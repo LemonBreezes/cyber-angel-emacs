@@ -15,287 +15,293 @@
   ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
+;; Extra stuff for when we run Doom without any modules loaded.
+(unless (or (modulep! :completion helm)
+            (modulep! :completion ivy)
+            (modulep! :completion vertico))
+  (ido-mode +1))
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
 ;;; UI
 
-(load! "lisp/cae-theme")
-(after! hydra
-  (load! "lisp/cae-cheatsheets"))
+(catch 'cae-ui-disabled
+  (load! "lisp/cae-theme")
+  (after! hydra
+    (load! "lisp/cae-cheatsheets"))
 
-;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)
-        doom-unicode-font (unless (modulep! :ui unicode)
-                            (font-spec :family "LXGW WenKai" :weight 'light
-                                       :size 17))))
+  ;; Set up fonts
+  (unless (memq system-type '(cygwin windows-nt ms-dos))
+    (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
+          doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+                                              :size 18)
+          doom-unicode-font (unless (modulep! :ui unicode)
+                              (font-spec :family "LXGW WenKai" :weight 'light
+                                         :size 17))))
 
-;; Show absolute line numbers. I prefer to not show relative line numbers
-;; because I use `avy' commands to jump to lines.
-(setq display-line-numbers-type t)
+  ;; Show absolute line numbers. I prefer to not show relative line numbers
+  ;; because I use `avy' commands to jump to lines.
+  (setq display-line-numbers-type t)
 
-;; Show minibuffer recursion depth
-(autoload 'minibuffer-depth-setup "mb-depth")
-(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+  ;; Show minibuffer recursion depth
+  (autoload 'minibuffer-depth-setup "mb-depth")
+  (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-;; I never use the mouse buttons on the tab bar so I prefer to not show them.
-(defadvice! cae-tab-bar-load-buttons-a ()
-  :override #'tab-bar--load-buttons
-  (setq tab-bar-close-button   nil
-        tab-bar-back-button    nil
-        tab-bar-forward-button nil
-        tab-bar-new-button     nil))
-;; For some reason `tab-bar' commands sometimes misbehave when they are called
-;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
-;; `tab-bar-mode' after a delay.
-(run-with-idle-timer 3 nil #'tab-bar-mode +1)
+  ;; I never use the mouse buttons on the tab bar so I prefer to not show them.
+  (defadvice! cae-tab-bar-load-buttons-a ()
+    :override #'tab-bar--load-buttons
+    (setq tab-bar-close-button   nil
+          tab-bar-back-button    nil
+          tab-bar-forward-button nil
+          tab-bar-new-button     nil))
+  ;; For some reason `tab-bar' commands sometimes misbehave when they are called
+  ;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
+  ;; `tab-bar-mode' after a delay.
+  (run-with-idle-timer 3 nil #'tab-bar-mode +1)
 
-;; Don't confirm when exiting Emacs that active processes exist.
-(setq confirm-kill-processes nil)
+  ;; Don't confirm when exiting Emacs that active processes exist.
+  (setq confirm-kill-processes nil)
 
-;; Colorize color strings.
-(add-hook 'prog-mode-hook #'rainbow-mode)
+  ;; Colorize color strings.
+  (add-hook 'prog-mode-hook #'rainbow-mode)
 
-(after! ansi-color
-  ;; I am trying this out. Not sure if I like it yet.
-  (setq ansi-color-bold-is-bright t))
+  (after! ansi-color
+    ;; I am trying this out. Not sure if I like it yet.
+    (setq ansi-color-bold-is-bright t))
 
-(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
-      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
-      kill-buffer-delete-auto-save-files t
-      scroll-conservatively 0           ;Doom disables this option as a
+  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+        truncate-string-ellipsis "..."  ;The unicode ellipsis is ugly to me
+        kill-buffer-delete-auto-save-files t
+        scroll-conservatively 0         ;Doom disables this option as a
                                         ;performance optimization but I would
                                         ;much rather have Emacs automatically
                                         ;recenter my windows.
-      window-combination-resize t)      ;Take new window space from all other
+        window-combination-resize t)    ;Take new window space from all other
                                         ;windows (not just current)
 
-(after! time
-  (setq display-time-default-load-average nil))
+  (after! time
+    (setq display-time-default-load-average nil))
 
-(after! help-fns
-  (setq help-enable-symbol-autoload t))
+  (after! help-fns
+    (setq help-enable-symbol-autoload t))
 
-(after! newcomment
-  (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
+  (after! newcomment
+    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
                                         ;`comment-region' so that I can mark the
                                         ;entire commented text with
                                         ;`mark-paragraph'.
-        comment-padding nil))           ;I prefer no spaces between comment
+          comment-padding nil))         ;I prefer no spaces between comment
                                         ;delimiters and the comment text.
 
-(when (and (modulep! :ui modeline)
-           (not (modulep! :ui modeline +light)))
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t)))
+  (when (and (modulep! :ui modeline)
+             (not (modulep! :ui modeline +light)))
+    (after! doom-modeline
+      (setq doom-modeline-hud t
+            doom-modeline-support-imenu t)))
 
-(after! which-key
-  (setq which-key-ellipsis "..."
-        which-key-compute-remaps t
-        which-key-max-description-length 35))
+  (after! which-key
+    (setq which-key-ellipsis "..."
+          which-key-compute-remaps t
+          which-key-max-description-length 35))
 
-(after! eros
-  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
+  (after! eros
+    (setq eros-eval-result-prefix "⟹ ")) ;Pretty arrow
 
-;; Do not spam me with warnings
-(after! warnings
-  (setq warning-minimum-level :emergency
-        warning-minimum-log-level :emergency))
+  ;; Do not spam me with warnings
+  (after! warnings
+    (setq warning-minimum-level :emergency
+          warning-minimum-log-level :emergency))
 
-(after! shr
-  ;; `shr' wraps lines in a visually unappealing way.
-  (setq shr-width 120
-        shr-max-width 120)
+  (after! shr
+    ;; `shr' wraps lines in a visually unappealing way.
+    (setq shr-width 120
+          shr-max-width 120)
 
-  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-  ;; not colorize backgrounds at all.
-  (advice-add #'shr-colorize-region :around #'ignore))
+    ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+    ;; not colorize backgrounds at all.
+    (advice-add #'shr-colorize-region :around #'ignore))
 
-(after! proced
-  (setq-default proced-auto-update-flag t))
+  (after! proced
+    (setq-default proced-auto-update-flag t))
 
-;; Allow switching to these buffers with `C-x b'
-(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
+  ;; Allow switching to these buffers with `C-x b'
+  (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
-(use-package! info-colors
-  :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+  (use-package! info-colors
+    :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
-(use-package! authinfo-color-mode
-  :defer t :init
-  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  (use-package! authinfo-color-mode
+    :defer t :init
+    (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+    (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
+    (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-(when (modulep! :ui workspaces)
-  (advice-add #'which-key--process-page :around
-              #'cae-ui-which-key-show-workspace-a))
+  (when (modulep! :ui workspaces)
+    (advice-add #'which-key--process-page :around
+                #'cae-ui-which-key-show-workspace-a))
 
-;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
-;; rules here instead of in the relevant `use-package!' blocks.
-(when (modulep! :ui popup)
-  (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
-    :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
-    :ttl nil)                           ; which slot/vslot?
-  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-    :quit nil :ttl t)                   ; which slot/vslot?
-  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
-    :quit nil)                          ; which slot/vslot?
-  (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
-  (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
-  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t)     ; which slot/vslot?
-  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
-    :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
-    :slot 2 :vslot -8)
-  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
-    :select t :quit t :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
-    :select t :ttl nil)                 ; which slot/vslot?
-  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :ttl nil)    ; which slot/vslot?
-  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
-    :modeline nil :quit nil :ttl nil)
-  (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
-  (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select nil :quit t :ttl nil)
-  (after! embark
-    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-      :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
-  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+  ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
+  ;; rules here instead of in the relevant `use-package!' blocks.
+  (when (modulep! :ui popup)
+    (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
+      :ttl nil :vslot 99)
+    (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
+      :ttl nil)                         ; which slot/vslot?
+    (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
+      :quit nil :ttl t)                 ; which slot/vslot?
+    (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
+      :quit nil)                        ; which slot/vslot?
+    (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
+      :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+    (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
+      :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
+    (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+      :side 'right :select t :quit t)   ; which slot/vslot?
+    (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
+      :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
+      :slot 2 :vslot -8)
+    (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+      :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+    (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+      :select t :quit t :ttl nil :vslot 99)
+    (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
+      :select t :ttl nil)               ; which slot/vslot?
+    (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
+      :side 'right :select t :ttl nil)  ; which slot/vslot?
+    (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
+      :modeline nil :quit nil :ttl nil)
+    (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
+      :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
+    (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
+      :side 'right :select nil :quit t :ttl nil)
+    (after! embark
+      (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+        :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
+    (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
-;; Lower the default popup delay.
-(after! tooltip
-  (setq tooltip-hide-delay 3))
+  ;; Lower the default popup delay.
+  (after! tooltip
+    (setq tooltip-hide-delay 3))
 
-(when (modulep! :checkers syntax +childframe)
-  (after! flycheck-posframe
-    (setq flycheck-posframe-border-width 1
-          flycheck-posframe-border-use-error-face t)))
+  (when (modulep! :checkers syntax +childframe)
+    (after! flycheck-posframe
+      (setq flycheck-posframe-border-width 1
+            flycheck-posframe-border-use-error-face t)))
 
-(use-package! goggles
-  :defer t :init
-  (add-hook 'prog-mode-hook #'goggles-mode)
-  (add-hook 'text-mode-hook #'goggles-mode)
-  (add-hook 'conf-mode-hook #'goggles-mode)
-  :config
-  (setq-default goggles-pulse t)
-  (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors-core
-      (add-to-list 'mc/unsupported-minor-modes #'goggles-mode))))
+  (use-package! goggles
+    :defer t :init
+    (add-hook 'prog-mode-hook #'goggles-mode)
+    (add-hook 'text-mode-hook #'goggles-mode)
+    (add-hook 'conf-mode-hook #'goggles-mode)
+    :config
+    (setq-default goggles-pulse t)
+    (when (modulep! :editor multiple-cursors)
+      (after! multiple-cursors-core
+        (add-to-list 'mc/unsupported-minor-modes #'goggles-mode))))
 
-;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
-(when (modulep! :completion vertico +childframe)
-  (after! vertico-posframe
-    (setq vertico-posframe-parameters
-          '((inhibit-double-buffering . t)))))
-(after! posframe
-  (setq posframe-inhibit-double-buffering t))
+  ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
+  (when (modulep! :completion vertico +childframe)
+    (after! vertico-posframe
+      (setq vertico-posframe-parameters
+            '((inhibit-double-buffering . t)))))
+  (after! posframe
+    (setq posframe-inhibit-double-buffering t))
 
-(use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-  :config
-  ;; Set custom function for rjsx-mode
-  ;; Disable topsy-mode for gptel-mode
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
-  (add-hook 'gptel-mode-hook
-            (defun cae-disable-topsy-in-gptel-h ()
-              "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
-                                                    ;package.
-              (topsy-mode -1))))
+  (use-package! topsy
+    :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+    :config
+    ;; Set custom function for rjsx-mode
+    ;; Disable topsy-mode for gptel-mode
+    (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
+    (add-hook 'gptel-mode-hook
+              (defun cae-disable-topsy-in-gptel-h ()
+                "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
+                                        ;package.
+                (topsy-mode -1))))
 
-(use-package! anzu
-  :defer t :init
-  (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-  (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
-  (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
-  :config
-  (setq anzu-mode-lighter ""
-        anzu-replace-threshold 50
-        anzu-replace-to-string-separator " → "))
+  (use-package! anzu
+    :defer t :init
+    (global-set-key [remap query-replace] 'anzu-query-replace)
+    (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+    (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
+    (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+    :config
+    (setq anzu-mode-lighter ""
+          anzu-replace-threshold 50
+          anzu-replace-to-string-separator " → "))
 
-(use-package! isearch-mb
-  :after-call isearch-mode-hook
-  :config
-  (isearch-mb--setup)
-  (isearch-mb-mode +1)
-  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
-  (add-to-list 'isearch-mb--with-buffer #'reposition-window)
-  (add-to-list 'isearch-mb--with-buffer #'scroll-right)
-  (add-to-list 'isearch-mb--with-buffer #'scroll-left)
-  (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-z C-j") #'avy-isearch)
-  (define-key isearch-mb-minibuffer-map (kbd "C-z j") #'avy-isearch)
-  (when (modulep! :completion vertico)
-    (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
-    (map! :map isearch-mb-minibuffer-map
-          [remap consult-history] #'consult-isearch-history)
-    (add-to-list 'isearch-mb--after-exit #'consult-line)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
-  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
-  (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
+  (use-package! isearch-mb
+    :after-call isearch-mode-hook
+    :config
+    (isearch-mb--setup)
+    (isearch-mb-mode +1)
+    (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
+    (add-to-list 'isearch-mb--with-buffer #'reposition-window)
+    (add-to-list 'isearch-mb--with-buffer #'scroll-right)
+    (add-to-list 'isearch-mb--with-buffer #'scroll-left)
+    (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
+    (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
+    (define-key isearch-mb-minibuffer-map (kbd "C-z C-j") #'avy-isearch)
+    (define-key isearch-mb-minibuffer-map (kbd "C-z j") #'avy-isearch)
+    (when (modulep! :completion vertico)
+      (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
+      (map! :map isearch-mb-minibuffer-map
+            [remap consult-history] #'consult-isearch-history)
+      (add-to-list 'isearch-mb--after-exit #'consult-line)
+      (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
+    (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
+    (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
+    (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
+    (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
-(use-package! hercules
-  :defer t :init
-  (after! embark
-    (map! :map embark-collect-mode-map
-          "<f6>" #'cae-embark-collect-cheatsheet))
-  (after! debug
-    (map! :map debugger-mode-map
-          "<f6>" #'cae-debugger-cheatsheet))
-  (after! edebug
-    (map! :map edebug-mode-map
-          "<f6>" #'cae-edebug-cheatsheet))
-  (after! macrostep
-    (map! :map macrostep-mode-keymap
-          "<f6>" #'cae-macrostep-cheatsheet))
-  :config
-  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
+  (use-package! hercules
+    :defer t :init
+    (after! embark
+      (map! :map embark-collect-mode-map
+            "<f6>" #'cae-embark-collect-cheatsheet))
+    (after! debug
+      (map! :map debugger-mode-map
+            "<f6>" #'cae-debugger-cheatsheet))
+    (after! edebug
+      (map! :map edebug-mode-map
+            "<f6>" #'cae-edebug-cheatsheet))
+    (after! macrostep
+      (map! :map macrostep-mode-keymap
+            "<f6>" #'cae-macrostep-cheatsheet))
+    :config
+    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide)))
 
 
 ;;; Tools
 
- (use-package! w3m
-   :defer t :config
-   (setq w3m-user-agent
-         (string-join
-          '("Mozilla/5.0"
-            "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
-            "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
-            "Mobile Safari/533.")
-          " ")
-         w3m-command-arguments '("-cookie" "-F"))
-   (after! w3m-search
-     (setq w3m-search-default-engine "duckduckgo"))
-   (map! :map w3m-mode-map
-         "o" #'ace-link-w3m))
+(use-package! w3m
+  :defer t :config
+  (setq w3m-user-agent
+        (string-join
+         '("Mozilla/5.0"
+           "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
+           "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
+           "Mobile Safari/533.")
+         " ")
+        w3m-command-arguments '("-cookie" "-F"))
+  (after! w3m-search
+    (setq w3m-search-default-engine "duckduckgo"))
+  (map! :map w3m-mode-map
+        "o" #'ace-link-w3m))
 
- (when (getenv "WSL_DISTRO_NAME")
-   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
-         browse-url-generic-args     '("/c" "start")))
- (setq browse-url-browser-function
-       (cond ((executable-find "termux-setup-storage")
-              #'browse-url-xdg-open)
-             (t #'browse-url-generic)))
+(when (getenv "WSL_DISTRO_NAME")
+  (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+        browse-url-generic-args     '("/c" "start")))
+(setq browse-url-browser-function
+      (cond ((executable-find "termux-setup-storage")
+             #'browse-url-xdg-open)
+            (t #'browse-url-generic)))
 
- (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
- (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
- (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
  (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
  ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
  ;; balanced, which breaks font-lock.
