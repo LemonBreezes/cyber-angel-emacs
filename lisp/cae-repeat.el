@@ -100,8 +100,8 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8)
-      (:enter +workspace/display))
+       "9" +workspace/switch-to-8
+       "TAB" +workspace/display))
    t)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
