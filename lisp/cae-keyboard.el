@@ -345,4 +345,5 @@
   :defer t :init
   (add-hook 'c-mode-common-hook #'electric-spacing-mode)
   (add-hook 'python-mode-hook #'electric-spacing-mode)
+  :config
   (setf (alist-get ?\( electric-spacing-rules) #'cae-keyboard-electric-spacing-\())
