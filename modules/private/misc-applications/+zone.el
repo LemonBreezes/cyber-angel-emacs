@@ -3,5 +3,11 @@
 (use-package! zone
   :defer-incrementally t
   :init
-  (setq zone-programs [zone-rainbow])
+  (map! :leader
+        :prefix +misc-applications-eyecandy-prefix
+        "z" #'zone-choose)
+  :config
+  ;; zone-nyan
+  ;; zone-rainbow
+  ;; zone-pgm-md5
   (zone-when-idle (* 5 60)))
