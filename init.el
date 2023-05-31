@@ -76,7 +76,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings)
+       (default +bindings +smartparens)
 
        :private
        ;; exwm
