@@ -179,6 +179,15 @@
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t)))
 
+(when (modulep! :checkers syntax)
+  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+  (setq flycheck-keymap-prefix (kbd "C-c F"))
+  (define-key flycheck-mode-map flycheck-keymap-prefix
+    flycheck-command-map)
+  (map! :leader
+        :prefix ("!" . nil)
+        :prefix ("F" . "Flycheck")))
+
 (use-package! goggles
   :init
   (add-hook 'prog-mode-hook #'goggles-mode)
