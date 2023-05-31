@@ -47,8 +47,6 @@
 
 ;;; Abbrevs
 
-(advice-add #'write-abbrev-file :after #'cae-multi-abbrev-push-changes-a)
-
 (defvar cae-multi-abbrev--file-mtime nil)
 (defvar cae-multi-abbrev--auto-commit-disabled nil)
 
@@ -58,11 +56,14 @@
             (equal mtime cae-multi-abbrev--file-mtime))
         (progn (apply orig-fun args)
                (setq cae-multi-abbrev--file-mtime mtime)
-               (cae-multi-abbrev-push-changes-a))
+               (unless cae-multi-abbrev--auto-commit-disabled
+                 (cae-multi-abbrev-push-changes-a)))
       (message "Abbrev file modified since last save. Disabling abbrev file auto-commit.")
       (apply orig-fun args)
       (setq cae-multi-abbrev--file-mtime mtime
             cae-multi-abbrev--auto-commit-disabled t))))
+
+(advice-add #'write-abbrev-file :around #'cae-multi-abbrev-write-file-a)
 
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
