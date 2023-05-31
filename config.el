@@ -432,7 +432,7 @@
          :g ";" #'copilot-complete)))
 
 (when (modulep! :editor snippets)
-(map! [remap yas-insert-snippet] #'consult-yasnippet))
+  (map! [remap yas-insert-snippet] #'consult-yasnippet))
 
 ;;; Term
 
