@@ -71,11 +71,11 @@
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'cae-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
-      [remap ibuffer] #'ibuffer-jump  ;This way
+      [remap ibuffer] #'ibuffer-jump    ;This way
                                         ;I can do `C-x C-b =' to quickly diff a
                                         ;buffer with its file.
-      "C-x _" #'shrink-window         ;Dual to `C-x ^'.
-      "C-x O" #'other-window-previous ;Dual to `C-x o'.
+      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
+      "C-x O" #'other-window-previous   ;Dual to `C-x o'.
       "C-x !" #'doom/window-enlargen
       "C-x M-o" #'ace-swap-window
       "C-x x o" #'ov-clear
@@ -87,7 +87,7 @@
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim)
       (:when (modulep! :completion vertico)
-       [remap apropos] nil)           ;`consult-apropos' is obsolete.
+       [remap apropos] nil)             ;`consult-apropos' is obsolete.
       (:after man
        :map Man-mode-map
        "o" #'ace-link-man)
