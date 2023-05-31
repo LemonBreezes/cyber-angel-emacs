@@ -161,6 +161,8 @@
 (setq bookmark-bmenu-file-column 50
       bookmark-menu-confirm-deletion nil)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+(advice-add #'bookmark-delete :around #'cae-hacks-always-yes-a)
+(advice-add #'cae-project-bookmark-delete :around #'cae-hacks-always-yes-a)
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
