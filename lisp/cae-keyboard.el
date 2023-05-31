@@ -71,5 +71,3 @@
   (map! "<tab>" #'indent-for-tab-command
         "C-i" #'doom/dumb-indent
         "C-S-i" #'doom/dumb-dedent))
-
-;;; self-insert-command replacements
