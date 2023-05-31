@@ -124,6 +124,10 @@
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t)))
 
+(use-package! highlight-context-line
+  :init
+  (add-hook 'doom-first-buffer-hook #'highlight-context-line-mode))
+
 
 ;;; Tools
 (load! "lisp/cae-webkit.el")
