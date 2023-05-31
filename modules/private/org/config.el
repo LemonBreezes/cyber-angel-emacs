@@ -59,11 +59,19 @@
   (define-key worf-mode-map (kbd "<tab>") (lookup-key org-mode-map (kbd "<tab>")))
   (advice-add #'worf-property
               :after
-              (cae-defun cae-org-worf-property-a ()
+              (cae-defun cae-worf-property-a ()
                 ;; Jump infront of the property drawer
                 (let ((parent (org-element-property :parent (org-element-at-point))))
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
+  (advice-add #'worf-down
+              :before
+              (cae-defun cae-worf-skip-vimish-fold-forward-a (_)
+                (-some->> (overlays-at (point))
+                  (-filter #'vimish-fold--vimish-overlay-p)
+                  (-map #'overlay-end)
+                  (apply #'max)
+                  (goto-char))))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
