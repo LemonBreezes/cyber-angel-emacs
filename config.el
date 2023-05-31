@@ -468,14 +468,6 @@
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
 
-(use-package! gptel
-  :defer t :init
-  (map! :leader "g" #'cae-gptel)
-  :config
-  (setq gptel-default-mode 'org-mode
-        gptel-prompt-string "* "
-        gptel--model "gpt-4"))
-
 
 ;;; Editor
 
