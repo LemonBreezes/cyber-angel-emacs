@@ -748,6 +748,14 @@
                              (avy-move-region . pre))
           avy-column-line-overlay t))
 
+  (use-package! tabgo
+    :commands tabgo
+    :defer t :init
+    (map! "C-z t" #'tabgo)
+    :config
+    (setq tabgo-tab-line-keys
+          (cae-keyboard-kbd tabgo-tab-line-keys)))
+
   (use-package! zop-to-char
     :defer t
     :init (map! [remap zap-to-char] #'zop-up-to-char
