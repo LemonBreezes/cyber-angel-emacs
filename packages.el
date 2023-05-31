@@ -23,6 +23,7 @@
 (package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
+(package! common-header-mode-line :recipe (:host github :repo "Bad-ptr/common-header-mode-line.el"))
 
 ;; cae-theme.el
 (package! modus-themes)
