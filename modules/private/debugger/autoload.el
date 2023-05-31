@@ -3,9 +3,15 @@
 ;;;###autoload
 (defun cae-debugger-dap-quit-session-a (_)
   (let ((ignore-window-parameters t))
-    (cl-loop for win in (window-list)
-             when (string-match-p "gdb" (buffer-name (window-buffer win))) do
-             (delete-window win))
+    ;;(cl-loop for win in (window-list)
+    ;;         when (and (string-match-p "gdb" (buffer-name (window-buffer win)))) do
+    ;;         (delete-window win))
+    ;;(cl-loop for buf the buffers do
+    ;;         (when (and (string-match-p "gdb" (buffer-name buf))
+    ;;                    (process-live-p (get-buffer-process buf)))
+    ;;           ;;(ignore-errors (interrupt-process (get-buffer-process buf)))
+    ;;           (message "Killing %s" (buffer-name buf))
+    ;;           ))
     ;;(cl-loop for buf in (buffer-list)
     ;;         when (and (string-match-p "gdb" (buffer-name buf))
     ;;                   (process-live-p (get-buffer-process buf)))
@@ -17,12 +23,12 @@
   (interactive)
   ;;(dap-delete-all-sessions)
   ;;(cae-debugger-dap-quit-session-a nil)
-  (when-let ((workspace-project (cl-find (+workspace-current-name)
-                                         (projectile-relevant-known-projects)
-                                         :test #'string-match-p)))
-    (unless (string= (projectile-project-name)
-                     (+workspace-current-name))
-      (projectile-switch-project-by-name workspace-project)))
+  ;;(when-let ((workspace-project (cl-find (+workspace-current-name)
+  ;;                                       (projectile-relevant-known-projects)
+  ;;                                       :test #'string-match-p)))
+  ;;  (unless (string= (projectile-project-name)
+  ;;                   (+workspace-current-name))
+  ;;    (projectile-switch-project-by-name workspace-project)))
   (dap-debug-last))
 
 ;;;###autoload
