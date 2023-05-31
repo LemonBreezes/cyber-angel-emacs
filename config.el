@@ -535,7 +535,7 @@
           "M-s" #'consult-history ;; orig. next-matching-history-element
           "M-r" #'consult-history) ;; orig. previous-matching-history-element
     :config
-    (setq consult-preview-key (list :debounce 0.5 'any))))
+    (setq consult-preview-key (list :debounce 0.4 'any))))
 
 (after! cc-mode
     (map! :map c-mode-base-map
