@@ -62,7 +62,9 @@
     "+flames-of-freedom"
     "+snow"
     "+zone"
-    ))
+
+    ;; Emacs OS
+    "+ednc"))
 
 (dolist (file +misc-applications--lisp-files)
   (load! file))
