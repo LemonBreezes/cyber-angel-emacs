@@ -520,6 +520,24 @@
          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
                              (thing-at-point 'line))))))
 
+(use-package! hungry-delete
+  :defer t :init
+  (add-hook 'emacs-lisp-mode-hook #'hungry-delete-mode)
+  (add-hook 'c-mode-common-hook #'hungry-delete-mode)
+  :config
+  (when (modulep! :config default +smartparens)
+    (map! :map hungry-delete-mode-map
+          [remap backward-delete-char-untabify] #'sp-backward-delete-char
+          [remap c-electric-backspace] #'sp-backward-delete-char
+          [remap delete-backward-char] #'sp-backward-delete-char
+          "<deletechar>" #'sp-delete-char
+          "C-d" #'sp-delete-char))
+  (when (modulep! :editor multiple-cursors)
+    (after! multiple-cursors
+      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
+      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
+  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
+
 
 ;;; Autocompletion
 
