@@ -10,6 +10,7 @@
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
                        zone-rainbow
+                       zone-matrix
                        zone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
