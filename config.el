@@ -14,6 +14,22 @@
   ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
+;; Doom should not bind leader key prefixes to keys which are not alphanumeric
+;; because then they can be overriden by other packages.
+(when (modulep! :checkers syntax)
+  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+  (setq flycheck-keymap-prefix (kbd "C-c C"))
+  (define-key flycheck-mode-map flycheck-keymap-prefix
+    flycheck-command-map)
+  (map! :leader
+        (:prefix ("C" . "checkers")))
+  (after! which-key
+    (setq which-key-replacement-alist
+          (delete '(("\\`C-c !\\'") nil . "checkers")
+                  which-key-replacement-alist))))
+(when (modulep! :editor snippets)
+  )
+
 ;;; UI
 
 (load! "lisp/cae-theme")
@@ -178,18 +194,6 @@
   (after! flycheck-posframe
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t)))
-
-(when (modulep! :checkers syntax)
-  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (define-key flycheck-mode-map flycheck-keymap-prefix
-    flycheck-command-map)
-  (map! :leader
-        (:prefix ("C" . "checkers")))
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c !\\'") nil . "checkers")
-                  which-key-replacement-alist))))
 
 (use-package! goggles
   :init
