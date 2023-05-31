@@ -561,8 +561,8 @@
                        beginning-of-buffer end-of-buffer embark-collect-cheatsheet
                        mouse-face)
      :transient t)
-    (map! :map embark-collect-mode-map
-          "<f6>" #'embark-collect-mode)))
+    (map! :map embark-collect
+          "<f6>" #'embark-collect)))
 
 (use-package! avy
   :defer t
