@@ -226,11 +226,6 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
-(after! embark
-  (map! :map embark-collect-mode-map
-        "<f6>" #'cae-embark-collect-cheatsheet-hydra/body
-        "h" #'cae-embark-collect-cheatsheet-hydra/body))
-
 
 ;;; Tools
 
