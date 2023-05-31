@@ -432,7 +432,7 @@
            (,(cae-keyboard-kbd "J") wspecial-outline-next-visible-heading "Move")
            (,(cae-keyboard-kbd "K") wspecial-outline-previous-visible-heading "Move")
            (,(cae-keyboard-kbd "g") wspecial-worf-goto "Move")
-           (,(cae-keyboard-kbd "o") wspecial-worf-ace-link "Move")     ;Visit Link
+           (,(cae-keyboard-kbd "o") wspecial-worf-ace-link "Move") ;Visit Link
            (,(cae-keyboard-kbd "O") wspecial-worf-ace-link-eww "Move") ;Visit in EWW
            (,(cae-keyboard-kbd "b") wspecial-worf-back-link "Move")
            (,(cae-keyboard-kbd "i") wspecial-worf-tab "Hide/Show")
@@ -442,7 +442,21 @@
            (,(cae-keyboard-kbd "F") wspecial-worf-attach-visit "Files")
            (,(cae-keyboard-kbd "A") wspecial-worf-attach "Files")
            (,(cae-keyboard-kbd "V") wspecial-worf-visit "Files")
-           (,(cae-keyboard-kbd "R") wspecial-worf-hydra-refile/body "Files")
+           (,(cae-keyboard-kbd "r") wspecial-worf-hydra-refile/body "Files")
+           (,(cae-keyboard-kbd "x") wspecial-hydra-worf-promote/body "Misc")
+           (,(cae-keyboard-kbd "L") wspecial-worf-copy-heading-id "Misc")
+           (,(cae-keyboard-kbd "a") wspecial-worf-add "Misc")
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
            (,(cae-keyboard-kbd ""))
 
            )))))
