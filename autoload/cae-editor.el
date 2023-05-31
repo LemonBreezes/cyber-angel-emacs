@@ -52,5 +52,5 @@
 (defun cae-copilot-complete-freeze-cursors-dwim ()
   (interactive)
   (if (bound-and-true-p mc-freeze--frozen-cursors)
-      (call-interactively #'mc/unfreeze-fake-cursors)
+      (call-interactively #'mc/freeze-fake-cursors-dwim)
     (call-interactively #'copilot-complete)))
