@@ -83,8 +83,8 @@
                       'local-map
                       (make-mode-line-mouse-map
                        'mouse-2
-		       #'compilation-goto-in-progress-buffer)))))
-  (map! "<f9>" #'minions-minor-modes-menu)
+		       #'compilation-goto-in-progress-buffer))))
+  (map! "<f9>" #'minions-minor-modes-menu))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
@@ -95,7 +95,7 @@
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
     (setopt nyan-bar-length 20
-           nyan-minimum-window-width 20))
+            nyan-minimum-window-width 20))
 
   ;; This block might seem crazy, but it's how I've gotten parrot mode to work
   ;; and be silent on startup.
