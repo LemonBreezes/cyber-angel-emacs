@@ -1,0 +1,896 @@
+diff --git a/modules/checkers/syntax/config.el b/modules/checkers/syntax/config.el
+index f3503f5a8..b49e29cc7 100644
+--- a/modules/checkers/syntax/config.el
++++ b/modules/checkers/syntax/config.el
+@@ -4,6 +4,7 @@
+ ;;; Flycheck
+ 
+ (use-package! flycheck
++  :unless (modulep! +flymake)
+   :commands flycheck-list-errors flycheck-buffer
+   :hook (doom-first-buffer . global-flycheck-mode)
+   :config
+@@ -45,6 +46,7 @@
+ 
+ 
+ (use-package! flycheck-popup-tip
++  :unless (modulep! +flymake)
+   :commands flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup
+   :hook (flycheck-mode . +syntax-init-popups-h)
+   :config
+@@ -63,6 +65,7 @@
+ 
+ (use-package! flycheck-posframe
+   :when (modulep! +childframe)
++  :unless (modulep! +flymake)
+   :hook (flycheck-mode . +syntax-init-popups-h)
+   :config
+   (setq flycheck-posframe-warning-prefix "! "
+@@ -80,4 +83,20 @@
+ 
+ 
+ ;;
+-;;; TODO Flymake
++;;; Flymake
++(use-package flymake
++  :when (modulep! +flymake)
++  :defer t
++  :init
++  (add-hook! (prog-mode text-mode) #'flymake-mode)
++  :config
++  (setq flymake-fringe-indicator-position 'right-fringe))
++
++
++(use-package flymake-popon
++  :when (modulep! +flymake)
++  :hook (flymake-mode . flymake-popon-mode)
++  :config
++  (setq flymake-popon-method (if (modulep! +childframe)
++                                 'postframe
++                               'popon)))
+diff --git a/modules/checkers/syntax/packages.el b/modules/checkers/syntax/packages.el
+index ef318dd62..ccaaedc61 100644
+--- a/modules/checkers/syntax/packages.el
++++ b/modules/checkers/syntax/packages.el
+@@ -1,9 +1,14 @@
+ ;; -*- no-byte-compile: t; -*-
+ ;;; checkers/syntax/packages.el
+ 
+-(package! flycheck :pin "784f184cdd9f9cb4e3dbb997c09d93e954142842")
+-(package! flycheck-popup-tip :pin "ef86aad907f27ca076859d8d9416f4f7727619c6")
+-(when (modulep! +childframe)
+-  (package! flycheck-posframe :pin "8f60c9bf124ab9597d681504a73fdf116a0bde12"))
++(unless (modulep! +flymake)
++  (package! flycheck :pin "784f184cdd9f9cb4e3dbb997c09d93e954142842")
++  (package! flycheck-popup-tip :pin "ef86aad907f27ca076859d8d9416f4f7727619c6")
++  (when (modulep! +childframe)
++    (package! flycheck-posframe :pin "8f60c9bf124ab9597d681504a73fdf116a0bde12")))
+ 
+-;; TODO flymake?
++;; Flymake
++(when (modulep! +flymake)
++  ;; NOTE: remove when straight bumped to support nonGnuELPA
++  (package! popon :recipe (:repo "https://codeberg.org/akib/emacs-popon"))
++  (package! flymake-popon :recipe (:repo "https://codeberg.org/akib/emacs-flymake-popon")))
+diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
+index 18c00c781..c2c0c65cd 100644
+--- a/modules/completion/vertico/config.el
++++ b/modules/completion/vertico/config.el
+@@ -212,7 +212,8 @@ orderless."
+   (add-to-list 'consult-dir-sources 'consult-dir--source-tramp-local t))
+ 
+ (use-package! consult-flycheck
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after (consult flycheck))
+ 
+ 
+diff --git a/modules/completion/vertico/packages.el b/modules/completion/vertico/packages.el
+index 9319a5bdc..77abcfec5 100644
+--- a/modules/completion/vertico/packages.el
++++ b/modules/completion/vertico/packages.el
+@@ -11,7 +11,8 @@
+ (package! consult :pin "16b2dc5e34c8a500adbee394b42c0e0d7fd24ad8")
+ (package! compat :pin "7ca7d300d1d256f674f83932d2918d8e70cd28f6")
+ (package! consult-dir :pin "ed8f0874d26f10f5c5b181ab9f2cf4107df8a0eb")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! consult-flycheck :pin "7a10be316d728d3384fa25574a30857c53fb3655"))
+ 
+ (package! embark :pin "629cce948c562361ddd6136d7cc49c5c981bb610")
+diff --git a/modules/lang/cc/config.el b/modules/lang/cc/config.el
+index 788903f0f..b5f130945 100644
+--- a/modules/lang/cc/config.el
++++ b/modules/lang/cc/config.el
+@@ -35,7 +35,7 @@ This is ignored by ccls.")
+ (use-package! cc-mode
+   :mode ("\\.mm\\'" . objc-mode)
+   ;; Use `c-mode'/`c++-mode'/`objc-mode' depending on heuristics
+-  :mode ("\\.h\\'" . +cc-c-c++-objc-mode) 
++  :mode ("\\.h\\'" . +cc-c-c++-objc-mode)
+   ;; Ensure find-file-at-point recognize system libraries in C modes. It must be
+   ;; set up before the likes of irony/lsp are initialized. Also, we use
+   ;; local-vars hooks to ensure these only run in their respective major modes,
+@@ -52,20 +52,20 @@ This is ignored by ccls.")
+     :symbols '(("public" "protected" "private")
+                ("class" "struct")))
+   (set-ligatures! '(c-mode c++-mode)
+-    ;; Functional
+-    ;; :def "void "
+-    ;; Types
+-    :null "nullptr"
+-    :true "true" :false "false"
+-    :int "int" :float "float"
+-    :str "std::string"
+-    :bool "bool"
+-    ;; Flow
+-    :not "!"
+-    :and "&&" :or "||"
+-    :for "for"
+-    :return "return"
+-    :yield "#require")
++                  ;; Functional
++                  ;; :def "void "
++                  ;; Types
++                  :null "nullptr"
++                  :true "true" :false "false"
++                  :int "int" :float "float"
++                  :str "std::string"
++                  :bool "bool"
++                  ;; Flow
++                  :not "!"
++                  :and "&&" :or "||"
++                  :for "for"
++                  :return "return"
++                  :yield "#require")
+ 
+   (when (modulep! +tree-sitter)
+     (add-hook! '(c-mode-local-vars-hook
+@@ -146,7 +146,8 @@ This is ignored by ccls.")
+     :hook (irony-mode . irony-eldoc))
+ 
+   (use-package! flycheck-irony
+-    :when (modulep! :checkers syntax)
++    :when (and (modulep! :checkers syntax)
++               (not (modulep! :checkers syntax +flymake)))
+     :config (flycheck-irony-setup))
+ 
+   (use-package! company-irony
+diff --git a/modules/lang/cc/packages.el b/modules/lang/cc/packages.el
+index d4170081c..2bbd8c6c7 100644
+--- a/modules/lang/cc/packages.el
++++ b/modules/lang/cc/packages.el
+@@ -22,7 +22,8 @@
+       (package! ccls :pin "675a5704c14a27931e835a431beea3631d92e8e6"))
+   (when (package! irony :pin "870d1576fb279bb93f776a71e65f45283c423a9e")
+     (package! irony-eldoc :pin "73e79a89fad982a2ba072f2fcc1b4e41f0aa2978")
+-    (when (modulep! :checkers syntax)
++    (when (and (modulep! :checkers syntax)
++               (not (modulep! :checkers syntax +flymake)))
+       (package! flycheck-irony :pin "42dbecd4a865cabeb301193bb4d660e26ae3befe"))
+     (when (modulep! :completion company)
+       (package! company-irony :pin "b44711dfce445610c1ffaec4951c6ff3882b216a")
+diff --git a/modules/lang/clojure/config.el b/modules/lang/clojure/config.el
+index edd5d9d12..21ed8f954 100644
+--- a/modules/lang/clojure/config.el
++++ b/modules/lang/clojure/config.el
+@@ -159,85 +159,85 @@
+   (setq cider-repl-display-help-banner nil)
+ 
+   (map! (:localleader
+-          (:map (clojure-mode-map clojurescript-mode-map clojurec-mode-map)
+-            "'"  #'cider-jack-in-clj
+-            "\"" #'cider-jack-in-cljs
+-            "c"  #'cider-connect-clj
+-            "C"  #'cider-connect-cljs
+-            "m"  #'cider-macroexpand-1
+-            "M"  #'cider-macroexpand-all
+-            (:prefix ("d" . "debug")
+-             "d" #'cider-debug-defun-at-point)
+-            (:prefix ("e" . "eval")
+-              "b" #'cider-eval-buffer
+-              "d" #'cider-eval-defun-at-point
+-              "D" #'cider-insert-defun-in-repl
+-              "e" #'cider-eval-last-sexp
+-              "E" #'cider-insert-last-sexp-in-repl
+-              "r" #'cider-eval-region
+-              "R" #'cider-insert-region-in-repl
+-              "u" #'cider-undef)
+-            (:prefix ("g" . "goto")
+-              "b" #'cider-pop-back
+-              "g" #'cider-find-var
+-              "n" #'cider-find-ns)
+-            (:prefix ("h" . "help")
+-              "n" #'cider-find-ns
+-              "a" #'cider-apropos
+-              "c" #'cider-clojuredocs
+-              "d" #'cider-doc
+-              "j" #'cider-javadoc
+-              "w" #'cider-clojuredocs-web)
+-            (:prefix ("i" . "inspect")
+-              "e" #'cider-enlighten-mode
+-              "i" #'cider-inspect
+-              "r" #'cider-inspect-last-result)
+-            (:prefix ("n" . "namespace")
+-              "n" #'cider-browse-ns
+-              "N" #'cider-browse-ns-all
+-              "r" #'cider-ns-refresh)
+-            (:prefix ("p" . "print")
+-              "p" #'cider-pprint-eval-last-sexp
+-              "P" #'cider-pprint-eval-last-sexp-to-comment
+-              "d" #'cider-pprint-eval-defun-at-point
+-              "D" #'cider-pprint-eval-defun-to-comment
+-              "r" #'cider-pprint-eval-last-sexp-to-repl)
+-            (:prefix ("r" . "repl")
+-              "n" #'cider-repl-set-ns
+-              "q" #'cider-quit
+-              "r" #'cider-ns-refresh
+-              "R" #'cider-restart
+-              "b" #'cider-switch-to-repl-buffer
+-              "B" #'+clojure/cider-switch-to-repl-buffer-and-switch-ns
+-              "c" #'cider-find-and-clear-repl-output
+-              "l" #'cider-load-buffer
+-              "L" #'cider-load-buffer-and-switch-to-repl-buffer)
+-            (:prefix ("t" . "test")
+-              "a" #'cider-test-rerun-test
+-              "l" #'cider-test-run-loaded-tests
+-              "n" #'cider-test-run-ns-tests
+-              "p" #'cider-test-run-project-tests
+-              "r" #'cider-test-rerun-failed-tests
+-              "s" #'cider-test-run-ns-tests-with-filters
+-              "t" #'cider-test-run-test)))
++         (:map (clojure-mode-map clojurescript-mode-map clojurec-mode-map)
++          "'"  #'cider-jack-in-clj
++          "\"" #'cider-jack-in-cljs
++          "c"  #'cider-connect-clj
++          "C"  #'cider-connect-cljs
++          "m"  #'cider-macroexpand-1
++          "M"  #'cider-macroexpand-all
++          (:prefix ("d" . "debug")
++           "d" #'cider-debug-defun-at-point)
++          (:prefix ("e" . "eval")
++           "b" #'cider-eval-buffer
++           "d" #'cider-eval-defun-at-point
++           "D" #'cider-insert-defun-in-repl
++           "e" #'cider-eval-last-sexp
++           "E" #'cider-insert-last-sexp-in-repl
++           "r" #'cider-eval-region
++           "R" #'cider-insert-region-in-repl
++           "u" #'cider-undef)
++          (:prefix ("g" . "goto")
++           "b" #'cider-pop-back
++           "g" #'cider-find-var
++           "n" #'cider-find-ns)
++          (:prefix ("h" . "help")
++           "n" #'cider-find-ns
++           "a" #'cider-apropos
++           "c" #'cider-clojuredocs
++           "d" #'cider-doc
++           "j" #'cider-javadoc
++           "w" #'cider-clojuredocs-web)
++          (:prefix ("i" . "inspect")
++           "e" #'cider-enlighten-mode
++           "i" #'cider-inspect
++           "r" #'cider-inspect-last-result)
++          (:prefix ("n" . "namespace")
++           "n" #'cider-browse-ns
++           "N" #'cider-browse-ns-all
++           "r" #'cider-ns-refresh)
++          (:prefix ("p" . "print")
++           "p" #'cider-pprint-eval-last-sexp
++           "P" #'cider-pprint-eval-last-sexp-to-comment
++           "d" #'cider-pprint-eval-defun-at-point
++           "D" #'cider-pprint-eval-defun-to-comment
++           "r" #'cider-pprint-eval-last-sexp-to-repl)
++          (:prefix ("r" . "repl")
++           "n" #'cider-repl-set-ns
++           "q" #'cider-quit
++           "r" #'cider-ns-refresh
++           "R" #'cider-restart
++           "b" #'cider-switch-to-repl-buffer
++           "B" #'+clojure/cider-switch-to-repl-buffer-and-switch-ns
++           "c" #'cider-find-and-clear-repl-output
++           "l" #'cider-load-buffer
++           "L" #'cider-load-buffer-and-switch-to-repl-buffer)
++          (:prefix ("t" . "test")
++           "a" #'cider-test-rerun-test
++           "l" #'cider-test-run-loaded-tests
++           "n" #'cider-test-run-ns-tests
++           "p" #'cider-test-run-project-tests
++           "r" #'cider-test-rerun-failed-tests
++           "s" #'cider-test-run-ns-tests-with-filters
++           "t" #'cider-test-run-test)))
+ 
+         (:when (modulep! :editor evil +everywhere)
+-          :map cider-repl-mode-map
+-          :i [S-return] #'cider-repl-newline-and-indent
+-          :i [M-return] #'cider-repl-return
+-          (:localleader
+-            "n" #'cider-repl-set-ns
+-            "q" #'cider-quit
+-            "r" #'cider-ns-refresh
+-            "R" #'cider-restart
+-            "c" #'cider-repl-clear-buffer)
+-          :map cider-repl-history-mode-map
+-          :i [return]  #'cider-repl-history-insert-and-quit
+-          :i "q"  #'cider-repl-history-quit
+-          :i "l"  #'cider-repl-history-occur
+-          :i "s"  #'cider-repl-history-search-forward
+-          :i "r"  #'cider-repl-history-search-backward
+-          :i "U"  #'cider-repl-history-undo-other-window)))
++         :map cider-repl-mode-map
++         :i [S-return] #'cider-repl-newline-and-indent
++         :i [M-return] #'cider-repl-return
++         (:localleader
++          "n" #'cider-repl-set-ns
++          "q" #'cider-quit
++          "r" #'cider-ns-refresh
++          "R" #'cider-restart
++          "c" #'cider-repl-clear-buffer)
++         :map cider-repl-history-mode-map
++         :i [return]  #'cider-repl-history-insert-and-quit
++         :i "q"  #'cider-repl-history-quit
++         :i "l"  #'cider-repl-history-occur
++         :i "s"  #'cider-repl-history-search-forward
++         :i "r"  #'cider-repl-history-search-backward
++         :i "U"  #'cider-repl-history-undo-other-window)))
+ 
+ 
+ (use-package! clj-refactor
+@@ -256,5 +256,6 @@
+ ;; clojure-lsp already uses clj-kondo under the hood
+ (use-package! flycheck-clj-kondo
+   :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake))
+              (not (modulep! +lsp)))
+   :after flycheck)
+diff --git a/modules/lang/clojure/packages.el b/modules/lang/clojure/packages.el
+index dd705b57a..70eefbfc6 100644
+--- a/modules/lang/clojure/packages.el
++++ b/modules/lang/clojure/packages.el
+@@ -17,5 +17,6 @@
+ (package! clojure-mode :pin "414157c3e523e80cc44dca8f86f1853122ee5f6b")
+ (package! clj-refactor :pin "db89b558710d31d4b9dfe7c4d2a07df9b498d4a6")
+ (package! cider :pin "92c1b6de20805a9caa556cc671ac39080e4e89cc")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-clj-kondo :pin "ff7bed2315755cfe02ef471edf522e27b78cd5ca"))
+diff --git a/modules/lang/crystal/config.el b/modules/lang/crystal/config.el
+index aceb5ed58..255f1a89d 100644
+--- a/modules/lang/crystal/config.el
++++ b/modules/lang/crystal/config.el
+@@ -16,12 +16,14 @@
+ 
+ 
+ (use-package! flycheck-crystal
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after crystal-mode)
+ 
+ 
+ (use-package! flycheck-ameba
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after crystal-mode
+   :config (flycheck-ameba-setup))
+ 
+diff --git a/modules/lang/crystal/packages.el b/modules/lang/crystal/packages.el
+index 179329deb..911621ca0 100644
+--- a/modules/lang/crystal/packages.el
++++ b/modules/lang/crystal/packages.el
+@@ -3,6 +3,7 @@
+ 
+ (package! crystal-mode :pin "96a8058205b24b513d0b9307db32f05e30f9570b")
+ (package! inf-crystal :pin "02007b2a2a3bea44902d7c83c4acba1e39d278e3")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-crystal :pin "96a8058205b24b513d0b9307db32f05e30f9570b")
+   (package! flycheck-ameba :pin "0c4925ae0e998818326adcb47ed27ddf9761c7dc"))
+diff --git a/modules/lang/elixir/config.el b/modules/lang/elixir/config.el
+index 93f39e4d1..93a6f031f 100644
+--- a/modules/lang/elixir/config.el
++++ b/modules/lang/elixir/config.el
+@@ -51,7 +51,8 @@
+ 
+ 
+ (use-package! flycheck-credo
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after elixir-mode
+   :config (flycheck-credo-setup))
+ 
+diff --git a/modules/lang/elixir/packages.el b/modules/lang/elixir/packages.el
+index 7ef95760b..c0ceb4793 100644
+--- a/modules/lang/elixir/packages.el
++++ b/modules/lang/elixir/packages.el
+@@ -5,5 +5,6 @@
+ (package! elixir-mode :pin "e0d0466d83ec80ddb412bb1473908a21baad1ec3")
+ (package! alchemist :pin "6f99367511ae209f8fe2c990779764bbb4ccb6ed")
+ (package! exunit :pin "0715c2dc2dca0b56c61330eda0690f90cca5f98b")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-credo :pin "e88f11ead53805c361ec7706e44c3dfee1daa19f"))
+diff --git a/modules/lang/elm/config.el b/modules/lang/elm/config.el
+index 7c5d29300..d04753667 100644
+--- a/modules/lang/elm/config.el
++++ b/modules/lang/elm/config.el
+@@ -21,6 +21,7 @@
+ 
+ 
+ (use-package! flycheck-elm
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after elm-mode
+   :config (add-to-list 'flycheck-checkers 'elm))
+diff --git a/modules/lang/elm/packages.el b/modules/lang/elm/packages.el
+index 61a99bbc0..d32acc2a3 100644
+--- a/modules/lang/elm/packages.el
++++ b/modules/lang/elm/packages.el
+@@ -2,5 +2,6 @@
+ ;;; lang/elm/packages.el
+ 
+ (package! elm-mode :pin "d4e434fa1857ba2f58d27c7520ebeac0515cd140")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-elm :pin "1b60050efd4729bfba548f3e5adbcb58436667cb"))
+diff --git a/modules/lang/emacs-lisp/config.el b/modules/lang/emacs-lisp/config.el
+index eece0fd9b..d6393e384 100644
+--- a/modules/lang/emacs-lisp/config.el
++++ b/modules/lang/emacs-lisp/config.el
+@@ -190,7 +190,8 @@ See `+emacs-lisp-non-package-mode' for details.")
+ 
+ 
+ (use-package! flycheck-cask
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :defer t
+   :init
+   (add-hook! 'emacs-lisp-mode-hook
+@@ -198,7 +199,8 @@ See `+emacs-lisp-non-package-mode' for details.")
+ 
+ 
+ (use-package! flycheck-package
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after flycheck
+   :config (flycheck-package-setup))
+ 
+diff --git a/modules/lang/emacs-lisp/packages.el b/modules/lang/emacs-lisp/packages.el
+index c5947ff23..86ab87036 100644
+--- a/modules/lang/emacs-lisp/packages.el
++++ b/modules/lang/emacs-lisp/packages.el
+@@ -11,7 +11,8 @@
+ (package! overseer :pin "02d49f582e80e36b4334c9187801c5ecfb027789")
+ (package! elisp-def :pin "dfca043ec0cbead67bd9c526cb009daf771d0fa2")
+ (package! elisp-demos :pin "01c301b516e9949d0239d20f6834afbc9acf0abb")
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-package :pin "615c1ed8c6fb7c73abec6aaa73d3fef498d231bc")
+   (package! flycheck-cask :pin "4b2ede6362ded4a45678dfbef1876faa42edbd58"))
+ 
+diff --git a/modules/lang/ess/config.el b/modules/lang/ess/config.el
+index 07060a774..85b9237ec 100644
+--- a/modules/lang/ess/config.el
++++ b/modules/lang/ess/config.el
+@@ -14,7 +14,8 @@
+     (add-to-list 'auto-mode-alist '("\\.jl\\'" . ess-julia-mode)))
+   :config
+   (setq ess-offset-continued 'straight
+-        ess-use-flymake (not (modulep! :checkers syntax))
++        ess-use-flymake (or (not (modulep! :checkers syntax))
++                            (modulep! :checkers syntax +flymake))
+         ess-nuke-trailing-whitespace-p t
+         ess-style 'DEFAULT
+         ess-history-directory (expand-file-name "ess-history/" doom-cache-dir))
+@@ -101,6 +102,7 @@
+     :hook (stan-mode . company-stan-setup))
+ 
+   (use-package! flycheck-stan
+-    :when (modulep! :checkers syntax)
++    :when (and  (modulep! :checkers syntax)
++                (not (modulep! :checkers syntax +flymake)))
+     :hook (stan-mode . flycheck-stan-stanc2-setup)
+     :hook (stan-mode . flycheck-stan-stanc3-setup)))
+diff --git a/modules/lang/ess/packages.el b/modules/lang/ess/packages.el
+index 5bb777b91..5d3c95b6f 100644
+--- a/modules/lang/ess/packages.el
++++ b/modules/lang/ess/packages.el
+@@ -11,5 +11,6 @@
+   (package! eldoc-stan :pin "150bbbe5fd3ad2b5a3dbfba9d291e66eeea1a581")
+   (when (modulep! :completion company)
+     (package! company-stan :pin "150bbbe5fd3ad2b5a3dbfba9d291e66eeea1a581"))
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (package! flycheck-stan :pin "150bbbe5fd3ad2b5a3dbfba9d291e66eeea1a581")))
+diff --git a/modules/lang/go/config.el b/modules/lang/go/config.el
+index d29b966ca..525444a81 100644
+--- a/modules/lang/go/config.el
++++ b/modules/lang/go/config.el
+@@ -78,5 +78,6 @@
+   (setq company-go-show-annotation t))
+ 
+ (use-package! flycheck-golangci-lint
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :hook (go-mode . flycheck-golangci-lint-setup))
+diff --git a/modules/lang/go/packages.el b/modules/lang/go/packages.el
+index 2d0ab4850..c6f9f3535 100644
+--- a/modules/lang/go/packages.el
++++ b/modules/lang/go/packages.el
+@@ -11,5 +11,6 @@
+ (when (modulep! :completion company)
+   (package! company-go :pin "31948b463f2fc18f8801e5a8fe511fef300eb3dd"))
+ 
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-golangci-lint :pin "8e446c68311048f0b87febf8ef0379e29d358851"))
+diff --git a/modules/lang/java/+meghanada.el b/modules/lang/java/+meghanada.el
+index caec53729..449372e5b 100644
+--- a/modules/lang/java/+meghanada.el
++++ b/modules/lang/java/+meghanada.el
+@@ -6,7 +6,8 @@
+   :init
+   (setq meghanada-server-install-dir (concat doom-data-dir "meghanada-server/")
+         meghanada-use-company (modulep! :completion company)
+-        meghanada-use-flycheck (modulep! :checkers syntax)
++        meghanada-use-flycheck (or (modulep! :checkers syntax +flymake)
++                                   (not (modulep! :checkers syntax)))
+         meghanada-use-eldoc t
+         meghanada-use-auto-start t)
+ 
+diff --git a/modules/lang/javascript/config.el b/modules/lang/javascript/config.el
+index a64e4f5dc..212ba6dd0 100644
+--- a/modules/lang/javascript/config.el
++++ b/modules/lang/javascript/config.el
+@@ -106,7 +106,8 @@
+                          #'typescript-tsx-mode
+                        #'typescript-mode)))
+ 
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (after! flycheck
+       (flycheck-add-mode 'javascript-eslint 'web-mode)
+       (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+diff --git a/modules/lang/kotlin/config.el b/modules/lang/kotlin/config.el
+index 23514f267..289821ceb 100644
+--- a/modules/lang/kotlin/config.el
++++ b/modules/lang/kotlin/config.el
+@@ -15,5 +15,6 @@
+ 
+ 
+ (use-package! flycheck-kotlin
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :hook (kotlin-mode . flycheck-kotlin-setup))
+diff --git a/modules/lang/kotlin/packages.el b/modules/lang/kotlin/packages.el
+index 12a1504c1..5f7105669 100644
+--- a/modules/lang/kotlin/packages.el
++++ b/modules/lang/kotlin/packages.el
+@@ -3,5 +3,6 @@
+ 
+ (package! kotlin-mode :pin "3e0c34087ba4965a8bf08d3f27325f0a1e631bfb")
+ 
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-kotlin :pin "bf1b398bdde128806a0a7479ebbe369bbaa40dae"))
+diff --git a/modules/lang/ledger/config.el b/modules/lang/ledger/config.el
+index 8ba41f9d6..02f9113ec 100644
+--- a/modules/lang/ledger/config.el
++++ b/modules/lang/ledger/config.el
+@@ -38,7 +38,8 @@
+ 
+ 
+ (use-package! flycheck-ledger
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after ledger-mode)
+ 
+ 
+diff --git a/modules/lang/ledger/packages.el b/modules/lang/ledger/packages.el
+index 81325d772..739d804b9 100644
+--- a/modules/lang/ledger/packages.el
++++ b/modules/lang/ledger/packages.el
+@@ -6,5 +6,6 @@
+ (when (modulep! :editor evil)
+   (package! evil-ledger :pin "7a9f9f5d39c42fffdba8004f8982642351f2b233"))
+ 
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-ledger :pin "628e25ba66604946085571652a94a54f4d1ad96f"))
+diff --git a/modules/lang/lua/config.el b/modules/lang/lua/config.el
+index 14d62daad..0ee8d34fa 100644
+--- a/modules/lang/lua/config.el
++++ b/modules/lang/lua/config.el
+@@ -53,7 +53,8 @@ lua-language-server.")
+   (add-hook! 'moonscript-mode-hook
+              #'+lua-moonscript-fix-single-quotes-h
+              #'+lua-moonscript-fontify-interpolation-h)
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (require 'flycheck-moonscript nil t)))
+ 
+ 
+diff --git a/modules/lang/lua/packages.el b/modules/lang/lua/packages.el
+index 9de8e8ff3..c40a299f4 100644
+--- a/modules/lang/lua/packages.el
++++ b/modules/lang/lua/packages.el
+@@ -5,7 +5,8 @@
+ 
+ (when (modulep! +moonscript)
+   (package! moonscript :pin "56f90471e2ced2b0a177aed4d8c2f854797e9cc7")
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (package! flycheck-moonscript
+       :recipe (:host github :repo "hlissner/emacs-flycheck-moonscript")
+       :pin "fcb99e5efcf31db05f236f02eaa575986a57172d")))
+diff --git a/modules/lang/nim/config.el b/modules/lang/nim/config.el
+index 257112e6a..377154627 100644
+--- a/modules/lang/nim/config.el
++++ b/modules/lang/nim/config.el
+@@ -34,6 +34,6 @@ windows."
+ 
+ 
+ (use-package! flycheck-nim
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after nim-mode)
+-
+diff --git a/modules/lang/nim/packages.el b/modules/lang/nim/packages.el
+index e90c69ebc..b085dcde7 100644
+--- a/modules/lang/nim/packages.el
++++ b/modules/lang/nim/packages.el
+@@ -5,5 +5,6 @@
+ 
+ (package! nim-mode :pin "744e076f0bea1c5ddc49f92397d9aa98ffa7eff8")
+ 
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-nim :pin "ddfade51001571c2399f78bcc509e0aa8eb752a4"))
+diff --git a/modules/lang/ocaml/config.el b/modules/lang/ocaml/config.el
+index 22d3ac30e..965955dce 100644
+--- a/modules/lang/ocaml/config.el
++++ b/modules/lang/ocaml/config.el
+@@ -64,7 +64,9 @@
+         "t" #'merlin-type-enclosing)
+ 
+   (use-package! flycheck-ocaml
+-    :when (modulep! :checkers syntax)
++    :when (and (modulep! :checkers syntax)
++               (not (modulep! :checkers syntax +flymake)))
++
+     :hook (merlin-mode . +ocaml-init-flycheck-h)
+     :config
+     (defun +ocaml-init-flycheck-h ()
+diff --git a/modules/lang/ocaml/packages.el b/modules/lang/ocaml/packages.el
+index 4aca200f7..725f00588 100644
+--- a/modules/lang/ocaml/packages.el
++++ b/modules/lang/ocaml/packages.el
+@@ -7,7 +7,8 @@
+   (package! merlin :pin "be753d9412387aedcf32aba88a1be9bcd33d97ba")
+   (package! merlin-eldoc :pin "db7fab1eddfe34781b7e79694f8923b285698032")
+   (package! merlin-company :pin "be753d9412387aedcf32aba88a1be9bcd33d97ba")
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (package! flycheck-ocaml :pin "77f8ddbd9bfc3a11957ac7ec7e45d5fa9179b192")))
+ 
+ (package! ocp-indent :pin "7c4d434132cebc15a8213c8be9e7323692eb0a2b")
+diff --git a/modules/lang/purescript/config.el b/modules/lang/purescript/config.el
+index 9ffa90be3..e05fd82bc 100644
+--- a/modules/lang/purescript/config.el
++++ b/modules/lang/purescript/config.el
+@@ -33,6 +33,7 @@
+   :hook (purescript-mode . psc-ide-mode)
+   :config
+   (remove-hook 'company-backends 'company-psc-ide-backend)
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (psc-ide-flycheck-setup))
+   (set-company-backend! 'purescript-mode 'company-psc-ide-backend))
+diff --git a/modules/lang/python/config.el b/modules/lang/python/config.el
+index 49bcfeda0..3014db9db 100644
+--- a/modules/lang/python/config.el
++++ b/modules/lang/python/config.el
+@@ -310,7 +310,8 @@
+ 
+ (use-package! flycheck-cython
+   :when (modulep! +cython)
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after cython-mode)
+ 
+ 
+diff --git a/modules/lang/raku/config.el b/modules/lang/raku/config.el
+index 87b8a015d..c85694c00 100644
+--- a/modules/lang/raku/config.el
++++ b/modules/lang/raku/config.el
+@@ -9,5 +9,6 @@
+ 
+ 
+ (use-package! flycheck-raku
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after raku-mode)
+diff --git a/modules/lang/raku/packages.el b/modules/lang/raku/packages.el
+index f8055282c..e36fe2af7 100644
+--- a/modules/lang/raku/packages.el
++++ b/modules/lang/raku/packages.el
+@@ -3,7 +3,8 @@
+ 
+ (package! raku-mode :pin "977b14a7c1295ebf2aad2f807d3f8e7c27aeb47f")
+ 
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! flycheck-raku
+     :recipe (:host github :repo "widefox/flycheck-raku")
+     :pin "b1acccd6e9d9753022571ee96d18b8e9f3227c65"))
+diff --git a/modules/lang/scheme/config.el b/modules/lang/scheme/config.el
+index 19552daa5..347d271e5 100644
+--- a/modules/lang/scheme/config.el
++++ b/modules/lang/scheme/config.el
+@@ -72,7 +72,8 @@
+ 
+ (use-package! flycheck-guile
+   :when (modulep! +guile)
+-  :when (modulep! :checkers syntax)
++  :when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+   :after geiser)
+ 
+ ;; Add Guix channels to Guile load path
+diff --git a/modules/lang/scheme/packages.el b/modules/lang/scheme/packages.el
+index 0425e33dc..8c8743695 100644
+--- a/modules/lang/scheme/packages.el
++++ b/modules/lang/scheme/packages.el
+@@ -15,10 +15,11 @@
+     (package! geiser-gauche :pin "8ff743f6416f00751e24aef8b9791501a40f5421"))
+   (when (modulep! +guile)
+     (package! geiser-guile :pin "b2d6f398e33c0f140dcde5adc91117aa7de4463d")
+-    (when (modulep! :checkers syntax)
++    (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+       (package! flycheck-guile
+         :recipe (:host github :repo "flatwhatson/flycheck-guile")
+-        :pin "e58ceb8b511cd395b9be69f4a1ff85305fbb51c3")))
++        :pin "e58ceb8b511cd395b9be69f4a1ff85305fbb51c3"))
+   (when (modulep! +kawa)
+     (package! geiser-kawa :pin "5896b19642923f74f718eb68d447560b2d26d797"))
+   (when (modulep! +mit)
+diff --git a/modules/lang/solidity/config.el b/modules/lang/solidity/config.el
+index e5e072c0c..d53d8ca3d 100644
+--- a/modules/lang/solidity/config.el
++++ b/modules/lang/solidity/config.el
+@@ -9,7 +9,8 @@
+   (set-company-backend! 'solidity-mode 'company-solidity)
+ 
+   (use-package! solidity-flycheck  ; included with solidity-mode
+-    :when (modulep! :checkers syntax)
++    :when (and (modulep! :checkers syntax)
++               (not (modulep! :checkers syntax +flymake)))
+     :config
+     (setq flycheck-solidity-solc-addstd-contracts t)
+     (when (funcall flycheck-executable-find solidity-solc-path)
+diff --git a/modules/lang/solidity/packages.el b/modules/lang/solidity/packages.el
+index 6eff2296a..be177658f 100644
+--- a/modules/lang/solidity/packages.el
++++ b/modules/lang/solidity/packages.el
+@@ -4,5 +4,6 @@
+ (package! solidity-mode :pin "20fb77e089e10187b37ae1a94153017b82ed2a0a")
+ (when (modulep! :completion company)
+   (package! company-solidity))
+-(when (modulep! :checkers syntax)
++(when (and (modulep! :checkers syntax)
++           (not (modulep! :checkers syntax +flymake)))
+   (package! solidity-flycheck))
+diff --git a/modules/lang/swift/packages.el b/modules/lang/swift/packages.el
+index 19889b310..07903af3d 100644
+--- a/modules/lang/swift/packages.el
++++ b/modules/lang/swift/packages.el
+@@ -7,5 +7,6 @@
+     (package! lsp-sourcekit :pin "f877659babd3b5f8ec09a8ad7d08193d95b6822e")
+   (when (modulep! :completion company)
+     (package! company-sourcekit :pin "a1860ad4dd3a542acd2fa0dfac2a388cbdf4af0c"))
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (package! flycheck-swift :pin "4c5ad401252400a78da395fd56a71e67ff8c2761")))
+diff --git a/modules/lang/zig/config.el b/modules/lang/zig/config.el
+index 94aaaf232..71f2b7657 100644
+--- a/modules/lang/zig/config.el
++++ b/modules/lang/zig/config.el
+@@ -18,7 +18,8 @@
+   (when (modulep! +tree-sitter)
+     (add-hook 'zig-mode-local-vars-hook #'tree-sitter! 'append))
+ 
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (flycheck-define-checker zig
+       "A zig syntax checker using zig's `ast-check` command."
+       :command ("zig" "ast-check" (eval (buffer-file-name)))
+@@ -26,7 +27,7 @@
+       ((error line-start (file-name) ":" line ":" column ": error: " (message) line-end))
+       :modes zig-mode)
+     (add-to-list 'flycheck-checkers 'zig))
+-              
++
+   (map! :localleader
+         :map zig-mode-map
+         "b" #'zig-compile
+diff --git a/modules/tools/lsp/+eglot.el b/modules/tools/lsp/+eglot.el
+index 48dc8c5ee..f7d666a70 100644
+--- a/modules/tools/lsp/+eglot.el
++++ b/modules/tools/lsp/+eglot.el
+@@ -11,7 +11,8 @@
+         ;; NOTE We disable eglot-auto-display-help-buffer because :select t in
+         ;;      its popup rule causes eglot to steal focus too often.
+         eglot-auto-display-help-buffer nil)
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (setq eglot-stay-out-of '(flymake)))
+ 
+   :config
+@@ -25,7 +26,8 @@
+ 
+   (add-to-list 'doom-debug-variables '(eglot-events-buffer-size . 0))
+ 
+-  (when (modulep! :checkers syntax)
++  (when (and (modulep! :checkers syntax)
++             (not (modulep! :checkers syntax +flymake)))
+     (after! flycheck
+       (load! "autoload/flycheck-eglot")))
+ 
+diff --git a/modules/tools/lsp/+lsp.el b/modules/tools/lsp/+lsp.el
+index ce33181d6..cfc8a15df 100644
+--- a/modules/tools/lsp/+lsp.el
++++ b/modules/tools/lsp/+lsp.el
+@@ -34,6 +34,11 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
+   ;; Make breadcrumbs opt-in; they're redundant with the modeline and imenu
+   (setq lsp-headerline-breadcrumb-enable nil)
+ 
++  ;; Explicitly tell lsp to use flymake; Lsp will default to flycheck if found
++  ;; even if its a dependency
++  (when (modulep! :checkers syntax +flymake)
++    (setq lsp-diagnostics-provider :flymake))
++
+   ;; Let doom bind the lsp keymap.
+   (when (modulep! :config default +bindings)
+     (setq lsp-keymap-prefix nil))
+@@ -67,6 +72,7 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
+     :implementations '(lsp-find-implementation :async t)
+     :type-definition #'lsp-find-type-definition)
+ 
++
+   (defadvice! +lsp--respect-user-defined-checkers-a (fn &rest args)
+     "Ensure user-defined `flycheck-checker' isn't overwritten by `lsp'."
+     :around #'lsp-diagnostics-flycheck-enable
