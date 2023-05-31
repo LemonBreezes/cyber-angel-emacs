@@ -85,8 +85,3 @@
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
 
-
-;;;###autoload
-(defun cae-recenter-maybe-h ()
-  (unless (pos-visible-in-window-p (point))
-    (recenter)))
