@@ -27,7 +27,7 @@
                    sentex-forward-sentence sentex-backward-sentence
                    sentex-kill-sentence parrot-rotate-next-word-at-point
                    cae-delete-char cae-modeline-rotate-next-word-at-poin
-                   cae-modeline-rotate-previous-word-at-pointt))
+                   cae-modeline-rotate-prev-word-at-pointt))
       (add-to-list 'mc/cmds-to-run-for-all cmd))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
