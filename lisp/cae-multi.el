@@ -38,6 +38,7 @@
   :init
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
+  (setq gac-ask-for-summary-p t)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
 
