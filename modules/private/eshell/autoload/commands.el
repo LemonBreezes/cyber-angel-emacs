@@ -153,6 +153,10 @@ file to edit."
                     ((file-exists-p "~/.emacs.d/bin/doom")
                      "~/.emacs.d/bin/doom")
                     ((file-exists-p "~/.config/emacs/bin/doom")
-                     "~/.config/emacs/bin/doom"))))
-    (apply #'call-process doom nil t nil
-           (flatten-list args))))
+                     "~/.config/emacs/bin/doom")))
+        (cmd (concat doom " " (mapconcat 'identity
+                                         (flatten-list args)
+                                         " "))))
+    (if doom
+        (eshell-command cmd)
+      (error "Couldn't find doom executable"))))
