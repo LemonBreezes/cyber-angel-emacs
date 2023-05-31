@@ -1,5 +1,7 @@
 ;;; lisp/cae-cheatsheets.el -*- lexical-binding: t; -*-
 
+;;; Save and restore hydras.
+
 (defvar cae-cheatsheets-minibuffer--last-hydra nil)
 (defvar cae-cheatsheets-minibuffer--last-workspace nil)
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
