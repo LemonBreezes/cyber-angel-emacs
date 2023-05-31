@@ -108,7 +108,7 @@ derivative.")
                        (cape-capf-inside-string #'cape-ispell)))
     (add-hook 'prog-mode-hook
               (lambda ()
-                (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings nil #'eq))))
+                (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings))))
   (dolist (sym +corfu-ispell-completion-modes)
     (add-hook (intern (concat (symbol-name sym) "-hook"))
               (lambda ()
