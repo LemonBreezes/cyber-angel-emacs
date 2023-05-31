@@ -179,8 +179,11 @@
 ;; and be silent on startup.
 (use-package! parrot
   :after (:any magit org)
-  :after-call git-auto-commit-mode
-  :after-call gac-push
+  :init
+  (add-hook 'before-save-hook
+            (cae-defun cae-modeline-load-parrot-h ()
+              (when (bound-and-true-p git-auto-commit-mode)
+                (parrot-mode +1))))
   :config
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
