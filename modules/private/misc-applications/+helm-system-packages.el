@@ -4,7 +4,7 @@
   :defer t
   :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
              (or (modulep! :private helm)
-                     (modulep! :completion helm)))
+                 (modulep! :completion helm)))
   :init
   (map! :leader
         :prefix +misc-applications-prefix
