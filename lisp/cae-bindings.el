@@ -20,7 +20,7 @@
                                                  (char-to-string key))) binding)))
     ;;(after! yasnippet
     ;;  (define-key yas-minor-mode-map (kbd "C-c &") nil))
-    (defvar yas-minor-mode-map (make-sparse-keymap))
+    (setq yas-minor-mode-map (make-sparse-keymap))
     (define-key doom-leader-map "&" nil)
     (after! which-key
       (setq which-key-replacement-alist
