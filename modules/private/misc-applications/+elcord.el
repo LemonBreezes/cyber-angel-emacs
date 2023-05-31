@@ -7,11 +7,11 @@
                       (getenv "SSH_TTY")))
              (not (string-suffix-p "-WSL2" operating-system-release)))
   :config
-  (setopt elcord-quiet t
-          elcord-use-major-mode-as-main-icon t
-          elcord-refresh-rate 10
-          elcord-idle-timer 300
-          elcord-idle-message "Going for a walk...")
+  (setq elcord-quiet t
+        elcord-use-major-mode-as-main-icon t
+        elcord-refresh-rate 10
+        elcord-idle-timer 300
+        elcord-idle-message "Going for a walk...")
   (require 'parent-mode)
   (defadvice! +elcord--buffer-boring-p-a (buffer-name)
     :before-until #'elcord--buffer-boring-p
