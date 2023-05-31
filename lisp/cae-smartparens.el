@@ -32,7 +32,7 @@
            ("M-J" sp-join-sexp "Edit")
            ("M-C" sp-convolute-sexp "Edit")
            ("C-M-t" sp-transpose-sexp "Edit")
-           ("C-x C-t" sp-transpose-hybrid-sexp "Edit") ;Overrides
+           ("C-x M-t" sp-transpose-hybrid-sexp "Edit") ;Overrides
                                         ;`transpose-lines'.
            ("C-M-k" sp-kill-sexp "Delete")
            ("C-M-S-k" sp-kill-hybrid-sexp "Delete")
