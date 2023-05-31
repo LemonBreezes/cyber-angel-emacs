@@ -836,6 +836,7 @@
         "M-P" #'symbol-overlay-switch-backward
         :leader
         :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
+  (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   :config
   (map! :map symbol-overlay-map
         "<f6>" #'cae-symbol-overlay-cheatsheet
@@ -843,7 +844,6 @@
         "P" #'symbol-overlay-switch-backward
         "r" #'symbol-overlay-rename
         "-" #'negative-argument)
-  (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
     ;; LSP provides its own symbol highlighting.
