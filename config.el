@@ -46,7 +46,7 @@
 (advice-add #'lsp-log :after
             (cae-defun cae-lsp-remove-from-persp (&rest _)
               (dolist (persp (persp-persps))
-                (persp-remove-buffer (get-buffer "*lsp-log*") persp))))
+                (persp-remove-buffer "*lsp-log*" persp))))
 
 ;;; UI
 
