@@ -371,6 +371,7 @@
       [remap ispell-word] #'eac-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
       "M-Z" #'zap-up-to-char
+      "<f8>" #'context-menu-open
       (:after vertico
        :map vertico-map
        "<prior>" #'vertico-scroll-down
