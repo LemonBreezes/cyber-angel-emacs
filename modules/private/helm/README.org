@@ -1,8 +1,0 @@
-#+TITLE:   private/helm
-#+DATE:    May 7, 2022
-#+SINCE:   <replace with next tagged release version>
-#+STARTUP: inlineimages nofold
-* Description
-
-This module is essentially a copy of the Doom Emacs module but with some code
-taken out so that it works alongside other completion engines.
