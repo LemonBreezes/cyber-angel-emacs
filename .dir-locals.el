@@ -13,7 +13,7 @@
                      (require 'git-auto-commit-mode nil t))
             (git-auto-commit-mode 1)
             (setq-local gac-automatically-push-p t))))))
- (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "misc-files/UnicodeData.txt" "shared-local/")))))
+ (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
 
 
 ;; Local Variables:
