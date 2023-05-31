@@ -104,8 +104,6 @@
       "e" #'cae-project-bookmark-edit-annotation
       "a" #'cae-project-bookmark-show-annotation)
 
-(backtrace! bookmark-edit-annotation)
-
 (setf (alist-get 'project-bookmark embark-keymap-alist)
       #'cae-project-bookmark-embark-map)
 
