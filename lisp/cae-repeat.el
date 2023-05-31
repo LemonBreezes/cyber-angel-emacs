@@ -1,10 +1,5 @@
 ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
-(defun other-window-previous (count &optional all-frames)
-  "Select the previous window."
-  (interactive "p\nP")
-  (other-window (- count) all-frames t))
-
 (map! "C-x O" #'other-window-previous)
 
 ;; Uses special keys from my esoteric keyboard layout
@@ -38,6 +33,7 @@
 
 (defun cae-repeat-ignore-when-hydra-active-a ()
   (and (featurep 'hydra) hydra-curr-map))
+
 (advice-add #'repeat-post-hook :before-until
             #'cae-repeat-ignore-when-hydra-active-a)
 
@@ -49,7 +45,9 @@
 (add-hook 'doom-first-input-hook #'repeat-mode)
 (after! which-key
   (require 'repeat-help)
-  (setq! repeat-help-popup-type 'which-key
-          repeat-help-auto nil)
+  :(setq repeat-help-popup-type 'which-key
+        repeat-help-auto nil)
   (repeat-help-mode +1))
 (map! :map help-map "C-r" #'describe-repeat-maps)
+
+(setq repeat-exit-key "C-g")
