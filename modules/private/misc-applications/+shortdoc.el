@@ -6,4 +6,6 @@
   :init
   (map! :leader
         :prefix +misc-applications-lookup-prefix
-        :desc "Shortdoc" "s" #'shortdoc))
+        :desc "Shortdoc" "s" #'shortdoc)
+  :config
+  (require 'posimacs-shortdocs))
