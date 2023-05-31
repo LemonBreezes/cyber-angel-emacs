@@ -11,6 +11,8 @@
           "C-M-S-d" #'dap-debug
           "C-M-S-r" #'cae-debugger-kill-all-sessions-and-restart
           "C-M-S-q" #'dap-disconnect
+          "C-M-S-b" #'dap-breakpoint-toggle
+          "C-M-S-h" #'dap-hydra
           (:prefix ("C-S-d" . "debug")
            :desc "DAP Hydra" "h"                     #'dap-hydra
            ;; :desc "Debug start" "s"                #'dap-debug
