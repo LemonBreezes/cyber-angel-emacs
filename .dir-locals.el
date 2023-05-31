@@ -5,6 +5,8 @@
   . ((eval
       . (progn
           ;; Prevent an Elisp file from being saved if it contains an error.
+          ;; This forces us to write our config so that it's idempotent, as it
+          ;; will get reloaded on every save.
           (when (and (derived-mode-p 'emacs-lisp-mode)
                      (buffer-file-name)
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
