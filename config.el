@@ -373,9 +373,9 @@
   :ensure t
   :init (isearch-mb-mode)
   :config
+  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
-  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (when (modulep! :completion vertico)
     (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
     (map! :map isearch-mb-minibuffer-map
