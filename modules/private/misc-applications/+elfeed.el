@@ -11,9 +11,9 @@
     :after elfeed
     :config
     (elfeed-tube-setup)
-    :bind (:map elfeed-show-mode-map
-           ("F" . elfeed-tube-fetch)
-           ([remap save-buffer] . elfeed-tube-save)
-           :map elfeed-search-mode-map
-           ("F" . elfeed-tube-fetch)
-           ([remap save-buffer] . elfeed-tube-save))))
+    (map! :map elfeed-show-mode-map
+          "F"                 #'elfeed-tube-fetch
+          [remap save-buffer] #'elfeed-tube-save
+          :map elfeed-search-mode-map
+          "F"                 #'elfeed-tube-fetch
+          [remap save-buffer] #'elfeed-tube-save)))
