@@ -15,6 +15,7 @@
     ;; ,(expand-file-name "doom-start.el" doom-core-dir)
     ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
+    ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
 
     ;; I have not tested compiling these files but it's better not to compile
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
