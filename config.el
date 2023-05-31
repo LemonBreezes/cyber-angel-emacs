@@ -18,6 +18,11 @@
 
 (load! "lisp/cae-theme")
 
+;; Output to stdout instead of a pager like `less'. This is useful when
+;; redirecting output to buffers.
+(setenv "PAGER" "cat")
+(setenv "GIT_PAGER" "cat")
+
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
