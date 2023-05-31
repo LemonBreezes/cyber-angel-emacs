@@ -23,9 +23,4 @@
   :config
   (setq pulseaudio-control-use-default-sink t
         pulseaudio-control-volume-step "10%")
-  (pulseaudio-control-default-keybindings)
-  (map! :map pulseaudio-control-map
-        "_" #'pulseaudio-control-decrease-volume
-        "+" #'pulseaudio-control-increase-volume
-        "=" #'pulseaudio-control-increase-volume-less
-        "-" #'pulseaudio-control-decrease-volume-less))
+  (pulseaudio-control-default-keybindings))
