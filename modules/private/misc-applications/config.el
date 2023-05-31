@@ -55,7 +55,6 @@
     "+tetris"
 
     ;; TODO Eyecandy
-    ;; fireplace
     ;; flames of freedom
     ;; zone
     ;; nyan zone
