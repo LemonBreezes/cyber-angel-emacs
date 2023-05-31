@@ -33,6 +33,9 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
+;;(defvar cae-debugger--session-workspace-map ()
+;;  "Alist of (session . workspace) pairs.")
+
 ;;;;;###autoload
 ;;(defun cae-debugger-mark-session-h (session)
 ;;  "Mark the current session with the current workspace."
