@@ -337,6 +337,7 @@
   (unless (or (cl-set-difference projectile-known-projects
                                  '("~/.doom.d" "~/.emacs.d")
                                  :test #'file-equal-p)
+              (not (file-directory-p "~/src/"))
               (directory-empty-p "~/src/"))
     (projectile-discover-projects-in-search-path))
   ;; Recognize `makefile' as a Makefile.
