@@ -40,7 +40,7 @@
         "+trashed"
         "+try"
         ;;"+vuiet"
-        "+ytel"
+        ;;"+ytel"
         "+webpaste"
         "+elfeed"
         "+leetcode"
