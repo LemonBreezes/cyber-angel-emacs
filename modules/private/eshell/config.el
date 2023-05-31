@@ -1,5 +1,11 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
+;; Store window history for Eshell
+(add-hook 'doom-switch-window-hook
+          (cae-defun cae-window-history-store-h ()
+            (push (selected-window) cae-window-history)))
+(defvar cae-window-history nil)
+
 (after! eshell
   (setq-hook! 'eshell-mode-hook
     imenu-generic-expression
