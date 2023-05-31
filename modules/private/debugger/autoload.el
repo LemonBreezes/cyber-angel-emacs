@@ -3,6 +3,10 @@
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
+  (dolist (buf (doom-visible-buffers))
+    (when (string-match-p (dap--debug-session-name (dap--cur-session-or-die))
+                          (buffer-name buf))
+      (delete-window (get-buffer-window buf))))
   (unwind-protect (dap-delete-all-sessions)
     (when-let ((workspace-project (cl-find (+workspace-current-name)
                                            (projectile-relevant-known-projects)
