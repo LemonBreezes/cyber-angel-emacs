@@ -266,6 +266,11 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
+             ;; This special case with the comma is being handled because we do
+             ;; not want the comma to be bound to any `lispy' special command.
+             ;; Instead, we want comma to always just insert a comma. What entry
+             ;; does is ensure that which would have been bound to comma is not
+             ;; lost.
              (,(cae-keyboard-kbd-reverse ",")
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
