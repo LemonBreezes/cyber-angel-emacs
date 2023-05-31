@@ -32,4 +32,10 @@
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
   ;; zone-pgm-random-life
-  (zone-when-idle (* 5 60)))
+  (zone-when-idle (* 5 60))
+
+  ;; Focus
+  (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
+    :around #'zone
+    (with-selected-window (car (doom-visible-windows))
+      (apply oldfun args))))
