@@ -13,8 +13,8 @@
         elcord-idle-timer 300
         elcord-idle-message "Going for a walk...")
   (require 'parent-mode)
-  (defadvice! elcord--make-process (oldfun)
-    :around
+  (defadvice! elcord--make-process-for-wsl-a (oldfun)
+    :around #'elcord--make-process
     (if (getenv "WSL_DISTRO_NAME")
         (make-process
          :name "*elcord-sock*"
