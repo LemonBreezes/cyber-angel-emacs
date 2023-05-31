@@ -1160,6 +1160,7 @@
   ;; Allow us to type HEAD~1, HEAD~2, etc. as arguments to git commands.
   (setq eshell-error-if-no-glob nil))
 
+;; I have disabled visual commands because I am using `eat'.
 ;;(after! em-term
 ;;  ;; Some of the commands I copied from other configurations and will likely
 ;;  ;; never use.
