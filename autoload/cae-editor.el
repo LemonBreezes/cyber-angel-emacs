@@ -140,7 +140,8 @@ using the tab-width variable."
 
 ;;;###autoload
 (defun cae-copy-for-reddit ()
-  "Copy and indent active region or current defun with 4 spaces. This is the
+  "Copy and indent active region or current defun with 4 spaces.
+This is the
 format used on Reddit for code blocks."
   (interactive)
   (when-let* ((bounds (if (region-active-p)
