@@ -968,6 +968,7 @@
         :desc "Mark previous sexps"             "C-M-b" #'mc/mark-previous-sexps
         :desc "Mark regexp"                     "%"     #'mc/mark-all-in-region-regexp)
   (after! multiple-cursors-core
+    (add-to-list 'mc/cmds-to-run-once #'read-only-mode)
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
