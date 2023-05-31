@@ -549,7 +549,17 @@
           "M-s" #'consult-history ;; orig. next-matching-history-element
           "M-r" #'consult-history) ;; orig. previous-matching-history-element
     :config
-    (setq consult-preview-key 'any)))
+    (setq consult-preview-key 'any)
+    (consult-customize
+     consult-ripgrep consult-git-grep consult-grep
+     consult-bookmark consult-recent-file
+     +default/search-project +default/search-other-project
+     +default/search-project-for-symbol-at-point
+     +default/search-cwd +default/search-other-cwd
+     +default/search-notes-for-symbol-at-point
+     +default/search-emacsd
+     consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+     :preview-key 'any)))
 
 (after! cc-mode
   (map! :map c-mode-base-map
