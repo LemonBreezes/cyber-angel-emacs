@@ -182,13 +182,16 @@
   :defer t
   :after (:any magit org)
   :config
-  ;;;
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
         parrot-animate-on-load nil
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
+  (advice-add #'gac-push
+              :around
+              (cae-defun cae-modeline-gac-party-on-push-a (oldfun buffer)
+                (+log (funcall oldfun buffer))))
   (parrot-mode +1))
 (use-package! parrot-rotate
   :defer t
