@@ -942,11 +942,11 @@
       (map! [remap kill-sentence] #'sentex-kill-sentence
             [remap forward-sentence] #'sentex-forward-sentence
             [remap backward-sentence] #'sentex-backward-sentence)))
-  
+
   (use-package! edit-indirect
     :defer t :init
     (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
-  
+
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
 
