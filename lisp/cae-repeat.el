@@ -55,16 +55,16 @@
 
   (eval
    `(define-repeat-map workspace-switch
-      (,(cae-keyboard-kbd "0") +workspace/switch-to-final)
-      (,(cae-keyboard-kbd "1") +workspace/switch-to-0)
-      (,(cae-keyboard-kbd "2") +workspace/switch-to-1)
-      (,(cae-keyboard-kbd "3") +workspace/switch-to-2)
-      (,(cae-keyboard-kbd "4") +workspace/switch-to-3)
-      (,(cae-keyboard-kbd "5") +workspace/switch-to-4)
-      (,(cae-keyboard-kbd "6") +workspace/switch-to-5)
-      (,(cae-keyboard-kbd "7") +workspace/switch-to-6)
-      (,(cae-keyboard-kbd "8") +workspace/switch-to-7)
-      (,(cae-keyboard-kbd "9") +workspace/switch-to-8)))
+      (,(cae-keyboard-kbd "0") +workspace/switch-to-final
+       ,(cae-keyboard-kbd "1") +workspace/switch-to-0
+       ,(cae-keyboard-kbd "2") +workspace/switch-to-1
+       ,(cae-keyboard-kbd "3") +workspace/switch-to-2
+       ,(cae-keyboard-kbd "4") +workspace/switch-to-3
+       ,(cae-keyboard-kbd "5") +workspace/switch-to-4
+       ,(cae-keyboard-kbd "6") +workspace/switch-to-5
+       ,(cae-keyboard-kbd "7") +workspace/switch-to-6
+       ,(cae-keyboard-kbd "8") +workspace/switch-to-7
+       ,(cae-keyboard-kbd "9") +workspace/switch-to-8)))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
