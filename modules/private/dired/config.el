@@ -113,6 +113,7 @@
 
   ;; Exit the current Dirvish session when running interactive commands like
   ;; `projectile-find-file'.
+  ;;
   (advice-add #'find-file :around #'cae-dired-find-file-a)
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
