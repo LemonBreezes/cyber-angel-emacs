@@ -64,7 +64,7 @@
   "Face for directory bookmarks.")
 
 (defconst cae-bookmark-keywords
-  `((,(concat "\\(.*\\)" " " prot-common-url-regexp)
+  `((,(concat "\\(.*\\)" " " cae-common-url-regexp)
      (1 '(boqld cae-bookmark-url) t)
      (2 'cae-bookmark-url t))
     ("\\(.*\\)\\( [~/].*\\.pdf\\)"
