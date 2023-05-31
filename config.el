@@ -670,8 +670,8 @@
   (map! :prefix "C-z"
         "n" #'avy-goto-line-below
         "p" #'avy-goto-line-above
-        "c" #'avy-copy-region
-        ;;"c" #'avy-goto-char
+        "y" #'avy-copy-region
+        "c" #'avy-goto-char
         "m" #'avy-move-region
         "l" #'avy-goto-line
         "e" #'avy-goto-end-of-line
@@ -686,9 +686,9 @@
         "C-." #'cae-avy-symbol-at-point
         "C-k" #'avy-kill-region
         "C-w" #'avy-kill-ring-save-region
-        "C-c" #'avy-copy-region
+        "C-y" #'avy-copy-region
         "C-m" #'avy-move-region
-        ;;"C-c" #'avy-goto-char
+        "C-c" #'avy-goto-char
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
         "C-SPC" #'avy-goto-char-timer)
