@@ -51,7 +51,7 @@
 ;;    (unless (string= workspace (+workspace-current-name))
 ;;      (+workspace-switch workspace))))
 
-;;;###autoload (autoload 'cae-debug-dap-hydra "private/debugger/autoload" t nil)
+;;;###autoload (autoload 'cae-debug-dap-hydra/body "private/debugger/autoload" t nil)
 (defhydra cae-debug-dap-hydra (:color pink :hint nil :foreign-keys run)
   "
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval
