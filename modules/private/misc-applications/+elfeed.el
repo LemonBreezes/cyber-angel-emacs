@@ -28,10 +28,10 @@
          "Navigation"
          (("RET" elfeed-search-show-entry "Show entry")
           ("b" elfeed-search-browse-url "Open entry")
-          ("n" next-line "Next line")
-          ("p" previous-line "Previous line")
-          ("<" elfeed-search-first-entry "First entry")
-          (">" elfeed-search-last-entry "Last entry")
+          ;;("n" next-line "Next line")
+          ;;("p" previous-line "Previous line")
+          ;;("<" elfeed-search-first-entry "First entry")
+          ;;(">" elfeed-search-last-entry "Last entry")
           ("y" elfeed-search-yank "Yank"))
          "Tag"
          (("+" elfeed-search-tag-all "Tag all")
