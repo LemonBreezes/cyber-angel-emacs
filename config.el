@@ -492,7 +492,6 @@
       (:when (modulep! :completion vertico)
        (:map minibuffer-local-map
         "C-;" nil                       ;I prefer <f8> for `embark-act'.
-        "C-s" nil                       ;I prefer `C-r' for `consult-history'
         ))
       (:when (modulep! :completion vertico)
        [remap apropos] nil
