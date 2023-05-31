@@ -1,5 +1,8 @@
 ;;; private/misc-applications/+leetcode.el -*- lexical-binding: t; -*-
 
+(defvar +leetcode-workspace-name "*leetcode*"
+  "The name of the workspace to use for leetcode.")
+
 (use-package! leetcode
   :defer t
   :init
