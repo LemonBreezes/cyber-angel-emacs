@@ -3,9 +3,6 @@
 ;;;###autoload
 (cae-defun cae-modeline-rotate-next-word-at-point ()
   (interactive)
-  (skip-syntax-forward "^w")
-    (when (eolp)
-      (skip-syntax-backward "^w")
-      (when-let ((beg (car-safe (bounds-of-thing-at-point 'word))))
-        (goto-char beg)))
-    (call-interactively #'parrot-rotate-next-word-at-point))
+  (save-excursion
+    (skip-syntax-forward "^w" (line-end-position))
+    (call-interactively #'parrot-rotate-next-word-at-point)))
