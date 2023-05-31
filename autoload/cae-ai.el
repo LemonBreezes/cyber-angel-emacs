@@ -41,3 +41,11 @@
       (delete-window (get-buffer-window "*chatgpt*"))
     (let ((chatgpt-shell-display-function #'pop-to-buffer))
       (call-interactively #'chatgpt-shell))))
+
+;;;###autoload
+(defun cae-ai-chatgpt-quit-or-delete-char (arg)
+  (interactive "p")
+  (let ((proc (get-buffer-process (current-buffer))))
+    (if (and (eobp) proc (= (point) (marker-position (process-mark proc))))
+	(kill-buffer (current-buffer))
+      (delete-char arg))))
