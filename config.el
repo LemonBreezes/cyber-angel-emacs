@@ -765,3 +765,13 @@
 
 ;; The `C-RET' and `C-S-RET' keybindings I like but they are overriden in Org
 ;; mode. Meow also provides alternatives.
+
+(map! :leader
+      (:prefix "f"
+       "m" nil                          ; we can move files with `dired'
+                                        ; instead.
+       "D" nil                          ; we can delete files with `dired'
+                                        ; instead.
+
+       )
+      )
