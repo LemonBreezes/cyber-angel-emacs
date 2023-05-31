@@ -25,7 +25,6 @@
     (after! lsp-mode
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)))
-  (require 'pulse) ; For `pulse-highlight-start'.
   (after! highlight-context-line
     (set-face-attribute 'highlight-context-line-face nil
                         :extend t))
