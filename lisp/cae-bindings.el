@@ -52,16 +52,17 @@
                                         ;to `M-r' and `M-s'. This way we can use
                                         ;`C-s' to search in the minibuffer.
 
+;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
 (let ((embark-act-key "<f8>"))
+  (when (eq (lookup-key doom-leader-map "a")
+            'embark-act)
+    (define-key doom-leader-map "a" nil))
   (map! embark-act-key #'embark-act
         (:when (modulep! :completion vertico)
          "C-;" nil
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'embark-act)))
-  (when (eq (lookup-key doom-leader-map "a")
-            'embark-act)
-    (define-key doom-leader-map "a" nil))
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
