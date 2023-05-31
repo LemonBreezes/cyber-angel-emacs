@@ -1074,8 +1074,7 @@
 
 (use-package! chatgpt-shell
   :defer t :init
-  (setq chatgpt-shell-model-version "gpt-4"
-        chatgpt-shell-display-function #'switch-to-buffer)
+  (setq chatgpt-shell-display-function #'switch-to-buffer)
   (map! :leader
         :prefix "o"
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
