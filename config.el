@@ -1,4 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+
 (load! "lisp/cae-logs")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-multi")
@@ -7,6 +8,7 @@
   "Whether the configuration has finished loading.")
 
 ;;; UI
+
 (load! "lisp/cae-theme")
 
 ;; Do not use pagers
@@ -161,6 +163,7 @@
 
 
 ;;; Tools
+
 (load! "lisp/cae-webkit.el")
 
 (setq browse-url-browser-function #'browse-url-generic
@@ -289,6 +292,7 @@
 
 
 ;;; Editor
+
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
@@ -482,6 +486,7 @@
 
 
 ;;; Autocompletion
+
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
@@ -620,6 +625,7 @@
         "C-c & C-n" nil
         "C-c & C-v" nil))
 
+
 ;;; Term
 
 ;; Enable Fish autocompletion in `read-shell-command'.
@@ -642,6 +648,7 @@
                                      ("geth" "attach"))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
+
 ;;; Org
 
 (after! calendar
