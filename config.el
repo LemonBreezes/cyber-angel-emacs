@@ -1072,6 +1072,11 @@
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
 
+(use-package! chatgpt-shell
+  :defer t :init
+  :config
+  (setq chatgpt-shell-default-model "gpt-4"))
+
 ;;; Email
 
 (setq user-full-name "StrawberryTea"
