@@ -1075,6 +1075,7 @@
 
 (use-package! chatgpt-shell
   :defer t :init
+  (autoload #'chatgpt-shell-add-??-command-to-eshell "chatgpt-shell")
   (map! :leader
         :prefix "o"
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
