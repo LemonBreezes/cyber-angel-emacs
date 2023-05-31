@@ -106,7 +106,7 @@
                  (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
 
 ;; Set some popup rules.
-(plist-put! +popup-defaults :ttl 3)
+(plist-put! +popup-defaults :ttl 0)
 ;; (set-popup-rule! "^\\*Man [^*]*\\*" :size 0.5 :side 'right :quit t :select :ttl t)
 ;; (set-popup-rule! "^ \\*Metahelp\\*" :size 0.5 :side 'right :quit t :select t :ttl t)
 ;; ;; Do not kill or close these buffers (respectively windows)!
