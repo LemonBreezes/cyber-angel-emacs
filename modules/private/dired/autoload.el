@@ -1,13 +1,5 @@
 ;;; private/dired/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun cae-dired-load-dirvish-h (dir)
-  (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
-  (require 'dirvish nil t)
-  (unless (memq #'dired-noselect find-directory-functions)
-    (add-hook 'find-directory-functions #'dired-noselect t))
-  (dired-noselect dir))
-
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
@@ -44,3 +36,5 @@
   (when (one-window-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
+
+;;;###autoload
