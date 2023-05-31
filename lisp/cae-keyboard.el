@@ -491,33 +491,76 @@
       (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil)))
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
-                                :hint nil)
-     "
+                                 :hint nil)
+      "
 ^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
 _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
 ^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)"
-     ;; arrows
-     (,(cae-keyboard-kbd "j") worf-down :exit t)
-     (,(cae-keyboard-kbd "k") worf-up :exit t)
-     (,(cae-keyboard-kbd "w") org-metaup)
-     (,(cae-keyboard-kbd "s") org-metadown)
-     (,(cae-keyboard-kbd "h") org-metaleft)
-     (,(cae-keyboard-kbd "l") org-metaright)
-     (,(cae-keyboard-kbd "e") move-end-of-line :exit t)
-     ;; modes
-     (,(cae-keyboard-kbd "f") worf-change-tree-mode :exit t)
-     (,(cae-keyboard-kbd "i") worf-change-shift-mode :exit t)
-     (,(cae-keyboard-kbd "r") worf-change-shiftcontrol-mode :exit t)
-     ;; misc
-     (,(cae-keyboard-kbd "p") org-set-property :exit t)
-     (,(cae-keyboard-kbd "t") org-set-tags-command :exit t)
-     (,(cae-keyboard-kbd "T") worf-change-time :exit t)
-     (,(cae-keyboard-kbd "n") worf-change-name :exit t)
-     (,(cae-keyboard-kbd "a") org-meta-return :exit t)
-     (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
-     (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
-     (,(cae-keyboard-kbd "q") nil)
-     (,(cae-keyboard-kbd "c") nil))))
+      ;; arrows
+      (,(cae-keyboard-kbd "j") worf-down :exit t)
+      (,(cae-keyboard-kbd "k") worf-up :exit t)
+      (,(cae-keyboard-kbd "w") org-metaup)
+      (,(cae-keyboard-kbd "s") org-metadown)
+      (,(cae-keyboard-kbd "h") org-metaleft)
+      (,(cae-keyboard-kbd "l") org-metaright)
+      (,(cae-keyboard-kbd "e") move-end-of-line :exit t)
+      ;; modes
+      (,(cae-keyboard-kbd "f") worf-change-tree-mode :exit t)
+      (,(cae-keyboard-kbd "i") worf-change-shift-mode :exit t)
+      (,(cae-keyboard-kbd "r") worf-change-shiftcontrol-mode :exit t)
+      ;; misc
+      (,(cae-keyboard-kbd "p") org-set-property :exit t)
+      (,(cae-keyboard-kbd "t") org-set-tags-command :exit t)
+      (,(cae-keyboard-kbd "T") worf-change-time :exit t)
+      (,(cae-keyboard-kbd "n") worf-change-name :exit t)
+      (,(cae-keyboard-kbd "a") org-meta-return :exit t)
+      (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
+      (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
+      (,(cae-keyboard-kbd "q") nil)
+      (,(cae-keyboard-kbd "c") nil)))
+  (eval
+   `(worf-defverb
+     "change"
+     '((,(cae-keyboard-kbd "j") org-metadown)
+       (,(cae-keyboard-kbd "k") org-metaup)
+       (,(cae-keyboard-kbd "h") org-metaleft)
+       (,(cae-keyboard-kbd "l") org-metaright)
+       (,(cae-keyboard-kbd "t") org-set-tags-command :disable)
+       (,(cae-keyboard-kbd "n") worf-change-name :disable :break)
+       (,(cae-keyboard-kbd "a") org-meta-return :disable :break))))
+  (eval
+   `(worf-defverb
+     "change-tree"
+     '((,(cae-keyboard-kbd "j") org-shiftmetadown)
+       (,(cae-keyboard-kbd "k") org-shiftmetaup)
+       (,(cae-keyboard-kbd "h") org-shiftmetaleft)
+       (,(cae-keyboard-kbd "l") org-shiftmetaright))))
+  (eval
+   `(worf-defverb
+     "change-shift"
+     '((,(cae-keyboard-kbd "j") org-shiftdown)
+       (,(cae-keyboard-kbd "k") org-shiftup)
+       (,(cae-keyboard-kbd "h") org-shiftleft)
+       (,(cae-keyboard-kbd "l") org-shiftright))))
+  (eval
+   `(worf-defverb
+     "change-shiftcontrol"
+     '((,(cae-keyboard-kbd "j") org-shiftcontroldown)
+       (,(cae-keyboard-kbd "k") org-shiftcontrolup)
+       (,(cae-keyboard-kbd "h") org-shiftcontrolleft)
+       (,(cae-keyboard-kbd "l") org-shiftcontrolright))))
+  (eval
+   `(worf-defverb
+     "delete"
+     '((,(cae-keyboard-kbd "p") org-delete-property :disable)
+       (,(cae-keyboard-kbd "k") worf-delete-k :disable)
+       (,(cae-keyboard-kbd "j") worf-cut-subtree :disable)
+       (,(cae-keyboard-kbd "w") worf-delete-w :disable)
+       (,(cae-keyboard-kbd "n") worf-delete-name :disable))))
+  (eval
+   `(worf-defverb
+     "yank"
+     '((,(cae-keyboard-kbd "j") org-copy-subtree :disable)))))
 
 ;;; Basically a custom input method
 
