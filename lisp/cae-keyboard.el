@@ -113,7 +113,7 @@
 
 ;;; Lispy
 
-(when (modulep! :editor lispye)
+(when (modulep! :editor lispy)
   (after! lispy
     ;; navigation
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "l") 'lispy-right)
