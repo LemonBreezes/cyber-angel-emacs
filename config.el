@@ -573,7 +573,7 @@
         "TAB" #'indent-for-tab-command))
 
 (when (modulep! :private corfu)
-  (map! :prefix-map ("M-+" . "autocomplete")
+  (map! :prefix "M-+"
         :g "c" #'completion-at-point    ; capf
         :g "t" #'complete-tag           ; etags
         :g "d" #'cape-dabbrev           ; or dabbrev-completion
