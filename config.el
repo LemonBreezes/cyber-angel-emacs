@@ -10,7 +10,7 @@
   "Whether on-kill native compilation is enabled.")
 
 (remove-hook 'doom-first-input-hook #'helm-mode) ;Helm is not our main
-                                                 ;completion system
+                                                 ;completion system.
 
 ;;; UI
 
