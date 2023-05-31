@@ -5,8 +5,8 @@
   . ((eval
       . (progn
           (when (and (derived-mode-p 'emacs-lisp-mode)
-                     (fboundp '+compile-this-elisp-file))
-            (add-hook 'after-save-hook #'+compile-this-elisp-file nil t))
+                     (fboundp 'cae-compile-this-elisp-file))
+            (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
           (when (and (buffer-file-name)
                      (not (file-in-directory-p (buffer-file-name)
                                                (concat doom-private-dir "secrets/")))
