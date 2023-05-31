@@ -63,12 +63,6 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
-;; check if the current key is pressed with the shift key
-(defun cae-hacks-shift-key-pressed-p ()
-  (let ((mods (event-modifiers last-input-event)))
-    (and (memq 'shift mods)
-         (not (memq 'lock mods)))))
-
 ;; `magit' breaks move line in log buffers.
 (defadvice! cae-hacks-magit-do-not-deincrement-a (args)
   :filter-args '(magit-previous-line magit-next-line)
@@ -78,6 +72,6 @@
          (> arg 0)
          transient-mark-mode
          (not (region-active-p))
-         (cae-hacks-shift-key-pressed-p)
+         (not (memq 'shift (event-modifiers last-input-event)))
          (cl-incf arg))
     (list arg try-vscroll)))
