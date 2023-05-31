@@ -419,7 +419,7 @@
          :g "k" #'cape-keyword
          :g "h" #'cape-history
          :g "s" #'cape-symbol
-         :g "y" #'yasnippet-capf
+         :g "y" #'consult-yasnippet
          :g "a" #'cape-abbrev
          :g "i" #'cape-ispell
          :g "l" #'cape-line
