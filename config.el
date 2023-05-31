@@ -496,6 +496,9 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
+(use-package! aggressive-indent
+  :defer t)
+
 
 ;;; Autocompletion
 
