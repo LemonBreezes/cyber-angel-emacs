@@ -33,15 +33,6 @@
         ((sp-delete-char arg))))
 
 ;;;###autoload
-(defun dos2unix ()
-  "Automate M-% C-q C-m RET C-q C-j RET"
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (while (search-forward (string ?\C-m) nil t)
-      (replace-match "" nil t))))
-
-;;;###autoload
 (defun cae-toggle-sudo ()
   (interactive)
   (let* ((file (or buffer-file-name
