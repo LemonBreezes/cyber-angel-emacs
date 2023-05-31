@@ -223,6 +223,6 @@ mark the string and call `edit-indirect-region' with it."
   (interactive)
   (if-let ((file (ffap-file-at-point)))
       (if (file-exists-p file)
-          (find-file #'file)
+          (find-file file)
         (call-interactively #'ffap))
     (call-interactively #'+lookup/definition)))
