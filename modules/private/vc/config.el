@@ -26,7 +26,6 @@
                            (magit-pull "--rebase" "--autostash")
                            (magit-revert "--autostash")))
   (when (modulep! :tools magit +forge)
-    (remove-hook 'doom-switch-buffer-hook #'+magit-revert-buffer-maybe-h)
     (map! :map magit-status-mode-map
           ;; Killing the Magit status buffer removes the `forge-pull' progress
           ;; from the modeline.
