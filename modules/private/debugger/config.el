@@ -16,6 +16,9 @@
     (map! :map dap-mode-map
           "C-S-d" #'dap-hydra)
 
+    (setq dap-debug-restart-keep-session nil
+          dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
+
     ;; Doom keeps emitting errors when trying to retrieve previous debug
     ;; sessions. This is a workaround.
     (doom-store-clear "+debugger"))
