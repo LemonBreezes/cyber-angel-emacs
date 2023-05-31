@@ -44,3 +44,10 @@
   (when (one-window-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
+
+;;;###autoload
+(defun cae-dired-fullscreen-dwim-h ()
+  (when (and (derived-mode-p 'dired-mode)
+             (one-window-p))
+    (ignore-error user-error
+      (dirvish-layout-switch dirvish-default-layout))))
