@@ -68,6 +68,7 @@
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! tabgo :recipe (:host github :repo "isamert/tabgo.el"))
 (package! multiclip :recipe (:host github :repo "kiennq/highlight2clipboard"))
+(package! switch-window)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
