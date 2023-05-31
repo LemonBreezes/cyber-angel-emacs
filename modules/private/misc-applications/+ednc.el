@@ -4,7 +4,11 @@
   :when (and (require 'dbus nil t)
              (dbus-ping :system "org.freedesktop.DBus"))
   :init
-  (run-with-idle-timer 1.5 nil #'ednc-mode 1)
+  (defun +ednc-load-h ()
+     (and (require 'dbus nil t)
+          (dbus-ping :system "org.freedesktop.DBus")
+          (ednc-mode +1)))
+  (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   :config
   (defun stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
