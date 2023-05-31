@@ -177,7 +177,3 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; This is for backwards compatibility with my old bookmarks file.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
-
-;; FIXME This is a hack to ignore some errors that are happening in Emacs 30 for
-;; some reason.
-(advice-add #'yas--post-command-handler :around #'cae-ignore-errors-a)
