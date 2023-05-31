@@ -645,7 +645,7 @@
  `(,@(when (modulep! :private dirvish)
       '(dired transient dirvish))
    ,@(when (and (modulep! :tools pdf)
-                (not (getenv "SSH_TTY")))
+                (not (string-suffix-p "-WSL2" operating-system-release))) ; WSL
       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
    ,@(when (modulep! :term eshell)
       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
