@@ -105,12 +105,21 @@
       (when (eq (length args) 2)
         (setq args (append args '("28.1"))))
       (apply oldfun args))
-    (add-hook 'doom-first-file-hook #'parrot-mode)
+
+    (defun tmp/enable-parrot-mode ()
+      (advice-add #'message :override #'ignore)
+      (unwind-protect (parrot-mode)
+        (advice-remove #'message #'ignore)
+        (remove-hook 'prog-mode-hook #'tmp/enable-parrot-mode)))
+    (add-hook 'prog-mode-hook #'tmp/enable-parrot-mode)
     :config
-    (setq! parrot-animate 'hide-static
-           parrot-rotate-animate-after-rotation nil
-           parrot-num-rotations 10
-           parrot-animate-on-load nil
-           parrot-party-on-magit-push t
-           parrot-party-on-org-todo-states '("DONE")
-           parrot-type 'nyan)))
+    (unwind-protect
+        (progn (advice-add #'parrot-start-animation :override #'ignore))
+      (setq! parrot-animate 'hide-static
+             parrot-rotate-animate-after-rotation nil
+             parrot-num-rotations 10
+             parrot-animate-on-load nil
+             parrot-party-on-magit-push t
+             parrot-party-on-org-todo-states '("DONE")
+             parrot-type 'nyan)
+      (advice-remove #'parrot-start-animation #'ignore))))
