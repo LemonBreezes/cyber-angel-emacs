@@ -116,7 +116,8 @@ Lispy."
   "Strip the top-level leading indentation for every line in STR.
 The least indented line will have 0 leading whitespace. Convert tabs to spaces
 using the tab-width variable."
-  (let* ((lines (split-string str "\n"))
+  (let* ((lines (replace-regexp-in-string "\t" (make-string tab-width ?\s)
+                                          (split-string str "\n")))
          (indentations (mapcar (lambda (line)
                                  (string-match "^[[:space:]]*" line)
                                  (match-end 0))
@@ -126,12 +127,9 @@ using the tab-width variable."
      (lambda (line)
        (if (string-match "^[[:space:]]+" line)
            (let* ((indent (match-string 0 line))
-                  (spaces (replace-regexp-in-string "\t"
-                                                    (make-string tab-width ?\ )
-                                                    indent))
-                  (actual-indent (substring spaces
+                  (actual-indent (substring indent
                                             0 (min min-indentation
-                                                   (length spaces))))
+                                                   (length indent))))
                   (stripped-indent (replace-regexp-in-string
                                     (regexp-quote actual-indent) "" line)))
              stripped-indent)
