@@ -687,25 +687,25 @@
     (define-key embark-region-map "T" #'titlecase-region)
     (define-key embark-heading-map "T" #'titlecase-line)))
 
-(use-package! macrursors
-  :config
-  (dolist (mode '(corfu-mode goggles-mode beacon-mode))
-    (add-hook 'macrursors-pre-finish-hook mode)
-    (add-hook 'macrursors-post-finish-hook mode))
-  (define-prefix-command 'macrursors-mark-map)
-  (global-set-key (kbd "C-c SPC") #'macrursors-select)
-  (global-set-key (kbd "C->") #'macrursors-mark-next-instance-of)
-  (global-set-key (kbd "C-<") #'macrursors-mark-previous-instance-of)
-  (global-set-key (kbd "C-;") 'macrursors-mark-map)
-  (define-key macrursors-mark-map (kbd "C-;") #'macrursors-mark-all-lines-or-instances)
-  (define-key macrursors-mark-map (kbd ";") #'macrursors-mark-all-lines-or-instances)
-  (define-key macrursors-mark-map (kbd "l") #'macrursors-mark-all-lists)
-  (define-key macrursors-mark-map (kbd "s") #'macrursors-mark-all-symbols)
-  (define-key macrursors-mark-map (kbd "e") #'macrursors-mark-all-sexps)
-  (define-key macrursors-mark-map (kbd "f") #'macrursors-mark-all-defuns)
-  (define-key macrursors-mark-map (kbd "n") #'macrursors-mark-all-numbers)
-  (define-key macrursors-mark-map (kbd ".") #'macrursors-mark-all-sentences)
-  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
+;;(use-package! macrursors
+;;  :config
+;;  (dolist (mode '(corfu-mode goggles-mode beacon-mode))
+;;    (add-hook 'macrursors-pre-finish-hook mode)
+;;    (add-hook 'macrursors-post-finish-hook mode))
+;;  (define-prefix-command 'macrursors-mark-map)
+;;  (global-set-key (kbd "C-c SPC") #'macrursors-select)
+;;  (global-set-key (kbd "C->") #'macrursors-mark-next-instance-of)
+;;  (global-set-key (kbd "C-<") #'macrursors-mark-previous-instance-of)
+;;  (global-set-key (kbd "C-;") 'macrursors-mark-map)
+;;  (define-key macrursors-mark-map (kbd "C-;") #'macrursors-mark-all-lines-or-instances)
+;;  (define-key macrursors-mark-map (kbd ";") #'macrursors-mark-all-lines-or-instances)
+;;  (define-key macrursors-mark-map (kbd "l") #'macrursors-mark-all-lists)
+;;  (define-key macrursors-mark-map (kbd "s") #'macrursors-mark-all-symbols)
+;;  (define-key macrursors-mark-map (kbd "e") #'macrursors-mark-all-sexps)
+;;  (define-key macrursors-mark-map (kbd "f") #'macrursors-mark-all-defuns)
+;;  (define-key macrursors-mark-map (kbd "n") #'macrursors-mark-all-numbers)
+;;  (define-key macrursors-mark-map (kbd ".") #'macrursors-mark-all-sentences)
+;;  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
 
 ;;; Autocompletion
 
@@ -888,6 +888,8 @@
         "C-c & C-v" nil))
 
 (when (modulep! :editor multiple-cursors)
+  (map! "C->" #'mc/mark-next-like-this
+        "C-<" #'mc/mark-previous-like-this)
   (map! :leader
         :prefix "m"
         :desc "Pop mark" "C-SPC"            #'mc/mark-pop
