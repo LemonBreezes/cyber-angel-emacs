@@ -30,7 +30,7 @@
   ;; For some reason, just binding this key in `gdb-frames-mode-map' doesn't
   ;; work for me.
   (map! :map comint-mode-map
-        "RET" #'cae-debugger-gdb-select-frame))
+        "RET" #'cae-debugger-gud-comint-send-input))
 (after! projectile
   (map! :map projectile-command-map
         "@" #'projectile-run-gdb))
