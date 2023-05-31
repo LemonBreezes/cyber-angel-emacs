@@ -155,6 +155,7 @@
 
   ;; Allow switching to these buffers with `C-x b'
   (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+  ;;(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
