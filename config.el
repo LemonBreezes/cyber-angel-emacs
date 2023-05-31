@@ -913,23 +913,3 @@
 
 (setq cae-config-finished-loading t)
 
-;;; Config
-;; Here I am going over Doom's `config' module and deciding which keybindings I
-;; like, etc.
-
-;; The `C-RET' and `C-S-RET' keybindings I like but they are overriden in Org
-;; mode. Meow also provides alternatives.
-
-;; Doom should use keymap-based replacements rather than
-;; `which-key-replacement-alist' for both performance reasons and so that the
-;; descriptions are less sensitive to breaking, such as when we add second
-;; leader key.
-
-;;;; Files map (SPC f)
-
-;; The recentf and sudo commands are useful enough to keep. Overall, though I
-;; can use some of these commands without the leader key, these keybindings are
-;; all convenient.
-
-;; What I would be missing is mainly `recentf', sudo stuff, opening scratch
-;; buffers... I think I prefer to use this as the leader key in Meow.
