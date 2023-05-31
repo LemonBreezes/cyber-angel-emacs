@@ -228,9 +228,6 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
-  ;; Save deleted regions to the `delete-selection-save-to-register' register
-  (advice-add #'meow-delete :before #'cae-meow-delete-save-to-register-a)
-  (advice-add #'meow-backward-delete :before #'cae-meow-delete-save-to-register-a)
   ;; Ensure the cursor is updated when running Emacs in a terminal.
   (autoload 'etcc--evil-set-cursor "evil-terminal-cursor-changer")
   (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
