@@ -424,6 +424,7 @@
 ;;; Worf
 (after! worf
   (worf-define-key worf-mode-map "P" #'org-priority)
+  ;;(worf-define-key worf-mode-map "P" #'worf-paste)
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
            (,(cae-keyboard-kbd "k") wspecial-worf-up "")
