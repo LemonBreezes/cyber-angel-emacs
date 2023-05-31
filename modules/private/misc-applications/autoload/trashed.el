@@ -46,18 +46,3 @@
   ("% m" trashed-mark-files-regexp "Mark by regexp" :column "Mark")
   ("% r" trashed-flag-restore-files-regexp "Flag restore by regexp" :column "Flag")
   ("% u" trashed-unmark-files-regexp "Unmark by regexp" :column "Mark"))
-
-;;;###autoload
-(defun +trashed ()
-  "TODO I should PR this to trashed.el as a replacement for `trashed'."
-  (interactive)
-  (if (not (buffer-live-p trashed-buffer))
-      (progn
-        (pop-to-buffer
-         (setq trashed-buffer (get-buffer-create trashed-buffer-name)))
-        (with-current-buffer trashed-buffer
-          (trashed-mode)
-          (revert-buffer)
-          (trashed-reset-vpos)
-          (trashed-reset-hpos t))))
-  (pop-to-buffer trashed-buffer))
