@@ -121,8 +121,8 @@ Lispy."
              (and (numberp arg)
                   (< arg 0)))
          (require 'pp+)
-         (setq current-prefix-arg (when (numberp arg)
-                                    (- arg)))
+         (setq current-prefix-arg (and (numberp arg)
+                                       (- arg)))
          (call-interactively #'pp-eval-expression))
         (t (call-interactively #'eval-expression))))
 
