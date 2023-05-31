@@ -442,6 +442,7 @@
 (load! "lisp/cae-repeat")
 (load! "lisp/cae-visible-mark")
 (load! "lisp/cae-smartparens")
+(load! "lisp/cae-visual-scrolling")
 
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
