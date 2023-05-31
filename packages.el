@@ -62,7 +62,7 @@
 (package! restore-point
   :recipe (:host github :repo "arthurcgusmao/restore-point"))
 (package! symbol-overlay)
-(package! sentex :recipe (:repo "https://codeberg.org/martianh/sentex.git"))
+(package! sentex)
 (package! edit-indirect)
 (package! string-edit-at-point)
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
