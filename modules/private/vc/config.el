@@ -29,15 +29,7 @@
     (map! :map magit-status-mode-map
           ;; Killing the Magit status buffer removes the `forge-pull' progress
           ;; from the modeline.
-          "q" (cmd! (let ((winconf magit-previous-window-configuration)
-                          (buffer (current-buffer))
-                          (frame (selected-frame)))
-                      ;;(quit-window kill-buffer (selected-window))
-                      (when (and winconf (equal frame (window-configuration-frame winconf)))
-                        (set-window-configuration winconf)
-                        (when (buffer-live-p buffer)
-                          (with-current-buffer buffer
-                            (setq magit-previous-window-configuration nil)))))))
+          "q" #'magit-mode-bury-buffer)
     (after! forge
       (setq forge-pull-notifications t
             forge-buffer-draft-p t))))
