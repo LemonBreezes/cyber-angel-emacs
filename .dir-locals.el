@@ -3,16 +3,19 @@
 
 ((nil
   . ((eval
-      . (when (bound-and-true-p cae-config-finished-loading)
-          (when (and (derived-mode-p 'emacs-lisp-mode)
-                     (fboundp 'cae-compile-this-elisp-file))
-            (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
-          (when (and (buffer-file-name)
-                     (not (file-in-directory-p (buffer-file-name)
-                                               (concat doom-private-dir "secrets/")))
-                     (require 'git-auto-commit-mode nil t))
-            (git-auto-commit-mode 1)
-            (setq-local gac-automatically-push-p t))))))
+      . (progn
+          (when (derived-mode-p 'emacs-lisp-mode)
+            (add-hook 'write-file-functions 'eval-buffer 1 t))
+          (when (bound-and-true-p cae-config-finished-loading)
+            (when (and (derived-mode-p 'emacs-lisp-mode)
+                       (fboundp 'cae-compile-this-elisp-file))
+              (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
+            (when (and (buffer-file-name)
+                       (not (file-in-directory-p (buffer-file-name)
+                                                 (concat doom-private-dir "secrets/")))
+                       (require 'git-auto-commit-mode nil t))
+              (git-auto-commit-mode 1)
+              (setq-local gac-automatically-push-p t)))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
 
 
