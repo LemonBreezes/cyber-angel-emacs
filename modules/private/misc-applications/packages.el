@@ -45,7 +45,11 @@
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
+
 (package! zones)
+(package! zone-nyan)
+(package! zone-rainbow)
+(package! zone-sl)
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
