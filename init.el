@@ -72,6 +72,7 @@
        :private
        ;; exwm
        (corfu +indexed)
+       helm
        debugger
        (dirvish +icons +dirvish)
        eshell
