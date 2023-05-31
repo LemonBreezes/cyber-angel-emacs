@@ -22,9 +22,6 @@
 ;;;###autoload
 (defun cae-compile-my-private-config ()
   (interactive)
-  (when (or (not cae-compile--exit-code)
-            (eq cae-compile--exit-code 0))
-    (+compile-pdf-tools))
   (mapc (lambda (s)
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
