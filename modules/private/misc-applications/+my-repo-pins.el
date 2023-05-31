@@ -5,7 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "j" #'my-repo-pins)
+        :desc "My repo pins" "j" #'my-repo-pins)
   :config
   (make-directory "~/code-root" t)
   (setq my-repo-pins-code-root "~/code-root"))
