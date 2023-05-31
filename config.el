@@ -1237,7 +1237,8 @@
   ;;(define-key org-mode-map org-babel-key-prefix #'org-babel-map)
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
-      "C-c \"" "plot")))
+      "C-c \"" "plot"
+      "C-c C-v" "babel")))
 
 ;;; Appendix
 
