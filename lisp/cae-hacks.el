@@ -90,7 +90,8 @@
 (defadvice! cae-hacks-diff-hl-reference-revision-a (oldfun &rest args)
   :around '(diff-hl-stage-current-hunk
             diff-hl-revert-hunk)
-  (let ((diff-hl-reference-revision (buffer-local-value
+  (let ((diff-hl-reference-revision
+         (buffer-local-value
                                      'diff-hl-reference-revision
                                      (current-buffer))))
     (apply oldfun args)))
