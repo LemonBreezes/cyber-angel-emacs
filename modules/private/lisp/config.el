@@ -52,16 +52,18 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
-          "M-m" nil                     ; formerly `lispy-mark-symbol'. I prefer
-                                        ; to keep the default `M-m' and `C-a'
-                                        ; keybindings.
-          "C-a" nil                     ; formerly
-                                        ; `lispy-move-beginning-of-line'.
-          "C-e" nil                     ; formerly `lispy-move-end-of-line'.
-                                        ; Doom's default `C-e' is better.
-          ;; "M-j" nil                     ; formerly `lisp-split'.
-          "M-i" nil                     ; formerly `lispy-iedit'. I prefer
-                                        ; multiple cursors.
+          "M-m" nil                     ;formerly `lispy-mark-symbol'. I prefer
+                                        ;to keep the default `M-m' and `C-a'
+                                        ;keybindings.
+          "C-a" nil                     ;formerly
+                                        ;`lispy-move-beginning-of-line'.
+          "C-e" nil                     ;formerly `lispy-move-end-of-line'.
+                                        ;Doom's default `C-e' is better.
+          ;; "M-j" nil                     ;formerly `lisp-split'.
+          "M-i" nil                     ;formerly `lispy-iedit'. I prefer
+                                        ;multiple cursors.
+          ;;"M-."   nil                   ;formerly `lispy-goto-symbol'.
+          "C-M-," nil
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
           "M-S" #'lispy-split
