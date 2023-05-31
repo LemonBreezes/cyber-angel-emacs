@@ -59,5 +59,3 @@
         (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                            (tramp-file-local-name file)))
       (doom/sudo-this-file))))
-
-(map! [remap doom/sudo-this-file] #'cae-toggle-sudo)
