@@ -72,7 +72,8 @@
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
     ("u" winner-undo
-     "r" winner-redo))
+     "r" winner-redo
+     "U" winner-redo))
 
   (define-repeat-map cae-buffer-navigation-repeat-map
     ("<left>" cae-dired-previous-buffer
