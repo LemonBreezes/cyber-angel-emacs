@@ -5,7 +5,7 @@
   ("a" embark-act "Act" :column "Act")
   ("A" embark-act-all "Act on all" :column "Act")
   ("E" embark-export "Export" :column "Act")
-  ("S" tabulated-list-sort "Sort" :column "Navigate")
+  ;;("S" tabulated-list-sort "Sort" :column "Navigate")
   ("m" embark-collect-mark "Mark" :column "Act")
   ("s" isearch-forward "Search forward" :column "Navigate")
   ("{" outline-previous-heading "Previous heading" :column "Navigate")
