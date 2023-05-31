@@ -172,7 +172,7 @@
              ("~" special-lispy-tilde)
              ("_" special-lispy-underscore)
              ("'" lispy-tick)
-             ("," ,(lookup-key cae-keyboard--lispy-mode-map-backup ","))
+             ("," nil)
              ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
                                (cae-keyboard-kbd-reverse "'"))))))
       (dolist (binding bindings)
