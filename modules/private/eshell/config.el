@@ -40,7 +40,7 @@
   (advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
   ;; Parse buffer redirection >#buf and >#.
-  (add-hook 'eshell-parse-argument-hook #'+eshell-syntax-buffer-redirect)
+  (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
 
   (setq eshell-input-filter #'cae-eshell-input-filter)
 
