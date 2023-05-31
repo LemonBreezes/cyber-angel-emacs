@@ -114,7 +114,8 @@
   (let* ((bookmark-file (cae-project--get-bookmark-file))
          (bookmark-dir (file-name-directory bookmark-file)))
     (if (file-exists-p bookmark-dir)
-        ;; Open Dired in the parent directory of the bookmark file and jump to the bookmark file.
+        ;; Open Dired in the parent directory of the bookmark file and jump to
+        ;; the bookmark file.
         (progn (dired bookmark-dir)
                (if (file-exists-p bookmark-file)
                    (dired-goto-file bookmark-file)
