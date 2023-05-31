@@ -12,7 +12,8 @@
   (after! dap-mode
     (remove-hook 'dap-stopped-hook #'+dap-running-session-mode)
     (setq dap-debug-restart-keep-session nil
-          dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
+          dap-auto-configure-features '(sessions locals breakpoints
+                                        expressions tooltip))
 
     (when (modulep! :private corfu)
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
