@@ -103,7 +103,7 @@
        "9" +workspace/switch-to-8)
       (:enter +workspace/display))
    t)
-  (setq repeat-check-key 'no)
+  (setq repeat-check-key nil)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
