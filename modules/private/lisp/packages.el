@@ -3,5 +3,4 @@
 
 (package! outline-minor-faces)
 (package! nameless)
-(package! topsy)
 (package! page-break-lines)
