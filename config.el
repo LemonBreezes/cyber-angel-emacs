@@ -609,7 +609,13 @@
            (or (and lsp-enable-on-type-formatting
                     (lsp--capability "documentOnTypeFormattingProvider"))
                (and lsp-enable-indentation
-                    (lsp--capability "documentRangeFormattingProvider")))))))
+                    (lsp--capability "documentRangeFormattingProvider")))))
+    (add-to-list
+     'aggressive-indent-dont-indent-if
+     '(and comment-start
+           (save-excursion
+             (beginning-of-line)
+             (looking-at (concat "^\\s-*" comment-start)))))))
 
 (use-package! hungry-delete
   :defer t :init
