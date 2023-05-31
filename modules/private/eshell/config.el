@@ -14,6 +14,9 @@
   :custom ((detached-show-output-on-attach t)
            (detached-terminal-data-command system-type))
   :config
+  ;; I copied this from
+  ;; https://lists.sr.ht/~niklaseklund/detached.el/%3C43845199-6AAD-4651-9D13-4F02F0D887D6%40technomadic.org%3E.
+  ;; Hopefully in a few months I can remove it.
   (defun cae-hacks-detached--db-update-sessions (orig-fn)
     "Ensure we print the full object to the DB."
     (let ((print-length nil)
