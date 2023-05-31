@@ -137,7 +137,7 @@
              (,(cae-keyboard-kbd "M") special-lispy-alt-multiline "Edit")
              (,(cae-keyboard-kbd "S") special-lispy-stringify "Edit")
              (,(cae-keyboard-kbd "a") special-lispy-ace-symbol "Move")
-             (,(cae-keyboard-kbd "H") special-lispy-ace-symbol-replace "Delete")
+             (,(cae-keyboard-kbd "H") special-lispy-ace-symbol-replace "Edit")
              (,(cae-keyboard-kbd "m") special-lispy-mark-list "Select")
              (,(cae-keyboard-kbd "e") special-lispy-eval "Eval")
              (,(cae-keyboard-kbd "E") special-lispy-eval-and-insert "Eval")
