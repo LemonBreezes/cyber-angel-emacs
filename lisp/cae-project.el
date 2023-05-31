@@ -5,7 +5,7 @@
 
 (defun cae-project-get-bookmark-file (project)
   "Return the bookmark file for PROJECT."
-  (expand-file-name "bookmarks" (cae-project-get-root project)))
+  (expand-file-name "bookmarks" (doom-project-root project)))
 
 (defun cae-project-bookmark-jump ())
 
