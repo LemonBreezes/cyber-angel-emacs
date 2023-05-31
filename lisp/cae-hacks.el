@@ -57,18 +57,6 @@
                    arg nil))
     (funcall oldfun arg)))
 
-;; Compile Vterm without asking.
-(when (modulep! :term vterm)
-  (defvar vterm-always-compile-module t)
-  (defadvice! cae-vterm-module-compile-silently-a (oldfun)
-    :around #'vterm-module-compile
-    (advice-add #'pop-to-buffer :override #'ignore)
-    (unwind-protect (funcall oldfun)
-      (advice-remove #'pop-to-buffer #'ignore)))
-
-  ;; Use the system's `libvterm' if available.
-  (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
-
 ;; A generic adviser for responding yes to yes or no prompts automatically.
 (defun cae-hacks-always-yes-a (oldfun &rest args)
   (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
