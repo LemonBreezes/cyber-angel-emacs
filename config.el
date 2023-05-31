@@ -213,7 +213,7 @@
       yank-pop-change-selection t)
 
 (after! xclip
-  (setq xclip-select-enable-clipboard nil))
+  (setq xclip-select-enable-clipboard (not (display-graphic-p))))
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
