@@ -505,7 +505,8 @@
   ;; external file change. Still, I use this for personal Org files and the
   ;; like.
   (when (modulep! :editor fold)
-    (add-hook 'doom-first-file-hook #'vimish-fold-global-mode))
+    (add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
+    (setq vimish-fold-indication-mode 'right-fringe))
 
   ;; Ensure local elisp packages are up-to-date.
   (add-hook 'emacs-lisp-mode-hook
