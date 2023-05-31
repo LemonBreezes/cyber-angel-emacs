@@ -34,7 +34,7 @@
   (cond ((and delete-active-region
               (region-active-p))
          (sp-delete-region (region-beginning) (region-end)))
-        ;; check if parens are balanced
+        ;; Only call `delete-char' if the parens are unbalanced.
         ((condition-case err
              (scan-sexps (point-min) (point-max))
            (scan-error t))
