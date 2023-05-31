@@ -277,6 +277,7 @@
               ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
                                       (cae-keyboard-kbd-reverse ","))
                           cae-lispy-hydra--command-column-alist))
+             ;;(lookup-key cae-keyboard--lispy-mode-map-backup "%")
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "")
