@@ -3,8 +3,7 @@
 ;;;###autoload
 (defun cae-dired-set-layout-h ()
   (when (and (derived-mode-p 'dired-mode)
-             (one-window-p)
-             (not (memq this-command '(next-buffer previous-buffer))))
+             (one-window-p))
     (dirvish-layout-toggle)))
 
 ;;;###autoload
