@@ -149,7 +149,8 @@
           auto-revert-tail-mode
           font-lock-mode
           highlight-changes-mode
-          ruler-mode))
+          ruler-mode
+          vline-mode))
   (setq minions-prominent-modes '(defining-kbd-macro
                                    projectile-mode
                                    flycheck-mode
