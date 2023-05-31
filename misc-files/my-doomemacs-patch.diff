@@ -955,7 +955,7 @@ index e5e072c0c..d53d8ca3d 100644
 @@ -9,7 +9,8 @@
    (set-company-backend! 'solidity-mode 'company-solidity)
  
-   (use-package! solidity-flycheck  ; included with solidity-mode
+   (use-package! solidity-flycheck  ;included with solidity-mode
 -    :when (modulep! :checkers syntax)
 +    :when (and (modulep! :checkers syntax)
 +               (not (modulep! :checkers syntax +flymake)))

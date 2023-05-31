@@ -1,0 +1,137 @@
+diff --git a/lisp/doom-keybinds.el b/lisp/doom-keybinds.el
+index 068c75457..db3594f5c 100644
+--- a/lisp/doom-keybinds.el
++++ b/lisp/doom-keybinds.el
+@@ -145,10 +145,12 @@ all hooks after it are ignored.")
+                     forms))
+             (when-let (desc (cadr (memq :which-key udef)))
+               (prependq!
+-               wkforms `((which-key-add-key-based-replacements
++               wkforms `((which-key-add-keymap-based-replacements
++                           doom-leader-map
+                            (general--concat t doom-leader-alt-key ,key)
+                            ,desc)
+-                         (which-key-add-key-based-replacements
++                         (which-key-add-keymap-based-replacements
++                           doom-leader-map
+                            (general--concat t doom-leader-key ,key)
+                            ,desc))))))))
+     (macroexp-progn
+diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
+index 18c00c781..8a87d304e 100644
+--- a/modules/completion/vertico/config.el
++++ b/modules/completion/vertico/config.el
+@@ -228,22 +228,24 @@ orderless."
+          "C-c C-;"           #'embark-export
+          "C-c C-l"           #'embark-collect
+          :desc "Export to writable buffer" "C-c C-e" #'+vertico/embark-export-write)
+-        (:leader
+-         :desc "Actions" "a" #'embark-act)) ; to be moved to :config default if accepted
++        ;; (:leader
++        ;;  :desc "Actions" "a" #'embark-act)
++        ) ; to be moved to :config default if accepted
+   :config
+   (require 'consult)
+ 
+   (set-popup-rule! "^\\*Embark Export:" :size 0.35 :ttl 0 :quit nil)
+ 
+-  (defadvice! +vertico--embark-which-key-prompt-a (fn &rest args)
+-    "Hide the which-key indicator immediately when using the completing-read prompter."
+-    :around #'embark-completing-read-prompter
+-    (which-key--hide-popup-ignore-command)
+-    (let ((embark-indicators
+-           (remq #'embark-which-key-indicator embark-indicators)))
+-      (apply fn args)))
+-  (cl-nsubstitute #'+vertico-embark-which-key-indicator #'embark-mixed-indicator embark-indicators)
+-  ;; add the package! target finder before the file target finder,
++  (after! which-key
++    (defadvice! +vertico--embark-which-key-prompt-a (fn &rest args)
++      "Hide the which-key indicator immediately when using the completing-read prompter."
++      :around #'embark-completing-read-prompter
++      (which-key--hide-popup-ignore-command)
++      (let ((embark-indicators
++             (remq #'embark-which-key-indicator embark-indicators)))
++        (apply fn args)))
++    (cl-nsubstitute #'+vertico-embark-which-key-indicator #'embark-mixed-indicator embark-indicators))
++  ;; Add the package! target finder before the file target finder,
+   ;; so we don't get a false positive match.
+   (let ((pos (or (cl-position
+                   'embark-target-file-at-point
+diff --git a/modules/config/default/+emacs-bindings.el b/modules/config/default/+emacs-bindings.el
+index 8e6be2a5f..9042f95ff 100644
+--- a/modules/config/default/+emacs-bindings.el
++++ b/modules/config/default/+emacs-bindings.el
+@@ -23,7 +23,9 @@
+       :desc "Evaluate line/region"        "e"   #'+eval/line-or-region
+ 
+       (:prefix ("l" . "<localleader>")) ; bound locally
+-      (:prefix ("!" . "checkers"))      ; bound by flycheck
++      (:when (and (modulep! :checkers syntax)
++                  (not (modulep! :checkers syntax +flymake)))
++       (:prefix ("!" . "checkers")))      ; bound by flycheck
+ 
+       ;;; <leader> c --- code
+       (:prefix-map ("c" . "code")
+@@ -145,7 +147,12 @@
+ 
+       ;;; <leader> i --- insert
+       (:prefix-map ("i" . "insert")
++<<<<<<< Updated upstream
+        :desc "Emoji"                         "e"   #'emojify-insert-emoji
++=======
++       (:when (modulep! :ui emoji)
++        :desc "Emoji"                         "e"   #'emojify-insert-emoji)
++>>>>>>> Stashed changes
+        :desc "Current file name"             "f"   #'+default/insert-file-path
+        :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
+        :desc "Snippet"                       "s"   #'yas-insert-snippet
+@@ -164,7 +171,12 @@
+ 
+        :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
+        :desc "Cancel current org-clock"       "C" #'org-clock-cancel
++<<<<<<< Updated upstream
+        :desc "Open deft"                      "d" #'deft
++=======
++       (:when (modulep! :ui deft)
++        :desc "Open deft"                      "d" #'deft)
++>>>>>>> Stashed changes
+        (:when (modulep! :lang org +noter)
+         :desc "Org noter"                    "e" #'org-noter)
+ 
+@@ -304,8 +316,8 @@
+        :desc "Restart & restore Emacs"      "r" #'doom/restart-and-restore
+        :desc "Restart Emacs"                "R" #'doom/restart)
+ 
+-      ;;; <leader> & --- snippets
+-      (:prefix-map ("&" . "snippets")
++      ;;; <leader> y --- snippets
++      (:prefix-map ("y" . "snippets")
+        :desc "New snippet"           "n" #'yas-new-snippet
+        :desc "Insert snippet"        "i" #'yas-insert-snippet
+        :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+@@ -325,7 +337,13 @@
+        :desc "Soft line wrapping"           "w" #'visual-line-mode
+        (:when (modulep! :editor word-wrap)
+         :desc "Soft line wrapping"          "w" #'+word-wrap-mode)
++<<<<<<< Updated upstream
+        (:when (modulep! :checkers syntax)
++=======
++       :desc "Flymake"                      "f" #'flymake-mode
++       (:when (and (modulep! :checkers syntax)
++                   (not (modulep! :checkers syntax +flymake)))
++>>>>>>> Stashed changes
+         :desc "Flycheck"                   "f" #'flycheck-mode)
+        (:when (modulep! :ui indent-guides)
+         :desc "Indent guides"              "i" #'highlight-indent-guides-mode)
+diff --git a/modules/lang/cc/autoload.el b/modules/lang/cc/autoload.el
+index 41b6ff1c4..ff3215bb5 100644
+--- a/modules/lang/cc/autoload.el
++++ b/modules/lang/cc/autoload.el
+@@ -1,5 +1,7 @@
+ ;;; lang/cc/autoload.el -*- lexical-binding: t; -*-
+ 
++(eval-when-compile (require 'cc-mode))
++
+ ;;;###autoload
+ (add-to-list 'auto-mode-alist '("\\.cl\\'" . opencl-mode))
+ 
