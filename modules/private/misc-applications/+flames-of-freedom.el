@@ -5,4 +5,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-eyecandy-prefix
-        "F" #'flames-of-freedom))
+        "F" #'flames-of-freedom-default))
