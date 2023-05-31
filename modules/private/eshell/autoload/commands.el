@@ -160,7 +160,7 @@ file to edit."
           (eshell-bol)
           (while (re-search-forward "sudo " nil t)
             (replace-match "" t nil))
-          (goto-char pt))
+          (goto-char (- pt (length "sudo "))))
       (progn
         (eshell-bol)
         (insert "sudo ")
