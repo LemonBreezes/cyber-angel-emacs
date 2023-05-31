@@ -19,8 +19,6 @@
 (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-pause-h)
 (add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)
 
-;;(add-to-list 'window-persistent-parameters '(winner-ring . t))
-
 ;;; Tab bar
 
 (after! hercules
