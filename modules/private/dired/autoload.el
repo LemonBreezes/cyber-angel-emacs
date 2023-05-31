@@ -47,7 +47,6 @@
 
 ;;;###autoload
 (defun cae-dired-fullscreen-dwim-h ()
-  (+log "hiiii" (one-window-p) (derived-mode-p 'dired-mode))
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p))
     (ignore-error user-error
