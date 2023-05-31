@@ -79,14 +79,12 @@
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit))
   (when-let ((hydra (alist-get (cl-find (tab-bar--current-tab)
-                                        (frame-parameter (selected-frame)
-                                                         'tabs)
+                                        (tab-bar-tabs)
                                         :test #'equal)
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil #'equal)))
     (setf (alist-get (cl-find (tab-bar--current-tab)
-                              (frame-parameter (selected-frame)
-                                               'tabs)
+                              (tab-bar-tabs)
                               :test #'equal)
                      cae-cheatsheets-tab-bar-hydra-alist
                      nil t #'equal)
