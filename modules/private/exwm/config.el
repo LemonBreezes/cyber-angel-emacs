@@ -100,7 +100,7 @@ expansion occurs within the parent Emacs session.")
     (after! helm
       (when (eq helm-default-display-buffer-functions
                 #'helm-display-buffer-in-own-frame)
-        (setopt helm-default-prompt-display-function #'helm-default-display-buffer)))
+        (setq helm-default-prompt-display-function #'helm-default-display-buffer)))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
@@ -167,7 +167,7 @@ expansion occurs within the parent Emacs session.")
                             (exwm-input--fake-key 'backspace))))
 
     ;; For people who run nested Emacs instances within EXWM.
-    (setopt exwm-replace nil)
+    (setq exwm-replace nil)
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
@@ -192,7 +192,7 @@ expansion occurs within the parent Emacs session.")
     (map! :map exwm-mode-map
           "C-c '" #'exwm-edit--compose)
     :config
-    (setopt exwm-edit-split "below"))
+    (setq exwm-edit-split "below"))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
