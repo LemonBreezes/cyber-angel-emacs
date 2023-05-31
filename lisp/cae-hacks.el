@@ -141,10 +141,4 @@
            cae-hacks--gcmh-mode nil))))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
-
-(defun cae-hacks-max-out-gc-h ()
-  (setq gc-cons-threshold cae-hacks-big-gc-threshold
-        gc-cons-percentage cae-hacks-big-gc-percentage)
-  (cae-hacks-transiently-enable-gc-messages))
-
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
