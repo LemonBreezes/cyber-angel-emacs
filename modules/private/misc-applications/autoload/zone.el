@@ -25,10 +25,9 @@
   "Choose a PGM to run for `zone'."
   (interactive
    (list
-    (completing-read
-     "Program: "
-     (mapcar 'symbol-name
-             (progn (require 'zone)
-                    zone-programs)))))
-  (let ((zone-programs (vector (intern pgm))))
-    (zone)))
+    (intern (completing-read
+             "Program: "
+             (mapcar 'symbol-name
+                     (progn (require 'zone)
+                            zone-programs))))))
+  (zone pgm))
