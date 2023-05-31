@@ -7,7 +7,6 @@
 (autoload 'View-scroll-half-page-forward "view")
 (autoload 'View-scroll-half-page-backward "view")
 
-;; TODO Figure out why these commands remove narrowing.
 (map! "C-v" #'View-scroll-half-page-forward
       "M-v" #'View-scroll-half-page-backward
       "C-S-v" #'my-View-scroll-half-page-forward-other-window
