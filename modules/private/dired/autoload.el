@@ -36,37 +36,6 @@
 ;;    (dirvish-quit))
 ;;  (apply oldfun args))
 
-;; TODO Patch these for the behavior I want. Turn them into `:before' advices
-;; and use hooks if necessary.
-
-;;;###autoload
-(defun cae-dired-find-file-a (oldfun file &optional wildcards)
-  "Like `find-file', but might exit the current Dirvish session."
-  (interactive
-   (find-file-read-args "Find file: "
-                        (confirm-nonexistent-file-or-buffer)))
-  (if (derived-mode-p 'dired-mode)
-      (progn
-        (when-let ((dir (file-name-directory file)))
-          (unless (file-equal-p dir default-directory)
-            (funcall oldfun dir)))
-        (unless (file-directory-p file)
-          ;; Copied from `dirvish-find-entry-a'
-          (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-            (if fn (funcall fn) (dirvish-kill dv)))
-          (funcall oldfun file wildcards)))
-    (funcall oldfun file wildcards))
-  (when (and (derived-mode-p 'dired-mode)
-             (one-window-p))
-    (ignore-error user-error
-      (dirvish-layout-switch dirvish-default-layout))))
-
-(defun cae-dired-find-file-other-window-a (oldfun &rest args)
-  (when (and (derived-mode-p 'dired-mode)
-             (window-dedicated-p))
-    (dirvish-quit))
-  (apply oldfun args))
-
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
