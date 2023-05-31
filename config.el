@@ -464,7 +464,7 @@
         org-ellipsis " ..."
         org-archive-location (concat org-directory ".archive/%s::")
         org-hide-emphasis-markers t
-        ;; All my computers is 64-bit processors
+        ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
     (setq +org-roam-auto-backlinks-buffer nil))
