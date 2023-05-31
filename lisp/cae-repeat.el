@@ -74,6 +74,8 @@
 
   (define-repeat-map dired-jump
     ("j" dired-jump))
+  (define-repeat-map cae-dired-jump
+    ("-" cae-dired-jump))
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
