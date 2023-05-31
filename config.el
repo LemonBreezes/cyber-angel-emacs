@@ -1230,9 +1230,8 @@
           org-agenda-files '("~/org/")))
   (when (and (modulep! :ui ligatures)
              (eq (car +ligatures-in-modes) 'not))
-    (add-to-list '+ligatures-in-modes 'org-mode t)))
+    (add-to-list '+ligatures-in-modes 'org-mode t))
 
-(after! org
   ;; TODO Contribute the prefix map stuff to Org.
   (define-prefix-command 'org-babel-map)
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
