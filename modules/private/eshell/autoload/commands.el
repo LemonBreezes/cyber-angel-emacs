@@ -141,9 +141,7 @@ file to edit."
                              (doom-real-buffer-p buf)
                              (or (buffer-local-value 'default-directory buf)
                                  (buffer-local-value 'list-buffers-directory buf))
-                             (not (memq buf ignored-bufs))
-                             (and (<= (cl-decf n) 0)
-                                  (push buf ignored-bufs))))
+                             (<= (cl-decf n) 0)))
                       (cdr (buffer-list)))))
     (when buf
       (eshell/cd (or (buffer-local-value 'default-directory buf)
