@@ -135,6 +135,8 @@
         garbage-collection-messages t
         gc-cons-threshold cae-hacks-gc-threshold
         gc-cons-percentage cae-hacks-gc-percentage)
+  (when (timerp gcmh-idle-timer)
+    (cancel-timer gcmh-idle-timer))
   (advice-add #'garbage-collect :override #'ignore)
   (gcmh-mode -1))
 
