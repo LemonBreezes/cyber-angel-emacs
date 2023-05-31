@@ -423,6 +423,20 @@
            (,(cae-keyboard-kbd "f") wspecial-hydra-worf-f/body "Move")
            (,(cae-keyboard-kbd "J") wspecial-outline-next-visible-heading "Move")
            (,(cae-keyboard-kbd "K") wspecial-outline-previous-visible-heading "Move")
+           (,(cae-keyboard-kbd "g") wspecial-worf-goto "Move")
+           (,(cae-keyboard-kbd "o") wspecial-worf-ace-link "Move")     ;Visit Link
+           (,(cae-keyboard-kbd "O") wspecial-worf-ace-link-eww "Move") ;Visit in EWW
+           (,(cae-keyboard-kbd "b") wspecial-worf-back-link "Move")
+           (,(cae-keyboard-kbd "i") wspecial-worf-tab "Hide/Show")
+           (,(cae-keyboard-kbd "/") wspecial-worf-tab-contents "Hide/Show")
+           (,(cae-keyboard-kbd "I") wspecial-worf-shifttab "Hide/Show")
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+           (,(cae-keyboard-kbd ""))
+
            )))))
 
 ;;; Basically a custom input method
