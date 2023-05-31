@@ -767,8 +767,10 @@
                                          ;`<f4>' and `C-x e'.
           ;; C-x bindings (ctl-x-map)
           "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
-          "C-x r SPC" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
-          "M-#" #'consult-register
+          ;; Custom M-# bindings for fast register access
+          "M-#" #'consult-register-load
+          "M-'" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
+          "C-M-#" #'consult-register
           [remap jump-to-register] #'consult-register-load
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
