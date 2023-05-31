@@ -467,9 +467,9 @@
 
   (when (modulep! :checkers spell)
     (after! spell-fu
-      (add-hook 'nxml-mode-hook
-                (cae-defun cae-disable-spell-fu-h ()
-                  (spell-fu-mode -1)))))
+      (add-hook! 'nxml-mode-hook
+        (cae-defun cae-disable-spell-fu-h ()
+          (spell-fu-mode -1)))))
 
   (use-package! dwim-shell-command
     :defer t :init
