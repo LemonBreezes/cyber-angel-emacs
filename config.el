@@ -45,7 +45,8 @@
 
 ;; Do not spam me with warnings
 (after! warnings
-  (setq warning-minimum-level :emergency))
+  (setq warning-minimum-level :emergency
+        warning-minimum-log-level :emergency))
 
 (after! shr
   ;; I'm not a fan of variable-pitch fonts.
