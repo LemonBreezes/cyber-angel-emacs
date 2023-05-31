@@ -109,7 +109,7 @@
            lisp
            misc-applications
            ;;modeline
-           ;;unpackaged
+           unpackaged
            ;;vc
            ;;org
 
