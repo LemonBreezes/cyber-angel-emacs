@@ -34,16 +34,6 @@
             (ignore-errors (byte-compile-file s))
             (ignore-errors (native-compile s))))
         (nconc
-         ;; Compiling `lisp/lib' creates some errors and these functions
-         ;; are not that important to have compiled anyways.
-         (directory-files-recursively doom-core-dir
-                                      "[a-za-z0-9]+\\.el$"
-                                      nil
-                                      #'ignore)
-         (directory-files-recursively doom-modules-dir
-                                      "[a-za-z0-9]+\\.el$"
-                                      nil
-                                      #'+file-not-in-unused-module-p)
          (directory-files-recursively
           doom-user-dir
           "[a-zA-Z0-9]+\\.el$"
