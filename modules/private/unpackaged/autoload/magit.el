@@ -39,13 +39,12 @@ command was called, go to its unstaged changes section."
            (not (magit-file-tracked-p (buffer-file-name))))))
 
 ;;;###autoload
-(after! hydra
-  (defhydra +vc/smerge-hydra (:hint nil
-                              :pre (if (not smerge-mode) (smerge-mode 1))
-                              ;; Disable `smerge-mode' when quitting hydra if
-                              ;; no merge conflicts remain.
-                              :post (smerge-auto-leave))
-    "
+(defhydra +vc/smerge-hydra (:hint nil
+                            :pre (if (not smerge-mode) (smerge-mode 1))
+                            ;; Disable `smerge-mode' when quitting hydra if
+                            ;; no merge conflicts remain.
+                            :post (smerge-auto-leave))
+  "
                                                          [smerge]
   Movement   Keep           Diff              Other
   ╭─────────────────────────────────────────────────────────╯
@@ -56,27 +55,27 @@ command was called, go to its unstaged changes section."
      ^_C-j_^     [_RET_] current  [_E_] ediff                 ╭──────────
      ^_G_^                                                │ [_q_] quit
 "
-    ("g" (progn (goto-char (point-min)) (smerge-next)))
-    ("G" (progn (goto-char (point-max)) (smerge-prev)))
-    ("C-j" smerge-next)
-    ("C-k" smerge-prev)
-    ("j" next-line)
-    ("k" previous-line)
-    ("b" smerge-keep-base)
-    ("u" smerge-keep-upper)
-    ("l" smerge-keep-lower)
-    ("a" smerge-keep-all)
-    ("RET" smerge-keep-current)
-    ("\C-m" smerge-keep-current)
-    ("<" smerge-diff-base-upper)
-    ("=" smerge-diff-upper-lower)
-    (">" smerge-diff-base-lower)
-    ("H" smerge-refine)
-    ("E" smerge-ediff)
-    ("C" smerge-combine-with-next)
-    ("r" smerge-resolve)
-    ("R" smerge-kill-current)
-    ;; Often after calling `smerge-vc-next-conflict', the cursor will land at
-    ;; the bottom of the window
-    ("n" (progn (smerge-vc-next-conflict) (recenter-top-bottom (/ (window-height) 8))))
-    ("q" nil :color blue)))
+  ("g" (progn (goto-char (point-min)) (smerge-next)))
+  ("G" (progn (goto-char (point-max)) (smerge-prev)))
+  ("C-j" smerge-next)
+  ("C-k" smerge-prev)
+  ("j" next-line)
+  ("k" previous-line)
+  ("b" smerge-keep-base)
+  ("u" smerge-keep-upper)
+  ("l" smerge-keep-lower)
+  ("a" smerge-keep-all)
+  ("RET" smerge-keep-current)
+  ("\C-m" smerge-keep-current)
+  ("<" smerge-diff-base-upper)
+  ("=" smerge-diff-upper-lower)
+  (">" smerge-diff-base-lower)
+  ("H" smerge-refine)
+  ("E" smerge-ediff)
+  ("C" smerge-combine-with-next)
+  ("r" smerge-resolve)
+  ("R" smerge-kill-current)
+  ;; Often after calling `smerge-vc-next-conflict', the cursor will land at
+  ;; the bottom of the window
+  ("n" (progn (smerge-vc-next-conflict) (recenter-top-bottom (/ (window-height) 8))))
+  ("q" nil :color blue))
