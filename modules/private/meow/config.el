@@ -174,7 +174,8 @@
   (meow/setup-keypad)
   (add-hook 'doom-first-file-hook #'meow-setup-indicator)
   (map! :map meow-normal-state-keymap
-        "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c")))))
+        "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+        "DEL" #'meow-keypad)
   (setq meow-keypad-start-keys
         '((?c . ?c)
           (?h . ?h)
