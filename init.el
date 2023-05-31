@@ -69,8 +69,8 @@
        eshell
        dired
        lisp
-       misc-applications
-       helm
+       ;; misc-applications
+       ;; helm
        unpackaged
        vc)
 
