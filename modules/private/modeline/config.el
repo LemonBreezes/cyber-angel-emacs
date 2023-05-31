@@ -1,8 +1,9 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-;; change the first occurrence of mode-line-buffer-identification to '(:eval (breadcrumb-project-crumbs))
 (setq mode-line-format
-      (cl-subst '(:eval (breadcrumb-project-crumbs)) 'mode-line-buffer-identification mode-line-format))
+      (cl-subst '(:eval (breadcrumb-project-crumbs))
+                'mode-line-buffer-identification
+                mode-line-format))
 
 (use-package! minions
   :defer t :init
