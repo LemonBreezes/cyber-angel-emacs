@@ -350,8 +350,8 @@
   :config
   (setq avy-timeout-seconds 0.25
         avy-keys (cae-keyboard-remap
-                  '(?- ?a ?s ?d ?f ?g
-                    ?h ?j ?k ?l ?\; ?\'))
+                  '(?a ?s ?d ?f ?g
+                    ?h ?j ?k ?l ?\;))
         avy-dispatch-alist
         (cae-keyboard-remap
          '((?x . avy-action-kill-move)
