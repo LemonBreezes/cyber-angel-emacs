@@ -61,7 +61,11 @@
                                         ;`lispy-move-beginning-of-line'.
 
           "C-e" nil                     ;formerly `lispy-move-end-of-line'.
-                                        ;Doom's default `C-e' is better.
+                                        ;Doom's default `C-e' is better because
+                                        ;it moves to the end of the code first
+                                        ;and then to the end of the line rather
+                                        ;than moving to the end of the line
+                                        ;first.
 
           "M-i" nil                     ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
