@@ -9,14 +9,11 @@
 (advice-add #'kill-emacs :before #'cae-compile-store-exit-code-a)
 
 (defvar cae-compile-files-to-ignore
-  `(,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
+  `(
+    ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
     ,(expand-file-name "lang/cc/autoload.el" doom-modules)
-
-    ;; I have not tested compiling these files but it's better not to compile
-    ;; them anyways as they are ran in a CLI and hence are harder to debug.
-    ;; ,(expand-file-name "doom-cli.el" doom-core-dir)
     ))
 
 (defvar cae-compile-native-comp-speed 3)
