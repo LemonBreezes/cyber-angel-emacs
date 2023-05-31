@@ -2,7 +2,7 @@
 
 ;; This function is like `doom-shut-up-a' but does not write messages to the
 ;; messages buffer.
-(defun cae-hacks-doom-shut-up-a (oldfun &rest args)
+(defun cae-hacks-shut-up-a (oldfun &rest args)
   (advice-add #'message :override #'ignore)
   (unwind-protect (quiet! (apply oldfun args))
     (advice-remove #'message #'ignore)))
