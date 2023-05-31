@@ -8,6 +8,7 @@
 
   ;; Fix an error
   (autoload 'org-link-set-parameters "ol")
+  (autoload 'org-link-types "ol")
 
   ;; Stop the weird blinking of the Webkit window when in focus.
   (modify-frame-parameters nil '((inhibit-double-buffering . t)))
