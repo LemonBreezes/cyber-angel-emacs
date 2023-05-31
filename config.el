@@ -577,11 +577,6 @@
   :defer t :init
   (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
   :config
-  (when (modulep! :config default +smartparens)
-    (map! :map hungry-delete-mode-map
-          [remap backward-delete-char-untabify] nil
-          [remap c-electric-backspace] nil
-          [remap delete-backward-char] nil))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
