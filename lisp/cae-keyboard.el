@@ -83,16 +83,16 @@
 (if (modulep! :private meow)
     (eval
      `(map! :map universal-argument-map
-            ,(cae-keyboard-kbd "1") "1"
-            ,(cae-keyboard-kbd "2") "2"
-            ,(cae-keyboard-kbd "3") "3"
-            ,(cae-keyboard-kbd "4") "4"
-            ,(cae-keyboard-kbd "5") "5"
-            ,(cae-keyboard-kbd "6") "6"
-            ,(cae-keyboard-kbd "7") "7"
-            ,(cae-keyboard-kbd "8") "8"
-            ,(cae-keyboard-kbd "9") "9"
-            ,(cae-keyboard-kbd "0") "0"))
+            ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "2") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "3") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "4") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "5") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "6") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
+            ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
   (defconst home-row-numbers-qwerty
     (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
   (home-row-numbers)
