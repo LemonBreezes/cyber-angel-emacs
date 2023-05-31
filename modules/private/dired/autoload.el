@@ -10,12 +10,12 @@
 
 (defun cae-dired-dirvish-fullscreen-p ()
   (and (derived-mode-p 'dired-mode)
-       (window-dedicated-p)
-       (not (window-dedicated-p))))
+       (window-dedicated-p)))
 
 (defun cae-dired-dirvish-not-fullscreen-p ()
   (not (and (derived-mode-p 'dired-mode)
-            (one-window-p))))
+            (one-window-p)
+            (not (window-dedicated-p)))))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
