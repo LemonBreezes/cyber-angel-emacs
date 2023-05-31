@@ -346,11 +346,20 @@
   :defer t
   :config
   (setq avy-timeout-seconds 0.25
-        avy-keys (cae-keyboard-strings
+        avy-keys (cae-keyboard-remap
                   '(?- ?a ?s ?d ?f ?g
                     ?h ?j ?k ?l ?\; ?\'))
-        avy-dispatch-alist (cae-keyboard-remap
-                            avy-dispatch-alist))
+        avy-dispatch-alist
+        (cae-keyboard-remap
+         '((120 . avy-action-kill-move)
+           (88 . avy-action-kill-stay)
+           (116 . avy-action-teleport)
+           (109 . avy-action-mark)
+           (110 . avy-action-copy)
+           (121 . avy-action-yank)
+           (89 . avy-action-yank-line)
+           (105 . avy-action-ispell)
+           (122 . avy-action-zap-to-char))))
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
         ))
