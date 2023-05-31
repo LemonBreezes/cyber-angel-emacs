@@ -250,7 +250,7 @@
 
 
 ;;; Editor
-(load! "lisp/cae-bookmark")
+(load! "lisp/cae-project")
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
