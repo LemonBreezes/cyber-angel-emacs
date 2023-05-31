@@ -32,12 +32,14 @@
         "+daemons"
         "+disk-usage"
         ;;"+elcord"
+        "+elfeed"
         ;;"+enime"
         ;;"+exercism"
         ;;"+forecast"
         ;;"+frameshot"
         ;;"+helm-linux-disks"
         ;;"+helm-system-packages"
+        "+leetcode"
         ;;"+mentor"
         "+my-repo-pins"
         ;;"+picpocket"
@@ -46,11 +48,10 @@
         "+trashed"
         "+try"
         ;;"+vuiet"
-        ;;"+ytel"
         "+webpaste"
-        "+elfeed"
-        "+leetcode"
         "+wttrin"
+        ;;"+ytel"
+
 
         ;; Lookup
         "+devdocs"
