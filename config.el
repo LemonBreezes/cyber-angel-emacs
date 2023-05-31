@@ -756,7 +756,9 @@
          "M-p" #'copilot-previous-completion))
 
   (when (modulep! :editor snippets)
-    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
+    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
+  (when (modulep! :editor multiple-cursors)
+    (add-to-list 'mc/unsupported-minor-modes #'copilot-mode)))
 
 (use-package! isearch-dabbrev
   :defer t
