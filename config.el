@@ -564,7 +564,7 @@
   (load! "lisp/cae-corfu"))
 
 (after! yasnippet
-  (setq yas-triggers-in-field t))
+  (setq yas-triggers-in-field t))       ;Allow nested snippets.
 
 (use-package! dabbrev
   :defer t :config
