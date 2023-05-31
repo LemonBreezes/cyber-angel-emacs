@@ -756,6 +756,10 @@
   :config
   (speedrect-hook))
 
+(use-package! smart-mark
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'smart-mark-mode))
+
 
 ;;; Autocompletion
 
