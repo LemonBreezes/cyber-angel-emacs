@@ -63,6 +63,13 @@
         (puthash file (cae-project--bookmark-alist-from-file file)
                  cae-project-bookmark-cache))))
 
+(defun cae-project-bookmark-reload (&optional project)
+  "Reload the bookmark alist for PROJECT."
+  (interactive)
+  (let ((file (cae-project--get-bookmark-file project)))
+    (puthash file (cae-project--bookmark-alist-from-file file)
+             cae-project-bookmark-cache)))
+
 (defmacro cae-project--with-bookmark-alist (project &rest body)
   "Execute BODY with the bookmark alist for PROJECT."
   (declare (indent defun))
