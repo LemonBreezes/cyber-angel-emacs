@@ -21,6 +21,8 @@
 
 ;;; Pause and resume with workspaces
 
+(defvar cae-cheatsheets-workspace--last-hydra nil)
+
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
   (when (featurep 'hydra)
     (set-persp-parameter 'hydra-pause-ring
