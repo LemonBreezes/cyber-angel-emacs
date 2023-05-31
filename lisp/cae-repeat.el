@@ -6,8 +6,7 @@
   :init
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
-  (setq repeat-exit-timeout 3
-        repeat-exit-key "C-g")
+  (setq repeat-exit-timeout 3)
   (map! :map help-map "C-r" #'describe-repeat-maps)
 
   ;; Uses special keys from my esoteric keyboard layout
