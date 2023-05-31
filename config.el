@@ -360,7 +360,8 @@
 
   (after! xclip
     (cond ((getenv "WSL_DISTRO_NAME")
-           (setq xclip-method 'powershell))
+           (setq xclip-program "clip.exe"
+                 xclip-method 'xclip))
           ((executable-find "termux-setup-storage")
            (setq xclip-method 'termux-clipboard-get))))
 
