@@ -47,7 +47,6 @@
 
 ;;;###autoload
 (defun cae-dired-find-file-fullscreen-h ()
-  (+log (current-buffer) "HELLOOO")
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p))
     (ignore-error user-error
