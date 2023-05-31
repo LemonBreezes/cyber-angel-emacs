@@ -1023,15 +1023,15 @@
     (setq copilot--base-dir
           (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
     ;; Model our Copilot interface after Fish completions.
-    (map! (:map copilot-completion-map
-           "<right>" #'copilot-accept-completion
-           "C-f" #'copilot-accept-completion
-           "M-<right>" #'copilot-accept-completion-by-word
-           "M-f" #'copilot-accept-completion-by-word
-           "C-e" #'copilot-accept-completion-by-line
-           "<end>" #'copilot-accept-completion-by-line
-           "M-n" #'copilot-next-completion
-           "M-p" #'copilot-previous-completion))
+    (map! :map copilot-completion-map
+          "<right>" #'copilot-accept-completion
+          "C-f" #'copilot-accept-completion
+          "M-<right>" #'copilot-accept-completion-by-word
+          "M-f" #'copilot-accept-completion-by-word
+          "C-e" #'copilot-accept-completion-by-line
+          "<end>" #'copilot-accept-completion-by-line
+          "M-n" #'copilot-next-completion
+          "M-p" #'copilot-previous-completion)
     (defun cae-copilot-clear-overlay-h ()
       "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
       (when (copilot--overlay-visible)
