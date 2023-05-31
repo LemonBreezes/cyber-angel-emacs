@@ -29,7 +29,7 @@
 
 (after! org
   (map! :map org-mode-map
-        "]" #'+org-insert-checkbox-or-bracket))
+        "]" #'cae-org-insert-checkbox-or-bracket))
 
 (use-package! org-jira
   :defer t :init
