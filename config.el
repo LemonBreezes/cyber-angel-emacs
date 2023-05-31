@@ -679,6 +679,7 @@
         "k" #'avy-kill-region
         "w" #'avy-kill-ring-save-region
         "j" #'avy-goto-word-1
+        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-above
