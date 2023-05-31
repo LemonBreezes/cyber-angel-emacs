@@ -26,7 +26,7 @@
        multiple-cursors
        file-templates
        snippets
-       word-wrap
+       ;; word-wrap
 
        :emacs
        undo
