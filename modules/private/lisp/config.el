@@ -51,7 +51,7 @@
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
-    (let ((bindings '(("<" "lispy-barf" "")
+    (let ((bindings `(("<" "lispy-barf" "")
                       (,(cae-keyboard-kbd "A") "lispy-beginning-of-defun" "")
                       (,(cae-keyboard-kbd "j") "lispy-down" "")
                       (,(cae-keyboard-kbd "Z") "lispy-edebug-stop" "")
@@ -123,7 +123,7 @@
       (eval
        (append
         '(defhydra cae-lispy-cheat-sheet (:hint nil :foreign-keys run)
-           (,(cae-keyboard-kbd "<f6>") nil "Exit" :exit t))
+           ("<f6>" nil "Exit" :exit t))
         (cl-loop for x in bindings
                  unless (string= "" (elt x 2))
                  collect
