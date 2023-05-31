@@ -178,16 +178,3 @@ derivative.")
          ;; with evil.
          :desc "scroll info up" "C-S-k" #'corfu-popupinfo-scroll-down
          :desc "scroll info down" "C-S-j" #'corfu-popupinfo-scroll-up)))
-
-;;
-;;; For yasnippet
-(use-package! company-yasnippet
-  :when (modulep! :editor snippets)
-  :commands company-yasnippet
-  :after cape
-  :init
-  (defalias 'yasnippet-capf (cape-interactive-capf (cape-company-to-capf #'company-yasnippet)))
-  ;; (add-hook 'yas-minor-mode-hook
-  ;;           (lambda ()
-  ;;             (add-to-list 'completion-at-point-functions #'yasnippet-capf)))
-  )
