@@ -183,6 +183,8 @@
          :side right :select t :quit t)
         ("^\\*Diff\\*" :size cae-popup-resize-help-buffer
          :side right :select t :quit t :ttl 0)
+        ("^\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
         ("^\\*\\([Hh]elp\\|Apropos\\)"
          :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
          :slot 2 :vslot -8)
