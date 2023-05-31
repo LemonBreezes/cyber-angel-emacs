@@ -204,7 +204,7 @@
           (meow-pop-selection . meow-pop-grab)
           (meow-beacon-change . meow-beacon-change-char)
           ;; These are the ones that are not bound by default.
-          (meow-replace . meow-yank)
+          (meow-replace . meow-yank)    ;Basically makes `meow-yank' obsolete.
           (meow-reverse . exchange-point-and-mark)
           ))
   (when (modulep! :private corfu)
