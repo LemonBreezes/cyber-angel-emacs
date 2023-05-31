@@ -91,3 +91,6 @@
 
 (use-package! magit-stats
   :defer t)
+
+(use-package! embark-vc
+  :after embark)
