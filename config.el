@@ -319,7 +319,8 @@
       "Check if the current buffer's display type is posframe."
       (frame-parameter (window-frame window) 'parent-frame))
     :config
-    (add-to-list 'perfect-margin-ignore-regexps "^ \\*which-key\\*$")
+    (dolist (regexp '("^ \\*which-key\\*$" "^\\*fireplace\\*$"))
+      (add-to-list 'perfect-margin-ignore-regexps regexp))
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
 
   (use-package! pdf-view-pagemark
