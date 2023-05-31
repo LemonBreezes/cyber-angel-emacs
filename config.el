@@ -362,7 +362,8 @@
            (?y . avy-action-yank)
            (?Y . avy-action-yank-line)
            (?i . avy-action-ispell)
-           (?z . avy-action-zap-to-char))))
+           (?z . avy-action-zap-to-char)))
+        avy-styles-alist '((avy-isearch . pre)))
   (setq-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     avy-indent-line-overlay t))
 
