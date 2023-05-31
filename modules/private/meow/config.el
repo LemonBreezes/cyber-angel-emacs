@@ -184,6 +184,7 @@
         `((?c . ?c)
           (?h . ?h)
           (?x . ?x)
+          (?\; . ?\;)                   ;For embark
           ;; For popups
           (,(cae-keyboard-remap-char ?`) . ,(cae-keyboard-remap-char ?`))
           (,(cae-keyboard-remap-char ?~) . ,(cae-keyboard-remap-char ?~))))
