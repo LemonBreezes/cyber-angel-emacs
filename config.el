@@ -608,6 +608,8 @@
                                      ("geth" "attach"))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
+(setq eshell-aliases-file (concat doom-private-dir "eshell/aliases"))
+
 ;;; Org
 
 (after! calendar
