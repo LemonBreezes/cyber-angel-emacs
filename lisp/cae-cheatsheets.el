@@ -7,7 +7,15 @@
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
 (defvar cae-cheatsheets-minibuffer--last-tab-index nil)
 
-(defvar cae-cheatsheets-tab--unique-identifier-fn #'doom-visible-buffers)
+(defvar cae-cheatsheets-tab--unique-identifier-fn
+  (lambda ()
+    (mapconcat #'buffer-name
+               (cl-remove-if (lambda (buf)
+                               (+popup-buffer-p buf))
+                (mapcar #'window-buffer
+                        (window-list-1 (frame-first-window)
+                                       'nomini)))
+               ", ")))
 
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
