@@ -22,12 +22,13 @@
 ;;;###autoload
 (defun cae-delete-char ()
   (interactive)
+  ;; Needs refactoring.
   (cond ((region-active-p)
          (if (bound-and-true-p lispy-mode)
              (call-interactively #'lispy-delete)
            (and delete-active-region
                 (delete-region (region-beginning) (region-end)))
-            (call-interactively #'sp-delete-region)))
+           (call-interactively #'sp-delete-region)))
         ;; Only call `delete-char' if the parens are unbalanced.
         ((condition-case error
              (scan-sexps (point-min) (point-max))
