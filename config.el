@@ -181,6 +181,8 @@
          :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
         ("^\\*tldr\\*" :size cae-popup-resize-help-buffer
          :side right :select t :quit t)
+        ("^\\*Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
         ("^\\*\\([Hh]elp\\|Apropos\\)"
          :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
          :slot 2 :vslot -8)
