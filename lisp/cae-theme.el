@@ -29,16 +29,16 @@
            modus-themes-prompts '(italic semibold))))
 
 ;; Set theme based on time
-(when (display-graphic-p)
-  (advice-add #'doom-init-theme-h :override #'ignore)
-  (use-package! circadian
-    :config
-    (cond ((memq doom-theme '(modus-operandi modus-vivendi))
-           (setq! circadian-themes '(("7:15" . modus-operandi)
-                                     ("19:30" . modus-vivendi))))
-          (t (setq! circadian-themes `(("0:00" . ,doom-theme)))))
-    (circadian-setup)
-    (after! exwm-randr
-      (add-hook 'doom-load-theme-hook #'exwm-randr-refresh))))
+;; (when (display-graphic-p)
+;;   (advice-add #'doom-init-theme-h :override #'ignore)
+;;   (use-package! circadian
+;;     :config
+;;     (cond ((memq doom-theme '(modus-operandi modus-vivendi))
+;;            (setq! circadian-themes '(("7:15" . modus-operandi)
+;;                                      ("19:30" . modus-vivendi))))
+;;           (t (setq! circadian-themes `(("0:00" . ,doom-theme)))))
+;;     (circadian-setup)
+;;     (after! exwm-randr
+;;       (add-hook 'doom-load-theme-hook #'exwm-randr-refresh))))
 
-(map! "<f5>" #'modus-themes-toggle)
+;; (map! "<f5>" #'modus-themes-toggle)
