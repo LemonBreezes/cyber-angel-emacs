@@ -212,7 +212,7 @@
 (add-hook 'shell-mode-hook  #'with-editor-export-editor)
 (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 (add-hook 'eshell-mode-hook #'with-editor-export-editor)
-
+i
 (when (and (modulep! :checkers spell)
            (not (modulep! :checkers spell +flyspell)))
   (after! spell-fu
@@ -222,14 +222,15 @@
     (setq spell-fu-faces-exclude
           (delq 'font-lock-string-face spell-fu-faces-include))))
 
-(use-package! pdftotext
-  :defer t
-  :init
-  (defadvice! +pdf-view-mode-a (oldfun &rest args)
-    :around #'pdf-view-mode
-    (if (display-graphic-p)
-        (apply oldfun args)
-      (apply #'pdftotext-mode args))))
+(when (modulep! :tools pdf)
+  (use-package! pdftotext
+    :defer t
+    :init
+    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+      :around #'pdf-view-mode
+      (if (display-graphic-p)
+          (apply oldfun args)
+        (apply #'pdftotext-mode args)))))
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
