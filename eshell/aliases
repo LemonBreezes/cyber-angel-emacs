@@ -1,7 +1,7 @@
 alias gr     egrep               --color=always                               $*
 alias doom   ~/.emacs.d/bin/doom                                              $*
 alias c      xclip               -selection     clipboard                     $*
-alias emerge sudo emerge         --color=y                                    $*
+alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
 alias git    git                 --no-pager                                   $*
 alias tree   tree                -C                                           $*
 alias rg     rg                  --color=always                               $*
