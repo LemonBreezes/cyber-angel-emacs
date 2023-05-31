@@ -90,7 +90,7 @@
   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
 (when (modulep! :ui workspaces)
-  (advice-add #'which-key--process-page :around #'cae-ui-which-key-show-workspace))
+  (advice-add #'which-key--process-page :around #'cae-ui-which-key-show-workspace-a))
 
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
