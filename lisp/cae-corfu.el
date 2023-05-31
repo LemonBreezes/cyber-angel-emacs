@@ -19,6 +19,14 @@
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
 
+  (defmacro cae-generate-corfu-select-index (index)
+    "Return a named function to run `corfu-complete' for INDEX"
+    `(cae-defun ,(intern (format "cae-corfu-complete-%s" index)) ()
+       ,(format "Call `corfu-complete' for index %s." index)
+       (interactive)
+       (let ((corfu--index ,index))
+         (corfu-complete))))
+
   (when (modulep! :private corfu +indexed)
     (setq corfu-indexed-start 1)
     (corfu-indexed-mode +1)
