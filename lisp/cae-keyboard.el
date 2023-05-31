@@ -57,7 +57,10 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "5") (kbd "C-x 5 5"))
 
 (when (modulep! :ui popup)
-  (define-key key-translation-map (cae-keyboard-kbd "C-" "`") (kbd "C-`")))
+  (global-set-key (kbd (cae-keyboard-kbd "C-" "`"))
+                  (lookup-key (current-global-map) (kbd "C-`")))
+  (global-set-key (kbd (cae-keyboard-kbd "C-" "~"))
+                  (lookup-key (current-global-map) (kbd "C-~"))))
 
 ;;; Universal argument
 
