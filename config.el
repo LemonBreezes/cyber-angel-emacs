@@ -306,11 +306,15 @@
       (map! :map macrostep-mode-keymap
             "<f6>" #'cae-macrostep-cheatsheet))
     :config
-    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide)))
+    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
   (use-package! outline-minor-faces
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
+  (use-package! pdf-view-pagemark
+    :defer t :init
+    (add-hook 'pdf-view-mode-hook 'pdf-view-pagemark-mode)))
 
 
 ;;; Tools
