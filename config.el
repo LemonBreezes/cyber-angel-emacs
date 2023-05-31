@@ -9,7 +9,8 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
-(remove-hook 'doom-first-input-hook #'helm-mode)
+(remove-hook 'doom-first-input-hook #'helm-mode) ;Helm is not our main
+                                                 ;completion system
 
 ;;; UI
 
