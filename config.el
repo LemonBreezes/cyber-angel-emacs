@@ -338,6 +338,9 @@
 (global-set-key [remap delete-frame] nil)
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
+;; Do not automatically continue comments.
+(advice-remove #'newline-and-indent #'+default--newline-indent-and-continue-comments-a)
+
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
