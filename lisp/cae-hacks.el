@@ -124,6 +124,7 @@
 
 (defconst cae-hacks-gc-threshold (* 3 1024 1024 1024))
 (defconst cae-hacks-gc-percentage 10)
+(defvar cae-hacks--gc-percentage nil)
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
@@ -133,9 +134,9 @@
     (setq cae-hacks--gcmh-mode        gcmh-mode)
     (gcmh-mode -1)
     (setq cae-hacks--gc-messages      garbage-collection-messages
+          cae-hacks--gc-percentage    gc-cons-percentage
           garbage-collection-messages t
-          gc-cons-threshold           cae-hacks-gc-threshold
-          gc-cons-percentage          cae-hacks-gc-percentage)
+          gc-cons-threshold           cae-hacks-gc-threshold)
     (when (timerp gcmh-idle-timer)
       (cancel-timer gcmh-idle-timer))
     (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
@@ -145,10 +146,10 @@
   (when cae-hacks--gc-disabled
     (gcmh-mode cae-hacks--gcmh-mode)
     (setq garbage-collection-messages cae-hacks--gc-messages
+          gc-cons-percentage          cae-hacks--gc-percentage
           cae-hacks--gc-messages      nil
-          cae-hacks--gcmh-mode        nil
-          gc-cons-threshold           gcmh-low-cons-threshold
-          gc-cons-percentage          cae-hacks-gc-percentage)
+          cae-hacks--gc-percentage    nil
+          cae-hacks--gcmh-mode        nil)
     (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
     (setq cae-hacks--gc-disabled nil)))
 
