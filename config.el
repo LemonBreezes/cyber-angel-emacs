@@ -481,7 +481,7 @@
         ;; C-x bindings (ctl-x-map)
         "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
         "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-        "C-x r J" #'consult-register
+        "M-#" #'consult-register
         [remap jump-to-register] #'consult-register-load
         ;; Other custom bindings
         ;; M-g bindings (goto-map)
