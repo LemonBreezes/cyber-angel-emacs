@@ -1082,6 +1082,14 @@
   :config
   (setq chatgpt-shell-model-version "gpt-4"))
 
+(advice-add #'comint-delchar-or-maybe-eof
+            :after
+            (cae-defun cae-comint-cleanup-buffer-a (arg)
+              (when (and (get-buffer-process (current-buffer))
+                         (prog1 (+popup-buffer-p)
+                           (kill-buffer (current-buffer))))
+                (delete-window))))
+
 ;;; Email
 
 (setq user-full-name "StrawberryTea"
