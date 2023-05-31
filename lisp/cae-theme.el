@@ -18,9 +18,11 @@
     (set-face-attribute 'company-preview nil
                         :inherit 'shadow
                         :background 'unspecified))
-  (after! markdown-mode
-    (set-face-attribute 'markdown-code-face nil
-                        :background 'unspecified))
+  (when (and (modulep! :tools lsp)
+             (not (modulep! :tools lsp +eglot)))
+    (after! lsp-mode
+      (set-face-attribute 'markdown-code-face nil
+                          :background 'unspecified)))
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
