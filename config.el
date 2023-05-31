@@ -1257,7 +1257,8 @@
 ;;; Email
 
 (when (modulep! :email notmuch)
-  (setq +notmuch-sync-backend 'mbsync)
+  (setq +notmuch-sync-backend 'mbsync
+        +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
   (after! notmuch-hello
     (map! :map notmuch-hello-mode-map
           "q" #'cae-notmuch-quit)))
