@@ -696,7 +696,8 @@
   :after pp
   :init
   (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-  (map! [remap eval-expression] #'pp-eval-expression))
+  (map! [remap eval-expression] #'pp-eval-expression
+        [remap eval-last-sexp] #'pp-eval-last-sexp))
 
 (use-package! abbrev
   :defer t :config
