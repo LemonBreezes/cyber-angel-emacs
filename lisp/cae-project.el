@@ -49,28 +49,7 @@
      (unwind-protect
          (progn ,@body)
        (advice-remove #'bookmark-maybe-load-default-file #'ignore)
-     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache))))
-
-(defun cae-project-bookmark-set (&optional name no-overwrite)
-  "Set a bookmark in the current project."
-  (interactive (list nil current-prefix-arg))
-  (cae-project--with-bookmark-alist nil
-    (bookmark-set name no-overwrite)
-    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
-
-(defun cae-project-bookmark-load (file &optional overwrite no-msg default)
-  "Load a bookmark file into the current project's bookmarks."
-  (interactive
-   (let ((default (abbreviate-file-name
-		   (or (car bookmark-bookmarks-timestamp)
-		       (cae-project--get-bookmark-file))))
-	 (prefix current-prefix-arg))
-     (list (read-file-name (format "Load bookmarks from: (%s) " default)
-			   (file-name-directory default) default 'confirm)
-	   prefix nil prefix)))
-  (cae-project--with-bookmark-alist nil
-    (bookmark-load file overwrite no-msg default)
-    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+       (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache))))
 
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
