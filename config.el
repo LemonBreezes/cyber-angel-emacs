@@ -284,7 +284,11 @@
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :term eshell)
     (after! eshell
-      (remove-hook 'eshell-mode-hook #'smartparens-mode))))
+      (remove-hook 'eshell-mode-hook #'smartparens-mode)))
+  (when (modulep! :editor snippets)
+    (after! yasnippet
+      (remove-hook 'yas-before-expand-snippet-hook
+                   #'+snippets--disable-smartparens-before-expand-h))))
 
 ;; This is how we get curly braces working in C without `smartparens'.
 (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
