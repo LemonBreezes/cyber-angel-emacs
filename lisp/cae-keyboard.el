@@ -3,37 +3,22 @@
 ;;; Remap keys
 
 ;; TODO Use key translation map instead of remapping keys
+;; Do this for the C-x t and C-c w prefix keys
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Translation-Map.html
 
-(map! "C-x t )" #'tab-close
-      "C-x t #" #'tab-close-other
-      "C-x t @" #'tab-new)
-(after! which-key
-  (add-to-list 'which-key-replacement-alist
-               '(("C-x t )" . "tab-close") . t))
-  (add-to-list 'which-key-replacement-alist
-               '(("C-x t #" . "tab-close-other") . t))
-  (add-to-list 'which-key-replacement-alist
-               '(("C-x t @" . "tab-new") . t)))
-
-(when (modulep! :ui workspaces)
-  (map! :leader
-      :prefix "w"
-      "!" #'+workspace/switch-to-0
-      "@" #'+workspace/switch-to-1
-      ";" #'+workspace/switch-to-2
-      "=" #'+workspace/switch-to-3
-      "+" #'+workspace/switch-to-4
-      "$" #'+workspace/switch-to-5
-      "&" #'+workspace/switch-to-6
-      "*" #'+workspace/switch-to-7
-      "(" #'+workspace/switch-to-8
-      ")" #'+workspace/switch-to-final)
-(after! which-key
-  (dotimes (i 9)
-    (add-to-list 'which-key-replacement-alist
-                 `((nil . ,(concat "+workspace/switch-to-" (number-to-string i))) . t)))
-  (add-to-list 'which-key-replacement-alist
-               '((nil . "+workspace/switch-to-final") . t))))
+(define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
+(define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
+(define-key key-translation-map (kbd "C-x t @") (kbd "C-x t 2"))
+(define-key key-translation-map (kbd "C-c w !") (kbd "C-x t 1"))
+(define-key key-translation-map (kbd "C-c w @") (kbd "C-x t 2"))
+(define-key key-translation-map (kbd "C-c w ;") (kbd "C-x t 3"))
+(define-key key-translation-map (kbd "C-c w =") (kbd "C-x t 4"))
+(define-key key-translation-map (kbd "C-c w +") (kbd "C-x t 5"))
+(define-key key-translation-map (kbd "C-c w $") (kbd "C-x t 6"))
+(define-key key-translation-map (kbd "C-c w &") (kbd "C-x t 7"))
+(define-key key-translation-map (kbd "C-c w *") (kbd "C-x t 8"))
+(define-key key-translation-map (kbd "C-c w (") (kbd "C-x t 9"))
+(define-key key-translation-map (kbd "C-c w )") (kbd "C-x t 0"))
 
 ;;; Universal argument
 
