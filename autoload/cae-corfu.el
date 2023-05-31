@@ -1,7 +1,7 @@
 ;;; autoload/cae-corfu.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun orderless-escapable-split-on-space-or-ampersand (s)
+(defun cae-orderless-escapable-split-on-space-or-ampersand (s)
   (mapcar
    (lambda (piece)
      (thread-last piece
@@ -24,7 +24,7 @@
                  "[ &]+" t)))
 
 ;;;###autoload
-(defun yas-setup-capf ()
+(defun cae-yas-setup-capf ()
   (make-variable-buffer-local 'completion-at-point-functions)
   (cl-pushnew 'cape-yasnippet
               completion-at-point-functions
