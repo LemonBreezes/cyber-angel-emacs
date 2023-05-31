@@ -15,7 +15,8 @@
       :prefix +misc-applications-prefix
       "1" #'mpc)
 
-(defvar +misc-applications--lisp-files
+(defvar +misc-applications--lisp-files nil)
+(setq +misc-applications--lisp-files
   '("+alarm-clock"
     "+aurel"
     "+daemons"
