@@ -857,7 +857,9 @@
         (nreverse (apply oldfun args))
       (apply oldfun args))))
 
-
+(use-package! unmodified-buffer
+  :defer t :init
+  (add-hook 'after-init-hook #'unmodified-buffer-global-mode))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
