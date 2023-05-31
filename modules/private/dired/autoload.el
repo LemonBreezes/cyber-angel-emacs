@@ -11,9 +11,6 @@
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
-  (interactive
-   (find-file-read-args "Find file: "
-                        (confirm-nonexistent-file-or-buffer)))
   (if (derived-mode-p 'dired-mode)
       (progn
         (when-let ((dir (file-name-directory file)))
@@ -25,14 +22,26 @@
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
-  (when (and (derived-mode-p 'dired-mode)
-             (one-window-p))
+  (when (cae-dired-dirvish-not-fullscreen-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
+(defun cae-dired-dirvish-fullscreen-p ()
+  (and (derived-mode-p 'dired-mode)
+       (window-dedicated-p)
+       (not (window-dedicated-p))))
+
+(defun cae-dired-dirvish-not-fullscreen-p ()
+  (not (and (derived-mode-p 'dired-mode)
+             (one-window-p))))
+
+(defun cae-dired-find-file-other-window-a (oldfun &rest args)
+  (when (cae-dired-dirvish-fullscreen-p)
+    (dirvish-quit))
+  (apply oldfun args))
+
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
-  (when (and (derived-mode-p 'dired-mode)
-             (window-dedicated-p))
+  (when (cae-dired-dirvish-fullscreen-p)
     (dirvish-layout-toggle))
   (call-interactively fn)
   (when (and (derived-mode-p 'dired-mode)
