@@ -363,7 +363,8 @@
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
 ;; Do not automatically continue comments.
-(advice-remove #'newline-and-indent #'+default--newline-indent-and-continue-comments-a)
+(advice-remove #'newline-and-indent
+               #'+default--newline-indent-and-continue-comments-a)
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
@@ -539,12 +540,13 @@
   :config
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
-    (add-to-list 'aggressive-indent-dont-indent-if
-                 '(and lsp-mode
-                       (or (and lsp-enable-on-type-formatting
-                                (lsp--capability "documentOnTypeFormattingProvider"))
-                           (and lsp-enable-indentation
-                                (lsp--capability "documentRangeFormattingProvider")))))))
+    (add-to-list
+     'aggressive-indent-dont-indent-if
+     '(and lsp-mode
+           (or (and lsp-enable-on-type-formatting
+                    (lsp--capability "documentOnTypeFormattingProvider"))
+               (and lsp-enable-indentation
+                    (lsp--capability "documentRangeFormattingProvider")))))))
 
 (use-package! hungry-delete
   :defer t :init
