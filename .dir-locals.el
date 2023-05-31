@@ -5,7 +5,7 @@
   . ((eval
       . (progn
           (when (and (derived-mode-p 'emacs-lisp-mode)
-                     (not (cl-member (file-name-base (buffer-file-name))
+                     (not (cl-member (file-name-nondirectory (buffer-file-name))
                                      '("init.el"
                                        ".dir-locals.el"
                                        "packages.el")
