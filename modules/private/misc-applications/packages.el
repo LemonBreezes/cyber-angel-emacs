@@ -42,6 +42,7 @@
 (package! my-repo-pins :recipe
   (:host github :repo "NinjaTrappeur/my-repo-pins"
    :build (:not compile)))
+(package! fireplace)
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
