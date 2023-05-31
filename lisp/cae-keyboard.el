@@ -113,7 +113,8 @@
 ;;; Distinguishing dual-purpose keycodes
 
 ;; This code allows us to use differentiate the `C-i' and `<tab>' keys. I should
-;; probably defer this hack to an external package.
+;; probably outsource this hack to an external package. Someone else has
+;; probably already done this.
 ;;
 ;; Do not use this code in terminal Emacs. For terminal Emacs, I would need to
 ;; wrap the `C-i' and `C-S-i' commands so that they run the commands bound to
