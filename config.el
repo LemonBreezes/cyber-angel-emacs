@@ -888,7 +888,7 @@
             (define-key map (kbd "C-. &")   #'cape-sgml)
             (define-key map (kbd "C-. r")   #'cape-rfc1345)
             (define-key map (kbd "C-. .")   #'copilot-complete)
-            (define-key map (kbd "C-. C-.")  #'cae-copilot-complete-freeze-cursors-dwim)
+            (define-key map (kbd "C-. C-.")  #'mc/unfreeze-fake-cursors)
             map))
 (cae-completion-mode +1)
 
