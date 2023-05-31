@@ -642,11 +642,6 @@
           "2" #'switch-window-then-split-below
           "3" #'switch-window-then-split-right
           "4" #'switch-window-then-kill-buffer
-          ,(cae-keyboard-kbd "0") #'switch-window-then-delete
-          ,(cae-keyboard-kbd "1") #'switch-window-then-maximize
-          ,(cae-keyboard-kbd "2") #'switch-window-then-split-horizontally
-          ,(cae-keyboard-kbd "3") #'switch-window-then-split-vertically
-          ,(cae-keyboard-kbd "4") #'switch-window-then-kill-buffer
           ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
           "SPC" #'avy-goto-char-timer
           "C-n" #'avy-goto-line-below
@@ -667,11 +662,6 @@
           "C-2" #'switch-window-then-split-horizontally
           "C-3" #'switch-window-then-split-vertically
           "C-4" #'switch-window-then-kill-buffer
-          ,(cae-keyboard-kbd "C-" "0") #'switch-window-then-delete
-          ,(cae-keyboard-kbd "C-" "1") #'switch-window-then-maximize
-          ,(cae-keyboard-kbd "C-" "2") #'switch-window-then-split-horizontally
-          ,(cae-keyboard-kbd "C-" "3") #'switch-window-then-split-vertically
-          ,(cae-keyboard-kbd "C-" "4") #'switch-window-then-kill-buffer
           (:map isearch-mode-map
            "j" #'avy-isearch
            "C-j" #'avy-isearch))
