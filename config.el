@@ -1215,7 +1215,9 @@
   :defer t
   :config
   (setq org-ai-default-chat-model "gpt-4"
-        org-ai-default-completion-model "gpt-4"))
+        org-ai-default-completion-model "gpt-4")
+  (when (modulep! :editor snippets)
+    (org-ai-install-yasnippets)))
 
 ;;; Appendix
 
