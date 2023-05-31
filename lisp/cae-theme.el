@@ -69,7 +69,6 @@
 ;;    (theme-magic-export-theme-mode +1)))
 
 ;; Set theme based on time
-(advice-add #'doom-init-theme-h :override #'ignore)
 (use-package! circadian
   :config
   (setq circadian-themes
@@ -79,6 +78,7 @@
       (let ((hook (if (daemonp)
                       'server-after-make-frame-hook
                     'after-init-hook)))
+        (remove-hook hook #'doom-init-theme-h)
         (add-hook hook #'circadian-setup -90))
     (setq calendar-latitude 0
           calendar-longitude 0)
