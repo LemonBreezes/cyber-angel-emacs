@@ -95,6 +95,8 @@ Lispy."
 
 ;;;###autoload
 (defun cae-eval-last-sexp (arg)
+  ;; Call `pp-eval-last-sexp' when called with a negative
+  ;; prefix argument
   (interactive "P")
   (cond ((or (eq arg '-)
              (and (numberp arg)
