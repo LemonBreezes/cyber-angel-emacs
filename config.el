@@ -285,15 +285,7 @@
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")))
 
-(setq browse-url-browser-function
-      (lambda (url &optional new-window)
-        ;; These are kind of arbitrary conditions that I just patched together.
-        (interactive (browse-url-interactive-arg "URL: "))
-        (cond ((getenv "WSL_DISTRO_NAME")
-               (browse-url-generic url new-window))
-              ((fboundp 'w3m-browse-url)
-               (w3m-browse-url url new-window))
-              (t (eww-browse-url url new-window)))))
+(setq browse-url-browser-function #'browse-url-generic)
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
