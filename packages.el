@@ -2,6 +2,7 @@
 (unpin! t)
 (disable-packages! evil-escape
                    flyspell
+                   flycheck
                    ccls
                    which-key)
 (unless (modulep! :config default +smartparens)
