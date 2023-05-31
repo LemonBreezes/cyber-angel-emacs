@@ -65,11 +65,16 @@ derivative.")
   ;; Only done with :tools vertico active due to orderless. Alternatively, we
   ;; could set it up here if it's not there.
   (when (and +corfu-want-multi-component (modulep! :completion vertico))
-    (cond ((modulep! :tools lsp +eglot) (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
-          ((modulep! :tools lsp) (add-hook 'lsp-completion-mode-hook
-                                           (defun doom--use-orderless-lsp-capf ()
-                                             (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-                                                   '(orderless)))))))
+    (cond ((modulep! :tools lsp +eglot)
+           (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
+          ((modulep! :tools lsp)
+           (add-hook 'lsp-completion-mode-hook
+                     (cae-defun doom--use-orderless-lsp-capf ()
+                       (setf (alist-get 'styles
+                                        (alist-get 'lsp-capf
+                                                   completion-category-defaults))
+                             '(orderless)))
+                     nil #'eq))))
 
   (map! (:unless (modulep! +tng)
          :desc "complete" "C-SPC" #'completion-at-point)
