@@ -179,7 +179,6 @@
 ;; and be silent on startup.
 (use-package! parrot
   :defer t :init
-  (map! "C-!" #'parrot-rotate-next-word-at-point)
   (after! magit (require 'parrot))
   :config
   (setopt parrot-animate 'hide-static
@@ -188,7 +187,12 @@
           parrot-party-on-magit-push t
           parrot-party-on-org-todo-states '("DONE")
           parrot-type 'nyan)
-  (parrot-mode +1)
+  (parrot-mode +1))
+(use-package! parrot-rotate
+  :defer t
+  :init
+  (map! "C-!" #'parrot-rotate-next-word-at-point)
+  :config
   (after! parrot-rotate
     (setq parrot-rotate-animate-after-rotation nil
           parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
