@@ -556,7 +556,7 @@
 (when (modulep! :completion vertico)
   (after! embark
     (map! :map embark-collect-mode-map
-          "<f6>" #'embark-collect-cheatsheet)))
+          "<f6>" #'cae-embark-collect-cheatsheet)))
 
 (use-package! avy
   :defer t
