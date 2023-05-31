@@ -29,12 +29,16 @@
                        ;; zone-pgm-martini-swan-dive
                        zone-pgm-rat-race
                        zone-pgm-paragraph-spaz])
+
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
   (advice-add #'zone-matrix :before
               (cae-defun +zone-matrix-disable-nobreak-char-display-a ()
                 (setq-local nobreak-char-display nil)))
+  (after! zone-matrix
+    (setq zmx-update-time 0.01
+          zmx-unicode-mode t))
 
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
