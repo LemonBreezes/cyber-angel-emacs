@@ -62,13 +62,13 @@
       (dirvish-emerge-mode 1)))
   (add-hook 'dirvish-emerge-mode-hook #'doom-auto-revert-buffer-h)
   (after! dirvish-emerge
-    (setopt dirvish-emerge-groups
-            '(("Recent files" (predicate . recent-files-2h))
-              ("Documents" (extensions "pdf" "tex" "bib" "epub"))
-              ("Video" (extensions "mp4" "mkv" "webm"))
-              ("Pictures" (extensions "jpg" "png" "svg" "gif" "jpeg" "avif"))
-              ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
-              ("Archives" (extensions "gz" "rar" "zip")))))
+    (setq dirvish-emerge-groups
+          '(("Recent files" (predicate . recent-files-2h))
+            ("Documents" (extensions "pdf" "tex" "bib" "epub"))
+            ("Video" (extensions "mp4" "mkv" "webm"))
+            ("Pictures" (extensions "jpg" "png" "svg" "gif" "jpeg" "avif"))
+            ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
+            ("Archives" (extensions "gz" "rar" "zip")))))
 
   (after! dirvish-quick-access
     (setopt dirvish-quick-access-entries
