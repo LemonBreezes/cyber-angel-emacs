@@ -540,6 +540,7 @@
   :init
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   :config
+  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1))
 
 
