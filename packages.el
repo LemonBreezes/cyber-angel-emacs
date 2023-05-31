@@ -52,7 +52,7 @@
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
 (package! aggressive-indent)
-(package! yank-indent)
+(package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
 (package! hungry-delete)
 (package! file-info)
 (package! titlecase)
