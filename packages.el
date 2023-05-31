@@ -14,6 +14,7 @@
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
 (package! rainbow-mode)
+(package! theme-magic)
 
 ;; cae-theme.el
 (package! modus-themes)
