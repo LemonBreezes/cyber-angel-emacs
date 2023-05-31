@@ -33,7 +33,7 @@ overriding other keymaps."
     :init-value nil
     :lighter nil
     :keymap general-override-mode-map)
-  (cae-general-override-mode +1))
+  (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 (doom! :completion
        (vertico +icons)
