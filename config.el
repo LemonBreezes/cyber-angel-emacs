@@ -1216,6 +1216,11 @@
   (map! :leader
         :prefix "g" :desc "GPT dwim" "d" #'cae-gptel))
 
+(use-package! org-ai
+  :defer t
+  :config
+  (setq org-ai-default-chat-model "gpt-4"))
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
