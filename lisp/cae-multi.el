@@ -30,6 +30,8 @@
                                           "dictionaries/word.txt")
         ispell-personal-dictionary (concat cae-multi-secrets-dir
                                            "aspell.en.pws")))
+(after! cape
+  (setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir)))
 
 (use-package! git-auto-commit-mode
   :defer t
