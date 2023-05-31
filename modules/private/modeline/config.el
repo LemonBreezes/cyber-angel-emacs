@@ -66,7 +66,6 @@
           (spell-fu-mode)
           (font-lock-mode)
           (glasses-mode)
-          (highlight-changes-mode)
           ;; (overwrite-mode)
           (ruler-mode)
           (visual-line-mode)
