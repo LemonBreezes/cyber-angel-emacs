@@ -17,7 +17,7 @@
     (after! dap-hydra
       (defhydra+ dap-hydra ()
         ("<f6>" nil "quit")
-        ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart")))
+        ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart" :color blue)))
 
     (when (modulep! :private corfu)
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
