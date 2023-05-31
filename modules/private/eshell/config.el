@@ -103,7 +103,7 @@
   (after! esh-module
     (when (>= emacs-major-version 29)
       (add-to-list 'eshell-modules-list 'eshell-elecslash nil #'eq))
-    (add-to-list 'eshell-modules-list 'eshell-rebind)
+    (add-to-list 'eshell-modules-list 'eshell-rebind nil #'eq)
     (after! em-rebind
       (setq eshell-rebind-keys-alist nil
             eshell-cannot-leave-input-list
