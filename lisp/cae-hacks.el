@@ -85,7 +85,7 @@
              (unwind-protect (funcall oldfun variables dir-name)
                (advice-remove #'safe-local-variable-p #'always)))
     (funcall oldfun variables dir-name)))
-
+;
 ;; Use the buffer local value of `diff-hl-reference-revision'
 (defadvice! cae-hacks-diff-hl-reference-revision-a (oldfun &rest args)
   :around '(diff-hl-diff-against-reference)
