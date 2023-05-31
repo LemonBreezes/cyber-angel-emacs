@@ -42,7 +42,7 @@
   (require 'edebug)
   (setq unread-command-events (list ?\C-x ?\C-a))
   (setq which-key-inhibit t)
-  (add-hook 'pre-command-hook #'cae-debugger--which-key-inhibit-hook)
+  ;; (add-hook 'pre-command-hook #'cae-debugger--which-key-inhibit-hook)
   (run-with-idle-timer
    which-key-idle-delay nil
    (lambda ()
