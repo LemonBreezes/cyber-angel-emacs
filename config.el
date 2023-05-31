@@ -548,11 +548,12 @@
           sp-backward-up-sexp sp-down-sexp sp-backward-down-sexp
           sp-beginning-of-sexp sp-end-of-sexp sp-kill-sexp sp-backward-kill-sexp
           sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
-          sp-backward-kill-word sp-backward-delete-char sp-delete-char
+          sp-backward-kill-word sp-backward-delete-cha/r sp-delete-char
           sp-forward-barf-sexp sp-slurp-hybrid-sexp sp-backward-slurp-sexp
           sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp))
       (dolist (cmd mc-smartparens-cmds)
-        (add-to-list 'mc/cmds-to-run-for-all cmd)))))
+        (add-to-list 'mc/cmds-to-run-for-all cmd)))
+    (map! "M-r" #'cae-raise-sexp-dwim)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
