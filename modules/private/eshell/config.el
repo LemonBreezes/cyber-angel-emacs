@@ -60,10 +60,6 @@
             (cl-set-difference eshell-cannot-leave-input-list
                                '(previous-line next-line)))))
 
-  ;; BUG Doom's default aliases are not being loaded. I had to manually add them to
-  ;; my aliases file.
-
-
   (when (>= emacs-major-version 29)
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
     (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize))
