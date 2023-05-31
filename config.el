@@ -658,8 +658,7 @@
  (setq read-extended-command-predicate #'command-completion-default-include-p)
 
  (use-package! avy
-   :defer t
-   :init
+   :defer t :init
    (map! :prefix "C-z"
          "n" #'avy-goto-line-below
          "p" #'avy-goto-line-above
@@ -795,8 +794,7 @@
    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
  (use-package! diff-mode
-   :defer t
-   :config
+   :defer t :config
    (map! :map diff-mode-map
          "q" #'kill-this-buffer))
 
@@ -805,8 +803,7 @@
    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
                                                              ;module.
    (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-   :defer t
-   :config
+   :defer t :config
    (add-to-list
     'aggressive-indent-dont-indent-if
     '(and (bound-and-true-p lsp-mode)
