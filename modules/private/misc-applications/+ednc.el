@@ -17,4 +17,7 @@
             (lambda (&rest _) (force-mode-line-update t)))
   (map! :leader
         :prefix "o"
-        :desc "Notifications" "n" #'+ednc-show-notifications))
+        :desc "Notifications" "n" #'+ednc-show-notifications)
+  (map! :map ednc-view-mode-map
+        "n" #'next-line
+        "p" #'previous-line))
