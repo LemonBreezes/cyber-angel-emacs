@@ -14,9 +14,16 @@
   (dap-delete-all-sessions)
   (cae-debugger-quit-session-a nil)
   (when-let ((workspace-project (cl-find (+workspace-current-name)
-                                    (projectile-relevant-known-projects)
-                                    :test #'string-match-p)))
+                                         (projectile-relevant-known-projects)
+                                         :test #'string-match-p)))
     (unless (string= (projectile-project-name)
                      (+workspace-current-name))
       (projectile-switch-project-by-name workspace-project)))
   (dap-debug-last))
+
+;;;###autoload
+(defun cae-gdb-select-frame ()
+  (interactive)
+  (if (derived-mode-p 'gdb-frames-mode)
+      (call-interactively #'gdb-select-frame)
+    (call-interactively #'comint-send-input)))
