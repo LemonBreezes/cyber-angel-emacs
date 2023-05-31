@@ -138,18 +138,18 @@
 (when (modulep! :completion vertico)
   (after! vertico
     (map! :map vertico-map
-          ;;"C-z i" #'vertico-quick-exit
-          "M-j" #'vertico-quick-jump)))
+          "M-j" #'vertico-quick-jump
+          "M-i" #'vertico-quick-exit)))
 
 (after! embark
   (map! :map embark-collect-mode-map
-        ;;"M-j" #'avy-embark-collect-choose
-        "M-j" #'avy-embark-collect-act))
+        "M-j" #'avy-embark-collect-choose
+        "M-i" #'avy-embark-collect-act))
 (when (modulep! :private corfu)
   (after! corfu
     (map! :map corfu-map
-          ;;"M-j" #'corfu-quick-jump
-          "M-j" #'corfu-quick-insert)))
+          "M-j" #'corfu-quick-jump
+          "M-i" #'corfu-quick-insert)))
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
