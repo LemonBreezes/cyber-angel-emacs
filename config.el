@@ -631,7 +631,7 @@
            (:unless (and (modulep! :checkers syntax)
                          (not (modulep! :checkers syntax +flymake)))
             "M-g f" #'consult-flycheck)
-           "M-s d" #'consult-find ;; does not cache files like Doom & Projectile search
+           "M-s d" #'consult-find ;; does not cache files like Doom's & Projectile's search
            "M-s D" #'consult-locate)
           )
     :config
