@@ -732,7 +732,7 @@
           [remap c-electric-delete-forward] #'cae-delete-char
           [remap delete-backward-char] #'sp-backward-delete-char
           [remap delete-char] #'cae-delete-char
-          [remap delete-forward-char] #'cae-delete))
+          [remap delete-forward-char] #'cae-delete-char))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
