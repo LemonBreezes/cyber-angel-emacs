@@ -686,11 +686,13 @@
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
         "C-SPC" #'avy-goto-char-timer)
+  ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
+  ;; branch I'm currently using because I should be able to get this working
+  ;; using `avy-styles-alist' instead.
   (advice-add #'avy-goto-end-of-line
               :around
               (cae-defun cae-avy-line-no-column-overlay-a (oldfun &rest args)
-                (let ((avy-column-line-overlay nil)
-                      (avy-style 'post))
+                (let ((avy-style 'post))
                   (apply oldfun args))))
 
   (when (modulep! :completion vertico)
@@ -722,8 +724,7 @@
            (?i . avy-action-ispell)
            (?z . avy-action-zap-to-char)))
         avy-styles-alist '((avy-isearch . pre)
-                           (ace-link-man . pre)
-                           (avy-goto-end-of-line . post))
+                           (ace-link-man . pre))
         avy-column-line-overlay t))
 
 (use-package! zop-to-char
