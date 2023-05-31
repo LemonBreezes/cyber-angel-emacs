@@ -854,7 +854,7 @@
          :map eshell-mode-map
          "TAB" #'completion-at-point
          "<tab>" #'completion-at-point)
-        :prefix "M-+"
+        :prefix "C-."
         "c" #'completion-at-point       ;capf
         "t" #'complete-tag              ;etags
         "d" #'cape-dabbrev              ;or dabbrev-completion
