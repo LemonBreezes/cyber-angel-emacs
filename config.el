@@ -476,6 +476,7 @@
 (load! "lisp/cae-smartparens")
 (load! "lisp/cae-visual-scrolling")
 (load! "lisp/cae-vlf")
+(load! "lisp/cae-mc")
 
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
