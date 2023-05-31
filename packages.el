@@ -53,7 +53,6 @@
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
-(package! smart-mark)
 (package! avy-embark-collect)
 
 ;; These are used for their autoloads.
