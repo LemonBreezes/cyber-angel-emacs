@@ -39,8 +39,7 @@
 ;;; Universal argument
 
 (defconst home-row-numbers-qwerty
-  (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;))
-  "list of the qwerty home row keys")
+  (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
 
 (home-row-numbers)
 
