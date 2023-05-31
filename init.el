@@ -34,6 +34,7 @@
 
        :term
        eshell
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
        (syntax +childframe)
