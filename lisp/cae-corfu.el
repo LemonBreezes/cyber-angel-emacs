@@ -78,6 +78,9 @@
            (lsp-mode  . yas-setup-capf)
            (sly-mode  . yas-setup-capf))
     :bind (("C-. y" . cape-yasnippet))
+    :init
+    (map! :map cae-completion-mode-map
+          "C-. y" #'cape-yasnippet)
     :config
     (defun yas-setup-capf ()
       (make-variable-buffer-local 'completion-at-point-functions)
