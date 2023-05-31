@@ -19,8 +19,8 @@
    0.001 nil
    (lambda ()
      (when (and (featurep 'persp-mode)
-                (not (string= (get-current-persp)
-                              cae-cheatsheets-minibuffer--last-workspace)))
+                (not (eq (get-current-persp)
+                         cae-cheatsheets-minibuffer--last-workspace)))
        (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                             cae-cheatsheets-minibuffer--last-hydra
                             cae-cheatsheets-minibuffer--last-workspace))
