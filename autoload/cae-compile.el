@@ -3,6 +3,11 @@
 (defvar +compile-interesting-file-name-regexp
   "[a-zA-Z0-9-_+]+")
 
+(defvar +kill-emacs--exit-code nil)
+(advice-add #'kill-emacs :before
+            (defun +kill-emacs-a (&optional exit-code _)
+              (setq +kill-emacs--exit-code (or exit-code 0))))
+
 ;;;###autoload
 (defun cae-compile-this-elisp-file ()
   (unless (or no-byte-compile
