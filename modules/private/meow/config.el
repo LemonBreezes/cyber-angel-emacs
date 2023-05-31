@@ -387,14 +387,14 @@
                ">" #'meow-end-of-thing
                "a" #'meow-append
                "A" #'meow-open-below
-               "b" #'meow-back-word
-               "B" #'meow-back-symbol
+               "w" #'meow-back-word     ; b -> w
+               "W" #'meow-back-symbol   ; B -> W
                "c" #'meow-change
                "d" #'meow-delete
                "D" #'meow-backward-delete
                "e" #'meow-line
                "E" #'meow-goto-line
-               "t" #'meow-find
+               "t" #'meow-find          ; f -> t
                "g" #'meow-cancel-selection
                "G" #'meow-grab
                "b" #'meow-left          ; h -> b
@@ -422,8 +422,8 @@
                "u" #'meow-undo
                "U" #'meow-undo-in-selection
                "v" #'meow-visit
-               "w" #'meow-next-word
-               "W" #'meow-next-symbol
+               "h" #'meow-next-word     ; w -> h
+               "H" #'meow-next-symbol   ; W -> H
                "x" #'meow-save
                "X" #'meow-sync-grab
                "y" #'meow-yank
