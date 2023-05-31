@@ -88,6 +88,14 @@
                (bookmark-write-file bookmark-default-file)))
            cae-project-bookmark-cache))
 
+(defun cae-project-bookmark-consult ()
+  "Consult bookmarks in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
+    (call-interactively #'consult-bookmark)))
+
 (add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
 
 (define-prefix-command 'cae-project-bookmark-map)
