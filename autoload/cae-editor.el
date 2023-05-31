@@ -20,7 +20,7 @@
           (funcall orig-func buffer-or-name))))))
 
 ;;;###autoload
-(defun cae-delete ()
+(defun cae-delete-char ()
   (interactive)
   ;; Needs refactoring.
   (let ((delete-fn
