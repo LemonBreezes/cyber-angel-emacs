@@ -320,6 +320,7 @@
 
 (setq delete-by-moving-to-trash t
       remote-file-name-inhibit-delete-by-moving-to-trash t
+      enable-remote-dir-locals t
       history-length (expt 2 16)
       make-cursor-line-fully-visible nil
       yank-pop-change-selection t)
