@@ -224,6 +224,4 @@ mark the string and call `edit-indirect-region' with it."
    which-key-idle-delay nil
    (lambda ()
      (when which-key-inhibit
-       (which-key-show-keymap 'org-ai-global-mode-prefix-map t)
-       (setq unread-command-events
-             (listify-key-sequence (kbd "C-c M-a")))))))
+       (which-key-show-keymap 'org-ai-global-mode-prefix-map t)))))
