@@ -7,7 +7,9 @@
   (let* ((video (ytel-get-current-video))
      	 (id    (ytel-video-id video)))
     (start-process "ytel mpv" nil
-		   "mpv"
+                   (if (executable-find "mpv.exe")
+                       "mpv.exe"
+		     "mpv")
 		   (concat "https://www.youtube.com/watch?v=" id))
     "--ytdl-format=bestvideo[height<=?720]+bestaudio/best")
   (message "Starting streaming..."))
