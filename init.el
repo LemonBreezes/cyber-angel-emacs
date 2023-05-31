@@ -66,7 +66,7 @@ overriding other keymaps."
        snippets
        multiple-cursors
        lispy
-       evil
+       (evil +everywhere)
 
        :emacs
        undo
