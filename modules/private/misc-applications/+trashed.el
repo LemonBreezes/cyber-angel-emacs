@@ -5,7 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "C-t" #'trashed)
+        "C-t" #'+trashed)
   :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
