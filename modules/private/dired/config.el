@@ -49,7 +49,16 @@
     (setq dired-mouse-drag-files t
           mouse-drag-and-drop-region-cross-program t))
   (when (>= emacs-major-version 28)
-    (setq dired-kill-when-opening-new-dired-buffer t)))
+    (setq dired-kill-when-opening-new-dired-buffer t))
+
+  (map! :map dired-mode-map
+        "C-M-k" #'dired-kill-subdir
+        "K" #'dired-kill-subdir
+        "I" #'dired-insert-subdir
+        "_" #'dired-up-directory
+        "[" #'dired-prev-dirline
+        "]" #'dired-next-dirline
+        "," #'dired-create-empty-file))
 
 (after! dirvish
   (after! dirvish-side
@@ -91,15 +100,7 @@
     (setq wdired-allow-to-change-permissions t))
 
   (autoload 'vc-create-repo "vc" nil t)
-  (map! :map dired-mode-map
-        "C-M-k" #'dired-kill-subdir
-        "K" #'dired-kill-subdir
-        "I" #'dired-insert-subdir
-        "_" #'dired-up-directory
-        "[" #'dired-prev-dirline
-        "]" #'dired-next-dirline
-        "," #'dired-create-empty-file
-        :map dirvish-mode-map
+  (map! :map dirvish-mode-map
         "e" #'cae-dired-find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
@@ -124,7 +125,7 @@
                 projectile-find-file-in-directory
                 doom/find-file-in-other-project))
     (define-key dirvish-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper
-                                                   fn)))
+                                                     fn)))
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
