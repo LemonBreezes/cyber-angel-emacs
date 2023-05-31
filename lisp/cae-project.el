@@ -89,8 +89,9 @@
                                     (symbol-name def)))))
        (defalias command
          `(lambda ()
-           (interactive)
-           (cae-project--with-bookmark-alist nil
+            (interactive)
+            (cae-project--with-bookmark-alist nil
+              (backtrace)
              (call-interactively #',def)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
                  (symbol-name def)))
@@ -120,7 +121,6 @@
     (let ((narrow (mapcar (pcase-lambda (`(,x ,y ,_)) (cons x y))
                           consult-bookmark-narrow)))
       (cae-project--with-bookmark-alist nil
-        (ignore bookmark-alist bookmark-default-file)
         (consult--read
          (consult--bookmark-candidates)
          :prompt "Bookmark: "
