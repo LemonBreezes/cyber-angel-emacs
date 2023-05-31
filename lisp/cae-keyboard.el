@@ -15,6 +15,17 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "7") (kbd "C-c w 7"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "8") (kbd "C-c w 8"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "9") (kbd "C-c w 9"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "0") (kbd "C-x w 0"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "1") (kbd "C-x w 1"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "2") (kbd "C-x w 2"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "3") (kbd "C-x w 3"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "4") (kbd "C-x w 4"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "5") (kbd "C-x w 5"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "6") (kbd "C-x w 6"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "7") (kbd "C-x w 7"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "8") (kbd "C-x w 8"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x w" "9") (kbd "C-x w 9"))
+
 
 ;; other window prefix
 (define-key key-translation-map (kbd "C-x 4 C-x 4") (kbd "C-x 4 4"))
