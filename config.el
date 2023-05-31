@@ -185,7 +185,7 @@
   (define-key flycheck-mode-map flycheck-keymap-prefix
     flycheck-command-map)
   (map! :leader
-        (:prefix ("F" . "Flycheck"))))
+        (:prefix ("F" . "flycheck"))))
 
 (use-package! goggles
   :init
