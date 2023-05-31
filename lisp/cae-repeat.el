@@ -40,14 +40,14 @@
 (autoload 'embark-verbose-indicator "embark")
 (autoload 'which-key--create-buffer-and-show "which-key")
 
-;; Karthink might have a package for defining repeat maps.
-
-(add-hook 'doom-first-input-hook #'repeat-mode)
-(after! which-key
-  (require 'repeat-help)
-  :(setq repeat-help-popup-type 'which-key
-        repeat-help-auto nil)
-  (repeat-help-mode +1))
-(map! :map help-map "C-r" #'describe-repeat-maps)
-
-(setq repeat-exit-key "C-g")
+(use-package! repeat
+  :init
+  (add-hook 'doom-first-input-hook #'repeat-mode)
+  :config
+  (after! which-key
+    (require 'repeat-help)
+    (setq repeat-help-popup-type 'which-key
+          repeat-help-auto nil)
+    (repeat-help-mode +1))
+  (setq repeat-exit-timeout 0.5)
+  (map! :map help-map "C-r" #'describe-repeat-maps))
