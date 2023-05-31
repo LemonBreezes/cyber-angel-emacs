@@ -13,11 +13,6 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
-(when (and (modulep! :completion helm)
-           (modulep! :completion vertico))
-  ;; Helm is not our main completion system.
-  (remove-hook 'doom-first-input-hook #'helm-mode))
-
 ;;; UI
 
 (load! "lisp/cae-theme")
