@@ -37,7 +37,7 @@
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.e
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
-    (while (minibufferp (window-buffer))
+    (while (minibufferp (window-buffer (selected-window)))
       (abort-recursive-edit))
     (let ((wconf (current-window-configuration)))
       (select-window (car (doom-visible-windows)))
