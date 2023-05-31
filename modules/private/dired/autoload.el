@@ -8,8 +8,9 @@
     (add-hook 'find-directory-functions #'dired-noselect t))
   (dired-noselect dir)
   (when (and (frame-width (selected-frame))
+             (one-window-p t)
              (> (frame-width (selected-frame)) 160))
-    (dirvish-dwim)))
+    (dirvish-layout-toggle)))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
@@ -29,6 +30,7 @@
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards)
     (when (and (file-directory-p file)
+               (one-window-p t)
                (frame-width (selected-frame))
                (> (frame-width (selected-frame)) 160))
       (dirvish-dwim))))
