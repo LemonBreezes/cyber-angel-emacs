@@ -15,6 +15,7 @@
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
 
     (after! dap-hydra
+      ;; Not in modulep! block because `dap-mode' requires hydra.
       (defhydra dap-hydra (:color pink :hint nil :foreign-keys run)
         "
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval
