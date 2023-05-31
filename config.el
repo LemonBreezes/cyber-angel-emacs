@@ -677,7 +677,7 @@
         "r" #'avy-resume
         "." #'cae-avy-symbol-at-point
         "k" #'avy-kill-region
-        "w" #'avy-copy-region
+        "w" #'avy-kill-ring-save-region
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-below
@@ -685,7 +685,7 @@
         "C-r" #'avy-resume
         "C-." #'cae-avy-symbol-at-point
         "C-k" #'avy-kill-region
-        "C-w" #'avy-copy-region
+        "C-w" #'avy-kill-ring-save-region
         "C-c" #'avy-goto-char
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
