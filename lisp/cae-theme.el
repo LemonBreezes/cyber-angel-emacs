@@ -53,7 +53,7 @@
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
-        ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
+        ef-themes-to-toggle '(ef-trio-dark ef-trio-light)))
 
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
