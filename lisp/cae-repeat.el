@@ -69,9 +69,7 @@
        "9" +workspace/switch-to-8)
       (:enter +workspace/display)
       (:exit
-       "/" tab-select
-       "o" tab-next
-        "O" tab-previous))
+       "/" tab-select))
        t)
 
   ;; Currently part of `other-window' repeat map
