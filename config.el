@@ -626,31 +626,6 @@
                            (ace-link-man . pre))
         avy-column-line-overlay t))
 
-(use-package! winum
-  :after-call doom-first-buffer-hook
-  :config
-  (winum-mode +1)
-  (eval
-   `(map! :map winum-base-map
-          "1" nil
-          "2" nil
-          "3" nil
-          "4" nil
-          "5" nil
-          "6" nil
-          "7" nil
-          "8" nil
-          "9" nil
-          ,(cae-keyboard-kbd "1") #'winum-select-window-1
-          ,(cae-keyboard-kbd "2") #'winum-select-window-2
-          ,(cae-keyboard-kbd "3") #'winum-select-window-3
-          ,(cae-keyboard-kbd "4") #'winum-select-window-4
-          ,(cae-keyboard-kbd "5") #'winum-select-window-5
-          ,(cae-keyboard-kbd "6") #'winum-select-window-6
-          ,(cae-keyboard-kbd "7") #'winum-select-window-7
-          ,(cae-keyboard-kbd "8") #'winum-select-window-8
-          ,(cae-keyboard-kbd "9") #'winum-select-window-9)))
-
 (use-package! zop-to-char
   :defer t
   :init
