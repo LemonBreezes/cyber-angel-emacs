@@ -62,7 +62,7 @@
 
 (unless (memq 'cae-theme-store-circadian-times-h kill-emacs-hook)
   (use-package! circadian
-    :defer-incrementally t
+    :defer t :defer-incrementally t
     :config
     (setq circadian-themes
           '((:sunrise . modus-operandi-tinted)
