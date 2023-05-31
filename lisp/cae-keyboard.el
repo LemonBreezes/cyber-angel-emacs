@@ -142,7 +142,8 @@
              (cl-member (minibuffer-prompt)
                         '("Go to line: "
                           "Go to char: "
-                          "Move to column: ")
+                          "Move to column: "
+                          "Checkout: ")
                         :test #'string-match-p))
         (and (featurep 'ispell)
              (get-buffer-window ispell-choices-buffer))
