@@ -2,7 +2,7 @@
 
 ;; Do not override other keymaps with `general-override-mode'. This was created
 ;; because Doom's leader key was overriding Eat's `eat-self-input' keybinding.
-(defvar cae-general-override--override-mode-p nil)
+(advice-add #'general-override-mode :override #'ignore)
 (after! general
   (define-minor-mode cae-general-override-mode
     "Minor mode to enable `general-override-mode-map' without
@@ -15,23 +15,7 @@ overriding other keymaps."
             (cae-defun cae-general--unbind-keys ()
               ;; Do not override `org-edit-special' in Org mode.
               (define-key general-override-mode-map (kbd "C-c '") nil)))
-  ;;(add-hook 'cae-general-override-mode-hook
-  ;;          (cae-defun cae-general-override--disable-override-mode ()
-  ;;            (if cae-general-override-mode
-  ;;                (progn
-  ;;                  (setq cae-general-override--override-mode-p
-  ;;                        general-override-mode)
-  ;;                  (general-override-mode -1))
-  ;;              (general-override-mode
-  ;;               (if cae-general-override--override-mode-p 1 -1))
-  ;;              (setq cae-general-override--override-mode-p nil))))
-  (add-hook 'doom-after-init-hook #'cae-general-override-mode t)
-  (advice-add #'doom-init-leader-keys-h
-              :around
-              (cae-defun cae-general-override--disable-override-mode (orig-fn &rest args)
-                (advice-add #'general-override-mode :override #'ignore)
-                (unwind-protect (apply orig-fn args)
-                  (advice-remove #'general-override-mode #'ignore)))))
+  (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
