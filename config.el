@@ -702,7 +702,7 @@
     (define-key embark-region-map "T" #'titlecase-region)
     (define-key embark-heading-map "T" #'titlecase-line)))
 
-;;(use-package speedrect)
+(use-package! speedrect)
 
 
 ;;; Autocompletion
