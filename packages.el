@@ -27,6 +27,7 @@
 (package! syslog-mode)
 (package! w3m)
 (package! ace-link)
+(package! pdftotext)
 
 ;; These are autoloaded without explicit configuration.
 (package! crontab-mode)
