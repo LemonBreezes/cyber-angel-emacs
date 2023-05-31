@@ -25,7 +25,7 @@
 (setenv "GIT_PAGER" "cat")
 
 ;; Very small screen on Android
-(when (string-match-p "-android" operating-system-release)
+(when (string-suffix-p "-android" system-configuration)
   (global-visual-line-mode +1))
 
 ;; Set up fonts
@@ -326,7 +326,7 @@
                    (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
            (setq exec-path (cons "/mnt/c/Windows/System32" exec-path)))
          (setq xclip-method 'powershell))
-        ((and (string-match-p "-android" operating-system-release)
+        ((and (string-suffix-p "-android" system-configuration)
               (executable-find "termux-clipboard-get"))
          (setq xclip-method 'termux-clipboard-get))))
 
