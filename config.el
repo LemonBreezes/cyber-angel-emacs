@@ -1056,8 +1056,9 @@
   (when (modulep! :completion vertico)
     (use-package! consult
       :defer t :init
-      (map! "C-h C-m" #'describe-keymap
-            "C-h <return>" #'info-emacs-manual
+      (map! (:map help-map
+             "C-m" #'describe-keymap
+             "<return>" #'info-emacs-manual)
             ;; C-x bindings (ctl-x-map)
             "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
             ;; Custom M-# bindings for fast register access
@@ -1068,7 +1069,7 @@
             ;; Other custom bindings
             ;; M-g bindings (goto-map)
             "M-g e" #'consult-compile-error
-            "M-g g" #'consult-goto-line   ;orig. goto-line
+            "M-g g" #'consult-goto-line ;orig. goto-line
             "M-g M-g" #'consult-goto-line ;orig. goto-line
             "M-g o" #'consult-outline     ;Alternative: consult-org-heading
             "M-g m" #'consult-mark
@@ -1080,7 +1081,7 @@
             ;; Isearch integration
             "M-s e" #'consult-isearch-history
             :map isearch-mode-map
-            "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
+            "M-e" #'consult-isearch-history ;orig. isearch-edit-string
             "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
             ;; Minibuffer history
             :map minibuffer-local-map
