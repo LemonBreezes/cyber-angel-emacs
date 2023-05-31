@@ -38,12 +38,20 @@
   (define-repeat-map scroll-down-command
     ("v" scroll-down-command)
     (:exit "V" scroll-up-command))
+
   (define-repeat-map vertico-scroll-up
     ("v" vertico-scroll-up)
     (:exit "V" vertico-scroll-down))
   (define-repeat-map vertico-scroll-down
     ("v" vertico-scroll-down)
     (:exit "V" vertico-scroll-up))
+
+  (define-repeat-map View-scroll-half-page-forward
+    ("v" View-scroll-half-page-forward)
+    (:exit "V" View-scroll-half-page-backward))
+  (define-repeat-map View-scroll-half-page-backward
+    ("v" View-scroll-half-page-backward)
+    (:exit "V" View-scroll-half-page-forward))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
