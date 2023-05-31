@@ -609,7 +609,7 @@
           er/mark-next-accessor er/mark-method-call
           er/mark-inside-quotes er/mark-outside-quotes er/mark-inside-pairs
           er/mark-outside-pairs er/mark-comment er/mark-url er/mark-email
-          er/mark-defun er/mark-sentence er/mark-paragraph er/mark-page)))
+          er/mark-defun er/mark-sentence er/mark-paragraph)))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
