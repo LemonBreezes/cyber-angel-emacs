@@ -19,7 +19,20 @@
                         :background 'unspecified)
     (set-face-attribute 'company-preview nil
                         :inherit 'shadow
-                        :background 'unspecified)))
+                        :background 'unspecified))
+  (after! lsp-ui
+    (set-face-attribute 'lsp-ui-doc-background nil
+                        :background (face-background 'tooltip))))
+
+(after! lsp-ui-doc
+  (defadvice! cae-theme-fixup-lsp-popup-a (string symbol)
+    "`lsp-ui-doc--render-buffer' does not set the entire doc to a
+uniform face. This function sets the entire doc to the face of
+the first character."
+    :filter-return #'lsp-ui-doc--render-buffer
+
+    (list string symbol)
+    ))
 
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
