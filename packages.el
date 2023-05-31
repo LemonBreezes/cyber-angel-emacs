@@ -37,7 +37,6 @@
 
 (package! pp+)
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
-(package! combobulate :recipe (:host github :repo "mickeynp/combobulate"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
