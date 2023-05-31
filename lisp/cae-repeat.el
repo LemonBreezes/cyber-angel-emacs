@@ -85,6 +85,8 @@
 
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
+  (define-repeat-map cae-org-ai-kill-region-at-point
+    ("DEL" cae-org-ai-kill-region-at-point))
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
