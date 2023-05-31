@@ -1083,9 +1083,8 @@
         eshell-visual-subcommands '(("gh" "repo" "fork")
                                     ("geth" "attach")
                                     ;;These are disabled because I set the Git
-                                    ;;pager to `cat'. This might not work though
-                                    ;;on remote machines, etc so some day I may
-                                    ;;have to change this.
+                                    ;;pager to `cat'. If that ever gets unset
+                                    ;;somehow, I will find an alternative.
                                     ;;("git" "log" "diff" "show")
                                     )
         eshell-visual-options '(;;("git" "--help" "--paginate")
