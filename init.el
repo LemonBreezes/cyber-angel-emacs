@@ -1,7 +1,6 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; For when we compile Doom.
-(defvar personal-keybindings nil)
+(load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c l")
