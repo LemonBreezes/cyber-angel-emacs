@@ -111,78 +111,8 @@
         "N" #'dirvish-narrow
         "j" #'consult-line)
 
-  ;; This is not a good approach because practically every function would have
-  ;; to be wrapped!
-  ;;(defmacro cae-dired-find-file-wrapper (fn)
-  ;;  "Wrap FN to exit Dirvish sessions when opening files."
-  ;;  `(cae-defun ,(intern (format "cae-dired-wrapped-%s" (symbol-name fn))) ()
-  ;;     (let ((dir default-directory))
-  ;;       (advice-add #'find-file :around #'cae-dired-find-file-a)
-  ;;       (unwind-protect (call-interactively #',fn)
-  ;;         (advice-remove #'find-file #'cae-dired-find-file-a)))))
-  ;;(after! which-key
-  ;;  (push '((nil . "cae-dired-wrapped-\\(.*\\)") . (nil . "\\1"))
-  ;;        which-key-replacement-alist))
-  ;;
-  ;;(dolist (fn '(find-file
-  ;;              projectile-find-file
-  ;;              projectile-find-file-in-directory
-  ;;              doom/find-file-in-other-project
-  ;;              magit-find-file
-  ;;              project-find-file
-  ;;              doom/sudo-find-file
-  ;;              find-file-other-tab
-  ;;              find-file-read-only
-  ;;              find-file-other-frame
-  ;;              find-file-other-window
-  ;;              doom/find-file-in-emacsd
-  ;;              projectile-find-file-dwim
-  ;;              projectile-find-file-dwim-other-frame
-  ;;              projectile-find-file-dwim-other-window
-  ;;              +default/find-file-under-here
-  ;;              +default/find-in-notes
-  ;;              +default/find-in-templates
-  ;;              find-file-read-only-other-tab
-  ;;              project-or-external-find-file
-  ;;              find-file-read-only-other-frame
-  ;;              doom/find-file-in-private-config
-  ;;              find-file-read-only-other-window
-  ;;              projectile-find-file-other-window
-  ;;              projectile-find-file-other-frame
-  ;;              projectile-find-file-in-known-projects
-  ;;              projectile-find-other-file
-  ;;              projectile-find-other-file-other-frame
-  ;;              projectile-find-other-file-other-window
-  ;;              magit-find-git-config-file
-  ;;              magit-find-git-config-file-other-frame
-  ;;              magit-find-git-config-file-other-window
-  ;;              find-file-literally
-  ;;              find-alternate-file
-  ;;              ido-find-file
-  ;;              consult-locate
-  ;;              projectile-find-test-file
-  ;;              +default/search-notes-for-symbol-at-point
-  ;;              +default/search-cwd
-  ;;              +default/search-emacsd
-  ;;              +default/search-project
-  ;;              +default/search-project-for-symbol-at-point
-  ;;              +default/search-other-cwd
-  ;;              +default/search-other-project
-  ;;              +default/org-notes-search
-  ;;              +default/org-notes-headlines
-  ;;              projectile-find-implementation-or-test-other-window
-  ;;              projectile-find-implementation-or-test-other-frame
-  ;;              projectile-find-references
-  ;;              projectile-recentf
-  ;;              recentf-open-files
-  ;;              projectile-edit-dir-locals
-  ;;              projectile-commander
-  ;;              projectile-find-tag
-  ;;              projectile-switch-project
-  ;;              projectile-switch-open-project))
-  ;;  (define-key dirvish-mode-map (vector 'remap fn)
-  ;;    (eval `(cae-dired-find-file-wrapper ,fn))))
-
+  ;; Exit the current Dirvish session when running interactive commands like
+  ;; `projectile-find-file'.
   (advice-add #'find-file :around #'cae-dired-find-file-a)
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
