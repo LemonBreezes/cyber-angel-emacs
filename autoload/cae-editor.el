@@ -18,3 +18,12 @@
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
           (funcall orig-func buffer-or-name))))))
+
+;;;###autoload
+(defun dos2unix (buffer)
+       "Automate M-% C-q C-m RET C-q C-j RET"
+       (interactive "*b")
+       (save-excursion
+        (goto-char (point-min))
+        (while (search-forward (string ?\C-m) nil t)
+               (replace-match "" nil t))))
