@@ -29,7 +29,7 @@
       (replace-match "" nil t))))
 
 ;;;###autoload
-(defun cae-sp-delete-char-or-region (&optional arg)
+(defun cae-sp-delete-char (&optional arg)
   (interactive "*P")
   (if (and delete-active-region
            (region-active-p))
