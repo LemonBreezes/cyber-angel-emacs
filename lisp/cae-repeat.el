@@ -20,6 +20,8 @@
      "<right>" next-buffer
      "u" winner-undo
      "r" winner-redo
+     "<tab>" +workspace/switch-right
+     "S-<tab>" +workspace/switch-left
      ;; Number row keys
      "!" delete-other-windows
      "@" split-window-below
