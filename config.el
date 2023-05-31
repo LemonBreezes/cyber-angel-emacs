@@ -550,7 +550,8 @@
           sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
           sp-backward-kill-word sp-backward-delete-cha/r sp-delete-char
           sp-forward-barf-sexp sp-slurp-hybrid-sexp sp-backward-slurp-sexp
-          sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp))
+          sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp
+          cae-raise-sexp-dwim))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))
     (map! "M-r" #'cae-raise-sexp-dwim)))
