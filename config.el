@@ -15,6 +15,9 @@
   ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
+(unless (modulep! :lang emacs-lisp)
+  (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
+
 ;;; UI
 
 (load! "lisp/cae-theme")
