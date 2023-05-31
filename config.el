@@ -55,6 +55,7 @@
 (add-hook 'prog-mode-hook #'rainbow-mode)
 
 (after! ansi-color
+  ;; I am trying this out. Not sure if I like it yet.
   (setq ansi-color-bold-is-bright t))
 
 (setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
