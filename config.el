@@ -521,23 +521,23 @@
   ;;      (remq 'process-kill-buffer-query-function
   ;;            kill-buffer-query-functions))
   ;;
-  ;;;; Bind `tab-bar' commands consistently with the built-in keybindings.
-  ;;(defadvice! cae-tab-bar-define-keys-a ()
-  ;;  :after #'tab-bar--define-keys
-  ;;  (unless (global-key-binding [(control f4)])
-  ;;    (global-set-key [(control f4)] #'tab-close)))
-  ;;(defadvice! cae-tab-bar-undefine-keys-a ()
-  ;;  :after #'tab-bar--undefine-keys
-  ;;  (when (eq (global-key-binding [(control f4)]) #'tab-close)
-  ;;    (global-unset-key [(control f4)])))
-  ;;
-  ;;;; Do not query before deleting a frame, since we can undo frame deletions.
-  ;;(global-set-key [remap delete-frame] nil)
-  ;;(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
-  ;;
-  ;;;; Do not automatically continue comments.
-  ;;(advice-remove #'newline-and-indent
-  ;;               #'+default--newline-indent-and-continue-comments-a)
+  ;; Bind `tab-bar' commands consistently with the built-in keybindings.
+  (defadvice! cae-tab-bar-define-keys-a ()
+    :after #'tab-bar--define-keys
+    (unless (global-key-binding [(control f4)])
+      (global-set-key [(control f4)] #'tab-close)))
+  (defadvice! cae-tab-bar-undefine-keys-a ()
+    :after #'tab-bar--undefine-keys
+    (when (eq (global-key-binding [(control f4)]) #'tab-close)
+      (global-unset-key [(control f4)])))
+
+  ;; Do not query before deleting a frame, since we can undo frame deletions.
+  (global-set-key [remap delete-frame] nil)
+  (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+
+  ;; Do not automatically continue comments.
+  (advice-remove #'newline-and-indent
+                 #'+default--newline-indent-and-continue-comments-a)
 
   ;; General keybindings.
   (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
