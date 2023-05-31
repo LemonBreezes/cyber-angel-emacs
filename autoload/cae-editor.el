@@ -213,4 +213,18 @@ mark the string and call `edit-indirect-region' with it."
 (cae-defun cae-lazy-load-org-ai ()
   (interactive)
   (org-ai-global-mode +1)
-  (execute-kbd-macro (kbd "C-c M-a")))
+  (setq unread-command-events
+        (listify-key-sequence (kbd "C-c M-a")))
+  (defvar org-ai-global-mode-prefix-map
+    (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
+  (setq which-key-inhibit t)
+  (add-transient-hook! 'pre-command-hook
+    (setq which-key-inhibit nil))
+  (run-with-idle-timer
+   which-key-idle-delay nil
+   (lambda ()
+     (when which-key-inhibit
+       (which-key-show-keymap 'org-ai-global-mode-prefix-map)
+       (setq unread-command-events
+             (listify-key-sequence (kbd "C-c M-a"))))))
+  )
