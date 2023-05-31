@@ -52,6 +52,7 @@
           lsp-modeline-diagnostics-mode
           lsp-modeline-code-actions-mode
           lsp-modeline-workspace-status-mode
+          dtrt-indent-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
