@@ -58,7 +58,12 @@ _R_: Restart      _sb_: List breakpoints
         ("es" dap-eval-thing-at-point)
         ("q" nil "quit" :color blue)
         ("R" cae-debugger-dap-kill-all-sessions-and-restart)
-        ("Q" dap-disconnect :color red))))
+        ("Q" dap-disconnect :color red)))
+
+    (when (modulep! :private corfu)
+      (defun cae-debugger-dap-ui-repl-corfu-setup ()
+        (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+      (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
 
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
