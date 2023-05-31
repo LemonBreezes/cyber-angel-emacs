@@ -509,6 +509,7 @@
       (remq 'process-kill-buffer-query-function
             kill-buffer-query-functions))
 
+
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
   :after #'tab-bar--define-keys
