@@ -4,12 +4,12 @@
 (defvar cae-hydra--last-hydra nil)
 
 (defun cae-hydra-store-last-hydra-h (&rest _)
-  (when (bound-and-true-p hydra-curr-map)
-    (setq cae-hydra--last-hydra hydra-curr-body-fn)
-    (hydra-keyboard-quit))
-  (and (featurep 'persp-mode)
-       (set-persp-parameter 'cae-hydra--last-hydra
-                            cae-hydra--last-hydra))
+  (setq cae-hydra--last-hydra
+        (when (bound-and-true-p hydra-curr-map)
+          hydra-curr-body-fn))
+  (when (featurep 'persp-mode)
+    (set-persp-parameter 'cae-hydra--last-hydra
+                         cae-hydra--last-hydra))
   (setf (alist-get (tab-bar--current-tab)
                    cae-hydra--tab-bar-last-hydra-alist
                    nil nil #'eq)
@@ -24,6 +24,7 @@
                               cae-hydra--tab-bar-last-hydra-alist
                               nil nil #'eq)
                    cae-hydra--last-hydra)))
+    (+log "hiii" hydra)
     (setq cae-hydra--last-hydra nil)
     (cae-hydra-store-last-hydra-h)
     (when hydra
