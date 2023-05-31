@@ -21,7 +21,7 @@
     "+daemons"
     "+disk-usage"
     ;; "+elcord"
-    ;; "+enime"
+    ;; "+enime" ;broken
     ;;"+exercism"
     "+forecast"
     ;; "+frameshot"
