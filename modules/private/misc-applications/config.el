@@ -38,6 +38,7 @@
     "+ytel"
     "+webpaste"
     "+elfeed"
+    "+leetcode"
 
     ;; Lookup
     "+devdocs"
