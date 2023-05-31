@@ -399,7 +399,7 @@
 
 ;; Make `smartparens' optional.
 (unless (modulep! :config default +smartparens)
-  (remove-hook 'doom-first-buffer-hook #'smartpyarens-global-mode)
+  (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :term eshell)
     (after! eshell
       (remove-hook 'eshell-mode-hook #'smartparens-mode)))
