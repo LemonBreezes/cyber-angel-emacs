@@ -31,8 +31,9 @@
     (when (modulep! :tools eval)
       (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)))
 
-  (add-hook 'dap-session-created-hook #'cae-debugger-mark-session-h)
-  (add-hook 'dap-stopped-hook #'cae-debugger-dap-switch-to-workspace-h))
+  ;;(add-hook 'dap-session-created-hook #'cae-debugger-mark-session-h)
+  ;;(add-hook 'dap-stopped-hook #'cae-debugger-dap-switch-to-workspace-h)
+  )
 
 (after! gud
   (setq gud-chdir-before-run nil)
