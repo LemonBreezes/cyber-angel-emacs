@@ -565,6 +565,7 @@
               (map! :map ctl-x-map
                     "p" #'+popup/other))))
 
+;; Remove redundant `consult-history' keybinding.
 (define-key!
   :keymaps (append +default-minibuffer-maps
                    (when (modulep! :editor evil +everywhere)
