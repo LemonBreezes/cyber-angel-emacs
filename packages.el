@@ -78,7 +78,7 @@
 ;; cae-keyboard.el
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! smart-semicolon)
-(package! electric-spacing)
+;;(package! electric-spacing)
 
 ;; cae-vlf.el
 (package! vlf)
