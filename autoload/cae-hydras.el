@@ -1,7 +1,7 @@
 ;;; autoload/cae-hydras.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defhydra embark-collect-cheatsheet-hydra (:color pink :foreign-keys run)
+;;;###autoload (autoload 'cae-embark-collect-cheatsheet-hydra/body "autoload/cae-hydras" nil t)
+(defhydra cae-embark-collect-cheatsheet-hydra (:color pink :foreign-keys run)
     ("a" embark-act "Act" :column "Act")
     ("A" embark-act-all "Act on all" :column "Act")
     ("E" embark-export "Export" :column "Act")
