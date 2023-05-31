@@ -169,7 +169,7 @@
 
 ;; Tools
 
-(load! "lisp/cae-webkit.el")
+;; (load! "lisp/cae-webkit.el")
 
 (use-package! w3m
   :defer t
@@ -189,7 +189,8 @@
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
-        (cond ((display-graphic-p)
+        (cond ((and (display-graphic-p)
+                    (fboundp 'webkit-browse-url))
                (webkit-browse-url url new-window))
               (t (w3m-browse-url url new-window)))))
 
