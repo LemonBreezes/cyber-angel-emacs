@@ -2,7 +2,7 @@
 
 ;; From https://emacs.stackexchange.com/questions/42113/customize-eshell-redirection-to-buffer
 ;;;###autoload
-(defun +eshell-syntax-buffer-redirect ()
+(defun cae-eshell-syntax-buffer-redirect ()
   "Parse buffer redirection > #buf and >#."
   (when (and (not eshell-current-argument)
              (not eshell-current-quoted)
@@ -20,7 +20,7 @@
 
 ;;; * Colorize ansi escape sequences in exported buffers
 ;;;###autoload
-(defun +eshell-ansi-buffer-output (fun object target)
+(defun cae-eshell-ansi-buffer-output (fun object target)
   "Interpret ansi escape sequences when redirecting to buffer."
   (let* ((buf (and (markerp target) (marker-buffer target)))
          (str (and buf (stringp object) (string-match-p "\e\\[" object) object)))
