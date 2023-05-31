@@ -556,6 +556,9 @@
       (:after man
        :map Man-mode-map
        "o" #'ace-link-man)
+      (:after eww
+       :map eww-mode-map
+       "o" #'ace-link-eww)
       :leader
       :desc "help" "h" help-map)
 (define-key resize-window-repeat-map "_" #'shrink-window)
