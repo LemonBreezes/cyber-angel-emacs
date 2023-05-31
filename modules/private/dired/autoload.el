@@ -26,7 +26,7 @@
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
   (when (derived-mode-p 'dired-mode)
-    (+log "hello!!!")))
+    (dirvish-dwim)))
 
 (defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
