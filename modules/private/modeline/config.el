@@ -178,6 +178,7 @@
 (use-package! parrot
   :defer t
   :init
+  ;; Wrangle parrot into being fully lazy-loaded.
   (autoload #'parrot--party-while-process "parrot")
   (autoload #'parrot--todo-party "parrot")
   (autoload #'parrot--magit-push-filter "parrot")
