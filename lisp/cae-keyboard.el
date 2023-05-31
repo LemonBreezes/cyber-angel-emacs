@@ -187,7 +187,7 @@
     (lispy-define-key lispy-mode-map-special "." 'lispy-repeat)
     (lispy-define-key lispy-mode-map-special "~" 'lispy-tilde)
     (lispy-define-key lispy-mode-map-special "_" 'lispy-underscore)
-    (lispy-define-key lispy-mode-map-special "'" 'lispy-tick) ;`special-lispy-eval-other-window'
+    (lispy-define-key lispy-mode-map-special "'" 'lispy-tick) ;`special-lispy-eval-other-window' lost
 
     ;; TODO digit argument
     (eval `(defhydra lh-knight ()
