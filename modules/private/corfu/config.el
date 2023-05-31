@@ -97,21 +97,6 @@ derivative.")
           :desc "previous" [backtab] #'corfu-previous
           :desc "next" "TAB" #'corfu-next
           :desc "previous" "S-TAB" #'corfu-previous)))
-  (eval
-   `(map! :when (modulep! +indexed)
-          "TAB" nil
-          "<tab>" nil
-          "RET" nil
-          ,(cae-keyboard-kbd "C-" "1") (cae-generate-corfu-select-index 0)
-          ,(cae-keyboard-kbd "C-" "2") (cae-generate-corfu-select-index 1)
-          ,(cae-keyboard-kbd "C-" "3") (cae-generate-corfu-select-index 2)
-          ,(cae-keyboard-kbd "C-" "4") (cae-generate-corfu-select-index 3)
-          ,(cae-keyboard-kbd "C-" "5") (cae-generate-corfu-select-index 4)
-          ,(cae-keyboard-kbd "C-" "6") (cae-generate-corfu-select-index 5)
-          ,(cae-keyboard-kbd "C-" "7") (cae-generate-corfu-select-index 6)
-          ,(cae-keyboard-kbd "C-" "8") (cae-generate-corfu-select-index 7)
-          ,(cae-keyboard-kbd "C-" "9") (cae-generate-corfu-select-index 8)
-          ,(cae-keyboard-kbd "C-" "0") (cae-generate-corfu-select-index 9)))
 
   (when (modulep! +indexed)
     (setq corfu-indexed-start 1)
