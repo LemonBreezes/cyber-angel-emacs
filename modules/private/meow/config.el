@@ -186,8 +186,6 @@
           "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
           :map meow-beacon-state-keymap
           doom-leader-key nil))
-  (map! :leader
-        :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
