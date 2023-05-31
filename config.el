@@ -15,7 +15,9 @@
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overwriting other packages' keybindings.
+;; because then they can be overwriting other packages' keybindings. As an
+;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
+;; bound to `org-mark-ring-goto'.
 (when (modulep! :checkers syntax)
   (after! flycheck
     (define-key flycheck-mode-map flycheck-keymap-prefix nil)
