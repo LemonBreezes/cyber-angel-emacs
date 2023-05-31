@@ -47,7 +47,7 @@
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        magit
-       (lsp +peek)
+       (lsp +peek +eglot)
        tree-sitter
 
        :lang
