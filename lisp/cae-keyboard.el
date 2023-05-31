@@ -343,7 +343,7 @@
 
 
 ;; This package has not been updated since 2014. If I have to add more advices,
-;; I'd might as well fork this package.
+;; I'd might as well fork it.
 (use-package! electric-spacing
   :defer t :init
   (add-hook 'c-mode-common-hook #'electric-spacing-mode)
