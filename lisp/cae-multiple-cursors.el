@@ -28,7 +28,8 @@
                    sentex-kill-sentence parrot-rotate-next-word-at-point
                    cae-delete-char cae-modeline-rotate-next-word-at-point
                    cae-modeline-rotate-prev-word-at-point
-                   forward-sexp backward-sexp backward-list forward-list))
+                   forward-sexp backward-sexp backward-list
+                   forward-list down-list backward-up-list up-list))
       (add-to-list 'mc/cmds-to-run-for-all cmd))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
