@@ -51,6 +51,11 @@
   (add-hook 'org-mode-hook #'worf-mode)
   :config
   (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
+  (map! :map worf-mode-map
+        "[" nil
+        "]" nil
+        "<backtab>" nil
+        "<S-iso-lefttab>" nil)
   (advice-add #'worf-property
               :after
               (cae-defun cae-org-worf-property-a ()
