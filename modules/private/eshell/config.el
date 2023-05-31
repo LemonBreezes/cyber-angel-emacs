@@ -51,6 +51,7 @@
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
                 (message "Type M-RET to enter semi-char mode.")))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
+  (remove-hook 'eshell-mode-hook #'hide-mode-line-mode)
 
   ;; Expand abbreviations before parsing input.
   (advice-add 'eshell-send-input :before
