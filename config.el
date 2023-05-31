@@ -135,10 +135,10 @@
 ;;; Tools
 (load! "lisp/cae-webkit.el")
 
-(setq! browse-url-browser-function #'browse-url-generic
-           browse-url-generic-program "chromium-bin"
-           browse-url-generic-args '("--no-sandbox")
-           browse-url-chromium-program "chromium-bin")
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "chromium-bin"
+      browse-url-generic-args '("--no-sandbox")
+      browse-url-chromium-program "chromium-bin")
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
