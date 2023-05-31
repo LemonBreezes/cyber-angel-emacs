@@ -98,7 +98,8 @@
              ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
-             ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
+             ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument)
+      t)
 (after! embark
   (eval `(map! :map embark-collect-mode-map
                ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
@@ -110,7 +111,8 @@
                ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
                ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
                ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
-               ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
+               ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument)
+        t)
   (map! :map minibuffer-local-map
         ;; `C-c ;' is a little easier to type on my keyboard. This alternate
         ;; keybinding also works in the terminal.
@@ -235,7 +237,8 @@
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
                                         (string-remove-prefix "lispy-"))
-                          :column ,(caddr binding))))))
+                          :column ,(caddr binding))))
+       t))
     (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
@@ -247,7 +250,8 @@
              "knight"
              (,(cae-keyboard-kbd "j") lispy-knight-down)
              (,(cae-keyboard-kbd "k") lispy-knight-up)
-             (,(cae-keyboard-kbd "z") nil)))
+             (,(cae-keyboard-kbd "z") nil))
+          t)
     (eval `(lispy-defverb
             "goto"
             ((,(cae-keyboard-kbd "d") lispy-goto)
@@ -259,7 +263,8 @@
              (,(cae-keyboard-kbd "q") lispy-quit)
              (,(cae-keyboard-kbd "j") lispy-goto-def-down)
              (,(cae-keyboard-kbd "a") lispy-goto-def-ace)
-             (,(cae-keyboard-kbd "e") lispy-goto-elisp-commands))))
+             (,(cae-keyboard-kbd "e") lispy-goto-elisp-commands)))
+          t)
     (eval `(lispy-defverb
             "other"
             ((,(cae-keyboard-kbd "h") lispy-move-left)
@@ -267,7 +272,8 @@
              (,(cae-keyboard-kbd "k") lispy-up-slurp)
              (,(cae-keyboard-kbd "l") lispy-move-right)
              ("SPC" lispy-other-space)
-             (,(cae-keyboard-kbd "g") lispy-goto-mode))))
+             (,(cae-keyboard-kbd "g") lispy-goto-mode)))
+          t)
     ;; These keys are not bound geometrically, they are bound based on
     ;; mnemonics, so it's better to leave them unchanged.
     ;;(eval `(defhydra hydra-lispy-x (:exit t
