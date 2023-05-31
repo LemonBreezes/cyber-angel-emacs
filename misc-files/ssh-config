@@ -1,0 +1,13 @@
+Host github.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host gitlab.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host gitNew.domain.***REMOVED***.com
+  Hostname gitNew.domain.***REMOVED***.com
+  user a***REMOVED***
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519

@@ -1,0 +1,15 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+# editorconfig.org
+
+root = true
+
+[*.txt]
+indent_style = tab
+indent_size = 4
+
+[*.{diff,md}]
+trim_trailing_whitespace = false
+
+[*.{c,h,cpp,hpp}]
+indent_size = 4

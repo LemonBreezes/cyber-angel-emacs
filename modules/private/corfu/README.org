@@ -1,0 +1,159 @@
+#+title:    :completion corfu
+#+subtitle: Complete with cap(f), cape and a flying feather
+#+created:  September 9, 2022
+#+since:    3.0.0 (#7002)
+
+* Description :unfold:
+This module provides code completion, powered by [[https://github.com/minad/corfu][corfu]].
+
+It is recommended to enable either this or [[doom-module:][:completion company]], in case you
+desire pre-configured auto-completion. Corfu is much lighter weight and focused,
+plus it's built on native Emacs functionality, whereas company is heavy and
+highly non-native, but has some extra features and more maturity.
+
+** Maintainers
+- [[doom-user:][@LuigiPiucco]]
+
+[[doom-contrib-maintainer:][Become a maintainer?]]
+
+** Module flags
+- +icons ::
+  Display icons beside completion suggestions.
+- +tng ::
+  Invoke completion on [[kbd:][TAB]]. When corfu is active, [[kbd:][TAB]] and [[kbd:][S-TAB]] will navigate
+  the completion candidates. Arrow keys and evil-style movement are still
+  supported.
+
+** Packages
+- [[doom-package:][corfu]]
+- [[doom-package:][cape]]
+- [[doom-package:][kind-icon]] if [[doom-module:][:completion corfu +icons]]
+- [[doom-package:][corfu-terminal]] if [[doom-module:][:os tty]]
+  
+** Hacks
+*** Snippet support
+Since the [[doom-package:yasnippet]] is very tied to [[doom-package:company]] for
+completion support, there isn't a proper capf for it. As such, we use
+[[doom-package:cape]]'s adapter on the company backend to get snippet completion,
+which works, but ideally we'd want something that doesn't pull in company. This
+could be a new package implementing a capf interface to yasnippet, a
+[[doom-package:tempel]] module, or maybe something else entirely.
+
+** TODO Changelog
+# This section will be machine generated. Don't edit it by hand.
+/This module does not have a changelog yet./
+
+* Installation
+Enable this module in your ~doom!~ block.
+
+This module has no direct requirements, but some languages may have their own
+requirements to fulfill before you get code completion in them (and some
+languages may lack code completion support altogether). Run ~$ doom doctor~ to
+find out if you're missing any dependencies. Note that corfu may have support
+for completions in languages that have no development intelligence, since it
+supports generic, context insensitive candidates such as file names or recurring
+words.
+
+* TODO Usage
+#+begin_quote
+ 🔨 /This module's usage documentation is incomplete./ [[doom-contrib-module:][Complete it?]]
+#+end_quote
+
+** Code completion
+By default, completion gets triggered after typing 2 non-space consecutive
+characters, or by means of the [[kbd:][C-SPC]] keybinding at any moment. While the popup
+is visible, the following relevant keys are available:
+
+| Keybind  | Description                                          |
+|----------+------------------------------------------------------|
+| [[kbd:][<down>]]   | Go to next candidate                                 |
+| [[kbd:][<up>]]     | Go to previous candidate                             |
+| [[kbd:][C-n]]      | Go to next candidate                                 |
+| [[kbd:][C-p]]      | Go to previous candidate                             |
+| [[kbd:][C-j]]      | (evil) Go to next candidate                          |
+| [[kbd:][C-k]]      | (evil) Go to previous candidate                      |
+| [[kbd:][C-<down>]] | Go to next doc line                                  |
+| [[kbd:][C-<up>]]   | Go to previous doc line                              |
+| [[kbd:][C-S-n]]    | Go to next doc line                                  |
+| [[kbd:][C-S-p]]    | Go to previous doc line                              |
+| [[kbd:][C-S-j]]    | (evil) Go to next doc line                           |
+| [[kbd:][C-S-k]]    | (evil) Go to previous doc line                       |
+| [[kbd:][C-h]]      | Toggle documentation (if available)                  |
+| [[kbd:][s-<down>]] | Export to minibuffer (if [[doom-module:][:completion vertico]])        |
+| [[kbd:][s-j]]      | (evil) Export to minibuffer (if [[doom-module:][:completion vertico]]) |
+| [[kbd:][RET]]      | Insert candidate                                     |
+| [[kbd:][C-SPC]]    | (when completing) Insert separator (see below)       |
+| [[kbd:][C-SPC]]    | Complete (unless [[doom-module:][:completion corfu +tng]])             |
+
+If you prefer a [[kbd:][TAB]]-centric completion style, enable the [[doom-module:][:completion corfu +tng]]
+flag so that, instead, you trigger completion with [[kbd:][TAB]], getting the following
+additional binds:
+
+| Keybind | Description                                |
+|---------+--------------------------------------------|
+| [[kbd:][TAB]]     | Complete                                   |
+| [[kbd:][TAB]]     | (when completing) Go to next candidate     |
+| [[kbd:][S-TAB]]   | (when completing) Go to previous candidate |
+
+** Searching with multiple keywords
+If the [[doom-module:][:completion vertico]] module is enabled, users can perform code completion
+with multiple search keywords by use of space as separator. More information can
+be found [[https://github.com/oantolin/orderless#company][here]]. Pressing [[kdb:][C-SPC]] again while completing inserts a space as
+separator. This allows searching with space-separated terms; each piece will
+match individually and in any order, with smart casing. Pressing just [[kbd:][SPC]] acts
+as normal and restarts completion, so that when typing sentences it doesn't try
+to complete the whole sentence instead of just the word.
+
+Without [[doom-module:][:completion vertico]], it still works, just not as intelligently, due to
+the lack of orderless.
+
+** Exporting to the minibuffer (requires [[doom-module:][:completion vertico]])
+When using the [[doom-module:][:completion vertico]] module, which pulls in the [[doom-package:][consult]] package,
+the entries shown in the completion popup can be exported to a consult
+minibuffer, giving access to all the manipulations the vertico suite allows. For
+instance, one could use this to export with [[doom-package:][embark]] via [[kbd:][C-c C-l]] and get a buffer
+with all candidates.
+
+** Ispell completion
+Ispell completion is supported, so long as you point to the right ~.dic~ file in
+~ispell-alternate-dictionary~. For selected text modes (see the configuration
+section) it completes everywhere, for programming modes it can complete in
+comments and strings.
+
+* Configuration
+A few variables may be set to change behavior of this module:
+
+- +corfu-auto-delay ::
+  Number of seconds till completion occurs automatically. Defaults to 0.1.
+- +corfu-auto-prefix ::
+  Number of characters till auto-completion starts to happen. Defaults to 2.
+- +corfu-want-multi-component ::
+  Sets whether orderless-style matching should be supported with space as a
+  separator.
+- +corfu-ispell-completion-modes ::
+  Lists modes in which to add ~cape-ispell~ as a capf. These show be majorly
+  text modes, else you will get lots of bad suggestions, since when this matches
+  it interrupts the flow of candidate selection.
+- +corfu-ispell-in-comments-and-strings ::
+  Whether we should complete when point is inside a string or comment. If
+  non-nil, works as in a text mode, else gives programming completions just like
+  in the rest of the buffer.
+
+Additionally, if you prefer to never stop completion on [[kbd:][SPC]], add the following
+to your ~config.el~:
+
+#+begin_src emacs-lisp
+(map! :map corfu-map
+      :desc "insert separator" "C-SPC" #'corfu-insert-separator)
+#+end_src
+
+* Troubleshooting
+[[doom-report:][Report an issue?]]
+
+* Frequently asked questions
+/This module has no FAQs yet./ [[doom-suggest-faq:][Ask one?]]
+
+* TODO Appendix
+#+begin_quote
+ 🔨 This module has no appendix yet. [[doom-contrib-module:][Write one?]]
+#+end_quote

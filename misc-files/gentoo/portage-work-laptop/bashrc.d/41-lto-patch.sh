@@ -1,0 +1,1 @@
+/var/lib/layman/lto-overlay/sys-config/ltoize/files/bashrc.d/41-lto-patch.sh

@@ -1,0 +1,7 @@
+COMMON_FLAGS="-march=native -Ofast -pipe -falign-functions=32 -fno-stack-protector"
+# COMMON_FLAGS="-march=native -Ofast -pipe -falign-functions=32 -fno-stack-protector -flto -fuse-linker-plugin"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS} -fpermissive"
+LDFLAGS="-Wl,--as-needed -Wl,-Ofast -Wl,--sort-common"
+# LDFLAGS="-Wl,--as-needed -Wl,-Ofast -Wl,--sort-common ${COMON_FLAGS}"
+# LD=/usr/bin/ld.bfd

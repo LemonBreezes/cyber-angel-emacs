@@ -1,0 +1,80 @@
+IMAPAccount ***REMOVED***
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Host outlook.office365.com
+SSLType STARTTLS
+User ***REMOVED***
+PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.password-store/mbsync/***REMOVED***.gpg"
+Timeout 120
+PipelineDepth 50
+
+IMAPStore ***REMOVED***-remote
+Account ***REMOVED***
+
+MaildirStore ***REMOVED***-local
+Inbox ~/.mail/***REMOVED***/Inbox
+Path ~/.mail/***REMOVED***/
+SubFolders Verbatim
+
+Channel ***REMOVED***
+CopyArrivalDate yes
+Create Both
+Expunge Both
+Far :***REMOVED***-remote:
+Patterns INBOX "Sent Items" Drafts Archive Trash
+Remove None
+Near :***REMOVED***-local:
+SyncState *
+
+IMAPAccount LemonBreezes@purelymail.com
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+Host imap.purelymail.com
+SSLType STARTTLS
+User LemonBreezes@purelymail.com
+PassCmd "gpg --quiet --for-your-eyes-only --no-tty --decrypt ~/.password-store/mbsync/LemonBreezes@purelymail.com.gpg"
+Timeout 120
+PipelineDepth 50
+
+IMAPStore LemonBreezes@purelymail.com-remote
+Account LemonBreezes@purelymail.com
+
+MaildirStore LemonBreezes@purelymail.com-local
+SubFolders Verbatim
+Inbox ~/.mail/LemonBreezes@purelymail.com/inbox
+Path ~/.mail/LemonBreezes@purelymail.com/
+
+Channel LemonBreezes@purelymail.com-default
+Far :LemonBreezes@purelymail.com-remote:
+Near :LemonBreezes@purelymail.com-local:
+Patterns "INBOX"
+SyncState *
+
+Channel LemonBreezes@purelymail.com-sent
+Far :LemonBreezes@purelymail.com-remote:Sent
+Near :LemonBreezes@purelymail.com-local:sent
+Create Near
+SyncState *
+
+Channel LemonBreezes@purelymail.com-drafts
+Far :LemonBreezes@purelymail.com-remote:Drafts
+Near :LemonBreezes@purelymail.com-local:drafts
+Create Near
+SyncState *
+
+Channel LemonBreezes@purelymail.com-archive
+Far :LemonBreezes@purelymail.com-remote:Archive
+Near :LemonBreezes@purelymail.com-local:archive
+Create Near
+SyncState *
+
+Channel LemonBreezes@purelymail.com-trash
+Far :LemonBreezes@purelymail.com-remote:Trash
+Near :LemonBreezes@purelymail.com-local:trash
+Create Near
+SyncState *
+
+Group LemonBreezes@purelymail.com
+Channel LemonBreezes@purelymail.com-default
+Channel LemonBreezes@purelymail.com-sent
+Channel LemonBreezes@purelymail.com-drafts
+Channel LemonBreezes@purelymail.com-archive
+Channel LemonBreezes@purelymail.com-trash
