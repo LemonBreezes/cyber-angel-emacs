@@ -565,6 +565,13 @@
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
 
+  ;; Automatically cleanup comint buffers with `C-d'.
+  (advice-add #'comint-delchar-or-maybe-eof
+              :after
+              (cae-defun cae-comint-cleanup-buffer-a (arg)
+                (when (get-buffer-process (current-buffer))
+                  (kill-buffer (current-buffer)))))
+
   ;; Allow remembering risky variables.
   (advice-add 'risky-local-variable-p :override #'ignore)
 
@@ -641,8 +648,8 @@
                     (oldfun &optional offset bottom-up)
                   (ignore-error 'wrong-type-argument
                     (funcall oldfun offset (not bottom-up)))))
-                (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
-    (advice-add #'avy-goto-line-below :around
+    (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
+      (advice-add #'avy-goto-line-below :around
                   (ignore-error 'wrong-type-argument
                     (apply oldfun args))))
     :config
