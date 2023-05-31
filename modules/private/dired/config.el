@@ -117,7 +117,7 @@
        (interactive)
        (let ((dir default-directory))
          (advice-add #'find-file :around #'cae-dired-find-file-a)
-         (unwind-protect (call-interactively ,fn)
+         (unwind-protect (call-interactively #',fn)
            (advice-remove #'find-file #'cae-dired-find-file-a)))))
 
   (map! :map dired-mode-map
