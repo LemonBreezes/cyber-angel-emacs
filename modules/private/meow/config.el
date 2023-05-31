@@ -204,7 +204,8 @@
           doom-leader-key doom-leader-map)
     (map! :map meow-beacon-state-keymap
           doom-leader-key nil)
-    (map! "DEL" doom-leader-map)
+    (map! :map meow-normal-state-keymap
+          "DEL" doom-leader-map)
     (meow/setup-leader)
     (map! :map meow-leader-keymap
           "l" #'meow-keypad-start))
