@@ -18,4 +18,4 @@
                 evil-operator-state-cursor '(hbar . 0)
                 evil-emacs-state-cursor '(hbar . 0))))
 
-;;;###autoload (autoload '+trashed-hydra/body "private/misc-applications/autoload/trashed.el"
+;;;###autoload (autoload '+trashed-hydra/body "private/misc-applications/autoload/trashed" nil t)
