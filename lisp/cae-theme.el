@@ -72,7 +72,7 @@
                                                  circadian-themes))
                            doom-theme)))))
 
-(use-package! theme-magic
-  :defer t
-  :init
-  (theme-magic-export-theme-mode +1))
+;; (use-package! theme-magic
+;;   :defer t
+;;   :init
+;;   (theme-magic-export-theme-mode +1))
