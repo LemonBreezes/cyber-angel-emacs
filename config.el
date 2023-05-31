@@ -1238,7 +1238,7 @@
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
       "C-c \"" "plot"
-      "C-c C-v" "babel")))
+      "C-c C-v" "org-babel-map")))
 
 ;;; Appendix
 
