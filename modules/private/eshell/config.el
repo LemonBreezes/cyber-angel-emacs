@@ -12,7 +12,17 @@
         :prefix "o"
         :desc "Detached session" "s" #'detached-open-session)
   :custom ((detached-show-output-on-attach t)
-           (detached-terminal-data-command system-type)))
+           (detached-terminal-data-command system-type))
+  :config
+  (defun cae-hacks-detached--db-update-sessions (orig-fn)
+    "Ensure we print the full object to the DB."
+    (let ((print-length nil)
+          (print-level nil))
+      (funcall orig-fn)))
+
+  (advice-add 'detached--db-update-sessions
+              :around
+              #'cae-hacks-detached--db-update-sessions))
 
 (use-package! eat
   :defer t :init
