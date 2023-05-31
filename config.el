@@ -627,9 +627,18 @@
 
   (use-package! avy
     :defer t :init
-    (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
-    (advice-add #'avy-goto-line :around #'cae-avy-indent-line-overlay-a)
-    (advice-add #'avy-goto-line-above :around #'cae-avy-goto-line-above-use-bottom-up-a)
+    (advice-add #'avy-goto-end-of-line :around
+                (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
+                  (let ((avy-style 'post))
+                    (apply oldfun args))))
+    (advice-add #'avy-goto-line :around
+                (cae-defun cae-avy-indent-line-overlay-a (oldfun &rest args)
+                  (let ((avy-indent-line-overlay t))
+                    (apply oldfun args))))
+    (advice-add #'avy-goto-line-above :around
+                (cae-defun cae-avy-goto-line-above-use-bottom-up-a (oldfun &optional offset bottom-up)
+                  (ignore-error 'wrong-type-argument
+                    (funcall oldfun offset (not bottom-up)))))
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
