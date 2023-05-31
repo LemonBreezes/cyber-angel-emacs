@@ -117,7 +117,8 @@
   (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
     :height 0.6 :side 'right :select t :quit t :ttl 0)
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
-  (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer) :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
+  (after! embark
+    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer) :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
 ;; Lower the default popup delay.
@@ -358,7 +359,10 @@
        "<next>" #'vertico-scroll-up)
       (:after man
        :map Man-mode-map
-       :n "o" #'ace-link-man))
+       :n "o" #'ace-link-man)
+      (:when (modulep! :config default)
+       :leader
+       "a" nil))
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
