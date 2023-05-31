@@ -51,21 +51,6 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
-;;;###autoload
-(defun cae-debugger-focus-dap ()
-  ;; Switch to perspective with dap session
-  (interactive)
-  (dap--debug-session-launch-args (dap--cur-session))
-  (let ((persp (cl-find-if (lambda (p)
-                             (cl-find-if (lambda (b)
-                                           (string-match-p "gdb" (buffer-name b)))
-                                         (persp-buffers p)))
-                           (+workspace-list))))
-    (when persp
-      (persp-switch persp)))
-  ()
-  (+popup/close-all))
-
 (defvar cae-debugger--session-workspace-map (make-hash-table :test #'equal)
   "Alist of (session . workspace) pairs.")
 
