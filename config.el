@@ -469,38 +469,38 @@
 
 ;;; Editor
 
-;;(load! "lisp/cae-repeat")
-;;(add-hook 'doom-first-buffer-hook
-;;          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
-;;            (load! "lisp/cae-visible-mark")
-;;            (load! "lisp/cae-visual-scrolling")))
-;;(load! "lisp/cae-smartparens")
-;;(load! "lisp/cae-vlf")
-;;(load! "lisp/cae-multiple-cursors")
-;;
-;;(autoload 'cae-project-bookmark (concat doom-private-dir
-;;                                        "lisp/cae-project"))
-;;(autoload 'cae-project-bookmark-set (concat doom-private-dir
-;;                                            "lisp/cae-project"))
-;;(autoload 'cae-project--get-bookmark-file (concat doom-private-dir
-;;                                                  "lisp/cae-project"))
-;;(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
-;;      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
-;;;; Ensure local elisp packages are up-to-date.
-;;(add-hook 'emacs-lisp-mode-hook
-;;          (lambda ()
-;;            (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
-;;
-;;;; Enable all disabled commands.
-;;(setq disabled-command-function nil)
-;;
-;;;; Treat all themes as safe.
-;;(setq custom-safe-themes t)
-;;
-;;(setq delete-active-region t)           ;makes `d' delete region in Meow.
-;;
-;;(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-;;(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
+(load! "lisp/cae-repeat")
+(add-hook 'doom-first-buffer-hook
+          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
+            (load! "lisp/cae-visible-mark")
+            (load! "lisp/cae-visual-scrolling")))
+(load! "lisp/cae-smartparens")
+(load! "lisp/cae-vlf")
+(load! "lisp/cae-multiple-cursors")
+
+(autoload 'cae-project-bookmark (concat doom-private-dir
+                                        "lisp/cae-project"))
+(autoload 'cae-project-bookmark-set (concat doom-private-dir
+                                            "lisp/cae-project"))
+(autoload 'cae-project--get-bookmark-file (concat doom-private-dir
+                                                  "lisp/cae-project"))
+(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
+      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+;; Ensure local elisp packages are up-to-date.
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
+
+;; Enable all disabled commands.
+(setq disabled-command-function nil)
+
+;; Treat all themes as safe.
+(setq custom-safe-themes t)
+
+(setq delete-active-region t)           ;makes `d' delete region in Meow.
+
+(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
+(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
 ;; Query buffers for a diff before killing them.
 (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
