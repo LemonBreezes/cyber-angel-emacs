@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
+;; For some reason, the LSP doc popup looks really bad with the other themes
+;; I've tried.
 (setq doom-theme 'standard-dark)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
