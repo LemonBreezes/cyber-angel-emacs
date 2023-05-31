@@ -67,6 +67,7 @@
 
 (when (modulep! :ui emoji)
   (after! emojify
+    (setq emojify-download-emojis-p t)
     (dolist (mode '(comint-mode syslog-mode term-mode eshell-mode vterm-mode
                     shell-mode compilation-mode special-mode fundamental-mode
                     syslog-mode crontab-mode))
