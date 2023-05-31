@@ -1088,7 +1088,8 @@
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
-  (setq chatgpt-shell-model-version "gpt-4"))
+  (setq chatgpt-shell-model-version "gpt-4"
+        chatgpt-shell-display-function #'display-buffer-same-window))
 
 ;;; Email
 
