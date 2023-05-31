@@ -632,7 +632,7 @@
           :map minibuffer-local-map
           "M-s" #'consult-history       ;orig. next-matching-history-element
           "M-r" #'consult-history       ;orig. previous-matching-history-element
-          ;; Redundant with Doom's :config default bindings.
+          ;; Redundant with Doom's :config default bindings
           :map global-map
           "M-g f" #'consult-flymake
           (:unless (and (modulep! :checkers syntax)
