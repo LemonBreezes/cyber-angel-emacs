@@ -13,7 +13,6 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos)))
            (emoji +unicode +github +ascii))
        hl-todo
-       hydra
        (ligatures +extra +iosevka)
        nav-flash
        (popup +defaults)
