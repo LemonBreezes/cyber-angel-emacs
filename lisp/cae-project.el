@@ -2,29 +2,27 @@
 
 ;; (vc-git--symbolic-ref (buffer-file-name))
 
-(defun cae-project-root ()
-  ;; TODO Handle the case where the current buffer is not visiting a file.
-  (doom-project-root))
-
-(defun cae-project--bookmark-file ()
-  (concat (cae-project-root)
+(defun cae-project--bookmark-file (&optional project-root)
+  (concat (or project-root
+              (doom-project-root)
+              (persp-parameter 'last-project-root))
           ".bookmarks/"
           (vc-git--symbolic-ref (buffer-file-name))))
 
-(defun cae-project-bookmark-load-h ()
-  (let ((bookmark-default-file (cae-project--bookmark-file))
-        (bookmark-alist nil))
+(defun cae-project-bookmark-load-h (_)
+  (when-let ((bookmark-default-file (cae-project--bookmark-file)))
     (when (file-exists-p bookmark-default-file)
       (bookmark-load bookmark-default-file)
-      (set-persp-parameter 'bookmark-alist bookmark-alist))))
+      (set-persp-parameter 'bookmark-file bookmark-default-file))))
 
-(defun cae-project-bookmark-save-h ()
-  (let ((bookmark-default-file (cae-project--bookmark-file)))
-    (bookmark-save)))
+(defun cae-project-bookmark-save-h (_)
+  (when-let ((bookmark-default-file (cae-project--bookmark-file)))
+    (when (and (string= (doom-project-name) (persp-name (get-current-persp)))
+               (cae-project--bookmark-file))
+      (set-persp-parameter 'bookmark-file bookmark-default-file)
+      (bookmark-save))))
 
-(add-hook 'projectile-after-switch-project-hook #'cae-project-bookmark-load)
-
-(setq bookmark-save-flag 1)
-
+(add-hook 'persp-before-deactivate-functions #'cae-project-bookmark-save-h)
+(add-hook 'persp-activated-functions #'cae-project-bookmark-load-h)
 
 ;; TODO make the bookmark file update when the branch changes
