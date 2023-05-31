@@ -409,6 +409,7 @@
        compile-command "make" test-command "make test" install-command
        "make install" package-command nil run-command nil)
      nil #'equal)
+    ;; Also recognize Truffle projects.
     (add-to-list
      'projectile-project-types
      '(evm-truffle marker-files
