@@ -12,6 +12,9 @@
                  (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))
       (hydra-keyboard-quit)))
 
+  (map! :map dap-mode-map
+        "C-S-d" #'dap-hydra)
+
   ;; Doom keeps emitting errors when trying to retrieve previous debug
   ;; sessions. This is a workaround.
   (doom-store-clear "+debugger")
