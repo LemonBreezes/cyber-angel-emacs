@@ -51,6 +51,8 @@
   (add-hook 'org-mode-hook #'worf-mode)
   :config
   (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
+  (keymap-set worf-mode-map "]" nil)
+  (keymap-set worf-mode-map "[" nil)
   ;; I was getting an issue where these keys sometimes did not work but these
   ;; redundant keybindings seem to fix it.
   (define-key worf-mode-map (kbd "S-<iso-lefttab>") (lookup-key org-mode-map (kbd "<backtab>")))
