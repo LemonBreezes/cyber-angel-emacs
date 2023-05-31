@@ -122,16 +122,20 @@ using the tab-width variable."
                                  (match-end 0))
                                lines))
          (min-indentation (apply #'min (delq 0 indentations))))
-    (mapconcat (lambda (line)
-                 (if (string-match "^[[:space:]]+" line)
-                     (let* ((indent (match-string 0 line))
-                            (spaces (replace-regexp-in-string "\t"
-                                                              (make-string tab-width ?\ )
-                                                              indent))
-                            (actual-indent (substring spaces 0 (min min-indentation (length spaces))))
-                            (stripped-indent (replace-regexp-in-string (regexp-quote actual-indent) "" line)))
-                       stripped-indent)
-                   line))
+    (mapconcat
+     (lambda (line)
+       (if (string-match "^[[:space:]]+" line)
+           (let* ((indent (match-string 0 line))
+                  (spaces (replace-regexp-in-string "\t"
+                                                    (make-string tab-width ?\ )
+                                                    indent))
+                  (actual-indent (substring spaces 0
+                                            (min min-indentation
+                                                 (length spaces))))
+                  (stripped-indent (replace-regexp-in-string
+                                    (regexp-quote actual-indent) "" line)))
+             stripped-indent)
+         line))
                lines "\n")))
 
 ;;;###autoload
