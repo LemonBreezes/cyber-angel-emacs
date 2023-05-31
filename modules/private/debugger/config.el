@@ -9,7 +9,7 @@
 
     (map! :map lsp-mode-map
           "C-M-S-d" #'dap-debug
-          "C-M-S-r" #'dap-debug-recent
+          "C-M-S-r" #'cae-debugger-kill-all-sessions-and-restart
           (:prefix ("C-S-d" . "debug")
            :desc "DAP Hydra" "h"                     #'dap-hydra
            ;; :desc "Debug start" "s"                #'dap-debug
