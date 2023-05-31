@@ -535,7 +535,7 @@
              (buffer-modified-p))
         (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                         if (or (eq ch ?k) (eq ch ?K))
-                        return (or (not-modified) t)
+                        return (or (set-buffer-modified-p nil) t)
                         if (or (eq ch ?d) (eq ch ?D))
                         do (setq cae-diff-window (diff-buffer-with-file))
                         if (or (eq ch ?s) (eq ch ?S))
