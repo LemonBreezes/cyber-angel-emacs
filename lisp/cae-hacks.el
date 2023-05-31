@@ -23,7 +23,7 @@
     (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h (&rest _)
   (unless (zerop (ring-length hydra-pause-ring))
-    run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0)))
+    (run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0))))
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
