@@ -271,6 +271,7 @@
 (map! "C-x 4 I" #'ibuffer-other-window
       (:when (display-graphic-p)
         "C-i" #'doom/dumb-indent
+        "<tab>" #'indent-for-tab-command
         "C-S-i" #'doom/dumb-dedent))
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
