@@ -18,7 +18,6 @@
         highlight-parentheses-mode
         highlight-symbol-mode
         hs-minor-mode
-        indent-guide-mode
         linum-mode
         nyan-mode
         projectile-mode
@@ -26,7 +25,38 @@
         smartparens-mode
         undo-tree-mode
         volatile-highlights-mode
-        whitespace-mode
         yas-minor-mode
         which-key-mode
-        vi-tilde-fringe-mode))
+        vi-tilde-fringe-mode
+        page-break-lines-mode
+        gcmh-mode
+        general-override-mode
+        editorconfig-mode
+        better-jumper-local-mode
+        persp-mode
+        ws-butler-mode
+        outline-minor-mode
+        diff-hl-flydiff-mode
+        copilot-mode
+        git-auto-commit-mode
+        hl-todo-mode
+        whitespace-mode
+        highlight-quoted-mode
+        ))
+(setq minions-available-modes
+      '(;; (abbrev-mode)
+        (auto-fill-mode)
+        (auto-revert-mode)
+        (auto-revert-tail-mode)
+        ;; (flyspell-mode)
+        (spell-fu-mode)
+        (flycheck-mode)
+        (font-lock-mode)
+        (highlight-changes-mode)
+        (outline-minor-mode)
+        (overwrite-mode)
+        (ruler-mode)
+        (visual-line-mode)
+        (fill-column-indicator-mode)))
+(add-hook 'c-mode-common-hook #'cae-modeline-minions-c-setup)
+(add-hook 'emacs-lisp-mode-hook #'cae-modeline-minions-elisp-setup)
