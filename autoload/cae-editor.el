@@ -273,4 +273,6 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-pop-mark ()
   (interactive)
   (let ((current-prefix-arg '(4)))
+    (setq this-command 'set-mark-command
+          real-this-command 'set-mark-command)
     (call-interactively #'set-mark-command)))
