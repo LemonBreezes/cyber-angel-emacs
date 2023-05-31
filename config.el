@@ -766,7 +766,8 @@
               (add-hook 'post-command-hook
                         (cae-defun cae-restore-point-h ()
                           (when (bound-and-true-p restore-point-mode)
-                            (setq inhibit-quit t))))))
+                            (setq inhibit-quit t)))
+                        nil t)))
   (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
 
 (use-package! symbol-overlay
