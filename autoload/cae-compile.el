@@ -56,7 +56,8 @@
   (unless (or no-byte-compile
               (not (stringp (buffer-file-name)))
               (file-in-directory-p (buffer-file-name) doom-local-dir)
-              (file-in-directory-p (buffer-file-name) cae-multi-local-dir)
+              (file-in-directory-p (buffer-file-name) (or (bound-and-true-p cae-multi-local-dir)
+                                                          doom-local-dir)) ; dummy value
               (not (string-match-p cae-compile-interesting-file-name-regexp
                                    (file-name-base (buffer-file-name))))
               (not (string-prefix-p "flycheck_" (buffer-file-name))))
@@ -125,7 +126,7 @@
       (straight-rebuild-package package))))
 
 ;; Run early in case I want to `C-g' and inspect the output.
-;; (add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
+(add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
 
 ;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
 ;; you will be waiting for a long time.
