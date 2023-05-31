@@ -6,7 +6,7 @@
 (defvar cae-multi-local-dir (expand-file-name "shared-local/" doom-user-dir))
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
-(defvar cae-multi-secrets-dir (expand-file-name "secrets/" cae-multi-local-dir))
+(defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
 
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
@@ -17,14 +17,14 @@
                       (directory-files cae-multi-secrets-dir t "\\.el$")))
   (load file nil t))
 
-(setopt abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
+(setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
-  (setopt bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
+  (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
 (after! calc
-  (setopt calc-settings-file (concat cae-multi-data-dir "calc.el")))
+  (setq calc-settings-file (concat cae-multi-data-dir "calc.el")))
 (after! eww
-  (setopt eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
-         eww-download-directory (expand-file-name "~/Downloads/")))
+  (setq eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
+        eww-download-directory (expand-file-name "~/Downloads/")))
 (after! ispell
   (setopt ispell-complete-word-dict (concat cae-multi-data-dir
                                            "dictionaries/word.txt")
