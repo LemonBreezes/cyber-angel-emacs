@@ -31,7 +31,7 @@
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
   (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
   (when (modulep! :ui workspaces)
-    (add-hook 'persp-before-deactivate-functions #'cae-hacks-hydra-pause-h)))
+    (add-hook 'persp-before-deactivate-functions #'cae-hacks-hydra-quit-h)))
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
