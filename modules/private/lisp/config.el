@@ -1,12 +1,13 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
-(use-package! nameless
-  :defer t
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
-  :config
-  (setq nameless-private-prefix t
-        nameless-global-aliases '()))
+;; This breaks terminal Emacs.
+;;(use-package! nameless
+;;  :defer t
+;;  :init
+;;  (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
+;;  :config
+;;  (setq nameless-private-prefix t
+;;        nameless-global-aliases '()))
 
 (use-package! outline-minor-faces
   :hook (emacs-lisp-mode . outline-minor-faces-add-font-lock-keywords))
