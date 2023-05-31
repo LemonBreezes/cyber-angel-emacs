@@ -10,15 +10,15 @@
 
 (defvar cae-compile-files-to-ignore
   `(;; Compiling these creates errors.
-    ;; ,(expand-file-name "lang/emacs-lisp/autoload.el" doom-modules-dir)
-    ,(expand-file-name "config/default/config.el" doom-modules-dir)
-    ,(expand-file-name "lang/org/autoload/contrib-present.el" doom-modules-dir)
-    ,(expand-file-name "doom-start.el" doom-core-dir)
+    ;; ,(expand-file-name "config/default/config.el" doom-modules-dir)
+    ;; ,(expand-file-name "lang/org/autoload/contrib-present.el" doom-modules-dir)
+    ;; ,(expand-file-name "doom-start.el" doom-core-dir)
     ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
 
     ;; I have not tested compiling these files but it's better not to compile
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
-    ,(expand-file-name "doom-cli.el" doom-core-dir)))
+    ;; ,(expand-file-name "doom-cli.el" doom-core-dir)
+    ))
 
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
@@ -73,6 +73,7 @@
                   (string= (file-name-nondirectory s) "doctor.el")
                   (string= (file-name-nondirectory s) ".dir-locals.el")
                   (string-prefix-p "flycheck_" (file-name-nondirectory s))
+                  (cl-member s cae-compile-files-to-ignore :test #'string=)
                   (and cae-compile--exit-code
                        (not (eq cae-compile--exit-code 0))
                        (not (file-exists-p (concat s "c"))))

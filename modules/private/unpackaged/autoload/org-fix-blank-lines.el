@@ -1,7 +1,7 @@
-;;; private/alphapapa-unpackages/autoload.el -*- lexical-binding: t; -*-
+;;; private/unpackaged/autoload/org-fix-blank-lines.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +unpackaged/org-fix-blank-lines-a (&optional prefix)
+(defun cae-unpackaged-org-fix-blank-lines (&optional prefix)
   "Ensure that blank lines exist between headings and between headings and their contents.
 With prefix, operate on whole buffer. Ensures that blank lines
 exist after each headings's drawers."
@@ -45,3 +45,10 @@ exist after each headings's drawers."
                      t (if prefix
                            nil
                          'tree))))
+
+(defun cae-unpackaged-org-fix-all-blank-lines ()
+  (ignore-errors (cae-unpackaged-org-fix-blank-lines '(4))))
+
+;;;###autoload
+(defun cae-unpackaged-org-fix-blank-lines-before-save ()
+  (add-hook 'before-save-hook #'cae-org-fix-all-blank-lines nil t))

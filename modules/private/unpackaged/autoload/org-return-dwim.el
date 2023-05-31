@@ -1,6 +1,6 @@
 ;;; private/unpackaged/autoload/org-return-dwim.el -*- lexical-binding: t; -*-
 
-(defun +org-list-insert-item-after (pos struct prevs &optional checkbox after-bullet)
+(defun cae-unpackaged-org-list-insert-item-after (pos struct prevs &optional checkbox after-bullet)
   (let* ((case-fold-search t)
 	 ;; Get information about list: ITEM containing POS, position
 	 ;; of point with regards to item start (BEFOREP), blank lines
@@ -123,8 +123,17 @@
 		  item struct (org-list-prevs-alist struct))))
     struct))
 
+(defun cae-unpackaged-org-element-descendant-of (type element)
+  "Return non-nil if ELEMENT is a descendant of TYPE.
+TYPE should be an element type, like `item' or `paragraph'.
+ELEMENT should be a list like that returned by `org-element-context'."
+  ;; MAYBE: Use `org-element-lineage'.
+  (when-let* ((parent (org-element-property :parent element)))
+    (or (eq type (car parent))
+        (cae-unpackaged-org-element-descendant-of type parent))))
+
 ;;;###autoload
-(defun my-unpackaged/org-return-dwim (&optional default)
+(defun cae-unpackaged-org-return-dwim (&optional default)
   "A helpful replacement for `org-return'.  With prefix, call `org-return'.
 
 On headings, move point to position after entry content.  In
@@ -190,7 +199,7 @@ appropriate.  In tables, insert a new row or end the table."
                   (unpackaged/org-element-descendant-of 'item context)) ; Element in list item, e.g. a link
               ;; Non-empty item: Add new item.
               (cl-letf (((symbol-function #'org-list-insert-item)
-                         (symbol-function #'+org-list-insert-item-after)))
+                         (symbol-function #'cae-unpackaged-org-list-insert-item-after)))
                 (org-insert-item))
             ;; Empty item: Close the list.
             ;; TODO: Do this with org functions rather than operating on the text. Can't seem to find the right function.
