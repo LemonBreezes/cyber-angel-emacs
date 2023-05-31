@@ -308,7 +308,7 @@
 (setq custom-safe-themes t)
 
 (delete-selection-mode -1)
-(setq delete-active-region t)           ;makes `d' delete region in `meow'.
+(setq delete-active-region t)           ;makes `d' delete region in Meow.
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
