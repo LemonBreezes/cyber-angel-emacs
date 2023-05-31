@@ -134,6 +134,10 @@
 (defvar cae-hacks--gcmh-mode nil)
 (defvar cae-hacks--gc-idle-timer nil)
 
+;;(when (version< "30" emacs-version)
+;;  (after! gcmh
+;;    ))
+
 (defun cae-hacks-disable-gc ()
   "Raise the GC threshold to a large value and enable GC messages."
   (unless cae-hacks--gc-disabled
