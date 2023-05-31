@@ -44,7 +44,11 @@
   (advice-add #'repeat-post-hook :before-until
               #'cae-repeat-ignore-when-hydra-active-a)
 
-  (add-hook 'doom-escape-hook #'repeat-exit)
+  (defun cae-repeat-exit-h ()
+    (interactive)
+    (repeat-exit)
+    (message "Repeat mode exited"))
+  (add-hook 'doom-escape-hook #'cae-repeat-exit-h)
 
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key"))
