@@ -163,8 +163,7 @@
           "Y" #'meow-yank-pop
           "\\" #'quoted-insert
           "/" #'+default/search-buffer
-          "S" #'embrace-commander
-          )))
+          "S" #'embrace-commander)))
 
 (use-package! meow
   :init
