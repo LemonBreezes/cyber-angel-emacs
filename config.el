@@ -721,7 +721,7 @@
             (mark " "
                   (name 16 -1)
                   " " filename)))
-    (add-to-list 'ibuffer-never-show-predicates #'doom-real-buffer-p)
+    (add-to-list 'ibuffer-never-show-predicates #'doom-unreal-buffer-p)
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*clangd.*\\*$")
