@@ -5,4 +5,6 @@
   (interactive)
   (save-excursion
     (skip-syntax-forward "^w")
+    (when (eolp)
+      (skip-syntax-backward "^w"))
     (call-interactively #'parrot-rotate-next-word-at-point)))
