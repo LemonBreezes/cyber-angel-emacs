@@ -162,5 +162,4 @@ file to edit."
               (replace-match "" t nil)))
         (progn
           (eshell-bol)
-          (insert "sudo ")
-          )))))
+          (insert "sudo "))))))
