@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; completion/corfu/packages.el
 
-(package! corfu :recipe (:files ("*.el" "extensions/*.el")) :branch "swap-icon-and-index")
+(package! corfu :recipe (:files ("*.el" "extensions/*.el") :branch "swap-icon-and-index"))
 (package! cape)
 (package! dabbrev)
 (when (modulep! +icons)
