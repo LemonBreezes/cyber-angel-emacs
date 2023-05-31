@@ -44,7 +44,6 @@
             (when (and (buffer-file-name)
                        (string= (file-name-nondirectory (buffer-file-name))
                                 dir-locals-file)
-                       (eq major-mode 'lisp-data-mode)
                        (not cae-lisp-dir-locals-elisp-mode-enabled-p))
               (setq-local cae-lisp--dir-locals-elisp-mode-enabled-p t)
               (emacs-lisp-mode))))
