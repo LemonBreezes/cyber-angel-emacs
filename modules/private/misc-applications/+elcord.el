@@ -2,10 +2,7 @@
 
 (use-package! elcord
   :hook (doom-first-file . elcord-mode)
-  :when (and (cae-display-graphic-p)
-             (not (or (memq system-type '(cygwin windows-nt ms-dos))
-                      (getenv "SSH_TTY")
-                      (getenv "WSL_DISTRO_NAME"))))
+  :when (cae-display-graphic-p)
   :config
   (setq elcord-quiet t
         elcord-use-major-mode-as-main-icon t
