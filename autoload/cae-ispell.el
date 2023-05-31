@@ -1,11 +1,11 @@
 ;;; autoload/cae-ispell.el -*- lexical-binding: t; -*-
 
-(defun eac-ispell-simple-get-word ()
+(defun cae-ispell-simple-get-word ()
   (require 'ispell)
   (car-safe (save-excursion (ispell-get-word nil))))
 
 ;;;###autoload
-(defun eac-ispell-word-then-abbrev (p)
+(defun cae-ispell-word-then-abbrev (p)
   "Call `ispell-word', then create an abbrev for it.
 With prefix P, create local abbrev. Otherwise it will
 be global.
@@ -16,7 +16,7 @@ abort completely with `C-g'."
   (interactive "P")
   (let (bef aft)
     (save-excursion
-      (while (if (setq bef (eac-ispell-simple-get-word))
+      (while (if (setq bef (cae-ispell-simple-get-word))
                  ;; Word was corrected or used quit.
                  (if (ispell-word nil 'quiet)
                      nil ; End the loop.
@@ -27,7 +27,7 @@ abort completely with `C-g'."
                (not (bobp)))
         (backward-word)
         (backward-char))
-      (setq aft (eac-ispell-simple-get-word)))
+      (setq aft (cae-ispell-simple-get-word)))
     (if (and aft bef (not (equal aft bef)))
         (let ((aft (downcase aft))
               (bef (downcase bef)))
