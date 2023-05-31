@@ -10,11 +10,10 @@
 ;;;###autoload
 (defun cae-dired-load-dirvish-h (dir)
   (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
-  (unless (featurep 'dirvish)
-    (require 'dirvish)
-    (unless (memq #'dired-noselect find-directory-functions)
-      (add-hook 'find-directory-functions #'dired-noselect t))
-    (dired-noselect dir)))
+  (require 'dirvish)
+  (unless (memq #'dired-noselect find-directory-functions)
+    (add-hook 'find-directory-functions #'dired-noselect t))
+  (dired-noselect dir))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
