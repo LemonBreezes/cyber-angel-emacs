@@ -769,9 +769,11 @@
         "N" #'symbol-overlay-switch-forward
         "P" #'symbol-overlay-switch-backward)
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
-  (add-hook 'lsp-mode-hook
-            (cae-defun cae-disable-symbol-overlay-h ()
-              (symbol-overlay-mode -1)))
+  (when (and (modulep! :tools lsp)
+             (not (modulep! :tools lsp +eglot)))
+    (add-hook 'lsp-mode-hook
+              (cae-defun cae-disable-symbol-overlay-h ()
+                (symbol-overlay-mode -1))))
   ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
   ;; overlay in the buffer. This is probably a bug.
   (advice-add #'symbol-overlay-get-list
