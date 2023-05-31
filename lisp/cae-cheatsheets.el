@@ -13,8 +13,8 @@
     (run-with-timer 0.001 nil hydra-pause-ring)))
 
 (after! hydra
-  (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
-  (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h))
+  (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-hydra-pause-h)
+  (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-hydra-resume-h))
 
 ;; Hercules already does this for us since I am using a fork of Hercules with
 ;; that feature.
