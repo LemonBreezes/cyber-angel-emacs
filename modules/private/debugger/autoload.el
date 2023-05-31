@@ -31,7 +31,7 @@
 (defun cae-debugger--which-key-inhibit-hook ()
   (setq which-key-inhibit nil)
   (remove-hook 'pre-command-hook
-               #'+helm--which-key-inhibit-hook))
+               #'cae-debugger--which-key-inhibit-hook))
 
 (defvar cae-debugger--global-map (make-sparse-keymap))
 
