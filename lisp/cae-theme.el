@@ -72,7 +72,6 @@
                                                  circadian-themes))
                            doom-theme)))))
 
-
 (use-package! theme-magic
   :defer t
   :init
