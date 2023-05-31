@@ -5,7 +5,6 @@ alias tree   tree                -C                                           $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 alias layman sudo layman                                                      $*
-alias emacs  if $(file-exists-p ~/.config/emacs/bin/doom) { ~/.config/emacs/bin/doom } { ~/.emacs.d/bin/doom } $*
 
 alias mcd    mkdir -p                                                         $1 && cd $1
 alias cd-    cd -
