@@ -106,6 +106,7 @@
           (lambda (s)
             (not (or (string= (file-name-nondirectory s) "experiments")
                      (string= (file-name-nondirectory s) "eshell")
+                     (string= (file-name-nondirectory s) "packages")
                      (string= (file-name-nondirectory s) "misc-files")
                      (string= (file-name-nondirectory s) "snippets")
                      (string= (file-name-nondirectory s) ".local")
