@@ -567,6 +567,7 @@
              ("M-J" sp-join-sexp "Edit")
              ("M-C" sp-convolute-sexp "Edit")
              ("C-M-t" sp-transpose-sexp "Edit")
+             ("C-x C-t" sp-transpose-hybrid-sexp "Edit")
              ("C-M-k" sp-kill-sexp "Kill")
              ("M-<delete>" sp-unwrap-sexp "Kill")
              ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
