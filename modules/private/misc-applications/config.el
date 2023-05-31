@@ -9,12 +9,14 @@
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 
-(autoload 'emms "emms")
-(when (modulep! :private misc-applications)
+(when (modulep! :app emms)
+  (autoload 'emms "emms")
   (map! :leader
         :prefix +misc-applications-prefix
-        "1" #'mpc
         "2" #'emms))
+(map! :leader
+      :prefix +misc-applications-prefix
+      "1" #'mpc)
 
 (defvar +misc-applications--lisp-files
   '("+alarm-clock"
