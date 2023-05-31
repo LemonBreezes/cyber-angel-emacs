@@ -183,25 +183,26 @@
   (after! magit (require 'parrot))
   :config
   (setopt parrot-animate 'hide-static
-          parrot-rotate-animate-after-rotation nil
           parrot-num-rotations 10
           parrot-animate-on-load nil
           parrot-party-on-magit-push t
           parrot-party-on-org-todo-states '("DONE")
           parrot-type 'nyan)
   (parrot-mode +1)
-  (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
-        parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
-  (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
-                                           "cae-keyboard-remap-to-strings"
-                                           "cae-keyboard-strings")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
-  (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!"))))
+  (after! parrot-rotate
+    (setq parrot-rotate-animate-after-rotation nil
+          parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+          parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
+                                             "cae-keyboard-remap-to-strings"
+                                             "cae-keyboard-strings")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))))
 
 ;; I have this disabled because I never use it to scroll the window.
 ;;
