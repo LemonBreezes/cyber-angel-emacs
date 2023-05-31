@@ -842,7 +842,8 @@
 
 (use-package! aggressive-indent
   :init
-  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp' module.
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
+                                                            ;module.
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
   :defer t
   :config
