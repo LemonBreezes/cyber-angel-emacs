@@ -31,7 +31,7 @@
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
-  ;; Now I can scroll with `v' and reverse directions with `V'!! Amazing!
+  ;; Now I can scroll with `v' and reverse directions with `V'! Amazing!
   (define-repeat-map scroll-up-command
     ("v" scroll-up-command)
     (:exit "V" scroll-down-command))
