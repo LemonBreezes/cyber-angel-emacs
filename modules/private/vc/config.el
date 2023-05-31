@@ -31,7 +31,8 @@
           ;; from the modeline.
           "q" #'magit-mode-bury-buffer)
     (after! forge
-      (setq forge-pull-notifications t))))
+      (setq forge-pull-notifications t
+            forge-buffer-draft-p t))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
