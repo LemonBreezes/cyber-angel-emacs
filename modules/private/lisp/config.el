@@ -141,4 +141,6 @@
                                         ; keybindings.
           "C-a" nil                   ; formerly `lispy-move-beginning-of-line'.
           "M-j" nil                   ; formerly `lisp-split'.
-          "M-r" #'lispy-raise-sexp)))
+          "M-r" #'lispy-raise-sexp
+          "M-R" #'lispy-raise-some
+          "M-S" #'lispy-split)))
