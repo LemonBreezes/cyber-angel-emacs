@@ -491,8 +491,7 @@
       [remap next-buffer] #'cae-next-buffer
       (:when (modulep! :completion vertico)
        (:map minibuffer-local-map
-        "C-;" nil                       ;I prefer <f8> for `embark-act'.
-        ))
+        "C-;" nil))                     ;I prefer <f8> for `embark-act'.
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
@@ -503,6 +502,11 @@
       (:after man
        :map Man-mode-map
        :n "o" #'ace-link-man))
+(define-key!
+  :keymaps (append +default-minibuffer-maps
+                   (when (modulep! :editor evil +everywhere)
+                     '(evil-ex-completion-map)))
+  "C-s" nil)
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 (map! :leader
