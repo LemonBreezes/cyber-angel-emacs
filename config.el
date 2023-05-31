@@ -295,6 +295,7 @@
 (map! "C-h ;" #'cae-project-bookmark)
 ;; Do not query before deleting a frame, since we can undo frame deletions.
 (global-set-key [remap delete-frame] nil)
+(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
