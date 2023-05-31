@@ -84,3 +84,11 @@
   (interactive)
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
+
+
+;;;###autoload
+(defun cae-recenter-and-flash-maybe ()
+  (unless (pos-visible-in-window-p (point))
+    (recenter)
+    (when (modulep! :ui nav-flash)
+      (+nav-flash-blink-cursor))))
