@@ -36,6 +36,7 @@
 ;;; Editor
 
 (package! pp+)
+(package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
