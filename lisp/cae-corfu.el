@@ -22,7 +22,6 @@
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
   (when (modulep! :private corfu +indexed)
-    (setq corfu-indexed-start 1)
     (corfu-indexed-mode +1)
     (eval
      `(map! :map corfu-map
