@@ -71,7 +71,7 @@
 
 (add-hook 'org-mode-hook #'locally-defer-font-lock)
 
-;; An `org-indent' hack from Tecosaur's Emacs config.
+;; An `org-indent' hack from Tecosaur's Emacs config. Refer there for documentation.
 (defadvice! +org-indent--reduced-text-prefixes ()
   :after #'org-indent--compute-prefixes
   (setq org-indent--text-line-prefixes
