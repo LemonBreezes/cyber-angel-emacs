@@ -79,6 +79,7 @@
      (1 'shadow t)))
   "Extra font-lock patterns for the Bookmark menu.")
 
+;;;###autoload
 (define-minor-mode cae-bookmark-extra-keywords
   "Apply extra font-lock rules to bookmark list buffers."
   :init-value nil
