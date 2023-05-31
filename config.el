@@ -562,8 +562,7 @@
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))
     (let ((bindings
-           '(("M-r" cae-raise-sexp "Edit")
-             ("M-(" sp-wrap-round "Edit")
+           '(("M-(" sp-wrap-round "Edit")
              ("M-S" sp-split-sexp "Edit")
              ("M-J" sp-join-sexp "Edit")
              ("M-C" sp-convolute-sexp "Edit")
@@ -572,6 +571,7 @@
              ("M-<delete>" sp-unwrap-sexp "Kill")
              ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
              ("M-D" sp-splice-sexp "Kill")
+             ("M-r" cae-raise-sexp "Kill")
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
              ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
              ("C-M-f" sp-forward-sexp "Navigation")
