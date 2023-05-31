@@ -1085,10 +1085,8 @@
 (advice-add #'comint-delchar-or-maybe-eof
             :after
             (cae-defun cae-comint-cleanup-buffer-a (arg)
-              (when (and (get-buffer-process (current-buffer))
-                         (prog1 (+popup-buffer-p)
-                           (kill-buffer (current-buffer))))
-                (delete-window))))
+              (when (get-buffer-process (current-buffer))
+                (kill-buffer (current-buffer)))))
 
 ;;; Email
 
