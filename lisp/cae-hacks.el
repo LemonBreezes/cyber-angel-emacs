@@ -101,6 +101,16 @@
 ;; might be an Emacs30 thing.
 (defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
 
+(defun cae-browse-url-generic-bookmark-handler (bookmark)
+  "Bookmark handler for opening URLs with `browse-url-generic'."
+  (let ((url (bookmark-prop-get bookmark 'filename)))
+    (if url
+        (browse-url-generic url)
+      (message "Bookmark does not have a valid FILENAME property."))))
+
+;; For my old bookmarks which were written for use with EXWM.
+(defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
+
 
 ;;; GC hacks
 
