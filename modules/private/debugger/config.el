@@ -15,12 +15,14 @@
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
 
     (after! dap-hydra
-      (defhydra+ dap-hydra () ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart")))
+      (defhydra+ dap-hydra ()
+        ("<f6>" nil "quit")
+        ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart")))
 
-      (when (modulep! :private corfu)
-        (defun cae-debugger-dap-ui-repl-corfu-setup ()
-          (add-to-list 'completion-at-point-functions #'cape-dabbrev))
-        (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
+    (when (modulep! :private corfu)
+      (defun cae-debugger-dap-ui-repl-corfu-setup ()
+        (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+      (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
 
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
