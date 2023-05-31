@@ -11,8 +11,8 @@
                      (buffer-file-name)
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
                                      `("init.el"
-                                      ,dir-locals-file
-                                      "packages.el")
+                                       ,dir-locals-file
+                                       "packages.el")
                                      :test #'string=))
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
@@ -23,6 +23,8 @@
                                    (bound-and-true-p eshell-aliases-file))
                      (fboundp 'eshell-read-aliases-list))
             (add-hook 'after-save-hook 'eshell-read-aliases-list nil t))
+
+          ()
 
           ;; Automatically compile Emacs Lisp files (if enabled).
           (when (bound-and-true-p cae-config-finished-loading)
