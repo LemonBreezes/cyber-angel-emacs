@@ -63,7 +63,7 @@ _c_: Continue       _su_: Up stack frame     _bc_: Set condition   _de_: Edit de
 _r_: Restart frame  _sd_: Down stack frame   _bh_: Set hit count   _ds_: Debug restart         _er_: Remove expression
 _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
 _R_: Restart        _sb_: List breakpoints
-                    _sS_: List sessions
+                  _sS_: List sessions
 "
   ("n" dap-next)
   ("i" dap-step-in)
