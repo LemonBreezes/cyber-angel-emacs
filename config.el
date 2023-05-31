@@ -84,7 +84,9 @@
       (add-to-list 'emojify-inhibit-major-modes mode))))
 
 (use-package! info-colors
-  :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+  :defer t :init
+  (after! info
+    (add-hook 'Info-selection-hook 'info-colors-fontify-node)))
 
 (use-package! authinfo-color-mode
   :mode ("authinfo.gpg\\'" . authinfo-color-mode)
@@ -169,7 +171,8 @@
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
-(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+(after! bookmark
+  (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords))
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
@@ -210,11 +213,11 @@
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
 ;; Use Emacs as the default editor for shell commands.
-(define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-(define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
-(add-hook 'shell-mode-hook  #'with-editor-export-editor)
-(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
-(add-hook 'eshell-mode-hook #'with-editor-export-editor)
+;; (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
+;; (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
+;; (add-hook 'shell-mode-hook  #'with-editor-export-editor)
+;; (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+;; (add-hook 'eshell-mode-hook #'with-editor-export-editor)
 
 (when (and (modulep! :checkers spell)
            (not (modulep! :checkers spell +flyspell)))
