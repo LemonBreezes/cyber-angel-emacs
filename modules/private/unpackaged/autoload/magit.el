@@ -21,6 +21,7 @@ command was called, go to its unstaged changes section."
                       (magit-section-forward)
                     (error (cl-return (magit-status-goto-initial-section-1))))))
     (recenter)
+    ;; It's a good time to garbage collect, since I spend a little time reading the status buffer.
     (cae-hacks-garbage-collect)))
 
 ;;;###autoload
