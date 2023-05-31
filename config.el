@@ -1089,7 +1089,7 @@
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
   (setq chatgpt-shell-model-version "gpt-4"
-        chatgpt-shell-display-function #'display-buffer-same-window))
+        chatgpt-shell-display-function #'switch-to-buffer))
 
 ;;; Email
 
