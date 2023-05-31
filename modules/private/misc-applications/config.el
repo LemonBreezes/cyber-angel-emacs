@@ -61,6 +61,7 @@
     "+fireplace"
     "+flames-of-freedom"
     "+snow"
+    "+zone"
     ))
 
 (dolist (file +misc-applications--lisp-files)
