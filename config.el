@@ -146,7 +146,8 @@
 
 (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
 (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
-;; Do not highlight quoted strings in syslog-mode.
+;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
+;; balanced, which breaks font-lock.
 (after! syslog-mode
   (setq syslog-font-lock-keywords
         (cl-remove-if
