@@ -73,14 +73,14 @@
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
     :after yasnippet
-    :hook ((prog-mode . yas-setup-capf)
-           (text-mode . yas-setup-capf)
-           (lsp-mode  . yas-setup-capf)
-           (sly-mode  . yas-setup-capf))
-    :bind (("C-. y" . cape-yasnippet))
     :init
     (map! :map cae-completion-mode-map
           "C-. y" #'cape-yasnippet)
+    (dolist (hook '(prog-mode-hook
+                    text-mode-hook
+                    lsp-mode-hook
+                    sly-mode-hook))
+      (add-hook hook #'yas-setup-capf))
     :config
     (defun yas-setup-capf ()
       (make-variable-buffer-local 'completion-at-point-functions)
