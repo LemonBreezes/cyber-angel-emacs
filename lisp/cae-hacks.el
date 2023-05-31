@@ -149,6 +149,8 @@
   (cae-hacks-enable-gc))
 
 (defun cae-hacks-enable-gc ()
+  "This is the inverse of `cae-hacks-disable-gc'.
+It is meant to be used as a `post-gc-hook'."
   (when cae-hacks--gc-disabled
     (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
     (setq garbage-collection-messages cae-hacks--gc-messages
