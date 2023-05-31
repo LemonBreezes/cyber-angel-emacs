@@ -109,7 +109,7 @@
         "h" #'dirvish-history-jump
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer))
-(map! :leader "o-" #'dirvish-dwim)
+(map! :leader "o-" #'cae-dired-jump)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
