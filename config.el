@@ -589,9 +589,8 @@
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
 
-(when (modulep! :config default +bindings)
-  (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
-        [remap doom/sudo-this-file] #'cae-toggle-sudo))
+(map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+      [remap doom/sudo-this-file] #'cae-toggle-sudo)
 
 (after! expand-region
   (setq expand-region-smart-cursor t)
