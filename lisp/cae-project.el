@@ -13,15 +13,17 @@
 
 (defun cae-project--get-bookmark-file (&optional project)
   "Return the bookmark file for PROJECT."
-  (expand-file-name (concat (doom-project-name project)
-                            "/"
-                            (if cae-project-bookmark-separate-into-branches
-                                (vc-git--symbolic-ref
-                                 (or project
-                                     (doom-project-root)))
-                              "default")
-                            ".bmk")
-                    cae-project-bookmark-dir))
+  (expand-file-name
+   (concat (doom-project-name project)
+           "/"
+           (if cae-project-bookmark-separate-into-branches
+               (or (ignore-errors (vc-git--symbolic-ref
+                               (or project
+                                   (doom-project-root))))
+                   "default")
+             "default")
+           ".bmk")
+   cae-project-bookmark-dir))
 
 (defun cae-project--bookmark-alist-from-file (file)
   "Return a bookmark alist from FILE."
