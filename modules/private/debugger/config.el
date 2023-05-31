@@ -11,7 +11,10 @@
                  when (string-match-p "gdb" (buffer-name buf)) do
                  (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
 
+  ;; Doom keeps emitting errors when trying to retrieve previous debug
+  ;; sessions. This is a workaround.
   (doom-store-clear "+debugger")
+
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
       (require 'dap-cpptools)
