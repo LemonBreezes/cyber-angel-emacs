@@ -30,7 +30,12 @@
 (add-hook 'doom-first-buffer-hook #'global-page-break-lines-mode)
 
 ;; A minimal mouse-free `tab-bar' UI.
-(advice-add #'tab-bar--load-buttons :override #'ignore)
+(defadvice! +tab-bar--load-buttons-a ()
+  :after #'tab-bar--load-buttons
+  (setq tab-bar-close-button   nil
+        tab-bar-back-button    nil
+        tab-bar-forward-button nil
+        tab-bar-new-button     nil))
 
 (setq x-stretch-cursor t
       truncate-string-ellipsis "..."
