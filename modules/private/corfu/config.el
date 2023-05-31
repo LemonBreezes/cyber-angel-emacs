@@ -68,12 +68,12 @@ derivative.")
     (cond ((modulep! :tools lsp +eglot)
            (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
           ((modulep! :tools lsp)
-           (add-hook 'lsp-completion-mode-hook
-                     (cae-defun doom--use-orderless-lsp-capf ()
-                       (setf (alist-get 'styles
-                                        (alist-get 'lsp-capf
-                                                   completion-category-defaults))
-                             '(orderless)))))))
+           (add-hook! 'lsp-completion-mode-hook
+             (cae-defun doom--use-orderless-lsp-capf ()
+               (setf (alist-get 'styles
+                                (alist-get 'lsp-capf
+                                           completion-category-defaults))
+                     '(orderless)))))))
 
   (map! (:unless (modulep! +tng)
          :desc "complete" "C-SPC" #'completion-at-point)
@@ -105,9 +105,8 @@ derivative.")
     (defalias 'corfu--ispell-in-comments-and-strings
       (cape-super-capf (cape-capf-inside-comment #'cape-ispell)
                        (cape-capf-inside-string #'cape-ispell)))
-    (add-hook 'prog-mode-hook
-              (lambda ()
-                (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings))))
+    (add-hook! 'prog-mode-hook
+      (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings)))
   (dolist (sym +corfu-ispell-completion-modes)
     (add-hook (intern (concat (symbol-name sym) "-hook"))
               (lambda ()
