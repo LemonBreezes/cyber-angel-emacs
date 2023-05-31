@@ -638,7 +638,9 @@
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
              (?e . cae-avy-action-embark-act)
-             (?3 . cae-avy-action-comment-dwim)))
+             (?E . cae-avy-action-embark-act-stay)
+             (?3 . cae-avy-action-comment-dwim)
+             (?3 . cae-avy-action-comment-dwim-stay)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
                              (avy-goto-end-of-line . post)
