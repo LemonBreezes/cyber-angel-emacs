@@ -49,7 +49,6 @@
         ;;"+vuiet"
         "+webpaste"
         "+wttrin"
-        ;;"+ytel"
 
         ;; Lookup
         "+devdocs"
