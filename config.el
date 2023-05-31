@@ -695,6 +695,7 @@
   ;; `avy-styles-alist' instead.
   (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
   (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
+  (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
 
   (when (modulep! :completion vertico)
