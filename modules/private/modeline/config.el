@@ -106,12 +106,11 @@
         (setq args (append args '("28.1"))))
       (apply oldfun args))
     (add-hook 'doom-first-file-hook #'parrot-mode)
-    (advice-add #'parrot-mode :around #'cae-hacks-shut-up-a)
     :config
-    (setq parrot-animate 'hide-static
-          parrot-rotate-animate-after-rotation nil
-          parrot-num-rotations 10
-          parrot-animate-on-load nil
-          parrot-party-on-magit-push t
-          parrot-party-on-org-todo-states '("DONE")
-          parrot-type 'nyan)))
+    (setq! parrot-animate 'hide-static
+           parrot-rotate-animate-after-rotation nil
+           parrot-num-rotations 10
+           parrot-animate-on-load nil
+           parrot-party-on-magit-push t
+           parrot-party-on-org-todo-states '("DONE")
+           parrot-type 'nyan)))
