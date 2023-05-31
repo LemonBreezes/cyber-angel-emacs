@@ -188,6 +188,8 @@
       :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
     (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
       :side 'right :select nil :quit t :ttl nil)
+    (set-popup-rule! "^\\*tldr\\*$" :size #'cae-popup-resize-help-buffer
+      :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
