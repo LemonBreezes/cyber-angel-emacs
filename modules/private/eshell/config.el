@@ -9,7 +9,8 @@
   (eat-eshell-visual-command-mode +1)
 
   ;; Do not let EAT override TERM.
-  (setopt eat-term-name (lambda () eshell-term-name))
+  (setopt eat-term-name (lambda () eshell-term-name)
+          eat-enable-yank-to-terminal t)
 
   (map! :map (eat-eshell-semi-char-mode-map)
         "C-a" #'eat-self-input
