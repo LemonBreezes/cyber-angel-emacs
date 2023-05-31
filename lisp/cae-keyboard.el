@@ -147,9 +147,6 @@
                          "Go to char: "
                          "Move to column: ")
                        :test #'string-match-p))
-       ;; Not a fullproof way to work with Ispell but it should be good enough.
-       ;; Basically, will I ever open the choices buffer then mouse click
-       ;; somewhere else and leave it lingering? Probably not.
        (and (featurep 'ispell)
             (get-buffer-window ispell-choices-buffer)))))
 
