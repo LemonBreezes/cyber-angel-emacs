@@ -759,10 +759,20 @@
 
 (use-package! symbol-overlay
   :defer t :init
-  (map! "M-i" #'symbol-overlay-put)
+  (map! "M-i" #'symbol-overlay-put
+        "M-N" #'symbol-overlay-switch-forward
+        "M-P" #'symbol-overlay-switch-backward)
   :config
   (map! :map symbol-overlay-map
-        "<f6>" #'cae-symbol-overlay-cheatsheet))
+        "<f6>" #'cae-symbol-overlay-cheatsheet
+        "N" #'symbol-overlay-switch-forward
+        "P" #'symbol-overlay-switch-backward)
+  (advice-add #'symbol-overlay-get-list
+              :around #'cae-hacks-symbol-overlay-reverse-list-a)
+  (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
+    (if (eq (car args) -1)
+        (nreverse (apply oldfun args))
+      (apply oldfun args))))
 
 
 ;;; Autocompletion
