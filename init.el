@@ -107,7 +107,7 @@
            eshell
            dired
            lisp
-           ;misc-applications
+           misc-applications
            modeline
            unpackaged
            vc
