@@ -217,7 +217,6 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))))
 
 ;; I have this disabled because I never use it to scroll the window.
-;;
 (when (modulep! +pretty)
   (use-package! nyan-mode
     :when (cae-display-graphic-p)
