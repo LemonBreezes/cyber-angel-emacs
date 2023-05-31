@@ -102,7 +102,7 @@
 (defun cae-keyboard-kbd-reverse (&rest args)
   (declare (pure t) (side-effect-free t))
   (pcase (length args)
-    (0 (kbd ""))
+    (0 "")
     (1 (apply #'string (cae-keyboard-remap-reverse (kbd (string-join args " ")))))
     (2 (mapconcat #'kbd
                   (append (butlast args)
