@@ -9,7 +9,6 @@
 
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
-(package! highlight-context-line)
 (package! goggles)
 
 ;; cae-theme.el
