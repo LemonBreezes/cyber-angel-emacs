@@ -86,7 +86,7 @@
   (call-interactively #'next-buffer))
 
 ;;;###autoload (autoload 'cae-embark-collect-hydra/body "cae-editor" nil t)
-(defhydra embark-collect-mode-hydra (:color blue :hint nil)
+(defhydra embark-collect-hydra (:color blue :hint nil)
   "
 Navigation^^             Mark/Unmark^^               Actions^^             Buffer^^
 -------------------------------------------------------------------------------------------
