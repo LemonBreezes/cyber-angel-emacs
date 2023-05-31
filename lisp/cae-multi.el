@@ -17,7 +17,7 @@
                       (directory-files cae-multi-secrets-dir t "\\.el$")))
   (load file nil t))
 
-(setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
+(setq abbrev-file-name (concat cae-multi-secrets-dir "abbrev_defs"))
 (after! bookmark
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
 (after! calc
@@ -27,9 +27,9 @@
         eww-download-directory (expand-file-name "~/Downloads/")))
 (after! ispell
   (setopt ispell-complete-word-dict (concat cae-multi-data-dir
-                                           "dictionaries/word.txt")
-         ispell-personal-dictionary (concat cae-multi-data-dir
-                                            "aspell.en.pws")))
+                                            "dictionaries/word.txt")
+          ispell-personal-dictionary (concat cae-multi-secrets-dir
+                                             "aspell.en.pws")))
 
 (use-package! git-auto-commit-mode
   :defer t
