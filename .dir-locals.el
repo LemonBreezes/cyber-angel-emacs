@@ -18,7 +18,7 @@
               (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
             (when (and (buffer-file-name)
                        (require 'diff-hl nil t))
-              (diff-hl-mode -1))
+              (run-at-time 0.0 nil #'diff-hl-mode -1))
             (when (and (buffer-file-name)
                        (not (file-in-directory-p (buffer-file-name)
                                                  (concat doom-private-dir "secrets/")))
