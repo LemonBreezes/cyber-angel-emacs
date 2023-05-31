@@ -3,6 +3,6 @@
 ;;;###autoload
 (defun +somafm ()
   (interactive)
-  (if (display-graphic-p)
+  (if (cae-display-graphic-p)
       (call-interactively #'somafm)
     (call-interactively #'somafm-by-completion)))
