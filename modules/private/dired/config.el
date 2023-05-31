@@ -121,10 +121,6 @@
 ;; Exit the current Dirvish session when running interactive commands like
 ;; `projectile-find-file'. Also, automatically enter fullscreen mode when
 ;; opening a file in a single window.
-;;(advice-add #'find-file :around #'cae-dired-find-file-a)
-;;(advice-add #'find-file-other-window :around
-;;            #'cae-dired-find-file-other-window-a)
-
 (advice-add #'find-file :before #'cae-dired-find-file-a)
 (advice-add #'find-file-other-window :before #'cae-dired-find-file-other-window-a)
 (add-hook 'find-file-hook #'cae-dired-find-file-h)
