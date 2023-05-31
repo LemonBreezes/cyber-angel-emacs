@@ -404,9 +404,9 @@
   ;; This is how we get curly braces working in C without `smartparens'.
   (setq electric-pair-pairs '((?\" . ?\")
                               (?\{ . ?\})
-                              (?\[ . ?\])
-                              (?\( . ?\)))
-        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+                              (?\[ . ?\]))
+        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit
+        electric-pair-open-newline-between-pairs t)
   (electric-pair-mode +1)
   (map! [remap newline] nil)
   (electric-indent-mode +1))
