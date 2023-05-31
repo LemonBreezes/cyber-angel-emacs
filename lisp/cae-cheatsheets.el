@@ -5,7 +5,7 @@
 (defvar cae-cheatsheets-minibuffer--last-hydra nil)
 
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
-  (when hydra-curr-map
+  (when (bound-and-true-p hydra-curr-map)
     (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
@@ -26,13 +26,13 @@
 (defvar cae-cheatsheets-workspace--last-hydra nil)
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
-  (when (featurep 'hydra)
-    (when hydra-curr-map
-      (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
-                           hydra-curr-body-fn))
-    (hydra-keyboard-quit)))
+  (when (bound-and-true-p hydra-curr-map)
+    (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
+                         hydra-curr-body-fn)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
+  (when (featurep 'hydra)
+    (hydra-keyboard-quit))
   (when (persp-parameter 'cae-cheatsheets-workspace--last-hydra)
     ;; In my testing, using a timer prevented Hydra from clobbering my
     ;; workspace-switching repeat map.
@@ -53,13 +53,15 @@
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
-  (when hydra-curr-map
+  (when (bound-and-true-p hydra-curr-map)
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
                      nil nil #'eq)
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
+  (when (featurep 'hydra)
+    (hydra-keyboard-quit))
   (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil #'eq)))
@@ -67,9 +69,6 @@
                      nil t #'eq)
           nil)
     (run-with-timer 0.001 nil hydra)))
-
-(defun cae-cheatsheets-hydra-quit-h (&rest _)
-  (hydra-keyboard-quit))
 
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
