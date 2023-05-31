@@ -217,6 +217,10 @@
         meow-select-on-change t
         meow-expand-hint-remove-delay 1.2 ;Just give me a little more time.
         meow-keypad-self-insert-undefined nil
+        meow-use-enhanced-selection-effect t ;???
+        meow-use-cursor-position-hack t      ;???
+        meow-use-dynamic-face-color nil      ;???
+        meow-goto-line-function #'consult-goto-line
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp
                                   eval-expression pp-eval-expression))
 
