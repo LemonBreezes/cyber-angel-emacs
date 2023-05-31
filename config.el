@@ -862,6 +862,9 @@
         "C-c & C-n" nil
         "C-c & C-v" nil))
 
+;; This minor mode is defined so that there keybindings can be temporarily
+;; turned off for multiple cursors and similar modes where completion is not a
+;; good idea.
 (define-minor-mode cae-completion-mode
   "A minor mode for convenient completion keybindings."
   :global t
