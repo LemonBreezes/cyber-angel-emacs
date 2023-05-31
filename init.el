@@ -71,7 +71,7 @@
        eshell
        dired
        lisp
-       misc-applications
+       ;; misc-applications
        ;; helm
        modeline
        unpackaged
