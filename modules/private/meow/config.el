@@ -189,13 +189,13 @@
           (,(cae-keyboard-remap-char ?`) . ,(cae-keyboard-remap-char ?`))
           (,(cae-keyboard-remap-char ?~) . ,(cae-keyboard-remap-char ?~))))
   (setq meow-mode-state-list
-        (cl-union meow-mode-state-list
-                  '((helpfulmode . normal)
+        (cl-union '((helpfulmode . normal)
                     (Man-mode . normal)
                     (message-buffer-mode . normal)
                     (eshell-mode . insert)
                     (eat-mode . insert)
                     (vterm-mode . insert))
+                  meow-mode-state-list
                   :test (lambda (x y) (eq (car x) (car y)))))
   (when (modulep! :private corfu)
     (after! corfu
