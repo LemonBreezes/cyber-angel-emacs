@@ -27,6 +27,7 @@
    [?7 ?&]
    [?8 ?*]
    [?9 ?\(]
+   ;; These keys are in the same place for me as they are in QWERTY.
    [?z] [?Z] [?-] [?.] [?>] [?q] [?Q] [?\[] [?\]]])
 
 ;;;###autoload
