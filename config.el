@@ -563,6 +563,9 @@
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
+(after! yasnippet
+  (setq yas-triggers-in-field t))
+
 (use-package! dabbrev
   :defer t :config
   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
