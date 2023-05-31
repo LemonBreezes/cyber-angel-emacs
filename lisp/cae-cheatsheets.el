@@ -34,6 +34,8 @@
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
   (setq hydra-pause-ring (persp-parameter 'hydra-pause-ring))
   (when (persp-parameter 'cae-cheatsheets-workspace--last-hydra)
+    ;; In my testing, using a timer prevented Hydra from clobbering my
+    ;; workspace-switching repeat map.
     (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra)))
   (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
 
