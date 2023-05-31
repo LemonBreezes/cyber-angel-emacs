@@ -37,5 +37,8 @@
   ;; Focus
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
-    (with-selected-window (car (doom-visible-windows))
-      (apply oldfun args))))
+    (let ((win (selected-window)))
+      (select-window (car (doom-visible-windows)))
+      (apply oldfun args)
+      (when (window-live-p win)
+        (select-window win)))))
