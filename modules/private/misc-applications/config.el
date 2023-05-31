@@ -50,6 +50,7 @@
         "+webpaste"
         "+elfeed"
         "+leetcode"
+        "+wttrin"
 
         ;; Lookup
         "+devdocs"
