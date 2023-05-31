@@ -7,6 +7,6 @@
   ("n" tetris-start-game "Start game" :column "Misc")
   ("p" tetris-pause-game "Pause game" :column "Misc")
   ("SPC" tetris-move-bottom "Move bottom" :column "Movement")
-  ("<up>" tetris-rotate-prev "Rotate clockwise" "Movement")
+  ("<up>" tetris-rotate-prev "Rotate clockwise" :column "Movement")
   ("<left>" tetris-move-left "Move left" :column "Movement")
   ("<right>" tetris-move-right "Move right" :column "Movement"))
