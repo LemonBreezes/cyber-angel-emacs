@@ -624,7 +624,7 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "h") org-metaleft)
       (,(cae-keyboard-kbd "l") worf-new-right))))
 
-;; Rebind Evil commands.
+;; TODO Rebind Evil commands.
 
 ;;; Basically a custom input method
 
