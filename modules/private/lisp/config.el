@@ -29,14 +29,6 @@
   (map! :map lispy-mode-map
         [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
 
-;; Automatically mark dir-locals as safe on save.
-(add-hook 'find-file-hook
-          (cae-defun cae-lisp-dir-locals-set-up-h ()
-            (when (and (buffer-file-name)
-                       (string= (file-name-nondirectory (buffer-file-name))
-                                dir-locals-file))
-              (add-hook 'after-save-hook #'cae-mark-dir-locals-as-safe-h nil t))))
-
 ;; Use Emacs Lisp mode for dir-locals files.
 (add-to-list 'auto-mode-alist (cons (regexp-quote dir-locals-file)
                                     'emacs-lisp-mode))
