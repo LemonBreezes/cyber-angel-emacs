@@ -26,8 +26,8 @@
        (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                             cae-cheatsheets-minibuffer--last-hydra
                             cae-cheatsheets-minibuffer--last-workspace))
-     (when (not (and (eq (tab-bar--current-tab)
-                         cae-cheatsheets-minibuffer--last-tab)
+     (when (not (and (equal (tab-bar--current-tab)
+                            cae-cheatsheets-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
                          cae-cheatsheets-minibuffer--last-tab-index)))
        (setf (alist-get (tab-bar--current-tab)
@@ -72,7 +72,8 @@
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
+    (setf (alist-get (cons (tab-bar--current-tab-index) (tab-bar--current-tab))
+                     cae-cheatsheets-tab-bar-hydra-alist
                      nil nil #'equal)
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
@@ -80,11 +81,13 @@
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
   (when (featurep 'hydra)
     (hydra-keyboard-quit))
-  (when-let ((hydra (alist-get (tab-bar--current-tab)
+  (when-let ((hydra (alist-get (cons (tab-bar--current-tab-index)
+                                     (tab-bar--current-tab))
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil #'equal)))
-    (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
-                     nil t #'eq)
+    (setf (alist-get (cons (tab-bar--current-tab-index) (tab-bar--current-tab))
+                     cae-cheatsheets-tab-bar-hydra-alist
+                     nil t #'equal)
           nil)
     (run-with-timer 0.001 nil hydra)))
 
