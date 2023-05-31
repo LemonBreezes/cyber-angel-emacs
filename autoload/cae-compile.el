@@ -14,6 +14,7 @@
     ,(expand-file-name "config/default/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/contrib-present.el" doom-modules-dir)
     ,(expand-file-name "doom-start.el" doom-core-dir)
+    ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
 
     ;; I have not tested compiling these files but it's better not to compile
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
@@ -59,13 +60,13 @@
               (file-in-directory-p (buffer-file-name) cae-multi-local-dir)
               (not (string-match-p cae-compile-interesting-file-name-regexp
                                    (file-name-base (buffer-file-name))))
-              (not (string-match-p "flycheck_.*" (buffer-file-name))))
+              (not (string-prefix-p "flycheck_" (buffer-file-name))))
     (byte-compile-file (buffer-file-name))
     (emacs-lisp-native-compile-and-load)))
 
 ;;;###autoload
-(defun cae-compile-my-private-config ()
-  (interactive)
+(defun cae-compile-my-private-config (&optional arg)
+  (interactive "P")
   (mapc (lambda (s)
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
@@ -75,7 +76,8 @@
                   (and cae-compile--exit-code
                        (not (eq cae-compile--exit-code 0))
                        (not (file-exists-p (concat s "c"))))
-                  (file-newer-than-file-p (concat s "c") s))
+                  (and (file-newer-than-file-p (concat s "c") s)
+                       (not arg)))
             (ignore-errors (byte-compile-file s))
             (ignore-errors (native-compile s))))
         (nconc
