@@ -257,3 +257,10 @@ mark the string and call `edit-indirect-region' with it."
        (mark-word)
        (prog1 (region-end)
          (call-interactively #'titlecase-region))))))
+
+;;;###autoload
+(defun cae-avy-action-embark-act ()
+  (goto-char pt)
+  (set-mark (point))
+  (avy-forward-item)
+  (embark-act))
