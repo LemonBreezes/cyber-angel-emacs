@@ -967,8 +967,7 @@
 
   (use-package! expand-region-improved
     :defer t :init
-    (map! "C-=" #'eri/expand-region
-          "C--" #'eri/contract-region)
+    (map! "C-=" #'eri/expand-region)
     :config
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
