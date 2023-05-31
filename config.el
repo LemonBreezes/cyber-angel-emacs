@@ -48,6 +48,10 @@
       truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t)
 
+(after! newcomment
+  (setq comment-empty-lines 'eol
+        comment-padding nil))
+
 (when (and (modulep! :ui modeline)
            (not (modulep! :ui modeline +light)))
   (after! doom-modeline
