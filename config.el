@@ -519,7 +519,7 @@
 (when (modulep! :completion vertico)
   (use-package! consult
     :init
-    (map! "C-h C-m" #'consult-mode-command
+    (map! "C-h C-m" #'describe-keymap
           "C-h <return>" #'info-emacs-manual
           "C-x C-k C-k" #'consult-kmacro ; replaces
                                         ; `kmacro-end-or-call-macro-repeat',
