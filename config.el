@@ -1260,6 +1260,10 @@
 
 ;;; Email
 
+(setq user-full-name "StrawberryTea"
+      user-mail-address "look@strawberrytea.xyz"
+      mail-host-address "strawberrytea.xyz")
+
 (when (modulep! :email notmuch)
   (setq +notmuch-sync-backend 'mbsync
         +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
