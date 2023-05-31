@@ -73,7 +73,7 @@
    t)
 
   (define-repeat-map cae-dired-jump
-    ("j" #'cae-dired-jump))
+    ("j" cae-dired-jump))
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
