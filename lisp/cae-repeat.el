@@ -8,7 +8,7 @@
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB"
-        repeat-check-key nil)           ;Do not police our keybindings.
+        repeat-check-key nil)
 
   (eval
    `(define-repeat-map other-window
