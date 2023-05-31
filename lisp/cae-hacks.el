@@ -140,11 +140,11 @@
     (and (fboundp #'gcmh-mode) (gcmh-mode -1))
     (setq cae-hacks--gc-messages      garbage-collection-messages
           cae-hacks--gc-percentage    gc-cons-percentage
-          cae-hacks--gc-idle-timer
-          (run-with-idle-timer 20 nil #'cae-hacks-garbage-collect)
           garbage-collection-messages t
           gc-cons-threshold           cae-hacks-gc-cons-threshold
           gc-cons-percentage          cae-hacks-gc-cons-percentage)
+    (setq cae-hacks--gc-idle-timer
+          (run-with-idle-timer 20 nil #'cae-hacks-garbage-collect))
     (when (timerp (bound-and-true-p gcmh-idle-timer))
       (cancel-timer gcmh-idle-timer))
     (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
