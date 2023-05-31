@@ -184,3 +184,7 @@ It is meant to be used as a `post-gc-hook'."
    '(nil "((nil . (" ("" '(projectile-skel-variable-cons) n)
      resume: ")))")
    str arg))
+
+;; For some reason, I had to do this after updating Emacs30 to get
+;; `cape-yasnippet' to work.
+(defalias 'prefix #'string-prefix-p)
