@@ -20,6 +20,7 @@
         (indent-according-to-mode))
     (call-interactively 'lispy-newline-and-indent)))
 
+;;;###autoload
 (defun cae-mark-dir-locals-as-safe-h ()
   ;; Mark all variables in dir-locals as safe. Meant to be run in a
   ;; `.dir-locals.el' buffer.
