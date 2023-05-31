@@ -249,5 +249,4 @@
              (,(cae-keyboard-kbd "T") lispy-ert "ert")
              (">" lispy-toggle-thread-last "toggle last-threaded form")
              ("" lispy-x-more-verbosity :exit nil)
-             ("?" lispy-x-more-verbosity "help" :exit nil)))
-    ))
+             ("?" lispy-x-more-verbosity "help" :exit nil)))))
