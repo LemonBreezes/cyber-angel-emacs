@@ -2,8 +2,7 @@
 
 (load! "lisp/cae-fixup-leader-key")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-;;(load! "lisp/cae-keyboard")
-                                        ;Input hacks.
+(load! "lisp/cae-keyboard")             ;Input hacks.
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
