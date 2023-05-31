@@ -10,7 +10,7 @@
   (when (and (frame-width (selected-frame))
              (one-window-p t)
              (> (frame-width (selected-frame)) 160))
-    (add-transient-hook! 'dirvish-setup-hook
+    (add-transient-hook! 'doom-switch-buffer-hook
       (dirvish-layout-toggle))))
 
 ;;;###autoload
