@@ -215,7 +215,8 @@
 (after! xclip
   ;; This may have to be tweaked if I am running Emacs in a Daemon and some
   ;; instances are running in a terminal and some are running in a GUI.
-  (setq xclip-select-enable-clipboard (not (display-graphic-p))))
+  (setq xclip-select-enable-clipboard (not (or (display-graphic-p)
+                                               (daemonp)))))
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
