@@ -1,4 +1,4 @@
-;;; lisp/cae-repeat.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
 (defun other-window-previous (count &optional all-frames)
   "Select the previous window."
