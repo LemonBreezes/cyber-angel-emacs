@@ -72,13 +72,13 @@
 
   (cond ((modulep! :completion vertico)
          (map! :map eshell-mode-map
-               :ig "M-R" #'consult-history))
+               "C-r" #'consult-history))
         ((modulep! :completion ivy)
          (map! :map eshell-mode-map
-               :ig "M-R" #'counsel-esh-history))
+               "C-r" #'counsel-esh-history))
         ((modulep! :completion helm)
          (map! :map eshell-mode-map
-               :ig "M-R" #'helm-eshell-history)))
+               "C-r" #'helm-eshell-history)))
 
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
