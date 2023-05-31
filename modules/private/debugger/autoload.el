@@ -3,8 +3,8 @@
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
-  (dolist (session (dap--get-sessions))
-    (dolist (buf (doom-visible-buffers))
+  (dolist (buf (doom-visible-buffers))
+    (dolist (session (dap--get-sessions))
       (when (string-match-p (dap--debug-session-name session)
                             (buffer-name buf))
         (delete-window (get-buffer-window buf)))))
