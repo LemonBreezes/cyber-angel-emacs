@@ -513,10 +513,10 @@
 
 ;;; Editor
 
-(setq doom-leader-alt-key (if (modulep! :editor evil) "M-*" "C-c")
-      doom-localleader-alt-key (if (modulep! :editor evil) "M-* m" "C-c l")
-      doom-leader-key (if (modulep! :editor evil) "SPC" "C-c")
-      doom-localleader-key (if (modulep! :editor evil) "SPC m" "C-c l"))
+(setq doom-leader-alt-key "C-c"
+      doom-localleader-alt-key "C-c l"
+      doom-leader-key "C-c"
+      doom-localleader-key "C-c l")
 
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
