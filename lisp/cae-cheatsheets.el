@@ -91,7 +91,7 @@
                                #'equal)))
     (setf (alist-get (tab-bar-tab-name-all)
                      cae-cheatsheets-tab-bar-hydra-alist
-                     nil t #'equal)
+                     nil nil #'equal)
           nil)
     (run-with-timer 0.001 nil hydra)))
 
