@@ -21,7 +21,7 @@ command was called, go to its unstaged changes section."
                do (condition-case nil
                       (magit-section-forward)
                     (error (cl-return (magit-status-goto-initial-section-1))))))
-    (recenter)))
+    ))
 
 ;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status ()
