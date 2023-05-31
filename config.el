@@ -859,7 +859,8 @@
           "TAB" #'consult-info
           "W" #'consult-man
           :leader
-          :desc "Mode command" "M-x" #'consult-mode-command)
+          "M-x" #'consult-mode-command
+          (:desc "Keyboard macro"  "ok" #'consult-kmacro))
     :config
     (setq consult-preview-key 'any)
     (consult-customize
