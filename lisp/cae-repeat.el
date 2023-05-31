@@ -77,14 +77,14 @@
        "9" workspace-switch-to-8)))
 
 
-       (defun cae-repeat-ignore-when-hydra-active-a ()
-         (bound-and-true-p hydra-curr-map))
+  (defun cae-repeat-ignore-when-hydra-active-a ()
+    (bound-and-true-p hydra-curr-map))
 
-       (advice-add #'repeat-post-hook :before-until
-                   #'cae-repeat-ignore-when-hydra-active-a)
+  (advice-add #'repeat-post-hook :before-until
+              #'cae-repeat-ignore-when-hydra-active-a)
 
-       (autoload 'embark-verbose-indicator "embark")
-       (autoload 'which-key--create-buffer-and-show "which-key"))
+  (autoload 'embark-verbose-indicator "embark")
+  (autoload 'which-key--create-buffer-and-show "which-key"))
 
 ;; This is so that my repeat maps are reloaded when I save this file.
 (when cae-config-finished-loading
