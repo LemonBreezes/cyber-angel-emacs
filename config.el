@@ -30,7 +30,11 @@
 (when (modulep! :editor snippets)
   (define-key doom-leader-map "&" nil)
   (map! :leader
-        :desc "snippets" "y" doom-leader-snippets-map))
+        :desc "snippets" "y" doom-leader-snippets-map)
+  (after! which-key
+    (setq which-key-replacement-alist
+          (delete '(("\\`C-c &") nil . "snippets")
+                    which-key-replacement-alist))))
 
 ;;; UI
 
