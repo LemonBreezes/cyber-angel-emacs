@@ -152,4 +152,5 @@
       which-key-replacement-alist)
 
 (map! :leader
-      :desc "Project bookmarks" "C-b" #'cae-project-bookmark)
+      "C-b" #'cae-project-bookmark
+      "RET" #'cae-project-bookmark-set)
