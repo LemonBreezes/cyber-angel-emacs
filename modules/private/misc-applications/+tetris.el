@@ -10,4 +10,5 @@
         "t" #'autotetris)
   :config
   (map! :map tetris-mode-map
-        "<f6>" #'+tetris-hydra/body))
+        "<f6>" #'+tetris-hydra/body
+        "a" #'autotetris-mode))
