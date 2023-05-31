@@ -406,8 +406,7 @@
                #'+default--newline-indent-and-continue-comments-a)
 
 ;; General keybindings.
-(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the
-                                        ;kill-ring.
+(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
