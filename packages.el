@@ -2,7 +2,8 @@
 (unpin! t)
 (disable-packages! avy
                    smartparens
-                   evil-escape)
+                   evil-escape
+                   flyspell)
 
 ;;; UI
 
