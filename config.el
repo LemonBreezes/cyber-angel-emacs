@@ -111,7 +111,7 @@
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
-    :ttl nil)
+    :ttl nil :vslot 99)
   (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
     :quit nil :ttl t)
@@ -125,15 +125,13 @@
   (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)" :size #'cae-popup-resize-help-buffer
     :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -8)
   (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
-    :height 0.6 :side 'right :select t :quit t :ttl 0)
+    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
-    :select t :quit t :ttl nil)
+    :select t :quit t :ttl nil :vslot 99)
   (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
-    :select t :ttl nil)
+    :select t :ttl nil)                 ; which vslot?
   (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
-    :side 'right :select t :ttl nil)
+    :side 'right :select t :ttl nil)    ; which vslot?
   (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
   (after! embark
     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
