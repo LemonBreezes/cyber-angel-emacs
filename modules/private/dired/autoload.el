@@ -15,7 +15,7 @@
 
 (defun cae-dired-dirvish-not-fullscreen-p ()
   (not (and (derived-mode-p 'dired-mode)
-             (one-window-p))))
+            (one-window-p))))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
