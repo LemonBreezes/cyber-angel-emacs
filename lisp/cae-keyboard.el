@@ -46,4 +46,5 @@
   "list of the numbers on the keyboard in normal order")
 
 (defvar home-row-numbere nil)
+
 (home-row-numbers)
