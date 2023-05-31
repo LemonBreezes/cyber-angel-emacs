@@ -216,8 +216,12 @@
 
 (after! xclip
   (when (string-suffix-p "-WSL2" operating-system-release)
-    (setenv "PATH" (concat (getenv "PATH") ":/mnt/c/Windows/System32"))
-    (setq xclip-method 'powershell)))
+    ;; For some reason, this doesn't work and I still have to edit my shell
+    ;; config.
+    (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
+      (setenv "PATH"
+              (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))))
+  (setq xclip-method 'powershell))
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
