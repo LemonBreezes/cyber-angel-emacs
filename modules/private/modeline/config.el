@@ -72,8 +72,7 @@
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode))
-
-(after! compile
+  (after! compile
     (setq-default minions-mode-line-modes
                   (cons
                    (list
@@ -85,8 +84,7 @@
                                 (make-mode-line-mouse-map
                                  'mouse-2
                                  #'compilation-goto-in-progress-buffer)))
-                   (default-value 'minions-mode-line-modes)))))
-
-(map! "<f9>" #'minions-minor-modes-menu)
+                   (default-value 'minions-mode-line-modes))))
+  (map! "<f9>" #'minions-minor-modes-menu))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
