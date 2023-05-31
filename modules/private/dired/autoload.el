@@ -36,7 +36,8 @@
 ;;    (dirvish-quit))
 ;;  (apply oldfun args))
 
-;; TODO Patch these for the behavior I want.
+;; TODO Patch these for the behavior I want. Turn them into `:before' advices
+;; and use hooks if necessary.
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
