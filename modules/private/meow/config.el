@@ -181,13 +181,13 @@
   (map! :leader
         "h" help-map)
   (setq meow-keypad-start-keys
-        '((?c . ?c)
+        `((?c . ?c)
           (?h . ?h)
           (?x . ?x)
           ;; For popups
           (?~ . ?~)
           (?` . ?`)
-          (?\" . ?\")))
+          (,(cae-keyboard-remap-char ?`) . ,(cae-keyboard-remap-char ?`))))
   (appendq! meow-mode-state-list
             '((helpfulmode . normal)
               (Man-mode . normal)
