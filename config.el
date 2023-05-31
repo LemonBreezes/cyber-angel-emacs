@@ -900,6 +900,7 @@
 
     (define-key mc/keymap (kbd "C-. .")   'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")   'mc/compare-chars)))
+
 
 ;;; Term
 
