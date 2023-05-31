@@ -553,5 +553,5 @@
   (define-prefix-command 'org-babel-map)
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
-(defvar cae-config-finished nil
+(defvar cae-config-finished t
   "Whether the configuration has finished loading.")
