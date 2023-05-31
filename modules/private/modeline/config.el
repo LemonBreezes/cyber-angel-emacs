@@ -143,7 +143,6 @@
           auto-fill-mode
           auto-revert-mode
           auto-revert-tail-mode
-          spell-fu-mode
           font-lock-mode
           highlight-changes-mode
           ruler-mode))
