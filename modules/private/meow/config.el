@@ -198,4 +198,9 @@
   (meow/setup-keypad)
   (map! :map meow-normal-state-keymap
         "DEL" doom-leader-map)
+  (appendq! meow-mode-state-list
+            '((helpful-mode . normal)
+              (Man-mode . normal)
+              (message-buffer-mode . normal)
+              (eshell-mode . insert)))
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
