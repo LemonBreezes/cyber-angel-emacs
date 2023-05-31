@@ -2,6 +2,7 @@
 
 ;;;###autoload
 (defun cae-kill-buffer-a (orig-func &optional buffer-or-name)
+  "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
   (setq buffer-or-name (or buffer-or-name (current-buffer)))
   (catch 'quit
     (save-window-excursion
