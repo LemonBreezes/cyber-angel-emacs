@@ -103,6 +103,7 @@ overriding other keymaps."
            (web +lsp +tree-sitter)
            (sh +lsp +tree-sitter)
            (nix +lsp +tree-sitter)
+           (solidity +lsp +tree-sitter)
 
            :os
            (:if IS-MAC macos)
