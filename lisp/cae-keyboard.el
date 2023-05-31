@@ -10,19 +10,30 @@
     (?i ?l)
     (?x ?,)
     (?z)
+    (?-)
     ))
 
+(characterp 88)
 (cl-defun cae-keyboard-remap (arg)
   (when (characterp arg)
     (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
       (when orbit
         (cl-return-from cae-keyboard-remap
           (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)))))
+  (when (json-alist-p arg)
+    (+log "arg is an alist" arg)
+    (cl-loop for (key . value) in arg
+             collect
+             (cons (cae-keyboard-remap key) value)))
   (cl-return-from cae-keyboard-remap
     (cl-mapcar #'cae-keyboard-remap arg)))
 
+
 (defun cae-keyboard-remap-to-strings (arg)
   (cl-mapcar #'char-to-string (cae-keyboard-remap arg)))
+
+(defun cae-keyboard-strings (arg)
+  (cl-mapcar #'char-to-string arg))
 
 (cl-assert (eq (cae-keyboard-remap ?w) ?b))
 (cl-assert (eq (cae-keyboard-remap ?b) ?j))
