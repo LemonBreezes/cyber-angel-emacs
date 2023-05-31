@@ -417,6 +417,12 @@
 (after! worg
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "Move")
+           (,(cae-keyboard-kbd "k") wspecial-worf-up "Move")
+           (,(cae-keyboard-kbd "h") wspecial-worf-left "Move")
+           (,(cae-keyboard-kbd "l") wspecial-worf-right "Move")
+           (,(cae-keyboard-kbd "f") wspecial-hydra-worf-f/body "Move")
+           (,(cae-keyboard-kbd "J") wspecial-outline-next-visible-heading "Move")
+           (,(cae-keyboard-kbd "K") wspecial-outline-previous-visible-heading "Move")
            )))))
 
 ;;; Basically a custom input method
