@@ -768,7 +768,6 @@
         "<f6>" #'cae-symbol-overlay-cheatsheet
         "N" #'symbol-overlay-switch-forward
         "P" #'symbol-overlay-switch-backward)
-  (setq symbol-overlay-idle-time 0.2)
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
   ;; overlay in the buffer. This is probably a bug.
