@@ -69,8 +69,7 @@
           ;; (overwrite-mode)
           (ruler-mode)
           (visual-line-mode)
-          (display-fill-column-indicator-mode)
-          (rainbow-mode)))
+          (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode))
 
