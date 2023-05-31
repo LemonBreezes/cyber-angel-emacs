@@ -9,7 +9,6 @@
   (disable-packages! flycheck))
 
 ;;; UI
-
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
@@ -22,7 +21,6 @@
 (package! ef-themes)
 
 ;;; Tools
-
 (package! nov)
 (package! syslog-mode)
 
@@ -39,7 +37,6 @@
                           :pre-build ("make")))
 
 ;;; Editor
-
 (package! pp+)
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
@@ -57,7 +54,6 @@
 (package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
 
 ;;; Autocompletion
-
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 (package! isearch-dabbrev)
