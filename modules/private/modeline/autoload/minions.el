@@ -3,7 +3,6 @@
 ;;;###autoload
 (defun cae-modeline-minions-c-setup ()
   (require 'glasses)
-  (require 'hideif)
   (setq-local minions-available-modes
               (append '((hide-ifdef-mode)
                         (glasses-mode))
