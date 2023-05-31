@@ -75,5 +75,4 @@
 (use-package! theme-magic
   :defer t
   :init
-  ;; Auto reload theme shortly after startup
-  (run-with-idle-timer 1.5 nil (lambda () (add-hook 'doom-load-theme-hook 'theme-magic-from-emacs))))
+  (theme-magic-export-theme-mode +1))
