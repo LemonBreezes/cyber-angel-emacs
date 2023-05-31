@@ -149,10 +149,10 @@
        (and (symbol-file this-command)
             (string= (file-name-base (symbol-file this-command)) "ace-window")))))
 
-(dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
-  (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
-                                        (kbd key-from)
-                                        #'cae-translate-number-row-p))
+;;(dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
+;;  (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
+;;                                        (kbd key-from)
+;;                                        #'cae-translate-number-row-p))
 
 ;;; Lispy
 
