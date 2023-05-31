@@ -63,8 +63,8 @@
 (use-package! circadian
   :config
   (setq circadian-themes
-        '((:sunrise . modus-operandi)
-          (:sunset  . modus-vivendi)))
+        '((:sunrise . modus-operandi-tinted)
+          (:sunset  . modus-vivendi-tinted)))
   (if (and calendar-latitude calendar-longitude)
       (let ((hook (if (daemonp)
                       'server-after-make-frame-hook
