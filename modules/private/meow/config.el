@@ -205,9 +205,7 @@
           (meow-beacon-change . meow-beacon-change-char)
           ;; These are the ones that are not bound by default.
           (meow-replace . meow-yank)    ;Basically makes `meow-yank' obsolete.
-          (meow-reverse . exchange-point-and-mark)
-          (cae-meow-save . cae-meow-save-line) ;Not bound to any keys yet.
-          ))
+          (meow-reverse . exchange-point-and-mark)))
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
@@ -222,7 +220,7 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
-  ;; Save deleted regions to the `delete-selection-save-to-register' register.
+  ;; Save deleted regions to the `delete-selection-save-to-register' register
   (advice-add #'meow-delete :before #'cae-meow-delete-save-to-register-a)
   (advice-add #'meow-backward-delete :before #'cae-meow-delete-save-to-register-a)
   ;; Ensure the cursor is updated when running Emacs in a terminal.
