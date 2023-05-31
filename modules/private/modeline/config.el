@@ -46,7 +46,6 @@
           whitespace-mode
           highlight-quoted-mode
           diff-hl-mode
-          eat-eshell-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -64,8 +63,18 @@
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(flycheck-mode
                                   defining-kbd-macro
-                                  projectile-mode))
+                                  projectile-mode
+                                  eat-eshell-mode
+                                  ))
+
+  (add-to-list 'minions-mode-line-modes
+               (assq 'compilation-in-progress mode-line-modes))
+  (add-to-list 'minions-mode-line-modes
+               (assq 'repeat-in-progress mode-line-modes))
   (minions-mode +1))
+
+(after! repeat
+  (setq repeat-echo-function #'repeat-echo-mode-line))
 
 (column-number-mode +1)
 
