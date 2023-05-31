@@ -36,48 +36,6 @@
         (puthash file (cae-project--bookmark-alist-from-file file)
                  cae-project-bookmark-cache))))
 
-(defun cae-project-bookmark-jump ()
-  "Jump to a bookmark in the current project."
-  (interactive)
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
-    (call-interactively #'bookmark-jump)))
-
-(defun cae-project-bookmark-set ()
-  "Set a bookmark in the current project."
-  (interactive)
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
-    (call-interactively #'bookmark-set)
-    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
-
-(defun cae-project-bookmark-delete ()
-  "Delete a bookmark in the current project."
-  (interactive)
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
-    (call-interactively #'bookmark-delete)))
-
-(defun cae-project-bookmark-rename ()
-  "Rename a bookmark in the current project."
-  (interactive)
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
-    (call-interactively #'bookmark-rename)))
-
-(defun cae-project-bookmark-save ()
-  "Save the current project's bookmarks."
-  (interactive)
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist)
-    (make-directory (file-name-directory bookmark-default-file) t)
-    (bookmark-write-file bookmark-default-file)))
-
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
   (interactive)
