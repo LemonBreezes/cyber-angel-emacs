@@ -182,7 +182,7 @@
           flycheck-posframe-border-use-error-face t)))
 
 (use-package! goggles
-  :init
+  :defer t :init
   (add-hook 'prog-mode-hook #'goggles-mode)
   (add-hook 'text-mode-hook #'goggles-mode)
   (add-hook 'conf-mode-hook #'goggles-mode)
