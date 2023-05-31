@@ -919,13 +919,15 @@
     (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
     (add-to-list 'copilot-disable-predicates
                  (cae-defun cae-disable-copilot-in-gptel-p ()
-                   (bound-and-true-p gptel-mode)))
+                   (bound-and-true-p gptel-mode))
+                 nil #'eq)
     (when (modulep! :editor snippets)
       (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
     (when (modulep! :editor multiple-cursors)
       (add-to-list 'copilot-disable-predicates
                    (cae-defun cae-multiple-cursors-active-p ()
-                     (bound-and-true-p multiple-cursors-mode)))))
+                     (bound-and-true-p multiple-cursors-mode))
+                   nil #'eq)))
 
   (use-package! isearch-dabbrev
     :defer t :init
