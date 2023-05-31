@@ -3,15 +3,19 @@
 ;;;###autoload
 (defun cae-debugger-dap-quit-session-a (_)
   (let ((ignore-window-parameters t))
-    (cl-loop for buf being the buffers
-             when (string-match-p "gdb" (buffer-name buf)) do
-             (ignore-errors (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
+    (cl-loop for win in (window-list)
+             when (string-match-p "gdb" (buffer-name (window-buffer win))) do
+             (delete-window win))
+    (cl-loop for buf in (buffer-list)
+             when (and (string-match-p "gdb" (buffer-name buf))
+                       (process-live-p (get-buffer-process buf)))
+             do (ignore-errors (interrupt-process (get-buffer-process buf))))))
 
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
-  (cae-debugger-dap-quit-session-a nil)
-  (ignore-errors (dap-delete-all-sessions))
+  ;;(dap-delete-all-sessions)
+  ;;(cae-debugger-dap-quit-session-a nil)
   (when-let ((workspace-project (cl-find (+workspace-current-name)
                                          (projectile-relevant-known-projects)
                                          :test #'string-match-p)))
