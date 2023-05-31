@@ -545,12 +545,12 @@
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
   (let ((bindings
-         '(("M-(" sp-wrap-round "Editing")
-           ("M-S" sp-split-sexp "Editing")
-           ("M-J" sp-join-sexp "Editing")
-           ("M-C" sp-convolute-sexp "Editing")
-           ("C-M-t" sp-transpose-sexp "Editing")
-           ("C-x C-t" sp-transpose-hybrid-sexp "Editing") ;Overrides
+         '(("M-(" sp-wrap-round "Other")
+           ("M-S" sp-split-sexp "Other")
+           ("M-J" sp-join-sexp "Other")
+           ("M-C" sp-convolute-sexp "Other")
+           ("C-M-t" sp-transpose-sexp "Other")
+           ("C-x C-t" sp-transpose-hybrid-sexp "Other") ;Overrides
                                         ;`transpose-lines'.
            ("C-M-k" sp-kill-sexp "Deleting")
            ("C-M-S-k" sp-kill-hybrid-sexp "Deleting")
