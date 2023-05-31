@@ -400,7 +400,8 @@
   ;; This is how we get curly braces working in C without `smartparens'.
   (setq electric-pair-pairs '((?\" . ?\")
                               (?\{ . ?\})
-                              (?\[ . ?\]))
+                              (?\[ . ?\])
+                              (?\( . ?\)))
         electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
   (electric-pair-mode +1)
   (map! [remap newline] nil)
