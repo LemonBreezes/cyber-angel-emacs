@@ -456,6 +456,10 @@
         ispell-dictionary "en_US"
         ispell-help-in-bufferp 'electric))
 
+(when (modulep! :emacs undo)
+  (after! undo-fu
+    (setq undo-fu-allow-undo-in-region t)))
+
 ;; Make `smartparens' optional.
 (unless (modulep! :config default +smartparens)
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
@@ -615,9 +619,7 @@
   :after tramp-sh
   :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-  (auto-sudoedit-mode +1))
-
-
+  (auto-sudoedit-mode +1))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
