@@ -34,11 +34,11 @@
 
 (add-hook 'pre-redisplay-functions #'mmv-draw-mark)
 
-(defun mmv-toggle-mark-visibility ()
-  "Toggles the mark's visiblity and redraws it (whether invisible or visible)."
-  (interactive)
-  (setq mmv-is-mark-visible (not mmv-is-mark-visible))
-  (if mmv-is-mark-visible
-      (set-face-attribute 'mmv-face nil :background (face-background 'match nil t) :foreground "white")
-    (set-face-attribute 'mmv-face nil :background 'unspecified :foreground 'unspecified))
-  (mmv-draw-mark))
+;;(defun mmv-toggle-mark-visibility ()
+;;  "Toggles the mark's visiblity and redraws it (whether invisible or visible)."
+;;  (interactive)
+;;  (setq mmv-is-mark-visible (not mmv-is-mark-visible))
+;;  (if mmv-is-mark-visible
+;;      (set-face-attribute 'mmv-face nil :background (face-background 'match nil t) :foreground "white")
+;;    (set-face-attribute 'mmv-face nil :background 'unspecified :foreground 'unspecified))
+;;  (mmv-draw-mark))
