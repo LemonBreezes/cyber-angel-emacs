@@ -45,6 +45,22 @@
     (bookmark-set name no-overwrite)
     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
 
+(defun cae-project-bookmark-load (file &optional overwrite no-msg default)
+  "Load a bookmark file into the current project's bookmarks."
+  (interactive
+   (let ((default (abbreviate-file-name
+		   (or (car bookmark-bookmarks-timestamp)
+		       (cae-project--get-bookmark-file))))
+	 (prefix current-prefix-arg))
+     (list (read-file-name (format "Load bookmarks from: (%s) " default)
+			   (file-name-directory default) default 'confirm)
+	   prefix nil prefix)))
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
+    (bookmark-load file overwrite no-msg default)
+    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
   (interactive)
@@ -125,6 +141,9 @@
     (if (assoc name bookmark-alist)
         (bookmark-jump name)
       (cae-project-bookmark-set name))))
+
+(setf (alist-get 'cae-project-bookmark marginalia-command-categories)
+      'bookmark)
 
 (map! :leader
       :prefix "p"
