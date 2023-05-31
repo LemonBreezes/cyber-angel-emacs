@@ -47,7 +47,7 @@
             #'cae-cheatsheets-workspace-hydra-resume-h))
 
 ;; Haven't done this for Hercules yet and I might never get around to it since I
-;; don't use Hercules that much.
+;; don't use Hercules that much. Same for the tab bar stuff.
 
 ;;; Quit before switching tabs
 
