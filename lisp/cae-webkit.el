@@ -1,4 +1,4 @@
-;;; lisp/cae-webkit.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/lisp/cae-webkit.el -*- lexical-binding: t; -*-
 
 (use-package! webkit
   :defer t
