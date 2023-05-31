@@ -259,7 +259,7 @@ mark the string and call `edit-indirect-region' with it."
          (call-interactively #'titlecase-region))))))
 
 ;;;###autoload
-(defun cae-avy-do (action)
+(defun cae-avy-do (action pt)
   (goto-char pt)
   (save-mark-and-excursion
     (when (eq avy-command 'avy-goto-line)
@@ -274,7 +274,8 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
-  (apply-partially #'cae-avy-do #'embark-act))
+  (apply-partially #'cae-avy-do
+                   (lambda () (call-interactively #'embark-act))))
 
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
