@@ -195,7 +195,8 @@
                     (message-buffer-mode . normal)
                     (eshell-mode . insert)
                     (eat-mode . insert)
-                    (vterm-mode . insert))))
+                    (vterm-mode . insert))
+                  :test (lambda (x y) (eq (car x) (car y)))))
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
