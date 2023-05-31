@@ -8,7 +8,7 @@
 
 (make-directory (expand-file-name "secrets" doom-user-dir) t)
 (dolist (file (directory-files
-               (expand-file-name "secrets/" doom-user-dir) t "\\.el$"))
+               (expand-file-name "secrets" doom-user-dir) t "\\.el$"))
   (load file nil t))
 
 ;;; UI
