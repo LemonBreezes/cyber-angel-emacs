@@ -84,7 +84,7 @@
   "Apply extra font-lock rules to bookmark list buffers."
   :init-value nil
   :global t
-  (if prot-bookmark-extra-keywords
+  (if cae-bookmark-extra-keywords
       (progn
         (font-lock-flush (point-min) (point-max))
         (font-lock-add-keywords nil cae-bookmark-keywords nil)
