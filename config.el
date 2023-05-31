@@ -1007,7 +1007,7 @@
 
  ;;; Org
 
-(setq doom-scratch-initial-major-mode 'org-mode)
+;;(setq doom-scratch-initial-major-mode 'org-mode)
 
 (after! calendar
   (setq calendar-week-start-day 1))
