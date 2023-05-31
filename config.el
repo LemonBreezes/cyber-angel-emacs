@@ -467,7 +467,7 @@
                  (spell-fu-mode -1)))))
 
 
-;;;;; Editor
+;;; Editor
 
 (load! "lisp/cae-repeat")
 (add-hook 'doom-first-buffer-hook
