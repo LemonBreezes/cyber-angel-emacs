@@ -270,7 +270,7 @@ x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :selec
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
-(load! "lisp/cae-repeat")
+(load! "lisp/cae-repeat")!
 (map! "C-<f4>" #'tab-close)
 
 (map! [remap backward-kill-word] #'doom/delete-backward-word
@@ -360,7 +360,8 @@ x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :selec
   :defer t :init
   (add-hook 'ibuffer-mode-hook #'display-line-numbers-mode)
   :config
-  (setq ibuffer-formats
+  (setq ibuffer-always-show-last-buffer t
+        ibuffer-formats
         '((mark modified read-only locked " "
            (name 23 23 :left :elide)
            " "
