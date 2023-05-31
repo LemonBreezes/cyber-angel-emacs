@@ -15,8 +15,6 @@
 (setq native-comp-async-jobs-number (num-processors))
 
 (defalias 'general-override-mode-map global-map)
-(after! general
-  (general-override-mode -1))
 
 (doom! :completion
        (vertico +icons)
