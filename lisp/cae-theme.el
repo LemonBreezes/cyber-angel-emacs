@@ -53,5 +53,3 @@
     (setq circadian-themes '((:sunrise . ef-trio-light)
                              (:sunset  . ef-trio-dark)))
     (circadian-setup)))
-
-;; (map! "<f5>" #'modus-themes-toggle)
