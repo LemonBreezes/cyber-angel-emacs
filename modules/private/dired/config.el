@@ -121,6 +121,8 @@
 ;; opening a file in a single window.
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 
+(map! [remap dired-jump] #'cae-dired-jump)
+
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
