@@ -275,6 +275,7 @@
 (map! "C-<f4>" #'tab-close
       "C-x 4 I" #'ibuffer-other-window)
 
+(windmove-default-keybindings)
 
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
