@@ -689,8 +689,7 @@
          "<tab>" #'completion-at-point)
         (:after corfu
          :map corfu-map
-         "C-M-i" #'corfu-move-to-minibuffer
-         "}" #'corfu-quick-complete)    ;`}' is easy to type on my keyboard layout
+         "C-M-i" #'corfu-move-to-minibuffer)
         :prefix "M-+"
         "c" #'completion-at-point       ;capf
         "t" #'complete-tag              ;etags
