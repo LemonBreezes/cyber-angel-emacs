@@ -22,6 +22,7 @@ Meant to be used like:
 
 ;;;###autoload (autoload 'cae-magit-forge-post-hydra/body "private/vc/autoload" nil t)
 (defhydra cae-magit-forge-post-hydra (:color blue)
+  ("<f6>" nil "Exit" :exit t)
   ("C-c C-c" forge-post-submit "Submit")
   ("C-c C-e" forge-post-dispatch  "Dispatch")
   ("C-c C-k" forge-post-cancel "Cancel"))
