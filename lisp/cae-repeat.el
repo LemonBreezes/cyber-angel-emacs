@@ -34,7 +34,10 @@
       ("o" tab-next
        "O" tab-previous
        ,(cae-keyboard-kbd "0") cae-tab-close-and-select-right
-       "0" cae-tab-close-and-select-right)))
+       "0" cae-tab-close-and-select-right))
+   `(define-repeat-map tab-close
+      (,(cae-keyboard-kbd "0") tab-close
+       "0" tab-close)))
 
   ;;Currently part of `other-window' repeat map
   ;;(define-repeat-map winner
