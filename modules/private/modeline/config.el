@@ -87,14 +87,8 @@
                                  'mouse-2
                                  #'compilation-goto-in-progress-buffer)))
                    (default-value 'minions-mode-line-modes))))
-  (after! repeat
-    (setq-default minions-mode-line-modes
-                  (cons (list 'repeat-in-progress repeat-echo-mode-line-string)
-                        (default-value 'minions-mode-line-modes))))
-  (minions-mode +1))
 
-(after! repeat
-  (setq repeat-echo-function #'repeat-echo-mode-line))
+  (minions-mode +1))
 
 (column-number-mode +1)
 
