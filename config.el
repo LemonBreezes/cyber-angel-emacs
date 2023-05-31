@@ -30,7 +30,7 @@
       (setq which-key-replacement-alist
             (delete '(("\\`C-c !\\'") nil . "checkers")
                     which-key-replacement-alist)))))
-(when (modulep! editor snippets)
+(when (modulep! :editor snippets)
   (dolist (p (cdr (lookup-key doom-leader-map "&")))
     (cl-destructuring-bind (key . binding) p
       (define-key doom-leader-map (kbd (concat "y " (char-to-string key))) binding)))
