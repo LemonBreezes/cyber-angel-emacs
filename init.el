@@ -1,8 +1,5 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(defvar cae-config-compilation-enabled nil
-  "Whether on-kill native compilation is enabled.")
-
 (setq load-prefer-newer t)
 (random t)                              ;Set the random seed.
 
