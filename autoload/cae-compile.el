@@ -41,6 +41,16 @@
         (advice-remove #'fboundp #'tmp/fboundp-a)
         (advice-remove #'exwm-input--update-focus-commit #'ignore)))))
 
+(defun cae-compile--file-not-in-unused-module-p (&optional file-name)
+  (not (when-let* ((file-name (or file-name (buffer-file-name)))
+                   (file-path (or (and (file-directory-p file-name)
+                                       (expand-file-name file-name))
+                                  (file-name-directory file-name)))
+                   (module-dir (cl-find-if (lambda (x) (string-prefix-p x file-path))
+                                           doom-modules-dirs))
+                   (module (doom-module-from-path file-path)))
+         (not (doom-module-p (car module) (cdr module))))))
+
 ;;;###autoload
 (defun cae-compile-this-elisp-file ()
   (unless (or no-byte-compile
