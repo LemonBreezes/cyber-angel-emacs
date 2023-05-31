@@ -666,7 +666,8 @@
                 save-abbrevs 'silently)
   (map! :map edit-abbrevs-mode-map
         [remap save-buffer] #'abbrev-edit-save-buffer)
-  (map! :map abbrev-map "e" #'edit-abbrevs))
+  (map! :map abbrev-map "e" #'edit-abbrevs)
+  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 
 (use-package! ibuffer
   :defer t
