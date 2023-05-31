@@ -24,7 +24,7 @@
 (package! nov)
 (package! syslog-mode)
 
-;; Not referenced in my config.
+;; These are autoloaded without explicit configuration.
 (package! crontab-mode)
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
