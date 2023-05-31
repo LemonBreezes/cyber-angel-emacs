@@ -292,16 +292,18 @@ mark the string and call `edit-indirect-region' with it."
          (vertico-posframe-size-function))
     (setf vertico-posframe-size-function
           `(lambda (_)
-             '(:height ,(frame-height
-                         (cl-find-if (lambda (frame)
-                                       (eq (frame-parameter frame 'posframe-hidehandler)
-                                           #'vertico-posframe-hidehandler))
-                                     (visible-frame-list)))
-               :width ,(frame-width
-                        (cl-find-if (lambda (frame)
-                                      (eq (frame-parameter frame 'posframe-hidehandler)
-                                          #'vertico-posframe-hidehandler))
-                                    (visible-frame-list)))
+             '(:height
+               ,(frame-height
+                 (cl-find-if (lambda (frame)
+                               (eq (frame-parameter frame 'posframe-hidehandler)
+                                   #'vertico-posframe-hidehandler))
+                             (visible-frame-list)))
+               :width
+               ,(frame-width
+                 (cl-find-if (lambda (frame)
+                               (eq (frame-parameter frame 'posframe-hidehandler)
+                                   #'vertico-posframe-hidehandler))
+                             (visible-frame-list)))
                :min-height nil
                :min-width nil)))
     (embark-act arg)))
