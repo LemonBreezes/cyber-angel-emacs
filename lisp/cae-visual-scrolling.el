@@ -28,8 +28,6 @@
   (with-selected-window (next-window)
     (call-interactively 'View-scroll-half-page-backward)))
 
-;;(setq scroll-preserve-screen-position 'always)
-
 (advice-add #'View-scroll-half-page-forward :around
             #'my-indicate-scroll-forward)
 
