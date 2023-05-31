@@ -180,11 +180,12 @@
 (use-package! parrot
   :after (:any magit org)
   :init
-  (add-hook 'before-save-hook
-            (cae-defun cae-modeline-load-parrot-h ()
-              (when (bound-and-true-p git-auto-commit-mode)
-                (parrot-mode +1)
-                (remove-hook 'before-save-hook #'cae-modeline-load-parrot-h))))
+  ;; Use `parrot' for indicating a `git push' by `git-auto-commit-mode'.
+  (advice-add #'gac-push
+              :after
+              (cae-defun cae-modeline-gac-party-on-push-a (buffer)
+                (let ((proc (get-buffer-process "*git-auto-push*")))
+                  (parrot--party-while-process proc))))
   :config
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
@@ -192,12 +193,6 @@
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
-  ;; Use `parrot' for indicating a `git push' by `git-auto-commit-mode'.
-  (advice-add #'gac-push
-              :after
-              (cae-defun cae-modeline-gac-party-on-push-a (buffer)
-                (let ((proc (get-buffer-process "*git-auto-push*")))
-                  (parrot--party-while-process proc))))
   (parrot-mode +1))
 (use-package! parrot-rotate
   :defer t
