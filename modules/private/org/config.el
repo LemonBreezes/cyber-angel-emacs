@@ -58,6 +58,18 @@
                 (let ((parent (org-element-property :parent (org-element-at-point))))
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
+  (advice-add #'worf-up
+              :around
+              (cae-defun cae-org-worf-up-a (oldfun arg)
+                (if (eq 'property-drawer (car (org-element-at-point)))
+                    (org-up-element)
+                  (funcall oldfun arg))))
+  (advice-add #'worf-down
+              :around
+              (cae-defun cae-org-worf-down-a (oldfun arg)
+                (when (eq 'property-drawer (car (org-element-at-point)))
+                  (org-up-element))
+                (funcall oldfun arg)))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
