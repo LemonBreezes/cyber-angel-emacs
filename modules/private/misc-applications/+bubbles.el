@@ -8,4 +8,5 @@
         "b" #'bubbles)
   :config
   (map! :map bubbles-mode-map
-        :n "RET" #'bubbles-plop))
+        :n "RET" #'bubbles-plop
+        "<f6>" #'+bubbles-hydra/body))
