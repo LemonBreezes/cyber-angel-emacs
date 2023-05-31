@@ -41,7 +41,25 @@
     (map! :map magit-mode-map
           :n "yc" #'git-link-commit))
   (after! file-info
-    ))
+    (let ((pos (cl-position-if
+                (lambda (x) (equal (plist-get x :handler)
+                                   '(file-info--get-headline "GIT")))
+                file-info-handlers)))
+      (dolist (info-handler '((:name "Git link"
+                               :handler (cl-letf (((symbol-function #'git-link--new)
+                                                   (symbol-function #'identity)))
+                                          (call-interactively #'git-link))
+                               :face font-lock-string-face
+                               :bind "g")
+                              (:name "Git link homepage"
+                               :handler (cl-letf (((symbol-function #'git-link--new)
+                                                   (symbol-function #'identity)))
+                                          (call-interactively #'git-link-homepage))
+                               :cache t
+                               :face font-lock-string-face
+                               :bind "G")))
+        (cl-pushnew info-handler (nthcdr (1+ pos) file-info-handlers)
+                    :test (lambda (x y) (equal (plist-get x :name) (plist-get y :name))))))))
 
 (use-package! gitignore-templates
   :defer t)
