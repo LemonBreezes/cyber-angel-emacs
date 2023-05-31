@@ -320,6 +320,9 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
+;; Query buffers for a diff before killing them.
+(advice-add #'doom-kill-buffer-fixup-windows :override #'cae-kill-buffer-fixup-windows)
+
 ;; Kill buffers without asking.
 (setq kill-buffer-query-functions
   (remq 'process-kill-buffer-query-function
