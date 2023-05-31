@@ -638,6 +638,7 @@
     (add-to-list '+ligatures-in-modes 'org-mode t)))
 
 (after! org
+  ;; TODO Contribute the prefix map stuff to Org.
   (define-prefix-command 'org-babel-map)
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
