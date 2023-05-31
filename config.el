@@ -7,7 +7,7 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 ;; TODO Make config compilation incremental when idle and handle changes in
-;; module flags. (Maybe if `init.el' changed, do something.)
+;; module flags. Maybe if `init.el' changed, do something.
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
