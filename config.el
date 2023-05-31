@@ -691,11 +691,8 @@
   ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
   ;; fork I'm currently using because I should be able to get this working using
   ;; `avy-styles-alist' instead.
-  (advice-add #'avy-goto-end-of-line
-              :around
-              (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
-                (let ((avy-style 'post))
-                  (apply oldfun args))))
+  (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
+  (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
 
   (when (modulep! :completion vertico)
     (after! vertico
@@ -727,7 +724,7 @@
            (?z . avy-action-zap-to-char)))
         avy-styles-alist '((avy-isearch . pre)
                            (ace-link-man . pre)
-                           (cae-avy-symbol-at-point . post))
+                           (avy-kill-region . pre))
         avy-column-line-overlay t))
 
 (use-package! zop-to-char
