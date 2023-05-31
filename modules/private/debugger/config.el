@@ -8,10 +8,6 @@
         (cl-loop for buf being the buffers
                  when (string-match-p "gdb" (buffer-name buf)) do
                  (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
-  (defadvice! cae-debugger-do-not-use-store-a ()
-    :override #'+debugger--get-last-config
-    (doom-store-clear "+debugger")
-    +debugger--last-config)
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
       (require 'dap-cpptools)
