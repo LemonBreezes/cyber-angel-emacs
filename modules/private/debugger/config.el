@@ -9,4 +9,5 @@
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
       (require 'dap-cpptools)
-      (dap-cpptools-setup))))
+      (dap-cpptools-setup))
+    (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
