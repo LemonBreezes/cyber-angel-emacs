@@ -39,7 +39,8 @@
                    +workspace/switch-to-8 +workspace/kill-session
                    +workspace/switch-right +workspace/switch-to-final
                    +workspace/restore-last-session +workspace/kill-session-and-quit
-                   +workspace/close-window-or-workspace read-only-mode))
+                   +workspace/close-window-or-workspace read-only-mode
+                   save-buffers-kill-terminal))
       (add-to-list 'mc/cmds-to-run-once cmd))
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
