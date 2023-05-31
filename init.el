@@ -17,6 +17,9 @@
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
+(setq user-full-name "StrawberryTea"
+      user-mail-address "look@strawberrytea.xyz")
+
 (setq doom-leader-alt-key "M-*"
       doom-localleader-alt-key "M-* m"
       doom-leader-key "C-c"
