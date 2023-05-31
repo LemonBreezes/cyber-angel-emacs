@@ -49,6 +49,11 @@
   (cae-keyboard-apply-recursively #'cae-keyboard-remap-char arg))
 
 ;;;###autoload
+(defun cae-keyboard-remap-reverse (arg)
+  (declare (pure t) (side-effect-free t))
+  (cae-keyboard-apply-recursively #'cae-keyboard-remap-char-reverse arg))
+
+;;;###autoload
 (defun cae-keyboard-remap-to-strings (arg)
   (declare (pure t) (side-effect-free t))
   (cae-keyboard-apply-recursively
