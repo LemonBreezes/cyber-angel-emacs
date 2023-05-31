@@ -663,10 +663,7 @@
   :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1)
-  ;; `auto-sudoedit' is a bit too eager to use sudo, and has some bad
-  ;; interactions with other packages. This advice makes it a bit more
-  ;; conservative.
-  (advice-add #'auto-sudoedit :before-until #'cae-auto-sudoedit-exempt-p))
+  (advice-add #'auto-sudoedit :override #'doom/sudo-this-file))
 
 (use-package! file-info
   :defer t
