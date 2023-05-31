@@ -622,6 +622,8 @@
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
         "C-;" #'avy-goto-word-1
+        (:when (not (cae-display-graphic-p))
+         "M-j" #'avy-goto-word-1)
         :map isearch-mode-map
         "C-;" #'avy-isearch
         (:when (not (cae-display-graphic-p))
