@@ -73,7 +73,8 @@
         "+zone"
 
         ;; Emacs OS
-        "+ednc"
+        "+ednc"                         ;I should write a Hydra for this package
+                                        ;once I start using it.
         "+proced"))
 
 (dolist (file +misc-applications-lisp-files)
