@@ -65,4 +65,4 @@
 (add-hook 'emacs-lisp-mode-hook #'cae-modeline-minions-elisp-setup)
 (map! "<f9>" #'minions-minor-modes-menu)
 
-(advice-add 'create-file-buffer :around #'cae-modeline-create-file-buffer-a)
+(advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
