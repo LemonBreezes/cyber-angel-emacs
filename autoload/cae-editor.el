@@ -296,7 +296,7 @@ mark the string and call `edit-indirect-region' with it."
     (apply oldfun args)))
 
 ;;;###autoload
-(defun embark-act-with-completing-read (&optional arg)
+(defun cae-embark-act-with-completing-read (&optional arg)
   (interactive "P")
   (let* ((embark-prompter #'embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
