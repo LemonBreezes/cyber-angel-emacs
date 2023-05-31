@@ -1066,6 +1066,7 @@
     (add-to-list 'mc/cmds-to-run-for-all #'doom/delete-backward-word)
     (add-to-list 'mc/cmds-to-run-for-all #'doom/forward-to-last-non-comment-or-eol)
     (add-to-list 'mc/cmds-to-run-for-all #'mark-sexp)
+    (add-to-list 'mc/cmds-to-run-for-all #'eros-eval-last-sexp)
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
