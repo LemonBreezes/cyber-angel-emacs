@@ -808,7 +808,7 @@
 ;;; Org
 
 (after! calendar
-  (setopt calendar-week-start-day 1))
+  (setq calendar-week-start-day 1))
 
 (after! org
   (setq org-directory "~/org/"
