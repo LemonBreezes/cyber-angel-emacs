@@ -1,10 +1,11 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
-(use-package! nameless
-  :hook (emacs-lisp-mode . nameless-mode)
-  :config
-  (setq nameless-private-prefix t
-        nameless-global-aliases '()))
+(unless (display-graphic-p)
+  (use-package! nameless
+    :hook (emacs-lisp-mode . nameless-mode)
+    :config
+    (setq nameless-private-prefix t
+          nameless-global-aliases '())))
 
 (use-package! outline-minor-faces
   :hook (emacs-lisp-mode . outline-minor-faces-add-font-lock-keywords))
