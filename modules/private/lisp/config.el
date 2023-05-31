@@ -42,7 +42,9 @@
                        (string= (file-name-nondirectory (buffer-file-name))
                                 dir-locals-file)
                        (not (eq major-mode 'emacs-lisp-mode)))
-                  (emacs-lisp-mode))))
+              (message "Switching to `emacs-lisp-mode' for %s."
+                       (buffer-file-name))
+              (emacs-lisp-mode))))
 
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
