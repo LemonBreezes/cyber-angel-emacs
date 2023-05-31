@@ -483,55 +483,59 @@
         "C-M-/" #'isearch-dabbrev-expand))
 
 (when (modulep! :completion vertico)
-  (map! "C-h C-m" #'consult-mode-command
-        "C-h <return>" #'info-emacs-manual
-        "C-x C-k C-k" #'consult-kmacro ; replaces
+  (use-package! consult
+    :init
+    (map! "C-h C-m" #'consult-mode-command
+          "C-h <return>" #'info-emacs-manual
+          "C-x C-k C-k" #'consult-kmacro ; replaces
                                         ; `kmacro-end-or-call-macro-repeat',
                                         ; which is similar to
                                         ; `kmacro-end-and-call-macro' from `<f4>'
                                         ; and `C-x e'.
-        ;; C-x bindings (ctl-x-map)
-        "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
-        "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-        "M-#" #'consult-register
-        [remap jump-to-register] #'consult-register-load
-        ;; Other custom bindings
-        ;; M-g bindings (goto-map)
-        "M-g e" #'consult-compile-error
-        (:when (modulep! :checkers syntax)
-          "M-g f" #'consult-flycheck)
-        (:when (modulep! :checkers syntax +flymake)
-          "M-g f" #'consult-flymake)  ;; Alternative: consult-flycheck
-        "M-g g" #'consult-goto-line   ;; orig. goto-line
-        "M-g M-g" #'consult-goto-line ;; orig. goto-line
-        "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
-        "M-g m" #'consult-mark
-        "M-g k" #'consult-global-mark
-        "M-g i" #'consult-imenu
-        "M-g I" #'consult-imenu-multi
-        ;; M-s bindings (search-map)
-        "M-s d" #'consult-find
-        "M-s D" #'consult-locate
-        "M-s g" #'consult-grep
-        "M-s G" #'consult-git-grep
-        [remap Info-search] #'consult-info
-        "M-s i" #'consult-info
-        "M-s r" #'consult-ripgrep
-        "M-s l" #'consult-line
-        "M-s L" #'consult-line-multi
-        "M-s k" #'consult-keep-lines
-        "M-s u" #'consult-focus-lines
-        ;; Isearch integration
-        "M-s e" #'consult-isearch-history
-        :map isearch-mode-map
-        "M-e" #'consult-isearch-history    ;; orig. isearch-edit-string
-        "M-s e" #'consult-isearch-history  ;; orig. isearch-edit-string
-        "M-s l" #'consult-line ;; needed by consult-line to detect isearch
-        "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
-        ;; Minibuffer history
-        :map minibuffer-local-map
-        "M-s" #'consult-history   ;; orig. next-matching-history-element
-        "M-r" #'consult-history)) ;; orig. previous-matching-history-element
+          ;; C-x bindings (ctl-x-map)
+          "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
+          "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
+          "M-#" #'consult-register
+          [remap jump-to-register] #'consult-register-load
+          ;; Other custom bindings
+          ;; M-g bindings (goto-map)
+          "M-g e" #'consult-compile-error
+          (:when (modulep! :checkers syntax)
+            "M-g f" #'consult-flycheck)
+          (:when (modulep! :checkers syntax +flymake)
+            "M-g f" #'consult-flymake) ;; Alternative: consult-flycheck
+          "M-g g" #'consult-goto-line  ;; orig. goto-line
+          "M-g M-g" #'consult-goto-line ;; orig. goto-line
+          "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
+          "M-g m" #'consult-mark
+          "M-g k" #'consult-global-mark
+          "M-g i" #'consult-imenu
+          "M-g I" #'consult-imenu-multi
+          ;; M-s bindings (search-map)
+          "M-s d" #'consult-find
+          "M-s D" #'consult-locate
+          "M-s g" #'consult-grep
+          "M-s G" #'consult-git-grep
+          [remap Info-search] #'consult-info
+          "M-s i" #'consult-info
+          "M-s r" #'consult-ripgrep
+          "M-s l" #'consult-line
+          "M-s L" #'consult-line-multi
+          "M-s k" #'consult-keep-lines
+          "M-s u" #'consult-focus-lines
+          ;; Isearch integration
+          "M-s e" #'consult-isearch-history
+          :map isearch-mode-map
+          "M-e" #'consult-isearch-history ;; orig. isearch-edit-string
+          "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
+          "M-s l" #'consult-line     ;; needed by consult-line to detect isearch
+          "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
+          ;; Minibuffer history
+          :map minibuffer-local-map
+          "M-s" #'consult-history ;; orig. next-matching-history-element
+          "M-r" #'consult-history) ;; orig. previous-matching-history-element
+    :config
+    (setq consult-preview-key (list :debounce 0.5 'any))))
 
 (after! cc-mode
     (map! :map c-mode-base-map
