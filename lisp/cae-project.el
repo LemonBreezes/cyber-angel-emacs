@@ -123,13 +123,6 @@
         (bookmark-jump name)
       (bookmark-set name))))
 
-(define-prefix-command 'cae-project-bookmark-map)
-(map! :map cae-project-bookmark-map
-      :desc "Jump to bookmark" "j" #'cae-project-bookmark
-      :desc "Set bookmark" "s" #'cae-project-bookmark-set
-      :desc "Delete bookmark" "d" #'cae-project-bookmark-delete
-      :desc "Rename bookmark" "r" #'cae-project-bookmark-rename
-      :desc "Save bookmarks" "S" #'cae-project-bookmark-save)
 (map! :leader
       :prefix "p"
-      :desc "Project bookmarks" "C-b" #'cae-project-bookmark-map)
+      :desc "Project bookmarks" "C-b" #'cae-project-bookmark)
