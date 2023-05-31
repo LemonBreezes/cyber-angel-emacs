@@ -18,34 +18,16 @@
 (use-package! eat
   :defer t :init
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
-  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
-
-(after! eshell
-  (setq-hook! 'eshell-mode-hook
-    imenu-generic-expression
-    `((,(propertize "λ" 'face 'eshell-prompt) "^.* λ \\(.*\\)" 1)))
-
-  ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
-  ;; to work in Eshell as it does in a terminal.
-  (when (symbol-function #'eshell/emacs)
-    (setf (symbol-function #'eshell/e)
-          (symbol-function #'eshell/emacs))
-    (unintern 'eshell/emacs))
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+  :config
+  (map! :map (eat-eshell-char-mode-map
+              eat-eshell-semi-char-mode-map)
+        "<tab>" #'eat-self-input
+        "<return>" #'eat-self-input)
 
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
-
-  ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
-  (advice-add #'eat-eshell-char-mode
-              :after
-              (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
-                (message "Type M-RET/C-M-m to exit char mode.")))
-
-  ;;(map! :map (eat-eshell-char-mode-map
-  ;;            eat-eshell-semi-char-mode-map)
-  ;;      "<tab>" #'eat-self-input
-  ;;      "<return>" #'eat-self-input)
 
   (add-hook! '(eat--eshell-char-mode-hook
                eat--eshell-semi-char-mode-hook
@@ -59,6 +41,24 @@
                              eat--eshell-semi-char-mode-hook
                              eat--eshell-process-running-mode-hook)
                          -1 1)))))))
+
+  ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
+  (advice-add #'eat-eshell-char-mode
+              :after
+              (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
+                (message "Type M-RET/C-M-m to exit char mode."))))
+
+(after! eshell
+  (setq-hook! 'eshell-mode-hook
+    imenu-generic-expression
+    `((,(propertize "λ" 'face 'eshell-prompt) "^.* λ \\(.*\\)" 1)))
+
+  ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
+  ;; to work in Eshell as it does in a terminal.
+  (when (symbol-function #'eshell/emacs)
+    (setf (symbol-function #'eshell/e)
+          (symbol-function #'eshell/emacs))
+    (unintern 'eshell/emacs))
 
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
