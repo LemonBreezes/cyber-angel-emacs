@@ -1,7 +1,5 @@
 ;;; lisp/cae-cheatsheets.el -*- lexical-binding: t; -*-
 
-;;; Pause and resume hydras with the minibuffer
-
 (defvar cae-cheatsheets-minibuffer--last-hydra nil)
 (defvar cae-cheatsheets-minibuffer--last-workspace nil)
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
@@ -43,9 +41,8 @@
        (funcall cae-cheatsheets-minibuffer--last-hydra)
        (setq cae-cheatsheets-minibuffer--last-hydra nil)))))
 
-(after! hydra
-  (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
-  (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h))
+(add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
+(add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h)
 
 (defvar cae-cheatsheets-workspace--last-hydra nil)
 
@@ -62,11 +59,10 @@
     (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra)))
   (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
 
-(when (modulep! :ui workspaces)
-  (add-hook 'persp-before-switch-functions
-            #'cae-cheatsheets-workspace-hydra-pause-h)
-  (add-hook 'persp-activated-functions
-            #'cae-cheatsheets-workspace-hydra-resume-h))
+(add-hook 'persp-before-switch-functions
+          #'cae-cheatsheets-workspace-hydra-pause-h)
+(add-hook 'persp-activated-functions
+          #'cae-cheatsheets-workspace-hydra-resume-h)
 
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
