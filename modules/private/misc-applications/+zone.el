@@ -54,7 +54,7 @@
                            (tabbar-state (frame-parameter nil 'tab-bar-lines)))
                        (select-window (car (doom-visible-windows)))
                        (delete-other-windows)
-                       (set-frame-parameter nil 'tab-bar-lines 1)
+                       (set-frame-parameter nil 'tab-bar-lines 0)
                        (apply oldfun args)
                        (set-frame-parameter nil 'tab-bar-lines tabbar-state)
                        (set-window-configuration wconf)))))
