@@ -36,7 +36,7 @@
 
        :checkers
        (syntax +childframe)
-       (spell +everywhere)
+       spell
        grammar
 
        :tools
