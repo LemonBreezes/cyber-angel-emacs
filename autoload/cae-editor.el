@@ -260,17 +260,20 @@ mark the string and call `edit-indirect-region' with it."
 
 (defun cae-avy-do (action pt)
   (goto-char pt)
-  (save-mark-and-excursion
-    (when (eq avy-command 'avy-goto-line)
-      (goto-char (point-at-bol)))
-    (set-mark (point))
-    (if (eq avy-command 'avy-goto-line)
-        (end-of-line)
-      (if (modulep! :config default +smartparens)
-          (sp-forward-sexp)
-        (forward-sexp)))
-    (funcall action)))
+  (unwind-protect
+      (save-mark-and-excursion
+        (when (eq avy-command 'avy-goto-line)
+          (goto-char (line-beginning-position)))
+        (set-mark (point))
+        (if (eq avy-command 'avy-goto-line)
+            (goto-char (min (1+ (line-end-position))
+                            (point-max)))
+          (if (modulep! :config default +smartparens)
+              (sp-forward-sexp)
+            (forward-sexp)))
+        (funcall action))))
 
+(advice-add #'nav-flash-show :override #'ignore)
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
   (apply-partially #'cae-avy-do #'embark-act))
