@@ -98,7 +98,7 @@
 (defun meow/setup-cae ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-cae)
   (when (modulep! +override)
-    (meow-motion-overwrite-define-key)) ; custom keybinding for motion state
+    (meow-motion-overwrite-define-key)) ;custom keybinding for motion state
   (eval
    `(map! :map meow-normal-state-keymap
           ,(cae-keyboard-kbd "1") #'meow-expand-1
@@ -111,24 +111,24 @@
           ,(cae-keyboard-kbd "8") #'meow-expand-8
           ,(cae-keyboard-kbd "9") #'meow-expand-9
           ,(cae-keyboard-kbd "0") #'meow-expand-0
-          ":" #'meow-reverse            ; : -> ;
+          ":" #'meow-reverse            ;: -> ;
           "?" #'meow-cheatsheet
           "<" #'meow-beginning-of-thing
           ">" #'meow-end-of-thing
           "a" #'meow-append
           "A" #'meow-open-below
-          "w" #'meow-back-word          ; b -> w
-          "W" #'meow-back-symbol        ; B -> W
+          "w" #'meow-back-word          ;b -> w
+          "W" #'meow-back-symbol        ;B -> W
           "c" #'meow-change
           "d" #'meow-delete
           "D" #'meow-backward-delete
           "e" #'meow-line
           "E" #'meow-goto-line
-          "t" #'meow-find               ; f -> t
+          "t" #'meow-find               ;f -> t
           "g" #'meow-cancel-selection
           "G" #'meow-grab
-          "b" #'meow-left               ; h -> b
-          "B" #'meow-left-expand        ; H -> B
+          "b" #'meow-left               ;h -> b
+          "B" #'meow-left-expand        ;H -> B
           "I" #'meow-open-above
           "i" #'meow-insert
           "j" #'meow-join
@@ -147,13 +147,13 @@
           "r" #'meow-replace
           "R" #'meow-swap-grab
           "s" #'meow-search
-          "f" #'meow-right              ; t -> f
-          "F" #'meow-right-expand       ; T -> F
+          "f" #'meow-right              ;t -> f
+          "F" #'meow-right-expand       ;T -> F
           "u" #'meow-undo
           "U" #'meow-undo-in-selection
           "v" #'meow-visit
-          "h" #'meow-next-word          ; w -> h
-          "H" #'meow-next-symbol        ; W -> H
+          "h" #'meow-next-word          ;w -> h
+          "H" #'meow-next-symbol        ;W -> H
           "x" #'meow-save
           "X" #'meow-sync-grab
           "y" #'meow-yank
@@ -183,7 +183,7 @@
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-normal-mode-hook #'corfu-quit)))
-  (meow-esc-mode +1)                    ; Make Meow usable in TUI Emacs.
+  (meow-esc-mode +1)                    ;Make Meow usable in TUI Emacs.
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
         meow-select-on-change t
