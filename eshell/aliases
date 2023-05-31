@@ -1,5 +1,4 @@
 alias gr     egrep               --color=always                               $*
-alias doom   ~/.emacs.d/bin/doom                                              $*
 alias c      xclip               -selection     clipboard                     $*
 alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
 alias tree   tree                -C                                           $*
