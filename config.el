@@ -695,7 +695,8 @@
   :init
   (map! [remap eval-expression] #'pp-eval-expression)
   :config
-  (setq pp-read-expression-map minibuffer-local-map))
+  ;(setq pp-read-expression-map minibuffer-local-map)
+  )
 
 (use-package! abbrev
   :defer t :config
