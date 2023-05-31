@@ -6,3 +6,4 @@
 (package! language-detection)
 (package! org-appear)
 (package! org-jira)
+(package! worf)
