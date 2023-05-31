@@ -8,7 +8,6 @@ core
 flycheck_*
 .local/
 .localelpa/
-packages/
 secrets/
 misc-files/iosevka-comfy*
 custom.el
