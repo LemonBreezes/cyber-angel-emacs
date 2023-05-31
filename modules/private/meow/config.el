@@ -158,8 +158,8 @@
           "X" #'meow-sync-grab
           "y" #'meow-yank
           "z" #'meow-pop-selection
-          "-" #'negative-argument
           ;; commands not bound by default
+          "-" #'negative-argument
           "Z" #'meow-pop-all-selection
           ,(cae-keyboard-kbd "&") #'meow-query-replace
           "%" #'meow-query-replace-regexp
