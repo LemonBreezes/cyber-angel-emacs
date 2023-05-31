@@ -17,13 +17,15 @@
   :before-until #'+workspace/switch-to
   (minibuffer-window-active-p (selected-window)))
 
-;; Prevent hydras from remaining active when switching workspaces.
+;; Prevent hydras/hercules from remaining active when switching workspaces.
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (after! hydra
   (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h)
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-quit-h)
   (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h))
+(after! hercules
+  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
