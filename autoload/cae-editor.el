@@ -178,3 +178,21 @@ mark the string and call `edit-indirect-region' with it."
     (if (ffap-url-p url)
         (browse-url-generic url)
       (message "Bookmark does not have a valid FILENAME property."))))
+
+;;;###autoload
+(defun cae-mark-comment ()
+  "Mark the entire comment around point."
+  (interactive)
+  (when (er--point-is-in-comment-p)
+    (let ((p (point)))
+      (skip-syntax-backward "\s")
+      (while (and (or (er--point-is-in-comment-p)
+                      (looking-at "[[:space:]]"))
+                  (not (eobp)))
+        (forward-char 1))
+      (skip-chars-backward "\n\r")
+      (set-mark (point))
+      (goto-char p)
+      (while (er--point-is-in-comment-p)
+        (forward-char -1))
+      (forward-char 1))))
