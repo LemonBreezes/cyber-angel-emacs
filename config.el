@@ -491,10 +491,6 @@
   (when (modulep! :editor evil)
     (load! "lisp/cae-evil"))
 
-  (when (modulep! :editor fold)
-    (add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
-    (setq vimish-fold-indication-mode 'right-fringe))
-
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project-bookmark"))
   (autoload 'cae-project-bookmark-set (concat doom-private-dir
@@ -503,6 +499,11 @@
                                                     "lisp/cae-project-bookmark"))
   (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
         :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+
+  ;; Enable Vim-style folding.
+  (when (modulep! :editor fold)
+    (add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
+    (setq vimish-fold-indication-mode 'right-fringe))
 
   ;; Ensure local elisp packages are up-to-date.
   (add-hook 'emacs-lisp-mode-hook
