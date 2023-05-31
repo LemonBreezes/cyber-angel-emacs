@@ -87,6 +87,7 @@
                (bookmark-write-file bookmark-default-file))
            cae-project-bookmark-cache))
 
+
 (define-prefix-command 'cae-project-bookmark-map)
 (map! :map cae-project-bookmark-map
       :desc "Jump to bookmark" "j" #'cae-project-bookmark-jump
