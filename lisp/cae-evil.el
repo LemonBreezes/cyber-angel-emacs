@@ -4,7 +4,8 @@
 (when (string= doom-leader-key "SPC")
   (map! :nmv "DEL" doom-leader-map))
 
-;; This allows us to circumvent the `evil-collection' keybindings.
+;; This allows us to circumvent the `evil-collection' keybindings. This is so
+;; that my keybindings are more consistent with the vanilla keybindings.
 (setq evil-default-state 'insert)
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
