@@ -13,4 +13,6 @@
   (map! :map speed-type--completed-keymap
         "q" #'kill-this-buffer
         "r" #'speed-type--replay
-        "n" #'speed-type--play-next))
+        "n" #'speed-type--play-next
+        :map speed-type-mode-map
+        "<f6>" #'+speed-type-hydra/body))
