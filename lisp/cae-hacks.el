@@ -17,23 +17,6 @@
   :before-until #'+workspace/switch-to
   (minibuffer-window-active-p (selected-window)))
 
-(defun cae-hacks-hydra-quit-h (&rest _)
-  (hydra-keyboard-quit))
-(defun cae-hacks-hydra-pause-h (&rest _)
-  (when hydra-curr-map
-    (if (modulep! :ui workspaces)
-        (ring-insert hydra-pause-ring hydra-curr-body-fn))
-    (hydra-keyboard-quit)))
-(defun cae-hacks-hydra-resume-h (&rest _)
-  (unless (zerop (ring-length hydra-pause-ring))
-    (run-with-timer 0.001 nil hydra-pause-ring)))
-(after! hydra
-  (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
-  (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h))
-(add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
-(after! hercules
-  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
-
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
   :filter-args #'advice-remove
