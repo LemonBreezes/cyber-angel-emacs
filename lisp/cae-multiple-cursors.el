@@ -30,7 +30,7 @@
                    cae-modeline-rotate-prev-word-at-point
                    forward-sexp backward-sexp backward-list
                    forward-list down-list backward-up-list up-list))
-      (add-to-list 'mc/cmds-to-run-for-all cmd nil #'eq))
+      (add-to-list 'mc/cmds-to-run-for-all cmd))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
                    +workspace/rename +workspace/display +workspace/new-named
@@ -45,7 +45,7 @@
                    +workspace/restore-last-session +workspace/kill-session-and-quit
                    +workspace/close-woutdow-or-workspace read-only-mode
                    save-buffers-kill-terminal))
-      (add-to-list 'mc/cmds-to-run-once cmd nil #'eq))
+      (add-to-list 'mc/cmds-to-run-once cmd))
     (dolist (mode '(cae-completion-mode symbol-overlay-mode goggles-mode
                     lispy-mode corfu-mode hungry-delete-mode
                     worf-mode isearch-mb-mode))
