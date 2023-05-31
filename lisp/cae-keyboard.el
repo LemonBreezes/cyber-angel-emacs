@@ -13,26 +13,6 @@
     (?-)
     ))
 
-(cl-defun cae-keyboard-apply-recursively (fn arg)
-  (declare (pure t) (side-effect-free t))
-  (when (characterp arg)
-    (cl-return-from cae-keyboard-apply-recursively
-      (funcall fn arg)))
-  (when (json-alist-p arg)
-    (cl-return-from cae-keyboard-apply-recursively
-      (mapcar (lambda (x)
-                (cons (cae-keyboard-apply-recursively fn (car x)) (cdr x)))
-              arg)))
-  (cl-return-from cae-keyboard-apply-recursively
-    (cl-mapcar (lambda (x) (cae-keyboard-apply-recursively fn x)) arg)))
-
-(cl-defun cae-keyboard-remap-char (arg)
-  (declare (pure t) (side-effect-free t))
-  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
-    (when orbit
-      (cl-return-from cae-keyboard-remap-char
-        (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)))))
-
 (cl-assert (eq (cae-keyboard-remap ?w) ?b))
 (cl-assert (eq (cae-keyboard-remap ?b) ?j))
 (cl-assert (eq (cae-keyboard-remap ?j) ?o))
