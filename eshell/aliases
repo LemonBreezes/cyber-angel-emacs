@@ -23,7 +23,3 @@ alias j    z $*
 alias vi   e $*
 alias vim  e $*
 alias nano e $*
-
-## Local Variables:
-## eval: (when (fboundp 'eshell-read-aliases-list) (eshell-read-aliases-list))
-## End:
