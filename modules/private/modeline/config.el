@@ -63,7 +63,8 @@
           (visual-line-mode)
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(flycheck-mode
-                                  defining-kbd-macro))
+                                  defining-kbd-macro
+                                  projectile-mode))
   (minions-mode +1))
 
 (column-number-mode +1)
