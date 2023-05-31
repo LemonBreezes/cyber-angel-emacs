@@ -6,17 +6,28 @@
 (defvar cae-project-bookmark-cache (make-hash-table :test 'equal)
   "Cache of project bookmarks.")
 
+(defvar cae-project-bookmark-separate-into-branches t
+  "If non-nil, separate bookmarks into branches.")
+
 (defun cae-project--get-bookmark-file (&optional project)
   "Return the bookmark file for PROJECT."
-  (expand-file-name (concat (doom-project-name) "/default")
+  (expand-file-name (concat (doom-project-name project)
+                            "/"
+                            (if cae-project-bookmark-separate-into-branches
+                                (vc-git--symbolic-ref
+                                 (or project
+                                     (doom-project-root)))
+                              "default")
+                            ".bmk")
                     cae-project-bookmark-dir))
 
 (defun cae-project--bookmark-alist-from-file (file)
   "Return a bookmark alist from FILE."
   (let ((bookmark-default-file file)
         (bookmark-alist nil))
-    (bookmark-load bookmark-default-file)
-    bookmark-alist))
+    (when (file-exists-p file)
+      (bookmark-load bookmark-default-file)
+      bookmark-alist)))
 
 (defun cae-project--bookmark-alist (&optional project)
   "Return the bookmark alist for the current project."
