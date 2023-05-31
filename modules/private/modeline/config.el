@@ -1,11 +1,11 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (if (doom-unreal-buffer-p (current-buffer))
-      (buffer-name)
-    (propertize (breadcrumb-project-crumbs)
-                'face '(:inherit variable-pitch
-                        :weight bold))))
+  (propertize (if (doom-unreal-buffer-p (current-buffer))
+                  (buffer-name)
+                (breadcrumb-project-crumbs))
+              'face '(:inherit variable-pitch
+                      :weight bold)))
 (native-compile #'cae-modeline-buffer-name)
 
 (add-hook! 'doom-first-file-hook
