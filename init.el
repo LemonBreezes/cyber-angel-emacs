@@ -3,9 +3,7 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
-(setq load-prefer-newer t)              ;Since I sometimes compile my config, I
-                                        ;want to make sure that I'm always
-                                        ;loading the latest version.
+(setq load-prefer-newer cae-config-compilation-enabled)
 (random t)                              ;Set the random seed.
 
 (load! "lisp/cae-lib")
