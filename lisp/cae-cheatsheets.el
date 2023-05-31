@@ -27,7 +27,6 @@
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
   (when (featurep 'hydra)
-    (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
     (when hydra-curr-map
       (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                            hydra-curr-body-fn))
