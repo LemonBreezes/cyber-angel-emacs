@@ -895,7 +895,6 @@
     :defer t :init
     (after! embark
       (define-key embark-region-map "T" #'titlecase-region)
-      (define-key embark-symbol-map "T" #'titlecase-region)
       (define-key embark-heading-map "T" #'titlecase-line)))
 
   ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
