@@ -3,10 +3,6 @@
 ;; For when we compile Doom.
 (defvar personal-keybindings nil)
 
-(unless (or (featurep 'smartparens)
-            (autoloadp (symbol-function 'sp-local-pair)))
-  (defalias 'sp-local-pair #'ignore))
-
 (defun cae-hacks-shut-up-a (oldfun &rest args)
   (advice-add #'message :override #'ignore)
   (unwind-protect (apply oldfun args)
