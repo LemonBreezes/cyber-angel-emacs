@@ -411,7 +411,7 @@
                               (?\{ . ?\})
                               (?\[ . ?\])
                               (?\( . ?\)))
-        electric-pair-text-pairs electric-pair-pairs))
+        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
