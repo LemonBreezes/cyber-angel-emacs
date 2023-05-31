@@ -39,12 +39,11 @@
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
+    (hydra-keyboard-quit)
     (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                          hydra-curr-body-fn)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
-  (when (featurep 'hydra)
-    (hydra-keyboard-quit))
   (when (persp-parameter 'cae-cheatsheets-workspace--last-hydra)
     ;; In my testing, using a timer prevented Hydra from clobbering my
     ;; workspace-switching repeat map.
