@@ -2,11 +2,13 @@
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
-(let ((prefix "j"))
-  (defvar +misc-applications-prefix prefix)
-  (defvar +misc-applications-lookup-prefix (concat prefix "l"))
-  (defvar +misc-applications-games-prefix (concat prefix "g"))
-  (defvar +misc-applications-eyecandy-prefix (concat prefix "e")))
+(defvar +misc-applications-prefix "a")
+(defvar +misc-applications-lookup-prefix
+  (concat +misc-applications-prefix "l"))
+(defvar +misc-applications-games-prefix
+  (concat +misc-applications-prefix "g"))
+(defvar +misc-applications-eyecandy-prefix
+  (concat +misc-applications-prefix "e"))
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
