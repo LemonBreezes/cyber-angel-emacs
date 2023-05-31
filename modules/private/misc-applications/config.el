@@ -61,6 +61,7 @@
     ;; let it snow
     "+fireplace"
     "+flames-of-freedom"
+    "+snow"
     ))
 
 (dolist (file +misc-applications--lisp-files)
