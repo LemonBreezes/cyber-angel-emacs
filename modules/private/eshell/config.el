@@ -11,6 +11,15 @@
         :leader
         :prefix "o"
         :desc "Detached session" "s" #'detached-open-session)
+  (defun patch--detached--db-update-sessions (orig-fn)
+    "Ensure we print the full object to the DB."
+    (let ((print-length nil)
+          (print-level nil))
+      (funcall orig-fn)))
+
+  (advice-add 'detached--db-update-sessions
+              :around
+              #'patch--detached--db-update-sessions)
   :custom ((detached-terminal-data-command system-type)))
 
 (use-package! eat
