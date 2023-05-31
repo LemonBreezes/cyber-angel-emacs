@@ -71,7 +71,8 @@
           (visual-line-mode)
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
-                                  projectile-mode))
+                                  projectile-mode
+                                  flycheck-mode))
   (after! compile
     (setq-default minions-mode-line-modes
                   (cons
@@ -131,4 +132,7 @@
                  '(:rot ("kbd"
                          "cae-keyboard-kbd")))
     (add-to-list 'parrot-rotate-dict
-                 '(:rot ("+log" "message")))))
+                 '(:rot ("+log" "message")))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("backtrace!" "unbacktrace!")))
+    ))
