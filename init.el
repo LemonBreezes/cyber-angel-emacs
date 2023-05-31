@@ -17,6 +17,10 @@
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
+(setq doom-leader-alt-key "M-*"
+      doom-localleader-alt-key "M-* m"
+      doom-leader-key "C-c"
+      doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
 ;; Do not override other keymaps with `general-override-mode'. This was created
