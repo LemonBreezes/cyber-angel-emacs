@@ -48,7 +48,7 @@
   (setq ytel-invidious-api-url
         (or (condition-case nil
                 (completing-read "Using instance: "
-                                 (subseq (ytel-instances-alist-from-json) 0 11) nil "confirm" "https://") ; "healthiest" 12 instances; no require match
+                                 (cl-subseq (ytel-instances-alist-from-json) 0 11) nil "confirm" "https://") ; "healthiest" 12 instances; no require match
               (error nil))
             "invidious.tube"))          ; fallback
   (doom-store-put 'ytel-invidious-api-url ytel-invidious-api-url))
