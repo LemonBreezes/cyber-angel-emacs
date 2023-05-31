@@ -115,3 +115,10 @@
   (setq last-command-event
         (cae-keyboard-remap-reverse last-command-event))
   (call-interactively #'digit-argument))
+
+;;;###autoload
+(defun cae-keyboard-electric-spacing-\(()
+    "The same as `electric-spacing-\(' but does not insert the closing paren."
+    (if (looking-back (regexp-opt '("if" "else" "for" "while" "switch")))
+        (insert " (")
+      (insert "(")))
