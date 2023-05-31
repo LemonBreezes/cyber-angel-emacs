@@ -761,7 +761,7 @@
         (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
                (advice-remove #'keyboard-quit #'rp/cond-restore-point)
                ;; Use `doom-escape-hook' instead of `keyboard-quit' because that
-               ;; way we are not modifying `keyboard-quit'.
+               ;; way we are certain this function is only called interactively.
                (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
       (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
