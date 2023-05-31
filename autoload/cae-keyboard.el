@@ -129,8 +129,7 @@
       (while (not (eobp))
         (let ((ch (following-char)))
           (if (and (char-equal ch ?_)
-                   (char-after (+ 2 (point)))
-                   (char-equal (char-after (+ 2 (point)))
+                   (eq (char-after (+ 2 (point)))
                                ?_))
               (progn
                 (forward-char 1)        ; discard _
