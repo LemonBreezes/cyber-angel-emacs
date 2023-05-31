@@ -20,12 +20,7 @@
   ;; Restore the window configuration after exiting `magit-status', since we are
   ;; deleting other windows with `cae-unpackaged-magit-save-buffer-show-status'.
   (after! magit
-    (setq magit-bury-buffer-function #'magit-restore-window-configuration)
-    ;;(map! :map magit-status-mode-map
-    ;;      ;; Killing the Magit status buffer removes the `forge-pull' progress
-    ;;      ;; from the modeline.
-    ;;      "q" #'magit-mode-bury-buffer)
-    )
+    (setq magit-bury-buffer-function #'magit-restore-window-configuration))
   (advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
