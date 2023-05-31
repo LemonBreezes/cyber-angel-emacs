@@ -346,9 +346,9 @@
 (use-package! copilot
   :defer t
   :init
-  (add-hook 'text-mode-hook #'copilot-mode)
-  (add-hook 'prog-mode-hook #'copilot-mode)
-  (add-hook 'conf-mode-hook #'copilot-mode)
+  (add-hook 'text-mode-hook   #'copilot-mode)
+  (add-hook 'prog-mode-hook   #'copilot-mode)
+  (add-hook 'conf-mode-hook   #'copilot-mode)
   (add-hook 'eshell-mode-hook #'copilot-mode)
   :config
   (setq copilot--base-dir
