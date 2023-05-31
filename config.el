@@ -40,7 +40,7 @@
   ;;      (cl-mapcar (lambda (x)
   ;;                   (if (and (listp (car-safe x))
   ;;                            (caar x))
-  ;;                       (string-replace "C-c &" "C-c y" (caar x))
+  ;;                       (setf (caar x) (string-replace "C-c &" "C-c y" (caar x)))
   ;;                     x))
   ;;                 which-key-replacement-alist))
   )
