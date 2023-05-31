@@ -42,8 +42,9 @@
        "0" tab-close
        "1" tab-close-other
        "2" tab-new)
-      (:enter tab-select)
-      (:exit "/" +workspace/display))
+      ;;(:enter tab-select)
+      ;;(:exit "/" +workspace/display)
+      )
    t)
 
   (eval
@@ -68,9 +69,10 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8)
-      (:enter +workspace/display)
-      (:exit
-       "/" tab-select))
+      ;;(:enter +workspace/display)
+      ;;(:exit
+      ;; "/" tab-select)
+      )
    t)
 
   (define-repeat-map dired-jump
