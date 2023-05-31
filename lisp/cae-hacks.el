@@ -119,6 +119,7 @@
       #'consult--ripgrep-make-builder
     (apply oldfun args)))
 
+;; Glue for Dired/Dirvish and `auto-sudoedit'.
 (defadvice! cae-hacks-auto-sudoedit-fixup-a (oldfun &rest args)
   :around #'auto-sudoedit
   (advice-add #'dired-insert-subdir
