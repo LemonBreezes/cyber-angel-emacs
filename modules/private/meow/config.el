@@ -172,7 +172,7 @@
                   (run-at-time 0.01 nil #'meow-mode-mode +1)))))
   (meow/setup-cae)
   (meow/setup-keypad)
-  (add-hook 'meow-mode-hook #'meow-setup-indicator)
+  ;; (add-hook 'meow-mode-hook #'meow-setup-indicator)
   (map! :map meow-normal-state-keymap
         "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
         "DEL" #'meow-keypad)
