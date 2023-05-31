@@ -59,6 +59,7 @@
                'deft))
   (define-key doom-leader-map "nd" nil))
 
+;; Add some descriptions for built-in prefixes.
 (map! :prefix ("M-s h" . "highlight"))
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
