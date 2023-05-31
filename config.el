@@ -373,9 +373,9 @@
   :ensure t
   :init (isearch-mb-mode)
   :config
+  (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp))
 
