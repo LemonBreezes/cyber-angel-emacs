@@ -110,6 +110,7 @@
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer
         [remap delete-other-windows] #'cae-dired-maximize-buffer))
+
 (add-hook 'dirvish-find-entry-hook
           (cae-defun cae-dirvish-find-entry-h (entry buffer)
             (when (one-window-p)
