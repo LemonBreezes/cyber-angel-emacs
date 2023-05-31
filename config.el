@@ -514,8 +514,8 @@
 
 ;;; Editor
 
-(setq doom-leader-alt-key (if (modulep! :editor evil) "M-*" "M-SPC")
-      doom-localleader-alt-key (if (modulep! :editor evil) "M-* m" "M-SPC l")
+(setq doom-leader-alt-key (if (modulep! :editor evil) "M-*" "C-c")
+      doom-localleader-alt-key (if (modulep! :editor evil) "M-* m" "C-c l")
       doom-leader-key (if (modulep! :editor evil) "SPC" "C-c")
       doom-localleader-key (if (modulep! :editor evil) "SPC m" "C-c l"))
 
