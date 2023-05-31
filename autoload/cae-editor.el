@@ -63,6 +63,7 @@
                  (advice-remove #'auto-sudoedit #'ignore)))
       (doom/sudo-this-file))))
 
+
 (defun cae-auto-sudoedit-exempt-p ()
   (let ((path (or (buffer-file-name) list-buffers-directory)))
     (or (file-directory-p path)
