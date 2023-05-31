@@ -192,7 +192,7 @@
     (if smart-mark-mode
         (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
       (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
-  (add-hook 'smart-mark-mode-hook #'cae-hacks-smart-mark-use-doom-escape-a))
+  (add-hook 'smart-mark-mode-hook #'cae-smart-mark-use-doom-escape-a))
 
 
 ;;; Tools
