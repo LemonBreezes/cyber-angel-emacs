@@ -236,7 +236,7 @@
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-signature-auto-activate t
-          lsp-signature-function #'lsp-signature-posframe
+          lsp-signature-function #'lsp-lv-message
           lsp-enable-snippet nil)
     (after! lsp-ui
       (setq lsp-ui-doc-show-with-cursor t))
