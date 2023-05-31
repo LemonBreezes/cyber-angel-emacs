@@ -6,9 +6,6 @@
 (defvar cae-config-incremental-compilation-enabled-p nil
   "Whether incremental native compilation is enabled.")
 
-(setq user-full-name "StrawberryTea"
-      user-mail-address "look@strawberrytea.xyz")
-
 ;;Since I sometimes compile my config, I want to make sure that I'm always
 ;;loading the latest version.
 (setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
