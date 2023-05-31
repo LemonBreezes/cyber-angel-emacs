@@ -37,7 +37,7 @@
            ("C-M-S-k" sp-kill-hybrid-sexp "Delete")
            ("M-<delete>" sp-unwrap-sexp "Delete")
            ("M-<backspace>" sp-backward-unwrap-sexp "Delete")
-           ("M-r" cae-raise-sexp "Delete") ;Overrides
+           ("M-R" cae-raise-sexp "Delete") ;Overrides
                                         ;`move-to-window-line-top-bottom'.
            ("M-D" sp-splice-sexp "Delete")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
