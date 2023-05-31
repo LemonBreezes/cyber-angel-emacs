@@ -677,9 +677,6 @@
          "M-n" #'copilot-next-completion
          "M-p" #'copilot-previous-completion))
 
-  (when (modulep! :config default +smartparens)
-    (map! :))
-
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
 
