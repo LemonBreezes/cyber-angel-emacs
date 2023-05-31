@@ -469,7 +469,7 @@
 
 (use-package! gptel
   :defer t :init
-  (map! :leader "g" #'gptel-send-menu)
+  (map! :leader "g" #'cae-gptel-send)
   :config
   (setq gptel-default-mode 'org-mode
         gptel-prompt-string "* "))
