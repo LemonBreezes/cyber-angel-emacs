@@ -80,7 +80,7 @@
 
        :private
        ;; exwm
-       (corfu +tng)
+       (corfu)
        ;; debugger
        (dirvish +icons +dirvish)
        eshell
