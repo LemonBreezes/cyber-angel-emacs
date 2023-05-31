@@ -1,12 +1,12 @@
 ;;; autoload/cae-compile.el -*- lexical-binding: t; -*-
 
-(defvar +compile-interesting-file-name-regexp
+(defvar cae-compile-interesting-file-name-regexp
   "[a-zA-Z0-9-_+]+")
 
-(defvar +kill-emacs--exit-code nil)
-(advice-add #'kill-emacs :before
-            (defun +kill-emacs-a (&optional exit-code _)
-              (setq +kill-emacs--exit-code (or exit-code 0))))
+(defvar cae-compile--exit-code nil)
+(defun cae-compile-store-exit-code-a (&optional exit-code _)
+  (setq cae-compile--exit-code (or exit-code 0)))
+(advice-add #'kill-emacs :before #'cae-compile-store-exit-code-a)
 
 ;;;###autoload
 (defun cae-compile-this-elisp-file ()
@@ -14,7 +14,7 @@
               (not (stringp (buffer-file-name)))
               (file-in-directory-p (buffer-file-name) doom-local-dir)
               (file-in-directory-p (buffer-file-name) cae-multi-local-dir)
-              (not (string-match-p +compile-interesting-file-name-regexp
+              (not (string-match-p cae-compile-interesting-file-name-regexp
                                    (file-name-base (buffer-file-name)))))
     (byte-compile-file (buffer-file-name))
     (emacs-lisp-native-compile-and-load)))
@@ -22,8 +22,8 @@
 ;;;###autoload
 (defun cae-compile-my-private-config ()
   (interactive)
-  (when (or (not +kill-emacs--exit-code)
-            (eq +kill-emacs--exit-code 0))
+  (when (or (not cae-compile--exit-code)
+            (eq cae-compile--exit-code 0))
     (+compile-pdf-tools))
   (mapc (lambda (s)
           (unless
@@ -31,8 +31,8 @@
                   (string= (file-name-nondirectory s) "doctor.el")
                   (string= (file-name-nondirectory s) ".dir-locals.el")
                   (string-prefix-p "flycheck_" (file-name-nondirectory s))
-                  (and +kill-emacs--exit-code
-                       (not (eq +kill-emacs--exit-code 0))
+                  (and cae-compile--exit-code
+                       (not (eq cae-compile--exit-code 0))
                        (not (file-exists-p (concat s "c"))))
                   (file-newer-than-file-p (concat s "c") s))
             (ignore-errors (byte-compile-file s))
