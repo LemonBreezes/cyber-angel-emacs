@@ -325,7 +325,8 @@
   (use-package! transpose-frame
     :defer t :init
     (map! :prefix "C-x"
-          "M-t" #'transpose-frame))
+          "M-t" #'transpose-frame
+          "M-r" #'rotate-frame-clockwise))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
