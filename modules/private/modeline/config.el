@@ -6,6 +6,7 @@
                 (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
+
 (run-with-idle-timer
  3 nil
  (lambda ()
