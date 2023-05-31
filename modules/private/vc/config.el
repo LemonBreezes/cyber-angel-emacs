@@ -24,7 +24,11 @@
         magit-repository-directories '(("~/src/" . 2))
         transient-values '((magit-rebase "--autosquash" "--autostash")
                            (magit-pull "--rebase" "--autostash")
-                           (magit-revert "--autostash"))))
+                           (magit-revert "--autostash")))
+
+  (magit-add-section-hook 'magit-status-sections-hook
+                        'cae-magit-insert-diff-upstream
+                        'magit-insert-stashes))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
