@@ -470,7 +470,8 @@
     ;;         (,(cae-keyboard-kbd "T") lispy-ert "ert")
     ;;         (">" lispy-toggle-thread-last "toggle last-threaded form")
     ;;         ("" lispy-x-more-verbosity :exit nil)
-    ;;         ("?" lispy-x-more-verbosity "help" :exit nil)))
+    ;;         ("?" lispy-x-more-verbosity "help" :exit nil))
+    ;;      t)
     ))
 
 ;;; Worf
@@ -573,7 +574,8 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
       (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
       (,(cae-keyboard-kbd "q") nil)
-      (,(cae-keyboard-kbd "c") nil)))
+      (,(cae-keyboard-kbd "c") nil))
+   t)
   (eval
    `(worf-defverb
      "change"
@@ -583,28 +585,32 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
        (,(cae-keyboard-kbd "l") org-metaright)
        (,(cae-keyboard-kbd "t") org-set-tags-command :disable)
        (,(cae-keyboard-kbd "n") worf-change-name :disable :break)
-       (,(cae-keyboard-kbd "a") org-meta-return :disable :break))))
+       (,(cae-keyboard-kbd "a") org-meta-return :disable :break)))
+   t)
   (eval
    `(worf-defverb
      "change-tree"
      '((,(cae-keyboard-kbd "j") org-shiftmetadown)
        (,(cae-keyboard-kbd "k") org-shiftmetaup)
        (,(cae-keyboard-kbd "h") org-shiftmetaleft)
-       (,(cae-keyboard-kbd "l") org-shiftmetaright))))
+       (,(cae-keyboard-kbd "l") org-shiftmetaright)))
+   t)
   (eval
    `(worf-defverb
      "change-shift"
      '((,(cae-keyboard-kbd "j") org-shiftdown)
        (,(cae-keyboard-kbd "k") org-shiftup)
        (,(cae-keyboard-kbd "h") org-shiftleft)
-       (,(cae-keyboard-kbd "l") org-shiftright))))
+       (,(cae-keyboard-kbd "l") org-shiftright)))
+   t)
   (eval
    `(worf-defverb
      "change-shiftcontrol"
      '((,(cae-keyboard-kbd "j") org-shiftcontroldown)
        (,(cae-keyboard-kbd "k") org-shiftcontrolup)
        (,(cae-keyboard-kbd "h") org-shiftcontrolleft)
-       (,(cae-keyboard-kbd "l") org-shiftcontrolright))))
+       (,(cae-keyboard-kbd "l") org-shiftcontrolright)))
+   t)
   (eval
    `(worf-defverb
      "delete"
@@ -612,17 +618,20 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
        (,(cae-keyboard-kbd "k") worf-delete-k :disable)
        (,(cae-keyboard-kbd "j") worf-cut-subtree :disable)
        (,(cae-keyboard-kbd "w") worf-delete-w :disable)
-       (,(cae-keyboard-kbd "n") worf-delete-name :disable))))
+       (,(cae-keyboard-kbd "n") worf-delete-name :disable)))
+   t)
   (eval
    `(worf-defverb
      "yank"
-     '((,(cae-keyboard-kbd "j") org-copy-subtree :disable))))
+     '((,(cae-keyboard-kbd "j") org-copy-subtree :disable)))
+   t)
   (eval
    `(defhydra worf-new (:exit t)
       (,(cae-keyboard-kbd "j") worf-new-down)
       (,(cae-keyboard-kbd "k") org-insert-heading)
       (,(cae-keyboard-kbd "h") org-metaleft)
-      (,(cae-keyboard-kbd "l") worf-new-right))))
+      (,(cae-keyboard-kbd "l") worf-new-right))
+   t))
 
 ;; TODO Rebind Evil commands.
 
