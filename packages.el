@@ -10,9 +10,10 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+;; Added because of errors.
 (package! lv)
-                                        ;Added because I was getting an error
-                                        ;about it not being installed.
+(when (modulep! :editor fold)
+  (package! vimish-fold))
 
 ;;; UI
 (package! info-colors)
