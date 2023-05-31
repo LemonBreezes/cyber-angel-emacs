@@ -164,7 +164,6 @@
 (use-package! meow
   :init
   (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
-  :demand t
   :config
   (when (modulep! :emacs vc)
     (after! git-timemachine
