@@ -222,7 +222,10 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-lookup-definition-dwim ()
   (interactive)
   (if-let ((file (ffap-file-at-point)))
-      (if (file-exists-p file)
+      (if (and (file-exists-p file)
+               (not (and buffer-file-name
+                         (string= (file-truename file)
+                                  (file-truename buffer-file-name)))))
           (progn (better-jumper-set-jump (marker-position (point-marker)))
                  (find-file file))
         (call-interactively #'ffap))
