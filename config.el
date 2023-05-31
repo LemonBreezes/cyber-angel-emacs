@@ -11,7 +11,7 @@
 
 (advice-add #'helm-mode :override #'ignore)
 (remove-hook 'doom-first-input-hook #'helm-mode) ;Helm is not our main
-                                                 ;completion system.
+                                        ;completion system.
 
 ;;; UI
 
@@ -616,7 +616,8 @@
                        lsp-organize-imports-remove-unused
                        prog-fill-reindent-defun
                        indent-pp-sexp
-                       save-buffer))
+                       save-buffer
+                       indent-for-tab-command))
       (add-to-list 'aggressive-indent-protected-commands command))))
 
 (use-package! hungry-delete
