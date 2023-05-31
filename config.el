@@ -247,7 +247,7 @@
               "--completion-style=detailed"
               "--header-insertion=never"
               "--header-insertion-decorators=0")))
-    (add-to-list 'lsp-disabled-clients 'clangd)
+    (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 
