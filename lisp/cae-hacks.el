@@ -97,12 +97,12 @@
 
 ;; Fix `save-some-buffers' so that I can continue the command after quitting a
 ;; diff with "q".
-(defadvice! +popup/quit-window--view-mode-a (oldfun)
+(defadvice! cae-hacks-quit-view-mode-a (oldfun)
   :around #'+popup/quit-window
   (if view-mode
       (View-quit)
     (funcall oldfun)))
-(advice-add #'meow-quit :around #'+popup/quit-window--view-mode-a)
+(advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
 (defadvice! +max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
