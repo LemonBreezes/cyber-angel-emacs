@@ -83,7 +83,8 @@
           (cae-sp-cheat-sheet/body))
        t)
       (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body)
-      (define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
+      ;;(define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body)
+      )
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (dolist (it sp--mc/cursor-specific-vars)
@@ -96,9 +97,8 @@
         (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/body)
         (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/nil)))
     (dolist (x bindings)
-      (define-key smartparens-mode-map (kbd (car x)) (cadr x)) ;Prevent our
-                                        ;commands from being shadowed by
-                                        ;`smartparens'.
+      ;;(define-key smartparens-mode-map (kbd (car x)) (cadr x))
+      (define-key smartparens-mode-map (kbd (car x)) nil)
       (global-set-key (kbd (car x)) (cadr x))))
   ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
   ;; `sp-up-sexp'.
