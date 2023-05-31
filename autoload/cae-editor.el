@@ -289,21 +289,16 @@ mark the string and call `edit-indirect-region' with it."
   (let* ((embark-prompter #'embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
          (embark-indicators '())
+         (posframe (cl-find-if
+                    (lambda (frame)
+                      (eq (frame-parameter frame 'posframe-hidehandler)
+                          #'vertico-posframe-hidehandler))
+                    (visible-frame-list)))
          (vertico-posframe-size-function))
     (setf vertico-posframe-size-function
           `(lambda (_)
-             '(:height
-               ,(frame-height
-                 (cl-find-if (lambda (frame)
-                               (eq (frame-parameter frame 'posframe-hidehandler)
-                                   #'vertico-posframe-hidehandler))
-                             (visible-frame-list)))
-               :width
-               ,(frame-width
-                 (cl-find-if (lambda (frame)
-                               (eq (frame-parameter frame 'posframe-hidehandler)
-                                   #'vertico-posframe-hidehandler))
-                             (visible-frame-list)))
+             '(:height ,(frame-height posframe)
+               :width ,(frame-width posframe)
                :min-height nil
                :min-width nil)))
     (embark-act arg)))
