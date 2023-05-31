@@ -1,5 +1,9 @@
 ;;; editor/meow/config.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (when (autoloadp (symbol-function #'cae-keyboard-kbd))
+    (autoload-do-load (symbol-function #'cae-keyboard-kbd))))
+
 ;; Setup Functions
 (advice-add #'meow-digit-argument :before #'cae-meow-use-keyboard-layout-a)
 
