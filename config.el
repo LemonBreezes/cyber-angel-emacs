@@ -517,6 +517,11 @@
                            (ace-link-man . pre))
         avy-column-line-overlay t))
 
+(use-package! winum
+  :after-call doom-switch-window-hook
+  :config
+  (winum-mode +1))
+
 (use-package! zop-to-char
   :defer t
   :init
