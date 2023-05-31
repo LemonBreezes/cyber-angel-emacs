@@ -267,9 +267,17 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
-             (,(cae-keyboard-kbd ";") lispy-comment "Other")
              ;; The tick and comma keys are special in Lispy because we want
              ;; them to not be rebound.
+
+             ;; We have to find two free keys to bind to the tick and comma
+             ;; commands.
+             ;;,((let (keys)
+             ;;    (when (eq (length (cl-find ?,
+             ;;                               cae-keyboard-orbits
+             ;;                               :test (lambda (x y) (cl-find x y))))
+             ;;              2)
+             ;;      (pus ))))
              (,(cae-keyboard-kbd-reverse ",")
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
@@ -279,8 +287,8 @@
              ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
                                (cae-keyboard-kbd-reverse "'"))
               ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
-                                     (cae-keyboard-kbd-reverse "'"))
-                         cae-lispy-hydra--command-column-alist))
+                                      (cae-keyboard-kbd-reverse "'"))
+                          cae-lispy-hydra--command-column-alist))
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "Select")
