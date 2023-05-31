@@ -1,4 +1,5 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
+
 ;;;###autoload
 (defun cae-kill-buffer-query-diff-a (orig-func &optional buffer-or-name)
   "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
