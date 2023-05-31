@@ -180,8 +180,6 @@
       (add-hook 'git-timemachine-mode-hook
                 (lambda ()
                   (run-at-time 0.01 nil #'meow-insert-mode +1)))))
-  (when (modulep! :ui vc-gutter +diff-hl)
-    )
   (meow/setup-cae)
   (meow/setup-keypad)
   (map! :map meow-normal-state-keymap
