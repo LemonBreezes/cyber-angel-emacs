@@ -1075,13 +1075,10 @@
 
 (use-package! chatgpt-shell
   :defer t :init
-  (autoload #'chatgpt-shell-add-??-command-to-eshell "chatgpt-shell")
   (map! :leader
         :prefix "o"
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
-  (after! eshell
-    (chatgpt-shell-add-??-command-to-eshell))
   :config
   (setq chatgpt-shell-model-version "gpt-4"
         chatgpt-shell-display-function #'switch-to-buffer)
