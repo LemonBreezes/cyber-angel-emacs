@@ -55,6 +55,7 @@
           dtrt-indent-mode
           tree-sitter-mode
           dap-mode
+          eat-eshell-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -72,7 +73,6 @@
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
-                                  eat-eshell-mode
                                   ))
 
   (after! compile
