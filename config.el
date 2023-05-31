@@ -506,7 +506,12 @@
            :map dired-mode-map
            [remap dired-do-async-shell-command] #'dwim-shell-command
            [remap dired-do-shell-command] #'dwim-shell-command
-           [remap dired-smart-shell-command] #'dwim-shell-command))))
+           [remap dired-smart-shell-command] #'dwim-shell-command)))
+
+  (use-package! 0x0
+    :defer t :init
+    (after! embark
+      (define-key embark-region-map (kbd "U") '0x0-dwim))))
 
 
 ;;; Editor
