@@ -1,6 +1,5 @@
 ;;; private/helm/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autoload
 (defun +helm--which-key-inhibit-hook ()
   (setq which-key-inhibit nil)
   (remove-hook 'pre-command-hook
