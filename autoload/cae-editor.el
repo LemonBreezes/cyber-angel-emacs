@@ -242,6 +242,7 @@ mark the string and call `edit-indirect-region' with it."
     (while (search-forward (string ?\C-m) nil t)
       (replace-match "" nil t))))
 
+;;;###autoload
 (defun cae-avy-do (action pt)
   (goto-char pt)
   (unwind-protect
