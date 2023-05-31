@@ -60,10 +60,6 @@
         "+snake"
         "+tetris"
 
-        ;; TODO Eyecandy
-        ;; zone
-        ;; nyan zone
-        ;; also encryption zone
         "+fireplace"
         "+flames-of-freedom"
         "+snow"
