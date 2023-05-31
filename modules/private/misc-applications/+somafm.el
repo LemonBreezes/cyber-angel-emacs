@@ -1,7 +1,9 @@
 ;;; private/misc-applications/somafm.el -*- lexical-binding: t; -*-
 
 (use-package! somafm
-  :defer-incrementally t
+  :defer-incrementally t                ; Somafm is _really_ slow to start up so
+                                        ; we lazily load Somafm and refresh the
+                                        ; channels.
   :init
   (map! :leader
         :prefix +misc-applications-prefix
