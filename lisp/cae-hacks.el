@@ -20,8 +20,9 @@
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (defun cae-hacks-hydra-pause-h ()
-  (ring-insert hydra-pause-ring hydra-curr-body-fn)
-  (hydra-keyboard-quit))
+  (when hydra-curr-map
+    (ring-insert hydra-pause-ring hydra-curr-body-fn)
+    (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h ()
   (unless (zerop (ring-length hydra-pause-ring))
     (run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0))))
