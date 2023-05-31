@@ -525,6 +525,7 @@
        :map Man-mode-map
        "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
+;; Use `<f8>' for `embark-act'.
 (after! embark
   (map! "<f8>" #'embark-act
         (:when (modulep! :completion vertico)
