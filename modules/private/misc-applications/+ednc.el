@@ -1,9 +1,9 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :init
-  (ednc-mode +1)
+  :defer-incrementally t
   :config
+  (ednc-mode +1)
   (defun stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
                  (let ((app-name (ednc-notification-app-name notification)))
