@@ -553,6 +553,11 @@
 ;; are hidden in normal buffers.
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 
+(when (modulep! :completion vertico)
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "<f6>" #'embark-collect-hydra/body)))
+
 (use-package! avy
   :defer t
   :init
