@@ -26,14 +26,14 @@
        (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                             cae-cheatsheets-minibuffer--last-hydra
                             cae-cheatsheets-minibuffer--last-workspace))
-     ;;(when (not (and (equal (tab-bar--current-tab)
-     ;;                       cae-cheatsheets-minibuffer--last-tab)
-     ;;                (eq (tab-bar--current-tab-index)
-     ;;                    cae-cheatsheets-minibuffer--last-tab-index)))
-     ;;  (setf (alist-get cae-cheatsheets-minibuffer--last-tab
-     ;;                   cae-cheatsheets-tab-bar-hydra-alist
-     ;;                   nil nil #'equal)
-     ;;        cae-cheatsheets-minibuffer--last-hydra))
+     (when (not (and (equal (tab-bar--current-tab)
+                            cae-cheatsheets-minibuffer--last-tab)
+                     (eq (tab-bar--current-tab-index)
+                         cae-cheatsheets-minibuffer--last-tab-index)))
+       (setf (alist-get cae-cheatsheets-minibuffer--last-tab
+                        cae-cheatsheets-tab-bar-hydra-alist
+                        nil nil #'equal)
+             cae-cheatsheets-minibuffer--last-hydra))
      (when (and cae-cheatsheets-minibuffer--last-hydra
                 (equal (tab-bar--current-tab)
                        cae-cheatsheets-minibuffer--last-tab)
@@ -82,17 +82,17 @@
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
-;;(defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
-;;  (when (bound-and-true-p hydra-curr-map)
-;;    (hydra-keyboard-quit))
-;;  (when-let ((hydra (alist-get (tab-bar--current-tab)
-;;                               cae-cheatsheets-tab-bar-hydra-alist
-;;                               nil nil #'equal)))
-;;    (setf (alist-get (tab-bar--current-tab)
-;;                     cae-cheatsheets-tab-bar-hydra-alist
-;;                     nil t #'equal)
-;;          nil)
-;;    (run-with-timer 0.001 nil hydra)))
+(defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
+  (when (bound-and-true-p hydra-curr-map)
+    (hydra-keyboard-quit))
+  (when-let ((hydra (alist-get (tab-bar--current-tab)
+                               cae-cheatsheets-tab-bar-hydra-alist
+                               nil nil #'equal)))
+    (setf (alist-get (tab-bar--current-tab)
+                     cae-cheatsheets-tab-bar-hydra-alist
+                     nil t #'equal)
+          nil)
+    (run-with-timer 0.001 nil hydra)))
 
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 ;;(add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
