@@ -28,11 +28,13 @@
 (if (boundp 'after-focus-change-function)
     (add-function :after after-focus-change-function
                   (lambda ()
-                    (when (and (frame-width (selected-frame))
-                               (< (frame-width (selected-frame)) 100))
-                      (global-visual-line-mode +1))))
+                    (global-visual-line-mode (and (frame-width (selected-frame))
+                                                  (< (frame-width (selected-frame)) 100)))))
   (add-hook! 'after-focus-change-function
-    (global-visual-line-mode +1)))
+    (global-visual-line-mode (and (frame-width (selected-frame))
+                                  (< (frame-width (selected-frame)) 100)))))
+(global-visual-line-mode (and (frame-width (selected-frame))
+                                  (< (frame-width (selected-frame)) 100)))
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
