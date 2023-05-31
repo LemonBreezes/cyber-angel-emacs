@@ -94,3 +94,15 @@
 (map! "<f9>" #'minions-minor-modes-menu)
 
 ;; (advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
+
+(use-package! nyan-mode
+  :defer-incrementally t
+  ;; (setq nyan-animate-nyancat t
+  ;;       nyan-wavy-trail t
+  ;;       nyan-bar-length 16
+  ;;       nyan-cat-face-number 3
+  ;;       nyan-animation-frame-interval 0.1
+  ;;       nyan-minimum-window-width 80
+  ;;       nyan-mode-line nil)
+  :config
+  (nyan-mode +1))
