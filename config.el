@@ -483,7 +483,6 @@
             (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
               (load! "lisp/cae-visible-mark")
               (load! "lisp/cae-visual-scrolling")))
-  (load! "lisp/cae-smartparens")
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-multiple-cursors")
 
