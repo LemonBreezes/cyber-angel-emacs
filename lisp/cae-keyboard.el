@@ -275,10 +275,11 @@
               nil "")
              (";" lispy-comment "")
              ;; The tick and comma keys are special in Lispy because we want
-             ;; them to not be rebound.
-             ;; We have to find two free keys to bind to the tick and comma
-             ;; commands.
-             ;; To handle this the right way, we would technically need to
+             ;; them to not be rebound. We have to find two free keys to bind to
+             ;; the tick and comma commands. To handle this the right way, we
+             ;; would technically need to look at this entire orbit but that's
+             ;; tough because the orbit can contain a null byte and mixes of
+             ;; special keys & number keys. Here we take a heuristic approach.
              (,(cond ((= (length (cl-find ?\,
                                           cae-keyboard-orbits
                                           :test (lambda (x y) (cl-find x y))))
