@@ -121,7 +121,7 @@
 
 (defadvice! cae-hacks-auto-sudoedit-fixup-a (oldfun &rest args)
   :around #'auto-sudoedit
-  (advice-add #'dired-insert-subdir-validate
+  (advice-add #'dired-insert-subdir
               :around #'cae-ignore-errors-a)
   (unwind-protect (apply oldfun args)
     (run-at-time 0.01 nil #'advice-remove
