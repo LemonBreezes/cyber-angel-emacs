@@ -54,6 +54,7 @@
   (advice-add #'worf-property
               :after
               (cae-defun cae-org-worf-property-a ()
+                ;; Jump infront of the property drawer
                 (let ((parent (org-element-property :parent (org-element-at-point))))
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
