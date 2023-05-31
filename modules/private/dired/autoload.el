@@ -29,3 +29,10 @@
     (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
       (if fn (funcall fn) (dirvish-kill dv)))
     (find-file file)))
+
+;;(defun cae-dired-find-file-a (oldfun &rest args)
+;;  (if (derived-mode-p 'dired-mode)
+;;      (apply #'cae-dired-find-file args)
+;;    (apply oldfun args)))
+;;
+;;(defun cae-dired-find-file-wrapper-a (oldfun &rest args)
