@@ -37,7 +37,7 @@ we're in the GUD buffer)."
 	                           `(gud-call ,cmd arg)
 	                         ;; Unused lexical warning if cmd does not use "arg".
 	                         cmd))))
-       ,(if key `(define-key gud-global-map ,key #',func))))
+       ,(if key `(global-set-key (concat "\C-x\C-a" ,key) #',func))))
 
   (cae-gud-global-def gud-tbreak "tbreak %f:%l" "\C-t"
                       "Set temporary breakpoint at current line.")
