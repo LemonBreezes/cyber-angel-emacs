@@ -103,6 +103,7 @@
   (use-package! parrot
     :after magit
     :defer t :init
+    (map! "C-!" #'parrot-rotate-next-word-at-point)
     :config
     (setopt parrot-animate 'hide-static
             parrot-rotate-animate-after-rotation nil
@@ -128,4 +129,6 @@
                          "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
-                         "cae-keyboard-kbd")))))
+                         "cae-keyboard-kbd")))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("+log" "message")))))
