@@ -12,8 +12,10 @@
               (zerop (ring-length (persp-parameter 'hydra-pause-ring))))
     (run-with-timer 0.001 nil (ring-remove (persp-parameter 'hydra-pause-ring) 0))))
 
-(add-hook 'persp-before-switch-functions #'cae-hacks-hydra-pause-h)
-(add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)
+(when (modulep! :ui workspaces)
+  (after! persp-mode
+    (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-pause-h)
+    (add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)))
 
 ;;; Tab bar
 
