@@ -14,13 +14,13 @@
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
 (package! rainbow-mode)
-(package! theme-magic)
 
 ;; cae-theme.el
 (package! modus-themes)
 (package! circadian)
 (package! standard-themes)
 (package! ef-themes)
+(package! theme-magic)
 
 ;;; Tools
 (package! nov)
