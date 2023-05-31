@@ -28,9 +28,10 @@
 (define-repeat-map pop-global-mark
   ("C-@" pop-global-mark))
 
+(defun cae-repeat-ignore-when-hydra-active-a ()
+  (and (featurep 'hydra) hydra-curr-map))
 (advice-add #'repeat-post-hook :before-until
-            (defun +repeat-post-hook-a ()
-              (and (featurep 'hydra) hydra-curr-map)))
+            #'cae-repeat-ignore-when-hydra-active-a)
 
 (autoload 'embark-verbose-indicator "embark")
 (autoload 'which-key--create-buffer-and-show "which-key")
