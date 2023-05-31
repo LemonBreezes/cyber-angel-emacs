@@ -47,7 +47,7 @@
   (after! lispy
     (setq lispy-font-lock-keywords nil)
     (setq! lispy-eval-display-style 'overlay)
-    (add-to-list 'lispy-elisp-modes 'minibuffer-mode)
-    (add-to-list 'lispy-elisp-modes 'helpful-mode)
-    (add-to-list 'lispy-elisp-modes 'lisp-data-mode)
+    (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
+    (add-to-list 'lispy-elisp-modes #'helpful-mode)
+    (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)))
