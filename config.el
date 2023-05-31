@@ -79,8 +79,9 @@
                                         ;performance optimization but I would
                                         ;much rather have Emacs automatically
                                         ;recenter my windows.
-        window-combination-resize t)    ;Take new window space from all other
+        window-combination-resize t     ;Take new window space from all other
                                         ;windows (not just current)
+        scroll-preserve-screen-position 'always)
 
   (after! time
     (setq display-time-default-load-average nil))
