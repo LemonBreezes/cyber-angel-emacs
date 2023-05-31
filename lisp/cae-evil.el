@@ -30,7 +30,7 @@
       :n "U" #'evil-redo)
 
 ;; Use Emacs keybindings in Evil insert state.
-(setq evil-disable-insert-state-bindings t
+(setq evil-disable-insert-state-bindings nil
       evil-insert-state-map (make-sparse-keymap))
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
 (define-key evil-insert-state-map
