@@ -997,8 +997,7 @@
              try-expand-line)))
 
   (use-package! copilot
-    :defer t
-    :init
+    :defer t :init
     (add-hook 'text-mode-hook   #'copilot-mode)
     (add-hook 'prog-mode-hook   #'copilot-mode)
     (add-hook 'conf-mode-hook   #'copilot-mode)
