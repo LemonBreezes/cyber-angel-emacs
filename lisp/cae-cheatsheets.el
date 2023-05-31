@@ -87,7 +87,10 @@
     (hydra-keyboard-quit))
   (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist
-                               nil nil #'equal)))
+                               nil nil
+                               (lambda (a b)
+                                 (string= (alist-get 'name (cdr a))
+                                          (alist-get 'name (cdr b)))))))
     (setf (alist-get (tab-bar--current-tab)
                      cae-cheatsheets-tab-bar-hydra-alist
                      nil t #'equal)
