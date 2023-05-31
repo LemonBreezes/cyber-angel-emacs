@@ -126,8 +126,7 @@
                 (bound-and-true-p selectrum-mode)
                 (bound-and-true-p icomplete-mode)
                 (bound-and-true-p helm-mode))
-      (icomplete-mode +1)
-      (icomplete-vertical-mode +1))))
+      (load! "lisp/cae-icomplete"))))
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
