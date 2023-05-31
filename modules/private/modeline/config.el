@@ -177,16 +177,15 @@
 (use-package! parrot
   :defer t :init
   ;; Wrangle parrot into being fully lazy-loaded.
-  (autoload #'parrot--party-while-process "parrot")
+  (autoload #'parrot-party-while-process "parrot")
   (autoload #'parrot--todo-party "parrot")
   (autoload #'parrot--magit-push-filter "parrot")
   (advice-add #'gac-push
               :after
               (cae-defun cae-modeline-gac-party-on-push-a (buffer)
                 (when-let ((proc (get-buffer-process "*git-auto-push*")))
-                  (parrot--party-while-process proc))))
-  (add-hook 'org-after-todo-state-change-hook
-            #'parrot--todo-party)
+                  (parrot-party-while-process proc))))
+  (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
   (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
   (setq parrot-animate 'hide-static
