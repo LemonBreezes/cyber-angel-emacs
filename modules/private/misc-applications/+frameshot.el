@@ -7,4 +7,4 @@
         :prefix +misc-applications-prefix
         "F" #'+frameshot-take)
   :config
-  (setopt frameshot-config `((output . ,doom-picture-dir))))
+  (setq frameshot-config `((output . ,doom-picture-dir))))
