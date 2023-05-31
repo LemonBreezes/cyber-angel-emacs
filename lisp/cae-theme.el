@@ -52,8 +52,6 @@
     :config
     (setq circadian-themes '((:sunrise . ef-trio-light)
                              (:sunset  . ef-trio-dark)))
-    (circadian-setup)
-    (after! exwm-randr
-      (add-hook 'doom-load-theme-hook #'exwm-randr-refresh))))
+    (circadian-setup)))
 
 ;; (map! "<f5>" #'modus-themes-toggle)
