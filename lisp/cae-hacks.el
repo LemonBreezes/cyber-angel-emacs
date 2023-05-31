@@ -138,7 +138,7 @@
 (defvar cae-hacks--gcmh-mode nil)
 (defvar cae-hacks--gc-idle-timer nil)
 
-(when (version< "30" emacs-version)
+(when (version<= "30" emacs-version)
   ;; Emacs 30 made a recent change to a constant which speeds up GC by 25%-50%,
   ;; so I am testing out increasing Doom's default thresholds.
   (after! gcmh
