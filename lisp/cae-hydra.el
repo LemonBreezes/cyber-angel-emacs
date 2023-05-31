@@ -28,7 +28,7 @@
     (setq cae-hydra--last-hydra nil)
     (cae-hydra-store-last-hydra-h)
     (when hydra
-      (funcall hydra))))
+      (run-at-time 0.001 nil hydra))))
 
 (add-hook 'persp-before-switch-functions #'cae-hydra-store-last-hydra-h)
 (add-hook 'persp-activated-functions #'cae-hydra-restore-last-hydra-h)
