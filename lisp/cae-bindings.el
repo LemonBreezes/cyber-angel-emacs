@@ -46,8 +46,9 @@
                   which-key-replacement-alist)))
   (map! :leader
         (:prefix ("F" . "fold")
-         ;;"k"     #'vimish-fold-delete
-         ;;"K" #'vimish-fold-delete-all
+         "k"     #'vimish-fold-delete
+         "K" #'vimish-fold-delete-all
+         "v" #'vimish-fold
          "t"     #'+fold/toggle
          "C" #'+fold/close-all
          "o"     #'+fold/open
