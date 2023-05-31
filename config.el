@@ -102,6 +102,10 @@
       (setq doom-modeline-hud t
             doom-modeline-support-imenu t)))
 
+  (when (modulep! :completion vertico +childframe)
+    (unless (cae-display-graphic-p)
+      (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
+
   (after! which-key
     (setq which-key-ellipsis "..."
           which-key-compute-remaps t
