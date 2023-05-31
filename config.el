@@ -128,6 +128,10 @@
   :init
   (add-hook 'doom-first-buffer-hook #'highlight-context-line-mode))
 
+(use-package! goggles
+  :init
+  (add-hook 'doom-first-input-hook #'goggles-mode))
+
 
 ;;; Tools
 (load! "lisp/cae-webkit.el")
