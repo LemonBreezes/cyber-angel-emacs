@@ -1,8 +1,8 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; (load! "lisp/cae-logs")
+(load! "lisp/cae-logs")
 (load! "lisp/cae-keyboard")
-;; (load! "lisp/cae-multi")
+(load! "lisp/cae-multi")
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
