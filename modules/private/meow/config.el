@@ -172,6 +172,7 @@
                   (run-at-time 0.01 nil #'meow-insert-mode +1)))))
   (meow/setup-cae)
   (meow/setup-keypad)
+  (meow-setup-indicator)
   (map! :map meow-normal-state-keymap
         "DEL" doom-leader-map)
   (appendq! meow-mode-state-list
