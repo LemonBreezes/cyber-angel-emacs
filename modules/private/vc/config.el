@@ -53,7 +53,7 @@
                                :bind "G")
                               (:name "Git link homepage"
                                :handler (progn
-                                          (advice-add #'git-link--new #'override #'identity)
+                                          (advice-add #'git-link--new :override #'identity)
                                           (call-interactively #'git-link-homepage)
                                           (advice-remove #'git-link--new #'override))
                                :cache t
