@@ -118,9 +118,7 @@
 
 (defun cae-make-conditional-key-translation (key-from key-to translate-keys-p)
   "Make a Key Translation such that if the translate-keys-p function returns true,
-   key-from translates to key-to, else key-from translates to itself.  lta
-
-***##..i
+   key-from translates to key-to, else key-from translates to itself.  translate-keys-p
    takes key-from as an argument. "
   (define-key key-translation-map key-from
     (lambda (prompt)
