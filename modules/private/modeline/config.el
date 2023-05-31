@@ -94,33 +94,3 @@
 (map! "<f9>" #'minions-minor-modes-menu)
 
 ;; (advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
-
-(use-package! nyan-mode
-  :when (modulep! +pretty)
-  :defer-incrementally t
-  ;; (setq nyan-animate-nyancat t
-  ;;       nyan-wavy-trail t
-  ;;       nyan-bar-length 16
-  ;;       nyan-cat-face-number 3
-  ;;       nyan-animation-frame-interval 0.1
-  ;;       nyan-minimum-window-width 80
-  ;;       nyan-mode-line nil)
-  :config
-  (nyan-mode +1))
-
-(use-package! parrot
-  :when (modulep! +pretty)
-  :defer-incrementally t
-  :init
-  :config
-  (unwind-protect
-      (progn (advice-add #'parrot-start-animation :override #'ignore)
-             (parrot-mode +1))
-    (setq! parrot-animate 'hide-static
-           parrot-rotate-animate-after-rotation nil
-           parrot-num-rotations 10
-           parrot-animate-on-load nil
-           parrot-party-on-magit-push t
-           parrot-party-on-org-todo-states '("DONE")
-           parrot-type 'nyan)
-    (advice-remove #'parrot-start-animation #'ignore)))
