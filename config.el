@@ -919,10 +919,11 @@
          "<end>" #'copilot-accept-completion-by-line
          "M-n" #'copilot-next-completion
          "M-p" #'copilot-previous-completion))
-  (add-hook 'doom-escape-hook
-            (cae-defun cae-copilot-clear-overlay-h ()
-              (when (copilot--overlay-visible)
-                (copilot-clear-overlay) t)))
+  (defun cae-copilot-clear-overlay-h ()
+    "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
+    (when (copilot--overlay-visible)
+      (copilot-clear-overlay) t))
+  (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
   (add-to-list 'copilot-disable-predicates
                (cae-defun cae-disable-copilot-in-gptel-p ()
                  (bound-and-true-p gptel-mode)))
