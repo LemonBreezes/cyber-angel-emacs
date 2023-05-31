@@ -49,7 +49,7 @@
     (dolist (mode '(cae-completion-mode symbol-overlay-mode goggles-mode
                     lispy-mode corfu-mode hungry-delete-mode
                     worf-mode isearch-mb-mode))
-      (add-to-list 'mc/unsupported-minor-modes mode nil #'eq))
+      (add-to-list 'mc/unsupported-minor-modes mode))
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
     (define-key mc/keymap (kbd "C-. C-.")   #'mc/freeze-fake-cursors-dwim)
