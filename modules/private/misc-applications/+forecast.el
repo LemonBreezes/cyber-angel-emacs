@@ -11,5 +11,5 @@
         forecast-units 'us
         forecast-language 'en)
   (map! :map forecast-mode-map
-        :n "q" #'+forecast-quit
-        :n "r" #'forecast-refresh))
+        "q" #'+forecast-quit
+        "r" #'forecast-refresh))
