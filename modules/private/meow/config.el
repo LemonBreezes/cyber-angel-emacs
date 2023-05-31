@@ -213,7 +213,7 @@
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
-  (unless (display-graphic-p)           ;Make Meow usable in the terminal.
+  (unless (cae-display-graphic-p)       ;Make Meow usable in the terminal.
     (setq meow-esc-delay 0.001)
     (meow-esc-mode +1))
   (setq meow-use-clipboard t
@@ -245,3 +245,7 @@
           (?s . ("\"" . "\""))
           (?\' . ("\'" . "\'"))
           (?` . ("`" . "`")))))
+
+;;Local Variables:
+;;eval: (unless (modulep! :private meow) (remove-hook 'write-file-functions #'eval-buffer t))
+;;End:
