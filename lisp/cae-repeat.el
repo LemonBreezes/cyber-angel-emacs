@@ -31,6 +31,9 @@
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
+  (define-repeat-map scroll-up-command
+    ("v" scroll-up-command))
+
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
 
