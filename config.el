@@ -454,8 +454,6 @@
                                         ; and `C-x e'.
         ;; C-x bindings (ctl-x-map)
         "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
-        ;; Custom M-# bindings for fast register access
-        ;;"M-'" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
         "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
         "C-x r J" #'consult-register
         [remap jump-to-register] #'consult-register-load
@@ -478,11 +476,11 @@
         "M-s D" #'consult-locate
         "M-s g" #'consult-grep
         "M-s G" #'consult-git-grep
+        [remap Info-search] #'consult-info
         "M-s i" #'consult-info
         "M-s r" #'consult-ripgrep
         "M-s l" #'consult-line
         "M-s L" #'consult-line-multi
-        "M-s m" #'consult-multi-occur
         "M-s k" #'consult-keep-lines
         "M-s u" #'consult-focus-lines
         ;; Isearch integration
