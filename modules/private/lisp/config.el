@@ -50,4 +50,4 @@
     (add-to-list 'lispy-elisp-modes 'minibuffer-mode)
     (add-to-list 'lispy-elisp-modes 'helpful-mode)
     (add-to-list 'lispy-elisp-modes 'lisp-data-mode)
-    (add-hook 'helpful-mode #'lispy-mode))  )
+    (add-hook 'helpful-mode #'lispy-mode)))
