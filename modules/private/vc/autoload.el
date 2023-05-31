@@ -17,5 +17,5 @@ Meant to be used like:
             "diff" "--no-prefix" (format "%s..." upstream-branch))))))
 
 ;;;###autoload
-(defun cae-magit-insert-diff-upstream-master ()
+(defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
