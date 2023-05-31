@@ -246,8 +246,9 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-titlecase-word-dwim ()
   (interactive)
   (if (region-active-p)
-      (call-interactively #'titlecase-dwim)
-    (when-let ((bounds (bounds-of-thing-at-point 'word))
-               (beg (car bounds))
-               (end (cdr bounds)))
-      (titlecase-region beg end))))
+      (call-interactively #'titlecase-region)
+    (goto-char
+     (save-mark-and-excursion
+       (mark-word)
+       (prog1 (region-end)
+         (call-interactively #'titlecase-region))))))
