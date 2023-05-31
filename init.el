@@ -37,6 +37,7 @@
        (spell +everywhere)
 
        :tools
+       debugger
        editorconfig
        (eval +overlay)
        lookup
