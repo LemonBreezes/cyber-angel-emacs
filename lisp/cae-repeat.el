@@ -18,12 +18,12 @@
    "<right>" next-buffer
    "u" winner-undo
    "r" winner-redo
-   (:exit "f" find-file)
    ;; Number row keys
    "!" delete-other-windows
    "@" split-window-below
    ";" split-window-right
-   ")" +workspace/close-window-or-workspace))
+   ")" +workspace/close-window-or-workspace)
+  (:exit "f" find-file))
 
 (define-repeat-map isearch-repeat
   ("s" isearch-repeat-forward
