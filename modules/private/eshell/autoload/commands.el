@@ -49,7 +49,7 @@
     (rename-file file2 file1)
     (rename-file temp file2)))
 
-;; Made obsolete by `eshell-elecslash'
+;; Made obsolete by `eshell-elecslash'.
 ;;;;; https://github.com/dakra/dmacs/blob/master/init.org#eshell
 ;;;;;###autoload
 ;;(defun eshell/rcd (&optional directory)
