@@ -6,7 +6,7 @@
         (cae-keyboard-remap-reverse last-command-event)))
 
 ;;;###autoload
-(defun cae-meow-update-cursor-a ()
+(defun cae-meow-update-cursor-a (&rest _)
   (when-let ((cursor
               (symbol-value
                (intern (concat "meow-cursor-type-"
