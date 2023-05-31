@@ -72,13 +72,13 @@
 
   (cond ((modulep! :completion vertico)
          (map! :map eshell-mode-map
-               "C-r" #'consult-history))
+               [remap eshell-isearch-backward] #'consult-history))
         ((modulep! :completion ivy)
          (map! :map eshell-mode-map
-               "C-r" #'counsel-esh-history))
+               [remap eshell-isearch-backward] #'counsel-esh-history))
         ((modulep! :completion helm)
          (map! :map eshell-mode-map
-               "C-r" #'helm-eshell-history)))
+               [remap eshell-isearch-backward] #'helm-eshell-history)))
 
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
