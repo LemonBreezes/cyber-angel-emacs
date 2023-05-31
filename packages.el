@@ -10,7 +10,6 @@
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
-(package! mini-popup :recipe (:host github :repo "minad/mini-popup"))
 
 ;; cae-theme.el
 (package! modus-themes)
