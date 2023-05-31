@@ -516,11 +516,10 @@
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
-  ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
   (defun cae-ask-kill-buffer ()
     "Ask to diff, save or kill buffer"
     (if (and (buffer-file-name) (buffer-modified-p))
-        (cl-loop for ch = (read-event "(K)ill buffer, (D)iff buffer, (S)ave buffer, (N)othing?")
+        (cl-loop for ch = (read-event "(k)ill buffer, (d)iff buffer, (s)ave buffer, (n)othing?")
                  if (or (eq ch ?k) (eq ch ?K))
                  return t
                  if (or (eq ch ?d) (eq ch ?D))
