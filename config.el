@@ -888,10 +888,9 @@
 (use-package! string-edit-at-point      ; Used in `cae-edit-indirect-dwim'.
   :defer t)
 
-(after! outline
-  (after! which-key
-    (add-to-list 'which-key-replacement-alist
-                 `(("C-c @" . nil) . (nil . "outline")))))
+(after! (:all outline which-key)
+  (add-to-list 'which-key-replacement-alist
+               `(("C-c @" . nil) . (nil . "outline"))))
 
 
 ;;; Autocompletion
