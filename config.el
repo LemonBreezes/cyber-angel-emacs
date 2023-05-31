@@ -35,10 +35,6 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
-(when (modulep! :term eshell)
-  (after! fish-completion
-    (advice-remove #'fish-completion--list-completions-with-desc #'+eshell--fallback-to-bash-a)))
-
 ;;; UI
 
 (when cae-init-ui-enabled-p
