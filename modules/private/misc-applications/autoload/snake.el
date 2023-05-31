@@ -5,7 +5,7 @@
   ("<f6>" nil "Exit" :exit t)
   ("q" snake-end-game nil :exit t)
   ("n" snake-start-game "Start game" :column "Misc")
-  ("p" snake-pause-game "Pause game" :column "Misc")
+  ("p" snake-pause-game "Pause/Unpause game" :column "Misc")
   ("<down>" snake-move-down "Move down" :column "Movement")
   ("<up>" snake-move-up "Move up" :column "Movement")
   ("<left>" snake-move-left "Move left" :column "Movement")
