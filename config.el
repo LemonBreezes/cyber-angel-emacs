@@ -133,6 +133,11 @@
   :config
   (setq-default goggles-pulse t))
 
+(when (modulep! :completion vertico +childframe)
+  (after! vertico-posframe
+    (setq vertico-posframe-parameters
+          '((inhibit-double-buffering . t)))))
+
 
 ;;; Tools
 (load! "lisp/cae-webkit.el")
