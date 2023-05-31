@@ -7,10 +7,16 @@
 (autoload 'View-scroll-half-page-forward "view")
 (autoload 'View-scroll-half-page-backward "view")
 
+;; Some modes remap `scroll-down-command', etc rather than binding the keys directly.
 ;;(map! "C-v" #'View-scroll-half-page-forward
 ;;      "M-v" #'View-scroll-half-page-backward
 ;;      "C-M-v" #'my-View-scroll-half-page-forward-other-window
 ;;      "C-M-S-v" #'my-View-scroll-half-page-backward-other-window)
+
+(map! [remap scroll-up-command] #'View-scroll-half-page-forward
+      [remap scroll-down-command] #'View-scroll-half-page-backward
+      [remap scroll-other-window] #'my-View-scroll-half-page-forward-other-window
+      [remap scroll-other-window-down] #'my-View-scroll-half-page-backward-other-window)
 
 (defun my-View-scroll-half-page-forward-other-window ()
   (interactive)
