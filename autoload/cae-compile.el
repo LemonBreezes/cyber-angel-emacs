@@ -81,7 +81,7 @@
              (lambda (s)
                (not
                 (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
-                               "shared-local" "media")
+                               "shared-local" "media" "secrets")
                            :test (lambda (x y)
                                    (string= (file-name-nondirectory x)
                                             y)))))))
