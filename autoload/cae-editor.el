@@ -73,6 +73,7 @@
 
 (defun cae-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
+             (dirvish-curr)
              (> (length (dv-layout (dirvish-curr))) 1))
     (dirvish-layout-toggle)))
 
