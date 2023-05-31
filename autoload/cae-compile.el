@@ -110,7 +110,7 @@
   (when (not (bound-and-true-p cae-config-finished-loading))
     (message "Config not finished loading")
     (cl-return-from cae-compile-my-private-config))
-  (when (not cae-config-compilation-on-kill-enabled)
+  (when (not cae-config-compilation-on-kill-enabled-p)
     (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
           (ignore-errors (byte-compile-file s))
