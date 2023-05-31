@@ -10,7 +10,6 @@
 ;;;###autoload
 (defun cae-ai-lazy-load-org-ai ()
   (interactive)
-  (require 'org-ai)
   (org-ai-global-mode +1)
   (setq unread-command-events
         (listify-key-sequence (kbd "C-c M-a")))
