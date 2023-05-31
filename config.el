@@ -888,8 +888,10 @@
         "C-c & C-v" nil))
 
 (when (modulep! :editor multiple-cursors)
-  (map! "C->" #'mc/mark-next-like-this
-        "C-<" #'mc/mark-previous-like-this)
+  (map! "C->"   #'mc/mark-next-like-this
+        "C-<"   #'mc/mark-previous-like-this
+        "C-M->" #'mc/skip-to-next-like-this
+        "C-M-<" #'mc/skip-to-previous-like-this)
   (map! :leader
         :prefix "m"
         :desc "Pop mark" "C-SPC"            #'mc/mark-pop
