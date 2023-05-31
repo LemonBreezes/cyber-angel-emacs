@@ -41,6 +41,7 @@
        :emacs
        undo
        ibuffer
+       vc
 
        :term
        eshell
