@@ -162,14 +162,16 @@
              (,(cae-keyboard-kbd "x") special-lispy-x "Other")
              (,(cae-keyboard-kbd "Z") special-lispy-edebug-stop "Other")
              (,(cae-keyboard-kbd "V") special-lispy-visit "Other")
-             ;; If any of the above keys get mapped to these, the keybinding will be lost!
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
              (,(cae-keyboard-kbd-reverse ",")
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
-              "Other")
+              "Other")                  ; This bit is really annoying. I don't
+                                        ; want to separately remap every lispy
+                                        ; command to a category just for this
+                                        ; one keycode. Lol.
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "")
