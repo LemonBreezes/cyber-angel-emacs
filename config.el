@@ -362,6 +362,21 @@
         [remap save-buffer] #'abbrev-edit-save-buffer)
   (map! :map abbrev-map "e" #'edit-abbrevs))
 
+(after! ibuffer
+  (setq ibuffer-formats
+        '((mark modified read-only locked " "
+           (name 23 23 :left :elide)
+           " "
+           (size 9 -1 :right)
+           " "
+           (mode 16 16 :left :elide)
+           " "
+           (vc-status 12 :left)
+           " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename))))
+
 
 ;;; Autocompletion
 
