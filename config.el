@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
-(load! "lisp/cae-multi")
+(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")
 
 (defvar cae-config-finished-loading nil
