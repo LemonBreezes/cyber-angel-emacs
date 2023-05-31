@@ -5,4 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "d" #'disk-usage))
+        "d" #'disk-usage)
+  :config
+  (map! :map disk-usage-mode-map
+        "<f6>" #'+disk-usage-hydra/body))
