@@ -26,7 +26,7 @@
           ;;("S" elfeed-search-set-filter "Set filter")
           ("c" elfeed-search-clear-filter "Clear filter"))
          "Navigation"
-         (("RET" elfeed-search-show-entry "Show entry")
+         (;;("RET" elfeed-search-show-entry "Show entry")
           ("b" elfeed-search-browse-url "Open entry")
           ;;("n" next-line "Next line")
           ;;("p" previous-line "Previous line")
