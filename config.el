@@ -947,7 +947,9 @@
           dabbrev-friend-buffer-function #'cae-dabbrev-friend-buffer))
 
   (use-package! hippie-exp
-    :defer t :config
+    :defer t :init
+    (map! [remap dabbrev-expand] #'hippie-expand)
+    :config
     (setq  hippie-expand-try-functions-list
            '(try-expand-dabbrev
              try-expand-dabbrev-all-buffers
@@ -957,7 +959,6 @@
              try-complete-lisp-symbol-partially
              try-complete-lisp-symbol
              try-expand-line)))
-  (map! [remap dabbrev-expand] #'hippie-expand)
 
   (use-package! copilot
     :defer t
