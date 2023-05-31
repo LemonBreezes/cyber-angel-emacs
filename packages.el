@@ -1,9 +1,10 @@
 ;; -*- no-byte-compile: t; -*-
 (unpin! t)
-(disable-packages! smartparens
-                   evil-escape
+(disable-packages! evil-escape
                    flyspell
                    ccls)
+(unless (modulep! :config +smartparens)
+  (disable-packages! smartparens))
 
 ;;; UI
 
