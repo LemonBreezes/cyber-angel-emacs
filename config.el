@@ -421,7 +421,7 @@
     :init
     (defadvice! +pdf-view-mode-a (oldfun &rest args)
       :around #'pdf-view-mode
-      (if (display-graphic-p)
+      (if (cae-display-graphic-p)
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
 
@@ -973,7 +973,7 @@
     (advice-add #'register-preview :override #'consult-register-window)))
 
 (after! cc-mode
-  (if (display-graphic-p)
+  (if (cae-display-graphic-p)
       (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
