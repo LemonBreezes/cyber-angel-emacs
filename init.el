@@ -83,6 +83,9 @@
        :config
        (default +bindings +smartparens)
 
+       :email
+       (mu4e +org)
+
        :app
        (rss +org)
 
