@@ -90,7 +90,7 @@
   :init
   (run-with-idle-timer 2 nil
                        (lambda () (theme-magic-export-theme-mode +1)
-                         (theme-magic-from-emacs))))
+                         (cae-hacks-shut-up-a theme-magic-from-emacs))))
 
 (unless (display-graphic-p)
   (setq +ligatures-in-modes nil
