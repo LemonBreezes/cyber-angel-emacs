@@ -107,17 +107,17 @@
 
 ;; Set some popup rules.
 (plist-put! +popup-defaults :ttl 3)
-(set-popup-rule! "^\\*Man [^*]*\\*" :size 0.5 :side 'right :quit t :select :ttl 3)
-(set-popup-rule! "^ \\*Metahelp\\*" :size 0.5 :side 'right :quit t :select t :ttl 3)
+(set-popup-rule! "^\\*Man [^*]*\\*" :size 0.5 :side 'right :quit t :select :ttl t)
+(set-popup-rule! "^ \\*Metahelp\\*" :size 0.5 :side 'right :quit t :select t :ttl t)
 ;; Do not kill or close these buffers (respectively windows)!
 (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :ttl nil :quit nil)
 (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :quit nil)
-(set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :ttl 5 :quit nil :ttl 3)
-(set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :side 'right :quit t :select t :ttl 3)
+(set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :ttl 5 :quit nil :ttl t)
+(set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :side 'right :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :side 'right)
 (after! info
-  (set-popup-rule! "^\\*info\\*" :size #'+popup-shrink-to-fit :quit t :select t :side 'right :ttl 3))
-(set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl 3)
+  (set-popup-rule! "^\\*info\\*" :size #'+popup-shrink-to-fit :quit t :select t :side 'right :ttl t))
+(set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 ;; (set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (after! eww
