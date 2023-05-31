@@ -1,5 +1,8 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; For when we compile Doom.
+(defvar personal-keybindings nil)
+
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c l")
 
@@ -16,7 +19,7 @@
        modeline
        (popup +defaults)
        ophints
-       (vc-gutter +pretty)
+       (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
 
