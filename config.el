@@ -537,7 +537,7 @@
 
   ;; Enable all disabled commands.
   (setq disabled-command-function nil)
-
+  ;;
   ;; Treat all themes as safe.
   (setq custom-safe-themes t)
 
