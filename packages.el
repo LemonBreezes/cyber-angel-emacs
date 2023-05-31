@@ -9,6 +9,8 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+
+;; Packages that are having bugs being byte-compiled in Emacs30.
 (package! yasnippet :recipe (:build (:not compile)))
 
 ;;; UI
