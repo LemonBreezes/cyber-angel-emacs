@@ -881,12 +881,12 @@
 (when (modulep! :editor multiple-cursors)
   (map! :leader
         :prefix "m"
-        :desc "Pop mark" "C-SPC" #'mc/mark-pop)
+        :desc "Pop mark" "C-SPC" #'mc/mark-pop
+        :desc "Mark all above" "<" #'mc/mark-all-above
+        :desc "Mark all below" ">" #'mc/mark-all-below)
   (after! multiple-cursors-core
     (define-key mc/keymap (kbd "C-. M-C-f") 'mc/mark-next-sexps)
     (define-key mc/keymap (kbd "C-. M-C-b") 'mc/mark-previous-sexps)
-    (define-key mc/keymap (kbd "C-. <") 'mc/mark-all-above)
-    (define-key mc/keymap (kbd "C-. >") 'mc/mark-all-below)
 
     (define-key mc/keymap (kbd "C-. C-d") 'mc/remove-current-cursor)
     (define-key mc/keymap (kbd "C-. C-k") 'mc/remove-cursors-at-eol)
