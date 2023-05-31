@@ -778,6 +778,13 @@
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
+  (defun symbol-overlay-jump-avy ()
+    "Jump to another occurance of symbol with avy."
+    (interactive)
+    (avy-with symbol-overlay-jump-avy
+      (avy-process
+       (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
+  (define-key symbol-overlay-map (kbd "'") 'symbol-overlay-jump-avy)
   ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
   ;; overlay in the buffer. This is probably a bug.
   (advice-add #'symbol-overlay-get-list
