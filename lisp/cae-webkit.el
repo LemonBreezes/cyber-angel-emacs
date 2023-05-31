@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-webkit.el -*- lexical-binding: t; -*-
 
 ;; This file has been deprecated because `webkit' has not been updated for over
-;; a year and no longer works on Gentoo.
+;; a year and no longer works on my systems.
 
 (use-package! webkit
   :defer t
