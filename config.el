@@ -6,8 +6,6 @@
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-(defvar cae-config-electric-pair-mode t
-  "Whether `electric-pair-mode' is enabled globally.")
 
 ;;; UI
 
@@ -400,18 +398,13 @@
                  #'+snippets--disable-smartparens-before-expand-h))
 
   ;; This is how we get curly braces working in C without `smartparens'.
-  (if cae-config-electric-pair-mode
-      (electric-pair-mode +1)
-    (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
-    (add-hook 'c-mode-common-hook #'electric-pair-local-mode))
+  (electric-pair-mode +1)
   (map! [remap newline] nil)
   (add-hook 'doom-first-file-hook #'electric-indent-mode)
-
-  (after! elec-pair
-    (setq electric-pair-pairs '((?\" . ?\")
-                                (?\{ . ?\})
-                                (?\[ . ?\]))
-          electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)))
+  (setq electric-pair-pairs '((?\" . ?\")
+                              (?\{ . ?\})
+                              (?\[ . ?\]))
+        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
