@@ -623,11 +623,15 @@
         "M-p" #'avy-goto-line-above
         "C-;" #'avy-goto-word-1
         :map isearch-mode-map
-        "C-;" #'avy-isearch)
+        "C-;" #'avy-isearch
+        (:when (not (cae-display-graphic-p))
+         "M-j" #'avy-isearch))
   (when (modulep! :completion vertico)
     (after! vertico
       (map! :map vertico-map
-            "C-;" #'vertico-quick-jump)))
+            "C-;" #'vertico-quick-jump
+            (:when (not (cae-display-graphic-p))
+             "M-j" #'vertico-quick-jump))))
   (after! embark
     (map! :map embark-collect-mode-map
           "C-;" #'avy-embark-collect-choose))
