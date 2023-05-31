@@ -28,7 +28,9 @@
           (delete '(("\\`C-c !\\'") nil . "checkers")
                   which-key-replacement-alist))))
 (when (modulep! :editor snippets)
-  )
+  (define-key doom-leader-map "&" nil)
+  (map! :leader
+        :desc "snippets" "y" doom-leader-snippets-map))
 
 ;;; UI
 
