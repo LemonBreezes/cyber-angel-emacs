@@ -382,6 +382,10 @@
          :map magit-log-mode-map
          "M-n" #'avy-goto-line-below
          "M-p" #'avy-goto-line-above)
+        (:when (modulep! :completion vertico)
+          (:after vertico-quick
+           :map vertico-map
+           "M-j" #'vertico-quick-jump))
         :map isearch-mode-map
         "M-j" #'avy-isearch)
   :config
