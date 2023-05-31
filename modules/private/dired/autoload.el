@@ -50,3 +50,11 @@
 (defun cae-dired-next-buffer ()
   (interactive)
   (cae-dired-switch-buffer--handle-dirvish #'next-buffer))
+
+;;;###autoload
+(defun cae-dired-jump ()
+  (interactive)
+  (call-interactively #'dired-jump)
+  (when (one-window-p)
+    (ignore-error user-error
+      (dirvish-layout-switch dirvish-default-layout))))
