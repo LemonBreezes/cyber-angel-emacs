@@ -73,10 +73,9 @@
           (display-fill-column-indicator-mode)
           (rainbow-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
-                                  projectile-mode
-                                  ))
+                                  projectile-mode))
 
-  (after! compile
+(after! compile
     (setq-default minions-mode-line-modes
                   (cons
                    (list
