@@ -875,7 +875,28 @@
                   eri/web-mode-element-parent
                   eri/mark-inside-org-table-cell
                   eri/mark-outside-org-table-cell     
-                  eri/web-mode-element-parent-content))
+                  eri/web-mode-element-parent-content
+                  er/mark-org-code-block
+                  er/mark-url
+                  er/mark-word
+                  er/mark-defun
+                  er/mark-email
+                  er/mark-symbol
+                  er/mark-comment
+                  er/mark-sentence
+                  er/mark-paragraph          
+                  er/mark-org-parent         
+                  er/mark-method-call
+                  er/mark-org-element
+                  er/mark-inside-pairs
+                  er/mark-inside-quotes
+                  er/mark-next-accessor
+                  er/mark-outside-pairs
+                  er/mark-text-sentence
+                  er/mark-outside-quotes
+                  er/mark-text-paragraph
+                  er/mark-org-element-parent
+                  er/mark-symbol-with-prefix))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
