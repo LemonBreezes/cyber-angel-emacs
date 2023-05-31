@@ -12,6 +12,7 @@
   (disable-packages! flycheck))
 ;; Added because of errors.
 (package! lv)
+(package! vimish-fold)
 
 ;;; UI
 (package! info-colors)
