@@ -379,7 +379,9 @@
         "M-p" #'avy-goto-line-above
         "M-j" #'avy-goto-char-timer
         :map isearch-mode-map
-        "M-j" #'avy-isearch)
+        "M-j" #'avy-isearch
+        (:after vertico
+         :map magit-log-mode-map))
   :config
   (setq avy-timeout-seconds 0.25
         avy-keys (cae-keyboard-remap
