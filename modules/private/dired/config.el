@@ -109,7 +109,8 @@
         "h" #'dirvish-history-jump
         "M-n" nil                       ; for `avy-goto-line-below'
         "N" #'dirvish-narrow
-        "j" #'+default/search-buffer)
+        "j" #'+default/search-buffer
+        [remap doom/window-maximize-buffer] #'cae-dired-maximize-buffer)
 
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
