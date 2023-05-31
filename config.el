@@ -357,6 +357,16 @@
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
 
+(use-package! anzu
+  :defer t
+  :init
+  (global-set-key [remap query-replace] 'anzu-query-replace)
+  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+  (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
+  (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+  :config
+  (setq anzu-mode-lighter ""))
+
 
 ;;; Editor
 
