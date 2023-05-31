@@ -69,6 +69,7 @@
        eshell
        dired
        lisp
+       misc-applications
        unpackaged
        vc)
 
