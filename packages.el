@@ -77,6 +77,7 @@
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
 (package! ialign)
+(package! transpose-frame)              ; I might bind this in the future.
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
