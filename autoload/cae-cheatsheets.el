@@ -20,7 +20,9 @@
 
 ;;;###autoload (autoload 'cae-vertico-cheatsheet-hydra/body "autoload/cae-cheatsheets" nil t)
 (defhydra cae-vertico-cheatsheet-hydra (:color pink :foreign-keys run)
-  ("C-c ;" embbark-export "Export")
+  ("C-c ;" embark-export "Export")
+  ("C-c C-e" +vertico/embark-export-write "Export writable")
+  ("C-c C-l" embark-collect "Collect")
   ("<f6>" nil "Exit" :exit t))
 
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
