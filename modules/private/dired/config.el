@@ -108,7 +108,9 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "N" #'dirvish-narrow
-        "j" #'+default/search-buffer))
+        "j" #'+default/search-buffer
+        [remap previous-buffer] #'cae-dired-previous-buffer
+        [remap next-buffer] #'cae-dired-next-buffer))
 (map! :leader "o-" #'cae-dired-jump)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
