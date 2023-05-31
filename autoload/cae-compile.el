@@ -56,7 +56,10 @@
          (not (doom-module-p (car module) (cdr module))))))
 
 ;;;###autoload
-(defun cae-compile-this-elisp-file ()
+(cl-defun cae-compile-this-elisp-file ()
+  (when (not (bound-and-true-p cae-config-finished-loading))
+    (message "Config not finished loading")
+    (cl-return-from cae-compile-this-elisp-file))
   (unless (or no-byte-compile
               (not (stringp (buffer-file-name)))
               (file-in-directory-p (buffer-file-name) doom-local-dir)
@@ -70,8 +73,11 @@
 
 
 ;;;###autoload
-(defun cae-compile-my-private-config (&optional arg)
+(cl-defun cae-compile-my-private-config (&optional arg)
   (interactive "P")
+  (when (not (bound-and-true-p cae-config-finished-loading))
+    (message "Config not finished loading")
+    (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
