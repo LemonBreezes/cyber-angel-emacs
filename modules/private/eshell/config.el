@@ -42,10 +42,10 @@
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
                 (message "Type M-RET/C-M-m to exit char mode.")))
 
-  (add-hook! (eat--eshell-char-mode-hook
-              eat--eshell-semi-char-mode-hook
-              eat--eshell-process-running-mode-hook)
-    (cae-defun cae-eshell-disable-modes-in-eat-h ()
+  (add-hook! '(eat--eshell-char-mode-hook
+               eat--eshell-semi-char-mode-hook
+               eat--eshell-process-running-mode-hook)
+    (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
           (when (bound-and-true-p mode)
