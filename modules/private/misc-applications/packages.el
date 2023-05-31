@@ -53,7 +53,8 @@
 (package! zone-nyan)
 (package! zone-rainbow)
 (package! zone-sl)
-(package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
+(package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"
+                               :build (:not compile)))
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
