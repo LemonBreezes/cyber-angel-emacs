@@ -400,8 +400,10 @@
                  #'+snippets--disable-smartparens-before-expand-h))
 
   ;; This is how we get curly braces working in C without `smartparens'.
-  (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
-  (add-hook 'c-mode-common-hook #'electric-pair-local-mode)
+  (if cae-config-electric-pair-mode
+      (electric-pair-mode +1)
+    (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
+    (add-hook 'c-mode-common-hook #'electric-pair-local-mode))
   (map! [remap newline] nil)
   (add-hook 'doom-first-file-hook #'electric-indent-mode))
 
