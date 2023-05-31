@@ -909,9 +909,12 @@
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
 
-  (after! (:all outline which-key)
-    (which-key-add-keymap-based-replacements outline-minor-mode-map
-      "C-c @" "outline"))
+  (after! outline
+    (setq outline-font-lock-faces nil
+          outline-font-lock-keywords nil)
+    (after! which-key
+      (which-key-add-keymap-based-replacements outline-minor-mode-map
+        "C-c @" "outline")))
 
   (use-package! expand-region-improved
     :defer t :init
