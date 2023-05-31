@@ -394,11 +394,11 @@
                "D" #'meow-backward-delete
                "e" #'meow-line
                "E" #'meow-goto-line
-               "f" #'meow-find
+               "t" #'meow-find
                "g" #'meow-cancel-selection
                "G" #'meow-grab
-               "b" #'meow-left          ; b -> h
-               "B" #'meow-left-expand   ; B -> H
+               "b" #'meow-left          ; h -> b
+               "B" #'meow-left-expand   ; H -> B
                "I" #'meow-open-above
                "i" #'meow-insert
                "j" #'meow-join
