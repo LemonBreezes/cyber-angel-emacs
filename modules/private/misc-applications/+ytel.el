@@ -9,4 +9,5 @@
   :config
   (setq ytel-invidious-api-url (or (doom-store-get 'ytel-invidious-api-url)
                                    "https://invidious.snopyta.org/"))
-  (define-key ytel-mode-map (kbd "RET") #'ytel-watch))
+  (define-key ytel-mode-map (kbd "RET") #'ytel-watch)
+  (define-key ytel-mode-map (kbd "<return>") #'ytel-watch))
