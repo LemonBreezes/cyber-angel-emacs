@@ -17,5 +17,5 @@
     (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
 
 (after! gdb-mi
-  (map! :map gdb-frames-mode-map
-        "RET" #'gdb-select-frame))
+  (map! :map comint-mode-map
+        "RET" #'cae-gdb-select-frame))
