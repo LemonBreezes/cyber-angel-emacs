@@ -174,6 +174,8 @@
     :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
   (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
     :side 'right :select nil :quit t :ttl nil)
+  (set-popup-rule! "^\\*Ibuffer\\*$" :size #'cae-popup-resize-help-buffer
+    :side 'right :select t :quit t :ttl nil)
   (after! embark
     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
       :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
