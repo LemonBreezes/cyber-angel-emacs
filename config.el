@@ -277,8 +277,7 @@
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-repeat")
-(map! "C-<f4>" #'tab-close
-      "C-x 4 I" #'ibuffer-other-window)
+(map! "C-x 4 I" #'ibuffer-other-window)
 
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
