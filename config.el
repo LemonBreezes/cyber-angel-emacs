@@ -19,7 +19,7 @@
 (load! "lisp/cae-theme")
 
 ;; Output to stdout instead of a pager like `less'. This is useful when
-;; redirecting output to buffers.
+;; redirecting output to buffers like for `eshell' or `shell'.
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
 
