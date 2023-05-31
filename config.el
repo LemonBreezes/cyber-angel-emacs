@@ -429,27 +429,6 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
-(use-package! harpoon
-  :defer t :init
-  (map! :leader
-        :desc "Harpoon" "H" #'harpoon-quick-menu-hydra
-        "1" #'harpoon-go-to-1
-        "2" #'harpoon-go-to-2
-        "3" #'harpoon-go-to-3
-        "4" #'harpoon-go-to-4
-        "5" #'harpoon-go-to-5
-        "6" #'harpoon-go-to-6
-        "7" #'harpoon-go-to-7
-        "8" #'harpoon-go-to-8
-        "9" #'harpoon-go-to-9)
-  (after! which-key
-    (dotimes (i 9)
-      (add-to-list 'which-key-replacement-alist
-                   `((nil . ,(concat "harpoon-go-to-" (number-to-string (1+ i)))) . t))))
-
-  :config
-  (setq harpoon-without-project-function '+workspace-current-name))
-
 
 ;;; Autocompletion
 
