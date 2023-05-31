@@ -38,6 +38,17 @@
   (define-key doom-leader-map "&" nil)
   (map! :leader
         :prefix ("y" . "snippets"))
+  (benchmark-run 1
+    (setq which-key-replacement-alist
+          (cl-mapcar (lambda (x)
+                       (let ((case-fold-search nil))
+                         (when (car-safe (car x))
+                           (setf (car (car x))
+                                 (replace-regexp-in-string "C-c &"
+                                                           "C-c y"
+                                                           (car-safe (car x)))))
+                         x))
+                     which-key-replacement-alist)))
   ;;(setq which-key-replacement-alist
   ;;      (cl-mapcar (lambda (x)
   ;;                   (when (and (listp (car-safe x))
