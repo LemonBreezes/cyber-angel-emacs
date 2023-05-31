@@ -1,10 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; I never use Deft.
-(unless (modulep! :ui deft)
-  (map! :leader
-        "nd" nil))
-
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
