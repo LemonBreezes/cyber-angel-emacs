@@ -318,7 +318,6 @@
   (advice-add #'aas-embark-menu :before
               (cae-defun cae-aas-load-embark-h ()
                 (require 'embark)))
-  (map! :leader "iS" #'aas-embark-menu)
   (aas-set-snippets 'global
     ";--" "—"
     ";-." "→"
