@@ -35,7 +35,7 @@ normally have their errors suppressed."
       (apply func args)
     ((debug error) (signal (car err) (cdr err)))))
 
-(defun cae-debug-function-on-hidden-errors (func)
+(defun cae-debug-toggle-debugging-function-on-hidden-errors (func)
   "Toggle hidden error debugging for function FUNC."
   (interactive "aFunction: ")
   (cond
@@ -47,3 +47,5 @@ normally have their errors suppressed."
     (message "Debug on hidden errors enabled for %s" func))))
 
 ;; Use this with `vertico--exhibit' for example to debug completion tables.
+;; Copied from here:
+;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
