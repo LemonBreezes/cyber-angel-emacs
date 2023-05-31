@@ -8,6 +8,8 @@
       doom-localleader-alt-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
+(define-prefix-command 'doom-leader-map)
+
 ;; Also show keybinidng descriptions on my second leader key.
 ;; (defun +which-key-add-key-based-replacements-a
 ;;     (oldfun key-sequence &rest args)
