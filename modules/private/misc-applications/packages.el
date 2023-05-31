@@ -5,8 +5,8 @@
      (package! pulseaudio-control))
 (package! vuiet)
 (package! somafm)
-(package! enime :recipe
-  (:host github :repo "xl666/enime" :files ("*")))
+;;(package! enime :recipe
+;;  (:host github :repo "xl666/enime" :files ("*")))
 (package! alarm-clock)
 (when (and (eq system-type 'gnu/linux)
            (or (modulep! :private helm)
