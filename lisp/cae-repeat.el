@@ -8,7 +8,8 @@
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB"
-        repeat-check-key nil)
+        repeat-check-key nil
+        repeat-echo-mode-line-string nil)
 
   (eval
    `(define-repeat-map other-window
