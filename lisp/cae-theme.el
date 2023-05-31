@@ -78,6 +78,8 @@
           calendar-longitude 0)
     (message "ERROR: Calendar latitude and longitude are not set.")))
 
+;; Cache the theme times so that we can set the theme on startup without loading
+;; the circadian package.
 (add-hook 'kill-emacs-hook
           (cae-defun cae-theme-store-circadian-times-h ()
             (when (require 'circadian nil t)
