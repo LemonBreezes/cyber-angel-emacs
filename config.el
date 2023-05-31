@@ -432,7 +432,11 @@
          :g ";" #'copilot-complete)))
 
 (when (modulep! :editor snippets)
-  (map! [remap yas-insert-snippet] #'consult-yasnippet))
+  (map! [remap yas-insert-snippet] #'consult-yasnippet
+        :map yas-minor-mode-map
+        "C-c & C-s" nil
+        "C-c & C-n" nil
+        "C-c & C-v" nil))
 
 ;;; Term
 
