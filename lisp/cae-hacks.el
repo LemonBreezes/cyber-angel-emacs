@@ -141,4 +141,4 @@
            cae-hacks--gcmh-mode nil))))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
-(add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
+(add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
