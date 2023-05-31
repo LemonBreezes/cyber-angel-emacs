@@ -1,0 +1,152 @@
+#+title: Dash vs CL vs Seq Emacs Lisp library benchmarks
+
+* Setup
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:10]
+:END:
+
+#+name: benchmark-setup
+#+begin_src elisp
+;;; experiments/seq-cl-dash-benchmarks.el -*- lexical-binding: t; -*-
+(defmacro k/benchmark-run (n &rest forms)
+  "Benchmark each of FORMS with `benchmark-run' with N repetitions."
+  (declare (indent 1))
+  `(list
+    '(form\# total gc-count gc-time)
+    'hline
+    ,@(cl-loop with index = 1
+               for form in forms
+               collect
+               (prog2
+                   (garbage-collect)
+                   `(cons ,index (benchmark-run ,n
+                                   ,form))
+                 (cl-incf index)))))
+
+(defmacro k/benchmark-run-compiled (n &rest forms)
+  "Benchmark each of FORMS, byte-compiled, with N repetitions."
+  (declare (indent 1))
+  `(list
+    '(form\# total gc-count gc-time)
+    'hline
+    ,@(cl-loop with index = 1
+               for form in forms
+               collect
+               (prog2
+                   (garbage-collect)
+                   `(cons ,index
+                          ;; Because `benchmark-run-compiled'
+                          ;; quotes the lambda, it is not able to
+                          ;; see any let form around it.
+                          (benchmark-call (native-compile (lambda () ,form))
+                                          ,n))
+                 (cl-incf index)))))
+#+end_src
+
+#+RESULTS: benchmark-setup
+: k/benchmark-run-compiled
+
+* Benchmarks
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:18]
+:END:
+
+** =cl-remove-duplicates=, =-uniq=, =seq-uniq=
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:18]
+:END:
+
+#+begin_src elisp :noweb yes
+<<benchmark-setup>>
+(let ((lst (make-list 1000 8))
+      (-compare-fn #'=))
+  (k/benchmark-run-compiled 10000
+    (cl-remove-duplicates lst :test #'=)
+    (-uniq lst)
+    (seq-uniq lst #'=)))
+#+end_src
+
+#+RESULTS:
+| form# |             total | gc-count |           gc-time |
+|-------+-------------------+----------+-------------------|
+|     1 |        0.51444219 |        0 |               0.0 |
+|     2 |       0.397517779 |        0 |               0.0 |
+|     3 | 8.744156561999999 |       62 | 4.460399634000001 |
+
+** =cl-some=, =-some=, =seq-some=
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:37]
+:END:
+
+#+begin_src elisp :noweb yes
+<<benchmark-setup>>
+(let ((lst (make-list 1000000 8)))
+  (k/benchmark-run-compiled 100
+    (cl-some #'cl-oddp lst)
+    (-some #'cl-oddp lst)
+    (seq-some #'cl-oddp lst)))
+#+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 1.421671898 |        0 |     0.0 |
+|     2 | 1.367541899 |        0 |     0.0 |
+|     3 | 3.920692069 |        0 |     0.0 |
+
+** =cl-remove-if-not=, =-filter=, =seq-filter=
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:40]
+:END:
+
+#+begin_src elisp :noweb yes
+<<benchmark-setup>>
+(let ((lst (make-list 100000 8)))
+  (k/benchmark-run 100
+    (cl-remove-if-not #'cl-oddp lst)
+    (-filter #'cl-oddp lst)
+    (--filter (cl-oddp it) lst)
+    (seq-filter #'cl-oddp lst)))
+#+end_src
+
+#+RESULTS:
+| form# |              total | gc-count |            gc-time |
+|-------+--------------------+----------+--------------------|
+|     1 |        0.323767573 |        0 |                0.0 |
+|     2 |        0.140685723 |        0 |                0.0 |
+|     3 |        32.78007469 |      143 |       10.064512013 |
+|     4 | 1.0816445650000002 |        9 | 0.6435447110000005 |
+
+** =cl-reduce=, =-reduce-from=, =seq-reduce=
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:42]
+:END:
+
+#+begin_src elisp :noweb yes
+<<benchmark-setup>>
+(let (alist)
+  (dotimes (i 10000)
+    (push (cons i (random 100000)) alist))
+  (k/benchmark-run 1000
+    (cl-reduce #'+ alist :key #'cdr)
+    (-reduce-from
+     (lambda (acc it)
+       (+ acc (cdr it)))
+     0 alist)
+    (--reduce-from
+     (+ acc (cdr it))
+     0 alist)
+    (seq-reduce
+     (lambda (acc it)
+       (+ acc (cdr it)))
+     alist 0)))
+#+end_src
+
+#+RESULTS:
+| form# |              total | gc-count |            gc-time |
+|-------+--------------------+----------+--------------------|
+|     1 |        1.009781831 |        9 | 0.6360654739999987 |
+|     2 |        0.594975909 |        0 |                0.0 |
+|     3 | 22.590929926999998 |       95 |  6.710677827000001 |
+|     4 |         0.94718291 |        0 |                0.0 |
+
