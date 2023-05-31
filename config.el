@@ -672,6 +672,7 @@
         "p" #'avy-goto-line-above
         "j" #'avy-goto-word-1
         "c" #'avy-goto-char
+        "l" #'avy-goto-line
         "." #'cae-avy-symbol-at-point
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
@@ -679,6 +680,7 @@
         "C-j" #'avy-goto-word-1
         "C-." #'cae-avy-symbol-at-point
         "C-c" #'avy-goto-char
+        "C-l" #'avy-goto-line
         "C-SPC" #'avy-goto-char-timer)
 
   (when (modulep! :completion vertico)
