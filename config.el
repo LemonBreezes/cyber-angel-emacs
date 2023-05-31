@@ -498,7 +498,7 @@
 
 (when (modulep! :private corfu)
   (map! :leader
-        (:prefix ("r" . "autocomplete")
+        (:prefix ("M-+" . "autocomplete")
          :g "c" #'completion-at-point   ; capf
          :g "t" #'complete-tag          ; etags
          :g "d" #'cape-dabbrev          ; or dabbrev-completion
