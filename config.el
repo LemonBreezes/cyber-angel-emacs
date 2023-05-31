@@ -7,292 +7,292 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
-;;; UI
+;; ;;; UI
 
-(load! "lisp/cae-theme")
+;; (load! "lisp/cae-theme")
 
-;; Do not use pagers
-(setenv "PAGER" "cat")
-(setenv "GIT_PAGER" "cat")
+;; ;; Do not use pagers
+;; (setenv "PAGER" "cat")
+;; (setenv "GIT_PAGER" "cat")
 
-;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ; Different computers
-    (setq doom-font (font-spec :family "Iosevka Comfy"
-                               :size (+ 16 font-size-offset))
-          doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                              :size (+ 16 font-size-offset))
-          doom-unicode-font (unless (modulep! :ui unicode)
-                              (font-spec :family "LXGW WenKai" :weight 'light
-                                         :size (+ 15 font-size-offset))))))
+;; ;; Set up fonts
+;; (unless (memq system-type '(cygwin windows-nt ms-dos))
+;;   (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ; Different computers
+;;     (setq doom-font (font-spec :family "Iosevka Comfy"
+;;                                :size (+ 16 font-size-offset))
+;;           doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+;;                                               :size (+ 16 font-size-offset))
+;;           doom-unicode-font (unless (modulep! :ui unicode)
+;;                               (font-spec :family "LXGW WenKai" :weight 'light
+;;                                          :size (+ 15 font-size-offset))))))
 
-;; Show minibuffer recursion depth
-(autoload 'minibuffer-depth-setup "mb-depth")
-(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+;; ;; Show minibuffer recursion depth
+;; (autoload 'minibuffer-depth-setup "mb-depth")
+;; (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-;; A minimal mouse-free `tab-bar' UI.
-(defadvice! cae-tab-bar-load-buttons-a ()
-  :override #'tab-bar--load-buttons
-  (setq tab-bar-close-button   nil
-        tab-bar-back-button    nil
-        tab-bar-forward-button nil
-        tab-bar-new-button     nil))
-(run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
+;; ;; A minimal mouse-free `tab-bar' UI.
+;; (defadvice! cae-tab-bar-load-buttons-a ()
+;;   :override #'tab-bar--load-buttons
+;;   (setq tab-bar-close-button   nil
+;;         tab-bar-back-button    nil
+;;         tab-bar-forward-button nil
+;;         tab-bar-new-button     nil))
+;; (run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
-(setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
-      truncate-string-ellipsis "..."    ; The unicode ellipsis is ugly to me
-      kill-buffer-delete-auto-save-files t)
+;; (setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
+;;       truncate-string-ellipsis "..."    ; The unicode ellipsis is ugly to me
+;;       kill-buffer-delete-auto-save-files t)
 
-(when (and (modulep! :ui modeline)
-           (not (modulep! :ui modeline +light)))
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t)))
+;; (when (and (modulep! :ui modeline)
+;;            (not (modulep! :ui modeline +light)))
+;;   (after! doom-modeline
+;;     (setq doom-modeline-hud t
+;;           doom-modeline-support-imenu t)))
 
-(after! which-key
-  (setq which-key-ellipsis "..."
-        which-key-compute-remaps t))
+;; (after! which-key
+;;   (setq which-key-ellipsis "..."
+;;         which-key-compute-remaps t))
 
-(after! eros
-  (setq eros-eval-result-prefix "⟹ "))  ; Pretty arrow
+;; (after! eros
+;;   (setq eros-eval-result-prefix "⟹ "))  ; Pretty arrow
 
-;; Do not spam me with warnings
-(after! warnings
-  (setq warning-minimum-level :emergency
-        warning-minimum-log-level :emergency))
+;; ;; Do not spam me with warnings
+;; (after! warnings
+;;   (setq warning-minimum-level :emergency
+;;         warning-minimum-log-level :emergency))
 
-(after! shr
-  ;; I'm not a fan of variable-pitch fonts.
-  (setq shr-use-fonts nil
-        ;; Shr wraps lines in a visually unappealing way.
-        shr-width 120
-        shr-max-width 120)
+;; (after! shr
+;;   ;; I'm not a fan of variable-pitch fonts.
+;;   (setq shr-use-fonts nil
+;;         ;; Shr wraps lines in a visually unappealing way.
+;;         shr-width 120
+;;         shr-max-width 120)
 
-  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-  ;; not colorize backgrounds at all.
-  (advice-add #'shr-colorize-region :around #'ignore))
+;;   ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+;;   ;; not colorize backgrounds at all.
+;;   (advice-add #'shr-colorize-region :around #'ignore))
 
-(after! proced
-  (setq-default proced-auto-update-flag t))
+;; (after! proced
+;;   (setq-default proced-auto-update-flag t))
 
-;; Allow switching to these buffers with `C-x b'
-(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
+;; ;; Allow switching to these buffers with `C-x b'
+;; (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+;; (add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
-(use-package! info-colors
-  :defer t :init
-  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+;; (use-package! info-colors
+;;   :defer t :init
+;;   (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
-(use-package! authinfo-color-mode
-  :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+;; (use-package! authinfo-color-mode
+;;   :defer t
+;;   :init
+;;   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+;;   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-(when (modulep! :ui workspaces)
-  (advice-add #'which-key--process-page :around #'cae-ui-which-key-show-workspace-a))
+;; (when (modulep! :ui workspaces)
+;;   (advice-add #'which-key--process-page :around #'cae-ui-which-key-show-workspace-a))
 
-;; Set some popup rules. How does vslot work?
-(when (modulep! :ui popup)
-  (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
-  (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
-  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
-  ;; (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
-  ;; (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
-  ;; (set-popup-rule! "^\\*Help\\*"           :ignore t)
-  ;; (set-popup-rule! "^\\*info\\*"           :ignore t)
-  ;; (set-popup-rule! "^\\*helpful "          :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
-  ;; (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
-  ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
-  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
-  (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl t)
-  (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t)
-  (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
-    :height 0.6 :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
-    :height 0.6 :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
-  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+;; ;; Set some popup rules. How does vslot work?
+;; (when (modulep! :ui popup)
+;;   (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
+;;   (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
+;;   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
+;;   ;; (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
+;;   ;; (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
+;;   ;; (set-popup-rule! "^\\*Help\\*"           :ignore t)
+;;   ;; (set-popup-rule! "^\\*info\\*"           :ignore t)
+;;   ;; (set-popup-rule! "^\\*helpful "          :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
+;;   ;; (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
+;;   ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
+;;   (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
+;;   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
+;;     :side 'right :ttl t :select t :quit t :ttl t)
+;;   (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
+;;     :side 'right :ttl t :select t :quit t :ttl 0)
+;;   (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+;;     :side 'right :select t :quit t)
+;;   (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
+;;     :side 'right :select t :quit t :ttl 0)
+;;   (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
+;;     :height 0.6 :side 'right :select t :quit t :ttl 0)
+;;   (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+;;     :side 'right :select t :quit t :ttl 0)
+;;   (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
+;;     :height 0.6 :side 'right :select t :quit t :ttl 0)
+;;   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
+;;   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
-;; Lower the default popup delay.
-(after! tooltip
-  (setq tooltip-hide-delay 3))
+;; ;; Lower the default popup delay.
+;; (after! tooltip
+;;   (setq tooltip-hide-delay 3))
 
-(when (modulep! :checkers syntax +childframe)
-  (after! flycheck-posframe
-    (setq flycheck-posframe-border-width 1
-          flycheck-posframe-border-use-error-face t)))
+;; (when (modulep! :checkers syntax +childframe)
+;;   (after! flycheck-posframe
+;;     (setq flycheck-posframe-border-width 1
+;;           flycheck-posframe-border-use-error-face t)))
 
-(when (and (modulep! :checkers syntax +flymake)
-           (modulep! :checkers syntax +childframe))
-  (defalias 'posframe-poshandler-p0p1-to-p0p1 #'posframe-poshandler-point-bottom-left-corner-upward))
+;; (when (and (modulep! :checkers syntax +flymake)
+;;            (modulep! :checkers syntax +childframe))
+;;   (defalias 'posframe-poshandler-p0p1-to-p0p1 #'posframe-poshandler-point-bottom-left-corner-upward))
 
-(use-package! goggles
-  :init
-  (add-hook 'prog-mode-hook #'goggles-mode)
-  (add-hook 'text-mode-hook #'goggles-mode)
-  (add-hook 'conf-mode-hook #'goggles-mode)
-  :config
-  (setq-default goggles-pulse t))
+;; (use-package! goggles
+;;   :init
+;;   (add-hook 'prog-mode-hook #'goggles-mode)
+;;   (add-hook 'text-mode-hook #'goggles-mode)
+;;   (add-hook 'conf-mode-hook #'goggles-mode)
+;;   :config
+;;   (setq-default goggles-pulse t))
 
-;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
-(when (modulep! :completion vertico +childframe)
-  (after! vertico-posframe
-    (setq vertico-posframe-parameters
-          '((inhibit-double-buffering . t)))))
-(after! posframe
-  (setq posframe-inhibit-double-buffering t))
+;; ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
+;; (when (modulep! :completion vertico +childframe)
+;;   (after! vertico-posframe
+;;     (setq vertico-posframe-parameters
+;;           '((inhibit-double-buffering . t)))))
+;; (after! posframe
+;;   (setq posframe-inhibit-double-buffering t))
 
-
-;;; Tools
+;; 
+;; ;;; Tools
 
-(load! "lisp/cae-webkit.el")
+;; (load! "lisp/cae-webkit.el")
 
-(setq browse-url-browser-function #'browse-url-generic
-      browse-url-generic-program "chromium-bin"
-      browse-url-generic-args '("--no-sandbox")
-      browse-url-chromium-program "chromium-bin")
+;; (setq browse-url-browser-function #'browse-url-generic
+;;       browse-url-generic-program "chromium-bin"
+;;       browse-url-generic-args '("--no-sandbox")
+;;       browse-url-chromium-program "chromium-bin")
 
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+;; (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+;; (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
-(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
-(add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
-;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
-;; balanced, which breaks font-lock.
-(after! syslog-mode
-  (setq syslog-font-lock-keywords
-        (cl-remove-if
-         (lambda (keyword)
-           (cl-destructuring-bind (regexp . face) keyword
-             (string= "'[^']*'" regexp)))
-         syslog-font-lock-keywords)))
+;; (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+;; (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
+;; ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
+;; ;; balanced, which breaks font-lock.
+;; (after! syslog-mode
+;;   (setq syslog-font-lock-keywords
+;;         (cl-remove-if
+;;          (lambda (keyword)
+;;            (cl-destructuring-bind (regexp . face) keyword
+;;              (string= "'[^']*'" regexp)))
+;;          syslog-font-lock-keywords)))
 
-;; Set up printers
-(after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
-(after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
+;; ;; Set up printers
+;; (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
+;; (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
 
-(setq delete-by-moving-to-trash t
-      history-length (expt 2 16))
+;; (setq delete-by-moving-to-trash t
+;;       history-length (expt 2 16))
 
-(setq bookmark-bmenu-file-column 50
-      bookmark-watch-bookmark-file nil)
-(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+;; (setq bookmark-bmenu-file-column 50
+;;       bookmark-watch-bookmark-file nil)
+;; (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
-(after! auth-source
-  (setq auth-source-cache-expiry nil
-        auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
-                                   auth-sources)
-        auth-source-gpg-encrypt-to nil))
+;; (after! auth-source
+;;   (setq auth-source-cache-expiry nil
+;;         auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
+;;                                    auth-sources)
+;;         auth-source-gpg-encrypt-to nil))
 
-(after! password-cache
-  (setq password-cache-expiry nil))
+;; (after! password-cache
+;;   (setq password-cache-expiry nil))
 
-(after! projectile
-  ;; Automatically find projects in the I personally use.
-  (setq projectile-project-search-path
-        `((,doom-user-dir . 0)
-          ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-          ("~/src/" . 1)))
-  (add-to-list 'projectile-globally-ignored-directories
-               (expand-file-name ".local/straight/repos/" user-emacs-directory))
-  (unless projectile-known-projects
-    (projectile-discover-projects-in-search-path))
-  ;; Recognize `makefile' as a Makefile.
-  (cl-pushnew
-   '(make marker-files
-     ("makefile")
-     project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-   projectile-project-types :test #'equal)
-  (cl-pushnew
-   '(gnumake marker-files
-     ("GNUmakefile")
-     project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-   projectile-project-types :test #'equal)
-  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
-  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
-  ;; Set up compilation.
-  (setq projectile-per-project-compilation-buffer t
-        compilation-read-command nil)
-  ;; Make the project prefix more readable.
-  (after! which-key
-    (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
-          which-key-replacement-alist)))
+;; (after! projectile
+;;   ;; Automatically find projects in the I personally use.
+;;   (setq projectile-project-search-path
+;;         `((,doom-user-dir . 0)
+;;           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+;;           ("~/src/" . 1)))
+;;   (add-to-list 'projectile-globally-ignored-directories
+;;                (expand-file-name ".local/straight/repos/" user-emacs-directory))
+;;   (unless projectile-known-projects
+;;     (projectile-discover-projects-in-search-path))
+;;   ;; Recognize `makefile' as a Makefile.
+;;   (cl-pushnew
+;;    '(make marker-files
+;;      ("makefile")
+;;      project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+;;    projectile-project-types :test #'equal)
+;;   (cl-pushnew
+;;    '(gnumake marker-files
+;;      ("GNUmakefile")
+;;      project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+;;    projectile-project-types :test #'equal)
+;;   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
+;;   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+;;   (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
+;;   ;; Set up compilation.
+;;   (setq projectile-per-project-compilation-buffer t
+;;         compilation-read-command nil)
+;;   ;; Make the project prefix more readable.
+;;   (after! which-key
+;;     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
+;;           which-key-replacement-alist)))
 
-(after! tramp
-  (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
+;; (after! tramp
+;;   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
-;; Use Emacs as the default editor for shell commands.
-(define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-(define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
-(add-hook 'shell-mode-hook  #'with-editor-export-editor)
-(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
-(add-hook 'eshell-mode-hook #'with-editor-export-editor)
+;; ;; Use Emacs as the default editor for shell commands.
+;; (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
+;; (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
+;; (add-hook 'shell-mode-hook  #'with-editor-export-editor)
+;; (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+;; (add-hook 'eshell-mode-hook #'with-editor-export-editor)
 
-(when (and (modulep! :checkers spell)
-           (not (modulep! :checkers spell +flyspell)))
-  (after! spell-fu
-    (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-    (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-    (add-to-list 'spell-fu-faces-exclude 'message-header-to)
-    (setq spell-fu-faces-exclude
-          (delq 'font-lock-string-face spell-fu-faces-include))))
+;; (when (and (modulep! :checkers spell)
+;;            (not (modulep! :checkers spell +flyspell)))
+;;   (after! spell-fu
+;;     (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+;;     (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+;;     (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+;;     (setq spell-fu-faces-exclude
+;;           (delq 'font-lock-string-face spell-fu-faces-include))))
 
-(when (modulep! :tools pdf)
-  (use-package! pdftotext
-    :defer t
-    :init
-    (defadvice! +pdf-view-mode-a (oldfun &rest args)
-      :around #'pdf-view-mode
-      (if (display-graphic-p)
-          (apply oldfun args)
-        (apply #'pdftotext-mode args)))))
+;; (when (modulep! :tools pdf)
+;;   (use-package! pdftotext
+;;     :defer t
+;;     :init
+;;     (defadvice! +pdf-view-mode-a (oldfun &rest args)
+;;       :around #'pdf-view-mode
+;;       (if (display-graphic-p)
+;;           (apply oldfun args)
+;;         (apply #'pdftotext-mode args)))))
 
-(when (and (modulep! :tools lsp)
-           (not (modulep! :tools lsp +eglot)))
-  (after! lsp-mode
-    (setopt lsp-headerline-breadcrumb-enable t
-            lsp-enable-snippet nil
-            lsp-enable-text-document-color t
-            lsp-enable-folding t
-            lsp-semantic-tokens-enable t)
-    (after! lsp-ui
-      (setq lsp-signature-auto-activate t
-            lsp-ui-doc-include-signature t
-            lsp-ui-doc-header nil))
-    (after! lsp-clangd
-      (setq lsp-clients-clangd-args
-            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-              "--background-index"
-              "--clang-tidy"
-              "--completion-style=detailed"
-              "--header-insertion=never"
-              "--header-insertion-decorators=0")))
-    (add-to-list 'lsp-disabled-clients 'ccls)
-    (add-to-list 'lsp-disabled-clients 'mspyls)))
+;; (when (and (modulep! :tools lsp)
+;;            (not (modulep! :tools lsp +eglot)))
+;;   (after! lsp-mode
+;;     (setopt lsp-headerline-breadcrumb-enable t
+;;             lsp-enable-snippet nil
+;;             lsp-enable-text-document-color t
+;;             lsp-enable-folding t
+;;             lsp-semantic-tokens-enable t)
+;;     (after! lsp-ui
+;;       (setq lsp-signature-auto-activate t
+;;             lsp-ui-doc-include-signature t
+;;             lsp-ui-doc-header nil))
+;;     (after! lsp-clangd
+;;       (setq lsp-clients-clangd-args
+;;             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+;;               "--background-index"
+;;               "--clang-tidy"
+;;               "--completion-style=detailed"
+;;               "--header-insertion=never"
+;;               "--header-insertion-decorators=0")))
+;;     (add-to-list 'lsp-disabled-clients 'ccls)
+;;     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
-(when (modulep! :tools lsp +eglot)
-  (after! eglot
-    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-          '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
+;; (when (modulep! :tools lsp +eglot)
+;;   (after! eglot
+;;     (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+;;           '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
 
-(use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-  :config
-  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+;; (use-package! topsy
+;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+;;   :config
+;;   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+;;   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
-
-;;; Editor
+;; 
+;; ;;; Editor
 
 ;; (load! "lisp/cae-repeat")
 
@@ -687,76 +687,76 @@
 ;;         "C-c & C-n" nil
 ;;         "C-c & C-v" nil))
 
-
-;;; Term
+;; 
+;; ;;; Term
 
-;; Enable Fish autocompletion in `read-shell-command'.
-(advice-add #'shell-completion-vars :after #'fish-completion-mode)
+;; ;; Enable Fish autocompletion in `read-shell-command'.
+;; (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
-(after! em-glob
-  (setq eshell-error-if-no-glob nil))
+;; (after! em-glob
+;;   (setq eshell-error-if-no-glob nil))
 
-(after! em-term
-  ;; Some of the commands I copied from other configurations and will likely
-  ;; never use.
-  (setq eshell-visual-commands
-        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-        eshell-visual-subcommands '(("gh" "repo" "fork")
-                                    ("git" "log" "diff" "show")
-                                    ("geth" "attach"))
-        eshell-visual-options '(("git" "--help" "--paginate"))))
+;; (after! em-term
+;;   ;; Some of the commands I copied from other configurations and will likely
+;;   ;; never use.
+;;   (setq eshell-visual-commands
+;;         '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+;;           "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+;;           "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+;;           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+;;           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+;;         eshell-visual-subcommands '(("gh" "repo" "fork")
+;;                                     ("git" "log" "diff" "show")
+;;                                     ("geth" "attach"))
+;;         eshell-visual-options '(("git" "--help" "--paginate"))))
 
-
-;;; Org
+;; 
+;; ;;; Org
 
-(after! calendar
-  (setopt calendar-week-start-day 1))
+;; (after! calendar
+;;   (setopt calendar-week-start-day 1))
 
-(after! org
-  (setq org-directory "~/org/"
-        org-extend-today-until 4
-        org-startup-with-inline-images t
-        org-image-actual-width t
-        org-log-done 'time
-        org-log-done-with-time t
-        org-ellipsis " ..."
-        org-archive-location (concat org-directory ".archive/%s::")
-        org-hide-emphasis-markers t
-        ;; All my computers use 64-bit processors
-        org-read-date-force-compatible-dates nil)
-  (when (modulep! :lang org +roam2)
-    (setq +org-roam-auto-backlinks-buffer nil))
+;; (after! org
+;;   (setq org-directory "~/org/"
+;;         org-extend-today-until 4
+;;         org-startup-with-inline-images t
+;;         org-image-actual-width t
+;;         org-log-done 'time
+;;         org-log-done-with-time t
+;;         org-ellipsis " ..."
+;;         org-archive-location (concat org-directory ".archive/%s::")
+;;         org-hide-emphasis-markers t
+;;         ;; All my computers use 64-bit processors
+;;         org-read-date-force-compatible-dates nil)
+;;   (when (modulep! :lang org +roam2)
+;;     (setq +org-roam-auto-backlinks-buffer nil))
 
-  (after! org-crypt
-    (setq org-crypt-disable-auto-save 'encrypt))
-  (after! org-agenda
-    (setq org-agenda-sticky nil
-          org-agenda-files '("~/org/")))
-  (when (and (modulep! :ui ligatures)
-             (eq (car +ligatures-in-modes) 'not))
-    (add-to-list '+ligatures-in-modes 'org-mode t)))
+;;   (after! org-crypt
+;;     (setq org-crypt-disable-auto-save 'encrypt))
+;;   (after! org-agenda
+;;     (setq org-agenda-sticky nil
+;;           org-agenda-files '("~/org/")))
+;;   (when (and (modulep! :ui ligatures)
+;;              (eq (car +ligatures-in-modes) 'not))
+;;     (add-to-list '+ligatures-in-modes 'org-mode t)))
 
-(after! org
-  ;; TODO Contribute the prefix map stuff to Org.
-  (define-prefix-command 'org-babel-map)
-  (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
+;; (after! org
+;;   ;; TODO Contribute the prefix map stuff to Org.
+;;   (define-prefix-command 'org-babel-map)
+;;   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
-(doom-load-packages-incrementally
- `(,@(when (modulep! :private dirvish)
-       '(dired transient dirvish))
-   ,@(when (modulep! :term eshell)
-       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-         em-tramp em-smart em-banner em-basic em-cmpl
-         em-extpipe em-glob em-hist em-ls em-script em-term
-         em-alias em-elecslash em-rebind em-prompt))
-   ,@(when (and (modulep! :tools pdf)
-                (display-graphic-p)
-                (not (string-suffix-p "-WSL2" operating-system-release)))
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
- t)
+;; (doom-load-packages-incrementally
+;;  `(,@(when (modulep! :private dirvish)
+;;        '(dired transient dirvish))
+;;    ,@(when (modulep! :term eshell)
+;;        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
+;;          em-tramp em-smart em-banner em-basic em-cmpl
+;;          em-extpipe em-glob em-hist em-ls em-script em-term
+;;          em-alias em-elecslash em-rebind em-prompt))
+;;    ,@(when (and (modulep! :tools pdf)
+;;                 (display-graphic-p)
+;;                 (not (string-suffix-p "-WSL2" operating-system-release)))
+;;        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
+;;  t)
 
-(setq cae-config-finished-loading t)
+;; (setq cae-config-finished-loading t)
