@@ -15,8 +15,8 @@
     (setq cae-cheatsheets-minibuffer--last-hydra nil)))
 
 (after! hydra
-  (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-hydra-pause-h)
-  (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-hydra-resume-h))
+  (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
+  (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h))
 
 ;; Hercules already does this for us since I am using a fork of Hercules with
 ;; that feature.
