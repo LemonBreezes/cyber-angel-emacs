@@ -70,10 +70,20 @@
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
     (call-interactively #'sp-raise-sexp)))
 
+
+(defun cae-switch-buffer--handle-dirvish ()
+  (when (and (featurep 'dirvish)
+             (> (length (dv-layout (dirvish-curr))) 1))
+    (dirvish-layout-toggle)))
+
 ;;;###autoload
 (defun cae-previous-buffer ()
   (interactive)
-  (when (and (featurep 'dirvish)
-             (> (length (dv-layout (dirvish-curr))) 1))
-    (dirvish-layout-toggle))
+  (cae-switch-buffer--handle-dirvish)
   (call-interactively #'previous-buffer))
+
+;;;###autoload
+(defun cae-next-buffer ()
+  (interactive)
+  (cae-switch-buffer--handle-dirvish)
+  (call-interactively #'next-buffer))
