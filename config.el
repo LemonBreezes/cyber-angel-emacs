@@ -219,8 +219,9 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
-  (add-to-list 'lsp-disabled-clients 'ccls)
-  (add-to-list 'lsp-disabled-clients 'mspyls))
+  (after! lsp
+    (add-to-list 'lsp-disabled-clients 'ccls)
+    (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 
 ;;; Editor
@@ -419,7 +420,6 @@
          :g "k" #'cape-keyword
          :g "h" #'cape-history
          :g "s" #'cape-symbol
-         :g "y" #'consult-yasnippet
          :g "a" #'cape-abbrev
          :g "i" #'cape-ispell
          :g "l" #'cape-line
@@ -430,6 +430,9 @@
          :g "&" #'cape-sgml
          :g "r" #'cape-rfc1345
          :g ";" #'copilot-complete)))
+
+(when (modulep! :editor snippets)
+(map! [remap yas-insert-snippet] #'consult-yasnippet))
 
 ;;; Term
 
