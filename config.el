@@ -900,15 +900,15 @@
         "C-M-<" #'mc/skip-to-previous-like-this)
   (map! :leader
         :prefix "m"
-        :desc "Pop mark" "C-SPC"                      #'mc/mark-pop
-        :desc "Mark all above" "<"                    #'mc/mark-all-above
-        :desc "Mark all below" ">"                    #'mc/mark-all-below
-        :desc "Mark words like this" "W"              #'mc/mark-all-words-like-this
-        :desc "Mark symbols like this" "S"            #'mc/mark-all-symbols-like-this
-        :desc "Mark words like this in defun" "C-w"   #'mc/mark-all-words-like-this-in-defun
-        :desc "Mark symbols like this in defun" "C-s" #'mc/mark-all-symbols-like-this-in-defun
-        :desc "Mark next sexps" "C-M-f"               #'mc/mark-next-sexps
-        :desc "Mark previous sexps" "C-M-b"           #'mc/mark-previous-sexps)
+        :desc "Pop mark"                        "C-SPC" #'mc/mark-pop
+        :desc "Mark all above"                  "<"     #'mc/mark-all-above
+        :desc "Mark all below"                  ">"     #'mc/mark-all-below
+        :desc "Mark words like this"            "W"     #'mc/mark-all-words-like-this
+        :desc "Mark symbols like this"          "S"     #'mc/mark-all-symbols-like-this
+        :desc "Mark words like this in defun"   "C-w"   #'mc/mark-all-words-like-this-in-defun
+        :desc "Mark symbols like this in defun" "C-s"   #'mc/mark-all-symbols-like-this-in-defun
+        :desc "Mark next sexps"                 "C-M-f" #'mc/mark-next-sexps
+        :desc "Mark previous sexps"             "C-M-b" #'mc/mark-previous-sexps)
   (after! multiple-cursors-core
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. C-.")   #'mc/freeze-fake-cursors-dwim)
