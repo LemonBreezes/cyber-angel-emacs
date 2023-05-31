@@ -122,7 +122,7 @@
              (string-prefix-p (expand-file-name ".local/straight/" doom-emacs-dir)
                               (file-name-directory (buffer-file-name))))
     (require 'straight)
-    (when-let (package (straight--determine-repo buffer-file-name))
+    (when-let ((package (straight--determine-repo buffer-file-name)))
       (mapc #'delete-file (directory-files (file-name-directory
                                             (buffer-file-name))
                                            nil
