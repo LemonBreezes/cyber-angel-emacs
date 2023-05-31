@@ -36,6 +36,8 @@
                                 dir-locals-file))
               (add-hook 'after-save-hook #'cae-mark-dir-locals-as-safe-h nil t))))
 
+(add-hook 'lisp-data-mode-hook #'rainbow-delimiters-mode)
+
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
