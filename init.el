@@ -36,6 +36,16 @@ overriding other keymaps."
               (define-key general-override-mode-map (kbd "C-c '") nil)))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
+;; Also show keybinidng descriptions on my second leader key when using Evil.
+(defun +which-key-add-key-based-replacements-a
+    (oldfun key-sequence &rest args)
+  (when (string-prefix-p "SPC " key-sequence)
+    (apply oldfun (concat "DEL " (string-remove-prefix "SPC " key-sequence))
+           args))
+  (apply oldfun key-sequence args))
+(advice-add #'which-key-add-key-based-replacements :around
+            #'+which-key-add-key-based-replacements-a)
+
 (defvar cae-init-ui-enabled-p t
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p t
