@@ -48,7 +48,7 @@
 (package! define-repeat-map :recipe (:repo "https://tildegit.org/acdw/define-repeat-map.el.git"))
 
 ;; cae-keyboard.el
-(package! home-row-numbers :recipe (:host github :repo "gdobbins/home-row-numbers"))
+(package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
 
 ;;; Autocompletion
 
