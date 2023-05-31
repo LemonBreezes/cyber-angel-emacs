@@ -393,6 +393,7 @@
 (use-package! isearch-mb
   :after-call isearch-mode-hook
   :config
+  (isearch-mb--setup)
   (isearch-mb-mode +1)
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (add-to-list 'isearch-mb--with-buffer #'scroll-right)
