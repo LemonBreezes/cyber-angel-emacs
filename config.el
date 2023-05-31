@@ -545,7 +545,7 @@
               (string= (file-attribute-user-id
                         (file-attributes path 'string))
                        (if (and (featurep 'tramp)
-                                (tramp-tramp-file-p buffer-file-name))
+                                (tramp-tramp-file-p path))
                            (tramp-get-remote-uid (tramp-dissect-file-name path)
                                                  'string)
                          (user-login-name))))
