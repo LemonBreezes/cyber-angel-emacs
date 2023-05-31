@@ -569,6 +569,7 @@
              ("M-C" sp-convolute-sexp "Edit")
              ("C-M-k" sp-kill-sexp "Edit")
              ("M-D" sp-splice-sexp "Edit")
+             ("C-M-t" sp-transpose-sexp "Edit")
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Edit")
              ("C-M-<delete>" sp-splice-sexp-killing-forward "Edit")
              ("C-M-f" sp-forward-sexp "Navigation")
