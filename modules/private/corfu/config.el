@@ -77,8 +77,8 @@ derivative.")
        (let ((corfu--index ,index))
          (corfu-complete))))
 
-  (map! (:unless (modulep! +tng)
-         :desc "complete" "C-SPC" #'completion-at-point)
+  (map! ;;(:unless (modulep! +tng)
+        ;; :desc "complete" "C-SPC" #'completion-at-point)
         (:map 'corfu-map
          (:when +corfu-want-multi-component
           :desc "insert separator" "C-SPC" #'corfu-insert-separator)
