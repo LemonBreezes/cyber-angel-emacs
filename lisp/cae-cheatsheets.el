@@ -68,7 +68,7 @@
 (add-hook 'persp-activated-functions
           #'cae-cheatsheets-workspace-hydra-resume-h)
 
-(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
+;;(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
 ;;(defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
 ;;  (when (bound-and-true-p hydra-curr-map)
