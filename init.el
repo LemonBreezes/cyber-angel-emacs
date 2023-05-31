@@ -22,6 +22,8 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
+(setq doom-theme 'wheatgrass)
+
 (doom! :completion
        (vertico +icons)
 
