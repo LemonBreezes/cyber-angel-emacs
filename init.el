@@ -123,7 +123,6 @@
     (unless (or (bound-and-true-p vertico-mode)
                 (bound-and-true-p ido-mode)
                 (bound-and-true-p ivy-mode)
-                (bound-and-true-p selectrum-mode)
                 (bound-and-true-p icomplete-mode)
                 (bound-and-true-p helm-mode))
       (load! "lisp/cae-icomplete"))))
