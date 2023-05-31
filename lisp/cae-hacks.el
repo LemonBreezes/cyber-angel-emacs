@@ -145,8 +145,8 @@
     (setq gcmh-high-cons-threshold (* 2 16777216)
           gcmh-low-cons-threshold (* 2 800000))))
 
-;; The purpose of these functions is to safely disable GC during long-running
-;; tasks.
+;; The purpose of these functions is to disable GC during long-running
+;; tasks showing GC messages when it does run.
 
 (defun cae-hacks-disable-gc ()
   "Raise the GC threshold to a large value and enable GC messages."
