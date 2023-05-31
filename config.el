@@ -322,8 +322,7 @@
                    (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
            (setq exec-path (cons "/mnt/c/Windows/System32" exec-path)))
          (setq xclip-method 'powershell))
-        ((and (string-suffix-p "-android" system-configuration)
-              (executable-find "termux-clipboard-get"))
+        ((executable-find "termux-setup-storage")
          (setq xclip-method 'termux-clipboard-get))))
 
 (setq bookmark-bmenu-file-column 50
