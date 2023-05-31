@@ -20,7 +20,7 @@
           ,(cae-keyboard-kbd "9") #'meow-digit-argument
           ,(cae-keyboard-kbd "0") #'meow-digit-argument))
   (after! which-key
-    ;; remove keys from which-key popupI
+    ;; Remove `meow-digit-argument' from the which-key menu.
     (add-to-list 'which-key-replacement-alist
                  '((nil . "meow-digit-argument") . t))))
 
