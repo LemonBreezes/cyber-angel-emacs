@@ -376,6 +376,8 @@
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
+  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
+  (when (modulep! :editor ))
   (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
@@ -449,11 +451,13 @@
       "C-x x o" #'ov-clear
       "M-Z" #'zap-up-to-char
       "<f8>" #'embark-act
-      [remap apropos] nil               ;`consult-apropos' is obsolete.
-      (:after vertico
-       :map vertico-map
-       "<prior>" #'vertico-scroll-down
-       "<next>" #'vertico-scroll-up)
+      (:when (modulep! :completion vertico)
+       [remap apropos] nil
+                                        ;`consult-apropos' is obsolete.
+       (:after vertico
+        :map vertico-map
+        "<prior>" #'vertico-scroll-down
+        "<next>" #'vertico-scroll-up))
       (:after man
        :map Man-mode-map
        :n "o" #'ace-link-man))
@@ -487,7 +491,11 @@
       lazy-count-suffix-format nil      ; Using the suffix for counting matches
                                         ; is better but does not work with
                                         ; `isearch-mb'.
-      lazy-highlight-cleanup nil)
+      lazy-highlight-cleanup nil
+      ;; The default search ring size is 16, which is too small considering that
+      ;; we can fuzzy search the history with Consult.
+      search-ring-max 200
+      regexp-search-ring-max 200)
 (add-hook 'doom-escape-hook
           (apply-partially #'lazy-highlight-cleanup t))
 
@@ -877,7 +885,8 @@
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
 (when (modulep! :editor snippets)
-  (map! [remap yas-insert-snippet] #'consult-yasnippet
+  (map! (:when (modulep! :completion vertico)
+         [remap yas-insert-snippet] #'consult-yasnippet)
         :map yas-minor-mode-map
         "C-c & C-s" nil
         "C-c & C-n" nil
