@@ -180,10 +180,12 @@
   (when (modulep! +leader)
     (map! :map meow-normal-state-keymap
           doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+          ;; "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+          "DEL" #'meow-keypad
           :map meow-motion-state-keymap
           doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+          ;; "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+          "DEL" #'meow-keypad
           :map meow-beacon-state-keymap
           doom-leader-key nil))
   (map! :leader :desc "help" "h" help-map)
@@ -203,7 +205,8 @@
                (eshell-mode . insert)
                (eat-mode . insert)
                (vterm-mode . insert)
-               (helpful-mode . motion)))
+               (helpful-mode . motion)
+               (gdb-frames-mode . normal)))
     (setf (alist-get (car p) meow-mode-state-list) (cdr p)))
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
