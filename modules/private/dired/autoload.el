@@ -44,9 +44,7 @@
   (when (cae-dired-dirvish-fullscreen-p)
     (dirvish-layout-toggle))
   (call-interactively fn)
-  (when (and (derived-mode-p 'dired-mode)
-             (one-window-p)
-             (not (window-dedicated-p)))
+  (when (cae-dirvish-not-fullscreen-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
