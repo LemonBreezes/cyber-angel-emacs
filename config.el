@@ -522,7 +522,7 @@
     "Ask to diff, save or kill buffer"
     (setq cae-diff-buffer nil)
     (if (and (buffer-file-name) (buffer-modified-p))
-        (cl-loop for ch = (read-event "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+        (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                  if (or (eq ch ?k) (eq ch ?K))
                  return t
                  if (or (eq ch ?d) (eq ch ?D))
