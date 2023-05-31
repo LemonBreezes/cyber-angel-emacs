@@ -26,7 +26,6 @@
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards)
     (when (and (file-directory-p file)
-               (one-window-p)
                (frame-width (selected-frame))
                (> (frame-width (selected-frame)) 160))
       (dirvish-dwim))))
