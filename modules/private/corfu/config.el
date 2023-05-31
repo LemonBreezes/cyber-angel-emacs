@@ -69,28 +69,20 @@ derivative.")
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
 
-  (defmacro cae-generate-corfu-select-index (index)
-    "Return a named function to run `corfu-complete' for INDEX"
-    `(cae-defun ,(intern (format "cae-corfu-complete-%s" index)) ()
-       ,(format "Call `corfu-complete' for index %s." index)
-       (interactive)
-       (let ((corfu--index ,index))
-         (corfu-complete))))
-
   (map! ;;(:unless (modulep! +tng)
-        ;;  :desc "complete" "C-SPC" #'completion-at-point)
-        (:map 'corfu-map
-         (:when +corfu-want-multi-component
-          :desc "insert separator" "C-SPC" #'corfu-insert-separator)
-         (:when (modulep! :completion vertico)
-          :desc "move to minibuffer" "s-<down>" #'corfu-move-to-minibuffer
-          (:when (modulep! :editor evil)
-           :desc "move to minibuffer" "s-j" #'corfu-move-to-minibuffer))
-         (:when (modulep! +tng)
-          :desc "next" [tab] #'corfu-next
-          :desc "previous" [backtab] #'corfu-previous
-          :desc "next" "TAB" #'corfu-next
-          :desc "previous" "S-TAB" #'corfu-previous)))
+   ;;  :desc "complete" "C-SPC" #'completion-at-point)
+   (:map 'corfu-map
+    (:when +corfu-want-multi-component
+     :desc "insert separator" "C-SPC" #'corfu-insert-separator)
+    (:when (modulep! :completion vertico)
+     :desc "move to minibuffer" "s-<down>" #'corfu-move-to-minibuffer
+     (:when (modulep! :editor evil)
+      :desc "move to minibuffer" "s-j" #'corfu-move-to-minibuffer))
+    (:when (modulep! +tng)
+     :desc "next" [tab] #'corfu-next
+     :desc "previous" [backtab] #'corfu-previous
+     :desc "next" "TAB" #'corfu-next
+     :desc "previous" "S-TAB" #'corfu-previous)))
 
   ;; Taken from corfu's README.
   ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
