@@ -171,7 +171,8 @@
              ("-" special-lispy-ace-subword)
              ("~" special-lispy-tilde)
              ("_" special-lispy-underscore)
-             ("'" lispy-tick)  ;`cae-keyboard-lispy--lost-quote-command' lost
+             ("'" lispy-tick)
+             ("," nil)
              ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
                                (cae-keyboard-kbd-reverse "'"))))))
       (dolist (binding bindings)
