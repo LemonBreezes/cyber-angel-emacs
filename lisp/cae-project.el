@@ -88,12 +88,12 @@
        (define-key cae-project-bookmark-embark-map (vector key) command))))
  embark-bookmark-map)
 
+;; These commands are exceptions to the above rule because they are noninteractive.
 (defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
   (cae-project--with-bookmark-alist nil
     (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)
     (setq-local bookmark-alist (cae-project--bookmark-alist)
                 bookmark-default-file (cae-project--get-bookmark-file))))
-
 (defun cae-project-bookmark-show-annotation (bookmark-name-or-record)
   (cae-project--with-bookmark-alist nil
     (bookmark-show-annotation bookmark-name-or-record)
