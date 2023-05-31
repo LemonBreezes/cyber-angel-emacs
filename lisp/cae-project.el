@@ -81,11 +81,6 @@
                (bookmark-write-file file))))
            cae-project-bookmark-cache))
 
-(defun cae-project-bookmark--update-cache-a (oldfun &rest args)
-    (apply oldfun args)
-    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)
-    (advice-remove oldfun #'cae-project-bookmark--update-cache-a))
-
 (after! embark
   (defvar-keymap cae-project-bookmark-embark-map
     :doc "Keymap for Embark project bookmarks actions."
@@ -103,7 +98,6 @@
               ;; TODO: Fix edit annotation
               (cae-project--with-bookmark-alist nil
                 (setq this-command ',def)
-                (advice-add ',def :around #'cae-project-bookmark--update-cache-a)
                 (call-interactively ',def)))
            (format "Analogous command to `%s' that uses the current project's bookmark file."
                    (symbol-name def)))
