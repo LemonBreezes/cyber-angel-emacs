@@ -1,8 +1,5 @@
 ;;; lisp/cae-hacks.el -*- lexical-binding: t; -*-
 
-(defconst cae-hacks-big-gc-threshold (* 3 1024 1024 1024))
-(defconst cae-hacks-big-gc-percentage 30)
-
 ;; For when we compile Doom.
 (defvar personal-keybindings nil)
 
@@ -125,16 +122,23 @@
 
 ;;; GC hacks
 
+(defconst cae-hacks-big-gc-threshold (* 3 1024 1024 1024))
+(defconst cae-hacks-big-gc-percentage 30)
 (defvar cae-hacks--gc-messages nil)
+(defvar cae-hacks--gcmh-mode nil)
 
-(defun cae-hacks-transiently-enable-gc-messages ()
+(defun cae-hacks-disable-gc-temporarily ()
   (setq cae-hacks--gc-messages garbage-collection-messages
+        cae-hacks--gcmh-mode gcmh-mode
         garbage-collection-messages t)
+  (gcmh-mode -1)
   (run-with-idle-timer
    10 nil
    (lambda ()
+     (gcmh-mode cae-hacks--gcmh-mode)
      (setq garbage-collection-messages cae-hacks--gc-messages
-           cae-hacks--gc-messages nil))))
+           cae-hacks--gc-messages nil
+           cae-hacks--gcmh-mode nil))))
 
 (defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
