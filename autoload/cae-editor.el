@@ -88,9 +88,9 @@
 
 ;;;###autoload (autoload 'cae-embark-collect-cheatsheet "autoload/cae-editor" nil t)
 (hercules-def
- :toggle-funs #'embark-collect-cheatsheet
+ :toggle-funs #'cae-embark-collect-cheatsheet
  :keymap 'embark-collect-mode-map
- :hide-funs '(digit-argument negative-argument describe-mode
+ :blacklist-funs '(digit-argument negative-argument describe-mode
  forward-button backward-button +popup/quit-window
  beginning-of-buffer end-of-buffer embark-collect-cheatsheet
  mouse-face)
