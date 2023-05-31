@@ -12,13 +12,6 @@
 (defvar cae-hacks--gcmh-mode nil)
 (defvar cae-hacks--gc-idle-timer nil)
 
-(when (version<= "30" emacs-version)
-  ;; Emacs 30 made a recent change to a constant which speeds up GC by 25%-50%,
-  ;; so I am testing out increasing Doom's default thresholds.
-  (after! gcmh
-    (setq gcmh-high-cons-threshold (* 2 16777216)
-          gcmh-low-cons-threshold (* 2 800000))))
-
 ;; The purpose of these functions is to disable GC during long-running
 ;; tasks while showing GC messages when it does run.
 
