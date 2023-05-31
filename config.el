@@ -535,16 +535,16 @@
              (buffer-modified-p))
         (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                         if (or (eq ch ?k) (eq ch ?K))
-                        return (or (set-buffer-modified-p nil) t)
+                        return t
                         if (or (eq ch ?d) (eq ch ?D))
                         do (setq cae-diff-window (diff-buffer-with-file))
                         if (or (eq ch ?s) (eq ch ?S))
                         return (progn (save-buffer) t)
                         if (memq ch '(?q ?Q))
                         return nil)
-               (when (window-live-p cae-diff-window)
-                 (delete-window cae-diff-window)
-                 (setq cae-diff-window nil)))
+          (when cae-diff-window
+            (delete-window cae-diff-window)
+            (setq cae-diff-window nil)))
       t))
   
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
