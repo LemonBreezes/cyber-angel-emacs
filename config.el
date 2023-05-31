@@ -133,9 +133,9 @@
     :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
     :select t :quit t :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
+  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
     :select t :ttl nil)                 ; which slot/vslot?
-  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
+  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
     :side 'right :select t :ttl nil)    ; which slot/vslot?
   (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
     :modeline nil :quit nil :ttl nil)
