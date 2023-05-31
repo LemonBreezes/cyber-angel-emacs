@@ -184,16 +184,39 @@
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
-(use-package! smart-mark
-  :init (add-hook 'doom-first-buffer-hook #'smart-mark-mode)
+(use-package! anzu
   :defer t
+  :init
+  (global-set-key [remap query-replace] 'anzu-query-replace)
+  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+  (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
+  (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
   :config
-  (defun cae-smart-mark-use-doom-escape-a ()
-    (if smart-mark-mode
-        (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
-      (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
-  (add-hook 'smart-mark-mode-hook #'cae-smart-mark-use-doom-escape-a)
-  (add-to-list 'smart-mark-mark-functions #'er/expand-region))
+  (setq anzu-mode-lighter ""
+        anzu-replace-threshold 50
+        anzu-replace-to-string-separator " → "))
+
+(use-package! isearch-mb
+  :after-call isearch-mode-hook
+  :config
+  (isearch-mb--setup)
+  (isearch-mb-mode +1)
+  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
+  (add-to-list 'isearch-mb--with-buffer #'scroll-right)
+  (add-to-list 'isearch-mb--with-buffer #'scroll-left)
+  (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
+  (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
+  (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
+  (when (modulep! :completion vertico)
+    (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
+    (map! :map isearch-mb-minibuffer-map
+          [remap consult-history] #'consult-isearch-history)
+    (add-to-list 'isearch-mb--after-exit #'consult-line)
+    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
+  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
+  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
+  (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
+  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
 
 ;;; Tools
@@ -383,40 +406,6 @@
           '("clangd" "--background-index" "--clang-tidy"
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
-
-(use-package! anzu
-  :defer t
-  :init
-  (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-  (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
-  (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
-  :config
-  (setq anzu-mode-lighter ""
-        anzu-replace-threshold 50
-        anzu-replace-to-string-separator " → "))
-
-(use-package! isearch-mb
-  :after-call isearch-mode-hook
-  :config
-  (isearch-mb--setup)
-  (isearch-mb-mode +1)
-  (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
-  (add-to-list 'isearch-mb--with-buffer #'scroll-right)
-  (add-to-list 'isearch-mb--with-buffer #'scroll-left)
-  (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
-  (when (modulep! :completion vertico)
-    (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
-    (map! :map isearch-mb-minibuffer-map
-          [remap consult-history] #'consult-isearch-history)
-    (add-to-list 'isearch-mb--after-exit #'consult-line)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
-  (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
-  (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
 
 ;;; Editor
@@ -731,7 +720,16 @@
     (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
       :side 'right :select nil :quit t :ttl 0)))
 
-
+(use-package! smart-mark
+  :init (add-hook 'doom-first-buffer-hook #'smart-mark-mode)
+  :defer t
+  :config
+  (defun cae-smart-mark-use-doom-escape-a ()
+    (if smart-mark-mode
+        (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
+      (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
+  (add-hook 'smart-mark-mode-hook #'cae-smart-mark-use-doom-escape-a)
+  (add-to-list 'smart-mark-mark-functions #'er/expand-region))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
