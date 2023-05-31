@@ -1226,8 +1226,6 @@
 
 ;;; AI
 
-(map! :leader :prefix ("g" . "gpt"))
-
 (use-package! org-ai
   :defer t :init
   (map! "C-c M-a" #'cae-ai-lazy-load-org-ai)
