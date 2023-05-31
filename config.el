@@ -1206,6 +1206,10 @@
       "C-c \"" "plot"
       "C-c C-v" "org-babel-map")))
 
+;;; AI
+
+
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
