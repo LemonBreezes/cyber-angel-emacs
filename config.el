@@ -18,10 +18,6 @@
 
 (load! "lisp/cae-theme")
 
-;; Do not use pagers
-(setenv "PAGER" "cat")
-(setenv "GIT_PAGER" "cat")
-
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
