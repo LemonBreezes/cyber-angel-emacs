@@ -29,6 +29,7 @@
 (defun cae-corfu-enable-in-minibuffer-h ()
   (unless (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
+              (string-match-p "I-search: " (minibuffer-prompt))
               (memq this-command '(evil-ex
                                    evil-ex-search-forward
                                    evil-ex-search-backward))
