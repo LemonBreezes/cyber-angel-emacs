@@ -99,7 +99,6 @@
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-cae)
   (when (modulep! +override)
     (meow-motion-overwrite-define-key)) ; custom keybinding for motion state
-  (meow/setup)
   (eval
    `(map! :map meow-normal-state-keymap
           ,(cae-keyboard-kbd "1") #'meow-expand-1
@@ -189,6 +188,7 @@
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
         meow-select-on-change t
-        meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression pp-eval-expression))
+        meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp
+                                  eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
