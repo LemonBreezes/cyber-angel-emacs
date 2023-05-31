@@ -130,7 +130,11 @@
 
 (use-package! goggles
   :init
-  (add-hook 'doom-first-input-hook #'goggles-mode))
+  (add-hook 'prog-mode-hook #'goggles-mode)
+  (add-hook 'text-mode-hook #'goggles-mode)
+  (add-hook 'conf-mode-hook #'goggles-mode)
+  :config
+  (setq-default goggles-pulse t))
 
 
 ;;; Tools
