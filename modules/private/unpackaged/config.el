@@ -23,5 +23,4 @@
   (defun cae-unpackaged-magit-start-smerge-hydra-h ()
     (when smerge-mode
       (+vc/smerge-hydra/body)))
-
   (add-hook 'magit-diff-visit-file-hook #'cae-unpackaged-magit-start-smerge-hydra-h))
