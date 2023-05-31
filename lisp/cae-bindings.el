@@ -84,6 +84,7 @@
       "C-S-i" #'doom/dumb-dedent
       [remap doom/backward-to-bol-or-indent] #'beginning-of-line
       [remap doom/sudo-this-file] #'cae-toggle-sudo
+      [remap expand-region] #'eri/expand-region
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim)
       (:when (modulep! :completion vertico)
