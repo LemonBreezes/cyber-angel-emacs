@@ -2,10 +2,6 @@
 
 ;;; Remap keys
 
-;; TODO Use key translation map instead of remapping keys
-;; Do this for the C-x t and C-c w prefix keys
-;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Translation-Map.html
-
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
 (define-key key-translation-map (kbd "C-x t @") (kbd "C-x t 2"))
