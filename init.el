@@ -66,6 +66,7 @@
        ;; exwm
        (corfu +tng)
        (dirvish +icons +dirvish)
+       eshell
        dired
        lisp
        unpackaged
