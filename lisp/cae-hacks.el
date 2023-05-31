@@ -63,12 +63,13 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
-(defadvice! cae-hacks-magit-do-not-deincrement-a (&optional arg try-vscroll)
+(defadvice! cae-hacks-magit-do-not-deincrement-a (args)
   :filter-args '(magit-previous-line magit-next-line)
-  (+log arg try-vscroll)
+  (let ((arg (car args))
+        (try-vscroll (second args)))
   (and (numberp arg)
-             (> arg 0)
-             transient-mark-mode
-             (not (region-active-p)))
+       (> arg 0)
+       transient-mark-mode
+       (not (region-active-p)))
     (cl-incf arg)
-  (list arg try-vscroll))
+  (list arg try-vscroll)))
