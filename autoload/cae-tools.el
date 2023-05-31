@@ -21,3 +21,12 @@
                         (cancel-function-timers 'ping-status))
                       (alert "internet working"))
                     (kill-buffer))))))
+
+;;;###autoload
+(defun dos2unix ()
+  "Automate M-% C-q C-m RET C-q C-j RET"
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward (string ?\C-m) nil t)
+      (replace-match "" nil t))))
