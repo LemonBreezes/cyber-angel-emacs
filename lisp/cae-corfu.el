@@ -32,6 +32,7 @@
     (corfu-indexed-mode +1)
     (eval
      `(map! :map corfu-map
+            "C-M-i" #'corfu-move-to-minibuffer
             ,(cae-keyboard-kbd "C-" "1") (cae-generate-corfu-select-index 0)
             ,(cae-keyboard-kbd "C-" "2") (cae-generate-corfu-select-index 1)
             ,(cae-keyboard-kbd "C-" "3") (cae-generate-corfu-select-index 2)
