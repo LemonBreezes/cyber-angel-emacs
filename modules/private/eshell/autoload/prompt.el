@@ -1,5 +1,6 @@
 ;;; private/eshell/autoload/prompt.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun cae-eshell-prompt ()
   (require 'shrink-path)
   (concat (let ((pwd (eshell/pwd)))
