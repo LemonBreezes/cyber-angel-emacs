@@ -163,8 +163,7 @@
           "Y" #'meow-yank-pop
           "\\" #'quoted-insert
           "/" #'+default/search-buffer
-          ,(cae-keyboard-kbd "*") #'isearch-forward-symbol-at-point
-
+          "S" #'embrace-commander
           )))
 
 (use-package! meow
