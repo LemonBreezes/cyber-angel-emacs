@@ -16,7 +16,7 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2)))
+  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ; Different computers
     (setq doom-font (font-spec :family "Iosevka Comfy"
                                :size (+ 16 font-size-offset))
           doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
