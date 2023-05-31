@@ -1,6 +1,7 @@
 ;;; private/unpackaged/config.el -*- lexical-binding: t; -*-
 
-;; This is a module created for stuff I copied from Alphapapa's `unpackaged.el' package.
+;; This is a module created for stuff I copied from Alphapapa's `unpackaged.el'
+;; package.
 
 ;;; Org
 (when (modulep! :lang org)
