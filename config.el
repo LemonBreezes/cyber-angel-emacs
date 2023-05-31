@@ -555,8 +555,14 @@
 
 (when (modulep! :completion vertico)
   (after! embark
-    (map! :map embark-collect-mode-map
-          "<f6>" #'cae-embark-collect-cheatsheet)))
+    (hercules-def
+     :toggle-funs #'embark-collect-mode
+     :keymap 'embark-collect-mode-map
+     :blacklist-funs '(digit-argument negative-argument describe-mode
+                       forward-button backward-button +popup/quit-window
+                       beginning-of-buffer end-of-buffer embark-collect-cheatsheet
+                       mouse-face)
+     :transient t)))
 
 (use-package! avy
   :defer t
