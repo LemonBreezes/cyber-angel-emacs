@@ -129,6 +129,7 @@
       "C-x O" #'other-window-previous   ;Dual to `C-x o'.
       "C-x !" #'doom/window-enlargen
       "C-x M-o" #'ace-swap-window
+      "C-x M-t" #'transpose-frame
       "C-x x o" #'ov-clear
       "M-Z" #'zap-up-to-char
       [C-i] #'doom/dumb-indent
