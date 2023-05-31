@@ -39,6 +39,13 @@
     ("v" scroll-down-command)
     (:exit "V" scroll-up-command))
 
+  (define-repeat-map scroll-other-window
+    ("v" scroll-other-window)
+    (:exit "V" scroll-other-window-down))
+  (define-repeat-map scroll-other-window-down
+    ("v" scroll-other-window-down)
+    (:exit "V" scroll-other-window))
+
   (define-repeat-map vertico-scroll-up
     ("v" vertico-scroll-up)
     (:exit "V" vertico-scroll-down))
