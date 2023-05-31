@@ -4,4 +4,4 @@
 (defun cae-meow-use-keyboard-layout-a ()
   (+log last-command-event)
   (setq last-command-event
-        (cae-keyboard-remap-char last-command-event)))
+        (cae-keyboard-remap-reverse last-command-event)))
