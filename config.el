@@ -20,157 +20,157 @@
 (load! "lisp/cae-theme")
 (load! "lisp/cae-cheatsheets")
 
-;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)
-        doom-unicode-font (unless (modulep! :ui unicode)
-                            (font-spec :family "LXGW WenKai" :weight 'light
-                                       :size 17))))
-
-;; Show absolute line numbers. I prefer to not show relative line numbers
-;; because I use `avy' commands to jump to lines.
-(setq display-line-numbers-type t)
-
-;; Show minibuffer recursion depth
-(autoload 'minibuffer-depth-setup "mb-depth")
-(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
-
-;; I never use the mouse buttons on the tab bar so I prefer to not show them.
-(defadvice! cae-tab-bar-load-buttons-a ()
-  :override #'tab-bar--load-buttons
-  (setq tab-bar-close-button   nil
-        tab-bar-back-button    nil
-        tab-bar-forward-button nil
-        tab-bar-new-button     nil))
-;; For some reason `tab-bar' commands sometimes misbehave when they are called
-;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
-;; `tab-bar-mode' after a delay.
-(run-with-idle-timer 3 nil #'tab-bar-mode +1)
-
-;; Don't confirm when exiting Emacs that active processes exist.
-(setq confirm-kill-processes nil)
-
-;; Colorize color strings.
-(add-hook 'prog-mode-hook #'rainbow-mode)
-
-(after! ansi-color
-  ;; I am trying this out. Not sure if I like it yet.
-  (setq ansi-color-bold-is-bright t))
-
-(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
-      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
-      kill-buffer-delete-auto-save-files t
-      scroll-conservatively 0           ;Doom disables this option as a
-                                        ;performance optimization but I would
-                                        ;much rather have Emacs automatically
-                                        ;recenter my windows.
-      window-combination-resize t)      ;Take new window space from all other
-                                        ;windows (not just current)
-
-(after! time
-  (setq display-time-default-load-average nil))
-
-(after! help-fns
-  (setq help-enable-symbol-autoload t))
-
-(after! newcomment
-  (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
-                                        ;`comment-region' so that I can mark the
-                                        ;entire commented text with
-                                        ;`mark-paragraph'.
-        comment-padding nil))           ;I prefer no spaces between comment
-                                        ;delimiters and the comment text.
-
-(when (and (modulep! :ui modeline)
-           (not (modulep! :ui modeline +light)))
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t)))
-
-(after! which-key
-  (setq which-key-ellipsis "..."
-        which-key-compute-remaps t
-        which-key-max-description-length 35))
-
-(after! eros
-  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
-
-;; Do not spam me with warnings
-(after! warnings
-  (setq warning-minimum-level :emergency
-        warning-minimum-log-level :emergency))
-
-(after! shr
-  ;; `shr' wraps lines in a visually unappealing way.
-  (setq shr-width 120
-        shr-max-width 120)
-
-  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-  ;; not colorize backgrounds at all.
-  (advice-add #'shr-colorize-region :around #'ignore))
-
-(after! proced
-  (setq-default proced-auto-update-flag t))
-
-;; Allow switching to these buffers with `C-x b'
-(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
-
-(use-package! info-colors
-  :defer t :init
-  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
-
-(use-package! authinfo-color-mode
-  :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
-
-(when (modulep! :ui workspaces)
-  (advice-add #'which-key--process-page :around
-              #'cae-ui-which-key-show-workspace-a))
-
-;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
-;; rules here instead of in the relevant `use-package!' blocks.
-(when (modulep! :ui popup)
-  (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
-    :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
-    :ttl nil)                           ; which slot/vslot?
-  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-    :quit nil :ttl t)                   ; which slot/vslot?
-  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
-    :quit nil)                          ; which slot/vslot?
-  (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
-  (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
-  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t)     ; which slot/vslot?
-  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
-    :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
-    :slot 2 :vslot -8)
-  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
-    :select t :quit t :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
-    :select t :ttl nil)                 ; which slot/vslot?
-  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :ttl nil)    ; which slot/vslot?
-  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
-    :modeline nil :quit nil :ttl nil)
-  (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
-  (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
-    :side 'right :select nil :quit t :ttl nil)
-  (after! embark
-    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-      :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
-  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+;;;; Set up fonts
+;;(unless (memq system-type '(cygwin windows-nt ms-dos))
+;;  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
+;;        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+;;                                            :size 18)
+;;        doom-unicode-font (unless (modulep! :ui unicode)
+;;                            (font-spec :family "LXGW WenKai" :weight 'light
+;;                                       :size 17))))
+;;
+;;;; Show absolute line numbers. I prefer to not show relative line numbers
+;;;; because I use `avy' commands to jump to lines.
+;;(setq display-line-numbers-type t)
+;;
+;;;; Show minibuffer recursion depth
+;;(autoload 'minibuffer-depth-setup "mb-depth")
+;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+;;
+;;;; I never use the mouse buttons on the tab bar so I prefer to not show them.
+;;(defadvice! cae-tab-bar-load-buttons-a ()
+;;  :override #'tab-bar--load-buttons
+;;  (setq tab-bar-close-button   nil
+;;        tab-bar-back-button    nil
+;;        tab-bar-forward-button nil
+;;        tab-bar-new-button     nil))
+;;;; For some reason `tab-bar' commands sometimes misbehave when they are called
+;;;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
+;;;; `tab-bar-mode' after a delay.
+;;(run-with-idle-timer 3 nil #'tab-bar-mode +1)
+;;
+;;;; Don't confirm when exiting Emacs that active processes exist.
+;;(setq confirm-kill-processes nil)
+;;
+;;;; Colorize color strings.
+;;(add-hook 'prog-mode-hook #'rainbow-mode)
+;;
+;;(after! ansi-color
+;;  ;; I am trying this out. Not sure if I like it yet.
+;;  (setq ansi-color-bold-is-bright t))
+;;
+;;(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
+;;      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
+;;      kill-buffer-delete-auto-save-files t
+;;      scroll-conservatively 0           ;Doom disables this option as a
+;;                                        ;performance optimization but I would
+;;                                        ;much rather have Emacs automatically
+;;                                        ;recenter my windows.
+;;      window-combination-resize t)      ;Take new window space from all other
+;;                                        ;windows (not just current)
+;;
+;;(after! time
+;;  (setq display-time-default-load-average nil))
+;;
+;;(after! help-fns
+;;  (setq help-enable-symbol-autoload t))
+;;
+;;(after! newcomment
+;;  (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
+;;                                        ;`comment-region' so that I can mark the
+;;                                        ;entire commented text with
+;;                                        ;`mark-paragraph'.
+;;        comment-padding nil))           ;I prefer no spaces between comment
+;;                                        ;delimiters and the comment text.
+;;
+;;(when (and (modulep! :ui modeline)
+;;           (not (modulep! :ui modeline +light)))
+;;  (after! doom-modeline
+;;    (setq doom-modeline-hud t
+;;          doom-modeline-support-imenu t)))
+;;
+;;(after! which-key
+;;  (setq which-key-ellipsis "..."
+;;        which-key-compute-remaps t
+;;        which-key-max-description-length 35))
+;;
+;;(after! eros
+;;  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
+;;
+;;;; Do not spam me with warnings
+;;(after! warnings
+;;  (setq warning-minimum-level :emergency
+;;        warning-minimum-log-level :emergency))
+;;
+;;(after! shr
+;;  ;; `shr' wraps lines in a visually unappealing way.
+;;  (setq shr-width 120
+;;        shr-max-width 120)
+;;
+;;  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+;;  ;; not colorize backgrounds at all.
+;;  (advice-add #'shr-colorize-region :around #'ignore))
+;;
+;;(after! proced
+;;  (setq-default proced-auto-update-flag t))
+;;
+;;;; Allow switching to these buffers with `C-x b'
+;;(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+;;(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
+;;
+;;(use-package! info-colors
+;;  :defer t :init
+;;  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+;;
+;;(use-package! authinfo-color-mode
+;;  :defer t
+;;  :init
+;;  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+;;  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
+;;  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+;;
+;;(when (modulep! :ui workspaces)
+;;  (advice-add #'which-key--process-page :around
+;;              #'cae-ui-which-key-show-workspace-a))
+;;
+;;;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
+;;;; rules here instead of in the relevant `use-package!' blocks.
+;;(when (modulep! :ui popup)
+;;  (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
+;;    :ttl nil :vslot 99)
+;;  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
+;;    :ttl nil)                           ; which slot/vslot?
+;;  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
+;;    :quit nil :ttl t)                   ; which slot/vslot?
+;;  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
+;;    :quit nil)                          ; which slot/vslot?
+;;  (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+;;  (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
+;;    :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
+;;  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :select t :quit t)     ; which slot/vslot?
+;;  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
+;;    :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
+;;    :slot 2 :vslot -8)
+;;  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+;;  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+;;    :select t :quit t :ttl nil :vslot 99)
+;;  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
+;;    :select t :ttl nil)                 ; which slot/vslot?
+;;  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :select t :ttl nil)    ; which slot/vslot?
+;;  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
+;;    :modeline nil :quit nil :ttl nil)
+;;  (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
+;;  (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
+;;    :side 'right :select nil :quit t :ttl nil)
+;;  (after! embark
+;;    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+;;      :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
+;;  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
 ;; Lower the default popup delay.
 (after! tooltip
