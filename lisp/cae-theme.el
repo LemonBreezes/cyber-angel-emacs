@@ -95,3 +95,5 @@
          (entry (car (last (or past-themes themes))))
          (theme (cdr entry)))
     (setq doom-theme theme)))
+
+(circadian-setup)
