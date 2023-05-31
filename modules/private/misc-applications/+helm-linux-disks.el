@@ -2,7 +2,9 @@
 
 (use-package! helm-linux-disks
   :defer t
-  :when (eq system-type 'gnu/linux)
+  :when (and (eq system-type 'gnu/linux)
+             (or (modulep! :private helm)
+                     (modulep! :completion helm)))
   :init
   (map! :leader
         :prefix +misc-applications-prefix
