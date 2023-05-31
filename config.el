@@ -613,6 +613,7 @@
           ;; M-s bindings (search-map)
           [remap Info-search] #'consult-info
           "M-s i" #'consult-info
+          "M-s m" #'consult-man
           "M-s k" #'consult-keep-lines
           "M-s u" #'consult-focus-lines
           ;; Isearch integration
