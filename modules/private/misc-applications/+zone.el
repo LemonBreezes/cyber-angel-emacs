@@ -38,7 +38,6 @@
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (while (minibufferp)
-      (sleep-for 0 100)
       (throw 'exit nil))
     (let ((wconf (current-window-configuration)))
       (select-window (car (doom-visible-windows)))
