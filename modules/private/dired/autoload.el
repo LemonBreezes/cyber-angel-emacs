@@ -14,7 +14,7 @@
     (require 'dirvish)
     (setq find-directory-functions
           (delq '+load-dirvish find-directory-functions))
-    (appendq! find-directory-functions '(dired-noselect))
+    (add-hook find-directory-functions '(dired-noselect) t)
     (dired-noselect dir)))
 
 ;;;###autoload
