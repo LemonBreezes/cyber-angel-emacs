@@ -75,6 +75,7 @@
        (defalias command
          `(lambda ()
             (interactive)
+            ;; TODO: Fix edit annotation
             (cae-project--with-bookmark-alist nil
               (call-interactively #',def)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
@@ -130,5 +131,4 @@
       which-key-replacement-alist)
 
 (map! :leader
-      :prefix "p"
       :desc "Project bookmarks" "C-b" #'cae-project-bookmark)
