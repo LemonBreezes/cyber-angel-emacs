@@ -2,5 +2,5 @@
 
 ;;;###autoload
 (defun cae-notmuch-quit ()
-  ((interactive))
+  (interactive)
   (+workspace/delete +notmuch-workspace-name))
