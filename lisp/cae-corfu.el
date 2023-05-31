@@ -12,10 +12,10 @@
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 
 (after! corfu
-  (setopt corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
-          corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
-          corfu-on-exact-match nil
-          corfu-preselect (if (modulep! :private corfu +tng) 'prompt t))
+  (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
+        corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
+        corfu-on-exact-match nil
+        corfu-preselect (if (modulep! :private corfu +tng) 'prompt t))
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
