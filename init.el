@@ -8,7 +8,7 @@
 (setq
  ;; Do not naively set `doom-leader-alt-key' and `doom-localleader-alt-key' to
  ;; `doom-leader-key' and `doom-localleader-key' respectively. If you do, Doom
- ;; will mess up your keybindings.
+ ;; will mess up your keybindings, even if you have Evil disabled.
  doom-leader-alt-key "M-SPC"
  doom-localleader-alt-key "M-SPC m"
  doom-leader-key "C-c"
