@@ -437,8 +437,8 @@
     (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
-        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/body)
-        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/nil)))
+        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/body nil #'eq)
+        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/nil nil #'eq)))
 
     ;; TODO `lispy-other-mode-map'
     (eval `(defhydra lh-knight ()
@@ -581,8 +581,8 @@
   (define-key worf-mode-map (kbd "<f6>") #'cae-worf-cheat-sheet/body)
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
-      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body)
-      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil)))
+      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body nil #'eq)
+      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil nil #'eq)))
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
