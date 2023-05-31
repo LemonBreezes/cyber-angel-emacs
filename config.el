@@ -257,12 +257,12 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
-    (setopt lsp-headerline-breadcrumb-enable t
-            lsp-enable-snippet t
-            lsp-enable-text-document-color t
-            lsp-enable-folding t
-            lsp-enable-indentation nil
-            lsp-semantic-tokens-enable t)
+    (setq lsp-headerline-breadcrumb-enable nil
+          lsp-enable-snippet t
+          lsp-enable-text-document-color t
+          lsp-enable-folding t
+          lsp-enable-indentation nil
+          lsp-semantic-tokens-enable t)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
