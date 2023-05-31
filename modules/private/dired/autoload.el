@@ -46,7 +46,7 @@
           (unless (file-equal-p dir default-directory)
             (advice-remove #'find-file #'cae-dired-find-file-a)
             (unwind-protect
-                (find-file oldfun dir)
+                (find-file dir)
               (advice-add #'find-file :before #'cae-dired-find-file-a))))
         (unless (file-directory-p file)
           ;; Copied from `dirvish-find-entry-a'
