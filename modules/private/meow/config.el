@@ -190,12 +190,7 @@
   (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
   :demand t
   :config
-  (cond
-   ((modulep! +colemak) (meow/setup-colemak))
-   ((modulep! +dvorak) (meow/setup-dvorak))
-   ((modulep! +qwerty) (meow/setup-qwerty))
-   ((modulep! +dvp) (meow/setup-dvp))
-   ((modulep! +cae) (meow/setup-cae)))
+  (meow/setup-cae)
   (cond
    ((modulep! +leader)
     (map! :map meow-normal-state-keymap
@@ -206,7 +201,7 @@
     (map! :map meow-beacon-state-keymap
           doom-leader-key nil)
     (meow/setup-leader)
-    (map! :map meow-leader-keymap
+    (map! :leader
           "l" #'meow-keypad-start))
    (t (meow/setup-keypad)))
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
