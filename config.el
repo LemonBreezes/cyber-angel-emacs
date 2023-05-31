@@ -257,10 +257,10 @@
     ;; Disable topsy-mode for gptel-mode
     (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
     (add-hook 'gptel-mode-hook
-      (cae-defun cae-disable-topsy-in-gptel-h ()
-        "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
+              (cae-defun cae-disable-topsy-in-gptel-h ()
+                "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
                                         ;package.
-        (topsy-mode -1))))
+                (topsy-mode -1))))
 
   (use-package! anzu
     :defer t :init
@@ -311,6 +311,10 @@
   (use-package! outline-minor-faces
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
+  (use-package! perfect-margin
+    :defer t :init
+    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
