@@ -860,7 +860,7 @@
           "W" #'consult-man
           :leader
           "M-x" #'consult-mode-command
-          (:desc "Keyboard macro"  "ok" #'consult-kmacro))
+          (:desc "Keyboard macro"  "ik" #'consult-kmacro))
     :config
     (setq consult-preview-key 'any)
     (consult-customize
