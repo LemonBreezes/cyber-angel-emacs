@@ -64,7 +64,8 @@
           "M-S" #'lispy-split
           "M-C" #'lispy-convolute
           "M-D" #'lispy-splice
-          "C-<backspace>" #'lispy-backward-kill-word)
+          "C-<backspace>" #'lispy-backward-kill-word
+          "C-d" #'cae-delete)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
