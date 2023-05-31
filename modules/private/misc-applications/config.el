@@ -29,7 +29,6 @@
     "+helm-linux-disks"
     "+helm-system-packages"
     "+mentor"
-    "+mpc"
     "+my-repo-pins"
     "+picpocket"
     "+pulseaudio-control"
