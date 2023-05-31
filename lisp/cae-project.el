@@ -86,11 +86,15 @@
 
 (defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
   (cae-project--with-bookmark-alist nil
-    (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)))
+    (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)
+    (setq-local bookmark-alist (cae-project--bookmark-alist)
+                bookmark-default-file (cae-project--get-bookmark-file))))
 
-(defun cae-project-bookmark-show-annotation (bookmark-name-or-record &optional from-bookmark-list)
+(defun cae-project-bookmark-show-annotation (bookmark-name-or-record)
   (cae-project--with-bookmark-alist nil
-    (bookmark-show-annotation bookmark-name-or-record from-bookmark-list)))
+    (bookmark-show-annotation bookmark-name-or-record)
+    (setq-local bookmark-alist (cae-project--bookmark-alist)
+                bookmark-default-file (cae-project--get-bookmark-file))))
 
 (map! :map cae-project-bookmark-embark-map
       "e" #'cae-project-bookmark-edit-annotation
