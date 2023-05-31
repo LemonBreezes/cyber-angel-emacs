@@ -49,18 +49,6 @@
                     " --no-sandbox")))
     args))
 
-;; Call `pp-eval-last-sexp' when `eros-eval-last-sexp' is called with a negative
-;; prefix argument
-(defadvice! cae-hacks-eros-eval-last-sexp-with-pp-a (oldfun arg)
-  :around #'eros-eval-last-sexp
-  (if (or (eq arg '-)
-          (and (numberp arg)
-               (< arg 0)))
-      (funcall #'pp-eval-last-sexp
-               (if (numberp arg)
-                   arg nil))
-    (funcall oldfun arg)))
-
 ;; A generic adviser for responding yes to yes or no prompts automatically.
 (defun cae-hacks-always-yes-a (oldfun &rest args)
   (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
