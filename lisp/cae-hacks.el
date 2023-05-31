@@ -128,16 +128,16 @@
 (defvar cae-hacks--gcmh-mode nil)
 
 (defun cae-hacks-disable-gc ()
+  (setq cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
+                                 gcmh-mode))
+  (gcmh-mode -1)
   (setq cae-hacks--gc-messages (and cae-hacks--gc-messages
                                     garbage-collection-messages)
-        cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
-                                 gcmh-mode)
         garbage-collection-messages t
         gc-cons-threshold cae-hacks-gc-threshold
         gc-cons-percentage cae-hacks-gc-percentage)
   (when (timerp gcmh-idle-timer)
-    (cancel-timer gcmh-idle-timer))
-  (gcmh-mode -1))
+    (cancel-timer gcmh-idle-timer)))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
