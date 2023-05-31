@@ -1046,6 +1046,7 @@
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
   (setq org-ai-default-chat-model "gpt-4")
+  ;;
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
 
