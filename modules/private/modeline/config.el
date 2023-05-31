@@ -135,13 +135,15 @@
           meow-mode
           shell-dirtrack-mode))
   (setq minions-promoted-modes
-        '((auto-fill-mode)
-          (auto-revert-mode)
-          (auto-revert-tail-mode)
-          (spell-fu-mode)
-          (font-lock-mode)
-          (nameless-mode)
-          (ruler-mode)))
+        '(orgtbl-mode
+          overwrite-mode
+          auto-fill-mode
+          auto-revert-mode
+          auto-revert-tail-mode
+          spell-fu-mode
+          font-lock-mode
+          highlight-changes-mode
+          ruler-mode))
   (setq minions-prominent-modes '(defining-kbd-macro
                                    projectile-mode
                                    flycheck-mode
