@@ -11,7 +11,8 @@ From https://www.reddit.com/r/emacs/comments/112t0uo/comment/j9g2r5n/?utm_source
 Here is an expample use of this function:
 (magit-add-section-hook 'magit-status-sections-hook
                         'cae-magit-insert-diff-upstream
-                        'magit-insert-stashes)"
+                        'magit-insert-stashes)
+With this, the diff with upstream is inserted before the stashes section."
   (magit-insert-section (diff-upstream nil t)
     (if-let ((upstream-branch (or branch (magit-get-upstream-branch (magit-get-current-branch)))))
         (progn
