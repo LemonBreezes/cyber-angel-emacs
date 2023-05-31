@@ -61,7 +61,8 @@ _R_: Restart      _sb_: List breakpoints
     (add-transient-hook! 'c-mode-common-hook
       (require 'dap-cpptools)
       (dap-cpptools-setup))
-    (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
+    (when (modulep! :tools eval)
+      (set-repl-handler! 'c++-mode #'cae-debugger/open-repl))))
 
 (after! gud
   (setq gud-chdir-before-run nil)
