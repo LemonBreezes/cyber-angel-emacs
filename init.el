@@ -1,5 +1,8 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+(defvar cae-config-finished nil
+  "Whether the configuration has finished loading.")
+
 (load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "C-c"
