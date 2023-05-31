@@ -58,6 +58,7 @@
           dap-mode
           spell-fu-mode
           meow-insert-mode
+          theme-magic-export-theme-mode
           eat-eshell-mode
           modern-c++-font-lock-mode))
   (setq minions-available-modes
