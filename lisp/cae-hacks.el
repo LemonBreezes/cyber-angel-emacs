@@ -62,3 +62,12 @@
   (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
+
+(defadvice! cae-hacks-magit-do-not-deincrement-a (&optional arg try-vscroll)
+  :filter-args '(magit-previous-line magit-next-line)
+  (when (and (numberp arg)
+           (> arg 0)
+           transient-mark-mode
+           (not (region-active-p)))
+    (cl-incf arg))
+  (list arg try-vscroll))
