@@ -207,9 +207,9 @@
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
-        (cond ;;((and (display-graphic-p)
-              ;;      (fboundp 'webkit-browse-url))
-              ;; (webkit-browse-url url new-window))
+        (cond ((or (string-suffix-p "-WSL2" operating-system-release)
+                   (display-graphic-p))
+               (browse-url-generic url new-window))
               ((fboundp 'w3m-browse-url)
                (w3m-browse-url url new-window))
               (t (eww-browse-url url new-window)))))
