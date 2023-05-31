@@ -32,3 +32,6 @@
   (undefine-key! rxt--read-pcre-mode-map
     "C-c i" "C-c s" "C-c x"))
 (add-hook 'emacs-lisp-mode-hook #'rxt-mode)
+
+(use-package! topsy
+  :defer t :init (add-hook 'emacs-lisp-mode-hook #'topsy-mode))
