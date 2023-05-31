@@ -22,7 +22,7 @@
           ("a" (elfeed-search-set-filter "@6-months-ago") "All")
           ("t" (elfeed-search-set-filter "@1-day-ago") "Today"))
          "Navigation"
-         (;;("RET" elfeed-search-show-entry "Show entry")
+         (("RET" elfeed-search-show-entry "Show entry")
           ("b" elfeed-search-browse-url "Open entry")
           ("s" elfeed-search-live-filter "Live filter")
           ("S" elfeed-search-set-filter "Set filter")
