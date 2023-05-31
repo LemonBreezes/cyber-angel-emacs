@@ -30,6 +30,7 @@
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
 
+  ;; Disable some Eshell modes when EAT is active.
   (add-hook! 'eat--eshell-process-running-mode-hook
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
