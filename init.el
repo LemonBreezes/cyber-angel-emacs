@@ -2,7 +2,7 @@
 
 (setq load-prefer-newer t)
 
-(load! "lisp/cae-hacks")
+;; (load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c l")
