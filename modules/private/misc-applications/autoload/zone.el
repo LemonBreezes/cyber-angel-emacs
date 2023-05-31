@@ -28,5 +28,6 @@
     (completing-read
      "Program: "
      (mapcar 'symbol-name zone-programs))))
+  (require 'zone)
   (let ((zone-programs (list (intern pgm))))
     (zone)))
