@@ -131,7 +131,9 @@
                    unless (string= "" (elt x 2))
                    collect
                    (list (if (string= (car x) "'")
-                             "=" (car x))
+                             "=" (car x)) ;Handle the `\'' key specially since
+                                          ;we never let that `lispy-tick' get
+                                          ;overwritten.
                          (intern (elt x 1))
                          (when (string-match "lispy-\\(?:eval-\\)?\\(.+\\)"
                                              (elt x 1))
