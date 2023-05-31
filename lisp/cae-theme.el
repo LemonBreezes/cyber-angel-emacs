@@ -31,8 +31,7 @@
                   font-lock-string-face
                   font-lock-comment-face
                   font-lock-doc-face))
-    (set-face-attribute face nil :weight 'normal))
-  )
+    (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
