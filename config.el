@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-logs")
+(load! "lisp/cae-debug")
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
 
