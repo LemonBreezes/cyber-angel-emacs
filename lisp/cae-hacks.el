@@ -120,7 +120,7 @@
     (when (bolp)
       (goto-char p))))
 
-;; For backwards compatibility.
+;; For backwards compatibility. `syslog-mode' uses this.
 (defun toggle-read-only (arg)
   (read-only-mode
    (cond ((not arg) (not buffer-read-only))
