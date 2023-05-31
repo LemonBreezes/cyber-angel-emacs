@@ -1206,7 +1206,7 @@
 ;;; Appendix
 
 (doom-load-packages-incrementally
- `(,@(when (modulep! :private dirvish)
+ `(,@(when (modulep! :emacs dirvishi)
        '(dired transient dirvish))
    auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
