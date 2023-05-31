@@ -24,6 +24,8 @@
             :around
             (cae-defun cae-tab-bar-switch-run-hooks-a (fun &rest args)
               (run-hooks 'cae-tab-bar-before-switch-hook)
-              (apply fun args)
+              (let ((cae-tab-bar-after-switch-hook nil)
+                    (cae-tab-bar-before-switch-hook nil))
+                (apply fun args))
               (run-hooks 'cae-tab-bar-after-switch-hook)))
 (advice-add #'tab-bar-new-tab-to :around #'cae-tab-bar-switch-run-hooks-a)
