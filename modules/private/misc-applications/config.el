@@ -58,7 +58,6 @@
     ;; zone
     ;; nyan zone
     ;; also encryption zone
-    ;; let it snow
     "+fireplace"
     "+flames-of-freedom"
     "+snow"
