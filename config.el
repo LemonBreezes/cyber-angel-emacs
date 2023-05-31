@@ -530,7 +530,7 @@
           embark-act-key #'embark-act)))
   (eval
    `(after! embark
-     (setq embark-cycle-key ,embark-act-key))))
+      (setq embark-cycle-key ,embark-act-key))))
 
 (define-key!
   :keymaps (append +default-minibuffer-maps
