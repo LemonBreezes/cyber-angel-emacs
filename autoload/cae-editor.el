@@ -47,7 +47,7 @@
 
 (defun cae-auto-sudoedit-exempt-p ()
   (let ((path (or (buffer-file-name) list-buffers-directory)))
-    (or (file-directory-p (buffer-file-name))
+    (or (file-directory-p path)
         (string-prefix-p (thread-last lisp-directory
                                       (file-name-parent-directory)
                                       (file-name-parent-directory))
