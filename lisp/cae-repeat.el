@@ -7,7 +7,8 @@
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
-  (setq repeat-exit-key "TAB")
+  (setq repeat-exit-key "TAB"
+        repeat-check-key nil)
 
   (eval
    `(define-repeat-map other-window
@@ -103,7 +104,6 @@
        "9" +workspace/switch-to-8)
       (:enter +workspace/display))
    t)
-  (setq repeat-check-key nil)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
