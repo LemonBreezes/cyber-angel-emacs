@@ -6,7 +6,6 @@
   `(progn (defun ,name ,arglist ,docstring ,@body)
           #',name))
 
-;;;###autoload
 (defun cae-ignore-errors-a (fun &rest args)
   "Ignore errors in FUN with ARGS."
   (ignore-errors (apply fun args)))
