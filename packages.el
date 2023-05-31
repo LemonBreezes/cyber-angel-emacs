@@ -33,7 +33,8 @@
 (package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 
-;; These are used for their autoloads.
+;; These are used for their autoloads. They are not explicitly referenced in
+;; this configuration.
 (package! crontab-mode)
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
@@ -60,7 +61,8 @@
 (package! edit-indirect)
 (package! string-edit-at-point)
 
-;; These are used for their autoloads.
+;; These are used for their autoloads. They are not explicitly referenced in
+;; this configuration.
 (package! ialign)
 
 ;; cae-multi.el
