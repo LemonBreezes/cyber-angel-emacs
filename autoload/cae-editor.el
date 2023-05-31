@@ -289,7 +289,7 @@ mark the string and call `edit-indirect-region' with it."
           real-this-command 'set-mark-command)
     (call-interactively #'set-mark-command)))
 
-(defun cae-embark-completing-read-prompter (oldfun &rest args)
+(defun cae-bind-C-z-to-abort-a (oldfun &rest args)
   (minibuffer-with-setup-hook
       (lambda ()
         (local-set-key (kbd "C-z") #'abort-recursive-edit))
@@ -298,7 +298,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-embark-act-with-completing-read (&optional arg)
   (interactive "P")
-  (let* ((embark-prompter #'cae-embark-completing-read-prompter)
+  (let* ((embark-prompter #'embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
          (embark-indicators '())
          (posframe (cl-find-if
