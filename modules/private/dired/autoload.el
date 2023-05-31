@@ -37,4 +37,10 @@
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
-;;;###autoload
+;;;###autoload (autoload 'cae-dired-dirvish-hydra/body "private/dired/autoload" nil t)
+(defhydra cae-dired-dirvish-hydra (:color blue)
+  ("<f6>" nil "Exit" :exit t)
+  ;;("C-c C-c" forge-post-submit "Submit")
+  ;;("C-c C-e" forge-post-dispatch  "Dispatch")
+  ;;("C-c C-k" forge-post-cancel "Cancel")
+  )
