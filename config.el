@@ -345,12 +345,14 @@
   ;; Automatically find projects in the I personally use.
   (setq projectile-project-search-path
         `((,doom-user-dir . 0)
+          (,doom-emacs-dir . 0)
           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
           ("~/src/" . 1)))
   (add-to-list 'projectile-globally-ignored-directories
                (expand-file-name ".local/straight/repos/" user-emacs-directory))
   (unless (or (cl-set-difference projectile-known-projects
-                                 '("~/.doom.d" "~/.emacs.d")
+                                 '("~/.doom.d" "~/.emacs.d" "~/.config/doom"
+                                   "~/.config/emacs")
                                  :test #'file-equal-p)
               (not (file-directory-p "~/src/"))
               (directory-empty-p "~/src/"))
