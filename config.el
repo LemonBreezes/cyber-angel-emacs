@@ -278,22 +278,19 @@
     :config
     (isearch-mb--setup)
     (isearch-mb-mode +1)
-    (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
-    (add-to-list 'isearch-mb--with-buffer #'reposition-window)
-    (add-to-list 'isearch-mb--with-buffer #'scroll-right)
-    (add-to-list 'isearch-mb--with-buffer #'scroll-left)
-    (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
+    (dolist (cmd '(recenter-top-bottom reposition-window
+                   scroll-right scroll-left isearch-yank-word
+                   consult-isearch-history))
+      (add-to-list 'isearch-mb--with-buffer cmd nil #'eq))
+    (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
+                   avy-isearch consult-line))
+      (add-to-list 'isearch-mb--after-exit cmd nil #'eq))
     (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
-      (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
       (map! :map isearch-mb-minibuffer-map
             [remap consult-history] #'consult-isearch-history)
-      (add-to-list 'isearch-mb--after-exit #'consult-line)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-    (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
-    (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
-    (add-to-list 'isearch-mb--after-exit  #'avy-isearch)
     (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
     (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
@@ -346,7 +343,7 @@
                 (t #'browse-url-generic))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+  (add-to-list 'doom-large-file-excluded-modes 'nov-mode nil #'eq)
 
   (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
   (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
@@ -400,7 +397,7 @@
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
                     "/run/current-system/profile/sbin"))
-      (add-to-list 'tramp-remote-path path)))
+      (add-to-list 'tramp-remote-path path nil #'string=)))
 
   ;; Use Emacs as the default editor for shell commands.
   ;; `dwim-shell-command'.
@@ -414,9 +411,9 @@
   (when (and (modulep! :checkers spell)
              (not (modulep! :checkers spell +flyspell)))
     (after! spell-fu
-      (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-      (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-      (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+      (add-to-list 'spell-fu-faces-exclude 'message-header-other nil #'eq)
+      (add-to-list 'spell-fu-faces-exclude 'org-property-value nil #'eq)
+      (add-to-list 'spell-fu-faces-exclude 'message-header-to nil #'eq)
       (setq spell-fu-faces-exclude
             (delq 'font-lock-string-face spell-fu-faces-include))))
 
@@ -450,8 +447,8 @@
                 "--completion-style=detailed"
                 "--header-insertion=never"
                 "--header-insertion-decorators=0")))
-      (add-to-list 'lsp-disabled-clients 'ccls)
-      (add-to-list 'lsp-disabled-clients 'mspyls)))
+      (add-to-list 'lsp-disabled-clients 'ccls nil #'eq)
+      (add-to-list 'lsp-disabled-clients 'mspyls nil #'eq)))
 
   (when (modulep! :tools lsp +eglot)
     (after! eglot
@@ -547,7 +544,7 @@
             (setq cae-diff-window nil)))
       t))
   
-  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
+  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer nil #'eq)
 
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
@@ -706,8 +703,10 @@
             (mark " "
                   (name 16 -1)
                   " " filename)))
-    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
-    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$"
+                 nil #'string=)
+    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"
+                 nil #'string=))
 
   (use-package! diff-mode
     :defer t :config
@@ -1018,7 +1017,7 @@
           org-agenda-files '("~/org/")))
   (when (and (modulep! :ui ligatures)
              (eq (car +ligatures-in-modes) 'not))
-    (add-to-list '+ligatures-in-modes 'org-mode t))
+    (add-to-list '+ligatures-in-modes 'org-mode t #'eq))
 
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
