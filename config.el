@@ -1210,6 +1210,7 @@
   (add-hook 'org-mode-hook #'org-ai-mode)
   :config
   (org-ai-global-mode +1)
+  (setq org-ai-default-chat-model "gpt-4")
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
 
