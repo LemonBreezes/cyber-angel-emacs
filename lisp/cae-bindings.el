@@ -158,6 +158,10 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
+(map! :leader
+      :prefix "t"
+      :desc "Column indicator" "C" #'vline-mode)
+
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (unless (lookup-key help-map (kbd "SPC"))
   (define-key help-map (kbd "SPC") #'cae-pop-mark))
