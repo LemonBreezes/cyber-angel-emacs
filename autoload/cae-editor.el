@@ -47,3 +47,11 @@
         (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                            (tramp-file-local-name file)))
       (doom/sudo-this-file))))
+
+;;;###autoload
+(defun cae-copilot-complete-freeze-cursors-dwim ()
+  (interactive)
+  (if (and (modulep! :editor multiple-cursors)
+           (> (mc/num-cursors) 1))
+      (call-interactively #'mc/freeze-fake-cursors-dwim)
+    (call-interactively #'copilot-complete)))
