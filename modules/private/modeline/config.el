@@ -89,4 +89,14 @@
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
-(when (modulep! +pretty))
+(when (modulep! +pretty)
+  (use-package! nyan-mode
+    :init
+    (add-hook 'doom-first-buffer-hook #'nyan-mode)
+    :config
+    (setq! nyan-animate-nyancat t
+           nyan-wavy-trail t
+           nyan-bar-length 20
+           nyan-cat-face-number 3
+           nyan-minimum-window-width 20
+           nyan-animation-frame-interval 0.1)))
