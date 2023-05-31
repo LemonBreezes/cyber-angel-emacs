@@ -39,6 +39,8 @@
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
+
+  ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
   (advice-add #'eat-eshell-char-mode
               :after
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
