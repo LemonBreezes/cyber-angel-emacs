@@ -196,7 +196,7 @@ appropriate.  In tables, insert a new row or end the table."
                   (and (eq 'item (car context))
                        (not (eq (org-element-property :contents-begin context)
                                 (org-element-property :contents-end context))))
-                  (unpackaged/org-element-descendant-of 'item context)) ; Element in list item, e.g. a link
+                  (cae-unpackaged-org-element-descendant-of 'item context)) ; Element in list item, e.g. a link
               ;; Non-empty item: Add new item.
               (cl-letf (((symbol-function #'org-list-insert-item)
                          (symbol-function #'cae-unpackaged-org-list-insert-item-after)))
