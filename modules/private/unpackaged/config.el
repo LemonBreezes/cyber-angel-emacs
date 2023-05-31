@@ -18,4 +18,10 @@
   (after! magit
     (setopt magit-bury-buffer-function #'magit-restore-window-configuration))
   (advice-add #'cae-unpackaged-magit-status :before-until
-              #'cae-unpackaged-magit-status-disable-when-gac-enabled-a))
+              #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
+
+  (defun cae-unpackaged-magit-start-smerge-hydra-h ()
+    (when smerge-mode
+      (+vc/smerge-hydra/body)))
+
+  (add-hook 'magit-diff-visit-file-hook #'cae-unpackaged-magit-start-smerge-hydra-h))
