@@ -84,7 +84,7 @@
        eshell
        dired
        lisp
-       ;; misc-applications
+       misc-applications
        modeline
        ;; (meow +leader)
        unpackaged
