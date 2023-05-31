@@ -8,6 +8,15 @@
     (add-hook 'find-directory-functions #'dired-noselect t))
   (dired-noselect dir))
 
+(defun cae-dired-dirvish-fullscreen-p ()
+  (and (derived-mode-p 'dired-mode)
+       (window-dedicated-p)
+       (not (window-dedicated-p))))
+
+(defun cae-dired-dirvish-not-fullscreen-p ()
+  (not (and (derived-mode-p 'dired-mode)
+             (one-window-p))))
+
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
@@ -25,15 +34,6 @@
   (when (cae-dired-dirvish-not-fullscreen-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
-
-(defun cae-dired-dirvish-fullscreen-p ()
-  (and (derived-mode-p 'dired-mode)
-       (window-dedicated-p)
-       (not (window-dedicated-p))))
-
-(defun cae-dired-dirvish-not-fullscreen-p ()
-  (not (and (derived-mode-p 'dired-mode)
-             (one-window-p))))
 
 (defun cae-dired-find-file-other-window-a (oldfun &rest args)
   (when (cae-dired-dirvish-fullscreen-p)
