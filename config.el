@@ -1081,7 +1081,9 @@
           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
         eshell-visual-subcommands '(("gh" "repo" "fork")
-                                    ("git" "log" "diff" "show")
+                                    ;;These are disabled because I set the Git
+                                    ;;pager to `cat'.
+                                    ;;("git" "log" "diff" "show")
                                     ("geth" "attach"))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
