@@ -139,5 +139,6 @@
           (lambda () (setq gc-cons-threshold cae-hacks-big-gc-threshold
                            gc-cons-percentage cae-hacks-big-gc-percentage
                            gcmh-low-cons-threshold gc-cons-threshold
-                           gcmh-high-cons-threshold gc-cons-threshold))
+                           gcmh-high-cons-threshold gc-cons-threshold
+                           garbage-collection-messages t))
           -10)
