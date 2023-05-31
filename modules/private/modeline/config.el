@@ -178,9 +178,9 @@
 ;; This block might seem crazy, but it's how I've gotten parrot mode to work
 ;; and be silent on startup.
 (use-package! parrot
-  :after magit
   :defer t :init
   (map! "C-!" #'parrot-rotate-next-word-at-point)
+  (after! magit (require 'parrot))
   :config
   (setopt parrot-animate 'hide-static
           parrot-rotate-animate-after-rotation nil
