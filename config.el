@@ -236,7 +236,7 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
-    (setq! lsp-headerline-breadcrumb-enable t
+    (setopt lsp-headerline-breadcrumb-enable t
            lsp-enable-snippet nil
            lsp-enable-text-document-color t
            lsp-enable-folding t
@@ -577,7 +577,7 @@
 ;;; Org
 
 (after! calendar
-  (setq! calendar-week-start-day 1))
+  (setopt calendar-week-start-day 1))
 
 (after! org
   (setq org-directory "~/org/"
