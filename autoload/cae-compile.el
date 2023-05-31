@@ -49,7 +49,7 @@
                      (string= (file-name-nondirectory s) "shared-local"))))))))
 
 ;;;###autoload
-(defun +straight-rebuild-package-maybe ()
+(defun cae-compile-rebuild-package-maybe ()
   (when (and (stringp (buffer-file-name))
              (stringp (file-name-directory (buffer-file-name)))
              (string-prefix-p (expand-file-name ".local/straight/" doom-emacs-dir)
