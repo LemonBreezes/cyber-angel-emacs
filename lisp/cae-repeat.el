@@ -5,7 +5,7 @@
 (use-package! repeat
   :init
   ;; (add-hook 'doom-first-input-hook #'repeat-mode)
-  (run-with-timer 1 nil #'repeat-mode +1)
+  (run-with-timer 2 nil #'repeat-mode +1)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-timeout 5)
