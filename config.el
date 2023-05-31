@@ -529,7 +529,7 @@
                  do (setq cae-diff-buffer (window-buffer (diff-buffer-with-file)))
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
-                 if (or (eq ch ?q) (eq ch ?Q) (eq ch ?\C-g) (eq ch ?\C-\[))
+                 if (memq ch '(?q ?Q ?\C-g ?\C-\[))
                  return (progn
                           (when (buffer-live-p cae-diff-buffer)
                             (kill-buffer cae-diff-buffer))
