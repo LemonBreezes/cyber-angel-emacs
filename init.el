@@ -9,7 +9,7 @@
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
-       (vertico +icons)
+       (vertico +icons +childframe)
 
        :ui
        doom-dashboard
