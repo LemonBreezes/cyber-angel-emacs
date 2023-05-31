@@ -48,7 +48,7 @@
 (package! ednc)
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
 (package! leetcode)
-(package! autotetris-mode)
+(package! autotetris-mode :recipe (:build (:not compile)))
 
 (package! zones)
 (package! zone-nyan)
