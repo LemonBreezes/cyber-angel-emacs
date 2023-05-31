@@ -62,5 +62,6 @@
 ;;;###autoload
 (defun cae-keyboard-kbd2 (&rest args)
   (declare (pure t) (side-effect-free t))
-  (append (butlast args)
-          (list (cae-keyboard-kbd (car (last args))))))
+  (mapconcat #'kbd
+             (append (butlast args)
+                     (list (cae-keyboard-kbd (car (last args)))))))
