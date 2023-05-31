@@ -650,6 +650,7 @@
               em-extpipe em-glob em-hist em-ls em-script em-term
               em-alias em-elecslash em-rebind em-prompt))
    ,@(when (and (modulep! :tools pdf)
+                (display-graphic-p)
                 (not (string-suffix-p "-WSL2" operating-system-release))) ; WSL
       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
