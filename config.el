@@ -120,12 +120,18 @@
   (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl t)
-  (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer :side 'right :ttl t :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t)
-  (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer :height 0.6 :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer :height 0.6 :side 'right :select t :quit t :ttl 0)
+  (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
+    :side 'right :ttl t :select t :quit t :ttl 0)
+  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+    :side 'right :select t :quit t)
+  (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
+    :side 'right :select t :quit t :ttl 0)
+  (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
+    :height 0.6 :side 'right :select t :quit t :ttl 0)
+  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+    :side 'right :select t :quit t :ttl 0)
+  (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
+    :height 0.6 :side 'right :select t :quit t :ttl 0)
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
