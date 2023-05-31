@@ -19,20 +19,13 @@
 
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
-(defvar cae-hacks-hydra-pause--workspace-before-switch nil)
 (defun cae-hacks-hydra-pause-h ()
   (when hydra-curr-map
-    (when (modulep! :ui workspaces)
-      (setq cae-hacks-hydra-pause--workspace-before-switch
-            (+workspace-current-name)))
     (ring-insert hydra-pause-ring hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h ()
-  (unless (or (zerop (ring-length hydra-pause-ring))
-              (not (equal (+workspace-current-name)
-                          cae-hacks-hydra-pause--workspace-before-switch)))
-    (run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0)))
-  (setq cae-hacks-hydra-pause--workspace-before-switch nil))
+  (unless (zerop (ring-length hydra-pause-ring))
+    (run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0))))
 (after! hydra
   (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h)
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
