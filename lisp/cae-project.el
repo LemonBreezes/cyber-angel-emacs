@@ -45,7 +45,8 @@
          (bookmark-save-flag nil))
      (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file
              bookmark-save-flag)
-     ,@body))
+     ,@body
+     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
 
 (defun cae-project-bookmark-set (&optional name no-overwrite)
   "Set a bookmark in the current project."
@@ -93,8 +94,7 @@
          `(lambda ()
             (interactive)
             (cae-project--with-bookmark-alist nil
-              (call-interactively #',def)
-              (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+              (call-interactively #',def)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
                  (symbol-name def)))
        (define-key cae-project-bookmark-embark-map (vector key) command))))
