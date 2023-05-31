@@ -13,6 +13,7 @@
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
+(package! rainbow-mode)
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -27,8 +28,8 @@
 
 (package! crontab-mode)
 (package! ebuild-mode :built-in t)
-(package! font-lock-studio)             ; I don't use this often, but it's useful
-                                        ; for debugging font-lock issues.
+(package! font-lock-studio)             ;I don't use this often, but it's useful
+                                        ;for debugging font-lock issues.
 (package! git-modes)
 
 ;; cae-webkit.el
