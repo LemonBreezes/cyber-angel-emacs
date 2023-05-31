@@ -42,7 +42,6 @@
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
                 (message "Type M-RET/C-M-m to exit char mode.")))
 
-  ;; Send TAB and RET to the terminal.
   (map! :map (eat-eshell-char-mode-map
               eat-eshell-semi-char-mode-map)
         "<tab>" #'eat-self-input
