@@ -526,7 +526,11 @@
        "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 (after! embark
-  (map! "<f8>" #'embark-act)
+  (map! "<f8>" #'embark-act
+        (:when (modulep! :completion vertico)
+         (:after vertico
+          :map vertico-map
+          "<f8>" #'embark-act)))
   (setq embark-cycle-key "<f8>"))
 
 (define-key!
