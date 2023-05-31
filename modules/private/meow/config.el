@@ -174,7 +174,10 @@
   (meow/setup-keypad)
   (add-hook 'doom-first-file-hook #'meow-setup-indicator)
   (map! :map meow-normal-state-keymap
-        "DEL" doom-leader-map)
+        "DEL" doom-leader-map
+        :map doom-leader-map
+        "l" doom-localleader-alt-key)
+
   (setq meow-keypad-start-keys
         '((?c . ?c)
           (?h . ?h)
