@@ -22,8 +22,8 @@
   (after! magit
     (setq magit-bury-buffer-function #'magit-restore-window-configuration)
     (map! :map magit-status-mode-map
-          "q" #'magit-mode-bury-buffer
-          "Q" #'+magit/quit-all))
+          ;; Killing Magit buffers creates
+          "q" #'magit-mode-bury-buffer))
   (advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
