@@ -55,4 +55,4 @@
   (save-excursion
     (goto-char (point-min))
     (while (search-forward (string ?\C-m) nil t)
-      (replace-match (string ?\C-j) nil t))))
+      (replace-match "" nil t))))
