@@ -24,7 +24,8 @@
        ,(cae-keyboard-kbd "2") split-window-below
        ,(cae-keyboard-kbd "3") split-window-right
        "u" winner-undo
-       "r" winner-redo)))
+       "r" winner-redo)
+      (:exit "m" ace-swap-window)))
 
   (define-repeat-map isearch-repeat
     ("s" isearch-repeat-forward
