@@ -15,8 +15,16 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(+log "HELLO WORLD" "I AM CAE" "I AM A DOOM EMACS USER" "I AM A PROGRAMMER" "I AM A HUMAN BEING" (featurep 'general))
-(defalias 'general-override-mode-map global-map)
+(define-minor-mode cae-doom-leader-mode
+  "Minor mode to enable the doom-leader keymap."
+  :global t
+  :init-value nil
+  :lighter nil
+  :keymap general-override-mode-map)
+(cae-doom-leader-mode +1)
+(after! general
+  (general-override-mode -1))
+
 
 (doom! :completion
        (vertico +icons)
