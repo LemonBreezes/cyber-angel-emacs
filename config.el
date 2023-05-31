@@ -13,7 +13,7 @@
 (defvar cae-config-compilation-on-kill-enabled-p nil
   "Whether on-kill native compilation is enabled.")
 
-(defvar cae-config-incremental-compilation-enabled-p nil
+(defvar cae-config-incremental-compilation-enabled-p t
   "Whether incremental native compilation is enabled.")
 
 (when (and (modulep! :completion helm)
