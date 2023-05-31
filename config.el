@@ -14,154 +14,154 @@
 (load! "lisp/cae-theme")
 
 ;; Do not use pagers
-;;(setenv "PAGER" "cat")
-;;(setenv "GIT_PAGER" "cat")
-;;
-;;;; Set up fonts
-;;(unless (memq system-type '(cygwin windows-nt ms-dos))
-;;  (let ((offset (if (string-match-p "WSL" operating-system-release) 2 0)))
-;;    (setq doom-font (font-spec :family "Iosevka Comfy" :size (+ 16 offset))
-;;          doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-;;                                              :size (+ 16 offset))
-;;          doom-unicode-font (unless (modulep! :ui unicode)
-;;                              (font-spec :family "LXGW WenKai" :weight 'light
-;;                                         :size (+ 15 offset))))))
-;;
-;;;; Show minibuffer recursion depth
-;;(autoload 'minibuffer-depth-setup "mb-depth")
-;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
-;;
-;;;; A minimal mouse-free `tab-bar' UI.
-;;(defadvice! cae-tab-bar-load-buttons-a ()
-;;  :override #'tab-bar--load-buttons
-;;  (setq tab-bar-close-button   nil
-;;        tab-bar-back-button    nil
-;;        tab-bar-forward-button nil
-;;        tab-bar-new-button     nil))
-;;(run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
-;;
-;;;; Don't confirm when exiting Emacs that active processes exist.
-;;(setq confirm-kill-processes nil)
-;;
-;;;; Colorize color strings.
-;;(add-hook 'prog-mode-hook #'rainbow-mode)
-;;
-;;(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
-;;      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
-;;      kill-buffer-delete-auto-save-files t)
-;;
-;;(after! newcomment
-;;  (setq comment-empty-lines 'eol
-;;        comment-padding nil))
-;;
-;;(when (and (modulep! :ui modeline)
-;;           (not (modulep! :ui modeline +light)))
-;;  (after! doom-modeline
-;;    (setq doom-modeline-hud t
-;;          doom-modeline-support-imenu t)))
-;;
-;;(after! which-key
-;;  (setq which-key-ellipsis "..."
-;;        which-key-compute-remaps t))
-;;
-;;(after! eros
-;;  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
-;;
-;;;; Do not spam me with warnings
-;;(after! warnings
+(setenv "PAGER" "cat")
+(setenv "GIT_PAGER" "cat")
+
+;; Set up fonts
+(unless (memq system-type '(cygwin windows-nt ms-dos))
+ (let ((offset (if (string-match-p "WSL" operating-system-release) 2 0)))
+   (setq doom-font (font-spec :family "Iosevka Comfy" :size (+ 16 offset))
+         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+                                             :size (+ 16 offset))
+         doom-unicode-font (unless (modulep! :ui unicode)
+                             (font-spec :family "LXGW WenKai" :weight 'light
+                                        :size (+ 15 offset))))))
+
+;; Show minibuffer recursion depth
+(autoload 'minibuffer-depth-setup "mb-depth")
+(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+
+;; A minimal mouse-free `tab-bar' UI.
+(defadvice! cae-tab-bar-load-buttons-a ()
+ :override #'tab-bar--load-buttons
+ (setq tab-bar-close-button   nil
+       tab-bar-back-button    nil
+       tab-bar-forward-button nil
+       tab-bar-new-button     nil))
+(run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
+
+;; Don't confirm when exiting Emacs that active processes exist.
+(setq confirm-kill-processes nil)
+
+;; Colorize color strings.
+(add-hook 'prog-mode-hook #'rainbow-mode)
+
+(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
+     truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
+     kill-buffer-delete-auto-save-files t)
+
+(after! newcomment
+ (setq comment-empty-lines 'eol
+       comment-padding nil))
+
+(when (and (modulep! :ui modeline)
+          (not (modulep! :ui modeline +light)))
+ (after! doom-modeline
+   (setq doom-modeline-hud t
+         doom-modeline-support-imenu t)))
+
+(after! which-key
+ (setq which-key-ellipsis "..."
+       which-key-compute-remaps t))
+
+(after! eros
+ (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
+
+;; Do not spam me with warnings
+;; (after! warnings
 ;;  (setq warning-minimum-level :emergency
 ;;        warning-minimum-log-level :emergency))
-;;
-;;(after! shr
-;;  ;; `shr' wraps lines in a visually unappealing way.
-;;  (setq shr-width 120
-;;        shr-max-width 120)
-;;
-;;  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-;;  ;; not colorize backgrounds at all.
-;;  (advice-add #'shr-colorize-region :around #'ignore))
-;;
-;;(after! proced
-;;  (setq-default proced-auto-update-flag t))
-;;
-;;;; Allow switching to these buffers with `C-x b'
-;;(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-;;(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
-;;
-;;(use-package! info-colors
-;;  :defer t :init
-;;  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
-;;
-;;(use-package! authinfo-color-mode
-;;  :defer t
-;;  :init
-;;  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-;;  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
-;;
-;;(when (modulep! :ui workspaces)
-;;  (advice-add #'which-key--process-page :around
-;;              #'cae-ui-which-key-show-workspace-a))
-;;
-;;;; Set some popup rules. How does vslot work?
-;;(when (modulep! :ui popup)
-;;  (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
-;;    :ttl nil)
-;;  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
-;;  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-;;    :quit nil :ttl t)
-;;  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
-;;  (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-;;    :side 'right :ttl t :select t :quit t :ttl t)
-;;  (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
-;;    :side 'right :ttl t :select t :quit t :ttl 0)
-;;  (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-;;    :side 'right :select t :quit t)
-;;  (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
-;;    :side 'right :select t :quit t :ttl 0)
-;;  (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
-;;    :height 0.6 :side 'right :select t :quit t :ttl 0)
-;;  (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-;;    :side 'right :select t :quit t :ttl 0)
-;;  (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
-;;    :height 0.6 :side 'right :select t :quit t :ttl 0)
-;;  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
-;;    :select t :quit t :ttl nil)
-;;  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
-;;    :select t :ttl nil)
-;;  (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
-;;    :side 'right :select t :ttl nil)
-;;  (after! embark
-;;    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-;;      :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
-;;  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
-;;
-;;;; Lower the default popup delay.
-;;(after! tooltip
-;;  (setq tooltip-hide-delay 3))
-;;
-;;(when (modulep! :checkers syntax +childframe)
-;;  (after! flycheck-posframe
-;;    (setq flycheck-posframe-border-width 1
-;;          flycheck-posframe-border-use-error-face t)))
-;;
-;;(use-package! goggles
-;;  :init
-;;  (add-hook 'prog-mode-hook #'goggles-mode)
-;;  (add-hook 'text-mode-hook #'goggles-mode)
-;;  (add-hook 'conf-mode-hook #'goggles-mode)
-;;  :config
-;;  (setq-default goggles-pulse t))
-;;
-;;;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
-;;(when (modulep! :completion vertico +childframe)
-;;  (after! vertico-posframe
-;;    (setq vertico-posframe-parameters
-;;          '((inhibit-double-buffering . t)))))
-;;(after! posframe
-;;  (setq posframe-inhibit-double-buffering t))
-;;
-;;
-;;;;; Tools
+
+(after! shr
+ ;; `shr' wraps lines in a visually unappealing way.
+ (setq shr-width 120
+       shr-max-width 120)
+
+ ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+ ;; not colorize backgrounds at all.
+ (advice-add #'shr-colorize-region :around #'ignore))
+
+(after! proced
+ (setq-default proced-auto-update-flag t))
+
+;; Allow switching to these buffers with `C-x b'
+(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
+
+(use-package! info-colors
+ :defer t :init
+ (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+
+(use-package! authinfo-color-mode
+ :defer t
+ :init
+ (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+ (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+
+(when (modulep! :ui workspaces)
+ (advice-add #'which-key--process-page :around
+             #'cae-ui-which-key-show-workspace-a))
+
+;; Set some popup rules. How does vslot work?
+(when (modulep! :ui popup)
+ (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
+   :ttl nil)
+ (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
+ (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
+   :quit nil :ttl t)
+ (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
+ (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
+   :side 'right :ttl t :select t :quit t :ttl t)
+ (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
+   :side 'right :ttl t :select t :quit t :ttl 0)
+ (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+   :side 'right :select t :quit t)
+ (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
+   :side 'right :select t :quit t :ttl 0)
+ (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
+   :height 0.6 :side 'right :select t :quit t :ttl 0)
+ (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+   :side 'right :select t :quit t :ttl 0)
+ (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
+   :height 0.6 :side 'right :select t :quit t :ttl 0)
+ (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+   :select t :quit t :ttl nil)
+ (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
+   :select t :ttl nil)
+ (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
+   :side 'right :select t :ttl nil)
+ (after! embark
+   (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+     :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
+ (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+
+;; Lower the default popup delay.
+(after! tooltip
+ (setq tooltip-hide-delay 3))
+
+(when (modulep! :checkers syntax +childframe)
+ (after! flycheck-posframe
+   (setq flycheck-posframe-border-width 1
+         flycheck-posframe-border-use-error-face t)))
+
+(use-package! goggles
+ :init
+ (add-hook 'prog-mode-hook #'goggles-mode)
+ (add-hook 'text-mode-hook #'goggles-mode)
+ (add-hook 'conf-mode-hook #'goggles-mode)
+ :config
+ (setq-default goggles-pulse t))
+
+;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
+(when (modulep! :completion vertico +childframe)
+ (after! vertico-posframe
+   (setq vertico-posframe-parameters
+         '((inhibit-double-buffering . t)))))
+(after! posframe
+ (setq posframe-inhibit-double-buffering t))
+
+
+;; Tools
 ;;
 ;;(load! "lisp/cae-webkit.el")
 ;;
