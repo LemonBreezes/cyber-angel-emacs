@@ -322,10 +322,6 @@
     (add-to-list 'perfect-margin-ignore-regexps "^ \\*which-key\\*$")
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
 
-  (use-package! transpose-frame
-    :defer t :init
-    (map! "C-x M-t" #'transpose-frame))
-
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
     :defer t :init
