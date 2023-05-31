@@ -54,7 +54,7 @@
     (when (modulep! :ui hydra)
       ;; TODO Add alt keybindings to this. There are also some alphabet keys not
       ;; in this. Check what Sacha Chua says.
-      (let ((bindings `(("<" "lispy-barf" "")
+      (let ((bindings `((,(cae-keyboard-kbd "<") "lispy-barf" "")
                         (,(cae-keyboard-kbd "A") "lispy-beginning-of-defun" "")
                         (,(cae-keyboard-kbd "j") "lispy-down" "")
                         (,(cae-keyboard-kbd "Z") "lispy-edebug-stop" "")
@@ -69,7 +69,7 @@
                         (,(cae-keyboard-kbd "P") "lispy-paste" "")
                         (,(cae-keyboard-kbd "l") "lispy-right" "")
                         (,(cae-keyboard-kbd "I") "lispy-shifttab" "")
-                        (">" "lispy-slurp" "")
+                        (,(cae-keyboard-kbd ">") "lispy-slurp" "")
                         ("SPC" "lispy-space" "")
                         (,(cae-keyboard-kbd "xB") "lispy-store-region-and-buffer" "")
                         (,(cae-keyboard-kbd "u") "lispy-undo" "")
@@ -99,7 +99,7 @@
                         (,(cae-keyboard-kbd "e") "lispy-eval" "Eval")
                         (,(cae-keyboard-kbd "E") "lispy-eval-and-insert" "Eval")
                         (,(cae-keyboard-kbd "xr") "lispy-eval-and-replace" "Eval")
-                        (,(cae-keyboard-kbd "p") "lispy-eval-other-window" "Eval")
+                        ("=" "lispy-eval-other-window" "Eval")
                         (,(cae-keyboard-kbd "q") "lispy-ace-paren" "Move")
                         (,(cae-keyboard-kbd "z") "lispy-knight" "Move")
                         (,(cae-keyboard-kbd "s") "lispy-move-down" "Move")
