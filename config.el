@@ -510,7 +510,6 @@
            [remap dired-do-shell-command] #'dwim-shell-command
            [remap dired-smart-shell-command] #'dwim-shell-command))))
 
-
 
 ;;; Editor
 
