@@ -2,6 +2,8 @@
 
 ;;; Remap keys
 
+;; TODO Use key translation map instead of remapping keys
+
 (map! "C-x t )" #'tab-close
       "C-x t #" #'tab-close-other
       "C-x t @" #'tab-new)
