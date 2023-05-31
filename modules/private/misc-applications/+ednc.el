@@ -1,7 +1,7 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :when (not (and (string-match-p "-android" operating-system-release)
+  :when (not (and (string-suffix-p "-android" system-configuration)
                   (executable-find "termux-clipboard-get")))
   :config
   (ednc-mode +1)
