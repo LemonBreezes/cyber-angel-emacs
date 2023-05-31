@@ -920,7 +920,7 @@
          "M-n" #'copilot-next-completion
          "M-p" #'copilot-previous-completion))
   (add-hook 'doom-escape-hook
-            (defun cae-copilot-clear-overlay-h ()
+            (cae-defun cae-copilot-clear-overlay-h ()
               "Like `copilot-clear-overlay' but returns `t' if a Copilot overlay
 was deleted."
               (when (copilot--overlay-visible)
