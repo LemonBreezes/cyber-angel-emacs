@@ -849,12 +849,12 @@
       '((eri/mark-inside-org-table-cell
          eri/mark-outside-org-table-cell))))
 
-  (use-package! switchy-window
-    :defer t :init
-    (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)
-    :config
-    (keymap-set switchy-window-minor-mode-map
-                "<remap> <other-window>" #'switchy-window))
+  ;;(use-package! switchy-window
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)
+  ;;  :config
+  ;;  (keymap-set switchy-window-minor-mode-map
+  ;;              "<remap> <other-window>" #'switchy-window))
 
   (use-package! embark
     :defer t :config
