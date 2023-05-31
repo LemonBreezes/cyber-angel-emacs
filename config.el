@@ -498,6 +498,7 @@
       "M-j" #'vertico-quick-jump))
   :config
   (setq avy-timeout-seconds 0.25
+        avy-all-windows t
         avy-keys (cae-keyboard-remap
                   '(?a ?s ?d ?f ?g
                     ?h ?j ?k ?l ?\;))
