@@ -80,7 +80,7 @@
        lisp
        misc-applications
        modeline
-       (meow +leader)
+       ;(meow +leader)
        unpackaged
        vc)
 
