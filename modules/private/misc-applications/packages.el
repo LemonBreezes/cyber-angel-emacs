@@ -38,7 +38,8 @@
 ;;(package! exercism-modern :recipe
 ;;  (:host github :repo "elken/exercism-modern" :files ("*/*" "*")))
 (package! my-repo-pins :recipe
-  (:host github :repo "NinjaTrappeur/my-repo-pins"))
+  (:host github :repo "NinjaTrappeur/my-repo-pins"
+   :build (:not compile)))
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
