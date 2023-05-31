@@ -132,7 +132,6 @@
 
 (defun cae-translate-number-row-p (key-from)
   "Return true if we should translate the number row keys."
-  (+log this-command (file-name-base (symbol-file this-command)))
   (and
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
@@ -150,9 +149,14 @@
         (and (symbol-file this-command)
              (cl-member (file-name-base (symbol-file this-command))
                         '("ace-window"
-                          "tabgo"
-                          "switch-window")
-                        :test #'string=)))))
+                          "tabgo")
+                        :test #'string=))
+        (and (symbol-file last-command)
+             (not this-command)
+             (cl-member (file-name-base (symbol-file last-command))
+                        '("switch-window")
+                        :test #'string=)
+             (minibufferp)))))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
   (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
