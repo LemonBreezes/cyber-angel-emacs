@@ -115,7 +115,8 @@
   ;; `projectile-find-file'.
   (advice-add #'find-file :around #'cae-dired-find-file-a)
 
-  ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish buffers.
+  ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
+  ;; buffers.
   (map! [remap previous-buffer] #'cae-previous-buffer
         [remap next-buffer] #'cae-next-buffer)
 
