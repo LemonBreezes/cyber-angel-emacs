@@ -43,7 +43,7 @@
        (debugger +lsp)
        editorconfig
        (eval +overlay)
-       lookup
+       (lookup +dictionary +docsets +offline)
        magit
        (lsp +peek)
        tree-sitter
