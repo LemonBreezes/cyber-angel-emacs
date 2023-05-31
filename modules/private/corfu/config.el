@@ -68,7 +68,7 @@ derivative.")
     (cond ((modulep! :tools lsp +eglot)
            (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
           ((modulep! :tools lsp)
-           (add-hook! 'lsp-completion-mode-hook
+           (add-hook 'lsp-completion-mode-hook
              (cae-defun doom--use-orderless-lsp-capf ()
                (setf (alist-get 'styles
                                 (alist-get 'lsp-capf
