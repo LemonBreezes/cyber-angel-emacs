@@ -69,7 +69,7 @@
        lisp
        misc-applications
        helm
-       mod
+       modeline
        unpackaged
        vc)
 
