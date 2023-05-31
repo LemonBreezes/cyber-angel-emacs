@@ -53,6 +53,8 @@
           lsp-modeline-code-actions-mode
           lsp-modeline-workspace-status-mode
           dtrt-indent-mode
+          tree-sitter-mode
+          dap-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -98,8 +100,6 @@
 
 (column-number-mode +1)
 
-(add-hook 'c-mode-common-hook #'cae-modeline-minions-c-setup)
-(add-hook 'emacs-lisp-mode-hook #'cae-modeline-minions-elisp-setup)
 (map! "<f9>" #'minions-minor-modes-menu)
 
 (advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
