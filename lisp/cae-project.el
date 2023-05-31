@@ -77,11 +77,26 @@
             (interactive)
             ;; TODO: Fix edit annotation
             (cae-project--with-bookmark-alist nil
-              (call-interactively #',def)))
+              (setq this-command ',def)
+              (call-interactively ',def)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
                  (symbol-name def)))
        (define-key cae-project-bookmark-embark-map (vector key) command))))
  embark-bookmark-map)
+
+(defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
+  (cae-project--with-bookmark-alist nil
+    (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)))
+
+(defun cae-project-bookmark-show-annotation (bookmark-name-or-record &optional from-bookmark-list)
+  (cae-project--with-bookmark-alist nil
+    (bookmark-show-annotation bookmark-name-or-record from-bookmark-list)))
+
+(map! :map cae-project-bookmark-embark-map
+      "e" #'cae-project-bookmark-edit-annotation
+      "a" #'cae-project-bookmark-show-annotation)
+
+(backtrace! bookmark-edit-annotation)
 
 (setf (alist-get 'project-bookmark embark-keymap-alist)
       #'cae-project-bookmark-embark-map)
