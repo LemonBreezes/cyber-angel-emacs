@@ -41,6 +41,7 @@
   (interactive)
   (let ((bookmark-alist (cae-project--bookmark-alist))
         (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
     (call-interactively #'bookmark-jump)))
 
 (defun cae-project-bookmark-set ()
@@ -48,6 +49,7 @@
   (interactive)
   (let ((bookmark-alist (cae-project--bookmark-alist))
         (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
     (call-interactively #'bookmark-set)
     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
 
@@ -56,6 +58,7 @@
   (interactive)
   (let ((bookmark-alist (cae-project--bookmark-alist))
         (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
     (call-interactively #'bookmark-delete)))
 
 (defun cae-project-bookmark-rename ()
@@ -63,6 +66,7 @@
   (interactive)
   (let ((bookmark-alist (cae-project--bookmark-alist))
         (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
     (call-interactively #'bookmark-rename)))
 
 (defun cae-project-bookmark-save ()
