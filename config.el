@@ -367,7 +367,7 @@
   :config
   (setq anzu-mode-lighter ""
         anzu-replace-threshold 50
-        anzu-replace-to-string-separator " => "))
+        anzu-replace-to-string-separator " → "))
 
 (use-package isearch-mb
   :ensure t
