@@ -51,8 +51,8 @@
 
 ;; Call `pp-eval-last-sexp' when `eros-eval-last-sexp' is called with a negative
 ;; prefix argument
-(defadvice! +eros-eval-lavst-sexp-a (oldfun &rest args)
-  :around #'eros-eval-lastv-sexp
-  (if (eq (car args) '-)
+(defadvice! +eros-eval-lavst-sexp-a (oldfun arg)
+  :around #'eros-eval-last-sexp
+  (if (eq arg '-)
       (funcall #'pp-eval-last-sexp (cdr args))
     (apply oldfun args)))
