@@ -555,7 +555,8 @@
            ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
            ("M-<delete>" sp-unwrap-sexp "Kill")
            ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-           ("M-r" cae-raise-sexp "Kill") ;Overrides a `move-to-window-line-top-bottom'.
+           ("M-r" cae-raise-sexp "Kill") ;Overrides
+                                         ;`move-to-window-line-top-bottom'.
            ("M-D" sp-splice-sexp "Kill")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
            ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
