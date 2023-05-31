@@ -4,7 +4,9 @@
   (after! orderless
     ;; So Orderless splits the string into components and then determines the
     ;; matching style for each component. This is all regexp stuff.
-    (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand)))
+    (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand))
+  (after! corfu
+    (setq corfu-separator ?&)))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 (add-hook 'minibuffer-exit-hook #'corfu-quit)
@@ -15,7 +17,6 @@
   (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
         corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
         corfu-on-exact-match nil
-        corfu-separator ?&
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete)
   (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
