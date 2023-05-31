@@ -50,8 +50,9 @@
 (package! leetcode)
 (package! autotetris-mode)
 (package! ytel)
+
 (package! posimacs-shortdocs :recipe
-  (:host github :repo "positron-solutions/posimacs-shortdocs"))
+  (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 
 (package! zones)
 (package! zone-nyan)
