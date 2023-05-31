@@ -53,16 +53,19 @@
                                         ;`C-s' to search in the minibuffer.
 
 (let ((embark-act-key "<f8>"))
-    (map! embark-act-key #'embark-act
-          (:when (modulep! :completion vertico)
-           "C-;" nil
-           (:map minibuffer-local-map
-            "C-;" nil
-            embark-act-key #'embark-act)))
-    (eval
-     `(after! embark
-        (setq embark-cycle-key ,embark-act-key))
-     t))
+  (map! embark-act-key #'embark-act
+        (:when (modulep! :completion vertico)
+         "C-;" nil
+         (:map minibuffer-local-map
+          "C-;" nil
+          embark-act-key #'embark-act)))
+  (when (eq (lookup-key doom-leader-map "a")
+            'embark-act)
+    (define-key doom-leader-map "a" nil))
+  (eval
+   `(after! embark
+      (setq embark-cycle-key ,embark-act-key))
+   t))
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
