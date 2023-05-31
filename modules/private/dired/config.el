@@ -93,7 +93,9 @@
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
         "v" #'dirvish-vc-menu
-        "h" #'dirvish-history-jump)
+        "h" #'dirvish-history-jump
+        "M-n" nil
+        "N" #'dirvish-narrow)
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
