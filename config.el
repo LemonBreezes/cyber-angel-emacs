@@ -1081,7 +1081,9 @@
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
   (setq chatgpt-shell-model-version "gpt-4"
-        chatgpt-shell-display-function #'switch-to-buffer))
+        chatgpt-shell-display-function #'switch-to-buffer)
+  (after! shell-maker
+    (define-key shell-maker-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)))
 
 ;;; Email
 
