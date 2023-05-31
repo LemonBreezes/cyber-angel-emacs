@@ -91,3 +91,7 @@
 
 ;; cae-corfu.el
 (package! cape-yasnippet :recipe (:host github :repo "elken/cape-yasnippet"))
+
+;;; AI
+(package! org-ai)
+(package! gptel)
