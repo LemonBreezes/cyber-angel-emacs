@@ -110,7 +110,7 @@
            misc-applications
            ;;modeline
            unpackaged
-           ;;vc
+           vc
            ;;org
 
            ;; (meow +leader)
