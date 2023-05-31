@@ -9,7 +9,7 @@
 
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
-  (add-hook 'doom-first-init-hook #'+exwm-flag-as-enabled)
+  (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
 
   (defvar +exwm-vanilla-emacs-config-file
     (expand-file-name "./exwm-vanilla-emacs-default-config.el" (doom-module-locate-path :private 'exwm))
