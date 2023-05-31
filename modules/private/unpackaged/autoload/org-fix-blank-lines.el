@@ -51,4 +51,4 @@ exist after each headings's drawers."
 
 ;;;###autoload
 (defun cae-unpackaged-org-fix-blank-lines-before-save ()
-  (add-hook 'before-save-hook #'cae-org-fix-all-blank-lines nil t))
+  (remove-hook 'before-save-hook #'cae-unpackaged-org-fix-all-blank-lines nil t))
