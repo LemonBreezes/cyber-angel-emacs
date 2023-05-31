@@ -225,6 +225,5 @@ mark the string and call `edit-indirect-region' with it."
       (if (file-exists-p file)
           (progn (better-jumper-set-jump (marker-position (point-marker)))
                  (find-file file))
-          (find-file file)
         (call-interactively #'ffap))
     (call-interactively #'+lookup/definition)))
