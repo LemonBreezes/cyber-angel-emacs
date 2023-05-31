@@ -29,9 +29,9 @@ overriding other keymaps."
   (advice-add #'doom-init-leader-keys-h
               :around
               (cae-defun cae-general-override--disable-override-mode (orig-fn &rest args)
-                (cl-letf (((symbol-function #'general-override-mode)
-                           (lambda (&rest _args) nil)))
-                  (apply orig-fn args)))))
+                (advice-add #'general-override-mode :override #'ignore)
+                (unwind-protect (apply orig-fn args)
+                  (advice-remove #'general-override-mode #'ignore)))))
 
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
