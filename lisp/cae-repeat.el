@@ -7,7 +7,7 @@
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
-  (setq repeat-exit-key "RET")
+  (setq repeat-exit-key "TAB")
 
   (define-repeat-map other-window
     ("o" other-window
