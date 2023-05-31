@@ -623,6 +623,80 @@
         (setq embark-cycle-key ,embark-act-key))
      t))
 
+  (eval
+   `(map! :prefix "C-z"
+          "n" #'avy-goto-line-below
+          "p" #'avy-goto-line-above
+          "y" #'avy-copy-region
+          "c" #'avy-goto-char
+          "m" #'avy-move-region
+          "l" #'avy-goto-line
+          "e" #'avy-goto-end-of-line
+          "." #'cae-avy-symbol-at-point
+          "k" #'avy-kill-region
+          "w" #'avy-kill-ring-save-region
+          "j" #'avy-goto-word-1
+          "o" #'switch-window
+          "0" #'switch-window-then-delete
+          "1" #'switch-window-then-maximize
+          "2" #'switch-window-then-split-below
+          "3" #'switch-window-then-split-right
+          "4" #'switch-window-then-kill-buffer
+          ,(cae-keyboard-kbd "0") #'switch-window-then-delete
+          ,(cae-keyboard-kbd "1") #'switch-window-then-maximize
+          ,(cae-keyboard-kbd "2") #'switch-window-then-split-horizontally
+          ,(cae-keyboard-kbd "3") #'switch-window-then-split-vertically
+          ,(cae-keyboard-kbd "4") #'switch-window-then-kill-buffer
+          ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+          "SPC" #'avy-goto-char-timer
+          "C-n" #'avy-goto-line-below
+          "C-p" #'avy-goto-line-above
+          "C-." #'cae-avy-symbol-at-point
+          "C-k" #'avy-kill-region
+          "C-w" #'avy-kill-ring-save-region
+          "C-y" #'avy-copy-region
+          "C-m" #'avy-move-region
+          "C-c" #'avy-goto-char
+          "C-l" #'avy-goto-line
+          "C-e" #'avy-goto-end-of-line
+          "C-j" #'avy-goto-word-1
+          "C-SPC" #'avy-goto-char-timer
+          "C-o" #'switch-window
+          "C-0" #'switch-window-then-delete
+          "C-1" #'switch-window-then-maximize
+          "C-2" #'switch-window-then-split-horizontally
+          "C-3" #'switch-window-then-split-vertically
+          "C-4" #'switch-window-then-kill-buffer
+          ,(cae-keyboard-kbd "C-" "0") #'switch-window-then-delete
+          ,(cae-keyboard-kbd "C-" "1") #'switch-window-then-maximize
+          ,(cae-keyboard-kbd "C-" "2") #'switch-window-then-split-horizontally
+          ,(cae-keyboard-kbd "C-" "3") #'switch-window-then-split-vertically
+          ,(cae-keyboard-kbd "C-" "4") #'switch-window-then-kill-buffer
+          (:map isearch-mode-map
+           "j" #'avy-isearch
+           "C-j" #'avy-isearch))
+   t)
+    (when (modulep! :completion vertico)
+      (after! vertico
+        (map! :map vertico-map
+              "C-z C-j" #'vertico-quick-jump
+              "C-z j" #'vertico-quick-jump
+              "C-z i" #'vertico-quick-exit
+              "C-z C-i" #'vertico-quick-exit)))
+    (after! embark
+      (map! :map embark-collect-mode-map
+            "C-z C-j" #'avy-embark-collect-choose
+            "C-z j" #'avy-embark-collect-choose
+            "C-z i" #'avy-embark-collect-act
+            "C-z C-i" #'avy-embark-collect-act))
+    (when (modulep! :private corfu)
+      (after! corfu
+        (map! :map corfu-map
+              "C-z C-j" #'corfu-quick-jump
+              "C-z j" #'corfu-quick-jump
+              "C-z i" #'corfu-quick-insert
+              "C-z C-i" #'corfu-quick-insert)))
+
   ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
   (when (modulep! :ui popup)
     (add-hook 'doom-switch-window-hook
@@ -924,6 +998,7 @@
     (eri/add-mode-expansions 'org-mode
       '((eri/mark-inside-org-table-cell
          eri/mark-outside-org-table-cell)))))
+
 
 
 ;;; Autocompletion
