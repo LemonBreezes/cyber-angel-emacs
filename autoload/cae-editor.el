@@ -121,7 +121,7 @@ using the tab-width variable."
                                  (string-match "^[[:space:]]*" line)
                                  (match-end 0))
                                lines))
-         (min-indentation (apply #'min (delq nil indentations))))
+         (min-indentation (apply #'min (delq 0 indentations))))
     (mapconcat (lambda (line)
                  (if (string-match "^[[:space:]]+" line)
                      (let* ((indent (match-string 0 line))
@@ -142,8 +142,9 @@ format used on Reddit for code blocks."
   (when-let* ((bounds (if (region-active-p)
                           (cons (region-beginning) (region-end))
                         (bounds-of-thing-at-point 'defun)))
-              (text (buffer-substring-no-properties (car bounds) (cdr bounds))))
+              (text (cae-strip-top-level-indentation
+                     (buffer-substring-no-properties (car bounds)
+                                                     (cdr bounds)))))
     (setq deactivate-mark t)
-    (kill-new (replace-regexp-in-string "^" "    "
-                                        (cae-strip-top-level-indentation text)))
+    (kill-new (replace-regexp-in-string "^" "    " text))
     (message "Copied!")))
