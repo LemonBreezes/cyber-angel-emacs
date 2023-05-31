@@ -7,7 +7,7 @@
     ;; Close the windows when the debugger is closed.
     (advice-add #'dap-disconnect :after #'cae-debugger-quit-session-a)
 
-    (map! :map dap-mode-map
+    (map! :map lsp-mode-map
           "C-S-d" #'dap-hydra)
 
     (setq dap-debug-restart-keep-session nil
