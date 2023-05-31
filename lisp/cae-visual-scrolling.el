@@ -8,10 +8,10 @@
 (autoload 'View-scroll-half-page-backward "view")
 
 ;; TODO Figure out why these commands remove narrowing.
-;; (global-set-key [remap scroll-up-command] 'View-scroll-half-page-forward)
-;; (global-set-key [remap scroll-down-command] 'View-scroll-half-page-backward)
-;; (global-set-key [remap scroll-other-window] 'my-View-scroll-half-page-forward-other-window)
-;; (global-set-key [remap scroll-other-window-down] 'my-View-scroll-half-page-backward-other-window)
+;;(global-set-key [remap scroll-up-command] 'View-scroll-half-page-forward)
+;;(global-set-key [remap scroll-down-command] 'View-scroll-half-page-backward)
+;;(global-set-key [remap scroll-other-window] 'my-View-scroll-half-page-forward-other-window)
+;;(global-set-key [remap scroll-other-window-down] 'my-View-scroll-half-page-backward-other-window)
 
 (defun my-View-scroll-half-page-forward-other-window ()
   (interactive)
@@ -23,7 +23,7 @@
   (with-selected-window (next-window)
     (call-interactively 'View-scroll-half-page-backward)))
 
-(setq scroll-preserve-screen-position 'always)
+;;(setq scroll-preserve-screen-position 'always)
 
 (advice-add #'View-scroll-half-page-forward :around
             #'my-indicate-scroll-forward)
