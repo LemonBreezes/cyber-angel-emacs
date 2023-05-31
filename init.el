@@ -37,7 +37,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe)
+       (syntax +childframe +flymake)
        spell
        grammar
 
@@ -48,7 +48,7 @@
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        magit
-       (lsp +peek)
+       (lsp +peek +eglot)
        tree-sitter
 
        :lang
