@@ -291,8 +291,8 @@
 (define-key (current-global-map)
   [remap shell-command] 'with-editor-shell-command)
 (add-hook 'shell-mode-hook  #'with-editor-export-editor)
-(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 (add-hook 'eshell-mode-hook #'with-editor-export-editor)
+(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 
 (when (and (modulep! :checkers spell)
            (not (modulep! :checkers spell +flyspell)))
