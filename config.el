@@ -25,10 +25,7 @@
 
 ;;; UI
 
-(catch 'cae-ui-disabled
-  (unless cae-init-ui-enabled-p
-    (throw 'cae-ui-disabled nil))
-
+(when cae-init-ui-enabled-p
   (load! "lisp/cae-theme")
   (after! hydra
     (load! "lisp/cae-cheatsheets"))
@@ -283,10 +280,7 @@
 
 ;;; Tools
 
-(catch 'cae-tools-disabled
-  (unless cae-init-tools-enabled-p
-    (throw 'cae-tools-disabled nil))
-
+(when cae-init-tools-enabled-p
   (use-package! w3m
     :defer t :config
     (setq w3m-user-agent
@@ -480,10 +474,7 @@
 
 ;;; Editor
 
-(catch 'cae-editor-disabled
-  (unless cae-init-editor-enabled-p
-    (throw 'cae-editor-disabled nil))
-
+(when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
   (add-hook 'doom-first-buffer-hook
             (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
@@ -948,9 +939,7 @@
 
 ;;; Autocompletion
 
-(catch 'cae-autocompletion-disabled
-  (unless cae-init-autocompletion-enabled-p
-    (throw 'cae-autocompletion-disabled nil))
+(when cae-init-autocompletion-enabled-p
   (when (modulep! :private corfu)
     (load! "lisp/cae-corfu"))
 
