@@ -66,3 +66,9 @@
 
 ;; Use the system's `libvterm' if available.
 (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
+
+(defadvice! embark--act-ignore-this-command-keys (oldfun &rest args)
+  :around #'embark--act
+  (advice-add #'set--this-command-keys :override #'ignore)
+  (unwind-protect (apply oldfun args)
+    (advice-remove #'set--this-command-keys #'ignore)))
