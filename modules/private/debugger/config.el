@@ -3,6 +3,7 @@
 (when (and (modulep! :tools lsp)
            (modulep! :tools debugger +lsp))
 
+  (map! "<f6>" #'dap-hydra)
   (after! dap-mode
     ;; Close the windows when the debugger is closed.
     (advice-add #'dap-disconnect :after #'cae-debugger-quit-session-a)
@@ -21,7 +22,7 @@ _o_: Step out       _sf_: Stack frame        _ba_: Add             _dl_: Debug l
 _c_: Continue       _su_: Up stack frame     _bc_: Set condition   _de_: Edit debug template   _ea_: Add expression.
 _r_: Restart frame  _sd_: Down stack frame   _bh_: Set hit count   _ds_: Debug restart
 _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
-                  _sb_: List breakpoints
+_R_: Restart      _sb_: List breakpoints
                   _sS_: List sessions
 "
         ("n" dap-next)
@@ -53,6 +54,7 @@ _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
         ("er" dap-eval-region)
         ("es" dap-eval-thing-at-point)
         ("q" nil "quit" :color blue)
+        ("R" cae-debugger-dap-kill-all-sessions-and-restart)
         ("Q" dap-disconnect :color red))))
 
   (when (modulep! :lang cc +lsp)
