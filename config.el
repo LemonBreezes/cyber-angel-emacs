@@ -500,7 +500,6 @@
       "C-x _" #'shrink-window           ;Dual to `C-x ^'.
       "C-x x o" #'ov-clear
       "M-Z" #'zap-up-to-char
-      "<f8>" #'embark-act
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       [remap previous-buffer] #'cae-previous-buffer
@@ -521,6 +520,9 @@
        :map Man-mode-map
        "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
+(after! embark
+  (map! "<f8>" #'embark-act)
+  (setq embark-cycle-key "<f8>"))
 
 (define-key!
   :keymaps (append +default-minibuffer-maps
