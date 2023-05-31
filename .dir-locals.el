@@ -11,7 +11,7 @@
                      (buffer-file-name)
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
                                      '("init.el"
-                                       ".dir-locals.el"
+                                       dir-locals-file
                                        "packages.el")
                                      :test #'string=))
                      (bound-and-true-p cae-config-finished-loading))
