@@ -134,4 +134,4 @@
                          (match-string 1 (elt x 1)))
                        :column
                        (elt x 2)))))
-      (define-key lispy-mode-map (kbd "<f6>") #'my-lispy-cheat-sheet/body))))
+      (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body))))
