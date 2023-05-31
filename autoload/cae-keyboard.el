@@ -67,5 +67,5 @@
   (declare (pure t) (side-effect-free t))
   (pcase (length args)
     (0 (kbd ""))
-    (1 (cae-keyboard--kbd1 args))
-    (_ (cae-keyboard--kbd2 args))))
+    (1 (apply #'cae-keyboard--kbd1 args))
+    (_ (apply #'cae-keyboard--kbd2 args))))
