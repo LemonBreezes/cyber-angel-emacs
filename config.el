@@ -22,7 +22,7 @@
   (let ((offset (if (string-match-p "WSL" operating-system-release) 2 0)))
     (setq doom-font (font-spec :family "Iosevka Comfy" :size (+ 16 offset))
           doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                              :size (+ 6 offset))
+                                              :size (+ 16 offset))
           doom-unicode-font (unless (modulep! :ui unicode)
                               (font-spec :family "LXGW WenKai" :weight 'light
                                          :size (+ 15 offset))))))
