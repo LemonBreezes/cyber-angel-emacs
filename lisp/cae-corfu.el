@@ -1,4 +1,4 @@
-;;; lisp/cae-corfu.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
 (after! orderless
   ;; So Orderless splits the string into components and then determines the
