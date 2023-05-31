@@ -55,4 +55,6 @@
     (corfu-indexed-mode +1)
     (eval
      `(map! :map corfu-map
-            "C-M-i" #'corfu-move-to-minibuffer))))
+            "C-M-i" #'corfu-move-to-minibuffer)))
+  (when (modulep! :editor multiple-cursors)
+    (add-to-list 'mc/unsupported-minor-modes 'corfu-mode)))
