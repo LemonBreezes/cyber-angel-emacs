@@ -25,20 +25,6 @@
                             (magit-pull "--rebase" "--autostash")
                             (magit-revert "--autostash"))))
 
-(when (and (modulep! :ui vc-gutter)
-           (not (modulep! :ui vc-gutter +diff-hl)))
-  (add-hook 'git-gutter-mode-hook
-            (defun +vc-gutter-update-deferred-h ()
-              (run-at-time 0.1 nil
-                           `(lambda ()
-                              (unless (eq (vc-backend (buffer-file-name)) 'Backup)
-                                (with-current-buffer ,(current-buffer)
-                                  (+vc-gutter-update-h)))))))
-  (after! git-gutter
-    (setq! git-gutter:diff-option "--ignore-cr-at-eol --ignore-space-change --ignore-all-space --ignore-blank-lines")
-    (setq-hook! 'git-gutter-mode-hook
-      git-gutter:start-revision "master")))
-
 (use-package! git-link
   :defer t
   :init
