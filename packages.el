@@ -3,15 +3,7 @@
 (disable-packages! evil-escape
                    flyspell
                    flycheck
-                   ccls
-                   helm-rg
-                   helm-org
-                   helm-projectile
-                   swiper-helm
-                   helm-descbinds
-		   helm-company
-		   helm-c-yasnippet
-		   helm-describe-modes)
+                   ccls)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
