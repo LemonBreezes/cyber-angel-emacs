@@ -1,5 +1,8 @@
 ;;; autoload/cae-keyboard.el -*- lexical-binding: t; -*-
 
+;; TODO Rewrite this file so that orbits in `cae-keyboard-orbits' always loop
+;; around. That way, I can improve my handling of the Lispy keybindings.
+
 (unless (featurep 'json)
   (defun json-alist-p (list)
     "Non-nil if and only if LIST is an alist with simple keys."
