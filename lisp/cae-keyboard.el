@@ -166,10 +166,6 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
-             (,(cae-keyboard-kbd-reverse ",")
-               ,(lookup-key cae-keyboard--lispy-mode-map-backup
-                            (cae-keyboard-kbd-reverse ","))
-               "Other")
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "")
@@ -186,23 +182,16 @@
        (append '(defhydra cae-lispy-cheat-sheet (:hint nil :foreign-keys run)
                   ("<f6>" nil "Exit" :exit t))
                (cl-loop for binding in bindings
-                        unless (string= (caddr binding) "")
+                        unless (or (string= (caddr binding) "")
+                                   (string= (car binding) ","))
                         collect
-                        `(,(if (string= (car binding) ",")
-                               (car (cl-find-if
-                                     (lambda (x)
-                                       (and (not (string= (car x) ","))
-                                            (eq (cadr x)
-                                                (lookup-key
-                                                 cae-keyboard--lispy-mode-map-backup
-                                                 (cae-keyboard-kbd-reverse ",")))))
-                                     bindings))
-                             (car binding))
+                        `(,(car binding)
                           ,(cadr binding)
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
                                         (string-remove-prefix "lispy-"))
                           :column ,(caddr binding))))))
+    (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
 
     ;; TODO `lispy-other-mode-map'
     (eval `(defhydra lh-knight ()
