@@ -48,3 +48,6 @@
 (map! :prefix "g"
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
+
+;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
+;; instead.
