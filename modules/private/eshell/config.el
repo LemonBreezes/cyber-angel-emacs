@@ -36,16 +36,20 @@
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
-  (map! :map (eat-eshell-semi-char-mode-map)
-        "C-a" #'eat-self-input
-        "C-e" #'eat-self-input
-        "M-DEL" #'eat-self-input
-        "C-u" #'eat-self-input
-        "M->" #'end-of-buffer
-        "<prior>" #'scroll-down-command
-        "<next>" #'scroll-up-command)
+  ;;(map! :map (eat-eshell-semi-char-mode-map)
+  ;;      "C-a" #'eat-self-input
+  ;;      "C-e" #'eat-self-input
+  ;;      "M-DEL" #'eat-self-input
+  ;;      "C-u" #'eat-self-input
+  ;;      "M->" #'end-of-buffer
+  ;;      "<prior>" #'scroll-down-command
+  ;;      "<next>" #'scroll-up-command)
   (map! :map eat-mode-map
         "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
+  (advice-add #'eat-eshell-char-mode
+              :after
+              (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
+                (message "Type M-RET to enter semi-char mode. %s")))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
