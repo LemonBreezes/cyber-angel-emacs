@@ -22,6 +22,7 @@ command was called, go to its unstaged changes section."
                     (error (cl-return (magit-status-goto-initial-section-1))))))
     (recenter)))
 
+;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status-here ()
   "Like `cae-unpackaged-magit-save-buffer-show-status' but with
 non-nil `magit-status-goto-file-position'."
