@@ -886,6 +886,7 @@
             (define-key map (kbd "C-. .")   #'copilot-complete)
             (define-key map (kbd "C-. C-.") #'copilot-complete)
             map))
+(cae-completion-mode +1)
 
 (when (modulep! :editor multiple-cursors)
   (map! "C->"   #'mc/mark-next-like-this
