@@ -48,3 +48,28 @@
                                      (buffer-substring-no-properties (point-min) (point-max))))))
            (format "\n#+end_src\n"))))
     (insert paste)))
+
+;;;###autoload
+(defun +org-insert-checkbox-or-bracket (arg)
+  (interactive "p")
+  (if (and (= arg 1)
+           (ignore-errors
+             (<= (point)
+                 (save-excursion
+                   (beginning-of-line)
+                   (re-search-forward
+                    (rx bol
+                        (or (+ "*") "-")
+                        (* whitespace)
+                        (? "[" (group any) "]")
+                        (* whitespace))
+                    (pos-eol))
+                   (point)))))
+      (progn (if (match-string 1)
+                 (delete-region (1- (match-beginning 1))
+                                (progn (goto-char (1+ (match-end 1)))
+                                       (skip-chars-forward "\s\t")
+                                       (point)))
+               (insert "[ ] "))
+             (goto-char (pos-eol)))
+    (org-self-insert-command arg)))
