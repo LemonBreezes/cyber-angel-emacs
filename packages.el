@@ -8,6 +8,7 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(package! auto-minor-mode)
 
 ;;; UI
 (package! info-colors)
