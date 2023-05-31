@@ -83,8 +83,7 @@
 
 (use-package! info-colors
   :defer t :init
-  (after! info
-    (add-hook 'Info-selection-hook 'info-colors-fontify-node)))
+  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
 (use-package! authinfo-color-mode
   :mode ("authinfo.gpg\\'" . authinfo-color-mode)
@@ -115,8 +114,7 @@
 (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
 (set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
-(after! info
-  (set-popup-rule! "^\\*info\\*"         :size #'+popup-shrink-to-fit :quit t :select t :ttl nil))
+(set-popup-rule! "^\\*info\\*"           :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
 (set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
@@ -169,8 +167,7 @@
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
-(after! bookmark
-  (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords))
+(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
@@ -211,11 +208,11 @@
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
 ;; Use Emacs as the default editor for shell commands.
-;; (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-;; (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
-;; (add-hook 'shell-mode-hook  #'with-editor-export-editor)
-;; (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
-;; (add-hook 'eshell-mode-hook #'with-editor-export-editor)
+(define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
+(define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
+(add-hook 'shell-mode-hook  #'with-editor-export-editor)
+(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+(add-hook 'eshell-mode-hook #'with-editor-export-editor)
 
 (when (and (modulep! :checkers spell)
            (not (modulep! :checkers spell +flyspell)))
@@ -269,8 +266,7 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-(after! dired
-  (add-hook 'dired-mode-hook #'display-line-numbers-mode))
+(add-hook 'dired-mode-hook #'display-line-numbers-mode)
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
@@ -332,9 +328,8 @@
     (after! eshell
       (remove-hook 'eshell-mode-hook #'smartparens-mode)))
   (when (modulep! :editor snippets)
-    (after! yasnippet
-      (remove-hook 'yas-before-expand-snippet-hook
-                   #'+snippets--disable-smartparens-before-expand-h))))
+    (remove-hook 'yas-before-expand-snippet-hook
+                   #'+snippets--disable-smartparens-before-expand-h)))
 
 ;; This is how we get curly braces working in C without `smartparens'.
 (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
@@ -362,8 +357,9 @@
   (map! :map abbrev-map "e" #'edit-abbrevs))
 
 (use-package! ibuffer
-  :defer t :config
+  :defer t :init
   (add-hook 'ibuffer-mode-hook #'display-line-numbers-mode)
+  :config
   (setq ibuffer-formats
         '((mark modified read-only locked " "
            (name 23 23 :left :elide)
