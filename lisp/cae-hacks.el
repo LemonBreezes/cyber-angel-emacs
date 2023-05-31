@@ -1,5 +1,8 @@
 ;;; lisp/cae-hacks.el -*- lexical-binding: t; -*-
 
+(defconst cae-hacks-big-gc-threshold (* 3 1024 1024 1024))
+(defconst cae-hacks-big-gc-percentage 30)
+
 ;; For when we compile Doom.
 (defvar personal-keybindings nil)
 
@@ -124,14 +127,14 @@
 
 (defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
-  (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 50)
+  (setq gc-cons-threshold cae-hacks-big-gc-threshold
+        gc-cons-percentage cae-hacks-big-gc-percentage)
   (let ((gcmh-low-cons-threshold most-positive-fixnum)
         (gcmh-high-cons-threshold most-positive-fixnum))
     (apply oldfun args)))
 
 (defun cae-hacks-max-out-gc-h ()
-  (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 30))
+  (setq gc-cons-threshold cae-hacks-big-gc-threshold
+        gc-cons-percentage cae-hacks-big-gc-percentage))
 
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
