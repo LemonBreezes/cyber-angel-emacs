@@ -64,5 +64,12 @@
       org-jira-map))
   :config
   (map! :map org-jira-entry-mode-map
+        "C-c i" nil
+        "C-c s" nil
+        "C-c c" nil
+        "C-c w" nil
+        "C-c t" nil
+        "C-c p" nil
+        "C-c b" nil
         "<f6>" #'cae-org-jira-hydra/body)
   (make-directory (expand-file-name "~/.org-jira") t))
