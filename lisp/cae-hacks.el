@@ -85,3 +85,8 @@
              (unwind-protect (funcall oldfun variables dir-name)
                (advice-remove #'safe-local-variable-p #'always)))
     (funcall oldfun variables dir-name)))
+
+;; Disable `diff-hl-mode' in my Doom private dir.
+(defadvice! cae-hacks-disable-diff-hl-in-private-config (&optional arg)
+  :before-until #'diff-hl-mode
+  (file-in-directory-p default-directory doom-user-dir))
