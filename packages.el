@@ -57,7 +57,6 @@
 (package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
-(package! key-chord-multiple :recipe (:host github :repo "jorenvo/key-chord-multiple"))
 
 ;; These are used for their autoloads.
 (package! ialign)
