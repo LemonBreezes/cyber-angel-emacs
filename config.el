@@ -736,7 +736,7 @@
                        indent-pp-sexp
                        save-buffer
                        indent-for-tab-command))
-      (add-to-list 'aggressive-indent-protected-commands command))
+      (add-to-list 'aggressive-indent-protected-commands command nil #'eq))
     (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
 
   (use-package! yank-indent
