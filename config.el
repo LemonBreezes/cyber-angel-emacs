@@ -140,7 +140,7 @@
           '((inhibit-double-buffering . t)))))
 (after! posframe
   (setq posframe-inhibit-double-buffering t))
-
+;
 
 ;;; Tools
 (load! "lisp/cae-webkit.el")
