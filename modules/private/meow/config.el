@@ -222,6 +222,7 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
+  ;; Ensure cursor is updated in terminal.
   (autoload 'etcc--evil-set-cursor "evil-terminal-cursor-changer")
   (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
   (advice-add #'eldoc-print-current-symbol-info :after #'cae-meow-update-cursor-a))
