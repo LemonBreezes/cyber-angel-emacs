@@ -844,6 +844,7 @@
   (use-package! expand-region-improved
     :defer t :init
     ;; Bound in `lisp/cae-bindings'.
+    ;; [remap expand-region] #'eri/expand-region
     :config
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
