@@ -878,7 +878,7 @@
   :defer t :init
   (map! "C-c '" #'cae-edit-indirect-dwim))
 
-(use-package! string-edit-at-point
+(use-package! string-edit-at-point      ; Used in `cae-edit-indirect-dwim'.
   :defer t)
 
 
