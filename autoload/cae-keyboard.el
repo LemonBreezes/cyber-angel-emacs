@@ -73,6 +73,7 @@
 
 ;;;###autoload
 (defun cae-keyboard-digit-argument ()
+  (interactive)
   (setq last-command-event
         (cae-keyboard-remap-reverse last-command-event))
   (call-interactively #'digit-argument))
