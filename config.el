@@ -861,7 +861,7 @@
           "<f6>" #'cae-embark-collect-cheatsheet-hydra/body)
     (define-key vertico-map (kbd "C-z") 'embark-act-with-completing-read)
     (advice-add #'embark-completing-read-prompter :around
-                #'cae-embark-completing-read-prompter)))
+                #'cae-bind-C-z-to-abort-a)))
 
 
 ;;; Autocompletion
