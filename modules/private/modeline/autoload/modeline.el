@@ -19,7 +19,10 @@
                        (name-id 0))
                   (while (get-buffer name-unique)
                     (setq name-unique
-                          (concat name-base (format " <%d>" name-id)))
+                          (concat name-base
+                                  (if (zerop name-id)
+                                      ""
+                                    (format " <%d>" name-id))))
                     (setq name-id (1+ name-id)))
                   (with-current-buffer buf
                     (rename-buffer name-unique))))))))
