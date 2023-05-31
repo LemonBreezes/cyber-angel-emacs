@@ -226,8 +226,7 @@
   :after-call isearch-mode-hook
   :config
   (isearch-mb--setup)
-  (unless isearch-mb-mode
-    (isearch-mb-mode +1))
+  (isearch-mb-mode +1)
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (add-to-list 'isearch-mb--with-buffer #'reposition-window)
   (add-to-list 'isearch-mb--with-buffer #'scroll-right)
