@@ -56,3 +56,16 @@
         (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                            (tramp-file-local-name file)))
       (doom/sudo-this-file))))
+
+;;;###autoload
+(defun cae-raise-dwim ()
+  (interactive)
+  (if (region-active-p)
+      (save-excursion
+        (let ((beg (region-beginning))
+              (end (region-end)))
+          (goto-char end)
+          (delete-region end (progn (sp-up-sexp) (point)))
+          (goto-char beg)
+          (delete-region beg (progn (sp-backward-up-sexp) (point)))))
+    (call-interactively #'sp-raise-sexp)))
