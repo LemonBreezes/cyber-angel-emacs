@@ -13,9 +13,8 @@
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
     ,(expand-file-name "lang/cc/autoload.el" doom-modules-dir)
-    ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)
-    ,(expand-file-name "config/default/autoload/search.el" doom-modules-dir)))
-
+    ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)))
+    
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
                               (pdf-info-check-epdfinfo))
@@ -66,14 +65,14 @@
         (s (nconc
             ;; Compiling `lisp/lib' creates some errors and these functions
             ;; are not that important to have compiled anyways.
-            (directory-files-recursively doom-core-dir
-                                         "[a-za-z0-9]+\\.el$"
-                                         nil
-                                         #'ignore)
-            (directory-files-recursively doom-modules-dir
-                                         "[a-za-z0-9]+\\.el$"
-                                         nil
-                                         #'cae-compile-file-not-in-unused-module-p)
+            ;; (directory-files-recursively doom-core-dir
+            ;;                              "[a-za-z0-9]+\\.el$"
+            ;;                              nil
+            ;;                              #'ignore)
+            ;; (directory-files-recursively doom-modules-dir
+            ;;                              "[a-za-z0-9]+\\.el$"
+            ;;                              nil
+            ;;                              #'cae-compile-file-not-in-unused-module-p)
             (directory-files-recursively
              doom-user-dir
              "[a-zA-Z0-9]+\\.el$"
