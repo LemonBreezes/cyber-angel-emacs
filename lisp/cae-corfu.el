@@ -29,10 +29,12 @@
 (defun cae-corfu-enable-in-minibuffer-h ()
   (unless (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
-              (string-match-p "I-search: " (minibuffer-prompt))
-              (string-match-p "Query replace " (minibuffer-prompt))
-              (string-match-p "Align regexp" (minibuffer-prompt))
-              (string-match-p "Expansion for " (minibuffer-prompt))
+              (cl-member (minibuffer-prompt)
+                         '("I-search: "
+                           "Query replace "
+                           "Align regexp"
+                           "Expansion for ")
+                         :test #'string-match-p)
               (memq this-command '(evil-ex
                                    evil-ex-search-forward
                                    evil-ex-search-backward))
