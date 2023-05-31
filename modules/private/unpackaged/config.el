@@ -22,7 +22,8 @@
   (after! magit
     (setq magit-bury-buffer-function #'magit-restore-window-configuration)
     (map! :map magit-status-mode-map
-          "q" #'magit-mode-bury-buffer))
+          "q" #'magit-mode-bury-buffer
+          "Q" #'magit-quit-session))
   (advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
