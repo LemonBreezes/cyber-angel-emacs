@@ -61,7 +61,6 @@
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
-(package! ts)
 
 ;; cae-repeat.el
 (package! define-repeat-map :recipe (:repo "https://tildegit.org/acdw/define-repeat-map.el.git"))
