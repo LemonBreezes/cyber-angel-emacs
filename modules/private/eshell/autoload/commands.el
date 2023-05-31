@@ -139,6 +139,10 @@ file to edit."
                             (buffer-local-value 'default-directory
                                                 (window-buffer win))))
                      cae-window-history)))
+    (+log (buffer-local-value 'default-directory
+                              (window-buffer target-window)))
     (when target-window
-      (eshell/cd (buffer-local-value 'default-directory
-                                     (window-buffer target-window))))))
+      (let ((path (buffer-local-value 'default-directory
+                                      (window-buffer target-window))))
+        (unless (string= path (eshell/pwd))
+          (eshell/cd path))))))
