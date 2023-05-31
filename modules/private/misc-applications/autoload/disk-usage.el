@@ -6,7 +6,7 @@
   ("q" quit-window nil :exit t)
   ("A" disk-usage-remove-filters "Remove filters" :column "Filters")
   ("R" disk-usage-toggle-recursive "Toggle hierarchical view" :column "Display")
-  ("S" tabulated-list-sort "Sort" :column "Display")
+  ;;("S" tabulated-list-sort "Sort" :column "Display")
   ("^" disk-usage-up "Run on parent directory" :column "Misc")
   ("a" disk-usage-add-filters "Add filters" :column "Filters")
   ("d" disk-usage-dired-at-point "Dired" :column "Act" :exit t)
