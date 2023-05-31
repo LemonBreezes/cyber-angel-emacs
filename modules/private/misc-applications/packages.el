@@ -18,7 +18,6 @@
 (package! speed-type)
 (package! disk-usage)
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
-            (getenv "SSH_TTY")
             (getenv "WSL_DISTRO_NAME"))
   (package! elcord))
 ;; (package! picpocket)
