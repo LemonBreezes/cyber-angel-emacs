@@ -92,5 +92,3 @@
  :keymap 'embark-collect-mode-map
  :hide-funs '()
  :transient t)
-
-(define-key embark-collect-mode-map (kbd "<f6>") #'embark-collect-cheatsheet)
