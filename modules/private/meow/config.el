@@ -205,6 +205,8 @@
               (message-buffer-mode . normal)
               (eshell-mode . insert)
               (vterm-mode . insert)))
+  (when (modulep! :private corfu)
+    (add-hook 'meow-normal-mode-hook #'corfu-quit))
   (setq meow-esc-delay 0.001
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression pp-eval-expression))
 
