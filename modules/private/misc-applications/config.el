@@ -18,7 +18,7 @@
     "+aurel"
     "+daemons"
     "+disk-usage"
-    "+elcord"
+    ;; "+elcord"
     "+enime"
     "+exercism"
     "+forecast"
