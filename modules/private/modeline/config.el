@@ -53,7 +53,6 @@
         (flycheck-mode)
         (font-lock-mode)
         (highlight-changes-mode)
-        (outline-minor-mode)
         (overwrite-mode)
         (ruler-mode)
         (visual-line-mode)
