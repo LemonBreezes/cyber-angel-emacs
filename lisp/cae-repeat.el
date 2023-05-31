@@ -11,18 +11,18 @@
 
   (eval
    `(define-repeat-map other-window
-      ("o" ,(lookup-key (current-global-map) (kbd "C-x o"))
-       "O" ,(lookup-key (current-global-map) (kbd "C-x O"))
+      ("o" other-window
+       "O" other-window-previous
        ,@(when (modulep! :ui popup)
            '("p" +popup/other))
-       "0" ,(lookup-key (current-global-map) (kbd "C-x 0"))
-       "1" ,(lookup-key (current-global-map) (kbd "C-x 1"))
-       "2" ,(lookup-key (current-global-map) (kbd "C-x 2"))
-       "3" ,(lookup-key (current-global-map) (kbd "C-x 3"))
-       ,(cae-keyboard-kbd "0") ,(lookup-key (current-global-map) (kbd "C-x 0"))
-       ,(cae-keyboard-kbd "1") ,(lookup-key (current-global-map) (kbd "C-x 1"))
-       ,(cae-keyboard-kbd "2") ,(lookup-key (current-global-map) (kbd "C-x 2"))
-       ,(cae-keyboard-kbd "3") ,(lookup-key (current-global-map) (kbd "C-x 3"))
+       "0" delete-window
+       "1" delete-other-windows
+       "2" split-window-below
+       "3" split-window-right
+       ,(cae-keyboard-kbd "0") delete-window
+       ,(cae-keyboard-kbd "1") delete-other-windows
+       ,(cae-keyboard-kbd "2") split-window-below
+       ,(cae-keyboard-kbd "3") split-window-right
        "u" winner-undo
        "r" winner-redo)))
 
