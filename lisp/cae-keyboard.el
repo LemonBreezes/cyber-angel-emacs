@@ -202,6 +202,7 @@
           (special-lispy-undo . "Other")
           (special-lispy-ace-paren . "Move")
           (special-lispy-ace-char . "Move")
+          (special-lispy-ace-subword "Select")
           (special-lispy-view . "View")
           (special-lispy-teleport . "Edit")
           (special-lispy-new-copy . "Select")
@@ -266,21 +267,23 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
-             ;; This special case with the comma is being handled because we do
-             ;; not want the comma to be bound to any `lispy' special command.
-             ;; Instead, we want comma to always just insert a comma. This entry
-             ;; ensures the command which would have been bound to comma is not
-             ;; left unbound.
+             (,(cae-keyboard-kbd ";") special-lispy-comment "Other")
+             ;; The tick and comma keys are special in Lispy because we want
+             ;; them to not be rebound.
              (,(cae-keyboard-kbd-reverse ",")
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
               ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
                                       (cae-keyboard-kbd-reverse ","))
                           cae-lispy-hydra--command-column-alist))
-             ;;(lookup-key cae-keyboard--lispy-mode-map-backup "%")
+             ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
+                               (cae-keyboard-kbd-reverse "'"))
+              ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
+                                     (cae-keyboard-kbd-reverse "'"))
+                         cae-lispy-hydra--command-column-alist))
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
-             ("-" special-lispy-ace-subword "")
+             ("-" special-lispy-ace-subword "Select")
              ("~" special-lispy-tilde "")
              ("_" special-lispy-underscore "")
              ("'" lispy-tick "")
