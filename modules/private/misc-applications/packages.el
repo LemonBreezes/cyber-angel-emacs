@@ -5,12 +5,14 @@
      (package! pulseaudio-control))
 (package! vuiet)
 (package! somafm)
-(package! enime :recipe (:host github :repo "xl666/enime" :files ("*")))
+(package! enime :recipe
+  (:host github :repo "xl666/enime" :files ("*")))
 (package! alarm-clock)
 (when (and (eq system-type 'gnu/linux)
            (or (modulep! :private helm)
                (modulep! :completion helm)))
-  (package! helm-linux-disks :recipe (:host github :repo "akirak/helm-linux-disks")))
+  (package! helm-linux-disks :recipe
+    (:host github :repo "akirak/helm-linux-disks")))
 ;; (package! mentor)
 (package! forecast)
 (package! tldr)
@@ -35,8 +37,8 @@
 (package! webpaste)
 (package! try)
 (package! know-your-http-well)
-(package! exercism-modern
-  :recipe (:host github :repo "elken/exercism-modern" :files ("*/*" "*")))
+(package! exercism-modern :recipe
+  (:host github :repo "elken/exercism-modern" :files ("*/*" "*")))
 (package! my-repo-pins :recipe
   (:host github :repo "NinjaTrappeur/my-repo-pins"
    :build (:not compile)))
