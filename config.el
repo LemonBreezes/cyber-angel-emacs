@@ -286,45 +286,45 @@
       (if (display-graphic-p)
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
-;;
-;;(when (and (modulep! :tools lsp)
-;;           (not (modulep! :tools lsp +eglot)))
-;;  (after! lsp-mode
-;;    (setq lsp-headerline-breadcrumb-enable nil
-;;          lsp-enable-snippet t
-;;          lsp-enable-text-document-color t
-;;          lsp-enable-folding t
-;;          lsp-enable-indentation nil
-;;          lsp-semantic-tokens-enable t)
-;;    (after! lsp-ui
-;;      (setq lsp-signature-auto-activate t
-;;            lsp-ui-doc-include-signature t
-;;            lsp-ui-doc-header nil))
-;;    (after! lsp-clangd
-;;      (setq lsp-clients-clangd-args
-;;            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-;;              "--background-index"
-;;              "--clang-tidy"
-;;              "--completion-style=detailed"
-;;              "--header-insertion=never"
-;;              "--header-insertion-decorators=0")))
-;;    (add-to-list 'lsp-disabled-clients 'ccls)
-;;    (add-to-list 'lsp-disabled-clients 'mspyls)))
-;;
-;;(when (modulep! :tools lsp +eglot)
-;;  (after! eglot
-;;    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-;;          '("clangd" "--background-index" "--clang-tidy"
-;;            "--completion-style=detailed" "--header-insertion=never"
-;;            "--header-insertion-decorators=0"))))
-;;
-;;(use-package! topsy
-;;  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-;;  :config
-;;  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-;;  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
-;;
-;;
+
+(when (and (modulep! :tools lsp)
+           (not (modulep! :tools lsp +eglot)))
+  (after! lsp-mode
+    (setq lsp-headerline-breadcrumb-enable nil
+          lsp-enable-snippet t
+          lsp-enable-text-document-color t
+          lsp-enable-folding t
+          lsp-enable-indentation nil
+          lsp-semantic-tokens-enable t)
+    (after! lsp-ui
+      (setq lsp-signature-auto-activate t
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-header nil))
+    (after! lsp-clangd
+      (setq lsp-clients-clangd-args
+            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+              "--background-index"
+              "--clang-tidy"
+              "--completion-style=detailed"
+              "--header-insertion=never"
+              "--header-insertion-decorators=0")))
+    (add-to-list 'lsp-disabled-clients 'ccls)
+    (add-to-list 'lsp-disabled-clients 'mspyls)))
+
+(when (modulep! :tools lsp +eglot)
+  (after! eglot
+    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+          '("clangd" "--background-index" "--clang-tidy"
+            "--completion-style=detailed" "--header-insertion=never"
+            "--header-insertion-decorators=0"))))
+
+(use-package! topsy
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :config
+  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+
+
 ;;;;; Editor
 ;;
 ;;(load! "lisp/cae-repeat")
