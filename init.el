@@ -111,10 +111,7 @@
            modeline
            unpackaged
            vc
-           org
-
-           ;; (meow +leader)
-           )
+           org)
   (progn
     ;; This comment will be removed after I test this.
     (message "Error: %S" err)
