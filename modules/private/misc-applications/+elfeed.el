@@ -16,7 +16,7 @@
     (when (modulep! :ui hydra)
       (pretty-hydra-define cae-elfeed-hydra (:color pink :foreign-keys run)
         ("Custom filter"
-         (("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+         (("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
           ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
           ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
           ("a" (elfeed-search-set-filter "@6-months-ago") "All")
