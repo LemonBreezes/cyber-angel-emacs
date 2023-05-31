@@ -42,6 +42,17 @@
 (define-key key-translation-map (kbd "C-x 4 C-x 4") (kbd "C-x 4 4"))
 (define-key key-translation-map (kbd "C-x 4 C-x 1") (kbd "C-x 4 1"))
 (define-key key-translation-map (kbd "C-x 4 C-x 0") (kbd "C-x 4 0"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-b") (kbd "C-x 4 b"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-f") (kbd "C-x 4 f"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-.") (kbd "C-x 4 ."))
+(define-key key-translation-map (kbd "C-x 4 C-x C-i") (kbd "C-x 4 i"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-a") (kbd "C-x 4 a"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-c") (kbd "C-x 4 c"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-d") (kbd "C-x 4 d"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-m") (kbd "C-x 4 m"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-p") (kbd "C-x 4 p"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-r") (kbd "C-x 4 r"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-o") (kbd "C-x 4 j"))
 
 ;; other frame prefix
 (define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
