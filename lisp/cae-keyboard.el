@@ -283,12 +283,3 @@
     ";!=" "≠"
     "-." "->"
     "=." "=>"))
-
-;; Make typing all-caps more ergonomic.
-(use-package! casease
-  :config
-  (casease-setup
-   :hook c-mode-common-hook
-   :separator ?-
-   :entries
-   ((screaming "\\b\\(-\\)[a-z]" "[A-Z]"))))
