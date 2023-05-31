@@ -11,8 +11,7 @@
         :desc "Delete doc" "d" #'devdocs-delete
         :desc "Search doc" "l" #'devdocs-lookup
         :desc "Search devdocs website" "s" #'devdocs-search
-        :desc "Update all docs" "u" #'devdocs-update-all
-        )
+        :desc "Update all docs" "u" #'devdocs-update-all)
   :config
   (setq devdocs-data-dir (expand-file-name "devdocs" doom-data-dir))
   (map! :map devdocs-mode-map
