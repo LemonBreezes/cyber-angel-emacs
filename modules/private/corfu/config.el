@@ -98,10 +98,6 @@ derivative.")
           :desc "next" "TAB" #'corfu-next
           :desc "previous" "S-TAB" #'corfu-previous)))
 
-  (when (modulep! +indexed)
-    (setq corfu-indexed-start 1)
-    (corfu-indexed-mode +1))
-
   ;; Taken from corfu's README.
   ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
   ;; ivy is being considered for removal.
