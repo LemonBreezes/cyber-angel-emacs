@@ -14,7 +14,7 @@
     ,(expand-file-name "config/default/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/contrib-present.el" doom-modules-dir)
     ,(expand-file-name "doom-start.el" doom-core-dir)
-    ;;,(expand-file-name "modules/private/corfu/config.el" doom-user-dir)
+    ;; ,(expand-file-name "modules/private/corfu/config.el" doom-user-dir)
 
     ;; I have not tested compiling these files but it's better not to compile
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
