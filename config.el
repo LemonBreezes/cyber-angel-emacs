@@ -287,7 +287,7 @@
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
-        (cond ((or (string-suffix-p "-WSL2" operating-system-release)
+        (cond ((or (getenv "WSL_DISTRO_NAME")
                    (display-graphic-p))
                (browse-url-generic url new-window))
               ((fboundp 'w3m-browse-url)
