@@ -318,7 +318,6 @@
     (defun cae-perfect-margin-ignore-posframe-p (window)
       "Check if the current buffer's display type is posframe."
       (frame-parameter (window-frame window) 'parent-frame))
-    ;; TODO Add a filter for which key.
     (defun cae-perfect-margin-ignore-which-key-p (window)
       "Check if the current buffer's display type is which-key."
       (string-match-p "^ \\*which-key\\*$" (buffer-name (window-buffer window))))
