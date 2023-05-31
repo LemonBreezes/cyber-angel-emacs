@@ -88,7 +88,7 @@
        dired
        lisp
        misc-applications
-       ;; helm
+       helm
        modeline
        meow
        unpackaged
