@@ -465,8 +465,28 @@
            (,(cae-keyboard-kbd "P") wspecial-org-priority "Misc")
            (,(cae-keyboard-kbd "t") wspecial-worf-todo "Misc")
            (,(cae-keyboard-kbd "u") wspecial-undo "Misc")
-           (,(cae-keyboard-kbd "R") wspecial-worf-recenter-mode)
-           )))))
+           (,(cae-keyboard-kbd "R") wspecial-worf-recenter-mode))))
+    (dolist (binding bindings)
+      (define-key worf-mode-map (car binding) (cadr binding)))
+    (eval
+     (append '(defhydra cae-worf-cheat-sheet (:hint nil :foreign-keys run)
+                ("<f6>" nil "Exit" :exit t))
+             (cl-loop for binding in bindings
+                      collect
+                      `(,(car binding)
+                        ,(cadr binding)
+                        ,(thread-last (symbol-name (cadr binding))
+                                      (string-remove-prefix "wspecial-")
+                                      (string-remove-prefix "worf-")
+                                      (string-remove-prefix "org-")
+                                      (string-remove-prefix "outline-"))
+                        :column ,(caddr binding))))
+     t))
+  (define-key worf-mode-map (kbd "<f6>") #'cae-worf-cheat-sheet/body)
+    (when (modulep! :editor multiple-cursors)
+      (after! multiple-cursors-core
+        (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body)
+        (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil))))
 
 ;;; Basically a custom input method
 
