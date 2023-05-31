@@ -556,6 +556,8 @@
         "M-Z" #'zap-up-to-char
         [C-i] #'doom/dumb-indent
         "C-S-i" #'doom/dumb-dedent
+        "C-=" #'eri/expand-region
+        "C--" #'eri/contract-region
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line
         [remap doom/sudo-this-file] #'cae-toggle-sudo
         (:when (modulep! :completion vertico)
@@ -867,7 +869,9 @@
                   symbol-overlay-jump-next
                   symbol-overlay-jump-prev
                   recenter-top-bottom
-                  reposition-window))
+                  reposition-window
+                  eri/expand-region
+                  eri/contract-region))
       (add-to-list 'rp/restore-point-commands fn))
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
