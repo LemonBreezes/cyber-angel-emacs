@@ -15,15 +15,15 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(define-minor-mode cae-doom-leader-mode
-  "Minor mode to enable the doom-leader keymap."
-  :global t
-  :init-value nil
-  :lighter nil
-  :keymap general-override-mode-map)
-(cae-doom-leader-mode +1)
 (after! general
-  (general-override-mode -1))
+  (general-override-mode -1)
+  (define-minor-mode cae-doom-leader-mode
+    "Minor mode to enable the doom-leader keymap."
+    :global t
+    :init-value nil
+    :lighter nil
+    :keymap general-override-mode-map)
+  (cae-doom-leader-mode +1))
 
 
 (doom! :completion
