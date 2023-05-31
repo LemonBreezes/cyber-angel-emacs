@@ -941,8 +941,17 @@
 
   (after! (:all outline which-key)
     (which-key-add-keymap-based-replacements outline-minor-mode-map
-      "C-c @" "outline")))
+      "C-c @" "outline"))
 
+  (use-package! expand-region-improved
+    :defer t :init
+    (map! "C-=" #'eri/expand-region
+          "C--" #'eri/contract-region)
+    :config
+    (eri/define-pair org-table-cell "|" 'org-at-table-p)
+    (eri/add-mode-expansions 'org-mode
+      '((eri/mark-inside-org-table-cell
+         eri/mark-outside-org-table-cell)))))
 
 ;;; Autocompletion
 
