@@ -258,12 +258,9 @@ mark the string and call `edit-indirect-region' with it."
     (funcall action)))
 
 ;;;###autoload
-(defalias 'cae-avy-do-stay
-  (doom-rpartial #'cae-avy-do t))
-
-;;;###autoload
 (defalias 'cae-avy-action-embark-act
   (apply-partially #'cae-avy-do #'embark-act))
+
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
   (apply-partially #'cae-avy-do
