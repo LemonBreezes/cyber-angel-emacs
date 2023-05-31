@@ -659,7 +659,7 @@
         (:after corfu
          :map corfu-map
          "C-M-i" #'corfu-move-to-minibuffer
-         "}" #'corfu-quick-complete)
+         "}" #'corfu-quick-complete)    ; I have a strange keyboard layout
         :prefix "M-+"
         "c" #'completion-at-point       ; capf
         "t" #'complete-tag              ; etags
