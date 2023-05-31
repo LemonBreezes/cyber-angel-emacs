@@ -55,6 +55,7 @@
 (package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
+(package! isearch-mb)
 
 ;; These are used for their autoloads.
 (package! ialign)
