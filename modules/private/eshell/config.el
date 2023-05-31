@@ -30,15 +30,19 @@
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
 
-  ;; Disable some Eshell modes when EAT is active.
+  ;; Temporarily disable some modes when EAT is active.
   (add-hook! 'eat--eshell-process-running-mode-hook
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
           (when (boundp mode)
-            (funcall mode
-                     (if eat--eshell-process-running-mode
-                         -1 1)))))))
+            (let ((mode-var (intern (concat "cae-eshell--" (symbol-name mode) "-enabled-p"))))
+              (if eat--eshell-process-running-mode
+                  (progn (set mode-var (symbol-value mode))
+                         (funcall mode -1))
+                (when (symbol-value mode-var)
+                  (funcall mode 1)
+                  (set mode-var nil)))))))))
 
   ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
   (advice-add #'eat-eshell-char-mode
