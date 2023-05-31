@@ -68,10 +68,17 @@
   (advice-add #'worf-down
               :around
               (cae-defun cae-worf-skip-vimish-fold-forward-a (oldfun arg)
-                (when (and (modulep! :editor fold)
-                           (+fold--vimish-fold-p))
-                  (setq arg (1+ arg)))
-                (funcall oldfun arg)))
+                (let ((pt-max (-some->> (and (modulep! :editor fold)
+                                             (overlays-at (point)))
+                                (-filter #'vimish-fold--vimish-overlay-p)
+                                (-map #'overlay-end)
+                                (apply #'max)))
+                      (pt (point)))
+                  (when pt-max
+                    (setq arg (1+ arg)))
+                  (funcall oldfun arg)
+                  (when (<= (point) pt-max)
+                    (goto-char pt)))))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
