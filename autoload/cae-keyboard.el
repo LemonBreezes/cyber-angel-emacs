@@ -16,6 +16,9 @@
       (mapcar (lambda (x)
                 (cons (cae-keyboard-apply-recursively fn (car x)) (cdr x)))
               arg)))
+  (when (stringp arg)
+    (cl-return-from cae-keyboard-apply-recursively
+      (cl-mapcar (lambda (x) (cae-keyboard-apply-recursively fn x)) (kbd arg))))
   (cl-return-from cae-keyboard-apply-recursively
     (cl-mapcar (lambda (x) (cae-keyboard-apply-recursively fn x)) arg)))
 
@@ -46,4 +49,18 @@
 ;;;###autoload
 (defun cae-keyboard-kbd (&rest args)
   (declare (pure t) (side-effect-free t))
-  (cae-keyboard-remap-char (kbd (string-join args " "))))
+  (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))))
+
+;; only apply cae-keyboard-kdb to the first argument
+;;;###autoload
+(defun cae-keyboard-kbd1 (&rest args)
+  (declare (pure t) (side-effect-free t))
+  (let ((kbd (cae-keyboard-kbd (car args))))
+    (cons kbd (cdr args))))
+
+;; only apply cae-keyboard-kdb to the last argument
+;;;###autoload
+(defun cae-keyboard-kbd2 (&rest args)
+  (declare (pure t) (side-effect-free t))
+  (append (butlast args)
+          (list (cae-keyboard-kbd (car (last args))))))
