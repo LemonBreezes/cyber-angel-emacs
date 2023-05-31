@@ -11,4 +11,7 @@
   :config
   (map! :map tetris-mode-map
         "<f6>" #'+tetris-hydra/body
-        "a" #'autotetris-mode))
+        "a" #'autotetris-mode)
+  (map! :map autotetris-mode-map
+        "a" nil))                       ;Not sure what `autotetris-move' even
+                                        ;does to be honest.
