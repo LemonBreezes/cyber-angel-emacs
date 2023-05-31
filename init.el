@@ -102,16 +102,16 @@
 
            :private
            (corfu +indexed)
-           ;;debugger
+           debugger
            (dirvish +icons +dirvish)
            eshell
-           ;;dired
+           dired
            lisp
            misc-applications
-           ;;modeline
+           modeline
            unpackaged
            vc
-           ;;org
+           org
 
            ;; (meow +leader)
            )
