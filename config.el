@@ -562,7 +562,7 @@
                        mouse-face)
      :transient t)
     (map! :map embark-collect-mode-map
-          "<f6>" #'cae-embark-collect-mode)))
+          "<f6>" #'embark-collect-mode)))
 
 (use-package! avy
   :defer t
