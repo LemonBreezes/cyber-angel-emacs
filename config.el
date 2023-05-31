@@ -881,7 +881,6 @@
 (use-package! string-edit-at-point      ; Used in `cae-edit-indirect-dwim'.
   :defer t)
 
-
 
 ;;; Autocompletion
 
