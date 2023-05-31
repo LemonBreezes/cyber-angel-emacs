@@ -714,6 +714,7 @@
 ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
 ;; `speedrect' commands.
 (use-package! speedrect
+  :after-call rectangle-mark-mode-hook
   :config
   (when (modulep! :ui popup)
     (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
