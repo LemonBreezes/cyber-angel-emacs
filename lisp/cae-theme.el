@@ -85,10 +85,12 @@
             'doom-one
           'modus-vivendi)))
 
-;; (use-package! theme-magic
-;;   :defer t
-;;   :init
-;;   (theme-magic-export-theme-mode +1))
+(use-package! theme-magic
+  :defer t
+  :init
+  (run-with-idle-timer 2 nil
+                       (lambda () (theme-magic-export-theme-mode +1)
+                         (theme-magic-from-emacs))))
 
 (unless (display-graphic-p)
   (setq +ligatures-in-modes nil
