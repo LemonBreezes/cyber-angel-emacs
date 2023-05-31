@@ -115,7 +115,7 @@
 
 ;; `vc-backup' refuses to build on Doom Emacs so I had to fork it and remove the
 ;; autoload line it uses.
-(add-to-list 'vc-handled-backends 'Backup t #'eq)
+(add-to-list 'vc-handled-backends 'Backup t)
 (use-package! vc-backup
   :defer t
   :init
