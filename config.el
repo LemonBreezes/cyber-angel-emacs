@@ -651,263 +651,269 @@
   (map! :leader :prefix "f"
         :desc "Show file info" "i" #'file-info-show)
   :config
-  (setq file-info-include-headlines t))
+  (setq file-info-include-headlines t)
+  (add-to-list 'file-info-handlers `( :name "Git link"
+                                      :handler (cl-letf (((symbol-function #'git-link--new)
+                                                          (symbol-function #'identity)))
+                                                 (call-interactively #'git-link))
+                                      :face font-lock-string-face
+                                      :bind "g")))
 
-
+  
 ;;; Autocompletion
 
-(when (modulep! :private corfu)
-  (load! "lisp/cae-corfu"))
+  (when (modulep! :private corfu)
+    (load! "lisp/cae-corfu"))
 
-(after! yasnippet
-  (setq yas-triggers-in-field t))       ;Allow nested snippets.
+  (after! yasnippet
+    (setq yas-triggers-in-field t))       ;Allow nested snippets.
 
-(use-package! dabbrev
-  :defer t :config
-  (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
-        dabbrev-upcase-means-case-search t))
+  (use-package! dabbrev
+    :defer t :config
+    (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
+          dabbrev-upcase-means-case-search t))
 
-(use-package! hippie-exp
-  :defer t :config
-  (setq  hippie-expand-try-functions-list
-         '(try-complete-file-name-partially
-           try-complete-file-name
-           try-expand-dabbrev
-           try-expand-dabbrev-all-buffers
-           try-expand-dabbrev-from-kill
-           try-complete-lisp-symbol-partially
-           try-complete-lisp-symbol
-           try-expand-line)))
-(map! [remap dabbrev-expand] #'hippie-expand)
+  (use-package! hippie-exp
+    :defer t :config
+    (setq  hippie-expand-try-functions-list
+           '(try-complete-file-name-partially
+             try-complete-file-name
+             try-expand-dabbrev
+             try-expand-dabbrev-all-buffers
+             try-expand-dabbrev-from-kill
+             try-complete-lisp-symbol-partially
+             try-complete-lisp-symbol
+             try-expand-line)))
+  (map! [remap dabbrev-expand] #'hippie-expand)
 
-(use-package! copilot
-  :defer t
-  :init
-  (add-hook 'text-mode-hook   #'copilot-mode)
-  (add-hook 'prog-mode-hook   #'copilot-mode)
-  (add-hook 'conf-mode-hook   #'copilot-mode)
-  :config
-  (setq copilot--base-dir
-        (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
-  (setq copilot-node-executable (expand-file-name
-                                 "~/.nvm/versions/node/v17.9.1/bin/node"))
-  ;; Model our Copilot interface after Fish completions.
-  (map! (:map copilot-completion-map
-         "<right>" #'copilot-accept-completion
-         "C-f" #'copilot-accept-completion
-         "M-<right>" #'copilot-accept-completion-by-word
-         "M-f" #'copilot-accept-completion-by-word
-         "C-e" #'copilot-accept-completion-by-line
-         "<end>" #'copilot-accept-completion-by-line
-         "M-n" #'copilot-next-completion
-         "M-p" #'copilot-previous-completion))
-
-  (when (modulep! :editor snippets)
-    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
-
-(use-package! isearch-dabbrev
-  :defer t
-  :init
-  (map! :map isearch-mode-map
-        "M-/" #'isearch-dabbrev-expand
-        "C-M-/" #'isearch-dabbrev-expand))
-
-(when (modulep! :completion vertico)
-  (use-package! consult
+  (use-package! copilot
+    :defer t
     :init
-    (map! "C-h C-m" #'describe-keymap
-          "C-h <return>" #'info-emacs-manual
-          "C-x C-k C-k" #'consult-kmacro ;replaces
+    (add-hook 'text-mode-hook   #'copilot-mode)
+    (add-hook 'prog-mode-hook   #'copilot-mode)
+    (add-hook 'conf-mode-hook   #'copilot-mode)
+    :config
+    (setq copilot--base-dir
+          (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
+    (setq copilot-node-executable (expand-file-name
+                                   "~/.nvm/versions/node/v17.9.1/bin/node"))
+    ;; Model our Copilot interface after Fish completions.
+    (map! (:map copilot-completion-map
+           "<right>" #'copilot-accept-completion
+           "C-f" #'copilot-accept-completion
+           "M-<right>" #'copilot-accept-completion-by-word
+           "M-f" #'copilot-accept-completion-by-word
+           "C-e" #'copilot-accept-completion-by-line
+           "<end>" #'copilot-accept-completion-by-line
+           "M-n" #'copilot-next-completion
+           "M-p" #'copilot-previous-completion))
+
+    (when (modulep! :editor snippets)
+      (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
+
+  (use-package! isearch-dabbrev
+    :defer t
+    :init
+    (map! :map isearch-mode-map
+          "M-/" #'isearch-dabbrev-expand
+          "C-M-/" #'isearch-dabbrev-expand))
+
+  (when (modulep! :completion vertico)
+    (use-package! consult
+      :init
+      (map! "C-h C-m" #'describe-keymap
+            "C-h <return>" #'info-emacs-manual
+            "C-x C-k C-k" #'consult-kmacro ;replaces
                                         ;`kmacro-end-or-call-macro-repeat',
                                         ;which is similar to
                                         ;`kmacro-end-and-call-macro' from `<f4>'
                                         ;and `C-x e'.
-          ;; C-x bindings (ctl-x-map)
-          "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
-          "C-x r SPC" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
-          "M-#" #'consult-register
-          [remap jump-to-register] #'consult-register-load
-          ;; Other custom bindings
-          ;; M-g bindings (goto-map)
-          "M-g e" #'consult-compile-error
-          "M-g g" #'consult-goto-line   ;orig. goto-line
-          "M-g M-g" #'consult-goto-line ;orig. goto-line
-          "M-g o" #'consult-outline     ;Alternative: consult-org-heading
-          "M-g m" #'consult-mark
-          "M-g k" #'consult-global-mark
-          "M-g I" #'consult-imenu-multi
-          ;; M-s bindings (search-map)
-          [remap Info-search] #'consult-info
-          "M-s i" #'consult-info
-          "M-s m" #'consult-man
-          "M-s k" #'consult-keep-lines
-          "M-s u" #'consult-focus-lines
-          ;; Isearch integration
-          "M-s e" #'consult-isearch-history
-          :map isearch-mode-map
-          "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
-          "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
-          "M-s l" #'consult-line       ;needed by consult-line to detect isearch
-          "M-s L" #'consult-line-multi ;needed by consult-line to detect isearch
-          ;; Minibuffer history
-          :map minibuffer-local-map
-          "M-s" #'consult-history       ;orig. next-matching-history-element
-          "M-r" #'consult-history       ;orig. previous-matching-history-element
-          ;; Redundant with Doom's :config default bindings
-          :map global-map
-          "M-g f" #'consult-flymake
-          (:when (and (modulep! :checkers syntax)
-                      (not (modulep! :checkers syntax +flymake)))
-           "M-g f" #'consult-flycheck)
-          (:unless (modulep! :config default)
-           "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
+            ;; C-x bindings (ctl-x-map)
+            "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
+            "C-x r SPC" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
+            "M-#" #'consult-register
+            [remap jump-to-register] #'consult-register-load
+            ;; Other custom bindings
+            ;; M-g bindings (goto-map)
+            "M-g e" #'consult-compile-error
+            "M-g g" #'consult-goto-line   ;orig. goto-line
+            "M-g M-g" #'consult-goto-line ;orig. goto-line
+            "M-g o" #'consult-outline     ;Alternative: consult-org-heading
+            "M-g m" #'consult-mark
+            "M-g k" #'consult-global-mark
+            "M-g I" #'consult-imenu-multi
+            ;; M-s bindings (search-map)
+            [remap Info-search] #'consult-info
+            "M-s i" #'consult-info
+            "M-s m" #'consult-man
+            "M-s k" #'consult-keep-lines
+            "M-s u" #'consult-focus-lines
+            ;; Isearch integration
+            "M-s e" #'consult-isearch-history
+            :map isearch-mode-map
+            "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
+            "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
+            "M-s l" #'consult-line       ;needed by consult-line to detect isearch
+            "M-s L" #'consult-line-multi ;needed by consult-line to detect isearch
+            ;; Minibuffer history
+            :map minibuffer-local-map
+            "M-s" #'consult-history       ;orig. next-matching-history-element
+            "M-r" #'consult-history       ;orig. previous-matching-history-element
+            ;; Redundant with Doom's :config default bindings
+            :map global-map
+            "M-g f" #'consult-flymake
+            (:when (and (modulep! :checkers syntax)
+                        (not (modulep! :checkers syntax +flymake)))
+             "M-g f" #'consult-flycheck)
+            (:unless (modulep! :config default)
+             "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
                                         ;also slower than `fd'. See Minad's
                                         ;comment in
                                         ;https://github.com/minad/consult/issues/363
-           "M-s r" #'consult-ripgrep
-           "M-s D" #'consult-locate))
-    :config
-    (setq consult-preview-key 'any)
-    (consult-customize
-     consult-ripgrep consult-git-grep consult-grep
-     consult-bookmark consult-recent-file
-     +default/search-project +default/search-other-project
-     +default/search-project-for-symbol-at-point
-     +default/search-cwd +default/search-other-cwd
-     +default/search-notes-for-symbol-at-point
-     +default/search-emacsd
-     consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
-     :preview-key 'any)))
+             "M-s r" #'consult-ripgrep
+             "M-s D" #'consult-locate))
+      :config
+      (setq consult-preview-key 'any)
+      (consult-customize
+       consult-ripgrep consult-git-grep consult-grep
+       consult-bookmark consult-recent-file
+       +default/search-project +default/search-other-project
+       +default/search-project-for-symbol-at-point
+       +default/search-cwd +default/search-other-cwd
+       +default/search-notes-for-symbol-at-point
+       +default/search-emacsd
+       consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+       :preview-key 'any)))
 
-(after! cc-mode
-  (if (display-graphic-p)
-      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
-    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+  (after! cc-mode
+    (if (display-graphic-p)
+        (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+      (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
-(when (modulep! :private corfu)
-  (map! (:after eshell
-         :map eshell-mode-map
-         "TAB" #'completion-at-point
-         "<tab>" #'completion-at-point)
-        :prefix "M-+"
-        "c" #'completion-at-point       ;capf
-        "t" #'complete-tag              ;etags
-        "d" #'cape-dabbrev              ;or dabbrev-completion
-        "f" #'cape-file
-        "k" #'cape-keyword
-        "h" #'cape-history
-        "s" #'cape-symbol
-        "a" #'cape-abbrev
-        "i" #'cape-ispell
-        "l" #'cape-line
-        "w" #'cape-dict
-        "\\" #'cape-tex
-        "_" #'cape-tex
-        "^" #'cape-tex
-        "&" #'cape-sgml
-        "r" #'cape-rfc1345
-        "+" #'copilot-complete
-        "M-+" #'copilot-complete))
+  (when (modulep! :private corfu)
+    (map! (:after eshell
+           :map eshell-mode-map
+           "TAB" #'completion-at-point
+           "<tab>" #'completion-at-point)
+          :prefix "M-+"
+          "c" #'completion-at-point       ;capf
+          "t" #'complete-tag              ;etags
+          "d" #'cape-dabbrev              ;or dabbrev-completion
+          "f" #'cape-file
+          "k" #'cape-keyword
+          "h" #'cape-history
+          "s" #'cape-symbol
+          "a" #'cape-abbrev
+          "i" #'cape-ispell
+          "l" #'cape-line
+          "w" #'cape-dict
+          "\\" #'cape-tex
+          "_" #'cape-tex
+          "^" #'cape-tex
+          "&" #'cape-sgml
+          "r" #'cape-rfc1345
+          "+" #'copilot-complete
+          "M-+" #'copilot-complete))
 
-(when (modulep! :editor snippets)
-  (map! [remap yas-insert-snippet] #'consult-yasnippet
-        :map yas-minor-mode-map
-        "C-c & C-s" nil
-        "C-c & C-n" nil
-        "C-c & C-v" nil))
+  (when (modulep! :editor snippets)
+    (map! [remap yas-insert-snippet] #'consult-yasnippet
+          :map yas-minor-mode-map
+          "C-c & C-s" nil
+          "C-c & C-n" nil
+          "C-c & C-v" nil))
 
-
+  
 ;;; Term
 
-;; Enable Fish autocompletion in `read-shell-command'.
-(advice-add #'shell-completion-vars :after #'fish-completion-mode)
+  ;; Enable Fish autocompletion in `read-shell-command'.
+  (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
-(after! em-glob
-  (setq eshell-error-if-no-glob nil))
+  (after! em-glob
+    (setq eshell-error-if-no-glob nil))
 
-(after! em-term
-  ;; Some of the commands I copied from other configurations and will likely
-  ;; never use.
-  (setq eshell-visual-commands
-        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-        eshell-visual-subcommands '(("gh" "repo" "fork")
-                                    ("git" "log" "diff" "show")
-                                    ("geth" "attach"))
-        eshell-visual-options '(("git" "--help" "--paginate"))))
+  (after! em-term
+    ;; Some of the commands I copied from other configurations and will likely
+    ;; never use.
+    (setq eshell-visual-commands
+          '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+            "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+            "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+            "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+            "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+          eshell-visual-subcommands '(("gh" "repo" "fork")
+                                      ("git" "log" "diff" "show")
+                                      ("geth" "attach"))
+          eshell-visual-options '(("git" "--help" "--paginate"))))
 
-
+  
 ;;; Org
 
-(after! calendar
-  (setq calendar-week-start-day 1))
+  (after! calendar
+    (setq calendar-week-start-day 1))
 
-(after! org
-  (setq org-directory "~/org/"
-        org-extend-today-until 4
-        org-startup-with-inline-images t
-        org-image-actual-width t
-        org-log-done 'time
-        org-log-done-with-time t
-        org-ellipsis " ..."
-        org-archive-location (concat org-directory ".archive/%s::")
-        org-hide-emphasis-markers t
-        ;; All my computers use 64-bit processors
-        org-read-date-force-compatible-dates nil)
-  (when (modulep! :lang org +roam2)
-    (setq +org-roam-auto-backlinks-buffer nil))
+  (after! org
+    (setq org-directory "~/org/"
+          org-extend-today-until 4
+          org-startup-with-inline-images t
+          org-image-actual-width t
+          org-log-done 'time
+          org-log-done-with-time t
+          org-ellipsis " ..."
+          org-archive-location (concat org-directory ".archive/%s::")
+          org-hide-emphasis-markers t
+          ;; All my computers use 64-bit processors
+          org-read-date-force-compatible-dates nil)
+    (when (modulep! :lang org +roam2)
+      (setq +org-roam-auto-backlinks-buffer nil))
 
-  (after! org-crypt
-    (setq org-crypt-disable-auto-save 'encrypt))
-  (after! org-agenda
-    (setq org-agenda-sticky nil
-          org-agenda-files '("~/org/")))
-  (when (and (modulep! :ui ligatures)
-             (eq (car +ligatures-in-modes) 'not))
-    (add-to-list '+ligatures-in-modes 'org-mode t)))
+    (after! org-crypt
+      (setq org-crypt-disable-auto-save 'encrypt))
+    (after! org-agenda
+      (setq org-agenda-sticky nil
+            org-agenda-files '("~/org/")))
+    (when (and (modulep! :ui ligatures)
+               (eq (car +ligatures-in-modes) 'not))
+      (add-to-list '+ligatures-in-modes 'org-mode t)))
 
-(after! org
-  ;; TODO Contribute the prefix map stuff to Org.
-  (define-prefix-command 'org-babel-map)
-  (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
+  (after! org
+    ;; TODO Contribute the prefix map stuff to Org.
+    (define-prefix-command 'org-babel-map)
+    (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
-(doom-load-packages-incrementally
- `(,@(when (modulep! :private dirvish)
-       '(dired transient dirvish))
-   auth-source tramp-compat tramp-integration tramp tramp-sh
-   ,@(when (modulep! :term eshell)
-       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-         em-tramp em-smart em-banner em-basic em-cmpl
-         em-extpipe em-glob em-hist em-ls em-script em-term
-         em-alias em-elecslash em-rebind em-prompt))
-   ,@(when (and (modulep! :tools pdf)
-                (display-graphic-p)
-                (not (string-suffix-p "-WSL2" operating-system-release)))
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
- t)
+  (doom-load-packages-incrementally
+   `(,@(when (modulep! :private dirvish)
+         '(dired transient dirvish))
+     auth-source tramp-compat tramp-integration tramp tramp-sh
+     ,@(when (modulep! :term eshell)
+         '(esh-util esh-module esh-proc esh-io esh-cmd eshell
+           em-tramp em-smart em-banner em-basic em-cmpl
+           em-extpipe em-glob em-hist em-ls em-script em-term
+           em-alias em-elecslash em-rebind em-prompt))
+     ,@(when (and (modulep! :tools pdf)
+                  (display-graphic-p)
+                  (not (string-suffix-p "-WSL2" operating-system-release)))
+         '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
+   t)
 
-(setq cae-config-finished-loading t)
+  (setq cae-config-finished-loading t)
 
 ;;; Config
-;; Here I am going over Doom's `config' module and deciding which keybindings I
-;; like, etc.
+  ;; Here I am going over Doom's `config' module and deciding which keybindings I
+  ;; like, etc.
 
-;; The `C-RET' and `C-S-RET' keybindings I like but they are overriden in Org
-;; mode. Meow also provides alternatives.
+  ;; The `C-RET' and `C-S-RET' keybindings I like but they are overriden in Org
+  ;; mode. Meow also provides alternatives.
 
-;; Doom should use keymap-based replacements rather than
-;; `which-key-replacement-alist' for both performance reasons and so that the
-;; descriptions are less sensitive to breaking, such as when we add second
-;; leader key.
+  ;; Doom should use keymap-based replacements rather than
+  ;; `which-key-replacement-alist' for both performance reasons and so that the
+  ;; descriptions are less sensitive to breaking, such as when we add second
+  ;; leader key.
 
 ;;;; Files map (SPC f)
 
-;; The recentf and sudo commands are useful enough to keep. Overall, though I
-;; can use some of these commands without the leader key, these keybindings are
-;; all convenient.
+  ;; The recentf and sudo commands are useful enough to keep. Overall, though I
+  ;; can use some of these commands without the leader key, these keybindings are
+  ;; all convenient.
 
-;; What I would be missing is mainly `recentf', sudo stuff, opening scratch
-;; buffers... I think I prefer to use this as the leader key in Meow.
+  ;; What I would be missing is mainly `recentf', sudo stuff, opening scratch
+  ;; buffers... I think I prefer to use this as the leader key in Meow.
