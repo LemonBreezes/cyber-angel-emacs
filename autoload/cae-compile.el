@@ -9,11 +9,7 @@
 (advice-add #'kill-emacs :before #'cae-compile-store-exit-code-a)
 
 (defvar cae-compile-files-to-ignore
-  `(;; Compiling these creates errors.
-    ;; ,(expand-file-name "config/default/config.el" doom-modules-dir)
-    ;; ,(expand-file-name "lang/org/autoload/contrib-present.el" doom-modules-dir)
-    ;; ,(expand-file-name "doom-start.el" doom-core-dir)
-    ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
+  `(,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
     ,(expand-file-name "lang/cc/autoload.el" doom-modules)
