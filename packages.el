@@ -16,6 +16,8 @@
 (package! goggles)
 (package! rainbow-mode)
 (package! topsy)
+(package! anzu)
+(package! isearch-mb)
 
 ;; cae-theme.el
 (package! modus-themes)
