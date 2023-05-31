@@ -116,14 +116,10 @@
 (map! :prefix "C-z"
       "n" #'avy-goto-line-below
       "p" #'avy-goto-line-above
-      ;;"y" #'avy-copy-region
       "c" #'avy-goto-char
-      ;;"m" #'avy-move-region
       "l" #'avy-goto-line
       "e" #'avy-goto-end-of-line
       "." #'cae-avy-symbol-at-point
-      ;;"k" #'avy-kill-region
-      ;;"w" #'avy-kill-ring-save-region
       "a" #'cae-avy-embark-act-on-region
       "j" #'avy-goto-word-1
       "o" #'switch-window
