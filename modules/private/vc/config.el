@@ -89,4 +89,5 @@
   (setq make-backup-files t
         vc-make-backup-files t))
 
-;; TODO Look at Karthik's config for his Smerge stuff.
+(use-package! magit-stats
+  :defer t)
