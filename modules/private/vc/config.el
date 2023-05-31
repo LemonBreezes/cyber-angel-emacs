@@ -27,7 +27,10 @@
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
-    (setq diff-hl-reference-revision "master")))
+    (setq diff-hl-reference-revision "master"))
+
+  (map! [remap +vc-gutter/previous-hunk] #'diff-hl-show-hunk-previous
+        [remap +vc-gutter/next-hunk]     #'diff-hl-show-hunk-next))
 
 (use-package! git-link
   :defer t
