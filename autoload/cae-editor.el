@@ -280,9 +280,14 @@ mark the string and call `edit-indirect-region' with it."
 (defalias 'cae-avy-action-comment-dwim
   (apply-partially #'cae-avy-do
                    (lambda ()
-                     (if (bound-and-true-p lispy-mode)
-                         (lispy-comment)
-                       (call-interactively #'comment-or-uncomment-region)))))
+                     (cond ((or (eq avy-command 'avy-goto-line)
+                                (memq this-command '(avy-goto-line-above
+                                                     avy-goto-line-below)))
+                            (call-interactively #'comment-or-uncomment-region))
+                           ((bound-and-true-p lispy-mode)
+                            (deactivate-mark)
+                            (lispy-comment))
+                           (t (call-interactively #'comment-or-uncomment-region))))))
 
 ;;;###autoload
 (defun cae-pop-mark ()
