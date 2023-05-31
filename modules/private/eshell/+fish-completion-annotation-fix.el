@@ -1,26 +1,5 @@
 ;;; private/eshell/+fish-completion-fix.el -*- lexical-binding: t; -*-
 
-;; (after! fish-completion
-;;   (defun +fish-completion--list-completions-a (raw-prompt)
-;;     (mapcar (lambda (e)
-;;               (string-match "\\`\\([^\t]*\\)\t?\\(.*\\)\\'" e)
-;;               (propertize (match-string 1 e) 'fish-completion--annotation (match-string 2 e)))
-;;             (split-string
-;;              (fish-completion--list-completions-with-desc raw-prompt)
-;;              "\n" t)))
-;;   (advice-add #'fish-completion--list-completions :override #'+fish-completion--list-completions-a)
-
-;;   (defun fish-completion--annotate (cand)
-;;     (when-let* ((pos (or (next-single-property-change 0 'fish-completion--annotation cand)
-;;                          0))
-;;                 (ann (get-text-property pos 'fish-completion--annotation cand)))
-;;       (concat (propertize " " 'display '(space :align-to center)) ann)))
-
-;;   (defun fish-completion--provide-annotation-function (table)
-;;     (nconc table (list :annotation-function #'fish-completion--annotate)))
-
-;;   (advice-add #'pcomplete-completions-at-point :filter-return #'fish-completion--provide-annotation-function))
-
 (when (modulep! :completion vertico)
   ;; Code is mostly from  https://github.com/minad/marginalia/issues/87
   ;; But we implement a capf because getting annotations from fish is
