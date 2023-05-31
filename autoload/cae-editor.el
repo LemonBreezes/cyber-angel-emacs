@@ -258,7 +258,6 @@ mark the string and call `edit-indirect-region' with it."
        (prog1 (region-end)
          (call-interactively #'titlecase-region))))))
 
-;;;###autoload
 (defun cae-avy-do (action pt)
   (goto-char pt)
   (save-mark-and-excursion
