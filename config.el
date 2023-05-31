@@ -540,7 +540,6 @@
                     return (progn (save-buffer buffer) t)
                     if (memq ch '(?q ?Q))
                     return nil)
-      (+log "hello" buffer)
       (when cae-diff-window
         (delete-window cae-diff-window)
         (setq cae-diff-window nil))))
