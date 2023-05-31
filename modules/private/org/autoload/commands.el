@@ -1,7 +1,7 @@
 ;;; private/org/autoload/commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +org-rich-yank ()
+(defun cae-org-rich-yank ()
   (interactive)
   (require 'org-rich-yank)
   (let* ((source-mode
@@ -50,7 +50,7 @@
     (insert paste)))
 
 ;;;###autoload
-(defun +org-insert-checkbox-or-bracket (arg)
+(defun cae-org-insert-checkbox-or-bracket (arg)
   (interactive "p")
   (if (and (= arg 1)
            (ignore-errors
