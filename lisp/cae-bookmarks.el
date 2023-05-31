@@ -1,1 +1,1 @@
-;;; lisp/cae-bookmarks.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/lisp/cae-bookmarks.el -*- lexical-binding: t; -*-
