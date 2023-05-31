@@ -25,6 +25,7 @@
 (map! :map minibuffer-local-map
       [remap exit-minibuffer] #'cae-lisp-newline-and-indent)
 (after! lispy
+  (setq lispy-avy-keys avy-keys)
   (map! :map lispy-mode-map
         [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
 
