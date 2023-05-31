@@ -53,7 +53,7 @@
 ;; Look up the "TAB" key in the current major mode. If it is bound and "<tab>"
 ;; is not bound, then bind it also to <tab>. This way, our global <tab> key
 ;; does not bind "C-i" everywhere.
-(defun +conditionally-remap-C-i ()
+(defun cae-keyboard-conditionally-remap-C-i ()
   (run-at-time
    0.0 nil
    (lambda ()
@@ -65,4 +65,7 @@
                   (not (eq tab-command C-i-command)))
          (define-key (current-local-map) (kbd "<tab>") C-i-command))))))
 
-(add-hook 'after-change-major-mode-hook #'+conditionally-remap-C-i)
+(add-hook 'after-change-major-mode-hook #'cae-keyboard-conditionally-remap-C-i)
+
+(map! "C-i" #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent)
