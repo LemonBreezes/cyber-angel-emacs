@@ -144,4 +144,4 @@ file to edit."
 
 ;;;###autoload
 (defun eshell/uu ()
-  (eshell/l 2))
+  (eshell/u 2))
