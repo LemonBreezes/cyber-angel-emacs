@@ -58,7 +58,7 @@
       (doom/sudo-this-file))))
 
 ;;;###autoload
-(defun cae-raise-sexp-dwim ()
+(defun cae-raise-sexp ()
   (interactive)
   (if (region-active-p)
       (save-excursion
