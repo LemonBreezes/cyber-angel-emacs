@@ -35,7 +35,11 @@
       ("o" tab-next
        "O" tab-previous
        ,(cae-keyboard-kbd "0") tab-close
-       "0" tab-close))
+       ,(cae-keyboard-kbd "1") tab-close-other
+       ,(cae-keyboard-kbd "2") tab-new
+       "0" tab-close
+       "1" tab-close-other
+       "2" tab-new))
    t)
 
   ;;Currently part of `other-window' repeat map
