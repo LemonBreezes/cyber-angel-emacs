@@ -57,5 +57,5 @@
 (defhydra +ytel-hydra (:color pink :hint nil)
   ("<f6>" nil "Exit" :exit t)
   ("q" ytel-quit nil :exit t)
-  ("s" ytel-search)
-  ("RET" ytel-watch))
+  ("s" ytel-search "Search")
+  ("RET" ytel-watch "Watch"))
