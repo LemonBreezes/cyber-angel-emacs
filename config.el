@@ -352,7 +352,6 @@
       [remap ispell-word] #'eac-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
       "M-Z" #'zap-up-to-char
-      "<f5>" #'redraw-display
       (:after vertico
        :map vertico-map
        "<prior>" #'vertico-scroll-down
