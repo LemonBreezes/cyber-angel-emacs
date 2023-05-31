@@ -164,6 +164,16 @@
       :prefix "t"
       :desc "Column indicator" "C" #'vline-mode)
 
+(when (modulep! :private corfu)
+  (after! corfu
+    (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
+          :map corfu-map
+          "C-M-i" #'corfu-move-to-minibuffer
+          "<escape>" #'keyboard-quit
+          ;; I use `TAB' instead. I don't like how the `RET' keybinding prevents
+          ;; me from exiting the minibuffer while the completion menu is open.
+          "RET" nil)))
+
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (unless (lookup-key help-map (kbd "SPC"))
   (define-key help-map (kbd "SPC") #'cae-pop-mark))
