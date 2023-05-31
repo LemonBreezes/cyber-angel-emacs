@@ -63,7 +63,7 @@
     (t :foreground "cyan"))
   "Face for directory bookmarks.")
 
-(defconst prot-bookmark-keywords
+(defconst cae-bookmark-keywords
   `((,(concat "\\(.*\\)" " " prot-common-url-regexp)
      (1 '(boqld cae-bookmark-url) t)
      (2 'cae-bookmark-url t))
