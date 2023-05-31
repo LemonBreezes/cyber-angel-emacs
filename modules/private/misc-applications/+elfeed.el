@@ -15,12 +15,12 @@
           "?" #'describe-mode
           "q" #'+elfeed-quit)
     (defhydra cae-elfeed-hydra ()
-      ("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
-      ("y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
-      ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-      ("M" elfeed-toggle-star "Mark")
-      ("a" (elfeed-search-set-filter "@6-months-ago") "All")
-      ("t" (elfeed-search-set-filter "@1-day-ago") "Today")
+      ;;("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+      ;;("y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
+      ;;("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+      ("m" elfeed-toggle-star "Mark")
+      ;;("a" (elfeed-search-set-filter "@6-months-ago") "All")
+      ;;("t" (elfeed-search-set-filter "@1-day-ago") "Today")
       ("Q" +elfeed-quit "Quit Elfeed" :color blue)
       ("q" nil "quit" :color blue))
     (map! :map elfeed-search-mode-map
