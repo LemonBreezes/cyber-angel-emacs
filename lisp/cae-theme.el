@@ -1,7 +1,5 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'modus-operandi-tinted)
-
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 (defun cae-theme-customize-faces-h (_)
@@ -61,19 +59,17 @@
 
 ;;; Set theme based on time of day.
 
-;; `circadian' works very well for me but I want a solution with a lower startup
-;; cost for my personal config.
-;;(use-package! circadian
-;;  :config
-;;  (setq circadian-themes
-;;        '((:sunrise . modus-operandi-tinted)
-;;          (:sunset  . modus-vivendi-tinted)))
-;;  (if (and calendar-latitude calendar-longitude)
-;;      (let ((hook (if (daemonp)
-;;                      'server-after-make-frame-hook
-;;                    'after-init-hook)))
-;;        (remove-hook hook #'doom-init-theme-h)
-;;        (add-hook hook #'circadian-setup -90))
-;;    (setq calendar-latitude 0
-;;          calendar-longitude 0)
-;;    (message "ERROR: Calendar latitude and longitude are not set.")))
+(use-package! circadian
+  :config
+  (setq circadian-themes
+        '((:sunrise . modus-operandi-tinted)
+          (:sunset  . modus-vivendi-tinted)))
+  (if (and calendar-latitude calendar-longitude)
+      (let ((hook (if (daemonp)
+                      'server-after-make-frame-hook
+                    'after-init-hook)))
+        (remove-hook hook #'doom-init-theme-h)
+        (add-hook hook #'circadian-setup -90))
+    (setq calendar-latitude 0
+          calendar-longitude 0)
+    (message "ERROR: Calendar latitude and longitude are not set.")))
