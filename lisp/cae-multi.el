@@ -51,6 +51,5 @@
 (defvar cae-multi-abbrev--auto-commit-disabled nil)
 
 (advice-add #'write-abbrev-file :around #'cae-multi-abbrev-write-file-a)
-
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
