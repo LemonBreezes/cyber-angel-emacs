@@ -171,6 +171,8 @@
       ;;"w" #'avy-kill-ring-save-region
       "a" #'cae-avy-embark-act-on-region
       "j" #'avy-goto-word-1
+      (:when (modulep! :editor fold)
+       "f" #'vimish-fold-avy)
       "o" #'switch-window
       "0" #'switch-window-then-delete
       "1" #'switch-window-then-maximize
