@@ -143,7 +143,7 @@ derivative.")
         kind-icon-blend-frac 0.2))
 
 (use-package! corfu-terminal
-  :when (and (modulep! :os tty) (not (display-graphic-p)))
+  :when (and (modulep! :os tty) (not (cae-display-graphic-p)))
   :hook (corfu-mode . corfu-terminal-mode))
 
 (use-package! dabbrev
