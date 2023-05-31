@@ -103,20 +103,21 @@
                    (not arg)))
         (push s result)))))
 
-
 ;;;###autoload
 (cl-defun cae-compile-my-private-config (&optional arg)
   (interactive "P")
   (when (not (bound-and-true-p cae-config-finished-loading))
     (message "Config not finished loading")
     (cl-return-from cae-compile-my-private-config))
-  (when (not cae-config-compilation-enabled)
+  (when (not cae-config-compilation-on-kill-enabled)
     (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
           (ignore-errors (byte-compile-file s))
 	  (let ((native-comp-speed cae-compile-native-comp-speed))
             (ignore-errors (native-compile s))))
         (cae-compile-list-files-to-compile arg)))
+
+
 
 ;;;###autoload
 (defun cae-compile-rebuild-package ()
@@ -131,6 +132,24 @@
                                            nil
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
+
+(defun cae-compile-next-file (files)
+  (when files
+    (let ((file (pop files)))
+      (if (file-exists-p file)
+          (progn
+            (message "Compiling %s" file)
+            (ignore-errors (byte-compile-file file))
+            (let ((native-comp-speed cae-compile-native-comp-speed))
+              (ignore-errors (native-compile file)))
+            (run-with-idle-timer 0.1 nil #'cae-compile-next-file files))
+        (run-with-idle-timer 0.1 nil #'cae-compile-next-file files)))))
+
+(defun cae-compile-schedule-native-compilation ()
+  (when (and (bound-and-true-p cae-config-finished-loading)
+             (bound-and-true-p cae-config-incremental-compilation-enabled-p))
+    (run-with-idle-timer 0.1 nil #'cae-compile-next-file
+                         (cae-compile-list-files-to-compile))))
 
 ;; Run early in case I want to `C-g' and inspect the output.
 (add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
