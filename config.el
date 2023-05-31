@@ -581,10 +581,10 @@
     (map! :map hungry-delete-mode-map
       [remap backward-delete-char-untabify] #'sp-backward-delete-char
       [remap c-electric-backspace] #'sp-backward-delete-char
-      [remap c-electric-delete-forward] #'cae-sp-delete-char-or-region
+      [remap c-electric-delete-forward] #'cae-sp-delete-char
       [remap delete-backward-char] #'sp-backward-delete-char
-      [remap delete-char] #'cae-sp-delete-char-or-region
-      [remap delete-forward-char] #'cae-sp-delete-char-or-region))
+      [remap delete-char] #'cae-sp-delete-char
+      [remap delete-forward-char] #'cae-sp-delete-char))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
@@ -596,12 +596,12 @@
 (defun cae-auto-sudoedit-maybe-h ()
   (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
             (string= (file-attribute-user-id
-                      (file-attributes path 'string))
-                     (if (and (featurep 'tramp)
-                              (tramp-tramp-file-p path))
-                         (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                               'string)
-                       (user-login-name))))
+                       (file-attributes path 'string))
+              (if (and (featurep 'tramp)
+                    (tramp-tramp-file-p path))
+                (tramp-get-remote-uid (tramp-dissect-file-name path)
+                  'string)
+                (user-login-name))))
     (require 'auto-sudoedit)
     (auto-sudoedit)))
 (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
