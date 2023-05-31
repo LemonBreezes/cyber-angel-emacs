@@ -12,7 +12,7 @@
         (when (string-match-p (dap--debug-session-name session)
                               (buffer-name buf))
           (let ((window (get-buffer-window buf)))
-            (when (not (equal window (frame-first-window)))
+            (when (not (eq window (frame-first-window)))
               (delete-window window)))))))
   (unwind-protect (dap-delete-all-sessions)
     (when-let ((workspace-project (cl-find (+workspace-current-name)
