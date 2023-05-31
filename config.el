@@ -1072,10 +1072,13 @@
         :desc "Mark regexp"                     "%"     #'mc/mark-all-in-region-regexp)
   (after! multiple-cursors-core
     (add-to-list 'mc/cmds-to-run-once #'read-only-mode)
-    (add-to-list 'mc/cmds-to-run-for-all #'doom/delete-backward-word)
-    (add-to-list 'mc/cmds-to-run-for-all #'doom/forward-to-last-non-comment-or-eol)
-    (add-to-list 'mc/cmds-to-run-for-all #'mark-sexp)
-    (add-to-list 'mc/cmds-to-run-for-all #'eros-eval-last-sexp)
+    (dolist (cmd '(doom/delete-backward-word
+                   doom/forward-to-last-non-comment-or-eol
+                   mark-sexp
+                   eros-eval-last-sexp
+                   eval-last-sexp
+                   cae-eval-last-sexp))
+      (add-to-list 'mc/cmds-to-run-for-all cmd))
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
