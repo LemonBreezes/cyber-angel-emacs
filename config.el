@@ -758,3 +758,7 @@
  t)
 
 (setq cae-config-finished-loading t)
+
+;;; Config
+;; Here I am going over Doom's `config' module and deciding which keybindings I
+;; like, etc.
