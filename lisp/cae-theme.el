@@ -24,16 +24,6 @@
     (set-face-attribute 'markdown-code-face nil
                         :background 'unspecified)))
 
-(after! lsp-ui-doc
-  (defadvice! cae-theme-fixup-lsp-popup-a (string symbol)
-    "`lsp-ui-doc--render-buffer' does not set the entire doc to a
-uniform face. This function sets the entire doc to the face of
-the first character."
-    :filter-return #'lsp-ui-doc--render-buffer
-
-    (list string symbol)
-    ))
-
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
     (setq! modus-themes-org-blocks 'gray-background
