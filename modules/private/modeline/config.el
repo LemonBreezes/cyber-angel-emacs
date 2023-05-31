@@ -67,10 +67,12 @@
                                   eat-eshell-mode
                                   ))
 
-  (add-to-list 'minions-mode-line-modes
-               (assq 'compilation-in-progress mode-line-modes))
-  (add-to-list 'minions-mode-line-modes
-               (assq 'repeat-in-progress mode-line-modes))
+  (setq-default minions-mode-line-modes
+                (cons (assq 'compilation-in-progress mode-line-modes)
+                      (default-value minions-mode-line-modes)))
+  (setq-default minions-mode-line-modes
+                (cons (assq 'repeat-in-progress mode-line-modes)
+                      (default-value 'minions-mode-line-modes)))
   (minions-mode +1))
 
 (after! repeat
