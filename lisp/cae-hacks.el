@@ -132,14 +132,14 @@
 (defun cae-hacks-disable-gc ()
   "Raise the GC threshold to a large value and enable GC messages."
   (unless cae-hacks--gc-disabled
-    (setq cae-hacks--gcmh-mode        gcmh-mode)
+    (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
     (gcmh-mode -1)
     (setq cae-hacks--gc-messages      garbage-collection-messages
           cae-hacks--gc-percentage    gc-cons-percentage
           garbage-collection-messages t
           gc-cons-threshold           cae-hacks-gc-cons-threshold
           gc-cons-percentage          cae-hacks-gc-cons-percentage)
-    (when (timerp gcmh-idle-timer)
+    (when (timerp (bound-and-true-p gcmh-idle-timer))
       (cancel-timer gcmh-idle-timer))
     (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
     (setq cae-hacks--gc-disabled t)))
@@ -150,7 +150,8 @@
 
 (defun cae-hacks-enable-gc ()
   (when cae-hacks--gc-disabled
-    (gcmh-mode cae-hacks--gcmh-mode)
+    (and (fboundp 'gcmh-mode)
+         (gcmh-mode cae-hacks--gcmh-mode))
     (setq garbage-collection-messages cae-hacks--gc-messages
           gc-cons-percentage          cae-hacks--gc-percentage
           cae-hacks--gc-messages      nil
