@@ -129,8 +129,6 @@
              ("<f6>" nil "Exit" :exit t))
           (cl-loop for x in bindings
                    unless (string= "" (elt x 2))
-                   do (when (string= (car x) "'")
-                        (setcar x "="))
                    collect
                    (list (car x)
                          (intern (elt x 1))
