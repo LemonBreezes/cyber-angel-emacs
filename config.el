@@ -36,16 +36,17 @@
       (define-key doom-leader-map (kbd (concat "y " (char-to-string key))) binding)))
   (after! yasnippet (define-key yas-minor-mode-map (kbd "C-c &") nil))
   (define-key doom-leader-map "&" nil)
-  (setq which-key-replacement-alist
-        (cl-mapcar (lambda (x)
-                     (let ((case-fold-search nil))
-                       (when (car-safe (car x))
-                         (setf (car (car x))
-                               (replace-regexp-in-string "\\`C-c &"
-                                                         "\\`C-c y"
-                                                         (car-safe (car x)))))
-                       x))
-                   which-key-replacement-alist)))
+  (after! which-key
+    (setq which-key-replacement-alist
+          (cl-mapcar (lambda (x)
+                       (let ((case-fold-search nil))
+                         (when (car-safe (car x))
+                           (setf (car (car x))
+                                 (replace-regexp-in-string "C-c &"
+                                                           "C-c y"
+                                                           (car-safe (car x)))))
+                         x))
+                     which-key-replacement-alist))))
 
 ;;; UI
 
