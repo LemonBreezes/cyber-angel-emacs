@@ -865,9 +865,11 @@
 ;; use multiple languages.
 (use-package! sentex
   :defer t :init
-  (map! [remap kill-sentence] #'sentex-kill-sentence
-        [remap forward-sentence] #'sentex-forward-sentence
-        [remap backward-sentence] #'sentex-backward-sentence))
+  (if (version<= "30" emacs-version)
+      (setq forward-sentence-function #'cae-forward-sentence-function)
+    (map! [remap kill-sentence] #'sentex-kill-sentence
+          [remap forward-sentence] #'sentex-forward-sentence
+          [remap backward-sentence] #'sentex-backward-sentence)))
 
 
 ;;; Autocompletion
