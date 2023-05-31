@@ -32,7 +32,7 @@
   ;;("p" previous-line "Previous line" :column "Navigation")
   ;;("<" elfeed-search-first-entry "First entry" :column "Navigation")
   ;;(">" elfeed-search-last-entry "Last entry" :column "Navigation")
-  ("y" elfeed-search-yank "Yank" :column "Navigation")
+  ;;("y" elfeed-search-yank "Yank" :column "Navigation")
   ("+" elfeed-search-tag-all "Tag all" :column "Tag")
   ("-" elfeed-search-untag-all "Untag all" :column "Tag")
   ("m" elfeed-toggle-star "Star" :column "Tag")
