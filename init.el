@@ -54,7 +54,7 @@
        (debugger +lsp)
        direnv
        editorconfig
-       ;; (eval +overlay)
+       (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
        (lsp +peek)
