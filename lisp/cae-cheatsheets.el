@@ -7,12 +7,14 @@
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
 (defvar cae-cheatsheets-minibuffer--last-tab-index nil)
 
+(defvar cae-cheatsheets-tab--unique-identifier-fn #'tab-bar-tab-name-all)
+
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn
           cae-cheatsheets-minibuffer--last-workspace (and (featurep 'persp-mode)
                                                           (get-current-persp))
-          cae-cheatsheets-minibuffer--last-tab (tab-bar-tab-name-all)
+          cae-cheatsheets-minibuffer--last-tab (funcall cae-cheatsheets-tab--unique-identifier-fn)
           cae-cheatsheets-minibuffer--last-tab-index (tab-bar--current-tab-index))
     (hydra-keyboard-quit)))
 
@@ -26,7 +28,7 @@
        (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                             cae-cheatsheets-minibuffer--last-hydra
                             cae-cheatsheets-minibuffer--last-workspace))
-     (when (not (and (equal (tab-bar-tab-name-all)
+     (when (not (and (equal (funcall cae-cheatsheets-tab--unique-identifier-fn)
                             cae-cheatsheets-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
                          cae-cheatsheets-minibuffer--last-tab-index)))
@@ -35,7 +37,7 @@
                         nil nil #'equal)
              cae-cheatsheets-minibuffer--last-hydra))
      (when (and cae-cheatsheets-minibuffer--last-hydra
-                (equal (tab-bar-tab-name-all)
+                (equal (funcall cae-cheatsheets-tab--unique-identifier-fn)
                        cae-cheatsheets-minibuffer--last-tab)
                 (or (not (featurep 'persp-mode))
                     (eq (get-current-persp)
@@ -76,7 +78,7 @@
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (setf (alist-get (tab-bar-tab-name-all)
+    (setf (alist-get (funcall cae-cheatsheets-tab--unique-identifier-fn)
                      cae-cheatsheets-tab-bar-hydra-alist
                      nil nil #'equal)
           hydra-curr-body-fn)
@@ -85,7 +87,7 @@
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit))
-  (when-let ((hydra (alist-get (tab-bar-tab-name-all)
+  (when-let ((hydra (alist-get (funcall cae-cheatsheets-tab--unique-identifier-fn)
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil
                                #'equal)))
