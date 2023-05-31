@@ -4,7 +4,7 @@
 (defun +leetcode ()
   (interactive)
   (when (modulep! :ui workspaces)
-    (+workspace-switch "leetcode" t))
+    (+workspace-switch "*leetcode*" t))
   (leetcode))
 
 ;;;###autoload
@@ -12,6 +12,6 @@
   (interactive)
   (leetcode-quit)
   (when (and (modulep! :ui workspaces)
-             (+workspace-exists-p "leetcode"))
-    (+workspace-delete "leetcode")
+             (+workspace-exists-p "*leetcode*"))
+    (+workspace-delete "*leetcode*")
     (+workspace/other)))
