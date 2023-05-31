@@ -41,12 +41,7 @@
           :n "yc" #'git-link-commit)))
 
 (use-package! gitignore-templates
-  :defer t
-  :init
-  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
-    (map! :leader (:prefix vc-prefix
-                   :desc "Insert Ignore Template" :ng "i" #'gitignore-templates-insert
-                   :desc "New Ignore File" :ng "I" #'gitignore-templates-new-file))))
+  :defer t)
 
 (use-package! git-email
   :defer t
@@ -55,11 +50,11 @@
     (require 'git-email-mu4e)
     (git-email-mu4e-mode +1))
   (setopt git-email-subject-regexp
-         "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
+          "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
-        "RET" #'git-email-format-patch))
+          "RET" #'git-email-format-patch))
   (map! :map dired-mode-map
         :localleader
         "g" #'git-email-send-email))
