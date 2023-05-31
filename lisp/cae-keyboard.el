@@ -57,6 +57,9 @@
 
 ;; other frame prefix
 (define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
+(define-key key-translation-map (kbd "C-x 5 C-x 0") (kbd "C-x 5 0"))
+(define-key key-translation-map (kbd "C-x 5 C-x 1") (kbd "C-x 5 1"))
+(define-key key-translation-map (kbd "C-x 5 C-x 2") (kbd "C-x 5 2"))
 
 ;;; Universal argument
 
