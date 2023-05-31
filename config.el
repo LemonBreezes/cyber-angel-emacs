@@ -661,6 +661,12 @@
         "C-;" #'avy-isearch
         (:when (not (cae-display-graphic-p))
          "M-j" #'avy-isearch))
+  (map! :prefix "C-z"
+        "n" #'avy-goto-line-below
+        "p" #'avy-goto-line-above
+        "w" #'avy-goto-word-1
+        "C-z" #'suspend-frame)
+
   (when (modulep! :completion vertico)
     (after! vertico
       (map! :map vertico-map
