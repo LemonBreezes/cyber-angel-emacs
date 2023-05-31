@@ -16,9 +16,17 @@
       (dap-cpptools-setup))
     (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
 
+(after! gud
+  (setq gud-chdir-before-run nil)
+  (add-hook 'gud-mode-hook #'gud-tooltip-mode))
 (after! gdb-mi
   (setq gdb-show-main t
-        gdb-many-windows t)
+        gdb-many-windows t
+        gdb-display-io-nopopup t
+        gdb-show-changed-values t
+        gdb-delete-out-of-scope t
+        gdb-use-colon-colon-notation t
+        gdb-restore-window-configuration-after-quit t)
   ;; For some reason, just binding this key in `gdb-frames-mode-map' doesn't
   ;; work for me.
   (map! :map comint-mode-map
