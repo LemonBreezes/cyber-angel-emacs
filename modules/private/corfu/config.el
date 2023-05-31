@@ -44,7 +44,8 @@ derivative.")
   :config
   (when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
     (add-hook 'lsp-mode-hook (defun doom--add-lsp-capf ()
-                               (add-to-list 'completion-at-point-functions (cape-capf-buster #'lsp-completion-at-point)))
+                               (add-to-list 'completion-at-point-functions
+                                            (cape-capf-buster #'lsp-completion-at-point)))
               ;; Below is so that context specific completions in cape come first.
               :depth 1))
   (add-to-list 'completion-styles 'partial-completion t)
