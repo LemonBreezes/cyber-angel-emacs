@@ -202,6 +202,7 @@
   :config
   (after! parrot-rotate
     (setq parrot-rotate-animate-after-rotation t
+          parrot-rotate-highlight-after-rotation nil
           parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
           parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
     (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
