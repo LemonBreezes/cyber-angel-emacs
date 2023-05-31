@@ -704,8 +704,8 @@
     (define-key embark-region-map "T" #'titlecase-region)
     (define-key embark-heading-map "T" #'titlecase-line)))
 
-;; Type `?' during rectangular mark for a help buffer describing the `speedrect'
-;; commands.
+;; Type `?' during `rectangular-mark-mode' for a help buffer describing the
+;; `speedrect' commands.
 (use-package! speedrect)
 
 
