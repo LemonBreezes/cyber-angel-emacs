@@ -11,11 +11,14 @@
 (define-repeat-map other-window
   ("o" other-window
    "O" other-window-previous
+   "q" quit-window
+   "p" +popup/other
+   "K" doom/kill-this-buffer-in-all-windows
+   ;; Number row keys
    "!" delete-other-windows
    "@" split-window-below
    ";" split-window-right
-   ")" +workspace/close-window-or-workspace
-   "q" quit-window))
+   ")" +workspace/close-window-or-workspace))
 
 (define-repeat-map isearch-repeat
   ("s" isearch-repeat-forward
