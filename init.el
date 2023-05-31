@@ -1,8 +1,16 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(setq load-prefer-newer t)              ;Since I sometimes compile my config, I
-                                        ;want to make sure that I'm always
-                                        ;loading the latest version.
+;; Don't enable these options. They will break your config.
+(defvar cae-config-compilation-on-kill-enabled-p nil
+  "Whether on-kill native compilation is enabled.")
+(defvar cae-config-incremental-compilation-enabled-p nil
+  "Whether incremental native compilation is enabled.")
+
+
+;;Since I sometimes compile my config, I want to make sure that I'm always
+;;loading the latest version.
+(setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
+                                 cae-config-incremental-compilation-enabled-p)))
 (random t)                              ;Set the random seed.
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
