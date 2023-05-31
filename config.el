@@ -262,8 +262,7 @@
     (map! :map macrostep-mode-keymap
           "<f6>" #'cae-macrostep-cheatsheet))
   :config
-  (after! hercules
-    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide)))
+  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
 
 ;;; Tools
