@@ -463,7 +463,7 @@
   (map! :leader "g" #'gptel)
   :config
   (setq gptel-default-mode 'org-mode
-        gptel-prompt-string "*"))
+        gptel-prompt-string "* "))
 
 
 ;;; Editor
