@@ -226,5 +226,4 @@ mark the string and call `edit-indirect-region' with it."
      (when which-key-inhibit
        (which-key-show-keymap 'org-ai-global-mode-prefix-map)
        (setq unread-command-events
-             (listify-key-sequence (kbd "C-c M-a"))))))
-  )
+             (listify-key-sequence (kbd "C-c M-a")))))))
