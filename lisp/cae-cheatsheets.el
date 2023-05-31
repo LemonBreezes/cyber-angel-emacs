@@ -20,11 +20,11 @@
 
 (when (modulep! :ui workspaces)
   (add-hook 'persp-before-switch-functions
-            (cae-defun cae-cheatsheets-minibuffer-hydra-store-h ()
+            (cae-defun cae-cheatsheets-minibuffer-hydra-store-h (_ _)
               (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                                    cae-cheatsheets-workspace--last-hydra)))
   (add-hook 'persp-activated-functions
-            (cae-defun cae-cheatsheets-minibuffer-resume-h ()
+            (cae-defun cae-cheatsheets-minibuffer-resume-h (_)
               (setq cae-cheatsheets-minibuffer--last-hydra
                     (persp-parameter 'cae-cheatsheets-minibuffer--last-hydra)))))
 
