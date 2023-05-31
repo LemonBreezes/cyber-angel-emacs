@@ -7,4 +7,3 @@
 (package! vc-backup :recipe (:repo "LemonBreezes/vc-backup"))
 (package! magit-stats)
 (package! embark-vc)
-(package! debbugs)
