@@ -40,10 +40,16 @@
   ;; Parse buffer redirection >#buf and >#.
   (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
 
-  (setq eshell-input-filter #'cae-eshell-input-filter ; filter trivial commands
-                                                      ; from history
-        eshell-prompt-function #'cae-eshell-prompt)
+  ;; Filter trivial commands from history.
+  (setq eshell-input-filter #'cae-eshell-input-filter)
 
+  (with-eval-after-load "esh-opt"
+    ;; Python virtualenvs
+    ;; (require 'virtualenvwrapper)
+    ;; (venv-initialize-eshell)
+    (autoload 'epe-theme-lambda "eshell-prompt-extras")
+    (setq eshell-highlight-prompt nil
+          eshell-prompt-function 'epe-theme-lambda))
   (after! esh-module
     (when (>= emacs-major-version 29)
       (add-to-list 'eshell-modules-list 'eshell-elecslash))
