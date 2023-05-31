@@ -491,6 +491,9 @@
   (when (modulep! :editor evil)
     (load! "lisp/cae-evil"))
 
+  (when (modulep! :editor fold)
+    (add-hook 'doom-first-file-hook #'vimish-fold-global-mode))
+
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project-bookmark"))
   (autoload 'cae-project-bookmark-set (concat doom-private-dir
