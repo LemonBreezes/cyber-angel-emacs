@@ -2,7 +2,7 @@
 
 (load! "lisp/cae-logs")
 (load! "lisp/cae-multi")
-;;(load! "lisp/cae-keyboard")
+(load! "lisp/cae-keyboard")
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
