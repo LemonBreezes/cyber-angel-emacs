@@ -1,5 +1,26 @@
 ;;; lisp/cae-workspaces.el -*- lexical-binding: t; -*-
 
+;;; Pause and resume cheatsheets with the minibuffer
+
+(defun cae-cheatsheets-hydra-quit-h (&rest _)
+  (hydra-keyboard-quit))
+
+(defun cae-cheatsheets-hydra-pause-h (&rest _)
+  (when hydra-curr-map
+    (if (modulep! :ui workspaces)
+        (ring-insert hydra-pause-ring hydra-curr-body-fn))
+    (hydra-keyboard-quit)))
+
+(defun cae-cheatsheets-hydra-resume-h (&rest _)
+  (unless (zerop (ring-length hydra-pause-ring))
+    (run-with-timer 0.001 nil hydra-pause-ring)))
+
+(after! hydra
+  (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
+  (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h))
+
+;;; Pause and resume with workspaces
+
 (defun cae-cheatsheets-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (set-persp-parameter 'hydra-pause-ring
@@ -16,3 +37,9 @@
   (after! persp-mode
     (add-hook 'persp-before-switch-functions #'cae-cheatsheets-hydra-pause-h)
     (add-hook 'persp-activated-functions #'cae-cheatsheets-hydra-resume-h)))
+
+;;; Quit before switching tabs
+
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
+(after! hercules
+  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
