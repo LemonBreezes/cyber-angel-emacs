@@ -176,10 +176,7 @@
              ("~" special-lispy-tilde "")
              ("_" special-lispy-underscore "")
              ("'" lispy-tick "")
-             ("," nil "")
-             ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
-                               (cae-keyboard-kbd-reverse "'"))
-              "Eval"))))
+             ("," nil ""))))
       (dolist (binding bindings)
         (define-key lispy-mode-map (car binding) (cadr binding)))
       (eval
