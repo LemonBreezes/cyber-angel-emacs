@@ -53,20 +53,6 @@
     ("v" vertico-scroll-down)
     (:exit "V" vertico-scroll-up))
 
-  (define-repeat-map View-scroll-half-page-forward
-    ("v" View-scroll-half-page-forward)
-    (:exit "V" View-scroll-half-page-backward))
-  (define-repeat-map View-scroll-half-page-backward
-    ("v" View-scroll-half-page-backward)
-    (:exit "V" View-scroll-half-page-forward))
-  (define-repeat-map my-View-scroll-half-page-forward-other-window
-    ("v" my-View-scroll-half-page-forward-other-window)
-    (:exit "V" my-View-scroll-half-page-backward-other-window))
-  (define-repeat-map my-View-scroll-half-page-backward-other-window
-    ("v" my-View-scroll-half-page-backward-other-window)
-    (:exit "V" my-View-scroll-half-page-forward-other-window))
-
-
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
 
