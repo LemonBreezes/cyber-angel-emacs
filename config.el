@@ -459,6 +459,7 @@
         "M-n" #'copilot-next-completion
         "M-p" #'copilot-previous-completion)
 
+  (add-hook 'window-configuration-change-hook #'copilot--clear-overlay)
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
 
