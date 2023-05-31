@@ -40,7 +40,8 @@ overriding other keymaps."
 (defun +which-key-add-key-based-replacements-a
     (oldfun key-sequence &rest args)
   (when (string-prefix-p "SPC " key-sequence)
-    (apply oldfun (concat "DEL " (string-remove-prefix "SPC " key-sequence))
+    (apply oldfun
+           (string-replace "SPC " "DEL " key-sequence)
            args))
   (apply oldfun key-sequence args))
 (advice-add #'which-key-add-key-based-replacements :around
