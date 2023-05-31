@@ -247,7 +247,9 @@ mark the string and call `edit-indirect-region' with it."
   (goto-char pt)
   (unwind-protect
       (save-mark-and-excursion
-        (cond ((eq avy-command 'avy-goto-line)
+        (cond ((or (eq avy-command 'avy-goto-line)
+                   (memq this-command '(avy-goto-line-above
+                                        avy-goto-line-below)))
                (progn (goto-char (line-beginning-position))
                       (set-mark (point))
                       (goto-char (line-end-position))))
