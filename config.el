@@ -531,7 +531,9 @@
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
   (defun cae-ask-kill-buffer ()
     "Ask to diff, save or kill buffer"
-    (if (and (buffer-file-name) (buffer-modified-p))
+    (if (and (buffer-file-name)
+             (buffer-modified-p)
+             (file-exists-p (buffer-file-name)))
         (progn (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                         if (or (eq ch ?k) (eq ch ?K))
                         return t
@@ -541,7 +543,7 @@
                         return (progn (save-buffer) t)
                         if (memq ch '(?q ?Q))
                         return nil)
-               (when cae-diff-window
+               (when (window-live-p cae-diff-window)
                  (delete-window cae-diff-window)
                  (setq cae-diff-window nil)))
       t))
