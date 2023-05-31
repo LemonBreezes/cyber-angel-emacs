@@ -111,14 +111,14 @@
  `(map! :prefix "C-z"
         "n" #'avy-goto-line-below
         "p" #'avy-goto-line-above
-        "y" #'avy-copy-region
+        ;;"y" #'avy-copy-region
         "c" #'avy-goto-char
-        "m" #'avy-move-region
+        ;;"m" #'avy-move-region
         "l" #'avy-goto-line
         "e" #'avy-goto-end-of-line
         "." #'cae-avy-symbol-at-point
-        "k" #'avy-kill-region
-        "w" #'avy-kill-ring-save-region
+        ;;"k" #'avy-kill-region
+        ;;"w" #'avy-kill-ring-save-region
         "j" #'avy-goto-word-1
         "o" #'switch-window
         "0" #'switch-window-then-delete
