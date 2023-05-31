@@ -71,6 +71,7 @@
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
+  (+log "hello hydra!")
   (when (bound-and-true-p hydra-curr-map)
     (setf (alist-get (cons (tab-bar--current-tab-index) (tab-bar--current-tab))
                      cae-cheatsheets-tab-bar-hydra-alist
