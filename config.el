@@ -526,7 +526,7 @@
 
 ;;; Term
 
-;; Enable Fish autocompletion in `read-shell-command'.
+;; Enable Fish autocompletion in `read-shell-command'
 (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
 (after! em-glob
