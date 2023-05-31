@@ -182,7 +182,7 @@
              ("'" special-lispy-tick) ;`special-lispy-eval-other-window' lost
              ("=" special-lispy-eval-other-window))))
       (dolist (binding bindings)
-        (define-key lispy-mode-map (car binding) (cdr binding))))
+        (define-key lispy-mode-map (car binding) (cadr binding))))
 
     ;; TODO digit argument
     (eval `(defhydra lh-knight ()
