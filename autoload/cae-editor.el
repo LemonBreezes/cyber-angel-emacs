@@ -2,6 +2,7 @@
 
 ;;;###autoload
 (defun cae-kill-buffer (&optional buffer-or-name)
+  (interactive "bKill buffer: ")
   (catch 'quit
     (save-window-excursion
       (with-current-buffer buffer-or-name
