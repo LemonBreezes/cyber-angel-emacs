@@ -102,3 +102,11 @@
   (if view-mode
       (View-quit)
     (funcall oldfun)))
+
+(defadvice! +max-out-gc-a (oldfun &rest args)
+  :around #'save-some-buffers
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-percentage 99)
+  (let ((gcmh-low-cons-threshold most-positive-fixnum)
+        (gcmh-high-cons-threshold most-positive-fixnum))
+    (apply oldfun args)))
