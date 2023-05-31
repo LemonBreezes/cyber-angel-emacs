@@ -25,8 +25,7 @@
 (setenv "GIT_PAGER" "cat")
 
 ;; Very small screen on Android
-(when (and (string-suffix-p "-android" system-configuration)
-           (frame-width (selected-frame))
+(when (and (frame-width (selected-frame))
            (< (frame-width (selected-frame)) 100))
   (global-visual-line-mode +1))
 
