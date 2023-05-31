@@ -90,5 +90,8 @@
 (hercules-def
  :toggle-funs #'embark-collect-cheatsheet
  :keymap 'embark-collect-mode-map
- :hide-funs '()
+ :hide-funs '(digit-argument negative-argument describe-mode
+ forward-button backward-button +popup/quit-window
+ beginning-of-buffer end-of-buffer embark-collect-cheatsheet
+ mouse-face)
  :transient t)
