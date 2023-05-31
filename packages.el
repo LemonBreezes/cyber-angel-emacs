@@ -90,4 +90,4 @@
 (package! consult-yasnippet)
 
 ;; cae-corfu.el
-(package! cape-yasnippet)
+(package! cape-yasnippet :recipe (:host github :repo "elken/cape-yasnippet"))
