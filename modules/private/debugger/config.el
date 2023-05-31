@@ -29,7 +29,7 @@
       (require 'dap-cpptools)
       (dap-cpptools-setup))
     (when (modulep! :tools eval)
-      (set-repl-handler! 'c++-mode #'cae-debugger/open-repl))))
+      (set-repl-handler! 'c++-mode #'cae-debugger-open-repl))))
 
 (after! gud
   (setq gud-chdir-before-run nil)
