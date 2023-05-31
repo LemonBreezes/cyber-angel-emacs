@@ -37,7 +37,7 @@ expansion occurs within the parent Emacs session.")
     (require 'exwm-systemtray)
     (exwm-randr-enable)
 
-    (setopt exwm-systemtray-height (line-pixel-height))
+    (setq exwm-systemtray-height (line-pixel-height))
     (exwm-systemtray-enable)
 
     (unless (modulep! :ui workspaces)
