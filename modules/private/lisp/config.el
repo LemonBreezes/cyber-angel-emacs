@@ -3,8 +3,7 @@
 (use-package! nameless
   :defer t
   :init
-  (when (display-graphic-p)
-    (add-hook 'emacs-lisp-mode-hook #'nameless-mode))
+  (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
   :config
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
