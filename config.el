@@ -199,8 +199,7 @@
    '(gnumake marker-files
      ("GNUmakefile")
      project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-   projectile-project-types :test #'equal)
-  )
+   projectile-project-types :test #'equal))
 
 
 (after! tramp
