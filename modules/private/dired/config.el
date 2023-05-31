@@ -113,6 +113,13 @@
         [remap next-buffer] #'cae-dired-next-buffer))
 (map! :leader "o-" #'cae-dired-jump)
 
-(add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
+(add-hook 'find-directory-functions
+          (cae-defun cae-dired-load-dirvish-h (dir)
+            (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
+            (require 'dirvish nil t)
+            (unless (memq #'dired-noselect find-directory-functions)
+              (add-hook 'find-directory-functions #'dired-noselect t))
+            (dired-noselect dir))
+          t)
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
