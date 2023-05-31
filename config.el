@@ -467,7 +467,7 @@
 
   (when (modulep! :checkers spell)
     (after! spell-fu
-      (add-hook! 'nxml-mode-hook
+      (add-hook 'nxml-mode-hook
         (cae-defun cae-disable-spell-fu-h ()
           (spell-fu-mode -1)))))
 
