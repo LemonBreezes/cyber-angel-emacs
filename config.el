@@ -222,7 +222,7 @@
 
 ;;; Editor
 
-;;(load! "lisp/cae-multi")
+(load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-repeat")
 (map! "C-<f4>" #'tab-close)
