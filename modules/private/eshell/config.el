@@ -39,7 +39,7 @@
         eat-enable-yank-to-terminal t)
 
   ;; Temporarily disable some modes when EAT is active.
-  (add-hook! 'eat--eshell-process-running-mode-hook
+  (add-hook 'eat--eshell-process-running-mode-hook
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
