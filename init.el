@@ -39,6 +39,7 @@
        :checkers
        (syntax +childframe)
        (spell +everywhere)
+       grammar
 
        :tools
        (debugger +lsp)
