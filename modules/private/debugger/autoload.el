@@ -14,7 +14,7 @@
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
-  ;;(dap-delete-all-sessions)
+  (dap-delete-all-sessions)
   ;;(cae-debugger-dap-quit-session-a nil)
   (when-let ((workspace-project (cl-find (+workspace-current-name)
                                          (projectile-relevant-known-projects)
