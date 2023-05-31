@@ -125,17 +125,29 @@
 
 ;;; GC hacks
 
+(defvar cae-hacks--gc-messages nil)
+
+(defun cae-hacks-transiently-enable-gc-messages ()
+  (setq cae-hacks--gc-messages garbage-collection-messages
+        garbage-collection-messages t)
+  (run-with-idle-timer
+   10 nil
+   (lambda ()
+     (setq garbage-collection-messages cae-hacks--gc-messages
+           cae-hacks--gc-messages nil))))
+
 (defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
   (setq gc-cons-threshold cae-hacks-big-gc-threshold
         gc-cons-percentage cae-hacks-big-gc-percentage)
   (let ((gcmh-low-cons-threshold cae-hacks-big-gc-threshold)
-        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold)
-        (garbage-collection-messages t))
+        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold))
+    (cae-hacks-transiently-enable-gc-messages)
     (apply oldfun args)))
 
 (defun cae-hacks-max-out-gc-h ()
   (setq gc-cons-threshold cae-hacks-big-gc-threshold
-        gc-cons-percentage cae-hacks-big-gc-percentage))
+        gc-cons-percentage cae-hacks-big-gc-percentage)
+  (cae-hacks-transiently-enable-gc-messages))
 
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
