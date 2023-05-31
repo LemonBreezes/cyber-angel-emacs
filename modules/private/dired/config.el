@@ -107,7 +107,6 @@
         "M-j" #'dirvish-fd-jump
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
-        "M-n" nil                       ; for `avy-goto-line-below'
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer))
 
