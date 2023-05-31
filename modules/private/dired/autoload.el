@@ -31,4 +31,4 @@
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file)))
-    (funcall oldfun wildcards)))
+    (funcall oldfun file wildcards)))
