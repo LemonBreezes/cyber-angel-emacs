@@ -265,6 +265,7 @@
             (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
+(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
