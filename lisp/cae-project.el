@@ -29,14 +29,6 @@
       (bookmark-load bookmark-default-file)
       bookmark-alist)))
 
-(defmacro cae-project--with-bookmark-file (file &rest body)
-  "Execute BODY with FILE as the bookmark file."
-  (declare (indent defun))
-  `(let ((bookmark-default-file ,file))
-     (unless (file-exists-p ,file)
-       (make-directory (file-name-directory ,file) t))
-     ,@body))
-
 (defun cae-project--bookmark-alist (&optional project)
   "Return the bookmark alist for the current project."
   (let ((file (cae-project--get-bookmark-file project)))
@@ -44,12 +36,19 @@
         (puthash file (cae-project--bookmark-alist-from-file file)
                  cae-project-bookmark-cache))))
 
+(defmacro cae-project--with-bookmark-alist (project &rest body)
+  "Execute BODY with the bookmark alist for PROJECT."
+  (declare (indent defun))
+  `(let ((bookmark-alist (cae-project--bookmark-alist ,project))
+         (bookmark-default-file (cae-project--get-bookmark-file ,project))
+         (bookmark-watch-bookmark-file nil))
+     (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file)
+     ,@body))
+
 (defun cae-project-bookmark-set (&optional name no-overwrite)
   "Set a bookmark in the current project."
   (interactive (list nil current-prefix-arg))
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
+  (cae-project--with-bookmark-alist nil
     (bookmark-set name no-overwrite)
     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
 
@@ -63,8 +62,7 @@
      (list (read-file-name (format "Load bookmarks from: (%s) " default)
 			   (file-name-directory default) default 'confirm)
 	   prefix nil prefix)))
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
+  (cae-project--with-bookmark-alist nil
     (ignore bookmark-alist bookmark-default-file)
     (bookmark-load file overwrite no-msg default)
     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
