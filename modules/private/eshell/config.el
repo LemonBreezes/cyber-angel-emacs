@@ -43,7 +43,8 @@
                 (message "Type M-RET/C-M-m to exit char mode.")))
 
   (map! :map eat-eshell-char-mode-map
-        "<tab>" #'eat-self-input)
+        "<tab>" #'eat-self-input
+        "<return>" #'eat-self-input)
 
   (add-hook! '(eat--eshell-char-mode-hook
                eat--eshell-semi-char-mode-hook
