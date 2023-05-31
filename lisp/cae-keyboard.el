@@ -290,3 +290,9 @@
   :defer t
   :init
   (add-hook 'c-mode-common-hook #'smart-semicolon-mode))
+
+(use-package! electric-spacing
+  :defer t
+  :init
+  (add-hook 'c-mode-common-hook #'electric-spacing-mode)
+  (add-hook 'python-mode-hook #'electric-spacing-mode))
