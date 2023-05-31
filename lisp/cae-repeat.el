@@ -7,7 +7,7 @@
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
-  (setq repeat-exit-timeout 5)
+  (setq repeat-exit-timeout nil)
 
   (define-repeat-map other-window
     ("o" other-window
@@ -32,7 +32,8 @@
     ("C-@" pop-global-mark))
 
   (define-repeat-map scroll-up-command
-    ("v" scroll-up-command))
+    ("v" scroll-up-command)
+    (:exit "V" scroll-down-command))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
