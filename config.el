@@ -293,6 +293,8 @@
 
 ;;; Editor
 
+(load! "lisp/cae-repeat")
+
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
@@ -318,7 +320,10 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-(load! "lisp/cae-repeat")
+;; Kill buffers without asking.
+(setq kill-buffer-query-functions
+  (remq 'process-kill-buffer-query-function
+         kill-buffer-query-functions))
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
