@@ -86,7 +86,7 @@
            (kbd "C-~")
            (kbd (concat "C-" (cae-keyboard-remap "~")))))))
 
-;;; Universal argument
+;;; Digit arguments
 
 (eval `(map! :map universal-argument-map
              ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
@@ -109,6 +109,19 @@
 ;;  (home-row-numbers)
 ;;  (map! :map universal-argument-map
 ;;        "l" #'cae-keyboard-insert-current-prefix))
+(after! embark
+  (eval `(map! :map embark-collect-mode-map
+               ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "2") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "3") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "4") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "5") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "6") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
+               ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument)))
+
 
 ;;; Lispy
 
