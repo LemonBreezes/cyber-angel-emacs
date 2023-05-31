@@ -1,7 +1,7 @@
 ;;; private/eshell/autoload/eshell.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +eshell-input-filter (str)
+(defun cae-eshell-input-filter (str)
   "Filter some trivial commands from the input history."
   (not (or (string-blank-p str)
            (equal "cd" str)
