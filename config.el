@@ -1214,7 +1214,8 @@
 (use-package! org-ai
   :defer t
   :config
-  (setq org-ai-default-chat-model "gpt-4"))
+  (setq org-ai-default-chat-model "gpt-4"
+        org-ai-default-completion-model "gpt-4"))
 
 ;;; Appendix
 
