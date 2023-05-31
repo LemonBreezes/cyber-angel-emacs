@@ -37,6 +37,7 @@
 
 (package! pp+)
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
+(package! ts-movement :recipe (:host github :repo "haritkapadia/ts-movement"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
