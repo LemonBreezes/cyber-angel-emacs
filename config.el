@@ -762,7 +762,8 @@
                          (cae-defun cae-restore-point-h ()
                            (when (bound-and-true-p restore-point-mode)
                              (rp/cond-restore-point)))))
-      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)))
+      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+      (add-hook 'doom-escape-hook #'cae-restore-point-h)))
   (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
 
 (use-package! symbol-overlay
