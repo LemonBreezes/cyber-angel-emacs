@@ -83,9 +83,8 @@
              nil
              (lambda (s)
                (not
-                (cl-member s '("experiments" "eshell" "packages" "misc-files"
-                               "snippets" ".local" ".git" "shared-local"
-                               "media")
+                (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
+                               "shared-local" "media")
                            :test (lambda (x y)
                                    (string= (file-name-nondirectory x)
                                             y)))))))
