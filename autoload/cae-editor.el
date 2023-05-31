@@ -161,3 +161,20 @@ This is the format used on Reddit for code blocks."
                  (sentex-backward-sentence arg)
                (sentex-forward-sentence arg)))
     (forward-sentence-default-function arg)))
+
+;;;###autoload
+(defun cae-edit-indirect-dwim (beg end &optional display-buffer)
+  "DWIM version of edit-indirect-region.
+When region is selected, behave like `edit-indirect-region'
+but when no region is selected and the cursor is in a 'string' syntax
+mark the string and call `edit-indirect-region' with it."
+  (interactive
+   (if (or (use-region-p) (not transient-mark-mode))
+       (prog1 (list (region-beginning) (region-end) t)
+         (deactivate-mark))
+     (if (nth 3 (syntax-ppss))
+         (list (beginning-of-thing 'edit-indirect-string)
+               (end-of-thing 'edit-indirect-string)
+               t)
+       (user-error "No region marked and not inside a string."))))
+  (edit-indirect-region beg end display-buffer))
