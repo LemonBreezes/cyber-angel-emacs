@@ -48,3 +48,6 @@
 (defvar home-row-numbers nil)
 
 (home-row-numbers)
+
+(map! :map universal-argument-map
+      "l" #'cae-keyboard-insert-current-prefix)
