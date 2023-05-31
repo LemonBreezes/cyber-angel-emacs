@@ -774,9 +774,9 @@
     (map! :map hungry-delete-mode-map
           [remap backward-delete-char-untabify] #'sp-backward-delete-char
           [remap c-electric-backspace] #'sp-backward-delete-char
-          [remap c-electric-delete-forward] #'cae-delete
+          [remap c-electric-delete-forward] #'cae-delete-char
           [remap delete-backward-char] #'sp-backward-delete-char
-          [remap delete-char] #'cae-delete
+          [remap delete-char] #'cae-delete-char
           [remap delete-forward-char] #'cae-delete))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
