@@ -768,7 +768,7 @@
         (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)))
   (add-hook 'restore-point-mode #'cae-restore-point-enable-in-minibuffer-h)
-  (advice-add #'rp/restore-point-position :after #'cae-recenter-and-flash-maybe))
+  (advice-add #'rp/restore-point-position :after #'cae-recenter-maybe-h))
 
   
 ;;; Autocompletion
