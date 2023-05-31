@@ -91,27 +91,6 @@
   (after! esh-mode
     (map! :map eshell-mode-map))
 
-  ;; (add-to-list 'eshell-modules-list 'eshell-smart)
-  ;; (after! em-smart
-  ;;   (setq! eshell-where-to-jump 'begin
-  ;;          eshell-review-quick-commands t
-  ;;          eshell-smart-space-goes-to-end t))
-
-  ;; ;; Glue `em-smart' with Evil.
-  ;; ;; Not sure why using `eshell-smart-display-navigate-list' doesn't work for this.
-  ;; (defadvice! +eshell-smart-disply-move-a (orig-fn &rest args)
-  ;;   :around #'eshell-smart-display-move
-  ;;   (if (memq this-command '(evil-normal-state
-  ;;                            evil-escape))
-  ;;       (let ((this-command 'self-insert-command))
-  ;;         (apply orig-fn args))
-  ;;     (apply orig-fn args)))
-
-  ;; (use-package! esh-autosuggest
-  ;;   :defer t
-  ;;   :init
-  ;;   (add-hook 'eshell-mode-hook #'esh-autosuggest-mode))
-
   ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files
   (load! "+fish-completion-annotation-fix")
 
