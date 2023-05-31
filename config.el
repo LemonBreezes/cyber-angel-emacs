@@ -1169,10 +1169,10 @@
           "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-        eshell-visual-subcommands '(("gh" "repo" "fork")
+        eshell-visual-subcommands `(("gh" "repo" "fork")
                                     ("geth" "attach")
-                                    ("git" "log" "diff" "show")
-                                    )
+                                    ,(unless (string= (getenv "GIT_PAGER") "cat")
+                                       '("git" "log" "diff" "show")))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
