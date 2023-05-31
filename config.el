@@ -567,8 +567,8 @@
      "C-M-f" #'sp-forward-sexp
      "C-M-b" #'sp-backward-sexp
      "C-M-u" #'sp-backward-up-sexp
-     "C-M-n" #'sp-up-sexp               ;Gets overridden.
-     "C-M-p" #'sp-backward-down-sexp    ;Gets overridden.
+     ;;"C-M-n" #'sp-up-sexp               ;Gets overridden.
+     ;;"C-M-p" #'sp-backward-down-sexp    ;Gets overridden.
      "C-M-d" #'sp-down-sexp
      "C-M-a" #'sp-beginning-of-sexp
      "M-(" #'sp-wrap-round
@@ -584,7 +584,15 @@
      ;; My version of `sp-smartparens-bindings'.
      "C-M-e" #'sp-up-sexp
      "C-M-a" #'sp-backward-down-sexp
-     )))
+     "C-M-n" #'sp-next-sexp
+     "C-M-p" #'sp-previous-sexp
+     "C-M-k" #'sp-kill-sexp
+     "M-D"   #'sp-splice-sexp
+     "C-M-<backspace>" #'sp-splice-sexp-killing-backward
+     "C-M-<delete>" #'sp-splice-sexp-killing-forward
+     "C-]" #'sp-select-next-thing-exchange
+     "C-M-]" #'sp-select-next-thing
+     "C-M-@" #'sp-mark-sexp)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
