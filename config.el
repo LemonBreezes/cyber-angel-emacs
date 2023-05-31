@@ -286,6 +286,11 @@
     (after! eshell
       (remove-hook 'eshell-mode-hook #'smartparens-mode))))
 
+(add-hook 'eshell-mode-hook #'electric-pair-local-mode)
+(add-hook 'c-mode-common-hook #'electric-pair-local-mode)
+(map! [remap newline] nil)
+(electric-indent-mode +1)
+
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
 (setq read-extended-command-predicate #'command-completion-default-include-p)
