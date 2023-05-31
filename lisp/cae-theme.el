@@ -25,9 +25,6 @@
     (after! lsp-mode
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)))
-  (after! highlight-context-line
-    (set-face-attribute 'highlight-context-line-face nil
-                        :extend t))
   (after! goggles
     (set-face-attribute 'goggles-added nil
                         :background (face-attribute 'hl-line :background)))
