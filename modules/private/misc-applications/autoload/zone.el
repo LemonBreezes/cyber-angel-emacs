@@ -29,5 +29,5 @@
      "Program: "
      (mapcar 'symbol-name zone-programs))))
   (require 'zone)
-  (let ((zone-programs (list (intern pgm))))
+  (let ((zone-programs (vector (intern pgm))))
     (zone)))
