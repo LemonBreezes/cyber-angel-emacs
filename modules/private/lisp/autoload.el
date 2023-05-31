@@ -9,7 +9,12 @@
   (interactive)
   (if (and (minibufferp)
            (string= (minibuffer-prompt) "Eval: ")
-           (comment-only-p (line-beginning-position) (line-end-position)))
+           ;; Insert a newline if either the sexp is unbalanced or there is no
+           ;; non-commented sexp.
+           (or (comment-only-p (line-beginning-position) (line-end-position))
+               (condition-case error
+                   (scan-sexps (point-min) (point-max))
+                 (scan-error t))))
       (progn
         (insert-char ?\n 1)
         (indent-according-to-mode))
