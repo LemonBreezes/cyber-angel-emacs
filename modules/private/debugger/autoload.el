@@ -51,14 +51,16 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
-(defvar cae-debugger--session-workspace-map (make-hash-table :test #'equal)
-  "Hash table of (session . workspace) pairs.")
+(defvar cae-debugger--session-workspace-map ()
+  "Alist of (session . workspace) pairs.")
 
 ;;;###autoload
 (defun cae-debugger-mark-session-h ()
   "Mark the current session with the current workspace."
   (when-let ((session (dap--cur-session)))
-    (puthash session (+workspace-current-name) cae-debugger--session-workspace-map)))
+    (setf (alist-get session cae-debugger--session-workspace-map
+                     nil nil #'equal)
+          (+workspace-current-name))))
 
 ;;;###autoload
 (defun cae-debugger-dap-switch-to-workspace-h ()
