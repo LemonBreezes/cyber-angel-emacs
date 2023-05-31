@@ -754,7 +754,10 @@
 
 (use-package! symbol-overlay
   :defer t :init
-  (map! "M-i" #'symbol-overlay-put))
+  (map! "M-i" #'symbol-overlay-put)
+  :config
+  (map! :map symbol-overlay-map
+        "<f8>" #'cae-symbol-overlay-cheatsheet))
 
 
 ;;; Autocompletion
