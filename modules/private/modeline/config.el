@@ -106,6 +106,7 @@
         (setq args (append args '("28.1"))))
       (apply oldfun args))
     (add-hook 'doom-first-file-hook #'parrot-mode)
+    (advice-add #'parrot-mode :around #'doom-shut-up-a)
     :config
     (setq parrot-animate 'hide-static
           parrot-rotate-animate-after-rotation nil
