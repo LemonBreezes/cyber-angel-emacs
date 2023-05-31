@@ -397,7 +397,7 @@
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
                     "/run/current-system/profile/sbin"))
-      (add-to-list 'tramp-remote-path path nil #'string=)))
+      (add-to-list 'tramp-remote-path path)))
 
   ;; Use Emacs as the default editor for shell commands.
   ;; `dwim-shell-command'.
