@@ -54,6 +54,8 @@
   (package! mc-extras))
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
 (package! avy-embark-collect)
+(use-package! restore-point
+  :recipe (:host github :repo "arthurcgusmao/restore-point"))
 
 ;; These are used for their autoloads.
 (package! ialign)
