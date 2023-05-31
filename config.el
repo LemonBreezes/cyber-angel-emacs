@@ -220,6 +220,7 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp
+    (setq! lsp-lens-enable nil)
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
