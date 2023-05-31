@@ -68,3 +68,9 @@
 
   ;; Use the system's `libvterm' if available.
   (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+
+;; A generic adviser for responding yes to yes or no prompts automatically.
+(defun cae-hacks-always-yes-a (oldfun &rest args)
+  (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
+            ((symbol-function #'y-or-n-p) (symbol-function #'always)))
+    (apply oldfun args)))
