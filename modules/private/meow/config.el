@@ -186,8 +186,7 @@
         :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
-        `((?h . ?h)
-          (?x . ?x)
+        `((?x . ?x)
           (?\; . ?\;)                   ;For embark
           (?\s . ?\s)                   ;For pop mark
           ;; For popups
