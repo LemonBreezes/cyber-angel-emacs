@@ -20,7 +20,8 @@
   (dolist (p (cdr (lookup-key doom-leader-map "&")))
     (cl-destructuring-bind (key . binding) p
       (define-key doom-leader-map (kbd (concat "S " (char-to-string key))) binding)))
-  (after! yasnippet (define-key yas-minor-mode-map (kbd "C-c &") nil))
+  (after! yasnippet
+    (define-key yas-minor-mode-map (kbd "C-c &") nil))
   (define-key doom-leader-map "&" nil)
   (after! which-key
     (setq which-key-replacement-alist
@@ -46,7 +47,7 @@
   (map! (:prefix ("x" . "fold")
          "k"     #'vimish-fold-delete
          "K" #'vimish-fold-delete-all
-         "t"     #'+fold/toggle
+         "x"     #'+fold/toggle
          "C" #'+fold/close-all
          "o"     #'+fold/open
          "O" #'+fold/open-all)))
