@@ -113,8 +113,11 @@
 ;;; Distinguishing dual-purpose keycodes
 
 ;; Look up the "TAB" key in the current major mode. If it is bound and "<tab>"
-;; is not bound, then bind it also to <tab>. This way, our global <tab> key
-;; does not bind "C-i" everywhere. This doesn't work for terminal Emacs.
+;; is not bound, then bind it also to <tab>. This way, our global <tab> key does
+;; not bind "C-i" everywhere. Do not use this code in terminal Emacs. For
+;; terminal Emacs, I would need to wrap the `C-i' and `C-S-i' commands so that
+;; they run the commands bound to <tab> and <backtab> respectively if
+;; `display-graphic-p' is nil.
 (when (display-graphic-p)
   (defun cae-keyboard-conditionally-remap-C-i ()
     (run-at-time
