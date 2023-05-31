@@ -120,6 +120,11 @@
   (after! eros
     (setq eros-eval-result-prefix "⟹ ")) ;Pretty arrow
 
+  (after! ffap
+    ;; Do not count angle brackets as part of file names.
+    (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
+          (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
+
   ;; Do not spam me with warnings
   (after! warnings
     (setq warning-minimum-level :emergency
@@ -580,6 +585,10 @@
         (:after man
          :map Man-mode-map
          "o" #'ace-link-man)
+        (:after vertico
+         (:map vertico-map
+          "<prior>" #'vertico-scroll-down
+          "<next>" #'vertico-scroll-up))
         (:after eww
          :map eww-mode-map
          "o" #'ace-link-eww)
