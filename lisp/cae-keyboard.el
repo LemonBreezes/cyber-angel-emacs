@@ -119,7 +119,7 @@
              (,(cae-keyboard-kbd "j") special-lispy-down "")
              (,(cae-keyboard-kbd "k") special-lispy-up "")
              (,(cae-keyboard-kbd "d") special-lispy-different "Move")
-             (,(cae-keyboard-kbd "o") special-lispy-other-mode "")
+             (,(cae-keyboard-kbd "o") special-lispy-goto-mode "Other")
              (,(cae-keyboard-kbd "p") special-lispy-eval-other-window "Eval")
              (,(cae-keyboard-kbd "P") special-lispy-paste "Edit")
              (,(cae-keyboard-kbd "y") special-lispy-occur "Move")
