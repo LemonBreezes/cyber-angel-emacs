@@ -40,7 +40,9 @@
        ,(cae-keyboard-kbd "2") tab-new
        "0" tab-close
        "1" tab-close-other
-       "2" tab-new))
+       "2" tab-new)
+      (:enter tab-select)
+      (:exit "/" +workspace/display))
    t)
 
   (eval
@@ -64,7 +66,9 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8))
+       "9" +workspace/switch-to-8)
+      (:enter +workspace/display)
+      (:exit "/" tab-select))
    t)
 
   ;; Currently part of `other-window' repeat map
