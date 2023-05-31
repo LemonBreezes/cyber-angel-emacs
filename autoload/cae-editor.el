@@ -219,21 +219,6 @@ mark the string and call `edit-indirect-region' with it."
       (forward-char 1))))
 
 ;;;###autoload
-(defun cae-avy-use-post-style-a (oldfun &rest args)
-  (let ((avy-style 'post))
-    (apply oldfun args)))
-
-;;;###autoload
-(defun cae-avy-indent-line-overlay-a (oldfun &rest args)
-  (let ((avy-indent-line-overlay t))
-    (apply oldfun args)))
-
-;;;###autoload
-(defun cae-avy-goto-line-above-use-bottom-up-a (oldfun &optional offset bottom-up)
-  (ignore-error 'wrong-type-argument
-    (funcall oldfun offset (not bottom-up))))
-
-;;;###autoload
 (defun cae-lookup-definition-dwim ()
   (interactive)
   (require 'ffap)
