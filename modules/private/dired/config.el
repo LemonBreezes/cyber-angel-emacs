@@ -83,12 +83,12 @@
 
   (after! dirvish-quick-access
     (setq! dirvish-quick-access-entries
-            '(("h" "~/" "Home")
-              ("e" "~/.emacs.d/" "Emacs user directory")
-              ("d" "~/Downloads/" "Downloads")
-              ("m" "/mnt/" "Drives")
-              ("s" "~/src/" "Source code")
-              ("t" "~/.local/share/Trash/files/" "TrashCan"))))
+           '(("h" "~/" "Home")
+             ("e" "~/.emacs.d/" "Emacs user directory")
+             ("d" "~/Downloads/" "Downloads")
+             ("m" "/mnt/" "Drives")
+             ("s" "~/src/" "Source code")
+             ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
   (after! dirvish-fd
     ;; On both of my computers, using "/" instead crashes Emacs.
@@ -110,6 +110,8 @@
         "M-n" nil                       ; for `avy-goto-line-below'
         "N" #'dirvish-narrow
         "j" #'consult-line)
+
+  ;; Jump directory with fullscren
 
   ;; Exit the current Dirvish session when running interactive commands like
   ;; `projectile-find-file'.
