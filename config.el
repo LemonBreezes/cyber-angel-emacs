@@ -917,23 +917,23 @@
   ;;        (nreverse (apply oldfun args))
   ;;      (apply oldfun args))))
 
-  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
-  ;; `sentence-end-double-space'. This package's settings should be tweaked if you
-  ;; use multiple languages.
-  (use-package! sentex
-    :defer t :init
-    (if (version<= "30" emacs-version)
-        (setq forward-sentence-function #'cae-forward-sentence-function)
-      (map! [remap kill-sentence] #'sentex-kill-sentence
-            [remap forward-sentence] #'sentex-forward-sentence
-            [remap backward-sentence] #'sentex-backward-sentence)))
-
-  (use-package! edit-indirect
-    :defer t :init
-    (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
-
-  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-    :defer t)
+  ;;;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
+  ;;;; `sentence-end-double-space'. This package's settings should be tweaked if you
+  ;;;; use multiple languages.
+  ;;(use-package! sentex
+  ;;  :defer t :init
+  ;;  (if (version<= "30" emacs-version)
+  ;;      (setq forward-sentence-function #'cae-forward-sentence-function)
+  ;;    (map! [remap kill-sentence] #'sentex-kill-sentence
+  ;;          [remap forward-sentence] #'sentex-forward-sentence
+  ;;          [remap backward-sentence] #'sentex-backward-sentence)))
+  ;;
+  ;;(use-package! edit-indirect
+  ;;  :defer t :init
+  ;;  (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
+  ;;
+  ;;(use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
+  ;;  :defer t)
 
   (after! (:all outline which-key)
     (which-key-add-keymap-based-replacements outline-minor-mode-map
