@@ -66,7 +66,7 @@
                                         ;performance optimization but I would
                                         ;much rather have Emacs automatically
                                         ;recenter my windows.
-      window-combination-resize t)      ;take new window space from all other
+      window-combination-resize t)      ;Take new window space from all other
                                         ;windows (not just current)
 
 (after! time
