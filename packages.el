@@ -29,6 +29,12 @@
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)
 
+;; cae-webkit.el
+(package! webkit :recipe (:type git :host github :repo "akirakyle/emacs-webkit"
+                          :branch "main"
+                          :files (:defaults "*.js" "*.css" "*.so")
+                          :pre-build ("make")))
+
 ;;; Editor
 
 (package! pp+)
