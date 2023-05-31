@@ -53,6 +53,13 @@
   (cl-return-from cae-keyboard-apply-recursively
     (cl-mapcar (lambda (x) (cae-keyboard-apply-recursively fn x)) arg)))
 
+(defun cae-keyboard-remap-char (arg)
+  (declare (pure t) (side-effect-free t))
+  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
+    (when orbit
+      (cl-return-from cae-keyboard-remap-char
+        (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)))))
+
 (defun cae-keyboard-strings (arg)
   (declare (pure t) (side-effect-free t))
   (+log arg)
@@ -61,23 +68,13 @@
 (defun cae-keyboard-remap (arg)
   (declare (pure t) (side-effect-free t))
   (+log arg)
-  (cae-keyboard-apply-recursively
-      (lambda (x)
-        (let ((orbit (cl-find x cae-keyboard-orbits :test #'memq)))
-          (when orbit
-            (cl-return-from cae-keyboard-remap
-              (nth (mod (1+ (cl-position x orbit)) (length orbit)) orbit)))))
-    arg))
+  (cae-keyboard-apply-recursively #'cae-keyboard-remap-char arg))
 
 (defun cae-keyboard-remap-to-strings (arg)
   (declare (pure t) (side-effect-free t))
   (+log arg)
   (cae-keyboard-apply-recursively
-      (lambda (x)
-        (let ((orbit (cl-find x cae-keyboard-orbits :test #'memq)))
-          (when orbit
-            (cl-return-from cae-keyboard-remap-to-strings
-              (char-to-string (nth (mod (1+ (cl-position x orbit)) (length orbit)) orbit))))))
+      (-compose #'char-to-string #'cae-keyboard-remap-char)
     arg))
 
 (cl-assert (eq (cae-keyboard-remap ?w) ?b))
