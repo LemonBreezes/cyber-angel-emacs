@@ -215,10 +215,8 @@
       yank-pop-change-selection t)
 
 (after! xclip
-  ;; This may have to be tweaked if I am running Emacs in a Daemon and some
-  ;; instances are running in a terminal and some are running in a GUI.
-  (setq xclip-select-enable-clipboard (or (display-graphic-p)
-                                          (daemonp))))
+  (when (string-suffix-p "-WSL2" operating-system-release)
+    (setq xclip-method 'powershell)))
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
