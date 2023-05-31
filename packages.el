@@ -73,6 +73,7 @@
 (package! multiclip :recipe (:host github :repo "kiennq/highlight2clipboard"))
 (package! switch-window)
 (package! switchy-window)
+(package! chatgpt-shell)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
