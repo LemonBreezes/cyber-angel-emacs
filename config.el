@@ -1086,7 +1086,7 @@
                 :around
                 (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
                   ;; This is a hack to prevent the ChatGPT shell from inheriting
-                  ;; the LD_LIBRARY_PATH variable in projects where I override it.
+                  ;; the LD_LIBRARY_PATH variable in projects where I override that.
                   (let ((process-environment (cl-remove-if
                                               (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
                                               process-environment)))
