@@ -269,9 +269,8 @@
   (add-to-list 'isearch-mb--with-buffer #'scroll-left)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-;") #'avy-isearch)
-  (when (not (cae-display-graphic-p))
-    (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch))
+  (define-key isearch-mb-minibuffer-map (kbd "C-z C-j") #'avy-isearch)
+  (define-key isearch-mb-minibuffer-map (kbd "C-z j") #'avy-isearch)
   (when (modulep! :completion vertico)
     (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
     (map! :map isearch-mb-minibuffer-map
@@ -732,7 +731,10 @@
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
         "C-j" #'avy-goto-word-1
-        "C-SPC" #'avy-goto-char-timer)
+        "C-SPC" #'avy-goto-char-timer
+        (:map isearch-mode-map
+         "j" #'avy-isearch
+         "C-j" #'avy-isearch))
   ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
   ;; fork I'm currently using because I should be able to get this working using
   ;; `avy-styles-alist' instead.
