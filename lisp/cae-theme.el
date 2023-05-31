@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'modus-vivendi)
+(setq doom-theme 'leuven)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
