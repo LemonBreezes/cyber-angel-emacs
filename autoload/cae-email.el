@@ -3,4 +3,6 @@
 ;;;###autoload
 (defun cae-notmuch-quit ()
   (interactive)
-  (+workspace/delete +notmuch-workspace-name))
+  (if (bound-and-true-p +notmuch-workspace-name)
+      (+workspace/delete +notmuch-workspace-name)
+    (call-interactively #'notmuch-bury-or-kill-this-buffer)))
