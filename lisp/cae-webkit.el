@@ -6,6 +6,9 @@
   (after! browse-url
     (setq browse-url-browser-function #'webkit-browse-url))
 
+  ;; Fix an error
+  (autoload 'org-link-set-parameters "ol-link")
+
   ;; Stop the weird blinking of the Webkit window when in focus.
   (modify-frame-parameters nil '((inhibit-double-buffering . t)))
   :config
