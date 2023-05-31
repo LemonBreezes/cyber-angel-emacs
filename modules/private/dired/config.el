@@ -120,8 +120,7 @@
 
   (add-hook 'dirvish-setup-hook
             (cae-defun cae-dired-set-fullscreen-dwim ()
-              (when (when (and (file-directory-p file)
-                               (one-window-p t)
+              (when (when (and (one-window-p t)
                                (frame-width (selected-frame))
                                (> (frame-width (selected-frame)) 160))
                       (dirvish-layout-toggle)))))
