@@ -43,6 +43,7 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+;; For some reason Persp is picking up a few buffers that it should not.
 (when (modulep! :ui workspaces)
   (after! persp-mode
     (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
