@@ -131,5 +131,8 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/cdl ()
-  (eshell/cd (buffer-local-value 'default-directory (last-buffer nil t))))
+(defun eshell/ ()
+  (when (window-buffer (cadr cae-window-history))
+    (eshell/cd
+     (buffer-local-value 'default-directory
+                         (window-buffer (cadr cae-window-history))))))
