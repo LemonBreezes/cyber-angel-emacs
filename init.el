@@ -23,7 +23,6 @@
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
-       (window-select +numbers)
        workspaces
 
        :editor
