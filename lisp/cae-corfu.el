@@ -69,3 +69,18 @@
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core 
       (add-to-list 'mc/unsupported-minor-modes 'corfu-mode))))
+
+(when (modulep! :editor snippets)
+  (use-package! cape-yasnippet
+    :after yasnippet
+    :hook ((prog-mode . yas-setup-capf)
+           (text-mode . yas-setup-capf)
+           (lsp-mode  . yas-setup-capf)
+           (sly-mode  . yas-setup-capf))
+    :bind (("C-. y" . cape-yasnippet))
+    :config
+    (defun yas-setup-capf ()
+      (setq-local completion-at-point-functions
+                  (cons 'cape-yasnippet
+                        completion-at-point-functions)))
+    (push 'cape-yasnippet completion-at-point-functions)))
