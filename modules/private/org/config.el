@@ -41,7 +41,7 @@
         "C-c t" nil
         "C-c p" nil
         "C-c b" nil
-        "<f7>" #'cae-org-jira-hydra/body)
+        "C-c M-j" #'cae-org-jira-hydra/body)
   (make-directory (expand-file-name "~/.org-jira") t))
 
 (use-package! worf
