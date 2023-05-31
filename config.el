@@ -762,7 +762,7 @@
   :defer t :init
   (map! "M-i" #'symbol-overlay-put
         "M-I" #'symbol-overlay-remove-all
-        "M-N" #'symbol-overlay-switch-forward
+        "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
         "M-P" #'symbol-overlay-switch-backward)
   :config
   (map! :map symbol-overlay-map
