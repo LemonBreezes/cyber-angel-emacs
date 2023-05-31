@@ -63,7 +63,7 @@
        (dirvish +icons +dirvish)
        dired
        lisp
-       unpackaged
+       ;;unpackaged
        vc)
 
 ;; Local Variables:
