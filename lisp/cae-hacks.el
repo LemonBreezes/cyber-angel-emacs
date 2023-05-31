@@ -17,22 +17,18 @@
   :before-until #'+workspace/switch-to
   (minibuffer-window-active-p (selected-window)))
 
+(defvar cae-hacks--previous-hydra nil)
+(add-to-list 'window-persistent-parameters '(cae-hacks--previous-hydra . writable))
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (defun cae-hacks-hydra-pause-h (&rest _)
   (when hydra-curr-map
-    (if (modulep! :ui workspaces)
-        (set-persp-parameter 'hydra-pause-ring
-                             (let ((hydra-pause-ring (make-ring 8)))
-                               (ring-insert hydra-pause-ring hydra-curr-body-fn)
-                               hydra-pause-ring))
-        (ring-insert hydra-pause-ring hydra-curr-body-fn))
+    (setq cae-hacks--previous-hydra hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h (&rest _)
-  (unless (or (null (persp-parameter 'hydra-pause-ring))
-              (and (ring-p (persp-parameter 'hydra-pause-ring))
-                   (zerop (ring-length (persp-parameter 'hydra-pause-ring)))))
-    (run-with-timer 0.001 nil (ring-remove (persp-parameter 'hydra-pause-ring) 0))))
+  (when cae-hacks--previous-hydra
+    (run-with-timer 0.001 nil cae-hacks--previous-hydra)
+    (setq cae-hacks--previous-hydra nil)))
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
