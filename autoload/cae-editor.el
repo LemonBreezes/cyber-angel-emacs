@@ -86,7 +86,7 @@ Lispy."
         (t (call-interactively #'self-insert-command))))
 
 ;;;###autoload
-(defun avy-symbol-at-point ()
+(defun cae-avy-symbol-at-point ()
   "Jump to another occurance of symbol with avy."
   (interactive)
   (avy-with symbol-overlay-jump-avy
