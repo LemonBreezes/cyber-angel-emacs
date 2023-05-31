@@ -21,7 +21,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (+workspace/other)
-    (leetcode-quit)))
+    (quit-window)))
 
 ;;;###autoload (autoload '+leetcode-problems-hydra/body "private/misc-applications/autoload/leetcode" nil t)
 (defhydra +leetcode-problems-hydra (:color pink :hint nil)
