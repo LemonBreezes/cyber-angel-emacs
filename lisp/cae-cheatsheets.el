@@ -46,7 +46,7 @@
     (add-hook 'persp-activated-functions
               #'cae-cheatsheets-workspace-hydra-resume-h)))
 
-;; Haven't done this for Hercules yet but I might never get around to it since I
+;; Haven't done this for Hercules yet and I might never get around to it since I
 ;; don't use Hercules that much.
 
 ;;; Quit before switching tabs
