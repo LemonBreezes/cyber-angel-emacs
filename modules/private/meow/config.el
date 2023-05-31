@@ -30,40 +30,21 @@
 
 ;; Keypad
 (defun meow/setup-keypad ()
-  (map! :map meow-keypad-state-keymap
-        "?" #'meow-cheatsheet
-        "/" #'meow-keypad-describe-key
-        "1" #'meow-digit-argument
-        "2" #'meow-digit-argument
-        "3" #'meow-digit-argument
-        "4" #'meow-digit-argument
-        "5" #'meow-digit-argument
-        "6" #'meow-digit-argument
-        "7" #'meow-digit-argument
-        "8" #'meow-digit-argument
-        "9" #'meow-digit-argument
-        "0" #'meow-digit-argument
-        "h" #'help-command))
-
-;; applies to all layouts (except dvp)
-(defun meow/setup ()
-  (map! :map meow-normal-state-keymap
-        "0" #'meow-expand-0
-        "1" #'meow-expand-1
-        "2" #'meow-expand-2
-        "3" #'meow-expand-3
-        "4" #'meow-expand-4
-        "5" #'meow-expand-5
-        "6" #'meow-expand-6
-        "7" #'meow-expand-7
-        "8" #'meow-expand-8
-        "9" #'meow-expand-9
-        "-" #'negative-argument
-        ";" #'meow-reverse
-        "," #'meow-inner-of-thing
-        "." #'meow-bounds-of-thing
-        "'" #'repeat
-        "<escape>" #'ignore))
+  (eval
+   `(map! :map meow-keypad-state-keymap
+          "?" #'meow-cheatsheet
+          "/" #'meow-keypad-describe-key
+          ,(cae-keyboard-kbd "1") #'meow-digit-argument
+          ,(cae-keyboard-kbd "2") #'meow-digit-argument
+          ,(cae-keyboard-kbd "3") #'meow-digit-argument
+          ,(cae-keyboard-kbd "4") #'meow-digit-argument
+          ,(cae-keyboard-kbd "5") #'meow-digit-argument
+          ,(cae-keyboard-kbd "6") #'meow-digit-argument
+          ,(cae-keyboard-kbd "7") #'meow-digit-argument
+          ,(cae-keyboard-kbd "8") #'meow-digit-argument
+          ,(cae-keyboard-kbd "9") #'meow-digit-argument
+          ,(cae-keyboard-kbd "0") #'meow-digit-argument
+          "h" #'help-command)))
 
 (defconst meow-cheatsheet-layout-cae
   `((<TLDE> "`"	"~")
@@ -121,16 +102,6 @@
   (meow/setup)
   (eval
    `(map! :map meow-normal-state-keymap
-          "1" #'digit-argument
-          "2" #'digit-argument
-          "3" #'digit-argument
-          "4" #'digit-argument
-          "5" #'digit-argument
-          "6" #'digit-argument
-          "7" #'digit-argument
-          "8" #'digit-argument
-          "9" #'digit-argument
-          "0" #'digit-argument
           ,(cae-keyboard-kbd "1") #'meow-expand-1
           ,(cae-keyboard-kbd "2") #'meow-expand-2
           ,(cae-keyboard-kbd "3") #'meow-expand-3
@@ -187,8 +158,7 @@
           "x" #'meow-save
           "X" #'meow-sync-grab
           "y" #'meow-yank
-          "z" #'meow-pop-selection
-          "%" #'meow-query-replace-regexp)))
+          "z" #'meow-pop-selection)))
 
 (use-package! meow
   :init
@@ -206,7 +176,8 @@
               (eshell-mode . insert)
               (vterm-mode . insert)))
   (when (modulep! :private corfu)
-    (add-hook 'meow-normal-mode-hook #'corfu-quit))
+    (after! corfu
+      (add-hook 'meow-normal-mode-hook #'corfu-quit)))
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
         meow-select-on-change t
