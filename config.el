@@ -111,7 +111,7 @@
 (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
 (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
 (set-popup-rule! "^\\*Help\\*"           :ignore t)
-(set-popup-rule! "^\\*info\\*"           :ignore t)
+(set-popup-rule! "^\\*info\\*"           :ignore t :ttl t)
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*helpful "          :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
 (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
