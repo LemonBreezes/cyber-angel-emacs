@@ -1,4 +1,4 @@
-;;; lisp/cae-logs.el -*- lexical-binding: t; -*-
+;;; lisp/cae-debug.el -*- lexical-binding: t; -*-
 
 (defun +log-all (&rest values)
   `(message ,(concat "Values: "
