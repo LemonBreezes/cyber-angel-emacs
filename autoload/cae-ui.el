@@ -25,6 +25,6 @@
                  (string-equal prefix-title "workspaces/windows")))
         out
       (cons (car out)
-            (lambda ()
-              (funcall (cdr out))
+            `(lambda ()
+              (funcall ,(cdr out))
               (which-key--echo (concat (current-message) " " (+workspace--tabline))))))))
