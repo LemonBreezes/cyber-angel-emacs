@@ -264,6 +264,7 @@
     "-." "->"
     "=." "=>"))
 
+;; Make typing all-caps more ergonomic.
 (use-package casease
   :defer nil
   :config
