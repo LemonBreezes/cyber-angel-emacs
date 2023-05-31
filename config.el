@@ -211,6 +211,11 @@
       history-length (expt 2 16)
       make-cursor-line-fully-visible nil)
 
+(add-hook 'term-setup-hook
+          (lambda ()
+            (send-string-to-terminal "\033[?17;0;16c")
+            ))
+
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
