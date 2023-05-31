@@ -1,6 +1,13 @@
 ;;; autoload/cae-keyboard.el -*- lexical-binding: t; -*-
 
-(require 'json)
+(unless (featurep 'json)
+  (defun json-alist-p (list)
+    "Non-nil if and only if LIST is an alist with simple keys."
+    (declare (pure t) (side-effect-free error-free))
+    (while (and (consp (car-safe list))
+                (atom (caar list))
+                (setq list (cdr list))))
+    (null list)))
 
 ;; These are the orbits of the alphabet under the permutation of the keys
 ;; created by the keyboard layout. Because my keyboard layout is so weird, some
