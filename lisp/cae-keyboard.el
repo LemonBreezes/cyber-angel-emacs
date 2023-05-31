@@ -135,13 +135,15 @@
   (and
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
-   (or (and (minibufferp)
-            ;;(not (bound-and-true-p vertico--input))
-            (cl-member (minibuffer-prompt)
-                       '("Go to line: "
-                         "Go to char: "
-                         "Move to column: ")
-                       :test #'string-match-p))
+   (or  (and (minibufferp)
+             ;; You may want to uncomment this line if you want to use say,
+             ;;`consult-line' and type special characters. (not
+             ;;(bound-and-true-p vertico--input))
+             (cl-member (minibuffer-prompt)
+                        '("Go to line: "
+                          "Go to char: "
+                          "Move to column: ")
+                        :test #'string-match-p))
        (and (featurep 'ispell)
             (get-buffer-window ispell-choices-buffer))
        (and (symbol-file this-command)
