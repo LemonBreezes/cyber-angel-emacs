@@ -132,9 +132,9 @@
                    collect
                    (list (if (string= (car x) "'")
                              "=" (car x)) ;Handle the `\'' key specially since
-                                          ;it has to be bound to `lispy-tick'.
-                                          ;The remappings will never override
-                                          ;that.
+                                        ;it has to be bound to `lispy-tick'.
+                                        ;The remappings will never override
+                                        ;that.
                          (intern (elt x 1))
                          (when (string-match "lispy-\\(?:eval-\\)?\\(.+\\)"
                                              (elt x 1))
