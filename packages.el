@@ -44,6 +44,7 @@
 ;;; Editor
 (package! pp+)
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
+(package! winum)
 (package! zop-to-char)
 (package! aggressive-indent)
 (package! hungry-delete)
