@@ -73,3 +73,35 @@
 |     1 |        2.400467216 |        0 |     0.0 |
 |     2 |        2.339334813 |        0 |     0.0 |
 |     3 | 2.5311752629999997 |        0 |     0.0 |
+
+#+begin_src emacs-lisp :tangle :noweb yes
+<<benchmark-setup>>
+(let ((lst (make-list 5000 'hello-how-are-you)))
+  (k/benchmark-run-compiled
+   10000
+   (cl-remove-duplicates lst :test #'eq)
+   (cl-remove-duplicates lst :test #'equal)))
+#+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 2.328537198 |        0 |     0.0 |
+|     2 | 2.472841711 |        0 |     0.0 |
+
+#+begin_src emacs-lisp :tangle :noweb yes
+<<benchmark-setup>>
+(let ((lst (make-list 5000 "hello how are you")))
+  (k/benchmark-run-compiled
+   10000
+   (cl-remove-duplicates lst :test #'eq)
+   (cl-remove-duplicates lst :test #'equal)
+   (cl-remove-duplicates lst :test #'string=)))
+#+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 2.299111045 |        0 |     0.0 |
+|     2 |  2.44475258 |        0 |     0.0 |
+|     3 | 2.524530791 |        0 |     0.0 |
