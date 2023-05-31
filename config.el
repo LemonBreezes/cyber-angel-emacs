@@ -603,7 +603,13 @@
         [remap doom/sudo-this-file] #'cae-toggle-sudo))
 
 (after! expand-region
-  (setq expand-region-smart-cursor t))
+  (setq expand-region-smart-cursor t
+        er/try-expand-list
+        '(er/mark-word er/mark-symbol er/mark-symbol-with-prefix
+          er/mark-next-accessor er/mark-method-call
+          er/mark-inside-quotes er/mark-outside-quotes er/mark-inside-pairs
+          er/mark-outside-pairs er/mark-comment er/mark-url er/mark-email
+          er/mark-defun er/mark-sentence er/mark-paragraph er/mark-page)))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
@@ -1167,7 +1173,7 @@
  t)
 
 (setq cae-config-finished-loading t)
-;
+
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
 ;;End:
