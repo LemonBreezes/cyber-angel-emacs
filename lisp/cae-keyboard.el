@@ -138,7 +138,6 @@
                          "Move to column: ")
                        :test #'string-match-p))
        (and (featurep 'ispell)
-            (not (minibufferp))   ;I added this check basically out of paranoia.
             (get-buffer-window ispell-choices-buffer))
        (and (symbol-file this-command)
             (string= (file-name-base (symbol-file this-command)) "ace-window")))))
