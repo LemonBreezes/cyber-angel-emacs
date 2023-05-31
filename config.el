@@ -611,8 +611,8 @@
 
 ;;; Autocompletion
 
-(when (modulep! :private corfu)
-  (load! "lisp/cae-corfu"))
+;; (when (modulep! :private corfu)
+;;   (load! "lisp/cae-corfu"))
 
 (after! yasnippet
   (setq yas-triggers-in-field t))       ;Allow nested snippets.
