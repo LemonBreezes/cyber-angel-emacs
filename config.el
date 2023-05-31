@@ -605,8 +605,6 @@
 
   (after! expand-region
     (setq expand-region-smart-cursor t)
-    ;;(dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-    ;;  (add-to-list 'er/try-expand-list fn t))
     (setq er/try-expand-list
           (mapcar (lambda (fn)
                     (if (eq fn #'er/mark-comment)
@@ -1200,6 +1198,8 @@
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
     (setq +org-roam-auto-backlinks-buffer nil))
+  (map! :map org-mode-map
+        "C-c C-M-h" #'er/mark-org-code-block)
 
   (after! org-crypt
     (setq org-crypt-disable-auto-save 'encrypt))
