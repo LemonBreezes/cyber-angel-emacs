@@ -345,7 +345,6 @@
 (advice-remove #'newline-and-indent #'+default--newline-indent-and-continue-comments-a)
 
 (map! [remap backward-kill-word] #'doom/delete-backward-word ; Do not litter the kill-ring.
-
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
@@ -511,13 +510,7 @@
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ; See my `lisp' module.
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  :defer t
-  :config
-  (add-to-list
-   'aggressive-indent-dont-indent-if
-   '(and (derived-mode-p 'c++-mode)
-         (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
-                             (thing-at-point 'line))))))
+  :defer t)
 
 (use-package! hungry-delete
   :defer t :init
