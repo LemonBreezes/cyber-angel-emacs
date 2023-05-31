@@ -114,7 +114,7 @@ derivative.")
   (dolist (hook '(TeX-mode-hook LaTeX-mode-hook org-mode-hook))
     (add-hook hook
               (lambda ()
-                (add-to-list 'completion-at-point-functions #'cape-latex))
+                (add-to-list 'completion-at-point-functions #'cape-tex))
               2))
   (dolist (hook '(html-mode-hook +web-react-mode-hook typescript-tsx-mode-hook org-mode-hook markdown-mode-hook))
     (lambda ()
