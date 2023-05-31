@@ -2,6 +2,14 @@
 
 ;;; Remap keys
 
+;; These are the orbits of the alphabet under the pseudo-permutation of the keys
+;; created by the keyboard layout.
+'(("w" "b" "j" "o" "y" "v" "k" "t" "g" "s" "a" "r" "f" "n" "m" "c" "u")
+  ("h" "d" "e" "p" "'" "_" "}" "\0")
+  ("i" "l")
+  ("x" ",")
+  ("z"))
+
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
 (define-key key-translation-map (kbd "C-x t @") (kbd "C-x t 2"))
