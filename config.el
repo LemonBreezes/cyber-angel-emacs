@@ -755,7 +755,7 @@
             [remap delete-backward-char] #'sp-backward-delete-char
             [remap delete-char] #'cae-delete-char
             [remap delete-forward-char] #'cae-delete-char))
-    (add-to-list 'hungry-delete-except-modes 'eshell-mode))
+    (add-to-list 'hungry-delete-except-modes 'eshell-mode nil #'eq))
 
   (use-package! file-info
     :defer t :init
