@@ -129,8 +129,8 @@
   :around #'save-some-buffers
   (setq gc-cons-threshold cae-hacks-big-gc-threshold
         gc-cons-percentage cae-hacks-big-gc-percentage)
-  (let ((gcmh-low-cons-threshold most-positive-fixnum)
-        (gcmh-high-cons-threshold most-positive-fixnum))
+  (let ((gcmh-low-cons-threshold cae-hacks-big-gc-threshold)
+        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold))
     (apply oldfun args)))
 
 (defun cae-hacks-max-out-gc-h ()
