@@ -40,4 +40,3 @@
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
-(package! ace-link)
