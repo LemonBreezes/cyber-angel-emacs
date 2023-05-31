@@ -263,3 +263,7 @@
     ";=." "⇒"
     "-." "->"
     "=." "=>"))
+
+(use-package! casease
+  :defer t :init
+  )
