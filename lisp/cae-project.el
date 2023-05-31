@@ -70,7 +70,7 @@
  (lambda (key def)
    (when (string-match-p "^bookmark-" (symbol-name def))
      ;; define an analogous command that uses the current project's bookmark file
-     (let ((command (intern (format "+%s"
+     (let ((command (intern (format "cae-project-%s"
                                     (symbol-name def)))))
        (defalias command
          `(lambda ()
@@ -125,6 +125,9 @@
 
 (setf (alist-get 'project-bookmark marginalia-annotator-registry)
       (alist-get 'bookmark marginalia-annotator-registry))
+
+;;(push '(("cae-project-\\(bookmark-.*\\)>" . nil) . ("\\1" . nil))
+;;      which-key-replacement-alist)
 
 (map! :leader
       :prefix "p"
