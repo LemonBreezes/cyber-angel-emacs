@@ -15,6 +15,11 @@
 ;;  :custom ((detached-show-output-on-attach t)
 ;;           (detached-terminal-data-command system-type)))
 
+;; Output to stdout instead of a pager like `less'. This is useful when
+;; redirecting output to buffers like for `eshell' or `shell'.
+(setenv "PAGER" "cat")
+(setenv "GIT_PAGER" "cat")
+
 (use-package! eat
   :defer t :init
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
