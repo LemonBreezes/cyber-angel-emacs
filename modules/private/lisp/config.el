@@ -14,6 +14,12 @@
 (use-package! outline-minor-faces
   :hook (emacs-lisp-mode . outline-minor-faces-add-font-lock-keywords))
 
+(add-hook 'minibuffer-setup-hook
+          (cae-defun cae-lisp-setup-minibuffer-comments-h ()
+            (when (string= (minibuffer-prompt) "Eval: ")
+              (setq-local comment-start ";"
+                          comment-end ""))))
+
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
