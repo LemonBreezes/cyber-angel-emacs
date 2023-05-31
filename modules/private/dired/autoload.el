@@ -11,9 +11,6 @@
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
-  (interactive
-   (find-file-read-args "Find file: "
-                        (confirm-nonexistent-file-or-buffer)))
   (if (derived-mode-p 'dired-mode)
       (progn
         (when-let ((dir (file-name-directory file)))
