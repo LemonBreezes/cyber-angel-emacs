@@ -203,6 +203,7 @@
     ;; The keypad doesn't work for me this way.
     (map! :leader
           "l" #'meow-keypad-start))
-
    (t (meow/setup-keypad)))
+  (map! :map meow-normal-state-keymap
+        "DEL" doom-leader-map)
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
