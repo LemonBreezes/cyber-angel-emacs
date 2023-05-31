@@ -288,7 +288,8 @@ mark the string and call `edit-indirect-region' with it."
                            ((bound-and-true-p lispy-mode)
                             (deactivate-mark)
                             (lispy-comment))
-                           (t (call-interactively #'comment-or-uncomment-region)))
+                           (t (call-interactively #'comment-or-uncomment-region)
+                              (call-interactively #'indent-region)))
                      (avy-pop-mark))))
 
 ;;;###autoload
