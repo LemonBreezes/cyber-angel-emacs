@@ -5,7 +5,9 @@
 ;; TODO handle bookmark bmenu
 ;; TODO handle the fringe indicator
 
-(defvar cae-project-bookmark-dir (concat cae-multi-secrets-dir "cae-project-bookmarks/")
+(defvar cae-project-bookmark-dir (concat (or (bound-and-true-p cae-multi-secrets-dir)
+                                             doom-data-dir)
+                                         "cae-project-bookmarks/")
   "Directory to store project bookmarks.")
 
 (defvar cae-project-bookmark-cache (make-hash-table :test 'equal)
