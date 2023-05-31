@@ -103,6 +103,8 @@
   (use-package! parrot
     :defer t :init
     (add-hook 'doom-first-file-hook #'parrot-mode)
+    (map! "C-!" #'parrot-rotate-next-word-at-point
+          "C-M-!" #'parrot-rotate-prev-word-at-point)
     :config
     (setopt parrot-animate 'hide-static
              parrot-rotate-animate-after-rotation nil
@@ -127,6 +129,4 @@
                          "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
-                         "cae-keyboard-kbd")))
-    (map! "C-!" #'parrot-rotate-next-word-at-point
-          "C-M-!" #'parrot-rotate-prev-word-at-point)))
+                         "cae-keyboard-kbd")))))
