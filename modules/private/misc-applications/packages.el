@@ -46,7 +46,7 @@
 (package! flames-of-freedom)
 (package! snow)
 (package! ednc)
-(package! wttrin)
+(package! wttrin :local-repo "~/.doom.d/packages/wttrin")
 
 (package! zones)
 (package! zone-nyan)
