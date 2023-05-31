@@ -24,17 +24,21 @@
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
 
-;; Very small screen on Android
+;; Created for handling the very small screen on Android phones. I tried to make
+;; it work for multiple Emacs frames. I'll probably never be in that situation though
 (if (boundp 'after-focus-change-function)
     (add-function :after after-focus-change-function
                   (lambda ()
-                    (global-visual-line-mode (and (frame-width (selected-frame))
-                                                  (< (frame-width (selected-frame)) 100)))))
+                    (global-visual-line-mode (if (and (frame-width (selected-frame))
+                                                      (< (frame-width (selected-frame)) 100))
+                                                 +1 -1))))
   (add-hook! 'after-focus-change-function
-    (global-visual-line-mode (and (frame-width (selected-frame))
-                                  (< (frame-width (selected-frame)) 100)))))
-(global-visual-line-mode (and (frame-width (selected-frame))
-                                  (< (frame-width (selected-frame)) 100)))
+    (global-visual-line-mode (if (and (frame-width (selected-frame))
+                                  (< (frame-width (selected-frame)) 100))
+                             +1 -1))))
+(global-visual-line-mode (if (and (frame-width (selected-frame))
+                                  (< (frame-width (selected-frame)) 100))
+                             +1 -1))
 (add-hook! '+doom-dashboard-mode-hook (visual-line-mode -1))
 
 ;; Set up fonts
