@@ -64,6 +64,7 @@
     ("v" my-View-scroll-half-page-backward-other-window)
     (:exit "V" my-View-scroll-half-page-forward-other-window)))
 
+;; For some reason this doesn't work.
 (after! restore-point
   (dolist (fn '(View-scroll-half-page-forward
                 View-scroll-half-page-backward
