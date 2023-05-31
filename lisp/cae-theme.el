@@ -54,6 +54,6 @@
   (advice-add #'doom-init-theme-h :override #'ignore)
   (use-package! circadian
     :config
-    (setq circadian-themes '((:sunrise . ef-trio-light)
+    (setq circadian-themes '((:sunrise . modus-operandi)
                              (:sunset  . ef-trio-dark)))
     (circadian-setup)))
