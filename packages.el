@@ -72,6 +72,9 @@
 (package! smart-semicolon)
 (package! electric-spacing)
 
+;; cae-vlf.el
+(package! vlf)
+
 ;;; Autocompletion
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
