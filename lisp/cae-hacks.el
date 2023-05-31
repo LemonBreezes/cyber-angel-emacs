@@ -91,3 +91,6 @@
 (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
   :before-until #'diff-hl-mode
   (file-in-directory-p default-directory doom-user-dir))
+
+;; This does not work when Doom is native compiled.
+(advice-add #'+debugger--get-last-config :override #'ignore)
