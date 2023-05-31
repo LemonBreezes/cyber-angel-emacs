@@ -18,7 +18,7 @@
                     "\\s-*>+\\s-*#.*\\'" ""
                     (buffer-substring-no-properties (line-beginning-position) (point))))))))
 
-;;; * Colorize ansi escape sequences in exported buffers
+;;; Colorize ansi escape sequences in exported buffers
 ;;;###autoload
 (defun cae-eshell-ansi-buffer-output (fun object target)
   "Interpret ansi escape sequences when redirecting to buffer."
