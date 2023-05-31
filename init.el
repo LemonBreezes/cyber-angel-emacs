@@ -12,7 +12,7 @@
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
-       (vertico +icons +childframe)
+       (vertico +icons)
 
        :ui
        doom-dashboard
@@ -73,6 +73,7 @@
 
        :app
        (rss +org)
+       irc
 
        :private
        ;; exwm
