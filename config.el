@@ -580,7 +580,9 @@
      "C-M-<right>" #'sp-backward-slurp-sexp
      "M-S" #'sp-split-sexp
      "M-J" #'sp-join-sexp
-     "M-C" #'sp-convolute-sexp)))
+     "M-C" #'sp-convolute-sexp
+     ;; My version of `sp-smartparens-bindings'.
+     )))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
