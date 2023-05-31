@@ -25,7 +25,6 @@
        multiple-cursors
        file-templates
        snippets
-       lispy
 
        :emacs
        undo
