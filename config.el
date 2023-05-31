@@ -750,7 +750,6 @@
                 symbol-overlay-jump-next
                 symbol-overlay-jump-prev))
     (add-to-list 'rp/restore-point-commands fn))
-  (advice-add #'rp/restore-point-position :before #'push-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
