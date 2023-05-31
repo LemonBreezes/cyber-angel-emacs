@@ -16,7 +16,7 @@
       (buffer-substring (point) (point-at-eol)))))
 
 ;;;###autoload
-(defun cae-ui-which-key-show-workspace (orig-fun &rest pages-obj)
+(defun cae-ui-which-key-show-workspace-a (orig-fun &rest pages-obj)
   "Show my workspaces in the echo thingy"
   (let ((out (apply orig-fun pages-obj))
         (prefix-title (which-key--pages-prefix-title (car pages-obj))))
