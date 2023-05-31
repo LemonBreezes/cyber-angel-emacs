@@ -67,6 +67,7 @@
                     (goto-char (org-element-property :begin parent))))))
   (advice-add #'worf-down
               :around
+              ;; Skip over vimish folds
               (cae-defun cae-worf-skip-vimish-fold-forward-a (oldfun arg)
                 (let ((pt-max (-some->> (and (modulep! :editor fold)
                                              (overlays-at (point)))
