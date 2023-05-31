@@ -18,6 +18,16 @@
   (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h))
 
+(when (modulep! :ui workspaces)
+  (add-hook 'persp-before-switch-functions
+            (cae-defun cae-cheatsheets-minibuffer-hydra-store-h ()
+              (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
+                                   cae-cheatsheets-workspace--last-hydra)))
+  (add-hook 'persp-activated-functions
+            (cae-defun cae-cheatsheets-minibuffer-resume-h ()
+              (setq cae-cheatsheets-minibuffer--last-hydra
+                    (persp-parameter 'cae-cheatsheets-minibuffer--last-hydra)))))
+
 ;; Hercules already does this for us since I am using a fork of Hercules with
 ;; that feature.
 
