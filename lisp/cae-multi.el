@@ -34,7 +34,7 @@
     backup-inhibited t))
 
 (defun cae-multi-abbrev-push-changes-a (&optional file _)
-  (when (file-in-directory-p abbrev-file-name cae-multi-data-dir)
+  (when (file-in-directory-p (if file file abbrev-file-name) cae-multi-data-dir)
     (let ((gac-automatically-push-p t)
           (gac-silent-message-p t))
       (gac--after-save (find-file-noselect (if file file abbrev-file-name))))))
