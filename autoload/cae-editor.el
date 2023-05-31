@@ -85,28 +85,11 @@
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
 
-;;;###autoload (autoload 'cae-embark-collect-cheatsheet-hydra/body "autoload/cae-editor" nil t)
-(defhydra embark-collect-cheatsheet-hydra (:color pink :foreign-keys run)
-  ("<f6>" nil "Exit" :exit t)
-  ("q" nil "Exit" :exit t)
-  ("a" embark-act "Act" :column "Act")
-  ("<" beginning-of-buffer "First candidate" :column "Navigation")
-  (">" end-of-buffer "Last candidate" :column "Navigation")
-  ("A" embark-act-all "Act all" :column "Act")
-  ("E" embark-export "Export" :column "Act")
-  ("M-<left>" tabulated-list-previous-column "Previous column" :column "Navigation")
-  ("M-<right>" tabulated-list-next-column "Next column" :column "Navigation")
-  ("M-a" embark-collect-direct-action-minor-mode "Toggle direct action mode" :column "Act")
-  ("M-{" outline-previous-heading "Previous heading" :column "Navigation")
-  ("M-}" outline-next-heading "Next heading" :column "Navigation")
-  ("S" tabulated-list-sort "Sort" :column "Navigation")
-  ("SPC" scroll-up-command "Scroll up" :column "Navigation")
-  ("S-SPC" scroll-down-command "Scroll down" :column "Navigation")
-  ("U" embark-collect-unmark-all "Unmark all" :column "Act")
-  ("g" revert-buffer "Revert buffer" :column "Act")
-  ("m" embark-collect-mark "Mark candidate" :column "Act")
-  ("s" isearch-forward "Search forward" :column "Navigation")
-  ("t" embark-collect-toggle-marks "Toggle marks" :column "Act")
-  ("u" embark-collect-unmark "Unmark candidate" :column "Act")
-  ("{" tabulated-list-narrow-current-column "Narrow current column" :column "Navigation")
-  ("}" tabulated-list-widen-current-column "Widen current column" :column "Navigation"))
+
+(hercules-def
+ :toggle-funs #'embark-collect-cheatsheet1
+ :keymap 'embark-collect-mode-map
+ :hide-funs '()
+ :transient t)
+
+(define-key embark-collect-mode-map (kbd "<f6>") #'embark-collect-cheatsheet)
