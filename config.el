@@ -970,7 +970,7 @@
 
   (use-package! switchy-window
     :defer t :init
-    (add-hook 'doom-first-file-hook #'switchy-window-minor-mode)))
+    (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)))
 
 
 
