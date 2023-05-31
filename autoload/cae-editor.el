@@ -205,4 +205,4 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (cae-defun cae-avy-use-pre-style-a (oldfun &rest args)
   (let ((avy-style 'pre))
-    (apply-oldfun args)))
+    (apply oldfun args)))
