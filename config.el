@@ -25,8 +25,6 @@
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
 
-(add-hook! '+doom-dashboard-mode-hook (visual-line-mode -1))
-
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
