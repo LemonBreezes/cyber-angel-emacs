@@ -54,8 +54,7 @@
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key"))
 
-;; This is so that my repeat maps are reloaded when I change them. This is
-;; paired with a hook which evaluates this file.
+;; This is so that my repeat maps are reloaded when I change them.
 (when cae-config-finished-loading
   (ignore-errors (repeat-mode -1))
   (ignore-errors (repeat-mode +1)))
