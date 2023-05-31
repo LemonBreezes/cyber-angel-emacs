@@ -688,11 +688,6 @@
     (map! :map abbrev-map "e" #'edit-abbrevs)
     (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 
-  (use-package! lam
-    :defer t :init
-    (autoload #'lam/control "lam" nil t)
-    (map! "C-x a l" #'lam/control))
-
   (use-package! ibuffer
     :defer t :config
     (setq ibuffer-always-show-last-buffer t
