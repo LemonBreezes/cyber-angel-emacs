@@ -113,8 +113,8 @@
 
   (defmacro cae-dired-find-file-wrapper (fn)
     "Wrap FN to exit Dirvish sessions when opening files."
-    `(lambda ;;,(intern (format "cae-dired-%s" (symbol-name fn)))
-       () (interactive)                 ; Do not use defun because too many
+    `(cmd! ;;,(intern (format "cae-dired-%s" (symbol-name fn)))
+      ()                 ; Do not use defun because too many
                                         ; symbols.
        (let ((dir default-directory))
          (advice-add #'find-file :around #'cae-dired-find-file-a)
