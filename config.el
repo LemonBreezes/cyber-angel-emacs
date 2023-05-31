@@ -555,7 +555,7 @@
            ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
            ("M-<delete>" sp-unwrap-sexp "Kill")
            ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-           ("M-r" cae-raise-sexp "Kill")
+           ("M-r" cae-raise-sexp "Kill") ;overrides a command I never use.
            ("M-D" sp-splice-sexp "Kill")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
            ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
@@ -575,10 +575,13 @@
            ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
-           ("C-]" sp-select-next-thing-exchange "Selection")
+           ("C-]" sp-select-next-thing-exchange "Selection") ;overrides a
+                                                             ;command I never
+                                                             ;use.
            ("C-M-]" sp-select-next-thing "Selection")
            ("C-M-@" sp-mark-sexp "Selection")
-           ("C-M-w" sp-copy-sexp "Selection"))))
+           ("C-M-w" sp-copy-sexp "Selection") ;overrides a command I never use.
+           )))
     (when (modulep! :ui hydra)
       (eval
        (append
