@@ -60,7 +60,7 @@
 
 ;;; Set theme based on time of day.
 
-(unless cae-config-finished-loading
+(unless (featurep 'circadian)
   (use-package! circadian
     :defer-incrementally t
     :config
