@@ -1,12 +1,13 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (add-hook! 'doom-first-file-hook
-  (setq-default mode-line-format
-                (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
-                                              'face '(:inherit variable-pitch
-                                                      :weight bold)))
-                          'mode-line-buffer-identification
-                          (default-value 'mode-line-format))))
+  (cae-defun cae-modeline--set-project-name ()
+    (setq-default mode-line-format
+                  (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
+                                                'face '(:inherit variable-pitch
+                                                        :weight bold)))
+                            'mode-line-buffer-identification
+                            (default-value 'mode-line-format)))))
 
 (use-package! minions
   :defer t :init
