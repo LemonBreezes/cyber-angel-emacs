@@ -19,12 +19,12 @@
   (when (modulep! :editor fold)
     (map! :map magit-status-mode-map
           [remap +fold/toggle] #'magit-section-toggle))
-  (setopt magit-diff-refine-hunk 'all
-          magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
-          magit-repository-directories '(("~/src/" . 2))
-          transient-values '((magit-rebase "--autosquash" "--autostash")
-                             (magit-pull "--rebase" "--autostash")
-                             (magit-revert "--autostash"))))
+  (setq magit-diff-refine-hunk 'all
+        magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
+        magit-repository-directories '(("~/src/" . 2))
+        transient-values '((magit-rebase "--autosquash" "--autostash")
+                           (magit-pull "--rebase" "--autostash")
+                           (magit-revert "--autostash"))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
