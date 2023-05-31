@@ -550,6 +550,9 @@
   ;; Query buffers for a diff before killing them.
   ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
 
+  ;; Allow remembering risky variables
+  (advice-add 'risky-local-variable-p :override #'ignore)
+
   ;; Kill buffers without asking.
   (setq kill-buffer-query-functions
         (remq 'process-kill-buffer-query-function
@@ -892,6 +895,7 @@
     :defer t :init
     (after! embark
       (define-key embark-region-map "T" #'titlecase-region)
+      (define-key embark-symbol-map "T" #'titlecase-region)
       (define-key embark-heading-map "T" #'titlecase-line)))
 
   ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
