@@ -454,6 +454,10 @@
                            (ace-link-man . pre))
         avy-column-line-overlay t))
 
+(when (modulep! :private corfu)
+  (after! corfu
+    (setq corfu-quick1 "")))
+
 (use-package! zop-to-char
   :defer t
   :init
