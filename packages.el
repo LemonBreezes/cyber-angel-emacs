@@ -58,6 +58,7 @@
 (package! symbol-overlay)
 (package! sentex :recipe (:repo "https://codeberg.org/martianh/sentex.git"))
 (package! edit-indirect)
+(package! string-edit-at-point)
 
 ;; These are used for their autoloads.
 (package! ialign)
