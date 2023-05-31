@@ -1171,8 +1171,8 @@
           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
         eshell-visual-subcommands `(("gh" "repo" "fork")
                                     ("geth" "attach")
-                                    ,(unless (string= (getenv "GIT_PAGER") "cat")
-                                       '("git" "log" "diff" "show")))
+                                    ,@(unless (string= (getenv "GIT_PAGER") "cat")
+                                        '(("git" "log" "diff" "show"))))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
