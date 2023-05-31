@@ -662,7 +662,8 @@
   :after tramp-sh
   :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-  (auto-sudoedit-mode +1))
+  (auto-sudoedit-mode +1)
+  (advice-add #'auto-sudoedit :before-until #'cae-auto-sudoedit-exempt-p))
 
 (use-package! file-info
   :defer t
