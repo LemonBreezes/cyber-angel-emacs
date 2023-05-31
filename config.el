@@ -18,7 +18,7 @@
 ;;; UI
 
 (load! "lisp/cae-theme")
-(load! "lisp/cae-cheatsheets")
+(load! "lisp/cae-hydra")
 
 ;; Output to stdout instead of a pager like `less'. This is useful when
 ;; redirecting output to buffers like for `eshell' or `shell'.
@@ -271,7 +271,10 @@
           "<f6>" #'cae-edebug-cheatsheet))
   (after! macrostep
     (map! :map macrostep-mode-keymap
-          "<f6>" #'cae-macrostep-cheatsheet)))
+          "<f6>" #'cae-macrostep-cheatsheet))
+  :config
+  (after! hercules
+    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide)))
 
 
 ;;; Tools
