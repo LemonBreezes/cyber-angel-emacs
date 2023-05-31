@@ -636,9 +636,7 @@
                       ?h ?j ?k ?l ?\;))
           avy-dispatch-alist
           (cae-keyboard-remap
-           '((?t . avy-action-teleport)
-             (?m . avy-action-mark)
-             (?z . avy-action-zap-to-char)
+           '((?z . avy-action-zap-to-char)
              (?e . cae-avy-action-embark-act)
              (?3 . cae-avy-action-comment-dwim)))
           avy-styles-alist '((avy-isearch . pre)
