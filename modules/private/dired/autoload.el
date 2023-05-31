@@ -6,12 +6,7 @@
   (require 'dirvish nil t)
   (unless (memq #'dired-noselect find-directory-functions)
     (add-hook 'find-directory-functions #'dired-noselect t))
-  (dired-noselect dir)
-  (when (and (frame-width (selected-frame))
-             (one-window-p t)
-             (> (frame-width (selected-frame)) 160))
-    (add-transient-hook! 'doom-switch-buffer-hook
-      (dirvish-layout-toggle))))
+  (dired-noselect dir))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
