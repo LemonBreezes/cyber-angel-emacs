@@ -2,6 +2,8 @@
 
 (use-package! nameless
   :defer t
+  ;; `nameless-mode' can cause buffers to become garbled when used in a
+  ;; terminal.
   :when (cae-display-graphic-p)
   :init
   (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
