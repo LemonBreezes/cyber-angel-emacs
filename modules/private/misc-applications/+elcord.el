@@ -2,7 +2,7 @@
 
 (use-package! elcord
   :hook (doom-first-file . elcord-mode)
-  :when (and (display-graphic-p)
+  :when (and (cae-display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
                       (getenv "SSH_TTY")
                       (getenv "WSL_DISTRO_NAME"))))
