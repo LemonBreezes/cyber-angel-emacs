@@ -34,8 +34,9 @@
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
   (advice-add #'zone-matrix :before
-              (cae-defun +zone-matrix-disable-nobreak-char-display-a ()
-                (setq-local nobreak-char-display nil)))
+              (cae-defun +zone-matrix-setup-buffer-appearance ()
+                (setq-local nobreak-char-display nil)
+                (face-remap-add-relative 'default :background "black")))
   (after! zone-matrix
     (setq zmx-unicode-mode t))
 
