@@ -206,12 +206,18 @@
   (setq posframe-inhibit-double-buffering t))
 
 (use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :defer t
+  :init
+  ;; Enable topsy-mode for all programming modes
+  (add-hook 'prog-mode-hook #'topsy-mode)
   :config
-  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+  ;; Set custom function for rjsx-mode
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
+
+  ;; Disable topsy-mode for gptel-mode
   (add-hook 'gptel-mode-hook
-            (cae-defun cae-disable-topsy-in-gptel-h ()
+            (defun cae-disable-topsy-in-gptel-h ()
+              "Disable topsy-mode in `gptel-mode'."
               (topsy-mode -1))))
 
 (use-package! anzu
