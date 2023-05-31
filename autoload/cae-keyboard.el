@@ -12,7 +12,7 @@
 ;; These are the orbits of the alphabet under the permutation of the keys
 ;; created by the keyboard layout. Because my keyboard layout is so weird, some
 ;; of these remappings involve non-printable characters. I have replaced those
-;; in the list below with a null byte (0x00) and terminated the list.
+;; in the list below with a null byte (0x00) and terminated the vector.
 (defvar cae-keyboard-orbits
   [[?w ?b ?j ?o ?y ?v ?k ?t ?g ?s ?a ?r ?f ?n ?m ?c ?u]
    [?W ?B ?J ?O ?Y ?V ?K ?T ?G ?S ?A ?R ?F ?N ?M ?C ?U]
