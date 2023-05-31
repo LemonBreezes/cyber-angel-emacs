@@ -23,6 +23,7 @@
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
+(package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -72,7 +73,6 @@
 (package! multiclip :recipe (:host github :repo "kiennq/highlight2clipboard"))
 (package! switch-window)
 (package! switchy-window)
-(package! chatgpt-shell)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
@@ -105,6 +105,7 @@
 
 ;;; AI
 (package! org-ai)
+(package! chatgpt-shell)
 
 ;;; XML
 (package! xml-format)
