@@ -9,7 +9,7 @@
            (string-prefix-p " " str))))
 
 ;;;###autoload
-(defun +eshell-set-up-autocompletion ()
+(defun cae-eshell-set-up-autocompletion ()
   (add-hook 'completion-at-point-functions
             #'cape-file nil t))
 
