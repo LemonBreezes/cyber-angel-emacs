@@ -8,8 +8,7 @@
         "z" #'zone-choose)
   :config
   ;; remove not interesting programs
-  (setq zone-programs [
-                       zone-nyan
+  (setq zone-programs [zone-nyan
                        zone-rainbow
                        zone-pgm-md5
                        zone-pgm-sl
