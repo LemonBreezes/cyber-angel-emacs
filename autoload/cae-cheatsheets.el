@@ -43,7 +43,7 @@
 (defun cae-macrostep-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-macrostep-cheatsheet
- :keymap 'macrostep-keymap
+ :keymap 'macrostep-mode-keymap
  :package 'macrostep)
 
 ;;;###autoload (autoload 'cae-symbol-overlay-cheatsheet "autoload/cae-cheatsheets" nil t)
