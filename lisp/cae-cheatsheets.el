@@ -30,10 +30,11 @@
                             cae-cheatsheets-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
                          cae-cheatsheets-minibuffer--last-tab-index)))
-       (setf (alist-get cae-cheatsheets-minibuffer--last-tab
-                        cae-cheatsheets-tab-bar-hydra-alist
-                        nil nil #'equal)
-             cae-cheatsheets-minibuffer--last-hydra))
+       ;;(setf (alist-get cae-cheatsheets-minibuffer--last-tab
+       ;;                 cae-cheatsheets-tab-bar-hydra-alist
+       ;;                 nil nil #'equal)
+       ;;      cae-cheatsheets-minibuffer--last-hydra)
+       )
      (when (and cae-cheatsheets-minibuffer--last-hydra
                 (equal (tab-bar--current-tab)
                        cae-cheatsheets-minibuffer--last-tab)
