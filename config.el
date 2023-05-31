@@ -344,6 +344,9 @@
 
 (use-package! avy
   :defer t
+  :init
+  (map! "M-n" #'avy-goto-line-below
+        "M-p" #'avy-goto-line-above)
   :config
   (setq avy-timeout-seconds 0.25
         avy-keys (cae-keyboard-remap
@@ -359,9 +362,7 @@
            (?y . avy-action-yank)
            (?Y . avy-action-yank-line)
            (?i . avy-action-ispell)
-           (?z . avy-action-zap-to-char))))
-  (map! "M-n" #'avy-goto-line-below
-        "M-p" #'avy-goto-line-above))
+           (?z . avy-action-zap-to-char)))))
 
 (use-package! pp+
   :after pp
