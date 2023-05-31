@@ -795,8 +795,7 @@
         "<f6>" #'cae-symbol-overlay-cheatsheet
         "N" #'symbol-overlay-switch-forward
         "P" #'symbol-overlay-switch-backward
-        "r" #'substitute-target-in-buffer
-        "R" #'substitute-target-in-defun
+        "r" #'symbol-overlay-rename
         "-" #'negative-argument)
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   (when (and (modulep! :tools lsp)
