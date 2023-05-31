@@ -46,22 +46,26 @@
    (-compose #'char-to-string #'cae-keyboard-remap-char)
     arg))
 
-;;;###autoload
-(defun cae-keyboard-kbd (&rest args)
+(defun cae-keyboard--kbd (&rest args)
   (declare (pure t) (side-effect-free t))
   (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))))
 
 ;; only apply cae-keyboard-kdb to the first argument
-;;;###autoload
-(defun cae-keyboard-kbd1 (&rest args)
+(defun cae-keyboard--kbd1 (&rest args)
   (declare (pure t) (side-effect-free t))
-  (let ((kbd (cae-keyboard-kbd (car args))))
+  (let ((kbd (cae-keyboard--kbd (car args))))
     (cons kbd (cdr args))))
 
 ;; only apply cae-keyboard-kdb to the last argument
-;;;###autoload
-(defun cae-keyboard-kbd2 (&rest args)
+(defun cae-keyboard--kbd2 (&rest args)
   (declare (pure t) (side-effect-free t))
   (mapconcat #'kbd
              (append (butlast args)
-                     (list (cae-keyboard-kbd (car (last args)))))))
+                     (list (cae-keyboard--kbd (car (last args)))))))
+
+(defun cae-keyboard-kbd (&rest args)
+  (declare (pure t) (side-effect-free t))
+  (pcase (length args)
+    (0 (kbd ""))
+    (1 (cae-keyboard--kbd1 args))
+    (_ (cae-keyboard--kbd2 args))))
