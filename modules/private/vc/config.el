@@ -94,7 +94,3 @@
 
 (use-package! embark-vc
   :after embark)
-
-;; Browse the Emacs bug tracker
-(use-package! debbugs
-  :defer t)
