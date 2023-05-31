@@ -11,10 +11,6 @@
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
 
-(use-package! outline-minor-faces
-  :defer t :init
-  (add-hook 'emacs-lisp-mode-hook #'outline-minor-faces-mode))
-
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
           (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
