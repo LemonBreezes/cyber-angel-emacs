@@ -52,7 +52,6 @@
     (setq dired-kill-when-opening-new-dired-buffer t)))
 
 (after! dirvish
-  (dirvish-peek-mode 1)
   (after! dirvish-side
     (dirvish-side-follow-mode 1))
   (add-hook! 'dirvish-setup-hook
