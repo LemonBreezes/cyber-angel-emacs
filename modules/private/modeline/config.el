@@ -192,7 +192,6 @@
               :after
               (cae-defun cae-modeline-gac-party-on-push-a (buffer)
                 (let ((proc (get-buffer-process "*git-auto-push*")))
-                  (set-process-sentinel proc nil)
                   (parrot--party-while-process proc))))
   (parrot-mode +1))
 (use-package! parrot-rotate
