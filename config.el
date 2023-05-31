@@ -181,11 +181,11 @@
 
 (when (modulep! :checkers syntax)
   (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-  (setq flycheck-keymap-prefix (kbd "C-c F"))
+  (setq flycheck-keymap-prefix (kbd "C-c C"))
   (define-key flycheck-mode-map flycheck-keymap-prefix
     flycheck-command-map)
   (map! :leader
-        (:prefix ("F" . "flycheck"))))
+        (:prefix ("C" . "checkers"))))
 
 (use-package! goggles
   :init
