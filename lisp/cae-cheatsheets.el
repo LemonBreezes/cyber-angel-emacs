@@ -10,9 +10,11 @@
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-minibuffer-hydra-resume-h (&rest _)
-  (when cae-cheatsheets-minibuffer--last-hydra
-    (run-with-timer 0.001 nil cae-cheatsheets-minibuffer--last-hydra)
-    (setq cae-cheatsheets-minibuffer--last-hydra nil)))
+  (run-with-timer 0.001 nil
+                  (lambda ()
+                    (when cae-cheatsheets-minibuffer--last-hydra
+                      (funcall cae-cheatsheets-minibuffer--last-hydra)
+                      (setq cae-cheatsheets-minibuffer--last-hydra nil)))))
 
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
