@@ -24,7 +24,7 @@
                (setq cae-multi-abbrev--file-mtime mtime)
                (unless file
                  (if cae-multi-abbrev--auto-commit-disabled
-                     (when (y-or-n-p "Abbrev file modified since last save. Enable auto-commit?")
+                     (when (y-or-n-p "Abbrev file modified since a previous save. Enable auto-commit?")
                        (setq cae-multi-abbrev--auto-commit-disabled nil)
                        (cae-multi-commit-file abbrev-file-name))
                    (cae-multi-commit-file abbrev-file-name))))
