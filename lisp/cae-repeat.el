@@ -35,6 +35,10 @@
     ("v" scroll-up-command)
     (:exit "V" scroll-down-command))
 
+  (define-repeat-map scroll-down-command
+    ("v" scroll-down-command)
+    (:exit "V" scroll-up-command))
+
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
 
