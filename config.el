@@ -166,7 +166,7 @@
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
-(add-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords)
+(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
