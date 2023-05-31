@@ -41,7 +41,7 @@
         (advice-remove #'fboundp #'tmp/fboundp-a)
         (advice-remove #'exwm-input--update-focus-commit #'ignore)))))
 
-(defun cae-compile--file-not-in-unused-module-p (&optional file-name)
+(defun cae-compile-file-not-in-unused-module-p (&optional file-name)
   (not (when-let* ((file-name (or file-name (buffer-file-name)))
                    (file-path (or (and (file-directory-p file-name)
                                        (expand-file-name file-name))
@@ -79,6 +79,16 @@
             (ignore-errors (byte-compile-file s))
             (ignore-errors (native-compile s))))
         (nconc
+         ;; Compiling `lisp/lib' creates some errors and these functions
+         ;; are not that important to have compiled anyways.
+         (directory-files-recursively doom-core-dir
+                                      "[a-za-z0-9]+\\.el$"
+                                      nil
+                                      #'ignore)
+         (directory-files-recursively doom-modules-dir
+                                      "[a-za-z0-9]+\\.el$"
+                                      nil
+                                      #'cae-compile-file-not-in-unused-module-p)
          (directory-files-recursively
           doom-user-dir
           "[a-zA-Z0-9]+\\.el$"
