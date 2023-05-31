@@ -571,7 +571,7 @@
              ("C-M-k" sp-kill-sexp "Kill")
              ("M-<delete>" sp-unwrap-sexp "Kill")
              ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-             ("M-D" sp-splice-sexp "Edit")
+             ("M-D" sp-splice-sexp "Kill")
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
              ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
              ("C-M-f" sp-forward-sexp "Navigation")
