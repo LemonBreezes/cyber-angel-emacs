@@ -58,6 +58,8 @@
     ;; fireplace
     ;; flames of freedom
     ;; zone
+    ;; nyan zone
+    ;; also encryption zone
     ))
 
 (dolist (file +misc-applications--lisp-files)
