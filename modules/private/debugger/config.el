@@ -8,6 +8,7 @@
         (cl-loop for buf being the buffers
                  when (string-match-p "gdb" (buffer-name buf)) do
                  (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
+  (doom-store-clear "+debugger")
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
       (require 'dap-cpptools)
