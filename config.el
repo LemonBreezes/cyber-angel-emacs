@@ -262,8 +262,6 @@
       "RET" #'cae-project-bookmark-set)
 (map! "C-h ;" #'cae-project-bookmark)
 
-(setq y-or-n-p-use-read-key nil)
-
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
