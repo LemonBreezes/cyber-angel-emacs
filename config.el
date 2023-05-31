@@ -918,8 +918,8 @@
          "C-e" #'copilot-accept-completion-by-line
          "<end>" #'copilot-accept-completion-by-line
          "M-n" #'copilot-next-completion
-         "M-p" #'copilot-previous-completion
-         [remap keyboard-quit] #'copilot-clear-overlay))
+         "M-p" #'copilot-previous-completion))
+  (add-hook 'doom-escape-hook #'copilot-clear-overlay)
   (add-to-list 'copilot-disable-predicates
                (cae-defun cae-disable-copilot-in-gptel-p ()
                  (bound-and-true-p gptel-mode)))
