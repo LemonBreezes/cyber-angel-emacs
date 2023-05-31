@@ -22,13 +22,23 @@
 ;; the minibuffer or switching back to the workspace or tab.
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
+(defun cae-hacks-hydra-pause-h ()
+  (ring-insert hydra-pause-ring hydra-curr-body-fn)
+  (hydra-keyboard-quit))
+(defun cae-hacks-hydra-resume-h ()
+  (let ((body (if (zerop (ring-length hydra-pause-ring))
+                  hydra-curr-body-fn
+                (ring-remove hydra-pause-ring 0))))
+    (when body
+      (funcall body))))
 (after! hydra
   (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h)
-  (add-hook 'minibuffer-setup-hook #'hydra-pause-resume)
-  (add-hook 'minibuffer-exit-hook #'hydra-pause-resume)
+  (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
+  (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
   (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h))
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
+
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
