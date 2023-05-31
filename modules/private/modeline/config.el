@@ -1,9 +1,9 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (setq-default mode-line-format
-      (cl-subst '(:eval (breadcrumb-project-crumbs))
-                'mode-line-buffer-identification
-                mode-line-format))
+              (cl-subst '(:eval (breadcrumb-project-crumbs))
+                        'mode-line-buffer-identification
+                        mode-line-format))
 
 (use-package! minions
   :defer t :init
