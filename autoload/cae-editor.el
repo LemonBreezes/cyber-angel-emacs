@@ -98,10 +98,10 @@ Lispy."
   ;; Call `pp-eval-last-sexp' when called with a negative
   ;; prefix argument
   (interactive "P")
-  (require 'pp+)
   (cond ((or (eq arg '-)
              (and (numberp arg)
                   (< arg 0)))
+         (require 'pp+)
          (funcall #'pp-eval-last-sexp (if (numberp arg) nil)))
         ((bound-and-true-p eros-mode)
          (funcall #'eros-eval-last-sexp arg))
