@@ -85,3 +85,10 @@
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
 
+;;;###autoload
+(defun cae-avy-symbol-at-point ()
+    "Jump to another occurance of symbol with avy."
+    (interactive)
+    (avy-with cae-avy-symbol-at-point
+      (avy-process
+       (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
