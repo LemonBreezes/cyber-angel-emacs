@@ -62,10 +62,8 @@
         warning-minimum-log-level :emergency))
 
 (after! shr
-  ;; I'm not a fan of variable-pitch fonts.
-  (setq shr-use-fonts nil
-        ;; Shr wraps lines in a visually unappealing way.
-        shr-width 120
+  ;; Shr wraps lines in a visually unappealing way.
+  (setq shr-width 120
         shr-max-width 120)
 
   ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
