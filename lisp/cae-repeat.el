@@ -14,6 +14,10 @@
    "q" quit-window
    "p" +popup/other
    "K" kill-buffer-and-window
+   "<left>" previous-buffer
+   "<right>" next-buffer
+   "u" winner-undo
+   "r" winner-redo
    ;; Number row keys
    "!" delete-other-windows
    "@" split-window-below
