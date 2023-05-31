@@ -1,6 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (setq load-prefer-newer t)
+(random t)
 
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
