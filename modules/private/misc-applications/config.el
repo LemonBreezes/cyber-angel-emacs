@@ -35,7 +35,6 @@
         "+elfeed"
         ;;"+enime"
         ;;"+exercism"
-        ;;"+forecast"
         ;;"+frameshot"
         ;;"+helm-linux-disks"
         ;;"+helm-system-packages"
