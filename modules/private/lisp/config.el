@@ -1,6 +1,7 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
 (use-package! nameless
+  :when (display-graphic-p)
   :hook (emacs-lisp-mode . nameless-mode)
   :config
   (setq nameless-private-prefix t
