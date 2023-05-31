@@ -24,7 +24,8 @@
                           comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
 (after! lispy
   (map! :map lispy-mode-map
-        ;; Allow inserting newlines in the minibuffer.
+        ;; Allow inserting newlines in the minibuffer. Also protect from
+        ;; entering unbalanced expressions into `eval-expression'.
         [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain))
 
 ;; Check parens before saving.
