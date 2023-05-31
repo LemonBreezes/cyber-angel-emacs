@@ -90,7 +90,7 @@
   :defer t :init
   (map! :leader
         :prefix "i"
-        :desc ".gitignore template" "I" #'gitignore-templates-insert))
+        :desc "s.gitignore template" "I" #'gitignore-templates-insert))
 
 (use-package! git-email
   :defer t :init
