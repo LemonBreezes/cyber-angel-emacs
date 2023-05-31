@@ -35,14 +35,7 @@
              (dirvish-curr)
              (window-dedicated-p))
     (dirvish-layout-toggle))
-  (call-interactively fn)
-  (when (and (featurep 'dirvish)
-             (dirvish-curr)
-             (one-window-p)
-             (not (window-dedicated-p))
-             (frame-width (selected-frame))
-             (> (frame-width (selected-frame)) 160))
-    (dirvish-layout-toggle)))
+  (call-interactively fn))
 
 ;;;###autoload
 (defun cae-dired-previous-buffer ()
