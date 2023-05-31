@@ -682,8 +682,8 @@
 
   (use-package! zop-to-char
     :defer t
-    :init (map! [remap zap-to-char] #'zop-up-to-char
-                [remap zap-up-to-char] #'zop-to-char)
+    :init (map! [remap zap-to-char] #'zop-to-char
+                [remap zap-up-to-char] #'zop-up-to-char)
     :config
     (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
