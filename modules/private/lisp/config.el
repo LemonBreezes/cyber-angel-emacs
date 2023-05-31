@@ -108,8 +108,7 @@
           "C-M-," nil                   ;formerly `lispy-mark'.
           "M-,"   nil                   ;formerly `pop-tag-mark'.
 
-          "M-r" #'lispy-raise-sexp
-          "M-R" #'lispy-raise-some
+          "M-R" #'lispy-raise-sexp
           "M-S" #'lispy-split
           "M-C" #'lispy-convolute
           "M-D" #'lispy-splice
