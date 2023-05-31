@@ -14,9 +14,9 @@
 
 (map! :leader
       :prefix +misc-applications-prefix
-      :desc "MPC" "1" #'mpc
-      :desc "List processes" "P" #'list-processes
-      :desc "List timers" "C-p" #'list-timers)
+      "1" #'mpc
+      "P" #'list-processes
+      "C-p" #'list-timers)
 
 (after! timer-list
   (map! :map timer-list-mode-map
