@@ -755,7 +755,8 @@
                 symbol-overlay-switch-backward
                 symbol-overlay-jump-next
                 symbol-overlay-jump-prev
-                recenter-top-bottom))
+                recenter-top-bottom
+                reposition-window))
     (add-to-list 'rp/restore-point-commands fn))
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
