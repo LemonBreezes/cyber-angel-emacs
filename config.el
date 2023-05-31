@@ -644,8 +644,6 @@
 (doom-load-packages-incrementally
  `(,@(when (modulep! :private dirvish)
       '(dirvish))
-   ,@(when (modulep! :tools pdf)
-      '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
    ,@(when (modulep! :term eshell)
       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
               em-tramp em-smart em-banner em-basic em-cmpl
