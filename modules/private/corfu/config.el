@@ -26,7 +26,6 @@ For completion in comments, see `+corfu-ispell-in-comments-and-strings'.")
   "Enable completion with ispell inside comments when in a `prog-mode'
 derivative.")
 
-;;
 ;;; Packages
 (use-package! corfu
   :init
