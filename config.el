@@ -10,8 +10,11 @@
 ;; I currently have this disabled so that I don't have to wait for Emacs to
 ;; compile everything on-kill. This would be cooler if it used an incremental
 ;; idle timer instead.
-(defvar cae-config-compilation-on-kill-enabled nil
+(defvar cae-config-compilation-on-kill-enabled-p nil
   "Whether on-kill native compilation is enabled.")
+
+(defvar cae-config-incremental-compilation-enabled-p nil
+  "Whether incremental native compilation is enabled.")
 
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
