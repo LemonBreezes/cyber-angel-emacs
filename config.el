@@ -300,7 +300,7 @@
 (map! :leader
       :prefix "p"
       "RET" #'cae-project-bookmark-set)
-(map! "C-h ;" #'cae-project-bookmark)
+(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
