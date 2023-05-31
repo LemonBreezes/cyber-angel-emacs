@@ -33,6 +33,8 @@
 (add-to-list 'auto-mode-alist (cons (regexp-quote dir-locals-file)
                                     'emacs-lisp-mode))
 
+(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
+
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
