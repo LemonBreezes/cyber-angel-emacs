@@ -4,5 +4,5 @@
 (package! minions)
 (when (modulep! +pretty)
   (package! nyan-mode))
-(package! parrot :recipe (:host github :repo "LemonBreezes/parrot-1"))
+(package! parrot)
 (package! vline)
