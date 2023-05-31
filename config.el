@@ -27,10 +27,13 @@
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
-;; Stuff so that modules don't break.
+;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
   (unless (cae-display-graphic-p)
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
+(when (modulep! :ui ligatures)
+  (unless (cae-display-graphic-p)
+    (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
 ;;; UI
 
