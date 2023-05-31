@@ -348,9 +348,8 @@
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
                                             "lisp/cae-project"))
-(map! :map projectile-command-map
-      "RET" #'cae-project-bookmark-set)
-(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark)
+(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
+      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
