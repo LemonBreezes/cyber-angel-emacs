@@ -567,36 +567,6 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "k") org-insert-heading)
       (,(cae-keyboard-kbd "h") org-metaleft)
       (,(cae-keyboard-kbd "l") worf-new-right)))
-  (defun cae-keyboard-remap-hydra-hint (s)
-    (with-output-to-string
-      (with-temp-buffer
-        (insert s)
-        (goto-char (point-min))
-        (while (not (eobp))
-          (let ((ch (following-char)))
-            (if (and (char-equal ch ?_)
-                     (char-after (+ 2 (point)))
-                     (char-equal (char-after (+ 2 (point)))
-                                 ?_))
-                (progn
-                  (forward-char 1)      ; discard _
-                  (let ((char (following-char)))
-                    (princ
-                     (string
-                      ?_
-                      (cae-keyboard-remap-char char)))
-                    (forward-char 1)    ; discard _
-                    (cond ((eq (char-after (1+ (point))) ?:)
-                           (forward-char 1)
-                           (princ (string ?_ ?:)))
-                          ((or (and (<= (char-after (1+ (point))) ?z)
-                                    (>= (char-after (1+ (point))) ?a))
-                               (and (<= (char-after (1+ (point))) ?Z)
-                                    (>= (char-after (1+ (point))) ?A)))
-                           (princ (string ?_ ?: ?\s char)))
-                          (t (princ (char-to-string ch))))))
-              (princ (char-to-string ch))))
-            (forward-char)))))
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
@@ -625,9 +595,7 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
       (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
       (,(cae-keyboard-kbd "q") nil)
-      (,(cae-keyboard-kbd "c") nil)))
-
-  )
+      (,(cae-keyboard-kbd "c") nil))))
 
 ;;; Basically a custom input method
 
