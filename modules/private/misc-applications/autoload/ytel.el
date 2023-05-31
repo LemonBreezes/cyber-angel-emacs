@@ -51,3 +51,11 @@
               (error nil))
             "invidious.tube"))          ; fallback
   (doom-store-put 'ytel-invidious-api-url ytel-invidious-api-url))
+
+
+;;;###autoload (autoload '+bubbles-hydra/body "private/misc-applications/autoload/bubbles" nil t)
+(defhydra +ytel-hydra (:color pink :hint nil)
+  ("<f6>" nil "Exit" :exit t)
+  ("q" ytel-quit nil :exit t)
+  ("s" ytel-search)
+  ("RET" ytel-watch))
