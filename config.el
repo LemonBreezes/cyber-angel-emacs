@@ -470,7 +470,7 @@
 
 (use-package! chatgpt-shell
   :defer t :init
-  (map! :leader ))
+  (map! :leader "g" #'chatgpt-shell))
 
 
 ;;; Editor
