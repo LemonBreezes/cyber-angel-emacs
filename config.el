@@ -1,5 +1,8 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(defvar cae-config-finished nil
+  "Whether the configuration has finished loading.")
+
 ;;; UI
 (load! "lisp/cae-theme")
 
