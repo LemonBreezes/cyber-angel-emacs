@@ -32,87 +32,86 @@
 (defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is disabled.")
 
-(doom! :config (default +bindings))
-;; (doom! :completion
-;;        (vertico +icons +childframe)
+(doom! :completion
+       (vertico +icons +childframe)
 
-;;        :ui
-;;        doom-dashboard
-;;        hl-todo
-;;        hydra
-;;        ;; (ligatures +extra +iosevka)
-;;        nav-flash
-;;        (popup +defaults)
-;;        (vc-gutter +pretty +diff-hl)
-;;        vi-tilde-fringe
-;;        workspaces
-;;        ;; (window-select +switch-window)
+       :ui
+       doom-dashboard
+       hl-todo
+       hydra
+       ;; (ligatures +extra +iosevka)
+       nav-flash
+       (popup +defaults)
+       (vc-gutter +pretty +diff-hl)
+       vi-tilde-fringe
+       workspaces
+       ;; (window-select +switch-window)
 
-;;        :editor
-;;        file-templates
-;;        format
-;;        snippets
-;;        multiple-cursors
-;;        lispy
+       :editor
+       file-templates
+       format
+       snippets
+       multiple-cursors
+       lispy
 
-;;        :emacs
-;;        undo
-;;        ibuffer
-;;        vc
+       :emacs
+       undo
+       ibuffer
+       vc
 
-;;        :term
-;;        eshell
-;;        ;; (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+       :term
+       eshell
+       ;; (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
-;;        :checkers
-;;        (syntax +childframe)
-;;        spell
-;;        grammar
+       :checkers
+       (syntax +childframe)
+       spell
+       grammar
 
-;;        :tools
-;;        (debugger +lsp)
-;;        direnv
-;;        editorconfig
-;;        (eval +overlay)
-;;        (lookup +dictionary +docsets +offline)
-;;        (magit +forge)
-;;        (lsp +peek)
-;;        tree-sitter
+       :tools
+       (debugger +lsp)
+       direnv
+       editorconfig
+       (eval +overlay)
+       (lookup +dictionary +docsets +offline)
+       (magit +forge)
+       (lsp +peek)
+       tree-sitter
 
-;;        :lang
-;;        (emacs-lisp +tree-sitter)
-;;        (org +roam2 +tree-sitter)
-;;        (cc +lsp +tree-sitter)
-;;        (web +lsp +tree-sitter)
-;;        (sh +lsp +tree-sitter)
-;;        (nix +lsp +tree-sitter)
+       :lang
+       (emacs-lisp +tree-sitter)
+       (org +roam2 +tree-sitter)
+       (cc +lsp +tree-sitter)
+       (web +lsp +tree-sitter)
+       (sh +lsp +tree-sitter)
+       (nix +lsp +tree-sitter)
 
-;;        :os
-;;        (:if IS-MAC macos)
-;;        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+       :os
+       (:if IS-MAC macos)
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
-;;        :config
-;;        (default +bindings +smartparens)
+       :config
+       (default +bindings +smartparens)
 
-;;        :email
-;;        ;; (mu4e +org)
+       :email
+       ;; (mu4e +org)
 
-;;        :app
-;;        (rss +org)
+       :app
+       (rss +org)
 
-;;        :private
-;;        (corfu +indexed)
-;;        debugger
-;;        (dirvish +icons +dirvish)
-;;        eshell
-;;        dired
-;;        lisp
-;;        misc-applications
-;;        modeline
-;;        ;; (meow +leader)
-;;        unpackaged
-;;        vc
-;;        org)
+       :private
+       (corfu +indexed)
+       debugger
+       (dirvish +icons +dirvish)
+       eshell
+       dired
+       lisp
+       misc-applications
+       modeline
+       ;; (meow +leader)
+       unpackaged
+       vc
+       org)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
