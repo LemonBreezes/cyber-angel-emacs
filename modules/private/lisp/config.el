@@ -12,7 +12,8 @@
         nameless-global-aliases '()))
 
 (use-package! outline-minor-faces
-  :hook (emacs-lisp-mode . outline-minor-faces-add-font-lock-keywords))
+  :defer t :init
+  (add-hook 'emacs-lisp-mode-hook #'outline-minor-faces-add-font-lock-keywords))
 
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
