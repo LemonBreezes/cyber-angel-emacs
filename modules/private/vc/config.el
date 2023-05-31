@@ -52,9 +52,9 @@
                                :face font-lock-string-face
                                :bind "G")
                               (:name "Git link homepage"
-                               :handler (prog2
-                                            (advice-add #'git-link--new :override #'identity)
-                                            (call-interactively #'git-link-homepage)
+                               :handler (unwind-protect
+                                            (progn (advice-add #'git-link--new :override #'identity)
+                                                   (call-interactively #'git-link-homepage))
                                           (advice-remove #'git-link--new #'identity))
                                :face font-lock-string-face
                                :bind "g")))
