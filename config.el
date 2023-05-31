@@ -133,9 +133,6 @@
 (after! tooltip
   (setq tooltip-hide-delay 3))
 
-(after! ace-link
-  (add-to-list 'avy-styles-alist '(ace-link-man . pre)))
-
 (when (modulep! :checkers syntax +childframe)
   (after! flycheck-posframe
     (setq flycheck-posframe-border-width 1
@@ -306,21 +303,20 @@
 (setq set-mark-command-repeat-pop t
       next-line-add-newlines t)
 
-(after! isearch
-  (setq search-whitespace-regexp ".*?"
-        isearch-lax-whitespace t
-        isearch-wrap-pause 'no-ding
-        isearch-lazy-count t
-        isearch-repeat-on-direction-change t
-        isearch-allow-motion t
-        isearch-allow-scroll t
-        isearch-yank-on-move 'shift
-        isearch-motion-changes-direction t
-        lazy-count-prefix-format nil
-        lazy-count-suffix-format " [%s/%s]"
-        lazy-highlight-cleanup nil)
-  (add-hook 'doom-escape-hook
-            (apply-partially #'lazy-highlight-cleanup t)))
+(setq search-whitespace-regexp ".*?"
+      isearch-lax-whitespace t
+      isearch-wrap-pause 'no-ding
+      isearch-lazy-count t
+      isearch-repeat-on-direction-change t
+      isearch-allow-motion t
+      isearch-allow-scroll t
+      isearch-yank-on-move 'shift
+      isearch-motion-changes-direction t
+      lazy-count-prefix-format nil
+      lazy-count-suffix-format " [%s/%s]"
+      lazy-highlight-cleanup nil)
+(add-hook 'doom-escape-hook
+          (apply-partially #'lazy-highlight-cleanup t))
 
 (after! ispell
   (setq ispell-quietly t
@@ -352,7 +348,9 @@
   :init
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
-        "M-j" #'avy-goto-char-timer)
+        "M-j" #'avy-goto-char-timer
+        :map isearch-mode-map
+        "M-j" #'avy-isearch)
   :config
   (setq avy-timeout-seconds 0.25
         avy-keys (cae-keyboard-remap
@@ -369,7 +367,8 @@
            (?Y . avy-action-yank-line)
            (?i . avy-action-ispell)
            (?z . avy-action-zap-to-char)))
-        avy-styles-alist '((avy-isearch . pre))
+        avy-styles-alist '((avy-isearch . pre)
+                           (ace-link-man . pre))
         avy-indent-line-overlay t))
 
 (use-package! pp+
@@ -463,13 +462,12 @@
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
 
-(after! isearch
-  (use-package! isearch-dabbrev
-    :defer t
-    :init
-    (map! :map isearch-mode-map
-          "M-/" #'isearch-dabbrev-expand
-          "C-M-/" #'isearch-dabbrev-expand)))
+(use-package! isearch-dabbrev
+  :defer t
+  :init
+  (map! :map isearch-mode-map
+        "M-/" #'isearch-dabbrev-expand
+        "C-M-/" #'isearch-dabbrev-expand))
 
 (when (modulep! :completion vertico)
   (map! "C-h C-m" #'consult-mode-command
@@ -510,6 +508,13 @@
         "M-s L" #'consult-line-multi
         "M-s k" #'consult-keep-lines
         "M-s u" #'consult-focus-lines
+        ;; Isearch integration
+        "M-s e" #'consult-isearch-history
+        :map isearch-mode-map
+        "M-e" #'consult-isearch-history    ;; orig. isearch-edit-string
+        "M-s e" #'consult-isearch-history  ;; orig. isearch-edit-string
+        "M-s l" #'consult-line ;; needed by consult-line to detect isearch
+        "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
         ;; Minibuffer history
         :map minibuffer-local-map
         "M-s" #'consult-history   ;; orig. next-matching-history-element
