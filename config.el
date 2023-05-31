@@ -476,7 +476,7 @@
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
-      [remap ispell-word] #'eac-ispell-word-then-abbrev
+      [remap ispell-word] #'cae-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
       "C-x C-b" #'ibuffer-jump          ;Previously bound to `ibuffer'. This way
                                         ;I can do `C-x C-b =' to quickly diff a
@@ -492,8 +492,8 @@
       (:when (modulep! :completion vertico)
        (:map minibuffer-local-map
         "C-;" nil                       ;I prefer <f8> for `embark-act'.
-        "C-s" nil                       ;I prefer `C-r' for `consult-history'.
-        "C-r" #'consult-history))
+        "C-s" nil                       ;I prefer `C-r' for `consult-history'
+        ))
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
