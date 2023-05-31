@@ -58,7 +58,8 @@
 
 ;; Set theme based on time
 
-(if (display-graphic-p)
+(if (and (display-graphic-p)
+         (not (modulep! :ui doom)))
     (progn (advice-add #'doom-init-theme-h :override #'ignore)
            (use-package! circadian
              :config
