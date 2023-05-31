@@ -29,6 +29,7 @@
   ("r" trashed-do-restore-and-exit "Flag restore" :column "Flag")
   ("f" trashed-find-file "Find file" :column "View")
   ("o" trashed-display-file "Find file other window" :column "View")
+  ("C-o" trashed-display-file "Display file" :column "View")
   ("m" trashed-mark "Mark" :column "Mark")
   ("t" trashed-toggle-marks "Toggle marks" :column "Mark")
   ("U" trashed-unmark-all "Unmark all" :column "Mark")
