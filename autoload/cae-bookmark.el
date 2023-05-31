@@ -108,3 +108,14 @@
                                          (directory-files "~/" t))))))
     (dired (file-name-directory newest-file))
     (dired-goto-file newest-file)))
+
+;;;###autoload
+(defun cae-bookmark-jump-to-project-bookmarks (_)
+  (let* ((bookmark-file (cae-project--get-bookmark-file))
+         (bookmark-dir (file-name-directory bookmark-file)))
+    (if (file-exists-p bookmark-dir)
+        ;; Open Dired in the parent directory of the bookmark file and jump to the bookmark file.
+        (progn (dired bookmark-dir)
+               (when (file-exists-p bookmark-file)
+                 (dired-goto-file bookmark-file)))
+      (message "No bookmark files found for this project."))))
