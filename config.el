@@ -324,10 +324,11 @@
 
 (after! xclip
   (cond ((getenv "WSL_DISTRO_NAME")
-         (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
-           (setenv "PATH"
-                   (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
-           (setq exec-path (cons "/mnt/c/Windows/System32" exec-path)))
+         (let ((powershell-dir "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"))
+           (unless (string-match-p powershell-dir (getenv "PATH"))
+             (setenv "PATH"
+                     (concat powershell-dir  path-separator (getenv "PATH")))
+             (setq exec-path (cons "/mnt/c/Windows/System32" exec-path))))
          (setq xclip-method 'powershell))
         ((executable-find "termux-setup-storage")
          (setq xclip-method 'termux-clipboard-get))))
