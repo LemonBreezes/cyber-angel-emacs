@@ -380,7 +380,7 @@
         anzu-replace-threshold 50
         anzu-replace-to-string-separator " → "))
 
-(use-package isearch-mb
+(use-package! isearch-mb
   :ensure t
   :init (isearch-mb-mode)
   :config
@@ -400,6 +400,19 @@
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
+
+;;(use-package! detached
+;;  :init
+;;  (detached-init)
+;;  :bind (;; Replace `async-shell-command' with `detached-shell-command'
+;;         ([remap async-shell-command] . detached-shell-command)
+;;         ;; Replace `compile' with `detached-compile'
+;;         ([remap compile] . detached-compile)
+;;         ([remap recompile] . detached-compile-recompile)
+;;         ;; Replace built in completion of sessions with `consult'
+;;         ([remap detached-open-session] . detached-consult-session))
+;;  :custom ((detached-show-output-on-attach t)
+;;           (detached-terminal-data-command system-type)))
 
 
 ;;; Editor
