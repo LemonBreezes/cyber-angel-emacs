@@ -25,10 +25,6 @@
     imenu-generic-expression
     `((,(propertize "λ" 'face 'eshell-prompt) "^.* λ \\(.*\\)" 1)))
 
-  (unless cae-config-finished-loading
-    (eat-eshell-mode +1)
-    (eat-eshell-visual-command-mode +1))
-
   ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
   ;; to work in Eshell as it does in a terminal.
   (when (symbol-function #'eshell/emacs)
