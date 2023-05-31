@@ -43,7 +43,7 @@
                   er/mark-symbol-with-prefix
                   View-scroll-half-page-forward
                   View-scroll-half-page-backward))
-                  (add-to-list 'rp/restore-point-commands fn))
+      (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
