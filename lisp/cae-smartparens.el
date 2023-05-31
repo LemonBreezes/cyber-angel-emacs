@@ -98,6 +98,7 @@
         (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/nil)))
     (dolist (x bindings)
       ;;(define-key smartparens-mode-map (kbd (car x)) (cadr x))
+      ;; Prevent our commands from being shadowed by `smartparens-mode-map'.
       (define-key smartparens-mode-map (kbd (car x)) nil)
       (global-set-key (kbd (car x)) (cadr x))))
   ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
