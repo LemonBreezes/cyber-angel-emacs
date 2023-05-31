@@ -904,6 +904,7 @@
         :desc "Mark next sexps" "C-M-f"     #'mc/mark-next-sexps
         :desc "Mark previous sexps" "C-M-b" #'mc/mark-previous-sexps)
   (after! multiple-cursors-core
+    (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. l")     #'mc/insert-letters)
     (define-key mc/keymap (kbd "C-. n")     #'mc/insert-numbers)
     (define-key mc/keymap (kbd "C-. [")     #'mc/vertical-align-with-space)
