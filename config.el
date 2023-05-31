@@ -541,7 +541,6 @@
         (:unless (display-graphic-p)
           "TAB" #'indent-for-tab-command)))
 
-
 (when (modulep! :private corfu)
   (map! (:prefix ("M-+" . "autocomplete")
          :g "c" #'completion-at-point   ; capf
