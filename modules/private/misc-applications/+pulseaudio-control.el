@@ -21,6 +21,5 @@
                   (which-key-show-keymap
                    'pulseaudio-control-map))))))
   :config
-  (setq pulseaudio-control-use-default-sink t
-        pulseaudio-control-volume-step "10%")
+  (setq pulseaudio-control-use-default-sink t)
   (pulseaudio-control-default-keybindings))
