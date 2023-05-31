@@ -45,10 +45,19 @@
     (require 'auto-sudoedit)
     (auto-sudoedit)))
 
-(defun cae-auto-sudoedit-exempt-p ()
-  (let ((path (or (buffer-file-name) list-buffers-directory)))
-    (or (file-directory-p path)
-        (string-prefix-p (thread-last lisp-directory
-                                      (file-name-parent-directory)
-                                      (file-name-parent-directory))
-                         path))))
+;;;###autoload
+(defun cae-toggle-sudo ()
+  (interactive)
+  (let* ((file (or buffer-file-name
+                   (when (or (derived-mode-p 'dired-mode)
+                             (derived-mode-p 'wdired-mode))
+                     default-directory)))
+         (tramp-prefix (string-remove-suffix (tramp-file-local-name file)
+                                             file))
+         (sudo-prefix (format "sudo:root@%s:" (file-remote-p file 'host))))
+    (if (string-suffix-p sudo-prefix tramp-prefix)
+        (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
+                           (tramp-file-local-name file)))
+      (doom/sudo-this-file))))
+
+(map! [remap doom/sudo-this-file] #'cae-toggle-sudo)
