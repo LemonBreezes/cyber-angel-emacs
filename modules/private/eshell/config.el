@@ -27,11 +27,6 @@
   (eat-eshell-mode +1)
   (eat-eshell-visual-command-mode +1)
 
-  ;; Send output directly to the eshell buffer.
-  (setenv "PAGER" "cat")
-  (setenv "GIT_PAGER" "cat")
-
-
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
