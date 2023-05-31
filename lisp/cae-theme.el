@@ -59,18 +59,18 @@
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
-;; Set theme based on time
-(use-package! circadian
-  :config
-  (setq circadian-themes
-        '((:sunrise . modus-operandi-tinted)
-          (:sunset  . modus-vivendi-tinted)))
-  (if (and calendar-latitude calendar-longitude)
-      (let ((hook (if (daemonp)
-                      'server-after-make-frame-hook
-                    'after-init-hook)))
-        (remove-hook hook #'doom-init-theme-h)
-        (add-hook hook #'circadian-setup -90))
-    (setq calendar-latitude 0
-          calendar-longitude 0)
-    (message "ERROR: Calendar latitude and longitude are not set.")))
+;;;; Set theme based on time
+;;(use-package! circadian
+;;  :config
+;;  (setq circadian-themes
+;;        '((:sunrise . modus-operandi-tinted)
+;;          (:sunset  . modus-vivendi-tinted)))
+;;  (if (and calendar-latitude calendar-longitude)
+;;      (let ((hook (if (daemonp)
+;;                      'server-after-make-frame-hook
+;;                    'after-init-hook)))
+;;        (remove-hook hook #'doom-init-theme-h)
+;;        (add-hook hook #'circadian-setup -90))
+;;    (setq calendar-latitude 0
+;;          calendar-longitude 0)
+;;    (message "ERROR: Calendar latitude and longitude are not set.")))
