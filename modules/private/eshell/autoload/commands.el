@@ -116,11 +116,6 @@ file to edit."
          (file (car (s-split "\n" files))))
     (find-file file)))
 
-;;;###autoload
-(defun eshell/gst (&rest args)
-  (magit-status-internal (or (pop args) default-directory))
-  (delete-other-windows))
-
 ;; https://www.n16f.net/blog/clearing-the-eshell-buffer/
 ;;;###autoload
 (defun cae-eshell-clear ()
