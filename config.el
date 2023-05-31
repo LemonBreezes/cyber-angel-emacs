@@ -900,7 +900,7 @@
         "C-M-<" #'mc/skip-to-previous-like-this)
   (map! :leader
         :prefix "m"
-        :desc "Pop mark"                        "C-SPC" #'mc/mark-pop
+        :desc "Pop mark"                        "SPC" #'mc/mark-pop
         :desc "Mark all above"                  "<"     #'mc/mark-all-above
         :desc "Mark all below"                  ">"     #'mc/mark-all-below
         :desc "Mark words like this"            "W"     #'mc/mark-all-words-like-this
