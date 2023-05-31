@@ -43,7 +43,8 @@
                    +workspace/close-window-or-workspace read-only-mode
                    save-buffers-kill-terminal forward-sexp backward-sexp))
       (add-to-list 'mc/cmds-to-run-once cmd))
-    (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
+    (dolist (mode '(cae-completion-mode))
+      (add-to-list 'mc/unsupported-minor-modes mode))
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
     (define-key mc/keymap (kbd "C-. C-.")   #'mc/freeze-fake-cursors-dwim)
