@@ -101,7 +101,6 @@
         "," #'dired-create-empty-file
         :map dirvish-mode-map
         "e" #'cae-dired-find-file
-        [remap find-file] #'cae-dired-find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
