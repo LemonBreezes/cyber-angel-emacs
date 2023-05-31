@@ -351,15 +351,15 @@
                     ?h ?j ?k ?l ?\; ?\'))
         avy-dispatch-alist
         (cae-keyboard-remap
-         '((120 . avy-action-kill-move)
-           (88 . avy-action-kill-stay)
-           (116 . avy-action-teleport)
-           (109 . avy-action-mark)
-           (110 . avy-action-copy)
-           (121 . avy-action-yank)
-           (89 . avy-action-yank-line)
-           (105 . avy-action-ispell)
-           (122 . avy-action-zap-to-char))))
+         '((?x . avy-action-kill-move)
+           (?X . avy-action-kill-stay)
+           (?t . avy-action-teleport)
+           (?m . avy-action-mark)
+           (?n . avy-action-copy)
+           (?y . avy-action-yank)
+           (?Y . avy-action-yank-line)
+           (?i . avy-action-ispell)
+           (?z . avy-action-zap-to-char))))
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above))
 
