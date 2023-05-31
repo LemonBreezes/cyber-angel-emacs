@@ -27,9 +27,3 @@
            (mapcar #'cadr
                    (read (buffer-string)))
            do (add-to-list 'safe-local-variable-values (cons var val))))
-
-(defun cae-setup-dir-locals-h ()
-  (when (and (buffer-file-name)
-             (string= (file-name-nondirectory (buffer-file-name))
-                      ".dir-locals.el"))
-    (cae-mark-dir-locals-as-safe-h)))
