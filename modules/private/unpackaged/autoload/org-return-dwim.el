@@ -225,6 +225,7 @@ appropriate.  In tables, insert a new row or end the table."
               (t
                ;; Non-empty row: call `org-return'.
                (org-return))))
+       ;; Uncomment this disallow empty lines at the end of source blocks.
        ;;((save-excursion
        ;;   (skip-chars-backward "\n")
        ;;   (looking-at "\\(\n+\\)#\\+end_"))
