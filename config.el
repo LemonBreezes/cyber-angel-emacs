@@ -288,9 +288,7 @@
 (setq browse-url-browser-function
       (cond ((and (string-suffix-p "-android" system-configuration)
                   (executable-find "termux-clipboard-get"))
-             (if (or (fboundp 'w3m-browse-url)
-                     (autoloadp 'w3m-browse-url))
-                 #'w3m-browse-url #'eww-browse-url))
+             #'browse-url-xdg-open)
             (t #'browse-url-generic)))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
