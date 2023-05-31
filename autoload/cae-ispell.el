@@ -16,7 +16,7 @@ abort completely with `C-g'."
   (interactive "P")
   (let (bef aft)
     (save-excursion
-      (while (if (setq bef (endless/simple-get-word))
+      (while (if (setq bef (eac-ispell-simple-get-word))
                  ;; Word was corrected or used quit.
                  (if (ispell-word nil 'quiet)
                      nil ; End the loop.
@@ -27,7 +27,7 @@ abort completely with `C-g'."
                (not (bobp)))
         (backward-word)
         (backward-char))
-      (setq aft (endless/simple-get-word)))
+      (setq aft (eac-ispell-simple-get-word)))
     (if (and aft bef (not (equal aft bef)))
         (let ((aft (downcase aft))
               (bef (downcase bef)))
