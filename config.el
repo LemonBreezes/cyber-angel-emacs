@@ -115,7 +115,7 @@
 (set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*info\\*"           :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
-x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
+(set-popup-rule! "^\\*helpful "          :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
 (set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (map! :map messages-buffer-mode-map :n "q" #'quit-window)
@@ -270,7 +270,7 @@ x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :selec
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
-(load! "lisp/cae-repeat")!
+(load! "lisp/cae-repeat")
 (map! "C-<f4>" #'tab-close)
 
 (map! [remap backward-kill-word] #'doom/delete-backward-word
