@@ -593,6 +593,9 @@
     (after! vertico
       (map! :map vertico-map
             "C-;" #'vertico-quick-jump)))
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "C-;" #'avy-embark-collect-choose))
   :config
   (setq avy-timeout-seconds 0.25
         avy-all-windows t
