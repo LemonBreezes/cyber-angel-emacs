@@ -377,11 +377,12 @@
   :config
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
+  (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
+  (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
   (when (modulep! :completion vertico)
     (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
     (map! :map isearch-mb-minibuffer-map
-     [remap consult-history] #'consult-isearch-history)
+          [remap consult-history] #'consult-isearch-history)
     (add-to-list 'isearch-mb--after-exit #'consult-line)
     (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
@@ -562,7 +563,6 @@
   :init
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
-        "M-j" #'avy-goto-word-1
         :map isearch-mode-map
         "M-j" #'avy-isearch)
   (when (modulep! :completion vertico)
