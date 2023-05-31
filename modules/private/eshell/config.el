@@ -21,17 +21,12 @@
         "<next>" #'scroll-up-command)
   (map! :map eat-mode-map
         "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
-  
 
   (add-hook 'eshell-mode-hook #'+eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
   (advice-add 'eshell-send-input :before #'expand-abbrev)
 
-  (when (modulep! :config default +smartparens)
-    (sp-local-pair 'eshell-mode "#<" ">")
-    (sp-local-pair 'eshell-mode "$(" ")")
-    (sp-local-pair 'eshell-mode "${" "}"))
   (unless (modulep! :config default +smartparens)
     (remove-hook 'eshell-mode-hook #'smartparens-mode))
 
