@@ -26,6 +26,10 @@
                            (magit-pull "--rebase" "--autostash")
                            (magit-revert "--autostash")))
   (when (modulep! :tools magit +forge)
+    (map! :map magit-status-mode-map
+          ;; Killing the Magit status buffer removes the `forge-pull' progress
+          ;; from the modeline.
+          "q" #'magit-mode-bury-buffer)
     (after! forge
       (setq forge-pull-notifications t))))
 
