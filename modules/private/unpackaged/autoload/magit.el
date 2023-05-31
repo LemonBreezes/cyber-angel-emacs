@@ -16,7 +16,6 @@ command was called, go to its unstaged changes section."
       (goto-char (point-min))
       (cl-loop until (when (equal section-ident (magit-section-ident (magit-current-section)))
                        (magit-section-show (magit-current-section))
-                       (recenter)
                        t)
                do (condition-case nil
                       (magit-section-forward)
