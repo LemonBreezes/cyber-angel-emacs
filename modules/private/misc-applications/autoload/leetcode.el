@@ -16,9 +16,15 @@
     (+workspace-delete +leetcode-workspace-name)
     (+workspace/other)))
 
+;;;###autoload
+(defun +leetcode-soft-quit ()
+  (interactive)
+  (if (modulep! :ui workspaces)
+      (+workspace/other)
+    (leetcode-quit)))
+
 ;;;###autoload (autoload '+leetcode-problems-hydra/body "private/misc-applications/autoload/leetcode" nil t)
 (defhydra +leetcode-problems-hydra (:color pink :hint nil)
   ("<f6>" nil "Exit" :exit t)
   ("q" +workspace/other nil :exit t)
-  ("Q" +leetcode-quit nil :exit t)
-  )
+  ("Q" +leetcode-quit nil :exit t))
