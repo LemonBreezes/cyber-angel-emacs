@@ -49,7 +49,7 @@
   (advice-add #'eat-eshell-char-mode
               :after
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
-                (message "Type M-RET to enter semi-char mode. %s")))
+                (message "Type M-RET to enter semi-char mode.")))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
