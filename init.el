@@ -66,19 +66,20 @@
        (default +bindings)
 
        :private
-       ;; exwm
-       (corfu +tng)
-       ;; debugger
-       (dirvish +icons +dirvish)
-       ;; eshell
-       dired
-       lisp
-       misc-applications
-       ;; helm
-       modeline
-       ;; meow
-       unpackaged
-       vc)
+       ;; ;; exwm
+       ;; (corfu +tng)
+       ;; ;; debugger
+       ;; (dirvish +icons +dirvish)
+       ;; ;; eshell
+       ;; dired
+       ;; lisp
+       ;; misc-applications
+       ;; ;; helm
+       ;; modeline
+       ;; ;; meow
+       ;; unpackaged
+       ;; vc
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
