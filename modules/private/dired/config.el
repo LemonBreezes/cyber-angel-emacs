@@ -111,7 +111,7 @@
         "j" #'+default/search-buffer
         [remap delete-other-windows] #'cae-dired-maximize-buffer))
 
-;;(remove-hook 'dirvish-find-entry-hook
+;;(add-hook 'dirvish-find-entry-hook
 ;;          (cae-defun cae-dirvish-find-entry-h (entry buffer)
 ;;            (when (one-window-p)
 ;;              (ignore-error user-error
