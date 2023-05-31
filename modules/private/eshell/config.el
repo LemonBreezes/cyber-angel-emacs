@@ -11,7 +11,6 @@
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
-
   (map! :map (eat-eshell-semi-char-mode-map)
         "C-a" #'eat-self-input
         "C-e" #'eat-self-input
@@ -22,7 +21,6 @@
         "<next>" #'scroll-up-command)
   (map! :map eat-mode-map
         "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
-
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
@@ -42,7 +40,9 @@
   ;; Parse buffer redirection >#buf and >#.
   (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
 
-  (setq eshell-input-filter #'cae-eshell-input-filter)
+  (setq eshell-input-filter #'cae-eshell-input-filter ; filter trivial commands
+                                                      ; from history
+        eshell-prompt-function #'cae-eshell-prompt)
 
   (after! esh-module
     (when (>= emacs-major-version 29)
