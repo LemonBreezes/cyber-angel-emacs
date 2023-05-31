@@ -266,7 +266,8 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-(add-hook 'dired-mode-hook #'display-line-numbers-mode)
+(after! dired
+  (add-hook 'dired-mode-hook #'display-line-numbers-mode))
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
@@ -359,6 +360,7 @@
 
 (use-package! ibuffer
   :defer t :config
+  (add-hook 'ibuffer-mode-hook #'display-line-numbers-mode)
   (setq ibuffer-formats
         '((mark modified read-only locked " "
            (name 23 23 :left :elide)
