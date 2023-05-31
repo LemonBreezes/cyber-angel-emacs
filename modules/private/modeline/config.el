@@ -102,19 +102,9 @@
   ;; and be silent on startup.
   (use-package! parrot
     :defer t :init
-    (defadvice! +define-obsolete-variable-alias-a (oldfun &rest args)
-      :around #'define-obsolete-variable-alias
-      (when (eq (length args) 2)
-        (setq args (append args '("28.1"))))
-      (apply oldfun args))
-    (add-transient-hook! 'prog-mode-hook
-      (advice-add #'message :override #'ignore)
-      (unwind-protect (parrot-mode)
-        (advice-remove #'message #'ignore)))
+    (add-hook 'doom-first-file-hook #'parrot-mode)
     :config
-    (unwind-protect
-        (progn (advice-add #'parrot-start-animation :override #'ignore))
-      (setopt parrot-animate 'hide-static
+    (setopt parrot-animate 'hide-static
              parrot-rotate-animate-after-rotation nil
              parrot-num-rotations 10
              parrot-animate-on-load nil
@@ -123,9 +113,8 @@
              parrot-type 'nyan)
       (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
             parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
-      (advice-remove #'parrot-start-animation #'ignore))
-    (add-to-list 'parrot-rotate-dict
-                 '(:rot ("add-hook" "remove-hook")))
+      (add-to-list 'parrot-rotate-dict
+                   '(:rot ("add-hook" "remove-hook")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("add-hook!" "remove-hook!")))
     (add-to-list 'parrot-rotate-dict
@@ -139,12 +128,5 @@
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
                          "cae-keyboard-kbd")))
-    ;; delete (:rot ("1" "2" "3" "4" "5" "6" "7" "8" "9" "10"))
-    ;; (setq parrot-rotate-dict
-    ;;       (cl-remove-if (lambda (x) (and (listp x)
-    ;;                                 (eq (car x) :rot)
-    ;;                                 (cl-every (lambda (y) (string-match-p "^[0-9]+$" y))
-    ;;                                           (cadr x))))
-    ;;                     parrot-rotate-dict))
     (map! "C-!" #'parrot-rotate-next-word-at-point
           "C-M-!" #'parrot-rotate-prev-word-at-point)))
