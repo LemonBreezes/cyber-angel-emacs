@@ -347,6 +347,9 @@
                                                  cae-keyboard-orbits
                                                  :test (lambda (x y) (cl-find x y))))))
                       (cae-keyboard-kbd-reverse "'"))
+                     ;; An idea for a backup is to iterate through the orbit of
+                     ;; ?, and ?' until some key is found that is not bound in
+                     ;; the map.
                      (t "\\"))
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
