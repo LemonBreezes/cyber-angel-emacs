@@ -111,8 +111,6 @@
         "N" #'dirvish-narrow
         "j" #'consult-line)
 
-  (map! [remap dired-jump] #'dirvish-dwim)
-
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
@@ -122,6 +120,8 @@
 ;; `projectile-find-file'. Also, automatically enter fullscreen mode when
 ;; opening a file in a single window.
 (advice-add #'find-file :around #'cae-dired-find-file-a)
+
+(map! [remap dired-jump] #'dirvish-dwim)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
