@@ -362,9 +362,10 @@
     (cond ((executable-find "termux-setup-storage")
            (setq xclip-method 'termux-clipboard-get))))
 
-  (setq bookmark-bmenu-file-column 50
-        bookmark-watch-bookmark-file nil)
-  (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+  (after! bookmark
+    (setq bookmark-bmenu-file-column 50
+          bookmark-watch-bookmark-file nil)
+    (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords))
 
   (after! auth-source
     (setq auth-source-cache-expiry nil
