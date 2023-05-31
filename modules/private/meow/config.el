@@ -163,8 +163,7 @@
           ,(cae-keyboard-kbd "&") #'meow-query-replace
           "%" #'meow-query-replace-regexp
           "Y" #'meow-yank-pop
-          "\\" #'quoted-insert
-          )))
+          "\\" #'quoted-insert)))
 
 (use-package! meow
   :init
