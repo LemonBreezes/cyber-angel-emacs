@@ -142,13 +142,16 @@
             (ignore-errors (byte-compile-file file))
             (let ((native-comp-speed cae-compile-native-comp-speed))
               (ignore-errors (native-compile file)))
-            (run-with-idle-timer 0.1 nil #'cae-compile-next-file files))
-        (run-with-idle-timer 0.1 nil #'cae-compile-next-file files)))))
+            (run-with-idle-timer doom-incremental-idle-timer
+                                 nil #'cae-compile-next-file files))
+        (run-with-idle-timer doom-incremental-idle-timer
+                             nil #'cae-compile-next-file files)))))
 
 (defun cae-compile-schedule-native-compilation ()
   (when (and (bound-and-true-p cae-config-finished-loading)
              (bound-and-true-p cae-config-incremental-compilation-enabled-p))
-    (run-with-idle-timer 0.1 nil #'cae-compile-next-file
+    (run-with-idle-timer doom-incremental-idle-timer
+                         nil #'cae-compile-next-file
                          (cae-compile-list-files-to-compile))))
 
 ;; Run early in case I want to `C-g' and inspect the output.
