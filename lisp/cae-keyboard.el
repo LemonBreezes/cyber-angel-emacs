@@ -266,6 +266,7 @@
 
 (use-package casease
   :defer nil
+  :config
   (casease-setup
    :hook python-mode-hook
    :separator ?-
@@ -277,4 +278,5 @@
    :separator ?-
    :entries
    ((camel "\\(-\\)[a-z]" "[A-Z]")
-    (snake "[a-z]"))))
+    (snake "[a-z]")
+    (screaming "\\(_\\)[a-z]" "[A-Z]"))))
