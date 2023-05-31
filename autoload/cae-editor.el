@@ -4,7 +4,9 @@
 (defun cae-kill-buffer-query-diff-a (orig-func &optional buffer-or-name)
   "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
   (setq buffer-or-name (or buffer-or-name (current-buffer)))
-  (if (and buffer-file-name (buffer-modified-p))
+  (if (and (buffer-local-value 'buffer-file-name
+                               (get-buffer buffer-or-name))
+           (buffer-modified-p (get-buffer buffer-or-name)))
       (catch 'quit
         (save-window-excursion
           (with-current-buffer buffer-or-name
