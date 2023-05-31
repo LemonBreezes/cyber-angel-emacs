@@ -281,10 +281,10 @@
     (dolist (cmd '(recenter-top-bottom reposition-window
                    scroll-right scroll-left isearch-yank-word
                    consult-isearch-history))
-      (add-to-list 'isearch-mb--with-buffer cmd nil #'eq))
+      (add-to-list 'isearch-mb--with-buffer cmd))
     (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
                    avy-isearch consult-line))
-      (add-to-list 'isearch-mb--after-exit cmd nil #'eq))
+      (add-to-list 'isearch-mb--after-exit cmd))
     (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
