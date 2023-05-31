@@ -64,7 +64,8 @@
     ("v" my-View-scroll-half-page-backward-other-window)
     (:exit "V" my-View-scroll-half-page-forward-other-window)))
 
-;; For some reason this doesn't work.
+;; For some reason this doesn't work. `restore-point' doesn't restore point for
+;; these commands, even though it does push the point to the ring.
 (after! restore-point
   (dolist (fn '(View-scroll-half-page-forward
                 View-scroll-half-page-backward
