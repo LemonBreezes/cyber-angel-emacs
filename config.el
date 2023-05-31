@@ -762,6 +762,7 @@
   :defer t :init
   (add-hook 'doom-first-input-hook #'restore-point-mode)
   :config
+  ;; Restore point in the minibuffer.
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
         (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
