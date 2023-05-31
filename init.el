@@ -8,9 +8,6 @@
       doom-localleader-alt-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(unless (featurep 'smartparens)
-  (defalias 'sp-local-pair #'ignore))
-
 (doom! :completion
        (vertico +icons +childframe)
 
