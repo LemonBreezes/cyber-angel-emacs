@@ -146,3 +146,21 @@ file to edit."
 ;;;###autoload
 (defun eshell/uu ()
   (eshell/u 2))
+
+;; Taken from Aweshell: https://github.com/manateelazycat/aweshell/blob/master/aweshell.el
+;;;###autoload
+(defun cae-sudo-toggle ()
+  "Toggle sudo with current command."
+  (interactive)
+  (save-excursion
+    (let ((commands (buffer-substring-no-properties
+                     (progn (eshell-bol) (point)) (point-max))))
+      (if (string-match-p "^sudo " commands)
+          (progn
+            (eshell-bol)
+            (while (re-search-forward "sudo " nil t)
+              (replace-match "" t nil)))
+        (progn
+          (eshell-bol)
+          (insert "sudo ")
+          )))))
