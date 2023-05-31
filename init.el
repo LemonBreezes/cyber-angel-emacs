@@ -23,7 +23,7 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(defvar cae-init-ui-enabled-p nil
+(defvar cae-init-ui-enabled-p t
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is disabled.")
