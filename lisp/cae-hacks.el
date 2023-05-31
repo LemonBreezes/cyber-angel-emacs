@@ -129,6 +129,10 @@
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
 
+(after! consult
+  (setq consult--gc-threshold cae-hacks-gc-threshold
+        consult--gc-percentage cae-hacks-gc-percentage))
+
 (defun cae-hacks-disable-gc ()
   (unless cae-hacks--gc-disabled
     (setq cae-hacks--gcmh-mode        gcmh-mode)
