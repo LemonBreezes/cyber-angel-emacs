@@ -315,7 +315,6 @@
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
 
-(setq delete-selection-save-to-register ?d)
 (delete-selection-mode -1)
 (setq delete-active-region t)           ;makes `d' delete region in Meow.
 
