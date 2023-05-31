@@ -168,6 +168,7 @@
 (use-package! meow
   :init
   (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
+  (add-hook 'git-timemachine-mode-hook #'meow-motion-mode)
   :demand t
   :config
   (meow/setup-cae)
@@ -187,6 +188,7 @@
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
         meow-select-on-change t
+        meow-keypad-self-insert-undefined nil
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp
                                   eval-expression pp-eval-expression))
 
