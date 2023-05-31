@@ -5,6 +5,7 @@
                                         ;loading the latest version.
 (random t)                              ;Set the random seed.
 
+(load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
