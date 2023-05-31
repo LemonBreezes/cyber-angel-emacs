@@ -152,5 +152,6 @@
       which-key-replacement-alist)
 
 (map! :leader
+      :prefix "p"
       "C-b" #'cae-project-bookmark
       "RET" #'cae-project-bookmark-set)
