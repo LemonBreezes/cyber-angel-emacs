@@ -9,6 +9,7 @@
   (:host github :repo "xl666/enime" :files ("*")))
 (package! alarm-clock)
 (when (and (eq system-type 'gnu/linux)
+           (not (getenv "WSL_DISTRO_NAME"))
            (or (modulep! :private helm)
                (modulep! :completion helm)))
   (package! helm-linux-disks :recipe
