@@ -11,6 +11,7 @@
   (setq zone-programs [zone-nyan
                        zone-rainbow
                        zone-matrix
+                       snow
                        zone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
