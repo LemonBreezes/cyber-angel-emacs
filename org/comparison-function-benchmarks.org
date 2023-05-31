@@ -1,0 +1,47 @@
+#+title: Comparison Function Benchmarks
+
+* Setup
+:PROPERTIES:
+:CREATED_TIME: [2022-09-02 Fri 15:10]
+:END:
+
+#+name: benchmark-setup
+#+begin_src elisp
+;;; experiments/seq-cl-dash-benchmarks.el -*- lexical-binding: t; -*-
+(defmacro k/benchmark-run (n &rest forms)
+  "Benchmark each of FORMS with `benchmark-run' with N repetitions."
+  (declare (indent 1))
+  `(list
+    '(form\# total gc-count gc-time)
+    'hline
+    ,@(cl-loop with index = 1
+               for form in forms
+               collect
+               (prog2
+                   (garbage-collect)
+                   `(cons ,index (benchmark-run ,n
+                                   ,form))
+                 (cl-incf index)))))
+
+(defmacro k/benchmark-run-compiled (n &rest forms)
+  "Benchmark each of FORMS, byte-compiled, with N repetitions."
+  (declare (indent 1))
+  `(list
+    '(form\# total gc-count gc-time)
+    'hline
+    ,@(cl-loop with index = 1
+               for form in forms
+               collect
+               (prog2
+                   (garbage-collect)
+                   `(cons ,index
+                          ;; Because `benchmark-run-compiled'
+                          ;; quotes the lambda, it is not able to
+                          ;; see any let form around it.
+                          (benchmark-call (native-compile (lambda () ,form))
+                                          ,n))
+                 (cl-incf index)))))
+#+end_src
+
+#+RESULTS: benchmark-setup
+: k/benchmark-run-compiled
