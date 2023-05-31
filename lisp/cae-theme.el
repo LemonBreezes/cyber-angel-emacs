@@ -59,8 +59,16 @@
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
-;; Set theme based on time
+(use-package! theme-magic
+  :defer t
+  :init
+  (if (display-graphic-p)
+      (run-with-idle-timer 2 nil
+                           (lambda () (theme-magic-export-theme-mode +1)
+                             (cae-hacks-shut-up-a #'theme-magic-from-emacs)))
+    (theme-magic-export-theme-mode +1)))
 
+;; Set theme based on time
 (if (and (display-graphic-p)
          (not (modulep! :ui doom)))
     (progn (advice-add #'doom-init-theme-h :override #'ignore)
@@ -84,13 +92,6 @@
         (if (modulep! :ui doom)
             'doom-one
           'modus-vivendi)))
-
-(use-package! theme-magic
-  :defer t
-  :init
-  (run-with-idle-timer 2 nil
-                       (lambda () (theme-magic-export-theme-mode +1)
-                         (cae-hacks-shut-up-a #'theme-magic-from-emacs))))
 
 (unless (display-graphic-p)
   (setq +ligatures-in-modes nil
