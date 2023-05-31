@@ -81,14 +81,6 @@
 (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 (add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
-(when (modulep! :ui emoji)
-  (after! emojify
-    (setq emojify-download-emojis-p t)
-    (dolist (mode '(comint-mode syslog-mode term-mode eshell-mode vterm-mode
-                    shell-mode compilation-mode special-mode fundamental-mode
-                    syslog-mode crontab-mode))
-      (add-to-list 'emojify-inhibit-major-modes mode))))
-
 (use-package! info-colors
   :defer t :init
   (add-hook 'Info-selection-hook 'info-colors-fontify-node))
