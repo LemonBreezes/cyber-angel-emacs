@@ -38,5 +38,5 @@
         ((condition-case error
              (scan-sexps (point-min) (point-max))
            (scan-error t))
-         (delete-char 1))
+         (delete-char arg))
         ((sp-delete-char arg))))
