@@ -52,7 +52,7 @@
         which-key-compute-remaps t))
 
 (after! eros
-  (setq eros-eval-result-prefix "⟹ "))
+  (setq eros-eval-result-prefix "⟹ "))  ; Pretty arrow
 
 ;; Do not spam me with warnings
 (after! warnings
