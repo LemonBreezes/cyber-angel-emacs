@@ -6,8 +6,8 @@
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-(defvar cae-config-electric-pair-mode nil
-  "Whether electric-pair-mode is enabled globally.")
+(defvar cae-config-electric-pair-mode t
+  "Whether `electric-pair-mode' is enabled globally.")
 
 ;;; UI
 
