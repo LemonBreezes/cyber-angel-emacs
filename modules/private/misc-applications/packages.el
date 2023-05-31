@@ -23,8 +23,6 @@
 ;; (package! picpocket)
 (when (eq system-type 'gnu/linux)
   (package! daemons))
-(when (and (eq system-type 'gnu/linux) (executable-find "pacman"))
-  (package! aurel))
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (not (or (modulep! :private helm)
                      (modulep! :completion helm))))
