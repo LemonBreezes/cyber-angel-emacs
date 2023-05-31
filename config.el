@@ -88,7 +88,8 @@
 
 (after! which-key
   (setq which-key-ellipsis "..."
-        which-key-compute-remaps t))
+        which-key-compute-remaps t
+        which-key-max-description-length 35))
 
 (after! eros
   (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
