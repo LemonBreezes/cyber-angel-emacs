@@ -518,7 +518,7 @@
         avy-column-line-overlay t))
 
 (use-package! winum
-  :after-call doom-switch-window-hook
+  :after-call doom-first-buffer-hook
   :config
   (winum-mode +1)
   (eval
