@@ -87,6 +87,7 @@
                (bookmark-write-file bookmark-default-file))
            cae-project-bookmark-cache))
 
+(add-hook 'kill-emacs-hook #'cae-save-all-project-bookmarks)
 
 (define-prefix-command 'cae-project-bookmark-map)
 (map! :map cae-project-bookmark-map
