@@ -10,4 +10,6 @@
         "L" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
-        "q" #'+leetcode-quit))
+        "q" #'+leetcode-quit)
+  (add-hook 'leetcode-solution-mode-hook
+          (lambda() (flycheck-mode -1))))
