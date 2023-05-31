@@ -104,14 +104,6 @@
     (funcall oldfun)))
 (advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
-(defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
-  :around #'save-some-buffers
-  (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 50)
-  (let ((gcmh-low-cons-threshold most-positive-fixnum)
-        (gcmh-high-cons-threshold most-positive-fixnum))
-    (apply oldfun args)))
-
 ;; Remove this as soon as Doom fixes the error upstream.
 (defadvice! cae-hacks-monkey-patch-consult-for-doom (oldfun &rest args)
   :around #'consult--ripgrep-make-builder
@@ -127,3 +119,19 @@
     (apply oldfun args)
     (when (bolp)
       (goto-char p))))
+
+;;; GC hacks
+
+(defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
+  :around #'save-some-buffers
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-percentage 50)
+  (let ((gcmh-low-cons-threshold most-positive-fixnum)
+        (gcmh-high-cons-threshold most-positive-fixnum))
+    (apply oldfun args)))
+
+(defun cae-hacks-max-out-gc-h ()
+  (setq gc-cons-threshold most-positive-fixnum
+        gc-cons-percentage 50))
+
+(add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
