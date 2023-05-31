@@ -317,8 +317,7 @@
     (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
     (defun cae-perfect-margin-ignore-posframe-p (window)
       "Check if the current buffer's display type is posframe."
-      (and (window-live-p (window))
-           (eq (plist-get (frame-parameters) 'posframe) t)))
+      (frame-parameter (window-frame window) 'parent-frame))
     :config
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
 
