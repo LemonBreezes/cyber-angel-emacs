@@ -579,12 +579,6 @@
        (setq embark-cycle-key ,embark-act-key))
     t))
 
- ;; I don't use Deft.
- (when (and (not (modulep! :ui deft))
-            (eq (lookup-key doom-leader-map "nd")
-                'deft))
-   (define-key doom-leader-map "nd" nil))
-
  ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
  (when (modulep! :ui popup)
    (add-hook 'post-command-hook
