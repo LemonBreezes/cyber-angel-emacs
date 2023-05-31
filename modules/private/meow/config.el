@@ -206,7 +206,7 @@
           ;; These are the ones that are not bound by default.
           (meow-replace . meow-yank)    ;Basically makes `meow-yank' obsolete.
           (meow-reverse . exchange-point-and-mark)
-          (cae-meow-save . cae-meow-save-line)
+          (cae-meow-save . cae-meow-save-line) ;Not bound to any keys yet.
           ))
   (when (modulep! :private corfu)
     (after! corfu
