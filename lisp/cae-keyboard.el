@@ -126,6 +126,26 @@
         "C-c ;" #'embark-export
         "C-c C-;" nil))
 
+(defun cae-make-conditional-key-translation (key-from key-to translate-keys-p)
+  "Make a Key Translation such that if the translate-keys-p function returns true,
+   key-from translates to key-to, else key-from translates to itself.  translate-keys-p
+   takes key-from as an argument. "
+  (define-key key-translation-map key-from
+    (lambda (prompt)
+      (if (funcall translate-keys-p key-from) key-to key-from))))
+
+(defun cae-translate-number-row-p (key-from)
+  "Return true if we should translate the number row keys."
+  (and
+   ;; Only allow a non identity translation if we're beginning a Key Sequence.
+   (equal key-from (this-command-keys))
+   (minibufferp)
+   (string-match-p "Go to line: " (minibuffer-prompt))))
+
+(dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
+  (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
+                                        (kbd key-from)
+                                        #'cae-translate-number-row-p))
 
 ;;; Lispy
 
