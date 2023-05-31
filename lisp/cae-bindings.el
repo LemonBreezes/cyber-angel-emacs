@@ -17,7 +17,7 @@
     (map! :leader
           (:prefix ("C" . "checkers")))))
 (when (modulep! :editor snippets)
-  (let ((snippet-prefix "y"))
+  (let ((snippet-prefix "S"))
     (dolist (p (cdr (lookup-key doom-leader-map "&")))
       (cl-destructuring-bind (key . binding) p
         (define-key doom-leader-map (kbd (concat (format "%s " snippet-prefix)
@@ -47,10 +47,10 @@
                 which-key-replacement-alist))
   (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
   (define-key doom-leader-map "\C-f" nil)
-  (map! (:prefix ("x" . "fold")
+  (map! (:prefix ("F" . "fold")
          "k"     #'vimish-fold-delete
          "K" #'vimish-fold-delete-all
-         "x"     #'+fold/toggle
+         "t"     #'+fold/toggle
          "C" #'+fold/close-all
          "o"     #'+fold/open
          "O" #'+fold/open-all)))
