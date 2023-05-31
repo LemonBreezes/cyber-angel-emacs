@@ -552,8 +552,7 @@
           sp-forward-barf-sexp sp-slurp-hybrid-sexp sp-backward-slurp-sexp
           sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp))
       (dolist (cmd mc-smartparens-cmds)
-        (add-to-list 'mc/cmds-to-run-for-all cmd))))
-  (map! "M-r" #'sp-raise-sexp))
+        (add-to-list 'mc/cmds-to-run-for-all cmd)))))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
