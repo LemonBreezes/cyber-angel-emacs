@@ -39,12 +39,7 @@
                    +workspace/switch-to-8 +workspace/kill-session
                    +workspace/switch-right +workspace/switch-to-final
                    +workspace/restore-last-session +workspace/kill-session-and-quit
-                   +workspace/close-window-or-workspace tab-switch
-                   tab-new tab-last-tab-list tab-move tab-next tab-undo
-                   tab-close tab-group tab-detach tab-new-to tab-recent
-                   tab-rename tab-select tab-move-to tab-previous tab-switcher
-                   tab-duplicate tab-close-group tab-close-other
-                   tab-window-detach read-only-mode))
+                   +workspace/close-window-or-workspace read-only-mode))
       (add-to-list 'mc/cmds-to-run-once cmd))
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
