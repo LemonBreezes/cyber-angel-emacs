@@ -106,6 +106,8 @@
           "?" #'meow-cheatsheet
           "[" #'meow-beginning-of-thing
           "]" #'meow-end-of-thing
+          "<" #'meow-beginning-of-thing
+          ">" #'meow-end-of-thing
           "a" #'meow-append
           "A" #'meow-open-below
           "w" #'meow-back-word          ;b -> w
@@ -159,7 +161,11 @@
           ,(cae-keyboard-kbd "&") #'meow-query-replace
           "%" #'meow-query-replace-regexp
           "Y" #'meow-yank-pop
-          "\\" #'quoted-insert)))
+          "\\" #'quoted-insert
+          "/" #'+default/search-buffer
+          ,(cae-keyboard-kbd "*") #'isearch-forward-symbol-at-point
+
+          )))
 
 (use-package! meow
   :init
