@@ -71,7 +71,7 @@
        dired
        lisp
        misc-applications
-       helm
+       ;; helm
        modeline
        unpackaged
        vc)
