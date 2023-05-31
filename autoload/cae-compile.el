@@ -142,7 +142,8 @@
     (let ((file (pop files)))
       (if (file-exists-p file)
           (progn
-            (message "Compiling %s" file)
+            (when doom-debug-mode
+              (message "Compiling %s" file))
             (ignore-errors (byte-compile-file file))
             ;;(let ((native-comp-speed cae-compile-native-comp-speed))
             ;;  (ignore-errors (native-compile file)))
