@@ -629,10 +629,6 @@
     :defer t :init
     (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
     (advice-add #'avy-goto-line :around #'cae-avy-indent-line-overlay-a)
-    (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
-    (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
-    (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
-    (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
     (advice-add #'avy-goto-line-above :around #'cae-avy-goto-line-above-use-bottom-up-a)
     :config
     (setq avy-timeout-seconds 0.4
