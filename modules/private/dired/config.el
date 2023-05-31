@@ -56,7 +56,9 @@
   (after! dirvish-side
     (dirvish-side-follow-mode 1))
   (add-hook! 'dirvish-setup-hook
-    (when (file-equal-p default-directory "~/Downloads/")
+    (when (string-match-p "downloads"
+                          (file-name-nondirectory
+                           (directory-file-name default-directory)))
       (dirvish-emerge-mode 1)))
   (add-hook 'dirvish-emerge-mode-hook #'doom-auto-revert-buffer-h)
   (after! dirvish-emerge
