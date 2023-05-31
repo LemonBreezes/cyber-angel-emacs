@@ -18,7 +18,7 @@
         "<f6>" #'+leetcode-problems-hydra/body
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
-  (add-hook! 'leetcode-solution-mode-hook
+  (add-hook 'leetcode-solution-mode-hook
     (lambda ()
       ;; Flycheck will emit errors because the code does not have any
       ;; import/include/etc statements. Besides, we can't use Flycheck
