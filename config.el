@@ -857,9 +857,9 @@
         (nreverse (apply oldfun args))
       (apply oldfun args))))
 
-(use-package! unmodified-buffer
-  :defer t :init
-  (add-hook 'after-init-hook #'unmodified-buffer-global-mode))
+;;(use-package! unmodified-buffer
+;;  :defer t :init
+;;  (add-hook 'after-init-hook #'unmodified-buffer-global-mode))
 
 
 ;;; Autocompletion
@@ -1164,7 +1164,7 @@
  t)
 
 (setq cae-config-finished-loading t)
-
+;
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
 ;;End:
