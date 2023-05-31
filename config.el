@@ -511,6 +511,7 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
+
 (use-package! aggressive-indent
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp' module.
@@ -518,24 +519,24 @@
   :defer t)
 
 ;; Doom uses a custom delete backward command,
-;; `+default--delete-backward-char-a', which I prefer.
-;; (use-package! hungry-delete
-;;   :defer t :init
-;;   (add-hook 'emacs-lisp-mode-hook #'hungry-delete-mode)
-;;   (add-hook 'c-mode-common-hook #'hungry-delete-mode)
-;;   :config
-;;   (when (modulep! :config default +smartparens)
-;;     (map! :map hungry-delete-mode-map
-;;           [remap backward-delete-char-untabify] #'sp-backward-delete-char
-;;           [remap c-electric-backspace] #'sp-backward-delete-char
-;;           [remap delete-backward-char] #'sp-backward-delete-char
-;;           "<deletechar>" #'sp-delete-char
-;;           "C-d" #'sp-delete-char))
-;;   (when (modulep! :editor multiple-cursors)
-;;     (after! multiple-cursors
-;;       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
-;;       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
-;;   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
+;; `+default--delete-backward-char-a', which I prefer. However, when
+;; `aggressive-indent-mode' in in use, `hungry-delete-mode' works better
+(use-package! hungry-delete
+  :defer t :init
+  (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
+  :config
+  (when (modulep! :config default +smartparens)
+    (map! :map hungry-delete-mode-map
+          [remap backward-delete-char-untabify] #'sp-backward-delete-char
+          [remap c-electric-backspace] #'sp-backward-delete-char
+          [remap delete-backward-char] #'sp-backward-delete-char
+          "<deletechar>" #'sp-delete-char
+          "C-d" #'sp-delete-char))
+  (when (modulep! :editor multiple-cursors)
+    (after! multiple-cursors
+      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
+      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
+  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
 ;; to use sudo on a file before `tramp-sh' is loaded.
