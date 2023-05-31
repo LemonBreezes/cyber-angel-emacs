@@ -268,15 +268,7 @@
   :defer nil
   :config
   (casease-setup
-   :hook python-mode-hook
-   :separator ?-
-   :entries
-   ((pascal "\\(-\\)[a-z]" "[A-Z]")
-    (snake "[a-z]")))
-  (casease-setup
    :hook c-mode-common-hook
    :separator ?-
    :entries
-   ((camel "\\(-\\)[a-z]" "[A-Z]")
-    (snake "[a-z]")
-    (screaming "\\(_\\)[a-z]" "[A-Z]"))))
+   ((screaming "\\(-\\)[a-z]" "[A-Z]"))))
