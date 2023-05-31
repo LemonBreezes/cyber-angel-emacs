@@ -877,8 +877,7 @@
         "^" #'cape-tex
         "&" #'cape-sgml
         "r" #'cape-rfc1345
-        "." #'copilot-complete
-        "C-." #'copilot-complete))
+        "." #'copilot-complete))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
@@ -909,8 +908,6 @@
     (define-key mc/keymap (kbd "C-. C-k")   #'mc/remove-cursors-at-eol)
     (define-key mc/keymap (kbd "C-. d")     #'mc/remove-duplicated-cursors)
     (define-key mc/keymap (kbd "C-. C-o")   #'mc/remove-cursors-on-blank-lines)
-
-    (define-key mc/keymap (kbd "C-. C-.")   #'mc/freeze-fake-cursors-dwim)
 
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)))
