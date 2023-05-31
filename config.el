@@ -38,15 +38,14 @@
   (define-key doom-leader-map "&" nil)
   (after! which-key
     (setq which-key-replacement-alist
-          (cl-mapcar (lambda (x)
-                       (let ((case-fold-search nil))
+          (let ((case-fold-search nil))
+            (cl-mapcar (lambda (x)
                          (when (car-safe (car x))
                            (setf (car (car x))
                                  (replace-regexp-in-string "C-c &"
                                                            "C-c y"
-                                                           (car-safe (car x)))))
-                         x))
-                     which-key-replacement-alist))))
+                                                           (car-safe (car x))))))
+                       which-key-replacement-alist)))))
 
 ;;; UI
 
