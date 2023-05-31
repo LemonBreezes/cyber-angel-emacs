@@ -84,7 +84,7 @@
        t)
       (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body)
       ;;(define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body)
-      )
+      (define-key smartparens-mode-map (kbd "C-M-?") nil))
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (dolist (it sp--mc/cursor-specific-vars)
