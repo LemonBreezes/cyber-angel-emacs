@@ -544,6 +544,8 @@
       "M-Z" #'zap-up-to-char
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
+      [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+      [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
       (:after man
@@ -588,9 +590,6 @@
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
-
-(map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
-      [remap doom/sudo-this-file] #'cae-toggle-sudo)
 
 (after! expand-region
   (setq expand-region-smart-cursor t)
