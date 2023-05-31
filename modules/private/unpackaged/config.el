@@ -11,7 +11,8 @@
 (when (modulep! :tools magit)
   (defalias 'magit-status-goto-initial-section-1 'magit-status-goto-initial-section)
 
-  (map! [remap magit-status] #'cae-unpackaged-magit-save-buffer-show-status)
+  (map! [remap magit-status] #'cae-unpackaged-magit-save-buffer-show-status
+        [remap magit-status-here] #'cae-unpackaged-magit-save-buffer-show-status-here)
 
   ;; Restore the window configuration after exiting `magit-status', since we are
   ;; deleting other windows with `cae-unpackaged-magit-save-buffer-show-status'.
