@@ -15,6 +15,7 @@
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
 (package! rainbow-mode)
+(package! topsy)
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -51,6 +52,7 @@
 (package! hungry-delete)
 (package! file-info)
 (package! titlecase)
+(package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
