@@ -17,7 +17,7 @@
 
 ;;; UI
 
-(load! "lisp/cae-theme")
+;;(load! "lisp/cae-theme")
 (after! hydra
   (load! "lisp/cae-cheatsheets"))
 
