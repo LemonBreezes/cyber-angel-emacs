@@ -46,6 +46,7 @@
           whitespace-mode
           highlight-quoted-mode
           diff-hl-mode
+          eat-eshell-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -54,8 +55,6 @@
           (auto-revert-tail-mode)
           ;; (flyspell-mode)
           (spell-fu-mode)
-          (flycheck-mode)
-          (flycheck-mode)
           (font-lock-mode)
           (highlight-changes-mode)
           ;; (overwrite-mode)
