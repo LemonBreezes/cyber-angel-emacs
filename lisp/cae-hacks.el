@@ -54,5 +54,5 @@
 (defadvice! +eros-eval-lavst-sexp-a (oldfun arg)
   :around #'eros-eval-last-sexp
   (if (eq arg '-)
-      (funcall #'pp-eval-last-sexp arg)
+      (funcall #'pp-eval-last-sexp nil)
     (funcall oldfun arg)))
