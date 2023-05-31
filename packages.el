@@ -4,15 +4,13 @@
                    flyspell
                    flycheck
                    ccls
-                   compat
-                   vimish-fold)
+                   compat)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 ;; Added because of errors.
 (package! lv)
-(package! vimish-fold)
 
 ;;; UI
 (package! info-colors)
