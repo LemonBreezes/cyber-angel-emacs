@@ -256,7 +256,7 @@
     (map! :map edebug-mode-map
           "<f6>" #'cae-edebug-cheatsheet))
   (after! macrostep
-    (map! :map macrostep-keymap
+    (map! :map macrostep-mode-keymap
           "<f6>" #'cae-macrostep-cheatsheet)))
 
 
