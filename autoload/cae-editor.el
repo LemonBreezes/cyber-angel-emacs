@@ -152,3 +152,13 @@ This is the format used on Reddit for code blocks."
     (setq deactivate-mark t)
     (kill-new (replace-regexp-in-string "^" "    " text))
     (message "Copied!")))
+
+;;;###autoload
+(defun cae-forward-sentence (&optional arg)
+  (or arg (setq arg 1))
+  (if (or (autoloadp (symbol-function #'sentex-forward-sentence))
+          (fboundp #'sentex-forward-sentence))
+      (if (< arg 0)
+          (sentex-backward-sentence arg)
+        (sentex-forward-sentence arg))
+    (forward-sentence-default-function arg)))
