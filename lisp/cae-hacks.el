@@ -17,9 +17,9 @@
 
 ;; Prevent hydras from remaining active when switching workspaces.
 (after! (:all persp-mode hydra)
-  (defun cae-hacks-hydar-quit-h (&rest _)
+  (defun cae-hacks-hydra-quit-h (&rest _)
     (hydra-keyboard-quit))
-  (add-hook 'persp-before-switch-functions #'cae-hacks-hydar-quit-h))
+  (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h))
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
