@@ -133,7 +133,10 @@
           override-global-mode
           font-lock-mode
           meow-mode
-          shell-dirtrack-mode))
+          shell-dirtrack-mode
+          meow-normal-mode
+          meow-motion-mode
+          meow-keypad-mode))
   (setq minions-promoted-modes
         '(orgtbl-mode
           overwrite-mode
