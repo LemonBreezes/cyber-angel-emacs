@@ -148,6 +148,7 @@
                          "Move to column: ")
                        :test #'string-match-p))
        (and (featurep 'ispell)
+            (not (minibufferp))         ;I added this basically because I am being paranoid XD
             (get-buffer-window ispell-choices-buffer)))))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
