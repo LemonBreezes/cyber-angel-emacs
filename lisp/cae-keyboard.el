@@ -423,7 +423,6 @@
 
 ;;; Worf
 (after! worf
-  (worf-define-key worf-mode-map "P" #'org-priority)
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
            (,(cae-keyboard-kbd "k") wspecial-worf-up "")
@@ -461,7 +460,7 @@
            (,(cae-keyboard-kbd "q") wspecial-worf-quit "Verbs")
            (,(cae-keyboard-kbd "n") wspecial-worf-new-copy "Verbs")
            (,(cae-keyboard-kbd "p") wspecial-worf-property "Nouns")
-           ;;(,(cae-keyboard-kbd "P") wspecial-worf-paste "Nouns")
+           (,(cae-keyboard-kbd "P") wspecial-worf-paste "Nouns")
            (,(cae-keyboard-kbd "P") wspecial-org-priority "Misc")
            (,(cae-keyboard-kbd "t") wspecial-worf-todo "Misc")
            (,(cae-keyboard-kbd "u") wspecial-undo "Misc")
