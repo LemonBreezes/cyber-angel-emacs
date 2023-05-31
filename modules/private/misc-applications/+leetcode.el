@@ -10,7 +10,9 @@
         "L" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
-        "q" #'+workspace/other
+        "q" #'quit-window
+        (:when (modulep! :ui workspaces)
+         "q" #'+workspace/other)
         "Q" #'+leetcode-quit
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
