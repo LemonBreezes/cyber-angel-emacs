@@ -53,6 +53,8 @@
 (package! file-info)
 (package! titlecase)
 (package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
+(when (modulep! :editor multiple-cursors)
+  (package! mc-extras))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
