@@ -18,8 +18,8 @@
                (ednc-notifications) ""))
   (add-to-list 'global-mode-string
                '((:eval (stack-notifications))))
-  (add-hook 'ednc-notification-presentation-functions
-            (lambda (&rest _) (force-mode-line-update t)))
+  (add-hook! 'ednc-notification-presentation-functions
+    (lambda (&rest _) (force-mode-line-update t)))
   (map! :leader
         :prefix "o"
         :desc "Notifications" "n" #'+ednc-show-notifications)
