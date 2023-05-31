@@ -34,7 +34,9 @@
           "q" #'magit-mode-bury-buffer)
     (after! forge
       (setq forge-pull-notifications t
-            forge-buffer-draft-p t))))
+            forge-buffer-draft-p t)
+      (map! :map forge-post-mode-map
+            "<f6>" #'cae-magit-forge-post-hydra/body))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
