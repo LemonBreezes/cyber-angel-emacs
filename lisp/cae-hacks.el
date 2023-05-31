@@ -137,7 +137,8 @@
         gc-cons-threshold cae-hacks-gc-threshold
         gc-cons-percentage cae-hacks-gc-percentage)
   (when (timerp gcmh-idle-timer)
-    (cancel-timer gcmh-idle-timer)))
+    (cancel-timer gcmh-idle-timer))
+  (add-hook 'post-gc-hook #'cae-hacks-enable-gc))
 
 (defun cae-hacks-enable-gc ()
   (gcmh-mode cae-hacks--gcmh-mode)
