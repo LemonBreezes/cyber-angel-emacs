@@ -8,7 +8,6 @@
 
 ;;; Stuff that should not be disabled.
 
-(load! "lisp/cae-fixup-leader-key")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
