@@ -81,9 +81,11 @@
   :defer t :init
   (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
-(use-package! authinfo-color-mode
-  :mode ("authinfo.gpg\\'" . authinfo-color-mode)
-  :init (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+(use-package! authinfo-color-modeam
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
 (when (modulep! :ui workspaces)
   ;; Add a tabline to Which Key
