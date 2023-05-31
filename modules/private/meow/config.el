@@ -104,8 +104,8 @@
           ,(cae-keyboard-kbd "0") #'meow-expand-0
           ":" #'meow-reverse            ;: -> ;
           "?" #'meow-cheatsheet
-          "<" #'meow-beginning-of-thing
-          ">" #'meow-end-of-thing
+          "[" #'meow-beginning-of-thing
+          "]" #'meow-end-of-thing
           "a" #'meow-append
           "A" #'meow-open-below
           "w" #'meow-back-word          ;b -> w
