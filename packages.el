@@ -90,6 +90,8 @@
 ;; cae-vlf.el
 (package! vlf)
 
+;; cae-bindings.el
+
 ;;; Autocompletion
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
