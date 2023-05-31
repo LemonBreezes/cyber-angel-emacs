@@ -17,7 +17,6 @@
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
 
-
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
                      (file-equal-p (buffer-file-name)
