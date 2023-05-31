@@ -155,7 +155,7 @@
              (,(cae-keyboard-kbd "q") special-lispy-ace-paren "")
              (,(cae-keyboard-kbd "Q") special-lispy-ace-char "Move")
              (,(cae-keyboard-kbd "v") special-lispy-view "View")
-             (,(cae-keyboard-kbd "t") special-lispy-teleport "Edit")
+             (,(cae-keyboard-kbd "t") special-lispy-teleport "")
              (,(cae-keyboard-kbd "n") special-lispy-new-copy "Select")
              (,(cae-keyboard-kbd "b") special-lispy-back "")
              (,(cae-keyboard-kbd "B") special-lispy-ediff-regions "View")
