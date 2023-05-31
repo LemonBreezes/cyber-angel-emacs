@@ -38,6 +38,7 @@
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
   (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
   (when (modulep! :ui workspaces)
+    ;;TODO use `window-persistent-parameters' instead.
     ;;(add-to-list 'window-persistent-parameters '(winner-ring . t))
     (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-pause-h)
     (add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)))
