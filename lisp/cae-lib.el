@@ -13,3 +13,14 @@
 (defun cae-display-graphic-p ()
   (and (display-graphic-p)
        (not (daemonp))))
+
+(defvar cae-tab-bar-before-switch-hook nil
+  "Hook run before switching tabs.")
+(defvar cae-tab-bar-after-switch-hook nil
+  "Hook run after switching tabs.")
+
+(advice-add #'tab-bar-select-tab
+            :around
+            (lambda (fun &rest args)
+              (run-hooks 'cae-tab-bar-before-switch-hook)
+              (apply fun args)))
