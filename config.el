@@ -773,9 +773,11 @@
 
   (use-package! titlecase
     :defer t :init
+    (keymap-global-set "C-x M-t" #'titlecase-dwim)
     (after! embark
       (define-key embark-region-map "T" #'titlecase-region)
-      (define-key embark-heading-map "T" #'titlecase-line)))
+      (define-key embark-heading-map "T" #'titlecase-line)
+      (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
   ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
   ;; `speedrect' commands.
