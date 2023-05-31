@@ -293,8 +293,7 @@
            (modulep! :config default +bindings))
   (map! "C-@" #'er/expand-region
         "C-=" nil
-        [remap doom/backward-to-bol-or-indent] #'beginning-of-line)
-  (map! :leader "e" nil))
+        [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
   (after! expand-region
     (setq expand-region-autocopy-register "e"
@@ -499,7 +498,7 @@
 
 (when (modulep! :private corfu)
   (map! :leader
-        (:prefix ("e" . "expand")
+        (:prefix ("r" . "autocomplete")
          :g "c" #'completion-at-point   ; capf
          :g "t" #'complete-tag          ; etags
          :g "d" #'cape-dabbrev          ; or dabbrev-completion
