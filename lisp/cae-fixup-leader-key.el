@@ -27,7 +27,6 @@ overriding other keymaps."
                 (setq cae-general-override--override-mode-p nil))))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
-
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
