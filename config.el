@@ -316,12 +316,15 @@
       yank-pop-change-selection t)
 
 (after! xclip
-  (when (string-suffix-p "-WSL2" operating-system-release)
-    (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
-      (setenv "PATH"
-              (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
-      (setq exec-path (cons "/mnt/c/Windows/System32" exec-path))))
-  (setq xclip-method 'powershell))
+  (cond ((string-suffix-p "-WSL2" operating-system-release)
+         (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
+           (setenv "PATH"
+                   (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
+           (setq exec-path (cons "/mnt/c/Windows/System32" exec-path)))
+         (setq xclip-method 'powershell))
+        ((and (string-match-p "-android" operating-system-release)
+              (executable-find "termux-clipboard-get"))
+         (setq xclip-method 'termux-clipboard-get))))
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
