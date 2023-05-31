@@ -23,11 +23,11 @@
 ;;;###autoload
 (defun zone-choose (pgm)
   "Choose a PGM to run for `zone'."
+  (require 'zone)
   (interactive
    (list
     (completing-read
      "Program: "
      (mapcar 'symbol-name zone-programs))))
-  (require 'zone)
   (let ((zone-programs (vector (intern pgm))))
     (zone)))
