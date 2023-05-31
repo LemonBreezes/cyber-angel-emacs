@@ -5,10 +5,8 @@
 
 (defun cae-hydra-store-last-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (hydra-keyboard-quit))
-  (setq cae-hydra--last-hydra
-        (when (bound-and-true-p hydra-curr-map)
-          hydra-curr-body-fn))
+    (hydra-keyboard-quit)
+    (setq cae-hydra--last-hydra hydra-curr-body-fn))
   (when (featurep 'persp-mode)
     (set-persp-parameter 'cae-hydra--last-hydra
                          cae-hydra--last-hydra))
