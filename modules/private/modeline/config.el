@@ -176,33 +176,35 @@
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
 ;; This block might seem crazy, but it's how I've gotten parrot mode to work
-  ;; and be silent on startup.
-  (use-package! parrot
-    :after magit
-    :defer t :init
-    (map! "C-!" #'parrot-rotate-next-word-at-point)
-    :config
-    (setopt parrot-animate 'hide-static
-      parrot-rotate-animate-after-rotation nil
-      parrot-num-rotations 10
-      parrot-animate-on-load nil
-      parrot-party-on-magit-push t
-      parrot-party-on-org-todo-states '("DONE")
-      parrot-type 'nyan)
-    (parrot-mode +1)
-    (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
-      parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
-    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
-                                              "cae-keyboard-remap-to-strings"
-                                              "cae-keyboard-strings")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!"))))
+;; and be silent on startup.
+(use-package! parrot
+  :after magit
+  :defer t :init
+  (map! "C-!" #'parrot-rotate-next-word-at-point)
+  :config
+  (setopt parrot-animate 'hide-static
+          parrot-rotate-animate-after-rotation nil
+          parrot-num-rotations 10
+          parrot-animate-on-load nil
+          parrot-party-on-magit-push t
+          parrot-party-on-org-todo-states '("DONE")
+          parrot-type 'nyan)
+  (parrot-mode +1)
+  (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+        parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+  (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
+                                           "cae-keyboard-remap-to-strings"
+                                           "cae-keyboard-strings")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
+  (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!"))))
 
+;; I have this disabled because it takes up space in the modeline and I never
+;; use it.
 (when (modulep! +pretty)
   (use-package! nyan-mode
     :when (display-graphic-p)
