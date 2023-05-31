@@ -259,7 +259,7 @@ mark the string and call `edit-indirect-region' with it."
          (call-interactively #'titlecase-region))))))
 
 ;;;###autoload
-(defun cae-avy-action-embark-act (pt)
+(defun cae-avy-do (action)
   (goto-char pt)
   (save-mark-and-excursion
     (when (eq avy-command 'avy-goto-line)
@@ -270,20 +270,16 @@ mark the string and call `edit-indirect-region' with it."
       (if (modulep! :config default +smartparens)
           (sp-forward-sexp)
         (forward-sexp)))
-    (embark-act)))
+    (funcall action)))
 
 ;;;###autoload
-(defun cae-avy-action-comment-dwim (pt)
-  (goto-char pt)
-  (save-mark-and-excursion
-    (when (eq avy-command 'avy-goto-line)
-      (goto-char (point-at-bol)))
-    (set-mark (point))
-    (if (eq avy-command 'avy-goto-line)
-        (end-of-line)
-      (if (modulep! :config default +smartparens)
-          (sp-forward-sexp)
-        (forward-sexp)))
-    (if (bound-and-true-p lispy-mode)
-        (call-interactively #'lispy-comment)
-      (call-interactively #'comment-or-uncomment-region))))
+(defalias 'cae-avy-action-embark-act
+  (apply-partially #'cae-avy-do #'embark-act))
+
+;;;###autoload
+(defalias 'cae-avy-action-comment-dwim
+  (apply-partially #'cae-avy-do
+                   (lambda ()
+                     (if (bound-and-true-p lispy-mode)
+                         (call-interactively #'lispy-comment)
+                       (call-interactively #'comment-or-uncomment-region)))))
