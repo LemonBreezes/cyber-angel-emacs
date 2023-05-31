@@ -43,7 +43,8 @@
                    +workspace/close-window-or-workspace read-only-mode
                    save-buffers-kill-terminal forward-sexp backward-sexp))
       (add-to-list 'mc/cmds-to-run-once cmd))
-    (dolist (mode '(cae-completion-mode symbol-overlay-mode goggles-mode))
+    (dolist (mode '(cae-completion-mode symbol-overlay-mode goggles-mode
+                    lispy-mode corfu-mode hungry-delete-mode))
       (add-to-list 'mc/unsupported-minor-modes mode))
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)
