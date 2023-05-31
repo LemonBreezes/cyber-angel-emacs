@@ -25,7 +25,7 @@
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
-  (+log "HELLOOOO" major-mode)
+  (+log "HELLOOOO" major-mode (one-window-p t))
   (when (derived-mode-p 'dired-mode)
     (dirvish-dwim)))
 
