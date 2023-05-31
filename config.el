@@ -30,31 +30,35 @@
       (setq which-key-replacement-alist
             (delete '(("\\`C-c !\\'") nil . "checkers")
                     which-key-replacement-alist)))))
-;;(when (modulep! :editor snippets)
-;;  (define-key doom-leader-map "&" nil)
-;;  (define-key yas-minor-mode-map (kbd "C-c &") nil)
-;;  (map! :leader
-;;        (:prefix-map ("y" . "snippets")
-;;         :desc "New snippet"           "n" #'yas-new-snippet
-;;         :desc "Insert snippet"        "i" #'yas-insert-snippet
-;;         :desc "Find global snippet"   "/" #'yas-visit-snippet-file
-;;         :desc "Reload snippets"       "r" #'yas-reload-all
-;;         :desc "Create Temp Template"  "c" #'aya-create
-;;         :desc "Use Temp Template"     "e" #'aya-expand))
-;;  (after! which-key
-;;    (setq which-key-replacement-alist
-;;          (cl-delete-if (lambda (x)
-;;                          (and (listp (car-safe x))
-;;                               (caar x)
-;;                               (string-match-p "C-c &" (caar x))))
-;;                        which-key-replacement-alist))
-;;    (setq which-key-replacement-alist
-;;          (delete '(("\\`C-c y\\'") nil . "snippets")
-;;                  which-key-replacement-alist))))
+(when (modulep! editor snippets)
+  ;;(define-key yas-minor-mode-map (kbd "C-c &") nil)
+  (lookup-key doom-leader-map "&")
+  )
+  ;;(when (modulep! :editor snippets)
+  ;;  (define-key doom-leader-map "&" nil)
+  ;;  (define-key yas-minor-mode-map (kbd "C-c &") nil)
+  ;;  (map! :leader
+  ;;        (:prefix-map ("y" . "snippets")
+  ;;         :desc "New snippet"           "n" #'yas-new-snippet
+  ;;         :desc "Insert snippet"        "i" #'yas-insert-snippet
+  ;;         :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+  ;;         :desc "Reload snippets"       "r" #'yas-reload-all
+  ;;         :desc "Create Temp Template"  "c" #'aya-create
+  ;;         :desc "Use Temp Template"     "e" #'aya-expand))
+  ;;  (after! which-key
+  ;;    (setq which-key-replacement-alist
+  ;;          (cl-delete-if (lambda (x)
+  ;;                          (and (listp (car-safe x))
+  ;;                               (caar x)
+  ;;                               (string-match-p "C-c &" (caar x))))
+  ;;                        which-key-replacement-alist))
+  ;;    (setq which-key-replacement-alist
+  ;;          (delete '(("\\`C-c y\\'") nil . "snippets")
+  ;;                  which-key-replacement-alist))))
 
 ;;; UI
 
-(load! "lisp/cae-theme")
+  (load! "lisp/cae-theme")
 (load! "lisp/cae-cheatsheets")
 
 ;; Set up fonts
