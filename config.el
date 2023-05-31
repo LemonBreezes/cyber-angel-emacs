@@ -19,7 +19,7 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((offset (if (string-match-p "WSL" operating-system-release) 2 0)))
+  (let ((offset (if (string-match-p "WSL" operating-system-release) 2 2)))
     (setq doom-font (font-spec :family "Iosevka Comfy" :size (+ 16 offset))
           doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
                                               :size (+ 16 offset))
