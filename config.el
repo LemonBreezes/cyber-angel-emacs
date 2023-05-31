@@ -1075,7 +1075,7 @@
 (use-package! chatgpt-shell
   :defer t :init
   :config
-  (setq chatgpt-shell-default-model "gpt-4"))
+  (setq chatgpt-shell-model-version "gpt-4"))
 
 ;;; Email
 
