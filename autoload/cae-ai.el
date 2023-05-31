@@ -27,10 +27,10 @@
   (interactive)
   ;; TODO Make this handle the kill ring correctly so that the second kill is prepended to the first.
   (call-interactively #'org-ai-kill-region-at-point)
-  (forward-char -1)
-  (let ((beg (point))
+  ;;(forward-char -1)
+  (let ((end (point))
         (s (buffer-substring-no-properties
             (point)
             (progn (skip-syntax-backward "\\s ") (point)))))
-    (delete-region beg (point))
-    (kill-append s t)))
+    (kill-append (concat s "\n") t)
+    (delete-region (point) end)))
