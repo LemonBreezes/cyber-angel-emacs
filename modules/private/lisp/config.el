@@ -29,7 +29,7 @@
   (map! :map lispy-mode-map
         ;; Allow inserting newlines in the minibuffer. Also protect from
         ;; entering unbalanced expressions into `eval-expression'.
-        [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent))
+        [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
 
 ;; Automatically mark dir-locals as safe on save.
 (add-hook 'lisp-data-mode-hook
