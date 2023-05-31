@@ -478,6 +478,7 @@
         "M-s D" #'consult-locate
         "M-s g" #'consult-grep
         "M-s G" #'consult-git-grep
+        "M-s i" #'consult-info
         "M-s r" #'consult-ripgrep
         "M-s l" #'consult-line
         "M-s L" #'consult-line-multi
