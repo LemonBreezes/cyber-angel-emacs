@@ -196,3 +196,13 @@ mark the string and call `edit-indirect-region' with it."
       (while (er--point-is-in-comment-p)
         (forward-char -1))
       (forward-char 1))))
+
+;;;###autoload
+(cae-defun cae-avy-use-post-style-a (oldfun &rest args)
+  (let ((avy-style 'post))
+    (apply oldfun args)))
+
+;;;###autoload
+(cae-defun cae-avy-use-pre-style-a (oldfun &rest args)
+  (let ((avy-style 'pre))
+    (apply-oldfun args)))
