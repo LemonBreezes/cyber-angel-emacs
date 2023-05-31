@@ -483,7 +483,10 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
-  (sp-local-pair '(org-mode) "<<" ">>"))
+  (sp-local-pair '(org-mode) "<<" ">>")
+  (when (modulep! :editor multiple-cursors)
+    (add-to-list 'mc--default-cmds-to-run-for-all #'sp-delete-char)
+    (add-to-list 'mc--default-cmds-to-run-for-all #'sp-backward-delete-char)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
@@ -635,8 +638,8 @@
           [remap delete-forward-char] #'cae-sp-delete-char))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors
-      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
-      (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
+      (add-to-list 'mc--default-cmds-to-run-for-all #'hungry-delete-backward)
+      (add-to-list 'mc--default-cmds-to-run-for-all #'hungry-delete-forward)))
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
