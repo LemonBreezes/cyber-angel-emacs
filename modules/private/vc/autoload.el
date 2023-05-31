@@ -28,7 +28,7 @@ Meant to be used like:
   ("C-c C-k" forge-post-cancel "Cancel"))
 
 ;;;###autoload (autoload 'cae-magit-forge-topic-hydra/body "private/vc/autoload" nil t)
-(defhydra cae-magit-forge-topic-hydra (:color blue)
+(defhydra cae-magit-forge-topic-hydra (:color pink)
   ("<f6>" nil "Exit" :exit t)
   ("C-c C-n" forge-create-post "Create post")
   ("C-c C-e" magit-edit-thing  "Edit")
