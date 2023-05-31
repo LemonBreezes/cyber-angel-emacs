@@ -744,9 +744,6 @@
             [remap delete-backward-char] #'sp-backward-delete-char
             [remap delete-char] #'cae-delete-char
             [remap delete-forward-char] #'cae-delete-char))
-    (when (modulep! :editor multiple-cursors)
-      (after! multiple-cursors-core
-        (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
     (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
   (use-package! file-info
