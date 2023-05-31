@@ -250,6 +250,9 @@ mark the string and call `edit-indirect-region' with it."
       (call-interactively #'titlecase-region)
     (goto-char
      (save-mark-and-excursion
+       (when-let (bounds (bounds-of-thing-at-point 'word))
+         (when (< (point) (cdr bounds))
+           (goto-char (car bounds))))
        (mark-word)
        (prog1 (region-end)
          (call-interactively #'titlecase-region))))))
