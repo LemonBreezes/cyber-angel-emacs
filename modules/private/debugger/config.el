@@ -17,6 +17,8 @@
     (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
 
 (after! gdb-mi
+  (setq gdb-show-main t
+        gdb-many-windows t)
   ;; For some reason, just binding this key in `gdb-frames-mode-map' doesn't
   ;; work for me.
   (map! :map comint-mode-map
