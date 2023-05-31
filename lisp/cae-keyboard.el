@@ -424,13 +424,13 @@
 ;;; Worf
 (after! worg
   (let ((bindings
-         `((,(cae-keyboard-kbd "j") wspecial-worf-down "Move")
-           (,(cae-keyboard-kbd "k") wspecial-worf-up "Move")
-           (,(cae-keyboard-kbd "h") wspecial-worf-left "Move")
-           (,(cae-keyboard-kbd "l") wspecial-worf-right "Move")
+         `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
+           (,(cae-keyboard-kbd "k") wspecial-worf-up "")
+           (,(cae-keyboard-kbd "h") wspecial-worf-left "")
+           (,(cae-keyboard-kbd "l") wspecial-worf-right "")
            (,(cae-keyboard-kbd "f") wspecial-hydra-worf-f/body "Move")
-           (,(cae-keyboard-kbd "J") wspecial-outline-next-visible-heading "Move")
-           (,(cae-keyboard-kbd "K") wspecial-outline-previous-visible-heading "Move")
+           (,(cae-keyboard-kbd "J") wspecial-outline-next-visible-heading "")
+           (,(cae-keyboard-kbd "K") wspecial-outline-previous-visible-heading "")
            (,(cae-keyboard-kbd "g") wspecial-worf-goto "Move")
            (,(cae-keyboard-kbd "o") wspecial-worf-ace-link "Move") ;Visit Link
            (,(cae-keyboard-kbd "O") wspecial-worf-ace-link-eww "Move") ;Visit in EWW
@@ -458,7 +458,7 @@
            (,(cae-keyboard-kbd "w") wspecial-worf-keyword-mode "Verbs")
            (,(cae-keyboard-kbd "m") worf-mark "Verbs")
            (,(cae-keyboard-kbd "q") wspecial-worf-quit "Verbs")
-
+           (,(cae-keyboard-kbd "n") wspecial-worf-new-copy "Verbs")
            )))))
 
 ;;; Basically a custom input method
