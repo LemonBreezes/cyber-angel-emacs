@@ -13,13 +13,16 @@
 
 (cl-defun cae-keyboard-remap (arg)
   (when (characterp arg)
-    (let ((orbit (cl-position arg cae-keyboard-orbits :test #'memq)))
+    (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
       (when orbit
-        (let ((orbit (nth orbit cae-keyboard-orbits)))
-          (cl-return-from cae-keyboard-remap
-            (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit))))))
+        (cl-return-from cae-keyboard-remap
+          (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)))))
   (cl-return-from cae-keyboard-remap
     (cl-mapcar #'cae-keyboard-remap arg)))
+
+(cl-assert (eq (cae-keyboard-remap ?w) ?b))
+(cl-assert (eq (cae-keyboard-remap ?b) ?j))
+(cl-assert (eq (cae-keyboard-remap ?j) ?o))
 
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
