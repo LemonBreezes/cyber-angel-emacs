@@ -11,5 +11,5 @@
   (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
   (map! :map trashed-mode-map
         "<f6>" #'+trashed-hydra/body
-        "q" #'kill-buffer)
+        "q" #'kill-this-buffer)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
