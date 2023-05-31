@@ -62,8 +62,8 @@ _o_: Step out       _sf_: Stack frame        _ba_: Add             _dl_: Debug l
 _c_: Continue       _su_: Up stack frame     _bc_: Set condition   _de_: Edit debug template   _ea_: Add expression
 _r_: Restart frame  _sd_: Down stack frame   _bh_: Set hit count   _ds_: Debug restart         _er_: Remove expression
 _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
-                  _sb_: List breakpoints
-                  _sS_: List sessions
+_R_: Restart        _sb_: List breakpoints
+                    _sS_: List sessions
 "
   ("n" dap-next)
   ("i" dap-step-in)
@@ -97,4 +97,4 @@ _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
   ("q" nil "quit" :color blue)
   ("Q" dap-disconnect :color red)
   ("<f6>" nil "quit")
-  ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart" :color red))
+  ("R" cae-debugger-dap-kill-all-sessions-and-restart nil :color red))
