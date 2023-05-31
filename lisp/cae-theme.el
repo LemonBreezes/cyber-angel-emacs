@@ -74,3 +74,22 @@
     (setq calendar-latitude 0
           calendar-longitude 0)
     (message "ERROR: Calendar latitude and longitude are not set.")))
+
+(add-hook 'kill-emacs-hook
+          (cae-defun cae-theme-store-cicadian-times-h ()
+            (let* ((themes (circadian-themes-parse))
+                   (now (circadian-now-time))
+                   (past-themes (circadian-filter-inactivate-themes themes now))
+                   (entry (car (last (or past-themes themes))))
+                   (theme (cdr entry))
+                   (next-entry (or (cadr (member entry themes))
+                                   (if (circadian-a-earlier-b-p (circadian-now-time) (cl-first entry))
+                                       (car themes))))
+                   (next-time (if next-entry
+                                  (circadian--encode-time
+                                   (cl-first (cl-first next-entry))
+                                   (cl-second (cl-first next-entry)))
+                                (+ (* (+ (- 23 (cl-first now)) (cl-first (cl-first (cl-first themes)))) 60 60)
+                                   (* (+ (- 60 (cl-second now)) (cl-second (cl-first (cl-first themes)))) 60)))))
+              (+log themes now past-themes entry theme next-entry next-time)
+              )))
