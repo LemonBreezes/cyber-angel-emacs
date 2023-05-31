@@ -107,3 +107,4 @@
 
 ;;; XML
 (package! xml-format)
+(package! noxml-fold)
