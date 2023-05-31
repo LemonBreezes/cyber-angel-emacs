@@ -87,10 +87,7 @@
     (dolist (mode '(comint-mode syslog-mode term-mode eshell-mode vterm-mode
                     shell-mode compilation-mode special-mode fundamental-mode
                     syslog-mode crontab-mode))
-      (add-to-list 'emojify-inhibit-major-modes mode))
-    ;; Only enable emojis in Org mode.
-    (add-hook 'org-mode-hook #'emojify-mode)
-    (remove-hook 'doom-first-buffer-hook #'global-emojify-mode)))
+      (add-to-list 'emojify-inhibit-major-modes mode))))
 
 (use-package! info-colors
   :defer t :init
