@@ -209,6 +209,7 @@
     (add-hook 'meow-normal-mode-hook #'corfu-quit))
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
+        meow-select-on-change t
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
