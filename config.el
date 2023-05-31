@@ -562,7 +562,9 @@
                        forward-button backward-button +popup/quit-window
                        beginning-of-buffer end-of-buffer embark-collect-cheatsheet
                        mouse-face)
-     :transient t)))
+     :transient t)
+    (map! :map embark-collect-mode-map
+          "<f6>" #'cae-embark-collect-mode)))
 
 (use-package! avy
   :defer t
