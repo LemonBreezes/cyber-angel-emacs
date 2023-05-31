@@ -204,6 +204,7 @@
   ;; Set up compilation.
   (setq projectile-per-project-compilation-buffer t
         compilation-read-command nil)
+  ;; Make the project prefix more readable.
   (after! which-key
     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist)))
