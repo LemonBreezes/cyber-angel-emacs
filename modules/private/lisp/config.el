@@ -22,6 +22,9 @@
                           comment-end ""
                           comment-start-skip ";+ *"
                           comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
+
+(map! :map minibuffer-local-map
+      [remap exit-minibuffer] #'cae-lisp-newline-and-indent)
 (after! lispy
   (map! :map lispy-mode-map
         ;; Allow inserting newlines in the minibuffer. Also protect from
