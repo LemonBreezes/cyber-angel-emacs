@@ -129,6 +129,8 @@
     ;; `shr' wraps lines in a visually unappealing way.
     (setq shr-width 120
           shr-max-width 120)
+    ;; I prefer to not use fonts in `shr' because it looks weird with the font setup I have.
+    (setq shr-use-fonts nil)
 
     ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
     ;; not colorize backgrounds at all.
