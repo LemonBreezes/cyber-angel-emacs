@@ -23,7 +23,8 @@
        ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
        ,(cae-keyboard-kbd "2") split-window-below
        ,(cae-keyboard-kbd "3") split-window-right
-       "M-o" ace-swap-window)))
+       "M-o" ace-swap-window))
+   t)
 
   (define-repeat-map isearch-repeat
     ("s" isearch-repeat-forward
@@ -35,9 +36,12 @@
        "O" tab-previous
        ,(cae-keyboard-kbd "0") cae-tab-close-and-select-right
        "0" cae-tab-close-and-select-right))
+   t)
+  (eval
    `(define-repeat-map tab-close
       (,(cae-keyboard-kbd "0") tab-close
-       "0" tab-close)))
+       "0" tab-close))
+   t)
 
   ;;Currently part of `other-window' repeat map
   ;;(define-repeat-map winner
@@ -97,7 +101,8 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8)))
+       "9" +workspace/switch-to-8))
+   t)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
@@ -106,7 +111,7 @@
               #'cae-repeat-ignore-when-hydra-active-a)
 
   (autoload 'embark-verbose-indicator "embark")
-(autoload 'which-key--create-buffer-and-show "which-key"))
+  (autoload 'which-key--create-buffer-and-show "which-key"))
 
 ;; This is so that my repeat maps are reloaded when I save this file.
 (when cae-config-finished-loading
