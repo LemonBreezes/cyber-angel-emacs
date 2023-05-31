@@ -1,5 +1,6 @@
 ;;; private/modeline/autoload.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (cae-defun cae-modeline-rotate-next-word-at-point ()
   (interactive)
   (save-excursion
