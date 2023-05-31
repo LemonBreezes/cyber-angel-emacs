@@ -72,7 +72,7 @@
        lisp
        misc-applications
        ;; helm
-       modeline
+       (modeline +pretty)
        unpackaged
        vc)
 
