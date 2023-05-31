@@ -41,6 +41,7 @@
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
 (package! aggressive-indent)
+(package! hungry-delete)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)

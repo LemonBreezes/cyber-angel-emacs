@@ -39,14 +39,10 @@
 
 (after! corfu
   (setopt corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
-         corfu-separator ?&
-         corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
-         corfu-on-exact-match nil
-         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
-         tab-always-indent 'complete)
+          corfu-separator ?&
+          corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
+          corfu-on-exact-match nil
+          corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
+          tab-always-indent 'complete)
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5))
-
-(after! eshell
-  (map! :map eshell-mode-map
-        "TAB" #'completion-at-point))

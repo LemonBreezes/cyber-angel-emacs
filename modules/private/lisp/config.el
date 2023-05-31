@@ -38,5 +38,5 @@
   :defer t :init (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
 
 ;; This fixes aggressive indent's indentation of plists. :)
-(setf (symbol-function #'lisp-indent-function)
-      (symbol-function #'+emacs-lisp-indent-function))
+(after! lisp-mode
+  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
