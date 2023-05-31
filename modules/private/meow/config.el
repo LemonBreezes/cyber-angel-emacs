@@ -26,8 +26,8 @@
    t)
   (after! which-key
     ;; Remove `meow-digit-argument' from the which-key menu.
-    (add-to-list 'which-key-replacement-alist
-                 '((nil . "meow-digit-argument") . t))))
+    (push 'which-key-replacement-alist
+          '((nil . "meow-digit-argument") . t))))
 
 ;; Keypad
 (defun meow/setup-keypad ()
