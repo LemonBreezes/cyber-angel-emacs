@@ -343,6 +343,7 @@
 ;;; Editor
 
 (load! "lisp/cae-repeat")
+(load! "lisp/cae-visible-mark")
 
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
