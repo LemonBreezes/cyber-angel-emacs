@@ -464,6 +464,8 @@
       "C-x x o" #'ov-clear
       "M-Z" #'zap-up-to-char
       "<f8>" #'embark-act
+      [remap previous-buffer] #'cae-previous-buffer
+      [remap next-buffer] #'cae-next-buffer
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
