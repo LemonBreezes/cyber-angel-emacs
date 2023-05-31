@@ -21,13 +21,6 @@
         corfu-on-exact-match nil
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete)
-  (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
-        :map corfu-map
-        "C-M-i" #'corfu-move-to-minibuffer
-        "<escape>" #'keyboard-quit
-        ;; I use `TAB' instead. I don't like how the `RET' keybinding prevents
-        ;; me from exiting the minibuffer while the completion menu is open.
-        "RET" nil)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
