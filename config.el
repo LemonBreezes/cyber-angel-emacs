@@ -780,10 +780,10 @@
     ;; Don't distract me while I'm doing multiple cursors calculus.
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
-  (defun symbol-overlay-jump-avy ()
+  (defun cae-avy-symbol-at-point ()
     "Jump to another occurance of symbol with avy."
     (interactive)
-    (avy-with symbol-overlay-jump-avy
+    (avy-with cae-avy-symbol-at-point
       (avy-process
        (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
   (define-key symbol-overlay-map (kbd "'") 'symbol-overlay-jump-avy)
