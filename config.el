@@ -173,7 +173,7 @@
          :ttl nil)
         ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
          :quit nil :ttl t)
-        ("^\\*org-roam\\*" :size 60 :side 'left :select nil
+        ("^\\*org-roam\\*" :size 60 :side left :select nil
          :quit nil)
         ("^\\*info.*" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
@@ -186,7 +186,7 @@
          :slot 2 :vslot -8)
         ("^ \\*Metahelp.*" :size cae-popup-resize-help-buffer
          :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-        ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+        ("^\\*Messages\\*" :vslot -10 :height 10 :side bottom
          :select t :quit t :ttl nil :vslot 99)
         ("^\\*eww.*" :size cae-popup-resize-help-buffer :side right
          :select t :ttl nil)
@@ -204,7 +204,7 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^\\*devdocs\\*$" :width 122
          :side right :ttl t :select t :quit t :ttl 0)
-        ("^Trash Can" :size 0.3 :side 'bottom :select t :quit t
+        ("^Trash Can" :size 0.3 :side bottom :select t :quit t
          :ttl 0)
         ("^\\*chatgpt\\*$" :size 0.3 :select t :quit nil :ttl nil)))
     (after! embark
