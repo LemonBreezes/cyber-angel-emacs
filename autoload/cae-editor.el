@@ -259,18 +259,19 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-avy-do (action pt)
-  (save-mark-and-excursion
-    (goto-char pt)
-    (cond ((or (eq avy-command 'avy-goto-line)
-               (memq this-command '(avy-goto-line-above
-                                    avy-goto-line-below)))
-           (progn (goto-char (line-beginning-position))
-                  (set-mark (point))
-                  (goto-char (line-end-position))))
-          ((eq this-command 'cae-avy-symbol-at-point)
-           (er/mark-symbol))
-          (t (eri/expand-region 1)))
-    (funcall action)))
+  (save-window-excursion
+    (save-mark-and-excursion
+      (goto-char pt)
+      (cond ((or (eq avy-command 'avy-goto-line)
+                 (memq this-command '(avy-goto-line-above
+                                      avy-goto-line-below)))
+             (progn (goto-char (line-beginning-position))
+                    (set-mark (point))
+                    (goto-char (line-end-position))))
+            ((eq this-command 'cae-avy-symbol-at-point)
+             (er/mark-symbol))
+            (t (eri/expand-region 1)))
+      (funcall action))))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
