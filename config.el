@@ -11,7 +11,7 @@
 
 ;;; UI
 
-(load! "lisp/cae-theme")
+;; (load! "lisp/cae-theme")
 
 ;; Do not use pagers
 (setenv "PAGER" "cat")
