@@ -351,7 +351,8 @@
   :defer t
   :init
   (map! "M-n" #'avy-goto-line-below
-        "M-p" #'avy-goto-line-above)
+        "M-p" #'avy-goto-line-above
+        "M-j" #'avy-goto-char-timer)
   :config
   (setq avy-timeout-seconds 0.25
         avy-keys (cae-keyboard-remap
