@@ -380,8 +380,7 @@
 ;;; Worf
 (after! worg
   (let ((bindings
-         '(
-           ()
+         `((,(cae-keyboard-kbd "j") wspecial-worf-down "Move")
            )))))
 
 ;;; Basically a custom input method
