@@ -8,9 +8,6 @@
     (map! :map dap-ui-repl-mode-map
           [remap comint-delchar-or-maybe-eof] #'cae-debugger-quit-or-delete-or-send-eof))
   (after! dap-mode
-    ;; Close the windows when the debugger is closed.
-    (advice-add #'dap-disconnect :after #'cae-debugger-dap-quit-session-a)
-
     (setq dap-debug-restart-keep-session nil
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
 
@@ -29,11 +26,7 @@
       (require 'dap-cpptools)
       (dap-cpptools-setup))
     (when (modulep! :tools eval)
-      (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)))
-
-  ;;(add-hook 'dap-session-created-hook #'cae-debugger-mark-session-h)
-  ;;(add-hook 'dap-stopped-hook #'cae-debugger-dap-switch-to-workspace-h)
-  )
+      (set-repl-handler! 'c++-mode #'cae-debugger-open-repl))))
 
 (after! gud
   (setq gud-chdir-before-run nil)
