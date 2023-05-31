@@ -45,7 +45,7 @@
                   View-scroll-half-page-backward
                   chatgpt-shell-mark-at-point-dwim
                   c-mark-function))
-      (add-to-list 'rp/restore-point-commands fn))
+      (add-to-list 'rp/restore-point-commands fn nil #'eq))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
