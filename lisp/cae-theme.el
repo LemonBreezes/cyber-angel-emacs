@@ -78,6 +78,3 @@
   :defer t
   :init
   (theme-magic-export-theme-mode +1))
-
-(unless (display-graphic-p)
-  (setq +ligatures-in-modes nil))
