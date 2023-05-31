@@ -4,7 +4,7 @@
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
-(defun cae-theme-customize-faces-h (theme)
+(defun cae-theme-customize-faces-h (_)
   (when (modulep! :lang org)
     (after! org
       (set-face-attribute 'org-ellipsis nil
@@ -73,4 +73,7 @@
                            doom-theme)))))
 
 (use-package! theme-magic
-  :defer t)
+  :defer t
+  :init
+  ;; Auto reload theme shortly after startup
+  (run-with-idle-timer 1.5 nil (lambda () (add-hook 'doom-load-theme-hook 'theme-magic-from-emacs))))
