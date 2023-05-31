@@ -11,7 +11,7 @@
   (lambda ()
     (mapconcat #'buffer-name
                (cl-remove-if (lambda (buf)
-                               (+popup-buffer-p buf))
+                               (doom-unreal-buffer-p buf))
                 (mapcar #'window-buffer
                         (window-list-1 (frame-first-window)
                                        'nomini)))
