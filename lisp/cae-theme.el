@@ -50,9 +50,9 @@
         modus-themes-prompts '(italic semibold)
         modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)))
 (after! ef-themes
-  (setq! ef-themes-variable-pitch-ui t
-          ef-themes-mixed-fonts t
-          ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
+  (setq ef-themes-variable-pitch-ui t
+        ef-themes-mixed-fonts t
+        ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
 
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
