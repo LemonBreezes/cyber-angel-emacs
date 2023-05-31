@@ -350,10 +350,10 @@
   (map! "C-h C-m" #'consult-mode-command
         "C-h <return>" #'info-emacs-manual
         "C-x C-k C-k" #'consult-kmacro ; replaces
-                                       ; `kmacro-end-or-call-macro-repeat',
-                                       ; which is similar to
-                                       ; `kmacro-end-and-call-macro' from `<f4>'
-                                       ; and `C-x e'.
+                                        ; `kmacro-end-or-call-macro-repeat',
+                                        ; which is similar to
+                                        ; `kmacro-end-and-call-macro' from `<f4>'
+                                        ; and `C-x e'.
         ;; C-x bindings (ctl-x-map)
         "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
         ;; Custom M-# bindings for fast register access
@@ -367,8 +367,8 @@
         (:when (modulep! :checkers syntax)
           "M-g f" #'consult-flycheck)
         (:when (modulep! :checkers syntax +flymake)
-          "M-g f" #'consult-flymake) ;; Alternative: consult-flycheck
-        "M-g g" #'consult-goto-line  ;; orig. goto-line
+          "M-g f" #'consult-flymake)  ;; Alternative: consult-flycheck
+        "M-g g" #'consult-goto-line   ;; orig. goto-line
         "M-g M-g" #'consult-goto-line ;; orig. goto-line
         "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
         "M-g m" #'consult-mark
@@ -388,14 +388,15 @@
         "M-s u" #'consult-focus-lines
         ;; Isearch integration
         "M-s e" #'consult-isearch-history
-        :map isearch-mode-map
-        "M-e" #'consult-isearch-history ;; orig. isearch-edit-string
-        "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
-        "M-s l" #'consult-line  ;; needed by consult-line to detect isearch
-        "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
+        (:after isearch
+         :map isearch-mode-map
+         "M-e" #'consult-isearch-history  ;; orig. isearch-edit-string
+         "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
+         "M-s l" #'consult-line ;; needed by consult-line to detect isearch
+         "M-s L" #'consult-line-multi) ;; needed by consult-line to detect isearch
         ;; Minibuffer history
         :map minibuffer-local-map
-        "M-s" #'consult-history ;; orig. next-matching-history-element
+        "M-s" #'consult-history   ;; orig. next-matching-history-element
         "M-r" #'consult-history)) ;; orig. previous-matching-history-element
 
 (after! cc-mode
