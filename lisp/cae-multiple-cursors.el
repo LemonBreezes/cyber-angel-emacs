@@ -30,7 +30,7 @@
                    cae-modeline-rotate-prev-word-at-point
                    forward-sexp backward-sexp backward-list
                    forward-list down-list backward-up-list up-list))
-      (add-to-list 'mc/cmds-to-run-for-all cmd))
+      (add-to-list 'mc/cmds-to-run-for-all cmd nil #'eq))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
                    +workspace/rename +workspace/display +workspace/new-named
