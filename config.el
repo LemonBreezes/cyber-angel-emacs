@@ -11,7 +11,7 @@
 
 ;;; UI
 
-;; (load! "lisp/cae-theme")
+(load! "lisp/cae-theme")
 
 ;; Do not use pagers
 ;;(setenv "PAGER" "cat")
@@ -843,8 +843,8 @@
 ;;                (not (string-suffix-p "-WSL2" operating-system-release)))
 ;;       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
 ;; t)
-;;
-;;(setq cae-config-finished-loading t)
+
+(setq cae-config-finished-loading t)
 
 ;;; Config
 ;; Here I am going over Doom's `config' module and deciding which keybindings I
