@@ -71,8 +71,7 @@
                 (expand-abbrev)))
 
   (use-package eshell-bookmark
-    :after eshell
-    :config
+    :defer t :init
     (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
   ;; Colorize ansi escape sequences in exported buffers
