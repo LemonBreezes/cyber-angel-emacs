@@ -43,7 +43,7 @@ derivative.")
 
   :config
   (when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
-    (add-hook! 'lsp-mode-hook
+    (add-hook 'lsp-mode-hook
       (cae-defun doom--add-lsp-capf ()
         (add-to-list 'completion-at-point-functions
                      (cape-capf-buster #'lsp-completion-at-point)))
