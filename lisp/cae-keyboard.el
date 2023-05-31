@@ -84,7 +84,7 @@
            (kbd (concat "C-" (cae-keyboard-remap "`"))))
          (define-key key-translation-map
            (kbd "C-~")
- ))))
+           (kbd (concat "C-" (cae-keyboard-remap "~")))))))
 
 ;;; Number row
 
