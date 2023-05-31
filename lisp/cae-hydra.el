@@ -23,9 +23,10 @@
                               nil nil #'eq)
                    cae-hydra--last-hydra)))
     (setq cae-hydra--last-hydra nil)
-    (hydra-keyboard-quit)
     (cae-hydra-store-last-hydra-h)
-    (funcall hydra)))
+    (when hydra
+      (hydra-keyboard-quit)
+      (funcall hydra))))
 
 (add-hook 'persp-before-switch-functions #'cae-hydra-store-last-hydra-h)
 (add-hook 'persp-activated-functions #'cae-hydra-restore-last-hydra-h)
