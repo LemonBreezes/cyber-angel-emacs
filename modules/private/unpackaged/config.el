@@ -21,8 +21,6 @@
   (advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
-  (advice-add #'+magit/quit-all :override #'ignore)
-
   (defun cae-unpackaged-magit-start-smerge-hydra-h ()
     (when smerge-mode
       (+vc/smerge-hydra/body)))
