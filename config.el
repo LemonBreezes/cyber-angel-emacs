@@ -29,12 +29,6 @@
                                          :size (+ 15 font-size-offset))))))
 
 (setq display-line-numbers-type 'relative)
-(remove-hook prog-mode-hook #'display-line-numbers-mode)
-(remove-hook text-mode-hook #'display-line-numbers-mode)
-(remove-hook conf-mode-hook #'display-line-numbers-mode)
-(after! magit-section
-  (setq magit-section-disable-line-numbers nil))
-(global-display-line-numbers-mode +1)
 
 ;; Show minibuffer recursion depth
 (autoload 'minibuffer-depth-setup "mb-depth")
