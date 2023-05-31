@@ -30,6 +30,7 @@
        format
        snippets
        multiple-cursors
+       lispy
 
        :emacs
        undo
@@ -80,7 +81,7 @@
        lisp
        misc-applications
        modeline
-       ;(meow +leader)
+                                        ;(meow +leader)
        unpackaged
        vc)
 
