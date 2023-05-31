@@ -24,7 +24,9 @@
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
-    (funcall oldfun file wildcards)))
+    (funcall oldfun file wildcards))
+  (when (derived-mode-p 'dired-mode)
+    (dirvish-dwim)))
 
 (defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
