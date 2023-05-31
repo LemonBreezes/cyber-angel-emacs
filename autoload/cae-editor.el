@@ -65,30 +65,3 @@
           (goto-char beg)
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
     (call-interactively #'sp-raise-sexp)))
-
-
-(defun cae-switch-buffer--handle-dirvish ()
-  (when (and (featurep 'dirvish)
-             (dirvish-curr)
-             (> (length (dv-layout (dirvish-curr))) 1))
-    (dirvish-layout-toggle)))
-
-;;;###autoload
-(defun cae-previous-buffer ()
-  (interactive)
-  (cae-switch-buffer--handle-dirvish)
-  (call-interactively #'previous-buffer))
-
-;;;###autoload
-(defun cae-next-buffer ()
-  (interactive)
-  (cae-switch-buffer--handle-dirvish)
-  (call-interactively #'next-buffer))
-
-;;;###autoload
-(defun cae-avy-symbol-at-point ()
-  "Jump to another occurance of symbol with avy."
-  (interactive)
-  (avy-with cae-avy-symbol-at-point
-    (avy-process
-     (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
