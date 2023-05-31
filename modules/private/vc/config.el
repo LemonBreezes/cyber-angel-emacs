@@ -24,7 +24,10 @@
         magit-repository-directories '(("~/src/" . 2))
         transient-values '((magit-rebase "--autosquash" "--autostash")
                            (magit-pull "--rebase" "--autostash")
-                           (magit-revert "--autostash"))))
+                           (magit-revert "--autostash")))
+  (when (modulep! :tools magit +forge)
+    (after! forge
+      (setq forge-pull-notifications t))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
