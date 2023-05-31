@@ -55,7 +55,6 @@
               :after
               (cae-defun cae-org-worf-property-a ()
                 (let ((parent (org-element-property :parent (org-element-at-point))))
-                  (+log parent)
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
   (when (modulep! :editor multiple-cursors)
