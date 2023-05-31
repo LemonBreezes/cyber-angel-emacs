@@ -10,4 +10,4 @@
   ("<up>" tetris-rotate-prev "Rotate clockwise" :column "Movement")
   ("<left>" tetris-move-left "Move left" :column "Movement")
   ("<right>" tetris-move-right "Move right" :column "Movement")
-  ("C-a" autotetris-mode "Autotetris" :column "Misc"))
+  ("a" autotetris-mode "Autotetris" :column "Misc"))
