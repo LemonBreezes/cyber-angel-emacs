@@ -108,7 +108,7 @@
         [remap dirvish-emerge-menu] #'cae-dired-dirvish-emerge-menu
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
-        "N" #'dirvish-narrow            ;Redundant with `M-n'.
+        ;; "N" #'dirvish-narrow            ;Redundant with `M-n'.
         "j" #'+default/search-buffer
         [remap previous-buffer] #'cae-dired-previous-buffer
         [remap next-buffer] #'cae-dired-next-buffer
