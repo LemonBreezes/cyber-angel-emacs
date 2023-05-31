@@ -1068,7 +1068,7 @@
             "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
             ;; Minibuffer history
             :map minibuffer-local-map
-            "M-s" #'consult-history     ;orig. next-matching-history-element
+            ;; "M-s" #'consult-history     ;orig. next-matching-history-element
             "M-r" #'consult-history     ;orig. previous-matching-history-element
             ;; Redundant with Doom's :config default bindings
             :map global-map
