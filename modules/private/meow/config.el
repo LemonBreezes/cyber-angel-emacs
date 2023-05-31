@@ -208,5 +208,5 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
-  (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
-  )
+  (autoload 'etcc--evil-set-cursor "evil-terminal-cursor-changer")
+  (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a))
