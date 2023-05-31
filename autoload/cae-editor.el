@@ -83,4 +83,3 @@ unbalanced, otherwise acts like `self-insert-command'."
         ((bound-and-true-p lispy-mode)
          (call-interactively #'lispy-right-nostring))
         (t (call-interactively #'self-insert-command))))
-()
