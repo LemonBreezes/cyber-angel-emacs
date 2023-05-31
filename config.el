@@ -39,6 +39,9 @@
         tab-bar-new-button     nil))
 (run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
+;; Colorize color strings.
+(add-hook 'prog-mode-hook #'rainbow-mode)
+
 (setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t)
