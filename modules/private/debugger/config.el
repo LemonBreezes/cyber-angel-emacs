@@ -17,5 +17,7 @@
     (set-repl-handler! 'c++-mode #'+dap-mode/open-repl)))
 
 (after! gdb-mi
+  ;; For some reason, just binding this key in `gdb-frames-mode-map' doesn't
+  ;; work for me.
   (map! :map comint-mode-map
         "RET" #'cae-gdb-select-frame))
