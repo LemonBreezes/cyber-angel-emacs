@@ -868,11 +868,16 @@
                   symbol-overlay-jump-prev
                   recenter-top-bottom
                   reposition-window
-                  eri/expand-region
-                  eri/contract-region
                   eri/maximize-region
                   eri/mark-block
-                  eri/mark-line))
+                  eri/expand-region
+                  eri/mark-line
+                  eri/contract-region
+                  eri/mark-outside-quotes
+                  eri/web-mode-element-parent
+                  eri/mark-inside-org-table-cell
+                  eri/mark-outside-org-table-cell     
+                  eri/web-mode-element-parent-content))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
