@@ -65,3 +65,14 @@
           (goto-char beg)
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
     (call-interactively #'sp-raise-sexp)))
+
+;;;###autoload
+(defun cae-insert-closing-paren ()
+  (interactive)
+  (cond ((condition-case error
+             (scan-sexps (point-min) (point-max))
+           (scan-error t))
+         (insert-char ?\)))
+        ((bound-and-true-p lispy-mode)
+         (call-interactively #'lispy-right-nostring))
+        (t (call-interactively #'self-insert-command))))
