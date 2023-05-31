@@ -226,29 +226,31 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
-;;(use-package! hercules
-;;  :config
-;;  (hercules-def
-;;   :toggle-funs #'cae-embark-collect-cheatsheet
-;;   :keymap 'embark-collect-mode-map
-;;   :package 'embark)
-;;  (hercules-def
-;;   :toggle-funs #'cae-debugger-cheatsheet
-;;   :keymap 'debugger-mode-map
-;;   :package 'debug)
-;;  (hercules-def
-;;   :toggle-funs #'cae-edebug-cheatsheet
-;;   :keymap 'edebug-mode-map
-;;   :package 'edebug)
-;;  (after! embark
-;;    (map! :map embark-collect-mode-map
-;;          "<f6>" #'cae-embark-collect-cheatsheet))
-;;  (after! debug
-;;    (map! :map debugger-mode-map
-;;          "<f6>" #'cae-debugger-cheatsheet))
-;;  (after! edebug
-;;    (map! :map edebug-mode-map
-;;          "<f6>" #'cae-edebug-cheatsheet)))
+;; Hercules could be lazy-loaded but it's a really small package. Doing so
+(use-package! hercules
+  :after which-key
+  :config
+  (hercules-def
+   :toggle-funs #'cae-embark-collect-cheatsheet
+   :keymap 'embark-collect-mode-map
+   :package 'embark)
+  (hercules-def
+   :toggle-funs #'cae-debugger-cheatsheet
+   :keymap 'debugger-mode-map
+   :package 'debug)
+  (hercules-def
+   :toggle-funs #'cae-edebug-cheatsheet
+   :keymap 'edebug-mode-map
+   :package 'edebug)
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "<f6>" #'cae-embark-collect-cheatsheet))
+  (after! debug
+    (map! :map debugger-mode-map
+          "<f6>" #'cae-debugger-cheatsheet))
+  (after! edebug
+    (map! :map edebug-mode-map
+          "<f6>" #'cae-edebug-cheatsheet)))
 
 ;;; Tools
 
