@@ -11,7 +11,8 @@
     (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn
           cae-cheatsheets-minibuffer--last-workspace (and (featurep 'persp-mode)
                                                           (get-current-persp))
-          cae-cheatsheets-minibuffer--last-tab (tab-bar--current-tab))
+          cae-cheatsheets-minibuffer--last-tab (tab-bar--current-tab)
+          cae-cheatsheets-minibuffer--last-tab-index (tab-bar--current-tab-index))
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-minibuffer-hydra-resume-h (&rest _)
@@ -24,8 +25,10 @@
        (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
                             cae-cheatsheets-minibuffer--last-hydra
                             cae-cheatsheets-minibuffer--last-workspace))
-     (when (not (eq (tab-bar--current-tab)
-                    cae-cheatsheets-minibuffer--last-tab))
+     (when (not (and (eq (tab-bar--current-tab)
+                         cae-cheatsheets-minibuffer--last-tab)
+                     (eq (tab-bar--current-tab-index)
+                         cae-cheatsheets-minibuffer-last-tab-index)))
        (setf (alist-get (tab-bar--current-tab)
                         cae-cheatsheets-tab-bar-hydra-alist
                         nil nil #'equal)
@@ -69,7 +72,7 @@
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
-                     nil nil #'eq)
+                     nil nil #'equal)
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
@@ -78,7 +81,7 @@
     (hydra-keyboard-quit))
   (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist
-                               nil nil #'eq)))
+                               nil nil #'equal)))
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
                      nil t #'eq)
           nil)
@@ -87,9 +90,10 @@
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
 
+;; Make these persp-local so that
 (defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
   (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
-                         cae-cheatsheets-tab-bar-hydra-alist))
+                       cae-cheatsheets-tab-bar-hydra-alist))
 
 (defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
   (setq cae-cheatsheets-tab-bar-hydra-alist
