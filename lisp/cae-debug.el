@@ -52,8 +52,8 @@ normally have their errors suppressed."
 
 ;;; Errors I am currently debugging
 
-(advice-add #'signal :around
-            (defun cae-debug-signal-a (func &rest args)
-              (when (eq (length args) 1)
+(advice-add #'vertico-exit :around
+            (defun cae-debug-vertico-exit-a (func &rest args)
+              (when (eq (length args) 2)
                 (backtrace))
               (apply func args)))
