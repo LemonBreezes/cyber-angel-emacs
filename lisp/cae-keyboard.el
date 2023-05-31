@@ -110,3 +110,81 @@
   (map! "<tab>" #'indent-for-tab-command
         "C-i" #'doom/dumb-indent
         "C-S-i" #'doom/dumb-dedent))
+
+;;; Lispy
+
+(when (modulep! :editor lispy)
+  (after! lispy
+    ;; navigation
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "l") 'lispy-right)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "h") 'lispy-left)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "f") 'lispy-flow)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "j") 'lispy-down)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "k") 'lispy-up)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "d") 'lispy-different)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "o") 'lispy-other-mode)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "p") 'lispy-eval-other-window)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "P") 'lispy-paste)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "y") 'lispy-occur)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "z") 'lh-knight/body)
+    ;; outline
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "J") 'lispy-outline-next)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "K") 'lispy-outline-prev)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "L") 'lispy-outline-goto-child)
+    ;; Paredit transformations
+    (lispy-define-key lispy-mode-map-special ">" 'lispy-slurp)
+    (lispy-define-key lispy-mode-map-special "<" 'lispy-barf)
+    (lispy-define-key lispy-mode-map-special "/" 'lispy-splice)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "r") 'lispy-raise)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "R") 'lispy-raise-some)
+    (lispy-define-key lispy-mode-map-special "+" 'lispy-join)
+    ;; more transformations
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "C") 'lispy-convolute)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "X") 'lispy-convolute-left)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "w") 'lispy-move-up)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "s") 'lispy-move-down)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "O") 'lispy-oneline)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "M") 'lispy-alt-multiline)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "S") 'lispy-stringify)
+    ;; marking
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "a") 'lispy-ace-symbol
+      :override '(cond ((looking-at lispy-outline)
+                        (lispy-meta-return))))
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "H") 'lispy-ace-symbol-replace)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "m") 'lispy-mark-list)
+    ;; dialect-specific
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "e") 'lispy-eval)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "E") 'lispy-eval-and-insert)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "g") 'lispy-goto-local)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "G") 'lispy-goto)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "F") 'lispy-follow t)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "D") 'pop-tag-mark)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "A") 'lispy-beginning-of-defun)
+    (lispy-define-key lispy-mode-map-special "_" 'lispy-underscore)
+    ;; miscellanea
+    (define-key lispy-mode-map-special (kbd "SPC") 'lispy-space)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "i") 'lispy-tab)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "I") 'lispy-shifttab)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "N") 'lispy-narrow)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "W") 'lispy-widen)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "c") 'lispy-clone)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "u") 'lispy-undo)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "q") 'lispy-ace-paren
+      :override '(cond ((bound-and-true-p view-mode)
+                        (View-quit))))
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "Q") 'lispy-ace-char)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "v") 'lispy-view)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "t") 'lispy-teleport
+      :override '(cond ((looking-at lispy-outline)
+                        (end-of-line))))
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "n") 'lispy-new-copy)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "b") 'lispy-back)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "B") 'lispy-ediff-regions)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "x") 'lispy-x)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "Z") 'lispy-edebug-stop)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "V") 'lispy-visit)
+    (lispy-define-key lispy-mode-map-special "-" 'lispy-ace-subword)
+    (lispy-define-key lispy-mode-map-special "." 'lispy-repeat)
+    (lispy-define-key lispy-mode-map-special "~" 'lispy-tilde)
+    ;; TODO digit argument
+    ))
