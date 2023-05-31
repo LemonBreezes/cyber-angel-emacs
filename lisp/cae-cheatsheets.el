@@ -90,7 +90,8 @@
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
 
-;; Make these persp-local so that
+;; Make these persp-local so that identical tabs on different workspaces do not
+;; share hydras.
 (defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
   (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
                        cae-cheatsheets-tab-bar-hydra-alist))
