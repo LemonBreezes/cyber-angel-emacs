@@ -489,9 +489,11 @@
       "C-S-i" #'doom/dumb-dedent
       [remap previous-buffer] #'cae-previous-buffer
       [remap next-buffer] #'cae-next-buffer
-      (:map minibuffer-local-map
-       "C-;" nil
-       "C-s" nil)
+      (:when (modulep! :completion vertico)
+       (:map minibuffer-local-map
+        "C-;" nil                       ;I prefer <f8> for `embark-act'.
+        "C-s" nil                       ;I prefer `C-r' for `consult-history'.
+        "C-r" #'consult-history))
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
