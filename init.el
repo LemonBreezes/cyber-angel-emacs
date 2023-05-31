@@ -17,7 +17,7 @@
        hydra
        (ligatures +extra +iosevka)
        nav-flash
-       ;; (popup +defaults)
+       (popup +defaults)
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces

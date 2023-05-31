@@ -20,8 +20,9 @@
         ;; Screens are larger nowadays, we can afford slightly larger thumbnails
         image-dired-thumb-size 150)
   :config
-  (set-popup-rule! "^\\*image-dired"
-    :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+  (when (modulep! :ui popup)
+    (set-popup-rule! "^\\*image-dired"
+                     :slot 20 :size 0.8 :select t :quit nil :ttl 0))
   (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
 
   (let* ((ls (executable-find "ls"))
@@ -109,7 +110,8 @@
   :config
   (dirvish-override-dired-mode)
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/"))
-  (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t)
+  (when (modulep! :ui popup)
+    (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t))
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
