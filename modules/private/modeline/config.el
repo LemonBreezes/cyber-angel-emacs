@@ -82,8 +82,7 @@
                                    flycheck-mode
                                    flymake-mode
                                    persp-mode
-                                   eat-eshell-mode
-                                   envrc-mode))
+                                   eat-eshell-mode))
   (after! compilation
     (or (assq 'compilation-in-progress mode-line-modes)
         (add-to-list 'minions-mode-line-modes
