@@ -64,8 +64,7 @@
       (,(cae-keyboard-kbd "6") +workspace/switch-to-5)
       (,(cae-keyboard-kbd "7") +workspace/switch-to-6)
       (,(cae-keyboard-kbd "8") +workspace/switch-to-7)
-      (,(cae-keyboard-kbd "9") +workspace/switch-to-8)
-      ))
+      (,(cae-keyboard-kbd "9") +workspace/switch-to-8)))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
