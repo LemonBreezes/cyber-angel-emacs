@@ -116,7 +116,7 @@
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :side 'right)
 (after! info
   (set-popup-rule! "^\\*info\\*" :size #'+popup-shrink-to-fit :quit t :select t :side 'right :ttl nil))
-(set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
+(set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl 5)
 ;; (set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (after! eww
