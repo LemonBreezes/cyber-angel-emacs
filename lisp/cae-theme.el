@@ -62,25 +62,26 @@
 (use-package! circadian
   ;;:defer-incrementally t
   :config
-  (setq circadian-themes
-        '((:sunrise . modus-operandi-tinted)
-          (:sunset  . modus-vivendi-tinted)))
-  (if (and calendar-latitude calendar-longitude)
-      (if doom-init-time
-          (circadian-setup)
-        (let ((hook (if (daemonp)
-                        'server-after-make-frame-hook
-                      'after-init-hook)))
-          (remove-hook hook #'doom-init-theme-h)
-          (add-hook hook #'circadian-setup -90)))
-    (setq calendar-latitude 0
-          calendar-longitude 0)
-    (message "ERROR: Calendar latitude and longitude are not set.")))
+  (circadian-setup))
+  ;;(setq circadian-themes
+  ;;      '((:sunrise . modus-operandi-tinted)
+  ;;        (:sunset  . modus-vivendi-tinted)))
+  ;;(if (and calendar-latitude calendar-longitude)
+  ;;    (if doom-init-time
+  ;;        (circadian-setup)
+  ;;      (let ((hook (if (daemonp)
+  ;;                      'server-after-make-frame-hook
+  ;;                    'after-init-hook)))
+  ;;        (remove-hook hook #'doom-init-theme-h)
+  ;;        (add-hook hook #'circadian-setup -90)))
+  ;;  (setq calendar-latitude 0
+  ;;        calendar-longitude 0)
+  ;;  (message "ERROR: Calendar latitude and longitude are not set.")))
 
-(add-hook 'kill-emacs-hook
-          (cae-defun cae-theme-store-circadian-times-h ()
-            (when (require 'circadian nil t)
-              (doom-store-put 'circadian-themes (circadian-themes-parse)))))
+  (add-hook 'kill-emacs-hook
+            (cae-defun cae-theme-store-circadian-times-h ()
+              (when (require 'circadian nil t)
+                (doom-store-put 'circadian-themes (circadian-themes-parse)))))
 
 (when (doom-store-get 'circadian-themes)
   (let* ((themes (doom-store-get 'circadian-themes))
