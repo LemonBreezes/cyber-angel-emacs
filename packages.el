@@ -25,6 +25,7 @@
 ;;; Tools
 (package! nov)
 (package! syslog-mode)
+(package! w3m)
 
 ;; These are autoloaded without explicit configuration.
 (package! crontab-mode)
