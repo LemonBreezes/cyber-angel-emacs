@@ -29,7 +29,7 @@
                (one-window-p)
                (frame-width (selected-frame))
                (> (frame-width (selected-frame)) 160))
-      (dirvish-layout-toggle))))
+      (run-at-time 0.001 nil #'dirvish-layout-toggle))))
 
 (defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
