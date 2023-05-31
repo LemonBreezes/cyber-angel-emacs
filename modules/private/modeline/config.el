@@ -85,10 +85,8 @@
                                 (make-mode-line-mouse-map
                                  'mouse-2
                                  #'compilation-goto-in-progress-buffer)))
-                   (default-value 'minions-mode-line-modes))))
+                   (default-value 'minions-mode-line-modes)))))
 
-  (minions-mode +1))
-
-(column-number-mode +1)
+(add-hook 'doom-first-file-hook #'column-number-mode)
 
 (map! "<f9>" #'minions-minor-modes-menu)
