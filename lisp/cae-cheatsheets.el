@@ -22,11 +22,12 @@
 ;;; Pause and resume with workspaces
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
-  (when (bound-and-true-p hydra-curr-map)
-    (set-persp-parameter 'hydra-pause-ring
-                         (progn (ring-insert hydra-pause-ring
-                                             hydra-curr-body-fn)
-                                hydra-pause-ring))
+  (when (featurep 'hydra)
+    (set-persp-parameter
+     'hydra-pause-ring
+     (progn (when hydra-curr-body-fn
+              (ring-insert hydra-pause-ring hydra-curr-body-fn))
+            hydra-pause-ring))
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
@@ -51,5 +52,6 @@
   (hydra-keyboard-quit))
 
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
+
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
