@@ -125,7 +125,7 @@
 (defconst cae-hacks-gc-threshold (* 3 1024 1024 1024))
 (defconst cae-hacks-gc-percentage 10)
 (defvar cae-hacks--gc-messages nil)
-(defvar cae-hacks--gc-disabled nil)     ; Make these functions idempotent.
+(defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
 
 (defun cae-hacks-disable-gc ()
