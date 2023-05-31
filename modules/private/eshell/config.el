@@ -44,8 +44,7 @@
 
   (map! :map (eat-eshell-char-mode-map
               eat-eshell-semi-char-mode-map)
-        "<tab>" #'eat-self-input
-        "<return>" #'eat-self-input)
+        "<tab>" #'eat-self-input)
 
   (add-hook! '(eat--eshell-char-mode-hook
                eat--eshell-semi-char-mode-hook
