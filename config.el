@@ -253,6 +253,11 @@
 
 ;;; Editor
 
+(autoload 'cae-project-bookmark (concat doom-private-dir
+                                        "lisp/cae-project.el"))
+(autoload 'cae-project-bookmark-set (concat doom-private-dir
+                                            "lisp/cae-project.el"))
+
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
