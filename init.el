@@ -12,6 +12,7 @@
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
+       helm
        (vertico +icons)
 
        :ui
