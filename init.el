@@ -23,8 +23,10 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(defvar cae-ui-enabled-p t
-  "Whether our UI tweaks are disabled.")
+(defvar cae-init-ui-enabled-p t
+  "Whether our UI section of `config.el' is disabled.")
+(defvar cae-init-tools-enabled-p t
+  "Whether our tools section of `config.el' is disabled.")
 
 (doom! :completion
        (vertico +icons)
