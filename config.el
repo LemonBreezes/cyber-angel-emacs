@@ -1217,7 +1217,8 @@
  t)
 
 (setq cae-config-finished-loading t)
-
+(after! multiple-cursors-core
+  (error "multiple-cursors-core loaded too early"))
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
 ;;End:
