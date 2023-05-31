@@ -14,6 +14,8 @@
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
     ,(expand-file-name "lang/cc/autoload.el" doom-modules-dir)
     ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)))
+
+(defvar cae-compile-native-comp-speed 3)
     
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
