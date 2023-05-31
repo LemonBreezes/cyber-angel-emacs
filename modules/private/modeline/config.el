@@ -82,12 +82,12 @@
                    (list
                     'compilation-in-progress
                     (propertize "[Compiling] "
-	                        'help-echo "Compiling; mouse-2: Goto Buffer"
+                                'help-echo "Compiling; mouse-2: Goto Buffer"
                                 'mouse-face 'mode-line-highlight
                                 'local-map
                                 (make-mode-line-mouse-map
                                  'mouse-2
-			         #'compilation-goto-in-progress-buffer)))
+                                 #'compilation-goto-in-progress-buffer)))
                    (default-value 'minions-mode-line-modes))))
   (after! repeat
     (setq-default minions-mode-line-modes
