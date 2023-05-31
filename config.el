@@ -659,7 +659,7 @@
   (map! :leader :prefix "f"
         :desc "Show file info" "i" #'file-info-show)
   :config
-  ;; See the :private vc module for further configuration.
+  ;; See the `:private vc' module for further configuration.
   (setq file-info-include-headlines t
         file-info-max-value-length 100))
 
