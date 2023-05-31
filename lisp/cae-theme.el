@@ -20,7 +20,19 @@
                         :background 'unspecified))
   (after! markdown-mode
     (set-face-attribute 'markdown-code-face nil
-                        :background 'unspecified)))
+                        :background 'unspecified))
+  ;; Remove bold constructs
+  (dolist (face '(font-lock-keyword-face
+                  font-lock-type-face
+                  font-lock-builtin-face
+                  font-lock-constant-face
+                  font-lock-variable-name-face
+                  font-lock-function-name-face
+                  font-lock-string-face
+                  font-lock-comment-face
+                  font-lock-doc-face))
+    (set-face-attribute face nil :weight 'normal))
+  )
 
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
