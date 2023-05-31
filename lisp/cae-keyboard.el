@@ -382,7 +382,7 @@
                                                  :test (lambda (x y) (cl-find x y))))))
                       (cae-keyboard-kbd-reverse "'"))
                      (t
-                      (message "Unable to find a free key for the comma command.")
+                      (message "Error: Unable to find a free key for the Lispy comma command.")
                       "\\"))
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
@@ -404,7 +404,7 @@
                                        :test (lambda (x y) (cl-find x y)))))
                  (cae-keyboard-kbd-reverse "'"))
                 (t
-                 (message "Unable to find a free key for the tick command.")
+                 (message "Error: Unable to find a free key for the Lispy tick command.")
                  "="))
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse "'"))
