@@ -652,20 +652,20 @@
           (:map isearch-mode-map
            "j" #'avy-isearch))
    t)
-    (when (modulep! :completion vertico)
-      (after! vertico
-        (map! :map vertico-map
-              "C-z j" #'vertico-quick-jump
-              "C-z i" #'vertico-quick-exit)))
-    (after! embark
-      (map! :map embark-collect-mode-map
-            "C-z j" #'avy-embark-collect-choose
-            "C-z i" #'avy-embark-collect-act))
-    (when (modulep! :private corfu)
-      (after! corfu
-        (map! :map corfu-map
-              "C-z j" #'corfu-quick-jump
-              "C-z i" #'corfu-quick-insert)))
+  (when (modulep! :completion vertico)
+    (after! vertico
+      (map! :map vertico-map
+            "C-z j" #'vertico-quick-jump
+            "C-z i" #'vertico-quick-exit)))
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "C-z j" #'avy-embark-collect-choose
+          "C-z i" #'avy-embark-collect-act))
+  (when (modulep! :private corfu)
+    (after! corfu
+      (map! :map corfu-map
+            "C-z j" #'corfu-quick-jump
+            "C-z i" #'corfu-quick-insert)))
 
   ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
   (when (modulep! :ui popup)
@@ -966,7 +966,11 @@
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
       '((eri/mark-inside-org-table-cell
-         eri/mark-outside-org-table-cell)))))
+         eri/mark-outside-org-table-cell))))
+
+  (use-package! switchy-window
+    :defer t :init
+    (add-hook 'doom-first-file-hook #'switchy-window-minor-mode)))
 
 
 
