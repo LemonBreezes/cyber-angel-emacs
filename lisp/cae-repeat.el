@@ -11,8 +11,8 @@
 
   (eval
    `(define-repeat-map other-window
-      ("o" other-window
-       "O" other-window-previous
+      ("o" ,(lookup-key (current-global-map) (kbd "C-x o"))
+       "O" ,(lookup-key (current-global-map) (kbd "C-x O"))
        ,@(when (modulep! :ui popup)
            '("p" +popup/other))
        "0" ,(lookup-key (current-global-map) (kbd "C-x 0"))
