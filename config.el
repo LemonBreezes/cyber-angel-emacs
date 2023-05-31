@@ -682,6 +682,7 @@
     :defer t :config
     (setq-default abbrev-mode t
                   save-abbrevs 'silently)
+    (setq abbrev-suggest t)
     (map! :map edit-abbrevs-mode-map
           [remap save-buffer] #'abbrev-edit-save-buffer)
     (map! :map abbrev-map "e" #'edit-abbrevs)
