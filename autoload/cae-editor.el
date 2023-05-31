@@ -18,3 +18,11 @@
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
           (funcall orig-func buffer-or-name))))))
+
+;;;###autoload
+(defun cae-auto-sudoedit-maybe-h ()
+  (when (and (not (file-writable-p buffer-file-name))
+             (not (string= (file-attribute-user-id
+                            (file-attributes (or (buffer-file-name) list-buffers-directory) 'string))
+                           (user-login-name))))
+    (auto-sudoedit)))
