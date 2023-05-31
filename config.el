@@ -252,7 +252,7 @@
                                           :completion (:detailedLabel t)
                                           :trackDependency 1
                                           :threads ,(max 1 (/ (doom-system-cpus) 2)))))
-    (add-to-list 'lsp-disabled-clients 'clangd)
+    (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 
