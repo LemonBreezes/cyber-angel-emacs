@@ -52,7 +52,8 @@
 (define-key key-translation-map (kbd "C-x 4 C-x C-m") (kbd "C-x 4 m"))
 (define-key key-translation-map (kbd "C-x 4 C-x C-p") (kbd "C-x 4 p"))
 (define-key key-translation-map (kbd "C-x 4 C-x C-r") (kbd "C-x 4 r"))
-(define-key key-translation-map (kbd "C-x 4 C-x C-o") (kbd "C-x 4 j"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-o") (kbd "C-x 4 C-o"))
+(define-key key-translation-map (kbd "C-x 4 C-x C-j") (kbd "C-x 4 C-j"))
 
 ;; other frame prefix
 (define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
