@@ -489,35 +489,35 @@
     (after! multiple-cursors-core
       (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body)
       (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil)))
-          (eval
+            (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
-              "
+                "
 ^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
 _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
 ^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)"
       ;; arrows
-              (,(cae-keyboard-kbd "j") worf-down :exit t)
-              (,(cae-keyboard-kbd "k") worf-up :exit t)
-              (,(cae-keyboard-kbd "w") org-metaup)
-              (,(cae-keyboard-kbd "s") org-metadown)
-              (,(cae-keyboard-kbd "h") org-metaleft)
-              (,(cae-keyboard-kbd "l") org-metaright)
-              (,(cae-keyboard-kbd "e") move-end-of-line :exit t)
+                (,(cae-keyboard-kbd "j") worf-down :exit t)
+                (,(cae-keyboard-kbd "k") worf-up :exit t)
+                (,(cae-keyboard-kbd "w") org-metaup)
+                (,(cae-keyboard-kbd "s") org-metadown)
+                (,(cae-keyboard-kbd "h") org-metaleft)
+                (,(cae-keyboard-kbd "l") org-metaright)
+                (,(cae-keyboard-kbd "e") move-end-of-line :exit t)
       ;; modes
-              (,(cae-keyboard-kbd "f") worf-change-tree-mode :exit t)
-              (,(cae-keyboard-kbd "i") worf-change-shift-mode :exit t)
-              (,(cae-keyboard-kbd "r") worf-change-shiftcontrol-mode :exit t)
+                (,(cae-keyboard-kbd "f") worf-change-tree-mode :exit t)
+                (,(cae-keyboard-kbd "i") worf-change-shift-mode :exit t)
+                (,(cae-keyboard-kbd "r") worf-change-shiftcontrol-mode :exit t)
       ;; misc
-              (,(cae-keyboard-kbd "p") org-set-property :exit t)
-              (,(cae-keyboard-kbd "t") org-set-tags-command :exit t)
-              (,(cae-keyboard-kbd "T") worf-change-time :exit t)
-              (,(cae-keyboard-kbd "n") worf-change-name :exit t)
-              (,(cae-keyboard-kbd "a") org-meta-return :exit t)
-              (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
-              (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
-              (,(cae-keyboard-kbd "q") nil)
-              (,(cae-keyboard-kbd "c") nil)))
+                (,(cae-keyboard-kbd "p") org-set-property :exit t)
+                (,(cae-keyboard-kbd "t") org-set-tags-command :exit t)
+                (,(cae-keyboard-kbd "T") worf-change-time :exit t)
+                (,(cae-keyboard-kbd "n") worf-change-name :exit t)
+                (,(cae-keyboard-kbd "a") org-meta-return :exit t)
+                (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
+                (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
+                (,(cae-keyboard-kbd "q") nil)
+                (,(cae-keyboard-kbd "c") nil)))
   (eval
    `(worf-defverb
      "change"
@@ -567,13 +567,43 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "k") org-insert-heading)
       (,(cae-keyboard-kbd "h") org-metaleft)
       (,(cae-keyboard-kbd "l") worf-new-right)))
+  (defun cae-keyboard-remap-hydra-hint (s)
+    (with-output-to-string
+      (with-temp-buffer
+        (insert s)
+        (goto-char (point-min))
+        (while (not (eobp))
+          (let ((ch (following-char)))
+            (if (and (char-equal ch ?_)
+                     (char-after (+ 2 (point)))
+                     (char-equal (char-after (+ 2 (point)))
+                                 ?_))
+                (progn
+                  (forward-char 1)      ; discard _
+                  (let ((char (following-char)))
+                    (princ
+                     (string
+                      ?_
+                      (cae-keyboard-remap-char char)))
+                    (forward-char 1)    ; discard _
+                    (cond ((eq (char-after (1+ (point))) ?:)
+                           (forward-char 1)
+                           (princ (string ?_ ?:)))
+                          ((or (and (<= (char-after (1+ (point))) ?z)
+                                    (>= (char-after (1+ (point))) ?a))
+                               (and (<= (char-after (1+ (point))) ?Z)
+                                    (>= (char-after (1+ (point))) ?A)))
+                           (princ (string ?_ ?: ?\s char)))
+                          (t (princ (char-to-string ch))))))
+              (princ (char-to-string ch))))
+            (forward-char)))))
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
-      "
+      ,(cae-keyboard-remap-hydra-hint "
 ^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
 _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
-^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)"
+^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)")
       ;; arrows
       (,(cae-keyboard-kbd "j") worf-down :exit t)
       (,(cae-keyboard-kbd "k") worf-up :exit t)
