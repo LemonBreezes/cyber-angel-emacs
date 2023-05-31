@@ -17,9 +17,7 @@
 ;;; Tracing functions
 
 (defun cae-debug-backtrace-a (&rest args)
-  (+log args)
-  (unless args
-    (backtrace)))
+  (backtrace))
 
 (defmacro backtrace! (function)
   `(advice-add ',function :before #'cae-debug-backtrace-a))
