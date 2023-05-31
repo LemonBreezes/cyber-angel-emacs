@@ -517,10 +517,6 @@
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
           "M-g e" #'consult-compile-error
-          (:when (modulep! :checkers syntax)
-            "M-g f" #'consult-flycheck)
-          (:when (modulep! :checkers syntax +flymake)
-            "M-g f" #'consult-flymake) ;; Alternative: consult-flycheck
           "M-g g" #'consult-goto-line  ;; orig. goto-line
           "M-g M-g" #'consult-goto-line ;; orig. goto-line
           "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
@@ -531,7 +527,6 @@
           ;; M-s bindings (search-map)
           [remap Info-search] #'consult-info
           "M-s i" #'consult-info
-          "M-s r" #'consult-ripgrep
           "M-s l" #'consult-line
           "M-s L" #'consult-line-multi
           "M-s k" #'consult-keep-lines
