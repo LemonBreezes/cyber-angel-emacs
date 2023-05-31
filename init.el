@@ -66,8 +66,8 @@
 
            :checkers
            (syntax +childframe)
-           spell
-           grammar
+           ;;spell
+           ;;grammar
 
            :tools
            (debugger +lsp)
