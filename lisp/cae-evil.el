@@ -51,3 +51,5 @@
 
 ;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
 ;; instead.
+(map! :m "C-d" nil
+      :m "C-u" nil)
