@@ -5,13 +5,7 @@
 
   (after! dap-mode
     ;; Close the windows when the debugger is closed.
-    (add-hook! #'dap-disconnect
-      (ignore-errors
-        (let ((ignore-window-parameters t))
-          (cl-loop for buf being the buffers
-                   when (string-match-p "gdb" (buffer-name buf)) do
-                   (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))
-        (hydra-keyboard-quit)))
+    (advice-add #'dap-disconnect :after #'cae-debugger-quit-session-a)
 
     (map! :map dap-mode-map
           "C-S-d" #'dap-hydra)
