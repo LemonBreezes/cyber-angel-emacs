@@ -31,7 +31,7 @@
        hydra
        ;; (ligatures +extra +iosevka)
        nav-flash
-       (popup +defaults)
+       ;; (popup +defaults)
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
@@ -96,8 +96,9 @@
        misc-applications
        modeline
        ;; (meow +leader)
-       unpackaged
-       vc)
+       ;; unpackaged
+       ;; vc
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
