@@ -3,4 +3,4 @@
 
 (package! eat)
 (package! eshell-bookmark)
-(package! eshell-prompts-extras)
+(package! eshell-prompt-extras)
