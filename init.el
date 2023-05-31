@@ -14,6 +14,7 @@
        :ui
        doom-dashboard
        hl-todo
+       hydra
        (ligatures +extra +iosevka)
        nav-flash
        (popup +defaults)
