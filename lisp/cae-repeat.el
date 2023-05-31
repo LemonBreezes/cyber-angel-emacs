@@ -37,6 +37,12 @@
   (define-repeat-map scroll-down-command
     ("v" scroll-down-command)
     (:exit "V" scroll-up-command))
+  (define-repeat-map vertico-scroll-up
+    ("v" vertico-scroll-up)
+    (:exit "V" vertico-scroll-down))
+  (define-repeat-map vertico-scroll-down
+    ("v" vertico-scroll-down)
+    (:exit "V" vertico-scroll-up))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
