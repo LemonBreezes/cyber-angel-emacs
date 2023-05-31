@@ -328,7 +328,7 @@
            (unless (string-match-p powershell-dir (getenv "PATH"))
              (setenv "PATH"
                      (concat powershell-dir  path-separator (getenv "PATH")))
-             (setq exec-path (cons "/mnt/c/Windows/System32" exec-path))))
+             (setq exec-path (cons powershell-dir exec-path))))
          (setq xclip-method 'powershell))
         ((executable-find "termux-setup-storage")
          (setq xclip-method 'termux-clipboard-get))))
