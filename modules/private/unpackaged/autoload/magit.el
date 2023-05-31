@@ -79,8 +79,3 @@ command was called, go to its unstaged changes section."
     ;; the bottom of the window
     ("n" (progn (smerge-vc-next-conflict) (recenter-top-bottom (/ (window-height) 8))))
     ("q" nil :color blue))
-
-;;;###autoload
-(defun cae-unpackaged-magit-start-smerge-hydra-h ()
-  (when smerge-mode
-    (+vc/smerge-hydra/body)))
