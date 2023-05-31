@@ -21,19 +21,3 @@
                         (cancel-function-timers 'ping-status))
                       (alert "internet working"))
                     (kill-buffer))))))
-
-;;;###autoload
-(defun cae-toggle-sudo ()
-  (interactive)
-  (let* ((file (or buffer-file-name
-                   (when (or (derived-mode-p 'dired-mode)
-                             (derived-mode-p 'wdired-mode))
-                     default-directory)))
-         (file-localname (file-remote-p file 'localname))
-         (tramp-prefix (and file-localname
-                            (string-remove-suffix file-localname file)))
-         (sudo-prefix (format "/sudo:root@%s:" (file-remote-p file 'host))))
-    (if (string-suffix-p sudo-prefix tramp-prefix)
-        (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
-                           (tramp-file-local-name file)))
-      (doom/sudo-this-file))))
