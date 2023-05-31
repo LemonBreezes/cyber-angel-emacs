@@ -748,14 +748,21 @@
   (dolist (fn '(symbol-overlay-switch-forward
                 symbol-overlay-switch-backward
                 symbol-overlay-jump-next
-                symbol-overlay-jump-prev))
+                symbol-overlay-jump-prev
+                View-scroll-half-page-forward
+                View-scroll-half-page-backward
+                my-View-scroll-half-page-forward-other-window
+                my-View-scroll-half-page-backward-other-window))
     (add-to-list 'rp/restore-point-commands fn))
   (advice-add #'rp/restore-point-position :before #'push-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
-        (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
-      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)))
+        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+               (add-hook 'doom-escape-hook #'rp/cond-restore-point))
+      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+      (remove-hook 'doom-escape-hook #'rp/cond-restore-point)))
   (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
 
 (use-package! symbol-overlay
