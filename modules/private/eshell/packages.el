@@ -3,4 +3,3 @@
 
 (package! eat)
 (package! eshell-bookmark)
-(package! esh-autosuggest)
