@@ -120,6 +120,9 @@
     (when (bolp)
       (goto-char p))))
 
+;; For backwards compatibility.
+(defun toggle-read-only (arg))
+
 ;;; GC hacks
 
 (defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
@@ -186,8 +189,6 @@ It is meant to be used as a `post-gc-hook'."
                       (cae-hacks-garbage-collect))))
   (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
 
-;; This hack is only enabled when I am compiling Emacs on kill.
 ;; Be wary of enabling this, especially on Android devices:
 ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
-(when cae-config-compilation-enabled
-  (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10))
+(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
