@@ -347,11 +347,9 @@
   (add-hook 'web-mode-hook  'smart-semicolon-mode)
   (add-hook 'java-mode-hook 'smart-semicolon-mode))
 
-;; I should fork this package and refine its rules based on my preferences. For
-;; example, typing after a closing paren should automatically insert a space.
-(use-package! electric-spacing
-  :defer t :init
-  (add-hook 'c-mode-common-hook #'electric-spacing-mode)
-  (add-hook 'python-mode-hook #'electric-spacing-mode)
-  :config
-  (advice-add #'electric-spacing-\( :override #'cae-keyboard-electric-spacing-\())
+;; This package is not maintained anymore and is giving me errors. It's also a
+;;lot of work to maintain its rules and they will likely always be incomplete. '
+;;(use-package! electric-spacing :defer t :init (add-hook 'c-mode-common-hook
+;;#'electric-spacing-mode) (add-hook 'python-mode-hook #'electric-spacing-mode)
+;;:config (advice-add #'electric-spacing-\( :override
+;;#'cae-keyboard-electric-spacing-\())
