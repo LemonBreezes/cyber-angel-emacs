@@ -226,27 +226,9 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
-;; Hercules could be lazy-loaded but it's only like 200 LOC and its only
-;; dependency is `which-key' so I'll defer that work to a later date.
 (use-package! hercules
-  :after which-key
-  :config
-  (hercules-def
-   :toggle-funs #'cae-embark-collect-cheatsheet
-   :keymap 'embark-collect-mode-map
-   :package 'embark)
-  (hercules-def
-   :toggle-funs #'cae-debugger-cheatsheet
-   :keymap 'debugger-mode-map
-   :package 'debug)
-  (hercules-def
-   :toggle-funs #'cae-edebug-cheatsheet
-   :keymap 'edebug-mode-map
-   :package 'edebug)
-  (hercules-def
-   :toggle-funs #'cae-macrostep-keymap
-   :keymap 'macrostep-keymap
-   :package 'macrostep)
+  :defer t
+  :init
   (after! embark
     (map! :map embark-collect-mode-map
           "<f6>" #'cae-embark-collect-cheatsheet))
@@ -258,7 +240,7 @@
           "<f6>" #'cae-edebug-cheatsheet))
   (after! macrostep
     (map! :map macrostep-keymap
-          "<f6>" #'cae-macrostep-keymap)))
+          "<f6>" #'cae-macrostep-cheatsheet)))
 
 
 ;;; Tools
