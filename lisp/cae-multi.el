@@ -54,5 +54,6 @@
       (gac--after-save (buffer-file-name))
       (dolist (file (org-all-archive-files))
         (gac--after-save file)))))
+
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
