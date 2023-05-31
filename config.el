@@ -551,13 +551,13 @@
            ("M-C" sp-convolute-sexp "Edit")
            ("C-M-t" sp-transpose-sexp "Edit")
            ("C-x C-t" sp-transpose-hybrid-sexp "Edit") ;Overrides
-                                                       ;`transpose-lines'.
+                                        ;`transpose-lines'.
            ("C-M-k" sp-kill-sexp "Kill")
            ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
            ("M-<delete>" sp-unwrap-sexp "Kill")
            ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
            ("M-r" cae-raise-sexp "Kill") ;Overrides
-                                         ;`move-to-window-line-top-bottom'.
+                                        ;`move-to-window-line-top-bottom'.
            ("M-D" sp-splice-sexp "Kill")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
            ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
@@ -578,10 +578,11 @@
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
            ("C-]" sp-select-next-thing-exchange "Selection") ;Overrides
-                                                        ;`abort-recursive-edit'.
+                                        ;`abort-recursive-edit'.
            ("C-M-]" sp-select-next-thing "Selection")
            ("C-M-@" sp-mark-sexp "Selection")
-           ("C-M-w" sp-copy-sexp "Selection")))) ;Overrides `append-next-kill'.
+           ;;("C-M-w" sp-copy-sexp "Selection");Overrides `append-next-kill'.
+           )))
     (when (modulep! :ui hydra)
       (eval
        (append
