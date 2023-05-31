@@ -62,7 +62,7 @@
         warning-minimum-log-level :emergency))
 
 (after! shr
-  ;; Shr wraps lines in a visually unappealing way.
+  ;; `shr' wraps lines in a visually unappealing way.
   (setq shr-width 120
         shr-max-width 120)
 
