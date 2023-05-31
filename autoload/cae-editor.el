@@ -279,8 +279,8 @@ mark the string and call `edit-indirect-region' with it."
 
 (defun cae-embark-completing-read-prompter (oldfun &rest args)
   (minibuffer-with-setup-hook
-      (lambda ()
-        (local-set-key (kbd "C-z") #'abort-recursive-edit))
+      `(lambda ()
+         (local-set-key (kbd "C-z") #'abort-recursive-edit))
     (apply oldfun args)))
 
 ;;;###autoload
@@ -288,5 +288,20 @@ mark the string and call `edit-indirect-region' with it."
   (interactive "P")
   (let* ((embark-prompter #'embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
-         (embark-indicators '()))
+         (embark-indicators '())
+         (vertico-posframe-size-function))
+    (setf vertico-posframe-size-function
+          `(lambda (_)
+             '(:height ,(frame-height
+                         (cl-find-if (lambda (frame)
+                                       (eq (frame-parameter frame 'posframe-hidehandler)
+                                           #'vertico-posframe-hidehandler))
+                                     (visible-frame-list)))
+               :width ,(frame-width
+                        (cl-find-if (lambda (frame)
+                                      (eq (frame-parameter frame 'posframe-hidehandler)
+                                          #'vertico-posframe-hidehandler))
+                                    (visible-frame-list)))
+               :min-height nil
+               :min-width nil)))
     (embark-act arg)))
