@@ -102,7 +102,6 @@
          (defalias command
            `(lambda ()
               (interactive)
-              ;; TODO: Fix edit annotation
               (cae-project--with-bookmark-alist nil
                 (setq this-command ',def)
                 (call-interactively ',def)))
