@@ -208,7 +208,8 @@
 
 (setq delete-by-moving-to-trash t
       remote-file-name-inhibit-delete-by-moving-to-trash t
-      history-length (expt 2 16))
+      history-length (expt 2 16)
+      make-cursor-line-fully-visible nil)
 
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
