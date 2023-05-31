@@ -310,6 +310,8 @@
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
+(provide 'company)
+
 (after! dabbrev
   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
         dabbrev-upcase-means-case-search t))
