@@ -514,7 +514,16 @@
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp' module.
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  :defer t)
+  :defer t
+  :config
+  (when (and (modulep! :tools lsp)
+             (not (modulep! :tools lsp +eglot)))
+    (add-to-list 'aggressive-indent-dont-indent-if
+                 '(and lsp-mode
+                       (or (and lsp-enable-on-type-formatting
+                                (lsp--capability "documentOnTypeFormattingProvider"))
+                           (and lsp-enable-indentation
+                                (lsp--capability "documentRangeFormattingProvider")))))))
 
 (use-package! hungry-delete
   :defer t :init
