@@ -1257,6 +1257,7 @@
 ;;; Email
 
 (when (modulep! :email notmuch)
+  (setq +notmuch-sync-backend 'mbsync)
   (after! notmuch-hello
     (map! :map notmuch-hello-mode-map
           "q" #'cae-notmuch-quit)))
