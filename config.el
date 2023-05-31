@@ -871,8 +871,8 @@
         "^" #'cape-tex
         "&" #'cape-sgml
         "r" #'cape-rfc1345
-        "+" #'copilot-complete
-        "M-+" #'copilot-complete))
+        "." #'copilot-complete
+        "C-." #'copilot-complete))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
