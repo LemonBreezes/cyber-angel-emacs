@@ -12,7 +12,7 @@
         nameless-global-aliases '()))
 
 ;; Allow `eval-expression' to have comments.
-(add-hook! 'minibuffer-setup-hook
+(add-hook 'minibuffer-setup-hook
   (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
     (when (string= (minibuffer-prompt) "Eval: ")
       (setq-local comment-start ";"
