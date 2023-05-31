@@ -118,7 +118,7 @@
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
         [remap next-buffer] #'cae-dired-next-buffer)
 
-  (add-hook 'dirvish-setup-hook
+  (add-hook 'dirvish-find-entry-hook
             (cae-defun cae-dired-set-fullscreen-dwim ()
               (when (when (and (one-window-p t)
                                (frame-width (selected-frame))
