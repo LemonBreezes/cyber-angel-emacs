@@ -205,12 +205,12 @@
       :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
     (set-popup-rule! "^Trash Can" :size 0.3 :side 'bottom :select t :quit t
       :ttl 0)                           ; which slot/vslot?
+    (set-popup-rule! "^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil) ; which slot/vslot?
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window)
-    (set-popup-rule! "^\\*notmuch-hello"  :ignore t)
-    (set-popup-rule! "^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil) )
+    (set-popup-rule! "^\\*notmuch-hello"  :ignore t))
 
   ;; Lower the default popup delay.
   (after! tooltip
