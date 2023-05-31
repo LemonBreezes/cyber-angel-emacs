@@ -32,7 +32,7 @@
         [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
 
 ;; Automatically mark dir-locals as safe on save.
-(add-hook 'lisp-data-mode-hook
+(add-hook 'find-file-hook
           (cae-defun cae-lisp-dir-locals-set-up-h ()
             (when (and (buffer-file-name)
                        (string= (file-name-nondirectory (buffer-file-name))
