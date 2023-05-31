@@ -60,6 +60,7 @@
 ;;; Set theme based on time of day.
 
 (use-package! circadian
+  :defer-incrementally t
   :config
   (setq circadian-themes
         '((:sunrise . modus-operandi-tinted)
