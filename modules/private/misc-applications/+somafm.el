@@ -1,12 +1,13 @@
 ;;; private/misc-applications/somafm.el -*- lexical-binding: t; -*-
 
 (use-package! somafm
-  :commands somafm
+  :defer-incrementally t
   :init
   (map! :leader
         :prefix +misc-applications-prefix
         "@" #'somafm)
   :config
+  (somafm--refresh-channels)
   (map! :map somafm-mode-map
         :n "q" #'bury-buffer
         :n "r" #'somafm--refresh-channels
