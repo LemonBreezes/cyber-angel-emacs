@@ -13,17 +13,18 @@
           :map elfeed-search-mode-map
           "?" #'describe-mode
           "q" #'+elfeed-quit)
-    (defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
-      ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
-      ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
-      ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-      ("m" elfeed-toggle-star "Mark")
-      ("A" (elfeed-search-set-filter "@6-months-ago") "All")
-      ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
-      ("Q" +elfeed-quit "Quit Elfeed" :color blue)
-      ("q" nil "quit" :color blue))
-    (map! :map elfeed-search-mode-map
-          "<f6>" #'cae-elfeed-hydra/body)
+    (when (modulep! :ui hydra)
+      (defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
+        ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+        ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
+        ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+        ("m" elfeed-toggle-star "Mark")
+        ("A" (elfeed-search-set-filter "@6-months-ago") "All")
+        ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
+        ("Q" +elfeed-quit "Quit Elfeed" :color blue)
+        ("q" nil "quit" :color blue))
+      (map! :map elfeed-search-mode-map
+            "<f6>" #'cae-elfeed-hydra/body))
 
     (use-package elfeed-tube
       :after elfeed
