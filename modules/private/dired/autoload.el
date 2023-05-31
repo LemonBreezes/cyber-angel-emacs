@@ -30,6 +30,7 @@
       (if fn (funcall fn) (dirvish-kill dv)))
     (find-file file)))
 
+;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
   (interactive
