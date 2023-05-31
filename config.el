@@ -631,6 +631,7 @@
     ;; fork I'm currently using because I should be able to get this working using
     ;; `avy-styles-alist' instead.
     (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
+    (advice-add #'avy-goto-line :around #'cae-avy-indent-line-overlay-a)
     (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
     (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
     (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
