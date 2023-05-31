@@ -1,7 +1,6 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :defer-incrementally t
   :config
   (ednc-mode +1)
   (defun stack-notifications (&optional hide)
