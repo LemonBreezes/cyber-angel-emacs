@@ -113,9 +113,7 @@
 
   (defmacro cae-dired-find-file-wrapper (fn)
     "Wrap FN to exit Dirvish sessions when opening files."
-    `(cmd! ;;,(intern (format "cae-dired-%s" (symbol-name fn)))
-      ()                 ; Do not use defun because too many
-                                        ; symbols.
+    `(defun ,(intern (format "cae-dired-%s" (symbol-name fn))) ()
        (let ((dir default-directory))
          (advice-add #'find-file :around #'cae-dired-find-file-a)
          (unwind-protect (call-interactively #',fn)
@@ -157,8 +155,8 @@
                 find-alternate-file
                 ido-find-file
                 consult-locate))
-    (define-key dirvish-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper
-                                                     fn)))
+    (define-key dirvish-mode-map (vector 'remap fn)
+      (cae-dired-find-file-wrapper fn)))
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
