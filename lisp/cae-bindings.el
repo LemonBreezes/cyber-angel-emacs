@@ -198,3 +198,16 @@
               (define-key map (kbd "C-. C-.")  #'mc/unfreeze-fake-cursors))
             map))
 (cae-completion-mode +1)
+
+(after! cc-mode
+    (if (cae-display-graphic-p)
+        (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+      (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+
+  (when (modulep! :editor snippets)
+    (map! (:when (modulep! :completion vertico)
+           [remap yas-insert-snippet] #'consult-yasnippet)
+          :map yas-minor-mode-map
+          "C-c & C-s" nil
+          "C-c & C-n" nil
+          "C-c & C-v" nil))
