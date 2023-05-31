@@ -676,19 +676,20 @@
   (use-package! ibuffer
     :defer t :config
     (setq ibuffer-always-show-last-buffer t
-          ibuffer-formats
-          '((mark modified read-only locked " "
-             (name 23 23 :left :elide)  ;Give more space to the name.
-             " "
-             (size 9 -1 :right)
-             " "
-             (mode 16 16 :left :elide)
-             " "
-             (vc-status 12 :left)
-             " " filename-and-process)
-            (mark " "
-                  (name 16 -1)
-                  " " filename)))
+          ;;ibuffer-formats
+          ;;'((mark modified read-only locked " "
+          ;;   (name 23 23 :left :elide)  ;Give more space to the name.
+          ;;   " "
+          ;;   (size 9 -1 :right)
+          ;;   " "
+          ;;   (mode 16 16 :left :elide)
+          ;;   " "
+          ;;   (vc-status 12 :left)
+          ;;   " " filename-and-process)
+          ;;  (mark " "
+          ;;        (name 16 -1)
+          ;;        " " filename))
+          )
     (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
