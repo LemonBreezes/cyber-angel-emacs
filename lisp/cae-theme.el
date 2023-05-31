@@ -21,7 +21,7 @@
   (after! markdown-mode
     (set-face-attribute 'markdown-code-face nil
                         :background 'unspecified))
-  ;; Remove bold constructs
+  ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
                   font-lock-builtin-face
