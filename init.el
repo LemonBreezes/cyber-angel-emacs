@@ -116,6 +116,7 @@
            ;; (meow +leader)
            )
   (progn
+    ;; This comment will be removed after I test this.
     (message "Error: %S" err)
     (with-output-to-temp-buffer "*Backtrace*"
       (backtrace))
