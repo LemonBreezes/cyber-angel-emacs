@@ -120,7 +120,8 @@
 
   (cond ((modulep! :completion vertico)
          (map! :map eshell-mode-map
-               [remap eshell-isearch-backward] #'consult-history))
+               [remap eshell-isearch-backward] #'consult-history
+               "M-R" #'consult-history))
         ((modulep! :completion ivy)
          (map! :map eshell-mode-map
                [remap eshell-isearch-backward] #'counsel-esh-history))
