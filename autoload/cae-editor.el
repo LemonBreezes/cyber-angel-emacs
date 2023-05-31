@@ -199,20 +199,11 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
-  (let ((avy-style 'post)
-        (avy-column-line-overlay nil))
-    (apply oldfun args)
-    (setf (symbol-function 'avy-resume)
-          (symbol-function oldfun))))
+  (let ((avy-style 'post))
+    (apply oldfun args)))
 
 ;;;###autoload
 (cae-defun cae-avy-use-pre-style-a (oldfun &rest args)
   (let ((avy-style 'pre)
         (avy-column-line-overlay nil))
-    (apply oldfun args)))
-
-;;;###autoload
-(cae-defun cae-avy-resume-use-last-style-a (oldfun &rest args)
-  (let ((avy-style (or (alist-get cae-last-avy-command avy-styles-alist)
-                       avy-style)))
     (apply oldfun args)))
