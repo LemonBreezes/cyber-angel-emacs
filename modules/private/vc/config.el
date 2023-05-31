@@ -41,6 +41,8 @@
               :map forge-topic-mode-map
               "<f6>" #'cae-magit-forge-topic-hydra/body
               :map forge-pullreq-list-mode-map
+              "<f6>" #'cae-magit-forge-pullreq-list-hydra/body
+              :map forge-pullreq-list-mode-map
               "j" #'+default/search-buffer
               :map forge-topic-list-mode-map
               "j" #'+default/search-buffer
