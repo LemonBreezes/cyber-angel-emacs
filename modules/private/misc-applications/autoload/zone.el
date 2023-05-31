@@ -24,10 +24,8 @@
 (defun zone-choose (pgm)
   "Choose a PGM to run for `zone'."
   (interactive
-   (list
-    (intern (completing-read
-             "Program: "
-             (mapcar 'symbol-name
-                     (progn (require 'zone)
-                            zone-programs))))))
+   (list (intern (completing-read "Program: "
+                                  (mapcar 'symbol-name
+                                          (progn (require 'zone)
+                                                 zone-programs))))))
   (zone pgm))
