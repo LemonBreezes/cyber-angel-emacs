@@ -47,6 +47,6 @@
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5))
 
-(map! (:after eshell
-              (:map eshell-mode-map
-               :g "<tab>" #'completion-at-point)))
+(after! eshell
+  (map! :map eshell-mode-map
+        "TAB" #'completion-at-point))
