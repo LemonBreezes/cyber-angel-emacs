@@ -29,6 +29,7 @@
   (after! diff-hl
     (setq diff-hl-reference-revision "master"))
 
+  ;; For the built-in repeat map.
   (map! [remap +vc-gutter/previous-hunk] #'diff-hl-show-hunk-previous
         [remap +vc-gutter/next-hunk]     #'diff-hl-show-hunk-next))
 
