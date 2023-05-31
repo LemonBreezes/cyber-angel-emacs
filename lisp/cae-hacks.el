@@ -79,16 +79,16 @@
     (advice-remove #'set--this-command-keys #'ignore)))
 
 ;; White list local variables for some projects.
-(defadvice! cae-hacks-whitelist-some-dir-locals-a (oldfun variables dir-name)
-  :around #'hack-local-variables-filter
-  (if (and default-directory
-           (cl-member default-directory
-                      `(,doom-user-dir "~/src/atlas/")
-                      :test #'file-in-directory-p))
-      (progn (advice-add #'safe-local-variable-p :override #'always)
-             (unwind-protect (funcall oldfun variables dir-name)
-               (advice-remove #'safe-local-variable-p #'always)))
-    (funcall oldfun variables dir-name)))
+;; (defadvice! cae-hacks-whitelist-some-dir-locals-a (oldfun variables dir-name)
+;;   :around #'hack-local-variables-filter
+;;   (if (and default-directory
+;;            (cl-member default-directory
+;;                       `(,doom-user-dir "~/src/atlas/")
+;;                       :test #'file-in-directory-p))
+;;       (progn (advice-add #'safe-local-variable-p :override #'always)
+;;              (unwind-protect (funcall oldfun variables dir-name)
+;;                (advice-remove #'safe-local-variable-p #'always)))
+;;     (funcall oldfun variables dir-name)))
 
 ;; Disable `diff-hl-mode' in my Doom private dir.
 (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
