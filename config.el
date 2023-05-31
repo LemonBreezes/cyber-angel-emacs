@@ -194,7 +194,10 @@
    projectile-project-types :test #'equal)
   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json"))
+  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
+  ;; Set up compilation.
+  (setq projectile-per-project-compilation-buffer t
+        compilation-read-command nil))
 
 
 (after! tramp
