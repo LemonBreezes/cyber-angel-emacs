@@ -2,7 +2,8 @@
 
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
-                (cl-subst '(:eval (breadcrumb-project-crumbs))
+                (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
+                                              'face '(:weight bold :slant italic :family "Variable Pitch")))
                           'mode-line-buffer-identification
                           (default-value 'mode-line-format))))
 
