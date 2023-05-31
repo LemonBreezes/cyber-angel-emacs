@@ -229,10 +229,26 @@
 (use-package! hercules
   :config
   (hercules-def
-   ;; read further to see why this works
-   :toggle-funs #'embark-collect-cheatsheet
+   :toggle-funs #'cae-embark-collect-cheatsheet
    :keymap 'embark-collect-mode-map
-   :package 'embark))
+   :package 'embark)
+  (hercules-def
+   :toggle-funs #'cae-debugger-cheatsheet
+   :keymap 'debugger-mode-map
+   :package 'debug)
+  (hercules-def
+   :toggle-funs #'cae-edebug-cheatsheet
+   :keymap 'edebug-mode-map
+   :package 'edebug)
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "<f6>" #'cae-embark-collect-cheatsheet))
+  (after! debug
+    (map! :map debugger-mode-map
+          "<f6>" #'cae-debugger-cheatsheet))
+  (after! edebug
+    (map! :map edebug-mode-map
+          "<f6>" #'cae-edebug-cheatsheet)))
 
 ;;; Tools
 
