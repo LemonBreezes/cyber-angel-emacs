@@ -139,4 +139,5 @@
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
                          "cae-keyboard-kbd")))
-    (map! "C-!" #'parrot-rotate-next-word-at-point)))
+    (map! "C-!" #'parrot-rotate-next-word-at-point
+          "C-M-!" #'parrot-rotate-prev-word-at-point)))
