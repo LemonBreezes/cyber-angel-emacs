@@ -93,8 +93,6 @@
         "K" #'dired-kill-subdir
         "I" #'dired-insert-subdir
         "_" #'dired-up-directory
-        "{" #'dired-prev-dirline
-        "}" #'dired-next-dirline
         "[" #'dired-prev-dirline
         "]" #'dired-next-dirline
         "," #'dired-create-empty-file
