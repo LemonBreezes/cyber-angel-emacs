@@ -73,6 +73,9 @@
 (after! time
   (setq display-time-default-load-average nil))
 
+(after! help-fns
+  (setq help-enable-symbol-autoload t))
+
 (after! newcomment
   (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
                                         ;`comment-region' so that I can mark the
