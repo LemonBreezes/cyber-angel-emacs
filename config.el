@@ -8,6 +8,12 @@
 
 ;;; Stuff that should not be disabled.
 
+(unless (modulep! :editor evil)
+  (setq doom-leader-alt-key "C-c"
+        doom-localleader-alt-key "C-c l"
+        doom-leader-key "C-c"
+        doom-localleader-key "C-c l"))
+
 (load! "lisp/cae-bindings")
 (when (modulep! :editor evil)
   (load! "lisp/cae-evil"))
