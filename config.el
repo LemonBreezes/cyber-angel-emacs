@@ -85,11 +85,11 @@
   :mode ("authinfo.gpg\\'" . authinfo-color-mode)
   :init (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-(use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-  :config
-  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+;; (use-package! topsy
+;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+;;   :config
+;;   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+;;   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
 (when (modulep! :ui workspaces)
   ;; Add a tabline to Which Key
