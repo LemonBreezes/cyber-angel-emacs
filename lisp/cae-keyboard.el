@@ -315,6 +315,10 @@
   :defer t :init
   (add-hook 'doom-first-input-hook #'aas-global-mode)
   :config
+  (advice-add #'aas-embark-menu :before
+              (cae-defun cae-aas-load-embark-h ()
+                (require 'embark)))
+  (map! :leader "iS" #'aas-embark-menu)
   (aas-set-snippets 'global
     ";--" "—"
     ";-." "→"
