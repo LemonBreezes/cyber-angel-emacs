@@ -35,6 +35,5 @@
 
 (advice-add #'write-abbrev-file :after #'cae-multi-abbrev-push-changes-a)
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
-
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
