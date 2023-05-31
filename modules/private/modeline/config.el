@@ -94,6 +94,10 @@
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
+(when (modulep! :private meow)
+  (after! meow
+    (meow-setup-indicator)))
+
 (when (modulep! +pretty)
   (use-package! nyan-mode
     :when (display-graphic-p)
