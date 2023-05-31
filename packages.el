@@ -55,8 +55,9 @@
 (package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
-(package! ialign)                       ;I don't use this often, but it's useful
-                                        ;for aligning text.
+
+;; These are used for their autoloads.
+(package! ialign)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
