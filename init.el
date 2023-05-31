@@ -1,5 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+(setq load-prefer-newer t)
+
 (load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "C-c"
@@ -10,8 +12,6 @@
 
        :ui
        doom-dashboard
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos)))
-           (emoji +unicode +github +ascii))
        hl-todo
        (ligatures +extra +iosevka)
        nav-flash
