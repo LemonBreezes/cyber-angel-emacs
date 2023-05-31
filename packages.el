@@ -45,7 +45,6 @@
 (package! ts)
 
 ;; cae-repeat.el
-(package! repeat-help :recipe (:host github :repo "LemonBreezes/repeat-help" :branch "real-last-command"))
 (package! define-repeat-map :recipe (:repo "https://tildegit.org/acdw/define-repeat-map.el.git"))
 
 ;; cae-keyboard.el
