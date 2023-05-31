@@ -6,6 +6,7 @@
 
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c l")
+(setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
        (vertico +icons)
