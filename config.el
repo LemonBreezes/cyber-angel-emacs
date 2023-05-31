@@ -1139,7 +1139,7 @@
               (define-key map (kbd "C-. f")   #'cape-file)
               (define-key map (kbd "C-. k")   #'cape-keyword)
               (define-key map (kbd "C-. h")   #'cape-history)
-              ;;(define-key map (kbd "C-. s")   #'cape-symbol)
+              (define-key map (kbd "C-. e")   #'cape-symbol)
               (define-key map (kbd "C-. a")   #'cape-abbrev)
               (define-key map (kbd "C-. i")   #'cape-ispell)
               (define-key map (kbd "C-. l")   #'cape-line)
