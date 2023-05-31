@@ -34,7 +34,6 @@
 
 (setq x-stretch-cursor t
       truncate-string-ellipsis "..."
-      scroll-margin 2
       kill-buffer-delete-auto-save-files t)
 
 (when (and (modulep! :ui modeline)
