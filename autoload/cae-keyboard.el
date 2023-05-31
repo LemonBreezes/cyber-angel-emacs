@@ -29,7 +29,14 @@
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
     (if orbit
         (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)
-    arg)))
+      arg)))
+
+(defun cae-keyboard-remap-char-reverse (arg)
+  (declare (pure t) (side-effect-free t))
+  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
+    (if orbit
+        (nth (mod (1- (cl-position arg orbit)) (length orbit)) orbit)
+      arg)))
 
 ;;;###autoload
 (defun cae-keyboard-strings (arg)
@@ -55,6 +62,6 @@
     (0 (kbd ""))
     (1 (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))))
     (2 (mapconcat #'kbd
-             (append (butlast args)
-                     (list (cae-keyboard-kbd (car (last args)))))))
+                  (append (butlast args)
+                          (list (cae-keyboard-kbd (car (last args)))))))
     (_ (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))) )))
