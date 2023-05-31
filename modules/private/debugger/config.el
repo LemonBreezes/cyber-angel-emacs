@@ -16,7 +16,7 @@
     (after! dap-hydra
       ;; For some reason, after updating Emacs30, I had to wrap this with an eval.
       (eval
-       '(defhydra+ dap-hydra ()
+       '(defhydra+ cae-debug-dap-hydra ()
           ("<f6>" nil "quit")
           ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart"))))
 
