@@ -497,150 +497,150 @@
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
 
-(setq delete-active-region t)           ;makes `d' delete region in Meow.
-
-(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
-
-;; Query buffers for a diff before killing them.
-(advice-add #'kill-buffer :around #'cae-kill-buffer-a)
-
-;; Kill buffers without asking.
-(setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-            kill-buffer-query-functions))
-
-;; Bind `tab-bar' commands consistently with the built-in keybindings.
-(defadvice! cae-tab-bar-define-keys-a ()
-  :after #'tab-bar--define-keys
-  (unless (global-key-binding [(control f4)])
-    (global-set-key [(control f4)] #'tab-close)))
-(defadvice! cae-tab-bar-undefine-keys-a ()
-  :after #'tab-bar--undefine-keys
-  (when (eq (global-key-binding [(control f4)]) #'tab-close)
-    (global-unset-key [(control f4)])))
-
-;; Do not query before deleting a frame, since we can undo frame deletions.
-(global-set-key [remap delete-frame] nil)
-(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
-
-;; Do not automatically continue comments.
-(advice-remove #'newline-and-indent
-               #'+default--newline-indent-and-continue-comments-a)
-
-;; General keybindings.
-(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
-      [remap upcase-word] #'upcase-dwim
-      [remap downcase-word] #'downcase-dwim
-      [remap capitalize-word] #'capitalize-dwim
-      [remap ispell-word] #'cae-ispell-word-then-abbrev
-      "C-x 4 I" #'ibuffer-other-window
-      [remap ibuffer] #'ibuffer-jump    ;This way
-                                        ;I can do `C-x C-b =' to quickly diff a
-                                        ;buffer with its file.
-      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
-      "C-x M-o" #'ace-swap-window
-      "C-x x o" #'ov-clear
-      "M-Z" #'zap-up-to-char
-      [C-i] #'doom/dumb-indent
-      "C-S-i" #'doom/dumb-dedent
-      (:when (modulep! :completion vertico)
-       [remap apropos] nil)             ;`consult-apropos' is obsolete.
-      (:after man
-       :map Man-mode-map
-       "o" #'ace-link-man)
-      (:after eww
-       :map eww-mode-map
-       "o" #'ace-link-eww)
-      :leader
-      :desc "help" "h" help-map)
-(define-key resize-window-repeat-map "_" #'shrink-window)
-(map! [remap delete-char] #'cae-delete-char
-      ")" #'cae-insert-closing-paren)
-(let ((embark-act-key "<f8>"))
-  (map! embark-act-key #'embark-act
-        (:when (modulep! :completion vertico)
-         (:map minibuffer-local-map
-          "C-;" nil
-          embark-act-key #'embark-act)))
-  (eval
-   `(after! embark
-      (setq embark-cycle-key ,embark-act-key))
-   t))
-
-;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-(when (modulep! :ui popup)
-  (add-hook 'post-command-hook
-            (cae-defun cae-fix-popup-other-keybinding ()
-              (define-key ctl-x-map "p" nil)
-              (map! :map ctl-x-map
-                    "p" #'+popup/other))))
-
-;; Remove redundant `consult-history' keybinding.
-(define-key!
-  :keymaps (append +default-minibuffer-maps
-                   (when (modulep! :editor evil +everywhere)
-                     '(evil-ex-completion-map)))
-  "C-s" nil)                            ;We already have `consult-history' bound
-                                        ;to `M-r' and `M-s'. This way we can use
-                                        ;`C-s' to search in the minibuffer.
-
-;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-(map! :leader
-      :desc "Copy link" "sy" #'link-hint-copy-link)
-
-(when (modulep! :config default +bindings)
-  (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
-        [remap doom/sudo-this-file] #'cae-toggle-sudo))
-
-(after! expand-region
-  (setq expand-region-smart-cursor t)
-  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-    (add-to-list 'er/try-expand-list fn t))
-  (setq er/try-expand-list
-        (mapcar (lambda (fn)
-                  (if (eq fn #'er/mark-comment)
-                      #'cae-mark-comment
-                    fn))
-                er/try-expand-list)))
-
-(advice-add #'persp-set-keymap-prefix :override #'ignore)
-
-(setq set-mark-command-repeat-pop t
-      next-line-add-newlines t)
-
-(setq search-whitespace-regexp ".*?"
-      search-default-mode #'char-fold-to-regexp
-      isearch-lax-whitespace t
-      isearch-wrap-pause 'no-ding
-      isearch-lazy-count t
-      isearch-repeat-on-direction-change t
-      isearch-allow-motion t
-      isearch-allow-scroll t
-      isearch-yank-on-move 'shift
-      isearch-motion-changes-direction t
-      lazy-count-prefix-format "(%s/%s) "
-      lazy-count-suffix-format nil      ; Using the suffix for counting matches
-                                        ; is better but does not work with
-                                        ; `isearch-mb'.
-      lazy-highlight-cleanup nil
-      ;; The default search ring size is 16, which is too small considering that
-      ;; we can fuzzy search the history with Consult.
-      search-ring-max 200
-      regexp-search-ring-max 200)
-(add-hook 'doom-escape-hook
-          (cae-defun cae-clean-up-lazy-highlight-h ()
-            (when isearch-lazy-highlight-overlays
-              (lazy-highlight-cleanup t) t)))
-
-(after! ispell
-  (setq ispell-quietly t
-        ispell-dictionary "en_US"
-        ispell-help-in-bufferp 'electric))
-
-(when (modulep! :emacs undo)
-  (after! undo-fu
-    (setq undo-fu-allow-undo-in-region t)))
+;;(setq delete-active-region t)           ;makes `d' delete region in Meow.
+;;
+;;(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
+;;(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
+;;
+;;;; Query buffers for a diff before killing them.
+;;(advice-add #'kill-buffer :around #'cae-kill-buffer-a)
+;;
+;;;; Kill buffers without asking.
+;;(setq kill-buffer-query-functions
+;;      (remq 'process-kill-buffer-query-function
+;;            kill-buffer-query-functions))
+;;
+;;;; Bind `tab-bar' commands consistently with the built-in keybindings.
+;;(defadvice! cae-tab-bar-define-keys-a ()
+;;  :after #'tab-bar--define-keys
+;;  (unless (global-key-binding [(control f4)])
+;;    (global-set-key [(control f4)] #'tab-close)))
+;;(defadvice! cae-tab-bar-undefine-keys-a ()
+;;  :after #'tab-bar--undefine-keys
+;;  (when (eq (global-key-binding [(control f4)]) #'tab-close)
+;;    (global-unset-key [(control f4)])))
+;;
+;;;; Do not query before deleting a frame, since we can undo frame deletions.
+;;(global-set-key [remap delete-frame] nil)
+;;(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+;;
+;;;; Do not automatically continue comments.
+;;(advice-remove #'newline-and-indent
+;;               #'+default--newline-indent-and-continue-comments-a)
+;;
+;;;; General keybindings.
+;;(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
+;;      [remap upcase-word] #'upcase-dwim
+;;      [remap downcase-word] #'downcase-dwim
+;;      [remap capitalize-word] #'capitalize-dwim
+;;      [remap ispell-word] #'cae-ispell-word-then-abbrev
+;;      "C-x 4 I" #'ibuffer-other-window
+;;      [remap ibuffer] #'ibuffer-jump    ;This way
+;;                                        ;I can do `C-x C-b =' to quickly diff a
+;;                                        ;buffer with its file.
+;;      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
+;;      "C-x M-o" #'ace-swap-window
+;;      "C-x x o" #'ov-clear
+;;      "M-Z" #'zap-up-to-char
+;;      [C-i] #'doom/dumb-indent
+;;      "C-S-i" #'doom/dumb-dedent
+;;      (:when (modulep! :completion vertico)
+;;       [remap apropos] nil)             ;`consult-apropos' is obsolete.
+;;      (:after man
+;;       :map Man-mode-map
+;;       "o" #'ace-link-man)
+;;      (:after eww
+;;       :map eww-mode-map
+;;       "o" #'ace-link-eww)
+;;      :leader
+;;      :desc "help" "h" help-map)
+;;(define-key resize-window-repeat-map "_" #'shrink-window)
+;;(map! [remap delete-char] #'cae-delete-char
+;;      ")" #'cae-insert-closing-paren)
+;;(let ((embark-act-key "<f8>"))
+;;  (map! embark-act-key #'embark-act
+;;        (:when (modulep! :completion vertico)
+;;         (:map minibuffer-local-map
+;;          "C-;" nil
+;;          embark-act-key #'embark-act)))
+;;  (eval
+;;   `(after! embark
+;;      (setq embark-cycle-key ,embark-act-key))
+;;   t))
+;;
+;;;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+;;(when (modulep! :ui popup)
+;;  (add-hook 'post-command-hook
+;;            (cae-defun cae-fix-popup-other-keybinding ()
+;;              (define-key ctl-x-map "p" nil)
+;;              (map! :map ctl-x-map
+;;                    "p" #'+popup/other))))
+;;
+;;;; Remove redundant `consult-history' keybinding.
+;;(define-key!
+;;  :keymaps (append +default-minibuffer-maps
+;;                   (when (modulep! :editor evil +everywhere)
+;;                     '(evil-ex-completion-map)))
+;;  "C-s" nil)                            ;We already have `consult-history' bound
+;;                                        ;to `M-r' and `M-s'. This way we can use
+;;                                        ;`C-s' to search in the minibuffer.
+;;
+;;;; I'm surprised Doom Emacs doesn't bind a key for copying links.
+;;(map! :leader
+;;      :desc "Copy link" "sy" #'link-hint-copy-link)
+;;
+;;(when (modulep! :config default +bindings)
+;;  (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+;;        [remap doom/sudo-this-file] #'cae-toggle-sudo))
+;;
+;;(after! expand-region
+;;  (setq expand-region-smart-cursor t)
+;;  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
+;;    (add-to-list 'er/try-expand-list fn t))
+;;  (setq er/try-expand-list
+;;        (mapcar (lambda (fn)
+;;                  (if (eq fn #'er/mark-comment)
+;;                      #'cae-mark-comment
+;;                    fn))
+;;                er/try-expand-list)))
+;;
+;;(advice-add #'persp-set-keymap-prefix :override #'ignore)
+;;
+;;(setq set-mark-command-repeat-pop t
+;;      next-line-add-newlines t)
+;;
+;;(setq search-whitespace-regexp ".*?"
+;;      search-default-mode #'char-fold-to-regexp
+;;      isearch-lax-whitespace t
+;;      isearch-wrap-pause 'no-ding
+;;      isearch-lazy-count t
+;;      isearch-repeat-on-direction-change t
+;;      isearch-allow-motion t
+;;      isearch-allow-scroll t
+;;      isearch-yank-on-move 'shift
+;;      isearch-motion-changes-direction t
+;;      lazy-count-prefix-format "(%s/%s) "
+;;      lazy-count-suffix-format nil      ; Using the suffix for counting matches
+;;                                        ; is better but does not work with
+;;                                        ; `isearch-mb'.
+;;      lazy-highlight-cleanup nil
+;;      ;; The default search ring size is 16, which is too small considering that
+;;      ;; we can fuzzy search the history with Consult.
+;;      search-ring-max 200
+;;      regexp-search-ring-max 200)
+;;(add-hook 'doom-escape-hook
+;;          (cae-defun cae-clean-up-lazy-highlight-h ()
+;;            (when isearch-lazy-highlight-overlays
+;;              (lazy-highlight-cleanup t) t)))
+;;
+;;(after! ispell
+;;  (setq ispell-quietly t
+;;        ispell-dictionary "en_US"
+;;        ispell-help-in-bufferp 'electric))
+;;
+;;(when (modulep! :emacs undo)
+;;  (after! undo-fu
+;;    (setq undo-fu-allow-undo-in-region t)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
