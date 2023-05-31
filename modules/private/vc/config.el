@@ -43,6 +43,8 @@
         (map! :map forge-pullreq-list-mode-map
               "j" #'consult-line
               :map forge-topic-list-mode-map
+              "j" #'consult-line
+              :map forge-repository-list-mode-map
               "j" #'consult-line)))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
