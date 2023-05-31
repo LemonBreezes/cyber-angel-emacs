@@ -876,7 +876,7 @@
 
 (use-package! edit-indirect
   :defer t :init
-  (map! "C-c '" #'edit-indirect-region))
+  (map! "C-c '" #'cae-edit-indirect-dwim))
 
 
 ;;; Autocompletion
