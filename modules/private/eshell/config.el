@@ -59,7 +59,7 @@
     (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize))
 
   (after! em-hist
-    (setopt eshell-history-size (expt 2 16))
+    (setq eshell-history-size (expt 2 16))
     (add-to-list 'eshell-expand-input-functions #'eshell-expand-history-references))
 
   (cond ((modulep! :completion vertico)
