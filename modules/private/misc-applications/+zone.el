@@ -10,4 +10,5 @@
   ;; zone-nyan
   ;; zone-rainbow
   ;; zone-pgm-md5
+  ;; zone-pgm-sl
   (zone-when-idle (* 5 60)))
