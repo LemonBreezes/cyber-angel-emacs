@@ -110,8 +110,7 @@
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer
         [remap delete-other-windows] #'cae-dired-maximize-buffer))
-(map! [remap dired-jump] #'cae-dired-jump)
-(add-hook 'find-file-hook #'cae-dired-find-file-fullscreen-h)
+(add-hook 'dirvish-setup-hook #'cae-dired-fullscreen-dwim-h)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
