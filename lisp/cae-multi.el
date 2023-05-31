@@ -34,16 +34,7 @@
     backup-inhibited t))
 
 (advice-add #'write-abbrev-file :after #'cae-multi-abbrev-push-changes-a)
-
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
-
-(defun cae-multi-org-archive-push-changes-h ()
-  (when (file-in-directory-p (buffer-file-name) doom-user-dir)
-    (let ((gac-automatically-push-p t)
-          (gac-silent-message-p t))
-      (gac--after-save (buffer-file-name))
-      (dolist (file (org-all-archive-files))
-        (gac--after-save file)))))
 
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
