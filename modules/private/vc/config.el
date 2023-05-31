@@ -36,7 +36,9 @@
       (setq forge-pull-notifications t
             forge-buffer-draft-p t)
       (map! :map forge-post-mode-map
-            "<f6>" #'cae-magit-forge-post-hydra/body))))
+            "<f6>" #'cae-magit-forge-post-hydra/body
+            :map forge-topic-mode-map
+            "<f6>" #'cae-magit-forge-topic-hydra/body))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
