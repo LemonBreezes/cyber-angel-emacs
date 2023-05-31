@@ -580,9 +580,8 @@
            ("C-]" sp-select-next-thing-exchange "Selection") ;Overrides
                                         ;`abort-recursive-edit'.
            ("C-M-]" sp-select-next-thing "Selection")
-           ("C-M-@" sp-mark-sexp "Selection")
            ("C-M-w" sp-copy-sexp "Selection") ;Overrides `append-next-kill'.
-           )))
+           ("C-M-@" sp-mark-sexp "Selection"))))
     (when (modulep! :ui hydra)
       (eval
        (append
