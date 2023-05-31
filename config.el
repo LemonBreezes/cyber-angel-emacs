@@ -511,7 +511,6 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
-
 (use-package! aggressive-indent
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp' module.
