@@ -24,11 +24,14 @@
                (setq cae-multi-abbrev--file-mtime mtime)
                (unless file
                  (if cae-multi-abbrev--auto-commit-disabled
-                     (when (y-or-n-p "Abbrev file modified since a previous save. Enable auto-commit?")
+                     (when (y-or-n-p
+                            (concat "Abbrev file modified since a previous "
+                                    "save. Enable auto-commit?"))
                        (setq cae-multi-abbrev--auto-commit-disabled nil)
                        (cae-multi-commit-file abbrev-file-name))
                    (cae-multi-commit-file abbrev-file-name))))
-      (message "Abbrev file modified since last save. Disabling abbrev file auto-commit.")
+      (message (concat "Abbrev file modified since last save. "
+                       "Disabling abbrev file auto-commit."))
       (funcall orig-fun file verbose)
       (setq cae-multi-abbrev--file-mtime mtime
             cae-multi-abbrev--auto-commit-disabled t))))
