@@ -99,7 +99,7 @@
                         (,(cae-keyboard-kbd "e") "lispy-eval" "Eval")
                         (,(cae-keyboard-kbd "E") "lispy-eval-and-insert" "Eval")
                         (,(cae-keyboard-kbd "xr") "lispy-eval-and-replace" "Eval")
-                        ("=" "lispy-eval-other-window" "Eval")
+                        (,(cae-keyboard-kbd "p") "lispy-eval-other-window" "Eval")
                         (,(cae-keyboard-kbd "q") "lispy-ace-paren" "Move")
                         (,(cae-keyboard-kbd "z") "lispy-knight" "Move")
                         (,(cae-keyboard-kbd "s") "lispy-move-down" "Move")
@@ -129,6 +129,8 @@
              ("<f6>" nil "Exit" :exit t))
           (cl-loop for x in bindings
                    unless (string= "" (elt x 2))
+                   do (when (string= (car x) "'")
+                        (setcar x "="))
                    collect
                    (list (car x)
                          (intern (elt x 1))
