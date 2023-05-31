@@ -48,14 +48,16 @@
         "<return>" #'eat-self-input)
 
   (add-hook! '(eat--eshell-char-mode-hook
-               eat--eshell-semi-char-mode-hook)
+               eat--eshell-semi-char-mode-hook
+               eat--eshell-process-running-mode-hook)
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
           (when (boundp mode)
             (funcall mode
                      (if (or eat--eshell-char-mode-hook
-                             eat--eshell-semi-char-mode-hook)
+                             eat--eshell-semi-char-mode-hook
+                             eat--eshell-process-running-mode-hook)
                          -1 1)))))))
 
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
