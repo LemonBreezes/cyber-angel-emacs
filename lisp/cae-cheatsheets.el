@@ -62,7 +62,7 @@
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
   (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist
-                               nil nil #'equal)))
+                               nil nil #'eq)))
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
                      nil t #'eq)
           nil)
