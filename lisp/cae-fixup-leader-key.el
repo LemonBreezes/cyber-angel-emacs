@@ -60,3 +60,9 @@ overriding other keymaps."
                                                            (car-safe (car x)))))
                          x)
                        which-key-replacement-alist)))))
+
+;; I don't use Deft.
+ (when (and (not (modulep! :ui deft))
+            (eq (lookup-key doom-leader-map "nd")
+                'deft))
+   (define-key doom-leader-map "nd" nil))
