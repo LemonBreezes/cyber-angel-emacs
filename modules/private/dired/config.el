@@ -5,7 +5,6 @@
   (unless global-mode-string (push "" global-mode-string))
   (add-to-list 'global-mode-string 'dired-rsync-modeline-status 'append))
 
-
 (after! dired
   ;; Use parallel versions of comression programs.
   ;; Install `pigz', pbzip2, `pixz', `'
