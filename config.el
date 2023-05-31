@@ -131,6 +131,7 @@
 
 ;;; Tools
 (load! "lisp/cae-webkit.el")
+(load! "lisp/cae-project")
 
 (setq browse-url-browser-function #'browse-url-generic
       browse-url-generic-program "chromium-bin"
