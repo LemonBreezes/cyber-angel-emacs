@@ -9,11 +9,6 @@
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 
-(when (modulep! :app emms)
-  (autoload 'emms "emms")
-  (map! :leader
-        :prefix +misc-applications-prefix
-        "2" #'emms))
 (map! :leader
       :prefix +misc-applications-prefix
       "1" #'mpc)
