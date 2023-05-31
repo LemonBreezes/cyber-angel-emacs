@@ -51,11 +51,6 @@
   (add-hook 'org-mode-hook #'worf-mode)
   :config
   (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
-  ;;(map! :map worf-mode-map
-  ;;      "[" nil
-  ;;      "]" nil
-  ;;      "<backtab>" nil
-  ;;      "<S-iso-lefttab>" nil)
   (advice-add #'worf-property
               :after
               (cae-defun cae-org-worf-property-a ()
@@ -63,18 +58,6 @@
                 (let ((parent (org-element-property :parent (org-element-at-point))))
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
-  (advice-add #'worf-up
-              :around
-              (cae-defun cae-org-worf-up-a (oldfun arg)
-                (if (eq 'property-drawer (car (org-element-at-point)))
-                    (org-up-element)
-                  (funcall oldfun arg))))
-  (advice-add #'worf-down
-              :around
-              (cae-defun cae-org-worf-down-a (oldfun arg)
-                (when (eq 'property-drawer (car (org-element-at-point)))
-                  (org-up-element))
-                (funcall oldfun arg)))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp)
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
