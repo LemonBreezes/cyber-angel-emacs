@@ -46,7 +46,8 @@
 (when (modulep! :editor lispy)
   (after! lispy
     (setq lispy-font-lock-keywords nil
-          lispy-eval-display-style 'overlay)
+          lispy-eval-display-style 'overlay
+          lispy-no-permanent-semantic t)
     (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
