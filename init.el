@@ -23,7 +23,7 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(defvar cae-ui-disabled-p nil
+(defvar cae-ui-enabled-p t
   "Whether our UI tweaks are disabled.")
 
 (doom! :completion
