@@ -276,3 +276,11 @@ mark the string and call `edit-indirect-region' with it."
     (setq this-command 'set-mark-command
           real-this-command 'set-mark-command)
     (call-interactively #'set-mark-command)))
+
+;;;###autoload
+(defun embark-act-with-completing-read (&optional arg)
+  (interactive "P")
+  (let* ((embark-prompter #'embark-completing-read-prompter)
+         (act (propertize "Act" 'face 'highlight))
+         (embark-indicators '()))
+    (embark-act arg)))
