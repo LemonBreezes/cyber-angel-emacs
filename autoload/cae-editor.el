@@ -18,15 +18,3 @@
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
           (funcall orig-func buffer-or-name))))))
-
-;;;###autoload
-(defun cae-auto-sudoedit-maybe-h ()
-  (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
-            (string= (file-attribute-user-id
-                      (file-attributes path 'string))
-                     (if (and (featurep 'tramp)
-                              (tramp-tramp-file-p path))
-                         (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                               'string)
-                       (user-login-name))))
-    (auto-sudoedit)))
