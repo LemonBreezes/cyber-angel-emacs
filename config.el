@@ -15,13 +15,6 @@
   ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; Add powershell to the path
-(let ((powershell-dir "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"))
-  (unless (string-match-p powershell-dir (getenv "PATH"))
-    (setenv "PATH"
-            (concat powershell-dir  path-separator (getenv "PATH")))
-    (setq exec-path (cons powershell-dir exec-path))))
-
 ;;; UI
 
 (load! "lisp/cae-theme")
