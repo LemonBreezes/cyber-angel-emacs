@@ -44,7 +44,7 @@
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-       (magit +forge)
+       magit
        (lsp +peek)
        tree-sitter
 
