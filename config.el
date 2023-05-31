@@ -675,14 +675,12 @@
         "m" #'avy-move-region
         "l" #'avy-goto-line
         "e" #'avy-goto-end-of-line
-        "r" #'avy-resume
         "." #'cae-avy-symbol-at-point
         "k" #'avy-kill-region
         "w" #'avy-kill-ring-save-region
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-above
-        "C-r" #'avy-resume
         "C-." #'cae-avy-symbol-at-point
         "C-k" #'avy-kill-region
         "C-w" #'avy-kill-ring-save-region
