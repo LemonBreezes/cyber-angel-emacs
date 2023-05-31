@@ -38,7 +38,7 @@
       (dirvish-layout-switch dirvish-default-layout))))
 
 ;;;###autoload (autoload 'cae-dired-dirvish-hydra/body "private/dired/autoload" nil t)
-(defhydra cae-dired-dirvish-hydra (:color blue)
+(defhydra cae-dired-dirvish-hydra (:color pink)
   ("<f6>" nil "Exit" :exit t)
   ("M-e" cae-dired-dirvish-emerge-menu "Emerge menu")
   ("M-l" dirvish-ls-switches-menu "ls menu")
