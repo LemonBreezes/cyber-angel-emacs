@@ -178,10 +178,12 @@
   (meow/setup-keypad)
   (add-hook 'minions-mode-hook #'meow-setup-indicator)
   (map! :map meow-normal-state-keymap
-        "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+        ;; "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+        "SPC" #'meow-keypad
         "DEL" #'meow-keypad
         :map meow-motion-state-keymap
-        "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c")))))
+        ;; "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
+        "DEL" #'meow-keypad)
   (map! :leader
         :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
