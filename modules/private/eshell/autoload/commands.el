@@ -138,6 +138,7 @@ file to edit."
                                  (buffer-local-value 'list-buffers-directory buf))
                              (<= (cl-decf n) 0)))
                       (cdr (buffer-list)))))
+    ;;(+log buf (buffer-local-value 'major-mode buf))
     (when buf
       (eshell/cd (or (buffer-local-value 'default-directory buf)
                      (buffer-local-value 'list-buffers-directory buf))))))
