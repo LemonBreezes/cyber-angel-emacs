@@ -397,8 +397,8 @@
                "f" #'meow-find
                "g" #'meow-cancel-selection
                "G" #'meow-grab
-               "o" #'meow-left                     ; h -> o
-               "O" #'meow-left-expand              ; H -> O
+               "b" #'meow-left          ; b -> h
+               "B" #'meow-left-expand   ; B -> H
                "I" #'meow-open-above
                "i" #'meow-insert
                "j" #'meow-join
@@ -408,8 +408,8 @@
                "M" #'meow-mark-symbol
                "n" #'meow-next
                "N" #'meow-next-expand
-               "h" #'meow-block                    ; o -> h
-               "H" #'meow-to-block                 ; O -> H
+               "o" #'meow-block
+               "O" #'meow-to-block
                "p" #'meow-prev
                "P" #'meow-prev-expand
                "q" #'meow-quit
@@ -417,8 +417,8 @@
                "r" #'meow-replace
                "R" #'meow-swap-grab
                "s" #'meow-search
-               "t" #'meow-right
-               "T" #'meow-right-expand
+               "f" #'meow-right         ; t -> f
+               "F" #'meow-right-expand  ; T -> F
                "u" #'meow-undo
                "U" #'meow-undo-in-selection
                "v" #'meow-visit
