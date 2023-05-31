@@ -221,6 +221,8 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-lookup-definition-dwim ()
   (interactive)
-  (if (ffap-file-at-point)
-      (call-interactively #'ffap)
+  (if-let ((file (ffap-file-at-point)))
+      (if (file-exists-p file)
+          (find-file #'file)
+        (call-interactively #'ffap))
     (call-interactively #'+lookup/definition)))
