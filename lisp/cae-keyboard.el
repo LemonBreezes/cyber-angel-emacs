@@ -21,9 +21,6 @@
   (cl-return-from cae-keyboard-remap
     (cl-mapcar #'cae-keyboard-remap arg)))
 
-(cae-keyboard-remap '(?w ?a ?s ?d))
-
-
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
 (define-key key-translation-map (kbd "C-x t @") (kbd "C-x t 2"))
