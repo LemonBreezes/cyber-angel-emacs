@@ -8,9 +8,10 @@
 ;;;###autoload
 (defun cae-meow-update-cursor-a (&rest _)
   (when-let ((cursor
-              (symbol-value
-               (intern (concat "meow-cursor-type-"
-                               (symbol-name meow--current-state))))))
+              (and meow--current-state
+                   (symbol-value
+                    (intern (concat "meow-cursor-type-"
+                                    (symbol-name meow--current-state)))))))
     (when (car-safe cursor)
       (setq cursor (car cursor)))
     (setq cursor-type cursor)
