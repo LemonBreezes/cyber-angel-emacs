@@ -508,10 +508,7 @@
           sp-backward-up-sexp sp-down-sexp sp-backward-down-sexp
           sp-beginning-of-sexp sp-end-of-sexp sp-kill-sexp sp-backward-kill-sexp
           sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
-          sp-backward-kill-word sp-backward-delete-char sp-delete-char
-          sp-forward-barf-sexp sp-backward-barf-sexp sp-forward-slurp-sexp
-          sp-backward-slurp-sexp sp-split-sexp sp-join-sexp sp-rewrap-sexp
-          sp-transpose-sexp sp-transose-hybrid-sexp))
+          sp-backward-kill-word sp-backward-delete-char sp-delete-char))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))))
 
