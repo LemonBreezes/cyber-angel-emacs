@@ -19,14 +19,13 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ;Different computers
-    (setq doom-font (font-spec :family "Iosevka Comfy"
-                               :size (+ 16 font-size-offset))
-          doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                              :size (+ 16 font-size-offset))
-          doom-unicode-font (unless (modulep! :ui unicode)
-                              (font-spec :family "LXGW WenKai" :weight 'light
-                                         :size (+ 15 font-size-offset))))))
+  (setq doom-font (font-spec :family "Iosevka Comfy"
+                             :size 16)
+        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+                                            :size 6)
+        doom-unicode-font (unless (modulep! :ui unicode)
+                            (font-spec :family "LXGW WenKai" :weight 'light
+                                       :size 15))))
 
 ;; Show minibuffer recursion depth
 (autoload 'minibuffer-depth-setup "mb-depth")
