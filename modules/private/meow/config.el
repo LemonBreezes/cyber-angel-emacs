@@ -189,9 +189,10 @@
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-normal-mode-hook #'corfu-quit)))
-  (meow-esc-mode +1)                    ;Make Meow usable in TUI Emacs.
-  (setq meow-esc-delay 0.001
-        meow-use-clipboard t
+  (unless (display-graphic-p)           ;Make Meow usable in the terminal.
+    (setq meow-esc-delay 0.001)
+    (meow-esc-mode +1))
+  (setq meow-use-clipboard t
         meow-select-on-change t
         meow-keypad-self-insert-undefined nil
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp
