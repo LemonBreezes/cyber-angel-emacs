@@ -11,6 +11,7 @@
 (setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
                                  cae-config-incremental-compilation-enabled-p)))
 (random t)                              ;Set the random seed.
+(setq doom-theme 'wheatgrass)           ;Set a dark default theme.
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
@@ -21,8 +22,6 @@
       doom-leader-key "C-c"
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
-
-(setq doom-theme 'wheatgrass)
 
 (doom! :completion
        (vertico +icons)
