@@ -74,7 +74,7 @@ unbalanced."
 ;;;###autoload
 (defun cae-insert-closing-paren ()
   "Inserts a closing paren if the sexps in the buffer are
-unbalanced, otherwise acts like `self-insert-command'."
+unbalanced, otherwise acts like `self-insert-command'. Handles Lispy."
   (interactive)
   (cond ((condition-case error
              (scan-sexps (point-min) (point-max))
