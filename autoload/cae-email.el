@@ -3,5 +3,4 @@
 ;;;###autoload
 (defun cae-notmuch-quit ()
   (interactive)
-  (+workspace/delete (or (bound-and-true-p +notmuch-workspace-name)
-                         "*notmuch*")))
+  (+workspace/delete +notmuch-workspace-name))
