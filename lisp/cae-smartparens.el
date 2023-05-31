@@ -5,6 +5,9 @@
 ;; happen when `smartparens' is disabled.
 (unless (modulep! :config default +smartparens)
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+  (when (modulep! :editor lispy)
+    (after! lispy
+      (remove-hook 'lispy-mode-hook #'turn-off-smartparens-mode)))
   (when (modulep! :term eshell)
     (after! eshell
       (remove-hook 'eshell-mode-hook #'smartparens-mode)))
@@ -22,7 +25,7 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
-  (sp-local-pair '(org-mode) "<<" ">>")
+  (sp-local-pair 'org-mode "<<" ">>")
   (let ((bindings
          '(("M-(" sp-wrap-round "Edit")
            ("M-S" sp-split-sexp "Edit")
