@@ -23,11 +23,11 @@
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
   (when (featurep 'hydra)
-    (set-persp-parameter
-     'hydra-pause-ring
-     (progn (when hydra-curr-body-fn
-              (ring-insert hydra-pause-ring hydra-curr-body-fn))
-            hydra-pause-ring))
+    (set-persp-parameter 'hydra-pause-ring
+                         (progn (when hydra-curr-body-fn
+                                  (ring-insert hydra-pause-ring
+                                               hydra-curr-body-fn))
+                                hydra-pause-ring))
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
