@@ -272,7 +272,6 @@
     (add-to-list 'isearch-mb--with-buffer #'scroll-left)
     (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-    (define-key isearch-mb-minibuffer-map (kbd "C-z C-j") #'avy-isearch)
     (define-key isearch-mb-minibuffer-map (kbd "C-z j") #'avy-isearch)
     (when (modulep! :completion vertico)
       (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
@@ -773,8 +772,7 @@
   (use-package! tabgo
     :commands tabgo
     :defer t :init
-    (map! "C-z t" #'tabgo
-          "C-z C-t" #'tabgo)
+    (map! "C-z t" #'tabgo)
     :config
     (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
