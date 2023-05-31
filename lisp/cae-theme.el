@@ -76,7 +76,10 @@
         '((:sunrise . modus-operandi)
           (:sunset  . modus-vivendi)))
   (if (and calendar-latitude calendar-longitude)
-      (circadian-setup)
+      (let ((hook (if (daemonp)
+                      'server-after-make-frame-hook
+                    'after-init-hook)))
+        (add-hook hook #'circadian-setup -90))
     (setq calendar-latitude 0
           calendar-longitude 0)
     (message "ERROR: Calendar latitude and longitude are not set.")))
