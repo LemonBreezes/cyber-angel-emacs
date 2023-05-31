@@ -4,7 +4,9 @@
 (defun cae-dired-set-layout-h ()
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p)
-             (not (eq last-command 'dirvish-layout-toggle)))
+             (not (eq last-command 'dirvish-layout-toggle))
+             (frame-width (selected-frame))
+             (> (frame-width (selected-frame)) 160))
     (dirvish-layout-toggle)))
 
 ;;;###autoload
