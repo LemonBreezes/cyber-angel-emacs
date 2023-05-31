@@ -10,7 +10,6 @@
 ;;loading the latest version.
 (setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
                                  cae-config-incremental-compilation-enabled-p)))
-(random t)                              ;Set the random seed.
 (setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
 (when (version< "30.0" emacs-version)
