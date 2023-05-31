@@ -14,8 +14,8 @@
 (defun cae-project-bookmark-load ()
   (let ((bookmark-default-file (cae-project--bookmark-file))
         (bookmark-alist nil))
-    (when (file-exists-p bookmark-file)
-      (bookmark-load bookmark-file)
+    (when (file-exists-p bookmark-default-file)
+      (bookmark-load bookmark-default-file)
       (set-persp-parameter 'bookmark-alist bookmark-alist))))
 
 (advice-add #'+workspaces-switch-to-project-h :after #'cae-project-bookmark-load)
