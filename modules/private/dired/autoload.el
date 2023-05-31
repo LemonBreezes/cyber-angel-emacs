@@ -21,7 +21,7 @@
   (interactive
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
-  (if (derived-mode-p 'dirvish-mode)
+  (if (derived-mode-p 'dired-mode)
       (progn
         (let ((dir (file-name-directory file)))
           (unless (file-equal-p dir default-directory)
