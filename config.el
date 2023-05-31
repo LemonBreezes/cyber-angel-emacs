@@ -597,14 +597,17 @@
         search-ring-max 200
         regexp-search-ring-max 200)
   (add-hook 'doom-escape-hook
-    (cae-defun cae-clean-up-lazy-highlight-h ()
-      (when isearch-lazy-highlight-overlays
-        (lazy-highlight-cleanup t) t)))
+            (cae-defun cae-clean-up-lazy-highlight-h ()
+              (when isearch-lazy-highlight-overlays
+                (lazy-highlight-cleanup t) t)))
 
   (after! ispell
     (setq ispell-quietly t
           ispell-dictionary "en_US"
           ispell-help-in-bufferp 'electric))
+
+  (after! vline
+    (setq vline-idle-time 0.1))
 
   (when (modulep! :emacs undo)
     (after! undo-fu
@@ -679,8 +682,8 @@
     (when (modulep! :tools eval +overlay)
       (after! eros
         (add-hook 'eros-mode-hook
-          (cae-defun cae-eros-setup-keybindings-h ()
-            (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
+                  (cae-defun cae-eros-setup-keybindings-h ()
+                    (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
 
   (use-package! abbrev
     :defer t :config
@@ -803,8 +806,8 @@
           "-" #'negative-argument)
     ;; LSP provides its own symbol highlighting.
     (add-hook 'lsp-mode-hook
-      (cae-defun cae-disable-symbol-overlay-h ()
-        (symbol-overlay-mode -1)))
+              (cae-defun cae-disable-symbol-overlay-h ()
+                (symbol-overlay-mode -1)))
     (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
     ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
     ;; overlay in the buffer. This is probably a bug.
