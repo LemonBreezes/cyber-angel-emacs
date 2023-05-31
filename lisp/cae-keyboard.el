@@ -34,7 +34,7 @@
                '((nil . "+workspace/switch-to-final") . t))))
 
 (defvar home-row-numbers-qwerty
-  '(?r ?a ?e ?n ?d ?o ?t ?i ?h ?\_)
+  '(?r ?a ?e ?n ?s ?d ?o ?t ?i ?h)
   "list of the qwerty home row keys")
 
 (defvar home-row-numbers-qwerty-numpad
