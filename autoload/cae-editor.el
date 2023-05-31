@@ -36,7 +36,7 @@
          (sp-delete-region (region-beginning) (region-end)))
         ;; check if parens are balanced
         ((condition-case err
-             (scan-sexps (point) (point-max))
+             (scan-sexps (point-min) (point-max))
            (scan-error t))
          (delete-char 1))
         ((sp-delete-char arg))))
