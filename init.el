@@ -4,7 +4,7 @@
       doom-localleader-alt-key "C-c l")
 
 (doom! :completion
-       (vertico +icons)
+       (vertico +icons +childframe)
 
        :ui
        doom-dashboard
