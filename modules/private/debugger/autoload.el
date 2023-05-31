@@ -97,4 +97,4 @@ _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
   ("q" nil "quit" :color blue)
   ("Q" dap-disconnect :color red)
   ("<f6>" nil "quit")
-  ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart"))
+  ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart" :color red))
