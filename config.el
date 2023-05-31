@@ -584,17 +584,20 @@
            ("C-M-@" sp-mark-sexp "Selection"))))
     (when (modulep! :ui hydra)
       (eval
-       (append
-        '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-           ("C-M-?" nil "Exit" :exit t))
-        (cl-loop for x in bindings
-                 collect (list (car x)
-                               (cadr x)
-                               (thread-last (symbol-name (cadr x))
-                                            (string-remove-prefix "cae-")
-                                            (string-remove-prefix "sp-"))
-                               :column
-                               (caddr x)))))
+       `(defun cae-sp-cheat-sheet/body ()
+          (interactive)
+          ,(append
+            '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
+              ("C-M-?" nil "Exit" :exit t))
+            (cl-loop for x in bindings
+                     collect (list (car x)
+                                   (cadr x)
+                                   (thread-last (symbol-name (cadr x))
+                                                (string-remove-prefix "cae-")
+                                                (string-remove-prefix "sp-"))
+                                   :column
+                                   (caddr x))))
+          (cae-sp-cheat-sheet/body)))
       (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
