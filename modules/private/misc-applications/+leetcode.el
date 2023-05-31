@@ -10,7 +10,8 @@
         "L" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
-        "q" #'+leetcode-quit
+        "q" #'+workspace/other
+        "Q" #'+leetcode-quit
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
