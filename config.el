@@ -798,10 +798,6 @@
     (add-hook 'lsp-mode-hook
               (cae-defun cae-disable-symbol-overlay-h ()
                 (symbol-overlay-mode -1)))
-    (when (modulep! :editor multiple-cursors)
-      ;; Don't distract me while I'm doing multiple cursor calculus.
-      (after! multiple-cursors-core
-        (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
     (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
     ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
     ;; overlay in the buffer. This is probably a bug.
