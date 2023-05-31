@@ -150,6 +150,12 @@
   (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
                                         (kbd key-from)
                                         #'cae-translate-number-row-p))
+;; Also use the home row keys as a number row.
+(let ((i 0))
+  (dolist (key-from (mapcar #'char-to-string '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
+    (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
+                                          (number-to-string (% (cl-incf i) 10))
+                                          #'cae-translate-number-row-p)))
 
 ;;; Lispy
 
