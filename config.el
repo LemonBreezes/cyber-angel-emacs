@@ -751,11 +751,15 @@
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)))
   (add-hook 'restore-point-mode #'cae-restore-point-enable-in-minibuffer-h))
 
-  
+(use-package! symbol-overlay
+  :defer t :init
+  (map! "M-i" #'symbol-overlay-put))
+
+
 ;;; Autocompletion
 
-  (when (modulep! :private corfu)
-    (load! "lisp/cae-corfu"))
+(when (modulep! :private corfu)
+  (load! "lisp/cae-corfu"))
 
 (after! yasnippet
   (setq yas-triggers-in-field t))       ;Allow nested snippets.
