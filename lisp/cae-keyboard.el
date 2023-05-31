@@ -21,8 +21,7 @@
     (?7 ?&)
     (?8 ?*)
     (?9 ?\()
-    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q)
-    ))
+    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q)))
 
 
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "0") (kbd "C-x t 0"))
