@@ -197,6 +197,15 @@
                (vterm-mode . insert)
                (helpful-mode . motion)))
     (setf (alist-get (car p) meow-mode-state-list) (cdr p)))
+  (setq meow-selection-command-fallback
+        '((meow-change . meow-change-char)
+          (meow-kill . meow-C-k)
+          (meow-cancel-selection . keyboard-quit)
+          (meow-pop-selection . meow-pop-grab)
+          (meow-beacon-change . meow-beacon-change-char)
+          ;; These are the ones that are not bound by default.
+
+          ))
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
