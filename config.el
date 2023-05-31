@@ -83,7 +83,7 @@
 
 (use-package! authinfo-color-mode
   :mode ("authinfo.gpg\\'" . authinfo-color-mode)
-  :init (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  :init (advice-add 'authinfo-mode :override #'authinfo-color-modee))
 
 ;; (use-package! topsy
 ;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
