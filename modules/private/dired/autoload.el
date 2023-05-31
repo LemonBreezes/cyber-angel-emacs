@@ -7,7 +7,7 @@
   (unless (memq #'dired-noselect find-directory-functions)
     (add-hook 'find-directory-functions #'dired-noselect t))
   (dired-noselect dir)
-  (dirvish-dwim))
+  (dirvish-dwim dir))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
