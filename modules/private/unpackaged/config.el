@@ -19,5 +19,3 @@
     (setq! magit-bury-buffer-function #'magit-restore-window-configuration))
   (advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a))
-
-;; TODO Look at Karthik's config for his Smerge stuff.
