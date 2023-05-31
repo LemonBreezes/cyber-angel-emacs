@@ -344,7 +344,8 @@
 ;; Do not automatically continue comments.
 (advice-remove #'newline-and-indent #'+default--newline-indent-and-continue-comments-a)
 
-(map! [remap backward-kill-word] #'doom/delete-backward-word
+(map! [remap backward-kill-word] #'doom/delete-backward-word ; Do not litter the kill-ring.
+
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
