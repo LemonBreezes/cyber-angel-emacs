@@ -3,7 +3,7 @@
 
 ((nil
   . ((eval
-      . (progn
+      . (when (bound-and-true-p cae-config-finished)
           (when (and (derived-mode-p 'emacs-lisp-mode)
                      (fboundp 'cae-compile-this-elisp-file))
             (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
