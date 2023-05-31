@@ -80,5 +80,5 @@
   "Extra font-lock patterns for the Bookmark menu.")
 
 (font-lock-flush (point-min) (point-max))
-(font-lock-add-keywords nil prot-bookmark-keywords nil)
-(add-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords)
+(font-lock-add-keywords nil cae-bookmark-keywords nil)
+(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
