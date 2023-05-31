@@ -607,8 +607,8 @@
         (dolist (x bindings)
           (add-to-list 'mc/cmds-to-run-for-all (cadr x))
           (add-to-list 'mc/cmds-to-run-for-all
-                       (intern (concat (symbol-name (cadr x)))))
-          )
+                       (intern (concat "cae-sp-cheat-sheet/"
+                                       (symbol-name (cadr x))))))
         (add-to-list 'mc/cmds-to-run-for-all #'cae-sp-cheat-sheet/body)))
     (dolist (x bindings)
       (define-key smartparens-mode-map (kbd (car x)) (cadr x))))
