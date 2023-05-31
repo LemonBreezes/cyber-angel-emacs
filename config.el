@@ -644,6 +644,9 @@
 (doom-load-packages-incrementally
  `(,@(when (modulep! :private dirvish)
       '(dired transient dirvish))
+   ,@(when (and (modulep! :tools pdf)
+                (not (getenv "SSH_TTY")))
+      '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
    ,@(when (modulep! :term eshell)
       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
               em-tramp em-smart em-banner em-basic em-cmpl
