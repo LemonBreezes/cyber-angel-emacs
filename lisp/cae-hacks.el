@@ -115,10 +115,10 @@ It is meant to be used as a `post-gc-hook'."
     (apply oldfun args)))
 
 ;; Compile Vterm without asking.
-(defvar vterm-always-compile-module t)
+(setq vterm-always-compile-module t)
 
 ;; Use the system's `libvterm' if available.
-(defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
+(setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
 ;; I'm disabling this workaround until I run into a problem.
 (defadvice! cae-hacks-ignore-this-command-keys-a (oldfun &rest args)
