@@ -74,7 +74,7 @@
          (map! :map eshell-mode-map
                :ig "M-R" #'helm-eshell-history)))
 
-  (map! :map eshell-mode-map "C-l" #'+eshell-clear)
+  (map! :map eshell-mode-map "C-l" #'cae-eshell-clear)
 
   ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files
   (load! "+fish-completion-annotation-fix")
