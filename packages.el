@@ -18,8 +18,6 @@
 (package! topsy)
 (package! anzu)
 (package! isearch-mb)
-(when (modulep! :ui hydra)
-  (package! pretty-hydra))
 
 ;; cae-theme.el
 (package! modus-themes)
