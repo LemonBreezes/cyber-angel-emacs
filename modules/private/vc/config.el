@@ -55,7 +55,7 @@
                                :handler (progn
                                           (advice-add #'git-link--new :override #'identity)
                                           (call-interactively #'git-link-homepage)
-                                          (advice-remove #'git-link--new #'override))
+                                          (advice-remove #'git-link--new #'identity))
                                :cache t
                                :face font-lock-string-face
                                :bind "g")))
