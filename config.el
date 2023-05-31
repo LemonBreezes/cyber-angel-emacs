@@ -1026,12 +1026,12 @@
 
 (use-package! org-ai
   :defer t :init
-  (map! "C-c M-a" #'cae-ai-lazy-load-org-ai)
+  (map! :desc "+org-ai-prefix" "C-c M-a" #'cae-ai-lazy-load-org-ai)
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   :config
   (map! :map org-ai-global-mode-map
-        :prefix "C-c M-a"
+        :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
