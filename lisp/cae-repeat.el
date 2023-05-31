@@ -34,12 +34,7 @@
    `(define-repeat-map tab-next
       ("o" tab-next
        "O" tab-previous
-       ,(cae-keyboard-kbd "0") cae-tab-close-and-select-right
-       "0" cae-tab-close-and-select-right))
-   t)
-  (eval
-   `(define-repeat-map tab-close
-      (,(cae-keyboard-kbd "0") tab-close
+       ,(cae-keyboard-kbd "0") tab-close
        "0" tab-close))
    t)
 
