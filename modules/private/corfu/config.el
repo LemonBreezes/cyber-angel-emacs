@@ -29,7 +29,8 @@ derivative.")
 ;;
 ;;; Packages
 (use-package! corfu
-  :hook (doom-first-buffer . global-corfu-mode)
+  :init
+  (add-hook 'doom-first-input-hook #'global-corfu-mode)
   :init
   ;; Auto-completion settings, must be set before calling `global-corfu-mode'.
   (setq corfu-auto t
