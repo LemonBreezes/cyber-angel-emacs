@@ -165,46 +165,48 @@
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
   (when (modulep! :ui popup)
-    (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
-      :ttl nil :vslot 99)
-    (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
-      :ttl nil)                         ; which slot/vslot?
-    (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-      :quit nil :ttl t)                 ; which slot/vslot?
-    (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
-      :quit nil)                        ; which slot/vslot?
-    (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-      :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
-    (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
-      :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
-    (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-      :side 'right :select t :quit t)   ; which slot/vslot?
-    (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
-      :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
-      :slot 2 :vslot -8)
-    (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-      :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-    (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
-      :select t :quit t :ttl nil :vslot 99)
-    (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
-      :select t :ttl nil)               ; which slot/vslot?
-    (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
-      :side 'right :select t :ttl nil)  ; which slot/vslot?
-    (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
-      :modeline nil :quit nil :ttl nil)
-    (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
-      :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
-    (set-popup-rule! "^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
-      :side 'right :select nil :quit t :ttl nil)
-    (set-popup-rule! "^\\*tldr\\*$" :size #'cae-popup-resize-help-buffer
-      :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
-    (set-popup-rule! "^\\*Shortdoc .*" :size #'cae-popup-resize-help-buffer
-      :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
-    (set-popup-rule! "^\\*devdocs\\*$" :width 122
-      :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
-    (set-popup-rule! "^Trash Can" :size 0.3 :side 'bottom :select t :quit t
-      :ttl 0)                           ; which slot/vslot?
-    (set-popup-rule! "^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil) ; which slot/vslot?
+    (set-popup-rules!
+      ;; TODO Set the correct slot/vslot for these popups.
+      '(("^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
+         :ttl nil :vslot 99)
+        ("^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
+         :ttl nil)
+        ("^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
+         :quit nil :ttl t)
+        ("^\\*org-roam\\*" :size 60 :side 'left :select nil
+         :quit nil)
+        ("^\\*info.*" :size #'cae-popup-resize-help-buffer
+         :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+        ("^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
+         :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
+        ("^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+         :side 'right :select t :quit t)
+        ("^\\*\\([Hh]elp\\|Apropos\\)"
+         :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
+         :slot 2 :vslot -8)
+        ("^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+         :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+        ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+         :select t :quit t :ttl nil :vslot 99)
+        ("^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
+         :select t :ttl nil)
+        ("^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
+         :side 'right :select t :ttl nil)
+        ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
+         :modeline nil :quit nil :ttl nil)
+        ("^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
+         :side 'right :select nil :quit t :ttl 0)
+        ("^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
+         :side 'right :select nil :quit t :ttl nil)
+        ("^\\*tldr\\*$" :size #'cae-popup-resize-help-buffer
+         :side 'right :ttl t :select t :quit t :ttl 0)
+        ("^\\*Shortdoc .*" :size #'cae-popup-resize-help-buffer
+         :side 'right :ttl t :select t :quit t :ttl 0)
+        ("^\\*devdocs\\*$" :width 122
+         :side 'right :ttl t :select t :quit t :ttl 0)
+        ("^Trash Can" :size 0.3 :side 'bottom :select t :quit t
+         :ttl 0)
+        ("^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil)))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
