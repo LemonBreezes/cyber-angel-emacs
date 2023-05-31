@@ -691,7 +691,7 @@
   ;; `avy-styles-alist' instead.
   (advice-add #'avy-goto-end-of-line
               :around
-              (cae-defun cae-avy-line-no-column-overlay-a (oldfun &rest args)
+              (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
                 (let ((avy-style 'post))
                   (apply oldfun args))))
 
