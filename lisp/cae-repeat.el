@@ -49,5 +49,6 @@
     (setq repeat-help-popup-type 'which-key
           repeat-help-auto nil)
     (repeat-help-mode +1))
-  (setq repeat-exit-timeout 0.5)
+  (setq repeat-exit-timeout 0.5
+        repeat-exit-key "C-g")
   (map! :map help-map "C-r" #'describe-repeat-maps))
