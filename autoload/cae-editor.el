@@ -21,8 +21,10 @@
 
 ;;;###autoload
 (defun cae-delete-char ()
+  "Like `delete-char', but works on the region if active, and
+deletes the following char if the sexps in the buffer are
+unbalanced."
   (interactive)
-  ;; Needs refactoring.
   (let ((delete-fn
          (cond ((condition-case error
                     (scan-sexps (point-min) (point-max))
