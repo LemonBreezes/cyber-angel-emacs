@@ -875,7 +875,8 @@
           [remap backward-sentence] #'sentex-backward-sentence)))
 
 (use-package! edit-indirect
-  :defer t :init)
+  :defer t :init
+  (map! "C-c '" #'edit-indirect-region))
 
 
 ;;; Autocompletion
