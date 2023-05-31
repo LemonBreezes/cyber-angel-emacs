@@ -171,7 +171,6 @@
                (expand-file-name "secrets/" doom-user-dir) t "\\.el$"))
   (load file nil t))
 
-
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
