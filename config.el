@@ -636,7 +636,9 @@
              "M-j" #'vertico-quick-jump))))
   (after! embark
     (map! :map embark-collect-mode-map
-          "C-;" #'avy-embark-collect-choose))
+          "C-;" #'avy-embark-collect-choose
+          (:when (not (cae-display-graphic-p))
+           "M-j" #'avy-embark-collect-choose)))
   :config
   (setq avy-timeout-seconds 0.25
         avy-all-windows t
