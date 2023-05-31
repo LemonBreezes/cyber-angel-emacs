@@ -330,9 +330,6 @@
   (advice-add #'aas-embark-menu :before
               (cae-defun cae-aas-load-embark-h ()
                 (require 'embark)))
-  (add-hook 'aas-global-condition-hook
-            (cae-defun cae-keyboard-org-ai-streaming-p ()
-              (bound-and-true-p org-ai--current-request-buffer)))
   (aas-set-snippets 'global
     ";--" "—"
     ";-." "→"
