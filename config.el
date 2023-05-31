@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Since Doom doesn't feature-gate keybindings, I have to do it myself. I'm not
-;; going through all the keybindings meticulously, I'm just disabling the ones I
+;; Since Doom doesn't feature-gate keybindings, I have to do it myself. I am not
+;; going through all the keybindings meticulously, I am just disabling the ones I
 ;; know I don't want.
 (unless (modulep! :ui deft)
   (map! :leader
