@@ -43,11 +43,14 @@
      compile-command "truffle compile" test-command "truffle test" install-command
      "truffle migrate" package-command nil run-command nil)
    nil #'equal)
-  (add-to-list 'projectile-project-root-files-top-down-recurring "truffle-config.js")
-  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
-  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
   (add-to-list 'projectile-project-root-files-top-down-recurring
-               "compile_commands.json")
+               "truffle-config.js" nil #'string=)
+  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$"
+               nil #'string=)
+  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root"
+               nil #'string=)
+  (add-to-list 'projectile-project-root-files-top-down-recurring
+               "compile_commands.json" nil #'string=)
   ;; Set up compilation.
   (setq projectile-per-project-compilation-buffer t
         compilation-read-command nil)
