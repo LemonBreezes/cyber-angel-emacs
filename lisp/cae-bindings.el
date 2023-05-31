@@ -19,7 +19,7 @@
         (define-key doom-leader-map (kbd (concat (format "%s " snippet-prefix)
                                                  (char-to-string key))) binding)))
     (after! yasnippet
-      (define-key yas-minor-mode-map (kbd "C-c &") nil))
+      (keymap-unset yas-minor-mode-map "C-c &" t))
     (define-key doom-leader-map "&" nil)
     (after! which-key
       (setq which-key-replacement-alist
