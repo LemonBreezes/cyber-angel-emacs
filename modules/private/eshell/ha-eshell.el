@@ -28,7 +28,7 @@ Called after every command by connecting to the `eshell-post-command-hook'."
          (buffer-substring-no-properties eshell-last-input-end eshell-last-output-start)))
     (ring-insert ha-eshell-output output)))
 
-(add-hook 'eshell-post-command-hook 'ha-eshell-store-last-output)
+(add-hook 'eshell-post-command-hook #'ha-eshell-store-last-output)
 
 (defun eshell/output (&rest args)
   "Return an eshell command output from its history.
