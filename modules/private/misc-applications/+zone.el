@@ -29,6 +29,15 @@
                        ;; zone-pgm-martini-swan-dive
                        zone-pgm-rat-race
                        zone-pgm-paragraph-spaz])
+
+  ;; For `zone-matrix'.
+  (defun tabbar-mode () (lambda (x) (message "%s")))
+  (defvar tabbar-mode nil)
+
+  (require 'zone-matrix)
+  (require 'zone-matrix-settings)
+  (setq zone-programs [zone-matrix])
+
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
   ;; zone-pgm-random-life
