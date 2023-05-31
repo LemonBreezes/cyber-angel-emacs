@@ -184,6 +184,15 @@
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
+(use-package! smart-mark
+  :defer t
+  :config
+  (defun cae-hacks-smart-mark-use-doom-escape-a ()
+              (if smart-mark-mode
+                  (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
+                (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
+  (add-hook 'smart-mark-mode-hook #'cae-hacks-smart-mark-use-doom-escape-a))
+
 
 ;;; Tools
 
