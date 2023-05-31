@@ -578,7 +578,7 @@
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
            ("C-]" sp-select-next-thing-exchange "Selection") ;Overrides
-                                        ;`abort-recursive-edit'.
+                                                        ;`abort-recursive-edit'.
            ("C-M-]" sp-select-next-thing "Selection")
            ("C-M-@" sp-mark-sexp "Selection")
            ("C-M-w" sp-copy-sexp "Selection")))) ;Overrides `append-next-kill'.
