@@ -41,11 +41,10 @@
   (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
 
 (when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-hook 'persp-before-switch-functions
-              #'cae-cheatsheets-workspace-hydra-pause-h)
-    (add-hook 'persp-activated-functions
-              #'cae-cheatsheets-workspace-hydra-resume-h)))
+  (add-hook 'persp-before-switch-functions
+            #'cae-cheatsheets-workspace-hydra-pause-h)
+  (add-hook 'persp-activated-functions
+            #'cae-cheatsheets-workspace-hydra-resume-h))
 
 ;; Haven't done this for Hercules yet and I might never get around to it since I
 ;; don't use Hercules that much.
@@ -86,9 +85,8 @@
         (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
 
 (when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
-    (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h)))
+  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
+  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
 
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
