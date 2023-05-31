@@ -162,137 +162,128 @@
 
 
 ;; Tools
-;;
-;;(load! "lisp/cae-webkit.el")
-;;
-;;(cond ((and (not (string-suffix-p "-WSL2" operating-system-release))
-;;            (display-graphic-p))
-;;       (setq browse-url-browser-function #'browse-url-generic
-;;             browse-url-generic-program "chromium-bin"
-;;             browse-url-generic-args '("--no-sandbox")
-;;             browse-url-chromium-program "chromium-bin"))
-;;      ((not (display-graphic-p))
-;;       (setq browse-url-browser-function #'w3m-browse-url)))
-;;
-;;(use-package! w3m
-;;  :defer t
-;;  :config
-;;  (setq w3m-search-default-engine "duckduckgo"
-;;        w3m-user-agent
-;;        (string-join
-;;         '("Mozilla/5.0"
-;;           "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
-;;           "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
-;;           "Mobile Safari/533.")
-;;         " ")
-;;        w3m-command-arguments '("-cookie" "-F"))
-;;  (map! :map w3m-mode-map
-;;        "o" #'ace-link-w3m))
-;;
-;;(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-;;(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
-;;
-;;(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
-;;(add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
-;;;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
-;;;; balanced, which breaks font-lock.
-;;(after! syslog-mode
-;;  (setq syslog-font-lock-keywords
-;;        (cl-remove-if
-;;         (lambda (keyword)
-;;           (cl-destructuring-bind (regexp . face) keyword
-;;             (string= "'[^']*'" regexp)))
-;;         syslog-font-lock-keywords)))
-;;
-;;;; Set up printers
-;;(after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
-;;(after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
-;;
-;;(setq delete-by-moving-to-trash t
-;;      remote-file-name-inhibit-delete-by-moving-to-trash t
-;;      history-length (expt 2 16))
-;;
-;;(setq bookmark-bmenu-file-column 50
-;;      bookmark-watch-bookmark-file nil)
-;;(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
-;;
-;;(after! auth-source
-;;  (setq auth-source-cache-expiry nil
-;;        auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
-;;                                   auth-sources)
-;;        auth-source-gpg-encrypt-to nil))
-;;
-;;(after! password-cache
-;;  (setq password-cache-expiry nil))
-;;
-;;(after! projectile
-;;  ;; Automatically find projects in the I personally use.
-;;  (setq projectile-project-search-path
-;;        `((,doom-user-dir . 0)
-;;          ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-;;          ("~/src/" . 1)))
-;;  (add-to-list 'projectile-globally-ignored-directories
-;;               (expand-file-name ".local/straight/repos/" user-emacs-directory))
-;;  (unless projectile-known-projects
-;;    (projectile-discover-projects-in-search-path))
-;;  ;; Recognize `makefile' as a Makefile.
-;;  (cl-pushnew
-;;   '(make marker-files
-;;     ("makefile")
-;;     project-file "Makefile" compilation-dir nil configure-command nil
-;;     compile-command "make" test-command "make test"
-;;     install-command "make install" package-command nil run-command nil)
-;;   projectile-project-types :test #'equal)
-;;  (cl-pushnew
-;;   '(gnumake marker-files
-;;     ("GNUmakefile")
-;;     project-file "GNUMakefile" compilation-dir nil configure-command nil
-;;     compile-command "make" test-command "make test" install-command
-;;     "make install" package-command nil run-command nil)
-;;   projectile-project-types :test #'equal)
-;;  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
-;;  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-;;  (add-to-list 'projectile-project-root-files-top-down-recurring
-;;               "compile_commands.json")
-;;  ;; Set up compilation.
-;;  (setq projectile-per-project-compilation-buffer t
-;;        compilation-read-command nil)
-;;  ;; Make the project prefix more readable.
-;;  (after! which-key
-;;    (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
-;;          which-key-replacement-alist)))
-;;
-;;(after! tramp
-;;  (setq tramp-terminal-prompt-regexp
-;;        "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
-;;
-;;;; Use Emacs as the default editor for shell commands.
-;;(define-key (current-global-map)
-;;  [remap async-shell-command] 'with-editor-async-shell-command)
-;;(define-key (current-global-map)
-;;  [remap shell-command] 'with-editor-shell-command)
-;;(add-hook 'shell-mode-hook  #'with-editor-export-editor)
-;;(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
-;;(add-hook 'eshell-mode-hook #'with-editor-export-editor)
-;;
-;;(when (and (modulep! :checkers spell)
-;;           (not (modulep! :checkers spell +flyspell)))
-;;  (after! spell-fu
-;;    (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-;;    (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-;;    (add-to-list 'spell-fu-faces-exclude 'message-header-to)
-;;    (setq spell-fu-faces-exclude
-;;          (delq 'font-lock-string-face spell-fu-faces-include))))
-;;
-;;(when (modulep! :tools pdf)
-;;  (use-package! pdftotext
-;;    :defer t
-;;    :init
-;;    (defadvice! +pdf-view-mode-a (oldfun &rest args)
-;;      :around #'pdf-view-mode
-;;      (if (display-graphic-p)
-;;          (apply oldfun args)
-;;        (apply #'pdftotext-mode args)))))
+
+(load! "lisp/cae-webkit.el")
+
+(use-package! w3m
+  :defer t
+  :config
+  (setq w3m-search-default-engine "duckduckgo"
+        w3m-user-agent
+        (string-join
+         '("Mozilla/5.0"
+           "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
+           "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
+           "Mobile Safari/533.")
+         " ")
+        w3m-command-arguments '("-cookie" "-F"))
+  (map! :map w3m-mode-map
+        "o" #'ace-link-w3m))
+
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+
+(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+(add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
+;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
+;; balanced, which breaks font-lock.
+(after! syslog-mode
+  (setq syslog-font-lock-keywords
+        (cl-remove-if
+         (lambda (keyword)
+           (cl-destructuring-bind (regexp . face) keyword
+             (string= "'[^']*'" regexp)))
+         syslog-font-lock-keywords)))
+
+;; Set up printers
+(after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
+(after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
+
+(setq delete-by-moving-to-trash t
+      remote-file-name-inhibit-delete-by-moving-to-trash t
+      history-length (expt 2 16))
+
+(setq bookmark-bmenu-file-column 50
+      bookmark-watch-bookmark-file nil)
+(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+
+(after! auth-source
+  (setq auth-source-cache-expiry nil
+        auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
+                                   auth-sources)
+        auth-source-gpg-encrypt-to nil))
+
+(after! password-cache
+  (setq password-cache-expiry nil))
+
+(after! projectile
+  ;; Automatically find projects in the I personally use.
+  (setq projectile-project-search-path
+        `((,doom-user-dir . 0)
+          ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+          ("~/src/" . 1)))
+  (add-to-list 'projectile-globally-ignored-directories
+               (expand-file-name ".local/straight/repos/" user-emacs-directory))
+  (unless projectile-known-projects
+    (projectile-discover-projects-in-search-path))
+  ;; Recognize `makefile' as a Makefile.
+  (cl-pushnew
+   '(make marker-files
+     ("makefile")
+     project-file "Makefile" compilation-dir nil configure-command nil
+     compile-command "make" test-command "make test"
+     install-command "make install" package-command nil run-command nil)
+   projectile-project-types :test #'equal)
+  (cl-pushnew
+   '(gnumake marker-files
+     ("GNUmakefile")
+     project-file "GNUMakefile" compilation-dir nil configure-command nil
+     compile-command "make" test-command "make test" install-command
+     "make install" package-command nil run-command nil)
+   projectile-project-types :test #'equal)
+  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
+  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+  (add-to-list 'projectile-project-root-files-top-down-recurring
+               "compile_commands.json")
+  ;; Set up compilation.
+  (setq projectile-per-project-compilation-buffer t
+        compilation-read-command nil)
+  ;; Make the project prefix more readable.
+  (after! which-key
+    (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist)))
+
+(after! tramp
+  (setq tramp-terminal-prompt-regexp
+        "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
+
+;; Use Emacs as the default editor for shell commands.
+(define-key (current-global-map)
+  [remap async-shell-command] 'with-editor-async-shell-command)
+(define-key (current-global-map)
+  [remap shell-command] 'with-editor-shell-command)
+(add-hook 'shell-mode-hook  #'with-editor-export-editor)
+(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+(add-hook 'eshell-mode-hook #'with-editor-export-editor)
+
+(when (and (modulep! :checkers spell)
+           (not (modulep! :checkers spell +flyspell)))
+  (after! spell-fu
+    (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+    (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+    (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+    (setq spell-fu-faces-exclude
+          (delq 'font-lock-string-face spell-fu-faces-include))))
+
+(when (modulep! :tools pdf)
+  (use-package! pdftotext
+    :defer t
+    :init
+    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+      :around #'pdf-view-mode
+      (if (display-graphic-p)
+          (apply oldfun args)
+        (apply #'pdftotext-mode args)))))
 ;;
 ;;(when (and (modulep! :tools lsp)
 ;;           (not (modulep! :tools lsp +eglot)))
