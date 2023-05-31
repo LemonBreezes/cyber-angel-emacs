@@ -502,8 +502,8 @@
 
   ;; Enable Vim-style folding. `vimish-fold' persists folds by saving the
   ;; overlay region `(point) (mark)'. This is problematic because it means that
-  ;; a fold can be broken by an external file change. Still, I think it's useful
-  ;; for files that don't get externally modified.
+  ;; a fold can be broken by an external file change. Still, I use this for
+  ;; personal Org files and the like.
   (when (modulep! :editor fold)
     (add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
     (setq vimish-fold-indication-mode 'right-fringe))
