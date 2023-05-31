@@ -561,7 +561,8 @@
           embark-act-key #'embark-act)))
   (eval
    `(after! embark
-      (setq embark-cycle-key ,embark-act-key))))
+      (setq embark-cycle-key ,embark-act-key))
+   t))
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
