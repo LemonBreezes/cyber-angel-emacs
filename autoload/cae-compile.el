@@ -31,7 +31,6 @@
                   (string= (file-name-nondirectory s) "doctor.el")
                   (string= (file-name-nondirectory s) ".dir-locals.el")
                   (string-prefix-p "flycheck_" (file-name-nondirectory s))
-                  (cl-member s +compile-files-to-ignore :test #'string=)
                   (and +kill-emacs--exit-code
                        (not (eq +kill-emacs--exit-code 0))
                        (not (file-exists-p (concat s "c"))))
