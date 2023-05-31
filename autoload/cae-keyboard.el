@@ -99,6 +99,17 @@
     (_ (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))) )))
 
 ;;;###autoload
+(defun cae-keyboard-kbd-reverse (&rest args)
+  (declare (pure t) (side-effect-free t))
+  (pcase (length args)
+    (0 (kbd ""))
+    (1 (apply #'string (cae-keyboard-remap-reverse (kbd (string-join args " ")))))
+    (2 (mapconcat #'kbd
+                  (append (butlast args)
+                          (list (cae-keyboard-kbd (car (last args)))))))
+    (_ (apply #'string (cae-keyboard-remap-reverse (kbd (string-join args " ")))) )))
+
+;;;###autoload
 (defun cae-keyboard-digit-argument ()
   (interactive)
   (setq last-command-event
