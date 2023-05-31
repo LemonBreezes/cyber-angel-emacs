@@ -111,3 +111,9 @@
   (let ((gcmh-low-cons-threshold most-positive-fixnum)
         (gcmh-high-cons-threshold most-positive-fixnum))
     (apply oldfun args)))
+
+(defadvice! cae-hacks-monkey-patch-consult-for-doom (oldfun &rest args)
+  :around #'consult--ripgrep-make-builder
+  (if (null args)
+      #'consult--ripgrep-make-builder
+    (apply oldfun args)))
