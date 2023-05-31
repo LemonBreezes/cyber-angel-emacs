@@ -22,7 +22,7 @@
   (dap-debug-last))
 
 ;;;###autoload
-(defun cae-comint-send-input ()
+(defun cae-debugger-gud-comint-send-input ()
   (interactive)
   ;; Not sure why `M-x gdb' binds this command everywhere, but it does.
   (cond ((derived-mode-p 'gdb-frames-mode)
