@@ -47,7 +47,7 @@
 
        :lang
        emacs-lisp
-       (org +roam2)
+       org
 
        :os
        (:if IS-MAC macos)
