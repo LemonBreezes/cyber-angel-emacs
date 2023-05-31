@@ -25,6 +25,10 @@
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
+  (define-repeat-map vc-gutter
+    ("n" +vc-gutter/next-hunk
+     "p" +vc-gutter/previous-hunk))
+
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
 
