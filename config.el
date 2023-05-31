@@ -985,7 +985,6 @@
     (keymap-set switchy-window-minor-mode-map
                 "<remap> <other-window>" #'switchy-window)))
 
-
 
 ;;; Autocompletion
 
