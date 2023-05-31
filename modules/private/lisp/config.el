@@ -147,7 +147,8 @@
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
           "M-S" #'lispy-split
-          "M-C" #'lispy-convolute-sexp)
+          "M-C" #'lispy-convolute-sexp
+          "M-D" #'lispy-splice-sexp)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
