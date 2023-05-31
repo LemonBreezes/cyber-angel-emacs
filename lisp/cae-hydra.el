@@ -4,6 +4,8 @@
 (defvar cae-hydra--last-hydra nil)
 
 (defun cae-hydra-store-last-hydra-h (&rest _)
+  (when (bound-and-true-p hydra-curr-map)
+    (hydra-keyboard-quit))
   (setq cae-hydra--last-hydra
         (when (bound-and-true-p hydra-curr-map)
           hydra-curr-body-fn))
@@ -24,7 +26,6 @@
                               cae-hydra--tab-bar-last-hydra-alist
                               nil nil #'eq)
                    cae-hydra--last-hydra)))
-    (+log "hiii" hydra)
     (setq cae-hydra--last-hydra nil)
     (cae-hydra-store-last-hydra-h)
     (when hydra
