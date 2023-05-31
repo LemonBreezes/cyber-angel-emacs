@@ -66,7 +66,9 @@
 
 (use-package! org-tidy
   :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode))
+  (add-hook 'org-mode-hook #'org-tidy-mode)
+  :config
+  (setq org-tidy-properties-inline-symbol "·"))
 
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
