@@ -14,7 +14,6 @@
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! goggles)
 (package! rainbow-mode)
-(package! evil-terminal-cursor-changer :recipe (:host github :repo "7696122/evil-terminal-cursor-changer"))
 
 ;; cae-theme.el
 (package! modus-themes)
