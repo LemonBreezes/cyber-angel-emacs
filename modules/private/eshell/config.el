@@ -30,8 +30,9 @@
     imenu-generic-expression
     `((,(propertize "λ" 'face 'eshell-prompt) "^.* λ \\(.*\\)" 1)))
 
-  (eat-eshell-mode +1)
-  (eat-eshell-visual-command-mode +1)
+  (unless cae-config-finished-loading
+    (eat-eshell-mode +1)
+    (eat-eshell-visual-command-mode +1))
 
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
