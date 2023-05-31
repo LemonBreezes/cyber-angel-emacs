@@ -3,7 +3,7 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
-(setq load-prefer-newer cae-config-compilation-enabled)
+(setq load-prefer-newer nil)
 (random t)                              ;Set the random seed.
 
 (load! "lisp/cae-lib")
