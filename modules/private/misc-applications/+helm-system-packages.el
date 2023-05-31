@@ -2,7 +2,9 @@
 
 (use-package! helm-system-packages
   :defer t
-  :when (not (memq system-type '(cygwin windows-nt ms-dos)))
+  :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
+             (or (modulep! :private helm)
+                     (modulep! :completion helm)))
   :init
   (map! :leader
         :prefix +misc-applications-prefix
