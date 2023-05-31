@@ -23,5 +23,3 @@ alias j    z $*
 alias vi   e $*
 alias vim  e $*
 alias nano e $*
-
-alias amake cd ~/src/atlas/ && mkdir -p build/debug/ && cd $_ && LD_LIBRARY_PATH=${pwd}/_deps/pgpsdk-src/libraries/release/:${pwd}/_deps/grpc-src/lib:${pwd}/_deps/opentelemetry-src/lib:$(expand-file-name "~/src/atlas-libraries/") make
