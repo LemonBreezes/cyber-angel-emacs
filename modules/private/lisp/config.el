@@ -136,7 +136,9 @@
                        (elt x 2)))))
       (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body))
     (map! :map lispy-mode-map-lispy
-          "M-m" nil                     ; previously `lispy-mark-symbol'. I prefer to
-                                        ; keep the default `M-m' and `C-a' keybindings.
-          "C-a" nil                     ; previously `lispy-move-beginning-of-line'.
+          "M-m" nil                 ; formerly `lispy-mark-symbol'. I prefer to
+                                    ; keep the default `M-m' and `C-a'
+                                    ; keybindings.
+          "C-a" nil                 ; formerly `lispy-move-beginning-of-line'.
+          "M-j" nil                 ; formerly `lisp-split'.
           )))
