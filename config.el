@@ -742,8 +742,8 @@
       (map! :map vertico-map
             "C-z C-j" #'vertico-quick-jump
             "C-z j" #'vertico-quick-jump
-            "C-z i" #'vertico-quick-insert
-            "C-z C-i" #'vertico-quick-insert)))
+            "C-z i" #'vertico-quick-exit
+            "C-z C-i" #'vertico-quick-exit)))
   (after! embark
     (map! :map embark-collect-mode-map
           "C-z C-j" #'avy-embark-collect-choose
