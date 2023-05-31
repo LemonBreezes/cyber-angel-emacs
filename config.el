@@ -181,7 +181,7 @@
         "o" #'ace-link-w3m))
 
 (setq browse-url-browser-function
-      (lambda (url &optioal new-window)
+      (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
         (cond (((display-graphic-p)
                 (webkit-browse-url url new-window))
