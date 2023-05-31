@@ -29,3 +29,20 @@
   (cl-pushnew 'cape-yasnippet
               completion-at-point-functions
               :test #'eq))
+
+;;;###autoload
+(defun cae-corfu-enable-in-minibuffer-h ()
+  (unless (or (bound-and-true-p mct--active)
+              (bound-and-true-p vertico--input)
+              (cl-member (minibuffer-prompt)
+                         '("I-search: "
+                           "Query replace "
+                           "Align regexp"
+                           "Expansion for ")
+                         :test #'string-match-p)
+              (memq this-command '(evil-ex
+                                   evil-ex-search-forward
+                                   evil-ex-search-backward))
+              (and (featurep 'helm-core)
+                   (helm--alive-p))
+              (corfu-mode +1))))
