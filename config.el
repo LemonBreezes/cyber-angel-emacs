@@ -106,8 +106,6 @@
 
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
-  (setq +popup-default-parameters
-        (delete '(no-other-window . t) +popup-default-parameters))
   (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
   (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
