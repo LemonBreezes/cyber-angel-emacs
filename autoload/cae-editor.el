@@ -316,6 +316,8 @@ mark the string and call `edit-indirect-region' with it."
            (beg (avy--line))
            (end (if beg (avy--line)
                   (cl-return-from cae-avy-embark-act-on-region))))
+      (unless end
+        (cl-return-from cae-avy-embark-act-on-region))
       (when (> beg end)
         (cl-rotatef beg end))
       (setq beg (save-excursion
