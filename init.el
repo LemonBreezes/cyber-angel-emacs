@@ -70,6 +70,9 @@
        :config
        (default +bindings +smartparens)
 
+       :app
+       (rss +org)
+
        :private
        ;; exwm
        (corfu +indexed)
