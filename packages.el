@@ -28,7 +28,6 @@
 (package! font-lock-studio)             ; I don't use this often, but it's useful
                                         ; for debugging font-lock issues.
 (package! git-modes)
-(package! pinentry)
 
 ;; cae-webkit.el
 (package! webkit :recipe (:type git :host github :repo "akirakyle/emacs-webkit"
