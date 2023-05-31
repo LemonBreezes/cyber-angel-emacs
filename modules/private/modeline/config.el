@@ -1,6 +1,7 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (use-package! minions
+  :defer t
   :init
   (add-hook 'doom-first-buffer-hook #'minions-mode)
   :config
