@@ -48,13 +48,13 @@ overriding other keymaps."
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p t
-  "Whether our UI section of `config.el' is disabled.")
+  "Whether our UI section of `config.el' is enabled.")
 (defvar cae-init-tools-enabled-p t
-  "Whether our tools section of `config.el' is disabled.")
+  "Whether our tools section of `config.el' is enabled.")
 (defvar cae-init-editor-enabled-p t
-  "Whether our editor section of `config.el' is disabled.")
+  "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p t
-  "Whether our autocompletion section of `config.el' is disabled.")
+  "Whether our autocompletion section of `config.el' is enabled.")
 
 (doom! :completion
        (vertico +icons +childframe)
