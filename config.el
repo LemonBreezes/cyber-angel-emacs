@@ -652,13 +652,7 @@
         :desc "Show file info" "i" #'file-info-show)
   :config
   (setq file-info-include-headlines t
-        file-info-max-value-length 100)
-  (add-to-list 'file-info-handlers `( :name "Git link"
-                                      :handler (cl-letf (((symbol-function #'git-link--new)
-                                                          (symbol-function #'identity)))
-                                                 (call-interactively #'git-link))
-                                      :face font-lock-string-face
-                                      :bind "g")))
+        file-info-max-value-length 100))
 
   
 ;;; Autocompletion
