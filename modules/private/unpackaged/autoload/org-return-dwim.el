@@ -202,7 +202,6 @@ appropriate.  In tables, insert a new row or end the table."
                          (symbol-function #'cae-unpackaged-org-list-insert-item-after)))
                 (org-insert-item))
             ;; Empty item: Close the list.
-            ;; TODO: Do this with org functions rather than operating on the text. Can't seem to find the right function.
             (delete-region (line-beginning-position) (line-end-position))
             (insert "\n"))))
 
