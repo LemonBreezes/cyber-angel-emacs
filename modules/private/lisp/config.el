@@ -20,6 +20,8 @@
 (add-hook 'dune-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'fennel-mode-hook #'cae-lisp-check-parens-before-save-h)
 
+(add-hook 'emacs-lisp-mode-hook #'cae-lisp-eval-buffer-before-save-h)
+
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
   (map! :prefix "C-c"
