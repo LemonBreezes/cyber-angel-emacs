@@ -22,6 +22,7 @@
   (hydra-keyboard-quit))
 (after! hydra
   (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h)
+  ;; TODO Make it so that we also resume the hydra upon exiting the minibuffer.
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-quit-h))
 
 ;; Make `advice-remove' ignore the keyword argument
