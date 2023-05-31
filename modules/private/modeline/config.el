@@ -98,6 +98,7 @@
     (setq! nyan-bar-length 20
            nyan-minimum-window-width 20))
 
+  ;; This block might seem crazy, but it's the only way to get the
   (use-package! parrot
     :defer t :init
     (defadvice! +define-obsolete-variable-alias-a (oldfun &rest args)
@@ -105,7 +106,6 @@
       (when (eq (length args) 2)
         (setq args (append args '("28.1"))))
       (apply oldfun args))
-
     (add-transient-hook! 'prog-mode-hook
       (advice-add #'message :override #'ignore)
       (unwind-protect (parrot-mode)
