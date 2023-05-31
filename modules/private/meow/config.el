@@ -311,64 +311,64 @@
   (when (modulep! +override)
     (meow-motion-overwrite-define-key)) ; custom keybinding for motion state
   (meow/setup)
-  (define-key! :map meow-normal-state-keymap
-    (cae-keyboard-kbd "1") #'meow-expand-1
-    (cae-keyboard-kbd "2") #'meow-expand-2
-    (cae-keyboard-kbd "3") #'meow-expand-3
-    (cae-keyboard-kbd "4") #'meow-expand-4
-    (cae-keyboard-kbd "5") #'meow-expand-5
-    (cae-keyboard-kbd "6") #'meow-expand-6
-    (cae-keyboard-kbd "7") #'meow-expand-7
-    (cae-keyboard-kbd "8") #'meow-expand-8
-    (cae-keyboard-kbd "9") #'meow-expand-9
-    (cae-keyboard-kbd "0") #'meow-expand-0
-    ":" #'meow-reverse                  ; : -> ;
-    "?" #'meow-cheatsheet
-    "<" #'meow-beginning-of-thing
-    ">" #'meow-end-of-thing
-    "a" #'meow-append
-    "A" #'meow-open-below
-    "b" #'meow-back-word
-    "B" #'meow-back-symbol
-    "c" #'meow-change
-    "d" #'meow-delete
-    "D" #'meow-backward-delete
-    "e" #'meow-line
-    "E" #'meow-goto-line
-    "f" #'meow-find
-    "g" #'meow-cancel-selection
-    "G" #'meow-grab
-    "o" #'meow-left                     ; h -> o
-    "O" #'meow-left-expand              ; H -> O
-    "I" #'meow-open-above
-    "i" #'meow-insert
-    "j" #'meow-join
-    "k" #'meow-kill
-    "l" #'meow-till
-    "m" #'meow-mark-word
-    "M" #'meow-mark-symbol
-    "n" #'meow-next
-    "N" #'meow-next-expand
-    "h" #'meow-block                    ; o -> h
-    "H" #'meow-to-block                 ; O -> H
-    "p" #'meow-prev
-    "P" #'meow-prev-expand
-    "q" #'meow-quit
-    "Q" #'meow-goto-line
-    "r" #'meow-replace
-    "R" #'meow-swap-grab
-    "s" #'meow-search
-    "t" #'meow-right
-    "T" #'meow-right-expand
-    "u" #'meow-undo
-    "U" #'meow-undo-in-selection
-    "v" #'meow-visit
-    "w" #'meow-next-word
-    "W" #'meow-next-symbol
-    "x" #'meow-save
-    "X" #'meow-sync-grab
-    "y" #'meow-yank
-    "z" #'meow-pop-selection))
+  (eval `(map! :map meow-normal-state-keymap
+               ,(cae-keyboard-kbd "1") #'meow-expand-1
+               ,(cae-keyboard-kbd "2") #'meow-expand-2
+               ,(cae-keyboard-kbd "3") #'meow-expand-3
+               ,(cae-keyboard-kbd "4") #'meow-expand-4
+               ,(cae-keyboard-kbd "5") #'meow-expand-5
+               ,(cae-keyboard-kbd "6") #'meow-expand-6
+               ,(cae-keyboard-kbd "7") #'meow-expand-7
+               ,(cae-keyboard-kbd "8") #'meow-expand-8
+               ,(cae-keyboard-kbd "9") #'meow-expand-9
+               ,(cae-keyboard-kbd "0") #'meow-expand-0
+               ":" #'meow-reverse                  ; : -> ;
+               "?" #'meow-cheatsheet
+               "<" #'meow-beginning-of-thing
+               ">" #'meow-end-of-thing
+               "a" #'meow-append
+               "A" #'meow-open-below
+               "b" #'meow-back-word
+               "B" #'meow-back-symbol
+               "c" #'meow-change
+               "d" #'meow-delete
+               "D" #'meow-backward-delete
+               "e" #'meow-line
+               "E" #'meow-goto-line
+               "f" #'meow-find
+               "g" #'meow-cancel-selection
+               "G" #'meow-grab
+               "o" #'meow-left                     ; h -> o
+               "O" #'meow-left-expand              ; H -> O
+               "I" #'meow-open-above
+               "i" #'meow-insert
+               "j" #'meow-join
+               "k" #'meow-kill
+               "l" #'meow-till
+               "m" #'meow-mark-word
+               "M" #'meow-mark-symbol
+               "n" #'meow-next
+               "N" #'meow-next-expand
+               "h" #'meow-block                    ; o -> h
+               "H" #'meow-to-block                 ; O -> H
+               "p" #'meow-prev
+               "P" #'meow-prev-expand
+               "q" #'meow-quit
+               "Q" #'meow-goto-line
+               "r" #'meow-replace
+               "R" #'meow-swap-grab
+               "s" #'meow-search
+               "t" #'meow-right
+               "T" #'meow-right-expand
+               "u" #'meow-undo
+               "U" #'meow-undo-in-selection
+               "v" #'meow-visit
+               "w" #'meow-next-word
+               "W" #'meow-next-symbol
+               "x" #'meow-save
+               "X" #'meow-sync-grab
+               "y" #'meow-yank
+               "z" #'meow-pop-selection)))
 
 (use-package! meow
   :init
