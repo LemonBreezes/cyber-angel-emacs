@@ -25,7 +25,6 @@
     :keymap general-override-mode-map)
   (cae-doom-leader-mode +1))
 
-
 (doom! :completion
        (vertico +icons)
 
