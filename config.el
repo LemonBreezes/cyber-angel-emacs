@@ -873,6 +873,7 @@
                   eri/expand-region
                   eri/contract-region))
       (add-to-list 'rp/restore-point-commands fn))
+    (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
       (when (bound-and-true-p restore-point-mode)
