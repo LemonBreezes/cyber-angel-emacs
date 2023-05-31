@@ -12,7 +12,7 @@
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
-       helm ;used for some commands but not as our main completion engine
+       helm ;Used for some commands but not as our main completion engine.
        (vertico +icons)
 
        :ui
