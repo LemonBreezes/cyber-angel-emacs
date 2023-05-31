@@ -404,8 +404,8 @@
                               (?\( . ?\)))
         electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
   (electric-pair-mode +1)
-  (map! [remap newline] nil)
-  (electric-indent-mode +1))
+  (electric-indent-mode +1)
+  (map! [remap newline] nil))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
