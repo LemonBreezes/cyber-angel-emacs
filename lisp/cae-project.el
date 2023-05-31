@@ -67,10 +67,14 @@
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
   (interactive)
-  (maphash (lambda (bookmark-default-file bookmark-alist)
-             (when bookmark-alist
-               (make-directory (file-name-directory bookmark-default-file) t)
-               (bookmark-write-file bookmark-default-file)))
+  (maphash (lambda (file alist)
+             (when alist
+               (make-directory (file-name-directory file) t)
+               (let ((bookmark-alist alist)
+                     (bookmark-default-file file)
+                     (bookmark-watch-bookmark-file nil)
+                     (bookmark-save-flag nil))
+               (bookmark-write-file file))))
            cae-project-bookmark-cache))
 
 (after! embark
