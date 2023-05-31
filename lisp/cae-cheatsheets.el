@@ -33,7 +33,8 @@
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
   (setq hydra-pause-ring (persp-parameter 'hydra-pause-ring))
-  (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra))
+  (when (persp-parameter 'cae-cheatsheets-workspace--last-hydra)
+    (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra)))
   (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
 
 (when (modulep! :ui workspaces)
