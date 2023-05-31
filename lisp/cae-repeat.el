@@ -77,15 +77,15 @@
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
        "0" +workspace/switch-to-final
-       "1" +workspace-switch-to-0
-       "2" +workspace-switch-to-1
-       "3" +workspace-switch-to-2
-       "4" +workspace-switch-to-3
-       "5" +workspace-switch-to-4
-       "6" +workspace-switch-to-5
-       "7" +workspace-switch-to-6
-       "8" +workspace-switch-to-7
-       "9" +workspace-switch-to-8)))
+       "1" +workspace/switch-to-0
+       "2" +workspace/switch-to-1
+       "3" +workspace/switch-to-2
+       "4" +workspace/switch-to-3
+       "5" +workspace/switch-to-4
+       "6" +workspace/switch-to-5
+       "7" +workspace/switch-to-6
+       "8" +workspace/switch-to-7
+       "9" +workspace/switch-to-8)))
 
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
