@@ -48,14 +48,13 @@
 (package! ednc)
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
 (package! leetcode)
-(package! autotetris-mode :recipe (:build (:not compile)))
+(package! autotetris-mode)
 
 (package! zones)
 (package! zone-nyan)
 (package! zone-rainbow)
 (package! zone-sl)
-(package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"
-                               :build (:not compile)))
+(package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
