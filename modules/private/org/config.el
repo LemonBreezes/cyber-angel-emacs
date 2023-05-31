@@ -114,7 +114,7 @@
                           "\u200b"))
                 nil 'face 'org-indent)))))
 
-(use-package! org-src-context
-  :when (modulep! :tools lsp)
-  :after org :config
-  (org-src-context-mode +1))
+;;(use-package! org-src-context
+;;  :when (modulep! :tools lsp)
+;;  :after org :config
+;;  (org-src-context-mode +1))
