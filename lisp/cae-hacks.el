@@ -165,10 +165,4 @@
                       (cae-hacks-garbage-collect))))
   (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
 
-(defun cae-hacks-disable-gc-temporarily (&rest _)
-  (cae-hacks-disable-gc)
-  (run-with-idle-timer 30 nil #'cae-hacks-enable-gc))
-
-(advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
-(add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
 (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
