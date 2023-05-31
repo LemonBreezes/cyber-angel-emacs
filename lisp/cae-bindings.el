@@ -108,6 +108,8 @@
       [remap doom/backward-to-bol-or-indent] #'beginning-of-line
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       [remap er/expand-region] #'eri/expand-region
+      (:map process-menu-mode-map
+       "o" #'link-hint-open-link)
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim)
       (:when (modulep! :completion vertico)
