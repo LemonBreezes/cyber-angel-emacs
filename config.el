@@ -43,9 +43,6 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
-(when (modulep! :ui workspaces)
-  ())
-
 ;;; UI
 
 (when cae-init-ui-enabled-p
