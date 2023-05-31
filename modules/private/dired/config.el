@@ -82,7 +82,7 @@
     (setq dirvish-show-media-properties t))
 
   (after! dirvish-quick-access
-    (setopt dirvish-quick-access-entries
+    (setq! dirvish-quick-access-entries
             '(("h" "~/" "Home")
               ("e" "~/.emacs.d/" "Emacs user directory")
               ("d" "~/Downloads/" "Downloads")

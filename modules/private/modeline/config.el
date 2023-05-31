@@ -226,5 +226,5 @@
     :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
-    (setopt nyan-bar-length 20
+    (setq! nyan-bar-length 20
             nyan-minimum-window-width 20)))
