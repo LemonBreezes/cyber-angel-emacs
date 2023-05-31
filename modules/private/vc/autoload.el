@@ -15,3 +15,7 @@ Meant to be used like:
           (magit-insert-heading (format "Diff with %s:" (substring-no-properties upstream-branch)))
           (magit--insert-diff
             "diff" "--no-prefix" (format "%s..." upstream-branch))))))
+
+;;;###autoload
+(defun cae-magit-insert-diff-upstream-master ()
+  (apply-partially #'cae-magit-insert-diff-upstream "master"))
