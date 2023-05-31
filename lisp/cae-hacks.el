@@ -121,7 +121,10 @@
       (goto-char p))))
 
 ;; For backwards compatibility.
-(defun toggle-read-only (arg))
+(defun toggle-read-only (arg)
+  (if (or (not arg) (<= arg 0))
+      (read-only-mode -1)
+    (read-only-mode 1)))
 
 ;;; GC hacks
 
