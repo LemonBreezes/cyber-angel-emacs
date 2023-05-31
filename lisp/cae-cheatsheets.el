@@ -28,8 +28,7 @@
                             cae-cheatsheets-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
                          cae-cheatsheets-minibuffer--last-tab-index)))
-       (setf (alist-get (cons cae-cheatsheets-minibuffer--last-tab-index
-                              cae-cheatsheets-minibuffer--last-tab)
+       (setf (alist-get cae-cheatsheets-minibuffer--last-tab
                         cae-cheatsheets-tab-bar-hydra-alist
                         nil nil #'equal)
              cae-cheatsheets-minibuffer--last-hydra))
@@ -78,14 +77,10 @@
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit))
-  (when-let ((hydra (alist-get (cl-find (tab-bar--current-tab)
-                                        (tab-bar-tabs)
-                                        :test #'equal)
+  (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil #'equal)))
-    (setf (alist-get (cl-find (tab-bar--current-tab)
-                              (tab-bar-tabs)
-                              :test #'equal)
+    (setf (alist-get (tab-bar--current-tab)
                      cae-cheatsheets-tab-bar-hydra-alist
                      nil t #'equal)
           nil)
