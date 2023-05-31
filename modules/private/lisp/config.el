@@ -84,8 +84,7 @@
                                         ;to `M-<backspace>' but I
                                         ;have a Smartparens command
                                         ;bound to that key.
-          "C-d" #'cae-delete-char
-          )
+          "C-d" #'cae-delete-char)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
