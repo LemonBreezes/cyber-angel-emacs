@@ -52,7 +52,7 @@ for completions in languages that have no development intelligence, since it
 supports generic, context insensitive candidates such as file names or recurring
 words.
 
-* TODO Usage
+* Usage
 #+begin_quote
  🔨 /This module's usage documentation is incomplete./ [[doom-contrib-module:][Complete it?]]
 #+end_quote
