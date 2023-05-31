@@ -592,7 +592,8 @@
      "C-M-<delete>" #'sp-splice-sexp-killing-forward
      "C-]" #'sp-select-next-thing-exchange
      "C-M-]" #'sp-select-next-thing
-     "C-M-@" #'sp-mark-sexp)))
+     "C-M-@" #'sp-mark-sexp)
+    (setq sp-navigate-interactive-always-progress-point t)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
