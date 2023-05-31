@@ -305,7 +305,7 @@ mark the string and call `edit-indirect-region' with it."
                     (lambda (frame)
                       (eq (frame-parameter frame 'posframe-hidehandler)
                           #'vertico-posframe-hidehandler))
-                    (visible-frame-list)))
+                    (nreverse (visible-frame-list))))
          (vertico-posframe-size-function))
     (setf vertico-posframe-size-function
           `(lambda (_)
