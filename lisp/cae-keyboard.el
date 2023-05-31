@@ -80,7 +80,8 @@
              ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
-(unless (modulep! :private meow)
+(unless (or (modulep! :private meow)
+            (modulep! :editor lispy))
   (defconst home-row-numbers-qwerty
     (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
   (home-row-numbers)
@@ -250,5 +251,15 @@
              ("" lispy-x-more-verbosity :exit nil)
              ("?" lispy-x-more-verbosity "help" :exit nil)))))
 
-(use-package! auto-activating-snippets
-  :defer t)
+;;; Basically a custom input method
+
+(use-package! aas
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'aas-global-mode)
+  :config
+  (aas-set-snippets 'global
+    ";--" "—"
+    ";-." "→"
+    ";=." "⇒"
+    "-." "->"
+    "=." "=>"))
