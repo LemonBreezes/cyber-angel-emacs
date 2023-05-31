@@ -88,8 +88,7 @@
        modeline
        ;; (meow +leader)
        unpackaged
-       vc
-       )
+       vc)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
