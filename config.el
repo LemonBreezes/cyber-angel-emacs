@@ -458,7 +458,9 @@
   :defer t
   :init
   (map! [remap zap-to-char] #'zop-up-to-char
-        [remap zap-up-to-char] #'zop-to-char))
+        [remap zap-up-to-char] #'zop-to-char)
+  :config
+  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
 (use-package! pp+
   :after pp
