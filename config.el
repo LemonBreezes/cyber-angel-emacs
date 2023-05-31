@@ -984,8 +984,6 @@
   (after! yasnippet
     (setq yas-triggers-in-field t))     ;Allow nested snippets.
 
-  ;;(add-to-list 'completion-styles 'typo t)
-
   (use-package! dabbrev
     :defer t :config
     (defun cae-dabbrev-friend-buffer (other-buffer)
