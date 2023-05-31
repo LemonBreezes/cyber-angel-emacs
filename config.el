@@ -588,8 +588,9 @@
      :preview-key 'any)))
 
 (after! cc-mode
-  (map! :map c-mode-base-map
-        "TAB" #'indent-for-tab-command))
+  (if (display-graphic-p)
+      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
 (when (modulep! :private corfu)
   (map! :prefix "M-+"
