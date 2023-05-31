@@ -758,7 +758,7 @@
             "C-z i" #'corfu-quick-insert
             "C-z C-i" #'corfu-quick-insert)))
   :config
-  (setq avy-timeout-seconds 0.3
+  (setq avy-timeout-seconds 0.4
         avy-all-windows t
         avy-keys (cae-keyboard-remap
                   '(?a ?s ?d ?f ?g
