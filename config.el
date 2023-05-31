@@ -496,7 +496,7 @@
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
   (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors
+    (after! multiple-cursors-core
       (add-to-list 'mc--default-cmds-to-run-for-all #'sp-delete-char)
       (add-to-list 'mc--default-cmds-to-run-for-all #'sp-backward-delete-char))))
 
