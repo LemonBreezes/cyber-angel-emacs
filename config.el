@@ -252,8 +252,7 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
 (use-package! hercules
-  :defer t
-  :init
+  :defer t :init
   (after! embark
     (map! :map embark-collect-mode-map
           "<f6>" #'cae-embark-collect-cheatsheet))
