@@ -115,4 +115,7 @@
                 nil 'face 'org-indent)))))
 
 (use-package! org-src-context
-  :defer t)
+  :defer t
+  :after org
+  :config
+  (org-src-context-mode +1))
