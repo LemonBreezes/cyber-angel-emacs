@@ -30,7 +30,6 @@
       :m "C-s" #'isearch-forward
       :n "U" #'evil-redo)
 
-
 ;; Use Emacs keybindings in Evil insert state.
 (setq evil-disable-insert-state-bindings t)
 (define-key! :keymaps +default-minibuffer-maps
@@ -40,3 +39,7 @@
   "C-v" nil
   "C-w" nil
   "C-z" nil)
+
+(map! :prefix "g"
+      :m "[" #'backward-page
+      :m "]" #'+forward-page)
