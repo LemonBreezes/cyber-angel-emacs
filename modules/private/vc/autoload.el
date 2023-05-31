@@ -19,3 +19,9 @@ Meant to be used like:
 ;;;###autoload
 (defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
+
+;;;###autoload (autoload 'cae-magit-forge-post-hydra/body "private/vc/autoload" nil t)
+(defhydra cae-magit-forge-post-hydra (:color blue)
+  ("C-c C-c" forge-post-submit "Submit")
+  ("C-c C-e" forge-post-dispatch  "Dispatch")
+  ("C-c C-k" forge-post-cancel "Cancel"))
