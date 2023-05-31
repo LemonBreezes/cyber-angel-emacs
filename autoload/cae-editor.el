@@ -84,3 +84,11 @@ Lispy."
         ((bound-and-true-p lispy-mode)
          (call-interactively #'lispy-right-nostring))
         (t (call-interactively #'self-insert-command))))
+
+;;;###autoload
+(defun avy-symbol-at-point ()
+  "Jump to another occurance of symbol with avy."
+  (interactive)
+  (avy-with symbol-overlay-jump-avy
+    (avy-process
+     (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
