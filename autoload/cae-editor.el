@@ -51,7 +51,6 @@
 ;;;###autoload
 (defun cae-copilot-complete-freeze-cursors-dwim ()
   (interactive)
-  (if (and (modulep! :editor multiple-cursors)
-           (> (mc/num-cursors) 1))
-      (call-interactively #'mc/freeze-fake-cursors-dwim)
+  (if (bound-and-true-p mc-freeze--frozen-cursors)
+      (call-interactively #'mc/unfreeze-fake-cursors)
     (call-interactively #'copilot-complete)))
