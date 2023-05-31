@@ -19,10 +19,17 @@
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
           (kill-buffer buffer-or-name))))))
 
-;;;###autoload
 (defun cae-kill-buffer-fixup-windows (buffer)
-  "Kill the BUFFER and ensure all the windows it was displayed in have switched
-to a real buffer or the fallback buffer."
   (let ((windows (get-buffer-window-list buffer)))
     (cae-kill-buffer buffer)
     (doom-fixup-windows (cl-remove-if-not #'window-live-p windows))))
+
+;;;###autoload
+(defun cae-kill-this-buffer-in-all-windows (buffer &optional dont-save)
+  (interactive
+   (list (current-buffer) current-prefix-arg))
+  (cl-assert (bufferp buffer) t)
+  (when (and (buffer-modified-p buffer) dont-save)
+    (with-current-buffer buffer
+      (set-buffer-modified-p nil)))
+  (cae-kill-buffer-fixup-windows buffer))
