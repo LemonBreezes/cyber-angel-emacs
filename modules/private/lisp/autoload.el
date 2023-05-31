@@ -5,7 +5,7 @@
   (add-hook 'write-file-functions 'check-parens nil t))
 
 ;;;###autoload
-(defun cae-lispy-newline-and-indent-plain ()
+(defun cae-lisp-newline-and-indent ()
   (interactive)
   (if (and (minibufferp)
            (string= (minibuffer-prompt) "Eval: ")
@@ -18,7 +18,9 @@
       (progn
         (insert-char ?\n 1)
         (indent-according-to-mode))
-    (call-interactively 'lispy-newline-and-indent)))
+    (if (bound-and-true-p lispy-mode)
+        (call-interactively #'lispy-newline-and-indent)
+      (call-interactively #'newline-and-indent))))
 
 ;;;###autoload
 (defun cae-mark-dir-locals-as-safe-h ()
