@@ -69,6 +69,9 @@
             ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
             ("Archives" (extensions "gz" "rar" "zip")))))
 
+  (after! dirvish-widgets
+    (setq dirvish-show-media-properties t))
+
   (after! dirvish-quick-access
     (setopt dirvish-quick-access-entries
             '(("h" "~/" "Home")
