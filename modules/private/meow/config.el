@@ -213,17 +213,3 @@
   (autoload 'etcc--evil-set-cursor "evil-terminal-cursor-changer")
   (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
   (advice-add #'eldoc-print-current-symbol-info :after #'cae-meow-update-cursor-a))
-
-(after! embrace
-  (setq embrace-default-pairs
-        '((?r . ("(" . ")"))
-          (?R . ("( " . " )"))
-          (?c . ("{" . "}"))
-          (?C . ("{ " . " }"))
-          (?\[ . ("[" . "]"))
-          (?\] . ("[ " . " ]"))
-          (?a . ("<" . ">"))
-          (?A . ("< " . " >"))
-          (?s . ("\"" . "\""))
-          (?\' . ("\'" . "\'"))
-          (?` . ("`" . "`")))))
