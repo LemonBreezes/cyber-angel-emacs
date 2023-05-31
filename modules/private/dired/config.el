@@ -115,7 +115,7 @@
         "<f6>" #'cae-dired-dirvish-hydra/body))
 (map! :leader "o-" #'cae-dired-jump)
 
-(add-hook! 'find-directory-functions
+(add-hook 'find-directory-functions
   (cae-defun cae-dired-load-dirvish-h (dir)
     (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
     (require 'dirvish nil t)
