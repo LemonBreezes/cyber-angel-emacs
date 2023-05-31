@@ -74,18 +74,14 @@
                                   projectile-mode
                                   flycheck-mode))
   (after! compile
-    (setq-default minions-mode-line-modes
-                  (cons
-                   (list
-                    'compilation-in-progress
-                    (propertize "[Compiling] "
-                                'help-echo "Compiling; mouse-2: Goto Buffer"
-                                'mouse-face 'mode-line-highlight
-                                'local-map
-                                (make-mode-line-mouse-map
-                                 'mouse-2
-                                 #'compilation-goto-in-progress-buffer)))
-                   (default-value 'minions-mode-line-modes))))
+    (setf (alist-get 'compilation-in-progress (default-value 'minions-mode-line-modes))
+          (propertize "[Compiling] "
+                      'help-echo "Compiling; mouse-2: Goto Buffer"
+                      'mouse-face 'mode-line-highlight
+                      'local-map
+                      (make-mode-line-mouse-map
+                       'mouse-2
+                       #'compilation-goto-in-progress-buffer))))
   (map! "<f9>" #'minions-minor-modes-menu))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
