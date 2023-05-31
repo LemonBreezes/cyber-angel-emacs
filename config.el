@@ -397,24 +397,24 @@
 ;;         ispell-dictionary "en_US"
 ;;         ispell-help-in-bufferp 'electric))
 
-;; ;; Make `smartparens' optional.
-;; (unless (modulep! :config default +smartparens)
-;;   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
-;;   (when (modulep! :term eshell)
-;;     (after! eshell
-;;       (remove-hook 'eshell-mode-hook #'smartparens-mode)))
-;;   (when (modulep! :editor snippets)
-;;     (remove-hook 'yas-before-expand-snippet-hook
-;;                  #'+snippets--disable-smartparens-before-expand-h))
+;; Make `smartparens' optional.
+(unless (modulep! :config default +smartparens)
+  (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+  (when (modulep! :term eshell)
+    (after! eshell
+      (remove-hook 'eshell-mode-hook #'smartparens-mode)))
+  (when (modulep! :editor snippets)
+    (remove-hook 'yas-before-expand-snippet-hook
+                 #'+snippets--disable-smartparens-before-expand-h))
 
-;;   ;; This is how we get curly braces working in C without `smartparens'.
-;;   (setq electric-pair-pairs '((?\" . ?\")
-;;                               (?\{ . ?\})
-;;                               (?\[ . ?\]))
-;;         electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit
-;;         electric-pair-open-newline-between-pairs t)
-;;   (electric-pair-mode +1)
-;;   (map! [remap newline] nil))
+  ;; This is how we get curly braces working in C without `smartparens'.
+  (setq electric-pair-pairs '((?\" . ?\")
+                              (?\{ . ?\})
+                              (?\[ . ?\]))
+        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit
+        electric-pair-open-newline-between-pairs t)
+  (electric-pair-mode +1)
+  (map! [remap newline] nil))
 
 ;; ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; ;; are hidden in normal buffers.
