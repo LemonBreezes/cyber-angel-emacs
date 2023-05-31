@@ -982,8 +982,8 @@
   :defer t)
 
 (after! (:all outline which-key)
-  (add-to-list 'which-key-replacement-alist
-               `(("C-c @" . nil) . (nil . "outline"))))
+  (which-key-add-keymap-based-replacements outline-minor-mode-map
+    "C-c @" "outline"))
 
 
 ;;; Autocompletion
