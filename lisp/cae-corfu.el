@@ -32,8 +32,7 @@
               (string-match-p "I-search: " (minibuffer-prompt))
               (string-match-p "Query replace " (minibuffer-prompt))
               (string-match-p "Align regexp" (minibuffer-prompt))
-              (memq (current-local-map)
-                    (list read-passwd-map elfeed-search-filter-map))
+              (string-match-p "Filter:" (minibuffer-prompt))
               (memq this-command '(evil-ex
                                    evil-ex-search-forward
                                    evil-ex-search-backward))
