@@ -9,6 +9,8 @@
 ;;; Stuff that should not be disabled.
 
 (load! "lisp/cae-bindings")
+(when (modulep! :editor evil)
+  (load! "lisp/cae-evil"))
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
@@ -477,20 +479,12 @@
 
 ;;; Editor
 
-(unless (modulep! :editor evil)
-  (setq doom-leader-alt-key "C-c"
-        doom-localleader-alt-key "C-c l"
-        doom-leader-key "C-c"
-        doom-localleader-key "C-c l"))
-
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-visible-mark")
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-multiple-cursors")
   (load! "lisp/cae-restore-point")
-  (when (modulep! :editor evil)
-    (load! "lisp/cae-evil"))
 
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project-bookmark"))
