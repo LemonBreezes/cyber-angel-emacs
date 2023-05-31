@@ -51,11 +51,7 @@
            :desc "Disconnect" "q"                   #'dap-disconnect))
 
     (setq dap-debug-restart-keep-session nil
-          dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
-
-    ;; Doom keeps emitting errors when trying to retrieve previous debug
-    ;; sessions. This is a workaround.
-    (doom-store-clear "+debugger"))
+          dap-auto-configure-features '(sessions locals breakpoints expressions tooltip)))
 
   (when (modulep! :lang cc +lsp)
     (add-transient-hook! 'c-mode-common-hook
