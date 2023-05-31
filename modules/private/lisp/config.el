@@ -37,8 +37,8 @@
     "C-c i" "C-c s" "C-c x"))
 (add-hook 'emacs-lisp-mode-hook #'rxt-mode)
 
-(use-package! page-break-lines
-  :defer t :init (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
+;;(use-package! page-break-lines
+;;  :defer t :init (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
 
 ;; This fixes aggressive indent's indentation of plists. :)
 (after! lisp-mode
