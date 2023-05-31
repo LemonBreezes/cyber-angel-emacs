@@ -19,7 +19,7 @@
                 evil-emacs-state-cursor '(hbar . 0))))
 
 ;;;###autoload (autoload '+trashed-hydra/body "private/misc-applications/autoload/trashed" nil t)
-(defhydra +trashed-hydra (:color blue)
+(defhydra +trashed-hydra (:color pink)
   ("<f6>" nil "Exit" :exit t)
   ("D" trashed-do-delete "Delete" :column "Do")
   ("R" trashed-do-restore "Restore" :column "Do")
