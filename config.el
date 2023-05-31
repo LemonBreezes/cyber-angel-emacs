@@ -23,7 +23,7 @@
 (unless (or (modulep! :completion helm)
             (modulep! :completion ivy)
             (modulep! :completion vertico))
-  (ido-mode +1))
+  (load! "lisp/cae-icomplete"))
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
