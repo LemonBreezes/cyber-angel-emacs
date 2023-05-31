@@ -14,7 +14,7 @@
                    (vc-call-backend vc-backend 'root filepath)))
               (when vc-base-path
                 (let* ((name-base
-                        "​" ; U+200B ZERO WIDTH SPACE
+                        "\u200B" ; U+200B ZERO WIDTH SPACE
                         (file-relative-name filepath vc-base-path))
                        (name-unique name-base)
                        (name-id 0))
