@@ -526,8 +526,6 @@
       "M-Z" #'zap-up-to-char
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
-      [remap previous-buffer] #'cae-previous-buffer
-      [remap next-buffer] #'cae-next-buffer
       (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
       ;;I am testing the default bindings which are to use `<prior>' and
