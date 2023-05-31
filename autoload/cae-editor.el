@@ -247,11 +247,13 @@ mark the string and call `edit-indirect-region' with it."
   (goto-char pt)
   (unwind-protect
       (save-mark-and-excursion
-        (if (eq avy-command 'avy-goto-line)
-            (progn (goto-char (line-beginning-position))
-                   (set-mark (point))
-                   (goto-char (line-end-position)))
-          (eri/expand-region 1))
+        (cond ((eq avy-command 'avy-goto-line)
+               (progn (goto-char (line-beginning-position))
+                      (set-mark (point))
+                      (goto-char (line-end-position))))
+              ((eq this-command 'cae-avy-symbol-at-point)
+               (er/mark-symbol))
+              (t (eri/expand-region 1)))
         (funcall action))))
 
 ;;;###autoload
