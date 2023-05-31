@@ -20,7 +20,7 @@
 (defvar cae-project-bookmark-separate-into-branches t
   "If non-nil, separate bookmarks into Git branches.")
 
-(defun cae-project--get-branch (project)
+(defun cae-project--get-branch (&optional project)
   (let ((res (car (split-string
                    (shell-command-to-string
                     (concat "cd " (or project
