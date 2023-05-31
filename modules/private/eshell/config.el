@@ -58,6 +58,8 @@
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
     (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize))
 
+  (map! :map eshell-mode-map
+        "C-d" #'cae-eshell-quit-or-delete-char)
   (after! em-hist
     (setq eshell-history-size (expt 2 16))
     (add-to-list 'eshell-expand-input-functions #'eshell-expand-history-references))
