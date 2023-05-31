@@ -269,6 +269,9 @@
 ;; Enable all disabled commands.
 (setq disabled-command-function nil)
 
+;; Treat all themes as safe.
+(setq custom-safe-themes t)
+
 (delete-selection-mode -1)
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
