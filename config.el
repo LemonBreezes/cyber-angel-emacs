@@ -35,6 +35,7 @@
                                   (< (frame-width (selected-frame)) 100)))))
 (global-visual-line-mode (and (frame-width (selected-frame))
                                   (< (frame-width (selected-frame)) 100)))
+(add-hook! '+doom-dashboard-mode-hook (global-visual-line-mode -1))
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
