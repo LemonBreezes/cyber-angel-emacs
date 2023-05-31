@@ -14,8 +14,8 @@
 (setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
 (when (version< "30.0" emacs-version)
-  (add-to-list 'safe-local-variable-directories doom-user-dir)
-  (add-to-list 'safe-local-variable-directories doom-emacs-dir))
+  (add-to-list 'safe-local-variable-directories doom-user-dir nil #'string=)
+  (add-to-list 'safe-local-variable-directories doom-emacs-dir nil #'string=))
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
