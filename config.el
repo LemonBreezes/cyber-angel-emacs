@@ -581,6 +581,8 @@
         "C-S-i" #'doom/dumb-dedent
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line
         [remap doom/sudo-this-file] #'cae-toggle-sudo
+        (:when (modulep! :tools lookup)
+         [remap +lookup/definition] #'cae-lookup-definition)
         (:when (modulep! :completion vertico)
          [remap apropos] nil)           ;`consult-apropos' is obsolete.
         (:after man
