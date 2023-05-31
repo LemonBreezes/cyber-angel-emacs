@@ -65,13 +65,12 @@
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
   (advice-add #'worf-down
-              :before
-              (cae-defun cae-worf-skip-vimish-fold-forward-a (_)
-                (-some->> (overlays-at (point))
-                  (-filter #'vimish-fold--vimish-overlay-p)
-                  (-map #'overlay-end)
-                  (apply #'max)
-                  (goto-char))))
+                 :filter-args
+                 (cae-defun cae-worf-skip-vimish-fold-forward-a (args)
+                   (when (and (modulep! :editor fold)
+                              (+fold--vimish-fold-p))
+                     (setcar args (1+ (car args))))
+                   args))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
