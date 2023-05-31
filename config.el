@@ -762,3 +762,5 @@
 ;;; Config
 ;; Here I am going over Doom's `config' module and deciding which keybindings I
 ;; like, etc.
+
+;; The `C-RET' and `C-S-RET' keybindings I like but they are overriden in Org mode.
