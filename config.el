@@ -65,21 +65,21 @@
        which-key-compute-remaps t))
 
 (after! eros
- (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
+  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
 
 ;; Do not spam me with warnings
-;; (after! warnings
-;;  (setq warning-minimum-level :emergency
-;;        warning-minimum-log-level :emergency))
+(after! warnings
+  (setq warning-minimum-level :emergency
+        warning-minimum-log-level :emergency))
 
 (after! shr
- ;; `shr' wraps lines in a visually unappealing way.
- (setq shr-width 120
-       shr-max-width 120)
+  ;; `shr' wraps lines in a visually unappealing way.
+  (setq shr-width 120
+        shr-max-width 120)
 
- ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
- ;; not colorize backgrounds at all.
- (advice-add #'shr-colorize-region :around #'ignore))
+  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+  ;; not colorize backgrounds at all.
+  (advice-add #'shr-colorize-region :around #'ignore))
 
 (after! proced
  (setq-default proced-auto-update-flag t))
