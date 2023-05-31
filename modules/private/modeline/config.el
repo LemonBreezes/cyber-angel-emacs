@@ -46,6 +46,12 @@
           whitespace-mode
           highlight-quoted-mode
           diff-hl-mode
+          lsp-completion-mode
+          lsp-diagnostics-mode
+          lsp-mode
+          lsp-modeline-diagnostics-mode
+          lsp-modeline-code-actions-mode
+          lsp-modeline-workspace-status-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -60,7 +66,8 @@
           (ruler-mode)
           (rainbow-mode)
           (visual-line-mode)
-          (display-fill-column-indicator-mode)))
+          (display-fill-column-indicator-mode)
+          ))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
                                   eat-eshell-mode
@@ -90,8 +97,6 @@
 
 (column-number-mode +1)
 
-(add-hook 'c-mode-common-hook #'cae-modeline-minions-c-setup)
-(add-hook 'emacs-lisp-mode-hook #'cae-modeline-minions-elisp-setup)
 (map! "<f9>" #'minions-minor-modes-menu)
 
 (advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
