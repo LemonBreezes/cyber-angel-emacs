@@ -109,11 +109,13 @@
   (nyan-mode +1))
 
 (use-package! parrot
-  :defer t :init
-  (add-transient-hook! 'prog-mode-hook #'tmp/enable-parrot-mode)
+  :when (modulep! +pretty)
+  :defer-incrementally t
+  :init
   :config
   (unwind-protect
-      (progn (advice-add #'parrot-start-animation :override #'ignore))
+      (progn (advice-add #'parrot-start-animation :override #'ignore)
+             (parrot-mode +1))
     (setq! parrot-animate 'hide-static
            parrot-rotate-animate-after-rotation nil
            parrot-num-rotations 10
