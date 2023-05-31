@@ -10,7 +10,7 @@
   (when (bound-and-true-p hydra-curr-map)
     (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn
           cae-cheatsheets-minibuffer--last-workspace (and (featurep 'persp-mode)
-                                                          (persp-name persp-curr))
+                                                          (persp-name (get-current-persp)))
           cae-cheatsheets-minibuffer--last-tab (tab-bar--current-tab))
     (hydra-keyboard-quit)))
 
