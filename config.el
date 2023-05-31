@@ -1214,7 +1214,10 @@
 (use-package! org-ai
   :defer t
   :config
-  (setq org-ai-default-chat-model "gpt-4"))
+  (setq org-ai-default-chat-model "gpt-4")
+  (add-hook 'org-ai-after-chat-insertion-hook
+            (cae-defun cae-org-ai-goto-end-of-buffer ()
+              (goto-char (point-max)))))
 
 ;;; Appendix
 
