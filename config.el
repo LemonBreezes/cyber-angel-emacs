@@ -805,7 +805,7 @@
     ;; Don't distract me while I'm doing multiple cursor calculus.
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
-  (define-key symbol-overlay-map (kbd "'") 'symbol-overlay-jump-avy)
+  (define-key symbol-overlay-map (kbd "'") 'cae-avy-symbol-at-point)
   ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
   ;; overlay in the buffer. This is probably a bug.
   (advice-add #'symbol-overlay-get-list
