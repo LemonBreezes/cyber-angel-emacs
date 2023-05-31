@@ -64,7 +64,8 @@
     "+zone"
 
     ;; Emacs OS
-    "+ednc"))
+    "+ednc"
+    "+proced"))
 
 (dolist (file +misc-applications--lisp-files)
   (load! file))
