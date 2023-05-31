@@ -536,7 +536,7 @@
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 (use-package! auto-sudoedit
-  :defer t
+  :after tramp-sh
   :config
   (auto-sudoedit-mode +1))
 
