@@ -591,7 +591,7 @@
           (interactive)
           ,(append
             '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-              ("C-M-?" nil "Exit" :exit t))
+               ("C-M-?" nil "Exit" :exit t))
             (cl-loop for x in bindings
                      collect (list (car x)
                                    (cadr x)
@@ -618,6 +618,8 @@
                                         ;commands from being shadowed by
                                         ;`smartparens'.
       (global-set-key (kbd (car x)) (cadr x))))
+  ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
+  ;; `sp-up-sexp'.
   (setq sp-navigate-interactive-always-progress-point t))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
