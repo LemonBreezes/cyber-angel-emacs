@@ -55,5 +55,5 @@
   (use-package! circadian
     :config
     (setq circadian-themes '((:sunrise . modus-operandi)
-                             (:sunset  . ef-trio-dark)))
+                             (:sunset  . modus-vivendi)))
     (circadian-setup)))
