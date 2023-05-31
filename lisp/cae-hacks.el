@@ -63,6 +63,7 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
+;; `magit' breaks move line in log buffers.
 (defadvice! cae-hacks-magit-do-not-deincrement-a (args)
   :filter-args '(magit-previous-line magit-next-line)
   (let ((arg (car args))
