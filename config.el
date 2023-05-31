@@ -724,7 +724,8 @@
            (?i . avy-action-ispell)
            (?z . avy-action-zap-to-char)))
         avy-styles-alist '((avy-isearch . pre)
-                           (ace-link-man . pre))
+                           (ace-link-man . pre)
+                           (cae-avy-symbol-at-point . post))
         avy-column-line-overlay t))
 
 (use-package! zop-to-char
