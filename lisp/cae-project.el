@@ -81,6 +81,11 @@
                (bookmark-write-file file))))
            cae-project-bookmark-cache))
 
+(defun cae-project-bookmark--update-cache-a (oldfun &rest args)
+    (apply oldfun args)
+    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)
+    (advice-remove oldfun #'cae-project-bookmark--update-cache-a))
+
 (after! embark
   (defvar-keymap cae-project-bookmark-embark-map
     :doc "Keymap for Embark project bookmarks actions."
@@ -98,19 +103,12 @@
               ;; TODO: Fix edit annotation
               (cae-project--with-bookmark-alist nil
                 (setq this-command ',def)
+                (advice-add ',def :around #'cae-project-bookmark--update-cache-a)
                 (call-interactively ',def)))
            (format "Analogous command to `%s' that uses the current project's bookmark file."
                    (symbol-name def)))
          (define-key cae-project-bookmark-embark-map (vector key) command))))
    embark-bookmark-map)
-
-  (defun cae-project-bookmark-delete (bookmark-name &optional batch)
-    "Delete the bookmark for PROJECT."
-    (interactive
-     (list (bookmark-completing-read "Delete bookmark"
-				     bookmark-current-bookmark)))
-    (cae-project--with-bookmark-alist project
-      (bookmark-delete (doom-project-name project))))
 
   ;; These commands are exceptions to the above rule because they are noninteractive.
   (defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
