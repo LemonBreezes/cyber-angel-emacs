@@ -117,7 +117,7 @@
   (after! em-hist
     (setq eshell-history-size (expt 2 16))
     (add-to-list 'eshell-expand-input-functions
-                 #'eshell-expand-history-references nil #'eq))
+                 #'eshell-expand-history-references))
 
   (cond ((modulep! :completion vertico)
          (map! :map eshell-mode-map
