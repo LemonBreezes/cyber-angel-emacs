@@ -124,7 +124,7 @@
 ;; opening a file in a single window.
 ;;(advice-add #'find-file :before #'cae-dired-find-file-a)
 ;;(advice-add #'find-file-other-window :before #'cae-dired-find-file-other-window-a)
-(add-hook 'find-file-hook #'cae-dired-find-file-fullscreen-h)
+;;(add-hook 'find-file-hook #'cae-dired-find-file-fullscreen-h)
 
 ;;(map! [remap dired-jump] #'cae-dired-jump)
 
