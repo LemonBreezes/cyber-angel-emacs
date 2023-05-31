@@ -219,10 +219,9 @@ mark the string and call `edit-indirect-region' with it."
   ;;(setq which-key-inhibit t)
   ;;(add-transient-hook! 'pre-command-hook
   ;;  (setq which-key-inhibit nil))
-  ;;(run-with-idle-timer
-  ;; which-key-idle-delay nil
-  ;; (lambda ()
-  ;;   (when which-key-inhibit
-  ;;     (which-key-show-keymap 'org-ai-global-mode-prefix-map))))
-  ;;(set-transient-map org-ai-global-mode-prefix-map)
-  )
+  (run-with-idle-timer
+   which-key-idle-delay nil
+   (lambda ()
+     (when which-key-inhibit
+       (which-key-show-keymap 'org-ai-global-mode-prefix-map))))
+  (set-transient-map org-ai-global-mode-prefix-map))
