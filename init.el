@@ -47,7 +47,7 @@ overriding other keymaps."
     (apply oldfun (replace-regexp-in-string "^SPC " "DEL " key-sequence) args))
   (apply oldfun key-sequence args))
 (advice-add #'which-key-add-key-based-replacements :around
-            #'cas-which-key-add-key-based-replacements-a)
+            #'cae-which-key-add-key-based-replacements-a)
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
