@@ -93,3 +93,17 @@
     (font-lock-flush (point-min) (point-max))))
 
 ;;; Custom bookmark functions
+
+(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/"))
+
+;;;###autoload
+(defun cae-bookmark-jump-to-newest-download (_)
+  (let ((newest-file (-max-by #'file-newer-than-file-p
+                              (cl-remove-if
+                               (lambda (file)
+                                 (or (string-prefix-p "." (file-name-nondirectory file))
+                                     (file-directory-p file)))
+                               (cl-union (directory-files "~/Downloads/" t)
+                                         (directory-files "~/" t))))))
+    (dired (file-name-directory newest-file))
+    (dired-goto-file newest-file)))
