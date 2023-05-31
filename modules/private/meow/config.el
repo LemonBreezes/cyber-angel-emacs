@@ -183,7 +183,7 @@
         :map meow-motion-state-keymap
         "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c")))))
   (map! :leader
-        "h" help-map)
+        :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?h . ?h)
