@@ -185,7 +185,11 @@
   (define-key flycheck-mode-map flycheck-keymap-prefix
     flycheck-command-map)
   (map! :leader
-        (:prefix ("C" . "checkers"))))
+        (:prefix ("C" . "checkers")))
+  (after! which-key
+    (setq which-key-replacement-alist
+          (delete '(("\\`C-c !\\'") nil . "checkers")
+                  which-key-replacement-alist))))
 
 (use-package! goggles
   :init
