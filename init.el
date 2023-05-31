@@ -34,7 +34,7 @@
        format
        snippets
        multiple-cursors
-       lispy
+       ;lispy
 
        :emacs
        undo
