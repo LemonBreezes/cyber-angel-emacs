@@ -37,5 +37,4 @@
   :defer t :init (add-hook 'emacs-lisp-mode-hook #'topsy-mode))
 
 (use-package! page-break-lines
-  :defer t :init
-  (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
+  :defer t :init (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
