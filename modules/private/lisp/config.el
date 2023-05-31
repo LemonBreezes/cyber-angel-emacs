@@ -57,11 +57,15 @@
 
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
+  (which-key-add-keymap-based-replacements rxt-mode-map
+    "C-c /" '("pcre2el" . nil)
+    "C-c / e" '("elisp" . nil)
+    "C-c / p" '("pcre" . nil))
   ;;(map! :map rxt-mode-map
-  ;; :prefix "C-c"
-  ;; (:prefix ("/" . "pcre2el")
-  ;;  (:prefix ("e" . "elisp"))
-  ;;  (:prefix ("p" . "pcre"))))
+  ;;      :prefix "C-c"
+  ;;      (:prefix ("/" . "pcre2el")
+  ;;       (:prefix ("e" . "elisp"))
+  ;;       (:prefix ("p" . "pcre"))))
   (map! :map rxt--read-pcre-mode-map
         "C-c C-i" #'rxt--toggle-i-mode
         "C-c C-t" #'rxt--toggle-s-mode
