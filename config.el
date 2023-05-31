@@ -38,7 +38,7 @@
         tab-bar-new-button     nil))
 
 (setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
-      truncate-string-ellipsis "..."    ; The 1-char ellipsis is ugly to me
+      truncate-string-ellipsis "..."    ; The single character ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t)
 
 (when (and (modulep! :ui modeline)
