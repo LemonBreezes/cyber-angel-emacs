@@ -207,3 +207,9 @@ mark the string and call `edit-indirect-region' with it."
   (let ((avy-style 'pre)
         (avy-column-line-overlay nil))
     (apply oldfun args)))
+
+;;;###autoload
+(cae-defun cae-avy-resume-use-last-style-a (oldfun &rest args)
+  (let ((avy-style (or (alist-get last-command avy-styles-alist)
+                       avy-style)))
+    (apply oldfun args)))
