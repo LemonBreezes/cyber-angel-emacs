@@ -41,7 +41,8 @@
   (declare (indent defun))
   `(let ((bookmark-alist (cae-project--bookmark-alist ,project))
          (bookmark-default-file (cae-project--get-bookmark-file ,project))
-         (bookmark-watch-bookmark-file nil))
+         (bookmark-watch-bookmark-file nil)
+         (bookmark-save-flag nil))
      (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file)
      ,@body))
 
