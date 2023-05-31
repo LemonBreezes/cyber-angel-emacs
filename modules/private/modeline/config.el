@@ -134,11 +134,8 @@
                  '(:rot ("defadvice!" "undefadvice!")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("cae-keyboard-remap"
-                         "cae-keyboard-remap-reverse"
                          "cae-keyboard-remap-to-strings"
-                         "cae-keyboard-remap-to-strings-reverse"
-                         "cae-keyboard-strings"
-                         )))
+                         "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
                          "cae-keyboard-kbd")))
