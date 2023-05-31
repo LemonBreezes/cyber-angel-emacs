@@ -30,20 +30,26 @@
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
-(defun cae-dired-switch-buffer--handle-dirvish ()
+(defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (featurep 'dirvish)
              (dirvish-curr)
              (window-dedicated-p))
+    (dirvish-layout-toggle))
+  (call-interactively fn)
+  (when (and (featurep 'dirvish)
+             (dirvish-curr)
+             (one-window-p)
+             (not (window-dedicated-p))
+             (frame-width (selected-frame))
+             (> (frame-width (selected-frame)) 160))
     (dirvish-layout-toggle)))
 
 ;;;###autoload
 (defun cae-dired-previous-buffer ()
   (interactive)
-  (cae-dired-switch-buffer--handle-dirvish)
-  (call-interactively #'previous-buffer))
+  (cae-dired-switch-buffer--handle-dirvish #'previous-buffer))
 
 ;;;###autoload
 (defun cae-dired-next-buffer ()
   (interactive)
-  (cae-dired-switch-buffer--handle-dirvish)
-  (call-interactively #'next-buffer))
+  (cae-dired-switch-buffer--handle-dirvish #'next-buffer))
