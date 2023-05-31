@@ -3,11 +3,9 @@
 ;; For when we compile Doom.
 (defvar personal-keybindings nil)
 
-;; This function is like `doom-shut-up-a' but does not write messages to the
-;; messages buffer.
 (defun cae-hacks-shut-up-a (oldfun &rest args)
   (advice-add #'message :override #'ignore)
-  (unwind-protect (quiet! (apply oldfun args))
+  (unwind-protect (apply oldfun args)
     (advice-remove #'message #'ignore)))
 
 ;; Prevent the minibuffer from "glitching" the workspace switch.
