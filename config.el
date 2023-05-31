@@ -70,8 +70,10 @@
   (setq-default proced-auto-update-flag t))
 
 ;; Allow switching to these buffers with `C-x b'
-(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
+(after! compile
+  (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h))
+(after! debug
+  (add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h))
 
 (when (modulep! :ui emoji)
   (after! emojify
@@ -334,8 +336,10 @@
                    #'+snippets--disable-smartparens-before-expand-h))))
 
 ;; This is how we get curly braces working in C without `smartparens'.
-(add-hook 'eshell-mode-hook #'electric-pair-local-mode)
-(add-hook 'c-mode-common-hook #'electric-pair-local-mode)
+(after! eshell
+  (add-hook 'eshell-mode-hook #'electric-pair-local-mode))
+(after! cc-vars
+  (add-hook 'c-mode-common-hook #'electric-pair-local-mode))
 (map! [remap newline] nil)
 (add-hook 'doom-first-file-hook #'electric-indent-mode)
 
@@ -405,7 +409,8 @@
   (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
-  (add-hook 'eshell-mode-hook #'copilot-mode)
+  (after! eshell
+    (add-hook 'eshell-mode-hook #'copilot-mode))
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
@@ -423,7 +428,8 @@
         "M-p" #'copilot-previous-completion)
 
   (when (modulep! :editor snippets)
-    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
+    (after! yasnippet
+      (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))))
 
 (after! isearch
   (use-package! isearch-dabbrev
