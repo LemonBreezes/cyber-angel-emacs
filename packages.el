@@ -12,7 +12,6 @@
   (disable-packages! flycheck))
 ;; Added because of errors.
 (package! lv)
-(package! vimish-fold :recipe (:host github :repo "matsievskiysv/vimish-fold"))
 
 ;;; UI
 (package! info-colors)
