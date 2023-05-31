@@ -301,9 +301,6 @@
       :prefix "p"
       "RET" #'cae-project-bookmark-set)
 (map! "C-h ;" #'cae-project-bookmark)
-;; Do not query before deleting a frame, since we can undo frame deletions.
-(global-set-key [remap delete-frame] nil)
-(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
@@ -322,7 +319,6 @@
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
 (load! "lisp/cae-repeat")
-(map! "C-x 4 I" #'ibuffer-other-window)
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
@@ -334,11 +330,16 @@
   (when (eq (global-key-binding [(control f4)]) #'tab-close)
     (global-unset-key [(control f4)])))
 
+;; Do not query before deleting a frame, since we can undo frame deletions.
+(global-set-key [remap delete-frame] nil)
+(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'eac-ispell-word-then-abbrev
+      "C-x 4 I" #'ibuffer-other-window
       (:after vertico
        :map vertico-map
        "<prior>" #'vertico-scroll-down
