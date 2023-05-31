@@ -66,11 +66,3 @@
 
 ;; Use the system's `libvterm' if available.
 (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
-
-;; Avy lines with `avy-indent-line-overlay' emmits an error in Dired mode with
-;; my config. This is a workaround.
-(defadvice! cae-hacks-do-not-inent-avy-lines-a (oldfun &rest args)
-  :around '(avy-goto-line-above avy-goto-line-below)
-  (let ((avy-indent-line-overlay (and (not (derived-mode-p 'dired-mode))
-                                      avy-indent-line-overlay)))
-    (apply oldfun args)))
