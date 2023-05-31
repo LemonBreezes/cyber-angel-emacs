@@ -234,6 +234,7 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
+    (setq lsp-headerline-breadcrumb-enable t)
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
