@@ -7,27 +7,60 @@
        (vertico +icons)
 
        :ui
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) (emoji +unicode +github +ascii))
+       doom-dashboard
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos)))
+           (emoji +unicode +github +ascii))
+       hl-todo
+       hydra
        (ligatures +extra +iosevka)
+       (modeline +light)
+       (popup +defaults)
+       ophints
+       (vc-gutter +pretty)
        vi-tilde-fringe
+       workspaces
+
+       :editor
+       multiple-cursors
+       file-templates
+       snippets
+       word-wrap
 
        :emacs
        undo
 
+       :term
+       eshell
+
+       :checkers
+       (spell +everywhere)
+
        :tools
+       editorconfig
+       (eval +overlay)
+       lookup
        magit
        tree-sitter
 
        :lang
        emacs-lisp
+       (org +roam2)
 
        :os
        (:if IS-MAC macos)
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
+       :config
+        (default +bindings)
+
        :private
+       ;; exwm
+       (corfu +tng)
        (dirvish +icons +dirvish)
-       dired)
+       dired
+       lisp
+       unpackaged
+       vc)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
