@@ -32,7 +32,7 @@
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
   ;; zone-pgm-random-life
-  (zone-when-idle (* 5 1))
+  (zone-when-idle (* 5 60))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
   ;; Quit out of the minibuffer if necessary before zoning.q
