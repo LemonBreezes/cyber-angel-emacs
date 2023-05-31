@@ -878,6 +878,9 @@
   :defer t :init
   (map! "C-c '" #'cae-edit-indirect-dwim))
 
+(use-package! string-edit-at-point
+  :defer t)
+
 
 ;;; Autocompletion
 
