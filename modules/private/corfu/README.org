@@ -3,6 +3,8 @@
 #+created:  September 9, 2022
 #+since:    3.0.0 (#7002)
 
+This module was copied from a Doom PR.
+
 * Description :unfold:
 This module provides code completion, powered by [[https://github.com/minad/corfu][corfu]].
 
