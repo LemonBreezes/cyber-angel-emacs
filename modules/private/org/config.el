@@ -48,6 +48,7 @@
   :defer t :init
   (add-hook 'org-mode-hook #'worf-mode)
   :config
+  (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
