@@ -201,8 +201,7 @@
   (setq posframe-inhibit-double-buffering t))
 
 (use-package! topsy
-  :defer t
-  :init
+  :defer t :init
   ;; Enable topsy-mode for all programming modes
   (add-hook 'prog-mode-hook #'topsy-mode)
   :config
