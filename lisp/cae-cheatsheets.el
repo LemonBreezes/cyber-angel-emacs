@@ -78,8 +78,7 @@
 (add-hook 'persp-activated-functions
           #'cae-cheatsheets-workspace-hydra-resume-h)
 
-;; TODO How we handle saving & restoring hydras for tab switching doesn't work.
-;; We need to open a bug report asking for tab-local variables and tab switching
+;; TODO We need to open a bug report asking for tab-local variables and tab switching
 ;; hooks.
 
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
