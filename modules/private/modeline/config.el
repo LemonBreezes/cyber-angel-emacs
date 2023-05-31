@@ -180,6 +180,7 @@
 (use-package! parrot
   :defer t :init
   (after! magit (require 'parrot))
+  (after! org (require 'parrot))
   :config
   (setopt parrot-animate 'hide-static
           parrot-num-rotations 10
