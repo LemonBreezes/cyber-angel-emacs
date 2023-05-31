@@ -22,7 +22,7 @@
   (dap-debug-last))
 
 ;;;###autoload
-(defun cae-gdb-select-frame ()
+(defun cae-debugger-gdb-select-frame ()
   (interactive)
   (if (derived-mode-p 'gdb-frames-mode)
       (call-interactively #'gdb-select-frame)
