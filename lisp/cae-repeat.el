@@ -40,7 +40,8 @@
        ,(cae-keyboard-kbd "2") tab-new
        "0" tab-close
        "1" tab-close-other
-       "2" tab-new))
+       "2" tab-new)
+      (:exit "M-t" +workspace/display))
    t)
 
   ;;Currently part of `other-window' repeat map
