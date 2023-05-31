@@ -82,6 +82,7 @@
                   (and cae-compile--exit-code
                        (not (eq cae-compile--exit-code 0))
                        (not (file-exists-p (concat s "c"))))
+                  (eq this-command 'kill-emacs)
                   (and (file-newer-than-file-p (concat s "c") s)
                        (not arg)))
             (ignore-errors (byte-compile-file s))
