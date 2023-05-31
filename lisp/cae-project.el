@@ -26,9 +26,11 @@
    (concat (doom-project-name project)
            "/"
            (if cae-project-bookmark-separate-into-branches
-               (or (ignore-errors (vc-git--symbolic-ref
-                               (or project
-                                   (doom-project-root))))
+               (or (car (split-string
+                         (shell-command-to-string
+                          (concat "cd " (or project
+                                            (doom-project-root))
+                                  "; git rev-parse --abbrev-ref HEAD")) "\n"))
                    "default")
              "default")
            ".bmk")
