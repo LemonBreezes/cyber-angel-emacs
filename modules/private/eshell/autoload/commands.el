@@ -122,7 +122,7 @@ file to edit."
 
 ;; https://www.n16f.net/blog/clearing-the-eshell-buffer/
 ;;;###autoload
-(defun +eshell-clear ()
+(defun cae-eshell-clear ()
   (interactive)
   (let ((input (eshell-get-old-input)))
     (eshell/clear t)
