@@ -146,7 +146,10 @@
                        '("Go to line: "
                          "Go to char: "
                          "Move to column: ")
-                       :test #'string-match-p)))))
+                       :test #'string-match-p))
+       ;; Not a fullproof way to work with Ispell but it should be good enough.
+       (and (featurep 'ispell)
+            (get-buffer-window ispell-choices-buffer)))))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
   (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
