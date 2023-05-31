@@ -32,7 +32,7 @@
   (let ((bookmark-default-file file)
         (bookmark-alist nil))
     (when (file-exists-p file)
-      (bookmark-load bookmark-default-file)
+      (bookmark-load bookmark-default-file nil t)
       bookmark-alist)))
 
 (defun cae-project--bookmark-alist (&optional project)
