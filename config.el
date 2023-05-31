@@ -280,7 +280,7 @@
         "o" #'ace-link-w3m))
 
 (when (and (eq system-type 'gnu/linux)
-           (string-suffix-p "-WSL2" operating-system-release))
+           (getenv "WSL_DISTRO_NAME"))
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")))
 
@@ -320,7 +320,7 @@
       yank-pop-change-selection t)
 
 (after! xclip
-  (cond ((string-suffix-p "-WSL2" operating-system-release)
+  (cond ((getenv "WSL_DISTRO_NAME")
          (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
            (setenv "PATH"
                    (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
