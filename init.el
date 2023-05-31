@@ -25,7 +25,7 @@
        multiple-cursors
        file-templates
        snippets
-       paredit
+       lispy
 
        :emacs
        undo
