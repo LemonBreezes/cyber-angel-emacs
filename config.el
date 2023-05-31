@@ -1211,11 +1211,6 @@
 
 (map! :leader :prefix ("g" . "gpt"))
 
-(use-package! gptel
-  :defer t :init
-  (map! :leader
-        :prefix "g" :desc "GPT dwim" "d" #'cae-gptel))
-
 (use-package! org-ai
   :defer t
   :config
