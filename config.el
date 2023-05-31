@@ -1213,7 +1213,7 @@
 (use-package! gptel
   :defer t :init
   (map! :leader
-        :prefix "g" :desc "GPT-3" "g" #'cae-gptel))
+        :prefix "s" :desc "GPT dwim" "d" #'cae-gptel))
 
 ;;; Appendix
 
