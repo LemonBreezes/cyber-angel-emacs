@@ -23,8 +23,3 @@
               (git-auto-commit-mode 1)
               (setq-local gac-automatically-push-p t)))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
-
-
-;; Local Variables:
-;; no-byte-compile: t
-;; End:

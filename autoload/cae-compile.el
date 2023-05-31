@@ -82,7 +82,7 @@
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
                   (string= (file-name-nondirectory s) "doctor.el")
-                  (string= (file-name-nondirectory s) ".dir-locals.el")
+                  ;; (string= (file-name-nondirectory s) ".dir-locals.el")
                   (string-prefix-p "flycheck_" (file-name-nondirectory s))
                   (cl-member s cae-compile-files-to-ignore :test #'string=)
                   (and cae-compile--exit-code
