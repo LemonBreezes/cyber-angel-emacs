@@ -5,7 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-eyecandy-prefix
-        :desc "Run a Zone screensaver" "z" #'zone-choose)
+         "z" #'zone-choose)
   :config
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
