@@ -91,8 +91,8 @@
          `(lambda ()
             (interactive)
             (cae-project--with-bookmark-alist nil
-              (backtrace)
-             (call-interactively #',def)))
+              (call-interactively #',def)
+              (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
                  (symbol-name def)))
        (define-key cae-project-bookmark-embark-map (vector key) command))))
