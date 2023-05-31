@@ -63,8 +63,9 @@
        (dirvish +icons +dirvish)
        dired
        lisp
-       ;;unpackaged
-       vc)
+       unpackaged
+       ;;vc
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
