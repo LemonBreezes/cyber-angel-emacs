@@ -6,12 +6,12 @@
 (autoload 'View-scroll-half-page-forward "view")
 (autoload 'View-scroll-half-page-backward "view")
 
-(global-set-key (kbd "C-v") 'View-scroll-half-page-forward)
-(global-set-key (kbd "M-v") 'View-scroll-half-page-backward)
-(global-set-key (kbd "C-M-v")
-  'my-View-scroll-half-page-forward-other-window)
-(global-set-key (kbd "C-M-S-v")
-  'my-View-scroll-half-page-backward-other-window)
+;;(global-set-key (kbd "C-v") 'View-scroll-half-page-forward)
+;;(global-set-key (kbd "M-v") 'View-scroll-half-page-backward)
+;;(global-set-key (kbd "C-M-v")
+;;  'my-View-scroll-half-page-forward-other-window)
+;;(global-set-key (kbd "C-M-S-v")
+;;  'my-View-scroll-half-page-backward-other-window)
 
 (defun my-View-scroll-half-page-forward-other-window ()
   (interactive)
