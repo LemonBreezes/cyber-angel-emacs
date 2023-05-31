@@ -133,7 +133,7 @@
         cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
                                  gcmh-mode)
         garbage-collection-messages t
-        gc-cons-threshold cae-hacks-big-gc-threshold
+        gc-cons-threshold cae-hacks-gc-threshold
         gc-cons-percentage cae-hacks-gc-percentage)
   (advice-add #'garbage-collect :override #'ignore)
   (gcmh-mode -1))
