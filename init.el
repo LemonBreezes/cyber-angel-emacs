@@ -86,7 +86,7 @@
        misc-applications
        ;; helm
        modeline
-       (meow +leader)
+       meow
        unpackaged
        vc)
 
