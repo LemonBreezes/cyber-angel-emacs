@@ -563,6 +563,7 @@
   :init
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
+        "M-j" #'avy-goto-word-1
         :map isearch-mode-map
         "M-j" #'avy-isearch)
   (when (modulep! :completion vertico)
