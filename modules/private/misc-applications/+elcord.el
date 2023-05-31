@@ -27,7 +27,8 @@
            :connection-type 'pipe
            :sentinel 'elcord--connection-sentinel
            :filter 'elcord--connection-filter
-           :noquery t)
+           :noquery t
+           :buffer "*elcord-sock*")
         (funcall oldfun))))
   (defadvice! +elcord--buffer-boring-p-a (buffer-name)
     :before-until #'elcord--buffer-boring-p
