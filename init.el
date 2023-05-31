@@ -35,7 +35,8 @@ overriding other keymaps."
     :keymap general-override-mode-map)
   (add-hook 'cae-general-override-mode-hook
             (cae-defun cae-general--unbind-keys ()
-              (define-key general-override-mode-map "\C-c'" nil)))
+              ;; Do not override `org-edit-special'.
+              (define-key general-override-mode-map (kbd "C-c '") nil)))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 (doom! :completion
