@@ -16,7 +16,6 @@
 
 ;; These are the packages that are currently not being lazy-loaded:
 ;; - `ednc'
-;; - `speedrect'
 
 ;;; UI
 
