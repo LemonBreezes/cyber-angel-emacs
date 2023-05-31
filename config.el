@@ -9,12 +9,9 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
+;; Don't enable these options. They will break your config.
 (defvar cae-config-compilation-on-kill-enabled-p nil
   "Whether on-kill native compilation is enabled.")
-
-;; I disabled this because the garbage collector eventually hammers me if I try
-;; to byte compile my entire config. It's faster to compile on-kill since that
-;; way I can disable garbage collection.
 (defvar cae-config-incremental-compilation-enabled-p nil
   "Whether incremental native compilation is enabled.")
 
