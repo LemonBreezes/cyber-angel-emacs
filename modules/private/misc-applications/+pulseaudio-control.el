@@ -20,5 +20,8 @@
                 (when which-key-inhibit
                   (which-key-show-keymap 'pulseaudio-control-map t))))))
   :config
+  (after! which-key
+    (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist))
   (setq pulseaudio-control-use-default-sink t)
   (pulseaudio-control-default-keybindings))
