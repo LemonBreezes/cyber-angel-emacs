@@ -112,6 +112,7 @@
         (gcmh-high-cons-threshold most-positive-fixnum))
     (apply oldfun args)))
 
+;; Remove this as soon as Doom fixes the error upstream.
 (defadvice! cae-hacks-monkey-patch-consult-for-doom (oldfun &rest args)
   :around #'consult--ripgrep-make-builder
   (if (null args)
