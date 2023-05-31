@@ -37,7 +37,7 @@
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-;; A minimal mouse-free `tab-bar' UI.
+;; I never use the mouse buttons on the tab bar so I prefer to not show them.
 (defadvice! cae-tab-bar-load-buttons-a ()
   :override #'tab-bar--load-buttons
   (setq tab-bar-close-button   nil
