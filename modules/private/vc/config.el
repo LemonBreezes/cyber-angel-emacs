@@ -55,6 +55,7 @@
                                :handler (cl-letf (((symbol-function #'git-link--new)
                                                    (symbol-function #'identity)))
                                           (call-interactively #'git-link-homepage))
+                               :cache t
                                :face font-lock-string-face
                                :bind "g")))
         (cl-pushnew info-handler (nthcdr (1+ pos) file-info-handlers)
