@@ -2,15 +2,17 @@
 
 ;;; Pause and resume cheatsheets with the minibuffer
 
-(defun cae-cheatsheets-hydra-pause-h (&rest _)
+(defvar cae-cheatsheets-minibuffer--last-hydra nil)
+
+(defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when hydra-curr-map
-    (if (modulep! :ui workspaces)
-        (ring-insert hydra-pause-ring hydra-curr-body-fn))
+    (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
-(defun cae-cheatsheets-hydra-resume-h (&rest _)
-  (unless (zerop (ring-length hydra-pause-ring))
-    (run-with-timer 0.001 nil hydra-pause-ring)))
+(defun cae-cheatsheets-minibuffer-hydra-resume-h (&rest _)
+  (when cae-cheatsheets-minibuffer--last-hydra
+    (run-with-timer 0.001 nil hydra-pause-ring)
+    (setq cae-cheatsheets-minibuffer--last-hydra nil)))
 
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-hydra-pause-h)
@@ -50,6 +52,16 @@
 ;; don't use Hercules that much.
 
 ;;; Quit before switching tabs
+
+(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
+(defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
+  (when hydra-curr-map
+    (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist)
+          hydra-curr-body-fn)))
+(defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
+  (when-let ((hydra (alist-get (tab-bar--current-tab)
+                               cae-cheatsheets-tab-bar-hydra-alist)))
+    (run-with-timer 0.001 nil hydra)))
 
 (defun cae-cheatsheets-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
