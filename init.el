@@ -73,7 +73,6 @@
 
        :app
        (rss +org)
-       irc
 
        :private
        ;; exwm
