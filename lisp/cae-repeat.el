@@ -21,6 +21,10 @@
     ("u" winner-undo
      "r" winner-redo))
 
+  (define-repeat-map cae-buffer-navigation-repeat-map
+    ("<left>" cae-previous-buffer
+     "<right>" cae-next-buffer))
+
   (define-repeat-map set-mark-command
     ("SPC" set-mark-command))
 
