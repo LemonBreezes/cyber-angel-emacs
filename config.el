@@ -542,7 +542,6 @@
           ,(cae-keyboard-kbd "8") #'winum-select-window-8
           ,(cae-keyboard-kbd "9") #'winum-select-window-9)))
 
-
 (use-package! zop-to-char
   :defer t
   :init
