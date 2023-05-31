@@ -161,7 +161,7 @@
   ;;(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
   (use-package! info-colors
-    :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+    :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
   (use-package! authinfo-color-mode
     :defer t :init
