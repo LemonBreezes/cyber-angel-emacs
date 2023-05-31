@@ -10,9 +10,6 @@
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 
-;; Packages that are having bugs being byte-compiled in Emacs30.
-(package! yasnippet :recipe (:build (:not compile)))
-
 ;;; UI
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
@@ -64,6 +61,7 @@
 (package! sentex :recipe (:repo "https://codeberg.org/martianh/sentex.git"))
 (package! edit-indirect)
 (package! string-edit-at-point)
+(package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
