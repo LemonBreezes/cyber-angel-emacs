@@ -246,6 +246,9 @@
 
 ;;; Editor
 
+;; Ensure local elisp packages are up-to-date.
+(add-hook 'after-save-hook #'cae-compile-rebuild-package)
+
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-repeat")
@@ -337,6 +340,7 @@
 
 
 ;;; Autocompletion
+
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
