@@ -227,16 +227,21 @@
   (cl-pushnew
    '(make marker-files
      ("makefile")
-     project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+     project-file "Makefile" compilation-dir nil configure-command nil
+     compile-command "make" test-command "make test"
+     install-command "make install" package-command nil run-command nil)
    projectile-project-types :test #'equal)
   (cl-pushnew
    '(gnumake marker-files
      ("GNUmakefile")
-     project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+     project-file "GNUMakefile" compilation-dir nil configure-command nil
+     compile-command "make" test-command "make test" install-command
+     "make install" package-command nil run-command nil)
    projectile-project-types :test #'equal)
   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
+  (add-to-list 'projectile-project-root-files-top-down-recurring
+               "compile_commands.json")
   ;; Set up compilation.
   (setq projectile-per-project-compilation-buffer t
         compilation-read-command nil)
@@ -304,7 +309,9 @@
 (when (modulep! :tools lsp +eglot)
   (after! eglot
     (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-          '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
+          '("clangd" "--background-index" "--clang-tidy"
+            "--completion-style=detailed" "--header-insertion=never"
+            "--header-insertion-decorators=0"))))
 
 (use-package! topsy
   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
@@ -370,7 +377,8 @@
                #'+default--newline-indent-and-continue-comments-a)
 
 ;; General keybindings.
-(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
+(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the
+                                        ;kill-ring.
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
