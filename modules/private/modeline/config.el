@@ -1,7 +1,8 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(add-hook! 'doom-switch-window-hook
+(add-hook! 'doom-init-ui-hook
   (cae-defun cae-modeline--set-project-name ()
+    (require 'breadcrumb)
     (setq-default mode-line-format
                   (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
                                                 'face '(:inherit variable-pitch
