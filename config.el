@@ -314,7 +314,13 @@
 
   (use-package! perfect-margin
     :defer t :init
-    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode))
+    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
+    (defun cae-perfect-margin-ignore-posframe-p ()
+      "Check if the current buffer's display type is posframe."
+      (and (window-live-p (selected-window))
+           (eq (plist-get (frame-parameters) 'posframe) t)))
+    :config
+    (add-to-list 'perfect-margin-ignore-filters 'my-perfect-margin-ignore-posframe-p))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
