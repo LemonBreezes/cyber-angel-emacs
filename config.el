@@ -220,7 +220,8 @@
     ;; config.
     (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
       (setenv "PATH"
-              (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))))
+              (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
+      (setq exec-path (cons "/mnt/c/Windows/System32" exec-path))))
   (setq xclip-method 'powershell))
 
 (setq bookmark-bmenu-file-column 50
