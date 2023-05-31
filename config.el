@@ -282,6 +282,10 @@
     :config
     (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide)))
 
+  (use-package! outline-minor-faces
+    :defer t :init
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
 
 ;;; Tools
 
@@ -915,10 +919,6 @@
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
         "C-c @" "outline")))
-
-  (use-package! outline-minor-faces
-    :defer t :init
-    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
   (use-package! expand-region-improved
     :defer t :init
