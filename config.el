@@ -533,9 +533,9 @@
     "Ask to diff, save or kill buffer"
     (if (and (buffer-file-name)
              (buffer-modified-p))
-        (progn (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+        (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                         if (or (eq ch ?k) (eq ch ?K))
-                        return t
+                        return (or (not-modified) t)
                         if (or (eq ch ?d) (eq ch ?D))
                         do (setq cae-diff-window (diff-buffer-with-file))
                         if (or (eq ch ?s) (eq ch ?S))
