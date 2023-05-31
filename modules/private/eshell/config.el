@@ -20,10 +20,11 @@
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
   :config
-  ;;(map! :map (eat-eshell-char-mode-map
-  ;;            eat-eshell-semi-char-mode-map)
-  ;;      "<tab>" #'eat-self-input
-  ;;      "<return>" #'eat-self-input)
+  ;; For some reason Eat doesn't bind these. I just raised an issue about it.
+  (map! :map (eat-eshell-char-mode-map
+              eat-eshell-semi-char-mode-map)
+        "<tab>" #'eat-self-input
+        "<return>" #'eat-self-input)
 
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
