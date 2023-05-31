@@ -147,7 +147,7 @@
                     (cae-keyboard-remap-char char)))
                   (forward-char 1)      ; discard _
                   (cond ((eq (char-after (1+ (point))) ?:)
-                         (forward-char 1)
+                         (forward-char 1) ; discard :
                          (princ (string ?_ ?:)))
                         ((or (and (<= (char-after (1+ (point))) ?z)
                                   (>= (char-after (1+ (point))) ?a))
