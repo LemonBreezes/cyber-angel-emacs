@@ -145,7 +145,8 @@
         cae-hacks--gc-messages nil
         cae-hacks--gcmh-mode nil
         gc-cons-threshold gcmh-low-cons-threshold
-        gc-cons-percentage cae-hacks-gc-percentage))
+        gc-cons-percentage cae-hacks-gc-percentage)
+  (remove-hook 'post-gc-hook #'cae-hacks-enable-gc))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
