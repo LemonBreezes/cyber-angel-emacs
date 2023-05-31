@@ -122,9 +122,10 @@
 
 ;; For backwards compatibility.
 (defun toggle-read-only (arg)
-  (if (or (not arg) (<= arg 0))
-      (read-only-mode -1)
-    (read-only-mode 1)))
+  (read-only-mode
+   (cond ((not arg) (not buffer-read-only))
+         ((and (integerp arg) (<= arg 0)) nil)
+         (t t))))
 
 ;;; GC hacks
 
