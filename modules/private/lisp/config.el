@@ -138,15 +138,16 @@
         (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)))
     (map! :map lispy-mode-map-lispy
           "M-m" nil                  ; formerly `lispy-mark-symbol'. I prefer to
-                                     ; keep the default `M-m' and `C-a'
-                                     ; keybindings.
-          "C-a" nil                  ; formerly `lispy-move-beginning-of-line'.
-          "C-e" nil                  ; formerly `lispy-move-end-of-line'.
-                                     ; Doom's default `C-e' is better.
-          "M-j" nil                  ; formerly `lisp-split'.
+                                        ; keep the default `M-m' and `C-a'
+                                        ; keybindings.
+          "C-a" nil                   ; formerly `lispy-move-beginning-of-line'.
+          "C-e" nil                   ; formerly `lispy-move-end-of-line'.
+                                        ; Doom's default `C-e' is better.
+          "M-j" nil                     ; formerly `lisp-split'.
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
-          "M-S" #'lispy-split)
+          "M-S" #'lispy-split
+          "M-C" #'lispy-convolute-sexp)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
