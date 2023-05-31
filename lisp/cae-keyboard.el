@@ -196,7 +196,8 @@
                                                 (lookup-key
                                                  cae-keyboard--lispy-mode-map-backup
                                                  (cae-keyboard-kbd-reverse ",")))))
-                                     bindings)))
+                                     bindings))
+                             (car binding))
                           ,(cadr binding)
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
