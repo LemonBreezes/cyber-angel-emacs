@@ -210,6 +210,10 @@
           "M-j" #'corfu-quick-jump
           "M-i" #'corfu-quick-insert)))
 
+(after! diff-mode
+  (map! :map diff-mode-map
+        "q" #'kill-this-buffer))
+
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
   (unless (boundp 'cae-fix-popup-other-keybinding-idle-timer)
