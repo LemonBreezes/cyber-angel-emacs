@@ -47,7 +47,8 @@
                 which-key-replacement-alist))
   (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
   (define-key doom-leader-map "\C-f" nil)
-  (map! (:prefix ("F" . "fold")
+  (map! :leader
+        (:prefix ("F" . "fold")
          "k"     #'vimish-fold-delete
          "K" #'vimish-fold-delete-all
          "t"     #'+fold/toggle
