@@ -403,7 +403,7 @@
 
 (use-package! detached
   :init
-  (detached-init)
+  (add-hook 'doom-first-input-hook #'detached-init)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
          ([remap async-shell-command] . detached-shell-command)
          ;; Replace `compile' with `detached-compile'
