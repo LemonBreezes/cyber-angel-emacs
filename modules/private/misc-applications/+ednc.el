@@ -1,6 +1,8 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
+  :when (not (and (string-match-p "-android" operating-system-release)
+                  (executable-find "termux-clipboard-get")))
   :config
   (ednc-mode +1)
   (defun stack-notifications (&optional hide)
