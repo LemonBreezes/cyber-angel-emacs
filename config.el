@@ -725,7 +725,9 @@
     (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*clangd.*\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*Native-compile-Log\\*$")
-    (add-to-list 'ibuffer-never-show-predicates "^\\*Async-native-compile-log\\*$"))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Async-native-compile-log\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*lsp-log\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Shell Command Output\\*$"))
 
   (use-package! aggressive-indent
     :disabled t
