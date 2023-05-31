@@ -30,17 +30,13 @@
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
 
-  (add-hook! '(eat--eshell-char-mode-hook
-               eat--eshell-semi-char-mode-hook
-               eat--eshell-process-running-mode-hook)
+  (add-hook! 'eat--eshell-process-running-mode-hook
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
           (when (boundp mode)
             (funcall mode
-                     (if (or eat--eshell-char-mode-hook
-                             eat--eshell-semi-char-mode-hook
-                             eat--eshell-process-running-mode-hook)
+                     (if eat--eshell-process-running-mode-hook
                          -1 1)))))))
 
   ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
