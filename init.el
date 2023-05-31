@@ -70,7 +70,7 @@
        (corfu +tng)
        ;; debugger
        (dirvish +icons +dirvish)
-       eshell
+       ;; eshell
        dired
        lisp
        misc-applications
