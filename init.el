@@ -45,7 +45,7 @@
        (eval +overlay)
        lookup
        magit
-       (lsp +eglot)
+       lsp
        tree-sitter
 
        :lang
