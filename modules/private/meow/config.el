@@ -207,4 +207,8 @@
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp
                                   eval-expression pp-eval-expression))
 
-  (map! :map meow-keymap [remap describe-key] #'helpful-key))
+  (map! :map meow-keymap [remap describe-key] #'helpful-key)
+  (when (modulep! :term eshell)
+    (remove-hook 'eshell-mode-hook #'hide-mode-line-mode))
+  (when (modulep! :term vterm)
+    (remove-hook 'vterm-mode-hook #'hide-mode-line-mode)))
