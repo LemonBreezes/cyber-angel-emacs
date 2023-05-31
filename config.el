@@ -175,32 +175,32 @@
          :quit nil :ttl t)
         ("^\\*org-roam\\*" :size 60 :side 'left :select nil
          :quit nil)
-        ("^\\*info.*" :size #'cae-popup-resize-help-buffer
+        ("^\\*info.*" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
-        ("^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
+        ("^\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
-        ("^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
+        ("^\\*tldr\\*" :size cae-popup-resize-help-buffer
          :side right :select t :quit t)
         ("^\\*\\([Hh]elp\\|Apropos\\)"
-         :size #'cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
+         :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
          :slot 2 :vslot -8)
-        ("^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
+        ("^ \\*Metahelp.*" :size cae-popup-resize-help-buffer
          :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
         ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
          :select t :quit t :ttl nil :vslot 99)
-        ("^\\*eww.*" :size #'cae-popup-resize-help-buffer :side right
+        ("^\\*eww.*" :size cae-popup-resize-help-buffer :side right
          :select t :ttl nil)
-        ("^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
+        ("^\\*w3m\\*$" :size cae-popup-resize-help-buffer
          :side right :select t :ttl nil)
         ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
          :modeline nil :quit nil :ttl nil)
-        ("^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
+        ("^SpeedRect Command Key Help$" :size cae-popup-resize-help-buffer
          :side right :select nil :quit t :ttl 0)
-        ("^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
+        ("^\\*ednc-log\\*$" :size cae-popup-resize-help-buffer
          :side right :select nil :quit t :ttl nil)
-        ("^\\*tldr\\*$" :size #'cae-popup-resize-help-buffer
+        ("^\\*tldr\\*$" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0)
-        ("^\\*Shortdoc .*" :size #'cae-popup-resize-help-buffer
+        ("^\\*Shortdoc .*" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0)
         ("^\\*devdocs\\*$" :width 122
          :side right :ttl t :select t :quit t :ttl 0)
