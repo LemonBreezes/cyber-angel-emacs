@@ -78,9 +78,6 @@
 (add-hook 'persp-activated-functions
           #'cae-cheatsheets-workspace-hydra-resume-h)
 
-;; TODO We need to open a bug report asking for tab-local variables and tab
-;; switching hooks.
-
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
