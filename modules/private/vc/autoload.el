@@ -26,3 +26,10 @@ Meant to be used like:
   ("C-c C-c" forge-post-submit "Submit")
   ("C-c C-e" forge-post-dispatch  "Dispatch")
   ("C-c C-k" forge-post-cancel "Cancel"))
+
+;;;###autoload
+(defhydra cae-magit-forge-topic-hydra (:color blue)
+  ("<f6>" nil "Exit" :exit t)
+  ("C-c C-n" forge-create-post "Create post")
+  ("C-c C-e" magit-edit-thing  "Edit")
+  ("C-c C-w" magit-browse-thing "Open in browser"))
