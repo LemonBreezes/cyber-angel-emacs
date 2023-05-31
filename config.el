@@ -137,6 +137,8 @@
   (after! vertico-posframe
     (setq vertico-posframe-parameters
           '((inhibit-double-buffering . t)))))
+(after! posframe
+  (setq posframe-inhibit-double-buffering t))
 
 
 ;;; Tools
