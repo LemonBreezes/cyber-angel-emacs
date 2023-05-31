@@ -293,7 +293,6 @@
   [remap shell-command] 'with-editor-shell-command)
 (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
   (dolist (fn '(with-editor-export-editor
-                with-editor-export-hg-editor
                 with-editor-export-git-editor))
     (add-hook hook fn)))
 (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
