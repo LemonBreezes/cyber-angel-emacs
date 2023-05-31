@@ -129,9 +129,9 @@ using the tab-width variable."
                   (spaces (replace-regexp-in-string "\t"
                                                     (make-string tab-width ?\ )
                                                     indent))
-                  (actual-indent (substring spaces 0
-                                            (min min-indentation
-                                                 (length spaces))))
+                  (actual-indent (substring spaces
+                                            0 (min min-indentation
+                                                   (length spaces))))
                   (stripped-indent (replace-regexp-in-string
                                     (regexp-quote actual-indent) "" line)))
              stripped-indent)
