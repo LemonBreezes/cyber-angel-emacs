@@ -569,8 +569,9 @@
   (advice-add #'comint-delchar-or-maybe-eof
               :after
               (cae-defun cae-comint-cleanup-buffer-a (arg)
-                (when (get-buffer-process (current-buffer))
-                  (kill-buffer (current-buffer)))))
+                (let ((proc (get-buffer-process (current-buffer))))
+                  (when (and (eobp) proc (= (point) (marker-position (process-mark proc))))
+                    (kill-buffer (current-buffer))))))
 
   ;; Allow remembering risky variables.
   (advice-add 'risky-local-variable-p :override #'ignore)
