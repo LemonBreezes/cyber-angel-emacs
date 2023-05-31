@@ -83,7 +83,6 @@
 
        :config
        ;; (default +bindings +smartparens)
-       default
 
        :email
        ;; (mu4e +org)
