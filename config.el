@@ -429,6 +429,9 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
+(use-package! harpoon
+  :defer t :init)
+
 
 ;;; Autocompletion
 
