@@ -609,7 +609,14 @@
            (or (and lsp-enable-on-type-formatting
                     (lsp--capability "documentOnTypeFormattingProvider"))
                (and lsp-enable-indentation
-                    (lsp--capability "documentRangeFormattingProvider")))))))
+                    (lsp--capability "documentRangeFormattingProvider")))))
+    (dolist (command '(lsp-format-buffer
+                       lsp-format-region
+                       lsp-organize-imports
+                       lsp-organize-imports-remove-unused
+                       prog-fill-reindent-defun
+                       indent-pp-sexp))
+      (add-to-list 'aggressive-indent-protected-commands command))))
 
 (use-package! hungry-delete
   :defer t :init
