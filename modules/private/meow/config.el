@@ -189,9 +189,9 @@
   ;;      "DEL" #'meow-keypad)
   (when (modulep! +leader)
     (map! :map meow-normal-state-keymap
-          doom-leader-key doom-leader-map
+          doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
           :map meow-motion-state-keymap
-          doom-leader-key doom-leader-map
+          doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
           :map meow-beacon-state-keymap
           doom-leader-key nil))
   (map! :leader
