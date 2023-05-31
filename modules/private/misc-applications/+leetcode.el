@@ -14,6 +14,10 @@
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
-            (lambda() (flycheck-mode -1)))
+            (lambda()
+              (when (bound-and-true-p flycheck-mode)
+                (flycheck-mode -1))
+              (when (bound-and-true-p copilot-mode)
+                (copilot-mode -1))))
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
