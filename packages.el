@@ -104,3 +104,6 @@
 
 ;;; AI
 (package! org-ai)
+
+;;; XML
+(package! xml-format)
