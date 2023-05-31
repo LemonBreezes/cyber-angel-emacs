@@ -153,9 +153,10 @@
                 magit-find-git-config-file
                 magit-find-git-config-file-other-frame
                 magit-find-git-config-file-other-window
-
+                find-file-literally
+                find-alternate-file
                 ido-find-file
-                ))
+                consult-locate))
     (define-key dirvish-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper
                                                      fn)))
 
