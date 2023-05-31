@@ -163,16 +163,12 @@ This is the format used on Reddit for code blocks."
     (forward-sentence-default-function arg)))
 
 ;;;###autoload
-(defun cae-edit-indirect-dwim (beg end &optional display-buffer)
+(defun cae-edit-indirect-dwim ()
   "DWIM version of edit-indirect-region.
 When region is selected, behave like `edit-indirect-region'
 but when no region is selected and the cursor is in a 'string' syntax
 mark the string and call `edit-indirect-region' with it."
-  (interactive
-   (if (or (use-region-p) (not transient-mark-mode))
-       (prog1 (list (region-beginning) (region-end) t)
-         (deactivate-mark))
-     (if (nth 3 (syntax-ppss))
-         (string-edit-at-point)
-       (user-error "No region marked and not inside a string."))))
-  (edit-indirect-region beg end display-buffer))
+  (interactive)
+  (if (region-active-p)
+      (call-interactively #'edit-indirect-region)
+    (call-interactively #'string-edit-at-point)))
