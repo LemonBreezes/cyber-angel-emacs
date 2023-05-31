@@ -724,11 +724,6 @@
     (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
-  (use-package! diff-mode
-    :defer t :config
-    (map! :map diff-mode-map
-          "q" #'kill-this-buffer))
-
   (use-package! aggressive-indent
     :disabled t
     :defer t :init
