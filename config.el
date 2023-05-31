@@ -30,7 +30,13 @@
 (when (modulep! :editor snippets)
   (define-key doom-leader-map "&" nil)
   (map! :leader
-        :desc "snippets" "y" doom-leader-snippets-map)
+        (:prefix-map ("y" . "snippets")
+       :desc "New snippet"           "n" #'yas-new-snippet
+       :desc "Insert snippet"        "i" #'yas-insert-snippet
+       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+       :desc "Reload snippets"       "r" #'yas-reload-all
+       :desc "Create Temp Template"  "c" #'aya-create
+       :desc "Use Temp Template"     "e" #'aya-expand))
   (after! which-key
     (setq which-key-replacement-alist
           (cl-delete-if (lambda (x)
