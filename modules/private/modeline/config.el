@@ -1,6 +1,6 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(add-hook! 'after-change-major-mode-hook
+(add-hook! 'doom-init-ui-hook
   (setq-default mode-line-format
                 (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
                                               'face '(:inherit variable-pitch
