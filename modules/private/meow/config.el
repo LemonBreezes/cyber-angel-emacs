@@ -208,11 +208,5 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
-  ;; Do not hide the modeline indicator as it is all we have in the terminal.
-  (when (modulep! :term eshell)
-    (remove-hook 'eshell-mode-hook #'hide-mode-line-mode))
-  (when (modulep! :term vterm)
-    (remove-hook 'vterm-mode-hook #'hide-mode-line-mode))
-  (when (modulep! :ui popup)
-    (setq +popup-window-parameters
-          (delq 'modeline +popup-window-parameters))))
+  (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
+  )
