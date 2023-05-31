@@ -50,7 +50,7 @@
        direnv
        editorconfig
        (eval +overlay)
-       (lookup +dictionary +docsets +offline)
+       ;; (lookup +dictionary +docsets +offline)
        (magit +forge)
        (lsp +peek)
        tree-sitter
