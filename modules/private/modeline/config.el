@@ -1,10 +1,20 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
+(defun cae-modeline-buffer-name ()
+  (if (doom-unreal-buffer-p (current-buffer))
+      (buffer-name)
+    (propertize (breadcrumb-project-crumbs)
+                'face '(:inherit variable-pitch
+                        :weight bold))))
+(native-compile #'cae-modeline-buffer-name)
+
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
-                (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
-                                              'face '(:inherit variable-pitch
-                                                      :weight bold)))
+                (cl-subst '(:eval (if (doom-unreal-buffer-p (current-buffer))
+                                      (buffer-name)
+                                    (propertize (breadcrumb-project-crumbs)
+                                                'face '(:inherit variable-pitch
+                                                        :weight bold))))
                           'mode-line-buffer-identification
                           (default-value 'mode-line-format))))
 
