@@ -710,7 +710,7 @@
     (setq ibuffer-always-show-last-buffer t
           ibuffer-formats
           '((mark modified read-only locked " "
-             (name 23 23 :left :elide) ;Give more space to the name.
+             (name 23 23 :left :elide)  ;Give more space to the name.
              " "
              (size 9 -1 :right)
              " "
@@ -726,10 +726,10 @@
     (add-to-list 'ibuffer-never-show-predicates "^\\*clangd.*\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*Native-compile-Log\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*Async-native-compile-log\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Shell Command Output\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*lsp-log\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*envrc\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*\\*$")
-    (add-to-list 'ibuffer-never-show-predicates "^\\*Shell Command Output\\*$")
     ;;(add-to-list 'ibuffer-never-show-predicates "^\\*Messages\\*$")
     )
 
