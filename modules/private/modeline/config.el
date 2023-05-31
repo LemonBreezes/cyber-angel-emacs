@@ -191,7 +191,7 @@
   (advice-add #'gac-push
               :after
               (cae-defun cae-modeline-gac-party-on-push-a (buffer)
-                (+log (get-buffer-process "*git-auto-push*"))))
+                (parrot--party-while-process (get-buffer-process "*git-auto-push*"))))
   (parrot-mode +1))
 (use-package! parrot-rotate
   :defer t
