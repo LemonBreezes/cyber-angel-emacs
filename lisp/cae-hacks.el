@@ -148,7 +148,7 @@
      (setq garbage-collection-messages cae-hacks--gc-messages
            cae-hacks--gc-messages nil
            cae-hacks--gcmh-mode nil
-           ;;gc-cons-threshold gcmh-low-cons-threshold
+           gc-cons-threshold gcmh-low-cons-threshold
            gc-cons-percentage cae-hacks-gc-percentage))))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
