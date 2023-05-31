@@ -13,7 +13,7 @@
 (defun cae-project--bookmark-alist-from-file (file)
   "Return a bookmark alist from FILE."
   (let ((bookmark-default-file file)
-        (bookmark-alist))
+        (bookmark-alist nil))
     (bookmark-load bookmark-default-file)
     bookmark-alist))
 
