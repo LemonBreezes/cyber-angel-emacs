@@ -240,8 +240,7 @@
            lsp-enable-snippet nil
            lsp-enable-text-document-color t
            lsp-enable-folding t
-           lsp-semantic-tokens-enable t
-           lsp-eldoc-render-all t)
+           lsp-semantic-tokens-enable t)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
