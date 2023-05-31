@@ -14,16 +14,37 @@
           "?" #'describe-mode
           "q" #'+elfeed-quit)
     (when (modulep! :ui hydra)
-      ;; TODO Extend to also include the default `elfeed-search-mode-map' bindings.
-      (defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
-        ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
-        ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
-        ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-        ("m" elfeed-toggle-star "Mark")
-        ("A" (elfeed-search-set-filter "@6-months-ago") "All")
-        ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
-        ("Q" +elfeed-quit "Quit Elfeed" :color blue)
-        ("q" nil "quit" :color blue))
+      (pretty-hydra-define cae-elfeed-hydra (:color pink :foreign-keys run)
+        ("Filter"
+         (("s" elfeed-search-live-filter "Live filter")
+          ("S" elfeed-search-set-filter "Set filter")
+          ("c" elfeed-search-clear-filter "Clear filter")
+          ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+          ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
+          ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+          ("A" (elfeed-search-set-filter "@6-months-ago") "All")
+          ("T" (elfeed-search-set-filter "@1-day-ago") "Today"))
+         "Navigation"
+         (("RET" elfeed-search-show-entry "Show entry")
+          ("b" elfeed-search-browse-url "Open entry")
+          ("n" next-line "Next line")
+          ("p" previous-line "Previous line")
+          ("<" elfeed-search-first-entry "First entry")
+          (">" elfeed-search-last-entry "Last entry")
+          ("y" elfeed-search-yank "Yank"))
+         "Tag"
+         (("+" elfeed-search-tag-all "Tag all")
+          ("-" elfeed-search-untag-all "Untag all")
+          ("m" elfeed-toggle-star "Star")
+          ("r" elfeed-search-untag-all-unread "Untag all unread")
+          ("u" elfeed-search-tag-all-unread "Tag all unread"))
+         "Tube"
+         (("F" elfeed-tube-fetch "Fetch")
+          ("C-x C-s" elfeed-tube-save "Save"))
+         "Misc"
+         (("g" elfeed-search-update--force "Update")
+          ("Q" +elfeed-quit "Quit Elfeed" :color blue)
+          ("q" nil "quit" :color blue))))
       (map! :map elfeed-search-mode-map
             "<f6>" #'cae-elfeed-hydra/body))
 
