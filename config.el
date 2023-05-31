@@ -229,8 +229,7 @@
 (after! embark
   (map! :map embark-collect-mode-map
         "<f6>" #'cae-embark-collect-cheatsheet-hydra/body
-        "h" #'cae-embark-collect-cheatsheet-hydra/body
-        "r" #'isearch-backward))
+        "h" #'cae-embark-collect-cheatsheet-hydra/body))
 
 
 ;;; Tools
