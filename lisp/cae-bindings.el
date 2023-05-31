@@ -42,9 +42,6 @@
 ;; many major modes.
 (when (and (modulep! :editor fold)
            (not (modulep! :editor evil)))
-  (setq which-key-replacement-alist
-        (delete '(("\\`C-c C-f\\'") nil . "fold")
-                which-key-replacement-alist))
   (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
   (define-key doom-leader-map "\C-f" nil)
   (map! :leader
