@@ -19,10 +19,8 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (setq doom-font (font-spec :family "Iosevka Comfy"
-                             :size 16)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 6)
+  (setq doom-font (font-spec :family "Iosevka Comfy" :size 16)
+        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo" :size 6)
         doom-unicode-font (unless (modulep! :ui unicode)
                             (font-spec :family "LXGW WenKai" :weight 'light
                                        :size 15))))
