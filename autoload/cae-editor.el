@@ -170,3 +170,11 @@ mark the string and call `edit-indirect-region' with it."
   (if (region-active-p)
       (call-interactively #'edit-indirect-region)
     (call-interactively #'string-edit-at-point)))
+
+;;;###autoload
+(defun cae-browse-url-generic-bookmark-handler (bookmark)
+  "Bookmark handler for opening URLs with `browse-url-generic'."
+  (let ((url (bookmark-prop-get bookmark 'filename)))
+    (if url
+        (browse-url-generic url)
+      (message "Bookmark does not have a valid FILENAME property."))))
