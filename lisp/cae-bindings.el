@@ -63,3 +63,41 @@
      `(after! embark
         (setq embark-cycle-key ,embark-act-key))
      t))
+
+;; General keybindings.
+(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
+      [remap upcase-word] #'upcase-dwim
+      [remap downcase-word] #'downcase-dwim
+      [remap capitalize-word] #'capitalize-dwim
+      [remap ispell-word] #'cae-ispell-word-then-abbrev
+      "C-x 4 I" #'ibuffer-other-window
+      [remap ibuffer] #'ibuffer-jump  ;This way
+                                        ;I can do `C-x C-b =' to quickly diff a
+                                        ;buffer with its file.
+      "C-x _" #'shrink-window         ;Dual to `C-x ^'.
+      "C-x O" #'other-window-previous ;Dual to `C-x o'.
+      "C-x !" #'doom/window-enlargen
+      "C-x M-o" #'ace-swap-window
+      "C-x x o" #'ov-clear
+      "M-Z" #'zap-up-to-char
+      [C-i] #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent
+      [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+      [remap doom/sudo-this-file] #'cae-toggle-sudo
+      (:when (modulep! :tools lookup)
+       [remap xref-find-definitions] #'cae-lookup-definition-dwim)
+      (:when (modulep! :completion vertico)
+       [remap apropos] nil)           ;`consult-apropos' is obsolete.
+      (:after man
+       :map Man-mode-map
+       "o" #'ace-link-man)
+      (:after vertico
+       (:map vertico-map
+        "<prior>" #'vertico-scroll-down
+        "<next>" #'vertico-scroll-up))
+      (:after eww
+       :map eww-mode-map
+       "o" #'ace-link-eww))
+(define-key resize-window-repeat-map "_" #'shrink-window)
+(map! [remap delete-char] #'cae-delete-char
+      ")" #'cae-insert-closing-paren)
