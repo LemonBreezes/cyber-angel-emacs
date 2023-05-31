@@ -740,14 +740,16 @@
   (when (modulep! :completion vertico)
     (after! vertico
       (map! :map vertico-map
-            "C-;" #'vertico-quick-jump
-            (:when (not (cae-display-graphic-p))
-             "M-j" #'vertico-quick-jump))))
+            "C-z C-j" #'vertico-quick-jump
+            "C-z j" #'vertico-quick-jump
+            "C-z i" #'vertico-quick-insert
+            "C-z C-i" #'vertico-quick-insert)))
   (after! embark
     (map! :map embark-collect-mode-map
-          "C-;" #'avy-embark-collect-choose
-          (:when (not (cae-display-graphic-p))
-           "M-j" #'avy-embark-collect-choose)))
+          "C-z C-j" #'avy-embark-collect-choose
+          "C-z j" #'avy-embark-collect-choose
+          "C-z i" #'avy-embark-collect-act
+          "C-z C-i" #'avy-embark-collect-act))
   (when (modulep! :private corfu)
     (after! corfu
       (map! :map corfu-map
