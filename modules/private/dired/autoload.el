@@ -11,6 +11,9 @@
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
+  (interactive
+   (find-file-read-args "Find file: "
+                        (confirm-nonexistent-file-or-buffer)))
   (if (derived-mode-p 'dired-mode)
       (progn
         (when-let ((dir (file-name-directory file)))
@@ -26,6 +29,12 @@
              (one-window-p))
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
+
+(defun cae-dired-find-file-other-window-a (oldfun &rest args)
+  (when (and (derived-mode-p 'dired-mode)
+             (window-dedicated-p))
+    (dirvish-quit))
+  (apply oldfun args))
 
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
