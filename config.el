@@ -721,8 +721,8 @@
           ;; Redundant with Doom's :config default bindings
           :map global-map
           "M-g f" #'consult-flymake
-          (:unless (and (modulep! :checkers syntax)
-                        (not (modulep! :checkers syntax +flymake)))
+          (:when (and (modulep! :checkers syntax)
+                      (not (modulep! :checkers syntax +flymake)))
            "M-g f" #'consult-flycheck)
           (:unless (modulep! :config default)
            "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
