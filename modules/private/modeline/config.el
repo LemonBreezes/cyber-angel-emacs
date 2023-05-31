@@ -136,7 +136,8 @@
           shell-dirtrack-mode
           meow-normal-mode
           meow-motion-mode
-          meow-keypad-mode))
+          meow-keypad-mode
+          highlight-changes-visible-mode))
   (setq minions-promoted-modes
         '(orgtbl-mode
           overwrite-mode
