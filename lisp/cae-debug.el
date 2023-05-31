@@ -37,7 +37,7 @@ normally have their errors suppressed."
 
 (defun toggle-debug-on-hidden-errors (func)
   "Toggle hidden error debugging for function FUNC."
-  (interactive "aFunction: ")
+  (interactive "aCallable: ")
   (cond
    ((advice-member-p #'cae-debug-reraise-error func)
     (advice-remove func #'cae-debug-reraise-error)
