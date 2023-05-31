@@ -87,7 +87,11 @@
                     :test (lambda (x y) (equal (plist-get x :name) (plist-get y :name))))))))
 
 (use-package! gitignore-templates
-  :defer t)
+  :defer t :init
+  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
+    (map! :leader
+          :prefix vc-prefix
+          "I" #'gitignore-templates-insert)))
 
 (use-package! git-email
   :defer t :init
