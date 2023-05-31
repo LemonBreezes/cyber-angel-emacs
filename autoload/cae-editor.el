@@ -70,7 +70,7 @@
 ;;;###autoload
 (defun cae-insert-closing-paren ()
   "Inserts a closing paren if the sexps in the buffer are
-unbalanced, otherwise acts like whatever `self-insert-command' is
+unbalanced, otherwise acts like whatever `)' is
 bound to."
   (interactive)
   (cond ((condition-case error
