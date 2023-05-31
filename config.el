@@ -501,32 +501,19 @@
     (after! multiple-cursors-core
       (dolist (it sp--mc/cursor-specific-vars)
         (add-to-list 'mc/cursor-specific-vars it))
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-delete-char)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-forward-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-up-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-up-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-down-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-down-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-beginning-of-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-end-of-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-kill-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-kill-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-kill-hybrid-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-kill-hybrid-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-kill-word)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-kill-word)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-delete-char)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-delete-char)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-forward-barf-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-barf-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-forward-slurp-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-slurp-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-split-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-join-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-rewrap-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-transpose-sexp)
-      (add-to-list 'mc/cmds-to-run-for-all #'sp-transpose-hybrid-sexp))))
+      ;; I definitely don't use all these commands but it's okay to future-proof
+      ;; a little bit.
+      (defconst mc-smartparens-cmds
+        '(sp-delete-char sp-forward-sexp sp-backward-sexp sp-up-sexp
+          sp-backward-up-sexp sp-down-sexp sp-backward-down-sexp
+          sp-beginning-of-sexp sp-end-of-sexp sp-kill-sexp sp-backward-kill-sexp
+          sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
+          sp-backward-kill-word sp-backward-delete-char sp-delete-char
+          sp-forward-barf-sexp sp-backward-barf-sexp sp-forward-slurp-sexp
+          sp-backward-slurp-sexp sp-split-sexp sp-join-sexp sp-rewrap-sexp
+          sp-transpose-sexp sp-transpose-hybrid-sexp))
+      (dolist (cmd mc-smartparens-cmds)
+        (add-to-list 'mc/cmds-to-run-for-all cmd)))))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
