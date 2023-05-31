@@ -1,17 +1,10 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-
-;; Don't enable these options. They will break your config.
-(defvar cae-config-compilation-on-kill-enabled-p nil
-  "Whether on-kill native compilation is enabled.")
-(defvar cae-config-incremental-compilation-enabled-p nil
-  "Whether incremental native compilation is enabled.")
 
 (when cae-config-incremental-compilation-enabled-p
   (run-with-idle-timer 2 nil #'cae-compile-schedule-native-compilation))
