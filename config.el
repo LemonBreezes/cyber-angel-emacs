@@ -198,7 +198,6 @@
   (setq projectile-per-project-compilation-buffer t
         compilation-read-command nil))
 
-
 (after! tramp
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
