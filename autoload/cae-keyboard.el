@@ -70,3 +70,9 @@
                   (append (butlast args)
                           (list (cae-keyboard-kbd (car (last args)))))))
     (_ (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))) )))
+
+;;;###autoload
+(defun cae-keyboard-digit-argument ()
+  (setq last-command-event
+        (cae-keyboard-remap-reverse last-command-event))
+  (call-interactively #'digit-argument))
