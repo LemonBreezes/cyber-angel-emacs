@@ -134,4 +134,8 @@
                          (match-string 1 (elt x 1)))
                        :column
                        (elt x 2)))))
-      (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body))))
+      (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body))
+    (map! :map lispy-mode-map-lispy
+          "M-m" nil            ; previously `lispy-mark-symbol'. I prefer to
+                               ; keep the default `M-m' and `C-a' keybindings.
+          )))
