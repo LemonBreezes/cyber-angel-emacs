@@ -249,3 +249,6 @@
              (">" lispy-toggle-thread-last "toggle last-threaded form")
              ("" lispy-x-more-verbosity :exit nil)
              ("?" lispy-x-more-verbosity "help" :exit nil)))))
+
+(use-package! auto-activating-snippets
+  :defer t)
