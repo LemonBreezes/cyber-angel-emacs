@@ -2,16 +2,10 @@
 
 (load! "lisp/cae-logs")
 (load! "lisp/cae-keyboard")
+(load! "lisp/cae-multi")
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-
-(make-directory (expand-file-name "secrets" doom-user-dir) t)
-(dolist (file (mapcar (doom-partial #'string-remove-suffix ".el")
-                      (directory-files (expand-file-name "secrets" doom-private-dir)
-                                       t
-                                       "\\.el$")))
-  (load file nil t))
 
 ;;; UI
 (load! "lisp/cae-theme")
@@ -281,7 +275,6 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-(load! "lisp/cae-multi")
 (load! "lisp/cae-repeat")
 (map! "C-x 4 I" #'ibuffer-other-window)
 
