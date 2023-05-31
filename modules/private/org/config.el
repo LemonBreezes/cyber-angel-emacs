@@ -16,3 +16,13 @@
           (cae-defun org-capture--insert-timestamp ()
             (when (org-at-heading-p)
               (cae-org-set-created-timestamp))))
+
+(use-package! org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+        org-appear-autosubmarkers t
+        org-appear-autolinks nil)
+  ;; for proper first-time setup, `org-appear--set-elements'
+  ;; needs to be run after other hooks have acted.
+  (run-at-time nil nil #'org-appear--set-elements))
