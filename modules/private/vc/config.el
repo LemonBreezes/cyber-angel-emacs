@@ -50,8 +50,8 @@
   (after! mu4e
     (require 'git-email-mu4e)
     (git-email-mu4e-mode +1))
-  (setopt git-email-subject-regexp
-          "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
+  (setq git-email-subject-regexp
+        "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
