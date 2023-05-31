@@ -205,7 +205,8 @@
           (meow-beacon-change . meow-beacon-change-char)
           ;; These are the ones that are not bound by default.
           (meow-replace . meow-yank)    ;Basically makes `meow-yank' obsolete.
-          (meow-reverse . exchange-point-and-mark)))
+          (meow-reverse . exchange-point-and-mark)
+          (meow-save . cae-meow-save-line)))
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
