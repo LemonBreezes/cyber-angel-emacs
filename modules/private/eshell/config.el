@@ -1,5 +1,23 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
+(use-package! detached
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'detached-init)
+  :bind (;; Replace `async-shell-command' with `detached-shell-command'
+         ([remap async-shell-command] . detached-shell-command)
+         ;; Replace `compile' with `detached-compile'
+         ([remap compile] . detached-compile)
+         ([remap recompile] . detached-compile-recompile)
+         ;; Replace built in completion of sessions with `consult'
+         ([remap detached-open-session] . detached-consult-session))
+  :custom ((detached-show-output-on-attach t)
+           (detached-terminal-data-command system-type)))
+
+(use-package! eat
+  :defer t :init
+  (add-hook 'eshell-load-hook #'eat-eshell-mode)
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
+
 (after! eshell
   (setq-hook! 'eshell-mode-hook
     imenu-generic-expression
