@@ -19,24 +19,28 @@
   ("<f6>" nil "Exit" :exit t :column nil))
 
 ;;;###autoload (autoload 'cae-embark-collect-cheatsheet "autoload/cae-cheatsheets" nil t)
+(defun cae-embark-collect-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-embark-collect-cheatsheet
  :keymap 'embark-collect-mode-map
  :package 'embark)
 
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
+(defun cae-debugger-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-debugger-cheatsheet
  :keymap 'debugger-mode-map
  :package 'debug)
 
 ;;;###autoload (autoload 'cae-edebug-cheatsheet "autoload/cae-cheatsheets" nil t)
+(defun cae-edebug-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-edebug-cheatsheet
  :keymap 'edebug-mode-map
  :package 'edebug)
 
 ;;;###autoload (autoload 'cae-macrostep-cheatsheet "autoload/cae-cheatsheets" nil t)
+(defun cae-macrostep-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-macrostep-cheatsheet
  :keymap 'macrostep-keymap
