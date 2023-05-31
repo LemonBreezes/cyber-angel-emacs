@@ -257,6 +257,10 @@
                                         "lisp/cae-project.el"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
                                             "lisp/cae-project.el"))
+(map! :leader
+      :prefix "p"
+      "C-b" #'cae-project-bookmark
+      "RET" #'cae-project-bookmark-set)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
