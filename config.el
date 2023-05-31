@@ -581,8 +581,7 @@
                                         ;`abort-recursive-edit'.
            ("C-M-]" sp-select-next-thing "Select")
            ("C-M-@" sp-mark-sexp "Select")
-           ("C-M-S-w" sp-copy-sexp "Select") ;Overrides `append-next-kill'.
-           )))
+           ("C-M-S-w" sp-copy-sexp "Select")))) ;Overrides `append-next-kill'.
     (when (modulep! :ui hydra)
       (eval
        `(defun cae-sp-cheat-sheet/body ()
