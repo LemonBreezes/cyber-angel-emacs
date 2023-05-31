@@ -206,7 +206,8 @@
                (eat-mode . insert)
                (vterm-mode . insert)
                (helpful-mode . motion)
-               (gdb-frames-mode . normal)))
+               (gdb-frames-mode . normal)
+               (Info-mode . insert)))
     (setf (alist-get (car p) meow-mode-state-list) (cdr p)))
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
