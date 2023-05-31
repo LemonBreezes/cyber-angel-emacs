@@ -1138,6 +1138,8 @@
   (define-prefix-command 'org-babel-map)
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
+;;; Appendix
+
 (doom-load-packages-incrementally
  `(,@(when (modulep! :private dirvish)
        '(dired transient dirvish))
