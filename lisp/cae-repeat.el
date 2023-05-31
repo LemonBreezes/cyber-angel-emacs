@@ -16,11 +16,11 @@
        ,@(when (modulep! :ui popup)
            '("p" +popup/other))
        "0" delete-window
-       "1" delete-other-windows
+       "1" doom/window-maximize-buffer
        "2" split-window-below
        "3" split-window-right
        ,(cae-keyboard-kbd "0") delete-window
-       ,(cae-keyboard-kbd "1") delete-other-windows
+       ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
        ,(cae-keyboard-kbd "2") split-window-below
        ,(cae-keyboard-kbd "3") split-window-right
        "u" winner-undo
