@@ -39,3 +39,7 @@
 
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key"))
+
+(when cae-config-finished-loading
+  (repeat-mode -1)
+  (repeat-mode +1))
