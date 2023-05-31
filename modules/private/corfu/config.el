@@ -74,7 +74,7 @@ derivative.")
                                         (alist-get 'lsp-capf
                                                    completion-category-defaults))
                              '(orderless)))
-                     nil #'eq))))
+                     nil))))
 
   (map! (:unless (modulep! +tng)
          :desc "complete" "C-SPC" #'completion-at-point)
