@@ -287,6 +287,7 @@
 
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
+        ;; These are kind of arbitrary conditions that I just patched together.
         (interactive (browse-url-interactive-arg "URL: "))
         (cond ((or (getenv "WSL_DISTRO_NAME")
                    (display-graphic-p))
