@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(load! "lisp/cae-hacks")
+
 ;;; UI
 (load! "lisp/cae-theme")
 
