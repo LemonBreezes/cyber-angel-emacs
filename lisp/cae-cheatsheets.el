@@ -3,16 +3,26 @@
 ;;; Pause and resume hydras with the minibuffer
 
 (defvar cae-cheatsheets-minibuffer--last-hydra nil)
+(defvar cae-cheatsheets-minibuffer--last-workspace nil)
+(defvar cae-cheatsheets-minibuffer--last-tab nil)
 
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn)
+    (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn
+          cae-cheatsheets-minibuffer--last-workspace (and (featurep 'persp-mode)
+                                                          (persp-name persp-curr))
+          cae-cheatsheets-minibuffer--last-tab (tab-bar--current-tab))
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-minibuffer-hydra-resume-h (&rest _)
   (run-with-timer 0.001 nil
                   (lambda ()
-                    (when cae-cheatsheets-minibuffer--last-hydra
+                    (when (and cae-cheatsheets-minibuffer--last-hydra
+                               (eq (tab-bar--current-tab)
+                                   cae-cheatsheets-minibuffer--last-tab)
+                               (or (not (featurep 'persp-mode))
+                                   (string= (persp-name persp-curr)
+                                            cae-cheatsheets-minibuffer--last-workspace)))
                       (funcall cae-cheatsheets-minibuffer--last-hydra)
                       (setq cae-cheatsheets-minibuffer--last-hydra nil)))))
 
