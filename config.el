@@ -61,7 +61,8 @@
 
 (after! newcomment
   (setq comment-empty-lines 'eol
-        comment-padding nil))
+        comment-padding nil))           ;I prefer no spaces between comment
+                                        ;delimiters and the comment text.
 
 (when (and (modulep! :ui modeline)
            (not (modulep! :ui modeline +light)))
