@@ -116,12 +116,15 @@ Lispy."
   ;; Call `pp-eval-expression' when called with a negative
   ;; prefix argument
   (interactive "P")
+  (+log current-prefix-arg)
   (cond ((or (eq arg '-)
              (and (numberp arg)
                   (< arg 0)))
          (require 'pp+)
-         (funcall #'pp-eval-expression (if (numberp arg) nil)))
-        (t (funcall #'eval-expression arg))))
+         (setq current-prefix-arg nil)
+         (call-interactively #'pp-eval-expression))
+        (t (call-interactively #'eval-expression))))
+
 
 ;;;###autoload
 (defun cae-tab-close-and-select-right ()
@@ -314,3 +317,25 @@ mark the string and call `edit-indirect-region' with it."
                :min-height nil
                :min-width nil)))
     (embark-act arg)))
+
+;;;###autoload
+(defun cae-avy-embark-act-on-region ()
+  "Select two lines and move the text between them above the current line."
+  (interactive)
+  (let* ((initial-window (selected-window))
+         (beg (avy--line))
+         (end (avy--line))
+         text)
+    (when (> beg end)
+      (cl-rotatef beg end))
+    (setq beg (save-excursion
+                (goto-char beg)
+                (line-beginning-position)))
+    (setq end (save-excursion
+                (goto-char end)
+                (1+ (line-end-position))))
+    (save-mark-and-excursion
+      (goto-char beg)
+      (set-mark end)
+      (activate-mark)
+      (embark-act))))
