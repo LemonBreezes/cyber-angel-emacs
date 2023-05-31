@@ -29,6 +29,14 @@
       (bookmark-load bookmark-default-file)
       bookmark-alist)))
 
+(defmacro cae-project--with-bookmark-file (file &rest body)
+  "Execute BODY with FILE as the bookmark file."
+  (declare (indent defun))
+  `(let ((bookmark-default-file ,file))
+     (unless (file-exists-p ,file)
+       (make-directory (file-name-directory ,file) t))
+     ,@body))
+
 (defun cae-project--bookmark-alist (&optional project)
   "Return the bookmark alist for the current project."
   (let ((file (cae-project--get-bookmark-file project)))
