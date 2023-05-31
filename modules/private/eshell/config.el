@@ -1,19 +1,17 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
-;; Detached's database is getting corrupted, so I'm disabling it for now.
-;;(use-package! detached
-;;  :defer t :init
-;;  (add-hook 'doom-first-input-hook #'detached-init)
-;;  (map! [remap async-shell-command] #'detached-shell-command
-;;        [remap compile] #'detached-compile
-;;        [remap recompile] #'detached-recompile
-;;        (:when (modulep! :completion vertico)
-;;         [remap detached-open-session] #'detached-consult-session)
-;;        :leader
-;;        :prefix "o"
-;;        :desc "Detached session" "s" #'detached-open-session)
-;;  :custom ((detached-show-output-on-attach t)
-;;           (detached-terminal-data-command system-type)))
+(use-package! detached
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'detached-init)
+  (map! [remap async-shell-command] #'detached-shell-command
+        [remap compile] #'detached-compile
+        [remap recompile] #'detached-recompile
+        (:when (modulep! :completion vertico)
+         [remap detached-open-session] #'detached-consult-session)
+        :leader
+        :prefix "o"
+        :desc "Detached session" "s" #'detached-open-session)
+  :custom ((detached-terminal-data-command system-type)))
 
 (use-package! eat
   :defer t :init
