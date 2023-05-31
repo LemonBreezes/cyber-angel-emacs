@@ -264,12 +264,10 @@ mark the string and call `edit-indirect-region' with it."
       (save-mark-and-excursion
         (when (eq avy-command 'avy-goto-line)
           (goto-char (line-beginning-position)))
-        (set-mark (point))
         (if (eq avy-command 'avy-goto-line)
-            (goto-char (line-end-position))
-          (if (modulep! :config default +smartparens)
-              (sp-forward-sexp)
-            (forward-sexp)))
+            (progn (set-mark (point))
+                   (goto-char (line-end-position)))
+          (eri/expand-region 1))
         (funcall action))))
 
 ;;;###autoload
