@@ -472,7 +472,7 @@
   :defer t
   :config
   (map! :map diff-mode-map
-        "q" #'kill-this-buffer))
+        "q" #'quit-window))
 
 
 ;;; Autocompletion
