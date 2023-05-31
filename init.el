@@ -34,7 +34,7 @@ overriding other keymaps."
     :init-value nil
     :lighter nil
     :keymap general-override-mode-map)
-  (add-hook! 'cae-general-override-mode-hook
+  (add-hook 'cae-general-override-mode-hook
     (cae-defun cae-general--unbind-keys ()
       ;; Do not override `org-edit-special' in Org mode.
       (define-key general-override-mode-map (kbd "C-c '") nil)))
