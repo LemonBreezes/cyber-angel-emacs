@@ -114,15 +114,16 @@
         [remap next-buffer] #'cae-dired-next-buffer
         "<f6>" #'cae-dired-dirvish-hydra/body))
 (map! :leader "o-" #'cae-dired-jump)
+(map! "<f5>" #'dirvish-side)
 
 (add-hook 'find-directory-functions
-  (cae-defun cae-dired-load-dirvish-h (dir)
-    (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
-    (require 'dirvish nil t)
-    (unless (memq #'dired-noselect find-directory-functions)
-      (add-hook 'find-directory-functions #'dired-noselect t))
-    (dired-noselect dir))
-  t)
+          (cae-defun cae-dired-load-dirvish-h (dir)
+            (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
+            (require 'dirvish nil t)
+            (unless (memq #'dired-noselect find-directory-functions)
+              (add-hook 'find-directory-functions #'dired-noselect t))
+            (dired-noselect dir))
+          t)
 
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
