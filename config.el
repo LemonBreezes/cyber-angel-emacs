@@ -761,9 +761,7 @@
 ;; Restore the mark with `C-g' after mark commands.
 (use-package! smart-mark
   :defer t :init
-  (add-hook 'doom-first-input-hook #'smart-mark-mode)
-  :config
-  (add-to-list 'smart-mark-mark-functions #'cae-mark-sexp))
+  (add-hook 'doom-first-input-hook #'smart-mark-mode))
 
 
 ;;; Autocompletion
