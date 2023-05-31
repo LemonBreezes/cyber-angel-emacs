@@ -5,6 +5,11 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
+(make-directory (expand-file-name "secrets" doom-user-dir) t)
+(dolist (file (directory-files
+               (expand-file-name "secrets/" doom-user-dir) t "\\.el$"))
+  (load file nil t))
+
 ;;; UI
 (load! "lisp/cae-theme")
 
@@ -161,11 +166,6 @@
 ;; Set up printers
 (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
 (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
-
-(make-directory (expand-file-name "secrets" doom-user-dir) t)
-(dolist (file (directory-files
-               (expand-file-name "secrets/" doom-user-dir) t "\\.el$"))
-  (load file nil t))
 
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
