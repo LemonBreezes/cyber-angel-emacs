@@ -15,18 +15,19 @@
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overriden by other packages.
+;; because then they can be overwriting other packages' keybindings.
 (when (modulep! :checkers syntax)
-  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (define-key flycheck-mode-map flycheck-keymap-prefix
-    flycheck-command-map)
-  (map! :leader
-        (:prefix ("C" . "checkers")))
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c !\\'") nil . "checkers")
-                  which-key-replacement-alist))))
+  (after! flycheck
+    (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+    (setq flycheck-keymap-prefix (kbd "C-c C"))
+    (define-key flycheck-mode-map flycheck-keymap-prefix
+      flycheck-command-map)
+    (map! :leader
+          (:prefix ("C" . "checkers")))
+    (after! which-key
+      (setq which-key-replacement-alist
+            (delete '(("\\`C-c !\\'") nil . "checkers")
+                    which-key-replacement-alist)))))
 ;;(when (modulep! :editor snippets)
 ;;  (define-key doom-leader-map "&" nil)
 ;;  (define-key yas-minor-mode-map (kbd "C-c &") nil)
