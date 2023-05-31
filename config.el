@@ -272,6 +272,8 @@
 (load! "lisp/cae-repeat")
 (map! "C-<f4>" #'tab-close)
 
+(delete-selection-mode -1)
+
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
