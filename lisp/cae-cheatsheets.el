@@ -55,7 +55,7 @@
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when hydra-curr-map
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
-                     nil nil #'equal)
+                     nil nil #'eq)
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
@@ -64,7 +64,7 @@
                                cae-cheatsheets-tab-bar-hydra-alist
                                nil nil #'equal)))
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist
-                     nil t #'equal)
+                     nil t #'eq)
           nil)
     (run-with-timer 0.001 nil hydra)))
 
