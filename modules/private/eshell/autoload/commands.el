@@ -131,7 +131,7 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/l (&optional n)
+(defun eshell/u (&optional n)
   (setq n (or n 1))
   (let* ((ignored-bufs)
          (buf
@@ -148,5 +148,5 @@ file to edit."
                      (buffer-local-value 'list-buffers-directory buf))))))
 
 ;;;###autoload
-(defun eshell/ll ()
+(defun eshell/uu ()
   (eshell/l 2))
