@@ -37,9 +37,49 @@
                  cae-project-bookmark-cache))))
 
 (defun cae-project-bookmark-jump ()
-  (let ((project (doom-project-name))
-        (bookmark (completing-read "Jump to bookmark: "
-                                   (cae-project--bookmark-alist))))
-    (bookmark-jump bookmark)))
+  "Jump to a bookmark in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (call-interactively #'bookmark-jump)))
 
-(defun cae-project-bookmark-set ())
+(defun cae-project-bookmark-set ()
+  "Set a bookmark in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (call-interactively #'bookmark-set)
+    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+
+(defun cae-project-bookmark-delete ()
+  "Delete a bookmark in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (call-interactively #'bookmark-delete)))
+
+(defun cae-project-bookmark-rename ()
+  "Rename a bookmark in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (call-interactively #'bookmark-rename)))
+
+(defun cae-project-bookmark-save ()
+  "Save the current project's bookmarks."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (make-directory (file-name-directory bookmark-default-file) t)
+    (bookmark-write-file bookmark-default-file)))
+
+(define-prefix-command 'cae-project-bookmark-map)
+(map! :map cae-project-bookmark-map
+      :desc "Jump to bookmark" "j" #'cae-project-bookmark-jump
+      :desc "Set bookmark" "s" #'cae-project-bookmark-set
+      :desc "Delete bookmark" "d" #'cae-project-bookmark-delete
+      :desc "Rename bookmark" "r" #'cae-project-bookmark-rename
+      :desc "Save bookmarks" "S" #'cae-project-bookmark-save)
+(map! :leader
+      :prefix "p"
+      :desc "Project bookmarks" "C-b" #'cae-project-bookmark-map)
