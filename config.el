@@ -244,7 +244,8 @@
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
   (add-hook 'gptel-mode-hook
             (defun cae-disable-topsy-in-gptel-h ()
-              "Disable topsy-mode in `gptel-mode'."
+              "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
+                                                    ;package.
               (topsy-mode -1))))
 
 (use-package! anzu
