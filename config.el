@@ -322,9 +322,7 @@
       remote-file-name-inhibit-delete-by-moving-to-trash t
       enable-remote-dir-locals t
       history-length (expt 2 16)
-      make-cursor-line-fully-visible nil ;I forgot why I set this but I remember
-                                         ;it was to prevent some annoying
-                                         ;behavior.
+      make-cursor-line-fully-visible nil ;I forgot why I set this.
       yank-pop-change-selection t)
 
 (after! xclip
