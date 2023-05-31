@@ -115,6 +115,9 @@
   ;; `projectile-find-file'.
   (advice-add #'find-file :around #'cae-dired-find-file-a)
 
+  (map! [remap previous-buffer] #'cae-previous-buffer
+        [remap next-buffer] #'cae-next-buffer)
+
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
 (add-to-list 'find-directory-functions #'cae-dired-load-dirvish-h t)
