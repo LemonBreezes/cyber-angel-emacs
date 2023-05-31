@@ -237,10 +237,14 @@
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
     (setq! lsp-headerline-breadcrumb-enable t
-           lsp-enable-snippet nil)
+           lsp-enable-snippet nil
+           lsp-enable-text-document-color t
+           lsp-enable-folding t
+           lsp-semantic-tokens-enable t)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
-            lsp-ui-doc-include-signature t))
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-header t))
     (after! lsp-clangd
       (setq lsp-clients-clangd-args
             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
