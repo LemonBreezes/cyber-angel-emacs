@@ -1,4 +1,4 @@
-;;; lisp/cae-workspaces.el -*- lexical-binding: t; -*-
+;;; lisp/cae-cheatsheets.el -*- lexical-binding: t; -*-
 
 ;;; Pause and resume cheatsheets with the minibuffer
 
