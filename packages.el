@@ -12,8 +12,6 @@
   (disable-packages! flycheck))
 ;; Added because of errors.
 (package! lv)
-(when (modulep! :editor fold)
-  (package! vimish-fold))
 
 ;;; UI
 (package! info-colors)
