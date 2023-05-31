@@ -739,7 +739,11 @@
            (?z . avy-action-zap-to-char)))
         avy-styles-alist '((avy-isearch . pre)
                            (ace-link-man . pre)
-                           (avy-kill-region . pre))
+                           (avy-goto-end-of-line . post)
+                           (avy-kill-ring-save-region . pre)
+                           (avy-kill-region . pre)
+                           (avy-copy-region . pre)
+                           (avy-move-region . pre))
         avy-column-line-overlay t))
 
 (use-package! zop-to-char
