@@ -794,7 +794,9 @@
   (map! :map symbol-overlay-map
         "<f6>" #'cae-symbol-overlay-cheatsheet
         "N" #'symbol-overlay-switch-forward
-        "P" #'symbol-overlay-switch-backward)
+        "P" #'symbol-overlay-switch-backward
+        "r" #'substitute-target-in-buffer
+        "R" #'substitute-target-in-defun)
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
