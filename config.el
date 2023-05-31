@@ -1,5 +1,8 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+;; For when we compile Doom.
+(defvar personal-keybindings nil)
+
 ;;; UI
 (load! "lisp/cae-theme")
 
