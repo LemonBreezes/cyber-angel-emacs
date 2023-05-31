@@ -14,6 +14,7 @@
 (use-package! outline-minor-faces
   :hook (emacs-lisp-mode . outline-minor-faces-add-font-lock-keywords))
 
+;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
           (cae-defun cae-lisp-setup-eval-expression-comments-h ()
             (when (string= (minibuffer-prompt) "Eval: ")
@@ -21,10 +22,10 @@
                           comment-end ""
                           comment-start-skip ";+ *"
                           comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
-
-(map! :map lispy-mode-map
-      ;; Allow inserting newlines in the minibuffer.
-      [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain)
+(after! lispy
+  (map! :map lispy-mode-map
+        ;; Allow inserting newlines in the minibuffer.
+        [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain))
 
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
