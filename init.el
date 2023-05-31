@@ -15,6 +15,7 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
+;; Do not override other keymaps with `general-override-mode'.
 (after! general
   (general-override-mode -1)
   (define-minor-mode cae-doom-leader-mode
