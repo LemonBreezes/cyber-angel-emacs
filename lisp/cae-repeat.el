@@ -20,6 +20,7 @@
      "<right>" next-buffer
      "u" winner-undo
      "r" winner-redo
+     "b" consult-bookmark
      ;; Number row keys
      "!" delete-other-windows
      "@" split-window-below
