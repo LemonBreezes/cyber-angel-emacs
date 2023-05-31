@@ -500,6 +500,7 @@
 
   (use-package! dwim-shell-command
     :defer t :init
+    (autoload 'dwim-shell-command "dwim-shell-command" nil t)
     (map! [remap shell-command] #'dwim-shell-command
           (:after dired
            :map dired-mode-map
