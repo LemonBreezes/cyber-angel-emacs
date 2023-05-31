@@ -857,6 +857,7 @@
         (nreverse (apply oldfun args))
       (apply oldfun args))))
 
+;; Hopefully someone will write a more optimized version of this some day.
 (use-package! unmodified-buffer
   :defer t :init
   (add-hook 'after-init-hook #'unmodified-buffer-global-mode))
