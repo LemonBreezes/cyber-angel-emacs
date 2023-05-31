@@ -95,7 +95,7 @@
     :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
-    (setq! nyan-bar-length 20
+    (setopt nyan-bar-length 20
            nyan-minimum-window-width 20))
 
   ;; This block might seem crazy, but it's how I've gotten parrot mode to work
@@ -114,7 +114,7 @@
     :config
     (unwind-protect
         (progn (advice-add #'parrot-start-animation :override #'ignore))
-      (setq! parrot-animate 'hide-static
+      (setopt parrot-animate 'hide-static
              parrot-rotate-animate-after-rotation nil
              parrot-num-rotations 10
              parrot-animate-on-load nil
