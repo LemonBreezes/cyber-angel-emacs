@@ -322,7 +322,7 @@ mark the string and call `edit-indirect-region' with it."
   (interactive)
   (save-window-excursion
     (let* ((initial-window (selected-window))
-           (avy-indent-line-overlay t)
+           (avy-indent-line-overlay t)  ;My preference
            (beg (avy--line))
            (end (if beg (avy--line)
                   (cl-return-from cae-avy-embark-act-on-region))))
