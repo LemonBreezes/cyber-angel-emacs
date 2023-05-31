@@ -185,6 +185,7 @@
           (?h . ?h)
           (?x . ?x)
           (?\; . ?\;)                   ;For embark
+          (?\s . ?\s)                   ;For pop mark
           ;; For popups
           (,(cae-keyboard-remap-char ?`) . ,(cae-keyboard-remap-char ?`))
           (,(cae-keyboard-remap-char ?~) . ,(cae-keyboard-remap-char ?~))))
