@@ -858,7 +858,14 @@
     :defer t :config
     (map! :map embark-collect-mode-map
           "<f6>" #'cae-embark-collect-cheatsheet-hydra/body)
-    (define-key vertico-map (kbd "C-z") 'embark-act-with-completing-read)))
+    (define-key vertico-map (kbd "C-z") 'embark-act-with-completing-read)
+    (advice-add #'embark-completing-read-prompter
+                :around
+                (cae-defun cae-embark-completing-read-prompter (oldfun &rest args)
+                  (minibuffer-with-setup-hook
+                      (lambda ()
+                        (local-set-key (kbd "C-z") #'abort-recursive-edit))
+                    (apply oldfun args))))))
 
 
 ;;; Autocompletion
