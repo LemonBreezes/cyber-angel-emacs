@@ -16,6 +16,9 @@
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h))
 
+;; Hercules already does this for us since I am using a fork of Hercules with
+;; that feature.
+
 ;;; Pause and resume with workspaces
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
@@ -38,6 +41,8 @@
               #'cae-cheatsheets-workspace-hydra-pause-h)
     (add-hook 'persp-activated-functions
               #'cae-cheatsheets-workspace-hydra-resume-h)))
+
+;; TODO Hercules
 
 ;;; Quit before switching tabs
 
