@@ -63,7 +63,6 @@
 			   (file-name-directory default) default 'confirm)
 	   prefix nil prefix)))
   (cae-project--with-bookmark-alist nil
-    (ignore bookmark-alist bookmark-default-file)
     (bookmark-load file overwrite no-msg default)
     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
 
@@ -71,7 +70,6 @@
   "Save all project bookmarks."
   (interactive)
   (maphash (lambda (bookmark-default-file bookmark-alist)
-             (ignore bookmark-alist)
              (when bookmark-alist
                (make-directory (file-name-directory bookmark-default-file) t)
                (bookmark-write-file bookmark-default-file)))
@@ -120,25 +118,22 @@
   (interactive
    (list
     (let ((narrow (mapcar (pcase-lambda (`(,x ,y ,_)) (cons x y))
-                            consult-bookmark-narrow))
-            (bookmark-alist (cae-project--bookmark-alist))
-            (bookmark-default-file (cae-project--get-bookmark-file)))
-      (ignore bookmark-alist bookmark-default-file)
-      (consult--read
-       (consult--bookmark-candidates)
-       :prompt "Bookmark: "
-       :state (consult--bookmark-preview)
-       :category 'project-bookmark
-       :history 'bookmark-history
-       ;; Add default names to future history.
-       ;; Ignore errors such that `consult-project-bookmark' can be used in
-       ;; buffers which are not backed by a file.
-       :add-history (ignore-errors (bookmark-prop-get (bookmark-make-record) 'defaults))
-       :group (consult--type-group narrow)
-       :narrow (consult--type-narrow narrow)))))
-  (let ((bookmark-alist (cae-project--bookmark-alist))
-        (bookmark-default-file (cae-project--get-bookmark-file)))
-    (ignore bookmark-alist bookmark-default-file)
+                          consult-bookmark-narrow)))
+      (cae-project--with-bookmark-alist nil
+        (ignore bookmark-alist bookmark-default-file)
+        (consult--read
+         (consult--bookmark-candidates)
+         :prompt "Bookmark: "
+         :state (consult--bookmark-preview)
+         :category 'project-bookmark
+         :history 'bookmark-history
+         ;; Add default names to future history.
+         ;; Ignore errors such that `consult-project-bookmark' can be used in
+         ;; buffers which are not backed by a file.
+         :add-history (ignore-errors (bookmark-prop-get (bookmark-make-record) 'defaults))
+         :group (consult--type-group narrow)
+         :narrow (consult--type-narrow narrow))))))
+  (cae-project--with-bookmark-alist
     (bookmark-maybe-load-default-file)
     (if (assoc name bookmark-alist)
         (bookmark-jump name)
