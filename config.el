@@ -536,6 +536,7 @@
                                  (kill-buffer cae-diff-buffer))
                                nil))
       t))
+  ;;
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
