@@ -5,5 +5,5 @@
   ("<f6>" nil "Exit" :exit t)
   ("q" quit-window nil :exit t)
   ("d" process-menu-delete-process "Delete process")
-  ("S" tabulated-list-sort "Sort")
+  ;;("S" tabulated-list-sort "Sort")
   ("g" revert-buffer "Refresh"))
