@@ -36,7 +36,6 @@
         tab-bar-back-button    nil
         tab-bar-forward-button nil
         tab-bar-new-button     nil))
-(run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
 (setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ; The unicode ellipsis is ugly to me
