@@ -409,8 +409,7 @@
 
   (setq electric-pair-pairs '((?\" . ?\")
                               (?\{ . ?\})
-                              (?\[ . ?\])
-                              (?\( . ?\)))
+                              (?\[ . ?\]))
         electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
