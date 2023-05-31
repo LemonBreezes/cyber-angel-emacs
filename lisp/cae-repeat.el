@@ -103,9 +103,7 @@
        "9" +workspace/switch-to-8)
       (:enter +workspace/display))
    t)
-  (defadvice! wowthisiweird ()
-    :after #'+workspace/display
-    (+log (repeat-get-map)))
+  (setq repeat-check-key nil)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
