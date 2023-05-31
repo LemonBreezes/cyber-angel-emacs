@@ -14,7 +14,7 @@
   ;;(define-key org-jira-map (kbd "C-c iF") 'org-jira-get-issues-from-filter)
   ("iu" 'org-jira-update-issue "update issue" :column "issues")
   ("iw" 'org-jira-progress-issue "progress issue workflow" :column "issues")
-  ("in" 'org-jira-progress-issue-next "progress issue workflow" :column "issues")
+  ("in" 'org-jira-progress-issue-next "progress issue workflow (next)" :column "issues")
   ("ia" 'org-jira-assign-issue "assign issue" :column "issues")
   ;;(define-key org-jira-map (kbd "C-c isr") 'org-jira-set-issue-reporter)
   ("ir" 'org-jira-refresh-issue "refresh issue" :column "issues")
