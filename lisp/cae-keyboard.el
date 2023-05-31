@@ -95,8 +95,6 @@
            (define-key (current-local-map) (kbd "<tab>") C-i-command))))))
 
   (add-hook 'after-change-major-mode-hook #'cae-keyboard-conditionally-remap-C-i)
-
-  (when (modulep! :private corfu +tng)
-    (map! "<tab>" #'indent-for-tab-command
-          "C-i" #'doom/dumb-indent
-          "C-S-i" #'doom/dumb-dedent)))
+  (map! "<tab>" #'indent-for-tab-command
+        "C-i" #'doom/dumb-indent
+        "C-S-i" #'doom/dumb-dedent))
