@@ -134,5 +134,4 @@
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("+log" "message")))
     (add-to-list 'parrot-rotate-dict
-                 '(:rot ("backtrace!" "unbacktrace!")))
-    ))
+                 '(:rot ("backtrace!" "unbacktrace!")))))
