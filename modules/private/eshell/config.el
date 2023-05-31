@@ -59,9 +59,6 @@
               (cae-defun cae-eshell-expand-abbrev-a (&rest _)
                 (expand-abbrev)))
 
-  (unless (modulep! :config default +smartparens)
-    (remove-hook 'eshell-mode-hook #'smartparens-mode))
-
   (use-package eshell-bookmark
     :after eshell
     :config
