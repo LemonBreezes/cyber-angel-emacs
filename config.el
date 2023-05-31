@@ -584,27 +584,27 @@
 ;;  "C-s" nil)                            ;We already have `consult-history' bound
 ;;                                        ;to `M-r' and `M-s'. This way we can use
 ;;                                        ;`C-s' to search in the minibuffer.
-;;
-;;;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-;;(map! :leader
-;;      :desc "Copy link" "sy" #'link-hint-copy-link)
-;;
-;;(when (modulep! :config default +bindings)
-;;  (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
-;;        [remap doom/sudo-this-file] #'cae-toggle-sudo))
-;;
-;;(after! expand-region
-;;  (setq expand-region-smart-cursor t)
-;;  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-;;    (add-to-list 'er/try-expand-list fn t))
-;;  (setq er/try-expand-list
-;;        (mapcar (lambda (fn)
-;;                  (if (eq fn #'er/mark-comment)
-;;                      #'cae-mark-comment
-;;                    fn))
-;;                er/try-expand-list)))
-;;
-;;(advice-add #'persp-set-keymap-prefix :override #'ignore)
+
+;; I'm surprised Doom Emacs doesn't bind a key for copying links.
+(map! :leader
+      :desc "Copy link" "sy" #'link-hint-copy-link)
+
+(when (modulep! :config default +bindings)
+  (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+        [remap doom/sudo-this-file] #'cae-toggle-sudo))
+
+(after! expand-region
+  (setq expand-region-smart-cursor t)
+  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
+    (add-to-list 'er/try-expand-list fn t))
+  (setq er/try-expand-list
+        (mapcar (lambda (fn)
+                  (if (eq fn #'er/mark-comment)
+                      #'cae-mark-comment
+                    fn))
+                er/try-expand-list)))
+
+(advice-add #'persp-set-keymap-prefix :override #'ignore)
 
 (setq set-mark-command-repeat-pop t
       next-line-add-newlines t)
