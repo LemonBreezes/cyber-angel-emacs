@@ -18,8 +18,9 @@
       (cl-destructuring-bind (key . binding) p
         (define-key doom-leader-map (kbd (concat (format "%s " snippet-prefix)
                                                  (char-to-string key))) binding)))
-    (after! yasnippet
-      (define-key yas-minor-mode-map (kbd "C-c &") nil))
+    ;;(after! yasnippet
+    ;;  (define-key yas-minor-mode-map (kbd "C-c &") nil))
+    (defvar yas-minor-mode-map (make-sparse-keymap))
     (define-key doom-leader-map "&" nil)
     (after! which-key
       (setq which-key-replacement-alist
