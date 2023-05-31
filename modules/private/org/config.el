@@ -44,3 +44,6 @@
         "C-c b" nil
         "<f6>" #'cae-org-jira-hydra/body)
   (make-directory (expand-file-name "~/.org-jira") t))
+
+(use-package! worf
+  :defer t)
