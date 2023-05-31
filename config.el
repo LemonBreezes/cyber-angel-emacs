@@ -209,7 +209,8 @@
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window)
-    (set-popup-rule! "^\\*notmuch-hello"  :ignore t))
+    (set-popup-rule! "^\\*notmuch-hello"  :ignore t)
+    (set-popup-rule! "^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil) )
 
   ;; Lower the default popup delay.
   (after! tooltip
