@@ -72,6 +72,7 @@
       :prefix ("C-x t ^" . "detach")
       :prefix ("C-x v"   . "version-control")
       :prefix ("C-x v b" . "branch")
+      :prefix ("C-x v M" . "mergebase")
       :prefix ("C-x w"   . "window")
       :prefix ("C-x w ^" . "detach")
       :prefix ("C-x x"   . "extra")
