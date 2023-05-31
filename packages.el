@@ -52,6 +52,7 @@
 (package! auto-sudoedit)
 (package! file-info)
 (package! titlecase)
+(package! holymotion)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
