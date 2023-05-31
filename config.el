@@ -192,7 +192,7 @@
       :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
     (set-popup-rule! "^\\*Shortdoc .*" :size #'cae-popup-resize-help-buffer
       :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
-    (set-popup-rule! "^\\*devdocs\\*$" :size #'cae-popup-resize-help-buffer
+    (set-popup-rule! "^\\*devdocs\\*$" :size #'0.5
       :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
