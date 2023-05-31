@@ -20,18 +20,22 @@
           (funcall orig-func buffer-or-name))))))
 
 ;;;###autoload
-(defun cae-sp-delete-char (&optional arg)
-  (interactive "*P")
-  (cond ((and delete-active-region
-              (region-active-p))
-         (if (bound-and-true-p lispy-mode))
-         (sp-delete-region (region-beginning) (region-end)))
+(defun cae-sp-delete-char ()
+  (interactive)
+  (cond ((region-active-p)
+         (if (bound-and-true-p lispy-mode)
+             (call-interactively #'lispy-delete)
+           (and delete-active-region
+                (delete-region (region-beginning) (region-end)))
+            (call-interactively #'sp-delete-region)))
         ;; Only call `delete-char' if the parens are unbalanced.
         ((condition-case error
              (scan-sexps (point-min) (point-max))
            (scan-error t))
-         (delete-char (or arg 1)))
-        ((sp-delete-char arg))))
+         (call-interactively #'delete-char))
+        ((bound-and-true-p lispy-mode)
+         (call-interactively #'lispy-delete))
+        ((call-interactively #'sp-delete-char))))
 
 ;;;###autoload
 (defun cae-toggle-sudo ()
