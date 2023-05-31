@@ -113,7 +113,7 @@
 
 ;;; Lispy
 
-(when (modulep! :editor lispye)
+(when (modulep! :editor lispy)
   (after! lispy
     ;; navigation
     (let ((bindings
