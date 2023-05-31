@@ -1191,9 +1191,10 @@
   :config
   (map! :map org-ai-global-mode-map
         :prefix "C-c M-a"
-        "b" #'cae-ai-org-ai-on-buffer
-        :map org-ai-mode-map
-        [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
+        "b" #'cae-ai-org-ai-on-buffer)
+  (map! :map org-ai-mode-map
+        [remap org-ai-kill-region-at-point]
+        #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
   (org-ai-global-mode +1)
