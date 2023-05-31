@@ -970,7 +970,9 @@
 
   (use-package! switchy-window
     :defer t :init
-    (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)))
+    (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)
+    (keymap-set switchy-window-minor-mode-map
+            "<remap> <other-window>" #'switchy-window)))
 
 
 
