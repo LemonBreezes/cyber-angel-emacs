@@ -148,11 +148,11 @@
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
-  (add-hook 'doom-switch-window-hook
-            (cae-defun cae-fix-popup-other-keybinding ()
-              (define-key ctl-x-map "p" nil)
-              (map! :map ctl-x-map
-                    "p" #'+popup/other))))
+  (run-with-idle-timer 3 t
+                       (cae-defun cae-fix-popup-other-keybinding ()
+                         (define-key ctl-x-map "p" nil)
+                         (map! :map ctl-x-map
+                               "p" #'+popup/other))))
 
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
 (map! :leader
