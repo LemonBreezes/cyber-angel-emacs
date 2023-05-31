@@ -11,7 +11,6 @@
   ;; Do not let EAT override TERM.
   (setq! eat-term-name (lambda () eshell-term-name))
 
-
   (map! :map (eat-eshell-semi-char-mode-map)
         "C-a" #'eat-self-input
         "C-e" #'eat-self-input
