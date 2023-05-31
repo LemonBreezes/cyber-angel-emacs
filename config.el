@@ -26,9 +26,8 @@
 
 ;; Created for handling the very small screen on Android phones.
 (add-hook! 'after-make-frame-functions
-  (global-visual-line-mode (if (and (frame-width (selected-frame))
-                                    (< (frame-width (selected-frame)) 100))
-                               +1 -1)))
+  (global-visual-line-mode (and (frame-width (selected-frame))
+                                (< (frame-width (selected-frame)) 100))))
 (add-hook! '+doom-dashboard-mode-hook (visual-line-mode -1))
 
 ;; Set up fonts
