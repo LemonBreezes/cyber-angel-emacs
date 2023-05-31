@@ -95,6 +95,8 @@
         "_" #'dired-up-directory
         "{" #'dired-prev-dirline
         "}" #'dired-next-dirline
+        "[" #'dired-prev-dirline
+        "]" #'dired-next-dirline
         "," #'dired-create-empty-file
         :map dirvish-mode-map
         "e" #'cae-dired-find-file
