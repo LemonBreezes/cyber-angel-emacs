@@ -360,6 +360,7 @@
 
   (after! xclip
     (cond ((getenv "WSL_DISTRO_NAME")
+           ;; Doesn't add the Windows clipboard to the kill ring.
            (setq xclip-program "clip.exe"
                  xclip-method 'xclip))
           ((executable-find "termux-setup-storage")
