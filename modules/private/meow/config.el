@@ -158,8 +158,12 @@
           "X" #'meow-sync-grab
           "y" #'meow-yank
           "z" #'meow-pop-selection
-          ;; commands not bound by default
+          "," #'meow-inner-of-thing
+          "." #'meow-bounds-of-thing
           "-" #'negative-argument
+          "'" #'repeat
+          "<escape>" #'doom/escape
+          ;; commands not bound by default
           "Z" #'meow-pop-all-selection
           ,(cae-keyboard-kbd "&") #'meow-query-replace
           "%" #'meow-query-replace-regexp
@@ -169,13 +173,15 @@
 (use-package! meow
   :init
   (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
+  :demand t
+  :config
   (when (modulep! :emacs vc)
     (after! git-timemachine
       (add-hook 'git-timemachine-mode-hook
                 (lambda ()
                   (run-at-time 0.01 nil #'meow-insert-mode +1)))))
-  :demand t
-  :config
+  (when (modulep! :ui vc-gutter +diff-hl)
+    )
   (meow/setup-cae)
   (meow/setup-keypad)
   (map! :map meow-normal-state-keymap
