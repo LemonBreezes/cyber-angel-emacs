@@ -534,9 +534,7 @@
 
 (after! cc-mode
   (map! :map c-mode-base-map
-        "<tab>" #'indent-for-tab-command
-        (:unless (display-graphic-p)
-          "TAB" #'indent-for-tab-command)))
+        "TAB" #'indent-for-tab-command))
 
 (when (modulep! :private corfu)
   (map! (:prefix ("M-+" . "autocomplete")
