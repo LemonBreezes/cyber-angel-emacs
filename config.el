@@ -159,7 +159,8 @@
   :config
   (setq-default goggles-pulse t)
   (when (modulep! :editor multiple-cursors)
-    (add-to-list 'mc/unsupported-minor-modes #'goggles-mode)))
+    (after! multiple-cursors-core
+      (add-to-list 'mc/unsupported-minor-modes #'goggles-mode))))
 
 ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
 (when (modulep! :completion vertico +childframe)
@@ -688,7 +689,7 @@
 
 (use-package! macrursors
   :config
-  (dolist (mode '(corfu-mode goggles-mode beacon-mode copilot-mode))
+  (dolist (mode '(corfu-mode goggles-mode beacon-mode))
     (add-hook 'macrursors-pre-finish-hook mode)
     (add-hook 'macrursors-post-finish-hook mode))
   (define-prefix-command 'macrursors-mark-map)
@@ -760,7 +761,8 @@
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
   (when (modulep! :editor multiple-cursors)
-    (add-to-list 'mc/unsupported-minor-modes #'copilot-mode)))
+    (after! multiple-cursors-core
+      (add-to-list 'mc/unsupported-minor-modes #'copilot-mode))))
 
 (use-package! isearch-dabbrev
   :defer t
