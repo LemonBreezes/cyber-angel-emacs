@@ -109,19 +109,16 @@
 (plist-put! +popup-defaults :ttl 5)
 (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
 (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
-(set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :ttl nil :quit nil)
-(set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :quit nil)
+(set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
+(set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
 (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
 (set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (after! info
   (set-popup-rule! "^\\*info\\*"         :size #'+popup-shrink-to-fit :quit t :select t :ttl nil))
-;; (set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
-;; ;; (set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
-;; ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
-;; (after! eww
-;;     (set-popup-rule! "^\\*eww bookmarks\\*" :size 0.3 :side 'bottom :quit t :select t)
-;;     (set-popup-rule! "^\\*eww" :ignore t))
+(set-popup-rule! "^\\*helpful .*\\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
+(set-popup-rule! "^\\*Messages\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
+(set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
 (map! :map messages-buffer-mode-map :n "q" #'quit-window)
 
 ;; Lower the default popup delay.
