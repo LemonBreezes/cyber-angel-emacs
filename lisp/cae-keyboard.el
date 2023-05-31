@@ -2,10 +2,6 @@
 
 ;;; Remap keys
 
-;; This one is because I bind `C-h' to a dedicated key on my keyboard.
-(unless (lookup-key help-map (kbd "SPC"))
-  (define-key help-map (kbd "SPC") #'cae-pop-mark))
-
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "0") (kbd "C-x t 0"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "1") (kbd "C-x t 1"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "2") (kbd "C-x t 2"))
