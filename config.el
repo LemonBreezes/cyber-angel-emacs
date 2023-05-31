@@ -641,4 +641,16 @@
   (define-prefix-command 'org-babel-map)
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
+(doom-load-packages-incrementally
+ `(,@(when (modulep! :private dirvish)
+      '(dirvish))
+   ,@(when (modulep! :tools pdf)
+      '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
+   ,@(when (modulep! :term eshell)
+      '(esh-util esh-module esh-proc esh-io esh-cmd eshell
+              em-tramp em-smart em-banner em-basic em-cmpl
+              em-extpipe em-glob em-hist em-ls em-script em-term
+              em-alias em-elecslash em-rebind)))
+ t)
+
 (setq cae-config-finished-loading t)
