@@ -538,154 +538,154 @@
 ;;       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
 ;;   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
-
-;;; Autocompletion
+;; 
+;; ;;; Autocompletion
 
-(when (modulep! :private corfu)
-  (load! "lisp/cae-corfu"))
+;; (when (modulep! :private corfu)
+;;   (load! "lisp/cae-corfu"))
 
-(use-package! dabbrev
-  :defer t :config
-  (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
-        dabbrev-upcase-means-case-search t))
+;; (use-package! dabbrev
+;;   :defer t :config
+;;   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
+;;         dabbrev-upcase-means-case-search t))
 
-(use-package! hippie-exp
-  :defer t :config
-  (setq  hippie-expand-try-functions-list
-         '(try-complete-file-name-partially
-           try-complete-file-name
-           try-expand-dabbrev
-           try-expand-dabbrev-all-buffers
-           try-expand-dabbrev-from-kill
-           try-complete-lisp-symbol-partially
-           try-complete-lisp-symbol
-           try-expand-line)))
-(map! [remap dabbrev-expand] #'hippie-expand)
+;; (use-package! hippie-exp
+;;   :defer t :config
+;;   (setq  hippie-expand-try-functions-list
+;;          '(try-complete-file-name-partially
+;;            try-complete-file-name
+;;            try-expand-dabbrev
+;;            try-expand-dabbrev-all-buffers
+;;            try-expand-dabbrev-from-kill
+;;            try-complete-lisp-symbol-partially
+;;            try-complete-lisp-symbol
+;;            try-expand-line)))
+;; (map! [remap dabbrev-expand] #'hippie-expand)
 
-(use-package! copilot
-  :defer t
-  :init
-  (add-hook 'text-mode-hook   #'copilot-mode)
-  (add-hook 'prog-mode-hook   #'copilot-mode)
-  (add-hook 'conf-mode-hook   #'copilot-mode)
-  :config
-  (setq copilot--base-dir
-        (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
-  (setq copilot-node-executable (expand-file-name
-                                 "~/.nvm/versions/node/v17.9.1/bin/node"))
-  ;; Model our Copilot interface after Fish completions.
-  (map! :map copilot-completion-map
-        "<right>" #'copilot-accept-completion
-        "C-f" #'copilot-accept-completion
-        "M-<right>" #'copilot-accept-completion-by-word
-        "M-f" #'copilot-accept-completion-by-word
-        "C-e" #'copilot-accept-completion-by-line
-        "<end>" #'copilot-accept-completion-by-line
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
+;; (use-package! copilot
+;;   :defer t
+;;   :init
+;;   (add-hook 'text-mode-hook   #'copilot-mode)
+;;   (add-hook 'prog-mode-hook   #'copilot-mode)
+;;   (add-hook 'conf-mode-hook   #'copilot-mode)
+;;   :config
+;;   (setq copilot--base-dir
+;;         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
+;;   (setq copilot-node-executable (expand-file-name
+;;                                  "~/.nvm/versions/node/v17.9.1/bin/node"))
+;;   ;; Model our Copilot interface after Fish completions.
+;;   (map! :map copilot-completion-map
+;;         "<right>" #'copilot-accept-completion
+;;         "C-f" #'copilot-accept-completion
+;;         "M-<right>" #'copilot-accept-completion-by-word
+;;         "M-f" #'copilot-accept-completion-by-word
+;;         "C-e" #'copilot-accept-completion-by-line
+;;         "<end>" #'copilot-accept-completion-by-line
+;;         "M-n" #'copilot-next-completion
+;;         "M-p" #'copilot-previous-completion)
 
-  (when (modulep! :editor snippets)
-    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
+;;   (when (modulep! :editor snippets)
+;;     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
 
-(use-package! isearch-dabbrev
-  :defer t
-  :init
-  (map! :map isearch-mode-map
-        "M-/" #'isearch-dabbrev-expand
-        "C-M-/" #'isearch-dabbrev-expand))
+;; (use-package! isearch-dabbrev
+;;   :defer t
+;;   :init
+;;   (map! :map isearch-mode-map
+;;         "M-/" #'isearch-dabbrev-expand
+;;         "C-M-/" #'isearch-dabbrev-expand))
 
-(when (modulep! :completion vertico)
-  (use-package! consult
-    :init
-    (map! "C-h C-m" #'describe-keymap
-          "C-h <return>" #'info-emacs-manual
-          "C-x C-k C-k" #'consult-kmacro ; replaces
-                                        ; `kmacro-end-or-call-macro-repeat',
-                                        ; which is similar to
-                                        ; `kmacro-end-and-call-macro' from `<f4>'
-                                        ; and `C-x e'.
-          ;; C-x bindings (ctl-x-map)
-          "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
-          "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-          "M-#" #'consult-register
-          [remap jump-to-register] #'consult-register-load
-          ;; Other custom bindings
-          ;; M-g bindings (goto-map)
-          "M-g e" #'consult-compile-error
-          "M-g g" #'consult-goto-line   ;; orig. goto-line
-          "M-g M-g" #'consult-goto-line ;; orig. goto-line
-          "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
-          "M-g m" #'consult-mark
-          "M-g k" #'consult-global-mark
-          ;; M-s bindings (search-map)
-          [remap Info-search] #'consult-info
-          "M-s i" #'consult-info
-          "M-s k" #'consult-keep-lines
-          "M-s u" #'consult-focus-lines
-          ;; Isearch integration
-          "M-s e" #'consult-isearch-history
-          :map isearch-mode-map
-          "M-e" #'consult-isearch-history   ;; orig. isearch-edit-string
-          "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
-          "M-s l" #'consult-line ;; needed by consult-line to detect isearch
-          "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
-          ;; Minibuffer history
-          :map minibuffer-local-map
-          "M-s" #'consult-history  ;; orig. next-matching-history-element
-          "M-r" #'consult-history) ;; orig. previous-matching-history-element
-    :config
-    (setq consult-preview-key 'any)
-    (consult-customize
-     consult-ripgrep consult-git-grep consult-grep
-     consult-bookmark consult-recent-file
-     +default/search-project +default/search-other-project
-     +default/search-project-for-symbol-at-point
-     +default/search-cwd +default/search-other-cwd
-     +default/search-notes-for-symbol-at-point
-     +default/search-emacsd
-     consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
-     :preview-key 'any)))
+;; (when (modulep! :completion vertico)
+;;   (use-package! consult
+;;     :init
+;;     (map! "C-h C-m" #'describe-keymap
+;;           "C-h <return>" #'info-emacs-manual
+;;           "C-x C-k C-k" #'consult-kmacro ; replaces
+;;                                         ; `kmacro-end-or-call-macro-repeat',
+;;                                         ; which is similar to
+;;                                         ; `kmacro-end-and-call-macro' from `<f4>'
+;;                                         ; and `C-x e'.
+;;           ;; C-x bindings (ctl-x-map)
+;;           "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
+;;           "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
+;;           "M-#" #'consult-register
+;;           [remap jump-to-register] #'consult-register-load
+;;           ;; Other custom bindings
+;;           ;; M-g bindings (goto-map)
+;;           "M-g e" #'consult-compile-error
+;;           "M-g g" #'consult-goto-line   ;; orig. goto-line
+;;           "M-g M-g" #'consult-goto-line ;; orig. goto-line
+;;           "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
+;;           "M-g m" #'consult-mark
+;;           "M-g k" #'consult-global-mark
+;;           ;; M-s bindings (search-map)
+;;           [remap Info-search] #'consult-info
+;;           "M-s i" #'consult-info
+;;           "M-s k" #'consult-keep-lines
+;;           "M-s u" #'consult-focus-lines
+;;           ;; Isearch integration
+;;           "M-s e" #'consult-isearch-history
+;;           :map isearch-mode-map
+;;           "M-e" #'consult-isearch-history   ;; orig. isearch-edit-string
+;;           "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
+;;           "M-s l" #'consult-line ;; needed by consult-line to detect isearch
+;;           "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
+;;           ;; Minibuffer history
+;;           :map minibuffer-local-map
+;;           "M-s" #'consult-history  ;; orig. next-matching-history-element
+;;           "M-r" #'consult-history) ;; orig. previous-matching-history-element
+;;     :config
+;;     (setq consult-preview-key 'any)
+;;     (consult-customize
+;;      consult-ripgrep consult-git-grep consult-grep
+;;      consult-bookmark consult-recent-file
+;;      +default/search-project +default/search-other-project
+;;      +default/search-project-for-symbol-at-point
+;;      +default/search-cwd +default/search-other-cwd
+;;      +default/search-notes-for-symbol-at-point
+;;      +default/search-emacsd
+;;      consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+;;      :preview-key 'any)))
 
-(after! cc-mode
-  (if (display-graphic-p)
-      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
-    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+;; (after! cc-mode
+;;   (if (display-graphic-p)
+;;       (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+;;     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
-(when (modulep! :private corfu)
-  (map! (:after eshell
-         :map eshell-mode-map
-         "TAB" #'completion-at-point
-         "<tab>" #'completion-at-point)
-        (:after corfu
-         :map corfu-map
-         "C-M-i" #'corfu-move-to-minibuffer
-         "}" #'corfu-quick-complete)    ; `}' is easy to type on my keyboard layout
-        :prefix "M-+"
-        "c" #'completion-at-point       ; capf
-        "t" #'complete-tag              ; etags
-        "d" #'cape-dabbrev              ; or dabbrev-completion
-        "f" #'cape-file
-        "k" #'cape-keyword
-        "h" #'cape-history
-        "s" #'cape-symbol
-        "a" #'cape-abbrev
-        "i" #'cape-ispell
-        "l" #'cape-line
-        "w" #'cape-dict
-        "\\" #'cape-tex
-        "_" #'cape-tex
-        "^" #'cape-tex
-        "&" #'cape-sgml
-        "r" #'cape-rfc1345
-        "+" #'copilot-complete
-        "M-+" #'copilot-complete))
+;; (when (modulep! :private corfu)
+;;   (map! (:after eshell
+;;          :map eshell-mode-map
+;;          "TAB" #'completion-at-point
+;;          "<tab>" #'completion-at-point)
+;;         (:after corfu
+;;          :map corfu-map
+;;          "C-M-i" #'corfu-move-to-minibuffer
+;;          "}" #'corfu-quick-complete)    ; `}' is easy to type on my keyboard layout
+;;         :prefix "M-+"
+;;         "c" #'completion-at-point       ; capf
+;;         "t" #'complete-tag              ; etags
+;;         "d" #'cape-dabbrev              ; or dabbrev-completion
+;;         "f" #'cape-file
+;;         "k" #'cape-keyword
+;;         "h" #'cape-history
+;;         "s" #'cape-symbol
+;;         "a" #'cape-abbrev
+;;         "i" #'cape-ispell
+;;         "l" #'cape-line
+;;         "w" #'cape-dict
+;;         "\\" #'cape-tex
+;;         "_" #'cape-tex
+;;         "^" #'cape-tex
+;;         "&" #'cape-sgml
+;;         "r" #'cape-rfc1345
+;;         "+" #'copilot-complete
+;;         "M-+" #'copilot-complete))
 
-(when (modulep! :editor snippets)
-  (map! [remap yas-insert-snippet] #'consult-yasnippet
-        :map yas-minor-mode-map
-        "C-c & C-s" nil
-        "C-c & C-n" nil
-        "C-c & C-v" nil))
+;; (when (modulep! :editor snippets)
+;;   (map! [remap yas-insert-snippet] #'consult-yasnippet
+;;         :map yas-minor-mode-map
+;;         "C-c & C-s" nil
+;;         "C-c & C-n" nil
+;;         "C-c & C-v" nil))
 
 
 ;;; Term
