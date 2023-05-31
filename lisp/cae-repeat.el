@@ -76,6 +76,10 @@
     ("j" dired-jump
      "-" cae-dired-jump))
 
+  (define-repeat-map expand-region-improved
+    ("=" eri/expand-region
+     "-" eri/contract-region))
+
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
     ("u" winner-undo
