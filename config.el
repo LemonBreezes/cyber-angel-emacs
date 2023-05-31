@@ -677,6 +677,7 @@
         "r" #'avy-resume
         "." #'cae-avy-symbol-at-point
         "k" #'avy-kill-region
+        "w" #'avy-copy-region
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-below
@@ -684,6 +685,7 @@
         "C-r" #'avy-resume
         "C-." #'cae-avy-symbol-at-point
         "C-k" #'avy-kill-region
+        "C-w" #'avy-copy-region
         "C-c" #'avy-goto-char
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
@@ -693,6 +695,7 @@
   ;; `avy-styles-alist' instead.
   (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
   (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
+  (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
 
   (when (modulep! :completion vertico)
     (after! vertico
