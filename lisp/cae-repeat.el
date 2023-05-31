@@ -81,6 +81,7 @@
       (:enter +workspace/display)
       (:exit
        "/" tab-select
+       "?" cae-repeat-blink-cursor
        "o" tab-next
        "O" tab-previous))
    t)
