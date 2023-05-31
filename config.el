@@ -878,9 +878,7 @@
    ,@(when (and (modulep! :tools pdf)
                 (display-graphic-p)
                 (not (string-suffix-p "-WSL2" operating-system-release)))
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
-   ,@(when (modulep! :private debugger))
-   gud edebug gdb-mi)
+       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
 (setq cae-config-finished-loading t)
