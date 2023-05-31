@@ -1207,6 +1207,7 @@
 (use-package! org-ai
   :defer t :init
   (map! "C-c M-a" #'cae-lazy-load-org-ai)
+  (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   :config
   (org-ai-global-mode +1)
