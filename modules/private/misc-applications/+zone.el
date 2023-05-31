@@ -10,7 +10,7 @@
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
                        zone-rainbow
-                       zone-pgm-md5
+                       qzone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
                        zone-pgm-putz-with-case
