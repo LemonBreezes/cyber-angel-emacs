@@ -107,6 +107,7 @@ Lispy."
         (t (funcall #'eval-last-sexp arg))))
 
 ;;;###autoload
-(defun cae-tab-close-and-select-right ()
+(defun cae-close-tab-and-select-right ()
+  (interactive)
   (let ((tab-bar-close-tab-select 'right))
     (call-interactively #'tab-close)))
