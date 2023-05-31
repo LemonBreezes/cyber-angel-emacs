@@ -15,6 +15,11 @@
   (advice-add #'helm-mode :override #'ignore)
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
+;; These are the packages that are currently not being lazy-loaded:
+;; - `ednc'
+;; - `isearch-mb'
+;; - `speedrect'
+
 ;;; UI
 
 (load! "lisp/cae-theme")
