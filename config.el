@@ -1187,7 +1187,8 @@
 (map! :leader :prefix ("g" . "gpt"))
 
 (use-package! org-ai
-  :defer t
+  :defer t :init
+  (map! "C-c M-a" #'cae-lazy-load-org-ai)
   :config
   (org-ai-global-mode +1)
   (add-hook 'org-mode-hook #'org-ai-mode)
