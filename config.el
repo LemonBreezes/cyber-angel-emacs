@@ -8,7 +8,7 @@
 
 ;;; Stuff that should not be disabled.
 
-(load! "lisp/cae-fixup-leader-key")
+(load! "lisp/cae-bindings")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
@@ -620,16 +620,6 @@
   (define-key resize-window-repeat-map "_" #'shrink-window)
   (map! [remap delete-char] #'cae-delete-char
         ")" #'cae-insert-closing-paren)
-  (let ((embark-act-key "<f8>"))
-    (map! embark-act-key #'embark-act
-          (:when (modulep! :completion vertico)
-           (:map minibuffer-local-map
-            "C-;" nil
-            embark-act-key #'embark-act)))
-    (eval
-     `(after! embark
-        (setq embark-cycle-key ,embark-act-key))
-     t))
 
   (eval
    `(map! :prefix "C-z"
@@ -677,15 +667,6 @@
                 (define-key ctl-x-map "p" nil)
                 (map! :map ctl-x-map
                       "p" #'+popup/other))))
-
-  ;; Remove redundant `consult-history' keybinding.
-  (define-key!
-    :keymaps (append +default-minibuffer-maps
-                     (when (modulep! :editor evil +everywhere)
-                       '(evil-ex-completion-map)))
-    "C-s" nil)                          ;We already have `consult-history' bound
-                                        ;to `M-r' and `M-s'. This way we can use
-                                        ;`C-s' to search in the minibuffer.
 
   ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
   (map! :leader
