@@ -37,6 +37,7 @@
         (dolist (mode modes)
           (when (boundp mode)
             (let ((mode-var (intern (concat "cae-eshell--" (symbol-name mode) "-enabled-p"))))
+              (make-local-variable mode-var)
               (if eat--eshell-process-running-mode
                   (progn (set mode-var (symbol-value mode))
                          (funcall mode -1))
