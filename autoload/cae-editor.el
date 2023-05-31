@@ -309,12 +309,13 @@ mark the string and call `edit-indirect-region' with it."
     (embark-act arg)))
 
 ;;;###autoload
-(defun cae-avy-embark-act-on-region ()
+(cl-defun cae-avy-embark-act-on-region ()
   (interactive)
   (save-window-excursion
-    (let ((initial-window (selected-window))
+    (let* ((initial-window (selected-window))
            (beg (avy--line))
-           (end (avy--line)))
+           (end (if beg (avy--line)
+                  (cl-return-from cae-avy-embark-act-on-region))))
       (when (> beg end)
         (cl-rotatef beg end))
       (setq beg (save-excursion
