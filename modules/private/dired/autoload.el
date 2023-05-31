@@ -10,7 +10,7 @@
   (when (and (frame-width (selected-frame))
              (one-window-p t)
              (> (frame-width (selected-frame)) 160))
-    (dirvish-layout-toggle)))
+    (run-at-time 0.001 nil #'dirvish-layout-toggle)))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
