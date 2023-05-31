@@ -177,7 +177,6 @@
   (meow/setup-cae)
   (meow/setup-keypad)
   (add-hook 'minions-mode-hook #'meow-setup-indicator)
-  (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
           (?h . ?h)
