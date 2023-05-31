@@ -37,6 +37,8 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "7") (kbd "C-c w 7"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "8") (kbd "C-c w 8"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "9") (kbd "C-c w 9"))
+(define-key key-translation-map (kbd "C-x 4 C-x 4") (kbd "C-x 4 4"))
+(define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
 
 ;;; Universal argument
 
