@@ -123,7 +123,8 @@
                 projectile-find-file
                 projectile-find-file-in-directory
                 doom/find-file-in-other-project))
-    (define-key dired-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper fn)))
+    (define-key dired-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper
+                                                   fn)))
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
