@@ -716,6 +716,7 @@
 (use-package! speedrect
   :after-call rectangle-mark-mode-hook
   :config
+  (speedrect-hook)
   (when (modulep! :ui popup)
     (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
       :side 'right :select nil :quit t :ttl 0)))
