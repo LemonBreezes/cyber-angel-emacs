@@ -105,7 +105,7 @@
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
-          "RET" #'git-email-format-patch))
+          :desc "Email patch" "RET" #'git-email-format-patch))
   (map! :map dired-mode-map
         :localleader
         "g" #'git-email-send-email)
