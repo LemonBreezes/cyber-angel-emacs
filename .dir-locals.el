@@ -3,7 +3,7 @@
 
 ((nil
   . ((eval
-      . (progn
+      . (progn t
           (when (and (derived-mode-p 'emacs-lisp-mode)
                      (buffer-file-name)
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
