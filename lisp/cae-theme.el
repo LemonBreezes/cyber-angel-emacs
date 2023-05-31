@@ -80,4 +80,5 @@
 
 (use-package! auto-dark
   :config
-  (setq auto-dark-detection-method 'powershell))
+  (setq auto-dark-detection-method 'powershell)
+  (auto-dark-mode +1))
