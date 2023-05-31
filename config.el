@@ -905,16 +905,15 @@
         :desc "Mark previous sexps" "C-M-b" #'mc/mark-previous-sexps)
   (after! multiple-cursors-core
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
+    (define-key mc/keymap (kbd "C-. C-.")   #'mc/freeze-fake-cursors-dwim)
     (define-key mc/keymap (kbd "C-. l")     #'mc/insert-letters)
     (define-key mc/keymap (kbd "C-. n")     #'mc/insert-numbers)
     (define-key mc/keymap (kbd "C-. [")     #'mc/vertical-align-with-space)
     (define-key mc/keymap (kbd "C-. {")     #'mc/vertical-align)
-
     (define-key mc/keymap (kbd "C-. C-d")   #'mc/remove-current-cursor)
     (define-key mc/keymap (kbd "C-. C-k")   #'mc/remove-cursors-at-eol)
     (define-key mc/keymap (kbd "C-. d")     #'mc/remove-duplicated-cursors)
     (define-key mc/keymap (kbd "C-. C-o")   #'mc/remove-cursors-on-blank-lines)
-
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
     (define-key mc/keymap (kbd "C-. =")     #'mc/compare-chars)))
 
