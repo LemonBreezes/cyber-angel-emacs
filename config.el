@@ -776,8 +776,7 @@
    (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 
  (use-package! ibuffer
-   :defer t
-   :config
+   :defer t :config
    (setq ibuffer-always-show-last-buffer t
          ibuffer-formats
          '((mark modified read-only locked " "
