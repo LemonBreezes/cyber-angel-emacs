@@ -9,6 +9,8 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
+(remove-hook 'doom-first-input-hook #'helm-mode)
+
 ;;; UI
 
 (load! "lisp/cae-theme")
