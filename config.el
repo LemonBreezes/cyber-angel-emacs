@@ -723,7 +723,9 @@
                   " " filename)))
     (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$")
-    (add-to-list 'ibuffer-never-show-predicates "^\\*clangd.*\\*$"))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*clangd.*\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Native-compile-Log\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Async-native-compile-log\\*$"))
 
   (use-package! aggressive-indent
     :disabled t
