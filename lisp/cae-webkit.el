@@ -1,6 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-webkit.el -*- lexical-binding: t; -*-
 
 (use-package! webkit
+  :when (display-graphic-p)
   :defer t
   :init
   (after! browse-url
