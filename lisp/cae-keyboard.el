@@ -233,7 +233,8 @@
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
                                         (string-remove-prefix "lispy-"))
-                          :column ,(caddr binding))))))
+                          :column ,(caddr binding)
+                          :bind #'ignore)))))
     (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
