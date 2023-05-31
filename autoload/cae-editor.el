@@ -35,7 +35,7 @@
                             ((eq response ?y) (save-buffer) t)
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
-          (apply orig-func (list (current-buffer))))))))
+          (funcall orig-func (or buffer-or-name (current-buffer))))))))
 
 (defun cae-kill-buffer-fixup-windows (buffer)
   (let ((windows (get-buffer-window-list buffer)))
