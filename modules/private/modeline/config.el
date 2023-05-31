@@ -55,6 +55,7 @@
         (highlight-changes-mode)
         (overwrite-mode)
         (ruler-mode)
+        (rainbow-mode)
         (visual-line-mode)
         (fill-column-indicator-mode)))
 (add-hook 'c-mode-common-hook #'cae-modeline-minions-c-setup)
