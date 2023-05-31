@@ -31,6 +31,8 @@
                             (font-spec :family "LXGW WenKai" :weight 'light
                                        :size 17))))
 
+;; Show absolute line numbers. I prefer to not show relative line numbers
+;; because I use `avy' commands to jump to lines.
 (setq display-line-numbers-type t)
 
 ;; Show minibuffer recursion depth
