@@ -41,12 +41,12 @@
            hl-todo
            hydra
            (ligatures +extra +iosevka)
-           ;; nav-flash
+           ;;nav-flash
            (popup +defaults)
            (vc-gutter +pretty +diff-hl)
            vi-tilde-fringe
            workspaces
-           ;; (window-select +switch-window)
+           ;;(window-select +switch-window)
 
            :editor
            file-templates
@@ -95,7 +95,7 @@
            (default +bindings +smartparens)
 
            :email
-           ;; (mu4e +org)
+           ;;(mu4e +org)
 
            :app
            (rss +org)
