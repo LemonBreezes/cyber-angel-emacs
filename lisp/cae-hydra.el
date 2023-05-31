@@ -16,6 +16,8 @@
         cae-hydra--last-hydra))
 
 (defun cae-hydra-restore-last-hydra-h (&rest _)
+  (when (bound-and-true-p hydra-curr-map)
+    (hydra-keyboard-quit))
   (let ((hydra (or (and (featurep 'persp-mode)
                         (persp-parameter 'cae-hydra--last-hydra))
                    (alist-get (tab-bar--current-tab)
@@ -23,8 +25,6 @@
                               nil nil #'eq)
                    cae-hydra--last-hydra)))
     (setq cae-hydra--last-hydra nil)
-    (when (featurep 'hydra)
-      (hydra-keyboard-quit))
     (cae-hydra-store-last-hydra-h)
     (when hydra
       (funcall hydra))))
