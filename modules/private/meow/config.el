@@ -203,5 +203,4 @@
               (Man-mode . normal)
               (message-buffer-mode . normal)
               (eshell-mode . insert)))
-
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
