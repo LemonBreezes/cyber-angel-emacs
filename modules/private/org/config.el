@@ -62,10 +62,7 @@
                 (let ((parent (org-element-property :parent (org-element-at-point))))
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
-  (advice-add #'worf-add :after #'cae-org-set-created-timestamp)
-  (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors-core
-      (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
+  (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
   :defer t :init
