@@ -31,7 +31,8 @@
                        zone-pgm-paragraph-spaz])
 
   ;; For `zone-matrix'.
-  (defvar tabbar-mode nil)
+  (unless (boundp 'tabbar-mode)
+    (defvar tabbar-mode nil))
   (autoload 'zone-matrix "zone-matrix")
   (advice-add #'zone-matrix :before
               (cae-defun +zone-matrix-disable-nobreak-char-display-a ()
