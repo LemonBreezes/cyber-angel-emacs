@@ -131,16 +131,13 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/l ()
-  (let ((target-window
-         (cl-find-if (lambda (win)
-                       (and (not (eq win (selected-window)))
-                            (window-buffer win)
-                            (buffer-local-value 'default-directory
-                                                (window-buffer win))))
-                     cae-window-history)))
-    (when target-window
-      (let ((path (buffer-local-value 'default-directory
-                                      (window-buffer target-window))))
+(defun eshell/u ()
+  (let ((buf
+         (cl-find-if (lambda (buf)
+                       (and (not (eq buf (current-buffer)))
+                            (buffer-local-value 'default-directory buf)))
+                     (buffer-list))))
+    (when buf
+      (let ((path (buffer-local-value 'default-directory buf)))
         (unless (file-equal-p path (eshell/pwd))
           (eshell/cd path))))))
