@@ -265,6 +265,7 @@ mark the string and call `edit-indirect-region' with it."
 (defalias 'cae-avy-parrot-rotate
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-next-word-at-point))
 
+;;;###autoload
 (defalias 'cae-avy-parrot-rotate-backward
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-prev-word-at-point))
 
