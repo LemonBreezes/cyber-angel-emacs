@@ -112,29 +112,7 @@
 
 ;;; Distinguishing dual-purpose keycodes
 
-;; This code allows us to use differentiate the `C-i' and `<tab>' keys. I should
-;; probably outsource this hack to an external package. Someone else has
-;; probably already done this.
-;;
-;; Do not use this code in terminal Emacs. For terminal Emacs, I would need to
-;; wrap the `C-i' and `C-S-i' commands so that they run the commands bound to
-;; <tab> and <backtab> respectively if `display-graphic-p' is nil.
-;;(when (display-graphic-p)
-;;  (defun cae-keyboard-conditionally-remap-C-i ()
-;;    (run-at-time
-;;     0.0 nil
-;;     (lambda ()
-;;       (let ((tab-command (lookup-key (current-local-map) (kbd "<tab>")))
-;;             (C-i-command (lookup-key (current-local-map) (kbd "C-i"))))
-;;         (when (and C-i-command
-;;                    (or (not tab-command)
-;;                        (eq tab-command 'self-insert-command))
-;;                    (not (eq tab-command C-i-command)))
-;;           (define-key (current-local-map) (kbd "<tab>") C-i-command))))))
-;;
-;;  (add-hook 'after-change-major-mode-hook #'cae-keyboard-conditionally-remap-C-i))
-(map! ;;"<tab>" #'indent-for-tab-command
- [C-i] #'doom/dumb-indent
+(map! [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent)
 
 ;;; Lispy
