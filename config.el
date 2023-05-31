@@ -365,7 +365,7 @@
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
 
-(setq delete-selection-save-to-register "d")
+(setq delete-selection-save-to-register ?d)
 (setq delete-active-region t)           ;makes `d' delete region in Meow.
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
