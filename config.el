@@ -520,30 +520,34 @@
   ;; Treat all themes as safe.
   (setq custom-safe-themes t)
 
-  (setq delete-active-region t)         ;makes `d' delete region in Meow.
+  (setq delete-active-region t) ;makes `d' delete region in Meow.
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
-  ;;(defvar cae-diff-window nil
-  ;;  "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
-  ;;(defun cae-ask-kill-buffer (buffer)
-  ;;  "Ask to diff, save or kill buffer"
-  ;;  (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
-  ;;                  if (or (eq ch ?k) (eq ch ?K))
-  ;;                  return t
-  ;;                  if (or (eq ch ?d) (eq ch ?D))
-  ;;                  do (setq cae-diff-window (diff-buffer-with-file buffer))
-  ;;                  if (or (eq ch ?s) (eq ch ?S))
-  ;;                  return (progn (save-buffer buffer) t)
-  ;;                  if (memq ch '(?q ?Q))
-  ;;                  return nil)
-  ;;    (when cae-diff-window
-  ;;      (delete-window cae-diff-window)
-  ;;      (setq cae-diff-window nil))))
-  ;;(advice-add #'kill-buffer--possibly-save :override #'cae-ask-kill-buffer)
+  (defvar cae-diff-window nil
+    "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
+  (defun cae-ask-kill-buffer ()
+    "Ask to diff, save or kill buffer"
+    (if (and (buffer-file-name)
+             (buffer-modified-p))
+        (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+                        if (or (eq ch ?k) (eq ch ?K))
+                        return t
+                        if (or (eq ch ?d) (eq ch ?D))
+                        do (setq cae-diff-window (diff-buffer-with-file))
+                        if (or (eq ch ?s) (eq ch ?S))
+                        return (progn (save-buffer) t)
+                        if (memq ch '(?q ?Q))
+                        return nil)
+          (when cae-diff-window
+            (delete-window cae-diff-window)
+            (setq cae-diff-window nil)))
+      t))
+  
+  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
@@ -583,9 +587,9 @@
         isearch-yank-on-move 'shift
         isearch-motion-changes-direction t
         lazy-count-prefix-format "(%s/%s) "
-        lazy-count-suffix-format nil    ; Using the suffix for counting matches
-                                        ; is better but does not work with
-                                        ; `isearch-mb'.
+        lazy-count-suffix-format nil ; Using the suffix for counting matches
+    ; is better but does not work with
+    ; `isearch-mb'.
         lazy-highlight-cleanup nil
         ;; The default search ring size is 16, which is too small considering that
         ;; we can fuzzy search the history with Consult.
@@ -691,7 +695,7 @@
     (setq ibuffer-always-show-last-buffer t
           ibuffer-formats
           '((mark modified read-only locked " "
-             (name 23 23 :left :elide)  ;Give more space to the name.
+             (name 23 23 :left :elide) ;Give more space to the name.
              " "
              (size 9 -1 :right)
              " "
@@ -714,7 +718,7 @@
     :disabled t
     :defer t :init
     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
-                                        ;module.
+    ;module.
     (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
     :config
     (add-to-list
@@ -824,7 +828,7 @@
     :defer t :init
     (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
 
-  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
+  (use-package! string-edit-at-point ; Used in `cae-edit-indirect-dwim'.
     :defer t)
 
   (after! outline
