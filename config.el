@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(load! "lisp/cae-logs")
+
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
