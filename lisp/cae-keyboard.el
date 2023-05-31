@@ -112,10 +112,9 @@
 
 ;;; Distinguishing dual-purpose keycodes
 
-;; Do not use this code in terminal Emacs. For
-;; terminal Emacs, I would need to wrap the `C-i' and `C-S-i' commands so that
-;; they run the commands bound to <tab> and <backtab> respectively if
-;; `display-graphic-p' is nil.
+;; Do not use this code in terminal Emacs. For terminal Emacs, I would need to
+;; wrap the `C-i' and `C-S-i' commands so that they run the commands bound to
+;; <tab> and <backtab> respectively if `display-graphic-p' is nil.
 (when (display-graphic-p)
   (defun cae-keyboard-conditionally-remap-C-i ()
     (run-at-time
