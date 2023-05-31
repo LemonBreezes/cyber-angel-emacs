@@ -5,7 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "w" #'wttrin)
+        "C-w" #'wttrin)
   :config
   (advice-add #'wttrin-query :after
               (cae-defun +wttrin-setup-h (&rest _)
