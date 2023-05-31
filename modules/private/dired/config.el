@@ -111,7 +111,7 @@
         "N" #'dirvish-narrow
         "j" #'consult-line)
 
-  ;; Jump directory with fullscren
+  (map! [remap dired-jump] #'dirvish-dwim)
 
   ;; Exit the current Dirvish session when running interactive commands like
   ;; `projectile-find-file'.
