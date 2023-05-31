@@ -130,10 +130,7 @@ derivative.")
       (add-to-list 'completion-at-point-functions #'cape-sgml t))
     :depth 2)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  :config
-  ;; Enhances speed on large projects, for which many buffers may be open.
-  (setq cape-dabbrev-check-other-buffers nil))
+  (add-to-list 'completion-at-point-functions #'cape-keyword))
 
 (use-package! kind-icon
   :when (modulep! +icons)
