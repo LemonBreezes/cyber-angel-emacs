@@ -14,7 +14,7 @@
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
 
     (after! dap-hydra
-      ;; For some reason, in Emacs30, I had to wrap this with an eval.
+      ;; For some reason, after updating Emacs30, I had to wrap this with an eval.
       (eval
        '(defhydra+ dap-hydra ()
           ("<f6>" nil "quit")
