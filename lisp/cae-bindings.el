@@ -101,3 +101,54 @@
 (define-key resize-window-repeat-map "_" #'shrink-window)
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
+
+(eval
+ `(map! :prefix "C-z"
+        "n" #'avy-goto-line-below
+        "p" #'avy-goto-line-above
+        "y" #'avy-copy-region
+        "c" #'avy-goto-char
+        "m" #'avy-move-region
+        "l" #'avy-goto-line
+        "e" #'avy-goto-end-of-line
+        "." #'cae-avy-symbol-at-point
+        "k" #'avy-kill-region
+        "w" #'avy-kill-ring-save-region
+        "j" #'avy-goto-word-1
+        "o" #'switch-window
+        "0" #'switch-window-then-delete
+        "1" #'switch-window-then-maximize
+        "2" #'switch-window-then-split-horizontally
+        "3" #'switch-window-then-split-vertically
+        "4" #'switch-window-then-kill-buffer
+        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+        "SPC" #'avy-goto-char-timer
+        (:map isearch-mode-map
+         "j" #'avy-isearch))
+ t)
+(when (modulep! :completion vertico)
+  (after! vertico
+    (map! :map vertico-map
+          "C-z j" #'vertico-quick-jump
+          "C-z i" #'vertico-quick-exit)))
+(after! embark
+  (map! :map embark-collect-mode-map
+        "C-z j" #'avy-embark-collect-choose
+        "C-z i" #'avy-embark-collect-act))
+(when (modulep! :private corfu)
+  (after! corfu
+    (map! :map corfu-map
+          "C-z j" #'corfu-quick-jump
+          "C-z i" #'corfu-quick-insert)))
+
+;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+(when (modulep! :ui popup)
+  (add-hook 'doom-switch-window-hook
+            (cae-defun cae-fix-popup-other-keybinding ()
+              (define-key ctl-x-map "p" nil)
+              (map! :map ctl-x-map
+                    "p" #'+popup/other))))
+
+;; I'm surprised Doom Emacs doesn't bind a key for copying links.
+(map! :leader
+      :desc "Copy link" "sy" #'link-hint-copy-link)
