@@ -22,8 +22,8 @@
     ("u" winner-undo
      "r" winner-redo))
 
-  ;;(define-repeat-map set-mark-command
-  ;;  ("SPC" set-mark-command))
+  (define-repeat-map set-mark-command
+    ("SPC" set-mark-command))
 
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
