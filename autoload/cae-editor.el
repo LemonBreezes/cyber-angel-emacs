@@ -284,4 +284,6 @@ mark the string and call `edit-indirect-region' with it."
       (if (modulep! :config default +smartparens)
           (sp-forward-sexp)
         (forward-sexp)))
-    (comment-or-uncomment-region)))
+    (if (bound-and-true-p lispy-mode)
+        (call-interactively #'lispy-comment)
+      (call-interactively #'comment-or-uncomment-region))))
