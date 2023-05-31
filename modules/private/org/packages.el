@@ -9,3 +9,4 @@
   (package! org-jira))
 (package! worf :recipe
   (:host github :repo "LemonBreezes/worf"))
+(package! org-tidy)
