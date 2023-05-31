@@ -1033,7 +1033,7 @@
         "R" #'org-ai-talk-read-region
         "c" #'org-ai-refactor-code)
   (after! embark
-    (map! :map embark-general-map
+    (map! :map embark-region-map
           "M-a" #'org-ai-region-map))
   :config
   (org-ai-global-mode +1)
