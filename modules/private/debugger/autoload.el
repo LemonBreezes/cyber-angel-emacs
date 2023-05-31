@@ -31,6 +31,13 @@
          (call-interactively #'comint-send-input))))
 
 ;;;###autoload
+(defun cae-debugger-quit-or-delete-or-send-eof (arg)
+  (interactive "p")
+  (if (eobp)
+      (kill-buffer)
+    (comint-delchar-or-maybe-eof arg)))
+
+;;;###autoload
 (defun cae-debugger/open-repl ()
   (interactive)
   (pop-to-buffer
