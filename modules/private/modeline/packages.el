@@ -3,3 +3,4 @@
 
 (package! minions :recipe (:host github :repo "LemonBreezes/minions"))
 (package! rainbow-mode)
+(package! nyan-mode)
