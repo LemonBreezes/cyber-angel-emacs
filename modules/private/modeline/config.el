@@ -138,9 +138,6 @@
                          "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
-                         "cae-keyboard-kbd"
-                         "cae-keyboard-kbd1"
-                         "cae-keyboard-kbd2"
-                         )))
+                         "cae-keyboard-kbd2")))
     (map! "C-!" #'parrot-rotate-next-word-at-point
           "C-M-!" #'parrot-rotate-prev-word-at-point)))
