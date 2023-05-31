@@ -113,30 +113,30 @@
 (unless (lookup-key help-map (kbd "SPC"))
   (define-key help-map (kbd "SPC") #'cae-pop-mark))
 
-(eval
- `(map! :prefix "C-z"
-        "n" #'avy-goto-line-below
-        "p" #'avy-goto-line-above
-        ;;"y" #'avy-copy-region
-        "c" #'avy-goto-char
-        ;;"m" #'avy-move-region
-        "l" #'avy-goto-line
-        "e" #'avy-goto-end-of-line
-        "." #'cae-avy-symbol-at-point
-        ;;"k" #'avy-kill-region
-        ;;"w" #'avy-kill-ring-save-region
-        "j" #'avy-goto-word-1
-        "o" #'switch-window
-        "0" #'switch-window-then-delete
-        "1" #'switch-window-then-maximize
-        "2" #'switch-window-then-split-horizontally
-        "3" #'switch-window-then-split-vertically
-        "4" #'switch-window-then-kill-buffer
-        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-        "SPC" #'avy-goto-char-timer
-        (:map isearch-mode-map
-         "j" #'avy-isearch))
- t)
+(map! :prefix "C-z"
+      "n" #'avy-goto-line-below
+      "p" #'avy-goto-line-above
+      ;;"y" #'avy-copy-region
+      "c" #'avy-goto-char
+      ;;"m" #'avy-move-region
+      "l" #'avy-goto-line
+      "e" #'avy-goto-end-of-line
+      "." #'cae-avy-symbol-at-point
+      ;;"k" #'avy-kill-region
+      ;;"w" #'avy-kill-ring-save-region
+      "a" #'cae-avy-embark-act-on-region
+      "j" #'avy-goto-word-1
+      "o" #'switch-window
+      "0" #'switch-window-then-delete
+      "1" #'switch-window-then-maximize
+      "2" #'switch-window-then-split-horizontally
+      "3" #'switch-window-then-split-vertically
+      "4" #'switch-window-then-kill-buffer
+      ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+      "SPC" #'avy-goto-char-timer
+      (:map isearch-mode-map
+       "j" #'avy-isearch))
+
 (when (modulep! :completion vertico)
   (after! vertico
     (map! :map vertico-map
