@@ -17,7 +17,3 @@
   ("M-<left>" tabulated-list-previous-column "Previous column" :column "Navigate")
   ("M-<right>" tabulated-list-next-column "Next column" :column "Navigate")
   ("<f6>" nil "Exit" :exit t :column nil))
-
-;;;###autoload (autoload 'cae-debugger-cheatsheet-hydra/body "autoload/cae-hydras" nil t)
-(defhydra cae-debugger-cheatsheet-hydra (:color pink :foreign-keys run)
-  ("<f6>" nil "Exit" :exit t :column nil))
