@@ -101,7 +101,7 @@
   (use-package! parrot
     :defer t :init
     (defvar parrot-animate-on-load nil)
-    (add-hook 'doom-first-file-hook #'enable-parrot-mode)
+    (add-hook 'doom-first-file-hook #'parrot-mode)
     :config
     (setq parrot-animate 'hide-static
           parrot-rotate-animate-after-rotation nil
