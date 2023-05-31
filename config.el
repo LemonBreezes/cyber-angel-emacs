@@ -37,7 +37,7 @@
       kill-buffer-delete-auto-save-files t)
 
 (when (and (modulep! :ui modeline)
-           (not (module! :ui modeline +light)))
+           (not (modulep! :ui modeline +light)))
   (setq doom-modeline-hud t))
 
 (after! which-key
