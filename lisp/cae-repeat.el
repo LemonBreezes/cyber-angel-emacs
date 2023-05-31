@@ -30,6 +30,13 @@
     ("s" isearch-repeat-forward
      "r" isearch-repeat-backward))
 
+  (eval
+   `(define-repeat-map tab-next
+      ("o" tab-next
+       "O" tab-previous
+       ,(cae-keyboard-kbd "0") cae-tab-close-and-select-right
+       "0" cae-tab-close-and-select-right)))
+
   ;;Currently part of `other-window' repeat map
   ;;(define-repeat-map winner
   ;;  ("u" winner-undo
@@ -89,7 +96,6 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8)))
-
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
