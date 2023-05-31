@@ -175,6 +175,6 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-browse-url-generic-bookmark-handler (bookmark)
   "Bookmark handler for opening URLs with `browse-url-generic'."
   (let ((url (bookmark-prop-get bookmark 'filename)))
-    (if url
+    (if (ffap-url-p url)
         (browse-url-generic url)
       (message "Bookmark does not have a valid FILENAME property."))))
