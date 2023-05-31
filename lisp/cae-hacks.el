@@ -66,8 +66,3 @@
 
 ;; Use the system's `libvterm' if available.
 (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
-
-(defun cae-hacks-erase-this-command-keys-a (&rest _)
-  (run-with-timer 0.0 nil (lambda ()
-                            (set--this-command-keys ""))))
-(advice-add #'embark--act :after #'cae-hacks-erase-this-command-keys-a)
