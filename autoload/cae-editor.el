@@ -92,3 +92,14 @@ Lispy."
   (avy-with symbol-overlay-jump-avy
     (avy-process
      (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
+
+;;;###autoload
+(defun cae-eval-last-sexp (arg)
+  (interactive "P")
+  (cond ((or (eq arg '-)
+             (and (numberp arg)
+                  (< arg 0)))
+         (funcall #'pp-eval-last-sexp (if numberp arg nil)))
+        ((bound-and-true-p eros-mode)
+         (funcall #'eros-eval-last-sexp arg))
+        (t (funcall #'eval-last-sexp arg))))
