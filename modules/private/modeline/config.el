@@ -6,7 +6,6 @@
                 (breadcrumb-project-crumbs))
               'face '(:inherit variable-pitch
                       :weight bold)))
-(run-with-idle-timer 5 #'native-compile #'cae-modeline-buffer-name)
 
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
