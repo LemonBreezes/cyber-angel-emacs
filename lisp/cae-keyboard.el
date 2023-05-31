@@ -123,7 +123,7 @@
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "k") 'lispy-up)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "d") 'lispy-different)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "o") 'lispy-other-mode)
-    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "p") 'lispy-eval-other-window)
+    ;;(lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "p") 'lispy-eval-other-window)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "P") 'lispy-paste)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "y") 'lispy-occur)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "z") 'lh-knight/body)
