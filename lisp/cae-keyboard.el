@@ -80,13 +80,14 @@
 
 ;;; Universal argument
 
-(defconst home-row-numbers-qwerty
-  (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
+(unless (modulep! :private meow)
+  (defconst home-row-numbers-qwerty
+    (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
 
-(home-row-numbers)
+  (home-row-numbers)
 
-(map! :map universal-argument-map
-      "l" #'cae-keyboard-insert-current-prefix)
+  (map! :map universal-argument-map
+        "l" #'cae-keyboard-insert-current-prefix))
 
 ;;; Distinguishing dual-purpose keycodes
 
