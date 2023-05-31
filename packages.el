@@ -30,7 +30,7 @@
 (package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 
-;; These are used for autoloads without explicit configuration.
+;; These are used for their autoloads without explicit configuration.
 (package! crontab-mode)
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
