@@ -23,7 +23,7 @@
   (map! :map eat-mode-map
         "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
 
-  (add-hook 'eshell-mode-hook #'+eshell-set-up-autocompletion)
+  (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
   (advice-add 'eshell-send-input :before #'expand-abbrev)
