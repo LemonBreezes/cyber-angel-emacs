@@ -73,8 +73,7 @@
    t)
 
   (define-repeat-map dired-jump
-    ("j" dired-jump)
-    (:enter dirvish-dwim))
+    ("j" dired-jump))
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
