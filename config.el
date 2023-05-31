@@ -745,6 +745,11 @@
   :defer t :init
   (add-hook 'doom-first-input-hook #'restore-point-mode)
   :config
+  (dolist (fn '(symbol-overlay-switch-forward
+                symbol-overlay-switch-backward
+                symbol-overlay-jump-next
+                symbol-overlay-jump-prev))
+    (add-to-list 'rp/restore-point-commands fn))
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
