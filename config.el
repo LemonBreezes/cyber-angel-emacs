@@ -212,6 +212,9 @@
       make-cursor-line-fully-visible nil
       yank-pop-change-selection t)
 
+(after! xclip
+  (setq xclip-select-enable-clipboard nil))
+
 (setq bookmark-bmenu-file-column 50
       bookmark-watch-bookmark-file nil)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
