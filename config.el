@@ -43,6 +43,11 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+(advice-add #'lsp-log :after
+            (cae-defun cae-lsp-remove-from-persp (&rest _)
+              (dolist (persp (persp-persps))
+                (persp-remove-buffer (get-buffer "*lsp-log*") persp))))
+
 ;;; UI
 
 (when cae-init-ui-enabled-p
