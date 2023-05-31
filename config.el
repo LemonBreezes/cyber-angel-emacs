@@ -511,9 +511,6 @@
       [remap previous-buffer] #'cae-previous-buffer
       [remap next-buffer] #'cae-next-buffer
       (:when (modulep! :completion vertico)
-       (:map minibuffer-local-map
-        "C-;" nil))                     ;I prefer <f8> for `embark-act'.
-      (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
       ;;I am testing the default bindings which are to use `<prior>' and
       ;;`<next>' for navigating the minibuffer history.
@@ -525,14 +522,14 @@
        :map Man-mode-map
        "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
-;; Use `<f8>' for `embark-act'.
-(after! embark
-  (map! "<f8>" #'embark-act
-        (:when (modulep! :completion vertico)
-         (:after vertico
-          :map vertico-map
-          "<f8>" #'embark-act)))
-  (setq embark-cycle-key "<f8>"))
+(let ((embark-act-key "<f8>"))
+  (after! embark
+    (map! embark-act-key #'embark-act
+          (:when (modulep! :completion vertico)
+           (:map minibuffer-local-map
+            "C-;" nil
+            embark-act-key #'embark-act)))
+    (setq embark-cycle-key embark-act-key)))
 
 (define-key!
   :keymaps (append +default-minibuffer-maps
