@@ -425,6 +425,11 @@
        :n "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
+;; https://github.com/doomemacs/doomemacs/issues/6940
+;; C-x p is used by project-prefix-map instead of +popup/other #6940
+(define-key ctl-x-map "p" nil)
+(map! "C-x p" #'+popup/other)
+
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
 
