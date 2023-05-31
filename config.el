@@ -871,9 +871,6 @@
         "C-c & C-v" nil))
 
 (when (modulep! :editor multiple-cursors)
-  (after! multiple-cursors-core
-    ;; (add-to-list 'mc/cmds-to-run-for-all 'doom/delete-backward-word)
-    )
   (map! :leader
         :prefix "m"
         :desc "Pop mark" "C-SPC" #'mc/mark-pop)
