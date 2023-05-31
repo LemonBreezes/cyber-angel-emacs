@@ -381,6 +381,8 @@
   :init (isearch-mb-mode)
   :config
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
+  (add-to-list 'isearch-mb--with-buffer #'scroll-right)
+  (add-to-list 'isearch-mb--with-buffer #'scroll-left)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
