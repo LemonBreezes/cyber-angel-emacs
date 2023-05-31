@@ -21,6 +21,7 @@
 
 ;;;###autoload
 (defun cae-kill-buffer-a (orig-func &optional buffer-or-name)
+  (setq buffer-or-name (or buffer-or-name (current-buffer)))
   (catch 'quit
     (save-window-excursion
       (with-current-buffer buffer-or-name
@@ -35,7 +36,7 @@
                             ((eq response ?y) (save-buffer) t)
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
-          (funcall orig-func (or buffer-or-name (current-buffer))))))))
+          (funcall orig-func buffer-or-name))))))
 
 (defun cae-kill-buffer-fixup-windows (buffer)
   (let ((windows (get-buffer-window-list buffer)))
