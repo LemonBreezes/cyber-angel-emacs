@@ -92,9 +92,7 @@
        (defalias command
          `(lambda ()
            (interactive)
-           (let ((bookmark-alist (cae-project--bookmark-alist))
-                 (bookmark-default-file (cae-project--get-bookmark-file)))
-             (ignore bookmark-alist bookmark-default-file)
+           (cae-project--with-bookmark-alist nil
              (call-interactively #',def)))
          (format "Analogous command to `%s' that uses the current project's bookmark file."
                  (symbol-name def)))
@@ -107,9 +105,7 @@
 (setf (alist-get 'project-bookmark embark-exporters-alist)
       (defalias 'cae-project-bookmark-export
         (lambda (cands)
-          (let ((bookmark-alist (cae-project--bookmark-alist))
-                (bookmark-default-file (cae-project--get-bookmark-file)))
-            (ignore bookmark-alist bookmark-default-file)
+          (cae-project--with-bookmark-alist nil
             (embark-export-bookmarks cands)))))
 
 (setf (alist-get 'cae-project-bookmark-delete embark-pre-action-hooks)
