@@ -881,6 +881,9 @@
 (use-package! string-edit-at-point      ; Used in `cae-edit-indirect-dwim'.
   :defer t)
 
+(use-package! comment-dwim-2
+  :defer t :init
+  (map! [remap comment-dwim] #'comment-dwim-2))
 
 ;;; Autocompletion
 
