@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(defvar cae-config-finished nil
+(defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
 ;;; UI
