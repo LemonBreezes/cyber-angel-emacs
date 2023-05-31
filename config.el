@@ -228,8 +228,8 @@
     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist)))
 
-(after! tramp
-  (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
+;; (after! tramp
+;;   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
 ;; Use Emacs as the default editor for shell commands.
 (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
