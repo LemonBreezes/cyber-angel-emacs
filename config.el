@@ -405,9 +405,9 @@
 (when (modulep! :private corfu)
   (map! :leader
         (:prefix ("e" . "expand")
-         :g "c" #'completion-at-point ; capf
-         :g "t" #'complete-tag        ; etags
-         :g "d" #'cape-dabbrev        ; or dabbrev-completion
+         :g "c" #'completion-at-point   ; capf
+         :g "t" #'complete-tag          ; etags
+         :g "d" #'cape-dabbrev          ; or dabbrev-completion
          :g "f" #'cape-file
          :g "k" #'cape-keyword
          :g "h" #'cape-history
