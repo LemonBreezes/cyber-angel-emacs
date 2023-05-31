@@ -264,18 +264,17 @@
     "-." "->"
     "=." "=>"))
 
-(require 'casease)
-
-(casease-setup
- :hook python-mode-hook
- :separator ?-
- :entries
- ((pascal "\\(-\\)[a-z]" "[A-Z]")
-  (snake "[a-z]")))
-
-(casease-setup
- :hook c-mode-common-hook
- :separator ?-
- :entries
- ((camel "\\(-\\)[a-z]" "[A-Z]")
-  (snake "[a-z]")))
+(use-package casease
+  :defer nil
+  (casease-setup
+   :hook python-mode-hook
+   :separator ?-
+   :entries
+   ((pascal "\\(-\\)[a-z]" "[A-Z]")
+    (snake "[a-z]")))
+  (casease-setup
+   :hook c-mode-common-hook
+   :separator ?-
+   :entries
+   ((camel "\\(-\\)[a-z]" "[A-Z]")
+    (snake "[a-z]"))))
