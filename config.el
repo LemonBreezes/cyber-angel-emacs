@@ -380,7 +380,8 @@
            " " filename-and-process)
           (mark " "
                 (name 16 -1)
-                " " filename))))
+                " " filename)))
+  (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
 
 
 ;;; Autocompletion
