@@ -538,14 +538,6 @@
 ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
 ;; to use sudo on a file before `tramp-sh' is loaded.
 (defun cae-auto-sudoedit-maybe-h ()
-  (+log (or (buffer-file-name) list-buffers-directory)
-        (file-attribute-user-id
-         (file-attributes path 'string))
-        (if (and (featurep 'tramp)
-                 (tramp-tramp-file-p path))
-            (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                  'string)
-          (user-login-name)))
   (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
             (string= (file-attribute-user-id
                       (file-attributes path 'string))
@@ -554,6 +546,7 @@
                          (tramp-get-remote-uid (tramp-dissect-file-name path)
                                                'string)
                        (user-login-name))))
+    (require 'auto-sudoedit)
     (auto-sudoedit)))
 (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
 (use-package! auto-sudoedit
