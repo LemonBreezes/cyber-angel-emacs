@@ -309,6 +309,7 @@
       [remap ispell-word] #'eac-ispell-word-then-abbrev
       (:after vertico
        :map vertico-map
+       "C-SPC" #'+vertico/embark-preview
        "<prior>" #'vertico-scroll-down
        "<next>" #'vertico-scroll-up)
       (:after man
