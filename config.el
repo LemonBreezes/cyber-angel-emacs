@@ -834,6 +834,7 @@
           "q" #'kill-this-buffer))
 
   (use-package! aggressive-indent
+    :disabled t
     :defer t :init
     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
                                         ;module.
