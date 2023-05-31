@@ -153,3 +153,4 @@
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
+(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
