@@ -916,6 +916,10 @@
       (which-key-add-keymap-based-replacements outline-minor-mode-map
         "C-c @" "outline")))
 
+  (use-package! outline-minor-faces
+    :defer t :init
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
   (use-package! expand-region-improved
     :defer t :init
     (map! "C-=" #'eri/expand-region
