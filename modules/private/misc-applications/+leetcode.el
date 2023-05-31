@@ -13,9 +13,7 @@
         "L" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
-        "q" #'quit-window
-        (:when (modulep! :ui workspaces)
-         "q" #'+workspace/other)
+        "q" #'+leetcode-soft-quit
         "Q" #'+leetcode-quit
         "<f6>" #'+leetcode-problems-hydra/body
         :map leetcode--problem-detail-mode-map
