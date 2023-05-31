@@ -29,6 +29,7 @@
 
        :emacs
        undo
+       (ibuffer +icons)
 
        :term
        eshell
