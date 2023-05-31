@@ -26,7 +26,7 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-x w" "8") (kbd "C-x w 8"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x w" "9") (kbd "C-x w 9"))
 
-;; My custom C-z prefix
+;; My custom C-z prefix.
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "0") (kbd "C-z 0"))
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "1") (kbd "C-z 1"))
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "2") (kbd "C-z 2"))
