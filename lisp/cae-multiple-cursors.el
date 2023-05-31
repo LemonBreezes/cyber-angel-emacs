@@ -26,8 +26,9 @@
                    forward-sentence backward-sentence kill-sentence
                    sentex-forward-sentence sentex-backward-sentence
                    sentex-kill-sentence parrot-rotate-next-word-at-point
-                   cae-delete-char cae-modeline-rotate-next-word-at-poin
-                   cae-modeline-rotate-prev-word-at-pointt))
+                   cae-delete-char cae-modeline-rotate-next-word-at-point
+                   cae-modeline-rotate-prev-word-at-point
+                   forward-sexp backward-sexp backward-list forward-list))
       (add-to-list 'mc/cmds-to-run-for-all cmd))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
@@ -42,7 +43,7 @@
                    +workspace/switch-right +workspace/switch-to-final
                    +workspace/restore-last-session +workspace/kill-session-and-quit
                    +workspace/close-woutdow-or-workspace read-only-mode
-                   save-buffers-kill-terminal forward-sexp backward-sexp))
+                   save-buffers-kill-terminal))
       (add-to-list 'mc/cmds-to-run-once cmd))
     (dolist (mode '(cae-completion-mode symbol-overlay-mode goggles-mode
                     lispy-mode corfu-mode hungry-delete-mode
