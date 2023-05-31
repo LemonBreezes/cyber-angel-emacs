@@ -130,7 +130,5 @@
                  '(:rot ("advice-add" "advice-remove")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("defadvice!" "undefadvice!")))
-    )
-
-
-  )
+    (map! "C-!" #'parrot-rotate-next-word-at-point
+          "C-M-!" #'parrot-rotate-previous-word-at-point)))
