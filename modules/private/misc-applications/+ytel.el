@@ -11,7 +11,7 @@
   (define-key ytel-mode-map (kbd "<return>") #'ytel-watch))
 
 (defvar invidious-instances-url
-      "https://api.invidious.io/instances.json?pretty=1&sort_by=health")
+  "api.invidious.io/instances.json?pretty=1&sort_by=health")
 
 (defun ytel-instances-fetch-json ()
   "Fetch list of invidious instances as json, sorted by health."
@@ -45,4 +45,27 @@
                 (completing-read "Using instance: "
                                  (subseq (ytel-instances-alist-from-json) 0 11) nil "confirm" "https://") ; "healthiest" 12 instances; no require match
               (error nil))
-            "https://invidious.synopyta.org"))) ; fallback
+            "invidious.tube"))) ; fallback
+
+;; default fallback "invidious.synopyta.org"
+
+(defun ytel-watch ()
+  "Stream video at point in mpv."
+  (interactive)
+  (let* ((video (ytel-get-current-video))
+         (id (ytel-video-id video)))
+    (start-process "ytel mpv" nil
+                   "mpv"
+                   (concat "youtube.com/watch?v=" id))
+    "--ytdl-format=bestvideo[height<=?720]+bestaudio/best")
+  (message "Starting streaming..."))
+
+;; (define-key ytel-mode-map "y" #'ytel-watch)
+
+;; youtube-comments
+
+;; xFA25E/ytel-show
+;; (use-package ytel-show
+;; :after ytel
+;; :bind (:map ytel-mode-map ("RET" . ytel-show))
+;; )
