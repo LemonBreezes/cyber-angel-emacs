@@ -52,7 +52,8 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (when (modulep! :ui hydra)
-      ;; TODO Add alt keybindings to this.
+      ;; TODO Add alt keybindings to this. There are also some alphabet keys not
+      ;; in this. Check what Sacha Chua says.
       (let ((bindings `(("<" "lispy-barf" "")
                         (,(cae-keyboard-kbd "A") "lispy-beginning-of-defun" "")
                         (,(cae-keyboard-kbd "j") "lispy-down" "")
