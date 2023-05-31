@@ -41,3 +41,9 @@
  :toggle-funs #'cae-macrostep-cheatsheet
  :keymap 'macrostep-keymap
  :package 'macrostep)
+
+;;;###autoload (autoload 'cae-symbol-overlay-cheatsheet "autoload/cae-cheatsheets" nil t)
+(hercules-def
+ :toggle-funs #'cae-symbol-overlay-cheatsheet
+ :keymap 'symbol-overlay-map
+ :package 'symbol-overlay)
