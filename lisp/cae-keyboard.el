@@ -22,19 +22,19 @@
     (?9 ?\()))
 
 
-(define-key key-translation-map (cae-keyboard-kbd "C-x t" "0") (kbd "C-x t 0"))
-(define-key key-translation-map (cae-keyboard-kbd "C-x t" "1") (kbd "C-x t 1"))
-(define-key key-translation-map (cae-keyboard-kbd "C-x t" "2") (kbd "C-x t 2"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "0") (kbd "C-c w 0"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "1") (kbd "C-c w 1"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "2") (kbd "C-c w 2"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "3") (kbd "C-c w 3"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "4") (kbd "C-c w 4"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "5") (kbd "C-c w 5"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "6") (kbd "C-c w 6"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "7") (kbd "C-c w 7"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "8") (kbd "C-c w 8"))
-(define-key key-translation-map (cae-keyboard-kbd "C-c w" "9") (kbd "C-c w 9"))
+(keyboard-translate (cae-keyboard-kbd "C-x t" "0") (kbd "C-x t 0"))
+(keyboard-translate (cae-keyboard-kbd "C-x t" "1") (kbd "C-x t 1"))
+(keyboard-translate (cae-keyboard-kbd "C-x t" "2") (kbd "C-x t 2"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "0") (kbd "C-c w 0"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "1") (kbd "C-c w 1"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "2") (kbd "C-c w 2"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "3") (kbd "C-c w 3"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "4") (kbd "C-c w 4"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "5") (kbd "C-c w 5"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "6") (kbd "C-c w 6"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "7") (kbd "C-c w 7"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "8") (kbd "C-c w 8"))
+(keyboard-translate (cae-keyboard-kbd "C-c w" "9") (kbd "C-c w 9"))
 
 ;;; Universal argument
 
