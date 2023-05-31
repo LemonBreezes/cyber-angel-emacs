@@ -187,6 +187,9 @@
   ;;      :map meow-motion-state-keymap
   ;;      "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
   ;;      "DEL" #'meow-keypad)
+  (when (modulep! +leader)
+    (map! :map meow-normal-state-keymap
+          doom-leader-key doom-leader-map))
   (map! :leader
         :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
