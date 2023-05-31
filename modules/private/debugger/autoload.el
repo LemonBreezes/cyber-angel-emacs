@@ -31,5 +31,5 @@
 ;;;###autoload
 (defun cae-debugger-projectile-run-gdb ()
   (interactive)
-  (let ((gdb-show-main t))
+  (let ((gdb-show-main nil))
     (call-interactively #'projectile-run-gdb)))
