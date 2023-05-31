@@ -29,7 +29,6 @@
   (after! diff-hl
     (setq diff-hl-reference-revision "master")))
 
-
 (use-package! git-link
   :defer t
   :init
