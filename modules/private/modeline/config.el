@@ -79,7 +79,6 @@
               (when vc-base-path
                 (let* ((name-base
                         (concat
-                         "./"
                          (file-relative-name filepath vc-base-path)))
                        (name-unique name-base)
                        (name-id 0))
