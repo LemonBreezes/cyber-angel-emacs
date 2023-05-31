@@ -148,12 +148,11 @@ file to edit."
 
 ;;;###autoload
 (defun eshell/doom (&rest args)
-  (cond ((executable-find "doom")
-         (apply #'call-process "doom" nil t nil
-                (flatten-list args)))
-        ((file-exists-p "~/.emacs.d/bin/doom")
-         (apply #'call-process "~/.emacs.d/bin/doom" nil t nil
-                (flatten-list args)))
-        (t
-         (apply #'call-process "~/.config/emacs/bin/doom" nil t nil
-                (flatten-list args)))))
+  (let ((doom (cond ((executable-find "doom")
+                     "doom")
+                    ((file-exists-p "~/.emacs.d/bin/doom")
+                     "~/.emacs.d/bin/doom")
+                    ((file-exists-p "~/.config/emacs/bin/doom")
+                     "~/.config/emacs/bin/doom"))))
+    (apply #'call-process doom nil t nil
+           (flatten-list args))))
