@@ -113,6 +113,7 @@ overriding other keymaps."
 
        :email
        ;;(mu4e +org)
+       (notmuch +org)
 
        :app
        (rss +org)
