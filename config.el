@@ -552,15 +552,15 @@
            ("C-M-t" sp-transpose-sexp "Editing")
            ("C-x C-t" sp-transpose-hybrid-sexp "Editing") ;Overrides
                                         ;`transpose-lines'.
-           ("C-M-k" sp-kill-sexp "Kill")
-           ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
-           ("M-<delete>" sp-unwrap-sexp "Kill")
-           ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-           ("M-r" cae-raise-sexp "Kill") ;Overrides
+           ("C-M-k" sp-kill-sexp "Deleting")
+           ("C-M-S-k" sp-kill-hybrid-sexp "Deleting")
+           ("M-<delete>" sp-unwrap-sexp "Deleting")
+           ("M-<backspace>" sp-backward-unwrap-sexp "Deleting")
+           ("M-r" cae-raise-sexp "Deleting") ;Overrides
                                         ;`move-to-window-line-top-bottom'.
-           ("M-D" sp-splice-sexp "Kill")
-           ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
-           ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
+           ("M-D" sp-splice-sexp "Deleting")
+           ("C-M-<backspace>" sp-splice-sexp-killing-backward "Deleting")
+           ("C-M-<delete>" sp-splice-sexp-killing-forward "Deleting")
            ("C-M-f" sp-forward-sexp "Navigation")
            ("C-M-b" sp-backward-sexp "Navigation")
            ("C-M-u" sp-backward-up-sexp "Navigation")
