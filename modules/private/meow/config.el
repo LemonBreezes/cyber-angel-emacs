@@ -169,7 +169,7 @@
     (after! git-timemachine
       (add-hook 'git-timemachine-mode-hook
                 (lambda ()
-                  (run-at-time 0.01 nil #'meow-mode-mode +1)))))
+                  (run-at-time 0.01 nil #'meow-insert-mode +1)))))
   (meow/setup-cae)
   (meow/setup-keypad)
   (add-hook 'minions-mode-hook #'meow-setup-indicator)
