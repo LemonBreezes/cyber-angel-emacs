@@ -32,8 +32,7 @@
         "]" #'+org-insert-checkbox-or-bracket))
 
 (use-package! org-jira
-  :defer t
-  :config
+  :defer t :config
   (map! :map org-jira-entry-mode-map
         "C-c i" nil
         "C-c s" nil
