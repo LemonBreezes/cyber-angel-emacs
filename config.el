@@ -561,7 +561,7 @@
   ;; Query buffers for a diff before killing them.
   ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
 
-  ;; Automatically indent after commenting.
+  ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
 
   ;; Allow remembering risky variables.
