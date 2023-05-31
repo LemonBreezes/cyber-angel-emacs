@@ -567,9 +567,11 @@
              ("M-S" sp-split-sexp "Edit")
              ("M-J" sp-join-sexp "Edit")
              ("M-C" sp-convolute-sexp "Edit")
-             ("C-M-k" sp-kill-sexp "Edit")
              ("M-D" sp-splice-sexp "Edit")
              ("C-M-t" sp-transpose-sexp "Edit")
+             ("M-<delete>" sp-unwrap-sexp "Edit")
+             ("C-M-k" sp-kill-sexp "Edit")
+             ("M-<backspace>" sp-backward-unwrap-sexp "Edit")
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Edit")
              ("C-M-<delete>" sp-splice-sexp-killing-forward "Edit")
              ("C-M-f" sp-forward-sexp "Navigation")
@@ -589,7 +591,8 @@
              ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
              ("C-]" sp-select-next-thing-exchange "Selection")
              ("C-M-]" sp-select-next-thing "Selection")
-             ("C-M-@" sp-mark-sexp "Selection"))))
+             ("C-M-@" sp-mark-sexp "Selection")
+             ("C-M-w" sp-copy-sexp "Selection"))))
       (when (modulep! :ui hydra)
         (eval
          (append
