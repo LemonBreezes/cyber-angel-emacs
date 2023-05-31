@@ -651,7 +651,8 @@
   (map! :leader :prefix "f"
         :desc "Show file info" "i" #'file-info-show)
   :config
-  (setq file-info-include-headlines t)
+  (setq file-info-include-headlines t
+        file-info-max-value-length 100)
   (add-to-list 'file-info-handlers `( :name "Git link"
                                       :handler (cl-letf (((symbol-function #'git-link--new)
                                                           (symbol-function #'identity)))
