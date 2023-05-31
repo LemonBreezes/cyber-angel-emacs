@@ -15,3 +15,20 @@
       (setq cursor (car cursor)))
     (setq cursor-type cursor)
     (etcc--evil-set-cursor)))
+
+(defun cae-meow-save-line ()
+  "Fallback command for `+meow-save'."
+  (interactive)
+  (let ((beg (if (eobp)
+                 (line-beginning-position 0)
+               (line-beginning-position)))
+        (end (line-beginning-position 2)))
+    (kill-ring-save beg end)))
+
+;;;###autoload
+(defun cae-meow-save ()
+  (interactive)
+  (save-excursion
+    (meow--with-selection-fallback
+     (meow--prepare-region-for-kill)
+     (call-interactively 'kill-ring-save))))
