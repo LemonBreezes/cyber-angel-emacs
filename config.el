@@ -638,8 +638,8 @@
           "o" #'switch-window
           "0" #'switch-window-then-delete
           "1" #'switch-window-then-maximize
-          "2" #'switch-window-then-split-below
-          "3" #'switch-window-then-split-right
+          "2" #'switch-window-then-split-horizontally
+          "3" #'switch-window-then-split-vertically
           "4" #'switch-window-then-kill-buffer
           ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
           "SPC" #'avy-goto-char-timer
