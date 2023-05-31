@@ -216,8 +216,6 @@
 
 (after! xclip
   (when (string-suffix-p "-WSL2" operating-system-release)
-    ;; For some reason, this doesn't work and I still have to edit my shell
-    ;; config.
     (unless (string-match-p "/mnt/c/Windows/System32" (getenv "PATH"))
       (setenv "PATH"
               (concat "/mnt/c/Windows/System32" path-separator (getenv "PATH")))
