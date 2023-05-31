@@ -268,3 +268,9 @@ mark the string and call `edit-indirect-region' with it."
                      (if (bound-and-true-p lispy-mode)
                          (lispy-comment)
                        (comment-or-uncomment-region)))))
+
+;;;###autoload
+(defun cae-pop-mark ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively #'set-mark-command)))
