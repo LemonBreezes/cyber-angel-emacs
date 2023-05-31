@@ -567,14 +567,14 @@
 ;;   `(after! embark
 ;;      (setq embark-cycle-key ,embark-act-key))
 ;;   t))
-;;
-;;;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-;;(when (modulep! :ui popup)
-;;  (add-hook 'post-command-hook
-;;            (cae-defun cae-fix-popup-other-keybinding ()
-;;              (define-key ctl-x-map "p" nil)
-;;              (map! :map ctl-x-map
-;;                    "p" #'+popup/other))))
+
+;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+(when (modulep! :ui popup)
+  (add-hook 'post-command-hook
+            (cae-defun cae-fix-popup-other-keybinding ()
+              (define-key ctl-x-map "p" nil)
+              (map! :map ctl-x-map
+                    "p" #'+popup/other))))
 
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
