@@ -36,6 +36,49 @@
         (puthash file (cae-project--bookmark-alist-from-file file)
                  cae-project-bookmark-cache))))
 
+(defun cae-project-bookmark-set (&optional name no-overwrite)
+  "Set a bookmark in the current project."
+  (interactive (list nil current-prefix-arg))
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
+    (bookmark-set name no-overwrite)
+    (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+
+(defun cae-project-bookmark-save-all ()
+  "Save all project bookmarks."
+  (interactive)
+  (maphash (lambda (bookmark-default-file bookmark-alist)
+             (ignore bookmark-alist)
+             (when bookmark-alist
+               (make-directory (file-name-directory bookmark-default-file) t)
+               (bookmark-write-file bookmark-default-file)))
+           cae-project-bookmark-cache))
+
+(add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
+
+(defvar-keymap cae-project-bookmark-embark-map
+  :doc "Keymap for Embark project bookmarks actions."
+  :parent embark-bookmark-map)
+
+(map-keymap
+ (lambda (key def)
+   (when (string-match-p "^bookmark-" (symbol-name def))
+     ;; define an analogous command that uses the current project's bookmark file
+     (let ((command (intern (format "+%s"
+                                    (symbol-name def)))))
+       (defalias command
+         `(lambda ()
+           (interactive)
+           (let ((bookmark-alist (cae-project--bookmark-alist))
+                 (bookmark-default-file (cae-project--get-bookmark-file)))
+             (ignore bookmark-alist bookmark-default-file)
+             (call-interactively #',def)))
+         (format "Analogous command to `%s' that uses the current project's bookmark file."
+                 (symbol-name def)))
+       (define-key cae-project-bookmark-embark-map (vector key) command))))
+ embark-bookmark-map)
+
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
   (interactive)
@@ -123,7 +166,7 @@
     (bookmark-maybe-load-default-file)
     (if (assoc name bookmark-alist)
         (bookmark-jump name)
-      (bookmark-set name))))
+      (cae-project-bookmark-set name))))
 
 (map! :leader
       :prefix "p"
