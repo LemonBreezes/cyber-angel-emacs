@@ -308,7 +308,8 @@
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
-            lsp-ui-doc-header nil))
+            lsp-ui-doc-header nil
+            lsp-ui-doc-show-with-cursor t))
     (after! lsp-clangd
       (setq lsp-clients-clangd-args
             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
