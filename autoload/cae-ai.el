@@ -39,4 +39,5 @@
   (interactive)
   (if (get-buffer-window "*chatgpt*")
       (delete-window (get-buffer-window "*chatgpt*"))
-    (call-interactively #'chatgpt-shell)))
+    (let ((chatgpt-shell-display-function #'pop-to-buffer))
+    (call-interactively #'chatgpt-shell))))
