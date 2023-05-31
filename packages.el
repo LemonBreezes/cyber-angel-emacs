@@ -55,6 +55,7 @@
 (package! avy-embark-collect)
 (package! restore-point
   :recipe (:host github :repo "arthurcgusmao/restore-point"))
+(package! symbol-overlay)
 
 ;; These are used for their autoloads.
 (package! ialign)
