@@ -365,7 +365,9 @@
   (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
   (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
   :config
-  (setq anzu-mode-lighter ""))
+  (setq anzu-mode-lighter ""
+        anzu-replace-threshold 50
+        anzu-replace-to-string-separator " => "))
 
 (use-package isearch-mb
   :ensure t
