@@ -49,7 +49,6 @@
 (package! zop-to-char)
 (package! aggressive-indent)
 (package! hungry-delete)
-(package! auto-sudoedit)
 (package! file-info)
 (package! titlecase)
 
