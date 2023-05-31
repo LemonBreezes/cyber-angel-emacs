@@ -581,79 +581,79 @@
         (setq embark-cycle-key ,embark-act-key))
      t))
 
-  ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-  (when (modulep! :ui popup)
-    (add-hook 'post-command-hook
-              (cae-defun cae-fix-popup-other-keybinding ()
-                (define-key ctl-x-map "p" nil)
-                (map! :map ctl-x-map
-                      "p" #'+popup/other))))
-
-  ;; Remove redundant `consult-history' keybinding.
-  (define-key!
-    :keymaps (append +default-minibuffer-maps
-                     (when (modulep! :editor evil +everywhere)
-                       '(evil-ex-completion-map)))
-    "C-s" nil)                          ;We already have `consult-history' bound
-                                        ;to `M-r' and `M-s'. This way we can use
-                                        ;`C-s' to search in the minibuffer.
-
-  ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-  (map! :leader
-        :desc "Copy link" "sy" #'link-hint-copy-link)
-
-  (after! expand-region
-    (setq expand-region-smart-cursor t)
-    (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-      (add-to-list 'er/try-expand-list fn t))
-    (setq er/try-expand-list
-          (mapcar (lambda (fn)
-                    (if (eq fn #'er/mark-comment)
-                        #'cae-mark-comment
-                      fn))
-                  er/try-expand-list)))
-
-  (advice-add #'persp-set-keymap-prefix :override #'ignore)
-
-  ;;(setq set-mark-command-repeat-pop t
-  ;;      next-line-add-newlines t)
+  ;;;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+  ;;(when (modulep! :ui popup)
+  ;;  (add-hook 'post-command-hook
+  ;;            (cae-defun cae-fix-popup-other-keybinding ()
+  ;;              (define-key ctl-x-map "p" nil)
+  ;;              (map! :map ctl-x-map
+  ;;                    "p" #'+popup/other))))
   ;;
-  ;;(setq search-whitespace-regexp ".*?"
-  ;;      search-default-mode #'char-fold-to-regexp
-  ;;      isearch-lax-whitespace t
-  ;;      isearch-wrap-pause 'no-ding
-  ;;      isearch-lazy-count t
-  ;;      isearch-repeat-on-direction-change t
-  ;;      isearch-allow-motion t
-  ;;      isearch-allow-scroll t
-  ;;      isearch-yank-on-move 'shift
-  ;;      isearch-motion-changes-direction t
-  ;;      lazy-count-prefix-format "(%s/%s) "
-  ;;      lazy-count-suffix-format nil    ; Using the suffix for counting matches
-  ;;                                      ; is better but does not work with
-  ;;                                      ; `isearch-mb'.
-  ;;      lazy-highlight-cleanup nil
-  ;;      ;; The default search ring size is 16, which is too small considering that
-  ;;      ;; we can fuzzy search the history with Consult.
-  ;;      search-ring-max 200
-  ;;      regexp-search-ring-max 200)
-  ;;(add-hook 'doom-escape-hook
-  ;;          (cae-defun cae-clean-up-lazy-highlight-h ()
-  ;;            (when isearch-lazy-highlight-overlays
-  ;;              (lazy-highlight-cleanup t) t)))
+  ;;;; Remove redundant `consult-history' keybinding.
+  ;;(define-key!
+  ;;  :keymaps (append +default-minibuffer-maps
+  ;;                   (when (modulep! :editor evil +everywhere)
+  ;;                     '(evil-ex-completion-map)))
+  ;;  "C-s" nil)                          ;We already have `consult-history' bound
+  ;;                                      ;to `M-r' and `M-s'. This way we can use
+  ;;                                      ;`C-s' to search in the minibuffer.
   ;;
-  ;;(after! ispell
-  ;;  (setq ispell-quietly t
-  ;;        ispell-dictionary "en_US"
-  ;;        ispell-help-in-bufferp 'electric))
+  ;;;; I'm surprised Doom Emacs doesn't bind a key for copying links.
+  ;;(map! :leader
+  ;;      :desc "Copy link" "sy" #'link-hint-copy-link)
   ;;
-  ;;(when (modulep! :emacs undo)
-  ;;  (after! undo-fu
-  ;;    (setq undo-fu-allow-undo-in-region t)))
+  ;;(after! expand-region
+  ;;  (setq expand-region-smart-cursor t)
+  ;;  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
+  ;;    (add-to-list 'er/try-expand-list fn t))
+  ;;  (setq er/try-expand-list
+  ;;        (mapcar (lambda (fn)
+  ;;                  (if (eq fn #'er/mark-comment)
+  ;;                      #'cae-mark-comment
+  ;;                    fn))
+  ;;                er/try-expand-list)))
   ;;
-  ;;;; Hide commands in M-x which do not work in the current mode. Vertico commands
-  ;;;; are hidden in normal buffers.
-  ;;(setq read-extended-command-predicate #'command-completion-default-include-p)
+  ;;(advice-add #'persp-set-keymap-prefix :override #'ignore)
+
+  (setq set-mark-command-repeat-pop t
+        next-line-add-newlines t)
+
+  (setq search-whitespace-regexp ".*?"
+        search-default-mode #'char-fold-to-regexp
+        isearch-lax-whitespace t
+        isearch-wrap-pause 'no-ding
+        isearch-lazy-count t
+        isearch-repeat-on-direction-change t
+        isearch-allow-motion t
+        isearch-allow-scroll t
+        isearch-yank-on-move 'shift
+        isearch-motion-changes-direction t
+        lazy-count-prefix-format "(%s/%s) "
+        lazy-count-suffix-format nil    ; Using the suffix for counting matches
+                                        ; is better but does not work with
+                                        ; `isearch-mb'.
+        lazy-highlight-cleanup nil
+        ;; The default search ring size is 16, which is too small considering that
+        ;; we can fuzzy search the history with Consult.
+        search-ring-max 200
+        regexp-search-ring-max 200)
+  (add-hook 'doom-escape-hook
+            (cae-defun cae-clean-up-lazy-highlight-h ()
+              (when isearch-lazy-highlight-overlays
+                (lazy-highlight-cleanup t) t)))
+
+  (after! ispell
+    (setq ispell-quietly t
+          ispell-dictionary "en_US"
+          ispell-help-in-bufferp 'electric))
+
+  (when (modulep! :emacs undo)
+    (after! undo-fu
+      (setq undo-fu-allow-undo-in-region t)))
+
+  ;; Hide commands in M-x which do not work in the current mode. Vertico commands
+  ;; are hidden in normal buffers.
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
 
   (use-package! avy
     :defer t :init
