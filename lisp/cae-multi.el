@@ -50,6 +50,8 @@
 (defvar cae-multi-abbrev--file-mtime nil)
 (defvar cae-multi-abbrev--auto-commit-disabled nil)
 
+;; A better idea is to write abbrevs to a temp file, diff the temp file with the
+;; current file, and then read the new file and push the changes.
 (advice-add #'write-abbrev-file :around #'cae-multi-abbrev-write-file-a)
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
