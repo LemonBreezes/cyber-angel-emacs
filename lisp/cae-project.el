@@ -66,8 +66,6 @@
                (bookmark-write-file bookmark-default-file)))
            cae-project-bookmark-cache))
 
-(add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
-
 (after! embark
   (defvar-keymap cae-project-bookmark-embark-map
     :doc "Keymap for Embark project bookmarks actions."
@@ -161,3 +159,5 @@
 
 (push '((nil . "cae-project-\\(bookmark-.*\\)") . (nil . "\\1"))
       which-key-replacement-alist)
+
+(add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
