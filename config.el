@@ -666,7 +666,9 @@
   ;; `auto-sudoedit' is a bit too eager to use sudo, and has some bad
   ;; interactions with other packages. This advice makes it a bit more
   ;; conservative.
-  (advice-add #'auto-sudoedit :before-until #'cae-auto-sudoedit-exempt-p))
+  ;; (advice-add #'auto-sudoedit :before-until #'cae-auto-sudoedit-exempt-p)
+  (advice-add #'auto-sudoedit :around #'cae-ignore-errors-a)
+  (advice-add #'cae-toggle-sudo :around #'cae-ignore-errors-a))
 
 (use-package! file-info
   :defer t
