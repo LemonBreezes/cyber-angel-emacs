@@ -102,6 +102,7 @@
   (if view-mode
       (View-quit)
     (funcall oldfun)))
+(advice-add #'meow-quit :around #'+popup/quit-window--view-mode-a)
 
 (defadvice! +max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
