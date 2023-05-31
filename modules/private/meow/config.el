@@ -188,13 +188,14 @@
           ;; For popups
           (,(cae-keyboard-remap-char ?`) . ,(cae-keyboard-remap-char ?`))
           (,(cae-keyboard-remap-char ?~) . ,(cae-keyboard-remap-char ?~))))
-  (appendq! meow-mode-state-list
-            '((helpfulmode . normal)
-              (Man-mode . normal)
-              (message-buffer-mode . normal)
-              (eshell-mode . insert)
-              (eat-mode . insert)
-              (vterm-mode . insert)))
+  (setq meow-mode-state-list
+        (cl-union meow-mode-state-list
+                  '((helpfulmode . normal)
+                    (Man-mode . normal)
+                    (message-buffer-mode . normal)
+                    (eshell-mode . insert)
+                    (eat-mode . insert)
+                    (vterm-mode . insert))))
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
