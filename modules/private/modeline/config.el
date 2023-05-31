@@ -101,9 +101,8 @@
   ;; This block might seem crazy, but it's how I've gotten parrot mode to work
   ;; and be silent on startup.
   (use-package! parrot
+    :after magit
     :defer t :init
-    (after! magit
-      (parrot-mode +1))
     (map! "C-!" #'parrot-rotate-next-word-at-point
           "C-M-!" #'parrot-rotate-prev-word-at-point)
     :config
@@ -114,6 +113,7 @@
              parrot-party-on-magit-push t
              parrot-party-on-org-todo-states '("DONE")
              parrot-type 'nyan)
+    (parrot-mode +1)
       (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
             parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
       (add-to-list 'parrot-rotate-dict
