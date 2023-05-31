@@ -1,8 +1,8 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (load! "lisp/cae-logs")
-(load! "lisp/cae-keyboard")
 (load! "lisp/cae-multi")
+(load! "lisp/cae-keyboard")
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
@@ -306,8 +306,6 @@
 
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
-
-(delete-selection-mode -1)
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
