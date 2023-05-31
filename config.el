@@ -467,16 +467,16 @@
                  (spell-fu-mode -1)))))
 
 
-;;; Editor
+;;;;; Editor
 
-(load! "lisp/cae-repeat")
-(add-hook 'doom-first-buffer-hook
-          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
-            (load! "lisp/cae-visible-mark")
-            (load! "lisp/cae-visual-scrolling")))
-(load! "lisp/cae-smartparens")
-(load! "lisp/cae-vlf")
-(load! "lisp/cae-multiple-cursors")
+;;(load! "lisp/cae-repeat")
+;;(add-hook 'doom-first-buffer-hook
+;;          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
+;;            (load! "lisp/cae-visible-mark")
+;;            (load! "lisp/cae-visual-scrolling")))
+;;(load! "lisp/cae-smartparens")
+;;(load! "lisp/cae-vlf")
+;;(load! "lisp/cae-multiple-cursors")
 
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
