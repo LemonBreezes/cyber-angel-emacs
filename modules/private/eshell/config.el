@@ -42,21 +42,20 @@
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
                 (message "Type M-RET/C-M-m to exit char mode.")))
 
-  (map! :map eat-eshell-char-mode-map
+  (map! :map (eat-eshell-char-mode-map
+              eat-eshell-semi-char-mode-map)
         "<tab>" #'eat-self-input
         "<return>" #'eat-self-input)
 
   (add-hook! '(eat--eshell-char-mode-hook
-               eat--eshell-semi-char-mode-hook
-               eat--eshell-process-running-mode-hook)
+               eat--eshell-semi-char-mode-hook)
     (defun cae-eshell-disable-modes-in-eat-h ()
       (let ((modes '(corfu-mode eldoc-mode)))
         (dolist (mode modes)
           (when (boundp mode)
             (funcall mode
                      (if (or eat--eshell-char-mode-hook
-                             eat--eshell-semi-char-mode-hook
-                             eat--eshell-process-running-mode-hook)
+                             eat--eshell-semi-char-mode-hook)
                          -1 1)))))))
 
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
