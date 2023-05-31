@@ -556,8 +556,6 @@
         "M-Z" #'zap-up-to-char
         [C-i] #'doom/dumb-indent
         "C-S-i" #'doom/dumb-dedent
-        "C-=" #'eri/expand-region
-        "C--" #'eri/contract-region
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line
         [remap doom/sudo-this-file] #'cae-toggle-sudo
         (:when (modulep! :completion vertico)
