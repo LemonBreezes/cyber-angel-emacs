@@ -25,17 +25,16 @@
 
 (defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
   (when (featurep 'hydra)
-    (set-persp-parameter 'hydra-pause-ring
-                         (progn (when hydra-curr-map
-                                  (ring-insert hydra-pause-ring
-                                               hydra-curr-body-fn))
-                                hydra-pause-ring))
+    (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
+    (when hydra-curr-map
+      (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
+                           hydra-curr-body-fn))
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
-  (let ((ring (persp-parameter 'hydra-pause-ring)))
-    (unless (or (null ring) (zerop (ring-length ring)))
-      (run-with-timer 0.001 nil (ring-remove ring 0)))))
+  (setq hydra-pause-ring (persp-parameter 'hydra-pause-ring))
+  (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra))
+  (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
 
 (when (modulep! :ui workspaces)
   (after! persp-mode
