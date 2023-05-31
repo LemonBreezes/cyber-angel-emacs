@@ -118,10 +118,7 @@
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer)
-
-  ;;(add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h)
-  )
+        [remap next-buffer] #'cae-dired-next-buffer))
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
