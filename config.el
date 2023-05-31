@@ -757,16 +757,15 @@
  ;; I mostly use this package for some additional prefix argument stuff like
  ;; using `C-u - M-:' to insert a string from Elisp without double quotes.
 (use-package! pp+
-   :after pp
-   :init
-   (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-   (map! ;;[remap eval-expression] #'pp-eval-expression
-         [remap eval-last-sexp] #'cae-eval-last-sexp)
-   (when (modulep! :tools eval +overlay)
-     (after! eros
-       (add-hook 'eros-mode-hook
-                 (cae-defun cae-eros-setup-keybindings-h ()
-                   (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
+  :defer t
+  :init
+  (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
+  (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
+  (when (modulep! :tools eval +overlay)
+    (after! eros
+      (add-hook 'eros-mode-hook
+                (cae-defun cae-eros-setup-keybindings-h ()
+                  (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
 
  (use-package! abbrev
    :defer t :config
