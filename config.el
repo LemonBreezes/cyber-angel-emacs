@@ -951,6 +951,7 @@
 (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
 (after! em-glob
+  ;; Allow us to type HEAD~1, HEAD~2, etc. as arguments to git commands.
   (setq eshell-error-if-no-glob nil))
 
 (after! em-term
