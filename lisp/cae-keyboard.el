@@ -336,10 +336,7 @@
     ";=." "⇒"
     ";!=" "≠"
     "-." "->"
-    "=." "=>"
-    (concat "g_dan" (cae-keyboard-kbd "7")) (cmd! (cae-gpt-insert-dan7-prompt))
-    "g_dan7" (cmd! (cae-gpt-insert-dan7-prompt))
-    "g_maximus" (cmd! (cae-gpt-insert-maximus-prompt))))
+    "=." "=>"))
 
 ;;; Programming language specific stuff
 
