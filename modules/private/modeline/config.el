@@ -139,5 +139,12 @@
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("kbd"
                          "cae-keyboard-kbd")))
+    ;; delete (:rot ("1" "2" "3" "4" "5" "6" "7" "8" "9" "10"))
+    ;; (setq parrot-rotate-dict
+    ;;       (cl-remove-if (lambda (x) (and (listp x)
+    ;;                                 (eq (car x) :rot)
+    ;;                                 (cl-every (lambda (y) (string-match-p "^[0-9]+$" y))
+    ;;                                           (cadr x))))
+    ;;                     parrot-rotate-dict))
     (map! "C-!" #'parrot-rotate-next-word-at-point
           "C-M-!" #'parrot-rotate-prev-word-at-point)))
