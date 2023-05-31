@@ -405,7 +405,8 @@
   ;; there are errors.
   (setq compilation-scroll-output t))
 
-;; Fixes a void function error on `find-file-hook' that occurs sporadically for me.
+;; Fixes a void function error on `find-file-hook' that occurs sporadically for
+;; me.
 (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
 (after! tramp
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*") ;; default + 
