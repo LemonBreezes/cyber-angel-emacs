@@ -27,22 +27,24 @@
 
 (use-package! git-auto-commit-mode
   :defer t
+  :init
+  (autoload 'gac--after-save "git-auto-commit-mode")
   :config
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
 
 (defun cae-multi-abbrev-push-changes-a (&optional file _)
-  (require 'git-auto-commit-mode)
-  (let ((gac-automatically-push-p t)
-        (gac-silent-message-p t))
-    (gac--after-save (find-file-noselect (if file file abbrev-file-name)))))
+  (when (file-in-directory-p abbrev-file-name cae-multi-data-dir)
+    (let ((gac-automatically-push-p t)
+          (gac-silent-message-p t))
+      (gac--after-save (find-file-noselect (if file file abbrev-file-name))))))
 (advice-add #'write-abbrev-file :after #'cae-multi-abbrev-push-changes-a)
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
-  (require 'git-auto-commit-mode)
-  (let ((gac-automatically-push-p t)
-        (gac-silent-message-p t))
-    (gac--after-save (find-file-noselect bookmark-default-file))))
+  (when (file-in-directory-p bookmark-default-file cae-multi-data-dir)
+    (let ((gac-automatically-push-p t)
+          (gac-silent-message-p t))
+      (gac--after-save (find-file-noselect bookmark-default-file)))))
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
 
 (defun cae-multi-org-archive-push-changes-h ()
