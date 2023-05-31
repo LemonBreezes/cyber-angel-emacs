@@ -84,9 +84,6 @@ derivative.")
           :desc "next" "TAB" #'corfu-next
           :desc "previous" "S-TAB" #'corfu-previous)))
 
-  ;; Taken from corfu's README.
-  ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
-  ;; ivy is being considered for removal.
   (when (modulep! :completion vertico)
     (defun corfu-move-to-minibuffer ()
       (interactive)
