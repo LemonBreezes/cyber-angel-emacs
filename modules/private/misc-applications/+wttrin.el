@@ -5,6 +5,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "w" #'wttrin)
-  :config
-  (setq wttrin-default-cities '("Miami")))
+        "w" #'wttrin))
