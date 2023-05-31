@@ -535,6 +535,9 @@
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
+(use-package! auto-sudoedit
+  :defer-incrementally t)
+
 
 ;;; Autocompletion
 
