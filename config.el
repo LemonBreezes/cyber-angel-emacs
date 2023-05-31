@@ -681,6 +681,9 @@
 
 (use-package! dabbrev
   :defer t :config
+  (defun cae-dabbrev-friend-buffer (other-buffer)
+    (< (buffer-size other-buffer) (* 1 1024 1024)))
+  (setq dabbrev-friend-buffer-function #'cae-dabbrev-friend-buffer)
   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
         dabbrev-upcase-means-case-search t))
 
