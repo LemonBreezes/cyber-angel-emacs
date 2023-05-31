@@ -103,8 +103,10 @@
   (use-package! parrot
     :defer t :init
     (add-hook 'doom-first-file-hook #'parrot-mode)
+    (after! magit
+      (parrot-mode +1))
     (map! "C-!" #'parrot-rotate-next-word-at-point
-          "C-M-!" #'parrot-rotate-prev-word-at-pint)
+          "C-M-!" #'parrot-rotate-prev-word-at-point)
     :config
     (setopt parrot-animate 'hide-static
              parrot-rotate-animate-after-rotation nil
