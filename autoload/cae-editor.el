@@ -20,7 +20,7 @@
           (funcall orig-func buffer-or-name))))))
 
 ;;;###autoload
-(defun cae-sp-delete-char ()
+(defun cae-delete-char ()
   (interactive)
   (cond ((region-active-p)
          (if (bound-and-true-p lispy-mode)
