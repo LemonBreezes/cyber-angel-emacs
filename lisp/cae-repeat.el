@@ -22,8 +22,7 @@
        ,(cae-keyboard-kbd "0") delete-window
        ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
        ,(cae-keyboard-kbd "2") split-window-below
-       ,(cae-keyboard-kbd "3") split-window-right)
-      (:exit
+       ,(cae-keyboard-kbd "3") split-window-right
        "m" ace-swap-window)))
 
   (define-repeat-map isearch-repeat
