@@ -1,13 +1,13 @@
 ;;; autoload/cae-ai.el -*- lexical-binding: t; -*-
 
-(defun cae-org-ai-on-buffer ()
+(defun cae-ai-org-ai-on-buffer ()
   (interactive)
   (save-mark-and-excursion
     (mark-whole-buffer)
     (call-interactively #'org-ai-on-region)))
 
 ;;;###autoload
-(cae-defun cae-lazy-load-org-ai ()
+(defun cae-ai-lazy-load-org-ai ()
   (interactive)
   (require 'org-ai)
   (setq unread-command-events
@@ -22,3 +22,8 @@
        (which-key-show-keymap 'org-ai-global-mode-prefix-map t)))))
 
 ;;org-ai-kill-region-at-point
+(defun cae-ai-org-ai-kill-region-at-point ()
+  (interactive)
+  (let ((beg (org-ai--get-region-beginning))
+        (end (org-ai--get-region-end)))
+    (kill-region beg end)))
