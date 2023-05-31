@@ -99,7 +99,7 @@
            nyan-minimum-window-width 20))
 
   ;; This block might seem crazy, but it's how I've gotten parrot mode to work
-  ;; and be silent on startup.
+  ;; and be silent on startup. It's a bit of a hack, but it works.
   (use-package! parrot
     :defer t :init
     (defadvice! +define-obsolete-variable-alias-a (oldfun &rest args)
