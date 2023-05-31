@@ -56,6 +56,9 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "2") (kbd "C-x 5 2"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "5") (kbd "C-x 5 5"))
 
+;; For Org mode
+(define-key key-translation-map (cae-keyboard-kbd "C-c C-x" "0") (kbd "C-c C-x 0"))
+
 ;; Doom popup module
 (when (modulep! :ui popup)
   (define-key key-translation-map (kbd (concat "C-" (cae-keyboard-remap "`"))) (kbd "C-`"))
