@@ -754,7 +754,8 @@
   (dolist (fn '(symbol-overlay-switch-forward
                 symbol-overlay-switch-backward
                 symbol-overlay-jump-next
-                symbol-overlay-jump-prev))
+                symbol-overlay-jump-prev
+                recenter-top-bottom))
     (add-to-list 'rp/restore-point-commands fn))
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
