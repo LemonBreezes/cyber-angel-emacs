@@ -550,7 +550,7 @@
   ;; Query buffers for a diff before killing them.
   ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
 
-  ;; Allow remembering risky variables
+  ;; Allow remembering risky variables.
   (advice-add 'risky-local-variable-p :override #'ignore)
 
   ;; Kill buffers without asking.
