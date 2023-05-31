@@ -18,6 +18,8 @@
   (minibuffer-window-active-p (selected-window)))
 
 ;; Prevent Hydra & Hercules from remaining active when switching workspaces.
+;; TODO A refinement of this would be to make the hydras resume after exiting
+;; the minibuffer or switching back to the workspace or tab.
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (after! hydra
