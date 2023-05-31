@@ -39,8 +39,7 @@
 
 (when cae-init-ui-enabled-p
   (load! "lisp/cae-theme")
-  (after! hydra
-    (load! "lisp/cae-cheatsheets"))
+  (load! "lisp/cae-cheatsheets")
 
   ;; Set up fonts
   (unless (memq system-type '(cygwin windows-nt ms-dos))
