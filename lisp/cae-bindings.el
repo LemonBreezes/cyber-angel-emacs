@@ -99,7 +99,8 @@
       (:after vertico
        (:map vertico-map
         "<prior>" #'vertico-scroll-down
-        "<next>" #'vertico-scroll-up))
+        "<next>" #'vertico-scroll-up
+        "C-z" #'cae-embark-act-with-completing-read))
       (:after eww
        :map eww-mode-map
        "o" #'ace-link-eww))
