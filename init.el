@@ -29,6 +29,8 @@
   "Whether our tools section of `config.el' is disabled.")
 (defvar cae-init-editor-enabled-p t
   "Whether our editor section of `config.el' is disabled.")
+(defvar cae-init-autocompletion-enabled-p t
+  "Whether our autocompletion section of `config.el' is disabled.")
 
 (doom! :completion
        (vertico +icons)
