@@ -217,3 +217,10 @@ mark the string and call `edit-indirect-region' with it."
   (let ((avy-style 'at)
         (avy-column-line-overlay nil))
     (apply oldfun args)))
+
+;;;###autoload
+(defun cae-lookup-definition-dwim ()
+  (interactive)
+  (if (ffap-file-at-point)
+      (call-interactively #'ffap)
+    (call-interactively #'+lookup/definition)))
