@@ -37,7 +37,7 @@
         (dolist (mode modes)
           (when (boundp mode)
             (funcall mode
-                     (if eat--eshell-process-running-mode-hook
+                     (if eat--eshell-process-running-mode
                          -1 1)))))))
 
   ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
