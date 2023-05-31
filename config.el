@@ -133,6 +133,7 @@
   :config
   (setq-default goggles-pulse t))
 
+;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
 (when (modulep! :completion vertico +childframe)
   (after! vertico-posframe
     (setq vertico-posframe-parameters
