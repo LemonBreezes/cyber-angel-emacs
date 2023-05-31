@@ -188,7 +188,7 @@
   :init (add-hook 'doom-first-buffer-hook #'smart-mark-mode)
   :defer t
   :config
-  (defun cae-hacks-smart-mark-use-doom-escape-a ()
+  (defun cae-smart-mark-use-doom-escape-a ()
     (if smart-mark-mode
         (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
       (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
