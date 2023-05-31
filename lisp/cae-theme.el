@@ -22,6 +22,7 @@
                         :background 'unspecified))
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
+    ;; For `lsp-ui'. Fixes the background color of the doc popup.
     (after! lsp-mode
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)))
