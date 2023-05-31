@@ -183,7 +183,7 @@
   (meow/setup-cae)
   (meow/setup-keypad)
   (map! :map meow-normal-state-keymap
-        "DEL" #'doom-leader-map)
+        "DEL" doom-leader-map)
   (appendq! meow-mode-state-list
             '((helpful-mode . normal)
               (Man-mode . normal)
