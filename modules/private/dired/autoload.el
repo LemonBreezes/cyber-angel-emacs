@@ -25,7 +25,8 @@
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
-  (when (derived-mode-p 'dired-mode)
+  (when (and (derived-mode-p 'dired-mode)
+             (one-window-p t))
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
