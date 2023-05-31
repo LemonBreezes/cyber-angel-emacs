@@ -41,6 +41,7 @@
        "0" tab-close
        "1" tab-close-other
        "2" tab-new)
+      (:enter tab-select)
       (:exit "M-t" +workspace/display))
    t)
 
