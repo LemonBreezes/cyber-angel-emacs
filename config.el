@@ -235,11 +235,19 @@
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
     (setq! lsp-headerline-breadcrumb-enable t
-           lsp-signature-auto-activate t
            lsp-enable-snippet nil)
     (after! lsp-ui
-      (setq lsp-ui-doc-show-with-cursor t
+      (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t))
+    (after! lsp-clangd
+      (setq lsp-clients-clangd-args
+            '("-j=3"
+              "--background-index"
+              "--clang-tidy"
+              "--completion-style=detailed"
+              "--header-insertion=never"
+              "--header-insertion-decorators=0"))
+      (set-lsp-priority! 'clangd 2))
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
