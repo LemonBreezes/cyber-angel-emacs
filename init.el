@@ -8,7 +8,7 @@
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c y"
       doom-leader-key "SPC"
-      doom-localleader-key "SPC l")
+      doom-localleader-key "SPC y")
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
