@@ -1,6 +1,6 @@
 #+title: Cyber Angel Emacs
 
-[[file:media/1675905913024.png][cyber-angel]]
+[[img:media/1675905913024.png][cyber-angel]]
 
 This config is a work-in-progress.
 
