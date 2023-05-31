@@ -57,3 +57,7 @@
       (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn))
     (dotimes (i (minibuffer-depth))
       (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))
+
+;; Here's another Zone that says positive words together with their definitions.
+;; But it requires `wordnet' to be installed and also an internet connection.
+;; https://xenodium.com/emacs-zones-to-lift-you-up/
