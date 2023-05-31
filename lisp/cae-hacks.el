@@ -104,7 +104,7 @@
     (funcall oldfun)))
 (advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
-(defadvice! +max-out-gc-a (oldfun &rest args)
+(defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
   :around #'save-some-buffers
   (setq gc-cons-threshold most-positive-fixnum
         gc-cons-percentage 99)
