@@ -9,6 +9,7 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(package! lv)
 
 ;;; UI
 (package! info-colors)
