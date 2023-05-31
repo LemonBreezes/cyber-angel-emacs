@@ -4,6 +4,7 @@
 ;;;###autoload (autoload 'cae-org-jira-hydra/body "private/org/autoload/org-jira" nil t)
 (defhydra cae-org-jira-hydra (:color blue :foreign-keys run)
   ("<f6>" nil "Exit" :exit t)
+  ("q" nil "Exit" :exit t)
   ("bg" 'org-jira-get-boards "get boards" :column "boards")
   ("iv" 'org-jira-get-issues-by-board "get issues by board" :column "issues")
   ("ib" 'org-jira-browse-issue "browse issue" :column "issues")
