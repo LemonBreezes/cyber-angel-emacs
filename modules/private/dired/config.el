@@ -79,6 +79,9 @@
              ("s" "~/src/" "Source code")
              ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
+  (after! dirvish-fd
+  (setq dirvish-fd-default-dir "~/"))
+
   (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
 
   (after! wdired
