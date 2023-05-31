@@ -212,8 +212,8 @@
   (add-hook 'prog-mode-hook #'topsy-mode)
   :config
   ;; Set custom function for rjsx-mode
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
   ;; Disable topsy-mode for gptel-mode
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
   (add-hook 'gptel-mode-hook
             (defun cae-disable-topsy-in-gptel-h ()
               "Disable topsy-mode in `gptel-mode'."
@@ -472,7 +472,7 @@
   :config
   (setq gptel-default-mode 'org-mode
         gptel-prompt-string "* "
-        gptel--model "gpt-4-32k"))
+        gptel--model "gpt-4"))
 
 
 ;;; Editor
