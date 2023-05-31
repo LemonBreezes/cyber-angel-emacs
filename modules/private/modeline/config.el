@@ -91,11 +91,10 @@
 
 (when (modulep! +pretty)
   (use-package! nyan-mode
+    :when (display-graphic-p)
     :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
-    (setq! nyan-animate-nyancat nil
-           nyan-bar-length 20
-           nyan-cat-face-number 3
+    (setq! nyan-bar-length 20
            nyan-minimum-window-width 20
            nyan-animation-frame-interval 0.1)))
