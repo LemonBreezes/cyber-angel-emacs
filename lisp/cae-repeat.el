@@ -103,7 +103,6 @@
        "9" +workspace/switch-to-8)
       (:enter +workspace/display))
    t)
-  (put #'+workspace/display 'repeat-map 'workspace-switch-repeat-map)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
