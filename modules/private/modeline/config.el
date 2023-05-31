@@ -83,7 +83,57 @@
           yas-global-mode
           auto-compression-mode
           auto-encryption-mode
-          all-the-icons-completion-mode))
+          all-the-icons-completion-mode
+          +popup-mode
+          corfu-history-mode
+          dirvish-override-dired-mode
+          envrc-global-mode
+          global-git-commit-mode
+          save-place-mode
+          recentf-mode
+          mouse-wheel-mode
+          minions-mode
+          show-paren-mode
+          global-hl-line-mode
+          global-corfu-mode
+          global-eldoc-mode
+          tab-bar-mode
+          repeat-mode
+          dap-ui-mode
+          column-number-mode
+          eat-eshell-visual-command-mode
+          transient-mark-mode
+          treemacs-filewatch-mode
+          line-number-mode
+          treemacs-follow-mode
+          smartparens-global-mode
+          ws-butler-global-mode
+          corfu-indexed-mode
+          eros-mode
+          gdb-many-windows
+          file-name-shadow-mode
+          corfu-popupinfo-mode
+          undo-fu-mode
+          treemacs-git-mode
+          vertico-mode
+          helm-mode
+          winner-mode
+          winum-mode
+          undo-fu-session-global-mode
+          treemacs-fringe-indicator-mode
+          window-divider-mode
+          electric-indent-mode
+          topsy-mode
+          hl-line-mode
+          goggles-mode
+          display-line-numbers-mode
+          auto-save-mode
+          corfu-mode
+          auto-composition-mode
+          override-global-mode
+          font-lock-mode
+          meow-mode
+          shell-dirtrack-mode))
   (setq minions-promoted-modes
         '((auto-fill-mode)
           (auto-revert-mode)
