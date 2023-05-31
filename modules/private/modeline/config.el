@@ -1,6 +1,6 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(add-hook! 'doom-load-theme-hook
+(add-hook! 'doom-first-input-hook
   (cae-defun cae-modeline--set-project-name ()
     (setq-default mode-line-format
                   (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
