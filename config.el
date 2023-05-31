@@ -23,6 +23,7 @@
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
+;; Stuff so that modules don't break.
 (when (modulep! :completion vertico +childframe)
   (unless (cae-display-graphic-p)
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
