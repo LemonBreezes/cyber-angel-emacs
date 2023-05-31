@@ -25,5 +25,4 @@
              (not (string= (file-attribute-user-id
                             (file-attributes (or (buffer-file-name) list-buffers-directory) 'string))
                            (user-login-name))))
-    (auto-sudoedit-mode +1)
     (auto-sudoedit)))
