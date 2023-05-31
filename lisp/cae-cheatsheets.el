@@ -97,6 +97,3 @@
   (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
 
 ;;; Hide Hercules when switching tabs
-
-(after! hercules
-  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
