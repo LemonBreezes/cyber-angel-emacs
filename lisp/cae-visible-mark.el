@@ -1,7 +1,7 @@
 ;;; lisp/cae-visible-mark.el -*- lexical-binding: t; -*-
 
 (defface mmv-face
-  '((t :background "lazy-highlight" :foreground "white"))
+  `((t :background ,(face-background 'match nil t) :foreground "white"))
   "Face used for showing the mark's position.")
 
 (defvar-local mmv-mark-overlay nil
