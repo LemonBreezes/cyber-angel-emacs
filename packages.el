@@ -22,6 +22,8 @@
 
 (package! nov)
 (package! syslog-mode)
+(package! font-lock-studio)             ; I don't use this often, but it's useful
+                                        ; for debugging font-lock issues.
 
 (package! crontab-mode)
 (package! ebuild-mode :built-in t)
