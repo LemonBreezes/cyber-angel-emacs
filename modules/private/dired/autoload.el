@@ -43,12 +43,3 @@
     (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
       (if fn (funcall fn) (dirvish-kill dv)))
     (funcall oldfun file)))
-
-(defmacro cae-dired-find-file-wrapper (fn)
-  "Wrap FN to exit Dirvish sessions when opening files."
-  `(cae-defun ,(intern (format "cae-dired-%s" fn)) ()
-     (interactive)
-     (let ((dir default-directory))
-       (advice-add #'find-file :around #'cae-dired-find-file-a)
-       (unwind-protect (call-interactively #',fn)
-         (advice-remove #'find-file #'cae-dired-find-file-a)))))
