@@ -36,8 +36,9 @@
 
 (when (and (modulep! :ui modeline)
            (not (modulep! :ui modeline +light)))
-  (setq doom-modeline-hud t
-        doom-modeline-support-imenu t))
+  (after! doom-modeline
+    (setq doom-modeline-hud t
+          doom-modeline-support-imenu t)))
 
 (after! which-key
   (setq which-key-ellipsis "..."
