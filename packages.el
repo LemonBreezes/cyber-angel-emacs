@@ -3,8 +3,7 @@
 (disable-packages! evil-escape
                    flyspell
                    flycheck
-                   ccls
-                   which-key)
+                   ccls)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
