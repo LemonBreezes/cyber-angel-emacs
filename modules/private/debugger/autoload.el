@@ -55,12 +55,11 @@
   "Alist of (session . workspace) pairs.")
 
 ;;;###autoload
-(defun cae-debugger-mark-session-h ()
+(defun cae-debugger-mark-session-h (session)
   "Mark the current session with the current workspace."
-  (when-let ((session (dap--cur-session)))
-    (setf (alist-get session cae-debugger--session-workspace-map
-                     nil nil #'equal)
-          (+workspace-current-name))))
+  (setf (alist-get session cae-debugger--session-workspace-map
+                   nil nil #'equal)
+        (+workspace-current-name)))
 
 ;;;###autoload
 (defun cae-debugger-dap-switch-to-workspace-h ()
