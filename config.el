@@ -374,8 +374,7 @@ x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :selec
                 (name 16 -1)
                 " " filename)))
   (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
-  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$")
-  (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
+  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
 
 ;;; Autocompletion
