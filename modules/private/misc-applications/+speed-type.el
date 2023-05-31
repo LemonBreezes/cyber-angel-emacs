@@ -9,7 +9,7 @@
   :config
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   (when (modulep! :private corfu)
-    (add-to-list 'corfu-excluded-modes #'speed-type-mode nil #'eq))
+    (add-to-list 'corfu-excluded-modes #'speed-type-mode))
   (map! :map speed-type--completed-keymap
         "q" #'kill-this-buffer
         "r" #'speed-type--replay
