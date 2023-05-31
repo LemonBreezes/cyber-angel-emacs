@@ -29,6 +29,7 @@
                                          :size (+ 15 font-size-offset))))))
 
 (setq display-line-numbers-type 'relative)
+(add-hook 'after-change-major-mode-hook #'display-line-numbers-mode)
 
 ;; Show minibuffer recursion depth
 (autoload 'minibuffer-depth-setup "mb-depth")
@@ -269,9 +270,6 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-(add-hook 'dired-mode-hook #'display-line-numbers-mode)
-(add-hook 'magit-log-mode-hook #'display-line-numbers-mode)
-
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-repeat")
@@ -361,8 +359,7 @@
   (map! :map abbrev-map "e" #'edit-abbrevs))
 
 (use-package! ibuffer
-  :defer t :init
-  (add-hook 'ibuffer-mode-hook #'display-line-numbers-mode)
+  :defer t
   :config
   (setq ibuffer-always-show-last-buffer t
         ibuffer-formats
@@ -382,8 +379,7 @@
   (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
 (use-package! diff-mode
-  :defer t :init
-  (add-hook 'diff-mode-hook #'display-line-numbers-mode)
+  :defer t
   :config
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
