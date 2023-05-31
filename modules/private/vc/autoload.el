@@ -33,3 +33,9 @@ Meant to be used like:
   ("C-c C-n" forge-create-post "Create post")
   ("C-c C-e" magit-edit-thing  "Edit")
   ("C-c C-w" magit-browse-thing "Open in browser"))
+
+;;;###autoload (autoload 'cae-magit-forge-pullreq-list-hydra/body "private/vc/autoload" nil t)
+(defhydra cae-magit-forge-pullreq-list-hydra (:color pink)
+  ("<f6>" nil "Exit" :exit t)
+  ("j" +default/search-buffer "Search buffer")
+  ("o" forge-browse-topic "Open in browser"))
