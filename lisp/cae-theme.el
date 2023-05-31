@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'wheatgrass)
+(setq doom-theme 'modus-operandi-tinted)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
