@@ -1,27 +1,27 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
 ;; Broken with the latest version of Consult.
-(use-package! detached
-  :defer t :init
-  (add-hook 'doom-first-input-hook #'detached-init)
-  (map! [remap async-shell-command] #'detached-shell-command
-        [remap compile] #'detached-compile
-        [remap recompile] #'detached-recompile
-        (:when (modulep! :completion vertico)
-         [remap detached-open-session] #'detached-consult-session)
-        :leader
-        :prefix "o"
-        :desc "Detached session" "s" #'detached-open-session)
-  (defun patch--detached--db-update-sessions (orig-fn)
-    "Ensure we print the full object to the DB."
-    (let ((print-length nil)
-          (print-level nil))
-      (funcall orig-fn)))
-
-  (advice-add 'detached--db-update-sessions
-              :around
-              #'patch--detached--db-update-sessions)
-  :custom ((detached-terminal-data-command system-type)))
+;;(use-package! detached
+;;  :defer t :init
+;;  (add-hook 'doom-first-input-hook #'detached-init)
+;;  (map! [remap async-shell-command] #'detached-shell-command
+;;        [remap compile] #'detached-compile
+;;        [remap recompile] #'detached-recompile
+;;        (:when (modulep! :completion vertico)
+;;         [remap detached-open-session] #'detached-consult-session)
+;;        :leader
+;;        :prefix "o"
+;;        :desc "Detached session" "s" #'detached-open-session)
+;;  (defun patch--detached--db-update-sessions (orig-fn)
+;;    "Ensure we print the full object to the DB."
+;;    (let ((print-length nil)
+;;          (print-level nil))
+;;      (funcall orig-fn)))
+;;
+;;  (advice-add 'detached--db-update-sessions
+;;              :around
+;;              #'patch--detached--db-update-sessions)
+;;  :custom ((detached-terminal-data-command system-type)))
 
 (use-package! eat
   :defer t :init
