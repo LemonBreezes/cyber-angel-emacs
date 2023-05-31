@@ -1212,7 +1212,6 @@
 (map! :leader :prefix ("g" . "gpt"))
 
 (use-package! org-ai
-  :defer t
   :defer-incrementally t
   :config
   (setq org-ai-default-chat-model "gpt-4"
