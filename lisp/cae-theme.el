@@ -26,6 +26,7 @@
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)))
   (after! goggles
+    ;; Make the goggles more subtle.
     (set-face-attribute 'goggles-added nil
                         :background (face-attribute 'lazy-highlight :background)))
   ;; Remove bold constructs.
