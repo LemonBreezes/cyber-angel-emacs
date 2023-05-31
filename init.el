@@ -108,10 +108,12 @@
        lisp
        misc-applications
        modeline
-       ;; (meow +leader)
        unpackaged
        vc
-       org)
+       org
+
+       ;; (meow +leader)
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
