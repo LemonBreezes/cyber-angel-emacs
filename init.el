@@ -29,6 +29,7 @@
        file-templates
        format
        snippets
+       multiple-cursors
 
        :emacs
        undo
