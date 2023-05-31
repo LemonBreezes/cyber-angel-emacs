@@ -89,6 +89,7 @@
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dired-mode-map
+        "C-M-k" #'dired-kill-subdir
         "K" #'dired-kill-subdir
         "I" #'dired-insert-subdir
         "_" #'dired-up-directory
