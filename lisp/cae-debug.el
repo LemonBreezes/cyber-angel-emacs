@@ -45,3 +45,5 @@ normally have their errors suppressed."
    (t
     (advice-add func :around #'cae-debug-reraise-error)
     (message "Debug on hidden errors enabled for %s" func))))
+
+;; Use this with `vertico--exhibit' for example to debug completion tables.
