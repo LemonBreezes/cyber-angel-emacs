@@ -37,7 +37,13 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "7") (kbd "C-c w 7"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "8") (kbd "C-c w 8"))
 (define-key key-translation-map (cae-keyboard-kbd "C-c w" "9") (kbd "C-c w 9"))
+
+;; other window prefix
 (define-key key-translation-map (kbd "C-x 4 C-x 4") (kbd "C-x 4 4"))
+(define-key key-translation-map (kbd "C-x 4 C-x 1") (kbd "C-x 4 1"))
+(define-key key-translation-map (kbd "C-x 4 C-x 0") (kbd "C-x 4 0"))
+
+;; other frame prefix
 (define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
 
 ;;; Universal argument
