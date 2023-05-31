@@ -47,6 +47,8 @@
   ("f" dirvish-file-info-menu "File info menu")
   ("v" dirvish-vc-menu "VC menu")
   ("y" dirvish-yank-menu "Yank menu")
+  ("a" dirvish-quick-access "Quick access")
+  ("s" dirvish-quicksort "Quicksort")
   ("?" dirvish-dispatch "Dirvish dispatch")
   ;;("C-c C-c" forge-post-submit "Submit")
   ;;("C-c C-e" forge-post-dispatch  "Dispatch")
