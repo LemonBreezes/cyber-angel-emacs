@@ -21,7 +21,6 @@
           ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
           ("a" (elfeed-search-set-filter "@6-months-ago") "All")
           ("t" (elfeed-search-set-filter "@1-day-ago") "Today")
-          ("-----" nil)
           ("s" elfeed-search-live-filter "Search")
           ;;("S" elfeed-search-set-filter "Set filter")
           ("c" elfeed-search-clear-filter "Clear filter"))
