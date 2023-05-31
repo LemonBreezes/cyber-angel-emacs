@@ -61,7 +61,6 @@
 
 ;; `circadian' works very well for me but I want a solution with a lower startup
 ;; cost for my personal config.
-;; Set theme based on time
 ;;(use-package! circadian
 ;;  :config
 ;;  (setq circadian-themes
