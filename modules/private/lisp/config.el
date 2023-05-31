@@ -150,7 +150,8 @@
           "M-R" #'lispy-raise-some
           "M-S" #'lispy-split
           "M-C" #'lispy-convolute
-          "M-D" #'lispy-splice)
+          "M-D" #'lispy-splice
+          "C-<backspace>" #'lispy-backward-kill-word)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
