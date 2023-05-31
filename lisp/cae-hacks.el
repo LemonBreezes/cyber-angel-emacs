@@ -1,5 +1,79 @@
 ;;; lisp/cae-hacks.el -*- lexical-binding: t; -*-
 
+
+;;; GC hacks
+
+(defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
+(defconst cae-hacks-gc-cons-percentage 10)
+(defconst cae-hacks-gc-idle-delay 20)
+(defvar cae-hacks--gc-percentage nil)
+(defvar cae-hacks--gc-messages nil)
+(defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
+(defvar cae-hacks--gcmh-mode nil)
+(defvar cae-hacks--gc-idle-timer nil)
+
+(when (version<= "30" emacs-version)
+  ;; Emacs 30 made a recent change to a constant which speeds up GC by 25%-50%,
+  ;; so I am testing out increasing Doom's default thresholds.
+  (after! gcmh
+    (setq gcmh-high-cons-threshold (* 2 16777216)
+          gcmh-low-cons-threshold (* 2 800000))))
+
+;; The purpose of these functions is to disable GC during long-running
+;; tasks while showing GC messages when it does run.
+
+(defun cae-hacks-disable-gc ()
+  "Raise the GC threshold to a large value and enable GC messages."
+  (unless cae-hacks--gc-disabled
+    (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
+    (and (fboundp #'gcmh-mode) (gcmh-mode -1))
+    (setq cae-hacks--gc-messages      garbage-collection-messages
+          cae-hacks--gc-percentage    gc-cons-percentage
+          garbage-collection-messages t
+          gc-cons-threshold           cae-hacks-gc-cons-threshold
+          gc-cons-percentage          cae-hacks-gc-cons-percentage)
+    (setq cae-hacks--gc-idle-timer
+          (run-with-idle-timer cae-hacks-gc-idle-delay
+                               nil #'cae-hacks-garbage-collect))
+    (when (timerp (bound-and-true-p gcmh-idle-timer))
+      (cancel-timer gcmh-idle-timer))
+    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
+    (setq cae-hacks--gc-disabled t)))
+
+(defun cae-hacks-garbage-collect ()
+  (garbage-collect)
+  (cae-hacks-enable-gc))
+
+(defun cae-hacks-enable-gc ()
+  "This is the inverse of `cae-hacks-disable-gc'.
+It is meant to be used as a `post-gc-hook'."
+  (when cae-hacks--gc-disabled
+    (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
+    (when (timerp cae-hacks--gc-idle-timer)
+      (cancel-timer cae-hacks--gc-idle-timer))
+    (setq garbage-collection-messages cae-hacks--gc-messages
+          gc-cons-percentage          cae-hacks--gc-percentage
+          cae-hacks--gc-messages      nil
+          cae-hacks--gc-percentage    nil
+          cae-hacks--gcmh-mode        nil
+          cae-hacks--gc-idle-timer    nil)
+    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
+    (setq cae-hacks--gc-disabled nil)))
+
+(if (boundp 'after-focus-change-function)
+    (add-function :after after-focus-change-function
+                  (lambda ()
+                    (unless (frame-focus-state)
+                      (cae-hacks-garbage-collect))))
+  (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
+
+;; Be wary of enabling this, especially on Android devices:
+;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
+(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
+
+
+;;; Other hacks
+
 ;; For when we compile Doom.
 (defvar personal-keybindings nil)
 
@@ -104,73 +178,6 @@
 ;; This is for backwards compatibility with my old bookmarks file.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
 
-
-;;; GC hacks
-
-(defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
-(defconst cae-hacks-gc-cons-percentage 10)
-(defconst cae-hacks-gc-idle-delay 20)
-(defvar cae-hacks--gc-percentage nil)
-(defvar cae-hacks--gc-messages nil)
-(defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
-(defvar cae-hacks--gcmh-mode nil)
-(defvar cae-hacks--gc-idle-timer nil)
-
-(when (version<= "30" emacs-version)
-  ;; Emacs 30 made a recent change to a constant which speeds up GC by 25%-50%,
-  ;; so I am testing out increasing Doom's default thresholds.
-  (after! gcmh
-    (setq gcmh-high-cons-threshold (* 2 16777216)
-          gcmh-low-cons-threshold (* 2 800000))))
-
-;; The purpose of these functions is to disable GC during long-running
-;; tasks while showing GC messages when it does run.
-
-(defun cae-hacks-disable-gc ()
-  "Raise the GC threshold to a large value and enable GC messages."
-  (unless cae-hacks--gc-disabled
-    (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
-    (and (fboundp #'gcmh-mode) (gcmh-mode -1))
-    (setq cae-hacks--gc-messages      garbage-collection-messages
-          cae-hacks--gc-percentage    gc-cons-percentage
-          garbage-collection-messages t
-          gc-cons-threshold           cae-hacks-gc-cons-threshold
-          gc-cons-percentage          cae-hacks-gc-cons-percentage)
-    (setq cae-hacks--gc-idle-timer
-          (run-with-idle-timer cae-hacks-gc-idle-delay
-                               nil #'cae-hacks-garbage-collect))
-    (when (timerp (bound-and-true-p gcmh-idle-timer))
-      (cancel-timer gcmh-idle-timer))
-    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
-    (setq cae-hacks--gc-disabled t)))
-
-(defun cae-hacks-garbage-collect ()
-  (garbage-collect)
-  (cae-hacks-enable-gc))
-
-(defun cae-hacks-enable-gc ()
-  "This is the inverse of `cae-hacks-disable-gc'.
-It is meant to be used as a `post-gc-hook'."
-  (when cae-hacks--gc-disabled
-    (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
-    (when (timerp cae-hacks--gc-idle-timer)
-      (cancel-timer cae-hacks--gc-idle-timer))
-    (setq garbage-collection-messages cae-hacks--gc-messages
-          gc-cons-percentage          cae-hacks--gc-percentage
-          cae-hacks--gc-messages      nil
-          cae-hacks--gc-percentage    nil
-          cae-hacks--gcmh-mode        nil
-          cae-hacks--gc-idle-timer    nil)
-    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
-    (setq cae-hacks--gc-disabled nil)))
-
-(if (boundp 'after-focus-change-function)
-    (add-function :after after-focus-change-function
-                  (lambda ()
-                    (unless (frame-focus-state)
-                      (cae-hacks-garbage-collect))))
-  (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
-
-;; Be wary of enabling this, especially on Android devices:
-;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
-(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
+;; FIXME This is a hack to ignore some errors that are happening in Emacs 30 for some
+;; reason.
+(advice-add #'yas--post-command-handler :around #'cae-ignore-errors-a)
