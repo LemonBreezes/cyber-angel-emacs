@@ -90,3 +90,4 @@
 (package! consult-yasnippet)
 
 ;; cae-corfu.el
+(package! cape-yasnippet)
