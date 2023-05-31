@@ -751,7 +751,8 @@
   (use-package! tabgo
     :commands tabgo
     :defer t :init
-    (map! "C-z t" #'tabgo)
+    (map! "C-z t" #'tabgo
+          "C-z C-t" #'tabgo)
     :config
     (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
