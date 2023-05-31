@@ -108,17 +108,17 @@ derivative.")
             ,(cae-keyboard-kbd "M-" "j") (cae-generate-corfu-select-index 6)
             ,(cae-keyboard-kbd "M-" "k") (cae-generate-corfu-select-index 7)
             ,(cae-keyboard-kbd "M-" "l") (cae-generate-corfu-select-index 8)
-            ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 9))))))
+            ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 9)))))
 
-;; Taken from corfu's README.
-;; TODO: extend this to other completion front-ends, mainly helm and ido, since
-;; ivy is being considered for removal.
-(when (modulep! :completion vertico)
-  (defun corfu-move-to-minibuffer ()
-    (interactive)
-    (let ((completion-extra-properties corfu--extra)
-          completion-cycle-threshold completion-cycling)
-      (apply #'consult-completion-in-region completion-in-region--data))))
+  ;; Taken from corfu's README.
+  ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
+  ;; ivy is being considered for removal.
+  (when (modulep! :completion vertico)
+    (defun corfu-move-to-minibuffer ()
+      (interactive)
+      (let ((completion-extra-properties corfu--extra)
+            completion-cycle-threshold completion-cycling)
+        (apply #'consult-completion-in-region completion-in-region--data)))))
 
 (use-package! cape
   :after corfu
