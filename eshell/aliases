@@ -23,3 +23,7 @@ alias j    z $*
 alias vi   e $*
 alias vim  e $*
 alias nano e $*
+
+## Local Variables:
+## eval: (progn)
+## End:
