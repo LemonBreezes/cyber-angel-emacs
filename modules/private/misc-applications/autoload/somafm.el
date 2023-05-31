@@ -1,5 +1,6 @@
 ;;; private/misc-applications/autoload/somafm.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +somafm ()
   (interactive)
   (if (display-graphic-p)
