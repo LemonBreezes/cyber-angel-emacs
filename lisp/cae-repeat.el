@@ -113,7 +113,7 @@
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key")
 
-;; This is so that my repeat maps are reloaded when I save this file.
-(when cae-config-finished-loading
-  (ignore-errors (repeat-mode -1))
-  (ignore-errors (repeat-mode +1))))
+  ;; This is so that my repeat maps are reloaded when I save this file.
+  (when cae-config-finished-loading
+    (ignore-errors (repeat-mode -1))
+    (ignore-errors (repeat-mode +1))))
