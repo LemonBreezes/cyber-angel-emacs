@@ -649,7 +649,8 @@
   :defer t
   :init
   (map! :leader :prefix "f"
-        :desc "Show file info" "i" #'file-info-show))
+        :desc "Show file info" "i" #'file-info-show))
+
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
