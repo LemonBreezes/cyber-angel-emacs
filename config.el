@@ -368,7 +368,7 @@
   (setq anzu-mode-lighter ""))
 
 (use-package isearch-mb
-  :ensure t :after anzu
+  :ensure t
   :init (isearch-mb-mode)
   :config
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
