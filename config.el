@@ -545,31 +545,31 @@
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
   (let ((bindings
-         '(("M-(" sp-wrap-round "Other")
-           ("M-S" sp-split-sexp "Other")
-           ("M-J" sp-join-sexp "Other")
-           ("M-C" sp-convolute-sexp "Other")
-           ("C-M-t" sp-transpose-sexp "Other")
-           ("C-x C-t" sp-transpose-hybrid-sexp "Other") ;Overrides
+         '(("M-(" sp-wrap-round "Edit")
+           ("M-S" sp-split-sexp "Edit")
+           ("M-J" sp-join-sexp "Edit")
+           ("M-C" sp-convolute-sexp "Edit")
+           ("C-M-t" sp-transpose-sexp "Edit")
+           ("C-x C-t" sp-transpose-hybrid-sexp "Edit") ;Overrides
                                         ;`transpose-lines'.
-           ("C-M-k" sp-kill-sexp "Deleting")
-           ("C-M-S-k" sp-kill-hybrid-sexp "Deleting")
-           ("M-<delete>" sp-unwrap-sexp "Deleting")
-           ("M-<backspace>" sp-backward-unwrap-sexp "Deleting")
-           ("M-r" cae-raise-sexp "Deleting") ;Overrides
+           ("C-M-k" sp-kill-sexp "Delete")
+           ("C-M-S-k" sp-kill-hybrid-sexp "Delete")
+           ("M-<delete>" sp-unwrap-sexp "Delete")
+           ("M-<backspace>" sp-backward-unwrap-sexp "Delete")
+           ("M-r" cae-raise-sexp "Delete") ;Overrides
                                         ;`move-to-window-line-top-bottom'.
-           ("M-D" sp-splice-sexp "Deleting")
-           ("C-M-<backspace>" sp-splice-sexp-killing-backward "Deleting")
-           ("C-M-<delete>" sp-splice-sexp-killing-forward "Deleting")
-           ("C-M-f" sp-forward-sexp "Navigation")
-           ("C-M-b" sp-backward-sexp "Navigation")
-           ("C-M-u" sp-backward-up-sexp "Navigation")
-           ("C-M-d" sp-down-sexp "Navigation")
-           ("C-M-a" sp-beginning-of-sexp "Navigation")
-           ("C-M-e" sp-up-sexp "Navigation")
-           ("C-M-a" sp-backward-down-sexp "Navigation")
-           ("C-M-n" sp-next-sexp "Navigation")
-           ("C-M-p" sp-previous-sexp "Navigation")
+           ("M-D" sp-splice-sexp "Delete")
+           ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
+           ("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
+           ("C-M-f" sp-forward-sexp "Navigate")
+           ("C-M-b" sp-backward-sexp "Navigate")
+           ("C-M-u" sp-backward-up-sexp "Navigate")
+           ("C-M-d" sp-down-sexp "Navigate")
+           ("C-M-a" sp-beginning-of-sexp "Navigate")
+           ("C-M-e" sp-up-sexp "Navigate")
+           ("C-M-a" sp-backward-down-sexp "Navigate")
+           ("C-M-n" sp-next-sexp "Navigate")
+           ("C-M-p" sp-previous-sexp "Navigate")
            ("C-(" sp-forward-slurp-sexp "Barf/Slurp")
            ("C-<right>" sp-forward-slurp-sexp "Barf/Slurp")
            ("C-S-<right>" sp-slurp-hybrid-sexp "Barf/Slurp")
@@ -577,11 +577,11 @@
            ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
-           ("C-M-S-w" sp-copy-sexp "Selection") ;Overrides `append-next-kill'.
-           ("C-]" sp-select-next-thing-exchange "Selection") ;Overrides
+           ("C-M-S-w" sp-copy-sexp "Select") ;Overrides `append-next-kill'.
+           ("C-]" sp-select-next-thing-exchange "Select") ;Overrides
                                         ;`abort-recursive-edit'.
-           ("C-M-]" sp-select-next-thing "Selection")
-           ("C-M-@" sp-mark-sexp "Selection"))))
+           ("C-M-]" sp-select-next-thing "Select")
+           ("C-M-@" sp-mark-sexp "Select"))))
     (when (modulep! :ui hydra)
       (eval
        `(defun cae-sp-cheat-sheet/body ()
