@@ -10,7 +10,7 @@
     (call-interactively #'parrot-rotate-next-word-at-point)))
 
 ;;;###autoload
-(defun cae-modeline-rotate-prev-word-at-point ()
+(defun cae-modeline-rotate-previous-word-at-point ()
   (interactive)
   (save-excursion
     (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
