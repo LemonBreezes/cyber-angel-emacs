@@ -753,8 +753,7 @@
     :defer t :init
     (map! "C-z t" #'tabgo)
     :config
-    (setq tabgo-tab-line-keys
-          (cae-keyboard-kbd tabgo-tab-line-keys)))
+    (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
   (use-package! zop-to-char
     :defer t
