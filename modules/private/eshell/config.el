@@ -49,7 +49,7 @@
   (advice-add #'eat-eshell-char-mode
               :after
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
-                (message "Type M-RET/C-M-m to enter semi-char mode.")))
+                (message "Type M-RET to exit char mode.")))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
   (remove-hook 'eshell-mode-hook #'hide-mode-line-mode) ;Show the Eat mode line
                                         ;indicator.
