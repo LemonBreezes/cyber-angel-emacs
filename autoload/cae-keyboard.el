@@ -3,6 +3,7 @@
 ;; TODO Rewrite this file so that orbits in `cae-keyboard-orbits' always loop
 ;; around. That way, I can improve my handling of the Lispy keybindings.
 ;; (read-char) "<prior>" => (error "Non-character input-event")
+;; This is quite problematic!
 
 (unless (featurep 'json)
   (defun json-alist-p (list)
