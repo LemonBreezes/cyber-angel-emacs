@@ -2,7 +2,7 @@
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-keyboard")
+(load! "lisp/cae-keyboard")             ;Keyboard hacks.
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
