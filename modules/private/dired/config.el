@@ -113,8 +113,9 @@
 
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
-  (map! [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer))
+  ;;(map! [remap previous-buffer] #'cae-dired-previous-buffer
+  ;;      [remap next-buffer] #'cae-dired-next-buffer)
+  )
 
 ;; TODO Patch these for the behavior I want. Turn them into `:before' advices
 ;; and use hooks if necessary.
