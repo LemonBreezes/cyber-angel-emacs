@@ -25,7 +25,13 @@
                    mark-sexp
                    eros-eval-last-sexp
                    eval-last-sexp
-                   cae-eval-last-sexp))
+                   cae-eval-last-sexp
+                   forward-sentence
+                   backward-sentence
+                   kill-sentence
+                   sentex-forward-sentence
+                   sentex-backward-sentence
+                   sentex-kill-sentence))
       (add-to-list 'mc/cmds-to-run-for-all cmd))
     (dolist (cmd '(+workspace/new +workspace/load +workspace/save
                    +workspace/cycle +workspace/other +workspace/delete
