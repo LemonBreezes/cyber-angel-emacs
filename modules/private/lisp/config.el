@@ -74,9 +74,9 @@
                                         ;any benefit it provides.
           lispy-avy-style-char 'at
           lispy-avy-style-symbol 'at)
-    (add-to-list 'lispy-elisp-modes #'minibuffer-mode nil #'eq)
-    (add-to-list 'lispy-elisp-modes #'helpful-mode nil #'eq)
-    (add-to-list 'lispy-elisp-modes #'lisp-data-mode nil #'eq)
+    (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
+    (add-to-list 'lispy-elisp-modes #'helpful-mode)
+    (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
           ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
