@@ -37,4 +37,6 @@
 ;;;###autoload
 (defun cae-ai-toggle-chatgpt-shell ()
   (interactive)
-  )
+  (if (get-buffer-window "*chatgpt*")
+      (delete-window (get-buffer-window "*chatgpt*"))
+    (call-interactively #'chatgpt-shell)))
