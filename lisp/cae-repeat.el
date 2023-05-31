@@ -11,22 +11,22 @@
         repeat-check-key nil
         repeat-echo-mode-line-string nil)
 
-  (eval
-   `(define-repeat-map other-window
-      ("o" other-window
-       "O" other-window-previous
-       ,@(when (modulep! :ui popup)
-           '("p" +popup/other))
-       "0" delete-window
-       "1" doom/window-maximize-buffer
-       "2" split-window-below
-       "3" split-window-right
-       ,(cae-keyboard-kbd "0") delete-window
-       ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
-       ,(cae-keyboard-kbd "2") split-window-below
-       ,(cae-keyboard-kbd "3") split-window-right
-       "M-o" ace-swap-window))
-   t)
+  ;;(eval
+  ;; `(define-repeat-map other-window
+  ;;    ("o" other-window
+  ;;     "O" other-window-previous
+  ;;     ,@(when (modulep! :ui popup)
+  ;;         '("p" +popup/other))
+  ;;     "0" delete-window
+  ;;     "1" doom/window-maximize-buffer
+  ;;     "2" split-window-below
+  ;;     "3" split-window-right
+  ;;     ,(cae-keyboard-kbd "0") delete-window
+  ;;     ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
+  ;;     ,(cae-keyboard-kbd "2") split-window-below
+  ;;     ,(cae-keyboard-kbd "3") split-window-right
+  ;;     "M-o" ace-swap-window))
+  ;; t)
 
   (define-repeat-map isearch-repeat
     ("s" isearch-repeat-forward
