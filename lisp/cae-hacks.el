@@ -65,7 +65,7 @@
 (defadvice! cae-hacks-magit-do-not-deincrement-a (args)
   :filter-args '(magit-previous-line magit-next-line)
   (let ((arg (car args))
-        (try-vscroll (second args)))
+        (try-vscroll (cadr args)))
     (and (numberp arg)
          (not (eq arg 0))
          transient-mark-mode
