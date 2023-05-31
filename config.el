@@ -210,6 +210,7 @@
   (isearch-mb--setup)
   (isearch-mb-mode +1)
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
+  (add-to-list 'isearch-mb--with-buffer #'reposition-window)
   (add-to-list 'isearch-mb--with-buffer #'scroll-right)
   (add-to-list 'isearch-mb--with-buffer #'scroll-left)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
