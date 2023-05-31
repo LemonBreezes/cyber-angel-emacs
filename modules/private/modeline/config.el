@@ -121,4 +121,16 @@
              parrot-party-on-magit-push t
              parrot-party-on-org-todo-states '("DONE")
              parrot-type 'nyan)
-      (advice-remove #'parrot-start-animation #'ignore))))
+      (advice-remove #'parrot-start-animation #'ignore))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("add-hook" "remove-hook")))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("add-hook!" "remove-hook!")))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("advice-add" "advice-remove")))
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("defadvice!" "undefadvice!")))
+    )
+
+
+  )
