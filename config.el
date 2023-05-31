@@ -716,7 +716,7 @@
            "M-g f" #'consult-flycheck)
           (:unless (modulep! :config default)
            "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
-                                        ;do, also slower than `fd'. See Minad's
+                                        ;also slower than `fd'. See Minad's
                                         ;comment in
                                         ;https://github.com/minad/consult/issues/363
            "M-s r" #'consult-ripgrep
