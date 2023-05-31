@@ -670,7 +670,12 @@
   (map! :prefix "C-z"
         "n" #'avy-goto-line-below
         "p" #'avy-goto-line-above
-        "j" #'avy-goto-word-1)
+        "j" #'avy-goto-word-1
+        "." #'cae-avy-symbol-at-point
+        "C-n" #'avy-goto-line-below
+        "C-p" #'avy-goto-line-below
+        "C-j" #'avy-goto-word-1
+        "C-." #'cae-avy-symbol-at-point)
 
   (when (modulep! :completion vertico)
     (after! vertico
