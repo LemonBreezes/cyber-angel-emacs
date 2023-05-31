@@ -377,6 +377,13 @@ x(set-popup-rule! "^\\*helpful "     :size #'+popup-shrink-to-fit :quit t :selec
   (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
   (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
+(use-package! diff-mode
+  :defer t :init
+  (add-hook 'diff-mode-hook #'display-line-numbers-mode)
+  :config
+  (map! :map diff-mode-map
+        "q" #'kill-this-buffer))
+
 
 ;;; Autocompletion
 
