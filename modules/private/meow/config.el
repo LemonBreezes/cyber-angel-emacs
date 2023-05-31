@@ -312,6 +312,16 @@
     (meow-motion-overwrite-define-key)) ; custom keybinding for motion state
   (meow/setup)
   (eval `(map! :map meow-normal-state-keymap
+               "1" #'digit-argument
+               "2" #'digit-argument
+               "3" #'digit-argument
+               "4" #'digit-argument
+               "5" #'digit-argument
+               "6" #'digit-argument
+               "7" #'digit-argument
+               "8" #'digit-argument
+               "9" #'digit-argument
+               "0" #'digit-argument
                ,(cae-keyboard-kbd "1") #'meow-expand-1
                ,(cae-keyboard-kbd "2") #'meow-expand-2
                ,(cae-keyboard-kbd "3") #'meow-expand-3
