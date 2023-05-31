@@ -362,10 +362,10 @@
     (cond ((executable-find "termux-setup-storage")
            (setq xclip-method 'termux-clipboard-get))))
 
+  (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
     (setq bookmark-bmenu-file-column 50
-          bookmark-watch-bookmark-file nil)
-    (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords))
+          bookmark-watch-bookmark-file nil))
 
   (after! auth-source
     (setq auth-source-cache-expiry nil
@@ -508,6 +508,7 @@
            [remap dired-do-async-shell-command] #'dwim-shell-command
            [remap dired-do-shell-command] #'dwim-shell-command
            [remap dired-smart-shell-command] #'dwim-shell-command))))
+
 
 
 ;;; Editor
