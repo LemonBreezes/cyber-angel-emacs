@@ -76,7 +76,10 @@
                (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
                                                           circadian-themes))
                                     doom-theme)))))
-  (setq doom-theme 'modus-vivendi))
+  (setq doom-theme
+        (if (modulep! :ui doom)
+            'doom-one
+          'modus-vivendi)))
 
 (use-package! theme-magic
   :defer t
