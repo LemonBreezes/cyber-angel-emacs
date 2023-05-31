@@ -267,7 +267,7 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
-             (,(cae-keyboard-kbd ";") special-lispy-comment "Other")
+             (,(cae-keyboard-kbd ";") lispy-comment "Other")
              ;; The tick and comma keys are special in Lispy because we want
              ;; them to not be rebound.
              (,(cae-keyboard-kbd-reverse ",")
