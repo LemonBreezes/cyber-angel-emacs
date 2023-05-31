@@ -216,6 +216,7 @@
 
 (after! xclip
   (when (string-suffix-p "-WSL2" operating-system-release)
+    (setenv "PATH" (concat (getenv "PATH") ":/mnt/c/Windows/System32"))
     (setq xclip-method 'powershell)))
 
 (setq bookmark-bmenu-file-column 50
