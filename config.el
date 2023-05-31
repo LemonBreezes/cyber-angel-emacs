@@ -655,23 +655,6 @@
       (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
-;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
-;; to use sudo on a file before `tramp-sh' is loaded.
-(add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
-(add-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h -1)
-(use-package! auto-sudoedit
-  :after tramp-sh
-  :config
-  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-  (remove-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h)
-  (auto-sudoedit-mode +1)
-  ;; `auto-sudoedit' is a bit too eager to use sudo, and has some bad
-  ;; interactions with other packages. This advice makes it a bit more
-  ;; conservative.
-  ;; (advice-add #'auto-sudoedit :before-until #'cae-auto-sudoedit-exempt-p)
-  (advice-add #'auto-sudoedit :around #'cae-ignore-errors-a)
-  (advice-add #'cae-toggle-sudo :around #'cae-ignore-errors-a))
-
 (use-package! file-info
   :defer t
   :init
