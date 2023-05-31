@@ -56,15 +56,19 @@
   (cl-return-from cae-keyboard-apply-recursively
     (cl-mapcar (lambda (x) (cae-keyboard-apply-recursively fn x)) arg)))
 
-(defun cae-keyboard-remap-char (arg)
-  (declare (pure t) (side-effect-free t))
+(cl-defun cae-keyboard-remap-char (arg)
+  (declare (side-effect-free t))
+  (unless cae-keyboard-remaps-enabled-p
+    (cl-return-from cae-keyboard-remap-char arg))
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
         (aref orbit (mod (1+ (cl-position arg orbit)) (length orbit)))
       arg)))
 
 (defun cae-keyboard-remap-char-reverse (arg)
-  (declare (pure t) (side-effect-free t))
+  (declare (side-effect-free t))
+  (unless cae-keyboard-remaps-enabled-p
+    (cl-return-from cae-keyboard-remap-char arg))
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
         (aref orbit (mod (1- (cl-position arg orbit)) (length orbit)))
