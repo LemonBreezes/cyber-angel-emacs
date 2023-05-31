@@ -343,7 +343,7 @@
                 (t #'browse-url-generic))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-  (add-to-list 'doom-large-file-excluded-modes 'nov-mode nil #'eq)
+  (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
   (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
   (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
