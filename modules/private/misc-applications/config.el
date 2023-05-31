@@ -1,5 +1,6 @@
 ;;; private/misc-applications/config.el -*- lexical-binding: t; -*-
 
+(defvar +misc-applications--lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
 (defvar +misc-applications-prefix "j")
 (defvar +misc-applications-lookup-prefix "j l")
@@ -15,7 +16,6 @@
       :prefix +misc-applications-prefix
       "1" #'mpc)
 
-(defvar +misc-applications--lisp-files nil)
 (setq +misc-applications--lisp-files
   '("+alarm-clock"
     "+aurel"
