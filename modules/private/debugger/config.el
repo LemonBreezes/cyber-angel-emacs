@@ -2,7 +2,9 @@
 
 (when (and (modulep! :tools lsp)
            (modulep! :tools debugger +lsp))
-  (map! "<f6>" #'dap-hydra)
+  (after! lsp-mode
+    (map! :map lsp-mode-map
+          "<f6>" #'dap-hydra))
   (after! dap-ui
     (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
     (map! :map dap-ui-repl-mode-map
