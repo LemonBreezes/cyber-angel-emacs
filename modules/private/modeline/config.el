@@ -178,8 +178,7 @@
 ;; This block might seem crazy, but it's how I've gotten parrot mode to work
 ;; and be silent on startup.
 (use-package! parrot
-  :defer-incrementally t                ;
-  :after (:any magit org)
+  :after (:any magit org git-auto-commit-mode)
   :after-call gac-push
   :config
   (setq parrot-animate 'hide-static
