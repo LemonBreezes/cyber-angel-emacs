@@ -16,7 +16,6 @@
        (ligatures +extra +iosevka)
        nav-flash
        (popup +defaults)
-       ophints
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
