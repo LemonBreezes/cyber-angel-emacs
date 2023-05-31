@@ -52,8 +52,9 @@
                    (when (or (derived-mode-p 'dired-mode)
                              (derived-mode-p 'wdired-mode))
                      default-directory)))
-         (tramp-prefix (string-remove-suffix (tramp-file-local-name file)
-                                             file))
+         (file-localname (file-remote-p file 'localname))
+         (tramp-prefix (and file-localname
+                            (string-remove-suffix file-localname file)))
          (sudo-prefix (format "/sudo:root@%s:" (file-remote-p file 'host))))
     (if (string-suffix-p sudo-prefix tramp-prefix)
         (progn (advice-add #'auto-sudoedit :override #'ignore)
