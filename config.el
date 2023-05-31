@@ -701,6 +701,8 @@
   (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
 
+  ;; TODO All of these commands have jump and choose variants. I should make two
+  ;; separate keybindings for the two variants.
   (when (modulep! :completion vertico)
     (after! vertico
       (map! :map vertico-map
