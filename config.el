@@ -379,6 +379,12 @@
                            (ace-link-man . pre))
         avy-column-line-overlay t))
 
+(use-package! zop-to-char
+  :defer t
+  :init
+  (map! [remap zap-to-char] #'zop-up-to-char
+        [remap zap-up-to-char] #'zop-to-char))
+
 (use-package! pp+
   :after pp
   :init
