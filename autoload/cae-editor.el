@@ -233,12 +233,6 @@ mark the string and call `edit-indirect-region' with it."
   (funcall oldfun offset (not bottom-up)))
 
 ;;;###autoload
-(defun cae-avy-use-at-style-a (oldfun &rest args)
-  (let ((avy-style 'at)
-        (avy-column-line-overlay nil))
-    (apply oldfun args)))
-
-;;;###autoload
 (defun cae-lookup-definition-dwim ()
   (interactive)
   (require 'ffap)
