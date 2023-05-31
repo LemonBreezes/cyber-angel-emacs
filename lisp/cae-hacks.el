@@ -76,3 +76,14 @@
                    shift-select-mode))
          (cl-incf arg))
     (list arg try-vscroll)))
+
+;; Compile Vterm without asking.
+(defvar vterm-always-compile-module t)
+(defadvice! cae-vterm-module-compile-silently-a (oldfun)
+  :around #'vterm-module-compile
+  (advice-add #'pop-to-buffer :override #'ignore)
+  (unwind-protect (funcall oldfun)
+    (advice-remove #'pop-to-buffer #'ignore)))
+
+;; Use the system's `libvterm' if available.
+(defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
