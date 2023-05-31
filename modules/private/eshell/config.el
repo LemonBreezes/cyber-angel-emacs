@@ -67,7 +67,6 @@
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
     (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize))
 
-
   (after! em-hist
     (setq! eshell-history-size (expt 2 16))
     (add-to-list 'eshell-expand-input-functions #'eshell-expand-history-references))
@@ -82,11 +81,8 @@
          (map! :map eshell-mode-map
                :ig "M-R" #'helm-eshell-history)))
 
-  (map! :map eshell-mode-map
-        :g "C-l" #'+eshell-clear
-        :g [remap doom/forward-to-last-non-comment-or-eol] #'end-of-line
-        :g [remap +kill-region-or-backward-to-bol] #'eshell-kill-input
-        :i "RET" #'eshell-send-input)
+  (map! :map eshell-mode-map "C-l" #'+eshell-clear)
+
 
   (after! esh-mode
     (map! :map eshell-mode-map))
