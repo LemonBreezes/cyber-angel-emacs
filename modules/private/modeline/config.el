@@ -183,7 +183,8 @@
   (add-hook 'before-save-hook
             (cae-defun cae-modeline-load-parrot-h ()
               (when (bound-and-true-p git-auto-commit-mode)
-                (parrot-mode +1))))
+                (parrot-mode +1)
+                (remove-hook 'before-save-hook #'cae-modeline-load-parrot-h))))
   :config
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
