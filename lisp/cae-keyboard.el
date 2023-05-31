@@ -286,4 +286,7 @@
 
 ;;; Programming language specific stuff
 
-(use-package! smart-semicolon)
+(use-package! smart-semicolon
+  :defer t
+  :init
+  (add-hook 'c-mode-common-hook #'smart-semicolon-mode))
