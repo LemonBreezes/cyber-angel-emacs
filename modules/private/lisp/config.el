@@ -61,11 +61,6 @@
     "C-c /" "pcre2el"
     "C-c / e" "elisp"
     "C-c / p" "pcre")
-  ;;(map! :map rxt-mode-map
-  ;;      :prefix "C-c"
-  ;;      (:prefix ("/" . "pcre2el")
-  ;;       (:prefix ("e" . "elisp"))
-  ;;       (:prefix ("p" . "pcre"))))
   (map! :map rxt--read-pcre-mode-map
         "C-c C-i" #'rxt--toggle-i-mode
         "C-c C-t" #'rxt--toggle-s-mode
