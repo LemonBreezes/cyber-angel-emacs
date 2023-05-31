@@ -56,6 +56,7 @@
                                             (advice-add #'git-link--new :override #'identity)
                                             (call-interactively #'git-link-homepage)
                                           (advice-remove #'git-link--new #'identity))
+                               :cache t
                                :face font-lock-string-face
                                :bind "g")))
         (cl-pushnew info-handler (nthcdr (1+ pos) file-info-handlers)
