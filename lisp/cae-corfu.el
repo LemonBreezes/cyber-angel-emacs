@@ -30,6 +30,8 @@
   (unless (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
               (string-match-p "I-search: " (minibuffer-prompt))
+              (string-match-p "Query replace: " (minibuffer-prompt))
+              (string-match-p "Query replace regexp: " (minibuffer-prompt))
               (memq this-command '(evil-ex
                                    evil-ex-search-forward
                                    evil-ex-search-backward))
