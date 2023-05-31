@@ -14,6 +14,7 @@
           "?" #'describe-mode
           "q" #'+elfeed-quit)
     (when (modulep! :ui hydra)
+      ;; TODO Extend to also include the default `elfeed-search-mode-map' bindings.
       (defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
         ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
         ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
