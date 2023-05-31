@@ -37,7 +37,7 @@
 
 ;; A minimal mouse-free `tab-bar' UI.
 (defadvice! +tab-bar--load-buttons-a ()
-  :after #'tab-bar--load-buttons
+  :override #'tab-bar--load-buttons
   (setq tab-bar-close-button   nil
         tab-bar-back-button    nil
         tab-bar-forward-button nil
