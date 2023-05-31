@@ -243,12 +243,9 @@ mark the string and call `edit-indirect-region' with it."
       (replace-match "" nil t))))
 
 ;;;###autoload
-(defun cae-avy-do (action pt &optional stay-p)
-  (unless stay-p
-    (goto-char pt))
+(defun cae-avy-do (action pt)
   (save-mark-and-excursion
-    (when stay-p
-      (goto-char pt))
+    (goto-char pt)
     (cond ((or (eq avy-command 'avy-goto-line)
                (memq this-command '(avy-goto-line-above
                                     avy-goto-line-below)))
@@ -267,22 +264,9 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
   (apply-partially #'cae-avy-do #'embark-act))
-
-;;;###autoload
-(defalias 'cae-avy-action-embark-act-stay
-  (apply-partially #'cae-avy-do-stay #'embark-act))
-
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
   (apply-partially #'cae-avy-do
-                   (lambda ()
-                     (if (bound-and-true-p lispy-mode)
-                         (lispy-comment)
-                       (comment-or-uncomment-region)))))
-
-;;;###autoload
-(defalias 'cae-avy-action-comment-dwim-stay
-  (apply-partially #'cae-avy-do-stay
                    (lambda ()
                      (if (bound-and-true-p lispy-mode)
                          (lispy-comment)
