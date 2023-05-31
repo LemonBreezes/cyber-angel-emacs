@@ -665,7 +665,7 @@
         "n" #'avy-goto-line-below
         "p" #'avy-goto-line-above
         "w" #'avy-goto-word-1
-        "C-z" #'suspend-frame)
+        "z" #'suspend-frame)
 
   (when (modulep! :completion vertico)
     (after! vertico
