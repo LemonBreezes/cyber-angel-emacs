@@ -10,7 +10,7 @@ Meant to be used like:
                         'cae-magit-insert-diff-upstream
                         'magit-insert-stashes)"
   (magit-insert-section (diff-upstream nil t)
-    (if-let ((upstream-branch "origin/master"))
+    (if-let ((upstream-branch (or branch (magit-get-upstream-branch))))
         (progn
           (magit-insert-heading (format "Diff with %s:" (substring-no-properties upstream-branch)))
           (magit--insert-diff t
