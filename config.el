@@ -863,7 +863,8 @@
   (use-package! jinx
     :defer t :init
     (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook))
-      (add-hook hook #'jinx-mode))))
+      (add-hook hook #'jinx-mode))
+    (advice-add 'jinx--correct-replace :before #'cae-jinx--add-to-abbrev)))
 
 
 ;;; Autocompletion
