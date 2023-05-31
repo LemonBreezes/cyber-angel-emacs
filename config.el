@@ -631,6 +631,7 @@
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
              (?e . cae-avy-action-embark-act)
+             (?1 . cae-avy-parrot-rotate)
              (?3 . cae-avy-action-comment-dwim)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
