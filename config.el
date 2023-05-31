@@ -11,9 +11,10 @@
 (defvar cae-config-compilation-enabled nil
   "Whether on-kill native compilation is enabled.")
 
-(advice-add #'helm-mode :override #'ignore)
-(remove-hook 'doom-first-input-hook #'helm-mode) ;Helm is not our main
-                                                 ;completion system.
+(when (modulep! :completion helm)
+  ;; Helm is not our main completion system.
+  (advice-add #'helm-mode :override #'ignore)
+  (remove-hook 'doom-first-input-hook #'helm-mode))
 
 ;;; UI
 
