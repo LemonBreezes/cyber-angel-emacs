@@ -496,10 +496,11 @@
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
-      "
+      (cae-keyboard-remap-hydra-hint
+       "
 ^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
 _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
-^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)"
+^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)")
       ;; arrows
       (,(cae-keyboard-kbd "j") worf-down :exit t)
       (,(cae-keyboard-kbd "k") worf-up :exit t)
@@ -570,36 +571,7 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
       (,(cae-keyboard-kbd "j") worf-new-down)
       (,(cae-keyboard-kbd "k") org-insert-heading)
       (,(cae-keyboard-kbd "h") org-metaleft)
-      (,(cae-keyboard-kbd "l") worf-new-right)))
-  (eval
-   `(defhydra hydra-worf-change (:idle 1.0
-                                 :hint nil)
-      ,(cae-keyboard-remap-hydra-hint "
-^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
-_h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
-^ ^ _s_ ^ ^    _a_dd     _T_ime    _f_: shiftmeta (tree)")
-      ;; arrows
-      (,(cae-keyboard-kbd "j") worf-down :exit t)
-      (,(cae-keyboard-kbd "k") worf-up :exit t)
-      (,(cae-keyboard-kbd "w") org-metaup)
-      (,(cae-keyboard-kbd "s") org-metadown)
-      (,(cae-keyboard-kbd "h") org-metaleft)
-      (,(cae-keyboard-kbd "l") org-metaright)
-      (,(cae-keyboard-kbd "e") move-end-of-line :exit t)
-      ;; modes
-      (,(cae-keyboard-kbd "f") worf-change-tree-mode :exit t)
-      (,(cae-keyboard-kbd "i") worf-change-shift-mode :exit t)
-      (,(cae-keyboard-kbd "r") worf-change-shiftcontrol-mode :exit t)
-      ;; misc
-      (,(cae-keyboard-kbd "p") org-set-property :exit t)
-      (,(cae-keyboard-kbd "t") org-set-tags-command :exit t)
-      (,(cae-keyboard-kbd "T") worf-change-time :exit t)
-      (,(cae-keyboard-kbd "n") worf-change-name :exit t)
-      (,(cae-keyboard-kbd "a") org-meta-return :exit t)
-      (,(cae-keyboard-kbd "o") hydra-worf-keyword/body :exit t)
-      (,(cae-keyboard-kbd "m") worf-archive-and-commit :exit t)
-      (,(cae-keyboard-kbd "q") nil)
-      (,(cae-keyboard-kbd "c") nil))))
+      (,(cae-keyboard-kbd "l") worf-new-right))))
 
 ;;; Basically a custom input method
 
