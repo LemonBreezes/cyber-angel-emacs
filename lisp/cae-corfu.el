@@ -42,7 +42,7 @@
   (use-package! cape-yasnippet
     :init
     (map! :map cae-completion-mode-map
-          "C-. y" #'cape-yasnippet)
+          "C-. s" #'cape-yasnippet)
     (dolist (hook '(prog-mode-hook
                     text-mode-hook
                     lsp-mode-hook
