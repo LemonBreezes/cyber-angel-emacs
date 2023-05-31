@@ -8,6 +8,7 @@ alias rg     rg                  --color=always                               $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 alias d      dirvish                                                          $1 > /dev/null
+alias layman sudo layman                                                      $*
 
 alias mcd    mkdir               -p                                           $1 && cd $1
 alias cdp   cd-to-project
