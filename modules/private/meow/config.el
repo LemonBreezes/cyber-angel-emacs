@@ -177,16 +177,6 @@
   (meow/setup-cae)
   (meow/setup-keypad)
   (add-hook 'minions-mode-hook #'meow-setup-indicator)
-  (when (modulep! +leader)
-    (map! :map meow-normal-state-keymap
-          doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          :map meow-motion-state-keymap
-          doom-leader-key (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          "DEL" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-          :map meow-beacon-state-keymap
-          doom-leader-key nil))
-  (map! :leader :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
