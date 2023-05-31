@@ -416,6 +416,9 @@
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'eac-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
+      "C-x C-b" #'ibuffer-jump          ;Previously bound to `ibuffer'. This way
+                                        ;I can do `C-x C-b =' to easily diff a
+                                        ;buffer with its file.
       "C-x _" #'shrink-window           ;Dual to `C-x ^'.
       "M-Z" #'zap-up-to-char
       "<f8>" #'embark-act
