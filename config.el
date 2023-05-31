@@ -726,9 +726,10 @@
 (use-package! titlecase
   :defer t
   :init
-  (after! embark
-    (define-key embark-region-map "T" #'titlecase-region)
-    (define-key embark-heading-map "T" #'titlecase-line)))
+  (when (modulep! :completion vertico)
+    (after! embark
+      (define-key embark-region-map "T" #'titlecase-region)
+      (define-key embark-heading-map "T" #'titlecase-line))))
 
 ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
 ;; `speedrect' commands.
@@ -1033,12 +1034,6 @@
                 (not (string-suffix-p "-WSL2" operating-system-release)))
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
-
-;;(hercules-def :toggle-funs #'embark-collect-cheatsheet
-;;              :keymap 'embark-collect-mode-map
-;;              ;;:package 'embark
-;;              :blacklist-funs '(digit-argument))
-;;(define-key embark-collect-mode-map (kbd "<f6>") #'embark-collect-cheatsheet)
 
 (setq cae-config-finished-loading t)
 
