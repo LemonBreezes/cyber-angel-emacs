@@ -76,7 +76,6 @@
        (rss +org)
 
        :private
-       ;; exwm
        (corfu +indexed)
        debugger
        (dirvish +icons +dirvish)
@@ -85,7 +84,7 @@
        lisp
        misc-applications
        modeline
-                                        ;(meow +leader)
+       ;;(meow +leader)
        unpackaged
        vc)
 
