@@ -917,7 +917,7 @@
     (when (modulep! :editor multiple-cursors)
       (add-to-list 'copilot-disable-predicates
                    (cae-defun cae-multiple-cursors-active-p ()
-                     multiple-cursors-mode))))
+                     (bound-and-true-p multiple-cursors-mode)))))
 
   (use-package! isearch-dabbrev
     :defer t :init
