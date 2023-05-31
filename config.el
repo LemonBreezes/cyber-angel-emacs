@@ -530,7 +530,7 @@
   ;; Maybe I should advise `kill-buffer--possibly-save' instead?
   (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
-  (defun cae-ask-kill-buffer (buffer)
+  (defun cae-ask-kill-buffer (&optional buffer)
     "Ask to diff, save or kill buffer"
     (if (and (buffer-file-name buffer)
              (buffer-modified-p buffer))
@@ -548,7 +548,6 @@
             (setq cae-diff-window nil)))
       t))
   (advice-add #'kill-buffer--possibly-save :override #'cae-ask-kill-buffer)
-  
   ;;(add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
