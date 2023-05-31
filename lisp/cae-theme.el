@@ -77,10 +77,3 @@
 ;;    (setq calendar-latitude 0
 ;;          calendar-longitude 0)
 ;;    (message "ERROR: Calendar latitude and longitude are not set.")))
-
-(use-package! auto-dark
-  :config
-  (setq auto-dark-detection-method 'powershell
-        auto-dark-dark-theme 'modus-operandi-tinted
-        auto-dark-light-theme 'modus-vivendi-tinted)
-  (auto-dark-mode +1))
