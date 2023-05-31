@@ -24,4 +24,4 @@
 
 ;; These keybindings are normally installed after running `gdb' but I want them
 ;; earlier in case I want to set breakpoints before running `gdb'.
-(load! "+gud-bindings")
+;; (load! "+gud-bindings")
