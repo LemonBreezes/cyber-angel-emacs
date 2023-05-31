@@ -121,5 +121,6 @@
               (add-hook 'find-directory-functions #'dired-noselect t))
             (dired-noselect dir))
           t)
+
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
