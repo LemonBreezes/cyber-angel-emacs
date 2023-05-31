@@ -514,6 +514,11 @@
 
 ;;; Editor
 
+(setq doom-leader-alt-key "M-*"
+      doom-localleader-alt-key "M-* m"
+      doom-leader-key (if (modulep! :editor evil) "SPC" "C-c")
+      doom-localleader-key (if (modulep! :editor evil) "SPC m" "C-c l"))
+
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
   (add-hook 'doom-first-buffer-hook
