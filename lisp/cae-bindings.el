@@ -42,8 +42,8 @@
   (define-key doom-leader-map "\C-f" nil)
   (map! :leader
         (:prefix ("F" . "fold")
-         "k"     #'vimish-fold-delete
-         "K" #'vimish-fold-delete-all
+         ;;"k"     #'vimish-fold-delete
+         ;;"K" #'vimish-fold-delete-all
          "t"     #'+fold/toggle
          "C" #'+fold/close-all
          "o"     #'+fold/open
