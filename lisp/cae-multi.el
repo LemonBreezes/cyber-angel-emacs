@@ -48,7 +48,7 @@
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
 
 (defun cae-multi-org-archive-push-changes-h ()
-  (when (string-prefix-p doom-user-dir (buffer-file-name))
+  (when (file-in-directory-p (buffer-file-name) doom-user-dir)
     (let ((gac-automatically-push-p t)
           (gac-silent-message-p t))
       (gac--after-save (buffer-file-name))
