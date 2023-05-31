@@ -16,6 +16,9 @@
 (defvar cae-config-incremental-compilation-enabled-p t
   "Whether incremental native compilation is enabled.")
 
+(when cae-config-incremental-compilation-enabled-p
+  (run-with-idle-timer 2 nil #'cae-compile-schedule-native-compilation))
+
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
   ;; Helm is not our main completion system.
