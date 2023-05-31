@@ -56,8 +56,7 @@
 ;;;###autoload
 (defun cae-toggle-sudo ()
   (interactive)
-  (require 'auto-sudoedit)
-  (let* ((curr-path (auto-sudoedit-current-path))
+  (let* ((curr-path (or (buffer-file-name) list-buffers-directory))
          (tramp-path (if (tramp-tramp-file-p curr-path)
                          ;; doesn't work for remote files
                          (tramp-file-name-localname (tramp-dissect-file-name curr-path))
