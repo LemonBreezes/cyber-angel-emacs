@@ -15,7 +15,7 @@
           (eval `(after! diff-hl
                    (setf (buffer-local-value 'diff-hl-reference-revision
                                                 ,(current-buffer))
-                         "HEAD~10")))
+                         "HEAD~20")))
           (when (bound-and-true-p cae-config-finished-loading)
             (when (and (derived-mode-p 'emacs-lisp-mode)
                        (fboundp 'cae-compile-this-elisp-file))
