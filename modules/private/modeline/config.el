@@ -203,8 +203,8 @@
   (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
   (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!"))))
 
-;; I have this disabled because it takes up space in the modeline and I never
-;; use it.
+;; I have this disabled because I never use it to scroll the window.
+;;
 (when (modulep! +pretty)
   (use-package! nyan-mode
     :when (display-graphic-p)
