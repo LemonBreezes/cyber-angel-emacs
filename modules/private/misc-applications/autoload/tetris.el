@@ -4,7 +4,7 @@
 (defhydra +tetris-hydra (:color pink :hint nil)
   ("<f6>" nil "Exit" :exit t)
   ("q" tetris-end-game nil :exit t)
-  ("n" tetris-start-game "(Re)Start game" :column "Misc")
+  ("n" tetris-start-game "Restart game" :column "Misc")
   ("p" tetris-pause-game "Pause/Unpause game" :column "Misc")
   ("SPC" tetris-move-bottom "Move bottom" :column "Movement")
   ("<up>" tetris-rotate-prev "Rotate clockwise" :column "Movement")
