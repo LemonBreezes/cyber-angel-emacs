@@ -496,7 +496,7 @@
   (eval
    `(defhydra hydra-worf-change (:idle 1.0
                                  :hint nil)
-      (cae-keyboard-remap-hydra-hint
+      ,(cae-keyboard-remap-hydra-hint
        "
 ^ ^ _w_ ^ ^    _t_ags    _p_rop    _r_: shiftcontrol
 _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
