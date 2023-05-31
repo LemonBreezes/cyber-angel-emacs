@@ -233,7 +233,7 @@ mark the string and call `edit-indirect-region' with it."
     (call-interactively #'+lookup/definition)))
 
 ;;;###autoload
-(defun dos2unix ()
+(defun cae-dos2unix ()
   "Automate M-% C-q C-m RET C-q C-j RET"
   (save-excursion
     (goto-char (point-min))
