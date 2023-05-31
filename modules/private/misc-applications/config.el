@@ -16,58 +16,60 @@
       :prefix +misc-applications-prefix
       "1" #'mpc)
 
+;; TODO Turn these into module flags and separate the binding of their prefixes
+;; out into `doom-after-init-hook' so that the user can modify them.
 (setq +misc-applications-lisp-files
-  '("+alarm-clock"
-    "+aurel"
-    "+daemons"
-    "+disk-usage"
-    ;;"+elcord"
-    ;;"+enime"
-    ;;"+exercism"
-    "+forecast"
-    ;;"+frameshot"
-    "+helm-linux-disks"
-    "+helm-system-packages"
-    ;;"+mentor"
-    "+my-repo-pins"
-    ;;"+picpocket"
-    "+pulseaudio-control"
-    "+somafm"
-    "+trashed"
-    "+try"
-    ;;"+vuiet"
-    "+ytel"
-    "+webpaste"
-    "+elfeed"
-    "+leetcode"
+      '("+alarm-clock"
+        "+aurel"
+        "+daemons"
+        "+disk-usage"
+        ;;"+elcord"
+        ;;"+enime"
+        ;;"+exercism"
+        "+forecast"
+        ;;"+frameshot"
+        "+helm-linux-disks"
+        "+helm-system-packages"
+        ;;"+mentor"
+        "+my-repo-pins"
+        ;;"+picpocket"
+        "+pulseaudio-control"
+        "+somafm"
+        "+trashed"
+        "+try"
+        ;;"+vuiet"
+        "+ytel"
+        "+webpaste"
+        "+elfeed"
+        "+leetcode"
 
-    ;; Lookup
-    "+devdocs"
-    "+know-your-http-well"
-    "+shortdoc"
-    "+tldr"
-    "+x86-lookup"
+        ;; Lookup
+        "+devdocs"
+        "+know-your-http-well"
+        "+shortdoc"
+        "+tldr"
+        "+x86-lookup"
 
-    ;; Games
-    "+bubbles"
-    "+doctor"
-    "+dunnet"
-    "+speed-type"
-    "+snake"
-    "+tetris"
+        ;; Games
+        "+bubbles"
+        "+doctor"
+        "+dunnet"
+        "+speed-type"
+        "+snake"
+        "+tetris"
 
-    ;; TODO Eyecandy
-    ;; zone
-    ;; nyan zone
-    ;; also encryption zone
-    "+fireplace"
-    "+flames-of-freedom"
-    "+snow"
-    "+zone"
+        ;; TODO Eyecandy
+        ;; zone
+        ;; nyan zone
+        ;; also encryption zone
+        "+fireplace"
+        "+flames-of-freedom"
+        "+snow"
+        "+zone"
 
-    ;; Emacs OS
-    "+ednc"
-    "+proced"))
+        ;; Emacs OS
+        "+ednc"
+        "+proced"))
 
 (dolist (file +misc-applications-lisp-files)
   (load! file))
