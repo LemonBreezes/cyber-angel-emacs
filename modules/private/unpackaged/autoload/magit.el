@@ -23,6 +23,8 @@ command was called, go to its unstaged changes section."
     (recenter)))
 
 (defun cae-unpackaged-magit-save-buffer-show-status-here ()
+  "Like `cae-unpackaged-magit-save-buffer-show-status' but with
+non-nil `magit-status-goto-file-position'."
   (save-buffer)
   (let ((magit-status-goto-file-position t))
     (call-interactively #'magit-status))
