@@ -6,5 +6,5 @@
   (map! :leader
         :prefix +misc-applications-prefix
         (:prefix ("e" . "exercism")
-                 "v" #'exercism-modern-view-tracks
-                 "j" #'exercism-modern-jump)))
+         "v" #'exercism-modern-view-tracks
+         "j" #'exercism-modern-jump)))
