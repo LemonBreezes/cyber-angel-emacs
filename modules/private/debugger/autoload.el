@@ -7,3 +7,16 @@
       (cl-loop for buf being the buffers
                when (string-match-p "gdb" (buffer-name buf)) do
                (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
+
+;;;###autoload
+(defun cae-debugger-kill-all-sessions-and-restart ()
+  (interactive)
+  (dap-delete-all-sessions)
+  (cae-debugger-quit-session-a nil)
+  (when-let ((workspace-project (cl-find (+workspace-current-name)
+                                    (projectile-relevant-known-projects)
+                                    :test #'string-match-p)))
+    (unless (string= (projectile-project-name)
+                     (+workspace-current-name))
+      (projectile-switch-project-by-name workspace-project)))
+  (dap-debug-last))
