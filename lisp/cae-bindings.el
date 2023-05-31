@@ -17,23 +17,26 @@
     (map! :leader
           (:prefix ("C" . "checkers")))))
 (when (modulep! :editor snippets)
-  (dolist (p (cdr (lookup-key doom-leader-map "&")))
-    (cl-destructuring-bind (key . binding) p
-      (define-key doom-leader-map (kbd (concat "S " (char-to-string key))) binding)))
-  (after! yasnippet
-    (define-key yas-minor-mode-map (kbd "C-c &") nil))
-  (define-key doom-leader-map "&" nil)
-  (after! which-key
-    (setq which-key-replacement-alist
-          (let ((case-fold-search nil))
-            (cl-mapcar (lambda (x)
-                         (when (car-safe (car x))
-                           (setf (car (car x))
-                                 (replace-regexp-in-string "C-c &"
-                                                           "C-c S"
-                                                           (car-safe (car x)))))
-                         x)
-                       which-key-replacement-alist)))))
+  (let ((snippet-prefix "y"))
+    (dolist (p (cdr (lookup-key doom-leader-map "&")))
+      (cl-destructuring-bind (key . binding) p
+        (define-key doom-leader-map (kbd (concat (format "%s " snippet-prefix)
+                                                 (char-to-string key))) binding)))
+    (after! yasnippet
+      (define-key yas-minor-mode-map (kbd "C-c &") nil))
+    (define-key doom-leader-map "&" nil)
+    (after! which-key
+      (setq which-key-replacement-alist
+            (let ((case-fold-search nil))
+              (cl-mapcar (lambda (x)
+                           (when (car-safe (car x))
+                             (setf (car (car x))
+                                   (replace-regexp-in-string
+                                    "C-c &"
+                                    (format "C-c %s" snippet-prefix)
+                                    (car-safe (car x)))))
+                           x)
+                         which-key-replacement-alist))))))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
