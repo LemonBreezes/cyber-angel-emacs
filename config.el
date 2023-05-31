@@ -609,8 +609,8 @@
           (add-to-list 'mc/cmds-to-run-for-all
                        (intern (concat "cae-sp-cheat-sheet/"
                                        (symbol-name (cadr x))))))
-        (add-to-list 'mc/cmds-to-run-for-all #'cae-sp-cheat-sheet/body)
-        (add-to-list 'mc/cmds-to-run-for-all #'cae-sp-cheat-sheet/nil)))
+        (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/body)
+        (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/nil)))
     (dolist (x bindings)
       (define-key smartparens-mode-map (kbd (car x)) (cadr x))))
   (setq sp-navigate-interactive-always-progress-point t))
