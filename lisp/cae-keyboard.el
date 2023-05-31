@@ -427,6 +427,7 @@
   (defvar cae-keyboard--worf-mode-map-backup (copy-keymap worf-mode-map))
   ;; So E is the same as % in my layout because E is not bound in
   ;; `worf-mode-map'. I can use E to set the priority of the current heading.
+  (worf-define-key worf-mode-map "E" #'org-priority)
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
            (,(cae-keyboard-kbd "k") wspecial-worf-up "")
@@ -451,6 +452,7 @@
            (,(cae-keyboard-kbd "L") wspecial-worf-copy-heading-id "Misc")
            (,(cae-keyboard-kbd "a") wspecial-worf-add "Misc")
            (,(cae-keyboard-kbd "e") wspecial-worf-eval "Misc")
+           (,(cae-keyboard-kbd "E") wspecial-org-priority "Misc")
            (,(cae-keyboard-kbd "s") wspecial-worf-save "Misc")
            (,(cae-keyboard-kbd "N") wspecial-org-narrow-to-subtree "Narrow/Widen")
            (,(cae-keyboard-kbd "W") wspecial-widen "Narrow/Widen")
