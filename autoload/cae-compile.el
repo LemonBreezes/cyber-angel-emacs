@@ -9,12 +9,10 @@
 (advice-add #'kill-emacs :before #'cae-compile-store-exit-code-a)
 
 (defvar cae-compile-files-to-ignore
-  `(
-    ,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
+  `(,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
-    ,(expand-file-name "lang/cc/autoload.el" doom-modules)
-    ))
+    ,(expand-file-name "lang/cc/autoload.el" doom-modules)))
 
 (defvar cae-compile-native-comp-speed 3)
 
