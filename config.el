@@ -527,28 +527,24 @@
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
-  ;; Maybe I should advise `kill-buffer--possibly-save' instead?
+
   (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
-  (defun cae-ask-kill-buffer (&optional buffer)
+  (defun cae-ask-kill-buffer (buffer)
     "Ask to diff, save or kill buffer"
-    (if (and (buffer-file-name buffer)
-             (buffer-modified-p buffer))
-        (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
-                        if (or (eq ch ?k) (eq ch ?K))
-                        return t
-                        if (or (eq ch ?d) (eq ch ?D))
-                        do (setq cae-diff-window (diff-buffer-with-file buffer))
-                        if (or (eq ch ?s) (eq ch ?S))
-                        return (progn (save-buffer buffer) t)
-                        if (memq ch '(?q ?Q))
-                        return nil)
-          (when cae-diff-window
-            (delete-window cae-diff-window)
-            (setq cae-diff-window nil)))
-      t))
+    (prog1 (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+                    if (or (eq ch ?k) (eq ch ?K))
+                    return t
+                    if (or (eq ch ?d) (eq ch ?D))
+                    do (setq cae-diff-window (diff-buffer-with-file buffer))
+                    if (or (eq ch ?s) (eq ch ?S))
+                    return (progn (save-buffer buffer) t)
+                    if (memq ch '(?q ?Q))
+                    return nil)
+      (when cae-diff-window
+        (delete-window cae-diff-window)
+        (setq cae-diff-window nil))))
   (advice-add #'kill-buffer--possibly-save :override #'cae-ask-kill-buffer)
-  ;;(add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
