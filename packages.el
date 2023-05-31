@@ -52,6 +52,7 @@
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
+(package! smart-mark)
 
 ;; These are used for their autoloads.
 (package! ialign)
