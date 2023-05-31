@@ -33,3 +33,7 @@
             (progn (skip-syntax-backward "\\s ") (point)))))
     (kill-append (concat s "\n") t)
     (delete-region (point) end)))
+
+;;;###autoload
+(defun cae-ai-toggle-chatgpt-shell ()
+  (interactive))
