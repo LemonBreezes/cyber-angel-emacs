@@ -37,26 +37,26 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "7") (kbd "C-z 7"))
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "8") (kbd "C-z 8"))
 (define-key key-translation-map (cae-keyboard-kbd "C-z" "9") (kbd "C-z 9"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "0"))) (kbd "C-z 0"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "1"))) (kbd "C-z 1"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "2"))) (kbd "C-z 2"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "3"))) (kbd "C-z 3"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "4"))) (kbd "C-z 4"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "5"))) (kbd "C-z 5"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "6"))) (kbd "C-z 6"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "7"))) (kbd "C-z 7"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "8"))) (kbd "C-z 8"))
-(define-key key-translation-map
-  (kbd (concat "C-z C-" (cae-keyboard-kbd "9"))) (kbd "C-z 9"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "0"))) (kbd "C-z 0"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "1"))) (kbd "C-z 1"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "2"))) (kbd "C-z 2"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "3"))) (kbd "C-z 3"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "4"))) (kbd "C-z 4"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "5"))) (kbd "C-z 5"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "6"))) (kbd "C-z 6"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "7"))) (kbd "C-z 7"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "8"))) (kbd "C-z 8"))
+;;(define-key key-translation-map
+;;  (kbd (concat "C-z C-" (cae-keyboard-kbd "9"))) (kbd "C-z 9"))
 
 
 ;; other window prefix
