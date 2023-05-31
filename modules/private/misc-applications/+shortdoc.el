@@ -6,4 +6,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-lookup-prefix
-        "s" #'shortdoc))
+        :desc "Shortdoc" "s" #'shortdoc))
