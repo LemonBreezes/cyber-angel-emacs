@@ -25,7 +25,6 @@
 ;; Do not override other keymaps with `general-override-mode'. This was created
 ;; because Doom's leader key was overriding Eat's `eat-self-input' keybinding.
 (after! general
-  (general-override-mode -1)
   (define-minor-mode cae-general-override-mode
     "Minor mode to enable `general-override-mode-map' without
 overriding other keymaps."
@@ -33,6 +32,11 @@ overriding other keymaps."
     :init-value nil
     :lighter nil
     :keymap general-override-mode-map)
+  (add-hook 'cae-general-override-mode-hook
+            (cae-defun cae-disable-general-override-mode-h ()
+              (if cae-general-override-mode
+                  (general-override-mode -1)
+                (general-override-mode 1))))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 (doom! :completion
