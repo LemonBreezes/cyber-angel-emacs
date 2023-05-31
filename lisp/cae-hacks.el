@@ -127,7 +127,7 @@
 
 (defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
 (defconst cae-hacks-gc-cons-percentage 10)
-(defconst cae-hacs-gc-idle-delay 5)
+(defconst cae-hacks-gc-idle-delay 5)
 (defvar cae-hacks--gc-percentage nil)
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
@@ -145,7 +145,7 @@
           gc-cons-threshold           cae-hacks-gc-cons-threshold
           gc-cons-percentage          cae-hacks-gc-cons-percentage)
     (setq cae-hacks--gc-idle-timer
-          (run-with-idle-timer cae-hacs-gc-idle-delay
+          (run-with-idle-timer cae-hacks-gc-idle-delay
                                nil #'cae-hacks-garbage-collect))
     (when (timerp (bound-and-true-p gcmh-idle-timer))
       (cancel-timer gcmh-idle-timer))
