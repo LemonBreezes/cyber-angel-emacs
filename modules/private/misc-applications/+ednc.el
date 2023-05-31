@@ -1,13 +1,11 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
-;;(dbus-ping :system "org.freedesktop.DBus")
-;;(dbus-list-known-names :system)
 (use-package! ednc
-  :defer 1.5
   :when (and (require 'dbus nil t)
              (dbus-ping :system "org.freedesktop.DBus"))
+  :init
+  (run-with-idle-timer 1.5 nil #'ednc-mode 1)
   :config
-  (ednc-mode +1)
   (defun stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
                  (let ((app-name (ednc-notification-app-name notification)))
