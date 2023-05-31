@@ -186,7 +186,8 @@
           (?x . ?x)
           ;; For popups
           (?~ . ?~)
-          (?` . ?`)))
+          (?` . ?`)
+          (?\" . ?\")))
   (appendq! meow-mode-state-list
             '((helpfulmode . normal)
               (Man-mode . normal)
