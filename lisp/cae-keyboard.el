@@ -283,3 +283,7 @@
     ";!=" "≠"
     "-." "->"
     "=." "=>"))
+
+;;; Programming language specific stuff
+
+(use-package! smart-semicolon)
