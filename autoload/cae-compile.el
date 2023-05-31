@@ -11,7 +11,8 @@
 (defvar cae-compile-files-to-ignore
   `(,(expand-file-name "ui/doom-dashboard/config.el" doom-modules-dir)
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
-    ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)))
+    ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
+    ,(expand-file-name "lang/cc/autoload.el" doom-modules-dir)))
 
 (defvar cae-compile-native-comp-speed 3)
 
