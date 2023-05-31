@@ -23,6 +23,13 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
+;; Add powershell to the path
+(let ((powershell-dir "/mnt/c/Windows/System32/WindowsPowerShell/v1.0"))
+  (unless (string-match-p powershell-dir (getenv "PATH"))
+    (setenv "PATH"
+            (concat powershell-dir  path-separator (getenv "PATH")))
+    (setq exec-path (cons powershell-dir exec-path))))
+
 (doom! :completion
        (vertico +icons)
 
