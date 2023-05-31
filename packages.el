@@ -11,7 +11,6 @@
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! org-sticky-header)
-(package! page-break-lines)
 (package! highlight-context-line)
 
 ;; cae-theme.el
