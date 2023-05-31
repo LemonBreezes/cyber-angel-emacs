@@ -615,12 +615,12 @@
           :map isearch-mode-map
           "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
           "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
-          "M-s l" #'consult-line ;needed by consult-line to detect isearch
+          "M-s l" #'consult-line       ;needed by consult-line to detect isearch
           "M-s L" #'consult-line-multi ;needed by consult-line to detect isearch
           ;; Minibuffer history
           :map minibuffer-local-map
-          "M-s" #'consult-history  ;orig. next-matching-history-element
-          "M-r" #'consult-history ;orig. previous-matching-history-element
+          "M-s" #'consult-history       ;orig. next-matching-history-element
+          "M-r" #'consult-history       ;orig. previous-matching-history-element
           :map global-map
           (:unless (modulep! :config default)
            "M-g f" #'consult-flymake
