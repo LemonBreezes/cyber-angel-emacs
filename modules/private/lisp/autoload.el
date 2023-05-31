@@ -9,8 +9,8 @@
   (interactive)
   (if (and (minibufferp)
            (string= (minibuffer-prompt) "Eval: ")
-           ;; Insert a newline if either the sexp is unbalanced or there is no
-           ;; non-commented sexp.
+           ;; Insert a newline if either the sexp is unbalanced or we are in a
+           ;; commented/empty line.
            (or (comment-only-p (line-beginning-position) (line-end-position))
                (condition-case error
                    (scan-sexps (point-min) (point-max))
