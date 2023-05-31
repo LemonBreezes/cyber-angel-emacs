@@ -79,7 +79,8 @@
 
 (add-hook 'kill-emacs-hook
           (cae-defun cae-theme-store-circadian-times-h ()
-            (doom-store-put 'circadian-themes (circadian-themes-parse))))
+            (when (require 'circadian nil t)
+              (doom-store-put 'circadian-themes (circadian-themes-parse)))))
 
 (when (doom-store-get 'circadian-themes)
   (let* ((themes (doom-store-get 'circadian-themes))
