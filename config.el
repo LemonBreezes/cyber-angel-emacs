@@ -27,7 +27,6 @@
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-(add-hook 'doom-first-buffer-hook #'global-page-break-lines-mode)
 
 ;; A minimal mouse-free `tab-bar' UI.
 (defadvice! +tab-bar--load-buttons-a ()
