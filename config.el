@@ -577,7 +577,7 @@
              (not (modulep! :tools lsp +eglot)))
     (add-to-list
      'aggressive-indent-dont-indent-if
-     '(and lsp-mode
+     '(and (bound-and-true-p lsp-mode)
            (or (and lsp-enable-on-type-formatting
                     (lsp--capability "documentOnTypeFormattingProvider"))
                (and lsp-enable-indentation
