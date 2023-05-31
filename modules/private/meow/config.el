@@ -203,7 +203,8 @@
             '((helpful-mode . normal)
               (Man-mode . normal)
               (message-buffer-mode . normal)
-              (eshell-mode . insert)))
+              (eshell-mode . insert)
+              (vterm-mode . insert)))
   (setq meow-esc-delay 0.001
         meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression pp-eval-expression))
 
