@@ -106,7 +106,7 @@
            (dirvish +icons +dirvish)
            eshell
            ;;dired
-           ;;lisp
+           lisp
            misc-applications
            ;;modeline
            ;;unpackaged
