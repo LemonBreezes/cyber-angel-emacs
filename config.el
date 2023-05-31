@@ -51,7 +51,8 @@
         tab-bar-forward-button nil
         tab-bar-new-button     nil))
 ;; For some reason `tab-bar' commands sometimes misbehave when they are called
-;; before `tab-bar-mode' is enabled. I took the easy solution and just enable `tab-bar-mode' after a delay.
+;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
+;; `tab-bar-mode' after a delay.
 (run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
 ;; Don't confirm when exiting Emacs that active processes exist.
