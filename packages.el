@@ -2,8 +2,7 @@
 (unpin! t)
 (disable-packages! evil-escape
                    flyspell
-                   ccls
-                   general)
+                   ccls)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 
