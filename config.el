@@ -50,7 +50,7 @@
      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
      kill-buffer-delete-auto-save-files t)
 
-(after! newcomment
+(with-eval-after-load "newcomment"
  (setq comment-empty-lines 'eol
        comment-padding nil))
 
@@ -235,13 +235,14 @@
      compile-command "make" test-command "make test"
      install-command "make install" package-command nil run-command nil)
    nil #'equal)
-  (cl-pushnew
+  (add-to-list
+   'projectile-project-types
    '(gnumake marker-files
      ("GNUmakefile")
      project-file "GNUMakefile" compilation-dir nil configure-command nil
      compile-command "make" test-command "make test" install-command
      "make install" package-command nil run-command nil)
-   projectile-project-types :test #'equal)
+   nil #'equal)
   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
   (add-to-list 'projectile-project-root-files-top-down-recurring
