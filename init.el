@@ -32,6 +32,7 @@
 (defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is disabled.")
 
+(doom! :config default)
 ;; (doom! :completion
 ;;        (vertico +icons +childframe)
 
