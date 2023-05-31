@@ -77,7 +77,6 @@
        dired
        lisp
        misc-applications
-       helm
        modeline
        (meow +leader)
        unpackaged
