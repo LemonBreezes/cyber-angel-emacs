@@ -722,6 +722,8 @@
 ;;  (define-key macrursors-mark-map (kbd ".") #'macrursors-mark-all-sentences)
 ;;  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
 
+;;(use-package speedrect)
+
 
 ;;; Autocompletion
 
