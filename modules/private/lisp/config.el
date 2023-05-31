@@ -94,6 +94,3 @@
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
-
-;; After saving a `.dir-locals.el' file, add mark it as safe.
-(add-hook 'after-save-hook 'cae-lisp-add-safe-local-variables-on-save)
