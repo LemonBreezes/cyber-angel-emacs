@@ -24,6 +24,7 @@
   (interactive "*P")
   (cond ((and delete-active-region
               (region-active-p))
+         (if (bound-and-true-p lispy-mode))
          (sp-delete-region (region-beginning) (region-end)))
         ;; Only call `delete-char' if the parens are unbalanced.
         ((condition-case error
