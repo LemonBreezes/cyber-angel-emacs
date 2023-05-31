@@ -109,7 +109,7 @@
         "h" #'dirvish-history-jump
         "M-n" nil                       ; for `avy-goto-line-below'
         "N" #'dirvish-narrow
-        "j" #'consult-line)
+        "j" #'+default/search-buffer)
 
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
