@@ -518,21 +518,23 @@
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
-  (defvar cae-diff-buffer nil
+  (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
   (defun cae-ask-kill-buffer ()
     "Ask to diff, save or kill buffer"
-    (setq cae-diff-buffer nil)
     (if (and (buffer-file-name) (buffer-modified-p))
-        (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
-                 if (or (eq ch ?k) (eq ch ?K))
-                 return t
-                 if (or (eq ch ?d) (eq ch ?D))
-                 do (diff-buffer-with-file)
-                 if (or (eq ch ?s) (eq ch ?S))
-                 return (progn (save-buffer) t)
-                 if (memq ch '(?q ?Q))
-                 return nil)
+        (progn (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+                        if (or (eq ch ?k) (eq ch ?K))
+                        return t
+                        if (or (eq ch ?d) (eq ch ?D))
+                        do (setq cae-diff-window (diff-buffer-with-file))
+                        if (or (eq ch ?s) (eq ch ?S))
+                        return (progn (save-buffer) t)
+                        if (memq ch '(?q ?Q))
+                        return nil)
+               (when cae-diff-window
+                 (delete-window cae-diff-window)
+                 (setq cae-diff-window nil)))
       t))
   
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
