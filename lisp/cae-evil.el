@@ -10,9 +10,6 @@
       "M--" #'negative-argument
       "M-=" #'count-words-region)
 
-(define-key! :keymaps +default-minibuffer-maps
-  [escape] #'abort-recursive-edit)
-
 ;; Unbind text scaling functions. We use C-x C-=.
 (map! :n "C--" nil
       :n "C-+" nil
