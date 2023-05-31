@@ -187,7 +187,8 @@
           "x" #'meow-save
           "X" #'meow-sync-grab
           "y" #'meow-yank
-          "z" #'meow-pop-selection)))
+          "z" #'meow-pop-selection
+          "%" #'meow-query-replace-regexp)))
 
 (use-package! meow
   :init
@@ -204,6 +205,6 @@
               (message-buffer-mode . normal)
               (eshell-mode . insert)))
   (setq meow-esc-delay 0.001
-        meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression))
+        meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
