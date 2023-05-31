@@ -135,9 +135,9 @@ file to edit."
   (let ((buf
          (cl-find-if (lambda (buf)
                        (and (not (eq buf (current-buffer)))
-                            (buffer-local-value 'default-directory buf)))
+                            (or (buffer-local-value 'default-directory buf)
+                                (buffer-local-value 'list-buffers-directory buf))))
                      (buffer-list))))
     (when buf
-      (let ((path (buffer-local-value 'default-directory buf)))
-        (unless (file-equal-p path (eshell/pwd))
-          (eshell/cd path))))))
+      (eshell/cd (or (buffer-local-value 'default-directory buf)
+                     (buffer-local-value 'list-buffers-directory buf))))))
