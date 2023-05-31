@@ -269,55 +269,57 @@
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
              ;; The tick and comma keys are special in Lispy because we want
              ;; them to not be rebound.
-
              ;; We have to find two free keys to bind to the tick and comma
              ;; commands.
-             ,@(list (when (not (= (length (cl-find ?\,
-                                                    cae-keyboard-orbits
-                                                    :test (lambda (x y) (cl-find x y))))
-                                   1))
-                       (list (cond ((= 2 (length (cl-find ?\,
-                                                          cae-keyboard-orbits
-                                                          :test (lambda (x y) (cl-find x y)))))
-                                    (cae-keyboard-kbd-reverse ","))
-                                   ((and (= 2 (length (cl-find ?\'
-                                                               cae-keyboard-orbits
-                                                               :test (lambda (x y) (cl-find x y)))))
-                                         (= 1 (length (cl-find ?\;
-                                                               cae-keyboard-orbits
-                                                               :test (lambda (x y) (cl-find x y))))))
-                                    (cae-keyboard-kbd-reverse "'"))
-                                   (t "\\"))
-                             (lookup-key cae-keyboard--lispy-mode-map-backup
-                                         (cae-keyboard-kbd-reverse ","))
-                             (alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
-                                                    (cae-keyboard-kbd-reverse ","))
-                                        cae-lispy-hydra--command-column-alist))))
-             ,@(list (when (not (= (length (cl-find ?\'
-                                                    cae-keyboard-orbits
-                                                    :test (lambda (x y) (cl-find x y))))
-                                   1))
-                       (list (cond ((not (= 1 (length (cl-find ?\;
-                                                               cae-keyboard-orbits
-                                                               :test (lambda (x y) (cl-find x y))))))
-                                    (cae-keyboard-kbd ";"))
-                                   ((= 2 (length (cl-find ?\'
-                                                          cae-keyboard-orbits
-                                                          :test (lambda (x y) (cl-find x y)))))
-                                    (cae-keyboard-kbd-reverse "'"))
-                                   (t "="))
-                             (lookup-key cae-keyboard--lispy-mode-map-backup
-                                         (cae-keyboard-kbd-reverse "'"))
-                             (alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
-                                                    (cae-keyboard-kbd-reverse "'"))
-                                        cae-lispy-hydra--command-column-alist))))
-           ("+" special-lispy-join "")
-           ("/" special-lispy-splice "")
-           ("-" special-lispy-ace-subword "Select")
-           ("~" special-lispy-tilde "")
-           ("_" special-lispy-underscore "")
-           ("'" lispy-tick "")
-           ("," nil ""))))
+             (,(cond ((= (length (cl-find ?\,
+                                          cae-keyboard-orbits
+                                          :test (lambda (x y) (cl-find x y))))
+                         1)
+                      ",")
+                     ((= 2 (length (cl-find ?\,
+                                            cae-keyboard-orbits
+                                            :test (lambda (x y) (cl-find x y)))))
+                      (cae-keyboard-kbd-reverse ","))
+                     ((and (= 2 (length (cl-find ?\'
+                                                 cae-keyboard-orbits
+                                                 :test (lambda (x y) (cl-find x y)))))
+                           (= 1 (length (cl-find ?\;
+                                                 cae-keyboard-orbits
+                                                 :test (lambda (x y) (cl-find x y))))))
+                      (cae-keyboard-kbd-reverse "'"))
+                     (t "\\"))
+              ,(lookup-key cae-keyboard--lispy-mode-map-backup
+                           (cae-keyboard-kbd-reverse ","))
+              ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
+                                      (cae-keyboard-kbd-reverse ","))
+                          cae-lispy-hydra--command-column-alist))
+             (,(cond
+                ((= (length (cl-find ?\'
+                                     cae-keyboard-orbits
+                                     :test (lambda (x y) (cl-find x y))))
+                    1)
+                 "'")
+                ((not (= 1 (length (cl-find ?\;
+                                            cae-keyboard-orbits
+                                            :test (lambda (x y) (cl-find x y))))))
+                 (cae-keyboard-kbd ";"))
+                ((= 2 (length (cl-find ?\'
+                                       cae-keyboard-orbits
+                                       :test (lambda (x y) (cl-find x y)))))
+                 (cae-keyboard-kbd-reverse "'"))
+                (t "="))
+              ,(lookup-key cae-keyboard--lispy-mode-map-backup
+                           (cae-keyboard-kbd-reverse "'"))
+              ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
+                                      (cae-keyboard-kbd-reverse "'"))
+                          cae-lispy-hydra--command-column-alist))
+             ("+" special-lispy-join "")
+             ("/" special-lispy-splice "")
+             ("-" special-lispy-ace-subword "Select")
+             ("~" special-lispy-tilde "")
+             ("_" special-lispy-underscore "")
+             ("'" lispy-tick "")
+             ("," nil ""))))
       (dolist (binding bindings)
         (define-key lispy-mode-map (car binding) (cadr binding)))
       (eval
