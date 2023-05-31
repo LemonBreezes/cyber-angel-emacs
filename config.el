@@ -522,6 +522,7 @@
       next-line-add-newlines t)
 
 (setq search-whitespace-regexp ".*?"
+      search-default-mode #'char-fold-to-regexp
       isearch-lax-whitespace t
       isearch-wrap-pause 'no-ding
       isearch-lazy-count t
