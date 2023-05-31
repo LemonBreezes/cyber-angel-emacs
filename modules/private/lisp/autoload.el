@@ -18,6 +18,8 @@
          (progn
            (insert-char ?\n 1)
            (indent-according-to-mode)))
+        ((minibufferp)
+         (call-interactively #'exit-minibuffer))
         ((bound-and-true-p lispy-mode)
          (call-interactively #'lispy-newline-and-indent))
         (t
