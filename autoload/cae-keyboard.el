@@ -119,6 +119,7 @@
         (cae-keyboard-remap-reverse last-command-event))
   (call-interactively #'digit-argument))
 
+;;;###autoload
 (defun cae-keyboard-remap-hydra-hint (s)
   (declare (pure t) (side-effect-free t))
   (with-output-to-string
