@@ -63,7 +63,6 @@
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
 
-;; From https://tecosaur.github.io/emacs-config/config.html
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
   (when (> (buffer-size) 50000)
@@ -72,6 +71,7 @@
 
 (add-hook 'org-mode-hook #'locally-defer-font-lock)
 
+;; `org-indent' hack from Tecosaur's Emacs config.
 (defadvice! +org-indent--reduced-text-prefixes ()
   :after #'org-indent--compute-prefixes
   (setq org-indent--text-line-prefixes
