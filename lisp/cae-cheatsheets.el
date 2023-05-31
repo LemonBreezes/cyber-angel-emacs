@@ -54,7 +54,7 @@
 (defun cae-cheatsheets-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 
-(add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-cheatsheets-hydra-quit-h)
 
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
