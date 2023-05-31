@@ -36,4 +36,5 @@
 
 ;;;###autoload
 (defun cae-ai-toggle-chatgpt-shell ()
-  (interactive))
+  (interactive)
+  )
