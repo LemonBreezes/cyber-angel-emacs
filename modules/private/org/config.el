@@ -47,4 +47,5 @@
 
 (use-package! worf
   :defer t :init
+  (defvar hydra-worf-change nil)
   (add-hook 'org-mode-hook #'worf-mode))
