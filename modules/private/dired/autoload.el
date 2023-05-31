@@ -50,3 +50,8 @@
   ("a" dirvish-quick-access "Quick access" :column "Menu")
   ("s" dirvish-quicksort "Quicksort" :column "Menu")
   ("?" dirvish-dispatch "Dirvish dispatch" :column "Menu"))
+
+(defun cae-emerge-menu ()
+  (interactive)
+  (dirvish-emerge-mode +1)
+  (call-interactively #'dirvish-emerge-menu))
