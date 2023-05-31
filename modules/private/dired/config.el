@@ -116,8 +116,6 @@
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
         [remap next-buffer] #'cae-dired-next-buffer))
 
-;; TODO Patch these for the behavior I want. Turn them into `:before' advices
-;; and use hooks if necessary.
 ;; Exit the current Dirvish session when running interactive commands like
 ;; `projectile-find-file'. Also, automatically enter fullscreen mode when
 ;; opening a file in a single window.
