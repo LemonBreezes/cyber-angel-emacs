@@ -148,6 +148,14 @@
         (bookmark-jump name)
       (cae-project-bookmark-set name))))
 
+(unless (featurep 'embark)
+  (defun cae-project-bookmark-set (name)
+    "Set a bookmark in the current project."
+    (interactive "sBookmark name: ")
+    (setq this-command 'bookmark-set)
+    (cae-project--with-bookmark-alist nil
+      (bookmark-set name))))
+
 (setf (alist-get 'project-bookmark marginalia-annotator-registry)
       (alist-get 'bookmark marginalia-annotator-registry))
 
