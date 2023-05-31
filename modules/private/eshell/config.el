@@ -42,9 +42,8 @@
         "M-DEL" #'eat-self-input
         "C-u" #'eat-self-input
         "M->" #'end-of-buffer
-        ;;"<prior>" #'scroll-down-command
-        ;;"<next>" #'scroll-up-command
-        )
+        "<prior>" #'scroll-down-command
+        "<next>" #'scroll-up-command)
   (map! :map eat-mode-map
         "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
