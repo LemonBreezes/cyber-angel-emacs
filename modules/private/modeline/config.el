@@ -7,10 +7,10 @@
               'face '(:inherit variable-pitch
                       :weight bold)))
 
-(mapcar #'byte-compile '(doom-real-buffer-p
-                         cae-modeline-buffer-name))
-
 (add-hook! 'doom-first-file-hook
+  (mapcar #'byte-compile '(doom-real-buffer-p
+                           cae-modeline-buffer-name
+                           doom-temp-buffer-p))
   (setq-default mode-line-format
                 (cl-subst '(:eval (cae-modeline-buffer-name))
                           'mode-line-buffer-identification
