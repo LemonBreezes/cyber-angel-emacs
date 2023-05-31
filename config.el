@@ -87,7 +87,10 @@
     (dolist (mode '(comint-mode syslog-mode term-mode eshell-mode vterm-mode
                     shell-mode compilation-mode special-mode fundamental-mode
                     syslog-mode crontab-mode))
-      (add-to-list 'emojify-inhibit-major-modes mode))))
+      (add-to-list 'emojify-inhibit-major-modes mode))
+    ;; Only enable emojis in Org mode.
+    (add-hook 'org-mode-hook #'emojify-mode)
+    (remove-hook 'doom-first-buffer-hook #'global-emojify-mode)))
 
 (use-package! info-colors
   :defer t :init
@@ -535,7 +538,7 @@
           "M-s" #'consult-history ;; orig. next-matching-history-element
           "M-r" #'consult-history) ;; orig. previous-matching-history-element
     :config
-    (setq consult-preview-key (list :debounce 0.4 'any))))
+    (setq consult-preview-key 'any)))
 
 (after! cc-mode
     (map! :map c-mode-base-map
