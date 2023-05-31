@@ -289,7 +289,9 @@
 (use-package! smart-semicolon
   :defer t
   :init
-  (add-hook 'c-mode-common-hook #'smart-semicolon-mode))
+  (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
+  (add-hook 'web-mode-hook  'smart-semicolon-mode)
+  (add-hook 'java-mode-hook 'smart-semicolon-mode))
 
 (use-package! electric-spacing
   :defer t
