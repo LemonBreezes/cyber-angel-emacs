@@ -49,7 +49,7 @@
   ("y" dirvish-yank-menu "Yank menu" :column "Menus")
   ("a" dirvish-quick-access "Quick access" :column "Menus")
   ("s" dirvish-quicksort "Quicksort" :column "Menus")
-  ("?" dirvish-dispatch "Dirvish dispatch") :column "Menus")
+  ("?" dirvish-dispatch "Dirvish dispatch" :column "Menus"))
 
 (defun cae-dired-dirvish-emerge-menu ()
   (interactive)
