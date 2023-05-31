@@ -378,10 +378,6 @@
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
         "M-j" #'avy-goto-char-timer
-        (:after magit-log
-         :map magit-log-mode-map
-         "M-n" #'avy-goto-line-below
-         "M-p" #'avy-goto-line-above)
         (:when (modulep! :completion vertico)
           (:after vertico
            :map vertico-map
