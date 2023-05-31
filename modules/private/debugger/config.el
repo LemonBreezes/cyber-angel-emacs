@@ -7,7 +7,7 @@
   (after! dap-mode
     (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
     ;; Close the windows when the debugger is closed.
-    (advice-add #'dap-disconnect :after #'cae-debugger-quit-session-a)
+    (advice-add #'dap-disconnect :after #'cae-debugger-dap-quit-session-a)
 
     (setq dap-debug-restart-keep-session nil
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
