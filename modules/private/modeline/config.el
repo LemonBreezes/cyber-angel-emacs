@@ -100,13 +100,12 @@
 
   (use-package! parrot
     :defer t :init
-    (defvar parrot-animate-on-load nil)
     (add-hook 'doom-first-file-hook #'parrot-mode)
     :config
     (setq parrot-animate 'hide-static
           parrot-rotate-animate-after-rotation nil
           parrot-num-rotations 10
+          parrot-animate-on-load nil
           parrot-party-on-magit-push t
           parrot-party-on-org-todo-states '("DONE")
-          parrot-type 'nyan)
-    (advice-remove #'parrot-start-animation #'ignore)))
+          parrot-type 'nyan)))
