@@ -42,6 +42,7 @@
 
        :tools
        direnv
+       debugger
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
