@@ -127,7 +127,7 @@
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gcmh-mode nil)
 
-(defun cae-hacks-disable-gc (&rest _)
+(defun cae-hacks-disable-gc ()
   (setq cae-hacks--gc-messages (and cae-hacks--gc-messages
                                     garbage-collection-messages)
         cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
