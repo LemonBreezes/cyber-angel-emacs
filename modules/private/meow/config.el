@@ -22,7 +22,8 @@
           ,(cae-keyboard-kbd "7") #'meow-digit-argument
           ,(cae-keyboard-kbd "8") #'meow-digit-argument
           ,(cae-keyboard-kbd "9") #'meow-digit-argument
-          ,(cae-keyboard-kbd "0") #'meow-digit-argument))
+          ,(cae-keyboard-kbd "0") #'meow-digit-argument)
+   t)
   (after! which-key
     ;; Remove `meow-digit-argument' from the which-key menu.
     (add-to-list 'which-key-replacement-alist
@@ -35,7 +36,8 @@
           "?" #'meow-cheatsheet
           "/" #'meow-keypad-describe-key
           ;; Add digit arguments?
-          "h" #'help-command)))
+          "h" #'help-command))
+  t)
 
 (defconst meow-cheatsheet-layout-cae
   `((<TLDE> "`" "~")
@@ -163,7 +165,8 @@
           ;; "%" #'meow-query-replace-regexp
           "Y" #'meow-yank-pop
           "\\" #'quoted-insert
-          "S" #'embrace-commander)))
+          "S" #'embrace-commander)
+   t))
 
 (use-package! meow
   :init
