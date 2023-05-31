@@ -68,6 +68,7 @@
 ;;(package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! smart-semicolon)
+(package! electric-spacing)
 
 ;;; Autocompletion
 (package! copilot
