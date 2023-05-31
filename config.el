@@ -291,14 +291,6 @@
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
-(when (string-suffix-p "-WSL2" operating-system-release)
-  (defun pinentry-emacs (desc prompt _ok _error)
-    (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
-      str))
-  (use-package! pinentry
-    :config
-    (pinentry-start)))
-
 
 ;;; Editor
 
