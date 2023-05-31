@@ -60,6 +60,7 @@
           meow-insert-mode
           theme-magic-export-theme-mode
           eat-eshell-mode
+          aggressive-indent-mode
           modern-c++-font-lock-mode))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -69,6 +70,7 @@
           ;; (flyspell-mode)
           (spell-fu-mode)
           (font-lock-mode)
+          (nameless-mode)
           ;; (glasses-mode)
           ;; (overwrite-mode)
           (ruler-mode)))
