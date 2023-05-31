@@ -113,7 +113,7 @@
        :category 'project-bookmark
        :history 'bookmark-history
        ;; Add default names to future history.
-       ;; Ignore errors such that `consult-bookmark' can be used in
+       ;; Ignore errors such that `consult-project-bookmark' can be used in
        ;; buffers which are not backed by a file.
        :add-history (ignore-errors (bookmark-prop-get (bookmark-make-record) 'defaults))
        :group (consult--type-group narrow)
