@@ -36,6 +36,8 @@
       (define-key doom-leader-map (kbd (concat "y " (char-to-string key))) binding)))
   (after! yasnippet (define-key yas-minor-mode-map (kbd "C-c &") nil))
   (define-key doom-leader-map "&" nil)
+  (map! :leader
+        :prefix ("y" . "snippets"))
   ;;(setq which-key-replacement-alist
   ;;      (cl-mapcar (lambda (x)
   ;;                   (when (and (listp (car-safe x))
