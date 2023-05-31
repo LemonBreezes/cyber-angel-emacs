@@ -7,4 +7,4 @@ insert_final_newline = true
 [*.el]
 charset = utf-8
 indent_style = space
-# indent_size = 2 # adding this line breaks Doom's custom indentation.
+# indent_size = 2 # adding this line ruins Doom's indentation.
