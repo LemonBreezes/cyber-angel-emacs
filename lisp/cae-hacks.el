@@ -69,7 +69,7 @@
   (let ((arg (car args))
         (try-vscroll (second args)))
     (and (numberp arg)
-         (> arg 0)
+         (not (eq arg 0))
          transient-mark-mode
          (not (region-active-p))
          (not (memq 'shift (event-modifiers last-input-event)))
