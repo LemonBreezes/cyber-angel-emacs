@@ -20,9 +20,9 @@
     (set-face-attribute 'company-preview nil
                         :inherit 'shadow
                         :background 'unspecified))
-  (after! lsp-ui
-    (set-face-attribute 'lsp-ui-doc-background nil
-                        :background (face-background 'tooltip))))
+  (after! markdown-mode
+    (set-face-attribute 'markdown-code-face nil
+                        :background 'unspecified)))
 
 (after! lsp-ui-doc
   (defadvice! cae-theme-fixup-lsp-popup-a (string symbol)
