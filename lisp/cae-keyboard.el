@@ -14,6 +14,7 @@
     ))
 
 (cl-defun cae-keyboard-remap (arg)
+  (declare (pure t) (side-effect-free t))
   (when (characterp arg)
     (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
       (when orbit
@@ -27,9 +28,11 @@
     (cl-mapcar #'cae-keyboard-remap arg)))
 
 (defun cae-keyboard-remap-to-strings (arg)
+  (declare (pure t) (side-effect-free t))
   (cl-mapcar #'char-to-string (cae-keyboard-remap arg)))
 
 (defun cae-keyboard-strings (arg)
+  (declare (pure t) (side-effect-free t))
   (cl-mapcar #'char-to-string arg))
 
 (cl-assert (eq (cae-keyboard-remap ?w) ?b))
