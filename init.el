@@ -16,6 +16,7 @@
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
+(load! "lisp/cae-fixup-leader-key")
 
 (setq doom-leader-alt-key "M-SPC"
       doom-localleader-alt-key "M-SPC m"
