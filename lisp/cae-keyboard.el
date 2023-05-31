@@ -54,6 +54,9 @@
 (define-key key-translation-map (kbd "C-x 4 C-x C-r") (kbd "C-x 4 r"))
 (define-key key-translation-map (kbd "C-x 4 C-x C-o") (kbd "C-x 4 C-o"))
 (define-key key-translation-map (kbd "C-x 4 C-x C-j") (kbd "C-x 4 C-j"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 4" "0") (kbd "C-x 4 0"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 4" "1") (kbd "C-x 4 1"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 4" "4") (kbd "C-x 4 4"))
 
 ;; other frame prefix
 (define-key key-translation-map (kbd "C-x 5 C-x 5") (kbd "C-x 5 5"))
@@ -70,6 +73,10 @@
 (define-key key-translation-map (kbd "C-x 5 C-x C-p") (kbd "C-x 5 p"))
 (define-key key-translation-map (kbd "C-x 5 C-x C-r") (kbd "C-x 5 r"))
 (define-key key-translation-map (kbd "C-x 5 C-x C-u") (kbd "C-x 5 u"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 5" "0") (kbd "C-x 5 0"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 5" "1") (kbd "C-x 5 1"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 5" "2") (kbd "C-x 5 2"))
+(define-key key-translation-map (cae-keyboard-kbd "C-x 5" "5") (kbd "C-x 5 5"))
 
 ;;; Universal argument
 
