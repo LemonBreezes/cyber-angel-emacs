@@ -116,8 +116,9 @@
 (when (modulep! :editor lispy)
   (after! lispy
     ;; navigation
-    (defvar cae-keyboard-lispy--lost-quote-keybinding
-      (lookup-key lispy-mode-map-special (cae-keyboard-kbd-reverse "'")))
+    (unless (boundp 'cae-keyboard-lispy--lost-quote-command)
+      (defvar cae-keyboard-lispy--lost-quote-command
+        (lookup-key lispy-mode-map-special (cae-keyboard-kbd-reverse "'"))))
     (let ((bindings
            `((,(cae-keyboard-kbd "l") special-lispy-right)
              (,(cae-keyboard-kbd "h") special-lispy-left)
@@ -177,9 +178,8 @@
              ("-" special-lispy-ace-subword)
              ("~" special-lispy-tilde)
              ("_" special-lispy-underscore)
-             ("'" lispy-tick)           ;`special-lispy-eval-other-window' lost
-             ;; This is not fully automatic because
-             ("=" special-lispy-eval-other-window))))
+             ("'" lispy-tick)  ;`cae-keyboard-lispy--lost-quote-command' lost
+             ("=" ,cae-keyboard-lispy--lost-quote-command))))
       (dolist (binding bindings)
         (define-key lispy-mode-map (car binding) (cadr binding))))
 
