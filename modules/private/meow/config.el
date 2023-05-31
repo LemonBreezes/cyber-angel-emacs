@@ -184,6 +184,7 @@
         '((?c . ?c)
           (?h . ?h)
           (?x . ?x)
+          ;; For popups
           (?~ . ?~)
           (?` . ?`)))
   (appendq! meow-mode-state-list
