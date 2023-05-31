@@ -159,6 +159,7 @@
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
 (when (modulep! :ui workspaces)
