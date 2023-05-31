@@ -1,7 +1,5 @@
 ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
-(map! "C-x O" #'other-window-previous)
-
 (use-package! repeat
   :init
   (add-hook 'doom-first-input-hook #'repeat-mode)
