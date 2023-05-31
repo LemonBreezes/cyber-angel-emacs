@@ -104,8 +104,11 @@
         "h" #'dirvish-history-jump
         "M-n" nil
         "N" #'dirvish-narrow
-        "j" #'consult-line)
-  (map! [remap +default/find-file-under-here] #'dirvish-fd)
+        "j" #'consult-line
+        "M-d" #'dirvish-fd-switches-menu)
+  (map! :leader
+        :prefix "f"
+        "C-f" #'dirvish-fd)
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
