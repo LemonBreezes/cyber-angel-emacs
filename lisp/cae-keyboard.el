@@ -477,6 +477,7 @@
      (append '(defhydra cae-worf-cheat-sheet (:hint nil :foreign-keys run)
                 ("<f6>" nil "Exit" :exit t))
              (cl-loop for binding in bindings
+                      unless (string= (caddr binding) "")
                       collect
                       `(,(car binding)
                         ,(cadr binding)
