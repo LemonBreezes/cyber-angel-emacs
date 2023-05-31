@@ -132,6 +132,7 @@
 
 (defun cae-translate-number-row-p (key-from)
   "Return true if we should translate the number row keys."
+  (+log this-command (file-name-base (symbol-file this-command)))
   (and
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
