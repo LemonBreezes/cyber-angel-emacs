@@ -58,7 +58,7 @@ So if we're connected with sudo to 'remotehost'
 '$ rcd /etc' would go to '/sudo:remotehost:/etc' instead of just
 '/etc' on localhost."
   (unless (file-remote-p default-directory)
-    (error "not in a remote location"))
+    (error "Not in a remote location"))
   (with-parsed-tramp-file-name default-directory nil
     (eshell/cd
      (tramp-make-tramp-file-name
