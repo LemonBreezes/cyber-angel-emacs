@@ -569,6 +569,7 @@
              ("C-M-t" sp-transpose-sexp "Edit")
              ("C-x C-t" sp-transpose-hybrid-sexp "Edit")
              ("C-M-k" sp-kill-sexp "Kill")
+             ("C-M-K" sp-kill-hybrid-sexp "Kill")
              ("M-<delete>" sp-unwrap-sexp "Kill")
              ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
              ("M-r" cae-raise-sexp "Kill")
