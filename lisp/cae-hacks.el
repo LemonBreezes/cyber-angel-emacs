@@ -177,3 +177,7 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; This is for backwards compatibility with my old bookmarks file.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
+
+;; This autoload fixes a void function error on `find-file-hook' that occurs
+;; sporadically for me.
+(autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
