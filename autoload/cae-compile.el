@@ -15,7 +15,8 @@
               (file-in-directory-p (buffer-file-name) doom-local-dir)
               (file-in-directory-p (buffer-file-name) cae-multi-local-dir)
               (not (string-match-p cae-compile-interesting-file-name-regexp
-                                   (file-name-base (buffer-file-name)))))
+                                   (file-name-base (buffer-file-name))))
+              (not (string-match-p "flycheck_.*" (buffer-file-name))))
     (byte-compile-file (buffer-file-name))
     (emacs-lisp-native-compile-and-load)))
 
@@ -61,3 +62,18 @@
                                            nil
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
+
+(add-hook 'after-save-hook #'cae-compile-rebuild-package)
+
+;; Run early in case I want to `C-g' and inspect the output.
+(add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
+
+;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
+;; you will be waiting for a long time.
+(add-hook 'kill-emacs-hook
+          ;; 10 GB or 30% of RAM
+          (lambda () (setq gc-cons-threshold (* 10 1024 1024 1024)
+                      gc-cons-percentage 30
+                      gcmh-low-cons-threshold gc-cons-threshold
+                      gcmh-high-cons-threshold gc-cons-threshold))
+          -10)
