@@ -143,4 +143,6 @@
           "M-j" nil                   ; formerly `lisp-split'.
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
-          "M-S" #'lispy-split)))
+          "M-S" #'lispy-split)
+    (when (modulep! :editor multiple-cursors)
+      (add-to-list 'mc/unsupported-minor-modes 'lispy-mode))))
