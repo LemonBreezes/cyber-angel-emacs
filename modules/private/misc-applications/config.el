@@ -20,7 +20,7 @@
 
 (after! timer-list
   (map! :map timer-list-mode-map
-        :n "<f6>" #'+timer-list-hydra/body))
+        "<f6>" #'+timer-list-hydra/body))
 
 ;; TODO Turn these into module flags and separate the binding of their prefixes
 ;; out into `doom-after-init-hook' so that the user can modify them.
