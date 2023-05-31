@@ -36,6 +36,7 @@
         tab-bar-back-button    nil
         tab-bar-forward-button nil
         tab-bar-new-button     nil))
+(add-hook 'doom-first-buffer-hook #'tab-bar-mode)
 
 (setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ; The unicode ellipsis is ugly to me
