@@ -60,8 +60,9 @@
             (cl-set-difference eshell-cannot-leave-input-list
                                '(previous-line next-line))))
     (after! em-alias
-      (dolist (alias +eshell-aliases)
-        (add-to-list 'eshell-command-aliases-list alias t))))
+      (add-hook! 'eshell-alias-load-hook
+        (dolist (alias +eshell-aliases)
+          (add-to-list 'eshell-command-aliases-list alias t)))))
 
   (when (>= emacs-major-version 29)
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
