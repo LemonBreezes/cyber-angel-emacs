@@ -549,6 +549,8 @@
                            (tramp-get-remote-uid (tramp-dissect-file-name path)
                                                  'string)
                          (user-login-name))))
+      (backtrace)
+      (auto-sudoedit-mode +1)
       (auto-sudoedit)))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
   :config
