@@ -81,7 +81,7 @@
 (use-package! info-colors
   :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
-(use-package! authinfo-color-modee
+(use-package! authinfo-color-mode
   :mode ("authinfo.gpg\\'" . authinfo-color-mode)
   :init (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
