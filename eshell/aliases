@@ -13,9 +13,16 @@ alias mcd    mkdir               -p                                           $1
 alias cd-    cd -
 alias cd--   cd -2
 
-alias ff    find-file-other-window $1
+alias f     find-file                    $1
+alias ff    find-file-other-window       $1
+alias bd    eshell-up                    $1
+alias l     ls -lh                       $*
+alias ll    ls -lah                      $*
+alias cdp   cd-to-project
+alias clear clear-scrollback
 alias gg    cae-unpackaged-magit-status
 alias q     exit
+
 
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom $*
 alias doom   DOOMDIR=~/.doom.d/         ~/.emacs.d/bin/doom          $*
