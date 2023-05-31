@@ -1,14 +1,16 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-fixup-leader-key")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-keyboard")             ;Input hacks.
-
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
 (when cae-config-incremental-compilation-enabled-p
   (run-with-idle-timer 2 nil #'cae-compile-schedule-native-compilation))
+
+;;; Stuff that should not be disabled.
+
+(load! "lisp/cae-fixup-leader-key")
+(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+(load! "lisp/cae-keyboard")             ;Input hacks.
 
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
