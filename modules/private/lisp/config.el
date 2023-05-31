@@ -1,6 +1,5 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
-;; This breaks terminal Emacs.
 (use-package! nameless
   :defer t
   :when (cae-display-graphic-p)
