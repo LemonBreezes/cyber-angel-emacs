@@ -12,4 +12,6 @@
   (map! :map leetcode--problems-mode-map
         "q" #'+leetcode-quit)
   (add-hook 'leetcode-solution-mode-hook
-            (lambda() (flycheck-mode -1))))
+            (lambda() (flycheck-mode -1)))
+  (setq leetcode-save-solutions t)
+  (setq leetcode-directory "~/src/leetcode"))
