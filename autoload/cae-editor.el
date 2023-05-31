@@ -155,9 +155,9 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-forward-sentence-function (&optional arg)
-  (or arg (setq arg 1))
   (if (fboundp #'sentex-forward-sentence)
-      (if (< arg 0)
-          (sentex-backward-sentence arg)
-        (sentex-forward-sentence arg))
+      (progn (or arg (setq arg 1))
+        (if (< arg 0)
+            (sentex-backward-sentence arg)
+          (sentex-forward-sentence arg)))
     (forward-sentence-default-function arg)))
