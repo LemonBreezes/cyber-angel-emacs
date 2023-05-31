@@ -73,8 +73,7 @@ derivative.")
                        (setf (alist-get 'styles
                                         (alist-get 'lsp-capf
                                                    completion-category-defaults))
-                             '(orderless)))
-                     nil))))
+                             '(orderless)))))))
 
   (map! (:unless (modulep! +tng)
          :desc "complete" "C-SPC" #'completion-at-point)
