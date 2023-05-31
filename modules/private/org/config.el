@@ -51,6 +51,13 @@
   (add-hook 'org-mode-hook #'worf-mode)
   :config
   (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
+  (advice-add #'worf-property
+              :after
+              (cae-defun cae-org-worf-property-a ()
+                (let ((parent (org-element-property :parent (org-element-at-point))))
+                  (+log parent)
+                  (when (eq 'property-drawer parent)
+                    (goto-char (org-element-property :begin parent))))))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
