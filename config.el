@@ -14,9 +14,6 @@
   ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; These are the packages that are currently not being lazy-loaded:
-;; - `ednc'
-
 ;;; UI
 
 (load! "lisp/cae-theme")
