@@ -544,11 +544,11 @@
     (load! "lisp/cae-evil"))
 
   (autoload 'cae-project-bookmark (concat doom-private-dir
-                                          "lisp/cae-project"))
+                                          "lisp/cae-project-bookmark"))
   (autoload 'cae-project-bookmark-set (concat doom-private-dir
-                                              "lisp/cae-project"))
+                                              "lisp/cae-project-bookmark"))
   (autoload 'cae-project--get-bookmark-file (concat doom-private-dir
-                                                    "lisp/cae-project"))
+                                                    "lisp/cae-project-bookmark"))
   (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
         :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
 
