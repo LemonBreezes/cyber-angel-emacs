@@ -69,12 +69,6 @@ derivative.")
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
 
-  (defmacro cae-defun (name arglist &optional docstring &rest body)
-    "`defun' but guaranteed return the created function."
-    (declare (doc-string 3) (indent 2))
-    `(progn (defun ,name ,arglist ,docstring ,@body)
-            #',name))
-
   (defmacro cae-generate-corfu-select-index (index)
     "Return a named function to run `corfu-complete' for INDEX"
     `(cae-defun ,(intern (format "cae-corfu-complete-%s" index)) ()
