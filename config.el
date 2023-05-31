@@ -529,7 +529,7 @@
                  do (diff-buffer-with-file)
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
-                 if (memq ch '(?q ?Q ?\C-g ?\C-\[))
+                 if (memq ch '(?q ?Q))
                  return nil)
       t))
   
