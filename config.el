@@ -763,120 +763,120 @@
 ;;  (map! :map abbrev-map "e" #'edit-abbrevs)
 ;;  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 ;;
-;;(use-package! ibuffer
-;;  :defer t :config
-;;  (setq ibuffer-always-show-last-buffer t
-;;        ibuffer-formats
-;;        '((mark modified read-only locked " "
-;;           (name 23 23 :left :elide)    ;Give more space to the name.
-;;           " "
-;;           (size 9 -1 :right)
-;;           " "
-;;           (mode 16 16 :left :elide)
-;;           " "
-;;           (vc-status 12 :left)
-;;           " " filename-and-process)
-;;          (mark " "
-;;                (name 16 -1)
-;;                " " filename)))
-;;  (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
-;;  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
-;;
-;;(use-package! diff-mode
-;;  :defer t :config
-;;  (map! :map diff-mode-map
-;;        "q" #'kill-this-buffer))
-;;
-;;(use-package! aggressive-indent
-;;  :init
-;;  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
-;;                                        ;module.
-;;  (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-;;  :defer t :config
-;;  (add-to-list
-;;   'aggressive-indent-dont-indent-if
-;;   '(and (bound-and-true-p lsp-mode)
-;;         (or (and lsp-enable-on-type-formatting
-;;                  (lsp--capability "documentOnTypeFormattingProvider"))
-;;             (and lsp-enable-indentation
-;;                  (lsp--capability "documentRangeFormattingProvider")))))
-;;  (dolist (command '(lsp-format-buffer
-;;                     lsp-format-region
-;;                     lsp-organize-imports
-;;                     lsp-organize-imports-remove-unused
-;;                     prog-fill-reindent-defun
-;;                     indent-pp-sexp
-;;                     save-buffer
-;;                     indent-for-tab-command))
-;;    (add-to-list 'aggressive-indent-protected-commands command))
-;;  (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
-;;
-;;(use-package! hungry-delete
-;;  :defer t :init
-;;  (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
-;;  :config
-;;  (when (modulep! :config default +smartparens)
-;;    (map! :map hungry-delete-mode-map
-;;          [remap backward-delete-char-untabify] #'sp-backward-delete-char
-;;          [remap c-electric-backspace] #'sp-backward-delete-char
-;;          [remap c-electric-delete-forward] #'cae-delete-char
-;;          [remap delete-backward-char] #'sp-backward-delete-char
-;;          [remap delete-char] #'cae-delete-char
-;;          [remap delete-forward-char] #'cae-delete-char))
-;;  (when (modulep! :editor multiple-cursors)
-;;    (after! multiple-cursors-core
-;;      (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
-;;  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
-;;
-;;(use-package! file-info
-;;  :defer t
-;;  :init
-;;  (map! :leader :prefix "f"
-;;        :desc "Show file info" "i" #'file-info-show)
-;;  :config
-;;  ;; See the `:private vc' module for further configuration.
-;;  (setq file-info-include-headlines t
-;;        file-info-max-value-length 100))
-;;
-;;(use-package! titlecase
-;;  :defer t
-;;  :init
-;;  (after! embark
-;;    (define-key embark-region-map "T" #'titlecase-region)
-;;    (define-key embark-heading-map "T" #'titlecase-line)))
-;;
-;;;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
-;;;; `speedrect' commands.
-;;(use-package! speedrect
-;;  :after-call rectangle-mark-mode-hook
-;;  :config
-;;  (speedrect-hook))
+(use-package! ibuffer
+  :defer t :config
+  (setq ibuffer-always-show-last-buffer t
+        ibuffer-formats
+        '((mark modified read-only locked " "
+           (name 23 23 :left :elide)    ;Give more space to the name.
+           " "
+           (size 9 -1 :right)
+           " "
+           (mode 16 16 :left :elide)
+           " "
+           (vc-status 12 :left)
+           " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename)))
+  (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
+  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
-(use-package! restore-point
+(use-package! diff-mode
+  :defer t :config
+  (map! :map diff-mode-map
+        "q" #'kill-this-buffer))
+
+(use-package! aggressive-indent
+  :init
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
+                                        ;module.
+  (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
+  :defer t :config
+  (add-to-list
+   'aggressive-indent-dont-indent-if
+   '(and (bound-and-true-p lsp-mode)
+         (or (and lsp-enable-on-type-formatting
+                  (lsp--capability "documentOnTypeFormattingProvider"))
+             (and lsp-enable-indentation
+                  (lsp--capability "documentRangeFormattingProvider")))))
+  (dolist (command '(lsp-format-buffer
+                     lsp-format-region
+                     lsp-organize-imports
+                     lsp-organize-imports-remove-unused
+                     prog-fill-reindent-defun
+                     indent-pp-sexp
+                     save-buffer
+                     indent-for-tab-command))
+    (add-to-list 'aggressive-indent-protected-commands command))
+  (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
+
+(use-package! hungry-delete
   :defer t :init
-  (add-hook 'doom-first-input-hook #'restore-point-mode)
+  (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
   :config
-  (dolist (fn '(symbol-overlay-switch-forward
-                symbol-overlay-switch-backward
-                symbol-overlay-jump-next
-                symbol-overlay-jump-prev
-                recenter-top-bottom
-                reposition-window))
-    (add-to-list 'rp/restore-point-commands fn))
-  ;; Restore point in the minibuffer.
-  (defun cae-restore-point-h ()
-    (when (bound-and-true-p restore-point-mode)
-      (rp/cond-restore-point)))
-  (defun cae-restore-point-enable-in-minibuffer-h ()
-    (if restore-point-mode
-        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
-               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
-               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
-               ;; way we are certain this function is only called interactively.
-               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
-      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
-      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
-  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
+  (when (modulep! :config default +smartparens)
+    (map! :map hungry-delete-mode-map
+          [remap backward-delete-char-untabify] #'sp-backward-delete-char
+          [remap c-electric-backspace] #'sp-backward-delete-char
+          [remap c-electric-delete-forward] #'cae-delete-char
+          [remap delete-backward-char] #'sp-backward-delete-char
+          [remap delete-char] #'cae-delete-char
+          [remap delete-forward-char] #'cae-delete-char))
+  (when (modulep! :editor multiple-cursors)
+    (after! multiple-cursors-core
+      (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
+  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
+
+(use-package! file-info
+  :defer t
+  :init
+  (map! :leader :prefix "f"
+        :desc "Show file info" "i" #'file-info-show)
+  :config
+  ;; See the `:private vc' module for further configuration.
+  (setq file-info-include-headlines t
+        file-info-max-value-length 100))
+
+(use-package! titlecase
+  :defer t
+  :init
+  (after! embark
+    (define-key embark-region-map "T" #'titlecase-region)
+    (define-key embark-heading-map "T" #'titlecase-line)))
+
+;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
+;; `speedrect' commands.
+(use-package! speedrect
+  :after-call rectangle-mark-mode-hook
+  :config
+  (speedrect-hook))
+
+;;(use-package! restore-point
+;;  :defer t :init
+;;  (add-hook 'doom-first-input-hook #'restore-point-mode)
+;;  :config
+;;  (dolist (fn '(symbol-overlay-switch-forward
+;;                symbol-overlay-switch-backward
+;;                symbol-overlay-jump-next
+;;                symbol-overlay-jump-prev
+;;                recenter-top-bottom
+;;                reposition-window))
+;;    (add-to-list 'rp/restore-point-commands fn))
+;;  ;; Restore point in the minibuffer.
+;;  (defun cae-restore-point-h ()
+;;    (when (bound-and-true-p restore-point-mode)
+;;      (rp/cond-restore-point)))
+;;  (defun cae-restore-point-enable-in-minibuffer-h ()
+;;    (if restore-point-mode
+;;        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+;;               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+;;               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
+;;               ;; way we are certain this function is only called interactively.
+;;               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
+;;      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+;;      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
+;;  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
 
 (use-package! symbol-overlay
   :defer t :init
