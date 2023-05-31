@@ -99,6 +99,8 @@
              ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
+;; I'm currently not using home row numbers because I'm using Lispy. I've also
+;; started using the numpad layer on my keyboard more.
 ;;(unless (or (modulep! :private meow)
 ;;            (modulep! :editor lispy))
 ;;  (defconst home-row-numbers-qwerty
