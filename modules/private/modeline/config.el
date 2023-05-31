@@ -102,7 +102,6 @@
   ;; and be silent on startup.
   (use-package! parrot
     :defer t :init
-    (add-hook 'doom-first-file-hook #'parrot-mode)
     (after! magit
       (parrot-mode +1))
     (map! "C-!" #'parrot-rotate-next-word-at-point
