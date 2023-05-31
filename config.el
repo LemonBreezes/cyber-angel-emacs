@@ -777,7 +777,7 @@
               (cae-defun cae-disable-symbol-overlay-h ()
                 (symbol-overlay-mode -1))))
   (when (modulep! :editor multiple-cursors)
-    ;; Don't distract me while I'm doing my multiple cursors calculus.
+    ;; Don't distract me while I'm doing my multiple cursor calculus.
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
   (define-key symbol-overlay-map (kbd "'") 'symbol-overlay-jump-avy)
