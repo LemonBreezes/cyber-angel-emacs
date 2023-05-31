@@ -326,8 +326,8 @@
         "f" #'meow-find
         "g" #'meow-cancel-selection
         "G" #'meow-grab
-        "h" #'meow-left
-        "H" #'meow-left-expand
+        "o" #'meow-left ; h -> o
+        "O" #'meow-left-expand ; H -> O
         "I" #'meow-open-above
         "i" #'meow-insert
         "j" #'meow-join
@@ -337,8 +337,8 @@
         "M" #'meow-mark-symbol
         "n" #'meow-next
         "N" #'meow-next-expand
-        "o" #'meow-block
-        "O" #'meow-to-block
+        "h" #'meow-block ; o -> h
+        "H" #'meow-to-block ; O -> H
         "p" #'meow-prev
         "P" #'meow-prev-expand
         "q" #'meow-quit
