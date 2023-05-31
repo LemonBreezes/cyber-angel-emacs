@@ -258,7 +258,7 @@
 
 
 ;;; Editor
-;
+
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
