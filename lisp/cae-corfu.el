@@ -50,3 +50,8 @@
       (add-hook hook #'cae-yas-setup-capf))
     :config
     (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
+
+(when (modulep! :lang org)
+  (use-package! org-block-capf
+    :defer t :init
+    (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)))
