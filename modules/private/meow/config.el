@@ -190,7 +190,7 @@
               (vterm-mode . insert)))
   (when (modulep! :private corfu)
     (after! corfu
-      (add-hook 'meow-normal-mode-hook #'corfu-quit)))
+      (remove-hook 'meow-normal-mode-hook #'corfu-quit)))
   (unless (display-graphic-p)           ;Make Meow usable in the terminal.
     (setq meow-esc-delay 0.001)
     (meow-esc-mode +1))
