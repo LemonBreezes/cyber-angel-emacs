@@ -43,6 +43,8 @@
   (:host github :repo "NinjaTrappeur/my-repo-pins"
    :build (:not compile)))
 (package! fireplace)
+(package! flames-of-freedom)
+(package! snow)
 
 (package! elfeed-tube)
 (package! elfeed-tube-mpv)
