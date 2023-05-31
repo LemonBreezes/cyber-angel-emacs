@@ -469,9 +469,11 @@
  ;;; Editor
 
  (load! "lisp/cae-repeat")
- (load! "lisp/cae-visible-mark")
- (load! "lisp/cae-smartparens")
- (load! "lisp/cae-visual-scrolling")
+(add-hook 'doom-first-buffer-hook
+          (cae-defun cae-config-load-visible-mark-h ()
+            (load! "lisp/cae-visible-mark")
+            (load! "lisp/cae-visual-scrolling")))
+(load! "lisp/cae-smartparens")
  (load! "lisp/cae-vlf")
  (load! "lisp/cae-multiple-cursors")
 
