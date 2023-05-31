@@ -976,8 +976,7 @@
 
 (use-package! edit-indirect
   :defer t :init
-  ;; (global-set-key "\C-c'" #'cae-edit-indirect-dwim)
-  )
+  (global-set-key "\C-c'" #'cae-edit-indirect-dwim))
 
 (use-package! string-edit-at-point      ; Used in `cae-edit-indirect-dwim'.
   :defer t)
