@@ -51,8 +51,8 @@
      kill-buffer-delete-auto-save-files t)
 
 (after! newcomment
- (setq comment-empty-lines 'eol
-       comment-padding nil))
+  (setq comment-empty-lines 'eol
+        comment-padding nil))
 
 (when (and (modulep! :ui modeline)
           (not (modulep! :ui modeline +light)))
