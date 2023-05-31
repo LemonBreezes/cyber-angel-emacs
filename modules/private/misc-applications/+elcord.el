@@ -4,8 +4,8 @@
   :hook (doom-first-file . elcord-mode)
   :when (and (display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
-                      (getenv "SSH_TTY")))
-             (not (string-suffix-p "-WSL2" operating-system-release)))
+                      (getenv "SSH_TTY")
+                      (string-suffix-p "-WSL2" operating-system-release))))
   :config
   (setq elcord-quiet t
         elcord-use-major-mode-as-main-icon t
