@@ -199,7 +199,10 @@
    '(gnumake marker-files
      ("GNUmakefile")
      project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-   projectile-project-types :test #'equal))
+   projectile-project-types :test #'equal)
+  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
+  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json"))
 
 
 (after! tramp
