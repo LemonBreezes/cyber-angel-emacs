@@ -61,6 +61,7 @@
     ;; nyan zone
     ;; also encryption zone
     ;; let it snow
+    "+fireplace"
     ))
 
 (dolist (file +misc-applications--lisp-files)
