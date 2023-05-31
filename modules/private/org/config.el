@@ -116,6 +116,5 @@
 
 (use-package! org-src-context
   :when (modulep! :tools lsp)
-  :after org
-  :config
+  :after org :config
   (org-src-context-mode +1))
