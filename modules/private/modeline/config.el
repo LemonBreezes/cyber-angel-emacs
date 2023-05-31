@@ -6,6 +6,11 @@
                 (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
+(run-with-idle-timer
+ 5 nil
+ (lambda ()
+   (mapcar #'native-compile '(doom-real-buffer-p
+                              cae-modeline-buffer-name))))
 
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
