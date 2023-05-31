@@ -17,12 +17,6 @@
                        (fboundp 'cae-compile-this-elisp-file))
               (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
             (when (and (buffer-file-name)
-                       (require 'diff-hl nil t))
-              (run-at-time 0.0 nil
-                           `(lambda ()
-                             (with-current-buffer ,(current-buffer)
-                               (diff-hl-mode 1)))))
-            (when (and (buffer-file-name)
                        (not (file-in-directory-p (buffer-file-name)
                                                  (concat doom-private-dir "secrets/")))
                        (require 'git-auto-commit-mode nil t))
