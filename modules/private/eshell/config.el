@@ -34,8 +34,12 @@
     (eat-eshell-mode +1)
     (eat-eshell-visual-command-mode +1))
 
-  (setf (symbol-function 'eshell/e) (symbol-function #'eshell/emacs))
-  (unintern 'eshell/emacs)
+  ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
+  ;; to work in Eshell as it does in a terminal.
+  (when (symbol-function #'eshell/emacs)
+    (setf (symbol-function #'eshell/e)
+          (symbol-function #'eshell/emacs))
+    (unintern 'eshell/emacs))
 
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
