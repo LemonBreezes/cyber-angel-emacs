@@ -67,6 +67,7 @@ overriding other keymaps."
        ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
+       unicode
        vi-tilde-fringe
        workspaces
        ;;(window-select +switch-window)
