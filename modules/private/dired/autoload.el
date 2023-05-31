@@ -33,20 +33,20 @@
           (funcall oldfun file)))
     (funcall oldfun file wildcards)))
 
-(defun cae-switch-buffer--handle-dirvish ()
+(defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
              (dirvish-curr)
              (> (length (dv-layout (dirvish-curr))) 1))
     (dirvish-layout-toggle)))
 
 ;;;###autoload
-(defun cae-previous-buffer ()
+(defun cae-dired-previous-buffer ()
   (interactive)
-  (cae-switch-buffer--handle-dirvish)
+  (cae-dired-switch-buffer--handle-dirvish)
   (call-interactively #'previous-buffer))
 
 ;;;###autoload
-(defun cae-next-buffer ()
+(defun cae-dired-next-buffer ()
   (interactive)
-  (cae-switch-buffer--handle-dirvish)
+  (cae-dired-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
