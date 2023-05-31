@@ -19,3 +19,14 @@
           (setq prev-md5 next-md5))
         (forward-line 1)
         (zone-park/sit-for (point-min) 0.1)))))
+
+;;;###autoload
+(defun zone-choose (pgm)
+  "Choose a PGM to run for `zone'."
+  (interactive
+   (list
+    (completing-read
+     "Program: "
+     (mapcar 'symbol-name zone-programs))))
+  (let ((zone-programs (list (intern pgm))))
+    (zone)))
