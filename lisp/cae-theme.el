@@ -62,8 +62,12 @@
     (progn (advice-add #'doom-init-theme-h :override #'ignore)
            (use-package! circadian
              :config
-             (setq circadian-themes '((:sunrise . modus-operandi)
-                                      (:sunset  . modus-vivendi)))
+             (setq circadian-themes
+                   (if (modulep! :ui doom)
+                       '((:sunrise . modus-operandi)
+                         (:sunset  . modus-vivendi))
+                     '((:sunrise . doom-one)
+                       (:sunset  . doom-one-light))))
              (if (and calendar-latitude calendar-longitude)
                  (circadian-setup)
                (setq calendar-latitude 0
