@@ -142,8 +142,8 @@
         (bookmark-jump name)
       (cae-project-bookmark-set name))))
 
-(setf (alist-get 'cae-project-bookmark marginalia-command-categories)
-      'bookmark)
+(setf (alist-get 'project-bookmark marginalia-annotator-registry)
+      (alist-get 'bookmark marginalia-annotator-registry))
 
 (map! :leader
       :prefix "p"
