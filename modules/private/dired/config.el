@@ -86,7 +86,7 @@
   (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
 
   (after! wdired
-    (setopt wdired-allow-to-change-permissions t))
+    (setq wdired-allow-to-change-permissions t))
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dired-mode-map
