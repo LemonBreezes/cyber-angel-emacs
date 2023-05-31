@@ -157,7 +157,8 @@
                 find-file-literally
                 find-alternate-file
                 ido-find-file
-                consult-locate))
+                consult-locate
+                projectile-find-test-file))
     (define-key dirvish-mode-map (vector 'remap fn)
       (eval `(cae-dired-find-file-wrapper ,fn))))
 
