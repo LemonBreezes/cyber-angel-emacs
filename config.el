@@ -7,8 +7,10 @@
   "Whether the configuration has finished loading.")
 
 (make-directory (expand-file-name "secrets" doom-user-dir) t)
-(dolist (file (directory-files
-               (expand-file-name "secrets" doom-user-dir) t "\\.el$"))
+(dolist (file (mapcar (doom-partial #'string-remove-suffix ".el")
+                      (directory-files (expand-file-name "secrets" doom-private-dir)
+                                       t
+                                       "\\.el$")))
   (load file nil t))
 
 ;;; UI
