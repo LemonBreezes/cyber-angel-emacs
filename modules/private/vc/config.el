@@ -38,7 +38,10 @@
       (map! :map forge-post-mode-map
             "<f6>" #'cae-magit-forge-post-hydra/body
             :map forge-topic-mode-map
-            "<f6>" #'cae-magit-forge-topic-hydra/body))))
+            "<f6>" #'cae-magit-forge-topic-hydra/body)
+      (when (modulep! :completion vertico)
+        (map! :map forge-pullreq-list-mode-map
+              "j" #'consult-line)))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
