@@ -34,7 +34,7 @@
 (use-package! org-jira
   :defer t :init
   (map! :leader
-        "J" #'cae-org-jira-hydra/body)
+        :desc "Jira" "J" #'cae-org-jira-hydra/body)
   :config
   (map! :map org-jira-entry-mode-map
         "C-c i" nil
