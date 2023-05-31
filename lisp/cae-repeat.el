@@ -64,16 +64,27 @@
        ,(cae-keyboard-kbd "6") +workspace/switch-to-5
        ,(cae-keyboard-kbd "7") +workspace/switch-to-6
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
-       ,(cae-keyboard-kbd "9") +workspace/switch-to-8)))
+       ,(cae-keyboard-kbd "9") +workspace/switch-to-8
+       "0" +workspace/switch-to-final
+       "1" workspace-switch-to-0
+       "2" workspace-switch-to-1
+       "3" workspace-switch-to-2
+       "4" workspace-switch-to-3
+       "5" workspace-switch-to-4
+       "6" workspace-switch-to-5
+       "7" workspace-switch-to-6
+       "8" workspace-switch-to-7
+       "9" workspace-switch-to-8)))
 
-  (defun cae-repeat-ignore-when-hydra-active-a ()
-    (bound-and-true-p hydra-curr-map))
 
-  (advice-add #'repeat-post-hook :before-until
-              #'cae-repeat-ignore-when-hydra-active-a)
+       (defun cae-repeat-ignore-when-hydra-active-a ()
+         (bound-and-true-p hydra-curr-map))
 
-  (autoload 'embark-verbose-indicator "embark")
-  (autoload 'which-key--create-buffer-and-show "which-key"))
+       (advice-add #'repeat-post-hook :before-until
+                   #'cae-repeat-ignore-when-hydra-active-a)
+
+       (autoload 'embark-verbose-indicator "embark")
+       (autoload 'which-key--create-buffer-and-show "which-key"))
 
 ;; This is so that my repeat maps are reloaded when I save this file.
 (when cae-config-finished-loading
