@@ -1,7 +1,7 @@
 ;;; private/debugger/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun cae-debugger-quit-session-a (_)
+(defun cae-debugger-dap-quit-session-a (_)
   (ignore-errors
     (let ((ignore-window-parameters t))
       (cl-loop for buf being the buffers
@@ -9,7 +9,7 @@
                (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
 
 ;;;###autoload
-(defun cae-debugger-kill-all-sessions-and-restart ()
+(defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
   (dap-delete-all-sessions)
   (cae-debugger-quit-session-a nil)
