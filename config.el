@@ -869,7 +869,10 @@
                   recenter-top-bottom
                   reposition-window
                   eri/expand-region
-                  eri/contract-region))
+                  eri/contract-region
+                  eri/maximize-region
+                  eri/mark-block
+                  eri/mark-line))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
