@@ -45,6 +45,7 @@
 (package! zop-to-char)
 (package! aggressive-indent)
 (package! hungry-delete)
+(package! auto-sudoedit)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
