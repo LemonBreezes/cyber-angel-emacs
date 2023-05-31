@@ -52,9 +52,10 @@
                                :face font-lock-string-face
                                :bind "G")
                               (:name "Git link homepage"
-                               :handler (cl-letf (((symbol-function #'git-link--new)
-                                                   (symbol-function #'identity)))
-                                          (call-interactively #'git-link-homepage))
+                               :handler (progn
+                                          (advice-add #'git-link--new #'override #'identity)
+                                          (call-interactively #'git-link-homepage)
+                                          (advice-remove #'git-link--new #'override))
                                :cache t
                                :face font-lock-string-face
                                :bind "g")))
