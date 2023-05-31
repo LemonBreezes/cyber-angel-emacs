@@ -9,13 +9,17 @@
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB")
 
-  (define-repeat-map other-window
-    ("o" other-window
-     "O" other-window-previous
-     "1" delete-other-windows
-     "2" split-window-below
-     "3" split-window-right
-     "0" delete-window))
+  (eval
+   `(define-repeat-map other-window
+      ("o" other-window
+       "O" other-window-previous
+       "1" delete-other-windows
+       "2" split-window-below
+       "3" split-window-right
+       ,(cae-keyboard-kbd "0") delete-window
+       ,(cae-keyboard-kbd "1") delete-other-windows
+       ,(cae-keyboard-kbd "2") split-window-below
+       ,(cae-keyboard-kbd "3") split-window-right)))
 
      (define-repeat-map isearch-repeat
        ("s" isearch-repeat-forward
