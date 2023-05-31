@@ -11,7 +11,6 @@
                                        ".dir-locals.el"
                                        "packages.el")
                                      :test #'string=)))
-            (setq-local byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
           (when (bound-and-true-p cae-config-finished-loading)
             (when (and (derived-mode-p 'emacs-lisp-mode)
@@ -22,5 +21,6 @@
                                                  (concat doom-private-dir "secrets/")))
                        (require 'git-auto-commit-mode nil t))
               (git-auto-commit-mode 1)
-              (setq-local gac-automatically-push-p t)))))))
+              (setq-local gac-automatically-push-p t
+                          byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
