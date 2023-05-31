@@ -538,12 +538,6 @@
 (use-package! auto-sudoedit
   :after tramp-sh
   :init
-  (defun cae-auto-sudoedit-maybe-h ()
-    (when (and (not (file-writable-p buffer-file-name))
-               (not (string= (file-attribute-user-id
-                              (file-attributes (or (buffer-file-name) list-buffers-directory) 'string))
-                             (user-login-name))))
-      (auto-sudoedit)))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   :config
   (auto-sudoedit-mode +1))
