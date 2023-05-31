@@ -272,7 +272,6 @@ mark the string and call `edit-indirect-region' with it."
             (forward-sexp)))
         (funcall action))))
 
-(advice-add #'nav-flash-show :override #'ignore)
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
   (apply-partially #'cae-avy-do #'embark-act))
