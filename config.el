@@ -796,7 +796,8 @@
         "N" #'symbol-overlay-switch-forward
         "P" #'symbol-overlay-switch-backward
         "r" #'substitute-target-in-buffer
-        "R" #'substitute-target-in-defun)
+        "R" #'substitute-target-in-defun
+        "-" #'negative-argument)
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
