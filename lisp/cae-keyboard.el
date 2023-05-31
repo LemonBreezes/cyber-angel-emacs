@@ -137,8 +137,8 @@
    (equal key-from (this-command-keys))
    (or  (and (minibufferp)
              ;; You may want to uncomment this line if you want to use say,
-             ;;`consult-line' and type special characters. (not
-             ;;(bound-and-true-p vertico--input))
+             ;; `consult-line' and type special characters.
+             ;;(not (bound-and-true-p vertico--input))
              (cl-member (minibuffer-prompt)
                         '("Go to line: "
                           "Go to char: "
