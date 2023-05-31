@@ -636,14 +636,8 @@
                       ?h ?j ?k ?l ?\;))
           avy-dispatch-alist
           (cae-keyboard-remap
-           '((?x . avy-action-kill-move)
-             (?X . avy-action-kill-stay)
-             (?t . avy-action-teleport)
+           '((?t . avy-action-teleport)
              (?m . avy-action-mark)
-             (?n . avy-action-copy)
-             (?y . avy-action-yank)
-             (?Y . avy-action-yank-line)
-             (?i . avy-action-ispell)
              (?z . avy-action-zap-to-char)
              (?e . cae-avy-action-embark-act)
              (?3 . cae-avy-action-comment-dwim)))
