@@ -3,8 +3,7 @@
 ;; My kill buffer improvements adapted from this stackoverflow answer:
 ;; https://emacs.stackexchange.com/questions/3245/kill-buffer-prompt-with-option-to-diff-the-changes
 
-(defun cae-kill-buffer (orig-func &optional buffer-or-name)
-  "Kill buffer with prompt to save if modified."
+(defun cae-kill-buffer (&optional buffer-or-name)
   (catch 'quit
     (save-window-excursion
       (with-current-buffer buffer-or-name
@@ -19,6 +18,13 @@
                             ((eq response ?y) (save-buffer) t)
                             ((eq response ?n) (set-buffer-modified-p nil) t)
                             ((eq response ?d) (diff-buffer-with-file) nil))))))
-          (apply orig-func (list (current-buffer))))))))
+          (kill-buffer buffer-or-name))))))
 
-(advice-add #'kill-buffer :around #'cae-kill-buffer)
+(defun cae-kill-buffer-fixup-windows (buffer)
+  "Kill the BUFFER and ensure all the windows it was displayed in have switched
+to a real buffer or the fallback buffer."
+  (let ((windows (get-buffer-window-list buffer)))
+    (cae-kill-buffer buffer)
+    (doom-fixup-windows (cl-remove-if-not #'window-live-p windows))))
+
+(advice-add #'doom-kill-buffer-fixup-windows :override #'cae-kill-buffer-fixup-windows)
