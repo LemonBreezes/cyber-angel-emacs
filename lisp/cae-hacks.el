@@ -20,18 +20,10 @@
 (defun cae-hacks-hydra-pause-h (&rest _)
   (when hydra-curr-map
     (ring-insert hydra-pause-ring hydra-curr-body-fn)
-    (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
     (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h (&rest _)
   (unless (zerop (ring-length hydra-pause-ring))
-    (run-with-timer
-     0.001 nil
-     (lambda ()
-       (when-let* ((hydra-pause-ring (persp-parameter 'hydra-pause-ring))
-                   (body (unless (ring-empty-p hydra-pause-ring)
-                           (ring-remove hydra-pause-ring 0))))
-         (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
-         (funcall body))))))
+    run-with-timer 0.001 nil (ring-remove hydra-pause-ring 0)))
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
