@@ -53,6 +53,10 @@
 ;; prefix argument
 (defadvice! +eros-eval-lavst-sexp-a (oldfun arg)
   :around #'eros-eval-last-sexp
-  (if (eq arg '-)
-      (funcall #'pp-eval-last-sexp nil)
+  (if (or (eq arg '-)
+          (and (numberp arg)
+               (< arg 0)))
+      (funcall #'pp-eval-last-sexp
+               (if (numberp arg)
+                   arg nil))
     (funcall oldfun arg)))
