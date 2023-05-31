@@ -6,24 +6,25 @@
 
 ;; Got these from Prot's config. Say, how do I even use `add-log' and `vc'?
 (after! add-log
-  (setopt add-log-keep-changes-together t))
+  (setq add-log-keep-changes-together t))
 (after! vc-git
-  (setopt vc-git-diff-switches '("--patch-with-stat" "--histogram"
-                                "--ignore-cr-at-eol" "--ignore-space-change"
-                                "--ignore-all-space" "--ignore-blank-lines")
-         vc-git-print-log-follow t
-         vc-annotate-background-mode nil))
+  (setq vc-git-diff-switches '("--patch-with-stat" "--histogram"
+                               "--ignore-cr-at-eol" "--ignore-space-change"
+                               "--ignore-all-space" "--ignore-blank-lines")
+        vc-git-print-log-follow t))
+(after! vc-annotate
+  (setq vc-annotate-background-mode nil))
 
 (after! magit
   (when (modulep! :editor fold)
     (map! :map magit-status-mode-map
           [remap +fold/toggle] #'magit-section-toggle))
   (setopt magit-diff-refine-hunk 'all
-         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
-         magit-repository-directories '(("~/src/" . 2))
-         transient-values '((magit-rebase "--autosquash" "--autostash")
-                            (magit-pull "--rebase" "--autostash")
-                            (magit-revert "--autostash"))))
+          magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
+          magit-repository-directories '(("~/src/" . 2))
+          transient-values '((magit-rebase "--autosquash" "--autostash")
+                             (magit-pull "--rebase" "--autostash")
+                             (magit-revert "--autostash"))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
