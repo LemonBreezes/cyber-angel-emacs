@@ -903,10 +903,6 @@
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
-  (setq copilot-node-executable "node"
-        ;;(expand-file-name
-        ;; "~/.nvm/versions/node/v17.9.1/bin/node")
-        )
   ;; Model our Copilot interface after Fish completions.
   (map! (:map copilot-completion-map
          "<right>" #'copilot-accept-completion
