@@ -50,8 +50,8 @@
         (prog1 'cae-debugger--global-map
           (setq cae-debugger--global-map
                 (cons 'keymap
-                      (let* ((alist1 (cdr (lookup-key (current-global-map) (kbd "C-x C-a"))))
-                             (alist2 (cdr (lookup-key (current-local-map) (kbd "C-x C-a"))))
+                      (let* ((alist1 (cdr-safe (lookup-key (current-global-map) (kbd "C-x C-a"))))
+                             (alist2 (cdr-safe (lookup-key (current-local-map) (kbd "C-x C-a"))))
                              (keys (mapcar #'car alist2)))
                         (dolist (key keys)
                           (setq alist1 (assq-delete-all key alist1)))
