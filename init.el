@@ -41,7 +41,7 @@
            hl-todo
            hydra
            (ligatures +extra +iosevka)
-           nav-flash
+           ;; nav-flash
            (popup +defaults)
            (vc-gutter +pretty +diff-hl)
            vi-tilde-fringe
