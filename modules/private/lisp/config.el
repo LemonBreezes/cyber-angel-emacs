@@ -70,7 +70,8 @@
           "M-."   nil                   ;formerly `lispy-goto-symbol'.
                                         ;`+lookup/definition' works more often
                                         ;and does not require semantic.
-          ;"C-M-," nil
+
+          "C-M-," nil                   ;formerly `lispy-mark'.
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
           "M-S" #'lispy-split
