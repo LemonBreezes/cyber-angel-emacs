@@ -2,7 +2,8 @@
 
 ;;;###autoload
 (defun cae-modeline-minions-c-setup ()
-  (doom-load-packages-incrementally '(hideif glasses))
+  (require 'glasses)
+  (require 'hideif)
   (setq-local minions-available-modes
               (append '((hide-ifdef-mode)
                         (glasses-mode))
