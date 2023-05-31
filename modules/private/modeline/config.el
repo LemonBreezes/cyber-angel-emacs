@@ -69,11 +69,20 @@
 
   (after! compile
     (setq-default minions-mode-line-modes
-                  (cons (assq 'compilation-in-progress mode-line-modes)
-                        (default-value 'minions-mode-line-modes))))
+                  (cons
+                   (list
+                    'compilation-in-progress
+                    (propertize "[Compiling] "
+	                        'help-echo "Compiling; mouse-2: Goto Buffer"
+                                'mouse-face 'mode-line-highlight
+                                'local-map
+                                (make-mode-line-mouse-map
+                                 'mouse-2
+			         #'compilation-goto-in-progress-buffer)))
+                   (default-value 'minions-mode-line-modes))))
   (after! repeat
     (setq-default minions-mode-line-modes
-                  (cons (assq 'repeat-in-progress mode-line-modes)
+                  (cons (list 'repeat-in-progress repeat-echo-mode-line-string)
                         (default-value 'minions-mode-line-modes))))
   (minions-mode +1))
 
