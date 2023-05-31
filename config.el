@@ -761,7 +761,7 @@
     (if restore-point-mode
         (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
                (advice-remove #'keyboard-quit #'rp/cond-restore-point)
-               (add-hook 'doom-escape-hook #'cae-restore-point-h))
+               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
       (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
   (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
