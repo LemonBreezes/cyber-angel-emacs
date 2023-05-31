@@ -41,6 +41,8 @@
             "<f6>" #'cae-magit-forge-topic-hydra/body)
       (when (modulep! :completion vertico)
         (map! :map forge-pullreq-list-mode-map
+              "j" #'consult-line
+              :map forge-topic-list-mode-map
               "j" #'consult-line)))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
