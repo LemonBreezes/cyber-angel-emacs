@@ -1,5 +1,8 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+(defvar cae-config-compilation-enabled nil
+  "Whether on-kill native compilation is enabled.")
+
 (setq load-prefer-newer t)              ;Since I sometimes compile my config, I
                                         ;want to make sure that I'm always
                                         ;loading the latest version.
