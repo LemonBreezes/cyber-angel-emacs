@@ -18,6 +18,7 @@
 ;;; UI
 
 (load! "lisp/cae-theme")
+(load! "lisp/cae-workspaces")
 
 ;; Output to stdout instead of a pager like `less'. This is useful when
 ;; redirecting output to buffers like for `eshell' or `shell'.
