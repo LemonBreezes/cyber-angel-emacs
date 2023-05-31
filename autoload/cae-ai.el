@@ -24,6 +24,6 @@
 ;;org-ai-kill-region-at-point
 (defun cae-ai-org-ai-kill-region-at-point ()
   (interactive)
-  (let ((beg (org-ai--get-region-beginning))
-        (end (org-ai--get-region-end)))
-    (kill-region beg end)))
+  (call-interactively #'org-ai-kill-region-at-point)
+  (forward-char -1)
+  (kill-region (point) (progn (skip-syntax-backward "\\s ") (point))))
