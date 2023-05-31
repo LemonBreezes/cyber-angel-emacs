@@ -73,8 +73,7 @@
           ))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
-                                  eat-eshell-mode
-                                  ))
+                                  eat-eshell-mode))
 
   (after! compile
     (setq-default minions-mode-line-modes
