@@ -11,7 +11,7 @@
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
   (cae-debugger-dap-quit-session-a nil)
-  (dap-delete-all-sessions)
+  (ignore-errors (dap-delete-all-sessions))
   (when-let ((workspace-project (cl-find (+workspace-current-name)
                                          (projectile-relevant-known-projects)
                                          :test #'string-match-p)))
