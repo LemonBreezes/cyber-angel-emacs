@@ -1,6 +1,8 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(setq load-prefer-newer t)
+(setq load-prefer-newer t)              ;Since I sometimes compile my config, I
+                                        ;want to make sure that I'm always
+                                        ;loading the latest version.
 (random t)                              ;Set the random seed.
 
 (load! "lisp/cae-lib")
