@@ -5,9 +5,7 @@
 (load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "C-c"
-      doom-localleader-alt-key "C-c l"
-      doom-localleader-key "DEL l"
-      doom-leader-key "DEL")
+      doom-localleader-alt-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
 ;; Also show keybinidng descriptions on my second leader key.
