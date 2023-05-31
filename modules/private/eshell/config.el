@@ -43,7 +43,7 @@
   ;; Filter trivial commands from history.
   (setq eshell-input-filter #'cae-eshell-input-filter)
 
-  (with-eval-after-load "esh-opt"
+  (after! esh-opt
     ;; Python virtualenvs
     ;; (require 'virtualenvwrapper)
     ;; (venv-initialize-eshell)
@@ -58,7 +58,10 @@
       (setq eshell-rebind-keys-alist nil
             eshell-cannot-leave-input-list
             (cl-set-difference eshell-cannot-leave-input-list
-                               '(previous-line next-line)))))
+                               '(previous-line next-line))))
+    (after! em-alias
+      (dolist (alias +eshell-aliases)
+        (add-to-list 'eshell-command-aliases-list alias t))))
 
   (when (>= emacs-major-version 29)
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
