@@ -14,7 +14,6 @@
   (package! helm-linux-disks :recipe
     (:host github :repo "akirak/helm-linux-disks")))
 ;; (package! mentor)
-;;(package! forecast)
 (package! tldr)
 (package! speed-type)
 (package! disk-usage)
