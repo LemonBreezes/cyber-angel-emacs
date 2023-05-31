@@ -791,7 +791,9 @@
   (map! "M-i" #'symbol-overlay-put
         "M-I" #'symbol-overlay-remove-all
         "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
-        "M-P" #'symbol-overlay-switch-backward)
+        "M-P" #'symbol-overlay-switch-backward
+        :leader
+        :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
   :config
   (map! :map symbol-overlay-map
         "<f6>" #'cae-symbol-overlay-cheatsheet
