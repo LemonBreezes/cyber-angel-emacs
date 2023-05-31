@@ -180,6 +180,7 @@
 (use-package! parrot
   :defer-incrementally t
   :after (:any magit org)
+  :after-call gac-push
   :config
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
