@@ -80,7 +80,8 @@
     :bind (("C-. y" . cape-yasnippet))
     :config
     (defun yas-setup-capf ()
-      (setq-local completion-at-point-functions
-                  (cons 'cape-yasnippet
-                        completion-at-point-functions)))
+      (make-variable-buffer-local 'completion-at-point-functions)
+      (cl-pushnew 'cape-yasnippet
+                  completion-at-point-functions
+                  :test #'eq))
     (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
