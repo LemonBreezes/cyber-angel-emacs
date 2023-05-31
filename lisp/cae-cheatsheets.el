@@ -76,9 +76,8 @@
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
 
 (defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
-  (when hydra-curr-map
-    (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
-                         cae-cheatsheets-tab-bar-hydra-alist)))
+  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
+                         cae-cheatsheets-tab-bar-hydra-alist))
 
 (defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
   (setq cae-cheatsheets-tab-bar-hydra-alist
