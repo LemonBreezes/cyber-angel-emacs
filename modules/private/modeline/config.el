@@ -73,7 +73,10 @@
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
-                                  flycheck-mode))
+                                  flycheck-mode
+                                  persp-mode
+                                  envrc-mode
+                                  lsp-mode))
   (after! compilation
     (or (assq 'compilation-in-progress mode-line-modes)
         (add-to-list 'minions-mode-line-modes
