@@ -46,6 +46,7 @@
                                         ;for debugging font-lock issues.
 (package! git-modes)
 (package! free-keys)
+(package! 0x0)
 
 ;;; Editor
 (package! pp+)
