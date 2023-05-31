@@ -111,11 +111,11 @@
         "j" #'+default/search-buffer
         [remap delete-other-windows] #'cae-dired-maximize-buffer))
 
-(add-hook 'dirvish-find-entry-hook
-          (cae-defun cae-dirvish-find-entry-h (entry buffer)
-            (when (one-window-p)
-              (ignore-error user-error
-                (dirvish-layout-switch dirvish-default-layout)))))
+;;(remove-hook 'dirvish-find-entry-hook
+;;          (cae-defun cae-dirvish-find-entry-h (entry buffer)
+;;            (when (one-window-p)
+;;              (ignore-error user-error
+;;                (dirvish-layout-switch dirvish-default-layout)))))
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
