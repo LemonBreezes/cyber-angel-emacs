@@ -77,7 +77,7 @@ derivative.")
 
   (defmacro cae-generate-corfu-select-index (index)
     "Return a named function to run `corfu-complete' for INDEX"
-    `(cae-defun ,(intern (format "noct-corfu-complete-%s" index)) ()
+    `(cae-defun ,(intern (format "cae-corfu-complete-%s" index)) ()
        ,(format "Call `corfu-complete' for index %s." index)
        (interactive)
        (let ((corfu--index ,index))
