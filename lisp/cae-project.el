@@ -74,6 +74,7 @@
   (interactive)
   (let ((bookmark-alist (cae-project--bookmark-alist))
         (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist)
     (make-directory (file-name-directory bookmark-default-file) t)
     (bookmark-write-file bookmark-default-file)))
 
