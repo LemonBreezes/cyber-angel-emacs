@@ -151,12 +151,10 @@
                         '("ace-window"
                           "tabgo")
                         :test #'string=))
-        (and (symbol-file last-command)
-             (not this-command)
-             (cl-member (file-name-base (symbol-file last-command))
-                        '("switch-window")
-                        :test #'string=)
-             (minibufferp)))))
+        (and (not this-command)
+             (minibufferp)
+             (symbol-file last-command)
+             (string= (file-name-base (symbol-file last-command)) "switch-window")))))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
   (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
