@@ -20,4 +20,3 @@ this function prepends a \"|\" to the final result if necessary."
 			             name-base))))
     (uniquify--create-file-buffer-advice buf filename)
     buf))
-(project-current nil (file-name-directory filename))

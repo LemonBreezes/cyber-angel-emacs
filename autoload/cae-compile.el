@@ -21,6 +21,8 @@
     ;; ,(expand-file-name "doom-cli.el" doom-core-dir)
     ))
 
+(defvar cae-compile-native-comp-speed 3)
+
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
                               (pdf-info-check-epdfinfo))
@@ -63,7 +65,9 @@
                                    (file-name-base (buffer-file-name))))
               (not (string-prefix-p "flycheck_" (buffer-file-name))))
     (byte-compile-file (buffer-file-name))
-    (emacs-lisp-native-compile-and-load)))
+    (let ((native-comp-speed cae-compile-native-comp-speed))
+      (emacs-lisp-native-compile-and-load))))
+
 
 ;;;###autoload
 (defun cae-compile-my-private-config (&optional arg)
@@ -81,7 +85,8 @@
                   (and (file-newer-than-file-p (concat s "c") s)
                        (not arg)))
             (ignore-errors (byte-compile-file s))
-            (ignore-errors (native-compile s))))
+	    (let ((native-comp-speed cae-compile-native-comp-speed))
+              (ignore-errors (native-compile s)))))
         (nconc
          ;; Compiling `lisp/lib' creates some errors and these functions
          ;; are not that important to have compiled anyways.
