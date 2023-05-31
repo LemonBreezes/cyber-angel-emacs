@@ -3,8 +3,8 @@
 ;;(dbus-ping :system "org.freedesktop.DBus")
 ;;(dbus-list-known-names :system)
 (use-package! ednc
-  :when (not (and (string-suffix-p "-android" system-configuration)
-                  (executable-find "termux-clipboard-get")))
+  :when (and (fboundp 'dbus)
+             (dbus-ping :system "org.freedesktop.DBus"))
   :config
   (ednc-mode +1)
   (defun stack-notifications (&optional hide)
