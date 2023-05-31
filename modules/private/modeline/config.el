@@ -201,7 +201,7 @@
 (use-package! parrot-rotate
   :defer t
   :init
-  (map! "C-!" #'parrot-rotate-next-word-at-point)
+  (map! "C-!" #'cae-modeline-rotate-next-word-at-point)
   :config
   (after! parrot-rotate
     (setq parrot-rotate-animate-after-rotation nil
