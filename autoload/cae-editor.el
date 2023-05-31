@@ -244,21 +244,25 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-avy-do (action pt &optional stay-p)
-  (let ((m (make-marker)))
-    (goto-char pt)
-    (save-mark-and-excursion
-      (cond ((or (eq avy-command 'avy-goto-line)
-                 (memq this-command '(avy-goto-line-above
-                                      avy-goto-line-below)))
-             (progn (goto-char (line-beginning-position))
-                    (set-mark (point))
-                    (goto-char (line-end-position))))
-            ((eq this-command 'cae-avy-symbol-at-point)
-             (er/mark-symbol))
-            (t (eri/expand-region 1)))
-      (funcall action))
+  (unless stay-p
+    (goto-char pt))
+  (save-mark-and-excursion
     (when stay-p
-      (goto-char (marker-position m)))))
+      (goto-char pt))
+    (cond ((or (eq avy-command 'avy-goto-line)
+               (memq this-command '(avy-goto-line-above
+                                    avy-goto-line-below)))
+           (progn (goto-char (line-beginning-position))
+                  (set-mark (point))
+                  (goto-char (line-end-position))))
+          ((eq this-command 'cae-avy-symbol-at-point)
+           (er/mark-symbol))
+          (t (eri/expand-region 1)))
+    (funcall action)))
+
+;;;###autoload
+(defalias 'cae-avy-do-stay
+  (doom-rpartial #'cae-avy-do t))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
@@ -266,7 +270,7 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act-stay
-  (apply-partially #'cae-avy-do #'embark-act t))
+  (apply-partially #'cae-avy-do-stay #'embark-act))
 
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
@@ -278,9 +282,8 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim-stay
-  (apply-partially #'cae-avy-do
+  (apply-partially #'cae-avy-do-stay
                    (lambda ()
                      (if (bound-and-true-p lispy-mode)
                          (lispy-comment)
-                       (comment-or-uncomment-region)))
-                   t))
+                       (comment-or-uncomment-region)))))
