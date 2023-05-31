@@ -226,6 +226,13 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
+(use-package! hercules
+  :config
+  (hercules-def
+   ;; read further to see why this works
+   :toggle-funs #'embark-collect-cheatsheet
+   :keymap 'embark-collect-mode-map
+   :package 'embark))
 
 ;;; Tools
 
