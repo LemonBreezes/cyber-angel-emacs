@@ -141,6 +141,8 @@
     :side 'right :select t :ttl nil)    ; which slot/vslot?
   (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
     :modeline nil :quit nil :ttl nil)
+  (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
+    :side 'right :select nil :quit t :ttl 0) ; which slot/vslot?
   (after! embark
     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
       :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
