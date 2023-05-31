@@ -84,7 +84,3 @@
   (interactive)
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
-
-
-;;;###autoload (autoload 'cae-embark-collect-cheatsheet "autoload/cae-editor" nil t)
-(after! embark)
