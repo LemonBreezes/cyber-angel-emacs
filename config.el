@@ -249,8 +249,10 @@
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
 ;; Use Emacs as the default editor for shell commands.
-(define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-(define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
+(define-key (current-global-map)
+  [remap async-shell-command] 'with-editor-async-shell-command)
+(define-key (current-global-map)
+  [remap shell-command] 'with-editor-shell-command)
 (add-hook 'shell-mode-hook  #'with-editor-export-editor)
 (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 (add-hook 'eshell-mode-hook #'with-editor-export-editor)
