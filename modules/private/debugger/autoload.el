@@ -40,9 +40,12 @@
 ;;;###autoload
 (defun cae-debugger/open-repl ()
   (interactive)
-  (pop-to-buffer
-   (or (get-buffer "*dap-ui-repl*")
-       (progn (dap-ui-repl)
-              (let ((buf (get-buffer "*dap-ui-repl*")))
-                (bury-buffer buf)
-                buf)))))
+  (let ((repl-buffer
+         (or (get-buffer "*dap-ui-repl*")
+             (progn (dap-ui-repl)
+                    (let ((buf (get-buffer "*dap-ui-repl*")))
+                      (bury-buffer buf)
+                      buf)))))
+    (with-current-buffer repl-buffer
+      (doom-mark-buffer-as-real-h))
+    (pop-to-buffer repl-buffer)))
