@@ -9,11 +9,11 @@
     (setq which-key-replacement-alist
           (delete '(("\\`C-c !\\'") nil . "checkers")
                   which-key-replacement-alist)))
+  (setq flycheck-keymap-prefix (kbd "C-c C"))
   (after! flycheck
-    (define-key flycheck-mode-map flycheck-keymap-prefix nil)
-    (setq flycheck-keymap-prefix (kbd "C-c C"))
-    (define-key flycheck-mode-map flycheck-keymap-prefix
-      flycheck-command-map)
+    ;;(define-key flycheck-mode-map flycheck-keymap-prefix nil)
+    ;;(define-key flycheck-mode-map flycheck-keymap-prefix
+    ;;  flycheck-command-map)
     (map! :leader
           (:prefix ("C" . "checkers")))))
 (when (modulep! :editor snippets)
