@@ -56,10 +56,3 @@
   (if (eq arg '-)
       (funcall #'pp-eval-last-sexp nil)
     (funcall oldfun arg)))
-
-;; A generic adviser for responding yes to yes or no prompts automatically.
-(defun +always-yes-for-prompts-a (oldfun &rest args)
-  (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
-            ((symbol-function #'y-or-n-p) (symbol-function #'always)))
-    (apply oldfun args)))
-(advice-add #'emojify--confirm-emoji-download :around #'+always-yes-for-prompts-a)
