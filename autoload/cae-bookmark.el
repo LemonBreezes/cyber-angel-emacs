@@ -116,6 +116,9 @@
     (if (file-exists-p bookmark-dir)
         ;; Open Dired in the parent directory of the bookmark file and jump to the bookmark file.
         (progn (dired bookmark-dir)
-               (when (file-exists-p bookmark-file)
-                 (dired-goto-file bookmark-file)))
+               (if (file-exists-p bookmark-file)
+                   (dired-goto-file bookmark-file)
+                 (kill-new bookmark-file)
+                 (message "Bookmark file %s does not exist.  It has been copied to the kill ring."
+                          bookmark-file)))
       (message "No bookmark files found for this project."))))
