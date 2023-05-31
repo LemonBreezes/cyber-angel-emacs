@@ -269,6 +269,16 @@
 (load! "lisp/cae-repeat")
 (map! "C-x 4 I" #'ibuffer-other-window)
 
+;; Bind `tab-bar' commands consistently with the built-in keybindings.
+(defadvice! cae-tab-bar-define-keys-a ()
+  :after #'tab-bar--define-keys
+  (unless (global-key-binding [(control f4)])
+    (global-set-key [(control f4)] #'tab-close)))
+(defadvice! cae-tab-bar-undefine-keys-a ()
+  :after #'tab-bar--undefine-keys
+  (when (eq (global-key-binding [(control f4)]) #'tab-close)
+    (global-unset-key [(control f4)])))
+
 (map! [remap backward-kill-word] #'doom/delete-backward-word
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
