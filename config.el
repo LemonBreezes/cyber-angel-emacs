@@ -195,6 +195,7 @@
                (expand-file-name ".local/straight/repos/" user-emacs-directory))
   (unless projectile-known-projects
     (projectile-discover-projects-in-search-path))
+  ;; Recognize `makefile' as a Makefile.
   (cl-pushnew
    '(make marker-files
      ("makefile")
