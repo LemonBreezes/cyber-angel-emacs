@@ -47,7 +47,7 @@
         "+trashed"
         "+try"
         ;;"+vuiet"
-        "+webpaste"
+        ;;"+webpaste" ; I'm using 0x0.st instead.
         "+wttrin"
 
         ;; Lookup
