@@ -32,7 +32,12 @@
   (let ((bookmark-default-file file)
         (bookmark-alist nil))
     (when (file-exists-p file)
-      (bookmark-load bookmark-default-file nil t)
+      (with-current-buffer (find-file-noselect file)
+	(goto-char (point-min))
+	(let ((blist (bookmark-alist-from-buffer)))
+	  (unless (listp blist)
+	    (error "Invalid bookmark list in %s" file)))
+	(kill-buffer (current-buffer)))
       bookmark-alist)))
 
 (defun cae-project--bookmark-alist (&optional project)
