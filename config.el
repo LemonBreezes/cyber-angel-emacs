@@ -1089,6 +1089,10 @@
     (map! :map notmuch-hello-mode-map
           "q" #'cae-notmuch-quit)))
 
+;;; HTML
+
+(remove-hook 'nxml-mode-local-vars-hook #'lsp!)
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
