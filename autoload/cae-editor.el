@@ -252,7 +252,6 @@ mark the string and call `edit-indirect-region' with it."
      (save-mark-and-excursion
        (cl-destructuring-bind (beg . end) (or (bounds-of-thing-at-point 'word)
                                               (cons 0 0))
-
          (when (< (point) end)
            (goto-char beg)))
        (mark-word)
