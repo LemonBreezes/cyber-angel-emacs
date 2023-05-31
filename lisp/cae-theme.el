@@ -60,7 +60,6 @@
 ;;; Set theme based on time of day.
 
 (use-package! circadian
-  :defer t
   :defer-incrementally t
   :config
   (setq circadian-themes
