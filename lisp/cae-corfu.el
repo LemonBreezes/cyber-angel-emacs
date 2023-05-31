@@ -51,7 +51,8 @@
       (setq corfu-indexed-start 1)
       (corfu-indexed-mode +1))
     (eval
-     `(map! "TAB" nil
+     `(map! :map corfu-map
+            "TAB" nil
             "<tab>" nil
             "RET" nil
             ,(cae-keyboard-kbd "C-" "1") (cae-generate-corfu-select-index 0)
