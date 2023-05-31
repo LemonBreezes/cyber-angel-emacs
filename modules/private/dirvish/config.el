@@ -138,8 +138,8 @@
           dirvish-hide-cursor nil))
   (when (modulep! :ui tabs)
     (after! centaur-tabs
-      (add-hook! 'dired-mode-hook 'centaur-tabs-local-mode)
-      (add-hook! 'dirvish-directory-view-mode-hook 'centaur-tabs-local-mode)))
+      (add-hook! 'dired-mode-hook #'centaur-tabs-local-mode)
+      (add-hook! 'dirvish-directory-view-mode-hook #'centaur-tabs-local-mode)))
   (when (modulep! :ui vc-gutter)
     (push 'vc-state dirvish-attributes))
   (when (modulep! +icons)
