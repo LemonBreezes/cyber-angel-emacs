@@ -742,7 +742,8 @@
                              (avy-kill-ring-save-region . pre)
                              (avy-kill-region . pre)
                              (avy-copy-region . pre)
-                             (avy-move-region . pre))
+                             (avy-move-region . pre)
+                             (lispy-ace-char . at))
           avy-column-line-overlay t))
 
   (use-package! zop-to-char
