@@ -190,7 +190,9 @@
                         unless (string= (caddr binding) "")
                         collect
                         `(,(car binding)
-                          ,(cadr binding)
+                          ,(if (string= (cadr binding) ",")
+                               (cae-keyboard-kbd-reverse (car binding))
+                               (cadr binding))
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
                                         (string-remove-prefix "lispy-"))
