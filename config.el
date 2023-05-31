@@ -411,9 +411,9 @@
   (when (and (modulep! :checkers spell)
              (not (modulep! :checkers spell +flyspell)))
     (after! spell-fu
-      (add-to-list 'spell-fu-faces-exclude 'message-header-other nil #'eq)
-      (add-to-list 'spell-fu-faces-exclude 'org-property-value nil #'eq)
-      (add-to-list 'spell-fu-faces-exclude 'message-header-to nil #'eq)
+      (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+      (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+      (add-to-list 'spell-fu-faces-exclude 'message-header-to)
       (setq spell-fu-faces-exclude
             (delq 'font-lock-string-face spell-fu-faces-include))))
 
@@ -447,8 +447,8 @@
                 "--completion-style=detailed"
                 "--header-insertion=never"
                 "--header-insertion-decorators=0")))
-      (add-to-list 'lsp-disabled-clients 'ccls nil #'eq)
-      (add-to-list 'lsp-disabled-clients 'mspyls nil #'eq)))
+      (add-to-list 'lsp-disabled-clients 'ccls)
+      (add-to-list 'lsp-disabled-clients 'mspyls)))
 
   (when (modulep! :tools lsp +eglot)
     (after! eglot
@@ -544,7 +544,7 @@
             (setq cae-diff-window nil)))
       t))
   
-  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer nil #'eq)
+  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
@@ -703,10 +703,8 @@
             (mark " "
                   (name 16 -1)
                   " " filename)))
-    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$"
-                 nil #'string=)
-    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"
-                 nil #'string=))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
 
   (use-package! diff-mode
     :defer t :config
@@ -735,7 +733,7 @@
                        indent-pp-sexp
                        save-buffer
                        indent-for-tab-command))
-      (add-to-list 'aggressive-indent-protected-commands command nil #'eq))
+      (add-to-list 'aggressive-indent-protected-commands command))
     (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
 
   (use-package! yank-indent
@@ -754,7 +752,7 @@
             [remap delete-backward-char] #'sp-backward-delete-char
             [remap delete-char] #'cae-delete-char
             [remap delete-forward-char] #'cae-delete-char))
-    (add-to-list 'hungry-delete-except-modes 'eshell-mode nil #'eq))
+    (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
   (use-package! file-info
     :defer t :init
@@ -918,15 +916,13 @@
     (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
     (add-to-list 'copilot-disable-predicates
                  (cae-defun cae-disable-copilot-in-gptel-p ()
-                   (bound-and-true-p gptel-mode))
-                 nil #'eq)
+                   (bound-and-true-p gptel-mode)))
     (when (modulep! :editor snippets)
       (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
     (when (modulep! :editor multiple-cursors)
       (add-to-list 'copilot-disable-predicates
                    (cae-defun cae-multiple-cursors-active-p ()
-                     (bound-and-true-p multiple-cursors-mode))
-                   nil #'eq)))
+                     (bound-and-true-p multiple-cursors-mode)))))
 
   (use-package! isearch-dabbrev
     :defer t :init
