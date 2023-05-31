@@ -467,106 +467,106 @@
                  (spell-fu-mode -1)))))
 
 
-;;;;; Editor
-;;
-;;(load! "lisp/cae-repeat")
-;;(add-hook 'doom-first-buffer-hook
-;;          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
-;;            (load! "lisp/cae-visible-mark")
-;;            (load! "lisp/cae-visual-scrolling")))
-;;(load! "lisp/cae-smartparens")
-;;(load! "lisp/cae-vlf")
-;;(load! "lisp/cae-multiple-cursors")
-;;
-;;(autoload 'cae-project-bookmark (concat doom-private-dir
-;;                                        "lisp/cae-project"))
-;;(autoload 'cae-project-bookmark-set (concat doom-private-dir
-;;                                            "lisp/cae-project"))
-;;(autoload 'cae-project--get-bookmark-file (concat doom-private-dir
-;;                                                  "lisp/cae-project"))
-;;(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
-;;      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
-;;;; Ensure local elisp packages are up-to-date.
-;;(add-hook 'emacs-lisp-mode-hook
-;;          (lambda ()
-;;            (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
-;;
-;;;; Enable all disabled commands.
-;;(setq disabled-command-function nil)
-;;
-;;;; Treat all themes as safe.
-;;(setq custom-safe-themes t)
-;;
-;;(setq delete-active-region t)           ;makes `d' delete region in Meow.
-;;
-;;(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-;;(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
-;;
-;;;; Query buffers for a diff before killing them.
-;;(advice-add #'kill-buffer :around #'cae-kill-buffer-a)
-;;
-;;;; Kill buffers without asking.
-;;(setq kill-buffer-query-functions
-;;      (remq 'process-kill-buffer-query-function
-;;            kill-buffer-query-functions))
-;;
-;;;; Bind `tab-bar' commands consistently with the built-in keybindings.
-;;(defadvice! cae-tab-bar-define-keys-a ()
-;;  :after #'tab-bar--define-keys
-;;  (unless (global-key-binding [(control f4)])
-;;    (global-set-key [(control f4)] #'tab-close)))
-;;(defadvice! cae-tab-bar-undefine-keys-a ()
-;;  :after #'tab-bar--undefine-keys
-;;  (when (eq (global-key-binding [(control f4)]) #'tab-close)
-;;    (global-unset-key [(control f4)])))
-;;
-;;;; Do not query before deleting a frame, since we can undo frame deletions.
-;;(global-set-key [remap delete-frame] nil)
-;;(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
-;;
-;;;; Do not automatically continue comments.
-;;(advice-remove #'newline-and-indent
-;;               #'+default--newline-indent-and-continue-comments-a)
-;;
-;;;; General keybindings.
-;;(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
-;;      [remap upcase-word] #'upcase-dwim
-;;      [remap downcase-word] #'downcase-dwim
-;;      [remap capitalize-word] #'capitalize-dwim
-;;      [remap ispell-word] #'cae-ispell-word-then-abbrev
-;;      "C-x 4 I" #'ibuffer-other-window
-;;      [remap ibuffer] #'ibuffer-jump    ;This way
-;;                                        ;I can do `C-x C-b =' to quickly diff a
-;;                                        ;buffer with its file.
-;;      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
-;;      "C-x M-o" #'ace-swap-window
-;;      "C-x x o" #'ov-clear
-;;      "M-Z" #'zap-up-to-char
-;;      [C-i] #'doom/dumb-indent
-;;      "C-S-i" #'doom/dumb-dedent
-;;      (:when (modulep! :completion vertico)
-;;       [remap apropos] nil)             ;`consult-apropos' is obsolete.
-;;      (:after man
-;;       :map Man-mode-map
-;;       "o" #'ace-link-man)
-;;      (:after eww
-;;       :map eww-mode-map
-;;       "o" #'ace-link-eww)
-;;      :leader
-;;      :desc "help" "h" help-map)
-;;(define-key resize-window-repeat-map "_" #'shrink-window)
-;;(map! [remap delete-char] #'cae-delete-char
-;;      ")" #'cae-insert-closing-paren)
-;;(let ((embark-act-key "<f8>"))
-;;  (map! embark-act-key #'embark-act
-;;        (:when (modulep! :completion vertico)
-;;         (:map minibuffer-local-map
-;;          "C-;" nil
-;;          embark-act-key #'embark-act)))
-;;  (eval
-;;   `(after! embark
-;;      (setq embark-cycle-key ,embark-act-key))
-;;   t))
+;;; Editor
+
+(load! "lisp/cae-repeat")
+(add-hook 'doom-first-buffer-hook
+          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
+            (load! "lisp/cae-visible-mark")
+            (load! "lisp/cae-visual-scrolling")))
+(load! "lisp/cae-smartparens")
+(load! "lisp/cae-vlf")
+(load! "lisp/cae-multiple-cursors")
+
+(autoload 'cae-project-bookmark (concat doom-private-dir
+                                        "lisp/cae-project"))
+(autoload 'cae-project-bookmark-set (concat doom-private-dir
+                                            "lisp/cae-project"))
+(autoload 'cae-project--get-bookmark-file (concat doom-private-dir
+                                                  "lisp/cae-project"))
+(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
+      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+;; Ensure local elisp packages are up-to-date.
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
+
+;; Enable all disabled commands.
+(setq disabled-command-function nil)
+
+;; Treat all themes as safe.
+(setq custom-safe-themes t)
+
+(setq delete-active-region t)           ;makes `d' delete region in Meow.
+
+(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
+(advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
+
+;; Query buffers for a diff before killing them.
+(advice-add #'kill-buffer :around #'cae-kill-buffer-a)
+
+;; Kill buffers without asking.
+(setq kill-buffer-query-functions
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
+
+;; Bind `tab-bar' commands consistently with the built-in keybindings.
+(defadvice! cae-tab-bar-define-keys-a ()
+  :after #'tab-bar--define-keys
+  (unless (global-key-binding [(control f4)])
+    (global-set-key [(control f4)] #'tab-close)))
+(defadvice! cae-tab-bar-undefine-keys-a ()
+  :after #'tab-bar--undefine-keys
+  (when (eq (global-key-binding [(control f4)]) #'tab-close)
+    (global-unset-key [(control f4)])))
+
+;; Do not query before deleting a frame, since we can undo frame deletions.
+(global-set-key [remap delete-frame] nil)
+(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+
+;; Do not automatically continue comments.
+(advice-remove #'newline-and-indent
+               #'+default--newline-indent-and-continue-comments-a)
+
+;; General keybindings.
+(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
+      [remap upcase-word] #'upcase-dwim
+      [remap downcase-word] #'downcase-dwim
+      [remap capitalize-word] #'capitalize-dwim
+      [remap ispell-word] #'cae-ispell-word-then-abbrev
+      "C-x 4 I" #'ibuffer-other-window
+      [remap ibuffer] #'ibuffer-jump    ;This way
+                                        ;I can do `C-x C-b =' to quickly diff a
+                                        ;buffer with its file.
+      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
+      "C-x M-o" #'ace-swap-window
+      "C-x x o" #'ov-clear
+      "M-Z" #'zap-up-to-char
+      [C-i] #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent
+      (:when (modulep! :completion vertico)
+       [remap apropos] nil)             ;`consult-apropos' is obsolete.
+      (:after man
+       :map Man-mode-map
+       "o" #'ace-link-man)
+      (:after eww
+       :map eww-mode-map
+       "o" #'ace-link-eww)
+      :leader
+      :desc "help" "h" help-map)
+(define-key resize-window-repeat-map "_" #'shrink-window)
+(map! [remap delete-char] #'cae-delete-char
+      ")" #'cae-insert-closing-paren)
+(let ((embark-act-key "<f8>"))
+  (map! embark-act-key #'embark-act
+        (:when (modulep! :completion vertico)
+         (:map minibuffer-local-map
+          "C-;" nil
+          embark-act-key #'embark-act)))
+  (eval
+   `(after! embark
+      (setq embark-cycle-key ,embark-act-key))
+   t))
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
