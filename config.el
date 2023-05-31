@@ -274,8 +274,7 @@
 ;;; Tools
 
  (use-package! w3m
-   :defer t
-   :config
+   :defer t :config
    (setq w3m-user-agent
          (string-join
           '("Mozilla/5.0"
@@ -428,8 +427,7 @@
 
  (when (modulep! :tools pdf)
    (use-package! pdftotext
-     :defer t
-     :init
+     :defer t :init
      (defadvice! +pdf-view-mode-a (oldfun &rest args)
        :around #'pdf-view-mode
        (if (cae-display-graphic-p)
