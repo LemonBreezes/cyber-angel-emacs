@@ -43,6 +43,7 @@
         corfu-on-exact-match nil
         corfu-separator ?&
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
+        cape-dabbrev-check-other-buffers t
         tab-always-indent 'complete)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
