@@ -146,6 +146,10 @@
     (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
     (setq cae-hacks--gc-disabled t)))
 
+(defun cae-hacks-garbage-collect ()
+  (garbage-collect)
+  (cae-hacks-enable-gc))
+
 (defun cae-hacks-enable-gc ()
   (when cae-hacks--gc-disabled
     (gcmh-mode cae-hacks--gcmh-mode)
@@ -156,6 +160,13 @@
           cae-hacks--gcmh-mode        nil)
     (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
     (setq cae-hacks--gc-disabled nil)))
+
+(if (boundp 'after-focus-change-function)
+    (add-function :after after-focus-change-function
+                  (lambda ()
+                    (unless (frame-focus-state)
+                      (cae-hacks-garbage-collect))))
+  (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
