@@ -25,6 +25,7 @@
        multiple-cursors
        file-templates
        snippets
+       paredit
 
        :emacs
        undo
