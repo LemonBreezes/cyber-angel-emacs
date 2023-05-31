@@ -87,6 +87,6 @@
     (funcall oldfun variables dir-name)))
 
 ;; Disable `diff-hl-mode' in my Doom private dir.
-(defadvice! cae-hacks-disable-diff-hl-in-private-config (&optional arg)
+(defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
   :before-until #'diff-hl-mode
   (file-in-directory-p default-directory doom-user-dir))
