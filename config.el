@@ -640,7 +640,9 @@
          "<tab>" #'completion-at-point)
         (:after corfu
          :map corfu-map
-         "C-M-i" #'corfu-move-to-minibuffer)
+         "C-M-i" #'corfu-move-to-minibuffer
+         "C-q" #'corfu-quick-insert
+         "M-q" #'corfu-quick-complete)
         :prefix "M-+"
         "c" #'completion-at-point       ; capf
         "t" #'complete-tag              ; etags
