@@ -650,7 +650,7 @@
       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
               em-tramp em-smart em-banner em-basic em-cmpl
               em-extpipe em-glob em-hist em-ls em-script em-term
-              em-alias em-elecslash em-rebind)))
+              em-alias em-elecslash em-rebind em-prompt)))
  t)
 
 (setq cae-config-finished-loading t)
