@@ -511,7 +511,7 @@
           sp-backward-kill-word sp-backward-delete-char sp-delete-char
           sp-forward-barf-sexp sp-backward-barf-sexp sp-forward-slurp-sexp
           sp-backward-slurp-sexp sp-split-sexp sp-join-sexp sp-rewrap-sexp
-          sp-transpose-sexp sp-transpose-hybrid-sexp))
+          sp-transpose-sexp sp-transose-hybrid-sexp))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))))
 
