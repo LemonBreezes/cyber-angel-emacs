@@ -145,7 +145,7 @@
              (,(cae-keyboard-kbd "G") special-lispy-goto "")
              (,(cae-keyboard-kbd "F") special-lispy-follow "Move")
              (,(cae-keyboard-kbd "D") special-pop-tag-mark "Move")
-             (,(cae-keyboard-kbd "A") special-lispy-beginning-of-defun "")
+             (,(cae-keyboard-kbd "A") special-lispy-beginning-of-defun "Move")
              (,(cae-keyboard-kbd "i") special-lispy-tab "Edit")
              (,(cae-keyboard-kbd "I") special-lispy-shifttab "View")
              (,(cae-keyboard-kbd "N") special-lispy-narrow "View")
