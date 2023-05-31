@@ -37,8 +37,7 @@
               (cae-defun +zone-matrix-disable-nobreak-char-display-a ()
                 (setq-local nobreak-char-display nil)))
   (after! zone-matrix
-    (setq zmx-update-time 0.01
-          zmx-unicode-mode t))
+    (setq zmx-unicode-mode t))
 
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
