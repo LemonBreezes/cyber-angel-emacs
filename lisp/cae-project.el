@@ -60,9 +60,13 @@
              bookmark-save-flag)
      (advice-add #'bookmark-maybe-load-default-file :override #'ignore)
      (unwind-protect
-         (progn ,@body)
+         (progn
+           ,@body)
        (advice-remove #'bookmark-maybe-load-default-file #'ignore)
        (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache))))
+
+;; (cae-project--bookmark-alist)
+;; (cae-project-bookmark-delete)
 
 (defun cae-project-bookmark-save-all ()
   "Save all project bookmarks."
@@ -99,6 +103,14 @@
                    (symbol-name def)))
          (define-key cae-project-bookmark-embark-map (vector key) command))))
    embark-bookmark-map)
+
+  (defun cae-project-bookmark-delete (bookmark-name &optional batch)
+    "Delete the bookmark for PROJECT."
+    (interactive
+     (list (bookmark-completing-read "Delete bookmark"
+				     bookmark-current-bookmark)))
+    (cae-project--with-bookmark-alist project
+      (bookmark-delete (doom-project-name project))))
 
   ;; These commands are exceptions to the above rule because they are noninteractive.
   (defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
