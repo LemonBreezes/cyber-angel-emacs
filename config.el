@@ -281,8 +281,9 @@
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 (when (modulep! :tools lsp +eglot)
-  (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-        '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0")))
+  (after! eglot
+    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+          '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
 
 (use-package! topsy
   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
@@ -628,25 +629,32 @@
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
 (when (modulep! :private corfu)
-  (map! :prefix "M-+"
-        :g "c" #'completion-at-point    ; capf
-        :g "t" #'complete-tag           ; etags
-        :g "d" #'cape-dabbrev           ; or dabbrev-completion
-        :g "f" #'cape-file
-        :g "k" #'cape-keyword
-        :g "h" #'cape-history
-        :g "s" #'cape-symbol
-        :g "a" #'cape-abbrev
-        :g "i" #'cape-ispell
-        :g "l" #'cape-line
-        :g "w" #'cape-dict
-        :g "\\" #'cape-tex
-        :g "_" #'cape-tex
-        :g "^" #'cape-tex
-        :g "&" #'cape-sgml
-        :g "r" #'cape-rfc1345
-        :g "+" #'copilot-complete
-        :g "M-+" #'copilot-complete))
+  (map! (:after eshell
+         :map eshell-mode-map
+         "TAB" #'completion-at-point
+         "<tab>" #'completion-at-point)
+        (:after corfu
+         :map corfu-map
+         "C-M-i" #'corfu-move-to-minibuffer)
+        :prefix "M-+"
+        "c" #'completion-at-point       ; capf
+        "t" #'complete-tag              ; etags
+        "d" #'cape-dabbrev              ; or dabbrev-completion
+        "f" #'cape-file
+        "k" #'cape-keyword
+        "h" #'cape-history
+        "s" #'cape-symbol
+        "a" #'cape-abbrev
+        "i" #'cape-ispell
+        "l" #'cape-line
+        "w" #'cape-dict
+        "\\" #'cape-tex
+        "_" #'cape-tex
+        "^" #'cape-tex
+        "&" #'cape-sgml
+        "r" #'cape-rfc1345
+        "+" #'copilot-complete
+        "M-+" #'copilot-complete))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
