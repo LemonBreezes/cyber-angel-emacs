@@ -1146,10 +1146,6 @@
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
 (when (modulep! :editor snippets)
-  (when (modulep! :completion vertico)
-    (add-hook 'vertico-mode-hook
-              (cae-defun cae-disable-yas-minor-mode-h ()
-                (yas-minor-mode -1))))
   (map! (:when (modulep! :completion vertico)
          [remap yas-insert-snippet] #'consult-yasnippet)
         :map yas-minor-mode-map
