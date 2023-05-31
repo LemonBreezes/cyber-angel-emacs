@@ -395,13 +395,13 @@
       (remove-hook 'eshell-mode-hook #'smartparens-mode)))
   (when (modulep! :editor snippets)
     (remove-hook 'yas-before-expand-snippet-hook
-                   #'+snippets--disable-smartparens-before-expand-h)))
+                 #'+snippets--disable-smartparens-before-expand-h))
 
-;; This is how we get curly braces working in C without `smartparens'.
-(add-hook 'eshell-mode-hook #'electric-pair-local-mode)
-(add-hook 'c-mode-common-hook #'electric-pair-local-mode)
-(map! [remap newline] nil)
-(add-hook 'doom-first-file-hook #'electric-indent-mode)
+  ;; This is how we get curly braces working in C without `smartparens'.
+  (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
+  (add-hook 'c-mode-common-hook #'electric-pair-local-mode)
+  (map! [remap newline] nil)
+  (add-hook 'doom-first-file-hook #'electric-indent-mode))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
