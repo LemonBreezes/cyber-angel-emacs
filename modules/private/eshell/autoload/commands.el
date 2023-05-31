@@ -49,20 +49,21 @@
     (rename-file file2 file1)
     (rename-file temp file2)))
 
-;;; https://github.com/dakra/dmacs/blob/master/init.org#eshell
-;;;###autoload
-(defun eshell/rcd (&optional directory)
-  "Like regular 'cd' but don't jump out of a tramp directory.
-When on a remote directory with tramp don't jump 'out' of the server.
-So if we're connected with sudo to 'remotehost'
-'$ rcd /etc' would go to '/sudo:remotehost:/etc' instead of just
-'/etc' on localhost."
-  (unless (file-remote-p default-directory)
-    (error "Not in a remote location"))
-  (with-parsed-tramp-file-name default-directory nil
-    (eshell/cd
-     (tramp-make-tramp-file-name
-      method user nil host nil (or directory "") hop))))
+;; Made obsolete by `eshell-elecslash'
+;;;;; https://github.com/dakra/dmacs/blob/master/init.org#eshell
+;;;;;###autoload
+;;(defun eshell/rcd (&optional directory)
+;;  "Like regular 'cd' but don't jump out of a tramp directory.
+;;When on a remote directory with tramp don't jump 'out' of the server.
+;;So if we're connected with sudo to 'remotehost'
+;;'$ rcd /etc' would go to '/sudo:remotehost:/etc' instead of just
+;;'/etc' on localhost."
+;;  (unless (file-remote-p default-directory)
+;;    (error "Not in a remote location"))
+;;  (with-parsed-tramp-file-name default-directory nil
+;;    (eshell/cd
+;;     (tramp-make-tramp-file-name
+;;      method user nil host nil (or directory "") hop))))
 
 ;; https://github.com/howardabrams/hamacs/blob/main/ha-eshell.org
 ;;;###autoload
