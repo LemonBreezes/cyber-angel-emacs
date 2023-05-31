@@ -38,8 +38,7 @@
      ("truffle-config.js")
      project-file "truffle-config.js" compilation-dir nil configure-command nil
      compile-command "truffle compile" test-command "truffle test" install-command
-     "truffle migrate" package-command nil run-command nil)
-   nil #'equal)
+     "truffle migrate" package-command nil run-command nil))
   (add-to-list 'projectile-project-root-files-top-down-recurring
                "truffle-config.js" nil #'string=)
   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$"
