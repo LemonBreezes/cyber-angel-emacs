@@ -66,11 +66,10 @@
           ;; (flyspell-mode)
           (spell-fu-mode)
           (font-lock-mode)
-          (glasses-mode)
+          ;; (glasses-mode)
           ;; (overwrite-mode)
           (ruler-mode)
-          (visual-line-mode)
-          (display-fill-column-indicator-mode)))
+          (visual-line-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                    projectile-mode
                                    flycheck-mode
