@@ -33,6 +33,8 @@
                   font-lock-doc-face))
     (set-face-attribute face nil :weight 'normal)))
 
+(add-hook 'enable-theme-functions #'diff-hl-update)
+
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
     (setopt modus-themes-org-blocks 'gray-background
