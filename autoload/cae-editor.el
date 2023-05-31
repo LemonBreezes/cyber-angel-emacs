@@ -84,31 +84,3 @@
   (interactive)
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
-
-;;;###autoload (autoload 'cae-embark-collect-hydra/body "cae-editor" nil t)
-(defhydra embark-collect-hydra (:color blue :hint nil)
-  "
-Navigation^^             Mark/Unmark^^               Actions^^             Buffer^^
--------------------------------------------------------------------------------------------
-[_p_] Outline previous  [_m_] Mark                   [_a_] Act               [_g_] Refresh
-[_n_] Outline next      [_u_] Unmark                 [_A_] Act All           [_<_] Beginning
-[_b_] Backward button   [_U_] Unmark All             [_e_] Export            [_>_] End
-[_f_] Forward button    [_t_] Toggle Marks           [_q_] Quit Window
-[_s_] Search Forward
-"
-  ("p" outline-previous-heading)
-  ("n" outline-next-heading)
-  ("b" backward-button)
-  ("f" forward-button)
-  ("s" isearch-forward)
-  ("m" embark-collect-mark)
-  ("u" embark-collect-unmark)
-  ("U" embark-collect-unmark-all)
-  ("t" embark-collect-toggle-marks)
-  ("a" embark-act)
-  ("A" embark-act-all)
-  ("e" embark-export)
-  ("g" embark-rerun-collect-or-export)
-  ("<" beginning-of-buffer)
-  (">" end-of-buffer)
-  ("q" quit-window :color red))
