@@ -38,24 +38,6 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
-;;(defvar cae-debugger--session-workspace-map ()
-;;  "Alist of (session . workspace) pairs.")
-;;
-;;;;;###autoload
-;;(defun cae-debugger-mark-session-h (session)
-;;  "Mark the current session with the current workspace."
-;;  (setf (alist-get session cae-debugger--session-workspace-map
-;;                   nil nil #'equal)
-;;        (+workspace-current-name)))
-;;
-;;;;;###autoload
-;;(defun cae-debugger-dap-switch-to-workspace-h (session)
-;;  "Switch to the workspace associated with the current session."
-;;  (when-let ((workspace (alist-get session cae-debugger--session-workspace-map
-;;                                   nil nil #'equal)))
-;;    (unless (string= workspace (+workspace-current-name))
-;;      (+workspace-switch workspace))))
-
 ;;;###autoload (autoload 'cae-debug-dap-hydra/body "private/debugger/autoload" t nil)
 (defhydra cae-debug-dap-hydra (:color pink :hint nil :foreign-keys run)
   "
