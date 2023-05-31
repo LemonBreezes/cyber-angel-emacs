@@ -8,7 +8,8 @@
           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
           ("~/src/" . 1)))
   (add-to-list 'projectile-globally-ignored-directories
-               (expand-file-name ".local/straight/repos/" user-emacs-directory))
+               (expand-file-name ".local/straight/repos/" user-emacs-directory)
+               nil #'string=)
   (unless (or (cl-set-difference projectile-known-projects
                                  '("~/.doom.d/" "~/.emacs.d/" "~/.config/doom/"
                                    "~/.config/emacs/")
