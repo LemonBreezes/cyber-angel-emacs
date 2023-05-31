@@ -29,7 +29,7 @@
     (map! :map magit-status-mode-map
           ;; Killing the Magit status buffer removes the `forge-pull' progress
           ;; from the modeline.
-          "q" #'magit-mode-bury-buffer)
+          "q" (cmd! (magit-restore-window-configuration)))
     (after! forge
       (setq forge-pull-notifications t
             forge-buffer-draft-p t))))
