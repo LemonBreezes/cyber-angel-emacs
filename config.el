@@ -479,14 +479,14 @@
   (unless cae-init-editor-enabled-p
     (throw 'cae-editor-disabled nil))
 
-  ;;(load! "lisp/cae-repeat")
-  ;;(add-hook 'doom-first-buffer-hook
-  ;;          (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
-  ;;            (load! "lisp/cae-visible-mark")
-  ;;            (load! "lisp/cae-visual-scrolling")))
-  ;;(load! "lisp/cae-smartparens")
-  ;;(load! "lisp/cae-vlf")
-  ;;(load! "lisp/cae-multiple-cursors")
+  (load! "lisp/cae-repeat")
+  (add-hook 'doom-first-buffer-hook
+            (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
+              (load! "lisp/cae-visible-mark")
+              (load! "lisp/cae-visual-scrolling")))
+  (load! "lisp/cae-smartparens")
+  (load! "lisp/cae-vlf")
+  (load! "lisp/cae-multiple-cursors")
 
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project"))
@@ -496,6 +496,7 @@
                                                     "lisp/cae-project"))
   (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
         :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+
   ;; Ensure local elisp packages are up-to-date.
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
