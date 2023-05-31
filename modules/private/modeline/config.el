@@ -88,7 +88,10 @@
                                        (make-mode-line-mouse-map
                                         'mouse-2
 			                #'compilation-goto-in-progress-buffer))))))
-  (map! "<f9>" #'minions-minor-modes-menu))
+  (map! "<f9>" #'minions-minor-modes-menu)
+
+  (when (modulep! :private meow)
+    (add-hook 'minions-mode-hook #'meow-mode)))
 
 (defalias 'cae-modeline-truncate-string (doom-rpartial #'truncate-string-to-width 30 nil nil t))
 (advice-add #'vc-git-mode-line-string :filter-return #'cae-modeline-truncate-string)
