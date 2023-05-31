@@ -127,7 +127,7 @@
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gcmh-mode nil)
 
-(defun cae-hacks-disable-gc-temporarily ()
+(defun cae-hacks-disable-gc-temporarily (&rest _)
   (setq cae-hacks--gc-messages garbage-collection-messages
         cae-hacks--gcmh-mode gcmh-mode
         garbage-collection-messages t)
@@ -140,14 +140,7 @@
            cae-hacks--gc-messages nil
            cae-hacks--gcmh-mode nil))))
 
-(defadvice! cae-hacks-max-out-gc-a (oldfun &rest args)
-  :around #'save-some-buffers
-  (setq gc-cons-threshold cae-hacks-big-gc-threshold
-        gc-cons-percentage cae-hacks-big-gc-percentage)
-  (let ((gcmh-low-cons-threshold cae-hacks-big-gc-threshold)
-        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold))
-    (cae-hacks-transiently-enable-gc-messages)
-    (apply oldfun args)))
+(advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
 
 (defun cae-hacks-max-out-gc-h ()
   (setq gc-cons-threshold cae-hacks-big-gc-threshold
