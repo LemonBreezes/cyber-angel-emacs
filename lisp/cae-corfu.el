@@ -83,4 +83,4 @@
       (setq-local completion-at-point-functions
                   (cons 'cape-yasnippet
                         completion-at-point-functions)))
-    (push 'cape-yasnippet completion-at-point-functions)))
+    (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
