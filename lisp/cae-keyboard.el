@@ -2,28 +2,6 @@
 
 ;;; Remap keys
 
-;; These are the orbits of the alphabet under the permutation of the keys
-;; created by the keyboard layout. Because my keyboard layout is so weird, some
-;; of these remappings involve non-printable characters. I have replaced those
-;; in the list below with a null byte (0x00) and terminated the list.
-(defvar cae-keyboard-orbits
-  '((?w ?b ?j ?o ?y ?v ?k ?t ?g ?s ?a ?r ?f ?n ?m ?c ?u)
-    (?W ?B ?J ?O ?Y ?V ?K ?T ?G ?S ?A ?R ?F ?N ?M ?C ?U)
-    (?# ?3 ?\; ?h ?d ?e ?p ?\' ?_ ?\} ?\0)
-    (?~ ?` ?\" ?% ?5 ?+ ?\0)
-    (?: ?H ?D ?E ?P ?% ?^ ?6 ?$ ?4 ?= ?\0)
-    (?i ?l) (?I ?L)
-    (?x ?,) (?X ?<)
-    (?0 ?\))
-    (?1 ?!)
-    (?2 ?@)
-    (?5 ?+ ?\0)
-    (?7 ?&)
-    (?8 ?*)
-    (?9 ?\()
-    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q)))
-
-
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "0") (kbd "C-x t 0"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "1") (kbd "C-x t 1"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x t" "2") (kbd "C-x t 2"))
@@ -80,24 +58,22 @@
 
 ;;; Universal argument
 
-(if (modulep! :private meow)
-    (eval
-     `(map! :map universal-argument-map
-            ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "2") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "3") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "4") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "5") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "6") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
-            ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
-  (defconst home-row-numbers-qwerty
-    (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
-  (home-row-numbers)
-  (map! :map universal-argument-map
-        "l" #'cae-keyboard-insert-current-prefix))
+(eval `(map! :map universal-argument-map
+             ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "2") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "3") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "4") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "5") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "6") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "7") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
+             ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
+(defconst home-row-numbers-qwerty
+(cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
+(home-row-numbers)
+(map! :map universal-argument-map
+      "l" #'cae-keyboard-insert-current-prefix)
 
 ;;; Distinguishing dual-purpose keycodes
 
