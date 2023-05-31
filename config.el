@@ -398,13 +398,13 @@
                  #'+snippets--disable-smartparens-before-expand-h))
 
   ;; This is how we get curly braces working in C without `smartparens'.
-  (electric-pair-mode +1)
-  (map! [remap newline] nil)
-  (add-hook 'doom-first-file-hook #'electric-indent-mode)
   (setq electric-pair-pairs '((?\" . ?\")
                               (?\{ . ?\})
                               (?\[ . ?\]))
-        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
+        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)
+  (electric-pair-mode +1)
+  (map! [remap newline] nil)
+  (add-hook 'doom-first-file-hook #'electric-indent-mode))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
