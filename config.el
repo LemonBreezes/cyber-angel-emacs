@@ -39,6 +39,9 @@
         tab-bar-new-button     nil))
 (run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
+;; Don't confirm when exiting Emacs that active processes exist.
+(setq confirm-kill-processes nil)
+
 ;; Colorize color strings.
 (add-hook 'prog-mode-hook #'rainbow-mode)
 
