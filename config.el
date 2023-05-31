@@ -773,6 +773,7 @@
 
   (use-package! titlecase
     :defer t :init
+    (map! "M-U" #'cae-titlecase-word-dwim)
     (after! embark
       (define-key embark-region-map "T" #'titlecase-region)
       (define-key embark-heading-map "T" #'titlecase-line)
