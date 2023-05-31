@@ -13,7 +13,7 @@
    "O" other-window-previous
    "q" quit-window
    "p" +popup/other
-   "K" doom/kill-this-buffer-in-all-windows
+   "K" kill-buffer-and-window
    ;; Number row keys
    "!" delete-other-windows
    "@" split-window-below
