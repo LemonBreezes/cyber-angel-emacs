@@ -359,7 +359,8 @@
         "z" #'meow-pop-selection))
 
 (use-package! meow
-  :hook (doom-after-modules-config . meow-global-mode)
+  :init
+  (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
   :demand t
   :config
   (cond
