@@ -37,7 +37,6 @@
 (when (and (modulep! :ui modeline)
            (not (modulep! :ui modeline +light)))
   (setq doom-modeline-hud t
-        doom-modeline-icon t
         doom-modeline-support-imenu t))
 
 (after! which-key
