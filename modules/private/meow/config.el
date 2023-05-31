@@ -211,4 +211,7 @@
   (when (modulep! :term eshell)
     (remove-hook 'eshell-mode-hook #'hide-mode-line-mode))
   (when (modulep! :term vterm)
-    (remove-hook 'vterm-mode-hook #'hide-mode-line-mode)))
+    (remove-hook 'vterm-mode-hook #'hide-mode-line-mode))
+  (when (modulep! :ui popup)
+    (setq +popup-window-parameters
+          (delq 'modeline +popup-window-parameters))))
