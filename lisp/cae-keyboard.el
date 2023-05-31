@@ -112,7 +112,8 @@
                ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
                ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
   (map! :map minibuffer-local-map
-        ;; `C-c ;' is a little easier to type on my keyboard.
+        ;; `C-c ;' is a little easier to type on my keyboard. This alternate
+        ;; keybinding also works in the terminal.
         "C-c ;" #'embark-export
         "C-c C-;" nil))
 
