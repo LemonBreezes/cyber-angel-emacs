@@ -80,12 +80,16 @@
 
 ;;; Universal argument
 
-(unless (modulep! :private meow)
+(if (modulep! :private meow)
+    (eval
+     `(map! :map universal-argument-map
+            ,(cae-keyboard-kbd "1") "1"
+            ,(cae-keyboard-kbd "2") "2"
+
+            ))
   (defconst home-row-numbers-qwerty
     (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
-
   (home-row-numbers)
-
   (map! :map universal-argument-map
         "l" #'cae-keyboard-insert-current-prefix))
 
