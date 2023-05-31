@@ -213,7 +213,6 @@
   :config
   ;; Set custom function for rjsx-mode
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
-
   ;; Disable topsy-mode for gptel-mode
   (add-hook 'gptel-mode-hook
             (defun cae-disable-topsy-in-gptel-h ()
