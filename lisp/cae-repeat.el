@@ -27,9 +27,10 @@
     ("s" isearch-repeat-forward
      "r" isearch-repeat-backward))
 
-  (define-repeat-map winner
-    ("u" winner-undo
-     "r" winner-redo))
+  ;;Currently part of `other-window' map
+  ;;(define-repeat-map winner
+  ;;  ("u" winner-undo
+  ;;   "r" winner-redo))
 
   (define-repeat-map cae-buffer-navigation-repeat-map
     ("<left>" cae-previous-buffer
