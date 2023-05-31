@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-keyboard.el -*- lexical-binding: t; -*-
 
-;; I have a pretty complicated keyboard layout.
+;;; Remap keys
 
 (map! "C-x t )" #'tab-close
       "C-x t #" #'tab-close-other
@@ -32,6 +32,8 @@
                  `((nil . ,(concat "+workspace/switch-to-" (number-to-string i))) . t)))
   (add-to-list 'which-key-replacement-alist
                '((nil . "+workspace/switch-to-final") . t))))
+
+;;; Universal argument
 
 (defvar home-row-numbers-qwerty
   '(?r ?a ?e ?n ?s ?d ?o ?t ?i ?h)
