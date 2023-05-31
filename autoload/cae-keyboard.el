@@ -56,4 +56,5 @@
     (1 (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))))
     (2 (mapconcat #'kbd
              (append (butlast args)
-                     (list (cae-keyboard-kbd (car (last args)))))))))
+                     (list (cae-keyboard-kbd (car (last args)))))))
+    (_ (apply #'string (cae-keyboard-remap (kbd (string-join args " ")))) )))
