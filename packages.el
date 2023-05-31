@@ -27,7 +27,7 @@
 (package! syslog-mode)
 (package! w3m)
 (package! ace-link)
-(package! pdftotext)
+(package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 
 ;; These are autoloaded without explicit configuration.
 (package! crontab-mode)
