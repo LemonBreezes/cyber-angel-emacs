@@ -75,6 +75,7 @@
                 (when (eq 'property-drawer (car (org-element-at-point)))
                   (org-up-element))
                 (funcall oldfun arg)))
+  (advice-add #'worf-add :after #'cae-org-set-created-timestamp)
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
