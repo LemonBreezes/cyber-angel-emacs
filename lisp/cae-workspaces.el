@@ -1,7 +1,7 @@
 ;;; lisp/cae-workspaces.el -*- lexical-binding: t; -*-
 
 (defun cae-hacks-hydra-pause-h (&rest _)
-  (when hydra-curr-map
+  (when (bound-and-true-p hydra-curr-map)
     (set-persp-parameter 'hydra-pause-ring
                          (progn (ring-insert hydra-pause-ring hydra-curr-body-fn)
                                 hydra-pause-ring))
