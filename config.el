@@ -689,7 +689,7 @@
   (define-key macrursors-mark-map (kbd "f") #'macrursors-mark-all-defuns)
   (define-key macrursors-mark-map (kbd "n") #'macrursors-mark-all-numbers)
   (define-key macrursors-mark-map (kbd ".") #'macrursors-mark-all-sentences)
-  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
+  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
