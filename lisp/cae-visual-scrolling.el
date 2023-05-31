@@ -9,8 +9,8 @@
 
 (map! "C-v" #'View-scroll-half-page-forward
       "M-v" #'View-scroll-half-page-backward
-      "C-S-v" #'my-View-scroll-half-page-forward-other-window
-      "M-S-v" #'my-View-scroll-half-page-backward-other-window)
+      "C-M-v" #'my-View-scroll-half-page-forward-other-window
+      "C-M-S-v" #'my-View-scroll-half-page-backward-other-window)
 
 (defun my-View-scroll-half-page-forward-other-window ()
   (interactive)
