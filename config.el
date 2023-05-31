@@ -36,6 +36,10 @@
       scroll-margin 2
       kill-buffer-delete-auto-save-files t)
 
+(when (and (modulep! :ui modeline)
+           (not (module! :ui modeline +light)))
+  (setq doom-modeline-hud t))
+
 (after! which-key
   (setq which-key-ellipsis "..."
         which-key-compute-remaps t))
