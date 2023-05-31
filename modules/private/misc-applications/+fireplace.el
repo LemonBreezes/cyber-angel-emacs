@@ -5,4 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-eyecandy-prefix
-        "f" #'fireplace))
+        "f" #'fireplace)
+  :config
+  (map! :map fireplace-mode-map
+        "<f6>" #'+fireplace-hydra/body))
