@@ -63,25 +63,25 @@
   (add-hook 'dirvish-emerge-mode-hook #'doom-auto-revert-buffer-h)
   (after! dirvish-emerge
     (setopt dirvish-emerge-groups
-           '(("Recent files" (predicate . recent-files-2h))
-             ("Documents" (extensions "pdf" "tex" "bib" "epub"))
-             ("Video" (extensions "mp4" "mkv" "webm"))
-             ("Pictures" (extensions "jpg" "png" "svg" "gif" "jpeg" "avif"))
-             ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
-             ("Archives" (extensions "gz" "rar" "zip")))))
+            '(("Recent files" (predicate . recent-files-2h))
+              ("Documents" (extensions "pdf" "tex" "bib" "epub"))
+              ("Video" (extensions "mp4" "mkv" "webm"))
+              ("Pictures" (extensions "jpg" "png" "svg" "gif" "jpeg" "avif"))
+              ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
+              ("Archives" (extensions "gz" "rar" "zip")))))
 
   (after! dirvish-quick-access
     (setopt dirvish-quick-access-entries
-           '(("h" "~/" "Home")
-             ("e" "~/.emacs.d/" "Emacs user directory")
-             ("d" "~/Downloads/" "Downloads")
-             ("m" "/mnt/" "Drives")
-             ("s" "~/src/" "Source code")
-             ("t" "~/.local/share/Trash/files/" "TrashCan"))))
+            '(("h" "~/" "Home")
+              ("e" "~/.emacs.d/" "Emacs user directory")
+              ("d" "~/Downloads/" "Downloads")
+              ("m" "/mnt/" "Drives")
+              ("s" "~/src/" "Source code")
+              ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
   (after! dirvish-fd
     ;; On both of my computers, using "/" instead crashes Emacs.
-  (setq dirvish-fd-default-dir "~/"))
+    (setq dirvish-fd-default-dir "~/"))
 
   (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
 
