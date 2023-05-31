@@ -122,7 +122,9 @@
   (map! :map dired-mode-map
         [remap find-file] (cae-dired-find-file-wrapper find-file)
         [remap projectile-find-file] (cae-dired-find-file-wrapper projectile-find-file)
-        [remap projectile-find-file-in-directory] (cae-dired-find-file-wrapper projectile-find-file-in-directory))
+        [remap projectile-find-file-in-directory] (cae-dired-find-file-wrapper projectile-find-file-in-directory)
+        [remap projectile-find-test-file] (cae-dired-find-file-wrapper projectile-find-test-file)
+        [remap doom/find-file-in-other-project] (cae-dired-find-file-wrapper doom/find-file-in-other-project))
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
