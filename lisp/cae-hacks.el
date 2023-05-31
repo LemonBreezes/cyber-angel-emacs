@@ -72,6 +72,7 @@
          (not (eq arg 0))
          transient-mark-mode
          (not (region-active-p))
-         (not (memq 'shift (event-modifiers last-input-event)))
+         (not (and (memq 'shift (event-modifiers last-input-event))
+                   shift-select-mode))
          (cl-incf arg))
     (list arg try-vscroll)))
