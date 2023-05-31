@@ -47,7 +47,7 @@
           ("C-x C-s" elfeed-tube-save "Save"))
          "Misc"
          (("g" elfeed-search-update--force "Update")
-          ("l" +elfeed-view-logs "Toggle log buffer")
+          ("l" +elfeed-toggle-log-buffer "Toggle log buffer")
           ("Q" +elfeed-quit "Quit Elfeed" :color blue)
           ("q" nil "quit" :color blue))))
       (map! :map elfeed-search-mode-map
