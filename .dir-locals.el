@@ -10,12 +10,12 @@
           (when (and (derived-mode-p 'emacs-lisp-mode)
                      (buffer-file-name)
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
-                                     '("init.el"
-                                       dir-locals-file
-                                       "packages.el")
+                                     `("init.el"
+                                      ,dir-locals-file
+                                      "packages.el")
                                      :test #'string=))
                      (bound-and-true-p cae-config-finished-loading))
-            (add-hook 'write-file-functions 'eval-buffer 1 t))
+            (remove-hook 'write-file-functions 'eval-buffer 1 t))
 
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
