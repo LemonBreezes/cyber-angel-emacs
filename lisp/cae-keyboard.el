@@ -695,6 +695,6 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
 (use-package! smart-semicolon
   :defer t :init
   (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
-  (add-hook 'web-mode-hook  'smart-semicolon-mode)
-  (add-hook 'java-mode-hook 'smart-semicolon-mode)
-  (add-hook 'js-mode-hook   'smart-semicolon-mode))
+  (add-hook 'web-mode-hook  #'smart-semicolon-mode)
+  (add-hook 'java-mode-hook #'smart-semicolon-mode)
+  (add-hook 'js-mode-hook   #'smart-semicolon-mode))
