@@ -1,16 +1,5 @@
 ;;; private/dired/autoload.el -*- lexical-binding: t; -*-
 
-;;;;;###autoload
-;;(defun cae-dired-set-layout-h ()
-;;  (when (and (derived-mode-p 'dired-mode)
-;;             (one-window-p)
-;;             (not (memq last-command '(dirvish-layout-toggle
-;;                                       cae-dired-previous-buffer
-;;                                       cae-dired-next-buffer)))
-;;             (frame-width (selected-frame))
-;;             (> (frame-width (selected-frame)) 160))
-;;    (dirvish-layout-toggle)))
-
 ;;;###autoload
 (defun cae-dired-load-dirvish-h (dir)
   (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
