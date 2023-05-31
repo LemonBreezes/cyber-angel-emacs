@@ -820,6 +820,7 @@
   (setq ibuffer-always-show-last-buffer t
         ibuffer-formats
         '((mark modified read-only locked " "
+           ;; Give more space to the buffer name.
            (name 23 23 :left :elide)
            " "
            (size 9 -1 :right)
