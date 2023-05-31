@@ -844,12 +844,10 @@
         "P" #'symbol-overlay-switch-backward
         "r" #'symbol-overlay-rename
         "-" #'negative-argument)
-  (when (and (modulep! :tools lsp)
-             (not (modulep! :tools lsp +eglot)))
-    ;; LSP provides its own symbol highlighting.
-    (add-hook 'lsp-mode-hook
-              (cae-defun cae-disable-symbol-overlay-h ()
-                (symbol-overlay-mode -1))))
+  ;; LSP provides its own symbol highlighting.
+  (add-hook 'lsp-mode-hook
+            (cae-defun cae-disable-symbol-overlay-h ()
+              (symbol-overlay-mode -1)))
   (when (modulep! :editor multiple-cursors)
     ;; Don't distract me while I'm doing multiple cursor calculus.
     (after! multiple-cursors-core
