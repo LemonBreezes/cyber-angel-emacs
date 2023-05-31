@@ -57,8 +57,7 @@
            ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
-           ;;("C-]" sp-select-next-thing-exchange "Select")
-                                        ;Overrides
+           ;;("C-]" sp-select-next-thing-exchange "Select") ;Overrides
                                         ;`abort-recursive-edit'.
            ;;("C-M-]" sp-select-next-thing "Select")
            ;;("C-M-@" sp-mark-sexp "Select")
