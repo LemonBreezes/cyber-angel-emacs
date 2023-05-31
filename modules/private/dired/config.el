@@ -122,8 +122,6 @@
 ;; `projectile-find-file'.
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 
-
-
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
