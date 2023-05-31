@@ -450,7 +450,6 @@
   (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
-  (add-hook 'eshell-mode-hook #'copilot-mode)
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
