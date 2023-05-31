@@ -125,6 +125,10 @@
 ;;(advice-add #'find-file-other-window :around
 ;;            #'cae-dired-find-file-other-window-a)
 
+(advice-add #'find-file :before #'cae-dired-find-file-a)
+(advice-add #'find-file-other-window :before #'cae-dired-find-file-other-window-a)
+(add-hook 'find-file-hook #'cae-dired-find-file-h)
+
 (map! [remap dired-jump] #'cae-dired-jump)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
