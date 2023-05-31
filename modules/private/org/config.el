@@ -32,7 +32,10 @@
         "]" #'+org-insert-checkbox-or-bracket))
 
 (use-package! org-jira
-  :defer t :config
+  :defer t :init
+  (map! :leader
+        "J" #'cae-org-jira-hydra/body)
+  :config
   (map! :map org-jira-entry-mode-map
         "C-c i" nil
         "C-c s" nil
@@ -40,8 +43,7 @@
         "C-c w" nil
         "C-c t" nil
         "C-c p" nil
-        "C-c b" nil
-        "<f7>" #'cae-org-jira-hydra/body)
+        "C-c b" nil)
   (make-directory (expand-file-name "~/.org-jira") t))
 
 (use-package! worf
