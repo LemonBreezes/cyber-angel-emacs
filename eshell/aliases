@@ -7,7 +7,7 @@ alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 alias layman sudo layman                                                      $*
 
-alias mcd    mkdir               -p                                           $1 && cd $1
+alias mcd    mkdir -p                                                         $1 && cd $1
 alias cd-    cd -
 alias cd--   cd -2
 
