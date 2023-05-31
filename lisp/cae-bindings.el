@@ -60,7 +60,22 @@
   (define-key doom-leader-map "nd" nil))
 
 ;; Add some descriptions for built-in prefixes.
-(map! :prefix ("M-s h" . "highlight"))
+(map! :prefix ("M-s h" . "highlight")
+      :prefix ("C-x 4" . "other-window")
+      :prefix ("C-x 5" . "other-frame")
+      :prefix ("C-x 8" . "unicode")
+      :prefix ("C-x a" . "abbrev")
+      :prefix ("C-x a i" . "inverse")
+      :prefix ("C-x n" . "narrow")
+      :prefix ("C-x r" . "register")
+      :prefix ("C-x v" . "version-control")
+      :prefix ("C-x w" . "window")
+      :prefix ("C-x w ^" . "detach")
+      :prefix ("C-x x" . "extra")
+      :prefix ("C-x C-a" . "gud")
+      :prefix ("C-x X" . "edebug")
+      :prefix ("C-x C-k" . "kmacro")
+      :prefix ("C-x RET" . "mule"))
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
