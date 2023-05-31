@@ -12,5 +12,5 @@
 (defun +elfeed-toggle-log-buffer ()
   (interactive)
   (if (get-buffer-window elfeed-log-buffer-name)
-      (delete-window elfeed-log-buffer-name)
+      (delete-window (get-buffer-window elfeed-log-buffer-name))
     (pop-to-buffer elfeed-log-buffer-name)))
