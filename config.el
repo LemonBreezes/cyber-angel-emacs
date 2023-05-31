@@ -1259,8 +1259,7 @@
 (when (modulep! :email notmuch)
   (after! notmuch-hello
     (map! :map notmuch-hello-mode-map
-          "q" #'cae-notmuch-quit))
-  )
+          "q" #'cae-notmuch-quit)))
 
 ;;; Appendix
 
