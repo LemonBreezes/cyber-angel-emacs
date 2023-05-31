@@ -50,10 +50,4 @@ normally have their errors suppressed."
 ;; Copied from here:
 ;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
 
-;;; Errors I am currently debugging
-
-(advice-add #'vertico-exit :around
-            (defun cae-debug-vertico-exit-a (func &rest args)
-              (when (eq (length args) 2)
-                (backtrace))
-              (apply func args)))
+;
