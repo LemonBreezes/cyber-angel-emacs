@@ -84,3 +84,8 @@
   (interactive)
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
+
+;;;###autoload (autoload 'cae-embark-collect-hydra/body "autoload/cae-editor" nil t)
+(defhydra embark-collect-hydra (:color pink :foreign-keys run)
+  ("<f6>" nil "Exit" :exit t)
+  ("q" quit-window :color red))
