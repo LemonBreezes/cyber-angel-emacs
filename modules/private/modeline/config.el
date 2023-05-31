@@ -183,11 +183,11 @@
   :after (:any magit org)
   :config
   (setq parrot-animate 'hide-static
-          parrot-num-rotations 10
-          parrot-animate-on-load nil
-          parrot-party-on-magit-push t
-          parrot-party-on-org-todo-states '("DONE")
-          parrot-type 'nyan)
+        parrot-num-rotations 10
+        parrot-animate-on-load nil
+        parrot-party-on-magit-push t
+        parrot-party-on-org-todo-states '("DONE")
+        parrot-type 'nyan)
   (parrot-mode +1))
 (use-package! parrot-rotate
   :defer t
