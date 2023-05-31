@@ -346,12 +346,3 @@
   (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
   (add-hook 'web-mode-hook  'smart-semicolon-mode)
   (add-hook 'java-mode-hook 'smart-semicolon-mode))
-
-;; This package is not maintained anymore and is giving me errors. It's also a
-;; lot of work to maintain its rules and they will likely always be incomplete.
-;;(use-package! electric-spacing
-;;  :defer t :init
-;;  (add-hook 'c-mode-common-hook #'electric-spacing-mode)
-;;  (add-hook 'python-mode-hook #'electric-spacing-mode)
-;;  :config
-;;  (advice-add #'electric-spacing-\( :override #'cae-keyboard-electric-spacing-\())
