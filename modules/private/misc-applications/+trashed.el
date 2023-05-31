@@ -8,4 +8,6 @@
         "C-t" #'trashed)
   :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
-  (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h))
+  (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
+  (map! :map trashed-mode-map
+        "<f6>" #'+trashed-hydra/body))
