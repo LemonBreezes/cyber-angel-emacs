@@ -25,7 +25,7 @@
             (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
 
           (setq-local jinx-local-words
-                      "cae corfu")
+                      "cae corfu eshell")
 
           ;; Automatically compile Emacs Lisp files (if enabled).
           (when (bound-and-true-p cae-config-finished-loading)
@@ -34,7 +34,7 @@
                        (bound-and-true-p cae-config-compilation-enabled))
               (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
 
-            ;; Automantically commit saved files to Git and push them to the
+            ;; Automatically commit saved files to Git and push them to the
             ;; remote.
             (when (and (buffer-file-name)
                        (not (file-in-directory-p (buffer-file-name)
