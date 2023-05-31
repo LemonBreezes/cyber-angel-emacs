@@ -94,3 +94,11 @@
 (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
   :before-until #'diff-hl-mode
   (file-in-directory-p default-directory doom-user-dir))
+
+;; Fix `save-some-buffers' so that I can continue the command after quitting a
+;; diff with "q".
+(defadvice! +popup/quit-window--view-mode-a (oldfun)
+  :around #'+popup/quit-window
+  (if view-mode
+      (View-quit)
+    (funcall oldfun)))
