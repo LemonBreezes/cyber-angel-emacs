@@ -456,8 +456,8 @@
 
 (when (modulep! :private corfu)
   (after! corfu
-    (setq corfu-quick1 (cae-keyboard-kbd "asdfghjkl;")
-          corfu-quick2 "")))
+    (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
+          corfu-quick2 (cae-keyboard-kbd "jkl;"))))
 
 (use-package! zop-to-char
   :defer t
