@@ -243,6 +243,10 @@
    :toggle-funs #'cae-edebug-cheatsheet
    :keymap 'edebug-mode-map
    :package 'edebug)
+  (hercules-def
+   :toggle-funs #'cae-macrostep-keymap
+   :keymap 'macrostep-keymap
+   :package 'macrostep)
   (after! embark
     (map! :map embark-collect-mode-map
           "<f6>" #'cae-embark-collect-cheatsheet))
@@ -251,7 +255,11 @@
           "<f6>" #'cae-debugger-cheatsheet))
   (after! edebug
     (map! :map edebug-mode-map
-          "<f6>" #'cae-edebug-cheatsheet)))
+          "<f6>" #'cae-edebug-cheatsheet))
+  (after! macrostep
+    (map! :map macrostep-keymap
+          "<f6>" #'cae-macrostep-keymap)))
+
 
 ;;; Tools
 
