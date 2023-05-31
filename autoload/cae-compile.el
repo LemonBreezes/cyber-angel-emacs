@@ -135,6 +135,8 @@
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
 
+(defvar cae-compile-incremental-idle-timer 2)
+
 (defun cae-compile-next-file (files)
   (when files
     (let ((file (pop files)))
@@ -146,14 +148,14 @@
             ;;  (ignore-errors (native-compile file)))
             (run-with-idle-timer doom-incremental-idle-timer
                                  nil #'cae-compile-next-file files))
-        (run-with-idle-timer doom-incremental-idle-timer
+        (run-with-idle-timer cae-compile-incremental-idle-timer
                              nil #'cae-compile-next-file files)))))
 
 ;;;###autoload
 (defun cae-compile-schedule-native-compilation ()
   (when (and (bound-and-true-p cae-config-finished-loading)
              (bound-and-true-p cae-config-incremental-compilation-enabled-p))
-    (run-with-idle-timer doom-incremental-idle-timer
+    (run-with-idle-timer cae-compile-incremental-idle-timer
                          nil #'cae-compile-next-file
                          (cae-compile-list-files-to-compile))))
 
