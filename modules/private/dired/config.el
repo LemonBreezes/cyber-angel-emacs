@@ -110,19 +110,21 @@
         "M-n" nil                       ; for `avy-goto-line-below'
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer
-        [remap delete-other-windows] #'cae-dired-maximize-buffer)
+        ;;[remap delete-other-windows] #'cae-dired-maximize-buffer
+        )
 
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
-  (map! [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer))
+  ;;(map! [remap previous-buffer] #'cae-dired-previous-buffer
+  ;;      [remap next-buffer] #'cae-dired-next-buffer)
+  )
 
 ;; Exit the current Dirvish session when running interactive commands like
 ;; `projectile-find-file'. Also, automatically enter fullscreen mode when
 ;; opening a file in a single window.
 (advice-add #'find-file :before #'cae-dired-find-file-a)
 (advice-add #'find-file-other-window :before #'cae-dired-find-file-other-window-a)
-(add-hook 'find-file-hook #'cae-dired-find-file-fullscreen-h)
+;;(add-hook 'find-file-hook #'cae-dired-find-file-fullscreen-h)
 
 (map! [remap dired-jump] #'cae-dired-jump)
 
