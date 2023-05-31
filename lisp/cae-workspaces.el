@@ -3,7 +3,8 @@
 (defun cae-hacks-hydra-pause-h (&rest _)
   (when hydra-curr-map
     (set-persp-parameter 'hydra-pause-ring
-                         (ring-insert hydra-pause-ring hydra-curr-body-fn))
+                         (progn (ring-insert hydra-pause-ring hydra-curr-body-fn)
+                                hydra-pause-ring))
     (hydra-keyboard-quit)))
 
 (defun cae-hacks-hydra-resume-h (&rest _)
