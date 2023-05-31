@@ -20,7 +20,7 @@
                 ('fsharp 'fsharp-mode) ('go 'go-mode)
                 ('groovy 'groovy-mode) ('haskell 'haskell-mode)
                 ('html 'html-mode) ('java 'java-mode)
-                ('javascript 'javascript-mode) ('json 'json-ts-mode)
+                ('javascript 'javascript-mode) ('json 'js-json-mode)
                 ('latex 'latex-mode) ('lisp 'lisp-mode)
                 ('lua 'lua-mode) ('matlab 'matlab-mode)
                 ('objc 'objc-mode) ('perl 'perl-mode)
