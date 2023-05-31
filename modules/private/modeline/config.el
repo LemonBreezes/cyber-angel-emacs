@@ -96,6 +96,7 @@
 ;; (advice-add 'create-file-buffer :override #'cae-modeline-create-file-buffer)
 
 (use-package! nyan-mode
+  :when (modulep! +pretty)
   :defer-incrementally t
   ;; (setq nyan-animate-nyancat t
   ;;       nyan-wavy-trail t
@@ -106,3 +107,18 @@
   ;;       nyan-mode-line nil)
   :config
   (nyan-mode +1))
+
+(use-package! parrot
+  :defer t :init
+  (add-transient-hook! 'prog-mode-hook #'tmp/enable-parrot-mode)
+  :config
+  (unwind-protect
+      (progn (advice-add #'parrot-start-animation :override #'ignore))
+    (setq! parrot-animate 'hide-static
+           parrot-rotate-animate-after-rotation nil
+           parrot-num-rotations 10
+           parrot-animate-on-load nil
+           parrot-party-on-magit-push t
+           parrot-party-on-org-todo-states '("DONE")
+           parrot-type 'nyan)
+    (advice-remove #'parrot-start-animation #'ignore)))
