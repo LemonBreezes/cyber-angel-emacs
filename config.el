@@ -456,11 +456,6 @@
                            (ace-link-man . pre))
         avy-column-line-overlay t))
 
-(when (modulep! :private corfu)
-  (after! corfu
-    (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
-          corfu-quick2 (cae-keyboard-kbd "jkl;"))))
-
 (use-package! zop-to-char
   :defer t
   :init
@@ -694,9 +689,6 @@
          :map eshell-mode-map
          "TAB" #'completion-at-point
          "<tab>" #'completion-at-point)
-        (:after corfu
-         :map corfu-map
-         "C-M-i" #'corfu-move-to-minibuffer)
         :prefix "M-+"
         "c" #'completion-at-point       ;capf
         "t" #'complete-tag              ;etags
