@@ -372,6 +372,7 @@
       "C-x 4 I" #'ibuffer-other-window
       "M-Z" #'zap-up-to-char
       "<f8>" #'embark-act
+      [remap apropos] nil               ; `consult-apropos' is obsolete.
       (:after vertico
        :map vertico-map
        "<prior>" #'vertico-scroll-down
