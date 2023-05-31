@@ -165,7 +165,7 @@
 
 (define-prefix-command 'cae-project-bookmark-map)
 (map! :map cae-project-bookmark-map
-      :desc "Jump to bookmark" "j" #'cae-project-bookmark-jump
+      :desc "Jump to bookmark" "j" #'cae-project-bookmark
       :desc "Set bookmark" "s" #'cae-project-bookmark-set
       :desc "Delete bookmark" "d" #'cae-project-bookmark-delete
       :desc "Rename bookmark" "r" #'cae-project-bookmark-rename
