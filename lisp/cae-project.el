@@ -6,7 +6,8 @@
 
 ;; TODO make global bookmark for project bookmark dir or make that a project
 ;; bookmark which is shared across branches. We should add support for adding
-;; bookmarks that are shared across branches and maybe adding bookmarks from outside of the project.
+;; bookmarks that are shared across branches and maybe adding bookmarks from
+;; outside of the project.
 
 (defvar cae-project-bookmark-dir (concat (or (bound-and-true-p cae-multi-secrets-dir)
                                              doom-data-dir)
