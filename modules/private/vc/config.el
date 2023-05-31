@@ -1,8 +1,8 @@
 ;;; private/vc/config.el -*- lexical-binding: t; -*-
 
 (when (modulep! :ui vc-gutter)
-  (setopt +vc-gutter-in-remote-files t
-         +vc-gutter-in-margin t))
+  (setq +vc-gutter-in-remote-files t
+        +vc-gutter-in-margin t))
 
 ;; Got these from Prot's config. Say, how do I even use `add-log' and `vc'?
 (after! add-log
