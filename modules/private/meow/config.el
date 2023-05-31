@@ -190,6 +190,7 @@
   (setq meow-keypad-start-keys
         `((?x . ?x)
           (?h . ?h)
+          (?c . ?c)
           (?\; . ?\;)                   ;For embark
           (?\s . ?\s)                   ;For pop mark
           ;; For popups
