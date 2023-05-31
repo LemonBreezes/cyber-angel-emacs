@@ -15,38 +15,39 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
-(after! magit
-  (when (modulep! :editor fold)
-    (map! :map magit-status-mode-map
-          [remap +fold/toggle] #'magit-section-toggle))
-  (setq magit-diff-refine-hunk 'all
-        ;;magit-revision-show-gravatars '("^Author:     " . "^Commit:     ") ;causes lag
-        magit-repository-directories '(("~/src/" . 2))
-        transient-values '((magit-rebase "--autosquash" "--autostash")
-                           (magit-pull "--rebase" "--autostash")
-                           (magit-revert "--autostash")))
-  (when (modulep! :tools magit +forge)
-    (map! :map magit-status-mode-map
-          ;; Killing the Magit status buffer removes the `forge-pull' progress
-          ;; from the modeline. One alternative is setting
-          ;; `forge--mode-line-buffer' every time the new Magit buffer is
-          ;; created in that repo.
-          "q" #'magit-mode-bury-buffer)
-    (after! forge
-      (setq forge-pull-notifications t
-            forge-buffer-draft-p t)
-      (map! :map forge-post-mode-map
-            "<f6>" #'cae-magit-forge-post-hydra/body
-            :map forge-topic-mode-map
-            "<f6>" #'cae-magit-forge-topic-hydra/body
-            :map forge-pullreq-list-mode-map
-            "j" #'+default/search-buffer
-            :map forge-topic-list-mode-map
-            "j" #'+default/search-buffer
-            :map forge-repository-list-mode-map
-            "j" #'+default/search-buffer
-            :map forge-notifications-mode-map
-            "j" #'+default/search-buffer))))
+(when (modulep! :tools magit)
+  (after! magit
+    (when (modulep! :editor fold)
+      (map! :map magit-status-mode-map
+            [remap +fold/toggle] #'magit-section-toggle))
+    (setq magit-diff-refine-hunk 'all
+          ;;magit-revision-show-gravatars '("^Author:     " . "^Commit:     ") ;causes lag
+          magit-repository-directories '(("~/src/" . 2))
+          transient-values '((magit-rebase "--autosquash" "--autostash")
+                             (magit-pull "--rebase" "--autostash")
+                             (magit-revert "--autostash")))
+    (when (modulep! :tools magit +forge)
+      (map! :map magit-status-mode-map
+            ;; Killing the Magit status buffer removes the `forge-pull' progress
+            ;; from the modeline. One alternative is setting
+            ;; `forge--mode-line-buffer' every time the new Magit buffer is
+            ;; created in that repo.
+            "q" #'magit-mode-bury-buffer)
+      (after! forge
+        (setq forge-pull-notifications t
+              forge-buffer-draft-p t)
+        (map! :map forge-post-mode-map
+              "<f6>" #'cae-magit-forge-post-hydra/body
+              :map forge-topic-mode-map
+              "<f6>" #'cae-magit-forge-topic-hydra/body
+              :map forge-pullreq-list-mode-map
+              "j" #'+default/search-buffer
+              :map forge-topic-list-mode-map
+              "j" #'+default/search-buffer
+              :map forge-repository-list-mode-map
+              "j" #'+default/search-buffer
+              :map forge-notifications-mode-map
+              "j" #'+default/search-buffer)))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
@@ -57,11 +58,11 @@
         [remap +vc-gutter/next-hunk]     #'diff-hl-show-hunk-next))
 
 (use-package! git-link
-  :defer t
-  :init
-  (after! magit
-    (map! :map magit-mode-map
-          :n "yc" #'git-link-commit))
+  :defer t :init
+  (when (modulep! :tools magit)
+    (after! magit
+      (map! :map magit-mode-map
+            :n "yc" #'git-link-commit)))
   (after! file-info
     (let ((pos (cl-position-if
                 (lambda (x) (equal (plist-get x :handler)
@@ -87,20 +88,21 @@
   :defer t)
 
 (use-package! git-email
-  :defer t
-  :init
-  (after! mu4e
-    (require 'git-email-mu4e)
-    (git-email-mu4e-mode +1))
-  (setq git-email-subject-regexp
-        "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
+  :defer t :init
+  (when (modulep! :email mu4e)
+    (after! mu4e
+      (require 'git-email-mu4e)
+      (git-email-mu4e-mode +1)))
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
           "RET" #'git-email-format-patch))
   (map! :map dired-mode-map
         :localleader
-        "g" #'git-email-send-email))
+        "g" #'git-email-send-email)
+  :config
+  (setq git-email-subject-regexp
+        "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)"))
 
 ;; `vc-backup' refuses to build on Doom Emacs so I had to fork it and remove the
 ;; autoload line it uses.
