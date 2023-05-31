@@ -209,7 +209,6 @@
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window)
-
     (set-popup-rule! "^\\*notmuch-hello"  :ignore t))
 
   ;; Lower the default popup delay.
