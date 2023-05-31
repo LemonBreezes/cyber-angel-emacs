@@ -265,7 +265,7 @@
     "=." "=>"))
 
 ;; Make typing all-caps more ergonomic.
-(use-package casease
+(use-package! casease
   :config
   (casease-setup
    :hook c-mode-common-hook
