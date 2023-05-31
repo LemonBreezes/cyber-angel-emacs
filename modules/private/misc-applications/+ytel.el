@@ -7,5 +7,5 @@
         :prefix +misc-applications-prefix
         "y" #'ytel)
   :config
-  (setq ytel-invidious-api-url "https://invidious.osi.kr/")
+  (setq ytel-invidious-api-url "https://invidious.snopyta.org/")
   (define-key ytel-mode-map (kbd "<return>") #'ytel-watch))
