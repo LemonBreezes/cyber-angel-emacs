@@ -1,5 +1,7 @@
 ;;; lisp/cae-project.el -*- lexical-binding: t; -*-
 
+;;; Project-local bookmarks.
+
 (defvar cae-project-bookmark-dir (concat doom-cache-dir "cae-project-bookmarks/")
   "Directory to store project bookmarks.")
 
