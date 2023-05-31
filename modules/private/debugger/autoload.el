@@ -52,7 +52,7 @@
     (pop-to-buffer repl-buffer)))
 
 (defvar cae-debugger--session-workspace-map (make-hash-table :test #'equal)
-  "Alist of (session . workspace) pairs.")
+  "Hash table of (session . workspace) pairs.")
 
 ;;;###autoload
 (defun cae-debugger-mark-session-h ()
