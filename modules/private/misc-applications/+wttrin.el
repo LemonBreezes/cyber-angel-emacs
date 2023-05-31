@@ -5,4 +5,8 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "w" #'wttrin))
+        "w" #'wttrin)
+  :config
+  (advice-add #'wttrin-query :after
+              (cae-defun +wttrin-setup-h (&rest _)
+                (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
