@@ -50,13 +50,6 @@
 (defun my-indicate-scroll-backward (f &rest args)
   (my-indicate-scroll (window-start) f args))
 
-(after! restore-point
-  (dolist (command '(View-scroll-half-page-forward
-                     View-scroll-half-page-backward
-                     my-View-scroll-half-page-forward-other-window
-                     my-View-scroll-half-page-backward-other-window))
-    (add-to-list 'rp/restore-point-commands command)))
-
 (after! repeat
   (define-repeat-map View-scroll-half-page-forward
     ("v" View-scroll-half-page-forward)
