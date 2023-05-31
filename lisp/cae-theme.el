@@ -59,6 +59,8 @@
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
+;;; Set theme based on time of day.
+
 ;; `circadian' works very well for me but I want a solution with a lower startup
 ;; cost for my personal config.
 ;;(use-package! circadian
