@@ -1,9 +1,9 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (propertize (if (doom-unreal-buffer-p (current-buffer))
-                  (buffer-name)
-                (breadcrumb-project-crumbs))
+  (propertize (if (doom-real-buffer-p (current-buffer))
+                  (breadcrumb-project-crumbs)
+                (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
 
