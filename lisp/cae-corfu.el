@@ -50,16 +50,17 @@
         corfu-separator ?&
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete)
+  (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
+        :map corfu-map
+        "C-M-i" #'corfu-move-to-minibuffer
+        "RET" nil)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
   (when (modulep! :private corfu +indexed)
-    (corfu-indexed-mode +1)
-    (eval
-     `(map! :map corfu-map
-            "C-M-i" #'corfu-move-to-minibuffer)))
+    (corfu-indexed-mode +1))
   (when (modulep! :editor multiple-cursors)
     (after! multiple-cursors-core 
       (add-to-list 'mc/unsupported-minor-modes 'corfu-mode))))
