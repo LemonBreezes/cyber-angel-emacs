@@ -28,7 +28,8 @@
                             cae-cheatsheets-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
                          cae-cheatsheets-minibuffer--last-tab-index)))
-       (setf (alist-get (tab-bar--current-tab)
+       (setf (alist-get (cons cae-cheatsheets-minibuffer--last-tab-index
+                              cae-cheatsheets-minibuffer--last-tab)
                         cae-cheatsheets-tab-bar-hydra-alist
                         nil nil #'equal)
              cae-cheatsheets-minibuffer--last-hydra))
