@@ -26,7 +26,9 @@
        ,(cae-keyboard-kbd "3") split-window-right
        "M-o" ace-swap-window)
       (:enter cae-repeat-blink-cursor)
-      (:exit "/" +workspace/display))
+      (:exit
+       "/" +workspace/display
+       "?" tab-select))
    t)
 
   (define-repeat-map isearch-repeat
@@ -35,6 +37,7 @@
 
   (defun cae-repeat-blink-cursor ()
     (interactive)
+    (message "Window mode active. Press TAB to exit.")
     (+nav-flash-blink-cursor))
 
   (eval
@@ -48,7 +51,9 @@
        "1" tab-close-other
        "2" tab-new)
       (:enter tab-select)
-      (:exit "/" cae-repeat-blink-cursor))
+      (:exit
+       "/" cae-repeat-blink-cursor
+       "?" +workspace/display))
    t)
 
   (eval
