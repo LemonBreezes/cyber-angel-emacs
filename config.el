@@ -17,7 +17,7 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ; Different computers
+  (let ((font-size-offset (if (getenv "SSH_TTY") 0 2))) ;Different computers
     (setq doom-font (font-spec :family "Iosevka Comfy"
                                :size (+ 16 font-size-offset))
           doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
@@ -39,8 +39,8 @@
         tab-bar-new-button     nil))
 (run-with-idle-timer 1.5 nil #'tab-bar-mode +1)
 
-(setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
-      truncate-string-ellipsis "..."    ; The unicode ellipsis is ugly to me
+(setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
+      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t)
 
 (when (and (modulep! :ui modeline)
@@ -54,7 +54,7 @@
         which-key-compute-remaps t))
 
 (after! eros
-  (setq eros-eval-result-prefix "⟹ "))  ; Pretty arrow
+  (setq eros-eval-result-prefix "⟹ "))  ;Pretty arrow
 
 ;; Do not spam me with warnings
 (after! warnings
@@ -338,7 +338,7 @@
 ;; Do not automatically continue comments.
 (advice-remove #'newline-and-indent #'+default--newline-indent-and-continue-comments-a)
 
-(map! [remap backward-kill-word] #'doom/delete-backward-word ; Do not litter the kill-ring.
+(map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
       [remap upcase-word] #'upcase-dwim
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
@@ -585,22 +585,22 @@
     :init
     (map! "C-h C-m" #'describe-keymap
           "C-h <return>" #'info-emacs-manual
-          "C-x C-k C-k" #'consult-kmacro ; replaces
-                                        ; `kmacro-end-or-call-macro-repeat',
-                                        ; which is similar to
-                                        ; `kmacro-end-and-call-macro' from `<f4>'
-                                        ; and `C-x e'.
+          "C-x C-k C-k" #'consult-kmacro ;replaces
+                                        ;`kmacro-end-or-call-macro-repeat',
+                                        ;which is similar to
+                                        ;`kmacro-end-and-call-macro' from `<f4>'
+                                        ;and `C-x e'.
           ;; C-x bindings (ctl-x-map)
-          "C-x M-:" #'consult-complex-command ; orig. repeat-complex-command
-          "C-x r SPC" #'consult-register-store ; orig. abbrev-prefix-mark (unrelated)
+          "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
+          "C-x r SPC" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
           "M-#" #'consult-register
           [remap jump-to-register] #'consult-register-load
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
           "M-g e" #'consult-compile-error
-          "M-g g" #'consult-goto-line   ; orig. goto-line
-          "M-g M-g" #'consult-goto-line ; orig. goto-line
-          "M-g o" #'consult-outline     ; Alternative: consult-org-heading
+          "M-g g" #'consult-goto-line   ;orig. goto-line
+          "M-g M-g" #'consult-goto-line ;orig. goto-line
+          "M-g o" #'consult-outline     ;Alternative: consult-org-heading
           "M-g m" #'consult-mark
           "M-g k" #'consult-global-mark
           "M-g I" #'consult-imenu-multi
@@ -613,23 +613,23 @@
           ;; Isearch integration
           "M-s e" #'consult-isearch-history
           :map isearch-mode-map
-          "M-e" #'consult-isearch-history   ; orig. isearch-edit-string
-          "M-s e" #'consult-isearch-history ; orig. isearch-edit-string
-          "M-s l" #'consult-line ; needed by consult-line to detect isearch
-          "M-s L" #'consult-line-multi ; needed by consult-line to detect isearch
+          "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
+          "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
+          "M-s l" #'consult-line ;needed by consult-line to detect isearch
+          "M-s L" #'consult-line-multi ;needed by consult-line to detect isearch
           ;; Minibuffer history
           :map minibuffer-local-map
-          "M-s" #'consult-history  ; orig. next-matching-history-element
-          "M-r" #'consult-history ; orig. previous-matching-history-element
+          "M-s" #'consult-history  ;orig. next-matching-history-element
+          "M-r" #'consult-history ;orig. previous-matching-history-element
           :map global-map
           (:unless (modulep! :config default)
            "M-g f" #'consult-flymake
            (:unless (and (modulep! :checkers syntax)
                          (not (modulep! :checkers syntax +flymake)))
             "M-g f" #'consult-flycheck)
-           "M-s d" #'consult-find ; does not cache files like Doom & Projectile do,
-                                        ; also slower than `fd'. See Minad's comment in
-                                        ; https://github.com/minad/consult/issues/363
+           "M-s d" #'consult-find ;does not cache files like Doom & Projectile do,
+                                        ;also slower than `fd'. See Minad's comment in
+                                        ;https://github.com/minad/consult/issues/363
            "M-s r" #'consult-ripgrep
            "M-s D" #'consult-locate))
     :config
@@ -658,11 +658,11 @@
         (:after corfu
          :map corfu-map
          "C-M-i" #'corfu-move-to-minibuffer
-         "}" #'corfu-quick-complete)    ; `}' is easy to type on my keyboard layout
+         "}" #'corfu-quick-complete)    ;`}' is easy to type on my keyboard layout
         :prefix "M-+"
-        "c" #'completion-at-point       ; capf
-        "t" #'complete-tag              ; etags
-        "d" #'cape-dabbrev              ; or dabbrev-completion
+        "c" #'completion-at-point       ;capf
+        "t" #'complete-tag              ;etags
+        "d" #'cape-dabbrev              ;or dabbrev-completion
         "f" #'cape-file
         "k" #'cape-keyword
         "h" #'cape-history
