@@ -468,10 +468,6 @@
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
 
-(use-package! chatgpt-shell
-  :defer t :init
-  (map! :leader "g" #'chatgpt-shell))
-
 
 ;;; Editor
 
