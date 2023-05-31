@@ -5,6 +5,7 @@
 (defvar cae-cheatsheets-minibuffer--last-hydra nil)
 (defvar cae-cheatsheets-minibuffer--last-workspace nil)
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
+(defvar cae-cheatsheets-minibuffer--last-tab-index nil)
 
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
