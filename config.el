@@ -160,8 +160,7 @@
              browse-url-generic-args '("--no-sandbox")
              browse-url-chromium-program "chromium-bin"))
       ((not (display-graphic-p))
-       (setq browse-url-browser-function #'browse-url-generic
-             browse-url-generic-program "w3m")))
+       (setq browse-url-browser-function #'eww-browse-url)))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
