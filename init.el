@@ -23,13 +23,13 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-(defvar cae-init-ui-enabled-p t
+(defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is disabled.")
-(defvar cae-init-tools-enabled-p t
+(defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is disabled.")
-(defvar cae-init-editor-enabled-p t
+(defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is disabled.")
-(defvar cae-init-autocompletion-enabled-p t
+(defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is disabled.")
 
 (doom! :completion
