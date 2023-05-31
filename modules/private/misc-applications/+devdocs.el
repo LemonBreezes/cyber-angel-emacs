@@ -9,8 +9,8 @@
           :desc "Read from first page" "p" #'devdocs-peruse
           :desc "Install doc" "i" #'devdocs-install
           :desc "Delete doc" "d" #'devdocs-delete
-          :desc "Search doc" "l" #'devdocs-lookup
-          :desc "Search devdocs website" "s" #'devdocs-search
+          :desc "Search doc" "s" #'devdocs-lookup
+          :desc "Search devdocs website" "w" #'devdocs-search
           :desc "Update all docs" "u" #'devdocs-update-all)))
   :config
   (setq devdocs-data-dir (expand-file-name "devdocs" doom-data-dir))
