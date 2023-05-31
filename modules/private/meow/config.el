@@ -182,11 +182,12 @@
         "DEL" #'meow-keypad
         :map meow-motion-state-keymap
         "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c")))))
-  ;;(map! :leader
-  ;;      :desc "help" "h" help-map)
+  (map! :leader
+        :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
+          (?h . ?h)
           (?\; . ?\;)                   ;For embark
           (?\s . ?\s)                   ;For pop mark
           ;; For popups
