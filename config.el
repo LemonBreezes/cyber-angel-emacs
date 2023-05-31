@@ -97,9 +97,11 @@
 
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
-  (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
-  (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
-  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
+  (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
+    :ttl nil)
+  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
+  (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
+    :quit nil :ttl t)
   (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl t)
@@ -115,13 +117,15 @@
     :side 'right :select t :quit t :ttl 0)
   (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
     :height 0.6 :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
-  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer
-    :side 'right :select t :ttl nil)
+  (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
+    :select t :quit t :ttl nil)
+  (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
+    :select t :ttl nil)
   (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
     :side 'right :select t :ttl nil)
   (after! embark
-    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer) :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
+    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+      :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
 ;; Lower the default popup delay.
