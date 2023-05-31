@@ -214,7 +214,8 @@
                                              "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
     (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))))
+    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled")))))
 
 ;; I have this disabled because I never use it to scroll the window.
 (when (modulep! +pretty)
