@@ -204,7 +204,7 @@
     (set-popup-rule! "^\\*devdocs\\*$" :width 122
       :side 'right :ttl t :select t :quit t :ttl 0) ; which slot/vslot?
     (set-popup-rule! "^Trash Can " :size 0.3 :side 'bottom :select t :quit t
-      :ttl 0)                          ; which slot/vslot?
+      :ttl 0)                           ; which slot/vslot?
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
