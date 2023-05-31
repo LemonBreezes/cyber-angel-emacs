@@ -27,9 +27,3 @@
   (if (derived-mode-p 'gdb-frames-mode)
       (call-interactively #'gdb-select-frame)
     (call-interactively #'comint-send-input)))
-
-;;;###autoload
-(defun cae-debugger-projectile-run-gdb ()
-  (interactive)
-  (let ((gdb-show-main nil))
-    (call-interactively #'projectile-run-gdb)))
