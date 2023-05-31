@@ -8,7 +8,8 @@
 
 (defun cae-project--get-bookmark-file (&optional project)
   "Return the bookmark file for PROJECT."
-  (expand-file-name "bookmarks" (doom-project-root project)))
+  (expand-file-name (concat (doom-project-name) "/default")
+                    cae-project-bookmark-dir))
 
 (defun cae-project--bookmark-alist-from-file (file)
   "Return a bookmark alist from FILE."
@@ -25,6 +26,9 @@
                  cae-project-bookmark-cache))))
 
 (defun cae-project-bookmark-jump ()
-  )
+  (let ((project (doom-project-name))
+        (bookmark (completing-read "Jump to bookmark: "
+                                   (cae-project--bookmark-alist))))
+    (bookmark-jump bookmark)))
 
 (defun cae-project-bookmark-set ())
