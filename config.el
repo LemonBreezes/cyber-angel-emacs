@@ -1085,7 +1085,8 @@
                    +workspace/switch-right +workspace/switch-to-final
                    +workspace/restore-last-session +workspace/kill-session-and-quit
                    +workspace/close-window-or-workspace
-                   read-only-mode)))
+                   read-only-mode))
+      (add-to-list 'mc/cmds-to-run-once cmd))
     (add-hook 'persp-before-switch-functions #'mc/freeze-fake-cursors)
     (add-to-list 'mc/unsupported-minor-modes #'cae-completion-mode)
     (define-key mc/keymap (kbd "C-. .")     #'mc/move-to-column)
