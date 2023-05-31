@@ -11,18 +11,18 @@
     (map! :map elfeed-show-mode-map
           "?" #'describe-mode
           :map elfeed-search-mode-map
-          "?" #'describe-mode)
-    `(defhydra cae-elfeed-hydra ()
-       "filter"
-       ("c" (elfeed-search-set-filter "@6-months-ago +cs") "cs")
-       ("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
-       ("d" (elfeed-search-set-filter "@6-months-ago +education") "education")
-       ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-       ;;("M" elfeed-toggle-star "Mark")
-       ("A" (elfeed-search-set-filter "@6-months-ago") "All")
-       ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
-       ("Q" +elfeed-quit "Quit Elfeed" :color blue)
-       ("q" nil "quit" :color blue))
+          "?" #'describe-mode
+          "q" #'+elfeed-quit)
+    (defhydra cae-elfeed-hydra ()
+      "filter"
+      ("c" (elfeed-search-set-filter "@6-months-ago +cs") "cs")
+      ("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+      ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
+      ;;("M" elfeed-toggle-star "Mark")
+      ("A" (elfeed-search-set-filter "@6-months-ago") "All")
+      ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
+      ("Q" +elfeed-quit "Quit Elfeed" :color blue)
+      ("q" nil "quit" :color blue))
     (map! :map elfeed-search-mode-map
           "<f6>" #'cae-elfeed-hydra/body)
 
