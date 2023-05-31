@@ -71,3 +71,6 @@
       (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
                                                  circadian-themes))
                            doom-theme)))))
+
+(use-package! theme-magic
+  :defer t)
