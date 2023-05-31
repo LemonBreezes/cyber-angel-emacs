@@ -37,8 +37,8 @@
 	(let ((blist (bookmark-alist-from-buffer)))
 	  (unless (listp blist)
 	    (error "Invalid bookmark list in %s" file))
-          (setq bookmark-alist blist
-	        bookmark-alist-modification-count 0))
+          ;; TODO: Make modification count compatible.
+          (setq bookmark-alist blist))
 	(kill-buffer (current-buffer)))
       bookmark-alist)))
 
