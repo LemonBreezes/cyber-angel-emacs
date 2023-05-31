@@ -758,11 +758,21 @@
   :config
   (speedrect-hook))
 
-
+(use-package! restore-point
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'restore-point-mode)
+  :config
+  (defun cae-restore-point-enable-in-minibuffer-h ()
+    (if restore-point-mode
+        (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)))
+  (add-hook 'restore-point-mode #'cae-restore-point-enable-in-minibuffer-h))
+
+  
 ;;; Autocompletion
 
-(when (modulep! :private corfu)
-  (load! "lisp/cae-corfu"))
+  (when (modulep! :private corfu)
+    (load! "lisp/cae-corfu"))
 
 (after! yasnippet
   (setq yas-triggers-in-field t))       ;Allow nested snippets.
