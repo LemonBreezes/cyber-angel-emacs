@@ -65,9 +65,10 @@
 
 (defadvice! cae-hacks-magit-do-not-deincrement-a (&optional arg try-vscroll)
   :filter-args '(magit-previous-line magit-next-line)
-  (when (and (numberp arg)
-           (> arg 0)
-           transient-mark-mode
-           (not (region-active-p)))
-    (cl-incf arg))
+  (+log arg try-vscroll)
+  (and (numberp arg)
+             (> arg 0)
+             transient-mark-mode
+             (not (region-active-p)))
+    (cl-incf arg)
   (list arg try-vscroll))
