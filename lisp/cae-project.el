@@ -7,7 +7,7 @@
   "Cache of project bookmarks.")
 
 (defvar cae-project-bookmark-separate-into-branches t
-  "If non-nil, separate bookmarks into branches.")
+  "If non-nil, separate bookmarks into Git branches.")
 
 (defun cae-project--get-bookmark-file (&optional project)
   "Return the bookmark file for PROJECT."
