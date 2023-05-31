@@ -384,11 +384,13 @@
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
-(after! dabbrev
+(use-package! dabbrev
+  :defer t :config
   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
         dabbrev-upcase-means-case-search t))
 
-(after! hippie-exp
+(use-package! hippie-exp
+  :defer t :config
   (setq  hippie-expand-try-functions-list
           '(try-complete-file-name-partially
             try-complete-file-name
