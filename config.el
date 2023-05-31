@@ -19,17 +19,17 @@
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
 ;; bound to `org-mark-ring-goto'.
 (when (modulep! :checkers syntax)
+  (after! which-key
+      (setq which-key-replacement-alist
+            (delete '(("\\`C-c !\\'") nil . "checkers")
+                    which-key-replacement-alist)))
   (after! flycheck
     (define-key flycheck-mode-map flycheck-keymap-prefix nil)
     (setq flycheck-keymap-prefix (kbd "C-c C"))
     (define-key flycheck-mode-map flycheck-keymap-prefix
       flycheck-command-map)
     (map! :leader
-          (:prefix ("C" . "checkers")))
-    (after! which-key
-      (setq which-key-replacement-alist
-            (delete '(("\\`C-c !\\'") nil . "checkers")
-                    which-key-replacement-alist)))))
+          (:prefix ("C" . "checkers")))))
 (when (modulep! :editor snippets)
   (dolist (p (cdr (lookup-key doom-leader-map "&")))
     (cl-destructuring-bind (key . binding) p
