@@ -112,10 +112,12 @@
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
     :ttl nil :vslot 99)
-  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
+  (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
+    :ttl nil)                           ; which vslot?
   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-    :quit nil :ttl t)
-  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
+    :quit nil :ttl t)                   ; which vslot?
+  (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
+    :quit nil)                          ; which vslot?
   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
   (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
