@@ -1,6 +1,0 @@
-# package.accept_keywords# required by =app-editors/emacs-29.0.9999 (argument)
-=app-editors/emacs-29.0.9999 **
-# required by efm-langserver (argument)
-=dev-util/efm-langserver-9999 **
-x11-drivers/nvidia-drivers **
->=sys-apps/kmscon-9.0.0 **
