@@ -561,24 +561,26 @@
           cae-raise-sexp-dwim))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))
-    (map! "M-r" #'cae-raise-sexp-dwim
-          "C-M-f" #'sp-forward-sexp
-          "C-M-b" #'sp-backward-sexp
-          "C-M-u" #'sp-backward-up-sexp
-          "C-M-n" #'sp-up-sexp
-          "C-M-p" #'sp-backward-down-sexp
-          "C-M-d" #'sp-down-sexp
-          "C-M-a" #'sp-beginning-of-sexp
-          "M-(" #'sp-wrap-round
-          "C-(" #'sp-forward-slurp-sexp
-          "C-<right>" #'sp-forward-slurp-sexp
-          "C-}" #'sp-forward-barf-sexp
-          "C-<left>" #'sp-forward-barf-sexp
-          "C-{" #'sp-backward-barf-sexp
-          "C-M-<right>" #'sp-backward-slurp-sexp
-          "M-S" #'sp-split-sexp
-          "M-J" #'sp-join-sexp
-          "M-C" #'sp-convolute-sexp)))
+    (map!
+     ;; My version of `sp-paredit-bindings'
+     "M-r" #'cae-raise-sexp-dwim
+     "C-M-f" #'sp-forward-sexp
+     "C-M-b" #'sp-backward-sexp
+     "C-M-u" #'sp-backward-up-sexp
+     "C-M-n" #'sp-up-sexp
+     "C-M-p" #'sp-backward-down-sexp
+     "C-M-d" #'sp-down-sexp
+     "C-M-a" #'sp-beginning-of-sexp
+     "M-(" #'sp-wrap-round
+     "C-(" #'sp-forward-slurp-sexp
+     "C-<right>" #'sp-forward-slurp-sexp
+     "C-}" #'sp-forward-barf-sexp
+     "C-<left>" #'sp-forward-barf-sexp
+     "C-{" #'sp-backward-barf-sexp
+     "C-M-<right>" #'sp-backward-slurp-sexp
+     "M-S" #'sp-split-sexp
+     "M-J" #'sp-join-sexp
+     "M-C" #'sp-convolute-sexp)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
