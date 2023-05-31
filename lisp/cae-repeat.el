@@ -102,7 +102,9 @@
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
        "r" +workspace/rename
-       "d" +workspace/display))
+       ;;"d" +workspace/display
+       )
+      (:enter +workspace/display))
    t)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
