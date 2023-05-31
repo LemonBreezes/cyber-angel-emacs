@@ -771,3 +771,6 @@
 ;; The recentf and sudo commands are useful enough to keep. Overall, though I
 ;; can use some of these commands without the leader key, these keybindings are
 ;; all convenient.
+
+;; What I would be missing is mainly `recentf', sudo stuff, opening scratch
+;; buffers... I think I prefer to use this as the leader key in Meow.
