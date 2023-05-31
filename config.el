@@ -510,6 +510,7 @@
 
   (use-package! 0x0
     :defer t :init
+    (map! "C-x U" #'0x0-dwim)
     (after! embark
       (define-key embark-region-map (kbd "U") '0x0-dwim))))
 
