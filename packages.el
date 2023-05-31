@@ -3,7 +3,7 @@
 (disable-packages! evil-escape
                    flyspell
                    ccls)
-(unless (modulep! :config +smartparens)
+(unless (modulep! :config defaulnt +smartparens)
   (disable-packages! smartparens))
 
 ;;; UI
