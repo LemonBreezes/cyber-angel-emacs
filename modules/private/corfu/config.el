@@ -152,7 +152,7 @@ derivative.")
   :after savehist
   :hook (corfu-mode . corfu-history-mode)
   :config
-  (add-to-list 'savehist-additional-variables 'corfu-history nil #'eq))
+  (add-to-list 'savehist-additional-variables 'corfu-history))
 (use-package! corfu-popupinfo
   :hook (corfu-mode . corfu-popupinfo-mode)
   :config
