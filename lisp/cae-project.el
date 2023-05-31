@@ -147,7 +147,8 @@
   (interactive
    (list
     (let ((narrow (mapcar (pcase-lambda (`(,x ,y ,_)) (cons x y))
-                          consult-bookmark-narrow)))
+                          (progn (require 'consult)
+                                 consult-bookmark-narrow))))
       (cae-project--with-bookmark-alist nil
         (consult--read
          (consult--bookmark-candidates)
