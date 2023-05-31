@@ -40,7 +40,7 @@
        (spell +everywhere)
 
        :tools
-       debugger
+       (debugger +lsp)
        editorconfig
        (eval +overlay)
        lookup
