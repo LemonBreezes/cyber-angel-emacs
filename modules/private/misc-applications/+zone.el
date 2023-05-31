@@ -38,12 +38,14 @@
   ;; Quit out of the minibuffer if necessary before zoning.q
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
-    (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil
-                 (lambda ()
-                   (let ((wconf (current-window-configuration)))
-                     (select-window (car (doom-visible-windows)))
-                     (delete-other-windows)
-                     (apply oldfun args)
-                     (set-window-configuration wconf))))
-    (dotimes (i (minibuffer-depth))
-      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))
+    (let ((zone-fn (lambda ()
+                     (let ((wconf (current-window-configuration)))
+                       (select-window (car (doom-visible-windows)))
+                       (delete-other-windows)
+                       (apply oldfun args)
+                       (set-window-configuration wconf)))))
+      (if (not (minibufferp))
+          (funcall zone-fn)
+        (run-at-time (* 0.01 (minibuffer-depth)) nil zone-fn)
+        (dotimes (i (minibuffer-depth))
+          (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))))
