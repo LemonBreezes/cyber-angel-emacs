@@ -74,6 +74,7 @@
 (package! switch-window)
 (package! jinx)
 (package! transpose-frame)
+
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
 (package! ialign)
