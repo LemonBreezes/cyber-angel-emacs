@@ -636,9 +636,16 @@
                   (let ((avy-indent-line-overlay t))
                     (apply oldfun args))))
     (advice-add #'avy-goto-line-above :around
-                (cae-defun cae-avy-goto-line-above-use-bottom-up-a (oldfun &optional offset bottom-up)
+                (cae-defun cae-avy-goto-line-above-use-bottom-up-a
+                    (oldfun &optional offset bottom-up)
                   (ignore-error 'wrong-type-argument
                     (funcall oldfun offset (not bottom-up)))))
+    (advice-add #'avy-goto-line-below :around
+                (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
+                  (ignore-error 'wrong-type-argument
+                    (apply oldfun args))))
+    (advice-add #'cae-avy-embark-act-on-region :around
+                #'cae-ignore-wrong-type-argument-a)
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
