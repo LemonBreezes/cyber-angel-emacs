@@ -158,7 +158,14 @@
           "x" #'meow-save
           "X" #'meow-sync-grab
           "y" #'meow-yank
-          "z" #'meow-pop-selection)))
+          "z" #'meow-pop-selection
+          ;; commands not bound by default
+          "Z" #'meow-pop-all-selection
+          ,(cae-keyboard-kbd "&") #'meow-query-replace
+          "%" #'meow-query-replace-regexp
+          "Y" #'meow-yank-pop
+          "\\" #'quoted-insert
+          )))
 
 (use-package! meow
   :init
@@ -178,6 +185,8 @@
   (when (modulep! :private corfu)
     (after! corfu
       (add-hook 'meow-normal-mode-hook #'corfu-quit)))
+  ;; Make Meow usarable in TUI Emacs.
+  (meow-esc-mode +1)
   (setq meow-esc-delay 0.001
         meow-use-clipboard t
         meow-select-on-change t
