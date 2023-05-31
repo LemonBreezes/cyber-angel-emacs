@@ -131,6 +131,10 @@
 (after! ace-link
   (add-to-list 'avy-styles-alist '(ace-link-man . pre)))
 
+(when (featurep! :checkers syntax +posframe)
+  (after! flycheck-posframe
+    (setq! flycheck-posframe-border-width 1
+           flycheck-posframe-border-use-error-face t)))
 
 
 ;;; Tools
