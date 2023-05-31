@@ -45,8 +45,11 @@
          (bookmark-save-flag nil))
      (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file
              bookmark-save-flag)
-     ,@body
-     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)))
+     (advice-add #'bookmark-maybe-load-default-file :override #'ignore)
+     (unwind-protect
+         (progn ,@body)
+       (advice-remove #'bookmark-maybe-load-default-file #'ignore)
+     (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache))))
 
 (defun cae-project-bookmark-set (&optional name no-overwrite)
   "Set a bookmark in the current project."
