@@ -18,13 +18,6 @@
   ;;("M-<right>" tabulated-list-next-column "Next column" :column "Navigate")
   ("<f6>" nil "Exit" :exit t :column nil))
 
-;;;;;###autoload (autoload 'cae-embark-collect-cheatsheet "autoload/cae-cheatsheets" nil t)
-;;(defun cae-embark-collect-cheatsheet () (interactive))
-;;(hercules-def
-;; :toggle-funs #'cae-embark-collect-cheatsheet
-;; :keymap 'embark-collect-mode-map
-;; :package 'embark)
-
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
 (defun cae-debugger-cheatsheet () (interactive))
 (hercules-def
