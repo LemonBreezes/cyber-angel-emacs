@@ -126,6 +126,7 @@
         "C-c ;" #'embark-export
         "C-c C-;" nil))
 
+;; TODO Make conditional key translations composable.
 (defun cae-make-conditional-key-translation (key-from key-to translate-keys-p)
   "Make a Key Translation such that if the translate-keys-p function returns true,
    key-from translates to key-to, else key-from translates to itself.  translate-keys-p
