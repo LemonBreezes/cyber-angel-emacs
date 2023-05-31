@@ -96,5 +96,4 @@
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
     (setq! nyan-bar-length 20
-           nyan-minimum-window-width 20
-           nyan-animation-frame-interval 0.1)))
+           nyan-minimum-window-width 20)))
