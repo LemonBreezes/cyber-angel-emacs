@@ -173,7 +173,7 @@
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
-;; Tools
+;;; Tools
 
 ;; (load! "lisp/cae-webkit.el")
 
