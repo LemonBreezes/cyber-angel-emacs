@@ -18,6 +18,7 @@
       (eval
        '(defhydra+ dap-hydra ()
           ("<f6>" nil "quit")
+          ("er" dap-ui-expressions-remove "Remove expression" :column "Eval")
           ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart"))))
 
     (when (modulep! :private corfu)
