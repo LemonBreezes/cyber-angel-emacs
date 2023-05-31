@@ -9,7 +9,8 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
-(package! lv)                           ;Added because I was getting an error
+;;(package! lv)
+                                        ;Added because I was getting an error
                                         ;about it not being installed.
 
 ;;; UI
