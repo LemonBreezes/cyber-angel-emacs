@@ -113,3 +113,6 @@
                             (char-to-string org-indent-boundary-char)
                           "\u200b"))
                 nil 'face 'org-indent)))))
+
+(use-package! org-src-context
+  :defer t)
