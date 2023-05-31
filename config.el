@@ -632,8 +632,8 @@
                          (not (modulep! :checkers syntax +flymake)))
             "M-g f" #'consult-flycheck)
            "M-s d" #'consult-find ;; does not cache files like Doom & Projectile do
-           "M-s D" #'consult-locate)
-          )
+           "M-s r" #'consult-ripgrep
+           "M-s D" #'consult-locate))
     :config
     (setq consult-preview-key 'any)
     (consult-customize
