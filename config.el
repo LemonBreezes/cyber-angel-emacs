@@ -609,6 +609,7 @@
           "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
           "M-g m" #'consult-mark
           "M-g k" #'consult-global-mark
+          "M-g I" #'consult-imenu-multi
           ;; M-s bindings (search-map)
           [remap Info-search] #'consult-info
           "M-s i" #'consult-info
@@ -624,7 +625,15 @@
           ;; Minibuffer history
           :map minibuffer-local-map
           "M-s" #'consult-history  ;; orig. next-matching-history-element
-          "M-r" #'consult-history) ;; orig. previous-matching-history-element
+          "M-r" #'consult-history ;; orig. previous-matching-history-element
+          (:unless (modulep! :config default)
+           "M-g f" #'consult-flymake
+           (:unless (and (modulep! :checkers syntax)
+                         (not (modulep! :checkers syntax +flymake)))
+            "M-g f" #'consult-flycheck)
+           "M-s d" #'consult-find ;; does not cache files like Doom & Projectile search
+           "M-s D" #'consult-locate)
+          )
     :config
     (setq consult-preview-key 'any)
     (consult-customize
