@@ -144,6 +144,7 @@
           "F" #'meow-right-expand       ;T -> F
           "u" #'meow-undo
           "U" #'meow-undo-in-selection
+          "_" #'undo-fu-only-redo
           "v" #'meow-visit
           "h" #'meow-next-word          ;w -> h
           "H" #'meow-next-symbol        ;W -> H
