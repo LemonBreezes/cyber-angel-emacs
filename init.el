@@ -70,6 +70,7 @@
        dired
        lisp
        misc-applications
+       helm
        unpackaged
        vc)
 
