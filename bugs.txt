@@ -1,0 +1,8 @@
+Debugger entered--Lisp error: (wrong-type-argument bufferp "magit-log: atlas")
+  buffer-local-value(major-mode "magit-log: atlas")
+  (let ((buffer-mode (buffer-local-value 'major-mode buffer))) (display-buffer buffer (cond ((and (eq buffer-mode 'magit-status-mode) (get-buffer-window buffer)) '(display-buffer-reuse-window)) ((or (and (boundp 'git-commit-mode) git-commit-mode) (eq buffer-mode 'magit-process-mode)) (let ((size (if ... 0.35 0.7))) (list 'display-buffer-below-selected (cons 'window-height (truncate ...))))) ((or (not (derived-mode-p 'magit-mode)) (not (memq (save-current-buffer ... major-mode) '...))) '(display-buffer-same-window)) ('(+magit--display-buffer-in-direction)))))
+  +magit-display-buffer-fn("magit-log: atlas")
+  magit-display-buffer("magit-log: atlas")
+  magit-display-repository-buffer("magit-log: atlas")
+  funcall-interactively(magit-display-repository-buffer "magit-log: atlas")
+  command-execute(magit-display-repository-buffer)
