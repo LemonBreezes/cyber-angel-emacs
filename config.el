@@ -241,15 +241,18 @@
             lsp-ui-doc-include-signature t))
     (after! lsp-clangd
       (setq lsp-clients-clangd-args
-            '("-j=3"
+            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
               "--background-index"
               "--clang-tidy"
               "--completion-style=detailed"
               "--header-insertion=never"
-              "--header-insertion-decorators=0"))
-      (set-lsp-priority! 'clangd 2))
+              "--header-insertion-decorators=0")))
     (after! ccls
-      (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+      (setq ccls-initialization-options '(:index (:comments 2)
+                                          :completion (:detailedLabel t)
+                                          :trackDependency 1
+                                          :threads ,(max 1 (/ (doom-system-cpus) 2))
+                                        ))
       (set-lsp-priority! 'ccls 2))
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
