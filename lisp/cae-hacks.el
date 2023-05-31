@@ -17,7 +17,7 @@
   :before-until #'+workspace/switch-to
   (minibuffer-window-active-p (selected-window)))
 
-;; Prevent hydras/hercules from remaining active when switching workspaces.
+;; Prevent Hydra & Hercules from remaining active when switching workspaces.
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (after! hydra
