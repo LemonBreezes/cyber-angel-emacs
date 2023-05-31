@@ -592,8 +592,6 @@
                       fn))
                   er/try-expand-list)))
 
-  (advice-add #'persp-set-keymap-prefix :override #'ignore)
-
   (setq set-mark-command-repeat-pop t
         next-line-add-newlines t)
 
