@@ -19,6 +19,28 @@
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
     ,(expand-file-name "doom-cli.el" doom-core-dir)))
 
+(defun cae-compile-pdf-tools ()
+  (unless (ignore-errors (and (require 'pdf-tools nil t)
+                              (pdf-info-check-epdfinfo))
+                         t)
+    (advice-add #'fboundp :around
+                (defun tmp/fboundp-a (oldfun function)
+                  (unless (eq function 'make-process)
+                    (funcall oldfun function))))
+    (advice-add #'exwm-input--update-focus-commit :override
+                #'ignore)
+    (let ((compilation-filter-hook
+           (remove 'comint-truncate-buffer compilation-filter-hook)))
+      (unwind-protect
+          (pdf-tools-build-server (or (and (stringp pdf-info-epdfinfo-program)
+                                           (file-name-directory
+                                            pdf-info-epdfinfo-program))
+                                      pdf-tools-directory)
+                                  ;; Use system versions of dependencies.
+                                  t)
+        (advice-remove #'fboundp #'tmp/fboundp-a)
+        (advice-remove #'exwm-input--update-focus-commit #'ignore)))))
+
 ;;;###autoload
 (defun cae-compile-this-elisp-file ()
   (unless (or no-byte-compile
