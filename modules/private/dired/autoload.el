@@ -29,3 +29,26 @@
     (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
       (if fn (funcall fn) (dirvish-kill dv)))
     (find-file file)))
+
+(defun cae-dired-find-file-a (oldfun file &optional wildcards)
+  "Like `find-file', but might exit the current Dirvish session."
+  (interactive
+   (find-file-read-args "Find file: "
+                        (confirm-nonexistent-file-or-buffer)))
+  (let ((dir (file-name-directory file)))
+    (unless (file-equal-p dir default-directory)
+      (funcall oldfun dir)))
+  (unless (file-directory-p file)
+    ;; Copied from `dirvish-find-entry-a'
+    (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+      (if fn (funcall fn) (dirvish-kill dv)))
+    (funcall oldfun file)))
+
+(defmacro cae-dired-find-file-wrapper (fn)
+  "Wrap FN to exit Dirvish sessions when opening files."
+  `(cae-defun ,(intern (format "cae-dired-%s" fn)) ()
+     (interactive)
+     (let ((dir default-directory))
+       (advice-add #'find-file :around #'cae-dired-find-file-a)
+       (unwind-protect (call-interactively #',fn)
+         (advice-remove #'find-file #'cae-dired-find-file-a)))))
