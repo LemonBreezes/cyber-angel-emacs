@@ -121,9 +121,10 @@
   (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
   (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t)
-  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -8)
+    :side 'right :select t :quit t)     ; which vslot?
+  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
+    :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
+    :slot 2 :vslot -8)
   (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
     :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
