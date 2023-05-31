@@ -35,7 +35,7 @@ normally have their errors suppressed."
       (apply func args)
     ((debug error) (signal (car err) (cdr err)))))
 
-(defun toggle-debug-on-hidden-errors (func)
+(defun cae-debug-function-on-hidden-errors (func)
   "Toggle hidden error debugging for function FUNC."
   (interactive "aFunction: ")
   (cond
