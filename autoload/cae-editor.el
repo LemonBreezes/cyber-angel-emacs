@@ -1,27 +1,23 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
-
 ;;;###autoload
 (defun cae-kill-buffer-query-diff-a (orig-func &optional buffer-or-name)
   "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
   (setq buffer-or-name (or buffer-or-name (current-buffer)))
-  (if (and (buffer-local-value 'buffer-file-name
-                               (get-buffer buffer-or-name))
-           (buffer-modified-p (get-buffer buffer-or-name)))
-      (catch 'quit
-        (save-window-excursion
-          (with-current-buffer buffer-or-name
-            (let (done (buf (current-buffer)))
-              (while (not done)
-                (let ((response (read-char-choice
-                                 (format "Save file %s? (y, n, d, q) " (buffer-file-name buf))
-                                 '(?y ?n ?d ?q))))
-                  (setq done (cond
-                              ((eq response ?q) (throw 'quit nil))
-                              ((eq response ?y) (save-buffer) t)
-                              ((eq response ?n) (set-buffer-modified-p nil) t)
-                              ((eq response ?d) (diff-buffer-with-file) nil)))))
-              (funcall orig-func buffer-or-name)))))
-    (funcall orig-func buffer-or-name)))
+  (when (and (buffer-local-value 'buffer-file-name (get-buffer buffer-or-name))
+             (buffer-modified-p (get-buffer buffer-or-name)))
+    (catch 'quit
+      (save-window-excursion
+        (with-current-buffer buffer-or-name
+          (let ((done nil) (buf (current-buffer)))
+            (while (not done)
+              (let ((response (read-char-choice (format "Save file %s? (y, n, d, q) " (buffer-file-name buf))
+                                                '(?y ?n ?d ?q))))
+                (setq done (cond
+                            ((eq response ?q) (throw 'quit nil))
+                            ((eq response ?y) (save-buffer) t)
+                            ((eq response ?n) (set-buffer-modified-p nil) t)
+                            ((eq response ?d) (diff-buffer-with-file) nil))))))))))
+  (funcall orig-func buffer-or-name))
 
 ;;;###autoload
 (defun cae-delete-char ()
