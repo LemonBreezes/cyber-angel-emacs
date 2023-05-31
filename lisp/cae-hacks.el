@@ -152,4 +152,5 @@
            gc-cons-percentage cae-hacks-gc-percentage))))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
+(advice-add #'save-buffers-kill-emacs :before #'cae-hacks-disable-gc-temporarily)
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
