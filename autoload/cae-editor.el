@@ -10,8 +10,10 @@
         (with-current-buffer buffer-or-name
           (let ((done nil) (buf (current-buffer)))
             (while (not done)
-              (let ((response (read-char-choice (format "Save file %s? (y, n, d, q) " (buffer-file-name buf))
-                                                '(?y ?n ?d ?q))))
+              (let ((response (read-char-choice
+                               (format "Save file %s? (y, n, d, q) "
+                                       (buffer-file-name buf))
+                               '(?y ?n ?d ?q))))
                 (setq done (cond
                             ((eq response ?q) (throw 'quit nil))
                             ((eq response ?y) (save-buffer) t)
