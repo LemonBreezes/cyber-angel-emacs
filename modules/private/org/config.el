@@ -69,17 +69,17 @@
               :around
               ;; Skip over vimish folds
               (cae-defun cae-worf-skip-vimish-fold-forward-a (oldfun arg)
-                (let ((pt-max (-some->> (and (modulep! :editor fold)
-                                             (overlays-at (point)))
-                                (-filter #'vimish-fold--vimish-overlay-p)
-                                (-map #'overlay-end)
-                                (apply #'max)))
-                      (pt (point)))
-                  (when pt-max
+                (let ((point-max (-some->> (and (modulep! :editor fold)
+                                                (overlays-at (point)))
+                                   (-filter #'vimish-fold--vimish-overlay-p)
+                                   (-map #'overlay-end)
+                                   (apply #'max)))
+                      (point (point)))
+                  (when point-max
                     (setq arg (1+ arg)))
                   (funcall oldfun arg)
-                  (when (<= (point) pt-max)
-                    (goto-char pt)))))
+                  (when (<= (point) point-max)
+                    (goto-char point)))))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
