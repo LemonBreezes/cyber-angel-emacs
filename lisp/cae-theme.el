@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'ef-trio-dark)
+(setq doom-theme 'ef-trio-light)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
@@ -43,7 +43,11 @@
            modus-themes-prompts '(italic semibold))))
 (after! ef-themes
   (setopt ef-themes-variable-pitch-ui t
-         ef-themes-mixed-fonts t))
+          ef-themes-mixed-fonts t
+          ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
+
+(map! :leader
+      :desc "Toggle theme" "t T" #'ef-themes-toggle)
 
 ;; Set theme based on time
 (when (display-graphic-p)
