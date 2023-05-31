@@ -18,7 +18,7 @@
    "<right>" next-buffer
    "u" winner-undo
    "r" winner-redo
-   "f" find-file
+   (:exit "f" find-file)
    ;; Number row keys
    "!" delete-other-windows
    "@" split-window-below
