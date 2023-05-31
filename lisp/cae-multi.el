@@ -26,10 +26,10 @@
   (setq eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
         eww-download-directory (expand-file-name "~/Downloads/")))
 (after! ispell
-  (setopt ispell-complete-word-dict (concat cae-multi-data-dir
-                                            "dictionaries/word.txt")
-          ispell-personal-dictionary (concat cae-multi-secrets-dir
-                                             "aspell.en.pws")))
+  (setq ispell-complete-word-dict (concat cae-multi-data-dir
+                                          "dictionaries/word.txt")
+        ispell-personal-dictionary (concat cae-multi-secrets-dir
+                                           "aspell.en.pws")))
 
 (use-package! git-auto-commit-mode
   :defer t
