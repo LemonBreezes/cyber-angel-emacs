@@ -136,8 +136,8 @@
 ;; you will be waiting for a long time.
 (add-hook 'kill-emacs-hook
           ;; 10 GB or 30% of RAM
-          (lambda () (setq gc-cons-threshold (* 10 1024 1024 1024)
-                           gc-cons-percentage 30
+          (lambda () (setq gc-cons-threshold cae-hacks-big-gc-threshold
+                           gc-cons-percentage cae-hacks-big-gc-percentage
                            gcmh-low-cons-threshold gc-cons-threshold
                            gcmh-high-cons-threshold gc-cons-threshold))
           -10)
