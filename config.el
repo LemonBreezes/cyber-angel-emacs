@@ -410,10 +410,7 @@
        "<next>" #'vertico-scroll-up)
       (:after man
        :map Man-mode-map
-       :n "o" #'ace-link-man)
-      (:when (modulep! :config default)
-       :leader
-       "a" nil))
+       :n "o" #'ace-link-man))
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
