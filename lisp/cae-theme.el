@@ -11,6 +11,7 @@
                         :weight 'normal)
     (set-face-attribute 'org-document-title nil
                         :height 1.2))
+  ;; For `esh-autosuggest'.
   (after! company
     (set-face-attribute 'company-preview-common nil
                         :inherit 'shadow
