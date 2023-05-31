@@ -160,9 +160,6 @@
 
 (setq bookmark-bmenu-file-column 50)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
-(defun cae-workspaces-load-bookmarks-h (_)
-  (bookmark-load bookmark-default-file t t))
-(add-hook 'persp-activated-functions #'cae-workspaces-load-bookmarks-h)
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
