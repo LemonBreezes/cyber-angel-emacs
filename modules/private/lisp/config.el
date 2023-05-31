@@ -28,6 +28,13 @@
         ;; entering unbalanced expressions into `eval-expression'.
         [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain))
 
+(add-hook 'lisp-data-mode-hook
+          (cae-defun cae-lisp-dir-locals-set-up-h ()
+            (when (and (buffer-file-name)
+                       (string= (file-name-nondirectory (buffer-file-name))
+                                dir-locals-file))
+              (add-hook 'after-save-hook #'cae-mark-dir-locals-as-safe-h nil t))))
+
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
