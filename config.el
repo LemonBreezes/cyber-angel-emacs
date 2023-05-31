@@ -843,7 +843,8 @@
 
   (use-package! expand-region-improved
     :defer t :init
-    (map! "C-=" #'eri/expand-region)
+    ;; The only keybinding is `C-=' on `eri/expand-region' and it's bound in
+    ;; `lisp/cae-keybindings'.
     :config
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
