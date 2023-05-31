@@ -46,6 +46,7 @@
 (package! flames-of-freedom)
 (package! snow)
 (package! ednc)
+(package! wttrin)
 
 (package! zones)
 (package! zone-nyan)
