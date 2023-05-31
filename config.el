@@ -1214,6 +1214,7 @@
 (use-package! org-ai
   :defer-incrementally t
   :config
+  (org-ai-global-mode +1)
   (setq org-ai-default-chat-model "gpt-4"
         org-ai-default-completion-model "gpt-4")
   (when (modulep! :editor snippets)
