@@ -23,8 +23,7 @@
      ("makefile")
      project-file "Makefile" compilation-dir nil configure-command nil
      compile-command "make" test-command "make test"
-     install-command "make install" package-command nil run-command nil)
-   nil #'equal)
+     install-command "make install" package-command nil run-command nil))
   (add-to-list
    'projectile-project-types
    '(gnumake marker-files
