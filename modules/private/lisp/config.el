@@ -54,10 +54,9 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
+          ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
+          ;; the beginning of the line.
           "M-m" nil                     ;formerly `lispy-mark-symbol'. I prefer
-                                        ;to keep the default `M-m' and `C-a'
-                                        ;keybindings.
-
           "C-a" nil                     ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
