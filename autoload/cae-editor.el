@@ -230,7 +230,8 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-avy-goto-line-above-use-bottom-up-a (oldfun &optional offset bottom-up)
-  (ignore-error 'wrong-type-argument (funcall oldfun offset (not bottom-up))))
+  (ignore-error 'wrong-type-argument
+    (funcall oldfun offset (not bottom-up))))
 
 ;;;###autoload
 (defun cae-lookup-definition-dwim ()
