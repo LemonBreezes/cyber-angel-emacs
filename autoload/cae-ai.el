@@ -25,7 +25,12 @@
 ;;;###autoload
 (defun cae-ai-org-ai-kill-region-at-point ()
   (interactive)
-  ;; TODO Make this handle the kill ring correctly so that the second kill is appended to the first.
+  ;; TODO Make this handle the kill ring correctly so that the second kill is prepended to the first.
   (call-interactively #'org-ai-kill-region-at-point)
   (forward-char -1)
-  (kill-region (point) (progn (skip-syntax-backward "\\s ") (point))))
+  (let ((beg (point))
+        (s (buffer-substring-no-properties
+            (point)
+            (progn (skip-syntax-backward "\\s ") (point)))))
+    (delete-region beg (point))
+    (kill-append s t)))
