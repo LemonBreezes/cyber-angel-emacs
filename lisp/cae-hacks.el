@@ -48,3 +48,11 @@
     args)
   (advice-add #'call-process-shell-command :filter-args
               #'+call-process-shell-command-a))
+
+;; Call `pp-eval-last-sexp' when `eros-eval-last-sexp' is called with a negative
+;; prefix argument
+(defadvice! +eros-eval-lavst-sexp-a (oldfun &rest args)
+  :around #'eros-eval-lastv-sexp
+  (if (eq (car args) '-)
+      (funcall #'pp-eval-last-sexp (cdr args))
+    (apply oldfun args)))
