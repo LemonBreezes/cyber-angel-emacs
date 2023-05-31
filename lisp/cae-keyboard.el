@@ -267,10 +267,18 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
+             (,(if (not (= 1 (length (cl-find ?\;
+                                              cae-keyboard-orbits
+                                              :test (lambda (x y) (cl-find x y))))))
+                   (cae-keyboard-kbd ";")
+                 ";")
+              nil "")
+             (";" lispy-comment "")
              ;; The tick and comma keys are special in Lispy because we want
              ;; them to not be rebound.
              ;; We have to find two free keys to bind to the tick and comma
              ;; commands.
+             ;; To handle this the right way, we would technically need to
              (,(cond ((= (length (cl-find ?\,
                                           cae-keyboard-orbits
                                           :test (lambda (x y) (cl-find x y))))
