@@ -700,12 +700,6 @@
   (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
-  (advice-add #'avy-resume :around #'cae-avy-resume-use-last-style-a)
-  (defvar cae-last-avy-command nil)
-  (add-hook 'post-command-hook
-            (cae-defun cae-avy-store-last-command-h ()
-              (when (string= (file-name-base (symbol-file last-command)) "avy")
-                (setq cae-last-avy-command last-command))))
 
   ;; TODO All of these commands have jump and choose variants. I should make two
   ;; separate keybindings for the two variants.
