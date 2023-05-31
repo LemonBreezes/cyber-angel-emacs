@@ -263,6 +263,9 @@
           (lambda ()
             (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
 
+;; Enable all disabled commands.
+(setq disabled-command-function nil)
+
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
