@@ -1033,6 +1033,7 @@
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   :config
+  (org-ai-global-mode +1)
   (map! :map org-ai-global-mode-map
         :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
