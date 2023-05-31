@@ -15,3 +15,10 @@
              (+workspace-exists-p +leetcode-workspace-name))
     (+workspace-delete +leetcode-workspace-name)
     (+workspace/other)))
+
+;;;###autoload (autoload '+leetcode-problems-hydra/body "private/misc-applications/autoload/leetcode" nil t)
+(defhydra +leetcode-problems-hydra (:color pink :hint nil)
+  ("<f6>" nil "Exit" :exit t)
+  ("q" +workspace/other nil :exit t)
+  ("Q" +leetcode-quit nil :exit t)
+  )
