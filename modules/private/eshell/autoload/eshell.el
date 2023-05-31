@@ -7,7 +7,7 @@
            (equal "cd" str)
            (string-prefix-p "cd " str)
            (string-prefix-p " " str)
-           (string-match-p "[a-zA-Z] " str))))
+           (string-match-p "^[a-zA-Z]$" str))))
 
 ;;;###autoload
 (defun cae-eshell-set-up-autocompletion ()
