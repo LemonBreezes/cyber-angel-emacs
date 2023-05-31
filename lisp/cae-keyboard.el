@@ -58,7 +58,7 @@
 
 (when (modulep! :ui popup)
   ;; For Meow, it's for some reason, not enough to just use a key translation
-  ;; map. We need to bind the keys to the commands.
+  ;; map. We need to bind the keys to the commands. This is worth investigating.
   (unless (boundp 'cae-keyboard-old-c-\`-command)
     (defvar cae-keyboard-old-c-\`-command (lookup-key (current-global-map) (kbd "C-`")))
     (defvar cae-keyboard-old-c-~-command (lookup-key (current-global-map) (kbd "C-~"))))
