@@ -63,7 +63,9 @@
          (progn
            ,@body)
        (advice-remove #'bookmark-maybe-load-default-file #'ignore)
-       (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache))))
+       (puthash bookmark-default-file bookmark-alist cae-project-bookmark-cache)
+       (unless bookmark-alist
+         (delete-file bookmark-default-file)))))
 
 ;; (cae-project--bookmark-alist)
 ;; (cae-project-bookmark-delete)
