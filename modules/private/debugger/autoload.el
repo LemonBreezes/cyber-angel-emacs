@@ -6,10 +6,11 @@
     (cl-loop for win in (window-list)
              when (string-match-p "gdb" (buffer-name (window-buffer win))) do
              (delete-window win))
-    (cl-loop for buf in (buffer-list)
-             when (and (string-match-p "gdb" (buffer-name buf))
-                       (process-live-p (get-buffer-process buf)))
-             do (ignore-errors (interrupt-process (get-buffer-process buf))))))
+    ;;(cl-loop for buf in (buffer-list)
+    ;;         when (and (string-match-p "gdb" (buffer-name buf))
+    ;;                   (process-live-p (get-buffer-process buf)))
+    ;;         do (ignore-errors (interrupt-process (get-buffer-process buf))))
+    ))
 
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
