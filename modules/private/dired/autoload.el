@@ -38,8 +38,8 @@
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p)
              (not (window-dedicated-p)))
-        (ignore-error user-error
-          (dirvish-layout-switch dirvish-default-layout))))
+    (ignore-error user-error
+      (dirvish-layout-switch dirvish-default-layout))))
 
 ;;;###autoload
 (defun cae-dired-previous-buffer ()
