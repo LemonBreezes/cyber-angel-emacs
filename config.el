@@ -286,8 +286,7 @@
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")))
 (setq browse-url-browser-function
-      (cond ((and (string-suffix-p "-android" system-configuration)
-                  (executable-find "termux-clipboard-get"))
+      (cond ((executable-find "termux-setup-storage")
              #'browse-url-xdg-open)
             (t #'browse-url-generic)))
 
