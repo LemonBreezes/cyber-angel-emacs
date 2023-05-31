@@ -9,4 +9,5 @@
 (defun meow-localleader ()
   "Enter Doom's localleader keymap."
   (interactive)
-  (meow--execute-kbd-macro doom-localleader-alt-key))
+  (setq unread-command-events
+        (listify-key-sequence (kbd "SPC m"))))
