@@ -561,6 +561,7 @@
            ("M-D" sp-splice-sexp "Delete")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
            ("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
+           ("C-M-S-<backspace>" sp-backward-kill-sexp "Delete")
            ("C-M-f" sp-forward-sexp "Navigate")
            ("C-M-b" sp-backward-sexp "Navigate")
            ("C-M-u" sp-backward-up-sexp "Navigate")
@@ -604,10 +605,13 @@
         (dolist (it sp--mc/cursor-specific-vars)
           (add-to-list 'mc/cursor-specific-vars it))
         (dolist (x bindings)
-          (add-to-list 'mc/cmds-to-run-for-all (cadr x)))
+          (add-to-list 'mc/cmds-to-run-for-all (cadr x))
+          (add-to-list 'mc/cmds-to-run-for-all
+                       (intern (concat (symbol-name (cadr x)))))
+          )
         (add-to-list 'mc/cmds-to-run-for-all #'cae-sp-cheat-sheet/body)))
     (dolist (x bindings)
-      (global-set-key (kbd (car x)) (cadr x))))
+      (define-key smartparens-mode-map (kbd (car x)) (cadr x))))
   (setq sp-navigate-interactive-always-progress-point t))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
