@@ -4,6 +4,7 @@
 tmp/
 core
 
+bugs.txt
 *.swp
 flycheck_*
 .local/
