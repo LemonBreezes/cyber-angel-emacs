@@ -91,7 +91,6 @@
        ,(cae-keyboard-kbd "7") +workspace/switch-to-6
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
-       "d" +workspace/display
        "0" +workspace/switch-to-final
        "1" +workspace/switch-to-0
        "2" +workspace/switch-to-1
@@ -102,8 +101,7 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
-       ;;"r" +workspace/rename
-       ;;"d" +workspace/display
+       "H-d" +workspace/display
        )
       (:enter +workspace/display))
    t)
