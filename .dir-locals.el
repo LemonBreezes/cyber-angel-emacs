@@ -10,7 +10,8 @@
                                      '("init.el"
                                        ".dir-locals.el"
                                        "packages.el")
-                                     :test #'string=)))
+                                     :test #'string=))
+                     (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
           (when (bound-and-true-p cae-config-finished-loading)
             (when (and (derived-mode-p 'emacs-lisp-mode)
