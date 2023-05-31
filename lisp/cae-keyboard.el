@@ -345,9 +345,4 @@
   :defer t :init
   (add-hook 'c-mode-common-hook #'electric-spacing-mode)
   (add-hook 'python-mode-hook #'electric-spacing-mode)
-  (defun cae-keyboard-electric-spacing-\(()
-    "The same as `electric-spacing-\(' but does not insert the closing paren."
-    (if (looking-back (regexp-opt '("if" "else" "for" "while" "switch")))
-        (insert " (")
-      (insert "(")))
   (advice-add #'electric-spacing-\( :override #'cae-keyboard-electric-spacing-\())
