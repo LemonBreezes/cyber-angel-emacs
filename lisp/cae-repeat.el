@@ -7,7 +7,7 @@
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
-  (setq repeat-exit-timeout 1.5)
+  (setq repeat-exit-timeout 3)
 
   ;; Uses special keys from my esoteric keyboard layout
   (define-repeat-map other-window
@@ -28,6 +28,12 @@
   (define-repeat-map vc-gutter
     ("n" +vc-gutter/next-hunk
      "p" +vc-gutter/previous-hunk))
+
+  (define-repeat-map scroll-up-command
+    ("v" scroll-up-command))
+
+  (define-repeat-map scroll-down-command
+    ("v" scroll-down-command))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
