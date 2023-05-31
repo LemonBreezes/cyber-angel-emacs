@@ -523,9 +523,7 @@
   (load! "lisp/cae-repeat")
   (add-hook 'doom-first-buffer-hook
             (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
-              (load! "lisp/cae-visible-mark")
-              ;; (load! "lisp/cae-visual-scrolling")
-              ))
+              (load! "lisp/cae-visible-mark")))
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-multiple-cursors")
   (load! "lisp/cae-restore-point")
