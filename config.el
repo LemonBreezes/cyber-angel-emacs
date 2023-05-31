@@ -8,12 +8,14 @@
   "Whether the configuration has finished loading.")
 
 ;; I currently have this disabled so that I don't have to wait for Emacs to
-;; compile everything on-kill. This would be cooler if it used an incremental
-;; idle timer instead.
+;; compile everything on-kill.
 (defvar cae-config-compilation-on-kill-enabled-p nil
   "Whether on-kill native compilation is enabled.")
 
-(defvar cae-config-incremental-compilation-enabled-p t
+;; I disabled this because the garbage collector eventually hammers me if I try
+;; to byte compile my entire config. It's faster to compile on-kill since that
+;; way I can disable garbage collection.
+(defvar cae-config-incremental-compilation-enabled-p nil
   "Whether incremental native compilation is enabled.")
 
 (when cae-config-incremental-compilation-enabled-p
