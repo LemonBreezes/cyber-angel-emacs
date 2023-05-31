@@ -16,7 +16,7 @@
 
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
-          (cae-defun cae-lisp-setup-eval-expression-comments-h ()
+          (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
             (when (string= (minibuffer-prompt) "Eval: ")
               (setq-local comment-start ";"
                           comment-end ""
