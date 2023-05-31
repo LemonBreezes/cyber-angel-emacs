@@ -2,18 +2,13 @@
 
 (defun cae-hacks-hydra-pause-h (&rest _)
   (when hydra-curr-map
-    (if (modulep! :ui workspaces)
-        (set-persp-parameter 'hydra-pause-ring
-                             (let ((hydra-pause-ring (make-ring 8)))
-                               (ring-insert hydra-pause-ring hydra-curr-body-fn)
-                               hydra-pause-ring))
-        (ring-insert hydra-pause-ring hydra-curr-body-fn))
+    (set-persp-parameter 'hydra-pause-ring
+                         (ring-insert hydra-pause-ring hydra-curr-body-fn))
     (hydra-keyboard-quit)))
 
 (defun cae-hacks-hydra-resume-h (&rest _)
   (unless (or (null (persp-parameter 'hydra-pause-ring))
-              (and (ring-p (persp-parameter 'hydra-pause-ring))
-                   (zerop (ring-length (persp-parameter 'hydra-pause-ring)))))
+              (zerop (ring-length (persp-parameter 'hydra-pause-ring))))
     (run-with-timer 0.001 nil (ring-remove (persp-parameter 'hydra-pause-ring) 0))))
 
 (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-pause-h)
