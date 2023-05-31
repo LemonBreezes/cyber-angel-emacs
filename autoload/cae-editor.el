@@ -320,22 +320,22 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-avy-embark-act-on-region ()
-  "Select two lines and move the text between them above the current line."
   (interactive)
-  (let* ((initial-window (selected-window))
-         (beg (avy--line))
-         (end (avy--line))
-         text)
-    (when (> beg end)
-      (cl-rotatef beg end))
-    (setq beg (save-excursion
-                (goto-char beg)
-                (line-beginning-position)))
-    (setq end (save-excursion
-                (goto-char end)
-                (1+ (line-end-position))))
-    (save-mark-and-excursion
-      (goto-char beg)
-      (set-mark end)
-      (activate-mark)
-      (embark-act))))
+  (save-window-excursion
+    (let* ((initial-window (selected-window))
+           (beg (avy--line))
+           (end (avy--line))
+           text)
+      (when (> beg end)
+        (cl-rotatef beg end))
+      (setq beg (save-excursion
+                  (goto-char beg)
+                  (line-beginning-position)))
+      (setq end (save-excursion
+                  (goto-char end)
+                  (1+ (line-end-position))))
+      (save-mark-and-excursion
+        (goto-char beg)
+        (set-mark end)
+        (activate-mark)
+        (embark-act)))))
