@@ -663,6 +663,13 @@
   (setq file-info-include-headlines t
         file-info-max-value-length 100))
 
+(use-package! titlecase
+  :defer t
+  :init
+  (after! embark
+    (define-key embark-region-map "T" #'titlecase-region)
+    (define-key embark-heading-map "T" #'titlecase-line)))
+
 
 ;;; Autocompletion
 
