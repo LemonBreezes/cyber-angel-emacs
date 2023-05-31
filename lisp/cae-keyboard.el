@@ -69,11 +69,12 @@
              ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
-(defconst home-row-numbers-qwerty
-(cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
-(home-row-numbers)
-(map! :map universal-argument-map
-      "l" #'cae-keyboard-insert-current-prefix)
+(unless (modulep! :private meow)
+  (defconst home-row-numbers-qwerty
+    (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
+  (home-row-numbers)
+  (map! :map universal-argument-map
+        "l" #'cae-keyboard-insert-current-prefix))
 
 ;;; Distinguishing dual-purpose keycodes
 
