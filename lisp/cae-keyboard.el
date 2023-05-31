@@ -47,4 +47,6 @@
 
 (defvar home-row-numbers nil)
 
+(eval-when-compile (require 'home-row-numbers))
+
 (home-row-numbers)
