@@ -1091,7 +1091,7 @@
 
 ;;; HTML
 
-;; I don't really need LSP for the XML files I edit, and it's a bit slow.
+;; I don't really need LSP for the XML files I edit.
 (remove-hook 'nxml-mode-local-vars-hook #'lsp!)
 
 ;;; Appendix
