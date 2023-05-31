@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-multi.el -*- lexical-binding: t; -*-
 
 ;; This is code written for the purpose of using this Emacs configuration on
-;; multiple machines. It is not intended to be used with other Emacs
+;; multiple machines. It is not intended to be copied to other Emacs
 ;; configurations.
 
 (defvar cae-multi-local-dir (expand-file-name "shared-local/" doom-user-dir))
