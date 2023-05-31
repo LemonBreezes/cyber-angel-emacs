@@ -318,12 +318,8 @@
     (defun cae-perfect-margin-ignore-posframe-p (window)
       "Check if the current buffer's display type is posframe."
       (frame-parameter (window-frame window) 'parent-frame))
-    (defun cae-perfect-margin-ignore-which-key-p (window)
-      "Check if the current buffer's display type is which-key."
-      (string-match-p "^ \\*which-key\\*$" (buffer-name (window-buffer window))))
     :config
-    (dolist (mode '(fireplace-mode))
-      (add-to-list 'perfect-margin-ignore-modes mode))
+    (add-to-list 'perfect-margin-ignore-regexps "^ \\*which-key\\*$")
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p)
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-which-key-p))
 
