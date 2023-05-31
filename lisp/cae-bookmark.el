@@ -79,17 +79,6 @@
      (1 'shadow t)))
   "Extra font-lock patterns for the Bookmark menu.")
 
-(define-minor-mode prot-bookmark-extra-keywords
-  "Apply extra font-lock rules to bookmark list buffers."
-  :init-value nil
-  :global t
-  (if prot-bookmark-extra-keywords
-      (progn
-        (font-lock-flush (point-min) (point-max))
-        (font-lock-add-keywords nil prot-bookmark-keywords nil)
-        (add-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords))
-    (font-lock-remove-keywords nil prot-bookmark-keywords)
-    (remove-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords)
-    (font-lock-flush (point-min) (point-max))))
-
-(prot-bookmark-extra-keywords 1)
+(font-lock-flush (point-min) (point-max))
+(font-lock-add-keywords nil prot-bookmark-keywords nil)
+(add-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords)
