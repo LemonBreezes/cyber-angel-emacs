@@ -92,19 +92,7 @@ derivative.")
         (apply #'consult-completion-in-region completion-in-region--data)))))
 
 (use-package! cape
-  :after corfu
-  :commands (cape-dabbrev
-             cape-file
-             cape-history
-             cape-keyword
-             cape-tex
-             cape-sgml
-             cape-rfc1345
-             cape-abbrev
-             cape-ispell
-             cape-dict
-             cape-symbol
-             cape-line)
+  :defer t
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   (when +corfu-ispell-in-comments-and-strings
