@@ -94,8 +94,7 @@
     :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
-    (setq! nyan-animate-nyancat t
-           nyan-wavy-trail t
+    (setq! nyan-animate-nyancat nil
            nyan-bar-length 20
            nyan-cat-face-number 3
            nyan-minimum-window-width 20
