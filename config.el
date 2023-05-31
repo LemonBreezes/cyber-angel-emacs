@@ -558,7 +558,7 @@
                                                  'string)
                          (user-login-name))))
       (auto-sudoedit)))
-  (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
+  (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h 91)
   :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1))
