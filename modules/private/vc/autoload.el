@@ -2,6 +2,11 @@
 
 ;;;###autoload
 (defun cae-magit-insert-diff-upstream (&optional branch)
+  "Insert diff between current branch and upstream branch. If
+ BRANCH is non-nil, use that branch instead of the current
+ branch's upstream branch.
+
+From https://www.reddit.com/r/emacs/comments/112t0uo/comment/j9g2r5n/?utm_source=share&utm_medium=web2x&context=3."
   (magit-insert-section (diff-upstream nil t)
     (if-let ((upstream-branch (or branch (magit-get-upstream-branch (magit-get-current-branch)))))
         (progn
