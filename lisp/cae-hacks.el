@@ -122,23 +122,32 @@
 
 ;;; GC hacks
 
-(defconst cae-hacks-big-gc-threshold (* 3 1024 1024 1024))
-(defconst cae-hacks-big-gc-percentage 30)
+(defconst cae-hacks-gc-threshold (* 3 1024 1024 1024))
+(defconst cae-hacks-gc-percentage 30)
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gcmh-mode nil)
 
+(defun cae-hacks-disable-gc (&rest _)
+  (setq cae-hacks--gc-messages (and cae-hacks--gc-messages
+                                    garbage-collection-messages)
+        cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
+                                 gcmh-mode)
+        garbage-collection-messages t
+        gc-cons-threshold cae-hacks-big-gc-threshold
+        gc-cons-percentage cae-hacks-gc-percentage)
+  (gcmh-mode -1))
+
 (defun cae-hacks-disable-gc-temporarily (&rest _)
-  (setq cae-hacks--gc-messages garbage-collection-messages
-        cae-hacks--gcmh-mode gcmh-mode
-        garbage-collection-messages t)
-  (gcmh-mode -1)
+  (cae-hacks-disable-gc)
   (run-with-idle-timer
    10 nil
    (lambda ()
      (gcmh-mode cae-hacks--gcmh-mode)
      (setq garbage-collection-messages cae-hacks--gc-messages
            cae-hacks--gc-messages nil
-           cae-hacks--gcmh-mode nil))))
+           cae-hacks--gcmh-mode nil
+           gc-cons-threshold gcmh-low-cons-threshold
+           gc-cons-percentage cae-hacks-gc-percentage))))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
