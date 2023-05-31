@@ -5,10 +5,10 @@
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
-(setq doom-leader-alt-key "C-c"
-      doom-localleader-alt-key "C-c l"
-      doom-leader-key nil
-      doom-localleader-key nil)
+(setq doom-leader-alt-key "M-SPC"
+      doom-localleader-alt-key "M-SPC m"
+      doom-leader-key "C-c"
+      doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
 (doom! :completion
