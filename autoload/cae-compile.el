@@ -25,8 +25,6 @@
                 (defun tmp/fboundp-a (oldfun function)
                   (unless (eq function 'make-process)
                     (funcall oldfun function))))
-    (advice-add #'exwm-input--update-focus-commit :override
-                #'ignore)
     (let ((compilation-filter-hook
            (remove 'comint-truncate-buffer compilation-filter-hook)))
       (unwind-protect
@@ -36,8 +34,7 @@
                                       pdf-tools-directory)
                                   ;; Use system versions of dependencies.
                                   t)
-        (advice-remove #'fboundp #'tmp/fboundp-a)
-        (advice-remove #'exwm-input--update-focus-commit #'ignore)))))
+        (advice-remove #'fboundp #'tmp/fboundp-a)))))
 
 (defun cae-compile-file-not-in-unused-module-p (&optional file-name)
   (not (when-let* ((file-name (or file-name (buffer-file-name)))
