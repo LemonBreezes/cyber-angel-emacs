@@ -50,6 +50,7 @@
   :defer t :init
   (add-hook 'org-mode-hook #'worf-mode)
   :config
+  (setq worf-recenter t)
   (define-key worf-mode-map (kbd "C-M-g") #'consult-org-heading)
   (keymap-set worf-mode-map "]" nil)
   (keymap-set worf-mode-map "[" nil)
@@ -65,12 +66,12 @@
                   (when (eq 'property-drawer (car parent))
                     (goto-char (org-element-property :begin parent))))))
   (advice-add #'worf-down
-                 :filter-args
-                 (cae-defun cae-worf-skip-vimish-fold-forward-a (args)
-                   (when (and (modulep! :editor fold)
-                              (+fold--vimish-fold-p))
-                     (setcar args (1+ (car args))))
-                   args))
+              :filter-args
+              (cae-defun cae-worf-skip-vimish-fold-forward-a (args)
+                (when (and (modulep! :editor fold)
+                           (+fold--vimish-fold-p))
+                  (setcar args (1+ (car args))))
+                args))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
 (use-package! org-tidy
