@@ -64,7 +64,7 @@
        dired
        lisp
        unpackaged
-       ;;vc
+       vc
        )
 
 ;; Local Variables:
