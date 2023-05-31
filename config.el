@@ -286,11 +286,15 @@
         "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
 ;; Use Emacs as the default editor for shell commands.
+
+;; TODO Is there a better way to do this? I don't want to use `vterm-mode-hook'
+;; because it causes a slight delay for Vterm. Also, I want this to work with
+;; `dwim-shell-command'.
 (define-key (current-global-map)
   [remap async-shell-command] 'with-editor-async-shell-command)
 (define-key (current-global-map)
   [remap shell-command] 'with-editor-shell-command)
-(dolist (hook '(shell-mode-hook eshell-mode-hook))
+(dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
   (dolist (fn '(with-editor-export-editor
                 with-editor-export-hg-editor
                 with-editor-export-git-editor))
