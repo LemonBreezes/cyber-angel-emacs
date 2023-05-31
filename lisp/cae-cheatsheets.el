@@ -31,10 +31,9 @@
     (hydra-keyboard-quit)))
 
 (defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
-  (unless (or (null (persp-parameter 'hydra-pause-ring))
-              (zerop (ring-length (persp-parameter 'hydra-pause-ring))))
-    (run-with-timer 0.001 nil
-                    (ring-remove (persp-parameter 'hydra-pause-ring) 0))))
+  (let ((ring (persp-parameter 'hydra-pause-ring)))
+    (unless (or (null ring) (zerop (ring-length ring)))
+      (run-with-timer 0.001 nil (ring-remove ring 0)))))
 
 (when (modulep! :ui workspaces)
   (after! persp-mode
