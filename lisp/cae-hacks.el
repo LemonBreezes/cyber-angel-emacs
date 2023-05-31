@@ -132,6 +132,6 @@
 
 (defun cae-hacks-max-out-gc-h ()
   (setq gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 50))
+        gc-cons-percentage 30))
 
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-max-out-gc-h -1)
