@@ -57,6 +57,8 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "5") (kbd "C-x 5 5"))
 
 (when (modulep! :ui popup)
+  ;; For Meow, it's for some reason, not enough to just use a key translation
+  ;; map. We need to bind the keys to the commands.
   (global-set-key (kbd (cae-keyboard-kbd "C-" "`"))
                   (lookup-key (current-global-map) (kbd "C-`")))
   (global-set-key (kbd (cae-keyboard-kbd "C-" "~"))
