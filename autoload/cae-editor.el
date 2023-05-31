@@ -24,7 +24,7 @@
 (defun cae-delete-char ()
   "Like `delete-char', but works on the region if active, and
 deletes the following char if the sexps in the buffer are
-unbalanced."
+unbalanced. Works with Lispy and Smartparens."
   (interactive)
   (let ((delete-fn
          (cond ((condition-case error
@@ -74,7 +74,8 @@ unbalanced."
 ;;;###autoload
 (defun cae-insert-closing-paren ()
   "Inserts a closing paren if the sexps in the buffer are
-unbalanced, otherwise acts like `self-insert-command'. Handles Lispy."
+unbalanced, otherwise acts like `self-insert-command'. Works with
+Lispy."
   (interactive)
   (cond ((condition-case error
              (scan-sexps (point-min) (point-max))
