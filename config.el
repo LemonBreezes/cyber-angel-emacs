@@ -309,9 +309,9 @@
 
 ;;; Tools
 
-(load! "lisp/cae-projectile")
-
 (when cae-init-tools-enabled-p
+  (load! "lisp/cae-projectile")
+
   (use-package! w3m
     :defer t :config
     (setq w3m-user-agent
