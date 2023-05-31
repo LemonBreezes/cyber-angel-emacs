@@ -11,7 +11,8 @@ alias d      dirvish                                                          $1
 alias layman sudo layman                                                      $*
 
 alias mcd    mkdir               -p                                           $1 && cd $1
-alias cdp   cd-to-project
+alias cdp    cd-to-project
+alias cd-    cd -
 
 alias q     exit
 alias clear clear-scrollback
