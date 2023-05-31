@@ -108,21 +108,21 @@ derivative.")
                        (cape-capf-inside-string #'cape-ispell)))
     (add-hook 'prog-mode-hook
               (lambda ()
-                (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings))))
+                (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings nil #'eq))))
   (dolist (sym +corfu-ispell-completion-modes)
     (add-hook (intern (concat (symbol-name sym) "-hook"))
               (lambda ()
-                (add-to-list 'completion-at-point-functions #'cape-ispell))))
+                (add-to-list 'completion-at-point-functions #'cape-ispell nil #'eq))))
   (add-hook! '(TeX-mode-hook LaTeX-mode-hook org-mode-hook)
     (lambda ()
-      (add-to-list 'completion-at-point-functions #'cape-tex t))
+      (add-to-list 'completion-at-point-functions #'cape-tex t #'eq))
     :depth 2)
   (add-hook! '(html-mode-hook +web-react-mode-hook typescript-tsx-mode-hook org-mode-hook markdown-mode-hook)
     (lambda ()
-      (add-to-list 'completion-at-point-functions #'cape-sgml t))
+      (add-to-list 'completion-at-point-functions #'cape-sgml t #'eq))
     :depth 2)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev nil #'eq)
+  (add-to-list 'completion-at-point-functions #'cape-keyword nil #'eq))
 
 (use-package! kind-icon
   :when (modulep! +icons)
@@ -152,7 +152,7 @@ derivative.")
   :after savehist
   :hook (corfu-mode . corfu-history-mode)
   :config
-  (add-to-list 'savehist-additional-variables 'corfu-history))
+  (add-to-list 'savehist-additional-variables 'corfu-history nil #'eq))
 (use-package! corfu-popupinfo
   :hook (corfu-mode . corfu-popupinfo-mode)
   :config
