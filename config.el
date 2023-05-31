@@ -458,6 +458,12 @@
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
 
+(use-package! gptel
+  :defer t :init
+  (map! :leader "g" #'gptel)
+  :config
+  (setq gptel-default-mode 'org-mode))
+
 
 ;;; Editor
 
