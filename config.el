@@ -1,5 +1,4 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-
 (load! "lisp/cae-logs")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-multi")
@@ -290,7 +289,6 @@
 
 
 ;;; Editor
-
 (autoload 'cae-project-bookmark (concat doom-private-dir
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
@@ -484,7 +482,6 @@
 
 
 ;;; Autocompletion
-
 (when (modulep! :private corfu)
   (load! "lisp/cae-corfu"))
 
