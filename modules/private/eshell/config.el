@@ -37,7 +37,7 @@
     (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
   ;; Colorize ansi escape sequences in exported buffers
-  (advice-add #'eshell-output-object-to-target :around #'+eshell-ansi-buffer-output)
+  (advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
   ;; Parse buffer redirection >#buf and >#.
   (add-hook 'eshell-parse-argument-hook #'+eshell-syntax-buffer-redirect)
