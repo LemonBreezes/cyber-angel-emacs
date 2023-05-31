@@ -2,7 +2,6 @@
 ;;; private/vc/packages.el
 
 (package! git-link)
-(package! blamer)
 (package! gitignore-templates)
 (package! git-email :recipe (:local-repo "packages/git-email"))
 (package! vc-backup :recipe (:repo "LemonBreezes/vc-backup"))
