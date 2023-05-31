@@ -147,7 +147,7 @@
 
 (when (and (modulep! :checkers syntax +flymake)
            (modulep! :checkers syntax +childframe))
-(defalias 'posframe-poshandler-p0p1-to-p0p1 #'posframe-poshandler-point-bottom-left-corner-upward))
+  (defalias 'posframe-poshandler-p0p1-to-p0p1 #'posframe-poshandler-point-bottom-left-corner-upward))
 
 (use-package! goggles
   :init
