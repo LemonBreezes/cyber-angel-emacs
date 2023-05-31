@@ -114,45 +114,10 @@
   (when (not cae-config-compilation-enabled)
     (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
-          (unless
-              (or (string= (file-name-nondirectory s) "packages.el")
-                  (string= (file-name-nondirectory s) "doctor.el")
-                  (string= (file-name-nondirectory s) dir-locals-file)
-                  (string-prefix-p "flycheck_" (file-name-nondirectory s))
-                  (cl-member s cae-compile-files-to-ignore :test #'string=)
-                  (and cae-compile--exit-code
-                       (not (eq cae-compile--exit-code 0))
-                       (not (file-exists-p (concat s "c"))))
-                  (eq this-command 'kill-emacs)
-                  (and (file-newer-than-file-p (concat s "c") s)
-                       (not arg)))
-            (ignore-errors (byte-compile-file s))
-	    (let ((native-comp-speed cae-compile-native-comp-speed))
-              (ignore-errors (native-compile s)))))
-        (nconc
-         ;; Compiling `lisp/lib' creates some errors and these functions
-         ;; are not that important to have compiled anyways.
-         (directory-files-recursively doom-core-dir
-                                      "[a-za-z0-9]+\\.el$"
-                                      nil
-                                      #'ignore)
-         (directory-files-recursively doom-modules-dir
-                                      "[a-za-z0-9]+\\.el$"
-                                      nil
-                                      #'cae-compile-file-not-in-unused-module-p)
-         (directory-files-recursively
-          doom-user-dir
-          "[a-zA-Z0-9]+\\.el$"
-          nil
-          (lambda (s)
-            (not (or (string= (file-name-nondirectory s) "experiments")
-                     (string= (file-name-nondirectory s) "eshell")
-                     (string= (file-name-nondirectory s) "packages")
-                     (string= (file-name-nondirectory s) "misc-files")
-                     (string= (file-name-nondirectory s) "snippets")
-                     (string= (file-name-nondirectory s) ".local")
-                     (string= (file-name-nondirectory s) ".git")
-                     (string= (file-name-nondirectory s) "shared-local"))))))))
+          (ignore-errors (byte-compile-file s))
+	  (let ((native-comp-speed cae-compile-native-comp-speed))
+            (ignore-errors (native-compile s))))
+        (cae-compile-list-files-to-compile arg)))
 
 ;;;###autoload
 (defun cae-compile-rebuild-package ()
