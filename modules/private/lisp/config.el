@@ -28,7 +28,7 @@
         ;; entering unbalanced expressions into `eval-expression'.
         [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain))
 
-;; Automatically mark dir-locals as safe when saving them.
+;; Automatically mark dir-locals as safe on save.
 (add-hook 'lisp-data-mode-hook
           (cae-defun cae-lisp-dir-locals-set-up-h ()
             (when (and (buffer-file-name)
