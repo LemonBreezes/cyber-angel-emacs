@@ -203,6 +203,7 @@
               (Man-mode . normal)
               (message-buffer-mode . normal)
               (eshell-mode . insert)))
-  (setq meow-esc-delay 0.001)
+  (setq meow-esc-delay 0.001
+        meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
