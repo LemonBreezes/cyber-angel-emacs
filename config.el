@@ -321,8 +321,9 @@
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
 ;; Query buffers for a diff before killing them.
-(map! [remap kill-buffer] #'cae-kill-buffer
-      [remap doom/kill-this-buffer-in-all-windows] #'cae-kill-this-buffer-in-all-windows)
+;; (map! [remap kill-buffer] #'cae-kill-buffer
+;;       [remap doom/kill-this-buffer-in-all-windows] #'cae-kill-this-buffer-in-all-windows)
+(advice-add #'kill-buffer :around #'cae-kill-buffer-a)
 
 ;; Kill buffers without asking.
 (setq kill-buffer-query-functions
