@@ -3,7 +3,8 @@
 (disable-packages! avy
                    smartparens
                    evil-escape
-                   flyspell)
+                   flyspell
+                   ccls)
 
 ;;; UI
 
