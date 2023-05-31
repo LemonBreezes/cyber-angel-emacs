@@ -9,7 +9,7 @@
   (dired-noselect dir))
 
 ;;;###autoload
-(defun cae-dired-find-file-a (file &optional wildcards)
+(defun cae-dired-find-file-a (file &rest _)
   "Like `find-file', but might exit the current Dirvish session."
   (if (derived-mode-p 'dired-mode)
       (progn
