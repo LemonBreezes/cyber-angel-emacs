@@ -684,6 +684,11 @@
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
         "C-SPC" #'avy-goto-char-timer)
+  (advice-add #'avy-goto-end-of-line
+              :around
+              (cae-defun cae-avy-line-no-column-overlay-a (oldfun &rest args)
+                (let ((avy-column-line-overlay nil))
+                  (apply oldfun args))))
 
   (when (modulep! :completion vertico)
     (after! vertico
