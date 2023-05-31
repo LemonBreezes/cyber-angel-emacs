@@ -1,5 +1,6 @@
 ;;; private/modeline/autoload/modeline.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun cae-create-file-buffer (filename)
   "Create a suitably named buffer for visiting FILENAME, and return it.
 FILENAME (sans directory) is used unchanged if that name is free;
