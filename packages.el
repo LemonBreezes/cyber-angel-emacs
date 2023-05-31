@@ -56,7 +56,7 @@
 (package! pcre :recipe (:host github :repo "syohex/emacs-pcre" ; Required by
                                                                ; `hop'
                         :pre-build ("make" "all")
-                        :files ( "*.el" "*.so")))
+                        :files ("*.el" "*.so")))
 
 ;; These are used for their autoloads.
 (package! ialign)
