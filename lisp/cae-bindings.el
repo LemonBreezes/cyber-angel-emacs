@@ -75,7 +75,7 @@
       :prefix ("C-x C-a" . "gud")
       :prefix ("C-x X" . "edebug")
       :prefix ("C-x C-k" . "kmacro")
-      :prefix ("C-x RET" . "mule"))
+      :prefix ("C-x RET" . "MULE"))
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
