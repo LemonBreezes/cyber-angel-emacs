@@ -554,12 +554,12 @@
 (when (modulep! :completion vertico)
   (after! embark
     (hercules-def
-     :toggle-funs #'cae-embark-collect-cheatsheet
+     :toggle-funs #'cae-embark-collect-cheatsheet1
      :keymap 'embark-collect-mode-map
      :blacklist-funs '(digit-argument negative-argument)
      :transient t)
     (map! :map embark-collect-mode-map
-          "<f6>" #'cae-embark-collect-cheatsheet)))
+          "<f6>" #'cae-embark-collect-cheatsheet1)))
 
 (use-package! avy
   :defer t
