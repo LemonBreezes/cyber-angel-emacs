@@ -15,7 +15,7 @@
   (message "Starting streaming..."))
 
 (defvar invidious-instances-url
-  "api.invidious.io/instances.json?pretty=1&sort_by=health")
+  "https://api.invidious.io/instances.json?pretty=1&sort_by=health")
 
 (defun ytel-instances-fetch-json ()
   "Fetch list of invidious instances as json, sorted by health."
