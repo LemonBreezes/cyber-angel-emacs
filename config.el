@@ -11,7 +11,8 @@
 (load! "lisp/cae-fixup-leader-key")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled.
+(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+                                        ;is also our Smartparens configuration.
 
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
