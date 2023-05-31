@@ -206,8 +206,7 @@
         compilation-read-command nil)
   (after! which-key
     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
-          which-key-replacement-alist))
-  )
+          which-key-replacement-alist)))
 
 (after! tramp
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
