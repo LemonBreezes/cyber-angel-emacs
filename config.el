@@ -689,7 +689,8 @@
   (advice-add #'avy-goto-end-of-line
               :around
               (cae-defun cae-avy-line-no-column-overlay-a (oldfun &rest args)
-                (let ((avy-column-line-overlay nil))
+                (let ((avy-column-line-overlay nil)
+                      (avy-style 'post))
                   (apply oldfun args))))
 
   (when (modulep! :completion vertico)
