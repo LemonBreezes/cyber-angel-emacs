@@ -110,6 +110,9 @@ derivative.")
             ,(cae-keyboard-kbd "M-" "l") (cae-generate-corfu-select-index 8)
             ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 9)))))
 
+  (when (modulep! +indexed)
+    (corfu-indexed-mode +1))
+
   ;; Taken from corfu's README.
   ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
   ;; ivy is being considered for removal.
