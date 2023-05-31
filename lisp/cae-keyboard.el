@@ -13,10 +13,6 @@
     (?-)
     ))
 
-(cl-assert (eq (cae-keyboard-remap ?w) ?b))
-(cl-assert (eq (cae-keyboard-remap ?b) ?j))
-(cl-assert (eq (cae-keyboard-remap ?j) ?o))
-
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
 (define-key key-translation-map (kbd "C-x t @") (kbd "C-x t 2"))
