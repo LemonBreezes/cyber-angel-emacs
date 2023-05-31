@@ -187,6 +187,7 @@
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
+  ;; Use `parrot' for indicating a `git push' by `git-auto-commit-mode'.
   (advice-add #'gac-push
               :after
               (cae-defun cae-modeline-gac-party-on-push-a (buffer)
