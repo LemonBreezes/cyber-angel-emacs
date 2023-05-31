@@ -4,7 +4,6 @@
   :defer t
   :init
   (map! :leader :prefix +misc-applications-prefix
-        "p" #'proced
-        "P" #'list-processes)
+        "p" #'proced)
   :config
   (setq proced-enable-color-flag t))
