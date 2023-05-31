@@ -33,8 +33,8 @@
   ;;   "r" winner-redo))
 
   (define-repeat-map cae-buffer-navigation-repeat-map
-    ("<left>" cae-previous-buffer
-     "<right>" cae-next-buffer))
+    ("<left>" cae-dired-previous-buffer
+     "<right>" cae-dired-next-buffer))
 
   (define-repeat-map set-mark-command
     ("SPC" set-mark-command))
