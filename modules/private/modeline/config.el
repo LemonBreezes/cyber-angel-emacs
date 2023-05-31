@@ -1,6 +1,6 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(setq mode-line-format
+(setq-default mode-line-format
       (cl-subst '(:eval (breadcrumb-project-crumbs))
                 'mode-line-buffer-identification
                 mode-line-format))
