@@ -968,7 +968,6 @@
       (advice-add #'register-preview :override #'consult-register-window))))
 
 
-
 ;;; Term
 
 ;; Enable Fish autocompletion in `read-shell-command'.
