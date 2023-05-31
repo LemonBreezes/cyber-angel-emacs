@@ -203,4 +203,6 @@
               (Man-mode . normal)
               (message-buffer-mode . normal)
               (eshell-mode . insert)))
+  (setq meow-esc-delay 0.001)
+
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
