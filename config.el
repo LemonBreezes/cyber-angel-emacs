@@ -391,7 +391,7 @@
         anzu-replace-to-string-separator " → "))
 
 (use-package! isearch-mb
-  :init (isearch-mb-mode)
+  :after-call isearch-mode-hook
   :config
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
   (add-to-list 'isearch-mb--with-buffer #'scroll-right)
