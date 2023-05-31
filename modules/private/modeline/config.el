@@ -56,6 +56,7 @@
           tree-sitter-mode
           dap-mode
           eat-eshell-mode
+          modern-c++-font-lock-mode
           ))
   (setq minions-available-modes
         '(;; (abbrev-mode)
@@ -70,7 +71,9 @@
           ;; (overwrite-mode)
           (ruler-mode)
           (visual-line-mode)
-          (display-fill-column-indicator-mode)))
+          (display-fill-column-indicator-mode)
+          (rainbow-mode)
+          ))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
                                   ))
