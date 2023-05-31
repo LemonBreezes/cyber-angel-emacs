@@ -855,12 +855,6 @@
       (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
-(when (modulep! :private corfu)
-  (map! (:after eshell
-         :map eshell-mode-map
-         "TAB" #'completion-at-point
-         "<tab>" #'completion-at-point)))
-
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
         :map yas-minor-mode-map
