@@ -169,6 +169,9 @@
 (use-package! w3m
   :defer t
   :config
+  (setq w3m-search-default-engine "duckduckgo"
+        w3m-user-agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533."
+        w3m-command-arguments '("-cookie" "-F"))
   (map! :map w3m-mode-map
         "o" #'link-hint-open-link))
 
