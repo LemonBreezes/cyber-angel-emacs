@@ -111,21 +111,19 @@
         "N" #'dirvish-narrow
         "j" #'consult-line)
 
-  (defmacro cae-dired-find-file-wrapper (fn)
-    "Wrap FN to exit Dirvish sessions when opening files."
-    `(cae-defun ,(intern (format "cae-dired-wrapped-%s" (symbol-name fn))) ()
-       (let ((dir default-directory))
-         (advice-add #'find-file :around #'cae-dired-find-file-a)
-         (unwind-protect (call-interactively #',fn)
-           (advice-remove #'find-file #'cae-dired-find-file-a)))))
-  (after! which-key
-    (push '((nil . "cae-dired-wrapped-\\(.*\\)") . (nil . "\\1"))
-          which-key-replacement-alist))
-
-
-
   ;; This is not a good approach because practically every function would have
   ;; to be wrapped!
+  ;;(defmacro cae-dired-find-file-wrapper (fn)
+  ;;  "Wrap FN to exit Dirvish sessions when opening files."
+  ;;  `(cae-defun ,(intern (format "cae-dired-wrapped-%s" (symbol-name fn))) ()
+  ;;     (let ((dir default-directory))
+  ;;       (advice-add #'find-file :around #'cae-dired-find-file-a)
+  ;;       (unwind-protect (call-interactively #',fn)
+  ;;         (advice-remove #'find-file #'cae-dired-find-file-a)))))
+  ;;(after! which-key
+  ;;  (push '((nil . "cae-dired-wrapped-\\(.*\\)") . (nil . "\\1"))
+  ;;        which-key-replacement-alist))
+  ;;
   ;;(dolist (fn '(find-file
   ;;              projectile-find-file
   ;;              projectile-find-file-in-directory
