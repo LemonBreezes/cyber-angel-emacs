@@ -154,7 +154,7 @@ This is the format used on Reddit for code blocks."
     (message "Copied!")))
 
 ;;;###autoload
-(defun cae-forward-sentence (&optional arg)
+(defun cae-forward-sentence-function (&optional arg)
   (or arg (setq arg 1))
   (if (or (autoloadp (symbol-function #'sentex-forward-sentence))
           (fboundp #'sentex-forward-sentence))
