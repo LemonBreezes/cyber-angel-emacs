@@ -85,6 +85,7 @@
             (when (require 'circadian nil t)
               (doom-store-put 'circadian-themes (circadian-themes-parse)))))
 
+;; Set the theme on startup.
 (unless cae-config-finished-loading
   (when (doom-store-get 'circadian-themes)
     (let* ((themes (doom-store-get 'circadian-themes))
