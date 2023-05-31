@@ -1,7 +1,7 @@
 ;;; private/eshell/autoload/commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +eshell-buffer-contents (buffer)
+(defun cae-eshell-buffer-contents (buffer)
   "Return fontified buffer contents for BUFFER."
   (with-current-buffer buffer
     (font-lock-ensure (point-min) (point-max))
@@ -12,9 +12,9 @@
   "Return fontified file contents for FILE."
   (let ((buffer (get-file-buffer file)))
     (if buffer
-        (+eshell-buffer-contents buffer)
+        (cae-eshell-buffer-contents buffer)
       (unwind-protect
-          (+eshell-buffer-contents
+          (cae-eshell-buffer-contents
            (setq buffer
                  (let ((inhibit-message t)
                        (non-essential t)
