@@ -105,6 +105,9 @@
   (after! help-fns
     (setq help-enable-symbol-autoload t))
 
+  (after! transient
+    (setq transient-align-variable-pitch t))
+
   (after! newcomment
     (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
                                         ;`comment-region' so that I can mark the
