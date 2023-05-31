@@ -63,7 +63,8 @@
           (rainbow-mode)
           (visual-line-mode)
           (display-fill-column-indicator-mode)))
-  (setq minions-prominent-modes '(defining-kbd-macro))
+  (setq minions-prominent-modes '(flycheck-mode
+                                  defining-kbd-macro))
   (minions-mode +1))
 
 (column-number-mode +1)
