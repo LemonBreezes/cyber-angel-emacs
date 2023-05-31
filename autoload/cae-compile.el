@@ -15,8 +15,6 @@
     ,(expand-file-name "lang/cc/autoload.el" doom-modules-dir)
     ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)))
 
-(defvar cae-compile-native-comp-speed 3)
-
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
                               (pdf-info-check-epdfinfo))
@@ -59,10 +57,7 @@
               (not (string-match-p cae-compile-interesting-file-name-regexp
                                    (file-name-base (buffer-file-name))))
               (not (string-prefix-p "flycheck_" (buffer-file-name))))
-    (byte-compile-file (buffer-file-name))
-    ;;(let ((native-comp-speed cae-compile-native-comp-speed))
-    ;;  (emacs-lisp-native-compile-and-load))
-    ))
+    (byte-compile-file (buffer-file-name))))
 
 (defun cae-compile-list-files-to-compile (&optional arg)
   (let (result)
@@ -113,10 +108,7 @@
   (when (not cae-config-compilation-on-kill-enabled-p)
     (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
-          (ignore-errors (byte-compile-file s))
-	  ;;(let ((native-comp-speed cae-compile-native-comp-speed))
-          ;;  (ignore-errors (native-compile s)))
-          )
+          (ignore-errors (byte-compile-file s)))
         (cae-compile-list-files-to-compile arg)))
 
 
@@ -145,8 +137,6 @@
             (when doom-debug-mode
               (message "Compiling %s" file))
             (ignore-errors (byte-compile-file file))
-            ;;(let ((native-comp-speed cae-compile-native-comp-speed))
-            ;;  (ignore-errors (native-compile file)))
             (run-with-idle-timer cae-compile-incremental-idle-timer
                                  nil #'cae-compile-next-file files))
         (run-with-idle-timer cae-compile-incremental-idle-timer
