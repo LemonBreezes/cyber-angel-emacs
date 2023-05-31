@@ -129,3 +129,7 @@ file to edit."
     (eshell/clear t)
     (eshell-emit-prompt)
     (insert input)))
+
+;;;###autoload
+(defun eshell/cdl ()
+  (eshell/cd (buffer-local-value 'default-directory (last-buffer nil t))))
