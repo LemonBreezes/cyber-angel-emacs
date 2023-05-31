@@ -28,7 +28,6 @@
             (not (or (modulep! :private helm)
                      (modulep! :completion helm))))
   (package! helm-system-packages))
-;;(package! ytel)
 (package! x86-lookup)
 (package! devdocs)
 (package! trashed)
