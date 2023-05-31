@@ -18,7 +18,7 @@
 (package! topsy)
 (package! anzu)
 (package! isearch-mb)
-(package! hercules)
+(package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 
 ;; cae-theme.el
 (package! modus-themes)
