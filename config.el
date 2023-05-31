@@ -180,6 +180,7 @@
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
+
 ;;; Tools
 
 (use-package! w3m
@@ -721,6 +722,7 @@
 ;;  (define-key macrursors-mark-map (kbd ".") #'macrursors-mark-all-sentences)
 ;;  (define-key macrursors-mark-map (kbd "r") #'macrursors-mark-all-lines))
 
+
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
