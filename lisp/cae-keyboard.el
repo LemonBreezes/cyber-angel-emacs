@@ -291,4 +291,4 @@
    :hook c-mode-common-hook
    :separator ?-
    :entries
-   ((screaming "\\(-\\)[a-z]" "[A-Z]"))))
+   ((screaming "\\b\\(-\\)[a-z]" "[A-Z]"))))
