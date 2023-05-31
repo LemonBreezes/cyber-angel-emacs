@@ -23,20 +23,19 @@
 (defun cae-delete-char ()
   (interactive)
   ;; Needs refactoring.
-  (cond ((region-active-p)
-         (if (bound-and-true-p lispy-mode)
-             (call-interactively #'lispy-delete)
-           (and delete-active-region
-                (delete-region (region-beginning) (region-end)))
-           (call-interactively #'sp-delete-region)))
-        ;; Only call `delete-char' if the parens are unbalanced.
-        ((condition-case error
-             (scan-sexps (point-min) (point-max))
-           (scan-error t))
-         (call-interactively #'delete-char))
-        ((bound-and-true-p lispy-mode)
-         (call-interactively #'lispy-delete))
-        ((call-interactively #'sp-delete-char))))
+  (let ((delete-fn
+         (cond ((condition-case error
+                    (scan-sexps (point-min) (point-max))
+                  (scan-error t))
+                #'delete-char)
+               ((bound-and-true-p lispy-mode)
+                #'lispy-delete)
+               ((bound-and-true-p smartparens-mode)
+                (if (region-active-p)
+                    #'sp-delete-region
+                  #'sp-delete-char))
+               (t #'delete-char))))
+    (call-interactively delete-fn)))
 
 ;;;###autoload
 (defun cae-toggle-sudo ()
