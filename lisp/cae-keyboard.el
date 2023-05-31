@@ -62,7 +62,6 @@
   (unless (boundp 'cae-keyboard-old-c-\`-command)
     (defvar cae-keyboard-old-c-\`-command (lookup-key (current-global-map) (kbd "C-`")))
     (defvar cae-keyboard-old-c-~-command (lookup-key (current-global-map) (kbd "C-~"))))
-
   (global-set-key (kbd (cae-keyboard-kbd "C-" "`"))
                   cae-keyboard-old-c-\`-command)
   (global-set-key (kbd (cae-keyboard-kbd "C-" "~"))
