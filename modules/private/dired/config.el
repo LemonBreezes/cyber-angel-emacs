@@ -113,8 +113,9 @@
 
   (defmacro cae-dired-find-file-wrapper (fn)
     "Wrap FN to exit Dirvish sessions when opening files."
-    `(cae-defun ,(intern (format "cae-dired-%s" (symbol-name fn))) ()
-       (interactive)
+    `(lambda ;;,(intern (format "cae-dired-%s" (symbol-name fn)))
+       () (interactive)                 ; Do not use defun because too many
+                                        ; symbols.
        (let ((dir default-directory))
          (advice-add #'find-file :around #'cae-dired-find-file-a)
          (unwind-protect (call-interactively #',fn)
@@ -123,7 +124,38 @@
   (dolist (fn '(find-file
                 projectile-find-file
                 projectile-find-file-in-directory
-                doom/find-file-in-other-project))
+                doom/find-file-in-other-project
+                magit-find-file
+                project-find-file
+                doom/sudo-find-file
+                find-file-other-tab
+                find-file-read-only
+                find-file-other-frame
+                find-file-other-window
+                doom/find-file-in-emacsd
+                projectile-find-file-dwim
+                projectile-find-file-dwim-other-frame
+                projectile-find-file-dwim-other-window
+                +default/find-file-under-here
+                +default/find-in-notes
+                +default/find-in-templates
+                find-file-read-only-other-tab
+                project-or-external-find-file
+                find-file-read-only-other-frame
+                doom/find-file-in-private-config
+                find-file-read-only-other-window
+                projectile-find-file-other-window
+                projectile-find-file-other-frame
+                projectile-find-file-in-known-projects
+                projectile-find-other-file
+                projectile-find-other-file-other-frame
+                projectile-find-other-file-other-window
+                magit-find-git-config-file
+                magit-find-git-config-file-other-frame
+                magit-find-git-config-file-other-window
+
+                ido-find-file
+                ))
     (define-key dirvish-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper
                                                      fn)))
 
