@@ -1254,6 +1254,14 @@
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
 
+;;; Email
+
+(when (modulep! :email notmuch)
+  (after! notmuch-hello
+    (map! :map notmuch-hello-mode-map
+          "q" #'cae-notmuch-quit))
+  )
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
