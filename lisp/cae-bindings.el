@@ -46,12 +46,12 @@
                   which-key-replacement-alist)))
   (map! :leader
         (:prefix ("F" . "fold")
-         "k"     #'vimish-fold-delete
+         "k" #'vimish-fold-delete
          "K" #'vimish-fold-delete-all
          "v" #'vimish-fold
-         "t"     #'+fold/toggle
+         "t" #'+fold/toggle
          "C" #'+fold/close-all
-         "o"     #'+fold/open
+         "o" #'+fold/open
          "O" #'+fold/open-all)))
 
 ;; I don't use Deft.
