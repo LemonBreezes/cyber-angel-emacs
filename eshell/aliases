@@ -3,10 +3,8 @@ alias doom   ~/.emacs.d/bin/doom                                              $*
 alias c      xclip               -selection     clipboard                     $*
 alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
 alias tree   tree                -C                                           $*
-alias rg     rg                  --color=always                               $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
-alias d      dirvish                                                          $1 > /dev/null
 alias layman sudo layman                                                      $*
 
 alias mcd    mkdir               -p                                           $1 && cd $1
@@ -22,6 +20,8 @@ alias cdp   cd-to-project
 alias clear clear-scrollback
 alias gg    cae-unpackaged-magit-status
 alias q     exit
+alias d     dirvish                      $1 > /dev/null
+alias rg    rg                            --color=always                      $*
 
 
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom $*
