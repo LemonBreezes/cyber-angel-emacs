@@ -108,9 +108,9 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "N" #'dirvish-narrow
-        "j" #'+default/search-buffer))
-
-;;(map! [remap dired-jump] #'dirvish-dwim)
+        "j" #'+default/search-buffer
+        [remap delete-other-windows] #'cae-dired-maximize-buffer))
+(map! [remap dired-jump] #'cae-dired-jump)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
