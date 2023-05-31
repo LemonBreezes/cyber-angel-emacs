@@ -42,6 +42,7 @@
         hl-todo-mode
         whitespace-mode
         highlight-quoted-mode
+        diff-hl-mode
         ))
 (setq minions-available-modes
       '(;; (abbrev-mode)
