@@ -515,9 +515,8 @@
     (setq vimish-fold-indication-mode 'right-fringe))
 
   ;; Ensure local elisp packages are up-to-date.
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
+  (add-hook! 'emacs-lisp-mode-hook
+      (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t))
 
   ;; Enable all disabled commands.
   (setq disabled-command-function nil)
