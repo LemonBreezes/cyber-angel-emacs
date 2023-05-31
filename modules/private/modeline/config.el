@@ -178,14 +178,21 @@
 ;; This block might seem crazy, but it's how I've gotten parrot mode to work
 ;; and be silent on startup.
 (use-package! parrot
-  :after (:any magit org)
+  :defer t
   :init
+  (autoload #'parrot--party-while-process "parrot")
+  (autoload #'parrot--todo-party "parrot")
+  (autoload #'parrot--magit-push-filter "parrot")
   ;; Use `parrot' for indicating a `git push' by `git-auto-commit-mode'.
   (advice-add #'gac-push
               :after
               (cae-defun cae-modeline-gac-party-on-push-a (buffer)
+                (require 'parrot)
                 (let ((proc (get-buffer-process "*git-auto-push*")))
                   (parrot--party-while-process proc))))
+  (add-hook 'org-after-todo-state-change-hook
+            #'parrot--todo-party)
+  (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
