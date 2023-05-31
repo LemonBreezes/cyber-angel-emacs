@@ -235,6 +235,8 @@
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-;") #'avy-isearch)
+  (when (not (cae-display-graphic-p))
+    (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch))
   (when (modulep! :completion vertico)
     (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
     (map! :map isearch-mb-minibuffer-map
