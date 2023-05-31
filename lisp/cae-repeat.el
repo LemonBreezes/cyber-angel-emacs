@@ -54,7 +54,7 @@
     (:exit "V" vertico-scroll-up))
 
   (eval
-   `(define-repeat-map +workspace/switch-to-0
+   `(define-repeat-map workspace-switch
       (,(cae-keyboard-kbd "0") +workspace/switch-to-final)
       (,(cae-keyboard-kbd "1") +workspace/switch-to-0)
       (,(cae-keyboard-kbd "2") +workspace/switch-to-1)
