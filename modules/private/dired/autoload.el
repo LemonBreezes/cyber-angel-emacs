@@ -21,11 +21,14 @@
   (interactive
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
-  (let ((dir (file-name-directory file)))
-    (unless (file-equal-p dir default-directory)
-      (funcall oldfun dir)))
-  (unless (file-directory-p file)
-    ;; Copied from `dirvish-find-entry-a'
-    (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-      (if fn (funcall fn) (dirvish-kill dv)))
-    (funcall oldfun file)))
+  (if (derived-mode-p 'dirvish-mode)
+      (progn
+        (let ((dir (file-name-directory file)))
+          (unless (file-equal-p dir default-directory)
+            (funcall oldfun dir)))
+        (unless (file-directory-p file)
+          ;; Copied from `dirvish-find-entry-a'
+          (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+            (if fn (funcall fn) (dirvish-kill dv)))
+          (funcall oldfun file)))
+    (funcall oldfun wildcards)))
