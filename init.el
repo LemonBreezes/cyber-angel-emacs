@@ -48,6 +48,7 @@
        :lang
        emacs-lisp
        (org +roam2)
+       (cc +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
