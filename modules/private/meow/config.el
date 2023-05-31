@@ -173,8 +173,7 @@
   (meow/setup-cae)
   (meow/setup-keypad)
   (add-hook 'doom-first-file-hook #'meow-setup-indicator)
-  (map! :map meow-normal-state-keymap
-        "DEL" doom-leader-map)
+  (define-key meow-normal-state-keymap (kbd "DEL") (kbd "C-c"))
 
   (setq meow-keypad-start-keys
         '((?c . ?c)
