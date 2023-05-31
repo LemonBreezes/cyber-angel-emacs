@@ -123,7 +123,7 @@
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "k") 'lispy-up)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "d") 'lispy-different)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "o") 'lispy-other-mode)
-    ;;(lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "p") 'lispy-eval-other-window)
+    (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "p") 'lispy-eval-other-window)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "P") 'lispy-paste)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "y") 'lispy-occur)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "z") 'lh-knight/body)
@@ -160,7 +160,6 @@
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "F") 'lispy-follow t)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "D") 'pop-tag-mark)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "A") 'lispy-beginning-of-defun)
-    (lispy-define-key lispy-mode-map-special "_" 'lispy-underscore)
     ;; miscellanea
     (define-key lispy-mode-map-special (kbd "SPC") 'lispy-space)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "i") 'lispy-tab)
@@ -183,15 +182,19 @@
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "x") 'lispy-x)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "Z") 'lispy-edebug-stop)
     (lispy-define-key lispy-mode-map-special (cae-keyboard-kbd "V") 'lispy-visit)
+    ;; If any of the above keys get mapped to these, the keybinding will be lost!
     (lispy-define-key lispy-mode-map-special "-" 'lispy-ace-subword)
     (lispy-define-key lispy-mode-map-special "." 'lispy-repeat)
     (lispy-define-key lispy-mode-map-special "~" 'lispy-tilde)
+    (lispy-define-key lispy-mode-map-special "_" 'lispy-underscore)
+    (lispy-define-key lispy-mode-map-special "'" 'lispy-tick) ;`special-lispy-eval-other-window'
+
     ;; TODO digit argument
     (eval `(defhydra lh-knight ()
              "knight"
-             (,(cae-keyboard-kbd"j") lispy-knight-down)
-             (,(cae-keyboard-kbd"k") lispy-knight-up)
-             (,(cae-keyboard-kbd"z") nil)))
+             (,(cae-keyboard-kbd "j") lispy-knight-down)
+             (,(cae-keyboard-kbd "k") lispy-knight-up)
+             (,(cae-keyboard-kbd "z") nil)))
     (eval `(lispy-defverb
             "goto"
             ((,(cae-keyboard-kbd "d") lispy-goto)
