@@ -130,6 +130,7 @@
       "C-x !" #'doom/window-enlargen
       "C-x M-o" #'ace-swap-window
       "C-x x o" #'ov-clear
+      "C-x x N" #'+default/new-buffer
       "M-Z" #'zap-up-to-char
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
