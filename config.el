@@ -712,6 +712,12 @@
           "C-;" #'avy-embark-collect-choose
           (:when (not (cae-display-graphic-p))
            "M-j" #'avy-embark-collect-choose)))
+  (when (modulep! :private corfu)
+    (after! corfu
+      (map! :map corfu-map
+            "C-;" #'corfu-quick-jump
+            (:when (not (cae-display-graphic-p))
+             "M-j" #'corfu-quick-jump))))
   :config
   (setq avy-timeout-seconds 0.25
         avy-all-windows t
