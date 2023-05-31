@@ -645,7 +645,18 @@
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1))
 
-
+(use-package! file-info
+  :defer t
+  :init
+  (map! :leader :prefix "f"
+        :desc "Show file info" "i" #'file-info-show)
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
+                                     :internal-border-width 2
+                                     :internal-border-color "#61AFEF"
+                                     :left-fringe 16
+                                     :right-fringe 16)))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
