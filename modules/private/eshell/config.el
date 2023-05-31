@@ -42,7 +42,7 @@
   ;; Parse buffer redirection >#buf and >#.
   (add-hook 'eshell-parse-argument-hook #'+eshell-syntax-buffer-redirect)
 
-  (setq eshell-input-filter #'+eshell-input-filter)
+  (setq eshell-input-filter #'cae-eshell-input-filter)
 
   (after! esh-module
     (when (>= emacs-major-version 29)
