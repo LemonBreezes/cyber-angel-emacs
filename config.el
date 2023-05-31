@@ -33,7 +33,7 @@
         :desc "snippets" "y" doom-leader-snippets-map)
   (after! which-key
     (setq which-key-replacement-alist
-          (delete '(("\\`C-c &") nil . "snippets")
+          (delete '(("\\`C-c y\\'") nil . "snippets")
                     which-key-replacement-alist))))
 
 ;;; UI
