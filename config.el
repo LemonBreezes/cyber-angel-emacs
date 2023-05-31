@@ -409,6 +409,14 @@
        compile-command "make" test-command "make test" install-command
        "make install" package-command nil run-command nil)
      nil #'equal)
+    (add-to-list
+     'projectile-project-types
+     '(evm-truffle marker-files
+       ("truffle-config.js")
+       project-file "truffle-config.js" compilation-dir nil configure-command nil
+       compile-command "truffle compile" test-command "truffle test" install-command
+       "truffle migrate" package-command nil run-command nil)
+     nil #'equal)
     (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
     (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
     (add-to-list 'projectile-project-root-files-top-down-recurring
