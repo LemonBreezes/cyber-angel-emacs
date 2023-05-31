@@ -6,9 +6,11 @@
   (map! [remap async-shell-command] #'detached-shell-command
         [remap compile] #'detached-compile
         [remap recompile] #'detached-recompile
-        "<f7>" #'detached-open-session
         (:when (modulep! :completion vertico)
-         [remap detached-open-session] #'detached-consult-session))
+         [remap detached-open-session] #'detached-consult-session)
+        :leader
+        :prefix "o"
+        :desc "Detached session" "s" #'detached-open-session)
   :custom ((detached-show-output-on-attach t)
            (detached-terminal-data-command system-type)))
 
