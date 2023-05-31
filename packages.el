@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 (unpin! t)
-(disable-packages! avy
-                   smartparens
+(disable-packages! smartparens
                    evil-escape
                    flyspell
                    ccls)
