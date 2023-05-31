@@ -14,6 +14,8 @@
 ;; (macroexpand '(+log 'test))
 ;;      => (message "Values: %s" 'test)
 
+;;; Tracing functions
+
 (defun cae-debug-backtrace-a (&rest args)
   (+log args)
   (unless args
@@ -24,6 +26,7 @@
 
 (defmacro unbacktrace! (function)
   `(advice-remove ',function #'cae-debug-backtrace-a))
+
 
 ;;; Power debugging
 
