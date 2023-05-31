@@ -874,8 +874,6 @@
           [remap forward-sentence] #'sentex-forward-sentence
           [remap backward-sentence] #'sentex-backward-sentence)))
 
-;; TODO Strip the top-level indentation when editing a region. Also, fix
-;; `cae-edit-indirect-dwim' in strings.
 (use-package! edit-indirect
   :defer t :init
   (map! "C-c '" #'cae-edit-indirect-dwim))
