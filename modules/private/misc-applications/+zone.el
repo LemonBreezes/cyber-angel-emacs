@@ -38,7 +38,8 @@
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (while (minibufferp)
-      (abort-recursive-edit))
+      (ignore-errors
+        (abort-recursive-edit)))
     (let ((wconf (current-window-configuration)))
       (select-window (car (doom-visible-windows)))
       (delete-other-windows)
