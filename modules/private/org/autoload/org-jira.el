@@ -1,7 +1,7 @@
 ;;; private/org/autoload/org-jira.el -*- lexical-binding: t; -*-
 
 
-;;;###autoload (autoload 'cae-elfeed-hydra/body "private/misc-applications/autoload/elfeed" nil t)
+;;;###autoload (autoload 'cae-org-jira-hydra/body "private/org/autoload/org-jira" nil t)
 (defhydra cae-org-jira-hydra (:color pink :foreign-keys run)
   ("<f6>" nil "Exit" :exit t)
   ("bg" 'org-jira-get-boards :column "boards")
