@@ -159,8 +159,8 @@
           "<escape>" #'doom/escape
           ;; commands not bound by default
           "Z" #'meow-pop-all-selection
-          ,(cae-keyboard-kbd "&") #'meow-query-replace
-          "%" #'meow-query-replace-regexp
+          ;; ,(cae-keyboard-kbd "&") #'meow-query-replace
+          ;; "%" #'meow-query-replace-regexp
           "Y" #'meow-yank-pop
           "\\" #'quoted-insert
           "S" #'embrace-commander)))
