@@ -22,7 +22,7 @@
   :config
   (when (modulep! :ui popup)
     (set-popup-rule! "^\\*image-dired"
-                     :slot 20 :size 0.8 :select t :quit nil :ttl 0))
+      :slot 20 :size 0.8 :select t :quit nil :ttl 0))
   (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
 
   (let* ((ls (executable-find "ls"))
