@@ -556,6 +556,11 @@
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))))
+(add-hook 'post-command-hook
+          (cae-defun cae-fix-popup-other-keybinding ()
+            (define-key ctl-x-map "p" nil)
+            (map! :map ctl-x-map
+                  "p" #'+popup/other)))
 
 (define-key!
   :keymaps (append +default-minibuffer-maps
