@@ -123,7 +123,18 @@
   :around #'auto-sudoedit
   (advice-add #'dired-insert-subdir
               :around #'cae-ignore-errors-a)
+  (advice-add #'dirvish-dir-data-proc-s
+              :around #'cae-ignore-errors-a)
   (unwind-protect (apply oldfun args)
     (run-at-time 0.01 nil #'advice-remove
                  #'dired-insert-subdir-validate
                  #'cae-ignore-errors-a)))
+(defadvice! dirvish-dir-data--ensure-attrs-hash-table (proc _exit)
+  :before #'dirvish-dir-data-proc-s
+  (pcase-let ((`(,buf . ,setup) (process-get proc 'meta))
+              (`(,vc . ,data) (with-current-buffer (process-buffer proc)
+                                (read (buffer-string)))))
+    (when (buffer-live-p buf)
+      (with-current-buffer buf
+        (unless dirvish--attrs-hash
+          (setq dirvish--attrs-hash (make-hash-table :test #'equal)))))))
