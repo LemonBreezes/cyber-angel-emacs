@@ -20,6 +20,7 @@
                        (not (file-in-directory-p (buffer-file-name)
                                                  (concat doom-private-dir "secrets/")))
                        (require 'git-auto-commit-mode nil t))
+              (diff-hl-mode -1)
               (git-auto-commit-mode 1)
               (setq-local gac-automatically-push-p t)))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
