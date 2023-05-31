@@ -101,7 +101,7 @@ derivative.")
 (use-package! cape
   :defer t
   :init
-  (add-to-list 'completion-at-point-functions #'cape-file nil #'eq)
+  (add-to-list 'completion-at-point-functions #'cape-file)
   (when +corfu-ispell-in-comments-and-strings
     (defalias 'corfu--ispell-in-comments-and-strings
       (cape-super-capf (cape-capf-inside-comment #'cape-ispell)
