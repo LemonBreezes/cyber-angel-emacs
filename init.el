@@ -63,7 +63,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-        (default +bindings)
+       (default +bindings)
 
        :private
        ;; exwm
@@ -73,7 +73,7 @@
        eshell
        dired
        lisp
-       ;; misc-applications
+       misc-applications
        ;; helm
        modeline
        unpackaged
