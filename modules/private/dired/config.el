@@ -121,7 +121,7 @@
 ;; opening a file in a single window.
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 
-;; When opening a file in a single window, automatically enter fullscreen mode.
+;; When opening a directory in a single window, automatically enter fullscreen mode.
 (map! [remap dired-jump] #'dirvish-dwim)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
