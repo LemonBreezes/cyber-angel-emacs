@@ -570,7 +570,9 @@
 
 ;; I don't use Deft.
 (when (and (not (modulep! :ui deft))
-           (lookup-key doom-leader-map "nd")))
+           (eq (lookup-key doom-leader-map "nd")
+               'deft))
+  (define-key doom-leader-map "nd" nil))
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
