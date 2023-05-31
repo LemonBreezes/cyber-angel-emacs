@@ -101,10 +101,10 @@
            (rss +org)
 
            :private
-           ;;(corfu +indexed)
+           (corfu +indexed)
            ;;debugger
            (dirvish +icons +dirvish)
-           ;;eshell
+           eshell
            ;;dired
            ;;lisp
            ;;misc-applications
