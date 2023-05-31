@@ -573,7 +573,7 @@
         "TAB" #'indent-for-tab-command))
 
 (when (modulep! :private corfu)
-  (map! (:prefix-map ("M-+" . "autocomplete")
+  (map! :prefix-map ("M-+" . "autocomplete")
          :g "c" #'completion-at-point   ; capf
          :g "t" #'complete-tag          ; etags
          :g "d" #'cape-dabbrev          ; or dabbrev-completion
@@ -591,7 +591,7 @@
          :g "&" #'cape-sgml
          :g "r" #'cape-rfc1345
          :g "+" #'copilot-complete
-         :g "M-+" #'copilot-complete)))
+         :g "M-+" #'copilot-complete))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
