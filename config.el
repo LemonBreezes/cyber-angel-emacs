@@ -383,8 +383,8 @@
   (setq compilation-scroll-output t))
 
 (after! tramp
-  (setq tramp-terminal-prompt-regexp
-        "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
+  (setenv "SHELL" "/bin/bash")
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*")) ;; default + 
 
 ;; Use Emacs as the default editor for shell commands.
 ;; `dwim-shell-command'.
