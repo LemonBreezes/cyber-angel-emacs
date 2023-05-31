@@ -224,15 +224,13 @@ mark the string and call `edit-indirect-region' with it."
     (apply oldfun args)))
 
 ;;;###autoload
-(defun cae-avy-use-pre-style-a (oldfun &rest args)
-  (let ((avy-style 'pre)
-        (avy-column-line-overlay nil))
-    (apply oldfun args)))
-
-;;;###autoload
 (defun cae-avy-indent-line-overlay-a (oldfun &rest args)
   (let ((avy-indent-line-overlay t))
     (apply oldfun args)))
+
+;;;###autoload
+(defun cae-avy-goto-line-above-use-bottom-up-a (oldfun &optional offset bottom-up)
+  (funcall oldfun offset (not bottom-up)))
 
 ;;;###autoload
 (defun cae-avy-use-at-style-a (oldfun &rest args)
