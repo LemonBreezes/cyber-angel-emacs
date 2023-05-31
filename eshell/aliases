@@ -24,8 +24,8 @@ alias d     dirvish                      $1 > /dev/null
 alias rg    rg                           --color=always                       $*
 
 
-alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom $*
-alias doom   DOOMDIR=~/.doom.d/         ~/.emacs.d/bin/doom          $*
+alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
+alias doom   DOOMDIR=~/.doom.d/         ~/.emacs.d/bin/doom                   $*
 
 alias j    z $*p
 alias vi   e $*
