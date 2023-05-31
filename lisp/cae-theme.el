@@ -68,10 +68,10 @@
              :config
              (setq circadian-themes
                    (if (modulep! :ui doom)
-                       '((:sunrise . modus-operandi)
-                         (:sunset  . modus-vivendi))
-                     '((:sunrise . doom-one)
-                       (:sunset  . doom-one-light))))
+                       '((:sunrise . doom-one)
+                         (:sunset  . doom-one-light))
+                     '((:sunrise . modus-operandi)
+                       (:sunset  . modus-vivendi))))
              (if (and calendar-latitude calendar-longitude)
                  (circadian-setup)
                (setq calendar-latitude 0
