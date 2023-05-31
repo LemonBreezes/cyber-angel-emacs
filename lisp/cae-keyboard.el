@@ -422,7 +422,7 @@
     ))
 
 ;;; Worf
-(after! worg
+(after! worf
   (worf-define-key worf-mode-map "P" #'org-priority)
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
