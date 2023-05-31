@@ -104,12 +104,12 @@
     (funcall oldfun)))
 (advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
-;; Remove this as soon as Doom fixes the error upstream.
-(defadvice! cae-hacks-monkey-patch-consult-for-doom (oldfun &rest args)
-  :around #'consult--ripgrep-make-builder
-  (if (null args)
-      #'consult--ripgrep-make-builder
-    (apply oldfun args)))
+;;;; Remove this as soon as Doom fixes the error upstream.
+;;(defadvice! cae-hacks-monkey-patch-consult-for-doom (oldfun &rest args)
+;;  :around #'consult--ripgrep-make-builder
+;;  (if (null args)
+;;      #'consult--ripgrep-make-builder
+;;    (apply oldfun args)))
 
 ;; Make `eshell-previous-prompt' properly handle the case when there is no
 ;; previous prompt.
