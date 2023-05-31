@@ -46,7 +46,7 @@ overriding other keymaps."
   "Whether our tools section of `config.el' is disabled.")
 (defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is disabled.")
-(defvar cae-init-autocompletion-enabled-p nil
+(defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is disabled.")
 
 (condition-case err
