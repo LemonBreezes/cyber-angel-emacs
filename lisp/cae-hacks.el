@@ -65,7 +65,6 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
-
 ;; Compile Vterm without asking.
 (defvar vterm-always-compile-module t)
 
