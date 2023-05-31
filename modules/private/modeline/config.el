@@ -107,17 +107,17 @@
           "C-M-!" #'parrot-rotate-prev-word-at-point)
     :config
     (setopt parrot-animate 'hide-static
-             parrot-rotate-animate-after-rotation nil
-             parrot-num-rotations 10
-             parrot-animate-on-load nil
-             parrot-party-on-magit-push t
-             parrot-party-on-org-todo-states '("DONE")
-             parrot-type 'nyan)
+            parrot-rotate-animate-after-rotation nil
+            parrot-num-rotations 10
+            parrot-animate-on-load nil
+            parrot-party-on-magit-push t
+            parrot-party-on-org-todo-states '("DONE")
+            parrot-type 'nyan)
     (parrot-mode +1)
-      (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
-            parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
-      (add-to-list 'parrot-rotate-dict
-                   '(:rot ("add-hook" "remove-hook")))
+    (setq parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+          parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+    (add-to-list 'parrot-rotate-dict
+                 '(:rot ("add-hook" "remove-hook")))
     (add-to-list 'parrot-rotate-dict
                  '(:rot ("add-hook!" "remove-hook!")))
     (add-to-list 'parrot-rotate-dict
