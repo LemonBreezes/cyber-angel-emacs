@@ -65,10 +65,10 @@
         (aref orbit (mod (1+ (cl-position arg orbit)) (length orbit)))
       arg)))
 
-(defun cae-keyboard-remap-char-reverse (arg)
+(cl-defun cae-keyboard-remap-char-reverse (arg)
   (declare (side-effect-free t))
   (unless cae-keyboard-remaps-enabled-p
-    (cl-return-from cae-keyboard-remap-char arg))
+    (cl-return-from cae-keyboard-remap-char-reverse arg))
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
         (aref orbit (mod (1- (cl-position arg orbit)) (length orbit)))
