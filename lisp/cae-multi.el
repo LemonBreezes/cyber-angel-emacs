@@ -33,18 +33,19 @@
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
 
-(defun cae-multi-abbrev-push-changes-a (&optional file _)
-  (when (file-in-directory-p (if file file abbrev-file-name) cae-multi-data-dir)
+(defun cae-multi-commit-file (file)
+  (when (file-in-directory-p file doom-user-dir)
     (let ((gac-automatically-push-p t)
           (gac-silent-message-p t))
-      (gac--after-save (find-file-noselect (if file file abbrev-file-name))))))
+      (gac--after-save (find-file-noselect file)))))
+
+(defun cae-multi-abbrev-push-changes-a (&optional file _)
+  (unless file
+    (cae-multi-commit-file abbrev-file-name)))
 (advice-add #'write-abbrev-file :after #'cae-multi-abbrev-push-changes-a)
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
-  (when (file-in-directory-p bookmark-default-file cae-multi-data-dir)
-    (let ((gac-automatically-push-p t)
-          (gac-silent-message-p t))
-      (gac--after-save (find-file-noselect bookmark-default-file)))))
+  (gac--after-save bookmark-default-file))
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
 
 (defun cae-multi-org-archive-push-changes-h ()
