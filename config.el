@@ -118,10 +118,11 @@
   ;; (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
   ;; (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
   (defun cae-popup-resize-help-buffer (win)
-    (when (> (cl-count-if (lambda (win)
-                            (window-in-direction 'right win t))
-                          (window-list))
-             1)
+    (when (let ((i 0))
+            (cl-loop for win the windows
+                     if (window-in-direction 'right win t)
+                     do (cl-incf i)
+                     finally return (> i 1)))
       ;; resize the help buffer to 1/3 of the screen
       (with-selected-window win
         (enlarge-window (- (/ (frame-width) 3)
