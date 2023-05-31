@@ -5,6 +5,7 @@
 
   (map! "<f6>" #'dap-hydra)
   (after! dap-mode
+    (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
     ;; Close the windows when the debugger is closed.
     (advice-add #'dap-disconnect :after #'cae-debugger-quit-session-a)
 
