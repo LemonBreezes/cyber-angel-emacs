@@ -55,7 +55,7 @@
 (setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t
-      display-raw-bytes-as-hex t)
+      display-raw-bytes-as-hex t)       ;Easier to read
 
 (after! newcomment
   (setq comment-empty-lines 'eol
