@@ -32,4 +32,4 @@
 
 (defun cae-org-jira-jump-to-jira-folder ()
   (interactive)
-  (find-file org-jira-download-dir))
+  (find-file org-jira-working-dir))
