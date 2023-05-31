@@ -46,7 +46,14 @@
               eat--eshell-semi-char-mode-hook
               eat--eshell-process-running-mode-hook)
     (cae-defun cae-eshell-disable-modes-in-eat-h ()
-      (when (or ))))
+      (let ((modes '(corfu-mode eldoc-mode)))
+        (dolist (mode modes)
+          (when (bound-and-true-p mode)
+            (funcall mode
+                     (if (or eat--eshell-char-mode-hook
+                             eat--eshell-semi-char-mode-hook
+                             eat--eshell-process-running-mode-hook)
+                         -1 1)))))))
 
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
