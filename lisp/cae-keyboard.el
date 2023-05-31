@@ -67,8 +67,6 @@
   (kbd "C-z C-9"))
 
 
-
-
 ;; other window prefix
 (define-key key-translation-map (kbd "C-x 4 C-x 4") (kbd "C-x 4 4"))
 (define-key key-translation-map (kbd "C-x 4 C-x 1") (kbd "C-x 4 1"))
