@@ -284,7 +284,8 @@ mark the string and call `edit-indirect-region' with it."
                      (cond ((or (eq avy-command 'avy-goto-line)
                                 (memq this-command '(avy-goto-line-above
                                                      avy-goto-line-below)))
-                            (call-interactively #'comment-or-uncomment-region))
+                            (call-interactively #'comment-or-uncomment-region)
+                            (call-interactively #'indent-region))
                            ((bound-and-true-p lispy-mode)
                             (deactivate-mark)
                             (lispy-comment))
