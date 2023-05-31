@@ -59,19 +59,18 @@
 ;; Set theme based on time
 
 (advice-add #'doom-init-theme-h :override #'ignore)
-(when (display-graphic-p)
-  (use-package! circadian
-    :config
-    (setq circadian-themes '((:sunrise . modus-operandi)
-                             (:sunset  . modus-vivendi)))
-    (if (and calendar-latitude calendar-longitude)
-        (circadian-setup)
-      (setq calendar-latitude 0
-            calendar-longitude 0)
-      (message "ERROR: Calendar latitude and longitude are not set.")
-      (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
-                                                 circadian-themes))
-                           doom-theme)))))
+(use-package! circadian
+  :config
+  (setq circadian-themes '((:sunrise . modus-operandi)
+                           (:sunset  . modus-vivendi)))
+  (if (and calendar-latitude calendar-longitude)
+      (circadian-setup)
+    (setq calendar-latitude 0
+          calendar-longitude 0)
+    (message "ERROR: Calendar latitude and longitude are not set.")
+    (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
+                                               circadian-themes))
+                         doom-theme))))
 
 (use-package! theme-magic
   :defer t
