@@ -38,16 +38,15 @@
       (map! :map forge-post-mode-map
             "<f6>" #'cae-magit-forge-post-hydra/body
             :map forge-topic-mode-map
-            "<f6>" #'cae-magit-forge-topic-hydra/body)
-      (when (modulep! :completion vertico)
-        (map! :map forge-pullreq-list-mode-map
-              "j" #'consult-line
-              :map forge-topic-list-mode-map
-              "j" #'consult-line
-              :map forge-repository-list-mode-map
-              "j" #'consult-line
-              :map forge-notifications-mode-map
-              "j" #'consult-line)))))
+            "<f6>" #'cae-magit-forge-topic-hydra/body
+            :map forge-pullreq-list-mode-map
+            "j" #'+default/search-buffer
+            :map forge-topic-list-mode-map
+            "j" #'+default/search-buffer
+            :map forge-repository-list-mode-map
+            "j" #'+default/search-buffer
+            :map forge-notifications-mode-map
+            "j" #'+default/search-buffer))))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
