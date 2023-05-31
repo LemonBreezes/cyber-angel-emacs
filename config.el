@@ -17,7 +17,7 @@
 ;; Do not use pagers
 (setenv "PAGER" "cat")
 (setenv "GIT_PAGER" "cat")
-
+w
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   (let ((font-size-offset (if (getenv "SSH_TTY") 0 2)))
