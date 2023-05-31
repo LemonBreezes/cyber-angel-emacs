@@ -1205,10 +1205,11 @@
 (map! :leader :prefix ("g" . "gpt"))
 
 (use-package! org-ai
-  :defer t :init (map! "C-c M-a" #'cae-lazy-load-org-ai)
+  :defer t :init
+  (map! "C-c M-a" #'cae-lazy-load-org-ai)
+  (add-hook 'org-mode-hook #'org-ai-mode)
   :config
   (org-ai-global-mode +1)
-  (add-hook 'org-mode-hook #'org-ai-mode)
   (setq org-ai-default-chat-model "gpt-4"
         org-ai-default-completion-model "gpt-4")
   (when (modulep! :editor snippets)
