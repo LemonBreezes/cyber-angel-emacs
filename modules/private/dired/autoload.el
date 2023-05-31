@@ -6,7 +6,10 @@
   (require 'dirvish nil t)
   (unless (memq #'dired-noselect find-directory-functions)
     (add-hook 'find-directory-functions #'dired-noselect t))
-  (dired-noselect dir))
+  (dired-noselect dir)
+  (when (and (frame-width (selected-frame))
+             (> (frame-width (selected-frame)) 160))
+    (dirvish-dwim)))
 
 ;;;###autoload
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
