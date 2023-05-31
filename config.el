@@ -689,7 +689,7 @@
 
 ;;(use-package! macrursors
 ;;  :config
-;;  (dolist (mode '(corfu-mode goggles-mode beacon-mode))
+;;  (dolist (mode '(corfu-mode goggles-mode))
 ;;    (add-hook 'macrursors-pre-finish-hook mode)
 ;;    (add-hook 'macrursors-post-finish-hook mode))
 ;;  (define-prefix-command 'macrursors-mark-map)
