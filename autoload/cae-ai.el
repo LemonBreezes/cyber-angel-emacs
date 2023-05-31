@@ -25,6 +25,7 @@
 ;;;###autoload
 (defun cae-ai-org-ai-kill-region-at-point ()
   (interactive)
+  (setq this-command 'org-ai-kill-region-at-point)
   (call-interactively #'org-ai-kill-region-at-point)
   (forward-char -1)
   (let ((end (point))
