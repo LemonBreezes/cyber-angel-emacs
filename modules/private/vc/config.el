@@ -66,7 +66,7 @@
 (use-package! vc-backup
   :defer t
   :init
-  (setopt make-backup-files t
-         vc-make-backup-files t))
+  (setq make-backup-files t
+        vc-make-backup-files t))
 
 ;; TODO Look at Karthik's config for his Smerge stuff.
