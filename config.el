@@ -493,7 +493,8 @@
 
   (when (modulep! :editor fold)
     ;;(add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
-    (setq vimish-fold-indication-mode 'right-fringe))
+    ;;(setq vimish-fold-indication-mode 'right-fringe)
+    )
 
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project-bookmark"))
