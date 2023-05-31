@@ -524,18 +524,15 @@
     (if (and (buffer-file-name) (buffer-modified-p))
         (cl-loop for ch = (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
                  if (or (eq ch ?k) (eq ch ?K))
-                 return (progn (when (buffer-live-p cae-diff-buffer)
-                                 (kill-buffer cae-diff-buffer))
-                               t)
+                 return t
                  if (or (eq ch ?d) (eq ch ?D))
-                 do (setq cae-diff-buffer (window-buffer (diff-buffer-with-file)))
+                 do (diff-buffer-with-file)
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
                  if (memq ch '(?q ?Q ?\C-g ?\C-\[))
-                 return (progn (when (buffer-live-p cae-diff-buffer)
-                                 (kill-buffer cae-diff-buffer))
-                               nil))
+                 return nil)
       t))
+  
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
