@@ -43,6 +43,6 @@
                     text-mode-hook
                     lsp-mode-hook
                     sly-mode-hook))
-      (add-hook hook #'caeyas-setup-capf))
+      (add-hook hook #'cae-yas-setup-capf))
     :config
     (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
