@@ -495,10 +495,11 @@
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
-       (:after vertico
-        :map vertico-map
-        "<prior>" #'vertico-scroll-down
-        "<next>" #'vertico-scroll-up))
+       ;;(:after vertico
+       ;; :map vertico-map
+       ;; "<prior>" #'vertico-scroll-down
+       ;; "<next>" #'vertico-scroll-up)
+       )
       (:after man
        :map Man-mode-map
        :n "o" #'ace-link-man))
