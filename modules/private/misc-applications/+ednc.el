@@ -1,5 +1,7 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
+;;(dbus-ping :system "org.freedesktop.DBus")
+;;(dbus-list-known-names :system)
 (use-package! ednc
   :when (not (and (string-suffix-p "-android" system-configuration)
                   (executable-find "termux-clipboard-get")))
