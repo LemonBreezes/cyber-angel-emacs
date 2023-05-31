@@ -25,10 +25,6 @@
 (package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
 (package! perfect-margin)
 
-;; Testing whether to use this or `perfect-margin'.
-(package! auto-olivetti :recipe (:repo "https://git.sr.ht/~ashton314/auto-olivetti"))
-(package! olivetti)
-
 ;; cae-theme.el
 (package! modus-themes)
 (package! circadian)
