@@ -116,11 +116,11 @@
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer))
+        [remap next-buffer] #'cae-dired-next-buffer)
 
-;; Exit the current Dirvish session when running interactive commands like
-;; `projectile-find-file'.
-(advice-add #'find-file :around #'cae-dired-find-file-a)
+  ;; Exit the current Dirvish session when running interactive commands like
+  ;; `projectile-find-file'.
+  (advice-add #'find-file :around #'cae-dired-find-file-a))
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
