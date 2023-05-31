@@ -175,7 +175,9 @@
   ;; (add-hook 'meow-mode-hook #'meow-setup-indicator)
   (map! :map meow-normal-state-keymap
         "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
-        "DEL" #'meow-keypad)
+        "DEL" #'meow-keypad
+        :map meow-motion-state-keymap
+        "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c")))))
   (map! :leader
         "h" help-map)
   (setq meow-keypad-start-keys
