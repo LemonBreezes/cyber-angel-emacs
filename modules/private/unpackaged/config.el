@@ -22,7 +22,7 @@
   (after! magit
     (setq magit-bury-buffer-function #'magit-restore-window-configuration)
     (map! :map magit-status-mode-map
-          ;; Killing the Magit status buffer deletes the `forge-pull' progress
+          ;; Killing the Magit status buffer removes the `forge-pull' progress
           ;; from the modeline.
           "q" #'magit-mode-bury-buffer))
   (advice-add #'cae-unpackaged-magit-status :before-until
