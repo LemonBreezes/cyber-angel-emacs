@@ -291,8 +291,8 @@ mark the string and call `edit-indirect-region' with it."
 
 (defun cae-embark-completing-read-prompter (oldfun &rest args)
   (minibuffer-with-setup-hook
-      `(lambda ()
-         (local-set-key (kbd "C-z") #'abort-recursive-edit))
+      (lambda ()
+        (local-set-key (kbd "C-z") #'abort-recursive-edit))
     (apply oldfun args)))
 
 ;;;###autoload
