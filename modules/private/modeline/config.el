@@ -189,9 +189,9 @@
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
   (advice-add #'gac-push
-              :around
+              :after
               (cae-defun cae-modeline-gac-party-on-push-a (oldfun buffer)
-                (+log (funcall oldfun buffer))))
+                (+log (get-buffer-process "*git-auto-push*"))))
   (parrot-mode +1))
 (use-package! parrot-rotate
   :defer t
