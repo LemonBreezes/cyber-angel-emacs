@@ -18,6 +18,7 @@
 (package! topsy)
 (package! anzu)
 (package! isearch-mb)
+(package! hercules)
 
 ;; cae-theme.el
 (package! modus-themes)
