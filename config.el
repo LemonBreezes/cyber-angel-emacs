@@ -89,6 +89,9 @@
   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
+(when (modulep! :ui workspaces)
+  (advice-add #'which-key--process-page :around #'cae-ui-which-key-show-workspace))
+
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
