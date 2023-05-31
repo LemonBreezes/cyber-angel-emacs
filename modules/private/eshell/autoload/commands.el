@@ -131,7 +131,7 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/u ()
+(defun eshell/l ()
   (let ((buf
          (cl-find-if (lambda (buf)
                        (and (not (eq buf (current-buffer)))
