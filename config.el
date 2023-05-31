@@ -608,30 +608,30 @@
 ;;
 ;;(setq set-mark-command-repeat-pop t
 ;;      next-line-add-newlines t)
-;;
-;;(setq search-whitespace-regexp ".*?"
-;;      search-default-mode #'char-fold-to-regexp
-;;      isearch-lax-whitespace t
-;;      isearch-wrap-pause 'no-ding
-;;      isearch-lazy-count t
-;;      isearch-repeat-on-direction-change t
-;;      isearch-allow-motion t
-;;      isearch-allow-scroll t
-;;      isearch-yank-on-move 'shift
-;;      isearch-motion-changes-direction t
-;;      lazy-count-prefix-format "(%s/%s) "
-;;      lazy-count-suffix-format nil      ; Using the suffix for counting matches
-;;                                        ; is better but does not work with
-;;                                        ; `isearch-mb'.
-;;      lazy-highlight-cleanup nil
-;;      ;; The default search ring size is 16, which is too small considering that
-;;      ;; we can fuzzy search the history with Consult.
-;;      search-ring-max 200
-;;      regexp-search-ring-max 200)
-;;(add-hook 'doom-escape-hook
-;;          (cae-defun cae-clean-up-lazy-highlight-h ()
-;;            (when isearch-lazy-highlight-overlays
-;;              (lazy-highlight-cleanup t) t)))
+
+(setq search-whitespace-regexp ".*?"
+      search-default-mode #'char-fold-to-regexp
+      isearch-lax-whitespace t
+      isearch-wrap-pause 'no-ding
+      isearch-lazy-count t
+      isearch-repeat-on-direction-change t
+      isearch-allow-motion t
+      isearch-allow-scroll t
+      isearch-yank-on-move 'shift
+      isearch-motion-changes-direction t
+      lazy-count-prefix-format "(%s/%s) "
+      lazy-count-suffix-format nil      ; Using the suffix for counting matches
+                                        ; is better but does not work with
+                                        ; `isearch-mb'.
+      lazy-highlight-cleanup nil
+      ;; The default search ring size is 16, which is too small considering that
+      ;; we can fuzzy search the history with Consult.
+      search-ring-max 200
+      regexp-search-ring-max 200)
+(add-hook 'doom-escape-hook
+          (cae-defun cae-clean-up-lazy-highlight-h ()
+            (when isearch-lazy-highlight-overlays
+              (lazy-highlight-cleanup t) t)))
 
 (after! ispell
   (setq ispell-quietly t
