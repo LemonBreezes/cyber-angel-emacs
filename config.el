@@ -188,13 +188,19 @@
 (after! projectile
   ;; Automatically find projects in the I personally use.
   (setq projectile-project-search-path
-         `((,doom-user-dir . 0)
-           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-           ("~/src/" . 1)))
+        `((,doom-user-dir . 0)
+          ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+          ("~/src/" . 1)))
   (add-to-list 'projectile-globally-ignored-directories
                (expand-file-name ".local/straight/repos/" user-emacs-directory))
   (unless projectile-known-projects
-    (projectile-discover-projects-in-search-path)))
+    (projectile-discover-projects-in-search-path))
+  (cl-pushnew
+   '(make marker-files
+     ("makefile")
+     project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+   projectile-project-types :test #'equal))
+
 
 (after! tramp
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
