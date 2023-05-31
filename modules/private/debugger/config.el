@@ -33,7 +33,7 @@
         "RET" #'cae-debugger-gdb-select-frame))
 (after! projectile
   (map! :map projectile-command-map
-        "@" #'cae-debugger-run-gdb))
+        "@" #'cae-debugger-projectile-run-gdb))
 
 ;; These keybindings are normally installed after running `gdb' but I want them
 ;; earlier in case I want to set breakpoints before running `gdb'.
