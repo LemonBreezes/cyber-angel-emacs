@@ -193,7 +193,7 @@
                           ,(if (string= (cadr binding) ",")
                                (progn (backtrace)
                                       (cae-keyboard-kbd-reverse (car binding)))
-                             (message "binding: %s_" binding)
+                             (message "binding: %s_" (cadr binding))
                              (cadr binding))
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
