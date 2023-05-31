@@ -13,7 +13,7 @@
        hl-todo
        hydra
        (ligatures +extra +iosevka)
-       ;; (modeline +light)
+       modeline
        (popup +defaults)
        ophints
        (vc-gutter +pretty)
