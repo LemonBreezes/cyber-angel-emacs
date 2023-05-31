@@ -210,4 +210,5 @@
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key)
   (autoload 'etcc--evil-set-cursor "evil-terminal-cursor-changer")
-  (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a))
+  (advice-add #'meow--update-cursor :after #'cae-meow-update-cursor-a)
+  (advice-add #'eldoc-print-current-symbol-info :after #'cae-meow-update-cursor-a))
