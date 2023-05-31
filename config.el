@@ -728,7 +728,9 @@
     (add-to-list 'ibuffer-never-show-predicates "^\\*Async-native-compile-log\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*lsp-log\\*$")
     (add-to-list 'ibuffer-never-show-predicates "^\\*envrc\\*$")
-    (add-to-list 'ibuffer-never-show-predicates "^\\*Shell Command Output\\*$"))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Shell Command Output\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*Messages\\*$"))
 
   (use-package! aggressive-indent
     :disabled t
