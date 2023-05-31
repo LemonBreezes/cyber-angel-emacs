@@ -98,7 +98,8 @@
     (setq! nyan-bar-length 20
            nyan-minimum-window-width 20))
 
-  ;; This block might seem crazy, but it's the only way to get the
+  ;; This block might seem crazy, but it's how I've gotten parrot mode to work
+  ;; and be silent on startup.
   (use-package! parrot
     :defer t :init
     (defadvice! +define-obsolete-variable-alias-a (oldfun &rest args)
