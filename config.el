@@ -81,9 +81,6 @@
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
 
-  ;; Colorize color strings.
-  (add-hook 'prog-mode-hook #'rainbow-mode)
-
   (after! ansi-color
     ;; I am trying this out. Not sure if I like it yet.
     (setq ansi-color-bold-is-bright t))
