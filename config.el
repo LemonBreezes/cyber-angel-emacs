@@ -286,7 +286,7 @@
     (after! eshell
       (remove-hook 'eshell-mode-hook #'smartparens-mode))))
 
-;; This is how we get curly braces working in C.
+;; This is how we get curly braces working in C without `smartparens'.
 (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
 (add-hook 'c-mode-common-hook #'electric-pair-local-mode)
 (map! [remap newline] nil)
