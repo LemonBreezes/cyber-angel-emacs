@@ -46,4 +46,5 @@
   (make-directory (expand-file-name "~/.org-jira") t))
 
 (use-package! worf
-  :defer t)
+  :defer t :init
+  (add-hook 'org-mode-hook #'worf-mode))
