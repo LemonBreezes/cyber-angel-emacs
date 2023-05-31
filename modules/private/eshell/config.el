@@ -34,6 +34,9 @@
     (eat-eshell-mode +1)
     (eat-eshell-visual-command-mode +1))
 
+  (setf (symbol-function 'eshell/e) (symbol-function #'eshell/emacs))
+  (unintern 'eshell/emacs)
+
   ;; Do not let EAT override TERM.
   (setq eat-term-name (lambda () eshell-term-name)
         eat-enable-yank-to-terminal t)
