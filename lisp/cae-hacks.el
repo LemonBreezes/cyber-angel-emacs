@@ -92,6 +92,7 @@
             diff-hl-revert-hunk)
   (let ((diff-hl-reference-revision
          (buffer-local-value
-                                     'diff-hl-reference-revision
-                                     (current-buffer))))
+          'diff-hl-reference-revision
+          (current-buffer))))
+    (message "diff-hl-reference-revision: %s" diff-hl-reference-revision)
     (apply oldfun args)))
