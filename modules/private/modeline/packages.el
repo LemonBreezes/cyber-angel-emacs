@@ -2,4 +2,6 @@
 ;;; private/modeline/packages.el
 
 (package! minions :recipe (:host github :repo "LemonBreezes/minions"))
-(package! nyan-mode)
+(when (modulep! +pretty)
+  (package! nyan-mode)
+  (package! parrot))
