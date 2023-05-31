@@ -4,7 +4,8 @@
   "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
   (setq buffer-or-name (or buffer-or-name (current-buffer)))
   (when (and (buffer-local-value 'buffer-file-name (get-buffer buffer-or-name))
-             (buffer-modified-p (get-buffer buffer-or-name)))
+             (buffer-modified-p (get-buffer buffer-or-name))
+             (not (+popup-window-p)))
     (catch 'quit
       (save-window-excursion
         (with-current-buffer buffer-or-name
