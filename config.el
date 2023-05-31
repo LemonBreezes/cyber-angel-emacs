@@ -320,7 +320,7 @@
       (and (window-live-p (selected-window))
            (eq (plist-get (frame-parameters) 'posframe) t)))
     :config
-    (add-to-list 'perfect-margin-ignore-filters 'my-perfect-margin-ignore-posframe-p))
+    (add-to-list 'perfect-margin-ignore-filters 'cae-perfect-margin-ignore-posframe-p))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
