@@ -21,6 +21,7 @@
 
 (advice-add #'tab-bar-select-tab
             :around
-            (lambda (fun &rest args)
+            (cae-defun cae-tab-bar-switch-run-hooks-a (fun &rest args)
               (run-hooks 'cae-tab-bar-before-switch-hook)
-              (apply fun args)))
+              (apply fun args)
+              (run-hooks 'cae-tab-bar-after-switch-hook)))
