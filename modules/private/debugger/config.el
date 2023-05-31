@@ -1,8 +1,10 @@
 ;;; private/debugger/config.el -*- lexical-binding: t; -*-
 
-(when (and (modulep! :lang cc +lsp)
-           (modulep! :tools lsp)
+(when (and (modulep! :tools lsp)
            (modulep! :tools debugger +lsp))
-  (add-transient-hook! 'c-mode-common-hook
-    (require 'dap-cpptools)
-    (dap-cpptools-setup)))
+  (after! dap-mode
+    (remove-hook 'dap-stopped-hook #'+dap-running-session-mode))
+  (when (modulep! :lang cc +lsp)
+    (add-transient-hook! 'c-mode-common-hook
+      (require 'dap-cpptools)
+      (dap-cpptools-setup))))
