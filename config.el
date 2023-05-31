@@ -315,7 +315,12 @@
         isearch-allow-motion t
         isearch-allow-scroll t
         isearch-yank-on-move 'shift
-        isearch-motion-changes-direction t))
+        isearch-motion-changes-direction t
+        lazy-count-prefix-format nil
+        lazy-count-suffix-format " [%s/%s]"
+        lazy-highlight-cleanup nil)
+  (add-hook 'doom-escape-hook
+            (apply-partially #'lazy-highlight-cleanup t)))
 
 (after! ispell
   (setq ispell-quietly t
