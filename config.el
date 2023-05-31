@@ -89,23 +89,6 @@
   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-(when (modulep! :ui workspaces)
-  ;; Add a tabline to Which Key
-  (defadvice! rigor/which-key-show-workspace (orig-fun &rest pages-obj)
-    "Show my workspaces in the echo thingy"
-    :around #'which-key--process-page
-    (let ((out (apply orig-fun pages-obj))
-          (prefix-title (which-key--pages-prefix-title (car pages-obj))))
-      (if (not (or (string-equal prefix-title "workspace")
-                   (string-equal prefix-title "workspaces/windows")))
-          out
-        (cons (car out)
-              `(lambda ()
-                 (funcall ,(cdr out))
-                 (unless (fboundp #'+workspace--tabline)
-                   (load (symbol-file #'+workspace/new) nil t))
-                 (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
-
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
