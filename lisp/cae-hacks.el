@@ -118,3 +118,12 @@
   (if (null args)
       #'consult--ripgrep-make-builder
     (apply oldfun args)))
+
+;; Make `eshell-previous-prompt' properly handle the case when there is no
+;; previous prompt.
+(defadvice! cae-hacks-jump-back-if-bolp (oldfun &rest args)
+  :around #'eshell-previous-prompt
+  (let ((p (point)))
+    (apply oldfun args)
+    (when (bolp)
+      (goto-char p))))
