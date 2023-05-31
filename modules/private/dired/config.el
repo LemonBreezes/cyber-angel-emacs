@@ -155,7 +155,8 @@
                 find-alternate-file
                 ido-find-file
                 consult-locate))
-    (define-key dirvish-mode-map (vector 'remap fn) (cae-dired-find-file-wrapper fn)))
+    (define-key dirvish-mode-map (vector 'remap fn)
+      (eval `(cae-dired-find-file-wrapper ,fn))))
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
