@@ -41,13 +41,13 @@ overriding other keymaps."
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 ;; Also show keybinidng descriptions on my second leader key when using Evil.
-(defun +which-key-add-key-based-replacements-a
+(defun cae-which-key-add-key-based-replacements-a
     (oldfun key-sequence &rest args)
   (when (string-prefix-p "SPC " key-sequence)
     (apply oldfun (replace-regexp-in-string "^SPC " "DEL " key-sequence) args))
   (apply oldfun key-sequence args))
 (advice-add #'which-key-add-key-based-replacements :around
-            #'+which-key-add-key-based-replacements-a)
+            #'cas-which-key-add-key-based-replacements-a)
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
