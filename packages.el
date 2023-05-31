@@ -52,6 +52,7 @@
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
 (package! aggressive-indent)
+(package! yank-indent)
 (package! hungry-delete)
 (package! file-info)
 (package! titlecase)
