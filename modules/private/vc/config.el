@@ -95,10 +95,14 @@
 
 (use-package! git-email
   :defer t :init
-  (when (modulep! :email mu4e)
-    (after! mu4e
-      (require 'git-email-mu4e)
-      (git-email-mu4e-mode +1)))
+  (cond ((modulep! :email mu4e)
+         (after! mu4e
+           (require 'git-email-mu4e)
+           (git-email-mu4e-mode +1)))
+        ((modulep! :email mu4e)
+         (after! mu4e
+           (require 'git-email-mu4e)
+           (git-email-mu4e-mode +1))))
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
