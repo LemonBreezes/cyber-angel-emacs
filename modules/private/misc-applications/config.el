@@ -55,6 +55,9 @@
     "+tetris"
 
     ;; TODO Eyecandy
+    ;; fireplace
+    ;; flames of freedom
+    ;; zone
     ))
 
 (dolist (file +misc-applications--lisp-files)
