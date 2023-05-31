@@ -583,10 +583,6 @@
   (advice-remove #'newline-and-indent
                  #'+default--newline-indent-and-continue-comments-a)
 
-  ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-  (map! :leader
-        :desc "Copy link" "sy" #'link-hint-copy-link)
-
   (after! expand-region
     (setq expand-region-smart-cursor t)
     (setq er/try-expand-list
