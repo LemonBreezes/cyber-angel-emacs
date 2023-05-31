@@ -6,7 +6,7 @@
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-(defvar cae-config-compilation-enabled nil
+(defvar cae-config-compilation-enabled t
   "Whether on-kill native compilation is enabled.")
 
 ;;; UI
