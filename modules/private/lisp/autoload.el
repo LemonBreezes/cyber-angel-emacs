@@ -24,12 +24,3 @@
          (call-interactively #'lispy-newline-and-indent))
         (t
          (call-interactively #'newline-and-indent))))
-
-;;;###autoload
-(defun cae-mark-dir-locals-as-safe-h ()
-  ;; Mark all variables in dir-locals as safe. Meant to be run in a
-  ;; `.dir-locals.el' buffer.
-  (cl-loop for (var . val) in
-           (mapcar #'cadr
-                   (read (buffer-string)))
-           do (add-to-list 'safe-local-variable-values (cons var val))))
