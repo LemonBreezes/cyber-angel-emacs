@@ -22,7 +22,7 @@
   (map! :map timer-list-mode-map
         "<f6>" #'+timer-list-hydra/body))
 (map! :map process-menu-mode-map
-      "<f6>" #'+process-menu-hydra/body)
+      "<f6>" #'+list-processes-hydra/body)
 
 ;; TODO Turn these into module flags and separate the binding of their prefixes
 ;; out into `doom-after-init-hook' so that the user can modify them.
