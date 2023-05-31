@@ -318,6 +318,7 @@
     (defun cae-perfect-margin-ignore-posframe-p (window)
       "Check if the current buffer's display type is posframe."
       (frame-parameter (window-frame window) 'parent-frame))
+    ;; TODO Add a filter for which key.
     :config
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
 
