@@ -94,3 +94,5 @@
          (entry (car (last (or past-themes themes))))
          (theme (cdr entry)))
     (setq doom-theme theme)))
+
+(cae-theme-load-circadian-times-h)
