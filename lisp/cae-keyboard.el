@@ -267,7 +267,7 @@
              ("SPC" lispy-other-space)
              (,(cae-keyboard-kbd "g") lispy-goto-mode))))
     (eval `(defhydra hydra-lispy-x (:exit t
-                                    :hint nil
+                                    :hint t
                                     :columns 3)
              "x"
              (,(cae-keyboard-kbd "b") lispy-bind-variable "bind variable")
