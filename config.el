@@ -152,144 +152,144 @@
   (setq posframe-inhibit-double-buffering t))
 
 
-;; ;;; Tools
+;;; Tools
 
-;; (load! "lisp/cae-webkit.el")
+(load! "lisp/cae-webkit.el")
 
-;; (setq browse-url-browser-function #'browse-url-generic
-;;       browse-url-generic-program "chromium-bin"
-;;       browse-url-generic-args '("--no-sandbox")
-;;       browse-url-chromium-program "chromium-bin")
+(setq browse-url-browser-function #'browse-url-generic
+      browse-url-generic-program "chromium-bin"
+      browse-url-generic-args '("--no-sandbox")
+      browse-url-chromium-program "chromium-bin")
 
-;; (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-;; (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
-;; (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
-;; (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
-;; ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
-;; ;; balanced, which breaks font-lock.
-;; (after! syslog-mode
-;;   (setq syslog-font-lock-keywords
-;;         (cl-remove-if
-;;          (lambda (keyword)
-;;            (cl-destructuring-bind (regexp . face) keyword
-;;              (string= "'[^']*'" regexp)))
-;;          syslog-font-lock-keywords)))
+(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+(add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
+;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
+;; balanced, which breaks font-lock.
+(after! syslog-mode
+  (setq syslog-font-lock-keywords
+        (cl-remove-if
+         (lambda (keyword)
+           (cl-destructuring-bind (regexp . face) keyword
+             (string= "'[^']*'" regexp)))
+         syslog-font-lock-keywords)))
 
-;; ;; Set up printers
-;; (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
-;; (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
+;; Set up printers
+(after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
+(after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
 
-;; (setq delete-by-moving-to-trash t
-;;       history-length (expt 2 16))
+(setq delete-by-moving-to-trash t
+      history-length (expt 2 16))
 
-;; (setq bookmark-bmenu-file-column 50
-;;       bookmark-watch-bookmark-file nil)
-;; (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+(setq bookmark-bmenu-file-column 50
+      bookmark-watch-bookmark-file nil)
+(add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
-;; (after! auth-source
-;;   (setq auth-source-cache-expiry nil
-;;         auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
-;;                                    auth-sources)
-;;         auth-source-gpg-encrypt-to nil))
+(after! auth-source
+  (setq auth-source-cache-expiry nil
+        auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
+                                   auth-sources)
+        auth-source-gpg-encrypt-to nil))
 
-;; (after! password-cache
-;;   (setq password-cache-expiry nil))
+(after! password-cache
+  (setq password-cache-expiry nil))
 
-;; (after! projectile
-;;   ;; Automatically find projects in the I personally use.
-;;   (setq projectile-project-search-path
-;;         `((,doom-user-dir . 0)
-;;           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-;;           ("~/src/" . 1)))
-;;   (add-to-list 'projectile-globally-ignored-directories
-;;                (expand-file-name ".local/straight/repos/" user-emacs-directory))
-;;   (unless projectile-known-projects
-;;     (projectile-discover-projects-in-search-path))
-;;   ;; Recognize `makefile' as a Makefile.
-;;   (cl-pushnew
-;;    '(make marker-files
-;;      ("makefile")
-;;      project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-;;    projectile-project-types :test #'equal)
-;;   (cl-pushnew
-;;    '(gnumake marker-files
-;;      ("GNUmakefile")
-;;      project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
-;;    projectile-project-types :test #'equal)
-;;   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
-;;   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-;;   (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
-;;   ;; Set up compilation.
-;;   (setq projectile-per-project-compilation-buffer t
-;;         compilation-read-command nil)
-;;   ;; Make the project prefix more readable.
-;;   (after! which-key
-;;     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
-;;           which-key-replacement-alist)))
+(after! projectile
+  ;; Automatically find projects in the I personally use.
+  (setq projectile-project-search-path
+        `((,doom-user-dir . 0)
+          ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+          ("~/src/" . 1)))
+  (add-to-list 'projectile-globally-ignored-directories
+               (expand-file-name ".local/straight/repos/" user-emacs-directory))
+  (unless projectile-known-projects
+    (projectile-discover-projects-in-search-path))
+  ;; Recognize `makefile' as a Makefile.
+  (cl-pushnew
+   '(make marker-files
+     ("makefile")
+     project-file "Makefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+   projectile-project-types :test #'equal)
+  (cl-pushnew
+   '(gnumake marker-files
+     ("GNUmakefile")
+     project-file "GNUMakefile" compilation-dir nil configure-command nil compile-command "make" test-command "make test" install-command "make install" package-command nil run-command nil)
+   projectile-project-types :test #'equal)
+  (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
+  (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+  (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
+  ;; Set up compilation.
+  (setq projectile-per-project-compilation-buffer t
+        compilation-read-command nil)
+  ;; Make the project prefix more readable.
+  (after! which-key
+    (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist)))
 
-;; (after! tramp
-;;   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
+(after! tramp
+  (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
 
-;; ;; Use Emacs as the default editor for shell commands.
-;; (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-;; (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
-;; (add-hook 'shell-mode-hook  #'with-editor-export-editor)
-;; (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
-;; (add-hook 'eshell-mode-hook #'with-editor-export-editor)
+;; Use Emacs as the default editor for shell commands.
+(define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
+(define-key (current-global-map) [remap shell-command] 'with-editor-shell-command)
+(add-hook 'shell-mode-hook  #'with-editor-export-editor)
+(advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+(add-hook 'eshell-mode-hook #'with-editor-export-editor)
 
-;; (when (and (modulep! :checkers spell)
-;;            (not (modulep! :checkers spell +flyspell)))
-;;   (after! spell-fu
-;;     (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-;;     (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-;;     (add-to-list 'spell-fu-faces-exclude 'message-header-to)
-;;     (setq spell-fu-faces-exclude
-;;           (delq 'font-lock-string-face spell-fu-faces-include))))
+(when (and (modulep! :checkers spell)
+           (not (modulep! :checkers spell +flyspell)))
+  (after! spell-fu
+    (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+    (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+    (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+    (setq spell-fu-faces-exclude
+          (delq 'font-lock-string-face spell-fu-faces-include))))
 
-;; (when (modulep! :tools pdf)
-;;   (use-package! pdftotext
-;;     :defer t
-;;     :init
-;;     (defadvice! +pdf-view-mode-a (oldfun &rest args)
-;;       :around #'pdf-view-mode
-;;       (if (display-graphic-p)
-;;           (apply oldfun args)
-;;         (apply #'pdftotext-mode args)))))
+(when (modulep! :tools pdf)
+  (use-package! pdftotext
+    :defer t
+    :init
+    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+      :around #'pdf-view-mode
+      (if (display-graphic-p)
+          (apply oldfun args)
+        (apply #'pdftotext-mode args)))))
 
-;; (when (and (modulep! :tools lsp)
-;;            (not (modulep! :tools lsp +eglot)))
-;;   (after! lsp-mode
-;;     (setopt lsp-headerline-breadcrumb-enable t
-;;             lsp-enable-snippet nil
-;;             lsp-enable-text-document-color t
-;;             lsp-enable-folding t
-;;             lsp-semantic-tokens-enable t)
-;;     (after! lsp-ui
-;;       (setq lsp-signature-auto-activate t
-;;             lsp-ui-doc-include-signature t
-;;             lsp-ui-doc-header nil))
-;;     (after! lsp-clangd
-;;       (setq lsp-clients-clangd-args
-;;             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-;;               "--background-index"
-;;               "--clang-tidy"
-;;               "--completion-style=detailed"
-;;               "--header-insertion=never"
-;;               "--header-insertion-decorators=0")))
-;;     (add-to-list 'lsp-disabled-clients 'ccls)
-;;     (add-to-list 'lsp-disabled-clients 'mspyls)))
+(when (and (modulep! :tools lsp)
+           (not (modulep! :tools lsp +eglot)))
+  (after! lsp-mode
+    (setopt lsp-headerline-breadcrumb-enable t
+            lsp-enable-snippet nil
+            lsp-enable-text-document-color t
+            lsp-enable-folding t
+            lsp-semantic-tokens-enable t)
+    (after! lsp-ui
+      (setq lsp-signature-auto-activate t
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-header nil))
+    (after! lsp-clangd
+      (setq lsp-clients-clangd-args
+            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+              "--background-index"
+              "--clang-tidy"
+              "--completion-style=detailed"
+              "--header-insertion=never"
+              "--header-insertion-decorators=0")))
+    (add-to-list 'lsp-disabled-clients 'ccls)
+    (add-to-list 'lsp-disabled-clients 'mspyls)))
 
-;; (when (modulep! :tools lsp +eglot)
-;;   (after! eglot
-;;     (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-;;           '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
+(when (modulep! :tools lsp +eglot)
+  (after! eglot
+    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+          '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
 
-;; (use-package! topsy
-;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-;;   :config
-;;   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-;;   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+(use-package! topsy
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :config
+  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
 
 ;;; Editor
