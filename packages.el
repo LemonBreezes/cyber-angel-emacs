@@ -94,4 +94,3 @@
 
 ;;; AI
 (package! org-ai)
-(package! gptel)
