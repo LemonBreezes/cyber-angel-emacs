@@ -11,7 +11,8 @@
 
   ;; Uses special keys from my esoteric keyboard layout
   (define-repeat-map other-window
-    ("o" other-window))
+    ("o" other-window
+     "O" other-window-previous))
 
   (define-repeat-map isearch-repeat
     ("s" isearch-repeat-forward
