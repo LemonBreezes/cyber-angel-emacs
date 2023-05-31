@@ -10,7 +10,7 @@
 ;;;###autoload
 (defun cae-dired-load-dirvish-h (dir)
   (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
-  (require 'dirvish)
+  (require 'dirvish nil t)
   (unless (memq #'dired-noselect find-directory-functions)
     (add-hook 'find-directory-functions #'dired-noselect t))
   (dired-noselect dir))
