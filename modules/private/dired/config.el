@@ -101,7 +101,7 @@
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dirvish-mode-map
-        "e" #'cae-dired-find-file
+        "e" #'find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
