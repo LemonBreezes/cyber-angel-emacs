@@ -1,5 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-
+v
 (load! "lisp/cae-logs")
 (load! "lisp/cae-keyboard")
 
@@ -620,4 +620,3 @@
   (define-key org-mode-map org-babel-key-prefix #'org-babel-map))
 
 (setq cae-config-finished-loading t)
-v
