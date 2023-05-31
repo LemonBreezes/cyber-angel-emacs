@@ -424,6 +424,7 @@
 ;;; Worf
 (after! worf
   ;;(worf-define-key worf-mode-map "P" #'org-priority)
+  (worf-define-key worf-mode-map "P" #'worf-paste)
   (let ((bindings
          `((,(cae-keyboard-kbd "j") wspecial-worf-down "")
            (,(cae-keyboard-kbd "k") wspecial-worf-up "")
@@ -483,10 +484,10 @@
                         :column ,(caddr binding))))
      t))
   (define-key worf-mode-map (kbd "<f6>") #'cae-worf-cheat-sheet/body)
-    (when (modulep! :editor multiple-cursors)
-      (after! multiple-cursors-core
-        (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body)
-        (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil))))
+  (when (modulep! :editor multiple-cursors)
+    (after! multiple-cursors-core
+      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/body)
+      (add-to-list 'mc/cmds-to-run-once #'worf-lispy-cheat-sheet/nil))))
 
 ;;; Basically a custom input method
 
