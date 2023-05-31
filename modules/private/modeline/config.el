@@ -74,6 +74,17 @@
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
                                   flycheck-mode))
+  (after! compilation
+    (or (assq 'compilation-in-progress mode-line-modes)
+        (add-to-list 'minions-mode-line-modes
+                     (list 'compilation-in-progress
+                           (propertize "[Compiling] "
+	                               'help-echo "Compiling; mouse-2: Goto Buffer"
+                                       'mouse-face 'mode-line-highlight
+                                       'local-map
+                                       (make-mode-line-mouse-map
+                                        'mouse-2
+			                #'compilation-goto-in-progress-buffer))))))
   (map! "<f9>" #'minions-minor-modes-menu))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
