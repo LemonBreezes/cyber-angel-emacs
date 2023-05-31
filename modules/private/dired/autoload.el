@@ -35,7 +35,6 @@
              (window-dedicated-p))
     (dirvish-quit)))
 
-
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
@@ -61,6 +60,13 @@
 (defun cae-dired-jump ()
   (interactive)
   (call-interactively #'dired-jump)
+  (when (one-window-p)
+    (ignore-error user-error
+      (dirvish-layout-switch dirvish-default-layout))))
+
+;;;###autoload
+(defun cae-dired-maximize-buffer ()
+  (call-interactively #'doom/window-maximize-buffer)
   (when (one-window-p)
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
