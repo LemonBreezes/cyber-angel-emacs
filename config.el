@@ -108,22 +108,22 @@
   (advice-add #'which-key--process-page :around
               #'cae-ui-which-key-show-workspace-a))
 
-;; Set some popup rules. How does vslot work?
+;; Set some popup rules. How does slot/vslot work?
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
     :ttl nil :vslot 99)
   (set-popup-rule! "^\\*exwm" :size #'+popup-shrink-to-fit :ttl nil
-    :ttl nil)                           ; which vslot?
+    :ttl nil)                           ; which slot/vslot?
   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit
-    :quit nil :ttl t)                   ; which vslot?
+    :quit nil :ttl t)                   ; which slot/vslot?
   (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil
-    :quit nil)                          ; which vslot?
+    :quit nil)                          ; which slot/vslot?
   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
   (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
     :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
   (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t)     ; which vslot?
+    :side 'right :select t :quit t)     ; which slot/vslot?
   (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)"
     :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
     :slot 2 :vslot -8)
@@ -132,9 +132,9 @@
   (set-popup-rule! "^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
     :select t :quit t :ttl nil :vslot 99)
   (set-popup-rule! "^\\*eww.*" :size #'cae-popup-resize-eww-buffer :side 'right
-    :select t :ttl nil)                 ; which vslot?
+    :select t :ttl nil)                 ; which slot/vslot?
   (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
-    :side 'right :select t :ttl nil)    ; which vslot?
+    :side 'right :select t :ttl nil)    ; which slot/vslot?
   (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.35 :select t
     :modeline nil :quit nil :ttl nil)
   (after! embark
@@ -495,10 +495,14 @@
 
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
-  (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors-core
-      (add-to-list 'mc--default-cmds-to-run-for-all #'sp-delete-char)
-      (add-to-list 'mc--default-cmds-to-run-for-all #'sp-backward-delete-char))))
+  ;;(when (modulep! :editor multiple-cursors)
+  ;;  (after! multiple-cursors-core
+  ;;    (dolist (it sp--mc/cursor-specific-vars)
+  ;;      (add-to-list 'mc/cursor-specific-vars it)) ;Should be done by
+  ;;                                                 ;`smartparens'.
+  ;;    (add-to-list 'mc/cmds-to-run-for-all #'sp-delete-char)
+  ;;    (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-delete-char)))
+  )
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
