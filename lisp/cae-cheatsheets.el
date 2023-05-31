@@ -72,17 +72,16 @@
 ;; We need to open a bug report asking for tab-local variables and tab switching
 ;; hooks.
 
-;;(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
+(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
-;;(defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
-;;  (when (bound-and-true-p hydra-curr-map)
-;;    (setf (alist-get (tab-bar--current-tab)
-;;                     cae-cheatsheets-tab-bar-hydra-alist
-;;                     nil nil #'equal)
-;;          hydra-curr-body-fn)
-;;    (+log "storing hydra" cae-cheatsheets-tab-bar-hydra-alist)
-;;    (hydra-keyboard-quit)))
-;;
+(defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
+  (when (bound-and-true-p hydra-curr-map)
+    (setf (alist-get (tab-bar--current-tab)
+                     cae-cheatsheets-tab-bar-hydra-alist
+                     nil nil #'equal)
+          hydra-curr-body-fn)
+    (hydra-keyboard-quit)))
+
 ;;(defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
 ;;  (when (bound-and-true-p hydra-curr-map)
 ;;    (hydra-keyboard-quit))
@@ -94,20 +93,20 @@
 ;;                     nil t #'equal)
 ;;          nil)
 ;;    (run-with-timer 0.001 nil hydra)))
-;;
-;;(add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
+
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 ;;(add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
-;;
-;;;; Make these persp-local so that identical tabs on different workspaces do not
-;;;; share hydras.
-;;(defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
-;;  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
-;;                       cae-cheatsheets-tab-bar-hydra-alist))
-;;
-;;(defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
-;;  (setq cae-cheatsheets-tab-bar-hydra-alist
-;;        (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
-;;
-;;(when (modulep! :ui workspaces)
-;;  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
-;;  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
+
+;; Make these persp-local so that identical tabs on different workspaces do not
+;; share hydras.
+(defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
+  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
+                       cae-cheatsheets-tab-bar-hydra-alist))
+
+(defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
+  (setq cae-cheatsheets-tab-bar-hydra-alist
+        (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
+
+(when (modulep! :ui workspaces)
+  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
+  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
