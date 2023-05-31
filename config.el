@@ -102,7 +102,7 @@
                    (load (symbol-file #'+workspace/new) nil t))
                  (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
 
-;; Set some popup rules.
+;; Set some popup rules. How does vslot work?
 (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
 (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
