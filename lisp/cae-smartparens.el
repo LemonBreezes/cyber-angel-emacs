@@ -1,7 +1,8 @@
 ;;; lisp/cae-smartparens.el -*- lexical-binding: t; -*-
 
 ;; Make `smartparens' optional. See also `lisp/cae-hacks.el' for a few lines of
-;; code that need to be ran before the `doom!' block to prevent errors when `smartparens' is disabled.
+;; code that need to be ran before the `doom!' block to prevent errors that
+;; happen when `smartparens' is disabled.
 (unless (modulep! :config default +smartparens)
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :term eshell)
