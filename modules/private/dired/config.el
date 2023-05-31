@@ -111,6 +111,19 @@
         "N" #'dirvish-narrow
         "j" #'consult-line)
 
+  (defmacro cae-dired-find-file-wrapper (fn)
+    "Wrap FN to exit Dirvish sessions when opening files."
+    `(cae-defun ,(intern (format "cae-dired-%s" (symbol-name fn))) ()
+       (interactive)
+       (let ((dir default-directory))
+         (advice-add #'find-file :around #'cae-dired-find-file-a)
+         (unwind-protect (call-interactively ,fn)
+           (advice-remove #'find-file #'cae-dired-find-file-a)))))
+
+  (map! :map dired-mode-map
+        [remap find-file] (cae-dired-find-file-wrapper find-file)
+        [remap projectile-find-file] (cae-dired-find-file-wrapper projectile-find-file))
+
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
 (add-to-list 'find-directory-functions #'cae-dired-load-dirvish-h t)
