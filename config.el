@@ -674,11 +674,13 @@
         "c" #'avy-goto-char
         "l" #'avy-goto-line
         "e" #'avy-goto-end-of-line
+        "r" #'avy-resume
         "." #'cae-avy-symbol-at-point
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-below
         "C-j" #'avy-goto-word-1
+        "C-r" #'avy-resume
         "C-." #'cae-avy-symbol-at-point
         "C-c" #'avy-goto-char
         "C-l" #'avy-goto-line
