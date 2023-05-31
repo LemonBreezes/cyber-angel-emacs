@@ -2,11 +2,10 @@
 
 ;;;###autoload
 (defun cae-debugger-dap-quit-session-a (_)
-  (ignore-errors
-    (let ((ignore-window-parameters t))
-      (cl-loop for buf being the buffers
-               when (string-match-p "gdb" (buffer-name buf)) do
-               (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
+  (let ((ignore-window-parameters t))
+    (cl-loop for buf being the buffers
+             when (string-match-p "gdb" (buffer-name buf)) do
+             (ignore-errors (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
 
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
@@ -54,17 +53,17 @@
 (defvar cae-debugger--session-workspace-map ()
   "Alist of (session . workspace) pairs.")
 
-;;;###autoload
-(defun cae-debugger-mark-session-h (session)
-  "Mark the current session with the current workspace."
-  (setf (alist-get session cae-debugger--session-workspace-map
-                   nil nil #'equal)
-        (+workspace-current-name)))
-
-;;;###autoload
-(defun cae-debugger-dap-switch-to-workspace-h (session)
-  "Switch to the workspace associated with the current session."
-  (when-let ((workspace (alist-get session cae-debugger--session-workspace-map
-                                   nil nil #'equal)))
-    (unless (string= workspace (+workspace-current-name))
-      (+workspace-switch workspace))))
+;;;;;###autoload
+;;(defun cae-debugger-mark-session-h (session)
+;;  "Mark the current session with the current workspace."
+;;  (setf (alist-get session cae-debugger--session-workspace-map
+;;                   nil nil #'equal)
+;;        (+workspace-current-name)))
+;;
+;;;;;###autoload
+;;(defun cae-debugger-dap-switch-to-workspace-h (session)
+;;  "Switch to the workspace associated with the current session."
+;;  (when-let ((workspace (alist-get session cae-debugger--session-workspace-map
+;;                                   nil nil #'equal)))
+;;    (unless (string= workspace (+workspace-current-name))
+;;      (+workspace-switch workspace))))
