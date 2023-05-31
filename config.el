@@ -106,7 +106,6 @@
                  (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
 
 ;; Set some popup rules.
-(plist-put! +popup-defaults :ttl 5)
 (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
 (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
 (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
