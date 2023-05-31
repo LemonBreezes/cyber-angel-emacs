@@ -13,6 +13,9 @@
 (random t)                              ;Set the random seed.
 (setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
+(when (version< "30.0" emacs-version)
+  (add-to-list 'safe-local-variable-directories doom-user-dir))
+
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
