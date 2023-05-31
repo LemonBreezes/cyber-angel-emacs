@@ -38,19 +38,9 @@
 
 ;;; Universal argument
 
-(defvar home-row-numbers-qwerty
-  '(?r ?a ?e ?n ?s ?d ?o ?t ?i ?h)
+(defconst home-row-numbers-qwerty
+  (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;))
   "list of the qwerty home row keys")
-
-(defvar home-row-numbers-qwerty-numpad
-  '(?c ?x ?\. ?o ?t ?i ?w ?l ?y ?\ )
-  "keys forming a numpad under the right hand in qwerty")
-
-(defvar home-row-numbers-norm
-  '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)
-  "list of the numbers on the keyboard in normal order")
-
-(defvar home-row-numbers nil)
 
 (home-row-numbers)
 
