@@ -60,7 +60,10 @@
       kill-buffer-delete-auto-save-files t)
 
 (after! newcomment
-  (setq comment-empty-lines 'eol
+  (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
+                                        ;`comment-region' so that I can mark the
+                                        ;entire commented text with
+                                        ;`mark-paragraph'.
         comment-padding nil))           ;I prefer no spaces between comment
                                         ;delimiters and the comment text.
 
