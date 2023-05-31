@@ -21,7 +21,7 @@
   (cl-return-from cae-keyboard-remap
     (cl-mapcar #'cae-keyboard-remap arg)))
 
-(cl-defun cae-keyboard-remap-to-strings (arg)
+(defun cae-keyboard-remap-to-strings (arg)
   (cl-mapcar #'char-to-string (cae-keyboard-remap arg)))
 
 (cl-assert (eq (cae-keyboard-remap ?w) ?b))
