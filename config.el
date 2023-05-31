@@ -45,6 +45,9 @@
 ;; Colorize color strings.
 (add-hook 'prog-mode-hook #'rainbow-mode)
 
+(after! ansi-color
+  (setq ansi-color-bold-is-bright t))
+
 (setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t)
