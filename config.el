@@ -526,10 +526,7 @@
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
-  ;; Query buffers for a diff before killing them. This could be improved so
-  ;; that it works more like `save-some-buffers'. It's kind of annoying that for
-  ;; both functions, if the underlying file does not exist, the diff just
-  ;; errors. Why not pop the buffer up instead in that scenario?
+  ;; Query buffers for a diff before killing them.
   (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
   (defun cae-ask-kill-buffer (buffer)
