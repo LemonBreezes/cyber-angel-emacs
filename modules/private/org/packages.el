@@ -5,3 +5,4 @@
 (package! org-inline-pdf)
 (package! language-detection)
 (package! org-appear)
+(package! org-jira)
