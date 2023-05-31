@@ -27,7 +27,8 @@
 (after! general
   (general-override-mode -1)
   (define-minor-mode cae-general-override-mode
-    "Minor mode to enable `general-override-mode-map' without overriding other keymaps."
+    "Minor mode to enable `general-override-mode-map' without
+overriding other keymaps."
     :global t
     :init-value nil
     :lighter nil
