@@ -88,10 +88,9 @@
 
 (use-package! gitignore-templates
   :defer t :init
-  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
-    (map! :leader
-          :prefix vc-prefix
-          "I" #'gitignore-templates-insert)))
+  (map! :leader
+        :prefix "i"
+        "I" #'gitignore-templates-insert))
 
 (use-package! git-email
   :defer t :init
