@@ -43,6 +43,12 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+(when (modulep! :ui workspaces)
+  (after! persp-mode
+    (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
+                 (cae-defun cae-persp-skip-buffer-p (buffer)
+                   (string= (buffer-name buffer) "*lsp-log*")))))
+
 ;;; UI
 
 (when cae-init-ui-enabled-p
