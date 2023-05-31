@@ -13,7 +13,7 @@
 
 (use-package! outline-minor-faces
   :defer t :init
-  (add-hook 'emacs-lisp-mode-hook #'outline-minor-faces-add-font-lock-keywords))
+  (add-hook 'emacs-lisp-mode-hook #'outline-minor-faces-mode))
 
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
