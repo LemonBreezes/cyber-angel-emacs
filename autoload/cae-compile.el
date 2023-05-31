@@ -125,8 +125,6 @@
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
 
-(add-hook 'after-save-hook #'cae-compile-rebuild-package)
-
 ;; Run early in case I want to `C-g' and inspect the output.
 (add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
 
