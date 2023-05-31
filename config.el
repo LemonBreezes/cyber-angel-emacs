@@ -1200,6 +1200,8 @@
 
 (use-package! org-ai
   :defer t :init
+  (defvar org-ai-global-mode-prefix-map
+    (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
   (map! "C-c M-a" #'cae-lazy-load-org-ai)
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
@@ -1207,7 +1209,8 @@
   (org-ai-global-mode +1)
   (setq org-ai-default-chat-model "gpt-4")
   (when (modulep! :editor snippets)
-    (org-ai-install-yasnippets)))
+    (org-ai-install-yasnippets))
+  (map! :map org-ai-global-mode-prefix-map))
 
 ;;; Appendix
 
