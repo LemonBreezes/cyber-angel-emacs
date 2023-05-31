@@ -54,6 +54,19 @@
 (defvar cae-debugger--session-workspace-map (make-hash-table :test #'equal)
   "Alist of (session . workspace) pairs.")
 
+;;;###autoload
 (defun cae-debugger-mark-session-h ()
   (when-let ((session (dap--cur-session)))
     (puthash session (+workspace-current-name) cae-debugger--session-workspace-map)))
+
+;;;###autoload
+(defun cae-debugger-dap-switch-to-workspace-h ()
+  "Switch to the workspace associated with the current session."
+  (when-let ((session (dap--cur-session))
+             (workspace (gethash session cae-debugger--session-workspace-map)))
+    (when-let ((workspace-project (cl-find workspace
+                                           (projectile-relevant-known-projects)
+                                           :test #'string-match-p)))
+      (unless (string= (projectile-project-name)
+                       workspace)
+        (projectile-switch-project-by-name workspace-project)))))
