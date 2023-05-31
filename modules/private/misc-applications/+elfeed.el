@@ -4,7 +4,8 @@
   (map! :leader :prefix +misc-applications-prefix
         "r" #'=rss)
 
-  ;; TODO Add starring
+  (defalias 'elfeed-toggle-star
+    (elfeed-expose #'elfeed-search-toggle-all 'star))
 
   (after! elfeed
     (push elfeed-db-directory recentf-exclude)
@@ -14,13 +15,12 @@
           "?" #'describe-mode
           "q" #'+elfeed-quit)
     (defhydra cae-elfeed-hydra ()
-      "filter"
-      ("c" (elfeed-search-set-filter "@6-months-ago +cs") "cs")
       ("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
+      ("y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
       ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-      ;;("M" elfeed-toggle-star "Mark")
-      ("A" (elfeed-search-set-filter "@6-months-ago") "All")
-      ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
+      ("M" elfeed-toggle-star "Mark")
+      ("a" (elfeed-search-set-filter "@6-months-ago") "All")
+      ("t" (elfeed-search-set-filter "@1-day-ago") "Today")
       ("Q" +elfeed-quit "Quit Elfeed" :color blue)
       ("q" nil "quit" :color blue))
     (map! :map elfeed-search-mode-map
