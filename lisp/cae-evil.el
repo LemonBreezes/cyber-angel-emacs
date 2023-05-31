@@ -47,4 +47,4 @@
 
 (map! :prefix "g"
       :m "[" #'backward-page
-      :m "]" #'+forward-page)
+      :m "]" #'cae-forward-page)
