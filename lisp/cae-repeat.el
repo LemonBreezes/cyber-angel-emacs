@@ -42,7 +42,7 @@
        "1" tab-close-other
        "2" tab-new)
       (:enter tab-select)
-      (:exit "M-t" +workspace/display))
+      (:exit "/" +workspace/display))
    t)
 
   (eval
@@ -68,7 +68,7 @@
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8)
       (:enter +workspace/display)
-      (:exit "M-t" tab-select))
+      (:exit "/" tab-select))
    t)
 
   ;; Currently part of `other-window' repeat map
