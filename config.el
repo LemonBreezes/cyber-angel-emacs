@@ -546,7 +546,6 @@
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
-  ;; Breaks `org-ai'. Do not enable.
   ;; Query buffers for a diff before killing them.
   ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
 
