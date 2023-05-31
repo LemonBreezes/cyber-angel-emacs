@@ -131,7 +131,3 @@
 
 ;; Run early in case I want to `C-g' and inspect the output.
 (add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
-
-;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
-;; you will be waiting for a long time.
-(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
