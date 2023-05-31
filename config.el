@@ -1052,9 +1052,9 @@
             ;; Other custom bindings
             ;; M-g bindings (goto-map)
             "M-g e" #'consult-compile-error
-            "M-g g" #'consult-goto-line      ;orig. goto-line
-            "M-g M-g" #'consult-goto-line    ;orig. goto-line
-            "M-g o" #'consult-outline        ;Alternative: consult-org-heading
+            "M-g g" #'consult-goto-line   ;orig. goto-line
+            "M-g M-g" #'consult-goto-line ;orig. goto-line
+            "M-g o" #'consult-outline     ;Alternative: consult-org-heading
             "M-g m" #'consult-mark
             "M-g k" #'consult-global-mark
             "M-g I" #'consult-imenu-multi
@@ -1078,9 +1078,9 @@
              "M-g f" #'consult-flycheck)
             (:unless (modulep! :config default)
              "M-s d" #'consult-find ;does not cache files like Doom & Projectile
-                                             ;also slower than `fd'. See Minad's comment
-                                             ;in
-                                             ;https://github.com/minad/consult/issues/363
+                                        ;also slower than `fd'. See Minad's comment
+                                        ;in
+                                        ;https://github.com/minad/consult/issues/363
              "M-s r" #'consult-ripgrep
              "M-s D" #'consult-locate)
             [remap Info-search] #'consult-info
@@ -1090,6 +1090,10 @@
             :leader
             "M-x" #'consult-mode-command
             (:desc "Keyboard macro"  "ik" #'consult-kmacro))
+      (when (modulep! :tools debugger +lsp)
+        (after! dap-ui
+          (map! :map dap-ui-repl-mode-map
+                "M-r" #'consult-history)))
       :config
       (setq consult-preview-key 'any)
       (consult-customize
