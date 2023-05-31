@@ -476,12 +476,12 @@
  
  ;;; Editor
 
- (load! "lisp/cae-repeat")
- (load! "lisp/cae-visible-mark")
- (load! "lisp/cae-smartparens")
- (load! "lisp/cae-visual-scrolling")
- (load! "lisp/cae-vlf")
- (load! "lisp/cae-multiple-cursors")
+ ;;(load! "lisp/cae-repeat")
+ ;;(load! "lisp/cae-visible-mark")
+ ;;(load! "lisp/cae-smartparens")
+ ;;(load! "lisp/cae-visual-scrolling")
+ ;;(load! "lisp/cae-vlf")
+ ;;(load! "lisp/cae-multiple-cursors")
 
  (autoload 'cae-project-bookmark (concat doom-private-dir
                                          "lisp/cae-project"))
