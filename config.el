@@ -357,7 +357,7 @@
         "<right>" #'copilot-accept-completion
         "C-f" #'copilot-accept-completion
         "M-<right>" #'copilot-accept-completion-by-word
-        "M-f" #'copilot-accept-completion-by-word
+        "M-f" #'copilot-accept-completion-by-wordd
         "C-e" #'copilot-accept-completion-by-line
         "<end>" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
