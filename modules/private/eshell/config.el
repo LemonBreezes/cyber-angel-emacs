@@ -35,11 +35,6 @@
   (unless (modulep! :config default +smartparens)
     (remove-hook 'eshell-mode-hook #'smartparens-mode))
 
-  (use-package! eshell-buffer-capf
-    :defer t
-    :init
-    (add-hook 'eshell-mode-hook #'eshell-buffer-capf-setup))
-
   (when (modulep! :private corfu)
     (add-hook 'eshell-mode-hook
               (lambda ()
