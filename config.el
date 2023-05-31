@@ -359,12 +359,7 @@
         yank-pop-change-selection t)
 
   (after! xclip
-    (cond ((getenv "WSL_DISTRO_NAME")
-           ;; Doesn't add the Windows clipboard to the kill ring but does add
-           ;; kills to the Windows clipboard.
-           (setq xclip-program "clip.exe"
-                 xclip-method 'xclip))
-          ((executable-find "termux-setup-storage")
+    (cond ((executable-find "termux-setup-storage")
            (setq xclip-method 'termux-clipboard-get))))
 
   (setq bookmark-bmenu-file-column 50
