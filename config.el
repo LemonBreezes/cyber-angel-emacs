@@ -268,7 +268,9 @@
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-repeat")
-(map! "C-x 4 I" #'ibuffer-other-window)
+(map! "C-x 4 I" #'ibuffer-other-window
+      "C-i" #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent)
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
