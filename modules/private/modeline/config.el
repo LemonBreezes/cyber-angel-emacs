@@ -109,8 +109,7 @@
     (add-transient-hook! 'prog-mode-hook
       (advice-add #'message :override #'ignore)
       (unwind-protect (parrot-mode)
-        (advice-remove #'message #'ignore)
-        (remove-hook 'prog-mode-hook #'tmp/enable-parrot-mode)))
+        (advice-remove #'message #'ignore)))
     :config
     (unwind-protect
         (progn (advice-add #'parrot-start-animation :override #'ignore))
