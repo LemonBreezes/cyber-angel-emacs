@@ -39,7 +39,11 @@
                     (eq (get-current-persp)
                         cae-cheatsheets-minibuffer--last-workspace)))
        (funcall cae-cheatsheets-minibuffer--last-hydra)
-       (setq cae-cheatsheets-minibuffer--last-hydra nil)))))
+       (setq cae-cheatsheets-minibuffer--last-hydra nil))
+     (setq cae-cheatsheets-minibuffer--last-tab-index nil
+           cae-cheatsheets-minibuffer--last-tab nil
+           cae-cheatsheets-minibuffer--last-hydra nil
+           cae-cheatsheets-minibuffer--last-workspace nil))))
 
 (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
 (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h)
