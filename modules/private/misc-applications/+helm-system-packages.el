@@ -8,4 +8,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "p" #'helm-system-packages))
+        "P" #'helm-system-packages))
