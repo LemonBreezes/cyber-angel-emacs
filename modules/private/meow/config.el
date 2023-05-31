@@ -34,16 +34,7 @@
    `(map! :map meow-keypad-state-keymap
           "?" #'meow-cheatsheet
           "/" #'meow-keypad-describe-key
-          ,(cae-keyboard-kbd "1") #'meow-digit-argument
-          ,(cae-keyboard-kbd "2") #'meow-digit-argument
-          ,(cae-keyboard-kbd "3") #'meow-digit-argument
-          ,(cae-keyboard-kbd "4") #'meow-digit-argument
-          ,(cae-keyboard-kbd "5") #'meow-digit-argument
-          ,(cae-keyboard-kbd "6") #'meow-digit-argument
-          ,(cae-keyboard-kbd "7") #'meow-digit-argument
-          ,(cae-keyboard-kbd "8") #'meow-digit-argument
-          ,(cae-keyboard-kbd "9") #'meow-digit-argument
-          ,(cae-keyboard-kbd "0") #'meow-digit-argument
+          ;; Add digit arguments?
           "h" #'help-command)))
 
 (defconst meow-cheatsheet-layout-cae
@@ -185,7 +176,7 @@
   (map! :map meow-normal-state-keymap
         "DEL" doom-leader-map)
   (appendq! meow-mode-state-list
-            '((helpful-mode . normal)
+            '((helpfulmode . normal)
               (Man-mode . normal)
               (message-buffer-mode . normal)
               (eshell-mode . insert)
