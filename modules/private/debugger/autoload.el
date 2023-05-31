@@ -39,6 +39,7 @@
 (defun cae-debugger-lazy-load-gud ()
   (interactive)
   (require 'gud)
+  (require 'edebug)
   (setq unread-command-events (list ?\C-x ?\C-a))
   (setq which-key-inhibit t)
   (add-hook 'pre-command-hook #'cae-debugger--which-key-inhibit-hook)
