@@ -2,9 +2,9 @@
 
 (when (and (modulep! :tools lsp)
            (modulep! :tools debugger +lsp))
-  (after! lsp-mode
-    (map! :map lsp-mode-map
-          "<f6>" #'dap-hydra))
+   (after! lsp-mode
+     (map! :map lsp-mode-map
+           "<f6>" #'dap-hydra/body))
   (after! dap-ui
     (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
     (map! :map dap-ui-repl-mode-map
@@ -14,9 +14,9 @@
           dap-auto-configure-features '(sessions locals breakpoints expressions tooltip))
 
     (after! dap-hydra
-      (defhydra+ dap-hydra ()
-        ("<f6>" nil "quit")
-        ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart")))
+       (defhydra+ dap-hydra ()
+         ("<f6>" nil "quit")
+         ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart")))
 
     (when (modulep! :private corfu)
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
