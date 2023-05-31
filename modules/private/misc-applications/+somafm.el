@@ -7,4 +7,4 @@
         "@" #'+somafm)
   :config
   (map! :map somafm-mode-map
-        ))
+        "<f6>" #'+somafm-hydra/body))
