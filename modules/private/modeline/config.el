@@ -56,20 +56,7 @@
           tree-sitter-mode
           dap-mode
           ))
-  (setq minions-available-modes
-        '(;; (abbrev-mode)
-          (auto-fill-mode)
-          (auto-revert-mode)
-          (auto-revert-tail-mode)
-          ;; (flyspell-mode)
-          (spell-fu-mode)
-          (font-lock-mode)
-          (glasses-mode)
-          (highlight-changes-mode)
-          ;; (overwrite-mode)
-          (ruler-mode)
-          (visual-line-mode)))
-  (setq minions-prominent-modes '(defining-kbd-macro
+    (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
                                   eat-eshell-mode
                                   ))
