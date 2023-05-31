@@ -535,30 +535,29 @@
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
+;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
+;; to use sudo on a file before `tramp-sh' is loaded.
+(defun cae-auto-sudoedit-maybe-h ()
+  (+log (or (buffer-file-name) list-buffers-directory)
+        (file-attribute-user-id
+         (file-attributes path 'string))
+        (if (and (featurep 'tramp)
+                 (tramp-tramp-file-p path))
+            (tramp-get-remote-uid (tramp-dissect-file-name path)
+                                  'string)
+          (user-login-name)))
+  (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
+            (string= (file-attribute-user-id
+                      (file-attributes path 'string))
+                     (if (and (featurep 'tramp)
+                              (tramp-tramp-file-p path))
+                         (tramp-get-remote-uid (tramp-dissect-file-name path)
+                                               'string)
+                       (user-login-name))))
+    (auto-sudoedit)))
+(add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
 (use-package! auto-sudoedit
   :after tramp-sh
-  :init
-  ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
-  ;; to use sudo on a file before `tramp-sh' is loaded.
-  (defun cae-auto-sudoedit-maybe-h ()
-    (+log (or (buffer-file-name) list-buffers-directory)
-          (file-attribute-user-id
-           (file-attributes path 'string))
-          (if (and (featurep 'tramp)
-                   (tramp-tramp-file-p path))
-              (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                    'string)
-            (user-login-name)))
-    (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
-              (string= (file-attribute-user-id
-                        (file-attributes path 'string))
-                       (if (and (featurep 'tramp)
-                                (tramp-tramp-file-p path))
-                           (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                                 'string)
-                         (user-login-name))))
-      (auto-sudoedit)))
-  (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h 91)
   :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1))
