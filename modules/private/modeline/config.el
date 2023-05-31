@@ -189,7 +189,7 @@
   (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
   (setq parrot-animate 'hide-static
-        parrot-num-rotations 4
+        parrot-num-rotations 3
         parrot-animate-on-load nil
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
