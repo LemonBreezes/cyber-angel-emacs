@@ -192,6 +192,7 @@
               (Man-mode . normal)
               (message-buffer-mode . normal)
               (eshell-mode . insert)
+              (eat-mode . insert)
               (vterm-mode . insert)))
   (when (modulep! :private corfu)
     (after! corfu
@@ -206,12 +207,3 @@
                                   eval-expression pp-eval-expression))
 
   (map! :map meow-keymap [remap describe-key] #'helpful-key))
-
-
-
-
-
-
-
-
-
