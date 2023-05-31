@@ -7,7 +7,7 @@
 (defvar cae-cheatsheets-minibuffer--last-tab nil)
 (defvar cae-cheatsheets-minibuffer--last-tab-index nil)
 
-(defvar cae-cheatsheets-tab--unique-identifier-fn #'tab-bar-tab-name-all)
+(defvar cae-cheatsheets-tab--unique-identifier-fn #'doom-visible-buffers)
 
 (defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
