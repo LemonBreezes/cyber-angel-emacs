@@ -101,6 +101,10 @@
 ;; might be an Emacs30 thing.
 (defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
 
+(defun tramp-set-connection-local-variables-for-buffer ()
+  (backtrace))
+
+
 ;;; GC hacks
 
 (defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
