@@ -49,7 +49,9 @@
     ;; (venv-initialize-eshell)
     (autoload 'epe-theme-lambda "eshell-prompt-extras")
     (setq eshell-highlight-prompt nil
-          eshell-prompt-function #'epe-theme-lambda))
+          eshell-prompt-function #'epe-theme-lambda)
+    (after! eshell-prompt-extras
+      (setq epe-show-local-working-directory t)))
   (after! esh-module
     (when (>= emacs-major-version 29)
       (add-to-list 'eshell-modules-list 'eshell-elecslash))
