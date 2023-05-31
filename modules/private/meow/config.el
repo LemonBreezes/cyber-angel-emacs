@@ -189,7 +189,11 @@
   ;;      "DEL" #'meow-keypad)
   (when (modulep! +leader)
     (map! :map meow-normal-state-keymap
-          doom-leader-key doom-leader-map))
+          doom-leader-key doom-leader-map
+          :map meow-motion-state-keymap
+          doom-leader-key doom-leader-map
+          :map meow-beacon-state-keymap
+          doom-leader-key nil))
   (map! :leader
         :desc "help" "h" help-map)
   (setq meow-keypad-leader-dispatch doom-leader-map)
