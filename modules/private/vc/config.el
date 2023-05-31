@@ -94,7 +94,3 @@
 
 (use-package! embark-vc
   :after embark)
-
-(use-package! bug-reference
-  :hook ((prog-mode . bug-reference-prog-mode)
-         (text-mode . bug-reference-mode)))
