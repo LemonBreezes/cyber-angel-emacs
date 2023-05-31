@@ -122,6 +122,8 @@
     (push '((nil . "cae-dired-wrapped-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist))
 
+  ;; This is not a good approach because practically every function would have
+  ;; to be wrapped!
   (dolist (fn '(find-file
                 projectile-find-file
                 projectile-find-file-in-directory
@@ -158,7 +160,26 @@
                 find-alternate-file
                 ido-find-file
                 consult-locate
-                projectile-find-test-file))
+                projectile-find-test-file
+                +default/search-notes-for-symbol-at-point
+                +default/search-cwd
+                +default/search-emacsd
+                +default/search-project
+                +default/search-project-for-symbol-at-point
+                +default/search-other-cwd
+                +default/search-other-project
+                +default/org-notes-search
+                +default/org-notes-headlines
+                projectile-find-implementation-or-test-other-window
+                projectile-find-implementation-or-test-other-frame
+                projectile-find-references
+                projectile-recentf
+                recentf-open-files
+                projectile-edit-dir-locals
+                projectile-commander
+                projectile-find-tag
+                projectile-switch-project
+                projectile-switch-open-project))
     (define-key dirvish-mode-map (vector 'remap fn)
       (eval `(cae-dired-find-file-wrapper ,fn))))
 
