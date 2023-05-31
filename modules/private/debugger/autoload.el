@@ -64,9 +64,4 @@
   "Switch to the workspace associated with the current session."
   (when-let ((session (dap--cur-session))
              (workspace (gethash session cae-debugger--session-workspace-map)))
-    (when-let ((workspace-project (cl-find workspace
-                                           (projectile-relevant-known-projects)
-                                           :test #'string-match-p)))
-      (unless (string= (projectile-project-name)
-                       workspace)
-        (projectile-switch-project-by-name workspace-project)))))
+    (+workspace-switch workspace)))
