@@ -208,7 +208,8 @@
                (Info-mode . insert)
                (dap-ui-repl-mode . insert)
                (inferior-emacs-lisp-mode . insert)
-               (comint-mode . insert)))
+               (comint-mode . insert)
+               (term-mode . insert)))
     (setf (alist-get (car p) meow-mode-state-list) (cdr p)))
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
