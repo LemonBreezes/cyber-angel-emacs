@@ -948,21 +948,7 @@ index 0425e33dc..8c8743695 100644
    (when (modulep! +kawa)
      (package! geiser-kawa :pin "5896b19642923f74f718eb68d447560b2d26d797"))
    (when (modulep! +mit)
-diff --git a/modules/lang/solidity/config.el b/modules/lang/solidity/config.el
-index e5e072c0c..d53d8ca3d 100644
---- a/modules/lang/solidity/config.el
-+++ b/modules/lang/solidity/config.el
-@@ -9,7 +9,8 @@
-   (set-company-backend! 'solidity-mode 'company-solidity)
- 
-   (use-package! solidity-flycheck  ;included with solidity-mode
--    :when (modulep! :checkers syntax)
-+    :when (and (modulep! :checkers syntax)
-+               (not (modulep! :checkers syntax +flymake)))
-     :config
-     (setq flycheck-solidity-solc-addstd-contracts t)
-     (when (funcall flycheck-executable-find solidity-solc-path)
-diff --git a/modules/lang/solidity/packages.el b/modules/lang/solidity/packages.el
+diffdiff --git a/modules/lang/solidity/packages.el b/modules/lang/solidity/packages.el
 index 6eff2296a..be177658f 100644
 --- a/modules/lang/solidity/packages.el
 +++ b/modules/lang/solidity/packages.el
