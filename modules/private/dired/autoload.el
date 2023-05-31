@@ -24,12 +24,7 @@
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
-    (funcall oldfun file wildcards)
-    (when (and (file-directory-p file)
-               (one-window-p t)
-               (frame-width (selected-frame))
-               (> (frame-width (selected-frame)) 160))
-      (dirvish-dwim))))
+    (funcall oldfun file wildcards)))
 
 (defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
