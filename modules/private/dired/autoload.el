@@ -12,9 +12,7 @@
   (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
   (unless (featurep 'dirvish)
     (require 'dirvish)
-    (setq find-directory-functions
-          (delq '+load-dirvish find-directory-functions))
-    (add-hook find-directory-functions '(dired-noselect) t)
+    (add-hook find-directory-functions #'dired-noselect t)
     (dired-noselect dir)))
 
 ;;;###autoload
