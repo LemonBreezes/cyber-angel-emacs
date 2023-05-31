@@ -248,7 +248,9 @@
               "--header-insertion=never"
               "--header-insertion-decorators=0"))
       (set-lsp-priority! 'clangd 2))
-    (add-to-list 'lsp-disabled-clients 'ccls)
+    (after! ccls
+      (setq ccls-initialization-options '(:index (:comments 2) :completion (:detailedLabel t)))
+      (set-lsp-priority! 'ccls 2))
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 
