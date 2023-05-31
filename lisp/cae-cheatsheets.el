@@ -21,7 +21,7 @@
                                (eq (tab-bar--current-tab)
                                    cae-cheatsheets-minibuffer--last-tab)
                                (or (not (featurep 'persp-mode))
-                                   (string= (persp-name persp-curr)
+                                   (string= (persp-name (get-current-persp))
                                             cae-cheatsheets-minibuffer--last-workspace)))
                       (funcall cae-cheatsheets-minibuffer--last-hydra)
                       (setq cae-cheatsheets-minibuffer--last-hydra nil)))))
