@@ -16,6 +16,7 @@
     (setq cursor-type cursor)
     (etcc--evil-set-cursor)))
 
+;;;###autoload
 (defun cae-meow-save-line ()
   "Fallback command for `+meow-save'."
   (interactive)
