@@ -32,6 +32,6 @@
 (defun cae-sp-delete-char-or-region (&optional arg)
   (interactive "*P")
   (if (and delete-active-region
-        (region-active-p))
-    (sp-delete-region (region-beginning) (region-end))
+           (region-active-p))
+      (sp-delete-region (region-beginning) (region-end))
     (sp-delete-char arg)))
