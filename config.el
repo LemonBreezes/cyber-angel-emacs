@@ -1074,6 +1074,10 @@
 
 (use-package! chatgpt-shell
   :defer t :init
+  (map! :leader
+        :prefix "o"
+        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
+        :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
   (setq chatgpt-shell-model-version "gpt-4"))
 
