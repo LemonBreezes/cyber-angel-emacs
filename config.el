@@ -117,15 +117,13 @@
     :quit nil :ttl t)
   (set-popup-rule! "^\\*org-roam\\*" :size 60 :side 'left :select nil :quit nil)
   (set-popup-rule! "^\\*info.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl t)
-  (set-popup-rule! "^\\*Man.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :ttl t :select t :quit t :ttl 0)
+    :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+  (set-popup-rule! "^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
+    :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
   (set-popup-rule! "^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
     :side 'right :select t :quit t)
-  (set-popup-rule! "^\\*helpful.*" :size #'cae-popup-resize-help-buffer
-    :side 'right :select t :quit t :ttl 0)
-  (set-popup-rule! "^\\*Help.*" :size #'cae-popup-resize-help-buffer
-    :height 0.6 :side 'right :select t :quit t :ttl 0)
+  (set-popup-rule! "^\\*\\([Hh]elp\\|Apropos\\)" :size #'cae-popup-resize-help-buffer
+    :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -8)
   (set-popup-rule! "^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
     :side 'right :select t :quit t :ttl 0)
   (set-popup-rule! "^\\*Apropos.*" :size #'cae-popup-resize-help-buffer
@@ -136,6 +134,7 @@
     :select t :ttl nil)
   (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
     :side 'right :select t :ttl nil)
+  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
   (after! embark
     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
       :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
