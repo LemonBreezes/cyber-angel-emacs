@@ -149,7 +149,7 @@ file to edit."
 ;;;###autoload
 (defun eshell/doom (&rest args)
   (let* ((doom (cond ((executable-find "doom")
-                      "doom")
+                      (executable-find "doom"))
                      ((file-exists-p "~/.emacs.d/bin/doom")
                       "~/.emacs.d/bin/doom")
                      ((file-exists-p "~/.config/emacs/bin/doom")
