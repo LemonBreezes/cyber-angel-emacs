@@ -112,6 +112,18 @@ Lispy."
         (t (funcall #'eval-last-sexp arg))))
 
 ;;;###autoload
+(defun cae-eval-expression (arg)
+  ;; Call `pp-eval-expression' when called with a negative
+  ;; prefix argument
+  (interactive "P")
+  (cond ((or (eq arg '-)
+             (and (numberp arg)
+                  (< arg 0)))
+         (require 'pp+)
+         (funcall #'pp-eval-expression (if (numberp arg) nil)))
+        (t (funcall #'eval-expression arg))))
+
+;;;###autoload
 (defun cae-tab-close-and-select-right ()
   (interactive)
   (let ((tab-bar-close-tab-select 'right))
