@@ -282,6 +282,7 @@
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
     (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
     (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
+    (add-to-list 'isearch-mb--after-exit  #'avy-isearch)
     (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
     (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
