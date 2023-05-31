@@ -94,3 +94,6 @@
 
 (use-package! embark-vc
   :after embark)
+
+(use-package! debbugs
+  :defer t)
