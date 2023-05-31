@@ -52,7 +52,7 @@
 (package! auto-sudoedit)
 (package! file-info)
 (package! titlecase)
-(package! holymotion)
+(package! holymotion :recipe (:host github :repo "Overdr0ne/holymotion"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
