@@ -2,6 +2,7 @@
 
 ;; This code was copied from here:
 ;; https://web.archive.org/web/20221002160330/https://with-emacs.com/posts/ui-hacks/keep-scrollin-scrollin-scrollin/
+;; I like these scrolling functions a lot.
 
 (autoload 'View-scroll-half-page-forward "view")
 (autoload 'View-scroll-half-page-backward "view")
