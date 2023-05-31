@@ -27,4 +27,5 @@
   ("cu" 'org-jira-update-comment "update comment" :column "comments")
   ("wu" 'org-jira-update-worklogs-from-org-clocks "update worklogs from org clocks" :column "worklogs")
   ("tj" 'org-jira-todo-to-jira "todo to Jira" :column "todo")
-  ("if" 'org-jira-get-issues-by-fixversion "get issues by fix version" :column "issues"))
+  ("if" 'org-jira-get-issues-by-fixversion "get issues by fix version" :column "issues")
+  ("J" (cmd! (find-file org-jira-download-dir)) "Jump to the Jira folder" :column "Misc"))
