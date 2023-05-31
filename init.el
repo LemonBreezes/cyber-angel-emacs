@@ -27,6 +27,8 @@
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p t
   "Whether our tools section of `config.el' is disabled.")
+(defvar cae-init-editor-enabled-p t
+  "Whether our editor section of `config.el' is disabled.")
 
 (doom! :completion
        (vertico +icons)
