@@ -199,6 +199,11 @@
   (map! :map w3m-mode-map
         "o" #'ace-link-w3m))
 
+(when (and (eq system-type 'gnu/linux)
+           (string-suffix-p "-WSL2" operating-system-release))
+  (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+        browse-url-generic-args     '("/c" "start")))
+
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
