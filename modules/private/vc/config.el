@@ -50,6 +50,7 @@
                                                    (symbol-function #'identity)))
                                           (call-interactively #'git-link))
                                :face font-lock-string-face
+                               :cache nil
                                :bind "G")
                               (:name "Git link homepage"
                                :handler (cl-letf (((symbol-function #'git-link--new)
