@@ -68,20 +68,47 @@ derivative.")
                                            (defun doom--use-orderless-lsp-capf ()
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
-  (map! (:unless (modulep! +tng)
-         :desc "complete" "C-SPC" #'completion-at-point)
-        (:map 'corfu-map
-         (:when +corfu-want-multi-component
-          :desc "insert separator" "C-SPC" #'corfu-insert-separator)
-         (:when (modulep! :completion vertico)
-          :desc "move to minibuffer" "s-<down>" #'corfu-move-to-minibuffer
-          (:when (modulep! :editor evil)
-           :desc "move to minibuffer" "s-j" #'corfu-move-to-minibuffer))
-         (:when (modulep! +tng)
-          :desc "next" [tab] #'corfu-next
-          :desc "previous" [backtab] #'corfu-previous
-          :desc "next" "TAB" #'corfu-next
-          :desc "previous" "S-TAB" #'corfu-previous))))
+
+  (defmacro cae-defun (name arglist &optional docstring &rest body)
+    "`defun' but guaranteed return the created function."
+    (declare (doc-string 3) (indent 2))
+    `(progn (defun ,name ,arglist ,docstring ,@body)
+            #',name))
+
+  (defmacro cae-generate-corfu-select-index (index)
+    "Return a named function to run `corfu-complete' for INDEX"
+    `(cae-defun ,(intern (format "noct-corfu-complete-%s" index)) ()
+       ,(format "Call `corfu-complete' for index %s." index)
+       (interactive)
+       (let ((corfu--index ,index))
+         (corfu-complete))))
+
+  (eval
+   `(map! (:unless (modulep! +tng)
+           :desc "complete" "C-SPC" #'completion-at-point)
+          (:map 'corfu-map
+           (:when +corfu-want-multi-component
+            :desc "insert separator" "C-SPC" #'corfu-insert-separator)
+           (:when (modulep! :completion vertico)
+            :desc "move to minibuffer" "s-<down>" #'corfu-move-to-minibuffer
+            (:when (modulep! :editor evil)
+             :desc "move to minibuffer" "s-j" #'corfu-move-to-minibuffer))
+           (:when (modulep! +tng)
+            :desc "next" [tab] #'corfu-next
+            :desc "previous" [backtab] #'corfu-previous
+            :desc "next" "TAB" #'corfu-next
+            :desc "previous" "S-TAB" #'corfu-previous)
+           (:when t
+            ,(cae-keyboard-kbd "M-" "a") (cae-generate-corfu-select-index 0)
+            ,(cae-keyboard-kbd "M-" "s") (cae-generate-corfu-select-index 1)
+            ,(cae-keyboard-kbd "M-" "d") (cae-generate-corfu-select-index 2)
+            ,(cae-keyboard-kbd "M-" "f") (cae-generate-corfu-select-index 3)
+            ,(cae-keyboard-kbd "M-" "g") (cae-generate-corfu-select-index 4)
+            ,(cae-keyboard-kbd "M-" "h") (cae-generate-corfu-select-index 5)
+            ,(cae-keyboard-kbd "M-" "j") (cae-generate-corfu-select-index 6)
+            ,(cae-keyboard-kbd "M-" "k") (cae-generate-corfu-select-index 7)
+            ,(cae-keyboard-kbd "M-" "l") (cae-generate-corfu-select-index 8)
+            ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 9))))))
 
 ;; Taken from corfu's README.
 ;; TODO: extend this to other completion front-ends, mainly helm and ido, since
