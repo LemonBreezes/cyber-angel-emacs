@@ -89,7 +89,3 @@
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
-
-;; The macrostep keymap is completely broken for me without this line. This
-;; might be an Emacs30 thing.
-(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
