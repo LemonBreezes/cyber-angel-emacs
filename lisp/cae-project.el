@@ -78,13 +78,14 @@
     (make-directory (file-name-directory bookmark-default-file) t)
     (bookmark-write-file bookmark-default-file)))
 
-(defun cae-save-all-project-bookmarks ()
+(defun cae-project-save-all-bookmarks ()
   "Save all project bookmarks."
   (interactive)
   (maphash (lambda (bookmark-default-file bookmark-alist)
-               (ignore bookmark-alist)
+             (ignore bookmark-alist)
+             (when bookmark-alist
                (make-directory (file-name-directory bookmark-default-file) t)
-               (bookmark-write-file bookmark-default-file))
+               (bookmark-write-file bookmark-default-file)))
            cae-project-bookmark-cache))
 
 (add-hook 'kill-emacs-hook #'cae-save-all-project-bookmarks)
