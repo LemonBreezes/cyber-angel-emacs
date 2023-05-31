@@ -720,16 +720,7 @@
     (set-popup-rule! "^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
       :side 'right :select nil :quit t :ttl 0)))
 
-(use-package! smart-mark
-  :init (add-hook 'doom-first-buffer-hook #'smart-mark-mode)
-  :defer t
-  :config
-  (defun cae-smart-mark-use-doom-escape-a ()
-    (if smart-mark-mode
-        (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
-      (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
-  (add-hook 'smart-mark-mode-hook #'cae-smart-mark-use-doom-escape-a)
-  (add-to-list 'smart-mark-mark-functions #'er/expand-region))
+
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
