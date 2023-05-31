@@ -21,7 +21,8 @@
           ,(cae-keyboard-kbd "0") #'meow-digit-argument))
   (after! which-key
     ;; hide those `meow-digit-argument' keys from the `which-key' popup.
-    (dotimes (i 9))))
+    (dotimes (i 9)
+      )))
 
 ;; Keypad
 (defun meow/setup-keypad ()
