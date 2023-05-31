@@ -9,9 +9,7 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
-;; I currently have this disabled so that I don't have to wait for Emacs to
-;; compile everything on-kill.
-(defvar cae-config-compilation-on-kill-enabled-p t
+(defvar cae-config-compilation-on-kill-enabled-p nil
   "Whether on-kill native compilation is enabled.")
 
 ;; I disabled this because the garbage collector eventually hammers me if I try
