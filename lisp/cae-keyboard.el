@@ -32,3 +32,18 @@
                  `((nil . ,(concat "+workspace/switch-to-" (number-to-string i))) . t)))
   (add-to-list 'which-key-replacement-alist
                '((nil . "+workspace/switch-to-final") . t))))
+
+(defvar home-row-numbers-qwerty
+  '(?r ?a ?e ?n ?d ?o ?t ?i ?h ?\_)
+  "list of the qwerty home row keys")
+
+(defvar home-row-numbers-qwerty-numpad
+  '(?c ?x ?\. ?o ?t ?i ?w ?l ?y ?\ )
+  "keys forming a numpad under the right hand in qwerty")
+
+(defvar home-row-numbers-norm
+  '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)
+  "list of the numbers on the keyboard in normal order")
+
+(defvar home-row-numbers nil)
+(home-row-numbers)
