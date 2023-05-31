@@ -40,10 +40,10 @@
 (package! git-modes)
 
 ;; cae-webkit.el
-(package! webkit :recipe (:type git :host github :repo "akirakyle/emacs-webkit"
-                          :branch "main"
-                          :files (:defaults "*.js" "*.css" "*.so")
-                          :pre-build ("make")))
+;;(package! webkit :recipe (:type git :host github :repo "akirakyle/emacs-webkit"
+;;                          :branch "main"
+;;                          :files (:defaults "*.js" "*.css" "*.so")
+;;                          :pre-build ("make")))
 
 ;;; Editor
 (package! pp+)
@@ -71,6 +71,7 @@
 ;; cae-keyboard.el
 (package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
+(package! casease :recipe (:host github :repo "DogLooksGood/casease"))
 
 ;;; Autocompletion
 (package! copilot
