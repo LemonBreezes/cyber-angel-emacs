@@ -615,10 +615,8 @@
         (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/nil)))
     (dolist (x bindings)
       (define-key smartparens-mode-map (kbd (car x)) (cadr x)) ;Prevent our
-                                                               ;commands from
-                                                               ;being shadowed
-                                                               ;by
-                                                               ;`smartparens'.
+                                        ;commands from being shadowed by
+                                        ;`smartparens'.
       (global-set-key (kbd (car x)) (cadr x))))
   (setq sp-navigate-interactive-always-progress-point t))
 
