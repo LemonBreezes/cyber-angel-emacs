@@ -1,5 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-o
+
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 
@@ -33,7 +33,7 @@ o
 (when (modulep! :editor snippets)
   (dolist (p (cdr (lookup-key doom-leader-map "&")))
     (cl-destructuring-bind (key . binding) p
-      (define-key doom-leader-map (kbd (concat "y " (char-to-string key))) binding)))
+      (define-key doom-leader-map (kbd (concat "S " (char-to-string key))) binding)))
   (after! yasnippet (define-key yas-minor-mode-map (kbd "C-c &") nil))
   (define-key doom-leader-map "&" nil)
   (after! which-key
@@ -43,7 +43,7 @@ o
                          (when (car-safe (car x))
                            (setf (car (car x))
                                  (replace-regexp-in-string "C-c &"
-                                                           "C-c y"
+                                                           "C-c S"
                                                            (car-safe (car x)))))
                          x)
                        which-key-replacement-alist)))))
