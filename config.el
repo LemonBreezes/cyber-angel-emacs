@@ -858,6 +858,9 @@
       (add-to-list 'aggressive-indent-protected-commands command))
     (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
 
+  (use-package! yank-indent
+  :config (global-yank-indent-mode t))
+
   (use-package! hungry-delete
     :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
     :config
