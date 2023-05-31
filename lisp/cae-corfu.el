@@ -47,6 +47,9 @@
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
 
   (when (modulep! :completion corfu +indexed)
+    (when (modulep! +indexed)
+      (setq corfu-indexed-start 1)
+      (corfu-indexed-mode +1))
     (eval
      `(map! "TAB" nil
             "<tab>" nil
