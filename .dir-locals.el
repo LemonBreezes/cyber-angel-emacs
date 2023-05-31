@@ -24,6 +24,9 @@
                      (fboundp 'eshell-read-aliases-list))
             (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
 
+          (setq-local jinx-local-words
+                      "cae corfu")
+
           ;; Automatically compile Emacs Lisp files (if enabled).
           (when (bound-and-true-p cae-config-finished-loading)
             (when (and (derived-mode-p 'emacs-lisp-mode)
