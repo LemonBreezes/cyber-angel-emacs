@@ -281,5 +281,5 @@ mark the string and call `edit-indirect-region' with it."
   (apply-partially #'cae-avy-do
                    (lambda ()
                      (if (bound-and-true-p lispy-mode)
-                         (call-interactively #'lispy-comment)
-                       (call-interactively #'comment-or-uncomment-region)))))
+                         (lispy-comment)
+                       (comment-or-uncomment-region)))))
