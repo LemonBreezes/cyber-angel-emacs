@@ -52,3 +52,24 @@
                                       (file-name-parent-directory)
                                       (file-name-parent-directory))
                          path))))
+
+;;;###autoload
+(defun cae-toggle-sudo ()
+  (interactive)
+  (require 'auto-sudoedit)
+  (let* ((curr-path (auto-sudoedit-current-path))
+         (tramp-path (if (tramp-tramp-file-p curr-path)
+                         ;; doesn't work for remote files
+                         (tramp-file-name-localname (tramp-dissect-file-name curr-path))
+                       (concat "/sudo::" curr-path))))
+    (when buffer-file-name
+      (set-visited-file-name tramp-path t))
+    (when dired-directory
+      (dired-unadvertise dired-directory)
+      (setq list-buffers-directory tramp-path)
+      (setq dired-directory tramp-path)
+      (setq default-directory tramp-path)
+      (dired-advertise))
+    (when (string= (car recentf-list) curr-path)
+      (pop recentf-list))
+    (revert-buffer t t)))
