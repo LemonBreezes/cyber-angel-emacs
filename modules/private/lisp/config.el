@@ -19,6 +19,7 @@
 (add-hook 'dune-mode-hook #'+check-parens-before-save-h)
 (add-hook 'fennel-mode-hook #'+check-parens-before-save-h)
 
+;; This tool helps us a lot with regular expressions
 (after! pcre2el
   (map! :prefix "C-c"
         (:prefix ("/" . "pcre2el")
