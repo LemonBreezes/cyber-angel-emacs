@@ -26,7 +26,8 @@
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
   (when (derived-mode-p 'dired-mode)
-    (dirvish-layout-switch dirvish-default-layout)))
+    (ignore-error user-error
+      (dirvish-layout-switch dirvish-default-layout))))
 
 (defun cae-dired-switch-buffer--handle-dirvish ()
   (when (and (featurep 'dirvish)
