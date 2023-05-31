@@ -56,16 +56,10 @@
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "2") (kbd "C-x 5 2"))
 (define-key key-translation-map (cae-keyboard-kbd "C-x 5" "5") (kbd "C-x 5 5"))
 
+;; Doom popup module
 (when (modulep! :ui popup)
-  ;; For Meow, it's for some reason, not enough to just use a key translation
-  ;; map. We need to bind the keys to the commands. This is worth investigating.
-  (unless (boundp 'cae-keyboard-old-c-\`-command)
-    (defvar cae-keyboard-old-c-\`-command (lookup-key (current-global-map) (kbd "C-`")))
-    (defvar cae-keyboard-old-c-~-command (lookup-key (current-global-map) (kbd "C-~"))))
-  (global-set-key (kbd (cae-keyboard-kbd "C-" "`"))
-                  cae-keyboard-old-c-\`-command)
-  (global-set-key (kbd (cae-keyboard-kbd "C-" "~"))
-                  cae-keyboard-old-c-~-command))
+  (define-key key-translation-map (cae-keyboard-kbd "C-" "`") (kbd "C-`"))
+  (define-key key-translation-map (cae-keyboard-kbd "C-" "~") (kbd "C-~")))
 
 ;;; Universal argument
 
