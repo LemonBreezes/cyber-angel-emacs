@@ -34,15 +34,16 @@
   ;; zone-pgm-random-life
   (zone-when-idle (* 5 60))
 
-  ;; Do not zone in a popup window. Also, do not show other windows when zoning.e
+  ;; Do not zone in a popup window. Also, do not show other windows when zoning.
+  ;; Quit out of the minibuffer if necessary before zoning.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
-    (run-at-time 0.01 nil
+    (run-at-time (* 0.01 (minibuffer-depth)) nil
                  (lambda ()
                    (let ((wconf (current-window-configuration)))
                      (select-window (car (doom-visible-windows)))
                      (delete-other-windows)
                      (apply oldfun args)
                      (set-window-configuration wconf))))
-    (when (minibufferp)
-      (abort-recursive-edit))))
+    (dotimes (i (minibuffer-depth))
+      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))
