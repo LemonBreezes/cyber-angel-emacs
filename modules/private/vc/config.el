@@ -97,5 +97,4 @@
 
 ;; Browse the Emacs bug tracker
 (use-package! debbugs
-  :disabled t
   :defer t)
