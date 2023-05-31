@@ -606,8 +606,8 @@
 ;;
 ;;(advice-add #'persp-set-keymap-prefix :override #'ignore)
 ;;
-;;(setq set-mark-command-repeat-pop t
-;;      next-line-add-newlines t)
+(setq set-mark-command-repeat-pop t
+      next-line-add-newlines t)
 
 (setq search-whitespace-regexp ".*?"
       search-default-mode #'char-fold-to-regexp
