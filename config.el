@@ -485,8 +485,9 @@
       isearch-allow-scroll t
       isearch-yank-on-move 'shift
       isearch-motion-changes-direction t
-      lazy-count-prefix-format " (%s/%s)"
-      lazy-count-suffix-format " [%s/%s]"
+      lazy-count-prefix-format "(%s/%s) "
+      lazy-count-suffix-format nil      ; Using the suffix is better but does
+                                        ; not work with `isearch-mb'.
       lazy-highlight-cleanup nil)
 (add-hook 'doom-escape-hook
           (apply-partially #'lazy-highlight-cleanup t))
