@@ -26,3 +26,7 @@
   ;; for proper first-time setup, `org-appear--set-elements'
   ;; needs to be run after other hooks have acted.
   (run-at-time nil nil #'org-appear--set-elements))
+
+(after! org
+  (map! :map org-mode-map
+        "]" #'+org-insert-checkbox-or-bracket))
