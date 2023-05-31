@@ -110,11 +110,6 @@
 ;;  (map! :map universal-argument-map
 ;;        "l" #'cae-keyboard-insert-current-prefix))
 
-;;; Distinguishing dual-purpose keycodes
-
-(map! [C-i] #'doom/dumb-indent
-      "C-S-i" #'doom/dumb-dedent)
-
 ;;; Lispy
 
 (when (modulep! :editor lispy)
