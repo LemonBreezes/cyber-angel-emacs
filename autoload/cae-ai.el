@@ -40,4 +40,4 @@
   (if (get-buffer-window "*chatgpt*")
       (delete-window (get-buffer-window "*chatgpt*"))
     (let ((chatgpt-shell-display-function #'pop-to-buffer))
-    (call-interactively #'chatgpt-shell))))
+      (call-interactively #'chatgpt-shell))))
