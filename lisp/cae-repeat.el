@@ -8,8 +8,7 @@
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB"
-        repeat-check-key nil)           ;Basically allow more complex repeat
-                                        ;maps.
+        repeat-check-key nil)           ;Do not police our keybindings.
 
   (eval
    `(define-repeat-map other-window
@@ -118,4 +117,4 @@
   ;; This is so that my repeat maps are reloaded when I save this file.
   (when cae-config-finished-loading
     (ignore-errors (repeat-mode -1))
-    (ignore-errors (repeat-mode +1))))
+    (ignore-errors (repeat-mode 1))))
