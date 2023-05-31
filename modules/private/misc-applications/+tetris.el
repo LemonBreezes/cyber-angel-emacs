@@ -5,4 +5,6 @@
   :init
   (map! :leader
         :prefix +misc-applications-games-prefix
-        "t" #'tetris))
+        "t" #'tetris
+        :prefix +misc-applications-eyecandy-prefix
+        "t" #'autotetris))
