@@ -176,6 +176,8 @@
   (map! :map meow-normal-state-keymap
         "SPC" (cmd! () (setq unread-command-events (listify-key-sequence (kbd "C-c"))))
         "DEL" #'meow-keypad)
+  (map! :leader
+        "h" help-map)
   (setq meow-keypad-start-keys
         '((?c . ?c)
           (?h . ?h)
