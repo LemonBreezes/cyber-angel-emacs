@@ -657,15 +657,28 @@
   (setq copilot-node-executable (expand-file-name
                                  "~/.nvm/versions/node/v17.9.1/bin/node"))
   ;; Model our Copilot interface after Fish completions.
-  (map! :map copilot-completion-map
-        "<right>" #'copilot-accept-completion
-        "C-f" #'copilot-accept-completion
-        "M-<right>" #'copilot-accept-completion-by-word
-        "M-f" #'copilot-accept-completion-by-word
-        "C-e" #'copilot-accept-completion-by-line
-        "<end>" #'copilot-accept-completion-by-line
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
+  (map! (:map copilot-completion-map
+         "<right>" #'copilot-accept-completion
+         "C-f" #'copilot-accept-completion
+         "M-<right>" #'copilot-accept-completion-by-word
+         "M-f" #'copilot-accept-completion-by-word
+         "C-e" #'copilot-accept-completion-by-line
+         "<end>" #'copilot-accept-completion-by-line
+         "M-n" #'copilot-next-completion
+         "M-p" #'copilot-previous-completion)
+        (:when (modulep! :config default +smartparens)
+         :map sp-pair-overlay-keymap
+         "<right>" #'copilot-accept-completion
+         "C-f" #'copilot-accept-completion
+         "M-<right>" #'copilot-accept-completion-by-word
+         "M-f" #'copilot-accept-completion-by-word
+         "C-e" #'copilot-accept-completion-by-line
+         "<end>" #'copilot-accept-completion-by-line
+         "M-n" #'copilot-next-completion
+         "M-p" #'copilot-previous-completion))
+
+  (when (modulep! :config default +smartparens)
+    (map! :))
 
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
