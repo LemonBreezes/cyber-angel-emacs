@@ -126,8 +126,8 @@
 (setf (alist-get 'project-bookmark marginalia-annotator-registry)
       (alist-get 'bookmark marginalia-annotator-registry))
 
-;;(push '(("cae-project-\\(bookmark-.*\\)>" . nil) . ("\\1" . nil))
-;;      which-key-replacement-alist)
+(push '((nil . "cae-project-\\(bookmark-.*\\)") . (nil . "\\1"))
+      which-key-replacement-alist)
 
 (map! :leader
       :prefix "p"
