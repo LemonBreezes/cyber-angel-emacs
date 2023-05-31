@@ -524,14 +524,14 @@
 (use-package! hippie-exp
   :defer t :config
   (setq  hippie-expand-try-functions-list
-          '(try-complete-file-name-partially
-            try-complete-file-name
-            try-expand-dabbrev
-            try-expand-dabbrev-all-buffers
-            try-expand-dabbrev-from-kill
-            try-complete-lisp-symbol-partially
-            try-complete-lisp-symbol
-            try-expand-line)))
+         '(try-complete-file-name-partially
+           try-complete-file-name
+           try-expand-dabbrev
+           try-expand-dabbrev-all-buffers
+           try-expand-dabbrev-from-kill
+           try-complete-lisp-symbol-partially
+           try-complete-lisp-symbol
+           try-expand-line)))
 (map! [remap dabbrev-expand] #'hippie-expand)
 
 (use-package! copilot
@@ -544,7 +544,7 @@
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir))
   (setq copilot-node-executable (expand-file-name
-                                  "~/.nvm/versions/node/v17.9.1/bin/node"))
+                                 "~/.nvm/versions/node/v17.9.1/bin/node"))
   ;; Model our Copilot interface after Fish completions.
   (map! :map copilot-completion-map
         "<right>" #'copilot-accept-completion
@@ -584,7 +584,7 @@
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
           "M-g e" #'consult-compile-error
-          "M-g g" #'consult-goto-line  ;; orig. goto-line
+          "M-g g" #'consult-goto-line   ;; orig. goto-line
           "M-g M-g" #'consult-goto-line ;; orig. goto-line
           "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
           "M-g m" #'consult-mark
@@ -597,13 +597,13 @@
           ;; Isearch integration
           "M-s e" #'consult-isearch-history
           :map isearch-mode-map
-          "M-e" #'consult-isearch-history ;; orig. isearch-edit-string
+          "M-e" #'consult-isearch-history   ;; orig. isearch-edit-string
           "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
-          "M-s l" #'consult-line     ;; needed by consult-line to detect isearch
+          "M-s l" #'consult-line ;; needed by consult-line to detect isearch
           "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
           ;; Minibuffer history
           :map minibuffer-local-map
-          "M-s" #'consult-history ;; orig. next-matching-history-element
+          "M-s" #'consult-history  ;; orig. next-matching-history-element
           "M-r" #'consult-history) ;; orig. previous-matching-history-element
     :config
     (setq consult-preview-key 'any)
@@ -670,8 +670,8 @@
           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
         eshell-visual-subcommands '(("gh" "repo" "fork")
-                                     ("git" "log" "diff" "show")
-                                     ("geth" "attach"))
+                                    ("git" "log" "diff" "show")
+                                    ("geth" "attach"))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
@@ -713,14 +713,14 @@
  `(,@(when (modulep! :private dirvish)
        '(dired transient dirvish))
    ,@(when (modulep! :term eshell)
-      '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-              em-tramp em-smart em-banner em-basic em-cmpl
-              em-extpipe em-glob em-hist em-ls em-script em-term
-              em-alias em-elecslash em-rebind em-prompt))
+       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
+         em-tramp em-smart em-banner em-basic em-cmpl
+         em-extpipe em-glob em-hist em-ls em-script em-term
+         em-alias em-elecslash em-rebind em-prompt))
    ,@(when (and (modulep! :tools pdf)
                 (display-graphic-p)
                 (not (string-suffix-p "-WSL2" operating-system-release)))
-      '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
+       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
 (setq cae-config-finished-loading t)
