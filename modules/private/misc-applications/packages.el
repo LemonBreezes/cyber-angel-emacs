@@ -3,7 +3,7 @@
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
-(package! vuiet)
+;;(package! vuiet)
 (package! somafm)
 ;;(package! enime :recipe
 ;;  (:host github :repo "xl666/enime" :files ("*")))
