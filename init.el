@@ -117,8 +117,8 @@ overriding other keymaps."
        (default +bindings +smartparens)
 
        :email
-       (mu4e +org)
-       ;;(notmuch +org)
+       ;;(mu4e +org)
+       (notmuch +org)
 
        :app
        (rss +org)
