@@ -609,8 +609,8 @@
 
   (after! expand-region
     (setq expand-region-smart-cursor t)
-    (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-      (add-to-list 'er/try-expand-list fn t))
+    ;;(dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
+    ;;  (add-to-list 'er/try-expand-list fn t))
     (setq er/try-expand-list
           (mapcar (lambda (fn)
                     (if (eq fn #'er/mark-comment)
