@@ -13,7 +13,7 @@
    #'mentor :before
    (defun +mentor-a ()
      (setopt mentor-rtorrent-keep-session t
-            mentor-rtorrent-external-rpc (expand-file-name "~/.rtorrent-rpc.socket"))
+             mentor-rtorrent-external-rpc (expand-file-name "~/.rtorrent-rpc.socket"))
      (mentor-setup-rtorrent)
      ;; I got a void variable error for some reason.
      (defvar mentor-rtorrent-client-version)))
