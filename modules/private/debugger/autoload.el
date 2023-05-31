@@ -64,8 +64,7 @@
 ;;;###autoload
 (defun cae-debugger-dap-switch-to-workspace-h (session)
   "Switch to the workspace associated with the current session."
-  (when-let (
-             (workspace (alist-get session cae-debugger--session-workspace-map
+  (when-let ((workspace (alist-get session cae-debugger--session-workspace-map
                                    nil nil #'equal)))
     (unless (string= workspace (+workspace-current-name))
       (+workspace-switch workspace))))
