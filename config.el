@@ -50,7 +50,7 @@
      truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
      kill-buffer-delete-auto-save-files t)
 
-(with-eval-after-load "newcomment"
+(after! newcomment
  (setq comment-empty-lines 'eol
        comment-padding nil))
 
