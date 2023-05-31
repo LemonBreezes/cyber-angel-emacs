@@ -123,7 +123,6 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
                                              "cae-keyboard-remap-to-strings"
                                              "cae-keyboard-strings")))
-    (add-to-list 'parrot-rotate-dict
-                 '(:rot ("kbd" "cae-keyboard-kbd")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
     (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
     (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))))
