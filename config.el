@@ -757,8 +757,7 @@
  ;; I mostly use this package for some additional prefix argument stuff like
  ;; using `C-u - M-:' to insert a string from Elisp without double quotes.
 (use-package! pp+
-  :defer t
-  :init
+  :defer t :init
   (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
   (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
   (when (modulep! :tools eval +overlay)
