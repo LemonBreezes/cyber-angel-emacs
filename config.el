@@ -495,14 +495,12 @@
 
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
-  ;;(when (modulep! :editor multiple-cursors)
-  ;;  (after! multiple-cursors-core
-  ;;    (dolist (it sp--mc/cursor-specific-vars)
-  ;;      (add-to-list 'mc/cursor-specific-vars it)) ;Should be done by
-  ;;                                                 ;`smartparens'.
-  ;;    (add-to-list 'mc/cmds-to-run-for-all #'sp-delete-char)
-  ;;    (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-delete-char)))
-  )
+  (when (modulep! :editor multiple-cursors)
+    (after! multiple-cursors-core
+      (dolist (it sp--mc/cursor-specific-vars)
+        (add-to-list 'mc/cursor-specific-vars it))
+      (add-to-list 'mc/cmds-to-run-for-all #'sp-delete-char)
+      (add-to-list 'mc/cmds-to-run-for-all #'sp-backward-delete-char))))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
