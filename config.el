@@ -369,8 +369,7 @@
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
-        auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
-                                   auth-sources)
+        auth-sources (expand-file-name "secrets/authinfo" doom-user-dir)
         auth-source-gpg-encrypt-to nil))
 
 (after! password-cache
