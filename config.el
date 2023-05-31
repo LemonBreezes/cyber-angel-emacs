@@ -297,6 +297,9 @@
     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist)))
 
+(after! compile
+  (setq compilation-scroll-output t))
+
 (after! tramp
   (setq tramp-terminal-prompt-regexp
         "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
