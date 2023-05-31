@@ -1038,7 +1038,7 @@
 
   (when (modulep! :completion vertico)
     (use-package! consult
-      :init
+      :defer t :init
       (map! "C-h C-m" #'describe-keymap
             "C-h <return>" #'info-emacs-manual
             ;; C-x bindings (ctl-x-map)
