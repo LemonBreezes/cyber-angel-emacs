@@ -32,6 +32,8 @@
                             (font-spec :family "LXGW WenKai" :weight 'light
                                        :size 17))))
 
+(setq display-line-numbers-type t)
+
 ;; Show minibuffer recursion depth
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
