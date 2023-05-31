@@ -4,11 +4,25 @@
 
 ;; These are the orbits of the alphabet under the pseudo-permutation of the keys
 ;; created by the keyboard layout.
-'(("w" "b" "j" "o" "y" "v" "k" "t" "g" "s" "a" "r" "f" "n" "m" "c" "u")
-  ("h" "d" "e" "p" "'" "_" "}" "\0")
-  ("i" "l")
-  ("x" ",")
-  ("z"))
+(defvar cae-keyboard-orbits
+  '((?w ?b ?j ?o ?y ?v ?k ?t ?g ?s ?a ?r ?f ?n ?m ?c ?u)
+    (?h ?d ?e ?p ?\' ?_ ?\} ?\0)
+    (?i ?l)
+    (?x ?,)
+    (?z)))
+
+(cl-defun cae-keyboard-remap (arg)
+  (when (characterp arg)
+    (let ((orbit (cl-position arg cae-keyboard-orbits :test #'memq)))
+      (when orbit
+        (let ((orbit (nth orbit cae-keyboard-orbits)))
+          (cl-return-from cae-keyboard-remap
+            (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit))))))
+  (cl-return-from cae-keyboard-remap
+    (cl-mapcar #'cae-keyboard-remap arg)))
+
+(cae-keyboard-remap '(?w ?a ?s ?d))
+
 
 (define-key key-translation-map (kbd "C-x t )") (kbd "C-x t 0"))
 (define-key key-translation-map (kbd "C-x t !") (kbd "C-x t !"))
