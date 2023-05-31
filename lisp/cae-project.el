@@ -36,7 +36,9 @@
 	(goto-char (point-min))
 	(let ((blist (bookmark-alist-from-buffer)))
 	  (unless (listp blist)
-	    (error "Invalid bookmark list in %s" file)))
+	    (error "Invalid bookmark list in %s" file))
+          (setq bookmark-alist blist
+	        bookmark-alist-modification-count 0))
 	(kill-buffer (current-buffer)))
       bookmark-alist)))
 
