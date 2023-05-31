@@ -166,6 +166,10 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
+             (,(cae-keyboard-kbd-reverse ",")
+               ,(lookup-key cae-keyboard--lispy-mode-map-backup
+                            (cae-keyboard-kbd-reverse ","))
+               "Other")
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "")
@@ -175,12 +179,7 @@
              ("," nil "")
              ("=" ,(lookup-key cae-keyboard--lispy-mode-map-backup
                                (cae-keyboard-kbd-reverse "'"))
-              ,(if (string-match-p
-                    "eval"
-                    (symbol-name (lookup-key
-                                  cae-keyboard--lispy-mode-map-backup
-                                  (cae-keyboard-kbd-reverse "'"))))
-                   "Eval" "Edit")))))
+              "Eval"))))
       (dolist (binding bindings)
         (define-key lispy-mode-map (car binding) (cadr binding)))
       (eval
@@ -189,12 +188,16 @@
                (cl-loop for binding in bindings
                         unless (string= (caddr binding) "")
                         collect
-                        `(,(car binding)
-                          ,(if (string= (cadr binding) ",")
-                               (progn (backtrace)
-                                      (cae-keyboard-kbd-reverse (car binding)))
-                             (message "binding: %s_" (cadr binding))
-                             (cadr binding))
+                        `(,(if (string= (car binding) ",")
+                               (car (cl-find-if
+                                     (lambda (x)
+                                       (and (not (string= (car x) ","))
+                                            (eq (cadr x)
+                                                (lookup-key
+                                                 cae-keyboard--lispy-mode-map-backup
+                                                 (cae-keyboard-kbd-reverse ",")))))
+                                     bindings)))
+                          ,(cadr binding)
                           ,(thread-last (symbol-name (cadr binding))
                                         (string-remove-prefix "special-")
                                         (string-remove-prefix "lispy-"))
