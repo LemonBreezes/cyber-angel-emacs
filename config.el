@@ -183,9 +183,9 @@
 (setq browse-url-browser-function
       (lambda (url &optional new-window)
         (interactive (browse-url-interactive-arg "URL: "))
-        (cond (((display-graphic-p)
-                (webkit-browse-url url new-window))
-               (t (w3m-browse-url url new-window))))))
+        (cond ((display-graphic-p)
+               (webkit-browse-url url new-window))
+              (t (w3m-browse-url url new-window)))))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
