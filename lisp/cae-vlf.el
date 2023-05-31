@@ -77,5 +77,6 @@
                                  ,(if (vectorp k)
                                       (key-description k)
                                     (key-description (vector k)))
-                                 ',v))))
+                                 ',v)
+                          t)))
                 vlf-mode-map)))
