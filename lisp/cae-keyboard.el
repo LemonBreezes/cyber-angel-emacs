@@ -58,8 +58,33 @@
 
 ;; Doom popup module
 (when (modulep! :ui popup)
-  (define-key key-translation-map (cae-keyboard-kbd "C-" "`") (kbd "C-`"))
-  (define-key key-translation-map (cae-keyboard-kbd "C-" "~") (kbd "C-~")))
+  (define-key key-translation-map (kbd (concat "C-" (cae-keyboard-remap "`"))) (kbd "C-`"))
+  (define-key key-translation-map (kbd (concat "C-" (cae-keyboard-remap "~"))) (kbd "C-~"))
+  ;; Ensure no keybindings are left inaccessible by the above remapping.
+  (cond ((and (eq (cae-keyboard-remap ?\`) ?~)
+              (eq (cae-keyboard-remap ?~) ?\`))
+         ;; ` → ~ and ~ → `
+         (ignore))
+        ((eq (cae-keyboard-remap ?~) ?\`)
+         ;; ~ → ` → " (as an example) so we need to map C-~ → C-" so that C-"
+         ;; does not get lost.
+         (define-key key-translation-map
+           (kbd "C-~")
+           (kbd (concat "C-" (cae-keyboard-remap "`")))))
+        ((eq (cae-keyboard-remap ?\`) ?~)
+         ;; Similar to the last scenario
+         (define-key key-translation-map
+           (kbd "C-`")
+           (kbd (concat "C-" (cae-keyboard-remap "~")))))
+        (t
+         ;; ~ → a and ` → b and a ≠ b so we can just map C-~ → C-a and
+         ;; C-` → C-b as those keybindings are "free".
+         (define-key key-translation-map
+           (kbd "C-`")
+           (kbd (concat "C-" (cae-keyboard-remap "`"))))
+         (define-key key-translation-map
+           (kbd "C-~")
+           (kbd (concat "C-" (cae-keyboard-remap "~")))))))
 
 ;;; Universal argument
 
@@ -275,6 +300,7 @@
     ";--" "—"
     ";-." "→"
     ";=." "⇒"
+    ";!=" "≠"
     "-." "->"
     "=." "=>"))
 
