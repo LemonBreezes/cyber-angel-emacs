@@ -16,7 +16,11 @@
   (add-hook 'leetcode-solution-mode-hook
             (lambda()
               (when (bound-and-true-p flycheck-mode)
+                ;; Flycheck will emit errors because the code does not have any
+                ;; import/include/etc statements. Besides, we can't use Flycheck
+                ;; in an interview anyway.
                 (flycheck-mode -1))
+              ;; Copilot is basically cheating, so disable it too.
               (when (bound-and-true-p copilot-mode)
                 (copilot-mode -1))))
   (setq leetcode-save-solutions t)
