@@ -105,3 +105,8 @@ Lispy."
         ((bound-and-true-p eros-mode)
          (funcall #'eros-eval-last-sexp arg))
         (t (funcall #'eval-last-sexp arg))))
+
+;;;###autoload
+(defun cae-tab-close-and-select-right ()
+  (let ((tab-bar-close-tab-select 'right))
+    (call-interactively #'tab-close)))
