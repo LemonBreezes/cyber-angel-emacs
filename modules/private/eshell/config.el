@@ -42,6 +42,12 @@
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
                 (message "Type M-RET/C-M-m to exit char mode.")))
 
+  (add-hook! (eat--eshell-char-mode-hook
+              eat--eshell-semi-char-mode-hook
+              eat--eshell-process-running-mode-hook)
+    (cae-defun cae-eshell-disable-modes-in-eat-h ()
+      (when (or ))))
+
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
