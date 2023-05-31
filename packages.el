@@ -52,6 +52,7 @@
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
+(package! hop :recipe (:host github :repo "Animeshz/hop.el"))
 
 ;; These are used for their autoloads.
 (package! ialign)
