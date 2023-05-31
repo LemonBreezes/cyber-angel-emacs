@@ -811,11 +811,6 @@
     :init
     (map! "C-h C-m" #'describe-keymap
           "C-h <return>" #'info-emacs-manual
-          "C-x C-k C-k" #'consult-kmacro ;replaces
-                                        ;`kmacro-end-or-call-macro-repeat',
-                                        ;which is similar to
-                                        ;`kmacro-end-and-call-macro' from
-                                        ;`<f4>' and `C-x e'.
           ;; C-x bindings (ctl-x-map)
           "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
           ;; Custom M-# bindings for fast register access
@@ -861,8 +856,8 @@
            "M-s D" #'consult-locate)
           [remap Info-search] #'consult-info
           :map help-map
-           "TAB" #'consult-info
-           "W" #'consult-man)
+          "TAB" #'consult-info
+          "W" #'consult-man)
     :config
     (setq consult-preview-key 'any)
     (consult-customize
