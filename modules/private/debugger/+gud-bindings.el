@@ -1,7 +1,7 @@
 ;;; private/debugger/+gud-bindings.el -*- lexical-binding: t; -*-
 
 (unless (featurep 'gud)
-  (map! "C-x C-a" #'cae-debugger-lazy-load-gud))
+  (map! "C-x C-a" #'cae-debugger-lazyload-gud))
 
 (after! gud
   (defvar-keymap gud-global-map
