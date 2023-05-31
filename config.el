@@ -775,7 +775,6 @@
 
   (use-package! titlecase
     :defer t :init
-    (map! "C-x M-u" #'titlecase-dwim)
     (after! embark
       (define-key embark-region-map "T" #'titlecase-region)
       (define-key embark-heading-map "T" #'titlecase-line)
