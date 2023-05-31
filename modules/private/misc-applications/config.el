@@ -34,7 +34,7 @@
         ;;"+elcord"
         ;;"+enime"
         ;;"+exercism"
-        "+forecast"
+        ;;"+forecast"
         ;;"+frameshot"
         ;;"+helm-linux-disks"
         ;;"+helm-system-packages"
