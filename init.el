@@ -27,7 +27,7 @@
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
-       ;(window-select +switch-window)
+       ;; (window-select +switch-window)
 
        :editor
        file-templates
