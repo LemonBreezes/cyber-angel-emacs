@@ -282,7 +282,7 @@ mark the string and call `edit-indirect-region' with it."
                    (lambda ()
                      (if (bound-and-true-p lispy-mode)
                          (lispy-comment)
-                       (comment-or-uncomment-region)))))
+                       (call-interactively #'comment-or-uncomment-region)))))
 
 ;;;###autoload
 (defun cae-pop-mark ()
