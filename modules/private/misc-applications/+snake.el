@@ -5,7 +5,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-games-prefix
-        "s" #'snake)
+        :desc "Snake" "s" #'snake)
   :config
   (map! :map snake-mode-map
         "<f6>" #'+snake-hydra/body))
