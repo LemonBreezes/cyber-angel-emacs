@@ -125,29 +125,31 @@
 (defconst cae-hacks-gc-threshold (* 3 1024 1024 1024))
 (defconst cae-hacks-gc-percentage 10)
 (defvar cae-hacks--gc-messages nil)
+(defvar cae-hacks--gc-disabled nil)     ; Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
 
 (defun cae-hacks-disable-gc ()
-  (setq cae-hacks--gcmh-mode (or cae-hacks--gcmh-mode
-                                 gcmh-mode))
-  (gcmh-mode -1)
-  (setq cae-hacks--gc-messages (and cae-hacks--gc-messages
-                                    garbage-collection-messages)
-        garbage-collection-messages t
-        gc-cons-threshold cae-hacks-gc-threshold
-        gc-cons-percentage cae-hacks-gc-percentage)
-  (when (timerp gcmh-idle-timer)
-    (cancel-timer gcmh-idle-timer))
-  (add-hook 'post-gc-hook #'cae-hacks-enable-gc))
+  (unless cae-hacks--gc-disabled
+    (setq cae-hacks--gcmh-mode   cae-hacks--gcmh-mode
+          cae-hacks--gc-disabled t)
+    (gcmh-mode -1)
+    (setq cae-hacks--gc-messages      cae-hacks--gc-messages
+          garbage-collection-messages t
+          gc-cons-threshold           cae-hacks-gc-threshold
+          gc-cons-percentage          cae-hacks-gc-percentage)
+    (when (timerp gcmh-idle-timer)
+      (cancel-timer gcmh-idle-timer))
+    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)))
 
 (defun cae-hacks-enable-gc ()
-  (gcmh-mode cae-hacks--gcmh-mode)
-  (setq garbage-collection-messages cae-hacks--gc-messages
-        cae-hacks--gc-messages nil
-        cae-hacks--gcmh-mode nil
-        gc-cons-threshold gcmh-low-cons-threshold
-        gc-cons-percentage cae-hacks-gc-percentage)
-  (remove-hook 'post-gc-hook #'cae-hacks-enable-gc))
+  (when cae-hacks--gc-disabled
+    (gcmh-mode cae-hacks--gcmh-mode)
+    (setq garbage-collection-messages cae-hacks--gc-messages
+          cae-hacks--gc-messages      nil
+          cae-hacks--gcmh-mode        nil
+          gc-cons-threshold           gcmh-low-cons-threshold
+          gc-cons-percentage          cae-hacks-gc-percentage)
+    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
