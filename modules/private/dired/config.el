@@ -103,7 +103,9 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "M-n" nil
-        "N" #'dirvish-narrow)
+        "N" #'dirvish-narrow
+        "j" #'consult-line)
+  (map! [remap +default/find-file-under-here] #'dirvish-fd)
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
