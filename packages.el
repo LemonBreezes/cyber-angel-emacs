@@ -22,7 +22,7 @@
 (package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
-(package! breadcrumb)
+(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 
 ;; cae-theme.el
 (package! modus-themes)
