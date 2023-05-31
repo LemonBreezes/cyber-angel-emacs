@@ -51,6 +51,7 @@
           ("q" nil "quit" :color blue))))
       (map! :map elfeed-search-mode-map
             "<f6>" #'cae-elfeed-hydra/body
+            ;; Elfeed maps `h' to `describe-mode', which is not as good.
             "h" #'cae-elfeed-hydra/body))
 
     (use-package elfeed-tube
