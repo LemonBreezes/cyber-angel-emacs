@@ -27,7 +27,8 @@
                           :background 'unspecified)))
   (after! highlight-context-line
     (set-face-attribute 'highlight-context-line-face nil
-                        :extend t))
+                        :extend t
+                        :background (face-attribute 'pulse-highlight-start-face :background)))
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
