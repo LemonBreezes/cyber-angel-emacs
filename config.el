@@ -527,7 +527,8 @@
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
                  if (or (eq ch ?q) (eq ch ?Q))
-                 return nil)
+                 do (progn (kill-buffer "*Diff*")
+                           (cl-return nil)))
       t))
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
