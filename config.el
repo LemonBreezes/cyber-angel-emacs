@@ -649,14 +649,7 @@
   :defer t
   :init
   (map! :leader :prefix "f"
-        :desc "Show file info" "i" #'file-info-show)
-  :config
-  (setq hydra-hint-display-type 'posframe)
-  (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
-                                     :internal-border-width 2
-                                     :internal-border-color "#61AFEF"
-                                     :left-fringe 16
-                                     :right-fringe 16)))
+        :desc "Show file info" "i" #'file-info-show)  )
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
