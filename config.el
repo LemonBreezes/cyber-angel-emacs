@@ -285,7 +285,13 @@
            (getenv "WSL_DISTRO_NAME"))
   (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
         browse-url-generic-args     '("/c" "start")))
-(setq browse-url-browser-function #'browse-url-generic)
+(setq browse-url-browser-function
+      (cond ((and (string-suffix-p "-android" system-configuration)
+                  (executable-find "termux-clipboard-get"))
+             (if (or (fboundp 'w3m-browse-url)
+                     (autoloadp 'w3m-browse-url))
+                 #'w3m-browse-url #'eww-browse-url))
+            (t #'browse-url-generic)))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
