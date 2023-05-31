@@ -108,14 +108,8 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "N" #'dirvish-narrow
-        "j" #'+default/search-buffer
-        [remap delete-other-windows] #'cae-dired-maximize-buffer))
-
-;;(add-hook 'dirvish-find-entry-hook
-;;          (cae-defun cae-dirvish-find-entry-h (entry buffer)
-;;            (when (one-window-p)
-;;              (ignore-error user-error
-;;                (dirvish-layout-switch dirvish-default-layout)))))
+        "j" #'+default/search-buffer))
+(map! :leader "o-" #'dirvish-dwim)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
