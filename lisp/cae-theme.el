@@ -69,7 +69,7 @@
     (theme-magic-export-theme-mode +1)))
 
 ;; Set theme based on time
-(if (and (display-graphic-p)
+(if (and (not (display-graphic-p))
          (not (modulep! :ui doom)))
     (progn (advice-add #'doom-init-theme-h :override #'ignore)
            (use-package! circadian
