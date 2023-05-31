@@ -4,8 +4,8 @@
   (setq-default mode-line-format
                 (cl-subst '(:eval (propertize (breadcrumb-project-crumbs)
                                               'face '(:weight bold
-                                                      ;;:slant italic
-                                                      :family "Variable Pitch")))
+                                                      :slant italic
+                                                      :inherit variable-pitch)))
                           'mode-line-buffer-identification
                           (default-value 'mode-line-format))))
 
