@@ -87,6 +87,6 @@
                                  #'compilation-goto-in-progress-buffer)))
                    (default-value 'minions-mode-line-modes)))))
 
-(add-hook 'doom-first-file-hook #'column-number-mode)
-
 (map! "<f9>" #'minions-minor-modes-menu)
+
+(add-hook 'doom-first-file-hook #'column-number-mode)
