@@ -429,6 +429,7 @@
 
 (when (and (not (modulep! editor evil))
            (modulep! :config default +bindings))
+  ;; I prefer `C-@' for `expand-region', but this is very subjective.
   (map! "C-@" #'er/expand-region
         "C-=" nil
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
