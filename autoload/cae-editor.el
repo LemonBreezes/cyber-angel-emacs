@@ -49,8 +49,10 @@
       (doom/sudo-this-file))))
 
 ;;;###autoload
-(defun cae-copilot-complete-freeze-cursors-dwim ()
+(defun dos2unix ()
+  "Automate M-% C-q C-m RET C-q C-j RET"
   (interactive)
-  (if (bound-and-true-p mc-freeze--frozen-cursors)
-      (call-interactively #'mc/freeze-fake-cursors-dwim)
-    (call-interactively #'copilot-complete)))
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward (string ?\C-m) nil t)
+      (replace-match (string ?\C-j) nil t))))
