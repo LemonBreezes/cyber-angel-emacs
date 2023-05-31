@@ -26,7 +26,7 @@
           (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards))
   (when (and (derived-mode-p 'dired-mode)
-             (one-window-p t))
+             (one-window-p))
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
