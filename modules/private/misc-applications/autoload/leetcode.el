@@ -35,7 +35,7 @@
   ("G" leetcode-refresh-fetch "Soft refresh" :column "Misc")
   ("L" leetcode-set-prefer-language "Set preferred language" :column "Misc")
   ("O" leetcode-show-problem :column "Act on ID")
-  ("P" leetcode-toggle-paid-display "Toggle paid problems" :column "Filter")
+  ("P" leetcode-toggle-paid-display "Toggle paid problems" :column "Display")
   ("S" tabulated-list-sort "Sort" :column "Misc")
   ("T" leetcode-toggle-tag-display "Toggle tag display" :column "Display")
   ("V" leetcode-view-problem "View problem" :column "Act on ID")
