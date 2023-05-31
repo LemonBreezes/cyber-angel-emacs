@@ -66,7 +66,8 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8)
-      (:enter +workspace/display))
+      (:enter +workspace/display)
+      (:exit "M-t" tab-select))
    t)
 
   ;; Currently part of `other-window' repeat map
