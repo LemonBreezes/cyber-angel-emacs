@@ -26,6 +26,8 @@
 ;;; UI
 
 (catch 'cae-ui-disabled
+  (unless cae-ui-enabled-p
+    (throw 'cae-ui-disabled nil))
   (load! "lisp/cae-theme")
   (after! hydra
     (load! "lisp/cae-cheatsheets"))
