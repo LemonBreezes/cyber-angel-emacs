@@ -506,7 +506,9 @@
   :keymaps (append +default-minibuffer-maps
                    (when (modulep! :editor evil +everywhere)
                      '(evil-ex-completion-map)))
-  "C-s" nil)
+  "C-s" nil)                            ;We already have `consult-history' bound
+                                        ;to `M-r' and `M-s'. This way we can use
+                                        ;C-s to search in the minibuffer.
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 (map! :leader
