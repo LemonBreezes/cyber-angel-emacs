@@ -764,8 +764,6 @@
  `(,@(when (modulep! :private dirvish)
        '(dired transient dirvish))
    ,@'(auth-source tramp-compat tramp-integration tramp tramp-sh)
-   ,@(when (autoloadp (symbol-function 'auto-sudoedit-mode))
-       '(auto-sudoedit))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
