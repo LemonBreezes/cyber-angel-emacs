@@ -122,6 +122,6 @@
 
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
-(add-to-list 'find-directory-functions #'cae-dired-load-dirvish-h t)
+(add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
