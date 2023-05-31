@@ -46,4 +46,7 @@
 
 (use-package! worf
   :defer t :init
-  (add-hook 'org-mode-hook #'worf-mode))
+  (add-hook 'org-mode-hook #'worf-mode)
+  :config
+  (when (modulep! :editor multiple-cursors)
+    (add-to-list 'mc/unsupported-minor-modes #'worf-mode)))
