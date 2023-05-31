@@ -86,7 +86,12 @@
                                        (make-mode-line-mouse-map
                                         'mouse-2
 			                #'compilation-goto-in-progress-buffer))))))
-  (map! "<f9>" #'minions-minor-modes-menu))
+  (map! "<f9>" #'minions-minor-modes-menu)
+
+  (defalias 'cae-modeline-truncate-string (-rpartial #'truncate-string-to-width 30 nil nil t))
+  (cae-modeline-truncate-string "hello world the cat in the hat")
+  (advice-add #'vc-git-mode-line-string :filter-return #'cae-modeline-truncate-string)
+  )
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
