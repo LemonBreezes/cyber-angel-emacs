@@ -44,7 +44,9 @@
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
 
   ;; Expand abbreviations before parsing input.
-  (advice-add 'eshell-send-input :before #'expand-abbrev)
+  (advice-add 'eshell-send-input :before
+              (cae-defun cae-eshell-expand-abbrev-a (&rest _)
+                (expand-abbrev)))
 
   (unless (modulep! :config default +smartparens)
     (remove-hook 'eshell-mode-hook #'smartparens-mode))
