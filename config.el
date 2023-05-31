@@ -259,8 +259,8 @@
                                             "lisp/cae-project"))
 (map! :leader
       :prefix "p"
-      "C-b" #'cae-project-bookmark
       "RET" #'cae-project-bookmark-set)
+(map! "M-#" #'cae-project-bookmark)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
@@ -507,7 +507,7 @@
           ;; C-x bindings (ctl-x-map)
           "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
           "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-          "M-#" #'consult-register
+          "C-x r J" #'consult-register
           [remap jump-to-register] #'consult-register-load
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
