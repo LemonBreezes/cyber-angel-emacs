@@ -61,7 +61,51 @@
                (unwind-protect (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                                                   (tramp-file-local-name file)))
                  (advice-remove #'auto-sudoedit #'ignore)))
-      (doom/sudo-this-file))))
+      (let* ((curr-path (auto-sudoedit-current-path))
+             (remote-info (let* ((file-owner (auto-sudoedit-file-owner curr-path))
+                                 (tramp-path
+                                  (if (tramp-tramp-file-p curr-path)
+                                      (auto-sudoedit-path-from-tramp-ssh-like curr-path file-owner)
+                                    (concat "/sudo::" curr-path))))
+                            (if (and
+                                 ;; We must know the file owner's login name
+                                 ;; If we can't, we don't know which user to sudo as
+                                 ;; 変換前のパスと同じでなく(2回めの変換はしない)
+                                 (not (equal curr-path tramp-path)))
+                                (cons file-owner tramp-path)
+                              (cons nil curr-path))))
+             (user (car remote-info))
+             (tramp-path (cdr remote-info)))
+        (when (and
+               curr-path
+               user
+               tramp-path
+               (or
+                (not auto-sudoedit-ask)
+                (y-or-n-p (format "This buffer belongs to user %s.  Reopen this buffer as user %s? " user user))))
+          ;; We have to tell emacs that this buffer now visits another file (actually the same one, just via tramp sudo)
+          ;; We have to do things differently for normal files and for dired
+          (when buffer-file-name
+            (set-visited-file-name tramp-path t))
+          (when dired-directory
+            ;; Remove the buffer as displaying the old directory path in dired's active buffer list
+            (dired-unadvertise dired-directory)
+            (setq list-buffers-directory tramp-path)
+            (setq dired-directory tramp-path)
+            (setq default-directory tramp-path)
+            ;; Insert the new directory path in dired's active buffer list
+            (dired-advertise))
+          ;; Remove the old filename from the recentf-list
+          ;; TODO: Is this a good idea? Could this break something?
+          (when (string= (car recentf-list) curr-path)
+            (pop recentf-list))
+          ;; We have changed the way emacs edits the file
+          ;; Therefore we have to reinitialize the buffer (read-only, etc.)
+          ;; Also the file may have not been readable before
+          ;; Revert buffer fixes this for us.
+          ;; Use the arguments to prevent user confirmation
+          ;; (There are no changes that could be discarded in the buffer anyways, it was just opened)
+          (revert-buffer t t))))))
 
 (defun cae-auto-sudoedit-exempt-p ()
   (let ((path (or (buffer-file-name) list-buffers-directory)))
