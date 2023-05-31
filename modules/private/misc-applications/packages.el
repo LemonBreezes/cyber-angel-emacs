@@ -22,7 +22,7 @@
 (when (and (eq system-type 'gnu/linux) (executable-find "pacman"))
   (package! aurel))
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  (package! helm-system-packages))
+  (package! helm-system-packages (recipe (:host github :repo "LemonBreezes/helm-system-packages"))))
 (package! ytel)
 (package! x86-lookup)
 (package! devdocs)
