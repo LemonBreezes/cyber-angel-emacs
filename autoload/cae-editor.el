@@ -202,12 +202,18 @@ mark the string and call `edit-indirect-region' with it."
       (forward-char 1))))
 
 ;;;###autoload
-(cae-defun cae-avy-use-post-style-a (oldfun &rest args)
+(defun cae-avy-use-post-style-a (oldfun &rest args)
   (let ((avy-style 'post))
     (apply oldfun args)))
 
 ;;;###autoload
-(cae-defun cae-avy-use-pre-style-a (oldfun &rest args)
+(defun cae-avy-use-pre-style-a (oldfun &rest args)
   (let ((avy-style 'pre)
+        (avy-column-line-overlay nil))
+    (apply oldfun args)))
+
+;;;###autoload
+(cae-defun cae-avy-use-at-style-a (oldfun &rest args)
+  (let ((avy-style 'at)
         (avy-column-line-overlay nil))
     (apply oldfun args)))
