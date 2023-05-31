@@ -123,7 +123,8 @@
 ;;; GC hacks
 
 ;; The purpose of these functions is to safely disable GC during long-running
-;; tasks which run in `kill-emacs-hook'.
+;; tasks.
+
 (defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
 (defconst cae-hacks-gc-cons-percentage 10)
 (defvar cae-hacks--gc-percentage nil)
