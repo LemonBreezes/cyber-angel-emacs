@@ -1,31 +1,19 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
-(use-package! detached
-  :defer t :init
-  (add-hook 'doom-first-input-hook #'detached-init)
-  (map! [remap async-shell-command] #'detached-shell-command
-        [remap compile] #'detached-compile
-        [remap recompile] #'detached-recompile
-        (:when (modulep! :completion vertico)
-         [remap detached-open-session] #'detached-consult-session)
-        :leader
-        :prefix "o"
-        :desc "Detached session" "s" #'detached-open-session)
-  :custom ((detached-show-output-on-attach t)
-           (detached-terminal-data-command system-type))
-  :config
-  ;; I copied this from
-  ;; https://lists.sr.ht/~niklaseklund/detached.el/%3C43845199-6AAD-4651-9D13-4F02F0D887D6%40technomadic.org%3E.
-  ;; Hopefully in a few months I can remove it.
-  (defun cae-hacks-detached--db-update-sessions (orig-fn)
-    "Ensure we print the full object to the DB."
-    (let ((print-length nil)
-          (print-level nil))
-      (funcall orig-fn)))
-
-  (advice-add 'detached--db-update-sessions
-              :around
-              #'cae-hacks-detached--db-update-sessions))
+;; Detached's database is getting corrupted, so I'm disabling it for now.
+;;(use-package! detached
+;;  :defer t :init
+;;  (add-hook 'doom-first-input-hook #'detached-init)
+;;  (map! [remap async-shell-command] #'detached-shell-command
+;;        [remap compile] #'detached-compile
+;;        [remap recompile] #'detached-recompile
+;;        (:when (modulep! :completion vertico)
+;;         [remap detached-open-session] #'detached-consult-session)
+;;        :leader
+;;        :prefix "o"
+;;        :desc "Detached session" "s" #'detached-open-session)
+;;  :custom ((detached-show-output-on-attach t)
+;;           (detached-terminal-data-command system-type)))
 
 (use-package! eat
   :defer t :init
