@@ -30,6 +30,9 @@
            modus-themes-variable-pitch-ui t
            modus-themes-mixed-fonts t
            modus-themes-prompts '(italic semibold))))
+(after! ef-themes
+  (setq! ef-themes-variable-pitch-ui t
+         ef-themes-mixed-fonts t))
 
 ;; ;; Set theme based on time
 ;; (when (display-graphic-p)
