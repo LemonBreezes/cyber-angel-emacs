@@ -1,5 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-
+o
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 
@@ -44,7 +44,8 @@
                            (setf (car (car x))
                                  (replace-regexp-in-string "C-c &"
                                                            "C-c y"
-                                                           (car-safe (car x))))))
+                                                           (car-safe (car x)))))
+                         x)
                        which-key-replacement-alist)))))
 
 ;;; UI
