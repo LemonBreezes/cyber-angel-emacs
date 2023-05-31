@@ -30,11 +30,6 @@
   (unless (modulep! :config default +smartparens)
     (remove-hook 'eshell-mode-hook #'smartparens-mode))
 
-  (when (modulep! :private corfu)
-    (add-hook 'eshell-mode-hook
-              (lambda ()
-                (add-to-list 'completion-at-point-functions 'cape-abbrev))))
-
   (use-package eshell-bookmark
     :after eshell
     :config
