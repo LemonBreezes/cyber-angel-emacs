@@ -361,8 +361,7 @@
            (105 . avy-action-ispell)
            (122 . avy-action-zap-to-char))))
   (map! "M-n" #'avy-goto-line-below
-        "M-p" #'avy-goto-line-above
-        ))
+        "M-p" #'avy-goto-line-above))
 
 (use-package! pp+
   :after pp
