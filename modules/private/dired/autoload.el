@@ -40,7 +40,7 @@
 ;;;###autoload (autoload 'cae-dired-dirvish-hydra/body "private/dired/autoload" nil t)
 (defhydra cae-dired-dirvish-hydra (:color blue)
   ("<f6>" nil "Exit" :exit t)
-  ("M-e" dirvish-emerge-menu "Emerge menu" :column "Menu")
+  ("M-e" cae-dired-dirvish-emerge-menu "Emerge menu" :column "Menu")
   ("M-l" dirvish-ls-switches-menu "ls menu" :column "Menu")
   ("M-m" dirvish-mark-menu "Mark menu" :column "Menu")
   ("M-s" dirvish-setup-menu "Setup menu" :column "Menu")
@@ -51,7 +51,7 @@
   ("s" dirvish-quicksort "Quicksort" :column "Menu")
   ("?" dirvish-dispatch "Dirvish dispatch" :column "Menu"))
 
-(defun cae-emerge-menu ()
+(defun cae-dired-dirvish-emerge-menu ()
   (interactive)
   (dirvish-emerge-mode +1)
   (call-interactively #'dirvish-emerge-menu))
