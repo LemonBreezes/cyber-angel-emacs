@@ -7,4 +7,6 @@
   ("n" tetris-start-game "Start game")
   ("p" tetris-pause-game "Pause game")
   ("SPC" tetris-move-bottom "Move bottom")
-  ("<up>" tetris-rotate-prev "Rotate clockwise"))
+  ("<up>" tetris-rotate-prev "Rotate clockwise")
+  ("<left>" tetris-move-left "Move left" "Movement")
+  ("<right>" tetris-move-right "Move right" "Movement"))
