@@ -78,7 +78,7 @@ derivative.")
          (corfu-complete))))
 
   (map! ;;(:unless (modulep! +tng)
-        ;; :desc "complete" "C-SPC" #'completion-at-point)
+        ;;  :desc "complete" "C-SPC" #'completion-at-point)
         (:map 'corfu-map
          (:when +corfu-want-multi-component
           :desc "insert separator" "C-SPC" #'corfu-insert-separator)
