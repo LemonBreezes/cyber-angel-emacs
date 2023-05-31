@@ -376,7 +376,7 @@
            (?z . avy-action-zap-to-char)))
         avy-styles-alist '((avy-isearch . pre)
                            (ace-link-man . pre))
-        avy-indent-line-overlay t))
+        avy-column-line-overlay t))
 
 (use-package! pp+
   :after pp
