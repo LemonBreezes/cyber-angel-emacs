@@ -37,13 +37,14 @@
               (corfu-mode +1))))
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 
+(after! cape
+  (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
   (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
         corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
         corfu-on-exact-match nil
         corfu-separator ?&
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
-        cape-dabbrev-check-other-buffers t
         tab-always-indent 'complete)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
