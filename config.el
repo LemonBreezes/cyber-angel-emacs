@@ -289,6 +289,9 @@
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
+(use-package! topsy
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode))
+
 
 ;;; Editor
 
