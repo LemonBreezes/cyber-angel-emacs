@@ -160,7 +160,6 @@
 
 (setq bookmark-bmenu-file-column 50)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
-;; (advice-add #'bookmark-jump :before #'bookmark-load)
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
