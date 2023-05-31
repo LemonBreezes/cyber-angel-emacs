@@ -7,6 +7,6 @@
         :prefix +misc-applications-lookup-prefix
         "x" #'x86-lookup)
   :config
-  (setopt
+  (setq
    x86-lookup-pdf (expand-file-name "325383-sdm-vol-2abcd.pdf" doom-data-dir)
    x86-lookup-cache-directory (expand-file-name "x86-lookup" doom-cache-dir)))
