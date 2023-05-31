@@ -9,3 +9,7 @@
 (defun cae-ignore-errors-a (fun &rest args)
   "Ignore errors in FUN with ARGS."
   (ignore-errors (apply fun args)))
+
+(defun cae-display-graphic-p ()
+  (and (display-graphic-p)
+       (not (daemonp))))
