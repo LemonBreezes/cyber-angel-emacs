@@ -312,6 +312,7 @@
     (meow-motion-overwrite-define-key)) ; custom keybinding for motion state
   (meow/setup)
   (map! :map meow-normal-state-keymap
+        "?" #'meow-cheatsheet
         "<" #'meow-beginning-of-thing
         ">" #'meow-end-of-thing
         "a" #'meow-append
