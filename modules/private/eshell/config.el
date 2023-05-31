@@ -44,15 +44,15 @@
   ;;      "M->" #'end-of-buffer
   ;;      "<prior>" #'scroll-down-command
   ;;      "<next>" #'scroll-up-command)
-  (map! :map eat-mode-map
-        "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
+  ;;(map! :map eat-mode-map
+  ;;      "C-c C-u" (cmd! (eat-input-char ?\C-u 1)))
   (advice-add #'eat-eshell-char-mode
               :after
               (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
-                (message "Type M-RET to enter semi-char mode.")))
+                (message "Type M-RET/C-M-m to enter semi-char mode.")))
   (add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
   (remove-hook 'eshell-mode-hook #'hide-mode-line-mode) ;Show the Eat mode line
-                                                        ;indicator.
+                                        ;indicator.
 
   ;; Expand abbreviations before parsing input.
   (advice-add 'eshell-send-input :before
