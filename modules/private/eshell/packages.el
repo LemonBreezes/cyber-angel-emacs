@@ -5,3 +5,4 @@
 (package! eshell-bookmark)
 (package! eshell-prompt-extras :recipe
   (:host github :repo "LemonBreezes/eshell-prompt-extras"))
+(package! detached)
