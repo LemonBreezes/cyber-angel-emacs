@@ -25,7 +25,7 @@
 
 ;; cae-theme.el
 (package! modus-themes)
-(package! circadian)
+(package! auto-dark)
 (package! standard-themes)
 (package! ef-themes)
 
