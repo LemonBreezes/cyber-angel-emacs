@@ -225,13 +225,13 @@ appropriate.  In tables, insert a new row or end the table."
               (t
                ;; Non-empty row: call `org-return'.
                (org-return))))
-       ((save-excursion
-          (skip-chars-backward "\n")
-          (looking-at "\\(\n+\\)#\\+end_"))
-        (if (> (- (match-end 1) (match-beginning 1)) 1)
-            (progn (goto-char (1- (match-end 1)))
-                   (delete-region (1+ (match-beginning 1)) (1- (match-end 1))))
-          (insert-char ?\n)))
+       ;;((save-excursion
+       ;;   (skip-chars-backward "\n")
+       ;;   (looking-at "\\(\n+\\)#\\+end_"))
+       ;; (if (> (- (match-end 1) (match-beginning 1)) 1)
+       ;;     (progn (goto-char (1- (match-end 1)))
+       ;;            (delete-region (1+ (match-beginning 1)) (1- (match-end 1))))
+       ;;   (insert-char ?\n)))
        (t
         ;; All other cases: call `org-return'.
         (org-return))))))
