@@ -514,6 +514,7 @@
                                         ;to `M-r' and `M-s'. This way we can use
                                         ;`C-s' to search in the minibuffer.
 
+;; I'm surprised Doom Emacs doesn't bind a key for copying links.
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
 
