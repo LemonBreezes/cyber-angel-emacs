@@ -15,18 +15,18 @@
           "q" #'+elfeed-quit)
     (when (modulep! :ui hydra)
       (pretty-hydra-define cae-elfeed-hydra (:color pink :foreign-keys run)
-        ("Filter"
+        ("Custom filter"
          (("e" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
           ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
           ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
           ("a" (elfeed-search-set-filter "@6-months-ago") "All")
-          ("t" (elfeed-search-set-filter "@1-day-ago") "Today")
-          ("s" elfeed-search-live-filter "Search")
-          ;;("S" elfeed-search-set-filter "Set filter")
-          ("c" elfeed-search-clear-filter "Clear filter"))
+          ("t" (elfeed-search-set-filter "@1-day-ago") "Today"))
          "Navigation"
          (;;("RET" elfeed-search-show-entry "Show entry")
           ("b" elfeed-search-browse-url "Open entry")
+          ("s" elfeed-search-live-filter "Search")
+          ("S" elfeed-search-set-filter "Set filter")
+          ("c" elfeed-search-clear-filter "Clear filter")
           ;;("n" next-line "Next line")
           ;;("p" previous-line "Previous line")
           ;;("<" elfeed-search-first-entry "First entry")
