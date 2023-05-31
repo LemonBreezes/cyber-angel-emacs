@@ -322,8 +322,8 @@
     ";!=" "≠"
     "-." "->"
     "=." "=>"
-    "g_dan7" (lambda () (cae-gpt-insert-dan7-prompt))
-    "g_maximus" (lambda () (cae-gpt-insert-maximus-prompt))))
+    "g_dan7" (cmd! () (cae-gpt-insert-dan7-prompt))
+    "g_maximus" (cmd! () (cae-gpt-insert-maximus-prompt))))
 
 ;;; Programming language specific stuff
 
