@@ -754,7 +754,6 @@
                 my-View-scroll-half-page-forward-other-window
                 my-View-scroll-half-page-backward-other-window))
     (add-to-list 'rp/restore-point-commands fn))
-  (advice-add #'rp/restore-point-position :before #'push-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
