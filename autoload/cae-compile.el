@@ -19,7 +19,7 @@
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
     ,(expand-file-name "doom-cli.el" doom-core-dir)))
 
-(defun cae-compile-pdf-tools ()
+(defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
                               (pdf-info-check-epdfinfo))
                          t)
