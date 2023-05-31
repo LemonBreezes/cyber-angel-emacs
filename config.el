@@ -632,15 +632,15 @@
 ;;          (cae-defun cae-clean-up-lazy-highlight-h ()
 ;;            (when isearch-lazy-highlight-overlays
 ;;              (lazy-highlight-cleanup t) t)))
-;;
-;;(after! ispell
-;;  (setq ispell-quietly t
-;;        ispell-dictionary "en_US"
-;;        ispell-help-in-bufferp 'electric))
-;;
-;;(when (modulep! :emacs undo)
-;;  (after! undo-fu
-;;    (setq undo-fu-allow-undo-in-region t)))
+
+(after! ispell
+  (setq ispell-quietly t
+        ispell-dictionary "en_US"
+        ispell-help-in-bufferp 'electric))
+
+(when (modulep! :emacs undo)
+  (after! undo-fu
+    (setq undo-fu-allow-undo-in-region t)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
