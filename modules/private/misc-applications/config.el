@@ -22,6 +22,7 @@
 ;; out into `doom-after-init-hook' so that the user can modify them.
 (setq +misc-applications-lisp-files
       '("+alarm-clock"
+        ;;"+aurel"
         "+daemons"
         "+disk-usage"
         ;;"+elcord"
