@@ -5,15 +5,19 @@
         "r" #'=rss)
 
   (after! elfeed
-    (push elfeed-db-directory recentf-exclude))
-
-  (use-package elfeed-tube
-    :after elfeed
-    :config
-    (elfeed-tube-setup)
+    (push elfeed-db-directory recentf-exclude)
     (map! :map elfeed-show-mode-map
-          "F"                 #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save
+          "?" #'describe-mode
           :map elfeed-search-mode-map
-          "F"                 #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save)))
+          "?" #'describe-mode)
+
+    (use-package elfeed-tube
+      :after elfeed
+      :config
+      (elfeed-tube-setup)
+      (map! :map elfeed-show-mode-map
+            "F" #'elfeed-tube-fetch
+            [remap save-buffer] #'elfeed-tube-save
+            :map elfeed-search-mode-map
+            "F" #'elfeed-tube-fetch
+            [remap save-buffer] #'elfeed-tube-save))))
