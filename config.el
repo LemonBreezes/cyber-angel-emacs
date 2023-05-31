@@ -857,7 +857,9 @@
           [remap Info-search] #'consult-info
           :map help-map
           "TAB" #'consult-info
-          "W" #'consult-man)
+          "W" #'consult-man
+          :leader
+          :desc "Mode command" "M-x" #'consult-mode-command)
     :config
     (setq consult-preview-key 'any)
     (consult-customize
