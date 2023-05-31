@@ -22,7 +22,6 @@
 (package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
-(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 (package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
 
 ;; cae-theme.el
