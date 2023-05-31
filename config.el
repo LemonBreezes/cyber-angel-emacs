@@ -844,31 +844,31 @@
   :config
   (speedrect-hook))
 
-;;(use-package! restore-point
-;;  :defer t :init
-;;  (add-hook 'doom-first-input-hook #'restore-point-mode)
-;;  :config
-;;  (dolist (fn '(symbol-overlay-switch-forward
-;;                symbol-overlay-switch-backward
-;;                symbol-overlay-jump-next
-;;                symbol-overlay-jump-prev
-;;                recenter-top-bottom
-;;                reposition-window))
-;;    (add-to-list 'rp/restore-point-commands fn))
-;;  ;; Restore point in the minibuffer.
-;;  (defun cae-restore-point-h ()
-;;    (when (bound-and-true-p restore-point-mode)
-;;      (rp/cond-restore-point)))
-;;  (defun cae-restore-point-enable-in-minibuffer-h ()
-;;    (if restore-point-mode
-;;        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
-;;               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
-;;               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
-;;               ;; way we are certain this function is only called interactively.
-;;               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
-;;      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
-;;      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
-;;  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
+(use-package! restore-point
+  :defer t :init
+  (add-hook 'doom-first-input-hook #'restore-point-mode)
+  :config
+  (dolist (fn '(symbol-overlay-switch-forward
+                symbol-overlay-switch-backward
+                symbol-overlay-jump-next
+                symbol-overlay-jump-prev
+                recenter-top-bottom
+                reposition-window))
+    (add-to-list 'rp/restore-point-commands fn))
+  ;; Restore point in the minibuffer.
+  (defun cae-restore-point-h ()
+    (when (bound-and-true-p restore-point-mode)
+      (rp/cond-restore-point)))
+  (defun cae-restore-point-enable-in-minibuffer-h ()
+    (if restore-point-mode
+        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
+               ;; way we are certain this function is only called interactively.
+               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
+      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
+  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
 
 (use-package! symbol-overlay
   :defer t :init
