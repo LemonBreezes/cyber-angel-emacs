@@ -38,6 +38,7 @@
         tab-bar-new-button     nil))
 
 (setq x-stretch-cursor t                ; Show me if I am on a TAB or a space
+      truncate-string-ellipsis "..."
       kill-buffer-delete-auto-save-files t)
 
 (when (and (modulep! :ui modeline)
