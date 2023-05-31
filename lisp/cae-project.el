@@ -118,6 +118,51 @@
        (define-key cae-project-bookmark-embark-map (vector key) command))))
  embark-bookmark-map)
 
+(setf (alist-get 'project-bookmark embark-keymap-alist)
+      #'cae-project-bookmark-embark-map)
+
+(setf (alist-get 'project-bookmark embark-exporters-alist)
+      (defalias 'cae-project-bookmark-export
+        (lambda (cands)
+          (let ((bookmark-alist (cae-project--bookmark-alist))
+                (bookmark-default-file (cae-project--get-bookmark-file)))
+            (ignore bookmark-alist bookmark-default-file)
+            (embark-export-bookmarks cands)))))
+
+(setf (alist-get 'cae-project-bookmark-delete embark-pre-action-hooks)
+      (alist-get 'bookmark-delete embark-pre-action-hooks))
+(setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
+      (alist-get 'bookmark-rename embark-post-action-hooks))
+(setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
+      (alist-get 'bookmark-rename embark-post-action-hooks))
+
+(defun cae-project-bookmark ()
+  "Consult bookmarks in the current project."
+  (interactive)
+  (let ((bookmark-alist (cae-project--bookmark-alist))
+        (bookmark-default-file (cae-project--get-bookmark-file)))
+    (ignore bookmark-alist bookmark-default-file)
+    (interactive
+     (list
+      (let ((narrow (mapcar (pcase-lambda (`(,x ,y ,_)) (cons x y))
+                            consult-bookmark-narrow)))
+        (consult--read
+         (consult--bookmark-candidates)
+         :prompt "Bookmark: "
+         :state (consult--bookmark-preview)
+         :category 'bookmark
+         :history 'bookmark-history
+         ;; Add default names to future history.
+         ;; Ignore errors such that `consult-bookmark' can be used in
+         ;; buffers which are not backed by a file.
+         :add-history (ignore-errors (bookmark-prop-get (bookmark-make-record) 'defaults))
+         :group (consult--type-group narrow)
+         :narrow (consult--type-narrow narrow)))))
+    (bookmark-maybe-load-default-file)
+    (if (assoc name bookmark-alist)
+        (bookmark-jump name)
+      (bookmark-set name))))
+
 (define-prefix-command 'cae-project-bookmark-map)
 (map! :map cae-project-bookmark-map
       :desc "Jump to bookmark" "j" #'cae-project-bookmark-jump
