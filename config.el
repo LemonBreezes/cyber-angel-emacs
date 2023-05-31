@@ -568,22 +568,22 @@
 ;;      (setq embark-cycle-key ,embark-act-key))
 ;;   t))
 
-;;;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-;;(when (modulep! :ui popup)
-;;  (add-hook 'post-command-hook
-;;            (cae-defun cae-fix-popup-other-keybinding ()
-;;              (define-key ctl-x-map "p" nil)
-;;              (map! :map ctl-x-map
-;;                    "p" #'+popup/other))))
+;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+(when (modulep! :ui popup)
+  (add-hook 'post-command-hook
+            (cae-defun cae-fix-popup-other-keybinding ()
+              (define-key ctl-x-map "p" nil)
+              (map! :map ctl-x-map
+                    "p" #'+popup/other))))
 
-;; Remove redundant `consult-history' keybinding.
-(define-key!
-  :keymaps (append +default-minibuffer-maps
-                   (when (modulep! :editor evil +everywhere)
-                     '(evil-ex-completion-map)))
-  "C-s" nil)                            ;We already have `consult-history' bound
-                                        ;to `M-r' and `M-s'. This way we can use
-                                        ;`C-s' to search in the minibuffer.
+;;;; Remove redundant `consult-history' keybinding.
+;;(define-key!
+;;  :keymaps (append +default-minibuffer-maps
+;;                   (when (modulep! :editor evil +everywhere)
+;;                     '(evil-ex-completion-map)))
+;;  "C-s" nil)                            ;We already have `consult-history' bound
+;;                                        ;to `M-r' and `M-s'. This way we can use
+;;                                        ;`C-s' to search in the minibuffer.
 
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
 (map! :leader
