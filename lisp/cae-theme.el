@@ -45,14 +45,14 @@
 
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
-    (setopt modus-themes-org-blocks 'gray-background
+    (setq! modus-themes-org-blocks 'gray-background
            modus-themes-slanted-constructs t
            modus-themes-bold-constructs nil
            modus-themes-variable-pitch-ui t
            modus-themes-mixed-fonts t
            modus-themes-prompts '(italic semibold))))
 (after! ef-themes
-  (setopt ef-themes-variable-pitch-ui t
+  (setq! ef-themes-variable-pitch-ui t
           ef-themes-mixed-fonts t
           ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
 
