@@ -13,9 +13,6 @@
          vc-annotate-background-mode nil))
 
 (after! magit
-  (when (modulep! :ui vc-gutter +diff-hl)
-    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
   (map! :map magit-status-mode-map
         [remap +fold/toggle] #'magit-section-toggle)
   (setq! magit-diff-refine-hunk 'all
