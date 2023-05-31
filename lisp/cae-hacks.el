@@ -132,7 +132,7 @@
   (unless cae-hacks--gc-disabled
     (setq cae-hacks--gcmh-mode        gcmh-mode)
     (gcmh-mode -1)
-    (setq cae-hacks--gc-messages      cae-hacks--gc-messages
+    (setq cae-hacks--gc-messages      garbage-collection-messages
           garbage-collection-messages t
           gc-cons-threshold           cae-hacks-gc-threshold
           gc-cons-percentage          cae-hacks-gc-percentage)
