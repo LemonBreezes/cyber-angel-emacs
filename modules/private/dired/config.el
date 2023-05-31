@@ -99,7 +99,7 @@
         "e" #'cae-dired-find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
-        "M-j" #'dirvish-fd
+        "M-j" #'dirvish-fd-jump
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "M-n" nil
