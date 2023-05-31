@@ -134,11 +134,4 @@
 
 ;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
 ;; you will be waiting for a long time.
-(add-hook 'kill-emacs-hook
-          ;; 10 GB or 30% of RAM
-          (lambda () (setq gc-cons-threshold cae-hacks-big-gc-threshold
-                           gc-cons-percentage cae-hacks-big-gc-percentage
-                           gcmh-low-cons-threshold gc-cons-threshold
-                           gcmh-high-cons-threshold gc-cons-threshold
-                           garbage-collection-messages t))
-          -10)
+(add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
