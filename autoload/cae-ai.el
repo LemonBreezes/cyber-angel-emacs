@@ -21,7 +21,6 @@
      (when which-key-inhibit
        (which-key-show-keymap 'org-ai-global-mode-prefix-map t)))))
 
-;;;###autoload
 (defun cae-ai-org-ai-kill-region-at-point ()
   (interactive)
   (call-interactively #'org-ai-kill-region-at-point)
