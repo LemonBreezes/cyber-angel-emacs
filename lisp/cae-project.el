@@ -3,6 +3,7 @@
 ;;; Project-local bookmarks.
 
 ;; TODO handle bookmark bmenu
+;; TODO handle the fringe indicator
 
 (defvar cae-project-bookmark-dir (concat doom-cache-dir "cae-project-bookmarks/")
   "Directory to store project bookmarks.")
