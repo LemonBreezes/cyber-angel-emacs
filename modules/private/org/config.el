@@ -69,7 +69,7 @@
               :around
               ;; Skip over vimish folds
               (cae-defun cae-worf-skip-vimish-fold-forward-a (oldfun arg)
-                (let ((point-max (-some->> (and (modulep! :editor fold)
+                (let ((point-max (-some->> (and (require 'vimish-fold nil t)
                                                 (overlays-at (point)))
                                    (-filter #'vimish-fold--vimish-overlay-p)
                                    (-map #'overlay-end)
