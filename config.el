@@ -401,9 +401,6 @@
     ;; there are errors.
     (setq compilation-scroll-output t))
 
-  ;; This autoload fixes a void function error on `find-file-hook' that occurs
-  ;; sporadically for me.
-  (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
   (after! tramp
     (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*") ;; default + 
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
