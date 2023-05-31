@@ -58,6 +58,7 @@
         (rainbow-mode)
         (visual-line-mode)
         (fill-column-indicator-mode)))
+
 (add-hook 'c-mode-common-hook #'cae-modeline-minions-c-setup)
 (add-hook 'emacs-lisp-mode-hook #'cae-modeline-minions-elisp-setup)
 (map! "<f9>" #'minions-minor-modes-menu)
