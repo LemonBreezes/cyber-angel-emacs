@@ -42,6 +42,7 @@
 
        :tools
        (debugger +lsp)
+       direnv
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
