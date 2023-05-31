@@ -1,3 +1,3 @@
 ;;; lisp/cae-project.el -*- lexical-binding: t; -*-
 
-(ignore)
+;; (vc-git--symbolic-ref (buffer-file-name))
