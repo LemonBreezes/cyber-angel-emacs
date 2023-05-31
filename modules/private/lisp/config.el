@@ -45,8 +45,8 @@
 
 (when (modulep! :editor lispy)
   (after! lispy
-    (setq lispy-font-lock-keywords nil)
-    (setq! lispy-eval-display-style 'overlay)
+    (setq lispy-font-lock-keywords nil
+          lispy-eval-display-style 'overlay)
     (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
@@ -68,7 +68,7 @@
           "M-."   nil                   ;formerly `lispy-goto-symbol'.
                                         ;`+lookup/definition' works more often
                                         ;and does not require semantic.
-          "C-M-," nil 
+          ;"C-M-," nil
           "M-r" #'lispy-raise-sexp
           "M-R" #'lispy-raise-some
           "M-S" #'lispy-split
