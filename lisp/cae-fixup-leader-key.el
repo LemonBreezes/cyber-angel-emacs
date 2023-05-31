@@ -15,16 +15,16 @@ overriding other keymaps."
             (cae-defun cae-general--unbind-keys ()
               ;; Do not override `org-edit-special' in Org mode.
               (define-key general-override-mode-map (kbd "C-c '") nil)))
-  (add-hook 'cae-general-override-mode-hook
-            (cae-defun cae-general-override--disable-override-mode ()
-              (if cae-general-override-mode
-                  (progn
-                    (setq cae-general-override--override-mode-p
-                          general-override-mode)
-                    (general-override-mode -1))
-                (general-override-mode
-                 (if cae-general-override--override-mode-p 1 -1))
-                (setq cae-general-override--override-mode-p nil))))
+  ;;(add-hook 'cae-general-override-mode-hook
+  ;;          (cae-defun cae-general-override--disable-override-mode ()
+  ;;            (if cae-general-override-mode
+  ;;                (progn
+  ;;                  (setq cae-general-override--override-mode-p
+  ;;                        general-override-mode)
+  ;;                  (general-override-mode -1))
+  ;;              (general-override-mode
+  ;;               (if cae-general-override--override-mode-p 1 -1))
+  ;;              (setq cae-general-override--override-mode-p nil))))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t)
   (advice-add #'doom-init-leader-keys-h
               :around
