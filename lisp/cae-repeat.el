@@ -6,7 +6,7 @@
   :init
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
-  (setq r:epeat-exit-timeout 0.5
+  (setq repeat-exit-timeout 0.5
         repeat-exit-key "C-g")
   (map! :map help-map "C-r" #'describe-repeat-maps)
 
