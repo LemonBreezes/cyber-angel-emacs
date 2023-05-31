@@ -9,6 +9,7 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(package! yasnippet :recipe (:build (:not compile)))
 
 ;;; UI
 (package! info-colors)
