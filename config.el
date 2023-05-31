@@ -533,9 +533,7 @@
     (after! multiple-cursors
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-backward)
       (add-to-list 'mc--default-cmds-to-run-for-all 'hungry-delete-forward)))
-  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
-
-
+  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 ;;; Autocompletion
 
 (when (modulep! :private corfu)
