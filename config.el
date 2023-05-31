@@ -513,9 +513,7 @@
 (use-package! aggressive-indent
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp' module.
-  (unless (and (modulep! :tools lsp)
-               (not (modulep! :tools lsp +eglot)))
-    (add-hook 'c-mode-common-hook #'aggressive-indent-mode))
+  (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
   :defer t)
 
 (use-package! hungry-delete
