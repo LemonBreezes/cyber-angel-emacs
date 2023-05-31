@@ -39,7 +39,6 @@
 
 (after! corfu
   (setopt corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
-          corfu-separator ?&
           corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
           corfu-on-exact-match nil
           corfu-preselect (if (modulep! :private corfu +tng) 'prompt t))
