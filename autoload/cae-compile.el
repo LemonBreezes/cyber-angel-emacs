@@ -149,6 +149,7 @@
         (run-with-idle-timer doom-incremental-idle-timer
                              nil #'cae-compile-next-file files)))))
 
+;;;###autoload
 (defun cae-compile-schedule-native-compilation ()
   (when (and (bound-and-true-p cae-config-finished-loading)
              (bound-and-true-p cae-config-incremental-compilation-enabled-p))
