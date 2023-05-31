@@ -1034,6 +1034,12 @@
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
+;;(hercules-def :toggle-funs #'embark-collect-cheatsheet
+;;              :keymap 'embark-collect-mode-map
+;;              ;;:package 'embark
+;;              :blacklist-funs '(digit-argument))
+;;(define-key embark-collect-mode-map (kbd "<f6>") #'embark-collect-cheatsheet)
+
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
