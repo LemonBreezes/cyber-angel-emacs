@@ -667,20 +667,7 @@
          "C-e" #'copilot-accept-completion-by-line
          "<end>" #'copilot-accept-completion-by-line
          "M-n" #'copilot-next-completion
-         "M-p" #'copilot-previous-completion)
-        (:when (modulep! :config default +smartparens) ;My config disables
-                                        ;Smartparens if the
-                                        ;+smartparens flag is not
-                                        ;set.
-         :map sp-pair-overlay-keymap
-         "<right>" #'cae-copilot-accept-completion-maybe
-         "C-f" #'cae-copilot-accept-completion-maybe
-         "M-<right>" #'cae-copilot-accept-completion-by-word-maybe
-         "M-f" #'cae-copilot-accept-completion-by-word-maybe
-         "C-e" #'cae-copilot-accept-completion-by-line-maybe
-         "<end>" #'cae-copilot-accept-completion-by-line-maybe
-         "M-n" #'cae-copilot-next-completion-maybe
-         "M-p" #'cae-copilot-previous-completion-maybe))
+         "M-p" #'copilot-previous-completion))
 
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
