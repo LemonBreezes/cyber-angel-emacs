@@ -57,3 +57,17 @@
                      my-View-scroll-half-page-forward-other-window
                      my-View-scroll-half-page-backward-other-window))
     (add-to-list 'rp/restore-point-commands command)))
+
+(after! repeat
+  (define-repeat-map View-scroll-half-page-forward
+    ("v" View-scroll-half-page-forward)
+    (:exit "V" View-scroll-half-page-backward))
+  (define-repeat-map View-scroll-half-page-backward
+    ("v" View-scroll-half-page-backward)
+    (:exit "V" View-scroll-half-page-forward))
+  (define-repeat-map my-View-scroll-half-page-forward-other-window
+    ("v" my-View-scroll-half-page-forward-other-window)
+    (:exit "V" my-View-scroll-half-page-backward-other-window))
+  (define-repeat-map my-View-scroll-half-page-backward-other-window
+    ("v" my-View-scroll-half-page-backward-other-window)
+    (:exit "V" my-View-scroll-half-page-forward-other-window)))
