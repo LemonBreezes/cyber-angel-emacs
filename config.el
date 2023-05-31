@@ -538,6 +538,8 @@
 (use-package! auto-sudoedit
   :after tramp-sh
   :init
+  ;; Loading Tramp is slow, so we have this hook load auto-sudoedit if we need
+  ;; to use sudo on a file before Tramp is loaded.
   (defun cae-auto-sudoedit-maybe-h ()
     (when (and (not (file-writable-p buffer-file-name))
                (not (string= (file-attribute-user-id
