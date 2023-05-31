@@ -3,4 +3,3 @@
 [[./media/cyber-angel.jpg]]
 
 This config is a work-in-progress.
-
