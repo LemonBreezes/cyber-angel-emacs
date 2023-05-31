@@ -81,7 +81,8 @@
           (cae-defun cae-theme-store-circadian-times-h ()
             (doom-store-put 'circadian-themes (circadian-themes-parse))))
 
-(let* ((themes (doom-store-get 'circadian-themes))
+(when (doom-store-get 'circadian-themes)
+  (let* ((themes (doom-store-get 'circadian-themes))
          (now (reverse (cl-subseq (decode-time) 0 3)))
          (past-themes
           (cl-remove-if (lambda (entry)
@@ -92,4 +93,4 @@
                         themes))
          (entry (car (last (or past-themes themes))))
          (theme (cdr entry)))
-  (setq doom-theme theme))
+    (setq doom-theme theme)))
