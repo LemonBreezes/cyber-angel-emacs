@@ -23,6 +23,10 @@
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
+(when (modulep! :completion vertico +childframe)
+  (unless (cae-display-graphic-p)
+    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
+
 ;;; UI
 
 (when cae-init-ui-enabled-p
@@ -99,10 +103,6 @@
     (after! doom-modeline
       (setq doom-modeline-hud t
             doom-modeline-support-imenu t)))
-
-  (when (modulep! :completion vertico +childframe)
-    (unless (cae-display-graphic-p)
-      (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
 
   (after! which-key
     (setq which-key-ellipsis "..."
