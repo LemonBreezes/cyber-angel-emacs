@@ -98,6 +98,7 @@ Lispy."
   ;; Call `pp-eval-last-sexp' when called with a negative
   ;; prefix argument
   (interactive "P")
+  (require 'pp+)
   (cond ((or (eq arg '-)
              (and (numberp arg)
                   (< arg 0)))
