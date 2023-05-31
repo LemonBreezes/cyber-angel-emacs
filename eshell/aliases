@@ -25,5 +25,5 @@ alias vim  e $*
 alias nano e $*
 
 ## Local Variables:
-## eval: (progn)
+## eval: (when (fboundp 'eshell-read-aliases-list) (eshell-read-aliases-list))
 ## End:
