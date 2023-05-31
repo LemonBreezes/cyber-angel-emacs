@@ -267,7 +267,7 @@
              ("SPC" lispy-other-space)
              (,(cae-keyboard-kbd "g") lispy-goto-mode))))
     ;; These keys are not bound geometrically, they are bound based on
-    ;; mnemonics, so it's better to leave them as they are.
+    ;; mnemonics, so it's better to leave them unchanged.
     ;;(eval `(defhydra hydra-lispy-x (:exit t
     ;;                                :hint nil
     ;;                                :columns 3)
