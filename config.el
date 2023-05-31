@@ -670,7 +670,6 @@
   (map! :prefix "C-z"
         "n" #'avy-goto-line-below
         "p" #'avy-goto-line-above
-        ";" #'avy-goto-word-1
         "c" #'avy-goto-char
         "l" #'avy-goto-line
         "e" #'avy-goto-end-of-line
@@ -681,7 +680,6 @@
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-above
-        "C-;" #'avy-goto-word-1
         "C-r" #'avy-resume
         "C-." #'cae-avy-symbol-at-point
         "C-k" #'avy-kill-region
