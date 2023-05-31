@@ -128,14 +128,11 @@
              (,(cae-keyboard-kbd "P") special-lispy-paste)
              (,(cae-keyboard-kbd "y") special-lispy-occur)
              (,(cae-keyboard-kbd "z") special-lh-knight/body)
-             ;; outline
              (,(cae-keyboard-kbd "J") special-lispy-outline-next)
              (,(cae-keyboard-kbd "K") special-lispy-outline-prev)
              (,(cae-keyboard-kbd "L") special-lispy-outline-goto-child)
-             ;; Paredit transformations
              (,(cae-keyboard-kbd "r") special-lispy-raise)
              (,(cae-keyboard-kbd "R") special-lispy-raise-some)
-             ;; more transformations
              (,(cae-keyboard-kbd "C") special-lispy-convolute)
              (,(cae-keyboard-kbd "X") special-lispy-convolute-left)
              (,(cae-keyboard-kbd "w") special-lispy-move-up)
@@ -143,7 +140,6 @@
              (,(cae-keyboard-kbd "O") special-lispy-oneline)
              (,(cae-keyboard-kbd "M") special-lispy-alt-multiline)
              (,(cae-keyboard-kbd "S") special-lispy-stringify)
-             ;; marking
              (,(cae-keyboard-kbd "a") special-lispy-ace-symbol)
              (,(cae-keyboard-kbd "H") special-lispy-ace-symbol-replace)
              (,(cae-keyboard-kbd "m") special-lispy-mark-list)
