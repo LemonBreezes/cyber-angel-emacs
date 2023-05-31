@@ -80,7 +80,11 @@
          (map! :map eshell-mode-map
                :ig "M-R" #'helm-eshell-history)))
 
-  (map! :map eshell-mode-map "C-l" #'cae-eshell-clear)
+  (map! :map eshell-mode-map
+        "C-l" #'cae-eshell-clear
+        (:when (modulep! :private corfu)
+         "TAB" #'completion-at-point
+         "<tab>" #'completion-at-point))
 
   ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files
   (load! "+fish-completion-annotation-fix")
