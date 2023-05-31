@@ -56,7 +56,6 @@
 
 ;; This is so that my repeat maps are reloaded when I change them. This is
 ;; paired with a hook which evaluates this file before save.
-(when (and cae-config-finished-loading
-           (featurep 'repeat))
+(when cae-config-finished-loading
   (ignore-errors (repeat-mode -1))
   (ignore-errors (repeat-mode +1)))
