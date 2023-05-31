@@ -152,3 +152,5 @@
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
+
+(advice-add #'persp-set-keymap-prefix :override #'ignore)
