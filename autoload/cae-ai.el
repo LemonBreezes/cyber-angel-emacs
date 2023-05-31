@@ -20,3 +20,5 @@
    (lambda ()
      (when which-key-inhibit
        (which-key-show-keymap 'org-ai-global-mode-prefix-map t)))))
+
+;;org-ai-kill-region-at-point
