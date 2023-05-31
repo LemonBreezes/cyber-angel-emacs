@@ -20,4 +20,4 @@
 
 ;;;###autoload (autoload '+trashed-hydra/body "private/misc-applications/autoload/trashed" nil t)
 (defhydra +trashed-hydra (:color blue)
-  )
+  ("<f6>" nil "Exit" :exit t))
