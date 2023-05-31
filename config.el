@@ -486,6 +486,8 @@
                                         "lisp/cae-project"))
 (autoload 'cae-project-bookmark-set (concat doom-private-dir
                                             "lisp/cae-project"))
+(autoload 'cae-project--get-bookmark-file (concat doom-private-dir
+                                                  "lisp/cae-project"))
 (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
       :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
 
