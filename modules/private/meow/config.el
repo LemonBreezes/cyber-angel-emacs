@@ -168,7 +168,6 @@
 (use-package! meow
   :init
   (add-hook 'doom-after-modules-config-hook #'meow-global-mode)
-  (add-hook 'git-timemachine-mode-hook #'meow-motion-mode)
   :demand t
   :config
   (meow/setup-cae)
