@@ -667,7 +667,8 @@
   (use-package! pp+
     :defer t :init
     (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-    (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
+    (map! [remap eval-last-sexp] #'cae-eval-last-sexp
+          [remap eval-expression] #'cae-eval-expression)
     (when (modulep! :tools eval +overlay)
       (after! eros
         (add-hook 'eros-mode-hook
