@@ -4,8 +4,7 @@
                    smartparens
                    evil-escape
                    flyspell
-                   ccls
-                   hydra)
+                   ccls)
 
 ;;; UI
 
