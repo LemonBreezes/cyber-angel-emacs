@@ -1185,13 +1185,13 @@
 
 (use-package! org-ai
   :defer t :init
-  (map! "C-c M-a" #'cae-lazy-load-org-ai)
+  (map! "C-c M-a" #'cae-ai-lazy-load-org-ai)
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   :config
   (map! :map org-ai-global-mode-map
         :prefix "C-c M-a"
-        "b" #'cae-org-ai-on-buffer)
+        "b" #'cae-ai-org-ai-on-buffer)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
   (org-ai-global-mode +1)
