@@ -870,6 +870,10 @@
         "C-c & C-n" nil
         "C-c & C-v" nil))
 
+(when (modulep! :editor multiple-cursors)
+  (map! :leader
+        :prefix "m"
+        :desc "Pop mark" "C-SPC" #'mc/mark-pop))
 
 ;;; Term
 
