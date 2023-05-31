@@ -62,10 +62,15 @@
 (setq x-stretch-cursor t                ;Show me if I am on a TAB or a space
       truncate-string-ellipsis "..."    ;The unicode ellipsis is ugly to me
       kill-buffer-delete-auto-save-files t
-      scroll-conservatively 0)          ;Doom disables this option as a
+      scroll-conservatively 0           ;Doom disables this option as a
                                         ;performance optimization but I would
                                         ;much rather have Emacs automatically
                                         ;recenter my windows.
+      window-combination-resize t)      ;take new window space from all other
+                                        ;windows (not just current)
+
+(after! time
+  (setq display-time-default-load-average nil))
 
 (after! newcomment
   (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
