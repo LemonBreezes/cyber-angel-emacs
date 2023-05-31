@@ -932,61 +932,7 @@
   (when (modulep! :completion vertico)
     (use-package! consult
       :defer t :init
-      (map! (:map help-map
-             "C-m" #'describe-keymap
-             "<return>" #'info-emacs-manual)
-            ;; C-x bindings (ctl-x-map)
-            "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
-            ;; Custom M-# bindings for fast register access
-            "M-#" #'consult-register-load
-            "M-'" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
-            "C-M-#" #'consult-register
-            [remap jump-to-register] #'consult-register-load
-            ;; Other custom bindings
-            ;; M-g bindings (goto-map)
-            "M-g e" #'consult-compile-error
-            "M-g g" #'consult-goto-line ;orig. goto-line
-            "M-g M-g" #'consult-goto-line ;orig. goto-line
-            "M-g o" #'consult-outline     ;Alternative: consult-org-heading
-            "M-g m" #'consult-mark
-            "M-g k" #'consult-global-mark
-            "M-g I" #'consult-imenu-multi
-            ;; M-s bindings (search-map)
-            "M-s k" #'consult-keep-lines
-            "M-s u" #'consult-focus-lines
-            ;; Isearch integration
-            "M-s e" #'consult-isearch-history
-            :map isearch-mode-map
-            "M-e" #'consult-isearch-history ;orig. isearch-edit-string
-            "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
-            ;; Minibuffer history
-            :map minibuffer-local-map
-            ;; "M-s" #'consult-history     ;orig. next-matching-history-element
-            "M-r" #'consult-history     ;orig. previous-matching-history-element
-            ;; Redundant with Doom's :config default bindings
-            :map global-map
-            "M-g f" #'consult-flymake
-            (:when (and (modulep! :checkers syntax)
-                        (not (modulep! :checkers syntax +flymake)))
-             "M-g f" #'consult-flycheck)
-            (:unless (modulep! :config default)
-             "M-s d" #'consult-find ;does not cache files like Doom & Projectile
-                                        ;also slower than `fd'. See Minad's comment
-                                        ;in
-                                        ;https://github.com/minad/consult/issues/363
-             "M-s r" #'consult-ripgrep
-             "M-s D" #'consult-locate)
-            [remap Info-search] #'consult-info
-            :map help-map
-            "TAB" #'consult-info
-            "W" #'consult-man
-            :leader
-            "M-x" #'consult-mode-command
-            (:desc "Keyboard macro"  "ik" #'consult-kmacro))
-      (when (modulep! :tools debugger +lsp)
-        (after! dap-ui
-          (map! :map dap-ui-repl-mode-map
-                "M-r" #'consult-history)))
+      ;; See `lisp/cae-bindings' for keybindings.
       :config
       (setq consult-preview-key 'any)
       (consult-customize
