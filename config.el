@@ -128,8 +128,8 @@
 
 (when (modulep! :checkers syntax +childframe)
   (after! flycheck-posframe
-    (setq! flycheck-posframe-border-width 1
-           flycheck-posframe-border-use-error-face t)))
+    (setq flycheck-posframe-border-width 1
+          flycheck-posframe-border-use-error-face t)))
 
 
 ;;; Tools
@@ -254,8 +254,8 @@
   (map! :leader "e" nil))
 
   (after! expand-region
-    (setq! expand-region-autocopy-register "e"
-           expand-region-smart-cursor t))
+    (setq expand-region-autocopy-register "e"
+          expand-region-smart-cursor t))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
@@ -436,21 +436,21 @@
 (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
 (after! em-glob
-  (setq! eshell-error-if-no-glob nil))
+  (setq eshell-error-if-no-glob nil))
 
 (after! em-term
   ;; Some of the commands I copied from other configurations and will likely
   ;; never use.
-  (setq! eshell-visual-commands
-         '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-           "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-           "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-           "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-         eshell-visual-subcommands '(("gh" "repo" "fork")
+  (setq eshell-visual-commands
+        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+        eshell-visual-subcommands '(("gh" "repo" "fork")
                                      ("git" "log" "diff" "show")
                                      ("geth" "attach"))
-         eshell-visual-options '(("git" "--help" "--paginate"))))
+        eshell-visual-options '(("git" "--help" "--paginate"))))
 
 ;;; Org
 
