@@ -118,3 +118,12 @@
   (if (null args)
       #'consult--ripgrep-make-builder
     (apply oldfun args)))
+
+(defadvice! cae-hacks-auto-sudoedit-fixup-a (oldfun &rest args)
+  :around #'auto-sudoedit
+  (advice-add #'dired-insert-subdir-validate
+              :around #'cae-ignore-errors-a)
+  (unwind-protect (apply oldfun args)
+    (run-at-time 0.01 nil #'advice-remove
+                 #'dired-insert-subdir-validate
+                 #'cae-ignore-errors-a)))
