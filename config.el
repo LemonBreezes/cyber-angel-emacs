@@ -266,6 +266,8 @@
 ;; Enable all disabled commands.
 (setq disabled-command-function nil)
 
+(delete-selection-mode -1)
+
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
