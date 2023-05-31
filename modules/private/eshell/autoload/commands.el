@@ -131,13 +131,24 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/l ()
-  (let ((buf
-         (cl-find-if (lambda (buf)
-                       (and (not (eq buf (current-buffer)))
-                            (or (buffer-local-value 'default-directory buf)
-                                (buffer-local-value 'list-buffers-directory buf))))
-                     (buffer-list))))
+(defun eshell/l (&optional n)
+  (setq n (or n 1))
+  (let* ((ignored-bufs)
+         (buf
+          (cl-find-if (lambda (buf)
+                        (and (get-buffer-window)
+                             (not (+popup-buffer-p buf))
+                             (doom-real-buffer-p buf)
+                             (or (buffer-local-value 'default-directory buf)
+                                 (buffer-local-value 'list-buffers-directory buf))
+                             (not (memq buf ignored-bufs))
+                             (and (<= (cl-decf n) 0)
+                                  (push buf ignored-bufs))))
+                      (cdr (buffer-list)))))
     (when buf
       (eshell/cd (or (buffer-local-value 'default-directory buf)
                      (buffer-local-value 'list-buffers-directory buf))))))
+
+;;;###autoload
+(defun eshell/ll ()
+  (eshell/l 2))
