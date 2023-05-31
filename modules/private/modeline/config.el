@@ -137,7 +137,10 @@
           meow-normal-mode
           meow-motion-mode
           meow-keypad-mode
-          highlight-changes-visible-mode))
+          highlight-changes-visible-mode
+          rainbow-mode
+          writegood-mode
+          sqlup-mode))
   (setq minions-promoted-modes
         '(orgtbl-mode
           overwrite-mode
