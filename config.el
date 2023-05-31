@@ -525,7 +525,7 @@
                  if (or (eq ch ?k) (eq ch ?K))
                  return t
                  if (or (eq ch ?d) (eq ch ?D))
-                 do (setq cae-diff-buffer (diff-buffer-with-file))
+                 do (setq cae-diff-buffer (window-buffer (diff-buffer-with-file)))
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
                  if (or (eq ch ?q) (eq ch ?Q))
