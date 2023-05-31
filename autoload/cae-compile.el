@@ -146,7 +146,7 @@
             (ignore-errors (byte-compile-file file))
             ;;(let ((native-comp-speed cae-compile-native-comp-speed))
             ;;  (ignore-errors (native-compile file)))
-            (run-with-idle-timer doom-incremental-idle-timer
+            (run-with-idle-timer cae-compile-incremental-idle-timer
                                  nil #'cae-compile-next-file files))
         (run-with-idle-timer cae-compile-incremental-idle-timer
                              nil #'cae-compile-next-file files)))))
