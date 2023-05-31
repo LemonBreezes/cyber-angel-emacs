@@ -25,6 +25,9 @@
     (after! lsp-mode
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)))
+  (after! highlight-context-line
+    (set-face-attribute 'highlight-context-line-face nil
+                        :extend t))
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
