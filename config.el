@@ -522,7 +522,7 @@
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
   (add-hook 'doom-first-buffer-hook
-            (cae-defun cae-config-load-visible-mark-and-scrolling-h ()
+            (cae-defun cae-config-load-visible-mark-h ()
               (load! "lisp/cae-visible-mark")))
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-multiple-cursors")
