@@ -72,10 +72,11 @@
           (visual-line-mode)
           (display-fill-column-indicator-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
-                                  projectile-mode
-                                  flycheck-mode
-                                  flymake-mode
-                                  persp-mode))
+                                   projectile-mode
+                                   flycheck-mode
+                                   flymake-mode
+                                   persp-mode
+                                   eat-eshell-mode))
   (after! compilation
     (or (assq 'compilation-in-progress mode-line-modes)
         (add-to-list 'minions-mode-line-modes
