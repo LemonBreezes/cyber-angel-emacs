@@ -100,13 +100,11 @@
 
   (use-package! parrot
     :defer t :init
-    ;; HACK This is a hack to make `parrot' work. I should probably submit a PR.
     (defadvice! +define-obsolete-variable-alias-a (oldfun &rest args)
       :around #'define-obsolete-variable-alias
       (when (eq (length args) 2)
         (setq args (append args '("28.1"))))
       (apply oldfun args))
-
     (add-hook 'doom-first-file-hook #'parrot-mode)
     :config
     (setq parrot-animate 'hide-static
