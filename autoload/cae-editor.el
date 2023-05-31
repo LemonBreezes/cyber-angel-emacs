@@ -223,5 +223,6 @@ mark the string and call `edit-indirect-region' with it."
    which-key-idle-delay nil
    (lambda ()
      (when which-key-inhibit
-       (which-key-show-keymap 'org-ai-global-mode-prefix-map))))
+       (which-key-show-keymap 'org-ai-global-mode-prefix-map)
+       (execute-kbd-macro (kbd "C-c M-a")))))
   )
