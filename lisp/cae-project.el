@@ -20,21 +20,6 @@
 
 (advice-add #'+workspaces-switch-to-project-h :after #'cae-project-bookmark-load)
 
-(defun cae-project-bookmark-jump ()
-  (interactive)
-  (let ((bookmark-alist (persp-parameter 'bookmark-alist)))
-      (call-interactively #'bookmark-jump)))
-
-(defun cae-project-bookmark-set ()
-  (interactive)
-  (let ((bookmark-default-file (cae-project--bookmark-file))
-        (bookmark-alist (persp-parameter 'bookmark-alist))
-        (bookmark-save-flag 1))
-  (call-interactively #'bookmark-set)))
-
-(map! :leader
-      :prefix "w"
-      :desc "Jump to project bookmark" "j" #'cae-project-bookmark-jump
-      :desc "Set project bookmark" "m" #'cae-project-bookmark-set)
+(setq bookmark-save-flag 1)
 
 ;; TODO make the bookmark file update when the branch changes
