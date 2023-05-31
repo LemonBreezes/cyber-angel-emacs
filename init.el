@@ -96,7 +96,7 @@
        misc-applications
        modeline
        ;; (meow +leader)
-       ;; unpackaged
+       unpackaged
        vc
        )
 
