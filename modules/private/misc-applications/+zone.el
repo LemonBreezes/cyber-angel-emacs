@@ -61,3 +61,7 @@
 ;; Here's another Zone that says positive words together with their definitions.
 ;; But it requires `wordnet' to be installed and also an internet connection.
 ;; https://xenodium.com/emacs-zones-to-lift-you-up/
+
+;; This is another Zone referencing the Matrix movie but it's kind of boring. It
+;; just says some green text slowly one line at a time.
+;; https://github.com/vreeze/zone-matrix-wake-up
