@@ -705,27 +705,6 @@
     (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
     (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
     (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
-
-    (when (modulep! :completion vertico)
-      (after! vertico
-        (map! :map vertico-map
-              "C-z C-j" #'vertico-quick-jump
-              "C-z j" #'vertico-quick-jump
-              "C-z i" #'vertico-quick-exit
-              "C-z C-i" #'vertico-quick-exit)))
-    (after! embark
-      (map! :map embark-collect-mode-map
-            "C-z C-j" #'avy-embark-collect-choose
-            "C-z j" #'avy-embark-collect-choose
-            "C-z i" #'avy-embark-collect-act
-            "C-z C-i" #'avy-embark-collect-act))
-    (when (modulep! :private corfu)
-      (after! corfu
-        (map! :map corfu-map
-              "C-z C-j" #'corfu-quick-jump
-              "C-z j" #'corfu-quick-jump
-              "C-z i" #'corfu-quick-insert
-              "C-z C-i" #'corfu-quick-insert)))
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
