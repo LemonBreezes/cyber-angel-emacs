@@ -45,6 +45,7 @@
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
+(package! ednc)
 
 (package! zones)
 (package! zone-nyan)
