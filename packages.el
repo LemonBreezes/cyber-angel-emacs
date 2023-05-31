@@ -26,6 +26,7 @@
 (package! nov)
 (package! syslog-mode)
 (package! w3m)
+(package! ace-link)
 
 ;; These are autoloaded without explicit configuration.
 (package! crontab-mode)
