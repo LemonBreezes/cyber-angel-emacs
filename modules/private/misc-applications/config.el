@@ -14,7 +14,8 @@
 
 (map! :leader
       :prefix +misc-applications-prefix
-      "1" #'mpc)
+      "1" #'mpc
+      "P" #'list-processes)
 
 ;; TODO Turn these into module flags and separate the binding of their prefixes
 ;; out into `doom-after-init-hook' so that the user can modify them.
