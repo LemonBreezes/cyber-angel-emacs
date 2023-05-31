@@ -72,6 +72,7 @@
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
+    (+log "storing hydra")
     (setf (alist-get (tab-bar--current-tab)
                      cae-cheatsheets-tab-bar-hydra-alist
                      nil nil #'equal)
