@@ -39,6 +39,7 @@
 
 ;;;###autoload
 (defun cae-toggle-sudo ()
+  "Toggle sudo access for the current file."
   (interactive)
   (let* ((file (or buffer-file-name
                    (when (or (derived-mode-p 'dired-mode)
