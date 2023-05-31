@@ -118,7 +118,7 @@ overriding other keymaps."
            (rss +org)
 
            :private
-           (corfu +numbers +ampersand)
+           (corfu +numbers)
            debugger
            (dirvish +icons +dirvish)
            eshell
