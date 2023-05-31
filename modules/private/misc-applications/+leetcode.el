@@ -10,7 +10,7 @@
     (advice-add #'leetcode--install-my-cookie :override #'ignore))
   (map! :leader
         :prefix +misc-applications-prefix
-        "L" #'+leetcode)
+        :desc "LeetCode" "L" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
         "q" #'+leetcode-soft-quit
