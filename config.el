@@ -314,7 +314,7 @@
 
   (use-package! pdf-view-pagemark
     :defer t :init
-    (add-hook 'pdf-view-mode-hook 'pdf-view-pagemark-mode)))
+    (add-hook 'pdf-view-mode-hook #'pdf-view-pagemark-mode)))
 
 
 ;;; Tools
