@@ -101,7 +101,7 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
-       "r" +workspace/rename
+       ;;"r" +workspace/rename
        ;;"d" +workspace/display
        )
       (:enter +workspace/display))
