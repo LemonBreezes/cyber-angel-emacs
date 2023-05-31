@@ -59,7 +59,7 @@
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
-;;;; Set theme based on time
+;; Set theme based on time
 ;;(use-package! circadian
 ;;  :config
 ;;  (setq circadian-themes
