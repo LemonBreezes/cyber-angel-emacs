@@ -61,20 +61,6 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
-;; `magit' breaks move line in log buffers.
-(defadvice! cae-hacks-magit-do-not-deincrement-a (args)
-  :filter-args '(magit-previous-line magit-next-line)
-  (let ((arg (car args))
-        (try-vscroll (cadr args)))
-    (and (numberp arg)
-         (not (eq arg 0))
-         transient-mark-mode
-         (not (region-active-p))
-         (not (and (memq 'shift (event-modifiers last-input-event))
-                   shift-select-mode))
-         (cl-incf arg))
-    (list arg try-vscroll)))
-
 ;; Compile Vterm without asking.
 (defvar vterm-always-compile-module t)
 
