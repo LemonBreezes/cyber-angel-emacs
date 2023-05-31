@@ -83,7 +83,7 @@
   :defer t :init
   (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
-(use-package! authinfo-color-modeam
+(use-package! authinfo-color-mode
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
