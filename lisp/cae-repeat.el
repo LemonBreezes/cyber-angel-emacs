@@ -22,6 +22,9 @@
     ("u" winner-undo
      "r" winner-redo))
 
+  (define-repeat-map pop-mark
+    ("SPC" pop-mark))
+
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
