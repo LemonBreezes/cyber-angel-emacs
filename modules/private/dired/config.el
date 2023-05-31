@@ -116,15 +116,7 @@
   ;; Allow `previous-buffer' and `next-buffer' to work with fullscreened Dirvish
   ;; buffers.
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer)
-
-  ;;(add-hook 'dirvish-setup-hook
-  ;;          (cae-defun cae-dired-set-fullscreen-dwim ()
-  ;;            (when (when (and (one-window-p t)
-  ;;                             (frame-width (selected-frame))
-  ;;                             (> (frame-width (selected-frame)) 160))
-  ;;                    (dirvish-layout-toggle)))))
-  )
+        [remap next-buffer] #'cae-dired-next-buffer))
 
 ;; Exit the current Dirvish session when running interactive commands like
 ;; `projectile-find-file'.
