@@ -690,6 +690,8 @@
   :config
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
+;; I mostly use this package for some additional prefix argument stuff like
+;; using `C-u - M-:' to insert a string from Elisp without double quotes.
 (use-package! pp+
   :after pp
   :init
