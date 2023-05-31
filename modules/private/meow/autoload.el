@@ -24,11 +24,3 @@
                (line-beginning-position)))
         (end (line-beginning-position 2)))
     (kill-ring-save beg end)))
-
-;;;###autoload
-(defun cae-meow-save ()
-  (interactive)
-  (save-excursion
-    (meow--with-selection-fallback
-     (meow--prepare-region-for-kill)
-     (call-interactively 'kill-ring-save))))
