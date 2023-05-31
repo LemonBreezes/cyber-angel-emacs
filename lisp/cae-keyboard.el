@@ -191,7 +191,9 @@
                         collect
                         `(,(car binding)
                           ,(cadr binding)
-                          ,(symbol-name (cadr binding))
+                          ,(thread-last (symbol-name (cadr binding))
+                                        (string-remove-prefix "special-")
+                                        (string-remove-prefix "lispy-"))
                           :column ,(caddr binding))))))
 
     ;; TODO `lispy-other-mode-map'
