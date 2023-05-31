@@ -666,7 +666,10 @@
          "<end>" #'copilot-accept-completion-by-line
          "M-n" #'copilot-next-completion
          "M-p" #'copilot-previous-completion)
-        (:when (modulep! :config default +smartparens)
+        (:when (modulep! :config default +smartparens) ;My config disables
+                                                       ;Smartparens if the
+                                                       ;+smartparens flag is not
+                                                       ;set.
          :map sp-pair-overlay-keymap
          "<right>" #'cae-copilot-accept-completion-maybe
          "C-f" #'cae-copilot-accept-completion-maybe
