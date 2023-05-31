@@ -59,7 +59,7 @@
                                         ; `lispy-move-beginning-of-line'.
           "C-e" nil                     ; formerly `lispy-move-end-of-line'.
                                         ; Doom's default `C-e' is better.
-          "M-j" nil                     ; formerly `lisp-split'.
+          ;; "M-j" nil                     ; formerly `lisp-split'.
           "M-i" nil                     ; formerly `lispy-iedit'. I prefer
                                         ; multiple cursors.
           "M-r" #'lispy-raise-sexp
