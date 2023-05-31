@@ -34,7 +34,7 @@
   ;; zone-pgm-random-life
   (zone-when-idle (* 5 60))
 
-  ;; Focus
+  ;; Do not zone in a popup window.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (let ((win (selected-window)))
