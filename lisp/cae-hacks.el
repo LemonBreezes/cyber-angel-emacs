@@ -101,6 +101,7 @@
 ;; might be an Emacs30 thing.
 (defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
 
+;; I'm currently debugging a void function error.
 (defun tramp-set-connection-local-variables-for-buffer ()
   (backtrace))
 
