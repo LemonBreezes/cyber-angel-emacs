@@ -127,6 +127,10 @@
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
 
+;; The macrostep keymap is completely broken for me without this line. This
+;; might be an Emacs30 thing.
+(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
+
 ;;; GC hacks
 
 (defconst cae-hacks-gc-cons-threshold (* 3 1024 1024 1024))
