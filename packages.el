@@ -73,11 +73,11 @@
 (package! multiclip :recipe (:host github :repo "kiennq/highlight2clipboard"))
 (package! switch-window)
 (package! jinx)
+(package! transpose-frame)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
 (package! ialign)
-(package! transpose-frame)              ; I might bind this in the future.
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
