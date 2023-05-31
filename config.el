@@ -552,14 +552,12 @@
 (setq read-extended-command-predicate #'command-completion-default-include-p)
 
 (when (modulep! :completion vertico)
-  (after! embark
-    (hercules-def
-     :toggle-funs #'cae-embark-collect-cheatsheet
-     :keymap 'embark-collect-mode-map
-     :blacklist-funs '(digit-argument negative-argument)
-     :transient t)
-    (map! :map embark-collect-mode-map
-          "<f6>" #'cae-embark-collect-cheatsheet)))
+  (hercules-def
+   :toggle-funs #'embark-collect-mode
+   :keymap 'embark-collect-mode-map
+   :blacklist-funs '(digit-argument negative-argument)
+   :package 'embark
+   :transient t))
 
 (use-package! avy
   :defer t
