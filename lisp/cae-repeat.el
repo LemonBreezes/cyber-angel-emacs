@@ -80,6 +80,9 @@
     ("=" eri/expand-region
      "-" eri/contract-region))
 
+  (define-repeat-map org-ai-kill-region-at-point
+    ("DEL" org-ai-kill-region-at-point))
+
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
     ("u" winner-undo
