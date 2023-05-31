@@ -201,7 +201,7 @@
         "C-M-!" #'cae-modeline-rotate-previous-word-at-point)
   :config
   (after! parrot-rotate
-    (setq parrot-rotate-animate-after-rotation t
+    (setq parrot-rotate-animate-after-rotation nil
           parrot-rotate-highlight-after-rotation nil
           parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
           parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
