@@ -615,7 +615,8 @@
                        lsp-organize-imports
                        lsp-organize-imports-remove-unused
                        prog-fill-reindent-defun
-                       indent-pp-sexp))
+                       indent-pp-sexp
+                       save-buffer))
       (add-to-list 'aggressive-indent-protected-commands command))))
 
 (use-package! hungry-delete
