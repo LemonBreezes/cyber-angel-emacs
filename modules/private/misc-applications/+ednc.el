@@ -1,13 +1,12 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :when (and (require 'dbus nil t)
-             (dbus-ping :system "org.freedesktop.DBus"))
+  :defer t
   :init
   (defun +ednc-load-h ()
-     (and (require 'dbus nil t)
-          (dbus-ping :system "org.freedesktop.DBus")
-          (ednc-mode +1)))
+    (and (require 'dbus nil t)
+         (dbus-ping :system "org.freedesktop.DBus")
+         (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   :config
   (defun stack-notifications (&optional hide)
