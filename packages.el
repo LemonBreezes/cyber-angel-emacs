@@ -40,6 +40,7 @@
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
 (package! git-modes)
+(package! projectile-git-autofetch)
 
 ;;; Editor
 (package! pp+)
