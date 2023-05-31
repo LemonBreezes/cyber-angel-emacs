@@ -4,17 +4,16 @@
   (map! :leader :prefix +misc-applications-prefix
         "r" #'=rss)
 
-  (defalias 'elfeed-toggle-star
-    (elfeed-expose #'elfeed-search-toggle-all 'star))
-
   (after! elfeed
+    (defalias 'elfeed-toggle-star
+      (elfeed-expose #'elfeed-search-toggle-all 'star))
     (push elfeed-db-directory recentf-exclude)
     (map! :map elfeed-show-mode-map
           "?" #'describe-mode
           :map elfeed-search-mode-map
           "?" #'describe-mode
           "q" #'+elfeed-quit)
-    (defhydra cae-elfeed-hydra ()
+    (defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
       ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs")
       ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube")
       ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
