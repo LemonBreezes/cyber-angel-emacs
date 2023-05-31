@@ -502,7 +502,13 @@
   :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  :defer t)
+  :defer t
+  :config
+  (add-to-list
+   'aggressive-indent-dont-indent-if
+   '(and (derived-mode-p 'c++-mode)
+         (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
+                             (thing-at-point 'line)))))  )
 
 
 ;;; Autocompletion
