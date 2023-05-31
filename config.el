@@ -472,7 +472,8 @@
   (map! :leader "g" #'cae-gptel)
   :config
   (setq gptel-default-mode 'org-mode
-        gptel-prompt-string "* "))
+        gptel-prompt-string "* "
+        gptel--model "gpt-4-32k"))
 
 
 ;;; Editor
