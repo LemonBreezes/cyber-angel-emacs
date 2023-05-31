@@ -24,7 +24,7 @@
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))))))
 
-(defun cae-dired-find-file-h ()
+(defun cae-dired-find-file-fullscreen-h ()
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p))
     (ignore-error user-error
