@@ -13,3 +13,14 @@
 
 ;; (macroexpand '(+log 'test))
 ;;      => (message "Values: %s" 'test)
+
+(defun +backtrace-a (&rest args)
+  (+log args)
+  (unless args
+    (backtrace)))
+
+(defmacro backtrace! (function)
+  `(advice-add ',function :before #'+backtrace-a))
+
+(defmacro unbacktrace! (function)
+  `(advice-remove ',function #'+backtrace-a))
