@@ -421,7 +421,7 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
-  (sp-local-pair '(org-mode) "<<" ">>" :actions '(insert)))
+  (sp-local-pair '(org-mode) "<<" ">>"))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
