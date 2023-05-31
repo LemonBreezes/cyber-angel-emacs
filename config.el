@@ -615,185 +615,185 @@
 
   (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
-  (setq set-mark-command-repeat-pop t
-        next-line-add-newlines t)
+  ;;(setq set-mark-command-repeat-pop t
+  ;;      next-line-add-newlines t)
+  ;;
+  ;;(setq search-whitespace-regexp ".*?"
+  ;;      search-default-mode #'char-fold-to-regexp
+  ;;      isearch-lax-whitespace t
+  ;;      isearch-wrap-pause 'no-ding
+  ;;      isearch-lazy-count t
+  ;;      isearch-repeat-on-direction-change t
+  ;;      isearch-allow-motion t
+  ;;      isearch-allow-scroll t
+  ;;      isearch-yank-on-move 'shift
+  ;;      isearch-motion-changes-direction t
+  ;;      lazy-count-prefix-format "(%s/%s) "
+  ;;      lazy-count-suffix-format nil    ; Using the suffix for counting matches
+  ;;                                      ; is better but does not work with
+  ;;                                      ; `isearch-mb'.
+  ;;      lazy-highlight-cleanup nil
+  ;;      ;; The default search ring size is 16, which is too small considering that
+  ;;      ;; we can fuzzy search the history with Consult.
+  ;;      search-ring-max 200
+  ;;      regexp-search-ring-max 200)
+  ;;(add-hook 'doom-escape-hook
+  ;;          (cae-defun cae-clean-up-lazy-highlight-h ()
+  ;;            (when isearch-lazy-highlight-overlays
+  ;;              (lazy-highlight-cleanup t) t)))
+  ;;
+  ;;(after! ispell
+  ;;  (setq ispell-quietly t
+  ;;        ispell-dictionary "en_US"
+  ;;        ispell-help-in-bufferp 'electric))
+  ;;
+  ;;(when (modulep! :emacs undo)
+  ;;  (after! undo-fu
+  ;;    (setq undo-fu-allow-undo-in-region t)))
+  ;;
+  ;;;; Hide commands in M-x which do not work in the current mode. Vertico commands
+  ;;;; are hidden in normal buffers.
+  ;;(setq read-extended-command-predicate #'command-completion-default-include-p)
 
-  (setq search-whitespace-regexp ".*?"
-        search-default-mode #'char-fold-to-regexp
-        isearch-lax-whitespace t
-        isearch-wrap-pause 'no-ding
-        isearch-lazy-count t
-        isearch-repeat-on-direction-change t
-        isearch-allow-motion t
-        isearch-allow-scroll t
-        isearch-yank-on-move 'shift
-        isearch-motion-changes-direction t
-        lazy-count-prefix-format "(%s/%s) "
-        lazy-count-suffix-format nil    ; Using the suffix for counting matches
-                                        ; is better but does not work with
-                                        ; `isearch-mb'.
-        lazy-highlight-cleanup nil
-        ;; The default search ring size is 16, which is too small considering that
-        ;; we can fuzzy search the history with Consult.
-        search-ring-max 200
-        regexp-search-ring-max 200)
-  (add-hook 'doom-escape-hook
-            (cae-defun cae-clean-up-lazy-highlight-h ()
-              (when isearch-lazy-highlight-overlays
-                (lazy-highlight-cleanup t) t)))
+  (use-package! avy
+    :defer t :init
+    (map! :prefix "C-z"
+          "n" #'avy-goto-line-below
+          "p" #'avy-goto-line-above
+          "y" #'avy-copy-region
+          "c" #'avy-goto-char
+          "m" #'avy-move-region
+          "l" #'avy-goto-line
+          "e" #'avy-goto-end-of-line
+          "." #'cae-avy-symbol-at-point
+          "k" #'avy-kill-region
+          "w" #'avy-kill-ring-save-region
+          "j" #'avy-goto-word-1
+          ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+          "SPC" #'avy-goto-char-timer
+          "C-n" #'avy-goto-line-below
+          "C-p" #'avy-goto-line-above
+          "C-." #'cae-avy-symbol-at-point
+          "C-k" #'avy-kill-region
+          "C-w" #'avy-kill-ring-save-region
+          "C-y" #'avy-copy-region
+          "C-m" #'avy-move-region
+          "C-c" #'avy-goto-char
+          "C-l" #'avy-goto-line
+          "C-e" #'avy-goto-end-of-line
+          "C-j" #'avy-goto-word-1
+          "C-SPC" #'avy-goto-char-timer
+          (:map isearch-mode-map
+           "j" #'avy-isearch
+           "C-j" #'avy-isearch))
+    ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
+    ;; fork I'm currently using because I should be able to get this working using
+    ;; `avy-styles-alist' instead.
+    (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
+    (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
 
-  (after! ispell
-    (setq ispell-quietly t
-          ispell-dictionary "en_US"
-          ispell-help-in-bufferp 'electric))
+    ;; TODO All of these commands have jump and choose variants. I should make two
+    ;; separate keybindings for the two variants.
+    (when (modulep! :completion vertico)
+      (after! vertico
+        (map! :map vertico-map
+              "C-z C-j" #'vertico-quick-jump
+              "C-z j" #'vertico-quick-jump
+              "C-z i" #'vertico-quick-exit
+              "C-z C-i" #'vertico-quick-exit)))
+    (after! embark
+      (map! :map embark-collect-mode-map
+            "C-z C-j" #'avy-embark-collect-choose
+            "C-z j" #'avy-embark-collect-choose
+            "C-z i" #'avy-embark-collect-act
+            "C-z C-i" #'avy-embark-collect-act))
+    (when (modulep! :private corfu)
+      (after! corfu
+        (map! :map corfu-map
+              "C-z C-j" #'corfu-quick-jump
+              "C-z j" #'corfu-quick-jump
+              "C-z i" #'corfu-quick-insert
+              "C-z C-i" #'corfu-quick-insert)))
+    :config
+    (setq avy-timeout-seconds 0.4
+          avy-all-windows t
+          avy-keys (cae-keyboard-remap
+                    '(?a ?s ?d ?f ?g
+                      ?h ?j ?k ?l ?\;))
+          avy-dispatch-alist
+          (cae-keyboard-remap
+           '((?x . avy-action-kill-move)
+             (?X . avy-action-kill-stay)
+             (?t . avy-action-teleport)
+             (?m . avy-action-mark)
+             (?n . avy-action-copy)
+             (?y . avy-action-yank)
+             (?Y . avy-action-yank-line)
+             (?i . avy-action-ispell)
+             (?z . avy-action-zap-to-char)))
+          avy-styles-alist '((avy-isearch . pre)
+                             (ace-link-man . pre)
+                             (avy-goto-end-of-line . post)
+                             (avy-kill-ring-save-region . pre)
+                             (avy-kill-region . pre)
+                             (avy-copy-region . pre)
+                             (avy-move-region . pre))
+          avy-column-line-overlay t))
 
-  (when (modulep! :emacs undo)
-    (after! undo-fu
-      (setq undo-fu-allow-undo-in-region t)))
+  (use-package! zop-to-char
+    :defer t
+    :init (map! [remap zap-to-char] #'zop-up-to-char
+                [remap zap-up-to-char] #'zop-to-char)
+    :config
+    (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
-  ;; Hide commands in M-x which do not work in the current mode. Vertico commands
-  ;; are hidden in normal buffers.
-  (setq read-extended-command-predicate #'command-completion-default-include-p)
+  ;; I mostly use this package for some additional prefix argument stuff like
+  ;; using `C-u - M-:' to insert a string from Elisp without double quotes.
+  (use-package! pp+
+    :defer t :init
+    (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
+    (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
+    (when (modulep! :tools eval +overlay)
+      (after! eros
+        (add-hook 'eros-mode-hook
+                  (cae-defun cae-eros-setup-keybindings-h ()
+                    (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
 
-  ;;(use-package! avy
-  ;;  :defer t :init
-  ;;  (map! :prefix "C-z"
-  ;;        "n" #'avy-goto-line-below
-  ;;        "p" #'avy-goto-line-above
-  ;;        "y" #'avy-copy-region
-  ;;        "c" #'avy-goto-char
-  ;;        "m" #'avy-move-region
-  ;;        "l" #'avy-goto-line
-  ;;        "e" #'avy-goto-end-of-line
-  ;;        "." #'cae-avy-symbol-at-point
-  ;;        "k" #'avy-kill-region
-  ;;        "w" #'avy-kill-ring-save-region
-  ;;        "j" #'avy-goto-word-1
-  ;;        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-  ;;        "SPC" #'avy-goto-char-timer
-  ;;        "C-n" #'avy-goto-line-below
-  ;;        "C-p" #'avy-goto-line-above
-  ;;        "C-." #'cae-avy-symbol-at-point
-  ;;        "C-k" #'avy-kill-region
-  ;;        "C-w" #'avy-kill-ring-save-region
-  ;;        "C-y" #'avy-copy-region
-  ;;        "C-m" #'avy-move-region
-  ;;        "C-c" #'avy-goto-char
-  ;;        "C-l" #'avy-goto-line
-  ;;        "C-e" #'avy-goto-end-of-line
-  ;;        "C-j" #'avy-goto-word-1
-  ;;        "C-SPC" #'avy-goto-char-timer
-  ;;        (:map isearch-mode-map
-  ;;         "j" #'avy-isearch
-  ;;         "C-j" #'avy-isearch))
-  ;;  ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
-  ;;  ;; fork I'm currently using because I should be able to get this working using
-  ;;  ;; `avy-styles-alist' instead.
-  ;;  (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
-  ;;  (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
-  ;;
-  ;;  ;; TODO All of these commands have jump and choose variants. I should make two
-  ;;  ;; separate keybindings for the two variants.
-  ;;  (when (modulep! :completion vertico)
-  ;;    (after! vertico
-  ;;      (map! :map vertico-map
-  ;;            "C-z C-j" #'vertico-quick-jump
-  ;;            "C-z j" #'vertico-quick-jump
-  ;;            "C-z i" #'vertico-quick-exit
-  ;;            "C-z C-i" #'vertico-quick-exit)))
-  ;;  (after! embark
-  ;;    (map! :map embark-collect-mode-map
-  ;;          "C-z C-j" #'avy-embark-collect-choose
-  ;;          "C-z j" #'avy-embark-collect-choose
-  ;;          "C-z i" #'avy-embark-collect-act
-  ;;          "C-z C-i" #'avy-embark-collect-act))
-  ;;  (when (modulep! :private corfu)
-  ;;    (after! corfu
-  ;;      (map! :map corfu-map
-  ;;            "C-z C-j" #'corfu-quick-jump
-  ;;            "C-z j" #'corfu-quick-jump
-  ;;            "C-z i" #'corfu-quick-insert
-  ;;            "C-z C-i" #'corfu-quick-insert)))
-  ;;  :config
-  ;;  (setq avy-timeout-seconds 0.4
-  ;;        avy-all-windows t
-  ;;        avy-keys (cae-keyboard-remap
-  ;;                  '(?a ?s ?d ?f ?g
-  ;;                    ?h ?j ?k ?l ?\;))
-  ;;        avy-dispatch-alist
-  ;;        (cae-keyboard-remap
-  ;;         '((?x . avy-action-kill-move)
-  ;;           (?X . avy-action-kill-stay)
-  ;;           (?t . avy-action-teleport)
-  ;;           (?m . avy-action-mark)
-  ;;           (?n . avy-action-copy)
-  ;;           (?y . avy-action-yank)
-  ;;           (?Y . avy-action-yank-line)
-  ;;           (?i . avy-action-ispell)
-  ;;           (?z . avy-action-zap-to-char)))
-  ;;        avy-styles-alist '((avy-isearch . pre)
-  ;;                           (ace-link-man . pre)
-  ;;                           (avy-goto-end-of-line . post)
-  ;;                           (avy-kill-ring-save-region . pre)
-  ;;                           (avy-kill-region . pre)
-  ;;                           (avy-copy-region . pre)
-  ;;                           (avy-move-region . pre))
-  ;;        avy-column-line-overlay t))
-  ;;
-  ;;(use-package! zop-to-char
-  ;;  :defer t
-  ;;  :init (map! [remap zap-to-char] #'zop-up-to-char
-  ;;              [remap zap-up-to-char] #'zop-to-char)
-  ;;  :config
-  ;;  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
-  ;;
-  ;;;; I mostly use this package for some additional prefix argument stuff like
-  ;;;; using `C-u - M-:' to insert a string from Elisp without double quotes.
-  ;;(use-package! pp+
-  ;;  :defer t :init
-  ;;  (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-  ;;  (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
-  ;;  (when (modulep! :tools eval +overlay)
-  ;;    (after! eros
-  ;;      (add-hook 'eros-mode-hook
-  ;;                (cae-defun cae-eros-setup-keybindings-h ()
-  ;;                  (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
-  ;;
-  ;;(use-package! abbrev
-  ;;  :defer t :config
-  ;;  (setq-default abbrev-mode t
-  ;;                save-abbrevs 'silently)
-  ;;  (map! :map edit-abbrevs-mode-map
-  ;;        [remap save-buffer] #'abbrev-edit-save-buffer)
-  ;;  (map! :map abbrev-map "e" #'edit-abbrevs)
-  ;;  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
-  ;;
-  ;;(use-package! ibuffer
-  ;;  :defer t :config
-  ;;  (setq ibuffer-always-show-last-buffer t
-  ;;        ibuffer-formats
-  ;;        '((mark modified read-only locked " "
-  ;;           (name 23 23 :left :elide)  ;Give more space to the name.
-  ;;           " "
-  ;;           (size 9 -1 :right)
-  ;;           " "
-  ;;           (mode 16 16 :left :elide)
-  ;;           " "
-  ;;           (vc-status 12 :left)
-  ;;           " " filename-and-process)
-  ;;          (mark " "
-  ;;                (name 16 -1)
-  ;;                " " filename)))
-  ;;  (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
-  ;;  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
-  ;;
-  ;;(use-package! diff-mode
-  ;;  :defer t :config
-  ;;  (map! :map diff-mode-map
-  ;;        "q" #'kill-this-buffer))
+  (use-package! abbrev
+    :defer t :config
+    (setq-default abbrev-mode t
+                  save-abbrevs 'silently)
+    (map! :map edit-abbrevs-mode-map
+          [remap save-buffer] #'abbrev-edit-save-buffer)
+    (map! :map abbrev-map "e" #'edit-abbrevs)
+    (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
+
+  (use-package! ibuffer
+    :defer t :config
+    (setq ibuffer-always-show-last-buffer t
+          ibuffer-formats
+          '((mark modified read-only locked " "
+             (name 23 23 :left :elide)  ;Give more space to the name.
+             " "
+             (size 9 -1 :right)
+             " "
+             (mode 16 16 :left :elide)
+             " "
+             (vc-status 12 :left)
+             " " filename-and-process)
+            (mark " "
+                  (name 16 -1)
+                  " " filename)))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
+
+  (use-package! diff-mode
+    :defer t :config
+    (map! :map diff-mode-map
+          "q" #'kill-this-buffer))
 
   (use-package! aggressive-indent
     :defer t :init
