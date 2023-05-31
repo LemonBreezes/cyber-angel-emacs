@@ -103,8 +103,6 @@
   (use-package! parrot
     :after magit
     :defer t :init
-    (map! "C-!" #'parrot-rotate-next-word-at-point
-          "C-M-!" #'parrot-rotate-prev-word-at-point)
     :config
     (setopt parrot-animate 'hide-static
             parrot-rotate-animate-after-rotation nil
