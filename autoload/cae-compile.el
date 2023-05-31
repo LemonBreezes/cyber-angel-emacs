@@ -73,6 +73,8 @@
   (when (not (bound-and-true-p cae-config-finished-loading))
     (message "Config not finished loading")
     (cl-return-from cae-compile-my-private-config))
+  (when (not cae-config-compilation-enabled)
+    (cl-return-from cae-compile-my-private-config))
   (mapc (lambda (s)
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
@@ -127,16 +129,15 @@
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
 
-(when cae-config-compilation-enabled
-  ;; Run early in case I want to `C-g' and inspect the output.
-  (add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
+;; Run early in case I want to `C-g' and inspect the output.
+(add-hook 'kill-emacs-hook #'cae-compile-my-private-config -1)
 
-  ;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
-  ;; you will be waiting for a long time.
-  (add-hook 'kill-emacs-hook
-            ;; 10 GB or 30% of RAM
-            (lambda () (setq gc-cons-threshold (* 10 1024 1024 1024)
-                        gc-cons-percentage 30
-                        gcmh-low-cons-threshold gc-cons-threshold
-                        gcmh-high-cons-threshold gc-cons-threshold))
-            -10))
+;; Make Emacs way faster at byte compiling but if this threshold is ever hit,
+;; you will be waiting for a long time.
+(add-hook 'kill-emacs-hook
+          ;; 10 GB or 30% of RAM
+          (lambda () (setq gc-cons-threshold (* 10 1024 1024 1024)
+                           gc-cons-percentage 30
+                           gcmh-low-cons-threshold gc-cons-threshold
+                           gcmh-high-cons-threshold gc-cons-threshold))
+          -10)
