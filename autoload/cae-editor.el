@@ -215,7 +215,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (cae-defun cae-lazy-load-org-ai ()
   (interactive)
-  (org-ai-global-mode +1)
+  (require 'org-ai)
   (setq unread-command-events
              (listify-key-sequence (kbd "C-c M-a")))
   (defvar org-ai-global-mode-prefix-map
