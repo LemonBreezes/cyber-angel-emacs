@@ -44,103 +44,91 @@ overriding other keymaps."
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p t
   "Whether our tools section of `config.el' is disabled.")
-(defvar cae-init-editor-enabled-p t
+(defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is disabled.")
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is disabled.")
 
-(condition-case err
-    (doom! :completion
-           (vertico +icons +childframe)
+(doom! :completion
+       (vertico +icons +childframe)
 
-           :ui
-           doom-dashboard
-           hl-todo
-           hydra
-           (ligatures +extra +iosevka)
-           nav-flash
-           (popup +defaults)
-           (vc-gutter +pretty +diff-hl)
-           vi-tilde-fringe
-           workspaces
-           ;;(window-select +switch-window)
+       :ui
+       doom-dashboard
+       hl-todo
+       hydra
+       (ligatures +extra +iosevka)
+       nav-flash
+       (popup +defaults)
+       (vc-gutter +pretty +diff-hl)
+       vi-tilde-fringe
+       workspaces
+       ;;(window-select +switch-window)
 
-           :editor
-           file-templates
-           format
-           snippets
-           multiple-cursors
-           lispy
+       :editor
+       file-templates
+       format
+       snippets
+       multiple-cursors
+       lispy
 
-           :emacs
-           undo
-           ibuffer
-           vc
+       :emacs
+       undo
+       ibuffer
+       vc
 
-           :term
-           eshell
-           (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+       :term
+       eshell
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
-           :checkers
-           (syntax +childframe)
-           ;;spell
-           ;;grammar
+       :checkers
+       (syntax +childframe)
+       ;;spell
+       ;;grammar
 
-           :tools
-           (debugger +lsp)
-           direnv
-           editorconfig
-           (eval +overlay)
-           (lookup +dictionary +docsets +offline)
-           (magit +forge)
-           (lsp +peek)
-           tree-sitter
+       :tools
+       (debugger +lsp)
+       direnv
+       editorconfig
+       (eval +overlay)
+       (lookup +dictionary +docsets +offline)
+       (magit +forge)
+       (lsp +peek)
+       tree-sitter
 
-           :lang
-           (emacs-lisp +tree-sitter)
-           (org +roam2 +tree-sitter)
-           (cc +lsp +tree-sitter)
-           (web +lsp +tree-sitter)
-           (sh +lsp +tree-sitter)
-           (nix +lsp +tree-sitter)
-           (solidity +lsp +tree-sitter)
+       :lang
+       (emacs-lisp +tree-sitter)
+       (org +roam2 +tree-sitter)
+       (cc +lsp +tree-sitter)
+       (web +lsp +tree-sitter)
+       (sh +lsp +tree-sitter)
+       (nix +lsp +tree-sitter)
+       (solidity +lsp +tree-sitter)
 
-           :os
-           (:if IS-MAC macos)
-           (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+       :os
+       (:if IS-MAC macos)
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
-           :config
-           (default +bindings +smartparens)
+       :config
+       (default +bindings +smartparens)
 
-           :email
-           ;;(mu4e +org)
+       :email
+       ;;(mu4e +org)
 
-           :app
-           (rss +org)
+       :app
+       (rss +org)
 
-           :private
-           (corfu +numbers)
-           debugger
-           (dirvish +icons +dirvish)
-           eshell
-           dired
-           lisp
-           misc-applications
-           modeline
-           unpackaged
-           vc
-           org)
-  (progn
-    ;; This comment will be removed after I test this.
-    (message "Error: %S" err)
-    (with-output-to-temp-buffer "*Backtrace*"
-      (backtrace))
-    (unless (or (bound-and-true-p vertico-mode)
-                (bound-and-true-p ido-mode)
-                (bound-and-true-p ivy-mode)
-                (bound-and-true-p icomplete-mode)
-                (bound-and-true-p helm-mode))
-      (load! "lisp/cae-icomplete"))))
+       :private
+       (corfu +numbers)
+       debugger
+       (dirvish +icons +dirvish)
+       eshell
+       dired
+       lisp
+       misc-applications
+       modeline
+       unpackaged
+       vc
+       org)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
