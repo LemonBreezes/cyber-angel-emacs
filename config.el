@@ -1187,6 +1187,7 @@
 (map! :leader :prefix ("g" . "gpt"))
 
 (use-package! org-ai
+  :defer t
   :config
   (org-ai-global-mode +1)
   (add-hook 'org-mode-hook #'org-ai-mode)
