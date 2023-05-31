@@ -14,20 +14,20 @@
 ;; of these remappings involve non-printable characters. I have replaced those
 ;; in the list below with a null byte (0x00) and terminated the list.
 (defvar cae-keyboard-orbits
-  '((?w ?b ?j ?o ?y ?v ?k ?t ?g ?s ?a ?r ?f ?n ?m ?c ?u)
-    (?W ?B ?J ?O ?Y ?V ?K ?T ?G ?S ?A ?R ?F ?N ?M ?C ?U)
-    (?# ?3 ?\; ?h ?d ?e ?p ?\' ?_ ?~ ?` ?\" ?% ?5 ?+ ?\0)
-    (?: ?H ?D ?E ?P ?% ?^ ?6 ?$ ?4 ?= ?\0)
-    (?i ?l) (?I ?L)
-    (?x ?,) (?X ?<)
-    (?0 ?\))
-    (?1 ?!)
-    (?2 ?@)
-    (?5 ?+ ?\0)
-    (?7 ?&)
-    (?8 ?*)
-    (?9 ?\()
-    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q) (?\[) (?\])))
+  '([?w ?b ?j ?o ?y ?v ?k ?t ?g ?s ?a ?r ?f ?n ?m ?c ?u]
+    [?W ?B ?J ?O ?Y ?V ?K ?T ?G ?S ?A ?R ?F ?N ?M ?C ?U]
+    [?# ?3 ?\; ?h ?d ?e ?p ?\' ?_ ?~ ?` ?\" ?% ?5 ?+ ?\0]
+    [?: ?H ?D ?E ?P ?% ?^ ?6 ?$ ?4 ?= ?\0]
+    [?i ?l] [?I ?L]
+    [?x ?,] [?X ?<]
+    [?0 ?\)]
+    [?1 ?!]
+    [?2 ?@]
+    [?5 ?+ ?\0]
+    [?7 ?&]
+    [?8 ?*]
+    [?9 ?\(]
+    [?z] [?Z] [?-] [?.] [?>] [?q] [?Q] [?\[] [?\]]))
 
 ;;;###autoload
 (defun cae-keyboard-insert-current-prefix (arg)
@@ -53,16 +53,16 @@
 
 (defun cae-keyboard-remap-char (arg)
   (declare (pure t) (side-effect-free t))
-  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
+  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
-        (nth (mod (1+ (cl-position arg orbit)) (length orbit)) orbit)
+        (aref orbit (mod (1+ (cl-position arg orbit)) (length orbit)))
       arg)))
 
 (defun cae-keyboard-remap-char-reverse (arg)
   (declare (pure t) (side-effect-free t))
-  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'memq)))
+  (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
-        (nth (mod (1- (cl-position arg orbit)) (length orbit)) orbit)
+        (aref orbit (mod (1- (cl-position arg orbit)) (length orbit)))
       arg)))
 
 ;;;###autoload
