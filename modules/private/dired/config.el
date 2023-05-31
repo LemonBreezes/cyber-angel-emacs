@@ -118,6 +118,14 @@
   (map! [remap previous-buffer] #'cae-dired-previous-buffer
         [remap next-buffer] #'cae-dired-next-buffer)
 
+  (add-hook 'dirvish-setup-hook
+            (cae-defun cae-dired-set-fullscreen-dwim ()
+              (when (when (and (file-directory-p file)
+                               (one-window-p t)
+                               (frame-width (selected-frame))
+                               (> (frame-width (selected-frame)) 160))
+                      (dirvish-layout-toggle)))))
+
   ;; Exit the current Dirvish session when running interactive commands like
   ;; `projectile-find-file'.
   (advice-add #'find-file :around #'cae-dired-find-file-a))
