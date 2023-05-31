@@ -34,7 +34,7 @@
   ;; zone-pgm-random-life
   (zone-when-idle (* 5 60))
 
-  ;; Do not zone in a popup window.
+  ;; Do not zone in a popup window. Also, do not show other windows when zoning.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (let ((wconf (current-window-configuration)))
