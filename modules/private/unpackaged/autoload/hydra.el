@@ -1,5 +1,7 @@
 ;;; private/unpackaged/autoload/hydra.el -*- lexical-binding: t; -*-
 
+(eval-when-compile (require 'hydra))
+
 ;;;###autoload (autoload '+vc/smerge-hydra/body "private/unpackaged/autoload/hydra" nil t)
 (defhydra +vc/smerge-hydra (:hint nil
                             :pre (if (not smerge-mode) (smerge-mode 1))
