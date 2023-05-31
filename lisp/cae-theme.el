@@ -47,7 +47,7 @@
           ef-themes-to-toggle '(ef-trio-light ef-trio-dark)))
 
 (map! :leader
-      :desc "Toggle theme" "t T" #'ef-themes-toggle)
+      :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
 ;; Set theme based on time
 (when (display-graphic-p)
