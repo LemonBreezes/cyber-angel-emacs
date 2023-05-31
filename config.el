@@ -247,43 +247,43 @@
 ;;     (setq spell-fu-faces-exclude
 ;;           (delq 'font-lock-string-face spell-fu-faces-include))))
 
-;; (when (modulep! :tools pdf)
-;;   (use-package! pdftotext
-;;     :defer t
-;;     :init
-;;     (defadvice! +pdf-view-mode-a (oldfun &rest args)
-;;       :around #'pdf-view-mode
-;;       (if (display-graphic-p)
-;;           (apply oldfun args)
-;;         (apply #'pdftotext-mode args)))))
+(when (modulep! :tools pdf)
+  (use-package! pdftotext
+    :defer t
+    :init
+    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+      :around #'pdf-view-mode
+      (if (display-graphic-p)
+          (apply oldfun args)
+        (apply #'pdftotext-mode args)))))
 
-;; (when (and (modulep! :tools lsp)
-;;            (not (modulep! :tools lsp +eglot)))
-;;   (after! lsp-mode
-;;     (setopt lsp-headerline-breadcrumb-enable t
-;;             lsp-enable-snippet nil
-;;             lsp-enable-text-document-color t
-;;             lsp-enable-folding t
-;;             lsp-semantic-tokens-enable t)
-;;     (after! lsp-ui
-;;       (setq lsp-signature-auto-activate t
-;;             lsp-ui-doc-include-signature t
-;;             lsp-ui-doc-header nil))
-;;     (after! lsp-clangd
-;;       (setq lsp-clients-clangd-args
-;;             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-;;               "--background-index"
-;;               "--clang-tidy"
-;;               "--completion-style=detailed"
-;;               "--header-insertion=never"
-;;               "--header-insertion-decorators=0")))
-;;     (add-to-list 'lsp-disabled-clients 'ccls)
-;;     (add-to-list 'lsp-disabled-clients 'mspyls)))
+(when (and (modulep! :tools lsp)
+           (not (modulep! :tools lsp +eglot)))
+  (after! lsp-mode
+    (setopt lsp-headerline-breadcrumb-enable t
+            lsp-enable-snippet nil
+            lsp-enable-text-document-color t
+            lsp-enable-folding t
+            lsp-semantic-tokens-enable t)
+    (after! lsp-ui
+      (setq lsp-signature-auto-activate t
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-header nil))
+    (after! lsp-clangd
+      (setq lsp-clients-clangd-args
+            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+              "--background-index"
+              "--clang-tidy"
+              "--completion-style=detailed"
+              "--header-insertion=never"
+              "--header-insertion-decorators=0")))
+    (add-to-list 'lsp-disabled-clients 'ccls)
+    (add-to-list 'lsp-disabled-clients 'mspyls)))
 
-;; (when (modulep! :tools lsp +eglot)
-;;   (after! eglot
-;;     (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-;;           '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
+(when (modulep! :tools lsp +eglot)
+  (after! eglot
+    (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+          '("clangd" "--background-index" "--clang-tidy" "--completion-style=detailed" "--header-insertion=never" "--header-insertion-decorators=0"))))
 
 ;; (use-package! topsy
 ;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
