@@ -25,6 +25,7 @@
        :editor
        multiple-cursors
        file-templates
+       format
        snippets
 
        :emacs
