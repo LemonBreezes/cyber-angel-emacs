@@ -59,6 +59,10 @@
                'deft))
   (define-key doom-leader-map "nd" nil))
 
+(map! :prefix ("M-s h" . "highlight"))
+
+;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
+;; Evil.
 (map! :leader :desc "help" "h" help-map)
 
 ;; Remove redundant `consult-history' keybinding.
