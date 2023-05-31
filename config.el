@@ -158,7 +158,8 @@
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
-(setq bookmark-bmenu-file-column 50)
+(setq bookmark-bmenu-file-column 50
+      bookmark-menu-confirm-deletion t)
 (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
 (after! auth-source
