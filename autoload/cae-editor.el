@@ -87,8 +87,6 @@
 
 
 ;;;###autoload
-(defun cae-recenter-and-flash-maybe ()
+(defun cae-recenter-maybe-h ()
   (unless (pos-visible-in-window-p (point))
-    (recenter)
-    (when (modulep! :ui nav-flash)
-      (+nav-flash-blink-cursor))))
+    (recenter)))
