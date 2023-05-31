@@ -922,7 +922,8 @@
   (map! "C->"   #'mc/mark-next-like-this
         "C-<"   #'mc/mark-previous-like-this
         "C-M->" #'mc/skip-to-next-like-this
-        "C-M-<" #'mc/skip-to-previous-like-this)
+        "C-M-<" #'mc/skip-to-previous-like-this
+        "M-<mouse-1>" #'mc/add-cursor-on-click)
   (map! :leader
         :prefix "m"
         :desc "Pop mark"                        "SPC"   #'mc/mark-pop
