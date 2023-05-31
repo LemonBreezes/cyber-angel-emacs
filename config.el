@@ -518,9 +518,6 @@
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
   :defer t)
 
-;; Doom uses a custom delete backward command,
-;; `+default--delete-backward-char-a', which I prefer. However, when
-;; `aggressive-indent-mode' in in use, `hungry-delete-mode' works better
 (use-package! hungry-delete
   :defer t :init
   (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
