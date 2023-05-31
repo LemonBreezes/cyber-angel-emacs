@@ -53,7 +53,8 @@
   (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
         :map corfu-map
         "C-M-i" #'corfu-move-to-minibuffer
-        ;; I use `TAB' instead.
+        ;; I use `TAB' instead. I don't like how the `RET' keybinding prevents
+        ;; me from exiting the minibuffer while the completion menu is open.
         "RET" nil)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
