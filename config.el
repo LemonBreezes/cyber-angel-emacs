@@ -133,49 +133,7 @@
   :config
   (setq-default goggles-pulse t))
 
-;; (use-package! mini-popup
-;;   :config
-;;   (mini-popup-mode +1)
-
-;;   ;; Configure a height function (Example for Vertico)
-;;   (defun mini-popup-height-resize ()
-;;     (* (1+ (min vertico--total vertico-count)) (default-line-height)))
-;;   (defun mini-popup-height-fixed ()
-;;     (* (1+ (if vertico--input vertico-count 0)) (default-line-height)))
-;;   (setq mini-popup--height-function #'mini-popup-height-fixed)
-
-;;   ;; Disable the minibuffer resizing of Vertico (HACK)
-;;   (advice-add #'vertico--resize-window :around
-;;               (lambda (&rest args)
-;;                 (unless mini-popup-mode
-;;                   (apply args))))
-
-;;   ;; Ensure that the popup is updated after refresh (Consult-specific)
-;;   (add-hook 'consult--completion-refresh-hook
-;;             (lambda (&rest _) (mini-popup--setup)) 99)
-
-;;   (setq-hook! 'minibuffer-setup-hook
-;;     completion-in-region-function #'consult-completion-in-region)
-
-;;   (advice-add #'eldoc-box-hover-at-point-mode :before-until
-;;               (defun +eldoc-box-hover-at-point-mode-a (&rest _)
-;;                 (and (minibufferp) (bound-and-true-p mini-popup-mode))))
-
-;;   (when (modulep! :private helm)
-;;     (add-hook 'helm-minibuffer-set-up-hook
-;;               (defun +mini-popup-disable-in-helm ()
-;;                 (when mini-popup-mode
-;;                   (mini-popup-mode -1)
-;;                   (run-at-time 0.05 nil #'mini-popup-mode))))
-;;     (advice-add #'mini-popup--hide :before-while (lambda () mini-popup--frame)))
-
-;;   ;; This is so that entries with tags do not take up multiple lines.
-;;   (when (modulep! :lang org)
-;;     (after! org-roam
-;;       (setq! org-roam-node-display-template
-;;               (format "${doom-hierarchy:80} %s %s"
-;;                       (propertize "${doom-type:12}" 'face 'font-lock-keyword-face)
-;;                       (propertize "${doom-tags:42}" 'face 'org-tag))))))
+
 ;;; Tools
 (load! "lisp/cae-webkit.el")
 
