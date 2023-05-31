@@ -72,8 +72,9 @@
        "/" tab-select))
    t)
 
-  (define-repeat-map cae-dired-jump
-    ("j" cae-dired-jump))
+  (define-repeat-map dired-jump
+    ("j" dired-jump)
+    (:enter dirvish-dwim))
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
