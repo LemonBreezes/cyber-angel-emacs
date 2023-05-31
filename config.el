@@ -377,7 +377,10 @@
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace-regexp)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (add-to-list 'isearch-mb--with-buffer #'recenter-top-bottom)
-  (when (modulep! :editor ))
+  (when (modulep! :completion vertico)
+    (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
+    (map! :map isearch-mb-minibuffer-map
+     [remap consult-history] #'consult-isearch-history))
   (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
