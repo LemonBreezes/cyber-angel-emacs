@@ -550,12 +550,12 @@
            ("M-J" sp-join-sexp "Edit")
            ("M-C" sp-convolute-sexp "Edit")
            ("C-M-t" sp-transpose-sexp "Edit")
-           ("C-x C-t" sp-transpose-hybrid-sexp "Edit") ;overrides `transpose-lines'.
+           ("C-x C-t" sp-transpose-hybrid-sexp "Edit") ;Overrides `transpose-lines'.
            ("C-M-k" sp-kill-sexp "Kill")
            ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
            ("M-<delete>" sp-unwrap-sexp "Kill")
            ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-           ("M-r" cae-raise-sexp "Kill") ;overrides a command I never use.
+           ("M-r" cae-raise-sexp "Kill") ;Overrides a `move-to-window-line-top-bottom'.
            ("M-D" sp-splice-sexp "Kill")
            ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
            ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
