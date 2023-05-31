@@ -3,14 +3,14 @@
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
-  (dap-delete-all-sessions)
-  (when-let ((workspace-project (cl-find (+workspace-current-name)
-                                         (projectile-relevant-known-projects)
-                                         :test #'string-match-p)))
-    (unless (string= (projectile-project-name)
-                     (+workspace-current-name))
-      (projectile-switch-project-by-name workspace-project)))
-  (dap-debug-last))
+  (unwind-protect (dap-delete-all-sessions)
+    (when-let ((workspace-project (cl-find (+workspace-current-name)
+                                           (projectile-relevant-known-projects)
+                                           :test #'string-match-p)))
+      (unless (string= (projectile-project-name)
+                       (+workspace-current-name))
+        (projectile-switch-project-by-name workspace-project)))
+    (dap-debug-last)))
 
 ;;;###autoload
 (defun cae-debugger-gud-comint-send-input ()
