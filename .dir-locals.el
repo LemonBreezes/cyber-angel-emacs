@@ -7,7 +7,8 @@
           (when (and (derived-mode-p 'emacs-lisp-mode)
                      (not (cl-member (buffer-name)
                                      '("init.el"
-                                       ".dir-locals.el")
+                                       ".dir-locals.el"
+                                       "packages.el")
                                      :test #'string=)))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
           (when (bound-and-true-p cae-config-finished-loading)
