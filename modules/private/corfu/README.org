@@ -41,10 +41,6 @@ which works, but ideally we'd want something that doesn't pull in company. This
 could be a new package implementing a capf interface to yasnippet, a
 [[doom-package:tempel]] module, or maybe something else entirely.
 
-** TODO Changelog
-# This section will be machine generated. Don't edit it by hand.
-/This module does not have a changelog yet./
-
 * Installation
 Enable this module in your ~doom!~ block.
 
