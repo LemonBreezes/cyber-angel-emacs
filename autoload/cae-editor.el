@@ -298,7 +298,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-embark-act-with-completing-read (&optional arg)
   (interactive "P")
-  (let* ((embark-prompter #'embark-completing-read-prompter)
+  (let* ((embark-prompter #'cae-embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
          (embark-indicators '())
          (posframe (cl-find-if
