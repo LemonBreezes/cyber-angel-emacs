@@ -73,7 +73,7 @@
   (advice-add #'set--this-command-keys :override #'ignore)
   (unwind-protect (apply oldfun args)
     (advice-remove #'set--this-command-keys #'ignore)))
-;
+
 ;; White list local variables for some projects.
 (defadvice! cae-hacks-whitelist-some-dir-locals-a (oldfun variables dir-name)
   :around #'hack-local-variables-filter
