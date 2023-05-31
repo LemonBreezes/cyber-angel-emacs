@@ -162,7 +162,6 @@
           "%" #'meow-query-replace-regexp
           "Y" #'meow-yank-pop
           "\\" #'quoted-insert
-          ;; "/" #'avy-goto-word-1
           "S" #'embrace-commander)))
 
 (use-package! meow
