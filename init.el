@@ -11,7 +11,7 @@
 (setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
                                  cae-config-incremental-compilation-enabled-p)))
 (random t)                              ;Set the random seed.
-(setq doom-theme 'wheatgrass)           ;Set a dark default theme.
+(setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
