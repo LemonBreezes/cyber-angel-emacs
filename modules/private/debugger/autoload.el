@@ -33,7 +33,8 @@
 ;;;###autoload
 (defun cae-debugger-quit-or-delete-or-send-eof (arg)
   (interactive "p")
-  (if (eobp)
+  (if (and (eobp)
+           (looking-back (concat dap-ui-repl-prompt "\\s-*") nil))
       (kill-buffer)
     (comint-delchar-or-maybe-eof arg)))
 
