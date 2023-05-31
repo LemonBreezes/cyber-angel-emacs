@@ -31,7 +31,12 @@
 ;;;###autoload
 (defun cae-sp-delete-char (&optional arg)
   (interactive "*P")
-  (if (and delete-active-region
-           (region-active-p))
-      (sp-delete-region (region-beginning) (region-end))
-    (sp-delete-char arg)))
+  (cond ((and delete-active-region
+              (region-active-p))
+         (sp-delete-region (region-beginning) (region-end)))
+        ;; check if parens are balanced
+        ((condition-case err
+             (scan-sexps (point) (point-max))
+           (scan-error t))
+         (delete-char 1))
+        ((sp-delete-char arg))))
