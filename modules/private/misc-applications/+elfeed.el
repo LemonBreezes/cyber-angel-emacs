@@ -14,8 +14,7 @@
           "?" #'describe-mode
           "q" #'+elfeed-quit)
     (set-popup-rule! (format "^%s$" (regexp-quote elfeed-log-buffer-name))
-      :size 0.3
-      :side 'right :select nil :quit t :ttl nil)
+      :size 0.3 :side 'right :select nil :quit t :ttl nil)
     (when (modulep! :ui hydra)
       (pretty-hydra-define cae-elfeed-hydra (:color pink :foreign-keys run)
         ("Custom filters"
