@@ -43,10 +43,6 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
-(add-hook 'doom-unreal-buffer-functions
-          (cae-defun cae-unreal-buffer-p (buffer)
-            (string-equal (buffer-name buffer) "*lsp-log*")))
-
 ;;; UI
 
 (when cae-init-ui-enabled-p
