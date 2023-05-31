@@ -3,3 +3,4 @@
 
 (package! mood-line)
 (package! minions)
+(package! rainbow-mode)
