@@ -155,7 +155,7 @@
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
-  (run-with-idle-timer 10 nil #'cae-hacks-enable-gc))
+  (run-with-idle-timer 30 nil #'cae-hacks-enable-gc))
 
 (advice-add #'save-some-buffers :before #'cae-hacks-disable-gc-temporarily)
 (add-hook 'git-timemachine-mode-hook #'cae-hacks-disable-gc-temporarily -1)
