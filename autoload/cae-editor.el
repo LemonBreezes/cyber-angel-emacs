@@ -113,8 +113,9 @@ Lispy."
     (call-interactively #'tab-close)))
 
 ;;;###autoload
-(defun cae-indented-copy-for-reddit ()
-  "Copy and indent active region or current defun."
+(defun cae-copy-for-reddit ()
+  "Copy and indent active region or current defun. This is the
+format used on Reddit for code blocks."
   (interactive)
   (when-let* ((bounds (if (region-active-p)
                           (cons (region-beginning) (region-end))
