@@ -527,6 +527,7 @@
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
+  ;; This could be improved so that it works more like `save-some-buffers'.
   (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
   (defun cae-ask-kill-buffer (buffer)
