@@ -67,7 +67,7 @@
       :prefix ("C-x a" . "abbrev")
       :prefix ("C-x a i" . "inverse")
       :prefix ("C-x n" . "narrow")
-      :prefix ("C-x r" . "register")
+      :prefix ("C-x r" . "register/bookmark/rectangle")
       :prefix ("C-x v" . "version-control")
       :prefix ("C-x w" . "window")
       :prefix ("C-x w ^" . "detach")
