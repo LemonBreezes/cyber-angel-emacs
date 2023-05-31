@@ -569,8 +569,8 @@
      "C-M-u" #'sp-backward-up-sexp
      "C-M-n" #'sp-up-sexp
      "C-M-p" #'sp-backward-down-sexp
-     "C-M-d" #'sp-down-sexp
-     "C-M-a" #'sp-beginning-of-sexp
+     "C-M-d" #'sp-down-sexp             ;Gets overridden.
+     "C-M-a" #'sp-beginning-of-sexp     ;Gets overridden.
      "M-(" #'sp-wrap-round
      "C-(" #'sp-forward-slurp-sexp
      "C-<right>" #'sp-forward-slurp-sexp
@@ -582,7 +582,8 @@
      "M-J" #'sp-join-sexp
      "M-C" #'sp-convolute-sexp
      ;; My version of `sp-smartparens-bindings'.
-
+     "C-M-e" #'sp-up-sexp
+     "C-M-a" #'sp-backward-down-sexp
      )))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
