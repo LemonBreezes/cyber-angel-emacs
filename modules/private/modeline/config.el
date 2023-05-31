@@ -1,8 +1,7 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (use-package! minions
-  :defer t
-  :init
+  :defer t :init
   (add-hook 'doom-first-buffer-hook #'minions-mode)
   :config
   (setq minions-demoted-modes
@@ -176,8 +175,7 @@
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
 (use-package! parrot
-  :defer t
-  :init
+  :defer t :init
   ;; Wrangle parrot into being fully lazy-loaded.
   (autoload #'parrot--party-while-process "parrot")
   (autoload #'parrot--todo-party "parrot")
@@ -199,8 +197,7 @@
         parrot-type 'nyan)
   (parrot-mode +1))
 (use-package! parrot-rotate
-  :defer t
-  :init
+  :defer t :init
   (map! "C-!" #'cae-modeline-rotate-next-word-at-point)
   :config
   (after! parrot-rotate
