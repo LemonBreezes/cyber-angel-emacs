@@ -20,18 +20,23 @@
 (defvar cae-project-bookmark-separate-into-branches t
   "If non-nil, separate bookmarks into Git branches.")
 
+(defun cae-project--get-branch (project)
+  (let ((res (car (split-string
+                   (shell-command-to-string
+                    (concat "cd " (or project
+                                      (doom-project-root))
+                            "; git rev-parse --abbrev-ref HEAD")) "\n"))))
+    (if (string-match-p "^fatal" res)
+        "default"
+      res)))
+
 (defun cae-project--get-bookmark-file (&optional project)
   "Return the bookmark file for PROJECT."
   (expand-file-name
    (concat (doom-project-name project)
            "/"
            (if cae-project-bookmark-separate-into-branches
-               (or (car (split-string
-                         (shell-command-to-string
-                          (concat "cd " (or project
-                                            (doom-project-root))
-                                  "; git rev-parse --abbrev-ref HEAD")) "\n"))
-                   "default")
+               (cae-project--get-branch project)
              "default")
            ".bmk")
    cae-project-bookmark-dir))
