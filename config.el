@@ -561,38 +561,37 @@
           cae-raise-sexp-dwim))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))
-    (map!
-     ;; My version of `sp-paredit-bindings'.
-     "M-r" #'cae-raise-sexp-dwim
-     "C-M-f" #'sp-forward-sexp
-     "C-M-b" #'sp-backward-sexp
-     "C-M-u" #'sp-backward-up-sexp
-     ;;"C-M-n" #'sp-up-sexp               ;Gets overridden.
-     ;;"C-M-p" #'sp-backward-down-sexp    ;Gets overridden.
-     "C-M-d" #'sp-down-sexp
-     "C-M-a" #'sp-beginning-of-sexp
-     "M-(" #'sp-wrap-round
-     "C-(" #'sp-forward-slurp-sexp
-     "C-<right>" #'sp-forward-slurp-sexp
-     "C-}" #'sp-forward-barf-sexp
-     "C-<left>" #'sp-forward-barf-sexp
-     "C-{" #'sp-backward-barf-sexp
-     "C-M-<right>" #'sp-backward-slurp-sexp
-     "M-S" #'sp-split-sexp
-     "M-J" #'sp-join-sexp
-     "M-C" #'sp-convolute-sexp
-     ;; My version of `sp-smartparens-bindings'.
-     "C-M-e" #'sp-up-sexp
-     "C-M-a" #'sp-backward-down-sexp
-     "C-M-n" #'sp-next-sexp
-     "C-M-p" #'sp-previous-sexp
-     "C-M-k" #'sp-kill-sexp
-     "M-D"   #'sp-splice-sexp
-     "C-M-<backspace>" #'sp-splice-sexp-killing-backward
-     "C-M-<delete>" #'sp-splice-sexp-killing-forward
-     "C-]" #'sp-select-next-thing-exchange
-     "C-M-]" #'sp-select-next-thing
-     "C-M-@" #'sp-mark-sexp)
+    ;; My version of `sp-paredit-bindings'.
+    "M-r" #'cae-raise-sexp-dwim
+    "C-M-f" #'sp-forward-sexp
+    "C-M-b" #'sp-backward-sexp
+    "C-M-u" #'sp-backward-up-sexp
+    ;;"C-M-n" #'sp-up-sexp               ;Gets overridden.
+    ;;"C-M-p" #'sp-backward-down-sexp    ;Gets overridden.
+    "C-M-d" #'sp-down-sexp
+    "C-M-a" #'sp-beginning-of-sexp
+    "M-(" #'sp-wrap-round
+    "C-(" #'sp-forward-slurp-sexp
+    "C-<right>" #'sp-forward-slurp-sexp
+    "C-}" #'sp-forward-barf-sexp
+    "C-<left>" #'sp-forward-barf-sexp
+    "C-{" #'sp-backward-barf-sexp
+    "C-M-<right>" #'sp-backward-slurp-sexp
+    "M-S" #'sp-split-sexp
+    "M-J" #'sp-join-sexp
+    "M-C" #'sp-convolute-sexp
+    ;; My version of `sp-smartparens-bindings'.
+    "C-M-e" #'sp-up-sexp
+    "C-M-a" #'sp-backward-down-sexp
+    "C-M-n" #'sp-next-sexp
+    "C-M-p" #'sp-previous-sexp
+    "C-M-k" #'sp-kill-sexp
+    "M-D"   #'sp-splice-sexp
+    "C-M-<backspace>" #'sp-splice-sexp-killing-backward
+    "C-M-<delete>" #'sp-splice-sexp-killing-forward
+    "C-]" #'sp-select-next-thing-exchange
+    "C-M-]" #'sp-select-next-thing
+    "C-M-@" #'sp-mark-sexp
     (setq sp-navigate-interactive-always-progress-point t)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
