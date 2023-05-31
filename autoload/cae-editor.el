@@ -350,3 +350,13 @@ mark the string and call `edit-indirect-region' with it."
                                      (bookmark-all-names))))
     (dolist (bookmark bookmarks)
       (bookmark-delete bookmark))))
+
+;;;###autoload
+(defun cae-jinx--add-to-abbrev (overlay word)
+  "Add abbreviation to `global-abbrev-table'.
+The misspelled word is taken from OVERLAY.  WORD is the corrected word."
+  (let ((abbrev (buffer-substring-no-properties
+                 (overlay-start overlay)
+                 (overlay-end overlay))))
+    (message "Abbrev: %s -> %s" abbrev word)
+    (define-abbrev global-abbrev-table abbrev word)))
