@@ -136,6 +136,7 @@
   (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
 (when (modulep! :ui workspaces)
+  (setq +workspaces-on-switch-project-behavior t)
   (advice-add #'which-key--process-page :around
               #'cae-ui-which-key-show-workspace-a))
 
