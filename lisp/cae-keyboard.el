@@ -99,16 +99,6 @@
              ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
              ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument))
-;; I'm currently not using home row numbers because I'm using Lispy. I've also
-;; started using the numpad layer on my keyboard more and `avy' rather than
-;; relative line numbers.
-;;(unless (or (modulep! :private meow)
-;;            (modulep! :editor lispy))
-;;  (defconst home-row-numbers-qwerty
-;;    (cae-keyboard-remap '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)))
-;;  (home-row-numbers)
-;;  (map! :map universal-argument-map
-;;        "l" #'cae-keyboard-insert-current-prefix))
 (after! embark
   (eval `(map! :map embark-collect-mode-map
                ,(cae-keyboard-kbd "1") #'cae-keyboard-digit-argument
