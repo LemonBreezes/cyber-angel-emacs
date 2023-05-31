@@ -687,8 +687,8 @@
         "C-e" #'avy-goto-end-of-line
         "C-SPC" #'avy-goto-char-timer)
   ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
-  ;; branch I'm currently using because I should be able to get this working
-  ;; using `avy-styles-alist' instead.
+  ;; fork I'm currently using because I should be able to get this working using
+  ;; `avy-styles-alist' instead.
   (advice-add #'avy-goto-end-of-line
               :around
               (cae-defun cae-avy-line-no-column-overlay-a (oldfun &rest args)
