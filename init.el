@@ -72,17 +72,18 @@
 
        :private
        ;; exwm
-       (corfu +indexed)
-       debugger
-       (dirvish +icons +dirvish)
-       eshell
-       dired
-       lisp
-       misc-applications
-       modeline
+       ;(corfu +indexed)
+       ;debugger
+       ;(dirvish +icons +dirvish)
+       ;eshell
+       ;dired
+       ;lisp
+       ;misc-applications
+       ;modeline
        (meow +leader)
-       unpackaged
-       vc)
+       ;unpackaged
+       ;vc
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
