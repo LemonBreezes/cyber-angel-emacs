@@ -763,8 +763,9 @@
 (doom-load-packages-incrementally
  `(,@(when (modulep! :private dirvish)
        '(dired transient dirvish))
+   ,@'(auth-source tramp-compat tramp-integration tramp)
    ,@(when (autoloadp (symbol-function 'auto-sudoedit-mode))
-       '(auth-source tramp-compat tramp-integration tramp tramp-sh auto-sudoedit))
+       '(tramp-sh auto-sudoedit))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
