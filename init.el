@@ -61,7 +61,6 @@
        (cc +lsp +tree-sitter)
        (web +lsp +tree-sitter)
        (sh +lsp +tree-sitter)
-       solidity
 
        :os
        (:if IS-MAC macos)
