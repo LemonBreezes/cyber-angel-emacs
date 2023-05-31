@@ -166,6 +166,10 @@
              (,(cae-keyboard-kbd ">") special-lispy-slurp "")
              (,(cae-keyboard-kbd "<") special-lispy-barf "")
              (,(cae-keyboard-kbd ".") special-lispy-repeat "Other")
+             (,(cae-keyboard-kbd-reverse ",")
+              ,(lookup-key cae-keyboard--lispy-mode-map-backup
+                           (cae-keyboard-kbd-reverse ","))
+              "Other")
              ("+" special-lispy-join "")
              ("/" special-lispy-splice "")
              ("-" special-lispy-ace-subword "")
