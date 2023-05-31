@@ -31,4 +31,9 @@
         (bookmark-alist (persp-parameter 'bookmark-alist)))
   (call-interactively #'bookmark-set))
 
+(map! :leader
+      :prefix "w"
+      :desc "Jump to project bookmark" "j" #'cae-project-bookmark-jump
+      :desc "Set project bookmark" "m" #'cae-project-bookmark-set)
+
 ;; TODO make the bookmark file update when the branch changes
