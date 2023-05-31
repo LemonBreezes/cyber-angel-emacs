@@ -84,17 +84,17 @@
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
 
-;;(defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
-;;  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
-;;                         cae-cheatsheets-tab-bar-hydra-alist))
-;;
-;;(defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
-;;  (setq cae-cheatsheets-tab-bar-hydra-alist
-;;        (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
-;;
-;;(when (modulep! :ui workspaces)
-;;  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
-;;  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
+(defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
+  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
+                         cae-cheatsheets-tab-bar-hydra-alist))
+
+(defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
+  (setq cae-cheatsheets-tab-bar-hydra-alist
+        (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
+
+(when (modulep! :ui workspaces)
+  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
+  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
 
 ;;; Hide Hercules when switching tabs
 
