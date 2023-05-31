@@ -148,8 +148,9 @@
              (get-buffer-window ispell-choices-buffer))
         (and (symbol-file this-command)
              (cl-member (file-name-base (symbol-file this-command))
-                        '( "ace-window"
-                           "tabgo")
+                        '("ace-window"
+                          "tabgo"
+                          "switch-window")
                         :test #'string=)))))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
