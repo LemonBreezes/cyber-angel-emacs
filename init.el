@@ -15,16 +15,17 @@
       doom-localleader-key "C-c l")
 (setq native-comp-async-jobs-number (num-processors))
 
-;; Do not override other keymaps with `general-override-mode'.
+;; Do not override other keymaps with `general-override-mode'. This was created
+;; because Doom's leader key was overriding Eat's `eat-self-input' keybinding.
 (after! general
   (general-override-mode -1)
-  (define-minor-mode cae-doom-leader-mode
-    "Minor mode to enable the doom-leader keymap."
+  (define-minor-mode cae-general-override-mode
+    "Minor mode to enable `general-override-mode-map' without overriding other keymaps."
     :global t
     :init-value nil
     :lighter nil
     :keymap general-override-mode-map)
-  (cae-doom-leader-mode +1))
+  (cae-general-override-mode +1))
 
 (doom! :completion
        (vertico +icons)
