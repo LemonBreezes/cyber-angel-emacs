@@ -377,7 +377,12 @@
     ;;         ("?" lispy-x-more-verbosity "help" :exit nil)))
     ))
 
-;;; TODO Worf
+;;; Worf
+(after! worg
+  (let ((bindings
+         '(
+           ()
+           )))))
 
 ;;; Basically a custom input method
 
