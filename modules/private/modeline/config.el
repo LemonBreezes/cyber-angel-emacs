@@ -208,6 +208,7 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
     (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
     (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
     (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
     (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
     (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
