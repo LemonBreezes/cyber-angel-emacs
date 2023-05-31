@@ -203,7 +203,11 @@
   (add-to-list 'projectile-project-root-files-top-down-recurring "compile_commands.json")
   ;; Set up compilation.
   (setq projectile-per-project-compilation-buffer t
-        compilation-read-command nil))
+        compilation-read-command nil)
+  (after! which-key
+    (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist))
+  )
 
 (after! tramp
   (setq tramp-terminal-prompt-regexp "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]"))
