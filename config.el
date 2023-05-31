@@ -859,25 +859,7 @@
   (map! (:after eshell
          :map eshell-mode-map
          "TAB" #'completion-at-point
-         "<tab>" #'completion-at-point)
-        :prefix "C-."
-        "c" #'completion-at-point       ;capf
-        "t" #'complete-tag              ;etags
-        "d" #'cape-dabbrev              ;or dabbrev-completion
-        "f" #'cape-file
-        "k" #'cape-keyword
-        "h" #'cape-history
-        "s" #'cape-symbol
-        "a" #'cape-abbrev
-        "i" #'cape-ispell
-        "l" #'cape-line
-        "w" #'cape-dict
-        "\\" #'cape-tex
-        "_" #'cape-tex
-        "^" #'cape-tex
-        "&" #'cape-sgml
-        "r" #'cape-rfc1345
-        "." #'copilot-complete))
+         "<tab>" #'completion-at-point)))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
