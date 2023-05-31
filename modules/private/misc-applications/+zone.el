@@ -37,8 +37,9 @@
   ;; Do not zone in a popup window.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
-    (let ((win (selected-window)))
+    (let ((win (selected-window))
+          (wconf (current-window-configuration)))
       (select-window (car (doom-visible-windows)))
+      (delete-other-windows)
       (apply oldfun args)
-      (when (window-live-p win)
-        (select-window win)))))
+      (set-window-configuration wconf))))
