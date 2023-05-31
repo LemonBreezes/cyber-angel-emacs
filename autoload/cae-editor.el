@@ -244,6 +244,7 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-titlecase-word-dwim ()
+  "Titlecase the current word or the selected region."
   (interactive)
   (if (region-active-p)
       (call-interactively #'titlecase-region)
