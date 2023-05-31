@@ -462,7 +462,8 @@
   :defer t :init
   (map! :leader "g" #'gptel)
   :config
-  (setq gptel-default-mode 'org-mode))
+  (setq gptel-default-mode 'org-mode
+        gptel-prompt-string "*"))
 
 
 ;;; Editor
