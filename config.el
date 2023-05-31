@@ -882,58 +882,58 @@
   ;;      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
   ;;      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
   ;;  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
-  ;;
-  ;;(use-package! symbol-overlay
-  ;;  :defer t :init
-  ;;  (map! "M-i" #'symbol-overlay-put
-  ;;        "M-I" #'symbol-overlay-remove-all
-  ;;        "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
-  ;;        "M-P" #'symbol-overlay-switch-backward
-  ;;        :leader
-  ;;        :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
-  ;;  (add-hook 'prog-mode-hook #'symbol-overlay-mode)
-  ;;  :config
-  ;;  (map! :map symbol-overlay-map
-  ;;        "<f6>" #'cae-symbol-overlay-cheatsheet
-  ;;        "N" #'symbol-overlay-switch-forward
-  ;;        "P" #'symbol-overlay-switch-backward
-  ;;        "r" #'symbol-overlay-rename
-  ;;        "-" #'negative-argument)
-  ;;  ;; LSP provides its own symbol highlighting.
-  ;;  (add-hook 'lsp-mode-hook
-  ;;            (cae-defun cae-disable-symbol-overlay-h ()
-  ;;              (symbol-overlay-mode -1)))
-  ;;  (when (modulep! :editor multiple-cursors)
-  ;;    ;; Don't distract me while I'm doing multiple cursor calculus.
-  ;;    (after! multiple-cursors-core
-  ;;      (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
-  ;;  (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
-  ;;  ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
-  ;;  ;; overlay in the buffer. This is probably a bug.
-  ;;  (advice-add #'symbol-overlay-get-list
-  ;;              :around #'cae-hacks-symbol-overlay-reverse-list-a)
-  ;;  (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
-  ;;    (if (eq (car args) -1)
-  ;;        (nreverse (apply oldfun args))
-  ;;      (apply oldfun args))))
-  ;;
-  ;;;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
-  ;;;; `sentence-end-double-space'. This package's settings should be tweaked if you
-  ;;;; use multiple languages.
-  ;;(use-package! sentex
-  ;;  :defer t :init
-  ;;  (if (version<= "30" emacs-version)
-  ;;      (setq forward-sentence-function #'cae-forward-sentence-function)
-  ;;    (map! [remap kill-sentence] #'sentex-kill-sentence
-  ;;          [remap forward-sentence] #'sentex-forward-sentence
-  ;;          [remap backward-sentence] #'sentex-backward-sentence)))
-  ;;
-  ;;(use-package! edit-indirect
-  ;;  :defer t :init
-  ;;  (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
-  ;;
-  ;;(use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-  ;;  :defer t)
+
+  (use-package! symbol-overlay
+    :defer t :init
+    (map! "M-i" #'symbol-overlay-put
+          "M-I" #'symbol-overlay-remove-all
+          "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
+          "M-P" #'symbol-overlay-switch-backward
+          :leader
+          :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
+    (add-hook 'prog-mode-hook #'symbol-overlay-mode)
+    :config
+    (map! :map symbol-overlay-map
+          "<f6>" #'cae-symbol-overlay-cheatsheet
+          "N" #'symbol-overlay-switch-forward
+          "P" #'symbol-overlay-switch-backward
+          "r" #'symbol-overlay-rename
+          "-" #'negative-argument)
+    ;; LSP provides its own symbol highlighting.
+    (add-hook 'lsp-mode-hook
+              (cae-defun cae-disable-symbol-overlay-h ()
+                (symbol-overlay-mode -1)))
+    (when (modulep! :editor multiple-cursors)
+      ;; Don't distract me while I'm doing multiple cursor calculus.
+      (after! multiple-cursors-core
+        (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
+    (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
+    ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
+    ;; overlay in the buffer. This is probably a bug.
+    (advice-add #'symbol-overlay-get-list
+                :around #'cae-hacks-symbol-overlay-reverse-list-a)
+    (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
+      (if (eq (car args) -1)
+          (nreverse (apply oldfun args))
+        (apply oldfun args))))
+
+  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
+  ;; `sentence-end-double-space'. This package's settings should be tweaked if you
+  ;; use multiple languages.
+  (use-package! sentex
+    :defer t :init
+    (if (version<= "30" emacs-version)
+        (setq forward-sentence-function #'cae-forward-sentence-function)
+      (map! [remap kill-sentence] #'sentex-kill-sentence
+            [remap forward-sentence] #'sentex-forward-sentence
+            [remap backward-sentence] #'sentex-backward-sentence)))
+
+  (use-package! edit-indirect
+    :defer t :init
+    (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
+
+  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
+    :defer t)
 
   (after! (:all outline which-key)
     (which-key-add-keymap-based-replacements outline-minor-mode-map
