@@ -20,7 +20,6 @@
 (package! circadian)
 (package! standard-themes)
 (package! ef-themes)
-(package! theme-magic)
 
 ;;; Tools
 (package! nov)
