@@ -48,6 +48,7 @@
 (package! hungry-delete)
 (package! file-info)
 (package! titlecase)
+(package! macrursors :recipe (:host github :repo "corytertel/macrursors"))
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
