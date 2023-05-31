@@ -491,6 +491,11 @@
 (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
       :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
 
+(map! [remap scroll-up-command] #'View-scroll-half-page-forward
+      [remap scroll-down-command] #'View-scroll-half-page-backward
+      [remap scroll-other-window] #'my-View-scroll-half-page-forward-other-window
+      [remap scroll-other-window-down] #'my-View-scroll-half-page-backward-other-window)
+
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
