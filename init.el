@@ -40,6 +40,8 @@ overriding other keymaps."
               (define-key general-override-mode-map (kbd "C-c '") nil)))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
+(setq doom-theme 'modus-vivendi)
+
 (defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p t
