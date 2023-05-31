@@ -135,7 +135,7 @@ file to edit."
   (let ((target-window
          (cl-find-if (lambda (win)
                        (and (not (eq win (selected-window)))
-                            (window-buffer win)o
+                            (window-buffer win)
                             (buffer-local-value 'default-directory
                                                 (window-buffer win))))
                      cae-window-history)))
