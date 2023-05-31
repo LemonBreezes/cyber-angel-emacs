@@ -71,8 +71,7 @@
           (font-lock-mode)
           ;; (glasses-mode)
           ;; (overwrite-mode)
-          (ruler-mode)
-          (visual-line-mode)))
+          (ruler-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                    projectile-mode
                                    flycheck-mode
