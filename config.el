@@ -1049,12 +1049,13 @@
     (org-ai-install-yasnippets)))
 
 (defun with-minibuffer-keymap (keymap)
-  (lambda (fn &rest args)
-    (minibuffer-with-setup-hook
-        (lambda ()
-          (use-local-map
-           (make-composed-keymap keymap (current-local-map))))
-      (apply fn args))))
+  (eval `(lambda (fn &rest args)
+          (minibuffer-with-setup-hook
+              (lambda ()
+                (use-local-map
+                 (make-composed-keymap ,keymap (current-local-map))))
+            (apply fn args)))
+        t))
 
 (defvar embark-completing-read-prompter-map
   (let ((map (make-sparse-keymap)))
