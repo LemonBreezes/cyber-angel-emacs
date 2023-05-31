@@ -40,13 +40,13 @@ overriding other keymaps."
               (define-key general-override-mode-map (kbd "C-c '") nil)))
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
-(defvar cae-init-ui-enabled-p t
+(defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is disabled.")
-(defvar cae-init-tools-enabled-p t
+(defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is disabled.")
-(defvar cae-init-editor-enabled-p t
+(defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is disabled.")
-(defvar cae-init-autocompletion-enabled-p t
+(defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is disabled.")
 
 (condition-case err
