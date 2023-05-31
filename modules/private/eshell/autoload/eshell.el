@@ -12,3 +12,12 @@
 (defun +eshell-set-up-autocompletion ()
   (add-hook 'completion-at-point-functions
             #'cape-file nil t))
+
+;;;###autoload
+(defun cae-eshell-quit-or-delete-char (arg)
+  "Delete a character (ahead of the cursor) or quit eshell if there's nothing to
+delete."
+  (interactive "p")
+  (if (eolp)
+      (eshell-life-is-too-much)
+    (delete-char arg)))
