@@ -57,6 +57,7 @@
           tree-sitter-mode
           dap-mode
           spell-fu-mode
+          auto-sudoedit-mode
           meow-insert-mode
           theme-magic-export-theme-mode
           eat-eshell-mode
