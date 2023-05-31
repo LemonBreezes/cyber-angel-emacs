@@ -46,7 +46,7 @@
                     sly-mode-hook))
       (add-hook hook #'cae-yas-setup-capf))
     :config
-    (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
+    (add-to-list 'completion-at-point-functions 'cape-yasnippet nil #'eq)))
 
 (when (modulep! :lang org)
   (use-package! org-block-capf
