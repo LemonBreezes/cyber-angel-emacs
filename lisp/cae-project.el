@@ -43,7 +43,8 @@
          (bookmark-default-file (cae-project--get-bookmark-file ,project))
          (bookmark-watch-bookmark-file nil)
          (bookmark-save-flag nil))
-     (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file)
+     (ignore bookmark-alist bookmark-default-file bookmark-watch-bookmark-file
+             bookmark-save-flag)
      ,@body))
 
 (defun cae-project-bookmark-set (&optional name no-overwrite)
