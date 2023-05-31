@@ -19,7 +19,6 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
-
 ;; Isearch is better in `Info-mode'
 (map! :map Info-mode-map
       :m "/" #'isearch-forward-regexp
