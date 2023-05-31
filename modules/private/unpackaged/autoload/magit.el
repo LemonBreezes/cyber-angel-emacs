@@ -20,8 +20,7 @@ command was called, go to its unstaged changes section."
                do (condition-case nil
                       (magit-section-forward)
                     (error (cl-return (magit-status-goto-initial-section-1))))))
-    (recenter)
-    (run-at-time 0.01 nil #'cae-hacks-garbage-collect)))
+    (recenter)))
 
 ;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status-here ()
@@ -33,8 +32,7 @@ non-nil `magit-status-goto-file-position'."
   (let ((magit-status-goto-file-position t))
     (call-interactively #'magit-status))
   (delete-other-windows)
-  (recenter)
-  (run-at-time 0.01 nil #'cae-hacks-garbage-collect))
+  (recenter))
 
 ;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status ()
