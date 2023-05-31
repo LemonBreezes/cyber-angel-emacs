@@ -281,7 +281,23 @@
     (add-to-list 'lsp-disabled-clients 'mspyls)))
 
 (use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode))
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :config
+  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+  (setf (alist-get 'rjsx-mode topsy-mode-functions)
+        (defun +rsjx-topsy-fn ()
+          (when (> (window-start) 1)
+            (save-excursion
+              (goto-char (window-start))
+              (while (save-excursion
+                       (forward-line -1)
+                       (looking-at-p "^\\s-*//"))
+                (forward-line -1))
+              (ignore-errors
+                (js2-beginning-of-defun))
+              (back-to-indentation)
+              (font-lock-ensure (point) (point-at-eol))
+              (buffer-substring (point) (point-at-eol)))))))
 
 
 ;;; Editor
