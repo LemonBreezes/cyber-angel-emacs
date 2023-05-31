@@ -195,6 +195,7 @@
 (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
 
 (setq delete-by-moving-to-trash t
+      remote-file-name-inhibit-delete-by-moving-to-trash t
       history-length (expt 2 16))
 
 (setq bookmark-bmenu-file-column 50
