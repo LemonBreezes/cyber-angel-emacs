@@ -57,10 +57,12 @@
     (if (or (null cae-multi-abbrev--file-mtime)
             (equal mtime cae-multi-abbrev--file-mtime))
         (progn (apply orig-fun args)
-               (setq cae-multi-abbrev--file-mtime mtime))
+               (setq cae-multi-abbrev--file-mtime mtime)
+               (cae-multi-abbrev-push-changes-a))
       (message "Abbrev file modified since last save. Disabling abbrev file auto-commit.")
       (apply orig-fun args)
-      (setq cae-multi-abbrev--file-mtime mtime))))
+      (setq cae-multi-abbrev--file-mtime mtime
+            cae-multi-abbrev--auto-commit-disabled t))))
 
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
