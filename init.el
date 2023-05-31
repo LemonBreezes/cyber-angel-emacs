@@ -76,7 +76,7 @@
        misc-applications
        ;; helm
        modeline
-       unpackaged
+       ;; unpackaged
        vc)
 
 ;; Local Variables:
