@@ -176,34 +176,34 @@
         ("^\\*org-roam\\*" :size 60 :side 'left :select nil
          :quit nil)
         ("^\\*info.*" :size #'cae-popup-resize-help-buffer
-         :side 'right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+         :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
         ("^\\*\\(?:Wo\\)?Man " :size #'cae-popup-resize-help-buffer
-         :side 'right :ttl t :select t :quit t :ttl 0 :vslot -6)
+         :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
         ("^\\*tldr\\*" :size #'cae-popup-resize-help-buffer
-         :side 'right :select t :quit t)
+         :side right :select t :quit t)
         ("^\\*\\([Hh]elp\\|Apropos\\)"
-         :size #'cae-popup-resize-help-buffer :side 'right :select t :quit t :ttl 0
+         :size #'cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
          :slot 2 :vslot -8)
         ("^ \\*Metahelp.*" :size #'cae-popup-resize-help-buffer
-         :side 'right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+         :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
         ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom
          :select t :quit t :ttl nil :vslot 99)
-        ("^\\*eww.*" :size #'cae-popup-resize-help-buffer :side 'right
+        ("^\\*eww.*" :size #'cae-popup-resize-help-buffer :side right
          :select t :ttl nil)
         ("^\\*w3m\\*$" :size #'cae-popup-resize-help-buffer
-         :side 'right :select t :ttl nil)
+         :side right :select t :ttl nil)
         ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
          :modeline nil :quit nil :ttl nil)
         ("^SpeedRect Command Key Help$" :size #'cae-popup-resize-help-buffer
-         :side 'right :select nil :quit t :ttl 0)
+         :side right :select nil :quit t :ttl 0)
         ("^\\*ednc-log\\*$" :size #'cae-popup-resize-help-buffer
-         :side 'right :select nil :quit t :ttl nil)
+         :side right :select nil :quit t :ttl nil)
         ("^\\*tldr\\*$" :size #'cae-popup-resize-help-buffer
-         :side 'right :ttl t :select t :quit t :ttl 0)
+         :side right :ttl t :select t :quit t :ttl 0)
         ("^\\*Shortdoc .*" :size #'cae-popup-resize-help-buffer
-         :side 'right :ttl t :select t :quit t :ttl 0)
+         :side right :ttl t :select t :quit t :ttl 0)
         ("^\\*devdocs\\*$" :width 122
-         :side 'right :ttl t :select t :quit t :ttl 0)
+         :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side 'bottom :select t :quit t
          :ttl 0)
         ("^\\*chatgpt\\*$" :size 0.25 :select t :quit nil :ttl nil)))
