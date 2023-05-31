@@ -187,7 +187,6 @@
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
-          (?h . ?h)
           (?\; . ?\;)                   ;For embark
           (?\s . ?\s)                   ;For pop mark
           ;; For popups
