@@ -18,8 +18,7 @@
               which-key-idle-delay nil
               (lambda ()
                 (when which-key-inhibit
-                  (which-key-show-keymap
-                   'pulseaudio-control-map))))))
+                  (which-key-show-keymap 'pulseaudio-control-map t))))))
   :config
   (setq pulseaudio-control-use-default-sink t)
   (pulseaudio-control-default-keybindings))
