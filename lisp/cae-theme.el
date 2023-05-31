@@ -83,7 +83,3 @@
     (setq calendar-latitude 0
           calendar-longitude 0)
     (message "ERROR: Calendar latitude and longitude are not set.")))
-
-(unless (display-graphic-p)
-  (setq +ligatures-in-modes nil
-        +ligatures-extras-in-modes nil))
