@@ -32,7 +32,6 @@
 (package! w3m)
 (package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
-(package! chatgpt-shell :recipe (:host github :repo "xenodium/chatgpt-shell"))
 
 ;; These are used for their autoloads.
 (package! crontab-mode)
