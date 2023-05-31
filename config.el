@@ -1032,8 +1032,7 @@
                      (bound-and-true-p multiple-cursors-mode)))))
 
   (use-package! isearch-dabbrev
-    :defer t
-    :init
+    :defer t :init
     (map! :map isearch-mode-map
           "M-/" #'isearch-dabbrev-expand
           "C-M-/" #'isearch-dabbrev-expand))
