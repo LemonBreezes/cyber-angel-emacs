@@ -178,9 +178,8 @@
 ;; This block might seem crazy, but it's how I've gotten parrot mode to work
 ;; and be silent on startup.
 (use-package! parrot
-  :defer t :init
-  (after! magit (require 'parrot))
-  (after! org (require 'parrot))
+  :defer t
+  :after (:any magit org)
   :config
   (setopt parrot-animate 'hide-static
           parrot-num-rotations 10
