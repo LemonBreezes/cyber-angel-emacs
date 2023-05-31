@@ -45,7 +45,6 @@
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        magit
-       pdf
        (lsp +peek)
        tree-sitter
 
