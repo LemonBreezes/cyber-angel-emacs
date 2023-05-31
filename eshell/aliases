@@ -14,7 +14,7 @@ alias cd-    cd -
 alias cd--   cd -2
 
 alias ff    find-file-other-window $1
-alias gg    cae-unpackaged-magit-status
+alias gg    cae-unpackaged-magit-status-1
 
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom $*
 alias doom   DOOMDIR=~/.doom.d/         ~/.emacs.d/bin/doom          $*
