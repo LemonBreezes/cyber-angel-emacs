@@ -105,6 +105,7 @@
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
+        [remap dirvish-emerge-menu] #'cae-dired-dirvish-emerge-menu
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "N" #'dirvish-narrow
