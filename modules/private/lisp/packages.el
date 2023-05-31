@@ -3,3 +3,4 @@
 
 (package! outline-minor-faces)
 (package! nameless)
+(package! topsy)
