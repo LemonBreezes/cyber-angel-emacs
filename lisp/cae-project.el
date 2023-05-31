@@ -29,4 +29,6 @@
   (interactive)
   (let ((bookmark-default-file (cae-project--bookmark-file)))
         (bookmark-alist (persp-parameter 'bookmark-alist)))
-    (call-interactively #'bookmark-set))
+  (call-interactively #'bookmark-set))
+
+;; TODO make the bookmark file update when the branch changes
