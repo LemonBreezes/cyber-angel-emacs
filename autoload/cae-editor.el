@@ -86,8 +86,9 @@
   (call-interactively #'next-buffer))
 
 
+;;;###autoload (autoload 'cae-embark-collect-cheatsheet "autoload/cae-editor" nil t)
 (hercules-def
- :toggle-funs #'embark-collect-cheatsheet1
+ :toggle-funs #'embark-collect-cheatsheet
  :keymap 'embark-collect-mode-map
  :hide-funs '()
  :transient t)
