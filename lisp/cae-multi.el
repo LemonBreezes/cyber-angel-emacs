@@ -17,7 +17,7 @@
                       (directory-files cae-multi-secrets-dir t "\\.el$")))
   (load file nil t))
 
-(setq abbrev-file-name (concat cae-multi-secrets-dir "abbrev_defs"))
+(setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
 (after! calc
