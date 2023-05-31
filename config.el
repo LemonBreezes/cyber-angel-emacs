@@ -822,7 +822,17 @@
      +default/search-notes-for-symbol-at-point
      +default/search-emacsd
      consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
-     :preview-key 'any)))
+     :preview-key 'any)
+    ;; Optionally configure the register formatting. This improves the register
+    ;; preview for `consult-register', `consult-register-load',
+    ;; `consult-register-store' and the Emacs built-ins.
+    (setq register-preview-delay 0.5
+          register-preview-function #'consult-register-format)
+
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window)
+  ))
 
 (after! cc-mode
   (if (display-graphic-p)
