@@ -423,6 +423,7 @@
       (:after man
        :map Man-mode-map
        :n "o" #'ace-link-man))
+(define-key resize-window-repeat-map "_" #'shrink-window)
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
@@ -485,8 +486,9 @@
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
   (when (modulep! :editor multiple-cursors)
-    (add-to-list 'mc--default-cmds-to-run-for-all #'sp-delete-char)
-    (add-to-list 'mc--default-cmds-to-run-for-all #'sp-backward-delete-char)))
+    (after! multiple-cursors
+      (add-to-list 'mc--default-cmds-to-run-for-all #'sp-delete-char)
+      (add-to-list 'mc--default-cmds-to-run-for-all #'sp-backward-delete-char))))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
@@ -502,8 +504,8 @@
         "M-j" #'avy-isearch)
   (when (modulep! :completion vertico)
     (after! vertico
-      :map vertico-map
-      "M-j" #'vertico-quick-jump))
+      (map! :map vertico-map
+            "M-j" #'vertico-quick-jump)))
   :config
   (setq avy-timeout-seconds 0.25
         avy-all-windows t
