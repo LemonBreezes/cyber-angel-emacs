@@ -47,7 +47,6 @@ overriding other keymaps."
        hl-todo
        hydra
        ;; (ligatures +extra +iosevka)
-       modeline
        nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
