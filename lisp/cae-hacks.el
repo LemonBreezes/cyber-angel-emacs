@@ -61,6 +61,8 @@
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
 
+(advice-add #'revert-buffer-quick :around #'cae-hacks-always-yes-a)
+
 ;; Compile Vterm without asking.
 (defvar vterm-always-compile-module t)
 
