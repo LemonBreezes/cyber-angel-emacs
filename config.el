@@ -489,8 +489,6 @@
       "C-S-i" #'doom/dumb-dedent
       [remap previous-buffer] #'cae-previous-buffer
       [remap next-buffer] #'cae-next-buffer
-      [remap mark-sexp] #'er/mark-symbol
-      [remap mark-word] #'er/mark-word
       (:when (modulep! :completion vertico)
        [remap apropos] nil
                                         ;`consult-apropos' is obsolete.
