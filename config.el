@@ -258,7 +258,7 @@
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
     (setopt lsp-headerline-breadcrumb-enable t
-            lsp-enable-snippet nil
+            lsp-enable-snippet t
             lsp-enable-text-document-color t
             lsp-enable-folding t
             lsp-semantic-tokens-enable t)
