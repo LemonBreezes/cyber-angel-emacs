@@ -158,7 +158,6 @@
           "." #'meow-bounds-of-thing
           "-" #'negative-argument
           "'" #'repeat
-          "<escape>" #'doom/escape
           ;; commands not bound by default
           "Z" #'meow-pop-all-selection
           ;; ,(cae-keyboard-kbd "&") #'meow-query-replace
