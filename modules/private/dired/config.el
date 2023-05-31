@@ -183,6 +183,8 @@
   ;;  (define-key dirvish-mode-map (vector 'remap fn)
   ;;    (eval `(cae-dired-find-file-wrapper ,fn))))
 
+  (advice-add #'find-file :around #'cae-dired-find-file-a)
+
   (add-hook 'doom-switch-buffer-hook #'cae-dired-set-layout-h))
 
 (add-to-list 'find-directory-functions #'cae-dired-load-dirvish-h t)
