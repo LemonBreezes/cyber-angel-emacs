@@ -40,7 +40,7 @@
 
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
-    :defer t:init
+    :defer t :init
     (map! :map cae-completion-mode-map
           "C-. s" #'cape-yasnippet)
     (dolist (hook '(prog-mode-hook
