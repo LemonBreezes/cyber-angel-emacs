@@ -36,6 +36,20 @@
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
+(when (and (modulep! :editor fold)
+           (not (modulep! :editor evil)))
+  (setq which-key-replacement-alist
+        (delete '(("\\`C-c C-f\\'") nil . "fold")
+                which-key-replacement-alist))
+  (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
+  (define-key doom-leader-map "\C-f" nil)
+  (map! (:prefix ("x" . "fold")
+         "k"     #'vimish-fold-delete
+         "K" #'vimish-fold-delete-all
+         "t"     #'+fold/toggle
+         "C" #'+fold/close-all
+         "o"     #'+fold/open
+         "O" #'+fold/open-all)))
 
 ;; I don't use Deft.
 (when (and (not (modulep! :ui deft))
