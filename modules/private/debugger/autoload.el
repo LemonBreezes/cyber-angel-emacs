@@ -1,10 +1,9 @@
 ;;; private/debugger/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun cae-debugger-quit-session-a ()
+(defun cae-debugger-quit-session-a (_)
   (ignore-errors
     (let ((ignore-window-parameters t))
       (cl-loop for buf being the buffers
                when (string-match-p "gdb" (buffer-name buf)) do
-               (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))
-    (hydra-keyboard-quit)))
+               (cae-hacks-always-yes-a #'doom-kill-buffer-and-windows buf)))))
