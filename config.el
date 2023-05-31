@@ -247,7 +247,9 @@
 ;;; Editor
 
 ;; Ensure local elisp packages are up-to-date.
-(add-hook 'after-save-hook #'cae-compile-rebuild-package)
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
 
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
