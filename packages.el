@@ -9,7 +9,7 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
-;;(package! lv)
+(package! lv)
                                         ;Added because I was getting an error
                                         ;about it not being installed.
 
@@ -22,6 +22,7 @@
 (package! anzu)
 (package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
+(package! outline-minor-faces)
 
 ;; cae-theme.el
 (package! modus-themes)
