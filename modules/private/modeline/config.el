@@ -56,6 +56,7 @@
           dtrt-indent-mode
           tree-sitter-mode
           dap-mode
+          spell-fu-mode
           eat-eshell-mode
           modern-c++-font-lock-mode))
   (setq minions-available-modes
