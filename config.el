@@ -536,7 +536,9 @@
       ;; "<next>" #'vertico-scroll-up)
       (:after man
        :map Man-mode-map
-       "o" #'ace-link-man))
+       "o" #'ace-link-man)
+      :leader
+      :desc "help" "h" help-map)
 (define-key resize-window-repeat-map "_" #'shrink-window)
 (let ((embark-act-key "<f8>"))
   (map! embark-act-key #'embark-act
