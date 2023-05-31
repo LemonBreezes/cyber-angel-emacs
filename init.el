@@ -15,7 +15,7 @@
        hl-todo
        hydra
        (ligatures +extra +iosevka)
-       ;; modeline
+       nav-flash
        (popup +defaults)
        ophints
        (vc-gutter +pretty +diff-hl)
