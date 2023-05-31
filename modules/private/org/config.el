@@ -32,7 +32,6 @@
         "]" #'cae-org-insert-checkbox-or-bracket))
 
 (use-package! org-jira
-  :disabled t
   :defer t :init
   (map! :leader
         :desc "Jira" "J" #'cae-org-jira-hydra/body)
