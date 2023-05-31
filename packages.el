@@ -39,7 +39,6 @@
 (package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
 
-
 ;; cae-multi.el
 (package! git-auto-commit-mode)
 (package! ts)
