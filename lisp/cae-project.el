@@ -175,7 +175,8 @@
 (setf (alist-get 'project-bookmark marginalia-annotator-registry)
       (alist-get 'bookmark marginalia-annotator-registry))
 
-(push '((nil . "cae-project-\\(bookmark-.*\\)") . (nil . "\\1"))
-      which-key-replacement-alist)
+(after! which-key
+  (push '((nil . "cae-project-\\(bookmark-.*\\)") . (nil . "\\1"))
+        which-key-replacement-alist))
 
 (add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
