@@ -43,6 +43,9 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+(when (modulep! :ui workspaces)
+  ())
+
 ;;; UI
 
 (when cae-init-ui-enabled-p
@@ -868,7 +871,8 @@
     :defer t :init
     (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook))
       (add-hook hook #'jinx-mode))
-    (advice-add 'jinx--correct-replace :before #'cae-jinx--add-to-abbrev)))
+    ;;(advice-add 'jinx--correct-replace :before #'cae-jinx--add-to-abbrev)
+    ))
 
 
 ;;; Autocompletion
