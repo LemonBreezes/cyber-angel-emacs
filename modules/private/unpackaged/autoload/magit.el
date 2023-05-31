@@ -38,7 +38,7 @@ command was called, go to its unstaged changes section."
            (not (buffer-file-name))
            (not (magit-file-tracked-p (buffer-file-name))))))
 
-;;;###autoload
+;;;###autoload (autoload '+vc/smerge-hydra/body "private/unpackaged/autoload/hydra" nil t)
 (defhydra +vc/smerge-hydra (:hint nil
                             :pre (if (not smerge-mode) (smerge-mode 1))
                             ;; Disable `smerge-mode' when quitting hydra if
