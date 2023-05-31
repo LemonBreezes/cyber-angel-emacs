@@ -95,4 +95,6 @@ _Q_: Disconnect     _sl_: List locals        _bl_: Set log message
   ("es" dap-eval-thing-at-point)
   ("er" dap-ui-expressions-remove)
   ("q" nil "quit" :color blue)
-  ("Q" dap-disconnect :color red))
+  ("Q" dap-disconnect :color red)
+  ("<f6>" nil "quit")
+  ("R" cae-debugger-dap-kill-all-sessions-and-restart "Restart"))
