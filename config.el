@@ -311,10 +311,6 @@
 
 ;; Use Emacs as the default editor for shell commands.
 ;; `dwim-shell-command'.
-(define-key (current-global-map)
-  [remap async-shell-command] 'with-editor-async-shell-command)
-(define-key (current-global-map)
-  [remap shell-command] 'with-editor-shell-command)
 (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
   (dolist (fn '(with-editor-export-editor
                 with-editor-export-hg-editor
