@@ -29,6 +29,9 @@
                        ;; zone-pgm-martini-swan-dive
                        zone-pgm-rat-race
                        zone-pgm-paragraph-spaz])
+  ;; For `zone-matrix'.
+  (defvar tabbar-mode nil)
+
   (require 'zone-matrix)
   (require 'zone-matrix-settings)
   (setq zone-programs [zone-matrix])
