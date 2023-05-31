@@ -120,7 +120,14 @@
     (message "Error: %S" err)
     (with-output-to-temp-buffer "*Backtrace*"
       (backtrace))
-    (ido-mode 1)))
+    (unless (or (bound-and-true-p vertico-mode)
+                (bound-and-true-p ido-mode)
+                (bound-and-true-p ivy-mode)
+                (bound-and-true-p selectrum-mode)
+                (bound-and-true-p icomplete-mode)
+                (bound-and-true-p helm-mode))
+      (icomplete-mode +1)
+      (icomplete-vertical-mode +1))))
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
