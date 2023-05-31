@@ -222,7 +222,7 @@
 ;;
 (when (modulep! +pretty)
   (use-package! nyan-mode
-    :when (display-graphic-p)
+    :when (cae-display-graphic-p)
     :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
