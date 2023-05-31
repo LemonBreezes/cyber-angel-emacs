@@ -156,5 +156,5 @@ file to edit."
                       "~/.config/emacs/bin/doom")))
          (cmd (concat doom " " (mapconcat 'identity args " "))))
     (if doom
-        (+eshell-run-command cmd)
+        (eshell-eval-command cmd)
       (error "Couldn't find doom executable"))))
