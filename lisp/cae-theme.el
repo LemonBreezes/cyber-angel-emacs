@@ -3,14 +3,13 @@
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 (defun cae-theme-customize-faces-h (_)
-  (when (modulep! :lang org)
-    (after! org
-      ;; This is how I like my ellipsis to look. Subtle.
-      (set-face-attribute 'org-ellipsis nil
-                          :inherit '(shadow default)
-                          :weight 'normal)
-      (set-face-attribute 'org-document-title nil
-                          :height 1.2)))
+  (after! org
+    ;; This is how I like my ellipsis to look. Subtle.
+    (set-face-attribute 'org-ellipsis nil
+                        :inherit '(shadow default)
+                        :weight 'normal)
+    (set-face-attribute 'org-document-title nil
+                        :height 1.2))
   ;; For `esh-autosuggest'.
   (after! company
     (set-face-attribute 'company-preview-common nil
