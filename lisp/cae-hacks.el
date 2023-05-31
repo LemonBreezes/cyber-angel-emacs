@@ -130,7 +130,8 @@
   (setq gc-cons-threshold cae-hacks-big-gc-threshold
         gc-cons-percentage cae-hacks-big-gc-percentage)
   (let ((gcmh-low-cons-threshold cae-hacks-big-gc-threshold)
-        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold))
+        (gcmh-high-cons-threshold cae-hacks-big-gc-threshold)
+        (garbage-collection-messages t))
     (apply oldfun args)))
 
 (defun cae-hacks-max-out-gc-h ()
