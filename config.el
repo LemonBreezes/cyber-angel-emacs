@@ -458,7 +458,7 @@
 
 (when (modulep! :emacs undo)
   (after! undo-fu
-    (setq)))
+    (setq undo-fu-allow-undo-in-region t)))
 
 ;; Make `smartparens' optional.
 (unless (modulep! :config default +smartparens)
