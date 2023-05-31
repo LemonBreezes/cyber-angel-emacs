@@ -499,6 +499,11 @@
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
 
+(when (modulep! :checkers spell)
+  (after! spell-fu
+    (add-hook 'nxml-mode-hook
+              (cae-defun cae-disable-spell-fu-h ()
+                (spell-fu-mode -1)))))
 
 ;;; Editor
 
