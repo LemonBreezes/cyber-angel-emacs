@@ -193,9 +193,7 @@
         (add-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)
       (remove-hook 'doom-escape-hook #'smart-mark-restore-cursor-when-cg)))
   (add-hook 'smart-mark-mode-hook #'cae-smart-mark-use-doom-escape-a)
-  (add-to-list 'smart-mark-mark-functions #'er/expand-region)
-  (add-to-list 'smart-mark-mark-functions #'er/mark-word)
-  (add-to-list 'smart-mark-mark-functions #'er/mark-symbol))
+  (add-to-list 'smart-mark-mark-functions #'er/expand-region))
 
 
 ;;; Tools
@@ -492,8 +490,6 @@
       "<f8>" #'embark-act
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
-      [remap mark-word] #'er/mark-word
-      [remap mark-sexp] #'er/mark-sexp
       [remap previous-buffer] #'cae-previous-buffer
       [remap next-buffer] #'cae-next-buffer
       (:when (modulep! :completion vertico)
