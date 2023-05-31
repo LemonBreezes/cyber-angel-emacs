@@ -56,8 +56,7 @@
           tree-sitter-mode
           dap-mode
           eat-eshell-mode
-          modern-c++-font-lock-mode
-          ))
+          modern-c++-font-lock-mode))
   (setq minions-available-modes
         '(;; (abbrev-mode)
           (auto-fill-mode)
