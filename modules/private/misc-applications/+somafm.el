@@ -4,7 +4,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        "@" #'somafm)
+        "@" #'+somafm)
   :config
   (map! :map somafm-mode-map
         :n "q" #'bury-buffer
