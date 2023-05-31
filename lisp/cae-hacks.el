@@ -89,6 +89,7 @@
 ;; Use the buffer local value of `diff-hl-reference-revision'
 (defadvice! cae-hacks-diff-hl-reference-revision-a (oldfun &rest args)
   :around '(diff-hl-diff-against-reference)
-  (setq diff-hl-reference-revision (buffer-local-value 'diff-hl-reference-revision (car (doom-visible-buffers))))
-  (apply oldfun args)
-  (setq diff-hl-reference-revision "master"))
+  (let ((diff-hl-reference-revision (buffer-local-value
+                                     'diff-hl-reference-revision
+                                     (car (doom-visible-buffers)))))
+    (apply oldfun args)))
