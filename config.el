@@ -597,16 +597,16 @@
                                         ; `kmacro-end-and-call-macro' from `<f4>'
                                         ; and `C-x e'.
           ;; C-x bindings (ctl-x-map)
-          "C-x M-:" #'consult-complex-command ;; orig. repeat-complex-command
-          "C-x r SPC" #'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
+          "C-x M-:" #'consult-complex-command ; orig. repeat-complex-command
+          "C-x r SPC" #'consult-register-store ; orig. abbrev-prefix-mark (unrelated)
           "M-#" #'consult-register
           [remap jump-to-register] #'consult-register-load
           ;; Other custom bindings
           ;; M-g bindings (goto-map)
           "M-g e" #'consult-compile-error
-          "M-g g" #'consult-goto-line   ;; orig. goto-line
-          "M-g M-g" #'consult-goto-line ;; orig. goto-line
-          "M-g o" #'consult-outline     ;; Alternative: consult-org-heading
+          "M-g g" #'consult-goto-line   ; orig. goto-line
+          "M-g M-g" #'consult-goto-line ; orig. goto-line
+          "M-g o" #'consult-outline     ; Alternative: consult-org-heading
           "M-g m" #'consult-mark
           "M-g k" #'consult-global-mark
           "M-g I" #'consult-imenu-multi
@@ -618,20 +618,22 @@
           ;; Isearch integration
           "M-s e" #'consult-isearch-history
           :map isearch-mode-map
-          "M-e" #'consult-isearch-history   ;; orig. isearch-edit-string
-          "M-s e" #'consult-isearch-history ;; orig. isearch-edit-string
-          "M-s l" #'consult-line ;; needed by consult-line to detect isearch
-          "M-s L" #'consult-line-multi ;; needed by consult-line to detect isearch
+          "M-e" #'consult-isearch-history   ; orig. isearch-edit-string
+          "M-s e" #'consult-isearch-history ; orig. isearch-edit-string
+          "M-s l" #'consult-line ; needed by consult-line to detect isearch
+          "M-s L" #'consult-line-multi ; needed by consult-line to detect isearch
           ;; Minibuffer history
           :map minibuffer-local-map
-          "M-s" #'consult-history  ;; orig. next-matching-history-element
-          "M-r" #'consult-history ;; orig. previous-matching-history-element
+          "M-s" #'consult-history  ; orig. next-matching-history-element
+          "M-r" #'consult-history ; orig. previous-matching-history-element
           (:unless (modulep! :config default)
            "M-g f" #'consult-flymake
            (:unless (and (modulep! :checkers syntax)
                          (not (modulep! :checkers syntax +flymake)))
             "M-g f" #'consult-flycheck)
-           "M-s d" #'consult-find ;; does not cache files like Doom & Projectile do
+           "M-s d" #'consult-find ; does not cache files like Doom & Projectile do,
+                                  ; also slower than `fd', see Minad's comment in
+                                  ; https://github.com/minad/consult/issues/363
            "M-s r" #'consult-ripgrep
            "M-s D" #'consult-locate))
     :config
