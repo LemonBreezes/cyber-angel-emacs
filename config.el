@@ -544,75 +544,64 @@
 
 (when (modulep! :config default +smartparens)
   (sp-local-pair '(org-mode) "<<" ">>")
-  (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors-core
-      (dolist (it sp--mc/cursor-specific-vars)
-        (add-to-list 'mc/cursor-specific-vars it))
-      ;; I definitely don't use all these commands but it's okay to future-proof
-      ;; a little bit.
-      (defconst mc-smartparens-cmds
-        '(sp-delete-char sp-forward-sexp sp-backward-sexp sp-up-sexp
-          sp-backward-up-sexp sp-down-sexp sp-backward-down-sexp
-          sp-beginning-of-sexp sp-end-of-sexp sp-kill-sexp sp-backward-kill-sexp
-          sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
-          sp-backward-kill-word sp-backward-delete-cha/r sp-delete-char
-          sp-forward-barf-sexp sp-slurp-hybrid-sexp sp-backward-slurp-sexp
-          sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp
-          cae-raise-sexp-dwim))
-      (dolist (cmd mc-smartparens-cmds)
-        (add-to-list 'mc/cmds-to-run-for-all cmd)))
-    (let ((bindings
-           '(("M-(" sp-wrap-round "Edit")
-             ("M-S" sp-split-sexp "Edit")
-             ("M-J" sp-join-sexp "Edit")
-             ("M-C" sp-convolute-sexp "Edit")
-             ("C-M-t" sp-transpose-sexp "Edit")
-             ("C-x C-t" sp-transpose-hybrid-sexp "Edit")
-             ("C-M-k" sp-kill-sexp "Kill")
-             ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
-             ("M-<delete>" sp-unwrap-sexp "Kill")
-             ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
-             ("M-r" cae-raise-sexp "Kill")
-             ("M-D" sp-splice-sexp "Kill")
-             ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
-             ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
-             ("C-M-f" sp-forward-sexp "Navigation")
-             ("C-M-b" sp-backward-sexp "Navigation")
-             ("C-M-u" sp-backward-up-sexp "Navigation")
-             ("C-M-d" sp-down-sexp "Navigation")
-             ("C-M-a" sp-beginning-of-sexp "Navigation")
-             ("C-M-e" sp-up-sexp "Navigation")
-             ("C-M-a" sp-backward-down-sexp "Navigation")
-             ("C-M-n" sp-next-sexp "Navigation")
-             ("C-M-p" sp-previous-sexp "Navigation")
-             ("C-(" sp-forward-slurp-sexp "Barf/Slurp")
-             ("C-<right>" sp-forward-slurp-sexp "Barf/Slurp")
-             ("C-S-<right>" sp-slurp-hybrid-sexp "Barf/Slurp")
-             ("C-}" sp-forward-barf-sexp "Barf/Slurp")
-             ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
-             ("C-{" sp-backward-barf-sexp "Barf/Slurp")
-             ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
-             ("C-]" sp-select-next-thing-exchange "Selection")
-             ("C-M-]" sp-select-next-thing "Selection")
-             ("C-M-@" sp-mark-sexp "Selection")
-             ("C-M-w" sp-copy-sexp "Selection"))))
-      (when (modulep! :ui hydra)
-        (eval
-         (append
-          '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-             ("C-M-?" nil "Exit" :exit t))
-          (cl-loop for x in bindings
-                   collect (list (car x)
-                                 (cadr x)
-                                 (thread-last (symbol-name (cadr x))
-                                              (string-remove-prefix "cae-")
-                                              (string-remove-prefix "sp-"))
-                                 :column
-                                 (caddr x)))))
-        (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
-      (dolist (x bindings)
-        (global-set-key (kbd (car x)) (cadr x))))
-    (setq sp-navigate-interactive-always-progress-point t)))
+  (let ((bindings
+         '(("M-(" sp-wrap-round "Edit")
+           ("M-S" sp-split-sexp "Edit")
+           ("M-J" sp-join-sexp "Edit")
+           ("M-C" sp-convolute-sexp "Edit")
+           ("C-M-t" sp-transpose-sexp "Edit")
+           ("C-x C-t" sp-transpose-hybrid-sexp "Edit")
+           ("C-M-k" sp-kill-sexp "Kill")
+           ("C-M-S-k" sp-kill-hybrid-sexp "Kill")
+           ("M-<delete>" sp-unwrap-sexp "Kill")
+           ("M-<backspace>" sp-backward-unwrap-sexp "Kill")
+           ("M-r" cae-raise-sexp "Kill")
+           ("M-D" sp-splice-sexp "Kill")
+           ("C-M-<backspace>" sp-splice-sexp-killing-backward "Kill")
+           ("C-M-<delete>" sp-splice-sexp-killing-forward "Kill")
+           ("C-M-f" sp-forward-sexp "Navigation")
+           ("C-M-b" sp-backward-sexp "Navigation")
+           ("C-M-u" sp-backward-up-sexp "Navigation")
+           ("C-M-d" sp-down-sexp "Navigation")
+           ("C-M-a" sp-beginning-of-sexp "Navigation")
+           ("C-M-e" sp-up-sexp "Navigation")
+           ("C-M-a" sp-backward-down-sexp "Navigation")
+           ("C-M-n" sp-next-sexp "Navigation")
+           ("C-M-p" sp-previous-sexp "Navigation")
+           ("C-(" sp-forward-slurp-sexp "Barf/Slurp")
+           ("C-<right>" sp-forward-slurp-sexp "Barf/Slurp")
+           ("C-S-<right>" sp-slurp-hybrid-sexp "Barf/Slurp")
+           ("C-}" sp-forward-barf-sexp "Barf/Slurp")
+           ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
+           ("C-{" sp-backward-barf-sexp "Barf/Slurp")
+           ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
+           ("C-]" sp-select-next-thing-exchange "Selection")
+           ("C-M-]" sp-select-next-thing "Selection")
+           ("C-M-@" sp-mark-sexp "Selection")
+           ("C-M-w" sp-copy-sexp "Selection"))))
+    (when (modulep! :ui hydra)
+      (eval
+       (append
+        '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
+           ("C-M-?" nil "Exit" :exit t))
+        (cl-loop for x in bindings
+                 collect (list (car x)
+                               (cadr x)
+                               (thread-last (symbol-name (cadr x))
+                                            (string-remove-prefix "cae-")
+                                            (string-remove-prefix "sp-"))
+                               :column
+                               (caddr x)))))
+      (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
+    (when (modulep! :editor multiple-cursors)
+      (after! multiple-cursors-core
+        (dolist (it sp--mc/cursor-specific-vars)
+          (add-to-list 'mc/cursor-specific-vars it))
+        (dolist (x bindings)
+          (add-to-list 'mc/cmds-to-run-for-all (cadr x)))))
+    (dolist (x bindings)
+      (global-set-key (kbd (car x)) (cadr x))))
+  (setq sp-navigate-interactive-always-progress-point t))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
