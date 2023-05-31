@@ -37,7 +37,7 @@
               (add-hook 'after-save-hook #'cae-mark-dir-locals-as-safe-h nil t))))
 
 ;; Use Emacs Lisp mode for dir-locals files.
-(defvar-local cae-lisp-dir-locals-elisp-mode-enabled-p nil
+(defvar-local cae-lisp--dir-locals-elisp-mode-enabled-p nil
   "Determines whether `emacs-lisp-mode' has been enabled for this buffer.")
 (add-hook 'doom-switch-buffer-hook
           (cae-defun cae-lisp-dir-locals-enable-elisp-mode-h ()
@@ -46,7 +46,7 @@
                                 dir-locals-file)
                        (eq major-mode 'lisp-data-mode)
                        (not cae-lisp-dir-locals-elisp-mode-enabled-p))
-              (setq-local cae-lisp-dir-locals-elisp-mode-enabled-p t)
+              (setq-local cae-lisp--dir-locals-elisp-mode-enabled-p t)
               (emacs-lisp-mode))))
 
 ;; Check parens before saving.
