@@ -1,8 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; For when we compile Doom.
-(defvar personal-keybindings nil)
-
 ;;; UI
 (load! "lisp/cae-theme")
 
@@ -216,6 +213,11 @@
     (if (display-graphic-p)
         (apply oldfun args)
       (apply #'pdftotext-mode args))))
+
+(when (and (modulep! :tools lsp)
+           (not (modulep! :tools lsp +eglot)))
+  (add-to-list 'lsp-disabled-clients 'ccls)
+  (add-to-list 'lsp-disabled-clients 'mspyls))
 
 
 ;;; Editor
