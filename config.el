@@ -1,6 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (load! "lisp/cae-logs")
+(load! "lisp/cae-keyboard")
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
@@ -270,7 +271,6 @@
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
 (load! "lisp/cae-multi")
-(load! "lisp/cae-keyboard")
 (load! "lisp/cae-repeat")
 (map! "C-<f4>" #'tab-close
       "C-x 4 I" #'ibuffer-other-window)
@@ -341,6 +341,16 @@
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
 (setq read-extended-command-predicate #'command-completion-default-include-p)
+
+(use-package! avy
+  :defer t
+  :config
+  (setq avy-timeout-seconds 0.25
+        avy-keys '(?r ?a ?e ?n ?s ?d ?o ?t ?i ?h)
+        )
+  (map! "M-n" #'avy-goto-line-below
+        "M-p" #'avy-goto-line-above
+        ))
 
 (use-package! pp+
   :after pp
