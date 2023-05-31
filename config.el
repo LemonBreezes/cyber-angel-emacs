@@ -549,12 +549,9 @@
       "C-S-i" #'doom/dumb-dedent
       (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
-      ;;I am testing the default bindings which are to use `<prior>' and
-      ;;`<next>' for navigating the minibuffer history.
-      ;;(:after vertico
-      ;; :map vertico-map
-      ;; "<prior>" #'vertico-scroll-down
-      ;; "<next>" #'vertico-scroll-up)
+      (:after vertico
+       :map vertico-map
+       "C-SPC" #'+vertico/embark-preview)
       (:after man
        :map Man-mode-map
        "o" #'ace-link-man)
