@@ -456,8 +456,8 @@
 
 (when (modulep! :private corfu)
   (after! corfu
-    (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
-          corfu-quick2 (cae-keyboard-kbd "jkl;"))))
+    (setq corfu-quick1 (cae-keyboard-kbd "asdfghjkl;")
+          corfu-quick2 "")))
 
 (use-package! zop-to-char
   :defer t
@@ -641,8 +641,7 @@
         (:after corfu
          :map corfu-map
          "C-M-i" #'corfu-move-to-minibuffer
-         "C-q" #'corfu-quick-insert
-         "M-q" #'corfu-quick-complete)
+         "}" #'corfu-quick-complete)
         :prefix "M-+"
         "c" #'completion-at-point       ; capf
         "t" #'complete-tag              ; etags
