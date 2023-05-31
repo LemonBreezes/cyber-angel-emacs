@@ -7,7 +7,7 @@
               'face '(:inherit variable-pitch
                       :weight bold)))
 (run-with-idle-timer
- 2 nil
+ 3 nil
  (lambda ()
    (mapcar #'native-compile '(doom-real-buffer-p
                               cae-modeline-buffer-name))))
