@@ -761,8 +761,9 @@
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
   (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors-core
-      (add-to-list 'mc/unsupported-minor-modes #'copilot-mode))))
+    (add-to-list 'copilot-disable-predicates
+                 (cae-defun cae-multiple-cursors-active-p ()
+                   (bound-and-true-p multiple-cursors-mode)))))
 
 (use-package! isearch-dabbrev
   :defer t
