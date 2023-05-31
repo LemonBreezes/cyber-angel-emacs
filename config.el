@@ -508,7 +508,9 @@
           sp-backward-up-sexp sp-down-sexp sp-backward-down-sexp
           sp-beginning-of-sexp sp-end-of-sexp sp-kill-sexp sp-backward-kill-sexp
           sp-kill-hybrid-sexp sp-backward-kill-hybrid-sexp sp-kill-word
-          sp-backward-kill-word sp-backward-delete-char sp-delete-char))
+          sp-backward-kill-word sp-backward-delete-char sp-delete-char
+          sp-forward-barf-sexp sp-slurp-hybrid-sexp sp-backward-slurp-sexp
+          sp-forward-slurp-sexp sp-backward-barf-sexp sp-transpose-hybrid-sexp))
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))))
 
@@ -887,6 +889,11 @@
         :desc "Mark next sexps" "C-M-f" #'mc/mark-next-sexps
         :desc "Mark previous sexps" "C-M-b" #'mc/mark-previous-sexps)
   (after! multiple-cursors-core
+    (define-key mc/keymap (kbd "C-. l") #'mc/insert-letters)
+    (define-key mc/keymap (kbd "C-. n") #'mc/insert-numbers)
+    (define-key mc/keymap (kbd "C-. [") #'mc/vertical-align-with-space)
+    (define-key mc/keymap (kbd "C-. [") #'mc/vertical-align)
+
     (define-key mc/keymap (kbd "C-. C-d") #'mc/remove-current-cursor)
     (define-key mc/keymap (kbd "C-. C-k") #'mc/remove-cursors-at-eol)
     (define-key mc/keymap (kbd "C-. d")   #'mc/remove-duplicated-cursors)
