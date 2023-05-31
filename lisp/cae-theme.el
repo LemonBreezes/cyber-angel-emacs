@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'leuven)
+(setq doom-theme 'ef-trio-dark)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
@@ -45,17 +45,15 @@
   (setq! ef-themes-variable-pitch-ui t
          ef-themes-mixed-fonts t))
 
-;; ;; Set theme based on time
-;; (when (display-graphic-p)
-;;   (advice-add #'doom-init-theme-h :override #'ignore)
-;;   (use-package! circadian
-;;     :config
-;;     (cond ((memq doom-theme '(modus-operandi modus-vivendi))
-;;            (setq! circadian-themes '(("7:15" . modus-operandi)
-;;                                      ("19:30" . modus-vivendi))))
-;;           (t (setq! circadian-themes `(("0:00" . ,doom-theme)))))
-;;     (circadian-setup)
-;;     (after! exwm-randr
-;;       (add-hook 'doom-load-theme-hook #'exwm-randr-refresh))))
+;; Set theme based on time
+(when (display-graphic-p)
+  (advice-add #'doom-init-theme-h :override #'ignore)
+  (use-package! circadian
+    :config
+    (setq circadian-themes '((:sunrise . ef-trio-light)
+                             (:sunset  . ef-trio-dark)))
+    (circadian-setup)
+    (after! exwm-randr
+      (add-hook 'doom-load-theme-hook #'exwm-randr-refresh))))
 
 ;; (map! "<f5>" #'modus-themes-toggle)
