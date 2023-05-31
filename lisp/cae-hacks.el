@@ -31,6 +31,8 @@
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h))
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
+(after! hercules
+  (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
