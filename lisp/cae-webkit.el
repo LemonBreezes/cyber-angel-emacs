@@ -1,12 +1,8 @@
 ;;; ~/.doom.d/lisp/cae-webkit.el -*- lexical-binding: t; -*-
 
 (use-package! webkit
-  :when (display-graphic-p)
   :defer t
   :init
-  (after! browse-url
-    (setq browse-url-browser-function #'webkit-browse-url))
-
   ;; Fix an error
   (autoload 'org-link-set-parameters "ol")
   (autoload 'org-link-types "ol")
