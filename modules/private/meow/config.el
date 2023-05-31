@@ -400,10 +400,10 @@
                "b" #'meow-left          ; h -> b
                "B" #'meow-left-expand   ; H -> B
                "I" #'meow-open-above
-               "l" #'meow-insert       ; i -> l
+               "i" #'meow-insert
                "j" #'meow-join
                "k" #'meow-kill
-               "i" #'meow-till          ; l -> i
+               "l" #'meow-till
                "m" #'meow-mark-word
                "M" #'meow-mark-symbol
                "n" #'meow-next
