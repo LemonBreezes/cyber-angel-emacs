@@ -512,7 +512,9 @@
     :defer t :init
     (map! "C-x U" #'0x0-dwim)
     (after! embark
-      (define-key embark-region-map (kbd "U") '0x0-dwim))))
+      (define-key embark-region-map (kbd "U") '0x0-dwim))))
+
+
 ;;; Editor
 
 (setq doom-leader-alt-key "C-c"
