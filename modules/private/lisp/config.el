@@ -130,7 +130,9 @@
           (cl-loop for x in bindings
                    unless (string= "" (elt x 2))
                    collect
-                   (list (car x)
+                   (list (if (string= (cae-keyboard-kbd (car x)) "'")
+                             (setcar x "=")
+                             (car x))
                          (intern (elt x 1))
                          (when (string-match "lispy-\\(?:eval-\\)?\\(.+\\)"
                                              (elt x 1))
