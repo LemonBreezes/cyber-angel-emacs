@@ -557,7 +557,7 @@
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))))
 
-;; Monkey fix Project overriding the `C-x p' keybinding.
+;; Monkey fix `project.el' overriding the `C-x p' keybinding.
 (when (modulep! :ui popup)
   (add-hook 'post-command-hook
             (cae-defun cae-fix-popup-other-keybinding ()
