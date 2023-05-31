@@ -39,7 +39,7 @@
     (comint-delchar-or-maybe-eof arg)))
 
 ;;;###autoload
-(defun cae-debugger/open-repl ()
+(defun cae-debugger-open-repl ()
   (interactive)
   (let ((repl-buffer
          (or (get-buffer "*dap-ui-repl*")
@@ -50,3 +50,25 @@
     (with-current-buffer repl-buffer
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
+
+;;;###autoload
+(defun cae-debugger-focus-dap ()
+  ;; Switch to perspective with dap session
+  (interactive)
+  (dap--debug-session-launch-args (dap--cur-session))
+  (let ((persp (cl-find-if (lambda (p)
+                             (cl-find-if (lambda (b)
+                                           (string-match-p "gdb" (buffer-name b)))
+                                         (persp-buffers p)))
+                           (+workspace-list))))
+    (when persp
+      (persp-switch persp)))
+  ()
+  (+popup/close-all))
+
+(defvar cae-debugger--session-workspace-map (make-hash-table :test #'equal)
+  "Alist of (session . workspace) pairs.")
+
+(defun cae-debugger-mark-session-h ()
+  (when-let ((session (dap--cur-session)))
+    (puthash session (+workspace-current-name) cae-debugger--session-workspace-map)))
