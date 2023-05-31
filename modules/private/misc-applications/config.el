@@ -60,6 +60,7 @@
     ;; zone
     ;; nyan zone
     ;; also encryption zone
+    ;; let it snow
     ))
 
 (dolist (file +misc-applications--lisp-files)
