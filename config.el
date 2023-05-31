@@ -278,198 +278,202 @@
 
 ;;; Tools
 
-(use-package! w3m
-  :defer t :config
-  (setq w3m-user-agent
-        (string-join
-         '("Mozilla/5.0"
-           "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
-           "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
-           "Mobile Safari/533.")
-         " ")
-        w3m-command-arguments '("-cookie" "-F"))
-  (after! w3m-search
-    (setq w3m-search-default-engine "duckduckgo"))
-  (map! :map w3m-mode-map
-        "o" #'ace-link-w3m))
+(catch 'cae-tools-disabled
+  (unless cae-init-tools-enabled-p
+    (throw 'cae-tools-disabled nil))
 
-(when (getenv "WSL_DISTRO_NAME")
-  (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
-        browse-url-generic-args     '("/c" "start")))
-(setq browse-url-browser-function
-      (cond ((executable-find "termux-setup-storage")
-             #'browse-url-xdg-open)
-            (t #'browse-url-generic)))
+  (use-package! w3m
+    :defer t :config
+    (setq w3m-user-agent
+          (string-join
+           '("Mozilla/5.0"
+             "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
+             "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
+             "Mobile Safari/533.")
+           " ")
+          w3m-command-arguments '("-cookie" "-F"))
+    (after! w3m-search
+      (setq w3m-search-default-engine "duckduckgo"))
+    (map! :map w3m-mode-map
+          "o" #'ace-link-w3m))
 
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
+  (when (getenv "WSL_DISTRO_NAME")
+    (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
+          browse-url-generic-args     '("/c" "start")))
+  (setq browse-url-browser-function
+        (cond ((executable-find "termux-setup-storage")
+               #'browse-url-xdg-open)
+              (t #'browse-url-generic)))
 
-(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
- (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
- ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
- ;; balanced, which breaks font-lock.
- (after! syslog-mode
-   (setq syslog-font-lock-keywords
-         (cl-remove-if
-          (lambda (keyword)
-            (cl-destructuring-bind (regexp . face) keyword
-              (string= "'[^']*'" regexp)))
-          syslog-font-lock-keywords)))
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
- ;; Set up printers
- (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
- (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
+  (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+  (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
+  ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
+  ;; balanced, which breaks font-lock.
+  (after! syslog-mode
+    (setq syslog-font-lock-keywords
+          (cl-remove-if
+           (lambda (keyword)
+             (cl-destructuring-bind (regexp . face) keyword
+               (string= "'[^']*'" regexp)))
+           syslog-font-lock-keywords)))
 
- (setq delete-by-moving-to-trash t
-       remote-file-name-inhibit-delete-by-moving-to-trash t
-       history-length (expt 2 16)
-       make-cursor-line-fully-visible nil ;I forgot why I set this.
-       yank-pop-change-selection t)
+  ;; Set up printers
+  (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
+  (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
 
- (after! xclip
-   (cond ((getenv "WSL_DISTRO_NAME")
-          (setq xclip-method 'powershell))
-         ((executable-find "termux-setup-storage")
-          (setq xclip-method 'termux-clipboard-get))))
+  (setq delete-by-moving-to-trash t
+        remote-file-name-inhibit-delete-by-moving-to-trash t
+        history-length (expt 2 16)
+        make-cursor-line-fully-visible nil ;I forgot why I set this.
+        yank-pop-change-selection t)
 
- (setq bookmark-bmenu-file-column 50
-       bookmark-watch-bookmark-file nil)
- (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
+  (after! xclip
+    (cond ((getenv "WSL_DISTRO_NAME")
+           (setq xclip-method 'powershell))
+          ((executable-find "termux-setup-storage")
+           (setq xclip-method 'termux-clipboard-get))))
 
- (after! auth-source
-   (setq auth-source-cache-expiry nil
-         auth-sources (list (concat doom-user-dir "secrets/authinfo"))
-         auth-source-gpg-encrypt-to nil))
+  (setq bookmark-bmenu-file-column 50
+        bookmark-watch-bookmark-file nil)
+  (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
 
- (after! password-cache
-   (setq password-cache-expiry nil))
+  (after! auth-source
+    (setq auth-source-cache-expiry nil
+          auth-sources (list (concat doom-user-dir "secrets/authinfo"))
+          auth-source-gpg-encrypt-to nil))
 
- (after! projectile
-   ;; Automatically find projects in the I personally use.
-   (setq projectile-project-search-path
-         `((,doom-user-dir . 0)
-           (,doom-emacs-dir . 0)
-           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-           ("~/src/" . 1)))
-   (add-to-list 'projectile-globally-ignored-directories
-                (expand-file-name ".local/straight/repos/" user-emacs-directory))
-   (unless (or (cl-set-difference projectile-known-projects
-                                  '("~/.doom.d" "~/.emacs.d" "~/.config/doom"
-                                    "~/.config/emacs")
-                                  :test #'file-equal-p)
-               (not (file-directory-p "~/src/"))
-               (directory-empty-p "~/src/"))
-     (projectile-discover-projects-in-search-path))
-   ;; Recognize `makefile' as a Makefile.
-   (add-to-list
-    'projectile-project-types
-    '(make marker-files
-      ("makefile")
-      project-file "Makefile" compilation-dir nil configure-command nil
-      compile-command "make" test-command "make test"
-      install-command "make install" package-command nil run-command nil)
-    nil #'equal)
-   (add-to-list
-    'projectile-project-types
-    '(gnumake marker-files
-      ("GNUmakefile")
-      project-file "GNUMakefile" compilation-dir nil configure-command nil
-      compile-command "make" test-command "make test" install-command
-      "make install" package-command nil run-command nil)
-    nil #'equal)
-   (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
-   (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
-   (add-to-list 'projectile-project-root-files-top-down-recurring
-                "compile_commands.json")
-   ;; Set up compilation.
-   (setq projectile-per-project-compilation-buffer t
-         compilation-read-command nil)
-   ;; Make the project prefix more readable.
-   (after! which-key
-     (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
-           which-key-replacement-alist)))
+  (after! password-cache
+    (setq password-cache-expiry nil))
 
- (after! compile
-   ;; Some projects I work on have many warnings I am not interested in and the
-   ;; `first-error' value for `compilation-scroll-output' stops scrolling at the
-   ;; first warning. It would be nice if it scrolled to the first error instead.
-   ;; Since it doesn't though, I just set it to `t' and scroll up manually if
-   ;; there are errors.
-   (setq compilation-scroll-output t))
+  (after! projectile
+    ;; Automatically find projects in the I personally use.
+    (setq projectile-project-search-path
+          `((,doom-user-dir . 0)
+            (,doom-emacs-dir . 0)
+            ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+            ("~/src/" . 1)))
+    (add-to-list 'projectile-globally-ignored-directories
+                 (expand-file-name ".local/straight/repos/" user-emacs-directory))
+    (unless (or (cl-set-difference projectile-known-projects
+                                   '("~/.doom.d" "~/.emacs.d" "~/.config/doom"
+                                     "~/.config/emacs")
+                                   :test #'file-equal-p)
+                (not (file-directory-p "~/src/"))
+                (directory-empty-p "~/src/"))
+      (projectile-discover-projects-in-search-path))
+    ;; Recognize `makefile' as a Makefile.
+    (add-to-list
+     'projectile-project-types
+     '(make marker-files
+       ("makefile")
+       project-file "Makefile" compilation-dir nil configure-command nil
+       compile-command "make" test-command "make test"
+       install-command "make install" package-command nil run-command nil)
+     nil #'equal)
+    (add-to-list
+     'projectile-project-types
+     '(gnumake marker-files
+       ("GNUmakefile")
+       project-file "GNUMakefile" compilation-dir nil configure-command nil
+       compile-command "make" test-command "make test" install-command
+       "make install" package-command nil run-command nil)
+     nil #'equal)
+    (add-to-list 'projectile-globally-ignored-directories "^.ccls-cache$")
+    (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root")
+    (add-to-list 'projectile-project-root-files-top-down-recurring
+                 "compile_commands.json")
+    ;; Set up compilation.
+    (setq projectile-per-project-compilation-buffer t
+          compilation-read-command nil)
+    ;; Make the project prefix more readable.
+    (after! which-key
+      (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
+            which-key-replacement-alist)))
 
- ;; This autoload fixes a void function error on `find-file-hook' that occurs
- ;; sporadically for me.
- (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
- (after! tramp
-   (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*") ;; default + 
-   (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
-                   "/run/current-system/profile/bin"
-                   "/run/current-system/profile/sbin"))
-     (add-to-list 'tramp-remote-path path)))
+  (after! compile
+    ;; Some projects I work on have many warnings I am not interested in and the
+    ;; `first-error' value for `compilation-scroll-output' stops scrolling at the
+    ;; first warning. It would be nice if it scrolled to the first error instead.
+    ;; Since it doesn't though, I just set it to `t' and scroll up manually if
+    ;; there are errors.
+    (setq compilation-scroll-output t))
 
- ;; Use Emacs as the default editor for shell commands.
- ;; `dwim-shell-command'.
- (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
-   (dolist (fn '(with-editor-export-editor
-                 with-editor-export-hg-editor
-                 with-editor-export-git-editor))
-     (add-hook hook fn)))
- (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+  ;; This autoload fixes a void function error on `find-file-hook' that occurs
+  ;; sporadically for me.
+  (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
+  (after! tramp
+    (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*") ;; default + 
+    (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
+                    "/run/current-system/profile/bin"
+                    "/run/current-system/profile/sbin"))
+      (add-to-list 'tramp-remote-path path)))
 
- (when (and (modulep! :checkers spell)
-            (not (modulep! :checkers spell +flyspell)))
-   (after! spell-fu
-     (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-     (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-     (add-to-list 'spell-fu-faces-exclude 'message-header-to)
-     (setq spell-fu-faces-exclude
-           (delq 'font-lock-string-face spell-fu-faces-include))))
+  ;; Use Emacs as the default editor for shell commands.
+  ;; `dwim-shell-command'.
+  (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
+    (dolist (fn '(with-editor-export-editor
+                  with-editor-export-hg-editor
+                  with-editor-export-git-editor))
+      (add-hook hook fn)))
+  (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 
- (when (modulep! :tools pdf)
-   (use-package! pdftotext
-     :defer t :init
-     (defadvice! +pdf-view-mode-a (oldfun &rest args)
-       :around #'pdf-view-mode
-       (if (cae-display-graphic-p)
-           (apply oldfun args)
-         (apply #'pdftotext-mode args)))))
+  (when (and (modulep! :checkers spell)
+             (not (modulep! :checkers spell +flyspell)))
+    (after! spell-fu
+      (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+      (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+      (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+      (setq spell-fu-faces-exclude
+            (delq 'font-lock-string-face spell-fu-faces-include))))
 
- (when (and (modulep! :tools lsp)
-            (not (modulep! :tools lsp +eglot)))
-   (after! lsp-mode
-     (setq lsp-headerline-breadcrumb-enable nil
-           lsp-enable-snippet t
-           lsp-enable-text-document-color t
-           lsp-enable-folding t
-           lsp-enable-indentation nil
-           lsp-semantic-tokens-enable t)
-     (after! lsp-ui
-       (setq lsp-signature-auto-activate t
-             lsp-ui-doc-include-signature t
-             lsp-ui-doc-header nil))
-     (after! lsp-clangd
-       (setq lsp-clients-clangd-args
-             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-               "--background-index"
-               "--clang-tidy"
-               "--completion-style=detailed"
-               "--header-insertion=never"
-               "--header-insertion-decorators=0")))
-     (add-to-list 'lsp-disabled-clients 'ccls)
-     (add-to-list 'lsp-disabled-clients 'mspyls)))
+  (when (modulep! :tools pdf)
+    (use-package! pdftotext
+      :defer t :init
+      (defadvice! +pdf-view-mode-a (oldfun &rest args)
+        :around #'pdf-view-mode
+        (if (cae-display-graphic-p)
+            (apply oldfun args)
+          (apply #'pdftotext-mode args)))))
 
- (when (modulep! :tools lsp +eglot)
-   (after! eglot
-     (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-           '("clangd" "--background-index" "--clang-tidy"
-             "--completion-style=detailed" "--header-insertion=never"
-             "--header-insertion-decorators=0"))))
+  (when (and (modulep! :tools lsp)
+             (not (modulep! :tools lsp +eglot)))
+    (after! lsp-mode
+      (setq lsp-headerline-breadcrumb-enable nil
+            lsp-enable-snippet t
+            lsp-enable-text-document-color t
+            lsp-enable-folding t
+            lsp-enable-indentation nil
+            lsp-semantic-tokens-enable t)
+      (after! lsp-ui
+        (setq lsp-signature-auto-activate t
+              lsp-ui-doc-include-signature t
+              lsp-ui-doc-header nil))
+      (after! lsp-clangd
+        (setq lsp-clients-clangd-args
+              `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+                "--background-index"
+                "--clang-tidy"
+                "--completion-style=detailed"
+                "--header-insertion=never"
+                "--header-insertion-decorators=0")))
+      (add-to-list 'lsp-disabled-clients 'ccls)
+      (add-to-list 'lsp-disabled-clients 'mspyls)))
 
- (when (modulep! :checkers spell)
-   (after! spell-fu
-     (add-hook 'nxml-mode-hook
-               (cae-defun cae-disable-spell-fu-h ()
-                 (spell-fu-mode -1)))))
+  (when (modulep! :tools lsp +eglot)
+    (after! eglot
+      (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+            '("clangd" "--background-index" "--clang-tidy"
+              "--completion-style=detailed" "--header-insertion=never"
+              "--header-insertion-decorators=0"))))
+
+  (when (modulep! :checkers spell)
+    (after! spell-fu
+      (add-hook 'nxml-mode-hook
+                (cae-defun cae-disable-spell-fu-h ()
+                  (spell-fu-mode -1))))))
 
 
 ;;; Editor
