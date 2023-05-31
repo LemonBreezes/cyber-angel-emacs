@@ -31,11 +31,16 @@
       (dirvish-layout-switch dirvish-default-layout))))
 
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
-  (when (and (featurep 'dirvish)
-             (dirvish-curr)
+  (when (and (derived-mode-p 'dired-mode)
+             (window-dedicated-p)
              (window-dedicated-p))
     (dirvish-layout-toggle))
-  (call-interactively fn))
+  (call-interactively fn)
+  (when (and (derived-mode-p 'dired-mode)
+             (one-window-p)
+             (not (window-dedicated-p)))
+        (ignore-error user-error
+          (dirvish-layout-switch dirvish-default-layout))))
 
 ;;;###autoload
 (defun cae-dired-previous-buffer ()
