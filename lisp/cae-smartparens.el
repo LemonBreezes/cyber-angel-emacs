@@ -80,8 +80,6 @@
                                    (caddr x))))
           (cae-sp-cheat-sheet/body))
        t)
-      (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body)
-      (define-key smartparens-mode-map (kbd "C-M-?") nil)
       (define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
