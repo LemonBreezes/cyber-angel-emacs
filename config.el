@@ -522,8 +522,8 @@
        :map Man-mode-map
        "o" #'ace-link-man))
 (define-key resize-window-repeat-map "_" #'shrink-window)
-(let ((embark-act-key "<f8>"))
-  (after! embark
+(after! embark
+  (let ((embark-act-key (kbd "<f8>")))
     (map! embark-act-key #'embark-act
           (:when (modulep! :completion vertico)
            (:map minibuffer-local-map
