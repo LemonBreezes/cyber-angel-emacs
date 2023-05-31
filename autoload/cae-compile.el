@@ -63,6 +63,47 @@
     (let ((native-comp-speed cae-compile-native-comp-speed))
       (emacs-lisp-native-compile-and-load))))
 
+(defun cae-compile-list-files-to-compile (&optional arg)
+  (let (result)
+    (dolist
+        (s (nconc
+            ;; Compiling `lisp/lib' creates some errors and these functions
+            ;; are not that important to have compiled anyways.
+            (directory-files-recursively doom-core-dir
+                                         "[a-za-z0-9]+\\.el$"
+                                         nil
+                                         #'ignore)
+            (directory-files-recursively doom-modules-dir
+                                         "[a-za-z0-9]+\\.el$"
+                                         nil
+                                         #'cae-compile-file-not-in-unused-module-p)
+            (directory-files-recursively
+             doom-user-dir
+             "[a-zA-Z0-9]+\\.el$"
+             nil
+             (lambda (s)
+               (not
+                (cl-member s '("experiments" "eshell" "packages" "misc-files"
+                               "snippets" ".local" ".git" "shared-local"
+                               "media")
+                           :test (lambda (x y)
+                                   (string= (file-name-nondirectory x)
+                                            y)))))))
+           result)
+      (unless
+          (or (string= (file-name-nondirectory s) "packages.el")
+              (string= (file-name-nondirectory s) "doctor.el")
+              (string= (file-name-nondirectory s) dir-locals-file)
+              (string-prefix-p "flycheck_" (file-name-nondirectory s))
+              (cl-member s cae-compile-files-to-ignore :test #'string=)
+              (and cae-compile--exit-code
+                   (not (eq cae-compile--exit-code 0))
+                   (not (file-exists-p (concat s "c"))))
+              (eq this-command 'kill-emacs)
+              (and (file-newer-than-file-p (concat s "c") s)
+                   (not arg)))
+        (push s result)))))
+
 
 ;;;###autoload
 (cl-defun cae-compile-my-private-config (&optional arg)
@@ -76,7 +117,7 @@
           (unless
               (or (string= (file-name-nondirectory s) "packages.el")
                   (string= (file-name-nondirectory s) "doctor.el")
-                  ;; (string= (file-name-nondirectory s) dir-locals-file)
+                  (string= (file-name-nondirectory s) dir-locals-file)
                   (string-prefix-p "flycheck_" (file-name-nondirectory s))
                   (cl-member s cae-compile-files-to-ignore :test #'string=)
                   (and cae-compile--exit-code
