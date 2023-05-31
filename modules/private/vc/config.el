@@ -13,8 +13,6 @@
          vc-annotate-background-mode nil))
 
 (after! magit
-  (map! :map magit-status-mode-map
-        [remap +fold/toggle] #'magit-section-toggle)
   (setq! magit-diff-refine-hunk 'all
          magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
          magit-repository-directories '(("~/src/" . 2))
