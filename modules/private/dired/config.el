@@ -124,10 +124,11 @@
   ;;                             (frame-width (selected-frame))
   ;;                             (> (frame-width (selected-frame)) 160))
   ;;                    (dirvish-layout-toggle)))))
+  )
 
-  ;; Exit the current Dirvish session when running interactive commands like
-  ;; `projectile-find-file'.
-  (advice-add #'find-file :around #'cae-dired-find-file-a))
+;; Exit the current Dirvish session when running interactive commands like
+;; `projectile-find-file'.
+(advice-add #'find-file :around #'cae-dired-find-file-a)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
