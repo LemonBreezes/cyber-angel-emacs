@@ -370,13 +370,14 @@
         anzu-replace-to-string-separator " → "))
 
 (use-package isearch-mb
+  :ensure t
   :init (isearch-mb-mode)
   :config
   (add-to-list 'isearch-mb--after-exit  #'anzu-isearch-query-replace)
   (add-to-list 'isearch-mb--with-buffer #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'isearch-query-replace-regexp))
+  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
 
 ;;; Editor
