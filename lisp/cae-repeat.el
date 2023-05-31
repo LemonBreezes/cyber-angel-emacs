@@ -15,7 +15,7 @@
      "O" other-window-previous
      "q" quit-window
      "p" +popup/other
-     "K" kill-buffer-and-window
+     "k" kill-buffer-and-window
      "<left>" previous-buffer
      "<right>" next-buffer
      "u" winner-undo
