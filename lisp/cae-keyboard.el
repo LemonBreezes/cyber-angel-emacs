@@ -435,11 +435,6 @@
                           :column ,(caddr binding))))
        t))
     (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
-    (when (modulep! :editor multiple-cursors)
-      (after! multiple-cursors-core
-        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/body)
-        (add-to-list 'mc/cmds-to-run-once #'cae-lispy-cheat-sheet/nil)))
-
     ;; TODO `lispy-other-mode-map'
     (eval `(defhydra lh-knight ()
              "knight"
