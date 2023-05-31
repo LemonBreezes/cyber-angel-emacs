@@ -38,9 +38,6 @@
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
-  (define-repeat-map recenter
-    ("l" recenter-top-bottom))
-
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (and (featurep 'hydra) hydra-curr-map))
 
