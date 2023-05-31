@@ -28,7 +28,8 @@
       (call-interactively #'gdb-select-frame)
     (call-interactively #'comint-send-input)))
 
-(defun cae-debugger--which-key-inhibit-hook ()
-  (setq which-key-inhibit nil)
-  (remove-hook 'pre-command-hook
-               #'cae-debugger--which-key-inhibit-hook))
+;;;###autoload
+(defun cae-debugger-projectile-run-gdb ()
+  (interactive)
+  (let ((gdb-show-main t))
+    (call-interactively #'projectile-run-gdb)))
