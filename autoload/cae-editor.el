@@ -84,3 +84,11 @@
   (interactive)
   (cae-switch-buffer--handle-dirvish)
   (call-interactively #'next-buffer))
+
+;;;###autoload
+(defun cae-mark-sexp ()
+  (interactive)
+  (require 'expand-region)
+  (let ((er/try-expand-list
+         (delq 'er/mark-word er/try-expand-list)))
+    (call-interactively #'er/expand-region)))
