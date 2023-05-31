@@ -47,7 +47,8 @@
   (after! lispy
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
-          lispy-no-permanent-semantic t)
+          lispy-no-permanent-semantic t) ;Semantic is slow and I don't know of
+                                         ;any benefit it provides.
     (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
