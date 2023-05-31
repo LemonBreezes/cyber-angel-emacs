@@ -120,8 +120,7 @@
 (add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
 (use-package! info-colors
-  :defer t :init
-  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+  :defer t :init (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
 (use-package! authinfo-color-mode
   :defer t :init
@@ -201,8 +200,7 @@
   (setq posframe-inhibit-double-buffering t))
 
 (use-package! topsy
-  :defer t :init
-  (add-hook 'prog-mode-hook #'topsy-mode)
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
   :config
   ;; Set custom function for rjsx-mode
   ;; Disable topsy-mode for gptel-mode
@@ -734,9 +732,8 @@
 
 (use-package! zop-to-char
   :defer t
-  :init
-  (map! [remap zap-to-char] #'zop-up-to-char
-        [remap zap-up-to-char] #'zop-to-char)
+  :init (map! [remap zap-to-char] #'zop-up-to-char
+              [remap zap-up-to-char] #'zop-to-char)
   :config
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
@@ -786,11 +783,11 @@
         "q" #'kill-this-buffer))
 
 (use-package! aggressive-indent
-  :init
+  :defer t :init
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
-                                        ;module.
+                                                            ;module.
   (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  :defer t :config
+  :config
   (add-to-list
    'aggressive-indent-dont-indent-if
    '(and (bound-and-true-p lsp-mode)
@@ -810,8 +807,7 @@
   (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
 
 (use-package! hungry-delete
-  :defer t :init
-  (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
+  :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
   :config
   (when (modulep! :config default +smartparens)
     (map! :map hungry-delete-mode-map
@@ -827,8 +823,7 @@
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 (use-package! file-info
-  :defer t
-  :init
+  :defer t :init
   (map! :leader :prefix "f"
         :desc "Show file info" "i" #'file-info-show)
   :config
@@ -837,8 +832,7 @@
         file-info-max-value-length 100))
 
 (use-package! titlecase
-  :defer t
-  :init
+  :defer t :init
   (after! embark
     (define-key embark-region-map "T" #'titlecase-region)
     (define-key embark-heading-map "T" #'titlecase-line)))
