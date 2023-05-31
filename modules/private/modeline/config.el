@@ -10,11 +10,7 @@
 
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
-                (cl-subst '(:eval (if (doom-unreal-buffer-p (current-buffer))
-                                      (buffer-name)
-                                    (propertize (breadcrumb-project-crumbs)
-                                                'face '(:inherit variable-pitch
-                                                        :weight bold))))
+                (cl-subst '(:eval (cae-modeline-buffer-name))
                           'mode-line-buffer-identification
                           (default-value 'mode-line-format))))
 
