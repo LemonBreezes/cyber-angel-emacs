@@ -209,7 +209,10 @@
   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
   :config
   ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
+  (add-hook 'gptel-mode-hook
+            (cae-defun cae-disable-topsy-in-gptel-h ()
+              (topsy-mode -1))))
 
 (use-package! anzu
   :defer t
