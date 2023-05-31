@@ -15,7 +15,7 @@
        hl-todo
        hydra
        (ligatures +extra +iosevka)
-       modeline
+       ;; modeline
        (popup +defaults)
        ophints
        (vc-gutter +pretty +diff-hl)
@@ -69,6 +69,7 @@
        lisp
        misc-applications
        helm
+       :modeline
        unpackaged
        vc)
 
