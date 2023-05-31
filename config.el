@@ -365,7 +365,6 @@
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
 
-(setq delete-selection-save-to-register ?d)
 (setq delete-active-region t)           ;makes `d' delete region in Meow.
 
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
@@ -429,8 +428,7 @@
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
 (after! expand-region
-  (setq expand-region-autocopy-register "e"
-        expand-region-smart-cursor t))
+  (setq expand-region-smart-cursor t))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
