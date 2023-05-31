@@ -1208,7 +1208,12 @@
 
 ;;; AI
 
+(map! :leader :prefix ("g" . "gpt"))
 
+(use-package! gptel
+  :defer t :init
+  (map! :leader
+        :prefix "g" :desc "GPT-3" "g" #'cae-gptel))
 
 ;;; Appendix
 
