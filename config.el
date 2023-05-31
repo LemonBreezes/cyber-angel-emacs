@@ -512,7 +512,7 @@
                      '(evil-ex-completion-map)))
   "C-s" nil)                            ;We already have `consult-history' bound
                                         ;to `M-r' and `M-s'. This way we can use
-                                        ;C-s to search in the minibuffer.
+                                        ;`C-s' to search in the minibuffer.
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
