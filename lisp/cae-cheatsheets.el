@@ -53,19 +53,24 @@
 ;;; Quit before switching tabs
 
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
+
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when hydra-curr-map
     (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist)
           hydra-curr-body-fn)))
+
 (defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
   (when-let ((hydra (alist-get (tab-bar--current-tab)
                                cae-cheatsheets-tab-bar-hydra-alist)))
-    (run-with-timer 0.001 nil hydra)))
+    (run-with-timer 0.001 nil hydra)
+    (setf (alist-get (tab-bar--current-tab) cae-cheatsheets-tab-bar-hydra-alist)
+          nil)))
 
 (defun cae-cheatsheets-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 
-(add-hook 'cae-tab-bar-before-switch-hook #'cae-cheatsheets-hydra-quit-h)
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
+(add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
 
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
