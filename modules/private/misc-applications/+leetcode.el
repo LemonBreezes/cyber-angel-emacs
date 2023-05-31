@@ -17,6 +17,7 @@
         (:when (modulep! :ui workspaces)
          "q" #'+workspace/other)
         "Q" #'+leetcode-quit
+        "<f6>" #'+leetcode-problems-hydra/body
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
