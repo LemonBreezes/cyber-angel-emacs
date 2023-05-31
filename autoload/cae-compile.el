@@ -17,8 +17,7 @@
 
     ;; I have not tested compiling these files but it's better not to compile
     ;; them anyways as they are ran in a CLI and hence are harder to debug.
-    ,(expand-file-name "doom-cli.el" doom-core-dir)
-    ,(expand-file-name "doom-cli-lib.el" doom-core-dir)))
+    ,(expand-file-name "doom-cli.el" doom-core-dir)))
 
 ;;;###autoload
 (defun cae-compile-this-elisp-file ()
