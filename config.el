@@ -602,338 +602,338 @@
   (map! :leader
         :desc "Copy link" "sy" #'link-hint-copy-link)
 
-  ;;(after! expand-region
-  ;;  (setq expand-region-smart-cursor t)
-  ;;  (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
-  ;;    (add-to-list 'er/try-expand-list fn t))
-  ;;  (setq er/try-expand-list
-  ;;        (mapcar (lambda (fn)
-  ;;                  (if (eq fn #'er/mark-comment)
-  ;;                      #'cae-mark-comment
-  ;;                    fn))
-  ;;                er/try-expand-list)))
-  ;;
-  ;;(advice-add #'persp-set-keymap-prefix :override #'ignore)
-  ;;
-  ;;(setq set-mark-command-repeat-pop t
-  ;;      next-line-add-newlines t)
-  ;;
-  ;;(setq search-whitespace-regexp ".*?"
-  ;;      search-default-mode #'char-fold-to-regexp
-  ;;      isearch-lax-whitespace t
-  ;;      isearch-wrap-pause 'no-ding
-  ;;      isearch-lazy-count t
-  ;;      isearch-repeat-on-direction-change t
-  ;;      isearch-allow-motion t
-  ;;      isearch-allow-scroll t
-  ;;      isearch-yank-on-move 'shift
-  ;;      isearch-motion-changes-direction t
-  ;;      lazy-count-prefix-format "(%s/%s) "
-  ;;      lazy-count-suffix-format nil    ; Using the suffix for counting matches
-  ;;                                      ; is better but does not work with
-  ;;                                      ; `isearch-mb'.
-  ;;      lazy-highlight-cleanup nil
-  ;;      ;; The default search ring size is 16, which is too small considering that
-  ;;      ;; we can fuzzy search the history with Consult.
-  ;;      search-ring-max 200
-  ;;      regexp-search-ring-max 200)
-  ;;(add-hook 'doom-escape-hook
-  ;;          (cae-defun cae-clean-up-lazy-highlight-h ()
-  ;;            (when isearch-lazy-highlight-overlays
-  ;;              (lazy-highlight-cleanup t) t)))
-  ;;
-  ;;(after! ispell
-  ;;  (setq ispell-quietly t
-  ;;        ispell-dictionary "en_US"
-  ;;        ispell-help-in-bufferp 'electric))
-  ;;
-  ;;(when (modulep! :emacs undo)
-  ;;  (after! undo-fu
-  ;;    (setq undo-fu-allow-undo-in-region t)))
-  ;;
-  ;;;; Hide commands in M-x which do not work in the current mode. Vertico commands
-  ;;;; are hidden in normal buffers.
-  ;;(setq read-extended-command-predicate #'command-completion-default-include-p)
-  ;;
-  ;;(use-package! avy
-  ;;  :defer t :init
-  ;;  (map! :prefix "C-z"
-  ;;        "n" #'avy-goto-line-below
-  ;;        "p" #'avy-goto-line-above
-  ;;        "y" #'avy-copy-region
-  ;;        "c" #'avy-goto-char
-  ;;        "m" #'avy-move-region
-  ;;        "l" #'avy-goto-line
-  ;;        "e" #'avy-goto-end-of-line
-  ;;        "." #'cae-avy-symbol-at-point
-  ;;        "k" #'avy-kill-region
-  ;;        "w" #'avy-kill-ring-save-region
-  ;;        "j" #'avy-goto-word-1
-  ;;        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-  ;;        "SPC" #'avy-goto-char-timer
-  ;;        "C-n" #'avy-goto-line-below
-  ;;        "C-p" #'avy-goto-line-above
-  ;;        "C-." #'cae-avy-symbol-at-point
-  ;;        "C-k" #'avy-kill-region
-  ;;        "C-w" #'avy-kill-ring-save-region
-  ;;        "C-y" #'avy-copy-region
-  ;;        "C-m" #'avy-move-region
-  ;;        "C-c" #'avy-goto-char
-  ;;        "C-l" #'avy-goto-line
-  ;;        "C-e" #'avy-goto-end-of-line
-  ;;        "C-j" #'avy-goto-word-1
-  ;;        "C-SPC" #'avy-goto-char-timer
-  ;;        (:map isearch-mode-map
-  ;;         "j" #'avy-isearch
-  ;;         "C-j" #'avy-isearch))
-  ;;  ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
-  ;;  ;; fork I'm currently using because I should be able to get this working using
-  ;;  ;; `avy-styles-alist' instead.
-  ;;  (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
-  ;;  (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
-  ;;  (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
-  ;;
-  ;;  ;; TODO All of these commands have jump and choose variants. I should make two
-  ;;  ;; separate keybindings for the two variants.
-  ;;  (when (modulep! :completion vertico)
-  ;;    (after! vertico
-  ;;      (map! :map vertico-map
-  ;;            "C-z C-j" #'vertico-quick-jump
-  ;;            "C-z j" #'vertico-quick-jump
-  ;;            "C-z i" #'vertico-quick-exit
-  ;;            "C-z C-i" #'vertico-quick-exit)))
-  ;;  (after! embark
-  ;;    (map! :map embark-collect-mode-map
-  ;;          "C-z C-j" #'avy-embark-collect-choose
-  ;;          "C-z j" #'avy-embark-collect-choose
-  ;;          "C-z i" #'avy-embark-collect-act
-  ;;          "C-z C-i" #'avy-embark-collect-act))
-  ;;  (when (modulep! :private corfu)
-  ;;    (after! corfu
-  ;;      (map! :map corfu-map
-  ;;            "C-z C-j" #'corfu-quick-jump
-  ;;            "C-z j" #'corfu-quick-jump
-  ;;            "C-z i" #'corfu-quick-insert
-  ;;            "C-z C-i" #'corfu-quick-insert)))
-  ;;  :config
-  ;;  (setq avy-timeout-seconds 0.4
-  ;;        avy-all-windows t
-  ;;        avy-keys (cae-keyboard-remap
-  ;;                  '(?a ?s ?d ?f ?g
-  ;;                    ?h ?j ?k ?l ?\;))
-  ;;        avy-dispatch-alist
-  ;;        (cae-keyboard-remap
-  ;;         '((?x . avy-action-kill-move)
-  ;;           (?X . avy-action-kill-stay)
-  ;;           (?t . avy-action-teleport)
-  ;;           (?m . avy-action-mark)
-  ;;           (?n . avy-action-copy)
-  ;;           (?y . avy-action-yank)
-  ;;           (?Y . avy-action-yank-line)
-  ;;           (?i . avy-action-ispell)
-  ;;           (?z . avy-action-zap-to-char)))
-  ;;        avy-styles-alist '((avy-isearch . pre)
-  ;;                           (ace-link-man . pre)
-  ;;                           (avy-goto-end-of-line . post)
-  ;;                           (avy-kill-ring-save-region . pre)
-  ;;                           (avy-kill-region . pre)
-  ;;                           (avy-copy-region . pre)
-  ;;                           (avy-move-region . pre))
-  ;;        avy-column-line-overlay t))
-  ;;
-  ;;(use-package! zop-to-char
-  ;;  :defer t
-  ;;  :init (map! [remap zap-to-char] #'zop-up-to-char
-  ;;              [remap zap-up-to-char] #'zop-to-char)
-  ;;  :config
-  ;;  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
-  ;;
-  ;;;; I mostly use this package for some additional prefix argument stuff like
-  ;;;; using `C-u - M-:' to insert a string from Elisp without double quotes.
-  ;;(use-package! pp+
-  ;;  :defer t :init
-  ;;  (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-  ;;  (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
-  ;;  (when (modulep! :tools eval +overlay)
-  ;;    (after! eros
-  ;;      (add-hook 'eros-mode-hook
-  ;;                (cae-defun cae-eros-setup-keybindings-h ()
-  ;;                  (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
-  ;;
-  ;;(use-package! abbrev
-  ;;  :defer t :config
-  ;;  (setq-default abbrev-mode t
-  ;;                save-abbrevs 'silently)
-  ;;  (map! :map edit-abbrevs-mode-map
-  ;;        [remap save-buffer] #'abbrev-edit-save-buffer)
-  ;;  (map! :map abbrev-map "e" #'edit-abbrevs)
-  ;;  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
-  ;;
-  ;;(use-package! ibuffer
-  ;;  :defer t :config
-  ;;  (setq ibuffer-always-show-last-buffer t
-  ;;        ibuffer-formats
-  ;;        '((mark modified read-only locked " "
-  ;;           (name 23 23 :left :elide)  ;Give more space to the name.
-  ;;           " "
-  ;;           (size 9 -1 :right)
-  ;;           " "
-  ;;           (mode 16 16 :left :elide)
-  ;;           " "
-  ;;           (vc-status 12 :left)
-  ;;           " " filename-and-process)
-  ;;          (mark " "
-  ;;                (name 16 -1)
-  ;;                " " filename)))
-  ;;  (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
-  ;;  (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
-  ;;
-  ;;(use-package! diff-mode
-  ;;  :defer t :config
-  ;;  (map! :map diff-mode-map
-  ;;        "q" #'kill-this-buffer))
-  ;;
-  ;;(use-package! aggressive-indent
-  ;;  :defer t :init
-  ;;  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
-  ;;                                      ;module.
-  ;;  (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
-  ;;  :config
-  ;;  (add-to-list
-  ;;   'aggressive-indent-dont-indent-if
-  ;;   '(and (bound-and-true-p lsp-mode)
-  ;;         (or (and lsp-enable-on-type-formatting
-  ;;                  (lsp--capability "documentOnTypeFormattingProvider"))
-  ;;             (and lsp-enable-indentation
-  ;;                  (lsp--capability "documentRangeFormattingProvider")))))
-  ;;  (dolist (command '(lsp-format-buffer
-  ;;                     lsp-format-region
-  ;;                     lsp-organize-imports
-  ;;                     lsp-organize-imports-remove-unused
-  ;;                     prog-fill-reindent-defun
-  ;;                     indent-pp-sexp
-  ;;                     save-buffer
-  ;;                     indent-for-tab-command))
-  ;;    (add-to-list 'aggressive-indent-protected-commands command))
-  ;;  (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
-  ;;
-  ;;(use-package! hungry-delete
-  ;;  :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
-  ;;  :config
-  ;;  (when (modulep! :config default +smartparens)
-  ;;    (map! :map hungry-delete-mode-map
-  ;;          [remap backward-delete-char-untabify] #'sp-backward-delete-char
-  ;;          [remap c-electric-backspace] #'sp-backward-delete-char
-  ;;          [remap c-electric-delete-forward] #'cae-delete-char
-  ;;          [remap delete-backward-char] #'sp-backward-delete-char
-  ;;          [remap delete-char] #'cae-delete-char
-  ;;          [remap delete-forward-char] #'cae-delete-char))
-  ;;  (when (modulep! :editor multiple-cursors)
-  ;;    (after! multiple-cursors-core
-  ;;      (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
-  ;;  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
-  ;;
-  ;;(use-package! file-info
-  ;;  :defer t :init
-  ;;  (map! :leader :prefix "f"
-  ;;        :desc "Show file info" "i" #'file-info-show)
-  ;;  :config
-  ;;  ;; See the `:private vc' module for further configuration.
-  ;;  (setq file-info-include-headlines t
-  ;;        file-info-max-value-length 100))
-  ;;
-  ;;(use-package! titlecase
-  ;;  :defer t :init
-  ;;  (after! embark
-  ;;    (define-key embark-region-map "T" #'titlecase-region)
-  ;;    (define-key embark-heading-map "T" #'titlecase-line)))
-  ;;
-  ;;;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
-  ;;;; `speedrect' commands.
-  ;;(use-package! speedrect
-  ;;  :after-call rectangle-mark-mode-hook
-  ;;  :config
-  ;;  (speedrect-hook))
-  ;;
-  ;;(use-package! restore-point
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-input-hook #'restore-point-mode)
-  ;;  :config
-  ;;  (dolist (fn '(symbol-overlay-switch-forward
-  ;;                symbol-overlay-switch-backward
-  ;;                symbol-overlay-jump-next
-  ;;                symbol-overlay-jump-prev
-  ;;                recenter-top-bottom
-  ;;                reposition-window))
-  ;;    (add-to-list 'rp/restore-point-commands fn))
-  ;;  ;; Restore point in the minibuffer.
-  ;;  (defun cae-restore-point-h ()
-  ;;    (when (bound-and-true-p restore-point-mode)
-  ;;      (rp/cond-restore-point)))
-  ;;  (defun cae-restore-point-enable-in-minibuffer-h ()
-  ;;    (if restore-point-mode
-  ;;        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
-  ;;               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
-  ;;               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
-  ;;               ;; way we are certain this function is only called interactively.
-  ;;               (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
-  ;;      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
-  ;;      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
-  ;;  (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
+  (after! expand-region
+    (setq expand-region-smart-cursor t)
+    (dolist (fn '(er/mark-sentence er/mark-paragraph mark-page))
+      (add-to-list 'er/try-expand-list fn t))
+    (setq er/try-expand-list
+          (mapcar (lambda (fn)
+                    (if (eq fn #'er/mark-comment)
+                        #'cae-mark-comment
+                      fn))
+                  er/try-expand-list)))
 
-  (use-package! symbol-overlay
+  (advice-add #'persp-set-keymap-prefix :override #'ignore)
+
+  (setq set-mark-command-repeat-pop t
+        next-line-add-newlines t)
+
+  (setq search-whitespace-regexp ".*?"
+        search-default-mode #'char-fold-to-regexp
+        isearch-lax-whitespace t
+        isearch-wrap-pause 'no-ding
+        isearch-lazy-count t
+        isearch-repeat-on-direction-change t
+        isearch-allow-motion t
+        isearch-allow-scroll t
+        isearch-yank-on-move 'shift
+        isearch-motion-changes-direction t
+        lazy-count-prefix-format "(%s/%s) "
+        lazy-count-suffix-format nil    ; Using the suffix for counting matches
+                                        ; is better but does not work with
+                                        ; `isearch-mb'.
+        lazy-highlight-cleanup nil
+        ;; The default search ring size is 16, which is too small considering that
+        ;; we can fuzzy search the history with Consult.
+        search-ring-max 200
+        regexp-search-ring-max 200)
+  (add-hook 'doom-escape-hook
+            (cae-defun cae-clean-up-lazy-highlight-h ()
+              (when isearch-lazy-highlight-overlays
+                (lazy-highlight-cleanup t) t)))
+
+  (after! ispell
+    (setq ispell-quietly t
+          ispell-dictionary "en_US"
+          ispell-help-in-bufferp 'electric))
+
+  (when (modulep! :emacs undo)
+    (after! undo-fu
+      (setq undo-fu-allow-undo-in-region t)))
+
+  ;; Hide commands in M-x which do not work in the current mode. Vertico commands
+  ;; are hidden in normal buffers.
+  (setq read-extended-command-predicate #'command-completion-default-include-p)
+
+  (use-package! avy
     :defer t :init
-    (map! "M-i" #'symbol-overlay-put
-          "M-I" #'symbol-overlay-remove-all
-          "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
-          "M-P" #'symbol-overlay-switch-backward
-          :leader
-          :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
-    (add-hook 'prog-mode-hook #'symbol-overlay-mode)
+    (map! :prefix "C-z"
+          "n" #'avy-goto-line-below
+          "p" #'avy-goto-line-above
+          "y" #'avy-copy-region
+          "c" #'avy-goto-char
+          "m" #'avy-move-region
+          "l" #'avy-goto-line
+          "e" #'avy-goto-end-of-line
+          "." #'cae-avy-symbol-at-point
+          "k" #'avy-kill-region
+          "w" #'avy-kill-ring-save-region
+          "j" #'avy-goto-word-1
+          ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+          "SPC" #'avy-goto-char-timer
+          "C-n" #'avy-goto-line-below
+          "C-p" #'avy-goto-line-above
+          "C-." #'cae-avy-symbol-at-point
+          "C-k" #'avy-kill-region
+          "C-w" #'avy-kill-ring-save-region
+          "C-y" #'avy-copy-region
+          "C-m" #'avy-move-region
+          "C-c" #'avy-goto-char
+          "C-l" #'avy-goto-line
+          "C-e" #'avy-goto-end-of-line
+          "C-j" #'avy-goto-word-1
+          "C-SPC" #'avy-goto-char-timer
+          (:map isearch-mode-map
+           "j" #'avy-isearch
+           "C-j" #'avy-isearch))
+    ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
+    ;; fork I'm currently using because I should be able to get this working using
+    ;; `avy-styles-alist' instead.
+    (advice-add #'avy-goto-end-of-line :around #'cae-avy-use-post-style-a)
+    (advice-add #'avy-kill-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
+    (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
+
+    ;; TODO All of these commands have jump and choose variants. I should make two
+    ;; separate keybindings for the two variants.
+    (when (modulep! :completion vertico)
+      (after! vertico
+        (map! :map vertico-map
+              "C-z C-j" #'vertico-quick-jump
+              "C-z j" #'vertico-quick-jump
+              "C-z i" #'vertico-quick-exit
+              "C-z C-i" #'vertico-quick-exit)))
+    (after! embark
+      (map! :map embark-collect-mode-map
+            "C-z C-j" #'avy-embark-collect-choose
+            "C-z j" #'avy-embark-collect-choose
+            "C-z i" #'avy-embark-collect-act
+            "C-z C-i" #'avy-embark-collect-act))
+    (when (modulep! :private corfu)
+      (after! corfu
+        (map! :map corfu-map
+              "C-z C-j" #'corfu-quick-jump
+              "C-z j" #'corfu-quick-jump
+              "C-z i" #'corfu-quick-insert
+              "C-z C-i" #'corfu-quick-insert)))
     :config
-    (map! :map symbol-overlay-map
-          "<f6>" #'cae-symbol-overlay-cheatsheet
-          "N" #'symbol-overlay-switch-forward
-          "P" #'symbol-overlay-switch-backward
-          "r" #'symbol-overlay-rename
-          "-" #'negative-argument)
-    ;; LSP provides its own symbol highlighting.
-    (add-hook 'lsp-mode-hook
-              (cae-defun cae-disable-symbol-overlay-h ()
-                (symbol-overlay-mode -1)))
+    (setq avy-timeout-seconds 0.4
+          avy-all-windows t
+          avy-keys (cae-keyboard-remap
+                    '(?a ?s ?d ?f ?g
+                      ?h ?j ?k ?l ?\;))
+          avy-dispatch-alist
+          (cae-keyboard-remap
+           '((?x . avy-action-kill-move)
+             (?X . avy-action-kill-stay)
+             (?t . avy-action-teleport)
+             (?m . avy-action-mark)
+             (?n . avy-action-copy)
+             (?y . avy-action-yank)
+             (?Y . avy-action-yank-line)
+             (?i . avy-action-ispell)
+             (?z . avy-action-zap-to-char)))
+          avy-styles-alist '((avy-isearch . pre)
+                             (ace-link-man . pre)
+                             (avy-goto-end-of-line . post)
+                             (avy-kill-ring-save-region . pre)
+                             (avy-kill-region . pre)
+                             (avy-copy-region . pre)
+                             (avy-move-region . pre))
+          avy-column-line-overlay t))
+
+  (use-package! zop-to-char
+    :defer t
+    :init (map! [remap zap-to-char] #'zop-up-to-char
+                [remap zap-up-to-char] #'zop-to-char)
+    :config
+    (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
+
+  ;; I mostly use this package for some additional prefix argument stuff like
+  ;; using `C-u - M-:' to insert a string from Elisp without double quotes.
+  (use-package! pp+
+    :defer t :init
+    (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
+    (map! [remap eval-last-sexp] #'cae-eval-last-sexp)
+    (when (modulep! :tools eval +overlay)
+      (after! eros
+        (add-hook 'eros-mode-hook
+                  (cae-defun cae-eros-setup-keybindings-h ()
+                    (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))))
+
+  (use-package! abbrev
+    :defer t :config
+    (setq-default abbrev-mode t
+                  save-abbrevs 'silently)
+    (map! :map edit-abbrevs-mode-map
+          [remap save-buffer] #'abbrev-edit-save-buffer)
+    (map! :map abbrev-map "e" #'edit-abbrevs)
+    (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
+
+  (use-package! ibuffer
+    :defer t :config
+    (setq ibuffer-always-show-last-buffer t
+          ibuffer-formats
+          '((mark modified read-only locked " "
+             (name 23 23 :left :elide)  ;Give more space to the name.
+             " "
+             (size 9 -1 :right)
+             " "
+             (mode 16 16 :left :elide)
+             " "
+             (vc-status 12 :left)
+             " " filename-and-process)
+            (mark " "
+                  (name 16 -1)
+                  " " filename)))
+    (add-to-list 'ibuffer-never-show-predicates "^\\*git-auto-push\\*$")
+    (add-to-list 'ibuffer-never-show-predicates "^\\*copilot events*\\*$"))
+
+  (use-package! diff-mode
+    :defer t :config
+    (map! :map diff-mode-map
+          "q" #'kill-this-buffer))
+
+  (use-package! aggressive-indent
+    :defer t :init
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode) ;See my `lisp'
+                                        ;module.
+    (add-hook 'c-mode-common-hook #'aggressive-indent-mode)
+    :config
+    (add-to-list
+     'aggressive-indent-dont-indent-if
+     '(and (bound-and-true-p lsp-mode)
+           (or (and lsp-enable-on-type-formatting
+                    (lsp--capability "documentOnTypeFormattingProvider"))
+               (and lsp-enable-indentation
+                    (lsp--capability "documentRangeFormattingProvider")))))
+    (dolist (command '(lsp-format-buffer
+                       lsp-format-region
+                       lsp-organize-imports
+                       lsp-organize-imports-remove-unused
+                       prog-fill-reindent-defun
+                       indent-pp-sexp
+                       save-buffer
+                       indent-for-tab-command))
+      (add-to-list 'aggressive-indent-protected-commands command))
+    (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
+
+  (use-package! hungry-delete
+    :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
+    :config
+    (when (modulep! :config default +smartparens)
+      (map! :map hungry-delete-mode-map
+            [remap backward-delete-char-untabify] #'sp-backward-delete-char
+            [remap c-electric-backspace] #'sp-backward-delete-char
+            [remap c-electric-delete-forward] #'cae-delete-char
+            [remap delete-backward-char] #'sp-backward-delete-char
+            [remap delete-char] #'cae-delete-char
+            [remap delete-forward-char] #'cae-delete-char))
     (when (modulep! :editor multiple-cursors)
-      ;; Don't distract me while I'm doing multiple cursor calculus.
       (after! multiple-cursors-core
-        (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
-    (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
-    ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
-    ;; overlay in the buffer. This is probably a bug.
-    (advice-add #'symbol-overlay-get-list
-                :around #'cae-hacks-symbol-overlay-reverse-list-a)
-    (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
-      (if (eq (car args) -1)
-          (nreverse (apply oldfun args))
-        (apply oldfun args))))
+        (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
+    (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
-  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
-  ;; `sentence-end-double-space'. This package's settings should be tweaked if you
-  ;; use multiple languages.
-  (use-package! sentex
+  (use-package! file-info
     :defer t :init
-    (if (version<= "30" emacs-version)
-        (setq forward-sentence-function #'cae-forward-sentence-function)
-      (map! [remap kill-sentence] #'sentex-kill-sentence
-            [remap forward-sentence] #'sentex-forward-sentence
-            [remap backward-sentence] #'sentex-backward-sentence)))
+    (map! :leader :prefix "f"
+          :desc "Show file info" "i" #'file-info-show)
+    :config
+    ;; See the `:private vc' module for further configuration.
+    (setq file-info-include-headlines t
+          file-info-max-value-length 100))
 
-  (use-package! edit-indirect
+  (use-package! titlecase
     :defer t :init
-    (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
+    (after! embark
+      (define-key embark-region-map "T" #'titlecase-region)
+      (define-key embark-heading-map "T" #'titlecase-line)))
 
-  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-    :defer t)
+  ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
+  ;; `speedrect' commands.
+  (use-package! speedrect
+    :after-call rectangle-mark-mode-hook
+    :config
+    (speedrect-hook))
+
+  (use-package! restore-point
+    :defer t :init
+    (add-hook 'doom-first-input-hook #'restore-point-mode)
+    :config
+    (dolist (fn '(symbol-overlay-switch-forward
+                  symbol-overlay-switch-backward
+                  symbol-overlay-jump-next
+                  symbol-overlay-jump-prev
+                  recenter-top-bottom
+                  reposition-window))
+      (add-to-list 'rp/restore-point-commands fn))
+    ;; Restore point in the minibuffer.
+    (defun cae-restore-point-h ()
+      (when (bound-and-true-p restore-point-mode)
+        (rp/cond-restore-point)))
+    (defun cae-restore-point-enable-in-minibuffer-h ()
+      (if restore-point-mode
+          (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+                 (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+                 ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
+                 ;; way we are certain this function is only called interactively.
+                 (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
+        (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+        (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
+    (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
+
+  ;;(use-package! symbol-overlay
+  ;;  :defer t :init
+  ;;  (map! "M-i" #'symbol-overlay-put
+  ;;        "M-I" #'symbol-overlay-remove-all
+  ;;        "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
+  ;;        "M-P" #'symbol-overlay-switch-backward
+  ;;        :leader
+  ;;        :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
+  ;;  (add-hook 'prog-mode-hook #'symbol-overlay-mode)
+  ;;  :config
+  ;;  (map! :map symbol-overlay-map
+  ;;        "<f6>" #'cae-symbol-overlay-cheatsheet
+  ;;        "N" #'symbol-overlay-switch-forward
+  ;;        "P" #'symbol-overlay-switch-backward
+  ;;        "r" #'symbol-overlay-rename
+  ;;        "-" #'negative-argument)
+  ;;  ;; LSP provides its own symbol highlighting.
+  ;;  (add-hook 'lsp-mode-hook
+  ;;            (cae-defun cae-disable-symbol-overlay-h ()
+  ;;              (symbol-overlay-mode -1)))
+  ;;  (when (modulep! :editor multiple-cursors)
+  ;;    ;; Don't distract me while I'm doing multiple cursor calculus.
+  ;;    (after! multiple-cursors-core
+  ;;      (add-to-list 'mc/unsupported-minor-modes 'symbol-overlay-mode)))
+  ;;  (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
+  ;;  ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
+  ;;  ;; overlay in the buffer. This is probably a bug.
+  ;;  (advice-add #'symbol-overlay-get-list
+  ;;              :around #'cae-hacks-symbol-overlay-reverse-list-a)
+  ;;  (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
+  ;;    (if (eq (car args) -1)
+  ;;        (nreverse (apply oldfun args))
+  ;;      (apply oldfun args))))
+  ;;
+  ;;;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
+  ;;;; `sentence-end-double-space'. This package's settings should be tweaked if you
+  ;;;; use multiple languages.
+  ;;(use-package! sentex
+  ;;  :defer t :init
+  ;;  (if (version<= "30" emacs-version)
+  ;;      (setq forward-sentence-function #'cae-forward-sentence-function)
+  ;;    (map! [remap kill-sentence] #'sentex-kill-sentence
+  ;;          [remap forward-sentence] #'sentex-forward-sentence
+  ;;          [remap backward-sentence] #'sentex-backward-sentence)))
+  ;;
+  ;;(use-package! edit-indirect
+  ;;  :defer t :init
+  ;;  (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim))
+  ;;
+  ;;(use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
+  ;;  :defer t)
 
   (after! (:all outline which-key)
     (which-key-add-keymap-based-replacements outline-minor-mode-map
