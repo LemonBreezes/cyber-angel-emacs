@@ -611,9 +611,7 @@
           "<next>" #'vertico-scroll-up))
         (:after eww
          :map eww-mode-map
-         "o" #'ace-link-eww)
-        :leader
-        :desc "help" "h" help-map)
+         "o" #'ace-link-eww))
   (define-key resize-window-repeat-map "_" #'shrink-window)
   (map! [remap delete-char] #'cae-delete-char
         ")" #'cae-insert-closing-paren)
@@ -971,8 +969,9 @@
   (use-package! switchy-window
     :defer t :init
     (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)
+    :config
     (keymap-set switchy-window-minor-mode-map
-            "<remap> <other-window>" #'switchy-window)))
+                "<remap> <other-window>" #'switchy-window)))
 
 
 
