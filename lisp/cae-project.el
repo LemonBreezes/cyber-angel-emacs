@@ -78,6 +78,15 @@
     (make-directory (file-name-directory bookmark-default-file) t)
     (bookmark-write-file bookmark-default-file)))
 
+(defun cae-save-all-project-bookmarks ()
+  "Save all project bookmarks."
+  (interactive)
+  (maphash (lambda (bookmark-default-file bookmark-alist)
+               (ignore bookmark-alist)
+               (make-directory (file-name-directory bookmark-default-file) t)
+               (bookmark-write-file bookmark-default-file))
+           cae-project-bookmark-cache))
+
 (define-prefix-command 'cae-project-bookmark-map)
 (map! :map cae-project-bookmark-map
       :desc "Jump to bookmark" "j" #'cae-project-bookmark-jump
