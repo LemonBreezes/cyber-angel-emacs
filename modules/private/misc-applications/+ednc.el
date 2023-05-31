@@ -3,7 +3,7 @@
 ;;(dbus-ping :system "org.freedesktop.DBus")
 ;;(dbus-list-known-names :system)
 (use-package! ednc
-  :when (and (fboundp 'dbus)
+  :when (and (require 'dbus nil t)
              (dbus-ping :system "org.freedesktop.DBus"))
   :config
   (ednc-mode +1)
