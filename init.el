@@ -63,6 +63,7 @@
        :private
        ;; exwm
        (corfu +tng)
+       debugger
        (dirvish +icons +dirvish)
        eshell
        dired
