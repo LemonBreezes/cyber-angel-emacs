@@ -22,8 +22,10 @@
   (dap-debug-last))
 
 ;;;###autoload
-(defun cae-debugger-gdb-select-frame ()
+(defun cae-comint-send-input ()
   (interactive)
-  (if (derived-mode-p 'gdb-frames-mode)
-      (call-interactively #'gdb-select-frame)
-    (call-interactively #'comint-send-input)))
+  ;; Not sure why `M-x gdb' binds this command everywhere, but it does.
+  (cond ((derived-mode-p 'gdb-frames-mode)
+         (call-interactively #'gdb-select-frame))
+        (t
+         (call-interactively #'comint-send-input))))
