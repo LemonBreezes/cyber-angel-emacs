@@ -39,7 +39,9 @@
   :init
   (after! magit
     (map! :map magit-mode-map
-          :n "yc" #'git-link-commit)))
+          :n "yc" #'git-link-commit))
+  (after! file-info
+    ))
 
 (use-package! gitignore-templates
   :defer t)
