@@ -516,6 +516,8 @@
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
   ;; Query buffers for a diff before killing them.
+  (defvar cae-diff-buffer nil
+    "Variable to store the diff buffer created by 'cae-ask-kill-buffer'.")
   (defun cae-ask-kill-buffer ()
     "Ask to diff, save or kill buffer"
     (if (and (buffer-file-name) (buffer-modified-p))
@@ -523,12 +525,14 @@
                  if (or (eq ch ?k) (eq ch ?K))
                  return t
                  if (or (eq ch ?d) (eq ch ?D))
-                 do (diff-buffer-with-file)
+                 do (setq cae-diff-buffer (diff-buffer-with-file))
                  if (or (eq ch ?s) (eq ch ?S))
                  return (progn (save-buffer) t)
                  if (or (eq ch ?q) (eq ch ?Q))
-                 do (progn (kill-buffer "*Diff*")
-                           (cl-return nil)))
+                 return (progn
+                          (when cae-diff-buffer
+                            (kill-buffer cae-diff-buffer))
+                          nil))
       t))
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
