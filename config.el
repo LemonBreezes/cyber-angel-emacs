@@ -561,13 +561,13 @@
   :init
   (map! "M-n" #'avy-goto-line-below
         "M-p" #'avy-goto-line-above
-        "M-j" #'avy-goto-word-1
+        "C-;" #'avy-goto-word-1
         :map isearch-mode-map
-        "M-j" #'avy-isearch)
+        "C-;" #'avy-isearch)
   (when (modulep! :completion vertico)
     (after! vertico
       (map! :map vertico-map
-            "M-j" #'vertico-quick-jump)))
+            "C-;" #'vertico-quick-jump)))
   :config
   (setq avy-timeout-seconds 0.25
         avy-all-windows t
