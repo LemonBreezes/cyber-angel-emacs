@@ -146,8 +146,6 @@
                         :test #'string-match-p))
         (and (featurep 'ispell)
              (get-buffer-window ispell-choices-buffer))
-        (string= (buffer-name)
-                 "*org-ai-refactor*")
         (and (symbol-file this-command)
              (string= (file-name-base (symbol-file this-command)) "ace-window")))))
 
