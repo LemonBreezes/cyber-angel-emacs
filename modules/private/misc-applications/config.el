@@ -34,7 +34,7 @@
     "+somafm"
     "+trashed"
     "+try"
-    "+vuiet"
+    ;;"+vuiet"
     "+ytel"
     "+webpaste"
     "+elfeed"
