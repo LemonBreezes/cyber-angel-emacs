@@ -45,6 +45,8 @@ overriding other keymaps."
 (advice-add #'which-key-add-key-based-replacements :around
             #'+which-key-add-key-based-replacements-a)
 
+;; I added these to help with debugging my config. It's easier to toggle these
+;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p t
   "Whether our UI section of `config.el' is disabled.")
 (defvar cae-init-tools-enabled-p t
