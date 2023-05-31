@@ -18,7 +18,7 @@
 
     (when (modulep! :private corfu)
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
-        (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+        (add-to-list 'completion-at-point-functions #'cape-dabbrev nil #'eq))
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
 
   (when (modulep! :lang cc +lsp)
