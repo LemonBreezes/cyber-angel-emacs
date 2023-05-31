@@ -585,6 +585,7 @@
                                         ;I can do `C-x C-b =' to quickly diff a
                                         ;buffer with its file.
         "C-x _" #'shrink-window         ;Dual to `C-x ^'.
+        "C-x O" #'other-window-previous ;Dual to `C-x o'.
         "C-x M-o" #'ace-swap-window
         "C-x x o" #'ov-clear
         "M-Z" #'zap-up-to-char
