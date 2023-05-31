@@ -371,7 +371,7 @@
 
 (after! auth-source
   (setq auth-source-cache-expiry nil
-        auth-sources (expand-file-name "secrets/authinfo" doom-user-dir)
+        auth-sources (concat doom-user-dir "secrets/authinfo")
         auth-source-gpg-encrypt-to nil))
 
 (after! password-cache
