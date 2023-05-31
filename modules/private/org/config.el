@@ -32,4 +32,6 @@
         "]" #'+org-insert-checkbox-or-bracket))
 
 (use-package! org-jira
-  :defer t)
+  :defer t
+  :config
+  (make-directory (expand-file-name "~/.org-jira") t))
