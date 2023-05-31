@@ -39,11 +39,12 @@ command was called, go to its unstaged changes section."
            (not (magit-file-tracked-p (buffer-file-name))))))
 
 ;;;###autoload
-(defhydra +vc/smerge-hydra (:hint nil
-                            :pre (if (not smerge-mode) (smerge-mode 1))
-                            ;; Disable `smerge-mode' when quitting hydra if
-                            ;; no merge conflicts remain.
-                            :post (smerge-auto-leave))
+(after! hydra
+  (defhydra +vc/smerge-hydra (:hint nil
+                              :pre (if (not smerge-mode) (smerge-mode 1))
+                              ;; Disable `smerge-mode' when quitting hydra if
+                              ;; no merge conflicts remain.
+                              :post (smerge-auto-leave))
     "
                                                          [smerge]
   Movement   Keep           Diff              Other
@@ -78,4 +79,4 @@ command was called, go to its unstaged changes section."
     ;; Often after calling `smerge-vc-next-conflict', the cursor will land at
     ;; the bottom of the window
     ("n" (progn (smerge-vc-next-conflict) (recenter-top-bottom (/ (window-height) 8))))
-    ("q" nil :color blue))
+    ("q" nil :color blue)))
