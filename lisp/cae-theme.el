@@ -27,7 +27,7 @@
                           :background 'unspecified)))
   (after! goggles
     (set-face-attribute 'goggles-added nil
-                        :background (face-attribute 'highlight :background)))
+                        :background (face-attribute 'lazy-highlight :background)))
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
