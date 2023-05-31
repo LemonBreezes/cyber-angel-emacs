@@ -772,6 +772,7 @@
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
+    ;; LSP provides its own symbol highlighting.
     (add-hook 'lsp-mode-hook
               (cae-defun cae-disable-symbol-overlay-h ()
                 (symbol-overlay-mode -1))))
