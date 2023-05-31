@@ -678,6 +678,7 @@
         "." #'cae-avy-symbol-at-point
         "k" #'avy-kill-region
         "w" #'avy-kill-ring-save-region
+        "j" #'avy-goto-word-1
         "SPC" #'avy-goto-char-timer
         "C-n" #'avy-goto-line-below
         "C-p" #'avy-goto-line-above
@@ -689,6 +690,7 @@
         "C-c" #'avy-goto-char
         "C-l" #'avy-goto-line
         "C-e" #'avy-goto-end-of-line
+        "C-j" #'avy-goto-word-1
         "C-SPC" #'avy-goto-char-timer)
   ;; For some reason this is necessary. It's either a bug in Avy or a bug in the
   ;; fork I'm currently using because I should be able to get this working using
