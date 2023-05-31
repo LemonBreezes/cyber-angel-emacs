@@ -33,7 +33,6 @@
 (package! trashed)
 (package! frameshot)
 (package! webpaste)
-(package! mu4e :built-in t)
 (package! try)
 (package! know-your-http-well)
 (package! exercism-modern
