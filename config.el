@@ -18,7 +18,8 @@
 ;;; UI
 
 (load! "lisp/cae-theme")
-(load! "lisp/cae-cheatsheets")
+(after! hydra
+  (load! "lisp/cae-cheatsheets"))
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
