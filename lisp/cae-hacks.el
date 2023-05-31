@@ -21,7 +21,8 @@
 (defun cae-hacks-hydra-quit-h (&rest _)
   (hydra-keyboard-quit))
 (after! hydra
-  (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h))
+  (add-hook 'persp-before-switch-functions #'cae-hacks-hydra-quit-h)
+  (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-quit-h))
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
