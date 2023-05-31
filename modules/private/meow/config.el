@@ -193,7 +193,8 @@
                (message-buffer-mode . normal)
                (eshell-mode . insert)
                (eat-mode . insert)
-               (vterm-mode . insert)))
+               (vterm-mode . insert)
+               (helpful-mode . motion)))
     (setf (alist-get (car p) meow-mode-state-list) (cdr p)))
   (when (modulep! :private corfu)
     (after! corfu
