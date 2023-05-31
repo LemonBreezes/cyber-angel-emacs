@@ -562,7 +562,7 @@
       (dolist (cmd mc-smartparens-cmds)
         (add-to-list 'mc/cmds-to-run-for-all cmd)))
     (map!
-     ;; My version of `sp-paredit-bindings'
+     ;; My version of `sp-paredit-bindings'.
      "M-r" #'cae-raise-sexp-dwim
      "C-M-f" #'sp-forward-sexp
      "C-M-b" #'sp-backward-sexp
@@ -582,6 +582,7 @@
      "M-J" #'sp-join-sexp
      "M-C" #'sp-convolute-sexp
      ;; My version of `sp-smartparens-bindings'.
+
      )))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
