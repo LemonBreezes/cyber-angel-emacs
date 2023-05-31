@@ -66,59 +66,60 @@
 
 (add-hook 'kill-emacs-hook #'cae-project-bookmark-save-all)
 
-(defvar-keymap cae-project-bookmark-embark-map
-  :doc "Keymap for Embark project bookmarks actions."
-  :parent embark-bookmark-map)
+(after! embark
+  (defvar-keymap cae-project-bookmark-embark-map
+    :doc "Keymap for Embark project bookmarks actions."
+    :parent embark-bookmark-map)
 
-(map-keymap
- (lambda (key def)
-   (when (string-match-p "^bookmark-" (symbol-name def))
-     ;; define an analogous command that uses the current project's bookmark file
-     (let ((command (intern (format "cae-project-%s"
-                                    (symbol-name def)))))
-       (defalias command
-         `(lambda ()
-            (interactive)
-            ;; TODO: Fix edit annotation
+  (map-keymap
+   (lambda (key def)
+     (when (string-match-p "^bookmark-" (symbol-name def))
+       ;; define an analogous command that uses the current project's bookmark file
+       (let ((command (intern (format "cae-project-%s"
+                                      (symbol-name def)))))
+         (defalias command
+           `(lambda ()
+              (interactive)
+              ;; TODO: Fix edit annotation
+              (cae-project--with-bookmark-alist nil
+                (setq this-command ',def)
+                (call-interactively ',def)))
+           (format "Analogous command to `%s' that uses the current project's bookmark file."
+                   (symbol-name def)))
+         (define-key cae-project-bookmark-embark-map (vector key) command))))
+   embark-bookmark-map)
+
+  ;; These commands are exceptions to the above rule because they are noninteractive.
+  (defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
+    (cae-project--with-bookmark-alist nil
+      (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)
+      (setq-local bookmark-alist (cae-project--bookmark-alist)
+                  bookmark-default-file (cae-project--get-bookmark-file))))
+  (defun cae-project-bookmark-show-annotation (bookmark-name-or-record)
+    (cae-project--with-bookmark-alist nil
+      (bookmark-show-annotation bookmark-name-or-record)
+      (setq-local bookmark-alist (cae-project--bookmark-alist)
+                  bookmark-default-file (cae-project--get-bookmark-file))))
+
+  (map! :map cae-project-bookmark-embark-map
+        "e" #'cae-project-bookmark-edit-annotation
+        "a" #'cae-project-bookmark-show-annotation)
+
+  (setf (alist-get 'project-bookmark embark-keymap-alist)
+        #'cae-project-bookmark-embark-map)
+
+  (setf (alist-get 'project-bookmark embark-exporters-alist)
+        (defalias 'cae-project-bookmark-export
+          (lambda (cands)
             (cae-project--with-bookmark-alist nil
-              (setq this-command ',def)
-              (call-interactively ',def)))
-         (format "Analogous command to `%s' that uses the current project's bookmark file."
-                 (symbol-name def)))
-       (define-key cae-project-bookmark-embark-map (vector key) command))))
- embark-bookmark-map)
+              (embark-export-bookmarks cands)))))
 
-;; These commands are exceptions to the above rule because they are noninteractive.
-(defun cae-project-bookmark-edit-annotation (bookmark-name-or-record &optional from-bookmark-list)
-  (cae-project--with-bookmark-alist nil
-    (bookmark-edit-annotation bookmark-name-or-record from-bookmark-list)
-    (setq-local bookmark-alist (cae-project--bookmark-alist)
-                bookmark-default-file (cae-project--get-bookmark-file))))
-(defun cae-project-bookmark-show-annotation (bookmark-name-or-record)
-  (cae-project--with-bookmark-alist nil
-    (bookmark-show-annotation bookmark-name-or-record)
-    (setq-local bookmark-alist (cae-project--bookmark-alist)
-                bookmark-default-file (cae-project--get-bookmark-file))))
-
-(map! :map cae-project-bookmark-embark-map
-      "e" #'cae-project-bookmark-edit-annotation
-      "a" #'cae-project-bookmark-show-annotation)
-
-(setf (alist-get 'project-bookmark embark-keymap-alist)
-      #'cae-project-bookmark-embark-map)
-
-(setf (alist-get 'project-bookmark embark-exporters-alist)
-      (defalias 'cae-project-bookmark-export
-        (lambda (cands)
-          (cae-project--with-bookmark-alist nil
-            (embark-export-bookmarks cands)))))
-
-(setf (alist-get 'cae-project-bookmark-delete embark-pre-action-hooks)
-      (alist-get 'bookmark-delete embark-pre-action-hooks))
-(setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
-      (alist-get 'bookmark-rename embark-post-action-hooks))
-(setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
-      (alist-get 'bookmark-rename embark-post-action-hooks))
+  (setf (alist-get 'cae-project-bookmark-delete embark-pre-action-hooks)
+        (alist-get 'bookmark-delete embark-pre-action-hooks))
+  (setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
+        (alist-get 'bookmark-rename embark-post-action-hooks))
+  (setf (alist-get 'cae-project-bookmark-rename embark-post-action-hooks)
+        (alist-get 'bookmark-rename embark-post-action-hooks)))
 
 (defun cae-project-bookmark (name)
   "Consult bookmarks in the current project."
@@ -150,8 +151,3 @@
 
 (push '((nil . "cae-project-\\(bookmark-.*\\)") . (nil . "\\1"))
       which-key-replacement-alist)
-
-(map! :leader
-      :prefix "p"
-      "C-b" #'cae-project-bookmark
-      "RET" #'cae-project-bookmark-set)
