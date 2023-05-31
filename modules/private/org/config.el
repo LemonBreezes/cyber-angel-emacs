@@ -49,4 +49,5 @@
   (add-hook 'org-mode-hook #'worf-mode)
   :config
   (when (modulep! :editor multiple-cursors)
-    (add-to-list 'mc/unsupported-minor-modes #'worf-mode)))
+    (after! multiple-cursors-core
+      (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
