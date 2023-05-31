@@ -5,6 +5,8 @@
   (interactive "p\nP")
   (other-window (- count) all-frames t))
 
+(map! "C-x O" #'other-window-previous)
+
 ;; Uses special keys from my esoteric keyboard layout
 (define-repeat-map other-window
   ("o" other-window
