@@ -130,10 +130,6 @@
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t)))
 
-(when (and (modulep! :checkers syntax +flymake)
-           (modulep! :checkers syntax +childframe))
-  (defalias 'posframe-poshandler-p0p1-to-p0p1 #'posframe-poshandler-point-bottom-left-corner-upward))
-
 (use-package! goggles
   :init
   (add-hook 'prog-mode-hook #'goggles-mode)
