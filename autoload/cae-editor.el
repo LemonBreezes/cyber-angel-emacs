@@ -242,22 +242,6 @@ mark the string and call `edit-indirect-region' with it."
     (while (search-forward (string ?\C-m) nil t)
       (replace-match "" nil t))))
 
-;;;###autoload
-(defun cae-titlecase-word-dwim ()
-  "Titlecase the current word or the selected region."
-  (interactive)
-  (if (region-active-p)
-      (call-interactively #'titlecase-region)
-    (goto-char
-     (save-mark-and-excursion
-       (cl-destructuring-bind (beg . end) (or (bounds-of-thing-at-point 'word)
-                                              (cons 0 0))
-         (when (< (point) end)
-           (goto-char beg)))
-       (mark-word)
-       (prog1 (region-end)
-         (call-interactively #'titlecase-region))))))
-
 (defun cae-avy-do (action pt)
   (goto-char pt)
   (unwind-protect
