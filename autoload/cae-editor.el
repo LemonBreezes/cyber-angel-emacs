@@ -55,6 +55,7 @@
 
 ;;;###autoload
 (defun cae-raise-sexp ()
+  "Like `sp-raise-sexp', but works on the region if active."
   (interactive)
   (if (region-active-p)
       (save-excursion
@@ -68,6 +69,9 @@
 
 ;;;###autoload
 (defun cae-insert-closing-paren ()
+  "Inserts a closing paren if the sexps in the buffer are
+unbalanced, otherwise acts like whatever `self-insert-command' is
+bound to."
   (interactive)
   (cond ((condition-case error
              (scan-sexps (point-min) (point-max))
