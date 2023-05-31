@@ -226,7 +226,8 @@
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
 
-;; Hercules could be lazy-loaded but it's a really small package.
+;; Hercules could be lazy-loaded but it's only like 200 LOC and its only
+;; dependency is `which-key' so I'll defer that work to a later date.
 (use-package! hercules
   :after which-key
   :config
