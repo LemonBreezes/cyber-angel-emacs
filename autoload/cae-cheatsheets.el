@@ -18,6 +18,11 @@
   ;;("M-<right>" tabulated-list-next-column "Next column" :column "Navigate")
   ("<f6>" nil "Exit" :exit t :column nil))
 
+;;;###autoload (autoload 'cae-vertico-cheatsheet-hydra/body "autoload/cae-cheatsheets" nil t)
+(defhydra cae-vertico-cheatsheet-hydra (:color pink :foreign-keys run)
+  ("C-c ;" embbark-export "Export")
+  ("<f6>" nil "Exit" :exit t))
+
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
 (defun cae-debugger-cheatsheet () (interactive))
 (hercules-def
