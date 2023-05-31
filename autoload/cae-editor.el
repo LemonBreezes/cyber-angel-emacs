@@ -322,10 +322,9 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-avy-embark-act-on-region ()
   (interactive)
   (save-window-excursion
-    (let* ((initial-window (selected-window))
+    (let ((initial-window (selected-window))
            (beg (avy--line))
-           (end (avy--line))
-           text)
+           (end (avy--line)))
       (when (> beg end)
         (cl-rotatef beg end))
       (setq beg (save-excursion
