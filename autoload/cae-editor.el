@@ -69,3 +69,11 @@
           (goto-char beg)
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
     (call-interactively #'sp-raise-sexp)))
+
+;;;###autoload
+(defun cae-previous-buffer ()
+  (interactive)
+  (when (and (featurep 'dirvish)
+             (> (length (dv-layout (dirvish-curr))) 1))
+    (dirvish-layout-toggle))
+  (call-interactively #'previous-buffer))
