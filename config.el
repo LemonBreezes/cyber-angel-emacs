@@ -287,9 +287,6 @@
 
   (use-package! hercules
     :defer t :init
-    (after! embark
-      (map! :map embark-collect-mode-map
-            "<f6>" #'cae-embark-collect-cheatsheet))
     (after! debug
       (map! :map debugger-mode-map
             "<f6>" #'cae-debugger-cheatsheet))
@@ -854,7 +851,13 @@
     (add-hook 'doom-first-buffer-hook #'switchy-window-minor-mode)
     :config
     (keymap-set switchy-window-minor-mode-map
-                "<remap> <other-window>" #'switchy-window)))
+                "<remap> <other-window>" #'switchy-window))
+
+  (use-package! embark
+    :defer t :config
+    (map! :map embark-collect-mode-map
+          "<f6>" #'cae-embark-collect-cheatsheet-hydra/body)
+    (define-key vertico-map (kbd "C-z") 'embark-act-with-completing-read)))
 
 
 ;;; Autocompletion
@@ -1047,31 +1050,6 @@
   (setq org-ai-default-chat-model "gpt-4")
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
-
-(defun with-minibuffer-keymap (keymap)
-  (eval `(lambda (fn &rest args)
-          (minibuffer-with-setup-hook
-              (lambda ()
-                (use-local-map
-                 (make-composed-keymap ,keymap (current-local-map))))
-            (apply fn args)))
-        t))
-
-(defvar embark-completing-read-prompter-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "<tab>") 'abort-recursive-edit)
-    map))
-
-(advice-add 'embark-completing-read-prompter :around
-            (with-minibuffer-keymap embark-completing-read-prompter-map))
-(define-key vertico-map (kbd "<tab>") 'embark-act-with-completing-read)
-
-(defun embark-act-with-completing-read (&optional arg)
-  (interactive "P")
-  (let* ((embark-prompter 'embark-completing-read-prompter)
-         (act (propertize "Act" 'face 'highlight))
-         (embark-indicator (lambda (_keymap targets) nil)))
-    (embark-act arg)))
 
 ;;; Email
 
