@@ -504,6 +504,8 @@
       (:after man
        :map Man-mode-map
        "o" #'ace-link-man))
+(define-key resize-window-repeat-map "_" #'shrink-window)
+
 (define-key!
   :keymaps (append +default-minibuffer-maps
                    (when (modulep! :editor evil +everywhere)
@@ -511,7 +513,6 @@
   "C-s" nil)                            ;We already have `consult-history' bound
                                         ;to `M-r' and `M-s'. This way we can use
                                         ;C-s to search in the minibuffer.
-(define-key resize-window-repeat-map "_" #'shrink-window)
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
