@@ -271,3 +271,17 @@ mark the string and call `edit-indirect-region' with it."
           (sp-forward-sexp)
         (forward-sexp)))
     (embark-act)))
+
+;;;###autoload
+(defun cae-avy-action-comment-dwim (pt)
+  (goto-char pt)
+  (save-mark-and-excursion
+    (when (eq avy-command 'avy-goto-line)
+      (goto-char (point-at-bol)))
+    (set-mark (point))
+    (if (eq avy-command 'avy-goto-line)
+        (end-of-line)
+      (if (modulep! :config default +smartparens)
+          (sp-forward-sexp)
+        (forward-sexp)))
+    (comment-or-uncomment-region)))
