@@ -277,6 +277,12 @@ mark the string and call `edit-indirect-region' with it."
           real-this-command 'set-mark-command)
     (call-interactively #'set-mark-command)))
 
+(defun cae-embark-completing-read-prompter (oldfun &rest args)
+  (minibuffer-with-setup-hook
+      (lambda ()
+        (local-set-key (kbd "C-z") #'abort-recursive-edit))
+    (apply oldfun args)))
+
 ;;;###autoload
 (defun embark-act-with-completing-read (&optional arg)
   (interactive "P")
