@@ -71,8 +71,7 @@
           (ruler-mode)
           (visual-line-mode)
           (display-fill-column-indicator-mode)
-          (rainbow-mode)
-          ))
+          (rainbow-mode)))
   (setq minions-prominent-modes '(defining-kbd-macro
                                   projectile-mode
                                   ))
