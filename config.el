@@ -576,7 +576,9 @@
       search-ring-max 200
       regexp-search-ring-max 200)
 (add-hook 'doom-escape-hook
-          (apply-partially #'lazy-highlight-cleanup t))
+          (cae-defun cae-clean-up-lazy-highlight-h ()
+            (when isearch-lazy-highlight-overlays
+              (lazy-highlight-cleanup t))))
 
 (after! ispell
   (setq ispell-quietly t
