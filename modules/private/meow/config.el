@@ -189,8 +189,6 @@
   ;;      "DEL" #'meow-keypad)
   (map! :leader
         :desc "help" "h" help-map)
-  (map! :map meow-normal-state-keymap
-        "DEL" #'meow-keypad)
   (setq meow-keypad-leader-dispatch doom-leader-map)
   (setq meow-keypad-start-keys
         `((?x . ?x)
