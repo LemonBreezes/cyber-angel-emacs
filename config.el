@@ -740,10 +740,10 @@
     (map! "C-h C-m" #'describe-keymap
           "C-h <return>" #'info-emacs-manual
           "C-x C-k C-k" #'consult-kmacro ;replaces
-                                        ;`kmacro-end-or-call-macro-repeat',
-                                        ;which is similar to
-                                        ;`kmacro-end-and-call-macro' from
-                                        ;`<f4>' and `C-x e'.
+                                         ;`kmacro-end-or-call-macro-repeat',
+                                         ;which is similar to
+                                         ;`kmacro-end-and-call-macro' from
+                                         ;`<f4>' and `C-x e'.
           ;; C-x bindings (ctl-x-map)
           "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
           "C-x r SPC" #'consult-register-store ;orig. abbrev-prefix-mark (unrelated)
@@ -783,9 +783,9 @@
            "M-g f" #'consult-flycheck)
           (:unless (modulep! :config default)
            "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
-                                        ;also slower than `fd'. See Minad's comment
-                                        ;in
-                                        ;https://github.com/minad/consult/issues/363
+                                    ;also slower than `fd'. See Minad's comment
+                                    ;in
+                                    ;https://github.com/minad/consult/issues/363
            "M-s r" #'consult-ripgrep
            "M-s D" #'consult-locate))
     :config
