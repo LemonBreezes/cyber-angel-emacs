@@ -40,6 +40,7 @@
               (make-local-variable mode-var)
               (if eat--eshell-process-running-mode
                   (progn (set mode-var (symbol-value mode))
+                         ;;(+log mode-var (symbol-value mode-var))
                          (funcall mode -1))
                 (when (symbol-value mode-var)
                   (funcall mode 1)
