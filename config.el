@@ -405,7 +405,13 @@
     (add-hook 'eshell-mode-hook #'electric-pair-local-mode)
     (add-hook 'c-mode-common-hook #'electric-pair-local-mode))
   (map! [remap newline] nil)
-  (add-hook 'doom-first-file-hook #'electric-indent-mode))
+  (add-hook 'doom-first-file-hook #'electric-indent-mode)
+
+  (setq electric-pair-pairs '((?\" . ?\")
+                              (?\{ . ?\})
+                              (?\[ . ?\])
+                              (?\( . ?\)))
+        electric-pair-text-pairs electric-pair-pairs))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
