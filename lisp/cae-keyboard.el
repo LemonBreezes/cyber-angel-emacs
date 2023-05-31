@@ -141,6 +141,8 @@
                           "Go to char: "
                           "Move to column: ")
                         :test #'string-match-p))
+        (and (featurep 'my-repo-pins)
+             (get-buffer-window "my-repo-pins-ui-buffer"))
         (and (featurep 'ispell)
              (get-buffer-window ispell-choices-buffer))
         (and (symbol-file this-command)
