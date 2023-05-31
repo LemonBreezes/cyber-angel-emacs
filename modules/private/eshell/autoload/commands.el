@@ -8,7 +8,7 @@
     (buffer-string)))
 
 ;;;###autoload
-(defun +eshell-file-contents (file)
+(defun cae-eshell-file-contents (file)
   "Return fontified file contents for FILE."
   (let ((buffer (get-file-buffer file)))
     (if buffer
@@ -39,7 +39,7 @@
 (defun eshell/hat (&rest files)
   "Output FILES with highlighting."
   (dolist (f files)
-    (eshell-print (+eshell-file-contents f))))
+    (eshell-print (cae-eshell-file-contents f))))
 
 ;;;###autoload
 (defun eshell/swap (file1 file2)
