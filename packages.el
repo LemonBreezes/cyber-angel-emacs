@@ -56,7 +56,6 @@
 (package! restore-point
   :recipe (:host github :repo "arthurcgusmao/restore-point"))
 (package! symbol-overlay)
-(package! substitute)
 
 ;; These are used for their autoloads.
 (package! ialign)
