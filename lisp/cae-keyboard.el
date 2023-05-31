@@ -175,7 +175,7 @@
              ("-" special-lispy-ace-subword)
              ("~" special-lispy-tilde)
              ("_" special-lispy-underscore)
-             ("'" special-lispy-tick) ;`special-lispy-eval-other-window' lost
+             ("'" lispy-tick) ;`special-lispy-eval-other-window' lost
              ("=" special-lispy-eval-other-window))))
       (dolist (binding bindings)
         (define-key lispy-mode-map (car binding) (cadr binding))))
