@@ -100,9 +100,7 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8
-       "C-d" +workspace/display
-      "C-S-d" cae-workspace-display))
+       "9" +workspace/switch-to-8))
    t)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
