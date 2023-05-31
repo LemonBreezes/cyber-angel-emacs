@@ -136,7 +136,7 @@
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
    (or (and (minibufferp)
-            (not (bound-and-true-p vertico--input))
+            ;;(not (bound-and-true-p vertico--input))
             (cl-member (minibuffer-prompt)
                        '("Go to line: "
                          "Go to char: "
