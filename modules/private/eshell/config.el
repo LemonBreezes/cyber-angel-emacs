@@ -4,7 +4,9 @@
 (defvar cae-window-history nil)
 (add-hook 'doom-switch-window-hook
           (cae-defun cae-window-history-store-h ()
-            (push (selected-window) cae-window-history)))
+            (push (selected-window) cae-window-history)
+            (when (> (length cae-window-history) 10)
+              (setq cae-window-history (cl-subseq cae-window-history 0 10)))))
 
 (after! eshell
   (setq-hook! 'eshell-mode-hook
