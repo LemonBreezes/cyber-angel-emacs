@@ -159,7 +159,7 @@
   (after! lispy
     ;; navigation
     (unless (boundp 'cae-keyboard--lispy-mode-map-backup)
-      (defvar cae-keyboard--lispy-mode-map-backup lispy-mode-map)
+      (defvar cae-keyboard--lispy-mode-map-backup (copy-keymap lispy-mode-map))
       (defvar cae-lispy-hydra--command-column-alist
         '((special-lispy-right . "")
           (special-lispy-left . "")
