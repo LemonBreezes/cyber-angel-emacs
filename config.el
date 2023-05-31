@@ -823,9 +823,6 @@
           "M-g k" #'consult-global-mark
           "M-g I" #'consult-imenu-multi
           ;; M-s bindings (search-map)
-          [remap Info-search] #'consult-info
-          "M-s i" #'consult-info
-          "M-s m" #'consult-man
           "M-s k" #'consult-keep-lines
           "M-s u" #'consult-focus-lines
           ;; Isearch integration
@@ -846,12 +843,16 @@
                       (not (modulep! :checkers syntax +flymake)))
            "M-g f" #'consult-flycheck)
           (:unless (modulep! :config default)
-           "M-s d" #'consult-find ;does not cache files like Doom & Projectile
-                                  ;also slower than `fd'. See Minad's comment
-                                  ;in
-                                  ;https://github.com/minad/consult/issues/363
+           "M-s d" #'consult-find   ;does not cache files like Doom & Projectile
+                                        ;also slower than `fd'. See Minad's comment
+                                        ;in
+                                        ;https://github.com/minad/consult/issues/363
            "M-s r" #'consult-ripgrep
-           "M-s D" #'consult-locate))
+           "M-s D" #'consult-locate)
+          [remap Info-search] #'consult-info
+          :map help-map
+           "TAB" #'consult-info
+           "W" #'consult-man)
     :config
     (setq consult-preview-key 'any)
     (consult-customize
