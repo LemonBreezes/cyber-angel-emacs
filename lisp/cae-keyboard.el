@@ -87,7 +87,6 @@
   (map! :map universal-argument-map
         "l" #'cae-keyboard-insert-current-prefix))
 
-
 ;;; Distinguishing dual-purpose keycodes
 
 ;; Look up the "TAB" key in the current major mode. If it is bound and "<tab>"
