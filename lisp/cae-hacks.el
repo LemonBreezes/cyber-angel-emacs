@@ -68,8 +68,20 @@
 (defvar vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
 ;; I'm disabling this workaround until I run into a problem.
-(defadvice! embark--act-ignore-this-command-keys (oldfun &rest args)
+(defadvice! cae-hacks-ignore-this-command-keys-a (oldfun &rest args)
   :around #'embark--act
   (advice-add #'set--this-command-keys :override #'ignore)
   (unwind-protect (apply oldfun args)
     (advice-remove #'set--this-command-keys #'ignore)))
+
+;; White list local variables for some projects.
+(defadvice! cae-hacks-whitelist-some-dir-locals-a (oldfun variables dir-name)
+  :around #'hack-local-variables-filter
+  (if (and default-directory
+           (cl-member default-directory
+                      `(,doom-user-dir "~/src/atlas/")
+                      :test #'file-in-directory-p))
+      (progn (advice-add #'safe-local-variable-p :override #'always)
+             (unwind-protect (funcall oldfun variables dir-name)
+               (advice-remove #'safe-local-variable-p #'always)))
+    (funcall oldfun variables dir-name)))
