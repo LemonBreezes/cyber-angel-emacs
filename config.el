@@ -167,7 +167,12 @@
 (after! posframe
   (setq posframe-inhibit-double-buffering t))
 
-
+(use-package! topsy
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :config
+  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
+
 ;; Tools
 
 ;; (load! "lisp/cae-webkit.el")
@@ -348,12 +353,6 @@
           '("clangd" "--background-index" "--clang-tidy"
             "--completion-style=detailed" "--header-insertion=never"
             "--header-insertion-decorators=0"))))
-
-(use-package! topsy
-  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-  :config
-  ;; It's really jarring that Topsy doesn't work if the top line is a comment.
-  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn))
 
 
 ;;; Editor
