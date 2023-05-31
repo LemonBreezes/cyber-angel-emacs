@@ -166,6 +166,12 @@
       ((not (display-graphic-p))
        (setq browse-url-browser-function #'w3m-browse-url)))
 
+(use-package! w3m
+  :defer t
+  :config
+  (map! :map w3m-mode-map
+        "o" #'link-hint-open-link))
+
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
