@@ -493,8 +493,7 @@
        (:map minibuffer-local-map
         "C-;" nil))                     ;I prefer <f8> for `embark-act'.
       (:when (modulep! :completion vertico)
-       [remap apropos] nil
-                                        ;`consult-apropos' is obsolete.
+       [remap apropos] nil              ;`consult-apropos' is obsolete.
        ;;I am testing the default bindings which are to use `<prior>' and
        ;;`<next>' for navigating the minibuffer history.
        ;;(:after vertico
@@ -504,7 +503,7 @@
        )
       (:after man
        :map Man-mode-map
-       :n "o" #'ace-link-man))
+       "o" #'ace-link-man))
 (define-key!
   :keymaps (append +default-minibuffer-maps
                    (when (modulep! :editor evil +everywhere)
