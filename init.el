@@ -4,7 +4,7 @@
 (random t)                              ; Set the random seed.
 
 (load! "lisp/cae-lib")
-(load! "lisp/cae-hacks")
+;; (load! "lisp/cae-hacks")
 
 (setq doom-leader-alt-key "M-SPC"
       doom-localleader-alt-key "M-SPC m"
