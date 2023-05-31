@@ -87,17 +87,17 @@
        (rss +org)
 
        :private
-       (corfu +indexed)
-       debugger
-       (dirvish +icons +dirvish)
-       eshell
-       dired
-       lisp
-       misc-applications
-       modeline
-       ;; (meow +leader)
-       unpackaged
-       vc
+       ;;(corfu +indexed)
+       ;;debugger
+       ;;(dirvish +icons +dirvish)
+       ;;eshell
+       ;;dired
+       ;;lisp
+       ;;misc-applications
+       ;;modeline
+       ;;;; (meow +leader)
+       ;;unpackaged
+       ;;vc
        )
 
 ;; Local Variables:
