@@ -4,12 +4,14 @@
                    flyspell
                    flycheck
                    ccls
-                   helm-mode
                    helm-rg
                    helm-org
                    helm-projectile
                    swiper-helm
-                   helm-descbinds)
+                   helm-descbinds
+		   helm-company
+		   helm-c-yasnippet
+		   helm-describe-modes)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
