@@ -524,6 +524,8 @@
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-multiple-cursors")
   (load! "lisp/cae-restore-point")
+  (when (modulep! :editor evil)
+    (load! "lisp/cae-evil"))
 
   (autoload 'cae-project-bookmark (concat doom-private-dir
                                           "lisp/cae-project"))
