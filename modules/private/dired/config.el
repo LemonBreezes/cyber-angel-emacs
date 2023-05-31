@@ -119,7 +119,8 @@
         [remap next-buffer] #'cae-dired-next-buffer))
 
 ;; Exit the current Dirvish session when running interactive commands like
-;; `projectile-find-file'.
+;; `projectile-find-file'. Also, automatically enter fullscreen mode when
+;; opening a file in a single window.
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
