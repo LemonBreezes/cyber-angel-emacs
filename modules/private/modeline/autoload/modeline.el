@@ -14,15 +14,14 @@
                    (vc-call-backend vc-backend 'root filepath)))
               (when vc-base-path
                 (let* ((name-base
+                        "​"
                         (file-relative-name filepath vc-base-path))
                        (name-unique name-base)
                        (name-id 0))
                   (while (get-buffer name-unique)
                     (setq name-unique
                           (concat name-base
-                                  (if (zerop name-id)
-                                      ""
-                                    (format " <%d>" name-id))))
+                                  (format " <%d>" name-id)))
                     (setq name-id (1+ name-id)))
                   (with-current-buffer buf
                     (rename-buffer name-unique))))))))
