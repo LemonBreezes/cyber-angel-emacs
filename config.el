@@ -533,7 +533,7 @@
                  return (progn
                           (when (and (window-live-p cae-diff-window)
                                      (buffer-name (window-buffer cae-diff-window)))
-                            (kill-buffer cae-diff-buffer))
+                            (kill-buffer (window-buffer cae-diff-window)))
                           nil))
       t))
   (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
