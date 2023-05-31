@@ -106,13 +106,13 @@
                  (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
 
 ;; Set some popup rules.
-(plist-put! +popup-defaults :ttl 0)
+(plist-put! +popup-defaults :ttl 5)
 ;; (set-popup-rule! "^\\*Man [^*]*\\*" :size 0.5 :side 'right :quit t :select :ttl t)
-;; (set-popup-rule! "^ \\*Metahelp\\*" :size 0.5 :side 'right :quit t :select t :ttl t)
+;; (set-popup-rule! "^ \\*Metahelp\v\*" :size 0.5 :side 'right :quit t :select t :ttl t)
 ;; ;; Do not kill or close these buffers (respectively windows)!
-;; (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :ttl nil :quit nil)
-;; (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :quit nil)
-;; (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :ttl 5 :quit nil :ttl t)
+(set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :ttl nil :quit nil)
+(set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :quit nil)
+(set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :ttl 5 :quit nil :ttl t)
 ;; (set-popup-rule! "^\\*Help\\*"           :size #'+popup-shrink-to-fit :side 'right :quit t :select t :ttl t)
 ;; (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :side 'right)
 ;; (after! info
