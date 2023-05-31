@@ -63,7 +63,7 @@
 (package! define-repeat-map :recipe (:repo "https://tildegit.org/acdw/define-repeat-map.el.git"))
 
 ;; cae-keyboard.el
-(package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
+;;(package! home-row-numbers :recipe (:host github :repo "LemonBreezes/home-row-numbers"))
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! casease :recipe (:host github :repo "DogLooksGood/casease"))
 
