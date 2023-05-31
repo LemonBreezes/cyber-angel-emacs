@@ -14,8 +14,6 @@ alias mcd    mkdir               -p                                           $1
 alias cdp    cd-to-project
 alias cd-    cd -
 alias cd--   cd -2
-alias cd---  cd -3
-alias cd---- cd -4
 
 alias q     exit
 alias clear clear-scrollback
