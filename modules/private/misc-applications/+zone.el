@@ -44,5 +44,5 @@
                      (delete-other-windows)
                      (apply oldfun args)
                      (set-window-configuration wconf))))
-    (while (minibufferp)
+    (when (minibufferp)
       (abort-recursive-edit))))
