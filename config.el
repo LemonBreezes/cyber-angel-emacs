@@ -1,7 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(eval-when-compile (require 'doom-lib nil t))
-
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
