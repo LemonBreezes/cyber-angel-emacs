@@ -412,7 +412,7 @@
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'eac-ispell-word-then-abbrev
       "C-x 4 I" #'ibuffer-other-window
-      "C-x _" #'shrink-window
+      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
       "M-Z" #'zap-up-to-char
       "<f8>" #'embark-act
       [remap apropos] nil               ;`consult-apropos' is obsolete.
