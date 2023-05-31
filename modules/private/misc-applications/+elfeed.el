@@ -50,7 +50,8 @@
           ("Q" +elfeed-quit "Quit Elfeed" :color blue)
           ("q" nil "quit" :color blue))))
       (map! :map elfeed-search-mode-map
-            "<f6>" #'cae-elfeed-hydra/body))
+            "<f6>" #'cae-elfeed-hydra/body
+            "h" #'cae-elfeed-hydra))
 
     (use-package elfeed-tube
       :after elfeed
