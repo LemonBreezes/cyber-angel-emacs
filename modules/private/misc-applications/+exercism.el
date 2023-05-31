@@ -5,6 +5,6 @@
   :init
   (map! :leader
         :prefix +misc-applications-prefix
-        (:prefix ("e" . "exercism")
+        (:prefix ("E" . "exercism")
          "v" #'exercism-modern-view-tracks
          "j" #'exercism-modern-jump)))
