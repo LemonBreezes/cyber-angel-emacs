@@ -27,7 +27,8 @@ command was called, go to its unstaged changes section."
   "Like `cae-unpackaged-magit-save-buffer-show-status' but with
 non-nil `magit-status-goto-file-position'."
   (interactive)
-  (save-buffer)
+  (when (buffer-file-name)
+    (save-buffer))
   (let ((magit-status-goto-file-position t))
     (call-interactively #'magit-status))
   (delete-other-windows)
@@ -37,7 +38,8 @@ non-nil `magit-status-goto-file-position'."
 (defun cae-unpackaged-magit-save-buffer-show-status ()
   "Save buffer and show its changes in `magit-status'."
   (interactive)
-  (save-buffer)
+  (when (buffer-file-name)
+    (save-buffer))
   (cae-unpackaged-magit-status))
 
 ;; Do not jump to changes if they have been automatically commited.
