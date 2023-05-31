@@ -23,6 +23,9 @@
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
+(package! perfect-margin)
+
+;; Testing whether to use this or `perfect-margin'.
 (package! auto-olivetti :recipe (:repo "https://git.sr.ht/~ashton314/auto-olivetti"))
 
 ;; cae-theme.el
