@@ -44,3 +44,7 @@
                        (user-login-name))))
     (require 'auto-sudoedit)
     (auto-sudoedit)))
+
+(defun cae-auto-sudoedit-exempt-p ()
+  (let ((path (or (buffer-file-name) list-buffers-directory)))
+    (string-prefix-p "/usr/share/emacs/" path)))
