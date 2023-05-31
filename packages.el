@@ -31,6 +31,7 @@
 (package! w3m)
 (package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
+(package! detached)
 
 ;; These are used for their autoloads.
 (package! crontab-mode)
