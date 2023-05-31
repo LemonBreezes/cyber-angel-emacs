@@ -1,15 +1,15 @@
 ;;; private/dired/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun cae-dired-set-layout-h ()
-  (when (and (derived-mode-p 'dired-mode)
-             (one-window-p)
-             (not (memq last-command '(dirvish-layout-toggle
-                                       cae-dired-previous-buffer
-                                       cae-dired-next-buffer)))
-             (frame-width (selected-frame))
-             (> (frame-width (selected-frame)) 160))
-    (dirvish-layout-toggle)))
+;;;;;###autoload
+;;(defun cae-dired-set-layout-h ()
+;;  (when (and (derived-mode-p 'dired-mode)
+;;             (one-window-p)
+;;             (not (memq last-command '(dirvish-layout-toggle
+;;                                       cae-dired-previous-buffer
+;;                                       cae-dired-next-buffer)))
+;;             (frame-width (selected-frame))
+;;             (> (frame-width (selected-frame)) 160))
+;;    (dirvish-layout-toggle)))
 
 ;;;###autoload
 (defun cae-dired-load-dirvish-h (dir)
@@ -37,20 +37,20 @@
           (funcall oldfun file)))
     (funcall oldfun file wildcards)))
 
-(defun cae-dired-switch-buffer--handle-dirvish ()
-  (when (and (featurep 'dirvish)
-             (dirvish-curr)
-             (window-dedicated-p))
-    (dirvish-layout-toggle)))
-
-;;;###autoload
-(defun cae-dired-previous-buffer ()
-  (interactive)
-  (cae-dired-switch-buffer--handle-dirvish)
-  (call-interactively #'previous-buffer))
-
-;;;###autoload
-(defun cae-dired-next-buffer ()
-  (interactive)
-  (cae-dired-switch-buffer--handle-dirvish)
-  (call-interactively #'next-buffer))
+;;(defun cae-dired-switch-buffer--handle-dirvish ()
+;;  (when (and (featurep 'dirvish)
+;;             (dirvish-curr)
+;;             (window-dedicated-p))
+;;    (dirvish-layout-toggle)))
+;;
+;;;;;###autoload
+;;(defun cae-dired-previous-buffer ()
+;;  (interactive)
+;;  (cae-dired-switch-buffer--handle-dirvish)
+;;  (call-interactively #'previous-buffer))
+;;
+;;;;;###autoload
+;;(defun cae-dired-next-buffer ()
+;;  (interactive)
+;;  (cae-dired-switch-buffer--handle-dirvish)
+;;  (call-interactively #'next-buffer))
