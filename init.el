@@ -75,6 +75,7 @@ overriding other keymaps."
        snippets
        multiple-cursors
        lispy
+       fold
 
        :emacs
        undo
