@@ -33,6 +33,7 @@
        eshell
 
        :checkers
+       syntax
        (spell +everywhere)
 
        :tools
