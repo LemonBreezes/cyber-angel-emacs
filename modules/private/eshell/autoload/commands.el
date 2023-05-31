@@ -131,7 +131,7 @@ file to edit."
     (insert input)))
 
 ;;;###autoload
-(defun eshell/u ()
+(defun eshell/l ()
   (let ((target-window
          (cl-find-if (lambda (win)
                        (and (window-buffer win)
