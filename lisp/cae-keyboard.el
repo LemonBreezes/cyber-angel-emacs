@@ -341,6 +341,9 @@
   (add-hook 'web-mode-hook  'smart-semicolon-mode)
   (add-hook 'java-mode-hook 'smart-semicolon-mode))
 
+
+;; This package has not been updated since 2014. If I have to add more advices,
+;; I'd might as well clone this package and maintain it myself.
 (use-package! electric-spacing
   :defer t :init
   (add-hook 'c-mode-common-hook #'electric-spacing-mode)
