@@ -202,7 +202,6 @@
 
 (use-package! topsy
   :defer t :init
-  ;; Enable topsy-mode for all programming modes
   (add-hook 'prog-mode-hook #'topsy-mode)
   :config
   ;; Set custom function for rjsx-mode
