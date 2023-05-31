@@ -25,7 +25,8 @@
        ,(cae-keyboard-kbd "2") split-window-below
        ,(cae-keyboard-kbd "3") split-window-right
        "M-o" ace-swap-window)
-      (:enter cae-repeat-blink-cursor))
+      (:enter cae-repeat-blink-cursor)
+      (:exit "/" +workspace/display))
    t)
 
   (define-repeat-map isearch-repeat
