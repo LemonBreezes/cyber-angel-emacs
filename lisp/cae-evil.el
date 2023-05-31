@@ -43,6 +43,8 @@
   "C-w" nil
   "C-z" nil)
 
+;; TODO Undefine the C-j, C-k, etc keys.
+
 (map! :prefix "g"
       :m "[" #'backward-page
       :m "]" #'+forward-page)
