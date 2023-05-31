@@ -49,6 +49,7 @@
 (package! aggressive-indent)
 (package! hungry-delete)
 (package! auto-sudoedit)
+(package! file-info)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
