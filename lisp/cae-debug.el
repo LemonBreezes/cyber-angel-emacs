@@ -49,3 +49,11 @@ normally have their errors suppressed."
 ;; Use this with `vertico--exhibit' for example to debug completion tables.
 ;; Copied from here:
 ;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
+
+;;; Errors I am currently debugging
+
+(advice-add #'signal :around
+            (defun cae-debug-signal-a (func &rest args)
+              (when (eq (length args) 1)
+                (backtrace))
+              (apply func args)))
