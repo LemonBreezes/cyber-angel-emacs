@@ -13,7 +13,8 @@
     ,(expand-file-name "lang/org/autoload/org.el" doom-modules-dir)
     ,(expand-file-name "tools/debugger/autoload/debugger.el" doom-modules-dir)
     ,(expand-file-name "lang/cc/autoload.el" doom-modules-dir)
-    ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)))
+    ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)
+    ,(expand-file-name "config/default/autoload/search.el" doom-modules-dir)))
 
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
