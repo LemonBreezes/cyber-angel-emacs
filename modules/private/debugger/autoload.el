@@ -56,6 +56,7 @@
 
 ;;;###autoload
 (defun cae-debugger-mark-session-h ()
+  "Mark the current session with the current workspace."
   (when-let ((session (dap--cur-session)))
     (puthash session (+workspace-current-name) cae-debugger--session-workspace-map)))
 
