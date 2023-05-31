@@ -700,7 +700,6 @@
   (advice-add #'avy-kill-ring-save-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-copy-region :around #'cae-avy-use-pre-style-a)
   (advice-add #'avy-move-region :around #'cae-avy-use-pre-style-a)
-  (advice-add #'avy-resume :around #'cae-avy-resume-use-last-style-a)
 
   ;; TODO All of these commands have jump and choose variants. I should make two
   ;; separate keybindings for the two variants.
