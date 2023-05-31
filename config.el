@@ -407,10 +407,11 @@
   (map! [remap newline] nil)
   (add-hook 'doom-first-file-hook #'electric-indent-mode)
 
-  (setq electric-pair-pairs '((?\" . ?\")
-                              (?\{ . ?\})
-                              (?\[ . ?\]))
-        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
+  (after! elec-pair
+    (setq electric-pair-pairs '((?\" . ?\")
+                                (?\{ . ?\})
+                                (?\[ . ?\]))
+          electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit)))
 
 ;; Hide commands in M-x which do not work in the current mode. Vertico commands
 ;; are hidden in normal buffers.
