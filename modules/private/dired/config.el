@@ -111,7 +111,6 @@
         "j" #'+default/search-buffer
         [remap delete-other-windows] #'cae-dired-maximize-buffer))
 ;;(add-hook 'dirvish-setup-hook #'cae-dired-fullscreen-dwim-h)
-(add-hook 'dired-after-readin-hook #'cae-dired-fullscreen-dwim-h)
 
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
