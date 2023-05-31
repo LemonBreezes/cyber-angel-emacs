@@ -34,11 +34,14 @@
                          x)
                        which-key-replacement-alist)))))
 
+;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
+;; many major modes.
+
 ;; I don't use Deft.
- (when (and (not (modulep! :ui deft))
-            (eq (lookup-key doom-leader-map "nd")
-                'deft))
-   (define-key doom-leader-map "nd" nil))
+(when (and (not (modulep! :ui deft))
+           (eq (lookup-key doom-leader-map "nd")
+               'deft))
+  (define-key doom-leader-map "nd" nil))
 
 (map! :leader
       :desc "help" "h" help-map)
