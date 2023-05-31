@@ -28,7 +28,7 @@
                     cae-cheatsheets-minibuffer--last-tab))
        (setf (alist-get (tab-bar--current-tab)
                         cae-cheatsheets-tab-bar-hydra-alist
-                        nil nil #'eq)
+                        nil nil #'equal)
              cae-cheatsheets-minibuffer--last-hydra))
      (when (and cae-cheatsheets-minibuffer--last-hydra
                 (equal (tab-bar--current-tab)
@@ -42,11 +42,6 @@
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h))
-
-;; Hercules already does this for us since I am using a fork of Hercules with
-;; that feature.
-
-;;; Pause and resume hydras with workspaces
 
 (defvar cae-cheatsheets-workspace--last-hydra nil)
 
@@ -68,11 +63,6 @@
             #'cae-cheatsheets-workspace-hydra-pause-h)
   (add-hook 'persp-activated-functions
             #'cae-cheatsheets-workspace-hydra-resume-h))
-
-;; Haven't done this for Hercules yet and I might never get around to it since I
-;; don't use Hercules that much. Same for the tab bar stuff.
-
-;;; Save and restore hydras before switching tabs
 
 (defvar cae-cheatsheets-tab-bar-hydra-alist nil)
 
@@ -108,5 +98,3 @@
 (when (modulep! :ui workspaces)
   (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
   (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
-
-;;; Hide Hercules when switching tabs
