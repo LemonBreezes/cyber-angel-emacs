@@ -577,10 +577,10 @@
            ("C-<left>" sp-forward-barf-sexp "Barf/Slurp")
            ("C-{" sp-backward-barf-sexp "Barf/Slurp")
            ("C-M-<right>" sp-backward-slurp-sexp "Barf/Slurp")
+           ("C-M-S-w" sp-copy-sexp "Selection") ;Overrides `append-next-kill'.
            ("C-]" sp-select-next-thing-exchange "Selection") ;Overrides
                                         ;`abort-recursive-edit'.
            ("C-M-]" sp-select-next-thing "Selection")
-           ("C-M-S-w" sp-copy-sexp "Selection") ;Overrides `append-next-kill'.
            ("C-M-@" sp-mark-sexp "Selection"))))
     (when (modulep! :ui hydra)
       (eval
