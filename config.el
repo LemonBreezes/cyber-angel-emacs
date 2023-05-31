@@ -752,7 +752,6 @@
                 symbol-overlay-jump-next
                 symbol-overlay-jump-prev))
     (add-to-list 'rp/restore-point-commands fn))
-  ;;(advice-add #'rp/restore-point-position :before #'push-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
     (when (bound-and-true-p restore-point-mode)
@@ -761,6 +760,8 @@
     (if restore-point-mode
         (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
                (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+               ;; Use `doom-escape-hook' instead of `keyboard-quit' because that
+               ;; way we are not modifying `keyboard-quit'.
                (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
       (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
