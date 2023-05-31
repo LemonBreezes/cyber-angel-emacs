@@ -18,7 +18,13 @@
           (cae-defun cae-lisp-setup-eval-expression-comments-h ()
             (when (string= (minibuffer-prompt) "Eval: ")
               (setq-local comment-start ";"
-                          comment-end ""))))
+                          comment-end ""
+                          comment-start-skip ";+ *"
+                          comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
+
+(map! :map lispy-mode-map
+      ;; Allow inserting newlines in the minibuffer.
+      [remap lispy-newline-and-indent-plain] #'cae-lispy-newline-and-indent-plain)
 
 ;; Check parens before saving.
 (add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
