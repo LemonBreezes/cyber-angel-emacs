@@ -290,8 +290,11 @@
   [remap async-shell-command] 'with-editor-async-shell-command)
 (define-key (current-global-map)
   [remap shell-command] 'with-editor-shell-command)
-(add-hook 'shell-mode-hook  #'with-editor-export-editor)
-(add-hook 'eshell-mode-hook #'with-editor-export-editor)
+(dolist (hook '(shell-mode-hook eshell-mode-hook))
+  (dolist (fn '(with-editor-export-editor
+                with-editor-export-hg-editor
+                with-editor-export-git-editor))
+    (add-hook hook fn)))
 (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
 
 (when (and (modulep! :checkers spell)
