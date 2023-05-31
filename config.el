@@ -653,9 +653,8 @@
           [remap delete-char] #'cae-sp-delete-char
           [remap delete-forward-char] #'cae-sp-delete-char))
   (when (modulep! :editor multiple-cursors)
-    (after! multiple-cursors
-      (add-to-list 'mc--default-cmds-to-run-for-all #'hungry-delete-backward)
-      (add-to-list 'mc--default-cmds-to-run-for-all #'hungry-delete-forward)))
+    (after! multiple-cursors-core
+      (add-to-list 'mc/unsupported-minor-modes 'hungry-delete-mode)))
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
