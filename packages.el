@@ -73,7 +73,6 @@
 (package! switch-window)
 (package! switchy-window)
 (package! chatgpt-shell)
-(package! lam :recipe (:host github :repo "ChanderG/lam"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
