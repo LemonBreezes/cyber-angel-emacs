@@ -41,7 +41,6 @@
        grammar
 
        :tools
-       debugger
        direnv
        editorconfig
        (eval +overlay)
