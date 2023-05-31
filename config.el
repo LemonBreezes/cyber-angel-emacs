@@ -694,7 +694,6 @@
               (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
                 (let ((avy-style 'post))
                   (apply oldfun args))))
-  (advice-add #'cae-avy-symbol-at-point :around #'cae-avy-use-post-style-a)
 
   (when (modulep! :completion vertico)
     (after! vertico
