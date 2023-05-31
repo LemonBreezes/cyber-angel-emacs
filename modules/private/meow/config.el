@@ -183,7 +183,9 @@
   (setq meow-keypad-start-keys
         '((?c . ?c)
           (?h . ?h)
-          (?x . ?x)))
+          (?x . ?x)
+          (?~ . ?~)
+          (?` . ?`)))
   (appendq! meow-mode-state-list
             '((helpfulmode . normal)
               (Man-mode . normal)
