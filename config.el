@@ -269,8 +269,9 @@
 (load! "lisp/cae-multi")
 (load! "lisp/cae-repeat")
 (map! "C-x 4 I" #'ibuffer-other-window
-      "C-i" #'doom/dumb-indent
-      "C-S-i" #'doom/dumb-dedent)
+      (:when (display-graphic-p)
+        "C-i" #'doom/dumb-indent
+        "C-S-i" #'doom/dumb-dedent))
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
@@ -536,7 +537,7 @@
 
 (after! cc-mode
     (map! :map c-mode-base-map
-          "TAB" #'indent-for-tab-command))
+          "<tab>" #'indent-for-tab-command))
 
 (when (modulep! :private corfu)
   (map! (:prefix ("M-+" . "autocomplete")
