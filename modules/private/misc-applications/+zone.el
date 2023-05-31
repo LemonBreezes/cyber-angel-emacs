@@ -31,10 +31,9 @@
                        zone-pgm-paragraph-spaz])
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
-
-  (require 'zone-matrix)
-  (require 'zone-matrix-settings)
-  (setq zone-programs [zone-matrix])
+  (advice-add #'zone-matrix :before
+              (cae-defun +zone-matrix-disable-nobreak-char-display-a ()
+                (setq-local nobreak-char-display nil)))
 
   ;; zone-pgm-stress
   ;; zone-pgm-stress-destress
