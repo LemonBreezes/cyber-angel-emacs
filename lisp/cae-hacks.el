@@ -135,6 +135,7 @@
         garbage-collection-messages t
         gc-cons-threshold cae-hacks-big-gc-threshold
         gc-cons-percentage cae-hacks-gc-percentage)
+  (advice-add #'garbage-collect :override #'ignore)
   (gcmh-mode -1))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
@@ -142,6 +143,7 @@
   (run-with-idle-timer
    10 nil
    (lambda ()
+     (advice-remove #'garbage-collect #'ignore)
      (gcmh-mode cae-hacks--gcmh-mode)
      (setq garbage-collection-messages cae-hacks--gc-messages
            cae-hacks--gc-messages nil
