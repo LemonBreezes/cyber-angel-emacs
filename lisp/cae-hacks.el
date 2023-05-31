@@ -130,8 +130,7 @@
 
 (defun cae-hacks-disable-gc ()
   (unless cae-hacks--gc-disabled
-    (setq cae-hacks--gcmh-mode   cae-hacks--gcmh-mode
-          cae-hacks--gc-disabled t)
+    (setq cae-hacks--gcmh-mode   cae-hacks--gcmh-mode)
     (gcmh-mode -1)
     (setq cae-hacks--gc-messages      cae-hacks--gc-messages
           garbage-collection-messages t
@@ -139,18 +138,19 @@
           gc-cons-percentage          cae-hacks-gc-percentage)
     (when (timerp gcmh-idle-timer)
       (cancel-timer gcmh-idle-timer))
-    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)))
+    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
+    (setq cae-hacks--gc-disabled t)))
 
 (defun cae-hacks-enable-gc ()
   (when cae-hacks--gc-disabled
-    (setq cae-hacks--gc-disabled nil)
     (gcmh-mode cae-hacks--gcmh-mode)
     (setq garbage-collection-messages cae-hacks--gc-messages
           cae-hacks--gc-messages      nil
           cae-hacks--gcmh-mode        nil
           gc-cons-threshold           gcmh-low-cons-threshold
           gc-cons-percentage          cae-hacks-gc-percentage)
-    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)))
+    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
+    (setq cae-hacks--gc-disabled nil)))
 
 (defun cae-hacks-disable-gc-temporarily (&rest _)
   (cae-hacks-disable-gc)
