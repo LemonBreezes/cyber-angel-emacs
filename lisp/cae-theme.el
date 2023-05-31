@@ -69,29 +69,23 @@
 ;;    (theme-magic-export-theme-mode +1)))
 
 ;; Set theme based on time
-(if (and (display-graphic-p)
-         (not (modulep! :ui doom)))
-    (progn (advice-add #'doom-init-theme-h :override #'ignore)
-           (use-package! circadian
-             :config
-             (setq circadian-themes
-                   (if (modulep! :ui doom)
-                       '((:sunrise . doom-one)
-                         (:sunset  . doom-one-light))
-                     '((:sunrise . modus-operandi)
-                       (:sunset  . modus-vivendi))))
-             (if (and calendar-latitude calendar-longitude)
-                 (circadian-setup)
-               (setq calendar-latitude 0
-                     calendar-longitude 0)
-               (message "ERROR: Calendar latitude and longitude are not set.")
-               (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
-                                                          circadian-themes))
-                                    doom-theme)))))
-  (setq doom-theme
+(advice-add #'doom-init-theme-h :override #'ignore)
+(use-package! circadian
+  :config
+  (setq circadian-themes
         (if (modulep! :ui doom)
-            'doom-one
-          'modus-vivendi)))
+            '((:sunrise . doom-one)
+              (:sunset  . doom-one-light))
+          '((:sunrise . modus-operandi)
+            (:sunset  . modus-vivendi))))
+  (if (and calendar-latitude calendar-longitude)
+      (circadian-setup)
+    (setq calendar-latitude 0
+          calendar-longitude 0)
+    (message "ERROR: Calendar latitude and longitude are not set.")
+    (setq doom-theme (or (cdr-safe (cl-find-if (lambda (x) (eq (car x) :sunset))
+                                               circadian-themes))
+                         doom-theme))))
 
 (unless (display-graphic-p)
   (setq +ligatures-in-modes nil
