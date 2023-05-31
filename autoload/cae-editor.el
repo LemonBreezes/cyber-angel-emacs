@@ -1,8 +1,7 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
 
 ;; I used to advise `kill-buffer' with this but stopped doing so since it always
-;; caused problems to pop up elsewhere somehow. I'm using an alternative
-;; solution now.
+;; caused problems to pop up elsewhere somehow.
 ;;(defun cae-kill-buffer-query-diff-a (orig-func &optional buffer-or-name)
 ;;  "Like `kill-buffer', but prompts to diff or save the buffer if it's modified."
 ;;  (setq buffer-or-name (or buffer-or-name (current-buffer)))
