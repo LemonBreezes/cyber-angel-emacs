@@ -46,6 +46,7 @@
 (add-hook 'hy-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'dune-mode-hook #'cae-lisp-check-parens-before-save-h)
 (add-hook 'fennel-mode-hook #'cae-lisp-check-parens-before-save-h)
+(add-hook 'lisp-data-mode-hook #'cae-lisp-check-parens-before-save-h)
 
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
