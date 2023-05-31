@@ -175,16 +175,7 @@
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
-(when (modulep! +pretty)
-  (use-package! nyan-mode
-    :when (display-graphic-p)
-    :init
-    (add-hook 'doom-first-buffer-hook #'nyan-mode)
-    :config
-    (setopt nyan-bar-length 20
-      nyan-minimum-window-width 20))
-
-  ;; This block might seem crazy, but it's how I've gotten parrot mode to work
+;; This block might seem crazy, but it's how I've gotten parrot mode to work
   ;; and be silent on startup.
   (use-package! parrot
     :after magit
@@ -210,4 +201,13 @@
                                               "cae-keyboard-strings")))
     (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
     (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))))
+    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!"))))
+
+(when (modulep! +pretty)
+  (use-package! nyan-mode
+    :when (display-graphic-p)
+    :init
+    (add-hook 'doom-first-buffer-hook #'nyan-mode)
+    :config
+    (setopt nyan-bar-length 20
+            nyan-minimum-window-width 20)))
