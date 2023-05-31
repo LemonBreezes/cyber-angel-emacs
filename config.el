@@ -517,6 +517,20 @@
 
   ;; Query buffers for a diff before killing them.
   ;; (advice-add #'kill-buffer :around #'cae-kill-buffer-a)
+  (defun cae-ask-kill-buffer ()
+    "Ask to diff, save or kill buffer"
+    (if (and (buffer-file-name) (buffer-modified-p))
+        (cl-loop for ch = (read-event "(K)ill buffer, (D)iff buffer, (S)ave buffer, (N)othing?")
+                 if (or (eq ch ?k) (eq ch ?K))
+                 return t
+                 if (or (eq ch ?d) (eq ch ?D))
+                 do (diff-buffer-with-file)
+                 if (or (eq ch ?s) (eq ch ?S))
+                 return (progn (save-buffer) t)
+                 if (or (eq ch ?n) (eq ch ?N))
+                 return nil)
+      t))
+  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
   ;; Automatically reindent after commenting.
   (advice-add #'comment-or-uncomment-region :after #'indent-region)
