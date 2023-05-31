@@ -27,7 +27,6 @@
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-
 ;; A minimal mouse-free `tab-bar' UI.
 (defadvice! +tab-bar--load-buttons-a ()
   :after #'tab-bar--load-buttons
