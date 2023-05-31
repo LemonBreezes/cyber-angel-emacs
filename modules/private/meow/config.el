@@ -20,9 +20,9 @@
           ,(cae-keyboard-kbd "9") #'meow-digit-argument
           ,(cae-keyboard-kbd "0") #'meow-digit-argument))
   (after! which-key
-    ;; hide those `meow-digit-argument' keys from the `which-key' popup.
-    (dotimes (i 9)
-      )))
+    ;; remove keys from which-key popupI
+    (add-to-list 'which-key-replacement-alist
+                 '((nil . "meow-digit-argument") . t))))
 
 ;; Keypad
 (defun meow/setup-keypad ()
