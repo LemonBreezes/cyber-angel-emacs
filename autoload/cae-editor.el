@@ -111,3 +111,15 @@ Lispy."
   (interactive)
   (let ((tab-bar-close-tab-select 'right))
     (call-interactively #'tab-close)))
+
+;;;###autoload
+(defun cae-indented-copy-for-reddit ()
+  "Copy and indent active region or current defun."
+  (interactive)
+  (when-let* ((bounds (if (region-active-p)
+                          (cons (region-beginning) (region-end))
+                        (bounds-of-thing-at-point 'defun)))
+              (text (buffer-substring-no-properties (car bounds) (cdr bounds))))
+    (setq deactivate-mark t)
+    (kill-new (replace-regexp-in-string "^" "    " text))
+    (message "Copied!")))
