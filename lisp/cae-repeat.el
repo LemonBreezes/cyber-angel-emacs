@@ -67,7 +67,7 @@
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8)))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
-    (and (featurep 'hydra) hydra-curr-map))
+    (bound-and-true-p hydra-curr-map))
 
   (advice-add #'repeat-post-hook :before-until
               #'cae-repeat-ignore-when-hydra-active-a)
