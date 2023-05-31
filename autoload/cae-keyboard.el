@@ -20,7 +20,7 @@
     (?7 ?&)
     (?8 ?*)
     (?9 ?\()
-    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q)))
+    (?z) (?Z) (?-) (?.) (?>) (?q) (?Q) (?\[) (?\])))
 
 ;;;###autoload
 (defun cae-keyboard-insert-current-prefix (arg)
