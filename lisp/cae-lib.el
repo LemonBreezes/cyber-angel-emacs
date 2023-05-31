@@ -14,7 +14,7 @@
   (and (display-graphic-p)
        (not (daemonp))))
 
-;; Add tab bar switch hooks
+;; Add tab bar switch hooks.
 (defvar cae-tab-bar-before-switch-hook nil
   "Hook run before switching tabs.")
 (defvar cae-tab-bar-after-switch-hook nil
