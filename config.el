@@ -538,7 +538,7 @@
 (use-package! auto-sudoedit
   :after tramp-sh
   :init
-  ;; Loading `tramp' is slow, so we have this hook load auto-sudoedit if we need
+  ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
   ;; to use sudo on a file before `tramp-sh' is loaded.
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
   :config
