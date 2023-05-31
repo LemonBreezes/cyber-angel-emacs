@@ -101,17 +101,17 @@
            (rss +org)
 
            :private
-           (corfu +indexed)
-           debugger
-           (dirvish +icons +dirvish)
-           eshell
-           dired
-           lisp
-           misc-applications
-           modeline
-           unpackaged
-           vc
-           org
+           ;(corfu +indexed)
+           ;debugger
+           ;(dirvish +icons +dirvish)
+           ;eshell
+           ;dired
+           ;lisp
+           ;misc-applications
+           ;modeline
+           ;unpackaged
+           ;vc
+           ;org
 
            ;; (meow +leader)
            )
