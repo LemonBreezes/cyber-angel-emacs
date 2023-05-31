@@ -417,6 +417,8 @@
 
 (map! :leader
       :desc "Copy link" "sy" #'link-hint-copy-link)
+(map! :leader
+      :desc "help" "h" help-map)
 
 (when (and (not (modulep! editor evil))
            (modulep! :config default +bindings))
