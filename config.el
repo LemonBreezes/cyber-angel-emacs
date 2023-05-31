@@ -874,6 +874,9 @@
           [remap forward-sentence] #'sentex-forward-sentence
           [remap backward-sentence] #'sentex-backward-sentence)))
 
+(use-package! edit-indirect
+  :defer t :init)
+
 
 ;;; Autocompletion
 
