@@ -3,7 +3,7 @@
 (setq-default mode-line-format
               (cl-subst '(:eval (breadcrumb-project-crumbs))
                         'mode-line-buffer-identification
-                        mode-line-format))
+                        (default-value 'mode-line-format)))
 
 (use-package! minions
   :defer t :init
