@@ -8,11 +8,12 @@
 
 ;;;###autoload
 (defun +trashed-hide-cursor-h ()
-  (setq-local cursor-type nil
-              evil-normal-state-cursor '(bar . 0)
-              evil-insert-state-cursor '(bar . 0)
-              evil-visual-state-cursor '(box . 0)
-              evil-motion-state-cursor '(box . 0)
-              evil-replace-state-cursor '(hbar . 0)
-              evil-operator-state-cursor '(hbar . 0)
-              evil-emacs-state-cursor '(hbar . 0)))
+  (setq-local cursor-type nil)
+  (when (featurep 'evil)
+    (setq-local evil-normal-state-cursor '(bar . 0)
+                evil-insert-state-cursor '(bar . 0)
+                evil-visual-state-cursor '(box . 0)
+                evil-motion-state-cursor '(box . 0)
+                evil-replace-state-cursor '(hbar . 0)
+                evil-operator-state-cursor '(hbar . 0)
+                evil-emacs-state-cursor '(hbar . 0))))
