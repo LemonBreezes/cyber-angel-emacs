@@ -27,9 +27,10 @@
 
 (defun cae-project-bookmark-set ()
   (interactive)
-  (let ((bookmark-default-file (cae-project--bookmark-file)))
-        (bookmark-alist (persp-parameter 'bookmark-alist)))
-  (call-interactively #'bookmark-set))
+  (let ((bookmark-default-file (cae-project--bookmark-file))
+        (bookmark-alist (persp-parameter 'bookmark-alist))
+        (bookmark-save-flag 1))
+  (call-interactively #'bookmark-set)))
 
 (map! :leader
       :prefix "w"
