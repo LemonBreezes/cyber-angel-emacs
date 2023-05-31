@@ -36,12 +36,20 @@
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
 ;; A minimal mouse-free `tab-bar' UI.
-(defadvice! +tab-bar--load-buttons-a ()
+(defadvice! cae-tab-bar-load-buttons-a ()
   :override #'tab-bar--load-buttons
   (setq tab-bar-close-button   nil
         tab-bar-back-button    nil
         tab-bar-forward-button nil
         tab-bar-new-button     nil))
+(defadvice! cae-tab-bar-define-keys-a ()
+  :after #'tab-bar--define-keys
+  (unless (global-key-binding [(control f4)])
+    (global-set-key [(control f4)] #'tab-close)))
+(defadvice! cae-tab-bar-undefine-keys-a ()
+  :after #'tab-bar--undefine-keys
+  (when (eq (global-key-binding [(control f4)]) #'tab-close)
+    (global-unset-key [(control f4)])))
 
 (setq x-stretch-cursor t
       truncate-string-ellipsis "..."
