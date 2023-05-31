@@ -166,6 +166,8 @@
 (setq delete-by-moving-to-trash t
       history-length (expt 2 16))
 
+(add-hook 'bookmark-bmenu-mode-hook #'prot-bookmark-extra-keywords)
+
 (after! auth-source
   (setq auth-source-cache-expiry nil
         auth-sources (cl-remove-if (lambda (s) (string-suffix-p ".gpg" s))
