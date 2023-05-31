@@ -511,8 +511,7 @@
           "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
           "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok"
-          "gh")
+          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
         eshell-visual-subcommands '(("gh" "repo" "fork")
                                      ("git" "log" "diff" "show")
                                      ("geth" "attach"))
