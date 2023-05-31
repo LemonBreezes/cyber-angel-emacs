@@ -66,6 +66,7 @@
 
 ;;;###autoload
 (defun cae-dired-maximize-buffer ()
+  (interactive)
   (call-interactively #'doom/window-maximize-buffer)
   (when (one-window-p)
     (ignore-error user-error
