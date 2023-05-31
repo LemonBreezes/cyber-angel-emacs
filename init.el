@@ -26,7 +26,6 @@
        workspaces
 
        :editor
-       multiple-cursors
        file-templates
        format
        snippets
