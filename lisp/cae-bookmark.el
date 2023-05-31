@@ -22,7 +22,7 @@
   "Regular expression that matches URLs.")
 
 (defconst cae-bookmark-keywords
-  `((,(concat "\\(.*\\)" " " cae-bookmarks-common-url-regexp)
+  `((,(concat "\\(.*\\)" " " cae-bookmark-common-url-regexp)
      (1 '(bold cae-bookmark-url) t)
      (2 'cae-bookmark-url t))
     ("\\(.*\\)\\( [~/].*\\.pdf\\)"
