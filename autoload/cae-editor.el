@@ -112,6 +112,28 @@ Lispy."
   (let ((tab-bar-close-tab-select 'right))
     (call-interactively #'tab-close)))
 
+(defun cae-strip-top-level-indentation (str)
+  "Strip the top-level leading indentation for every line in STR.
+The least indented line will have 0 leading whitespace. Convert tabs to spaces
+using the tab-width variable."
+  (let* ((lines (split-string str "\n"))
+         (indentations (mapcar (lambda (line)
+                                 (string-match "^[[:space:]]*" line)
+                                 (match-end 0))
+                               lines))
+         (min-indentation (apply #'min (delq nil indentations))))
+    (mapconcat (lambda (line)
+                 (if (string-match "^[[:space:]]+" line)
+                     (let* ((indent (match-string 0 line))
+                            (spaces (replace-regexp-in-string "\t"
+                                                              (make-string tab-width ?\ )
+                                                              indent))
+                            (actual-indent (substring spaces 0 (min min-indentation (length spaces))))
+                            (stripped-indent (replace-regexp-in-string (regexp-quote actual-indent) "" line)))
+                       stripped-indent)
+                   line))
+               lines "\n")))
+
 ;;;###autoload
 (defun cae-copy-for-reddit ()
   "Copy and indent active region or current defun. This is the
@@ -122,5 +144,6 @@ format used on Reddit for code blocks."
                         (bounds-of-thing-at-point 'defun)))
               (text (buffer-substring-no-properties (car bounds) (cdr bounds))))
     (setq deactivate-mark t)
-    (kill-new (replace-regexp-in-string "^" "    " text))
+    (kill-new (replace-regexp-in-string "^" "    "
+                                        (cae-strip-top-level-indentation text)))
     (message "Copied!")))
