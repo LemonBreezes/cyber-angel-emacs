@@ -567,10 +567,10 @@
      "C-M-f" #'sp-forward-sexp
      "C-M-b" #'sp-backward-sexp
      "C-M-u" #'sp-backward-up-sexp
-     "C-M-n" #'sp-up-sexp
-     "C-M-p" #'sp-backward-down-sexp
-     "C-M-d" #'sp-down-sexp             ;Gets overridden.
-     "C-M-a" #'sp-beginning-of-sexp     ;Gets overridden.
+     "C-M-n" #'sp-up-sexp               ;Gets overridden.
+     "C-M-p" #'sp-backward-down-sexp    ;Gets overridden.
+     "C-M-d" #'sp-down-sexp
+     "C-M-a" #'sp-beginning-of-sexp
      "M-(" #'sp-wrap-round
      "C-(" #'sp-forward-slurp-sexp
      "C-<right>" #'sp-forward-slurp-sexp
