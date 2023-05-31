@@ -88,3 +88,5 @@
   (map! "<f9>" #'minions-minor-modes-menu))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
+
+(when (modulep! +pretty))
