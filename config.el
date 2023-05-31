@@ -132,7 +132,8 @@
     :select t :ttl nil)                 ; which vslot?
   (set-popup-rule! "^\\*w3m\\*$" :size #'cae-popup-resize-eww-buffer
     :side 'right :select t :ttl nil)    ; which vslot?
-  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
+  (set-popup-rule! "^\\*dap-ui-repl\\*$" :vslot -5 :size 0.35 :select t
+    :modeline nil :quit nil :ttl nil)
   (after! embark
     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
       :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
