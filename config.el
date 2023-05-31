@@ -547,6 +547,8 @@
        "o" #'ace-link-man)
       :leader
       :desc "help" "h" help-map)
+(map! [remap delete-char] #'cae-delete-char
+      ")" #'cae-insert-closing-paren)
 (define-key resize-window-repeat-map "_" #'shrink-window)
 (let ((embark-act-key "<f8>"))
   (map! embark-act-key #'embark-act
