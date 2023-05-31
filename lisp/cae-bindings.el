@@ -59,8 +59,7 @@
                'deft))
   (define-key doom-leader-map "nd" nil))
 
-(map! :leader
-      :desc "help" "h" help-map)
+(map! :leader :desc "help" "h" help-map)
 
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
