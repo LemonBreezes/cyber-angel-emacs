@@ -60,8 +60,8 @@
        tree-sitter
 
        :lang
-       emacs-lisp
-       (org +roam2)
+       (emacs-lisp +tree-sitter)
+       (org +roam2 +tree-sitter)
        (cc +lsp +tree-sitter)
        (web +lsp +tree-sitter)
        (sh +lsp +tree-sitter)
