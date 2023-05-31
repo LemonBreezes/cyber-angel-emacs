@@ -365,31 +365,34 @@
              ;; would technically need to look at this entire orbit but that's
              ;; tough because the orbit can contain a null byte and mixes of
              ;; special keys & number keys. Here we take a heuristic approach.
-             (,(cond ((= (length (cl-find ?\,
-                                          cae-keyboard-orbits
-                                          :test (lambda (x y) (cl-find x y))))
-                         1)
-                      ",")
-                     ((= 2 (length (cl-find ?\,
+             (,(cond
+                ((not cae-keyboard-remaps-enabled-p) ",")
+                ((= (length (cl-find ?\,
+                                     cae-keyboard-orbits
+                                     :test (lambda (x y) (cl-find x y))))
+                    1)
+                 ",")
+                ((= 2 (length (cl-find ?\,
+                                       cae-keyboard-orbits
+                                       :test (lambda (x y) (cl-find x y)))))
+                 (cae-keyboard-kbd-reverse ","))
+                ((and (= 2 (length (cl-find ?\'
                                             cae-keyboard-orbits
                                             :test (lambda (x y) (cl-find x y)))))
-                      (cae-keyboard-kbd-reverse ","))
-                     ((and (= 2 (length (cl-find ?\'
-                                                 cae-keyboard-orbits
-                                                 :test (lambda (x y) (cl-find x y)))))
-                           (= 1 (length (cl-find ?\;
-                                                 cae-keyboard-orbits
-                                                 :test (lambda (x y) (cl-find x y))))))
-                      (cae-keyboard-kbd-reverse "'"))
-                     (t
-                      (message "Error: Unable to find a free key for the Lispy comma command.")
-                      "\\"))
+                      (= 1 (length (cl-find ?\;
+                                            cae-keyboard-orbits
+                                            :test (lambda (x y) (cl-find x y))))))
+                 (cae-keyboard-kbd-reverse "'"))
+                (t
+                 (message "Error: Unable to find a free key for the Lispy comma command.")
+                 "\\"))
               ,(lookup-key cae-keyboard--lispy-mode-map-backup
                            (cae-keyboard-kbd-reverse ","))
               ,(alist-get (lookup-key cae-keyboard--lispy-mode-map-backup
                                       (cae-keyboard-kbd-reverse ","))
                           cae-lispy-hydra--command-column-alist))
              (,(cond
+                ((not cae-keyboard-remaps-enabled-p) "'")
                 ((= (length (cl-find ?\'
                                      cae-keyboard-orbits
                                      :test (lambda (x y) (cl-find x y))))
