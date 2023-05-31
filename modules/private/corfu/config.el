@@ -132,6 +132,7 @@ derivative.")
   :hook (corfu-mode . corfu-terminal-mode))
 
 (use-package! dabbrev
+  :defer t
   :config
   (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
