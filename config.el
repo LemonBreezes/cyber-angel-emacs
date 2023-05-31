@@ -106,15 +106,17 @@
 
 ;; Set some popup rules. How does vslot work?
 (when (modulep! :ui popup)
+  (setq +popup-default-parameters
+        (delete '(no-other-window . t) +popup-default-parameters))
   (set-popup-rule! "^\\*Man [^*]*\\*"      :size #'+popup-shrink-to-fit :quit t :select :ttl t)
   (set-popup-rule! "^ \\*Metahelp\v\*"     :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
   (set-popup-rule! "^\\*Backtrace\\*"      :size #'+popup-shrink-to-fit :quit nil :ttl nil)
   (set-popup-rule! "^\\*exwm"              :size #'+popup-shrink-to-fit :ttl nil :ttl nil)
   (set-popup-rule! "^\\*Pp Eval Output\\*" :size #'+popup-shrink-to-fit :quit nil :ttl t)
   (set-popup-rule! "^\\*Help\\*"           :ignore t)
-  (set-popup-rule! "^\\*info\\*"           :ignore t :ttl t)
-  (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
+  (set-popup-rule! "^\\*info\\*"           :ignore t)
   (set-popup-rule! "^\\*helpful "          :size #'+popup-shrink-to-fit :quit t :select t :ttl 0)
+  (set-popup-rule! "^\\*Apropos\\*"        :size #'+popup-shrink-to-fit :quit t :select t :ttl t)
   (set-popup-rule! "^\\*Warnings\\*"       :size #'+popup-shrink-to-fit :quit t :select t :ttl nil)
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
@@ -282,6 +284,8 @@
       :prefix "p"
       "RET" #'cae-project-bookmark-set)
 (map! "C-h ;" #'cae-project-bookmark)
+;; Do not query before deleting a frame, since we can undo frame deletions.
+(global-set-key [remap delete-frame] nil)
 
 ;; Ensure local elisp packages are up-to-date.
 (add-hook 'emacs-lisp-mode-hook
