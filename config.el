@@ -362,7 +362,8 @@
         [remap save-buffer] #'abbrev-edit-save-buffer)
   (map! :map abbrev-map "e" #'edit-abbrevs))
 
-(after! ibuffer
+(use-package! ibuffer
+  :defer t :config
   (setq ibuffer-formats
         '((mark modified read-only locked " "
            (name 23 23 :left :elide)
