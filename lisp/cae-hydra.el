@@ -26,3 +26,10 @@
     (hydra-keyboard-quit)
     (cae-hydra-store-last-hydra-h)
     (funcall hydra)))
+
+(add-hook 'persp-before-switch-functions #'cae-hydra-store-last-hydra-h)
+(add-hook 'persp-activated-functions #'cae-hydra-restore-last-hydra-h)
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-hydra-store-last-hydra-h)
+(add-hook 'cae-tab-bar-after-switch-hook #'cae-hydra-restore-last-hydra-h)
+(add-hook 'minibuffer-setup-hook #'cae-hydra-store-last-hydra-h)
+(add-hook 'minibuffer-exit-hook #'cae-hydra-restore-last-hydra-h)
