@@ -44,7 +44,7 @@
   (declare (pure t) (side-effect-free t))
   (cae-keyboard-apply-recursively
    (-compose #'char-to-string #'cae-keyboard-remap-char)
-    arg))
+   arg))
 
 ;;;###autoload
 (defun cae-keyboard-kbd (&rest args)
