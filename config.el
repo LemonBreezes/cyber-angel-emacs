@@ -380,7 +380,9 @@
   (when (modulep! :completion vertico)
     (add-to-list 'isearch-mb--with-buffer #'consult-isearch-history)
     (map! :map isearch-mb-minibuffer-map
-     [remap consult-history] #'consult-isearch-history))
+     [remap consult-history] #'consult-isearch-history)
+    (add-to-list 'isearch-mb--after-exit #'consult-line)
+    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
   (define-key isearch-mb-minibuffer-map (kbd "C-w")   #'isearch-yank-word)
   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
