@@ -98,19 +98,20 @@ derivative.")
             :desc "previous" [backtab] #'corfu-previous
             :desc "next" "TAB" #'corfu-next
             :desc "previous" "S-TAB" #'corfu-previous)
-           (:when t
-            ,(cae-keyboard-kbd "M-" "a") (cae-generate-corfu-select-index 0)
-            ,(cae-keyboard-kbd "M-" "s") (cae-generate-corfu-select-index 1)
-            ,(cae-keyboard-kbd "M-" "d") (cae-generate-corfu-select-index 2)
-            ,(cae-keyboard-kbd "M-" "f") (cae-generate-corfu-select-index 3)
-            ,(cae-keyboard-kbd "M-" "g") (cae-generate-corfu-select-index 4)
-            ,(cae-keyboard-kbd "M-" "h") (cae-generate-corfu-select-index 5)
-            ,(cae-keyboard-kbd "M-" "j") (cae-generate-corfu-select-index 6)
-            ,(cae-keyboard-kbd "M-" "k") (cae-generate-corfu-select-index 7)
-            ,(cae-keyboard-kbd "M-" "l") (cae-generate-corfu-select-index 8)
-            ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 9)))))
+           (:when (modulep! +indexed)
+            ,(cae-keyboard-kbd "M-" "a") (cae-generate-corfu-select-index 1)
+            ,(cae-keyboard-kbd "M-" "s") (cae-generate-corfu-select-index 2)
+            ,(cae-keyboard-kbd "M-" "d") (cae-generate-corfu-select-index 3)
+            ,(cae-keyboard-kbd "M-" "f") (cae-generate-corfu-select-index 4)
+            ,(cae-keyboard-kbd "M-" "g") (cae-generate-corfu-select-index 5)
+            ,(cae-keyboard-kbd "M-" "h") (cae-generate-corfu-select-index 6)
+            ,(cae-keyboard-kbd "M-" "j") (cae-generate-corfu-select-index 7)
+            ,(cae-keyboard-kbd "M-" "k") (cae-generate-corfu-select-index 8)
+            ,(cae-keyboard-kbd "M-" "l") (cae-generate-corfu-select-index 9)
+            ,(cae-keyboard-kbd "M-" ";") (cae-generate-corfu-select-index 10)))))
 
   (when (modulep! +indexed)
+    (setq corfu-indexed-start 1)
     (corfu-indexed-mode +1))
 
   ;; Taken from corfu's README.
