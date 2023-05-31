@@ -215,6 +215,7 @@ mark the string and call `edit-indirect-region' with it."
   (org-ai-global-mode +1)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
+  (define-prefix-command 'org-ai-global-mode-prefix-map)
   (setq unread-command-events (list ?\C-c ?\M-a))
   (setq which-key-inhibit t)
   (add-transient-hook! 'pre-command-hook
@@ -223,5 +224,4 @@ mark the string and call `edit-indirect-region' with it."
    which-key-idle-delay nil
    (lambda ()
      (when which-key-inhibit
-       (which-key-show-keymap 'org-ai-global-mode-prefix-map)
-       (set-transient-map org-ai-global-mode-prefix-map)))))
+       (which-key-show-keymap 'org-ai-global-mode-prefix-map)))))
