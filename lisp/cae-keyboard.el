@@ -140,7 +140,11 @@
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
    (minibufferp)
-   (string-match-p "Go to line: " (minibuffer-prompt))))
+   (cl-member (minibuffer-prompt)
+              '("Go to line: "
+                "Go to char: "
+                "Move to column: ")
+              :test #'string-match-p)))
 
 (dolist (key-from (mapcar #'char-to-string '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0)))
   (cae-make-conditional-key-translation (cae-keyboard-kbd key-from)
