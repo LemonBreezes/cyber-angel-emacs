@@ -143,6 +143,7 @@
 
 (defun cae-hacks-enable-gc ()
   (when cae-hacks--gc-disabled
+    (setq cae-hacks--gc-disabled nil)
     (gcmh-mode cae-hacks--gcmh-mode)
     (setq garbage-collection-messages cae-hacks--gc-messages
           cae-hacks--gc-messages      nil
