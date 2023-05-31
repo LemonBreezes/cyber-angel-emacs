@@ -921,8 +921,6 @@
          "M-p" #'copilot-previous-completion))
   (add-hook 'doom-escape-hook
             (cae-defun cae-copilot-clear-overlay-h ()
-              "Like `copilot-clear-overlay' but returns `t' if a Copilot overlay
-was deleted."
               (when (copilot--overlay-visible)
                 (copilot-clear-overlay) t)))
   (add-to-list 'copilot-disable-predicates
