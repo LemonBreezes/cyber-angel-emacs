@@ -59,10 +59,5 @@
                     lsp-mode-hook
                     sly-mode-hook))
       (add-hook hook #'yas-setup-capf))
-    (defun yas-setup-capf ()
-      (make-variable-buffer-local 'completion-at-point-functions)
-      (cl-pushnew 'cape-yasnippet
-                  completion-at-point-functions
-                  :test #'eq))
     :config
     (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
