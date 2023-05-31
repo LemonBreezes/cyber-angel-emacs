@@ -24,21 +24,12 @@
        ,(cae-keyboard-kbd "1") doom/window-maximize-buffer
        ,(cae-keyboard-kbd "2") split-window-below
        ,(cae-keyboard-kbd "3") split-window-right
-       "M-o" ace-swap-window)
-      (:enter cae-repeat-blink-cursor)
-      (:exit
-       "/" +workspace/display
-       "?" tab-select))
+       "M-o" ace-swap-window))
    t)
 
   (define-repeat-map isearch-repeat
     ("s" isearch-repeat-forward
      "r" isearch-repeat-backward))
-
-  (defun cae-repeat-blink-cursor ()
-    (interactive)
-    (message "Window mode active. Press TAB to exit.")
-    (+nav-flash-blink-cursor))
 
   (eval
    `(define-repeat-map tab-next
@@ -51,9 +42,7 @@
        "1" tab-close-other
        "2" tab-new)
       (:enter tab-select)
-      (:exit
-       "/" cae-repeat-blink-cursor
-       "?" +workspace/display))
+      (:exit "/" +workspace/display))
    t)
 
   (eval
@@ -81,10 +70,9 @@
       (:enter +workspace/display)
       (:exit
        "/" tab-select
-       "?" cae-repeat-blink-cursor
        "o" tab-next
-       "O" tab-previous))
-   t)
+        "O" tab-previous))
+       t)
 
   ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
