@@ -65,11 +65,7 @@
     (:exit "V" my-View-scroll-half-page-forward-other-window)))
 
 (after! restore-point
-  (dolist (fn '(symbol-overlay-switch-forward
-                symbol-overlay-switch-backward
-                symbol-overlay-jump-next
-                symbol-overlay-jump-prev
-                View-scroll-half-page-forward
+  (dolist (fn '(View-scroll-half-page-forward
                 View-scroll-half-page-backward
                 my-View-scroll-half-page-forward-other-window
                 my-View-scroll-half-page-backward-other-window))
