@@ -110,6 +110,8 @@
         "N" #'dirvish-narrow
         "j" #'+default/search-buffer))
 
+(map! [remap dired-jump] #'dirvish-dwim)
+
 (add-hook 'find-directory-functions #'cae-dired-load-dirvish-h t)
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
