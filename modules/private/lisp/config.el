@@ -24,8 +24,8 @@
 (after! pcre2el
   (map! :prefix "C-c"
         (:prefix ("/" . "pcre2el")
-                 (:prefix ("e" . "elisp"))
-                 (:prefix ("p" . "pcre"))))
+         (:prefix ("e" . "elisp"))
+         (:prefix ("p" . "pcre"))))
   (map! :map rxt--read-pcre-mode-map
         "C-c C-i" #'rxt--toggle-i-mode
         "C-c C-t" #'rxt--toggle-s-mode
