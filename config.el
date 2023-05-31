@@ -112,7 +112,8 @@
   (advice-add #'which-key--process-page :around
               #'cae-ui-which-key-show-workspace-a))
 
-;; Set some popup rules. How does slot/vslot work?
+;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
+;; rules here instead of in the relevant `use-package!' blocks.
 (when (modulep! :ui popup)
   (set-popup-rule! "^\\*Backtrace\\*" :size #'+popup-shrink-to-fit :quit nil
     :ttl nil :vslot 99)
