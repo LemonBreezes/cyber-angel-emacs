@@ -554,10 +554,7 @@
          :g "&" #'cape-sgml
          :g "r" #'cape-rfc1345
          :g "+" #'copilot-complete
-         :g "M-+" #'copilot-complete))
-  (after! eshell
-    (map! :map eshell-mode-map
-          "M-+" #'cape-history)))
+         :g "M-+" #'copilot-complete)))
 
 (when (modulep! :editor snippets)
   (map! [remap yas-insert-snippet] #'consult-yasnippet
