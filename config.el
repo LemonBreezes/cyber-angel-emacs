@@ -35,25 +35,6 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
-(when (getenv "WSL_DISTRO_NAME")
-  (defun windows-path-to-wsl-path (windows-path)
-    "Convert a Windows path to a WSL path."
-    (let* ((path (replace-regexp-in-string "\\\\" "/" windows-path))
-           (drive-letter (substring path 0 1))
-           (wsl-path (substring path 2)))
-      (concat "/mnt/" (downcase drive-letter) wsl-path)))
-
-  (let ((default-directory "/mnt/c/Windows/System32/")
-        (windows-paths (or (doom-store-get 'windows-paths)
-                           (thread-last (shell-command-to-string "/mnt/c/Windows/System32/cmd.exe /C \"echo %PATH%\"")
-                                        (string-replace "" "")
-                                        (string-replace "\n" "")
-                                        (funcall (doom-rpartial #'split-string ";"))
-                                        (cl-mapcar #'windows-path-to-wsl-path)))))
-    (doom-store-put 'windows-paths windows-paths)
-    (dolist (path windows-paths)
-      (add-to-list 'exec-path path t #'string=))))
-
 ;;; UI
 
 (when cae-init-ui-enabled-p
