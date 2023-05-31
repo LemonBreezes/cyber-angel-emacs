@@ -43,12 +43,12 @@ derivative.")
 
   :config
   (when (and (modulep! :tools lsp) (not (modulep! :tools lsp +eglot)))
-    (add-hook 'lsp-mode-hook
-              (cae-defun doom--add-lsp-capf ()
-                (add-to-list 'completion-at-point-functions
-                             (cape-capf-buster #'lsp-completion-at-point)))
-              ;; Below is so that context specific completions in cape come first.
-              1))
+    (add-hook! 'lsp-mode-hook
+      (cae-defun doom--add-lsp-capf ()
+        (add-to-list 'completion-at-point-functions
+                     (cape-capf-buster #'lsp-completion-at-point)))
+      ;; Below is so that context specific completions in cape come first.
+      1))
   (add-to-list 'completion-styles 'partial-completion t)
   (add-to-list 'completion-styles 'initials t)
   (setq corfu-cycle t
