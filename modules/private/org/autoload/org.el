@@ -11,3 +11,9 @@ from running."
                       (org-timestamp-format
                        (org-timestamp-from-time (current-time) t t)
                        (org-time-stamp-format t t)))))
+
+;;;###autoload
+(defun cae-org-run-exit-src-code-hooks (&rest _)
+  "Runs all hooks in `+org-exit-src-code-hook`."
+  (let ((inhibit-read-only t))
+    (run-hooks '+org-exit-src-code-hook)))
