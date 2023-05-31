@@ -267,6 +267,9 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
 
+(add-hook 'dired-mode-hook #'display-line-numbers-mode)
+(add-hook 'ibuffer-mode-hook #'display-line-numbers-mode)
+
 (load! "lisp/cae-multi")
 (load! "lisp/cae-keyboard")
 (load! "lisp/cae-repeat")
