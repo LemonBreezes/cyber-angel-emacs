@@ -892,7 +892,7 @@
     (define-key mc/keymap (kbd "C-. l") #'mc/insert-letters)
     (define-key mc/keymap (kbd "C-. n") #'mc/insert-numbers)
     (define-key mc/keymap (kbd "C-. [") #'mc/vertical-align-with-space)
-    (define-key mc/keymap (kbd "C-. [") #'mc/vertical-align)
+    (define-key mc/keymap (kbd "C-. {") #'mc/vertical-align)
 
     (define-key mc/keymap (kbd "C-. C-d") #'mc/remove-current-cursor)
     (define-key mc/keymap (kbd "C-. C-k") #'mc/remove-cursors-at-eol)
