@@ -118,9 +118,7 @@
                                         ;have a Smartparens command
                                         ;bound to that key.
           "C-d" #'cae-delete-char
-          ")" #'cae-insert-closing-paren
-          (:when (not (cae-display-graphic-p))
-           "M-j" nil))
+          ")" #'cae-insert-closing-paren)
     (when (modulep! :editor multiple-cursors)
       (after! multiple-cursors-core
         (add-to-list 'mc/unsupported-minor-modes 'lispy-mode)))))
