@@ -63,6 +63,7 @@
     (after! multiple-cursors-core
       (add-to-list 'mc/unsupported-minor-modes #'worf-mode))))
 
+;; From https://tecosaur.github.io/emacs-config/config.html
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
   (when (> (buffer-size) 50000)
@@ -83,6 +84,6 @@
                 (concat (make-string (* n (1- org-indent-indentation-per-level))
                                      ?\s)
                         (if (> n 0)
-                             (char-to-string org-indent-boundary-char)
+                            (char-to-string org-indent-boundary-char)
                           "\u200b"))
                 nil 'face 'org-indent)))))
