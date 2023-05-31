@@ -24,20 +24,21 @@
     (hydra-keyboard-quit)))
 (defun cae-hacks-hydra-resume-h (&rest _)
   (unless (zerop (ring-length hydra-pause-ring))
-    (run-with-timer 0.001 nil
-                    (lambda ()
-                      (when-let* ((hydra-pause-ring (persp-parameter 'hydra-pause-ring))
-                                  (body (ring-remove hydra-pause-ring 0)))
-                        (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
-                        (funcall (ring-remove hydra-pause-ring 0)))))))
+    (run-with-timer
+     0.001 nil
+     (lambda ()
+       (when-let* ((hydra-pause-ring (persp-parameter 'hydra-pause-ring))
+                   (body (unless (ring-empty-p hydra-pause-ring)
+                           (ring-remove hydra-pause-ring 0))))
+         (set-persp-parameter 'hydra-pause-ring hydra-pause-ring)
+         (funcall body))))))
 (after! hydra
   (add-hook 'minibuffer-setup-hook #'cae-hacks-hydra-pause-h)
   (add-hook 'minibuffer-exit-hook #'cae-hacks-hydra-resume-h)
   (add-hook 'cae-tab-bar-before-switch-hook #'cae-hacks-hydra-quit-h)
   (when (modulep! :ui workspaces)
     (add-hook 'persp-before-deactivate-functions #'cae-hacks-hydra-pause-h)
-    (add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)
-    (add-to-list 'window-persistent-parameters '(hydra-pause-ring . t))))
+    (add-hook 'persp-activated-functions #'cae-hacks-hydra-resume-h)))
 (after! hercules
   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
