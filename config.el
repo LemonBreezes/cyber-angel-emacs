@@ -640,12 +640,10 @@
                     (oldfun &optional offset bottom-up)
                   (ignore-error 'wrong-type-argument
                     (funcall oldfun offset (not bottom-up)))))
-    (advice-add #'avy-goto-line-below :around
                 (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
+    (advice-add #'avy-goto-line-below :around
                   (ignore-error 'wrong-type-argument
                     (apply oldfun args))))
-    (advice-add #'cae-avy-embark-act-on-region :around
-                #'cae-ignore-wrong-type-argument-a)
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
