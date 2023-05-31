@@ -6,7 +6,7 @@
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
                       (getenv "SSH_TTY"))))
   :config
-  (setq! elcord-quiet t
+  (setopt elcord-quiet t
          elcord-use-major-mode-as-main-icon t
          elcord-refresh-rate 10
          elcord-idle-timer 300

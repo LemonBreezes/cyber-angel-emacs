@@ -1,5 +1,7 @@
 ;;; autoload/cae-keyboard.el -*- lexical-binding: t; -*-
 
+(require 'json)
+
 ;;;###autoload
 (defun cae-keyboard-insert-current-prefix (arg)
   "Insert the current prefix argument."

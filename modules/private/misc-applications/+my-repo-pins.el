@@ -8,4 +8,4 @@
         "j" #'my-repo-pins)
   :config
   (make-directory "~/code-root" t)
-  (setq! my-repo-pins-code-root "~/code-root"))
+  (setopt my-repo-pins-code-root "~/code-root"))

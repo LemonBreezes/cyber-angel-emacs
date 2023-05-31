@@ -8,5 +8,5 @@
         :prefix +misc-applications-prefix
         "u" #'daemons)
   :config
-  (setq! daemons-always-sudo t
+  (setopt daemons-always-sudo t
          daemons-show-output-in-minibuffer t))

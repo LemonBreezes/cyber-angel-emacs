@@ -35,14 +35,14 @@
 
 (after! modus-themes
   (let ((modus-themes-custom-auto-reload nil))
-    (setq! modus-themes-org-blocks 'gray-background
+    (setopt modus-themes-org-blocks 'gray-background
            modus-themes-slanted-constructs t
            modus-themes-bold-constructs nil
            modus-themes-variable-pitch-ui t
            modus-themes-mixed-fonts t
            modus-themes-prompts '(italic semibold))))
 (after! ef-themes
-  (setq! ef-themes-variable-pitch-ui t
+  (setopt ef-themes-variable-pitch-ui t
          ef-themes-mixed-fonts t))
 
 ;; Set theme based on time

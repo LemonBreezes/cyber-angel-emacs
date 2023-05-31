@@ -60,7 +60,7 @@
       (dirvish-emerge-mode 1)))
   (add-hook 'dirvish-emerge-mode-hook #'doom-auto-revert-buffer-h)
   (after! dirvish-emerge
-    (setq! dirvish-emerge-groups
+    (setopt dirvish-emerge-groups
            '(("Recent files" (predicate . recent-files-2h))
              ("Documents" (extensions "pdf" "tex" "bib" "epub"))
              ("Video" (extensions "mp4" "mkv" "webm"))
@@ -69,7 +69,7 @@
              ("Archives" (extensions "gz" "rar" "zip")))))
 
   (after! dirvish-quick-access
-    (setq! dirvish-quick-access-entries
+    (setopt dirvish-quick-access-entries
            '(("h" "~/" "Home")
              ("e" "~/.emacs.d/" "Emacs user directory")
              ("d" "~/Downloads/" "Downloads")
@@ -80,7 +80,7 @@
   (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
 
   (after! wdired
-    (setq! wdired-allow-to-change-permissions t))
+    (setopt wdired-allow-to-change-permissions t))
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dired-mode-map

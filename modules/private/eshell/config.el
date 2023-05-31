@@ -9,7 +9,7 @@
   (eat-eshell-visual-command-mode +1)
 
   ;; Do not let EAT override TERM.
-  (setq! eat-term-name (lambda () eshell-term-name))
+  (setopt eat-term-name (lambda () eshell-term-name))
 
   (map! :map (eat-eshell-semi-char-mode-map)
         "C-a" #'eat-self-input
@@ -63,7 +63,7 @@
     (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize))
 
   (after! em-hist
-    (setq! eshell-history-size (expt 2 16))
+    (setopt eshell-history-size (expt 2 16))
     (add-to-list 'eshell-expand-input-functions #'eshell-expand-history-references))
 
   (cond ((modulep! :completion vertico)

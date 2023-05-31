@@ -1,14 +1,14 @@
 ;;; private/vc/config.el -*- lexical-binding: t; -*-
 
 (when (modulep! :ui vc-gutter)
-  (setq! +vc-gutter-in-remote-files t
+  (setopt +vc-gutter-in-remote-files t
          +vc-gutter-in-margin t))
 
 ;; Got these from Prot's config. Say, how do I even use `add-log' and `vc'?
 (after! add-log
-  (setq! add-log-keep-changes-together t))
+  (setopt add-log-keep-changes-together t))
 (after! vc-git
-  (setq! vc-git-diff-switches '("--patch-with-stat" "--histogram"
+  (setopt vc-git-diff-switches '("--patch-with-stat" "--histogram"
                                 "--ignore-cr-at-eol" "--ignore-space-change"
                                 "--ignore-all-space" "--ignore-blank-lines")
          vc-git-print-log-follow t
@@ -18,7 +18,7 @@
   (when (modulep! :editor fold)
     (map! :map magit-status-mode-map
           [remap +fold/toggle] #'magit-section-toggle))
-  (setq! magit-diff-refine-hunk 'all
+  (setopt magit-diff-refine-hunk 'all
          magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
          magit-repository-directories '(("~/src/" . 2))
          transient-values '((magit-rebase "--autosquash" "--autostash")
@@ -50,7 +50,7 @@
   (after! mu4e
     (require 'git-email-mu4e)
     (git-email-mu4e-mode +1))
-  (setq! git-email-subject-regexp
+  (setopt git-email-subject-regexp
          "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)")
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
@@ -66,7 +66,7 @@
 (use-package! vc-backup
   :defer t
   :init
-  (setq! make-backup-files t
+  (setopt make-backup-files t
          vc-make-backup-files t))
 
 ;; TODO Look at Karthik's config for his Smerge stuff.

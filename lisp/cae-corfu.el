@@ -24,7 +24,7 @@
                         (_ x)))
                     s 'fixedcase 'literal)
                    "[ &]+" t)))
-  (setq! orderless-component-separator #'orderless-escapable-split-on-space-or-ampersand))
+  (setopt orderless-component-separator #'orderless-escapable-split-on-space-or-ampersand))
 
 (defun cae-corfu-enable-in-minibuffer-h ()
   (unless (or (bound-and-true-p mct--active)
@@ -38,7 +38,7 @@
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 
 (after! corfu
-  (setq! corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
+  (setopt corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
          corfu-separator ?&
          corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
          corfu-on-exact-match nil
