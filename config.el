@@ -6,6 +6,8 @@
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
+(defvar cae-config-compilation-enabled nil
+  "Whether ")
 
 ;;; UI
 
