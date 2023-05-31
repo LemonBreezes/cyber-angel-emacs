@@ -15,7 +15,7 @@
     (emacs-lisp-native-compile-and-load)))
 
 ;;;###autoload
-(defun +compile-my-private-config ()
+(defun cae-compile-my-private-config ()
   (interactive)
   (when (or (not +kill-emacs--exit-code)
             (eq +kill-emacs--exit-code 0))
