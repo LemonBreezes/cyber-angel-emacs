@@ -1160,24 +1160,20 @@
   ;; Allow us to type HEAD~1, HEAD~2, etc. as arguments to git commands.
   (setq eshell-error-if-no-glob nil))
 
-(after! em-term
-  ;; Some of the commands I copied from other configurations and will likely
-  ;; never use.
-  (setq eshell-visual-commands
-        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-        eshell-visual-subcommands '(("gh" "repo" "fork")
-                                    ("geth" "attach")
-                                    ;;These are disabled because I set the Git
-                                    ;;pager to `cat'. If that ever gets unset
-                                    ;;somehow, I will find an alternative.
-                                    ;;("git" "log" "diff" "show")
-                                    )
-        eshell-visual-options '(;;("git" "--help" "--paginate")
-                                )))
+;;(after! em-term
+;;  ;; Some of the commands I copied from other configurations and will likely
+;;  ;; never use.
+;;  (setq eshell-visual-commands
+;;        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+;;          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+;;          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+;;          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+;;          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+;;        eshell-visual-subcommands '(("gh" "repo" "fork")
+;;                                    ("geth" "attach")
+;;                                    ("git" "log" "diff" "show")
+;;                                    )
+;;        eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
 ;;; Org
