@@ -33,7 +33,7 @@
   "Whether our autocompletion section of `config.el' is disabled.")
 
 (doom! :completion
-       (vertico +icons)
+       (vertico +icons (:if (cae-display-graphic-p) +childframe))
 
        :ui
        doom-dashboard
