@@ -182,7 +182,6 @@
   :defer t
   :after (:any magit org)
   :config
-  ;
   (setq parrot-animate 'hide-static
         parrot-num-rotations 10
         parrot-animate-on-load nil
