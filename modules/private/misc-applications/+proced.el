@@ -6,6 +6,4 @@
   (map! :leader :prefix +misc-applications-prefix
         "p" #'proced)
   :config
-  (setq-default proced-auto-update-flag t)
-  (setq-default proced-auto-update-interval 1)
   (setq proced-enable-color-flag t))
