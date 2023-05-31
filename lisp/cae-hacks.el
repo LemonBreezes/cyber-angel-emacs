@@ -130,7 +130,7 @@
 (defvar cae-hacks--gcmh-mode nil)
 
 (defun cae-hacks-disable-gc ()
-  ;; Raise the GC threshold to a large value and enable GC messages.
+  "Raise the GC threshold to a large value and enable GC messages."
   (unless cae-hacks--gc-disabled
     (setq cae-hacks--gcmh-mode        gcmh-mode)
     (gcmh-mode -1)
