@@ -157,7 +157,9 @@
   (add-hook 'text-mode-hook #'goggles-mode)
   (add-hook 'conf-mode-hook #'goggles-mode)
   :config
-  (setq-default goggles-pulse t))
+  (setq-default goggles-pulse t)
+  (when (modulep! :editor multiple-cursors)
+    (add-to-list 'mc/unsupported-minor-modes #'goggles-mode)))
 
 ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
 (when (modulep! :completion vertico +childframe)
