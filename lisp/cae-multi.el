@@ -11,16 +11,16 @@
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
 
-(setq! abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
+(setopt abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
-  (setq! bookmark-default-file (concat cae-multi-data-dir "bookmarks")))
+  (setopt bookmark-default-file (concat cae-multi-data-dir "bookmarks")))
 (after! calc
-  (setq! calc-settings-file (concat cae-multi-data-dir "calc.el")))
+  (setopt calc-settings-file (concat cae-multi-data-dir "calc.el")))
 (after! eww
-  (setq! eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
+  (setopt eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
          eww-download-directory (expand-file-name "~/Downloads/")))
 (after! ispell
-  (setq! ispell-complete-word-dict (concat cae-multi-data-dir
+  (setopt ispell-complete-word-dict (concat cae-multi-data-dir
                                            "dictionaries/word.txt")
          ispell-personal-dictionary (concat cae-multi-data-dir
                                             "aspell.en.pws")))
