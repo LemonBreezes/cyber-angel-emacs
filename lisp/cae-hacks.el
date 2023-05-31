@@ -1,5 +1,9 @@
 ;;; lisp/cae-hacks.el -*- lexical-binding: t; -*-
 
+;; For when we compile Doom.
+(defvar personal-keybindings nil)
+(defvar snippets nil)
+
 ;; This function is like `doom-shut-up-a' but does not write messages to the
 ;; messages buffer.
 (defun cae-hacks-shut-up-a (oldfun &rest args)
