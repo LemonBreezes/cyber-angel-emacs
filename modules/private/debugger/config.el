@@ -38,11 +38,4 @@
         gdb-show-changed-values t
         gdb-delete-out-of-scope t
         gdb-use-colon-colon-notation t
-        gdb-restore-window-configuration-after-quit t)
-  ;; For some reason, just binding this key in `gdb-frames-mode-map' doesn't
-  ;; work for me.
-  (map! :map comint-mode-map
-        "RET" #'cae-debugger-gud-comint-send-input))
-(after! projectile
-  (map! :map projectile-command-map
-        "@" #'projectile-run-gdb))
+        gdb-restore-window-configuration-after-quit t))
