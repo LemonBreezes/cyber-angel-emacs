@@ -23,7 +23,7 @@
        workspaces
 
        :editor
-       multiple-cursors
+       ;; multiple-cursors
        file-templates
        snippets
 
