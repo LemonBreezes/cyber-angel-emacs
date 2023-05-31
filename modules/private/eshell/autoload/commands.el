@@ -145,20 +145,3 @@ file to edit."
 ;;;###autoload
 (defun eshell/uu ()
   (eshell/u 2))
-
-;;;###autoload
-(defun eshell/doom (&rest args)
-  (let* ((doom (cond ((executable-find "doom")
-                      (executable-find "doom"))
-                     ((file-exists-p "~/.emacs.d/bin/doom")
-                      "~/.emacs.d/bin/doom")
-                     ((file-exists-p "~/.config/emacs/bin/doom")
-                      "~/.config/emacs/bin/doom")))
-         (cmd (concat doom " " (mapconcat 'identity args " "))))
-    (if doom
-        (progn (let ((inhibit-read-only t))
-                 (previous-line)
-                 (delete-line))
-               (run-with-idle-timer 0.01 nil #'+eshell-run-command cmd))
-      (error "Couldn't find doom executable"))
-    nil))
