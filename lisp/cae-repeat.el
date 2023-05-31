@@ -104,6 +104,7 @@
        "d" +workspace/display)
       (:enter +workspace/display))
    t)
+  (define-key workspace-switch-repeat-map "d" nil)
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
