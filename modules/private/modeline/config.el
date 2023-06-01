@@ -2,7 +2,7 @@
 
 (defun cae-modeline-buffer-name ()
   (propertize (if (doom-real-buffer-p (current-buffer))
-                  (breadcrumb-project-crumbs)
+                  (or (breadcrumb-project-crumbs) "")
                 (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
