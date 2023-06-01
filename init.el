@@ -84,6 +84,7 @@ overriding other keymaps."
        multiple-cursors
        lispy
        fold
+       word-wrap
 
        :emacs
        undo
