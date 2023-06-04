@@ -56,6 +56,10 @@
                   evil-snipe-X
                   evil-snipe-repeat
                   evil-snipe-repeat-reverse
+                  evil-ex-search-forward
+                  evil-ex-search-backward
+                  evil-ex-search-next
+                  evil-ex-search-previous
                   keyboard-escape-quit))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
