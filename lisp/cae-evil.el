@@ -52,6 +52,9 @@
 (map! :m "C-d" nil
       :m "C-u" nil)
 
+(after! evil-snipe
+  (setq evil-snipe-scope 'visible))
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
