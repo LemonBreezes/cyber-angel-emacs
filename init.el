@@ -85,6 +85,7 @@ overriding other keymaps."
        lispy
        fold
        word-wrap
+       (evil +everywhere)
 
        :emacs
        undo
