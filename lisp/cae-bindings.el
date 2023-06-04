@@ -44,15 +44,16 @@
     (setq which-key-replacement-alist
           (delete '(("\\`C-c C-f\\'") nil . "fold")
                   which-key-replacement-alist)))
-  (map! :leader
-        (:prefix ("F" . "fold")
-         "k" #'vimish-fold-delete
-         "K" #'vimish-fold-delete-all
-         "c" #'vimish-fold
-         "t" #'+fold/toggle
-         "C" #'+fold/close-all
-         "o" #'+fold/open
-         "O" #'+fold/open-all)))
+  (unless (modulep! :editor evil)
+    (map! :leader
+          (:prefix ("F" . "fold")
+           "k" #'vimish-fold-delete
+           "K" #'vimish-fold-delete-all
+           "c" #'vimish-fold
+           "t" #'+fold/toggle
+           "C" #'+fold/close-all
+           "o" #'+fold/open
+           "O" #'+fold/open-all))))
 
 ;; I don't use Deft.
 (when (and (not (modulep! :ui deft))
