@@ -47,7 +47,15 @@
                   c-mark-function
                   mark-whole-buffer
                   evil-snipe-s
+                  evil-snipe-S
+                  evil-snipe-f
+                  evil-snipe-F
+                  evil-snipe-t
+                  evil-snipe-T
+                  evil-snipe-x
+                  evil-snipe-X
                   evil-snipe-repeat
+                  evil-snipe-repeat-reverse
                   keyboard-escape-quit))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
