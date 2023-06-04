@@ -105,7 +105,12 @@
 (let ((embark-act-key "<f8>"))
   (when (eq (lookup-key doom-leader-map "a")
             'embark-act)
-    (define-key doom-leader-map "a" nil))
+    (define-key doom-leader-map "a" nil)
+    (after! which-key
+      (setq which-key-replacement-alist
+            (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
+                          which-key-replacement-alist)))
+
   (map! embark-act-key #'embark-act
         (:when (modulep! :completion vertico)
          "C-;" nil
@@ -115,7 +120,7 @@
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
-   t))
+   t)))
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
