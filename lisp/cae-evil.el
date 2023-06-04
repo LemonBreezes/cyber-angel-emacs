@@ -55,8 +55,7 @@
 (after! evil-snipe
   (setq evil-snipe-scope 'visible
         evil-snipe-tab-increment t
-        evil-snipe-auto-scroll t
-        evil-snipe-spillover-scope nil))
+        evil-snipe-auto-scroll t))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
