@@ -85,7 +85,8 @@
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
-(map! :leader :desc "help" "h" help-map)
+(unless (modulep! :editor evil)
+  (map! :leader :desc "help" "h" help-map))
 
 ;; Allow escape to exit the minibuffer.
 (define-key! :keymaps +default-minibuffer-maps
