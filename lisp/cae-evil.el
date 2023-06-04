@@ -54,6 +54,10 @@
 
 (after! evil-snipe
   (setq evil-snipe-scope 'visible))
+(setq! evil-ex-substitute-global t
+       evil-move-cursor-back nil
+       evil-vsplit-window-right t
+       evil-split-window-below t)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
