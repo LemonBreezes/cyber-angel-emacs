@@ -60,6 +60,10 @@
                   evil-ex-search-backward
                   evil-ex-search-next
                   evil-ex-search-previous
+                  evil-ex-search-word-forward
+                  evil-ex-search-word-backward
+                  evil-ex-search-unbounded-word-forward
+                  evil-ex-search-unbounded-word-backward
                   keyboard-escape-quit))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
