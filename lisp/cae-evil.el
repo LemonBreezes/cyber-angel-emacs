@@ -53,7 +53,8 @@
       :m "C-u" nil)
 
 (after! evil-snipe
-  (setq evil-snipe-scope 'visible))
+  (setq evil-snipe-scope 'visible
+        evil-snipe-tab-increment t))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
