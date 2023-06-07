@@ -60,7 +60,6 @@
       evil-split-window-below t)
 
 
-;;;###autoload (autoload 'evilem-motion-next-line "evil-easymotion" nil t)
 (after! evil-easymotion
   (evilem-make-motion
    evilem-motion-forward-line #'forward-line
