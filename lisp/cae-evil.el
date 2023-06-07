@@ -60,6 +60,8 @@
       evil-split-window-below t)
 
 (after! evil-easymotion
+  ;; This hack fixes `evilem-motion-next-line' on my Emacs. I think that command
+  ;; breaks because I'm using Emacs 30.
   (evilem-make-motion
    evilem-motion-forward-line #'forward-line
    :pre-hook (setq evil-this-type 'line)
