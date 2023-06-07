@@ -59,6 +59,17 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
+
+;;;###autoload (autoload 'evilem-motion-next-line "evil-easymotion" nil t)
+(after! evil-easymotion
+  (evilem-make-motion
+   evilem-motion-forward-line #'forward-line
+   :pre-hook (setq evil-this-type 'line)
+   :bind ((temporary-goal-column (current-column))
+          (line-move-visual nil)))
+  (advice-add #'evilem-motion-next-line :override #'evilem-motion-forward-line))
+
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
