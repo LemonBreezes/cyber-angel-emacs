@@ -1,5 +1,6 @@
 ;;; private/modeline/autoload.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun cae-modeline--rotate-word-at-point (rotate-function)
   (save-excursion
     (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
