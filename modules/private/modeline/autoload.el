@@ -7,7 +7,8 @@
     (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
       (goto-char beg))
     (skip-syntax-forward "^w" (line-end-position))
-    (condition-case (call-interactively rotate-function)
+    (condition-case err
+        (call-interactively rotate-function)
         (error
          (skip-syntax-backward "^w" (line-beginning-position))
          (call-interactively rotate-function)))))
