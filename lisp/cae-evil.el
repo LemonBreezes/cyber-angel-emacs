@@ -59,7 +59,6 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
-
 (after! evil-easymotion
   (evilem-make-motion
    evilem-motion-forward-line #'forward-line
