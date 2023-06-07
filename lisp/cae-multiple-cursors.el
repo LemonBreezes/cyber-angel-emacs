@@ -26,7 +26,7 @@
                    forward-sentence backward-sentence kill-sentence
                    sentex-forward-sentence sentex-backward-sentence
                    sentex-kill-sentence parrot-rotate-next-word-at-point
-                   cae-delete-char cae-modeline-rotate-next-word-at-point
+                   cae-delete-char cae-modeline-rotate-forward-word-at-point
                    cae-modeline-rotate-backward-word-at-point
                    forward-sexp backward-sexp backward-list
                    forward-list down-list backward-up-list up-list))
