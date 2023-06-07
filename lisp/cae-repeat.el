@@ -70,11 +70,6 @@
   (define-repeat-map pop-global-mark
     ("C-@" pop-global-mark))
 
-  (when (modulep! :editor evil)
-    (define-repeat-map evil-window-next
-      ("w" evil-window-next
-       "W" evil-window-prev)))
-
   ;; Now I can scroll with `v' and reverse directions with `V'! Amazing!
   (define-repeat-map scroll-up-command
     ("v" scroll-up-command)
@@ -96,6 +91,11 @@
   (define-repeat-map vertico-scroll-down
     ("v" vertico-scroll-down)
     (:exit "V" vertico-scroll-up))
+
+  (when (modulep! :editor evil)
+    (define-repeat-map evil-window-next
+      ("w" evil-window-next
+       "W" evil-window-prev)))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
