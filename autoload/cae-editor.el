@@ -360,10 +360,3 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
                  (overlay-end overlay))))
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
-
-;;;###autoload (autoload 'evilem-motion-next-line "evil-easymotion" nil t)
-(evilem-make-motion
- evilem-motion-next-line #'forward-line
- :pre-hook (setq evil-this-type 'line)
- :bind ((temporary-goal-column (current-column))
-        (line-move-visual nil)))
