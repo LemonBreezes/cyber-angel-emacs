@@ -95,7 +95,11 @@
   (when (modulep! :editor evil)
     (define-repeat-map evil-window-next
       ("w" evil-window-next
-       "W" evil-window-prev)))
+       "W" evil-window-prev))
+
+    (define-repeat-map tab-bar-switch-next-tab
+      ("t" tab-bar-switch-to-next-tab
+       "T" tab-bar-switch-to-prev-tab)))
 
   (defun cae-repeat-ignore-when-hydra-active-a ()
     (bound-and-true-p hydra-curr-map))
