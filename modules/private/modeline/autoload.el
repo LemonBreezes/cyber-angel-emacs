@@ -1,5 +1,6 @@
 ;;; private/modeline/autoload.el -*- lexical-binding: t; -*-
 
+;; Not sure why I had to autoload this.
 ;;;###autoload
 (defun cae-modeline--rotate-word-at-point (rotate-function)
   (save-excursion
