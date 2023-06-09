@@ -21,7 +21,7 @@
         corfu-on-exact-match nil
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete
-        tab-first-completion 'word-or-paren)
+        tab-first-completion 'word)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
