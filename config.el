@@ -592,7 +592,7 @@
                   er/try-expand-list)))
 
   (setq set-mark-command-repeat-pop t
-        ;;next-line-add-newlines t ; Does not work with `evil-mode'.
+        ;;next-line-add-newlines t ; Does not apply to Evil's "j" and "k".
         )
 
   (setq search-whitespace-regexp ".*?"
