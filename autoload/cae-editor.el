@@ -360,3 +360,13 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
                  (overlay-end overlay))))
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
+
+;;;###autoload
+(defun cae-create-new-buffer ()
+  (interactive)
+  (if (modulep! 'evil)
+      (call-interactively #'evil-buffer-new)
+    (let ((buffer (generate-new-buffer "*new*")))
+      (set-window-buffer nil buffer)
+      (with-current-buffer buffer
+        (funcall (default-value 'major-mode))))))
