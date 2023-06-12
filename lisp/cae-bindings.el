@@ -82,6 +82,7 @@
       :prefix ("C-x X"   . "edebug")
       :prefix ("C-x C-k" . "kmacro")
       :prefix ("C-x RET" . "MULE"))
+(which-key-add-keymap-based-replacements help-map "4" "other-window")
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
