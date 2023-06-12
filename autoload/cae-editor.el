@@ -364,9 +364,8 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
 ;;;###autoload
 (defun cae-create-new-buffer ()
   (interactive)
-  (if (modulep! 'evil)
-      (call-interactively #'evil-buffer-new)
-    (let ((buffer (generate-new-buffer "*new*")))
-      (set-window-buffer nil buffer)
-      (with-current-buffer buffer
-        (funcall (default-value 'major-mode))))))
+  (let ((buffer (generate-new-buffer "*new*")))
+    (set-window-buffer nil buffer)
+    (with-current-buffer buffer
+      (funcall (default-value 'major-mode))
+      (setq doom-real-buffer-p t))))
