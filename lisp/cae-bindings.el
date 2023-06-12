@@ -82,7 +82,8 @@
              ("C-a" . "gud")
              ("X" . "edebug")
              ("C-k" . "kmacro")
-             ("RET" . "MULE")))
+             ("RET" . "MULE")
+             ("X" . "debug")))
   (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
