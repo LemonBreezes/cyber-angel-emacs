@@ -362,7 +362,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (define-abbrev global-abbrev-table abbrev word)))
 
 ;;;###autoload
-(defun cae-create-new-buffer ()
+(defun cae-make-new-buffer ()
   (interactive)
   (let ((buffer (generate-new-buffer "*new*")))
     (set-window-buffer nil buffer)
