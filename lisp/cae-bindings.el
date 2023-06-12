@@ -86,6 +86,8 @@
              ;;("X" . "debug")
              ))
   (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
+;; These two don't work in `which-key-add-keymap-based-replacements' for some
+;; reason.
 (which-key-add-key-based-replacements "C-x r" "register")
 (which-key-add-key-based-replacements "C-x X" "edebug")
 
