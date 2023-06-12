@@ -70,7 +70,7 @@
              ("a" . "abbrev")
              ("a i" . "inverse")
              ("n" . "narrow")
-             ("r" . "register")
+             ;;("r" . "register")
              ("t" . "tab-bar")
              ("t ^" . "detach")
              ("v" . "version-control")
@@ -83,8 +83,11 @@
              ("X" . "edebug")
              ("C-k" . "kmacro")
              ("RET" . "MULE")
-             ("X" . "debug")))
+             ;;("X" . "debug")
+             ))
   (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
+(which-key-add-key-based-replacements "C-x r" "register")
+(which-key-add-key-based-replacements "C-x X" "debug")
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
