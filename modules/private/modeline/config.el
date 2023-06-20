@@ -8,7 +8,7 @@
                       :weight bold)))
 
 (add-hook! 'doom-first-file-hook
-  (mapcar #'byte-compile '(doom-real-buffer-p
+  (mapc #'byte-compile '(doom-real-buffer-p
                            cae-modeline-buffer-name
                            doom-temp-buffer-p))
   (setq-default mode-line-format
