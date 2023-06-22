@@ -1,8 +1,7 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (propertize (if (and (doom-real-buffer-p (current-buffer))
-                       (buffer-local-value 'buffer-file-name (current-buffer)))
+  (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
                   (breadcrumb-project-crumbs)
                 (buffer-name))
               'face '(:inherit variable-pitch
