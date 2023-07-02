@@ -58,7 +58,7 @@ overriding other keymaps."
   "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
-(defvar cae-keyboard-remaps-enabled-p nil
+(defvar cae-keyboard-remaps-enabled-p t
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
@@ -85,7 +85,7 @@ overriding other keymaps."
        lispy
        fold
        word-wrap
-       (evil +everywhere)
+       ;; (evil +everywhere)
 
        :emacs
        undo
