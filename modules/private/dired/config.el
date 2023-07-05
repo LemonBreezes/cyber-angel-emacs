@@ -61,6 +61,9 @@
         "," #'dired-create-empty-file))
 
 (after! dirvish
+  (unless (cae-display-graphic-p)
+    (setq dirvish-attributes
+          (delq 'all-the-icons dirvish-attributes)))
   (after! dirvish-side
     (dirvish-side-follow-mode 1))
   (add-hook! 'dirvish-setup-hook
