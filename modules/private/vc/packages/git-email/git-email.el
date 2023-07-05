@@ -360,7 +360,7 @@ them into the message buffer."
     ;; Jump to subject or 'to' address if they are emtpy
     (when (or (re-search-backward "\\*\\*\\* TO ADDRESS HERE \\*\\*\\*" nil t)
               (re-search-backward "\\*\\*\\* SUBJECT HERE \\*\\*\\*" nil t))
-      (kill-line))))
+      (delete-region (point) (point-at-eol)))))
 
 
 ;;;; Format patches
