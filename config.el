@@ -131,8 +131,9 @@
           which-key-compute-remaps t
           which-key-max-description-length 35))
 
-  (after! eros
-    (setq eros-eval-result-prefix "⟹ ")) ;Pretty arrow
+  (when (cae-display-graphic-p)
+    (after! eros
+      (setq eros-eval-result-prefix "⟹ "))) ;Pretty arrow
 
   (after! ffap
     ;; Do not count angle brackets as part of file names because then they get
