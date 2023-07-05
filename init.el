@@ -45,7 +45,6 @@ overriding other keymaps."
   (when (string-prefix-p "SPC " key-sequence)
     (apply oldfun (replace-regexp-in-string "^SPC " "DEL " key-sequence) args))
   (apply oldfun key-sequence args))
-B
 
 (advice-add #'which-key-add-key-based-replacements :around
             #'cae-which-key-add-key-based-replacements-a)
