@@ -51,7 +51,7 @@ from Lisp, enable the mode if ARG is omitted or nil."
                ;; built in context feature.
                (seq-filter (lambda (header)
                              (not (eq (car header) 'from)))
-                           headers)
+                           headers))))
     (setq git-email-compose-email-function 'message-mail)))
 
 (provide 'git-email-mu4e)
