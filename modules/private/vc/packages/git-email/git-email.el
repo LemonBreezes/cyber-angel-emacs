@@ -365,6 +365,9 @@ them into the message buffer."
 
 ;;;; Format patches
 
+(defvar git-email--revision-history '()
+  "Minibuffer history of `git-email--minibuffer-get-revision'.")
+
 (defun git-email--minibuffer-get-revision ()
   "Let the user choose a git revision from the minibuffer."
   (interactive)
@@ -386,10 +389,14 @@ them into the message buffer."
                   (cycle-sort-function . identity))
               (complete-with-action
                action revs string pred)))))
-    (git-email--parse-revision (completing-read "Revision: " sorted-revs))))
+    (git-email--parse-revision (completing-read "Revision: " sorted-revs
+                                                nil nil nil 'git-email--revision-history))))
 
 (defun git-email--parse-revision (rev)
   "Return only the revision hash from REV.
+
+(defvar git-email--format-patch-args-history '()
+  "Minibuffer history of `git-email-format-patch' ARGS.")
 
 This parses the output of ‘git-email--minibuffer-get-revision’."
   (substring rev 0 7))
@@ -416,7 +423,8 @@ default behavior is to delete them after sending the message."
                           (lambda (a) (concat a " "))
                           (completing-read-multiple
                            "Args: " git-email-format-patch-extra-args
-                           nil nil git-email-format-patch-default-args)))
+                           nil nil git-email-format-patch-default-args
+                           'git-email--format-patch-args-history)))
          (or (run-hook-with-args-until-success
               'git-email-get-revision-functions)
              (git-email--minibuffer-get-revision))
@@ -500,6 +508,9 @@ NAME."
       (git-email--compose-email file))
     (run-hooks 'git-email-post-compose-email-hook)))
 
+(defvar git-email--rewrite-header-history '()
+  "Minibuffer history of `git-email-rewrite-header'.")
+
 ;;;###autoload
 (defun git-email-rewrite-header (header value &optional append)
   "Re-write the value of HEADER to VALUE, if HEADER doesn't exist
@@ -513,7 +524,8 @@ This is mainly useful if you forgot to Cc someone when using
 give you an address to send your patches to."
   (interactive
    (list (completing-read "Header to re-write: "
-                          git-email-headers)
+                          git-email-headers
+                          nil nil nil 'git-email--rewrite-header-history)
          (read-from-minibuffer "Set header to: ")
          current-prefix-arg))
   (let ((buffers (message-buffers))
