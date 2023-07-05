@@ -253,13 +253,12 @@ If no marks are found, return the filename at point."
 (defun git-email--get-current-project ()
   "Return the path of the current project.
 Falls back to `default-directory'."
-  (let ((dir (or (and (bound-and-true-p projectile-known-projects)
-                      (projectile-project-root))
-                 (and (bound-and-true-p project-list-file)
-                      (git-email--project-current))
-                 (vc-root-dir)
-                 default-directory)))
-    dir))
+  (or (and (bound-and-true-p projectile-known-projects)
+           (projectile-project-root))
+      (and (bound-and-true-p project-list-file)
+           (git-email--project-current))
+      (vc-root-dir)
+      default-directory))
 
 
 ;;;; Get contents from patch
