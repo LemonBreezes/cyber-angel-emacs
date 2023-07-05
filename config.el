@@ -592,9 +592,7 @@
                       fn))
                   er/try-expand-list)))
 
-  (setq set-mark-command-repeat-pop t
-        ;;next-line-add-newlines t ; Does not apply to Evil's "j".
-        )
+  (setq set-mark-command-repeat-pop t)
 
   (setq search-whitespace-regexp ".*?"
         search-default-mode #'char-fold-to-regexp
