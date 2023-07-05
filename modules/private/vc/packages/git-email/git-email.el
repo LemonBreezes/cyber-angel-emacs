@@ -345,11 +345,7 @@ If the header is not found, return an empty string."
 
 This runs \“git config --list\" in the current directory
 so might not always work."
-  (let* ((to (shell-command-to-string  "git config --list | grep sendemail.to"))
-         (address (if (string= "" to)
-                      ""
-                    (substring to 13 -1)))) ; Remove newline
-    address))
+  (string-trim (shell-command-to-string  "git config --get sendemail.to")))
 
 (defun git-email--compose-email (patch-file)
   "Given a PATCH-FILE, compose an email.
