@@ -592,6 +592,7 @@
                       fn))
                   er/try-expand-list)))
 
+  ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
   (setq set-mark-command-repeat-pop t)
 
   (setq search-whitespace-regexp ".*?"
