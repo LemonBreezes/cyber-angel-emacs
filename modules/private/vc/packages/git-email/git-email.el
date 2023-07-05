@@ -288,7 +288,7 @@ Falls back to `default-directory'."
 (defun git-email--fontify-using-faces (text)
   "Fontify TEXT using faces."
   (let ((pos 0)
-        (next (gensym)))
+        next)
     (while (setq next (next-single-property-change pos 'face text))
       (put-text-property pos next 'font-lock-face
                          (get-text-property pos 'face text) text)
