@@ -175,9 +175,8 @@ HERE *** *\"."
 
 (defcustom git-email-buffer-p-function
   #'git-email-buffer-p
-  "Function used for determining if a buffer contains an unsent
-patch based on the buffer name.  The function must take one
-argument --- the buffer name."
+  "Function to test if buffer has an unsent patch.
+The function must take one argument: the buffer's name."
   :type 'function
   :group 'git-email
   :package-version '(git-email . "0.3.0"))
@@ -390,7 +389,7 @@ them into the message buffer."
               (complete-with-action
                action revs string pred)))))
     (git-email--parse-revision (completing-read "Revision: " sorted-revs
-                                                nil nil nil 'git-email--revision-history))))
+                                       nil nil nil 'git-email--revision-history))))
 
 (defun git-email--parse-revision (rev)
   "Return only the revision hash from REV.
@@ -445,15 +444,16 @@ default behavior is to delete them after sending the message."
 ;;;; Misc
 
 (defun git-email-generate-message-buffer-name (_type address _group)
-  "Generate a buffer name that looks like this:
+  "Generate a buffer name in the form of:
 
 \"* git-email unsent patch to *** TO ADDRESS HERE *** *\""
   (generate-new-buffer-name
    (concat "*git-email unsent patch to " address " *" )))
 
 (defun git-email-buffer-p (name)
-  "Check whether a buffer is contains an unsent patch based on its
-NAME."
+  "Test if NAME buffer has an unsent patch.
+The heuristic is to check if the buffer's name includes the
+string 'git-email-unsent-patch'."
   (if (string-match "git-email-unsent-patch" name)
       t
     nil))
@@ -462,7 +462,7 @@ NAME."
 ;;;; Operate on emails
 
 (defun git-email-message-buffer-greaterp (old new)
-  "Compare the number in the buffer name of OLD with NEW"
+  "Compare the number in the buffer name of OLD with NEW."
   (cl-flet ((regexp (name)
                     (string-to-number
                      (replace-regexp-in-string ".*<\\([0-9]+\\)>"
@@ -486,6 +486,9 @@ NAME."
           sorted-buffers)))
 
 (defun git-email--rewrite-header-in-buffer (buffer header value append)
+  "Rewrite BUFFER's HEADER with VALUE.
+If APPEND is non-nil, append the VALUE to the existing one
+instead of overwriting it."
   (switch-to-buffer buffer)
   (save-excursion
     (goto-char (point-min))
@@ -501,6 +504,7 @@ NAME."
           (insert "\n" (concat (capitalize header) ": " value)))))))
 
 (defun git-email--send-files (files)
+  "Send email for each file in FILES."
   (dolist (file files)
     (run-hooks 'git-email-pre-compose-email-hook)
     (let ((message-generate-new-buffers
@@ -513,8 +517,8 @@ NAME."
 
 ;;;###autoload
 (defun git-email-rewrite-header (header value &optional append)
-  "Re-write the value of HEADER to VALUE, if HEADER doesn't exist
-yet, just set it to VALUE.
+  "Re-write value of HEADER to VALUE.
+If HEADER doesn't exist yet, just set it to VALUE.
 
 With prefix argument APPEND, append the VALUE to HEADER instead
 of overwriting it.
