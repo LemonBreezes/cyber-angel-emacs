@@ -1,0 +1,42 @@
+-*- mode: org -*-
+* Release 0.2.0
+Changes since 0.1.0:
+
+- Four new optional libraries for integration with other packages:
+
+  - ~git-email-gnus~ sets some variables to make ~git-email~ play
+    nicely with the Gnus message composition buffer.
+
+  - ~git-email-notmuch~ sets some variables to make ~git-email~ play
+    nicely with the notmuch mail client.
+
+  - ~git-email-magit~ adds extra infix arguments to the transient
+    command for ~magit-patch-create~ for making it easier to directly
+    sending your patches via email.
+
+  - ~git-email-piem~ sets some variables for determining the "to"
+    address of a message by reading the ~piem-inboxes~ variable.
+
+- ~git-email~ is now a nix flake, meaning Nix users can easily install
+  the package into their environment.
+
+- ~git-email~ now has an Info manual that documents all the options and
+   gives some suggestions of the workflow to use.
+
+- The functionality for applying patches was removed in favor of the
+  piem[fn:1] packagge
+
+- Minor bug fixes
+
+[1] https://git.kyleam.com/piem
+
+* Release 0.1.0
+Initial release of git-email.
+
+- Three major functionalities were introduced:
+
+  - The ability to select patches to send via email.
+  
+  - The ability to generate patches and then send them via email.
+  
+  - Primitive support for applying a patch from a buffer.

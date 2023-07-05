@@ -1,0 +1,386 @@
+\input texinfo    @c -*- texinfo -*-
+
+@set VERSION 0.2.0
+
+@setfilename git-email.info
+@settitle Format and send patches in Emacs
+@documentencoding UTF-8
+@documentlanguage en
+
+@copying
+This manual is for git-email 0.2.0.
+
+Copyright @copyright{} 2021 all contributors
+<~yoctocell/git-email-devel@@lists.sr.ht>
+
+@quotation
+Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with no Front-Cover Texts,
+and with no Back-Cover Texts.  A copy of the license is included in
+the section entitled "GNU Free Documentation License".
+@end quotation
+@end copying
+
+@dircategory Emacs
+@direntry
+* git-email: (git-email). Format and send patches in Emacs
+@end direntry
+
+@finalout
+@titlepage
+@title git-email reference manual
+@subtitle for version @value{VERSION}
+@author Xinglu Chen
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top
+@top git-email
+
+This manual is for git-email version @value{VERSION}
+@end ifnottex
+
+
+@menu
+* Introduction::
+* Installation::
+* Usage::
+* Customization options::
+* Integration with other packages::
+* Acknowledgements::
+* Contributing::
+
+Appendices
+* GNU Free Documentation License::
+
+Indices
+* Variable Index::
+* Lisp Function Index::
+* Concept Index::
+@end menu
+
+@c @detailmenu
+@c --- The Detailed Node Listing ---
+@c 
+@c Usage
+@c 
+@c * Send patches::
+@c 
+@c Send patches
+@c 
+@c * git-email-send-email::
+@c * git-email-format-patch::
+@c 
+@c Customization options
+@c 
+@c * Sending email::
+@c * Format patches::
+@c * Miscellaneous::
+@c 
+@c Installation
+@c 
+@c * Nix::
+@c 
+@c @end detailmenu
+@c @end menu
+
+@node Introduction
+@chapter Introduction
+
+@samp{git-email} makes it easy to format and send patches via email in
+Emacs, it offers two main functions for sending email with Git.
+
+@itemize
+@item
+@code{git-email-send-email} will send the marked files as patches using your
+mail client of choice.  This means that you have to first run
+@code{git format-patch} to generate the patches.
+
+@item
+@code{git-email-format-patch} will ask you for a base revision and generate
+patches for all the changes that occured between the revision and
+the current HEAD@.  It will then prepare the patches as email
+messages in the same way as @code{git-email-send-email}.
+@end itemize
+
+If you want to easily apply patches you have recieved via email, you
+should checkout @uref{https://git.kyleam.com/piem, piem}.
+
+@node Installation
+@chapter Installation
+
+@samp{git-email} is not yet available in any package repositories, so
+you have to install it manually by cloning the Git repo and adding @samp{git-email} to
+your @code{load-path}.  Or, you can install it using one of the options
+listed below.
+
+@node Guix
+@section Guix
+
+You can install git-email with guix by running @command{guix install
+--install-from-file=guix.scm}.
+
+@node Usage
+@chapter Usage
+
+@node Send patches
+@section Send patches
+
+@node git-email-send-email
+@subsection git-email-send-email
+@findex git-email-send-email
+
+When you are in a dired, vc-dir, or ibuffer buffer, you can mark patch
+files and run @code{git-email-send-email} to send the patches.  If you arent
+in one of those bufffers, you will be prompted to enter a file path in
+the minibuffer.
+
+Once a message has been created, your cursor will automatically be
+placed in the appropriate location.  This means that if the subject or
+"to" address is empty, the cursor will automatically be there already.
+
+By default, the built-in @code{message-mail} function will be used for
+composing the message.  You can change this to something else by
+customizing the @code{git-email-compose-email-function}.
+
+@node git-email-format-patch
+@subsection git-email-format-patch
+@findex git-email-format-patch
+
+When you invoke @code{git-email-format-patch}, you will prompted in the
+minibuffer for extra arguments to give @code{git format-patch}.  Some common
+arguments will be displayed in your completion framework. If you want
+to select multiple options, separate them with @code{,} or whatever the value
+of @code{crm-separator} is.  You can add options to the list of candidates by
+customizing @code{git-email-format-patch-extra-args}.
+@code{git-email-format-patch-default-args} contains arguments automatically
+passed to @code{git format-patch} if no extra arguments are given.
+
+After you have entered extra arguments, the minibuffer will prompt you
+to select the @emph{base} commit for your patches.  That is, a patch will be
+generated for the changes between the @emph{base} commit and the current
+HEAD@.  Selecting the second candidate in the list is equivalent to
+typing @code{HEAD^1} in the shell.  If you are already in a VC log buffer,
+the revision under point will be used automatically.
+
+When the revision has been selected, patches will be generated and you
+will be greeted with a message buffer containing a patch, just like
+with @code{git-email-send-email}.  By default, the generated patches will be
+deleted, if you don not like this behaviour, call
+@code{git-email-format-patch} with a prefix argument (C-u).
+
+@findex git-email-rewrite-header
+In case you forgot to Cc someone while writing the command line options
+for @command{git format-patch}, you can use
+@code{git-email-rewrite-header} to add an Email address to Cc to all the
+messages.  If you have already put an address in the ``Cc'' field, and
+you still want to keep that address, you can invoke
+@code{git-email-rewrite-header} with a prefix argument, then the address
+to specified will be appended to the ``Cc'' field, rather than
+overwriting the old address.
+
+Another use of @code{git-email-rewrite-header} is when you are sending a
+multi-patchset series to a mailing list managed by Debbugs.  You first
+have to send a message to the mailing list address, then you have to
+wait for an ``acknowledgement'' message from Debbugs that tells you the
+bug number for the messages.  Once you know the bug number you can send
+followup messages to @email{@var{NNN}@@debbugs.gnu.org}, where @var{NNN}
+is the bug number.  See @uref{https://debbugs.gnu.org/Advanced.html, the
+Debbugs documentation} for more information.  Instead of having to
+manually switch to every buffer and add the ``To'' address, you can
+simply call @code{git-email-rewrite-header}, specify the ``To'' header,
+and then the appropriate Debbugs address.
+
+You can see all the customizable variables running @kbd{M-x
+customize-group @key{RET} git-email @key{RET}}.
+
+@node Customization options
+@chapter Customization options
+
+@node Sending email
+@section Sending email
+
+@itemize
+@vindex git-email-compose-email-function
+@item
+@code{git-email-compose-email-function} is the function used to compose an
+email, defaults to @code{mesage-mail}.
+
+@vindex git-email-send-email-function
+@item
+@code{git-email-send-email-function} is the function used to send the
+email, defaults to @code{message-send-and-exit}.
+
+@vindex git-email-pre-compose-email-hook
+@item
+@code{git-email-pre-compose-email-hook} is a list of functions to be
+executed before composing messages.  This useful if you want to do
+extra formatting of the message.
+
+@vindex git-email-post-compose-email-hook
+@item
+@code{git-email-post-compose-email-hook} is a list of functions to be
+executed after sending the messages.  You could for example run
+‘notmuch new’ to index your messages.
+
+@vindex git-email-headers
+@item
+@code{git-email-headers} is a list of headers to include in the message,
+you probably should not touch this unless you really know what you
+are doing.
+
+@vindex git-email-get-files-functions
+@item
+@code{git-email-get-files-functions} is a list of functions to run to get
+a list of patches to send.  The default, there is already support
+for dired, ibuffer and vc-dir.
+
+@vindex git-email-get-to-address-function
+@item
+@code{git-email-get-to-address-function} is a function that returns the
+``to'' address for a message.  The default function runs @command{git
+config --list} to get the address, this will not work unless you are in
+a git repository.
+@end itemize
+
+@node Format patches
+@section Format patches
+
+@itemize
+@vindex git-email-format-patch-default-args
+@item
+@code{git-email-format-patch-default-args} is a string of arguments to give
+@code{git format-patch} by default.  If you choose to give extra arguments,
+the default arguments will not be used.
+
+@vindex git-email-format-patch-extra-args
+@item
+@code{git-email-format-patch-extra-args} is a list of arguments presented
+in your completion framework when entering extra arguments to give
+to ‘git format-patch’.  These arguments are just there for the sake
+of convience, you are not restricted to just the arguments in this
+list.
+
+@vindex git-email-revision-limit
+@item
+@code{git-email-revision-limit} controls the number of revisions to show in
+the minibuffer when choosing a base revision.
+
+@vindex git-email-revision-command
+@item
+@code{git-email-revision-command} is the command to run to get a list of
+revisions.  If you change this, you will most likely also have to
+change @code{git-email-revision-parser} variable
+
+@vindex git-email-get-revision-functions
+@item
+@code{git-email-get-revision-functions} is a list of functions to run to
+try to get the base revision for the patches.  If all of the
+functions return nil, it fallsback to
+‘git-email--minibuffer-get-revision’.  By default, it will get the
+revision of under point if you are in a VC log buffer.
+@end itemize
+
+@node Miscellaneous
+@section Miscellaneous
+
+@itemize
+@vindex git-email-get-current-project-functions
+@item
+@code{git-email-get-current-project-functions} is a hook that is executed
+to get the path of the current project.  The path must include a
+trailing @samp{/}.
+
+@vindex git-email-generate-message-buffer
+@item
+@code{git-email-generate-message-buffer} controls how message buffer
+names are generated.  See the documentation for
+@code{message-generate-new-buffers} for more information.
+
+@vindex git-email-buffer-p-function
+@item
+If you have changed the default value of
+@code{git-email-generate-message-buffer}, you probably also want to
+change the value of @code{git-email-buffer-p-function}.  It should be a
+function that takes one argument---the name of a buffer, and returns
+@code{t} if the buffer contains an unsent patch generated using
+@samp{git-email}.
+
+By default the name will have the following format @samp{git-email
+unsent patch to *** TO ADDRESS HERE *** *}.
+@end itemize
+
+@node Integration with other packages
+@chapter Integration with other packages
+
+@samp{git-email} offers minor modes for Gnus, Mu4e, and Notmuch, these
+minor modes will just configure some variables for you and provide any
+extra functionality as of right now.
+
+There is also integration with magit in the @file{git-email-magit.el}
+library.  This will faciliate the transient library, you can send a
+patch from the magit status buffer by pressing @kbd{W c s}.
+
+@node Acknowledgements
+@chapter Acknowledgements
+
+Thank you Protesilaos Stavrou for your extensive testing and feedback!
+
+Other packages and tools of interest:
+
+@itemize
+@cindex public-inbox
+@item
+@uref{https://git.kyleam.com/piem/, piem} --- gluing together
+public-inbox archives and Git.
+@end itemize
+
+@itemize
+@item
+@uref{https://git-send-email.io/, git-send-email.io} --- tutorial for
+configuring and using @code{git send-email}.
+@end itemize
+
+@node Contributing
+@chapter Contributing
+
+You are welcome to send patches and bug reports to the
+@uref{https://lists.sr.ht/~yoctocell/git-email-devel, git-email-devel}
+mailing list.
+
+Please format commit messages in the ChangeLog format (@pxref{Change
+Logs,,, standards, GNU Coding Standards}); you can check the commit log
+for examples.
+
+If you are using @uref{https://guix.gnu.org/, GNU Guix}, you can create
+a development environment by running @command{guix environment
+--load=guix.scm} (see the @file{guix.scm} file for more details).
+
+@node GNU Free Documentation License
+@appendix GNU Free Documentation License
+@include fdl-1.3.texi
+
+@node Variable Index
+@unnumbered Variable Index
+
+@printindex vr
+
+@node Lisp Function Index
+@unnumbered Function Index
+
+@printindex fn
+
+@node Concept Index
+@unnumbered Concept Index
+
+@printindex cp
+
+
+@bye
