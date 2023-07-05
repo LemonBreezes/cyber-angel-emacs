@@ -38,6 +38,7 @@
 
 (require 'project)
 (require 'message)
+(require 'mailheader)
 (require 'cl-lib)
 
 
@@ -73,10 +74,7 @@
 
 (defcustom git-email-headers
   '(subject from cc in-reply-to message-id references)
-  "List of headers that should get inserted into the message buffer.
-
-The 'to' address will always be inserted by calling
-`git-email-get-to-address-functions'."
+  "List of headers that can be updated via `git-email-rewrite-header'."
   :type '(symbol)
   :group 'git-email
   :package-version '(git-email . "0.2.0"))
@@ -167,11 +165,11 @@ for more information.
 By default it will be \"*git-email unsent patch to *** TO ADDRESS
 HERE *** *\"."
   :type '(choice (const nil)
-		 (sexp :tag "unique" :format "unique\n" :value unique
-		       :match (lambda (widget value) (memq value '(unique t))))
-		 (const unsent)
-		 (const standard)
-		 (function :format "\n    %{%t%}: %v"))
+	  (sexp :tag "unique" :format "unique\n" :value unique
+		:match (lambda (widget value) (memq value '(unique t))))
+	  (const unsent)
+	  (const standard)
+	  (function :format "\n    %{%t%}: %v"))
   :group 'git-email
   :package-version '(git-email . "0.3.0"))
 
@@ -260,49 +258,6 @@ Falls back to `default-directory'."
 
 ;;;; Get contents from patch
 
-(defun git-email--extract-header (header)
-  "Extract HEADER from the current buffer."
-  (goto-char (point-min))
-  (if (eq header 'subject)
-      (git-email--extract-subject)
-    (buffer-substring-no-properties
-     (if (re-search-forward (format " *%s: +" header) nil t)
-         (point)
-       (point-at-eol))
-     (point-at-eol))))
-
-(defvar git-email-subject-regexp
-  (rx bol "Subject:"
-      (zero-or-more space) "["
-      (zero-or-more (not (any "]" "\n")))
-      "PATCH"
-      (zero-or-more (not (any "]" "\n")))
-      "]" (one-or-more space)
-      (one-or-more not-newline)
-      (or (and eol (= 2 space)
-               (one-or-more (not (any "\n" "\t" "$"))) eol)
-          eol)))
-
-(defun git-email--extract-subject ()
-  "Extract the subject from the current buffer.  git-format-patch
-will add a newline in the subject if the subject is too long.
-Just using `git-email--extract-header' would result in part of
-the subject being cut of.  See what I did there?  ;-)"
-  (let ((string (buffer-substring-no-properties (point-min) (point-max))))
-    (string-match git-email-subject-regexp string)
-    (string-remove-prefix
-     "Subject: " (replace-regexp-in-string
-                  "\n" "" (match-string-no-properties 0 string)))))
-
-(defun git-email--extract-headers (patch-file)
-  "Extract headers from PATCH-FILE.
-If the header is not found, return an empty string."
-  (with-temp-buffer
-    (insert-file-contents patch-file)
-    (mapcar (lambda (header)
-              `(,header . ,(git-email--extract-header header)))
-            git-email-headers)))
-
 (defun git-email--extract-diff (patch-file)
   "Extract the diff from PATCH-FILE."
   (with-temp-buffer
@@ -338,7 +293,22 @@ If the header is not found, return an empty string."
 
 (defun git-email--remove-subject (header)
   "Remove HEADER if it is the subject."
-  (not (string-equal (symbol-name (car header)) "subject")))
+  (not (string-equal (car header) "Subject")))
+
+(defun git-email--extract-headers (patch-file)
+  "Extract all the headers from a PATCH-FILE."
+  (with-temp-buffer
+    (insert-file-contents patch-file)
+    ;; Find the first headers, and jump to the start of it's line
+    (re-search-forward "\\([A-Za-z0-9-]+\\): \\(.*\\)")
+    (beginning-of-line)
+    (let ((headers (mail-header-extract-no-properties)))
+      ;; Headers are returned as downcased symbols, but all
+      ;; compose-mail functions expect headers to be capitialized
+      ;; strings.
+      (dolist (h headers headers)
+        (when (symbolp (car h))
+          (setcar h (capitalize (symbol-name (car h)))))))))
 
 (defun git-email--get-to-address ()
   "Get the \"to\" address of the message.
@@ -362,18 +332,16 @@ them into the message buffer."
                                    (lambda (a b)
                                      (equal (car a) b))))
          ;; Don't insert 'to' address if the patch already contains one.
-         (sendemail-to (if to-address
-                           (cdr (nth to-address used-headers))
+         (to-address (or (cdr (assoc "To" used-headers 'string-equal))
                          (run-hook-with-args-until-success
                           'git-email-get-to-address-functions)))
-         (to (if (string-equal sendemail-to "")
+         ;; Don't insert 'to' address if the patch already contains one.
+         (to (if (string-equal to-address "")
                  "*** TO ADDRESS HERE ***"
-               sendemail-to))
+               to-address))
          (diff (git-email--extract-diff patch-file)))
     (funcall git-email-compose-email-function to
-             ;; Remove 'subject' header, otherwise two subject headers will be
-             ;; inserted.
-             (cdr (assoc 'subject used-headers))
+             (cdr (assoc "Subject" used-headers 'string-equal))
              (seq-filter #'git-email--remove-subject used-headers))
     ;; Insert diff at the beginning of the body
     (goto-char (point-min))
@@ -410,7 +378,7 @@ them into the message buffer."
           (lambda (string pred action)
             (if (eq action 'metadata)
                 '(metadata (display-sort-function . identity)
-                           (cycle-sort-function . identity))
+                  (cycle-sort-function . identity))
               (complete-with-action
                action revs string pred)))))
     (git-email--parse-revision (completing-read "Revision: " sorted-revs))))
@@ -497,7 +465,7 @@ NAME."
   ;; Sort the buffers so that [PATCH 0/N] comes first, this prevents
   ;; the ordering from getting messed up.
   (let* ((message-buffers (seq-filter #'git-email-buffer-p
-                                  (message-buffers)) )
+                                      (message-buffers)) )
          (sorted-buffers (sort message-buffers #'git-email-message-buffer-greaterp)))
     (mapc (lambda (b)
             (switch-to-buffer b)
@@ -546,10 +514,10 @@ give you an address to send your patches to."
   (let ((buffers (message-buffers))
         (start-buffer (current-buffer)))
     (save-excursion
-       (mapc (lambda (buffer)
-               (git-email--rewrite-header-in-buffer
-                buffer header value append))
-             buffers))
+      (mapc (lambda (buffer)
+              (git-email--rewrite-header-in-buffer
+               buffer header value append))
+            buffers))
     (switch-to-buffer start-buffer)))
 
 ;;;###autoload
