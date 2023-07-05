@@ -31,28 +31,37 @@
 
 (require 'git-email)
 (require 'transient)
+(require 'magit-process)
 (require 'magit-patch)
-(require 'magit-log)
 
-(defun git-email--escape-string (str)
-  "Escape STR if it has spaces in it."
-  (if (string-match-p "\s" str)
-      (format "\"%s\"" str)
-    str))
-
-;;;###autoload
-(defun git-email-magit-patch-send (args &optional commit)
+(defun git-email-magit-patch-send (range args files)
+  "Send a set of patches via email."
+  ;; This is largely copied from magit-patch's `magit-patch-create'
+  ;; function.
   (interactive
-   (let ((args (transient-args 'magit-patch-create)))
-     (list (mapconcat #'git-email--escape-string
-                      (seq-filter #'stringp args)
-                      " "))))
-  ;; For some reason, `git-email-format-patch' gets called before
-  ;; `magit-log-select' has retunred anything, leading to an error.
-  (if commit
-      (git-email-format-patch args commit nil)
-    (magit-log-select (lambda (commit)
-                        (git-email-magit-patch-send args commit)))))
+   (if (not (eq transient-current-command 'magit-patch-create))
+       (list nil nil nil)
+     (cons (if-let ((revs (magit-region-values 'commit)))
+               (if (length= revs 1)
+                   (list "-1" (car revs))
+                 (concat (car (last revs)) "^.." (car revs)))
+             (let ((range (magit-read-range-or-commit
+                           "Format range or commit")))
+               (if (string-search ".." range)
+                   range
+                 (format "%s~..%s" range range))))
+           (let ((args (transient-args 'magit-patch-create)))
+             (list (-filter #'stringp args)
+                   (cdr (assoc "--" args)))))))
+  (let ((files (nreverse
+                (split-string
+                 (magit--with-temp-process-buffer
+                   (let* ((status (magit-process-git t "format-patch" range args "--" files))
+                          (output (buffer-string)))
+                     output))))))
+    (git-email--send-files files)
+    (mapc #'delete-file files)))
+
 
 (transient-append-suffix 'magit-patch-create "c"
   '(1 "s" "Send patch" git-email-magit-patch-send))
