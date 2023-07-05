@@ -43,7 +43,17 @@ from Lisp, enable the mode if ARG is omitted or nil."
   :init-value nil
   (if git-email-notmuch-mode
       (progn
-        (setq git-email-compose-email-function 'notmuch-mua-mail)
+        (setq git-email-compose-email-function
+              (lambda (to subject headers)
+                (notmuch-mua-mail
+                 to
+                 subject
+                 ;; Notmuch expects that headers are symbols. It's
+                 ;; only really used by the `From' header, but might
+                 ;; as well do them all.
+                 (dolist (h headers headers)
+                   (when (stringp (car h))
+                     (setcar h (intern (car h))))))))
         (setq git-email-send-email-function 'notmuch-mua-send-and-exit))
     (setq git-email-compose-email-function 'message-mail)
     (setq git-email-send-email-function 'message-send-and-exit)))
