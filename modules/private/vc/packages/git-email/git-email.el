@@ -244,13 +244,19 @@ If no marks are found, return the filename at point."
 
 (declare-function projectile-project-root "projectile")
 
+(defun git-email--project-current ()
+  "Return directory from `project-current' based on Emacs version."
+  (if (>= emacs-major-version 29)
+      (project-root (project-current))
+    (cdr (project-current))))
+
 (defun git-email--get-current-project ()
   "Return the path of the current project.
 Falls back to `default-directory'."
   (let ((dir (or (and (bound-and-true-p projectile-known-projects)
                       (projectile-project-root))
                  (and (bound-and-true-p project-list-file)
-                      (cdr (project-current)))
+                      (git-email--project-current))
                  (vc-root-dir)
                  default-directory)))
     dir))
