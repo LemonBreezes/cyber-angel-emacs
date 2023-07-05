@@ -14,6 +14,8 @@
                                        ,dir-locals-file
                                        "packages.el")
                                      :test #'string=))
+                     (not (string-match-p "/packages/"
+                           buffer-file-name))
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
 
