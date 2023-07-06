@@ -50,20 +50,21 @@
                  (cae-defun cae-persp-skip-buffer-p (buffer)
                    (string= (buffer-name buffer) "*lsp-log*")))))
 
+;; Set up fonts
+(unless (memq system-type '(cygwin windows-nt ms-dos))
+  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
+        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+                                            :size 18)
+        doom-unicode-font (unless (modulep! :ui unicode)
+                            (font-spec :family "LXGW WenKai" :weight 'light
+                                       :size 17))))
+
+
 ;;; UI
 
 (when cae-init-ui-enabled-p
   (load! "lisp/cae-theme")
   (load! "lisp/cae-cheatsheets")
-
-  ;; Set up fonts
-  (unless (memq system-type '(cygwin windows-nt ms-dos))
-    (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-          doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                              :size 18)
-          doom-unicode-font (unless (modulep! :ui unicode)
-                              (font-spec :family "LXGW WenKai" :weight 'light
-                                         :size 17))))
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
