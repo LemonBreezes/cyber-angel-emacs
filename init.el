@@ -51,7 +51,7 @@ overriding other keymaps."
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-init-ui-enabled-p t
+(defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is enabled.")
 (defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is enabled.")
