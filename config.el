@@ -321,6 +321,10 @@
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
+  ;; Using this package removes the margin from the left side of the window and
+  ;; causes `dired-next-line' to move forward by two characters instead of one.
+  ;; This package is really cool for laptops with small screens but I will look
+  ;; for an alternative next time that use-case comes up.
   ;;(use-package! perfect-margin
   ;;  :defer t :init
   ;;  (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
