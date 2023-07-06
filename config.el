@@ -63,117 +63,119 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  ;;(load! "lisp/cae-theme")
+  (load! "lisp/cae-theme")
   (load! "lisp/cae-cheatsheets")
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
-  (setq display-line-numbers-type t)
+  ;;(setq display-line-numbers-type t)
 
   ;; Show minibuffer recursion depth
-  (autoload 'minibuffer-depth-setup "mb-depth")
-  (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+  ;;(autoload 'minibuffer-depth-setup "mb-depth")
+  ;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
   ;; I never use the mouse buttons on the tab bar so I prefer to not show them.
-  (defadvice! cae-tab-bar-load-buttons-a ()
-    :override #'tab-bar--load-buttons
-    (setq tab-bar-close-button   nil
-          tab-bar-back-button    nil
-          tab-bar-forward-button nil
-          tab-bar-new-button     nil))
+  ;;(defadvice! cae-tab-bar-load-buttons-a ()
+  ;;  :override #'tab-bar--load-buttons
+  ;;  (setq tab-bar-close-button   nil
+  ;;        tab-bar-back-button    nil
+  ;;        tab-bar-forward-button nil
+  ;;        tab-bar-new-button     nil))
   ;; For some reason `tab-bar' commands sometimes misbehave when they are called
   ;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
   ;; `tab-bar-mode' after a delay.
-  (run-with-idle-timer 3 nil #'tab-bar-mode +1)
+  ;;(run-with-idle-timer 3 nil #'tab-bar-mode +1)
 
   ;; Don't confirm when exiting Emacs that active processes exist.
-  (setq confirm-kill-processes nil)
+  ;;(setq confirm-kill-processes nil)
 
-  (after! ansi-color
-    ;; I am trying this out. Not sure if I like it yet.
-    (setq ansi-color-bold-is-bright t))
+  ;;(after! ansi-color
+  ;;  ;; I am trying this out. Not sure if I like it yet.
+  ;;  (setq ansi-color-bold-is-bright t))
 
-  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-        truncate-string-ellipsis "..."  ;The unicode ellipsis is ugly to me
-        kill-buffer-delete-auto-save-files t
-        scroll-conservatively 0         ;Doom disables this option as a
-                                        ;performance optimization but I would
-                                        ;much rather have Emacs automatically
-                                        ;recenter my windows .
-        window-combination-resize t     ;Take new window space from all other
-                                        ;windows (not just current)
-        scroll-preserve-screen-position 'always)
+  ;;(setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+  ;;      truncate-string-ellipsis "..."  ;The unicode ellipsis is ugly to me
+  ;;      kill-buffer-delete-auto-save-files t
+  ;;      scroll-conservatively 0         ;Doom disables this option as a
+  ;;                                      ;performance optimization but I would
+  ;;                                      ;much rather have Emacs automatically
+  ;;                                      ;recenter my windows .
+  ;;      window-combination-resize t     ;Take new window space from all other
+  ;;                                      ;windows (not just current)
+  ;;      scroll-preserve-screen-position 'always)
 
-  (after! time
-    (setq display-time-default-load-average nil))
+  ;;(after! time
+  ;;  (setq display-time-default-load-average nil))
 
-  (after! help-fns
-    (setq help-enable-symbol-autoload t))
+  ;;(after! help-fns
+  ;;  (setq help-enable-symbol-autoload t))
 
-  (after! transient
-    (setq transient-align-variable-pitch t))
+  ;;(after! transient
+  ;;  (setq transient-align-variable-pitch t))
 
-  (after! newcomment
-    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
-                                        ;`comment-region' so that I can mark the
-                                        ;entire commented text with
-                                        ;`mark-paragraph'.
-          comment-padding nil))         ;I prefer no spaces between comment
+  ;;(after! newcomment
+  ;;  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+  ;;                                      ;`comment-region' so that I can mark the
+  ;;                                      ;entire commented text with
+  ;;                                      ;`mark-paragraph'.
+  ;;        comment-padding nil))
+                                        ;I prefer no spaces between comment
                                         ;delimiters and the comment text.
 
-  (when (and (modulep! :ui modeline)
-             (not (modulep! :ui modeline +light)))
-    (after! doom-modeline
-      (setq doom-modeline-hud t
-            doom-modeline-support-imenu t)))
+  ;;(when (and (modulep! :ui modeline)
+  ;;           (not (modulep! :ui modeline +light)))
+  ;;  (after! doom-modeline
+  ;;    (setq doom-modeline-hud t
+  ;;          doom-modeline-support-imenu t)))
 
-  (after! which-key
-    (setq which-key-ellipsis "..."
-          which-key-compute-remaps t
-          which-key-max-description-length 35))
+  ;;(after! which-key
+  ;;  (setq which-key-ellipsis "..."
+  ;;        which-key-compute-remaps t
+  ;;        which-key-max-description-length 35))
 
-  (when (cae-display-graphic-p)
-    (after! eros
-      (setq eros-eval-result-prefix "⟹ "))) ;Pretty arrow
+  ;;(when (cae-display-graphic-p)
+  ;;  (after! eros
+  ;;    (setq eros-eval-result-prefix "⟹ ")))
+                                        ;Pretty arrow
 
-  (after! ffap
-    ;; Do not count angle brackets as part of file names because then they get
-    ;; mixed up with the tags.
-    (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
-          (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
+  ;;(after! ffap
+  ;;  ;; Do not count angle brackets as part of file names because then they get
+  ;;  ;; mixed up with the tags.
+  ;;  (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
+  ;;        (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
   ;; Do not spam me with warnings
-  (after! warnings
-    (setq warning-minimum-level :emergency
-          warning-minimum-log-level :emergency))
+  ;;(after! warnings
+  ;;  (setq warning-minimum-level :emergency
+  ;;        warning-minimum-log-level :emergency))
 
-  (after! shr
-    ;; `shr' wraps lines in a visually unappealing way.
-    (setq shr-width 120
-          shr-max-width 120)
+  ;;(after! shr
+  ;;  ;; `shr' wraps lines in a visually unappealing way.
+  ;;  (setq shr-width 120
+  ;;        shr-max-width 120)
+  ;;
+  ;;  ;; I prefer to not use fonts in `shr' because it looks weird with the font setup I have.
+  ;;  (setq shr-use-fonts nil)
+  ;;
+  ;;  ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
+  ;;  ;; not colorize backgrounds at all.
+  ;;  (advice-add #'shr-colorize-region :around #'ignore))
 
-    ;; I prefer to not use fonts in `shr' because it looks weird with the font setup I have.
-    (setq shr-use-fonts nil)
-
-    ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-    ;; not colorize backgrounds at all.
-    (advice-add #'shr-colorize-region :around #'ignore))
-
-  (after! proced
-    (setq-default proced-auto-update-flag t))
+  ;;(after! proced
+  ;;  (setq-default proced-auto-update-flag t))
 
   ;; Allow switching to these buffers with `C-x b'
-  (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+  ;;(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
   ;;(add-hook 'debugger-mode-hook #'doom-mark-buffer-as-real-h)
 
-  (use-package! info-colors
-    :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
+  ;;(use-package! info-colors
+  ;;  :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
-  (use-package! authinfo-color-mode
-    :defer t :init
-    (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-    (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-    (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  ;;(use-package! authinfo-color-mode
+  ;;  :defer t :init
+  ;;  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+  ;;  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
+  ;;  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
   (when (modulep! :ui workspaces)
     (advice-add #'which-key--process-page :around
