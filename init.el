@@ -53,7 +53,7 @@ overriding other keymaps."
 ;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is enabled.")
-(defvar cae-init-tools-enabled-p nil
+(defvar cae-init-tools-enabled-p t
   "Whether our tools section of `config.el' is enabled.")
 (defvar cae-init-editor-enabled-p t
   "Whether our editor section of `config.el' is enabled.")
