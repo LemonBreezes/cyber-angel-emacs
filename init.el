@@ -57,7 +57,7 @@ overriding other keymaps."
   "Whether our tools section of `config.el' is enabled.")
 (defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is enabled.")
-(defvar cae-init-autocompletion-enabled-p nil
+(defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
 (defvar cae-keyboard-remaps-enabled-p t
   "Whether we remap keys for special keyboard layouts.")
