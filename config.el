@@ -63,7 +63,7 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  (load! "lisp/cae-theme")
+  ;;(load! "lisp/cae-theme")
   (load! "lisp/cae-cheatsheets")
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
