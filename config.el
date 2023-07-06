@@ -175,161 +175,161 @@
     (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
     (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-  ;; (when (modulep! :ui workspaces)
-  ;;   (advice-add #'which-key--process-page :around
-  ;;               #'cae-ui-which-key-show-workspace-a))
+  (when (modulep! :ui workspaces)
+    (advice-add #'which-key--process-page :around
+                #'cae-ui-which-key-show-workspace-a))
 
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
-  ;; (when (modulep! :ui popup)
-  ;;   (set-popup-rules!
-  ;;     ;; TODO Set the correct slot/vslot for these popups.
-  ;;     '(("^\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
-  ;;        :ttl nil :vslot 99)
-  ;;       ("^\\*exwm" :size +popup-shrink-to-fit :ttl nil
-  ;;        :ttl nil)
-  ;;       ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
-  ;;        :quit nil :ttl t)
-  ;;       ("^\\*org-roam\\*" :size 60 :side left :select nil
-  ;;        :quit nil)
-  ;;       ("^\\*info.*" :size cae-popup-resize-help-buffer
-  ;;        :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
-  ;;       ("^\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
-  ;;        :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
-  ;;       ("^\\*tldr\\*" :size cae-popup-resize-help-buffer
-  ;;        :side right :select t :quit t)
-  ;;       ("^\\*Diff\\*" :size cae-popup-resize-help-buffer
-  ;;        :side right :select t :quit t :ttl 0)
-  ;;       ("^\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
-  ;;        :side right :select t :quit t :ttl 0)
-  ;;       ("^\\*\\([Hh]elp\\|Apropos\\)"
-  ;;        :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
-  ;;        :slot 2 :vslot -8)
-  ;;       ("^ \\*Metahelp.*" :size cae-popup-resize-help-buffer
-  ;;        :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-  ;;       ("^\\*Messages\\*" :vslot -10 :height 10 :side bottom
-  ;;        :select t :quit t :ttl nil :vslot 99)
-  ;;       ("^\\*eww.*" :size cae-popup-resize-help-buffer :side right
-  ;;        :select t :ttl nil)
-  ;;       ("^\\*w3m\\*$" :size cae-popup-resize-help-buffer
-  ;;        :side right :select t :ttl nil)
-  ;;       ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
-  ;;        :modeline nil :quit nil :ttl nil)
-  ;;       ("^SpeedRect Command Key Help$" :size cae-popup-resize-help-buffer
-  ;;        :side right :select nil :quit t :ttl 0)
-  ;;       ("^\\*ednc-log\\*$" :size cae-popup-resize-help-buffer
-  ;;        :side right :select nil :quit t :ttl nil)
-  ;;       ("^\\*tldr\\*$" :size cae-popup-resize-help-buffer
-  ;;        :side right :ttl t :select t :quit t :ttl 0)
-  ;;       ("^\\*Shortdoc .*" :size cae-popup-resize-help-buffer
-  ;;        :side right :ttl t :select t :quit t :ttl 0)
-  ;;       ("^\\*devdocs\\*$" :width 122
-  ;;        :side right :ttl t :select t :quit t :ttl 0)
-  ;;       ("^Trash Can" :size 0.3 :side bottom :select t :quit t
-  ;;        :ttl 0)
-  ;;       ("^\\*chatgpt\\*$" :size 0.3 :select t :quit nil :ttl nil)))
-  ;;   (after! embark
-  ;;     (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-  ;;       :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
-  ;;   (map! :map messages-buffer-mode-map :n "q" #'quit-window)
-  ;;   (set-popup-rule! "^\\*notmuch-hello"  :ignore t))
+  (when (modulep! :ui popup)
+    (set-popup-rules!
+      ;; TODO Set the correct slot/vslot for these popups.
+      '(("^\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
+         :ttl nil :vslot 99)
+        ("^\\*exwm" :size +popup-shrink-to-fit :ttl nil
+         :ttl nil)
+        ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
+         :quit nil :ttl t)
+        ("^\\*org-roam\\*" :size 60 :side left :select nil
+         :quit nil)
+        ("^\\*info.*" :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+        ("^\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
+        ("^\\*tldr\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t)
+        ("^\\*Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
+        ("^\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
+        ("^\\*\\([Hh]elp\\|Apropos\\)"
+         :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
+         :slot 2 :vslot -8)
+        ("^ \\*Metahelp.*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+        ("^\\*Messages\\*" :vslot -10 :height 10 :side bottom
+         :select t :quit t :ttl nil :vslot 99)
+        ("^\\*eww.*" :size cae-popup-resize-help-buffer :side right
+         :select t :ttl nil)
+        ("^\\*w3m\\*$" :size cae-popup-resize-help-buffer
+         :side right :select t :ttl nil)
+        ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
+         :modeline nil :quit nil :ttl nil)
+        ("^SpeedRect Command Key Help$" :size cae-popup-resize-help-buffer
+         :side right :select nil :quit t :ttl 0)
+        ("^\\*ednc-log\\*$" :size cae-popup-resize-help-buffer
+         :side right :select nil :quit t :ttl nil)
+        ("^\\*tldr\\*$" :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0)
+        ("^\\*Shortdoc .*" :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0)
+        ("^\\*devdocs\\*$" :width 122
+         :side right :ttl t :select t :quit t :ttl 0)
+        ("^Trash Can" :size 0.3 :side bottom :select t :quit t
+         :ttl 0)
+        ("^\\*chatgpt\\*$" :size 0.3 :select t :quit nil :ttl nil)))
+    (after! embark
+      (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+        :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
+    (map! :map messages-buffer-mode-map :n "q" #'quit-window)
+    (set-popup-rule! "^\\*notmuch-hello"  :ignore t))
 
   ;; Lower the default popup delay.
-  ;; (after! tooltip
-  ;;   (setq tooltip-hide-delay 3))
+  (after! tooltip
+    (setq tooltip-hide-delay 3))
 
-  ;; (when (modulep! :checkers syntax +childframe)
-  ;;   (after! flycheck-posframe
-  ;;     (setq flycheck-posframe-border-width 1
-  ;;           flycheck-posframe-border-use-error-face t)))
+  (when (modulep! :checkers syntax +childframe)
+    (after! flycheck-posframe
+      (setq flycheck-posframe-border-width 1
+            flycheck-posframe-border-use-error-face t)))
 
-  ;; (use-package! goggles
-  ;;   :defer t :init
-  ;;   (add-hook 'prog-mode-hook #'goggles-mode)
-  ;;   (add-hook 'text-mode-hook #'goggles-mode)
-  ;;   (add-hook 'conf-mode-hook #'goggles-mode)
-  ;;   :config
-  ;;   (setq-default goggles-pulse t))
+  (use-package! goggles
+    :defer t :init
+    (add-hook 'prog-mode-hook #'goggles-mode)
+    (add-hook 'text-mode-hook #'goggles-mode)
+    (add-hook 'conf-mode-hook #'goggles-mode)
+    :config
+    (setq-default goggles-pulse t))
 
   ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
-  ;; (when (modulep! :completion vertico +childframe)
-  ;;   (after! vertico-posframe
-  ;;     (setq vertico-posframe-parameters
-  ;;           '((inhibit-double-buffering . t)))))
-  ;; (after! posframe
-  ;;   (setq posframe-inhibit-double-buffering t))
+  (when (modulep! :completion vertico +childframe)
+    (after! vertico-posframe
+      (setq vertico-posframe-parameters
+            '((inhibit-double-buffering . t)))))
+  (after! posframe
+    (setq posframe-inhibit-double-buffering t))
 
-  ;; (use-package! topsy
-  ;;   :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
-  ;;   :config
-  ;;   ;; Set custom function for rjsx-mode
-  ;;   ;; Disable topsy-mode for gptel-mode
-  ;;   (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
-  ;;   (add-hook 'gptel-mode-hook
-  ;;             (cae-defun cae-disable-topsy-in-gptel-h ()
-  ;;               "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
-  ;;                                       ;package.
-  ;;               (topsy-mode -1))))
-
-  ;; (use-package! anzu
-  ;;   :defer t :init
-  ;;   (global-set-key [remap query-replace] 'anzu-query-replace)
-  ;;   (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-  ;;   (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
-  ;;   (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
-  ;;   :config
-  ;;   (setq anzu-mode-lighter ""
-  ;;         anzu-replace-threshold 50
-  ;;         anzu-replace-to-string-separator " → "))
-
-  ;; (use-package! isearch-mb
-  ;;   :after-call isearch-mode-hook
-  ;;   :config
-  ;;   (isearch-mb--setup)
-  ;;   (isearch-mb-mode +1)
-  ;;   (dolist (cmd '(recenter-top-bottom reposition-window
-  ;;                  scroll-right scroll-left isearch-yank-word
-  ;;                  consult-isearch-history))
-  ;;     (add-to-list 'isearch-mb--with-buffer cmd))
-  ;;   (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
-  ;;                  avy-isearch consult-line))
-  ;;     (add-to-list 'isearch-mb--after-exit cmd))
-  ;;   (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-  ;;   (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
-  ;;   (when (modulep! :completion vertico)
-  ;;     (map! :map isearch-mb-minibuffer-map
-  ;;           [remap consult-history] #'consult-isearch-history)
-  ;;     (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-  ;;   (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-  ;;   (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
-
-  ;; (use-package! hercules
-  ;;   :defer t :init
-  ;;   (after! debug
-  ;;     (map! :map debugger-mode-map
-  ;;           "<f6>" #'cae-debugger-cheatsheet))
-  ;;   (after! edebug
-  ;;     (map! :map edebug-mode-map
-  ;;           "<f6>" #'cae-edebug-cheatsheet))
-  ;;   (after! macrostep
-  ;;     (map! :map macrostep-mode-keymap
-  ;;           "<f6>" #'cae-macrostep-cheatsheet))
-  ;;   :config
-  ;;   (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
-
-  ;; (use-package! outline-minor-faces
-  ;;   :defer t :init
-  ;;   (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
-
-  (use-package! perfect-margin
-    :defer t :init
-    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
-    (defun cae-perfect-margin-ignore-posframe-p (window)
-      "Check if the current buffer's display type is posframe."
-      (frame-parameter (window-frame window) 'parent-frame))
+  (use-package! topsy
+    :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
     :config
-    (add-to-list 'perfect-margin-ignore-regexps "^ ")
-    (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
+    ;; Set custom function for rjsx-mode
+    ;; Disable topsy-mode for gptel-mode
+    (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
+    (add-hook 'gptel-mode-hook
+              (cae-defun cae-disable-topsy-in-gptel-h ()
+                "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
+                                        ;package.
+                (topsy-mode -1))))
+
+  (use-package! anzu
+    :defer t :init
+    (global-set-key [remap query-replace] 'anzu-query-replace)
+    (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+    (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
+    (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+    :config
+    (setq anzu-mode-lighter ""
+          anzu-replace-threshold 50
+          anzu-replace-to-string-separator " → "))
+
+  (use-package! isearch-mb
+    :after-call isearch-mode-hook
+    :config
+    (isearch-mb--setup)
+    (isearch-mb-mode +1)
+    (dolist (cmd '(recenter-top-bottom reposition-window
+                   scroll-right scroll-left isearch-yank-word
+                   consult-isearch-history))
+      (add-to-list 'isearch-mb--with-buffer cmd))
+    (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
+                   avy-isearch consult-line))
+      (add-to-list 'isearch-mb--after-exit cmd))
+    (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
+    (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
+    (when (modulep! :completion vertico)
+      (map! :map isearch-mb-minibuffer-map
+            [remap consult-history] #'consult-isearch-history)
+      (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
+    (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
+    (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
+
+  (use-package! hercules
+    :defer t :init
+    (after! debug
+      (map! :map debugger-mode-map
+            "<f6>" #'cae-debugger-cheatsheet))
+    (after! edebug
+      (map! :map edebug-mode-map
+            "<f6>" #'cae-edebug-cheatsheet))
+    (after! macrostep
+      (map! :map macrostep-mode-keymap
+            "<f6>" #'cae-macrostep-cheatsheet))
+    :config
+    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
+
+  (use-package! outline-minor-faces
+    :defer t :init
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
+  ;;(use-package! perfect-margin
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
+  ;;  (defun cae-perfect-margin-ignore-posframe-p (window)
+  ;;    "Check if the current buffer's display type is posframe."
+  ;;    (frame-parameter (window-frame window) 'parent-frame))
+  ;;  :config
+  ;;  (add-to-list 'perfect-margin-ignore-regexps "^ ")
+  ;;  (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
