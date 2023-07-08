@@ -886,8 +886,7 @@
   ;;  )
 
   (use-package! logos
-    :defer t
-    :custom
+    :defer t :custom
     (logos-outlines-are-pages t)
     :bind
     ([remap forward-page] . logos-forward-page-dwim)
