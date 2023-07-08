@@ -369,3 +369,11 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (with-current-buffer buffer
       (funcall (default-value 'major-mode))
       (setq doom-real-buffer-p t))))
+
+;;;###autoload
+(defun cae-narrow-to-page ()
+  (interactive)
+  (save-mark-and-excursion
+    (end-of-line)
+    (deactivate-mark)
+    (logos-narrow-dwim)))
