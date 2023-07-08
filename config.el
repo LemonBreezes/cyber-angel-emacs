@@ -886,6 +886,7 @@
   ;;  )
 
   (use-package! logos
+    :defer t
     :custom
     (logos-outlines-are-pages t)
     :bind
