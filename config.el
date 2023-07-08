@@ -884,7 +884,13 @@
   ;;    (add-hook hook #'jinx-mode))
   ;;  ;;(advice-add 'jinx--correct-replace :before #'cae-jinx--add-to-abbrev)
   ;;  )
-  )
+
+  (use-package! logos
+    :custom
+    (logos-outlines-are-pages t)
+    :bind
+    ([remap forward-page] . logos-forward-page-dwim)
+    ([remap backward-page] . logos-backward-page-dwim)))
 
 
 ;;; Autocompletion
