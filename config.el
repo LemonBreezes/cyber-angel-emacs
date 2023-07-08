@@ -135,7 +135,7 @@
 
   (when (cae-display-graphic-p)
     (after! eros
-      (setq eros-eval-result-prefix "⟹ "))) ;Pretty arrow
+      (setq eros-eval-result-prefix (if (cae-display-graphic-p) "⟹ " "=> ")))) ;Pretty arrow
 
   (after! ffap
     ;; Do not count angle brackets as part of file names because then they get
