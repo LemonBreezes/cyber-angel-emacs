@@ -361,11 +361,10 @@
          "M-s r" #'consult-ripgrep
          "M-s D" #'consult-locate)
         [remap Info-search] #'consult-info
+        "M-X" #'consult-mode-command
         :map help-map
         "TAB" #'consult-info
         "W" #'consult-man
-        :leader
-        "M-x" #'consult-mode-command
         (:desc "Keyboard macro"  "ik" #'consult-kmacro))
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
