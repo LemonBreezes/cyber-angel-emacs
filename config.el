@@ -890,8 +890,7 @@
     (logos-outlines-are-pages t)
     :bind
     ([remap forward-page] . logos-forward-page-dwim)
-    ([remap backward-page] . logos-backward-page-dwim)
-    ([remap narrow-to-region] . logos-narrow-dwim)))
+    ([remap backward-page] . logos-backward-page-dwim)))
 
 
 ;;; Autocompletion
