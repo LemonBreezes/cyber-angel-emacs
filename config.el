@@ -1021,7 +1021,7 @@
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
- ;;; Org
+;;; Org
 
 (setq doom-scratch-initial-major-mode 'org-mode)
 
