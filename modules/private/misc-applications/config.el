@@ -36,26 +36,28 @@
 (setq +misc-applications-lisp-files
       '("+alarm-clock"
         ;;"+aurel"
-        "+daemons"
         "+disk-usage"
         ;;"+elcord"
         "+elfeed"
         ;;"+enime"
         ;;"+exercism"
         ;;"+frameshot"
-        ;;"+helm-linux-disks"
-        ;;"+helm-system-packages"
         "+leetcode"
         ;;"+mentor"
         "+my-repo-pins"
         ;;"+picpocket"
         "+pulseaudio-control"
         "+somafm"
-        "+trashed"
         "+try"
         ;;"+vuiet"
         ;;"+webpaste" ; I'm using 0x0.st instead.
         "+wttrin"
+
+        ;; Lists
+        "+daemons"
+        ;;"+helm-linux-disks"
+        ;;"+helm-system-packages"
+        "+trashed"
 
         ;; Lookup
         "+devdocs"
