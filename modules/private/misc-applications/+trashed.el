@@ -4,8 +4,8 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
-        "C-t" #'trashed)
+        :prefix +misc-applications-lists-prefix
+        :desc "trash files" "t" #'trashed)
   :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
