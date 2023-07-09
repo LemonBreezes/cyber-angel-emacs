@@ -43,7 +43,6 @@
         "+my-repo-pins"
         "+pulseaudio-control"
         "+somafm"
-        ;;"+webpaste" ; I'm using 0x0.st instead.
         "+wttrin"
 
         ;; Lists
