@@ -91,6 +91,23 @@ It is meant to be used as a `post-gc-hook'."
       (list (nth 0 args) (nth 2 args))
     args))
 
+;; Use --no-sandbox when running Chromium, Discord, etc. as the root user.
+(when (eq (user-uid) 0)
+  (defadvice! cae-hacks-call-process-shell-command-a (args)
+    :filter-args #'call-process-shell-command
+    (when (cl-member (file-name-base (car (split-string (car args) " ")))
+                     '("chromium-bin-browser"
+                       "chromium-bin"
+                       "google-chrome-beta"
+                       "discord"
+                       "signal-desktop"
+                       "vscode" "vscodium" "code")
+                     :test #'string=)
+      (setf (car args)
+            (concat (string-trim-right (car args))
+                    " --no-sandbox")))
+    args))
+
 ;; If `try' is used before the package list is loaded, fetch it.
 (defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
   :before #'try
