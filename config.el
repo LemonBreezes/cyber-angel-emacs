@@ -1131,6 +1131,12 @@
 ;; I don't really need LSP for the XML files I edit.
 (remove-hook 'nxml-mode-local-vars-hook #'lsp!)
 
+;;; Fennel
+
+(when (modulep! :tools lsp)
+  (after! lsp-mode
+    (setf (alist-get 'fennel-mode lsp-language-id-configuration) "fennel")))
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
