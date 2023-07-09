@@ -38,6 +38,7 @@
         "+disk-usage"
         ;;"+elcord"
         "+elfeed"
+        "+ement"
         "+leetcode"
         "+my-repo-pins"
         "+pulseaudio-control"
