@@ -95,6 +95,7 @@
 
 ;; cae-bindings.el
 (package! vline)
+(package! try)
 
 ;;; Autocompletion
 (package! copilot
