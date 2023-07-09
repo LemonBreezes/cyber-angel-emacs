@@ -52,7 +52,6 @@
 
 (add-hook 'circadian-after-load-theme-hook #'startup/restart-redshift)
 (advice-add #'+workspace-switch :after #'startup/restart-redshift)
-;;(add-hook 'doom-load-theme-hook #'startup/restart-redshift)
 
 (if (process-live-p startup/redshift-process)
     (startup/restart-redshift)
