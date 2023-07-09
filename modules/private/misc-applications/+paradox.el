@@ -3,7 +3,8 @@
 (use-package! paradox
   :after package
   :init
-  (map! :prefix +misc-applications-lists-prefix
-        "emacs packages" #'paradox-list-packages)
+  (map! :leader
+        :prefix +misc-applications-lists-prefix
+        :desc "emacs packages" "p" #'paradox-list-packages)
   :config
   (paradox-enable))
