@@ -117,19 +117,17 @@
     (after! which-key
       (setq which-key-replacement-alist
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
-                          which-key-replacement-alist)))
-
-    (eval `(map! ,embark-act-key #'embark-act
-                 (:when (modulep! :completion vertico)
-                  "C-;" nil
-                  (:map minibuffer-local-map
-                   "C-;" nil
-                   ,embark-act-key #'embark-act)))
-          t)
+                          which-key-replacement-alist))))
+  (map! embark-act-key #'embark-act
+        (:when (modulep! :completion vertico)
+         "C-;" nil
+         (:map minibuffer-local-map
+          "C-;" nil
+          embark-act-key #'embark-act)))
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
-   t)))
+   t))
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
