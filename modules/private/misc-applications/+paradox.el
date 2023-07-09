@@ -6,4 +6,4 @@
   (map! :prefix +misc-applications-lists-prefix
         "emacs packages" #'paradox-list-packages)
   :config
-  )
+  (paradox-enable))
