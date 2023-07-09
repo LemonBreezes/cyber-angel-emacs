@@ -50,6 +50,7 @@
 (package! leetcode)
 (package! autotetris-mode)
 (package! ytel)
+(package! paradox)
 
 (package! posimacs-shortdocs :recipe
   (:host github :repo "LemonBreezes/posimacs-shortdocs"))
