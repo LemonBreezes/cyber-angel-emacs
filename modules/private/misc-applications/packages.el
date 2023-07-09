@@ -50,9 +50,10 @@
 (package! autotetris-mode)
 (package! ytel)
 (package! paradox)
+(package! ement)
 
 (package! posimacs-shortdocs :recipe
-  (:host github :repo "LemonBreezes/posimacs-shortdocs"))
+          (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 
 (package! zones)
 (package! zone-nyan)
