@@ -4,8 +4,8 @@
 ;; programs on startup and using these programs in a dedicated workspace.
 
 (defvar +startup-prefix "k")
-(defvar +startup-directory (expand-file-name "startup/" doom-user-dir))
-(defvar +startup-config-dir (expand-file-name "misc-files/config-files" doom-user-dir))
+(defvar +startup-directory (concat (file-name-directory buffer-file-name) "startup/"))
+(defvar +startup-config-dir (concat +startup-directory "config-files/"))
 
 (map! :leader :prefix (+startup-prefix . "programs"))
 
@@ -28,9 +28,9 @@
   (advice-add #'+workspace/switch-to :after #'+workspace-switch-to-exwm-buffer-maybe)
   (remove-hook 'exwm-init-hook #'tmp/exwm-init-hook))
 
-;;(after! exwm
-;;  (if exwm--connection
-;;      (progn (tmp/exwm-init-hook)
-;;             (add-to-list 'persp-filter-save-buffers-functions
-;;                          #'exwm--buffer->id))
-;;    (add-hook 'exwm-init-hook #'tmp/exwm-init-hook 'append)))
+(after! exwm
+  (if exwm--connection
+      (progn (tmp/exwm-init-hook)
+             (add-to-list 'persp-filter-save-buffers-functions
+                          #'exwm--buffer->id))
+    (add-hook 'exwm-init-hook #'tmp/exwm-init-hook 'append)))
