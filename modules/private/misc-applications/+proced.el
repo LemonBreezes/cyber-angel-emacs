@@ -6,7 +6,6 @@
   (map! :leader :prefix +misc-applications-lists-prefix
         :desc "system processes" "s" #'proced)
   :config
-  (setq proced-enable-color-flag t
-        proced-tree-flag t)
+  (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
         "<f6>" #'+proced-hydra/body))
