@@ -21,7 +21,8 @@
       "1" #'mpc
       "P" #'list-processes
       "C-p" #'list-timers)
-(map! :prefix +misc-applications-lists-prefix
+(map! :leader
+      :prefix +misc-applications-lists-prefix
       "p" #'list-packages
       "P" #'list-processes
       "t" #'list-timers)
