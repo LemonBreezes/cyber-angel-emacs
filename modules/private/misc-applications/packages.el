@@ -48,7 +48,6 @@
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
 (package! leetcode)
 (package! autotetris-mode)
-(package! ytel)
 (package! paradox)
 (package! ement)
 
