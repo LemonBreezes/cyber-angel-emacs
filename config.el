@@ -362,7 +362,7 @@
     (map! :map w3m-mode-map
           "o" #'ace-link-w3m))
 
-  ;; Set up the default browser based on our system.
+  ;; Set up the default browser.
   (after! browse-url
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
