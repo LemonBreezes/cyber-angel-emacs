@@ -48,7 +48,6 @@
         ;;"+picpocket"
         "+pulseaudio-control"
         "+somafm"
-        "+try"
         ;;"+vuiet"
         ;;"+webpaste" ; I'm using 0x0.st instead.
         "+wttrin"
