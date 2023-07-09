@@ -57,6 +57,7 @@
         "+daemons"
         ;;"+helm-linux-disks"
         ;;"+helm-system-packages"
+        "+paradox"
         "+trashed"
 
         ;; Lookup
