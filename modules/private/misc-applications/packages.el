@@ -28,7 +28,6 @@
 (package! x86-lookup)
 (package! devdocs)
 (package! trashed)
-(package! webpaste)
 (package! know-your-http-well)
 (package! my-repo-pins :recipe
   (:host github :repo "NinjaTrappeur/my-repo-pins"
