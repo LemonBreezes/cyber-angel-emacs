@@ -1,8 +1,6 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
-;;; private/exwm/config.el -*- lexical-binding: t; -*-
-
-;; ;; Do not load EXWM when we are in SSH-X11.
+;; Do not load EXWM when we are in SSH-X11.
 (when (getenv "SSH_TTY")
   (setenv "EXWM_RUNNING" "true"))
 
