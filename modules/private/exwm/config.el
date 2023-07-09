@@ -211,4 +211,4 @@ expansion occurs within the parent Emacs session.")
     :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (when (modulep! :ui workspaces)
-    (load! "+startup")))
+    (load! "+startup-programs")))
