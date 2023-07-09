@@ -363,9 +363,11 @@
           "o" #'ace-link-w3m))
 
   (after! browse-url
-    (when (getenv "WSL_DISTRO_NAME")
-      (setq browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
-            browse-url-generic-args     '("/c" "start")))
+    (cond ((getenv "WSL_DISTRO_NAME")
+           (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
+                 browse-url-generic-args '("/c" "start")))
+          ((executable-find "chromium-bin-browser")
+           (setq browse-url-generic-program (executable-find "chromium-bin-browser"))))
     (setq browse-url-browser-function
           (cond ((executable-find "termux-setup-storage")
                  #'browse-url-xdg-open)
