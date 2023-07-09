@@ -7,5 +7,4 @@
         :prefix +misc-applications-lists-prefix
         :desc "emacs packages" "p" #'paradox-list-packages)
   :config
-  (paradox-enable)
-  (setq paradox-display-download-count t))
+  (paradox-enable))
