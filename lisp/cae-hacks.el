@@ -13,7 +13,7 @@
 (defvar cae-hacks--gc-idle-timer nil)
 
 ;; The purpose of these functions is to disable GC during long-running tasks
-;; while showing GC messages if Emacs GCs anyways.
+;; while showing GC messages if Emacs GCs anyways while running such a task.
 
 (defun cae-hacks-disable-gc ()
   "Raise the GC threshold to a large value and enable GC messages."
