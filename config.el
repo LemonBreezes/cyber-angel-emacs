@@ -362,6 +362,7 @@
     (map! :map w3m-mode-map
           "o" #'ace-link-w3m))
 
+  ;; Set up the default browser based on our system.
   (after! browse-url
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
@@ -493,8 +494,8 @@
   (when (modulep! :checkers spell)
     (after! spell-fu
       (add-hook 'nxml-mode-hook
-        (cae-defun cae-disable-spell-fu-h ()
-          (spell-fu-mode -1)))))
+                (cae-defun cae-disable-spell-fu-h ()
+                  (spell-fu-mode -1)))))
 
   (use-package! dwim-shell-command
     :defer t :init
