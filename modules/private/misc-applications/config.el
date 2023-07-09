@@ -3,15 +3,14 @@
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
 (defvar +misc-applications-prefix "a")
-(defvar +misc-applications-lookup-prefix
-  (concat +misc-applications-prefix "l"))
-(defvar +misc-applications-games-prefix
-  (concat +misc-applications-prefix "g"))
-(defvar +misc-applications-eyecandy-prefix
-  (concat +misc-applications-prefix "e"))
+(defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "L"))
+(defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
+(defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
+(defvar +misc-applications-lists-prefix (concat +misc-applications-prefix "l"))
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
+(map! :leader :prefix (+misc-applications-lists-prefix . "lists"))
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
 
@@ -22,6 +21,10 @@
       "1" #'mpc
       "P" #'list-processes
       "C-p" #'list-timers)
+(map! :prefix +misc-applications-lists-prefix
+      "p" #'list-packages
+      "P" #'list-processes
+      "t" #'list-timers)
 
 (after! timer-list
   (map! :map timer-list-mode-map
