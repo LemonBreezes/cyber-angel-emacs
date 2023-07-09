@@ -5,7 +5,9 @@
   :when (and (cae-display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
                       (getenv "SSH_TTY")
-                      (getenv "WSL_DISTRO_NAME"))))
+                      (getenv "WSL_DISTRO_NAME")))
+             (modulep! :private exwm)
+             )
   :config
   (setq elcord-quiet t
         elcord-use-major-mode-as-main-icon t
