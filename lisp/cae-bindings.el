@@ -129,6 +129,10 @@
       (setq embark-cycle-key ,embark-act-key))
    t))
 
+(after! embark
+  (map! :map embark-package-map
+        "t" #'try))
+
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
       [remap upcase-word] #'upcase-dwim
