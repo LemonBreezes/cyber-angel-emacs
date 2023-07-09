@@ -40,12 +40,9 @@
         ;;"+elcord"
         "+elfeed"
         "+leetcode"
-        ;;"+mentor"
         "+my-repo-pins"
-        ;;"+picpocket"
         "+pulseaudio-control"
         "+somafm"
-        ;;"+vuiet"
         ;;"+webpaste" ; I'm using 0x0.st instead.
         "+wttrin"
 
