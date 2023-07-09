@@ -28,7 +28,6 @@
 (package! x86-lookup)
 (package! devdocs)
 (package! trashed)
-;; (package! frameshot)
 (package! webpaste)
 (package! know-your-http-well)
 ;;(package! exercism-modern :recipe
