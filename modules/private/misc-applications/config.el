@@ -18,14 +18,12 @@
 (keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader
       :prefix +misc-applications-prefix
-      "1" #'mpc
-      "P" #'list-processes
-      "C-p" #'list-timers)
+      "1" #'mpc)
 (map! :leader
       :prefix +misc-applications-lists-prefix
-      "p" #'list-packages
-      "P" #'list-processes
-      "t" #'list-timers)
+      :desc "packages" "p" #'list-packages
+      :desc "emacs processes" "e" #'list-processes
+      :desc "timers" "t" #'list-timers)
 
 (after! timer-list
   (map! :map timer-list-mode-map
