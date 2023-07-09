@@ -92,10 +92,10 @@ It is meant to be used as a `post-gc-hook'."
     args))
 
 ;; If `try' is used before the package list is loaded, fetch it.
-(advice-add #'try :before
-            (defun +try-package-refresh-contents-maybe (&rest _)
-              (unless package-archive-contents
-                (package--archives-initialize))))
+(defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
+  :before #'try
+  (unless package-archive-contents
+    (package--archives-initialize)))
 
 ;; A generic adviser for responding yes to yes or no prompts automatically.
 (defun cae-hacks-always-yes-a (oldfun &rest args)
