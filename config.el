@@ -391,7 +391,7 @@
                (string= "'[^']*'" regexp)))
            syslog-font-lock-keywords)))
 
-  ;; Set up printers
+  ;; Set up printers.
   (after! lpr (setq printer-name "Brother_HL-L2380DW_series"))
   (after! ps-print (setq ps-printer-name "Brother_HL-L2380DW_series"))
 
