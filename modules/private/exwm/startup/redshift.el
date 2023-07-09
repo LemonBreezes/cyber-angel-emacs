@@ -54,6 +54,7 @@
 (add-hook 'geo-data-changed-hook #'startup/restart-redshift)
 (advice-add #'+workspace-switch :after #'startup/restart-redshift)
 (add-hook 'doom-load-theme-hook #'startup/restart-redshift)
+(run-at-time 0.01 nil #'startup/restart-redshift)
 
 (if (process-live-p startup/redshift-process)
     (startup/restart-redshift)
