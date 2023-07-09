@@ -3,8 +3,8 @@
 (use-package! proced
   :defer t
   :init
-  (map! :leader :prefix +misc-applications-lists-prefix
-        :desc "system processes" "s" #'proced)
+  ;;(map! :leader :prefix +misc-applications-lists-prefix
+  ;;      :desc "system processes" "s" #'proced)
   :config
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
