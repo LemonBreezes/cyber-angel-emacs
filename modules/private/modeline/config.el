@@ -2,7 +2,8 @@
 
 (defun cae-modeline-buffer-name ()
   (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
-                  (breadcrumb-project-crumbs)
+                  (or (breadcrumb-project-crumbs)
+                      (buffer-name))
                 (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
