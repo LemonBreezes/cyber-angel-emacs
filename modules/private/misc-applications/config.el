@@ -23,7 +23,7 @@
       :prefix +misc-applications-lists-prefix
       :desc "packages" "p" #'list-packages
       :desc "emacs processes" "e" #'list-processes
-      :desc "timers" "t" #'list-timers)
+      :desc "timers" "T" #'list-timers)
 
 (after! timer-list
   (map! :map timer-list-mode-map
