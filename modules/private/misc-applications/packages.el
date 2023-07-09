@@ -35,7 +35,6 @@
 (package! trashed)
 ;; (package! frameshot)
 (package! webpaste)
-(package! try)
 (package! know-your-http-well)
 ;;(package! exercism-modern :recipe
 ;;  (:host github :repo "elken/exercism-modern" :files ("*/*" "*")))
