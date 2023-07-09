@@ -21,9 +21,9 @@
       "1" #'mpc)
 (map! :leader
       :prefix +misc-applications-lists-prefix
-      :desc "packages" "p" #'list-packages
+      :desc "emacs packages" "p" #'list-packages
       :desc "emacs processes" "e" #'list-processes
-      :desc "timers" "T" #'list-timers)
+      :desc "emacs timers" "T" #'list-timers)
 
 (after! timer-list
   (map! :map timer-list-mode-map
