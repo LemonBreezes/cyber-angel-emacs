@@ -36,7 +36,7 @@
 (setq +misc-applications-lisp-files
       '("+alarm-clock"
         "+disk-usage"
-        ;;"+elcord"
+        "+elcord"
         "+elfeed"
         "+ement"                        ; TODO
         "+leetcode"
