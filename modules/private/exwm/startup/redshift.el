@@ -51,7 +51,6 @@
        :desc "Kill Redshift" "x" #'startup/kill-redshift))
 
 (add-hook 'circadian-after-load-theme-hook #'startup/restart-redshift)
-(add-hook 'geo-data-changed-hook #'startup/restart-redshift)
 (advice-add #'+workspace-switch :after #'startup/restart-redshift)
 (add-hook 'doom-load-theme-hook #'startup/restart-redshift)
 (add-hook 'doom-after-init-hook #'startup/restart-redshift)
