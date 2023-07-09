@@ -119,7 +119,8 @@ expansion occurs within the parent Emacs session.")
     ;;   (setenv "SDL_VIDEODRIVER" "x11")
     ;;   (exwm-xim-enable))
 
-    (exwm-enable)
+    ;;(exwm-enable)
+    (exwm-init)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
     (map! [remap suspend-frame] #'undefined)
