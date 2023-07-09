@@ -223,7 +223,8 @@
       ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
       "SPC" #'avy-goto-char-timer
       (:map isearch-mode-map
-       "j" #'avy-isearch))
+       "j" #'avy-isearch)
+      "z" #'+workspace/other)
 
 (when (modulep! :completion vertico)
   (after! vertico
