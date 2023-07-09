@@ -1,6 +1,7 @@
 ;;; private/misc-applications/+paradox.el -*- lexical-binding: t; -*-
 
 (use-package! paradox
+  :defer t
   :init
   (map! :leader
         :prefix +misc-applications-lists-prefix
