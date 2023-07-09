@@ -134,7 +134,10 @@ expansion occurs within the parent Emacs session.")
                     (string= "gimp" exwm-instance-name))
           (exwm-workspace-rename-buffer exwm-title)))
       (advice-add #'exwm--update-utf8-title :around
-                  #'exwm--update-utf8-title-advice))
+                  (cae-defun exwm--update-utf8-title-advice (oldfun id &optional force)
+                    "Only update the window title when the buffer is visible."
+                    (when (get-buffer-window (exwm--id->buffer id))
+                      (funcall oldfun id force)))))
 
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
