@@ -3,7 +3,6 @@
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
-;;(package! vuiet)
 (package! somafm)
 (package! enime :recipe
   (:host github :repo "xl666/enime" :files ("*")))
@@ -14,14 +13,12 @@
                (modulep! :completion helm)))
   (package! helm-linux-disks :recipe
     (:host github :repo "akirak/helm-linux-disks")))
-;; (package! mentor)
 (package! tldr)
 (package! speed-type)
 (package! disk-usage)
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (getenv "WSL_DISTRO_NAME"))
   (package! elcord))
-;; (package! picpocket)
 (when (eq system-type 'gnu/linux)
   (package! daemons))
 ;;(when (and (eq system-type 'gnu/linux) (executable-find "pacman"))
