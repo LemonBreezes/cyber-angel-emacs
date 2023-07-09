@@ -4,7 +4,7 @@
 ;; programs on startup and using these programs in a dedicated workspace.
 
 (defvar +startup-prefix "k")
-(defvar +startup-directory (concat (file-name-directory buffer-file-name) "startup/"))
+(defvar +startup-directory (concat (dir!) "startup-programs/"))
 (defvar +startup-config-dir (concat +startup-directory "config-files/"))
 
 (map! :leader :prefix (+startup-prefix . "programs"))
