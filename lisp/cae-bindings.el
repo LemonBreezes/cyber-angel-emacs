@@ -110,7 +110,8 @@
                                         ;`C-s' to search in the minibuffer.
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
-(let ((embark-act-key "<f8>"))
+(let ((embark-act-key "<f8>")
+      (embark-act-all-key "<f9>"))
   (when (eq (lookup-key doom-leader-map "a")
             'embark-act)
     (define-key doom-leader-map "a" nil)
@@ -119,11 +120,13 @@
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
                           which-key-replacement-alist))))
   (map! embark-act-key #'embark-act
+        embark-act-all-key #'embark-act-all
         (:when (modulep! :completion vertico)
          "C-;" nil
          (:map minibuffer-local-map
           "C-;" nil
-          embark-act-key #'embark-act)))
+          embark-act-key #'embark-act
+          embark-act-all-key #'embark-act-all)))
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
