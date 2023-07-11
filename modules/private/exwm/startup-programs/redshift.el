@@ -20,7 +20,7 @@
                    ('modus-operandi
                     `("-P" "-O" "6300" "-b" "1.0" "-g" "1.0"))
                    ('modus-vivendi
-                    `("-P" "-O" "3500" "-b"
+                    `("-P" "-O" "3000" "-b"
                       ;; Set monitor brightness lower in certain applications.
                       ,(pcase (+workspace-current-name)
                          ("Chromium" "1.0")
