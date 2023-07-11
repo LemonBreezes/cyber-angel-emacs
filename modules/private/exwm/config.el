@@ -143,31 +143,31 @@ expansion occurs within the parent Emacs session.")
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
     ;; Set up key translations for using Emacs keybindings in X windows.
-    (unless (modulep! :editor evil)
-      (setq exwm-input-simulation-keys
-            '(([?\C-p] . [up])
-              ([?\C-n] . [down])
-              ([?\M-w] . [?\C-c])
-              ([?\C-y] . [?\C-v])
-              ([?\C-x ?h] . [?\C-a])
-              ([?\C-e] . [end])
-              ([?\C-a] . [home])
-              ([?\C-v] . [next])
-              ([?\M-v] . [prior])
-              ([?\C-d] . [delete])
-              ([?\C-s] . [?\C-k])
-              ([?\C-k] . [S-end delete])
-              ([?\C-w] . [?\C-x])       ; Use C-F4 to close tabs in Firefox.
-              ([?\C-f] . [right])       ; Use F3 to search in Firefox.
-              ([?\C-x ?\C-s] . [?\C-s])
-              ([?\C-f] . [right])
-              ([?\C-b] . [left])
-              ([?\M-b] . [C-left])
-              ([?\M-f] . [C-right])
-              ([?\M-d] . [C-delete])))
-      (map! :map exwm-mode-map
-            "C-c C-u" (cmd! (exwm-input--fake-key ?\C-a)
-                            (exwm-input--fake-key 'backspace))))
+    ;;(unless (modulep! :editor evil)
+    ;;  (setq exwm-input-simulation-keys
+    ;;        '(([?\C-p] . [up])
+    ;;          ([?\C-n] . [down])
+    ;;          ([?\M-w] . [?\C-c])
+    ;;          ([?\C-y] . [?\C-v])
+    ;;          ([?\C-x ?h] . [?\C-a])
+    ;;          ([?\C-e] . [end])
+    ;;          ([?\C-a] . [home])
+    ;;          ([?\C-v] . [next])
+    ;;          ([?\M-v] . [prior])
+    ;;          ([?\C-d] . [delete])
+    ;;          ([?\C-s] . [?\C-k])
+    ;;          ([?\C-k] . [S-end delete])
+    ;;          ([?\C-w] . [?\C-x])       ; Use C-F4 to close tabs in Firefox.
+    ;;          ([?\C-f] . [right])       ; Use F3 to search in Firefox.
+    ;;          ([?\C-x ?\C-s] . [?\C-s])
+    ;;          ([?\C-f] . [right])
+    ;;          ([?\C-b] . [left])
+    ;;          ([?\M-b] . [C-left])
+    ;;          ([?\M-f] . [C-right])
+    ;;          ([?\M-d] . [C-delete])))
+    ;;  (map! :map exwm-mode-map
+    ;;        "C-c C-u" (cmd! (exwm-input--fake-key ?\C-a)
+    ;;                        (exwm-input--fake-key 'backspace))))
 
     ;; For people who run nested Emacs instances within EXWM.
     (setq exwm-replace nil)
