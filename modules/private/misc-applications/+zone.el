@@ -41,9 +41,6 @@
   (after! zone-matrix
     (setq zmx-unicode-mode t))
 
-  ;; zone-pgm-stress
-  ;; zone-pgm-stress-destress
-  ;; zone-pgm-random-life
   (unless (bound-and-true-p exwm--connection)
     (zone-when-idle (* 5 60)))
 
