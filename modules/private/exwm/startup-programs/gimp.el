@@ -31,6 +31,7 @@
 (defun startup/manage-gimp ()
   (when (and (stringp exwm-class-name)
              (string-match-p "gimp" exwm-class-name))
+    (setq-local exwm-input--simulation-keys nil)
     (unless (string= (+workspace-current-name) startup/gimp-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/gimp-workspace)
@@ -42,12 +43,6 @@
     (startup/start-gimp))
   (+workspace-switch startup/gimp-workspace t)
   (+workspace-switch-to-exwm-buffer-maybe))
-
-(add-hook 'exwm-manage-finish-hook
-          (lambda ()
-            (when (and exwm-class-name
-                       (string= exwm-class-name "Gimp"))
-              (exwm-input-set-local-simulation-keys nil))))
 
 (map! :leader
       :prefix +startup-prefix
