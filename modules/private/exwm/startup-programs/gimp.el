@@ -31,7 +31,6 @@
 (defun startup/manage-gimp ()
   (when (and (stringp exwm-class-name)
              (string-match-p "gimp" exwm-class-name))
-    (exwm-input--unset-simulation-keys)
     (unless (string= (+workspace-current-name) startup/gimp-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/gimp-workspace)
