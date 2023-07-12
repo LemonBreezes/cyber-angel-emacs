@@ -66,7 +66,7 @@
     (cancel-timer startup/discord--timer)
     (advice-remove #'+workspace/other #'tmp/cancel-discord-timer-a)))
 
-;; Hacks around an error that happens when there is no Discord process.
+;; HACK Hacks around an error that happens when there is no Discord process.
 (defadvice! startup/discord-elcord-a ()
   :before-until #'elcord--start-idle
   (process-live-p startup/discord-process))
