@@ -68,7 +68,7 @@
 
 ;; HACK Prevent an error that happens when there is no Discord process.
 (defadvice! startup/discord-elcord-a ()
-  :before-until #'elcord--start-idle
+  :before-while #'elcord--start-idle
   (process-live-p startup/discord-process))
 
 (map! :leader
