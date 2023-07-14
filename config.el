@@ -427,7 +427,7 @@
     (setq compilation-scroll-output t))
 
   (after! tramp
-    (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*") ;; default + 
+    (setq tramp-shell-prompt-pattern "[[\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*\"]")
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
                     "/run/current-system/profile/sbin"))
