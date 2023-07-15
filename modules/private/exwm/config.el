@@ -90,6 +90,19 @@ expansion occurs within the parent Emacs session.")
                            (interactive)
                            (exwm-workspace-switch-create 9))))))
 
+    ;; Some of these keybindings are redundant with EXWM's default ones but we
+    ;; are comprehensive and add extra ones.
+    (map! :map exwm-mode-map
+          :localleader
+          (:prefix ("d" . "debug")
+           "l" #'xcb-debug:clearn
+           "m" #'xcb-debug:mark
+           "t" #'exwm-debug)
+          "f" #'exwm-layout-toggle-fullscreen
+          "h" #'exwm-floating-hide
+          "q" #'exwm-input-send-next-key
+          "SPC" #'exwm-floating-toggle-floating
+          "m" #'exwm-layout-toggle-mode-line)
 
     ;; A few `ido' fixes.
     (use-package! exwm-config
