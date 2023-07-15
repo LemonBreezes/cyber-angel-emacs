@@ -69,11 +69,6 @@
         :n "U"  #'exwm-firefox-core-undo
         :n "/"  #'exwm-firefox-core-find ; Compatible with Chrome as well.
 
-        ;; These commands are too fragile as they involve clicking the corner
-        ;; of the browser content to focus it.
-        ;; :n "gb" #'+exwm-firefox-core-focus-bookmarks-bar
-        ;; :n "gB" #'+exwm-firefox-core-open-bookmark-in-new-tab
-
         ;; Do not accidentally send escape
         :n [remap exwm-firefox-core-cancel] #'exwm-evil-normal-state
 
