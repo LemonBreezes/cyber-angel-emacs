@@ -1,0 +1,8 @@
+;;; autoload/exwm/autoload/exwm.el -*- lexical-binding: t; -*-
+
+;;;###autoload
+(defun +exwm-rename-buffer-to-title ()
+  "Rename the buffer to its `exwm-title'."
+  (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+              (string= "gimp" exwm-instance-name))
+    (exwm-workspace-rename-buffer exwm-title)))
