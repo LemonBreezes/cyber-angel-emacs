@@ -59,7 +59,7 @@ overriding other keymaps."
   "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
-(defvar cae-keyboard-remaps-enabled-p t
+(defvar cae-keyboard-remaps-enabled-p nil
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
@@ -73,7 +73,6 @@ overriding other keymaps."
        ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
-       unicode
        vi-tilde-fringe
        workspaces
        ;;(window-select +switch-window)
@@ -86,7 +85,7 @@ overriding other keymaps."
        lispy
        fold
        word-wrap
-       ;; (evil +everywhere)
+       (evil +everywhere)
 
        :emacs
        undo
