@@ -210,5 +210,8 @@ expansion occurs within the parent Emacs session.")
     :defer t
     :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
+  (when (modulep! :editor evil)
+    (load! "+evil"))
+
   (when (modulep! :ui workspaces)
     (load! "+startup-programs")))
