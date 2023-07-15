@@ -1,0 +1,29 @@
+;;; private/exwm/autoload/evil.el -*- lexical-binding: t; -*-
+
+(defvar +exwm-refocus-application--message nil)
+(defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.001))
+
+;;;###autoload
+(defun +exwm-refocus-application (&rest _)
+  "Refocus input for the currently selected EXWM buffer, if any."
+  (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer))
+
+(defun +exwm-refocus-application--timer ()
+  (when exwm-class-name
+    (setq +exwm-refocus-application--message (current-message))
+    (advice-add #'+exwm-refocus-application :override #'ignore)
+    (let ((state (bound-and-true-p evil-state)))
+      (add-transient-hook! 'minibuffer-setup-hook
+        (run-at-time +exwm-refocus-application--delay nil
+                     (lambda ()
+                       (run-at-time
+                        0.0 nil
+                        (lambda ()
+                          (minibuffer-message +exwm-refocus-application--message)
+                          (advice-remove #'+exwm-refocus-application #'ignore)
+                                      (pcase state
+                                        ('insert (exwm-evil-core-insert))
+                                        ('normal (exwm-evil-core-normal))
+                                        (_ nil))))
+                       (ignore-errors (throw 'exit #'ignore))))))
+    (read-string "")))
