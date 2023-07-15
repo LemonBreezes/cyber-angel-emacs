@@ -17,6 +17,10 @@
   ;; We will disable `C-c' in insert state.
   (define-key exwm-mode-map (kbd "C-c") nil)
 
+  ;; At this point, we `garbage-collect' without hanging input for our
+  ;; application.
+  (advice-add #'exwm-evil-insert :after #'garbage-collect)
+
   (map! :map exwm-mode-map
         :localleader
         (:prefix ("d" . "debug")
