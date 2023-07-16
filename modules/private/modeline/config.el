@@ -1,12 +1,13 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
-                  (or (breadcrumb-project-crumbs)
-                      (buffer-name))
-                (buffer-name))
-              'face '(:inherit variable-pitch
-                      :weight bold)))
+  (concat (bound-and-true-p evil-mode-line-tag)
+          (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
+                          (or (breadcrumb-project-crumbs)
+                              (buffer-name))
+                        (buffer-name))
+                      'face '(:inherit variable-pitch
+                              :weight bold))))
 
 (add-hook! 'doom-first-file-hook
   (mapc #'byte-compile '(doom-real-buffer-p
