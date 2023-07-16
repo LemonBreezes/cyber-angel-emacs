@@ -1,13 +1,12 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (concat (or (bound-and-true-p evil-mode-line-tag) "")
-          (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
-                          (or (breadcrumb-project-crumbs)
-                              (buffer-name))
-                        (buffer-name))
-                      'face '(:inherit variable-pitch
-                              :weight bold))))
+  (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
+                  (or (breadcrumb-project-crumbs)
+                      (buffer-name))
+                (buffer-name))
+              'face '(:inherit variable-pitch
+                      :weight bold)))
 
 (add-hook! 'doom-first-file-hook
   (mapc #'byte-compile '(doom-real-buffer-p
@@ -17,6 +16,10 @@
                 (cl-subst '(:eval (cae-modeline-buffer-name))
                           'mode-line-buffer-identification
                           (default-value 'mode-line-format))))
+
+(when (modulep! :editor evil)
+  (setq! evil-mode-line-format
+         '(after . mode-line-frame-identification)))
 
 (use-package! minions
   :defer t :init
