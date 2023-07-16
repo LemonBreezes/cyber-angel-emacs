@@ -1,7 +1,7 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (concat (bound-and-true-p evil-mode-line-tag)
+  (concat (or (bound-and-true-p evil-mode-line-tag) "")
           (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
                           (or (breadcrumb-project-crumbs)
                               (buffer-name))
