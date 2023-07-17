@@ -29,13 +29,7 @@ expansion occurs within the parent Emacs session.")
     (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                 (string= "gimp" exwm-instance-name))
       (exwm-workspace-rename-buffer exwm-title)))
-  (defun +exwm-rename-buffer-to-class ()
-    "Rename the buffer to its `exwm-class-name'."
-    (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                (string= "gimp" exwm-instance-name)
-                (string= (buffer-name) exwm-class-name))
-      (exwm-workspace-rename-buffer exwm-class-name)))
-  (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-class)
+  (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
 
   (use-package! exwm
     :config
