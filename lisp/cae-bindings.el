@@ -119,6 +119,7 @@
       (setq which-key-replacement-alist
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
                           which-key-replacement-alist))))
+  (keymap-global-set embark-act-key #'embark-act)
   (map! embark-act-key #'embark-act
         embark-act-all-key #'embark-act-all
         (:when (modulep! :completion vertico)
