@@ -378,10 +378,10 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (deactivate-mark)
     (logos-narrow-dwim)))
 
-(defvar bookmark/downloads-directory (expand-file-name "~/Downloads/"))
+(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/"))
 
 ;;;###autoload
-(defun bookmark/jump-to-newest-download (_)
+(defun cae-bookmark-jump-to-newest-download (_)
   ;; For backwards compatibility with my bookmarks file.
   (let ((newest-file (-max-by #'file-newer-than-file-p
                               (cl-remove-if
