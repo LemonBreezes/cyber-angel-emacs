@@ -64,7 +64,8 @@
                   evil-ex-search-word-backward
                   evil-ex-search-unbounded-word-forward
                   evil-ex-search-unbounded-word-backward
-                  keyboard-escape-quit))
+                  keyboard-escape-quit
+                  evil-force-normal-state))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
