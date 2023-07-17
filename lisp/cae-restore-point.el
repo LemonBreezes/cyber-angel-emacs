@@ -65,7 +65,65 @@
                   evil-ex-search-unbounded-word-forward
                   evil-ex-search-unbounded-word-backward
                   keyboard-escape-quit
-                  evil-force-normal-state))
+                  evil-force-normal-state
+                  evil-inner-xml-attr
+                  +evil:inner-url-txtobj
+                  +evil:inner-any-quote
+                  evil-indent-plus-i-indent-up
+                  evil-indent-plus-i-indent-up-down
+                  evil-indent-plus-i-indent
+                  +evil:whole-buffer-txtobj
+                  +evil:defun-txtobj
+                  evilnc-inner-comment
+                  evil-inner-arg
+                  evil-inner-symbol
+                  evil-inner-tag
+                  evil-inner-back-quote
+                  evil-inner-double-quote
+                  evil-inner-single-quote
+                  evil-inner-angle
+                  evil-inner-angle
+                  evil-inner-curly
+                  evil-inner-curly
+                  evil-textobj-anyblock-inner-block
+                  evil-inner-bracket
+                  evil-inner-bracket
+                  evil-inner-paren
+                  evil-inner-paren
+                  evil-inner-paren
+                  evil-inner-paragraph
+                  evil-inner-sentence
+                  evil-inner-WORD
+                  evil-inner-word
+                  evil-outer-xml-attr
+                  +evil:outer-url-txtobj
+                  +evil:outer-any-quote
+                  evil-indent-plus-a-indent-up
+                  evil-indent-plus-a-indent-up-down
+                  evil-indent-plus-a-indent
+                  +evil:whole-buffer-txtobj
+                  +evil:defun-txtobj
+                  evilnc-outer-commenter
+                  evil-outer-arg
+                  evil-a-symbol
+                  evil-a-tag
+                  evil-a-back-quote
+                  evil-a-double-quote
+                  evil-a-single-quote
+                  evil-an-angle
+                  evil-an-angle
+                  evil-a-curly
+                  evil-a-curly
+                  evil-textobj-anyblock-a-block
+                  evil-a-bracket
+                  evil-a-bracket
+                  evil-a-paren
+                  evil-a-paren
+                  evil-a-paren
+                  evil-a-paragraph
+                  evil-a-sentence
+                  evil-a-WORD
+                  evil-a-word))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
