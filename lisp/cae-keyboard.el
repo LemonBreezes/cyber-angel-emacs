@@ -676,6 +676,10 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
 
 ;; TODO Rebind Evil commands.
 
+;; Ideally, we would undefine the C-j, C-k, etc keys and remap them for their
+;; corresponding keyboard layout but because some control keybindings are
+;; identified with RET, ESC, etc, that is not possible in terminal Emacs.
+
 ;;; Basically a custom input method
 
 (use-package! aas
