@@ -377,3 +377,17 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (end-of-line)
     (deactivate-mark)
     (logos-narrow-dwim)))
+(defvar bookmark/downloads-directory (expand-file-name "~/Downloads/"))
+
+;;;###autoload
+(defun bookmark/jump-to-newest-download (_)
+  ;; For backwards compatibility with my bookmarks file.
+  (let ((newest-file (-max-by #'file-newer-than-file-p
+                              (cl-remove-if
+                               (lambda (file)
+                                 (or (string-prefix-p "." (file-name-nondirectory file))
+                                     (file-directory-p file)))
+                               (cl-union (directory-files "~/Downloads/" t)
+                                         (directory-files "~/" t))))))
+    (dired (file-name-directory newest-file))
+    (dired-goto-file newest-file)))
