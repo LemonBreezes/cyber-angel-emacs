@@ -99,6 +99,23 @@
       ("w" evil-window-next
        "W" evil-window-prev))
 
+    (define-repeat-map evil-scroll
+      ("d" evil-scroll-down
+       "u" evil-scroll-up))
+
+    (define-repeat-map evil-scroll-line
+      ("e" evil-scroll-line-down
+       "y" evil-scroll-line-up))
+
+    (define-repeat-map evil-undo
+      ("u" evil-undo
+       "U" evil-redo
+       "r" evil-redo))
+
+    (define-repeat-map evil-paste-pop
+      ("n" evil-paste-pop-next
+       "p" evil-paste-pop))
+
     (define-repeat-map tab-bar-switch-next-tab
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
