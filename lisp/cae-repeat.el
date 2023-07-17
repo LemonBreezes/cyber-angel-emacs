@@ -42,8 +42,10 @@
    t)
 
   (define-repeat-map dired-jump
-    ("j" dired-jump
-     "-" cae-dired-jump))
+    ("j" dired-jump))
+
+  (define-repeat-map cae-dired-jump
+    ("-" cae-dired-jump))
 
   (define-repeat-map expand-region-improved
     ("=" eri/expand-region
