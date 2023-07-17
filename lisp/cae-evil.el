@@ -41,7 +41,8 @@
   "C-w" nil
   "C-z" nil)
 
-;; TODO Undefine the C-j, C-k, etc keys.
+;; Ideally, we would undefine the C-j, C-k, etc keys but because some control
+;; keybindings are identified with RET, ESC, etc, that is not possible in terminal Emacs.
 
 (map! :prefix "g"
       :m "[" #'backward-page
