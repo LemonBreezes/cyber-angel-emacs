@@ -129,7 +129,6 @@
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
-      (message "restore point")
       (when restore-point-mode
         (rp/cond-restore-point)))
     (defun cae-restore-point-enable-in-minibuffer-h ()
