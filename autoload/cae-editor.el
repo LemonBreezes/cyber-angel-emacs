@@ -377,6 +377,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (end-of-line)
     (deactivate-mark)
     (logos-narrow-dwim)))
+
 (defvar bookmark/downloads-directory (expand-file-name "~/Downloads/"))
 
 ;;;###autoload
