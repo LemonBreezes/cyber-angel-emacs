@@ -66,6 +66,7 @@
                   evil-ex-search-unbounded-word-backward
                   keyboard-escape-quit
                   evil-force-normal-state
+                  evil-normal-state
                   evil-inner-xml-attr
                   +evil:inner-url-txtobj
                   +evil:inner-any-quote
@@ -128,7 +129,8 @@
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
-      (when (bound-and-true-p restore-point-mode)
+      (message "restore point")
+      (when restore-point-mode
         (rp/cond-restore-point)))
     (defun cae-restore-point-enable-in-minibuffer-h ()
       (if restore-point-mode
