@@ -123,7 +123,8 @@
                   evil-a-paragraph
                   evil-a-sentence
                   evil-a-WORD
-                  evil-a-word))
+                  evil-a-word
+                  evil-visual-line))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
