@@ -2,6 +2,7 @@
 
 (after! evil
   (evil-set-initial-state 'exwm-mode 'normal)
+  ;; Testing if this fixes an issue in EXWM.
   (add-hook! 'evil-mode-hook
     (evil-esc-mode -1))
   (setq evil-intercept-esc nil))
