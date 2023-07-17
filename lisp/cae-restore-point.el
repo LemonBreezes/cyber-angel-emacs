@@ -66,6 +66,7 @@
                   evil-ex-search-unbounded-word-backward
                   keyboard-escape-quit
                   evil-force-normal-state
+                  evil-exit-visual-state
                   evil-normal-state
                   evil-inner-xml-attr
                   +evil:inner-url-txtobj
