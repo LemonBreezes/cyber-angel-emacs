@@ -45,10 +45,10 @@
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
 
-;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
-;; instead.
-(map! :m "C-d" nil
-      :m "C-u" nil)
+;; ;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
+;; ;; instead.
+;;(map! :m "C-d" nil
+;;      :m "C-u" nil)
 
 (after! evil-snipe
   (setq evil-snipe-scope 'visible))
