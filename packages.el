@@ -2,7 +2,6 @@
 (unpin! t)
 (disable-packages! evil-escape
                    flyspell
-                   flycheck
                    ccls
                    compat)
 (unless (modulep! :config default +smartparens)
