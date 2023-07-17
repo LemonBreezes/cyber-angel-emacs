@@ -119,14 +119,14 @@
       (setq which-key-replacement-alist
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
                           which-key-replacement-alist))))
-  (map! embark-act-key #'embark-act
-        embark-act-all-key #'embark-act-all
-        (:when (modulep! :completion vertico)
+  (map! (:when (modulep! :completion vertico)
          "C-;" nil
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'embark-act
-          embark-act-all-key #'embark-act-all)))
+          embark-act-all-key #'embark-act-all))
+        embark-act-key #'embark-act
+        embark-act-all-key #'embark-act-all)
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
