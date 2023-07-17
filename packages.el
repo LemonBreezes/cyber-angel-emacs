@@ -4,7 +4,8 @@
                    flyspell
                    flycheck
                    ccls
-                   compat)
+                   compat
+                   evil-escape)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
