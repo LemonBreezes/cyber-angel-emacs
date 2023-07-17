@@ -1,11 +1,7 @@
 ;;; private/exwm/+evil.el -*- lexical-binding: t; -*-
 
 (after! evil
-  (evil-set-initial-state 'exwm-mode 'normal)
-  ;; Testing if this fixes an issue in EXWM.
-  (add-hook! 'evil-mode-hook
-    (evil-esc-mode -1))
-  (setq evil-intercept-esc nil))
+  (evil-set-initial-state 'exwm-mode 'normal))
 (after! evil-snipe
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
