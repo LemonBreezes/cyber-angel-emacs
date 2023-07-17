@@ -41,8 +41,9 @@
   "C-w" nil
   "C-z" nil)
 
-;; Ideally, we would undefine the C-j, C-k, etc keys but because some control
-;; keybindings are identified with RET, ESC, etc, that is not possible in terminal Emacs.
+;; Ideally, we would undefine the C-j, C-k, etc keys and remap them for their
+;; corresponding keyboard layout but because some control keybindings are
+;; identified with RET, ESC, etc, that is not possible in terminal Emacs.
 
 (map! :prefix "g"
       :m "[" #'backward-page
