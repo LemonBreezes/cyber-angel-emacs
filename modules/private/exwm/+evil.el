@@ -2,7 +2,8 @@
 
 (after! evil
   (evil-set-initial-state 'exwm-mode 'normal)
-  (evil-esc-mode -1))
+  (add-hook! 'evil-mode-hook
+             (evil-esc-mode -1)))
 (after! evil-snipe
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
