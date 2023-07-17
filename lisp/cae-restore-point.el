@@ -138,7 +138,12 @@
                  (advice-remove #'keyboard-quit #'rp/cond-restore-point)
                  ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
                  ;; way we are certain this function is only called interactively.
-                 (add-hook 'doom-escape-hook #'cae-restore-point-h -1))
+                 (add-hook 'doom-escape-hook #'cae-restore-point-h -1)
+
+                 ;; When we're using Evil, we also want to restore point when we
+                 ;; exit visual state.
+                 (advice-add #'evil-exit-visual-state :before #'rp/cond-restore-point))
         (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+        (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
         (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
     (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
