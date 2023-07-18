@@ -194,6 +194,8 @@ Can be negative.")
   (when (eq helm-icons-provider 'all-the-icons)
     (setq helm-icons-mode->icon nil)))
 
+(autoload 'helm-info-emacs "helm-info" nil t)
+(autoload 'helm-info-gnus "helm-info" nil t)
 (after! helm-net
   (setq helm-net-prefer-curl t
         helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
