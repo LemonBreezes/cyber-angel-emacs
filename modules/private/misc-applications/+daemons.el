@@ -5,8 +5,8 @@
   :when (eq system-type 'gnu/linux)
   :init
   (map! :leader
-        :prefix +misc-applications-lists-prefix
-        :desc "daemons" "d" #'daemons)
+        :prefix +misc-applications-system-prefix
+        :desc "daemons" "u" #'daemons)
   :config
   (setq daemons-always-sudo t
         daemons-show-output-in-minibuffer t))
