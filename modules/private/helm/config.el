@@ -108,9 +108,9 @@ Can be negative.")
     "C-u"      #'helm-delete-minibuffer-contents
     "C-s"      #'helm-minibuffer-history
     ;; Swap TAB and C-z
-                                        ;"TAB"      #'helm-execute-persistent-action
-    ;;[tab]      #'helm-execute-persistent-action
-    ;;"C-z"      #'helm-select-action
+    "TAB"      #'helm-execute-persistent-action
+    [tab]      #'helm-execute-persistent-action
+    "C-z"      #'helm-select-action
     )
    (:after helm-ag :map helm-ag-map
     "C--"      #'+helm-do-ag-decrease-context
