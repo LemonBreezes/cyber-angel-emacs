@@ -154,7 +154,11 @@ Can be negative.")
         helm-posframe-border-width 1)
   (defadvice! +helm-ensure-window-not-dedicated-a (&rest _)
     :before #'helm-show-action-buffer
-    (set-window-dedicated-p helm-buffer nil)))
+    (set-window-dedicated-p (if (helm--show-action-window-other-window-p)
+                                (split-window (get-buffer-window helm-buffer)
+                                              nil helm-show-action-window-other-window)
+                              (get-buffer-window helm-buffer))
+                            nil)))
 
 
 (use-package! helm-flx
