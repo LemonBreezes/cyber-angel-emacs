@@ -164,6 +164,7 @@ file to edit."
         (insert "sudo ")
         (goto-char (+ pt (length "sudo ")))))))
 
+;;;###autoload
 (defun cae-shell-quit-or-delete-char (arg)
   "Delete a character (ahead of the cursor) or quit eshell if there's nothing to
 delete."
