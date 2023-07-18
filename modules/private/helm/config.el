@@ -136,9 +136,6 @@ Can be negative.")
     (setq helm-locate-command "mdfind -name %s"))
   (set-keymap-parent helm-generic-files-map helm-map))
 
-(use-package! helm-descbinds
-  :hook (helm-mode . helm-descbinds-mode))
-
 (use-package! helm-icons
   :when (modulep! +icons)
   :hook (helm-mode . helm-icons-enable)
