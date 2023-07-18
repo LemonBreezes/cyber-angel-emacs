@@ -42,7 +42,7 @@ Can be negative.")
         helm-find-files-doc-header nil
         ;; Default helm window sizes
         helm-display-buffer-default-width nil
-        helm-display-buffer-default-height 0.35
+        helm-display-buffer-default-height 0.5
         ;; When calling `helm-semantic-or-imenu', don't immediately jump to
         ;; symbol at point.
         helm-imenu-execute-action-at-once-if-one nil
