@@ -63,7 +63,6 @@ overriding other keymaps."
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
-       (helm +icons)
        (vertico +icons +childframe)
 
        :ui
