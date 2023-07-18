@@ -42,7 +42,7 @@ Can be negative.")
         helm-find-files-doc-header nil
         ;; Default helm window sizes
         helm-display-buffer-default-width nil
-        helm-display-buffer-default-height 0.35
+        helm-display-buffer-default-height 0.25
         ;; When calling `helm-semantic-or-imenu', don't immediately jump to
         ;; symbol at point.
         helm-imenu-execute-action-at-once-if-one nil
@@ -132,7 +132,7 @@ Can be negative.")
    (:after helm-grep :map helm-grep-map
     [C-return] #'helm-grep-run-other-window-action))
 
-  (set-popup-rule! "^\\*helm" :vslot -100 :size 0.22 :ttl nil)
+  (set-popup-rule! "^\\*helm" :vslot -100 :size 0.3 :ttl nil)
 
   ;; Hide minibuffer if `helm-echo-input-in-header-line'
   (add-hook 'helm-minibuffer-set-up-hook #'helm-hide-minibuffer-maybe)
