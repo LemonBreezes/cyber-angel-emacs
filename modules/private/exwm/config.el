@@ -139,15 +139,6 @@ expansion occurs within the parent Emacs session.")
     (map! [remap suspend-frame] #'undefined)
     (advice-add #'suspend-frame :override #'ignore)
 
-    ;; Prevent EXWM buffers from changing their name while not focused.
-    ;; This allows Persp to restore them as intended.
-    (when (modulep! :ui workspaces)
-      (defun +exwm-rename-buffer-to-title ()
-        "Rename the buffer to its `exwm-title'."
-        (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                    (string= "gimp" exwm-instance-name))
-          (exwm-workspace-rename-buffer exwm-title))))
-
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
