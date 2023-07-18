@@ -24,12 +24,12 @@ expansion occurs within the parent Emacs session.")
         'wheatgrass))
     "The theme loaded in our vanilla Emacs child sessions.")
 
-  (defun +exwm-rename-buffer-to-title ()
-    "Rename the buffer to its `exwm-title'."
-    (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                (string= "gimp" exwm-instance-name))
-      (exwm-workspace-rename-buffer exwm-title)))
-  (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
+  ;;(defun +exwm-rename-buffer-to-title ()
+  ;;  "Rename the buffer to its `exwm-title'."
+  ;;  (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+  ;;              (string= "gimp" exwm-instance-name))
+  ;;    (exwm-workspace-rename-buffer exwm-title)))
+  ;;(add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
 
   (use-package! exwm
     :config
@@ -146,12 +146,7 @@ expansion occurs within the parent Emacs session.")
         "Rename the buffer to its `exwm-title'."
         (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                     (string= "gimp" exwm-instance-name))
-          (exwm-workspace-rename-buffer exwm-title)))
-      (advice-add #'exwm--update-utf8-title :around
-                  (cae-defun exwm--update-utf8-title-advice (oldfun id &optional force)
-                    "Only update the window title when the buffer is visible."
-                    (when (get-buffer-window (exwm--id->buffer id))
-                      (funcall oldfun id force)))))
+          (exwm-workspace-rename-buffer exwm-title))))
 
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
