@@ -149,8 +149,8 @@ Can be negative.")
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
         helm-posframe-width 0.65
         helm-posframe-height 0.35
-        helm-posframe-min-width 80
-        helm-posframe-min-height 16
+        helm-posframe-min-width 90
+        helm-posframe-min-height 20
         helm-posframe-border-width 1))
 
 
