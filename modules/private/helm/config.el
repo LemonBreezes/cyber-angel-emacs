@@ -80,6 +80,9 @@ Can be negative.")
     (add-to-list 'completion-styles (if fuzzy 'flex 'helm) t))
 
   :config
+  (after! which-key
+    (which-key-add-key-based-replacements "C-x c" "helm"))
+
   (map!
    (:after helm :map helm-map
     [remap next-line]     #'helm-next-line
@@ -97,7 +100,7 @@ Can be negative.")
     "C-u"      #'helm-delete-minibuffer-contents
     "C-s"      #'helm-minibuffer-history
     ;; Swap TAB and C-z
-    ;"TAB"      #'helm-execute-persistent-action
+                                        ;"TAB"      #'helm-execute-persistent-action
     ;;[tab]      #'helm-execute-persistent-action
     ;;"C-z"      #'helm-select-action
     )
