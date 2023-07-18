@@ -45,24 +45,6 @@ Can be negative.")
         ;; Disable special behavior for left/right, M-left/right keys.
         helm-ff-lynx-style-map nil)
 
-  (map! [remap apropos]                   #'helm-apropos
-        [remap find-library]              #'helm-locate-library
-        [remap bookmark-jump]             #'helm-bookmarks
-        [remap execute-extended-command]  #'helm-M-x
-        [remap find-file]                 #'helm-find-files
-        [remap ibuffer-find-file]         #'helm-find-files
-        [remap locate]                    #'helm-locate
-        [remap imenu]                     #'helm-semantic-or-imenu
-        [remap noop-show-kill-ring]       #'helm-show-kill-ring
-        [remap persp-switch-to-buffer]    #'+helm/workspace-mini
-        [remap switch-to-buffer]          #'helm-buffers-list
-        [remap projectile-find-file]      #'+helm/projectile-find-file
-        [remap projectile-recentf]        #'helm-projectile-recentf
-        [remap projectile-switch-project] #'helm-projectile-switch-project
-        [remap projectile-switch-to-buffer] #'helm-projectile-switch-to-buffer
-        [remap recentf-open-files]        #'helm-recentf
-        [remap yank-pop]                  #'helm-show-kill-ring)
-
   (when (modulep! :editor evil +everywhere)
     (setq helm-default-prompt-display-function #'+helm--set-prompt-display))
 
@@ -154,42 +136,8 @@ Can be negative.")
     (setq helm-locate-command "mdfind -name %s"))
   (set-keymap-parent helm-generic-files-map helm-map))
 
-
-(use-package! helm-org
-  :when (modulep! :lang org)
-  :defer t
-  :init
-  (after! helm-mode
-    (pushnew! helm-completing-read-handlers-alist
-              '(org-capture . helm-org-completing-read-tags)
-              '(org-set-tags . helm-org-completing-read-tags))))
-
-
-;; DEPRECATED: Remove when projectile is replaced with project.el
-(use-package! helm-projectile
-  :commands (helm-projectile-find-file
-             helm-projectile-recentf
-             helm-projectile-switch-project
-             helm-projectile-switch-to-buffer)
-  :init
-  (defvar helm-projectile-find-file-map (make-sparse-keymap))
-  :config
-  (set-keymap-parent helm-projectile-find-file-map helm-map))
-
-
-(use-package! swiper-helm
-  :defer t
-  :config
-  (setq ivy-height 20
-        swiper-helm-display-function
-        (lambda (buf &optional _resume) (pop-to-buffer buf)))
-  (global-set-key [remap swiper] #'swiper-helm)
-  (add-to-list 'swiper-font-lock-exclude #'+doom-dashboard-mode nil #'eq))
-
-
 (use-package! helm-descbinds
   :hook (helm-mode . helm-descbinds-mode))
-
 
 (use-package! helm-icons
   :when (modulep! +icons)
