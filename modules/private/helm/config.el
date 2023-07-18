@@ -23,6 +23,10 @@ Can be negative.")
 
 (use-package! helm-mode
   :defer t
+  :init
+  (unless (featurep 'helm)
+    (map! :map ctl-x-map
+          "c" #'+helm-lazy-load))
   :config
   ;; helm is too heavy for `find-file-at-point'
   (add-to-list 'helm-completing-read-handlers-alist (cons #'find-file-at-point nil)))
