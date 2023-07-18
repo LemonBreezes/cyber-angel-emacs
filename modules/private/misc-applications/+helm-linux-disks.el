@@ -8,4 +8,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-system-prefix
-        :desc "linux disks" "D" #'helm-linux-disks))
+        :desc "disks" "D" #'helm-linux-disks))
