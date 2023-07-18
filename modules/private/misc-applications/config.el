@@ -6,11 +6,11 @@
 (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "L"))
 (defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
 (defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
-(defvar +misc-applications-lists-prefix (concat +misc-applications-prefix "l"))
+(defvar +misc-applications-system-prefix (concat +misc-applications-prefix "l"))
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
-(map! :leader :prefix (+misc-applications-lists-prefix . "lists"))
+(map! :leader :prefix (+misc-applications-system-prefix . "lists"))
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
 
@@ -20,7 +20,7 @@
       :prefix +misc-applications-prefix
       "1" #'mpc)
 (map! :leader
-      :prefix +misc-applications-lists-prefix
+      :prefix  +misc-applications-system-prefix
       :desc "emacs packages" "p" #'list-packages
       :desc "emacs processes" "e" #'list-processes
       :desc "emacs timers" "T" #'list-timers)
