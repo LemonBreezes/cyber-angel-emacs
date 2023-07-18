@@ -49,6 +49,10 @@ Can be negative.")
         ;; Disable special behavior for left/right, M-left/right keys.
         helm-ff-lynx-style-map nil)
 
+  ;; My preferences
+  (setq helm-display-header-line t
+        helm-echo-input-in-header-line t)
+
   (when (modulep! :editor evil +everywhere)
     (setq helm-default-prompt-display-function #'+helm--set-prompt-display))
 
@@ -147,7 +151,7 @@ Can be negative.")
         helm-posframe-height 0.35
         helm-posframe-min-width 80
         helm-posframe-min-height 16
-        helm-posframe-border-width 8))
+        helm-posframe-border-width 1))
 
 
 (use-package! helm-flx
