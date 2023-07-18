@@ -91,25 +91,25 @@ Can be negative.")
   (after! which-key
     (which-key-add-key-based-replacements "C-x c" "helm"))
 
-  (map! :map helm-map
-        [remap next-line] #'helm-next-line
-        [remap previous-line] #'helm-previous-line
-        [left] #'left-char
-        [right] #'right-char
-        "C-S-f" #'helm-previous-page
-        "C-S-n" #'helm-next-source
-        "C-S-p" #'helm-previous-source
-        (:when (modulep! :editor evil +everywhere)
-         "C-j" #'helm-next-line
-         "C-k" #'helm-previous-line
-         "C-S-j" #'helm-next-source
-         "C-S-k" #'helm-previous-source)
-        "C-u" #'helm-delete-minibuffer-contents
-        "C-s" #'helm-minibuffer-history
-        ;; Swap TAB and C-z
-        "TAB" #'helm-execute-persistent-action
-        [tab] #'helm-execute-persistent-action
-        "C-z" #'helm-select-action
+  (map! (:map helm-map
+         [remap next-line] #'helm-next-line
+         [remap previous-line] #'helm-previous-line
+         [left] #'left-char
+         [right] #'right-char
+         "C-S-f" #'helm-previous-page
+         "C-S-n" #'helm-next-source
+         "C-S-p" #'helm-previous-source
+         (:when (modulep! :editor evil +everywhere)
+          "C-j" #'helm-next-line
+          "C-k" #'helm-previous-line
+          "C-S-j" #'helm-next-source
+          "C-S-k" #'helm-previous-source)
+         "C-u" #'helm-delete-minibuffer-contents
+         "C-s" #'helm-minibuffer-history
+         ;; Swap TAB and C-z
+         "TAB" #'helm-execute-persistent-action
+         [tab] #'helm-execute-persistent-action
+         "C-z" #'helm-select-action)
         (:after helm-ag :map helm-ag-map
          "C--" #'+helm-do-ag-decrease-context
          "C-=" #'+helm-do-ag-increase-context
