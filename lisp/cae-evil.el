@@ -45,6 +45,9 @@
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
 
+(map! :leader :prefix "w"
+      "e" #'+popup/other)
+
 ;; ;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
 ;; ;; instead.
 ;;(map! :m "C-d" nil
