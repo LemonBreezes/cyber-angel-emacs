@@ -64,6 +64,7 @@ overriding other keymaps."
 
 (doom! :completion
        (vertico +icons +childframe)
+       (helm +icons)
 
        :ui
        doom-dashboard
