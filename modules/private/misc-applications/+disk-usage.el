@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
+        :prefix +misc-applications-system-prefix
         "d" #'disk-usage)
   :config
   (map! :map disk-usage-mode-map
