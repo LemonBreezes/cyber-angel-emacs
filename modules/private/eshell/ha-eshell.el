@@ -57,8 +57,7 @@ to be `:text'.
 
     (if-let ((results (ring-ref ha-eshell-output (or element 0))))
         (cl-case (string-to-char frmt)
-          (?l     (split-string results)
-                  (+log results))
+          (?l     (split-string results))
           (?f     (ha-eshell-store-file-output results))
           (otherwise (s-trim results)))
       "")))
