@@ -203,30 +203,30 @@
   (define-key help-map (kbd "SPC") #'cae-pop-mark))
 
 (map! :prefix "C-z"
-      "n" #'avy-goto-line-below
-      "p" #'avy-goto-line-above
+      :e "n" #'avy-goto-line-below
+      :e "p" #'avy-goto-line-above
       ;;"y" #'avy-copy-region
-      "c" #'avy-goto-char
+      :e "c" #'avy-goto-char
       ;;"m" #'avy-move-region
-      "l" #'avy-goto-line
-      "e" #'avy-goto-end-of-line
-      "." #'cae-avy-symbol-at-point
+      :e "l" #'avy-goto-line
+      :e "e" #'avy-goto-end-of-line
+      :e "." #'cae-avy-symbol-at-point
       ;;"k" #'avy-kill-region
       ;;"w" #'avy-kill-ring-save-region
-      "a" #'cae-avy-embark-act-on-region
-      "j" #'avy-goto-word-1
+      :e "a" #'cae-avy-embark-act-on-region
+      :e "j" #'avy-goto-word-1
       (:when (modulep! :editor fold)
-       "f" #'vimish-fold-avy)
-      "o" #'switch-window
-      "0" #'switch-window-then-delete
-      "1" #'switch-window-then-maximize
-      "2" #'switch-window-then-split-horizontally
-      "3" #'switch-window-then-split-vertically
-      "4" #'switch-window-then-kill-buffer
+       :e "f" #'vimish-fold-avy)
+      :e "o" #'switch-window
+      :e "0" #'switch-window-then-delete
+      :e "1" #'switch-window-then-maximize
+      :e "2" #'switch-window-then-split-horizontally
+      :e "3" #'switch-window-then-split-vertically
+      :e "4" #'switch-window-then-kill-buffer
       ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-      "SPC" #'avy-goto-char-timer
+      :e "SPC" #'avy-goto-char-timer
       (:map isearch-mode-map
-       "j" #'avy-isearch))
+       :e "j" #'avy-isearch))
 
 (when (modulep! :completion vertico)
   (after! vertico
