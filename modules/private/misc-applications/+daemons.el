@@ -6,7 +6,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-system-prefix
-        :desc "daemons" "u" #'daemons)
+        :desc "services" "u" #'daemons)
   :config
   (setq daemons-always-sudo t
         daemons-show-output-in-minibuffer t))
