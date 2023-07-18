@@ -133,6 +133,7 @@
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
+        "C-d" #'cae-eshell-quit-or-delete-char
         (:when (modulep! :private corfu)
          "TAB" #'completion-at-point
          "<tab>" #'completion-at-point))
