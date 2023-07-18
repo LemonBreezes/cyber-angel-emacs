@@ -63,8 +63,8 @@ overriding other keymaps."
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
-       (vertico +icons +childframe)
        (helm +icons)
+       (vertico +icons +childframe)
 
        :ui
        doom-dashboard
