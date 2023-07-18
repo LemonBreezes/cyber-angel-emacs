@@ -299,6 +299,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-embark-act-with-completing-read (&optional arg)
   (interactive "P")
+  (defvar embark-prompter 'embark-keymap-prompter)
   (let* ((embark-prompter #'embark-completing-read-prompter)
          (act (propertize "Act" 'face 'highlight))
          (embark-indicators '())
