@@ -64,7 +64,6 @@ overriding other keymaps."
 
 (doom! :completion
        (vertico +icons +childframe)
-       (helm +icons)
 
        :ui
        doom-dashboard
@@ -138,6 +137,7 @@ overriding other keymaps."
 
        :private
        (corfu +numbers)
+       (helm +icons)
        debugger
        (dirvish +icons +dirvish)
        eshell
