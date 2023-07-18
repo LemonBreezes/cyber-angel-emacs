@@ -7,5 +7,5 @@
                  (modulep! :completion helm)))
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
+        :prefix +misc-applications-system-prefix
         "D" #'helm-linux-disks))
