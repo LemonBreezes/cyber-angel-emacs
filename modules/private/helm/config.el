@@ -142,16 +142,17 @@ Can be negative.")
     (advice-add fn :around #'doom-use-helpful-a)))
 
 
-(use-package! helm-posframe
-  :when (modulep! +childframe)
-  :hook (helm-mode . helm-posframe-enable)
-  :config
-  (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
-        helm-posframe-width 0.65
-        helm-posframe-height 0.35
-        helm-posframe-min-width 160
-        helm-posframe-min-height 20
-        helm-posframe-border-width 1))
+;; DEPRECATED `helm-posframe' is no longer maintained.
+;;(use-package! helm-posframe
+;;  :when (modulep! +childframe)
+;;  :hook (helm-mode . helm-posframe-enable)
+;;  :config
+;;  (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
+;;        helm-posframe-width 0.65
+;;        helm-posframe-height 0.35
+;;        helm-posframe-min-width 160
+;;        helm-posframe-min-height 20
+;;        helm-posframe-border-width 1))
 
 
 (use-package! helm-flx
