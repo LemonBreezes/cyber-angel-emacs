@@ -142,7 +142,7 @@ Can be negative.")
     (advice-add fn :around #'doom-use-helpful-a)))
 
 
-;; DEPRECATED `helm-posframe' is no longer maintained.
+;; DEPRECATED `helm-posframe' is no longer maintained and is broken.
 ;;(use-package! helm-posframe
 ;;  :when (modulep! +childframe)
 ;;  :hook (helm-mode . helm-posframe-enable)
