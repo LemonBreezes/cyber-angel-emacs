@@ -151,7 +151,10 @@ Can be negative.")
         helm-posframe-height 0.35
         helm-posframe-min-width 160
         helm-posframe-min-height 20
-        helm-posframe-border-width 1))
+        helm-posframe-border-width 1)
+  (defadvice! +helm-ensure-window-not-dedicated-a (&rest _)
+    :before #'helm-show-action-buffer
+    (set-window-dedicated-p (get-buffer-window) nil)))
 
 
 (use-package! helm-flx
