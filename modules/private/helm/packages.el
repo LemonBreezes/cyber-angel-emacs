@@ -7,5 +7,3 @@
   (package! helm-posframe))
 (when (modulep! +fuzzy)
   (package! helm-flx))
-(when (modulep! +icons)
-  (package! helm-icons))
