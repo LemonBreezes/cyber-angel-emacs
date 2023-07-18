@@ -10,6 +10,11 @@
 (map! :leader :prefix (+startup-prefix . "programs"))
 
 (defun +workspace-switch-to-exwm-buffer-maybe (&rest _)
+  ;; Also rename buffers to their titles
+  (cl-loop for buf in (+workspace-buffer-list)
+           if (buffer-local-value 'exwm-title buf)
+           do (with-current-buffer buf
+                (exwm-workspace-rename-buffer exwm-title)))
   (let ((buf (cl-find-if
               (lambda (buf)
                 (and (buffer-local-value 'exwm-class-name buf)
