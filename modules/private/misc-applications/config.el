@@ -10,7 +10,7 @@
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
-(map! :leader :prefix (+misc-applications-system-prefix . "lists"))
+(map! :leader :prefix (+misc-applications-system-prefix . "system"))
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
 
