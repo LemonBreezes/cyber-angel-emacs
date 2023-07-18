@@ -193,3 +193,7 @@ Can be negative.")
   :config
   (when (eq helm-icons-provider 'all-the-icons)
     (setq helm-icons-mode->icon nil)))
+
+(after! helm-net
+  (setq helm-net-prefer-curl t
+        helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
