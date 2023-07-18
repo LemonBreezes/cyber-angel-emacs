@@ -2,8 +2,6 @@
 ;;; completion/helm/packages.el
 
 (package! helm)
-(package! helm-descbinds)
-(package! helm-describe-modes)
 
 (when (modulep! +childframe)
   (package! helm-posframe))
