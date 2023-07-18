@@ -137,7 +137,7 @@ overriding other keymaps."
 
        :private
        (corfu +numbers)
-       (helm +icons +childframe)
+       (helm +childframe)
        debugger
        (dirvish +icons +dirvish)
        eshell
