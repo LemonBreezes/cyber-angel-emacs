@@ -1,0 +1,1 @@
+This Helm module was copied from Doom Emacs but modified so that it does not become our main completion system.
