@@ -47,8 +47,8 @@
 
         ;; Lists
         "+daemons"
-        ;;"+helm-linux-disks"
-        ;;"+helm-system-packages"
+        "+helm-linux-disks"
+        "+helm-system-packages"
         "+paradox"
         "+trashed"
 
