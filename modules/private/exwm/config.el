@@ -24,12 +24,13 @@ expansion occurs within the parent Emacs session.")
         'wheatgrass))
     "The theme loaded in our vanilla Emacs child sessions.")
 
-  ;;(defun +exwm-rename-buffer-to-title ()
-  ;;  "Rename the buffer to its `exwm-title'."
-  ;;  (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-  ;;              (string= "gimp" exwm-instance-name))
-  ;;    (exwm-workspace-rename-buffer exwm-title)))
-  ;;(add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
+  (defun +exwm-rename-buffer-to-title ()
+    "Rename the buffer to its `exwm-title'."
+    (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                (string= "gimp" exwm-instance-name)
+                (not (persp-contain-buffer-p (current-buffer) (get-current-persp))))
+      (exwm-workspace-rename-buffer exwm-title)))
+  (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
 
   (use-package! exwm
     :config
