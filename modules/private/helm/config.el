@@ -192,15 +192,6 @@ Can be negative.")
     (setq helm-locate-command "mdfind -name %s"))
   (set-keymap-parent helm-generic-files-map helm-map))
 
-(use-package! helm-icons
-  :when (modulep! +icons)
-  :hook (helm-mode . helm-icons-enable)
-  :init
-  (setq helm-icons-provider 'all-the-icons)
-  :config
-  (when (eq helm-icons-provider 'all-the-icons)
-    (setq helm-icons-mode->icon nil)))
-
 (autoload 'helm-info-emacs "helm-info" nil t)
 (autoload 'helm-info-gnus "helm-info" nil t)
 (after! helm-net
