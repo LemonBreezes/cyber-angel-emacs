@@ -150,7 +150,7 @@ It is meant to be used as a `post-gc-hook'."
 ;; might be an Emacs30 thing.
 (defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
 
-;; This is for backwards compatibility with my old bookmarks file.
+;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
 
 ;; This autoload fixes a void function error on `find-file-hook' that occurs
