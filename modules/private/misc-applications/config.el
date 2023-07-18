@@ -6,7 +6,7 @@
 (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "L"))
 (defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
 (defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
-(defvar +misc-applications-system-prefix (concat +misc-applications-prefix "l"))
+(defvar +misc-applications-system-prefix (concat +misc-applications-prefix "s"))
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
