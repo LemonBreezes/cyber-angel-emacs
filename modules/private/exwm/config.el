@@ -28,7 +28,10 @@ expansion occurs within the parent Emacs session.")
     "Rename the buffer to its `exwm-title'."
     (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                 (string= "gimp" exwm-instance-name)
-                (not (persp-contain-buffer-p (current-buffer) (get-current-persp))))
+                (and (not (persp-contain-buffer-p (current-buffer) (get-current-persp)))
+                     (cl-loop for persp in (persp-persps)
+                              if (persp-contain-buffer-p (current-buffer) persp)
+                              return t)))
       (exwm-workspace-rename-buffer exwm-title)))
   (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
 
