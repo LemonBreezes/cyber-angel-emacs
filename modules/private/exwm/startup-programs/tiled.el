@@ -45,7 +45,7 @@
 
 (map! :leader
       :prefix +startup-prefix
-      (:prefix ("g" . "Tiled")
+      (:prefix ("T" . "Tiled")
        :desc "Restart Tiled" "r" #'startup/restart-tiled
        :desc "Select Tiled" "s" #'startup/select-tiled
        :desc "Kill Tiled" "x" #'startup/kill-tiled))
