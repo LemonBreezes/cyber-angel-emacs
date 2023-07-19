@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-lists-prefix
+        :prefix +misc-applications-system-prefix
         :desc "trash files" "t" #'trashed)
   :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)

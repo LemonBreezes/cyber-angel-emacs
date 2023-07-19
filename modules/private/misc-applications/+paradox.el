@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-lists-prefix
+        :prefix +misc-applications-system-prefix
         :desc "emacs packages" "p" #'paradox-list-packages)
   :config
   (paradox-enable))
