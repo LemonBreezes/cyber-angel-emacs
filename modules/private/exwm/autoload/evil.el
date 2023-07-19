@@ -21,9 +21,9 @@
                         (lambda ()
                           (minibuffer-message +exwm-refocus-application--message)
                           (advice-remove #'+exwm-refocus-application #'ignore)
-                                      (pcase state
-                                        ('insert (exwm-evil-core-insert))
-                                        ('normal (exwm-evil-core-normal))
-                                        (_ nil))))
+                          (pcase state
+                            ('insert (exwm-evil-core-insert))
+                            ('normal (exwm-evil-core-normal))
+                            (_ nil))))
                        (ignore-errors (throw 'exit #'ignore))))))
     (read-string "")))
