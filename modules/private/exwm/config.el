@@ -95,7 +95,6 @@ expansion occurs within the parent Emacs session.")
                            (exwm-workspace-switch-create 9))))))
 
     (map! :map exwm-mode-map
-          "C-c C-c" (cmd! (exwm-input--fake-key ?\C-c))
           :localleader
           (:prefix ("d" . "debug")
            "l" #'xcb-debug:clearn
