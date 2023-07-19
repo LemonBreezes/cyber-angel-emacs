@@ -218,4 +218,5 @@ expansion occurs within the parent Emacs session.")
     (load! "+evil"))
 
   (when (modulep! :ui workspaces)
-    (load! "+startup-programs")))
+    (unless cae-config-finished-loading
+      (load! "+startup-programs"))))
