@@ -1,7 +1,7 @@
 ;;; private/exwm/startup-programs/tiled.el -*- lexical-binding: t; -*-
 
 (defvar startup/tiled-process nil)
-(defvar startup/tiled-executable (executable-find "tiled"))
+(defvar startup/tiled-executable "~/src/Tiled-1.10.1_Linux_Qt-6_x86_64.AppImage")
 (defvar startup/tiled-workspace "Tiled")
 
 (defun startup/start-tiled (&optional arg)
