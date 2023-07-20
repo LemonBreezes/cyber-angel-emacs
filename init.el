@@ -85,7 +85,9 @@ overriding other keymaps."
        lispy
        fold
        word-wrap
-       (evil +everywhere)
+       ;; (evil +everywhere) ; Be prepared to encounter issues if you use Evil
+       ;; with my config. If you encounter any or have suggestions, please raise
+       ;; an issue on GitHub.
 
        :emacs
        undo
