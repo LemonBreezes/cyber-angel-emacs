@@ -333,7 +333,7 @@
     (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p)
     ;; This is a monkey patch to fix an issue where `dired-next-line' would move
     ;; forward by two lines instead of one when `perfect-margin-mode' is enabled.
-    (defadvice! cae-dired-next-line-a (fun arg)
+    (defadvice! cae-dired-next-line-a (arg)
       :after #'dired-next-line
       (when (and (bound-and-true-p perfect-margin-mode)
                  (> arg 0)
