@@ -344,9 +344,10 @@
     :defer t :init
     (add-hook 'pdf-view-mode-hook #'pdf-view-pagemark-mode))
 
-  (use-package! devil
-    :defer t :init
-    (global-devil-mode +1)))
+  ;;(use-package! devil
+  ;;  :defer t :init
+  ;;  (global-devil-mode +1))
+  )
 
 
 ;;; Tools
