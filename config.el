@@ -670,8 +670,8 @@
                     (oldfun &optional offset bottom-up)
                   (ignore-error 'wrong-type-argument
                     (funcall oldfun offset (not bottom-up)))))
-    (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
-      (advice-add #'avy-goto-line-below :around
+    (advice-add #'avy-action-goto :around
+                (cae-defun cae-ignore-wrong-type-argument-a (oldfun &rest args)
                   (ignore-error 'wrong-type-argument
                     (apply oldfun args))))
     :config
