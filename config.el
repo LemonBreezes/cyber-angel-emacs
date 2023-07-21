@@ -335,6 +335,7 @@
     ;; forward by two lines instead of one when `perfect-margin-mode' is enabled.
     (defadvice! cae-dired-next-line-a (fun arg)
       :around #'dired-next-line
+      (+log arg)
       (when (and (> (count-lines (point) (progn (funcall fun arg) (point))) arg)
                  (called-interactively-p 'any))
         (dired-previous-line 1))))
