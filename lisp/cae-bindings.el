@@ -297,7 +297,6 @@
             (define-key map (kbd "C-. h")   #'cape-history)
             (define-key map (kbd "C-. e")   #'cape-symbol)
             (define-key map (kbd "C-. a")   #'cape-abbrev)
-            (define-key map (kbd "C-. i")   #'cape-ispell)
             (define-key map (kbd "C-. l")   #'cape-line)
             (define-key map (kbd "C-. w")   #'cape-dict)
             (define-key map (kbd "C-. \\")  #'cape-tex)
