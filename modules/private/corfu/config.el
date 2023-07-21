@@ -101,12 +101,13 @@ derivative.")
   :defer t
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (when +corfu-ispell-in-comments-and-strings
-    (defalias 'corfu--ispell-in-comments-and-strings
-      (cape-super-capf (cape-capf-inside-comment #'cape-ispell)
-                       (cape-capf-inside-string #'cape-ispell)))
-    (add-hook! 'prog-mode-hook
-      (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings)))
+  ;; `cape-ispell' was deprecated in favor of `cape-dict'.
+  ;;(when +corfu-ispell-in-comments-and-strings
+  ;;  (defalias 'corfu--ispell-in-comments-and-strings
+  ;;    (cape-super-capf (cape-capf-inside-comment #'cape-ispell)
+  ;;                     (cape-capf-inside-string #'cape-ispell)))
+  ;;  (add-hook! 'prog-mode-hook
+  ;;    (add-to-list 'completion-at-point-functions #'corfu--ispell-in-comments-and-strings)))
   (dolist (sym +corfu-ispell-completion-modes)
     (add-hook (intern (concat (symbol-name sym) "-hook"))
               (lambda ()
