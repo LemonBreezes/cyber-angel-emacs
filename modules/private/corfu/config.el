@@ -101,7 +101,8 @@ derivative.")
   :defer t
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
-  ;; `cape-ispell' was deprecated in favor of `cape-dict'.
+  ;; `cape-ispell' was deprecated in favor of `cape-dict'. I never personally
+  ;; used `cape-ispell' anyways.
   ;;(when +corfu-ispell-in-comments-and-strings
   ;;  (defalias 'corfu--ispell-in-comments-and-strings
   ;;    (cape-super-capf (cape-capf-inside-comment #'cape-ispell)
