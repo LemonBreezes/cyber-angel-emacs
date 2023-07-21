@@ -41,6 +41,7 @@
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
 (when (modulep! :ui ligatures)
   (unless (cae-display-graphic-p)
+    (setq +ligatures-in-modes nil)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
 ;; For some reason Persp is picking up a few buffers that it should not.
