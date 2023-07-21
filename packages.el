@@ -74,6 +74,7 @@
 (package! jinx)
 (package! transpose-frame)
 (package! logos)
+(package! devil)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
