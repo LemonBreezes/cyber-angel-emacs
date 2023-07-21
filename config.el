@@ -334,8 +334,7 @@
     ;; This is a monkey patch to fix an issue where `dired-next-line' would move
     ;; forward by two lines instead of one when `perfect-margin-mode' is enabled.
     (defadvice! cae-dired-next-line-a (fun arg)
-      :around #'dired-next-line
-      (funcall fun arg)
+      :after #'dired-next-line
       (when (and (bound-and-true-p perfect-margin-mode)
                  (> arg 0)
                  (not (equal (window-fringes) '(0 0 nil nil)))
