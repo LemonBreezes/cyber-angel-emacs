@@ -69,7 +69,7 @@ overriding other keymaps."
        doom-dashboard
        hl-todo
        hydra
-       (:if (cae-display-graphic-p) (ligatures +extra +iosevka))
+       (ligatures +extra +iosevka)
        ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
