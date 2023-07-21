@@ -335,10 +335,11 @@
     ;; forward by two lines instead of one when `perfect-margin-mode' is enabled.
     (defadvice! cae-dired-next-line-a (fun arg)
       :around #'dired-next-line
-      (+log arg)
-      (when (and (> (count-lines (point) (progn (funcall fun arg) (point))) arg)
+      (when (and (bound-and-true-p perfect-margin-mode)
+                 (> arg 0)
+                 (not (equal (window-fringes) '(0 0 nil nil)))
                  (called-interactively-p 'any))
-        (dired-previous-line 1))))
+        (forward-line -1))))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
