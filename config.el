@@ -326,15 +326,20 @@
   ;; causes `dired-next-line' to move forward by two lines instead of one. This
   ;; package is really cool for laptops with small screens but I will look for
   ;; an alternative next time that use-case comes up.
-  ;;(use-package! perfect-margin
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
-  ;;  (defun cae-perfect-margin-ignore-posframe-p (window)
-  ;;    "Check if the current buffer's display type is posframe."
-  ;;    (frame-parameter (window-frame window) 'parent-frame))
-  ;;  :config
-  ;;  (add-to-list 'perfect-margin-ignore-regexps "^ ")
-  ;;  (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p))
+  (use-package! perfect-margin
+    :defer t :init
+    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
+    (defun cae-perfect-margin-ignore-posframe-p (window)
+      "Check if the current buffer's display type is posframe."
+      (frame-parameter (window-frame window) 'parent-frame))
+    :config
+    (add-to-list 'perfect-margin-ignore-regexps "^ ")
+    (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p)
+    (defadvice! cae-dired-next-line-a (fun arg)
+      :around #'dired-next-line
+      (when (and (> (count-lines (point) (progn (funcall fun arg) (point))) arg)
+                 (called-interactively-p 'any))
+        (dired-previous-line 1))))
 
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
