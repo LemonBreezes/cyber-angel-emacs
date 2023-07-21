@@ -44,55 +44,46 @@ expansion occurs within the parent Emacs session.")
     (setq exwm-systemtray-height (line-pixel-height))
     (exwm-systemtray-enable)
 
-    (unless (modulep! :ui workspaces)
-      (setq exwm-workspace-number 4)
-      (setq exwm-input-global-keys
-            `(;; Bind "s-r" to exit char-mode and fullscreen mode.
-              ([?\s-r] . exwm-reset)
-              ;; Bind "s-w" to switch workspace interactively.
-              ([?\s-w] . exwm-workspace-switch)
-              ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
-              ,@(mapcar (lambda (i)
-                          `(,(kbd (format "s-%d" i)) .
-                            (lambda ()
-                              (interactive)
-                              (exwm-workspace-switch-create ,i))))
-                        (number-sequence 0 9))
-              ;; Bind "s-&" to launch applications ('M-&' also works if the output
-              ;; buffer does not bother you).
-              ([?\s-&] . (lambda (command)
-		           (interactive (list (read-shell-command "$ ")))
-		           (start-process-shell-command command nil command)))
-              ([?\s-1] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 0)))
-              ([?\s-2] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 1)))
-              ([?\s-3] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 2)))
-              ([?\s-4] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 3)))
-              ([?\s-5] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 4)))
-              ([?\s-6] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 5)))
-              ([?\s-7] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 6)))
-              ([?\s-8] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 7)))
-              ([?\s-9] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 8)))
-              ([?\s-0] . (lambda ()
-                           (interactive)
-                           (exwm-workspace-switch-create 9))))))
+    (cond ((modulep! :ui workspaces)
+           (setq exwm-input-global-keys
+                 `(;; Bind "s-r" to exit char-mode and fullscreen mode.
+                   ([?\s-r] . exwm-reset)
+                   ;; Bind "s-w" to switch workspace interactively.
+                   ([?\s-w] . +workspace/switch-to)
+                   ;; Bind "s-&" to launch applications ('M-&' also works if the output
+                   ;; buffer does not bother you).
+                   ([?\s-&] . (lambda (command)
+		                (interactive (list (read-shell-command "$ ")))
+		                (start-process-shell-command command nil command)))
+                   ([?\s-1] . +workspace/switch-to-0)
+                   ([?\s-2] . +workspace/switch-to-1)
+                   ([?\s-3] . +workspace/switch-to-2)
+                   ([?\s-4] . +workspace/switch-to-3)
+                   ([?\s-5] . +workspace/switch-to-4)
+                   ([?\s-6] . +workspace/switch-to-5)
+                   ([?\s-7] . +workspace/switch-to-6)
+                   ([?\s-8] . +workspace/switch-to-7)
+                   ([?\s-9] . +workspace/switch-to-8)
+                   ([?\s-0] . +workspace/switch-to-final))))
+          (t
+           (setq exwm-workspace-number 4)
+           (setq exwm-input-global-keys
+                 `(;; Bind "s-r" to exit char-mode and fullscreen mode.
+                   ([?\s-r] . exwm-reset)
+                   ;; Bind "s-w" to switch workspace interactively.
+                   ([?\s-w] . exwm-workspace-switch)
+                   ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
+                   ,@(mapcar (lambda (i)
+                               `(,(kbd (format "s-%d" i)) .
+                                 (lambda ()
+                                   (interactive)
+                                   (exwm-workspace-switch-create ,i))))
+                             (number-sequence 0 9))
+                   ;; Bind "s-&" to launch applications ('M-&' also works if the output
+                   ;; buffer does not bother you).
+                   ([?\s-&] . (lambda (command)
+		                (interactive (list (read-shell-command "$ ")))
+		                (start-process-shell-command command nil command)))))))
 
     (map! :map exwm-mode-map
           :localleader
