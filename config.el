@@ -322,17 +322,6 @@
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
-  (use-package! perfect-margin
-    :defer t :init
-    (add-hook 'doom-first-buffer-hook #'perfect-margin-mode)
-    (defun cae-perfect-margin-ignore-posframe-p (window)
-      "Check if the current buffer's display type is posframe."
-      (frame-parameter (window-frame window) 'parent-frame))
-    :config
-    (add-to-list 'perfect-margin-ignore-regexps "^ ")
-    (add-to-list 'perfect-margin-ignore-filters #'cae-perfect-margin-ignore-posframe-p)
-    (add-to-list 'perfect-margin-ignore-modes 'dired-mode))
-
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
     :defer t :init
