@@ -346,7 +346,8 @@
 
   (use-package! devil
     :defer t :init
-    (global-devil-mode +1)))
+    (global-devil-mode +1)
+    (map! "C-,")))
 
 
 ;;; Tools
