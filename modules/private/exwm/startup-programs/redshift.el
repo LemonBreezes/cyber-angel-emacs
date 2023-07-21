@@ -17,8 +17,8 @@
                               ":"
                               (number-to-string calendar-longitude))
                  (pcase (modus-themes--current-theme)
-                   ((or modus-operandi modus-operandi-tinted
-                        modus-operandi-tritanopia modus-operandi-deuteranopia)
+                   ((or modus-vivendi modus-vivendi-tinted
+                        modus-vivendi-tritanopia modus-vivendi-deuteranopia)
                     `("-P" "-O" "5200" "-b"
                       ;; Set monitor brightness lower in certain applications.
                       ,(pcase (+workspace-current-name)
@@ -27,8 +27,8 @@
                          ("Discord" "1.0")
                          (_ "1.0"))
                       "-g" "1.0"))
-                   ((or modus-vivendi modus-vivendi-tinted
-                        modus-vivendi-tritanopia modus-vivendi-deuteranopia)
+                   ((or modus-operandi modus-operandi-tinted
+                        modus-operandi-tritanopia modus-operandi-deuteranopia)
                     '("-P" "-O" "6300" "-b" "1.0" "-g" "1.0")))))))
 
 (defun startup/kill-redshift (&optional arg)
