@@ -477,6 +477,9 @@
                 "--completion-style=detailed"
                 "--header-insertion=never"
                 "--header-insertion-decorators=0")))
+      (after! lsp-lua
+        (setq lsp-lua-runtime-version "LuaJIT"
+              lsp-lua-hint-enable t))
       (add-to-list 'lsp-disabled-clients 'ccls)
       (add-to-list 'lsp-disabled-clients 'mspyls)))
 
