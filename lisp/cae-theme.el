@@ -62,6 +62,8 @@
 
 ;;; Set theme based on time of day.
 
+;; TODO I need separate functions for when it's night time and for when the
+;; theme is dark. This is for if I want to use a dark theme during the day.
 (defun cae-night-mode-p ()
   (eq (frame-parameter nil 'background-mode) 'dark))
 
