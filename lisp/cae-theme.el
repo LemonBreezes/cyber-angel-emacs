@@ -60,43 +60,43 @@
 
 ;;; Set theme based on time of day.
 
-(unless (memq 'cae-theme-store-circadian-times-h kill-emacs-hook)
-  (use-package! circadian
-    :defer t :defer-incrementally t
-    :config
-    (setq circadian-themes
-          '((:sunrise . modus-operandi-tinted)
-            (:sunset  . modus-vivendi-tinted)))
-    (if (and calendar-latitude calendar-longitude)
-        (if doom-init-time
-            (circadian-setup)
-          (let ((hook (if (daemonp)
-                          'server-after-make-frame-hook
-                        'after-init-hook)))
-            (remove-hook hook #'doom-init-theme-h)
-            (add-hook hook #'circadian-setup -90)))
-      (setq calendar-latitude 0
-            calendar-longitude 0)
-      (message "ERROR: Calendar latitude and longitude are not set.")))
-
-  ;; Cache the theme times so that we can set the theme on startup without loading
-  ;; the circadian package.
-  (add-hook 'kill-emacs-hook
-    (cae-defun cae-theme-store-circadian-times-h ()
-      (when (require 'circadian nil t)
-        (doom-store-put 'circadian-themes (circadian-themes-parse)))))
-
-  ;; Set the theme on startup.
-  (when (doom-store-get 'circadian-themes)
-    (let* ((themes (doom-store-get 'circadian-themes))
-           (now (reverse (cl-subseq (decode-time) 0 3)))
-           (past-themes
-            (cl-remove-if (lambda (entry)
-                            (let ((theme-time (cl-first entry)))
-                              (not (or (and (= (cl-first theme-time) (cl-first now))
-                                            (<= (cl-second theme-time) (cl-second now)))
-                                       (< (cl-first theme-time) (cl-first now))))))
-                          themes))
-           (entry (car (last (or past-themes themes))))
-           (theme (cdr entry)))
-      (setq doom-theme theme))))
+;;(unless (memq 'cae-theme-store-circadian-times-h kill-emacs-hook)
+;;  (use-package! circadian
+;;    :defer t :defer-incrementally t
+;;    :config
+;;    (setq circadian-themes
+;;          '((:sunrise . modus-operandi-tinted)
+;;            (:sunset  . modus-vivendi-tinted)))
+;;    (if (and calendar-latitude calendar-longitude)
+;;        (if doom-init-time
+;;            (circadian-setup)
+;;          (let ((hook (if (daemonp)
+;;                          'server-after-make-frame-hook
+;;                        'after-init-hook)))
+;;            (remove-hook hook #'doom-init-theme-h)
+;;            (add-hook hook #'circadian-setup -90)))
+;;      (setq calendar-latitude 0
+;;            calendar-longitude 0)
+;;      (message "ERROR: Calendar latitude and longitude are not set.")))
+;;
+;;  ;; Cache the theme times so that we can set the theme on startup without loading
+;;  ;; the circadian package.
+;;  (add-hook 'kill-emacs-hook
+;;    (cae-defun cae-theme-store-circadian-times-h ()
+;;      (when (require 'circadian nil t)
+;;        (doom-store-put 'circadian-themes (circadian-themes-parse)))))
+;;
+;;  ;; Set the theme on startup.
+;;  (when (doom-store-get 'circadian-themes)
+;;    (let* ((themes (doom-store-get 'circadian-themes))
+;;           (now (reverse (cl-subseq (decode-time) 0 3)))
+;;           (past-themes
+;;            (cl-remove-if (lambda (entry)
+;;                            (let ((theme-time (cl-first entry)))
+;;                              (not (or (and (= (cl-first theme-time) (cl-first now))
+;;                                            (<= (cl-second theme-time) (cl-second now)))
+;;                                       (< (cl-first theme-time) (cl-first now))))))
+;;                          themes))
+;;           (entry (car (last (or past-themes themes))))
+;;           (theme (cdr entry)))
+;;      (setq doom-theme theme))))
