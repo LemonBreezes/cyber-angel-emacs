@@ -55,6 +55,7 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
+  ;; Previously I used Iosevka Comfy and size 18.
   (setq doom-font (font-spec :family "Iosevka" :size 20)
         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
                                             :size 20)
