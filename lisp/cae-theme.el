@@ -62,7 +62,7 @@
 
 ;;; Set theme based on time of day.
 
-(unless (memq 'cae-theme-store-circadian-times-h kill-emacs-hook)
+(unless cae-config-finished-loading
   (use-package! circadian
     ;;:defer t :defer-incrementally t
     :config
