@@ -62,8 +62,8 @@
 
 ;;; Set theme based on time of day.
 
-(defvar cae-night-mode-p nil
-  "Whether it is night time.")
+(defun cae-night-mode-p ()
+  (eq (frame-parameter nil 'background-mode) 'dark))
 
 (use-package! circadian
   ;;:defer t :defer-incrementally t
