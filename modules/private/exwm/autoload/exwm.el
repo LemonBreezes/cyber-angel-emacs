@@ -6,7 +6,8 @@
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
-  (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer))
+  (when (derived-mode-p 'exwm-mode)
+    (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)))
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
