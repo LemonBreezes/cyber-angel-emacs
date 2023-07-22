@@ -88,8 +88,6 @@
     (message "ERROR: Calendar latitude and longitude are not set.")
     (doom-store-put 'circadian-themes (circadian-themes-parse))))
 
-(doom-store-get 'circadian-themes)
-
 ;;;; Cache the theme times so that we can set the theme on startup without loading
 ;;;; the circadian package.
 (add-hook 'kill-emacs-hook
