@@ -68,7 +68,7 @@
   (circadian-sunset))
 
 (use-package! circadian
-  ;;:defer t :defer-incrementally t
+  :defer t :defer-incrementally t
   :config
   (setq circadian-themes
         '((:sunrise . modus-operandi-deuteranopia)
@@ -94,16 +94,17 @@
               (doom-store-put 'circadian-themes (circadian-themes-parse)))))
 
 ;;;; Set the theme on startup.
-;;(when (doom-store-get 'circadian-themes)
-;;  (let* ((themes (doom-store-get 'circadian-themes))
-;;         (now (reverse (cl-subseq (decode-time) 0 3)))
-;;         (past-themes
-;;          (cl-remove-if (lambda (entry)
-;;                          (let ((theme-time (cl-first entry)))
-;;                            (not (or (and (= (cl-first theme-time) (cl-first now))
-;;                                          (<= (cl-second theme-time) (cl-second now)))
-;;                                     (< (cl-first theme-time) (cl-first now))))))
-;;                        themes))
-;;         (entry (car (last (or past-themes themes))))
-;;         (theme (cdr entry)))
-;;    (setq doom-theme theme)))
+(when (and (doom-store-get 'circadian-themes)
+           (not cae-config-finished-loading))
+  (let* ((themes (doom-store-get 'circadian-themes))
+         (now (reverse (cl-subseq (decode-time) 0 3)))
+         (past-themes
+          (cl-remove-if (lambda (entry)
+                          (let ((theme-time (cl-first entry)))
+                            (not (or (and (= (cl-first theme-time) (cl-first now))
+                                          (<= (cl-second theme-time) (cl-second now)))
+                                     (< (cl-first theme-time) (cl-first now))))))
+                        themes))
+         (entry (car (last (or past-themes themes))))
+         (theme (cdr entry)))
+    (setq doom-theme theme)))
