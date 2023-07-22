@@ -67,8 +67,8 @@
     :defer t :defer-incrementally t
     :config
     (setq circadian-themes
-          '((:sunrise . modus-operandi-tinted)
-            (:sunset  . modus-vivendi-tinted)))
+          '((:sunrise . modus-operandi-deuteranopia)
+            (:sunset  . modus-vivendi-deuteranopia)))
     (if (and calendar-latitude calendar-longitude)
         (if doom-init-time
             (circadian-setup)
