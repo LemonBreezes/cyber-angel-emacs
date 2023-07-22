@@ -12,7 +12,7 @@
   (setq startup/dunst-process
         (start-process "dunst" " *startup/dunst*" "dunst" "-config"
                        (expand-file-name
-                        (if (cae-night-mode-p)
+                        (if (cae-dark-theme-p)
                             "dunstrc-dark"
                           "dunstrc-light")
                         +startup-config-dir))))
