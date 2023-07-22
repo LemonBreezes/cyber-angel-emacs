@@ -12,12 +12,9 @@
   (setq startup/dunst-process
         (start-process "dunst" " *startup/dunst*" "dunst" "-config"
                        (expand-file-name
-                        (cond ((cl-find-if (lambda (theme)
-                                             (string-prefix-p "modus-operandi-"
-                                                              (symbol-name theme)))
-                                           custom-enabled-themes)
-                               "dunstrc-light")
-                              (t "dunstrc-dark"))
+                        (if (cae-night-mode-p)
+                            "dunstrc-dark"
+                          "dunstrc-light")
                         +startup-config-dir))))
 
 (defun startup/kill-dunst ()
