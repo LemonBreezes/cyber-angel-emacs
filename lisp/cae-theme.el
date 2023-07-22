@@ -76,12 +76,14 @@
                    (or (doom-store-get 'circadian-sunrise)
                        (require 'circadian)
                        (circadian-sunrise)))))
-        (or (and (>= (cl-first now) (cl-first sunset)))
-            (and (< (cl-first now) (cl-first sunrise)))
-            (and (= (cl-first now) (cl-first sunset))
-                 (>= (cl-second now) (cl-second sunset)))
-            (and (= (cl-first now) (cl-first sunrise))
-                 (< (cl-second now) (cl-second sunrise))))))
+    (doom-store-put 'circadian-sunset sunset)
+    (doom-store-put 'circadian-sunrise sunrise)
+    (or (and (>= (cl-first now) (cl-first sunset)))
+        (and (< (cl-first now) (cl-first sunrise)))
+        (and (= (cl-first now) (cl-first sunset))
+             (>= (cl-second now) (cl-second sunset)))
+        (and (= (cl-first now) (cl-first sunrise))
+             (< (cl-second now) (cl-second sunrise))))))
 
 (use-package! circadian
   :defer t :defer-incrementally t
