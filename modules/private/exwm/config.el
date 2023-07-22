@@ -139,8 +139,8 @@ expansion occurs within the parent Emacs session.")
     ;;(add-hook 'doom-switch-buffer-hook #'+exwm-refocus-application)
     ;;(add-hook 'doom-switch-window-hook #'+exwm-refocus-application)
     ;;(add-hook 'doom-escape-hook #'+exwm-refocus-application)
-    (when (featurep! :ui workspaces)
-      (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
+    ;;(when (featurep! :ui workspaces)
+    ;;  (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
 
 
     ;; Set up key translations for using Emacs keybindings in X windows.
