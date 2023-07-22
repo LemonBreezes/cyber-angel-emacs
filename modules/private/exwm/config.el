@@ -137,6 +137,7 @@ expansion occurs within the parent Emacs session.")
     ;; Fixes focus being lost from EXWM buffers when switching workspaces or
     ;; buffers.
     (add-hook 'doom-switch-buffer-hook #'+exwm-refocus-application)
+    (add-hook 'doom-switch-window-hook #'+exwm-refocus-application)
     (add-hook 'doom-escape-hook #'+exwm-refocus-application)
     (when (featurep! :ui workspaces)
       (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
