@@ -66,16 +66,12 @@
   (eq (frame-parameter nil 'background-mode) 'dark))
 (defun cae-night-time-p ()
   (let ((now (reverse (cl-subseq (decode-time) 0 3)))
-        (sunset (if (featurep 'circadian)
-                    (circadian-sunset)
-                  (or (doom-store-get 'circadian-sunset)
-                      (require 'circadian)
-                      (circadian-sunset))))
-        (sunrise (if (featurep 'circadian)
-                     (circadian-sunrise)
-                   (or (doom-store-get 'circadian-sunrise)
-                       (require 'circadian)
-                       (circadian-sunrise)))))
+        (sunset (or (doom-store-get 'circadian-sunset)
+                    (require 'circadian)
+                    (circadian-sunset)))
+        (sunrise (or (doom-store-get 'circadian-sunrise)
+                     (require 'circadian)
+                     (circadian-sunrise))))
     (doom-store-put 'circadian-sunset sunset)
     (doom-store-put 'circadian-sunrise sunrise)
     (or (and (>= (cl-first now) (cl-first sunset)))
@@ -102,14 +98,18 @@
     (setq calendar-latitude 0
           calendar-longitude 0)
     (message "ERROR: Calendar latitude and longitude are not set.")
-    (doom-store-put 'circadian-themes (circadian-themes-parse))))
+    (doom-store-put 'circadian-themes (circadian-themes-parse))
+    (doom-store-put 'circadian-sunset (circadian-sunset))
+    (doom-store-put 'circadian-sunrise (circadian-sunrise))))
 
 ;; Cache the theme times so that we can set the theme on startup without loading
 ;; the circadian package.
 (add-hook 'kill-emacs-hook
           (cae-defun cae-theme-store-circadian-times-h ()
             (when (require 'circadian nil t)
-              (doom-store-put 'circadian-themes (circadian-themes-parse)))))
+              (doom-store-put 'circadian-themes (circadian-themes-parse))
+              (doom-store-put 'circadian-sunset (circadian-sunset))
+              (doom-store-put 'circadian-sunrise (circadian-sunrise)))))
 
 ;;;; Set the theme on startup.
 (when (and (doom-store-get 'circadian-themes)
