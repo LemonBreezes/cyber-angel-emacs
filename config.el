@@ -480,7 +480,8 @@
       (after! lsp-lua
         (setq lsp-lua-runtime-version "LuaJIT"
               lsp-lua-hint-enable t
-              lsp-lua-hint-set-type t))
+              lsp-lua-hint-set-type t
+              lsp-clients-lua-language-server-bin (executable-find "lua-language-server")))
       (add-to-list 'lsp-disabled-clients 'ccls)
       (add-to-list 'lsp-disabled-clients 'mspyls)))
 
