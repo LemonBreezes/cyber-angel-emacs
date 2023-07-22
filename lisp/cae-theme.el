@@ -55,6 +55,8 @@
         ef-themes-mixed-fonts t
         ef-themes-to-toggle '(ef-trio-dark ef-trio-light)))
 
+(setq doom-theme 'modus-vivendi-deuteranopia)
+
 (map! :leader
       :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
