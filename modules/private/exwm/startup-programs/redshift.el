@@ -20,10 +20,8 @@
                      `("-P" "-O" "4200" "-b"
                        ;; Set monitor brightness lower in certain applications.
                        ,(pcase (+workspace-current-name)
-                          ("Chromium" "1.0")
                           ("Teams" "0.6")
-                          ("Discord" "1.0")
-                          (_ "1.0"))
+                          (_ "0.6"))
                        "-g" "1.0")
                    '("-P" "-O" "6300" "-b" "1.0" "-g" "1.0"))))))
 
