@@ -9,7 +9,7 @@
   (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer))
 
 (defun +exwm-refocus-application--timer ()
-  (when exwm-class-name
+  (when (derived-mode-p 'exwm-mode)
     (setq +exwm-refocus-application--message (current-message))
     (advice-add #'+exwm-refocus-application :override #'ignore)
     (let ((state (bound-and-true-p evil-state)))
