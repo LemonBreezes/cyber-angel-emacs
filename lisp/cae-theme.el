@@ -64,8 +64,10 @@
 
 ;; TODO I need separate functions for when it's night time and for when the
 ;; theme is dark. This is for if I want to use a dark theme during the day.
-(defun cae-night-mode-p ()
+(defun cae-dark-theme-p ()
   (eq (frame-parameter nil 'background-mode) 'dark))
+(defun cae-night-mode-p ()
+  (circadian-sunset))
 
 (use-package! circadian
   ;;:defer t :defer-incrementally t
@@ -83,26 +85,29 @@
           (add-hook hook #'circadian-setup -90)))
     (setq calendar-latitude 0
           calendar-longitude 0)
-    (message "ERROR: Calendar latitude and longitude are not set.")))
+    (message "ERROR: Calendar latitude and longitude are not set.")
+    (doom-store-put 'circadian-themes (circadian-themes-parse))))
+
+(doom-store-get 'circadian-themes)
 
 ;;;; Cache the theme times so that we can set the theme on startup without loading
 ;;;; the circadian package.
-  ;;(add-hook 'kill-emacs-hook
-  ;;          (cae-defun cae-theme-store-circadian-times-h ()
-  ;;            (when (require 'circadian nil t)
-  ;;              (doom-store-put 'circadian-themes (circadian-themes-parse)))))
-  ;;
+(add-hook 'kill-emacs-hook
+          (cae-defun cae-theme-store-circadian-times-h ()
+            (when (require 'circadian nil t)
+              (doom-store-put 'circadian-themes (circadian-themes-parse)))))
+
 ;;;; Set the theme on startup.
-  ;;(when (doom-store-get 'circadian-themes)
-  ;;  (let* ((themes (doom-store-get 'circadian-themes))
-  ;;         (now (reverse (cl-subseq (decode-time) 0 3)))
-  ;;         (past-themes
-  ;;          (cl-remove-if (lambda (entry)
-  ;;                          (let ((theme-time (cl-first entry)))
-  ;;                            (not (or (and (= (cl-first theme-time) (cl-first now))
-  ;;                                          (<= (cl-second theme-time) (cl-second now)))
-  ;;                                     (< (cl-first theme-time) (cl-first now))))))
-  ;;                        themes))
-  ;;         (entry (car (last (or past-themes themes))))
-  ;;         (theme (cdr entry)))
-  ;;    (setq doom-theme theme)))
+;;(when (doom-store-get 'circadian-themes)
+;;  (let* ((themes (doom-store-get 'circadian-themes))
+;;         (now (reverse (cl-subseq (decode-time) 0 3)))
+;;         (past-themes
+;;          (cl-remove-if (lambda (entry)
+;;                          (let ((theme-time (cl-first entry)))
+;;                            (not (or (and (= (cl-first theme-time) (cl-first now))
+;;                                          (<= (cl-second theme-time) (cl-second now)))
+;;                                     (< (cl-first theme-time) (cl-first now))))))
+;;                        themes))
+;;         (entry (car (last (or past-themes themes))))
+;;         (theme (cdr entry)))
+;;    (setq doom-theme theme)))
