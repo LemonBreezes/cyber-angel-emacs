@@ -49,7 +49,7 @@
         modus-themes-variable-pitch-ui t
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
-        modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted)))
+        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
