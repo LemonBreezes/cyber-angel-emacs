@@ -64,8 +64,26 @@
 
 (defun cae-dark-theme-p ()
   (eq (frame-parameter nil 'background-mode) 'dark))
-(defun cae-night-mode-p ()
-  (circadian-sunset))
+(defun cae-night-time-p ()
+  (circadian-sunrise)
+  (circadian-sunset)
+  (circadian-now-time)
+  (let ((now (reverse (cl-subseq (decode-time) 0 3)))
+        (sunset (if (featurep 'circadian)
+                    (doom-store-put 'circadian-sunset
+                                    (circadian-sunset))
+                  (or (doom-store-get 'circadian-sunset)
+                      (require 'circadian)
+                      (doom-store-put 'circadian-sunset
+                                      (circadian-sunset)))))
+        (sunrise (if (featurep 'circadian)
+                     (doom-store-put 'circadian-sunrise
+                                     (circadian-sunrise))
+                   (or (doom-store-get 'circadian-sunrise)
+                       (require 'circadian)
+                       (doom-store-put 'circadian-sunrise
+                                       (circadian-sunrise))))))
+    ))
 
 (use-package! circadian
   :defer t :defer-incrementally t
