@@ -67,19 +67,15 @@
 (defun cae-night-time-p ()
   (let ((now (reverse (cl-subseq (decode-time) 0 3)))
         (sunset (if (featurep 'circadian)
-                    (doom-store-put 'circadian-sunset
-                                    (circadian-sunset))
+                    (circadian-sunset)
                   (or (doom-store-get 'circadian-sunset)
                       (require 'circadian)
-                      (doom-store-put 'circadian-sunset
-                                      (circadian-sunset)))))
+                      (circadian-sunset))))
         (sunrise (if (featurep 'circadian)
-                     (doom-store-put 'circadian-sunrise
-                                     (circadian-sunrise))
+                     (circadian-sunrise)
                    (or (doom-store-get 'circadian-sunrise)
                        (require 'circadian)
-                       (doom-store-put 'circadian-sunrise
-                                       (circadian-sunrise))))))
+                       (circadian-sunrise)))))
         (or (and (>= (cl-first now) (cl-first sunset)))
             (and (< (cl-first now) (cl-first sunrise)))
             (and (= (cl-first now) (cl-first sunset))
