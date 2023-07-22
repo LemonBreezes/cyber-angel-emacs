@@ -29,7 +29,7 @@
                       "-g" "1.0"))
                    ((or modus-operandi modus-operandi-tinted
                         modus-operandi-tritanopia modus-operandi-deuteranopia)
-                    '("-P" "-O" "6300" "-b" "1.0" "-g" "1.0")))))))
+                    '("-P" "-O" "5300" "-b" "1.0" "-g" "1.0")))))))
 
 (defun startup/kill-redshift (&optional arg)
   (interactive "p")
