@@ -4,5 +4,6 @@
   (interactive)
   (if (memq 'last-command '(cae-paradox-menu-quick-help
                             paradox-menu-quick-help))
-      (call-interactively #'keyboard-quit)
+      (progn (+log "HELLO")
+             (call-interactively #'keyboard-quit))
     (call-interactively #'paradox-menu-quick-help)))
