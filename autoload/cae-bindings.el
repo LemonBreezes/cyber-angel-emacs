@@ -2,5 +2,5 @@
 
 (defun cae-embark-act ()
   (interactive)
-  (let ((embark-cycle-key (this-command-keys-vector)))
+  (let ((embark-cycle-key (key-description (this-command-keys))))
     (call-interactively 'embark-act)))
