@@ -33,6 +33,7 @@
             (cae-defun cae-corfu-quit-h ()
               (when (cae-corfu-visible-p)
                 (corfu-quit)
+                (+log "hello!!")
                 t))))
 
 (when (modulep! :editor snippets)
