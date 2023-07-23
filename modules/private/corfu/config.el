@@ -1,6 +1,6 @@
 ;;; completion/corfu/config.el -*- lexical-binding: t; -*-
 
-(defvar +corfu-auto-delay 0.1
+(defvar +corfu-auto-delay 0.5
   "How long after point stands still will completion be called automatically,
 in seconds.
 
