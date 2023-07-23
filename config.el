@@ -276,9 +276,6 @@
                                         ;package.
                 (topsy-mode -1))))
 
-  (use-package! beacon
-    :defer t)
-
   (use-package! anzu
     :defer t :init
     (global-set-key [remap query-replace] 'anzu-query-replace)
