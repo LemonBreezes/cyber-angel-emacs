@@ -611,7 +611,13 @@
                     (if (eq fn #'er/mark-comment)
                         #'cae-mark-comment
                       fn))
-                  er/try-expand-list)))
+                  er/try-expand-list))
+    ;; If I wanted to mark words or symbols, I would use the built-in commands.
+    (setq er/try-expand-list
+          (thread-last er/try-expand-list
+                       (delq #'er/mark-word)
+                       (delq #'er/mark-symbol)
+                       (delq #'er/mark-symbol-with-prefix))))
 
   ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
   (setq set-mark-command-repeat-pop t)
