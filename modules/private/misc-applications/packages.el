@@ -41,19 +41,20 @@
 (package! know-your-http-well)
 (package! tldr)
 (package! x86-lookup)
+(package! posimacs-shortdocs :recipe
+  (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 
 ;; Games
 (package! autotetris-mode)
-
 (package! speed-type)
 
+;; Eye candy
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
-(package! ednc)
 
-(package! posimacs-shortdocs :recipe
-          (:host github :repo "LemonBreezes/posimacs-shortdocs"))
+;; Emacs OS
+(package! ednc)
 
 (package! zones)
 (package! zone-nyan)
