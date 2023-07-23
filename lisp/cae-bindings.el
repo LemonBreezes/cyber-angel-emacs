@@ -320,7 +320,7 @@
   :lighter nil
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-.") #'cae-completion-prefix-map)
-            (define-key map (kbd "<f7>" #'cae-completion-prefix-map))
+            (define-key map (kbd "<f7>") #'cae-completion-prefix-map)
             map))
 (cae-completion-mode +1)
 
