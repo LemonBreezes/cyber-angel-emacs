@@ -276,10 +276,10 @@
                                         ;package.
                 (topsy-mode -1))))
 
+  ;; Currently we only use this programatically
   (use-package! beacon
-    :defer-incrementally t
+    :defer t
     :config
-    (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape))
 
   (use-package! anzu
