@@ -415,3 +415,10 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (let ((this-command 'yank)
         (real-this-command 'yank))
     (yank-indent--post-command-hook)))
+
+;;;###autoload
+(defun cae-embark-act ()
+  (interactive)
+  (require 'embark)
+  (let ((embark-cycle-key (key-description (this-command-keys))))
+    (call-interactively 'embark-act)))
