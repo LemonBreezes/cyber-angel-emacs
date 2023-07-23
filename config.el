@@ -635,7 +635,7 @@
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
   (after! midnight
-    (setq clean-buffer-list-kill-regexps "\\`\\*.*\\*\\'"))
+    (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")))
 
   (after! ispell
     (setq ispell-quietly t
