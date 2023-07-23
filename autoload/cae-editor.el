@@ -272,7 +272,7 @@ mark the string and call `edit-indirect-region' with it."
   (apply-partially #'cae-avy-do #'cae-kill-region))
 
 ;;;###autoload
-(cae-defun cae-kill-region ()
+(defun cae-kill-region ()
   (interactive)
   (call-interactively #'kill-region)
   (delete-blank-lines))
