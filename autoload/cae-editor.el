@@ -275,6 +275,12 @@ mark the string and call `edit-indirect-region' with it."
                          (delete-blank-lines))))
 
 ;;;###autoload
+(cae-defun cae-kill-region-and-blanks ()
+  (interactive)
+  (call-interactively #'kill-region)
+  (delete-blank-lines))
+
+;;;###autoload
 (defalias 'cae-avy-parrot-rotate
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-forward-word-at-point))
 
