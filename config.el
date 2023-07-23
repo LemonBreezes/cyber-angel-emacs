@@ -783,7 +783,7 @@
   (use-package! yank-indent
     :defer t :init (add-hook 'doom-first-buffer-hook #'global-yank-indent-mode)
     :config
-    (advice-add #'lispy-yank :after #'yank-indent--after-yank-advice))
+    (advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
 
   (use-package! hungry-delete
     :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
