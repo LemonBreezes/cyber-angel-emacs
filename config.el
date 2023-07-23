@@ -633,7 +633,7 @@
                 (lazy-highlight-cleanup t) t)))
 
   ;; Autokill buffers which have not been displayed for 3 days.
-  (run-with-idle-timer 10 nil #'midnight-mode +1)
+  (run-with-idle-timer 30 nil #'midnight-mode +1)
 
   (after! ispell
     (setq ispell-quietly t
