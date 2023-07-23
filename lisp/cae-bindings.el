@@ -129,10 +129,10 @@
           embark-act-alt-key #'cae-embark-act
           embark-act-all-key #'embark-act-all
           embark-act-all-alt-key #'embark-act-all))
-        embark-act-key #'embark-act
-        embark-act-alt-key #'embark-act
+        embark-act-key #'cae-embark-act
+        embark-act-alt-key #'cae-embark-act
         embark-act-all-key #'embark-act-all
-        embark-act-all-alt-key #'embark-act)
+        embark-act-all-alt-key #'embark-act-all)
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
