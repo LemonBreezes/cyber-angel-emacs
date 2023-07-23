@@ -282,7 +282,12 @@
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
     (after! corfu
-      (add-hook 'beacon-dont-blink-predicates #'corfu-popupinfo--visible-p)))
+      (add-hook 'beacon-dont-blink-predicates
+                (cae-defun cae-corfu-visible-p ()
+                  (or (and (frame-live-p corfu--frame)
+                           (frame-visible-p corfu--frame))
+                      (and (frame-live-p corfu-popupinfo--frame)
+                           (frame-visible-p corfu-popupinfo--frame)))))))
 
   (use-package! anzu
     :defer t :init
