@@ -36,7 +36,7 @@
                                           (copilot--overlay-visible))))
                   (corfu-quit)
                   (when copilot-state
-                    (copilot-complete)))
+                    (run-at-time 0.0 nil #'copilot-complete)))
                 t))))
 
 (when (modulep! :editor snippets)
