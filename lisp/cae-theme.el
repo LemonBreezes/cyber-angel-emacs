@@ -31,7 +31,7 @@
                         :background (face-attribute 'lazy-highlight :background nil t)))
   (after! beacon
     ;; Make the `beacon' more subtle.
-    (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
+    (setq beacon-color (face-attribute 'cursor :background nil t)))
 
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
