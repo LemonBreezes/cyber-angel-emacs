@@ -635,7 +635,9 @@
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
   (after! midnight
-    (setq clean-buffer-list-delay-special 7200))
+    (setq clean-buffer-list-delay-special 7200)
+    (add-to-list 'clean-buffer-list-kill-never-buffer-names
+                 "*doom*"))
 
   (after! ispell
     (setq ispell-quietly t
