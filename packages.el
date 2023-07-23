@@ -22,7 +22,7 @@
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
-(package! perfect-margin)
+(package! beacon)
 
 ;; cae-theme.el
 (package! modus-themes)
