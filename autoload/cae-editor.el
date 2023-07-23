@@ -260,7 +260,8 @@ mark the string and call `edit-indirect-region' with it."
                  (cae-pop-mark)
                  (when (bound-and-true-p hl-line-mode)
                    (hl-line-highlight))
-                 (beacon-blink))))
+                 (when (bound-and-true-p beacon-mode)
+                   (beacon-blink)))))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
