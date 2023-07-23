@@ -23,21 +23,22 @@
 (when (eq system-type 'gnu/linux)
   (package! daemons))
 (package! disk-usage)
-
+(when (or (modulep! :private helm)
+          (modulep! :completion helm))
+  (when (and (eq system-type 'gnu/linux)
+             (not (getenv "WSL_DISTRO_NAME")))
+    (package! helm-linux-disks :recipe
+      (:host github :repo "akirak/helm-linux-disks")))
+  (unless (memq system-type '(cygwin windows-nt ms-dos))
+    (package! helm-system-packages)))
+(package! paradox)
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
-(when (and (eq system-type 'gnu/linux)
-           (not (getenv "WSL_DISTRO_NAME"))
-           (or (modulep! :private helm)
-               (modulep! :completion helm)))
-  (package! helm-linux-disks :recipe
-    (:host github :repo "akirak/helm-linux-disks")))
+
+
 (package! tldr)
 (package! speed-type)
-(unless (or (memq system-type '(cygwin windows-nt ms-dos))
-            (not (or (modulep! :private helm)
-                     (modulep! :completion helm))))
-  (package! helm-system-packages))
+
 (package! x86-lookup)
 (package! devdocs)
 (package! trashed)
@@ -47,7 +48,6 @@
 (package! snow)
 (package! ednc)
 (package! autotetris-mode)
-(package! paradox)
 
 (package! posimacs-shortdocs :recipe
           (:host github :repo "LemonBreezes/posimacs-shortdocs"))
