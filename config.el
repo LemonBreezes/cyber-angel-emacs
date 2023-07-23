@@ -278,7 +278,9 @@
 
   (use-package! beacon
     :defer-incrementally t
-    :config (beacon-mode +1))
+    :config
+    (beacon-mode +1)
+    (add-to-list 'beacon-dont-blink-commands 'doom/escape))
 
   (use-package! anzu
     :defer t :init
