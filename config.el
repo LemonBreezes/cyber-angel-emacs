@@ -276,12 +276,6 @@
                                         ;package.
                 (topsy-mode -1))))
 
-  ;; Currently we only use this programatically.
-  (use-package! beacon
-    :defer t
-    :config
-    (add-to-list 'beacon-dont-blink-commands 'doom/escape))
-
   (use-package! anzu
     :defer t :init
     (global-set-key [remap query-replace] 'anzu-query-replace)
