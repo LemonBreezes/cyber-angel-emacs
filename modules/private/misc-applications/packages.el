@@ -19,6 +19,8 @@
 (package! somafm)
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
 
+;; System
+
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
 (when (and (eq system-type 'gnu/linux)
