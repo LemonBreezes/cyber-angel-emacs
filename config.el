@@ -687,6 +687,7 @@
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
+             (?k . cae-avy-action-kill)
              (?e . cae-avy-action-embark-act)
              (?1 . cae-avy-parrot-rotate)
              (?! . cae-avy-parrot-rotate-backward)
