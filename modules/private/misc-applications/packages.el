@@ -42,6 +42,8 @@
 (package! tldr)
 (package! x86-lookup)
 
+;; Games
+(package! autotetris-mode)
 
 (package! speed-type)
 
@@ -49,7 +51,6 @@
 (package! flames-of-freedom)
 (package! snow)
 (package! ednc)
-(package! autotetris-mode)
 
 (package! posimacs-shortdocs :recipe
           (:host github :repo "LemonBreezes/posimacs-shortdocs"))
