@@ -36,12 +36,15 @@
      (package! pulseaudio-control))
 (package! trashed)
 
-(package! tldr)
-(package! speed-type)
-
-(package! x86-lookup)
+;; Lookup
 (package! devdocs)
 (package! know-your-http-well)
+(package! tldr)
+(package! x86-lookup)
+
+
+(package! speed-type)
+
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
