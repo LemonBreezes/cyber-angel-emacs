@@ -3,8 +3,9 @@
 
 ;; Standalone apps
 (package! alarm-clock)
-(package! elfeed-tube)
-(package! elfeed-tube-mpv)
+(when (modulep! :app rss)
+  (package! elfeed-tube)
+  (package! elfeed-tube-mpv))
 
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
