@@ -43,5 +43,5 @@ Meant to be used like:
 (defun cae-git-timemachine-help ()
   (interactive)
   (if transient--original-buffer
-      (keyboard-quit)
+      (doom/escape)
     (call-interactively  #'git-timemachine-help)))
