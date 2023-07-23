@@ -1131,16 +1131,17 @@
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
   (advice-add #'shell-maker-async-shell-command
-                :around
-                (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
-                  ;; This is a hack to prevent the ChatGPT shell from inheriting
-                  ;; the LD_LIBRARY_PATH variable in projects where I override
-                  ;; that.
-                  (let ((process-environment (cl-remove-if
-                                              (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
-                                              process-environment)))
-                    (apply oldfun args))))
+              :around
+              (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+                ;; This is a hack to prevent the ChatGPT shell from inheriting
+                ;; the LD_LIBRARY_PATH variable in projects where I override
+                ;; that.
+                (let ((process-environment (cl-remove-if
+                                            (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
+                                            process-environment)))
+                  (apply oldfun args))))
   (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
+  (define-key chatgpt-shell-mode-map (kbd "<f6>") #'cae-chatgpt-shell-cheatsheet/body)
   (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 ;;; Email
