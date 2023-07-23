@@ -638,7 +638,10 @@
     (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
           clean-buffer-list-delay-special 7200)
     (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                 doom-fallback-buffer-name))
+                 doom-fallback-buffer-name)
+    (after! copilot-balancer
+      (add-to-list 'clean-buffer-list-kill-never-buffer-names
+                   (buffer-name copilot-balancer-debug-buffer))))
 
   (after! ispell
     (setq ispell-quietly t
