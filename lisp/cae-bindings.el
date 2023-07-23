@@ -142,7 +142,9 @@
   ;; `elp' instrument package commands from `embark-package-map' are not mapped
   ;; in `+vertico/embark-doom-package-map'.
   (map! :map +vertico/embark-doom-package-map
-        "t" #'try))
+        "t" #'try)
+  (map! :map embark-region-map
+        "k" #'kill-region))
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
