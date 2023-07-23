@@ -259,7 +259,8 @@ mark the string and call `edit-indirect-region' with it."
                (lambda ()
                  (cae-pop-mark)
                  (when (bound-and-true-p hl-line-mode)
-                   (hl-line-highlight)))))
+                   (hl-line-highlight))
+                 (beacon-blink))))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
