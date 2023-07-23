@@ -29,6 +29,7 @@
           ("\\.gz\\'" "" "pigz -d")
           ("\\.lz\\'" "" "plzip -d")
           ("\\.Z\\'" "" "uncompress")
+          ("\\.deb\\'" "" "dpkg-deb -x %i %o")
           ("\\.z\\'" "" "pigz -d")
           ("\\.dz\\'" "" "dictunzip")
           ("\\.tbz\\'" ".tar" "pbunzip2")
