@@ -1,12 +1,17 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
+;; Standalone apps
+(package! alarm-clock)
+(package! elfeed-tube)
+(package! elfeed-tube-mpv)
+
+
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
 (package! somafm)
 (package! enime :recipe
   (:host github :repo "xl666/enime" :files ("*")))
-(package! alarm-clock)
 (when (and (eq system-type 'gnu/linux)
            (not (getenv "WSL_DISTRO_NAME"))
            (or (modulep! :private helm)
@@ -51,6 +56,3 @@
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
 (package! zone-tmux-clock)
-
-(package! elfeed-tube)
-(package! elfeed-tube-mpv)
