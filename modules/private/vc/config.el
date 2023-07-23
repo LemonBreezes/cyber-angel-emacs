@@ -134,5 +134,4 @@
 
 (after! git-timemachine
   (map! :map git-timemachine-mode-map
-        "<f6>" #'git-timemachine-help
-        [remap git-timemachine-help] #'cae-git-timemachine-help))
+        "<f6>" #'git-timemachine-help))
