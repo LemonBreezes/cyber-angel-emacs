@@ -2,8 +2,8 @@
 
 (defun cae-paradox-menu-quick-help ()
   (interactive)
-  (if (and (memq last-command '(cae-paradox-menu-quick-help
-                                paradox-menu-quick-help)))
+  (if (and (eq last-command paradox-menu-quick-help))
       (progn (clear-minibuffer-message)
              (setq this-command #'clear-minibuffer-message))
-    (call-interactively #'paradox-menu-quick-help)))
+    (call-interactively #'paradox-menu-quick-help)
+    (setq this-command 'paradox-menu-quick-help)))
