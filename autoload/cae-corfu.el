@@ -46,3 +46,10 @@
               (and (featurep 'helm-core)
                    (helm--alive-p))
               (corfu-mode +1))))
+
+;;;###autoload
+(cae-defun cae-corfu-visible-p ()
+  (or (and (frame-live-p corfu--frame)
+           (frame-visible-p corfu--frame))
+      (and (frame-live-p corfu-popupinfo--frame)
+           (frame-visible-p corfu-popupinfo--frame))))
