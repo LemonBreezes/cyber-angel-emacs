@@ -45,7 +45,7 @@
         "+somafm"
         "+wttrin"
 
-        ;; Lists
+        ;; System
         "+daemons"
         "+helm-linux-disks"
         "+helm-system-packages"
