@@ -39,9 +39,3 @@ Meant to be used like:
   ("<f6>" nil "Exit" :exit t)
   ("j" +default/search-buffer "Search buffer")
   ("o" forge-browse-topic "Open in browser"))
-
-(defun cae-git-timemachine-help ()
-  (interactive)
-  (if transient--original-buffer
-      (doom/escape)
-    (call-interactively  #'git-timemachine-help)))
