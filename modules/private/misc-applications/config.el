@@ -34,23 +34,28 @@
 ;; TODO Turn these into module flags and separate the binding of their prefixes
 ;; out into `doom-after-init-hook' so that the user can modify them.
 (setq +misc-applications-lisp-files
-      '("+alarm-clock"
-        "+disk-usage"
-        "+elcord"
+      '(;; Standalone apps
+        "+alarm-clock"
         "+elfeed"
         "+ement"                        ; TODO
-        "+leetcode"
         "+my-repo-pins"
-        "+pulseaudio-control"
+
+        ;; Use external APIs or apps
+        "+elcord"
+        "+leetcode"
         "+somafm"
         "+wttrin"
 
         ;; System
         "+daemons"
+        "+disk-usage"
         "+helm-linux-disks"
         "+helm-system-packages"
         "+paradox"
+        "+pulseaudio-control"
         "+trashed"
+
+        ;; Insert text
 
         ;; Lookup
         "+devdocs"
