@@ -282,7 +282,9 @@
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
     (add-hook 'beacon-dont-blink-predicates
-              (lambda () ())))
+              (lambda ()
+                (and (featurep 'corfu)
+                     (corfu-popupinfo--visible-p)))))
 
   (use-package! anzu
     :defer t :init
