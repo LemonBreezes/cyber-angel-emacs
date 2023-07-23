@@ -6,4 +6,4 @@
       (progn (clear-minibuffer-message)
              (setq this-command #'clear-minibuffer-message))
     (call-interactively #'paradox-menu-quick-help)
-    (setq this-command 'paradox-menu-quick-help)))
+    (setq this-command #'paradox-menu-quick-help)))
