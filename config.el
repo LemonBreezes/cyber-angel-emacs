@@ -280,7 +280,9 @@
     :defer t :init (add-hook 'doom-first-buffer-hook #'beacon-mode)
     :config
     (beacon-mode +1)
-    (add-to-list 'beacon-dont-blink-commands 'doom/escape))
+    (add-to-list 'beacon-dont-blink-commands 'doom/escape)
+    (add-hook 'beacon-dont-blink-predicates
+              (lambda () ())))
 
   (use-package! anzu
     :defer t :init
