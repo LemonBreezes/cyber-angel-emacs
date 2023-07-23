@@ -282,7 +282,9 @@
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
     (after! corfu
-      (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p)))
+      (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
+    (dolist (mode '(eshell-mode vterm-mode eat-mode))
+      (add-to-list 'beacon-dont-blink-major-modes mode)))
 
   (use-package! anzu
     :defer t :init
