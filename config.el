@@ -894,16 +894,12 @@
       '((eri/mark-inside-org-table-cell
          eri/mark-outside-org-table-cell)))
     (setq eri/try-expand-list
-          '((er/mark-inside-quotes
-             eri/mark-outside-quotes)
-            (er/mark-inside-pairs
-             er/mark-outside-pairs)
-            er/mark-comment
-            er/mark-url
-            er/mark-email
-            eri/mark-line
-            eri/mark-block
-            mark-page)))
+          (thread-last eri/try-expand-list
+                       (remove '(er/mark-word
+                                 er/mark-symbol
+                                 er/mark-symbol-with-prefix
+                                 er/mark-next-accessor))
+                       (delq 'er/mark-method-call))))
 
   (use-package! embark
     :defer t :config
