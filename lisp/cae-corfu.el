@@ -32,8 +32,8 @@
   (add-hook 'doom-escape-hook
             (cae-defun cae-corfu-quit-h ()
               (when (cae-corfu-visible-p)
-                (corfu-quit)
-                (+log "hello!!")
+                (delete-frame corfu--frame)
+                (delete-frame corfu-popupinfo--frame)
                 t))))
 
 (when (modulep! :editor snippets)
