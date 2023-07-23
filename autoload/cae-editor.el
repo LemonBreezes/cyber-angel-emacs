@@ -255,8 +255,7 @@ mark the string and call `edit-indirect-region' with it."
            (er/mark-symbol))
           (t (eri/expand-region 1)))
     (call-interactively action))
-  (deactivate-mark)
-  (pop-mark))
+  (cae-pop-mark))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
