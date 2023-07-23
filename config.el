@@ -283,8 +283,7 @@
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
     (after! corfu
       (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
-    (setq beacon-blink-when-window-scrolls nil)
-    (add-to-list 'beacon-dont-blink-major-modes 'dired-mode))
+    (setq beacon-blink-when-window-scrolls nil))
 
   (use-package! anzu
     :defer t :init
