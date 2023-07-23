@@ -32,9 +32,12 @@
   (add-hook 'doom-escape-hook
             (cae-defun cae-corfu-quit-h ()
               (when (cae-corfu-visible-p)
-                (corfu--hide-frame corfu--frame)
-                (corfu--hide-frame corfu-popupinfo--frame)
-                t))))
+                (let ((copilot-state (and (bound-and-true-p copilot-mode)
+                                          (copilot--overlay-visible))))
+                  (corfu-quit)
+                  (when copilot-state
+                    (copilot-complete))))
+              t)))
 
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
