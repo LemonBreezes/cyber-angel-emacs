@@ -40,8 +40,7 @@
   (if (get-buffer-window (chatgpt-shell--primary-buffer))
       (delete-window (get-buffer-window (chatgpt-shell--primary-buffer)))
     (let ((chatgpt-shell-display-function #'pop-to-buffer))
-      (chatgpt-shell-start nil t)
-      (pop-to-buffer (chatgpt-shell--primary-buffer)))))
+      (call-interactively #'chatgpt-shell))))
 
 ;;;###autoload
 (defun cae-ai-chatgpt-quit-or-delete-char (arg)
