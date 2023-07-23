@@ -65,5 +65,4 @@
     (define-key cae-mc-map (kbd "[")     #'mc/vertical-align-with-space)
     (define-key cae-mc-map (kbd "{")     #'mc/vertical-align)
     (define-key mc/keymap (kbd "C-.") #'cae-mc-map)
-    (define-key mc/keymap (kbd "<f7>") #'cae-mc-map)
-    ))
+    (define-key mc/keymap (kbd "<f7>") #'cae-mc-map)))
