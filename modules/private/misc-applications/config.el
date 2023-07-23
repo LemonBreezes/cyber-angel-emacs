@@ -67,6 +67,7 @@
         "+snake"
         "+tetris"
 
+        ;; Eye candy
         "+fireplace"
         "+flames-of-freedom"
         "+snow"
