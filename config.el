@@ -1130,8 +1130,7 @@
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
-  (after! shell-maker
-    (advice-add #'shell-maker-async-shell-command
+  (advice-add #'shell-maker-async-shell-command
                 :around
                 (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
                   ;; This is a hack to prevent the ChatGPT shell from inheriting
@@ -1141,9 +1140,8 @@
                                               (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
                                               process-environment)))
                     (apply oldfun args))))
-    (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
-    (advice-add #'shell-maker-welcome-message :override #'ignore)
-    ))
+  (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
+  (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 ;;; Email
 
