@@ -277,7 +277,8 @@
                 (topsy-mode -1))))
 
   (use-package! beacon
-    :defer-incrementally t)
+    :defer-incrementally t
+    :config (beacon-mode +1))
 
   (use-package! anzu
     :defer t :init
