@@ -277,7 +277,7 @@
                 (topsy-mode -1))))
 
   (use-package! beacon
-    :defer t :init (add-hook 'doom-first-buffer-hook #'beacon-mode)
+    :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
     :config
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
