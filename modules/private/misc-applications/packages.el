@@ -34,14 +34,13 @@
 (package! paradox)
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
-
+(package! trashed)
 
 (package! tldr)
 (package! speed-type)
 
 (package! x86-lookup)
 (package! devdocs)
-(package! trashed)
 (package! know-your-http-well)
 (package! fireplace)
 (package! flames-of-freedom)
