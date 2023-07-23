@@ -72,6 +72,7 @@
         "+speed-type"
         "+snake"
         "+tetris"
+        ;; TODO Add `2048' and `klondike'
 
         ;; Eye candy
         "+fireplace"
