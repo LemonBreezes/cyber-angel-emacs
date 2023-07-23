@@ -254,7 +254,7 @@ mark the string and call `edit-indirect-region' with it."
           ((eq this-command 'cae-avy-symbol-at-point)
            (er/mark-symbol))
           (t (eri/expand-region 1)))
-    (funcall action)
+    (call-interactively action)
     (deactivate-mark)))
 
 ;;;###autoload
