@@ -22,6 +22,7 @@
 ;; System
 (when (eq system-type 'gnu/linux)
   (package! daemons))
+(package! disk-usage)
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
@@ -33,7 +34,6 @@
     (:host github :repo "akirak/helm-linux-disks")))
 (package! tldr)
 (package! speed-type)
-(package! disk-usage)
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (not (or (modulep! :private helm)
                      (modulep! :completion helm))))
