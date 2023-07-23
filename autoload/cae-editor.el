@@ -392,3 +392,9 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
                                          (directory-files "~/" t))))))
     (dired (file-name-directory newest-file))
     (dired-goto-file newest-file)))
+
+;;;###autoload
+(defun cae-yank-indent-a (&rest _)
+  (let ((this-command 'yank)
+        (real-this-command 'yank))
+    (yank-indent--post-command-hook)))
