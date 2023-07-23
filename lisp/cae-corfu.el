@@ -36,8 +36,8 @@
                                           (copilot--overlay-visible))))
                   (corfu-quit)
                   (when copilot-state
-                    (copilot-complete))))
-              t)))
+                    (copilot-complete)))
+                t))))
 
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
