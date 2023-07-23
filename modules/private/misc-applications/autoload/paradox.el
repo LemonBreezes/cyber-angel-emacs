@@ -2,8 +2,7 @@
 
 (defun cae-paradox-menu-quick-help ()
   (interactive)
-  (if (memq 'last-command '(cae-paradox-menu-quick-help
+  (if (memq last-command '(cae-paradox-menu-quick-help
                             paradox-menu-quick-help))
-      (progn (+log "HELLO")
-             (call-interactively #'keyboard-quit))
+      (clear-minibuffer-message)
     (call-interactively #'paradox-menu-quick-help)))
