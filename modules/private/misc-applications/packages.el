@@ -6,7 +6,10 @@
 (when (modulep! :app rss)
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
-
+(package! ement)
+(package! my-repo-pins :recipe
+  (:host github :repo "NinjaTrappeur/my-repo-pins"
+   :build (:not compile)))
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
@@ -35,9 +38,6 @@
 (package! devdocs)
 (package! trashed)
 (package! know-your-http-well)
-(package! my-repo-pins :recipe
-  (:host github :repo "NinjaTrappeur/my-repo-pins"
-   :build (:not compile)))
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
@@ -46,7 +46,6 @@
 (package! leetcode)
 (package! autotetris-mode)
 (package! paradox)
-(package! ement)
 
 (package! posimacs-shortdocs :recipe
           (:host github :repo "LemonBreezes/posimacs-shortdocs"))
