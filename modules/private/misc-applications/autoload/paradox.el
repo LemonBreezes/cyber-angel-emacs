@@ -6,5 +6,4 @@
                                 paradox-menu-quick-help))
            (current-message))
       (clear-minibuffer-message)
-    (+log (current-message))
     (call-interactively #'paradox-menu-quick-help)))
