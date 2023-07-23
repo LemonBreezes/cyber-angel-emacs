@@ -632,6 +632,8 @@
               (when isearch-lazy-highlight-overlays
                 (lazy-highlight-cleanup t) t)))
 
+  (run-with-idle-timer 10 nil #'midnight-mode +1)
+
   (after! ispell
     (setq ispell-quietly t
           ispell-dictionary "en_US"
