@@ -56,6 +56,7 @@
         "+trashed"
 
         ;; Insert text
+        ;; TODO Add `helm-rage' and `lorem-ipsum' to this list.
 
         ;; Lookup
         "+devdocs"
