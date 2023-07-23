@@ -4,5 +4,7 @@
   (interactive)
   (if (and (memq last-command '(cae-paradox-menu-quick-help
                                 paradox-menu-quick-help)))
-      (clear-minibuffer-message)
+      (progn
+        (+log (current-message))
+        (clear-minibuffer-message))
     (call-interactively #'paradox-menu-quick-help)))
