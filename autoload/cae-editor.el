@@ -202,7 +202,8 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-mark-comment ()
-  "Mark the entire comment around point."
+  "Mark the entire comment around point. Like `er/mark-comment' but
+also marks comment with leading whitespace"
   (interactive)
   (when (er--point-is-in-comment-p)
     (let ((p (point)))
