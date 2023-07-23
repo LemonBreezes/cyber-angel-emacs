@@ -892,7 +892,18 @@
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
       '((eri/mark-inside-org-table-cell
-         eri/mark-outside-org-table-cell))))
+         eri/mark-outside-org-table-cell)))
+    (setq eri/try-expand-list
+          '((er/mark-inside-quotes
+             eri/mark-outside-quotes)
+            (er/mark-inside-pairs
+             er/mark-outside-pairs)
+            er/mark-comment
+            er/mark-url
+            er/mark-email
+            eri/mark-line
+            eri/mark-block
+            mark-page)))
 
   (use-package! embark
     :defer t :config
