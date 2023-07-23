@@ -636,7 +636,7 @@
   (run-with-idle-timer 30 nil #'midnight-mode +1)
   (dolist (buffer '("\\*Outline.*\\*" "\\*.*Profiler-Report.*\\*"
                     "\\`\\*Customize Group:" "\\`\\*Compile-Log\\*"
-                    "\\`magit: " ))
+                    "\\`magit[-a-z]*:"))
     (add-to-list 'clean-buffer-list-kill-regexps buffer))
 
   (after! ispell
