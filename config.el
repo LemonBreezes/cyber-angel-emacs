@@ -276,7 +276,7 @@
                                         ;package.
                 (topsy-mode -1))))
 
-  ;; Currently we only use this programatically
+  ;; Currently we only use this programatically.
   (use-package! beacon
     :defer t
     :config
