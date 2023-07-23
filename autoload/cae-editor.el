@@ -261,7 +261,7 @@ mark the string and call `edit-indirect-region' with it."
   (apply-partially #'cae-avy-do #'embark-act))
 
 ;;;###autoload
-(defalias 'cae-avy-action-embark-act
+(defalias 'cae-avy-action-kill
   (apply-partially #'cae-avy-do #'kill-region))
 
 ;;;###autoload
