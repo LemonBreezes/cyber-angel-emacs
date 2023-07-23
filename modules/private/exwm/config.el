@@ -188,8 +188,8 @@ expansion occurs within the parent Emacs session.")
 
     (defun +exwm-exit-floating-mode-h ()
       (when (string= exwm-class-name "love")
-        (exwm-floating--exit)))
-    (add-hook 'exwm-update-class-hook #'+exwm-exit-floating-mode-h)
+        (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
+    (add-hook 'exwm-manage-finish-hook #'+exwm-exit-floating-mode-h)
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
