@@ -254,7 +254,7 @@ mark the string and call `edit-indirect-region' with it."
           ((eq this-command 'cae-avy-symbol-at-point)
            (er/mark-symbol))
           (t (eri/expand-region 1)))
-    (call-interactively action)))
+    (funcall action)))
 
 ;;;###autoload
 (defalias 'cae-avy-action-embark-act
@@ -262,7 +262,10 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defalias 'cae-avy-action-kill
-  (apply-partially #'cae-avy-do #'kill-region))
+  (apply-partially #'cae-avy-do
+                   (lambda ()
+                     (kill-new (buffer-substring-no-properties (region-beginning) (region-end)))
+                     (delete-region (region-beginning) (region-end)))))
 
 ;;;###autoload
 (defalias 'cae-avy-parrot-rotate
