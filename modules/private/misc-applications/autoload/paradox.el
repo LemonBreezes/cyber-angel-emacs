@@ -7,6 +7,6 @@
            (string= (current-message)
                     (mapconcat 'paradox--prettify-key-descriptor
                                paradox--key-descriptors "\n")))
-      (progn (clear-minibuffer-message)
+      (progn ;;(clear-minibuffer-message)
              (message "HELLOOOO"))
     (call-interactively #'paradox-menu-quick-help)))
