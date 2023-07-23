@@ -20,7 +20,8 @@
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
 
 ;; System
-
+(when (eq system-type 'gnu/linux)
+  (package! daemons))
 
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
@@ -33,8 +34,6 @@
 (package! tldr)
 (package! speed-type)
 (package! disk-usage)
-(when (eq system-type 'gnu/linux)
-  (package! daemons))
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (not (or (modulep! :private helm)
                      (modulep! :completion helm))))
