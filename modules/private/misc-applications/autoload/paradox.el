@@ -2,5 +2,5 @@
 
 (defun cae-paradox-menu-quick-help ()
   (interactive)
-  (+log (current-message))
+  ;;(+log (current-message))
   (call-interactively #'paradox-menu-quick-help))
