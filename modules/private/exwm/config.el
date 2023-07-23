@@ -186,6 +186,11 @@ expansion occurs within the parent Emacs session.")
       (when window (apply oldfun window args)))
     (advice-add #'select-window :around #'+exwm-select-window-a)
 
+    (defun +exwm-exit-floating-mode-h ()
+      (when (string= exwm-class-name "love")
+        (exwm-floating--exit -1)))
+    (add-hook 'exwm-update-class-hook #'+exwm-exit-floating-mode-a)
+
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
       outline-minor-mode-highlight nil))
