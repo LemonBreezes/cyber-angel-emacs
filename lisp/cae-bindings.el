@@ -135,7 +135,7 @@
         embark-act-all-alt-key #'embark-act)
   (eval
    `(after! embark
-      (setq embark-cycle-key ,embark-act-key))
+      (setq embark-cycle-key nil))
    t))
 
 (after! embark
