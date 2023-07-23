@@ -28,7 +28,11 @@
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
   (when (modulep! :private corfu +numbers)
-    (corfu-indexed-mode +1)))
+    (corfu-indexed-mode +1))
+  (add-hook 'doom-escape-hook
+            (cae-defun cae-corfu-quit ()
+              (when (cae-corfu-visible-p)
+                (corfu-quit)))))
 
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
