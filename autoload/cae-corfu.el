@@ -51,4 +51,5 @@
 (cae-defun cae-corfu-visible-p ()
   (or (and (frame-live-p corfu--frame)
            (frame-visible-p corfu--frame))
-      corfu-terminal--popon))
+      (and (featurep 'corfu-terminal)
+           (popon-live-p corfu-terminal--popon))))
