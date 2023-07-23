@@ -9,4 +9,4 @@
   :config
   (paradox-enable)
   (map! :map paradox-menu-mode-map
-        "<f6>" #'paradox-menu-quick-help))
+        "<f6>" #'cae-paradox-menu-quick-help))
