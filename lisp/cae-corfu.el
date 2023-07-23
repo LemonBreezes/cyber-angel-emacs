@@ -30,7 +30,7 @@
   (when (modulep! :private corfu +numbers)
     (corfu-indexed-mode +1))
   (add-hook 'doom-escape-hook
-            (cae-defun cae-corfu-quit ()
+            (cae-defun cae-corfu-quit-h ()
               (when (cae-corfu-visible-p)
                 (corfu-quit)
                 t))))
