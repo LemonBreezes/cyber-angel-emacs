@@ -170,8 +170,6 @@
       [remap doom/backward-to-bol-or-indent] #'beginning-of-line
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       [remap er/expand-region] #'eri/expand-region
-      [remap mark-word] #'er/mark-word
-      [remap mark-symbol] #'er/mark-symbol
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
       (:when (modulep! :tools lookup)
