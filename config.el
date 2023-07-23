@@ -284,7 +284,7 @@
     (after! corfu
       (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
     (setq beacon-blink-when-window-scrolls nil
-          beacon-blink-when-buffer-changes nil))
+          beacon-blink-when-buffer-changes t))
 
   (use-package! anzu
     :defer t :init
