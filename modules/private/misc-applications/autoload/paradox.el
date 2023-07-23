@@ -9,5 +9,6 @@
            ;;                    paradox--key-descriptors "\n"))
            )
       (progn (clear-minibuffer-message)
+             (setq this-command #'clear-minibuffer-message)
              (message ""))
     (call-interactively #'paradox-menu-quick-help)))
