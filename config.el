@@ -618,7 +618,8 @@
                        (delq #'er/mark-word)
                        (delq #'er/mark-symbol)
                        (delq #'er/mark-symbol-with-prefix)
-                       (delq #'er/mark-next-accessor))))
+                       (delq #'er/mark-next-accessor)
+                       (delq #'er/mark-method-call))))
 
   ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
   (setq set-mark-command-repeat-pop t)
