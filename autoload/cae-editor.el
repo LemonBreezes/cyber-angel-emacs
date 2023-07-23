@@ -261,6 +261,10 @@ mark the string and call `edit-indirect-region' with it."
   (apply-partially #'cae-avy-do #'embark-act))
 
 ;;;###autoload
+(defalias 'cae-avy-action-embark-act
+  (apply-partially #'cae-avy-do #'kill-region))
+
+;;;###autoload
 (defalias 'cae-avy-parrot-rotate
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-forward-word-at-point))
 
