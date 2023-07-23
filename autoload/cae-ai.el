@@ -37,7 +37,8 @@
 ;;;###autoload
 (defun cae-ai-toggle-chatgpt-shell ()
   (interactive)
-  (if (get-buffer-window (chatgpt-shell--primary-buffer))
+  (if-let* ((buf (chatgpt-shell--primary-buffer))
+            (win (get-buffer-window (chatgpt-shell--primary-buffer))))
       (delete-window (get-buffer-window (chatgpt-shell--primary-buffer)))
     (let ((chatgpt-shell-display-function #'pop-to-buffer))
       (call-interactively #'chatgpt-shell))))
