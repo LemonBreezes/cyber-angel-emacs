@@ -52,16 +52,15 @@
 (package! fireplace)
 (package! flames-of-freedom)
 (package! snow)
-
-;; Emacs OS
-(package! ednc)
-
 (package! zones)
 (package! zone-nyan)
 (package! zone-rainbow)
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
 (package! zone-tmux-clock)
+
+;; Emacs OS
+(package! ednc)
 
 ;; Trash bin
 (ignore
