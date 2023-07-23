@@ -72,7 +72,7 @@
         "+speed-type"
         "+snake"
         "+tetris"
-        ;; TODO Add `2048' and `klondike'
+        ;; TODO Add `2048', `klondike', and `chess' to this list.
 
         ;; Eye candy
         "+fireplace"
