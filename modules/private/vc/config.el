@@ -131,3 +131,7 @@
 (after! smerge-mode
   (map! :map smerge-mode-map
         "<f6>" #'+vc/smerge-hydra/body))
+
+(after! git-timemachine
+  (map! :map git-timemachine-mode-map
+        "<f6>" #'git-timemachine-help))
