@@ -21,6 +21,7 @@
           ("\\.tar\\.lz\\'" . "tar -cf - %i | plzip -c9 > %o")
           ("\\.tar\\.lzo\\'" . "tar -cf - %i | lzop -c9 > %o")
           ("\\.zip\\'" . "zip %o -r --filesync %i")
+          ("\\.deb\\'" . "dpkg-deb -x %i %o")
           ("\\.pax\\'" . "pax -wf %o %i"))
         dired-compress-file-suffixes
         '(("\\.tar\\.gz\\'" "" "pigz -dc %i | tar -xf -")
