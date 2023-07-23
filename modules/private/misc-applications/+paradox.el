@@ -7,4 +7,6 @@
         :prefix +misc-applications-system-prefix
         :desc "emacs packages" "p" #'paradox-list-packages)
   :config
-  (paradox-enable))
+  (paradox-enable)
+  (map! :map paradox-menu-mode-map
+        "<f6>" #'paradox-menu-quick-help))
