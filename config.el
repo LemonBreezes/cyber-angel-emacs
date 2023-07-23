@@ -613,7 +613,7 @@
                       fn))
                   er/try-expand-list))
     ;; If I wanted to mark words or symbols, I would use the built-in commands.
-    (setq-default er/try-expandp-list
+    (setq er/try-expandp-list
           (thread-last er/try-expand-list
                        (delq #'er/mark-word)
                        (delq #'er/mark-symbol)
