@@ -636,7 +636,9 @@
   (run-with-idle-timer 30 nil #'midnight-mode +1)
   (after! midnight
     (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
-          clean-buffer-list-delay-special 7200))
+          clean-buffer-list-delay-special 7200)
+    (add-to-list 'clean-buffer-list-kill-never-buffer-names
+                 doom-fallback-buffer-name))
 
   (after! ispell
     (setq ispell-quietly t
