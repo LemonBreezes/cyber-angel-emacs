@@ -110,8 +110,10 @@
                                         ;`C-s' to search in the minibuffer.
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
-(let ((embark-act-key (if (cae-display-graphic-p) "C-;" "<f8>"))
-      (embark-act-all-key (if (cae-display-graphic-p) "C-:" "<f9>")))
+(let ((embark-act-key "C-;")
+      (embark-act-alt-key "<f8>")
+      (embark-act-all-key "C-:")
+      (embark-act-all-alt-key "<f9>"))
   (when (eq (lookup-key doom-leader-map "a")
             'embark-act)
     (define-key doom-leader-map "a" nil)
@@ -124,9 +126,13 @@
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'embark-act
-          embark-act-all-key #'embark-act-all))
+          embark-act-alt-key #'embark-act
+          embark-act-all-key #'embark-act-all
+          embark-act-all-alt-key #'embark-act-all))
         embark-act-key #'embark-act
-        embark-act-all-key #'embark-act-all)
+        embark-act-alt-key #'embark-act
+        embark-act-all-key #'embark-act-all
+        embark-act-all-alt-key #'embark-act)
   (eval
    `(after! embark
       (setq embark-cycle-key ,embark-act-key))
