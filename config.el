@@ -974,12 +974,18 @@
     (add-to-list 'copilot-disable-predicates
                  (cae-defun cae-disable-copilot-in-gptel-p ()
                    (bound-and-true-p gptel-mode)))
+    (add-to-list 'copilot-disable-predicates
+                 (cae-defun cae-disable-copilot-with-beacon-active-p ()
+                   (bound-and-true-p beacon--ovs)))
     (when (modulep! :editor snippets)
       (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
     (when (modulep! :editor multiple-cursors)
       (add-to-list 'copilot-disable-predicates
                    (cae-defun cae-multiple-cursors-active-p ()
-                     (bound-and-true-p multiple-cursors-mode)))))
+                     (bound-and-true-p multiple-cursors-mode))))
+    (after! (:all copilot-balancer midnight)
+      (add-to-list 'clean-buffer-list-kill-never-buffer-names
+                   (buffer-name copilot-balancer-debug-buffer))))
 
   (use-package! isearch-dabbrev
     :defer t :init
