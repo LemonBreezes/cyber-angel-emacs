@@ -125,10 +125,8 @@
          "C-;" nil
          (:map minibuffer-local-map
           "C-;" nil
-          embark-act-key (cmd! ()
-                               (let ((embark-cycle-key embark-act-key))
-                                 (call-interactively #'embark-act)))
-          embark-act-alt-key #'embark-act
+          embark-act-key #'cae-embark-act
+          embark-act-alt-key #'cae-embark-act
           embark-act-all-key #'embark-act-all
           embark-act-all-alt-key #'embark-act-all))
         embark-act-key #'embark-act
