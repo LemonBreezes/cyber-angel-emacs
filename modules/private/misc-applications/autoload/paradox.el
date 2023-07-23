@@ -1,5 +1,6 @@
 ;;; private/misc-applications/autoload/paradox.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun cae-paradox-menu-quick-help ()
   (interactive)
   (if (and (eq last-command #'paradox-menu-quick-help))
