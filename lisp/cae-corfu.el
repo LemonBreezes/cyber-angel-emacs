@@ -32,7 +32,8 @@
   (add-hook 'doom-escape-hook
             (cae-defun cae-corfu-quit ()
               (when (cae-corfu-visible-p)
-                (corfu-quit)))))
+                (corfu-quit)
+                t))))
 
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
