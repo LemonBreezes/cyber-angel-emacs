@@ -4,6 +4,8 @@
   (interactive)
   (if (and (memq last-command '(cae-paradox-menu-quick-help
                                 paradox-menu-quick-help))
-           (current-message))
+           (string= (current-message)
+                    (mapconcat 'paradox--prettify-key-descriptor
+                               paradox--key-descriptors "\n")))
       (clear-minibuffer-message)
     (call-interactively #'paradox-menu-quick-help)))
