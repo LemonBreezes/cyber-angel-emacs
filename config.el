@@ -634,10 +634,12 @@
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
-  (dolist (buffer '("\\*Outline.*\\*" "\\*.*Profiler-Report.*\\*"
-                    "\\`\\*Customize Group:" "\\`\\*Compile-Log\\*"
-                    "\\`magit[-a-z]*:"))
-    (add-to-list 'clean-buffer-list-kill-regexps buffer))
+  ;;(dolist (buffer '("\\*Outline.*\\*" "\\*.*Profiler-Report.*\\*"
+  ;;                  "\\`\\*Customize Group:" "\\`\\*Compile-Log\\*"
+  ;;                  "\\`magit[-a-z]*:" "\\`\\*vc-.*\\*" "\\`\\*Warnings\\*"))
+  ;;  (add-to-list 'clean-buffer-list-kill-regexps buffer))
+  (after! midnight
+    (setq clean-buffer-list-kill-regexps "\\`\\*.*\\*\\'"))
 
   (after! ispell
     (setq ispell-quietly t
