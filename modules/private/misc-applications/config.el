@@ -108,10 +108,14 @@
 
         (dolist (file +misc-applications-lisp-files)
           (load! file))
-        (run-at-time 0.05 nil
+        (run-at-time 0.01 nil
                      (lambda ()
                        (setq unread-command-events
-                             (listify-key-sequence (kbd (concat doom-leader-key " " +misc-applications-prefix))))))
+                             (listify-key-sequence (kbd (concat doom-leader-key))))))
+        (run-at-time 0.02 nil
+                     (lambda ()
+                       (setq unread-command-events
+                             (listify-key-sequence (kbd +misc-applications-prefix)))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
