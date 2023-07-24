@@ -36,6 +36,8 @@
 (package! trashed)
 
 ;; Insert
+(package! helm-rage)
+(package! lorem-ipsum)
 
 ;; Lookup
 (package! devdocs)
