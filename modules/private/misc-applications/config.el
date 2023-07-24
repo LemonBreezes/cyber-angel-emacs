@@ -107,7 +107,7 @@
                 ;; TODO Quotes
 
                 ;; Lookup
-                ;;"+devdocs"
+                "+devdocs"
                 ;;"+know-your-http-well"
                 ;;"+shortdoc"
                 ;;"+tldr"
