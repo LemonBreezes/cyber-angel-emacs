@@ -1,9 +1,5 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
-;; Do not load EXWM when we are in SSH-X11.
-(when (getenv "SSH_TTY")
-  (setenv "EXWM_RUNNING" "true"))
-
 (when (and (eq 'x (framep (selected-frame)))
            (not (getenv "EXWM_RUNNING")))
 
