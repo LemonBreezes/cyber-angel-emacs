@@ -19,14 +19,6 @@
         (defvar +misc-applications-insert-prefix (concat +misc-applications-prefix "i"))
         (defvar doom-picture-dir "~/Pictures/")
         (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
-        (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
-        (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
-        (map! :leader :prefix (+misc-applications-system-prefix . "system"))
-        (map! :leader :prefix (+misc-applications-games-prefix . "games"))
-        (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
-        (map! :leader :prefix (+misc-applications-external-apps-prefix . "external apps"))
-        (map! :leader :prefix (+misc-applications-standalone-apps-prefix . "standalone apps"))
-        (map! :leader :prefix (+misc-applications-insert-prefix . "insert"))
         (which-key-add-keymap-based-replacements '+misc-applications-map
           "l" "lookup"
           "s" "system"
