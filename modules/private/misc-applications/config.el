@@ -123,15 +123,15 @@
                 ;; TODO Add `2048', `klondike', and `chess' to this list.
 
                 ;; Eye candy
-                ;;"+fireplace"
-                ;;"+flames-of-freedom"
-                ;;"+snow"
-                ;;"+zone"
+                "+fireplace"
+                "+flames-of-freedom"
+                "+snow"
+                "+zone"
 
                 ;; Emacs OS
                 ;;"+ednc"                 ;I should write a Hydra for this package
                 ;;                        ;once I start using it.
-                ;;"+proced"
+                "+proced"
                 ))
 
         (dolist (file +misc-applications-lisp-files)
