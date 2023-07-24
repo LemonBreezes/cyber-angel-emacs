@@ -1,6 +1,7 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
+  :when (cae-display-graphic-p)
   :defer t
   :init
   (defun +ednc-load-h ()
