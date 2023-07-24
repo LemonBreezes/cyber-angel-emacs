@@ -111,7 +111,7 @@
                 "+know-your-http-well"
                 "+shortdoc"
                 "+tldr"
-                ;;"+x86-lookup"
+                "+x86-lookup"
 
                 ;; Games
                 ;;"+bubbles"
