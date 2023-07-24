@@ -28,14 +28,16 @@
           "r" #'decide-random-range
           "c" #'decide-random-choice
           "t" #'decide-from-table
-          "w 4" #'decide-whereto-compass-4
-          "w 6" #'decide-whereto-compass-6
-          "w 8" #'decide-whereto-compass-8
-          "w 1 0" #'decide-whereto-compass-10
-          "W 2" #'decide-whereto-relative-2
-          "W 3" #'decide-whereto-relative-3
-          "W 4" #'decide-whereto-relative-4
-          "W 6" 'decide-whereto-relative-6
+          (:prefix ("w" . "whereto compass")
+           "4" #'decide-whereto-compass-4
+           "6" #'decide-whereto-compass-6
+           "8" #'decide-whereto-compass-8
+           "1 0" #'decide-whereto-compass-10)
+          (:prefix ("W" . "whereto relative")
+           "2" #'decide-whereto-relative-2
+           "3" #'decide-whereto-relative-3
+           "4" #'decide-whereto-relative-4
+           "6" 'decide-whereto-relative-6)
           "RET" #'decide-question-return
           "SPC" #'decide-question-space)))
   :config
