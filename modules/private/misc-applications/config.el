@@ -110,7 +110,7 @@
                 "+devdocs"
                 "+know-your-http-well"
                 "+shortdoc"
-                ;;"+tldr"
+                "+tldr"
                 ;;"+x86-lookup"
 
                 ;; Games
