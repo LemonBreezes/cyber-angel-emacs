@@ -17,13 +17,6 @@
         (defvar +misc-applications-external-apps-prefix (concat +misc-applications-prefix "x"))
         (defvar +misc-applications-standalone-apps-prefix (concat +misc-applications-prefix "t"))
         (defvar +misc-applications-insert-prefix (concat +misc-applications-prefix "i"))
-        (defvar +misc-applications-lookup-map (make-sparse-keymap))
-        (defvar +misc-applications-games-map (make-sparse-keymap))
-        (defvar +misc-applications-eyecandy-map (make-sparse-keymap))
-        (defvar +misc-applications-system-map (make-sparse-keymap))
-        (defvar +misc-applications-external-apps-map (make-sparse-keymap))
-        (defvar +misc-applications-standalone-apps-map (make-sparse-keymap))
-        (defvar +misc-applications-insert-map (make-sparse-keymap))
         (define-prefix-command '+misc-applications-lookup-map)
         (define-prefix-command '+misc-applications-games-map)
         (define-prefix-command '+misc-applications-eyecandy-map)
@@ -45,7 +38,8 @@
         ;;(map! :leader
         ;;      :prefix +misc-applications-prefix
         ;;      "1" #'mpc)
-        (map! :map +misc-applications-system-map
+        (map! :leader
+              :prefix  +misc-applications-system-prefix
               :desc "emacs packages" "p" #'list-packages
               :desc "emacs processes" "e" #'list-processes
               :desc "emacs timers" "T" #'list-timers)
