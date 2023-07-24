@@ -22,9 +22,9 @@
 
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
-;;(map! :leader
-;;      :prefix +misc-applications-prefix
-;;      "1" #'mpc)
+(map! :leader
+      :prefix +misc-applications-prefix
+      "1" #'mpc)
 (map! :leader
       :prefix  +misc-applications-system-prefix
       :desc "emacs packages" "p" #'list-packages
