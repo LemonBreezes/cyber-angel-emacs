@@ -3,15 +3,23 @@
 (use-package! devdocs
   :defer t
   :init
-  (map! :leader
-        (:prefix +misc-applications-lookup-prefix
-         (:prefix ("d" . "devdocs")
-          :desc "Read from first page" "p" #'devdocs-peruse
-          :desc "Install doc" "i" #'devdocs-install
-          :desc "Delete doc" "d" #'devdocs-delete
-          :desc "Search doc" "s" #'devdocs-lookup
-          :desc "Search devdocs website" "w" #'devdocs-search
-          :desc "Update all docs" "u" #'devdocs-update-all)))
+  (map! :map +misc-applications-lookup-map
+        (:prefix "d"
+          "p" #'devdocs-peruse
+          "i" #'devdocs-install
+          "d" #'devdocs-delete
+          "s" #'devdocs-lookup
+          "w" #'devdocs-search
+          "u" #'devdocs-update-all))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-lookup-map
+      "d" "devdocs"
+      "dp" "Read from first page"
+      "di" "Install doc"
+      "dd" "Delete doc"
+      "ds" "Search doc"
+      "dw" "Search devdocs website"
+      "du" "Update all docs"))
   :config
   (setq devdocs-data-dir (expand-file-name "devdocs" doom-data-dir))
   (map! :map devdocs-mode-map
