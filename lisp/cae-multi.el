@@ -13,9 +13,7 @@
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-secrets-dir t)
 
-(dolist (file (mapcar (doom-partial #'string-remove-suffix ".el")
-                      (directory-files cae-multi-secrets-dir t "\\.el$")))
-  (load file nil t))
+(load! (concat cae-multi-secrets-dir "secrets.el"))
 
 (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
