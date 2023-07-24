@@ -29,7 +29,7 @@
                   (insert (ednc-format-notification new t))
                   (pop-to-buffer (current-buffer)))
           (kill-buffer)))))
-  (set-popup-rule! "*Notification [0-9]+" :side 'bottom :size 0.3 :select t)
+  (set-popup-rule! "*Notification [0-9]+" :side 'bottom :size #'+popup-shrink-to-fit :select nil)
   ;;(add-to-list 'global-mode-string
   ;;             '((:eval (stack-notifications))))
   ;;(add-hook 'ednc-notification-presentation-functions
