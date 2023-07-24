@@ -16,7 +16,7 @@
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
 (map! :leader :prefix (+misc-applications-external-prefix . "external"))
-(map! :leader :prefix (+misc-applications-standalone-prefix . "standalone"))
+(map! :leader :prefix (+misc-applications-standalone-prefix . "standalone apps"))
 
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
