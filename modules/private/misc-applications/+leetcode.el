@@ -9,8 +9,8 @@
   (when (memq system-type '(cygwin windows-nt ms-dos))
     (advice-add #'leetcode--install-my-cookie :override #'ignore))
   (map! :leader
-        :prefix +misc-applications-prefix
-        :desc "LeetCode" "C-l" #'+leetcode)
+        :prefix +misc-applications-standalone-apps-prefix
+        :desc "LeetCode" "l" #'+leetcode)
   :config
   (map! :map leetcode--problems-mode-map
         "q" #'+leetcode-soft-quit
