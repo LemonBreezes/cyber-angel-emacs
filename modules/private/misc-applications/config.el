@@ -73,8 +73,8 @@
         (setq +misc-applications-lisp-files
               '(;; Standalone apps
                 "+alarm-clock"
-                "+elfeed"
-                "+my-repo-pins"
+                ;;"+elfeed"
+                ;;"+my-repo-pins"
 
                 ;; Use external APIs or apps
                 ;;"+elcord"
