@@ -3,8 +3,7 @@
 (use-package! my-repo-pins
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-standalone-apps-prefix
+  (map! :map +misc-applications-standalone-apps-map
         "j" #'my-repo-pins)
   :config
   (make-directory "~/code-root" t)
