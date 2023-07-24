@@ -110,7 +110,10 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq unread-command-events
-              (list ?\C-c ?a))
+              (append unread-command-events
+                      (listify-key-sequence
+                       (kbd doom-leader-alt-key)
+                       (kbd +misc-applications-prefix))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
