@@ -47,6 +47,7 @@
           "p" "packages"
           "e" "processes"
           "T" "timers")
+        ;;
 
         (after! timer-list
           (map! :map timer-list-mode-map
