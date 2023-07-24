@@ -215,7 +215,8 @@ also marks comment with leading whitespace"
       (skip-chars-backward "\n\r")
       (set-mark (point))
       (goto-char p)
-      (while (er--point-is-in-comment-p)
+      (while (or (er--point-is-in-comment-p)
+                 (looking-at "[[:space:]]"))
         (forward-char -1))
       (forward-char 1))))
 
