@@ -4,10 +4,6 @@
 (defvar +misc-applications-map (make-sparse-keymap))
 (define-prefix-command '+misc-applications-map)
 (defvar +misc-applications-prefix "a")
-;;map! :leader
-;;:desc "+misc-applications" +misc-applications-prefix
-;;defun +misc-applications-prefix ()
-;;(interactive)
 
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
