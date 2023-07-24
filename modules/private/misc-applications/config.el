@@ -3,12 +3,11 @@
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
 (defvar +misc-applications-prefix "a")
-;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
-(keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader
       :desc "+misc-applications" +misc-applications-prefix
       (defun +misc-applications-prefix ()
         (interactive)
+        ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
         (keymap-unset doom-leader-map +misc-applications-prefix t)
         (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "l"))
         (defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
