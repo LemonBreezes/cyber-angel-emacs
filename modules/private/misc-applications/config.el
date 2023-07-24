@@ -45,8 +45,7 @@
         ;;(map! :leader
         ;;      :prefix +misc-applications-prefix
         ;;      "1" #'mpc)
-        (map! :leader
-              :prefix  +misc-applications-system-prefix
+        (map! :map +misc-applications-system-map
               :desc "emacs packages" "p" #'list-packages
               :desc "emacs processes" "e" #'list-processes
               :desc "emacs timers" "T" #'list-timers)
