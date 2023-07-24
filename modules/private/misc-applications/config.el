@@ -43,6 +43,10 @@
               :desc "emacs packages" "p" #'list-packages
               :desc "emacs processes" "e" #'list-processes
               :desc "emacs timers" "T" #'list-timers)
+        (which-key-add-keymap-based-replacements '+misc-applications-system-map
+          "p" "packages"
+          "e" "processes"
+          "T" "timers")
 
         (after! timer-list
           (map! :map timer-list-mode-map
