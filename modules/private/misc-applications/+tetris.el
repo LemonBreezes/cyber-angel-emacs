@@ -3,11 +3,10 @@
 (use-package! tetris
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
-        "t" #'tetris
-        :prefix +misc-applications-eyecandy-prefix
-        "t" #'autotetris)
+  (map! (:map +misc-applications-games-map
+         "t" #'tetris)
+        (:map +misc-applications-eyecandy-map
+         "t" #'autotetris))
   :config
   (map! :map tetris-mode-map
         "<f6>" #'+tetris-hydra/body
