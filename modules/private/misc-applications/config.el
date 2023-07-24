@@ -94,10 +94,8 @@
                                         ;once I start using it.
         "+proced"))
 
-(unless cae-config-finished-loading
-  (run-with-idle-timer
-   5 nil
-   (lambda ()
-     (dolist (file +misc-applications-lisp-files)
-       (byte-recompile-file (concat (dir!) file ".el") nil 0)
-       (load! file)))))
+(run-with-idle-timer
+ 5 nil
+ (lambda ()
+   (dolist (file +misc-applications-lisp-files)
+     (load! file))))
