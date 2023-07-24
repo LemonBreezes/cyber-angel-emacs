@@ -21,7 +21,8 @@
     (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
       (with-current-buffer (get-buffer-create name)
         (if new (let ((inhibit-read-only t))
-                  (if old (erase-buffer) (ednc-view-mode))
+                  (erase-buffer)
+                  (ednc-view-mode)
                   (set-buffer-multibyte nil)
                   (insert (concat (ednc-format-notification new)
                                   "\n"
