@@ -3,6 +3,5 @@
 (use-package! snow
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-eyecandy-prefix
+  (map! :map +misc-applications-eyecandy-map
         "s" #'snow))
