@@ -197,7 +197,10 @@ expansion occurs within the parent Emacs session.")
     (map! :map exwm-mode-map
           "C-c '" #'exwm-edit--compose)
     :config
-    (setq exwm-edit-split "below"))
+    (setq exwm-edit-split "below"
+          exwm-edit-yank-delay 1.0
+          exwm-edit-paste-delay 0.5
+          exwm-edit-clean-kill-ring-delay 0.2))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
