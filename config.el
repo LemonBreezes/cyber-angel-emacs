@@ -523,7 +523,14 @@
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
 
   (use-package! posimacs-shortdocs
-    :after shortdoc))
+    :after shortdoc)
+
+  (use-package! wakatime-mode
+    :defer t :defer-incrementally t
+    :config
+    (global-wakatime-mode +1)
+    (setq wakatime-cli-path
+          "~/src/wakatime-cli-linux-amd64")))
 
 
 ;;; Editor
