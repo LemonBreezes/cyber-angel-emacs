@@ -82,11 +82,12 @@
                     (goto-char point)))))
   (advice-add #'worf-add :after #'cae-org-set-created-timestamp))
 
-(use-package! org-tidy
-  :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode)
-  :config
-  (setq org-tidy-properties-inline-symbol "·"))
+;; Giving some error
+;;(use-package! org-tidy
+;;  :defer t :init
+;;  (add-hook 'org-mode-hook #'org-tidy-mode)
+;;  :config
+;;  (setq org-tidy-properties-inline-symbol "·"))
 
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
