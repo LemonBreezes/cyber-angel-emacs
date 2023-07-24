@@ -188,9 +188,12 @@ When region is selected, behave like `edit-indirect-region'
 but when no region is selected and the cursor is in a 'string' syntax
 mark the string and call `edit-indirect-region' with it."
   (interactive)
-  (if (region-active-p)
-      (call-interactively #'edit-indirect-region)
-    (call-interactively #'string-edit-at-point)))
+  (cond ((region-active-p)
+         (call-interactively #'edit-indirect-region))
+        ((derived-mode-p 'org-mode)
+         (call-interactively #'org-edit-special))
+        (t
+         (call-interactively #'string-edit-at-point))))
 
 ;;;###autoload
 (defun cae-browse-url-generic-bookmark-handler (bookmark)
