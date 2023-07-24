@@ -39,4 +39,5 @@
           "RET" #'decide-question-return
           "SPC" #'decide-question-space)))
   :config
-  (map! :))
+  (map! :prefix +misc-applications-insert-prefix
+        "d" #'decide-prefix-map))
