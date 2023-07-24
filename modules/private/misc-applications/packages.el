@@ -41,6 +41,7 @@
   (package! helm-rage))
 (package! lorem-ipsum)
 (package! password-generator)
+(package! decide)
 
 ;; Lookup
 (package! devdocs)
