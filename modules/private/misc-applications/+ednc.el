@@ -14,7 +14,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
       "n" "Notifications"))
   :config
-  (defun show-notification-in-buffer (old new)
+  (defun +ednc-show-notification-in-buffer (old new)
     (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
       (with-current-buffer (get-buffer-create name)
         (if new (let ((inhibit-read-only t))
@@ -26,7 +26,12 @@
                   (delete-blank-lines)
                   (display-buffer (current-buffer)))
           (kill-buffer)))))
-  (add-hook 'ednc-notification-presentation-functions #'show-notification-in-buffer)
+  (defun ednc-dismiss-all-notifications ()
+    (interactive)
+    (cl-mapcar (lambda (notification)
+                 (ednc-dismiss-notification notification))
+               (ednc-notifications)))
+  (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
 
   (defun stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
