@@ -108,12 +108,15 @@
 
         (dolist (file +misc-applications-lisp-files)
           (load! file))
-        (execute-kbd-macro (kbd (concat doom-leader-key " " +misc-applications-prefix)))
-        (setq which-key-inhibit t)
-        (add-transient-hook! 'pre-command-hook
-          (setq which-key-inhibit nil))
-        (run-with-idle-timer
-         which-key-idle-delay nil
+        (run-at-time
+         0.0 nil
          (lambda ()
-           (when which-key-inhibit
-             (which-key-show-keymap '+misc-applications-map t))))))
+           (execute-kbd-macro (kbd (concat doom-leader-key " " +misc-applications-prefix)))
+           (setq which-key-inhibit t)
+           (add-transient-hook! 'pre-command-hook
+             (setq which-key-inhibit nil))
+           (run-with-idle-timer
+            which-key-idle-delay nil
+            (lambda ()
+              (when which-key-inhibit
+                (which-key-show-keymap '+misc-applications-map t))))))))
