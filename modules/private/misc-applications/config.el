@@ -80,7 +80,7 @@
 
                 ;; Use external APIs or apps
                 "+elcord"
-                ;;"+leetcode"
+                "+leetcode"
                 ;;"+somafm"
                 ;;"+wttrin"
 
