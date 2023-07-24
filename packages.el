@@ -37,6 +37,8 @@
 (package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! dwim-shell-command)
+(package! posimacs-shortdocs :recipe
+  (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
