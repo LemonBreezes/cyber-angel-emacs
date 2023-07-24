@@ -3,8 +3,7 @@
 (use-package! tldr
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-lookup-prefix
+  (map! :map +misc-applications-lookup-map
         "t" #'tldr)
   :config
   (setq tldr-directory-path
