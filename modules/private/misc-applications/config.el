@@ -24,7 +24,6 @@
         (define-prefix-command '+misc-applications-external-apps-map)
         (define-prefix-command '+misc-applications-standalone-apps-map)
         (define-prefix-command '+misc-applications-insert-map)
-        (defvar doom-picture-dir "~/Pictures/")
         (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
         (map! :leader :prefix +misc-applications-prefix
               +misc-applications-lookup-prefix +misc-applications-lookup-map
