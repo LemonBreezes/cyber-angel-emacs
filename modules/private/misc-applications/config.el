@@ -9,7 +9,7 @@
       (defun +misc-applications-prefix ()
         (interactive)
         ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
-        ;;(keymap-unset doom-leader-map +misc-applications-prefix t)
+        (keymap-unset doom-leader-map +misc-applications-prefix t)
         (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "l"))
         (defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
         (defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
