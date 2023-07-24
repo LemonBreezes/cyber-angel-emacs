@@ -431,6 +431,213 @@
       "w" "whereto compass"
       "W" "whereto relative")))
 
+(use-package! bubbles
+  :defer t
+  :init
+  (map! :map +misc-applications-games-map
+        "b" #'bubbles)
+  :config
+  (map! :map bubbles-mode-map
+        :n "RET" #'bubbles-plop
+        "<f6>" #'+bubbles-hydra/body
+        "ta" #'bubbles-set-graphics-theme-ascii
+        "tb" #'bubbles-set-graphics-theme-balls
+        "te" #'bubbles-set-graphics-theme-emacs
+        "tc" #'bubbles-set-graphics-theme-circles
+        "ts" #'bubbles-set-graphics-theme-squares
+        "td" #'bubbles-set-graphics-theme-diamonds
+        "dh" #'bubbles-set-game-hard
+        "de" #'bubbles-set-game-easy
+        "dm" #'bubbles-set-game-medium
+        "dd" #'bubbles-set-game-difficult
+        "du" #'bubbles-set-game-userdefined
+        "S" #'bubbles-save-settings))
+
+(use-package! doctor
+  :defer t
+  :init
+  (map! :map +misc-applications-games-map
+        "D" #'doctor))
+
+(use-package! dunnet
+  :defer t
+  :init
+  (map! :map +misc-applications-games-map
+        "d" #'dunnet))
+
+(use-package! speed-type
+  :defer t
+  :init
+  (map! :map +misc-applications-games-map
+        "T" #'speed-type-text)
+  :config
+  (add-hook 'speed-type-mode-hook #'visual-line-mode)
+  (when (modulep! :private corfu)
+    (add-to-list 'corfu-excluded-modes #'speed-type-mode))
+  (map! :map speed-type--completed-keymap
+        "q" #'kill-this-buffer
+        "r" #'speed-type--replay
+        "n" #'speed-type--play-next
+        :map speed-type-mode-map
+        "<f6>" #'+speed-type-hydra/body))
+
+(use-package! snake
+  :defer t
+  :init
+  (map! :map +misc-applications-games-map
+        "s" #'snake)
+  :config
+  (map! :map snake-mode-map
+        "<f6>" #'+snake-hydra/body))
+
+(use-package! tetris
+  :defer t
+  :init
+  (map! (:map +misc-applications-games-map
+         "t" #'tetris)
+        (:map +misc-applications-eyecandy-map
+         "t" #'autotetris))
+  :config
+  (map! :map tetris-mode-map
+        "<f6>" #'+tetris-hydra/body
+        "a" #'autotetris-mode)
+  (map! :map autotetris-mode-map
+        "a" nil))                       ;Not sure what `autotetris-move' even
+                                        ;does to be honest.
+
+(use-package! fireplace
+  :defer t
+  :init
+  (map! :map +misc-applications-eyecandy-map
+        "f" #'fireplace)
+  :config
+  (map! :map fireplace-mode-map
+        "<f6>" #'+fireplace-hydra/body))
+
+(use-package! flames-of-freedom
+  :defer t
+  :init
+  (map! :map +misc-applications-eyecandy-map
+        "F" #'flames-of-freedom-default))
+
+(use-package! snow
+  :defer t
+  :init
+  (map! :map +misc-applications-eyecandy-map
+        "s" #'snow))
+
+(use-package! zone
+  :defer-incrementally t
+  :init
+  (map! :map +misc-applications-eyecandy-map
+        "z" #'zone-choose)
+  :config
+  ;; remove not interesting programs
+  (setq zone-programs [zone-nyan
+                       zone-rainbow
+                       zone-matrix
+                       zone-tmux-clock
+                       zone-pgm-md5
+                       zone-pgm-sl
+                       zone-pgm-jitter
+                       zone-pgm-putz-with-case
+                       zone-pgm-dissolve
+                       ;; zone-pgm-explode
+                       zone-pgm-whack-chars
+                       zone-pgm-rotate
+                       zone-pgm-rotate-LR-lockstep
+                       zone-pgm-rotate-RL-lockstep
+                       zone-pgm-rotate-LR-variable
+                       zone-pgm-rotate-RL-variable
+                       zone-pgm-drip
+                       ;; zone-pgm-drip-fretfully
+                       ;; zone-pgm-five-oclock-swan-dive
+                       ;; zone-pgm-martini-swan-dive
+                       zone-pgm-rat-race
+                       zone-pgm-paragraph-spaz])
+
+  ;; For `zone-matrix'.
+  (defvar tabbar-mode nil)
+  (autoload 'zone-matrix "zone-matrix")
+  (advice-add #'zone-matrix :before
+              (cae-defun +zone-matrix-setup-buffer-appearance ()
+                (setq-local nobreak-char-display nil)
+                (face-remap-add-relative 'default :background "black")))
+  (after! zone-matrix
+    (setq zmx-unicode-mode t))
+
+  (unless (bound-and-true-p exwm--connection)
+    (zone-when-idle (* 5 60)))
+
+  ;; Do not zone in a popup window. Also, do not show other windows when zoning.
+  ;; Quit out of the minibuffer if necessary before zoning.q
+  (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
+    :around #'zone
+    (let ((zone-fn (lambda ()
+                     (let ((wconf (current-window-configuration))
+                           (tabbar-state (frame-parameter nil 'tab-bar-lines)))
+                       (select-window (car (doom-visible-windows)))
+                       (delete-other-windows)
+                       (set-frame-parameter nil 'tab-bar-lines 0)
+                       (apply oldfun args)
+                       (set-frame-parameter nil 'tab-bar-lines tabbar-state)
+                       (set-window-configuration wconf)))))
+      (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn))
+    (dotimes (i (minibuffer-depth))
+      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))
+
+;; Here's another Zone that says positive words together with their definitions.
+;; But it requires `wordnet' to be installed and also an internet connection.
+;; https://xenodium.com/emacs-zones-to-lift-you-up/
+
+;; This is another Zone referencing the Matrix movie but it's kind of boring. It
+;; just says some green text slowly one line at a time.
+;; https://github.com/vreeze/zone-matrix-wake-up
+
+(use-package! ednc
+  :when (cae-display-graphic-p)
+  :defer t
+  :init
+  (defun +ednc-load-h ()
+    (and (require 'dbus nil t)
+         (ednc-mode +1)))
+  (run-with-idle-timer 1.5 nil #'+ednc-load-h)
+  (map! :map +misc-applications-emacs-os-map
+        "ns" #'+ednc-show-notifications
+        "nd" #'+ednc-dismiss-all-notifications)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
+      "n" "notifications"
+      "ns" "show notifications"
+      "nd" "dismiss all notifications"))
+  :config
+  (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
+
+  (defun +ednc-stack-notifications (&optional hide)
+    (mapconcat (lambda (notification)
+                 (let ((app-name (ednc-notification-app-name notification)))
+                   (unless (member app-name hide)
+                     (push app-name hide)
+                     (ednc-format-notification notification))))
+               (ednc-notifications) ""))
+
+  (add-to-list 'global-mode-string
+               '((:eval (+ednc-stack-notifications))))
+  (add-hook 'ednc-notification-presentation-functions
+            (lambda (&rest _) (force-mode-line-update t)))
+  (map! :map ednc-view-mode-map
+        "n" #'next-line
+        "p" #'previous-line))
+
+(use-package! proced
+  :defer t
+  :config
+  (setq proced-enable-color-flag t)
+  (map! :map proced-mode-map
+        "<f6>" #'+proced-hydra/body))
+
+
+
 (setq +misc-applications-lisp-files
       '(;; Standalone apps
         "+alarm-clock"
