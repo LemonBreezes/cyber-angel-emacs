@@ -7,6 +7,6 @@
                  (modulep! :completion helm)))
   :init
   (map! :map +misc-applications-system-map
-        :desc "disks" "D" #'helm-linux-disks)
+        "D" #'helm-linux-disks)
   (which-key-add-keymap-based-replacements +misc-applications-system-map
     "D" "disks"))
