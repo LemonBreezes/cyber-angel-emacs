@@ -42,9 +42,6 @@
           "t" "standalone apps"
           "i" "insert")
 
-        ;;(map! :leader
-        ;;      :prefix +misc-applications-prefix
-        ;;      "1" #'mpc)
         (map! :leader
               :prefix  +misc-applications-system-prefix
               "p" #'list-packages
@@ -81,6 +78,9 @@
                 "+paradox"
                 "+pulseaudio-control"
                 "+trashed"
+
+                ;; Music TODO
+                ;; mpc
 
                 ;; Insert
                 "+helm-rage"
