@@ -81,8 +81,8 @@
                 ;; Use external APIs or apps
                 "+elcord"
                 "+leetcode"
-                ;;"+somafm"
-                ;;"+wttrin"
+                "+somafm"
+                "+wttrin"
 
                 ;; System
                 ;;"+daemons"
