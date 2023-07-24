@@ -607,13 +607,7 @@
                  #'+default--newline-indent-and-continue-comments-a)
 
   (after! expand-region
-    (setq expand-region-smart-cursor t)
-    (setq er/try-expand-list
-          (mapcar (lambda (fn)
-                    (if (eq fn #'er/mark-comment)
-                        #'cae-mark-comment
-                      fn))
-                  er/try-expand-list)))
+    (setq expand-region-smart-cursor t))
 
   ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
   (setq set-mark-command-repeat-pop t)
@@ -893,12 +887,16 @@
       '((eri/mark-inside-org-table-cell
          eri/mark-outside-org-table-cell)))
     (setq eri/try-expand-list
-          (thread-last eri/try-expand-list
-                       (remove '(er/mark-word
-                                 er/mark-symbol
-                                 er/mark-symbol-with-prefix
-                                 er/mark-next-accessor))
-                       (delq 'er/mark-method-call))))
+          '((er/mark-inside-quotes
+             eri/mark-outside-quotes)
+            (er/mark-inside-pairs
+             er/mark-outside-pairs)
+            cae-mark-comment
+            er/mark-url
+            er/mark-email
+            eri/mark-line
+            eri/mark-block
+            mark-page)))
 
   (use-package! embark
     :defer t :config
