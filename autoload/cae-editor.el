@@ -205,6 +205,7 @@ mark the string and call `edit-indirect-region' with it."
   "Mark the entire comment around point. Like `er/mark-comment' but
 also marks comment with leading whitespace"
   (interactive)
+  (+log "hello")
   (when (er--point-is-in-comment-p)
     (let ((p (point)))
       (skip-syntax-backward "\s")
