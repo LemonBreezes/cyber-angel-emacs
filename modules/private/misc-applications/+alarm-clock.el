@@ -3,11 +3,14 @@
 (use-package! alarm-clock
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-standalone-apps-prefix
-        (:prefix ("a" . "alarms")
-         "a" #'alarm-clock-set
-         "A" #'alarm-clock-list-view))
+  (map! :map +misc-applications-standalone-apps-map
+        :prefix "a"
+        "a" #'alarm-clock-set
+        "A" #'alarm-clock-list-view)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "a a" "set alarm"
+      "a A" "list alarms"))
   :config
   (map! :leader
         :prefix +misc-applications-prefix
