@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
+        :prefix +misc-applications-standalone-prefix
         (:prefix ("a" . "alarms")
          "a" #'alarm-clock-set
          "A" #'alarm-clock-list-view))
