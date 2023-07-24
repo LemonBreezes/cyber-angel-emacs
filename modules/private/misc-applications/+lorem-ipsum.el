@@ -5,7 +5,7 @@
   :init
   (map! :leader
         (:prefix +misc-applications-insert-prefix
-         :prefix ("l" . "lorem-ipsum")
-         "l" #'lorem-ipsum-insert-list
-         "p" #'lorem-ipsum-insert-paragraphs
-         "s" #'lorem-ipsum-insert-sentences)))
+         (:prefix ("l" . "lorem-ipsum")
+          "l" #'lorem-ipsum-insert-list
+          "p" #'lorem-ipsum-insert-paragraphs
+          "s" #'lorem-ipsum-insert-sentences))))
