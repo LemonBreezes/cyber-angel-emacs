@@ -77,10 +77,10 @@
                 "+my-repo-pins"
 
                 ;; Use external APIs or apps
-                "+elcord"
-                "+leetcode"
-                "+somafm"
-                "+wttrin"
+                ;;"+elcord"
+                ;;"+leetcode"
+                ;;"+somafm"
+                ;;"+wttrin"
 
                 ;; System
                 ;;"+daemons"
@@ -95,40 +95,41 @@
                 ;; mpc
 
                 ;; Insert
-                "+helm-rage"
-                "+lorem-ipsum"
-                "+password-generator"
-                "+uuidgen"
-                "+decide"
+                ;;"+helm-rage"
+                ;;"+lorem-ipsum"
+                ;;"+password-generator"
+                ;;"+uuidgen"
+                ;;"+decide"
 
                 ;; TODO Quotes
 
                 ;; Lookup
-                "+devdocs"
-                "+know-your-http-well"
-                "+shortdoc"
-                "+tldr"
-                "+x86-lookup"
+                ;;"+devdocs"
+                ;;"+know-your-http-well"
+                ;;"+shortdoc"
+                ;;"+tldr"
+                ;;"+x86-lookup"
 
                 ;; Games
-                "+bubbles"
-                "+doctor"
-                "+dunnet"
-                "+speed-type"
-                "+snake"
-                "+tetris"
+                ;;"+bubbles"
+                ;;"+doctor"
+                ;;"+dunnet"
+                ;;"+speed-type"
+                ;;"+snake"
+                ;;"+tetris"
                 ;; TODO Add `2048', `klondike', and `chess' to this list.
 
                 ;; Eye candy
-                "+fireplace"
-                "+flames-of-freedom"
-                "+snow"
-                "+zone"
+                ;;"+fireplace"
+                ;;"+flames-of-freedom"
+                ;;"+snow"
+                ;;"+zone"
 
                 ;; Emacs OS
-                "+ednc"                 ;I should write a Hydra for this package
-                                        ;once I start using it.
-                "+proced"))
+                ;;"+ednc"                 ;I should write a Hydra for this package
+                ;;                        ;once I start using it.
+                ;;"+proced"
+                ))
 
         (dolist (file +misc-applications-lisp-files)
           (load! file))
