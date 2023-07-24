@@ -114,8 +114,7 @@
                 "+zone"
 
                 ;; Emacs OS
-                ;;"+ednc"                 ;I should write a Hydra for this package
-                ;;                        ;once I start using it.
+                ;;"+ednc"              ; Currently I'm using Dunst instead.
                 "+proced"
                 ))
 
