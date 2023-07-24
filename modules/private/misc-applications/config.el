@@ -110,8 +110,9 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq which-key-inhibit t)
+        (map! "<f13>" #'+misc-applications-map)
         (setq unread-command-events
-              (list ?\C-c ?a))
+              (list 'f13))
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
         (run-with-idle-timer
