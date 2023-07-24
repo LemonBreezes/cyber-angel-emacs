@@ -19,10 +19,15 @@
       (with-current-buffer (get-buffer-create name)
         (if new (let ((inhibit-read-only t))
                   (if old (erase-buffer) (ednc-view-mode))
-                  (insert (ednc-format-notification new t))
+                  (set-buffer-multibyte nil)
+                  (insert (concat (ednc-format-notification new)
+                                  "\n"
+                                  (ednc-format-notification new t)))
+                  (delete-blank-lines)
                   (display-buffer (current-buffer)))
           (kill-buffer)))))
   (add-hook 'ednc-notification-presentation-functions #'show-notification-in-buffer)
+
   ;;(defun stack-notifications (&optional hide)
   ;;  (mapconcat (lambda (notification)
   ;;               (let ((app-name (ednc-notification-app-name notification)))
