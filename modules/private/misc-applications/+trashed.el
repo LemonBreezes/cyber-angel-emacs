@@ -3,9 +3,11 @@
 (use-package! trashed
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-system-prefix
-        :desc "trash files" "t" #'trashed)
+  (map! :map +misc-applications-system-map
+        "t" #'trashed)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "t" "trash files"))
   :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
