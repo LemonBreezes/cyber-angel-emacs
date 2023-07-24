@@ -122,5 +122,4 @@
           (load! file))
         (map! "<f13>" #'+misc-applications-map)
         (setq unread-command-events
-              (list 'f13))
-        (global-unset-key "<f13>")))
+              (list 'f13))))
