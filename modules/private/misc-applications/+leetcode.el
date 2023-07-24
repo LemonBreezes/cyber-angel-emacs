@@ -8,10 +8,10 @@
   :init
   (when (memq system-type '(cygwin windows-nt ms-dos))
     (advice-add #'leetcode--install-my-cookie :override #'ignore))
-  (map! :map +misc-applications-standalone-apps-map
+  (map! :map +misc-applications-external-apps-map
         "l" #'+leetcode)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "l" "LeetCode"))
   :config
   (map! :map leetcode--problems-mode-map
