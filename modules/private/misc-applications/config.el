@@ -114,7 +114,7 @@
                 "+zone"
 
                 ;; Emacs OS
-                ;;"+ednc"              ; Currently I'm using Dunst instead.
+                "+ednc"              ; Currently I'm using Dunst instead.
                 "+proced"
                 ))
 
