@@ -108,7 +108,7 @@
 
                 ;; Lookup
                 "+devdocs"
-                ;;"+know-your-http-well"
+                "+know-your-http-well"
                 ;;"+shortdoc"
                 ;;"+tldr"
                 ;;"+x86-lookup"
