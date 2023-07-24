@@ -61,6 +61,7 @@
         ;; Insert
         "+helm-rage"
         "+lorem-ipsum"
+        "+password-generator"
 
         ;; Lookup
         "+devdocs"
