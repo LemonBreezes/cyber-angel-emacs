@@ -110,12 +110,12 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq which-key-inhibit t)
+        (setq unread-command-events
+              (list ?\C-c ?a))
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
         (run-with-idle-timer
          which-key-idle-delay nil
          (lambda ()
            (when which-key-inhibit
-             (which-key-show-keymap '+misc-applications-map t)
-             (setq unread-command-events
-                   (list ?\C-c ?a)))))))
+             (which-key-show-keymap '+misc-applications-map t))))))
