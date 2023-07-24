@@ -113,3 +113,6 @@
         ;; Emacs OS
         "+ednc"
         "+proced"))
+
+(dolist (file +misc-applications-lisp-files)
+  (load! file))
