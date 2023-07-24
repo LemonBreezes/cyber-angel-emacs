@@ -8,5 +8,6 @@
   :init
   (map! :map +misc-applications-system-map
         "D" #'helm-linux-disks)
-  (which-key-add-keymap-based-replacements +misc-applications-system-map
-    "D" "disks"))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "D" "disks")))
