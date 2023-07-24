@@ -7,4 +7,4 @@
   :init
   (map! :leader
         :prefix +misc-applications-insert-prefix
-        :desc "disks" "D" #'helm-linux-disks))
+        "r" #'helm-rage))
