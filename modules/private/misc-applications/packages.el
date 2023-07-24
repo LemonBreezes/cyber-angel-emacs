@@ -48,8 +48,6 @@
 (package! know-your-http-well)
 (package! tldr)
 (package! x86-lookup)
-(package! posimacs-shortdocs :recipe
-  (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 
 ;; Games
 (package! autotetris-mode)
