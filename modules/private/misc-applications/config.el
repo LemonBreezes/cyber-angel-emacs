@@ -32,7 +32,7 @@
         (define-prefix-command '+misc-applications-standalone-apps-map)
         (define-prefix-command '+misc-applications-insert-map)
         (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
-        (map! :leader :prefix +misc-applications-prefix
+        (map! :map +misc-applications-map
               +misc-applications-lookup-prefix #'+misc-applications-lookup-map
               +misc-applications-games-prefix #'+misc-applications-games-map
               +misc-applications-eyecandy-prefix #'+misc-applications-eyecandy-map
