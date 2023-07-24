@@ -3,6 +3,5 @@
 (use-package! uuidgen
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-insert-prefix
+  (map! :map +misc-applications-insert-map
         "u" #'uuidgen))
