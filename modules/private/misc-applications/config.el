@@ -46,14 +46,15 @@
           '+misc-applications-standalone-apps-map)
         (define-key +misc-applications-map (kbd +misc-applications-insert-prefix)
           '+misc-applications-insert-map)
-        (which-key-add-keymap-based-replacements '+misc-applications-map
-          "l" "lookup"
-          "s" "system"
-          "g" "games"
-          "e" "eyecandy"
-          "x" "external apps"
-          "t" "standalone apps"
-          "i" "insert")
+        (after! which-key
+          (which-key-add-keymap-based-replacements '+misc-applications-map
+            "l" "lookup"
+            "s" "system"
+            "g" "games"
+            "e" "eyecandy"
+            "x" "external apps"
+            "t" "standalone apps"
+            "i" "insert"))
 
         (map! :map +misc-applications-system-map
               "p" #'list-packages
