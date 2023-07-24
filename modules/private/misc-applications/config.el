@@ -115,8 +115,7 @@
 
                 ;; Emacs OS
                 "+ednc"              ; Currently I'm using Dunst instead.
-                "+proced"
-                ))
+                "+proced"))
 
         (dolist (file +misc-applications-lisp-files)
           (load! file))
