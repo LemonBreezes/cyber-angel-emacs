@@ -1,12 +1,13 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :when (cae-display-graphic-p)
+  :when (and (cae-display-graphic-p)
+             (not (getenv "SSH_TTY")))
   :defer t
   :init
   (defun +ednc-load-h ()
     (and (require 'dbus nil t)
-         (ednc-mode +1)))
+         (ednc-dmode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   (map! :map +misc-applications-emacs-os-map
         "ns" #'+ednc-show-notifications
