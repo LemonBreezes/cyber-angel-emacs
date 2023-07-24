@@ -190,8 +190,8 @@ mark the string and call `edit-indirect-region' with it."
   (interactive)
   (cond ((region-active-p)
          (call-interactively #'edit-indirect-region))
-        ((derived-mode-p 'org-mode)
-         (call-interactively #'org-edit-special))
+        ((and (derived-mode-p 'org-mode)
+              (ignore-error 'user-error (call-interactively #'org-edit-special))))
         (t
          (call-interactively #'string-edit-at-point))))
 
