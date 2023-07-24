@@ -811,6 +811,9 @@
     (map! :leader :prefix "f"
           :desc "Show file info" "i" #'file-info-show)
     :config
+    ;; Fixes an error caused by a typo in the code.
+    ;;(defvar wakatime-ui-mode nil)
+    ;;(defvar wakatime-ui-current-session-text nil)
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
           file-info-max-value-length 100))
