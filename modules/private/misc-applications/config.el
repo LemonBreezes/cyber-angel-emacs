@@ -85,23 +85,24 @@
                 "+wttrin"
 
                 ;; System
-                ;;"+daemons"
-                ;;"+disk-usage"
-                ;;"+helm-linux-disks"
-                ;;"+helm-system-packages"
-                ;;"+paradox"
-                ;;"+pulseaudio-control"
-                ;;"+trashed"
+                "+daemons"
+                "+disk-usage"
+                "+helm-linux-disks"
+                "+helm-system-packages"
+                "+paradox"
+                "+pulseaudio-control"
+                "+trashed"
 
-                ;; Music TODO
+                ;; TODO Music
                 ;; mpc
+                ;; somafm
 
                 ;; Insert
-                ;;"+helm-rage"
-                ;;"+lorem-ipsum"
-                ;;"+password-generator"
-                ;;"+uuidgen"
-                ;;"+decide"
+                "+helm-rage"
+                "+lorem-ipsum"
+                "+password-generator"
+                "+uuidgen"
+                "+decide"
 
                 ;; TODO Quotes
 
