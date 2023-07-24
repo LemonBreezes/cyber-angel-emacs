@@ -3,6 +3,5 @@
 (use-package! doctor
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
+  (map! :map +misc-applications-games-map
         "D" #'doctor))
