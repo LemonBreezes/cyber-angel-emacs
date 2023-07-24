@@ -40,7 +40,7 @@ overriding other keymaps."
   (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
 
 ;; Also show keybinidng descriptions on my second leader key when using Evil.
-(when (autoloadp 'evil-mode)
+(when (or (featurep 'evil) (autoloadp 'evil-mode))
   (defun cae-which-key-add-key-based-replacements-a
       (oldfun key-sequence &rest args)
     (when (string-prefix-p "SPC " key-sequence)
