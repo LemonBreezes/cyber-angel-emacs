@@ -889,9 +889,9 @@
     (setq eri/try-expand-list
           '((er/mark-inside-quotes
              eri/mark-outside-quotes)
+            cae-mark-comment
             (er/mark-inside-pairs
              er/mark-outside-pairs)
-            cae-mark-comment
             er/mark-url
             er/mark-email
             eri/mark-line
