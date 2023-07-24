@@ -111,10 +111,7 @@
           (load! file))
         (setq unread-command-events
               (append unread-command-events
-                      (listify-key-sequence
-                       (concat (kbd +misc-applications-prefix)
-                               " "
-                               (kbd doom-leader-alt-key)))))
+                      (list ?\C-c ?a)))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
