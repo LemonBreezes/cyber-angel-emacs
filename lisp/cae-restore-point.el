@@ -41,6 +41,7 @@
                   er/mark-text-paragraph
                   er/mark-org-element-parent
                   er/mark-symbol-with-prefix
+                  cae-mark-comment
                   View-scroll-half-page-forward
                   View-scroll-half-page-backward
                   chatgpt-shell-mark-at-point-dwim
