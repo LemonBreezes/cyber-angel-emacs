@@ -1,6 +1,7 @@
 ;;; private/misc-applications/config.el -*- lexical-binding: t; -*-
 
 (defvar +misc-applications-lisp-files nil)
+(defvar +misc-applications-map (make-sparse-keymap))
 (define-prefix-command '+misc-applications-map)
 (defvar +misc-applications-prefix "a")
 (map! :leader
@@ -109,8 +110,7 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq unread-command-events
-              (listify-key-sequence (kbd doom-leader-alt-key)
-                                    (kbd +misc-applications-prefix)))
+              (list ?\C-c ?a))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
