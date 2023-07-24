@@ -14,13 +14,6 @@
     (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
       "n" "Notifications"))
   :config
-  (defun stack-notifications (&optional hide)
-    (mapconcat (lambda (notification)
-                 (let ((app-name (ednc-notification-app-name notification)))
-                   (unless (member app-name hide)
-                     (push app-name hide)
-                     (ednc-format-notification notification))))
-               (ednc-notifications) ""))
   (defun show-notification-in-buffer (old new)
     (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
       (with-current-buffer (get-buffer-create name)
@@ -30,6 +23,13 @@
                   (pop-to-buffer (current-buffer)))
           (kill-buffer)))))
   (set-popup-rule! "*Notification [0-9]+" :side 'top :size #'+popup-shrink-to-fit :select nil)
+  ;;(defun stack-notifications (&optional hide)
+  ;;  (mapconcat (lambda (notification)
+  ;;               (let ((app-name (ednc-notification-app-name notification)))
+  ;;                 (unless (member app-name hide)
+  ;;                   (push app-name hide)
+  ;;                   (ednc-format-notification notification))))
+  ;;             (ednc-notifications) ""))
   ;;(add-to-list 'global-mode-string
   ;;             '((:eval (stack-notifications))))
   ;;(add-hook 'ednc-notification-presentation-functions
