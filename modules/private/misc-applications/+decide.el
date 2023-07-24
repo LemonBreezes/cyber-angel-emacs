@@ -5,4 +5,5 @@
   :init
   (map! :leader
         :prefix +misc-applications-insert-prefix
-        "d" #'+decide))
+        "d" (if (featurep 'decide)
+                #'decide-prefix-map #'+decide)))
