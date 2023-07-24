@@ -3,9 +3,14 @@
 (use-package! lorem-ipsum
   :defer t
   :init
-  (map! :leader
-        (:prefix +misc-applications-insert-prefix
-         (:prefix ("l" . "lorem-ipsum")
-          "l" #'lorem-ipsum-insert-list
-          "p" #'lorem-ipsum-insert-paragraphs
-          "s" #'lorem-ipsum-insert-sentences))))
+  (map! :map +misc-applications-insert-map
+        (:prefix "l"
+         "l" #'lorem-ipsum-insert-list
+         "p" #'lorem-ipsum-insert-paragraphs
+         "s" #'lorem-ipsum-insert-sentences))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-insert-map
+      "l" "lorem-ipsum"
+      "l l" "lorem-ipsum-insert-list"
+      "l p" "lorem-ipsum-insert-paragraphs"
+      "l s" "lorem-ipsum-insert-sentences")))
