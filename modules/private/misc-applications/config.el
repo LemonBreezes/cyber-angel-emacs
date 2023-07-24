@@ -76,7 +76,7 @@
               '(;; Standalone apps
                 "+alarm-clock"
                 "+elfeed"
-                ;;"+my-repo-pins"
+                "+my-repo-pins"
 
                 ;; Use external APIs or apps
                 ;;"+elcord"
