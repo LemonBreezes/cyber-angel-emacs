@@ -196,6 +196,7 @@
               (cae-defun +wttrin-setup-h (&rest _)
                 (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
 
+
 ;;; System
 
 (use-package! daemons
@@ -301,6 +302,7 @@
         "<f6>" #'+trashed-hydra/body)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
 
+
 ;;; Insert
 
 (use-package! helm-rage
@@ -438,6 +440,7 @@
       "w" "whereto compass"
       "W" "whereto relative")))
 
+
 ;;; Games
 
 (use-package! bubbles
@@ -606,6 +609,7 @@
 ;; just says some green text slowly one line at a time.
 ;; https://github.com/vreeze/zone-matrix-wake-up
 
+
 ;;; Emacs OS
 
 (use-package! ednc
