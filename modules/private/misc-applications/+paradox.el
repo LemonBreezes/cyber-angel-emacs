@@ -3,9 +3,11 @@
 (use-package! paradox
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-system-prefix
+  (map! :map +misc-applications-system-map
         :desc "emacs packages" "p" #'paradox-list-packages)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "p" "emacs packages"))
   :config
   (paradox-enable)
   (map! :map paradox-menu-mode-map
