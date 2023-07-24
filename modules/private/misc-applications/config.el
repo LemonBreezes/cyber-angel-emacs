@@ -113,6 +113,7 @@
         (map! "<f13>" #'+misc-applications-map)
         (setq unread-command-events
               (list 'f13))
+        ;;
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
         (run-with-idle-timer
