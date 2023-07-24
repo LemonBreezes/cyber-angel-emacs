@@ -114,9 +114,7 @@
                              (listify-key-sequence (kbd doom-leader-key)))))
         (run-at-time 0.02 nil
                      (lambda ()
-                       (setq unread-command-events
-                             (nconc (listify-key-sequence (kbd +misc-applications-prefix))
-                                    unread-command-events))))
+                       (execute-kbd-macro (kbd +misc-applications-prefix))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
