@@ -6,7 +6,6 @@
 (when (modulep! :app rss)
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
-(package! ement)
 (package! my-repo-pins :recipe
   (:host github :repo "NinjaTrappeur/my-repo-pins"
    :build (:not compile)))
