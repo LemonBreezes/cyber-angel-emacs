@@ -2,4 +2,7 @@
 
 (use-package! decide
   :defer t
-  :init)
+  :init
+  (map! :leader
+        :prefix +misc-applications-insert-prefix
+        "d" #'decide-prefix-map))
