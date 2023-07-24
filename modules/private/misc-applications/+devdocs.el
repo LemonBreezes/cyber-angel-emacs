@@ -5,12 +5,12 @@
   :init
   (map! :map +misc-applications-lookup-map
         (:prefix "d"
-          "p" #'devdocs-peruse
-          "i" #'devdocs-install
-          "d" #'devdocs-delete
-          "s" #'devdocs-lookup
-          "w" #'devdocs-search
-          "u" #'devdocs-update-all))
+         "p" #'devdocs-peruse
+         "i" #'devdocs-install
+         "d" #'devdocs-delete
+         "s" #'devdocs-lookup
+         "w" #'devdocs-search
+         "u" #'devdocs-update-all))
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-lookup-map
       "d" "devdocs"
