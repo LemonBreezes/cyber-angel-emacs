@@ -21,8 +21,7 @@
     (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
       (with-current-buffer (get-buffer-create name)
         (if new (let ((inhibit-read-only t))
-                  (erase-buffer)
-                  (ednc-view-mode)
+                  (if old (erase-buffer) (ednc-view-mode))
                   (set-buffer-multibyte nil)
                   (insert (concat (ednc-format-notification new)
                                   "\n"
@@ -37,7 +36,7 @@
                (ednc-notifications)))
   (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
 
-  (defun stack-notifications (&optional hide)
+  (defun +ednc-stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
                  (let ((app-name (ednc-notification-app-name notification)))
                    (unless (member app-name hide)
@@ -45,7 +44,7 @@
                      (ednc-format-notification notification))))
                (ednc-notifications) ""))
   (add-to-list 'global-mode-string
-               '((:eval (stack-notifications))))
+               '((:eval (+ednc-stack-notifications))))
   (add-hook 'ednc-notification-presentation-functions
             (lambda (&rest _) (force-mode-line-update t)))
   (map! :map ednc-view-mode-map
