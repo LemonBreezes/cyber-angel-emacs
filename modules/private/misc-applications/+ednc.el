@@ -1,8 +1,7 @@
 ;;; private/misc-applications/+ednc.el -*- lexical-binding: t; -*-
 
 (use-package! ednc
-  :when (and (cae-display-graphic-p)
-             (not (getenv "SSH_TTY")))
+  :when (cae-display-graphic-p)
   :defer t
   :init
   (defun +ednc-load-h ()
