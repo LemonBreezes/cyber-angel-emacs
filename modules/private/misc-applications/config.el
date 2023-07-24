@@ -79,7 +79,7 @@
                 "+my-repo-pins"
 
                 ;; Use external APIs or apps
-                ;;"+elcord"
+                "+elcord"
                 ;;"+leetcode"
                 ;;"+somafm"
                 ;;"+wttrin"
