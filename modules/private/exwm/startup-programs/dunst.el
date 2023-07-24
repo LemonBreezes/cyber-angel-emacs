@@ -47,6 +47,6 @@
        (cmd! (let ((shell-file-name "/bin/sh"))
                (quiet! (shell-command "dunstctl context" nil nil))))))
 
-;;(if (process-live-p startup/dunst-process)
-;;    (startup/restart-dunst)
-;;  (startup/start-dunst))
+(if (process-live-p startup/dunst-process)
+    (startup/restart-dunst)
+  (startup/start-dunst))
