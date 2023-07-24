@@ -122,6 +122,9 @@
   (make-directory "~/code-root" t)
   (setq my-repo-pins-code-root "~/code-root"))
 
+
+;;; External apps
+
 (use-package! elcord
   :hook (doom-first-file . elcord-mode)
   :when (and (cae-display-graphic-p)
@@ -192,6 +195,8 @@
   (advice-add #'wttrin-query :after
               (cae-defun +wttrin-setup-h (&rest _)
                 (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
+
+;;; System
 
 (use-package! daemons
   :defer t
@@ -295,6 +300,8 @@
   (map! :map trashed-mode-map
         "<f6>" #'+trashed-hydra/body)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
+
+;;; Insert
 
 (use-package! helm-rage
   :defer t
@@ -431,6 +438,8 @@
       "w" "whereto compass"
       "W" "whereto relative")))
 
+;;; Games
+
 (use-package! bubbles
   :defer t
   :init
@@ -504,6 +513,8 @@
   (map! :map autotetris-mode-map
         "a" nil))                       ;Not sure what `autotetris-move' even
                                         ;does to be honest.
+
+;;; Eyecandy
 
 (use-package! fireplace
   :defer t
