@@ -6,7 +6,7 @@
              (or (modulep! :private helm)
                  (modulep! :completion helm)))
   :init
-  (map! :prefix +misc-applications-system-prefix
+  (map! :map +misc-applications-system-map
         "s" #'helm-system-packages)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
