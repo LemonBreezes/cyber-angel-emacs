@@ -40,6 +40,7 @@
           (modulep! :completion helm))
   (package! helm-rage))
 (package! lorem-ipsum)
+(package! password-generator)
 
 ;; Lookup
 (package! devdocs)
