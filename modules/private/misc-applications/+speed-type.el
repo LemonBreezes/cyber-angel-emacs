@@ -3,8 +3,7 @@
 (use-package! speed-type
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
+  (map! :map +misc-applications-games-map
         "T" #'speed-type-text)
   :config
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
