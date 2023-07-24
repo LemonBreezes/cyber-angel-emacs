@@ -9,10 +9,13 @@
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   (map! :map +misc-applications-emacs-os-map
-        "n" #'+ednc-show-notifications)
+        "ns" #'+ednc-show-notifications
+        "nd" #'+ednc-dismiss-all-notifications)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
-      "n" "Notifications"))
+      "n" "notifications"
+      "ns" "show notifications"
+      "nd" "dismiss all notifications"))
   :config
   (defun +ednc-show-notification-in-buffer (old new)
     (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
@@ -26,7 +29,7 @@
                   (delete-blank-lines)
                   (display-buffer (current-buffer)))
           (kill-buffer)))))
-  (defun ednc-dismiss-all-notifications ()
+  (defun +ednc-dismiss-all-notifications ()
     (interactive)
     (cl-mapcar (lambda (notification)
                  (ednc-dismiss-notification notification))
