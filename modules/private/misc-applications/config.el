@@ -32,14 +32,14 @@
         (define-prefix-command '+misc-applications-standalone-apps-map)
         (define-prefix-command '+misc-applications-insert-map)
         (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
-        (map! :map +misc-applications-map
-              +misc-applications-lookup-prefix #'+misc-applications-lookup-map
-              +misc-applications-games-prefix #'+misc-applications-games-map
-              +misc-applications-eyecandy-prefix #'+misc-applications-eyecandy-map
-              +misc-applications-system-prefix #'+misc-applications-system-map
-              +misc-applications-external-apps-prefix #'+misc-applications-external-apps-map
-              +misc-applications-standalone-apps-prefix #'+misc-applications-standalone-apps-map
-              +misc-applications-insert-prefix #'+misc-applications-insert-map)
+        (eval `(map! :map +misc-applications-map
+                    ,+misc-applications-lookup-prefix #'+misc-applications-lookup-map
+                    ,+misc-applications-games-prefix #'+misc-applications-games-map
+                    ,+misc-applications-eyecandy-prefix #'+misc-applications-eyecandy-map
+                    ,+misc-applications-system-prefix #'+misc-applications-system-map
+                    ,+misc-applications-external-apps-prefix #'+misc-applications-external-apps-map
+                    ,+misc-applications-standalone-apps-prefix #'+misc-applications-standalone-apps-map
+                    ,+misc-applications-insert-prefix #'+misc-applications-insert-map))
         (which-key-add-keymap-based-replacements '+misc-applications-map
           "l" "lookup"
           "s" "system"
