@@ -108,7 +108,7 @@
 
         (dolist (file +misc-applications-lisp-files)
           (load! file))
-        (run-at-time 0.01 nil
+        (run-at-time 0.05 nil
                      (lambda ()
                        (setq unread-command-events
                              (listify-key-sequence (kbd (concat doom-leader-key " " +misc-applications-prefix))))))
