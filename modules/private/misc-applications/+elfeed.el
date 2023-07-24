@@ -1,7 +1,7 @@
 ;;; private/misc-applications/+elfeed.el -*- lexical-binding: t; -*-
 
 (when (modulep! :app rss)
-  (map! :leader :prefix +misc-applications-standalone-apps-prefix
+  (map! :map +misc-applications-standalone-apps-map
         "r" #'=rss)
 
   (after! elfeed
