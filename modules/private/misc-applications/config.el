@@ -8,7 +8,7 @@
 (defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
 (defvar +misc-applications-system-prefix (concat +misc-applications-prefix "s"))
 (defvar +misc-applications-external-prefix (concat +misc-applications-prefix "x"))
-(defvar +misc-applications-standalone-prefix (concat +misc-applications-prefix "t"))
+(defvar +misc-applications-standalone-apps-prefix (concat +misc-applications-prefix "t"))
 (defvar doom-picture-dir "~/Pictures/")
 (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
 (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
@@ -16,7 +16,7 @@
 (map! :leader :prefix (+misc-applications-games-prefix . "games"))
 (map! :leader :prefix (+misc-applications-eyecandy-prefix . "eyecandy"))
 (map! :leader :prefix (+misc-applications-external-prefix . "external"))
-(map! :leader :prefix (+misc-applications-standalone-prefix . "standalone apps"))
+(map! :leader :prefix (+misc-applications-standalone-apps-prefix . "standalone apps"))
 
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
