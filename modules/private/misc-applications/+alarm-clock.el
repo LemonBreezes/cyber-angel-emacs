@@ -9,6 +9,7 @@
         "A" #'alarm-clock-list-view)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "a" "alarms"
       "a a" "set alarm"
       "a A" "list alarms"))
   :config
