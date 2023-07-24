@@ -3,5 +3,6 @@
 ;;;###autoload
 (defun +ednc-show-notifications ()
   (interactive)
+  (require 'ednc)
   (let ((buf (get-buffer-create ednc-log-name)))
     (pop-to-buffer buf)))
