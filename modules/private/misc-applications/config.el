@@ -19,7 +19,8 @@
             ("system" "s")
             ("external-apps" "x")
             ("standalone-apps" "t")
-            ("insert" "i")))
+            ("insert" "i")
+            ("emacs os" "o")))
 
         (mapc (lambda (app-type)
                 (let* ((name (car app-type))
