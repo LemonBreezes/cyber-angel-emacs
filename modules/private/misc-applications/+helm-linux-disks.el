@@ -6,6 +6,7 @@
              (or (modulep! :private helm)
                  (modulep! :completion helm)))
   :init
-  (map! :leader
-        :prefix +misc-applications-system-prefix
-        :desc "disks" "D" #'helm-linux-disks))
+  (map! :map +misc-applications-system-map
+        :desc "disks" "D" #'helm-linux-disks)
+  (which-key-add-keymap-based-replacements +misc-applications-system-map
+    "D" "disks"))
