@@ -5,7 +5,8 @@
 (defvar +misc-applications-prefix "a")
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
-(map! :leader +misc-applications-prefix
+(map! :leader
+      :desc "+misc-applications" +misc-applications-prefix
       (defun +misc-applications-prefix ()
         (interactive)
         (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "l"))
