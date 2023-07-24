@@ -3,8 +3,7 @@
 (use-package! x86-lookup
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-lookup-prefix
+  (map! :map +misc-applications-lookup-map
         "x" #'x86-lookup)
   :config
   (setq
