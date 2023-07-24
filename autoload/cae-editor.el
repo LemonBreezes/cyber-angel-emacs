@@ -189,9 +189,7 @@ but when no region is selected and the cursor is in a 'string' syntax
 mark the string and call `edit-indirect-region' with it."
   (interactive)
   (cond ((region-active-p)
-         (call-interactively #'edit-indirect-region)
-         (when (eq major-mode 'fundamental-mode)
-           (funcall (buffer-local-value 'major-mode (overlay-buffer edit-indirect--overlay)))))
+         (call-interactively #'edit-indirect-region))
         ((and (derived-mode-p 'org-mode)
               (ignore-error 'user-error (call-interactively #'org-edit-special))))
         (t
