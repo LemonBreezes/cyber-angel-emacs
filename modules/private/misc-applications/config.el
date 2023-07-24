@@ -75,7 +75,7 @@
         (setq +misc-applications-lisp-files
               '(;; Standalone apps
                 "+alarm-clock"
-                ;;"+elfeed"
+                "+elfeed"
                 ;;"+my-repo-pins"
 
                 ;; Use external APIs or apps
