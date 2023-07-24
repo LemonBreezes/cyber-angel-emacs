@@ -62,6 +62,9 @@
         "+helm-rage"
         "+lorem-ipsum"
         "+password-generator"
+        "+uuidgen"
+
+        ;; TODO Quotes
 
         ;; Lookup
         "+devdocs"
