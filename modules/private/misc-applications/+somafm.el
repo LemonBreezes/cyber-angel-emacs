@@ -4,7 +4,7 @@
   :init
   (map! :leader
         :prefix +misc-applications-external-apps-prefix
-        "@" #'+somafm)
+        "s" #'+somafm)
   :config
   (map! :map somafm-mode-map
         "<f6>" #'+somafm-hydra/body))
