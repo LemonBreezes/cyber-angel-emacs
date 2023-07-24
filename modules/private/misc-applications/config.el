@@ -29,7 +29,7 @@
                        (var-map (concat "+misc-applications-" name "-map")))
                   (set (intern var-prefix) prefix)
                   (set (intern var-map) (make-sparse-keymap))
-                  (define-prefix-command var-map)
+                  (define-prefix-command (intern var-map))
                   (define-key +misc-applications-map (kbd var-prefix) (intern var-map))))
               application-types)
 
