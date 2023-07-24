@@ -3,6 +3,5 @@
 (use-package! dunnet
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
+  (map! :map +misc-applications-games-map
         "d" #'dunnet))
