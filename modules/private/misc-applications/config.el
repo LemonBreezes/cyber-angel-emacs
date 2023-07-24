@@ -95,4 +95,8 @@
         "+proced"))
 
 (dolist (file +misc-applications-lisp-files)
+  (when (or (not (file-exists-p (concat (dir!) file ".elc")))
+            (file-newer-than-file-p (concat (dir!) file ".el")
+                                    (concat (dir!) file ".elc")))
+    (byte-compile-file (concat (dir!) file ".el")))
   (load! file))
