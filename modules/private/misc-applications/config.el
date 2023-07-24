@@ -1,5 +1,7 @@
 ;;; private/misc-applications/config.el -*- lexical-binding: t; -*-
 
+;;; Preamble
+
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
 (define-prefix-command '+misc-applications-map)
@@ -53,6 +55,381 @@
         "<f6>" #'+timer-list-hydra/body))
 (map! :map process-menu-mode-map
       "<f6>" #'+list-processes-hydra/body)
+
+
+;;; Standalone apps
+
+(use-package! alarm-clock
+  :defer t
+  :init
+  (map! :map +misc-applications-standalone-apps-map
+        :prefix "a"
+        "a" #'alarm-clock-set
+        "A" #'alarm-clock-list-view)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "a" "alarms"
+      "a a" "set alarm"
+      "a A" "list alarms"))
+  :config
+  (map! :leader
+        :prefix +misc-applications-prefix
+        (:prefix ("a" . "alarms")
+         "k" #'alarm-clock-kill))
+  (setq alarm-clock-cache-file
+        (expand-file-name "alarm-clock.cache" doom-cache-dir))
+  (alarm-clock--turn-autosave-on))
+
+(use-package! elfeed
+  :when (modulep! :app rss)
+  :defer t
+  :init
+  (map! :map +misc-applications-standalone-apps-map
+        "r" #'=rss)
+  :config
+  (defalias 'elfeed-toggle-star
+    (elfeed-expose #'elfeed-search-toggle-all 'star))
+  (push elfeed-db-directory recentf-exclude)
+  (map! :map elfeed-show-mode-map
+        "?" #'describe-mode
+        :map elfeed-search-mode-map
+        "?" #'describe-mode
+        "q" #'+elfeed-quit)
+  (set-popup-rule! (format "^%s$" (regexp-quote elfeed-log-buffer-name))
+    :size 0.3 :side 'right :select nil :quit t :ttl nil)
+  (when (modulep! :ui hydra)
+    (map! :map elfeed-search-mode-map
+          "<f6>" #'cae-elfeed-hydra/body
+          ;; Elfeed maps `h' to `describe-mode', which is not as good.
+          "h" #'cae-elfeed-hydra/body))
+
+  (use-package! elfeed-tube
+    :config
+    (elfeed-tube-setup)
+    (map! :map elfeed-show-mode-map
+          "F" #'elfeed-tube-fetch
+          [remap save-buffer] #'elfeed-tube-save
+          :map elfeed-search-mode-map
+          "F" #'elfeed-tube-fetch
+          [remap save-buffer] #'elfeed-tube-save)))
+
+(use-package! my-repo-pins
+  :defer t
+  :init
+  (map! :map +misc-applications-standalone-apps-map
+        "j" #'my-repo-pins)
+  :config
+  (make-directory "~/code-root" t)
+  (setq my-repo-pins-code-root "~/code-root"))
+
+(use-package! elcord
+  :hook (doom-first-file . elcord-mode)
+  :when (and (cae-display-graphic-p)
+             (not (or (memq system-type '(cygwin windows-nt ms-dos))
+                      (getenv "SSH_TTY")
+                      (getenv "WSL_DISTRO_NAME")))
+             ;; I only use this on my desktop machine when EXWM is running.
+             (modulep! :private exwm))
+  :config
+  (setq elcord-quiet t
+        elcord-use-major-mode-as-main-icon t
+        elcord-refresh-rate 10
+        elcord-idle-timer 300
+        elcord-idle-message "Going for a walk...")
+  (require 'parent-mode)
+  (defadvice! +elcord--buffer-boring-p-a (buffer-name)
+    :before-until #'elcord--buffer-boring-p
+    (or (string-match-p "^\\*\\(doom\\|Messages\\|scratch\\|dashboard\\|elfeed\\|vterm\\|eshell\\|terminal\\|magit\\|help\\|Compile-Log\\|lsp\\|treemacs\\|\\*\\)" buffer-name)
+        (parent-mode-is-derived-p (buffer-local-value 'major-mode (get-buffer buffer-name))
+                                  'exwm-mode))))
+
+(use-package! leetcode
+  :defer t
+  :init
+  (defvar +leetcode-workspace-name "*leetcode*"
+    "The name of the workspace to use for leetcode.")
+  (when (memq system-type '(cygwin windows-nt ms-dos))
+    (advice-add #'leetcode--install-my-cookie :override #'ignore))
+  (map! :map +misc-applications-external-apps-map
+        "l" #'+leetcode)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+      "l" "LeetCode"))
+  :config
+  (map! :map leetcode--problems-mode-map
+        "q" #'+leetcode-soft-quit
+        "Q" #'+leetcode-quit
+        "<f6>" #'+leetcode-problems-hydra/body
+        :map leetcode--problem-detail-mode-map
+        "o" #'link-hint-open-link)
+  (add-hook 'leetcode-solution-mode-hook
+            (lambda ()
+              ;; Flycheck will emit errors because the code does not have any
+              ;; import/include/etc statements. Besides, we can't use Flycheck
+              ;; in an interview anyway.
+              (when (bound-and-true-p flycheck-mode)
+                (flycheck-mode -1))
+              ;; Copilot is basically cheating, so disable it too.
+              (when (bound-and-true-p copilot-mode)
+                (copilot-mode -1))))
+  (setq leetcode-save-solutions t)
+  (setq leetcode-directory "~/src/leetcode"))
+
+(use-package! somafm
+  :init
+  (map! :map +misc-applications-external-apps-map
+        "s" #'+somafm)
+  :config
+  (map! :map somafm-mode-map
+        "<f6>" #'+somafm-hydra/body))
+
+(use-package! wttrin
+  :defer t
+  :init
+  (map! :map +misc-applications-external-apps-map
+        "w" #'wttrin)
+  :config
+  (advice-add #'wttrin-query :after
+              (cae-defun +wttrin-setup-h (&rest _)
+                (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
+
+(use-package! daemons
+  :defer t
+  :when (eq system-type 'gnu/linux)
+  :init
+  (map! :map +misc-applications-system-map
+        "u" #'daemons)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "u" "services"))
+  :config
+  (setq daemons-always-sudo t
+        daemons-show-output-in-minibuffer t))
+
+(use-package! disk-usage
+  :defer t
+  :init
+  (map! :map +misc-applications-system-map
+        "d" #'disk-usage)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "d" "disk usage"))
+  :config
+  (map! :map disk-usage-mode-map
+        "<f6>" #'+disk-usage-hydra/body))
+
+(use-package! helm-linux-disks
+  :defer t
+  :when (and (eq system-type 'gnu/linux)
+             (or (modulep! :private helm)
+                 (modulep! :completion helm)))
+  :init
+  (map! :map +misc-applications-system-map
+        "D" #'helm-linux-disks)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "D" "disks")))
+
+(use-package! helm-system-packages
+  :defer t
+  :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
+             (or (modulep! :private helm)
+                 (modulep! :completion helm)))
+  :init
+  (map! :map +misc-applications-system-map
+        "s" #'helm-system-packages)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "s" "system packages")))
+
+(use-package! paradox
+  :defer t
+  :init
+  (map! :map +misc-applications-system-map
+        "p" #'paradox-list-packages)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "p" "emacs packages"))
+  :config
+  (paradox-enable)
+  (map! :map paradox-menu-mode-map
+        "<f6>" #'cae-paradox-menu-quick-help))
+
+(use-package! pulseaudio-control
+  :defer t
+  :when (and (eq system-type 'gnu/linux)
+             (executable-find "pactl"(and (eq system-type 'gnu/linux)
+                                          (executable-find "pactl"))))
+  :init
+  (map! :map ctl-x-map
+        "/" (cmd!
+             ;; Lazy load `pulseaudio-control'.
+             (pulseaudio-control-default-keybindings)
+             (setq unread-command-events (list ?\C-x ?/))
+             (setq which-key-inhibit t)
+             (add-transient-hook! 'pre-command-hook
+               (setq which-key-inhibit nil))
+             (run-with-idle-timer
+              which-key-idle-delay nil
+              (lambda ()
+                (when which-key-inhibit
+                  (which-key-show-keymap 'pulseaudio-control-map t))))))
+  :config
+  (after! which-key
+    (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist))
+  (setq pulseaudio-control-use-default-sink t)
+  (pulseaudio-control-default-keybindings))
+
+(use-package! trashed
+  :defer t
+  :init
+  (map! :map +misc-applications-system-map
+        "t" #'trashed)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "t" "trash files"))
+  :config
+  (advice-add #'trashed :around #'+trashed-revert-buffer-a)
+  (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
+  (map! :map trashed-mode-map
+        "<f6>" #'+trashed-hydra/body)
+  (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
+
+(use-package! helm-rage
+  :defer t
+  :when (or (modulep! :private helm)
+            (modulep! :completion helm))
+  :init
+  (map! :map +misc-applications-insert-map
+        "r" #'helm-rage))
+
+(use-package! lorem-ipsum
+  :defer t
+  :init
+  (map! :map +misc-applications-insert-map
+        (:prefix "l"
+         "l" #'lorem-ipsum-insert-list
+         "p" #'lorem-ipsum-insert-paragraphs
+         "s" #'lorem-ipsum-insert-sentences))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-insert-map
+      "l" "lorem-ipsum"
+      "l l" "lorem-ipsum-insert-list"
+      "l p" "lorem-ipsum-insert-paragraphs"
+      "l s" "lorem-ipsum-insert-sentences")))
+
+(use-package! password-generator
+  :defer t
+  :init
+  (map! :map +misc-applications-insert-map
+        (:prefix "p"
+         "c" #'password-generator-custom
+         "s" #'password-generator-simple
+         "t" #'password-generator-strong
+         "n" #'password-generator-numeric
+         "p" #'password-generator-paranoid
+         "h" #'password-generator-phonetic))
+  (after! which-key
+    (which-key-add-keymap-based-replacements
+      +misc-applications-insert-map
+      "p" "password-generator"
+      "pc" "custom"
+      "ps" "simple"
+      "pt" "strong"
+      "pn" "numeric"
+      "pp" "paranoid"
+      "ph" "phonetic")))
+
+(use-package! uuidgen
+  :defer t
+  :init
+  (map! :map +misc-applications-insert-map
+        "u" #'uuidgen))
+
+(use-package! decide
+  :defer t
+  :init
+  (map! :map +misc-applications-insert-map
+        (:prefix "d"
+         "?" #'decide-dwim-insert
+         "+" #'decide-for-me-likely
+         "-" #'decide-for-me-unlikely
+         "d" #'decide-roll-dice
+         "D" #'decide-roll-2d6
+         "3" #'decide-roll-1d3
+         "4" #'decide-roll-1d4
+         "5" #'decide-roll-1d5
+         "6" #'decide-roll-1d6
+         "7" #'decide-roll-1d7
+         "8" #'decide-roll-1d8
+         "9" #'decide-roll-1d9
+         "1 0" #'decide-roll-1d10
+         "1 2" #'decide-roll-1d12
+         "2 0" #'decide-roll-1d20
+         "%" #'decide-roll-1d100
+         "f" #'decide-roll-fate
+         "a" #'decide-roll-1dA
+         "A" #'decide-roll-2dA
+         "r" #'decide-random-range
+         "c" #'decide-random-choice
+         "t" #'decide-from-table
+         (:prefix "w"
+          "4" #'decide-whereto-compass-4
+          "6" #'decide-whereto-compass-6
+          "8" #'decide-whereto-compass-8
+          "1 0" #'decide-whereto-compass-10)
+         (:prefix "W"
+          "2" #'decide-whereto-relative-2
+          "3" #'decide-whereto-relative-3
+          "4" #'decide-whereto-relative-4
+          "6" 'decide-whereto-relative-6)
+         "RET" #'decide-question-return
+         "SPC" #'decide-question-space))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-insert-map
+      "d" "decide"
+      "dw" "whereto compass"
+      "dW" "whereto relative"))
+  (autoload #'decide-dwim-insert "decide" nil t)
+  (autoload #'decide-for-me-likely "decide" nil t)
+  (autoload #'decide-for-me-unlikely "decide" nil t)
+  (autoload #'decide-roll-dice "decide" nil t)
+  (autoload #'decide-roll-2d6 "decide" nil t)
+  (autoload #'decide-roll-1d3 "decide" nil t)
+  (autoload #'decide-roll-1d4 "decide" nil t)
+  (autoload #'decide-roll-1d5 "decide" nil t)
+  (autoload #'decide-roll-1d6 "decide" nil t)
+  (autoload #'decide-roll-1d7 "decide" nil t)
+  (autoload #'decide-roll-1d8 "decide" nil t)
+  (autoload #'decide-roll-1d9 "decide" nil t)
+  (autoload #'decide-roll-1d10 "decide" nil t)
+  (autoload #'decide-roll-1d12 "decide" nil t)
+  (autoload #'decide-roll-1d20 "decide" nil t)
+  (autoload #'decide-roll-1d100 "decide" nil t)
+  (autoload #'decide-roll-fate "decide" nil t)
+  (autoload #'decide-roll-1dA "decide" nil t)
+  (autoload #'decide-roll-2dA "decide" nil t)
+  (autoload #'decide-random-range "decide" nil t)
+  (autoload #'decide-random-choice "decide" nil t)
+  (autoload #'decide-from-table "decide" nil t)
+  (autoload #'decide-whereto-compass-4 "decide" nil t)
+  (autoload #'decide-whereto-compass-6 "decide" nil t)
+  (autoload #'decide-whereto-compass-8 "decide" nil t)
+  (autoload #'decide-whereto-compass-10 "decide" nil t)
+  (autoload #'decide-whereto-relative-2 "decide" nil t)
+  (autoload #'decide-whereto-relative-3 "decide" nil t)
+  (autoload #'decide-whereto-relative-4 "decide" nil t)
+  (autoload #'decide-whereto-relative-6 "decide" nil t)
+  (autoload #'decide-question-return "decide" nil t)
+  (autoload #'decide-question-space "decide" nil t)
+  :config
+  (map! :prefix +misc-applications-insert-prefix
+        "d" #'decide-prefix-map)
+  (after! which-key
+    (which-key-add-keymap-based-replacements decide-prefix-map
+      "w" "whereto compass"
+      "W" "whereto relative")))
 
 (setq +misc-applications-lisp-files
       '(;; Standalone apps
