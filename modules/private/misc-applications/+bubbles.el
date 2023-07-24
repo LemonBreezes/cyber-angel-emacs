@@ -3,8 +3,7 @@
 (use-package! bubbles
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
+  (map! :map +misc-applications-games-map
         "b" #'bubbles)
   :config
   (map! :map bubbles-mode-map
