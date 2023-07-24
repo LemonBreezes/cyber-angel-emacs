@@ -115,7 +115,8 @@
         (run-at-time 0.02 nil
                      (lambda ()
                        (setq unread-command-events
-                             (listify-key-sequence (kbd +misc-applications-prefix)))))
+                             (nconc (listify-key-sequence (kbd +misc-applications-prefix))
+                                    unread-command-events))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
