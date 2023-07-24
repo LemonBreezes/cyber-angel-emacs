@@ -109,7 +109,7 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq unread-command-events
-              (listify-key-sequence (kbd (concat doom-leader-key +misc-applications-prefix +misc-applications-prefix))))
+              (listify-key-sequence (kbd (concat doom-leader-key " " +misc-applications-prefix " " +misc-applications-prefix))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
