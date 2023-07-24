@@ -39,6 +39,7 @@
 (package! dwim-shell-command)
 (package! posimacs-shortdocs :recipe
   (:host github :repo "LemonBreezes/posimacs-shortdocs"))
+(package! wakatime-mode)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
