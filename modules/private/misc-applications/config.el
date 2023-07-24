@@ -43,7 +43,7 @@
           "i" "insert")
 
         (map! :leader
-              :prefix  +misc-applications-system-prefix
+              :map  +misc-applications-system-map
               "p" #'list-packages
               "e" #'list-processes
               "T" #'list-timers)
