@@ -4,7 +4,8 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-insert-prefix
-        "ll" #'lorem-ipsum-insert-list
-        "lp" #'lorem-ipsum-insert-paragraphs
-        "ls" #'lorem-ipsum-insert-sentences))
+        (:prefix +misc-applications-insert-prefix
+         :prefix ("l" . "lorem-ipsum")
+         "l" #'lorem-ipsum-insert-list
+         "p" #'lorem-ipsum-insert-paragraphs
+         "s" #'lorem-ipsum-insert-sentences)))
