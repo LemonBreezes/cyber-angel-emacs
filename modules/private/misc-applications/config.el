@@ -58,7 +58,7 @@
         "+pulseaudio-control"
         "+trashed"
 
-        ;; Insert text
+        ;; Insert
         ;; TODO Add `helm-rage' and `lorem-ipsum' to this list.
 
         ;; Lookup
