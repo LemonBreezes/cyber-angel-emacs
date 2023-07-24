@@ -3,8 +3,7 @@
 (use-package! zone
   :defer-incrementally t
   :init
-  (map! :leader
-        :prefix +misc-applications-eyecandy-prefix
+  (map! :map +misc-applications-eyecandy-map
         "z" #'zone-choose)
   :config
   ;; remove not interesting programs
