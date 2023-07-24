@@ -2,6 +2,7 @@
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
+(define-prefix-command '+misc-applications-map)
 (defvar +misc-applications-prefix "a")
 (map! :leader
       :desc "+misc-applications" +misc-applications-prefix
@@ -17,6 +18,7 @@
         (defvar +misc-applications-standalone-apps-prefix (concat +misc-applications-prefix "t"))
         (defvar +misc-applications-insert-prefix (concat +misc-applications-prefix "i"))
         (defvar doom-picture-dir "~/Pictures/")
+        (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
         (map! :leader :prefix (+misc-applications-prefix . "misc-applications"))
         (map! :leader :prefix (+misc-applications-lookup-prefix . "lookup"))
         (map! :leader :prefix (+misc-applications-system-prefix . "system"))
@@ -99,4 +101,14 @@
                 "+proced"))
 
         (dolist (file +misc-applications-lisp-files)
-          (load! file))))
+          (load! file))
+        (setq unread-command-events
+              (listify-key-sequence (kbd (concat doom-leader-key " " +misc-applications-prefix))))
+        (setq which-key-inhibit t)
+        (add-transient-hook! 'pre-command-hook
+          (setq which-key-inhibit nil))
+        (run-with-idle-timer
+         which-key-idle-delay nil
+         (lambda ()
+           (when which-key-inhibit
+             (which-key-show-keymap 'org-ai-global-mode-prefix-map t))))))
