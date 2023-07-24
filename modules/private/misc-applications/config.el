@@ -63,6 +63,7 @@
         "+lorem-ipsum"
         "+password-generator"
         "+uuidgen"
+        "+decide"
 
         ;; TODO Quotes
 
