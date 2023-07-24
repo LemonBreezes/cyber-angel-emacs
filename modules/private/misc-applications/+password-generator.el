@@ -3,12 +3,21 @@
 (use-package! password-generator
   :defer t
   :init
-  (map! :leader
-        (:prefix +misc-applications-insert-prefix
-         (:prefix ("p" . "password-generator")
-          "c" #'password-generator-custom
-          "s" #'password-generator-simple
-          "t" #'password-generator-strong
-          "n" #'password-generator-numeric
-          "p" #'password-generator-paranoid
-          "h" #'password-generator-phonetic))))
+  (map! :map +misc-applications-insert-map
+        (:prefix "p"
+         "c" #'password-generator-custom
+         "s" #'password-generator-simple
+         "t" #'password-generator-strong
+         "n" #'password-generator-numeric
+         "p" #'password-generator-paranoid
+         "h" #'password-generator-phonetic))
+  (after! which-key
+    (which-key-add-keymap-based-replacements
+      +misc-applications-insert-map
+      "p" "password-generator"
+      "pc" "custom"
+      "ps" "simple"
+      "pt" "strong"
+      "pn" "numeric"
+      "pp" "paranoid"
+      "ph" "phonetic")))
