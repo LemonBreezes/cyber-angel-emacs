@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :map +misc-applications-system-map
-        :desc "emacs packages" "p" #'paradox-list-packages)
+        "p" #'paradox-list-packages)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "p" "emacs packages"))
