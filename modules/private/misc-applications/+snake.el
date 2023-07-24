@@ -3,8 +3,7 @@
 (use-package! snake
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-games-prefix
+  (map! :map +misc-applications-games-map
         "s" #'snake)
   :config
   (map! :map snake-mode-map
