@@ -27,6 +27,14 @@
         (map! :leader :prefix (+misc-applications-external-apps-prefix . "external apps"))
         (map! :leader :prefix (+misc-applications-standalone-apps-prefix . "standalone apps"))
         (map! :leader :prefix (+misc-applications-insert-prefix . "insert"))
+        (which-key-add-keymap-based-replacements '+misc-applications-map
+          "l" "lookup"
+          "s" "system"
+          "g" "games"
+          "e" "eyecandy"
+          "x" "external apps"
+          "t" "standalone apps"
+          "i" "insert")
 
         (map! :leader
               :prefix +misc-applications-prefix
