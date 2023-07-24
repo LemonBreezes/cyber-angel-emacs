@@ -33,6 +33,7 @@
               +misc-applications-external-apps-prefix #'+misc-applications-external-apps-map
               +misc-applications-standalone-apps-prefix #'+misc-applications-standalone-apps-map
               +misc-applications-insert-prefix #'+misc-applications-insert-map)
+        ;;
         (which-key-add-keymap-based-replacements '+misc-applications-map
           "l" "lookup"
           "s" "system"
