@@ -3,7 +3,6 @@
 (defvar +misc-applications-lisp-files nil)
 (define-prefix-command '+misc-applications-map)
 (defvar +misc-applications-prefix "a")
-(keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader
       :desc "+misc-applications" +misc-applications-prefix
       (defun +misc-applications-prefix ()
