@@ -5,6 +5,5 @@
   :when (or (modulep! :private helm)
             (modulep! :completion helm))
   :init
-  (map! :leader
-        :prefix +misc-applications-insert-prefix
+  (map! :map +misc-applications-insert-map
         "r" #'helm-rage))
