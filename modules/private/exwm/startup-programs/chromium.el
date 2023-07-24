@@ -70,5 +70,5 @@
 
 (if (process-live-p startup/chromium-process)
     (startup/restart-chromium)
-  (unless (getenv "SSH_TTY"))
-  (startup/start-chromium))
+  (unless (getenv "SSH_TTY")
+    (startup/start-chromium)))
