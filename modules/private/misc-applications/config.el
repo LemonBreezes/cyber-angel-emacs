@@ -112,8 +112,9 @@
         (setq unread-command-events
               (append unread-command-events
                       (listify-key-sequence
-                       (kbd doom-leader-alt-key)
-                       (kbd +misc-applications-prefix))))
+                       (concat (kbd +misc-applications-prefix)
+                               " "
+                               (kbd doom-leader-alt-key)))))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
