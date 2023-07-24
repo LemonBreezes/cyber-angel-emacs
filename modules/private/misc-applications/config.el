@@ -110,8 +110,7 @@
         (dolist (file +misc-applications-lisp-files)
           (load! file))
         (setq unread-command-events
-              (append unread-command-events
-                      (list ?\C-c ?a)))
+              (list ?\C-c ?a))
         (setq which-key-inhibit t)
         (add-transient-hook! 'pre-command-hook
           (setq which-key-inhibit nil))
