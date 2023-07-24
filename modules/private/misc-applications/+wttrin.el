@@ -3,8 +3,7 @@
 (use-package! wttrin
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-external-apps-prefix
+  (map! :map +misc-applications-external-apps-map
         "w" #'wttrin)
   :config
   (advice-add #'wttrin-query :after
