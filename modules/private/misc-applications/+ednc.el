@@ -23,7 +23,6 @@
                   (if old (erase-buffer) (ednc-view-mode))
                   (set-buffer-multibyte nil)
                   (insert (ednc-format-notification new t))
-                  (delete-blank-lines)
                   (display-buffer (current-buffer)))
           (kill-buffer)))))
   (defun +ednc-dismiss-all-notifications ()
