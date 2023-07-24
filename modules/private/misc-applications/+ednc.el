@@ -22,7 +22,7 @@
         (if new (let ((inhibit-read-only t))
                   (if old (erase-buffer) (ednc-view-mode))
                   (set-buffer-multibyte nil)
-                  (insert (concat (ednc-format-notification new t)))
+                  (insert (ednc-format-notification new t))
                   (delete-blank-lines)
                   (display-buffer (current-buffer)))
           (kill-buffer)))))
