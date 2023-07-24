@@ -224,7 +224,7 @@
          :side right :select nil :quit t :ttl 0)
         ("^\\*ednc-log\\*$" :size cae-popup-resize-help-buffer
          :side right :select nil :quit t :ttl nil)
-        ("*Notification [0-9]+" :side 'top :size #'+popup-shrink-to-fit
+        ("*Notification [0-9]+" :side top :size +popup-shrink-to-fit
          :select nil)
         ("^\\*tldr\\*$" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0)
