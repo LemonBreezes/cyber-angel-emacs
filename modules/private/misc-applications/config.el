@@ -95,7 +95,7 @@
         "+proced"))
 
 (run-with-idle-timer
- 5 nil
+ 3 nil
  (lambda ()
    (dolist (file +misc-applications-lisp-files)
      (load! file))))
