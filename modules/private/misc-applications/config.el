@@ -59,10 +59,11 @@
               "p" #'list-packages
               "e" #'list-processes
               "T" #'list-timers)
-        (which-key-add-keymap-based-replacements '+misc-applications-system-map
-          "p" "packages"
-          "e" "processes"
-          "T" "timers")
+        (after! which-key
+          (which-key-add-keymap-based-replacements '+misc-applications-system-map
+            "p" "packages"
+            "e" "processes"
+            "T" "timers"))
 
         (after! timer-list
           (map! :map timer-list-mode-map
