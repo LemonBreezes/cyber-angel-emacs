@@ -117,9 +117,3 @@
         ;; Emacs OS
         "+ednc"
         "+proced"))
-
-;;(dolist (file +misc-applications-lisp-files)
-;;  (load! file))
-;;(map! "<f13>" #'+misc-applications-map)
-;;(setq unread-command-events
-;;      (list 'f13))
