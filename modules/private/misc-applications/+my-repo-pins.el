@@ -4,7 +4,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
+        :prefix +misc-applications-standalone-apps-prefix
         "j" #'my-repo-pins)
   :config
   (make-directory "~/code-root" t)
