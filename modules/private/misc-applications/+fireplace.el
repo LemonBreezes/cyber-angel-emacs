@@ -3,8 +3,7 @@
 (use-package! fireplace
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-eyecandy-prefix
+  (map! :map +misc-applications-eyecandy-map
         "f" #'fireplace)
   :config
   (map! :map fireplace-mode-map
