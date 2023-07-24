@@ -2,8 +2,7 @@
 
 (use-package! somafm
   :init
-  (map! :leader
-        :prefix +misc-applications-external-apps-prefix
+  (map! :map +misc-applications-external-apps-map
         "s" #'+somafm)
   :config
   (map! :map somafm-mode-map
