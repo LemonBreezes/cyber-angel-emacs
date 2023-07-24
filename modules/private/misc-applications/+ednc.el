@@ -5,7 +5,6 @@
   :init
   (defun +ednc-load-h ()
     (and (require 'dbus nil t)
-         (dbus-ping :system "org.freedesktop.DBus")
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   (map! :map +misc-applications-emacs-os-map
