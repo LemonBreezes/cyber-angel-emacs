@@ -514,6 +514,7 @@
         "a" nil))                       ;Not sure what `autotetris-move' even
                                         ;does to be honest.
 
+
 ;;; Eyecandy
 
 (use-package! fireplace
@@ -604,6 +605,8 @@
 ;; This is another Zone referencing the Matrix movie but it's kind of boring. It
 ;; just says some green text slowly one line at a time.
 ;; https://github.com/vreeze/zone-matrix-wake-up
+
+;;; Emacs OS
 
 (use-package! ednc
   :when (cae-display-graphic-p)
