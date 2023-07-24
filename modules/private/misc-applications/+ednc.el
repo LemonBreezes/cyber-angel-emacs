@@ -8,6 +8,11 @@
          (dbus-ping :system "org.freedesktop.DBus")
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
+  (map! :map +misc-applications-emacs-os-map
+        :desc "Notifications" "n" #'+ednc-show-notifications)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
+      "n" "Notifications"))
   :config
   (defun stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
@@ -19,10 +24,7 @@
   (add-to-list 'global-mode-string
                '((:eval (stack-notifications))))
   (add-hook 'ednc-notification-presentation-functions
-    (lambda (&rest _) (force-mode-line-update t)))
-  (map! :leader
-        :prefix "o"
-        :desc "Notifications" "n" #'+ednc-show-notifications)
+            (lambda (&rest _) (force-mode-line-update t)))
   (map! :map ednc-view-mode-map
         "n" #'next-line
         "p" #'previous-line))
