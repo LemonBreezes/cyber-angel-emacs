@@ -9,7 +9,7 @@
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
   (map! :map +misc-applications-emacs-os-map
-        :desc "Notifications" "n" #'+ednc-show-notifications)
+        "n" #'+ednc-show-notifications)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
       "n" "Notifications"))
