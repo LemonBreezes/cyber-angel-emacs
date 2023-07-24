@@ -36,7 +36,9 @@
 (package! trashed)
 
 ;; Insert
-(package! helm-rage)
+(when (or (modulep! :private helm)
+          (modulep! :completion helm))
+  (package! helm-rage))
 (package! lorem-ipsum)
 
 ;; Lookup
