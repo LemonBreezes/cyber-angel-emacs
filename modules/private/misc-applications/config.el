@@ -111,4 +111,4 @@
          which-key-idle-delay nil
          (lambda ()
            (when which-key-inhibit
-             (which-key-show-keymap 'org-ai-global-mode-prefix-map t))))))
+             (which-key-show-keymap '+misc-applications-map t))))))
