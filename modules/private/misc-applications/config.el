@@ -10,51 +10,35 @@
         (interactive)
         ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
         (keymap-unset doom-leader-map +misc-applications-prefix t)
-        (defvar +misc-applications-lookup-prefix "l")
-        (defvar +misc-applications-games-prefix "g")
-        (defvar +misc-applications-eyecandy-prefix "e")
-        (defvar +misc-applications-system-prefix "s")
-        (defvar +misc-applications-external-apps-prefix "x")
-        (defvar +misc-applications-standalone-apps-prefix "t")
-        (defvar +misc-applications-insert-prefix "i")
-        (defvar +misc-applications-lookup-map (make-sparse-keymap))
-        (defvar +misc-applications-games-map (make-sparse-keymap))
-        (defvar +misc-applications-eyecandy-map (make-sparse-keymap))
-        (defvar +misc-applications-system-map (make-sparse-keymap))
-        (defvar +misc-applications-external-apps-map (make-sparse-keymap))
-        (defvar +misc-applications-standalone-apps-map (make-sparse-keymap))
-        (defvar +misc-applications-insert-map (make-sparse-keymap))
-        (define-prefix-command '+misc-applications-lookup-map)
-        (define-prefix-command '+misc-applications-games-map)
-        (define-prefix-command '+misc-applications-eyecandy-map)
-        (define-prefix-command '+misc-applications-system-map)
-        (define-prefix-command '+misc-applications-external-apps-map)
-        (define-prefix-command '+misc-applications-standalone-apps-map)
-        (define-prefix-command '+misc-applications-insert-map)
+
         (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
-        (define-key +misc-applications-map (kbd +misc-applications-lookup-prefix)
-          '+misc-applications-lookup-map)
-        (define-key +misc-applications-map (kbd +misc-applications-games-prefix)
-          '+misc-applications-games-map)
-        (define-key +misc-applications-map (kbd +misc-applications-eyecandy-prefix)
-          '+misc-applications-eyecandy-map)
-        (define-key +misc-applications-map (kbd +misc-applications-system-prefix)
-          '+misc-applications-system-map)
-        (define-key +misc-applications-map (kbd +misc-applications-external-apps-prefix)
-          '+misc-applications-external-apps-map)
-        (define-key +misc-applications-map (kbd +misc-applications-standalone-apps-prefix)
-          '+misc-applications-standalone-apps-map)
-        (define-key +misc-applications-map (kbd +misc-applications-insert-prefix)
-          '+misc-applications-insert-map)
+        (defvar application-types
+          '(("lookup" "l")
+            ("games" "g")
+            ("eyecandy" "e")
+            ("system" "s")
+            ("external-apps" "x")
+            ("standalone-apps" "t")
+            ("insert" "i")))
+
+        (mapc (lambda (app-type)
+                (let* ((name (car app-type))
+                       (prefix (cadr app-type))
+                       (var-prefix (concat "+misc-applications-" name "-prefix"))
+                       (var-map (concat "+misc-applications-" name "-map")))
+                  (set var-prefix prefix)
+                  (set var-map (make-sparse-keymap))
+                  (define-prefix-command var-map)
+                  (define-key +misc-applications-map (kbd var-prefix) (intern var-map))))
+              application-types)
+
         (after! which-key
-          (which-key-add-keymap-based-replacements '+misc-applications-map
-            "l" "lookup"
-            "s" "system"
-            "g" "games"
-            "e" "eyecandy"
-            "x" "external apps"
-            "t" "standalone apps"
-            "i" "insert"))
+          (mapc (lambda (app-type)
+                  (let* ((name (car app-type))
+                         (prefix (cadr app-type)))
+                    (which-key-add-keymap-based-replacements '+misc-applications-map
+                      prefix name)))
+                application-types))
 
         (map! :map +misc-applications-system-map
               "p" #'list-packages
