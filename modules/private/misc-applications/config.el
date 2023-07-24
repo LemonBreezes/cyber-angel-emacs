@@ -400,38 +400,19 @@
       "d" "decide"
       "dw" "whereto compass"
       "dW" "whereto relative"))
-  (autoload #'decide-dwim-insert "decide" nil t)
-  (autoload #'decide-for-me-likely "decide" nil t)
-  (autoload #'decide-for-me-unlikely "decide" nil t)
-  (autoload #'decide-roll-dice "decide" nil t)
-  (autoload #'decide-roll-2d6 "decide" nil t)
-  (autoload #'decide-roll-1d3 "decide" nil t)
-  (autoload #'decide-roll-1d4 "decide" nil t)
-  (autoload #'decide-roll-1d5 "decide" nil t)
-  (autoload #'decide-roll-1d6 "decide" nil t)
-  (autoload #'decide-roll-1d7 "decide" nil t)
-  (autoload #'decide-roll-1d8 "decide" nil t)
-  (autoload #'decide-roll-1d9 "decide" nil t)
-  (autoload #'decide-roll-1d10 "decide" nil t)
-  (autoload #'decide-roll-1d12 "decide" nil t)
-  (autoload #'decide-roll-1d20 "decide" nil t)
-  (autoload #'decide-roll-1d100 "decide" nil t)
-  (autoload #'decide-roll-fate "decide" nil t)
-  (autoload #'decide-roll-1dA "decide" nil t)
-  (autoload #'decide-roll-2dA "decide" nil t)
-  (autoload #'decide-random-range "decide" nil t)
-  (autoload #'decide-random-choice "decide" nil t)
-  (autoload #'decide-from-table "decide" nil t)
-  (autoload #'decide-whereto-compass-4 "decide" nil t)
-  (autoload #'decide-whereto-compass-6 "decide" nil t)
-  (autoload #'decide-whereto-compass-8 "decide" nil t)
-  (autoload #'decide-whereto-compass-10 "decide" nil t)
-  (autoload #'decide-whereto-relative-2 "decide" nil t)
-  (autoload #'decide-whereto-relative-3 "decide" nil t)
-  (autoload #'decide-whereto-relative-4 "decide" nil t)
-  (autoload #'decide-whereto-relative-6 "decide" nil t)
-  (autoload #'decide-question-return "decide" nil t)
-  (autoload #'decide-question-space "decide" nil t)
+  (dolist (f '(decide-dwim-insert decide-for-me-likely
+               decide-for-me-unlikely decide-roll-dice decide-roll-2d6
+               decide-roll-1d3 decide-roll-1d4 decide-roll-1d5 decide-roll-1d6
+               decide-roll-1d7 decide-roll-1d8 decide-roll-1d9 decide-roll-1d10
+               decide-roll-1d12 decide-roll-1d20 decide-roll-1d100
+               decide-roll-fate decide-roll-1dA decide-roll-2dA
+               decide-random-range decide-random-choice decide-from-table
+               decide-whereto-compass-4 decide-whereto-compass-6
+               decide-whereto-compass-8 decide-whereto-compass-10
+               decide-whereto-relative-2 decide-whereto-relative-3
+               decide-whereto-relative-4 decide-whereto-relative-6
+               decide-question-return decide-question-space))
+    (autoload f "decide" nil t))
   :config
   (map! :prefix +misc-applications-insert-prefix
         "d" #'decide-prefix-map)
