@@ -3,6 +3,5 @@
 (use-package! flames-of-freedom
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-eyecandy-prefix
+  (map! :map +misc-applications-eyecandy-map
         "F" #'flames-of-freedom-default))
