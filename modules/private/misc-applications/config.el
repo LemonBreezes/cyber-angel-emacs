@@ -41,7 +41,6 @@
       '(;; Standalone apps
         "+alarm-clock"
         "+elfeed"
-        "+ement"                        ; TODO
         "+my-repo-pins"
 
         ;; Use external APIs or apps
