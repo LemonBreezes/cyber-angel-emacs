@@ -341,12 +341,7 @@
   (use-package! pdf-view-pagemark
     :when (modulep! :tools pdf)
     :defer t :init
-    (add-hook 'pdf-view-mode-hook #'pdf-view-pagemark-mode))
-
-  (use-package! devil
-    :defer t :init
-    (global-devil-mode +1)
-    (map! "C-," #'global-devil-mode)))
+    (add-hook 'pdf-view-mode-hook #'pdf-view-pagemark-mode)))
 
 
 ;;; Tools
