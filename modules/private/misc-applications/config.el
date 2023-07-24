@@ -71,13 +71,13 @@
                 "+wttrin"
 
                 ;; System
-                "+daemons"
-                "+disk-usage"
-                "+helm-linux-disks"
-                "+helm-system-packages"
-                "+paradox"
-                "+pulseaudio-control"
-                "+trashed"
+                ;;"+daemons"
+                ;;"+disk-usage"
+                ;;"+helm-linux-disks"
+                ;;"+helm-system-packages"
+                ;;"+paradox"
+                ;;"+pulseaudio-control"
+                ;;"+trashed"
 
                 ;; Music TODO
                 ;; mpc
