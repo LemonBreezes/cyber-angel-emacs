@@ -3,11 +3,13 @@
 (use-package! know-your-http-well
   :defer t
   :init
-  (map! :leader
-        :prefix +misc-applications-lookup-prefix
-        (:prefix ("k" . "know-your-http-well")
+  (map! :map +misc-applications-lookup-map
+        (:prefix "k"
          "h" #'http-header
          "m" #'http-method
          "r" #'http-relation
          "s" #'http-status-code
-         "t" #'media-type)))
+         "t" #'media-type))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-lookup-map
+      "k" "know-your-http-well")))
