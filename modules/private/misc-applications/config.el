@@ -34,9 +34,9 @@
           "t" "standalone apps"
           "i" "insert")
 
-        (map! :leader
-              :prefix +misc-applications-prefix
-              "1" #'mpc)
+        ;;(map! :leader
+        ;;      :prefix +misc-applications-prefix
+        ;;      "1" #'mpc)
         (map! :leader
               :prefix  +misc-applications-system-prefix
               :desc "emacs packages" "p" #'list-packages
