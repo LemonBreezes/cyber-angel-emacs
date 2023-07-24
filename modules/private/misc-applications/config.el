@@ -7,6 +7,7 @@
 (keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader +misc-applications-prefix
       (defun +misc-applications-prefix ()
+        (interactive)
         (defvar +misc-applications-lookup-prefix (concat +misc-applications-prefix "l"))
         (defvar +misc-applications-games-prefix (concat +misc-applications-prefix "g"))
         (defvar +misc-applications-eyecandy-prefix (concat +misc-applications-prefix "e"))
