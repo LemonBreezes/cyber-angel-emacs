@@ -16,20 +16,6 @@
       "ns" "show notifications"
       "nd" "dismiss all notifications"))
   :config
-  (defun +ednc-show-notification-in-buffer (old new)
-    (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
-      (with-current-buffer (get-buffer-create name)
-        (if new (let ((inhibit-read-only t))
-                  (if old (erase-buffer) (ednc-view-mode))
-                  (set-buffer-multibyte nil)
-                  (insert (ednc-format-notification new t))
-                  (display-buffer (current-buffer)))
-          (kill-buffer)))))
-  (defun +ednc-dismiss-all-notifications ()
-    (interactive)
-    (cl-mapcar (lambda (notification)
-                 (ednc-dismiss-notification notification))
-               (ednc-notifications)))
   (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
 
   (defun +ednc-stack-notifications (&optional hide)
@@ -39,6 +25,7 @@
                      (push app-name hide)
                      (ednc-format-notification notification))))
                (ednc-notifications) ""))
+
   (add-to-list 'global-mode-string
                '((:eval (+ednc-stack-notifications))))
   (add-hook 'ednc-notification-presentation-functions
