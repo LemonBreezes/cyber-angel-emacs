@@ -114,12 +114,12 @@
                 "+x86-lookup"
 
                 ;; Games
-                ;;"+bubbles"
-                ;;"+doctor"
-                ;;"+dunnet"
-                ;;"+speed-type"
-                ;;"+snake"
-                ;;"+tetris"
+                "+bubbles"
+                "+doctor"
+                "+dunnet"
+                "+speed-type"
+                "+snake"
+                "+tetris"
                 ;; TODO Add `2048', `klondike', and `chess' to this list.
 
                 ;; Eye candy
