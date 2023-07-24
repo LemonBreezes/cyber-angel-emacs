@@ -5,9 +5,6 @@
 
 (defvar startup/dunst-process nil)
 
-(unless (executable-find "dunstctl")
-  (error "dunstctl is missing from your PATH."))
-
 (defun startup/start-dunst ()
   (setq startup/dunst-process
         (start-process "dunst" " *startup/dunst*" "dunst" "-config"
@@ -47,6 +44,8 @@
        (cmd! (let ((shell-file-name "/bin/sh"))
                (quiet! (shell-command "dunstctl context" nil nil))))))
 
-(if (process-live-p startup/dunst-process)
-    (startup/restart-dunst)
-  (startup/start-dunst))
+;;(unless (executable-find "dunstctl")
+;;  (error "dunstctl is missing from your PATH."))
+;;(if (process-live-p startup/dunst-process)
+;;    (startup/restart-dunst)
+;;  (startup/start-dunst))
