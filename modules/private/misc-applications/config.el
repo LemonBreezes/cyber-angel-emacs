@@ -114,7 +114,7 @@
                 "+zone"
 
                 ;; Emacs OS
-                "+ednc"              ; Currently I'm using Dunst instead.
+                "+ednc" 
                 "+proced"))
 
         (dolist (file +misc-applications-lisp-files)
