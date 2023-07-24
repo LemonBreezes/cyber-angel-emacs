@@ -4,8 +4,8 @@
   :defer t
   :init
   (map! :leader
-        :prefix +misc-applications-prefix
-        "C-w" #'wttrin)
+        :prefix +misc-applications-external-apps-prefix
+        "w" #'wttrin)
   :config
   (advice-add #'wttrin-query :after
               (cae-defun +wttrin-setup-h (&rest _)
