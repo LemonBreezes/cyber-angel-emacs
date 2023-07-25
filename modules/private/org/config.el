@@ -46,6 +46,9 @@
         "C-c b" nil)
   (make-directory (expand-file-name "~/.org-jira") t))
 
+(use-package! ejira
+  :defer t)
+
 (use-package! worf
   :defer t :init
   (add-hook 'org-mode-hook #'worf-mode)
