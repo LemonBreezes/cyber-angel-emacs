@@ -6,6 +6,7 @@
 (package! language-detection)
 (package! org-appear)
 (package! org-jira)
+(package! ejira)
 (package! worf :recipe
   (:host github :repo "LemonBreezes/worf"))
 (package! org-tidy)
