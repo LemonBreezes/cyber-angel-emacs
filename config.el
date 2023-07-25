@@ -880,10 +880,9 @@
     (add-hook 'edit-indirect-after-creation-hook
               (cae-defun cae-edit-indirect-major-mode-fallback-h ()
                 (when (eq major-mode 'fundamental-mode)
-                  (funcall
-                   (buffer-local-value
-                    'major-mode
-                    (overlay-buffer edit-indirect--overlay)))))))
+                  (funcall (buffer-local-value
+                            'major-mode
+                            (overlay-buffer edit-indirect--overlay)))))))
 
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
