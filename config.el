@@ -884,9 +884,6 @@
                             'major-mode
                             (overlay-buffer edit-indirect--overlay)))))))
 
-  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-    :defer t)
-
   (after! outline
     (setq outline-font-lock-faces nil
           outline-font-lock-keywords nil)
