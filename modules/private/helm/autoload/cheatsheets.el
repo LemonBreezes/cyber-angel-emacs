@@ -1,6 +1,6 @@
 ;;; private/helm/autoload/cheatsheets.el -*- lexical-binding: t; -*-
 
-;;;###autoload
+;;;###autoload (autoload '+helm-cheatsheet-hydra/body "private/helm/autoload/cheatsheets" nil t)
 (defhydra +helm-top-cheatsheet-hydra (:color pink :foreign-keys run)
   ("M-C" helm-top-run-sort-by-com "sort by com")
   ("M-M" helm-top-run-sort-by-mem "sort by mem")
