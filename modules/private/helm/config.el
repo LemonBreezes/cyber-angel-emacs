@@ -197,4 +197,4 @@ Can be negative.")
 
 (after! helm-sys
   (map! :map helm-top-map
-        "<f6>" #'+helm-top-cheat))
+        "<f6>" #'+helm-top-cheatsheet-hydra/body))
