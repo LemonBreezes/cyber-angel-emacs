@@ -85,7 +85,8 @@ Can be negative.")
     ;; completion-styles is ignored unless helm-completion-style is customized
     ;; to 'emacs.
     (setq helm-completion-style 'emacs)
-    (add-to-list 'completion-styles (if fuzzy 'flex 'helm) t))
+    ;;(add-to-list 'completion-styles (if fuzzy 'flex 'helm) t)
+    )
 
   :config
   (after! which-key
