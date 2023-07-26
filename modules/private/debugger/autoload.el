@@ -46,7 +46,7 @@
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval
 ^^^^^^^^----------------------------------------------------------------------------------------------------------------
 _n_: Next           _ss_: Session            _bb_: Toggle          _dd_: Debug                 _ee_: Eval
-_i_: Step in        _st_: Thread             _bd_: Delete          _dr_: Debug recent          _er_: Eval region
+_i_: Step in        _st_: Thread             _bd_: Delete          _dr_: Debug recent          _eR_: Eval region
 _o_: Step out       _sf_: Stack frame        _ba_: Add             _dl_: Debug last            _es_: Eval thing at point
 _c_: Continue       _su_: Up stack frame     _bc_: Set condition   _de_: Edit debug template   _ea_: Add expression
 _r_: Restart frame  _sd_: Down stack frame   _bh_: Set hit count   _ds_: Debug restart         _er_: Remove expression
@@ -80,7 +80,7 @@ _R_: Restart        _sb_: List breakpoints
   ("de" dap-debug-edit-template)
   ("ee" dap-eval)
   ("ea" dap-ui-expressions-add)
-  ("er" dap-eval-region)
+  ("eR" dap-eval-region)
   ("es" dap-eval-thing-at-point)
   ("er" dap-ui-expressions-remove)
   ("q" nil "quit" :color blue)
