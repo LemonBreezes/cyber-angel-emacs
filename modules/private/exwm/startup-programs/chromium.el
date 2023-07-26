@@ -68,7 +68,7 @@
     (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/chromium-workspace))
     (apply orig-fn args)))
 
-(unless (+startup-inhibit-autostart-p)
-    (if (process-live-p startup/chromium-process)
-        (startup/restart-chromium)
-      (startup/start-chromium)))
+(if (process-live-p startup/chromium-process)
+    (startup/restart-chromium)
+  (unless (getenv "SSH_TTY")
+    (startup/start-chromium)))
