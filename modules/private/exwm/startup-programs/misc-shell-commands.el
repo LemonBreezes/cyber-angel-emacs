@@ -15,7 +15,8 @@
 (call-process-shell-command "xhost +" nil startup/misc-shell-commands-buffer)
 
 ;; Set our refresh rate to 144Hz.
-(call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer)
+(unless (getenv "SSH_TTY")
+  (call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer))
 
 ;; Start up Pipewire.
 (when (and (executable-find "gentoo-pipewire-launcher")
