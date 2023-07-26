@@ -78,7 +78,7 @@
        :desc "Select Discord" "s" #'startup/select-discord
        :desc "Kill Discord" "x" #'startup/kill-discord))
 
-(unless (+startup-inhibit-autostart-a)
+(unless (+startup-inhibit-autostart-p)
   (if (process-live-p startup/discord-process)
       (startup/restart-discord)
     (startup/start-discord)))
