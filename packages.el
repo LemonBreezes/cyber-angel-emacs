@@ -40,7 +40,6 @@
 (package! posimacs-shortdocs :recipe
   (:host github :repo "LemonBreezes/posimacs-shortdocs"))
 (package! wakatime-mode)
-(package! clockify :recipe (:host github :repo "oxalorg/emacs-clockify"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
