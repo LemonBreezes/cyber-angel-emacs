@@ -3,7 +3,6 @@
 (when (executable-find "dunstctl")
   (after! alert
     (setq alert-default-style 'libnotify))
-
   (defvar startup/dunst-process nil)
 
   (defun startup/start-dunst ()
