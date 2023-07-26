@@ -43,6 +43,10 @@
                 t)))
   (map! :map corfu-map "C-g" #'cae-corfu-quit))
 
+(after! lsp-completion
+  ;; Do not try to configure `company-capf' for LSP.
+  (setq lsp-completion-provider nil))
+
 (when (modulep! :editor snippets)
   (use-package! cape-yasnippet
     :defer t :init
