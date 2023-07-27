@@ -100,7 +100,7 @@ overriding other keymaps."
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe +flymake)
+       (syntax +childframe)
        ;;spell
        ;;grammar
 
