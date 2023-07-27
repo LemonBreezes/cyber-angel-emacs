@@ -178,6 +178,7 @@
   (setq leetcode-directory "~/src/leetcode"))
 
 (use-package! somafm
+  :defer t
   :init
   (map! :map +misc-applications-external-apps-map
         "s" #'+somafm)
