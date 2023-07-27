@@ -141,7 +141,7 @@ overriding other keymaps."
        :private
        (corfu +numbers)
        helm
-       (debugger +lsp)
+       ;; (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
        exwm
