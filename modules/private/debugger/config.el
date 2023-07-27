@@ -32,7 +32,8 @@
 
 (after! gud
   (setq gud-chdir-before-run nil)
-  (add-hook 'gud-mode-hook #'gud-tooltip-mode))
+  ;;(add-hook 'gud-mode-hook #'gud-tooltip-mode)
+  )
 (after! gdb-mi
   (setq gdb-show-main nil
         gdb-many-windows nil
