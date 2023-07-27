@@ -111,7 +111,7 @@ overriding other keymaps."
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
-       (lsp +eglot)
+       (lsp +peek)
        tree-sitter
 
        :lang
@@ -141,7 +141,7 @@ overriding other keymaps."
        :private
        (corfu +numbers)
        helm
-       ;; debugger
+       (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
        exwm
