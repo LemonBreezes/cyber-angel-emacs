@@ -126,6 +126,7 @@
 ;;; External apps
 
 (use-package! elcord
+  :defer t
   :hook (doom-first-file . elcord-mode)
   :when (and (cae-display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
