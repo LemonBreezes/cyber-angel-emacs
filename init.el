@@ -105,7 +105,7 @@ overriding other keymaps."
        ;;grammar
 
        :tools
-       debugger
+       ;; debugger
        direnv
        editorconfig
        (eval +overlay)
@@ -141,7 +141,7 @@ overriding other keymaps."
        :private
        (corfu +numbers)
        helm
-       (debugger +lsp)
+       debugger
        (dirvish +icons +dirvish)
        eshell
        exwm
