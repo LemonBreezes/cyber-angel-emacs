@@ -163,6 +163,7 @@
       "C-x M-t" #'transpose-frame
       "C-x x N" #'cae-make-new-buffer
       "C-x x o" #'ov-clear
+      "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
