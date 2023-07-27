@@ -234,7 +234,8 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side bottom :select t :quit t
          :ttl 0)
-        ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)))
+        ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
+        ("^\\*vterm" :quit nil :ttl nil)))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
