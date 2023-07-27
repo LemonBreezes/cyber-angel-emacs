@@ -139,19 +139,20 @@ overriding other keymaps."
        (rss +org)
 
        :private
-       (corfu +numbers)
-       helm
-       debugger
-       (dirvish +icons +dirvish)
-       eshell
+       ;; (corfu +numbers)
+       ;; helm
+       ;; debugger
+       ;; (dirvish +icons +dirvish)
+       ;; eshell
        ;; exwm
-       dired
-       lisp
+       ;; dired
+       ;; lisp
        ;; misc-applications
-       modeline
-       unpackaged
-       vc
-       org)
+       ;; modeline
+       ;; unpackaged
+       ;; vc
+       ;; org
+       )
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
