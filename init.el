@@ -110,7 +110,7 @@ overriding other keymaps."
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-       (magit +forge)
+       (magit) ;; +forge is broken for me on the latest Emacs.
        (lsp +peek)
        tree-sitter
 
