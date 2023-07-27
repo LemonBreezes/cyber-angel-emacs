@@ -33,7 +33,7 @@
 (after! gud
   (setq gud-chdir-before-run nil))
 (after! gdb-mi
-  (setq gdb-show-main nil
+  (setq gdb-show-main t
         gdb-many-windows nil
         gdb-display-io-nopopup nil
         gdb-show-changed-values t
