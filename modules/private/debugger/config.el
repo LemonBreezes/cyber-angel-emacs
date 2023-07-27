@@ -35,8 +35,8 @@
   (add-hook 'gud-mode-hook #'gud-tooltip-mode))
 (after! gdb-mi
   (setq gdb-show-main t
-        gdb-many-windows t
-        gdb-display-io-nopopup t
+        gdb-many-windows nil
+        gdb-display-io-nopopup nil
         gdb-show-changed-values t
         gdb-delete-out-of-scope t
         gdb-use-colon-colon-notation t
