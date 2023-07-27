@@ -111,7 +111,7 @@ overriding other keymaps."
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
-       (lsp +peek +eglot)
+       (lsp +eglot)
        tree-sitter
 
        :lang
