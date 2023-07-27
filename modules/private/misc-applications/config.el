@@ -95,9 +95,6 @@
         :map elfeed-search-mode-map
         "?" #'describe-mode
         "q" #'+elfeed-quit)
-  (when (modulep! :ui popup)
-    (set-popup-rule! (format "^%s$" (regexp-quote elfeed-log-buffer-name))
-      :size 0.3 :side 'right :select nil :quit t :ttl nil))
   (when (modulep! :ui hydra)
     (map! :map elfeed-search-mode-map
           "<f6>" #'cae-elfeed-hydra/body
