@@ -523,7 +523,7 @@
         "s" #'snow))
 
 (use-package! zone
-  :defer-incrementally t
+  :defer t :defer-incrementally t
   :init
   (map! :map +misc-applications-eyecandy-map
         "z" #'zone-choose)
