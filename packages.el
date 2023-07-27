@@ -23,6 +23,7 @@
 (package! outline-minor-faces)
 (package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
 (package! beacon)
+(package! winum)
 
 ;; cae-theme.el
 (package! modus-themes)
