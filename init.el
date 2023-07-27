@@ -54,11 +54,11 @@ overriding other keymaps."
 ;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p t
   "Whether our UI section of `config.el' is enabled.")
-(defvar cae-init-tools-enabled-p t
+(defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is enabled.")
-(defvar cae-init-editor-enabled-p t
+(defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is enabled.")
-(defvar cae-init-autocompletion-enabled-p t
+(defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is enabled.")
 (defvar cae-keyboard-remaps-enabled-p t
   "Whether we remap keys for special keyboard layouts.")
