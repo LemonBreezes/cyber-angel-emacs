@@ -100,7 +100,7 @@ overriding other keymaps."
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe)
+       (syntax +childframe +flymake)
        ;;spell
        ;;grammar
 
@@ -111,7 +111,7 @@ overriding other keymaps."
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
-       (lsp +peek)
+       (lsp +peek +eglot)
        tree-sitter
 
        :lang
