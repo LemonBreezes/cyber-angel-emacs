@@ -18,7 +18,7 @@
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
-(load! "lisp/cae-hacks")
+;; (load! "lisp/cae-hacks")
 
 (setq native-comp-async-jobs-number (num-processors))
 
