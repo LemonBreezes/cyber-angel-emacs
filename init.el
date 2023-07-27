@@ -105,7 +105,7 @@ overriding other keymaps."
        ;;grammar
 
        :tools
-       (debugger +lsp)
+       debugger
        direnv
        editorconfig
        (eval +overlay)
