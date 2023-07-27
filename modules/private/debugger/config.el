@@ -31,9 +31,7 @@
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
 (after! gud
-  (setq gud-chdir-before-run nil)
-  ;;(add-hook 'gud-mode-hook #'gud-tooltip-mode)
-  )
+  (setq gud-chdir-before-run nil))
 (after! gdb-mi
   (setq gdb-show-main nil
         gdb-many-windows nil
