@@ -140,7 +140,7 @@ overriding other keymaps."
 
        :private
        (corfu +numbers)
-       helm
+       ;; helm
        debugger
        (dirvish +icons +dirvish)
        eshell
