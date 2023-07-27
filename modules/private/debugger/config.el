@@ -34,7 +34,7 @@
   (setq gud-chdir-before-run nil)
   (add-hook 'gud-mode-hook #'gud-tooltip-mode))
 (after! gdb-mi
-  (setq gdb-show-main t
+  (setq gdb-show-main nil
         gdb-many-windows nil
         gdb-display-io-nopopup nil
         gdb-show-changed-values t
