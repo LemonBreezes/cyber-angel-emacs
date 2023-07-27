@@ -147,7 +147,7 @@ overriding other keymaps."
        exwm
        dired
        lisp
-       ;; misc-applications
+       misc-applications
        modeline
        unpackaged
        vc
