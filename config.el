@@ -1206,6 +1206,8 @@
  t)
 
 (setq cae-config-finished-loading t)
+(setq make-pointer-invisible nil
+      visible-cursor t)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
