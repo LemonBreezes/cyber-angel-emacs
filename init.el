@@ -18,7 +18,7 @@
 
 (load! "lisp/cae-debug")                ;Debug Emacs.
 (load! "lisp/cae-lib")
-;; (load! "lisp/cae-hacks")
+(load! "lisp/cae-hacks")
 
 (setq native-comp-async-jobs-number (num-processors))
 
@@ -52,15 +52,15 @@ overriding other keymaps."
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-init-ui-enabled-p nil
+(defvar cae-init-ui-enabled-p t
   "Whether our UI section of `config.el' is enabled.")
-(defvar cae-init-tools-enabled-p nil
+(defvar cae-init-tools-enabled-p t
   "Whether our tools section of `config.el' is enabled.")
-(defvar cae-init-editor-enabled-p nil
+(defvar cae-init-editor-enabled-p t
   "Whether our editor section of `config.el' is enabled.")
-(defvar cae-init-autocompletion-enabled-p nil
+(defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
-(defvar cae-keyboard-remaps-enabled-p nil
+(defvar cae-keyboard-remaps-enabled-p t
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
@@ -139,20 +139,19 @@ overriding other keymaps."
        (rss +org)
 
        :private
-       ;; (corfu +numbers)
-       ;; helm
-       ;; debugger
-       ;; (dirvish +icons +dirvish)
-       ;; eshell
-       ;; exwm
-       ;; dired
-       ;; lisp
-       ;; misc-applications
-       ;; modeline
-       ;; unpackaged
-       ;; vc
-       ;; org
-       )
+       (corfu +numbers)
+       helm
+       debugger
+       (dirvish +icons +dirvish)
+       eshell
+       exwm
+       dired
+       lisp
+       misc-applications
+       modeline
+       unpackaged
+       vc
+       org)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
