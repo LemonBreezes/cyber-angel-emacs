@@ -1172,7 +1172,10 @@
       mail-host-address "strawberrytea.xyz")
 
 (after! sendmail
-  (setq send-mail-function #'smtpmail-send-it))
+  (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
+  (setq send-mail-function #'smtpmail-send-it
+        sendmail-program "/usr/bin/msmtp"
+        send-mail-function #'async-smtpmail-send-it))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
