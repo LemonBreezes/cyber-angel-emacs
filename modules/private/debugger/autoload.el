@@ -87,3 +87,10 @@ _R_: Restart        _sb_: List breakpoints
   ("Q" dap-disconnect :color red)
   ("<f6>" nil "quit")
   ("R" cae-debugger-dap-kill-all-sessions-and-restart nil :color red))
+
+;;;###autoload
+(defun cae-run-or-pop-to-gdb ()
+  (interactive)
+  (if (buffer-live-p gud-comint-buffer)
+      (call-interactively #'gdb-display-gdb-buffer)
+    (call-interactively #'gdb)))
