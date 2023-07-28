@@ -43,5 +43,3 @@
         gdb-debuginfod-enable t
         gdb-display-io-buffer nil))
 (map! :leader :prefix "o" "g" #'cae-run-or-pop-to-gdb)
-(remove-hook! 'gdb-mode-hook
-  (set-window-dedicated-p (selected-window) nil))
