@@ -1171,6 +1171,8 @@
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz")
 
+(after! sendmail
+  (setq send-mail-function #'smtpmail-send-it))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-smtp-service 587
