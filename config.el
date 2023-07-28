@@ -1173,8 +1173,7 @@
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (after! sendmail
-  (setq send-mail-function #'smtpmail-send-it
-        send-mail-function #'async-smtpmail-send-it))
+  (setq send-mail-function #'async-smtpmail-send-it))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it))
 (after! smtpmail
