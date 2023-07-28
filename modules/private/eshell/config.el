@@ -132,7 +132,28 @@
          "TAB" #'completion-at-point
          "<tab>" #'completion-at-point))
 
-  ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files
+  ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
   (load! "+fish-completion-annotation-fix")
 
-  (load! "ha-eshell"))
+  (load! "ha-eshell")
+
+  ;; Global Eshell history. From https://gitlab.com/ambrevar/dotfiles/-/blob/master/.emacs.d/lisp/init-eshell.el.
+  (defvar ambrevar/eshell-history-global-ring nil
+    "The history ring shared across Eshell sessions.")
+
+  (defun ambrevar/eshell-hist-use-global-history ()
+    "Make Eshell history shared across different sessions."
+    (unless ambrevar/eshell-history-global-ring
+      (when eshell-history-file-name
+        (eshell-read-history nil t))
+      (setq ambrevar/eshell-history-global-ring (or eshell-history-ring (make-ring eshell-history-size))))
+    (setq eshell-history-ring ambrevar/eshell-history-global-ring))
+  (add-hook 'eshell-mode-hook 'ambrevar/eshell-hist-use-global-history)
+
+  (defun ambrevar/eshell-history-remove-duplicates ()
+    (require 'functions) ; For `ambrevar/ring-delete-first-item-duplicates'.
+    (ambrevar/ring-delete-first-item-duplicates eshell-history-ring))
+  (add-hook 'eshell-pre-command-hook 'ambrevar/eshell-history-remove-duplicates)
+
+  ;; Always save history
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history))
