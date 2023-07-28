@@ -42,4 +42,3 @@
         gdb-restore-window-configuration-after-quit t
         gdb-debuginfod-enable t
         gdb-display-io-buffer nil))
-(map! :leader :prefix "o" "g" #'cae-run-or-pop-to-gdb)
