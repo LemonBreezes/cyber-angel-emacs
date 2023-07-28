@@ -1179,7 +1179,7 @@
         smtpmail-smtp-service 465
         smtpmail-stream-type 'tls
         smtpmail-queue-mail nil
-        smtpmail-queue-dir "~/.mail/queue/cur/"
+        smtpmail-queue-dir "~/.mail/queued-mail/"
         smtpmail-servers-requiring-authorization ".*"
         smtpmail-smtp-user user-mail-address))
 
