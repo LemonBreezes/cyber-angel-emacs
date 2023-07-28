@@ -1,3 +1,4 @@
+alias git  git --no-pager $*
 alias gr     egrep               --color=always                               $*
 alias c      xclip               -selection     clipboard                     $*
 alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
