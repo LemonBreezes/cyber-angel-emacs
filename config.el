@@ -1200,23 +1200,24 @@
           "q" #'cae-notmuch-quit)))
 
 (when (modulep! :email mu4e)
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "Fastmail"
-            :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
-            :vars '((user-mail-address . "look@strawberrytea.xyz")
-                    (user-full-name . "StrawberryTea")
-                    (smtpmail-smtp-server . "smtp.fastmail.com")
-                    (smtpmail-default-smtp-server . "smtp.fastmail.com")
-                    (smtpmail-stream-type . starttls)
-                    (smtpmail-smtp-service . 587)
-                    (mu4e-trash-folder . "/Fastmail/Trash")
-                    (mu4e-refile-folder . "/Fastmail/Archive")
-                    (mu4e-drafts-folder . "/Fastmail/Drafts")
-                    (mu4e-sent-folder . "/Fastmail/Sent"))))))
+  (after! mu4e
+    (setq mu4e-contexts
+          `(,(make-mu4e-context
+              :name "Fastmail"
+              :match-func
+              (lambda (msg)
+                (when msg
+                  (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
+              :vars '((user-mail-address . "look@strawberrytea.xyz")
+                      (user-full-name . "StrawberryTea")
+                      (smtpmail-smtp-server . "smtp.fastmail.com")
+                      (smtpmail-default-smtp-server . "smtp.fastmail.com")
+                      (smtpmail-stream-type . starttls)
+                      (smtpmail-smtp-service . 587)
+                      (mu4e-trash-folder . "/Fastmail/Trash")
+                      (mu4e-refile-folder . "/Fastmail/Archive")
+                      (mu4e-drafts-folder . "/Fastmail/Drafts")
+                      (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
 ;;; HTML
 
