@@ -1,2 +1,3 @@
 echo "hello"
 export GIT_PAGER="FUCKKKK"
+echo $GIT_PAGER
