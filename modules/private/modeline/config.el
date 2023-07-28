@@ -256,4 +256,3 @@
         mu4e-modeline-all-read '("R:" "R:")
         mu4e-modeline-all-clear '("C:" "C:")
         mu4e-modeline-new-items '("N:" "N:")))
-(advice-add #'mu4e-alert-enable-mode-line-display :override #'ignore)
