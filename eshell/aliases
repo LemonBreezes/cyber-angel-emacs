@@ -27,5 +27,3 @@ alias vi   e $*
 alias vim  e $*
 alias nano e $*
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
-
-alias git  git --no-pager $*
