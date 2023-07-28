@@ -1176,11 +1176,11 @@
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
-        smtpmail-smtp-service 587
-        smtpmail-stream-type 'starttls
+        ;;smtpmail-smtp-service 587
+        ;;smtpmail-stream-type 'starttls
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queue/cur/"
-        smtpmail-servers-requiring-authorization ".*"
+        ;;smtpmail-servers-requiring-authorization ".*"
         smtpmail-smtp-user user-mail-address))
 
 (when (modulep! :email notmuch)
