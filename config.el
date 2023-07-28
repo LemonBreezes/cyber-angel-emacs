@@ -1175,10 +1175,11 @@
   (setq send-mail-function #'smtpmail-send-it))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
-        smtpmail-smtp-service 587
-        smtpmail-stream-type 'starttls
+        smtpmail-smtp-service 465
+        smtpmail-stream-type nil
         smtpmail-queue-mail nil
-        smtpmail-queue-dir "~/.mail/queue/cur/"))
+        smtpmail-queue-dir "~/.mail/queue/cur/"
+        smtpmail-servers-requiring-authorization ".*"))
 
 (when (modulep! :email notmuch)
   (setq +notmuch-sync-backend 'mbsync
