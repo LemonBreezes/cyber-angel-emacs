@@ -1176,8 +1176,8 @@
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
-        smtpmail-smtp-service 587
-        smtpmail-stream-type 'starttls
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'tls
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queue/cur/"
         smtpmail-servers-requiring-authorization ".*"
