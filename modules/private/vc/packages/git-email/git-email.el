@@ -5,7 +5,7 @@
 ;; Author: Xinglu Chen <public@yoctocell.xyz>
 ;; URL: https://git.sr.ht/~yoctocell/git-email
 ;; Version: 0.2.0
-;; Package-Requires: ((emacs "27.1"))
+;; Package-Requires: ((emacs "28.1"))
 ;; Keywords: git mail
 ;; License: GNU General Public License >= 3
 
