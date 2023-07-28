@@ -104,7 +104,7 @@ The path should end with a trailing \"/\"."
   :package-version '(git-email . "0.1.0"))
 
 (defcustom git-email-format-patch-default-args ""
-  "Default arguments to give to 'git format-patch'."
+  "Default arguments to give to `git format-patch'."
   :type 'string
   :group 'git-email
   :package-version '(git-email . "0.1.0"))
