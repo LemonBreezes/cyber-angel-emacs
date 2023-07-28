@@ -1171,6 +1171,13 @@
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz")
 
+(after! smtpmail
+  (setq smtpmail-smtp-server "smtp.fastmail.com"
+        smtpmail-smtp-service 587
+        smtpmail-stream-type 'starttls
+        smtpmail-queue-mail nil
+        smtpmail-queue-dir "~/.mail/queue/cur/"))
+
 (when (modulep! :email notmuch)
   (setq +notmuch-sync-backend 'mbsync
         +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
