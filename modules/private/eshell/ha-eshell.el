@@ -24,8 +24,10 @@
 (defun ha-eshell-store-last-output ()
   "Store the output from the last eshell command.
 Called after every command by connecting to the `eshell-post-command-hook'."
-  (let ((output
-         (buffer-substring-no-properties eshell-last-input-end eshell-last-output-start)))
+  (when-let ((output
+              (and eshell-last-input-end eshell-last-output-start
+                   (buffer-substring-no-properties eshell-last-input-end
+                                                   eshell-last-output-start))))
     (ring-insert ha-eshell-output output)))
 
 (add-hook 'eshell-post-command-hook #'ha-eshell-store-last-output)
