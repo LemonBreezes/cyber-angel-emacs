@@ -1179,7 +1179,8 @@
         smtpmail-stream-type 'starttls
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queue/cur/"
-        smtpmail-servers-requiring-authorization ".*"))
+        smtpmail-servers-requiring-authorization ".*"
+        smtpmail-smtp-user user-mail-address))
 
 (when (modulep! :email notmuch)
   (setq +notmuch-sync-backend 'mbsync
