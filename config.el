@@ -1216,12 +1216,7 @@
                       (mu4e-trash-folder . "/Fastmail/Trash")
                       (mu4e-refile-folder . "/Fastmail/Archive")
                       (mu4e-drafts-folder . "/Fastmail/Drafts")
-                      (mu4e-sent-folder . "/Fastmail/Sent"))))))
-  (after! mu4e-bookmarks
-    (setq mu4e-modeline-unread-items '("U:" "U:")
-          mu4e-modeline-all-read '("R:" "R:")
-          mu4e-modeline-all-clear '("C:" "C:")
-          mu4e-modeline-new-items '("N:" "N:"))))
+                      (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
 ;;; HTML
 
