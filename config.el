@@ -1198,7 +1198,9 @@
           "q" #'cae-notmuch-quit)))
 
 (when (modulep! :email mu4e)
-  (autoload 'mu4e-user-agent "mu4e-compose" nil t)
+  (defun mu4e-user-agent ()
+    "Return the `mu4e-user-agent' symbol."
+    'mu4e-user-agent)
   (setq mail-user-agent 'mu4e-user-agent)
   (after! mu4e
     (setq mu4e-contexts
