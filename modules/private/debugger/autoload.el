@@ -91,6 +91,9 @@ _R_: Restart        _sb_: List breakpoints
 ;;;###autoload
 (defun cae-run-or-pop-to-gdb ()
   (interactive)
-  (if (buffer-live-p gud-comint-buffer)
-      (call-interactively #'gdb-display-gdb-buffer)
-    (call-interactively #'gdb)))
+  (require 'gud)
+  (cond ((get-buffer-window gud-comint-buffer)
+         (delete-window (get-buffer-window gud-comint-buffer)))
+        ((buffer-live-p gud-comint-buffer)
+         (call-interactively #'gdb-display-gdb-buffer))
+        (t (call-interactively #'gdb))))
