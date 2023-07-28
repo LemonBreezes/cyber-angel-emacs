@@ -40,4 +40,5 @@
         gdb-delete-out-of-scope t
         gdb-use-colon-colon-notation t
         gdb-restore-window-configuration-after-quit t
-        gdb-debuginfod-enable t))
+        gdb-debuginfod-enable t
+        gdb-display-io-buffer nil))
