@@ -1198,9 +1198,7 @@
           "q" #'cae-notmuch-quit)))
 
 (when (modulep! :email mu4e)
-  (defadvice! cae-compose-mail-require-mu4e-a (&rest _)
-    :before #'compose-mail
-    (require 'mu4e-compose))
+  (map! [remap compose-mail] #'+mu4e/compose)
   (after! mu4e
     (setq mu4e-contexts
           `(,(make-mu4e-context
