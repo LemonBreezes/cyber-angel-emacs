@@ -1,4 +1,3 @@
-alias git  git --no-pager $*
 alias gr     egrep               --color=always                               $*
 alias c      xclip               -selection     clipboard                     $*
 alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
@@ -28,3 +27,5 @@ alias vi   e $*
 alias vim  e $*
 alias nano e $*
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
+
+alias git  git --no-pager $*
