@@ -406,9 +406,9 @@ This parses the output of ‘git-email--minibuffer-get-revision’."
 
 ;;;###autoload
 (defun git-email-format-patch (args range keep)
-  "Format and send patch(es) using 'git format-patch'.
+  "Format and send patch(es) using `git format-patch'.
 
-ARGS are additional arguments to give to 'git format-patch'.  By
+ARGS are additional arguments to give to `git format-patch'.  By
 default, the arguments in `git-email-format-patch-default-args'
 will be used.
 
@@ -452,7 +452,7 @@ default behavior is to delete them after sending the message."
 (defun git-email-buffer-p (name)
   "Test if NAME buffer has an unsent patch.
 The heuristic is to check if the buffer's name includes the
-string 'git-email-unsent-patch'."
+string `git-email-unsent-patch'."
   (if (string-match "git-email-unsent-patch" name)
       t
     nil))
