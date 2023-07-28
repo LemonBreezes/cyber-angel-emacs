@@ -1198,10 +1198,9 @@
           "q" #'cae-notmuch-quit)))
 
 (when (modulep! :email mu4e)
-  (defun mu4e-user-agent ()
-    "Return the `mu4e-user-agent' symbol."
-    'mu4e-user-agent)
-  (setq mail-user-agent 'mu4e-user-agent)
+  (defadvice! cae-compose-mail-require-mu4e-a (&rest _)
+    :before #'compose-mail
+    (require 'mu4e-compose))
   (after! mu4e
     (setq mu4e-contexts
           `(,(make-mu4e-context
