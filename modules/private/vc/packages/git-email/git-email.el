@@ -393,12 +393,11 @@ them into the message buffer."
 
 (defun git-email--parse-revision (rev)
   "Return only the revision hash from REV.
+This parses the output of ‘git-email--minibuffer-get-revision’."
+  (substring rev 0 7))
 
 (defvar git-email--format-patch-args-history '()
   "Minibuffer history of `git-email-format-patch' ARGS.")
-
-This parses the output of ‘git-email--minibuffer-get-revision’."
-  (substring rev 0 7))
 
 (defun git-email--log-get-revision ()
   "Get the revision at point in `log-view-mode'."
@@ -519,7 +518,7 @@ instead of overwriting it."
 (defun git-email-rewrite-header (header value &optional append)
   "Re-write value of HEADER to VALUE.
 If HEADER doesn't exist yet, just set it to VALUE.
-
+ 
 With prefix argument APPEND, append the VALUE to HEADER instead
 of overwriting it.
 
