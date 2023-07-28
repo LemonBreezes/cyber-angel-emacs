@@ -1198,11 +1198,6 @@
           "q" #'cae-notmuch-quit)))
 
 (when (modulep! :email mu4e)
-  (defadvice! cae-mu4e-ensure-server ()
-    :before #'+mu4e/compose
-    (require 'mu4e)
-    (unless mu4e--server-props
-      (mu4e--start)))
   (map! [remap compose-mail] #'+mu4e/compose)
   (after! mu4e
     (setq mu4e-contexts
