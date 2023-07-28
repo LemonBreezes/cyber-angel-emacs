@@ -1176,7 +1176,7 @@
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-smtp-service 587
-        smtpmail-stream-type 'starttls
+        smtpmail-stream-type nil
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queue/cur/"))
 
