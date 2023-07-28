@@ -331,10 +331,6 @@ them into the message buffer."
                         (lambda (header)
                           (not (string-equal (cdr header) "")))
                         headers))
-         (to-address (seq-position used-headers
-                                   'to
-                                   (lambda (a b)
-                                     (equal (car a) b))))
          ;; Don't insert 'to' address if the patch already contains one.
          (to-address (or (cdr (assoc "To" used-headers 'string-equal))
                          (run-hook-with-args-until-success
