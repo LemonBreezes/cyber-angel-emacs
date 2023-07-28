@@ -3,7 +3,8 @@
 (disable-packages! evil-escape
                    flyspell
                    ccls
-                   compat)
+                   compat
+                   mu4e-alert)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
