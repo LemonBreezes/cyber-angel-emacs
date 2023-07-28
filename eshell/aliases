@@ -28,3 +28,5 @@ alias vim  e $*
 alias nano e $*
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
 alias gpt  auto-copilot-cli $*
+
+alias git  env GIT_PAGER="cat" git $*
