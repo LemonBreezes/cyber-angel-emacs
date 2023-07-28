@@ -28,3 +28,5 @@ alias vim  e $*
 alias nano e $*
 alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
 alias git  git --no-pager $*
+
+alias update-emacs emerge emacs && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync
