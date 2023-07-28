@@ -148,7 +148,7 @@ The path should end with a trailing \"/\"."
   :package-version '(git-email . "0.2.0"))
 
 (defcustom git-email-get-revision-functions '(git-email--log-get-revision)
-  "List of functions to get the base commit for 'git format-patch'.
+  "List of functions to get the base commit for `git format-patch'.
 If none of the functions return non-nil value,
 `git-email--minibuffer-get-revision' will be used as a fallback."
   :type 'hook
