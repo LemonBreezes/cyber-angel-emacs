@@ -113,6 +113,7 @@ overriding other keymaps."
        (magit) ;; +forge is broken for me on the latest Emacs.
        (lsp +peek)
        tree-sitter
+       pdf
 
        :lang
        (emacs-lisp +tree-sitter)
