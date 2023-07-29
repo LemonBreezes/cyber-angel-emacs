@@ -113,9 +113,5 @@
 (when (modulep! :lang org)
   (package! org-block-capf :recipe (:host github :repo "xenodium/org-block-capf")))
 
-;;; AI
-(package! org-ai)
-(package! chatgpt-shell)
-
 ;;; XML
 (package! xml-format)
