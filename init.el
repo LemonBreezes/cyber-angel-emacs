@@ -152,7 +152,8 @@ overriding other keymaps."
        modeline
        unpackaged
        vc
-       org)
+       org
+       ai)
 
 ;; Local Variables:
 ;; eval: (when (featurep 'lispy) (lispy-mode -1))
