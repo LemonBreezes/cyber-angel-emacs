@@ -52,4 +52,6 @@
 
 (use-package! gpt-commit
   :defer t :init
-  (add-hook 'git-commit-setup-hook 'gpt-commit-message))
+  (add-hook 'git-commit-setup-hook 'gpt-commit-message)
+  :config
+  (setq gpt-commit-model "gpt-4"))
