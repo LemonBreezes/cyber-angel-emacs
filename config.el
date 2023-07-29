@@ -344,12 +344,7 @@
 
   (use-package! outline-minor-faces
     :defer t :init
-    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
-
-  (use-package! pdf-view-pagemark
-    :when (modulep! :tools pdf)
-    :defer t :init
-    (add-hook 'pdf-view-mode-hook #'pdf-view-pagemark-mode)))
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode)))
 
 
 ;;; Tools
