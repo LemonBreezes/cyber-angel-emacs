@@ -6,7 +6,7 @@
                    compat               ; I use the latest version of Emacs.
                    mu4e-alert           ; Mu4e comes with `mu4e-modeline-mode'
                                         ; and I don't need email notifications.
-                   )
+                   ace-window)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
