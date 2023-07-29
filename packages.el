@@ -24,7 +24,6 @@
 (package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
-(package! pdf-view-pagemark :recipe (:host github :repo "kimim/pdf-view-pagemark"))
 (package! beacon)
 (package! winum)
 
