@@ -30,6 +30,13 @@
   (setq startup/picom-process
         (start-process "picom" startup/misc-shell-commands-buffer "picom")))
 
+;; Start solaar
+(defvar startup/solaar-process nil)
+(when (and (executable-find "solaar")
+           (not (process-live-p startup/solaar-process)))
+  (setq startup/solaar-process
+        (start-process "solaar" startup/misc-shell-commands-buffer "solaar" "--window=hide")))
+
 ;; Start up Talon.
 ;; (start-process "talon" startup/misc-shell-commands-buffer "~/src/talon/run.sh")
 
