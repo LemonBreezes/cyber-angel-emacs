@@ -76,7 +76,7 @@ overriding other keymaps."
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
-       ;;(window-select +switch-window)
+       (window-select +numbers)
 
        :editor
        file-templates
