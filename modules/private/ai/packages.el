@@ -3,3 +3,4 @@
 
 (package! org-ai)
 (package! chatgpt-shell)
+(package! gpt-commit)
