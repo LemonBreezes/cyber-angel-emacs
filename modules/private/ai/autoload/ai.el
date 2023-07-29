@@ -1,7 +1,5 @@
 ;;; private/ai/autoload/ai.el -*- lexical-binding: t; -*-
 
-;;; autoload/cae-ai.el -*- lexical-binding: t; -*-
-
 ;;;###autoload
 (defun cae-ai-org-ai-on-buffer ()
   (interactive)
