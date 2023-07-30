@@ -941,7 +941,7 @@
 
   (use-package! indent-bars
     :defer t
-    :hook ((lua-mode python-mode yaml-mode) . indent-bars-mode)))
+    :hook ((python-mode yaml-mode) . indent-bars-mode)))
 
 
 ;;; Autocompletion
