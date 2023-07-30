@@ -142,7 +142,9 @@
     :before-until #'elcord--buffer-boring-p
     (or (string-match-p "^\\*\\(doom\\|Messages\\|scratch\\|dashboard\\|elfeed\\|vterm\\|eshell\\|terminal\\|magit\\|help\\|Compile-Log\\|lsp\\|treemacs\\|\\*\\)" buffer-name)
         (parent-mode-is-derived-p (buffer-local-value 'major-mode (get-buffer buffer-name))
-                                  'exwm-mode))))
+                                  'exwm-mode)
+        (parent-mode-is-derived-p (buffer-local-value 'major-mode (get-buffer buffer-name))
+                                  'dired-mode))))
 
 (use-package! leetcode
   :defer t
