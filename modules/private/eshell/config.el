@@ -128,6 +128,8 @@
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
         :ig "C-d" #'cae-eshell-quit-or-delete-char
+        "C-p" (lookup-key global-map (kbd "C-p"))
+        "C-n" (lookup-key global-map (kbd "C-n"))
         (:when (modulep! :private corfu)
          "TAB" #'completion-at-point
          "<tab>" #'completion-at-point))
