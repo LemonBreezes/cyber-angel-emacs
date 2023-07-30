@@ -48,7 +48,7 @@
               (corfu-mode +1))))
 
 ;;;###autoload
-(cae-defun cae-corfu-visible-p ()
+(defun cae-corfu-visible-p ()
   (or (and (frame-live-p corfu--frame)
            (frame-visible-p corfu--frame))
       (and (featurep 'corfu-terminal)
