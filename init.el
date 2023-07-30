@@ -140,7 +140,7 @@ overriding other keymaps."
        (rss +org)
 
        :private
-       (corfu +numbers +orderless +icons)
+       (corfu +orderless +icons)
        helm
        (debugger +lsp)
        (dirvish +icons +dirvish)
