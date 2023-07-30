@@ -224,5 +224,4 @@ expansion occurs within the parent Emacs session.")
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
       (add-hook! 'persp-mode-hook
-        (perspective-exwm-mode +1)
         (load! "+startup-programs")))))
