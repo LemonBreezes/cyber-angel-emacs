@@ -492,7 +492,8 @@
               lsp-lua-hint-enable t
               lsp-lua-hint-set-type t
               lsp-clients-lua-language-server-bin (executable-find "lua-language-server")
-              lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin))
+              lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
+              lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
       (add-to-list 'lsp-disabled-clients 'ccls)
       (add-to-list 'lsp-disabled-clients 'mspyls)))
 
@@ -868,11 +869,9 @@
   ;; use multiple languages.
   (use-package! sentex
     :defer t :init
-    (if (version<= "30" emacs-version)
-        (setq forward-sentence-function #'cae-forward-sentence-function)
-      (map! [remap kill-sentence] #'sentex-kill-sentence
-            [remap forward-sentence] #'sentex-forward-sentence
-            [remap backward-sentence] #'sentex-backward-sentence)))
+    (map! [remap kill-sentence] #'sentex-kill-sentence
+          [remap forward-sentence] #'sentex-forward-sentence
+          [remap backward-sentence] #'sentex-backward-sentence))
 
   (use-package! edit-indirect
     :defer t :init
