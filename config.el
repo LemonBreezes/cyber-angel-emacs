@@ -937,7 +937,11 @@
     :bind
     ([remap forward-page] . logos-forward-page-dwim)
     ([remap backward-page] . logos-backward-page-dwim)
-    ([remap narrow-to-page] . cae-narrow-to-page)))
+    ([remap narrow-to-page] . cae-narrow-to-page))
+
+  (use-package indent-bars
+    :defer t
+    :hook ((lua-mode python-mode yaml-mode) . indent-bars-mode)))
 
 
 ;;; Autocompletion
