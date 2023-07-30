@@ -121,9 +121,9 @@ expansion occurs within the parent Emacs session.")
     ;;   (setenv "SDL_VIDEODRIVER" "x11")
     ;;   (exwm-xim-enable))
 
-    (when (modulep! :ui workspaces)
-      (after! persp-mode
-        (perspective-exwm-mode +1)))
+    ;;(when (modulep! :ui workspaces)
+    ;;  (after! persp-mode
+    ;;    (perspective-exwm-mode +1)))
     (exwm-enable)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
