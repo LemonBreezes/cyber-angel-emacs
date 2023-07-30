@@ -122,7 +122,8 @@ expansion occurs within the parent Emacs session.")
     ;;   (exwm-xim-enable))
 
     (when (modulep! :ui workspaces)
-      (perspective-exwm-mode +1))
+      (after! persp-mode
+        (perspective-exwm-mode +1)))
     (exwm-enable)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
