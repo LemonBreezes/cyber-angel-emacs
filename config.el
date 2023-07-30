@@ -864,7 +864,7 @@
           (nreverse (apply oldfun args))
         (apply oldfun args))))
 
-  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc. without
+  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc., without
   ;; `sentence-end-double-space'. This package's settings should be tweaked if you
   ;; use multiple languages.
   (use-package! sentex
@@ -1050,7 +1050,7 @@
 (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
 (after! em-glob
-  ;; Allow us to type HEAD~1, HEAD~2, etc. as arguments to git commands.
+  ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
   (setq eshell-error-if-no-glob nil))
 
 (after! em-term
