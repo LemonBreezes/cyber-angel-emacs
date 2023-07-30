@@ -79,6 +79,7 @@
 (package! jinx)
 (package! transpose-frame)
 (package! logos)
+(package! indent-bars)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
