@@ -33,9 +33,8 @@
   (advice-add #'+workspace/switch-to :after #'+workspace-switch-to-exwm-buffer-maybe)
   (remove-hook 'exwm-init-hook #'tmp/exwm-init-hook))
 
-(after! exwm
-  (if exwm--connection
-      (progn (tmp/exwm-init-hook)
-             (add-to-list 'persp-filter-save-buffers-functions
-                          #'exwm--buffer->id))
-    (add-hook 'exwm-init-hook #'tmp/exwm-init-hook 'append)))
+(if exwm--connection
+    (progn (tmp/exwm-init-hook)
+           (add-to-list 'persp-filter-save-buffers-functions
+                        #'exwm--buffer->id))
+  (add-hook 'exwm-init-hook #'tmp/exwm-init-hook 'append))
