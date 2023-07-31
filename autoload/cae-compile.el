@@ -47,12 +47,6 @@
          (not (doom-module-p (car module) (cdr module))))))
 
 ;;;###autoload
-(defun cae-compile-autoload-file-p (file)
-  (and (stringp file)
-       (or (string-match-p "autoload" file)
-           (string-match-p "/startup-programs/"))))
-
-;;;###autoload
 (cl-defun cae-compile-this-elisp-file ()
   (when (not (bound-and-true-p cae-config-finished-loading))
     (message "Config not finished loading")
@@ -89,6 +83,7 @@
              nil
              (lambda (s)
                (and
+                (cae-compile-file-not-in-unused-module-p s)
                 (not
                  (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
                                 "shared-local" "media" "secrets")
