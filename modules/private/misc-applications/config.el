@@ -42,12 +42,12 @@
 
 (map! :map +misc-applications-system-map
       "p" #'list-packages
-      "e" #'list-processes
+      "E" #'list-processes
       "T" #'list-timers)
 (after! which-key
   (which-key-add-keymap-based-replacements '+misc-applications-system-map
     "p" "packages"
-    "e" "processes"
+    "E" "emacs processes"
     "T" "timers"))
 
 (after! timer-list
@@ -253,10 +253,10 @@
   :defer t
   :init
   (map! :map +misc-applications-system-map
-        "p" #'paradox-list-packages)
+        "e" #'paradox-list-packages)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "p" "emacs packages"))
+      "e" "emacs packages"))
   :config
   (paradox-enable)
   (map! :map paradox-menu-mode-map
@@ -633,10 +633,10 @@
   :defer t
   :init
   (map! :map +misc-applications-system-map
-        "P" #'proced)
+        "p" #'proced)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "P" "proced"))
+      "p" "processes"))
   :config
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
