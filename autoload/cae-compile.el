@@ -35,8 +35,7 @@
         (lambda (s) (or (string-match-p "autoload" s)
                    (and (modulep! :private exwm)
                         (string-match-p "/startup-programs/" s)
-                        (not (string-match-p "disabled" s)))))
-        )
+                        (not (string-match-p "disabled" s))))))
        (cons (concat doom-user-dir "config.el"))))
 
 ;;;###autoload
