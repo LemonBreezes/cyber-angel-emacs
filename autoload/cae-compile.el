@@ -82,25 +82,28 @@
              "[a-zA-Z0-9]+\\.el$"
              nil
              (lambda (s)
-               (not
-                (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
-                               "shared-local" "media" "secrets")
-                           :test (lambda (x y)
-                                   (string= (file-name-nondirectory x)
-                                            y)))))))
+               (and
+                (cae-compile-file-not-in-unused-module-p s)
+                (not
+                 (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
+                                "shared-local" "media" "secrets")
+                            :test (lambda (x y)
+                                    (string= (file-name-nondirectory x)
+                                             y))))))))
            result)
       (unless
-          (or (string= (file-name-nondirectory s) "packages.el")
-              (string= (file-name-nondirectory s) "doctor.el")
-              (string= (file-name-nondirectory s) dir-locals-file)
-              (string-prefix-p "flycheck_" (file-name-nondirectory s))
-              (cl-member s cae-compile-files-to-ignore :test #'string=)
-              (and cae-compile--exit-code
-                   (not (eq cae-compile--exit-code 0))
-                   (not (file-exists-p (concat s "c"))))
-              (eq this-command 'kill-emacs)
-              (and (file-newer-than-file-p (concat s "c") s)
-                   (not arg)))
+          (or
+           (string= (file-name-nondirectory s) "packages.el")
+           (string= (file-name-nondirectory s) "doctor.el")
+           (string= (file-name-nondirectory s) dir-locals-file)
+           (string-prefix-p "flycheck_" (file-name-nondirectory s))
+           (cl-member s cae-compile-files-to-ignore :test #'string=)
+           (and cae-compile--exit-code
+                (not (eq cae-compile--exit-code 0))
+                (not (file-exists-p (concat s "c"))))
+           (eq this-command 'kill-emacs)
+           (and (file-newer-than-file-p (concat s "c") s)
+                (not arg)))
         (push s result)))))
 
 ;;;###autoload
