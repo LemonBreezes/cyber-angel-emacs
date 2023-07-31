@@ -250,7 +250,7 @@ also marks comment with leading whitespace"
               (not (and buffer-file-name
                         (file-equal-p identifier buffer-file-name))))
          (progn (better-jumper-set-jump (marker-position (point-marker)))
-                (find-file file)))
+                (find-file identifier)))
         ((+lookup--jump-to :definition identifier nil arg))
         ((user-error "Couldn't find the definition of %S" (substring-no-properties identifier)))))
 
