@@ -40,5 +40,5 @@
 
 ;;;###autoload
 (defun cae-compile-private-config ()
-  (mapc #'byte-compile-file
+  (mapc #'byte-recompile-file
         (cae-compile-list-files-to-compile)))
