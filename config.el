@@ -6,7 +6,7 @@
   "Whether the configuration has finished loading.")
 
 ;;; Stuff that should not be disabled.
-
+;;
 (unless (modulep! :editor evil)
   (setq doom-leader-alt-key "C-c"
         doom-localleader-alt-key "C-c l"
