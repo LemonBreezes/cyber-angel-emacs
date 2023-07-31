@@ -18,7 +18,7 @@
 (defun cae-compile-list-files-to-compile ()
   (require 'dash)
   (-filter
-   (lambda ())
+   (lambda (s) (string-match-p "autoload" s))
    (directory-files-recursively
     doom-user-dir
     "[a-zA-Z0-9]+\\.el$"
