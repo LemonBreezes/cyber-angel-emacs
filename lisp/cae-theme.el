@@ -97,6 +97,7 @@
 
 ;;;; Set the theme on startup.
 (when (and (doom-store-get 'circadian-themes)
+           (not (symbolp (caar (doom-store-get 'circadian-themes))))
            (not cae-config-finished-loading))
   (let* ((themes (doom-store-get 'circadian-themes))
          (now (reverse (cl-subseq (decode-time) 0 3)))

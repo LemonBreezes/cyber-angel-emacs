@@ -62,6 +62,10 @@
                             (font-spec :family "LXGW WenKai" :weight 'light
                                        :size 18))))
 
+;; I have disabled `rainbow-delimiters' as a package so this is to prevent
+;; errors.
+(defalias 'rainbow-delimiters-mode #'ignore)
+
 
 ;;; UI
 
