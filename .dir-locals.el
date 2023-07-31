@@ -23,10 +23,7 @@
             ;; Byte compile autoload files on save.
             (when (member (buffer-file-name)
                           (cae-compile-list-files-to-compile))
-              (add-hook 'after-save-hook
-                        (lambda ()
-                          (byte-recompile-file (buffer-file-name)))
-                        nil t)))
+              (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
 
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
