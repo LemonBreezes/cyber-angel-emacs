@@ -245,7 +245,7 @@ also marks comment with leading whitespace"
                      current-prefix-arg))
   (require 'ffap)
   (cond ((null identifier) (user-error "Nothing under point"))
-        ((+lookup--jump-to :definition identifier nil arg))
+        ((quiet! (+lookup--jump-to :definition identifier nil arg)))
         ((when-let ((file (ffap-file-at-point)))
            (when (and (file-exists-p file)
                       (not (and buffer-file-name
