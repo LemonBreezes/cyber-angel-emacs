@@ -18,7 +18,9 @@
 (defun cae-compile-list-files-to-compile ()
   (require 'dash)
   (-filter
-   (lambda (s) (string-match-p "autoload" s))
+   (lambda (s) (or (string-match-p "autoload" s)
+              (string-match-p "/startup-programs/" s)
+              (not (string-match-p "disabled" s))))
    (directory-files-recursively
     doom-user-dir
     "[a-zA-Z0-9]+\\.el$"
