@@ -34,3 +34,6 @@
                    :test (lambda (x y)
                            (string= (file-name-nondirectory x)
                                     y)))))))))
+
+;;;###autoload
+(defun cae-compile-private-config ())
