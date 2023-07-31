@@ -89,7 +89,6 @@
              nil
              (lambda (s)
                (and
-                (cae-compile-file-not-in-unused-module-p s)
                 (not
                  (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
                                 "shared-local" "media" "secrets")
