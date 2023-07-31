@@ -92,7 +92,8 @@ _R_: Restart        _sb_: List breakpoints
 (defun cae-run-or-pop-to-gdb ()
   (interactive)
   (require 'gud)
-  (cond ((get-buffer-window gud-comint-buffer)
+  (cond ((and gud-comint-buffer
+              (get-buffer-window gud-comint-buffer))
          (delete-window (get-buffer-window gud-comint-buffer)))
         ((buffer-live-p gud-comint-buffer)
          (call-interactively #'gdb-display-gdb-buffer))
