@@ -13,3 +13,19 @@
                                            nil
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
+
+;;;###autoload
+(defun cae-compile-autoloads ()
+  (directory-files-recursively
+   doom-user-dir
+   "[a-zA-Z0-9]+\\.el$"
+   nil
+   (lambda (s)
+     (and
+      (cae-compile-file-not-in-unused-module-p s)
+      (not
+       (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
+                      "shared-local" "media" "secrets" "trash")
+                  :test (lambda (x y)
+                          (string= (file-name-nondirectory x)
+                                   y))))))))
