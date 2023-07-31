@@ -70,6 +70,9 @@
   (load! "lisp/cae-theme")
   (load! "lisp/cae-cheatsheets")
 
+  (when (>= emacs-major-version 29)
+    (pixel-scroll-precision-mode +1))
+
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
   (setq display-line-numbers-type t)
