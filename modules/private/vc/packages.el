@@ -7,4 +7,5 @@
 (package! vc-backup :recipe (:repo "LemonBreezes/vc-backup"))
 (package! magit-stats)
 (package! embark-vc)
-(package! consult-gh)
+(when (modulep! :completion vertico)
+  (package! consult-gh))
