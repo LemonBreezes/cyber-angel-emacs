@@ -1,9 +1,5 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;;Since I sometimes compile my config, I want to make sure that I'm always
-;;loading the latest version.
-(setq load-prefer-newer (not (or cae-config-compilation-on-kill-enabled-p
-                                 cae-config-incremental-compilation-enabled-p)))
 (setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
 (when (version< "30.0" emacs-version)
