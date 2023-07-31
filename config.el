@@ -3,9 +3,6 @@
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
 
-(when cae-config-incremental-compilation-enabled-p
-  (run-with-idle-timer 2 nil #'cae-compile-schedule-native-compilation))
-
 ;;; Stuff that should not be disabled.
 
 (unless (modulep! :editor evil)
