@@ -15,14 +15,13 @@
       (straight-rebuild-package package))))
 
 ;;;###autoload
-(defun cae-compile-autoloads ()
+(defun cae-compile-list-files-to-compile ()
   (directory-files-recursively
    doom-user-dir
    "[a-zA-Z0-9]+\\.el$"
    nil
    (lambda (s)
      (and
-      (cae-compile-file-not-in-unused-module-p s)
       (not
        (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
                       "shared-local" "media" "secrets" "trash" "org" "media"
