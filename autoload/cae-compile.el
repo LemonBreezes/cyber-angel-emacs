@@ -17,9 +17,11 @@
 ;;;###autoload
 (defun cae-compile-list-files-to-compile ()
   (require 'dash)
+  ;; List autoloads and startup program files
   (-filter
    (lambda (s) (or (string-match-p "autoload" s)
-              (and (string-match-p "/startup-programs/" s)
+              (and (modulep! :private exwm)
+                   (string-match-p "/startup-programs/" s)
                    (not (string-match-p "disabled" s)))))
    (directory-files-recursively
     doom-user-dir
