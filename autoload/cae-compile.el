@@ -16,16 +16,19 @@
 
 ;;;###autoload
 (defun cae-compile-list-files-to-compile ()
-  (directory-files-recursively
-   doom-user-dir
-   "[a-zA-Z0-9]+\\.el$"
-   nil
-   (lambda (s)
-     (and
-      (not
-       (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
-                      "shared-local" "media" "secrets" "trash" "org" "media"
-                      "lisp")
-                  :test (lambda (x y)
-                          (string= (file-name-nondirectory x)
-                                   y))))))))
+  (require 'dash)
+  (-filter
+   (lambda ())
+   (directory-files-recursively
+    doom-user-dir
+    "[a-zA-Z0-9]+\\.el$"
+    nil
+    (lambda (s)
+      (and
+       (not
+        (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
+                       "shared-local" "media" "secrets" "trash" "org" "media"
+                       "lisp")
+                   :test (lambda (x y)
+                           (string= (file-name-nondirectory x)
+                                    y)))))))))
