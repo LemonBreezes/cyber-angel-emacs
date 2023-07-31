@@ -243,14 +243,15 @@ also marks comment with leading whitespace"
 (defun cae-lookup-definition-dwim (identifier &optional arg)
   (interactive (list (doom-thing-at-point-or-region)
                      current-prefix-arg))
+  (require 'ffap)
   (cond ((null identifier) (user-error "Nothing under point"))
         ((+lookup--jump-to :definition identifier nil arg))
         ((when-let ((file (ffap-file-at-point)))
            (when (and (file-exists-p file)
-                    (not (and buffer-file-name
-                              (file-equal-p file buffer-file-name))))
-               (progn (better-jumper-set-jump (marker-position (point-marker)))
-                      (find-file file)))))
+                      (not (and buffer-file-name
+                                (file-equal-p file buffer-file-name))))
+             (progn (better-jumper-set-jump (marker-position (point-marker)))
+                    (find-file file)))))
         ((user-error "Couldn't find the definition of %S" (substring-no-properties identifier)))))
 
 ;;;###autoload
