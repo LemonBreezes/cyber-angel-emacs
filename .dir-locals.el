@@ -22,7 +22,8 @@
 
             ;; Byte compile autoload files on save.
             (when (or (string-match-p "autoload" (buffer-file-name))
-                      (and (string-match-p "/startup-programs/" (buffer-file-name))
+                      (and (modulep! :private exwm)
+                           (string-match-p "/startup-programs/" (buffer-file-name))
                            (not (string-match-p "disabled" s))))
               (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
 
