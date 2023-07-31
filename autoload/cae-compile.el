@@ -18,25 +18,26 @@
 (defun cae-compile-list-files-to-compile ()
   (require 'dash)
   ;; List autoloads and startup program files
-  (-filter
-   (lambda (s) (or (string-match-p "autoload" s)
-              (and (modulep! :private exwm)
-                   (string-match-p "/startup-programs/" s)
-                   (not (string-match-p "disabled" s)))))
-   (directory-files-recursively
-    doom-user-dir
-    "[a-zA-Z0-9]+\\.el$"
-    nil
-    (lambda (s)
-      (and
-       (not
-        (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
-                       "shared-local" "media" "secrets" "trash" "org" "media"
-                       "lisp")
-                   :test (lambda (x y)
-                           (string= (file-name-nondirectory x)
-                                    y))))))))
-  (concat doom-user-dir "config.el"))
+  (->> (directory-files-recursively
+        doom-user-dir
+        "[a-zA-Z0-9]+\\.el$"
+        nil
+        (lambda (s)
+          (and
+           (not
+            (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
+                           "shared-local" "media" "secrets" "trash" "org" "media"
+                           "lisp")
+                       :test (lambda (x y)
+                               (string= (file-name-nondirectory x)
+                                        y)))))))
+       (-filter
+        (lambda (s) (or (string-match-p "autoload" s)
+                   (and (modulep! :private exwm)
+                        (string-match-p "/startup-programs/" s)
+                        (not (string-match-p "disabled" s)))))
+        )
+       (cons (concat doom-user-dir "config.el"))))
 
 ;;;###autoload
 (defun cae-compile-private-config ()
