@@ -36,7 +36,8 @@
                    (and (modulep! :private exwm)
                         (string-match-p "/startup-programs/" s)
                         (not (string-match-p "disabled" s))))))
-       (cons (concat doom-user-dir "config.el"))))
+       (cons (concat doom-user-dir "config.el"))
+       (cons (concat doom-user-dir "lisp/cae-bindings.el"))))
 
 ;;;###autoload
 (defun cae-compile-private-config ()
