@@ -4,7 +4,7 @@
 
 (defvar cae-config-finished-loading nil
   "Whether the configuration has finished loading.")
-;
+
 ;;; Stuff that should not be disabled.
 
 (unless (modulep! :editor evil)
