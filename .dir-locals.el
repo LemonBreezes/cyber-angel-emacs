@@ -21,10 +21,8 @@
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
             ;; Byte compile autoload files on save.
-            (when (or (string-match-p "autoload" (buffer-file-name))
-                      (and (modulep! :private exwm)
-                           (string-match-p "/startup-programs/" (buffer-file-name))
-                           (not (string-match-p "disabled" s))))
+            (when (member (buffer-file-name)
+                          (cae-compile-list-files-to-compile))
               (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
 
           ;; Automatically update Eshell aliases.
