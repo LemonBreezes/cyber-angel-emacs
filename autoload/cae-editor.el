@@ -248,7 +248,7 @@ also marks comment with leading whitespace"
         ((and (string-match-p "/" identifier)
               (file-exists-p identifier)
               (not (and buffer-file-name
-                        (file-equal-p file buffer-file-name))))
+                        (file-equal-p identifier buffer-file-name))))
          (progn (better-jumper-set-jump (marker-position (point-marker)))
                 (find-file file)))
         ((+lookup--jump-to :definition identifier nil arg))
