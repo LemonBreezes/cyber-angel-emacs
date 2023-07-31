@@ -15,9 +15,13 @@
                                        "packages.el")
                                      :test #'string=))
                      (not (string-match-p "/packages/"
-                           buffer-file-name))
+                                          buffer-file-name))
                      (bound-and-true-p cae-config-finished-loading))
-            (add-hook 'write-file-functions 'eval-buffer 1 t))
+            (add-hook 'write-file-functions 'eval-buffer 1 t)
+
+            ;; Byte compile autoload files on save.
+            (when (string-match-p "/autoload/" (buffer-file-name))
+              (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
 
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
