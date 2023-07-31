@@ -631,6 +631,12 @@
 
 (use-package! proced
   :defer t
+  :init
+  (map! :map +misc-applications-system-map
+        "P" #'proced)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "P" "proced"))
   :config
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
