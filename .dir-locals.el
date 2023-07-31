@@ -12,6 +12,7 @@
                      (not (cl-member (file-name-nondirectory (buffer-file-name))
                                      `("init.el"
                                        ,dir-locals-file
+                                       "custom.el"
                                        "packages.el")
                                      :test #'string=))
                      (not (string-match-p "/packages/"
