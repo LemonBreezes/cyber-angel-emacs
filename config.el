@@ -66,7 +66,6 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
-
 ;;; UI
 
 (when cae-init-ui-enabled-p
