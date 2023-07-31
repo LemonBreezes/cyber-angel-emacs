@@ -25,7 +25,8 @@
       (cae-compile-file-not-in-unused-module-p s)
       (not
        (cl-member s '("eshell" "packages" "snippets" ".local" ".git"
-                      "shared-local" "media" "secrets" "trash" "org")
+                      "shared-local" "media" "secrets" "trash" "org" "media"
+                      "lisp")
                   :test (lambda (x y)
                           (string= (file-name-nondirectory x)
                                    y))))))))
