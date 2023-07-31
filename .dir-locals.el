@@ -20,9 +20,7 @@
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
             ;; Byte compile autoload files on save.
-            (when (or (string-match-p "/autoload/" (buffer-file-name))
-                      (string-match-p "/autoload.el$" (buffer-file-name)))
-              (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
+            (add-hook 'after-save-hook #'elisp-byte-compile-file nil t))
 
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
