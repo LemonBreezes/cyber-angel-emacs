@@ -9,8 +9,7 @@
       ido-confirm-unique-completion t
       ido-case-fold t
       ido-create-new-buffer 'always
-      ido-enable-flex-matching t
-      ido-everywhere t)
+      ido-enable-flex-matching t)
 
 (map! :map (ido-common-completion-map ido-file-completion-map)
       "C-w"  #'ido-delete-backward-word-updir
