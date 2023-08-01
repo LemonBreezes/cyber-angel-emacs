@@ -1,6 +1,6 @@
 ;;; private/vc/autoload.el -*- lexical-binding: t; -*-
 
-(eval-when-compile (require 'magit))
+(eval-when-compile (require 'magit nil t))
 
 ;;;###autoload
 (defun cae-magit-insert-diff-upstream (&optional branch)
