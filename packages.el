@@ -117,6 +117,7 @@
 
 ;; cae-ido.el
 (package! ido-vertical-mode)
+(package! flx-ido)
 
 ;;; XML
 (package! xml-format)
