@@ -467,7 +467,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   "Offer ido-based completion using the specified hippie-expand function."
   (let* ((options (cae-hippie-expand-completions hippie-expand-function))
          (selection (and options
-                         (ido-completing-read "Completions: " options))))
+                         (completing-read "Completions: " options))))
     (if selection
         (progn (he-substitute-string selection t)
                (when (condition-case error
@@ -481,3 +481,15 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   "Offer ido-based completion for the word at point."
   (interactive)
   (cae-hippie-expand-with 'hippie-expand))
+
+;;;###autoload
+(defun cae-vertico-previous ()
+  (interactive)
+  (let ((vertico--allow-prompt nil))
+    (call-interactively #'vertico-previous)))
+
+;;;###autoload
+(defun cae-vertico-next ()
+  (interactive)
+  (let ((vertico--allow-prompt nil))
+    (call-interactively #'vertico-next)))
