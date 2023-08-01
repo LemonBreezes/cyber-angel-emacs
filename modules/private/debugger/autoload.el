@@ -89,7 +89,7 @@ _R_: Restart        _sb_: List breakpoints
   ("R" cae-debugger-dap-kill-all-sessions-and-restart nil :color red))
 
 ;;;###autoload
-(defun cae-run-or-pop-to-gdb ()
+(defun cae-debugger-run-or-pop-to-gdb ()
   (interactive)
   (require 'gud)
   (cond ((and gud-comint-buffer
