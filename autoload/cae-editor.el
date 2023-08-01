@@ -463,7 +463,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     ;; Provide the options in the order in which they are normally generated.
     (delete he-search-string (reverse he-tried-table))))
 
-(defun cae-ido-hippie-expand-with (hippie-expand-function)
+(defun cae-hippie-expand-with (hippie-expand-function)
   "Offer ido-based completion using the specified hippie-expand function."
   (let* ((options (cae-hippie-expand-completions hippie-expand-function))
          (selection (and options
@@ -473,7 +473,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
       (message "No expansion found"))))
 
 ;;;###autoload
-(defun cae-ido-hippie-expand ()
+(defun cae-hippie-expand ()
   "Offer ido-based completion for the word at point."
   (interactive)
   (cae-ido-hippie-expand-with 'hippie-expand))
