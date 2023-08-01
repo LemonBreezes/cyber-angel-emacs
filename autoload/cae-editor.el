@@ -455,7 +455,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (cl-letf (((symbol-function #'ding) (symbol-function #'ignore))) ; avoid the (ding) when hippie-expand exhausts its options.
       (while (progn
                (funcall hippie-expand-function nil)
-               (setq last-command 'my-hippie-expand-completions)
+               (setq last-command 'cae-hippie-expand-completions)
                (not (equal he-num -1)))))
     ;; Evaluating the completions modifies the buffer, however we will finish
     ;; up in the same state that we began.
