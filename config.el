@@ -981,8 +981,10 @@
              try-complete-file-name-partially
              try-complete-file-name
              try-complete-lisp-symbol-partially
-             try-complete-lisp-symbol)
+             try-complete-lisp-symbol
+             try-expand-line)
            hippie-expand-verbose nil))
+
 
   (use-package! copilot
     :defer t :init
