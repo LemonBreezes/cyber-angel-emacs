@@ -467,7 +467,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   "Offer ido-based completion using the specified hippie-expand function."
   (let* ((options (cae-hippie-expand-completions hippie-expand-function))
          (selection (and options
-                         (ido-completing-read "Completions: " options))))
+                         (completing-read "Completions: " options))))
     (if selection
         (he-substitute-string selection t)
       (message "No expansion found"))))
