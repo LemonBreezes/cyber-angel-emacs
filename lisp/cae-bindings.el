@@ -198,6 +198,12 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
+;; Do not allow selecting the prompt since we can just do `C-u RET' to select
+;; it.
+(map! :map vertico-map
+      [remap vertico-previous] #'cae-vertico-previous
+      [remap vertico-next] #'cae-vertico-next)
+
 (map! :leader
       :prefix "t"
       :desc "Column indicator" "C" #'vline-mode)
