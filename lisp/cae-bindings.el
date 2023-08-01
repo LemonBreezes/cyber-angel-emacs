@@ -165,6 +165,7 @@
       "C-x x o" #'ov-clear
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
+      "M-/" #'hippie-expand
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
