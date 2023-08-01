@@ -469,7 +469,11 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
          (selection (and options
                          (completing-read "Completions: " options))))
     (if selection
-        (he-substitute-string selection t)
+        (progn (he-substitute-string selection t)
+               (when (condition-case error
+                         (scan-sexps (point-min) (point-max))
+                       (scan-error t))
+                 (delete-region (point) (point-at-eol))))
       (message "No expansion found"))))
 
 ;;;###autoload
