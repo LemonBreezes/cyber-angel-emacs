@@ -200,7 +200,6 @@ Can be negative.")
         "<f6>" #'+helm-top-cheatsheet-hydra/body))
 
 (use-package! helm-lines
-  :defer t
-  :config
+  :defer t :config
   (setq helm-lines-search-function #'helm-lines-search-rg
         helm-lines-project-root-function #'doom-project-root))
