@@ -202,4 +202,5 @@ Can be negative.")
 (use-package! helm-lines
   :defer t
   :config
-  (setq helm-lines-search-function #'helm-lines-search-rg))
+  (setq helm-lines-search-function #'helm-lines-search-rg
+        helm-lines-project-root-function #'doom-project-root))
