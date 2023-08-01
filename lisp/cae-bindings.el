@@ -195,6 +195,9 @@
        :map eww-mode-map
        "o" #'ace-link-eww))
 (define-key resize-window-repeat-map "_" #'shrink-window)
+
+;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
+;; a closing paren if parens are unbalanced.
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
