@@ -476,6 +476,6 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
 (defun cae-ido-hippie-expand ()
   "Offer ido-based completion for the word at point."
   (interactive)
-  (my-ido-hippie-expand-with 'hippie-expand))
+  (cae-ido-hippie-expand-with 'hippie-expand))
 
 (global-set-key (kbd "C-M-/") 'cae-ido-hippie-expand)
