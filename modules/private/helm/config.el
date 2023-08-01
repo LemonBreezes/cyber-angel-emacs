@@ -199,5 +199,7 @@ Can be negative.")
   (map! :map helm-top-map
         "<f6>" #'+helm-top-cheatsheet-hydra/body))
 
-(after! helm-lines
+(use-package! helm-lines
+  :defer t
+  :config
   (setq helm-lines-search-function #'helm-lines-search-rg))
