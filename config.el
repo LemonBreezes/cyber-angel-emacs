@@ -957,9 +957,7 @@
     (load! "lisp/cae-corfu"))
 
   ;; Ido
-  (setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
-  (after! ido
-    (load! "lisp/cae-ido"))
+  (load! "lisp/cae-ido")
 
   (after! yasnippet
     (setq yas-triggers-in-field t))     ;Allow nested snippets.
