@@ -451,6 +451,8 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (let ((this-command 'cae-hippie-expand-completions)
         (last-command last-command)
         (buffer-modified (buffer-modified-p))
+        (hippie-expand-try-functions-list
+         (delq 'try-expand-line hippie-expand-try-functions-list))
         (hippie-expand-function (or hippie-expand-function 'hippie-expand)))
     (cl-letf (((symbol-function #'ding) (symbol-function #'ignore))) ; avoid the (ding) when hippie-expand exhausts its options.
       (while (progn
