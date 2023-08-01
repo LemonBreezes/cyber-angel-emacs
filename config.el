@@ -955,6 +955,8 @@
 (when cae-init-autocompletion-enabled-p
   (when (modulep! :private corfu)
     (load! "lisp/cae-corfu"))
+  (after! ido
+    (load! "lisp/cae-ido"))
 
   (after! yasnippet
     (setq yas-triggers-in-field t))     ;Allow nested snippets.
