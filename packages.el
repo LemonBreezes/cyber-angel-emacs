@@ -115,5 +115,8 @@
 (when (modulep! :lang org)
   (package! org-block-capf :recipe (:host github :repo "xenodium/org-block-capf")))
 
+;; cae-ido.el
+(package! ido-vertical-mode)
+
 ;;; XML
 (package! xml-format)
