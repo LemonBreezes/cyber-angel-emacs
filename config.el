@@ -955,8 +955,6 @@
 (when cae-init-autocompletion-enabled-p
   (when (modulep! :private corfu)
     (load! "lisp/cae-corfu"))
-
-  ;; Ido
   (load! "lisp/cae-ido")
 
   (after! yasnippet
