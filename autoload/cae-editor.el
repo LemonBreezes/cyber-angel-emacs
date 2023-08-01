@@ -465,7 +465,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
 
 (defun cae-ido-hippie-expand-with (hippie-expand-function)
   "Offer ido-based completion using the specified hippie-expand function."
-  (let* ((options (my-hippie-expand-completions hippie-expand-function))
+  (let* ((options (cae-hippie-expand-completions hippie-expand-function))
          (selection (and options
                          (ido-completing-read "Completions: " options))))
     (if selection
