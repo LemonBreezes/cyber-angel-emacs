@@ -30,6 +30,7 @@
                                            "aspell.en.pws")))
 (after! cape
   (setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir)))
+(setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
 
 (use-package! git-auto-commit-mode
   :defer t
