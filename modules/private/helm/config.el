@@ -202,4 +202,6 @@ Can be negative.")
 (use-package! helm-lines
   :defer t :config
   (setq helm-lines-search-function #'helm-lines-search-rg
-        helm-lines-project-root-function #'doom-project-root))
+        helm-lines-project-root-function #'doom-project-root)
+  (map! :map cae-completion-prefix-map
+        "l" #'helm-lines))
