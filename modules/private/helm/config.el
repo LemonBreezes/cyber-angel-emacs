@@ -199,9 +199,6 @@ Can be negative.")
   (map! :map helm-top-map
         "<f6>" #'+helm-top-cheatsheet-hydra/body))
 
-(use-package! helm-lines
-  :defer t :config
+(after! helm-lines
   (setq helm-lines-search-function #'helm-lines-search-rg
-        helm-lines-project-root-function #'doom-project-root)
-  (map! :map cae-completion-prefix-map
-        "l" #'helm-lines))
+        helm-lines-project-root-function #'doom-project-root))
