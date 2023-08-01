@@ -40,8 +40,8 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
-;;;###autoload (autoload 'cae-debug-dap-hydra/body "private/debugger/autoload" t nil)
-(defhydra cae-debug-dap-hydra (:color pink :hint nil :foreign-keys run)
+;;;###autoload (autoload 'cae-debugger-dap-hydra/body "private/debugger/autoload" t nil)
+(defhydra cae-debugger-dap-hydra (:color pink :hint nil :foreign-keys run)
   "
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval
 ^^^^^^^^----------------------------------------------------------------------------------------------------------------
