@@ -4,12 +4,12 @@
            (modulep! :tools debugger +lsp))
   (after! lsp-mode
     (map! :map lsp-mode-map
-          "<f6>" #'cae-debug-dap-hydra/body))
+          "<f6>" #'cae-debugger-dap-hydra/body))
   (after! dap-ui
     (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
     (map! :map dap-ui-repl-mode-map
           [remap comint-delchar-or-maybe-eof] #'cae-debugger-quit-or-delete-or-send-eof
-          "<f6>" #'cae-debug-dap-hydra/body))
+          "<f6>" #'cae-debugger-dap-hydra/body))
   (after! dap-mode
     (remove-hook 'dap-stopped-hook #'+dap-running-session-mode)
     (setq dap-debug-restart-keep-session nil
