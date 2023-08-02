@@ -140,19 +140,16 @@ Can be negative.")
   (dolist (fn '(helm-describe-variable helm-describe-function))
     (advice-add fn :around #'doom-use-helpful-a)))
 
-
-;; DEPRECATED `helm-posframe' is no longer maintained and is broken.
-;;(use-package! helm-posframe
-;;  :when (modulep! +childframe)
-;;  :hook (helm-mode . helm-posframe-enable)
-;;  :config
-;;  (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
-;;        helm-posframe-width 0.65
-;;        helm-posframe-height 0.35
-;;        helm-posframe-min-width 160
-;;        helm-posframe-min-height 20
-;;        helm-posframe-border-width 1))
-
+(use-package! helm-posframe
+  :when (modulep! +childframe)
+  :after helm :config
+  (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
+        helm-posframe-width 0.65
+        helm-posframe-height 0.35
+        helm-posframe-min-width 160
+        helm-posframe-min-height 20
+        helm-posframe-border-width 1)
+  (helm-posframe-enable))
 
 (use-package! helm-flx
   :when (modulep! +fuzzy)
@@ -202,9 +199,3 @@ Can be negative.")
 (after! helm-lines
   (setq helm-lines-search-function #'helm-lines-search-rg
         helm-lines-project-root-function #'doom-project-root))
-
-(when (modulep! +childframe)
-  (after! helm-posframe
-    (setq helm-posframe-border-width 1))
-  (after! helm
-    (helm-posframe-enable)))
