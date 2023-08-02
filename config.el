@@ -152,7 +152,7 @@
     (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
-  ;; Do not spam me with warnings
+  ;; Do not spam me with warnings on startup.
   (after! warnings
     (setq warning-minimum-level :emergency
           warning-minimum-log-level :emergency)
