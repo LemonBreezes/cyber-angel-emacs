@@ -491,6 +491,7 @@
 
 (use-package! somafm
   :defer t :init
+  (autoload 'soma "somafm" nil t)
   (map! :map +misc-applications-music-map
         "s" #'+somafm)
   (after! which-key
