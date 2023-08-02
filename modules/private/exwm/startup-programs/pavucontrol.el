@@ -59,3 +59,14 @@
        :desc "Restart Pavucontrol" "r" #'startup/restart-pavucontrol
        :desc "Select Pavucontrol" "s" #'startup/select-pavucontrol
        :desc "Kill Pavucontrol" "x" #'startup/kill-pavucontrol))
+(map! :map +startup-applications-map
+      :prefix "p"
+      "r" #'startup/restart-pavucontrol
+      "s" #'startup/select-pavucontrol
+      "x" #'startup/kill-pavucontrol)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "p"   "Pavucontrol"
+    "p r" "Restart Pavucontrol"
+    "p s" "Select Pavucontrol"
+    "p x" "Kill Pavucontrol"))
