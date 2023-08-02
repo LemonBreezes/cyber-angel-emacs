@@ -195,7 +195,3 @@ Can be negative.")
 (after! helm-sys
   (map! :map helm-top-map
         "<f6>" #'+helm-top-cheatsheet-hydra/body))
-
-(after! helm-lines
-  (setq helm-lines-search-function #'helm-lines-search-rg
-        helm-lines-project-root-function #'doom-project-root))
