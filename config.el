@@ -551,11 +551,11 @@
   (load! "lisp/cae-multiple-cursors")
   (load! "lisp/cae-restore-point")
 
-  (autoload 'cae-project-bookmark (concat doom-private-dir
+  (autoload 'cae-project-bookmark (concat doom-user-dir
                                           "lisp/cae-project-bookmark"))
-  (autoload 'cae-project-bookmark-set (concat doom-private-dir
+  (autoload 'cae-project-bookmark-set (concat doom-user-dir
                                               "lisp/cae-project-bookmark"))
-  (autoload 'cae-project--get-bookmark-file (concat doom-private-dir
+  (autoload 'cae-project--get-bookmark-file (concat doom-user-dir
                                                     "lisp/cae-project-bookmark"))
   (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
         :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
