@@ -144,8 +144,9 @@
 (after! embark
   ;; `elp' instrument package commands from `embark-package-map' are not mapped
   ;; in `+vertico/embark-doom-package-map'.
-  (map! :map +vertico/embark-doom-package-map
-        "t" #'try)
+  (when (modulep! :completion vertico)
+    (map! :map +vertico/embark-doom-package-map
+          "t" #'try))
   (map! :map embark-region-map
         "k" #'cae-kill-region))
 
