@@ -148,7 +148,7 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; The macrostep keymap is completely broken for me without this line. This
 ;; might be an Emacs30 thing.
-(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
+;;(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
 
 ;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
