@@ -6,10 +6,10 @@
 (defvar +startup-prefix "k")
 (defvar +startup-directory (concat (dir!) "startup-programs/"))
 (defvar +startup-config-dir (concat +startup-directory "config-files/"))
+(defvar +startup-applications-map (make-sparse-keymap))
+(define-prefix-command '+startup-applications-map)
 
-(defvar +startup-map (make-sparse-keymap))
-
-(map! :leader :prefix (+startup-prefix . "programs"))
+(map! :leader :desc "startup applications" +startup-prefix #'+startup-applications-map)
 
 (defun +workspace-switch-to-exwm-buffer-maybe (&rest _)
   ;; Also rename buffers to their titles
