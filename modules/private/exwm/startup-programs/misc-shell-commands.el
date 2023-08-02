@@ -30,12 +30,19 @@
   (setq startup/picom-process
         (start-process "picom" startup/misc-shell-commands-buffer "picom")))
 
-;; Start solaar
+;; Start solaar for my Logitech mouse
 (defvar startup/solaar-process nil)
 (when (and (executable-find "solaar")
            (not (process-live-p startup/solaar-process)))
   (setq startup/solaar-process
         (start-process "solaar" startup/misc-shell-commands-buffer "solaar" "--window=hide")))
+
+;; Start the Music Player Daemon
+(defvar startup/mpd-process nil)
+(when (and (executable-find "mpd")
+           (not (process-live-p startup/mpd-process)))
+  (setq startup/mpd-process
+        (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
 
 ;; Start up Talon.
 ;; (start-process "talon" startup/misc-shell-commands-buffer "~/src/talon/run.sh")
