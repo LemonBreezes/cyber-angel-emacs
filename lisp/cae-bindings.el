@@ -330,7 +330,8 @@
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-.") #'cae-completion-prefix-map)
             (define-key map (kbd "<f5>") #'cae-completion-prefix-map)
-            map))
+            map)
+  :group 'cae)
 (cae-completion-mode +1)
 
 (after! cc-mode
