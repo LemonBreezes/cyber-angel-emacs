@@ -1,5 +1,7 @@
 ;;; private/debugger/autoload.el -*- lexical-binding: t; -*-
 
+(eval-when-compile (require 'hydra nil t))
+
 ;;;###autoload
 (defun cae-debugger-dap-kill-all-sessions-and-restart ()
   (interactive)
