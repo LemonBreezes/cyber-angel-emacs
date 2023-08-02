@@ -44,15 +44,15 @@ Note that changes are applied only after a cache reset, via
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
   (map! (:unless (modulep! +tng)
-          :desc "complete" "C-SPC" #'completion-at-point)
+         "C-SPC" #'completion-at-point)
         (:map 'corfu-map
-              (:when (modulep! +orderless)
-                :desc "insert separator" "C-SPC" #'corfu-insert-separator)
-              (:when (modulep! +tng)
-                :desc "next" [tab] #'corfu-next
-                :desc "previous" [backtab] #'corfu-previous
-                :desc "next" "TAB" #'corfu-next
-                :desc "previous" "S-TAB" #'corfu-previous)))
+         (:when (modulep! +orderless)
+          "C-SPC" #'corfu-insert-separator)
+         (:when (modulep! +tng)
+          [tab] #'corfu-next
+          [backtab] #'corfu-previous
+          "TAB" #'corfu-next
+          "S-TAB" #'corfu-previous)))
 
   (when (modulep! :editor evil)
     (evil-collection-define-key 'insert 'corfu-map
@@ -68,9 +68,9 @@ Note that changes are applied only after a cache reset, via
             (completion-cycle-threshold completion-cycling))
         (apply #'consult-completion-in-region completion-in-region--data)))
     (map! :map 'corfu-map
-          :desc "move to minibuffer" "s-<down>" #'corfu-move-to-minibuffer
+          "s-<down>" #'corfu-move-to-minibuffer
           (:when (modulep! :editor evil)
-            :desc "move to minibuffer" "s-j" #'corfu-move-to-minibuffer))))
+            "s-j" #'corfu-move-to-minibuffer))))
 
 (use-package! cape
   :after corfu
@@ -110,14 +110,14 @@ Note that changes are applied only after a cache reset, via
   :config
   (setq corfu-popupinfo-delay '(0.5 . 1.0))
   (map! (:map 'corfu-map
-         :desc "scroll info up" "C-<up>" #'corfu-popupinfo-scroll-down
-         :desc "scroll info down" "C-<down>" #'corfu-popupinfo-scroll-up
-         :desc "scroll info up" "C-S-p" #'corfu-popupinfo-scroll-down
-         :desc "scroll info down" "C-S-n" #'corfu-popupinfo-scroll-up
-         :desc "toggle info" "C-h" #'corfu-popupinfo-toggle)
+         "C-<up>" #'corfu-popupinfo-scroll-down
+         "C-<down>" #'corfu-popupinfo-scroll-up
+         "C-S-p" #'corfu-popupinfo-scroll-down
+         "C-S-n" #'corfu-popupinfo-scroll-up
+         "C-h" #'corfu-popupinfo-toggle)
         (:map 'corfu-popupinfo-map
          :when (modulep! :editor evil)
          ;; Reversed because popupinfo assumes opposite of what feels intuitive
          ;; with evil.
-         :desc "scroll info up" "C-S-k" #'corfu-popupinfo-scroll-down
-         :desc "scroll info down" "C-S-j" #'corfu-popupinfo-scroll-up)))
+         "C-S-k" #'corfu-popupinfo-scroll-down
+         "C-S-j" #'corfu-popupinfo-scroll-up)))
