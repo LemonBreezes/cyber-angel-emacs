@@ -37,6 +37,7 @@
 
 ;;;###autoload (autoload 'cae-magit-forge-pullreq-list-hydra/body "private/vc/autoload" nil t)
 (defhydra cae-magit-forge-pullreq-list-hydra (:color pink)
+  ""
   ("<f6>" nil "Exit" :exit t)
   ("j" +default/search-buffer "Search buffer")
   ("o" forge-browse-topic "Open in browser"))
