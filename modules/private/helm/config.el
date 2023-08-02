@@ -205,3 +205,5 @@ Can be negative.")
 
 (after! helm-posframe
   (setq helm-posframe-border-width 1))
+(after! helm
+  (helm-posframe-enable))
