@@ -125,7 +125,7 @@
             (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
             (require 'dirvish nil t)
             (unless (memq #'dired-noselect find-directory-functions)
-              (add-hook 'find-directory-functions #'dired-noselect t))
+              (add-hook 'find-directory-functions #'dired-noselect :append))
             (dired-noselect dir))
           t)
 
