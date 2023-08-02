@@ -55,12 +55,16 @@
                        (persp-get-by-name startup/chromium-workspace))
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("c" . "Chromium")
-       :desc "Restart Chromium" "r" #'startup/restart-chromium
-       :desc "Select Chromium" "s" #'startup/select-chromium
-       :desc "Kill Chromium" "x" #'startup/kill-chromium))
+(map! :map +startup-applications-map
+      :prefix "c"
+      "r" #'startup/restart-chromium
+      "s" #'startup/select-chromium
+      "x" #'startup/kill-chromium)
+(which-key-add-keymap-based-replacements +startup-applications-map
+  "c" "Chromium"
+  "c r" "Restart Chromium"
+  "c s" "Select Chromium"
+  "c x" "Kill Chromium")
 
 (when (modulep! :private exwm)
   (defadvice! +exwm--firefox-bookmark-handler-a (orig-fn &rest args)
