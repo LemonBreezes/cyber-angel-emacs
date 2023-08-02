@@ -71,10 +71,12 @@
       "a a" "set alarm"
       "a A" "list alarms"))
   :config
-  (map! :leader
-        :prefix +misc-applications-prefix
-        (:prefix ("a" . "alarms")
-         "k" #'alarm-clock-kill))
+  (map! :map +misc-applications-standalone-apps-map
+        :prefix "a"
+        "k" #'alarm-clock-kill)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "a k" "kill alarm"))
   (setq alarm-clock-cache-file
         (expand-file-name "alarm-clock.cache" doom-cache-dir))
   (alarm-clock--turn-autosave-on))
