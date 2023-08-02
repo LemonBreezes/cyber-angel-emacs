@@ -27,12 +27,17 @@
                  startup/flameshot-executable
                  "gui"))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("f" . "Flameshot")
-       :desc "Restart Flameshot" "r" #'startup/restart-flameshot
-       :desc "Kill Flameshot" "x" #'startup/kill-flameshot
-       :desc "Take screenshot" "f" #'startup/flameshot-take-screenshot))
+(map! :map +startup-applications-map
+      :prefix "f"
+      "r" #'startup/restart-flameshot
+      "x" #'startup/kill-flameshot
+      "f" #'startup/flameshot-take-screenshot)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "f" "Flameshot"
+    "f r" "Restart Flameshot"
+    "f x" "Kill Flameshot"
+    "f f" "Take screenshot"))
 
 ;; (if (process-live-p startup/flameshot-process)
 ;;     (startup/restart-flameshot)
