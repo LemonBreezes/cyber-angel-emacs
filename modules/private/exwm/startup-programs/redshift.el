@@ -17,7 +17,7 @@
                               ":"
                               (number-to-string calendar-longitude))
                  (if (cae-night-time-p)
-                     `("-P" "-O" "1000" "-b"
+                     `("-P" "-O" "1300" "-b"
                        ;; Set monitor brightness lower in certain applications.
                        ,(pcase (+workspace-current-name)
                           ("Teams" "0.6")
