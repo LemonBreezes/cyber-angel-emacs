@@ -21,8 +21,9 @@
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
             ;; Byte compile autoload files on save.
-            (when (member (buffer-file-name)
-                          (cae-compile-list-files-to-compile))
+            (when (and (fboundp 'cae-compile-list-files-to-compile)
+                       (member (buffer-file-name)
+                               (cae-compile-list-files-to-compile)))
               (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
 
           ;; Automatically update Eshell aliases.
