@@ -3,7 +3,7 @@
 
 (package! helm)
 
-;;(when (modulep! +childframe)
-;;  (package! helm-posframe))
+(when (modulep! +childframe)
+  (package! helm-posframe))
 (when (modulep! +fuzzy)
   (package! helm-flx))
