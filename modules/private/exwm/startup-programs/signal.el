@@ -44,12 +44,17 @@
   (+workspace-switch startup/signal-workspace t)
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("s" . "Signal")
-       :desc "Restart Signal" "r" #'startup/restart-signal
-       :desc "Select Signal" "s" #'startup/select-signal
-       :desc "Kill Signal" "x" #'startup/kill-signal))
+(map! :map +startup-applications-map
+      :prefix "s"
+      "r" #'startup/restart-signal
+      "s" #'startup/select-signal
+      "x" #'startup/kill-signal)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "s" "Signal"
+    "s r" "Restart Signal"
+    "s s" "Select Signal"
+    "s x" "Kill Signal"))
 
 ;; (if (process-live-p startup/signal-process)
 ;;     (startup/restart-signal)
