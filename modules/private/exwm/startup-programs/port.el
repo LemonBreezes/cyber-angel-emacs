@@ -50,12 +50,17 @@
   (+workspace-switch startup/port-workspace t)
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("P" . "Port")
-       :desc "Restart Port" "r" #'startup/restart-port
-       :desc "Select Port" "s" #'startup/select-port
-       :desc "Kill Port" "x" #'startup/kill-port))
+(map! :map +startup-applications-map
+      :prefix "P"
+      "r" #'startup/restart-port
+      "s" #'startup/select-port
+      "x" #'startup/kill-port)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "P" "Port"
+    "P r" "Restart Port"
+    "P s" "Select Port"
+    "P x" "Kill Port"))
 
 ;; (if (process-live-p startup/port-process)
 ;;     (startup/restart-port)
