@@ -53,8 +53,9 @@
 (after! timer-list
   (map! :map timer-list-mode-map
         "<f6>" #'+timer-list-hydra/body))
-(map! :map process-menu-mode-map
-      "<f6>" #'+list-processes-hydra/body)
+(after! simple
+  (map! :map process-menu-mode-map
+        "<f6>" #'+list-processes-hydra/body))
 
 
 ;;; Standalone apps
@@ -563,8 +564,7 @@
 
 (use-package! ednc
   :when (cae-display-graphic-p)
-  :defer t
-  :init
+  :defer t :init
   (defun +ednc-load-h ()
     (and (require 'dbus nil t)
          (ednc-mode +1)))
@@ -577,9 +577,7 @@
       "n" "notifications"
       "ns" "show notifications"
       "nd" "dismiss all notifications"))
-  :config
   (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
-
   (defun +ednc-stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
                  (let ((app-name (ednc-notification-app-name notification)))
@@ -587,18 +585,17 @@
                      (push app-name hide)
                      (ednc-format-notification notification))))
                (ednc-notifications) ""))
-
-  (add-to-list 'global-mode-string
-               '((:eval (+ednc-stack-notifications))))
   (add-hook 'ednc-notification-presentation-functions
             (lambda (&rest _) (force-mode-line-update t)))
+  :config
+  (add-to-list 'global-mode-string
+               '((:eval (+ednc-stack-notifications))))
   (map! :map ednc-view-mode-map
         "n" #'next-line
         "p" #'previous-line))
 
 (use-package! proced
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "p" #'proced)
   (after! which-key
