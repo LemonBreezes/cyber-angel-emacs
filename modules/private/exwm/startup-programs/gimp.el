@@ -43,12 +43,17 @@
   (+workspace-switch startup/gimp-workspace t)
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("g" . "GIMP")
-       :desc "Restart GIMP" "r" #'startup/restart-gimp
-       :desc "Select GIMP" "s" #'startup/select-gimp
-       :desc "Kill GIMP" "x" #'startup/kill-gimp))
+(map! :map +startup-applications-map
+      :prefix "g"
+      "r" #'startup/restart-gimp
+      "s" #'startup/select-gimp
+      "x" #'startup/kill-gimp)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "g" "GIMP"
+    "g r" "Restart GIMP"
+    "g s" "Select GIMP"
+    "g x" "Kill GIMP"))
 
 ;; (if (process-live-p startup/gimp-process)
 ;;     (startup/restart-gimp)
