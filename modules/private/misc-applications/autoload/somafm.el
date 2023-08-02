@@ -1,5 +1,7 @@
 ;;; private/misc-applications/autoload/somafm.el -*- lexical-binding: t; -*-
 
+(eval-when-compile (require 'hydra nil t))
+
 ;;;###autoload
 (defun +somafm ()
   (interactive)
