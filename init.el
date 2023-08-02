@@ -22,7 +22,8 @@ overriding other keymaps."
     :global t
     :init-value nil
     :lighter nil
-    :keymap general-override-mode-map)
+    :keymap general-override-mode-map
+    :group 'cae)
   (add-hook 'cae-general-override-mode-hook
     (cae-defun cae-general--unbind-keys ()
       ;; Do not override `org-edit-special' in Org mode.
