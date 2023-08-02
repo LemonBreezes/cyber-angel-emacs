@@ -945,8 +945,7 @@
     ([remap narrow-to-page] . cae-narrow-to-page))
 
   (use-package! indent-bars
-    :defer t
-    :hook ((python-mode yaml-mode) . indent-bars-mode)))
+    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode)))
 
 
 ;;; Autocompletion
