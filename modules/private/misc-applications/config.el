@@ -127,20 +127,21 @@
              ;; I only use this on my desktop machine when EXWM is running.
              (modulep! :private exwm))
   :defer t :hook (doom-first-file . elcord-mode)
-  :config
-  (setq elcord-quiet t
-        elcord-use-major-mode-as-main-icon t
-        elcord-refresh-rate 10
-        elcord-idle-timer 300
-        elcord-idle-message "Going for a walk...")
-  (require 'parent-mode)
+  :init
   (defadvice! +elcord--buffer-boring-p-a (buffer-name)
     :before-until #'elcord--buffer-boring-p
     (or (string-match-p "^\\*\\(doom\\|Messages\\|scratch\\|dashboard\\|elfeed\\|vterm\\|eshell\\|terminal\\|magit\\|help\\|Compile-Log\\|lsp\\|treemacs\\|\\*\\)" buffer-name)
         (parent-mode-is-derived-p (buffer-local-value 'major-mode (get-buffer buffer-name))
                                   'exwm-mode)
         (parent-mode-is-derived-p (buffer-local-value 'major-mode (get-buffer buffer-name))
-                                  'dired-mode))))
+                                  'dired-mode)))
+  :config
+  (setq elcord-quiet t
+        elcord-use-major-mode-as-main-icon t
+        elcord-refresh-rate 10
+        elcord-idle-timer 300
+        elcord-idle-message "Going for a walk...")
+  (autoload 'parent-mode-is-derived-p "parent-mode"))
 
 (use-package! leetcode
   :defer t :init
