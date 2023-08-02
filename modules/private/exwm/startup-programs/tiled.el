@@ -43,12 +43,16 @@
   (+workspace-switch startup/tiled-workspace t)
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("T" . "Tiled")
-       :desc "Restart Tiled" "r" #'startup/restart-tiled
-       :desc "Select Tiled" "s" #'startup/select-tiled
-       :desc "Kill Tiled" "x" #'startup/kill-tiled))
+(map! :map +startup-applications-map
+      :prefix "T"
+      "r" #'startup/restart-tiled
+      "s" #'startup/select-tiled
+      "x" #'startup/kill-tiled)
+(which-key-add-keymap-based-replacements +startup-applications-map
+  "T" "Tiled"
+  "T r" "Restart Tiled"
+  "T s" "Select Tiled"
+  "T x" "Kill Tiled")
 
 ;; (if (process-live-p startup/tiled-process)
 ;;     (startup/restart-tiled)
