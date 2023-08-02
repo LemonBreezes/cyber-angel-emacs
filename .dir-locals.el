@@ -20,12 +20,6 @@
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
-            ;; Byte compile autoload files on save.
-            (when (and (fboundp 'cae-compile-list-files-to-compile)
-                       (member (buffer-file-name)
-                               (cae-compile-list-files-to-compile)))
-              (add-hook 'after-save-hook #'elisp-byte-compile-file nil t)))
-
           ;; Automatically update Eshell aliases.
           (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
                      (file-equal-p (buffer-file-name)
@@ -35,13 +29,6 @@
 
           (setq-local jinx-local-words
                       "cae corfu eshell")
-
-          ;; Automatically compile Emacs Lisp files (if enabled).
-          (when (bound-and-true-p cae-config-finished-loading)
-            (when (and (derived-mode-p 'emacs-lisp-mode)
-                       (fboundp 'cae-compile-this-elisp-file)
-                       (bound-and-true-p cae-config-compilation-enabled))
-              (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
 
             ;; Automatically commit saved files to Git and push them to the
             ;; remote.
