@@ -217,10 +217,10 @@
         "<f6>" #'+disk-usage-hydra/body))
 
 (use-package! helm-linux-disks
-  :defer t
   :when (and (eq system-type 'gnu/linux)
              (or (modulep! :private helm)
                  (modulep! :completion helm)))
+  :defer t
   :init
   (map! :map +misc-applications-system-map
         "D" #'helm-linux-disks)
