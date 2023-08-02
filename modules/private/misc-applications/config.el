@@ -220,8 +220,7 @@
   :when (and (eq system-type 'gnu/linux)
              (or (modulep! :private helm)
                  (modulep! :completion helm)))
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "D" #'helm-linux-disks)
   (after! which-key
