@@ -53,12 +53,6 @@
                        (persp-get-by-name startup/pavucontrol-workspace))
   (+workspace-switch-to-exwm-buffer-maybe))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("p" . "Pavucontrol")
-       :desc "Restart Pavucontrol" "r" #'startup/restart-pavucontrol
-       :desc "Select Pavucontrol" "s" #'startup/select-pavucontrol
-       :desc "Kill Pavucontrol" "x" #'startup/kill-pavucontrol))
 (map! :map +startup-applications-map
       :prefix "p"
       "r" #'startup/restart-pavucontrol
