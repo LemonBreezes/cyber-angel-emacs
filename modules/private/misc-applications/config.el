@@ -177,14 +177,6 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
-(use-package! somafm
-  :defer t :init
-  (map! :map +misc-applications-external-apps-map
-        "s" #'+somafm)
-  :config
-  (map! :map somafm-mode-map
-        "<f6>" #'+somafm-hydra/body))
-
 (use-package! wttrin
   :defer t :init
   (map! :map +misc-applications-external-apps-map
@@ -493,6 +485,17 @@
 ;; This is another Zone referencing the Matrix movie but it's kind of boring. It
 ;; just says some green text slowly one line at a time.
 ;; https://github.com/vreeze/zone-matrix-wake-up
+
+
+;;; Music
+
+(use-package! somafm
+  :defer t :init
+  (map! :map +misc-applications-music-map
+        "s" #'+somafm)
+  :config
+  (map! :map somafm-mode-map
+        "<f6>" #'+somafm-hydra/body))
 
 
 ;;; Emacs OS
