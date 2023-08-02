@@ -71,12 +71,17 @@
   :before-while #'elcord--start-idle
   (process-live-p startup/discord-process))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("d" . "Discord")
-       :desc "Restart Discord" "r" #'startup/restart-discord
-       :desc "Select Discord" "s" #'startup/select-discord
-       :desc "Kill Discord" "x" #'startup/kill-discord))
+(map! :map +startup-applications-map
+      :prefix "d"
+      "r" #'startup/restart-discord
+      "s" #'startup/select-discord
+      "x" #'startup/kill-discord)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "d" "Discord"
+    "d r" "Restart Discord"
+    "d s" "Select Discord"
+    "d x" "Kill Discord"))
 
 (if (process-live-p startup/discord-process)
     (startup/restart-discord)
