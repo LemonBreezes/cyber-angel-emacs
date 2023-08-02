@@ -13,14 +13,7 @@
   (org-ai-global-mode +1)
   (setq unread-command-events
         (listify-key-sequence (kbd "C-c M-a")))
-  (setq which-key-inhibit t)
-  (add-transient-hook! 'pre-command-hook
-    (setq which-key-inhibit nil))
-  (run-with-idle-timer
-   which-key-idle-delay nil
-   (lambda ()
-       (when which-key-inhibit
-       (which-key-show-keymap 'org-ai-global-mode-prefix-map t)))))
+  (cae-which-key-show-map 'org-ai-global-mode-prefix-map))
 
 ;;;###autoload
 (defun cae-ai-org-ai-kill-region-at-point ()

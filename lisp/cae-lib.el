@@ -14,18 +14,17 @@
   (and (display-graphic-p)
        (not (daemonp))))
 
-;; Add tab bar switch hooks.
-(defvar cae-tab-bar-before-switch-hook nil
-  "Hook run before switching tabs.")
-(defvar cae-tab-bar-after-switch-hook nil
-  "Hook run after switching tabs.")
+(defun cae-which-key-inhibit-hook ()
+  (setq which-key-inhibit nil)
+  (remove-hook 'pre-command-hook
+               #'cae-which-key-inhibit-hook))
 
-(advice-add #'tab-bar-select-tab
-            :around
-            (cae-defun cae-tab-bar-switch-run-hooks-a (fun &rest args)
-              (run-hooks 'cae-tab-bar-before-switch-hook)
-              (let ((cae-tab-bar-after-switch-hook nil)
-                    (cae-tab-bar-before-switch-hook nil))
-                (apply fun args))
-              (run-hooks 'cae-tab-bar-after-switch-hook)))
-(advice-add #'tab-bar-new-tab-to :around #'cae-tab-bar-switch-run-hooks-a)
+(defun cae-which-key-show-map (keymap)
+  (setq which-key-inhibit t)
+  (add-hook 'pre-command-hook #'cae-which-key-inhibit-hook)
+  (run-with-idle-timer
+   which-key-idle-delay nil
+   `(lambda ()
+      (when which-key-inhibit
+        (which-key-show-keymap
+         ,keymap)))))
