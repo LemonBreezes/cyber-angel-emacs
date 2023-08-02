@@ -1,5 +1,8 @@
 ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
+(eval-when-compile (require 'vertico nil t)
+                   (require 'embark nil t))
+
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
@@ -141,9 +144,8 @@
 (after! embark
   ;; `elp' instrument package commands from `embark-package-map' are not mapped
   ;; in `+vertico/embark-doom-package-map'.
-  (when (modulep! :completion vertico)
-    (map! :map +vertico/embark-doom-package-map
-          "t" #'try))
+  (map! :map +vertico/embark-doom-package-map
+        "t" #'try)
   (map! :map embark-region-map
         "k" #'cae-kill-region))
 
