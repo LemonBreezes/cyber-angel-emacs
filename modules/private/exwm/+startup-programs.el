@@ -7,6 +7,8 @@
 (defvar +startup-directory (concat (dir!) "startup-programs/"))
 (defvar +startup-config-dir (concat +startup-directory "config-files/"))
 
+(defvar +startup-map (make-sparse-keymap))
+
 (map! :leader :prefix (+startup-prefix . "programs"))
 
 (defun +workspace-switch-to-exwm-buffer-maybe (&rest _)
