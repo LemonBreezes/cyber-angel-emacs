@@ -13,6 +13,8 @@
        (zone-leave-me-alone)))
     (run-with-idle-timer 1 nil #'zone-nyan-preview)))
 
-(map! :leader
-      :prefix +startup-prefix
-      :desc "Lock screen" "l" #'startup/lock-screen)
+(map! :map +startup-applications-map
+      "l" #'startup/lock-screen)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "l" "Lock screen"))
