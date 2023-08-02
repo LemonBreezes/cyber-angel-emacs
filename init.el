@@ -131,7 +131,7 @@ overriding other keymaps."
 
        :private
        (corfu +orderless +icons)
-       helm
+       (helm +childframe)
        (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
