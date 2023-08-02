@@ -60,8 +60,7 @@
 ;;; Standalone apps
 
 (use-package! alarm-clock
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-standalone-apps-map
         :prefix "a"
         "a" #'alarm-clock-set
@@ -82,8 +81,7 @@
 
 (use-package! elfeed
   :when (modulep! :app rss)
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-standalone-apps-map
         "r" #'=rss)
   :config
@@ -112,8 +110,7 @@
           [remap save-buffer] #'elfeed-tube-save)))
 
 (use-package! my-repo-pins
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-standalone-apps-map
         "j" #'my-repo-pins)
   :config
@@ -124,13 +121,12 @@
 ;;; External apps
 
 (use-package! elcord
-  :defer t
-  :hook (doom-first-file . elcord-mode)
   :when (and (cae-display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
                       (getenv "WSL_DISTRO_NAME")))
              ;; I only use this on my desktop machine when EXWM is running.
              (modulep! :private exwm))
+  :defer t :hook (doom-first-file . elcord-mode)
   :config
   (setq elcord-quiet t
         elcord-use-major-mode-as-main-icon t
@@ -147,8 +143,7 @@
                                   'dired-mode))))
 
 (use-package! leetcode
-  :defer t
-  :init
+  :defer t :init
   (defvar +leetcode-workspace-name "*leetcode*"
     "The name of the workspace to use for leetcode.")
   (when (memq system-type '(cygwin windows-nt ms-dos))
@@ -179,8 +174,7 @@
   (setq leetcode-directory "~/src/leetcode"))
 
 (use-package! somafm
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-external-apps-map
         "s" #'+somafm)
   :config
@@ -188,11 +182,9 @@
         "<f6>" #'+somafm-hydra/body))
 
 (use-package! wttrin
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-external-apps-map
         "w" #'wttrin)
-  :config
   (advice-add #'wttrin-query :after
               (cae-defun +wttrin-setup-h (&rest _)
                 (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
@@ -201,9 +193,8 @@
 ;;; System
 
 (use-package! daemons
-  :defer t
   :when (eq system-type 'gnu/linux)
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "u" #'daemons)
   (after! which-key
@@ -214,8 +205,7 @@
         daemons-show-output-in-minibuffer t))
 
 (use-package! disk-usage
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "d" #'disk-usage)
   (after! which-key
@@ -273,14 +263,7 @@
              ;; Lazy load `pulseaudio-control'.
              (pulseaudio-control-default-keybindings)
              (setq unread-command-events (list ?\C-x ?/))
-             (setq which-key-inhibit t)
-             (add-transient-hook! 'pre-command-hook
-               (setq which-key-inhibit nil))
-             (run-with-idle-timer
-              which-key-idle-delay nil
-              (lambda ()
-                (when which-key-inhibit
-                  (which-key-show-keymap 'pulseaudio-control-map t))))))
+             (cae-which-key-show-map 'pulseaudio-control-map)))
   :config
   (after! which-key
     (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
