@@ -504,9 +504,11 @@
   :defer t :init
   (map! :map +misc-applications-music-map
         "m" #'mpc)
-(after! which-key
+  (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "m" "MPC")))
+      "m" "MPC"))
+  :config
+  (setq mpc-host system-name))
 
 
 ;;; Emacs OS
