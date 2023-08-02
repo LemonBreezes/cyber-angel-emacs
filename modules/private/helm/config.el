@@ -202,3 +202,6 @@ Can be negative.")
 (after! helm-lines
   (setq helm-lines-search-function #'helm-lines-search-rg
         helm-lines-project-root-function #'doom-project-root))
+
+(after! helm-posframe
+  (setq helm-posframe-border-width 1))
