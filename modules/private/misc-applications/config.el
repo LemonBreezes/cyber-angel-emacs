@@ -331,14 +331,12 @@
       "ph" "phonetic")))
 
 (use-package! uuidgen
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-insert-map
         "u" #'uuidgen))
 
 (use-package! decide
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-insert-map
         (:prefix "d"
          "?" #'decide-dwim-insert
@@ -405,8 +403,7 @@
 ;;; Games
 
 (use-package! bubbles
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-games-map
         "b" #'bubbles)
   :config
@@ -427,24 +424,21 @@
         "S" #'bubbles-save-settings))
 
 (use-package! doctor
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-games-map
         "D" #'doctor))
 
 (use-package! dunnet
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-games-map
         "d" #'dunnet))
 
 (use-package! speed-type
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-games-map
         "T" #'speed-type-text)
-  :config
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
+  :config
   (when (modulep! :private corfu)
     (add-to-list 'corfu-excluded-modes #'speed-type-mode))
   (map! :map speed-type--completed-keymap
@@ -455,8 +449,7 @@
         "<f6>" #'+speed-type-hydra/body))
 
 (use-package! snake
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-games-map
         "s" #'snake)
   :config
@@ -464,8 +457,7 @@
         "<f6>" #'+snake-hydra/body))
 
 (use-package! tetris
-  :defer t
-  :init
+  :defer t :init
   (map! (:map +misc-applications-games-map
          "t" #'tetris)
         (:map +misc-applications-eyecandy-map
@@ -482,8 +474,7 @@
 ;;; Eyecandy
 
 (use-package! fireplace
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-eyecandy-map
         "f" #'fireplace)
   :config
@@ -491,22 +482,43 @@
         "<f6>" #'+fireplace-hydra/body))
 
 (use-package! flames-of-freedom
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-eyecandy-map
         "F" #'flames-of-freedom-default))
 
 (use-package! snow
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-eyecandy-map
         "s" #'snow))
 
 (use-package! zone
-  :defer t :defer-incrementally t
-  :init
+  :defer t :defer-incrementally t :init
   (map! :map +misc-applications-eyecandy-map
         "z" #'zone-choose)
+  ;; For `zone-matrix'.
+  (defvar tabbar-mode nil)
+  (autoload 'zone-matrix "zone-matrix")
+  (advice-add #'zone-matrix :before
+              (cae-defun +zone-matrix-setup-buffer-appearance ()
+                (setq-local nobreak-char-display nil)
+                (face-remap-add-relative 'default :background "black")))
+
+  ;; Do not zone in a popup window. Also, do not show other windows when zoning.
+  ;; Quit out of the minibuffer if necessary before zoning.q
+  (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
+    :around #'zone
+    (let ((zone-fn (lambda ()
+                     (let ((wconf (current-window-configuration))
+                           (tabbar-state (frame-parameter nil 'tab-bar-lines)))
+                       (select-window (car (doom-visible-windows)))
+                       (delete-other-windows)
+                       (set-frame-parameter nil 'tab-bar-lines 0)
+                       (apply oldfun args)
+                       (set-frame-parameter nil 'tab-bar-lines tabbar-state)
+                       (set-window-configuration wconf)))))
+      (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn))
+    (dotimes (i (minibuffer-depth))
+      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit)))
   :config
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
@@ -532,35 +544,11 @@
                        zone-pgm-rat-race
                        zone-pgm-paragraph-spaz])
 
-  ;; For `zone-matrix'.
-  (defvar tabbar-mode nil)
-  (autoload 'zone-matrix "zone-matrix")
-  (advice-add #'zone-matrix :before
-              (cae-defun +zone-matrix-setup-buffer-appearance ()
-                (setq-local nobreak-char-display nil)
-                (face-remap-add-relative 'default :background "black")))
   (after! zone-matrix
     (setq zmx-unicode-mode t))
 
   (unless (bound-and-true-p exwm--connection)
-    (zone-when-idle (* 5 60)))
-
-  ;; Do not zone in a popup window. Also, do not show other windows when zoning.
-  ;; Quit out of the minibuffer if necessary before zoning.q
-  (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
-    :around #'zone
-    (let ((zone-fn (lambda ()
-                     (let ((wconf (current-window-configuration))
-                           (tabbar-state (frame-parameter nil 'tab-bar-lines)))
-                       (select-window (car (doom-visible-windows)))
-                       (delete-other-windows)
-                       (set-frame-parameter nil 'tab-bar-lines 0)
-                       (apply oldfun args)
-                       (set-frame-parameter nil 'tab-bar-lines tabbar-state)
-                       (set-window-configuration wconf)))))
-      (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn))
-    (dotimes (i (minibuffer-depth))
-      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit))))
+    (zone-when-idle (* 5 60))))
 
 ;; Here's another Zone that says positive words together with their definitions.
 ;; But it requires `wordnet' to be installed and also an internet connection.
