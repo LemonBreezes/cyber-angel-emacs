@@ -286,16 +286,14 @@
 ;;; Insert
 
 (use-package! helm-rage
-  :defer t
   :when (or (modulep! :private helm)
             (modulep! :completion helm))
-  :init
+  :defer t :init
   (map! :map +misc-applications-insert-map
         "r" #'helm-rage))
 
 (use-package! lorem-ipsum
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-insert-map
         (:prefix "l"
          "l" #'lorem-ipsum-insert-list
@@ -309,8 +307,7 @@
       "l s" "lorem-ipsum-insert-sentences")))
 
 (use-package! password-generator
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-insert-map
         (:prefix "p"
          "c" #'password-generator-custom
