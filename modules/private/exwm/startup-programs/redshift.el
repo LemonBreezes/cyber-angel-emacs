@@ -42,9 +42,9 @@
   (startup/start-redshift arg))
 
 (map! :map +startup-applications-map
-      (:prefix ("r" . "Redshift")
-       :desc "restart Redshift" "r" #'startup/restart-redshift
-       :desc "Kill Redshift" "x" #'startup/kill-redshift))
+      :prefix "r"
+      "r" #'startup/restart-redshift
+      "x" #'startup/kill-redshift)
 (after! which-key
   (which-key-add-keymap-based-replacements +startup-applications-map
     "r" "Redshift"
