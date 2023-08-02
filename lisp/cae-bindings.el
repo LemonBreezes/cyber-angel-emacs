@@ -207,7 +207,9 @@
       [remap previous-line] #'cae-vertico-previous
       [remap previous-line-or-history-element] #'cae-vertico-previous
       [remap next-line] #'cae-vertico-next
-      [remap next-line-or-history-element] #'cae-vertico-next)
+      [remap next-line-or-history-element] #'cae-vertico-next
+      "<up>" #'cae-vertico-previous
+      "<down>" #'cae-vertico-next)
 
 (map! :leader
       :prefix "t"
