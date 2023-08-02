@@ -322,7 +322,8 @@
 (define-key cae-completion-prefix-map "r" #'cape-rfc1345)
 (define-key cae-completion-prefix-map "." #'copilot-complete)
 (when (modulep! :editor multiple-cursors)
-  (define-key cae-completion-prefix-map (kbd "C-.") #'mc/unfreeze-fake-cursors))
+  (define-key cae-completion-prefix-map (kbd "C-.") #'mc/unfreeze-fake-cursors)
+  (define-key cae-completion-prefix-map (kbd "<f5>") #'mc/unfreeze-fake-cursors))
 (define-minor-mode cae-completion-mode
   "A minor mode for convenient completion keybindings."
   :global t
