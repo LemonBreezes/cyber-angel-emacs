@@ -19,6 +19,7 @@
     ("external-apps" "x")
     ("standalone-apps" "t")
     ("insert" "i")
+    ("music" "m")
     ("emacs-os" "o")))
 
 (mapc (lambda (app-type)
