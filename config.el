@@ -21,9 +21,9 @@
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
 
+;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
-  ;; Helm is not our main completion system.
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
 ;; Extra stuff for when we run Doom without any modules loaded.
