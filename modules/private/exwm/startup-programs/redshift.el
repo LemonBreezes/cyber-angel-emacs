@@ -41,11 +41,16 @@
   (startup/kill-redshift)
   (startup/start-redshift arg))
 
-(map! :leader
-      :prefix +startup-prefix
+(map! :map +startup-applications-map
       (:prefix ("r" . "Redshift")
        :desc "restart Redshift" "r" #'startup/restart-redshift
        :desc "Kill Redshift" "x" #'startup/kill-redshift))
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "r" "Redshift"
+    "rr" "Restart Redshift"
+    "rx" "Kill Redshift"))
+
 
 (add-hook 'doom-load-theme-hook #'startup/restart-redshift)
 ;;(advice-add #'+workspace-switch :after #'startup/restart-redshift)
