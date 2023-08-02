@@ -115,8 +115,7 @@
 ;; autoload line it uses.
 (add-to-list 'vc-handled-backends 'Backup t)
 (use-package! vc-backup
-  :defer t
-  :init
+  :defer t :init
   (setq make-backup-files t
         vc-make-backup-files t))
 
