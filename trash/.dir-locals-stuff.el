@@ -6,7 +6,7 @@
   (when (and (derived-mode-p 'emacs-lisp-mode)
              (fboundp 'cae-compile-this-elisp-file)
              (bound-and-true-p cae-config-compilation-enabled))
-    (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
+    (add-hook 'after-save-hook #'cae-compile-this-elisp-file nil t))
 
 
   ;; Byte compile autoload files on save.
