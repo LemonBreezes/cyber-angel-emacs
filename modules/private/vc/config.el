@@ -94,14 +94,6 @@
 
 (use-package! git-email
   :defer t :init
-  (cond ((modulep! :email mu4e)
-         (after! mu4e
-           (require 'git-email-mu4e)
-           (git-email-mu4e-mode +1)))
-        ((modulep! :email notmuch)
-         (after! notmuch
-           (require 'git-email-notmuch)
-           (git-email-notmuch-mode +1))))
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
@@ -110,6 +102,12 @@
         :localleader
         "g" #'git-email-send-email)
   :config
+  (cond ((modulep! :email mu4e)
+         (require 'git-email-mu4e)
+         (git-email-mu4e-mode +1))
+        ((modulep! :email notmuch)
+         (require 'git-email-notmuch)
+         (git-email-notmuch-mode +1)))
   (setq git-email-subject-regexp
         "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)"))
 
