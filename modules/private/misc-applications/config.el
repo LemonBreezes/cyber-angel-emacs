@@ -269,19 +269,18 @@
   (pulseaudio-control-default-keybindings))
 
 (use-package! trashed
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "t" #'trashed)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "t" "trash files"))
-  :config
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
+  (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
+  :config
   (map! :map trashed-mode-map
-        "<f6>" #'+trashed-hydra/body)
-  (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
+        "<f6>" #'+trashed-hydra/body))
 
 
 ;;; Insert
