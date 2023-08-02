@@ -1,9 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(add-hook 'kill-emacs-hook #'cae-compile-private-config)
-
-(defvar cae-config-finished-loading nil
-  "Whether the configuration has finished loading.")
+(defvar cae-config-finished-loading nil)
 
 ;;; Stuff that should not be disabled.
 
@@ -156,9 +153,14 @@
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
   ;; Do not spam me with warnings
-  ;;(after! warnings
-  ;;  (setq warning-minimum-level :emergency
-  ;;        warning-minimum-log-level :emergency))
+  (after! warnings
+    (setq warning-minimum-level :emergency
+          warning-minimum-log-level :emergency)
+    (add-hook 'doom-first-file-hook
+              (cae-defun cae-warnings-initialize ()
+                (setq warning-minimum-level :warning
+                      warning-minimum-log-level :warning))
+              :append))
 
   (after! shr
     ;; `shr' wraps lines in a visually unappealing way.
@@ -504,10 +506,17 @@
 
   (when (modulep! :tools lsp +eglot)
     (after! eglot
-      (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-            '("clangd" "--background-index" "--clang-tidy"
-              "--completion-style=detailed" "--header-insertion=never"
-              "--header-insertion-decorators=0"))))
+      (if (assoc '(c++-mode c-mode) eglot-server-programs)
+          (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
+                '("clangd" "--background-index" "--clang-tidy"
+                  "--completion-style=detailed" "--header-insertion=never"
+                  "--header-insertion-decorators=0"))
+        (setq eglot-server-programs
+              (cons (cons '(c++-mode c-mode)
+                          '("clangd" "--background-index" "--clang-tidy"
+                            "--completion-style=detailed" "--header-insertion=never"
+                            "--header-insertion-decorators=0"))
+                    eglot-server-programs)))))
 
   (when (modulep! :checkers spell)
     (after! spell-fu
