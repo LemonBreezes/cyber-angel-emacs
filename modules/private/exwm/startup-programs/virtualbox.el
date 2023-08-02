@@ -73,12 +73,17 @@
                   t))
            (apply oldfun args))))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("v" . "VirtualBox")
-       :desc "Restart VirtualBox" "r" #'startup/restart-virtualbox
-       :desc "Select VirtualBox" "s" #'startup/select-virtualbox
-       :desc "Kill VirtualBox" "x" #'startup/kill-virtualbox))
+(map! :map +startup-applications-map
+      :prefix "v"
+      "r" #'startup/restart-virtualbox
+      "s" #'startup/select-virtualbox
+      "x" #'startup/kill-virtualbox)
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+    "v" "VirtualBox"
+    "v r" "Restart VirtualBox"
+    "v s" "Select VirtualBox"
+    "v x" "Kill VirtualBox"))
 
 ;; (if (process-live-p startup/virtualbox-process)
 ;;     (startup/restart-virtualbox)
