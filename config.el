@@ -506,17 +506,14 @@
 
   (when (modulep! :tools lsp +eglot)
     (after! eglot
-      (if (assoc '(c++-mode c-mode) eglot-server-programs)
-          (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs))
-                '("clangd" "--background-index" "--clang-tidy"
-                  "--completion-style=detailed" "--header-insertion=never"
-                  "--header-insertion-decorators=0"))
-        (setq eglot-server-programs
-              (cons (cons '(c++-mode c-mode)
-                          '("clangd" "--background-index" "--clang-tidy"
-                            "--completion-style=detailed" "--header-insertion=never"
-                            "--header-insertion-decorators=0"))
-                    eglot-server-programs)))))
+      (let ((clangd '("clangd" "--background-index" "--clang-tidy"
+                      "--completion-style=detailed" "--header-insertion=never"
+                      "--header-insertion-decorators=0")))
+        (if (assoc '(c++-mode c-mode) eglot-server-programs)
+            (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs)) clangd)
+          (setq eglot-server-programs
+                (cons (cons '(c++-mode c-mode) clangd)
+                      eglot-server-programs))))))
 
   (when (modulep! :checkers spell)
     (after! spell-fu
