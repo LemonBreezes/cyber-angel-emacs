@@ -203,7 +203,8 @@ Can be negative.")
   (setq helm-lines-search-function #'helm-lines-search-rg
         helm-lines-project-root-function #'doom-project-root))
 
-(after! helm-posframe
-  (setq helm-posframe-border-width 1))
-(after! helm
-  (helm-posframe-enable))
+(when (modulep! +childframe)
+  (after! helm-posframe
+    (setq helm-posframe-border-width 1))
+  (after! helm
+    (helm-posframe-enable)))
