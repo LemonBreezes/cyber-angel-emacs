@@ -228,11 +228,10 @@
       "D" "disks")))
 
 (use-package! helm-system-packages
-  :defer t
   :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
              (or (modulep! :private helm)
                  (modulep! :completion helm)))
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "s" #'helm-system-packages)
   (after! which-key
@@ -240,8 +239,7 @@
       "s" "system packages")))
 
 (use-package! paradox
-  :defer t
-  :init
+  :defer t :init
   (map! :map +misc-applications-system-map
         "e" #'paradox-list-packages)
   (after! which-key
@@ -253,11 +251,10 @@
         "<f6>" #'cae-paradox-menu-quick-help))
 
 (use-package! pulseaudio-control
-  :defer t
   :when (and (eq system-type 'gnu/linux)
              (executable-find "pactl"(and (eq system-type 'gnu/linux)
                                           (executable-find "pactl"))))
-  :init
+  :defer t :init
   (map! :map ctl-x-map
         "/" (cmd!
              ;; Lazy load `pulseaudio-control'.
