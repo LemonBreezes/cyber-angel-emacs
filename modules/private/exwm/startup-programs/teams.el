@@ -41,12 +41,17 @@
     (startup/restart-teams))
   (+workspace-switch startup/teams-workspace t))
 
-(map! :leader
-      :prefix +startup-prefix
-      (:prefix ("t" . "Teams")
-       :desc "Restart Teams" "r" #'startup/restart-teams
-       :desc "Select Teams" "s" #'startup/select-teams
-       :desc "Kill Teams" "x" #'startup/kill-teams))
+(map! :map +startup-applications-map
+      :prefix "t"
+      "r" #'startup/restart-teams
+      "s" #'startup/select-teams
+      "x" #'startup/kill-teams)
+(after! which-key
+(which-key-add-keymap-based-replacements +startup-applications-map
+  "t"   "Teams"
+  "t r" "Restart Teams"
+  "t s" "Select Teams"
+  "t x" "Kill Teams"))
 
 (when (executable-find "teams")
   (add-hook 'exwm-manage-finish-hook #'startup/manage-teams))
