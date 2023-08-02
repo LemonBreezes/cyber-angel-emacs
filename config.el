@@ -156,9 +156,9 @@
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
   ;; Do not spam me with warnings
-  (after! warnings
-    (setq warning-minimum-level :emergency
-          warning-minimum-log-level :emergency))
+  ;;(after! warnings
+  ;;  (setq warning-minimum-level :emergency
+  ;;        warning-minimum-log-level :emergency))
 
   (after! shr
     ;; `shr' wraps lines in a visually unappealing way.
