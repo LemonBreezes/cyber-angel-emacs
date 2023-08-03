@@ -120,7 +120,6 @@
   (setq set-message-functions
         '(inhibit-message
           set-minibuffer-message)
-        echo-keystrokes 0.02
         inhibit-message-regexps '("C-g is undefined$"))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
