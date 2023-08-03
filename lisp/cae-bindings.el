@@ -176,6 +176,7 @@
       [remap doom/backward-to-bol-or-indent] #'beginning-of-line
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       [remap er/expand-region] #'eri/expand-region
+      "<f7>" #'er/expand-region
       (:after transient
        (:map transient-map
         "<f6>" #'transient-quit-all))
