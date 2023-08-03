@@ -321,7 +321,8 @@
     (add-hook 'org-mode-hook #'iscroll-mode)
     (add-hook 'markdown-mode-hook #'iscroll-mode)
     (add-hook 'image-mode-hook #'iscroll-mode)
-    (add-hook 'eww-mode-hook #'iscroll-mode))
+    (add-hook 'eww-mode-hook #'iscroll-mode)
+    (add-hook 'w3m-mode-hook #'iscroll-mode))
 
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
