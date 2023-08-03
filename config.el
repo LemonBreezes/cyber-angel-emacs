@@ -116,6 +116,9 @@
   (after! time
     (setq display-time-default-load-average nil))
 
+  (after! help
+    (setq describe-bindings-show-prefix-commands t))
+
   (after! help-fns
     (setq help-enable-symbol-autoload t))
 
