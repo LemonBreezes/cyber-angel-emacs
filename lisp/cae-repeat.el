@@ -1,11 +1,11 @@
-;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
+  ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
 (use-package! repeat
   :init
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
-  (setq repeat-exit-key "TAB"
+  (setq repeat-exit-key "RET"
         repeat-check-key nil
         repeat-echo-mode-line-string nil)
 
