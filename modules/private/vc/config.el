@@ -140,7 +140,7 @@
                consult-gh-search-repos
                consult-gh-search-issues)
     :custom
-    (consult-gh-default-clone-directory "~/elisp-packages")
+    (consult-gh-default-clone-directory "~/src/")
     (consult-gh-show-preview t)
     (consult-gh-preview-key "C-l")
     (consult-gh-issue-action #'consult-gh--issue-view-action)
