@@ -126,6 +126,10 @@
   (advice-add #'repeat-post-hook :before-until
               #'cae-repeat-ignore-when-hydra-active-a)
 
+  (after! outline
+    (map! :map outline-navigation-repeat-map
+          "TAB" #'outline-toggle-children))
+
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key")
 
