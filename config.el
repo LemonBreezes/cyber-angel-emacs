@@ -134,6 +134,7 @@
     (setq help-enable-symbol-autoload t))
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
+  (autoload 'shortdoc-help-fns-examples-function "shortdoc")
 
   (after! bind-key
     (setq bind-key-describe-special-forms t))
