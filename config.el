@@ -117,7 +117,9 @@
         mouse-drag-copy-region 'non-empty)
 
   (setq set-message-functions
-        '(set-multi-message))
+        '(inhibit-message
+          set-multi-message)
+        inhibit-message-regexps '("C-g is undefined$"))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
