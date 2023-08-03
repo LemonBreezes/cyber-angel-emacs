@@ -696,7 +696,7 @@
                  doom-fallback-buffer-name))
 
   (after! outline
-    (setq outline-minor-mode-use-buttons t))
+    (setq outline-minor-mode-use-buttons 'in-margins))
 
   (after! ispell
     (setq ispell-quietly t
