@@ -695,6 +695,9 @@
     (add-to-list 'clean-buffer-list-kill-never-buffer-names
                  doom-fallback-buffer-name))
 
+  (after! outline
+    (setq outline-minor-mode-use-buttons t))
+
   (after! ispell
     (setq ispell-quietly t
           ispell-dictionary "en_US"
