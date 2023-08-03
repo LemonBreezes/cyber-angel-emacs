@@ -972,6 +972,14 @@
     (load! "lisp/cae-corfu"))
   (load! "lisp/cae-ido")
 
+  (setq completion-auto-help 'always ; Open completion always; `lazy' another
+                                     ; option
+        completions-max-height 20    ; This is arbitrary
+        completions-detailed t
+        completions-format 'one-column
+        completions-group t
+        completion-auto-select 'second-tab) ; Much more eager
+
   (after! yasnippet
     (setq yas-triggers-in-field t))     ;Allow nested snippets.
 
