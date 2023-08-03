@@ -46,11 +46,8 @@
         dired-listing-switches
         "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group")
 
-  (when (>= emacs-major-version 29)
-    (setq dired-mouse-drag-files t
-          mouse-drag-and-drop-region-cross-program t))
-  (when (>= emacs-major-version 28)
-    (setq dired-kill-when-opening-new-dired-buffer t))
+  (setq dired-mouse-drag-files t
+        dired-kill-when-opening-new-dired-buffer t)
 
   (map! :map dired-mode-map
         "C-M-k" #'dired-kill-subdir
