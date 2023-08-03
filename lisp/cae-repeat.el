@@ -128,8 +128,7 @@
   
   (after! outline
     (map! :map outline-navigation-repeat-map
-          "TAB" #'outline-toggle-children
-          "j" #'consult-outline)
+          "TAB" #'outline-toggle-children)
     (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
 
   (autoload 'embark-verbose-indicator "embark")
