@@ -111,7 +111,7 @@
         scroll-preserve-screen-position 'always)
 
   ;; Mouse drag and drop.
-  (setq mouse-drag-mode-line-buffer t   ;Allow dragging buffers to other programs.
+  (setq mouse-drag-mode-line-buffer t ;Allow dragging buffers to other programs.
         mouse-drag-and-drop-region t
         mouse-drag-and-drop-region-scroll-margin t
         mouse-drag-copy-region 'non-empty
@@ -315,6 +315,12 @@
                 "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
                                         ;package.
                 (topsy-mode -1))))
+
+  (use-package! iscroll
+    :defer t :init
+    (add-hook 'org-mode-hook #'iscroll-mode)
+    (add-hook 'markdown-mode-hook #'iscroll-mode)
+    (add-hook 'image-mode-hook #'iscroll-mode))
 
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
