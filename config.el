@@ -127,9 +127,10 @@
   (after! time
     (setq display-time-default-load-average nil))
 
+  ;; Improve Emacs's base help even though we never use it.
   (after! help
-    (setq describe-bindings-show-prefix-commands t))
-
+    (setq describe-bindings-show-prefix-commands t
+          help-window-keep-selected t))
   (after! help-fns
     (setq help-enable-symbol-autoload t))
   (add-hook 'help-fns-describe-function-functions
