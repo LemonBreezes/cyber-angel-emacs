@@ -612,6 +612,9 @@
   ;; Allow us to undo deleting frames.
   (undelete-frame-mode +1)
 
+  (after! paren
+    (setq show-paren-context-when-offscreen 'overlay))
+
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
