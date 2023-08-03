@@ -112,7 +112,7 @@
         scroll-preserve-screen-position 'always)
 
   ;; Mouse drag and drop.
-  (setq mouse-drag-mode-line-buffer t   ;Allow dragging files to other programs.
+  (setq mouse-drag-mode-line-buffer t   ;Allow dragging buffers to other programs.
         mouse-drag-and-drop-region t
         mouse-drag-and-drop-region-scroll-margin t
         mouse-drag-copy-region 'non-empty
