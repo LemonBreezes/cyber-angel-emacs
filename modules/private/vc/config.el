@@ -133,6 +133,7 @@
   (map! :map git-timemachine-mode-map
         "<f6>" #'git-timemachine-help))
 
+;; TODO `igist' and `consult-gh'.
 (when (modulep! :completion vertico)
   (use-package! consult-gh
     :commands (consult-gh-orgs
