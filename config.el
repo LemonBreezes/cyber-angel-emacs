@@ -110,13 +110,6 @@
                                         ;windows (not just current)
         scroll-preserve-screen-position 'always)
 
-  ;; Mouse drag and drop.
-  (setq mouse-drag-mode-line-buffer t ;Allow dragging buffers to other programs.
-        mouse-drag-and-drop-region t
-        mouse-drag-and-drop-region-scroll-margin t
-        mouse-drag-copy-region 'non-empty
-        mouse-drag-and-drop-region-cross-program t)
-
   (setq set-message-functions
         '(inhibit-message
           set-minibuffer-message)
