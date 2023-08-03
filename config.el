@@ -131,10 +131,10 @@
   ;; Improve Emacs's base help even though we never use it.
   (after! help
     (setq describe-bindings-show-prefix-commands t
-          help-window-keep-selected t
-          help-enable-variable-value-editing t))
+          help-window-keep-selected t))
   (after! help-fns
-    (setq help-enable-symbol-autoload t))
+    (setq help-enable-symbol-autoload t
+          help-enable-variable-value-editing t))
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
   (autoload #'shortdoc-help-fns-examples-function "shortdoc")
