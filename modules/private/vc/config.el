@@ -142,7 +142,7 @@
     :custom
     (consult-gh-default-clone-directory "~/src/")
     (consult-gh-show-preview t)
-    (consult-gh-preview-key "C-l")
+    (consult-gh-preview-key 'any)
     (consult-gh-issue-action #'consult-gh--issue-view-action)
     (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
     (consult-gh-file-action #'consult-gh--files-view-action)
