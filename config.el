@@ -609,6 +609,7 @@
 
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
+  ;; Allow us to undo deleting frames
   (undelete-frame-mode +1)
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
