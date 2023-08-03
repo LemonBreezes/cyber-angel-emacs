@@ -108,8 +108,14 @@
                                         ;recenter my windows .
         window-combination-resize t     ;Take new window space from all other
                                         ;windows (not just current)
-        scroll-preserve-screen-position 'always
-        mouse-drag-mode-line-buffer t)  ;Allow dragging files to other programs.
+        scroll-preserve-screen-position 'always)
+
+  ;; Mouse options
+  (setq mouse-drag-mode-line-buffer t   ;Allow dragging files to other programs.
+                mouse-drag-and-drop-region t
+                mouse-drag-and-drop-region-scroll-margin t
+                mouse-drag-copy-region 'non-empty)
+
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
