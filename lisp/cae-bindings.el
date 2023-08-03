@@ -1,4 +1,4 @@
-;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
+  ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
 (eval-when-compile (require 'vertico nil t)
                    (require 'embark nil t))
@@ -204,6 +204,12 @@
 ;; a closing paren if parens are unbalanced.
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
+
+;; Use `TAB' instead of `RET' for outline cycling buttons
+(after! outline
+  (map! :map outline-overlay-button-map
+        "RET" nil
+        "TAB" #'outline-cycle))
 
 (map! :leader
       :prefix "t"
