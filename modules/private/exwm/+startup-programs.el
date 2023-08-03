@@ -39,4 +39,4 @@
     (progn (tmp/exwm-init-hook)
            (add-to-list 'persp-filter-save-buffers-functions
                         #'exwm--buffer->id))
-  (add-hook 'exwm-init-hook #'tmp/exwm-init-hook 'append))
+  (add-hook 'exwm-init-hook #'tmp/exwm-init-hook :append))
