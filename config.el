@@ -112,9 +112,12 @@
 
   ;; Mouse options
   (setq mouse-drag-mode-line-buffer t   ;Allow dragging files to other programs.
-                mouse-drag-and-drop-region t
-                mouse-drag-and-drop-region-scroll-margin t
-                mouse-drag-copy-region 'non-empty)
+        mouse-drag-and-drop-region t
+        mouse-drag-and-drop-region-scroll-margin t
+        mouse-drag-copy-region 'non-empty)
+
+  (setq set-message-functions
+        '(set-multi-message))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
