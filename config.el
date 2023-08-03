@@ -116,7 +116,6 @@
                 mouse-drag-and-drop-region-scroll-margin t
                 mouse-drag-copy-region 'non-empty)
 
-
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
 
