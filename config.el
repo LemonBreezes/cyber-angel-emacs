@@ -70,8 +70,7 @@
   (load! "lisp/cae-theme")
   (load! "lisp/cae-cheatsheets")
 
-  (when (>= emacs-major-version 29)
-    (add-hook 'doom-first-buffer-hook #'pixel-scroll-precision-mode))
+  (add-hook 'doom-first-buffer-hook #'pixel-scroll-precision-mode)
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
