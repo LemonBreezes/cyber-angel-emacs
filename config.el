@@ -891,7 +891,10 @@
       '((eri/mark-inside-org-table-cell
          eri/mark-outside-org-table-cell)))
     (setq eri/try-expand-list
-          '((er/mark-inside-quotes
+          '((er/mark-symbol
+             er/mark-symbol-with-prefix
+             er/mark-next-accessor)
+            (er/mark-inside-quotes
              eri/mark-outside-quotes)
             (er/mark-inside-pairs
              er/mark-outside-pairs)
