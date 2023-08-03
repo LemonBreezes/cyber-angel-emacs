@@ -960,7 +960,6 @@
              try-expand-line)
            hippie-expand-verbose nil))
 
-
   (use-package! copilot
     :defer t :init
     (add-hook 'text-mode-hook   #'copilot-mode)
