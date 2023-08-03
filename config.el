@@ -115,7 +115,8 @@
   (setq mouse-drag-mode-line-buffer t   ;Allow dragging files to other programs.
         mouse-drag-and-drop-region t
         mouse-drag-and-drop-region-scroll-margin t
-        mouse-drag-copy-region 'non-empty)
+        mouse-drag-copy-region 'non-empty
+        mouse-drag-and-drop-region-cross-program t)
 
   (setq set-message-functions
         '(inhibit-message
