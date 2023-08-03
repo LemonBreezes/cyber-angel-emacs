@@ -111,7 +111,7 @@
                                         ;windows (not just current)
         scroll-preserve-screen-position 'always)
 
-  ;; Mouse options
+  ;; Mouse drag and drop.
   (setq mouse-drag-mode-line-buffer t   ;Allow dragging files to other programs.
         mouse-drag-and-drop-region t
         mouse-drag-and-drop-region-scroll-margin t
