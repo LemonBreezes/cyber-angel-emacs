@@ -125,10 +125,12 @@
 
   (advice-add #'repeat-post-hook :before-until
               #'cae-repeat-ignore-when-hydra-active-a)
-
+  
   (after! outline
     (map! :map outline-navigation-repeat-map
-          "TAB" #'outline-toggle-children))
+          "TAB" #'outline-toggle-children
+          "j" #'consult-outline)
+    (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
 
   (autoload 'embark-verbose-indicator "embark")
   (autoload 'which-key--create-buffer-and-show "which-key")
