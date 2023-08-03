@@ -122,6 +122,9 @@
   (after! help-fns
     (setq help-enable-symbol-autoload t))
 
+  (after! bind-key
+    (setq bind-key-describe-special-forms t))
+
   (after! transient
     (setq transient-align-variable-pitch t))
 
