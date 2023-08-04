@@ -1,5 +1,15 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
+(use-package! whisper
+  :defer t
+  :bind ("<f12>" . whisper-run)
+  :config
+  (setq whisper-install-directory doom-cache-dir
+        whisper-model "base"
+        whisper-language "en"
+        whisper-translate nil
+        whisper-use-threads (num-processors)))
+
 (use-package! org-ai
   :defer t :init
   (map! :desc "+org-ai-prefix" "C-c M-a" #'cae-ai-lazy-load-org-ai)
@@ -14,8 +24,12 @@
   (after! embark
     (map! :map embark-region-map
           "M-a" #'org-ai-region-map))
-  (load! "+whisper")
   :config
+  (require 'whisper)
+  (require 'greader-espeak)
+  (require 'greader)
+  (setq org-ai-talk-say-words-per-minute 210
+        org-ai-talk-say-voice "Karen")
   (org-ai-global-mode +1)
   (map! :map org-ai-global-mode-map
         :prefix ("C-c M-a" . "org-ai")
