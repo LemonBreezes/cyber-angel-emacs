@@ -16,11 +16,15 @@
 
 ;;; Tracing functions
 
-(defun cae-debug-backtrace-a (&rest args)
-  (backtrace))
+(defun cae-debug-backtrace-a (args)
+  `(lambda (&rest fn-args)
+     (when (or (null ,args) (equal ,args fn-args))
+       (backtrace))))
 
-(defmacro backtrace! (function)
-  `(advice-add ',function :before #'cae-debug-backtrace-a))
+(cae-debug-backtrace-a nil)
+
+(defmacro backtrace! (function &rest args)
+  `(advice-add ',function :before ,(cae-debug-backtrace-a args)))
 
 (defmacro unbacktrace! (function)
   `(advice-remove ',function #'cae-debug-backtrace-a))
