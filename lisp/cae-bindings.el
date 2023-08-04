@@ -1,5 +1,7 @@
   ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
+;;; Fixup leader key
+
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
@@ -63,6 +65,22 @@
                'deft))
   (define-key doom-leader-map "nd" nil))
 
+;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
+;; Evil.
+(unless (modulep! :editor evil)
+  (map! :leader :desc "help" "h" help-map))
+
+(when (modulep! :editor snippets)
+  (map! (:when (modulep! :completion vertico)
+         [remap yas-insert-snippet] #'consult-yasnippet)
+        :map yas-minor-mode-map
+        "C-c & C-s" nil
+        "C-c & C-n" nil
+        "C-c & C-v" nil))
+
+
+;;; Extra which-key descriptions
+
 ;; Add some descriptions for built-in prefixes.
 (after! which-key
   (which-key-add-keymap-based-replacements search-map "h" "highlight")
@@ -94,10 +112,7 @@
   (which-key-add-key-based-replacements "C-x r" "register")
   (which-key-add-key-based-replacements "C-x X" "edebug"))
 
-;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
-;; Evil.
-(unless (modulep! :editor evil)
-  (map! :leader :desc "help" "h" help-map))
+;;; General keybindings
 
 ;; Allow escape to exit the minibuffer.
 (define-key! :keymaps +default-minibuffer-maps
@@ -229,6 +244,44 @@
 (unless (lookup-key help-map (kbd "SPC"))
   (define-key help-map (kbd "SPC") #'cae-pop-mark))
 
+(after! diff-mode
+  (map! :map diff-mode-map
+        "q" #'kill-this-buffer))
+
+;; Monkey fix `project.el' overriding the `C-x p' keybinding.
+(when (modulep! :ui popup)
+  (unless (boundp 'cae-fix-popup-other-keybinding-idle-timer)
+    (defvar cae-fix-popup-other-keybinding-idle-timer nil)
+    (setq cae-fix-popup-other-keybinding-idle-timer
+          (run-with-idle-timer
+           3 t
+           (cae-defun cae-fix-popup-other-keybinding ()
+             (define-key ctl-x-map "p" nil)
+             (map! :map ctl-x-map
+                   "p" #'+popup/other))))))
+
+;; I'm surprised Doom Emacs doesn't bind a key for copying links.
+(map! :leader
+      :desc "Copy link" "sy" #'link-hint-copy-link)
+
+(advice-add #'persp-set-keymap-prefix :override #'ignore)
+
+;; Bind `tab-bar' commands consistently with the built-in keybindings.
+(defadvice! cae-tab-bar-define-keys-a ()
+  :after #'tab-bar--define-keys
+  (unless (global-key-binding [(control f4)])
+    (global-set-key [(control f4)] #'tab-close)))
+(defadvice! cae-tab-bar-undefine-keys-a ()
+  :after #'tab-bar--undefine-keys
+  (when (eq (global-key-binding [(control f4)]) #'tab-close)
+    (global-unset-key [(control f4)])))
+
+;; Do not query before deleting a frame, since we can undo frame deletions.
+(global-set-key [remap delete-frame] nil)
+(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+
+;;; Avy keybindings
+
 (unless (modulep! :editor evil)
   (map! :prefix "C-z"
         "n" #'avy-goto-line-below
@@ -272,41 +325,7 @@
           "M-j" #'corfu-quick-jump
           "M-i" #'corfu-quick-insert)))
 
-(after! diff-mode
-  (map! :map diff-mode-map
-        "q" #'kill-this-buffer))
-
-;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-(when (modulep! :ui popup)
-  (unless (boundp 'cae-fix-popup-other-keybinding-idle-timer)
-    (defvar cae-fix-popup-other-keybinding-idle-timer nil)
-    (setq cae-fix-popup-other-keybinding-idle-timer
-          (run-with-idle-timer
-           3 t
-           (cae-defun cae-fix-popup-other-keybinding ()
-             (define-key ctl-x-map "p" nil)
-             (map! :map ctl-x-map
-                   "p" #'+popup/other))))))
-
-;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-(map! :leader
-      :desc "Copy link" "sy" #'link-hint-copy-link)
-
-(advice-add #'persp-set-keymap-prefix :override #'ignore)
-
-;; Bind `tab-bar' commands consistently with the built-in keybindings.
-(defadvice! cae-tab-bar-define-keys-a ()
-  :after #'tab-bar--define-keys
-  (unless (global-key-binding [(control f4)])
-    (global-set-key [(control f4)] #'tab-close)))
-(defadvice! cae-tab-bar-undefine-keys-a ()
-  :after #'tab-bar--undefine-keys
-  (when (eq (global-key-binding [(control f4)]) #'tab-close)
-    (global-unset-key [(control f4)])))
-
-;; Do not query before deleting a frame, since we can undo frame deletions.
-(global-set-key [remap delete-frame] nil)
-(global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
+;;; Completion keybindings
 
 ;; This minor mode is defined so that there keybindings can be temporarily
 ;; turned off for multiple cursors and similar modes where completion is not a
@@ -343,17 +362,11 @@
 (cae-completion-mode +1)
 
 (after! cc-mode
-    (if (cae-display-graphic-p)
-        (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
-      (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+  (if (cae-display-graphic-p)
+      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
-  (when (modulep! :editor snippets)
-    (map! (:when (modulep! :completion vertico)
-           [remap yas-insert-snippet] #'consult-yasnippet)
-          :map yas-minor-mode-map
-          "C-c & C-s" nil
-          "C-c & C-n" nil
-          "C-c & C-v" nil))
+;;; Consult keybindings
 
 (when (modulep! :completion vertico)
   (map! (:map help-map
