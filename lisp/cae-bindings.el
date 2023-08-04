@@ -15,26 +15,26 @@
         (:prefix ("C" . "checkers"))))
 
 (when (modulep! :editor snippets)
-  (let ((snippet-prefix "S"))
-    (dolist (p (cdr (lookup-key doom-leader-map "&")))
-      (cl-destructuring-bind (key . binding) p
-        (define-key doom-leader-map (kbd (concat (format "%s " snippet-prefix)
-                                                 (char-to-string key))) binding)))
-    (after! yasnippet
-      (keymap-unset yas-minor-mode-map "C-c" t))
-    (define-key doom-leader-map "&" nil)
-    (after! which-key
-      (setq which-key-replacement-alist
-            (let ((case-fold-search nil))
-              (cl-mapcar (lambda (x)
-                           (when (car-safe (car x))
-                             (setf (car (car x))
-                                   (replace-regexp-in-string
-                                    "C-c &"
-                                    (format "C-c %s" snippet-prefix)
-                                    (car-safe (car x)))))
-                           x)
-                         which-key-replacement-alist))))))
+  (defvar cae-snippet-prefix "S")
+  (dolist (p (cdr (lookup-key doom-leader-map "&")))
+    (cl-destructuring-bind (key . binding) p
+      (define-key doom-leader-map (kbd (concat (format "%s " cae-snippet-prefix)
+                                               (char-to-string key))) binding)))
+  (after! yasnippet
+    (keymap-unset yas-minor-mode-map "C-c" t))
+  (define-key doom-leader-map "&" nil)
+  (after! which-key
+    (setq which-key-replacement-alist
+          (let ((case-fold-search nil))
+            (cl-mapcar (lambda (x)
+                         (when (car-safe (car x))
+                           (setf (car (car x))
+                                 (replace-regexp-in-string
+                                  "C-c &"
+                                  (format "C-c %s" cae-snippet-prefix)
+                                  (car-safe (car x)))))
+                         x)
+                       which-key-replacement-alist)))))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
@@ -410,3 +410,7 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
+
+(after! exwm
+  (map! :map exwm-mode-map
+        "<f12>" #'cae-exwm-start-dictation))
