@@ -13,6 +13,7 @@
   (setq flycheck-keymap-prefix (kbd "C-c C"))
   (map! :leader
         (:prefix ("C" . "checkers"))))
+
 (when (modulep! :editor snippets)
   (let ((snippet-prefix "S"))
     (dolist (p (cdr (lookup-key doom-leader-map "&")))
@@ -63,34 +64,35 @@
   (define-key doom-leader-map "nd" nil))
 
 ;; Add some descriptions for built-in prefixes.
-(which-key-add-keymap-based-replacements search-map "h" "highlight")
-(which-key-add-keymap-based-replacements help-map "4" "other-window")
-(dolist (p '(("4" . "other-window")
-             ("5" . "other-frame")
-             ("8" . "unicode")
-             ("a" . "abbrev")
-             ("a i" . "inverse")
-             ("n" . "narrow")
-             ;;("r" . "register")
-             ("t" . "tab-bar")
-             ("t ^" . "detach")
-             ("v" . "version-control")
-             ("v b" . "branch")
-             ("v M" . "mergebase")
-             ("w" . "window")
-             ("w ^" . "detach")
-             ("x" . "extra")
-             ("C-a" . "gud")
-             ("X" . "edebug")
-             ("C-k" . "kmacro")
-             ("RET" . "MULE")
-             ;;("X" . "debug")
-             ))
-  (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
-;; These two don't work in `which-key-add-keymap-based-replacements' for some
-;; reason.
-(which-key-add-key-based-replacements "C-x r" "register")
-(which-key-add-key-based-replacements "C-x X" "edebug")
+(after! which-key
+  (which-key-add-keymap-based-replacements search-map "h" "highlight")
+  (which-key-add-keymap-based-replacements help-map "4" "other-window")
+  (dolist (p '(("4" . "other-window")
+               ("5" . "other-frame")
+               ("8" . "unicode")
+               ("a" . "abbrev")
+               ("a i" . "inverse")
+               ("n" . "narrow")
+               ;;("r" . "register")
+               ("t" . "tab-bar")
+               ("t ^" . "detach")
+               ("v" . "version-control")
+               ("v b" . "branch")
+               ("v M" . "mergebase")
+               ("w" . "window")
+               ("w ^" . "detach")
+               ("x" . "extra")
+               ("C-a" . "gud")
+               ("X" . "edebug")
+               ("C-k" . "kmacro")
+               ("RET" . "MULE")
+               ;;("X" . "debug")
+               ))
+    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
+  ;; These two don't work in `which-key-add-keymap-based-replacements' for some
+  ;; reason.
+  (which-key-add-key-based-replacements "C-x r" "register")
+  (which-key-add-key-based-replacements "C-x X" "edebug"))
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
