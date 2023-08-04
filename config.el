@@ -613,12 +613,12 @@
   ;; Sensibly handle the primary selection.
   (setq save-interprogram-paste-before-kill t
         select-enable-primary t)
-  ;;(lost-selection-mode +1)
+  (lost-selection-mode +1)
 
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
   ;; Allow us to undo deleting frames.
-  ;;(undelete-frame-mode +1)
+  (undelete-frame-mode +1)
 
   (after! paren
     (setq show-paren-context-when-offscreen 'overlay))
