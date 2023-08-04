@@ -613,7 +613,7 @@
   ;; Sensibly handle the primary selection.
   (setq save-interprogram-paste-before-kill t
         select-enable-primary t)
-  (lost-selection-mode +1)
+  ;;(lost-selection-mode +1)
 
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
