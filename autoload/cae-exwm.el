@@ -2,4 +2,5 @@
 
 ;;;###autoload
 (defun cae-exwm-start-dictation ()
-  (interactive))
+  (interactive)
+  (call-interactively #'exwm-edit--compose))
