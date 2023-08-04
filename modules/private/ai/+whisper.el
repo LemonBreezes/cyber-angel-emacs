@@ -7,11 +7,6 @@
   (setq org-ai-talk-say-words-per-minute 210)
   (setq org-ai-talk-say-voice "Karen"))
 
-;; example usage:
-;; (rk/find-device-matching "FaceTime" :video)
-;; (rk/find-device-matching "Macbook Pro Microphone" :audio)
-;; (rk/select-default-audio-device)
-
 (use-package! whisper
   :defer t
   :bind ("<f12>" . whisper-run)
