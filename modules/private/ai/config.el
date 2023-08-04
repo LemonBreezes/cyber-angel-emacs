@@ -16,6 +16,10 @@
           "M-a" #'org-ai-region-map))
   :config
   (org-ai-global-mode +1)
+
+  (setq org-ai-talk-say-words-per-minute 210)
+  (setq org-ai-talk-say-voice "Karen")
+
   (map! :map org-ai-global-mode-map
         :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
