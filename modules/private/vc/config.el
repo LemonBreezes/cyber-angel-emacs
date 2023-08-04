@@ -147,5 +147,7 @@
         consult-gh-repo-action #'consult-gh--repo-browse-files-action
         consult-gh-file-action #'consult-gh--files-view-action
         consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa" "LemonBreezes" "protesilaos")))
-  (use-package! consult-gh-embark
-    :after (consult-gh embark))
+(use-package! consult-gh-embark
+  :after (consult-gh embark))
+
+(use-package! igist :defer t)
