@@ -280,6 +280,10 @@
 (global-set-key [remap delete-frame] nil)
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
+(after! exwm
+  (map! :map exwm-mode-map
+        "<f12>" #'cae-exwm-start-dictation))
+
 ;;; Avy keybindings
 
 (unless (modulep! :editor evil)
@@ -423,7 +427,3 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
-
-(after! exwm
-  (map! :map exwm-mode-map
-        "<f12>" #'cae-exwm-start-dictation))
