@@ -191,3 +191,4 @@ Can be negative.")
 (after! helm-net
   (setq helm-net-prefer-curl t
         helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
+(setq helm-display-function #'helm-display-buffer-popup-frame)
