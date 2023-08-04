@@ -27,4 +27,4 @@
    `(lambda ()
       (when which-key-inhibit
         (which-key-show-keymap
-         ,keymap)))))
+         ',keymap)))))
