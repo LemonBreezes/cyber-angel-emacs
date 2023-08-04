@@ -284,6 +284,7 @@
   (map! :map exwm-mode-map
         "<f12>" #'cae-exwm-start-dictation))
 
+
 ;;; Avy keybindings
 
 (unless (modulep! :editor evil)
@@ -329,6 +330,7 @@
           "M-j" #'corfu-quick-jump
           "M-i" #'corfu-quick-insert)))
 
+
 ;;; Completion keybindings
 
 ;; This minor mode is defined so that there keybindings can be temporarily
@@ -370,6 +372,7 @@
       (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
     (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
+
 ;;; Consult keybindings
 
 (when (modulep! :completion vertico)
