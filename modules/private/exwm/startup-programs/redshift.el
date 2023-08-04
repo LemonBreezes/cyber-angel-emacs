@@ -16,7 +16,7 @@
                  "-l" (concat (number-to-string calendar-latitude)
                               ":"
                               (number-to-string calendar-longitude))
-                 (if (not (cae-night-time-p))
+                 (if (cae-night-time-p)
                      `("-P" "-O" "3300" "-b"
                        ;; Set monitor brightness lower in certain applications.
                        ,(pcase (+workspace-current-name)
@@ -55,6 +55,6 @@
 (add-hook 'doom-load-theme-hook #'startup/restart-redshift)
 ;;(advice-add #'+workspace-switch :after #'startup/restart-redshift)
 
-(if (process-live-p startup/redshift-process)
-    (startup/restart-redshift)
-  (startup/start-redshift))
+;;(if (process-live-p startup/redshift-process)
+;;    (startup/restart-redshift)
+;;  (startup/start-redshift))
