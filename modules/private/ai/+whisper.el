@@ -79,7 +79,8 @@ If `DEVICE-NAME' is provided, it will be used instead of prompting the user."
   (setq whisper-install-directory doom-cache-dir
         whisper-model "base"
         whisper-language "en"
-        whisper-translate nil)
+        whisper-translate nil
+        whisper-use-threads (num-processors))
   (when (eq system-type 'darwin)
     (rk/select-default-audio-device "Macbook Pro Microphone")
     (when rk/default-audio-device)
