@@ -1,6 +1,6 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
-;; Broken with the latest version of Consult.
+;; Currently broken.
 ;;(use-package! detached
 ;;  :defer t :init
 ;;  (add-hook 'doom-first-input-hook #'detached-init)
