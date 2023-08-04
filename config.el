@@ -765,9 +765,7 @@
           avy-column-line-overlay t))
 
   (use-package! tabgo
-    :commands tabgo
-    :defer t :init
-    (map! "C-z t" #'tabgo)
+    :commands tabgo :defer t
     :config
     (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
