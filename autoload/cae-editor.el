@@ -329,6 +329,7 @@ also marks comment with leading whitespace"
           real-this-command 'set-mark-command)
     (call-interactively #'set-mark-command)))
 
+;;;###autoload
 (defun cae-bind-C-z-to-abort-a (oldfun &rest args)
   (minibuffer-with-setup-hook
       (lambda ()
