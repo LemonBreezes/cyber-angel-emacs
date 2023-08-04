@@ -96,13 +96,7 @@
       (setq epe-show-local-working-directory t)))
   (after! esh-module
     (when (>= emacs-major-version 29)
-      (add-to-list 'eshell-modules-list 'eshell-elecslash))
-    ;;(add-to-list 'eshell-modules-list 'eshell-rebind)
-    (after! em-rebind
-      (setq eshell-rebind-keys-alist nil
-            eshell-cannot-leave-input-list
-            (cl-set-difference eshell-cannot-leave-input-list
-                               '(previous-line next-line)))))
+      (add-to-list 'eshell-modules-list 'eshell-elecslash)))
 
   (when (>= emacs-major-version 29)
     (autoload 'eshell-elecslash-initialize "eshell-elecslash")
