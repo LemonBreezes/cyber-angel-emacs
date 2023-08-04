@@ -21,16 +21,49 @@ Can be negative.")
 ;;
 ;;; Packages
 
-(use-package! helm-mode
-  :defer t
-  :init
-  (unless (featurep 'helm)
-    (map! :map ctl-x-map
-          "c" #'+helm-lazy-load))
-  :config
-  ;; helm is too heavy for `find-file-at-point'
-  (add-to-list 'helm-completing-read-handlers-alist (cons #'find-file-at-point nil)))
+(unless (featurep 'helm)
+  (map! :map ctl-x-map
+        "c" #'+helm-lazy-load))
 
+(after! helm-core
+  (map! (:map helm-map
+         [remap next-line] #'helm-next-line
+         [remap previous-line] #'helm-previous-line
+         [left] #'left-char
+         [right] #'right-char
+         "C-S-f" #'helm-previous-page
+         "C-S-n" #'helm-next-source
+         "C-S-p" #'helm-previous-source
+         (:when (modulep! :editor evil +everywhere)
+          "C-j" #'helm-next-line
+          "C-k" #'helm-previous-line
+          "C-S-j" #'helm-next-source
+          "C-S-k" #'helm-previous-source)
+         "C-u" #'helm-delete-minibuffer-contents
+         "C-s" #'helm-minibuffer-history
+         ;; Swap TAB and C-z
+         "TAB" #'helm-execute-persistent-action
+         [tab] #'helm-execute-persistent-action
+         "C-z" #'helm-select-action)
+        (:after helm-ag :map helm-ag-map
+         "C--" #'+helm-do-ag-decrease-context
+         "C-=" #'+helm-do-ag-increase-context
+         [left] nil
+         [right] nil)
+        (:after helm-files :map (helm-find-files-map helm-read-file-map)
+         [C-return] #'helm-ff-run-switch-other-window
+         "C-w" #'helm-find-files-up-one-level
+         (:when (modulep! :editor evil +everywhere)
+          "C-h" #'helm-find-files-up-one-level
+          "C-l" #'helm-execute-persistent-action))
+        (:after helm-locate :map helm-generic-files-map
+         [C-return] #'helm-ff-run-switch-other-window)
+        (:after helm-buffers :map helm-buffer-map
+         [C-return] #'helm-buffer-switch-other-window)
+        (:after helm-occur :map helm-occur-map
+         [C-return] #'helm-occur-run-goto-line-ow)
+        (:after helm-grep :map helm-grep-map
+         [C-return] #'helm-grep-run-other-window-action)))
 
 (use-package! helm
   :after helm-mode
@@ -91,45 +124,6 @@ Can be negative.")
   :config
   (after! which-key
     (which-key-add-key-based-replacements "C-x c" "helm"))
-
-  (map! (:map helm-map
-         [remap next-line] #'helm-next-line
-         [remap previous-line] #'helm-previous-line
-         [left] #'left-char
-         [right] #'right-char
-         "C-S-f" #'helm-previous-page
-         "C-S-n" #'helm-next-source
-         "C-S-p" #'helm-previous-source
-         (:when (modulep! :editor evil +everywhere)
-          "C-j" #'helm-next-line
-          "C-k" #'helm-previous-line
-          "C-S-j" #'helm-next-source
-          "C-S-k" #'helm-previous-source)
-         "C-u" #'helm-delete-minibuffer-contents
-         "C-s" #'helm-minibuffer-history
-         ;; Swap TAB and C-z
-         "TAB" #'helm-execute-persistent-action
-         [tab] #'helm-execute-persistent-action
-         "C-z" #'helm-select-action)
-        (:after helm-ag :map helm-ag-map
-         "C--" #'+helm-do-ag-decrease-context
-         "C-=" #'+helm-do-ag-increase-context
-         [left] nil
-         [right] nil)
-        (:after helm-files :map (helm-find-files-map helm-read-file-map)
-         [C-return] #'helm-ff-run-switch-other-window
-         "C-w" #'helm-find-files-up-one-level
-         (:when (modulep! :editor evil +everywhere)
-          "C-h" #'helm-find-files-up-one-level
-          "C-l" #'helm-execute-persistent-action))
-        (:after helm-locate :map helm-generic-files-map
-         [C-return] #'helm-ff-run-switch-other-window)
-        (:after helm-buffers :map helm-buffer-map
-         [C-return] #'helm-buffer-switch-other-window)
-        (:after helm-occur :map helm-occur-map
-         [C-return] #'helm-occur-run-goto-line-ow)
-        (:after helm-grep :map helm-grep-map
-         [C-return] #'helm-grep-run-other-window-action))
 
   (set-popup-rule! "^\\*helm" :vslot -100 :size 0.3 :ttl nil)
 
