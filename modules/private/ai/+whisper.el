@@ -76,7 +76,7 @@ If `DEVICE-NAME' is provided, it will be used instead of prompting the user."
 (use-package! whisper
   :bind ("<f12>" . whisper-run)
   :config
-  (setq whisper-install-directory (locate-user-emacs-file ".cache/")
+  (setq whisper-install-directory doom-cache-dir
         whisper-model "base"
         whisper-language "en"
         whisper-translate nil)
