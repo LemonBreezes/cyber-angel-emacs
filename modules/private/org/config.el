@@ -31,24 +31,6 @@
   (map! :map org-mode-map
         "]" #'cae-org-insert-checkbox-or-bracket))
 
-(use-package! org-jira
-  :defer t :init
-  (map! :leader
-        :desc "Jira" "J" #'cae-org-jira-hydra/body)
-  :config
-  (map! :map org-jira-entry-mode-map
-        "C-c i" nil
-        "C-c s" nil
-        "C-c c" nil
-        "C-c w" nil
-        "C-c t" nil
-        "C-c p" nil
-        "C-c b" nil)
-  (make-directory (expand-file-name "~/.org-jira") t))
-
-(use-package! ejira
-  :defer t)
-
 (use-package! worf
   :defer t :init
   (add-hook 'org-mode-hook #'worf-mode)
