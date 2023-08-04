@@ -1,8 +1,8 @@
 ;;; private/ai/+whisper.el -*- lexical-binding: t; -*-
 
 (require 'whisper)
+(autoload 'greader-epseak "greader-espeak")
 (require 'greader)
-(require 'greader-espeak)
 (setq org-ai-talk-say-words-per-minute 210)
 (setq org-ai-talk-say-voice "Karen")
 
