@@ -1,120 +1,5 @@
   ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
-;;; Fixup leader key
-
-;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overwriting other packages' keybindings. As an
-;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
-;; bound to `org-mark-ring-goto'.
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake)))
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c !\\'") nil . "checkers")
-                  which-key-replacement-alist)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader
-        (:prefix ("C" . "checkers"))))
-
-(when (modulep! :editor snippets)
-  (defvar cae-snippet-prefix "S")
-  (dolist (p (cdr (lookup-key doom-leader-map "&")))
-    (cl-destructuring-bind (key . binding) p
-      (define-key doom-leader-map (kbd (concat (format "%s " cae-snippet-prefix)
-                                               (char-to-string key))) binding)))
-  (after! yasnippet
-    (keymap-unset yas-minor-mode-map "C-c" t))
-  (define-key doom-leader-map "&" nil)
-  (after! which-key
-    (setq which-key-replacement-alist
-          (let ((case-fold-search nil))
-            (cl-mapcar (lambda (x)
-                         (when (car-safe (car x))
-                           (setf (car (car x))
-                                 (replace-regexp-in-string
-                                  "C-c &"
-                                  (format "C-c %s" cae-snippet-prefix)
-                                  (car-safe (car x)))))
-                         x)
-                       which-key-replacement-alist)))))
-
-;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
-;; many major modes.
-(when (and (modulep! :editor fold)
-           (not (modulep! :editor evil)))
-  (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
-  (define-key doom-leader-map "\C-f" nil)
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c C-f\\'") nil . "fold")
-                  which-key-replacement-alist)))
-  (unless (modulep! :editor evil)
-    (map! :leader
-          (:prefix ("F" . "fold")
-           "k" #'vimish-fold-delete
-           "K" #'vimish-fold-delete-all
-           "c" #'vimish-fold
-           "t" #'+fold/toggle
-           "C" #'+fold/close-all
-           "o" #'+fold/open
-           "O" #'+fold/open-all))))
-
-;; I don't use Deft.
-(when (and (not (modulep! :ui deft))
-           (eq (lookup-key doom-leader-map "nd")
-               'deft))
-  (define-key doom-leader-map "nd" nil))
-
-;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
-;; Evil.
-(unless (modulep! :editor evil)
-  (map! :leader :desc "help" "h" help-map))
-
-(when (modulep! :editor snippets)
-  (map! (:when (modulep! :completion vertico)
-         [remap yas-insert-snippet] #'consult-yasnippet)
-        :map yas-minor-mode-map
-        "C-c & C-s" nil
-        "C-c & C-n" nil
-        "C-c & C-v" nil))
-
-
-;;; Extra which-key descriptions
-
-;; Add some descriptions for built-in prefixes.
-(after! which-key
-  (which-key-add-keymap-based-replacements search-map "h" "highlight")
-  (which-key-add-keymap-based-replacements help-map "4" "other-window")
-  (dolist (p '(("4" . "other-window")
-               ("5" . "other-frame")
-               ("8" . "unicode")
-               ("a" . "abbrev")
-               ("a i" . "inverse")
-               ("n" . "narrow")
-               ;;("r" . "register")
-               ("t" . "tab-bar")
-               ("t ^" . "detach")
-               ("v" . "version-control")
-               ("v b" . "branch")
-               ("v M" . "mergebase")
-               ("w" . "window")
-               ("w ^" . "detach")
-               ("x" . "extra")
-               ("C-a" . "gud")
-               ("X" . "edebug")
-               ("C-k" . "kmacro")
-               ("RET" . "MULE")
-               ;;("X" . "debug")
-               ))
-    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
-  ;; These two don't work in `which-key-add-keymap-based-replacements' for some
-  ;; reason.
-  (which-key-add-key-based-replacements "C-x r" "register")
-  (which-key-add-key-based-replacements "C-x X" "edebug"))
-
-
-;;; General keybindings
-
 ;; Allow escape to exit the minibuffer.
 (define-key! :keymaps +default-minibuffer-maps
   [escape] #'abort-recursive-edit)
@@ -284,6 +169,119 @@
 (after! exwm
   (map! :map exwm-mode-map
         "<f12>" #'cae-exwm-start-dictation))
+
+
+;;; Fixup leader key
+
+;; Doom should not bind leader key prefixes to keys which are not alphanumeric
+;; because then they can be overwriting other packages' keybindings. As an
+;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
+;; bound to `org-mark-ring-goto'.
+(when (and (modulep! :checkers syntax)
+           (not (modulep! :checkers syntax +flymake)))
+  (after! which-key
+    (setq which-key-replacement-alist
+          (delete '(("\\`C-c !\\'") nil . "checkers")
+                  which-key-replacement-alist)))
+  (setq flycheck-keymap-prefix (kbd "C-c C"))
+  (map! :leader
+        (:prefix ("C" . "checkers"))))
+
+(when (modulep! :editor snippets)
+  (defvar cae-snippet-prefix "S")
+  (dolist (p (cdr (lookup-key doom-leader-map "&")))
+    (cl-destructuring-bind (key . binding) p
+      (define-key doom-leader-map (kbd (concat (format "%s " cae-snippet-prefix)
+                                               (char-to-string key))) binding)))
+  (after! yasnippet
+    (keymap-unset yas-minor-mode-map "C-c" t))
+  (define-key doom-leader-map "&" nil)
+  (after! which-key
+    (setq which-key-replacement-alist
+          (let ((case-fold-search nil))
+            (cl-mapcar (lambda (x)
+                         (when (car-safe (car x))
+                           (setf (car (car x))
+                                 (replace-regexp-in-string
+                                  "C-c &"
+                                  (format "C-c %s" cae-snippet-prefix)
+                                  (car-safe (car x)))))
+                         x)
+                       which-key-replacement-alist)))))
+
+;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
+;; many major modes.
+(when (and (modulep! :editor fold)
+           (not (modulep! :editor evil)))
+  (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
+  (define-key doom-leader-map "\C-f" nil)
+  (after! which-key
+    (setq which-key-replacement-alist
+          (delete '(("\\`C-c C-f\\'") nil . "fold")
+                  which-key-replacement-alist)))
+  (unless (modulep! :editor evil)
+    (map! :leader
+          (:prefix ("F" . "fold")
+           "k" #'vimish-fold-delete
+           "K" #'vimish-fold-delete-all
+           "c" #'vimish-fold
+           "t" #'+fold/toggle
+           "C" #'+fold/close-all
+           "o" #'+fold/open
+           "O" #'+fold/open-all))))
+
+;; I don't use Deft.
+(when (and (not (modulep! :ui deft))
+           (eq (lookup-key doom-leader-map "nd")
+               'deft))
+  (define-key doom-leader-map "nd" nil))
+
+;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
+;; Evil.
+(unless (modulep! :editor evil)
+  (map! :leader :desc "help" "h" help-map))
+
+(when (modulep! :editor snippets)
+  (map! (:when (modulep! :completion vertico)
+         [remap yas-insert-snippet] #'consult-yasnippet)
+        :map yas-minor-mode-map
+        "C-c & C-s" nil
+        "C-c & C-n" nil
+        "C-c & C-v" nil))
+
+
+;;; Extra which-key descriptions
+
+;; Add some descriptions for built-in prefixes.
+(after! which-key
+  (which-key-add-keymap-based-replacements search-map "h" "highlight")
+  (which-key-add-keymap-based-replacements help-map "4" "other-window")
+  (dolist (p '(("4" . "other-window")
+               ("5" . "other-frame")
+               ("8" . "unicode")
+               ("a" . "abbrev")
+               ("a i" . "inverse")
+               ("n" . "narrow")
+               ;;("r" . "register")
+               ("t" . "tab-bar")
+               ("t ^" . "detach")
+               ("v" . "version-control")
+               ("v b" . "branch")
+               ("v M" . "mergebase")
+               ("w" . "window")
+               ("w ^" . "detach")
+               ("x" . "extra")
+               ("C-a" . "gud")
+               ("X" . "edebug")
+               ("C-k" . "kmacro")
+               ("RET" . "MULE")
+               ;;("X" . "debug")
+               ))
+    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
+  ;; These two don't work in `which-key-add-keymap-based-replacements' for some
+  ;; reason.
+  (which-key-add-key-based-replacements "C-x r" "register")
+  (which-key-add-key-based-replacements "C-x X" "edebug"))
 
 
 ;;; Avy keybindings
