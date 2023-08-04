@@ -290,6 +290,7 @@
 ;;  (map! :prefix "C-z"
 ;;        "n" #'avy-goto-line-below
 ;;        "p" #'avy-goto-line-above
+;;        "t" #'tabgo
 ;;        ;;"y" #'avy-copy-region
 ;;        "c" #'avy-goto-char
 ;;        ;;"m" #'avy-move-region
