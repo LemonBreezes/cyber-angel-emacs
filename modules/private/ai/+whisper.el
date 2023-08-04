@@ -1,10 +1,11 @@
 ;;; private/ai/+whisper.el -*- lexical-binding: t; -*-
 
-(require 'whisper)
-(require 'greader-espeak)
-(require 'greader)
-(setq org-ai-talk-say-words-per-minute 210)
-(setq org-ai-talk-say-voice "Karen")
+(after! org-ai
+  (require 'whisper)
+  (require 'greader-espeak)
+  (require 'greader)
+  (setq org-ai-talk-say-words-per-minute 210)
+  (setq org-ai-talk-say-voice "Karen"))
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; whisper, everything below this point is only needed if you want speech input
@@ -76,6 +77,7 @@ If `DEVICE-NAME' is provided, it will be used instead of prompting the user."
 ;; (rk/select-default-audio-device)
 
 (use-package! whisper
+  :defer t
   :bind ("<f12>" . whisper-run)
   :config
   (setq whisper-install-directory doom-cache-dir
