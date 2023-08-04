@@ -14,9 +14,9 @@
   (after! embark
     (map! :map embark-region-map
           "M-a" #'org-ai-region-map))
+  (load! "+whisper")
   :config
   (org-ai-global-mode +1)
-  (load! "+whisper")
   (map! :map org-ai-global-mode-map
         :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
