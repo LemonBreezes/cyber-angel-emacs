@@ -5,5 +5,4 @@
   (interactive)
   (call-interactively #'exwm-edit--compose)
   (run-at-time exwm-edit-yank-delay nil
-               (lambda ()
-                 (call-interactively #'whisper-run))))
+               (lambda () (call-interactively #'whisper-run))))
