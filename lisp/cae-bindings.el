@@ -4,7 +4,8 @@
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
 ;; bound to `org-mark-ring-goto'.
-(when (modulep! :checkers syntax)
+(when (and (modulep! :checkers syntax)
+           (not (modulep! :checkers syntax +flymake)))
   (after! which-key
     (setq which-key-replacement-alist
           (delete '(("\\`C-c !\\'") nil . "checkers")
