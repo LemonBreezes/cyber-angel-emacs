@@ -41,5 +41,6 @@
         gdb-use-colon-colon-notation t
         gdb-restore-window-configuration-after-quit t
         gdb-debuginfod-enable t
+        gdb-debuginfod-enable-setting t
         gdb-display-io-buffer nil))
 (map! :leader :prefix "o" "g" #'cae-debugger-run-or-pop-to-gdb)
