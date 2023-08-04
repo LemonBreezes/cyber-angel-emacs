@@ -191,7 +191,3 @@ Can be negative.")
 (after! helm-net
   (setq helm-net-prefer-curl t
         helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
-
-(after! helm-sys
-  (map! :map helm-top-map
-        "<f6>" #'+helm-top-cheatsheet-hydra/body))
