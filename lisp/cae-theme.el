@@ -52,8 +52,6 @@
         modus-themes-variable-pitch-ui t
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
-        modus-themes-completions '((matches . (extrabold))
-                                   (selection . (semibold)))
         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
