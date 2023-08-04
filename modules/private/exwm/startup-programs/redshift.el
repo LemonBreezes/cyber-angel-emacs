@@ -16,7 +16,7 @@
                  "-l" (concat (number-to-string calendar-latitude)
                               ":"
                               (number-to-string calendar-longitude))
-                 (if (cae-night-time-p)
+                 (if (not (cae-night-time-p))
                      `("-P" "-O" "3300" "-b"
                        ;; Set monitor brightness lower in certain applications.
                        ,(pcase (+workspace-current-name)
