@@ -112,6 +112,7 @@
   (which-key-add-key-based-replacements "C-x r" "register")
   (which-key-add-key-based-replacements "C-x X" "edebug"))
 
+
 ;;; General keybindings
 
 ;; Allow escape to exit the minibuffer.
