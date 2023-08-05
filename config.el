@@ -69,7 +69,7 @@
 
 (when cae-init-ui-enabled-p
   (load! "lisp/cae-theme")
-  (load! "lisp/cae-cheatsheets")
+  (load! "lisp/cae-hydra")
 
   (add-hook 'doom-first-buffer-hook #'pixel-scroll-precision-mode)
 
