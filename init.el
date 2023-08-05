@@ -28,7 +28,7 @@ overriding other keymaps."
     (cae-defun cae-general--unbind-keys ()
       ;; Do not override `org-edit-special' in Org mode.
       (define-key general-override-mode-map (kbd "C-c '") nil)))
-  (add-hook 'doom-after-init-hook #'cae-general-override-mode t))
+  (add-hook 'doom-after-init-hook #'cae-general-override-mode :append))
 
 ;; Also show keybinidng descriptions on my second leader key when using Evil.
 (when (or (featurep 'evil) (autoloadp 'evil-mode))
@@ -91,7 +91,7 @@ overriding other keymaps."
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe)
+       (syntax +flymake +childframe)
        ;;spell
        ;;grammar
 
@@ -102,13 +102,13 @@ overriding other keymaps."
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit) ;; +forge is broken for me on the latest Emacs.
-       (lsp +peek)
+       (lsp +peek +eglot)
        tree-sitter
        pdf
 
        :lang
        (emacs-lisp +tree-sitter)
-       (org +roam2 +tree-sitter)
+       (org +roam2 +tree-sitter +dragndrop)
        (cc +lsp +tree-sitter)
        (web +lsp +tree-sitter)
        (sh +lsp +tree-sitter)

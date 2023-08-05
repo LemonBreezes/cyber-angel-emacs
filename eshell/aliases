@@ -30,3 +30,4 @@ alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
 alias git  git --no-pager $*
 
 alias update-emacs smart-live-rebuild && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync
+alias update-emacs2 cd ~/.config/emacs && git stash && doom upgrade && git stash pop && doom sync

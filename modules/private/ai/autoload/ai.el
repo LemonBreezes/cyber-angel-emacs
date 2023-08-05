@@ -42,5 +42,5 @@
   (interactive "p")
   (let ((proc (get-buffer-process (current-buffer))))
     (if (and (eobp) proc (= (point) (marker-position (process-mark proc))))
-	    (kill-buffer (current-buffer))
-        (delete-char arg))))
+        (kill-buffer (current-buffer))
+      (delete-char arg))))

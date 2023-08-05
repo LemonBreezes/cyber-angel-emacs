@@ -1,9 +1,0 @@
-;;; private/helm/autoload/cheatsheets.el -*- lexical-binding: t; -*-
-
-;;;###autoload (autoload '+helm-cheatsheet-hydra/body "private/helm/autoload/cheatsheets" nil t)
-(defhydra +helm-top-cheatsheet-hydra (:color pink :foreign-keys run)
-  ("M-C" helm-top-run-sort-by-com "sort by com")
-  ("M-M" helm-top-run-sort-by-mem "sort by mem")
-  ("M-P" helm-top-run-sort-by-cpu "sort by cpu")
-  ("M-U" helm-top-run-sort-by-user "sort by user")
-  ("<f6>" nil "Exit" :exit t :column nil))

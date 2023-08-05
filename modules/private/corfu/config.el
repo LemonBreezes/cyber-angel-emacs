@@ -1,12 +1,5 @@
 ;;; completion/corfu/config.el -*- lexical-binding: t; -*-
 
-(defvar +corfu-icon-height 0.9
-  "The height applied to the icons (it is passed to both svg-lib and kind-icon).
-
-It may need tweaking for the completions to not become cropped at the end.
-Note that changes are applied only after a cache reset, via
-`kind-icon-reset-cache'.")
-
 ;;
 ;;; Packages
 (use-package! corfu
@@ -44,15 +37,15 @@ Note that changes are applied only after a cache reset, via
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
   (map! (:unless (modulep! +tng)
-         "C-SPC" #'completion-at-point)
+          "C-SPC" #'completion-at-point)
         (:map 'corfu-map
-         (:when (modulep! +orderless)
-          "C-SPC" #'corfu-insert-separator)
-         (:when (modulep! +tng)
-          [tab] #'corfu-next
-          [backtab] #'corfu-previous
-          "TAB" #'corfu-next
-          "S-TAB" #'corfu-previous)))
+              (:when (modulep! +orderless)
+                "C-SPC" #'corfu-insert-separator)
+              (:when (modulep! +tng)
+                [tab] #'corfu-next
+                [backtab] #'corfu-previous
+                "TAB" #'corfu-next
+                "S-TAB" #'corfu-previous)))
 
   (when (modulep! :editor evil)
     (evil-collection-define-key 'insert 'corfu-map
@@ -67,32 +60,61 @@ Note that changes are applied only after a cache reset, via
       (let ((completion-extra-properties corfu--extra)
             (completion-cycle-threshold completion-cycling))
         (apply #'consult-completion-in-region completion-in-region--data)))
-    (map! :map 'corfu-map
-          "s-<down>" #'corfu-move-to-minibuffer
-          (:when (modulep! :editor evil)
-            "s-j" #'corfu-move-to-minibuffer))))
+    (map! :map 'corfu-map "s-<down>" #'corfu-move-to-minibuffer
+          (:when (modulep! :editor evil) "s-j" #'corfu-move-to-minibuffer))))
 
 (use-package! cape
   :after corfu
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
   :config
-  (when (modulep! :editor snippets)
-    (load! "+yas-capf.el")
-    (add-hook 'yas-minor-mode-hook
-              (lambda ()
-                (add-to-list 'completion-at-point-functions #'yas-capf)))))
+  (add-hook 'prog-mode-hook
+            (lambda () (add-to-list 'completion-at-point-functions #'cape-file))))
 
+(use-package! yasnippet-capf
+  :commands yasnippet-capf
+  :config
+  (add-hook 'yas-minor-mode-hook
+            (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
+
+(use-package! svg-lib
+  :after kind-icon)
 (use-package! kind-icon
-  :commands kind-icon-margin-formatter
+  :commands (kind-icon-margin-formatter
+             kind-icon-reset-cache
+             kind-icon-formatted)
   :init
   (add-hook 'corfu-margin-formatters #'kind-icon-margin-formatter)
   :config
-  (setq kind-icon-default-face 'corfu-default
+  (defface corfu-kind-icon '((t :inherit corfu-default))
+    "Face for the icons in the corfu popup.
+For changing color, you should probably use `kind-icon-mapping', which see. The
+purpose here is overriding size and helping with scaling issues."
+    :group 'corfu)
+  (setq kind-icon-default-face 'corfu-kind-icon
         kind-icon-blend-background t
         kind-icon-blend-frac 0.2)
-  (plist-put kind-icon-default-style :height +corfu-icon-height)
-  (plist-put svg-lib-style-default :height +corfu-icon-height))
+  (let ((def-style (svg-lib-style-compute-default 'corfu-kind-icon))
+        res)
+    (cl-loop for (key value) on def-style by 'cddr
+             do (unless (member key '(:foreground
+                                      :background
+                                      :font-size
+                                      :font-width
+                                      :font-weight
+                                      :font-family
+                                      :width))
+                  (setq res (plist-put res key value))))
+    (setq kind-icon-default-style (plist-put res :stroke 0.25)))
+  (defadvice! doom--kind-icon-remove-padding (orig kind)
+    "Rescale icon images to 1, and set surrounding spaces to width 0.
+This fixes the cropping due to scaling issues."
+    :around #'kind-icon-formatted
+    (let* ((text (funcall orig kind))
+           (image (get-text-property 1 'display text)))
+      (when (imagep image)
+          (setf (image-property image :scale) 1)
+          (put-text-property 0 1 'display '(space :width (0)) text)
+          (put-text-property 2 3 'display '(space :width (0)) text))
+      text)))
 
 (use-package! corfu-terminal
   :when (not (display-graphic-p))
@@ -110,11 +132,11 @@ Note that changes are applied only after a cache reset, via
   :config
   (setq corfu-popupinfo-delay '(0.5 . 1.0))
   (map! (:map 'corfu-map
-         "C-<up>" #'corfu-popupinfo-scroll-down
-         "C-<down>" #'corfu-popupinfo-scroll-up
-         "C-S-p" #'corfu-popupinfo-scroll-down
-         "C-S-n" #'corfu-popupinfo-scroll-up
-         "C-h" #'corfu-popupinfo-toggle)
+              "C-<up>" #'corfu-popupinfo-scroll-down
+              "C-<down>" #'corfu-popupinfo-scroll-up
+              "C-S-p" #'corfu-popupinfo-scroll-down
+              "C-S-n" #'corfu-popupinfo-scroll-up
+              "C-h" #'corfu-popupinfo-toggle)
         (:map 'corfu-popupinfo-map
          :when (modulep! :editor evil)
          ;; Reversed because popupinfo assumes opposite of what feels intuitive

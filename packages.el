@@ -26,6 +26,7 @@
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! beacon)
+(package! iscroll)
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -56,7 +57,6 @@
 
 ;;; Editor
 (package! pp+)
-(package! avy :recipe (:repo "LemonBreezes/avy" :branch "master"))
 (package! zop-to-char)
 (package! aggressive-indent)
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
