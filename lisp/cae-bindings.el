@@ -56,6 +56,7 @@
       [remap downcase-word] #'downcase-dwim
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'cae-ispell-word-then-abbrev
+      [remap exchange-point-and-mark] #'cae-exchange-point-and-mark
       "C-x 4 I" #'ibuffer-other-window
       [remap ibuffer] #'ibuffer-jump    ;This way
                                         ;I can do `C-x C-b =' to quickly diff a
