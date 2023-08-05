@@ -17,7 +17,7 @@
                                        'nomini)))
                ", ")))
 
-(defun cae-hydra-minibuffer-hydra-pause-h (&rest _)
+(defun cae-hydra-minibuffer-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (setq cae-hydra-minibuffer--last-hydra hydra-curr-body-fn
           cae-hydra-minibuffer--last-workspace (and (featurep 'persp-mode)
@@ -57,7 +57,7 @@
            cae-hydra-minibuffer--last-hydra nil
            cae-hydra-minibuffer--last-workspace nil))))
 
-(add-hook 'minibuffer-setup-hook #'cae-hydra-minibuffer-hydra-pause-h)
+(add-hook 'minibuffer-setup-hook #'cae-hydra-minibuffer-pause-h)
 (add-hook 'minibuffer-exit-hook #'cae-hydra-minibuffer-hydra-resume-h)
 
 (defvar cae-hydra-workspace--last-hydra nil)
@@ -80,7 +80,7 @@
 
 (defvar cae-hydra-tab-bar-hydra-alist nil)
 
-(defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
+(defun cae-hydra-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (setf (alist-get (funcall cae-hydra-tab--unique-identifier-fn)
                      cae-hydra-tab-bar-hydra-alist
@@ -101,7 +101,7 @@
           nil)
     (run-with-timer 0.001 nil hydra)))
 
-(add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
+(add-hook 'cae-tab-bar-before-switch-hook #'cae-hydra-tab-bar-store-hydra-h)
 (add-hook 'cae-tab-bar-after-switch-hook #'cae-hydra-tab-bar-resume-hydra-h)
 
 ;; Make these persp-local so that identical tabs on different workspaces do not
