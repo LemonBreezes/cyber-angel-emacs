@@ -330,6 +330,16 @@ also marks comment with leading whitespace"
     (call-interactively #'set-mark-command)))
 
 ;;;###autoload
+(defun cae-exchange-point-and-mark ()
+  (interactive)
+  (let ((current-prefix-arg
+         ;; invert the current transient prefix arg
+         (pcase current-prefix-arg
+           (`(4) nil)
+           (_ '(4)))))
+    (call-interactively #'exchange-point-and-mark)))
+
+;;;###autoload
 (defun cae-bind-C-z-to-abort-a (oldfun &rest args)
   (minibuffer-with-setup-hook
       (lambda ()
