@@ -101,7 +101,6 @@
     (setq ansi-color-bold-is-bright t))
 
   (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-        truncate-string-ellipsis "..."  ;The unicode ellipsis is ugly to me
         kill-buffer-delete-auto-save-files t
         scroll-conservatively 0         ;Doom disables this option as a
                                         ;performance optimization but I would
@@ -162,6 +161,9 @@
   (when (cae-display-graphic-p)
     (after! eros
       (setq eros-eval-result-prefix (if (cae-display-graphic-p) "⟹ " "=> ")))) ;Pretty arrow
+
+  (after! mule-utils
+    (setq truncate-string-ellipsis "..."))  ;The unicode ellipsis is ugly to me
 
   (after! ffap
     ;; Do not count angle brackets as part of file names because then they get
