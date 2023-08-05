@@ -162,7 +162,7 @@
     (after! eros
       (setq eros-eval-result-prefix (if (cae-display-graphic-p) "⟹ " "=> ")))) ;Pretty arrow
 
-  (after! mule-utils
+  (after! mule-util
     (setq truncate-string-ellipsis "..."))  ;The unicode ellipsis is ugly to me
 
   (after! ffap
