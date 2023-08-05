@@ -1,6 +1,5 @@
 ;;; private/misc-applications/trash/+my-repo-pins.el -*- lexical-binding: t; -*-
 
-
 (use-package! my-repo-pins
   :defer t :init
   (map! :map +misc-applications-standalone-apps-map
