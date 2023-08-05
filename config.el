@@ -728,10 +728,6 @@
                 (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
                   (let ((avy-style 'post))
                     (apply oldfun args))))
-    (advice-add #'avy-goto-line :around
-                (cae-defun cae-avy-indent-line-overlay-a (oldfun &rest args)
-                  (let ((avy-indent-line-overlay t))
-                    (apply oldfun args))))
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
