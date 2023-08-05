@@ -1,13 +1,13 @@
-;;; lisp/cae-cheatsheets.el -*- lexical-binding: t; -*-
+;;; lisp/cae-hydra.el -*- lexical-binding: t; -*-
 
 ;;; Save and resume hydras.
 
-(defvar cae-cheatsheets-minibuffer--last-hydra nil)
-(defvar cae-cheatsheets-minibuffer--last-workspace nil)
-(defvar cae-cheatsheets-minibuffer--last-tab nil)
-(defvar cae-cheatsheets-minibuffer--last-tab-index nil)
+(defvar cae-hydra-minibuffer--last-hydra nil)
+(defvar cae-hydra-minibuffer--last-workspace nil)
+(defvar cae-hydra-minibuffer--last-tab nil)
+(defvar cae-hydra-minibuffer--last-tab-index nil)
 
-(defvar cae-cheatsheets-tab--unique-identifier-fn
+(defvar cae-hydra-tab--unique-identifier-fn
   (lambda ()
     (mapconcat #'buffer-name
                (cl-remove-if (lambda (buf)
@@ -17,103 +17,103 @@
                                        'nomini)))
                ", ")))
 
-(defun cae-cheatsheets-minibuffer-hydra-pause-h (&rest _)
+(defun cae-hydra-minibuffer-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (setq cae-cheatsheets-minibuffer--last-hydra hydra-curr-body-fn
-          cae-cheatsheets-minibuffer--last-workspace (and (featurep 'persp-mode)
+    (setq cae-hydra-minibuffer--last-hydra hydra-curr-body-fn
+          cae-hydra-minibuffer--last-workspace (and (featurep 'persp-mode)
                                                           (get-current-persp))
-          cae-cheatsheets-minibuffer--last-tab (funcall cae-cheatsheets-tab--unique-identifier-fn)
-          cae-cheatsheets-minibuffer--last-tab-index (tab-bar--current-tab-index))
+          cae-hydra-minibuffer--last-tab (funcall cae-hydra-tab--unique-identifier-fn)
+          cae-hydra-minibuffer--last-tab-index (tab-bar--current-tab-index))
     (hydra-keyboard-quit)))
 
-(defun cae-cheatsheets-minibuffer-hydra-resume-h (&rest _)
+(defun cae-hydra-minibuffer--resume-h (&rest _)
   (run-with-timer
    0.001 nil
    (lambda ()
      (when (and (featurep 'persp-mode)
                 (not (eq (get-current-persp)
-                         cae-cheatsheets-minibuffer--last-workspace)))
-       (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
-                            cae-cheatsheets-minibuffer--last-hydra
-                            cae-cheatsheets-minibuffer--last-workspace))
-     (when (not (and (equal (funcall cae-cheatsheets-tab--unique-identifier-fn)
-                            cae-cheatsheets-minibuffer--last-tab)
+                         cae-hydra-minibuffer--last-workspace)))
+       (set-persp-parameter 'cae-hydra-workspace--last-hydra
+                            cae-hydra-minibuffer--last-hydra
+                            cae-hydra-minibuffer--last-workspace))
+     (when (not (and (equal (funcall cae-hydra-tab--unique-identifier-fn)
+                            cae-hydra-minibuffer--last-tab)
                      (eq (tab-bar--current-tab-index)
-                         cae-cheatsheets-minibuffer--last-tab-index)))
-       (setf (alist-get cae-cheatsheets-minibuffer--last-tab
-                        cae-cheatsheets-tab-bar-hydra-alist
+                         cae-hydra-minibuffer--last-tab-index)))
+       (setf (alist-get cae-hydra-minibuffer--last-tab
+                        cae-hydra-tab-bar-hydra-alist
                         nil nil #'equal)
-             cae-cheatsheets-minibuffer--last-hydra))
-     (when (and cae-cheatsheets-minibuffer--last-hydra
-                (equal (funcall cae-cheatsheets-tab--unique-identifier-fn)
-                       cae-cheatsheets-minibuffer--last-tab)
+             cae-hydra-minibuffer--last-hydra))
+     (when (and cae-hydra-minibuffer--last-hydra
+                (equal (funcall cae-hydra-tab--unique-identifier-fn)
+                       cae-hydra-minibuffer--last-tab)
                 (or (not (featurep 'persp-mode))
                     (eq (get-current-persp)
-                        cae-cheatsheets-minibuffer--last-workspace)))
-       (funcall cae-cheatsheets-minibuffer--last-hydra)
-       (setq cae-cheatsheets-minibuffer--last-hydra nil))
-     (setq cae-cheatsheets-minibuffer--last-tab-index nil
-           cae-cheatsheets-minibuffer--last-tab nil
-           cae-cheatsheets-minibuffer--last-hydra nil
-           cae-cheatsheets-minibuffer--last-workspace nil))))
+                        cae-hydra-minibuffer--last-workspace)))
+       (funcall cae-hydra-minibuffer--last-hydra)
+       (setq cae-hydra-minibuffer--last-hydra nil))
+     (setq cae-hydra-minibuffer--last-tab-index nil
+           cae-hydra-minibuffer--last-tab nil
+           cae-hydra-minibuffer--last-hydra nil
+           cae-hydra-minibuffer--last-workspace nil))))
 
-(add-hook 'minibuffer-setup-hook #'cae-cheatsheets-minibuffer-hydra-pause-h)
-(add-hook 'minibuffer-exit-hook #'cae-cheatsheets-minibuffer-hydra-resume-h)
+(add-hook 'minibuffer-setup-hook #'cae-hydra-minibuffer-hydra-pause-h)
+(add-hook 'minibuffer-exit-hook #'cae-hydra-minibuffer-hydra-resume-h)
 
-(defvar cae-cheatsheets-workspace--last-hydra nil)
+(defvar cae-hydra-workspace--last-hydra nil)
 
-(defun cae-cheatsheets-workspace-hydra-pause-h (&rest _)
+(defun cae-hydra-workspace-hydra-pause-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit)
-    (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra
+    (set-persp-parameter 'cae-hydra-workspace--last-hydra
                          hydra-curr-body-fn)))
 
-(defun cae-cheatsheets-workspace-hydra-resume-h (&rest _)
-  (when (persp-parameter 'cae-cheatsheets-workspace--last-hydra)
-    (run-with-timer 0.001 nil (persp-parameter 'cae-cheatsheets-workspace--last-hydra)))
-  (set-persp-parameter 'cae-cheatsheets-workspace--last-hydra nil))
+(defun cae-hydra-workspace-hydra-resume-h (&rest _)
+  (when (persp-parameter 'cae-hydra-workspace--last-hydra)
+    (run-with-timer 0.001 nil (persp-parameter 'cae-hydra-workspace--last-hydra)))
+  (set-persp-parameter 'cae-hydra-workspace--last-hydra nil))
 
 (add-hook 'persp-before-switch-functions
-          #'cae-cheatsheets-workspace-hydra-pause-h)
+          #'cae-hydra-workspace-hydra-pause-h)
 (add-hook 'persp-activated-functions
-          #'cae-cheatsheets-workspace-hydra-resume-h)
+          #'cae-hydra-workspace-hydra-resume-h)
 
-(defvar cae-cheatsheets-tab-bar-hydra-alist nil)
+(defvar cae-hydra-tab-bar-hydra-alist nil)
 
 (defun cae-sheetsheets-tab-bar-store-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
-    (setf (alist-get (funcall cae-cheatsheets-tab--unique-identifier-fn)
-                     cae-cheatsheets-tab-bar-hydra-alist
+    (setf (alist-get (funcall cae-hydra-tab--unique-identifier-fn)
+                     cae-hydra-tab-bar-hydra-alist
                      nil nil #'equal)
           hydra-curr-body-fn)
     (hydra-keyboard-quit)))
 
-(defun cae-cheatsheets-tab-bar-resume-hydra-h (&rest _)
+(defun cae-hydra-tab-bar-resume-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit))
-  (when-let ((hydra (alist-get (funcall cae-cheatsheets-tab--unique-identifier-fn)
-                               cae-cheatsheets-tab-bar-hydra-alist
+  (when-let ((hydra (alist-get (funcall cae-hydra-tab--unique-identifier-fn)
+                               cae-hydra-tab-bar-hydra-alist
                                nil nil
                                #'equal)))
     (setf (alist-get (tab-bar-tab-name-all)
-                     cae-cheatsheets-tab-bar-hydra-alist
+                     cae-hydra-tab-bar-hydra-alist
                      nil t #'equal)
           nil)
     (run-with-timer 0.001 nil hydra)))
 
 (add-hook 'cae-tab-bar-before-switch-hook #'cae-sheetsheets-tab-bar-store-hydra-h)
-(add-hook 'cae-tab-bar-after-switch-hook #'cae-cheatsheets-tab-bar-resume-hydra-h)
+(add-hook 'cae-tab-bar-after-switch-hook #'cae-hydra-tab-bar-resume-hydra-h)
 
 ;; Make these persp-local so that identical tabs on different workspaces do not
 ;; share hydras.
-(defun cae-cheatsheets-tab-bar-workspace-store-hydra-h (&rest _)
-  (set-persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist
-                       cae-cheatsheets-tab-bar-hydra-alist))
+(defun cae-hydra-tab-bar-workspace-store-hydra-h (&rest _)
+  (set-persp-parameter 'cae-hydra-tab-bar-hydra-alist
+                       cae-hydra-tab-bar-hydra-alist))
 
-(defun cae-cheatsheets-tab-bar-workspace-resume-hydra-h (&rest _)
-  (setq cae-cheatsheets-tab-bar-hydra-alist
-        (persp-parameter 'cae-cheatsheets-tab-bar-hydra-alist)))
+(defun cae-hydra-tab-bar-workspace-resume-hydra-h (&rest _)
+  (setq cae-hydra-tab-bar-hydra-alist
+        (persp-parameter 'cae-hydra-tab-bar-hydra-alist)))
 
 (when (modulep! :ui workspaces)
-  (add-hook 'persp-before-switch-functions #'cae-cheatsheets-tab-bar-workspace-store-hydra-h)
-  (add-hook 'persp-activated-functions #'cae-cheatsheets-tab-bar-workspace-resume-hydra-h))
+  (add-hook 'persp-before-switch-functions #'cae-hydra-tab-bar-workspace-store-hydra-h)
+  (add-hook 'persp-activated-functions #'cae-hydra-tab-bar-workspace-resume-hydra-h))
