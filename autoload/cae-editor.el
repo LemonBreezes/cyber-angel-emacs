@@ -333,10 +333,11 @@ also marks comment with leading whitespace"
 (defun cae-exchange-point-and-mark ()
   (interactive)
   (let ((current-prefix-arg
-         ;; invert the current transient prefix arg
-         (pcase current-prefix-arg
-           (`(4) nil)
-           (_ '(4)))))
+         (if (region-active-p)
+             current-prefix-arg
+           (pcase current-prefix-arg
+             (`(4) nil)
+             (_ '(4))))))
     (call-interactively #'exchange-point-and-mark)))
 
 ;;;###autoload
