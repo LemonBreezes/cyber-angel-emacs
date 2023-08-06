@@ -127,7 +127,7 @@
 
 (after! smerge-mode
   (map! :map smerge-mode-map
-        "C-h b c" #'+vc/smerge-hydra/body))
+        "<f6>" #'+vc/smerge-hydra/body))
 
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
