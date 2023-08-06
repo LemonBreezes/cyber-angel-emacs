@@ -23,7 +23,7 @@
   ("C-c ;" embark-export "Export")
   ("C-c C-e" +vertico/embark-export-write "Export writable")
   ("C-c C-l" embark-collect "Collect")
-  ("ESC" nil "Exit" :exit t))
+  ("q" nil "Exit" :exit t))
 
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
 (defun cae-debugger-cheatsheet () (interactive))
