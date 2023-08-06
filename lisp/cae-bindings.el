@@ -180,10 +180,6 @@
 ;; bound to `org-mark-ring-goto'.
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c !\\'") nil . "checkers")
-                  which-key-replacement-alist)))
   (setq flycheck-keymap-prefix (kbd "C-c C"))
   (map! :leader
         (:prefix ("C" . "checkers"))))
@@ -196,19 +192,7 @@
                                                (char-to-string key))) binding)))
   (after! yasnippet
     (keymap-unset yas-minor-mode-map "C-c" t))
-  (define-key doom-leader-map "&" nil)
-  (after! which-key
-    (setq which-key-replacement-alist
-          (let ((case-fold-search nil))
-            (cl-mapcar (lambda (x)
-                         (when (car-safe (car x))
-                           (setf (car (car x))
-                                 (replace-regexp-in-string
-                                  "C-c &"
-                                  (format "C-c %s" cae-snippet-prefix)
-                                  (car-safe (car x)))))
-                         x)
-                       which-key-replacement-alist)))))
+  (define-key doom-leader-map "&" nil))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
