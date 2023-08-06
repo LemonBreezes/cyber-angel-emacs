@@ -98,7 +98,7 @@
         "q" #'+elfeed-quit)
   (when (modulep! :ui hydra)
     (map! :map elfeed-search-mode-map
-          "C-h b c" #'cae-elfeed-hydra/body
+          "?" #'cae-elfeed-hydra/body
           ;; Elfeed maps `h' to `describe-mode', which is not as good.
           "h" #'cae-elfeed-hydra/body))
 
