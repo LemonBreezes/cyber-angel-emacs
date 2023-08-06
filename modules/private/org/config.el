@@ -18,7 +18,8 @@
       (cae-org-set-created-timestamp))))
 
 (use-package! org-appear
-  :hook (org-mode . org-appear-mode)
+  :defer t :init
+  (add-hook 'org-mode-hook #'org-appear-mode)
   :config
   (setq org-appear-autoemphasis t
         org-appear-autosubmarkers t
