@@ -12,35 +12,6 @@
 
 (setq native-comp-async-jobs-number (num-processors))
 
-;; Do not override other keymaps with `general-override-mode'. This was created
-;; because Doom's leader key was overriding Eat's `eat-self-input' keybinding.
-(advice-add #'general-override-mode :override #'ignore)
-(after! general
-  (define-minor-mode cae-general-override-mode
-    "Minor mode to enable `general-override-mode-map' without
-overriding other keymaps."
-    :global t
-    :init-value nil
-    :lighter nil
-    :keymap general-override-mode-map
-    :group 'cae)
-  (add-hook 'cae-general-override-mode-hook
-    (cae-defun cae-general--unbind-keys ()
-      ;; Do not override `org-edit-special' in Org mode.
-      (define-key general-override-mode-map (kbd "C-c '") nil)))
-  (add-hook 'doom-after-init-hook #'cae-general-override-mode :append))
-
-;; Also show keybinidng descriptions on my second leader key when using Evil.
-(when (or (featurep 'evil) (autoloadp 'evil-mode))
-  (defun cae-which-key-add-key-based-replacements-a
-      (oldfun key-sequence &rest args)
-    (when (string-prefix-p "SPC " key-sequence)
-      (apply oldfun (replace-regexp-in-string "^SPC " "DEL " key-sequence) args))
-    (apply oldfun key-sequence args))
-
-  (advice-add #'which-key-add-key-based-replacements :around
-              #'cae-which-key-add-key-based-replacements-a))
-
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p t
