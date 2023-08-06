@@ -143,6 +143,8 @@ Can be negative.")
         helm-posframe-min-width 160
         helm-posframe-min-height 20
         helm-posframe-border-width 1)
+  (advice-add #'helm-posframe-enable :around #'doom-shut-up-a)
+  (advice-add #'helm-posframe-disable :around #'doom-shut-up-a)
   (helm-posframe-enable))
 
 (use-package! helm-flx
