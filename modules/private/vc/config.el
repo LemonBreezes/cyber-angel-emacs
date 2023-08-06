@@ -127,11 +127,7 @@
 
 (after! smerge-mode
   (map! :map smerge-mode-map
-        "<f6>" #'+vc/smerge-hydra/body))
-
-(after! git-timemachine
-  (map! :map git-timemachine-mode-map
-        "<f6>" #'git-timemachine-help))
+        "C-h b c" #'+vc/smerge-hydra/body))
 
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
