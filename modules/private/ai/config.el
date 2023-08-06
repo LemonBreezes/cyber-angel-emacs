@@ -63,7 +63,6 @@
                                             process-environment)))
                   (apply oldfun args))))
   (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
-  (define-key chatgpt-shell-mode-map (kbd "<f6>") #'cae-chatgpt-shell-cheatsheet-hydra/body)
   (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 (use-package! gpt-commit
