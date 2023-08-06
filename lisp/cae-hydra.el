@@ -26,7 +26,7 @@
           cae-hydra-minibuffer--last-tab-index (tab-bar--current-tab-index))
     (hydra-keyboard-quit)))
 
-(defun cae-hydra-minibuffer--resume-h (&rest _)
+(defun cae-hydra-minibuffer-resume-h (&rest _)
   (run-with-timer
    0.001 nil
    (lambda ()
