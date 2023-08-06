@@ -200,13 +200,9 @@
            (not (modulep! :editor evil)))
   (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
   (define-key doom-leader-map "\C-f" nil)
-  (after! which-key
-    (setq which-key-replacement-alist
-          (delete '(("\\`C-c C-f\\'") nil . "fold")
-                  which-key-replacement-alist)))
   (unless (modulep! :editor evil)
     (map! :leader
-          (:prefix ("F" . "fold")
+          (:prefix-map ("F" . "fold")
            "k" #'vimish-fold-delete
            "K" #'vimish-fold-delete-all
            "c" #'vimish-fold
