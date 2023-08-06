@@ -153,7 +153,7 @@
   (map! :map leetcode--problems-mode-map
         "q" #'+leetcode-soft-quit
         "Q" #'+leetcode-quit
-        "C-h b c" #'+leetcode-problems-hydra/body
+        "<f6>" #'+leetcode-problems-hydra/body
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
