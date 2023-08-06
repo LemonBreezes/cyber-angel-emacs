@@ -53,9 +53,9 @@
 
 (after! timer-list
   (map! :map timer-list-mode-map
-        "<f6>" #'+timer-list-hydra/body))
+        "C-h b c" #'+timer-list-hydra/body))
 (map! :map process-menu-mode-map
-      "<f6>" #'+list-processes-hydra/body)
+      "C-h b c" #'+list-processes-hydra/body)
 
 
 ;;; Standalone apps
