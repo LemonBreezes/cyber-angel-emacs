@@ -52,9 +52,3 @@
  :toggle-funs #'cae-symbol-overlay-cheatsheet
  :keymap 'symbol-overlay-map
  :package 'symbol-overlay)
-
-;;;###autoload (autoload 'cae-chatgpt-shell-cheatsheet-hydra/body "autoload/cae-cheatsheets" nil t)
-(defhydra cae-chatgpt-shell-cheatsheet-hydra (:color pink :foreign-keys run)
-  ("C-c C-s" chatgpt-shell-swap-system-prompt "swap system prompt")
-  ("C-c C-v" chatgpt-shell-swap-model-version "swap model version")
-  ("<f6>" nil "Exit" :exit t :column nil))
