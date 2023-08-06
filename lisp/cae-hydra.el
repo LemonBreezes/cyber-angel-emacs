@@ -58,7 +58,7 @@
            cae-hydra-minibuffer--last-workspace nil))))
 
 (add-hook 'minibuffer-setup-hook #'cae-hydra-minibuffer-pause-h)
-(add-hook 'minibuffer-exit-hook #'cae-hydra-minibuffer-hydra-resume-h)
+(add-hook 'minibuffer-exit-hook #'cae-hydra-minibuffer-resume-h)
 
 (defvar cae-hydra-workspace--last-hydra nil)
 
