@@ -1206,7 +1206,7 @@
          em-extpipe em-glob em-hist em-ls em-script em-term
          em-alias em-elecslash em-rebind em-prompt))
    ,@(when (modulep! :tools pdf)
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-occur pdf-tools)))
+       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
 (setq cae-config-finished-loading t)
