@@ -182,16 +182,7 @@
            (not (modulep! :checkers syntax +flymake)))
   (setq flycheck-keymap-prefix (kbd "C-c C"))
   (map! :leader
-        (:prefix ("C" . "checkers"))))
-
-(when (modulep! :editor snippets)
-  (defvar cae-snippet-prefix "S")
-  (add-transient-hook! 'doom-after-init-hook
-    (setf (alist-get ?S doom-leader-map)
-          (alist-get ?& doom-leader-map))
-    (after! yasnippet
-      (keymap-unset yas-minor-mode-map "C-c" t))
-    (define-key doom-leader-map "&" nil)))
+        (:prefix-map ("C" . "checkers"))))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
