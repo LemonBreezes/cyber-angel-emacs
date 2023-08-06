@@ -888,9 +888,10 @@
 
   (use-package! edit-indirect
     :defer t :init
-    (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim)
-    (after! org
-      (define-key org-mode-map (kbd "C-c '") #'cae-edit-indirect-dwim))
+    (unless (modulep! :editor evil)
+      (global-set-key (kbd "C-c '") #'cae-edit-indirect-dwim)
+      (after! org
+        (define-key org-mode-map (kbd "C-c '") #'cae-edit-indirect-dwim)))
     :config
     (add-hook 'edit-indirect-after-creation-hook
               (cae-defun cae-edit-indirect-major-mode-fallback-h ()
