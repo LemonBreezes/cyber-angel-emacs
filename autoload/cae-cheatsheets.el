@@ -16,14 +16,14 @@
   ("M-a" embark-collect-direct-action-minor-mode "Toggle direct action" :column "Act")
   ;;("M-<left>" tabulated-list-previous-column "Previous column" :column "Navigate")
   ;;("M-<right>" tabulated-list-next-column "Next column" :column "Navigate")
-  ("<f6>" nil "Exit" :exit t :column nil))
+  ("q" nil "Exit" :exit t :column nil))
 
 ;;;###autoload (autoload 'cae-vertico-cheatsheet-hydra/body "autoload/cae-cheatsheets" nil t)
 (defhydra cae-vertico-cheatsheet-hydra (:color pink :foreign-keys run)
   ("C-c ;" embark-export "Export")
   ("C-c C-e" +vertico/embark-export-write "Export writable")
   ("C-c C-l" embark-collect "Collect")
-  ("<f6>" nil "Exit" :exit t))
+  ("q" nil "Exit" :exit t))
 
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
 (defun cae-debugger-cheatsheet () (interactive))
