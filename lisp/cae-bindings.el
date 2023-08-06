@@ -187,10 +187,8 @@
 (when (modulep! :editor snippets)
   (defvar cae-snippet-prefix "S")
   (add-transient-hook! 'doom-after-init-hook
-    (dolist (p (cdr (lookup-key doom-leader-map "&")))
-      (cl-destructuring-bind (key . binding) p
-        (define-key doom-leader-map (kbd (concat (format "%s " cae-snippet-prefix)
-                                                 (char-to-string key))) binding)))
+    (setf (alist-get ?S doom-leader-map)
+          (alist-get ?& doom-leader-map))
     (after! yasnippet
       (keymap-unset yas-minor-mode-map "C-c" t))
     (define-key doom-leader-map "&" nil)))
