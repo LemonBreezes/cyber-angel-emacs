@@ -198,6 +198,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-browse-url-generic-bookmark-handler (bookmark)
   "Bookmark handler for opening URLs with `browse-url-generic'."
+  (require 'ffap)
   (let ((url (bookmark-prop-get bookmark 'filename)))
     (if (ffap-url-p url)
         (browse-url-generic url)
