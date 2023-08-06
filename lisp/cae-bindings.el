@@ -174,26 +174,6 @@
 
 ;;; Fixup leader key
 
-;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overwriting other packages' keybindings. As an
-;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
-;; bound to `org-mark-ring-goto'.
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader
-        (:prefix ("C" . "checkers"))))
-
-(when (modulep! :editor snippets)
-  (defvar cae-snippet-prefix "S")
-  (dolist (p (cdr (lookup-key doom-leader-map "&")))
-    (cl-destructuring-bind (key . binding) p
-      (define-key doom-leader-map (kbd (concat (format "%s " cae-snippet-prefix)
-                                               (char-to-string key))) binding)))
-  (after! yasnippet
-    (keymap-unset yas-minor-mode-map "C-c" t))
-  (define-key doom-leader-map "&" nil))
-
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
 (when (and (modulep! :editor fold)
