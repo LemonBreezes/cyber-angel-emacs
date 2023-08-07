@@ -246,8 +246,7 @@
                ("X" . "edebug")
                ("C-k" . "kmacro")
                ("RET" . "MULE")
-               ("X" . "debug")
-               ))
+               ("X" . "debug")))
     (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p))))
 
 
