@@ -26,6 +26,7 @@
 ;; Return Isearch to Evil
 (map! :m "C-r" #'isearch-backward
       :m "C-s" #'isearch-forward
+      :n "C-r" nil
       :n "U" #'evil-redo)
 
 ;; Use Emacs keybindings in Evil insert state.
