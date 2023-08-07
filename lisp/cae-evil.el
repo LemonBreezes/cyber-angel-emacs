@@ -2,7 +2,8 @@
 
 ;; I use a split keyboard and map backspace to my left thumb key.
 (when (string= doom-leader-key "SPC")
-  (map! :nmv "DEL" #'doom-leader-map))
+  (map! :map general-override-mode-map
+        :nmv "DEL" #'doom-leader-map))
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
