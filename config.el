@@ -285,6 +285,7 @@
             flycheck-posframe-border-use-error-face t)))
 
   (use-package! goggles
+    :when (not (modulep! :ui ophints))
     :defer t :init
     (add-hook 'prog-mode-hook #'goggles-mode)
     (add-hook 'text-mode-hook #'goggles-mode)
