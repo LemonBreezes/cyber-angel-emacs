@@ -394,32 +394,3 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
-
-;;; Dired keybindings
-
-(after! dired
-  (map! :map dired-mode-map
-        "C-M-k" #'dired-kill-subdir
-        "K" #'dired-kill-subdir
-        "I" #'dired-insert-subdir
-        "_" #'dired-up-directory
-        "[" #'dired-prev-dirline
-        "]" #'dired-next-dirline
-        "," #'dired-create-empty-file))
-(autoload 'vc-create-repo "vc" nil t)
-(after! dirvish
-  (map! :map dirvish-mode-map
-        "e" #'find-file
-        "<backtab>" #'dirvish-subtree-clear
-        "M-l" #'dirvish-ls-switches-menu
-        "M-j" #'dirvish-fd-jump
-        [remap dirvish-emerge-menu] #'cae-dired-dirvish-emerge-menu
-        "v" #'dirvish-vc-menu
-        "h" #'dirvish-history-jump
-        ;; "N" #'dirvish-narrow            ;Redundant with `M-n'.
-        "j" #'+default/search-buffer
-        [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer
-        "<f6>" #'cae-dired-dirvish-hydra/body))
-
-(map! :leader "o-" #'cae-dired-jump)
