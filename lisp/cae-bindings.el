@@ -233,7 +233,7 @@
                ("a" . "abbrev")
                ("a i" . "inverse")
                ("n" . "narrow")
-               ;;("r" . "register")
+               ("r" . "register")
                ("t" . "tab-bar")
                ("t ^" . "detach")
                ("v" . "version-control")
@@ -246,13 +246,9 @@
                ("X" . "edebug")
                ("C-k" . "kmacro")
                ("RET" . "MULE")
-               ;;("X" . "debug")
+               ("X" . "debug")
                ))
-    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
-  ;; These two don't work in `which-key-add-keymap-based-replacements' for some
-  ;; reason.
-  (which-key-add-key-based-replacements "C-x r" "register")
-  (which-key-add-key-based-replacements "C-x X" "edebug"))
+    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p))))
 
 
 ;;; Avy keybindings
@@ -283,23 +279,21 @@
         ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
         "SPC" #'avy-goto-char-timer
         (:map isearch-mode-map
-         "j" #'avy-isearch)))
-
-(when (modulep! :completion vertico)
-  (after! vertico
-    (map! :map vertico-map
-          "M-j" #'vertico-quick-jump
-          "M-i" #'vertico-quick-exit)))
-
-(after! embark
-  (map! :map embark-collect-mode-map
-        "M-j" #'avy-embark-collect-choose
-        "M-i" #'avy-embark-collect-act))
-(when (modulep! :private corfu)
-  (after! corfu
-    (map! :map corfu-map
-          "M-j" #'corfu-quick-jump
-          "M-i" #'corfu-quick-insert)))
+         "j" #'avy-isearch))
+  (when (modulep! :completion vertico)
+    (after! vertico
+      (map! :map vertico-map
+            "M-j" #'vertico-quick-jump
+            "M-i" #'vertico-quick-exit)))
+  (after! embark
+    (map! :map embark-collect-mode-map
+          "M-j" #'avy-embark-collect-choose
+          "M-i" #'avy-embark-collect-act))
+  (when (modulep! :private corfu)
+    (after! corfu
+      (map! :map corfu-map
+            "M-j" #'corfu-quick-jump
+            "M-i" #'corfu-quick-insert))))
 
 
 ;;; Completion keybindings
