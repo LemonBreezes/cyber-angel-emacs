@@ -17,6 +17,7 @@
                                         expressions tooltip))
 
     (when (modulep! :private corfu)
+      B
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
         (add-to-list 'completion-at-point-functions #'cape-dabbrev))
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
@@ -40,7 +41,7 @@
         gdb-delete-out-of-scope t
         gdb-use-colon-colon-notation t
         gdb-restore-window-configuration-after-quit t
-        gdb-debuginfod-enable t
-        gdb-debuginfod-enable-setting t
+        gdb-debuginfod-enable nil
+        gdb-debuginfod-enable-setting nil
         gdb-display-io-buffer nil))
 (map! :leader :prefix "o" "g" #'cae-debugger-run-or-pop-to-gdb)
