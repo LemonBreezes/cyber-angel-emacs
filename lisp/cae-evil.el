@@ -73,6 +73,16 @@
           (line-move-visual nil)))
   (advice-add #'evilem-motion-next-line :override #'evilem-motion-forward-line))
 
+(add-hook 'evil-insert-state-entry-hook
+          (cae-defun cae-goto-end-of-prompt-h ()
+            (cond ((and (bound-and-true-p comint-last-prompt)
+                        (not (eq (point) (point-max))))
+                   (goto-char (point-max)))
+                  ;; eshell
+                  ((and (bound-and-true-p eshell-last-output-end)
+                        (not (eq (point) eshell-last-output-end)))
+                   (goto-char eshell-last-output-end)))))
+
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
