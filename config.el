@@ -1087,12 +1087,6 @@
                                         '(("git" "log" "diff" "show"))))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
-(when (modulep! :editor evil)
-  (evil-set-initial-state 'eshell-mode 'insert)
-  (evil-set-initial-state 'shell-mode 'insert)
-  (evil-set-initial-state 'term-mode 'insert)
-  (evil-set-initial-state 'vterm-mode 'insert)
-  (evil-set-initial-state 'gud-mode 'insert))
 
 
 ;;; Org
