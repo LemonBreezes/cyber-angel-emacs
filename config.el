@@ -285,7 +285,7 @@
             flycheck-posframe-border-use-error-face t)))
 
   (use-package! goggles
-    :when (not (modulep! :ui evil))
+    :when (not (modulep! :editor evil))
     :defer t :init
     (add-hook 'prog-mode-hook #'goggles-mode)
     (add-hook 'text-mode-hook #'goggles-mode)
@@ -614,9 +614,9 @@
   (setq custom-safe-themes t)
 
   ;; Sensibly handle the primary selection.
-  (setq save-interprogram-paste-before-kill t
-        select-enable-primary t)
-  (lost-selection-mode +1)
+  ;;(setq save-interprogram-paste-before-kill t
+  ;;      select-enable-primary t)
+  ;;(lost-selection-mode +1)
 
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
