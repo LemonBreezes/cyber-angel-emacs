@@ -1092,7 +1092,7 @@
   (evil-set-initial-state 'shell-mode 'insert)
   (evil-set-initial-state 'term-mode 'insert)
   (evil-set-initial-state 'vterm-mode 'insert)
-  (evil-set-initial-state 'comint-mode 'insert))
+  (evil-set-initial-state 'gud-mode 'insert))
 
 
 ;;; Org
