@@ -73,6 +73,7 @@
           (line-move-visual nil)))
   (advice-add #'evilem-motion-next-line :override #'evilem-motion-forward-line))
 
+;; Jump to the end of the prompt when entering insert state in a terminal.
 (add-hook 'evil-insert-state-entry-hook
           (cae-defun cae-goto-end-of-prompt-h ()
             (cond ((and (bound-and-true-p comint-last-prompt)
