@@ -18,6 +18,7 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
+;; Define a leader key for switching to popup windows.
 (map! :map evil-window-map
       "e" #'+popup/other)
 
