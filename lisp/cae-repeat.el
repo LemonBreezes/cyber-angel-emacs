@@ -51,6 +51,12 @@
     ("=" eri/expand-region
      "-" eri/contract-region))
 
+  ;;(define-repeat-map expand-region
+  ;;  ("=" er/expand-region
+  ;;   "-" er/contract-region
+  ;;   "C-=" er/expand-region
+  ;;   "C--" er/contract-region))
+
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
   (define-repeat-map cae-org-ai-kill-region-at-point
