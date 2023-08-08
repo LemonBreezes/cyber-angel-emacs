@@ -1087,7 +1087,6 @@
                                         '(("git" "log" "diff" "show"))))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
-
 
 ;;; Org
 
