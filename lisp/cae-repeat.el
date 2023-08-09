@@ -6,7 +6,7 @@
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB"
-        repeat-check-key nil
+        repeat-check-key t
         repeat-echo-mode-line-string nil)
 
   (define-repeat-map isearch-repeat
