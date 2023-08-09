@@ -59,6 +59,10 @@
     ("<left>" cae-dired-previous-buffer
      "<right>" cae-dired-next-buffer))
 
+  (define-repeat-map cae-buffer-navigation-repeat-map
+    ("p" previous-buffer
+     "n" next-buffer))
+
   (define-repeat-map set-mark-command
     ("SPC" set-mark-command))
 
