@@ -113,7 +113,8 @@
   (setq set-message-functions
         '(inhibit-message
           set-minibuffer-message)
-        inhibit-message-regexps '("C-g is undefined$"))
+        inhibit-message-regexps '("C-g is undefined$"
+                                  "ESC is undefined$"))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
