@@ -37,9 +37,6 @@
        "9" +workspace/switch-to-8))
    t)
 
-  (define-repeat-map dired-jump
-    ("j" dired-jump))
-
   (define-repeat-map cae-dired-jump
     ("-" cae-dired-jump))
 
