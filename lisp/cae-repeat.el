@@ -51,15 +51,15 @@
     ("=" eri/expand-region
      "-" eri/contract-region))
 
-  (map! "C-=" #'er/expand-region
-        [remap er/expand-region] nil)
-  (setq expand-region-fast-keys-enabled nil)
+  ;;(map! "C-=" #'er/expand-region
+  ;;      [remap er/expand-region] nil)
+  ;;(setq expand-region-fast-keys-enabled nil)
 
-  (define-repeat-map expand-region
-    ("=" er/expand-region
-     "-" er/contract-region
-     "C-=" er/expand-region
-     "C--" er/contract-region))
+  ;;(define-repeat-map expand-region
+  ;;  ("=" er/expand-region
+  ;;   "-" er/contract-region
+  ;;   "C-=" er/expand-region
+  ;;   "C--" er/contract-region))
 
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
