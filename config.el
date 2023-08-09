@@ -43,6 +43,13 @@
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+(after! xclip
+  (cond ((executable-find "termux-setup-storage")
+         (setq xclip-method 'termux-clipboard-get))
+        ((and (getenv "SSH_TTY")
+              (not (cae-display-graphic-p)))
+         (setq xclip-method nil))))
+
 ;; For some reason Persp is picking up a few buffers that it should not.
 (when (modulep! :ui workspaces)
   (after! persp-mode
@@ -441,10 +448,6 @@
         history-length (expt 2 16)
         make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t)
-
-  (after! xclip
-    (cond ((executable-find "termux-setup-storage")
-           (setq xclip-method 'termux-clipboard-get))))
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
