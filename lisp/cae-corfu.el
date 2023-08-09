@@ -26,7 +26,7 @@
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
   ;; Fish completions are too slow for on-key completion.
-  (setq-hook! 'eshell-mode-hook corfu-auto-delay 0.5)
+  (setq-hook! 'eshell-mode-hook corfu-auto-delay nil)
   (when (modulep! :private corfu +numbers)
     (corfu-indexed-mode +1))
   (defun cae-corfu-quit ()
