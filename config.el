@@ -10,10 +10,11 @@
         doom-leader-key "C-c"
         doom-localleader-key "C-c l"))
 
-(load! "lisp/cae-bindings")
-(when (modulep! :editor evil)
-  (load! "lisp/cae-evil"))
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+;;(load! "lisp/cae-bindings")
+;;(when (modulep! :editor evil)
+;;  (load! "lisp/cae-evil"))
+;;(load! "lisp/cae-multi")
+                                        ;Run parallel Emacs instances.
 (load! "lisp/cae-keyboard")             ;Input hacks.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
