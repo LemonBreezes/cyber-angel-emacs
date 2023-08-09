@@ -34,11 +34,7 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8)
-      ;;(:enter +workspace/display)
-      ;;(:exit
-      ;; "/" tab-select)
-      )
+       "9" +workspace/switch-to-8))
    t)
 
   (define-repeat-map dired-jump
