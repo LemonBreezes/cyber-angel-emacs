@@ -1,9 +1,10 @@
 ;;; lisp/cae-evil.el -*- lexical-binding: t; -*-
 
 ;; I use a split keyboard and map backspace to my left thumb key.
-(when (string= doom-leader-key "SPC")
-  (map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
-        :desc "<leader>" :nmv "<backspace>" #'doom-leader-map))
+(map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
+      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map
+      :desc "<localleader>" :nmv "DEL m" #'doom-localleader-map
+      :desc "<localleader>" :nmv "m" #'doom-localleader-map)
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
