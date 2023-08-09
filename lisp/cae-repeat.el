@@ -80,6 +80,12 @@
     ("v" scroll-down-command)
     (:exit "V" scroll-up-command))
 
+  (define-repeat-map multiple-cursors
+    ("n" mc/mark-next-like-this
+     "p" mc/mark-previous-like-this
+     "N" mc/unmark-next-like-this
+     "P" mc/unmark-previous-like-this))
+
   (define-repeat-map scroll-other-window
     ("v" scroll-other-window)
     (:exit "V" scroll-other-window-down))
