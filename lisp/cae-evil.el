@@ -4,8 +4,6 @@
 ;;(lookup-key evil-normal-state-map doom-localleader-key)
 (map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
-      ;;:desc "<localleader>" :nmv "DEL m" #'
-      ;;:desc "<localleader>" :nmv "m" #'doom-localleader-map)
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
