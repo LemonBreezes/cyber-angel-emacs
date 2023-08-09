@@ -2,8 +2,8 @@
 
 ;; I use a split keyboard and map backspace to my left thumb key.
 ;;(lookup-key evil-normal-state-map doom-localleader-key)
-(map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
-      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
+;;(map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
+;;      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
