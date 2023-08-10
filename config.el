@@ -78,8 +78,6 @@
   (load! "lisp/cae-theme")
   (load! "lisp/cae-hydra")
 
-  (add-hook 'doom-first-buffer-hook #'pixel-scroll-precision-mode)
-
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
   (setq display-line-numbers-type t)
