@@ -7,7 +7,8 @@
                    mu4e-alert           ; Mu4e comes with `mu4e-modeline-mode'
                                         ; and I don't need email notifications.
                    ace-window
-                   rainbow-delimiters)
+                   rainbow-delimiters
+                   volatile-highlights)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
@@ -18,7 +19,8 @@
 ;;; UI
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
-(package! goggles)
+(unless (modulep! :editor evil)
+  (package! goggles))
 (package! rainbow-mode)
 (package! topsy)
 (package! anzu)

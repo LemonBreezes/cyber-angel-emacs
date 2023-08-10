@@ -22,7 +22,7 @@
   "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
-(defvar cae-keyboard-remaps-enabled-p t
+(defvar cae-keyboard-remaps-enabled-p nil
   "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
@@ -39,6 +39,7 @@
        vi-tilde-fringe
        workspaces
        (window-select +numbers)
+       ophints
 
        :editor
        file-templates
@@ -48,7 +49,7 @@
        lispy
        fold
        word-wrap
-       ;; (evil +everywhere) ; Be prepared to encounter issues if you use Evil
+       (evil +everywhere) ; Be prepared to encounter issues if you use Evil
        ;; with my config. If you encounter any or have suggestions, please raise
        ;; an issue on GitHub.
 
@@ -107,7 +108,7 @@
        (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
-       exwm
+       ;; exwm
        dired
        lisp
        misc-applications

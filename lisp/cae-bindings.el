@@ -252,47 +252,47 @@
 
 ;;; Avy keybindings
 
-(unless (modulep! :editor evil)
-  (map! :prefix "C-z"
-        "n" #'avy-goto-line-below
-        "p" #'avy-goto-line-above
-        "t" #'tabgo
-        ;;"y" #'avy-copy-region
-        "c" #'avy-goto-char
-        ;;"m" #'avy-move-region
-        "l" #'avy-goto-line
-        "e" #'avy-goto-end-of-line
-        "." #'cae-avy-symbol-at-point
-        ;;"k" #'avy-kill-region
-        ;;"w" #'avy-kill-ring-save-region
-        "a" #'cae-avy-embark-act-on-region
-        "j" #'avy-goto-word-1
-        (:when (modulep! :editor fold)
-         "f" #'vimish-fold-avy)
-        "o" #'switch-window
-        "0" #'switch-window-then-delete
-        "1" #'switch-window-then-maximize
-        "2" #'switch-window-then-split-horizontally
-        "3" #'switch-window-then-split-vertically
-        "4" #'switch-window-then-kill-buffer
-        ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-        "SPC" #'avy-goto-char-timer
-        (:map isearch-mode-map
-         "j" #'avy-isearch))
-  (when (modulep! :completion vertico)
-    (after! vertico
-      (map! :map vertico-map
-            "M-j" #'vertico-quick-jump
-            "M-i" #'vertico-quick-exit)))
-  (after! embark
-    (map! :map embark-collect-mode-map
-          "M-j" #'avy-embark-collect-choose
-          "M-i" #'avy-embark-collect-act))
-  (when (modulep! :private corfu)
-    (after! corfu
-      (map! :map corfu-map
-            "M-j" #'corfu-quick-jump
-            "M-i" #'corfu-quick-insert))))
+;; (unless (modulep! :editor evil)
+;;   (map! :prefix "C-z"
+;;         "n" #'avy-goto-line-below
+;;         "p" #'avy-goto-line-above
+;;         "t" #'tabgo
+;;         ;;"y" #'avy-copy-region
+;;         "c" #'avy-goto-char
+;;         ;;"m" #'avy-move-region
+;;         "l" #'avy-goto-line
+;;         "e" #'avy-goto-end-of-line
+;;         "." #'cae-avy-symbol-at-point
+;;         ;;"k" #'avy-kill-region
+;;         ;;"w" #'avy-kill-ring-save-region
+;;         "a" #'cae-avy-embark-act-on-region
+;;         "j" #'avy-goto-word-1
+;;         (:when (modulep! :editor fold)
+;;          "f" #'vimish-fold-avy)
+;;         "o" #'switch-window
+;;         "0" #'switch-window-then-delete
+;;         "1" #'switch-window-then-maximize
+;;         "2" #'switch-window-then-split-horizontally
+;;         "3" #'switch-window-then-split-vertically
+;;         "4" #'switch-window-then-kill-buffer
+;;         ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
+;;         "SPC" #'avy-goto-char-timer
+;;         (:map isearch-mode-map
+;;          "j" #'avy-isearch))
+;;   (when (modulep! :completion vertico)
+;;     (after! vertico
+;;       (map! :map vertico-map
+;;             "M-j" #'vertico-quick-jump
+;;             "M-i" #'vertico-quick-exit)))
+;;   (after! embark
+;;     (map! :map embark-collect-mode-map
+;;           "M-j" #'avy-embark-collect-choose
+;;           "M-i" #'avy-embark-collect-act))
+;;   (when (modulep! :private corfu)
+;;     (after! corfu
+;;       (map! :map corfu-map
+;;             "M-j" #'corfu-quick-jump
+;;             "M-i" #'corfu-quick-insert))))
 
 
 ;;; Completion keybindings
@@ -389,7 +389,8 @@
         :map help-map
         "TAB" #'consult-info
         "W" #'consult-man
-        (:desc "Keyboard macro"  "ik" #'consult-kmacro))
+        (:leader
+         :desc "Keyboard macro"  "ik" #'consult-kmacro))
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
