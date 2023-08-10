@@ -79,6 +79,12 @@
   (load! "lisp/cae-hydra")
 
   (add-hook 'doom-first-buffer-hook #'pixel-scroll-precision-mode)
+  (after! pixel-scroll
+    (let ((keymap (alist-get 'pixel-scroll-precision-mode minor-mode-map-alist)))
+      (setq minor-mode-map-alist (assq-delete-all 'pixel-scroll-precision-mode
+                                                  minor-mode-map-alist))
+        (add-to-list 'minor-mode-map-alist (cons 'pixel-scroll-precision-mode
+                                                 keymap))))
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
@@ -171,7 +177,7 @@
       (setq eros-eval-result-prefix (if (cae-display-graphic-p) "⟹ " "=> ")))) ;Pretty arrow
 
   (after! mule-util
-    (setq truncate-string-ellipsis "..."))  ;The unicode ellipsis is ugly to me
+    (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
 
   (after! ffap
     ;; Do not count angle brackets as part of file names because then they get
