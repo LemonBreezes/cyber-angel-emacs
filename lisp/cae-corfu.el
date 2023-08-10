@@ -47,18 +47,18 @@
   ;; Do not try to configure `company-capf' for LSP.
   (setq lsp-completion-provider nil))
 
-(when (modulep! :editor snippets)
-  (use-package! cape-yasnippet
-    :defer t :init
-    (map! :map cae-completion-mode-map
-          "C-. s" #'yasnippet-capf)
-    (dolist (hook '(prog-mode-hook
-                    text-mode-hook
-                    lsp-mode-hook
-                    sly-mode-hook))
-      (add-hook hook #'cae-yas-setup-capf))
-    :config
-    (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
+;;(when (modulep! :editor snippets)
+;;  (use-package! cape-yasnippet
+;;    :defer t :init
+;;    (map! :map cae-completion-mode-map
+;;          "C-. s" #'yasnippet-capf)
+;;    (dolist (hook '(prog-mode-hook
+;;                    text-mode-hook
+;;                    lsp-mode-hook
+;;                    sly-mode-hook))
+;;      (add-hook hook #'cae-yas-setup-capf))
+;;    :config
+;;    (add-to-list 'completion-at-point-functions 'cape-yasnippet)))
 
 (when (modulep! :lang org)
   (use-package! org-block-capf
