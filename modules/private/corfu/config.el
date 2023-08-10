@@ -71,7 +71,7 @@
 
 (use-package! yasnippet-capf
   :commands yasnippet-capf
-  :config
+  :init
   (add-hook 'yas-minor-mode-hook
             (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
 
