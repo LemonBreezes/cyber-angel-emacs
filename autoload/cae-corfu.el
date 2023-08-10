@@ -24,13 +24,6 @@
                  "[ &]+" t)))
 
 ;;;###autoload
-(defun cae-yas-setup-capf ()
-  (make-variable-buffer-local 'completion-at-point-functions)
-  (cl-pushnew 'cape-yasnippet
-              completion-at-point-functions
-              :test #'eq))
-
-;;;###autoload
 (defun cae-corfu-enable-in-minibuffer-h ()
   (unless (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
