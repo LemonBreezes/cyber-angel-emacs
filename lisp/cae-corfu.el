@@ -51,7 +51,7 @@
   (use-package! cape-yasnippet
     :defer t :init
     (map! :map cae-completion-mode-map
-          "C-. s" #'cape-yasnippet)
+          "C-. s" #'yasnippet-capf)
     (dolist (hook '(prog-mode-hook
                     text-mode-hook
                     lsp-mode-hook
