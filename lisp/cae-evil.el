@@ -5,8 +5,6 @@
 (map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
 
-(remove-hook 'doom-first-input-hook #'evil-snipe-mode t)
-
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
 (map! "C--" #'negative-argument
