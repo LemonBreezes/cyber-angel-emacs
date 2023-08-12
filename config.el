@@ -75,7 +75,6 @@
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 (remove-hook 'doom-first-input-hook #'evil-snipe-override-mode)
 
-
 
 ;;; UI
 
