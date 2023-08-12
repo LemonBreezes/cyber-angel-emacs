@@ -71,8 +71,8 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
-(remove-hook 'doom-first-input-hook #'evil-snipe-mode t)
-(remove-hook 'doom-first-input-hook #'evil-snipe-override-mode t)
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+(remove-hook 'doom-first-input-hook #'evil-snipe-override-mode)
 
 
 
