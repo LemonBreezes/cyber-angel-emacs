@@ -14,4 +14,4 @@
   (if-let ((map (evil-get-auxiliary-keymap
                  (current-local-map) 'normal)))
       (which-key--show-keymap "Normal state bindings" map nil nil nil)
-    (message "There are no major mode normal state bindings.")))
+    (message "No major mode normal state bindings.")))
