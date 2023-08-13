@@ -131,7 +131,7 @@
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
         :n "l"  #'dired-find-file
         :m "e" (lookup-key dirvish-mode-map "e")
-        :m "E" (lookup-key dirvish-mode-map "E")
+        :m "E" (lookup-key dirvish-mode-map "E") ; nil
         :m "w" (lookup-key dirvish-mode-map "w")
         :m "f" (lookup-key dirvish-mode-map "f")
         :m "F" (lookup-key dirvish-mode-map "F")
