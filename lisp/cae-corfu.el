@@ -41,7 +41,9 @@
               (when (cae-corfu-visible-p)
                 (cae-corfu-quit)
                 t)))
-  (map! :map corfu-map "C-g" #'cae-corfu-quit))
+  (map! :map corfu-map
+        "C-g" #'cae-corfu-quit
+        "<escape>" #'cae-corfu-quit))
 
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
