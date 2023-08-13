@@ -1,5 +1,5 @@
-;;; lisp/cae-evil.el -*- lexical-binding: t; -*-
 
+;;; lisp/cae-evil.el -*- lexical-binding: t; -*-
 ;; I use a split keyboard and map backspace to my left thumb key.
 ;;(lookup-key evil-normal-state-map doom-localleader-key)
 (map! :desc "<leader>" :nmv "DEL" #'doom-leader-map
@@ -17,6 +17,10 @@
       :n "C-=" nil
       :n "M-C-=" nil
       :n "M-C--" nil)
+
+;; Disable motion state keybindings where they don't make sense.
+(dolist (map '(dired-mode-map dirvish-mode-map))
+  (setf (alist-get map evil-motion-state-modes) 'motion))
 
 ;; Define a leader key for switching to popup windows.
 (unless (lookup-key evil-window-map "e")
