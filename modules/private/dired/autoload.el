@@ -42,7 +42,7 @@
   ("<f6>" nil "Exit" :exit t)
   ("M-e" cae-dired-dirvish-emerge-menu "Emerge menu" :column "UI")
   ("M-l" dirvish-ls-switches-menu "ls menu" :column "UI")
-  ("M-m" dirvish-mark-menu "Mark menu" :column "Act")
+  ("M-m" dirvish-mark-menu "Mark menu" :column "Misc")
   ("M-r" dirvish-rsync "Rsync menu" :column "Act")
   ("M-c" dirvish-chxxx-menu "ChXXX menu" :column "Act")
   ("M-h" dirvish-history-menu "History menu" :column "Navigate")
