@@ -8,13 +8,17 @@
                                         ; and I don't need email notifications.
                    ace-window
                    rainbow-delimiters
-                   volatile-highlights)
+                   volatile-highlights
+                   evil-snipe)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 ;; Added because of errors.
 (package! lv)
+
+;; cae-evil.el
+(package! evil-god-state)
 
 ;;; UI
 (package! info-colors)
