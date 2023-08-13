@@ -11,11 +11,11 @@
 ;;;###autoload
 ;; show the current evil normal state map for this major mode
 ;; use annalist
-(defun cae-evil-show-normal-state-map ()
+(defun cae-show-normal-state-bindings ()
   (interactive)
   (require 'dash)
   (-some--> (symbol-value (intern (format "%S-map" major-mode)))
     (evil-get-auxiliary-keymap it 'normal)
-    (which-key--show-keymap "Normal state map"
+    (which-key--show-keymap "Normal state bindings"
                             it
                             nil nil nil)))
