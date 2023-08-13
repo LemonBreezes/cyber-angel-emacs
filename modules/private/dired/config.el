@@ -106,7 +106,7 @@
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
         :ng "a"   #'dirvish-quick-access
-        :g "f"   #'dirvish-file-info-menu
+        :g  "f"   #'dirvish-file-info-menu
         :ng "y"   #'dirvish-yank-menu
         :ng "s"   #'dirvish-quicksort
         :g "TAB" #'dirvish-subtree-toggle
