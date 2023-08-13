@@ -103,6 +103,39 @@
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dirvish-mode-map
+        :n  "?"   #'dirvish-dispatch
+        :n  "q"   #'dirvish-quit
+        :ng "a"   #'dirvish-quick-access
+        :g "f"   #'dirvish-file-info-menu
+        :ng "y"   #'dirvish-yank-menu
+        :ng "s"   #'dirvish-quicksort
+        :g "TAB" #'dirvish-subtree-toggle
+        :g "M-t" #'dirvish-layout-toggle
+        :g "M-b" #'dirvish-history-go-backward
+        :g "M-f" #'dirvish-history-go-forward
+        :g "M-n" #'dirvish-narrow
+        :g "M-m" #'dirvish-mark-menu
+        :g "M-s" #'dirvish-setup-menu
+        :g "M-e" #'dirvish-emerge-menu
+        :g "M-r" #'dirvish-rsync
+        :g "M-c" #'dirvish-chxxx-menu
+        :g "M-h" #'dirvish-history-menu
+        :g "M-;"  #'dirvish-epa-dired-menu
+        :n "h"  #'dired-up-directory
+        :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
+        :n "l"  #'dired-find-file
+        :m "e" (lookup-key dirvish-mode-map "e")
+        :m "E" (lookup-key dirvish-mode-map "E") ; nil
+        :m "w" (lookup-key dirvish-mode-map "w")
+        :m "f" (lookup-key dirvish-mode-map "f")
+        :m "F" (lookup-key dirvish-mode-map "F")
+        :m "v" (lookup-key dirvish-mode-map "v")
+        :m "V" (lookup-key dirvish-mode-map "V")
+        :m "$" (lookup-key dirvish-mode-map "$")
+        :m "0" (lookup-key dirvish-mode-map "0")
+        :n "p" #'dirvish-history-last)
+
+  (map! :map dirvish-mode-map
         "e" #'find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
