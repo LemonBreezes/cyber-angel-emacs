@@ -98,9 +98,13 @@
 (after! evil-god-state
   (add-hook 'post-command-hook
             (cae-defun cae-god-state-exit ()
-              (when (and (eq evil-state 'god)
-                         (not (eq real-this-command #'evil-execute-in-god-state)))
-                (evil-god-state-bail))))
+              (run-at-time
+               0.0 nil
+               (lambda ()
+                 (when (and (eq evil-state 'god)
+                            (not (eq real-last-command
+                                     #'evil-execute-in-god-state)))
+                   (evil-god-state-bail))))))
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
 ;;Local Variables:
