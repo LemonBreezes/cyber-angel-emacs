@@ -167,8 +167,7 @@
     (setq which-key-ellipsis "..."
           which-key-compute-remaps t
           which-key-max-description-length 35
-          which-key-separator (if (cae-display-graphic-p) " → " " -> ")
-          which-key-show-operator-state-maps t))
+          which-key-separator (if (cae-display-graphic-p) " → " " -> ")))
 
   (when (cae-display-graphic-p)
     (after! eros
