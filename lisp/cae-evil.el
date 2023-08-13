@@ -85,9 +85,9 @@
                         (not (eq (point) eshell-last-output-end)))
                    (goto-char eshell-last-output-end)))))
 
-(after! evil-embrace
-  (setq evil-embrace-show-help-p t))
-
+;; God mode support
+(after! god-mode
+  (which-key-enable-god-mode-support))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
