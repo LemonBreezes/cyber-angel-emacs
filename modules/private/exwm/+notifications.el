@@ -6,14 +6,7 @@
     (and (require 'dbus nil t)
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
-  (map! :map +misc-applications-emacs-os-map
-        "ns" #'+ednc-show-notifications
-        "nd" #'+ednc-dismiss-all-notifications)
-  (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-emacs-os-map
-      "n" "notifications"
-      "ns" "show notifications"
-      "nd" "dismiss all notifications"))
+  ;; TODO Add keybindings.
   (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
   (defun +ednc-stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
