@@ -88,7 +88,8 @@
 ;; God mode support
 (after! god-mode
   (which-key-enable-god-mode-support)
-  (setq god-mode-enable-function-key-translation nil))
+  (setq god-mode-enable-function-key-translation nil
+        god-mode-alist '(("SPC" . "C-") ("g" . "M-") ("G" . "C-M-"))))
 (map! :n "s" #'evil-execute-in-god-state)
 (after! evil-god-state
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
