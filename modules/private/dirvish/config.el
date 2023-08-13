@@ -144,8 +144,6 @@
         :m "$" (lookup-key dirvish-mode-map "$")
         :m "0" (lookup-key dirvish-mode-map "0")
         :n "p" #'dirvish-history-last)
-  (map! :map dired-mode-map
-        :n "<delete>" nil)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
