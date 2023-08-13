@@ -98,8 +98,7 @@
 (after! evil-god-state
   (add-hook 'post-command-hook
             (cae-defun cae-god-state-exit ()
-              (when (and (eq evil-state 'god)
-                         (not (eq this-command 'evil-execute-in-god-state)))
+              (when (eq evil-state 'god)
                 (evil-god-state-bail))))
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
