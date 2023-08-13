@@ -103,12 +103,12 @@
 
   (autoload 'vc-create-repo "vc" nil t)
   (map! :map dirvish-mode-map
-        :n  "?"  #'dirvish-dispatch
-        :n  "q"  #'dirvish-quit
-        :ng "a"  #'dirvish-quick-access
-        :g  "f"  #'dirvish-file-info-menu
-        :ng "y"  #'dirvish-yank-menu
-        :ng "s"  #'dirvish-quicksort
+        :n "?" #'dirvish-dispatch
+        :n "q" #'dirvish-quit
+        :ng "a" #'dirvish-quick-access
+        :g "f" #'dirvish-file-info-menu
+        :ng "y" #'dirvish-yank-menu
+        :ng "s" #'dirvish-quicksort
         :g "TAB" #'dirvish-subtree-toggle
         :g "M-t" #'dirvish-layout-toggle
         :g "M-b" #'dirvish-history-go-backward
@@ -121,9 +121,9 @@
         :g "M-c" #'dirvish-chxxx-menu
         :g "M-h" #'dirvish-history-menu
         :g "M-;" #'dirvish-epa-dired-menu
-        :n "h"   #'dired-up-directory
-        :n "b"   #'dirvish-history-jump  ; Swapped with "h" to have hjkl
-        :n "l"   #'dired-find-file
+        :n "h" #'dired-up-directory
+        :n "b" #'dirvish-history-jump   ; Swapped with "h" to have hjkl
+        :n "l" #'dired-find-file
         :m "e" (lookup-key dirvish-mode-map "e")
         :m "E" (lookup-key dirvish-mode-map "E") ; nil
         :m "w" (lookup-key dirvish-mode-map "w")
