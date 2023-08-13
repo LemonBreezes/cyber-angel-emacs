@@ -127,6 +127,7 @@
         :g "M-m" #'dirvish-mark-menu
         :g "M-s" #'dirvish-setup-menu
         :g "M-e" #'dirvish-emerge-menu
+        :g "M-r" #'dirvish-rsync
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
         :n "l"  #'dired-find-file
