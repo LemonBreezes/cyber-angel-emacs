@@ -14,11 +14,5 @@
 (defun cae-evil-show-normal-state-map ()
   (interactive)
   (when-let ((buf (get-buffer-create "*evil normal state map*"))
-             (map dired-mode-map))
-    (with-current-buffer buf
-      (erase-buffer)
-      (evil-normal-state)
-      (evil-normalize-keymaps)
-      (pp (evil-get-auxiliary-keymap map 'normal)
-          buf)
-      (pop-to-buffer buf))))
+             (map  (evil-get-auxiliary-keymap dired-mode-map 'normal)))
+    (which-key-show-keymap "Normal State Map" map buf)))
