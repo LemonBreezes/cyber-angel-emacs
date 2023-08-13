@@ -506,7 +506,8 @@
 ;;; Emacs OS
 
 (use-package! ednc
-  :when (cae-display-graphic-p)
+  :when (and (cae-display-graphic-p)
+             (modulep! :private exwm))
   :defer t :init
   (defun +ednc-load-h ()
     (and (require 'dbus nil t)
