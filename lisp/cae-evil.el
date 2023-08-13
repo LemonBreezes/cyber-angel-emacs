@@ -97,6 +97,14 @@
   (global-set-key (kbd "C-x C-0") #'delete-window))
 (map! :n "s" #'evil-execute-in-god-state)
 (after! evil-god-state
+  (add-hook 'post-command-hook
+            (cae-defun cae-god-state-exit ()
+              (run-at-time
+               0.0 nil
+               (lambda ()
+                 (unless (or (not (eq evil-state 'god))
+                             (eq last-command #'evil-execute-in-god-state))
+                   (evil-god-state-bail))))))
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
 (unless (lookup-key help-map "bn")
