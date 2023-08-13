@@ -127,6 +127,8 @@
                   evil-a-sentence
                   evil-a-WORD
                   evil-a-word
+                  ;; So these Evil scrolling commands don't work with this mode
+                  ;; for some reason.
                   evil-scroll-up
                   evil-scroll-down
                   evil-scroll-left
