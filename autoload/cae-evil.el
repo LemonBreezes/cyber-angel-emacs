@@ -13,6 +13,7 @@
 ;; use annalist
 (defun cae-evil-show-normal-state-map ()
   (interactive)
+  (require 'dash)
   (-some--> (symbol-value (intern (format "%S-map" major-mode)))
     (evil-get-auxiliary-keymap it 'normal)
     (which-key--show-keymap "Normal state map"
