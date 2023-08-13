@@ -124,6 +124,7 @@
         '(inhibit-message
           set-minibuffer-message)
         inhibit-message-regexps '("C-g is undefined$"
+                                  "god-mode-lookup-key-sequence: Wrong type argument: characterp, escape$"
                                   "ESC is undefined$"))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
