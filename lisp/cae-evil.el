@@ -89,6 +89,8 @@
 (after! god-mode
   (which-key-enable-god-mode-support))
 (map! :n "s" #'evil-execute-in-god-state)
+(after! evil-god-state
+  (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
