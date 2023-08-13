@@ -13,8 +13,8 @@
 ;; use annalist
 (defun cae-evil-show-normal-state-map ()
   (interactive)
-  (when-let ((buf (get-buffer-create "*evil normal state map*"))
-             (map  (evil-get-auxiliary-keymap dired-mode-map 'normal)))
+  (-some--> (symbol-value (intern (format "%S-map" major-mode)))
+    (evil-get-auxiliary-keymap it 'normal)
     (which-key--show-keymap "Normal state map"
-                            map
+                            it
                             nil nil nil)))
