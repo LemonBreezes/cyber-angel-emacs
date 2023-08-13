@@ -168,8 +168,6 @@
           which-key-compute-remaps t
           which-key-max-description-length 35
           which-key-separator (if (cae-display-graphic-p) " → " " -> ")
-          which-key-paging-key "<f6>"
-          which-key-paging-prefixes '("C-x" "C-h")
           which-key-show-operator-state-maps t))
 
   (when (cae-display-graphic-p)
