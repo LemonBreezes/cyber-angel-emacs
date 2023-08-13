@@ -86,22 +86,12 @@
                    (goto-char eshell-last-output-end)))))
 
 ;; God mode support
-;;(after! god-mode
-;;  (which-key-enable-god-mode-support)
-;;  (setq god-mode-enable-function-key-translation nil))
-;;(map! :n "s" #'evil-execute-in-god-state)
-;;(after! evil-god-state
-;;  (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
-
-;; Devil
-(use-package! devil
-  :when (modulep! :editor evil)
-  :defer t :init
-  (map! :map devil-mode-map
-        "," nil
-        :n "s" #'devil)
-  :config
-  (setq devil-key "s"))
+(after! god-mode
+  (which-key-enable-god-mode-support)
+  (setq god-mode-enable-function-key-translation nil))
+(map! :n "s" #'evil-execute-in-god-state)
+(after! evil-god-state
+  (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
