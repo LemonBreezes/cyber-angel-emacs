@@ -128,8 +128,9 @@
         :ng "M-s" #'dirvish-setup-menu
         :ng "M-e" #'dirvish-emerge-menu
         ;; TODO Do more research on the Evil keybindings.
-        :n "h"  #'dired-up-directory
-        :n "l"  #'dired-find-file)
+        ;;:n "h"  #'dired-up-directory
+        ;;:n "l"  #'dired-find-file
+        )
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
