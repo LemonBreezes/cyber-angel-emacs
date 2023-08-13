@@ -11,6 +11,8 @@
 (keymap-unset doom-leader-map +misc-applications-prefix t)
 
 (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
+(which-key-add-keymap-based-replacements 'doom-leader-map
+  +misc-applications-prefix "misc-applications")
 (defvar application-types
   '(("lookup" "l")
     ("games" "g")
@@ -19,8 +21,7 @@
     ("external-apps" "x")
     ("standalone-apps" "t")
     ("insert" "i")
-    ("music" "m")
-    ("emacs-os" "o")))
+    ("music" "m")))
 
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
