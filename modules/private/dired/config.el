@@ -59,6 +59,9 @@
         "," #'dired-create-empty-file))
 
 (after! dirvish
+  (advice-add #'find-file :around #'cae-dired-find-file-a)
+  (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
+
   (unless (cae-display-graphic-p)
     (setq dirvish-attributes
           (delq 'subtree-state
