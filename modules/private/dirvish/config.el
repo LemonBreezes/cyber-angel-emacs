@@ -112,9 +112,6 @@
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/"))
   (when (modulep! :ui popup)
     (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t))
-  (when (modulep! :editor evil)
-    (evil-make-overriding-map dired-mode-map 'motion)
-    (evil-make-overriding-map dirvish-mode-map 'motion))
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
@@ -132,9 +129,7 @@
         :g "M-e" #'dirvish-emerge-menu
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
-        :n "l"  #'dired-find-file
-        :n "gg" #'evil-goto-first-line
-        :n "G"  #'evil-goto-line)
+        :n "l"  #'dired-find-file)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
