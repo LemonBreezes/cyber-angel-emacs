@@ -89,7 +89,11 @@
 (after! god-mode
   (which-key-enable-god-mode-support)
   (setq god-mode-enable-function-key-translation nil
-        god-mode-alist '(("SPC" . "C-") ("g" . "M-") ("G" . "C-M-"))))
+        god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+  (global-set-key (kbd "C-x C-1") #'delete-other-windows)
+  (global-set-key (kbd "C-x C-2") #'split-window-below)
+  (global-set-key (kbd "C-x C-3") #'split-window-right)
+  (global-set-key (kbd "C-x C-0") #'delete-window))
 (map! :n "s" #'evil-execute-in-god-state)
 (after! evil-god-state
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
