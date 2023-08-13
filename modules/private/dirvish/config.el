@@ -139,7 +139,7 @@
         :m "V" (lookup-key dirvish-mode-map "V")
         :m "$" (lookup-key dirvish-mode-map "$")
         :m "0" (lookup-key dirvish-mode-map "0")
-        :m "p" #'dirvish-history-last)
+        :n "p" #'dirvish-history-last)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
