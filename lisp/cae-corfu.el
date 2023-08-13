@@ -42,8 +42,8 @@
                 (cae-corfu-quit)
                 t)))
   (map! :map corfu-map
-        "C-g" #'cae-corfu-quit
-        :i "<escape>" #'cae-corfu-quit))
+        "C-g" #'cae-corfu-quit)
+  (add-hook 'evil-normal-state-exit-hook #'corfu-quit))
 
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
