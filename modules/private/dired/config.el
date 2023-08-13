@@ -117,7 +117,7 @@
         :g "M-m" #'dirvish-mark-menu
         :ng "M-s" #'dirvish-setup-menu
         :g "M-e" #'dirvish-emerge-menu
-        :g "M-r" #'dirvish-rsync
+        :g "M-r" #'dirvish-rsync-transient
         :g "M-c" #'dirvish-chxxx-menu
         :g "M-h" #'dirvish-history-menu
         :g "M-;" #'dirvish-epa-dired-menu
