@@ -99,7 +99,8 @@
   (add-hook 'post-command-hook
             (cae-defun cae-god-state-exit ()
               (when (and (eq evil-state 'god)
-                         (not unread-command-events))
+                         ;; no prefix keys currently pressed
+                         (not (this-command-keys)))
                 (evil-god-state-bail))))
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
