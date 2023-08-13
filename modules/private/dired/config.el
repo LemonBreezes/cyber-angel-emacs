@@ -120,7 +120,7 @@
         :g "M-r" #'dirvish-rsync
         :g "M-c" #'dirvish-chxxx-menu
         :g "M-h" #'dirvish-history-menu
-        :g "M-;"  #'dirvish-epa-dired-menu
+        :g "M-;" #'dirvish-epa-dired-menu
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
         :n "l"  #'dired-find-file
