@@ -161,3 +161,5 @@
 
 (setq find-directory-functions
       (delq 'dired-noselect find-directory-functions))
+
+(advice-remove #'find-file :around #'cae-dired-find-file-a)
