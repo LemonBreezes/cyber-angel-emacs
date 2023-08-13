@@ -97,7 +97,9 @@
 (use-package! devil
   :when (modulep! :editor evil)
   :defer t :init
-  (map! :n "s" #'devil)
+  (map! :map devil-mode-map
+        "," nil
+        :n "s" #'devil)
   :config
   (setq devil-key "s"))
 
