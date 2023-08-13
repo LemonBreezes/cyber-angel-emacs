@@ -118,6 +118,6 @@
        org
        ai)
 
-;; Local Variables:
-;; eval: (when (featurep 'lispy) (lispy-mode -1))
-;; End:
+;;Local Variables:
+;;eval: (when (featurep 'lispy) (lispy-mode -1))
+;;End:

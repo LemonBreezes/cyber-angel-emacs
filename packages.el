@@ -112,8 +112,6 @@
 (package! consult-yasnippet)
 
 ;; cae-corfu.el
-(when (modulep! :editor snippets)
-  (package! cape-yasnippet :recipe (:host github :repo "elken/cape-yasnippet")))
 (when (modulep! :lang org)
   (package! org-block-capf :recipe (:host github :repo "xenodium/org-block-capf")))
 

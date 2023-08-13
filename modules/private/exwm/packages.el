@@ -11,3 +11,5 @@
   (package! exwm-firefox-evil))
 (package! app-launcher :recipe
   (:host github :repo "SebastienWae/app-launcher"))
+(when (modulep! +notifications)
+  (package! ednc))

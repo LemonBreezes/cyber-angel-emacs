@@ -62,11 +62,3 @@
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
 (package! zone-tmux-clock)
-
-;; Emacs OS
-(package! ednc)
-
-;; Trash bin
-(ignore
- (package! enime :recipe
-   (:host github :repo "xl666/enime" :files ("*"))))
