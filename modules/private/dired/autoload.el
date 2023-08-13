@@ -66,7 +66,6 @@
   (interactive
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
-  ;; programatically use the same interactive arguments as `find-file'
   (if (derived-mode-p 'dired-mode)
       (progn
         (when-let ((dir (file-name-directory file)))
@@ -76,9 +75,7 @@
           ;; Copied from `dirvish-find-entry-a'
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
-          (funcall oldfun file wildcards))
-        (when-let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-          (if fn (funcall fn) (dirvish-kill dv))))
+          (funcall oldfun file wildcards)))
     (funcall oldfun file wildcards)))
 
 ;;;###autoload
