@@ -135,7 +135,8 @@
         :m "w" (lookup-key dirvish-mode-map "w")
         :m "f" (lookup-key dirvish-mode-map "f")
         :m "F" (lookup-key dirvish-mode-map "F")
-        )
+        :m "v" (lookup-key dirvish-mode-map "v")
+        :m "V" (lookup-key dirvish-mode-map "V"))
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
