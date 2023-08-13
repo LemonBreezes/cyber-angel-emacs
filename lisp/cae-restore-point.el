@@ -126,7 +126,15 @@
                   evil-a-paragraph
                   evil-a-sentence
                   evil-a-WORD
-                  evil-a-word))
+                  evil-a-word
+                  evil-scroll-up
+                  evil-scroll-down
+                  evil-scroll-left
+                  evil-scroll-right
+                  evil-scroll-line-up
+                  evil-scroll-line-down
+                  evil-scroll-page-down
+                  evil-scroll-page-up))
       (add-to-list 'rp/restore-point-commands fn))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
