@@ -112,6 +112,8 @@
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/"))
   (when (modulep! :ui popup)
     (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t))
+  (evil-make-overriding-map dired-mode-map 'motion)
+  (evil-make-overriding-map dirvish-mode-map 'motion)
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
@@ -128,8 +130,9 @@
         :ng "M-s" #'dirvish-setup-menu
         :ng "M-e" #'dirvish-emerge-menu
         ;; TODO Do more research on the Evil keybindings.
-        ;;:n "h"  #'dired-up-directory
-        ;;:n "l"  #'dired-find-file
+        :n "h"  #'dired-up-directory
+        :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
+        :n "l"  #'dired-find-file
         )
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
