@@ -11,7 +11,7 @@
 ;;;###autoload
 (defun cae-show-normal-state-bindings ()
   (interactive)
-  (if-let ((map (evil-get-auxiliary-keymap
-                 (current-local-map) 'normal)))
+  (if-let ((map (or (evil-get-auxiliary-keymap
+                     (current-local-map) 'normal))))
       (which-key--show-keymap "Normal state bindings" map nil nil nil)
     (message "No %s normal state bindings are defined." major-mode)))
