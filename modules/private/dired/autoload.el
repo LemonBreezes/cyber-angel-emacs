@@ -88,3 +88,32 @@
 ;;  (when (and (derived-mode-p 'dired-mode)
 ;;             (window-dedicated-p))
 ;;    (dirvish-quit)))
+
+
+(defun cae-dired-find-file-a (oldfun file &optional wildcards)
+  "Like `find-file', but might exit the current Dirvish session."
+  (interactive
+   (find-file-read-args "Find file: "
+                        (confirm-nonexistent-file-or-buffer)))
+  (if (derived-mode-p 'dired-mode)
+      (progn
+        (when-let ((dir (file-name-directory file)))
+          (unless (file-equal-p dir default-directory)
+            (funcall oldfun dir)))
+        (unless (file-directory-p file)
+          ;; Copied from `dirvish-find-entry-a'
+          (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+            (if fn (funcall fn) (dirvish-kill dv)))
+          (funcall oldfun file wildcards))
+        (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+          (if fn (funcall fn) (dirvish-kill dv))))
+    (funcall oldfun file wildcards)))
+
+(defun cae-dired-find-file-other-window-a (oldfun &rest args)
+  (when (and (derived-mode-p 'dired-mode)
+             (window-dedicated-p))
+    (dirvish-quit))
+  (apply oldfun args))
+
+(advice-add #'find-file :around #'cae-dired-find-file-a)
+(advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
