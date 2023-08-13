@@ -176,7 +176,7 @@ expansion occurs within the parent Emacs session.")
     (after! tooltip
       (add-to-list 'tooltip-frame-parameters '(parent-frame . nil) t))
 
-    ;; Prevent `window-live-p' and `frame-live-p' from producing errors when
+;; Prevent `window-live-p' and `frame-live-p' from producing errors when
     ;; their argument is nil.
     (defun +exwm-select-window-a (oldfun window &rest args)
       (when window (apply oldfun window args)))
@@ -220,4 +220,11 @@ expansion occurs within the parent Emacs session.")
 
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
-      (load! "+startup-programs"))))
+      (load! "+startup-programs")))
+
+  (when (modulep! +notifications)
+    (load! "+notifications")))
+
+;;Local Variables:
+;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
+;;End:
