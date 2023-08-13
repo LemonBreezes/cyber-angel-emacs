@@ -14,7 +14,7 @@
 (defun cae-evil-show-normal-state-map ()
   (interactive)
   (when-let ((buf (get-buffer-create "*evil normal state map*"))
-             (map (symbol-value (intern (concat (symbol-name major-mode) "-map")))))
+             (map dired-mode-map))
     (with-current-buffer buf
       (erase-buffer)
       (evil-normal-state)
