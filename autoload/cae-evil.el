@@ -9,8 +9,6 @@
     (forward-page count)))
 
 ;;;###autoload
-;; show the current evil normal state map for this major mode
-;; use annalist
 (defun cae-show-normal-state-bindings ()
   (interactive)
   (require 'dash)
