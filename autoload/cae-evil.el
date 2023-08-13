@@ -15,4 +15,6 @@
   (interactive)
   (when-let ((buf (get-buffer-create "*evil normal state map*"))
              (map  (evil-get-auxiliary-keymap dired-mode-map 'normal)))
-    (which-key-show-keymap map)))
+    (which-key--show-keymap "Normal state map"
+                            map
+                            nil nil nil)))
