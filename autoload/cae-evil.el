@@ -13,7 +13,7 @@
   (interactive)
   (if-let ((map (or (evil-get-auxiliary-keymap
                      (cond ((bound-and-true-p git-timemachine-mode)
-                             git-time-machine-mode-map)
+                             git-timemachine-mode-map)
                            (t (current-local-map)))
                      'normal))))
       (which-key--show-keymap "Normal state bindings" map nil nil nil)
