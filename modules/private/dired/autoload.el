@@ -43,7 +43,7 @@
   ("M-e" cae-dired-dirvish-emerge-menu "Emerge menu" :column "UI")
   ("M-l" dirvish-ls-switches-menu "ls menu" :column "UI")
   ("M-m" dirvish-mark-menu "Mark menu" :column "Misc")
-  ("M-r" dirvish-rsync "Rsync menu" :column "Act")
+  ("M-r" dirvish-rsync-transient "Rsync menu" :column "Act")
   ("M-c" dirvish-chxxx-menu "ChXXX menu" :column "Act")
   ("M-h" dirvish-history-menu "History menu" :column "Navigate")
   ("M-;" dirvish-epa-dired-menu "EPA menu" :column "Act")
