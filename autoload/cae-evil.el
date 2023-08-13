@@ -12,6 +12,7 @@
 (defun cae-show-normal-state-bindings ()
   (interactive)
   (require 'dash)
-  (-some--> (current-local-map)
-    (evil-get-auxiliary-keymap it 'normal)
-    (which-key--show-keymap "Normal state bindings" it nil nil nil)))
+  (which-key--show-keymap "Normal state bindings"
+                          (evil-get-auxiliary-keymap
+                           (current-local-map) 'normal)
+                          nil nil nil))
