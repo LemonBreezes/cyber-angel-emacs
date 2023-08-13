@@ -71,11 +71,6 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
-;; `evil-snipe' gives me errors when I have `native-comp-speed' set to 3.
-(when (eq native-comp-speed 3)
-  (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
-  (remove-hook 'doom-first-input-hook #'evil-snipe-override-mode))
-
 
 ;;; UI
 
