@@ -71,6 +71,9 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
+(after! annalist
+  (setq annalist-record nil))
+
 
 ;;; UI
 
