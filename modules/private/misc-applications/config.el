@@ -8,7 +8,6 @@
 (defvar +misc-applications-prefix "a")
 
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
-(define-prefix-command 'doom-leader-map)
 (keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
 (which-key-add-keymap-based-replacements 'doom-leader-map
