@@ -93,6 +93,14 @@
 ;;(after! evil-god-state
 ;;  (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
+;; Devil
+(use-package! devil
+  :when (modulep! :editor evil)
+  :defer t :init
+  (map! :n "s" #'devil)
+  :config
+  (setq devil-key "s"))
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
