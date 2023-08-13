@@ -104,6 +104,7 @@
                  (unless (or (not (eq evil-state 'god))
                              (eq last-command #'evil-execute-in-god-state))
                    (evil-god-state-bail))))))
+  (advice-add #'evil-stop-execute-in-god-state :override #'ignore)
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
 ;;Local Variables:
