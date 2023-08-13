@@ -95,7 +95,7 @@
   (global-set-key (kbd "C-x C-2") #'split-window-below)
   (global-set-key (kbd "C-x C-3") #'split-window-right)
   (global-set-key (kbd "C-x C-0") #'delete-window))
-(map! :vn "s" #'evil-execute-in-god-state)
+(map! :n "s" #'evil-execute-in-god-state)
 (after! evil-god-state
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
