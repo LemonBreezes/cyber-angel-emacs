@@ -102,13 +102,7 @@
                0.0 nil
                (lambda ()
                  (unless (or (not (eq evil-state 'god))
-                             (eq last-command #'evil-execute-in-god-state)
-                             (eq last-command #'universal-argument)
-                             (eq last-command #'universal-argument-minus)
-                             (eq last-command #'universal-argument-more)
-                             (eq last-command #'universal-argument-other-key)
-                             (eq last-command #'digit-argument)
-                             (eq last-command #'negative-argument))
+                             (eq last-command #'evil-execute-in-god-state))
                    (evil-god-state-bail))))))
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
