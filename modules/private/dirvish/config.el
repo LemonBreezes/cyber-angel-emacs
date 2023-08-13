@@ -129,7 +129,8 @@
         :g "M-e" #'dirvish-emerge-menu
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
-        :n "l"  #'dired-find-file)
+        :n "l"  #'dired-find-file
+        :m "e" nil)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
