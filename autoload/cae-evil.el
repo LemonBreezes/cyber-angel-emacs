@@ -11,7 +11,6 @@
 ;;;###autoload
 (defun cae-show-normal-state-bindings ()
   (interactive)
-  (require 'dash)
   (which-key--show-keymap "Normal state bindings"
                           (evil-get-auxiliary-keymap
                            (current-local-map) 'normal)
