@@ -117,18 +117,18 @@
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
-        :ng "a"   #'dirvish-quick-access
-        :ng "f"   #'dirvish-file-info-menu
-        :ng "y"   #'dirvish-yank-menu
-        :ng "s"   #'dirvish-quicksort
-        :ng "TAB" #'dirvish-subtree-toggle
-        :ng "M-t" #'dirvish-layout-toggle
-        :ng "M-b" #'dirvish-history-go-backward
-        :ng "M-f" #'dirvish-history-go-forward
-        :ng "M-n" #'dirvish-narrow
-        :ng "M-m" #'dirvish-mark-menu
-        :ng "M-s" #'dirvish-setup-menu
-        :ng "M-e" #'dirvish-emerge-menu
+        :g "a"   #'dirvish-quick-access
+        :g "f"   #'dirvish-file-info-menu
+        :g "y"   #'dirvish-yank-menu
+        :g "s"   #'dirvish-quicksort
+        :g "TAB" #'dirvish-subtree-toggle
+        :g "M-t" #'dirvish-layout-toggle
+        :g "M-b" #'dirvish-history-go-backward
+        :g "M-f" #'dirvish-history-go-forward
+        :g "M-n" #'dirvish-narrow
+        :g "M-m" #'dirvish-mark-menu
+        :g "M-s" #'dirvish-setup-menu
+        :g "M-e" #'dirvish-emerge-menu
         ;; TODO Do more research on the Evil keybindings.
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
