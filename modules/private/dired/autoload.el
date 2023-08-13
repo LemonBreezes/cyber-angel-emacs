@@ -70,7 +70,8 @@
           (advice-remove #'find-file #'cae-dired-find-file-a)
           (unwind-protect
               (find-file dir)
-            (advice-add #'find-file :before #'cae-dired-find-file-a)))
+            (advice-add #'find-file :around #'cae-dired-find-file-a)))
+        (+log "HELLOO")
         (unless (file-directory-p file)
           ;; Copied from `dirvish-find-entry-a'
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
