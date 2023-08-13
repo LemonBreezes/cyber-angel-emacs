@@ -14,6 +14,4 @@
   (require 'dash)
   (-some--> (symbol-value (intern (format "%S-map" major-mode)))
     (evil-get-auxiliary-keymap it 'normal)
-    (which-key--show-keymap "Normal state bindings"
-                            it
-                            nil nil nil)))
+    (which-key--show-keymap "Normal state bindings" it nil nil nil)))
