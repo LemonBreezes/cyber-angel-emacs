@@ -64,19 +64,25 @@
 (defun cae-dired-find-file-a (oldfun file &optional wildcards)
   "Like `find-file', but might exit the current Dirvish session."
   (interactive
+   ;; Get file or buffer name to open
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
+  ;; Check if in Dired mode
   (if (derived-mode-p 'dired-mode)
       (progn
+        ;; Check if file is in a different directory and if so change to it
         (when-let ((dir (file-name-directory file)))
           (unless (file-equal-p dir default-directory)
             (funcall oldfun dir)))
+        ;; If not a directory, kill Dirvish and find the file
         (unless (file-directory-p file)
           ;; Copied from `dirvish-find-entry-a'
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards)))
+    ;; If not in Dired mode, find the file as usual
     (funcall oldfun file wildcards)))
+
 
 ;;;###autoload
 (defun cae-dired-find-file-other-window-a (oldfun &rest args)
