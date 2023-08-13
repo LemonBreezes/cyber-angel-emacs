@@ -105,7 +105,7 @@
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
           (funcall oldfun file wildcards))
-        (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+        (when-let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
           (if fn (funcall fn) (dirvish-kill dv))))
     (funcall oldfun file wildcards)))
 
