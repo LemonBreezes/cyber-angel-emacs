@@ -112,6 +112,9 @@
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/"))
   (when (modulep! :ui popup)
     (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t))
+  ;; Disable motion state keybindings where they don't make sense.
+  (evil-make-overriding-map dired-mode-map 'motion)
+  (evil-make-overriding-map dirvish-mode-map 'motion)
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
