@@ -131,6 +131,8 @@
         ;;:n "h"  #'dired-up-directory
         ;;:n "l"  #'dired-find-file
         )
+  (setf (alist-get 'dired-mode-map evil-overriding-maps)
+        'motion)
   (setf (alist-get 'dirvish-mode-map evil-overriding-maps)
         'motion)
   (if (modulep! +dirvish)
