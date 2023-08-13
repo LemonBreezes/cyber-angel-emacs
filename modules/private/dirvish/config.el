@@ -130,7 +130,12 @@
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
         :n "l"  #'dired-find-file
-        :m "e" nil)
+        :m "e" (lookup-key dirvish-mode-map "e")
+        :m "E" (lookup-key dirvish-mode-map "E")
+        :m "w" (lookup-key dirvish-mode-map "w")
+        :m "f" (lookup-key dirvish-mode-map "f")
+        :m "F" (lookup-key dirvish-mode-map "F")
+        )
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
