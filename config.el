@@ -71,6 +71,7 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
+;; This is a startup optimization since I've never used `annalist' before.
 (after! annalist
   (setq annalist-record nil))
 
