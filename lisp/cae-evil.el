@@ -18,10 +18,6 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
-;; Disable motion state keybindings where they don't make sense.
-(dolist (map '(dired-mode-map dirvish-mode-map))
-  (setf (alist-get map evil-overriding-maps) 'motion))
-
 ;; Define a leader key for switching to popup windows.
 (unless (lookup-key evil-window-map "e")
   (map! :map evil-window-map
