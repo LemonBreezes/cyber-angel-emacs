@@ -269,6 +269,18 @@
   (map! :map trashed-mode-map
         "<f6>" #'+trashed-hydra/body))
 
+(use-package! proced
+  :defer t :init
+  (map! :map +misc-applications-system-map
+        "p" #'proced)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "p" "processes"))
+  :config
+  (setq proced-enable-color-flag t)
+  (map! :map proced-mode-map
+        "<f6>" #'+proced-hydra/body))
+
 
 ;;; Insert
 
