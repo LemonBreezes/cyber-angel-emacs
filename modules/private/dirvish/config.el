@@ -117,10 +117,10 @@
   (map! :map dirvish-mode-map
         :n  "?"   #'dirvish-dispatch
         :n  "q"   #'dirvish-quit
-        :g "a"   #'dirvish-quick-access
+        :ng "a"   #'dirvish-quick-access
         :g "f"   #'dirvish-file-info-menu
-        :g "y"   #'dirvish-yank-menu
-        :g "s"   #'dirvish-quicksort
+        :ng "y"   #'dirvish-yank-menu
+        :ng "s"   #'dirvish-quicksort
         :g "TAB" #'dirvish-subtree-toggle
         :g "M-t" #'dirvish-layout-toggle
         :g "M-b" #'dirvish-history-go-backward
@@ -132,7 +132,9 @@
         ;; TODO Do more research on the Evil keybindings.
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
-        :n "l"  #'dired-find-file)
+        :n "l"  #'dired-find-file
+        :n "gg" #'evil-goto-first-line
+        :n "G"  #'evil-goto-line)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
