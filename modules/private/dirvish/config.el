@@ -132,8 +132,7 @@
         ;; TODO Do more research on the Evil keybindings.
         :n "h"  #'dired-up-directory
         :n "b"  #'dirvish-history-jump  ; Swapped with "h" to have hjkl
-        :n "l"  #'dired-find-file
-        )
+        :n "l"  #'dired-find-file)
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
