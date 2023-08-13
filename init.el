@@ -12,6 +12,11 @@
 
 (setq native-comp-async-jobs-number (num-processors))
 
+;; This is a startup optimization. I've never used `annalist' to print stuff out
+;; into Org tables.
+(provide 'annalist)
+(defalias 'annalist-define-view 'ignore)
+
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (defvar cae-init-ui-enabled-p t
