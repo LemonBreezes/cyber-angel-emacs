@@ -106,6 +106,8 @@
                              (eq last-command #'evil-execute-in-god-state))
                    (evil-god-state-bail))))))
 
+  ;; Monkey-patch `evil-visual-state-activate-hook' to not clobber `god-state'
+  ;; when the mark is active.
   (advice-add #'evil-visual-state-activate-hook
               :override
               (cae-defun cae-evil-visual-activate-hook (&optional _command)
