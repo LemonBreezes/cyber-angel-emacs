@@ -25,7 +25,9 @@
              scroll-up scroll-down
              scroll-up-command
              rp/point-ring-nav-previous)
-           '(symbol-overlay-switch-forward
+           '(cae-pop-mark
+             pop-mark
+             symbol-overlay-switch-forward
              symbol-overlay-switch-backward
              symbol-overlay-jump-next
              symbol-overlay-jump-prev
