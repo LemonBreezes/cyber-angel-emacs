@@ -91,6 +91,8 @@
   (which-key-enable-god-mode-support)
   (setq god-mode-enable-function-key-translation nil
         god-mode-alist '((nil . "C-") ("g" . "M-") ("G" . "C-M-")))
+  (setf (alist-get 'escape god-mode-sanitized-key-alist)
+        "<escape>")
   (global-set-key (kbd "C-x C-1") #'delete-other-windows)
   (global-set-key (kbd "C-x C-2") #'split-window-below)
   (global-set-key (kbd "C-x C-3") #'split-window-right)
