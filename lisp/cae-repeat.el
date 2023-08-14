@@ -107,9 +107,9 @@
       ("d" evil-scroll-down
        "u" evil-scroll-up))
 
-  (define-repeat-map evil-scroll-page
-    ("f" evil-scroll-page-down
-     "b" evil-scroll-page-up))
+    (define-repeat-map evil-scroll-page
+      ("f" evil-scroll-page-down
+       "b" evil-scroll-page-up))
 
     (define-repeat-map evil-scroll-line
       ("e" evil-scroll-line-down
