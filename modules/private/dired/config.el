@@ -93,7 +93,8 @@
              ("d" "~/Downloads/" "Downloads")
              ("m" "/mnt/" "Drives")
              ("s" "~/src/" "Source code")
-             ("t" "~/.local/share/Trash/files/" "TrashCan"))))
+             ("t" "~/.local/share/Trash/files/" "TrashCan")
+             ("9" "/hdd/torrents/P90X - Extreme Home Fitness Exercise Complete Workout/Videos/"))))
 
   (after! dirvish-fd
     (setq dirvish-fd-default-dir "~/"))
