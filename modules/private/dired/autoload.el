@@ -3,7 +3,7 @@
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
-    (dirvish-layout-toggle))
+    (call-interactively #'dirvish-layout-toggle))
   (call-interactively fn)
   (when (and (derived-mode-p 'dired-mode)
              (one-window-p)
