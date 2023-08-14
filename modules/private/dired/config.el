@@ -140,6 +140,7 @@
 
   (map! :map dirvish-mode-map
         :ng "e" #'find-file
+        :ng "w" #'+default/search-buffer
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
