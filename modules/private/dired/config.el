@@ -139,7 +139,7 @@
         :n "p" #'dirvish-history-last)
 
   (map! :map dirvish-mode-map
-        "e" #'find-file
+        :ng "e" #'find-file
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
