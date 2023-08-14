@@ -78,7 +78,7 @@
     ("v" scroll-down-command)
     (:exit "V" scroll-up-command))
 
-  (define-repeat-map multiple-cursors
+  (define-repeat-map multiple-cursors-mark
     ("n" mc/mark-next-like-this
      "p" mc/mark-previous-like-this
      "N" mc/unmark-next-like-this
@@ -106,6 +106,10 @@
     (define-repeat-map evil-scroll
       ("d" evil-scroll-down
        "u" evil-scroll-up))
+
+  (define-repeat-map evil-scroll-page
+    ("f" evil-scroll-page-down
+     "b" evil-scroll-page-up))
 
     (define-repeat-map evil-scroll-line
       ("e" evil-scroll-line-down
