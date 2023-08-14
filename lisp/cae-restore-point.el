@@ -149,8 +149,6 @@
                   evil-a-sentence
                   evil-a-WORD
                   evil-a-word
-                  ;;next-line     ; These two are necessary because Evil
-                  ;;previous-line ; messes with `this-command'.
                   evil-scroll-up
                   evil-scroll-down
                   evil-scroll-left
