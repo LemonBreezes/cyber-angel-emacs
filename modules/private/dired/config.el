@@ -145,6 +145,7 @@
         "M-l" #'dirvish-ls-switches-menu
         "M-j" #'dirvish-fd-jump
         "M-k" #'dirvish-fd
+        "M-a" #'dirvish-fd-ask
         "M-i" #'dirvish-fd-switches-menu
         [remap dirvish-emerge-menu] #'cae-dired-dirvish-emerge-menu
         "v" #'dirvish-vc-menu
