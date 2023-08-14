@@ -154,7 +154,8 @@
         [remap previous-buffer] #'cae-dired-previous-buffer
         [remap next-buffer] #'cae-dired-next-buffer
         "<f6>" #'cae-dired-dirvish-hydra/body))
-(map! :leader "o-" #'cae-dired-jump)
+(map! :leader "o-" #'cae-dired-jump
+      :leader "op" #'dirvish-side)
 
 (add-hook 'find-directory-functions
           (cae-defun cae-dired-load-dirvish-h (dir)
