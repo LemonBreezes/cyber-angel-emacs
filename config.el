@@ -45,10 +45,7 @@
 
 (after! xclip
   (cond ((executable-find "termux-setup-storage")
-         (setq xclip-method 'termux-clipboard-get))
-        ((and (getenv "SSH_TTY")
-              (not (cae-display-graphic-p)))
-         (setq xclip-method nil))))
+         (setq xclip-method 'termux-clipboard-get))))
 
 ;; For some reason Persp is picking up a few buffers that it should not.
 (when (modulep! :ui workspaces)
@@ -70,6 +67,12 @@
 ;; I have disabled `rainbow-delimiters' as a package so this is to prevent
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
+
+
+(when (and (modulep! :os tty)
+           (getenv "SSH_TTY")
+           (not (cae-display-graphic-p)))
+  (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
 
 ;;; UI
