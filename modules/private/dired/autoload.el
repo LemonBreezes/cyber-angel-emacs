@@ -71,8 +71,7 @@
    (find-file-read-args "Find file: "
                         (confirm-nonexistent-file-or-buffer)))
   ;; Check if in Dired mode
-  (if (and (derived-mode-p 'dired-mode)
-           (not (dirvish-side--session-visible-p)))
+  (if (derived-mode-p 'dired-mode)
       (progn
         ;; Check if file is in a different directory and if so change to it
         (when-let ((dir (file-name-directory file)))
