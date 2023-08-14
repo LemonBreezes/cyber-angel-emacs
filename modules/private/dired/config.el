@@ -97,7 +97,7 @@
 
   (after! dirvish-fd
     ;; On both of my computers, using "/" instead crashes Emacs.
-    (setq dirvish-fd-default-dir "~/"))
+    (setq dirvish-fd-default-dir "/"))
 
   (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
 
