@@ -88,9 +88,8 @@
 
 (use-package! gitignore-templates
   :defer t :init
-  (map! :leader
-        :prefix "i"
-        :desc ".gitignore template" "I" #'gitignore-templates-insert))
+  (unless (lookup-key doom-leader-map "iI")
+    (map! :leader :desc ".gitignore template" "iI" #'gitignore-templates-insert)))
 
 (use-package! git-email
   :defer t :init
