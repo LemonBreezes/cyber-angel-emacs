@@ -89,7 +89,7 @@ when inhibited to show history matches."
         (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
         (require 'tldr)
         (tldr-update-docs))
-     (lambda (_) (message "tldr docs updated.")))))
+     (lambda (_) (message "tldr docs updated")))))
 
 (set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
 
