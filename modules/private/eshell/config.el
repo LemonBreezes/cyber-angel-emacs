@@ -113,18 +113,10 @@
                #'eshell-expand-history-references))
 
 (after! eshell
-  (cond ((modulep! :completion vertico)
-         (map! :map eshell-mode-map
-               [remap eshell-isearch-backward] #'consult-history
-               "M-R" #'consult-history))
-        ((modulep! :completion ivy)
-         (map! :map eshell-mode-map
-               [remap eshell-isearch-backward] #'counsel-esh-history))
-        ((modulep! :completion helm)
-         (map! :map eshell-mode-map
-               [remap eshell-isearch-backward] #'helm-eshell-history)))
-
   (map! :map eshell-mode-map
+        (:when (modulep! :completion vertico)
+         "M-s" nil
+         "M-r" #'consult-history)
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
         :ig "C-d" #'cae-eshell-quit-or-delete-char))
