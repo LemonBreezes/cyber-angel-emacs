@@ -83,8 +83,8 @@
                    (goto-char (point-max)))
                   ;; eshell
                   ((and (bound-and-true-p eshell-last-output-end)
-                        (not (eq (point) eshell-last-output-end)))
-                   (goto-char eshell-last-output-end)))))
+                        (not (>= (point) eshell-last-output-end)))
+                   (goto-char (point-max))))))
 
 ;; God mode support
 (after! god-mode
