@@ -1175,6 +1175,7 @@
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
+;; Compile Vterm in the background.
 (when (modulep! :term vterm)
   (run-with-idle-timer
    10 nil
