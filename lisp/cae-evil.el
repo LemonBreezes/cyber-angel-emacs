@@ -111,23 +111,21 @@
 
   ;; Monkey-patch `evil-visual-state-activate-hook' to not clobber `god-state'
   ;; when the mark is active.
-  (advice-add #'evil-visual-state-activate-hook
-              :override
-              (cae-defun cae-evil-visual-activate-hook (&optional _command)
-                "Enable Visual state if the region is activated."
-                (unless (evil-visual-state-p)
-                  (evil-delay nil
-                      ;; the activation may only be momentary, so re-check
-                      ;; in `post-command-hook' before entering Visual state
-                      '(unless (or (evil-visual-state-p)
-                                   (evil-insert-state-p)
-                                   (evil-emacs-state-p)
-                                   (evil-god-state-p))
-                         (when (and (region-active-p)
-                                    (not deactivate-mark))
-                           (evil-visual-state)))
-                    'post-command-hook nil t
-                    "evil-activate-visual-state"))))
+  (defun evil-visual-activate-hook (&optional _command)
+    "Enable Visual state if the region is activated."
+    (unless (evil-visual-state-p)
+      (evil-delay nil
+          ;; the activation may only be momentary, so re-check
+          ;; in `post-command-hook' before entering Visual state
+          '(unless (or (evil-visual-state-p)
+                       (evil-insert-state-p)
+                       (evil-emacs-state-p)
+                       (evil-god-state-p))
+             (when (and (region-active-p)
+                        (not deactivate-mark))
+               (evil-visual-state)))
+        'post-command-hook nil t
+        "evil-activate-visual-state")))
 
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
