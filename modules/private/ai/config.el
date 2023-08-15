@@ -46,10 +46,12 @@
 
 (use-package! chatgpt-shell
   :defer t :init
-  (map! :leader
-        :prefix "o"
-        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
-        :desc "Open ChatGPT here" "C" #'chatgpt-shell)
+  (unless (or (lookup-key doom-leader-map "oc")
+              (lookup-key doom-leader-map "oC"))
+    (map! :leader
+          :prefix "o"
+          :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
+          :desc "Open ChatGPT here" "C" #'chatgpt-shell))
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer)
   (advice-add #'shell-maker-async-shell-command
