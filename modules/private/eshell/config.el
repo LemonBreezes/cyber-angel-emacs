@@ -115,9 +115,11 @@
 (after! eshell
   (when (modulep! :completion vertico)
     (map! :map eshell-mode-map
-          [remap +eshell/search-history] #'consult-history
-          "M-s" nil
-          "M-r" #'consult-history))
+          [remap +eshell/search-history] #'consult-history)
+    (after! em-hist
+      (map! :map eshell-hist-mode-map
+            "M-s" nil
+            "M-r" #'consult-history)))
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
