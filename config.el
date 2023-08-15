@@ -833,9 +833,8 @@
 
   (use-package! file-info
     :defer t :init
-    (unless (lookup-key doom-leader-map "fi")
-      (map! :leader :prefix "f"
-            :desc "Show file info" "i" #'file-info-show))
+    (map! :leader :prefix "f"
+          :desc "Show file info" "i" #'file-info-show)
     :config
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
