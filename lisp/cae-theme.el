@@ -60,9 +60,8 @@
 
 (setq doom-theme 'modus-vivendi-deuteranopia)
 
-(unless (lookup-key doom-leader-map "tT")
-  (map! :leader
-        :desc "Toggle theme" "t T" #'modus-themes-toggle))
+(map! :leader
+      :desc "Toggle theme" "t T" #'modus-themes-toggle)
 
 ;;; Set theme based on time of day.
 
