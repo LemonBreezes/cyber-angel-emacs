@@ -222,7 +222,9 @@
 (use-package! parrot-rotate
   :defer t :init
   (map! "C-!" #'cae-modeline-rotate-forward-word-at-point
-        "C-M-!" #'cae-modeline-rotate-backward-word-at-point)
+        "C-M-!" #'cae-modeline-rotate-backward-word-at-point
+       :n "]r"  #'rotate-text
+       :n "[r"  #'rotate-text-backward)
   :config
   (after! parrot-rotate
     (setq parrot-rotate-animate-after-rotation nil
