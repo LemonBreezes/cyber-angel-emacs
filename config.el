@@ -833,8 +833,7 @@
 
   (use-package! file-info
     :defer t :init
-    (map! :leader :prefix "f"
-          :desc "Show file info" "i" #'file-info-show)
+    (map! :leader :desc "Show file info" "fi" #'file-info-show)
     :config
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
