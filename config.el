@@ -1178,7 +1178,7 @@
 ;; Compile Vterm in the background.
 (when (modulep! :term vterm)
   (run-with-idle-timer
-   5 nil
+   3 nil
    (lambda ()
      (unless (require 'vterm-module nil t)
        (async-start
