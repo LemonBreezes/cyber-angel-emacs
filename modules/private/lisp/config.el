@@ -126,4 +126,8 @@
         additional
         additional-insert))
     (after! lispyville
+      (pushnew! evil-goggles--commands
+                '(evil-commentary :face evil-goggles-commentary-face :switch
+                 evil-goggles-enable-commentary :advice
+                 evil-goggles--generic-async-advice))
       (setq lispyville-motions-put-into-special t))))
