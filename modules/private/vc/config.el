@@ -94,9 +94,10 @@
 (use-package! git-email
   :defer t :init
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
-    (map! :leader
-          :prefix vc-prefix
-          :desc "Email patch" "RET" #'git-email-format-patch))
+    (unless (lookup-key doom-leader-map (concat vc-prefix " " "RET"))
+      (map! :leader
+            :prefix vc-prefix
+            :desc "Email patch" "RET" #'git-email-format-patch)))
   (map! :map dired-mode-map
         :localleader
         "g" #'git-email-send-email)
