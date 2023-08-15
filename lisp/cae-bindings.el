@@ -203,8 +203,7 @@
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
-(unless (or (modulep! :editor evil)
-            (lookup-key doom-leader-map "h"))
+(unless (modulep! :editor evil)
   (map! :leader :desc "help" "h" help-map))
 
 (when (modulep! :editor snippets)
