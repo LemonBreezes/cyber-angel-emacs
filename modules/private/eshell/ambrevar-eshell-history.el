@@ -1,4 +1,4 @@
-;;; private/eshell/ambrevar-eshell-history.el -*- lexical-binding: t; -*-
+;;; private/eshell/global-ambrevar-eshell-history.el -*- lexical-binding: t; -*-
 
 ;; Global Eshell history. From https://gitlab.com/ambrevar/dotfiles/-/blob/master/.emacs.d/lisp/init-eshell.el.
 (defvar ambrevar/eshell-history-global-ring nil
