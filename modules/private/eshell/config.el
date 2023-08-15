@@ -95,8 +95,8 @@
 ;;(after! esh-module
 ;;  (add-to-list 'eshell-modules-list 'eshell-elecslash))
 
-(autoload 'eshell-elecslash-initialize "eshell-elecslash")
-(add-hook 'eshell-mode-hook #'eshell-elecslash-initialize)
+;;(autoload 'eshell-elecslash-initialize "eshell-elecslash")
+;;(add-hook 'eshell-mode-hook #'eshell-elecslash-initialize)
 
 (after! em-hist
   (setq eshell-history-size (expt 2 16))
