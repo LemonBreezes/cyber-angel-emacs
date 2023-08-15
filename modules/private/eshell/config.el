@@ -75,14 +75,15 @@
 ;;  :defer t :init
 ;;  (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 ;;
-;;;; Colorize ansi escape sequences in exported buffers
-;;(advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
-;;
-;;;; Parse buffer redirection >#buf and >#.
-;;(add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
-;;
-;;;; Filter trivial commands from history.
-;;(setq eshell-input-filter #'cae-eshell-input-filter)
+
+;; Colorize ansi escape sequences in exported buffers
+(advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
+
+;; Parse buffer redirection >#buf and >#.
+(add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
+
+;; Filter trivial commands from history.
+(setq eshell-input-filter #'cae-eshell-input-filter)
 
 ;;Set the prompt
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
