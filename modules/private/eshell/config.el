@@ -57,40 +57,40 @@
   imenu-generic-expression
   `((,(propertize "λ" 'face 'eshell-prompt) "^.* λ \\(.*\\)" 1)))
 
-;;;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
-;;;; to work in Eshell as it does in a terminal.
-;;(when (symbol-function #'eshell/emacs)
-;;  (setf (symbol-function #'eshell/e)
-;;        (symbol-function #'eshell/emacs))
-;;  (unintern 'eshell/emacs))
-;;
-;;(add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
-;;
-;;;; Expand abbreviations before parsing input.
-;;(advice-add 'eshell-send-input :before
-;;            (cae-defun cae-eshell-expand-abbrev-a (&rest _)
-;;              (expand-abbrev)))
-;;
-;;(use-package eshell-bookmark
-;;  :defer t :init
-;;  (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
-;;
+;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
+;; to work in Eshell as it does in a terminal.
+(when (symbol-function #'eshell/emacs)
+  (setf (symbol-function #'eshell/e)
+        (symbol-function #'eshell/emacs))
+  (unintern 'eshell/emacs))
+
+(add-hook 'eshell-mode-hook #'cae-eshell-set-up-autocompletion)
+
+;; Expand abbreviations before parsing input.
+(advice-add 'eshell-send-input :before
+            (cae-defun cae-eshell-expand-abbrev-a (&rest _)
+              (expand-abbrev)))
+
+(use-package eshell-bookmark
+  :defer t :init
+  (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
+
 
 ;; Colorize ansi escape sequences in exported buffers
-;;(advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
+(advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
 ;; Parse buffer redirection >#buf and >#.
-(add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
+;;(add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
 
 ;; Filter trivial commands from history.
-;;(setq eshell-input-filter
-;;      (cae-defun cae-eshell-input-filter (str)
-;;        "Filter some trivial commands from the input history."
-;;        (not (or (string-blank-p str)
-;;                 (equal "cd" str)
-;;                 (string-prefix-p "cd " str)
-;;                 (string-prefix-p " " str)
-;;                 (string-match-p "^[a-zA-Z]$" str)))))
+(setq eshell-input-filter
+      (cae-defun cae-eshell-input-filter (str)
+        "Filter some trivial commands from the input history."
+        (not (or (string-blank-p str)
+                 (equal "cd" str)
+                 (string-prefix-p "cd " str)
+                 (string-prefix-p " " str)
+                 (string-match-p "^[a-zA-Z]$" str)))))
 
 ;;Set the prompt
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
