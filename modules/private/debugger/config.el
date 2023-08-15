@@ -44,5 +44,4 @@
         gdb-debuginfod-enable nil
         gdb-debuginfod-enable-setting nil
         gdb-display-io-buffer nil))
-(unless (lookup-key doom-leader-map "og")
-  (map! :leader "og" #'cae-debugger-run-or-pop-to-gdb))
+(map! :leader "og" #'cae-debugger-run-or-pop-to-gdb)
