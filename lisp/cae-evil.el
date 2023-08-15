@@ -63,7 +63,8 @@
 (setq evil-ex-substitute-global t
       evil-move-cursor-back nil
       evil-vsplit-window-right t
-      evil-split-window-below t)
+      evil-split-window-below t
+      evil-move-beyond-eol t)
 
 (after! evil-easymotion
   ;; This hack fixes `evilem-motion-next-line' on my Emacs. I think that command
