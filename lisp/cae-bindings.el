@@ -180,10 +180,10 @@
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
 ;; bound to `org-mark-ring-goto'.
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader (:prefix-map ("C" . "checkers"))))
+;;(when (and (modulep! :checkers syntax)
+;;           (not (modulep! :checkers syntax +flymake)))
+;;  (setq flycheck-keymap-prefix (kbd "C-c C"))
+;;  (map! :leader (:prefix-map ("C" . "checkers"))))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
