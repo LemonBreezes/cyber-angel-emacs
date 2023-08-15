@@ -68,7 +68,6 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
-
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
            (getenv "SSH_TTY")
