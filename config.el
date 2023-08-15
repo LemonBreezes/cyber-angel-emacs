@@ -74,6 +74,11 @@
            (not (cae-display-graphic-p)))
   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
+;; Allow C-v in the terminal.
+(when (not (cae-display-graphic-p))
+  (map! :map key-translation-map
+      "<xterm-paste>" "C-v"))
+
 
 ;;; UI
 
