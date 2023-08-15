@@ -382,8 +382,6 @@
     "M-s D" #'consult-locate)
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command
-   :map help-map
-   "TAB" #'consult-info
    "W" #'consult-man)
   (unless (lookup-key doom-leader-map "ik")
     (map! :leader
