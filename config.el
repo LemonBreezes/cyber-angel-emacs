@@ -1175,6 +1175,19 @@
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
+(when (modulep! :term vterm)
+  (run-with-idle-timer
+   10 nil
+   (lambda ()
+     (unless (require 'vterm-module nil t)
+       (async-start
+        `(lambda ()
+           (add-to-list 'load-path ,(file-name-directory (locate-library "vterm")))
+           (require 'vterm)
+           (vterm-module-compile))
+        (lambda (_)
+          (message "vterm-module compiled")))))))
+
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
