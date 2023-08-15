@@ -1,4 +1,6 @@
-;;; private/eshell/fish-completion-fix.el -*- lexical-binding: t; -*-
+;;; private/eshell/fish-completion-annotation-fix.el -*- lexical-binding: t; -*-
+
+
 
 ;; Code is mostly from  https://github.com/minad/marginalia/issues/87
 ;; But we implement a capf because getting annotations from fish is
