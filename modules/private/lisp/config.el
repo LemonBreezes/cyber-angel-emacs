@@ -116,7 +116,14 @@
           ")" #'cae-insert-closing-paren))
 
   (when (modulep! :editor evil)
+    (setq lispyville-key-theme
+      '(commentary
+        (operators normal)
+        c-w
+        (prettify insert)
+        (atom-movement t)
+        slurp/barf-lispy
+        additional
+        additional-insert))
     (after! lispyville
-      (add-to-list 'lispyville-key-theme 'commentary)
-      (lispyville-set-key-theme lispyville-key-theme)
       (setq lispyville-motions-put-into-special t))))
