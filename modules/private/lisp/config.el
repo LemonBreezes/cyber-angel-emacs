@@ -116,7 +116,9 @@
           ")" #'cae-insert-closing-paren))
 
   (when (modulep! :editor evil)
-    (lispyville-set-key-theme
-     (cl-merge 'list '(pretty commentary)
-               lispyville-key-theme
-               #'eq))))
+    (after! lispyville
+      (lispyville-set-key-theme
+       (cl-merge 'list '(pretty commentary)
+                 lispyville-key-theme
+                 #'eq))
+      (setq lispyville-motions-put-into-special t))))
