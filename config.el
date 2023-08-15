@@ -860,9 +860,10 @@
     (map! "M-i" #'symbol-overlay-put
           "M-I" #'symbol-overlay-remove-all
           "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
-          "M-P" #'symbol-overlay-switch-backward
-          :leader
-          :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
+          "M-P" #'symbol-overlay-switch-backward)
+    (unless (lookup-key doom-leader-map "to")
+      (map! :leader
+       :desc "Highlight symbol at point" "to" #'symbol-overlay-mode))
     (add-hook 'prog-mode-hook #'symbol-overlay-mode)
     :config
     (map! :map symbol-overlay-map
