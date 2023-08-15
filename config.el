@@ -996,46 +996,6 @@
              try-expand-line)
            hippie-expand-verbose nil))
 
-  (use-package! copilot
-    :defer t :init
-    (add-hook 'text-mode-hook   #'copilot-mode)
-    (add-hook 'prog-mode-hook   #'copilot-mode)
-    (add-hook 'conf-mode-hook   #'copilot-mode)
-    :config
-    (setq copilot--base-dir
-          (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
-          copilot-idle-delay 0.1)
-    ;; Model our Copilot interface after Fish completions.
-    (map! :map copilot-completion-map
-          "<right>" #'copilot-accept-completion
-          "C-f" #'copilot-accept-completion
-          "M-<right>" #'copilot-accept-completion-by-word
-          "M-f" #'copilot-accept-completion-by-word
-          "C-e" #'copilot-accept-completion-by-line
-          "<end>" #'copilot-accept-completion-by-line
-          "M-n" #'copilot-next-completion
-          "M-p" #'copilot-previous-completion)
-    (defun cae-copilot-clear-overlay-h ()
-      "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
-      (when (copilot--overlay-visible)
-        (copilot-clear-overlay) t))
-    (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
-    (add-to-list 'copilot-disable-predicates
-                 (cae-defun cae-disable-copilot-in-gptel-p ()
-                   (bound-and-true-p gptel-mode)))
-    (add-to-list 'copilot-disable-predicates
-                 (cae-defun cae-disable-copilot-in-dunnet-p ()
-                   (bound-and-true-p dun-mode)))
-    (when (modulep! :editor snippets)
-      (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
-    (when (modulep! :editor multiple-cursors)
-      (add-to-list 'copilot-disable-predicates
-                   (cae-defun cae-multiple-cursors-active-p ()
-                     (bound-and-true-p multiple-cursors-mode))))
-    (after! (:all copilot-balancer midnight)
-      (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                   (buffer-name copilot-balancer-debug-buffer))))
-
   (use-package! isearch-dabbrev
     :defer t :init
     (map! :map isearch-mode-map
