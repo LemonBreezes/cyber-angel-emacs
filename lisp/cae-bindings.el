@@ -113,9 +113,10 @@
         "RET" nil
         "TAB" #'outline-cycle))
 
-(map! :leader
-      :prefix "t"
-      :desc "Column indicator" "C" #'vline-mode)
+(unless (lookup-key doom-leader-map "tC")
+  (map! :leader
+        :prefix "t"
+        :desc "Column indicator" "C" #'vline-mode))
 
 (when (modulep! :private corfu)
   (after! corfu
@@ -148,8 +149,9 @@
                    "p" #'+popup/other))))))
 
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-(map! :leader
-      :desc "Copy link" "sy" #'link-hint-copy-link)
+(unless (lookup-key doom-leader-map "sy")
+  (map! :leader
+        :desc "Copy link" "sy" #'link-hint-copy-link))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
@@ -181,8 +183,7 @@
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
   (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader
-        (:prefix-map ("C" . "checkers"))))
+  (map! :leader (:prefix-map ("C" . "checkers"))))
 
 ;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
 ;; many major modes.
@@ -209,7 +210,8 @@
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
-(unless (modulep! :editor evil)
+(unless (or (modulep! :editor evil)
+            (lookup-key doom-leader-map "h"))
   (map! :leader :desc "help" "h" help-map))
 
 (when (modulep! :editor snippets)
@@ -363,7 +365,7 @@
         "M-s k" #'consult-keep-lines
         "M-s u" #'consult-focus-lines
         ;; Isearch integration
-        "M-s e" #'consult-isearch-history
+
         :map isearch-mode-map
         "M-e" #'consult-isearch-history   ;orig. isearch-edit-string
         "M-s e" #'consult-isearch-history ;orig. isearch-edit-string
@@ -388,9 +390,10 @@
         "M-X" #'consult-mode-command
         :map help-map
         "TAB" #'consult-info
-        "W" #'consult-man
-        (:leader
-         :desc "Keyboard macro"  "ik" #'consult-kmacro))
+        "W" #'consult-man)
+  (unless (lookup-key doom-leader-map "ik")
+    (map! :leader
+          :desc "Keyboard macro"  "ik" #'consult-kmacro))
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
