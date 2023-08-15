@@ -99,7 +99,8 @@
   (after! dirvish-fd
     (setq dirvish-fd-default-dir "~/"))
 
-  (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes))
+  (after! hl-line
+    (setq global-hl-line-modes (delq 'dired-mode global-hl-line-modes)))
 
   (after! wdired
     (setq wdired-allow-to-change-permissions t))
