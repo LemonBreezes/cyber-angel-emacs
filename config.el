@@ -287,6 +287,10 @@
       (setq flycheck-posframe-border-width 1
             flycheck-posframe-border-use-error-face t)))
 
+  ;; Show the window number in the modeline (when applicable).
+  (after! winum
+    (setq winum-auto-setup-mode-line t))
+
   (use-package! goggles
     :when (not (modulep! :editor evil))
     :defer t :init
