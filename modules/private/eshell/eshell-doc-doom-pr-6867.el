@@ -78,3 +78,12 @@ when inhibited to show history matches."
         (or (ignore-errors (funcall func cmd)) "")
       (prog1 nil
         (puthash cmd 'none esh-help-man-cache)))))
+
+;;; Lookup handler
+
+(set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
+
+(after! man
+  (map! :map Man-mode-map :n "x" #'+eshell-man-to-tldr))
+(after! tldr
+  (map! :map tldr-mode-map :n "x" #'+eshell-tldr-to-man))
