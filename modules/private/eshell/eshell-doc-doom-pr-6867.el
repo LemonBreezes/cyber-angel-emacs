@@ -82,7 +82,7 @@ when inhibited to show history matches."
 ;;; Lookup handler
 
 ;; This I added myself :)
-(unless (file-exists-p tldr-directory-path)
+(unless (file-exists-p (expand-file-name "tldr" doom-data-dir))
   (after! async
     (async-start
      `(lambda ()
