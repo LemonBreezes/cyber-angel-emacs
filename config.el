@@ -833,8 +833,9 @@
 
   (use-package! file-info
     :defer t :init
-    (map! :leader :prefix "f"
-          :desc "Show file info" "i" #'file-info-show)
+    (unless (lookup-key doom-leader-map "fi")
+      (map! :leader :prefix "f"
+            :desc "Show file info" "i" #'file-info-show))
     :config
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
@@ -895,7 +896,8 @@
 
   (use-package! edit-indirect
     :defer t :init
-    (unless (modulep! :editor evil)
+    (unless (or (modulep! :editor evil)
+                (lookup-key doom-leader-map "'"))
       (map! :leader "'" #'cae-edit-indirect-dwim))
     :config
     (add-hook 'edit-indirect-after-creation-hook
