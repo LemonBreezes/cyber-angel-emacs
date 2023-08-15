@@ -869,8 +869,11 @@
           "P" #'symbol-overlay-switch-backward
           "r" #'symbol-overlay-rename
           "-" #'negative-argument)
-    ;; LSP provides its own symbol highlighting.
+    ;; LSP and Eglot provide its own symbol highlighting.
     (add-hook 'lsp-mode-hook
+              (cae-defun cae-disable-symbol-overlay-h ()
+                (symbol-overlay-mode -1)))
+    (add-hook 'eglot-managed-mode-hook
               (cae-defun cae-disable-symbol-overlay-h ()
                 (symbol-overlay-mode -1)))
     (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
