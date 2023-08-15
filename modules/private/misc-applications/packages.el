@@ -6,9 +6,6 @@
 (when (modulep! :app rss)
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
-(package! my-repo-pins :recipe
-  (:host github :repo "NinjaTrappeur/my-repo-pins"
-   :build (:not compile)))
 
 ;; Use external APIs or apps
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))

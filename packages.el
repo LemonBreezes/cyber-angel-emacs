@@ -74,7 +74,7 @@
 (package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
 (package! avy-embark-collect)
 (package! restore-point
-  :recipe (:host github :repo "arthurcgusmao/restore-point"))
+  :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! symbol-overlay)
 (package! sentex)
 (package! edit-indirect)
@@ -110,8 +110,6 @@
 (package! try)
 
 ;;; Autocompletion
-(package! copilot
-  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 (package! isearch-dabbrev)
 (package! consult-yasnippet)
 

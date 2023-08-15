@@ -14,8 +14,7 @@
 
 ;; This is a startup optimization. I've never used `annalist' to print stuff out
 ;; into Org tables.
-(provide 'annalist)
-(defalias 'annalist-define-view 'ignore)
+(setq annalist-record nil)
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
