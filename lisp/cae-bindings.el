@@ -339,8 +339,8 @@
 ;;; Consult keybindings
 
 (when (modulep! :completion vertico)
-  (map!                                     ;; C-x bindings (ctl-x-map)
-   "C-x M-:" #'consult-complex-command      ;orig. repeat-complex-command
+  (map!                                ;; C-x bindings (ctl-x-map)
+   "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
    ;; Custom M-# bindings for fast register access
    "M-#" #'consult-register-load
    "M-'" #'consult-register-store       ;orig. abbrev-prefix-mark (unrelated)
@@ -355,14 +355,14 @@
    "M-g m" #'consult-mark
    "M-g k" #'consult-global-mark
    "M-g I" #'consult-imenu-multi
-   ;; M-s bindings (search-map)
+;; M-s bindings (search-map)
    "M-s k" #'consult-keep-lines
    "M-s u" #'consult-focus-lines
    ;; Isearch integration
 
    :map isearch-mode-map
-   "M-e" #'consult-isearch-history        ;orig. isearch-edit-string
-   "M-s e" #'consult-isearch-history      ;orig. isearch-edit-string
+   "M-e" #'consult-isearch-history      ;orig. isearch-edit-string
+   "M-s e" #'consult-isearch-history    ;orig. isearch-edit-string
    ;; Minibuffer history
    :map minibuffer-local-map
    ;; "M-s" #'consult-history     ;orig. next-matching-history-element
@@ -383,6 +383,8 @@
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command
    "W" #'consult-man)
+  (unless (lookup-key help-map "TAB")
+    (map! :map help-map "TAB" #'consult-info))
   (unless (lookup-key doom-leader-map "ik")
     (map! :leader
           :desc "Keyboard macro"  "ik" #'consult-kmacro))
