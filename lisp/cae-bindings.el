@@ -383,11 +383,9 @@
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command
    "W" #'consult-man)
-  (unless (lookup-key help-map "TAB")
-    (map! :map help-map "TAB" #'consult-info))
-  (unless (lookup-key doom-leader-map "ik")
-    (map! :leader
-          :desc "Keyboard macro"  "ik" #'consult-kmacro))
+  (map! :map help-map "TAB" #'consult-info)
+  (map! :leader
+        :desc "Keyboard macro"  "ik" #'consult-kmacro)
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
