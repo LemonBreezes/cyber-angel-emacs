@@ -17,7 +17,7 @@
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
   (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
-        corfu-auto-delay (if (modulep! :private corfu +tng) 0.0 0.2)
+        corfu-auto-delay 0.2
         corfu-on-exact-match nil
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete
