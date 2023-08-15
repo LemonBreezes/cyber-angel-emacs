@@ -462,4 +462,5 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
 (defun cae-dabbrev-expand ()
   (interactive)
   (cae-corfu-quit)
+  (setq this-command #'fancy-dabbrev-expand)
   (call-interactively #'fancy-dabbrev-expand))
