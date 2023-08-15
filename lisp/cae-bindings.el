@@ -169,10 +169,6 @@
 (global-set-key [remap delete-frame] nil)
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
-(after! exwm
-  (map! :map exwm-mode-map
-        "<f12>" #'cae-exwm-start-dictation))
-
 
 ;;; Fixup leader key
 
