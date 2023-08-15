@@ -48,7 +48,6 @@
 ;;  "C-v" nil
 ;;  "C-w" nil
 ;;  "C-z" nil)
-(map! :i "C-k" nil)
 
 (map! :prefix "g"
       :m "[" #'backward-page
