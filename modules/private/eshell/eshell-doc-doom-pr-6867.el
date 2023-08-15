@@ -81,6 +81,16 @@ when inhibited to show history matches."
 
 ;;; Lookup handler
 
+;; This I added myself :)
+(unless (file-exists-p tldr-directory-path)
+  (after! async
+    (async-start
+     `(lambda ()
+        (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
+        (require 'tldr)
+        (tldr-update-docs))
+     (lambda (_) (message "tldr docs updated.")))))
+
 (set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
 
 (after! man
