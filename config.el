@@ -1187,7 +1187,7 @@
            (require 'vterm)
            (vterm-module-compile))
         (lambda (_)
-          (message "vterm-module compiled")))))))
+          (message "vterm module compiled")))))))
 
 (setq cae-config-finished-loading t)
 
