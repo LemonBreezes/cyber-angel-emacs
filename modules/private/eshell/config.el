@@ -80,7 +80,8 @@
 (advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
 ;; Parse buffer redirection >#buf and >#.
-;;(add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
+(after! esh-arg
+  (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect))
 
 ;; Filter trivial commands from history.
 (setq eshell-input-filter
