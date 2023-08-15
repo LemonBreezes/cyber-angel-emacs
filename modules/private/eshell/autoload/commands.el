@@ -172,3 +172,8 @@ delete."
   (if (and (eolp))
       (eshell-life-is-too-much)
     (delete-char arg)))
+
+;;;###autoload
+(defun eshell/help (cmd)
+  "Get help for command from tldr, man or helpful."
+  (+eshell-help-run-help cmd))
