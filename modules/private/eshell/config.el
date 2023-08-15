@@ -83,14 +83,15 @@
 (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect)
 
 ;; Filter trivial commands from history.
-(setq eshell-input-filter
-      (cae-defun cae-eshell-input-filter (str)
-        "Filter some trivial commands from the input history."
-        (not (or (string-blank-p str)
-                 (equal "cd" str)
-                 (string-prefix-p "cd " str)
-                 (string-prefix-p " " str)
-                 (string-match-p "^[a-zA-Z]$" str)))))
+(after! em-hist
+  (setq eshell-input-filter
+        (cae-defun cae-eshell-input-filter (str)
+          "Filter some trivial commands from the input history."
+          (not (or (string-blank-p str)
+                   (equal "cd" str)
+                   (string-prefix-p "cd " str)
+                   (string-prefix-p " " str)
+                   (string-match-p "^[a-zA-Z]$" str))))))
 
 ;;Set the prompt
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
