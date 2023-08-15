@@ -131,5 +131,6 @@
 
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
 (load! "fish-completion-annotation-fix")
+
 (load! "ha-eshell")
 (load! "ambrevar-global-eshell-history")
