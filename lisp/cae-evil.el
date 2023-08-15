@@ -130,9 +130,7 @@
 
   (evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
-(unless (lookup-key help-map "bn")
-  (map! :map help-map
-        "bn" #'cae-show-normal-state-bindings))
+(map! :map help-map "bn" #'cae-show-normal-state-bindings)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
