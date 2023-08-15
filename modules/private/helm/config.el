@@ -190,7 +190,7 @@ Can be negative.")
         helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
 
 (use-package! helm-tramp
-  :defer t
+  :defer t :config
   (after! helm-global-bindings
     (map! :map helm-command-map
           "T" #'helm-tramp)))
