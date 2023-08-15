@@ -116,11 +116,6 @@ It is meant to be used as a `post-gc-hook'."
   (unwind-protect (apply oldfun args)
     (advice-remove #'set--this-command-keys #'ignore)))
 
-;; Disable `diff-hl-mode' in my Doom private dir.
-(defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
-  :before-until #'diff-hl-mode
-  (file-in-directory-p default-directory doom-user-dir))
-
 ;; Fix `save-some-buffers' so that I can continue the command after quitting a
 ;; diff with "q".
 (defadvice! cae-hacks-quit-view-mode-a (oldfun)
