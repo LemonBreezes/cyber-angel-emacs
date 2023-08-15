@@ -869,6 +869,7 @@
           "P" #'symbol-overlay-switch-backward
           "r" #'symbol-overlay-rename
           "-" #'negative-argument)
+    ;; LSP and Eglot provide its own symbol highlighting.
     (add-hook! (lsp-mode eglot-managed-mode) (symbol-overlay-mode -1))
     (define-key symbol-overlay-map (kbd "o") 'cae-avy-symbol-at-point)
     ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
