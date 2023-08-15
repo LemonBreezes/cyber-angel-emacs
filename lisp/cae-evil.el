@@ -29,25 +29,26 @@
       :m "/" #'isearch-forward-regexp
       :m "?" #'isearch-backward-regexp)
 
-;; Return Isearch to Evil
-;;(map! :m "C-r" #'isearch-backward
-;;      :m "C-s" #'isearch-forward
-;;      :n "C-r" nil
-;;      :n "U" #'evil-redo)
+(when (modulep! :editor evil +hybrid)
+  ;; Return Isearch to Evil
+  (map! :m "C-r" #'isearch-backward
+        :m "C-s" #'isearch-forward
+        :n "C-r" nil
+        :n "U" #'evil-redo)
 
-;; Use Emacs keybindings in Evil insert state.
-;;(setq evil-disable-insert-state-bindings nil
-;;      evil-insert-state-map (make-sparse-keymap))
-;;(define-key evil-insert-state-map [escape] 'evil-normal-state)
-;;(define-key evil-insert-state-map
-;;  (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-;;(define-key! :keymaps +default-minibuffer-maps
-;;  "C-a" nil
-;;  "C-r" nil
-;;  "C-u" nil
-;;  "C-v" nil
-;;  "C-w" nil
-;;  "C-z" nil)
+  ;; Use Emacs keybindings in Evil insert state.
+  (setq evil-disable-insert-state-bindings nil
+        evil-insert-state-map (make-sparse-keymap))
+  (define-key evil-insert-state-map [escape] 'evil-normal-state)
+  (define-key evil-insert-state-map
+    (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+  (define-key! :keymaps +default-minibuffer-maps
+    "C-a" nil
+    "C-r" nil
+    "C-u" nil
+    "C-v" nil
+    "C-w" nil
+    "C-z" nil))
 
 (map! :prefix "g"
       :m "[" #'backward-page
