@@ -51,6 +51,11 @@
   ;; Do not try to configure `company-capf' for LSP.
   (setq lsp-completion-provider nil))
 
+;; Text mode
+
+(add-hook! (org-mode markdown-mode)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+
 (when (modulep! :lang org)
   (use-package! org-block-capf
     :defer t :init
