@@ -463,7 +463,7 @@
 
   (after! tramp
     (setq tramp-shell-prompt-pattern
-          "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+          "\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
           tramp-use-scp-direct-remote-copying t)
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
