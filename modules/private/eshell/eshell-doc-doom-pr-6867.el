@@ -1,5 +1,7 @@
 ;;; private/eshell/eshell-doc-doom-pr-6867.el -*- lexical-binding: t; -*-
 
+;;; Fish Completion annotation support
+
 ;; Code is mostly from  https://github.com/minad/marginalia/issues/87
 ;; But we implement a capf because getting annotations from fish is
 ;; difficult if we stick with pcomplete. The capf is non-exclusive
@@ -36,6 +38,8 @@
 
 (add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
 
+;;; Eshell Syntax Highlighting fix
+
 (use-package eshell-syntax-highlighting
   :hook (eshell-mode . eshell-syntax-highlighting-mode)
   :config
@@ -61,3 +65,16 @@ when inhibited to show history matches."
       (remove-hook 'pre-command-hook #'+eshell-syntax-highlight-maybe-h t)))
 
   (add-hook 'eshell-syntax-highlighting-mode-hook #'+eshell-syntax-highlighting-mode-h))
+
+;;; Eshell Eldoc fix
+
+(defadvice! +eshell-eldoc-function-a (func cmd)
+  "Don't try to parse man output unless a manpage exists."
+  :around #'esh-help-eldoc-man-minibuffer-string
+  (if-let ((cache-result (gethash cmd esh-help-man-cache)))
+      (unless (eq 'none cache-result)
+        cache-result)
+    (if (Man-completion-table cmd nil nil)
+        (or (ignore-errors (funcall func cmd)) "")
+      (prog1 nil
+        (puthash cmd 'none esh-help-man-cache)))))
