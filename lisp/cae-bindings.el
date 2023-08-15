@@ -113,10 +113,9 @@
         "RET" nil
         "TAB" #'outline-cycle))
 
-(unless (lookup-key doom-leader-map "tC")
-  (map! :leader
-        :prefix "t"
-        :desc "Column indicator" "C" #'vline-mode))
+(map! :leader
+      :prefix "t"
+      :desc "Column indicator" "C" #'vline-mode)
 
 (when (modulep! :private corfu)
   (after! corfu
@@ -148,9 +147,7 @@
                    "p" #'+popup/other))))))
 
 ;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-(unless (lookup-key doom-leader-map "sy")
-  (map! :leader
-        :desc "Copy link" "sy" #'link-hint-copy-link))
+(map! :leader :desc "Copy link" "sy" #'link-hint-copy-link)
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
