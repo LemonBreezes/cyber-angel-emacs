@@ -113,4 +113,10 @@
                                         ;have a Smartparens command
                                         ;bound to that key.
           "C-d" #'cae-delete-char
-          ")" #'cae-insert-closing-paren)))
+          ")" #'cae-insert-closing-paren))
+
+  (when (modulep! :editor evil)
+    (lispyville-set-key-theme
+     (cl-merge 'list '(pretty commentary)
+               lispyville-key-theme
+               #'eq))))
