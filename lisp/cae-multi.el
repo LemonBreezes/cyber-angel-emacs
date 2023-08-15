@@ -36,7 +36,12 @@
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
   (setq-hook! 'git-auto-commit-mode-hook
-    backup-inhibited t))
+    backup-inhibited t)
+
+  ;; Disable `diff-hl-mode' in my Doom private dir.
+  (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
+    :before-until #'diff-hl-mode
+    (file-in-directory-p default-directory doom-user-dir)))
 
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
 (after! org
