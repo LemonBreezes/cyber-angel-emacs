@@ -117,8 +117,6 @@
 
   (when (modulep! :editor evil)
     (after! lispyville
-      (lispyville-set-key-theme
-       (cl-merge 'list '(pretty commentary)
-                 lispyville-key-theme
-                 #'eq))
+      (add-to-list 'lispyville-key-theme 'commentary)
+      (lispyville-set-key-theme lispyville-key-theme)
       (setq lispyville-motions-put-into-special t))))
