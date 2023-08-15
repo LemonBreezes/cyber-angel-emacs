@@ -121,11 +121,7 @@
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
-        :ig "C-d" #'cae-eshell-quit-or-delete-char
-        ;;(:when (modulep! :private corfu)
-        ;; "TAB" #'completion-at-point
-        ;; "<tab>" #'completion-at-point)
-        )
+        :ig "C-d" #'cae-eshell-quit-or-delete-char)
 
   ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
   (load! "+fish-completion-annotation-fix")
