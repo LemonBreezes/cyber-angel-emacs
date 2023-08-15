@@ -896,7 +896,8 @@
 
   (use-package! edit-indirect
     :defer t :init
-    (map! :leader "'" #'cae-edit-indirect-dwim)
+    (unless (modulep! :editor evil)
+      (map! :leader "'" #'cae-edit-indirect-dwim))
     :config
     (add-hook 'edit-indirect-after-creation-hook
               (cae-defun cae-edit-indirect-major-mode-fallback-h ()
