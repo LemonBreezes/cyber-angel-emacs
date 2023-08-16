@@ -74,8 +74,6 @@
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
-      (:when (not (modulep! :editor evil))
-       [remap doom/backward-to-bol-or-indent] #'beginning-of-line)
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       [remap er/expand-region] #'eri/expand-region
       "<f7>" #'er/expand-region
@@ -98,9 +96,6 @@
       (:after eww
        :map eww-mode-map
        "o" #'ace-link-eww))
-(unless (modulep! :editor evil)
-  (map! (:when (modulep! :tools lookup)
-         [remap xref-find-definitions] #'cae-lookup-definition-dwim)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
@@ -169,43 +164,11 @@
 
 ;;; Fixup leader key
 
-;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overwriting other packages' keybindings. As an
-;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
-;; bound to `org-mark-ring-goto'.
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake))
-           (not (modulep! :editor evil)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader (:prefix-map ("C" . "checkers"))))
-
-;; Doom binds it's folding prefix to `C-c C-f' which is a keybinding used by
-;; many major modes.
-(when (and (modulep! :editor fold)
-           (not (modulep! :editor evil)))
-  (defvar doom-fold-map (lookup-key doom-leader-map "\C-f"))
-  (define-key doom-leader-map "\C-f" nil)
-  (unless (modulep! :editor evil)
-    (map! :leader
-          (:prefix-map ("F" . "fold")
-           "k" #'vimish-fold-delete
-           "K" #'vimish-fold-delete-all
-           "c" #'vimish-fold
-           "t" #'+fold/toggle
-           "C" #'+fold/close-all
-           "o" #'+fold/open
-           "O" #'+fold/open-all))))
-
 ;; I don't use Deft.
 (when (and (not (modulep! :ui deft))
            (eq (lookup-key doom-leader-map "nd")
                'deft))
   (define-key doom-leader-map "nd" nil))
-
-;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
-;; Evil.
-(unless (modulep! :editor evil)
-  (map! :leader :desc "help" "h" help-map))
 
 (when (modulep! :editor snippets)
   (map! (:when (modulep! :completion vertico)
@@ -248,51 +211,6 @@
                ))
     (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p))))
 (define-prefix-command 'ctl-x-r-map)
-
-
-;;; Avy keybindings
-
-;; (unless (modulep! :editor evil)
-;;   (map! :prefix "C-z"
-;;         "n" #'avy-goto-line-below
-;;         "p" #'avy-goto-line-above
-;;         "t" #'tabgo
-;;         ;;"y" #'avy-copy-region
-;;         "c" #'avy-goto-char
-;;         ;;"m" #'avy-move-region
-;;         "l" #'avy-goto-line
-;;         "e" #'avy-goto-end-of-line
-;;         "." #'cae-avy-symbol-at-point
-;;         ;;"k" #'avy-kill-region
-;;         ;;"w" #'avy-kill-ring-save-region
-;;         "a" #'cae-avy-embark-act-on-region
-;;         "j" #'avy-goto-word-1
-;;         (:when (modulep! :editor fold)
-;;          "f" #'vimish-fold-avy)
-;;         "o" #'switch-window
-;;         "0" #'switch-window-then-delete
-;;         "1" #'switch-window-then-maximize
-;;         "2" #'switch-window-then-split-horizontally
-;;         "3" #'switch-window-then-split-vertically
-;;         "4" #'switch-window-then-kill-buffer
-;;         ;;"r" #'avy-resume ; `avy-resume' is too buggy to be useful.
-;;         "SPC" #'avy-goto-char-timer
-;;         (:map isearch-mode-map
-;;          "j" #'avy-isearch))
-;;   (when (modulep! :completion vertico)
-;;     (after! vertico
-;;       (map! :map vertico-map
-;;             "M-j" #'vertico-quick-jump
-;;             "M-i" #'vertico-quick-exit)))
-;;   (after! embark
-;;     (map! :map embark-collect-mode-map
-;;           "M-j" #'avy-embark-collect-choose
-;;           "M-i" #'avy-embark-collect-act))
-;;   (when (modulep! :private corfu)
-;;     (after! corfu
-;;       (map! :map corfu-map
-;;             "M-j" #'corfu-quick-jump
-;;             "M-i" #'corfu-quick-insert))))
 
 
 ;;; Completion keybindings
