@@ -4,12 +4,6 @@
 
 ;;; Stuff that should not be disabled.
 
-(unless (modulep! :editor evil)
-  (setq doom-leader-alt-key "C-c"
-        doom-localleader-alt-key "C-c l"
-        doom-leader-key "C-c"
-        doom-localleader-key "C-c l"))
-
 (load! "lisp/cae-bindings")
 (when (modulep! :editor evil)
   (load! "lisp/cae-evil"))
@@ -285,15 +279,6 @@
   ;; Show the window number in the modeline (when applicable).
   (after! winum
     (setq winum-auto-setup-mode-line t))
-
-  (use-package! goggles
-    :when (not (modulep! :editor evil))
-    :defer t :init
-    (add-hook 'prog-mode-hook #'goggles-mode)
-    (add-hook 'text-mode-hook #'goggles-mode)
-    (add-hook 'conf-mode-hook #'goggles-mode)
-    :config
-    (setq-default goggles-pulse t))
 
   ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
   (when (modulep! :completion vertico +childframe)
@@ -854,35 +839,6 @@
     :config
     (speedrect-hook))
 
-  (use-package! symbol-overlay
-    :when (not (modulep! :editor evil))
-    :defer t :init
-    (map! "M-i" #'symbol-overlay-put
-          "M-I" #'symbol-overlay-remove-all
-          "M-N" #'symbol-overlay-switch-forward ;jump to the next overlay
-          "M-P" #'symbol-overlay-switch-backward)
-    (map! :leader
-          :desc "Highlight symbol at point" "to" #'symbol-overlay-mode)
-    (add-hook 'prog-mode-hook #'symbol-overlay-mode)
-    :config
-    (map! :map symbol-overlay-map
-          "<f6>" #'cae-symbol-overlay-cheatsheet
-          "N" #'symbol-overlay-switch-forward
-          "P" #'symbol-overlay-switch-backward
-          "r" #'symbol-overlay-rename
-          "-" #'negative-argument
-          "o" #'cae-avy-symbol-at-point)
-    ;; LSP and Eglot provide its own symbol highlighting.
-    (add-hook! (lsp-mode eglot-managed-mode) (symbol-overlay-mode -1))
-    ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
-    ;; overlay in the buffer. This is probably a bug.
-    (advice-add #'symbol-overlay-get-list
-                :around #'cae-hacks-symbol-overlay-reverse-list-a)
-    (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
-      (if (eq (car args) -1)
-          (nreverse (apply oldfun args))
-        (apply oldfun args))))
-
   ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc., without
   ;; `sentence-end-double-space'. This package's settings should be tweaked if you
   ;; use multiple languages.
@@ -891,18 +847,6 @@
     (map! [remap kill-sentence] #'sentex-kill-sentence
           [remap forward-sentence] #'sentex-forward-sentence
           [remap backward-sentence] #'sentex-backward-sentence))
-
-  (use-package! edit-indirect
-    :defer t :init
-    (unless (modulep! :editor evil)
-      (map! :leader "'" #'cae-edit-indirect-dwim))
-    :config
-    (add-hook 'edit-indirect-after-creation-hook
-              (cae-defun cae-edit-indirect-major-mode-fallback-h ()
-                (when (eq major-mode 'fundamental-mode)
-                  (funcall (buffer-local-value
-                            'major-mode
-                            (overlay-buffer edit-indirect--overlay)))))))
 
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
