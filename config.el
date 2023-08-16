@@ -331,6 +331,8 @@
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
     :config
+    (setq beacon-blink-delay 0.15
+          beacon-blink-duration 0.15)
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
     (add-hook 'persp-activated-functions
