@@ -127,6 +127,9 @@
   (map! :map smerge-mode-map
         "<f6>" #'+vc/smerge-hydra/body))
 
+(use-package! blamer
+  :defer t)
+
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
   :defer t :when (modulep! :completion vertico)
