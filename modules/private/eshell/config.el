@@ -104,7 +104,7 @@
     (setq epe-show-local-working-directory t)))
 
 (after! esh-module
-  (add-to-list 'eshell-modules-list 'em-elecslash))
+  (add-to-list 'eshell-modules-list 'eshell-elecslash))
 
 (autoload 'eshell-elecslash-initialize "em-elecslash")
 (add-hook 'eshell-mode-hook #'eshell-elecslash-initialize)
