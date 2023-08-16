@@ -147,6 +147,7 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
+(defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
 
 ;; This autoload fixes a void function error on `find-file-hook' that occurs
 ;; sporadically for me.
