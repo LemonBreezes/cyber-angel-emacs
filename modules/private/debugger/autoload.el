@@ -98,6 +98,5 @@ _R_: Restart        _sb_: List breakpoints
               (get-buffer-window gud-comint-buffer))
          (delete-window (get-buffer-window gud-comint-buffer)))
         ((buffer-live-p gud-comint-buffer)
-         (call-interactively #'gdb-display-gdb-buffer)
-         (set-window-dedicated-p (get-buffer-window gud-comint-buffer) nil))
+         (call-interactively #'gdb-display-gdb-buffer))
         (t (call-interactively #'gdb))))
