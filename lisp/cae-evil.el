@@ -64,8 +64,7 @@
 (setq evil-ex-substitute-global t
       evil-move-cursor-back nil
       evil-vsplit-window-right t
-      evil-split-window-below t
-      evil-move-beyond-eol t)
+      evil-split-window-below t)
 
 ;; Jump to the end of the prompt when entering insert state in a terminal.
 (add-hook 'evil-insert-state-entry-hook
