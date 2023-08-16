@@ -5,6 +5,9 @@
 (map! :map general-override-mode-map
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
+(after! evilem
+  (map! :map evilem-map
+        "DEL" (lookup-key evilem-map "\s")))
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
