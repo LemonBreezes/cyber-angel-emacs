@@ -72,6 +72,10 @@
 
 (when (modulep! :editor lispy)
   (after! lispy
+    (add-hook 'doom-escape-hook
+              (cae-defun cae-lispy-clear-iedit-h ()
+                (when (bound-and-true-p iedit-mode)
+                  (iedit-mode -1))))
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
           lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
@@ -97,12 +101,12 @@
                                         ;than moving to the end of the line
                                         ;first.
 
-           "M-i" nil)                    ;formerly `lispy-iedit'. I prefer
+           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
 
           ;; I prefer Doom's jump commands.
-          "M-." nil                    ;formerly `lispy-goto-symbol'.
-          "C-M-," nil                  ;formerly `lispy-mark'.
+          "M-." nil                     ;formerly `lispy-goto-symbol'.
+          "C-M-," nil                   ;formerly `lispy-mark'.
           "M-," nil                     ;formerly `pop-tag-mark'.
 
           "M-R" #'lispy-raise-sexp
