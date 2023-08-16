@@ -129,7 +129,10 @@
 
 (use-package! blamer
   :defer t :init
-  (map! :leader :desc "Blamer" "tB" #'blamer-mode))
+  (map! :leader :desc "Blamer" "tB" #'blamer-mode)
+  :config
+  (setq blamer-idle-time 0.3
+        blamer-avatar-folder (concat doom-cache-dir "avatars/")))
 
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
