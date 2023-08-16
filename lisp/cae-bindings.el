@@ -83,8 +83,6 @@
         "<f6>" #'transient-quit-all))
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
-      (:when (modulep! :tools lookup)
-       [remap xref-find-definitions] #'cae-lookup-definition-dwim)
       (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
       (:after man
@@ -99,6 +97,9 @@
       (:after eww
        :map eww-mode-map
        "o" #'ace-link-eww))
+(unless (modulep! :editor evil)
+  (map! (:when (modulep! :tools lookup)
+         [remap xref-find-definitions] #'cae-lookup-definition-dwim)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
