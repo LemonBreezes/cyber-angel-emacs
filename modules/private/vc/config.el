@@ -132,7 +132,7 @@
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
     (map! :leader
           :prefix vc-prefix
-          :desc "Blamer" "b" #'blamer-mode)))
+          :desc "Blamer" "B" #'blamer-mode)))
 
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
