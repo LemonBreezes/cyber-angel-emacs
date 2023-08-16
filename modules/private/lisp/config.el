@@ -117,18 +117,18 @@
 
   (when (modulep! :editor evil)
     (setq lispyville-key-theme
-      '(commentary
-        (operators normal)
-        c-w
-        c-u
-        (prettify insert)
-        (atom-movement t)
-        slurp/barf-lispy
-        additional
-        additional-insert))
+          '(commentary
+            (operators normal)
+            c-w
+            c-u
+            (prettify insert)
+            (atom-movement t)
+            slurp/barf-lispy
+            additional
+            additional-insert))
     (after! lispyville
       (cl-pushnew '(lispyville-comment-or-uncomment :face evil-goggles-commentary-face :switch
-                 evil-goggles-enable-commentary :advice
-                 evil-goggles--generic-async-advice)
-                evil-goggles--commands)
+                    evil-goggles-enable-commentary :advice
+                    evil-goggles--generic-async-advice)
+                  evil-goggles--commands)
       (setq lispyville-motions-put-into-special t))))
