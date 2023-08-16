@@ -9,7 +9,9 @@
                    ace-window
                    rainbow-delimiters
                    volatile-highlights
-                   evil-snipe)
+                   evil-snipe
+                   hl-line
+                   flymake-popon)
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
@@ -112,6 +114,7 @@
 ;;; Autocompletion
 (package! isearch-dabbrev)
 (package! consult-yasnippet)
+(package! fancy-dabbrev)
 
 ;; cae-corfu.el
 (when (modulep! :lang org)

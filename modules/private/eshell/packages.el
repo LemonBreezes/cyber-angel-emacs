@@ -3,8 +3,6 @@
 
 (package! eat)
 (package! eshell-bookmark)
-(package! eshell-prompt-extras :recipe
-  (:host github :repo "LemonBreezes/eshell-prompt-extras"
-   :branch "enable-lexical-binding"))
+(package! eshell-prompt-extras)
 (package! tldr)
 ;;(package! detached)

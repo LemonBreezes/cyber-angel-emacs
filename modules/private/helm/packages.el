@@ -7,3 +7,4 @@
   (package! helm-posframe :recipe (:host github :repo "LemonBreezes/helm-posframe" :branch "fix-window-dedicated-p-error")))
 (when (modulep! +fuzzy)
   (package! helm-flx))
+(package! helm-tramp)

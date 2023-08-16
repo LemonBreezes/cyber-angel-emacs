@@ -67,7 +67,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +flymake +childframe)
+       (syntax +flymake)
        ;;spell
        ;;grammar
 
