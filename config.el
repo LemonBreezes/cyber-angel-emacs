@@ -855,6 +855,7 @@
     (speedrect-hook))
 
   (use-package! symbol-overlay
+    :when (not (modulep! :editor evil))
     :defer t :init
     (map! "M-i" #'symbol-overlay-put
           "M-I" #'symbol-overlay-remove-all
