@@ -129,9 +129,7 @@
 
 (use-package! blamer
   :defer t :init
-  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
-    (map! :leader :prefix vc-prefix
-          :desc "Blamer" "B" #'blamer-mode)))
+  (map! :leader :desc "Blamer" "tB" #'blamer-mode))
 
 ;; TODO `igist' and `consult-gh'.
 (use-package! consult-gh
