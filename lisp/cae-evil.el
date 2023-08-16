@@ -5,7 +5,7 @@
 (map! :map general-override-mode-map
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
-(after! evilem
+(after! evil-easymotion
   (map! :map evilem-map
         "DEL" (lookup-key evilem-map "\s")))
 
