@@ -122,6 +122,7 @@
             c-w
             c-u
             prettify
+            wrap
             (atom-movement t)
             slurp/barf-lispy
             additional
