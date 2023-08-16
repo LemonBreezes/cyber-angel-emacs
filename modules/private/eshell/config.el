@@ -128,7 +128,7 @@
         :ig "C-d" #'cae-eshell-quit-or-delete-char))
 
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
-(load! "eshell-doc-doom-pr-6867")
+;;(load! "eshell-doc-doom-pr-6867")
 
 (load! "ha-eshell")
 (load! "ambrevar-global-eshell-history")
