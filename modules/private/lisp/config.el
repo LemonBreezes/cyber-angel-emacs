@@ -122,7 +122,6 @@
             (operators normal)
             c-w
             c-u
-            prettify
             (atom-movement t)
             slurp/barf-lispy
             additional
