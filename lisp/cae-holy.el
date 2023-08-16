@@ -37,7 +37,6 @@
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim))
 
-
 (use-package! goggles
   :defer t :init
   (add-hook 'prog-mode-hook #'goggles-mode)
