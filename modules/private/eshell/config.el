@@ -130,7 +130,7 @@
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
 (load! "eshell-doc-doom-pr-6867")
 
-(load! "ha-eshell")
+;;(load! "ha-eshell")
 (load! "ambrevar-global-eshell-history")
 
 ;;Local Variables:
