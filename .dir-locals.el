@@ -20,15 +20,17 @@
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
-          ;; Automatically update Eshell aliases.
-          (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
-                     (file-equal-p (buffer-file-name)
-                                   (bound-and-true-p eshell-aliases-file))
-                     (fboundp 'eshell-read-aliases-list))
-            (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
+            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
+            (setq-local blamer--block-render-p t)
 
-          (setq-local jinx-local-words
-                      "cae corfu eshell")
+            ;; Automatically update Eshell aliases.
+            (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
+                       (file-equal-p (buffer-file-name)
+                                     (bound-and-true-p eshell-aliases-file))
+                       (fboundp 'eshell-read-aliases-list))
+              (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
+
+            (setq-local jinx-local-words "cae corfu eshell")
 
             ;; Automatically commit saved files to Git and push them to the
             ;; remote.

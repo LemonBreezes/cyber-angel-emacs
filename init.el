@@ -77,7 +77,7 @@
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-       (magit) ;; +forge is broken for me on the latest Emacs.
+       (magit +forge)
        (lsp +peek +eglot)
        tree-sitter
        pdf

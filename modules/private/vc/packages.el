@@ -10,3 +10,4 @@
 (when (modulep! :completion vertico)
   (package! consult-gh))
 (package! igist)
+(package! blamer)
