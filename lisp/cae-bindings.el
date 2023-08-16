@@ -274,7 +274,7 @@
    "M-g m" #'consult-mark
    "M-g k" #'consult-global-mark
    "M-g I" #'consult-imenu-multi
-;; M-s bindings (search-map)
+   ;; M-s bindings (search-map)
    "M-s k" #'consult-keep-lines
    "M-s u" #'consult-focus-lines
    ;; Isearch integration
