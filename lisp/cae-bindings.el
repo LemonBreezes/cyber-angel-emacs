@@ -74,7 +74,8 @@
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
-      [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+      (:when (not (modulep! :editor evil))
+       [remap doom/backward-to-bol-or-indent] #'beginning-of-line)
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       [remap er/expand-region] #'eri/expand-region
       "<f7>" #'er/expand-region
