@@ -120,6 +120,7 @@
       '(commentary
         (operators normal)
         c-w
+        c-u
         (prettify insert)
         (atom-movement t)
         slurp/barf-lispy
