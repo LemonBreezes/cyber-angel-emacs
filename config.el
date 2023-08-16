@@ -226,7 +226,7 @@
         ("^\\*exwm" :size +popup-shrink-to-fit :ttl nil
          :ttl nil)
         ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
-         :quit nil :ttl t)
+         :quit t :ttl t)
         ("^\\*org-roam\\*" :size 60 :side left :select nil
          :quit nil)
         ("^\\*info.*" :size cae-popup-resize-help-buffer
