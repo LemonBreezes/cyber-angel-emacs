@@ -75,7 +75,6 @@
   :defer t :init
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
-
 ;; Colorize ansi escape sequences in exported buffers
 (advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
