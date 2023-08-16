@@ -89,7 +89,9 @@
   (global-set-key (kbd "C-x C-2") #'split-window-below)
   (global-set-key (kbd "C-x C-3") #'split-window-right)
   (global-set-key (kbd "C-x C-0") #'delete-window))
-(map! :n "s" #'evil-execute-in-god-state)
+(map! :n "s" #'evil-execute-in-god-state
+      :map god-local-mode-map
+      "C-h C-k" #'god-mode-describe-key)
 (after! evil-god-state
   (add-hook 'post-command-hook
             (cae-defun cae-god-state-exit ()
