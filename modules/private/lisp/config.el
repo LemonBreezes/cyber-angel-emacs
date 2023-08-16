@@ -83,26 +83,27 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
-          ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
-          ;; the beginning of the line or indentation.
-          "M-m" nil                     ;formerly `lispy-mark-symbol'. I prefer
-          "C-a" nil                     ;formerly
+          (:when (not (modulep! :editor evil))
+           ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
+           ;; the beginning of the line or indentation.
+           "M-m" nil                    ;formerly `lispy-mark-symbol'. I prefer
+           "C-a" nil                    ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
-          "C-e" nil                     ;formerly `lispy-move-end-of-line'.
+           "C-e" nil                    ;formerly `lispy-move-end-of-line'.
                                         ;Doom's default `C-e' is better because
                                         ;it moves to the end of the code first
                                         ;and then to the end of the line rather
                                         ;than moving to the end of the line
                                         ;first.
 
-          "M-i" nil                     ;formerly `lispy-iedit'. I prefer
+           "M-i" nil)                    ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
 
           ;; I prefer Doom's jump commands.
-          "M-."   nil                   ;formerly `lispy-goto-symbol'.
-          "C-M-," nil                   ;formerly `lispy-mark'.
-          "M-,"   nil                   ;formerly `pop-tag-mark'.
+          "M-." nil                    ;formerly `lispy-goto-symbol'.
+          "C-M-," nil                  ;formerly `lispy-mark'.
+          "M-," nil                     ;formerly `pop-tag-mark'.
 
           "M-R" #'lispy-raise-sexp
           "M-S" #'lispy-split
