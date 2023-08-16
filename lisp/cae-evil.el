@@ -67,16 +67,6 @@
       evil-split-window-below t
       evil-move-beyond-eol t)
 
-(after! evil-easymotion
-  ;; This hack fixes `evilem-motion-next-line' on my Emacs. I think that command
-  ;; breaks because I'm using Emacs 30.
-  (evilem-make-motion
-   evilem-motion-forward-line #'forward-line
-   :pre-hook (setq evil-this-type 'line)
-   :bind ((temporary-goal-column (current-column))
-          (line-move-visual nil)))
-  (advice-add #'evilem-motion-next-line :override #'evilem-motion-forward-line))
-
 ;; Jump to the end of the prompt when entering insert state in a terminal.
 (add-hook 'evil-insert-state-entry-hook
           (cae-defun cae-goto-end-of-prompt-h ()
