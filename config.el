@@ -617,6 +617,7 @@
   ;; Automatically deindent items when they are added to the kill ring.
   (add-hook #'doom-first-input-hook #'kill-ring-deindent-mode)
 
+  ;; Navigate camelCase words.
   (add-hook 'c-mode-common-hook #'subword-mode)
 
   (after! paren
