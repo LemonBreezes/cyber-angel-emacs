@@ -104,3 +104,10 @@
                             (char-to-string org-indent-boundary-char)
                           "\u200b"))
                 nil 'face 'org-indent)))))
+
+(use-package! org-pandoc-import
+  :defer t :config
+  (setq org-pandoc-import-filters-folder
+        (string-replace straight-build-dir "repos" org-pandoc-import-filters-folder)
+        org-pandoc-import-setup-folder
+        (string-replace straight-build-dir "repos" org-pandoc-import-setup-folder)))
