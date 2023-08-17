@@ -11,8 +11,6 @@
         whisper-translate nil
         whisper-use-threads (num-processors)))
 
-
-
 (use-package! org-ai
   :defer t :init
   (map! :desc "+org-ai-prefix" "C-c M-a" #'cae-ai-lazy-load-org-ai)
