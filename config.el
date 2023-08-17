@@ -1123,6 +1123,11 @@
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
 
+;;(error Given parent class emacsql-sqlite-connection is not a class)
+(setq doom-incremental-packages
+      (cl-set-difference doom-incremental-packages
+                         '(magit magit-section pdf-view pdf-tools)))
+
 ;; Compile Vterm in the background.
 (when (modulep! :term vterm)
   (run-with-idle-timer
