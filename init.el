@@ -112,7 +112,7 @@
        (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
-       ;; exwm
+       (exwm +notifications)
        dired
        lisp
        misc-applications
