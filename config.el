@@ -617,6 +617,8 @@
   ;; Automatically deindent items when they are added to the kill ring.
   (add-hook #'doom-first-input-hook #'kill-ring-deindent-mode)
 
+  (add-hook 'c-mode-common-hook #'subword-mode)
+
   (after! paren
     (setq show-paren-context-when-offscreen 'overlay))
 
