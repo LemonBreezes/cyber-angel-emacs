@@ -108,6 +108,6 @@
 (use-package! org-pandoc-import
   :defer t :init
   (setq org-pandoc-import-filters-folder
-        (expand-file-name ".local/straight/repos/org-pandoc-import/filters" doom-emacs-dir)
+        (expand-file-name ".local/straight/repos/org-pandoc-import/filters/" doom-emacs-dir)
         org-pandoc-import-setup-folder
         (expand-file-name ".local/straight/repos/org-pandoc-import/" doom-emacs-dir)))
