@@ -9,7 +9,6 @@
     (load! "lisp/cae-evil")
   (load! "lisp/cae-holy"))
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-;;(load! "lisp/cae-keyboard")             ;Custom keyboard layout
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
 
