@@ -52,7 +52,9 @@
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
-    (setq diff-hl-reference-revision "master"))
+    (setq diff-hl-reference-revision "master")
+    (unless (cae-display-graphic-p)
+      (diff-hl-margin-mode +1)))
 
   ;; For the built-in repeat map.
   (map! [remap +vc-gutter/previous-hunk] #'diff-hl-show-hunk-previous
