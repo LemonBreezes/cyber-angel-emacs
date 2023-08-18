@@ -312,5 +312,5 @@
 ;;             "M-i" #'corfu-quick-insert))))
 
 ;;Local Variables:
-;;eval: (when (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
+;;eval: (unless (modulep! :private holy) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
