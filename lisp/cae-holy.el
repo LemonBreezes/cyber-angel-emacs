@@ -81,6 +81,13 @@
   :config
   (setq-default goggles-pulse t))
 
+(use-package! zop-to-char
+  :defer t :init
+  (map! [remap zap-to-char] #'zop-to-char
+        [remap zap-up-to-char] #'zop-up-to-char)
+  :config
+  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
+
 (use-package! symbol-overlay
   :defer t :init
   (map! "M-i" #'symbol-overlay-put
