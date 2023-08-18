@@ -817,6 +817,8 @@
 (when cae-init-autocompletion-enabled-p
   (when (modulep! :private corfu)
     (load! "lisp/cae-corfu"))
+
+  (setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
   (after! ido
     (load! "lisp/cae-ido"))
 
