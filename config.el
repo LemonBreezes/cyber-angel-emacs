@@ -574,7 +574,9 @@
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-visible-mark")
   (load! "lisp/cae-vlf")
-  (load! "lisp/cae-multiple-cursors")
+  (when (and (modulep! :editor multiple-cursors)
+             (not (modulep! :editor evil)))
+    (load! "lisp/cae-multiple-cursors"))
   (load! "lisp/cae-restore-point")
 
   (autoload 'cae-project-bookmark (concat doom-user-dir
