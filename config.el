@@ -819,13 +819,6 @@
       (define-key embark-heading-map "T" #'titlecase-line)
       (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
-  ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
-  ;; `speedrect' commands.
-  (use-package! speedrect
-    :after-call rectangle-mark-mode-hook
-    :config
-    (speedrect-hook))
-
   ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc., without
   ;; `sentence-end-double-space'. This package's settings should be tweaked if you
   ;; use multiple languages.
