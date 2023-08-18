@@ -12,6 +12,11 @@
                    evil-snipe
                    hl-line
                    flymake-popon)
+(when (modulep! editor evil)
+  (package! evil-embrace :recipe
+    (:host github :repo "LemonBreezes/evil-embrace"
+     :branch "fix-for-latest-evil-surround")))
+
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
@@ -25,16 +30,13 @@
 ;;; UI
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
-(unless (modulep! :editor evil)
-  (package! goggles))
 (package! rainbow-mode)
 (package! topsy)
-(package! anzu)
-(package! isearch-mb)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! beacon)
 (package! iscroll)
+(package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -64,45 +66,28 @@
 (package! 0x0)
 
 ;;; Editor
-(package! pp+)
-(package! zop-to-char)
-(package! aggressive-indent)
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
-(package! hungry-delete)
 (package! file-info)
 (package! titlecase)
-(when (modulep! :editor multiple-cursors)
-  (package! mc-extras))
-(package! speedrect :recipe (:host github :repo "jdtsmith/speedrect"))
 (package! avy-embark-collect)
 (package! restore-point
   :recipe (:host github :repo "LemonBreezes/restore-point"))
-(package! symbol-overlay)
 (package! sentex)
-(package! edit-indirect)
-(package! string-edit-at-point)
-(package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
-(package! tabgo :recipe (:host github :repo "isamert/tabgo.el"))
-(package! multiclip :recipe (:host github :repo "kiennq/highlight2clipboard"))
-(package! switch-window)
-(package! jinx)
 (package! transpose-frame)
 (package! logos)
-(package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
+(package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
+(package! smart-semicolon)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
-(package! ialign)
+(when (not (modulep! :editor evil))
+  (package! ialign))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
 
 ;; cae-repeat.el
 (package! define-repeat-map :recipe (:repo "https://tildegit.org/acdw/define-repeat-map.el.git"))
-
-;; cae-keyboard.el
-(package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
-(package! smart-semicolon)
 
 ;; cae-vlf.el
 (package! vlf)
@@ -112,9 +97,7 @@
 (package! try)
 
 ;;; Autocompletion
-(package! isearch-dabbrev)
 (package! consult-yasnippet)
-(package! fancy-dabbrev)
 
 ;; cae-corfu.el
 (when (modulep! :lang org)

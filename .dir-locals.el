@@ -17,6 +17,8 @@
                                      :test #'string=))
                      (not (string-match-p "/packages/"
                                           buffer-file-name))
+                     (not (string-match-p "/trash/"
+                                          buffer-file-name))
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 

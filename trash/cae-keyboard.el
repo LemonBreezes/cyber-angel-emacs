@@ -680,28 +680,3 @@ _h_ ^+^ _l_    _n_ame    _e_dit    _i_: shift
 ;; corresponding keyboard layout but because some control keybindings are
 ;; identified with RET, ESC, etc, that is not possible in terminal Emacs.
 
-;;; Basically a custom input method
-
-(use-package! aas
-  :defer t :init
-  (add-hook 'doom-first-input-hook #'aas-global-mode)
-  :config
-  (advice-add #'aas-embark-menu :before
-              (cae-defun cae-aas-load-embark-h ()
-                (require 'embark)))
-  (aas-set-snippets 'global
-    ";--" "—"
-    ";-." "→"
-    ";=." "⇒"
-    ";!=" "≠"
-    "-." "->"
-    "=." "=>"))
-
-;;; Programming language specific stuff
-
-(use-package! smart-semicolon
-  :defer t :init
-  (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
-  (add-hook 'web-mode-hook  #'smart-semicolon-mode)
-  (add-hook 'java-mode-hook #'smart-semicolon-mode)
-  (add-hook 'js-mode-hook   #'smart-semicolon-mode))

@@ -26,8 +26,6 @@
   "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
-(defvar cae-keyboard-remaps-enabled-p nil
-  "Whether we remap keys for special keyboard layouts.")
 
 (doom! :completion
        (vertico +icons +childframe)
@@ -50,7 +48,6 @@
        format
        snippets
        multiple-cursors
-       lispy
        fold
        word-wrap
        (evil +everywhere) ; Be prepared to encounter issues if you use Evil
@@ -121,7 +118,9 @@
        unpackaged
        vc
        org
-       ai)
+       ai
+       ;;holy
+       )
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))

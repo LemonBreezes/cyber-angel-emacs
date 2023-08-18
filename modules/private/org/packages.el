@@ -5,6 +5,6 @@
 (package! org-inline-pdf)
 (package! language-detection)
 (package! org-appear)
-(package! worf :recipe
-  (:host github :repo "LemonBreezes/worf"))
+;;(package! worf :recipe
+;;  (:host github :repo "LemonBreezes/worf"))
 (package! org-tidy)

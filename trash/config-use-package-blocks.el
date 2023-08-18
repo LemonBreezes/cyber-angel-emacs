@@ -24,3 +24,50 @@
                      indent-for-tab-command))
     (add-to-list 'aggressive-indent-protected-commands command))
   (add-to-list 'aggressive-indent-dont-indent-if '(bound-and-true-p lispy-mode)))
+
+(use-package! hungry-delete
+  :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
+  :config
+  (when (modulep! :config default +smartparens)
+    (map! :map hungry-delete-mode-map
+          [remap backward-delete-char-untabify] #'sp-backward-delete-char
+          [remap c-electric-backspace] #'sp-backward-delete-char
+          [remap c-electric-delete-forward] #'cae-delete-char
+          [remap delete-backward-char] #'sp-backward-delete-char
+          [remap delete-char] #'cae-delete-char
+          [remap delete-forward-char] #'cae-delete-char))
+  (add-to-list 'hungry-delete-except-modes 'eshell-mode))
+
+(use-package! tabgo
+  :commands tabgo :defer t
+  :config
+  (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
+
+(use-package! jinx
+  :defer t :init
+  (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook))
+    (add-hook hook #'jinx-mode)))
+
+(use-package! w3m
+  :defer t :config
+  (setq w3m-user-agent
+        (string-join
+         '("Mozilla/5.0"
+           "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
+           "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
+           "Mobile Safari/533.")
+         " ")
+        w3m-command-arguments '("-cookie" "-F"))
+  (after! w3m-search
+    (setq w3m-search-default-engine "duckduckgo"))
+  (map! :map w3m-mode-map
+        "o" #'ace-link-w3m))
+
+(autoload 'cae-project-bookmark (concat doom-user-dir
+                                        "lisp/cae-project-bookmark"))
+(autoload 'cae-project-bookmark-set (concat doom-user-dir
+                                            "lisp/cae-project-bookmark"))
+(autoload 'cae-project--get-bookmark-file (concat doom-user-dir
+                                                  "lisp/cae-project-bookmark"))
+(map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
+      :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
