@@ -766,11 +766,6 @@
                              (avy-move-region . pre))
           avy-column-line-overlay t))
 
-  (use-package! tabgo
-    :commands tabgo :defer t
-    :config
-    (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
-
   (use-package! abbrev
     :defer t :config
     (setq-default abbrev-mode t
