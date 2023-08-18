@@ -350,21 +350,6 @@
 (when cae-init-tools-enabled-p
   (load! "lisp/cae-projectile")
 
-  (use-package! w3m
-    :defer t :config
-    (setq w3m-user-agent
-          (string-join
-           '("Mozilla/5.0"
-             "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
-             "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
-             "Mobile Safari/533.")
-           " ")
-          w3m-command-arguments '("-cookie" "-F"))
-    (after! w3m-search
-      (setq w3m-search-default-engine "duckduckgo"))
-    (map! :map w3m-mode-map
-          "o" #'ace-link-w3m))
-
   ;; Set up the default browser.
   (after! browse-url
     (cond ((getenv "WSL_DISTRO_NAME")
