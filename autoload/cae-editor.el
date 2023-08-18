@@ -314,7 +314,9 @@ This is the format used on Reddit for code blocks."
                   (goto-char (line-end-position))))
           ((eq this-command 'cae-avy-symbol-at-point)
            (er/mark-symbol))
-          (t (eri/expand-region 1)))
+          (t (if (fboundp 'eri/expand-region)
+                  (eri/expand-region 1)
+               (er/expand-region 1))))
     (call-interactively action))
   (run-at-time 0.0 nil
                (lambda ()
