@@ -26,7 +26,7 @@ alias j    z $*p
 alias vi   e $*
 alias vim  e $*
 alias nano e $*
-alias vdoom  DOOMDIR=~/.doom-vanilla.d/ ~/doomemacs-vanilla/bin/doom          $*
+alias vdoom  DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom          $*
 alias git  git --no-pager $*
 
 alias update-emacs smart-live-rebuild && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync

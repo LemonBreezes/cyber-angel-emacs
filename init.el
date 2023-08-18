@@ -91,6 +91,7 @@
        (nix +lsp +tree-sitter)
        (solidity +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
+       (data +lsp +tree-sitter +fennel)
 
        :os
        (:if IS-MAC macos)
