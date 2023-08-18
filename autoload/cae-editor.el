@@ -91,14 +91,6 @@ Lispy."
         (t (call-interactively #'self-insert-command))))
 
 ;;;###autoload
-(defun cae-avy-symbol-at-point ()
-  "Jump to another occurance of symbol with avy."
-  (interactive)
-  (avy-with symbol-overlay-jump-avy
-    (avy-process
-     (avy--regex-candidates (regexp-quote (thing-at-point 'symbol t))))))
-
-;;;###autoload
 (defun cae-eval-last-sexp (arg)
   ;; Call `pp-eval-last-sexp' when called with a negative
   ;; prefix argument
@@ -126,12 +118,6 @@ Lispy."
          (call-interactively #'pp-eval-expression))
         (t (call-interactively #'eval-expression))))
 
-
-;;;###autoload
-(defun cae-tab-close-and-select-right ()
-  (interactive)
-  (let ((tab-bar-close-tab-select 'right))
-    (call-interactively #'tab-close)))
 
 (defun cae-strip-top-level-indentation (str)
   "Strip the top-level leading indentation for every line in STR.
@@ -173,29 +159,6 @@ This is the format used on Reddit for code blocks."
     (message "Copied!")))
 
 ;;;###autoload
-(defun cae-forward-sentence-function (&optional arg)
-  (if (fboundp #'sentex-forward-sentence)
-      (progn (or arg (setq arg 1))
-             (if (< arg 0)
-                 (sentex-backward-sentence arg)
-               (sentex-forward-sentence arg)))
-    (forward-sentence-default-function arg)))
-
-;;;###autoload
-(defun cae-edit-indirect-dwim ()
-  "DWIM version of edit-indirect-region.
-When region is selected, behave like `edit-indirect-region'
-but when no region is selected and the cursor is in a 'string' syntax
-mark the string and call `edit-indirect-region' with it."
-  (interactive)
-  (cond ((region-active-p)
-         (call-interactively #'edit-indirect-region))
-        ((and (derived-mode-p 'org-mode)
-              (ignore-error 'user-error (call-interactively #'org-edit-special))))
-        (t
-         (call-interactively #'string-edit-at-point))))
-
-;;;###autoload
 (defun cae-browse-url-generic-bookmark-handler (bookmark)
   "Bookmark handler for opening URLs with `browse-url-generic'."
   (require 'ffap)
@@ -203,28 +166,6 @@ mark the string and call `edit-indirect-region' with it."
     (if (ffap-url-p url)
         (browse-url-generic url)
       (message "Bookmark does not have a valid FILENAME property."))))
-
-;;;###autoload
-(defun cae-mark-comment ()
-  "Mark the entire comment around point. Like `er/mark-comment' but
-also marks comment with leading whitespace"
-  (interactive)
-  (when (save-excursion
-          (skip-syntax-forward "\s")
-          (er--point-is-in-comment-p))
-    (let ((p (point)))
-      (skip-syntax-backward "\s")
-      (while (and (or (er--point-is-in-comment-p)
-                      (looking-at "[[:space:]]"))
-                  (not (eobp)))
-        (forward-char 1))
-      (skip-chars-backward "\n\r")
-      (set-mark (point))
-      (goto-char p)
-      (while (or (er--point-is-in-comment-p)
-                 (looking-at "[[:space:]]"))
-        (forward-char -1))
-      (forward-char 1))))
 
 ;;;###autoload
 (defun cae-lookup-definition-dwim ()
@@ -457,10 +398,3 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (require 'embark)
   (let ((embark-cycle-key (key-description (this-command-keys))))
     (call-interactively 'embark-act)))
-
-;;;###autoload
-(defun cae-dabbrev-expand ()
-  (interactive)
-  (cae-corfu-quit)
-  (setq this-command #'fancy-dabbrev-expand)
-  (call-interactively #'fancy-dabbrev-expand))
