@@ -844,6 +844,12 @@
              try-expand-line)
            hippie-expand-verbose nil))
 
+  (use-package! isearch-dabbrev
+    :defer t :init
+    (map! :map isearch-mode-map
+          "M-/" #'isearch-dabbrev-expand
+          "C-M-/" #'isearch-dabbrev-expand))
+
   (when (modulep! :completion vertico)
     (use-package! consult
       :defer t :init
