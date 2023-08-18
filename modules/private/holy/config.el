@@ -1,8 +1,8 @@
 ;;; private/holy/config.el -*- lexical-binding: t; -*-
 
-(load! "visible-mark")
-(load! "multiple-cursors")
-(load! "restore-point")
+(load! "+visible-mark")
+(load! "+multiple-cursors")
+(load! "+restore-point")
 
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
