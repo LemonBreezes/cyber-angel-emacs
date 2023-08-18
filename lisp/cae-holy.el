@@ -34,6 +34,8 @@
          "O" #'+fold/open-all)))
 
 (map! [remap doom/backward-to-bol-or-indent] #'beginning-of-line
+      [remap er/expand-region] #'eri/expand-region
+      "<f7>" #'er/expand-region
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim))
 
@@ -83,6 +85,28 @@
                 (funcall (buffer-local-value
                           'major-mode
                           (overlay-buffer edit-indirect--overlay)))))))
+
+(use-package! expand-region-improved
+  :defer t :init
+  :config
+  (eri/define-pair org-table-cell "|" 'org-at-table-p)
+  (eri/add-mode-expansions 'org-mode
+    '((eri/mark-inside-org-table-cell
+       eri/mark-outside-org-table-cell)))
+  (setq eri/try-expand-list
+        '((er/mark-symbol
+           er/mark-symbol-with-prefix
+           er/mark-next-accessor)
+          (er/mark-inside-quotes
+           eri/mark-outside-quotes)
+          (er/mark-inside-pairs
+           er/mark-outside-pairs)
+          cae-mark-comment
+          er/mark-url
+          er/mark-email
+          eri/mark-line
+          eri/mark-block
+          mark-page)))
 
 ;; (unless (modulep! :editor evil)
 ;;   (map! :prefix "C-z"
