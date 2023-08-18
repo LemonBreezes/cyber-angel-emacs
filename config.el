@@ -1128,7 +1128,7 @@
       (cl-set-difference doom-incremental-packages
                          '(magit magit-section pdf-view pdf-tools)))
 
-;; Compile Vterm in the background.
+;; FIXME Compile Vterm in the background.
 (when (modulep! :term vterm)
   (run-with-idle-timer
    3 nil
