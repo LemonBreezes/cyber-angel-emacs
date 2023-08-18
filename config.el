@@ -327,7 +327,7 @@
           beacon-overlay-priority -1))
 
   (use-package! anzu
-    :defer t :init
+
     (global-set-key [remap query-replace] 'anzu-query-replace)
     (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
     (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
@@ -374,7 +374,10 @@
 
   (use-package! outline-minor-faces
     :defer t :init
-    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode)))
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+
+  (use-package! indent-bars
+    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode)))
 
 
 ;;; Tools
@@ -885,8 +888,27 @@
     ([remap backward-page] . logos-backward-page-dwim)
     ([remap narrow-to-page] . cae-narrow-to-page))
 
-  (use-package! indent-bars
-    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode)))
+  (use-package! aas
+    :defer t :init
+    (add-hook 'doom-first-input-hook #'aas-global-mode)
+    :config
+    (advice-add #'aas-embark-menu :before
+                (cae-defun cae-aas-load-embark-h ()
+                  (require 'embark)))
+    (aas-set-snippets 'global
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"))
+
+  (use-package! smart-semicolon
+    :defer t :init
+    (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
+    (add-hook 'web-mode-hook  #'smart-semicolon-mode)
+    (add-hook 'java-mode-hook #'smart-semicolon-mode)
+    (add-hook 'js-mode-hook   #'smart-semicolon-mode)))
 
 
 ;;; Autocompletion
