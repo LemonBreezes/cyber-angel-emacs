@@ -525,7 +525,6 @@
 
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
-  (load! "lisp/cae-visible-mark")
   (load! "lisp/cae-vlf")
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
