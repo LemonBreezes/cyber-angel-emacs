@@ -9,7 +9,8 @@
   (map! :map evilem-map
         "DEL" (lookup-key evilem-map "\s")))
 
-;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs.
+;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
+;; between TAB and C-i there.
 (unless (cae-display-graphic-p)
   (add-hook! (prog-mode conf-mode text-mode)
     (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward)))
