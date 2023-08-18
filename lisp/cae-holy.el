@@ -88,6 +88,13 @@
   :config
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
+;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
+;; `speedrect' commands.
+(use-package! speedrect
+  :after-call rectangle-mark-mode-hook
+  :config
+  (speedrect-hook))
+
 (use-package! symbol-overlay
   :defer t :init
   (map! "M-i" #'symbol-overlay-put
