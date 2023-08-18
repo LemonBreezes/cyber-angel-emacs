@@ -75,8 +75,6 @@
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
       [remap doom/sudo-this-file] #'cae-toggle-sudo
-      [remap er/expand-region] #'eri/expand-region
-      "<f7>" #'er/expand-region
       (:after transient
        (:map transient-map
         "<f6>" #'transient-quit-all))
@@ -161,6 +159,11 @@
 (global-set-key [remap delete-frame] nil)
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
+(after! cc-mode
+  (if (cae-display-graphic-p)
+      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
+    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+
 
 ;;; Fixup leader key
 
@@ -211,48 +214,6 @@
                ))
     (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p))))
 (define-prefix-command 'ctl-x-r-map)
-
-
-;;; Completion keybindings
-
-;; This minor mode is defined so that there keybindings can be temporarily
-;; turned off for multiple cursors and similar modes where completion is not a
-;; good idea.
-(define-prefix-command 'cae-completion-prefix-map)
-(define-key cae-completion-prefix-map "c" #'completion-at-point)
-(define-key cae-completion-prefix-map "t" #'complete-tag)
-(define-key cae-completion-prefix-map "d" #'cape-dabbrev)
-(define-key cae-completion-prefix-map "f" #'cape-file)
-(define-key cae-completion-prefix-map "k" #'cape-keyword)
-(define-key cae-completion-prefix-map "h" #'cape-history)
-(define-key cae-completion-prefix-map "e" #'cape-symbol)
-(define-key cae-completion-prefix-map "a" #'cape-abbrev)
-(define-key cae-completion-prefix-map "l" #'cape-line)
-(define-key cae-completion-prefix-map "w" #'cape-dict)
-(define-key cae-completion-prefix-map "\\" #'cape-tex)
-(define-key cae-completion-prefix-map "_" #'cape-tex)
-(define-key cae-completion-prefix-map "^" #'cape-tex)
-(define-key cae-completion-prefix-map "&" #'cape-sgml)
-(define-key cae-completion-prefix-map "r" #'cape-rfc1345)
-(define-key cae-completion-prefix-map "." #'copilot-complete)
-(when (modulep! :editor multiple-cursors)
-  (define-key cae-completion-prefix-map (kbd "C-.") #'mc/unfreeze-fake-cursors)
-  (define-key cae-completion-prefix-map (kbd "<f5>") #'mc/unfreeze-fake-cursors))
-(define-minor-mode cae-completion-mode
-  "A minor mode for convenient completion keybindings."
-  :global t
-  :lighter nil
-  :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-.") #'cae-completion-prefix-map)
-            (define-key map (kbd "<f5>") #'cae-completion-prefix-map)
-            map)
-  :group 'cae)
-(cae-completion-mode +1)
-
-(after! cc-mode
-  (if (cae-display-graphic-p)
-      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
-    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
 
 
 ;;; Consult keybindings
