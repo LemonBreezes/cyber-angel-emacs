@@ -1,5 +1,7 @@
 ;;; lisp/cae-holy.el -*- lexical-binding: t; -*-
 
+(load! "cae-visible-mark")
+
 (setq doom-leader-alt-key "C-c"
       doom-localleader-alt-key "C-c l"
       doom-leader-key "C-c"
