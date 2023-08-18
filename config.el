@@ -771,13 +771,6 @@
     :config
     (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
-  (use-package! zop-to-char
-    :defer t :init
-    (map! [remap zap-to-char] #'zop-to-char
-          [remap zap-up-to-char] #'zop-up-to-char)
-    :config
-    (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
-
   (use-package! abbrev
     :defer t :config
     (setq-default abbrev-mode t
