@@ -65,7 +65,8 @@
 ;;; Set theme based on time of day.
 
 (use-package! circadian
-  :defer t :defer-incrementally t :config
+  :defer-incrementally t
+  :defer t :config
   (setq circadian-themes
         '((:sunrise . modus-operandi-deuteranopia)
           (:sunset  . modus-vivendi-deuteranopia)))
