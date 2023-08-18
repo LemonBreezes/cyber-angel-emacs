@@ -152,7 +152,6 @@
            eri/mark-outside-quotes)
           (er/mark-inside-pairs
            er/mark-outside-pairs)
-          cae-mark-comment
           er/mark-url
           er/mark-email
           eri/mark-line
