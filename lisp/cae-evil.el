@@ -10,7 +10,8 @@
         "DEL" (lookup-key evilem-map "\s")))
 
 (unless (cae-display-graphic-p)
-  (map! :m "TAB" #'better-jumper-jump-forward))
+  (add-hook! '(prog-mode conf-mode text-mode)
+             (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward)))
 
 ;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
 ;; and `C-x C-=' make these keybindings redundant.
