@@ -168,20 +168,6 @@ This is the format used on Reddit for code blocks."
       (message "Bookmark does not have a valid FILENAME property."))))
 
 ;;;###autoload
-(defun cae-lookup-definition-dwim ()
-  (interactive)
-  (require 'ffap)
-  (if-let ((file (ffap-file-at-point)))
-      (if (and (file-exists-p file)
-               (not (and buffer-file-name
-                         (string= (file-truename file)
-                                  (file-truename buffer-file-name)))))
-          (progn (better-jumper-set-jump (marker-position (point-marker)))
-                 (find-file file))
-        (call-interactively #'ffap))
-    (call-interactively #'+lookup/definition)))
-
-;;;###autoload
 (defun cae-lookup-definition-dwim (identifier &optional arg)
   (interactive (list (doom-thing-at-point-or-region)
                      current-prefix-arg))
