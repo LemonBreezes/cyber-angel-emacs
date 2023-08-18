@@ -39,6 +39,40 @@
       (:when (modulep! :tools lookup)
        [remap xref-find-definitions] #'cae-lookup-definition-dwim))
 
+;; This minor mode is defined so that there keybindings can be temporarily
+;; turned off for multiple cursors and similar modes where completion is not a
+;; good idea.
+(define-prefix-command 'cae-completion-prefix-map)
+(define-key cae-completion-prefix-map "c" #'completion-at-point)
+(define-key cae-completion-prefix-map "t" #'complete-tag)
+(define-key cae-completion-prefix-map "d" #'cape-dabbrev)
+(define-key cae-completion-prefix-map "f" #'cape-file)
+(define-key cae-completion-prefix-map "k" #'cape-keyword)
+(define-key cae-completion-prefix-map "h" #'cape-history)
+(define-key cae-completion-prefix-map "e" #'cape-symbol)
+(define-key cae-completion-prefix-map "a" #'cape-abbrev)
+(define-key cae-completion-prefix-map "l" #'cape-line)
+(define-key cae-completion-prefix-map "w" #'cape-dict)
+(define-key cae-completion-prefix-map "\\" #'cape-tex)
+(define-key cae-completion-prefix-map "_" #'cape-tex)
+(define-key cae-completion-prefix-map "^" #'cape-tex)
+(define-key cae-completion-prefix-map "&" #'cape-sgml)
+(define-key cae-completion-prefix-map "r" #'cape-rfc1345)
+(define-key cae-completion-prefix-map "." #'copilot-complete)
+(when (modulep! :editor multiple-cursors)
+  (define-key cae-completion-prefix-map (kbd "C-.") #'mc/unfreeze-fake-cursors)
+  (define-key cae-completion-prefix-map (kbd "<f5>") #'mc/unfreeze-fake-cursors))
+(define-minor-mode cae-completion-mode
+  "A minor mode for convenient completion keybindings."
+  :global t
+  :lighter nil
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-.") #'cae-completion-prefix-map)
+            (define-key map (kbd "<f5>") #'cae-completion-prefix-map)
+            map)
+  :group 'cae)
+(cae-completion-mode +1)
+
 (use-package! goggles
   :defer t :init
   (add-hook 'prog-mode-hook #'goggles-mode)
@@ -150,4 +184,6 @@
 ;;             "M-j" #'corfu-quick-jump
 ;;             "M-i" #'corfu-quick-insert))))
 
-
+;;Local Variables:
+;;eval: (when (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
+;;End:
