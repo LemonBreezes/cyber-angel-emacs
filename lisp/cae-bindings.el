@@ -1,9 +1,5 @@
   ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
-;; Allow escape to exit the minibuffer.
-(define-key! :keymaps +default-minibuffer-maps
-  [escape] #'abort-recursive-edit)
-
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
   :keymaps (append +default-minibuffer-maps
@@ -70,7 +66,6 @@
       "C-x x o" #'ov-clear
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
-      "M-/" #'cae-dabbrev-expand
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
