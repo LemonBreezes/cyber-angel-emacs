@@ -87,10 +87,10 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
+          "M-m" nil                    ;formerly `lispy-mark-symbol'.
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
-           "M-m" nil                    ;formerly `lispy-mark-symbol'. I prefer
            "C-a" nil                    ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
