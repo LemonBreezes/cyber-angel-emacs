@@ -804,19 +804,6 @@
     :config
     (advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
 
-  (use-package! hungry-delete
-    :defer t :init (add-hook 'aggressive-indent-mode-hook #'hungry-delete-mode)
-    :config
-    (when (modulep! :config default +smartparens)
-      (map! :map hungry-delete-mode-map
-            [remap backward-delete-char-untabify] #'sp-backward-delete-char
-            [remap c-electric-backspace] #'sp-backward-delete-char
-            [remap c-electric-delete-forward] #'cae-delete-char
-            [remap delete-backward-char] #'sp-backward-delete-char
-            [remap delete-char] #'cae-delete-char
-            [remap delete-forward-char] #'cae-delete-char))
-    (add-to-list 'hungry-delete-except-modes 'eshell-mode))
-
   (use-package! file-info
     :defer t :init
     (map! :leader :desc "Show file info" "fi" #'file-info-show)
