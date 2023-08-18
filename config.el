@@ -276,8 +276,7 @@
             flycheck-posframe-border-use-error-face t)))
 
   ;; Show the window number in the modeline (when applicable).
-  (after! winum
-    (setq winum-auto-setup-mode-line t))
+  (setq winum-auto-setup-mode-line t)
 
   ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
   (when (modulep! :completion vertico +childframe)
@@ -529,18 +528,8 @@
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
-  (if (modulep! :editor evil)
-    (load! "lisp/cae-evil")
-  (load! "lisp/cae-holy"))
-
-  (autoload 'cae-project-bookmark (concat doom-user-dir
-                                          "lisp/cae-project-bookmark"))
-  (autoload 'cae-project-bookmark-set (concat doom-user-dir
-                                              "lisp/cae-project-bookmark"))
-  (autoload 'cae-project--get-bookmark-file (concat doom-user-dir
-                                                    "lisp/cae-project-bookmark"))
-  (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
-        :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+  (when (modulep! :editor evil)
+    (load! "lisp/cae-evil"))
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
   ;; This is problematic because it means that a fold can be broken by an
@@ -828,7 +817,8 @@
 (when cae-init-autocompletion-enabled-p
   (when (modulep! :private corfu)
     (load! "lisp/cae-corfu"))
-  (load! "lisp/cae-ido")
+  (after! ido
+    (load! "lisp/cae-ido"))
 
   (after! yasnippet
     (setq yas-triggers-in-field t))     ;Allow nested snippets.
