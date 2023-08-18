@@ -166,3 +166,13 @@ It is meant to be used as a `post-gc-hook'."
 ;; For some reason, I had to do this after updating Emacs30 to get
 ;; `cape-yasnippet' to work.
 (defalias 'prefix #'string-prefix-p)
+
+;; These is for backwards compatibility.
+(dolist (sym '(cae-keyboard-strings
+               cae-keyboard-remap
+               cae-keyboard-remap-reverse
+               cae-keyboard-remap-to-strings
+               cae-keyboard-kbd
+               cae-keyboard-kbd-reverse
+               cae-keyboard-remap-hydra-hint))
+  (defalias sym #'identity))
