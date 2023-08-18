@@ -4,6 +4,10 @@
 (load! "+multiple-cursors")
 (load! "+restore-point")
 
+;; Allow escape to exit the minibuffer.
+(define-key! :keymaps +default-minibuffer-maps
+  [escape] #'abort-recursive-edit)
+
 ;; Doom should not bind leader key prefixes to keys which are not alphanumeric
 ;; because then they can be overwriting other packages' keybindings. As an
 ;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
