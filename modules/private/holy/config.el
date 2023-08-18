@@ -154,7 +154,7 @@
           mark-page)))
 
 (use-package! anzu
-
+  :defer t :init
   (global-set-key [remap query-replace] 'anzu-query-replace)
   (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
   (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
