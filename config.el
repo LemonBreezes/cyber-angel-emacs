@@ -5,9 +5,6 @@
 ;;; Stuff that should not be disabled.
 
 (load! "lisp/cae-bindings")
-(if (modulep! :editor evil)
-    (load! "lisp/cae-evil")
-  (load! "lisp/cae-holy"))
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
@@ -547,7 +544,9 @@
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
-  (load! "lisp/cae-restore-point")
+  (if (modulep! :editor evil)
+    (load! "lisp/cae-evil")
+  (load! "lisp/cae-holy"))
 
   (autoload 'cae-project-bookmark (concat doom-user-dir
                                           "lisp/cae-project-bookmark"))
