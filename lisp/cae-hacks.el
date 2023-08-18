@@ -167,7 +167,7 @@ It is meant to be used as a `post-gc-hook'."
 ;; `cape-yasnippet' to work.
 (defalias 'prefix #'string-prefix-p)
 
-;; These is for backwards compatibility.
+;; These are for backwards compatibility.
 (dolist (sym '(cae-keyboard-strings
                cae-keyboard-remap
                cae-keyboard-remap-reverse
