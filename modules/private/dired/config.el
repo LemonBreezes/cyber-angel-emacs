@@ -88,7 +88,7 @@
 
   (after! dirvish-quick-access
     (setq! dirvish-quick-access-entries
-           `(("h" ,(getenv "HOME") "Home")
+           `(("h" "~/" "Home")
              ("e" ,doom-emacs-dir "Emacs user directory")
              ("d" "~/Downloads/" "Downloads")
              ("m" "/mnt/" "Drives")
