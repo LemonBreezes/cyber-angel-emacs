@@ -177,64 +177,6 @@ This is the format used on Reddit for code blocks."
       (replace-match "" nil t))))
 
 ;;;###autoload
-(defun cae-avy-do (action pt)
-  (save-mark-and-excursion
-    (goto-char pt)
-    (cond ((or (eq avy-command 'avy-goto-line)
-               (memq this-command '(avy-goto-line-above
-                                    avy-goto-line-below)))
-           (progn (goto-char (line-beginning-position))
-                  (set-mark (point))
-                  (goto-char (line-end-position))))
-          ((eq this-command 'cae-avy-symbol-at-point)
-           (er/mark-symbol))
-          (t (eri/expand-region 1)))
-    (call-interactively action))
-  (run-at-time 0.0 nil
-               (lambda ()
-                 (cae-pop-mark)
-                 (when (bound-and-true-p hl-line-mode)
-                   (hl-line-highlight))
-                 (when (bound-and-true-p beacon-mode)
-                   (beacon-blink)))))
-
-;;;###autoload
-(defalias 'cae-avy-action-embark-act
-  (apply-partially #'cae-avy-do #'embark-act))
-
-;;;###autoload
-(defalias 'cae-avy-action-kill
-  (apply-partially #'cae-avy-do #'cae-kill-region))
-
-;;;###autoload
-(defun cae-kill-region ()
-  (interactive)
-  (call-interactively #'kill-region)
-  (delete-blank-lines))
-
-;;;###autoload
-(defalias 'cae-avy-parrot-rotate
-  (apply-partially #'cae-avy-do #'cae-modeline-rotate-forward-word-at-point))
-
-;;;###autoload
-(defalias 'cae-avy-parrot-rotate-backward
-  (apply-partially #'cae-avy-do #'cae-modeline-rotate-backward-word-at-point))
-
-;;;###autoload
-(defalias 'cae-avy-action-comment-dwim
-  (apply-partially #'cae-avy-do
-                   (lambda ()
-                     (cond ((or (eq avy-command 'avy-goto-line)
-                                (memq this-command '(avy-goto-line-above
-                                                     avy-goto-line-below)))
-                            (call-interactively #'comment-or-uncomment-region))
-                           ((bound-and-true-p lispy-mode)
-                            (deactivate-mark)
-                            (lispy-comment))
-                           (t (call-interactively #'comment-or-uncomment-region)))
-                     (avy-pop-mark))))
-
-;;;###autoload
 (defun cae-pop-mark ()
   (interactive)
   (let ((current-prefix-arg '(4)))
@@ -316,16 +258,6 @@ This is the format used on Reddit for code blocks."
       (bookmark-delete bookmark))))
 
 ;;;###autoload
-(defun cae-jinx--add-to-abbrev (overlay word)
-  "Add abbreviation to `global-abbrev-table'.
-The misspelled word is taken from OVERLAY.  WORD is the corrected word."
-  (let ((abbrev (buffer-substring-no-properties
-                 (overlay-start overlay)
-                 (overlay-end overlay))))
-    (message "Abbrev: %s -> %s" abbrev word)
-    (define-abbrev global-abbrev-table abbrev word)))
-
-;;;###autoload
 (defun cae-make-new-buffer ()
   (interactive)
   (let ((buffer (generate-new-buffer "*new*")))
@@ -369,3 +301,61 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (require 'embark)
   (let ((embark-cycle-key (key-description (this-command-keys))))
     (call-interactively 'embark-act)))
+
+;;;###autoload
+(defun cae-avy-do (action pt)
+  (save-mark-and-excursion
+    (goto-char pt)
+    (cond ((or (eq avy-command 'avy-goto-line)
+               (memq this-command '(avy-goto-line-above
+                                    avy-goto-line-below)))
+           (progn (goto-char (line-beginning-position))
+                  (set-mark (point))
+                  (goto-char (line-end-position))))
+          ((eq this-command 'cae-avy-symbol-at-point)
+           (er/mark-symbol))
+          (t (eri/expand-region 1)))
+    (call-interactively action))
+  (run-at-time 0.0 nil
+               (lambda ()
+                 (cae-pop-mark)
+                 (when (bound-and-true-p hl-line-mode)
+                   (hl-line-highlight))
+                 (when (bound-and-true-p beacon-mode)
+                   (beacon-blink)))))
+
+;;;###autoload
+(defalias 'cae-avy-action-embark-act
+  (apply-partially #'cae-avy-do #'embark-act))
+
+;;;###autoload
+(defalias 'cae-avy-action-kill
+  (apply-partially #'cae-avy-do #'cae-kill-region))
+
+;;;###autoload
+(defun cae-kill-region ()
+  (interactive)
+  (call-interactively #'kill-region)
+  (delete-blank-lines))
+
+;;;###autoload
+(defalias 'cae-avy-parrot-rotate
+  (apply-partially #'cae-avy-do #'cae-modeline-rotate-forward-word-at-point))
+
+;;;###autoload
+(defalias 'cae-avy-parrot-rotate-backward
+  (apply-partially #'cae-avy-do #'cae-modeline-rotate-backward-word-at-point))
+
+;;;###autoload
+(defalias 'cae-avy-action-comment-dwim
+  (apply-partially #'cae-avy-do
+                   (lambda ()
+                     (cond ((or (eq avy-command 'avy-goto-line)
+                                (memq this-command '(avy-goto-line-above
+                                                     avy-goto-line-below)))
+                            (call-interactively #'comment-or-uncomment-region))
+                           ((bound-and-true-p lispy-mode)
+                            (deactivate-mark)
+                            (lispy-comment))
+                           (t (call-interactively #'comment-or-uncomment-region)))
+                     (avy-pop-mark))))
