@@ -31,8 +31,7 @@
 (setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir))
 
 (use-package! git-auto-commit-mode
-  :defer t
-  :init
+  :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
   (setq-hook! 'git-auto-commit-mode-hook
