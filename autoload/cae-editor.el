@@ -168,21 +168,6 @@ This is the format used on Reddit for code blocks."
       (message "Bookmark does not have a valid FILENAME property."))))
 
 ;;;###autoload
-(defun cae-lookup-definition-dwim (identifier &optional arg)
-  (interactive (list (doom-thing-at-point-or-region)
-                     current-prefix-arg))
-  (require 'ffap)
-  (cond ((null identifier) (user-error "Nothing under point"))
-        ((and (string-match-p "/" identifier)
-              (file-exists-p identifier)
-              (not (and buffer-file-name
-                        (file-equal-p identifier buffer-file-name))))
-         (progn (better-jumper-set-jump (marker-position (point-marker)))
-                (find-file identifier)))
-        ((+lookup--jump-to :definition identifier nil arg))
-        ((user-error "Couldn't find the definition of %S" (substring-no-properties identifier)))))
-
-;;;###autoload
 (defun cae-dos2unix ()
   "Automate M-% C-q C-m RET C-q C-j RET"
   (interactive)
