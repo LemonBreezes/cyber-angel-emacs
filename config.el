@@ -860,29 +860,6 @@
       (which-key-add-keymap-based-replacements outline-minor-mode-map
         "C-c @" "outline")))
 
-  (use-package! expand-region-improved
-    :defer t :init
-    ;; Keybindings in `lisp/cae-bindings'.
-    :config
-    (eri/define-pair org-table-cell "|" 'org-at-table-p)
-    (eri/add-mode-expansions 'org-mode
-      '((eri/mark-inside-org-table-cell
-         eri/mark-outside-org-table-cell)))
-    (setq eri/try-expand-list
-          '((er/mark-symbol
-             er/mark-symbol-with-prefix
-             er/mark-next-accessor)
-            (er/mark-inside-quotes
-             eri/mark-outside-quotes)
-            (er/mark-inside-pairs
-             er/mark-outside-pairs)
-            cae-mark-comment
-            er/mark-url
-            er/mark-email
-            eri/mark-line
-            eri/mark-block
-            mark-page)))
-
   (use-package! embark
     :defer t :config
     (map! :map embark-collect-mode-map
