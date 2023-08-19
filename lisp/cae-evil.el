@@ -78,6 +78,10 @@
 (after! evil
   (setq evil-embrace-show-help-p t))
 
+(use-package! evil-owl
+  :defer t :defer-incrementally t :config
+  (evil-owl-mode))
+
 ;; Jump to the end of the prompt when entering insert state in a terminal.
 (add-hook 'evil-insert-state-entry-hook
           (cae-defun cae-goto-end-of-prompt-h ()
