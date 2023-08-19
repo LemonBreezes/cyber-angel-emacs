@@ -23,5 +23,3 @@
       "~"    (cmd! (if (looking-back "/" (point-min))
                        (insert "~/")
                      (call-interactively #'self-insert-command))))
-
-(ido-vertical-mode +1)
