@@ -115,8 +115,7 @@
         '(inhibit-message
           set-minibuffer-message)
         inhibit-message-regexps '("C-g is undefined$"
-                                  "ESC is undefined$"
-                                  "evil-mouse-drag-region must be bound to an event with parameters"))
+                                  "ESC is undefined$"))
 
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
     scroll-margin 2)
