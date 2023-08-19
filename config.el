@@ -751,15 +751,6 @@
       (define-key embark-heading-map "T" #'titlecase-line)
       (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
-  ;; Make Emacs's sentence commands work with Mr., Mrs., e.g., etc., without
-  ;; `sentence-end-double-space'. This package's settings should be tweaked if you
-  ;; use multiple languages.
-  (use-package! sentex
-    :defer t :init
-    (map! [remap kill-sentence] #'sentex-kill-sentence
-          [remap forward-sentence] #'sentex-forward-sentence
-          [remap backward-sentence] #'sentex-backward-sentence))
-
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
 
