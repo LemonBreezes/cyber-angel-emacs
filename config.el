@@ -526,7 +526,8 @@
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
   (when (modulep! :editor evil)
-    (load! "lisp/cae-evil"))
+    (after! evil
+      (load! "lisp/cae-evil")))
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
   ;; This is problematic because it means that a fold can be broken by an
