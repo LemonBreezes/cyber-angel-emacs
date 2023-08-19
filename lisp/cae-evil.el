@@ -75,7 +75,7 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
-(evil-set-initial-state 'eat-mode 'insert)
+(evil-set-initial-state 'eat-mode 'emacs)
 
 (after! evil-embrace
   (setq evil-embrace-show-help-p t))
