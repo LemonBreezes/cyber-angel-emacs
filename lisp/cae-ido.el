@@ -25,4 +25,3 @@
                      (call-interactively #'self-insert-command))))
 
 (ido-vertical-mode +1)
-(flx-ido-mode +1)
