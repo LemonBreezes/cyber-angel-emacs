@@ -75,7 +75,9 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
-(after! evil
+(evil-set-initial-state 'eat-mode 'insert)
+
+(after! evil-embrace
   (setq evil-embrace-show-help-p t))
 
 (use-package! evil-owl
