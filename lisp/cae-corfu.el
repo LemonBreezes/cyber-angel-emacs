@@ -57,21 +57,3 @@
   (use-package! org-block-capf
     :defer t :init
     (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)))
-
-;; Minad's Orderless hack
-
-(defun orderless-fast-dispatch (word index total)
-  (and (= index 0) (= total 1) (length< word 4)
-       `(orderless-regexp . ,(concat "^" (regexp-quote word)))))
-
-(after! orderless
-  (orderless-define-completion-style orderless-fast
-    (orderless-style-dispatchers '(orderless-fast-dispatch))
-    (orderless-matching-styles '(orderless-literal orderless-regexp))))
-
-(setq-hook! 'corfu-mode-hook
-  completion-styles '(orderless-fast basic))
-(after! corfu
-  (setq corfu-auto t
-        corfu-auto-delay 0
-        corfu-auto-prefix 1))
