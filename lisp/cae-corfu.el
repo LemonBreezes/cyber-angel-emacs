@@ -17,7 +17,7 @@
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
   (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
-        corfu-auto-delay 0.2
+        corfu-auto-delay 0.0
         corfu-on-exact-match nil
         corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
         tab-always-indent 'complete
@@ -70,7 +70,8 @@
     (orderless-matching-styles '(orderless-literal orderless-regexp))))
 
 (setq-hook! 'corfu-mode-hook
-  corfu-auto t
-  corfu-auto-delay 0
-  corfu-auto-prefix 1
   completion-styles '(orderless-fast basic))
+(after! corfu
+  (setq corfu-auto t
+        corfu-auto-delay 0
+        corfu-auto-prefix 1))
