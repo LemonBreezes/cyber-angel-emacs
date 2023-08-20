@@ -40,7 +40,7 @@
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
-       (window-select +numbers)
+       window-select
        ophints
 
        :editor
@@ -110,7 +110,7 @@
        (debugger +lsp)
        (dirvish +icons +dirvish)
        eshell
-       (exwm +notifications)
+       exwm
        dired
        lisp
        misc-applications

@@ -11,4 +11,5 @@
   (package! orderless))
 (package! yasnippet-capf)
 (when (modulep! :editor snippets)
-  (package! yasnippet-capf :recipe (:repo "https://github.com/LuigiPiucco/yasnippet-capf.git")))
+  (package! yasnippet-capf :recipe
+    (:host github :repo "LuigiPiucco/yasnippet-capf")))
