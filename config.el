@@ -286,6 +286,9 @@
             '((inhibit-double-buffering . t)))))
   (after! posframe
     (setq posframe-inhibit-double-buffering t))
+  (after! corfu
+    (pushnew! corfu--frame-parameters
+              '(inhibit-double-buffering . t)))
 
   (use-package! topsy
     :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
