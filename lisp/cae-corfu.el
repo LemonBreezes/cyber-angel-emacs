@@ -64,12 +64,13 @@
   (and (= index 0) (= total 1) (length< word 4)
        `(orderless-regexp . ,(concat "^" (regexp-quote word)))))
 
-(orderless-define-completion-style orderless-fast
-  (orderless-style-dispatchers '(orderless-fast-dispatch))
-  (orderless-matching-styles '(orderless-literal orderless-regexp)))
+(after! orderless
+  (orderless-define-completion-style orderless-fast
+    (orderless-style-dispatchers '(orderless-fast-dispatch))
+    (orderless-matching-styles '(orderless-literal orderless-regexp))))
 
-(setq-hook! corfu-mode
+(setq-hook! 'corfu-mode-hook
   corfu-auto t
   corfu-auto-delay 0
   corfu-auto-prefix 1
-  completion-styles '(orderless-fast basic))
+  completion-styles '(orderless-fast orderless basic))
