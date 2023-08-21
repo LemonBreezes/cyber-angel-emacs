@@ -102,4 +102,8 @@
       ;; Prevent our commands from being shadowed by `smartparens-mode-map'.
       ;;(define-key smartparens-mode-map (kbd (car x)) nil)
       ;;(global-set-key (kbd (car x)) (cadr x))
-      )))
+      )
+    ;; I define this key globally so that I can always reference the
+    ;; `smartparens' keymap and use it as a hydra even if the mode is not
+    ;; active.
+    (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body)))
