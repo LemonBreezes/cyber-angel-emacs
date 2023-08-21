@@ -195,7 +195,8 @@ expansion occurs within the parent Emacs session.")
     :commands exwm-edit--compose
     :init
     (map! :map exwm-mode-map
-          "C-c '" #'exwm-edit--compose)
+          :localleader
+          :desc "EXWM Edit" "'" #'exwm-edit--compose)
     :config
     (setq exwm-edit-split "below"
           exwm-edit-yank-delay 1.0
