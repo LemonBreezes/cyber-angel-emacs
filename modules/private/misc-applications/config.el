@@ -264,7 +264,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "t" "trash files"))
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
-  (add-hook 'trashed-mode-hook #'+trashed-hide-cursor-h)
+  (add-hook 'trashed-mode-hook #'+misc-applications-hide-cursor-h)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
   :config
   (map! :map trashed-mode-map
@@ -434,6 +434,7 @@
   (advice-add #'zone-matrix :before
               (cae-defun +zone-matrix-setup-buffer-appearance ()
                 (setq-local nobreak-char-display nil)
+                (+misc-applications-hide-cursor-h)
                 (face-remap-add-relative 'default :background "black")))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
