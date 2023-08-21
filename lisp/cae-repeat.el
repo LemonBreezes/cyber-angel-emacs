@@ -124,6 +124,10 @@
       ("n" evil-paste-pop-next
        "p" evil-paste-pop))
 
+    (define-repeat-map evil-file
+      ("f" +evil/next-file
+       "d" +evil/previous-file))
+
     (define-repeat-map tab-bar-switch-next-tab
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
