@@ -34,15 +34,15 @@
   (map! :map exwm-mode-map
         :localleader
         (:prefix ("d" . "debug")
-         "l" #'xcb-debug:clear
-         "m" #'xcb-debug:mark
-         "t" #'exwm-debug)
-        "f" #'exwm-layout-toggle-fullscreen
-        "h" #'exwm-floating-hide
-        "q" #'exwm-input-send-next-key
-        "SPC" #'exwm-floating-toggle-floating
-        "e" (cmd! (exwm-evil-send-key 1 'escape))
-        "m" #'exwm-layout-toggle-mode-line))
+         :desc "Clear debug buffer" "l" #'xcb-debug:clear
+         :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
+         :desc "Enable debug logging" "t" #'exwm-debug)
+        :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
+        :desc "Hide floating window" "h" #'exwm-floating-hide
+        :desc "Send next key" "q" #'exwm-input-send-next-key
+        :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
+        :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
+        :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
 
 (use-package! exwm-firefox-evil
   :after exwm
