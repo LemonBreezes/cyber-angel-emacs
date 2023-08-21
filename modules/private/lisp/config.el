@@ -72,6 +72,7 @@
 
 (when (modulep! :editor lispy)
   (after! lispy
+    (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
     (add-hook 'doom-escape-hook
               (cae-defun cae-lispy-clear-iedit-h ()
                 (when (bound-and-true-p iedit-mode)
@@ -87,7 +88,7 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
-          "M-m" nil                    ;formerly `lispy-mark-symbol'.
+          "M-m" nil                     ;formerly `lispy-mark-symbol'.
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
