@@ -21,11 +21,6 @@
             (cae-defun cae-org-fixup-doom-keybindings ()
               (remove-hook 'org-tab-first-hook #'+org-indent-maybe-h)))
 
-;; This hook causes problems with `elfeed-org' and probably other packages as
-;; well because it does not check if the buffer is an org buffer when the timer
-;; runs.
-(remove-hook 'org-mode-hook #'+org-make-last-point-visible-h)
-
 (use-package! org-appear
   :defer t :init
   (add-hook 'org-mode-hook #'org-appear-mode)
