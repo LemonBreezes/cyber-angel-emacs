@@ -196,7 +196,7 @@ expansion occurs within the parent Emacs session.")
     :init
     (map! :map exwm-mode-map
           :localleader
-          :desc "Edit input field" "'" #'exwm-edit--compose)
+          :desc "Edit input box" "'" #'exwm-edit--compose)
     :config
     (setq exwm-edit-split "below"
           exwm-edit-yank-delay 1.0
