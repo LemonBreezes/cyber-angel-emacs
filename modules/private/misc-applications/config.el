@@ -102,15 +102,16 @@
           ;; Elfeed maps `h' to `describe-mode', which is not as good.
           "h" #'cae-elfeed-hydra/body))
 
-  (use-package! elfeed-tube
-    :config
-    (elfeed-tube-setup)
-    (map! :map elfeed-show-mode-map
-          "F" #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save
-          :map elfeed-search-mode-map
-          "F" #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save)))
+  ;;(use-package! elfeed-tube
+  ;;  :config
+  ;;  (elfeed-tube-setup)
+  ;;  (map! :map elfeed-show-mode-map
+  ;;        "F" #'elfeed-tube-fetch
+  ;;        [remap save-buffer] #'elfeed-tube-save
+  ;;        :map elfeed-search-mode-map
+  ;;        "F" #'elfeed-tube-fetch
+  ;;        [remap save-buffer] #'elfeed-tube-save))
+  )
 
 
 ;;; External apps
