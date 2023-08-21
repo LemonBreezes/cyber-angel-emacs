@@ -15,7 +15,7 @@
   (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
 
 
-(use-package exwm-evil
+(use-package! exwm-evil
   :after exwm
   :config
   (exwm-evil-enable-mouse-workaround)
