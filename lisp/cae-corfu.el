@@ -14,7 +14,8 @@
               ("\1" ,(string char))
               (_ x)))
           piece
-          'fixedcase 'literal)))
+          'fixedcase 'literal)
+         'fixedcase 'literal))
       (split-string (replace-regexp-in-string
                      (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
                      (lambda (x)
