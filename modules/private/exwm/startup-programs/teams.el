@@ -8,7 +8,8 @@
     (unless (string= (+workspace-current-name) startup/teams-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/teams-workspace)
-      (+workspace-new startup/teams-workspace ))))
+      (+workspace-new startup/teams-workspace)
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/teams-workspace)))))
 
 (defun startup/kill-teams (&optional arg)
   (interactive "p")
