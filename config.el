@@ -355,6 +355,10 @@
 
   ;; Set up the default browser.
   (after! browse-url
+    (setq browse-url-browser-function
+      (cond ((executable-find "termux-setup-storage")
+             #'browse-url-xdg-open)
+            (t #'browse-url-generic)))
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
@@ -363,11 +367,7 @@
            (setq browse-url-generic-program (or (executable-find "chromium-bin-browser")
                                                 (executable-find "google-chrome-unstable"))
                  browse-url-generic-args (when (eq (user-uid) 0)
-                                           '("--no-sandbox")))))
-    (setq browse-url-browser-function
-          (cond ((executable-find "termux-setup-storage")
-                 #'browse-url-xdg-open)
-                (t #'browse-url-generic))))
+                                           '("--no-sandbox"))))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
