@@ -37,7 +37,7 @@
              (string-match-p "discord" exwm-class-name))
     (unless (+workspace-exists-p startup/discord-workspace)
       (+workspace-new startup/discord-workspace)
-      (set-persp-parameter 'dont-save-to-file t (get-current-persp))))
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/discord-workspace))))
   (when (persp-get-by-name startup/discord-workspace)
     (persp-add-buffer
      (cl-remove-if-not
