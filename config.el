@@ -656,10 +656,9 @@
   (map! [remap eval-last-sexp] #'cae-eval-last-sexp
         [remap eval-expression] #'cae-eval-expression)
   (when (modulep! :tools eval +overlay)
-    (after! eros
-      (add-hook 'eros-mode-hook
-                (cae-defun cae-eros-setup-keybindings-h ()
-                  (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))))
+    (add-hook 'eros-mode-hook
+              (cae-defun cae-eros-setup-keybindings-h ()
+                (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))
 
   (after! outline
     (setq outline-minor-mode-use-buttons nil))
