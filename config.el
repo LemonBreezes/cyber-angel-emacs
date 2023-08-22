@@ -648,8 +648,6 @@
   (after! midnight
     (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
           clean-buffer-list-delay-special 7200)
-    (add-to-list 'clean-buffer-list-kill-regexps
-                 (rx buffer-start "magit-" (or "process" "diff")))
     (add-to-list 'clean-buffer-list-kill-never-buffer-names
                  doom-fallback-buffer-name))
 
