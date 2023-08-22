@@ -36,10 +36,8 @@
   (when (and (stringp exwm-class-name)
              (string-match-p "discord" exwm-class-name))
     (unless (+workspace-exists-p startup/discord-workspace)
-      (+workspace-new startup/discord-workspace))
-    ;; (require 'agda-input)
-    ;; (set-input-method "Agda")
-    )
+      (+workspace-new startup/discord-workspace)
+      (set-persp-parameter 'dont-save-to-file t (get-current-persp))))
   (when (persp-get-by-name startup/discord-workspace)
     (persp-add-buffer
      (cl-remove-if-not
