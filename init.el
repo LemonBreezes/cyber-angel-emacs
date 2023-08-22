@@ -50,9 +50,8 @@
        multiple-cursors
        fold
        word-wrap
-       (evil +everywhere) ; Be prepared to encounter issues if you use Evil
-       ;; with my config. If you encounter any or have suggestions, please raise
-       ;; an issue on GitHub.
+       (evil +everywhere)
+       lispy
 
        :emacs
        undo

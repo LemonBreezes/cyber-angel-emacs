@@ -17,10 +17,15 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+
+;; Packages I have patched.
 (when (and (modulep! :lang org)
            (modulep! :editor evil))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode" :branch "enable-lexical-binding")))
+(when (modulep! :app rss)
+  (package! elfeed-org :recipe
+    (:host github :repo "LemonBreezes/elfeed-org" :branch "elfeed-org-fixes")))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
