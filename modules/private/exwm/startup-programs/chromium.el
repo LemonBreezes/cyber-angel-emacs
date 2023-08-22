@@ -43,7 +43,7 @@
       (previous-buffer))
     (unless (+workspace-exists-p startup/chromium-workspace)
       (+workspace-new startup/chromium-workspace)
-      (set-persp-parameter 'dont-save-to-file t (get-current-persp)))))
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/chromium-workspace)))))
 
 (defun startup/select-chromium ()
   (interactive)
