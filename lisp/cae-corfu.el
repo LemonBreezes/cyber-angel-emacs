@@ -4,15 +4,17 @@
   `(defun cae-orderless-escapable-split-on-space-or-char (s)
      (mapcar
       (lambda (piece)
-        (thread-last piece
-                     (replace-regexp-in-string
-                      (concat (string 0) "\\|" (string 1))
-                      (lambda (x)
-                        (pcase x
-                          ("\0" " ")
-                          ("\1" ,(string char))
-                          (_ x))))
-                     (replace-regexp-in-string (string 1) ,(string char))))
+        (replace-regexp-in-string
+         (string 1) ,(string char)
+         (replace-regexp-in-string
+          (concat (string 0) "\\|" (string 1))
+          (lambda (x)
+            (pcase x
+              ("\0" " ")
+              ("\1" ,(string char))
+              (_ x)))
+          piece
+          'fixedcase 'literal)))
       (split-string (replace-regexp-in-string
                      (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
                      (lambda (x)
