@@ -36,7 +36,8 @@
     (unless (string= (+workspace-current-name) startup/pavucontrol-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/pavucontrol-workspace)
-      (+workspace-new startup/pavucontrol-workspace))))
+      (+workspace-new startup/pavucontrol-workspace)
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/pavucontrol-workspace)))))
 
 (defun startup/select-pavucontrol ()
   (interactive)
