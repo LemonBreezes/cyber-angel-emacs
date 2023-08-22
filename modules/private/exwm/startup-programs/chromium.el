@@ -81,4 +81,5 @@
 (defadvice! +browse-url-generic-a (&rest _)
   :before #'browse-url-generic
   (when (equal startup/chromium-executable browse-url-generic-program)
-    (+workspace-switch startup/chromium-workspace t)))
+    (+workspace-switch startup/chromium-workspace t)
+    (+workspace/display)))
