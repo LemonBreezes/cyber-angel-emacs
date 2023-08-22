@@ -35,7 +35,8 @@
     (unless (string= (+workspace-current-name) startup/signal-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/signal-workspace)
-      (+workspace-new startup/signal-workspace ))))
+      (+workspace-new startup/signal-workspace)
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/signal-workspace)))))
 
 (defun startup/select-signal ()
   (interactive)
