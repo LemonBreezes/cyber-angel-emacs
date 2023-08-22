@@ -17,13 +17,14 @@
            if (buffer-local-value 'exwm-title buf)
            do (with-current-buffer buf
                 (exwm-workspace-rename-buffer exwm-title)))
-  (let ((buf (cl-find-if
+  (when-let ((buf (cl-find-if
               (lambda (buf)
                 (and (buffer-local-value 'exwm-class-name buf)
                      (string-match-p (downcase (+workspace-current-name))
                                      (buffer-local-value 'exwm-class-name buf))))
               (buffer-list))))
-    (when (and buf (not (+popup-window-p)))
+    (set-persp-parameter 'dont-save-to-file t (get-current-persp))
+    (unless (+popup-window-p)
       (unless (doom-visible-buffer-p buf)
         (switch-to-buffer buf)))))
 
