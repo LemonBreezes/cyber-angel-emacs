@@ -13,8 +13,7 @@
                           ("\0" " ")
                           ("\1" ,(string char))
                           (_ x))))
-                     (replace-regexp-in-string (string 1) ,(string char)
-                                               'fixedcase 'literal)))
+                     (replace-regexp-in-string (string 1) ,(string char))))
       (split-string (replace-regexp-in-string
                      "\\\\\\\\\\|\\\\ \\|\\\\&"
                      (lambda (x)
@@ -23,7 +22,7 @@
                          (,(concat "\\" (string char)) "\1")
                          (_ x)))
                      s 'fixedcase 'literal)
-                    (concat "[ " (string char) "]+") t))))
+                    ,(concat "[ " (string char) "]+") t))))
 
 ;;;###autoload
 (defun cae-yas-setup-capf ()
