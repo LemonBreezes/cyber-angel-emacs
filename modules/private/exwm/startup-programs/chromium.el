@@ -7,7 +7,7 @@
 (defvar startup/chromium-workspace (if (or (executable-find "chromium-bin")
                            (executable-find "chromium"))
                        "Chromium"
-                       "Chrome"))
+                     "Chrome"))
 
 (defun startup/start-chromium (&optional arg)
   (when startup/chromium-executable
