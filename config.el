@@ -983,6 +983,10 @@
                       (mu4e-drafts-folder . "/Fastmail/Drafts")
                       (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
+(after! gnus
+  (setq gnus-select-method
+        '(nntp "news.gmane.io" (nntp-port-number 119))))
+
 ;;; HTML
 
 ;; I don't really need LSP for the XML files I edit.
