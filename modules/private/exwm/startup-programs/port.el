@@ -41,7 +41,8 @@
       (lambda (buf)
         (string= "Port" (buffer-local-value 'exwm-class-name buf)))
       (buffer-list))
-     (persp-get-by-name startup/port-workspace))))
+     (persp-get-by-name startup/port-workspace)
+     (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/port-workspace)))))
 
 (defun startup/select-port ()
   (interactive)
