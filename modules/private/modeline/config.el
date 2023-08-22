@@ -9,15 +9,6 @@
                       :weight bold)))
 
 (add-hook! 'doom-first-file-hook
-  (run-with-idle-timer
-   5 nil
-   (lambda ()
-     (mapc (lambda (func)
-             (unless (compiled-function-p (symbol-function func))
-               (native-compile func)))
-           '(doom-real-buffer-p
-             cae-modeline-buffer-name
-             doom-temp-buffer-p))))
   (setq-default mode-line-format
                 (cl-subst '(:eval (cae-modeline-buffer-name))
                           'mode-line-buffer-identification
