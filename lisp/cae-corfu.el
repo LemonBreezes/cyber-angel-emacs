@@ -4,9 +4,10 @@
   (if (modulep! corfu +ampersand)
       (progn ;; So Orderless splits the string into components and then determines the
         ;; matching style for each component. This is all regexp stuff.
-        (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand)
+        (setq orderless-component-separator
+              (cae-orderless-escapable-split-fn ?-))
         (after! corfu
-          (setq corfu-separator ?&)))
+          (setq corfu-separator ?-)))
     (setq orderless-component-separator " +")))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
