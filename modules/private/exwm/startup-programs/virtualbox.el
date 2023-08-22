@@ -43,7 +43,8 @@
     (unless (string= (+workspace-current-name) startup/virtualbox-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/virtualbox-workspace)
-      (+workspace-new startup/virtualbox-workspace))))
+      (+workspace-new startup/virtualbox-workspace)
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/virtualbox-workspace)))))
 
 (defun startup/select-virtualbox (&optional no-vm-p)
   (interactive "P")
