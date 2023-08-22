@@ -1,14 +1,19 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
-(if (modulep! corfu +ampersand)
-    (progn (after! orderless
-             ;; So Orderless splits the string into components and then determines the
-             ;; matching style for each component. This is all regexp stuff.
-             (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand))
-           (after! corfu
-             (setq corfu-separator ?&)))
-  (after! orderless
-    (setq orderless-component-separator " +")))
+(after! orderless
+  (if (modulep! corfu +ampersand)
+      (progn ;; So Orderless splits the string into components and then determines the
+        ;; matching style for each component. This is all regexp stuff.
+        (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand)
+        (after! corfu
+          (setq corfu-separator ?&)))
+    (setq orderless-component-separator " +"))
+
+  (defun orderless-fast-dispatch (word index total)
+    (and (= index 0) (= total 1) (length< word 4)
+         `(orderless-initialism . ,word)))
+
+  (add-to-list 'orderless-style-dispatchers #'orderless-fast-dispatch :append))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 (add-hook 'minibuffer-exit-hook #'corfu-quit)
