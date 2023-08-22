@@ -985,7 +985,7 @@
 
 (after! gnus
   (setq gnus-select-method '(nnml "")
-        gnus-secondary-select-methods '((nntp "news.gmane.org")
+        gnus-secondary-select-methods '((nntp "news.gmane.io")
                                         (nntp "news.eternal-september.org"))))
 
 ;;; HTML
