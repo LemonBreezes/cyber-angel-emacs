@@ -34,7 +34,8 @@
     (unless (string= (+workspace-current-name) startup/gimp-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/gimp-workspace)
-      (+workspace-new startup/gimp-workspace ))))
+      (+workspace-new startup/gimp-workspace)
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/gimp-workspace)))))
 
 (defun startup/select-gimp ()
   (interactive)
