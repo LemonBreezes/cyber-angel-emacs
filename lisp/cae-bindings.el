@@ -77,18 +77,12 @@
        "o" #'link-hint-open-link)
       (:when (modulep! :completion vertico)
        [remap apropos] nil)             ;`consult-apropos' is obsolete.
-      (:after man
-       :map Man-mode-map
-       "o" #'ace-link-man)
       (:after vertico
        (:map vertico-map
         "<prior>" #'vertico-scroll-down
         "<next>" #'vertico-scroll-up
         "C-z" #'cae-embark-act-with-completing-read
-        "<f6>" #'cae-vertico-cheatsheet-hydra/body))
-      (:after eww
-       :map eww-mode-map
-       "o" #'ace-link-eww))
+        "<f6>" #'cae-vertico-cheatsheet-hydra/body)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
