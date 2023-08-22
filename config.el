@@ -984,7 +984,7 @@
                       (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
 (after! gnus
-  (setq gnus-select-method nil
+  (setq gnus-select-method '(nnml "")
         gnus-secondary-select-methods '((nntp "news.gmane.org")
                                         (nntp "news.eternal-september.org"))))
 
