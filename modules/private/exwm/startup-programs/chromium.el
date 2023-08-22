@@ -77,3 +77,8 @@
     (startup/restart-chromium)
   (unless (getenv "SSH_TTY")
     (startup/start-chromium)))
+
+(defadvice! +browse-url-generic-a (&rest _)
+  :before #'browse-url-generic
+  (when (equal startup/chromium-executable browse-url-generic-program)
+    (+workspace-switch startup/chromium-workspace t)))
