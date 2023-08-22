@@ -7,13 +7,7 @@
         (setq orderless-component-separator #'cae-orderless-escapable-split-on-space-or-ampersand)
         (after! corfu
           (setq corfu-separator ?&)))
-    (setq orderless-component-separator " +"))
-
-  (defun orderless-fast-dispatch (word index total)
-    (and (= index 0) (= total 1) (length< word 4)
-         `(orderless-initialism . ,word)))
-
-  (add-to-list 'orderless-style-dispatchers #'orderless-fast-dispatch :append))
+    (setq orderless-component-separator " +")))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 (add-hook 'minibuffer-exit-hook #'corfu-quit)
