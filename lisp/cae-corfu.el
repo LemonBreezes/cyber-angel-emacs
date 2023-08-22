@@ -12,8 +12,6 @@
                           ("\0" " ")
                           ("\1" ,(string char))
                           (_ x))))
-                     ;; I just noticed this was missing 'fixedcase and 'literal.
-                     ;; I'm too sleepy to add that now.
                      (replace-regexp-in-string (string 1) ,(string char))))
       (split-string (replace-regexp-in-string
                      (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
