@@ -35,7 +35,7 @@
       (previous-buffer))
     (unless (+workspace-exists-p startup/tiled-workspace)
       (+workspace-new startup/tiled-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/teams-workspace)))))
+      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/tiled-workspace)))))
 
 (defun startup/select-tiled ()
   (interactive)
