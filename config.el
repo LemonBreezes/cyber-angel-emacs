@@ -801,7 +801,11 @@
     (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
     (add-hook 'web-mode-hook  #'smart-semicolon-mode)
     (add-hook 'java-mode-hook #'smart-semicolon-mode)
-    (add-hook 'js-mode-hook   #'smart-semicolon-mode)))
+    (add-hook 'js-mode-hook   #'smart-semicolon-mode))
+
+  (use-package! dwim-coder-mode
+    :defer t
+    :hook ((c-ts-mode python-ts-mode rust-ts-mode) . dwim-coder-mode)))
 
 
 ;;; Autocompletion
