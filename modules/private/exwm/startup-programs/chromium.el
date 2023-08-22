@@ -4,7 +4,10 @@
 (defvar startup/chromium-executable (or (executable-find "chromium-bin")
                         (executable-find "chromium")
                         (executable-find "google-chrome-unstable")))
-(defvar startup/chromium-workspace "Chromium")
+(defvar startup/chromium-workspace (if (or (executable-find "chromium-bin")
+                           (executable-find "chromium"))
+                       "Chromium"
+                       "Chrome"))
 
 (defun startup/start-chromium (&optional arg)
   (when startup/chromium-executable
