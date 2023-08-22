@@ -67,12 +67,6 @@
   "c s" "Select Chromium"
   "c x" "Kill Chromium")
 
-(when (modulep! :private exwm)
-  (defadvice! +exwm--firefox-bookmark-handler-a (orig-fn &rest args)
-    (+workspace-switch "Chromium" t)
-    (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/chromium-workspace))
-    (apply orig-fn args)))
-
 (if (process-live-p startup/chromium-process)
     (startup/restart-chromium)
   (unless (getenv "SSH_TTY")
