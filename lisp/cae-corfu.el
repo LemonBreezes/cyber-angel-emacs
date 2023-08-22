@@ -14,7 +14,7 @@
                           (_ x))))
                      (replace-regexp-in-string (string 1) ,(string char))))
       (split-string (replace-regexp-in-string
-                     (concat "\\\\\\\\\\|\\\\ \\|\\\\" (string char))
+                     (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
                      (lambda (x)
                        (pcase x
                          ("\\ " "\0")
