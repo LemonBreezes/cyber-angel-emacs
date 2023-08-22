@@ -989,6 +989,7 @@
                                         (nntp "news.eternal-september.org"))
         gnus-asynchronous t
         gnus-view-pseudo-asynchronously t))
+;; TODO https://grep.app/search?q=gnus-view-pseudo-asynchronously%20
 
 ;;; HTML
 
