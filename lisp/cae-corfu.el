@@ -24,7 +24,7 @@
                     ,(concat "[ " (string char) "]+") t))))
 
 (after! orderless
-  (if (modulep! corfu +ampersand)
+  (if (modulep! :private corfu +extra-split-char)
       (progn ;; So Orderless splits the string into components and then determines the
         ;; matching style for each component. This is all regexp stuff.
         (setq orderless-component-separator
