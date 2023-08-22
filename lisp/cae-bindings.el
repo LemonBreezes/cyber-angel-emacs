@@ -256,8 +256,7 @@
     "M-s r" #'consult-ripgrep
     "M-s D" #'consult-locate)
    [remap Info-search] #'consult-info
-   "M-X" #'consult-mode-command
-   "W" #'consult-man)
+   "M-X" #'consult-mode-command)
   (map! :map help-map "TAB" #'consult-info)
   (map! :leader
         :desc "Keyboard macro"  "ik" #'consult-kmacro)
