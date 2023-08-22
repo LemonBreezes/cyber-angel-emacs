@@ -1,10 +1,9 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
 (defun cae-modeline-buffer-name ()
-  (propertize (if (buffer-local-value 'buffer-file-name (current-buffer))
-                  (or (breadcrumb-project-crumbs)
-                      (buffer-name))
-                (buffer-name))
+  (propertize (or (and (buffer-local-value 'buffer-file-name (current-buffer))
+                       (breadcrumb-project-crumbs))
+                  (buffer-name))
               'face '(:inherit variable-pitch
                       :weight bold)))
 
