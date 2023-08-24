@@ -93,6 +93,7 @@
   ;; before `tab-bar-mode' is enabled. I took the easy solution and just enable
   ;; `tab-bar-mode' after a delay.
   (run-with-idle-timer 3 nil #'tab-bar-mode +1)
+  (setq tab-bar-show 1)
 
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
