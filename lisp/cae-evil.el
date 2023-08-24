@@ -31,7 +31,8 @@
 ;; Define a leader key for switching to popup windows.
 (unless (lookup-key evil-window-map "e")
   (map! :map evil-window-map
-        "e" #'+popup/other))
+        "e" #'+popup/other
+        "~" #'+popup/raise))
 
 ;; Isearch is better in `Info-mode'
 (map! :map Info-mode-map
