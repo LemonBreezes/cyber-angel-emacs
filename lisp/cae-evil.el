@@ -63,6 +63,8 @@
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
 
+(delq! 'replace +evil-collection-disabled-list)
+
 ;; ;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
 ;; ;; instead.
 ;;(map! :m "C-d" nil
