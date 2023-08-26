@@ -146,8 +146,8 @@
         bbdb-default-area-code nil
         bbdb-dwim-net-address-allow-redundancy t
         bbdb-electric-p nil
-        bbdb-add-aka nil
-        bbdb-add-name nil
+        bbdb-add-aka 'query
+        bbdb-add-name 'query
         bbdb-add-mails t
         bbdb-new-nets-always-primary 'never
         bbdb-north-american-phone-numbers-p nil
