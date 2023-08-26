@@ -346,7 +346,10 @@
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
   (use-package! indent-bars
-    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode)))
+    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode))
+
+  (use-package! nice-citation
+    :after (:or gnus message)))
 
 
 ;;; Tools
