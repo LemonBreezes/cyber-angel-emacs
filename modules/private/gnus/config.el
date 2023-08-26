@@ -1,7 +1,6 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
 (map! :leader :desc "Gnus" "og" #'=gnus)
-(add-hook 'message-setup-hook #'bbdb-mail-aliases)
 
 (use-package! gnus
   :commands gnus gnus-unplugged gnus-agent-batch
@@ -122,3 +121,10 @@
   :defer t :config
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
+
+(use-package! bbdb
+  :defer t :init
+  (add-hook 'message-setup-hook #'bbdb-mail-aliases)
+  :config
+  (bbdb-initialize 'message 'gnus)
+  (bbdb-mua-auto-update-init 'message 'gnus))
