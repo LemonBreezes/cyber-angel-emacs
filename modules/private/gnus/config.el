@@ -1,5 +1,7 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
+(map! :leader :desc "Gnus" "og" #'gnus)
+
 (use-package! gnus
   :commands gnus gnus-unplugged gnus-agent-batch
   :custom
