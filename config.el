@@ -932,6 +932,8 @@
 
 ;;; Email
 
+(load! "lisp/cae-gnus")
+
 (setq user-full-name "StrawberryTea"
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz")
@@ -982,14 +984,6 @@
                       (mu4e-refile-folder . "/Fastmail/Archive")
                       (mu4e-drafts-folder . "/Fastmail/Drafts")
                       (mu4e-sent-folder . "/Fastmail/Sent")))))))
-
-(after! gnus
-  (setq gnus-select-method '(nnml "")
-        gnus-secondary-select-methods '((nntp "news.gmane.io")
-                                        (nntp "news.eternal-september.org"))
-        gnus-asynchronous t
-        gnus-view-pseudo-asynchronously t))
-;; TODO https://grep.app/search?q=gnus-view-pseudo-asynchronously%20
 
 ;;; HTML
 
