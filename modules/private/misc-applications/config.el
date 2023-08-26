@@ -10,8 +10,9 @@
 ;; "a" is bound to `emabark-act', which I use `<f8>' for instead.
 (keymap-unset doom-leader-map +misc-applications-prefix t)
 (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
-(which-key-add-keymap-based-replacements 'doom-leader-map
-  +misc-applications-prefix "misc-applications")
+(after! which-key
+  (which-key-add-keymap-based-replacements 'doom-leader-map
+    +misc-applications-prefix "misc-applications"))
 (defvar application-types
   '(("lookup" "l")
     ("games" "g")
