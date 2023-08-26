@@ -116,7 +116,6 @@
         "<f6>" #'cae-gnus-summary-cheatsheet/body))
 
 (use-package! gnus-art
-  :defer t
-  :config
+  :defer t :config
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
