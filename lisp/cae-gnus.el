@@ -6,7 +6,7 @@
   (gnus-use-cache t)
   (gnus-use-scoring nil)
   (gnus-suppress-duplicates t)
-  (gnus-novice-user nil)
+  (gnus-novice-user t)
   (gnus-expert-user t)
   (gnus-interactive-exit 'quiet)
   (gnus-inhibit-startup-message t)
