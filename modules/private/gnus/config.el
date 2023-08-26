@@ -121,7 +121,3 @@
   :defer t :config
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
-
-(unless (or (modulep! :email mu4e)
-            (modulep! :email notmuch))
-  (setq mail-user-agent 'gnus-user-agent))
