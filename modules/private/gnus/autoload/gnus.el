@@ -19,3 +19,9 @@
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer)))
   (call-interactively #'gnus-unplugged))
+
+(add-hook 'gnus-exit-gnus-hook
+          (cae-defun +gnus-kill-workspace-h ()
+            (when (and (featurep! :ui workspaces)
+                       (+workspace-exists-p +gnus-workspace-name))
+              (+workspace/delete +gnus-workspace-name))))
