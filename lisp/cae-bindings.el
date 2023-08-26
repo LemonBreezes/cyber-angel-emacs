@@ -1,5 +1,10 @@
   ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
+
+(map! :map general-override-mode-map
+      :desc "<leader>" :nmv "DEL" #'doom-leader-map
+      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
+
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
   :keymaps (append +default-minibuffer-maps
