@@ -20,6 +20,8 @@
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
 (after! bbdb
   (setq bbdb-file (concat cae-multi-secrets-dir "bbdb")))
+(after! calendar
+  (setq diary-file (concat cae-multi-secrets-dir "diary")))
 (after! calc
   (setq calc-settings-file (concat cae-multi-data-dir "calc.el")))
 (after! eww
