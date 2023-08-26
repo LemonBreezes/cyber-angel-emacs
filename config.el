@@ -934,7 +934,8 @@
 
 (setq user-full-name "StrawberryTea"
       user-mail-address "look@strawberrytea.xyz"
-      mail-host-address "strawberrytea.xyz")
+      mail-host-address "strawberrytea.xyz"
+      mail-source-directory "~/.mail/")
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (after! sendmail
