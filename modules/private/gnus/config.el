@@ -50,6 +50,7 @@
    gnus-article-sort-functions '((not gnus-article-sort-by-number)
                                  (not gnus-article-sort-by-date))
    gnus-article-browse-delete-temp t
+   gnus-article-show-cursor t
    ;; Display more MINE stuff
    gnus-mime-display-multipart-related-as-mixed t
 ;;; Asynchronous support for Gnus
