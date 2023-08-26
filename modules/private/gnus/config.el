@@ -127,6 +127,7 @@
   (require 'bbdb-com)
   (require 'bbdb-anniv)
   (require 'bbdb-gnus)
+  (require 'bbdb-mua)
   (bbdb-initialize 'message 'gnus)
   (bbdb-mua-auto-update-init 'message 'gnus)
   (setq bbdb-mua-pop-up nil)
