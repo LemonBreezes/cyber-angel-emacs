@@ -349,6 +349,7 @@
     :defer t :hook ((python-mode yaml-mode) . indent-bars-mode))
 
   (use-package! nice-citation
+    :when (cae-display-graphic-p)
     :after (:or gnus message)))
 
 
