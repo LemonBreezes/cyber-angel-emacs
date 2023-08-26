@@ -5,6 +5,11 @@
 (defvar startup/discord-workspace "Discord")
 (defvar startup/discord--timer nil)
 
+(define-minor-mode startup/discord-mode
+  "Minor mode for Discord."
+  :init-value nil
+  :global nil)
+
 (defun startup/start-discord (&optional arg)
   (when startup/discord-executable
     (setq startup/discord-process
@@ -35,6 +40,7 @@
 (defun startup/manage-discord ()
   (when (and (stringp exwm-class-name)
              (string-match-p "discord" exwm-class-name))
+    (startup/discord-mode +1)
     (unless (+workspace-exists-p startup/discord-workspace)
       (+workspace-new startup/discord-workspace)
       (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/discord-workspace))))
