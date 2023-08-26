@@ -13,12 +13,13 @@
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "news.gmane.io")
-                                   (nnimap "fastmail"
-                                           (nnimap-inbox "INBOX")
-                                           (nnimap-address "imap.fastmail.com")
-                                           (nnimap-server-port 993)
-                                           (nnimap-stream ssl)
-                                           (nnimap-expunge 'never)))
+                                   ;;(nnimap "fastmail"
+                                   ;;        (nnimap-inbox "INBOX")
+                                   ;;        (nnimap-address "imap.fastmail.com")
+                                   ;;        (nnimap-server-port 993)
+                                   ;;        (nnimap-stream ssl)
+                                   ;;        (nnimap-expunge 'never))
+                                   )
    gnus-large-newsgroup 4000
    network-security-level 'low
 ;;; Startup functions
