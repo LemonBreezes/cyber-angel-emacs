@@ -90,7 +90,8 @@
   :config
   (defalias 'elfeed-toggle-star
     (elfeed-expose #'elfeed-search-toggle-all 'star))
-  (push elfeed-db-directory recentf-exclude)
+  (after! recentf
+    (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
         "?" #'describe-mode
         :map elfeed-search-mode-map
