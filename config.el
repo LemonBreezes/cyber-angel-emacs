@@ -5,7 +5,7 @@
 ;;; Stuff that should not be disabled.
 
 (load! "lisp/cae-bindings")
-;; (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 ;; (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
 
