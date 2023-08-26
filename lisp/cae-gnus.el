@@ -18,8 +18,12 @@
                                            (nnimap-address "imap.fastmail.com")
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
-                                           (nnimap-expunge 'never))))
-  ;;; Startup functions
+                                           (nnimap-expunge 'never)
+                                           (nnimap-split-fancy '(| (any "emacs-devel" "emacs-devel")
+                                                                 "INBOX")))))
+  (gnus-large-newsgroup 4000)
+  (network-security-level 'low)
+;;; Startup functions
   (gnus-save-killed-list nil)
   (gnus-check-new-newsgroups nil)
   ;; No other newsreader is used.
@@ -28,7 +32,7 @@
   (gnus-subscribe-newsgroup-method 'gnus-subscribe-interactively)
   ;; Emacs 28 introduces a unified query lang
   (gnus-search-use-parsed-queries t)
-  ;;; Article mode for Gnus
+;;; Article mode for Gnus
   (gnus-visible-headers (rx line-start (or "From"
                                            "Subject"
                                            "Mail-Followup-To"
@@ -45,10 +49,10 @@
   (gnus-article-browse-delete-temp t)
   ;; Display more MINE stuff
   (gnus-mime-display-multipart-related-as-mixed t)
-  ;;; Asynchronous support for Gnus
+;;; Asynchronous support for Gnus
   (gnus-asynchronous t)
   (gnus-use-header-prefetch t)
-  ;;; Cache interface for Gnus
+;;; Cache interface for Gnus
   (gnus-cache-enter-articles '(ticked dormant unread))
   (gnus-cache-remove-articles '(read))
   (gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
