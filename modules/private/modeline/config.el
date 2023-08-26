@@ -242,7 +242,7 @@
 (when (modulep! +pretty)
   (use-package! nyan-mode
     :when (cae-display-graphic-p)
-    :init
+    :defer t :init
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
     (setq! nyan-bar-length 20
