@@ -127,7 +127,6 @@
   (require 'bbdb-com)
   (require 'bbdb-anniv)
   (require 'bbdb-gnus)
-  (require 'bbdb-mua)
   (bbdb-initialize 'message 'gnus)
   (bbdb-mua-auto-update-init 'message 'gnus)
   (setq bbdb-mua-pop-up nil)
@@ -141,32 +140,14 @@
   (add-hook 'message-setup-hook 'bbdb-mail-aliases)
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
   ;; (add-hook 'list-diary-entries-hook 'bbdb-include-anniversaries)
-  (setq bbdb-always-add-addresses t
-        bbdb-complete-name-allow-cycling t
-        bbdb-completion-display-record t
+  (setq bbdb-completion-display-record t
         bbdb-default-area-code nil
-        bbdb-dwim-net-address-allow-redundancy t
-        bbdb-electric-p nil
-        bbdb-add-aka 'query
+        bbdb-add-aka t
         bbdb-add-name 'query
         bbdb-add-mails t
-        bbdb-new-nets-always-primary 'never
-        bbdb-north-american-phone-numbers-p nil
-        bbdb-offer-save 'auto
-        bbdb-pop-up-target-lines 3
-        bbdb-print-net 'primary
-        bbdb-print-require t
-        bbdb-use-pop-up nil
-        bbdb-user-mail-names gnus-ignored-from-addresses
-        bbdb/gnus-split-crosspost-default nil
-        bbdb/gnus-split-default-group nil
-        bbdb/gnus-split-myaddr-regexp gnus-ignored-from-addresses
-        bbdb/gnus-split-nomatch-function nil
-        bbdb/gnus-summary-known-poster-mark "+"
-        bbdb/gnus-summary-mark-known-posters t
         bbdb-ignore-message-alist '(("Newsgroup" . ".*")))
   (defalias 'bbdb-y-or-n-p #'(lambda (prompt) t))
-  (setq bbdb-auto-notes-alist
+  (setq bbdb-auto-notes-rules
         '(("Newsgroups" ("[^,]+" newsgroups 0))
           ("Subject" (".*" last-subj 0 t))
           ("User-Agent" (".*" mailer 0))
