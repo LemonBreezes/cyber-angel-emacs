@@ -14,8 +14,8 @@
                           (default-value 'mode-line-format))))
 
 (when (modulep! :editor evil)
-  (setq! evil-mode-line-format
-         '(after . mode-line-frame-identification)))
+  (setq evil-mode-line-format
+        '(after . mode-line-frame-identification)))
 
 (use-package! minions
   :defer t :init
