@@ -1,8 +1,7 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
 (use-package! whisper
-  :defer t
-  :init
+  :defer t :init
   (map! "<f12>" #'whisper-run)
   :config
   (setq whisper-install-directory doom-cache-dir
