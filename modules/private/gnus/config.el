@@ -13,7 +13,6 @@
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "news.gmane.io")
-                                   (nntp "news.eternal-september.org")
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
