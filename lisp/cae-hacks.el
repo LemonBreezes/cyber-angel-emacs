@@ -80,13 +80,6 @@ It is meant to be used as a `post-gc-hook'."
   :before-until #'+workspace/switch-to
   (minibuffer-window-active-p (selected-window)))
 
-;; Make `advice-remove' ignore the keyword argument
-(defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
-  :filter-args #'advice-remove
-  (if (keywordp (nth 1 args))
-      (list (nth 0 args) (nth 2 args))
-    args))
-
 ;; If `try' is used before the package list is loaded, fetch it.
 (defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
   :before #'try
