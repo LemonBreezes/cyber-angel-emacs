@@ -3,7 +3,7 @@
 (map! :leader :desc "Gnus" "og" #'=gnus)
 
 (use-package! gnus
-  :defer t :commands gnus gnus-unplugged gnus-agent-batch
+  :commands gnus gnus-unplugged gnus-agent-batch
   :custom
   (gnus-use-cache t)
   (gnus-use-scoring nil)
