@@ -55,11 +55,3 @@ normally have their errors suppressed."
 ;; Copied from here:
 ;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
 
-;;; Convenience advices
-
-;; Make `advice-remove' ignore the keyword argument
-(defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
-  :filter-args #'advice-remove
-  (if (keywordp (nth 1 args))
-      (list (nth 0 args) (nth 2 args))
-    args))
