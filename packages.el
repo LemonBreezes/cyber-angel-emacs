@@ -23,9 +23,6 @@
            (modulep! :editor evil))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode" :branch "enable-lexical-binding")))
-(when (modulep! :app rss)
-  (package! elfeed-org :recipe
-    (:host github :repo "LemonBreezes/elfeed-org" :branch "elfeed-org-fixes")))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
@@ -50,7 +47,6 @@
 ;;; Tools
 (package! nov)
 (package! syslog-mode)
-(package! ace-link)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! dwim-shell-command)
 (package! wakatime-mode)
@@ -61,6 +57,7 @@
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
+(package! eff)
 (package! git-modes)
 (package! 0x0)
 

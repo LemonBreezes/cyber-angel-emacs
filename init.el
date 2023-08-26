@@ -6,15 +6,11 @@
   (add-to-list 'safe-local-variable-directories doom-user-dir)
   (add-to-list 'safe-local-variable-directories doom-emacs-dir))
 
-(load! "lisp/cae-debug")                ;Debug Emacs.
+(load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
 (setq native-comp-async-jobs-number (num-processors))
-
-;; This is a startup optimization. I've never used `annalist' to print stuff out
-;; into Org tables.
-(setq annalist-record nil)
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
@@ -73,7 +69,7 @@
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-       (magit +forge)
+       magit
        (lsp +peek +eglot)
        tree-sitter
        pdf
@@ -87,7 +83,7 @@
        (nix +lsp +tree-sitter)
        (solidity +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
-       (data +lsp +tree-sitter +fennel)
+       (data +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
@@ -97,14 +93,14 @@
        (default +bindings +smartparens)
 
        :email
-       (mu4e +org)
+       ;;(mu4e +org)
        ;;(notmuch +org)
 
        :app
        (rss +org)
 
        :private
-       (corfu +orderless +icons)
+       (corfu +orderless +icons +split-char)
        (helm +childframe)
        (debugger +lsp)
        (dirvish +icons +dirvish)
@@ -118,6 +114,7 @@
        vc
        org
        ai
+       gnus
        ;;holy
        )
 

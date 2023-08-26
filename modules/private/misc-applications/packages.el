@@ -8,9 +8,6 @@
   (package! elfeed-tube-mpv))
 
 ;; Use external APIs or apps
-(unless (or (memq system-type '(cygwin windows-nt ms-dos))
-            (getenv "WSL_DISTRO_NAME"))
-  (package! elcord))
 (package! leetcode)
 (package! somafm)
 (package! wttrin :recipe (:local-repo "packages/wttrin"))
@@ -38,12 +35,6 @@
   (package! helm-rage))
 (package! lorem-ipsum)
 (package! password-generator)
-
-;; Lookup
-(package! devdocs)
-(package! know-your-http-well)
-(package! tldr)
-(package! x86-lookup)
 
 ;; Games
 (package! autotetris-mode)

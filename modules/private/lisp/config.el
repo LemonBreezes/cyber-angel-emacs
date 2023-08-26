@@ -88,10 +88,10 @@
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
-          "M-m" nil                     ;formerly `lispy-mark-symbol'.
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
+           "M-m" nil                    ;formerly `lispy-mark-symbol'.
            "C-a" nil                    ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
@@ -102,22 +102,18 @@
                                         ;than moving to the end of the line
                                         ;first.
 
-           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
+           "M-i" nil                    ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
 
-          ;; I prefer Doom's jump commands.
-          "M-." nil                     ;formerly `lispy-goto-symbol'.
-          "C-M-," nil                   ;formerly `lispy-mark'.
-          "M-," nil                     ;formerly `pop-tag-mark'.
+           ;; I prefer Doom's jump commands.
+           "M-." nil                    ;formerly `lispy-goto-symbol'.
+           "C-M-," nil                  ;formerly `lispy-mark'.
+           "M-," nil                    ;formerly `pop-tag-mark'.
 
-          "M-R" #'lispy-raise-sexp
-          "M-S" #'lispy-split
-          "M-C" #'lispy-convolute
-          "M-D" #'lispy-splice
-          "C-<backspace>" #'lispy-backward-kill-word ;This command normally
-                                        ;to `M-<backspace>' but I
-                                        ;have a Smartparens command
-                                        ;bound to that key.
+           "M-R" #'lispy-raise-sexp
+           "M-S" #'lispy-split
+           "M-C" #'lispy-convolute
+           "M-D" #'lispy-splice)
           "C-d" #'cae-delete-char
           ")" #'cae-insert-closing-paren))
 
