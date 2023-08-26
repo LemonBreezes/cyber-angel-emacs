@@ -29,6 +29,8 @@
         (which-key-show-keymap
          ',keymap)))))
 
+;;; Backwards compatibility
+
 ;; For backwards compatibility. `syslog-mode' uses this.
 (defun toggle-read-only (arg)
   (read-only-mode
