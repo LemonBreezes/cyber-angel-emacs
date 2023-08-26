@@ -130,20 +130,9 @@ It is meant to be used as a `post-gc-hook'."
     (when (bolp)
       (goto-char p))))
 
-;; For backwards compatibility. `syslog-mode' uses this.
-(defun toggle-read-only (arg)
-  (read-only-mode
-   (cond ((not arg) (not buffer-read-only))
-         ((and (integerp arg) (<= arg 0)) nil)
-         (t t))))
-
 ;; The macrostep keymap is completely broken for me without this line. This
 ;; might be an Emacs30 thing.
 ;;(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
-
-;; This is for backwards compatibility with some of my old bookmarks.
-(defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
-(defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
 
 ;; This autoload fixes a void function error on `find-file-hook' that occurs
 ;; sporadically for me.
@@ -158,17 +147,3 @@ It is meant to be used as a `post-gc-hook'."
    '(nil "((nil . (" ("" '(projectile-skel-variable-cons) n)
      resume: ")))")
    str arg))
-
-;; For some reason, I had to do this after updating Emacs30 to get
-;; `cape-yasnippet' to work.
-(defalias 'prefix #'string-prefix-p)
-
-;; These are for backwards compatibility.
-(dolist (sym '(cae-keyboard-strings
-               cae-keyboard-remap
-               cae-keyboard-remap-reverse
-               cae-keyboard-remap-to-strings
-               cae-keyboard-kbd
-               cae-keyboard-kbd-reverse
-               cae-keyboard-remap-hydra-hint))
-  (defalias sym #'identity))
