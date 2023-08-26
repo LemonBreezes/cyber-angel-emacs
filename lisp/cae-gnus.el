@@ -16,7 +16,7 @@
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
-                                           (nnimap-server-port "imaps")
+                                           (nnimap-server-port 993)
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never))))
   ;;; Startup functions
