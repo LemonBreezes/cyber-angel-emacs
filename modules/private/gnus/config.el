@@ -1,7 +1,5 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
-;;; lisp/cae-gnus.el -*- lexical-binding: t; -*-
-
 (use-package! gnus
   :commands gnus gnus-unplugged gnus-agent-batch
   :custom
