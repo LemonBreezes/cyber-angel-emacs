@@ -142,7 +142,7 @@
   (setq bbdb-completion-display-record t
         bbdb-default-area-code nil
         bbdb-add-aka t
-        bbdb-add-name 'query
+        bbdb-add-name nil
         bbdb-add-mails t
         bbdb-ignore-message-alist '(("Newsgroup" . ".*")))
   (defalias 'bbdb-y-or-n-p #'(lambda (prompt) t))
