@@ -2,68 +2,68 @@
 
 (defvar cae-config-finished-loading nil)
 
-;;; Stuff that should not be disabled.
+;; ;;; Stuff that should not be disabled.
 
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
-                                        ;is also our Smartparens configuration.
+;; (load! "lisp/cae-bindings")
+;; (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+;; (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+;;                                         ;is also our Smartparens configuration.
 
-;; Helm is not our main completion system.
-(when (and (modulep! :completion helm)
-           (modulep! :completion vertico))
-  (remove-hook 'doom-first-input-hook #'helm-mode))
+;; ;; Helm is not our main completion system.
+;; (when (and (modulep! :completion helm)
+;;            (modulep! :completion vertico))
+;;   (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; Extra stuff for when we run Doom without any modules loaded.
-(unless (or (modulep! :completion helm)
-            (modulep! :completion ivy)
-            (modulep! :completion vertico))
-  (icomplete-mode +1)
-  (icomplete-vertical-mode +1))
-(unless (modulep! :lang emacs-lisp)
-  (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
+;; ;; Extra stuff for when we run Doom without any modules loaded.
+;; (unless (or (modulep! :completion helm)
+;;             (modulep! :completion ivy)
+;;             (modulep! :completion vertico))
+;;   (icomplete-mode +1)
+;;   (icomplete-vertical-mode +1))
+;; (unless (modulep! :lang emacs-lisp)
+;;   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
-;; Stuff so that Emacs doesn't break in the Terminal.
-(when (modulep! :completion vertico +childframe)
-  (unless (cae-display-graphic-p)
-    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
-(when (modulep! :ui ligatures)
-  (unless (cae-display-graphic-p)
-    (setq +ligatures-in-modes nil)
-    (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
-    (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
-    (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
+;; ;; Stuff so that Emacs doesn't break in the Terminal.
+;; (when (modulep! :completion vertico +childframe)
+;;   (unless (cae-display-graphic-p)
+;;     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
+;; (when (modulep! :ui ligatures)
+;;   (unless (cae-display-graphic-p)
+;;     (setq +ligatures-in-modes nil)
+;;     (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
+;;     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
+;;     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
-(after! xclip
-  (cond ((executable-find "termux-setup-storage")
-         (setq xclip-method 'termux-clipboard-get))))
+;; (after! xclip
+;;   (cond ((executable-find "termux-setup-storage")
+;;          (setq xclip-method 'termux-clipboard-get))))
 
-;; For some reason Persp is picking up a few buffers that it should not.
-(when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
-                 (cae-defun cae-persp-skip-buffer-p (buffer)
-                   (string= (buffer-name buffer) "*lsp-log*")))))
+;; ;; For some reason Persp is picking up a few buffers that it should not.
+;; (when (modulep! :ui workspaces)
+;;   (after! persp-mode
+;;     (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
+;;                  (cae-defun cae-persp-skip-buffer-p (buffer)
+;;                    (string= (buffer-name buffer) "*lsp-log*")))))
 
-;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  ;; Previously I used Iosevka Comfy and size 18.
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 19)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 19)
-        doom-unicode-font (unless (modulep! :ui unicode)
-                            (font-spec :family "LXGW WenKai" :weight 'light
-                                       :size 18))))
+;; ;; Set up fonts
+;; (unless (memq system-type '(cygwin windows-nt ms-dos))
+;;   ;; Previously I used Iosevka Comfy and size 18.
+;;   (setq doom-font (font-spec :family "Iosevka Comfy" :size 19)
+;;         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+;;                                             :size 19)
+;;         doom-unicode-font (unless (modulep! :ui unicode)
+;;                             (font-spec :family "LXGW WenKai" :weight 'light
+;;                                        :size 18))))
 
-;; I have disabled `rainbow-delimiters' as a package so this is to prevent
-;; errors.
-(defalias 'rainbow-delimiters-mode #'ignore)
+;; ;; I have disabled `rainbow-delimiters' as a package so this is to prevent
+;; ;; errors.
+;; (defalias 'rainbow-delimiters-mode #'ignore)
 
-;; Do not break my clipboard in SSH sessions.
-(when (and (modulep! :os tty)
-           (getenv "SSH_TTY")
-           (not (cae-display-graphic-p)))
-  (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
+;; ;; Do not break my clipboard in SSH sessions.
+;; (when (and (modulep! :os tty)
+;;            (getenv "SSH_TTY")
+;;            (not (cae-display-graphic-p)))
+;;   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
 
 ;;; UI
