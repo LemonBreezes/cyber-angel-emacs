@@ -12,7 +12,9 @@
   :global nil)
 
 (map! :map startup/discord-mode-map
-      :n "K" (cmd! () (exwm-input--fake-key 'C-k)))
+      :n "K" (cmd! ()
+                   (exwm-input--fake-key 'C-k)
+                   (exwm-evil-insert)))
 
 (defun startup/start-discord (&optional arg)
   (when startup/discord-executable
