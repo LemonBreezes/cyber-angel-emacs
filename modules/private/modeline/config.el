@@ -21,6 +21,7 @@
   :defer t :init
   (add-hook 'doom-first-buffer-hook #'minions-mode)
   :config
+  (setq minions-mode-line-lighter (if (cae-display-graphic-p) "≡" "="))
   (setq minions-demoted-modes
         '(abbrev-mode
           auto-fill-function
