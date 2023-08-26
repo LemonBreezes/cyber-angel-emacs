@@ -2,7 +2,7 @@
 
 (use-package! repeat
   :defer t :init
-  (advice-add #'repeat-mode :around #'doom-shut-up-a)
+  (advice-add #'repeat-mode :around #'cae-hacks-shut-up-a )
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
