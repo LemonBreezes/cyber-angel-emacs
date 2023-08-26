@@ -932,8 +932,6 @@
 
 ;;; Email
 
-(load! "lisp/cae-gnus")
-
 (setq user-full-name "StrawberryTea"
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz")
