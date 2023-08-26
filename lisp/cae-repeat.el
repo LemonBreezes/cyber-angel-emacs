@@ -1,7 +1,7 @@
   ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
 (use-package! repeat
-  :init
+  :defer t :init
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (map! :map help-map "C-r" #'describe-repeat-maps)
