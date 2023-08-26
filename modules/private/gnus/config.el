@@ -5,7 +5,7 @@
 (use-package! gnus
   :commands gnus gnus-unplugged gnus-agent-batch
   :custom
-  (mail-user-agent 'gnus-user-agent)
+  (mail-user-agent 'message-user-agent)
   (gnus-use-cache t)
   (gnus-use-scoring nil)
   (gnus-suppress-duplicates t)
