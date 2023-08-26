@@ -18,6 +18,8 @@
 (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
+(after! bbdb
+  (setq bbdb-file (concat cae-multi-secrets-dir "bbdb")))
 (after! calc
   (setq calc-settings-file (concat cae-multi-data-dir "calc.el")))
 (after! eww
