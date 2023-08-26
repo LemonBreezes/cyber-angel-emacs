@@ -81,40 +81,39 @@
 (use-package! gnus-sum
   :hook (gnus-select-group . gnus-group-set-timestamp)
   :config
-  (setq
+  (when (cae-display-graphic-p)
    ;; Pretty marks
-   ;;gnus-sum-thread-tree-root            "┌ "
-   ;;gnus-sum-thread-tree-false-root      "◌ "
-   ;;gnus-sum-thread-tree-single-indent   "◎ "
-   ;;gnus-sum-thread-tree-vertical        "│"
-   ;;
-   ;;gnus-sum-thread-tree-leaf-with-other "├─►"
-   ;;gnus-sum-thread-tree-single-leaf     "╰─►"
-   gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
-   ;; Loose threads
-   gnus-summary-make-false-root 'adopt
-   gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
-   gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
-   ;; Filling in threads
-   ;; 2 old articles are enough for memory
-   gnus-fetch-old-headers 2
-   gnus-fetch-old-ephemeral-headers 2
-   gnus-build-sparse-threads 'some
-   ;; More threading
-   gnus-show-threads t
-   gnus-thread-indent-level 2
-   gnus-thread-hide-subtree nil
-   ;; Sorting
-   gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-   gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
-   ;; Viewing
-   gnus-view-pseudos 'automatic
-   gnus-view-pseudos-separately t
-   gnus-view-pseudo-asynchronously t
-   ;; No auto select
-   gnus-auto-select-first nil
-   gnus-auto-select-next nil
-   gnus-paging-select-next nil)
+    (setq gnus-sum-thread-tree-root "┌ "
+          gnus-sum-thread-tree-false-root "◌ "
+          gnus-sum-thread-tree-single-indent "◎ "
+          gnus-sum-thread-tree-vertical "│"
+          gnus-sum-thread-tree-leaf-with-other "├─►"
+          gnus-sum-thread-tree-single-leaf "╰─►"))
+  (setq gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
+        ;; Loose threads
+        gnus-summary-make-false-root 'adopt
+        gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
+        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+        ;; Filling in threads
+        ;; 2 old articles are enough for memory
+        gnus-fetch-old-headers 2
+        gnus-fetch-old-ephemeral-headers 2
+        gnus-build-sparse-threads 'some
+        ;; More threading
+        gnus-show-threads t
+        gnus-thread-indent-level 2
+        gnus-thread-hide-subtree nil
+        ;; Sorting
+        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+        gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
+        ;; Viewing
+        gnus-view-pseudos 'automatic
+        gnus-view-pseudos-separately t
+        gnus-view-pseudo-asynchronously t
+        ;; No auto select
+        gnus-auto-select-first nil
+        gnus-auto-select-next nil
+        gnus-paging-select-next nil)
   (map! :map gnus-summary-mode-map
         "<f6>" #'cae-gnus-summary-cheatsheet/body))
 
