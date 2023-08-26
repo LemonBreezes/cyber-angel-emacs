@@ -128,7 +128,6 @@
 
 (use-package! bbdb
   :after (:or gnus message)
-  :defer-incrementally t
   :defer t :config
   (require 'bbdb-com)
   (require 'bbdb-gnus)
