@@ -139,7 +139,7 @@
   (add-hook 'mail-setup-hook 'bbdb-mail-aliases)
   (add-hook 'message-setup-hook 'bbdb-mail-aliases)
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  ;; (add-hook 'list-diary-entries-hook 'bbdb-include-anniversaries)
+  (add-hook 'list-diary-entries-hook 'bbdb-include-anniversaries)
   (setq bbdb-completion-display-record t
         bbdb-default-area-code nil
         bbdb-add-aka t
