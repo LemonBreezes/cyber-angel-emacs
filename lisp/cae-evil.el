@@ -2,9 +2,6 @@
 ;;; lisp/cae-evil.el -*- lexical-binding: t; -*-
 ;; I use a split keyboard and map backspace to my left thumb key.
 ;;(lookup-key evil-normal-state-map doom-localleader-key)
-(map! :map general-override-mode-map
-      :desc "<leader>" :nmv "DEL" #'doom-leader-map
-      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
 (after! evil-easymotion
   (map! :map evilem-map
         "DEL" (lookup-key evilem-map "\s")))
