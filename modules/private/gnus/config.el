@@ -122,8 +122,11 @@
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
+(unless (or (modulep! :email mu4e)
+            (modulep! :email notmuch))
+  (setq mail-user-agent 'gnus-user-agent))
+
 (use-package bbdb
-  :when (modulep! +email)
   :defer-incrementally t
   :defer t :config
   (require 'bbdb-com)
