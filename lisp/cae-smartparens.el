@@ -4,6 +4,7 @@
 ;; code that need to be ran before the `doom!' block to prevent errors that
 ;; happen when `smartparens' is disabled.
 (unless (modulep! :config default +smartparens)
+  (defalias 'sp-local-pair #'ignore)
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :editor lispy)
     (after! lispy
