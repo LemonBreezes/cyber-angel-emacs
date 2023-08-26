@@ -130,42 +130,6 @@ expansion occurs within the parent Emacs session.")
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
-    ;; Fixes focus being lost from EXWM buffers when switching workspaces or
-    ;; buffers.
-    ;;(add-hook 'doom-switch-buffer-hook #'+exwm-refocus-application)
-    ;;(add-hook 'doom-switch-window-hook #'+exwm-refocus-application)
-    ;;(add-hook 'doom-escape-hook #'+exwm-refocus-application)
-    ;;(when (modulep! :ui workspaces)
-    ;;  (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
-
-
-    ;; Set up key translations for using Emacs keybindings in X windows.
-    ;;(unless (modulep! :editor evil)
-    ;;  (setq exwm-input-simulation-keys
-    ;;        '(([?\C-p] . [up])
-    ;;          ([?\C-n] . [down])
-    ;;          ([?\M-w] . [?\C-c])
-    ;;          ([?\C-y] . [?\C-v])
-    ;;          ([?\C-x ?h] . [?\C-a])
-    ;;          ([?\C-e] . [end])
-    ;;          ([?\C-a] . [home])
-    ;;          ([?\C-v] . [next])
-    ;;          ([?\M-v] . [prior])
-    ;;          ([?\C-d] . [delete])
-    ;;          ([?\C-s] . [?\C-k])
-    ;;          ([?\C-k] . [S-end delete])
-    ;;          ([?\C-w] . [?\C-x])       ; Use C-F4 to close tabs in Firefox.
-    ;;          ([?\C-f] . [right])       ; Use F3 to search in Firefox.
-    ;;          ([?\C-x ?\C-s] . [?\C-s])
-    ;;          ([?\C-f] . [right])
-    ;;          ([?\C-b] . [left])
-    ;;          ([?\M-b] . [C-left])
-    ;;          ([?\M-f] . [C-right])
-    ;;          ([?\M-d] . [C-delete])))
-    ;;  (map! :map exwm-mode-map
-    ;;        "C-c C-u" (cmd! (exwm-input--fake-key ?\C-a)
-    ;;                        (exwm-input--fake-key 'backspace))))
-
     ;; For people who run nested Emacs instances within EXWM.
     (setq exwm-replace nil)
 
