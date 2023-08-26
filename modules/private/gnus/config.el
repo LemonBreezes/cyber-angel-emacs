@@ -18,9 +18,7 @@
                                            (nnimap-address "imap.fastmail.com")
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
-                                           (nnimap-expunge 'never)
-                                           (nnimap-split-fancy '(| (any "emacs-devel" "emacs-devel")
-                                                                 "INBOX"))))
+                                           (nnimap-expunge 'never)))
    gnus-large-newsgroup 4000
    network-security-level 'low
 ;;; Startup functions
