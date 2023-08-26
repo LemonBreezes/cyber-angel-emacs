@@ -123,13 +123,14 @@
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
 (use-package bbdb
+  :when (modulep! +email)
   :defer-incrementally t
   :defer t :config
   (require 'bbdb-com)
   (require 'bbdb-gnus)
   (bbdb-initialize 'message 'gnus)
   (bbdb-mua-auto-update-init 'message 'gnus)
-  (setq bbdb-mua-pop-up nil)
+  (setq bbdb-mua-pop-up t)
   (setq bbdb-allow-duplicates t)
   (setq bbdb-pop-up-window-size 5)
   (setq bbdb-ignore-redundant-mails t)
