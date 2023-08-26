@@ -14,8 +14,7 @@
   (which-key-add-keymap-based-replacements 'doom-leader-map
     +misc-applications-prefix "misc-applications"))
 (defvar application-types
-  '(("lookup" "l")
-    ("games" "g")
+  '(("games" "g")
     ("eyecandy" "e")
     ("system" "s")
     ("external-apps" "x")
