@@ -892,12 +892,13 @@
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
-;;; Org
+;;; Notes, GTD, Org, etc.
 
 (setq doom-scratch-initial-major-mode 'org-mode)
 
 (after! calendar
-  (setq calendar-week-start-day 1))
+  (setq calendar-week-start-day 1
+        calendar-mark-diary-entries-flag t))
 
 (after! org
   (setq org-directory "~/org/"
