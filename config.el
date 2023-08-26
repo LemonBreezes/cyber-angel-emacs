@@ -2,7 +2,7 @@
 
 (defvar cae-config-finished-loading nil)
 
-;; ;;; Stuff that should not be disabled.
+;;; Stuff that should not be disabled.
 
 ;; (load! "lisp/cae-bindings")
 ;; (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
