@@ -49,7 +49,6 @@
 
 ;; Group mode commands for Gnus
 (use-package! gnus-group
-  :ensure nil
   :hook (gnus-group-mode . gnus-topic-mode)
   :custom
   ;;          indentation ------------.
