@@ -1,7 +1,6 @@
 ;;; lisp/cae-gnus.el -*- lexical-binding: t; -*-
 
 (use-package! gnus
-  :ensure nil
   :commands gnus gnus-unplugged gnus-agent-batch
   :custom
   (gnus-use-cache t)
@@ -12,14 +11,8 @@
   (gnus-interactive-exit 'quiet)
   (gnus-inhibit-startup-message t)
   (gnus-select-method '(nnnil ""))
-  (gnus-secondary-select-methods '((nntp "gmane" (nntp-address "news.gmane.io"))
-                                   (nntp "nntp.lore.kernel.org")
-                                   (nnimap "GMail"
-                                           (nnimap-inbox "INBOX")
-                                           (nnimap-address "imap.gmail.com")
-                                           (nnimap-server-port "imaps")
-                                           (nnimap-stream ssl)
-                                           (nnimap-expunge 'never))))
+  (gnus-secondary-select-methods '((nntp "news.gmane.io")
+                                   (nntp "news.eternal-september.org")))
   ;;; Startup functions
   (gnus-save-killed-list nil)
   (gnus-check-new-newsgroups nil)
@@ -71,7 +64,6 @@
 
 ;; Summary mode commands for Gnus
 (use-package! gnus-sum
-  :ensure nil
   :hook (gnus-select-group . gnus-group-set-timestamp)
   :custom
   ;; Pretty marks
