@@ -123,9 +123,9 @@
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
 (use-package bbdb
+  :defer-incrementally t
   :defer t :config
   (require 'bbdb-com)
-  (require 'bbdb-anniv)
   (require 'bbdb-gnus)
   (bbdb-initialize 'message 'gnus)
   (bbdb-mua-auto-update-init 'message 'gnus)
@@ -139,7 +139,6 @@
   (add-hook 'mail-setup-hook 'bbdb-mail-aliases)
   (add-hook 'message-setup-hook 'bbdb-mail-aliases)
   (add-hook 'bbdb-notice-mail-hook 'bbdb-auto-notes)
-  (add-hook 'list-diary-entries-hook 'bbdb-include-anniversaries)
   (setq bbdb-completion-display-record t
         bbdb-default-area-code nil
         bbdb-add-aka t
