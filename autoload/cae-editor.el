@@ -361,7 +361,3 @@ This is the format used on Reddit for code blocks."
                             (lispy-comment))
                            (t (call-interactively #'comment-or-uncomment-region)))
                      (avy-pop-mark))))
-
-(defun cae-pop-last-buffer ()
-  (interactive)
-  (pop-to-buffer (other-buffer (current-buffer) t)))
