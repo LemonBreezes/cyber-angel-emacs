@@ -692,6 +692,7 @@
           avy-keys (cae-keyboard-remap
                     '(?a ?s ?d ?f ?g
                       ?h ?j ?k ?l ?\;))
+          avy-background (cae-display-graphic-p)
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
