@@ -69,7 +69,10 @@
   ;;  *   marked articles --. | | | | |
   ;;                        | | | | | |  Ticked    New     Unread  open-status Group
   (gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n")
-  (gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)))
+  (gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet))
+  :config
+  (map! :map gnus-group-mode-map
+        "<f6>" #'cae-gnus-group-cheatsheet/body))
 
 ;; Summary mode commands for Gnus
 (use-package! gnus-sum
@@ -80,7 +83,7 @@
   (gnus-sum-thread-tree-false-root      "◌ ")
   (gnus-sum-thread-tree-single-indent   "◎ ")
   (gnus-sum-thread-tree-vertical        "│")
-  (gnus-sum-thread-tree-indent          "  ")
+
   (gnus-sum-thread-tree-leaf-with-other "├─►")
   (gnus-sum-thread-tree-single-leaf     "╰─►")
   (gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n")
@@ -107,4 +110,13 @@
   ;; No auto select
   (gnus-auto-select-first nil)
   (gnus-auto-select-next nil)
-  (gnus-paging-select-next nil))
+  (gnus-paging-select-next nil)
+  :config
+  (map! :map gnus-summary-mode-map
+        "<f6>" #'cae-gnus-summary-cheatsheet/body))
+
+(use-package! gnus-art
+  :defer t
+  :config
+  (map! :map gnus-article-mode-map
+        "<f6>" #'cae-gnus-article-cheatsheet/body))
