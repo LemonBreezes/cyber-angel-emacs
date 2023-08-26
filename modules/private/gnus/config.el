@@ -126,7 +126,8 @@
             (modulep! :email notmuch))
   (setq mail-user-agent 'gnus-user-agent))
 
-(use-package bbdb
+(use-package! bbdb
+  :after (:or gnus message)
   :defer-incrementally t
   :defer t :config
   (require 'bbdb-com)
