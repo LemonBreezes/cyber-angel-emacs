@@ -14,7 +14,7 @@
   (gnus-secondary-select-methods '((nntp "news.gmane.io")
                                    (nntp "news.eternal-september.org")
                                    (nnimap "fastmail"
-                                           (nnimap-inbox "Inbox")
+                                           (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
