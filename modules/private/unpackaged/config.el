@@ -5,8 +5,9 @@
 
 ;;; Org
 (when (modulep! :lang org)
-  (map! :map org-mode-map
-        "<return>" #'cae-unpackaged-org-return-dwim)
+  (after! org
+    (map! :map org-mode-map
+          "<return>" #'cae-unpackaged-org-return-dwim))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
