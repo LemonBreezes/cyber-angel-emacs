@@ -69,7 +69,8 @@
   ("^" gnus-group-enter-server-mode)
   ("m" gnus-group-new-mail)
   ("#" gnus-topic-mark-topic)
-  ("q" nil))
+  ("q" nil)
+  ("<f6>" nil))
 
 ;;;###autoload (autoload 'cae-gnus-summary-cheatsheet/body "autoload/cae-cheatsheets" nil t"
 (defhydra cae-gnus-summary-cheatsheet (:color blue)
@@ -96,7 +97,8 @@
   ("w" gnus-summary-wide-reply)
   ("#" gnus-topic-mark-topic)
   ("G" dianyou-group-make-nnir-group)
-  ("q" nil))
+  ("q" nil)
+  ("<f6>" nil))
 
 ;;;###autoload (autoload 'cae-gnus-article-cheatsheet/body "autoload/cae-cheatsheets" nil t"
 (defhydra cae-gnus-article-cheatsheet (:color blue)
@@ -119,4 +121,5 @@
   ("b" my-w3m-open-link-or-image-or-url)
   ("f" w3m-lnum-follow)
   ("g" w3m-lnum-goto)
-  ("q" nil))
+  ("q" nil)
+  ("<f6>" nil))
