@@ -8,7 +8,11 @@
 (define-minor-mode startup/discord-mode
   "Minor mode for Discord."
   :init-value nil
+  :keymap (make-sparse-keymap)
   :global nil)
+
+(map! :map startup/discord-mode-map
+      :n "K" (cmd! () (exwm-input--fake-key 'C-k)))
 
 (defun startup/start-discord (&optional arg)
   (when startup/discord-executable
