@@ -933,6 +933,7 @@
       mail-source-directory "~/.mail/")
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
+(setq compose-mail-user-agent-warnings nil)
 (after! sendmail
   (setq send-mail-function #'async-smtpmail-send-it))
 (after! message
