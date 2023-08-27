@@ -20,3 +20,27 @@
   ("dd" bubbles-set-game-difficult "Difficult" :column "Set difficulty")
   ("du" bubbles-set-game-userdefined "Userdefined" :column "Set difficulty")
   ("S" bubbles-save-settings "Save settings" :column "Misc"))
+
+;;;###autoload
+(defun +bubbles ()
+  (interactive)
+  (if (modulep! :ui workspaces)
+      ;; delete current workspace if empty
+      ;; this is useful when mu4e is in the daemon
+      ;; as otherwise you can accumulate empty workspaces
+      (progn
+        (unless (+workspace-buffer-list)
+          (+workspace-delete (+workspace-current-name)))
+        (+workspace-switch +bubbles-workspace-name t))
+    (setq +bubbles--old-wconf (current-window-configuration))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer)))
+  (call-interactively #'bubbles))
+
+;;;###autoload
+(defun +bubbles-quit ()
+  (interactive)
+  (if (modulep! :ui workspaces)
+      (+workspace/delete +bubbles-workspace-name)
+    (set-window-configuration +bubbles--old-wconf))
+  (kill-buffer "*bubbles*"))
