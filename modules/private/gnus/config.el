@@ -179,8 +179,7 @@
   :after gnus)
 
 (use-package! bbdb
-  :after gnus
-  :init
+  :after gnus :init
   (add-hook 'message-mode-hook
             (function (lambda()
                         (local-set-key (kbd "<tab>") 'bbdb-complete-mail))))
