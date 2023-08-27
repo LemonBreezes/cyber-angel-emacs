@@ -15,19 +15,23 @@
 (defun +snake (&optional arg)
   (interactive "P")
   (if arg
-    (setq +snake--old-wconf nil)
-  (if (modulep! :ui workspaces)
-      ;; delete current workspace if empty
-      ;; this is useful when mu4e is in the daemon
-      ;; as otherwise you can accumulate empty workspaces
-      (progn
-        (unless (+workspace-buffer-list)
-          (+workspace-delete (+workspace-current-name)))
-        (+workspace-switch +snake-workspace-name t))
-    (setq +snake--old-wconf (current-window-configuration))
-    (delete-other-windows)
-    (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'snake))
+      (setq +snake--old-wconf nil)
+    (if (modulep! :ui workspaces)
+        ;; delete current workspace if empty
+        ;; this is useful when mu4e is in the daemon
+        ;; as otherwise you can accumulate empty workspaces
+        (progn
+          (unless (+workspace-buffer-list)
+            (+workspace-delete (+workspace-current-name)))
+          (+workspace-switch +snake-workspace-name t))
+      (setq +snake--old-wconf (current-window-configuration))
+      (delete-other-windows)
+      (switch-to-buffer (doom-fallback-buffer))))
+  (call-interactively #'snake)
+  (with-current-buffer (get-buffer-create snake-score-file)
+    (local-set-key (kbd "q") #'+snake-quit)
+    (when (featurep 'evil)
+      (evil-local-set-key 'normal (kbd "q") #'+snake-quit))))
 
 ;;;###autoload
 (defun +snake-quit ()
