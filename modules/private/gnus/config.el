@@ -25,6 +25,7 @@
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
    gnus-agent-queue-mail nil
+   gnus-agent-expire-days 90
    gnus-always-read-dribble-file t
    gnus-use-cache t
    gnus-use-scoring nil
@@ -89,7 +90,7 @@
 ;;; Cache interface for Gnus
    gnus-cache-enter-articles '(ticked dormant unread)
    gnus-cache-remove-articles '(read)
-   gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
+   gnus-cacheable-groups "^\\(nntp\\|\\)"))
 
 ;; Group mode commands for Gnus
 (use-package! gnus-group
