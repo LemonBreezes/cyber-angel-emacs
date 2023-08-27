@@ -8,7 +8,11 @@
   (after! org
     (map! :map org-mode-map
           "<return>" #'cae-unpackaged-org-return-dwim
-          "RET" #'cae-unpackaged-org-return-dwim))
+          "RET" #'cae-unpackaged-org-return-dwim)
+    (when (modulep! :editor evil)
+      (map! :map evil-org-mode-map
+            :i "<return>" #'cae-unpackaged-org-return-dwim
+            :i "RET" #'cae-unpackaged-org-return-dwim)))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
