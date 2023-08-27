@@ -23,7 +23,7 @@
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
 (add-hook 'pre-command-hook
-          (cae-defun cae-tty-setup-frame ()
+          (cae-defun cae-tty-setup-posframe-h ()
             "Setup frame for TTY."
             (if (cae-display-graphic-p)
                 (when (and (boundp 'vertico-posframe-mode)
