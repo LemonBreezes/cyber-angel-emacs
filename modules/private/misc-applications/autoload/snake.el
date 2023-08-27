@@ -27,18 +27,22 @@
       (setq +snake--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'snake)
-  (with-current-buffer (get-buffer-create snake-score-file)
+  (with-current-buffer (find-file-noselect (expand-file-name "snake-scores" shared-game-score-directory))
     (local-set-key (kbd "q") #'+snake-quit)
     (when (featurep 'evil)
-      (evil-local-set-key 'normal (kbd "q") #'+snake-quit))))
+      (evil-local-set-key 'normal (kbd "q") #'+snake-quit)))
+  (call-interactively #'snake))
 
 ;;;###autoload
 (defun +snake-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-    (when (+workspace-exists-p +snake-workspace-name)
-      (+workspace/delete +snake-workspace-name))
-  (when +snake--old-wconf
-    (set-window-configuration +snake--old-wconf)))
-  (kill-buffer "*Snake*"))
+      (when (+workspace-exists-p +snake-workspace-name)
+        (+workspace/delete +snake-workspace-name))
+    (when +snake--old-wconf
+      (set-window-configuration +snake--old-wconf)))
+  (kill-buffer "*Snake*")
+  (when-let ((saves-buf (get-file-buffer (expand-file-name "snake-scores" shared-game-score-directory))))
+    (with-current-buffer saves-buf
+      (save-buffer)
+      (kill-buffer))))
