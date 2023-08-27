@@ -17,6 +17,7 @@
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "news.gmane.io")
+                                   (nnreddit "")
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
