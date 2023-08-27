@@ -34,7 +34,7 @@
                                            (nnimap-stream ssl)
                                            (nnimap-expunge never)
                                            (nnimap-split-methods default)))
-   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
+   gnus-registry-ignored-groups nil ;;'(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
    gnus-uncacheable-groups "^nnml"
