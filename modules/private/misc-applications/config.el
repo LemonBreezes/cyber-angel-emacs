@@ -91,7 +91,7 @@
   (defalias 'elfeed-toggle-star
     (elfeed-expose #'elfeed-search-toggle-all 'star))
   (setq elfeed-search-filter
-        "@2-week-ago +unread")
+        "@2-week-ago +unread ~reddit.com/r/")
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
