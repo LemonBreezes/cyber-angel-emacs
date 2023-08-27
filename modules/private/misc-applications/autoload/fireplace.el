@@ -24,3 +24,11 @@
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer)))
   (call-interactively #'fireplace))
+
+
+;;;###autoload
+(defun +fireplace-quit ()
+  (interactive)
+  (if (modulep! :ui workspaces)
+      (+workspace/delete +fireplace-workspace-name)
+    (set-window-configuration +fireplace--old-wconf)))
