@@ -11,6 +11,7 @@
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
+;; Remove some hooks that don't work in the terminal.
 (unless (cae-display-graphic-p)
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     #'vi-tilde-fringe-mode)
