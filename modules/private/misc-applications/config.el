@@ -547,4 +547,6 @@
   (setq mpc-host system-name)
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
-        "<f6>" #'+mpc-hydra/body))
+        "<f6>" #'+mpc-hydra/body
+        :n "C-j" #'evil-collection-mpc-move-down
+        :n "C-k" #'evil-collection-mpc-move-up))
