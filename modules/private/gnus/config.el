@@ -33,6 +33,7 @@
                                            (nnimap-split-fancy '(| (any "emacs-devel" "emacs-devel")
                                                                  (from "look@strawberrytea.xyz" "sent")
                                                                  "INBOX"))))
+   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
    gnus-uncacheable-groups "^nnml"
