@@ -6,7 +6,7 @@
   ("C-c C-k" speed-type-complete "Complete" :exit t))
 
 ;;;###autoload
-(defun +speed-type (&optional arg)
+(defun +speed-type-text (&optional arg)
   (interactive "P")
   (if arg
       (setq +speed-type--old-wconf nil)
