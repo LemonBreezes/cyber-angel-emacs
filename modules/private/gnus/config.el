@@ -32,6 +32,8 @@
                                            (nnimap-split-methods
                                             (("nnimap+fastmail:Sent" "From:.*look@strawberrytea\\.xyz")
                                              ("nnimap+fastmail:Sent" "Bcc:.*look@strawberrytea\\.xyz")))))
+   gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
+                      ("Gnus"))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
