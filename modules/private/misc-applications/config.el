@@ -424,8 +424,12 @@
 
 (use-package! zone
   :defer t :defer-incrementally t :init
+  (defvar +zone-workspace-name "*zone*"
+    "The name of the workspace to use for `zone'.")
+  (defvar +zone--old-wconf nil
+    "The window configuration to restore after quitting `zone'.")
   (map! :map +misc-applications-eyecandy-map
-        "z" #'zone-choose)
+        "z" #'+zone-choose)
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
