@@ -18,12 +18,6 @@
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 
-;; Packages I have patched.
-(when (and (modulep! :lang org)
-           (modulep! :editor evil))
-  (package! evil-org :recipe
-    (:host github :repo "LemonBreezes/evil-org-mode" :branch "enable-lexical-binding")))
-
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl))
@@ -37,6 +31,7 @@
 (package! beacon)
 (package! iscroll)
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
+(package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -69,6 +64,7 @@
 (package! logos)
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! smart-semicolon)
+(package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)

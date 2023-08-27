@@ -11,7 +11,6 @@
 (when (modulep! :editor multiple-cursors)
   (package! mc-extras))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
-(package! restore-point)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
