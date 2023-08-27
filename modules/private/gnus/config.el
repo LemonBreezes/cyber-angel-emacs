@@ -162,7 +162,7 @@
   (require 'bbdb-gnus)
   (bbdb-initialize 'message 'gnus)
   (bbdb-mua-auto-update-init 'message 'gnus)
-  (setq bbdb-mua-pop-up t)
+  (setq bbdb-mua-pop-up nil)
   (setq bbdb-allow-duplicates t)
   (setq bbdb-pop-up-window-size 5)
   (setq bbdb-ignore-redundant-mails t)
