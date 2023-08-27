@@ -521,10 +521,15 @@
       "s" "SomaFM"))
   (add-hook 'somafm-mode-hook #'hl-line-mode)
   (add-hook 'somafm-mode-hook #'+misc-applications-hide-cursor-h)
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'somafm-mode evil-snipe-disabled-modes)))
   :config
   (map! :map somafm-mode-map
         "<f6>" #'+somafm-hydra/body
-        :ng "q" #'quit-window))
+        :ng "q" #'quit-window
+        :n "l" #'somafm--sort
+        :n "s" #'somafm--stop))
 
 (use-package! mpc
   :defer t :init
