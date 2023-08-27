@@ -90,6 +90,8 @@
   :config
   (defalias 'elfeed-toggle-star
     (elfeed-expose #'elfeed-search-toggle-all 'star))
+  (setq elfeed-search-filter
+        "@2-week-ago !+reddit")
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
