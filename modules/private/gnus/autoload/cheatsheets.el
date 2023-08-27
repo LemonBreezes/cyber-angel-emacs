@@ -1,6 +1,6 @@
 ;;; private/gnus/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'cae-gnus-group-cheatsheet/body "private/misc-applications/autoload/cae-cheatsheets" nil t)
+;;;###autoload (autoload 'cae-gnus-group-cheatsheet/body "private/gnus/autoload/cae-cheatsheets" nil t)
 (defhydra cae-gnus-group-cheatsheet (:color blue)
   "
 [_A_] Remote groups (A A) [_g_] Refresh
@@ -19,7 +19,7 @@
   ("q" nil)
   ("<f6>" nil))
 
-;;;###autoload (autoload 'cae-gnus-summary-cheatsheet/body "private/misc-applications/autoload/cae-cheatsheets" nil t"
+;;;###autoload (autoload 'cae-gnus-summary-cheatsheet/body "private/gnus/autoload/cae-cheatsheets" nil t"
 (defhydra cae-gnus-summary-cheatsheet (:color blue)
   "
 [_s_] Show thread   [_F_] Forward (C-c C-f)
@@ -47,7 +47,7 @@
   ("q" nil)
   ("<f6>" nil))
 
-;;;###autoload (autoload 'cae-gnus-article-cheatsheet/body "private/misc-applications/autoload/cae-cheatsheets" nil t"
+;;;###autoload (autoload 'cae-gnus-article-cheatsheet/body "private/gnus/autoload/cae-cheatsheets" nil t"
 (defhydra cae-gnus-article-cheatsheet (:color blue)
   "
 [_o_] Save attachment        [_F_] Forward
