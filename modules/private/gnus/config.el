@@ -32,8 +32,10 @@
                                            (nnimap-address "imap.fastmail.com")
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
+                                           (nnimap-streaming t)
                                            (nnimap-expunge never)
-                                           (nnimap-split-methods default)))
+                                           (nnimap-split-methods
+                                            (("nnimap+fastmail:Sent" "^From::.*look@strawberrytea.xyz.*$")))))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
