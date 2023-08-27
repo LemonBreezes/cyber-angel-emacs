@@ -13,7 +13,9 @@
   (interactive)
   (if (get-buffer-window elfeed-log-buffer-name)
       (delete-window (get-buffer-window elfeed-log-buffer-name))
-    (pop-to-buffer elfeed-log-buffer-name)))
+    (pop-to-buffer elfeed-log-buffer-name)
+    (when (featurep 'evil)
+      (evil-local-set-key 'normal (kbd "q") #'quit-window))))
 
 ;;;###autoload (autoload 'cae-elfeed-hydra/body "private/misc-applications/autoload/elfeed" nil t)
 (eval
