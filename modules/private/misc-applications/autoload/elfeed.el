@@ -23,6 +23,7 @@
  `(defhydra cae-elfeed-hydra (:color pink :foreign-keys run)
     ("<f6>" nil "Exit" :exit t)
     ("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs" :column "Custom filters")
+    ("E" (elfeed-search-set-filter "@6-months-ago +reddit") "reddit" :column "Custom filters")
     ("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube" :column "Custom filters")
     ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred" :column "Custom filters")
     ("a" (elfeed-search-set-filter "@6-months-ago") "All" :column "Custom filters")
