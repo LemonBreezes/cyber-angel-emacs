@@ -164,3 +164,6 @@
         ;;            "INBOX")))
         )))
   (add-hook 'message-header-setup-hook #'cae-message-header-setup-hook))
+
+(use-package! gnus-dired
+  :hook (dired-mode . gnus-dired-mode))
