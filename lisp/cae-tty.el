@@ -31,6 +31,7 @@
                          (vertico-posframe-mode +1))
                        (when (and (boundp 'helm-display-function)
                                   (not (eq helm-display-function #'helm-posframe-display)))
+                         (posframe-delete-all)
                          (helm-posframe-enable)))
               (when (bound-and-true-p vertico-posframe-mode)
                 (vertico-posframe-mode -1))
