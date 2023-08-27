@@ -938,7 +938,7 @@
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it
         message-mail-user-agent t
-        message-user-agent 'sendmail-user-agent)
+        gnus-agent-queue-mail nil)
   (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
