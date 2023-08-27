@@ -22,6 +22,7 @@
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
+;; Automatically enable & disable the posframe when using multiple client frames.
 (add-hook 'pre-command-hook
           (cae-defun cae-tty-setup-posframe-h ()
             "Setup frame for TTY."
