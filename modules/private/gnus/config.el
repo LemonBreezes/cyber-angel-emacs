@@ -7,7 +7,7 @@
 (use-package! gnus
   :commands gnus-unplugged
   :config
-  (setq
+  (setq!
    gnus-use-cache t
    gnus-use-scoring nil
    gnus-suppress-duplicates t
@@ -16,16 +16,24 @@
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
-   gnus-secondary-select-methods '((nntp "news.gmane.io")
+   gnus-secondary-select-methods '((nntp "Gmane"
+                                    (nntp-address "news.gmane.org"))
+                                   (nntp "Eternal September"
+                                         (nntp-address "news.eternal-september.org"))
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)))
+   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
+   gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
+   gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
+   gnus-uncacheable-groups "^nnml"
    gnus-large-newsgroup 4000
    network-security-level 'low
    gnus-permanently-visible-groups '("INBOX")
+   gnus-activate-level 2
 ;;; Startup functions
    gnus-save-killed-list nil
    gnus-check-new-newsgroups nil
@@ -72,7 +80,7 @@
   ;;  %          new mail ----. | | | |
   ;;  *   marked articles --. | | | | |
   ;;                        | | | | | |  Ticked    New     Unread  open-status Group
-  (setq
+  (setq!
    gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
    gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet))
   (map! :map gnus-group-mode-map
@@ -84,37 +92,37 @@
   :config
   (when (cae-display-graphic-p)
    ;; Pretty marks
-    (setq gnus-sum-thread-tree-root "┌ "
+    (setq! gnus-sum-thread-tree-root "┌ "
           gnus-sum-thread-tree-false-root "◌ "
           gnus-sum-thread-tree-single-indent "◎ "
           gnus-sum-thread-tree-vertical "│"
           gnus-sum-thread-tree-leaf-with-other "├─►"
           gnus-sum-thread-tree-single-leaf "╰─►"))
-  (setq gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
-        ;; Loose threads
-        gnus-summary-make-false-root 'adopt
-        gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
-        gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
-        ;; Filling in threads
-        ;; 2 old articles are enough for memory
-        gnus-fetch-old-headers 2
-        gnus-fetch-old-ephemeral-headers 2
-        gnus-build-sparse-threads 'some
-        ;; More threading
-        gnus-show-threads t
-        gnus-thread-indent-level 2
-        gnus-thread-hide-subtree nil
-        ;; Sorting
-        gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-        gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
-        ;; Viewing
-        gnus-view-pseudos 'automatic
-        gnus-view-pseudos-separately t
-        gnus-view-pseudo-asynchronously t
-        ;; No auto select
-        gnus-auto-select-first nil
-        gnus-auto-select-next nil
-        gnus-paging-select-next nil)
+  (setq! gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
+         ;; Loose threads
+         gnus-summary-make-false-root 'adopt
+         gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
+         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+         ;; Filling in threads
+         ;; 2 old articles are enough for memory
+         gnus-fetch-old-headers 2
+         gnus-fetch-old-ephemeral-headers 2
+         gnus-build-sparse-threads 'some
+         ;; More threading
+         gnus-show-threads t
+         gnus-thread-indent-level 2
+         gnus-thread-hide-subtree nil
+         ;; Sorting
+         gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+         gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
+         ;; Viewing
+         gnus-view-pseudos 'automatic
+         gnus-view-pseudos-separately t
+         gnus-view-pseudo-asynchronously t
+         ;; No auto select
+         gnus-auto-select-first nil
+         gnus-auto-select-next nil
+         gnus-paging-select-next nil)
   (map! :map gnus-summary-mode-map
         "<f6>" #'cae-gnus-summary-cheatsheet/body))
 
