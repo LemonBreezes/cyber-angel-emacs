@@ -397,6 +397,10 @@
 
 (use-package! fireplace
   :defer t :init
+  (defvar +fireplace-workspace-name "*fireplace*"
+    "The name of the workspace to use for fireplace.")
+  (defvar +fireple--old-wconf nil
+    "The window configuration to restore after quitting fireplace.")
   (map! :map +misc-applications-eyecandy-map
         "f" #'+fireplace)
   :config
