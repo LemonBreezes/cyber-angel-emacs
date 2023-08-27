@@ -936,7 +936,8 @@
 (after! sendmail
   (setq send-mail-function #'sendmail-query-once))
 (after! message
-  (setq message-send-mail-function #'async-smtpmail-send-it)
+  (setq message-send-mail-function #'async-smtpmail-send-it
+        message-mail-user-agent t)
   (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
