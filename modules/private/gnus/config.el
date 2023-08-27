@@ -149,7 +149,7 @@
 
 (use-package! message-mailer
   :defer t :config
-  (defun my-message-header-setup-hook ()
+  (defun cae-message-header-setup-hook ()
     (message-remove-header "From")
     (let ((gcc (message-field-value "Gcc")))
       (when (or (null gcc)
@@ -163,4 +163,4 @@
         ;;              "mail.sent"
         ;;            "INBOX")))
         )))
-  (add-hook 'message-header-setup-hook 'my-message-header-setup-hook))
+  (add-hook 'message-header-setup-hook 'cae-message-header-setup-hook))
