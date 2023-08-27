@@ -32,8 +32,3 @@
     (when +speed-type--old-wconf
       (set-window-configuration +speed-type--old-wconf)))
   (kill-buffer "*dungeon*"))
-
-;;;###autoload
-(defun +evil-insert-a (&rest _)
-  (when (modulep! :editor evil)
-    (evil-insert-state)))
