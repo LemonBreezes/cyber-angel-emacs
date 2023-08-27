@@ -108,7 +108,8 @@
         :ng "Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube"))
         :ng "*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star"))
         :ng "a" (cmd! () (elfeed-search-set-filter "@6-months-ago"))
-        :ng "T" (cmd! () (elfeed-search-set-filter "@1-day-ago")))
+        :ng "T" (cmd! () (elfeed-search-set-filter "@1-day-ago"))
+        :ng "t" #'mark-whole-buffer)
   (map! :map elfeed-search-mode-map
         "<f6>" #'cae-elfeed-hydra/body
         ;; Elfeed maps `h' to `describe-mode', which is not as good.
