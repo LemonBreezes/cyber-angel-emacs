@@ -30,22 +30,25 @@
         ;; In the case of +tng, TAB should be smart regarding completion;
         ;; However, it should otherwise behave like normal, whatever normal was.
         tab-always-indent (if (modulep! +tng) 'complete tab-always-indent))
+  (when (modulep! :tools lsp)
+    (advice-add #'lsp-completion-at-point :around #'cape-wrap-noninterruptible))
   (when (modulep! +orderless)
     (cond ((modulep! :tools lsp +eglot) (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
-          ((modulep! :tools lsp) (add-hook 'lsp-completion-mode-hook
-                                           (defun doom--use-orderless-lsp-capf ()
-                                             (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-                                                   '(orderless)))))))
+          ((modulep! :tools lsp)
+           (add-hook 'lsp-completion-mode-hook
+                     (defun doom--use-orderless-lsp-capf ()
+                       (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+                             '(orderless)))))))
   (map! (:unless (modulep! +tng)
-          "C-SPC" #'completion-at-point)
+         "C-SPC" #'completion-at-point)
         (:map 'corfu-map
-              (:when (modulep! +orderless)
-                "C-SPC" #'corfu-insert-separator)
-              (:when (modulep! +tng)
-                [tab] #'corfu-next
-                [backtab] #'corfu-previous
-                "TAB" #'corfu-next
-                "S-TAB" #'corfu-previous)))
+         (:when (modulep! +orderless)
+          "C-SPC" #'corfu-insert-separator)
+         (:when (modulep! +tng)
+          [tab] #'corfu-next
+          [backtab] #'corfu-previous
+          "TAB" #'corfu-next
+          "S-TAB" #'corfu-previous)))
 
   (when (modulep! :editor evil)
     (evil-collection-define-key 'insert 'corfu-map
