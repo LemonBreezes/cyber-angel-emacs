@@ -274,7 +274,8 @@
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
         "<f6>" #'+proced-hydra/body
-        "c" #'proced-mark-children))
+        "c" #'proced-mark-children
+        :n "gr" #'revert-buffer))
 
 
 ;;; Insert
