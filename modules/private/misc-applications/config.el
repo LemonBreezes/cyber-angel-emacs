@@ -96,12 +96,15 @@
         "?" #'describe-mode
         :map elfeed-search-mode-map
         "?" #'describe-mode
-        "q" #'+elfeed-quit)
-  (when (modulep! :ui hydra)
-    (map! :map elfeed-search-mode-map
-          "<f6>" #'cae-elfeed-hydra/body
-          ;; Elfeed maps `h' to `describe-mode', which is not as good.
-          "h" #'cae-elfeed-hydra/body))
+        :ng "q" #'+elfeed-quit
+        :n "b" #'elfeed-search-browse-url
+        :n "m" #'elfeed-toggle-star
+        :n "F" #'elfeed-tube-fetch
+        :n "l" #'+elfeed-toggle-log-buffer)
+  (map! :map elfeed-search-mode-map
+        "<f6>" #'cae-elfeed-hydra/body
+        ;; Elfeed maps `h' to `describe-mode', which is not as good.
+        "h" #'cae-elfeed-hydra/body)
 
   (use-package! elfeed-tube
     :config
