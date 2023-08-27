@@ -1,155 +1,155 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
-;;(unless (or (modulep! :email mu4e)
-;;            (modulep! :email notmuch))
-;;  (map! :leader :desc "Gnus" "o m" #'=gnus))
-;;
-;;(use-package! gnus
-;;  :commands gnus-unplugged
-;;  :config
-;;  (setq!
-;;   message-subscribed-address-functions '(gnus-find-subscribed-addresses)
-;;   gnus-use-cache t
-;;   gnus-use-scoring nil
-;;   gnus-suppress-duplicates t
-;;   gnus-novice-user t
-;;   gnus-expert-user t
-;;   gnus-interactive-exit 'quiet
-;;   gnus-inhibit-startup-message t
-;;   gnus-select-method '(nnnil "")
-;;   gnus-secondary-select-methods '((nntp "Gmane"
-;;                                    (nntp-address "news.gmane.io"))
-;;                                   (nntp "Eternal September"
-;;                                         (nntp-address "news.eternal-september.org"))
-;;                                   (nnimap "fastmail"
-;;                                           (nnimap-inbox "INBOX")
-;;                                           (nnimap-address "imap.fastmail.com")
-;;                                           (nnimap-server-port 993)
-;;                                           (nnimap-stream ssl)
-;;                                           (nnimap-expunge 'never)))
-;;   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
-;;   gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
-;;   gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
-;;   gnus-uncacheable-groups "^nnml"
-;;   gnus-large-newsgroup 4000
-;;   network-security-level 'low
-;;   gnus-permanently-visible-groups "INBOX"
-;;   gnus-activate-level 2
-;;;;; Startup functions
-;;   gnus-save-killed-list nil
-;;   gnus-check-new-newsgroups nil
-;;   ;; No other newsreader is used.
-;;   gnus-save-newsrc-file nil
-;;   gnus-read-newsrc-file nil
-;;   gnus-subscribe-newsgroup-method 'gnus-subscribe-interactively
-;;   ;; Emacs 28 introduces a unified query lang
-;;   gnus-search-use-parsed-queries t
-;;;;; Article mode for Gnus
-;;   gnus-visible-headers (rx line-start (or "From"
-;;                                           "Subject"
-;;                                           "Mail-Followup-To"
-;;                                           "Date"
-;;                                           "To"
-;;                                           "Cc"
-;;                                           "Newsgroups"
-;;                                           "User-Agent"
-;;                                           "X-Mailer"
-;;                                           "X-Newsreader")
-;;                            ":")
-;;   gnus-article-sort-functions '((not gnus-article-sort-by-number)
-;;                                 (not gnus-article-sort-by-date))
-;;   gnus-article-browse-delete-temp t
-;;   gnus-article-show-cursor t
-;;   ;; Display more MINE stuff
-;;   gnus-mime-display-multipart-related-as-mixed t
-;;;;; Asynchronous support for Gnus
-;;   gnus-asynchronous t
-;;   gnus-use-header-prefetch t
-;;;;; Cache interface for Gnus
-;;   gnus-cache-enter-articles '(ticked dormant unread)
-;;   gnus-cache-remove-articles '(read)
-;;   gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
-;;
-;;;; Group mode commands for Gnus
-;;(use-package! gnus-group
-;;  :init
-;;  (autoload 'gnus-topic-mode "gnus-topic")
-;;  :defer t :hook
-;;  (gnus-group-mode . gnus-topic-mode)
-;;  :config
-;;  ;;          indentation ------------.
-;;  ;;  #      process mark ----------. |
-;;  ;;                level --------. | |
-;;  ;;           subscribed ------. | | |
-;;  ;;  %          new mail ----. | | | |
-;;  ;;  *   marked articles --. | | | | |
-;;  ;;                        | | | | | |  Ticked    New     Unread  open-status Group
-;;  (setq!
-;;   gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
-;;   gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet))
-;;  (map! :map gnus-group-mode-map
-;;        "<f6>" #'cae-gnus-group-cheatsheet/body))
-;;
-;;;; Summary mode commands for Gnus
-;;(use-package! gnus-sum
-;;  :hook (gnus-select-group . gnus-group-set-timestamp)
-;;  :config
-;;  (when (cae-display-graphic-p)
-;;    ;; Pretty marks
-;;    (setq! gnus-sum-thread-tree-false-root nil
-;;           gnus-sum-thread-tree-single-indent nil
-;;           gnus-sum-thread-tree-root nil
-;;           gnus-sum-thread-tree-vertical "│ "
-;;           gnus-sum-thread-tree-leaf-with-other "├── "
-;;           gnus-sum-thread-tree-single-leaf "└── "
-;;           gnus-sum-thread-tree-indent " "
-;;           gnus-sum-thread-tree-single-indent nil))
-;;  (setq! gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
-;;         ;; Loose threads
-;;         gnus-summary-make-false-root 'adopt
-;;         gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
-;;         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
-;;         ;; Filling in threads
-;;         ;; 2 old articles are enough for memory
-;;         gnus-fetch-old-headers 2
-;;         gnus-fetch-old-ephemeral-headers 2
-;;         gnus-build-sparse-threads 'some
-;;         ;; More threading
-;;         gnus-show-threads t
-;;         gnus-thread-indent-level 2
-;;         gnus-thread-hide-subtree nil
-;;         ;; Sorting
-;;         gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-;;         gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
-;;         ;; Viewing
-;;         gnus-view-pseudos 'automatic
-;;         gnus-view-pseudos-separately t
-;;         gnus-view-pseudo-asynchronously t
-;;         ;; No auto select
-;;         gnus-auto-select-first nil
-;;         gnus-auto-select-next nil
-;;         gnus-paging-select-next nil)
-;;  (map! :map gnus-summary-mode-map
-;;        "<f6>" #'cae-gnus-summary-cheatsheet/body))
-;;
-;;(use-package! gnus-art
-;;  :defer t :config
-;;  (setq! gnus-default-article-saver 'gnus-summary-save-in-mail
-;;         gnus-treat-hide-citation-maybe t
-;;         gnus-treat-strip-cr t
-;;         gnus-treat-strip-leading-blank-lines t
-;;         gnus-treat-strip-multiple-blank-lines t
-;;         gnus-treat-strip-trailing-blank-lines t
-;;         gnus-treat-unsplit-urls t
-;;         gnus-ignored-mime-types
-;;         '("application/x-pkcs7-signature"
-;;           "application/ms-tnef"
-;;           "text/x-vcard"))
-;;  (map! :map gnus-article-mode-map
-;;        "<f6>" #'cae-gnus-article-cheatsheet/body))
-;;
-;;(use-package! gnus-dired
-;;  :hook (dired-mode . gnus-dired-mode))
-;;
-;;(use-package! spam
-;;  :after gnus)
+(unless (or (modulep! :email mu4e)
+            (modulep! :email notmuch))
+  (map! :leader :desc "Gnus" "o m" #'=gnus))
+
+(use-package! gnus
+  :commands gnus-unplugged
+  :config
+  (setq!
+   message-subscribed-address-functions '(gnus-find-subscribed-addresses)
+   gnus-use-cache t
+   gnus-use-scoring nil
+   gnus-suppress-duplicates t
+   gnus-novice-user t
+   gnus-expert-user t
+   gnus-interactive-exit 'quiet
+   gnus-inhibit-startup-message t
+   gnus-select-method '(nnnil "")
+   gnus-secondary-select-methods '((nntp "Gmane"
+                                    (nntp-address "news.gmane.io"))
+                                   (nntp "Eternal September"
+                                         (nntp-address "news.eternal-september.org"))
+                                   (nnimap "fastmail"
+                                           (nnimap-inbox "INBOX")
+                                           (nnimap-address "imap.fastmail.com")
+                                           (nnimap-server-port 993)
+                                           (nnimap-stream ssl)
+                                           (nnimap-expunge 'never)))
+   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
+   gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
+   gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
+   gnus-uncacheable-groups "^nnml"
+   gnus-large-newsgroup 4000
+   network-security-level 'low
+   gnus-permanently-visible-groups "INBOX"
+   gnus-activate-level 2
+;;; Startup functions
+   gnus-save-killed-list nil
+   gnus-check-new-newsgroups nil
+   ;; No other newsreader is used.
+   gnus-save-newsrc-file nil
+   gnus-read-newsrc-file nil
+   gnus-subscribe-newsgroup-method 'gnus-subscribe-interactively
+   ;; Emacs 28 introduces a unified query lang
+   gnus-search-use-parsed-queries t
+;;; Article mode for Gnus
+   gnus-visible-headers (rx line-start (or "From"
+                                           "Subject"
+                                           "Mail-Followup-To"
+                                           "Date"
+                                           "To"
+                                           "Cc"
+                                           "Newsgroups"
+                                           "User-Agent"
+                                           "X-Mailer"
+                                           "X-Newsreader")
+                            ":")
+   gnus-article-sort-functions '((not gnus-article-sort-by-number)
+                                 (not gnus-article-sort-by-date))
+   gnus-article-browse-delete-temp t
+   gnus-article-show-cursor t
+   ;; Display more MINE stuff
+   gnus-mime-display-multipart-related-as-mixed t
+;;; Asynchronous support for Gnus
+   gnus-asynchronous t
+   gnus-use-header-prefetch t
+;;; Cache interface for Gnus
+   gnus-cache-enter-articles '(ticked dormant unread)
+   gnus-cache-remove-articles '(read)
+   gnus-cacheable-groups "^\\(nntp\\|nnimap\\)"))
+
+;; Group mode commands for Gnus
+(use-package! gnus-group
+  :init
+  (autoload 'gnus-topic-mode "gnus-topic")
+  :defer t :hook
+  (gnus-group-mode . gnus-topic-mode)
+  :config
+  ;;          indentation ------------.
+  ;;  #      process mark ----------. |
+  ;;                level --------. | |
+  ;;           subscribed ------. | | |
+  ;;  %          new mail ----. | | | |
+  ;;  *   marked articles --. | | | | |
+  ;;                        | | | | | |  Ticked    New     Unread  open-status Group
+  (setq!
+   gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
+   gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet))
+  (map! :map gnus-group-mode-map
+        "<f6>" #'cae-gnus-group-cheatsheet/body))
+
+;; Summary mode commands for Gnus
+(use-package! gnus-sum
+  :hook (gnus-select-group . gnus-group-set-timestamp)
+  :config
+  (when (cae-display-graphic-p)
+    ;; Pretty marks
+    (setq! gnus-sum-thread-tree-false-root nil
+           gnus-sum-thread-tree-single-indent nil
+           gnus-sum-thread-tree-root nil
+           gnus-sum-thread-tree-vertical "│ "
+           gnus-sum-thread-tree-leaf-with-other "├── "
+           gnus-sum-thread-tree-single-leaf "└── "
+           gnus-sum-thread-tree-indent " "
+           gnus-sum-thread-tree-single-indent nil))
+  (setq! gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
+         ;; Loose threads
+         gnus-summary-make-false-root 'adopt
+         gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
+         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+         ;; Filling in threads
+         ;; 2 old articles are enough for memory
+         gnus-fetch-old-headers 2
+         gnus-fetch-old-ephemeral-headers 2
+         gnus-build-sparse-threads 'some
+         ;; More threading
+         gnus-show-threads t
+         gnus-thread-indent-level 2
+         gnus-thread-hide-subtree nil
+         ;; Sorting
+         gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+         gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
+         ;; Viewing
+         gnus-view-pseudos 'automatic
+         gnus-view-pseudos-separately t
+         gnus-view-pseudo-asynchronously t
+         ;; No auto select
+         gnus-auto-select-first nil
+         gnus-auto-select-next nil
+         gnus-paging-select-next nil)
+  (map! :map gnus-summary-mode-map
+        "<f6>" #'cae-gnus-summary-cheatsheet/body))
+
+(use-package! gnus-art
+  :defer t :config
+  (setq! gnus-default-article-saver 'gnus-summary-save-in-mail
+         gnus-treat-hide-citation-maybe t
+         gnus-treat-strip-cr t
+         gnus-treat-strip-leading-blank-lines t
+         gnus-treat-strip-multiple-blank-lines t
+         gnus-treat-strip-trailing-blank-lines t
+         gnus-treat-unsplit-urls t
+         gnus-ignored-mime-types
+         '("application/x-pkcs7-signature"
+           "application/ms-tnef"
+           "text/x-vcard"))
+  (map! :map gnus-article-mode-map
+        "<f6>" #'cae-gnus-article-cheatsheet/body))
+
+(use-package! gnus-dired
+  :hook (dired-mode . gnus-dired-mode))
+
+(use-package! spam
+  :after gnus)
