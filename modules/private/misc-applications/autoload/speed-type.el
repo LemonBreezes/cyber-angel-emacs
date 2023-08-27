@@ -31,4 +31,4 @@
         (+workspace/delete +speed-type-workspace-name))
     (when +speed-type--old-wconf
       (set-window-configuration +speed-type--old-wconf)))
-  (kill-buffer "*dungeon*"))
+  (kill-buffer "speed-type"))
