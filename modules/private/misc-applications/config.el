@@ -551,7 +551,7 @@
       "m" "MPC"))
   :config
   (setq mpc-host system-name
-        mpc-mpd-music-directory "/hdd/unindexed-music/")
+        mpc-mpd-music-directory "/mnt/unindexed-music/")
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
         "<f6>" #'+mpc-hydra/body
