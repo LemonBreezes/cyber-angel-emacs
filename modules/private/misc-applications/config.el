@@ -358,7 +358,11 @@
   (defvar +dunnet-workspace-name "*dunnet*")
   (defvar +dunnet--old-wconf nil)
   (map! :map +misc-applications-games-map
-        "d" #'+dunnet))
+        "d" #'+dunnet)
+  :config
+  (map! :map dun-mode-map
+        "C-c C-k" #'+dunnet-quit
+        :n "q" #'+dunnet-quit))
 
 (use-package! speed-type
   :defer t :init
