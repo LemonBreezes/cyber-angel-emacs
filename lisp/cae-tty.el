@@ -36,4 +36,4 @@
                 (vertico-posframe-mode -1))
               (when (and (boundp 'helm-display-function)
                          (eq helm-display-function #'helm-posframe-display))
-                (helm-posframe-enable)))))
+                (helm-posframe-disable)))))
