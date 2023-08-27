@@ -942,8 +942,8 @@
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
-        ;;smtpmail-smtp-service 465
-        ;;smtpmail-stream-type 'tls
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'tls
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queued-mail/"
         smtpmail-servers-requiring-authorization ".*"
