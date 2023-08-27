@@ -394,6 +394,8 @@
   :config
   (map! :map snake-mode-map
         "<f6>" #'+snake-hydra/body
+        :ng "q" #'+snake-quit
+        :map snake-null-map
         :ng "q" #'+snake-quit))
 
 (use-package! tetris
