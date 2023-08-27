@@ -20,7 +20,6 @@
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'+snow-quit))))
 
-
 ;;;###autoload
 (defun +snow-quit ()
   (interactive)
