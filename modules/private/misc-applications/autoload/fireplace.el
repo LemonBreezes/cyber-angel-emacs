@@ -8,3 +8,18 @@
   ("C-+" fireplace-up "Fireplace up")
   ("C--" fireplace-down "Fireplace down")
   ("C-=" fireplace-toggle-sound "Toggle sound"))
+
+;;;###autoload
+(defun +fireplace ()
+  (interactive)
+  (if (modulep! :ui workspaces)
+      ;; delete current workspace if empty
+      ;; this is useful when mu4e is in the daemon
+      ;; as otherwise you can accumulate empty workspaces
+      (progn
+        (unless (+workspace-buffer-list)
+          (+workspace-delete (+workspace-current-name)))
+        (+workspace-switch +fireplace-workspace-name t))
+    (setq +fireplace--old-wconf (current-window-configuration))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer))))
