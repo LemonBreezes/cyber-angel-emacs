@@ -8,6 +8,7 @@
   :commands gnus-unplugged
   :config
   (setq!
+   message-subscribed-address-functions '(gnus-find-subscribed-addresses)
    gnus-use-cache t
    gnus-use-scoring nil
    gnus-suppress-duplicates t
