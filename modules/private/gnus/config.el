@@ -8,7 +8,7 @@
       nnmail-split-methods 'nnimap-split-fancy
       nnimap-unsplittable-articles "UNDELETED")
 (setq nnimap-split-methods
-      '(("INBOX.sent" "^From::.*look@strawberrytea.xyz"))
+      '(("Sent" "^From::.*look@strawberrytea.xyz"))
       nnmail-split-methods nnimap-split-methods)
 
 (use-package! gnus
