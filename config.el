@@ -942,7 +942,9 @@
         mail-self-blind t))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it
-        message-default-mail-headers "Bcc: look@strawberrytea.xyz\n")
+        message-default-mail-headers "Bcc: look@strawberrytea.xyz\n"
+        message-forward-as-mime t
+        message-forward-before-signature t)
   (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
