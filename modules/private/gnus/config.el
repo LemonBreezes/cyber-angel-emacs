@@ -5,9 +5,8 @@
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
 (setq nnmail-split-methods
-      '(("mail.other" "From:.*look@strawberrytea\\.xyz")
-        ("mail.other" "Bcc:.*look@strawberrytea\\.xyz"))
-      nnimap-split-methods nnmail-split-methods)
+      nil
+      nnimap-split-methods nil)
 
 (use-package! gnus
   :commands gnus-unplugged
@@ -35,8 +34,8 @@
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)
                                            (nnimap-split-methods
-                                            (("mail.other" "From:.*look@strawberrytea\\.xyz")
-                                              ("mail.other" "Bcc:.*look@strawberrytea\\.xyz")))))
+                                            (("nnimap+fastmail:Sent" "From:.*look@strawberrytea\\.xyz")
+                                             ("nnimap+fastmail:Sent" "Bcc:.*look@strawberrytea\\.xyz")))))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
