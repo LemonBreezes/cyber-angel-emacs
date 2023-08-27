@@ -22,4 +22,5 @@
         (+workspace-switch +fireplace-workspace-name t))
     (setq +fireplace--old-wconf (current-window-configuration))
     (delete-other-windows)
-    (switch-to-buffer (doom-fallback-buffer))))
+    (switch-to-buffer (doom-fallback-buffer)))
+  (call-interactively #'fireplace))
