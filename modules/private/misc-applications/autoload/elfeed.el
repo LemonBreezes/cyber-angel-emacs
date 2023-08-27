@@ -14,6 +14,7 @@
   (if (get-buffer-window elfeed-log-buffer-name)
       (delete-window (get-buffer-window elfeed-log-buffer-name))
     (pop-to-buffer elfeed-log-buffer-name)
+    (local-set-key (kbd "q") #'quit-window)
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'quit-window))))
 
