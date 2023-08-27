@@ -21,7 +21,7 @@
       (setq +speed-type--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'speed-type))
+  (call-interactively #'speed-type-text))
 
 ;;;###autoload
 (defun +speed-type-quit ()
