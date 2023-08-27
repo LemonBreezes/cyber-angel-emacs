@@ -5,8 +5,9 @@
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
 (when (modulep! :editor evil)
-  (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode))
-    (cl-pushnew mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode))
+      (cl-pushnew mode evil-snipe-disabled-modes))))
 
 (use-package! gnus
   :commands gnus-unplugged
@@ -83,6 +84,8 @@
 ;;; Asynchronous support for Gnus
    gnus-asynchronous t
    gnus-use-header-prefetch t
+   gnus-use-article-prefetch t
+   gnus-fetch-old-headers 'some
 ;;; Cache interface for Gnus
    gnus-cache-enter-articles '(ticked dormant unread)
    gnus-cache-remove-articles '(read)
