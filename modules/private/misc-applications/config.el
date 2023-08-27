@@ -545,7 +545,8 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPC"))
   :config
-  (setq mpc-host system-name)
+  (setq mpc-host system-name
+        mpc-mpd-music-directory "/hdd/unindexed-music/")
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
         "<f6>" #'+mpc-hydra/body
