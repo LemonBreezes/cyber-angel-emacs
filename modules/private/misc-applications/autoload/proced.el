@@ -6,7 +6,7 @@
     ("<f6>" nil "Exit" :exit t)
     ("q" quit-window nil :exit t)
     ("g" revert-buffer "Refresh" :column "Display")
-    ("C" proced-mark-children "Mark children" :column "Mark")
+    ("c" proced-mark-children "Mark children" :column "Mark")
     ("F" proced-format-interactive "Set format" :column "Display")
     ("M" proced-mark-all "Mark all" :column "Mark")
     ("P" proced-mark-parents "Mark parents" :column "Mark")
