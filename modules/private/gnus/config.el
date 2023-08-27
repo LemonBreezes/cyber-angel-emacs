@@ -15,7 +15,7 @@
    gnus-use-scoring nil
    gnus-suppress-duplicates t
    gnus-novice-user t
-   gnus-expert-user t
+   gnus-expert-user nil
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
