@@ -381,7 +381,8 @@
         "r" #'speed-type--replay
         "n" #'speed-type--play-next
         :map speed-type-mode-map
-        "<f6>" #'+speed-type-hydra/body))
+        "<f6>" #'+speed-type-hydra/body
+        :n "q" #'+speed-type-quit))
 
 (use-package! snake
   :defer t :init
