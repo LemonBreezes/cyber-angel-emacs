@@ -44,6 +44,7 @@
            (not (process-live-p startup/mpd-process)))
   (setq startup/mpd-process
         (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
+;;(kill-process startup/mpd-process)
 
 ;; Start up Talon.
 ;; (start-process "talon" startup/misc-shell-commands-buffer "~/src/talon/run.sh")
