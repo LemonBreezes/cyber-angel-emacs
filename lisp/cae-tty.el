@@ -13,4 +13,9 @@
 
 (unless (cae-display-graphic-p)
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
-           #'vi-tilde-fringe-mode))
+    #'vi-tilde-fringe-mode)
+  (let ((hook (if (daemonp)
+                'server-after-make-frame-hook
+              'after-init-hook)))
+  (remove-hook hook #'doom-init-fonts-h -100)
+  (remove-hook hook #'doom-init-theme-h -90)))
