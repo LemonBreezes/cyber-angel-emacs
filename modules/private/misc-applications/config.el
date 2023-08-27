@@ -267,6 +267,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "p" "processes"))
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
   :config
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
