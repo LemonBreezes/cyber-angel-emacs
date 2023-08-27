@@ -400,6 +400,8 @@
 
 (use-package! tetris
   :defer t :init
+  (defvar +tetris-workspace-name "*tetris*")
+  (defvar +tetris--old-wconf nil)
   (map! (:map +misc-applications-games-map
          "t" #'tetris)
         (:map +misc-applications-eyecandy-map
