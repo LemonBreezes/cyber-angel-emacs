@@ -35,7 +35,7 @@
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)
                                            (nnimap-split-methods
-                                            '(("mail.other" "From:.*look@strawberrytea\\.xyz")
+                                            (("mail.other" "From:.*look@strawberrytea\\.xyz")
                                               ("mail.other" "Bcc:.*look@strawberrytea\\.xyz")))))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
