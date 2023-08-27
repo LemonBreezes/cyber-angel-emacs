@@ -22,7 +22,7 @@
    gnus-expert-user nil
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
-   gnus-select-method '(nnil "")
+   gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "Gmane"
                                     (nntp-address "news.gmane.io"))
                                    (nntp "Eternal September"
