@@ -934,15 +934,16 @@
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (after! sendmail
-  (setq send-mail-function #'sendmail-query-once))
+  (setq send-mail-function #'async-smtpmail-send-it))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it
-        message-mail-user-agent t
         gnus-agent-queue-mail nil)
   (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
+        ;;smtpmail-smtp-service 465
+        ;;smtpmail-stream-type 'tls
         smtpmail-queue-mail nil
         smtpmail-queue-dir "~/.mail/queued-mail/"
         smtpmail-servers-requiring-authorization ".*"
