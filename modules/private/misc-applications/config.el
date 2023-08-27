@@ -546,4 +546,5 @@
   :config
   (setq mpc-host system-name)
   (map! :map mpc-mode-map
-        :ng "q" #'+mpc-quit))
+        :ng "q" #'+mpc-quit
+        "<f6>" #'+mpc-hydra/body))
