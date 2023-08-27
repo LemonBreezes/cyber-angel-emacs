@@ -160,7 +160,11 @@
   :after gnus)
 
 (use-package! bbdb
-  :after (:or gnus message)
+  :after gnus
+  :init
+  (add-hook 'message-mode-hook
+            (function (lambda()
+                        (local-set-key (kbd "<tab>") 'bbdb-complete-mail))))
   :defer t :config
   (require 'bbdb-com)
   (require 'bbdb-gnus)
