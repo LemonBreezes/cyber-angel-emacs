@@ -39,6 +39,7 @@
               (when (and (boundp 'helm-display-function)
                          (eq helm-display-function #'helm-posframe-display))
                 (helm-posframe-disable)))))
+
 (add-hook 'doom-switch-frame-hook
           (cae-defun cae-tty-setup-frame-h ()
             (unless (cae-display-graphic-p)
