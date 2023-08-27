@@ -22,9 +22,12 @@
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
-(add-hook 'doom-switch-frame-hook
+(add-hook 'pre-command-hook
           (cae-defun cae-tty-setup-frame ()
             "Setup frame for TTY."
             (if (cae-display-graphic-p)
-                (vertico-posframe-mode +1)
-              (vertico-posframe-mode -1))))
+                (when (and (boundp 'vertico-posframe-mode)
+                           (not vertico-posframe-mode))
+                  (vertico-posframe-mode +1))
+              (when (bound-and-true-p vertico-posframe-mode)
+                (vertico-posframe-mode -1)))))
