@@ -21,7 +21,7 @@
         (zone-park/sit-for (point-min) 0.1)))))
 
 ;;;###autoload
-(defun +zone-choose (pgm)
+(defun zone-choose (pgm)
   "Choose a PGM to run for `zone'."
   (interactive
    (list
