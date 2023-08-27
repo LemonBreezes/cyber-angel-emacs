@@ -132,5 +132,16 @@
 
 (use-package! gnus-art
   :defer t :config
+  (setq! gnus-default-article-saver 'gnus-summary-save-in-mail
+         gnus-treat-hide-citation-maybe t
+         gnus-treat-strip-cr t
+         gnus-treat-strip-leading-blank-lines t
+         gnus-treat-strip-multiple-blank-lines t
+         gnus-treat-strip-trailing-blank-lines t
+         gnus-treat-unsplit-urls t
+         gnus-ignored-mime-types
+         '("application/x-pkcs7-signature"
+           "application/ms-tnef"
+           "text/x-vcard"))
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
