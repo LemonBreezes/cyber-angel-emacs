@@ -41,6 +41,7 @@
     ("u" elfeed-search-tag-all-unread "Tag all unread" :column "Tag")
     ("F" elfeed-tube-fetch "Fetch" :column "Tube")
     ("C-x C-s" elfeed-tube-save "Save" :column "Tube")
+    (,(if (modulep! :editor evil) "gR" "G") elfeed-search-fetch "Fetch" :column "Misc")
     (,(if (modulep! :editor evil) "r" "g") elfeed-search-update--force "Update" :column "Misc")
     ("l" +elfeed-toggle-log-buffer "Toggle log buffer" :column "Misc")
     ("q" +elfeed-quit "Quit Elfeed" :color blue))
