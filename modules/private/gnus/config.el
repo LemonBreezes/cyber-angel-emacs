@@ -13,7 +13,6 @@
   (setq nnimap-unsplittable-articles '("UNDELETED"))
   (setq nnmail-split-fancy
         '(|
-          (: gnus-registry-split-fancy-with-parent)
           (: spam-split)
           (from "look@strawberrytea.xyz" "Sent")
           "INBOX" ;; or "mail.misc" for nnml/POP3
