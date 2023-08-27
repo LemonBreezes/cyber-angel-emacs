@@ -326,6 +326,8 @@
 
 (use-package! bubbles
   :defer t :init
+  (defvar +bubbles-workspace-name "*bubbles*")
+  (defvar +bubbles--old-wconf nil)
   (map! :map +misc-applications-games-map
         "b" #'bubbles)
   :config
@@ -397,10 +399,8 @@
 
 (use-package! fireplace
   :defer t :init
-  (defvar +fireplace-workspace-name "*fireplace*"
-    "The name of the workspace to use for `fireplace'.")
-  (defvar +fireplace--old-wconf nil
-    "The window configuration to restore after quitting `fireplace'.")
+  (defvar +fireplace-workspace-name "*fireplace*")
+  (defvar +fireplace--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
         "f" #'+fireplace)
   :config
@@ -415,10 +415,8 @@
 
 (use-package! snow
   :defer t :init
-  (defvar +snow-workspace-name "*snow*"
-    "The name of the workspace to use for `snow'.")
-  (defvar +snow--old-wconf nil
-    "The window configuration to restore after quitting `snow'.")
+  (defvar +snow-workspace-name "*snow*")
+  (defvar +snow--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
         "s" #'+snow))
 
