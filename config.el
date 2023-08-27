@@ -942,6 +942,7 @@
         mail-self-blind t))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it
+        gnus-agent-queue-mail nil
         message-default-mail-headers "Bcc: look@strawberrytea.xyz\n")
   (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
