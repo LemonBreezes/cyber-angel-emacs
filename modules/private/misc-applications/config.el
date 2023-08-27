@@ -544,4 +544,6 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPC"))
   :config
-  (setq mpc-host system-name))
+  (setq mpc-host system-name)
+  (map! :map mpc-mode-map
+        :ng "q" #'+mpc-quit))
