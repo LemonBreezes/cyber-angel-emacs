@@ -4,9 +4,6 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
-(setq nnimap-split-methods
-      '(("nnimap+fastmail:Sent" "From:.*look@strawberrytea\\.xyz")))
-
 (use-package! gnus
   :commands gnus-unplugged
   :config
