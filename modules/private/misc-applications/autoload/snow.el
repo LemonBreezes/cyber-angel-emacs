@@ -23,4 +23,4 @@
   (if (modulep! :ui workspaces)
       (+workspace/delete +snow-workspace-name)
     (set-window-configuration +snow--old-wconf))
-  (kill-buffer snow-buffer-name))
+  (kill-buffer "*snow*"))
