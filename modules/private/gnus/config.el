@@ -148,8 +148,8 @@
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
-(use-package! gnus-dired
-  :hook (dired-mode . gnus-dired-mode))
+;;(use-package! gnus-dired
+;;  :hook (dired-mode . gnus-dired-mode))
 
 (use-package! spam
   :after gnus)
