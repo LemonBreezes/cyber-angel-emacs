@@ -4,6 +4,10 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
+(when (modulep! :editor evil)
+  (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode))
+    (cl-pushnew mode evil-snipe-disabled-modes :test #'eq)))
+
 (use-package! gnus
   :commands gnus-unplugged
   :config
