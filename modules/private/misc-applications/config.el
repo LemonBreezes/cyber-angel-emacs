@@ -332,6 +332,7 @@
         "b" #'+bubbles)
   :config
   (map! :map bubbles-mode-map
+        :ng "q" #'bubbles-quit
         :n "RET" #'bubbles-plop
         "<f6>" #'+bubbles-hydra/body
         "ta" #'bubbles-set-graphics-theme-ascii
