@@ -25,6 +25,7 @@
                                            (nnimap-expunge 'never)))
    gnus-large-newsgroup 4000
    network-security-level 'low
+   gnus-permanently-visible-groups '("INBOX")
 ;;; Startup functions
    gnus-save-killed-list nil
    gnus-check-new-newsgroups nil
