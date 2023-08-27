@@ -329,7 +329,7 @@
   (defvar +bubbles-workspace-name "*bubbles*")
   (defvar +bubbles--old-wconf nil)
   (map! :map +misc-applications-games-map
-        "b" #'bubbles)
+        "b" #'+bubbles)
   :config
   (map! :map bubbles-mode-map
         :n "RET" #'bubbles-plop
