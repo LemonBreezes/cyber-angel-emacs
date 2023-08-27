@@ -39,7 +39,6 @@
    gnus-large-newsgroup 4000
    network-security-level 'low
    gnus-permanently-visible-groups "INBOX"
-   gnus-activate-level 2
 ;;; Startup functions
    gnus-save-killed-list nil
    gnus-check-new-newsgroups nil
