@@ -331,6 +331,9 @@
   (map! :map +misc-applications-games-map
         "b" #'+bubbles)
   :config
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'bubbles-mode evil-snipe-disabled-modes)))
   (map! :map bubbles-mode-map
         :ng "q" #'+bubbles-quit
         :n "RET" #'bubbles-plop
