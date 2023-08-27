@@ -21,13 +21,3 @@
     (remove-hook hook #'doom-init-fonts-h -100)
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
-
-(advice-add #'flymake--mode-line-counter :filter-return
-            (cae-defun cae-strip-face-a (str)
-              (if (cae-display-graphic-p)
-                  str
-                (mapcar (lambda (l)
-                          (if (listp l)
-                              (plist-put l 'face nil)
-                            l))
-                        str))))
