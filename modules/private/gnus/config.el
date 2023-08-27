@@ -33,7 +33,6 @@
                                            (nnimap-split-fancy '(| (any "emacs-devel" "emacs-devel")
                                                                  (from "look@strawberrytea.xyz" "sent")
                                                                  "INBOX"))))
-   nnmail-split-methods '(("Sent" "^From:.*look@strawberrytea.xyz.*"))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
    gnus-uncacheable-groups "^nnml"
