@@ -17,7 +17,7 @@
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'flames-of-freedom-default)
-  (with-current-buffer "*flames-of-freedom*"
+  (with-current-buffer "Flames Of Freedom"
     (local-set-key (kbd "q") #'+flames-of-freedom-quit)
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'+flames-of-freedom-quit))))
@@ -30,4 +30,4 @@
       (+workspace/delete +flames-of-freedom-workspace-name))
   (when +flames-of-freedom--old-wconf
     (set-window-configuration +flames-of-freedom--old-wconf)))
-  (kill-buffer "*flames-of-freedom*"))
+  (kill-buffer "Flames Of Freedom"))
