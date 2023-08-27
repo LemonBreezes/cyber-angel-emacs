@@ -176,9 +176,6 @@
     ;; not colorize backgrounds at all.
     (advice-add #'shr-colorize-region :around #'ignore))
 
-  (after! proced
-    (setq-default proced-auto-update-flag t))
-
   ;; Allow switching to these buffers with `C-x b'
   (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 
