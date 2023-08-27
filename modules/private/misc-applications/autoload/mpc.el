@@ -6,7 +6,7 @@
   ("q" +mpc-quit nil :exit t)
   ("<" mpc-prev "Previous song")
   (">" mpc-next "Next song")
-  ("s" mpc-toggle-place "Toggle play")
+  ("s" mpc-toggle-play "Toggle play")
   ("p" mpc-pause "Pause")
   ("g" mpc-seek-current "Seek current")
   ("o" mpc-goto-playing-song "Goto playing song"))
