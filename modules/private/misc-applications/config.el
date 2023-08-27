@@ -355,8 +355,10 @@
 
 (use-package! dunnet
   :defer t :init
+  (defvar +dunnet-workspace-name "*dunnet*")
+  (defvar +dunnet--old-wconf nil)
   (map! :map +misc-applications-games-map
-        "d" #'dunnet))
+        "d" #'+dunnet))
 
 (use-package! speed-type
   :defer t :init
