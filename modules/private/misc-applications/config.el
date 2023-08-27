@@ -348,11 +348,6 @@
         "du" #'bubbles-set-game-userdefined
         "S" #'bubbles-save-settings))
 
-(use-package! doctor
-  :defer t :init
-  (map! :map +misc-applications-games-map
-        "D" #'doctor))
-
 (use-package! dunnet
   :defer t :init
   (defvar +dunnet-workspace-name "*dunnet*")
