@@ -369,7 +369,7 @@
   (defvar +speed-type-workspace-name "*speed-type*")
   (defvar +speed-type--old-wconf nil)
   (map! :map +misc-applications-games-map
-        "T" #'speed-type-text)
+        "T" #'+speed-type-text)
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   :config
   (when (modulep! :private corfu)
@@ -377,7 +377,7 @@
   (when (modulep! :editor evil)
     (evil-set-initial-state #'speed-type-mode 'insert))
   (map! :map speed-type--completed-keymap
-        "q" #'kill-this-buffer
+        "q" #'+speed-type-quit
         "r" #'speed-type--replay
         "n" #'speed-type--play-next
         :map speed-type-mode-map
