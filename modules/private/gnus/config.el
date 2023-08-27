@@ -72,8 +72,7 @@
 
 ;; Group mode commands for Gnus
 (use-package! gnus-group
-  :defer t
-  :hook
+  :defer t :hook
   (gnus-group-mode . gnus-topic-mode)
   :config
   ;;          indentation ------------.
