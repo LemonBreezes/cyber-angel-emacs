@@ -22,9 +22,9 @@
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
+  (mpc-quit)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +mpc-workspace-name)
         (+workspace/delete +mpc-workspace-name))
     (when +mpc--old-wconf
-      (set-window-configuration +mpc--old-wconf)))
-  (kill-buffer mpc-buffer-name))
+      (set-window-configuration +mpc--old-wconf))))
