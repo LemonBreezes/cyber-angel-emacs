@@ -7,8 +7,6 @@
     ("q" +mpc-quit nil :exit t)
     ("<" mpc-prev "Previous song" :column "Navigate")
     (">" mpc-next "Next song" :column "Navigate")
-    ("(" mpc-rewind "Rewind" :column "Navigate")
-    (")" mpc-ffwd "Fast forward" :column "Navigate")
     (,(if (modulep! :editor evil) "t" "s") mpc-toggle-play "Toggle play" :column "Toggle")
     ,@(when (modulep! :editor evil)
         '(("r" mpc-toggle-repeat "Toggle repeat" :column "Toggle")
