@@ -398,9 +398,9 @@
 (use-package! fireplace
   :defer t :init
   (defvar +fireplace-workspace-name "*fireplace*"
-    "The name of the workspace to use for fireplace.")
+    "The name of the workspace to use for `fireplace'.")
   (defvar +fireplace--old-wconf nil
-    "The window configuration to restore after quitting fireplace.")
+    "The window configuration to restore after quitting `fireplace'.")
   (map! :map +misc-applications-eyecandy-map
         "f" #'+fireplace)
   :config
@@ -415,8 +415,12 @@
 
 (use-package! snow
   :defer t :init
+  (defvar +snow-workspace-name "*snow*"
+    "The name of the workspace to use for `snow'.")
+  (defvar +snow--old-wconf nil
+    "The window configuration to restore after quitting `snow'.")
   (map! :map +misc-applications-eyecandy-map
-        "s" #'snow))
+        "s" #'+snow))
 
 (use-package! zone
   :defer t :defer-incrementally t :init
