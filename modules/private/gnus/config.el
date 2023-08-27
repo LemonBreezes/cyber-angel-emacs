@@ -6,7 +6,8 @@
 
 (setq nnmail-split-methods
       '(("mail.other" "From:.*look@strawberrytea\\.xyz")
-        ("mail.other" "Bcc:.*look@strawberrytea\\.xyz")))
+        ("mail.other" "Bcc:.*look@strawberrytea\\.xyz"))
+nnimap-split-methods nnmail-split-methods)
 
 (use-package! gnus
   :commands gnus-unplugged
