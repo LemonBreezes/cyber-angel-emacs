@@ -2,7 +2,7 @@
 
 (unless (or (modulep! :email mu4e)
             (modulep! :email notmuch))
-  (map! :leader :desc "Gnus" "o m" #'gnus))
+  (map! :leader :desc "Gnus" "o m" #'gnus-plugged))
 
 (use-package! gnus
   :commands gnus gnus-unplugged gnus-agent-batch
