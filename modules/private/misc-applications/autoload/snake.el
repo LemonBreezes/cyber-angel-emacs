@@ -28,11 +28,10 @@
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
   (let ((saves-buf (find-file-noselect (expand-file-name "snake-scores" shared-game-score-directory))))
-    (switch-to-buffer saves-buf)
-    (local-set-key (kbd "q") #'+snake-quit)
-    (when (featurep 'evil)
-      (evil-local-set-key 'normal (kbd "q") #'+snake-quit))
-    (split-window-right))
+    (with-current-buffer saves-buf
+      (local-set-key (kbd "q") #'+snake-quit)
+      (when (featurep 'evil)
+        (evil-local-set-key 'normal (kbd "q") #'+snake-quit))))
   (call-interactively #'snake))
 
 ;;;###autoload
