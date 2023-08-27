@@ -16,11 +16,7 @@
     (setq +flames-of-freedom--old-wconf (current-window-configuration))
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'flames-of-freedom-default)
-  (with-current-buffer "Flames Of Freedom"
-    (local-set-key (kbd "q") #'+flames-of-freedom-quit)
-    (when (featurep 'evil)
-      (evil-local-set-key 'normal (kbd "q") #'+flames-of-freedom-quit))))
+  (call-interactively #'flames-of-freedom-default))
 
 (defun +flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
