@@ -116,11 +116,6 @@
       ("e" evil-scroll-line-down
        "y" evil-scroll-line-up))
 
-    (define-repeat-map evil-undo
-      ("u" evil-undo
-       "U" evil-redo
-       "r" evil-redo))
-
     (define-repeat-map evil-paste-pop
       ("n" evil-paste-pop-next
        "p" evil-paste-pop))
