@@ -14,7 +14,7 @@
           ("c" mpc-toggle-consume "Toggle consume" :column "Toggle")
           ("p" mpc-playlist "Show playlist" :column "Playlist")
           ("a" mpc-playlist-add "Add to playlist" :column "Playlist")
-          ("x" mpc-play-at-point "Play at point" :column "Toggle")))
+          ("x" mpc-play-at-point "Play at point" :column "Playlist")))
     ("p" mpc-pause "Pause" :column "Toggle")
     ("g" mpc-seek-current "Seek current" :column "Navigate")
     ("o" mpc-goto-playing-song "Goto playing song" :column "Movement"))
