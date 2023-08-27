@@ -525,6 +525,8 @@
 
 (use-package! mpc
   :defer t :init
+  (defvar +mpc-workspace-name "*mpc*")
+  (defvar +mpc--old-wconf nil)
   (map! :map +misc-applications-music-map
         "m" #'+mpc)
   (after! which-key
