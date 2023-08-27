@@ -4,6 +4,7 @@
 
 ;;; Stuff that should not be disabled.
 
+(load! "lisp/cae-tty")
 (load! "lisp/cae-bindings")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
@@ -22,17 +23,6 @@
   (icomplete-vertical-mode +1))
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
-
-;; Stuff so that Emacs doesn't break in the Terminal.
-(when (modulep! :completion vertico +childframe)
-  (unless (cae-display-graphic-p)
-    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
-(when (modulep! :ui ligatures)
-  (unless (cae-display-graphic-p)
-    (setq +ligatures-in-modes nil)
-    (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
-    (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
-    (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
 
 (after! xclip
   (cond ((executable-find "termux-setup-storage")
