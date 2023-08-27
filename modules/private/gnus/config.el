@@ -5,8 +5,8 @@
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
 (setq nnmail-split-methods
-      '(("sent" "From:.*look@strawberrytea\\.xyz")
-        ("sent" "Bcc:.*look@strawberrytea\\.xyz")))
+      '(("mail.other" "From:.*look@strawberrytea\\.xyz")
+        ("mail.other" "Bcc:.*look@strawberrytea\\.xyz")))
 
 (use-package! gnus
   :commands gnus-unplugged
