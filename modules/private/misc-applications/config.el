@@ -338,18 +338,19 @@
         :ng "q" #'+bubbles-quit
         :n "RET" #'bubbles-plop
         "<f6>" #'+bubbles-hydra/body
-        "ta" #'bubbles-set-graphics-theme-ascii
-        "tb" #'bubbles-set-graphics-theme-balls
-        "te" #'bubbles-set-graphics-theme-emacs
-        "tc" #'bubbles-set-graphics-theme-circles
-        "ts" #'bubbles-set-graphics-theme-squares
-        "td" #'bubbles-set-graphics-theme-diamonds
-        "dh" #'bubbles-set-game-hard
-        "de" #'bubbles-set-game-easy
-        "dm" #'bubbles-set-game-medium
-        "dd" #'bubbles-set-game-difficult
-        "du" #'bubbles-set-game-userdefined
-        "S" #'bubbles-save-settings))
+        :ng "u" #'bubbles-undo
+        :ng "ta" #'bubbles-set-graphics-theme-ascii
+        :ng "tb" #'bubbles-set-graphics-theme-balls
+        :ng "te" #'bubbles-set-graphics-theme-emacs
+        :ng "tc" #'bubbles-set-graphics-theme-circles
+        :ng "ts" #'bubbles-set-graphics-theme-squares
+        :ng "td" #'bubbles-set-graphics-theme-diamonds
+        :ng "dh" #'bubbles-set-game-hard
+        :ng "de" #'bubbles-set-game-easy
+        :ng "dm" #'bubbles-set-game-medium
+        :ng "dd" #'bubbles-set-game-difficult
+        :ng "du" #'bubbles-set-game-userdefined
+        :ng "S" #'bubbles-save-settings))
 
 (use-package! dunnet
   :defer t :init
