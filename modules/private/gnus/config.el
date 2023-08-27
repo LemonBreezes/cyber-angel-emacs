@@ -4,9 +4,12 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
-(setq nnimap-split-methods  '(("nnimap+fastmail:Sent" "^From::.*look@strawberrytea.xyz.*"))
-      nnmail-split-methods nnimap-split-methods
-      nnimap-unsplittable-articles nil)
+(setq nnimap-split-methods 'nnimap-split-fancy
+      nnmail-split-methods 'nnimap-split-fancy
+      nnimap-unsplittable-articles "UNDELETED")
+(setq nnimap-split-methods
+      '(("INBOX.sent" "^From::.*look@strawberrytea.xyz"))
+      nnmail-split-methods nnimap-split-methods)
 
 (use-package! gnus
   :commands gnus-unplugged
