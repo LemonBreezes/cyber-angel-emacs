@@ -390,7 +390,7 @@
   (defvar +snake-workspace-name "*snake*")
   (defvar +snake--old-wconf nil)
   (map! :map +misc-applications-games-map
-        "s" #'snake)
+        "s" #'+snake)
   :config
   (map! :map snake-mode-map
         "<f6>" #'+snake-hydra/body
