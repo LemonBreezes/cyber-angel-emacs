@@ -4,10 +4,6 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
-(setq nnmail-split-methods
-      nil
-      nnimap-split-methods nil)
-
 (use-package! gnus
   :commands gnus-unplugged
   :config
