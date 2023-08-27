@@ -4,6 +4,9 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
+(setq nnmail-split-methods
+      '(("sent" "From:.*look@strawberrytea.xyz")))
+
 (use-package! gnus
   :commands gnus-unplugged
   :config
@@ -29,10 +32,7 @@
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)
-                                           (nnimap-split-methods fancy)
-                                           (nnimap-split-fancy '(| (any "emacs-devel" "emacs-devel")
-                                                                 (from "look@strawberrytea.xyz" "INBOX.SENT")
-                                                                 "INBOX"))))
+                                           (nnimap-split-methods default)))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
