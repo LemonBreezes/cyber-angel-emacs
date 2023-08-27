@@ -935,7 +935,8 @@
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (setq compose-mail-user-agent-warnings nil)
 (after! sendmail
-  (setq send-mail-function #'async-smtpmail-send-it))
+  (setq send-mail-function #'async-smtpmail-send-it
+        mail-self-blind t))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it
         gnus-agent-queue-mail nil)
