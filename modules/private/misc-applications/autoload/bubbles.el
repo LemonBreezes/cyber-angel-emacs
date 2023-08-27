@@ -22,8 +22,8 @@
   ("S" bubbles-save-settings "Save settings" :column "Misc"))
 
 ;;;###autoload
-(defun +bubbles ()
-  (interactive)
+(defun +bubbles (&optional arg)
+  (interactive "P")
   (if arg
       (setq +bubbles--old-wconf nil)
     (if (modulep! :ui workspaces)
