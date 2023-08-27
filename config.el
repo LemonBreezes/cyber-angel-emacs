@@ -938,7 +938,9 @@
 (after! sendmail
   (setq send-mail-function #'async-smtpmail-send-it))
 (after! message
-  (setq message-send-mail-function #'async-smtpmail-send-it))
+  (setq message-send-mail-function #'async-smtpmail-send-it
+        message-sendmail-f-is-evil t)
+  (add-hook 'message-setup-hook #'message-check-recipients))
 (after! smtpmail
   (setq smtpmail-smtp-server "smtp.fastmail.com"
         smtpmail-default-smtp-server "smtp.fastmail.com"
