@@ -194,7 +194,7 @@
   (setq bbdb-pop-up-window-size 5)
   (setq bbdb-ignore-redundant-mails t)
   (setq bbdb-update-records-p 'create)
-  (setq bbdb-mua-update-interactive-p '(create . query))
+  (setq bbdb-mua-interactive-action '(create . query))
   (setq bbdb-mua-auto-update-p 'create)
   (add-hook 'mail-setup-hook 'bbdb-mail-aliases)
   (add-hook 'message-setup-hook 'bbdb-mail-aliases)
