@@ -9,7 +9,6 @@
   :config
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
-   mail-user-agent 'gnus-user-agent
    gnus-use-cache t
    gnus-use-scoring nil
    gnus-suppress-duplicates t
@@ -147,3 +146,22 @@
            "text/x-vcard"))
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
+
+(use-package! message-mailer
+  :defer t :config
+  (defun my-message-header-setup-hook ()
+    (message-remove-header "From")
+    (let ((gcc (message-field-value "Gcc")))
+      (when (or (null gcc)
+                (string-match "nnfolder\\+archive:" gcc))
+        (message-remove-header "Bcc")
+        (message-remove-header "Gcc")
+        ;; (message-add-header (format "Bcc: %s" user-mail-address))
+        ;; (message-add-header
+        ;;  (format "Gcc: %s"
+        ;;          (if (string-match "\\`list\\." (or gnus-newsgroup-name ""))
+        ;;              "mail.sent"
+        ;;            "INBOX")))
+        )))
+  (add-hook 'message-header-setup-hook 'my-message-header-setup-hook)
+  )
