@@ -405,7 +405,8 @@
         "f" #'+fireplace)
   :config
   (map! :map fireplace-mode-map
-        "<f6>" #'+fireplace-hydra/body))
+        "<f6>" #'+fireplace-hydra/body
+        :ng "q" #'+fireplace-quit))
 
 (use-package! flames-of-freedom
   :defer t :init
