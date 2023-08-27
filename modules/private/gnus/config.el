@@ -9,6 +9,7 @@
   :config
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
+   gnus-agent-queue-mail nil
    gnus-always-read-dribble-file t
    gnus-use-cache t
    gnus-use-scoring nil
