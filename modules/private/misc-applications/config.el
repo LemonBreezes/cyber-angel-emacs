@@ -520,9 +520,11 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "s" "SomaFM"))
   (add-hook 'somafm-mode-hook #'hl-line-mode)
+  (add-hook 'somafm-mode-hook #'+misc-applications-hide-cursor-h)
   :config
   (map! :map somafm-mode-map
-        "<f6>" #'+somafm-hydra/body))
+        "<f6>" #'+somafm-hydra/body
+        :ng "q" #'quit-window))
 
 (use-package! mpc
   :defer t :init
