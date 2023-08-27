@@ -425,7 +425,7 @@
 (use-package! zone
   :defer t :defer-incrementally t :init
   (map! :map +misc-applications-eyecandy-map
-        "z" #'zone-choose)
+        "z" #'+zone-choose)
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
