@@ -27,12 +27,15 @@
       (setq +snake--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
-  (let ((saves-buf (find-file-noselect (expand-file-name "snake-scores" shared-game-score-directory))))
-    (with-current-buffer saves-buf
-      (local-set-key (kbd "q") #'+snake-quit)
-      (when (featurep 'evil)
-        (evil-local-set-key 'normal (kbd "q") #'+snake-quit))))
-  (call-interactively #'snake))
+  (let* ((saves-buf (find-file-noselect (expand-file-name "snake-scores" shared-game-score-directory)))
+         (highest-score (with-current-buffer saves-buf
+                          (local-set-key (kbd "q") #'+snake-quit)
+                          (when (featurep 'evil)
+                            (evil-local-set-key 'normal (kbd "q") #'+snake-quit))
+                          (buffer-substring-no-properties (goto-char (point-min))
+                                                          (pos-eol)))))
+    (call-interactively #'snake)
+    (setq-local header-line-format highest-score)))
 
 ;;;###autoload
 (defun +snake-quit ()
