@@ -31,4 +31,5 @@
       (mapcar 'symbol-name
               (progn (require 'zone)
                      zone-programs))))))
-  (zone pgm))
+  (let ((echo-area-clear-hook))
+    (zone pgm)))
