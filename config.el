@@ -249,7 +249,8 @@
         ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
         ("^\\*notmuch-hello"  :ignore)
-        ("^\\*gud-" :ttl nil :size 0.35)))
+        ("^\\*gud-" :ttl nil :size 0.35)
+        ("^\\*Article " :ttl nil :size (lambda (_)) :quit t)))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
