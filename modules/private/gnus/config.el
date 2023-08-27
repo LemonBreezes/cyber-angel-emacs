@@ -167,3 +167,6 @@
 
 (use-package! gnus-dired
   :hook (dired-mode . gnus-dired-mode))
+
+(use-package! spam
+  :after gnus)
