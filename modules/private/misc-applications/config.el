@@ -355,6 +355,8 @@
   (map! :map +misc-applications-games-map
         "d" #'+dunnet)
   :config
+  (when (modulep! :editor evil)
+    (evil-set-initial-state #'dun-mode 'insert))
   (map! :map dun-mode-map
         "C-c C-k" #'+dunnet-quit
         :n "q" #'+dunnet-quit))
