@@ -7,7 +7,7 @@
 (setq nnmail-split-methods
       '(("mail.other" "From:.*look@strawberrytea\\.xyz")
         ("mail.other" "Bcc:.*look@strawberrytea\\.xyz"))
-nnimap-split-methods nnmail-split-methods)
+      nnimap-split-methods nnmail-split-methods)
 
 (use-package! gnus
   :commands gnus-unplugged
@@ -34,7 +34,9 @@ nnimap-split-methods nnmail-split-methods)
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)
-                                           (nnimap-split-methods default)))
+                                           (nnimap-split-methods
+                                            '(("mail.other" "From:.*look@strawberrytea\\.xyz")
+                                              ("mail.other" "Bcc:.*look@strawberrytea\\.xyz")))))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
