@@ -387,6 +387,8 @@
 
 (use-package! snake
   :defer t :init
+  (defvar +snake-workspace-name "*snake*")
+  (defvar +snake--old-wconf nil)
   (map! :map +misc-applications-games-map
         "s" #'snake)
   :config
