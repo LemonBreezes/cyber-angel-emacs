@@ -366,6 +366,8 @@
 
 (use-package! speed-type
   :defer t :init
+  (defvar +speed-type-workspace-name "*speed-type*")
+  (defvar +speed-type--old-wconf nil)
   (map! :map +misc-applications-games-map
         "T" #'speed-type-text)
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
