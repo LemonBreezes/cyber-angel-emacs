@@ -255,6 +255,7 @@
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+misc-applications-hide-cursor-h)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'trashed-mode-hook #'hl-line-mode)
   :config
   (map! :map trashed-mode-map
         "<f6>" #'+trashed-hydra/body))
