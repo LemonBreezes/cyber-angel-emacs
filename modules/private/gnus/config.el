@@ -32,7 +32,8 @@
    gnus-secondary-select-methods '((nntp "Gmane"
                                     (nntp-address "news.gmane.io"))
                                    (nntp "Eternal September"
-                                         (nntp-address "news.eternal-september.org"))
+                                         (nntp-address "news.eternal-september.org")
+                                         (nntp-authinfo-user "StrawberryTea"))
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
