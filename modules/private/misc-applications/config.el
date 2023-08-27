@@ -519,6 +519,7 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "s" "SomaFM"))
+  (add-hook 'somafm-mode-hook #'hl-line-mode)
   :config
   (map! :map somafm-mode-map
         "<f6>" #'+somafm-hydra/body))
