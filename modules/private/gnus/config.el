@@ -4,82 +4,9 @@
             (modulep! :email notmuch))
   (map! :leader :desc "Gnus" "o m" #'=gnus))
 
-(defun nnimap-split-incoming-mail ()
-  (with-current-buffer (nnimap-buffer)
-    (let ((nnimap-incoming-split-list nil)
-      (nnmail-split-methods
-       (cond
-        ((eq nnimap-split-methods 'default)
-         nnmail-split-methods)
-        (nnimap-split-methods
-         nnimap-split-methods)
-        (nnimap-split-fancy
-         'nnmail-split-fancy)))
-      (nnmail-split-fancy (or nnimap-split-fancy
-                  nnmail-split-fancy))
-      (nnmail-inhibit-default-split-group t)
-      (groups (nnimap-get-groups))
-          (can-move (and (nnimap-capability "MOVE")
-             (equal (nnimap-quirk "MOVE") "MOVE")))
-      new-articles)
-      (erase-buffer)
-      (nnimap-command "SELECT %S" nnimap-inbox)
-      (setf (nnimap-group nnimap-object) nnimap-inbox)
-      (setq new-articles (nnimap-new-articles (nnimap-get-flags "1:*")))
-      (when new-articles
-    (nnimap-fetch-inbox new-articles)
-    (nnimap-transform-split-mail)
-    (nnheader-ms-strip-cr)
-    (nnmail-cache-open)
-    (nnmail-split-incoming (current-buffer)
-                   #'nnimap-save-mail-spec
-                   nil nil
-                   #'nnimap-dummy-active-number
-                   #'nnimap-save-mail-spec)
-    (when nnimap-incoming-split-list
-      (let ((specs (nnimap-make-split-specs nnimap-incoming-split-list))
-        sequences junk-articles)
-        ;; Create any groups that doesn't already exist on the
-        ;; server first.
-        (dolist (spec specs)
-          (when (and (not (member (car spec) groups))
-             (not (eq (car spec) 'junk)))
-        (nnimap-command "CREATE %S" (nnimap-group-to-imap (car spec)))))
-        ;; Then copy over all the messages.
-        (erase-buffer)
-        (dolist (spec specs)
-          (let ((group (car spec))
-            (ranges (cdr spec)))
-        (if (eq group 'junk)
-            (setq junk-articles ranges)
-          ;; Don't copy if the message is already in its
-          ;; target group.
-          (unless (string= group nnimap-inbox)
-            (push (list (nnimap-send-command
-                 (if can-move
-                     "UID MOVE %s %S"
-                   "UID COPY %s %S")
-                 (nnimap-article-ranges ranges)
-                (nnimap-group-to-imap group))
-                ranges)
-              sequences)))))
-        ;; Wait for the last COPY response...
-        (when (and (not can-move) sequences)
-          (nnimap-wait-for-response (caar sequences))
-          ;; And then mark the successful copy actions as deleted,
-          ;; and possibly expunge them.  Almost any non-nil
-          ;; setting of nnimap-expunge should lead to expunging
-          ;; here.
-          (let ((nnimap-expunge (and nnimap-expunge
-                     (not (equal nnimap-expunge 'never))
-                     'immediate)))
-        (nnimap-delete-article
-         (nnimap-parse-copied-articles sequences))))
-        (when junk-articles
-              (nnimap-delete-article junk-articles))))))))
-
 (setq nnimap-split-methods
-      '(("Sent" "^From::.*look@strawberrytea.xyz"))
+      '(("Sent" "^From::.*look@strawberrytea.xyz")
+        ("bogus" ""))
       nnmail-split-methods nnimap-split-methods
       nnimap-unsplittable-articles '("UNDELETED"))
 
