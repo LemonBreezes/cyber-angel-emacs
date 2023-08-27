@@ -147,7 +147,7 @@
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
-(use-package! message-mailer
+(use-package! message
   :defer t :config
   (defun cae-message-header-setup-hook ()
     (message-remove-header "From")
@@ -164,6 +164,12 @@
         ;;            "INBOX")))
         )))
   (add-hook 'message-header-setup-hook #'cae-message-header-setup-hook))
+
+(use-package! sendmail
+  :defer t :config
+  (setq! mail-self-blind t
+         mail-setup-with-from nil
+         mail-source-delete-incoming t))
 
 (use-package! gnus-dired
   :hook (dired-mode . gnus-dired-mode))
