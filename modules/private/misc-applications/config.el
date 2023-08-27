@@ -535,6 +535,9 @@
   :defer t :init
   (defvar +mpc-workspace-name "*mpc*")
   (defvar +mpc--old-wconf nil)
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'mpc-mode evil-snipe-disabled-modes)))
   (map! :map +misc-applications-music-map
         "m" #'+mpc)
   (after! which-key
