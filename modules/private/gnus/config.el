@@ -10,7 +10,6 @@
   (gnus-registry-initialize)
   (setq nnmail-split-methods 'nnmail-split-fancy)
   (setq nnimap-split-methods 'nnmail-split-fancy)
-  (setq nnimap-unsplittable-articles '("UNDELETED"))
   (setq nnmail-split-fancy
         '(|
           (: spam-split)
