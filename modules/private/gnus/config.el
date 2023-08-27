@@ -30,7 +30,7 @@
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)
                                            (nnimap-split-methods fancy)
-                                           (nnimap-split-fancy '(| ("from" "look@strawberrytea.xyz" Sent)
+                                           (nnimap-split-fancy '(| ("from" "look@strawberrytea\\.xyz" Sent)
                                                                  "INBOX"))))
    nnmail-split-methods '(("Sent" "^From:.*look@strawberrytea.xyz.*"))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
