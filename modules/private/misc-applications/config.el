@@ -101,11 +101,11 @@
         :n "m" #'elfeed-toggle-star
         :n "F" #'elfeed-tube-fetch
         :n "l" #'+elfeed-toggle-log-buffer
-        :g "E" (elfeed-search-set-filter "@6-months-ago +emacs")
-        :g "Y" (elfeed-search-set-filter "@6-months-ago +tube")
-        :g "*" (elfeed-search-set-filter "@6-months-ago +star")
-        :g "a" (elfeed-search-set-filter "@6-months-ago")
-        :g "t" (elfeed-search-set-filter "@1-day-ago"))
+        :ng "E" (elfeed-search-set-filter "@6-months-ago +emacs")
+        :ng "Y" (elfeed-search-set-filter "@6-months-ago +tube")
+        :ng "*" (elfeed-search-set-filter "@6-months-ago +star")
+        :ng "a" (elfeed-search-set-filter "@6-months-ago")
+        :ng "t" (elfeed-search-set-filter "@1-day-ago"))
   (map! :map elfeed-search-mode-map
         "<f6>" #'cae-elfeed-hydra/body
         ;; Elfeed maps `h' to `describe-mode', which is not as good.
