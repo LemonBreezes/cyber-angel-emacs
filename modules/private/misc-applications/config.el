@@ -526,7 +526,7 @@
 (use-package! mpc
   :defer t :init
   (map! :map +misc-applications-music-map
-        "m" #'mpc)
+        "m" #'+mpc)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPC"))
