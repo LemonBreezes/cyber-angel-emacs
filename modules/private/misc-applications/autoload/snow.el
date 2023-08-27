@@ -14,7 +14,10 @@
     (setq +snow--old-wconf (current-window-configuration))
     (delete-other-windows)
     (switch-to-buffer (doom-fallback-buffer)))
-  (call-interactively #'snow))
+  (call-interactively #'snow)
+  (local-set-key (kbd "q") #'+snow-quit)
+  (when (featurep 'evil)
+    (evil-local-set-key 'normal (kbd "q") #'+snow-quit)))
 
 
 ;;;###autoload
