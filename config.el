@@ -934,7 +934,7 @@
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (after! sendmail
-  (setq send-mail-function #'async-smtpmail-send-it))
+  (setq send-mail-function #'sendmail-query-once))
 (after! message
   (setq message-send-mail-function #'async-smtpmail-send-it)
   (add-hook 'message-setup-hook #'message-check-recipients))
