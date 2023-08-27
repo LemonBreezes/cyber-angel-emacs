@@ -28,7 +28,6 @@
                                            (nnimap-server-port 993)
                                            (nnimap-stream ssl)
                                            (nnimap-expunge 'never)))
-   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
    gnus-uncacheable-groups "^nnml"
