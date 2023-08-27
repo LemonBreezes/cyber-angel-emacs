@@ -22,12 +22,11 @@
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'+flames-of-freedom-quit))))
 
-;;;###autoload
 (defun +flames-of-freedom-quit ()
-  (interactive)
   (if (modulep! :ui workspaces)
     (when (+workspace-exists-p +flames-of-freedom-workspace-name)
       (+workspace/delete +flames-of-freedom-workspace-name))
   (when +flames-of-freedom--old-wconf
-    (set-window-configuration +flames-of-freedom--old-wconf)))
-  (kill-buffer "Flames Of Freedom"))
+    (set-window-configuration +flames-of-freedom--old-wconf))))
+
+(advice-add #'flames-of-freedom-default :after #'+flames-of-freedom-quit)
