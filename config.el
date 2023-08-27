@@ -890,8 +890,6 @@
 
 ;;; Notes, GTD, Org, etc.
 
-(setq doom-scratch-initial-major-mode 'org-mode)
-
 (after! calendar
   (setq calendar-week-start-day 1
         calendar-mark-diary-entries-flag t))
