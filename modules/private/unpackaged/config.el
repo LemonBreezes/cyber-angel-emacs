@@ -7,7 +7,8 @@
 (when (modulep! :lang org)
   (after! org
     (map! :map org-mode-map
-          "<return>" #'cae-unpackaged-org-return-dwim))
+          "<return>" #'cae-unpackaged-org-return-dwim
+          "RET" #'cae-unpackaged-org-return-dwim))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
