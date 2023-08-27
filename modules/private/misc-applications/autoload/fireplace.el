@@ -31,4 +31,5 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (+workspace/delete +fireplace-workspace-name)
-    (set-window-configuration +fireplace--old-wconf)))
+    (set-window-configuration +fireplace--old-wconf))
+  (kill-buffer fireplace-buffer-name))
