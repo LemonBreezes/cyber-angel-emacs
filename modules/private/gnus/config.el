@@ -163,4 +163,4 @@
         ;;              "mail.sent"
         ;;            "INBOX")))
         )))
-  (add-hook 'message-header-setup-hook 'cae-message-header-setup-hook))
+  (add-hook 'message-header-setup-hook #'cae-message-header-setup-hook))
