@@ -72,6 +72,8 @@
 
 ;; Group mode commands for Gnus
 (use-package! gnus-group
+  :init
+  (autoload 'gnus-topic-mode "gnus-topic")
   :defer t :hook
   (gnus-group-mode . gnus-topic-mode)
   :config
