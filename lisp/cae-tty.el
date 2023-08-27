@@ -21,3 +21,9 @@
     (remove-hook hook #'doom-init-fonts-h -100)
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
+
+(add-hook 'doom-switch-frame-hook
+          (cae-defun cae-tty-setup-frame ()
+            "Setup frame for TTY."
+            (unless (cae-display-graphic-p)
+              (vertico-posframe-mode -1))))
