@@ -13,8 +13,6 @@
     ("a" autotetris-mode "Autotetris" :column "Misc")
     ,@(if (modulep! :editor evil)
           (list '("ZZ" tetris-end-game "Quit" :column "Misc")
-                '("G" tetris-move-bottom "Move bottom" :column "Movement")
-                '("J" tetris-move-bottom "Move bottom" :column "Movement")
                 '("TAB" tetris-move-bottom "Move bottom" :column "Movement"))
         (list '("SPC" tetris-move-bottom "Move bottom" :column "Movement"))))
  t)
