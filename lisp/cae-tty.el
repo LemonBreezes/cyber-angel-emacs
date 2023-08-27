@@ -25,5 +25,6 @@
 (add-hook 'doom-switch-frame-hook
           (cae-defun cae-tty-setup-frame ()
             "Setup frame for TTY."
-            (unless (cae-display-graphic-p)
+            (if (cae-display-graphic-p)
+                (vertico-posframe-mode +1)
               (vertico-posframe-mode -1))))
