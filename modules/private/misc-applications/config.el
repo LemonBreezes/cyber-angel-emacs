@@ -102,6 +102,7 @@
         :n "F" #'elfeed-tube-fetch
         :n "l" #'+elfeed-toggle-log-buffer
         :ng "E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs"))
+        :ng "R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit"))
         :ng "Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube"))
         :ng "*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star"))
         :ng "a" (cmd! () (elfeed-search-set-filter "@6-months-ago"))
