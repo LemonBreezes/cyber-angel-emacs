@@ -1,5 +1,16 @@
 ;;; private/misc-applications/autoload/mpc.el -*- lexical-binding: t; -*-
 
+;;;###autoload (autoload '+mpc-hydra/body "private/misc-applications/autoload/mpc" nil t)
+(defhydra +mpc-hydra (:color pink :hint nil)
+  ("<f6>" nil "Exit" :exit t)
+  ("q" +mpc-quit nil :exit t)
+  ("<" mpc-prev "Previous song")
+  (">" mpc-next "Next song")
+  ("s" mpc-toggle-place "Toggle play")
+  ("p" mpc-pause "Pause")
+  ("g" mpc-seek-current "Seek current")
+  ("o" mpc-goto-playing-song "Goto playing song"))
+
 ;;;###autoload
 (defun +mpc (&optional arg)
   (interactive "P")
