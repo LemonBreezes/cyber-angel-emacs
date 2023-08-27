@@ -12,7 +12,8 @@
 ;;;###autoload
 (defun +fireplace (&optional arg)
   (interactive "P")
-  (unless arg
+  (if arg
+      (setq +fireplace--old-wconf nil)
     (if (modulep! :ui workspaces)
         ;; delete current workspace if empty
         ;; this is useful when mu4e is in the daemon
@@ -32,5 +33,6 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (+workspace/delete +fireplace-workspace-name)
-    (set-window-configuration +fireplace--old-wconf))
+    (when +fireplace--old-wconf
+      (set-window-configuration +fireplace--old-wconf)))
   (kill-buffer fireplace-buffer-name))
