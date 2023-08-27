@@ -40,7 +40,7 @@
    gnus-uncacheable-groups "^nnml"
    gnus-large-newsgroup 4000
    network-security-level 'low
-   gnus-permanently-visible-groups "INBOX"
+   gnus-permanently-visible-groups "INBOX\\|Sent"
 ;;; Startup functions
    gnus-save-killed-list nil
    gnus-check-new-newsgroups nil
