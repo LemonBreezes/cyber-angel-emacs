@@ -256,6 +256,9 @@
     (after! elfeed
       (set-popup-rule! (format "^%s$" (regexp-quote elfeed-log-buffer-name))
         :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
+    (after! bbdb
+      (set-popup-rule! (format "^%s$" (regexp-quote bbdb-buffer-name))
+        :select nil :quit t :ttl nil))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
   ;; Lower the default popup delay.
