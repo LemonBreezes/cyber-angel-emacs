@@ -5,7 +5,7 @@
   (map! :leader :desc "Gnus" "o m" #'gnus-plugged))
 
 (use-package! gnus
-  :commands gnus gnus-unplugged gnus-agent-batch
+  :commands gnus-unplugged
   :config
   (setq
    gnus-use-cache t
