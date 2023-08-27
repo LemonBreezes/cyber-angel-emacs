@@ -141,7 +141,7 @@
          ;; More threading
          gnus-show-threads t
          gnus-thread-indent-level 2
-         gnus-thread-hide-subtree nil
+         gnus-thread-hide-subtree t
          ;; Sorting
          gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
          gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
