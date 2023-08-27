@@ -50,7 +50,6 @@
                                            (nnimap-split-methods default)))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
-   gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
    gnus-uncacheable-groups "^nnml"
    gnus-large-newsgroup 4000
    network-security-level 'low
@@ -86,7 +85,6 @@
    gnus-asynchronous t
    gnus-use-header-prefetch t
    gnus-use-article-prefetch t
-   gnus-fetch-old-headers 'some
 ;;; Cache interface for Gnus
    gnus-cache-enter-articles '(ticked dormant unread)
    gnus-cache-remove-articles '(read)
@@ -135,13 +133,11 @@
   (setq! gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
          ;; Loose threads
          gnus-summary-make-false-root 'adopt
-         gnus-simplify-subject-functions '(gnus-simplify-subject-re gnus-simplify-whitespace)
+         gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
          gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
          ;; Filling in threads
-         ;; 2 old articles are enough for memory
-         gnus-fetch-old-headers 2
-         gnus-fetch-old-ephemeral-headers 2
          gnus-build-sparse-threads 'some
+         gnus-fetch-old-headers 'some
          ;; More threading
          gnus-show-threads t
          gnus-thread-indent-level 2
