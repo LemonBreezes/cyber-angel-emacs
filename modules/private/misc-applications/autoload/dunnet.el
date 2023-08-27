@@ -26,4 +26,4 @@
         (+workspace/delete +dunnet-workspace-name))
     (when +dunnet--old-wconf
       (set-window-configuration +dunnet--old-wconf)))
-  (kill-buffer "*dunnet*"))
+  (kill-buffer "*dungeon*"))
