@@ -429,6 +429,8 @@
 
 (use-package! flames-of-freedom
   :defer t :init
+  (defvar +flames-of-freedom-workspace-name "*flames-of-freedom*")
+  (defvar +flames-of-freedom--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
         "F" #'flames-of-freedom-default))
 
