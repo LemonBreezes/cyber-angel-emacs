@@ -403,13 +403,11 @@
   (defvar +tetris-workspace-name "*tetris*")
   (defvar +tetris--old-wconf nil)
   (map! (:map +misc-applications-games-map
-         "t" #'+tetris)
-        (:map +misc-applications-eyecandy-map
-         "t" #'autotetris))
+         "t" #'+tetris))
   :config
   (map! :map tetris-mode-map
         "<f6>" #'+tetris-hydra/body
-        "a" #'autotetris-mode
+        :ng "a" #'autotetris-mode
         :ng "q" #'+tetris-quit)
   (map! :map autotetris-mode-map
         "a" nil))                       ;Not sure what `autotetris-move' even
