@@ -148,30 +148,6 @@
   (map! :map gnus-article-mode-map
         "<f6>" #'cae-gnus-article-cheatsheet/body))
 
-(use-package! message
-  :defer t :config
-  (defun cae-message-header-setup-hook ()
-    (message-remove-header "From")
-    (let ((gcc (message-field-value "Gcc")))
-      (when (or (null gcc)
-                (string-match "nnfolder\\+archive:" gcc))
-        (message-remove-header "Bcc")
-        (message-remove-header "Gcc")
-        ;; (message-add-header (format "Bcc: %s" user-mail-address))
-        ;; (message-add-header
-        ;;  (format "Gcc: %s"
-        ;;          (if (string-match "\\`list\\." (or gnus-newsgroup-name ""))
-        ;;              "mail.sent"
-        ;;            "INBOX")))
-        )))
-  (add-hook 'message-header-setup-hook #'cae-message-header-setup-hook))
-
-(use-package! sendmail
-  :defer t :config
-  (setq! mail-self-blind t
-         mail-setup-with-from nil
-         mail-source-delete-incoming t))
-
 (use-package! gnus-dired
   :hook (dired-mode . gnus-dired-mode))
 
