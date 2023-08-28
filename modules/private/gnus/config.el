@@ -38,7 +38,7 @@
    gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "Gmane"
                                     (nntp-address "news.gmane.io")
-                                    (gnus-search-engine notmuch))
+                                    (gnus-search-engine gnus-search-notmuch))
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea"))
