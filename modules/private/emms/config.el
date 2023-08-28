@@ -48,3 +48,58 @@
         helm-emms-default-sources '(helm-source-emms-files
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
+
+(use-package! emms-mode-line-cycle
+  :after emms
+  :config
+  (custom-set-variables
+   '(emms-mode-line-cycle-max-width 25)
+   '(emms-mode-line-cycle-additional-space-num 4)
+   '(emms-mode-line-cycle-use-icon-p t)
+   '(emms-mode-line-format " [%s]")
+   '(emms-mode-line-cycle-any-width-p t)
+   '(emms-mode-line-cycle-velocity 2)
+   '(emms-mode-line-cycle-current-title-function
+     (lambda ()
+       (let ((track (emms-playlist-current-selected-track)))
+         (cl-case (emms-track-type track)
+           ((streamlist)
+            (let ((stream-name (emms-stream-name
+                                (emms-track-get track 'metadata))))
+              (if stream-name stream-name (emms-track-description track))))
+           ((url) (emms-track-description track))
+           (t (file-name-nondirectory
+               (emms-track-description track)))))))
+   '(emms-mode-line-titlebar-function
+     (lambda ()
+       '(:eval
+         (when emms-player-playing-p
+           (format " %s %s"
+                   (format emms-mode-line-format (emms-mode-line-cycle-get-title))
+                   emms-playing-time-string))))))
+  ;; Disable variable pitch fonts in the modeline because they look bad with the
+  ;; cycling effect.
+  (after! modus-themes
+    (setq! modus-themes-variable-pitch-ui nil))
+  (after! ef-themes
+    (setq! ef-themes-variable-pitch-ui nil))
+  (setq! emms-mode-line-icon-image-cache
+         '(image :type xpm :ascent center :data "/* XPM */
+static char *note[] = {
+/* width height num_colors chars_per_pixel */
+\"    10   11        2            1\",
+/* colors */
+\". c #1fb3b3\",
+\"# c None s None\",
+/* pixels */
+\"###...####\",
+\"###.#...##\",
+\"###.###...\",
+\"###.#####.\",
+\"###.#####.\",
+\"#...#####.\",
+\"....#####.\",
+\"#..######.\",
+\"#######...\",
+\"######....\",
+\"#######..#\" };")))
