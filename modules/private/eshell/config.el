@@ -98,6 +98,8 @@
 ;; Set the prompt
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
 (after! em-prompt
+  (require 'virtualenvwrapper)
+  (venv-initialize-eshell)
   (setq eshell-highlight-prompt nil
         eshell-prompt-function #'epe-theme-lambda)
   (after! eshell-prompt-extras
