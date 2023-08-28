@@ -33,7 +33,9 @@
       (progn (setq orderless-component-separator
                    (cae-orderless-escapable-split-fn ?,))
              (after! corfu
-               (setq corfu-separator ?,)))
+               (setq corfu-separator ?,)
+               (map! :map corfu-map
+                     "," #'corfu-insert-separator)))
     (setq orderless-component-separator " +")))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
