@@ -39,7 +39,7 @@
     ("a" "Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
     ("m" "EMMS indexed" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
 
-;; These two functions are from
+;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
 
 ;;;###autoload
@@ -54,3 +54,23 @@ file extension."
       (search-forward-regexp (rx "." (+ alnum) eol))
       (delete-region (match-beginning 0) (match-end 0)))
     (buffer-string)))
+
+;;;###autoload
+(defun my-emms-track-description (track)
+  "Return a description of TRACK, for EMMS, but try to cut just
+the track name from the file name, and just use the file name too
+rather than the whole path."
+  (let ((artist (emms-track-get track 'info-artist))
+        (title (emms-track-get track 'info-title)))
+    (cond ((and artist title)
+           ;; Converting the artist/title to a string works around a bug in `emms-info-exiftool'
+           ;; where, if your track name is a number, e.g. "1999" by Jeroen Tel, then it will be an
+           ;; integer type here, confusing everything.
+           ;;
+           ;; I would fix the bug properly and submit a patch but I just cannot be bothered to
+           ;; figure out how to do that.
+           (concat (format "%s" artist) " - " (format "%s" title)))
+          (title title)
+          ((eq (emms-track-type track) 'file)
+           (track-title-from-file-name (emms-track-name track)))
+          (t (emms-track-simple-description track)))))
