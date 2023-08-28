@@ -19,7 +19,7 @@
   ("q" nil)
   ("<f6>" nil))
 
-;;;###autoload (autoload 'cae-gnus-summary-cheatsheet/body "private/gnus/autoload/cheatsheets" nil t"
+;;;###autoload (autoload 'cae-gnus-summary-cheatsheet/body "private/gnus/autoload/cheatsheets" nil t)
 (defhydra cae-gnus-summary-cheatsheet (:color blue)
   "
 [_s_] Show thread   [_F_] Forward (C-c C-f)
