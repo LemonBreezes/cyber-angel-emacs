@@ -7,6 +7,13 @@
   :config
   (emms-all)
   (emms-default-players)
+  (setq emms-repeat-playlist t
+        emms-later-do-interval 0.01
+        emms-later-do-batch 20
+        emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
+        emms-source-file-default-directory (expand-file-name "/hdd/music/")
+        emms-player-mpd-music-directory (expand-file-name "/hdd/music/")
+        )
   (map! :map emms-playlist-mode-map
         :localleader
         "l" #'emms-toggle-repeat-playlist
