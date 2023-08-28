@@ -23,6 +23,7 @@
   (emms-all)
   (emms-default-players)
   (setq emms-repeat-playlist t
+        emms-repeat-track t
         emms-later-do-interval 0.5
         emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
@@ -40,7 +41,9 @@
         "t" #'emms-toggle-repeat-track
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
-  (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track))
+  (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
+
+  (setq emms-track-description-function 'cae-emms-track-description))
 
 (use-package! helm-emms
   :when (modulep! :private helm)
