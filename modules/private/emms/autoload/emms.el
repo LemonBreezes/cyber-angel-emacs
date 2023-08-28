@@ -34,7 +34,7 @@
   "Jump to EMMS music directories."
   ["Quick Access"
    [("v" "VGM" (lambda () (interactive) (dired "/mnt/music/VGM/")))
-    ("y" "Youtube Music" (lambda () (interactive) (dired "/mnt/Youtube Music/")))
+    ("y" "Youtube Music" (lambda () (interactive) (dired "/mnt/music/Youtube Music/")))
     ("p" "Playlists" (lambda () (interactive) (dired "/mnt/music/Playlists/")))
     ("a" "Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
     ("m" "EMMS indexed" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
