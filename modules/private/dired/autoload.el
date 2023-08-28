@@ -72,12 +72,20 @@
   (call-interactively #'previous-buffer)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
-    (run-at-time 0.1 nil #'dirvish-layout-toggle)))
+    (run-at-time
+     0.0 nil
+     (lambda ()
+       (when (and (derived-mode-p 'dired-mode)
+                  (window-dedicated-p))
+         (dirvish-layout-toggle))))))
 
 ;;;###autoload
 (defun cae-switch-to-next-buffer ()
   (interactive)
   (call-interactively #'next-buffer)
-  (when (and (derived-mode-p 'dired-mode)
-             (window-dedicated-p))
-    (run-at-time 0.0 nil #'dirvish-layout-toggle)))
+  (run-at-time
+   0.0 nil
+   (lambda ()
+     (when (and (derived-mode-p 'dired-mode)
+                (window-dedicated-p))
+       (dirvish-layout-toggle)))))
