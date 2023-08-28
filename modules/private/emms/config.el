@@ -33,6 +33,6 @@
   (setq helm-emms-dired-directories (list (expand-file-name "/mnt/unindexed-music/"))
         helm-emms-use-track-description-function t
         helm-emms-directory-files-recursive-fn #'helm-emms-walk-directory-with-find
-        helm-emms-default-sources '(helm-source-emms-files
+        helm-emms-default-sources '(;;helm-source-emms-files
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
