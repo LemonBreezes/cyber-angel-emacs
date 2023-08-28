@@ -110,7 +110,7 @@
    gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)
 
    gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
-                      ("hackernews" "nnhackernews:news")
+                      ("hackernews" "nnhackernews:news" "nnhackernews:ask" "nnhackernews:show" "nnhackernews:jobs")
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
