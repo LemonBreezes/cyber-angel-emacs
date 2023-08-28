@@ -24,6 +24,7 @@
 
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
+   gnus-group-use-permanent-levels t
    gnus-agent-queue-mail nil
    gnus-agent-expire-days 90
    gnus-always-read-dribble-file t
