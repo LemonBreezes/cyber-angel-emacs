@@ -1,5 +1,7 @@
 ;;; private/emms/config.el -*- lexical-binding: t; -*-
 
+(add-to-list 'safe-local-variable-directories "/mnt/music/")
+
 (use-package! emms
   :defer t :init
   (defvar +emms-workspace-name "*emms*")
