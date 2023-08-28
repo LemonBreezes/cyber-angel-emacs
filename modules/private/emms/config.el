@@ -42,6 +42,8 @@
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
+  (add-hook 'emms-browser-mode-hook #'doom-set-buffer-real)
+  (add-hook 'emms-playlist-mode-hook #'doom-set-buffer-real)
 
   (setq emms-track-description-function 'cae-emms-track-description))
 
