@@ -72,3 +72,19 @@
              (window-dedicated-p))
     (dirvish-quit))
   (apply oldfun args))
+
+;;;###autoload
+(defun cae-switch-to-previous-buffer ()
+  (interactive)
+  (call-interactively #'previous-buffer)
+  (when (and (derived-mode-p 'dired-mode)
+             (window-dedicated-p))
+    (call-interactively #'dirvish-layout-toggle)))
+
+;;;###autoload
+(defun cae-switch-to-next-buffer ()
+  (interactive)
+  (call-interactively #'next-buffer)
+  (when (and (derived-mode-p 'dired-mode)
+             (window-dedicated-p))
+    (call-interactively #'dirvish-layout-toggle)))
