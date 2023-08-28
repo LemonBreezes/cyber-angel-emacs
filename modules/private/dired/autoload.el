@@ -62,7 +62,8 @@
 (defun cae-dired-find-file-other-window-a (oldfun &rest args)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
-    (dirvish-quit))
+    (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+      (if fn (funcall fn) (dirvish-kill dv))))
   (apply oldfun args))
 
 ;;;###autoload
