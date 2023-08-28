@@ -556,4 +556,5 @@
         :ng "q" #'+mpc-quit
         "<f6>" #'+mpc-hydra/body
         :n "C-j" #'evil-collection-mpc-move-down
-        :n "C-k" #'evil-collection-mpc-move-up))
+        :n "C-k" #'evil-collection-mpc-move-up
+        :n "o" #'mpc-goto-playing-song))
