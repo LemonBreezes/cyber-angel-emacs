@@ -21,8 +21,8 @@
         emms-later-do-interval 0.5
         emms-later-do-batch 1000
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
-        emms-source-file-default-directory (expand-file-name "/mnt/unindexed-music/")
-        emms-player-mpd-music-directory (expand-file-name "/mnt/unindexed-music/")
+        emms-source-file-default-directory (expand-file-name "/mnt/music/")
+        emms-player-mpd-music-directory (expand-file-name "/mnt/music/")
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool))
@@ -42,7 +42,7 @@
   (map! :leader
         :desc "Helm EMMS" "eh" #'helm-emms)
   :config
-  (setq helm-emms-dired-directories (list (expand-file-name "/mnt/unindexed-music/"))
+  (setq helm-emms-dired-directories (list (expand-file-name "/mnt/music/"))
         helm-emms-use-track-description-function t
         helm-emms-directory-files-recursive-fn #'helm-emms-walk-directory-with-find
         helm-emms-default-sources '(helm-source-emms-files
