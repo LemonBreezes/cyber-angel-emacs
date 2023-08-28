@@ -30,7 +30,8 @@
         emms-player-mpd-music-directory (expand-file-name "Artists" +emms-music-dir)
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-thumbnail-async
-        emms-info-functions '(emms-info-exiftool))
+        emms-info-functions '(emms-info-exiftool)
+        emms-browser-switch-to-playlist-on-add t)
   (map! :map emms-playlist-mode-map
         :localleader
         "l" #'emms-toggle-repeat-playlist
