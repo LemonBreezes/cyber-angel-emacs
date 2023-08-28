@@ -113,7 +113,6 @@
    gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
                       ("hackernews" "nnhackernews:news")
                       ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel"
-                       "nntp+Gmane:gmane.emacs.emms.user"
                        "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user"
                        "nntp+Gmane:gmane.emacs.orgmode")
                       ("Gnus"))
@@ -229,5 +228,10 @@
   :defer t :config
   (setq nnhackernews-render-story t))
 
-(after! gnus-srvr
+(use-package! gnus-srvr
+  :defer t :config
   (map! [remap gnus-browse-unsubscribe-current-group] #'gnus-browse-toggle-subscription-at-point))
+
+(use-package! nnmairix
+  :defer t :config
+  (setq nnmairix-allowfast-default t))
