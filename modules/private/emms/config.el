@@ -24,6 +24,7 @@
   (emms-default-players)
   (setq emms-repeat-playlist t
         emms-repeat-track t
+        emms-random-playlist t
         emms-later-do-interval 0.5
         emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
@@ -42,8 +43,8 @@
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
-  (add-hook 'emms-browser-mode-hook #'doom-set-buffer-real)
-  (add-hook 'emms-playlist-mode-hook #'doom-set-buffer-real)
+  (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
 
   (setq emms-track-description-function 'cae-emms-track-description))
 
