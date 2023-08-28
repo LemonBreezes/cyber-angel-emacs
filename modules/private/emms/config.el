@@ -39,8 +39,7 @@
 (use-package! helm-emms
   :when (modulep! :private helm)
   :defer t :init
-  (map! :map +misc-applications-music-map
-        "e" #'helm-emms)
+  (map! :leader "Eh" #'helm-emms)
   :config
   (setq helm-emms-dired-directories (list (expand-file-name "/mnt/unindexed-music/"))
         helm-emms-use-track-description-function t
