@@ -101,7 +101,9 @@
       :i "C-c" #'copilot-complete
       :i "C-f" #'cape-file
       :i "C-s" #'yasnippet-capf
-      :i "C-e" #'cape-elisp-symbol)
+      :i "C-l" #'cape-line
+      :i "C-d" (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
