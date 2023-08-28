@@ -19,7 +19,7 @@
   (emms-default-players)
   (setq emms-repeat-playlist t
         emms-later-do-interval 0.5
-        emms-later-do-batch 1000
+        emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
         emms-source-file-default-directory (expand-file-name "/mnt/music/")
         emms-player-mpd-music-directory (expand-file-name "/mnt/music/")
@@ -80,9 +80,9 @@
   ;; Disable variable pitch fonts in the modeline because they look bad with the
   ;; cycling effect.
   (after! modus-themes
-    (setq! modus-themes-variable-pitch-ui nil))
+    (setq modus-themes-variable-pitch-ui nil))
   (after! ef-themes
-    (setq! ef-themes-variable-pitch-ui nil))
+    (setq ef-themes-variable-pitch-ui nil))
   (setq! emms-mode-line-icon-image-cache
          '(image :type xpm :ascent center :data "/* XPM */
 static char *note[] = {
