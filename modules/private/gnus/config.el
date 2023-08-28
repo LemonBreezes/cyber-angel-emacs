@@ -86,7 +86,7 @@
 ;;; Asynchronous support for Gnus
    gnus-asynchronous t
    gnus-use-header-prefetch t
-   gnus-use-article-prefetch 30
+   gnus-use-article-prefetch t
 ;;; Cache interface for Gnus
    gnus-cache-enter-articles '(ticked dormant unread)
    gnus-cache-remove-articles '(read)
