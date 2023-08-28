@@ -128,6 +128,7 @@
   (map! :map eshell-mode-map
         "C-l" #'cae-eshell-clear
         "C-S-l" #'cae-sudo-toggle
+        :i "C-u" #'eshell-kill-input
         :ig "C-d" #'cae-eshell-quit-or-delete-char))
 
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
