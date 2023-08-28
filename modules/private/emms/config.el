@@ -9,7 +9,7 @@
   (emms-default-players)
   (setq emms-repeat-playlist t
         emms-later-do-interval 0.01
-        emms-later-do-batch 20
+        emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
         emms-source-file-default-directory (expand-file-name "/mnt/unindexed-music/")
         emms-player-mpd-music-directory (expand-file-name "/mnt/unindexed-music/")
@@ -26,6 +26,7 @@
         "m" #'emms-shuffle))
 
 (use-package! helm-emms
+  :when (modulep! :private helm)
   :defer t :init
   (map! :map +misc-applications-music-map
         "e" #'helm-emms)
