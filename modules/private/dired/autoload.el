@@ -68,10 +68,9 @@
 
 (defun cae-dired-switch-buffer--handle-dirvish (fn)
   (when (and (derived-mode-p 'dired-mode)
-           (one-window-p)
-           (not (window-dedicated-p)))
-  (ignore-error user-error
-    (dirvish-layout-toggle)))
+             (window-dedicated-p))
+    (ignore-error user-error
+      (dirvish-layout-toggle)))
   (call-interactively fn))
 
 ;;;###autoload
