@@ -75,6 +75,7 @@
     (run-at-time
      0.0 nil
      (lambda ()
+       (+log "Eh")
        (when (and (derived-mode-p 'dired-mode)
                   (window-dedicated-p))
          (dirvish-layout-toggle))))))
