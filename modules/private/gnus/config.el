@@ -222,4 +222,4 @@
 
 (use-package! nnhackernews
   :defer t :config
-  (setq nnhackernews-render-story nil))
+  (setq nnhackernews-render-story t))
