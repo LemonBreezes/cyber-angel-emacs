@@ -70,15 +70,12 @@
 (defun cae-switch-to-previous-buffer ()
   (interactive)
   (previous-buffer)
-  (when (and (derived-mode-p 'dired-mode)
-             (window-dedicated-p))
-    (run-at-time
-     0.0 nil
-     (lambda ()
-       (+log "Eh")
-       (when (and (derived-mode-p 'dired-mode)
-                  (window-dedicated-p))
-         (dirvish-layout-toggle))))))
+  (run-at-time
+   0.0 nil
+   (lambda ()
+     (when (and (derived-mode-p 'dired-mode)
+                (window-dedicated-p))
+       (dirvish-layout-toggle)))))
 
 ;;;###autoload
 (defun cae-switch-to-next-buffer ()
