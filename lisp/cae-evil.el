@@ -100,7 +100,8 @@
 (map! :prefix "C-x"
       :i "C-c" #'copilot-complete
       :i "C-f" #'cape-file
-      :i "C-s" #'yasnippet-capf)
+      :i "C-s" #'yasnippet-capf
+      :i "C-e" #'cape-elisp-symbol)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
