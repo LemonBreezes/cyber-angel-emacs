@@ -119,8 +119,8 @@
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
-                         (("fastmail" visible nil nil))
                          (("emacs" visible nil nil))
+                         (("fastmail" visible nil nil))
                          (("hackernews" visible))))
   (map! :map gnus-group-mode-map
         "<f6>" #'cae-gnus-group-cheatsheet/body))
