@@ -10,8 +10,8 @@
     (map! :map dired-mode-map
           :ng "E" #'emms-play-dired))
   (map! :leader
-        :prefix-map ("E" . "EMMS")
-        :desc "Smart browse" "E" #'+emms)
+        :prefix-map ("e" . "EMMS")
+        :desc "Smart browse" "e" #'+emms)
   :config
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit)
@@ -39,8 +39,8 @@
 (use-package! helm-emms
   :when (modulep! :private helm)
   :defer t :init
-  (map! :map +misc-applications-music-map
-        "e" #'helm-emms)
+  (map! :leader
+        "eh" #'helm-emms)
   :config
   (setq helm-emms-dired-directories (list (expand-file-name "/mnt/unindexed-music/"))
         helm-emms-use-track-description-function t
