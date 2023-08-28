@@ -8,14 +8,6 @@
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
-;;;###autoload
-(defun cae-dired-maximize-buffer ()
-  (interactive)
-  (call-interactively #'doom/window-maximize-buffer)
-  (when (one-window-p)
-    (ignore-error user-error
-      (dirvish-layout-switch dirvish-default-layout))))
-
 ;;;###autoload (autoload 'cae-dired-dirvish-hydra/body "private/dired/autoload" nil t)
 (defhydra cae-dired-dirvish-hydra (:color pink)
   ("<f6>" nil "Exit" :exit t)
