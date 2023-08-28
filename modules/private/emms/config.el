@@ -15,7 +15,7 @@
   :config
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
-        :ng "a" (cmd! () (dirvish-quick-access)))
+        :ng "a" #'+emms-quick-access)
   (emms-all)
   (emms-default-players)
   (setq emms-repeat-playlist t
