@@ -69,7 +69,7 @@
 ;;;###autoload
 (defun cae-switch-to-previous-buffer ()
   (interactive)
-  (call-interactively #'previous-buffer)
+  (previous-buffer)
   (when (and (derived-mode-p 'dired-mode)
              (window-dedicated-p))
     (run-at-time
