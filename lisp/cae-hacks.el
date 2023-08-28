@@ -144,7 +144,6 @@ It is meant to be used as a `post-gc-hook'."
      resume: ")))")
    str arg))
 
-
 ;; For backwards compatibility. `syslog-mode' uses this.
 (defun toggle-read-only (arg)
   (read-only-mode
