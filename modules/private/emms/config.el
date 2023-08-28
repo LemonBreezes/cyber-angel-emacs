@@ -15,3 +15,15 @@
         "t" #'emms-toggle-repeat-track
         "s" #'emms-playlist-save
         "m" #'emms-shuffle))
+
+(use-package! helm-emms
+  :defer t :init
+  (map! :map +misc-applications-music-map
+        "e" #'helm-emms)
+  :config
+  (setq helm-emms-dired-directories (list (expand-file-name "/mnt/unindexed-music/"))
+        helm-emms-use-track-description-function t
+        helm-emms-directory-files-recursive-fn #'helm-emms-walk-directory-with-find
+        helm-emms-default-sources '(helm-source-emms-files
+                                    helm-source-emms-streams
+                                    helm-source-emms-dired)))
