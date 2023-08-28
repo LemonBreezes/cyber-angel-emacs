@@ -37,8 +37,7 @@
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
    gnus-secondary-select-methods '((nntp "Gmane"
-                                    (nntp-address "news.gmane.io")
-                                    (gnus-search-engine gnus-search-mairix))
+                                    (nntp-address "news.gmane.io"))
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea"))
