@@ -548,6 +548,12 @@
   ;; Treat all themes as safe.
   (setq custom-safe-themes t)
 
+  ;; Skip some buffers with prev buffer
+  (setq switch-to-prev-buffer-skip
+        (lambda (_win buf _bury-or-kill)
+          (and (not (get-buffer-window buf))
+               (doom-real-buffer-p buf))))
+
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
   ;; Allow us to undo deleting frames.
