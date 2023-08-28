@@ -65,3 +65,4 @@
     (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
       (if fn (funcall fn) (dirvish-kill dv))))
   (apply oldfun args))
+
