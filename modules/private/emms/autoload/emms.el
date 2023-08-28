@@ -22,7 +22,7 @@
 ;;;###autoload
 (defun +emms-quit ()
   (interactive)
-  (emms-quit)
+  (call-interactively #'emms-browser-bury-buffer)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +emms-workspace-name)
         (+workspace/delete +emms-workspace-name))
