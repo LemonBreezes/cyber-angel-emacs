@@ -4,8 +4,8 @@
   :defer t :init
   (defvar +emms-workspace-name "*emms*")
   (defvar +emms--old-wconf nil)
-  (setq emms-directory (concat doom-data-dir "emms")
-        emms-cache-file (concat doom-cache-dir "emms"))
+  (setq emms-directory (concat doom-data-dir "emms/")
+        emms-cache-file (concat emms-directory "cache"))
   (after! dired
     (map! :map dired-mode-map
           :ng "E" #'emms-play-dired))
