@@ -6,7 +6,7 @@
 
 (when (modulep! :editor evil)
   (after! evil-snipe
-    (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode))
+    (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode gnus-server-mode))
       (cl-pushnew mode evil-snipe-disabled-modes))))
 
 (use-package! gnus
@@ -112,6 +112,9 @@
 
    gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
                       ("hackernews" "nnhackernews:news")
+                      ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel"
+                       "nntp+Gmane:gmane.emacs.emms.patches"
+                       )
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
@@ -223,3 +226,6 @@
 (use-package! nnhackernews
   :defer t :config
   (setq nnhackernews-render-story t))
+
+(after! gnus-srvr
+  (map! [remap gnus-browse-unsubscribe-current-group] #'gnus-browse-toggle-subscription-at-point))
