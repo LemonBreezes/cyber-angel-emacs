@@ -41,7 +41,7 @@
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea"))
                                    (nnhackernews "")
-                                   (nndiscourse "https://discourse.doomemacs.org" (nndiscourse-scheme "https"))
+                                   (nndiscourse "discourse.doomemacs.org" (nndiscourse-scheme "https"))
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
