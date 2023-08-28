@@ -32,12 +32,6 @@
 ;;;###autoload (autoload '+emms-quick-access "private/emms/autoload/emms" nil t)
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
-  ;; /mnt/music/VGM/
-  ;; /mnt/Youtube Music/
-  ;; /mnt/music/Playlists/
-  ;; /mnt/music/Anime Music/
-  ;; /mnt/music/Artists/
-  ;; make a transient that will open the above directories in dired
   ["Quick Access"
    [("v" "VGM" (lambda () (interactive) (dired "/mnt/music/VGM/")))
     ("y" "Youtube Music" (lambda () (interactive) (dired "/mnt/Youtube Music/")))
