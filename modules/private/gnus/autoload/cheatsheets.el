@@ -47,7 +47,7 @@
   ("q" nil)
   ("<f6>" nil))
 
-;;;###autoload (autoload 'cae-gnus-article-cheatsheet/body "private/gnus/autoload/cheatsheets" nil t"
+;;;###autoload (autoload 'cae-gnus-article-cheatsheet/body "private/gnus/autoload/cheatsheets" nil t)
 (defhydra cae-gnus-article-cheatsheet (:color blue)
   "
 [_o_] Save attachment        [_F_] Forward
