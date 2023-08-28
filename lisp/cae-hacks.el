@@ -130,10 +130,6 @@ It is meant to be used as a `post-gc-hook'."
     (when (bolp)
       (goto-char p))))
 
-;; The macrostep keymap is completely broken for me without this line. This
-;; might be an Emacs30 thing.
-;;(defvaralias 'macrostep-mode-map 'macrostep-mode-keymap)
-
 ;; This autoload fixes a void function error on `find-file-hook' that occurs
 ;; sporadically for me.
 (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
