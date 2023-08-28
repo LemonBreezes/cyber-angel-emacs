@@ -71,7 +71,7 @@
            (one-window-p)
            (not (window-dedicated-p)))
   (ignore-error user-error
-    (dirvish-layout-switch dirvish-default-layout)))
+    (dirvish-layout-toggle)))
   (call-interactively fn))
 
 ;;;###autoload
