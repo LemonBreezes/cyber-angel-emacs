@@ -7,6 +7,9 @@
   (after! dired
     (map! :map dired-mode-map
           :ng "E" #'emms-play-dired))
+  (map! :leader
+        :prefix-map ("E" . "EMMS")
+        :desc "Smart browse" "E" #'emms-smart-browse)
   :config
   (emms-all)
   (emms-default-players)
@@ -30,7 +33,7 @@
 
 (use-package! helm-emms
   :when (modulep! :private helm)
-  : t :init
+  :defer t :init
   (map! :map +misc-applications-music-map
         "e" #'helm-emms)
   :config
