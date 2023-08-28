@@ -29,7 +29,9 @@
         "i" #'emms-insert-file
         "t" #'emms-toggle-repeat-track
         "s" #'emms-playlist-save
-        "m" #'emms-shuffle))
+        "m" #'emms-shuffle)
+ (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
+  )
 
 (use-package! helm-emms
   :when (modulep! :private helm)
