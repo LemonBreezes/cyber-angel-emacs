@@ -169,7 +169,7 @@
           ruler-mode
           vline-mode))
   (setq minions-prominent-modes '(defining-kbd-macro
-                                   projectile-mode
+                                   ;;projectile-mode
                                    flycheck-mode
                                    flymake-mode
                                    persp-mode
