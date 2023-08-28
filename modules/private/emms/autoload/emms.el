@@ -56,7 +56,7 @@ file extension."
     (buffer-string)))
 
 ;;;###autoload
-(defun my-emms-track-description (track)
+(defun cae-emms-track-description (track)
   "Return a description of TRACK, for EMMS, but try to cut just
 the track name from the file name, and just use the file name too
 rather than the whole path."
