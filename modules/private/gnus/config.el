@@ -62,7 +62,7 @@
    ;; No other newsreader is used.
    gnus-save-newsrc-file nil
    gnus-read-newsrc-file nil
-   gnus-subscribe-newsgroup-method 'gnus-subscribe-interactively
+   gnus-subscribe-newsgroup-method 'gnus-subscribe-zombies
    ;; Emacs 28 introduces a unified query lang
    gnus-search-use-parsed-queries t
 ;;; Article mode for Gnus
