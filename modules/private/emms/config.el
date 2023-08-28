@@ -4,6 +4,9 @@
   :defer t :init
   (setq emms-directory (concat doom-data-dir "emms")
         emms-cache-file (concat doom-cache-dir "emms"))
+  (after! dired
+    (map! :map dired-mode-map
+          :ng "E" #'emms-play-dired))
   :config
   (emms-all)
   (emms-default-players)
@@ -27,7 +30,7 @@
 
 (use-package! helm-emms
   :when (modulep! :private helm)
-  :defer t :init
+  : t :init
   (map! :map +misc-applications-music-map
         "e" #'helm-emms)
   :config
