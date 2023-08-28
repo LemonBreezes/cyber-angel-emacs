@@ -151,8 +151,8 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "j" #'+default/search-buffer
-        [remap previous-buffer] #'cae-dired-previous-buffer
-        [remap next-buffer] #'cae-dired-next-buffer
+        ;;[remap previous-buffer] #'cae-dired-previous-buffer
+        ;;[remap next-buffer] #'cae-dired-next-buffer
         "<f6>" #'cae-dired-dirvish-hydra/body))
 (map! :leader
       "o-" #'cae-dired-jump
