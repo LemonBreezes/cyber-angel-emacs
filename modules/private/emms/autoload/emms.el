@@ -39,7 +39,8 @@
     ("a" "Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
     ("m" "EMMS indexed" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
 
-;; These two functions are from https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
+;; These two functions are from
+;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
 
 ;;;###autoload
 (defun cae-track-title-from-file-name (file)
