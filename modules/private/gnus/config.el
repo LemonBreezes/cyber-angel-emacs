@@ -53,7 +53,7 @@
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
-   gnus-large-newsgroup 4000
+   gnus-large-newsgroup 200
    network-security-level 'low
    gnus-permanently-visible-groups "INBOX"
 ;;; Startup functions
