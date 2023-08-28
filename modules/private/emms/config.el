@@ -13,6 +13,8 @@
         :prefix-map ("E" . "EMMS")
         :desc "Smart browse" "E" #'+emms)
   :config
+  (map! :map emms-browser-mode-map
+        :ng "q" #'+emms-quit)
   (emms-all)
   (emms-default-players)
   (setq emms-repeat-playlist t
