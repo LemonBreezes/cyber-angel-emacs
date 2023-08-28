@@ -113,7 +113,7 @@
    gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
                       ("hackernews" "nnhackernews:news")
                       ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel"
-                       "nntp+Gmane:gmane.emacs.emms.patches" "nntp+Gmane:gmane.emacs.emms.user"
+                       "nntp+Gmane:gmane.emacs.emms.user" ;;"nntp+Gmane:gmane.emacs.emms.patches"
                        "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user"
                        "nntp+Gmane:gmane.emacs.emacs.help" "nntp+Gmane:gmane.emacs.emacs.orgmode" "nntp+Gmane:gmane.emacs.emacs.tramp")
                       ("Gnus"))
