@@ -2,6 +2,8 @@
 
 (use-package! emms
   :defer t :init
+  (defvar +emms-workspace-name "*emms*")
+  (defvar +emms--old-wconf nil)
   (setq emms-directory (concat doom-data-dir "emms")
         emms-cache-file (concat doom-cache-dir "emms"))
   (after! dired
@@ -9,7 +11,7 @@
           :ng "E" #'emms-play-dired))
   (map! :leader
         :prefix-map ("E" . "EMMS")
-        :desc "Smart browse" "E" #'emms-smart-browse)
+        :desc "Smart browse" "E" #'+emms)
   :config
   (emms-all)
   (emms-default-players)
@@ -30,8 +32,7 @@
         "t" #'emms-toggle-repeat-track
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
- (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
-  )
+  (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track))
 
 (use-package! helm-emms
   :when (modulep! :private helm)
