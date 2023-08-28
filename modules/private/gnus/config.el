@@ -218,3 +218,7 @@
           ("X-Newsreader" (".*" mailer 0))
           ("X-Face" (".+" face 0 'replace))
           ("Face" (".+" face 0 'replace)))))
+
+(use-package! nnhackernews
+  :defer t :config
+  (setq nnhackernews-render-story nil))
