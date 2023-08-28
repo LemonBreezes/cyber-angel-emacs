@@ -39,11 +39,11 @@
         (start-process "solaar" startup/misc-shell-commands-buffer "solaar" "--window=hide")))
 
 ;; Start the Music Player Daemon
-;;(defvar startup/mpd-process )
-;;(when (and (executable-find "mpd")
-;;           (not (process-live-p startup/mpd-process)))
-;;  (setq startup/mpd-process
-;;        (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
+(defvar startup/mpd-process nil)
+(when (and (executable-find "mpd")
+           (not (process-live-p startup/mpd-process)))
+  (setq startup/mpd-process
+        (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
 ;;(kill-process startup/mpd-process)
 
 ;; Start up Talon.
