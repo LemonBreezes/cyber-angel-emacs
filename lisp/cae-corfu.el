@@ -42,7 +42,8 @@
 (add-hook 'minibuffer-exit-hook #'corfu-quit)
 
 (after! cape
-  (setq cape-dabbrev-check-other-buffers t))
+  (setq cape-dabbrev-check-other-buffers t
+        cape-line-buffer-function #'cae-cape-line-buffers))
 (after! corfu
   (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
