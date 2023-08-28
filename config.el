@@ -551,8 +551,8 @@
   ;; Skip some buffers with prev buffer
   (setq switch-to-prev-buffer-skip
         (lambda (_win buf _bury-or-kill)
-          (and (not (get-buffer-window buf))
-               (doom-real-buffer-p buf))))
+          (or (get-buffer-window buf)
+              (doom-unreal-buffer-p buf))))
 
   (setq delete-active-region t)         ;makes `d' delete region in Meow.
 
