@@ -39,8 +39,8 @@
   ;; /mnt/music/Artists/
   ;; make a transient that will open the above directories in dired
   ["Quick Access"
-   [("VGM" (lambda () (interactive) (dired "/mnt/music/VGM/")))
-    ("Youtube Music" (lambda () (interactive) (dired "/mnt/Youtube Music/")))
-    ("Playlists" (lambda () (interactive) (dired "/mnt/music/Playlists/")))
-    ("Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
-    ("Artists" (lambda () (interactive) (dired "/mnt/music/Artists/")))]])
+   [("v" "VGM" (lambda () (interactive) (dired "/mnt/music/VGM/")))
+    ("y" "Youtube Music" (lambda () (interactive) (dired "/mnt/Youtube Music/")))
+    ("p" "Playlists" (lambda () (interactive) (dired "/mnt/music/Playlists/")))
+    ("a" "Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
+    ("m" "EMMS indexed" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
