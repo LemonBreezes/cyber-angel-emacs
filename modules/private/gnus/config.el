@@ -40,6 +40,7 @@
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea"))
+                                   (nnhackernews "")
                                    (nnimap "fastmail"
                                            (nnimap-inbox "INBOX")
                                            (nnimap-address "imap.fastmail.com")
