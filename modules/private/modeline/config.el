@@ -174,7 +174,8 @@
                                    flymake-mode
                                    persp-mode
                                    eat-eshell-mode
-                                   envrc-mode))
+                                   ;;envrc-mode
+                                   ))
   (after! compilation
     (or (assq 'compilation-in-progress mode-line-modes)
         (add-to-list 'minions-mode-line-modes
