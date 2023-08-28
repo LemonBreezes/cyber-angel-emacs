@@ -13,7 +13,9 @@
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
         emms-source-file-default-directory (expand-file-name "/mnt/unindexed-music/")
         emms-player-mpd-music-directory (expand-file-name "/mnt/unindexed-music/")
-        emms-info-native--max-num-vorbis-comments 48000)
+        emms-info-native--max-num-vorbis-comments 48000
+        emms-browser-covers #'emms-browser-cache-thumbnail-async
+        emms-info-functions '(emms-info-exiftool))
   (map! :map emms-playlist-mode-map
         :localleader
         "l" #'emms-toggle-repeat-playlist
