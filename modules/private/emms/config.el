@@ -19,7 +19,7 @@
   (emms-default-players)
   (setq emms-repeat-playlist t
         emms-later-do-interval 0.5
-        emms-later-do-batch 400
+        emms-later-do-batch 1000
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
         emms-source-file-default-directory (expand-file-name "/mnt/unindexed-music/")
         emms-player-mpd-music-directory (expand-file-name "/mnt/unindexed-music/")
