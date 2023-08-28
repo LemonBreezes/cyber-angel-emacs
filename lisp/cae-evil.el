@@ -97,7 +97,9 @@
 
 (map! :map help-map "bn" #'cae-show-normal-state-bindings)
 
-(map! :i "C-x C-c" #'copilot-complete)
+(map! :prefix "C-x"
+      :i "C-c" #'copilot-complete
+      :i "C-f" #'cape-file)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
