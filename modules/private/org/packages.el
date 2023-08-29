@@ -7,6 +7,3 @@
 (package! org-appear)
 ;;(package! worf :recipe
 ;;  (:host github :repo "LemonBreezes/worf"))
-(package! org-tidy :recipe
-  (:host github :repo "LemonBreezes/org-tidy"
-   :branch "fix-for-latest-version-of-org"))
