@@ -17,7 +17,6 @@
                                         expressions tooltip))
 
     (when (modulep! :private corfu)
-      B
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
         (add-to-list 'completion-at-point-functions #'cape-dabbrev))
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
