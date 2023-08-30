@@ -9,6 +9,7 @@
   ;; Use parallel versions of comression programs.
   ;; Install `pigz', `pbzip2', `pixz', `plzip', and `lzop' for parallel decompression.
   ;; Install `dpkg', `rar', and `unrar' as well.
+  ;; `pax' and `7z' I don't install unless I need it.
   (setq dired-compress-file-alist
         '(("\\.gz\\'" . "pigz -9f %i")
           ("\\.bz2\\'" . "pbzip2 -9f %i")
@@ -40,7 +41,7 @@
           ("\\.tar\\.zst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
-          ("\\.7z\\'" "" "7z x -aoa -o%o %i") ; Not sure if I'll ever encounter a 7z file.
+          ("\\.7z\\'" "" "7z x -aoa -o%o %i")
           ("\\.tar\\'" ".tgz" nil))
 
         ;; From Dirvish's documentation.
