@@ -79,6 +79,12 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
+(after! evil-embrace
+  (setq evil-embrace-show-help-p t)
+  ;; I prefer using `C-f' for prefix functions everywhere over a DWIM-style `f'.
+  (remove-hook! (lisp-mode emacs-lisp-mode clojura-mode racket-mode hy-mode)
+    #'+evil-embrace-lisp-mode-hook-h))
+
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
 
