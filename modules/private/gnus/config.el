@@ -106,7 +106,7 @@
   ;;  %          new mail ----. | | | |
   ;;  *   marked articles --. | | | | |
   ;;                        | | | | | |  Ticked    New     Unread  open-status Group
-  (setq!
+  (setq
    gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
    gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)
 
