@@ -1,7 +1,8 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
 (when (and (eq 'x (framep (selected-frame)))
-           (not (getenv "EXWM_RUNNING")))
+           (not (getenv "EXWM_RUNNING"))
+           (not (getenv "RATPOISON")))
 
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
