@@ -60,11 +60,6 @@
     ("<left>" cae-dired-previous-buffer
      "<right>" cae-dired-next-buffer))
 
-  (when (modulep! :editor evil)
-    (define-repeat-map leader-key-buffer-navigation-repeat-map
-      ("p" previous-buffer
-       "n" next-buffer)))
-
   (define-repeat-map set-mark-command
     ("SPC" set-mark-command))
 
@@ -123,10 +118,6 @@
     (define-repeat-map evil-paste-pop
       ("n" evil-paste-pop-next
        "p" evil-paste-pop))
-
-    (define-repeat-map evil-file
-      ("]" +evil/next-file
-       "[" +evil/previous-file))
 
     (define-repeat-map tab-bar-switch-next-tab
       ("t" tab-bar-switch-to-next-tab
