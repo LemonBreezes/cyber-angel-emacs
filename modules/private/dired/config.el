@@ -65,7 +65,8 @@
   (unless (cae-display-graphic-p)
     (setq dirvish-attributes
           (delq 'subtree-state
-                (delq 'all-the-icons dirvish-attributes))))
+                (delq 'all-the-icons dirvish-attributes))
+          dirvish-path-separators '("~/" "/" "/")))
   (after! dirvish-side
     (dirvish-side-follow-mode 1))
   (add-hook! 'dirvish-setup-hook
