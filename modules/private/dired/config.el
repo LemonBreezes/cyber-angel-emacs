@@ -7,7 +7,8 @@
 
 (after! dired
   ;; Use parallel versions of comression programs.
-  ;; Install `pigz', `pbzip2', `pixz', `plzip' for parallel decompression.
+  ;; Install `pigz', `pbzip2', `pixz', `plzip', and `lzop' for parallel decompression.
+  ;; Install `dpkg',
   (setq dired-compress-file-alist
         '(("\\.gz\\'" . "pigz -9f %i")
           ("\\.bz2\\'" . "pbzip2 -9f %i")
