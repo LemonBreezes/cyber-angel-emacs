@@ -81,7 +81,7 @@
 
 (after! evil-embrace
   (setq evil-embrace-show-help-p t)
-  (cl-pushnew 6 evil-embrace-evil-surround-keys)
+  (cl-pushnew ?\C-f evil-embrace-evil-surround-keys)
   ;; I prefer using `C-f' for prefix functions everywhere over a DWIM-style `f'.
   (remove-hook! (lisp-mode emacs-lisp-mode clojura-mode racket-mode hy-mode)
     #'+evil-embrace-lisp-mode-hook-h))
