@@ -11,7 +11,7 @@
   (unless (cae-display-graphic-p)
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
 (when (modulep! :ui ligatures)
-  (unless (cae-display-graphic-p)
+  (when (cae-tty-dumb-term-p)
     (setq +ligatures-in-modes nil)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
