@@ -144,6 +144,7 @@
 
   (map! :map dirvish-mode-map
         :ng "e" #'find-file
+        :n "f" nil
         :ng "w" #'+default/search-buffer
         "<backtab>" #'dirvish-subtree-clear
         "M-l" #'dirvish-ls-switches-menu
