@@ -21,7 +21,7 @@
           ("\\.tar\\.zst\\'" . "tar -cf - %i | zstd -19 -o %o")
           ("\\.tar\\.lz\\'" . "tar -cf - %i | plzip -c9 > %o")
           ("\\.tar\\.lzo\\'" . "tar -cf - %i | lzop -c9 > %o")
-          ("\\.zip\\'" . "zip %o -r --filesync %i")
+          ("\\.zip\\'" . "pigz --zip -f9 %o -r --filesync %i")
           ("\\.pax\\'" . "pax -wf %o %i"))
         dired-compress-file-suffixes
         '(("\\.tar\\.gz\\'" "" "pigz -dc %i | tar -xf -")
@@ -36,7 +36,7 @@
           ("\\.tbz\\'" ".tar" "pbunzip2")
           ("\\.bz2\\'" "" "pbunzip2")
           ("\\.xz\\'" "" "pixz -d")
-          ("\\.zip\\'" "" "unzip -o -d %o %i")
+          ("\\.zip\\'" "" "unpigz -o -d %o %i")
           ("\\.tar\\.zst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
