@@ -15,14 +15,14 @@
 (call-process-shell-command "xhost +" nil startup/misc-shell-commands-buffer)
 
 ;; Set our refresh rate to 144Hz.
-(ignore-errors
- (call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer))
+;;(ignore-errors
+;;  (call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer))
 
 ;; Start up Pipewire.
-(when (and (executable-find "gentoo-pipewire-launcher")
-           (not (process-live-p startup/pipewire-process)))
-  (setq startup/pipewire-process
-        (start-process "pipewire" startup/misc-shell-commands-buffer "gentoo-pipewire-launcher")))
+;;(when (and (executable-find "gentoo-pipewire-launcher")
+;;           (not (process-live-p startup/pipewire-process)))
+;;  (setq startup/pipewire-process
+;;        (start-process "pipewire" startup/misc-shell-commands-buffer "gentoo-pipewire-launcher")))
 
 ;; Start up our compositor.
 (defvar startup/picom-process nil)
@@ -39,12 +39,11 @@
         (start-process "solaar" startup/misc-shell-commands-buffer "solaar" "--window=hide")))
 
 ;; Start the Music Player Daemon
-(defvar startup/mpd-process nil)
-(when (and (executable-find "mpd")
-           (not (process-live-p startup/mpd-process)))
-  (setq startup/mpd-process
-        (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
-;;(kill-process startup/mpd-process)
+;;(defvar startup/mpd-process nil)
+;;(when (and (executable-find "mpd")
+;;           (not (process-live-p startup/mpd-process)))
+;;  (setq startup/mpd-process
+;;        (start-process "mpd" startup/misc-shell-commands-buffer "mpd" "--no-daemon" "--stdout")))
 
 ;; Start up Talon.
 ;; (start-process "talon" startup/misc-shell-commands-buffer "~/src/talon/run.sh")
