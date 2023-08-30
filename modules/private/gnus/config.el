@@ -115,12 +115,14 @@
                       ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel"
                        "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user"
                        "nntp+Gmane:gmane.emacs.orgmode")
+                      ("Junk" "nnhackernews:ask" "nnhackernews:job" "nnhackernews:show")
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
                          (("emacs" visible nil nil))
                          (("fastmail" visible nil nil))
-                         (("hackernews" visible))))
+                         (("hackernews" visible))
+                         (("Junk" invisible))))
   (map! :map gnus-group-mode-map
         "<f6>" #'cae-gnus-group-cheatsheet/body))
 
