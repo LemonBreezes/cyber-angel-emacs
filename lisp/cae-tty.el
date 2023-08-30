@@ -1,6 +1,6 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
-(defvar cae-tty-disable-unicode
+(defun cae-tty-dumb-term-p ()
   (pcase cae-term
     (pred (cae-display-graphic-p) nil)
     ("xterm-kitty" nil)
