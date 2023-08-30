@@ -9,7 +9,7 @@
   ;; Use parallel versions of comression programs.
   ;; Install `pigz', `pbzip2', `pixz', `plzip', and `lzop' for parallel decompression.
   ;; Install `dpkg', `rar', and `unrar' as well.
-  ;; `pax' and `7z' I don't install unless I need it.
+  ;; `pax' and `7z' I don't install unless I need them.
   (setq dired-compress-file-alist
         '(("\\.gz\\'" . "pigz -9f %i")
           ("\\.bz2\\'" . "pbzip2 -9f %i")
