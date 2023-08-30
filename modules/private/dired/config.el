@@ -40,7 +40,7 @@
           ("\\.tar\\.zst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
-          ("\\.7z\\'" "" "7z x -aoa -o%o %i")
+          ("\\.7z\\'" "" "7z x -aoa -o%o %i") ; Not sure if I'll ever encounter a 7z file.
           ("\\.tar\\'" ".tgz" nil))
 
         ;; From Dirvish's documentation.
