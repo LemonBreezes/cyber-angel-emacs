@@ -55,6 +55,8 @@
            (not (cae-display-graphic-p)))
   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
+(add-to-list 'exec-path (expand-file-name "bin/" doom-emacs-dir))
+
 
 ;;; UI
 

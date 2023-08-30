@@ -11,7 +11,8 @@
                    volatile-highlights
                    hl-line
                    flymake-popon
-                   elfeed-goodies)
+                   elfeed-goodies
+                   highlight-numbers)
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
