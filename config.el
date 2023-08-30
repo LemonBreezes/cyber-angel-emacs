@@ -38,8 +38,8 @@
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   ;; Previously I used Iosevka Comfy and size 18.
-  (setq doom-font (font-spec :family "Iosevka Term" :size 16) ; Iosevka Comfy
-        doom-variable-pitch-font (font-spec :family "Iosevka Term" ; Iosevka Comfy Duo
+  (setq doom-font (font-spec :family "Iosevka" :size 16) ; Iosevka Comfy
+        doom-variable-pitch-font (font-spec :family "Iosevka" ; Iosevka Comfy Duo
                                             :size 16)
         doom-unicode-font (unless (modulep! :ui unicode)
                             (font-spec :family "LXGW WenKai" :weight 'light
