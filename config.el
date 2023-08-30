@@ -444,15 +444,6 @@
       (setq spell-fu-faces-exclude
             (delq 'font-lock-string-face spell-fu-faces-include))))
 
-  (when (modulep! :tools pdf)
-    (use-package! pdftotext
-      :defer t :init
-      (defadvice! +pdf-view-mode-a (oldfun &rest args)
-        :around #'pdf-view-mode
-        (if (cae-display-graphic-p)
-            (apply oldfun args)
-          (apply #'pdftotext-mode args)))))
-
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
     (after! lsp-mode
@@ -520,8 +511,7 @@
   (use-package! wakatime-mode
     :defer t :defer-incrementally t :config
     (global-wakatime-mode +1)
-    (setq wakatime-cli-path
-          "~/src/wakatime-cli-linux-amd64")))
+    (setq wakatime-cli-path (executable-find "wakatime"))))
 
 
 ;;; Editor
