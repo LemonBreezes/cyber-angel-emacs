@@ -2,9 +2,8 @@
 
 (setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
 
-(when (version< "30.0" emacs-version)
-  (add-to-list 'safe-local-variable-directories doom-user-dir)
-  (add-to-list 'safe-local-variable-directories doom-emacs-dir))
+(add-to-list 'safe-local-variable-directories doom-user-dir)
+(add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
@@ -90,7 +89,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings +smartparens)
+       (default +bindings)
 
        :email
        ;;(mu4e +org)

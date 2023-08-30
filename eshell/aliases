@@ -4,10 +4,16 @@ alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
 alias tree   tree                -C                                           $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
+
 alias layman sudo layman                                                      $*
 alias tailscale sudo tailscale                                                $*
 alias tailscaled sudo tailscaled                                              $*
 alias nvidia-settings sudo nvidia-settings                                    $*
+alias genlop sudo genlop                                                      $*
+
+alias sysu systemctl --user                                                   $*
+alias systemctl sudo systemctl                                                $*
+alias sys sudo systemctl                                                      $*
 
 alias mcd    mkdir -p                                                         $1 && cd $1
 alias cd-    cd -
@@ -37,3 +43,4 @@ alias update-emacs smart-live-rebuild && cd ~/.config/emacs && doom build && git
 alias update-doom cd ~/.config/emacs && git stash && doom upgrade && git stash pop && doom sync
 alias update-gentoo sudo emaint -a sync && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
 alias update-gentoo2 sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
+alias doom ~/.config/emacs/bin/doom $*
