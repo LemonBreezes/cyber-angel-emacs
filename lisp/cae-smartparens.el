@@ -5,6 +5,7 @@
 ;; happen when `smartparens' is disabled.
 (unless (modulep! :config default +smartparens)
   (defalias 'sp-local-pair #'ignore)
+  (defalias 'sp--syntax-ppss #'syntax-ppss)
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :editor lispy)
     (after! lispy
