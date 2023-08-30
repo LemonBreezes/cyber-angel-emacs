@@ -139,11 +139,11 @@
     (setq which-key-ellipsis "..."
           which-key-compute-remaps t
           which-key-max-description-length 35
-          which-key-separator (if (cae-display-graphic-p) " → " " -> ")))
+          which-key-separator (if cae-tty-disable-unicode " -> " " → ")))
 
   (when (cae-display-graphic-p)
     (after! eros
-      (setq eros-eval-result-prefix (if (cae-display-graphic-p) "⟹ " "=> ")))) ;Pretty arrow
+      (setq eros-eval-result-prefix (if cae-tty-disable-unicode "=> " "⟹ ")))) ;Pretty arrow
 
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
