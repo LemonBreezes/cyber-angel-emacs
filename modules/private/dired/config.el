@@ -64,7 +64,7 @@
   (advice-add #'find-file :around #'cae-dired-find-file-a)
   (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
 
-  (when (cae-dumb-term-p)
+  (when (cae-tty-dumb-term-p)
     (setq dirvish-attributes
           (delq 'subtree-state
                 (delq 'all-the-icons dirvish-attributes))
