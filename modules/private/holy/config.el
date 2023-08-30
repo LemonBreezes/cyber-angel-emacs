@@ -168,7 +168,7 @@
   :config
   (setq anzu-mode-lighter ""
         anzu-replace-threshold 50
-        anzu-replace-to-string-separator (if cae-tty-disable-unicode " -> " " → ")))
+        anzu-replace-to-string-separator (if (cae-tty-dumb-term-p) " -> " " → ")))
 
 (use-package! isearch-mb
   :after-call isearch-mode-hook
