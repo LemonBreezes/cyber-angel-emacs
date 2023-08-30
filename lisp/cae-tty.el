@@ -22,6 +22,15 @@
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
+(when (modulep! :tools pdf)
+  (use-package! pdftotext
+    :defer t :init
+    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+      :around #'pdf-view-mode
+      (if (cae-display-graphic-p)
+          (apply oldfun args)
+        (apply #'pdftotext-mode args)))))
+
 ;; Automatically enable & disable the posframe when using multiple client frames.
 ;;(add-hook 'pre-command-hook
 ;;          (cae-defun cae-tty-setup-posframe-h ()
