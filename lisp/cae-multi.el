@@ -13,7 +13,8 @@
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-secrets-dir t)
 
-(load! (concat cae-multi-secrets-dir "secrets.el"))
+(when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
+  (load! (concat cae-multi-secrets-dir "secrets.el")))
 
 (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
