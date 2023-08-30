@@ -130,7 +130,7 @@
 (use-package! gnus-sum
   :hook (gnus-select-group . gnus-group-set-timestamp)
   :config
-  (when (cae-display-graphic-p)
+  (when cae-tty-disable-unicode
     ;; Pretty marks
     (setq! gnus-sum-thread-tree-false-root nil
            gnus-sum-thread-tree-single-indent nil
