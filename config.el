@@ -139,11 +139,10 @@
     (setq which-key-ellipsis "..."
           which-key-compute-remaps t
           which-key-max-description-length 35
-          which-key-separator (if cae-tty-disable-unicode " -> " " → ")))
+          which-key-separator (if (cae-tty-dumb-term-p) " -> " " → ")))
 
-  (when (cae-display-graphic-p)
-    (after! eros
-      (setq eros-eval-result-prefix (if cae-tty-disable-unicode "=> " "⟹ ")))) ;Pretty arrow
+  (after! eros
+    (setq eros-eval-result-prefix (if (cae-tty-dumb-term-p) "=> " "⟹ "))) ;Pretty arrow
 
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
@@ -683,7 +682,7 @@
           avy-keys (cae-keyboard-remap
                     '(?a ?s ?d ?f ?g
                       ?h ?j ?k ?l ?\;))
-          avy-background (not cae-tty-disable-unicode)
+          avy-background (not (cae-tty-dumb-term-p))
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
