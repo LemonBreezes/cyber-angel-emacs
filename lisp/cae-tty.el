@@ -1,5 +1,11 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
+(defvar cae-tty-disable-unicode
+  (pcase cae-term
+    (pred (cae-display-graphic-p) nil)
+    ("xterm-kitty" nil)
+    (_ t)))
+
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
   (unless (cae-display-graphic-p)
