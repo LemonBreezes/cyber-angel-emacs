@@ -16,11 +16,11 @@
   (setq nnmail-split-methods 'nnmail-split-fancy)
   (setq nnimap-split-methods 'nnmail-split-fancy)
   (setq nnmail-split-fancy
-        '(|
-          (: spam-split)
-          (from "look@strawberrytea.xyz" "Sent")
-          "INBOX" ;; or "mail.misc" for nnml/POP3
-          ))
+        `(|
+         (: spam-split)
+         (from ,user-mail-address "Sent")
+         "INBOX" ;; or "mail.misc" for nnml/POP3
+         ))
 
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
