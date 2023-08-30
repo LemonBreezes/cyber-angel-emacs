@@ -79,9 +79,6 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
-(after! evil-embrace
-  (setq evil-embrace-show-help-p t))
-
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
 
