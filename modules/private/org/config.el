@@ -73,7 +73,7 @@
 
 (use-package! org-tidy
   :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode)
+  (advice-add #'org-set-font-lock-defaults :after #'org-tidy-mode)
   :config
   (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
 
