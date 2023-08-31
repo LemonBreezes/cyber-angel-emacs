@@ -16,9 +16,9 @@
     (when (org-at-heading-p)
       (cae-org-set-created-timestamp))))
 
-(advice-add #'+org-init-keybinds-h :after
-            (cae-defun cae-org-fixup-doom-keybindings ()
-              (remove-hook 'org-tab-first-hook #'+org-indent-maybe-h)))
+;;(advice-add #'+org-init-keybinds-h :after
+;;            (cae-defun cae-org-fixup-doom-keybindings ()
+;;              (remove-hook 'org-tab-first-hook #'+org-indent-maybe-h)))
 
 (use-package! org-appear
   :defer t :init
