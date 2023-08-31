@@ -73,6 +73,8 @@
 
 (use-package! org-tidy
   :defer t :init
+  ;; For some reason just having it as a hook doesn't get `org-tidy' to apply in
+  ;; the Dirvish preview.
   (advice-add #'org-set-font-lock-defaults :after
               (lambda () (unless (or org-inhibit-startup
                                      org-inhibit-startup-visibility-stuff)
