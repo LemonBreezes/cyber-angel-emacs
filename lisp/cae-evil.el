@@ -79,6 +79,8 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
+(remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
+  #'+evil-embrace-lisp-mode-hook)
 (after! evil-embrace
   (setq evil-embrace-show-help-p t))
 
