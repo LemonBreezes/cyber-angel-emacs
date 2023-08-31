@@ -116,8 +116,8 @@
                        "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user" "nntp+Gmane:gmane.emacs.gnus.patches"
                        "nntp+Gmane:gmane.emacs.gnus.general"
                        "nntp+Gmane:gmane.emacs.orgmode")
-                      ("Gnus"))
-   gnus-topic-topology '(("Gnus" visible)
+                      ("Root"))
+   gnus-topic-topology '(("Root" visible)
                          (("misc" visible))
                          (("emacs" visible nil nil))
                          (("fastmail" visible nil nil))
