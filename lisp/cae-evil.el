@@ -79,17 +79,15 @@
       evil-vsplit-window-right t
       evil-split-window-below t)
 
+(defadvice! cae-evil-embrace-init-escaped-pairs-a (&rest args)
+  "Add escaped-sequence support to embrace."
+  :after #'embrace--setup-defaults
+  (embrace-add-pair-regexp ?\C-f "([^ ]+ " ")" #'+evil--embrace-escaped
+                           (embrace-build-help "(function " ")")))
 (after! evil-embrace
   (setq evil-embrace-show-help-p t)
   (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
-    #'+evil-embrace-lisp-mode-hook)
-  (defadvice! cae-evil-embrace-init-escaped-pairs-a (&rest args)
-    "Add escaped-sequence support to embrace."
-    :after #'embrace--setup-defaults
-    (embrace-add-pair-regexp ?\C-f "([^ ]+ " ")" #'+evil--embrace-escaped
-                             (embrace-build-help "(function " ")")))
-  )
-
+    #'+evil-embrace-lisp-mode-hook))
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
 
