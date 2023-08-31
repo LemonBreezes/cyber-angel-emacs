@@ -3,6 +3,9 @@
 
 (defalias 'cae-tty-disable-unicode-p #'cae-display-graphic-p)
 
+(when (cae-tty-disable-unicode-p)
+  (setq embrace-help-separator " -> "))
+
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
   (unless (cae-display-graphic-p)
