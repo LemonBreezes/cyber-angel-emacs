@@ -81,7 +81,8 @@
 
 (after! evil-embrace
   (setq evil-embrace-show-help-p t)
-  (cl-pushnew ?\C-f evil-embrace-evil-surround-keys))
+  (setq-default evil-embrace-evil-surround-keys
+                (cl-pushnew ?\C-f (default-value 'evil-embrace-evil-surround-keys))))
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
