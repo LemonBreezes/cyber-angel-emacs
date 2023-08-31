@@ -74,6 +74,7 @@
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
+      "<f7>" #'er/expand-region
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:after transient
        (:map transient-map
