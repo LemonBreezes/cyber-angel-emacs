@@ -123,7 +123,8 @@
                          (("fastmail" visible nil nil))
                          (("hackernews" visible))))
   (map! :map gnus-group-mode-map
-        "<f6>" #'cae-gnus-group-cheatsheet/body))
+        "<f6>" #'cae-gnus-group-cheatsheet/body
+        :n "Tm" #'gnus-topic-move-group))
 
 ;; Summary mode commands for Gnus
 (use-package! gnus-sum
