@@ -81,6 +81,10 @@
 
 (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
   #'+evil-embrace-lisp-mode-hook-h)
+(defadvice! cae-embrace-init-pairs-a (&rest args)
+  :after #'embrace--setup-defaults
+  (embrace-add-pair-regexp ?\C-f "([^ ]+ " ")" 'embrace-with-prefix-function
+                         (embrace-build-help "(function " ")")))
 (after! evil-embrace
   (setq evil-embrace-show-help-p t))
 
