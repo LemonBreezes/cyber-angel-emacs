@@ -355,9 +355,9 @@
   ;; Set up the default browser.
   (after! browse-url
     (setq browse-url-browser-function
-      (cond ((executable-find "termux-setup-storage")
-             #'browse-url-xdg-open)
-            (t #'browse-url-generic)))
+          (cond ((executable-find "termux-setup-storage")
+                 #'browse-url-xdg-open)
+                (t #'browse-url-generic)))
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
@@ -425,12 +425,13 @@
 
   ;; Use Emacs as the default editor for shell commands.
   ;; `dwim-shell-command'.
-  (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
-    (dolist (fn '(with-editor-export-editor
-                  with-editor-export-hg-editor
-                  with-editor-export-git-editor))
-      (add-hook hook fn)))
-  (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a)
+  (when (cae-display-graphic-p)
+    (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
+      (dolist (fn '(with-editor-export-editor
+                    with-editor-export-hg-editor
+                    with-editor-export-git-editor))
+        (add-hook hook fn)))
+    (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a))
 
   (when (and (modulep! :checkers spell)
              (not (modulep! :checkers spell +flyspell)))
