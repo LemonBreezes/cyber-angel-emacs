@@ -68,7 +68,9 @@
     (setq dirvish-attributes
           (delq 'subtree-state
                 (delq 'all-the-icons dirvish-attributes))
-          dirvish-path-separators '("~" "/" "/")))
+          dirvish-path-separators '("~" "/" "/")
+          dirvish-subtree-prefix " |"
+          dirvish-subtree-line-prefix " |"))
   (after! dirvish-side
     (dirvish-side-follow-mode 1))
   (add-hook! 'dirvish-setup-hook
