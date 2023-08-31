@@ -18,6 +18,8 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(package! embrace :recipe (:host github :repo "LemonBreezes/embrace.el"
+                           :branch "add-prefix-function-to-defaults"))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
