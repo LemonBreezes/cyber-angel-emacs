@@ -63,6 +63,8 @@
     "C-w" nil
     "C-z" nil))
 
+(evil-set-initial-state 'eshell-mode 'insert)
+
 (map! :prefix "g"
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
