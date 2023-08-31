@@ -77,6 +77,12 @@
   :config
   (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
 
+(use-package! org-modern
+  :unless (cae-tty-disable-unicode-p)
+  :defer t :after org
+  :config
+  (setq org-modern-todo nil))
+
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
   (when (> (buffer-size) 50000)
