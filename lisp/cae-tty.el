@@ -1,7 +1,8 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
 
-(defalias 'cae-tty-disable-unicode-p #'cae-display-graphic-p)
+(defun cae-tty-disable-unicode-p ()
+  (not (cae-display-graphic-p)))
 
 (when (cae-tty-disable-unicode-p)
   (setq embrace-help-separator " -> "))
