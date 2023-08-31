@@ -361,3 +361,25 @@ This is the format used on Reddit for code blocks."
                             (lispy-comment))
                            (t (call-interactively #'comment-or-uncomment-region)))
                      (avy-pop-mark))))
+
+;;;###autoload
+(defun cae-mark-comment ()
+  "Mark the entire comment around point. Like `er/mark-comment' but
+also marks comment with leading whitespace"
+  (interactive)
+  (when (save-excursion
+          (skip-syntax-forward "\s")
+          (er--point-is-in-comment-p))
+    (let ((p (point)))
+      (skip-syntax-backward "\s")
+      (while (and (or (er--point-is-in-comment-p)
+                      (looking-at "[[:space:]]"))
+                  (not (eobp)))
+        (forward-char 1))
+      (skip-chars-backward "\n\r")
+      (set-mark (point))
+      (goto-char p)
+      (while (or (er--point-is-in-comment-p)
+                 (looking-at "[[:space:]]"))
+        (forward-char -1))
+      (forward-char 1))))
