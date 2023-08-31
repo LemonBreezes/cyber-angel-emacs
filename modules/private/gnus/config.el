@@ -134,7 +134,7 @@
 (use-package! gnus-sum
   :hook (gnus-select-group . gnus-group-set-timestamp)
   :config
-  (unless (cae-tty-dumb-term-p)
+  (unless (cae-tty-disable-unicode-p)
     ;; Pretty marks
     (setq! gnus-sum-thread-tree-false-root nil
            gnus-sum-thread-tree-single-indent nil

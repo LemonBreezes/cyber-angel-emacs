@@ -9,14 +9,13 @@
 
 (defvar cae-term (getenv "TERM"))
 
-(defun cae-tty-dumb-term-p ()
-  (pcase cae-term
-    (pred (cae-display-graphic-p) nil)
-    ("xterm-kitty" nil)
-    (_ t)))
+(defun cae-tty-disable-unicode-p ()
+  (unless (cae-display-graphic-p)
+    (pcase cae-term
+      (_ t))))
 
 ;; Set a fallback theme.
-(setq doom-theme (unless (cae-tty-dumb-term-p) 'wheatgrass))
+(setq doom-theme 'wheatgrass)
 
 (setq native-comp-async-jobs-number (num-processors))
 
