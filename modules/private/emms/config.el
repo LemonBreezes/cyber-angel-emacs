@@ -49,7 +49,8 @@
   (setq emms-track-description-function 'cae-emms-track-description))
 
 (use-package! helm-emms
-  :when (modulep! :private helm)
+  :when (or (modulep! :private helm)
+            (modulep! :completion helm))
   :defer t :init
   (map! :leader
         :desc "Helm EMMS" "eh" #'helm-emms)
