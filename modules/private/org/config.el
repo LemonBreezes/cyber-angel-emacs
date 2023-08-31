@@ -81,6 +81,7 @@
   :unless (cae-tty-disable-unicode-p)
   :defer t :after org
   :config
+  (global-org-modern-mode +1)
   (setq org-modern-todo nil))
 
 (defun locally-defer-font-lock ()
