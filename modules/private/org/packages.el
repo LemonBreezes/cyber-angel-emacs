@@ -7,3 +7,4 @@
 (package! org-appear)
 (package! org-tidy :recipe
   (:host github :repo "jxq0/org-tidy"))
+(package! org-modern)

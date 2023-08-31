@@ -1,9 +1,5 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
-
-(defun cae-tty-disable-unicode-p ()
-  (not (cae-display-graphic-p)))
-
 (when (cae-tty-disable-unicode-p)
   (after! org-eldoc
     (setq org-eldoc-breadcrumb-separator " -> "))

@@ -366,7 +366,9 @@
            (setq browse-url-generic-program (or (executable-find "chromium-bin-browser")
                                                 (executable-find "google-chrome-unstable"))
                  browse-url-generic-args (when (eq (user-uid) 0)
-                                           '("--no-sandbox"))))))
+                                           '("--no-sandbox"))))
+          ((executable-find "firefox-bin")
+           (setq browse-url-generic-program "firefox-bin"))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)

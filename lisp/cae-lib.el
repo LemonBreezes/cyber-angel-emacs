@@ -14,6 +14,9 @@
   (and (display-graphic-p)
        (not (daemonp))))
 
+(defun cae-tty-disable-unicode-p ()
+  (not (cae-display-graphic-p)))
+
 (defun cae-which-key-inhibit-hook ()
   (setq which-key-inhibit nil)
   (remove-hook 'pre-command-hook

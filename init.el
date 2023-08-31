@@ -7,12 +7,6 @@
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
-(defvar cae-term (getenv "TERM"))
-
-(defun cae-tty-disable-unicode-p ()
-  (unless (cae-display-graphic-p)
-    (pcase cae-term
-      (_ t))))
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
@@ -52,7 +46,6 @@
        snippets
        multiple-cursors
        fold
-       word-wrap
        (evil +everywhere)
        lispy
 
@@ -97,7 +90,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings)
+       (default +bindings +smartparens)
 
        :email
        ;;(mu4e +org)

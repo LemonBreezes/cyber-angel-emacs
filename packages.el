@@ -18,6 +18,8 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(package! embrace :recipe (:host github :repo "LemonBreezes/embrace.el"
+                           :branch "add-prefix-function-to-defaults"))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
@@ -66,6 +68,7 @@
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! smart-semicolon)
 (package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
+(package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
