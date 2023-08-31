@@ -112,13 +112,17 @@
 
    gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
                       ("hackernews" "nnhackernews:news")
-                      ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel"
-                       "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user"
+                      ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.help"
+                       "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user" "nntp+Gmane:gmane.emacs.gnus.patches"
+                       "nntp+Gmane:gmane.emacs.gnus.general"
                        "nntp+Gmane:gmane.emacs.orgmode")
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
-                         (("emacs" visible nil nil))
+                         (("emacs" visible nil nil)
+                          ("emms" visible)
+                          ("org" visible)
+                          ("gnus" visible))
                          (("fastmail" visible nil nil))
                          (("hackernews" visible))))
   (map! :map gnus-group-mode-map
