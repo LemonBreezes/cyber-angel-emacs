@@ -83,7 +83,11 @@
   (setq evil-embrace-show-help-p t)
   ;; `evil-embrace' removes our ability to add prefix functions with `C-f'.
   (setq-default evil-embrace-evil-surround-keys
-                (cl-pushnew ?\C-f (default-value 'evil-embrace-evil-surround-keys))))
+                (cl-pushnew ?\C-f (default-value 'evil-embrace-evil-surround-keys)))
+  (defadvice! evil-embrace-show-help-ignore-C-f (oldfun)
+    :around #'evil-embrace--get-help-string
+    (let ((evil-embrace-evil-surround-keys (delq ?\C-f evil-embrace-evil-surround-keys)))
+      (funcall oldfun))))
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
