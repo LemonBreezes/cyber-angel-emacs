@@ -119,10 +119,7 @@
                       ("Gnus"))
    gnus-topic-topology '(("Gnus" visible)
                          (("misc" visible))
-                         (("emacs" visible nil nil)
-                          ("emms" visible)
-                          ("org" visible)
-                          ("gnus" visible))
+                         (("emacs" visible nil nil))
                          (("fastmail" visible nil nil))
                          (("hackernews" visible))))
   (map! :map gnus-group-mode-map
