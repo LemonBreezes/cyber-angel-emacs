@@ -81,9 +81,14 @@
 
 (after! evil-embrace
   (setq evil-embrace-show-help-p t)
-  ;; `evil-embrace' removes our ability to add prefix functions with `C-f'.
-  (setq-default evil-embrace-evil-surround-keys
-                (cl-pushnew ?\C-f (default-value 'evil-embrace-evil-surround-keys))))
+  (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
+    #'+evil-embrace-lisp-mode-hook)
+  (defadvice! cae-evil-embrace-init-escaped-pairs-a (&rest args)
+    "Add escaped-sequence support to embrace."
+    :after #'embrace--setup-defaults
+    (embrace-add-pair-regexp ?\C-f "([^ ]+ " ")" #'+evil--embrace-escaped
+                             (embrace-build-help "(function " ")")))
+  )
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
