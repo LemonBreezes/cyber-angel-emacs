@@ -1,13 +1,22 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'wheatgrass)           ;Set a dark fallback theme.
-
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
+
+(defvar cae-term (getenv "TERM"))
+
+(defun cae-tty-dumb-term-p ()
+  (pcase cae-term
+    (pred (cae-display-graphic-p) nil)
+    ("xterm-kitty" nil)
+    (_ t)))
+
+;; Set a fallback theme.
+(setq doom-theme (unless (cae-tty-dumb-term-p) 'wheatgrass))
 
 (setq native-comp-async-jobs-number (num-processors))
 
@@ -114,6 +123,7 @@
        org
        ai
        gnus
+       emms
        ;;holy
        )
 

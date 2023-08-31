@@ -1,2 +1,4 @@
 1. Install the compression/decompression programs mentioned in the Dired module.
 2. Install Iosevka Comfy and LXGW Wenkai.
+3. Install xwininfo and xclip.
+4. Install Aspell and Enchant.

@@ -12,7 +12,6 @@ alias nvidia-settings sudo nvidia-settings                                    $*
 alias genlop sudo genlop                                                      $*
 
 alias sysu systemctl --user                                                   $*
-alias systemctl sudo systemctl                                                $*
 alias sys sudo systemctl                                                      $*
 
 alias mcd    mkdir -p                                                         $1 && cd $1
