@@ -81,6 +81,7 @@
 
 (after! evil-embrace
   (setq evil-embrace-show-help-p t)
+  ;; `evil-embrace' removes our ability to add prefix functions with `C-f'.
   (setq-default evil-embrace-evil-surround-keys
                 (cl-pushnew ?\C-f (default-value 'evil-embrace-evil-surround-keys))))
 
