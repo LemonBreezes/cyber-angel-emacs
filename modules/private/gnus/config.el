@@ -110,18 +110,22 @@
    gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
    gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)
 
-   gnus-topic-alist '(("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent")
-                      ("hackernews" "nnhackernews:news")
-                      ("emacs" "nntp+Gmane:gmane.emacs.bugs" "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.help"
-                       "nntp+Gmane:gmane.emacs.gnus.general" "nntp+Gmane:gmane.emacs.gnus.user" "nntp+Gmane:gmane.emacs.gnus.patches"
-                       "nntp+Gmane:gmane.emacs.gnus.general"
-                       "nntp+Gmane:gmane.emacs.orgmode")
-                      ("Root"))
-   gnus-topic-topology '(("Root" visible)
-                         (("misc" visible))
-                         (("emacs" visible nil nil))
-                         (("fastmail" visible nil nil))
-                         (("hackernews" visible))))
+   gnus-topic-alist '(("emms" "nntp+Gmane:gmane.emacs.emms.patches"
+                       "nntp+Gmane:gmane.emacs.emms.user")
+                      ("gnus" "nntp+Gmane:gmane.emacs.gnus.user"
+                       "nntp+Gmane:gmane.emacs.gnus.patches" "nntp+Gmane:gmane.emacs.gnus.announce"
+                       "nntp+Gmane:gmane.emacs.gnus.general")
+                      ("orgmode" "nntp+Gmane:gmane.emacs.orgmode") ("misc")
+                      ("fastmail" "nnimap+fastmail:INBOX") ("hackernews" "nnhackernews:news")
+                      ("emacs" "nntp+Gmane:gmane.linux.gentoo.announce" "nntp+Gmane:gmane.emacs.help"
+                       "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.bugs"
+                       "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.announce")
+                      ("Root" "nndraft:drafts" "nnhackernews:ask" "nnhackernews:show"
+                       "nnhackernews:job"))
+   gnus-topic-topology '(("Root" visible) (("misc" visible))
+                         (("emacs" visible nil nil) (("orgmode" visible nil nil))
+                          (("gnus" visible nil nil)) (("emms" invisible nil nil)))
+                         (("fastmail" visible nil nil)) (("hackernews" visible))))
   (map! :map gnus-group-mode-map
         "<f6>" #'cae-gnus-group-cheatsheet/body
         :n "Tm" #'gnus-topic-move-group))
