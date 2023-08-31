@@ -50,6 +50,11 @@
               :map forge-notifications-mode-map
               "j" #'+default/search-buffer)))))
 
+(when (modulep! :emacs vc)
+  (after! git-timemachine
+    (map! :map git-timemachine-mode-map
+          "<f6>" #'git-timemachine-help)))
+
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
     (setq diff-hl-reference-revision "master")
