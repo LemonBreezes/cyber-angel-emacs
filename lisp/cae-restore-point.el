@@ -31,6 +31,7 @@
              symbol-overlay-jump-prev
              recenter-top-bottom
              reposition-window
+             er/expand-region
              eri/maximize-region
              eri/mark-block
              eri/expand-region
