@@ -172,5 +172,3 @@ It is meant to be used as a `post-gc-hook'."
 ;; For some reason, this variable is not being set. It's safe to set it here as
 ;; it should be overwritten by Doom later anyways.
 (setq evil-undo-system 'undo-fu)
-
-(unless (functionp #'imagep) (defalias 'imagep #'ignore))
