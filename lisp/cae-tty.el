@@ -5,9 +5,12 @@
   (not (cae-display-graphic-p)))
 
 (when (cae-tty-disable-unicode-p)
-  (setq embrace-help-separator " -> "
-        org-eldoc-breadcrumb-separator " -> "
-        query-replace-from-to-separator " -> "))
+  (after! org-eldoc
+    (setq org-eldoc-breadcrumb-separator " -> "))
+  (after! embrace
+    (setq embrace-help-separator " -> "))
+  (after! replace
+    query-replace-from-to-separator " -> "))
 
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
