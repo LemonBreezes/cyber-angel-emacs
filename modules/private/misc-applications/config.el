@@ -159,14 +159,6 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
-(use-package! wttrin
-  :defer t :init
-  (map! :map +misc-applications-external-apps-map
-        "w" #'wttrin)
-  (advice-add #'wttrin-query :after
-              (cae-defun +wttrin-setup-h (&rest _)
-                (face-remap-add-relative 'default :family "Iosevka" :height 1.0))))
-
 
 ;;; System
 
