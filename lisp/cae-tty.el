@@ -1,7 +1,7 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
 
-;; For some reason the terminal breaks with unicode.
+;; For some reason the terminal display breaks with unicode.
 (defalias 'cae-tty-disable-unicode-p #'cae-display-graphic-p)
 
 ;; Stuff so that Emacs doesn't break in the Terminal.
