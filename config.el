@@ -745,7 +745,7 @@
   (use-package! titlecase
     :defer t :init
     (after! embark
-      (define-key embark-region-map "T" #'titlecase-region)
+
       (define-key embark-heading-map "T" #'titlecase-line)
       (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
@@ -795,7 +795,29 @@
     (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
     (add-hook 'web-mode-hook  #'smart-semicolon-mode)
     (add-hook 'java-mode-hook #'smart-semicolon-mode)
-    (add-hook 'js-mode-hook   #'smart-semicolon-mode)))
+    (add-hook 'js-mode-hook   #'smart-semicolon-mode))
+
+  (use-package! expand-region-improved
+    :defer t :init
+    :config
+    (eri/define-pair org-table-cell "|" 'org-at-table-p)
+    (eri/add-mode-expansions 'org-mode
+                             '((eri/mark-inside-org-table-cell
+                                eri/mark-outside-org-table-cell)))
+    (setq eri/try-expand-list
+          '((er/mark-symbol
+             er/mark-symbol-with-prefix
+             er/mark-next-accessor)
+            (er/mark-inside-quotes
+             eri/mark-outside-quotes)
+            (er/mark-inside-pairs
+             er/mark-outside-pairs)
+            cae-mark-comment
+            er/mark-url
+            er/mark-email
+            eri/mark-line
+            eri/mark-block
+            mark-page))))
 
 
 ;;; Autocompletion
