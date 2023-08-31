@@ -76,9 +76,10 @@
   ;; For some reason just having it as a hook doesn't get `org-tidy' to apply in
   ;; the Dirvish preview.
   (advice-add #'org-set-font-lock-defaults :after
-              (lambda () (unless (or org-inhibit-startup
-                                     org-inhibit-startup-visibility-stuff)
-                           (org-tidy-mode))))
+              (cae-defun cae-init-org-tidy-mode-a ()
+                (unless (or org-inhibit-startup
+                            org-inhibit-startup-visibility-stuff)
+                  (org-tidy-mode))))
   :config
   (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
 
