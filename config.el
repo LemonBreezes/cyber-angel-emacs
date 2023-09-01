@@ -492,16 +492,6 @@
                 (cae-defun cae-disable-spell-fu-h ()
                   (spell-fu-mode -1)))))
 
-  (use-package! dwim-shell-command
-    :defer t :init
-    (autoload 'dwim-shell-command "dwim-shell-command" nil t)
-    (map! [remap shell-command] #'dwim-shell-command
-          (:after dired
-           :map dired-mode-map
-           [remap dired-do-async-shell-command] #'dwim-shell-command
-           [remap dired-do-shell-command] #'dwim-shell-command
-           [remap dired-smart-shell-command] #'dwim-shell-command)))
-
   (use-package! 0x0
     :defer t :init
     (map! "C-x U" #'0x0-dwim)
