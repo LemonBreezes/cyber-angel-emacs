@@ -1,0 +1,582 @@
+diff --git a/lisp/doom-keybinds.el b/lisp/doom-keybinds.el
+index 29788e9a9..1fb58a747 100644
+--- a/lisp/doom-keybinds.el
++++ b/lisp/doom-keybinds.el
+@@ -25,6 +25,14 @@ and Emacs states, and for non-evil users.")
+ (defvar doom-leader-map (make-sparse-keymap)
+   "An overriding keymap for <leader> keys.")
+ 
++(defvar doom-localleader-map-alist nil
++  "An alist mapping major modes to their localleader keymaps.")
++
++(defvar doom-localleader-map (make-sparse-keymap)
++  "The current major mode's localleader keymap.")
++
++(defvar doom-localleader-current-major-mode nil
++  "The major mode of the current localleader keymap.")
+ 
+ ;;
+ ;;; Global keybind settings
+@@ -145,11 +153,8 @@ all hooks after it are ignored.")
+                     forms))
+             (when-let (desc (cadr (memq :which-key udef)))
+               (prependq!
+-               wkforms `((which-key-add-key-based-replacements
+-                           (general--concat t doom-leader-alt-key ,key)
+-                           ,desc)
+-                         (which-key-add-key-based-replacements
+-                           (general--concat t doom-leader-key ,key)
++               wkforms `((which-key-add-keymap-based-replacements doom-leader-map
++                           ,key
+                            ,desc))))))))
+     (macroexp-progn
+      (append (and wkforms `((after! which-key ,@(nreverse wkforms))))
+@@ -168,6 +173,43 @@ See `doom-leader-key' and `doom-leader-alt-key' to change the leader prefix."
+     :keymaps 'doom-leader-map
+     ,@args))
+ 
++(defmacro doom--define-localleader-leader-key (&rest keys)
++  (let ((modes (cl-mapcar #'general--remove-map
++                          (doom-unquote (progn (pop keys) (pop keys)))))
++        prefix forms wkforms result)
++    (macroexp-progn (dolist (mode modes result)
++                      (unless (keymapp (alist-get mode doom-localleader-map-alist))
++                        (setf (alist-get mode doom-localleader-map-alist)
++                              (make-sparse-keymap)))
++                      (let ((keys keys))
++                        (while keys
++                          (let ((key (pop keys))
++                                (def (pop keys)))
++                            (if (keywordp key)
++                                (when (memq key '(:prefix :infix))
++                                  (setq prefix def))
++                              (when prefix
++                                (setq key `(general--concat t ,prefix ,key)))
++                              (let* ((udef (cdr-safe (doom-unquote def)))
++                                     (bdef (if (general--extended-def-p udef)
++                                               (general--extract-def (general--normalize-extended-def udef))
++                                             def)))
++                                (unless (eq bdef :ignore)
++                                  (push `(define-key
++                                           (alist-get ',mode doom-localleader-map-alist)
++                                           (general--kbd ,key)
++                                           ,bdef)
++                                        forms))
++                                (when-let (desc (cadr (memq :which-key udef)))
++                                  (prependq!
++                                   wkforms `((which-key-add-keymap-based-replacements
++                                               (alist-get ',mode doom-localleader-map-alist)
++                                               ,key
++                                               ,desc))))))))
++                        (prependq! result
++                                   (append (and wkforms `((after! which-key ,@(nreverse wkforms))))
++                                           (nreverse forms))))))))
++
+ (defmacro define-localleader-key! (&rest args)
+   "Define <localleader> key.
+ 
+@@ -195,8 +237,20 @@ localleader prefix."
+ ;;   :prefix/:non-normal-prefix properties because general is incredibly slow
+ ;;   binding keys en mass with them in conjunction with :states -- an effective
+ ;;   doubling of Doom's startup time!
+-(define-prefix-command 'doom/leader 'doom-leader-map)
+ (define-key doom-leader-map [override-state] 'all)
++(define-prefix-command 'doom-leader-map)
++(define-prefix-command 'doom-localleader-map)
++
++(add-hook! '(after-change-major-mode-hook
++             doom-switch-buffer-hook
++             doom-switch-window-hook
++             doom-switch-frame-hook)
++  (defun doom-init-localleader-key-h ()
++    "Set the localleader keys for the current major-mode."
++    (unless (doom-unreal-buffer-p (current-buffer))
++      (setq doom-localleader-current-major-mode major-mode)
++      (set-keymap-parent doom-localleader-map
++                         (cdr (assq major-mode doom-localleader-map-alist))))))
+ 
+ ;; Bind `doom-leader-key' and `doom-leader-alt-key' as late as possible to give
+ ;; the user a chance to modify them.
+@@ -210,9 +264,12 @@ localleader prefix."
+                    (set-keymap-parent doom-leader-map mode-specific-map))
+                   ((equal doom-leader-alt-key "C-x")
+                    (set-keymap-parent doom-leader-map ctl-x-map)))
+-            (define-key map (kbd doom-leader-alt-key) 'doom/leader))
+-        (evil-define-key* '(normal visual motion) map (kbd doom-leader-key) 'doom/leader)
+-        (evil-define-key* '(emacs insert) map (kbd doom-leader-alt-key) 'doom/leader))
++            (define-key map (kbd doom-leader-alt-key) #'doom-leader-map)
++            (define-key map (kbd doom-localleader-alt-key) #'doom-localleader-map))
++        (evil-define-key* '(normal visual motion) map (kbd doom-leader-key) #'doom-leader-map)
++        (evil-define-key* '(emacs insert) map (kbd doom-leader-alt-key) #'doom-leader-map)
++        (evil-define-key* '(normal visual motion) map (kbd doom-localleader-key) #'doom-localleader-map)
++        (evil-define-key* '(emacs insert) map (kbd doom-localleader-alt-key) #'doom-localleader-map))
+       (general-override-mode +1))))
+ 
+ 
+@@ -283,7 +340,6 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+       (let ((key (pop rest)))
+         (cond ((listp key)
+                (doom--map-nested nil key))
+-
+               ((keywordp key)
+                (pcase key
+                  (:leader
+@@ -291,7 +347,7 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+                   (setq doom--map-fn 'doom--define-leader-key))
+                  (:localleader
+                   (doom--map-commit)
+-                  (setq doom--map-fn 'define-localleader-key!))
++                  (setq doom--map-fn 'doom--define-localleader-leader-key))
+                  (:after
+                   (doom--map-nested (list 'after! (pop rest)) rest)
+                   (setq rest nil))
+@@ -317,6 +373,8 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+                                           :prefix prefix)
+                                     rest))
+                       (push `(defvar ,keymap (make-sparse-keymap))
++                            doom--map-forms)
++                      (push `(define-prefix-command ',keymap)
+                             doom--map-forms))))
+                  (:prefix
+                   (cl-destructuring-bind (prefix . desc)
+diff --git a/lisp/doom-ui.el b/lisp/doom-ui.el
+index 05cc20c12..7ba7b1858 100644
+--- a/lisp/doom-ui.el
++++ b/lisp/doom-ui.el
+@@ -196,7 +196,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
+ `kill-current-buffer'."
+   :before-until #'kill-current-buffer
+   (let ((buf (current-buffer)))
+-    (cond ((window-dedicated-p)
++    (cond ((eq (window-dedicated-p) 'popup)
++           (set-window-dedicated-p (selected-window) nil)
++           nil)
++          ((eq (window-dedicated-p) t)
+            (delete-window)
+            t)
+           ((eq buf (doom-fallback-buffer))
+diff --git a/lisp/lib/help.el b/lisp/lib/help.el
+index cd6c8e269..77e5fa07b 100644
+--- a/lisp/lib/help.el
++++ b/lisp/lib/help.el
+@@ -168,7 +168,8 @@ selection of all minor-modes, active or not."
+                   (location
+                    (goto-char location)))
+             (ignore-errors
+-              (when (outline-invisible-p)
++              (when (memq (get-char-property (point) 'invisible)
++                          '(outline org-fold-outline))
+                 (save-excursion
+                   (outline-previous-visible-heading 1)
+                   (org-show-subtree))))))
+diff --git a/modules/editor/evil/init.el b/modules/editor/evil/init.el
+index 6bfa97df6..5b0ccd269 100644
+--- a/modules/editor/evil/init.el
++++ b/modules/editor/evil/init.el
+@@ -1,297 +1,32 @@
+-;;; editor/evil/init.el -*- lexical-binding: t; -*-
+-
+-(defvar evil-collection-key-blacklist)
+ 
+-;; We load evil-collection ourselves for these reasons:
+-;;
+-;; 1. To truly lazy load it. Some of its modules, like
+-;;    evil-collection-{elisp-mode,buff-menu} are loaded immediately, because
+-;;    Emacs loads their packages immediately, which pulls in all of
+-;;    evil-collection (and other packages with it, sometimes).
+-;; 2. This ensures a predictable load order, versus lazy loading using :defer or
+-;;    :after-call. This means users can use (after! org ...) and be sure that
+-;;    their changes will override evil-collection's.
+-;; 3. Ideally, we'd do away with evil-collection entirely. It changes too often,
+-;;    introduces breaking bugs too frequently, and I don't agree with all their
+-;;    design choices. Regardless, it does more good than trouble, so it may be
+-;;    here to stay.
+-;; 4. Adds `+evil-collection-disabled-list', to make it easier for users to
+-;;    disable modules, and to reduce the effort required to maintain our copy of
+-;;    `evil-collection-list' (now I can just copy it from time to time).
++;;; editor/evil/init.el -*- lexical-binding: t; -*-
+ 
+ (when (and (not noninteractive)
+            (not (doom-context-p 'reload))
+            (modulep! +everywhere))
+-
+-  (setq evil-collection-company-use-tng (modulep! :completion company +tng)
+-        ;; must be set before evil/evil-collection is loaded
+-        evil-want-keybinding nil)
+-
+-  (defvar +evil-collection-disabled-list
+-    '(anaconda-mode
+-      buff-menu
+-      calc
+-      comint
+-      company
+-      custom
+-      eldoc
+-      elisp-mode
+-      ert
+-      free-keys
+-      helm
+-      help
+-      indent
+-      image
+-      kotlin-mode
+-      outline
+-      replace
+-      shortdoc
+-      simple
+-      slime
+-      lispy)
+-    "A list of `evil-collection' modules to ignore. See the definition of this
+-variable for an explanation of the defaults (in comments). See
+-`evil-collection-mode-list' for a list of available options.")
+-
+-  (defvar evil-collection-setup-minibuffer nil)
+-
+-  ;; We do this ourselves, and better.
+-  (defvar evil-collection-want-unimpaired-p nil)
+-  ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
+-  (defvar evil-collection-want-find-usages-bindings-p nil)
+-  ;; Reduces keybind conflicts between outline-mode and org-mode (which is
+-  ;; derived from outline-mode).
+-  (defvar evil-collection-outline-enable-in-minor-mode-p nil)
+-
+-  ;; We handle loading evil-collection ourselves
+-  (defvar evil-collection--supported-modes nil)
+-
+-  ;; This has to be defined here since evil-collection doesn't autoload its own.
+-  ;; It must be updated whenever evil-collection updates theirs. Here's an easy
+-  ;; way to update it:
+-  ;;
+-  ;; (with-current-buffer
+-  ;;     (url-retrieve-synchronously "https://raw.githubusercontent.com/emacs-evil/evil-collection/master/evil-collection.el" t t)
+-  ;;   (goto-char (point-min))
+-  ;;   (when (re-search-forward "^(defvar evil-collection--supported-modes\n[^(]+")
+-  ;;     (let ((list (sexp-at-point)))
+-  ;;       ;; Fixes
+-  ;;       (when (assq 'pdf list)
+-  ;;         (setf (alist-get 'pdf list) '(pdf-tools)))
+-  ;;       (let ((diff (cl-set-difference evil-collection-mode-list list :test #'equal)))
+-  ;;         (list (- (length list) (length evil-collection-mode-list))
+-  ;;               diff)
+-  ;;         (message "diff: %s" diff)
+-  ;;         (kill-new (prin1-to-string list))))))
+-
+-  (defvar evil-collection-mode-list
+-    `(2048-game
+-      ag
+-      alchemist
+-      anaconda-mode
+-      apropos
+-      arc-mode
+-      atomic-chrome
+-      auto-package-update
+-      beginend
+-      bluetooth
+-      bm
+-      bookmark
+-      (buff-menu "buff-menu")
+-      calc
+-      calendar
+-      cider
+-      cmake-mode
+-      color-rg
+-      comint
+-      company
+-      compile
+-      consult
+-      corfu
+-      crdt
+-      (custom cus-edit)
+-      cus-theme
+-      daemons
+-      dashboard
+-      deadgrep
+-      debbugs
+-      debug
+-      devdocs
+-      dictionary
+-      diff-hl
+-      diff-mode
+-      dired
+-      dired-sidebar
+-      disk-usage
+-      doc-view
+-      docker
+-      ebib
+-      ebuku
+-      edbi
+-      edebug
+-      ediff
+-      eglot
+-      explain-pause-mode
+-      elfeed
+-      eldoc
+-      elisp-mode
+-      elisp-refs
+-      elisp-slime-nav
+-      embark
+-      emms
+-      ,@(if (> emacs-major-version 28) '(emoji))
+-      epa
+-      ert
+-      eshell
+-      eval-sexp-fu
+-      evil-mc
+-      eww
+-      fanyi
+-      finder
+-      flycheck
+-      flymake
+-      forge
+-      free-keys
+-      geiser
+-      ggtags
+-      git-timemachine
+-      gited
+-      gnus
+-      go-mode
+-      grep
+-      guix
+-      hackernews
+-      helm
+-      help
+-      helpful
+-      hg-histedit
+-      hungry-delete
+-      ibuffer
+-      image
+-      image-dired
+-      image+
+-      imenu
+-      imenu-list
+-      (indent "indent")
+-      indium
+-      info
+-      ivy
+-      js2-mode
+-      leetcode
+-      lispy
+-      log-edit
+-      log-view
+-      lsp-ui-imenu
+-      lua-mode
+-      kotlin-mode
+-      macrostep
+-      man
+-      (magit magit-repos magit-submodule)
+-      magit-section
+-      magit-todos
+-      markdown-mode
+-      monky
+-      mpc
+-      mu4e
+-      mu4e-conversation
+-      neotree
+-      newsticker
+-      notmuch
+-      nov
+-      omnisharp
+-      org
+-      org-present
+-      org-roam
+-      osx-dictionary
+-      outline
+-      p4
+-      (package-menu package)
+-      pass
+-      (pdf pdf-tools)
+-      popup
+-      proced
+-      prodigy
+-      profiler
+-      python
+-      quickrun
+-      racer
+-      racket-describe
+-      realgud
+-      reftex
+-      replace
+-      restclient
+-      rg
+-      ripgrep
+-      rjsx-mode
+-      robe
+-      rtags
+-      ruby-mode
+-      scheme
+-      scroll-lock
+-      selectrum
+-      sh-script
+-      ,@(if (> emacs-major-version 27) '(shortdoc))
+-      simple
+-      simple-mpc
+-      slime
+-      sly
+-      snake
+-      so-long
+-      speedbar
+-      tablist
+-      tar-mode
+-      telega
+-      (term term ansi-term multi-term)
+-      tetris
+-      thread
+-      tide
+-      timer-list
+-      transmission
+-      trashed
+-      tuareg
+-      typescript-mode
+-      vc-annotate
+-      vc-dir
+-      vc-git
+-      vdiff
+-      vertico
+-      view
+-      vlf
+-      vterm
+-      vundo
+-      w3m
+-      wdired
+-      wgrep
+-      which-key
+-      woman
+-      xref
+-      xwidget
+-      yaml-mode
+-      youtube-dl
+-      zmusic
+-      (ztree ztree-diff)))
+-
+-  (defun +evil-collection-init (module &optional disabled-list)
+-    "Initialize evil-collection-MODULE.
+-
+-Unlike `evil-collection-init', this respects `+evil-collection-disabled-list',
+-and complains if a module is loaded too early (during startup)."
+-    (unless (memq (or (car-safe module) module) disabled-list)
+-      (doom-log "editor:evil: loading evil-collection-%s %s"
+-                (or (car-safe module) module)
+-                (if after-init-time "" "(too early!)"))
+-      (with-demoted-errors "evil-collection error: %s"
+-        (evil-collection-init (list module)))))
++  (setq
++   ;; We do this ourselves, and better.
++   evil-collection-want-unimpaired-p nil
++   ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
++   evil-collection-want-find-usages-bindings-p nil
++   ;; Reduces keybind conflicts between outline-mode and org-mode (which is
++   ;; derived from outline-mode).
++   evil-collection-outline-enable-in-minor-mode-p nil
++
++   evil-collection-setup-minibuffer nil
++   ;; must be set before evil/evil-collection is loaded
++   evil-collection-company-use-tng (modulep! :completion company +tng)
++   evil-want-keybinding nil)
+ 
+   (defadvice! +evil-collection-disable-blacklist-a (fn)
+-    :around #'evil-collection-vterm-toggle-send-escape  ; allow binding to ESC
++    :around #'evil-collection-vterm-toggle-send-escape ; allow binding to ESC
+     (let (evil-collection-key-blacklist)
+       (funcall-interactively fn)))
+ 
+   ;; These modes belong to packages that Emacs always loads at startup, causing
+   ;; evil-collection and it's co-packages to all load immediately. We avoid this
+   ;; by loading them after evil-collection has first loaded...
+-  (with-eval-after-load 'evil-collection
++  (after! evil-collection
+     ;; Don't let evil-collection interfere with certain keys
+     (setq evil-collection-key-blacklist
+           (append (list doom-leader-key doom-localleader-key
+@@ -301,50 +36,22 @@ and complains if a module is loaded too early (during startup)."
+                     '("gd" "gf" "K"))
+                   (when (modulep! :tools eval)
+                     '("gr" "gR"))
+-                  '("[" "]" "gz" "<escape>")))
++                  '("[" "]" "gz" "<escape>"))
++          evil-collection-mode-list
++          (cl-set-difference evil-collection-mode-list
++                             '(anaconda-mode
++                               company
++                               eldoc
++                               ert
++                               helm
++                               kotlin-mode
++                               outline
++                               simple
++                               slime
++                               lispy)))
+ 
+     (evil-define-key* 'normal process-menu-mode-map
+       "q" #'kill-current-buffer
+-      "d" #'process-menu-delete-process)
+-
+-    (mapc #'+evil-collection-init '(comint custom)))
+-
+-  ;; ...or on first invokation of their associated major/minor modes.
+-  (after! evil
+-    ;; Emacs loads these two packages immediately, at startup, which needlessly
+-    ;; convolutes load order for evil-collection-help.
+-    (add-transient-hook! 'help-mode
+-      (+evil-collection-init 'help))
+-    (add-transient-hook! 'Buffer-menu-mode
+-      (+evil-collection-init '(buff-menu "buff-menu")))
+-    (add-transient-hook! 'calc-mode
+-      (+evil-collection-init 'calc))
+-    (add-transient-hook! 'image-mode
+-      (+evil-collection-init 'image))
+-    (add-transient-hook! 'emacs-lisp-mode
+-      (+evil-collection-init 'elisp-mode))
+-    (add-transient-hook! 'occur-mode
+-      (+evil-collection-init 'replace))
+-    (add-transient-hook! 'indent-rigidly
+-      (+evil-collection-init '(indent "indent")))
+-    (add-transient-hook! 'minibuffer-setup-hook
+-      (when evil-collection-setup-minibuffer
+-        (+evil-collection-init 'minibuffer)
+-        (evil-collection-minibuffer-insert)))
+-    (add-transient-hook! 'process-menu-mode
+-      (+evil-collection-init '(process-menu simple)))
+-    (add-transient-hook! 'shortdoc-mode
+-      (+evil-collection-init 'shortdoc))
+-    (add-transient-hook! 'tabulated-list-mode
+-      (+evil-collection-init 'tabulated-list))
+-    (add-transient-hook! 'tab-bar-mode
+-      (+evil-collection-init 'tab-bar))
++      "d" #'process-menu-delete-process))
+ 
+-    ;; HACK Do this ourselves because evil-collection break's `eval-after-load'
+-    ;;      load order by loading their target plugin before applying keys. This
+-    ;;      makes it hard for end-users to overwrite these keybinds with a
+-    ;;      simple `after!' or `with-eval-after-load'.
+-    (dolist (mode evil-collection-mode-list)
+-      (dolist (req (or (cdr-safe mode) (list mode)))
+-        (with-eval-after-load req
+-          (+evil-collection-init mode +evil-collection-disabled-list))))))
++  (evil-collection-init))
+diff --git a/modules/lang/org/autoload/org.el b/modules/lang/org/autoload/org.el
+index 6cd51bd45..6ca2c2211 100644
+--- a/modules/lang/org/autoload/org.el
++++ b/modules/lang/org/autoload/org.el
+@@ -371,7 +371,9 @@ see how ARG affects this command."
+         (goto-char (point-min))
+         (while (not (eobp))
+           (org-next-visible-heading 1)
+-          (when (outline-invisible-p (line-end-position))
++          (when (memq (get-char-property (line-end-position)
++                                         'invisible)
++                      '(outline org-fold-outline))
+             (let ((level (org-outline-level)))
+               (when (> level max)
+                 (setq max level))))))
+@@ -489,7 +491,10 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
+                    (or org-cycle-open-archived-trees
+                        (not (member org-archive-tag (org-get-tags))))
+                    (or (not arg)
+-                       (setq invisible-p (outline-invisible-p (line-end-position)))))
++                       (setq invisible-p
++                             (memq (get-char-property (line-end-position)
++                                                      'invisible)
++                                   '(outline org-fold-outline)))))
+           (unless invisible-p
+             (setq org-cycle-subtree-status 'subtree))
+           (org-cycle-internal-local)
