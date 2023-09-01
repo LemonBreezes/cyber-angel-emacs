@@ -163,7 +163,9 @@
   :defer t :config
   (require 'elfeed-tube)
   (setq empv-invidious-instance
-        (aio-wait-for (elfeed-tube--get-invidious-url))))
+        (concat "https://www."
+                (aio-wait-for (elfeed-tube--get-invidious-url))
+                "/api/v1")))
 
 
 ;;; System
