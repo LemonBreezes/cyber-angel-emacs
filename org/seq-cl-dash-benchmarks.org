@@ -66,6 +66,23 @@
     (seq-uniq lst #'=)))
 #+end_src
 
+Results after recompiling with -O3 and -march=skylake with GCC
+#+RESULTS:
+| form# |               total | gc-count |           gc-time |
+|-------+---------------------+----------+-------------------|
+|     1 |         0.486850657 |        0 |               0.0 |
+|     2 | 0.32140624100000004 |        0 |               0.0 |
+|     3 |  12.511666872000001 |       90 | 6.162411392999999 |
+
+With Clang and -O3, -flto=thin
+#+RESULTS:
+| form# |               total | gc-count |     gc-time |
+|-------+---------------------+----------+-------------|
+|     1 |         0.608860955 |        0 |         0.0 |
+|     2 | 0.41814508300000003 |        0 |         0.0 |
+|     3 |  12.608610074000001 |       90 | 6.549872463 |
+
+Old results:
 #+RESULTS:
 | form# |             total | gc-count |           gc-time |
 |-------+-------------------+----------+-------------------|
@@ -87,6 +104,24 @@
     (seq-some #'cl-oddp lst)))
 #+end_src
 
+Results after recompiling with -O3 and -march=skylake with GCC
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 1.443489587 |        0 |     0.0 |
+|     2 | 1.394253424 |        0 |     0.0 |
+|     3 | 3.100340842 |        0 |     0.0 |
+
+With Clang and -O3, -flto=thin
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 1.991942513 |        0 |     0.0 |
+|     2 | 2.040352603 |        0 |     0.0 |
+|     3 | 4.126440601 |        0 |     0.0 |
+
+
+Old results:
 #+RESULTS:
 | form# |       total | gc-count | gc-time |
 |-------+-------------+----------+---------|
@@ -109,6 +144,18 @@
     (seq-filter #'cl-oddp lst)))
 #+end_src
 
+Results after recompiling with -O3 and -march=skylake with GCC
+#+RESULTS:
+| form# |        total | gc-count |           gc-time |
+|-------+--------------+----------+-------------------|
+|     1 |  0.307200754 |        0 |               0.0 |
+|     2 |   0.14051568 |        0 |               0.0 |
+|     3 | 20.553764926 |      143 | 9.038986776000002 |
+|     4 |  0.919142631 |        9 | 0.573326514999998 |
+
+(forgot to take clang results)
+
+Old results:
 #+RESULTS:
 | form# |              total | gc-count |            gc-time |
 |-------+--------------------+----------+--------------------|
@@ -142,6 +189,25 @@
      alist 0)))
 #+end_src
 
+Results after recompiling with -O3 and -march=skylake with GCC
+#+RESULTS:
+| form# |              total | gc-count |            gc-time |
+|-------+--------------------+----------+--------------------|
+|     1 | 0.8475778620000001 |        9 | 0.5681250109999993 |
+|     2 | 0.6368698279999999 |        0 |                0.0 |
+|     3 |       13.021640997 |       95 |  5.958606903000003 |
+|     4 | 0.9302371279999999 |        0 |                0.0 |
+
+With Clang and -O3, -flto=thin
+#+RESULTS:
+| form# |              total | gc-count |            gc-time |
+|-------+--------------------+----------+--------------------|
+|     1 |        1.169519602 |        9 | 0.7553499819999985 |
+|     2 |        0.752585681 |        0 |                0.0 |
+|     3 | 22.494633366000002 |       95 |  7.641952104000001 |
+|     4 |        1.002289367 |        0 |                0.0 |
+
+Old results:
 #+RESULTS:
 | form# |              total | gc-count |            gc-time |
 |-------+--------------------+----------+--------------------|

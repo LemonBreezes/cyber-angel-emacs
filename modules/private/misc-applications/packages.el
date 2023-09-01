@@ -10,7 +10,7 @@
 ;; Use external APIs or apps
 (package! leetcode)
 (package! somafm)
-(package! wttrin :recipe (:local-repo "packages/wttrin"))
+(package! ytdious :recipe (:host github :repo "spiderbit/ytdious"))
 
 ;; System
 (when (eq system-type 'gnu/linux)
