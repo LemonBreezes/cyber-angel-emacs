@@ -3,7 +3,8 @@
 (defvar startup/chromium-process nil)
 (defvar startup/chromium-executable (or (executable-find "chromium-bin")
                         (executable-find "chromium")
-                        (executable-find "google-chrome-unstable")))
+                        (executable-find "google-chrome-unstable")
+                        (executable-find "google-chrome-stable")))
 (defvar startup/chromium-workspace (if (or (executable-find "chromium-bin")
                            (executable-find "chromium"))
                        "Chromium"
