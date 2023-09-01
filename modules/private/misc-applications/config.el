@@ -159,6 +159,12 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
+(use-package! empv
+  :defer t :config
+  (require 'elfeed-tube)
+  (setq empv-invidious-instance
+        (aio-wait-for (elfeed-tube--get-invidious-url))))
+
 
 ;;; System
 
