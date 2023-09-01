@@ -73,13 +73,7 @@
 
 (use-package! org-tidy
   :defer t :init
-  ;; For some reason just having it as a hook doesn't get `org-tidy' to apply in
-  ;; the Dirvish preview.
-  (advice-add #'org-set-font-lock-defaults :after
-              (cae-defun cae-org-init-tidy-mode-a ()
-                (unless (or org-inhibit-startup
-                            org-inhibit-startup-visibility-stuff)
-                  (org-tidy-mode))))
+  (add-hook 'org-mode-hook #'org-tidy-mode)
   :config
   (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
 
