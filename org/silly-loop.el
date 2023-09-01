@@ -6,4 +6,4 @@
     (while (> (setq n (1- n)) 0))
     (- (float-time) t1)))
 
-;;(silly-loop 50000000)
+;; (silly-loop 50000000)
