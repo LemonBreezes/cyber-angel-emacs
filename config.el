@@ -361,9 +361,9 @@
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
-          ((when-let (chrome (or (executable-find "chromium-bin-browser")
-                                 (executable-find "google-chrome-unstable")
-                                 (executable-find "google-chrome-stable"))))
+          ((when-let ((chrome (or (executable-find "chromium-bin-browser")
+                                  (executable-find "google-chrome-unstable")
+                                  (executable-find "google-chrome-stable")))))
            (setq browse-url-generic-program chrome
                  browse-url-generic-args (when (eq (user-uid) 0)
                                            '("--no-sandbox"))))
