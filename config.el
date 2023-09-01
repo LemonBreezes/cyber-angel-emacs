@@ -363,10 +363,10 @@
                  browse-url-generic-args '("/c" "start")))
           ((when-let ((chrome (or (executable-find "chromium-bin-browser")
                                   (executable-find "google-chrome-unstable")
-                                  (executable-find "google-chrome-stable")))))
-           (setq browse-url-generic-program chrome
-                 browse-url-generic-args (when (eq (user-uid) 0)
-                                           '("--no-sandbox"))))
+                                  (executable-find "google-chrome-stable"))))
+             (setq browse-url-generic-program chrome
+                   browse-url-generic-args (when (eq (user-uid) 0)
+                                             '("--no-sandbox")))))
           ((executable-find "firefox-bin")
            (setq browse-url-generic-program "firefox-bin"))))
 
