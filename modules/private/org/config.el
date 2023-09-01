@@ -35,12 +35,6 @@
   (map! :map org-mode-map
         "]" #'cae-org-insert-checkbox-or-bracket))
 
-(use-package! org-tidy
-  :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode)
-  :config
-  (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
-
 (use-package! org-modern
   :unless (cae-tty-disable-unicode-p)
   :defer t :after org
