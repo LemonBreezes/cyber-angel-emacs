@@ -68,17 +68,13 @@
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
 
-;; ;; Unmap `C-d` and `C-u` in Evil since we use the `<prior>` and `<next>` keys
-;; ;; instead.
-;;(map! :m "C-d" nil
-;;      :m "C-u" nil)
-
 (after! evil-snipe
   (setq evil-snipe-scope 'visible))
 (setq evil-ex-substitute-global t
       evil-move-cursor-back nil
       evil-vsplit-window-right t
-      evil-split-window-below t)
+      evil-split-window-below t
+      evil-v$-excludes-newline t)
 
 (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
   #'+evil-embrace-lisp-mode-hook-h)
