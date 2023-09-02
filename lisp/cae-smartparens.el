@@ -4,8 +4,17 @@
 ;; code that need to be ran before the `doom!' block to prevent errors that
 ;; happen when `smartparens' is disabled.
 (unless (modulep! :config default +smartparens)
+  (provide 'smartparens)
   (defalias 'sp-local-pair #'ignore)
+  (defalias 'sp-pair #'ignore)
+  (defalias 'sp-with-modes #'ignore)
   (defalias 'sp--syntax-ppss #'syntax-ppss)
+  (defalias 'sp-point-in-comment
+    (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
+  (defalias 'sp-point-in-string
+    (lambda (&optional pos) (nth 3 (syntax-ppss pos))))
+  (defalias 'sp-beginning-of-sexp
+    (lambda (&optional arg) (beginning-of-thing 'sexp)))
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :editor lispy)
     (after! lispy
