@@ -165,6 +165,8 @@
              consult-gh-repo-clone
              consult-gh-search-repos
              consult-gh-search-issues)
+  :init
+  (map! )
   :config
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
@@ -570,10 +572,10 @@
 (use-package! empv
   :defer t :init
   (map! :map +misc-applications-music-map
-        "p" #'empv-play)
+        "y" #'empv-play)
   (after! which-key
-  (which-key-add-keymap-based-replacements +misc-applications-music-map
-    "m" "MPC"))
+    (which-key-add-keymap-based-replacements +misc-applications-music-map
+      "y" "Youtube"))
   :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
