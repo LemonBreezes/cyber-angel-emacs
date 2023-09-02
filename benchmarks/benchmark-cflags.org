@@ -1,0 +1,9 @@
+#+title: Benchmark CFLAGS
+
+I don't have any benchmark Elisp written here yet. But for now, I can just
+discuss my findings. The most fundamental ~CFLAGS~ are
+#+begin_src sh
+CFLAGS="-Ofast -fno-finite-math-only -fomit-frame-pointer -march=skylake -pipe"
+#+end_src
+
+1. ~-ftracer~ makes emacs MUCH slower.

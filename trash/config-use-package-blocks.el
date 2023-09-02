@@ -71,3 +71,13 @@
                                                   "lisp/cae-project-bookmark"))
 (map! :desc "project-bookmark" "C-x r p" #'cae-project-bookmark
       :desc "project-bookmark-set" "C-x r P" #'cae-project-bookmark-set)
+
+(use-package! dwim-shell-command
+  :defer t :init
+  (autoload 'dwim-shell-command "dwim-shell-command" nil t)
+  (map! [remap shell-command] #'dwim-shell-command
+        (:after dired
+         :map dired-mode-map
+         [remap dired-do-async-shell-command] #'dwim-shell-command
+         [remap dired-do-shell-command] #'dwim-shell-command
+         [remap dired-smart-shell-command] #'dwim-shell-command)))

@@ -7,6 +7,7 @@
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
 
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/ebuild-mode")
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
@@ -115,7 +116,6 @@
        org
        ai
        gnus
-       emms
        ;;holy
        )
 

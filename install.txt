@@ -1,4 +1,9 @@
 1. Install the compression/decompression programs mentioned in the Dired module.
 2. Install Iosevka Comfy and LXGW Wenkai.
-3. Install xwininfo and xclip.
+3. Install Xwininfo and Xclip.
 4. Install Aspell and Enchant.
+5. Install Exiftool.
+6. Install Flameshot.
+7. Log into Copilot with the interactive command `copilot-login`.
+8. Install Pavucontrol.
+9. Install Youtube DLP (Youtube DL fork).

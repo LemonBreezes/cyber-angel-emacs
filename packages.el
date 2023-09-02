@@ -13,6 +13,9 @@
                    flymake-popon
                    elfeed-goodies
                    highlight-numbers)
+(when (and (modulep! :editor evil +everywhere)
+           (modulep! :lang org))
+  (package! evil-org :recipe (:host github :repo "Somelauw/evil-org-mode")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
@@ -44,7 +47,6 @@
 (package! nov)
 (package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
-(package! dwim-shell-command)
 (package! wakatime-mode)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
@@ -65,7 +67,7 @@
 (package! logos)
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
 (package! smart-semicolon)
-(package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
+(package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 
 ;; cae-multi.el

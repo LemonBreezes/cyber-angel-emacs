@@ -9,8 +9,8 @@
 
 ;; Use external APIs or apps
 (package! leetcode)
-(package! somafm)
-(package! ytdious :recipe (:host github :repo "spiderbit/ytdious"))
+(when (modulep! :completion vertico)
+  (package! consult-gh))
 
 ;; System
 (when (eq system-type 'gnu/linux)
@@ -50,3 +50,11 @@
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
 (package! zone-tmux-clock)
+
+;; Music
+(package! somafm)
+(package! empv)
+(package! emms)
+(when (or (modulep! :private helm)
+          (modulep! :completion helm))
+  (package! helm-emms))

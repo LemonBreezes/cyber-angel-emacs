@@ -66,6 +66,21 @@
     (seq-uniq lst #'=)))
 #+end_src
 
+#+RESULTS:
+| form# |               total | gc-count |            gc-time |
+|-------+---------------------+----------+--------------------|
+|     1 | 0.46318598099999997 |        0 |                0.0 |
+|     2 |         0.302332498 |        0 |                0.0 |
+|     3 |         8.727145788 |       90 | 3.9050022250000005 |
+
+GRAPHITE="-fgraphite-identity -floop-nest-optimize -floop-parallelize-all"
+#+RESULTS:
+| form# |             total | gc-count |     gc-time |
+|-------+-------------------+----------+-------------|
+|     1 |       0.493596167 |        0 |         0.0 |
+|     2 |       0.332954255 |        0 |         0.0 |
+|     3 | 7.589732875999999 |       45 | 3.089871422 |
+
 Results after recompiling with -O3 and -march=skylake with GCC
 #+RESULTS:
 | form# |               total | gc-count |           gc-time |
@@ -103,6 +118,21 @@ Old results:
     (-some #'cl-oddp lst)
     (seq-some #'cl-oddp lst)))
 #+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 1.340823246 |        0 |     0.0 |
+|     2 | 1.344405964 |        0 |     0.0 |
+|     3 | 3.090915419 |        0 |     0.0 |
+
+GRAPHITE="-fgraphite-identity -floop-nest-optimize -floop-parallelize-all"
+#+RESULTS:
+| form# |              total | gc-count | gc-time |
+|-------+--------------------+----------+---------|
+|     1 | 1.4027854160000002 |        0 |     0.0 |
+|     2 |        1.369111772 |        0 |     0.0 |
+|     3 |        3.157122877 |        0 |     0.0 |
 
 Results after recompiling with -O3 and -march=skylake with GCC
 #+RESULTS:
@@ -143,6 +173,23 @@ Old results:
     (--filter (cl-oddp it) lst)
     (seq-filter #'cl-oddp lst)))
 #+end_src
+
+#+RESULTS:
+| form# |        total | gc-count |            gc-time |
+|-------+--------------+----------+--------------------|
+|     1 |  0.283229917 |        0 |                0.0 |
+|     2 |  0.132785873 |        0 |                0.0 |
+|     3 | 26.192283986 |      143 |  6.178632387999999 |
+|     4 |  0.738455533 |        9 | 0.3924212340000004 |
+
+GRAPHITE="-fgraphite-identity -floop-nest-optimize -floop-parallelize-all"
+#+RESULTS:
+| form# |       total | gc-count |             gc-time |
+|-------+-------------+----------+---------------------|
+|     1 | 0.285270708 |        0 |                 0.0 |
+|     2 | 0.140052951 |        0 |                 0.0 |
+|     3 | 8.656276082 |       71 |   4.631300494999998 |
+|     4 | 0.691772183 |        5 | 0.32903805200000136 |
 
 Results after recompiling with -O3 and -march=skylake with GCC
 #+RESULTS:
@@ -188,6 +235,23 @@ Old results:
        (+ acc (cdr it)))
      alist 0)))
 #+end_src
+
+#+RESULTS:
+| form# |              total | gc-count |             gc-time |
+|-------+--------------------+----------+---------------------|
+|     1 | 0.6649631779999999 |        9 | 0.38730541500000015 |
+|     2 |        0.597570053 |        0 |                 0.0 |
+|     3 |       15.248649145 |       95 |         4.078324743 |
+|     4 |        0.923310333 |        0 |                 0.0 |
+
+GRAPHITE="-fgraphite-identity -floop-nest-optimize -floop-parallelize-all"
+#+RESULTS:
+| form# |              total | gc-count |           gc-time |
+|-------+--------------------+----------+-------------------|
+|     1 |        0.558997343 |        4 |       0.255304014 |
+|     2 |        0.660300164 |        0 |               0.0 |
+|     3 |        6.368575687 |       48 | 3.072646128999999 |
+|     4 | 0.9898279799999999 |        0 |               0.0 |
 
 Results after recompiling with -O3 and -march=skylake with GCC
 #+RESULTS:
