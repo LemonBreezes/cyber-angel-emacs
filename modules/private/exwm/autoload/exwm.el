@@ -7,7 +7,8 @@
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
   (when (derived-mode-p 'exwm-mode)
-    (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)))
+    ;;(run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)
+    ))
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
@@ -28,3 +29,37 @@
                             (_ nil))))
                        (ignore-errors (throw 'exit #'ignore))))))
     (read-string "")))
+
+;;;###autoload
+(defun +exwm-do-mouse-click (x y &optional button-num window-id)
+  "Perform a mouse click at (window relative) position X and Y
+
+By default BUTTON-NUM is ``1'' (i.e. main click) and the WINDOW-ID is the currently selected window."
+  (let* ((button-index (intern (format "xcb:ButtonIndex:%d" (or button-num 1))))
+         (button-mask (intern (format "xcb:ButtonMask:%d" (or button-num 1))))
+         (window-id (or window-id (exwm--buffer->id
+                                   (window-buffer (selected-window)))
+                        (user-error "No window selected")))
+         (button-actions `((xcb:ButtonPress . ,button-mask)
+                           (xcb:ButtonRelease . 0))))
+    (dolist (b-action button-actions)
+      (xcb:+request exwm--connection
+          (make-instance 'xcb:SendEvent
+                         :propagate 0
+                         :destination window-id
+                         :event-mask xcb:EventMask:NoEvent
+                         :event (xcb:marshal
+                                 (make-instance (car b-action)
+                                                :detail button-index
+                                                :time xcb:Time:CurrentTime
+                                                :root exwm--root
+                                                :event window-id
+                                                :child 0
+                                                :root-x 0
+                                                :root-y 0
+                                                :event-x x
+                                                :event-y y
+                                                :state (cdr b-action)
+                                                :same-screen 0)
+                                 exwm--connection))))
+    (xcb:flush exwm--connection)))
