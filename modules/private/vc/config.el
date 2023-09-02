@@ -143,21 +143,4 @@
   (setq blamer-datetime-formatter "[%s]")
   (setq blamer-commit-formatter " ● %s"))
 
-;; TODO `igist' and `consult-gh'.
-(use-package! consult-gh
-  :defer t :when (modulep! :completion vertico)
-  :commands (consult-gh-orgs
-             consult-gh-repo-clone
-             consult-gh-search-repos
-             consult-gh-search-issues)
-  :config
-  (setq consult-gh-default-clone-directory "~/src/"
-        consult-gh-show-preview t
-        consult-gh-issue-action #'consult-gh--issue-view-action
-        consult-gh-repo-action #'consult-gh--repo-browse-files-action
-        consult-gh-file-action #'consult-gh--files-view-action
-        consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa" "LemonBreezes" "protesilaos")))
-(use-package! consult-gh-embark
-  :after (consult-gh embark))
-
 (use-package! igist :defer t)
