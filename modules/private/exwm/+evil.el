@@ -18,7 +18,6 @@
 (use-package! exwm-evil
   :after exwm
   :config
-  (evil-set-initial-state 'exwm-mode 'insert)
   (add-hook 'exwm-mode-hook #'enable-exwm-evil-mode)
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
   (add-hook 'doom-switch-buffer-hook #'enable-exwm-evil-mode)
