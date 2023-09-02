@@ -69,7 +69,7 @@
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
-  (setq display-line-numbers-type (if (modulep! :editor evil) 'relative t)
+  (setq display-line-numbers-type t
         display-line-numbers-width-start t)
 
   ;; Show minibuffer recursion depth
