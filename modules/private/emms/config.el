@@ -1,11 +1,11 @@
 ;;; private/emms/config.el -*- lexical-binding: t; -*-
 
-(defvar +emms-music-dir "/mnt/hdd/music/"
-  "The directory where your music library is located.")
-(add-to-list 'safe-local-variable-directories +emms-music-dir)
 
 (use-package! emms
   :defer t :init
+  (defvar +emms-music-dir "/mnt/hdd/music/"
+  "The directory where your music library is located.")
+  (add-to-list 'safe-local-variable-directories +emms-music-dir)
   (defvar +emms-workspace-name "*emms*")
   (defvar +emms--old-wconf nil)
   (setq emms-directory (concat doom-data-dir "emms/")
