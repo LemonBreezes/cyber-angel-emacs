@@ -159,14 +159,6 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
-(use-package! empv
-  :defer t :config
-  (require 'elfeed-tube)
-  (setq empv-invidious-instance
-        (concat "https://"
-                (aio-wait-for (elfeed-tube--get-invidious-url))
-                "/api/v1")))
-
 
 ;;; System
 
@@ -558,3 +550,15 @@
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
         :n "o" #'mpc-goto-playing-song))
+
+(use-package! empv
+  :defer t :init
+  (map! :map +misc-applications-music-map
+        "p")
+  :config
+  (setq empv-youtube-use-tabulated-results t)
+  (require 'elfeed-tube)
+  (setq empv-invidious-instance
+        (concat "https://"
+                (aio-wait-for (elfeed-tube--get-invidious-url))
+                "/api/v1")))
