@@ -30,6 +30,9 @@
   ;; application.
   (advice-add #'exwm-evil-insert :after #'garbage-collect)
 
+  (map! :map exwm-evil-mode-map
+        :m "<down-mouse-1>")
+
   (map! :map exwm-mode-map
         :localleader
         (:prefix ("d" . "debug")
