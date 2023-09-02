@@ -167,6 +167,7 @@
              consult-gh-search-issues)
   :init
   ;; TODO Finish this
+  (defvar consult-preview-key 'any)
   (map! :map +misc-applications-external-apps-map
         "go" #'consult-gh-orgs
         "gc" #'consult-gh-repo-clone
