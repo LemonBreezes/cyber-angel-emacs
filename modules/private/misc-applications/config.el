@@ -159,6 +159,22 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
+(use-package! consult-gh
+  :defer t :when (modulep! :completion vertico)
+  :commands (consult-gh-orgs
+             consult-gh-repo-clone
+             consult-gh-search-repos
+             consult-gh-search-issues)
+  :config
+  (setq consult-gh-default-clone-directory "~/src/"
+        consult-gh-show-preview t
+        consult-gh-issue-action #'consult-gh--issue-view-action
+        consult-gh-repo-action #'consult-gh--repo-browse-files-action
+        consult-gh-file-action #'consult-gh--files-view-action
+        consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa" "LemonBreezes" "protesilaos")))
+(use-package! consult-gh-embark
+  :after (consult-gh embark))
+
 
 ;;; System
 
@@ -554,9 +570,12 @@
 (use-package! empv
   :defer t :init
   (map! :map +misc-applications-music-map
-        "p")
+        "p" #'empv-play)
+  (after! which-key
+  (which-key-add-keymap-based-replacements +misc-applications-music-map
+    "m" "MPC"))
   :config
-  (setq empv-youtube-use-tabulated-results t)
+  (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (setq empv-invidious-instance
         (concat "https://"
