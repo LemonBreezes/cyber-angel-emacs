@@ -1,6 +1,6 @@
 ;;; private/emms/config.el -*- lexical-binding: t; -*-
 
-(defvar +emms-music-dir "/mnt/music/"
+(defvar +emms-music-dir "/mnt/hdd/music/"
   "The directory where your music library is located.")
 (add-to-list 'safe-local-variable-directories +emms-music-dir)
 
