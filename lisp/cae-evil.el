@@ -26,6 +26,7 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
+
 ;; Restore these Vim keybindings which Doom overrides.
 (map! :i "C-e" #'evil-copy-from-below)
 
@@ -109,7 +110,9 @@
       :i "C-f" #'cape-file
       :i "C-s" #'yasnippet-capf
       :i "C-l" #'cape-line
-      :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
+      :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+      :i "C-p" nil
+      :i "C-n" nil)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
