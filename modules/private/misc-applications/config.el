@@ -597,9 +597,12 @@
   (after! dired
     (map! :map dired-mode-map
           :ng "E" #'emms-play-dired))
-  (map! :leader
-        :prefix-map ("e" . "EMMS")
-        :desc "Smart browse" "e" #'+emms)
+  (map! :map +misc-applications-music-map
+        "ee" #'+emms)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-music-map
+      "e" "EMMS"
+      "e" "Smart browse"))
   :config
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
@@ -638,6 +641,12 @@
   :defer t :init
   (map! :leader
         :desc "Helm EMMS" "eh" #'helm-emms)
+  (map! :map +misc-applications-music-map
+        "eh" #'helm-emms)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-music-map
+      "e" "EMMS"
+      "eh" "Helm EMMS"))
   :config
   (setq helm-emms-dired-directories (list (expand-file-name +emms-music-dir))
         helm-emms-use-track-description-function t
