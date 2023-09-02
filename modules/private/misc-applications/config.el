@@ -166,15 +166,16 @@
              consult-gh-search-repos
              consult-gh-search-issues)
   :init
+  ;; TODO Finish this
   (map! :map +misc-applications-external-apps-map
         "go" #'consult-gh-orgs
         "gc" #'consult-gh-repo-clone
         "gs" #'consult-gh-search-repos
         "gi" #'consult-gh-search-issues
         "gd" #'consult-gh-default-repos)
-  (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
-      "l" "LeetCode"))
+  ;;(after! which-key
+  ;;  (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+  ;;    "l" "LeetCode"))
   :config
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
