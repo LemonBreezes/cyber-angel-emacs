@@ -18,7 +18,6 @@
 (use-package! exwm-evil
   :after exwm
   :config
-  (exwm-evil-enable-mouse-workaround)
   (add-hook 'exwm-mode-hook #'enable-exwm-evil-mode)
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
   (add-hook 'doom-switch-buffer-hook #'enable-exwm-evil-mode)
