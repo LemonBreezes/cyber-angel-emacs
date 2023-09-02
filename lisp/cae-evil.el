@@ -26,7 +26,6 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
-
 ;; Restore these Vim keybindings which Doom overrides.
 (map! :i "C-e" #'evil-copy-from-below)
 
