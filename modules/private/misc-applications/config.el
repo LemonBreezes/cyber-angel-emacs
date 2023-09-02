@@ -602,7 +602,7 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"
-      "e" "Smart browse"))
+      "ee" "Smart browse"))
   :config
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
