@@ -170,7 +170,8 @@
         "go" #'consult-gh-orgs
         "gc" #'consult-gh-repo-clone
         "gs" #'consult-gh-search-repos
-        "gi" #'consult-gh-search-issues)
+        "gi" #'consult-gh-search-issues
+        "gd" #'consult-gh-default-repos)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "l" "LeetCode"))
@@ -180,6 +181,7 @@
         consult-gh-issue-action #'consult-gh--issue-view-action
         consult-gh-repo-action #'consult-gh--repo-browse-files-action
         consult-gh-file-action #'consult-gh--files-view-action
+        consult-gh-preview-buffer-mode #'org-mode
         consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa"
                                        "LemonBreezes" "protesilaos"
                                        "emacs-mirror" "doomemacs"
