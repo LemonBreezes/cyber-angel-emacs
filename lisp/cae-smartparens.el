@@ -7,7 +7,6 @@
   (provide 'smartparens)
   (defalias 'sp-local-pair #'ignore)
   (defalias 'sp-pair #'ignore)
-  (defalias 'sp-with-modes #'ignore)
   (defalias 'sp--syntax-ppss #'syntax-ppss)
   (defalias 'sp-point-in-comment
     (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
