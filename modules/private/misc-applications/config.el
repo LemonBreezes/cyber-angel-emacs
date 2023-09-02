@@ -165,13 +165,22 @@
              consult-gh-repo-clone
              consult-gh-search-repos
              consult-gh-search-issues)
+  :init
+  (map! :map +misc-applications-external-apps-map
+        "go" #'consult-gh-orgs
+        "gc" #'consult-gh-repo-clone
+        "gs" #'consult-gh-search-repos
+        "gi" #'consult-gh-search-issues)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+      "l" "LeetCode"))
   :config
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
         consult-gh-issue-action #'consult-gh--issue-view-action
         consult-gh-repo-action #'consult-gh--repo-browse-files-action
         consult-gh-file-action #'consult-gh--files-view-action
-        consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa" "LemonBreezes" "protesilaos")))
+        consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa" "LemonBreezes" "protesilaos" "emacs-mirror" "doomemacs")))
 (use-package! consult-gh-embark
   :after (consult-gh embark))
 
