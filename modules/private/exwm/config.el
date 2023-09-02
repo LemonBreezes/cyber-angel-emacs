@@ -1,8 +1,8 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
-;;when (and (eq 'x (framep (selected-frame)))
-;;           (not (getenv "EXWM_RUNNING"))
-;;           (not (getenv "RATPOISON")))
+(when (and (eq 'x (framep (selected-frame)))
+           (not (getenv "EXWM_RUNNING"))
+           (not (getenv "RATPOISON")))
 
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
@@ -132,7 +132,7 @@ expansion occurs within the parent Emacs session.")
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
     ;; For people who run nested Emacs instances within EXWM.
-    (setq exwm-replace t)
+    (setq exwm-replace nil)
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
@@ -189,7 +189,7 @@ expansion occurs within the parent Emacs session.")
       (load! "+startup-programs")))
 
   (when (modulep! +notifications)
-    (load! "+notifications"))
+    (load! "+notifications")))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
