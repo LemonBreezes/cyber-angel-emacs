@@ -57,18 +57,18 @@
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'fish-completion-mode-hook corfu-auto-delay nil)
 
-  (defun cae-corfu-quit ()
-    (interactive)
-    (let ((copilot-state (and (bound-and-true-p copilot-mode)
-                              (copilot--overlay-visible))))
-      (corfu-quit)
-      (when copilot-state
-        (copilot-complete))))
-  (add-hook 'doom-escape-hook
-            (cae-defun cae-corfu-quit-h ()
-              (when (cae-corfu-visible-p)
-                (cae-corfu-quit)
-                t)))
+  ;;(defun cae-corfu-quit ()
+  ;;  (interactive)
+  ;;  (let ((copilot-state (and (bound-and-true-p copilot-mode)
+  ;;                            (copilot--overlay-visible))))
+  ;;    (corfu-quit)
+  ;;    (when copilot-state
+  ;;      (copilot-complete))))
+  ;;(add-hook 'doom-escape-hook
+  ;;          (cae-defun cae-corfu-quit-h ()
+  ;;            (when (cae-corfu-visible-p)
+  ;;              (cae-corfu-quit)
+  ;;              t)))
   (map! :map corfu-map
         "C-g" #'cae-corfu-quit)
   (add-hook 'evil-insert-state-exit-hook #'corfu-quit))
