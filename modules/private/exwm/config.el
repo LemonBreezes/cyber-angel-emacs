@@ -132,7 +132,7 @@ expansion occurs within the parent Emacs session.")
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
     ;; For people who run nested Emacs instances within EXWM.
-    (setq exwm-replace nil)
+    (setq exwm-replace (when (not (getenv "EXWM_RUNNING")) 'ask))
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
