@@ -3,12 +3,10 @@
 (defvar startup/redshift-process nil)
 (defvar startup/redshift-timer nil)
 
-(unless (executable-find "redshift")
-  (error "redshift is missing from your PATH."))
-
 (defun startup/start-redshift (&optional arg)
   (when (and (bound-and-true-p calendar-latitude)
-             (bound-and-true-p calendar-longitude))
+             (bound-and-true-p calendar-longitude)
+             (executable-find "redshift"))
     (advice-add #'+workspace-switch :after #'startup/restart-redshift)
     (setq startup/redshift-process
           (apply #'start-process
