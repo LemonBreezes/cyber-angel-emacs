@@ -14,7 +14,7 @@
   (defalias 'sp-point-in-string
     (lambda (&optional pos) (nth 3 (syntax-ppss pos))))
   (defalias 'sp-beginning-of-sexp
-    (lambda (&optional arg) (beginning-of-thing 'sexp)))
+    (lambda (&optional arg) (goto-char (beginning-of-thing 'sexp))))
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :editor lispy)
     (after! lispy
