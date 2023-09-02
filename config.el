@@ -13,6 +13,9 @@
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
+(when (modulep! :editor evil)
+  (after! evil
+    (load! "lisp/cae-evil")))
 
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
@@ -513,9 +516,6 @@
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
-  (when (modulep! :editor evil)
-    (after! evil
-      (load! "lisp/cae-evil")))
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
   ;; This is problematic because it means that a fold can be broken by an
