@@ -7,8 +7,7 @@
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
   (when (derived-mode-p 'exwm-mode)
-    ;;(run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)
-    ))
+    (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)))
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
@@ -63,3 +62,17 @@ By default BUTTON-NUM is ``1'' (i.e. main click) and the WINDOW-ID is the curren
                                                 :same-screen 0)
                                  exwm--connection))))
     (xcb:flush exwm--connection)))
+
+;;;###autoload
+(defun +exwm-evil-do-left-click ()
+  "Perform a left mouse click at the current cursor position."
+  (interactive)
+  (cl-destructuring-bind (mouse-x . mouse-y)
+      (mouse-absolute-pixel-position)
+    (if (provided-mode-derived-p
+         (buffer-local-value 'major-mode
+                             (window-buffer (window-at mouse-x mouse-y)))
+         'exwm-mode)
+        (progn (+exwm-do-mouse-click mouse-x mouse-y)
+               (exwm-evil-insert))
+      (call-interactively #'evil-mouse-drag-region))))
