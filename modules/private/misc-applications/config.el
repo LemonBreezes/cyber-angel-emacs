@@ -572,10 +572,13 @@
 (use-package! empv
   :defer t :init
   (map! :map +misc-applications-music-map
-        "y" #'empv-play)
+        "yy" #'empv-youtube
+        "yp" #'empv-youtube-playlist)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "y" "Youtube"))
+      "y" "YouTube"
+      "yp" "Search for playlist"
+      "yy" "Search for video"))
   :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
