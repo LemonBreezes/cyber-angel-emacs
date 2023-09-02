@@ -168,6 +168,7 @@
   :init
   ;; TODO Finish this
   (defvar consult-preview-key 'any)
+  (setq consult-gh-prioritize-local-folder 'suggest)
   (map! :map +misc-applications-external-apps-map
         "go" #'consult-gh-orgs
         "gc" #'consult-gh-repo-clone
@@ -655,8 +656,6 @@
   :when (or (modulep! :private helm)
             (modulep! :completion helm))
   :defer t :init
-  (map! :leader
-        :desc "Helm EMMS" "eh" #'helm-emms)
   (map! :map +misc-applications-music-map
         "eh" #'helm-emms)
   (after! which-key
