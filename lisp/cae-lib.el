@@ -17,8 +17,9 @@
 (defun cae-tty-disable-unicode-p ()
   (not (cae-display-graphic-p)))
 
-(defmacro cae-oneshot-keymap (keymap)
+(defmacro cae-oneshot-keymap (keymap package)
   `(lambda () (interactive)
+     (require ',package)
      (let* ((once t)
             (timer
              (run-with-idle-timer
