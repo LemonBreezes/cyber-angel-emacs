@@ -84,3 +84,5 @@
     (+workspace/display)))
 
 (advice-add #'consult-gh--issue-browse-url-action :before #'+startup/chromium-browse-url-generic-a)
+(advice-add #'consult-gh-embark-open-in-browser :before #'+startup/chromium-browse-url-generic-a)
+(advice-add #'consult-gh--repo-browse-url-action :before #'+startup/chromium-browse-url-generic-a)
