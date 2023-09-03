@@ -199,6 +199,8 @@
                                        "systemcrafters")))
 (use-package! consult-gh-embark
   :after (consult-gh embark))
+(use-package! consult-gh-forge
+  :defer-incrementally t)
 
 
 ;;; System
