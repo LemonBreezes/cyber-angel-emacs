@@ -4,5 +4,6 @@
 (defun +empv-keymap () (interactive))
 (hercules-def
  :toggle-funs #'+empv-keymap
+ :transient t
  :keymap 'empv-map
  :package 'empv)
