@@ -99,11 +99,8 @@
                    (goto-char (point-max))))))
 
 (map! :map help-map "bn" #'cae-show-normal-state-bindings)
-
 (when (modulep! :private corfu)
-  (map! :i "C-@" (cmds! (not (minibufferp)) #'corfu-complete)
-        :i "C-SPC" (cmds! (not (minibufferp)) #'corfu-complete)
-        (:prefix "C-x"
+  (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-s" #'yasnippet-capf
