@@ -164,9 +164,10 @@
   :commands (consult-gh-orgs
              consult-gh-repo-clone
              consult-gh-search-repos
-             consult-gh-search-issues)
+             consult-gh-search-issues
+             consult-gh-find-file
+             consult-gh-repo-fork)
   :init
-  ;; TODO Finish this
   (defvar consult-preview-key 'any)
   (setq consult-gh-prioritize-local-folder 'suggest)
   (map! :map +misc-applications-external-apps-map
