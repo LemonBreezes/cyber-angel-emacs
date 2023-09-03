@@ -183,7 +183,6 @@
       "gc" "Clone repo"
       "gs" "Search repos"
       "gi" "Search issues"
-      "gd" "Default repos"
       "gf" "Find file"
       "gk" "Fork repo"))
   :config
