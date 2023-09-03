@@ -23,8 +23,7 @@ Can be negative.")
 
 (unless (featurep 'helm)
   (map! :map ctl-x-map
-        "c" (cae-oneshot-keymap helm-command-map
-                                helm-global-bindings)))
+        "c" (cae-oneshot-keymap helm-command-map helm-global-bindings)))
 
 (after! helm-core
   (map! (:map helm-map
