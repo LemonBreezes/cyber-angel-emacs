@@ -22,6 +22,8 @@
 
 (add-hook 'gnus-exit-gnus-hook
           (cae-defun +gnus-kill-workspace-h ()
+            (when (featurep 'bbdb)
+              (bbdb-save))
             (when (and (modulep! :ui workspaces)
                        (+workspace-exists-p +gnus-workspace-name))
               (+workspace/delete +gnus-workspace-name))))
