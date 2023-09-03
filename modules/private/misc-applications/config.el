@@ -612,7 +612,6 @@
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
-  (map! "C-x m" empv-map)
   (setq empv-reset-playback-speed-on-quit t
         empv-base-directory "/mnt/hdd/music")
   (setq empv-invidious-instance
