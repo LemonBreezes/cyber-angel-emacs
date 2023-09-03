@@ -593,7 +593,6 @@
         :n "o" #'mpc-goto-playing-song))
 
 (use-package! empv
-  :defer-incrementally t
   :defer t :init
   (define-prefix-command #'empv-map)
   (map! :map +misc-applications-music-map
