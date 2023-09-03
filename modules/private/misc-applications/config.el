@@ -602,7 +602,7 @@
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
   (setq empv-reset-playback-speed-on-quit t
-        empv-base-directory "/mnt/hdd/"
+        empv-base-directory "/mnt/hdd/music"
         empv-audio-dir "/mnt/hdd/music"
         empv-video-dir "/mnt/hdd/videos")
   (setq empv-invidious-instance
