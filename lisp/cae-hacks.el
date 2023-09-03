@@ -67,6 +67,7 @@ It is meant to be used as a `post-gc-hook'."
 
 ;;; Other hacks
 
+;; For shutting up noisy functions.
 (defun cae-hacks-shut-up-a (oldfun &rest args)
   (advice-add #'message :override #'ignore)
   (unwind-protect (apply oldfun args)
