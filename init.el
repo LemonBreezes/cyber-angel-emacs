@@ -70,7 +70,7 @@
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-       magit
+       (magit +forge)
        (lsp +peek +eglot)
        tree-sitter
        pdf

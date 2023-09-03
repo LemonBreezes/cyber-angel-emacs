@@ -16,6 +16,9 @@
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
   (package! evil-org :recipe (:host github :repo "Somelauw/evil-org-mode")))
+(when (modulep! :private misc-applications)
+  (package! consult-gh :recipe
+    (:host github :repo "LemonBreezes/consult-gh" :branch "fix-symbolp-error-from-missing-quote")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
@@ -24,7 +27,8 @@
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
-  (package! evil-owl))
+  (package! evil-owl)
+  (package! string-inflection))
 
 ;;; UI
 (package! info-colors)
