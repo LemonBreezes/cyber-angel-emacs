@@ -195,10 +195,6 @@
     (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
     (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-  (when (modulep! :ui workspaces)
-    (advice-add #'which-key--process-page :around
-                #'cae-ui-which-key-show-workspace-a))
-
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
   (when (modulep! :ui popup)
