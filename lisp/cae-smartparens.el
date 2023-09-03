@@ -2,6 +2,8 @@
 
 ;; Make `smartparens' optional.
 (unless (modulep! :config default +smartparens)
+  ;; Check this out. This guy removes
+  ;; https://git.sr.ht/~alternateved/dotemacs/tree/main/item/init.el#L404
   (provide 'smartparens)
   (defalias 'sp-local-pair #'ignore)
   (defalias 'sp-pair #'ignore)
