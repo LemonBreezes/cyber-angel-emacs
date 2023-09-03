@@ -1,10 +1,14 @@
 ;;; lisp/cae-debug.el -*- lexical-binding: t; -*-
 
+;; I use this as a simpler print statement. For example, I do this:
+;; (+log 'test)
+;; (+log 'test "the cat" 1 2 3) => Values: test, the cat, 1, 2, 3
+
 (defun +log-all (&rest values)
   `(message ,(concat "Values: "
-                    (string-join (make-list (length values) "%s")
-                                 ", "))
-           ,@values))
+                     (string-join (make-list (length values) "%s")
+                                  ", "))
+    ,@values))
 
 (defvar-local +log-expander #'+log-all)
 
