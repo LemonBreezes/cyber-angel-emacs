@@ -42,6 +42,10 @@
 
 ;;; Power debugging
 
+;; Use this with `vertico--exhibit' for example to debug completion tables.
+;; Copied from here:
+;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
+
 (defun cae-debug-reraise-error (func &rest args)
   "Call function FUNC with ARGS and re-raise any error which occurs.
 Useful for debugging post-command hooks and filter functions, which
@@ -60,7 +64,3 @@ normally have their errors suppressed."
    (t
     (advice-add func :around #'cae-debug-reraise-error)
     (message "Debug on hidden errors enabled for %s" func))))
-
-;; Use this with `vertico--exhibit' for example to debug completion tables.
-;; Copied from here:
-;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
