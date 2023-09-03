@@ -8,14 +8,6 @@
       (call-interactively #'org-ai-on-region)))
 
 ;;;###autoload
-(defun cae-ai-lazy-load-org-ai ()
-  (interactive)
-  (org-ai-global-mode +1)
-  (setq unread-command-events
-        (listify-key-sequence (kbd "C-c M-a")))
-  (cae-which-key-show-map 'org-ai-global-mode-prefix-map))
-
-;;;###autoload
 (defun cae-ai-org-ai-kill-region-at-point ()
   (interactive)
   (call-interactively #'org-ai-kill-region-at-point)
