@@ -941,7 +941,6 @@
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz"
       mail-source-directory "~/.mail/")
-(map! "C-x M" #'compose-mail)
 
 (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
 (setq compose-mail-user-agent-warnings nil)
