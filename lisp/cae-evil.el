@@ -100,14 +100,17 @@
 
 (map! :map help-map "bn" #'cae-show-normal-state-bindings)
 
-(map! :prefix "C-x"
-      :i "C-c" #'copilot-complete
-      :i "C-f" #'cape-file
-      :i "C-s" #'yasnippet-capf
-      :i "C-l" #'cape-line
-      :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
-      :i "C-n" nil
-      :i "C-p" nil)
+(when (modulep! :private corfu)
+  (map! :i "C-@" (cmds! (not (minibufferp)) #'company-complete-common)
+        :i "C-SPC" (cmds! (not (minibufferp)) #'company-complete-common)
+        (:prefix "C-x"
+         :i "C-c" #'copilot-complete
+         :i "C-f" #'cape-file
+         :i "C-s" #'yasnippet-capf
+         :i "C-l" #'cape-line
+         :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+         :i "C-n" nil
+         :i "C-p" nil)))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
