@@ -40,9 +40,10 @@
          (setq once nil)))))
 
 (defun cae-oneshot-keymap (keymap)
-  (let ((which-key-show-prefix t))
-    (which-key--show-keymap
-     (symbol-name keymap) (symbol-value keymap) nil nil t))
-  (set-transient-map (symbol-value keymap)
-                     (cae-once)
-                     #'hercules--hide))
+  `(lambda () (interactive)
+     (let ((which-key-show-prefix t))
+       (which-key--show-keymap
+        (symbol-name ,keymap) (symbol-value ,keymap) nil nil t))
+     (set-transient-map (symbol-value ,keymap)
+                        (cae-once)
+                        #'hercules--hide)))
