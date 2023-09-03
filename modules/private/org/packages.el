@@ -6,5 +6,4 @@
 (package! language-detection)
 (package! org-appear)
 (package! org-modern)
-(package! org-tidy :recipe
-  (:host github :repo "jxq0/org-tidy"))
+(package! org-tidy :recipe (:host github :repo "jxq0/org-tidy"))
