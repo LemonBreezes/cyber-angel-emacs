@@ -596,15 +596,20 @@
   :defer t :init
   (map! :map +misc-applications-music-map
         "yy" #'empv-youtube
-        "yp" #'empv-youtube-playlist)
+        "yp" #'empv-youtube-playlist
+        "yl" #'empv-lyrics-show
+        "yL" #'empv-lyrics-current)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "y" "YouTube"
       "yp" "Search for playlist"
-      "yy" "Search for video"))
+      "yy" "Search for video"
+      "yl" "Search lyrics"
+      "yL" "Show lyrics"))
   :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
+  (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (setq empv-invidious-instance
         (concat "https://"
                 (aio-wait-for (elfeed-tube--get-invidious-url))
