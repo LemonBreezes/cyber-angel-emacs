@@ -610,6 +610,7 @@
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
+  (add-to-list 'empv-mpv-args "--save-position-on-quit")
   (setq empv-invidious-instance
         (concat "https://"
                 (aio-wait-for (elfeed-tube--get-invidious-url))
