@@ -17,21 +17,6 @@
 (defun cae-tty-disable-unicode-p ()
   (not (cae-display-graphic-p)))
 
-(defun cae-which-key-inhibit-hook ()
-  (setq which-key-inhibit nil)
-  (remove-hook 'pre-command-hook
-               #'cae-which-key-inhibit-hook))
-
-(defun cae-which-key-show-map (keymap)
-  (setq which-key-inhibit t)
-  (add-hook 'pre-command-hook #'cae-which-key-inhibit-hook)
-  (run-with-idle-timer
-   which-key-idle-delay nil
-   `(lambda ()
-      (when which-key-inhibit
-        (which-key-show-keymap
-         ',keymap)))))
-
 (defmacro cae-oneshot-keymap (keymap)
   `(lambda () (interactive)
      (let* ((once t)
