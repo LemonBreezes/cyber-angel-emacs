@@ -755,7 +755,8 @@
     :defer t :config
     (map! :map embark-collect-mode-map
           "<f6>" #'cae-embark-collect-cheatsheet-hydra/body)
-    (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read)
+    (after! vertico
+      (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
     (advice-add #'embark-completing-read-prompter :around
                 #'cae-bind-C-z-to-abort-a))
 
