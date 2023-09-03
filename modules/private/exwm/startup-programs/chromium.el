@@ -5,10 +5,10 @@
                         (executable-find "chromium")
                         (executable-find "google-chrome-unstable")
                         (executable-find "google-chrome-stable")))
-(defvar startup/chromium-workspace (if (or (executable-find "chromium-bin")
+(defvar startup/chromium-browser (if (or (executable-find "chromium-bin")
                            (executable-find "chromium"))
-                       "Chromium"
-                     "Chrome"))
+                     "chromium" "chrome"))
+(defvar startup/chromium-workspace (capitalize startup/chromium-browser))
 
 (defun startup/start-chromium (&optional arg)
   (when startup/chromium-executable
@@ -39,7 +39,7 @@
 
 (defun startup/manage-chromium ()
   (when (and (stringp exwm-class-name)
-             (string-match-p "chromium" exwm-class-name))
+             (if) (string-match-p startup/chromium-browser exwm-class-name))
     (unless (string= (+workspace-current-name) startup/chromium-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/chromium-workspace)
