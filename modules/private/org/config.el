@@ -20,16 +20,16 @@
 ;;            (cae-defun cae-org-fixup-doom-keybindings ()
 ;;              (remove-hook 'org-tab-first-hook #'+org-indent-maybe-h)))
 
-;;(use-package! org-appear
-;;  :defer t :init
-;;  (add-hook 'org-mode-hook #'org-appear-mode)
-;;  :config
-;;  (setq org-appear-autoemphasis t
-;;        org-appear-autosubmarkers t
-;;        org-appear-autolinks nil)
-;;  ;; for proper first-time setup, `org-appear--set-elements'
-;;  ;; needs to be run after other hooks have acted.
-;;  (run-at-time nil nil #'org-appear--set-elements))
+(use-package! org-appear
+  :defer t :init
+  (add-hook 'org-mode-hook #'org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+        org-appear-autosubmarkers t
+        org-appear-autolinks nil)
+  ;; for proper first-time setup, `org-appear--set-elements'
+  ;; needs to be run after other hooks have acted.
+  (run-at-time nil nil #'org-appear--set-elements))
 
 (after! org
   (map! :map org-mode-map
