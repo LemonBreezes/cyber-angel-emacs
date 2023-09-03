@@ -19,6 +19,8 @@
 (when (modulep! :private misc-applications)
   (package! consult-gh :recipe
     (:host github :repo "LemonBreezes/consult-gh" :branch "fix-symbolp-error-from-missing-quote")))
+(package! code-review :recipe
+  (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
