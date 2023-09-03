@@ -174,10 +174,13 @@
         "gc" #'consult-gh-repo-clone
         "gs" #'consult-gh-search-repos
         "gi" #'consult-gh-search-issues
-        "gd" #'consult-gh-default-repos)
-  ;;(after! which-key
-  ;;  (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
-  ;;    "l" "LeetCode"))
+        "gd" #'consult-gh-default-repos
+        "gf" #'consult-gh-find-file
+        "gk" #'consult-gh-repo-fork)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+      "g" "GitHub CLI"
+      "go" "Orgs"))
   :config
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
