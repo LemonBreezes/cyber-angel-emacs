@@ -608,7 +608,9 @@
   (setq empv-invidious-instance
         (concat "https://"
                 (aio-wait-for (elfeed-tube--get-invidious-url))
-                "/api/v1")))
+                "/api/v1"))
+  (after! embark
+    (empv-embark-initialize-extra-actions)))
 
 (use-package! emms
   :defer t :init
@@ -633,7 +635,7 @@
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access)
   (emms-all)
-  (emms-default-players)
+  (setq emms-player-list '(emms-player-mpv))
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
