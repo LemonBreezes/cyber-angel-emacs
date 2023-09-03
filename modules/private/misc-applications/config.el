@@ -613,7 +613,9 @@
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
   (setq empv-reset-playback-speed-on-quit t
-        empv-base-directory "/mnt/hdd/music")
+        empv-base-directory "/mnt/hdd/"
+        empv-audio-dir "/mnt/hdd/music"
+        empv-video-dir "/mnt/hdd/videos")
   (setq empv-invidious-instance
         (concat "https://"
                 (aio-wait-for (elfeed-tube--get-invidious-url))
@@ -644,7 +646,7 @@
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access)
   (emms-all)
-  (setq emms-player-list '(emms-player-mpv))
+  (emms-default-players)
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
