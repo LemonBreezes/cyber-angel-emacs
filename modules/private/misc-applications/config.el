@@ -594,6 +594,8 @@
 
 (use-package! empv
   :defer t :init
+  (map! :map +misc-applications-music-map
+        "m" #'+empv-keymap)
   :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
