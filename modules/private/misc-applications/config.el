@@ -606,7 +606,7 @@
   ;;    "yL" "Show current lyrics"))
   :config
   (map! :map +misc-applications-music-map
-        "m" #'empv-map)
+        "m" 'empv-map)
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
