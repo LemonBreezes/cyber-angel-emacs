@@ -605,7 +605,7 @@
       "yp" "Search for playlist"
       "yy" "Search for video"
       "yl" "Search lyrics"
-      "yL" "Show lyrics"))
+      "yL" "Show current lyrics"))
   :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
