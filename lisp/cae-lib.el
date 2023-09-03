@@ -32,18 +32,20 @@
         (which-key-show-keymap
          ',keymap)))))
 
-(defmacro cae-once ()
-  "Return t once and nil afterwards."
-  `(let ((once t))
-     (lambda ()
-       (prog1 once
-         (setq once nil)))))
-
-(defun cae-oneshot-keymap (keymap)
+(defmacro cae-oneshot-keymap (keymap)
   `(lambda () (interactive)
-     (let ((which-key-show-prefix t))
-       (which-key--show-keymap
-        (symbol-name ,keymap) (symbol-value ,keymap) nil nil t))
-     (set-transient-map (symbol-value ,keymap)
-                        (cae-once)
-                        #'hercules--hide)))
+     (let* ((once t)
+            (timer
+             (run-with-idle-timer
+              which-key-idle-delay nil
+              (lambda ()
+                (when once
+                  (let ((which-key-show-prefix t))
+                    (which-key--show-keymap
+                     (symbol-name ',keymap) (symbol-value ',keymap) nil nil t)))))))
+       (set-transient-map (symbol-value ',keymap)
+                          (lambda ()
+                            (prog1 once
+                              (setq once nil)))
+                          (lambda ()
+                            (cancel-timer timer))))))
