@@ -595,19 +595,10 @@
 (use-package! empv
   :defer-incrementally t
   :defer t :init
-  (map! :map +misc-applications-music-map
-        "m" #'+empv-lazy-load-keymap)
-  ;;(after! which-key
-  ;;  (which-key-add-keymap-based-replacements +misc-applications-music-map
-  ;;    "y" "YouTube"
-  ;;    "yp" "Search for playlist"
-  ;;    "yy" "Search for video"
-  ;;    "yl" "Search lyrics"
-  ;;    "yL" "Show current lyrics"))
-  :config
   (define-prefix-command #'empv-map)
   (map! :map +misc-applications-music-map
         "m" #'empv-map)
+  :config
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
