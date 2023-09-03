@@ -20,6 +20,6 @@ from running."
 
 ;;;###autoload (autoload 'cae-org-babel-cheatsheet "private/org/autoload/org" nil t)
 (hercules-def
- :toggle-funs #'org-babel-cheatsheet
+ :toggle-funs #'cae-org-babel-cheatsheet
  :keymap 'org-babel-map
  :transient t)
