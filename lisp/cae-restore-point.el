@@ -158,7 +158,22 @@
                   evil-scroll-line-up
                   evil-scroll-line-down
                   evil-scroll-page-down
-                  evil-scroll-page-up))))
+                  evil-scroll-page-up
+                  evil-forward-word-begin
+                  evil-forward-WORD-begin
+                  evil-forward-WORD-end
+                  evil-forward-word-end
+                  evil-backward-word-begin
+                  evil-backward-WORD-begin
+                  evil-backward-WORD-end
+                  evil-backward-word-end
+                  evil-forward-arg
+                  evil-backward-arg
+                  lispyville-backward-atom-begin
+                  lispyville-forward-atom-begin
+                  lispyville-backward-atom-end
+                  lispyville-forward-atom-end
+                  ))))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
