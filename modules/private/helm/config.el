@@ -23,7 +23,7 @@ Can be negative.")
 
 (unless (featurep 'helm)
   (map! :map ctl-x-map
-        "c" #'+helm-lazy-load))
+        "c" (cae-oneshot-keymap helm-command-map)))
 
 (after! helm-core
   (map! (:map helm-map
