@@ -39,7 +39,7 @@
 
 (defun startup/manage-chromium ()
   (when (and (stringp exwm-class-name)
-             (if) (string-match-p startup/chromium-browser exwm-class-name))
+             (string-match-p startup/chromium-browser exwm-class-name))
     (unless (string= (+workspace-current-name) startup/chromium-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/chromium-workspace)
