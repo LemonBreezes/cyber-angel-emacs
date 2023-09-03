@@ -265,12 +265,10 @@
                                           (executable-find "pactl"))))
   :defer t :init
   (map! :map ctl-x-map
-        "/" (cmd!
-             ;; Lazy load `pulseaudio-control'.
-             (pulseaudio-control-default-keybindings)
-             (setq unread-command-events (list ?\C-x ?/))
-             (cae-which-key-show-map 'pulseaudio-control-map)))
+        "/" (cae-oneshot-keymap pulseaudio-control-map
+                                pulseaudio-control))
   :config
+  (pulseaudio-control-default-keybindings)
   (after! which-key
     (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist))
