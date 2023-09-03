@@ -4,6 +4,9 @@
 (unless (modulep! :config default +smartparens)
   ;; Check this out. This guy removes
   ;; https://git.sr.ht/~alternateved/dotemacs/tree/main/item/init.el#L404
+  ;; I think you could achieve similar effects with puni (which does a bit too
+  ;; much for my taste) or paredit (which supposedly works with non-lisps to
+  ;; some regard), but I prefer those small utility functions
   (provide 'smartparens)
   (defalias 'sp-local-pair #'ignore)
   (defalias 'sp-pair #'ignore)
