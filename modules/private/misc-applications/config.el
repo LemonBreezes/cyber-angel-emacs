@@ -593,6 +593,7 @@
         :n "o" #'mpc-goto-playing-song))
 
 (use-package! empv
+  :defer-incrementally t
   :defer t :init
   (map! :map +misc-applications-music-map
         "yy" #'empv-youtube
