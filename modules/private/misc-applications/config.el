@@ -578,10 +578,10 @@
     (after! evil-snipe
       (cl-pushnew #'mpc-mode evil-snipe-disabled-modes)))
   (map! :map +misc-applications-music-map
-        "m" #'+mpc)
+        "M" #'+mpc)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "m" "MPC"))
+      "M" "MPC"))
   :config
   (setq mpc-host system-name
         mpc-mpd-music-directory "/mnt/unindexed-music/")
