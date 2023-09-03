@@ -16,6 +16,14 @@
 
 ;;; Tracing functions
 
+;; I use these to debug functions. For example, I do this:
+;; (backtrace! #'my-function)
+;; (unbacktrace! #'my-function)
+;; (backtrace! #'my-function '(arg1 arg2))
+;; (unbacktrace! #'my-function)
+;; To get backtraces and figure out why a function is being called with certain
+;; arguments.
+
 (defun cae-debug-backtrace-a (args)
   `(lambda (&rest fn-args)
      (when (or (null ,args) (equal ,args fn-args))
