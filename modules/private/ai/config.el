@@ -12,7 +12,8 @@
 
 (use-package! org-ai
   :defer t :init
-  (map! :desc "+org-ai-prefix" "C-c M-a" #'cae-ai-lazy-load-org-ai)
+  (map! :desc "+org-ai-prefix" "C-c M-a"
+        (cae-oneshot-keymap org-ai-global-mode-prefix-map))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   (define-prefix-command 'org-ai-region-map)
