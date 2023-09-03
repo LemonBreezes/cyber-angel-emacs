@@ -21,8 +21,6 @@
      (when (or (null ,args) (equal ,args fn-args))
        (backtrace))))
 
-(cae-debug-backtrace-a nil)
-
 (defmacro backtrace! (function &rest args)
   `(advice-add ',function :before ,(cae-debug-backtrace-a args)))
 
