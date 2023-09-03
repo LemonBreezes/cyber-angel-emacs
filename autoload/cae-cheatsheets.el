@@ -48,9 +48,3 @@
  :toggle-funs #'cae-symbol-overlay-cheatsheet
  :keymap 'symbol-overlay-map
  :package 'symbol-overlay)
-
-;;;###autoload (autoload 'cae-org-babel-cheatsheet "autoload/cae-cheatsheets" nil t)
-(hercules-def
- :toggle-funs #'org-babel-cheatsheet
- :keymap 'org-babel-map
- :transient t)
