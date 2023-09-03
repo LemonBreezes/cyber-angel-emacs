@@ -62,6 +62,8 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; Be wary of enabling this, especially on Android devices:
 ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
+;; Basically, set a GC threshhold that you are comfortable waiting for if you
+;; have to wait.
 (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
 
 
