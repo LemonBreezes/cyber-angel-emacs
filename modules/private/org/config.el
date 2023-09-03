@@ -20,6 +20,9 @@
 ;;            (cae-defun cae-org-fixup-doom-keybindings ()
 ;;              (remove-hook 'org-tab-first-hook #'+org-indent-maybe-h)))
 
+;; This is giving me an error.
+(remove-hook 'org-mode-hook #'+org-make-last-point-visible-h)
+
 (use-package! org-appear
   :defer t :init
   (add-hook 'org-mode-hook #'org-appear-mode)
