@@ -17,3 +17,9 @@ from running."
   "Runs all hooks in `+org-exit-src-code-hook`."
   (let ((inhibit-read-only t))
     (run-hooks '+org-exit-src-code-hook)))
+
+;;;###autoload (autoload 'cae-org-babel-cheatsheet "private/org/autoload/org" nil t)
+(hercules-def
+ :toggle-funs #'org-babel-cheatsheet
+ :keymap 'org-babel-map
+ :transient t)
