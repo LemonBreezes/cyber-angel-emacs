@@ -26,28 +26,24 @@
   ("q" nil "Exit" :exit t))
 
 ;;;###autoload (autoload 'cae-debugger-cheatsheet "autoload/cae-cheatsheets" nil t)
-(defun cae-debugger-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-debugger-cheatsheet
  :keymap 'debugger-mode-map
  :package 'debug)
 
 ;;;###autoload (autoload 'cae-edebug-cheatsheet "autoload/cae-cheatsheets" nil t)
-(defun cae-edebug-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-edebug-cheatsheet
  :keymap 'edebug-mode-map
  :package 'edebug)
 
 ;;;###autoload (autoload 'cae-macrostep-cheatsheet "autoload/cae-cheatsheets" nil t)
-(defun cae-macrostep-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-macrostep-cheatsheet
  :keymap 'macrostep-mode-keymap
  :package 'macrostep)
 
 ;;;###autoload (autoload 'cae-symbol-overlay-cheatsheet "autoload/cae-cheatsheets" nil t)
-(defun cae-symbol-overlay-cheatsheet () (interactive))
 (hercules-def
  :toggle-funs #'cae-symbol-overlay-cheatsheet
  :keymap 'symbol-overlay-map
