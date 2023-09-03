@@ -13,7 +13,7 @@
 (use-package! org-ai
   :defer t :init
   (map! :desc "+org-ai-prefix" "C-c M-a"
-        (cae-oneshot-keymap org-ai-global-mode-prefix-map))
+        (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
   (define-prefix-command 'org-ai-region-map)
