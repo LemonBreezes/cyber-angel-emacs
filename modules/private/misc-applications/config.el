@@ -165,8 +165,7 @@
              consult-gh-repo-clone
              consult-gh-search-repos
              consult-gh-search-issues
-             consult-gh-find-file
-             consult-gh-repo-fork)
+             consult-gh-find-file)
   :init
   (defvar consult-preview-key 'any)
   (setq consult-gh-prioritize-local-folder 'suggest)
@@ -175,8 +174,7 @@
         "gc" #'consult-gh-repo-clone
         "gs" #'consult-gh-search-repos
         "gi" #'consult-gh-search-issues
-        "gf" #'consult-gh-find-file
-        "gk" #'consult-gh-repo-fork)
+        "gf" #'consult-gh-find-file)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "g" "GitHub CLI"
@@ -184,8 +182,7 @@
       "gc" "Clone repo"
       "gs" "Search repos"
       "gi" "Search issues"
-      "gf" "Find file"
-      "gk" "Fork repo"))
+      "gf" "Find file"))
   :config
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
