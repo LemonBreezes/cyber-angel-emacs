@@ -121,7 +121,8 @@ It is meant to be used as a `post-gc-hook'."
 (advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
 ;; Make `eshell-previous-prompt' properly handle the case when there is no
-;; previous prompt.
+;; previous prompt. Normally it goes to the beginning of the buffer. I prefer
+;; for it to just stay on the first prompt.
 (defadvice! cae-hacks-jump-back-if-bolp (oldfun &rest args)
   :around #'eshell-previous-prompt
   (let ((p (point)))
