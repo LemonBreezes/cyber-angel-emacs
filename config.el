@@ -162,8 +162,8 @@
           warning-minimum-log-level :emergency)
     (add-hook 'doom-first-file-hook
               (cae-defun cae-warnings-initialize ()
-                (setq warning-minimum-level :warning
-                      warning-minimum-log-level :warning))
+                (setq warning-minimum-level :error
+                      warning-minimum-log-level :error))
               :append))
 
   (after! shr
