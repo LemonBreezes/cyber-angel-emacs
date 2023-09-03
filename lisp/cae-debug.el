@@ -64,4 +64,3 @@ normally have their errors suppressed."
 ;; Use this with `vertico--exhibit' for example to debug completion tables.
 ;; Copied from here:
 ;; https://gist.github.com/jdtsmith/1fbcacfe677d74bbe510aec80ac0050c.
-
