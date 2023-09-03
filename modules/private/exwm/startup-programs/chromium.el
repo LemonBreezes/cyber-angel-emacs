@@ -82,4 +82,5 @@
   (when (equal startup/chromium-executable browse-url-generic-program)
     (+workspace-switch startup/chromium-workspace t)
     (+workspace/display)))
+
 (advice-add #'consult-gh--issue-browse-url-action :before #'+startup/chromium-browse-url-generic-a)
