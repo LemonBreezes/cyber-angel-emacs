@@ -36,7 +36,8 @@
 
 (after! org
   (map! :map org-mode-map
-        "]" #'cae-org-insert-checkbox-or-bracket))
+        "]" #'cae-org-insert-checkbox-or-bracket
+        "C-c C-v" #'cae-org-babel-cheatsheet))
 
 (use-package! org-modern
   :unless (cae-tty-disable-unicode-p)
