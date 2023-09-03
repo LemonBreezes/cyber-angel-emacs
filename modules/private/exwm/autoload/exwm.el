@@ -67,12 +67,13 @@ By default BUTTON-NUM is ``1'' (i.e. main click) and the WINDOW-ID is the curren
 (defun +exwm-evil-do-left-click ()
   "Perform a left mouse click at the current cursor position."
   (interactive)
-  (exwm-evil-insert)
   (cl-destructuring-bind (mouse-x . mouse-y)
       (mouse-absolute-pixel-position)
     (if (provided-mode-derived-p
          (buffer-local-value 'major-mode
                              (window-buffer (window-at mouse-x mouse-y)))
          'exwm-mode)
-        (+exwm-do-mouse-click mouse-x mouse-y)
+        (progn
+          (exwm-evil-insert)
+          (+exwm-do-mouse-click mouse-x mouse-y))
       (call-interactively #'evil-mouse-drag-region))))
