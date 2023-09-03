@@ -31,7 +31,7 @@
   (advice-add #'exwm-evil-insert :after #'garbage-collect)
 
   (map! :map exwm-evil-mode-map
-        :m "<down-mouse-1>")
+        :m "<down-mouse-1>" #'+exwm-evil-do-left-click)
 
   (map! :map exwm-mode-map
         :localleader
