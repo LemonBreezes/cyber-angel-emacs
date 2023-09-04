@@ -214,8 +214,7 @@ expansion occurs within the parent Emacs session.")
       (unless (condition-case err
                   (abort-recursive-edit)
                 (quit t))
-        (call-interactively this-command))
-      )))
+        (call-interactively this-command)))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
