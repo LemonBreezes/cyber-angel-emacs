@@ -82,14 +82,16 @@ when inhibited to show history matches."
 ;;; Lookup handler
 
 ;; This I added myself :)
-(unless (file-exists-p (concat doom-cache-dir "tldr/"))
-  (after! async
-    (async-start
-     `(lambda ()
-        (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
-        (require 'tldr)
-        (tldr-update-docs))
-     (lambda (_) (message "tldr docs updated")))))
+(let ((tldr-dir (concat doom-cache-dir "tldr/")))
+  (unless (file-exists-p tldr-dir)
+    (after! async
+      (async-start
+       `(lambda ()
+          (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
+          (setq tldr-directory-path ,tldr-dir)
+          (require 'tldr)
+          (tldr-update-docs))
+       (lambda (_) (message "tldr docs updated"))))))
 
 (set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
 
