@@ -62,6 +62,8 @@
     "C-v" nil
     "C-w" nil
     "C-z" nil))
+(unless (modulep! :editor evil +hybrid)
+  ())
 
 (map! :prefix "g"
       :m "[" #'backward-page
