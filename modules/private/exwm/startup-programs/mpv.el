@@ -9,7 +9,10 @@
       (previous-buffer))
     (unless (+workspace-exists-p startup/mpv-workspace)
       (+workspace-new startup/mpv-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/mpv-workspace)))))
+      (run-at-time
+       0.0 nil
+       (lambda ()
+         (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/mpv-workspace)))))))
 
 (defun startup/mpv-kill-mpv ()
   (interactive)
