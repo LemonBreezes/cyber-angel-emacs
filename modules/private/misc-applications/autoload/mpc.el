@@ -46,6 +46,7 @@
     (when +mpc--old-wconf
       (set-window-configuration +mpc--old-wconf))))
 
+;;;###autoload
 (defun +mpc-clear ()
   (interactive)
   (mpc-cmd-clear)
