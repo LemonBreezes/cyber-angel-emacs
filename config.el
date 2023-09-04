@@ -423,8 +423,11 @@
                     "/run/current-system/profile/sbin"))
       (add-to-list 'tramp-remote-path path)))
 
+  (when (modulep! :completion vertico)
+    (after! marginalia
+      (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file))))
+
   ;; Use Emacs as the default editor for shell commands.
-  ;; `dwim-shell-command'.
   (when (cae-display-graphic-p)
     (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
       (dolist (fn '(with-editor-export-editor
