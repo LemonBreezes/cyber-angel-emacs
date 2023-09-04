@@ -67,7 +67,8 @@
 
 (after! evil-easymotion
   (map! :map evilem-map
-        "RET" #'cae-avy-embark-act-on-region))
+        "RET" #'cae-avy-embark-act-on-region
+        "TAB" #'avy-goto-word-1))
 
 (map! :prefix "g"
       :m "[" #'backward-page
