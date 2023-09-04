@@ -26,7 +26,8 @@
 (defun +fireplace-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +fireplace-workspace-name)
+      (when (and (+workspace-exists-p +fireplace-workspace-name)
+                 (string= (+workspace-current-name) +fireplace-workspace-name))
         (+workspace/delete +fireplace-workspace-name))
     (when +fireplace--old-wconf
       (set-window-configuration +fireplace--old-wconf)))
