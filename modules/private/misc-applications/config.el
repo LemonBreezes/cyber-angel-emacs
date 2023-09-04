@@ -62,7 +62,7 @@
       "<f6>" #'+list-processes-hydra/body)
 
 (map! :map +misc-applications-map
-      "h" (cae-oneshot-keymap helm-command-map helm))
+      "h" helm-command-map)
 
 
 ;;; Standalone apps
@@ -636,11 +636,10 @@
     (map! :map dired-mode-map
           :ng "E" #'emms-play-dired))
   (map! :map +misc-applications-music-map
-        "ee" #'+emms)
+        "e" #'+emms)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "e" "EMMS"
-      "ee" "Smart browse"))
+      "e" "EMMS"))
   :config
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
