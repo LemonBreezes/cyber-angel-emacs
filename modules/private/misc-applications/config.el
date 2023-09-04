@@ -619,7 +619,7 @@
   (setq empv-youtube-use-tabulated-results nil)
   (advice-add #'empv--youtube-show-tabulated-results
               :override
-              #'empv--youtube-show-tabulated-results)
+              #'+empv--youtube-show-tabulated-results)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
