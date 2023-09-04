@@ -8,10 +8,11 @@
     (unless (string= (+workspace-current-name) startup/mpv-workspace)
       (previous-buffer))
     (unless (+workspace-exists-p startup/mpv-workspace)
-      (+workspace-new startup/mpv-workspace)
-      (add-transient-hook! 'persp-created-functions
-        (lambda (&rest _)
-          (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/mpv-workspace)))))))
+      (+workspace-new startup/mpv-workspace))))
+
+(defun startup/mpv-setup-workspace (persp _)
+  (when (string= persp-name startup/mpv-workspace)
+    (set-persp-parameter 'dont-save-to-file t persp)))
 
 (defun startup/mpv-kill-mpv ()
   (interactive)
@@ -19,3 +20,4 @@
 
 (add-hook 'exwm-manage-finish-hook #'startup/manage-mpv)
 (advice-add #'empv-exit :after #'startup/mpv-kill-mpv)
+(add-hook 'persp-created-functions #'startup/mpv-setup-workspace)
