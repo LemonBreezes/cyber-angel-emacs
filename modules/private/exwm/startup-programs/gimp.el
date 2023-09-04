@@ -10,7 +10,6 @@
           (start-process "gimp"
                          " *startup/gimp*"
                          startup/gimp-executable))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-gimp)
     (when arg (+workspace-switch startup/gimp-workspace t))))
 
 (defun startup/kill-gimp (&optional arg)
@@ -55,6 +54,7 @@
     "g r" "Restart GIMP"
     "g s" "Select GIMP"
     "g x" "Kill GIMP"))
+(add-hook 'exwm-manage-finish-hook #'startup/manage-gimp)
 
 ;; (if (process-live-p startup/gimp-process)
 ;;     (startup/restart-gimp)
