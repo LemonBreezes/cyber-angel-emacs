@@ -26,7 +26,7 @@
 ;;;###autoload
 (defun +mpc (&optional arg)
   (interactive "P")
-  (setq +mpc--old-wconf (window-state-get))
+  (setq +mpc--old-wconf (current-window-configuration))
   (delete-other-windows)
   (if (and +mpc--wconf
            (not (cl-find-if-not #'buffer-live-p
@@ -40,6 +40,6 @@
   (interactive)
   (if +mpc--old-wconf
       (progn
-        (window-state-put +mpc--old-wconf)
+        (set-window-configuration +mpc--old-wconf)
         (setq +mpc--old-wconf nil))
     (mpc-quit)))
