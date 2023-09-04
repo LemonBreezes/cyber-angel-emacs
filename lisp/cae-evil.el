@@ -63,7 +63,11 @@
     "C-w" nil
     "C-z" nil))
 (unless (modulep! :editor evil +hybrid)
-  ())
+  (setq evil-want-C-g-bindings t
+        evil-want-C-h-delete t
+        evil-want-C-u-scroll t
+        evil-want-C-u-delete t
+        +evil-want-o/O-to-continue-comments nil))
 
 (after! evil-easymotion
   (map! :map evilem-map
