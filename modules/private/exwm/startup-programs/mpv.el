@@ -16,7 +16,8 @@
 
 (defun startup/mpv-kill-mpv ()
   (interactive)
-  (+workspace-delete startup/mpv-workspace))
+  (when (+workspace-exists-p startup/mpv-workspace)
+    (+workspace-delete startup/mpv-workspace)))
 
 (add-hook 'exwm-manage-finish-hook #'startup/manage-mpv)
 (advice-add #'empv-exit :after #'startup/mpv-kill-mpv)
