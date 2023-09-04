@@ -2,6 +2,9 @@
 
 ;;; Preamble
 
+(defvar +misc-applications-music-dir "/mnt/hdd/music/"
+  "The directory where your music library is located.")
+
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
 (define-prefix-command '+misc-applications-map)
