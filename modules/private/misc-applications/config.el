@@ -617,6 +617,14 @@
         "T" #'empv-youtube-tabulated
         "'" #'empv-youtube-tabulated-last-results)
   (setq empv-youtube-use-tabulated-results nil)
+  (add-hook 'empv-youtube-results-mode-hook
+            (cae-defun +empv-youtube-results-h ()
+              (setq tabulated-list-padding 0)
+              (setq-local tabulated-list-format
+                          `[("Thumbnail" 20 nil)
+                            ("Title" ,(- (window-width) 20 10 10 (* tabulated-list-padding 2)) t)
+                            ("Length"  10 t)
+                            ("Views" 10 t)])))
   (advice-add #'empv--youtube-show-tabulated-results
               :override
               #'+empv--youtube-show-tabulated-results)
