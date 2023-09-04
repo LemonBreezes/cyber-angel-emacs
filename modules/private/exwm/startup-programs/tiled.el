@@ -53,7 +53,8 @@
   "T r" "Restart Tiled"
   "T s" "Select Tiled"
   "T x" "Kill Tiled")
-(add-hook 'exwm-manage-finish-hook #'startup/manage-tiled)
+(when startup/tiled-executable
+  (add-hook 'exwm-manage-finish-hook #'startup/manage-tiled))
 
 ;; (if (process-live-p startup/tiled-process)
 ;;     (startup/restart-tiled)
