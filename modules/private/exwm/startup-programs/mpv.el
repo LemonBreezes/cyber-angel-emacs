@@ -11,7 +11,7 @@
       (+workspace-new startup/mpv-workspace))))
 
 (defun startup/mpv-setup-workspace (persp _)
-  (when (string= persp-name startup/mpv-workspace)
+  (when (string= persp startup/mpv-workspace)
     (set-persp-parameter 'dont-save-to-file t persp)))
 
 (defun startup/mpv-kill-mpv ()
