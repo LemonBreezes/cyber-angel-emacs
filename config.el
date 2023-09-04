@@ -6,56 +6,56 @@
 
 ;; I have disabled `rainbow-delimiters' as a package so this is to prevent
 ;; errors.
-(defalias 'rainbow-delimiters-mode #'ignore)
+;; (defalias 'rainbow-delimiters-mode #'ignore)
 
-(load! "lisp/cae-tty")
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
-                                        ;is also our Smartparens configuration.
-(when (modulep! :editor evil)
-  (load! "lisp/cae-evil"))
+;; (load! "lisp/cae-tty")
+;; (load! "lisp/cae-bindings")
+;; (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+;; (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+;;                                         ;is also our Smartparens configuration.
+;; (when (modulep! :editor evil)
+;;   (load! "lisp/cae-evil"))
 
-;; Helm is not our main completion system.
-(when (and (modulep! :completion helm)
-           (modulep! :completion vertico))
-  (remove-hook 'doom-first-input-hook #'helm-mode))
+;; ;; Helm is not our main completion system.
+;; (when (and (modulep! :completion helm)
+;;            (modulep! :completion vertico))
+;;   (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; Extra stuff for when we run Doom without any modules loaded.
-(unless (or (modulep! :completion helm)
-            (modulep! :completion ivy)
-            (modulep! :completion vertico))
-  (icomplete-mode +1)
-  (icomplete-vertical-mode +1))
-(unless (modulep! :lang emacs-lisp)
-  (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
+;; ;; Extra stuff for when we run Doom without any modules loaded.
+;; (unless (or (modulep! :completion helm)
+;;             (modulep! :completion ivy)
+;;             (modulep! :completion vertico))
+;;   (icomplete-mode +1)
+;;   (icomplete-vertical-mode +1))
+;; (unless (modulep! :lang emacs-lisp)
+;;   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
-(after! xclip
-  (cond ((executable-find "termux-setup-storage")
-         (setq xclip-method 'termux-clipboard-get))))
+;; (after! xclip
+;;   (cond ((executable-find "termux-setup-storage")
+;;          (setq xclip-method 'termux-clipboard-get))))
 
-;; For some reason Persp is picking up a few buffers that it should not.
-(when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
-                 (cae-defun cae-persp-skip-buffer-p (buffer)
-                   (string= (buffer-name buffer) "*lsp-log*")))))
+;; ;; For some reason Persp is picking up a few buffers that it should not.
+;; (when (modulep! :ui workspaces)
+;;   (after! persp-mode
+;;     (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
+;;                  (cae-defun cae-persp-skip-buffer-p (buffer)
+;;                    (string= (buffer-name buffer) "*lsp-log*")))))
 
-;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  ;; Previously I used Iosevka Comfy and size 18.
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)
-        doom-unicode-font (unless (modulep! :ui unicode)
-                            (font-spec :family "LXGW WenKai" :weight 'light
-                                       :size 18))))
+;; ;; Set up fonts
+;; (unless (memq system-type '(cygwin windows-nt ms-dos))
+;;   ;; Previously I used Iosevka Comfy and size 18.
+;;   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
+;;         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+;;                                             :size 18)
+;;         doom-unicode-font (unless (modulep! :ui unicode)
+;;                             (font-spec :family "LXGW WenKai" :weight 'light
+;;                                        :size 18))))
 
-;; Do not break my clipboard in SSH sessions.
-(when (and (modulep! :os tty)
-           (getenv "SSH_TTY")
-           (not (cae-display-graphic-p)))
-  (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
+;; ;; Do not break my clipboard in SSH sessions.
+;; (when (and (modulep! :os tty)
+;;            (getenv "SSH_TTY")
+;;            (not (cae-display-graphic-p)))
+;;   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
 
 ;;; UI
