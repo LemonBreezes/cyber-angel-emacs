@@ -41,7 +41,8 @@
 (defun +tetris-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +tetris-workspace-name)
+      (when (and (+workspace-exists-p +tetris-workspace-name)
+                 (string= (+workspace-current-name) +tetris-workspace-name))
         (+workspace/delete +tetris-workspace-name))
     (when +tetris--old-wconf
       (set-window-configuration +tetris--old-wconf)))
