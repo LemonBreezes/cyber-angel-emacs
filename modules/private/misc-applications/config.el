@@ -23,7 +23,8 @@
     ("external-apps" "x")
     ("standalone-apps" "t")
     ("insert" "i")
-    ("music" "m")))
+    ("music" "m")
+    ("helm" "h")))
 
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
