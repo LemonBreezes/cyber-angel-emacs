@@ -38,6 +38,8 @@
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
-  (when +mpc--old-wconf
-    (set-window-configuration +mpc--old-wconf)
-    (setq +mpc--old-wconf nil)))
+  (if +mpc--old-wconf
+      (progn
+        (set-window-configuration +mpc--old-wconf)
+        (setq +mpc--old-wconf nil))
+    (mpc-quit)))
