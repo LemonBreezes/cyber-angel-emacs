@@ -10,6 +10,7 @@
           (start-process "pavucontrol"
                          " *startup/pavucontrol*"
                          startup/pavucontrol-executable))
+    (add-hook 'exwm-manage-finish-hook #'startup/manage-pavucontrol)
     (when arg (+workspace-switch startup/pavucontrol-workspace t)
           (set-persp-parameter 'dont-save-to-file t
                                (persp-get-by-name startup/pavucontrol-workspace)))))
@@ -64,5 +65,3 @@
     "p r" "Restart Pavucontrol"
     "p s" "Select Pavucontrol"
     "p x" "Kill Pavucontrol"))
-(when startup/pavucontrol-executable
-  (add-hook 'exwm-manage-finish-hook #'startup/manage-pavucontrol))
