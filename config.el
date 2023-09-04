@@ -15,9 +15,9 @@
 ;; (load! "lisp/cae-smartparens")
                                         ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
-(when (modulep! :editor evil)
-  (after! evil
-    (load! "lisp/cae-evil")))
+;; (when (modulep! :editor evil)
+;;   (after! evil
+;;     (load! "lisp/cae-evil")))
 
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
