@@ -10,4 +10,10 @@
     (unless (+workspace-exists-p startup/mpv-workspace)
       (+workspace-new startup/mpv-workspace)
       (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/mpv-workspace)))))
+
+(defun startup/mpv-kill-mpv ()
+  (interactive)
+  (+workspace-delete startup/mpv-workspace))
+
 (add-hook 'exwm-manage-finish-hook #'startup/manage-mpv)
+(advice-add #'empv-exit :after #'startup/mpv-kill-mpv)
