@@ -613,7 +613,8 @@
       "m" "MPV"))
   :config
   (map! :map empv-map
-        "P" #'empv-youtube-playlist)
+        "P" #'empv-youtube-playlist
+        "T" #'empv-youtube-tabulated)
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
