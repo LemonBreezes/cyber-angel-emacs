@@ -41,8 +41,7 @@
   (interactive)
   (mpc-quit)
   (if (modulep! :ui workspaces)
-      (when (and (+workspace-exists-p +mpc-workspace-name)
-                 (string= (+workspace-current-name) +mpc-workspace-name))
+      (when (+workspace-exists-p +mpc-workspace-name)
         (+workspace/delete +mpc-workspace-name))
     (when +mpc--old-wconf
       (set-window-configuration +mpc--old-wconf))))
