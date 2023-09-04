@@ -206,15 +206,7 @@ expansion occurs within the parent Emacs session.")
       (load! "+startup-programs")))
 
   (when (modulep! +notifications)
-    (load! "+notifications"))
-
-  (when (modulep! :completion vertico +childframe)
-    (after! vertico-posframe
-      (vertico-posframe-cleanup)
-      (unless (condition-case err
-                  (abort-recursive-edit)
-                (quit t))
-        (call-interactively this-command)))))
+    (load! "+notifications")))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
