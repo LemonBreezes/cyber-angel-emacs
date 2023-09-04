@@ -177,7 +177,8 @@
              consult-gh-find-file)
   :init
   (defvar consult-preview-key 'any)
-  (setq consult-gh-prioritize-local-folder 'suggest)
+  (setq consult-gh-prioritize-local-folder 'suggest
+        consult-gh-confirm-before-clone nil)
   (map! :map +misc-applications-external-apps-map
         "go" #'consult-gh-orgs
         "gc" #'consult-gh-repo-clone
