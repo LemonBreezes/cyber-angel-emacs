@@ -590,6 +590,8 @@
         "<f6>" #'+mpc-hydra/body
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
+        :n "w" #'evil-window-next
+        :n "W" #'evil-window-prev
         :n "o" #'mpc-goto-playing-song))
 
 (use-package! empv
