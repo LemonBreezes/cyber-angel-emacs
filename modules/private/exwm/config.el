@@ -210,7 +210,9 @@ expansion occurs within the parent Emacs session.")
 
   (when (modulep! :completion vertico +childframe)
     (after! vertico-posframe
-      (vertico-posframe-cleanup))))
+      (vertico-posframe-cleanup)
+      (throw 'quit nil)
+      (call-interactively this-command))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
