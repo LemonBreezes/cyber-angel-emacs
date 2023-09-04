@@ -55,7 +55,8 @@
     "s r" "Restart Signal"
     "s s" "Select Signal"
     "s x" "Kill Signal"))
-(add-hook 'exwm-manage-finish-hook #'startup/manage-signal)
+(when startup/signal-executable
+  (add-hook 'exwm-manage-finish-hook #'startup/manage-signal))
 
 ;; (if (process-live-p startup/signal-process)
 ;;     (startup/restart-signal)
