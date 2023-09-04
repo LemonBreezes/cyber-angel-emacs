@@ -18,7 +18,8 @@
   (interactive)
   (call-interactively #'emms-browser-bury-buffer)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +emms-workspace-name)
+      (when (and (+workspace-exists-p +emms-workspace-name)
+                 (string= (+workspace-current-name) +emms-workspace-name))
         (+workspace/delete +emms-workspace-name))
     (when +emms--old-wconf
       (set-window-configuration +emms--old-wconf))))
