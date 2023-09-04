@@ -37,7 +37,8 @@
 (defun +bubbles-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +bubbles-workspace-name)
+      (when (and (+workspace-exists-p +bubbles-workspace-name)
+                 (string= (+workspace-current-name) +bubbles-workspace-name))
         (+workspace/delete +bubbles-workspace-name))
     (when +bubbles--old-wconf
       (set-window-configuration +bubbles--old-wconf)))
