@@ -34,12 +34,18 @@
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
+  (when +mpc--loc
+    (when (and (marker-buffer +mpc--loc)
+               (get-buffer-window (marker-buffer +mpc--loc)))
+      (select-window (get-buffer-window (marker-buffer +mpc--loc))))
+    (goto-char (marker-position +mpc--loc))
+    (setq +mpc--loc nil))
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
-  (setq +mpc--loc (make-marker))
+  (setq +mpc--loc (point-marker))
   (if +mpc--old-wconf
       (progn
         (set-window-configuration +mpc--old-wconf)
