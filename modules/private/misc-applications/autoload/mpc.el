@@ -63,7 +63,9 @@
   (setf (alist-get (window-buffer (selected-window))
                    +mpc-buf-pos-alist)
         (point-marker))
-  (call-interactively #'other-window)
+  (while (and (> (length (doom-visible-windows)) 2)
+              (string= (buffer-name) "*MPC-Status*"))
+    (call-interactively #'other-window))
   (+mpc-jump-to-previous-position))
 
 ;;;###autoload
@@ -72,5 +74,7 @@
   (setf (alist-get (window-buffer (selected-window))
                    +mpc-buf-pos-alist)
         (point-marker))
-  (call-interactively #'other-window-previous)
+  (while (and (> (length (doom-visible-windows)) 2)
+              (string= (buffer-name) "*MPC-Status*"))
+    (call-interactively #'other-window-previous))
   (+mpc-jump-to-previous-position))
