@@ -73,10 +73,7 @@
             (lambda () (add-to-list 'completion-at-point-functions #'cape-file))))
 
 (use-package! yasnippet-capf
-  :defer t :commands yasnippet-capf
-  :init
-  (add-hook 'yas-minor-mode-hook
-            (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
+  :defer t :commands yasnippet-capf)
 
 (use-package! svg-lib
   :after kind-icon)
