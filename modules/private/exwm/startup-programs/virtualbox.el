@@ -84,8 +84,7 @@
     "v r" "Restart VirtualBox"
     "v s" "Select VirtualBox"
     "v x" "Kill VirtualBox"))
-(when startup/virtualbox-executable
-  (add-hook 'exwm-manage-finish-hook #'startup/manage-virtualbox))
+(add-hook 'exwm-manage-finish-hook #'startup/manage-virtualbox)
 
 ;; (if (process-live-p startup/virtualbox-process)
 ;;     (startup/restart-virtualbox)
