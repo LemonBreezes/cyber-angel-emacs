@@ -65,6 +65,10 @@
 (unless (modulep! :editor evil +hybrid)
   ())
 
+(after! evil-easymotion
+  (map! :map evilem-map
+        "RET" #'cae-avy-embark-act-on-region))
+
 (map! :prefix "g"
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
