@@ -49,6 +49,8 @@
         (setq +mpc--old-wconf nil))
     (mpc-quit)))
 
+;; This is a hack that should be unncessary but for some reason restoring the
+;; window configuration doesn't work properly for MPC. This is a workaround.
 
 (defun +mpc-jump-to-previous-position ()
   (when-let (pos (alist-get (window-buffer (selected-window))
