@@ -23,7 +23,6 @@
                          " *startup/discord*"
                          startup/discord-executable
                          (if (eq (user-uid) 0) "--no-sandbox" "")))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-discord)
     (when arg (+workspace-switch startup/discord-workspace t)
           (set-persp-parameter 'dont-save-to-file t
                                (persp-get-by-name startup/discord-workspace)))))
@@ -97,3 +96,4 @@
     (startup/restart-discord)
   (unless (getenv "SSH_TTY")
     (startup/start-discord)))
+(add-hook 'exwm-manage-finish-hook #'startup/manage-discord)
