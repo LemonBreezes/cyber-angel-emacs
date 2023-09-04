@@ -33,13 +33,34 @@
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
+  (+mpc-jump-to-previous-position)
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
+  (dolist (buf (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))
+    (setf (alist-get buf +mpc-buf-pos-alist)
+          (with-current-buffer buf
+            (point-marker))))
   (if +mpc--old-wconf
       (progn
         (set-window-configuration +mpc--old-wconf)
         (setq +mpc--old-wconf nil))
     (mpc-quit)))
+
+
+(defun +mpc-jump-to-previous-position ()
+  (when-let (pos (alist-get (window-buffer (selected-window))
+                            +mpc-buf-pos-alist))
+    (goto-char (marker-position pos))))
+
+(defun +mpc-other-window ()
+  (interactive)
+  (call-interactively #'other-window)
+  (+mpc-jump-to-previous-position))
+
+(defun +mpc-other-window-previous ()
+  (interactive)
+  (call-interactively #'other-window-previous)
+  (+mpc-jump-to-previous-position))
