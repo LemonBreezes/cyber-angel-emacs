@@ -1031,10 +1031,6 @@
 
 (setq cae-config-finished-loading t)
 
-(when (getenv "EXWM_RUNNING")
-  (after! vertico-posframe
-    (vertico-posframe-cleanup)))
-
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
 ;;End:
