@@ -89,6 +89,8 @@
                   evil-ex-search-unbounded-word-forward
                   evil-ex-search-unbounded-word-backward
                   evil-goto-line
+                  evil-jump-item
+                  evil-goto-first-line
                   keyboard-escape-quit
                   evil-force-normal-state
                   evil-exit-visual-state
