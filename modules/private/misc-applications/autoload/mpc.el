@@ -22,32 +22,24 @@
 
 
 (defvar +mpc--wconf nil)
-(defvar +mpc--loc nil)
 
 ;;;###autoload
 (defun +mpc (&optional arg)
   (interactive "P")
-  (setq +mpc--old-wconf (current-window-configuration))
+  (setq +mpc--old-wconf (window-state-get))
   (delete-other-windows)
   (if (and +mpc--wconf
            (not (cl-find-if-not #'buffer-live-p
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
-  (when +mpc--loc
-    (when (and (marker-buffer +mpc--loc)
-               (get-buffer-window (marker-buffer +mpc--loc)))
-      (select-window (get-buffer-window (marker-buffer +mpc--loc))))
-    (goto-char (marker-position +mpc--loc))
-    (setq +mpc--loc nil))
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
-  (setq +mpc--loc (point-marker))
   (if +mpc--old-wconf
       (progn
-        (set-window-configuration +mpc--old-wconf)
+        (window-state-put +mpc--old-wconf)
         (setq +mpc--old-wconf nil))
     (mpc-quit)))
