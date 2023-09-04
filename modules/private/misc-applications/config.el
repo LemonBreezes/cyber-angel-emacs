@@ -597,7 +597,8 @@
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'other-window
-        :n "w" #'other-window-previous  ; defined in my connfig
+        :n "w" #'other-window-previous  ; defined elsewhere in my config
+        :n "RET" #'mpc-play-at-point
         :n "o" #'mpc-goto-playing-song))
 
 (use-package! empv
