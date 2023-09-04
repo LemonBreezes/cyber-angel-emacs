@@ -15,6 +15,9 @@
   (when (+workspace-exists-p startup/mpv-workspace)
     (+workspace-delete startup/mpv-workspace)))
 
+(defun startup/mpv-setup-workspace (persp _)
+  (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/mpv-workspace)))
+
 (add-hook 'exwm-manage-finish-hook #'startup/manage-mpv)
 (advice-add #'empv-exit :after #'startup/mpv-kill-mpv)
 (add-hook 'persp-created-functions #'startup/mpv-setup-workspace)
