@@ -596,8 +596,8 @@
         "<f6>" #'+mpc-hydra/body
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
-        :n "e" #'other-window
-        :n "w" #'other-window-previous  ; defined elsewhere in my config
+        :n "e" #'+mpc-other-window
+        :n "w" #'+mpc-other-window-previous
         :n "RET" #'mpc-play-at-point
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
