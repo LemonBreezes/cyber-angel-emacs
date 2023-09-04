@@ -29,8 +29,8 @@
   (setq +mpc--old-wconf (current-window-configuration))
   (delete-other-windows)
   (if (and +mpc--wconf
-           (cl-find-if-not #'buffer-live-p
-            (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers)))))
+           (not (cl-find-if-not #'buffer-live-p
+                                (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
   (setq +mpc--wconf (current-window-configuration)))
