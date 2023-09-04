@@ -126,7 +126,7 @@ expansion occurs within the parent Emacs session.")
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
     (map! [remap suspend-frame] #'undefined)
-    (advice-add #'suspend-frame :override #'ignore)
+
 
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
@@ -154,7 +154,10 @@ expansion occurs within the parent Emacs session.")
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
-      outline-minor-mode-highlight nil))
+      outline-minor-mode-highlight nil)
+
+    (after! posframe
+      (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)))
 
   (use-package! exwm-edit
     :commands exwm-edit--compose
