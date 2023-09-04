@@ -425,6 +425,7 @@
 
   (when (modulep! :completion vertico)
     (after! marginalia
+      ;; Use `embark-file-map' for `ffap-menu'.
       (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file))))
 
   ;; Use Emacs as the default editor for shell commands.
