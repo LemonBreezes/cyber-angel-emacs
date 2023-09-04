@@ -616,7 +616,6 @@
         "P" #'empv-youtube-playlist
         "T" #'empv-youtube-tabulated
         "'" #'empv-youtube-tabulated-last-results)
-  ;;
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
