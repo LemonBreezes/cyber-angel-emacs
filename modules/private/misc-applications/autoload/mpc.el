@@ -75,7 +75,7 @@
   (setf (alist-get (window-buffer (selected-window))
                    +mpc-buf-pos-alist)
         (point-marker))
-  (cl-loop do (call-interactively #'other-windou)
+  (cl-loop do (call-interactively #'other-window)
            until (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
