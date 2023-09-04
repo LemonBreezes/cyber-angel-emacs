@@ -617,6 +617,12 @@
         "T" #'empv-youtube-tabulated
         "'" #'empv-youtube-tabulated-last-results)
   (setq empv-youtube-use-tabulated-results nil)
+  (add-hook 'empv-youtube-results-mode
+            (cae-defun +empv-youtube-results-h ()
+              (setq-local tabulated-list-format [("Thumbnail" 20 nil)
+                                                 ("Title" 60 t)
+                                                 ("Length"  10 t)
+                                                 ("Views" 10 t)])))
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
