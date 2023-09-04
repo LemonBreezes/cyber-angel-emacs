@@ -53,5 +53,4 @@
   "t r" "Restart Teams"
   "t s" "Select Teams"
   "t x" "Kill Teams"))
-
 (add-hook 'exwm-manage-finish-hook #'startup/manage-teams)
