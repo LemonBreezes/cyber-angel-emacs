@@ -1,1 +1,1 @@
-;;; private/exwm/startup-programs/mpv.el -*- lexical-binding: t; -*-
+;;; startup/mpv.el -*- lexical-binding: t; -*-
