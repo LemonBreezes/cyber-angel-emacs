@@ -62,7 +62,8 @@ unbalanced. Works with Lispy and Smartparens."
         (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                            (tramp-file-local-name file)))
       (doom/sudo-this-file))
-    (goto-char p)))
+    (unless (buffer-modified-p)
+      (goto-char p))))
 
 ;;;###autoload
 (defun cae-raise-sexp ()
