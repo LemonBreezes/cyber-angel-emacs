@@ -33,10 +33,11 @@
       (setq +mpc--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
-  (when (derived-mode-p 'mpc-mode)
-    (mpc-quit))
-  (call-interactively #'mpc))
-
+  (unless (provided-mode-derived-p
+           (buffer-local-value 'major-mode
+                               (window-buffer (selected-window)))
+           'mpc-mode)
+    (call-interactively #'mpc)))
 
 ;;;###autoload
 (defun +mpc-quit ()
