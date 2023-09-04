@@ -10,10 +10,6 @@
     (unless (+workspace-exists-p startup/mpv-workspace)
       (+workspace-new startup/mpv-workspace))))
 
-(defun startup/mpv-setup-workspace (persp _)
-  (when (string= (persp-name persp) startup/mpv-workspace)
-    (set-persp-parameter 'dont-save-to-file t persp)))
-
 (defun startup/mpv-kill-mpv ()
   (interactive)
   (when (+workspace-exists-p startup/mpv-workspace)
