@@ -1,5 +1,6 @@
 ;;; private/misc-applications/autoload/empv.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +empv--youtube-show-tabulated-results (candidates)
   (with-current-buffer (get-buffer-create "*empv-yt-results*")
     (empv-youtube-results-mode)
