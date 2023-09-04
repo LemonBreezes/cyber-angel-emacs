@@ -22,6 +22,7 @@
 
 
 (defvar +mpc--wconf nil)
+(defvar +mpc--loc nil)
 
 ;;;###autoload
 (defun +mpc (&optional arg)
@@ -38,6 +39,7 @@
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
+  (setq +mpc--loc (make-marker))
   (if +mpc--old-wconf
       (progn
         (set-window-configuration +mpc--old-wconf)
