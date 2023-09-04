@@ -602,8 +602,7 @@
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
         :n "i" #'evilem-motion-next-line
-        :n "u" #'evilem-motion-previous-line
-        ))
+        :n "u" #'evilem-motion-previous-line))
 
 (use-package! empv
   :defer t :init
