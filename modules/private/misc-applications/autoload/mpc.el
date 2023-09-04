@@ -57,10 +57,16 @@
 
 (defun +mpc-other-window ()
   (interactive)
+  (setf (alist-get (window-buffer (selected-window))
+                   +mpc-buf-pos-alist)
+        (point-marker))
   (call-interactively #'other-window)
   (+mpc-jump-to-previous-position))
 
 (defun +mpc-other-window-previous ()
   (interactive)
+  (setf (alist-get (window-buffer (selected-window))
+                   +mpc-buf-pos-alist)
+        (point-marker))
   (call-interactively #'other-window-previous)
   (+mpc-jump-to-previous-position))
