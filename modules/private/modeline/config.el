@@ -220,9 +220,6 @@
         "C-M-!" #'cae-modeline-rotate-backward-word-at-point
         :n "]r"  #'cae-modeline-rotate-forward-word-at-point
         :n "[r"  #'cae-modeline-rotate-backward-word-at-point)
-  (after! embark
-    (map! :map embark-identifier-map
-          "!"   #'cae-modeline-rotate-forward-word-at-point))
   :config
   (after! parrot-rotate
     (setq parrot-rotate-animate-after-rotation nil
