@@ -55,6 +55,7 @@
                             +mpc-buf-pos-alist))
     (goto-char (marker-position pos))))
 
+;;;###autoload
 (defun +mpc-other-window ()
   (interactive)
   (setf (alist-get (window-buffer (selected-window))
@@ -63,6 +64,7 @@
   (call-interactively #'other-window)
   (+mpc-jump-to-previous-position))
 
+;;;###autoload
 (defun +mpc-other-window-previous ()
   (interactive)
   (setf (alist-get (window-buffer (selected-window))
