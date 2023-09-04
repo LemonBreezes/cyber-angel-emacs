@@ -7,6 +7,10 @@
   :when (cae-display-graphic-p)
   :init
   (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
+  (after! elisp-mode
+    (map! :map emacs-lisp-mode-map
+          :localleader
+          "n" #'nameless-mode))
   :config
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
