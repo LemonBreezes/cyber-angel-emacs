@@ -178,7 +178,7 @@ expansion occurs within the parent Emacs session.")
   (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
   (use-package! exwm-mff
-    :defer t
+
     :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (defadvice! +exwm-input--fake-last-command ()
@@ -206,7 +206,11 @@ expansion occurs within the parent Emacs session.")
       (load! "+startup-programs")))
 
   (when (modulep! +notifications)
-    (load! "+notifications")))
+    (load! "+notifications"))
+
+  (when (modulep! :completion vertico +childframe)
+    (after! vertico-posframe
+      (vertico-posframe-cleanup))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
