@@ -106,7 +106,8 @@
                         (not (>= (point) eshell-last-output-end)))
                    (goto-char (point-max))))))
 
-(map! :map help-map "bn" #'cae-show-normal-state-bindings)
+(after! help
+  (map! :map help-map "bn" #'cae-show-normal-state-bindings))
 (when (modulep! :private corfu)
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
