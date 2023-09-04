@@ -22,6 +22,7 @@
 
 
 (defvar +mpc--wconf nil)
+(defvar +mpc-buf-pos-alist nil)
 
 ;;;###autoload
 (defun +mpc (&optional arg)
