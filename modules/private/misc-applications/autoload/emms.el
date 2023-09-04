@@ -27,11 +27,11 @@
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
-   [("v" "VGM" (lambda () (interactive) (dired "/mnt/music/VGM/")))
-    ("y" "Youtube Music" (lambda () (interactive) (dired "/mnt/music/Youtube Music/")))
-    ("p" "Playlists" (lambda () (interactive) (dired "/mnt/music/Playlists/")))
-    ("a" "Anime Music" (lambda () (interactive) (dired "/mnt/music/Anime Music/")))
-    ("m" "EMMS indexed" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
+   [("v" "VGM" (lambda () (interactive) (dired (expand-file-name "VGM" +emms-music-dir))))
+    ("y" "Youtube Music" (lambda () (interactive) (dired (expand-file-name "Youtube Music" +emms-music-dir))))
+    ("p" "Playlists" (lambda () (interactive) (dired (expand-file-name "Playlists" +emms-music-dir))))
+    ("a" "Anime Music" (lambda () (interactive) (dired (expand-file-name "Anime Music" +emms-music-dir))))
+    ("m" "Artists" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
