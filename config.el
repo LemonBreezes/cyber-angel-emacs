@@ -416,7 +416,8 @@
 
   (after! tramp
     (setq tramp-shell-prompt-pattern
-          "\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+          ;;"\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+          "\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>]*.*\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
           tramp-use-scp-direct-remote-copying t)
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
@@ -505,7 +506,7 @@
     (global-wakatime-mode +1)
     (setq wakatime-cli-path (executable-find "wakatime")))
 
-
+  
   ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
   ;; to use sudo on a file before `tramp-sh' is loaded.
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
