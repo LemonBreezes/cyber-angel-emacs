@@ -56,11 +56,13 @@ unbalanced. Works with Lispy and Smartparens."
          (file-localname (file-remote-p file 'localname))
          (tramp-prefix (and file-localname
                             (string-remove-suffix file-localname file)))
-         (sudo-prefix (format "/sudo:root@%s:" (file-remote-p file 'host))))
+         (sudo-prefix (format "/sudo:root@%s:" (file-remote-p file 'host)))
+         (p (point)))
     (if (string-suffix-p sudo-prefix tramp-prefix)
         (find-file (concat (string-remove-suffix sudo-prefix tramp-prefix)
                            (tramp-file-local-name file)))
-      (doom/sudo-this-file))))
+      (doom/sudo-this-file))
+    (goto-char p)))
 
 ;;;###autoload
 (defun cae-raise-sexp ()
