@@ -172,3 +172,7 @@ It is meant to be used as a `post-gc-hook'."
 ;; For some reason, this variable is not being set. It's safe to set it here as
 ;; it should be overwritten by Doom later anyways.
 (setq evil-undo-system 'undo-fu)
+
+;; For some reason I got a void variable error in `helm-system-packages' for
+;; this.
+(defvar helm-marked-buffer-name "*helm marked*")
