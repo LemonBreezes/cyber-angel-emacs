@@ -53,11 +53,11 @@
         :n "U" #'evil-redo)
 
   ;; Use Emacs keybindings in Evil insert state.
-  (setq evil-disable-insert-state-bindings nil
-        evil-insert-state-map (make-sparse-keymap))
-  (define-key evil-insert-state-map [escape] 'evil-normal-state)
-  (define-key evil-insert-state-map
-    (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+  (setq evil-disable-insert-state-bindings nil)
+  (after! evil
+    (define-key evil-insert-state-map [escape] 'evil-normal-state)
+    (define-key evil-insert-state-map
+      (read-kbd-macro evil-toggle-key) 'evil-emacs-state))
   (define-key! :keymaps +default-minibuffer-maps
     "C-a" nil
     "C-r" nil
