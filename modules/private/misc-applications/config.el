@@ -619,7 +619,7 @@
 
 (use-package! emms
   :defer t :init
-  (defvar +emms-music-dir "/mnt/hdd/music/"
+  (defvar +emms-music-dir +misc-applications-music-dir
     "The directory where your music library is located.")
   (add-to-list 'safe-local-variable-directories +emms-music-dir)
   (defvar +emms-workspace-name "*emms*")
