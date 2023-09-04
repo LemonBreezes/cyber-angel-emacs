@@ -23,6 +23,11 @@
 (defvar cae-init-autocompletion-enabled-p t
   "Whether our autocompletion section of `config.el' is enabled.")
 
+(setq evil-undo-system 'undo-fu
+      evil-want-C-u-scroll t
+      evil-want-C-u-delete t
+      +evil-want-o/O-to-continue-comments nil)
+
 (doom! :completion
        (vertico +icons +childframe)
 
@@ -99,6 +104,7 @@
        (rss +org)
 
        :private
+       ;;holy
        (corfu +orderless +icons +split-char)
        (helm +childframe)
        (debugger +lsp)
@@ -113,9 +119,7 @@
        vc
        org
        ai
-       gnus
-       ;;holy
-       )
+       gnus)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))

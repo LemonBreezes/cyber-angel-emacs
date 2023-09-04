@@ -7,3 +7,4 @@
 7. Log into Copilot with the interactive command `copilot-login`.
 8. Install Pavucontrol.
 9. Install Youtube DLP (Youtube DL fork).
+10. Install Dunst.

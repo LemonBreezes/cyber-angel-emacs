@@ -1,6 +1,6 @@
 alias gr     egrep               --color=always                               $*
 alias c      xclip               -selection     clipboard                     $*
-alias emerge sudo emerge         --color=y --autounmask --autounmask-continue $*
+alias emerge sudo emerge --color=y --autounmask --autounmask-continue         $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 
@@ -18,7 +18,17 @@ alias eselect sudo eselect                                                    $*
 alias tree   sudo tree -C                                                     $*
 
 alias sysu systemctl --user                                                   $*
+alias sysut systemctl --user status                                           $*
+alias sysus systemctl --user start                                            $*
+alias sysur systemctl --user restart                                          $*
+alias sysux systemctl --user stop                                             $*
+alias sysudr systemctl --user daemon-reload                                   $*
 alias sys sudo systemctl                                                      $*
+alias syst sudo systemctl status                                              $*
+alias syss sudo systemctl start                                               $*
+alias sysr sudo systemctl restart                                             $*
+alias sysx sudo systemctl stop                                                $*
+alias sysdr sudo systemctl daemon-reload                                      $*
 
 alias mcd    mkdir -p                                                         $1 && cd $1
 alias cd-    cd -
