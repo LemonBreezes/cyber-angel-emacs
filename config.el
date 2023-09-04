@@ -415,10 +415,11 @@
     (setq compilation-scroll-output t))
 
   (after! tramp
-    (setq tramp-shell-prompt-pattern
+    (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>][[:blank:]]*")
+    (setq ;;tramp-shell-prompt-pattern
           ;;"\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
-          "\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>]*.*\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
-          tramp-use-scp-direct-remote-copying t)
+          ;;"\\(?:^\\|\r\\)[^]#$%>➜\n]*#?[]#$%>]*.*\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+     tramp-use-scp-direct-remote-copying t)
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
                     "/run/current-system/profile/sbin"))
