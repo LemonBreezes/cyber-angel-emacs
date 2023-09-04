@@ -54,5 +54,4 @@
   "t s" "Select Teams"
   "t x" "Kill Teams"))
 
-(when (executable-find "teams")
-  (add-hook 'exwm-manage-finish-hook #'startup/manage-teams))
+(add-hook 'exwm-manage-finish-hook #'startup/manage-teams)
