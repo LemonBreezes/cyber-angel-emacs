@@ -64,4 +64,4 @@
     "p r" "Restart Pavucontrol"
     "p s" "Select Pavucontrol"
     "p x" "Kill Pavucontrol"))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-pavucontrol)
+(add-hook 'exwm-manage-finish-hook #'startup/manage-pavucontrol)
