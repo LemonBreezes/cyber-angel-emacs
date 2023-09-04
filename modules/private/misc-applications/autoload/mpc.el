@@ -20,37 +20,22 @@
     ("o" mpc-goto-playing-song "Goto playing song" :column "Movement"))
  t)
 
+
+(defvar +mpc--wconf nil)
+
 ;;;###autoload
 (defun +mpc (&optional arg)
   (interactive "P")
-  (if arg
-      (setq +mpc--old-wconf nil)
-    (if (modulep! :ui workspaces)
-        ;; delete current workspace if empty
-        ;; this is useful when mu4e is in the daemon
-        ;; as otherwise you can accumulate empty workspaces
-        (+workspace-switch +mpc-workspace-name t)
-      (setq +mpc--old-wconf (current-window-configuration))
-      (delete-other-windows)
-      (switch-to-buffer (doom-fallback-buffer))))
-  (unless (provided-mode-derived-p
-           (buffer-local-value 'major-mode
-                               (window-buffer (selected-window)))
-           'mpc-mode)
-    (call-interactively #'mpc)))
+  (setq +mpc--old-wconf (current-window-configuration))
+  (delete-other-windows)
+  (if +mpc--wconf
+      (set-window-configuration +mpc--wconf)
+    (call-interactively #'mpc))
+  (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
 (defun +mpc-quit ()
   (interactive)
-  (mpc-quit)
-  (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +mpc-workspace-name)
-        (+workspace/delete +mpc-workspace-name))
-    (when +mpc--old-wconf
-      (set-window-configuration +mpc--old-wconf))))
-
-;;;###autoload
-(defun +mpc-clear ()
-  (interactive)
-  (mpc-cmd-clear)
-  (mpc-songs-refresh))
+  (when +mpc--old-wconf
+    (set-window-configuration +mpc--old-wconf)
+    (setq +mpc--old-wconf nil)))
