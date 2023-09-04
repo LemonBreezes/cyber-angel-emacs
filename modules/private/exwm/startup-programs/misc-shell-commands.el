@@ -24,13 +24,6 @@
 ;;  (setq startup/pipewire-process
 ;;        (start-process "pipewire" startup/misc-shell-commands-buffer "gentoo-pipewire-launcher")))
 
-;; Start up our compositor.
-(defvar startup/picom-process nil)
-(when (and (executable-find "picom")
-           (not (process-live-p startup/picom-process)))
-  (setq startup/picom-process
-        (start-process "picom" startup/misc-shell-commands-buffer "picom")))
-
 ;; Start solaar for my Logitech mouse
 (defvar startup/solaar-process nil)
 (when (and (executable-find "solaar")
