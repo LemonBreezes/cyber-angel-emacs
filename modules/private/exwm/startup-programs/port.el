@@ -12,7 +12,6 @@
                          " *startup/port*"
                          startup/port-executable
                          (if (eq (user-uid) 0) "--no-sandbox" "")))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-port)
     (when arg (+workspace-switch startup/port-workspace))))
 
 (defun startup/kill-port (&optional arg)
@@ -66,3 +65,5 @@
 ;; (if (process-live-p startup/port-process)
 ;;     (startup/restart-port)
 ;;   (startup/start-port))
+
+(add-hook 'exwm-manage-finish-hook #'startup/manage-port)
