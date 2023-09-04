@@ -580,7 +580,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "c" "MPC"))
   :config
-  (setq mpc-host system-name
+  (setq mpc-host "localhost"
         mpc-mpd-music-directory "/mnt/unindexed-music/")
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
