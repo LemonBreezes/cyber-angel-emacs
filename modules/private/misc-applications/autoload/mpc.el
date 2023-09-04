@@ -58,23 +58,25 @@
     (goto-char (marker-position pos))))
 
 ;;;###autoload
-(defun +mpc-other-window ()
-  (interactive)
-  (setf (alist-get (window-buffer (selected-window))
-                   +mpc-buf-pos-alist)
-        (point-marker))
-  (while (and (> (length (doom-visible-windows)) 2)
-              (string= (buffer-name) "*MPC-Status*"))
-    (call-interactively #'other-window))
-  (+mpc-jump-to-previous-position))
-
-;;;###autoload
 (defun +mpc-other-window-previous ()
   (interactive)
   (setf (alist-get (window-buffer (selected-window))
                    +mpc-buf-pos-alist)
         (point-marker))
-  (while (and (> (length (doom-visible-windows)) 2)
-              (string= (buffer-name) "*MPC-Status*"))
-    (call-interactively #'other-window-previous))
-  (+mpc-jump-to-previous-position))
+  (cl-loop do (call-interactively #'other-window-previous)
+           until (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+           finally (goto-char (marker-position
+                               (alist-get (window-buffer (selected-window))
+                                          +mpc-buf-pos-alist)))))
+
+;;;###autoload
+(defun +mpc-other-window ()
+  (interactive)
+  (setf (alist-get (window-buffer (selected-window))
+                   +mpc-buf-pos-alist)
+        (point-marker))
+  (cl-loop do (call-interactively #'other-windou)
+           until (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+           finally (goto-char (marker-position
+                               (alist-get (window-buffer (selected-window))
+                                          +mpc-buf-pos-alist)))))
