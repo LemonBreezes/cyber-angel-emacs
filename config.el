@@ -8,10 +8,12 @@
 ;; errors.
 (defalias 'rainbow-delimiters-mode #'ignore)
 
-(load! "lisp/cae-tty")
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+;; (load! "lisp/cae-tty")
+;; (load! "lisp/cae-bindings")
+;; (load! "lisp/cae-multi")
+                                        ;Run parallel Emacs instances.
+;; (load! "lisp/cae-smartparens")
+                                        ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
 (when (modulep! :editor evil)
   (after! evil
