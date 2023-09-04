@@ -597,6 +597,8 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPV"))
   :config
+  (map! :map empv-map
+        "P" #'empv-youtube-playlist)
   (setq empv-youtube-use-tabulated-results nil)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
