@@ -57,9 +57,10 @@
            (not (cae-display-graphic-p)))
   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
-;; This is necessary for Tramp to work. This regexp is specific to my machines.
-;;(after! tramp
-;;  (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>][[:blank:]]*"))
+(after! tramp
+  (setq tramp-shell-prompt-pattern
+        ;;"\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>][[:blank:]]*"
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 
 ;;; UI
