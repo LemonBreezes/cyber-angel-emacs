@@ -10,7 +10,6 @@
           (start-process "tiled"
                          " *startup/tiled*"
                          startup/tiled-executable))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-tiled)
     (when arg (+workspace-switch startup/tiled-workspace t))))
 
 (defun startup/kill-tiled (&optional arg)
@@ -54,6 +53,7 @@
   "T r" "Restart Tiled"
   "T s" "Select Tiled"
   "T x" "Kill Tiled")
+(add-hook 'exwm-manage-finish-hook #'startup/manage-tiled)
 
 ;; (if (process-live-p startup/tiled-process)
 ;;     (startup/restart-tiled)
