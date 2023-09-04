@@ -11,13 +11,7 @@
   (if arg
       (setq +speed-type--old-wconf nil)
     (if (modulep! :ui workspaces)
-        ;; delete current workspace if empty
-        ;; this is useful when mu4e is in the daemon
-        ;; as otherwise you can accumulate empty workspaces
-        (progn
-          (unless (+workspace-buffer-list)
-            (+workspace-delete (+workspace-current-name)))
-          (+workspace-switch +speed-type-workspace-name t))
+        (+workspace-switch +speed-type-workspace-name t)
       (setq +speed-type--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
