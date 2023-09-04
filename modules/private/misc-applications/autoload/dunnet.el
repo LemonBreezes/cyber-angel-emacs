@@ -16,7 +16,8 @@
 (defun +dunnet-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +dunnet-workspace-name)
+      (when (and (+workspace-exists-p +dunnet-workspace-name)
+                 (string= (+workspace-current-name) +dunnet-workspace-name))
         (+workspace/delete +dunnet-workspace-name))
     (when +dunnet--old-wconf
       (set-window-configuration +dunnet--old-wconf)))
