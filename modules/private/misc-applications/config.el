@@ -601,8 +601,8 @@
         :n "RET" #'mpc-play-at-point
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
-        :n "u" #'evilem-motion-next-line
-        :n "i" #'evilem-motion-previous-line
+        :n "i" #'evilem-motion-next-line
+        :n "u" #'evilem-motion-previous-line
         ))
 
 (use-package! empv
