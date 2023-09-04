@@ -31,7 +31,7 @@
     ("y" "Youtube Music" (lambda () (interactive) (dired (expand-file-name "Youtube Music" +emms-music-dir))))
     ("p" "Playlists" (lambda () (interactive) (dired (expand-file-name "Playlists" +emms-music-dir))))
     ("a" "Anime Music" (lambda () (interactive) (dired (expand-file-name "Anime Music" +emms-music-dir))))
-    ("m" "Artists" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
+    ("r" "Artists" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
