@@ -64,7 +64,7 @@
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
   (map! :map +misc-applications-map
-        "h" helm-command-map))
+        "h" (cae-oneshot-keymap helm-command-map helm)))
 
 
 ;;; Standalone apps
