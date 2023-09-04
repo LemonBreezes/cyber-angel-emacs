@@ -600,7 +600,7 @@
         :n "w" #'other-window-previous  ; defined elsewhere in my config
         :n "RET" #'mpc-play-at-point
         :n "o" #'mpc-goto-playing-song
-        :n "C" #'+mpc-clear))
+        :n "C" #'mpc-stop))
 
 (use-package! empv
   :defer t :init
