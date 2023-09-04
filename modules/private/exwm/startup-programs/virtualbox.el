@@ -17,7 +17,6 @@
                                          " *startup/virtualbox*"
                                          (format "vboxmanage startvm --type=gui %s"
                                                  startup/virtualbox-vm))))
-    (add-hook 'exwm-manage-finish-hook #'startup/manage-virtualbox)
     (when arg (+workspace-switch startup/virtualbox-workspace t))))
 
 (defun startup/kill-virtualbox (&optional arg)
@@ -85,6 +84,8 @@
     "v r" "Restart VirtualBox"
     "v s" "Select VirtualBox"
     "v x" "Kill VirtualBox"))
+(when startup/virtualbox-executable
+  (add-hook 'exwm-manage-finish-hook #'startup/manage-virtualbox))
 
 ;; (if (process-live-p startup/virtualbox-process)
 ;;     (startup/restart-virtualbox)
