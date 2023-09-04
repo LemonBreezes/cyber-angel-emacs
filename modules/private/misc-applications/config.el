@@ -677,11 +677,10 @@
             (modulep! :completion helm))
   :defer t :init
   (map! :map +misc-applications-music-map
-        "eh" #'helm-emms)
+        "h" #'helm-emms)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "e" "EMMS"
-      "eh" "Helm EMMS"))
+      "h" "Helm EMMS"))
   :config
   (setq helm-emms-dired-directories (list (expand-file-name +emms-music-dir))
         helm-emms-use-track-description-function t
