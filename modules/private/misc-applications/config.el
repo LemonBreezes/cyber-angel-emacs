@@ -61,8 +61,10 @@
 (map! :map process-menu-mode-map
       "<f6>" #'+list-processes-hydra/body)
 
-(map! :map +misc-applications-map
-      "h" helm-command-map)
+(when (or (modulep! :private helm)
+          (modulep! :completion helm))
+  (map! :map +misc-applications-map
+        "h" helm-command-map))
 
 
 ;;; Standalone apps
