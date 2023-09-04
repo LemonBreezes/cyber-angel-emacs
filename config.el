@@ -59,7 +59,8 @@
 
 ;; This is necessary for Tramp to work. This regexp is specific to my machines.
 (after! tramp
-  (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#-%>]*#?[]#-%>][[:blank:]]*"))
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]\n#-%>]*#?[]#-%>][[:blank:]]*")
+  )
 
 
 ;;; UI
