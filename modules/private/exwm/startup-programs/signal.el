@@ -11,6 +11,7 @@
                          " *startup/signal*"
                          startup/signal-executable
                          (if (eq (user-uid) 0) "--no-sandbox" "")))
+    (add-hook 'exwm-manage-finish-hook #'startup/manage-signal)
     (when arg (+workspace-switch startup/signal-workspace t))))
 
 (defun startup/kill-signal (&optional arg)
@@ -55,8 +56,6 @@
     "s r" "Restart Signal"
     "s s" "Select Signal"
     "s x" "Kill Signal"))
-(when startup/signal-executable
-  (add-hook 'exwm-manage-finish-hook #'startup/manage-signal))
 
 ;; (if (process-live-p startup/signal-process)
 ;;     (startup/restart-signal)
