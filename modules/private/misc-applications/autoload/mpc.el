@@ -33,6 +33,8 @@
       (setq +mpc--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
+  (when (derived-mode-p 'mpc-mode)
+    (mpc-quit))
   (call-interactively #'mpc))
 
 
