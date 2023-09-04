@@ -157,7 +157,10 @@ expansion occurs within the parent Emacs session.")
       outline-minor-mode-highlight nil)
 
     (after! posframe
-      (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)))
+      (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)
+      (define-advice posframe-show (:filter-return (frame) exwm-deparent)
+        (set-frame-parameter frame 'parent-frame nil)
+        frame)))
 
   (use-package! exwm-edit
     :commands exwm-edit--compose
