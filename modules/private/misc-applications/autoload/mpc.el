@@ -29,10 +29,7 @@
         ;; delete current workspace if empty
         ;; this is useful when mu4e is in the daemon
         ;; as otherwise you can accumulate empty workspaces
-        (progn
-          (unless (+workspace-buffer-list)
-            (+workspace-delete (+workspace-current-name)))
-          (+workspace-switch +mpc-workspace-name t))
+        (+workspace-switch +mpc-workspace-name t)
       (setq +mpc--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
@@ -48,3 +45,8 @@
         (+workspace/delete +mpc-workspace-name))
     (when +mpc--old-wconf
       (set-window-configuration +mpc--old-wconf))))
+
+(defun +mpc-clear ()
+  (interactive)
+  (mpc-cmd-clear)
+  (mpc-songs-refresh))
