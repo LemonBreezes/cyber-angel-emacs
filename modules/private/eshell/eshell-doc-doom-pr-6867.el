@@ -36,7 +36,7 @@
       (add-hook 'completion-at-point-functions #'+eshell-fish-capf nil t)
     (remove-hook 'completion-at-point-functions #'+eshell-fish-capf t)))
 
-(add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
+;;(add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
 
 ;;; Eshell Syntax Highlighting fix
 
