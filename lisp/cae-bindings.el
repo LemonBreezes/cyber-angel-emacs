@@ -119,7 +119,8 @@
 
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (define-key help-map (kbd "SPC") #'cae-pop-mark)
-;; This is so that `describe-key-briefly' is more convenient to use with `F1'.
+;; This is so that `describe-key-briefly' is more convenient to use with the
+;; `F1' prefix.
 (define-key help-map (kbd "<f1>") #'describe-key-briefly)
 
 (after! diff-mode
