@@ -1,17 +1,17 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(defun cae-modeline-buffer-name ()
-  (propertize (or (and (buffer-local-value 'buffer-file-name (current-buffer))
-                       (breadcrumb-project-crumbs))
-                  (buffer-name))
-              'face '(:inherit variable-pitch
-                      :weight bold)))
-
-(add-hook! 'doom-first-file-hook
-  (setq-default mode-line-format
-                (cl-subst '(:eval (cae-modeline-buffer-name))
-                          'mode-line-buffer-identification
-                          (default-value 'mode-line-format))))
+;;(defun cae-modeline-buffer-name ()
+;;  (propertize (or (and (buffer-local-value 'buffer-file-name (current-buffer))
+;;                       (breadcrumb-project-crumbs))
+;;                  (buffer-name))
+;;              'face '(:inherit variable-pitch
+;;                      :weight bold)))
+;;
+;;(add-hook! 'doom-first-file-hook
+;;  (setq-default mode-line-format
+;;                (cl-subst '(:eval (cae-modeline-buffer-name))
+;;                          'mode-line-buffer-identification
+;;                          (default-value 'mode-line-format))))
 
 (when (modulep! :editor evil)
   (setq evil-mode-line-format
