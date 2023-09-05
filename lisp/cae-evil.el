@@ -108,10 +108,10 @@
 
 (after! evil-collection
   (setq evil-collection-key-blacklist '())
-  (autoload #'evil-collection-unimpaired-paste-below "evil-collection-unimpaired" nil t)
-  (autoload #'evil-collection-unimpaired-paste-above "evil-collection-unimpaired" nil t)
-  (map! :n "]p" #'evil-collection-unimpaired-paste-below
-        :n "[p" #'evil-collection-unimpaired-paste-above))
+  (map! :n "]p" #'cae-unimpaired-paste-below
+        :n "[p" #'cae-unimpaired-paste-above
+        :m "[6" #'cae-unimpaired-b64-encode
+        :m "]6" #'cae-unimpaired-b64-decode))
 
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
