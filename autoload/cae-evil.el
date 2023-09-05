@@ -20,6 +20,15 @@
       (which-key--show-keymap "Normal state bindings" map nil nil nil)
     (message "No %s normal state bindings are defined." major-mode)))
 
+(defun evil-collection-unimpaired--encode (beg end fn)
+  "Apply FN from BEG to END."
+  (save-excursion
+    (goto-char beg)
+    (let* ((end (if (eq evil-this-type 'line) (1- end) end))
+           (text (buffer-substring-no-properties beg end)))
+      (delete-region beg end)
+      (insert (funcall fn text)))))
+
 ;;;###autoload (autoload 'evil-collection-unimpaired-b64-encode "autoload/cae-evil" nil t)
 (evil-define-operator cae-unimpaired-b64-encode (count &optional beg end)
   "Encode a base64 string."
