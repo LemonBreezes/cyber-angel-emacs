@@ -11,7 +11,8 @@ command was called, go to its unstaged changes section."
                                                  (locate-dominating-file buffer-file-name ".git"))))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
     (call-interactively #'magit-status)
-    (delete-other-windows)
+    (let ((ignore-window-parameters t))
+      (delete-other-windows))
     (when buffer-file-path
       (goto-char (point-min))
       (cl-loop until (when (equal section-ident (magit-section-ident (magit-current-section)))
