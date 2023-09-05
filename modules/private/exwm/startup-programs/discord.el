@@ -42,7 +42,9 @@
 (defun startup/select-discord ()
   (interactive)
   (unless (process-live-p startup/discord-process)
-    (startup/restart-discord)))
+    (startup/restart-discord))
+  (+workspace-switch startup/discord-workspace t)
+  (+workspace/display))
 
 ;; HACK Prevent an error that happens when there is no Discord process.
 (defadvice! startup/discord-elcord-a ()
