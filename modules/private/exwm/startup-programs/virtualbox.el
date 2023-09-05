@@ -16,51 +16,24 @@
             (start-process-shell-command "virtualbox"
                                          " *startup/virtualbox*"
                                          (format "vboxmanage startvm --type=gui %s"
-                                                 startup/virtualbox-vm))))
-    (when arg (+workspace-switch startup/virtualbox-workspace t))))
+                                                 startup/virtualbox-vm))))))
 
 (defun startup/kill-virtualbox (&optional arg)
   (interactive "p")
   (when (process-live-p startup/virtualbox-process)
     (shell-command-to-string (format "vboxmanage controlvm %s savestate"
-                                     startup/virtualbox-uuid)))
-  (when (and arg (+workspace-exists-p startup/virtualbox-workspace))
-    (when (string= startup/virtualbox-workspace
-                   (+workspace-current-name))
-      (+workspace/other))
-    (+workspace-delete startup/virtualbox-workspace)))
+                                     startup/virtualbox-uuid))))
 
 (defun startup/restart-virtualbox (&optional arg)
   (interactive "p")
   (startup/kill-virtualbox)
   (startup/start-virtualbox arg))
 
-(defun startup/manage-virtualbox ()
-  (when (and (stringp exwm-class-name)
-             (string-match-p "VirtualBox" exwm-class-name))
-    (hide-mode-line-mode +1)
-    (unless (string= (+workspace-current-name) startup/virtualbox-workspace)
-      (previous-buffer))
-    (unless (+workspace-exists-p startup/virtualbox-workspace)
-      (+workspace-new startup/virtualbox-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/virtualbox-workspace)))))
-
 (defun startup/select-virtualbox (&optional no-vm-p)
   (interactive "P")
   (unless (process-live-p startup/virtualbox-process)
     (startup/start-virtualbox nil no-vm-p))
-  (+workspace-switch startup/virtualbox-workspace t)
-  (setq startup/virtualbox--timer
-        (run-at-time 1 0.05
-                     (lambda ()
-                       (if (and (stringp exwm-class-name)
-                                (string-match-p "VirtualBox" exwm-class-name))
-                           (cancel-timer startup/virtualbox--timer)
-                         (+workspace-switch-to-exwm-buffer-maybe)))))
-  (defadvice! tmp/cancel-discord-timer-a (&rest _)
-    :before #'+workspace-switch
-    (cancel-timer startup/virtualbox--timer)
-    (advice-remove #'+workspace-switch #'tmp/cancel-discord-timer-a)))
+  (+workspace-switch startup/virtualbox-workspace t))
 
 (when (modulep! :completion vertico)
   ;; Do not grab input from Consult.
@@ -84,7 +57,6 @@
     "v r" "Restart VirtualBox"
     "v s" "Select VirtualBox"
     "v x" "Kill VirtualBox"))
-(add-hook 'exwm-manage-finish-hook #'startup/manage-virtualbox)
 
 ;; (if (process-live-p startup/virtualbox-process)
 ;;     (startup/restart-virtualbox)
