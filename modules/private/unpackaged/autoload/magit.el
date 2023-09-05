@@ -32,7 +32,8 @@ non-nil `magit-status-goto-file-position'."
     (ignore-errors (save-buffer)))
   (let ((magit-status-goto-file-position t))
     (call-interactively #'magit-status))
-  (delete-other-windows)
+  (let ((ignore-window-parameters t))
+    (delete-other-windows))
   (recenter))
 
 ;;;###autoload
