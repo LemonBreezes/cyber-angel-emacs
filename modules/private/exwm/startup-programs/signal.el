@@ -10,39 +10,23 @@
           (start-process "signal"
                          " *startup/signal*"
                          startup/signal-executable
-                         (if (eq (user-uid) 0) "--no-sandbox" "")))
-    (when arg (+workspace-switch startup/signal-workspace t))))
+                         (if (eq (user-uid) 0) "--no-sandbox" "")))))
 
 (defun startup/kill-signal (&optional arg)
   (interactive "p")
   (when (process-live-p startup/signal-process)
-    (kill-process startup/signal-process))
-  (when (and arg (+workspace-exists-p startup/signal-workspace))
-    (when (string= startup/signal-workspace
-                   (+workspace-current-name))
-      (+workspace/other))
-    (+workspace-delete startup/signal-workspace)))
+    (kill-process startup/signal-process)))
 
 (defun startup/restart-signal (&optional arg)
   (interactive "p")
   (startup/kill-signal)
   (startup/start-signal arg))
 
-(defun startup/manage-signal ()
-  (when (and (stringp exwm-class-name)
-             (string-match-p "signal" exwm-class-name))
-    (unless (string= (+workspace-current-name) startup/signal-workspace)
-      (previous-buffer))
-    (unless (+workspace-exists-p startup/signal-workspace)
-      (+workspace-new startup/signal-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/signal-workspace)))))
-
 (defun startup/select-signal ()
   (interactive)
   (unless (process-live-p startup/signal-process)
     (startup/start-signal))
-  (+workspace-switch startup/signal-workspace t)
-  (+workspace-switch-to-exwm-buffer-maybe))
+  (+workspace-switch startup/signal-workspace t))
 
 (map! :map +startup-applications-map
       :prefix "s"
@@ -55,7 +39,6 @@
     "s r" "Restart Signal"
     "s s" "Select Signal"
     "s x" "Kill Signal"))
-(add-hook 'exwm-manage-finish-hook #'startup/manage-signal)
 
 ;; (if (process-live-p startup/signal-process)
 ;;     (startup/restart-signal)
