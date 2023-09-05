@@ -406,7 +406,8 @@
         "d" #'+dunnet)
   :config
   (when (modulep! :editor evil)
-    (evil-set-initial-state #'dun-mode 'insert))
+    (after! evil
+      (evil-set-initial-state #'dun-mode 'insert)))
   (map! :map dun-mode-map
         "C-c C-k" #'+dunnet-quit
         :n "q" #'+dunnet-quit))
@@ -422,7 +423,8 @@
   (when (modulep! :private corfu)
     (add-to-list 'corfu-excluded-modes #'speed-type-mode))
   (when (modulep! :editor evil)
-    (evil-set-initial-state #'speed-type-mode 'insert))
+    (after! evil
+      (evil-set-initial-state #'speed-type-mode 'insert)))
   (map! :map speed-type--completed-keymap
         "q" #'+speed-type-quit
         "r" #'speed-type--replay
