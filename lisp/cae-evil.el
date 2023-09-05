@@ -106,6 +106,9 @@
                         (not (>= (point) eshell-last-output-end)))
                    (goto-char (point-max))))))
 
+(after! comint
+  (map! :map comint-mode-map
+        :i "C-d" #'cae-comint-delchar-or-maybe-eof))
 (after! evil-collection
   (setq evil-collection-key-blacklist
         (append (when (modulep! :config default)
