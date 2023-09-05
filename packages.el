@@ -75,6 +75,7 @@
 (package! smart-semicolon)
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
+(package! auto-sudoedit)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
