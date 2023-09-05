@@ -244,6 +244,8 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^\\*Shortdoc .*" :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0)
+        ("^\\*ielm\\*$" :size cae-popup-resize-help-buffer
+         :side right :ttl nil :select t :quit t :ttl 0)
         ("^\\*devdocs\\*$" :width 122
          :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side bottom :select t :quit t
