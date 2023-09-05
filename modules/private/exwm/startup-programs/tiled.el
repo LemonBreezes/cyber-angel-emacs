@@ -9,32 +9,17 @@
     (setq startup/tiled-process
           (start-process "tiled"
                          " *startup/tiled*"
-                         startup/tiled-executable))
-    (when arg (+workspace-switch startup/tiled-workspace t))))
+                         startup/tiled-executable))))
 
 (defun startup/kill-tiled (&optional arg)
   (interactive "p")
   (when (process-live-p startup/tiled-process)
-    (kill-process startup/tiled-process))
-  (when (and arg (+workspace-exists-p startup/tiled-workspace))
-    (when (string= startup/tiled-workspace
-                   (+workspace-current-name))
-      (+workspace/other))
-    (+workspace-delete startup/tiled-workspace)))
+    (kill-process startup/tiled-process)))
 
 (defun startup/restart-tiled (&optional arg)
   (interactive "p")
   (startup/kill-tiled)
   (startup/start-tiled arg))
-
-(defun startup/manage-tiled ()
-  (when (and (stringp exwm-class-name)
-             (string-match-p "tiled" exwm-class-name))
-    (unless (string= (+workspace-current-name) startup/tiled-workspace)
-      (previous-buffer))
-    (unless (+workspace-exists-p startup/tiled-workspace)
-      (+workspace-new startup/tiled-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/tiled-workspace)))))
 
 (defun startup/select-tiled ()
   (interactive)
