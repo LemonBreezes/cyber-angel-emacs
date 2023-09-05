@@ -125,7 +125,7 @@
 (load! "eshell-doc-doom-pr-6867")
 
 ;;(load! "ha-eshell")
-(load! "ambrevar-global-eshell-history")
+;;(load! "ambrevar-global-eshell-history")
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private eshell) (remove-hook 'write-file-functions #'eval-buffer t))
