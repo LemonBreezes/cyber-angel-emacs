@@ -2,12 +2,6 @@
 
 (defvar startup/teams-workspace "Teams")
 
-(defun startup/manage-teams ()
-  (when (and (stringp exwm-class-name)
-             (string-match-p "teams" exwm-class-name))
-    (unless (string= (+workspace-current-name) startup/teams-workspace)
-      (previous-buffer))))
-
 (defun startup/kill-teams (&optional arg)
   (interactive "p")
   (when (and arg (+workspace-exists-p startup/teams-workspace))
