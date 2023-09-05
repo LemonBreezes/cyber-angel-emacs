@@ -3,6 +3,7 @@
 (defvar startup/discord-process nil)
 (defvar startup/discord-executable (executable-find "discord"))
 (defvar startup/discord--timer nil)
+(defvar startup/discord-workspace "Discord")
 
 (define-minor-mode startup/discord-mode
   "Minor mode for Discord."
