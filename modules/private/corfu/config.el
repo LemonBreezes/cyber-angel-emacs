@@ -4,6 +4,7 @@
 ;;; Packages
 (use-package! corfu
   :hook (doom-first-buffer . global-corfu-mode)
+  :hook (org-mode . corfu-mode)
   :init
   ;; Auto-completion settings, must be set before calling `global-corfu-mode'.
   ;; Due to lazy-loading, setting them in config.el works too.
@@ -30,27 +31,24 @@
         ;; In the case of +tng, TAB should be smart regarding completion;
         ;; However, it should otherwise behave like normal, whatever normal was.
         tab-always-indent (if (modulep! +tng) 'complete tab-always-indent))
-  (when (modulep! :tools lsp)
-    (advice-add #'lsp-completion-at-point :around #'cape-wrap-noninterruptible))
   (when (modulep! +orderless)
     (cond ((modulep! :tools lsp +eglot) (add-to-list 'completion-category-overrides '(eglot (styles orderless))))
-          ((modulep! :tools lsp)
-           (add-hook 'lsp-completion-mode-hook
-                     (defun doom--use-orderless-lsp-capf ()
-                       (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-                             '(orderless)))))))
+          ((modulep! :tools lsp) (add-hook 'lsp-completion-mode-hook
+                                           (defun doom--use-orderless-lsp-capf ()
+                                             (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+                                                   '(orderless)))))))
   (map! (:unless (modulep! +tng)
-         "C-SPC" #'completion-at-point)
+          "C-SPC" #'completion-at-point)
         (:map 'corfu-map
-         (:when (modulep! +orderless)
-          "C-SPC" #'corfu-insert-separator)
-         (:when (modulep! +tng)
-          [tab] #'corfu-next
-          [backtab] #'corfu-previous
-          "TAB" #'corfu-next
-          "S-TAB" #'corfu-previous)))
+              (:when (modulep! +orderless)
+                "C-SPC" #'corfu-insert-separator)
+              (:when (modulep! +tng)
+                [tab] #'corfu-next
+                [backtab] #'corfu-previous
+                "TAB" #'corfu-next
+                "S-TAB" #'corfu-previous)))
 
-  (when (modulep! :editor evil)
+  (after! evil-collection-corfu
     (evil-collection-define-key 'insert 'corfu-map
       (kbd "RET") #'corfu-insert
       [return] #'corfu-insert))
@@ -66,14 +64,21 @@
     (map! :map 'corfu-map "s-<down>" #'corfu-move-to-minibuffer
           (:when (modulep! :editor evil) "s-j" #'corfu-move-to-minibuffer))))
 
+(defmacro +add-capf! (capf)
+  "Create sexp to add CAPF to the list of CAPFs."
+  `(add-to-list 'completion-at-point-functions ,capf))
 (use-package! cape
   :after corfu
   :config
-  (add-hook 'prog-mode-hook
-            (lambda () (add-to-list 'completion-at-point-functions #'cape-file))))
+  (add-hook! prog-mode (+add-capf! #'cape-file))
+  (add-hook! (org-mode markdown-mode) (+add-capf! #'cape-elisp-block))
+  (advice-add #'lsp-completion-at-point :around #'cape-wrap-noninterruptible))
 
-(use-package! yasnippet-capf
-  :defer t :commands yasnippet-capf)
+;;(use-package! yasnippet-capf
+;;  :after corfu
+;;  :config
+;;  (add-hook 'yas-minor-mode-hook
+;;            (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
 
 (use-package! svg-lib
   :after kind-icon)
@@ -110,10 +115,10 @@ This fixes the cropping due to scaling issues."
     :around #'kind-icon-formatted
     (let* ((text (funcall orig kind))
            (image (get-text-property 1 'display text)))
-      (when (imagep image)
-          (setf (image-property image :scale) 1)
-          (put-text-property 0 1 'display '(space :width (0)) text)
-          (put-text-property 2 3 'display '(space :width (0)) text))
+      (when (eq (car-safe image) 'image)
+        (setf (image-property image :scale) 1)
+        (put-text-property 0 1 'display '(space :width (0)) text)
+        (put-text-property 2 3 'display '(space :width (0)) text))
       text)))
 
 (use-package! corfu-terminal
