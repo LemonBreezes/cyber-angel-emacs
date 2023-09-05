@@ -28,7 +28,8 @@
 (defun +mpc (&optional arg)
   (interactive "P")
   (setq +mpc--old-wconf (current-window-configuration))
-  (delete-other-windows)
+  (let ((ignore-window-parameters t))
+    (delete-other-windows))
   (if (and +mpc--wconf
            (not (cl-find-if-not #'buffer-live-p
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
