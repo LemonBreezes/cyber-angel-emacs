@@ -108,6 +108,8 @@
 
 (after! evil-collection
   (setq evil-collection-key-blacklist '())
+  (autoload #'evil-collection-unimpaired-paste-below "evil-collection-unimpaired" nil t)
+  (autoload #'evil-collection-unimpaired-paste-above "evil-collection-unimpaired" nil t)
   (map! :n "]p" #'evil-collection-unimpaired-paste-below
         :n "[p" #'evil-collection-unimpaired-paste-above))
 
