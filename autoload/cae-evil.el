@@ -71,7 +71,7 @@
   (if (and (derived-mode-p 'comint-mode)
            (eobp)
            (not (bolp)))
-      (progn (comint-delchar-or-maybe-eof)
+      (progn (comint-send-eof)
              (call-interactively #'kill-current-buffer)
              (call-interactively #'evil-window-mru))
     (lookup-key evil-insert-state-map [delete])))
