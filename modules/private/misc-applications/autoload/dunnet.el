@@ -8,7 +8,8 @@
     (if (modulep! :ui workspaces)
         (+workspace-switch +dunnet-workspace-name t)
       (setq +dunnet--old-wconf (current-window-configuration))
-      (delete-other-windows)
+      (let ((ignore-window-parameters t))
+        (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'dunnet))
 
