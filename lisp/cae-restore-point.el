@@ -24,7 +24,9 @@
              scroll-other-window-down
              scroll-up scroll-down
              scroll-up-command
-             rp/point-ring-nav-previous)
+             rp/point-ring-nav-previous
+             lispy-forward
+             lispy-backward)
            '(symbol-overlay-switch-forward
              symbol-overlay-switch-backward
              symbol-overlay-jump-next
@@ -174,8 +176,7 @@
                   lispyville-backward-atom-begin
                   lispyville-forward-atom-begin
                   lispyville-backward-atom-end
-                  lispyville-forward-atom-end
-                  ))))
+                  lispyville-forward-atom-end))))
     (advice-add #'rp/restore-point-position :after #'deactivate-mark)
     ;; Restore point in the minibuffer.
     (defun cae-restore-point-h ()
