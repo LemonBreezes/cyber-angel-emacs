@@ -38,7 +38,8 @@ Can be negative.")
           "C-j" #'helm-next-line
           "C-k" #'helm-previous-line
           "C-S-j" #'helm-next-source
-          "C-S-k" #'helm-previous-source)
+          "C-S-k" #'helm-previous-source
+          "C-w" #'doom/delete-backward-word)
          "C-u" #'helm-delete-minibuffer-contents
          "C-s" #'helm-minibuffer-history
          ;; Swap TAB and C-z
