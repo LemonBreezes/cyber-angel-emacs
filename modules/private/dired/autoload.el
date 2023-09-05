@@ -71,7 +71,6 @@
 
 ;;;###autoload
 (defun cae-dired-consult-jump-a (oldfun pos)
-  (+log pos)
   (when (consp pos) (setq pos (car pos)))
   (when (and (markerp pos)
              (derived-mode-p 'dired-mode))
