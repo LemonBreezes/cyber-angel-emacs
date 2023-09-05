@@ -2,7 +2,6 @@
 
 (defvar startup/discord-process nil)
 (defvar startup/discord-executable (executable-find "discord"))
-(defvar startup/discord-workspace "Discord")
 (defvar startup/discord--timer nil)
 
 (define-minor-mode startup/discord-mode
@@ -22,20 +21,12 @@
           (start-process "discord"
                          " *startup/discord*"
                          startup/discord-executable
-                         (if (eq (user-uid) 0) "--no-sandbox" "")))
-    (when arg (+workspace-switch startup/discord-workspace t)
-          (set-persp-parameter 'dont-save-to-file t
-                               (persp-get-by-name startup/discord-workspace)))))
+                         (if (eq (user-uid) 0) "--no-sandbox" "")))))
 
 (defun startup/kill-discord (&optional arg)
   (interactive "p")
   (when (process-live-p startup/discord-process)
-    (kill-process startup/discord-process))
-  (when (and arg (+workspace-exists-p startup/discord-workspace))
-    (when (string= startup/discord-workspace
-                   (+workspace-current-name))
-      (+workspace/other))
-    (+workspace-delete startup/discord-workspace)))
+    (kill-process startup/discord-process)))
 
 (defun startup/restart-discord (&optional arg)
   (interactive "p")
@@ -45,35 +36,12 @@
 (defun startup/manage-discord ()
   (when (and (stringp exwm-class-name)
              (string-match-p "discord" exwm-class-name))
-    (startup/discord-mode +1)
-    (unless (+workspace-exists-p startup/discord-workspace)
-      (+workspace-new startup/discord-workspace)
-      (set-persp-parameter 'dont-save-to-file t (persp-get-by-name startup/discord-workspace))))
-  (when (persp-get-by-name startup/discord-workspace)
-    (persp-add-buffer
-     (cl-remove-if-not
-      (lambda (buf)
-        (string= "discord" (buffer-local-value 'exwm-class-name buf)))
-      (buffer-list))
-     (persp-get-by-name startup/discord-workspace))))
+    (startup/discord-mode +1)))
 
 (defun startup/select-discord ()
   (interactive)
   (unless (process-live-p startup/discord-process)
-    (startup/restart-discord))
-  (+workspace-switch startup/discord-workspace t)
-  (set-persp-parameter 'dont-save-to-file t
-                       (persp-get-by-name startup/discord-workspace))
-  (setq startup/discord--timer
-        (run-at-time 1 0.05
-                     (lambda ()
-                       (if (string= "discord" exwm-class-name)
-                           (cancel-timer startup/discord--timer)
-                         (+workspace-switch-to-exwm-buffer-maybe)))))
-  (defadvice! tmp/cancel-discord-timer-a (&rest _)
-    :before #'+workspace-switch
-    (cancel-timer startup/discord--timer)
-    (advice-remove #'+workspace/other #'tmp/cancel-discord-timer-a)))
+    (startup/restart-discord)))
 
 ;; HACK Prevent an error that happens when there is no Discord process.
 (defadvice! startup/discord-elcord-a ()
