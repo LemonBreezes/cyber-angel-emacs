@@ -75,7 +75,7 @@
   (advice-add #'lsp-completion-at-point :around #'cape-wrap-noninterruptible))
 
 (use-package! yasnippet-capf
-  :defer t
+  :after corfu
   :config
   (add-hook 'yas-minor-mode-hook
             (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
