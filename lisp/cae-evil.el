@@ -125,7 +125,8 @@
         :m "]6" #'cae-unimpaired-b64-decode))
 (after! evil-org
   (setq evil-org-key-theme '(navigation insert textobjects
-                             additional calendar shift todo heading)))
+                             additional calendar shift todo heading))
+  (evil-org-set-key-theme))
 
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
