@@ -82,7 +82,6 @@
                        pos)
                       ((buffer-file-name
                         (marker-buffer pos))))))
-      (progn
         ;; Check if file is in a different directory and if so change to it
         (when-let ((dir (file-name-directory file)))
           (unless (file-equal-p dir default-directory)
@@ -92,6 +91,6 @@
           ;; Copied from `dirvish-find-entry-a'
           (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
             (if fn (funcall fn) (dirvish-kill dv)))
-          (funcall oldfun pos)))))
+          (funcall oldfun pos))))
   ;; If not in Dired mode, find the file as usual
   (funcall oldfun pos))
