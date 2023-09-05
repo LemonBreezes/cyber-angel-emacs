@@ -17,7 +17,8 @@
     (if (modulep! :ui workspaces)
         (+workspace-switch +fireplace-workspace-name t)
       (setq +fireplace--old-wconf (current-window-configuration))
-      (delete-other-windows)
+      (let ((ignore-window-parameters t))
+        (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'fireplace))
 
