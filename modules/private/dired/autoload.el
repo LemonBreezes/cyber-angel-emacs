@@ -71,9 +71,7 @@
 
 ;;;###autoload
 (defun cae-dired-consult-jump-a (oldfun pos)
-  (when (consp pos) (setq pos (car pos)))
-  (when (and (markerp pos)
-             (derived-mode-p 'dired-mode))
+  (when (derived-mode-p 'dired-mode)
     (when-let ((file
                 (cond ((and (consp pos)
                             (markerp (car pos)))
@@ -82,15 +80,15 @@
                        pos)
                       ((buffer-file-name
                         (marker-buffer pos))))))
-        ;; Check if file is in a different directory and if so change to it
-        (when-let ((dir (file-name-directory file)))
-          (unless (file-equal-p dir default-directory)
-            (funcall oldfun dir)))
-        ;; If not a directory, kill Dirvish and find the file
-        (unless (file-directory-p file)
-          ;; Copied from `dirvish-find-entry-a'
-          (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-            (if fn (funcall fn) (dirvish-kill dv)))
-          (funcall oldfun pos))))
+      ;; Check if file is in a different directory and if so change to it
+      (when-let ((dir (file-name-directory file)))
+        (unless (file-equal-p dir default-directory)
+          (funcall oldfun dir)))
+      ;; If not a directory, kill Dirvish and find the file
+      (unless (file-directory-p file)
+        ;; Copied from `dirvish-find-entry-a'
+        (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+          (if fn (funcall fn) (dirvish-kill dv)))
+        (funcall oldfun pos))))
   ;; If not in Dired mode, find the file as usual
   (funcall oldfun pos))
