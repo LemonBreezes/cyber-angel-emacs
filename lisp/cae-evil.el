@@ -106,6 +106,9 @@
                         (not (>= (point) eshell-last-output-end)))
                    (goto-char (point-max))))))
 
+(after! evil-collection
+  (setq evil-collection-key-blacklist '()))
+
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
 (when (modulep! :private corfu)
