@@ -36,7 +36,7 @@
                   (when-let
                       ((class (buffer-local-value 'exwm-class-name buf)))
                     (string-match-p startup/chromium-browser class)))
-                (doom-buffer-list)))
+                (buffer-list)))
     (startup/restart-chromium))
   (+workspace-switch startup/chromium-workspace t)
   (+workspace/display))
