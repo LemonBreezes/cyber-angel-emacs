@@ -110,6 +110,8 @@
   (setq evil-collection-key-blacklist '())
   (map! :n "]p" #'cae-unimpaired-paste-below
         :n "[p" #'cae-unimpaired-paste-above
+        :n "] DEL" #'+evil/insert-newline-below
+        :n "[ DEL" #'+evil/insert-newline-above
         :m "[6" #'cae-unimpaired-b64-encode
         :m "]6" #'cae-unimpaired-b64-decode))
 
