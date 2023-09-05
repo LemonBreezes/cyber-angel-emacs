@@ -64,3 +64,11 @@
     (indent-to indent)
     (evil-paste-after 1)
     (move-to-column column)))
+
+(defun cae-comint-delchar-or-maybe-eof ()
+  (interactive)
+  (if (and (derived-mode-p 'comint-mode)
+           (eobp)
+           (not (bolp)))
+      (comint-delchar-or-maybe-eof)
+    (lookup-key evil-insert-state-map [delete])))
