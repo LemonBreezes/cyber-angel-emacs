@@ -6,37 +6,37 @@
 ;; But we implement a capf because getting annotations from fish is
 ;; difficult if we stick with pcomplete. The capf is non-exclusive
 ;; so fallback to pcomplete machinery happens if there are no candidates.
-;;(defun +eshell-fish-completion-list (raw-prompt)
-;;  "Return list of completion candidates for RAW-PROMPT."
-;;  (mapcar (lambda (e) (let ((res (split-string e "\t")))
-;;                        (propertize (car res) 'fish-annotation (cadr res))))
-;;          (split-string
-;;           (fish-completion--list-completions-with-desc raw-prompt)
-;;           "\n" t)))
-;;
-;;(defun +eshell-fish-capf ()
-;;  "A a capf for fish-completion."
-;;  (when-let (((not (file-remote-p default-directory)))
-;;             (args (ignore-errors (eshell-complete-parse-arguments)))
-;;             (table (+eshell-fish-completion-list
-;;                     (buffer-substring (or (cadr args) (point)) (point))))
-;;             ((not (file-exists-p (car table)))))
-;;    (list (car (last args)) (point) table
-;;          :exclusive 'no
-;;          :annotation-function #'+eshell-fish-completion-annotate
-;;          :exit-function (lambda (&rest _) (insert " ")))))
-;;
-;;(defun +eshell-fish-completion-annotate (cand)
-;;  (when-let* ((ann (get-text-property 0 'fish-annotation cand)))
-;;    (concat (propertize " " 'display '(space :align-to center)) ann)))
-;;
-;;(defun +eshell-use-annotated-completions-h ()
-;;  "Use annotaed fish completions."
-;;  (if fish-completion-mode
-;;      (add-hook 'completion-at-point-functions #'+eshell-fish-capf nil t)
-;;    (remove-hook 'completion-at-point-functions #'+eshell-fish-capf t)))
-;;
-;;(add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
+(defun +eshell-fish-completion-list (raw-prompt)
+  "Return list of completion candidates for RAW-PROMPT."
+  (mapcar (lambda (e) (let ((res (split-string e "\t")))
+                        (propertize (car res) 'fish-annotation (cadr res))))
+          (split-string
+           (fish-completion--list-completions-with-desc raw-prompt)
+           "\n" t)))
+
+(defun +eshell-fish-capf ()
+  "A a capf for fish-completion."
+  (when-let (((not (file-remote-p default-directory)))
+             (args (ignore-errors (eshell-complete-parse-arguments)))
+             (table (+eshell-fish-completion-list
+                     (buffer-substring (or (cadr args) (point)) (point))))
+             ((not (file-exists-p (car table)))))
+    (list (car (last args)) (point) table
+          :exclusive 'no
+          :annotation-function #'+eshell-fish-completion-annotate
+          :exit-function (lambda (&rest _) (insert " ")))))
+
+(defun +eshell-fish-completion-annotate (cand)
+  (when-let* ((ann (get-text-property 0 'fish-annotation cand)))
+    (concat (propertize " " 'display '(space :align-to center)) ann)))
+
+(defun +eshell-use-annotated-completions-h ()
+  "Use annotaed fish completions."
+  (if fish-completion-mode
+      (add-hook 'completion-at-point-functions #'+eshell-fish-capf nil t)
+    (remove-hook 'completion-at-point-functions #'+eshell-fish-capf t)))
+
+(add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
 
 ;;; Eshell Syntax Highlighting fix
 
