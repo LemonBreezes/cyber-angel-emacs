@@ -74,7 +74,14 @@
   (when (consp pos) (setq pos (car pos)))
   (when (and (markerp pos)
              (derived-mode-p 'dired-mode))
-    (when-let ((file (buffer-file-name (marker-buffer pos))))
+    (when-let ((file
+                (cond ((and (consp pos)
+                            (markerp (car pos)))
+                       (buffer-file-name (marker-buffer (car pos))))
+                      ((stringp pos)
+                       pos)
+                      ((buffer-file-name
+                        (marker-buffer pos))))))
       (progn
         ;; Check if file is in a different directory and if so change to it
         (when-let ((dir (file-name-directory file)))
