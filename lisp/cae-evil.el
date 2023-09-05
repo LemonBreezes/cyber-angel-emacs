@@ -111,7 +111,9 @@
         (append (when (modulep! :config default)
                   (list doom-leader-key doom-localleader-key
                         doom-leader-alt-key))
-                '("<escape>" "[" "]" "gz")))
+                (when (modulep! :editor multiple-cursors)
+                  '("gz"))
+                '("<escape>" "[" "]")))
   (map! :n "]p" #'cae-unimpaired-paste-below
         :n "[p" #'cae-unimpaired-paste-above
         :n "] DEL" #'+evil/insert-newline-below
