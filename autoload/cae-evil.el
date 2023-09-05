@@ -21,21 +21,21 @@
     (message "No %s normal state bindings are defined." major-mode)))
 
 ;;;###autoload (autoload 'evil-collection-unimpaired-b64-encode "autoload/cae-evil" nil t)
-(evil-define-operator evil-collection-unimpaired-b64-encode (count &optional beg end)
+(evil-define-operator cae-unimpaired-b64-encode (count &optional beg end)
   "Encode a base64 string."
   (interactive "<c><r>")
   (ignore count)
   (evil-collection-unimpaired--encode beg end #'base64-encode-string))
 
 ;;;###autoload (autoload 'evil-collection-unimpaired-b64-decode "autoload/cae-evil" nil t)
-(evil-define-operator evil-collection-unimpaired-b64-decode (count &optional beg end)
+(evil-define-operator cae-unimpaired-b64-decode (count &optional beg end)
   "Decode a base64 string."
   (interactive "<c><r>")
   (ignore count)
   (evil-collection-unimpaired--encode beg end #'base64-decode-string))
 
 ;;;###autoload
-(defun evil-collection-unimpaired-paste-above ()
+(defun cae-unimpaired-paste-above ()
   "Paste above current line with preserving indentation."
   (interactive)
   (let ((indent (current-indentation))
@@ -46,7 +46,7 @@
     (move-to-column column)))
 
 ;;;###autoload
-(defun evil-collection-unimpaired-paste-below ()
+(defun cae-unimpaired-paste-below ()
   "Paste below current line with preserving indentation."
   (interactive)
   (let ((indent (current-indentation))
