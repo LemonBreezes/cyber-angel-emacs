@@ -41,9 +41,11 @@
 
 (use-package! org-modern
   :unless (cae-tty-disable-unicode-p)
-  :defer t :after org
+  :defer t :init
+  (after! org
+    (require 'org-modern)
+    (global-org-modern-mode +1))
   :config
-  (global-org-modern-mode +1)
   (setq org-modern-todo nil))
 
 (use-package! org-tidy
