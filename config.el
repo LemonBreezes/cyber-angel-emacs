@@ -810,8 +810,8 @@
     :config
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
-                             '((eri/mark-inside-org-table-cell
-                                eri/mark-outside-org-table-cell)))
+      '((eri/mark-inside-org-table-cell
+         eri/mark-outside-org-table-cell)))
     (setq eri/try-expand-list
           '((er/mark-symbol
              er/mark-symbol-with-prefix
