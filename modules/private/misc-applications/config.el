@@ -613,6 +613,8 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPV"))
   :config
+  (map! :map +misc-applications-music-map
+        "m" empv-map)
   (map! :map empv-map
         "P" #'empv-youtube-playlist
         "T" #'empv-youtube-tabulated
