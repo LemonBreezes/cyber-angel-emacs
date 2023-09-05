@@ -1,12 +1,5 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-;;(defun cae-modeline-buffer-name ()
-;;  (propertize (or (and (buffer-local-value 'buffer-file-name (current-buffer))
-;;                       (breadcrumb-project-crumbs))
-;;                  (buffer-name))
-;;              'face '(:inherit variable-pitch
-;;                      :weight bold)))
-
 (add-hook! 'doom-first-file-hook
   (setq-default mode-line-format
                 (cl-subst '(:eval (breadcrumb-project-crumbs))
