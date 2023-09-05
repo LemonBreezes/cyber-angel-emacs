@@ -72,6 +72,6 @@
            (eobp)
            (not (bolp)))
       (progn (call-interactively #'comint-delchar-or-maybe-eof)
-             (kill-current-buffer)
-             (evil-window-mru))
+             (call-interactively #'kill-current-buffer)
+             (call-interactively #'evil-window-mru))
     (lookup-key evil-insert-state-map [delete])))
