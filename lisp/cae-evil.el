@@ -107,7 +107,7 @@
                    (goto-char (point-max))))))
 
 (after! evil-collection
-  (setq evil-collection-key-blacklist '("<escape>"))
+  (setq evil-collection-key-blacklist '("<escape>" "[" "]"))
   (map! :n "]p" #'cae-unimpaired-paste-below
         :n "[p" #'cae-unimpaired-paste-above
         :n "] DEL" #'+evil/insert-newline-below
