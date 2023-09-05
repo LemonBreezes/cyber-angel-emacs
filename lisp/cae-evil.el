@@ -123,6 +123,7 @@
         :n "[ DEL" #'+evil/insert-newline-above
         :m "[6" #'cae-unimpaired-b64-encode
         :m "]6" #'cae-unimpaired-b64-decode))
+;; This isn't working for me.
 (setq evil-org-key-theme '(navigation insert textobjects additional calendar
                            shift todo heading))
 
