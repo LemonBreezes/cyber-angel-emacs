@@ -65,6 +65,7 @@
     (evil-paste-after 1)
     (move-to-column column)))
 
+;;;###autoload
 (defun cae-comint-delchar-or-maybe-eof ()
   (interactive)
   (if (and (derived-mode-p 'comint-mode)
