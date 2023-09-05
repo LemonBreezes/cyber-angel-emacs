@@ -697,7 +697,7 @@
           avy-keys (cae-keyboard-remap
                     '(?a ?s ?d ?f ?g
                       ?h ?j ?k ?l ?\;))
-          ;;avy-background (not (cae-tty-disable-unicode-p))
+          avy-background nil
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?z . avy-action-zap-to-char)
