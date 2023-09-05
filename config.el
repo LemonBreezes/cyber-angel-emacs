@@ -520,7 +520,13 @@
     (advice-add #'dirvish-data-for-dir :around
                 (cae-defun cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
                   (funcall oldfun (tramp-file-local-name dir) buffer setup)))
-    (auto-sudoedit-mode +1)))
+    (auto-sudoedit-mode +1))
+
+  (use-package! font-lock-studio
+    :defer t :config
+    (when (modulep! :editor evil)
+      (after! evil
+        (evil-set-initial-state 'font-lock-studio-mode 'emacs)))))
 
 
 ;;; Editor
