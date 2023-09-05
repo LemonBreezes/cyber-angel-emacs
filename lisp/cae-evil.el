@@ -127,7 +127,7 @@
 (setq evil-org-key-theme '(navigation insert textobjects additional calendar
                            shift todo heading))
 (after! evil
-  (map! :i "C-h" #'doom/backward-kill-to-bol-and-indent
+  (map! :i "C-h" #'doom/backward-to-bol-or-indent
         :i "C-l" #'doom/forward-to-last-non-comment-or-eol))
 
 (after! help
