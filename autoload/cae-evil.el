@@ -71,5 +71,5 @@
   (if (and (derived-mode-p 'comint-mode)
            (eobp)
            (not (bolp)))
-      (comint-delchar-or-maybe-eof)
+      (call-interactively #'comint-delchar-or-maybe-eof)
     (lookup-key evil-insert-state-map [delete])))
