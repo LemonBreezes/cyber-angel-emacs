@@ -38,7 +38,6 @@
     "g r" "Restart GIMP"
     "g s" "Select GIMP"
     "g x" "Kill GIMP"))
-(add-hook 'exwm-manage-finish-hook #'startup/manage-gimp)
 
 ;; (if (process-live-p startup/gimp-process)
 ;;     (startup/restart-gimp)
