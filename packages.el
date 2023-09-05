@@ -13,12 +13,6 @@
                    flymake-popon
                    elfeed-goodies
                    highlight-numbers)
-(when (and (modulep! :editor evil +everywhere)
-           (modulep! :lang org))
-  (package! evil-org :recipe (:host github :repo "Somelauw/evil-org-mode")))
-(when (modulep! :private misc-applications)
-  (package! consult-gh :recipe
-    (:host github :repo "LemonBreezes/consult-gh" :branch "fix-symbolp-error-from-missing-quote")))
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 

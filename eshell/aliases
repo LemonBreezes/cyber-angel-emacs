@@ -58,7 +58,7 @@ alias git  git --no-pager $*
 
 alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom $*
 alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
-alias update-emacs smart-live-rebuild && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync
+alias update-emacs sudo smart-live-rebuild && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync
 alias update-emacs2 cd ~/.config/emacs && git stash && doom upgrade && git stash pop && doom sync
 alias update-gentoo sudo emaint -a sync && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
 alias update-gentoo2 sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
