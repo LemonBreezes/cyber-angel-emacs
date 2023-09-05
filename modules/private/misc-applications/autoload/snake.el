@@ -19,7 +19,8 @@
     (if (modulep! :ui workspaces)
         (+workspace-switch +snake-workspace-name t)
       (setq +snake--old-wconf (current-window-configuration))
-      (delete-other-windows)
+      (let ((ignore-window-parameters t))
+        (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
   (let* ((saves-buf (find-file-noselect (expand-file-name "snake-scores" shared-game-score-directory)))
          (highest-score (with-current-buffer saves-buf
