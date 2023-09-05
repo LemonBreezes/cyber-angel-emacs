@@ -8,6 +8,7 @@
 (defvar startup/chromium-browser (if (or (executable-find "chromium-bin")
                            (executable-find "chromium"))
                      "chromium" "chrome"))
+(defvar startup/chromium-workspace "Chrome")
 
 (defun startup/start-chromium (&optional arg)
   (when startup/chromium-executable
@@ -34,9 +35,11 @@
                 (lambda (buf)
                   (when-let
                       ((class (buffer-local-value 'exwm-class-name buf)))
-                    (string-match-p "chromium" class)))
+                    (string-match-p startup/chromium-browser class)))
                 (doom-buffer-list)))
-    (startup/restart-chromium)))
+    (startup/restart-chromium))
+  (+workspace-switch startup/chromium-workspace t)
+  (+workspace/display))
 
 (map! :map +startup-applications-map
       :prefix "c"
