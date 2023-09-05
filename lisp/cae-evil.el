@@ -107,7 +107,9 @@
                    (goto-char (point-max))))))
 
 (after! evil-collection
-  (setq evil-collection-key-blacklist '()))
+  (setq evil-collection-key-blacklist '())
+  (map! :n "]p" #'evil-collection-unimpaired-paste-below
+        :n "[p" #'evil-collection-unimpaired-paste-above))
 
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
