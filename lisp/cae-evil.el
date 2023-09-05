@@ -126,6 +126,8 @@
 ;; This isn't working for me.
 (setq evil-org-key-theme '(navigation insert textobjects additional calendar
                            shift todo heading))
+
+;; This is if we want `C-h' and `C-l' everywhere.
 (after! evil
   (map! :i "C-h" #'doom/backward-to-bol-or-indent
         :i "C-l" #'doom/forward-to-last-non-comment-or-eol))
