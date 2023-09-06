@@ -268,3 +268,7 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
+
+(after! org
+  (map! :map org-mode-map
+        "M-RET" #'org-insert-heading))
