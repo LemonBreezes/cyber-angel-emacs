@@ -1,7 +1,7 @@
 ;;; private/exwm/autoload/evil.el -*- lexical-binding: t; -*-
 
 (defvar +exwm-refocus-application--message "")
-(defvar +exwm-refocus-application--delay (* exwm-input--update-focus-interval 3))
+(defvar +exwm-refocus-application--delays '(0.015 0.03))
 (defvar +exwm-refocus-application--timer nil)
 (defvar +exwm-refocus-application--last-time 0)
 (defvar +exwm-refocus-application--last-state nil)
@@ -13,7 +13,7 @@
              (not (memq +exwm-refocus-application--timer
                         timer-list))
              (> (float-time) (+ +exwm-refocus-application--last-time +exwm-refocus-application--delay)))
-    (run-at-time (/ +exwm-refocus-application--delay 2)
+    (run-at-time (nth 0 +exwm-refocus-application--delays)
                  nil #'+exwm-refocus-application--timer)))
 
 (defun +exwm-refocus-application--timer ()
@@ -26,7 +26,7 @@
 
 (defun +exwm-refocus-application-minibuffer-quit-timer ()
   (setq +exwm-refocus-application--timer
-        (run-at-time +exwm-refocus-application--delay nil
+        (run-at-time (nth 1 +exwm-refocus-application--delays) nil
                      (lambda ()
                        (run-at-time
                         0.0 nil
