@@ -37,4 +37,5 @@
                             (_ nil))))
                        (when (minibufferp)
                          (setq +exwm-refocus-application--last-time (float-time))
+                         (run-at-time 0.0 nil #'minibuffer-message +exwm-refocus-application--message)
                          (throw 'exit nil))))))
