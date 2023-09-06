@@ -4,7 +4,6 @@
 (defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.011))
 (defvar +exwm-refocus-application--timer nil)
 (defvar +exwm-refocus-application--last-time 0)
-(defvar +exwm-refocus-application--last-state nil)
 
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
@@ -17,8 +16,7 @@
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
-    (setq +exwm-refocus-application--message (current-message)
-          +exwm-refocus-application--last-state (bound-and-true-p evil-state))
+    (setq +exwm-refocus-application--message (current-message))
     (let ((state (bound-and-true-p evil-state)))
       (ignore state)
       (add-hook 'minibuffer-setup-hook
