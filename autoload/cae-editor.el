@@ -397,3 +397,10 @@ also marks comment with leading whitespace"
                        (user-login-name))))
     (require 'auto-sudoedit)
     (auto-sudoedit)))
+
+;;;###autoload
+(defun cae-org-insert-heading ()
+  (interactive)
+  (call-interactively #'org-insert-heading)
+  (when (eq (bound-and-true-p evil-state) 'normal)
+    (evil-append-line 1)))
