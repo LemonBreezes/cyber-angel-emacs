@@ -11,7 +11,7 @@
   "Refocus input for the currently selected EXWM buffer, if any."
   (when (and (derived-mode-p 'exwm-mode)
              (> (float-time) (+ +exwm-refocus-application--last-time
-                                (* 5 +exwm-refocus-application--delay))))
+                                (* 2 +exwm-refocus-application--delay))))
     (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)
     (setq +exwm-refocus-application--last-time (float-time))))
 
