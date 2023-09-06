@@ -19,11 +19,9 @@
     (setq +exwm-refocus-application--message (current-message))
     (let ((state (bound-and-true-p evil-state)))
       (ignore state)
-      (add-transient-hook! 'minibuffer-setup-hook
-        #'+exwm-refocus-application-minibuffer-quit-timer))
-    (minibuffer-with-setup-hook
-        #'+exwm-refocus-application-minibuffer-quit-timer
-        (read-string ""))))
+      (minibuffer-with-setup-hook
+          #'+exwm-refocus-application-minibuffer-quit-timer
+        (read-string "")))))
 
 (defun +exwm-refocus-application-minibuffer-quit-timer ()
   (run-at-time +exwm-refocus-application--delay nil
