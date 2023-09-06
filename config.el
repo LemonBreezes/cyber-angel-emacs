@@ -832,15 +832,7 @@
             er/mark-email
             eri/mark-line
             eri/mark-block
-            mark-page)))
-
-  (use-package! kmacro-x
-    :after-call kmacro-start-macro :init
-    (unless (modulep! :editor multiple-cursors)
-      (map! :g "C->" #'kmacro-x-mc-mark-next
-            :g "C-<" #'kmacro-x-mc-mark-previous))
-    :config
-    (kmacro-x-atomic-undo-mode)))
+            mark-page))))
 
 
 ;;; Autocompletion
