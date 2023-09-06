@@ -184,8 +184,7 @@ expansion occurs within the parent Emacs session.")
   (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
   (use-package! exwm-mff
-
-    :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
+    :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (defadvice! +exwm-input--fake-last-command ()
     :override #'exwm-input--fake-last-command
