@@ -71,7 +71,7 @@
       "C-x x o" #'ov-clear
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
-      [C-i] #'doom/dumb-indent
+      ;;[C-i] #'doom/dumb-indent
       [remap dabbrev-expand] #'hippie-expand
       "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
