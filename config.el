@@ -832,7 +832,11 @@
             er/mark-email
             eri/mark-line
             eri/mark-block
-            mark-page))))
+            mark-page)))
+
+  (use-package! kmacro-x
+    :defer t :init
+    ))
 
 
 ;;; Autocompletion
