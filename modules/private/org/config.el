@@ -78,6 +78,7 @@
   ;; So E is the same as % in my layout because E is not bound in
   ;; `worf-mode-map'. I can use E to set the priority of the current heading.
   (worf-define-key worf-mode-map "E" #'org-priority)
+  (keymap-set worf-mode-map "<f6>" #'cae-worf-cheat-sheet/body)
 
   ;;(advice-add #'worf-property
   ;;            :after
