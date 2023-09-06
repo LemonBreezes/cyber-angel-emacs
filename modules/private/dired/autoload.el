@@ -4,7 +4,9 @@
 (defun cae-dired-jump ()
   (interactive)
   (call-interactively #'dired-jump)
-  (when (one-window-p)
+  (when (and (one-window-p)
+             (dirvish-curr)
+             (window-valid-p (dv-root-window (dirvish-curr))))
     (ignore-error user-error
       (dirvish-layout-switch dirvish-default-layout))))
 
