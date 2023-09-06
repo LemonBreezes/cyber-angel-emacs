@@ -8,7 +8,6 @@
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
-  ;; Better would be if this function call went to sleep
   (when (and (derived-mode-p 'exwm-mode)
              (> (float-time) (+ +exwm-refocus-application--last-time
                                 0.05)))
