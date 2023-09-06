@@ -19,7 +19,6 @@
   (when (derived-mode-p 'exwm-mode)
     (setq +exwm-refocus-application--message (current-message))
     (let ((+exwm-refocus-application--last-state (bound-and-true-p evil-state)))
-      (setq inhibit-redisplay t)
       (minibuffer-with-setup-hook
           #'+exwm-refocus-application-minibuffer-quit-timer
         (read-string "")))))
@@ -33,7 +32,6 @@
                         (lambda ()
                           (when +exwm-refocus-application--message
                             (minibuffer-message +exwm-refocus-application--message))
-                          (setq inhibit-redisplay nil)
                           (pcase +exwm-refocus-application--last-state
                             ('insert (exwm-evil-core-insert))
                             ('normal (exwm-evil-core-normal))
