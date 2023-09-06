@@ -36,6 +36,10 @@
       (add-hook 'completion-at-point-functions #'+eshell-fish-capf nil t)
     (remove-hook 'completion-at-point-functions #'+eshell-fish-capf t)))
 
+;; This has been disabled because using `fish-completion' as a CAPF breaks a lot
+;; of `pcomplete' functionality. I plan to fix this directly in
+;; `fish-completion' but it will take some time.
+
 ;;(add-hook 'fish-completion-mode-hook #'+eshell-use-annotated-completions-h)
 
 ;;; Eshell Syntax Highlighting fix
