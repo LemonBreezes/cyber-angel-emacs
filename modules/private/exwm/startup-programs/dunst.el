@@ -28,7 +28,7 @@
 
   (map! :leader
         :prefix +startup-prefix
-        (:prefix-map ("n" . "Dunst")
+        (:prefix-map ("n" . "dunst")
          :desc "Restart Dunst" "r" #'startup/restart-dunst
          :desc "Kill Dunst" "x" #'startup/kill-dunst
          :desc "Close notification" "c"
