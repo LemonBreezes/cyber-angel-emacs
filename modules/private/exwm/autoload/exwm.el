@@ -1,7 +1,7 @@
 ;;; private/exwm/autoload/evil.el -*- lexical-binding: t; -*-
 
 (defvar +exwm-refocus-application--message "")
-(defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.01))
+(defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.0011))
 (defvar +exwm-refocus-application--timer nil)
 (defvar +exwm-refocus-application--last-time 0)
 (defvar +exwm-refocus-application--last-state nil)
