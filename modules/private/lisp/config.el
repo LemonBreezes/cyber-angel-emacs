@@ -119,7 +119,6 @@
            "M-C" #'lispy-convolute
            "M-D" #'lispy-splice)
           (:when (modulep! :editor evil)
-           "C-S-w" #'lispy-delete-atom
            "M-," nil)
           "C-d" #'cae-delete-char
           ")" #'cae-insert-closing-paren))
