@@ -136,7 +136,7 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
-(map! :i "C-S-w" (cmd! () (mark-sexp) (delete)))
+(map! :i "C-S-w" (cmd! () (mark-sexp -1) (call-interactively #'kill-region)))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
