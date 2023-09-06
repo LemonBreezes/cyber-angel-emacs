@@ -137,7 +137,8 @@
          :i "C-p" nil)))
 
 (after! org
-  (map! "M-RET" #'org-insert-heading))
+  (map! :map org-mode-map
+        "M-RET" #'org-insert-heading))
 
 
 ;;Local Variables:
