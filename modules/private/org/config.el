@@ -79,6 +79,8 @@
   ;; `worf-mode-map'. I can use E to set the priority of the current heading.
   (worf-define-key worf-mode-map "E" #'org-priority)
   (keymap-set worf-mode-map "<f6>" #'cae-worf-cheat-sheet/body)
+  (setq-hook! worf-mode
+    org-insert-heading-respect-content nil)
 
   ;;(advice-add #'worf-property
   ;;            :after
