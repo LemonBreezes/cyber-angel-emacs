@@ -12,7 +12,7 @@
   (when (and (derived-mode-p 'exwm-mode)
              (not (memq +exwm-refocus-application--timer
                         timer-list))
-             (> (float-time) (+ +exwm-refocus-application--last-time +exwm-refocus-application--delay)))
+             (> (float-time) (+ +exwm-refocus-application--last-time (nth 1 +exwm-refocus-application--delays))))
     (run-at-time (nth 0 +exwm-refocus-application--delays)
                  nil #'+exwm-refocus-application--timer)))
 
