@@ -4,6 +4,7 @@
 (defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.011))
 (defvar +exwm-refocus-application--timer nil)
 (defvar +exwm-refocus-application--last-time 0)
+(defvar +exwm-refocus-application--last-state nil)
 
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
@@ -16,10 +17,10 @@
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
-    (setq +exwm-refocus-application--message (current-message))
-      (add-hook 'minibuffer-setup-hook
-                #'+exwm-refocus-application-minibuffer-quit-timer
-                (bound-and-true-p evil-state))
+    (setq +exwm-refocus-application--message (current-message)
+          +exwm-refocus-application--last-state (bound-and-true-p evil-state))
+    (add-hook 'minibuffer-setup-hook
+              #'+exwm-refocus-application-minibuffer-quit-timer)
     (read-string "")))
 
 (defun +exwm-refocus-application-minibuffer-quit-timer (state)
@@ -29,8 +30,9 @@
                   0.0 nil
                   (lambda ()
                     (minibuffer-message "")
-                    (pcase state
+                    (pcase +exwm-refocus-application--last-state
                       ('insert (exwm-evil-core-insert))
                       ('normal (exwm-evil-core-normal))
-                      (_ nil)))
+                      (_ nil))
+                    (setq +exwm-refocus-application--last-state nil))
                   (ignore-errors (throw 'exit #'ignore))))))
