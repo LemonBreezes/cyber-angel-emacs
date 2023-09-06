@@ -75,8 +75,6 @@
 (after! esh-arg
   (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect))
 
-(remove-hook 'eshell-mode-hook #'+eshell-remove-fringes-h)
-
 ;; Filter trivial commands from history.
 (setq eshell-input-filter
       (cae-defun cae-eshell-input-filter (str)
