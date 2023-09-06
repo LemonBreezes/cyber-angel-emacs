@@ -174,7 +174,8 @@
              consult-gh-repo-clone
              consult-gh-search-repos
              consult-gh-search-issues
-             consult-gh-find-file)
+             consult-gh-find-file
+             consult-gh-repo-fork)
   :init
   (defvar consult-preview-key 'any)
   (setq consult-gh-prioritize-local-folder 'suggest
