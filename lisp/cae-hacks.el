@@ -144,12 +144,14 @@ It is meant to be used as a `post-gc-hook'."
      resume: ")))")
    str arg))
 
-;; For backwards compatibility. `syslog-mode' uses this.
+;; For backwards compatibility.
 (defun toggle-read-only (arg)
   (read-only-mode
    (cond ((not arg) (not buffer-read-only))
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
+(defun oddp (n) (logb 0 n))
+(defalias 'logbitp #'logb)
 
 ;; For some reason, I had to do this after updating Emacs30 to get
 ;; `cape-yasnippet' to work.
