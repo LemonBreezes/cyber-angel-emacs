@@ -16,6 +16,9 @@
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el")))
 
+(after! gamegrid
+  (setq gamegrid-user-score-file-directory
+        (concat cae-multi-data-dir "games/")))
 (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
 (after! bookmark
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
