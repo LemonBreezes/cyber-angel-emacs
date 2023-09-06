@@ -2,8 +2,7 @@
 
 [[./media/cyber-angel.jpg]]
 
-This is my Emacs OS. I use it for everything. Here is a summary of some of my modules
-from most interesting to least interesting (in my opinion):
+This is my Emacs OS. I use it for everything. Here is a summary of my two favorite modules:
 
 ** EXWM: Emacs X Window Manager
 
@@ -34,4 +33,3 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
 
 6. Standalone, are Elisp applications which do not communicate with any external
    service provider or many, so for example ~elfeed~ or ~alarm-clock~.
-
