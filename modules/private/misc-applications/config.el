@@ -46,7 +46,7 @@
         application-types))
 
 (map! :map +misc-applications-system-map
-      "p" #'list-packages
+      "e" #'list-packages
       "E" #'list-processes
       "T" #'list-timers)
 (after! which-key
