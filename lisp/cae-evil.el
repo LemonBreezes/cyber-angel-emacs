@@ -138,7 +138,8 @@
 
 (map! :i "C-S-w" (cmd! () (if (featurep 'smartparens)
                               (sp-mark-sexp -1)
-                            (call-interactively #'kill-regionl))))
+                            (mark-sexp -1))
+                       (call-interactively #'kill-regionl)))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
