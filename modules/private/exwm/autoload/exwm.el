@@ -10,10 +10,10 @@
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
   (when (and (derived-mode-p 'exwm-mode)
-             (> (float-time) (+ +exwm-refocus-application--last-time
-                                (* 2 +exwm-refocus-application--delay))))
-    (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)
-    (setq +exwm-refocus-application--last-time (float-time))))
+             (not (memq +exwm-refocus-application--timer
+                        timer-list))
+             (> (float-time) (+ +exwm-refocus-application--last-time +exwm-refocus-application--delay)))
+    (run-at-time +exwm-refocus-application--delay nil #'+exwm-refocus-application--timer)))
 
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
@@ -24,15 +24,17 @@
         (read-string "")))))
 
 (defun +exwm-refocus-application-minibuffer-quit-timer ()
-  (run-at-time +exwm-refocus-application--delay nil
-               (lambda ()
-                 (run-at-time
-                  0.0 nil
-                  (lambda ()
-                    (minibuffer-message "")
-                    (pcase +exwm-refocus-application--last-state
-                      ('insert (exwm-evil-core-insert))
-                      ('normal (exwm-evil-core-normal))
-                      (_ nil))))
-                 (when (minibufferp)
-                   (throw 'exit nil)))))
+  (setq +exwm-refocus-application--timer
+        (run-at-time +exwm-refocus-application--delay nil
+                     (lambda ()
+                       (run-at-time
+                        0.0 nil
+                        (lambda ()
+                          (minibuffer-message "")
+                          (pcase +exwm-refocus-application--last-state
+                            ('insert (exwm-evil-core-insert))
+                            ('normal (exwm-evil-core-normal))
+                            (_ nil))))
+                       (when (minibufferp)
+                         (setq +exwm-refocus-application--last-time (float-time))
+                         (throw 'exit nil))))))
