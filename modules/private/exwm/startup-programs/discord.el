@@ -44,17 +44,7 @@
   (unless (process-live-p startup/discord-process)
     (startup/restart-discord))
   (+workspace-switch startup/discord-workspace t)
-  (+workspace/display)
-  (setq startup/discord--timer
-        (run-at-time 1 0.05
-                     (lambda ()
-                       (if (string= "discord" exwm-class-name)
-                           (cancel-timer startup/discord--timer)
-                         (+workspace-switch-to-exwm-buffer-maybe)))))
-(defadvice! tmp/cancel-discord-timer-a (&rest _)
-  :before #'+workspace-switch
-  (cancel-timer startup/discord--timer)
-  (advice-remove #'+workspace/other #'tmp/cancel-discord-timer-a)))
+  (+workspace/display))
 
 ;; HACK Prevent an error that happens when there is no Discord process.
 (defadvice! startup/discord-elcord-a ()
