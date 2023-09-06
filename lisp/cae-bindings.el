@@ -271,4 +271,4 @@
 
 (after! org
   (map! :map org-mode-map
-        "M-RET" #'org-insert-heading))
+        "M-RET" #'cae-org-insert-heading))
