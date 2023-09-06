@@ -136,10 +136,6 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
-(after! org
-  (map! :map org-mode-map
-        "M-RET" #'org-insert-heading))
-
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
