@@ -1,7 +1,7 @@
 ;;; private/exwm/autoload/evil.el -*- lexical-binding: t; -*-
 
 (defvar +exwm-refocus-application--message "")
-(defvar +exwm-refocus-application--delay (+ exwm-input--update-focus-interval 0.011))
+(defvar +exwm-refocus-application--delay exwm-input--update-focus-interval)
 (defvar +exwm-refocus-application--timer nil)
 (defvar +exwm-refocus-application--last-time 0)
 
@@ -20,8 +20,10 @@
     (let ((state (bound-and-true-p evil-state)))
       (ignore state)
       (add-transient-hook! 'minibuffer-setup-hook
-                #'+exwm-refocus-application-minibuffer-quit-timer))
-    (read-string "")))
+        #'+exwm-refocus-application-minibuffer-quit-timer))
+    (minibuffer-with-setup-hook
+        #'+exwm-refocus-application-minibuffer-quit-timer
+        (read-string ""))))
 
 (defun +exwm-refocus-application-minibuffer-quit-timer ()
   (run-at-time +exwm-refocus-application--delay nil
@@ -34,4 +36,5 @@
                       ('insert (exwm-evil-core-insert))
                       ('normal (exwm-evil-core-normal))
                       (_ nil)))
-                  (ignore-errors (throw 'exit #'ignore))))))
+                  (when (minibufferp)
+                    (throw 'exit nil))))))
