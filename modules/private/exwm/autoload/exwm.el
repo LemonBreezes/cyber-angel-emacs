@@ -13,17 +13,22 @@
 (defun +exwm-refocus-application--timer ()
   (when (derived-mode-p 'exwm-mode)
     (setq +exwm-refocus-application--message (current-message))
+    (advice-add #'+exwm-refocus-application :override #'ignore)
     (let ((state (bound-and-true-p evil-state)))
-      (add-transient-hook! 'minibuffer-setup-hook
-        (run-at-time +exwm-refocus-application--delay nil
-                     (lambda ()
-                       (run-at-time
-                        0.0 nil
-                        (lambda ()
-                          (minibuffer-message +exwm-refocus-application--message)
-                          (pcase state
-                            ('insert (exwm-evil-core-insert))
-                            ('normal (exwm-evil-core-normal))
-                            (_ nil))))
-                       (ignore-errors (throw 'exit #'ignore))))))
+      (add-hook! 'minibuffer-setup-hook
+                 #'+exwm-refocus-application-minibuffer-quit-timer))
     (read-string "")))
+
+(defun +exwm-refocus-application-minibuffer-quit-timer ()
+  (run-at-time +exwm-refocus-application--delay nil
+               (lambda ()
+                 (run-at-time
+                  0.0 nil
+                  (lambda ()
+                    (minibuffer-message +exwm-refocus-application--message)
+                    (advice-remove #'+exwm-refocus-application #'ignore)
+                    (pcase state
+                      ('insert (exwm-evil-core-insert))
+                      ('normal (exwm-evil-core-normal))
+                      (_ nil))))
+                 (ignore-errors (throw 'exit #'ignore)))))
