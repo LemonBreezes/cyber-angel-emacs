@@ -940,6 +940,7 @@
         org-ellipsis " ..."
         org-archive-location (concat org-directory ".archive/%s::")
         org-hide-emphasis-markers t
+        org-special-ctrl-k t
         ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
