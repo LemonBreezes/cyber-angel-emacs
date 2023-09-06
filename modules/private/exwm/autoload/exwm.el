@@ -18,6 +18,7 @@
   (when (derived-mode-p 'exwm-mode)
     (setq +exwm-refocus-application--message (current-message))
     (let ((state (bound-and-true-p evil-state)))
+      (ignore state)
       (add-hook 'minibuffer-setup-hook
                 #'+exwm-refocus-application-minibuffer-quit-timer))
     (read-string "")))
