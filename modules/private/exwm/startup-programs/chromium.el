@@ -41,11 +41,13 @@
   (+workspace-switch startup/chromium-workspace t)
   (+workspace/display))
 
-(map! :map +startup-applications-map
-      :prefix "c"
-      "r" #'startup/restart-chromium
-      "s" #'startup/select-chromium
-      "x" #'startup/kill-chromium)
+(eval
+ `(map! :map +startup-applications-map
+        :prefix-map ("c" . ,startup/chromium-browser)
+        "r" #'startup/restart-chromium
+        "s" #'startup/select-chromium
+        "x" #'startup/kill-chromium)
+ t)
 (which-key-add-keymap-based-replacements +startup-applications-map
   "c" "Chromium"
   "c r" "Restart Chromium"
