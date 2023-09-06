@@ -13,7 +13,7 @@
              (not (memq +exwm-refocus-application--timer
                         timer-list))
              (> (float-time) (+ +exwm-refocus-application--last-time +exwm-refocus-application--delay)))
-    (run-at-time (max (/ +exwm-refocus-application--delay 2) exwm-input--update-focus-interval)
+    (run-at-time (/ +exwm-refocus-application--delay 2)
                  nil #'+exwm-refocus-application--timer)))
 
 (defun +exwm-refocus-application--timer ()
