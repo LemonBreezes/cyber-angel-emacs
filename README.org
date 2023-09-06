@@ -12,7 +12,8 @@ manager. Here are some features my EXWM module provides:
 1. Full Evil mode (Vim) integration globally for every application.
 2. Automatic management of non-floating applications into workspaces.
 3. Universal editing of text boxes with ~exwm-edit~.
-4. Configuration for a notification daemon implemented in Elisp, ~ednc~.
+4. Configuration for a notification daemon implemented in Elisp, ~ednc~. (Though I
+   still prefer Dunst)
 5. A launcher for my personal applications.
 
 ** Misc Applications
@@ -33,3 +34,6 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
 
 6. Standalone, are Elisp applications which do not communicate with any external
    service provider or many, so for example ~elfeed~ or ~alarm-clock~.
+
+   If you have ideas for apps that should be added or removed from this module,
+   feel free to open an issue!
