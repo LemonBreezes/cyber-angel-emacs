@@ -154,7 +154,7 @@ file to edit."
   (interactive)
   (let ((pt (point))
         (commands (buffer-substring-no-properties
-                   (progn (eshell-bol) (point)) (point-max))))
+                   (progn (beginning-of-line) (point)) (point-max))))
     (if (string-match-p "^sudo " commands)
         (progn
           (while (re-search-forward "sudo " nil t)
