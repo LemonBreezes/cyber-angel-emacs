@@ -136,7 +136,9 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
-(map! :i "C-S-w" (cmd! () (mark-sexp -1) (call-interactively #'kill-region)))
+(map! :i "C-S-w" (cmd! () (if (featurep 'smartparens)
+                              (sp-mark-sexp -1)
+                            (call-interactively #'kill-regionl))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
