@@ -42,6 +42,7 @@
 (package! circadian)
 (package! standard-themes)
 (package! ef-themes)
+(package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
 
 ;;; Tools
 (package! nov)
@@ -69,7 +70,7 @@
 (package! smart-semicolon)
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
-(package! auto-sudoedit)
+(package! auto-sudoedit :recipe (:host github :repo "LemonBreezes/auto-sudoedit"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)

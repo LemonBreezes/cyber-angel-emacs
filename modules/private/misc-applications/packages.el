@@ -10,7 +10,7 @@
 ;; Use external APIs or apps
 (package! leetcode)
 (when (modulep! :completion vertico)
-  (package! consult-gh))
+  (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
 
 ;; System
 (when (eq system-type 'gnu/linux)
@@ -24,7 +24,6 @@
       (:host github :repo "akirak/helm-linux-disks")))
   (unless (memq system-type '(cygwin windows-nt ms-dos))
     (package! helm-system-packages)))
-(package! paradox)
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
 (package! trashed)
@@ -39,6 +38,7 @@
 ;; Games
 (package! autotetris-mode)
 (package! speed-type)
+(package! klondike)                     ; TODO
 
 ;; Eye candy
 (package! fireplace)
