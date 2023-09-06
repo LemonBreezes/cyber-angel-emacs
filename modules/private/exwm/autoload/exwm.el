@@ -30,11 +30,11 @@
                        (run-at-time
                         0.0 nil
                         (lambda ()
-                          (setq +exwm-refocus-application--last-time (float-time))
                           (minibuffer-message +exwm-refocus-application--message)
                           (pcase +exwm-refocus-application--last-state
                             ('insert (exwm-evil-core-insert))
                             ('normal (exwm-evil-core-normal))
                             (_ nil))))
                        (when (minibufferp)
+                         (setq +exwm-refocus-application--last-time (float-time))
                          (throw 'exit nil))))))
