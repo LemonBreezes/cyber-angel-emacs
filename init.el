@@ -76,6 +76,7 @@
        (magit +forge)
        (lsp +peek +eglot)
        tree-sitter
+       docker
        pdf
 
        :lang

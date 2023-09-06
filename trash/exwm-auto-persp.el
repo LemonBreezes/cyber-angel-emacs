@@ -1,6 +1,6 @@
 ;;; lisp/exwm-auto-persp.el -*- lexical-binding: t; -*-
 
-(after! exwm
+(after! (:all exwm dash persp-mode)
   (require 'dash)
   (defvar +exwm-workspaces ()
     "The list of EXWM workspaces created up to now.")
@@ -12,6 +12,7 @@
     '(("google-chrome-unstable" . "Chrome")
       ("chromium-browser" . "Chrome")
       ("chromium" . "Chrome")
+      ("Google-chrome" . "Chrome")
       ("firefox developer edition" . "Firefox")
       ("\"firefox developer edition\"" . "Firefox")
       ("\"firefoxdeveloperedition\"" . "Firefox")

@@ -17,6 +17,7 @@ alias gpasswd sudo gpasswd                                                    $*
 alias groupmod sudo groupmod                                                  $*
 alias grub-mkconfig sudo grub-mkconfig                                        $*
 alias eselect sudo eselect                                                    $*
+alias usermod sudo usermod                                                    $*
 alias tree   sudo tree -C                                                     $*
 
 alias sysu systemctl --user                                                   $*
