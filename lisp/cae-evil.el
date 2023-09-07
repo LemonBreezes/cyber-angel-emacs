@@ -136,7 +136,7 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
-(after! org
+(after! evil-org
   (map! :map evil-org-mode-map
         :i "C-u" #'cae-evil-org-delete-back-to-indentation)
   (map! :map org-mode-map
