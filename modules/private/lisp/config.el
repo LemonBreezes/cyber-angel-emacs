@@ -131,18 +131,3 @@
                     evil-goggles--generic-async-advice)
                   evil-goggles--commands)
       (setq lispyville-motions-put-into-special t))))
-
-(when (and (not (modulep! :editor lispy))
-           (modulep! :config default +smartparens)
-           (modulep! :editor evil))
-  (use-package! evil-cleverparens
-    :after evil
-    :custom
-    (evil-cleverparens-use-additional-bindings nil)
-    :hook (paredit-mode . evil-cleverparens-mode))
-
-  (use-package! paredit
-    :hook (emacs-lisp-mode . paredit-mode)
-    :hook (clojure-mode . paredit-mode)
-    :hook (lisp-mode . paredit-mode)
-    :hook (common-lisp-mode . paredit-mode)))
