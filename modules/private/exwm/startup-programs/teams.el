@@ -3,6 +3,7 @@
 (defvar startup/teams-workspace "Teams")
 (defvar startup/teams-executable (or (executable-find "teams-for-linux")
                         (executable-find "teams")))
+(defvar startup/teams-buffer (get-buffer-create "*startup/teams*"))
 
 (defun startup/kill-teams (&optional arg)
   (interactive "p")
@@ -27,8 +28,8 @@
   (interactive)
   (startup/kill-teams)
   ;; For some reason starting it with `start-process' doesn't work.
-  (shell-command-to-string (concat startup/teams-executable
-                                   (if (eq (user-uid) 0) " --no-sandbox" " "))))
+  (start-process "Teams" (get-buffer-create) startup/teams-executable
+                                   (if (eq (user-uid) 0) " --no-sandbox" " ")))
 
 (defun startup/select-teams ()
   (interactive)
