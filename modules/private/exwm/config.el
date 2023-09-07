@@ -2,7 +2,8 @@
 
 (when (and (eq 'x (framep (selected-frame)))
            (not (getenv "EXWM_RUNNING"))
-           (not (getenv "RATPOISON")))
+           (not (getenv "RATPOISON"))
+           (not (getenv "WAYLAND_DISPLAY")))
 
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
