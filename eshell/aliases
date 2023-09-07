@@ -64,3 +64,4 @@ alias update-emacs2 cd ~/.config/emacs && git stash && doom upgrade && git stash
 alias update-gentoo sudo emaint -a sync && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
 alias update-gentoo2 sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going
 alias doom ~/.config/emacs/bin/doom $*
+alias update-doom-patch rm ~/.config/emacs/cae-emacs-doom.patch && cd ~/.config/emacs && git diff *> ~/.config/doom/cae-emacs-doom.patch && cd -

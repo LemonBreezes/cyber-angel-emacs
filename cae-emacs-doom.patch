@@ -139,6 +139,82 @@ index 29788e9a9..1fb58a747 100644
                              doom--map-forms))))
                   (:prefix
                    (cl-destructuring-bind (prefix . desc)
+diff --git a/lisp/doom-packages.el b/lisp/doom-packages.el
+index 0e6c2784f..b3b0aaa3f 100644
+--- a/lisp/doom-packages.el
++++ b/lisp/doom-packages.el
+@@ -97,7 +97,7 @@ uses a straight or package.el command directly).")
+       ;; no affect on packages that are pinned, however (run 'doom purge' to
+       ;; compact those after-the-fact). Some packages break when shallow cloned
+       ;; (like magit and org), but we'll deal with that elsewhere.
+-      straight-vc-git-default-clone-depth '(1 single-branch))
++      straight-vc-git-default-clone-depth 'full)
+ 
+ (with-eval-after-load 'straight
+   ;; HACK: Doom relies on deferred compilation, which spares the user 20-50min
+@@ -179,35 +179,34 @@ uses a straight or package.el command directly).")
+         (print! (start "Installing straight..."))
+         (print-group!
+          (cl-destructuring-bind (depth . options)
+-             (ensure-list straight-vc-git-default-clone-depth)
+-           (let ((branch-switch (if (memq 'single-branch options)
+-                                    "--single-branch"
+-                                  "--no-single-branch")))
+-             (cond
+-              ((eq 'full depth)
+-               (funcall call "git" "clone" "--origin" "origin"
+-                        branch-switch repo-url repo-dir))
+-              ((integerp depth)
+-               (if (null pin)
+-                   (progn
+-                     (when (file-directory-p repo-dir)
+-                       (delete-directory repo-dir 'recursive))
+-                     (funcall call "git" "clone" "--origin" "origin" repo-url
+-                              "--no-checkout" repo-dir
++             (let ((branch-switch (if (memq 'single-branch options)
++                                      "--single-branch"
++                                    "--no-single-branch")))
++               (cond
++                ((eq 'full depth)
++                 (funcall call "git" "clone" "--origin" "origin"
++                          branch-switch repo-url repo-dir))
++                ((integerp depth)
++                 (if (null pin)
++                     (progn
++                       (when (file-directory-p repo-dir)
++                         (delete-directory repo-dir 'recursive))
++                       (funcall call "git" "clone" "--origin" "origin" repo-url
++                                "--no-checkout" repo-dir
++                                "--depth" (number-to-string depth)
++                                branch-switch
++                                "--no-tags"
++                                "--branch" straight-repository-branch))
++                   (make-directory repo-dir 'recursive)
++                   (let ((default-directory repo-dir))
++                     (funcall call "git" "init")
++                     (funcall call "git" "branch" "-m" straight-repository-branch)
++                     (funcall call "git" "remote" "add" "origin" repo-url
++                              "--master" straight-repository-branch)
++                     (funcall call "git" "fetch" "origin" pin
+                               "--depth" (number-to-string depth)
+-                              branch-switch
+-                              "--no-tags"
+-                              "--branch" straight-repository-branch))
+-                 (make-directory repo-dir 'recursive)
+-                 (let ((default-directory repo-dir))
+-                   (funcall call "git" "init")
+-                   (funcall call "git" "branch" "-m" straight-repository-branch)
+-                   (funcall call "git" "remote" "add" "origin" repo-url
+-                            "--master" straight-repository-branch)
+-                   (funcall call "git" "fetch" "origin" pin
+-                            "--depth" (number-to-string depth)
+-                            "--no-tags")
+-                   (funcall call "git" "reset" "--hard" pin)))))))))
++                              "--no-tags")
++                     (funcall call "git" "reset" "--hard" pin)))))))))
+       (require 'straight (concat repo-dir "/straight.el"))
+       (doom-log "Initializing recipes")
+       (mapc #'straight-use-recipes
 diff --git a/lisp/doom-ui.el b/lisp/doom-ui.el
 index 05cc20c12..7ba7b1858 100644
 --- a/lisp/doom-ui.el
@@ -155,20 +231,21 @@ index 05cc20c12..7ba7b1858 100644
             (delete-window)
             t)
            ((eq buf (doom-fallback-buffer))
-diff --git a/lisp/lib/help.el b/lisp/lib/help.el
-index cd6c8e269..77e5fa07b 100644
---- a/lisp/lib/help.el
-+++ b/lisp/lib/help.el
-@@ -168,7 +168,8 @@ selection of all minor-modes, active or not."
-                   (location
-                    (goto-char location)))
-             (ignore-errors
--              (when (outline-invisible-p)
-+              (when (memq (get-char-property (point) 'invisible)
-+                          '(outline org-fold-outline))
-                 (save-excursion
-                   (outline-previous-visible-heading 1)
-                   (org-show-subtree))))))
+diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
+index 1aa68732d..f795b64f7 100644
+--- a/modules/completion/vertico/config.el
++++ b/modules/completion/vertico/config.el
+@@ -239,8 +239,9 @@ orderless."
+   :init
+   (setq which-key-use-C-h-commands nil
+         prefix-help-command #'embark-prefix-help-command)
++  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+   (map! [remap describe-bindings] #'embark-bindings
+-        "C-;"               #'embark-act  ; to be moved to :config default if accepted
++        "C-;"               #'embark-act ; to be moved to :config default if accepted
+         (:map minibuffer-local-map
+          "C-;"               #'embark-act
+          "C-c C-;"           #'embark-export
 diff --git a/modules/editor/evil/init.el b/modules/editor/evil/init.el
 index 6bfa97df6..5b0ccd269 100644
 --- a/modules/editor/evil/init.el
@@ -553,30 +630,3 @@ index 6bfa97df6..5b0ccd269 100644
 -        (with-eval-after-load req
 -          (+evil-collection-init mode +evil-collection-disabled-list))))))
 +  (evil-collection-init))
-diff --git a/modules/lang/org/autoload/org.el b/modules/lang/org/autoload/org.el
-index 6cd51bd45..6ca2c2211 100644
---- a/modules/lang/org/autoload/org.el
-+++ b/modules/lang/org/autoload/org.el
-@@ -371,7 +371,9 @@ see how ARG affects this command."
-         (goto-char (point-min))
-         (while (not (eobp))
-           (org-next-visible-heading 1)
--          (when (outline-invisible-p (line-end-position))
-+          (when (memq (get-char-property (line-end-position)
-+                                         'invisible)
-+                      '(outline org-fold-outline))
-             (let ((level (org-outline-level)))
-               (when (> level max)
-                 (setq max level))))))
-@@ -489,7 +491,10 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
-                    (or org-cycle-open-archived-trees
-                        (not (member org-archive-tag (org-get-tags))))
-                    (or (not arg)
--                       (setq invisible-p (outline-invisible-p (line-end-position)))))
-+                       (setq invisible-p
-+                             (memq (get-char-property (line-end-position)
-+                                                      'invisible)
-+                                   '(outline org-fold-outline)))))
-           (unless invisible-p
-             (setq org-cycle-subtree-status 'subtree))
-           (org-cycle-internal-local)
