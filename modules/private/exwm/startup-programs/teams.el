@@ -1,6 +1,8 @@
 ;;; startup/teams.el -*- lexical-binding: t; -*-
 
 (defvar startup/teams-workspace "Teams")
+(defvar startup/teams-executable (or (executable-find "teams-for-linux")
+                        (executable-find "teams")))
 
 (defun startup/kill-teams (&optional arg)
   (interactive "p")
@@ -9,7 +11,7 @@
                    (+workspace-current-name))
       (+workspace/other))
     (+workspace-delete startup/teams-workspace))
-  (shell-command-to-string "killall teams")
+  (shell-command-to-string (concat "killall " (file-name-nondirectory startup/teams-executable)))
   (mapc (lambda (frame)
           (when (frame-live-p frame)
             (when (thread-last frame
@@ -19,7 +21,7 @@
                                (string-match-p "Microsoft Teams"))
               (with-selected-frame frame
                 (exwm-floating--exit)))))
-   (visible-frame-list)))
+        (visible-frame-list)))
 
 (defun startup/restart-teams ()
   (interactive)
