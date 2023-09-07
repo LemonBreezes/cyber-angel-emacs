@@ -50,16 +50,10 @@
                (not (modulep! :editor lispy)))
       (use-package! evil-cleverparens
         :defer t :init
+        (setq evil-cp-additional-movement-keys
+              '(("M-l" . evil-cp-end-of-defun)
+                ("M-h" . evil-cp-beginning-of-defun)))
         (add-hook 'prog-mode-hook 'evil-cleverparens-mode)
         :custom ((evil-cleverparens-use-additional-bindings nil)
-                 (evil-cleverparens-use-s-and-S nil)
+                 evil-cleverparens-use-s-and-S nil
                  (evil-cleverparens-swap-move-by-word-and-symbol t))))))
-
-(unless (modulep! :editor lispy)
-  (use-package! paredit
-    :defer t :init
-    (dolist (mode sp-lisp-modes)
-      (add-hook mode #'paredit-mode)))
-  (use-package! paredit-everywhere
-    :defer t :init
-    (add-hook 'prog-mode-hook #'paredit-everywhere-mode)))
