@@ -42,16 +42,8 @@
 (advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;; Check parens before saving.
-(add-hook 'emacs-lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'lisp-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'scheme-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'clojure-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'racket-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'lfe-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'hy-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'dune-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'fennel-mode-hook #'cae-lisp-check-parens-before-save-h)
-(add-hook 'lisp-data-mode-hook #'cae-lisp-check-parens-before-save-h)
+(dolist (mode sp-lisp-modes)
+  (add-hook mode #'cae-lisp-check-parens-before-save-h))
 
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
