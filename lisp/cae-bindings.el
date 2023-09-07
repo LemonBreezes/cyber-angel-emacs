@@ -269,10 +269,11 @@
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
 
-(after! org
-  (map! :map org-mode-map
-        "M-RET" #'org-insert-heading
-        "M-RET" #'cae-evil-org-insert-heading
-        "M-S-RET" #'cae-evil-org-insert-todo-heading
-        "M-<return>" #'org-insert-heading
-        "M-S-<return>" #'org-insert-todo-heading))
+(unless (modulep! :editor evil)
+  (after! org
+    (map! :map org-mode-map
+          "M-RET" #'org-insert-heading
+          "M-RET" #'cae-evil-org-insert-heading
+          "M-S-RET" #'cae-evil-org-insert-todo-heading
+          "M-<return>" #'org-insert-heading
+          "M-S-<return>" #'org-insert-todo-heading)))
