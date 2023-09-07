@@ -119,9 +119,9 @@
                 (when (modulep! :tools lookup)
                   '("gd" "gf" "K"))
                 ;; Hopefuly setting `evil-collection-want-find-usages-bindings'
-                ;;to nil is enough.
-                ;;(when (modulep! :tools eval)
-                ;;'("gr" "gR"))
+                ;; to nil is enough.
+                ;; (when (modulep! :tools eval)
+                ;; '("gr" "gR"))
                 '("<escape>" "[" "]"))
         evil-collection-want-find-usages-bindings nil)
   (map! :n "]p" #'cae-unimpaired-paste-below
