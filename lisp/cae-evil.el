@@ -28,7 +28,7 @@
       :n "M-C--" nil)
 
 ;; Restore these Vim keybindings which Doom overrides.
-(map! :i "C-e" #'evil-copy-from-below)
+;;(map! :i "C-e" #'evil-copy-from-below)
 
 ;; Define a leader key for switching to popup windows.
 (after! evil
