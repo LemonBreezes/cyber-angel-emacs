@@ -74,3 +74,17 @@
       (progn (comint-send-eof)
              (call-interactively #'kill-current-buffer))
     (lookup-key evil-insert-state-map [delete])))
+
+;;;###autoload
+(evil-define-command cae-evil-org-delete-back-to-indentation ()
+  "Delete back to the first non-whitespace character.
+If point is before the first non-whitespace character of a
+current line then delete from the point to the beginning of the
+current line.  If point is on the beginning of the line, behave
+according to `evil-backspace-join-lines'."
+  (let ((beg (if (<= (current-column) (current-indentation))
+                 (line-beginning-position)
+               (save-excursion (evil-first-non-blank) (point))))
+        (org-beg (save-excursion (org-beginning-of-line) (point))))
+    (evil-delete (max beg org-beg)
+                 (point))))
