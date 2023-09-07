@@ -205,7 +205,7 @@
         consult-gh-preview-buffer-mode #'org-mode
         consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa"
                                        "LemonBreezes" "protesilaos"
-                                       "emacs-mirror" "doomemacs"
+                                       "emacs-mirror" "doomemacs" "tecosaur"
                                        "systemcrafters")))
 (use-package! consult-gh-embark
   :after (consult-gh embark))
