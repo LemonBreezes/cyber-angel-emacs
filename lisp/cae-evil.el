@@ -136,6 +136,10 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
+(after! org
+  (map! :map evil-org-mode-map
+        :i "C-u" #'cae-evil-org-delete-back-to-indentation))
+
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
