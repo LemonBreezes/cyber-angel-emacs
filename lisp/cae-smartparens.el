@@ -51,7 +51,8 @@
       (use-package! evil-cleverparens
         :defer t :init
         (add-hook 'prog-mode-hook 'evil-cleverparens-mode)
-        :custom (evil-cleverparens-use-additional-bindings nil)))))
+        :custom ((evil-cleverparens-use-additional-bindings nil)
+                 (evil-cleverparens-use-s-and-S nil))))))
 
 (unless (modulep! :editor lispy)
   (use-package! paredit
