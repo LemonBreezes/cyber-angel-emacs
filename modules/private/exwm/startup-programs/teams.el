@@ -27,7 +27,6 @@
 (defun startup/restart-teams ()
   (interactive)
   (startup/kill-teams)
-  ;; For some reason starting it with `start-process' doesn't work.
   (start-process "Teams" (get-buffer-create startup/teams-buffer)
                  startup/teams-executable
                  (if (eq (user-uid) 0) " --no-sandbox" " ")))
