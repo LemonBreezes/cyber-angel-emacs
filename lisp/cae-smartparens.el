@@ -54,6 +54,5 @@
               '(("M-l" . evil-cp-end-of-defun)
                 ("M-h" . evil-cp-beginning-of-defun)))
         (add-hook 'prog-mode-hook 'evil-cleverparens-mode)
-        :custom ((evil-cleverparens-use-additional-bindings nil)
-                 (evil-cleverparens-use-s-and-S nil)
+        :custom ((evil-cleverparens-use-s-and-S nil)
                  (evil-cleverparens-swap-move-by-word-and-symbol t))))))
