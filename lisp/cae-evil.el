@@ -151,6 +151,9 @@
         :g "M-S-RET" #'cae-evil-org-insert-todo-heading
         :g "M-<return>" #'cae-evil-org-insert-heading
         :g "M-S-<return>" #'cae-evil-org-insert-todo-heading))
+(map! :leader
+      (:prefix "b"
+       :desc "New empty Org buffer" "o" #'+evil-buffer-org-new))
 
 
 ;;Local Variables:
