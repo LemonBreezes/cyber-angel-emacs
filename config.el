@@ -279,6 +279,7 @@
   (setq winum-auto-setup-mode-line t)
 
   ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
+  ;; EDIT: I decided to also disable `double-buffering'
   (when (modulep! :completion vertico +childframe)
     (after! vertico-posframe
       (setf (alist-get 'inhibit-double-buffering vertico-posframe-parameters) t)
@@ -293,8 +294,7 @@
   (after! posframe
     (setq posframe-inhibit-double-buffering t))
   (after! corfu
-    (pushnew! corfu--frame-parameters
-              '(inhibit-double-buffering . t)))
+    (setf (alist-get 'inhibit-double-buffering corfu--frame-parameters) t))
 
   (use-package! topsy
     :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
