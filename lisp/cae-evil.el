@@ -120,7 +120,8 @@
                 ;;  '("gd" "gf" "K"))
                 ;;(when (modulep! :tools eval)
                 ;;  '("gr" "gR"))
-                '("<escape>" "[" "]")))
+                '("<escape>" "[" "]"))
+        evil-collection-want-find-usages-bindings nil)
   (map! :n "]p" #'cae-unimpaired-paste-below
         :n "[p" #'cae-unimpaired-paste-above
         :n "] DEL" #'+evil/insert-newline-below
