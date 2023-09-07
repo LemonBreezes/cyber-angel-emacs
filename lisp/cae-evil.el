@@ -140,7 +140,7 @@
   (map! :map evil-org-mode-map
         :i "C-u" #'cae-evil-org-delete-back-to-indentation)
   (map! :map org-mode-map
-        :i "M-RET" #'cae-evil-org-insert-heading))
+        :g "M-RET" #'cae-evil-org-insert-heading))
 
 
 ;;Local Variables:
