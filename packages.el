@@ -15,6 +15,8 @@
                    highlight-numbers)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
+(package! evil-org :recipe
+  (:host github :repo "LemonBreezes/evil-org-mode"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))

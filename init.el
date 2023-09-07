@@ -48,7 +48,7 @@
        file-templates
        format
        snippets
-       ;;multiple-cursors
+       multiple-cursors
        fold
        (evil +everywhere)
        lispy
