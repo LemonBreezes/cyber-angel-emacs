@@ -11,7 +11,7 @@ It should return a cons cell representing the X and Y coordinates. See
 Can be negative.")
 
 (defvar +helm-posframe-parameters
-  '((internal-border-width . 8)
+  '((internal-border-width . 1)
     (width . 0.65)
     (height . 0.35)
     (min-width . 80)
@@ -31,6 +31,8 @@ Can be negative.")
          [remap previous-line] #'helm-previous-line
          [left] #'left-char
          [right] #'right-char
+         [prior] #'helm-previous-page
+         [next] #'helm-next-page
          "C-S-f" #'helm-previous-page
          "C-S-n" #'helm-next-source
          "C-S-p" #'helm-previous-source
@@ -147,6 +149,7 @@ Can be negative.")
         helm-posframe-min-width 160
         helm-posframe-min-height 20
         helm-posframe-border-width 1)
+  (setq helm-posframe-parameters +helm-posframe-parameters)
   (advice-add #'helm-posframe-enable :around #'doom-shut-up-a)
   (advice-add #'helm-posframe-disable :around #'doom-shut-up-a)
   (helm-posframe-enable))
