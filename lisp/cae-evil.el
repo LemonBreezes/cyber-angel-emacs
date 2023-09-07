@@ -116,6 +116,10 @@
                         doom-leader-alt-key))
                 (when (modulep! :editor multiple-cursors)
                   '("gz"))
+                (when (modulep! :tools lookup)
+                  '("gd" "gf" "K"))
+                (when (modulep! :tools eval)
+                  '("gr" "gR"))
                 '("<escape>" "[" "]")))
   (map! :n "]p" #'cae-unimpaired-paste-below
         :n "[p" #'cae-unimpaired-paste-above
