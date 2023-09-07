@@ -141,7 +141,8 @@
       (setq lispyville-motions-put-into-special t))))
 
 (when (and (not (modulep! :editor lispy))
-           (modulep! :config default +smartparens))
+           (modulep! :config default +smartparens)
+           (modulep! :editor evil))
   (use-package! evil-cleverparens
     :after evil
     :custom
