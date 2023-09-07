@@ -21,7 +21,6 @@
            (modulep! :completion vertico))
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; ;; Extra stuff for when we run Doom without any modules loaded.
 (unless (or (modulep! :completion helm)
             (modulep! :completion ivy)
             (modulep! :completion vertico))
@@ -525,9 +524,9 @@
     :after tramp-sh
     :config
     (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-    (advice-add #'dirvish-data-for-dir :around
-                (cae-defun cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
-                  (funcall oldfun (tramp-file-local-name dir) buffer setup)))
+    (advice-add #'dirvish-data-for-dir :before-until
+                (cae-defun cae-auto-sudoedit-file-local-name-a (dir buffer setup)
+                  (and (featurep 'tramp) (file-remote-p dir))))
     (auto-sudoedit-mode +1))
 
   (use-package! font-lock-studio
