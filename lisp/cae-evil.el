@@ -141,7 +141,9 @@
         :i "C-u" #'cae-evil-org-delete-back-to-indentation)
   (map! :map org-mode-map
         :g "M-RET" #'cae-evil-org-insert-heading
-        :g "M-S-RET" #'cae-evil-org-insert-todo-heading))
+        :g "M-S-RET" #'cae-evil-org-insert-todo-heading
+        :g "M-<return>" #'cae-evil-org-insert-heading
+        :g "M-S-<return>" #'cae-evil-org-insert-todo-heading))
 
 
 ;;Local Variables:
