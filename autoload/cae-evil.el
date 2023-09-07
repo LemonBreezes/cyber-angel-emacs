@@ -88,3 +88,10 @@ according to `evil-backspace-join-lines'."
         (org-beg (save-excursion (org-beginning-of-line) (point))))
     (evil-delete (max beg org-beg)
                  (point))))
+
+;;;###autoload
+(defun cae-evil-org-insert-heading ()
+  (interactive)
+  (call-interactively #'org-insert-heading)
+  (when (eq evil-state 'normal)
+    (evil-append-line 1)))
