@@ -52,7 +52,8 @@
         :defer t :init
         (add-hook 'prog-mode-hook 'evil-cleverparens-mode)
         :custom ((evil-cleverparens-use-additional-bindings nil)
-                 (evil-cleverparens-use-s-and-S nil))))))
+                 (evil-cleverparens-use-s-and-S nil)
+                 (evil-cleverparens-swap-move-by-word-and-symbol t))))))
 
 (unless (modulep! :editor lispy)
   (use-package! paredit
