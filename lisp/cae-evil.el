@@ -116,8 +116,8 @@
                         doom-leader-alt-key))
                 (when (modulep! :editor multiple-cursors)
                   '("gz"))
-                (when (modulep! :tools lookup)
-                  '("gd" "gf" "K"))
+                ;;(when (modulep! :tools lookup)
+                ;;  '("gd" "gf" "K"))
                 ;; Hopefuly setting `evil-collection-want-find-usages-bindings'
                 ;; to nil is enough.
                 ;; (when (modulep! :tools eval)
