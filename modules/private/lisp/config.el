@@ -144,6 +144,7 @@
            (modulep! :config default +smartparens)
            (modulep! :editor evil))
   (use-package! evil-cleverparens
+    :after evil
     :custom
     (evil-cleverparens-use-additional-bindings nil)
     :hook (paredit-mode . evil-cleverparens-mode))
