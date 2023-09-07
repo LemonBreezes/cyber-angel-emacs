@@ -282,7 +282,8 @@
   (when (modulep! :completion vertico +childframe)
     (after! vertico-posframe
       (setq vertico-posframe-parameters
-            '((inhibit-double-buffering . t)))))
+            '((inhibit-double-buffering . t)
+              (parent-frame . nil)))))
   (after! posframe
     (setq posframe-inhibit-double-buffering t))
   (after! corfu
