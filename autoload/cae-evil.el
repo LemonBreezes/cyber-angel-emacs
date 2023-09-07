@@ -95,3 +95,11 @@ according to `evil-backspace-join-lines'."
   (call-interactively #'org-insert-heading)
   (when (eq evil-state 'normal)
     (evil-append-line 1)))
+
+;;;###autoload
+(defun cae-evil-org-insert-todo-heading ()
+  (interactive)
+  (call-interactively #'org-insert-todo-heading)
+  (+log evil-state)
+  (when (eq evil-state 'normal)
+    (evil-append-line 1)))
