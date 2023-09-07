@@ -27,7 +27,8 @@
   (interactive)
   (startup/kill-teams)
   ;; For some reason starting it with `start-process' doesn't work.
-  (shell-command-to-string "teams --no-sandbox"))
+  (shell-command-to-string (concat "teams "
+                                   (if (eq (user-uid) 0) "--no-sandbox" ""))))
 
 (defun startup/select-teams ()
   (interactive)
