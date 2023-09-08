@@ -38,7 +38,7 @@
   (+workspace-switch startup/teams-workspace t))
 
 (map! :map +startup-applications-map
-      :prefix-map ("t" . "teams")
+      :prefix "t"
       "r" #'startup/restart-teams
       "s" #'startup/select-teams
       "x" #'startup/kill-teams)
