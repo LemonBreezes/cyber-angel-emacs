@@ -768,11 +768,11 @@
           file-info-max-value-length 100))
 
   (use-package! titlecase
-    :defer t :init
-    (after! embark
-
-      (define-key embark-heading-map "T" #'titlecase-line)
-      (define-key embark-sentence-map "T" #'titlecase-sentence)))
+  :defer t :init
+  (after! embark
+    (define-key embark-region-map "T" #'titlecase-region)
+    (define-key embark-heading-map "T" #'titlecase-line)
+    (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
