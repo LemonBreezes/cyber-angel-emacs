@@ -232,6 +232,9 @@
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "u" "services"))
   :config
+  (map! :map daemons-mode-map
+        "<f6>" #'cae-cheatsheets-daemons
+        :n "<f6>" #'cae-cheatsheets-evil-daemons)
   (setq daemons-always-sudo t
         daemons-show-output-in-minibuffer t))
 
