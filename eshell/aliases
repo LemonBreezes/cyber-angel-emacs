@@ -1,8 +1,8 @@
 alias gr     egrep               --color=always                               $*
 alias c      xclip               -selection     clipboard                     $*
-alias emerge sudo emerge --color=y --autounmask --autounmask-continue --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) $*
-alias cmerge compile sudo emerge --color=y --autounmask --autounmask-continue --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) $*
-alias cmerge1 compile sudo emerge --color=y --autounmask --autounmask-continue --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) --oneshot $*
+alias emerge sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) $*
+alias cmerge compile sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) $*
+alias cmerge1 compile sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) --oneshot $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 

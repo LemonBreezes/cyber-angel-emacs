@@ -28,6 +28,11 @@
   (package! evil-owl)
   (package! string-inflection))
 
+;; cae-smartparens
+(when (and (not (modulep! :editor lispy))
+           (modulep! :editor evil))
+  (package! evil-cleverparens))
+
 ;;; UI
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
