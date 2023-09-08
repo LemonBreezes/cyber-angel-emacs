@@ -26,7 +26,6 @@
                   "~/.cache"))
         t))
 
-
 ;; Set our refresh rate to 144Hz.
 ;;(ignore-errors
 ;;  (call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer))
