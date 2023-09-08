@@ -60,7 +60,7 @@
         :n "<f6>" #'cae-cheatsheets-evil-timer-list
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
-      "<f6>" #'+list-processes-hydra/body
+      "<f6>" #'cae-cheatsheets-list-processes
       :n "gr" #'revert-buffer)
 (after! package
   (map! :map package-menu-mode-map
@@ -315,7 +315,8 @@
   :config
   (setq proced-enable-color-flag t)
   (map! :map proced-mode-map
-        "<f6>" #'+proced-hydra/body
+        "<f6>" #'cae-cheatsheets-proced
+        :n "<f6>" #'cae-cheatsheets-evil-proced
         "c" #'proced-mark-children
         :n "gr" #'revert-buffer))
 
