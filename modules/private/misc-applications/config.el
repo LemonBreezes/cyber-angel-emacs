@@ -635,9 +635,6 @@
                             ("Title" ,(- (window-width) 20 10 10 (* tabulated-list-padding 2)) t)
                             ("Length"  10 t)
                             ("Views" 10 t)])))
-  (advice-add #'empv--youtube-show-tabulated-results
-              :override
-              #'+empv--youtube-show-tabulated-results)
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
