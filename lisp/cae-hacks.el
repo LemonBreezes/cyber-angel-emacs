@@ -150,7 +150,6 @@ It is meant to be used as a `post-gc-hook'."
    (cond ((not arg) (not buffer-read-only))
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
-(defun oddp (n) (logbitp 0 n))
 
 ;; For some reason, I had to do this after updating Emacs30 to get
 ;; `cape-yasnippet' to work.
