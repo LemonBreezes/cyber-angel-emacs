@@ -468,7 +468,7 @@
         "f" #'+fireplace)
   :config
   (map! :map fireplace-mode-map
-        "<f6>" #'+fireplace-hydra/body
+        "<f6>" #'cae-cheatsheets-fireplace
         :ng "q" #'+fireplace-quit))
 
 (use-package! flames-of-freedom
