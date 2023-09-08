@@ -47,7 +47,7 @@
            (apply oldfun args))))
 
 (map! :map +startup-applications-map
-      :prefix-map ("v" . "virtualbox")
+      :prefix "v"
       "r" #'startup/restart-virtualbox
       "s" #'startup/select-virtualbox
       "x" #'startup/kill-virtualbox)
