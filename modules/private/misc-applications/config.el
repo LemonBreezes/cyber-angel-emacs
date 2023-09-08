@@ -59,7 +59,8 @@
         "<f6>" #'+timer-list-hydra/body
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
-      "<f6>" #'+list-processes-hydra/body)
+      "<f6>" #'+list-processes-hydra/body
+      :n "gr" #'revert-buffer)
 
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
