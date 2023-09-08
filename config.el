@@ -452,7 +452,12 @@
               (imenu grid)
               (t ,@(if (cae-display-graphic-p)
                        '(posframe indexed)
-                     '(vertico-flat-mode)))))))
+                     '(vertico-flat-mode))))
+            vertico-multiform-commands
+            `((cae-embark-act-with-completing-read
+               ,@(if (cae-display-graphic-p)
+                     '(posframe)
+                   '(vertico-flat-mode)))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
