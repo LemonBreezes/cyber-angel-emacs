@@ -36,7 +36,7 @@
   ("L" leetcode-set-prefer-language "Set preferred language" :column "Misc")
   ("O" leetcode-show-problem :column "Act on ID")
   ("P" leetcode-toggle-paid-display "Toggle paid problems" :column "Display")
-  ;;("S" tabulated-list-sort "Sort" :column "Misc")
+  ("S" tabulated-list-sort "Sort" :column "Misc")
   ("T" leetcode-toggle-tag-display "Toggle tag display" :column "Display")
   ("V" leetcode-view-problem "View problem" :column "Act on ID")
   ("b" leetcode-show-current-problem-in-browser "Browse problem URL" :column "Current problem")
