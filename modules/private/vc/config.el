@@ -36,11 +36,11 @@
         (setq forge-pull-notifications t
               forge-buffer-draft-p t)
         (map! :map forge-post-mode-map
-              "<f6>" #'cae-magit-forge-post-hydra/body
+              "<f6>" #'cae-cheatsheets-magit-forge-post
               :map forge-topic-mode-map
-              "<f6>" #'cae-magit-forge-topic-hydra/body
+              "<f6>" #'cae-cheatsheets-magit-forge-topic
               :map forge-pullreq-list-mode-map
-              "<f6>" #'cae-magit-forge-pullreq-list-hydra/body
+              "<f6>" #'cae-cheatsheets-magit-forge-pullreq-list
               :map forge-pullreq-list-mode-map
               "j" #'+default/search-buffer
               :map forge-topic-list-mode-map
