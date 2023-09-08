@@ -52,7 +52,7 @@
   (process-live-p startup/discord-process))
 
 (map! :map +startup-applications-map
-      :prefix-map ("d" . "discord")
+      :prefix "d"
       "r" #'startup/restart-discord
       "s" #'startup/select-discord
       "x" #'startup/kill-discord)
