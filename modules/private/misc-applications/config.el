@@ -56,11 +56,8 @@
     "T" "timers"))
 (after! timer-list
   (map! :map timer-list-mode-map
+        "<f6>" #'+timer-list-hydra/body
         :n "gr" #'revert-buffer))
-
-(after! timer-list
-  (map! :map timer-list-mode-map
-        "<f6>" #'+timer-list-hydra/body))
 (map! :map process-menu-mode-map
       "<f6>" #'+list-processes-hydra/body)
 
