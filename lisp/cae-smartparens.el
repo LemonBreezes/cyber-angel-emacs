@@ -58,4 +58,5 @@
                  (evil-cleverparens-swap-move-by-word-and-symbol t))
         :config
         (map! :map evil-cleverparens-mode-map
-              "M-\"" #'+evil-cp-wrap-next-double-quotes)))))
+              :n "M-\"" #'+evil-cp-wrap-next-double-quotes
+              :n "<f6>" #'cae-evil-cleverparens-hydra/body)))))
