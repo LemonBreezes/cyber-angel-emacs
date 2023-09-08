@@ -91,8 +91,8 @@
         "<next>" #'vertico-scroll-up
         "C-z" #'cae-embark-act-with-completing-read
         "<f6>" (if (modulep! :editor evil)
-                   #'cae-cheatsheets-vertico
-                 #'cae-cheatsheets-evil-vertico))))
+                   #'cae-cheatsheets-evil-vertico
+                 #'cae-cheatsheets-vertico))))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
