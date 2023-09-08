@@ -449,7 +449,6 @@
       (setq vertico-multiform-categories
             `((embark-keybinding grid)
               (consult-grep buffer)
-              (consult-location buffer)
               (imenu grid)
               (t ,@(if (cae-display-graphic-p)
                        '(posframe indexed)
