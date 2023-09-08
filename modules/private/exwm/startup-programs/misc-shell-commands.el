@@ -15,19 +15,18 @@
 ;; Allow commands running under Sudo to access the diplay.
 (start-process "xhost" startup/misc-shell-commands-buffer "xhost" "+")
 
-(benchmark-run 1
-  (when (> (car (memory-info)) (* 63 1024 1024))
-    (eval `(start-process "vmtouch" startup/misc-shell-commands-buffer "vmtouch" "-dl"
-            doom-user-dir doom-emacs-dir "/usr/share/emacs"
-            ,@native-comp-eln-load-path
-            ,@(list (executable-find "emacs")
-                    (executable-find "emacsclient")
-                    (executable-find "rg")
-                    startup/discord-executable
-                    startup/chromium-executable
-                    (executable-find "git")
-                    "~/.cache"))
-          t)))
+(when (> (car (memory-info)) (* 63 1024 1024))
+  (eval `(start-process "vmtouch" startup/misc-shell-commands-buffer "vmtouch" "-dl"
+          doom-user-dir doom-emacs-dir "/usr/share/emacs"
+          ,@native-comp-eln-load-path
+          ,@(list (executable-find "emacs")
+                  (executable-find "emacsclient")
+                  (executable-find "rg")
+                  startup/discord-executable
+                  startup/chromium-executable
+                  (executable-find "git")
+                  "~/.cache"))
+        t))
 
 
 ;; Set our refresh rate to 144Hz.
