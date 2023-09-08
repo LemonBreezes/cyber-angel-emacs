@@ -21,23 +21,3 @@ Meant to be used like:
 ;;;###autoload
 (defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
-
-;;;###autoload (autoload 'cae-magit-forge-post-hydra/body "private/vc/autoload" nil t)
-(defhydra cae-magit-forge-post-hydra (:color pink)
-  ("<f6>" nil "Exit" :exit t)
-  ("C-c C-c" forge-post-submit "Submit")
-  ("C-c C-e" forge-post-dispatch  "Dispatch")
-  ("C-c C-k" forge-post-cancel "Cancel"))
-
-;;;###autoload (autoload 'cae-magit-forge-topic-hydra/body "private/vc/autoload" nil t)
-(defhydra cae-magit-forge-topic-hydra (:color pink)
-  ("<f6>" nil "Exit" :exit t)
-  ("C-c C-n" forge-create-post "Create post")
-  ("C-c C-e" magit-edit-thing  "Edit")
-  ("C-c C-w" magit-browse-thing "Open in browser"))
-
-;;;###autoload (autoload 'cae-magit-forge-pullreq-list-hydra/body "private/vc/autoload" nil t)
-(defhydra cae-magit-forge-pullreq-list-hydra (:color pink)
-  ("<f6>" nil "Exit" :exit t)
-  ("j" +default/search-buffer "Search buffer")
-  ("o" forge-browse-topic "Open in browser"))
