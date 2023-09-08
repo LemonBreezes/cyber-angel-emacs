@@ -4,6 +4,7 @@
 (eval `(defhydra +timer-list-hydra (:color pink :hint nil)
          ("<f6>" nil "Exit" :exit t)
          ("q" quit-window nil :exit t)
+         ("S" tabulated-list-sort "Sort")
          ,@(if (modulep! :editor evil)
                '(("C" timer-list-cancel "Cancel timer")
                  ("gr" revert-buffer "Refresh"))
