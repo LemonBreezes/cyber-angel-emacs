@@ -4,6 +4,7 @@
 (eval `(defhydra +list-processes-hydra (:color pink :hint nil)
          ("<f6>" nil "Exit" :exit t)
          ("q" quit-window nil :exit t)
+         ("S" tabulated-list-sort "Sort")
          ,@(if (modulep! :editor evil)
                '(("D" process-menu-delete-process "Delete process")
                  ("gr" revert-buffer "Refresh"))
