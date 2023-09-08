@@ -51,8 +51,7 @@
   :before-while #'elcord--start-idle
   (process-live-p startup/discord-process))
 
-(map! :map +startup-applications-map
-      :prefix "d"
+(map! :map +startup-applications-map :prefix "d"
       "r" #'startup/restart-discord
       "s" #'startup/select-discord
       "x" #'startup/kill-discord)
