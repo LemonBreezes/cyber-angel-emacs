@@ -737,6 +737,24 @@
                              (avy-move-region . pre))
           avy-column-line-overlay t))
 
+  (use-package! embrace
+    :defer t :init
+    (advice-add #'embrace--show-help-buffer :around
+                (cae-defun +cae-embrace-use-popup-a (oldfun help-string)
+                  (cl-letf (((symbol-function #'display-buffer-in-side-window)
+                             (symbol-function #'display-buffer)))
+                    (funcall oldfun help-string))))
+    (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
+      #'+evil-embrace-lisp-mode-hook-h)
+    (defadvice! cae-embrace-init-pairs-a (&rest args)
+      :after #'embrace--setup-defaults
+      (embrace-add-pair-regexp ?\C-f "([^ ]+ " ")" 'embrace-with-prefix-function
+                               (embrace-build-help "(function " ")")))
+    :config
+    (after! evil-embrace
+      (setq evil-embrace-show-help-p t))
+    (setq embrace-show-help-p t))
+
   (use-package! abbrev
     :defer t :config
     (setq-default abbrev-mode t
