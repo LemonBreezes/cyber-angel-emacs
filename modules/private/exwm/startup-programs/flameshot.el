@@ -28,7 +28,7 @@
                  "gui"))
 
 (map! :map +startup-applications-map
-      :prefix-map ("f" . "flameshot")
+      :prefix "f"
       "r" #'startup/restart-flameshot
       "x" #'startup/kill-flameshot
       "f" #'startup/flameshot-take-screenshot)
