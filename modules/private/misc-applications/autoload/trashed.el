@@ -34,7 +34,7 @@
             ("zb" trashed-flag-backup-files "Flag backup files for deletion" :column "Flag")
             ("za" trashed-flag-auto-save-files "Flag auto save files" :column "Mark")
             ("gr" revert-buffer "Refresh" :column "Misc")
-            ("gO" trashed-display-file "Display file" :column "View")
+            ;;("gO" trashed-display-file "Display file" :column "View")
             ("M-RET" trashed-display-file "Display file" :column "View")
             ("RET" trashed-find-file "Find file" :column "View")
             ("S-RET" trashed-find-file-other-window "Find file other window" :column "View")
