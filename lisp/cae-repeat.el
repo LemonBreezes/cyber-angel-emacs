@@ -115,10 +115,6 @@
       ("C-p" evil-complete-previous-line
        "C-n" evil-complete-next-line))
 
-    (define-repeat-map evil-scroll
-      ("u" evil-scroll-up
-       "d" evil-scroll-down))
-
     (define-repeat-map evil-paste-pop
       ("n" evil-paste-pop-next
        "p" evil-paste-pop))
