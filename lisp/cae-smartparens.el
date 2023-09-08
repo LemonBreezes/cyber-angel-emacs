@@ -55,4 +55,7 @@
                 ("M-h" . evil-cp-beginning-of-defun)))
         (add-hook 'prog-mode-hook 'evil-cleverparens-mode)
         :custom ((evil-cleverparens-use-s-and-S nil)
-                 (evil-cleverparens-swap-move-by-word-and-symbol t))))))
+                 (evil-cleverparens-swap-move-by-word-and-symbol t))
+        :config
+        (map! :map evil-cleverparens-mode-map
+              "M-\"" #'+evil-cp-wrap-next-double-quotes)))))
