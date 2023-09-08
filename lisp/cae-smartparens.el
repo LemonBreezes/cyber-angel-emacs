@@ -90,11 +90,12 @@
                    ("M-C" sp-convolute-sexp "Edit")))
              ;; These below override built-in commands and I think with
              ;; `evil-cleverparens', they are not needed.
-             ;;("M-<delete>" sp-unwrap-sexp "Delete")
-             ;;("M-<backspace>" sp-backward-unwrap-sexp "Delete")
-             ;;("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
-             ;;("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
-             ;;("C-M-S-<backspace>" sp-backward-kill-sexp "Delete")
+             ("M-<delete>" sp-unwrap-sexp "Delete")
+             ("M-<backspace>" sp-backward-unwrap-sexp "Delete")
+             ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
+             ("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
+             ("C-M-S-<backspace>" sp-backward-kill-sexp "Delete")
+             ("C-M-S-<delete>" sp-forward-kill-sexp "Delete")
              ;;("C-]" sp-select-next-thing-exchange "Select") ;Overrides
                                         ;`abort-recursive-edit'.
              ;;("C-M-]" sp-select-next-thing "Select")
