@@ -95,7 +95,7 @@
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
              ("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
              ("C-M-S-<backspace>" sp-backward-kill-sexp "Delete")
-             ("C-M-S-<delete>" sp-forward-kill-sexp "Delete")
+             ("C-M-S-<delete>" sp-kill-sexp "Delete")
              ;;("C-]" sp-select-next-thing-exchange "Select") ;Overrides
                                         ;`abort-recursive-edit'.
              ;;("C-M-]" sp-select-next-thing "Select")
