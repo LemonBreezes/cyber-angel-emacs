@@ -120,7 +120,7 @@
                          ;; to nil is enough.
                          ;; (when (modulep! :tools eval)
                          ;; '("gr" "gR"))
-                         '("<escape>" "[" "]"))))
+                         '("<escape>" "[" "]" "<backspace>" "DEL"))))
   (setq evil-collection-key-blacklist blacklist)
   (after! evil-collection
     (setq evil-collection-key-blacklist blacklist
