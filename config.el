@@ -447,8 +447,8 @@
             `((embark-keybinding grid)
               (consult-grep buffer)
               (t ,@(if (cae-display-graphic-p)
-                       '(vertico-flat-mode indexed)
-                     '(posframe indexed)))))))
+                       '(posframe indexed)
+                     '(vertico-flat-mode)))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
