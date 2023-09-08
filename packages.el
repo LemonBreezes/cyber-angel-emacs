@@ -12,7 +12,8 @@
                    hl-line
                    flymake-popon
                    elfeed-goodies
-                   highlight-numbers)
+                   highlight-numbers
+                   which-key)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
