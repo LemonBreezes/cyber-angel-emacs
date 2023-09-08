@@ -292,7 +292,8 @@
   (add-hook 'trashed-mode-hook #'hl-line-mode)
   :config
   (map! :map trashed-mode-map
-        "<f6>" #'+trashed-hydra/body))
+        "<f6>" #'cae-cheatsheets-trashed-hydra/body
+        :n "<f6>" #'cae-sheetcheats-evil-trashed-hydra/body))
 
 (use-package! proced
   :defer t :init
