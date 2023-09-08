@@ -33,8 +33,8 @@
   ("M-[" evil-cp-wrap-next-square "Wrap next square" :column "Wrap")
   ("M-]" evil-cp-wrap-previous-square "Wrap previous square" :column "Wrap")
   ("M-{" evil-cp-wrap-next-curly "Wrap next curly" :column "Wrap")
-  ("M-}" evil-cp-wrap-previous-curly "Wrap next curly" :column "Wrap")
-  ("M-\"" +evil-cp-wrap-next-double-quotes "Wrap next quotes" :column "Wrap"))
+  ("M-}" evil-cp-wrap-previous-curly "Wrap previous curly" :column "Wrap")
+  ("M-\"" +evil-cp-wrap-next-double-quotes "Wrap next double quotes" :column "Wrap"))
 
 ;;;###autoload (autoload '+evil-cp-wrap-next-double-quotes "autoload/cae-evil" nil t)
 (evil-define-command +evil-cp-wrap-next-double-quotes (count)
