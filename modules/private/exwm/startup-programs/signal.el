@@ -29,7 +29,7 @@
   (+workspace-switch startup/signal-workspace t))
 
 (map! :map +startup-applications-map
-      :prefix-map ("s" . "signal")
+      :prefix "s"
       "r" #'startup/restart-signal
       "s" #'startup/select-signal
       "x" #'startup/kill-signal)
