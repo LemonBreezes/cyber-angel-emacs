@@ -25,6 +25,7 @@
        (let* ((once t)
               (timer
                (when (featurep 'which-key)
+                 (+log "HELLOOOOOO" keymap package)
                  (run-with-idle-timer
                   which-key-idle-delay nil
                   (lambda ()
