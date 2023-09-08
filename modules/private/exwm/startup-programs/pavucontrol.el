@@ -34,7 +34,7 @@
   (+workspace-switch startup/pavucontrol-workspace t))
 
 (map! :map +startup-applications-map
-      :prefix-map ("p" . "pavucontrol")
+      :prefix "p"
       "r" #'startup/restart-pavucontrol
       "s" #'startup/select-pavucontrol
       "x" #'startup/kill-pavucontrol)
