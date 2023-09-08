@@ -119,7 +119,7 @@
                                      (caddr x))))
             (cae-sp-cheat-sheet/body))
          t)
-        (define-key smartparens-mode-map (kbd "<f6>") #'cae-sp-cheat-sheet/body))
+        (define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
       (when (modulep! :editor multiple-cursors)
         (after! multiple-cursors-core
           (dolist (it sp--mc/cursor-specific-vars)
@@ -140,4 +140,4 @@
       ;; I define this key globally so that I can always reference the
       ;; `smartparens' keymap and use it as a hydra even if the mode is not
       ;; active.
-      (global-set-key (kbd (if (modulep! :editor lispy) "C-M-?" "<f6>")) #'cae-sp-cheat-sheet/body))))
+      (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body))))
