@@ -15,17 +15,6 @@
 ;; Allow commands running under Sudo to access the diplay.
 (start-process "xhost" startup/misc-shell-commands-buffer "xhost" "+")
 
-(when (> (car (memory-info)) (* 63 1024 1024))
-  (eval `(start-process "vmtouch" startup/misc-shell-commands-buffer "vmtouch" "-dl"
-          doom-user-dir doom-emacs-dir "/usr/share/emacs"
-          ,@native-comp-eln-load-path
-          ,@(list (executable-find "emacs")
-                  (executable-find "emacsclient")
-                  startup/discord-executable
-                  startup/chromium-executable
-                  "~/.cache"))
-        t))
-
 ;; Set our refresh rate to 144Hz.
 ;;(ignore-errors
 ;;  (call-process-shell-command "xrandr --output HDMI-0 --mode 2560x1440 -r 143.91" nil startup/misc-shell-commands-buffer))
