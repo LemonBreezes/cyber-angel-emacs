@@ -42,7 +42,6 @@
       (doom-mark-buffer-as-real-h))
     (pop-to-buffer repl-buffer)))
 
-
 ;;;###autoload
 (defun cae-debugger-run-or-pop-to-gdb ()
   (interactive)
