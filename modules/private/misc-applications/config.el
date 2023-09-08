@@ -293,7 +293,7 @@
   :config
   (map! :map trashed-mode-map
         "<f6>" #'cae-cheatsheets-trashed
-        :n "<f6>" #'cae-sheetcheats-evil-trashed))
+        :n "<f6>" #'cae-cheetcheats-evil-trashed))
 
 (use-package! proced
   :defer t :init
