@@ -66,7 +66,7 @@ unbalanced. Works with Lispy and Smartparens."
       (goto-char p))))
 
 ;;;###autoload
-(defun cae-raise-sexp ()
+(defun cae-sp-raise-sexp ()
   "Like `sp-raise-sexp', but works on the region if active."
   (interactive)
   (if (region-active-p)
