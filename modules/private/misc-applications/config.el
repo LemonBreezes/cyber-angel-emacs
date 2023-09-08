@@ -436,7 +436,7 @@
         "s" #'+snake)
   :config
   (map! :map snake-mode-map
-        "<f6>" #'+snake-hydra/body
+        "<f6>" #'cae-cheatsheets-snake
         :ng "q" #'+snake-quit
         :map snake-null-map
         :ng "q" #'+snake-quit))
@@ -449,7 +449,8 @@
          "t" #'+tetris))
   :config
   (map! :map tetris-mode-map
-        "<f6>" #'+tetris-hydra/body
+        "<f6>" #'cae-cheatsheets-tetris
+        :n "<f6>" #'cae-cheatsheets-evil-tetris
         :ng "a" #'autotetris-mode
         :ng "q" #'+tetris-quit)
   (map! :map autotetris-mode-map
