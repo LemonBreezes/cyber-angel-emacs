@@ -571,7 +571,8 @@
       (cl-pushnew #'somafm-mode evil-snipe-disabled-modes)))
   :config
   (map! :map somafm-mode-map
-        "<f6>" #'+somafm-hydra/body
+        "<f6>" #'cae-cheatsheets-somafm
+        :n "<f6>" #'cae-cheatsheets-evil-somafm
         :ng "q" #'quit-window
         :n "l" #'somafm--sort
         :n "s" #'somafm--stop))
