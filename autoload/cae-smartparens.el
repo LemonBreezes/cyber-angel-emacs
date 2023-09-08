@@ -1,0 +1,61 @@
+;;; autoload/cae-smartparens.el -*- lexical-binding: t; -*-
+
+;;;###autoload (autoload 'cae-evil-cleverparens-hydra/body "autoload/cae-smartparens" nil t)
+(defhydra cae-evil-cleverparens-hydra (:color pink :foreign-keys run)
+  ("<f6>" nil "Exit" :exit t)
+  ("M-(" evil-cp-wrap-next-round)
+  ("M-)" evil-cp-wrap-previous-round)
+  ("M-C" evil-cp-change-enclosing)
+  ("M-D" evil-cp-delete-enclosing)
+  ("M-J" sp-join-sexp)
+  ("M-O" evil-cp-open-above-form)
+  ("M-R" evil-cp-raise-form)
+  ("M-S" sp-split-sexp)
+  ("M-T" evil-cp-toggle-balanced-yank)
+  ("M-Y" evil-cp-yank-enclosing)
+  ("M-[" evil-cp-wrap-next-square)
+  ("M-]" evil-cp-wrap-previous-square)
+  ("M-a" evil-cp-insert-at-end-of-form)
+  ("M-c" evil-cp-change-sexp)
+  ("M-d" evil-cp-delete-sexp)
+  ("M-h" evil-cp-beginning-of-defun)
+  ("M-i" evil-cp-insert-at-beginning-of-form)
+  ("M-j" evil-cp-drag-forward)
+  ("M-k" evil-cp-drag-backward)
+  ("M-l" evil-cp-end-of-defun)
+  ("M-o" evil-cp-open-below-form)
+  ("M-q" sp-indent-defun)
+  ("M-r" sp-raise-sexp)
+  ("M-s" sp-splice-sexp)
+  ("M-t" sp-transpose-sexp)
+  ("M-v" sp-convolute-sexp)
+  ("M-w" evil-cp-copy-paste-form)
+  ("M-y" evil-cp-yank-sexp)
+  ("M-z" evil-cp-override)
+  ("M-{" evil-cp-wrap-next-curly)
+  ("M-}" evil-cp-wrap-previous-curly)
+  ("M-h" evil-cp-beginning-of-defun)
+  ("M-l" evil-cp-end-of-defun)
+  ("M-T" evil-cp-toggle-balanced-yank)
+  ("M-h" evil-cp-beginning-of-defun)
+  ("M-l" evil-cp-end-of-defun)
+  ("M-z" evil-cp-override))
+
+;;;###autoload (autoload '+evil-cp-wrap-next-double-quotes "autoload/cae-evil" nil t)
+(evil-define-command +evil-cp-wrap-next-double-quotes (count)
+  "Wraps the next COUNT sexps inside curly braces. If the point
+is inside a symbol, that symbol is treated as the first sexp to
+wrap.
+
+When called with \\[universal-argument], wraps the current
+enclosing form and the next N forms, where N is the count for how
+many times the \\[universal-argument] was invoked."
+  (interactive "<c>")
+  (setq count (or count 1))
+  (if (consp current-prefix-arg)
+      (let ((count (evil-cp-universal-invoke-arg-count)))
+        (save-excursion
+          (sp-backward-up-sexp)
+          (evil-cp--wrap-next "\"" count))
+        (evil-cp--backward-up-list))
+    (evil-cp--wrap-next "\"" count)))
