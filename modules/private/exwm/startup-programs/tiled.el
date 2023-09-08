@@ -33,11 +33,12 @@
       "r" #'startup/restart-tiled
       "s" #'startup/select-tiled
       "x" #'startup/kill-tiled)
-(which-key-add-keymap-based-replacements +startup-applications-map
-  "T" "Tiled"
-  "T r" "Restart Tiled"
-  "T s" "Select Tiled"
-  "T x" "Kill Tiled")
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+                                           "T" "Tiled"
+                                           "T r" "Restart Tiled"
+                                           "T s" "Select Tiled"
+                                           "T x" "Kill Tiled"))
 
 ;; (if (process-live-p startup/tiled-process)
 ;;     (startup/restart-tiled)
