@@ -444,6 +444,7 @@
       (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
     (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
     (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
+    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
     (after! vertico-multiform
       (setq vertico-multiform-categories
             `((embark-keybinding grid)
