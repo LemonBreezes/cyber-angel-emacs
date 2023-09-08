@@ -106,8 +106,8 @@
          `(defun cae-sp-cheat-sheet/body ()
             (interactive)
             ,(append
-              '(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-                 ("C-M-?" nil "Exit" :exit t))
+              `(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
+                 (,(if (modulep! :editor evil) "<f6>" "C-M-?") nil "Exit" :exit t))
               (cl-loop for x in bindings
                        collect (list (car x)
                                      (cadr x)
