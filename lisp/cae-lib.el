@@ -24,13 +24,16 @@
        (require ',package)
        (let* ((once t)
               (timer
-               (run-with-idle-timer
-                which-key-idle-delay nil
-                (lambda ()
-                  (when once
-                    (let ((which-key-show-prefix t))
-                      (which-key--show-keymap
-                       (symbol-name ',keymap) (symbol-value ',keymap) nil nil t)))))))
+               (when (featurep 'which-key)
+                 (run-with-idle-timer
+                  which-key-idle-delay nil
+                  (lambda ()
+                    (when once
+                      (let ((which-key-show-prefix t))
+                        (which-key--show-keymap
+                         (symbol-name ',keymap)
+                         (symbol-value ',keymap)
+                         nil nil t))))))))
          (set-transient-map (symbol-value ',keymap)
                             (lambda ()
                               (prog1 once
