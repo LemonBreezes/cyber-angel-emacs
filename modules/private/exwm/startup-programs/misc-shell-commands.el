@@ -9,10 +9,26 @@
 ;; (call-process-shell-command "nvidia-settings -a '[gpu:0]/gpupowermizermode=1'" nil startup/misc-shell-commands-buffer)
 
 ;; Run our CPU at max power.
-(call-process-shell-command "echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor" nil startup/misc-shell-commands-buffer)
+(let ((command "echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor"))
+  (start-process "cpu scaling governor" startup/misc-shell-commands-buffer "sh" "-c" command))
 
 ;; Allow commands running under Sudo to access the diplay.
-(call-process-shell-command "xhost +" nil startup/misc-shell-commands-buffer)
+(start-process "xhost" startup/misc-shell-commands-buffer "xhost" "+")
+
+(benchmark-run 1
+  (when (> (car (memory-info)) (* 63 1024 1024))
+    (eval `(start-process "vmtouch" startup/misc-shell-commands-buffer "vmtouch" "-dl"
+            doom-user-dir doom-emacs-dir "/usr/share/emacs"
+            ,@native-comp-eln-load-path
+            ,@(list (executable-find "emacs")
+                    (executable-find "emacsclient")
+                    (executable-find "rg")
+                    startup/discord-executable
+                    startup/chromium-executable
+                    (executable-find "git")
+                    "~/.cache"))
+          t)))
+
 
 ;; Set our refresh rate to 144Hz.
 ;;(ignore-errors
