@@ -28,7 +28,7 @@
   (+workspace-switch startup/gimp-workspace t))
 
 (map! :map +startup-applications-map
-      :prefix-map ("g" . "gimp")
+      :prefix "g"
       "r" #'startup/restart-gimp
       "s" #'startup/select-gimp
       "x" #'startup/kill-gimp)
