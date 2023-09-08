@@ -21,7 +21,7 @@
   ("m" trashed-mark "Mark" :column "Mark")
   ("t" trashed-toggle-marks "Toggle marks" :column "Mark")
   ("U" trashed-unmark-all "Unmark all" :column "Mark")
-  ;;("S" tabulated-list-sort "Sort" :column "Misc")
+  ("S" tabulated-list-sort "Sort" :column "Misc")
   ("g" revert-buffer "Refresh" :column "Misc")
   ("#" trashed-flag-auto-save-files "Flag auto save files" :column "Mark")
   ("x" trashed-do-execute "Execute" :column "Do")
