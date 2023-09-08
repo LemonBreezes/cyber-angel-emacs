@@ -63,6 +63,7 @@
       :n "gr" #'revert-buffer)
 (after! package
   (map! :map package-menu-mode-map
+        ;; This one is not complete yet but it's fine. Just use Embark instead.
         "<f6>" #'+list-packages-hydra/body))
 
 (when (or (modulep! :private helm)
