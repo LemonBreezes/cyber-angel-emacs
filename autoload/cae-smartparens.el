@@ -39,7 +39,8 @@
   ("M-T" evil-cp-toggle-balanced-yank)
   ("M-h" evil-cp-beginning-of-defun)
   ("M-l" evil-cp-end-of-defun)
-  ("M-z" evil-cp-override))
+  ("M-z" evil-cp-override)
+  ("M-\"" +evil-cp-wrap-next-double-quotes))
 
 ;;;###autoload (autoload '+evil-cp-wrap-next-double-quotes "autoload/cae-evil" nil t)
 (evil-define-command +evil-cp-wrap-next-double-quotes (count)
