@@ -107,7 +107,7 @@
             (interactive)
             ,(append
               `(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-                 (,(if (modulep! :editor evil) "<f6>" "C-M-?") nil "Exit" :exit t))
+                 (,(if (modulep! :editor lispy) "C-M-?" "<f6>") nil "Exit" :exit t))
               (cl-loop for x in bindings
                        collect (list (car x)
                                      (cadr x)
@@ -139,4 +139,4 @@
       ;; I define this key globally so that I can always reference the
       ;; `smartparens' keymap and use it as a hydra even if the mode is not
       ;; active.
-      (global-set-key (kbd "<f6>") #'cae-sp-cheat-sheet/body))))
+      (global-set-key (kbd (if (modulep! :editor lispy) "C-M-?" "<f6>")) #'cae-sp-cheat-sheet/body))))
