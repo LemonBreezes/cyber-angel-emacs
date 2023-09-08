@@ -41,6 +41,7 @@
       ("net-runelite-client-runelite" . "RuneLite")
       ("gnome-control-center" . "Gnome CC")
       ("microsoft teams" . "Teams")
+      ("teams-for-linux" . "Teams")
       ("virtualbox" . "VirtualBox")
       ("virtualbox manager" . "VirtualBox")
       ("virtualboxvm" . "VirtualBox")
