@@ -109,27 +109,28 @@
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
-(after! evil-collection
-  (setq evil-collection-key-blacklist
-        (append (when (modulep! :config default)
-                  (list doom-leader-key doom-localleader-key
-                        doom-leader-alt-key))
-                (when (modulep! :editor multiple-cursors)
-                  '("gz"))
-                ;;(when (modulep! :tools lookup)
-                ;;  '("gd" "gf" "K"))
-                ;; Hopefuly setting `evil-collection-want-find-usages-bindings'
-                ;; to nil is enough.
-                ;; (when (modulep! :tools eval)
-                ;; '("gr" "gR"))
-                '("<escape>" "[" "]"))
-        evil-collection-want-find-usages-bindings nil)
-  (map! :n "]p" #'cae-unimpaired-paste-below
-        :n "[p" #'cae-unimpaired-paste-above
-        :n "] DEL" #'+evil/insert-newline-below
-        :n "[ DEL" #'+evil/insert-newline-above
-        :m "[6" #'cae-unimpaired-b64-encode
-        :m "]6" #'cae-unimpaired-b64-decode))
+(let ((blacklist (append (when (modulep! :config default)
+                           (list doom-leader-key doom-localleader-key
+                                 doom-leader-alt-key))
+                         (when (modulep! :editor multiple-cursors)
+                           '("gz"))
+                         ;;(when (modulep! :tools lookup)
+                         ;;  '("gd" "gf" "K"))
+                         ;; Hopefuly setting `evil-collection-want-find-usages-bindings'
+                         ;; to nil is enough.
+                         ;; (when (modulep! :tools eval)
+                         ;; '("gr" "gR"))
+                         '("<escape>" "[" "]"))))
+  (setq evil-collection-key-blacklist blacklist)
+  (after! evil-collection
+    (setq evil-collection-key-blacklist blacklist
+          evil-collection-want-find-usages-bindings nil)
+    (map! :n "]p" #'cae-unimpaired-paste-below
+          :n "[p" #'cae-unimpaired-paste-above
+          :n "] DEL" #'+evil/insert-newline-below
+          :n "[ DEL" #'+evil/insert-newline-above
+          :m "[6" #'cae-unimpaired-b64-encode
+          :m "]6" #'cae-unimpaired-b64-decode)))
 
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
