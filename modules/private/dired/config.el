@@ -158,7 +158,7 @@
         "v" #'dirvish-vc-menu
         "h" #'dirvish-history-jump
         "j" #'+default/search-buffer
-        "<f6>" #'cae-dired-dirvish-hydra/body))
+        "<f6>" #'cae-cheatsheets-dirvish))
 (map! :leader
       "o-" #'cae-dired-jump
       "op" #'dirvish-side)
