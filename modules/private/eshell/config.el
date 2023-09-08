@@ -120,6 +120,9 @@
         :ig "C-d" #'cae-eshell-quit-or-delete-char
         [remap eshell-bol] #'beginning-of-line))
 
+;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
+(load! "eshell-doc-doom-pr-6867")
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :private eshell) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
