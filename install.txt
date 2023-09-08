@@ -8,3 +8,4 @@
 8. Install Pavucontrol.
 9. Install Youtube DLP (Youtube DL fork).
 10. Install Dunst.
+11. Install VMTouch.

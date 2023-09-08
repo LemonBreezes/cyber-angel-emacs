@@ -1,6 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
+;; This is where my cheatsheets are.
+(package! cae-cheatsheets :recipe (:host github :repo "LemonBreezes/cae-cheatsheets"))
+
 ;; Standalone apps
 (package! alarm-clock)
 (when (modulep! :app rss)
