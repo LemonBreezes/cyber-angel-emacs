@@ -444,7 +444,11 @@
     (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
     (after! vertico-multiform
       (setq vertico-multiform-categories
-            '((embark-keybinding grid)))))
+            `((embark-keybinding grid)
+              (consult-grep buffer)
+              (t ,@(if (cae-display-graphic-p)
+                       '(vertico-flat-mode indexed)
+                     '(posframe indexed)))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
