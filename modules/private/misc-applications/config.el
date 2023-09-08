@@ -130,8 +130,8 @@
   ;;("R" (elfeed-search-set-filter "@6-months-ago +reddit") "reddit" :column "Custom filters")
   ;;("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube" :column "Custom filters")
   (map! :map elfeed-search-mode-map
-        "<f6>" #'cae-elfeed-hydra/body
-        :n "<f6>" #'cae-elfeed-evil-hydra/body
+        "<f6>" #'cae-cheatsheets-elfeed
+        :n "<f6>" #'cae-cheatsheets-evil-elfeed
         ;; Elfeed maps `h' to `describe-mode', which is not as good.
         "h" #'cae-elfeed-hydra/body)
 
