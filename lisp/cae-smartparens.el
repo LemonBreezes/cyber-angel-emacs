@@ -71,7 +71,7 @@
                        ("C-M-a" . sp-backward-down-sexp)
                        ("C-M-n" . sp-next-sexp)
                        ("C-M-p" . sp-previous-sexp)
-                       ("C-M-R" . sp-raise-sexp)
+                       ("C-M-R" . cae-sp-raise-sexp)
                        ("C-)" . sp-forward-slurp-sexp)
                        ("C-M-)" . sp-slurp-hybrid-sexp)
                        ("C-(" . sp-backward-slurp-sexp)
