@@ -54,6 +54,8 @@
     "p" "packages"
     "E" "emacs processes"
     "T" "timers"))
+(map! :map timer-list-mode-map
+      :n "gr" #'revert-buffer)
 
 (after! timer-list
   (map! :map timer-list-mode-map
