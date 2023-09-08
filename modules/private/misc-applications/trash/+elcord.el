@@ -1,5 +1,8 @@
 ;;; private/misc-applications/trash/+elcord.el -*- lexical-binding: t; -*-
 
+;; This package is pretty cool. But I decided I did not want everyone on Discord
+;; to know what I was doing all the time. So I disabled it.
+
 (use-package! elcord
   :when (and (cae-display-graphic-p)
              (not (or (memq system-type '(cygwin windows-nt ms-dos))

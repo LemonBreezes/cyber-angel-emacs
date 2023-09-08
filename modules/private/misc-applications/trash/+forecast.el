@@ -1,5 +1,7 @@
 ;;; private/misc-applications/forecast.el -*- lexical-binding: t; -*-
 
+;; This package is broken. The API was shut down.
+
 (use-package! forecast
   :defer t
   :init

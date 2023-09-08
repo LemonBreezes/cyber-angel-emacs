@@ -1,5 +1,7 @@
 ;;; private/misc-applications/+ytel.el -*- lexical-binding: t; -*-
 
+;; `empv' blows this package out of the water.
+
 (use-package! ytel
   :defer t
   :init

@@ -1,5 +1,8 @@
 ;;; private/misc-applications/vuiet.el -*- lexical t; -*-
 
+;; I might pick this one back up again one day. My biggest complaint is the lack
+;; of a track looping feature.
+
 (use-package! vuiet
   :defer t
   :init

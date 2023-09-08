@@ -1,5 +1,7 @@
 ;;; private/misc-applications/+frameshot.el -*- lexical-binding: t; -*-
 
+;; I prefer to use Flameshot to take screenshots.
+
 (use-package! frameshot
   :defer t
   :init

@@ -1,5 +1,7 @@
 ;;; private/misc-applications/enime.el -*- lexical-binding: t; -*-
 
+;; This package is broken.
+
 (defvar +enime-workspace-name "*enime*")
 
 (use-package! enime

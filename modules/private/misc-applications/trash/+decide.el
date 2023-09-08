@@ -1,5 +1,8 @@
 ;;; private/misc-applications/trash/+decide.el -*- lexical-binding: t; -*-
 
+;; I never really saw a use for having this package in my config, it's a pretty
+;; niche package. I might add it back in the future though.
+
 (use-package! decide
   :defer t :init
   (map! :map +misc-applications-insert-map

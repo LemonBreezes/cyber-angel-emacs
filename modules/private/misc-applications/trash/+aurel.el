@@ -1,5 +1,7 @@
 ;;; private/misc-applications/aurel.el -*- lexical-binding: t; -*-
 
+;; I don't use Arch Linux anymore.
+
 (use-package! aurel
   :defer t
   :when (and (eq system-type 'gnu/linux) (executable-find "pacman"))

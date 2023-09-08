@@ -1,5 +1,8 @@
 ;;; private/misc-applications/+devdocs.el -*- lexical-binding: t; -*-
 
+;; All the lookup packages got removed because ChatGPT essentially made them
+;; obsolete.
+
 (use-package! devdocs
   :defer t
   :init

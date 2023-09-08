@@ -1,5 +1,8 @@
 ;;; private/misc-applications/+try.el -*- lexical-binding: t; -*-
 
+;; I moved `try' into my normal configuration and added it to my
+;; `embark-package-map'.
+
 (use-package! try
   :defer t
   :init
