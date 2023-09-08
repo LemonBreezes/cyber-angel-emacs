@@ -246,7 +246,7 @@
       "d" "disk usage"))
   :config
   (map! :map disk-usage-mode-map
-        "<f6>" #'+disk-usage-hydra/body))
+        "<f6>" #'cae-cheatsheets-disk-usage))
 
 (use-package! helm-linux-disks
   :when (and (eq system-type 'gnu/linux)
