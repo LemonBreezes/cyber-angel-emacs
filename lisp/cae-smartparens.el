@@ -107,6 +107,8 @@
             (interactive)
             ,(append
               `(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
+                 ;; If we're using Lispy, we want `<f6>' to be a cheatsheet for
+                 ;; that instead.
                  (,(if (modulep! :editor lispy) "C-M-?" "<f6>") nil "Exit" :exit t))
               (cl-loop for x in bindings
                        collect (list (car x)
