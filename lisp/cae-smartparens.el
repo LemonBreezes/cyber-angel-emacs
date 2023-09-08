@@ -88,8 +88,6 @@
                    ("M-J" sp-join-sexp "Edit")
                    ("M-D" sp-splice-sexp "Delete")
                    ("M-C" sp-convolute-sexp "Edit")))
-             ;; These below override built-in commands and I think with
-             ;; `evil-cleverparens', they are not needed.
              ("M-<delete>" sp-unwrap-sexp "Delete")
              ("M-<backspace>" sp-backward-unwrap-sexp "Delete")
              ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
