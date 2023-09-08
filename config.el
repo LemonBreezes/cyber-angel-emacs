@@ -438,6 +438,7 @@
     (after! marginalia
       ;; Use `embark-file-map' for `ffap-menu'.
       (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
+    (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
     (after! vertico-multiform
       (setq vertico-multiform-categories
             '((embark-keybinding grid)))))
