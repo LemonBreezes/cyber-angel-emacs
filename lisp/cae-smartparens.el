@@ -59,6 +59,7 @@
         :config
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'+evil-cp-wrap-next-double-quotes
+              :g "C-M-C" #'embrace-commander
               :n "<f6>" #'cae-cheatsheets-evil-cleverparens)))
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
