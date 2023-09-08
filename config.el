@@ -447,12 +447,11 @@
       (setq vertico-multiform-categories
             `((embark-keybinding grid)
               (consult-grep buffer)
-              (consult-line buffer)
+              (consult-location buffer)
+              (imenu buffer)
               (t ,@(if (cae-display-graphic-p)
                        '(posframe indexed)
-                     '(vertico-flat-mode))))
-            vertico-multiform-commands
-            '((+default/search-buffer buffer)))))
+                     '(vertico-flat-mode)))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
