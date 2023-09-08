@@ -437,7 +437,10 @@
   (when (modulep! :completion vertico)
     (after! marginalia
       ;; Use `embark-file-map' for `ffap-menu'.
-      (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file))))
+      (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
+    (after! vertico-multiform
+      (setq vertico-multiform-categories
+            '((embark-keybinding grid)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
