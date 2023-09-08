@@ -29,7 +29,7 @@
   (+workspace-switch-to-exwm-buffer-maybe))
 
 (map! :map +startup-applications-map
-      :prefix-map ("T" . "tiled")
+      :prefix"T"
       "r" #'startup/restart-tiled
       "s" #'startup/select-tiled
       "x" #'startup/kill-tiled)
