@@ -682,7 +682,7 @@
           ispell-help-in-bufferp 'electric))
 
   (after! vline
-    (setq vline-idle-time 0.5))
+    (setq vline-idle-time 0.1))
 
   (when (modulep! :emacs undo)
     (after! undo-fu
