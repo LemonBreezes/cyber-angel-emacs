@@ -594,7 +594,8 @@
         mpc-mpd-music-directory "/mnt/unindexed-music/")
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
-        "<f6>" #'+mpc-hydra/body
+        "<f6>" #'cae-cheatsheets-mpc
+        :n "<f6>" #'cae-cheatsheets-evil-mpc
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
