@@ -48,11 +48,12 @@
         "s" #'startup/select-chromium
         "x" #'startup/kill-chromium)
  t)
-(which-key-add-keymap-based-replacements +startup-applications-map
-  "c" "Chromium"
-  "c r" "Restart Chromium"
-  "c s" "Select Chromium"
-  "c x" "Kill Chromium")
+(after! which-key
+  (which-key-add-keymap-based-replacements +startup-applications-map
+                                           "c" "Chromium"
+                                           "c r" "Restart Chromium"
+                                           "c s" "Select Chromium"
+                                           "c x" "Kill Chromium"))
 
 (if (process-live-p startup/chromium-process)
     (startup/restart-chromium)
