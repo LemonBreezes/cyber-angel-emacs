@@ -60,84 +60,31 @@
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'+evil-cp-wrap-next-double-quotes
               :n "<f6>" #'cae-evil-cleverparens-hydra/body)))
-
-    ;; This way I can define the keybindings for `smartparens' and define the
-    ;; hydra cheatsheet in one place.
-    (let ((bindings
-           `(;; These are safe to have globally
-             ("C-M-t" sp-transpose-sexp "Edit")
-             ("C-x C-t" sp-transpose-hybrid-sexp "Edit")
-             ("C-M-k" sp-kill-sexp "Delete")
-             ("C-M-S-k" sp-kill-hybrid-sexp "Delete")
-             ("C-M-f" sp-forward-sexp "Move")
-             ("C-M-b" sp-backward-sexp "Move")
-             ("C-M-u" sp-backward-up-sexp "Move")
-             ("C-M-d" sp-down-sexp "Move")
-             ("C-M-a" sp-beginning-of-sexp "Move")
-             ("C-M-e" sp-up-sexp "Move")
-             ("C-M-a" sp-backward-down-sexp "Move")
-             ("C-M-n" sp-next-sexp "Move")
-             ("C-M-p" sp-previous-sexp "Move")
-             ("C-M-R" cae-raise-sexp "Delete")
-             ("C-)" sp-forward-slurp-sexp "Barf/Slurp")
-             ("C-M-)" sp-slurp-hybrid-sexp "Barf/Slurp")
-             ("C-(" sp-backward-slurp-sexp "Barf/Slurp")
-             ("C-}" sp-forward-barf-sexp "Barf/Slurp")
-             ("C-{" sp-backward-barf-sexp "Barf/Slurp")
-             ,@(unless (modulep! :editor evil)
-                 '(("M-(" sp-wrap-round "Edit")
-                   ("M-S" sp-split-sexp "Edit")
-                   ("M-J" sp-join-sexp "Edit")
-                   ("M-D" sp-splice-sexp "Delete")
-                   ("M-C" sp-convolute-sexp "Edit")))
-             ("M-<delete>" sp-unwrap-sexp "Delete")
-             ("M-<backspace>" sp-backward-unwrap-sexp "Delete")
-             ("C-M-<backspace>" sp-splice-sexp-killing-backward "Delete")
-             ("C-M-<delete>" sp-splice-sexp-killing-forward "Delete")
-             ("C-M-S-<backspace>" sp-backward-kill-sexp "Delete")
-             ("C-M-S-<delete>" sp-kill-sexp "Delete")
-             ;;("C-]" sp-select-next-thing-exchange "Select") ;Overrides
-                                        ;`abort-recursive-edit'.
-             ;;("C-M-]" sp-select-next-thing "Select")
-             ;;("C-M-@" sp-mark-sexp "Select")
-             ("C-M-S-w" sp-copy-sexp "Select")
-             )))
-      (when (modulep! :ui hydra)
-        (eval
-         `(defun cae-sp-cheat-sheet/body ()
-            (interactive)
-            ,(append
-              `(defhydra cae-sp-cheat-sheet (:hint nil :foreign-keys run)
-                 ("C-M-?" nil "Exit" :exit t))
-              (cl-loop for x in bindings
-                       collect (list (car x)
-                                     (cadr x)
-                                     (thread-last (symbol-name (cadr x))
-               (string-remove-prefix "cae-")
-               (string-remove-prefix "sp-"))
-                                     :column
-                                     (caddr x))))
-            (cae-sp-cheat-sheet/body))
-         t)
-        (define-key smartparens-mode-map (kbd "C-M-?") #'cae-sp-cheat-sheet/body))
-      (when (modulep! :editor multiple-cursors)
-        (after! multiple-cursors-core
-          (dolist (it sp--mc/cursor-specific-vars)
-            (add-to-list 'mc/cursor-specific-vars it))
-          (dolist (x bindings)
-            (add-to-list 'mc/cmds-to-run-for-all (cadr x))
-            (add-to-list 'mc/cmds-to-run-for-all
-                         (intern (concat "cae-sp-cheat-sheet/"
-                                         (symbol-name (cadr x))))))
-          (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/body)
-          (add-to-list 'mc/cmds-to-run-once #'cae-sp-cheat-sheet/nil)))
-      (dolist (x bindings)
-        (define-key smartparens-mode-map (kbd (car x)) (cadr x))
-        ;; Prevent our commands from being shadowed by `smartparens-mode-map'.
-        ;;(define-key smartparens-mode-map (kbd (car x)) nil)
-        ;;(global-set-key (kbd (car x)) (cadr x))
-        )
-      ;; I define this key globally so that I can always reference the
-      ;; `smartparens' keymap and use it as a hydra even if the mode is not
-      ;; active.
-      (global-set-key (kbd "C-M-?") #'cae-sp-cheat-sheet/body))))
+    (dolist (binding '(("C-M-t" . sp-transpose-sexp)
+                       ("C-M-k" . sp-kill-sexp)
+                       ("C-M-S-k" . sp-kill-hybrid-sexp)
+                       ("C-M-f" . sp-forward-sexp)
+                       ("C-M-b" . sp-backward-sexp)
+                       ("C-M-u" . sp-backward-up-sexp)
+                       ("C-M-d" . sp-down-sexp)
+                       ("C-M-e" . sp-up-sexp)
+                       ("C-M-a" . sp-backward-down-sexp)
+                       ("C-M-n" . sp-next-sexp)
+                       ("C-M-p" . sp-previous-sexp)
+                       ("C-M-R" . sp-raise-sexp)
+                       ("C-)" . sp-forward-slurp-sexp)
+                       ("C-M-)" . sp-slurp-hybrid-sexp)
+                       ("C-(" . sp-backward-slurp-sexp)
+                       ("C-}" . sp-forward-barf-sexp)
+                       ("C-{" . sp-backward-barf-sexp)
+                       ("M-<delete>" . sp-unwrap-sexp)
+                       ("M-<backspace>" . sp-backward-unwrap-sexp)
+                       ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
+                       ("C-M-<delete>" . sp-splice-sexp-killing-forward)
+                       ("C-M-S-<backspace>" . sp-backward-kill-sexp)
+                       ("C-M-S-<delete>" . sp-kill-sexp)
+                       ;;("C-]" . sp-select-next-thing-exchange) ;Overrides `abort-recursive-edit'.
+                       ;;("C-M-]" . sp-select-next-thing)
+                       ;;("C-M-@" . sp-mark-sexp)
+                       ("C-M-S-w" . sp-copy-sexp)))
+      (define-key smartparens-mode-map (kbd (car binding)) (cdr binding)))))
