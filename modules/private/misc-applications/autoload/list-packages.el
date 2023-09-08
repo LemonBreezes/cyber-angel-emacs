@@ -12,30 +12,17 @@
       t)
 
 (defhydra +list-packages-hydra (:color pink :hint nil)
-  "
-  _?_ : describe-package  _H_ : hide-package    _S_ : sort
-  _U_ : mark-upgrades     _b_ : report-bug      _d_ : mark-delete
-  _g_ : revert-buffer     _h_ : quick-help      _i_ : mark-install
-  _r_ : revert-buffer     _u_ : unmark          _w_ : browse-url
-  _x_ : execute
-
-  / / : clear-filter      / N : filter-by-name-or-description
-  / a : filter-by-archive / d : filter-by-description
-  / k : filter-by-keyword / m : filter-marked
-  / n : filter-by-name    / s : filter-by-status
-  / u : filter-upgradable / v : filter-by-version
-  "
   ("<f6>" nil "Exit" :exit t)
   ("q" quit-window :exit t)
-  ("?" package-menu-describe-package :column "Display")
-  ("H" package-menu-hide-package :column "Display")
-  ("S" tabulated-list-sort :column "Display")
-  ("U" package-menu-mark-upgrades :column "Mark")
-  ("b" package-report-bug :column "Act")
-  ("d" package-menu-mark-delete :column "Mark")
-  ("g" revert-buffer :column "Display")
-  ("h" package-menu-quick-help :column :column "Display")
-  ("i" package-menu-mark-install "Install" :column "Act")
+  ("?" package-menu-describe-package "Describe package" :column "Display")
+  ("H" package-menu-hide-package "Hide package" :column "Display")
+  ("S" tabulated-list-sort "Sort" :column "Display")
+  ("U" package-menu-mark-upgrades "Mark upgrades" :column "Mark")
+  ("b" package-report-bug "Report bug" :column "Act")
+  ("d" package-menu-mark-delete "Delete package" :column "Mark")
+  ("g" revert-buffer "Revert buffer" :column "Display")
+  ;;("h" package-menu-quick-help "Quick help" :column "Display")
+  ("i" package-menu-mark-install "Install package" :column "Act")
   ("r" revert-buffer "Revert buffer" :column "Display")
   ("u" package-menu-mark-unmark "Unmark" :column "Mark")
   ("w" package-browse-url "Browse URL" :column "Act")
