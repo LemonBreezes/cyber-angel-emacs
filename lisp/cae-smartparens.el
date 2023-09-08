@@ -98,7 +98,7 @@
                                         ;`abort-recursive-edit'.
              ;;("C-M-]" sp-select-next-thing "Select")
              ;;("C-M-@" sp-mark-sexp "Select")
-             ;;("C-M-S-w" sp-copy-sexp "Select")
+             ("C-M-S-w" sp-copy-sexp "Select")
              )))
       (when (modulep! :ui hydra)
         (eval
