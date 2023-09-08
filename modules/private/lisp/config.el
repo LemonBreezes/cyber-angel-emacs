@@ -47,10 +47,11 @@
 
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
-  (which-key-add-keymap-based-replacements rxt-mode-map
-    "C-c /" "pcre2el"
-    "C-c / e" "elisp"
-    "C-c / p" "pcre")
+  (after! which-key
+    (which-key-add-keymap-based-replacements rxt-mode-map
+      "C-c /" "pcre2el"
+      "C-c / e" "elisp"
+      "C-c / p" "pcre"))
   (map! :map rxt--read-pcre-mode-map
         "C-c C-i" #'rxt--toggle-i-mode
         "C-c C-t" #'rxt--toggle-s-mode
