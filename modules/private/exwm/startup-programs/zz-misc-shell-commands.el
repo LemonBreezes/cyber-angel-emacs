@@ -21,8 +21,10 @@
           ,@native-comp-eln-load-path
           ,@(list (executable-find "emacs")
                   (executable-find "emacsclient")
+                  (executable-find "rg")
                   startup/discord-executable
                   startup/chromium-executable
+                  (executable-find "git")
                   "~/.cache"))
         t))
 
