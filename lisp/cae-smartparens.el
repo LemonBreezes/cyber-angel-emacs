@@ -61,6 +61,8 @@
               :n "M-\"" #'+evil-cp-wrap-next-double-quotes
               :n "<f6>" #'cae-evil-cleverparens-hydra/body)))
 
+    ;; This way I can define the keybindings for `smartparens' and define the
+    ;; hydra cheatsheet in one place.
     (let ((bindings
            `(;; These are safe to have globally
              ("C-M-t" sp-transpose-sexp "Edit")
