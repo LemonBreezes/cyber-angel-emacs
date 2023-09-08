@@ -1,22 +1,5 @@
 ;;; private/misc-applications/autoload/tetris.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload '+tetris-hydra/body "private/misc-applications/autoload/tetris" nil t)
-(eval
- `(defhydra +tetris-hydra (:color pink :hint nil)
-    ("<f6>" nil "Exit" :exit t)
-    ("q" +tetris-quit nil :exit t)
-    ("n" tetris-start-game "Restart game" :column "Misc")
-    ("p" tetris-pause-game "Pause/Unpause game" :column "Misc")
-    ("<up>" tetris-rotate-prev "Rotate clockwise" :column "Movement")
-    ("<left>" tetris-move-left "Move left" :column "Movement")
-    ("<right>" tetris-move-right "Move right" :column "Movement")
-    ("a" autotetris-mode "Autotetris" :column "Misc")
-    ,@(if (modulep! :editor evil)
-          (list '("ZZ" tetris-end-game "Quit" :column "Misc")
-                '("TAB" tetris-move-bottom "Move bottom" :column "Movement"))
-        (list '("SPC" tetris-move-bottom "Move bottom" :column "Movement"))))
- t)
-
 ;;;###autoload
 (defun +tetris (&optional arg)
   (interactive "P")
