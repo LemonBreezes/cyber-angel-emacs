@@ -61,6 +61,9 @@
 (map! :map process-menu-mode-map
       "<f6>" #'+list-processes-hydra/body
       :n "gr" #'revert-buffer)
+(after! package
+  (map! :map package-menu-mode-map
+        "<f6>" #'+list-packages-hydra/body))
 
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
