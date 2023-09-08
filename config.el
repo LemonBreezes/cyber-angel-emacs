@@ -448,7 +448,7 @@
             `((embark-keybinding grid)
               (consult-grep buffer)
               (consult-location buffer)
-              (imenu buffer)
+              (imenu grid)
               (t ,@(if (cae-display-graphic-p)
                        '(posframe indexed)
                      '(vertico-flat-mode)))))))
