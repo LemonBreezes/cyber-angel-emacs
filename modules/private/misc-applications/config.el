@@ -425,7 +425,7 @@
         "r" #'speed-type--replay
         "n" #'speed-type--play-next
         :map speed-type-mode-map
-        "<f6>" #'+speed-type-hydra/body
+        "<f6>" #'cae-cheatsheets-speed-type
         :n "q" #'+speed-type-quit))
 
 (use-package! snake
