@@ -398,3 +398,7 @@ also marks comment with leading whitespace"
     (require 'auto-sudoedit)
     (auto-sudoedit)))
 
+;;;###autoload
+(defun cae-embrace-with-prefix-function ()
+  (let ((fname (read-string "Function: ")))
+    (cons (format "(%s " (or fname "")) ")")))
