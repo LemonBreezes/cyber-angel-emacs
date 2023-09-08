@@ -748,10 +748,9 @@
       #'+evil-embrace-lisp-mode-hook-h)
     (defadvice! cae-embrace-init-pairs-a (&rest args)
       :after #'embrace--setup-defaults
-      (embrace-add-pair-regexp ?\C-f "(\\(\\w\\|\\s_\\)+?+ " ")" 'cae-embrace-with-prefix-function
+      (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")" 'cae-embrace-with-prefix-function
                                (embrace-build-help "(function " ")")))
     :config
-    (embrace--setup-defaults)
     (after! evil-embrace
       (setq evil-embrace-show-help-p t))
     (setq embrace-show-help-p t))
