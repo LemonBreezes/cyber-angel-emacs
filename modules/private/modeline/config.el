@@ -1,9 +1,5 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(use-package! breadcrumb
-  :defer t :init
-  (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
-
 (when (modulep! :editor evil)
   (setq evil-mode-line-format
         '(after . mode-line-frame-identification)))
