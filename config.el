@@ -745,6 +745,9 @@
       #'+evil-embrace-lisp-mode-hook-h)
     (defadvice! cae-embrace-init-pairs-a (&rest args)
       :after #'embrace--setup-defaults
+      (dolist (pair '((?\{ . ("{" . "}"))
+                      (?\} . ("{ " . " }"))))
+        (embrace-add-pair (car pair) (cadr pair) (cddr pair)))
       (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")" 'cae-embrace-with-prefix-function
                                (embrace-build-help "(function " ")")))
     :config
@@ -808,7 +811,7 @@
           outline-font-lock-keywords nil)
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
-                                               "C-c @" "outline")))
+        "C-c @" "outline")))
 
   (use-package! embark
     :defer t :config
@@ -996,8 +999,8 @@
 
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
-                                             "C-c \"" "plot"
-                                             "C-c C-v" "org-babel-map")))
+      "C-c \"" "plot"
+      "C-c C-v" "org-babel-map")))
 
 ;;; Email
 
