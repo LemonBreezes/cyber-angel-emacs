@@ -155,6 +155,9 @@ It is meant to be used as a `post-gc-hook'."
 ;; `cape-yasnippet' to work.
 (defalias 'prefix #'string-prefix-p)
 
+;; Finally figured out where the `oddp' function went! Now those errors are gone.
+(defalias 'oddp #'cl-oddp)
+
 ;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
 (defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
