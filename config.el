@@ -260,7 +260,7 @@
         ("^\\*notmuch-hello"  :ignore)
         ("^\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top)
-        ("*Neato Graph Bar" :side top :select nil :quit t :ttl 0 :size cae-popup-shrink-to-fit)))
+        ("*Neato Graph Bar" :side top :quit t :ttl 0 :size 0.3)))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
