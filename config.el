@@ -541,7 +541,6 @@
                   (pcase-let ((`(,buf . ,setup) (process-get proc 'meta)))
                     (when (buffer-live-p buf)
                       (with-current-buffer buf
-                        (+log dirvish--attrs-hash)
                         (setq-local dirvish--attrs-hash (or dirvish--attrs-hash (make-hash-table))))))))
     (auto-sudoedit-mode +1)))
 
