@@ -541,8 +541,7 @@
   ;; to use sudo on a file before `tramp-sh' is loaded.
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
   (use-package! auto-sudoedit
-    :after tramp-sh
-    :config
+    :after tramp-sh :config
     (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
     (advice-add #'dirvish-data-for-dir :before-until
                 (cae-defun cae-auto-sudoedit-file-local-name-a (dir buffer setup)
