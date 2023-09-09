@@ -65,8 +65,8 @@
       :n "gr" #'revert-buffer)
 (after! package
   (map! :map package-menu-mode-map
-        "<f6>" #'cae-cheatsheets-list-packages
-        :n "<f6>" #'cae-cheatsheets-evil-list-packages
+        "<f6>" #'cae-cheatsheets-package-menu
+        :n "<f6>" #'cae-cheatsheets-evil-package-menu
         :n "s /" #'package-menu-clear-filter
         :n "s N" #'package-menu-filter-by-name-or-description
         :n "s a" #'package-menu-filter-by-archive
