@@ -15,7 +15,7 @@
 (map! :leader :desc "misc-applications" +misc-applications-prefix #'+misc-applications-map)
 (after! which-key
   (which-key-add-keymap-based-replacements 'doom-leader-map
-    +misc-applications-prefix "misc-applications"))
+                                           +misc-applications-prefix "misc-applications"))
 (defvar application-types
   '(("games" "g")
     ("eyecandy" "e")
@@ -61,7 +61,17 @@
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
       "<f6>" #'cae-cheatsheets-list-processes
-      :n "gr" #'revert-buffer)
+      :n "gr" #'revert-buffer
+      :n "s /" #'package-menu-clear-filter
+      :n "s N" #'package-menu-filter-by-name-or-description
+      :n "s a" #'package-menu-filter-by-archive
+      :n "s d" #'package-menu-filter-by-description
+      :n "s k" #'package-menu-filter-by-keyword
+      :n "s m" #'package-menu-filter-marked
+      :n "s n" #'package-menu-filter-by-name
+      :n "s s" #'package-menu-filter-by-status
+      :n "s u" #'package-menu-filter-upgradable
+      :n "s v" #'package-menu-filter-by-version)
 (after! package
   (map! :map package-menu-mode-map
         ;; This one is not complete yet but it's fine. Just use Embark instead.
