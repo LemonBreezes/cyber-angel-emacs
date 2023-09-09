@@ -64,7 +64,6 @@
       :n "gr" #'revert-buffer)
 (after! package
   (map! :map package-menu-mode-map
-        ;; This one is not complete yet but it's fine. Just use Embark instead.
         "<f6>" #'cae-cheatsheets-list-packages
         :n "<f6>" #'cae-cheatsheets-evil-list-packages
         :n "s /" #'package-menu-clear-filter
