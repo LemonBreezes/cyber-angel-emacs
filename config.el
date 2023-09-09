@@ -61,7 +61,7 @@
         "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; I'm gonna try using `embark-prefix-help-command' instead of `which-key'.
-(remove-hook 'doom-first-input #'which-key-mode)
+(remove-hook 'doom-first-input-hook #'which-key-mode)
 
 
 ;;; UI
