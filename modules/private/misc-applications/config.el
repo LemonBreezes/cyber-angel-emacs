@@ -60,7 +60,8 @@
         :n "<f6>" #'cae-cheatsheets-evil-timer-list
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
-      "<f6>" #'cae-cheatsheets-list-processes
+      "<f6>" #'cae-cheatsheets-process-menu
+      :n "<f6>" #'cae-cheatsheets-evil-process-menu
       :n "gr" #'revert-buffer)
 (after! package
   (map! :map package-menu-mode-map
