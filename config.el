@@ -745,8 +745,9 @@
       #'+evil-embrace-lisp-mode-hook-h)
     (defadvice! cae-embrace-init-pairs-a (&rest args)
       :after #'embrace--setup-defaults
-      (dolist (pair '((?\{ . ("{" . "}"))
-                      (?\} . ("{ " . " }"))))
+      ;; Switch `{' and `}' to match `evil-surround'.
+      (dolist (pair '((?\} . ("{" . "}"))
+                      (?\{ . ("{ " . " }"))))
         (embrace-add-pair (car pair) (cadr pair) (cddr pair)))
       (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")" 'cae-embrace-with-prefix-function
                                (embrace-build-help "(function " ")")))
