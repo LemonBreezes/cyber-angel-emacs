@@ -111,16 +111,13 @@
       "r" "RSS"))
   :config
   (after! cae-cheatsheets
-    (defhydra+ cae-cheatsheets-elfeed-hydra ()
-      ("R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit")) "reddit" :column "Custom filters")
-      ("E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs")) "emacs" :column "Custom filters")
-      ("Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube")) "youtube" :column "Custom filters")
-      ("*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star")) "star" :column "Custom filters"))
-    (defhydra+ cae-cheatsheets-evil-elfeed-hydra ()
-      ("R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit")) "reddit" :column "Custom filters")
-      ("E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs")) "emacs" :column "Custom filters")
-      ("Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube")) "youtube" :column "Custom filters")
-      ("*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star")) "star" :column "Custom filters")))
+    (let ((new-heads
+           '(("R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit")) "reddit" :column "Custom filters")
+             ("E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs")) "emacs" :column "Custom filters")
+             ("Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube")) "youtube" :column "Custom filters")
+             ("*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star")) "star" :column "Custom filters"))))
+      (dolist (hydra '(cae-cheatsheets-elfeed-hydra cae-cheatsheets-evil-elfeed-hydra))
+        (eval `(defhydra+ ,hydra () ,@new-heads)))))
   (defalias 'elfeed-toggle-star
     (elfeed-expose #'elfeed-search-toggle-all 'star))
   (setq elfeed-search-filter
