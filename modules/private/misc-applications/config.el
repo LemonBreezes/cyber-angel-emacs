@@ -349,7 +349,7 @@
         "r" #'helm-rage)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-insert-map
-      "r" "Rage faces")))
+      "r" "Insert ASCII memes")))
 
 (use-package! lorem-ipsum
   :defer t :init
@@ -361,9 +361,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-insert-map
       "l" "lorem-ipsum"
-      "l l" "lorem-ipsum-insert-list"
-      "l p" "lorem-ipsum-insert-paragraphs"
-      "l s" "lorem-ipsum-insert-sentences")))
+      "l l" "Insert junk list"
+      "l p" "Insert junk paragraph"
+      "l s" "Insert junk sentences")))
 
 (use-package! password-generator
   :defer t :init
@@ -379,17 +379,20 @@
     (which-key-add-keymap-based-replacements
       +misc-applications-insert-map
       "p" "password-generator"
-      "pc" "custom"
-      "ps" "simple"
-      "pt" "strong"
-      "pn" "numeric"
-      "pp" "paranoid"
-      "ph" "phonetic")))
+      "pc" "Custom alphabet"
+      "ps" "Simple"
+      "pt" "Strong"
+      "pn" "Numeric"
+      "pp" "Paranoid"
+      "ph" "Phonetic")))
 
 (use-package! uuidgen
   :defer t :init
   (map! :map +misc-applications-insert-map
-        "u" #'uuidgen))
+        "u" #'uuidgen)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-insert-map
+      "u" "Generate UUID")))
 
 
 ;;; Games
