@@ -6,7 +6,9 @@
   (after! embrace
     (setq embrace-help-separator " -> "))
   (after! replace
-    query-replace-from-to-separator " -> "))
+    (setq query-replace-from-to-separator " -> "))
+  (after! helm-files
+    (setq helm-rsync-percent-sign "%")))
 
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
