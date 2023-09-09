@@ -545,7 +545,11 @@
     :defer t :config
     (when (modulep! :editor evil)
       (after! evil
-        (evil-set-initial-state 'font-lock-studio-mode 'emacs)))))
+        (evil-set-initial-state 'font-lock-studio-mode 'emacs)))
+    (advice-add #'font-lock-studio-region :around
+                (cae-defun cae-ignore-window-properties-a (fn &rest args)
+                  (let ((ignore-window-parameters t))
+                    (apply fn args))))))
 
 
 ;;; Editor
