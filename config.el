@@ -538,6 +538,7 @@
     (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
     (advice-add #'dirvish-data-for-dir :before-until
                 (cae-defun cae-auto-sudoedit-file-local-name-a (dir buffer setup)
+                  (setq-local dirvish--attrs-hash (or dirvish--attrs-hash (make-hash-table)))
                   (and (featurep 'tramp) (file-remote-p dir))))
     (auto-sudoedit-mode +1)))
 
