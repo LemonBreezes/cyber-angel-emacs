@@ -37,7 +37,7 @@
           ("\\.tbz\\'" ".tar" "pbunzip2")
           ("\\.bz2\\'" "" "pbunzip2")
           ("\\.xz\\'" "" "pixz -d")
-          ("\\.zip\\'" "" "unpigz -o -d %o %i")
+          ("\\.zip\\'" "" "unzip -o -d %o %i")
           ("\\.tar\\.zst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
