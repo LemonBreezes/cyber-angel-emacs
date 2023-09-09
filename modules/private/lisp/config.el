@@ -15,6 +15,14 @@
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
 
+(when (modulep! :tools eval +overlay)
+  (advice-add #'edebug-compute-previous-result
+              :around
+              #'adviced:edebug-compute-previous-result)
+  (advice-add #'edebug-previous-result
+              :around
+              #'adviced:edebug-previous-result))
+
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
   (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
