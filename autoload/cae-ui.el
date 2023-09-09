@@ -17,7 +17,7 @@
       (buffer-substring (point) (point-at-eol)))))
 
 ;;;###autoload
-(defun cae-apply-ansi-color-to-log-buffer-h ()
+(defun cae-apply-ansi-color-to-buffer-h ()
   (interactive)
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
