@@ -405,6 +405,8 @@
              (cl-destructuring-bind (regexp . face) keyword
                (string= "'[^']*'" regexp)))
            syslog-font-lock-keywords)))
+  ;; Prettify log buffers
+  (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
 
   ;; Set up printers.
   (after! lpr (setq printer-name "Brother_HL-2350DW"))
