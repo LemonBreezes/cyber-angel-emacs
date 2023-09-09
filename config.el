@@ -259,7 +259,8 @@
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
         ("^\\*notmuch-hello"  :ignore)
         ("^\\*gud-" :ttl nil :size 0.35)
-        ("embrace-help" :side top)))
+        ("embrace-help" :side top)
+        ("*Neato Graph Bar" :side top :quit t :ttl 0 :size cae-popup-shrink-to-fit)))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
