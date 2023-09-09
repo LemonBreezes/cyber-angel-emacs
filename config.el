@@ -539,8 +539,7 @@
     (advice-add #'dirvish-data-for-dir :before-until
                 (cae-defun cae-auto-sudoedit-file-local-name-a (dir buffer setup)
                   (and (featurep 'tramp) (file-remote-p dir))))
-    (auto-sudoedit-mode +1))
-)
+    (auto-sudoedit-mode +1)))
 
 
 ;;; Editor
@@ -1090,6 +1089,9 @@
          em-tramp em-smart em-banner em-basic em-cmpl
          em-extpipe em-glob em-hist em-ls em-script em-term
          em-alias em-elecslash em-rebind em-prompt))
+   ,@(when (or (modulep! :completion helm)
+               (modulep! :private helm))
+       '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
    ,@(when (modulep! :tools pdf)
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
