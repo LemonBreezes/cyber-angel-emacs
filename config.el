@@ -536,12 +536,12 @@
   (use-package! auto-sudoedit
     :after tramp-sh :config
     (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-    ;;(advice-add #'dirvish-dir-data-proc-s :before
-    ;;            (cae-defun cae-auto-sudoedit-update-dirvish-state-a (proc _exit)
-    ;;              (pcase-let ((`(,buf . ,setup) (process-get proc 'meta)))
-    ;;                (when (buffer-live-p buf)
-    ;;                  (with-current-buffer buf
-    ;;                    (setq-local dirvish--attrs-hash (or dirvish--attrs-hash (make-hash-table))))))))
+    (advice-add #'dirvish-dir-data-proc-s :before
+                (cae-defun cae-auto-sudoedit-update-dirvish-state-a (proc _exit)
+                  (pcase-let ((`(,buf . ,setup) (process-get proc 'meta)))
+                    (when (buffer-live-p buf)
+                      (with-current-buffer buf
+                        (setq-local dirvish--attrs-hash (or dirvish--attrs-hash (make-hash-table))))))))
     (auto-sudoedit-mode +1)))
 
 
