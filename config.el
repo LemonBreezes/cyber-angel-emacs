@@ -450,6 +450,7 @@
             `((embark-keybinding grid)
               (consult-grep buffer)
               (imenu grid)
+              (consult-location buffer)
               (t ,@(if (cae-display-graphic-p)
                        '(posframe indexed)
                      '(vertico-flat-mode))))
