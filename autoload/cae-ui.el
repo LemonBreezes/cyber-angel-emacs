@@ -15,3 +15,9 @@
       (back-to-indentation)
       (font-lock-ensure (point) (point-at-eol))
       (buffer-substring (point) (point-at-eol)))))
+
+;;;###autoload
+(defun cae-apply-ansi-color-to-log-buffer-h ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
