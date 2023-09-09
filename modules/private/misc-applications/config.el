@@ -330,7 +330,7 @@
       "g" "Resource usage graph"))
   :config
   (map! :map neato-graph-bar-mode-map
-        "q" #'quit-window))
+        :ng "q" #'quit-window))
 
 
 ;;; Insert
