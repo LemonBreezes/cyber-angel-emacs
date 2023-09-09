@@ -96,10 +96,6 @@
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
 
-  (after! ansi-color
-    ;; I am trying this out. Not sure if I like it yet.
-    (setq ansi-color-bold-is-bright t))
-
   (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
         kill-buffer-delete-auto-save-files t
         scroll-conservatively 0         ;Doom disables this option as a
