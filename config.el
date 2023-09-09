@@ -308,7 +308,6 @@
     :defer t :init
     (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
 
-
   (use-package! iscroll
     :defer t :init
     (add-hook 'org-mode-hook #'iscroll-mode)
