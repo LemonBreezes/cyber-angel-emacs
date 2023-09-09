@@ -131,12 +131,6 @@
         :n "m" #'elfeed-toggle-star
         :n "F" #'elfeed-tube-fetch
         :n "l" #'+elfeed-toggle-log-buffer
-        :ng "E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs"))
-        :ng "R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit"))
-        :ng "Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube"))
-        :ng "*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star"))
-        :ng "a" (cmd! () (elfeed-search-set-filter "@6-months-ago"))
-        :ng "T" (cmd! () (elfeed-search-set-filter "@1-day-ago"))
         :ng "t" #'mark-whole-buffer)
   ;;("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs" :column "Custom filters")
   ;;("R" (elfeed-search-set-filter "@6-months-ago +reddit") "reddit" :column "Custom filters")
