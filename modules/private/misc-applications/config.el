@@ -132,9 +132,6 @@
         :n "F" #'elfeed-tube-fetch
         :n "l" #'+elfeed-toggle-log-buffer
         :ng "t" #'mark-whole-buffer)
-  ;;("E" (elfeed-search-set-filter "@6-months-ago +emacs") "emacs" :column "Custom filters")
-  ;;("R" (elfeed-search-set-filter "@6-months-ago +reddit") "reddit" :column "Custom filters")
-  ;;("Y" (elfeed-search-set-filter "@6-months-ago +tube") "youtube" :column "Custom filters")
   (map! :map elfeed-search-mode-map
         "<f6>" #'cae-cheatsheets-elfeed
         :n "<f6>" #'cae-cheatsheets-evil-elfeed)
