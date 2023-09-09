@@ -1,6 +1,6 @@
 ;;; private/lisp/autoload/eval.el -*- lexical-binding: t; -*-
 
-(defun adviced:edebug-compute-previous-result (_ &rest r)
+(defun cae-edebug-compute-previous-result-a (_ &rest r)
   "Adviced `edebug-compute-previous-result'."
   (let ((previous-value (nth 0 r)))
     (if edebug-unwrap-results
@@ -9,7 +9,7 @@
     (setq edebug-previous-result
           (edebug-safe-prin1-to-string previous-value))))
 
-(defun adviced:edebug-previous-result (_ &rest r)
+(defun cae-edebug-previous-result-a (_ &rest r)
   "Adviced `edebug-previous-result'."
   (eros--make-result-overlay edebug-previous-result
     :where (point)
