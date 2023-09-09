@@ -747,7 +747,13 @@
       :after #'embrace--setup-defaults
       ;; Switch `{' and `}' to match `evil-surround'.
       (dolist (pair '((?\} . ("{" . "}"))
-                      (?\{ . ("{ " . " }"))))
+                      (?\{ . ("{ " . " }"))
+                      (?\( . ("( " . " )"))
+                      (?\) . ("(" . ")"))
+                      (?\[ . ("[ " . " ]"))
+                      (?\] . ("[" . "]"))
+                      (?< . ("< " . " >"))
+                      (?> . ("<" . ">"))))
         (embrace-add-pair (car pair) (cadr pair) (cddr pair)))
       (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")" 'cae-embrace-with-prefix-function
                                (embrace-build-help "(function " ")")))
