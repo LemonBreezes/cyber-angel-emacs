@@ -81,6 +81,8 @@
   (autoload 'minibuffer-depth-setup "mb-depth")
   (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
+  (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
+
   ;; I never use the mouse buttons on the tab bar so I prefer to not show them.
   (defadvice! cae-tab-bar-load-buttons-a ()
     :override #'tab-bar--load-buttons
