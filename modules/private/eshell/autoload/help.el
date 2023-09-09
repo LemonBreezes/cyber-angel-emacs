@@ -39,6 +39,7 @@
                               maximize (length s) into max
                               finally return s))
                 ((tldr-get-file-path-from-command-name cmd)))
-           (progn (display-buffer (get-buffer-create "*tldr*") #'display-buffer-same-window)
-                  (with-current-buffer "*tldr*" (tldr cmd)))
+           (progn
+             (set-window-buffer (selected-window) (get-buffer-create "*tldr*"))
+             (with-current-buffer "*tldr*" (tldr cmd)))
          (message "No tldr page for %s" cmd)))
