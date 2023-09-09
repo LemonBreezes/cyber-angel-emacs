@@ -431,6 +431,9 @@
   (defvar +dunnet--old-wconf nil)
   (map! :map +misc-applications-games-map
         "d" #'+dunnet)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "d" "Dunnet"))
   :config
   (when (modulep! :editor evil)
     (after! evil
@@ -445,6 +448,9 @@
   (defvar +speed-type--old-wconf nil)
   (map! :map +misc-applications-games-map
         "T" #'+speed-type-text)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "T" "Speed Type"))
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   :config
   (when (modulep! :private corfu)
@@ -466,6 +472,9 @@
   (defvar +snake--old-wconf nil)
   (map! :map +misc-applications-games-map
         "s" #'+snake)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "s" "Snake"))
   :config
   (map! :map snake-mode-map
         "<f6>" #'cae-cheatsheets-snake
@@ -479,6 +488,9 @@
   (defvar +tetris--old-wconf nil)
   (map! (:map +misc-applications-games-map
          "t" #'+tetris))
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "t" "Tetris"))
   :config
   (map! :map tetris-mode-map
         "<f6>" #'cae-cheatsheets-tetris
@@ -498,6 +510,9 @@
   (defvar +fireplace--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
         "f" #'+fireplace)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
+      "f" "Fireplace"))
   :config
   (map! :map fireplace-mode-map
         "<f6>" #'cae-cheatsheets-fireplace
@@ -508,19 +523,28 @@
   (defvar +flames-of-freedom-workspace-name "*flames-of-freedom*")
   (defvar +flames-of-freedom--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
-        "F" #'+flames-of-freedom))
+        "F" #'+flames-of-freedom)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
+      "F" "Flames of Freedom")))
 
 (use-package! snow
   :defer t :init
   (defvar +snow-workspace-name "*snow*")
   (defvar +snow--old-wconf nil)
   (map! :map +misc-applications-eyecandy-map
-        "s" #'+snow))
+        "s" #'+snow)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
+      "s" "Snow")))
 
 (use-package! zone
   :defer t :defer-incrementally t :init
   (map! :map +misc-applications-eyecandy-map
         "z" #'zone-choose)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
+      "z" "Zone"))
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
@@ -648,6 +672,9 @@
   :config
   (map! :map +misc-applications-music-map
         "m" empv-map)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-music-map
+      "m" "MPV"))
   (map! :map empv-map
         "P" #'empv-youtube-playlist
         "T" #'empv-youtube-tabulated
