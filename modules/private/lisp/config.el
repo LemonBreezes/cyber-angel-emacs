@@ -15,7 +15,22 @@
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
 
+;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
+  (defun cae-edebug-compute-previous-result-a (_ &rest r)
+    "Adviced `edebug-compute-previous-result'."
+    (let ((previous-value (nth 0 r)))
+      (if edebug-unwrap-results
+          (setq previous-value
+                (edebug-unwrap* previous-value)))
+      (setq edebug-previous-result
+            (edebug-safe-prin1-to-string previous-value))))
+
+  (defun cae-edebug-previous-result-a (_ &rest r)
+    "Adviced `edebug-previous-result'."
+    (eros--make-result-overlay edebug-previous-result
+      :where (point)
+      :duration eros-eval-result-duration))
   (advice-add #'edebug-compute-previous-result
               :around
               #'adviced:edebug-compute-previous-result)
@@ -25,12 +40,12 @@
 
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
-  (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
-    (when (string= (minibuffer-prompt) "Eval: ")
-      (setq-local comment-start ";"
-                  comment-end ""
-                  comment-start-skip ";+ *"
-                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
+          (cae-defun cae-lisp-eval-expression-set-up-comments-h ()
+            (when (string= (minibuffer-prompt) "Eval: ")
+              (setq-local comment-start ";"
+                          comment-end ""
+                          comment-start-skip ";+ *"
+                          comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
 
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
