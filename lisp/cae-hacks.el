@@ -155,7 +155,8 @@ It is meant to be used as a `post-gc-hook'."
 ;; `cape-yasnippet' to work.
 (defalias 'prefix #'string-prefix-p)
 
-;; Finally figured out where the `oddp' function went! Now those errors are gone.
+;; Finally figured out where the `oddp' function went! Now those errors in Corfu
+;; are gone.
 (defalias 'oddp #'cl-oddp)
 
 ;; This is for backwards compatibility with some of my old bookmarks.
