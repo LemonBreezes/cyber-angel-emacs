@@ -887,7 +887,8 @@
     (load! "lisp/cae-ido"))
 
   (after! yasnippet
-    (setq yas-triggers-in-field t))     ;Allow nested snippets.
+    (setq yas-triggers-in-field t     ;Allow nested snippets.
+          yas-trigger-symbol (if (cae-tty-disable-unicode-p) " =>"" →")))
 
   (use-package! dabbrev
     :defer t :config
