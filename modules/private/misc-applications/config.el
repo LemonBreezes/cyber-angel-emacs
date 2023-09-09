@@ -392,7 +392,7 @@
         "u" #'uuidgen)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-insert-map
-      "u" "Generate UUID")))
+      "u" "Insert UUID")))
 
 
 ;;; Games
