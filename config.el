@@ -304,6 +304,11 @@
   (after! corfu
     (setf (alist-get 'inhibit-double-buffering corfu--frame-parameters) t))
 
+  (use-package! breadcrumb
+    :defer t :init
+    (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
+
+
   (use-package! iscroll
     :defer t :init
     (add-hook 'org-mode-hook #'iscroll-mode)
@@ -797,11 +802,11 @@
           file-info-max-value-length 100))
 
   (use-package! titlecase
-  :defer t :init
-  (after! embark
-    (define-key embark-region-map "T" #'titlecase-region)
-    (define-key embark-heading-map "T" #'titlecase-line)
-    (define-key embark-sentence-map "T" #'titlecase-sentence)))
+    :defer t :init
+    (after! embark
+      (define-key embark-region-map "T" #'titlecase-region)
+      (define-key embark-heading-map "T" #'titlecase-line)
+      (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
   (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
     :defer t)
@@ -811,7 +816,7 @@
           outline-font-lock-keywords nil)
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
-        "C-c @" "outline")))
+                                               "C-c @" "outline")))
 
   (use-package! embark
     :defer t :config
@@ -999,8 +1004,8 @@
 
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
-      "C-c \"" "plot"
-      "C-c C-v" "org-babel-map")))
+                                             "C-c \"" "plot"
+                                             "C-c C-v" "org-babel-map")))
 
 ;;; Email
 
