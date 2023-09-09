@@ -321,6 +321,14 @@
         "c" #'proced-mark-children
         :n "gr" #'revert-buffer))
 
+(use-package! neato-graph-bar
+  :defer t :init
+  (map! :map +misc-applications-system-map
+        "g" #'neato-graph-bar)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "g" "Resource usage graph")))
+
 
 ;;; Insert
 
