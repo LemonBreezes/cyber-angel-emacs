@@ -71,7 +71,7 @@ Can be negative.")
          [C-return] #'helm-grep-run-other-window-action)))
 
 (use-package! helm
-  :after helm-mode
+  :defer t
   :preface
   (setq helm-candidate-number-limit 150
         ;; Remove extraineous helm UI elements
@@ -122,10 +122,7 @@ Can be negative.")
     ;; Instead, append those styles so that they act as a fallback.  Variable
     ;; completion-styles is ignored unless helm-completion-style is customized
     ;; to 'emacs.
-    (setq helm-completion-style 'emacs)
-    ;;(add-to-list 'completion-styles (if fuzzy 'flex 'helm) t)
-    )
-
+    (setq helm-completion-style 'emacs))
   :config
   (after! which-key
     (which-key-add-key-based-replacements "C-x c" "helm"))
