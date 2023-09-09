@@ -51,9 +51,9 @@
       "T" #'list-timers)
 (after! which-key
   (which-key-add-keymap-based-replacements '+misc-applications-system-map
-    "p" "packages"
-    "E" "emacs processes"
-    "T" "timers"))
+    "e" "List Emacs packages"
+    "E" "List Emacs processes"
+    "T" "List Emacs timers"))
 (after! timer-list
   (map! :map timer-list-mode-map
         "<f6>" #'cae-cheatsheets-timer-list
@@ -71,7 +71,10 @@
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
   (map! :map +misc-applications-map
-        "h" (cae-oneshot-keymap helm-command-map helm)))
+        "h" (cae-oneshot-keymap helm-command-map helm))
+  (after! which-key
+    (which-key-add-keymap-based-replacements '+misc-applications-map
+      "h" "helm")))
 
 
 ;;; Standalone apps
@@ -85,15 +88,15 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
       "a" "alarms"
-      "a a" "set alarm"
-      "a A" "list alarms"))
+      "a a" "Set alarm"
+      "a A" "List alarms"))
   :config
   (map! :map +misc-applications-standalone-apps-map
         :prefix "a"
         "k" #'alarm-clock-kill)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
-      "a k" "kill alarm"))
+      "a k" "Kill alarm"))
   (setq alarm-clock-cache-file
         (expand-file-name "alarm-clock.cache" doom-cache-dir))
   (alarm-clock--turn-autosave-on))
@@ -103,6 +106,9 @@
   :defer t :init
   (map! :map +misc-applications-standalone-apps-map
         "r" #'=rss)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "r" "RSS"))
   :config
   (defalias 'elfeed-toggle-star
     (elfeed-expose #'elfeed-search-toggle-all 'star))
@@ -230,7 +236,7 @@
         "u" #'daemons)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "u" "services"))
+      "u" "daemons"))
   :config
   (map! :map daemons-mode-map
         "<f6>" #'cae-cheatsheets-daemons
@@ -258,7 +264,7 @@
         "D" #'helm-linux-disks)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "D" "disks")))
+      "D" "Linux disks")))
 
 (use-package! helm-system-packages
   :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
@@ -309,7 +315,7 @@
         "p" #'proced)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "p" "processes"))
+      "p" "List system processes"))
   (when (modulep! :editor evil)
     (after! evil-snipe
       (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
@@ -340,7 +346,10 @@
             (modulep! :completion helm))
   :defer t :init
   (map! :map +misc-applications-insert-map
-        "r" #'helm-rage))
+        "r" #'helm-rage)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-insert-map
+      "r" "Rage faces")))
 
 (use-package! lorem-ipsum
   :defer t :init
