@@ -35,7 +35,9 @@
 
 ;;;###autoload
 (defun +eshell-man-to-tldr () "Go the tldr page for the current man pgae." (interactive)
-       (if-let ((cmd (car (split-string Man-arguments)))
+       (if-let ((cmd (cl-loop for s in (split-string Man-arguments)
+                              maximize (length s) into max
+                              finally return s))
                 ((tldr-get-file-path-from-command-name cmd)))
            (progn (display-buffer (get-buffer-create "*tldr*") #'display-buffer-same-window)
                   (with-current-buffer "*tldr*" (tldr cmd)))
