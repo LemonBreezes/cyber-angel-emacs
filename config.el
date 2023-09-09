@@ -745,7 +745,7 @@
       #'+evil-embrace-lisp-mode-hook-h)
     (defadvice! cae-embrace-init-pairs-a (&rest args)
       :after #'embrace--setup-defaults
-      ;; Switch `{' and `}' to match `evil-surround'.
+      ;; Switch opening and closing pairs to match `evil-surround'.
       (dolist (pair '((?\} . ("{" . "}"))
                       (?\{ . ("{ " . " }"))
                       (?\( . ("( " . " )"))
