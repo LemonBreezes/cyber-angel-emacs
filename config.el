@@ -338,7 +338,9 @@
     (after! corfu
       (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
     (setq beacon-blink-when-window-scrolls nil
-          beacon-overlay-priority -1))
+          beacon-overlay-priority -1)
+    (dolist (cmd '(+eshell-tldr-to-man))
+      (add-to-list 'beacon-dont-blink-commands cmd)))
 
   (use-package! hercules
     :defer t :init
