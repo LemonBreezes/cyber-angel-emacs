@@ -540,16 +540,7 @@
                 (cae-defun cae-auto-sudoedit-file-local-name-a (dir buffer setup)
                   (and (featurep 'tramp) (file-remote-p dir))))
     (auto-sudoedit-mode +1))
-
-  (use-package! font-lock-studio
-    :defer t :config
-    (when (modulep! :editor evil)
-      (after! evil
-        (evil-set-initial-state 'font-lock-studio-mode 'emacs)))
-    (advice-add #'font-lock-studio-region :around
-                (cae-defun cae-ignore-window-properties-a (fn &rest args)
-                  (let ((ignore-window-parameters t))
-                    (apply fn args))))))
+)
 
 
 ;;; Editor
