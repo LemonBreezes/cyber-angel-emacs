@@ -327,7 +327,10 @@
         "g" #'neato-graph-bar)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "g" "Resource usage graph")))
+      "g" "Resource usage graph"))
+  :config
+  (map! :map neato-graph-bar-mode-map
+        "q" #'quit-window))
 
 
 ;;; Insert
