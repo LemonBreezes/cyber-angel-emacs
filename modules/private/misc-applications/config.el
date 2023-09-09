@@ -111,17 +111,15 @@
       "r" "RSS"))
   :config
   (after! cae-cheatsheets
-    (let ((new-heads
+    (let ((custom-filters
            '(("R" (cmd! () (elfeed-search-set-filter "@6-months-ago +reddit")) "reddit" :column "Custom filters")
              ("E" (cmd! () (elfeed-search-set-filter "@6-months-ago +emacs")) "emacs" :column "Custom filters")
              ("Y" (cmd! () (elfeed-search-set-filter "@6-months-ago +tube")) "youtube" :column "Custom filters")
              ("*" (cmd! () (elfeed-search-set-filter "@6-months-ago +star")) "star" :column "Custom filters"))))
       (dolist (hydra '(cae-cheatsheets-elfeed-hydra cae-cheatsheets-evil-elfeed-hydra))
-        (eval `(defhydra+ ,hydra () ,@new-heads)))))
-  (defalias 'elfeed-toggle-star
-    (elfeed-expose #'elfeed-search-toggle-all 'star))
-  (setq elfeed-search-filter
-        "@2-week-ago +unread ~reddit.com/r/")
+        (eval `(defhydra+ ,hydra () ,@custom-filters)))
+      (cl-loop for (key . filter) in custom-filters do
+               (map! :ng key filter))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
