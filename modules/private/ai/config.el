@@ -51,7 +51,8 @@
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   :config
-  (setq chatgpt-shell-display-function #'switch-to-buffer)
+  (setq chatgpt-shell-display-function #'switch-to-buffer
+        chatgpt-shell-model-version 2)
   (advice-add #'shell-maker-async-shell-command
               :around
               (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
