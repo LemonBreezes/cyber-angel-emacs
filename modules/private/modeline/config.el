@@ -1,11 +1,5 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-;;(add-hook! 'doom-first-file-hook
-;;  (setq-default mode-line-format
-;;                (cl-subst '(:eval (breadcrumb-project-crumbs))
-;;                          'mode-line-buffer-identification
-;;                          (default-value 'mode-line-format))))
-
 (use-package! breadcrumb
   :defer t :init
   (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
