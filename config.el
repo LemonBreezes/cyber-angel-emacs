@@ -1100,7 +1100,15 @@
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
    ,@(when (modulep! :private misc-applications)
-       '(empv mpc somafm emms helm-emms))
+       '(empv mpc somafm emms helm-emms ; music
+         zone snow flames-of-freedom fireplace ; eyecandy
+         neato-graph-bar proced trashed pulseaudio-control ; system
+         helm-system-packages helm-linux-disks disk-usage daemons
+         consult-gh leetcode ; external apps
+         elfeed alarm-clock
+        tetris snake speed-type dunnet bubbles ; games
+        uuidgen password-generator lorem-ipsum helm-rage ; insert
+         ))
    ,@(when (modulep! :tools pdf)
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
