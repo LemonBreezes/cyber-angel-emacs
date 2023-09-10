@@ -674,7 +674,7 @@
   :defer t :init
   (map! :map +misc-applications-music-map
         "m" (cae-oneshot-keymap empv-map empv))
-  (after! which-ke
+  (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPV"))
   :config
