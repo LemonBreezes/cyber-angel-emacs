@@ -1090,6 +1090,8 @@
          em-tramp em-smart em-banner em-basic em-cmpl
          em-extpipe em-glob em-hist em-ls em-script em-term
          em-alias em-elecslash em-rebind em-prompt))
+   ,@(when (modulep! :term vterm)
+       '(vterm))
    ,@(when (or (modulep! :completion helm)
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
