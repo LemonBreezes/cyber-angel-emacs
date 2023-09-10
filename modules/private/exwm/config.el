@@ -82,7 +82,9 @@ expansion occurs within the parent Emacs session.")
                    ([?\s-&] . (lambda (command)
 		                (interactive (list (read-shell-command "$ ")))
 		                (start-process-shell-command command nil command)))
-                   ([?\s-d] . helm-run-external-command)))))
+                   ,@(when (or (modulep! :private helm)
+                               (modulep! :completion helm))
+                       '(([?\s-d] . helm-run-external-command)))))))
 
     (map! :map exwm-mode-map
           :localleader
