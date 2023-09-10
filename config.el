@@ -1110,7 +1110,9 @@
    ,@(when (and (or (modulep! :completion helm)
                     (modulep! :private helm))
                 (modulep! :private misc-applications))
-       '(helm-system-packages helm-emms helm-linux-disks)))
+       '(helm-system-packages helm-emms helm-linux-disks))
+   ,@(when (modulep! :private misc-applications)
+       '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)))
  t)
 
 (setq cae-config-finished-loading t)
