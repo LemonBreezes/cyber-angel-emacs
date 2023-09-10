@@ -1106,7 +1106,11 @@
    ,@(when (modulep! :app rss)
        '(elfeed))
    ,@(when (modulep! :app rss +org)
-       '(elfeed-org)))
+       '(elfeed-org))
+   ,@(when (and (or (modulep! :completion helm)
+                    (modulep! :private helm))
+                (modulep! :private misc-applications))
+       '(helm-system-packages helm-emms)))
  t)
 
 (setq cae-config-finished-loading t)
