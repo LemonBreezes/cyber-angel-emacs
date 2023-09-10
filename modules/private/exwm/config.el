@@ -81,7 +81,8 @@ expansion occurs within the parent Emacs session.")
                    ;; buffer does not bother you).
                    ([?\s-&] . (lambda (command)
 		                (interactive (list (read-shell-command "$ ")))
-		                (start-process-shell-command command nil command)))))))
+		                (start-process-shell-command command nil command)))
+                   ([?\s-d] . helm-run-external-command)))))
 
     (map! :map exwm-mode-map
           :localleader
