@@ -539,12 +539,6 @@
     (advice-add #'dirvish-data-for-dir :around
                 (cae-defun cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
                   (funcall oldfun (tramp-file-local-name dir) buffer setup)))
-    (advice-add #'dirvish-dir-data-proc-s :before
-                (cae-defun cae-auto-sudoedit-update-dirvish-state-a (proc _exit)
-                  (pcase-let ((`(,buf . ,setup) (process-get proc 'meta)))
-                    (when (buffer-live-p buf)
-                      (with-current-buffer buf
-                        (setq-local dirvish--attrs-hash (or dirvish--attrs-hash (make-hash-table))))))))
     (auto-sudoedit-mode +1)))
 
 
