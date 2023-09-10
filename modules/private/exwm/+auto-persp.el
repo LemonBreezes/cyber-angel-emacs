@@ -161,9 +161,9 @@ buffers of that class."
                                            :get-name #'+exwm-persp--get-name)
                    (+workspace-switch (car (+workspace-list-names)))
                    (advice-remove #'+workspace/display #'ignore)
-                   (+workspace/display)))
+                   (+workspace/display))))
 
-               (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app))
+  (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
 
   (add-hook! 'exwm-mode-hook
     (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace)))
