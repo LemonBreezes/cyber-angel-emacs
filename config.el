@@ -1097,7 +1097,7 @@
    ,@(when (or (modulep! :completion helm)
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
-   ,@(when (modulep! :private misc-applications)
+   ,@(when (modulep! :private misc-applications) ; music
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :private gnus)
        '(gnus gnus-group gnus-sum bbdb gnus-srvr))
