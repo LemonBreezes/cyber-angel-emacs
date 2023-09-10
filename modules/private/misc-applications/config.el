@@ -260,7 +260,8 @@
       "d" "disk usage"))
   :config
   (map! :map disk-usage-mode-map
-        "<f6>" #'cae-cheatsheets-disk-usage))
+        "<f6>" #'cae-cheatsheets-disk-usage
+        :n "<f6>" #'cae-cheatsheets-evil-disk-usage))
 
 (use-package! helm-linux-disks
   :when (and (eq system-type 'gnu/linux)
