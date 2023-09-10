@@ -83,10 +83,6 @@ expansion occurs within the parent Emacs session.")
 		                (interactive (list (read-shell-command "$ ")))
 		                (start-process-shell-command command nil command)))))))
 
-    (when (or (modulep! :completion helm)
-              (modulep! :private helm))
-      (map! "s-d" #'helm-run-external-command))
-
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
