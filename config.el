@@ -1099,6 +1099,8 @@
    ,@(when (or (modulep! :completion helm)
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
+   ,@(when (modulep! :private misc-applications)
+       '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :tools pdf)
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
  t)
