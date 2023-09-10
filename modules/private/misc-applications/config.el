@@ -587,7 +587,6 @@
   (setq zone-programs [zone-nyan
                        zone-rainbow
                        zone-matrix
-                       zone-tmux-clock
                        zone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
