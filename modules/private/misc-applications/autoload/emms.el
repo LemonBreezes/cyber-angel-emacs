@@ -24,7 +24,7 @@
     (when +emms--old-wconf
       (set-window-configuration +emms--old-wconf))))
 
-;;;###autoload (autoload '+emms-quick-access "private/emms/autoload/emms" nil t)
+;;;###autoload (autoload '+emms-quick-access "private/misc-applications/autoload/emms" nil t)
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
