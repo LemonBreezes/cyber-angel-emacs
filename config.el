@@ -1113,11 +1113,12 @@
    ,@(when (and (or (modulep! :completion helm)
                     (modulep! :private helm))
                 (modulep! :private misc-applications))
-       '(helm-system-packages helm-emms helm-linux-disks))
+       '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :private misc-applications) ; system apps
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
               '(snake speed-type tetris bubbles dunnet autotetris)
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow zone-nyan)
+              '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
               '(alarm))))
  t)
