@@ -1110,7 +1110,7 @@
    ,@(when (and (or (modulep! :completion helm)
                     (modulep! :private helm))
                 (modulep! :private misc-applications))
-       '(helm-system-packages helm-emms)))
+       '(helm-system-packages helm-emms helm-linux-disks)))
  t)
 
 (setq cae-config-finished-loading t)
