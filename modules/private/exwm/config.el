@@ -83,6 +83,10 @@ expansion occurs within the parent Emacs session.")
 		                (interactive (list (read-shell-command "$ ")))
 		                (start-process-shell-command command nil command)))))))
 
+    (when (or (modulep! :completion helm)
+              (modulep! :private helm))
+      (map! :leader :desc "Run external command" "s-d" #'helm-run-external-command))
+
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
@@ -209,7 +213,6 @@ expansion occurs within the parent Emacs session.")
 
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
-      (load! "+startup-programs")
       (load! "+auto-persp")))
 
   (when (modulep! +notifications)
