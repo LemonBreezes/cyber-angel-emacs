@@ -1083,7 +1083,7 @@
 
 (doom-load-packages-incrementally
  `(,@(when (modulep! :emacs dirvish)
-       '(dired transient dirvish))
+           '(dired transient dirvish))
    auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
@@ -1112,10 +1112,7 @@
                 (modulep! :private misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks))
    ,@(when (modulep! :private misc-applications) ; system apps
-       (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
-              '(tetris bubbles klondike speed-type autotetris-mode dunnet)
-              '(fireplace flames-of-freedom snow zones zone-nyan zone-rainbow
-                zone-sl zone-matrix))))
+       '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)))
  t)
 
 (setq cae-config-finished-loading t)
