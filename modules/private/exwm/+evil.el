@@ -14,8 +14,6 @@
 (when (modulep! :ui workspaces)
   (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
 
-(map! :leader :desc "Launch application" "$" #'app-launcher-run-app)
-
 (use-package! exwm-evil
   :after exwm
   :config
