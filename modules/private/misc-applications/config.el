@@ -311,7 +311,6 @@
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+misc-applications-hide-cursor-h)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'trashed-mode-hook #'hl-line-mode)
   :config
   (map! :map trashed-mode-map
         "<f6>" #'cae-cheatsheets-trashed
@@ -329,6 +328,7 @@
       (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
   :config
   (setq proced-enable-color-flag t)
+  (add-hook 'proced-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map proced-mode-map
         "<f6>" #'cae-cheatsheets-proced
         :n "<f6>" #'cae-cheatsheets-evil-proced
@@ -628,7 +628,6 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "s" "SomaFM"))
-  (add-hook 'somafm-mode-hook #'hl-line-mode)
   (add-hook 'somafm-mode-hook #'+misc-applications-hide-cursor-h)
   (when (modulep! :editor evil)
     (after! evil-snipe
