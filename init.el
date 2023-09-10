@@ -41,7 +41,7 @@
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
-       window-select
+       (window-select +numbers)
        ophints
 
        :editor
@@ -63,7 +63,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe)
+       (syntax +childframe +flymake)
        ;;spell
        ;;grammar
 

@@ -81,3 +81,15 @@
          [remap dired-do-async-shell-command] #'dwim-shell-command
          [remap dired-do-shell-command] #'dwim-shell-command
          [remap dired-smart-shell-command] #'dwim-shell-command)))
+
+(use-package! topsy
+  :defer t :init (add-hook 'prog-mode-hook #'topsy-mode)
+  :config
+  ;; Set custom function for rjsx-mode
+  ;; Disable topsy-mode for gptel-mode
+  (setf (alist-get 'rjsx-mode topsy-mode-functions) #'cae-ui-topsy-rjsx-fn)
+  (add-hook 'gptel-mode-hook
+            (cae-defun cae-disable-topsy-in-gptel-h ()
+              "Disable topsy-mode in `gptel-mode'." ;`gptel' is Karthink's
+                                        ;package.
+              (topsy-mode -1))))

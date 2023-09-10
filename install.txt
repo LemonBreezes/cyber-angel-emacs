@@ -9,3 +9,6 @@
 9. Install Youtube DLP (Youtube DL fork).
 10. Install Dunst.
 11. Install VMTouch.
+12. Install Udiskctl.
+13. Install LSOF.
+14. Install Fuse in slot 0, emerge --ask sys-fs/fuse:0

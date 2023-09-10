@@ -12,8 +12,7 @@
                    hl-line
                    flymake-popon
                    elfeed-goodies
-                   highlight-numbers
-                   which-key)
+                   highlight-numbers)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
@@ -37,10 +36,10 @@
 ;;; UI
 (package! info-colors)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
-(package! topsy)
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! beacon)
+(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 (package! iscroll)
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))

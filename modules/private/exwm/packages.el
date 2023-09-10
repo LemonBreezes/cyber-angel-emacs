@@ -9,7 +9,5 @@
   (package! exwm-evil
     :recipe (:host github :repo "LemonBreezes/exwm-evil"))
   (package! exwm-firefox-evil))
-(package! app-launcher :recipe
-  (:host github :repo "SebastienWae/app-launcher"))
 (when (modulep! +notifications)
   (package! ednc))

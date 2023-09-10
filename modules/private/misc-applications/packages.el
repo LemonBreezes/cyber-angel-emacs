@@ -30,6 +30,7 @@
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
 (package! trashed)
+(package! neato-graph-bar)
 
 ;; Insert
 (when (or (modulep! :private helm)
