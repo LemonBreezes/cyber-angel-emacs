@@ -85,7 +85,7 @@ expansion occurs within the parent Emacs session.")
 
     (when (or (modulep! :completion helm)
               (modulep! :private helm))
-      (map! :leader :desc "Run external command" "s-d" #'helm-run-external-command))
+      (map! "s-d" #'helm-run-external-command))
 
     (map! :map exwm-mode-map
           :localleader
