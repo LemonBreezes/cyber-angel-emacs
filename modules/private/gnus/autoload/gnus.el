@@ -8,13 +8,7 @@
 (defun =gnus ()
   (interactive)
   (if (modulep! :ui workspaces)
-      ;; delete current workspace if empty
-      ;; this is useful when mu4e is in the daemon
-      ;; as otherwise you can accumulate empty workspaces
-      (progn
-        (unless (+workspace-buffer-list)
-          (+workspace-delete (+workspace-current-name)))
-        (+workspace-switch +gnus-workspace-name t))
+      (+workspace-switch +gnus-workspace-name t)
     (setq +gnus--old-wconf (current-window-configuration))
     (let ((ignore-window-parameters t))
       (delete-other-windows))
