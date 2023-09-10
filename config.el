@@ -1102,7 +1102,11 @@
    ,@(when (modulep! :private gnus)
        '(gnus gnus-group gnus-sum bbdb gnus-srvr))
    ,@(when (modulep! :tools pdf)
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools)))
+       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
+   ,@(when (modulep! :app rss)
+       '(elfeed))
+   ,@(when (modulep! :app rss +org)
+       '(elfeed-org)))
  t)
 
 (setq cae-config-finished-loading t)
