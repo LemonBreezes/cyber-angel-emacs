@@ -126,8 +126,8 @@
              ("E" ,(cmd! () (elfeed-search-set-filter "@6-months-ago +emacs")) "emacs" :column "Custom filters")
              ("Y" ,(cmd! () (elfeed-search-set-filter "@6-months-ago +tube")) "youtube" :column "Custom filters")
              ("*" ,(cmd! () (elfeed-search-set-filter "@6-months-ago +star")) "star" :column "Custom filters")
-             ("a" ,(cmd! () (elfeed-search-set-filter "@6-months-ago") "All" :column "Custom filters"))
-             ("T" ,(cmd! () (elfeed-search-set-filter "@1-day-ago") "Today" :column "Custom filters")))))
+             ("a" ,(cmd! () (elfeed-search-set-filter "@6-months-ago")) "All" :column "Custom filters")
+             ("T" ,(cmd! () (elfeed-search-set-filter "@1-day-ago")) "Today" :column "Custom filters"))))
       (dolist (hydra '(cae-cheatsheets-elfeed-hydra cae-cheatsheets-evil-elfeed-hydra))
         (eval `(defhydra+ ,hydra () ,@custom-filters)))
       (cl-loop for (key . filter) in custom-filters do
