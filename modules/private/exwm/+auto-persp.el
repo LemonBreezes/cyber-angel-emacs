@@ -87,13 +87,13 @@ nil if its not an EXWM buffer."
         (when (and (modulep! :ui popup)
                    (+popup-window-p))
           (other-window 1)
-          (switch-to-buffer buffer)))
+          (switch-to-buffer buffer)))))
 
-      (defun +exwm-persp--get-name (state)
-        "Gets the name of our new EXWM workspace."
-        (setf (alist-get 'persp-name state)
-              (+exwm-get-workspace-name (alist-get 'buffer state)))
-        state)))
+  (defun +exwm-persp--get-name (state)
+    "Gets the name of our new EXWM workspace."
+    (setf (alist-get 'persp-name state)
+          (+exwm-get-workspace-name (alist-get 'buffer state)))
+    state)
 
   (defun +exwm-persp--predicate (buffer &optional state)
     "Determines whether to create a workspace for this new EXWM buffer."
