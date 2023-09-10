@@ -156,7 +156,8 @@ buffers of that class."
                                        :switch 'window
                                        :predicate #'+exwm-persp--predicate
                                        :after-match #'+exwm-persp--after-match
-                                       :get-name #'+exwm-persp--get-name)))
+                                       :get-name #'+exwm-persp--get-name)
+                 (+workspace-switch (car (+workspace-list-names)))))
 
   (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
 
