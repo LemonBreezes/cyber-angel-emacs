@@ -131,7 +131,7 @@
       (dolist (hydra '(cae-cheatsheets-elfeed-hydra cae-cheatsheets-evil-elfeed-hydra))
         (eval `(defhydra+ ,hydra () ,@custom-filters)))
       (cl-loop for (key . filter) in custom-filters do
-               (map! :ng key filter))))
+               (map! :map elfeed-search-mode-map :ng key filter))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
