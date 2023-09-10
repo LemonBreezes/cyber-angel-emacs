@@ -116,9 +116,9 @@
         :n "?" #'dirvish-dispatch
         :n "q" #'dirvish-quit
         :ng "a" #'dirvish-quick-access
-        :g "f" #'dirvish-file-info-menu
         :ng "y" #'dirvish-yank-menu
         :ng "s" #'dirvish-quicksort
+        :g "f" #'dirvish-file-info-menu
         :g "TAB" #'dirvish-subtree-toggle
         :g "M-t" #'dirvish-layout-toggle
         :g "M-b" #'dirvish-history-go-backward
