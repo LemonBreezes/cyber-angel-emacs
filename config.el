@@ -1111,8 +1111,11 @@
                     (modulep! :private helm))
                 (modulep! :private misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks))
-   ,@(when (modulep! :private misc-applications)
-       '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)))
+   ,@(when (modulep! :private misc-applications) ; system apps
+       (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
+              '(tetris bubbles klondike speed-type autotetris-mode dunnet)
+              '(fireplace flames-of-freedom snow zones zone-nyan zone-rainbow
+                zone-sl zone-matrix))))
  t)
 
 (setq cae-config-finished-loading t)
