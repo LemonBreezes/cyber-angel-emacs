@@ -315,7 +315,8 @@
   :config
   (map! :map trashed-mode-map
         "<f6>" #'cae-cheatsheets-trashed
-        :n "<f6>" #'cae-cheatsheets-evil-trashed))
+        :n "<f6>" #'cae-cheatsheets-evil-trashed
+        :n "t" #'trashed-toggle-marks))
 
 (use-package! proced
   :defer t :init
