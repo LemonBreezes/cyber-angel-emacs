@@ -1092,6 +1092,8 @@
          em-alias em-elecslash em-rebind em-prompt))
    ,@(when (modulep! :term vterm)
        '(vterm))
+   ,@(when (modulep! :ui hydra)
+       '(hydra cae-cheatsheets))
    ,@(when (or (modulep! :completion helm)
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
