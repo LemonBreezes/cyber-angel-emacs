@@ -1,7 +1,8 @@
 ;;; startup/discord.el -*- lexical-binding: t; -*-
 
 (defvar startup/discord-process nil)
-(defvar startup/discord-executable (executable-find "discord"))
+(defvar startup/discord-executable (or (executable-find "discord-canary")
+                        (executable-find "discord")))
 (defvar startup/discord--timer nil)
 (defvar startup/discord-workspace "Discord")
 
