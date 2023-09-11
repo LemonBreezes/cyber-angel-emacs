@@ -75,17 +75,19 @@ nil if its not an EXWM buffer."
       (when (not (string= application-name (+workspace-current-name)))
         (persp-remove-buffer buffer))
       (cl-pushnew application-name +exwm-workspaces :test #'string=)
-      (+workspace-switch application-name t)
-      (+workspace/display)
-      (when (-some->> (doom-visible-buffers)
-              (--first (string= (+exwm-get-workspace-name it) application-name))
-              (get-buffer-window)
-              (select-window))
-        (switch-to-buffer buffer))
-      (when (and (modulep! :ui popup)
-                 (+popup-window-p))
-        (other-window 1)
-        (switch-to-buffer buffer))))
+      (if doom-first-input-hook
+          (+workspace-new application-name)
+        (+workspace-switch application-name t)
+        (+workspace/display)
+        (when (-some->> (doom-visible-buffers)
+                (--first (string= (+exwm-get-workspace-name it) application-name))
+                (get-buffer-window)
+                (select-window))
+          (switch-to-buffer buffer))
+        (when (and (modulep! :ui popup)
+                   (+popup-window-p))
+          (other-window 1)
+          (switch-to-buffer buffer)))))
 
   (defun +exwm-persp--get-name (state)
     "Gets the name of our new EXWM workspace."
@@ -145,23 +147,16 @@ buffers of that class."
 
   (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
 
-  (run-at-time 1 nil
-               (lambda ()
-                 (advice-add #'+workspace/display :override #'ignore)
-                 (unwind-protect
-                     (persp-def-auto-persp "EXWM"
-                                           :parameters '((dont-save-to-file . t))
-                                           :hooks '(exwm-manage-finish-hook)
-                                           :dyn-env '(after-switch-to-buffer-functions ;; prevent recursion
-                                                      (persp-add-buffer-on-find-file nil)
-                                                      persp-add-buffer-on-after-change-major-mode)
-                                           :switch 'window
-                                           :predicate #'+exwm-persp--predicate
-                                           :after-match #'+exwm-persp--after-match
-                                           :get-name #'+exwm-persp--get-name)
-                   (+workspace-switch (car (+workspace-list-names)))
-                   (advice-remove #'+workspace/display #'ignore)
-                   (+workspace/display))))
+  (persp-def-auto-persp "EXWM"
+                        :parameters '((dont-save-to-file . t))
+                        :hooks '(exwm-manage-finish-hook)
+                        :dyn-env '(after-switch-to-buffer-functions ;; prevent recursion
+                                   (persp-add-buffer-on-find-file nil)
+                                   persp-add-buffer-on-after-change-major-mode)
+                        :switch 'window
+                        :predicate #'+exwm-persp--predicate
+                        :after-match #'+exwm-persp--after-match
+                        :get-name #'+exwm-persp--get-name)
 
   (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
 
