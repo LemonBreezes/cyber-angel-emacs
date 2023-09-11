@@ -280,3 +280,6 @@
           "M-S-RET" #'cae-evil-org-insert-todo-heading
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
+
+(when (modulep! :private exwm)
+  (map! "s-c" (cmd! () (start-process "chrome" nil "google-chrome-stable"))))
