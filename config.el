@@ -1082,7 +1082,9 @@
 ;;; Appendix
 
 (doom-load-packages-incrementally
- `(,@(when (modulep! :emacs dirvish)
+ `(,@(when (modulep! :private corfu)
+    '(corfu))
+   ,@(when (modulep! :emacs dirvish)
            '(dired transient dirvish))
    auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
