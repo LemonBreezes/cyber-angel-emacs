@@ -145,7 +145,7 @@ buffers of that class."
 
   (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
 
-  (add-hook 'doom-first-input-hook
+  (add-transient-hook! 'pre-command-hook
             (lambda ()
               (advice-add #'+workspace/display :override #'ignore)
               (unwind-protect
