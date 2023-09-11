@@ -40,3 +40,15 @@
                                 (setq once nil)))
                             (lambda ()
                               (cancel-timer timer)))))))
+
+(defmacro cae-run-with-delay-until (condition &rest body)
+  "Run BODY with delay until CONDITION is met."
+  (declare (indent 1))
+  `(let ((timer nil))
+     (setq timer
+           (run-with-timer
+            0.1 0.1
+            (lambda ()
+              (when ,condition
+                (cancel-timer timer)
+                ,@body))))))
