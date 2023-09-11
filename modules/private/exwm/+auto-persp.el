@@ -145,25 +145,23 @@ buffers of that class."
 
   (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
 
-  (cae-run-with-delay-until
-      (lambda () (and (member (+workspace-current-name) +exwm-workspaces)
-                      (derived-mode-p 'exwm-mode)))
-    (lambda ()
-      (advice-add #'+workspace/display :override #'ignore)
-      (unwind-protect
-          (persp-def-auto-persp "EXWM"
-                                :parameters '((dont-save-to-file . t))
-                                :hooks '(exwm-manage-finish-hook)
-                                :dyn-env '(after-switch-to-buffer-functions ;; prevent recursion
-                                           (persp-add-buffer-on-find-file nil)
-                                           persp-add-buffer-on-after-change-major-mode)
-                                :switch 'window
-                                :predicate #'+exwm-persp--predicate
-                                :after-match #'+exwm-persp--after-match
-                                :get-name #'+exwm-persp--get-name)
-        (+workspace-switch (car (+workspace-list-names)))
-        (advice-remove #'+workspace/display #'ignore)
-        (+workspace/display))))
+  (run-at-time 1 nil
+               (lambda ()
+                 (advice-add #'+workspace/display :override #'ignore)
+                 (unwind-protect
+                     (persp-def-auto-persp "EXWM"
+                                           :parameters '((dont-save-to-file . t))
+                                           :hooks '(exwm-manage-finish-hook)
+                                           :dyn-env '(after-switch-to-buffer-functions ;; prevent recursion
+                                                      (persp-add-buffer-on-find-file nil)
+                                                      persp-add-buffer-on-after-change-major-mode)
+                                           :switch 'window
+                                           :predicate #'+exwm-persp--predicate
+                                           :after-match #'+exwm-persp--after-match
+                                           :get-name #'+exwm-persp--get-name)
+                   (+workspace-switch (car (+workspace-list-names)))
+                   (advice-remove #'+workspace/display #'ignore)
+                   (+workspace/display))))
 
   (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
 
