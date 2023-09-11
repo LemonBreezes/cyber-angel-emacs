@@ -53,7 +53,6 @@
 (package! zone-rainbow)
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
-(package! zone-tmux-clock)
 
 ;; Music
 (package! somafm)

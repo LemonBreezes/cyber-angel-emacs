@@ -177,7 +177,6 @@ paragraph to your private configuration:
                          (+workspace-switch "Vterm" t)
                          (let ((display-buffer-alist))
                            (vterm most-positive-fixnum)))))
-        "s-d" #'app-launcher-run-app
         "s-'" #'exwm-edit--compose)
   (after! exwm
     (dolist (key '(?\s-h ?\s-j ?\s-k ?\s-l ?\s-H ?\s-J ?\s-K ?\s-L ?\s-0 ?\s-1
