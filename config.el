@@ -730,11 +730,14 @@
 
   (use-package! embrace
     :defer t :init
+    ;; Respect popup rules with the Embrace help popup.
     (advice-add #'embrace--show-help-buffer :around
                 (cae-defun +cae-embrace-use-popup-a (oldfun help-string)
                   (cl-letf (((symbol-function #'display-buffer-in-side-window)
                              (symbol-function #'display-buffer)))
                     (funcall oldfun help-string))))
+    ;; I don't like Doom's `f' for a Lisp function. I prefer `C-f' and `f' to
+    ;; behave the same way globally rather than having `f' be context-sensitive.
     (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
       #'+evil-embrace-lisp-mode-hook-h)
     (defadvice! cae-embrace-init-pairs-a (&rest args)
