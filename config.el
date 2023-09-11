@@ -1100,7 +1100,7 @@
    ,@(when (modulep! :private misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :private ai)
-       '(org-ai whisper chatgpt-shell))
+       '(org-ai chatgpt-shell))
    ,@(when (modulep! :private gnus)
        '(gnus gnus-group gnus-sum bbdb gnus-srvr))
    ,@(when (modulep! :tools pdf)
