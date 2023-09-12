@@ -282,4 +282,5 @@
           "M-S-<return>" #'org-insert-todo-heading)))
 
 (when (modulep! :private exwm)
-  (map! "s-c" (cmd! () (start-process "chrome" nil "google-chrome-stable"))))
+  (map! "s-c" (cmd! () (start-process "chrome" nil "google-chrome-stable"))
+        "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))))
