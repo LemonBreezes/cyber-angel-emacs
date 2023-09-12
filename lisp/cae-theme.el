@@ -94,7 +94,7 @@
               (doom-store-put 'circadian-sunset (circadian-sunset))
               (doom-store-put 'circadian-sunrise (circadian-sunrise)))))
 
-;;;; Set the theme on startup.
+;; Set the theme on startup.
 (when (and (doom-store-get 'circadian-themes)
            (not (symbolp (caar (doom-store-get 'circadian-themes))))
            (not cae-config-finished-loading))
