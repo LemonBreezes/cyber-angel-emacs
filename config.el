@@ -326,8 +326,16 @@
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
-  (use-package! indent-bars
-    :defer t :hook ((python-mode yaml-mode) . indent-bars-mode))
+  (use-package indent-bars
+    :custom
+    (indent-bars-treesit-support t)
+    (indent-bars-no-descend-string t)
+    (indent-bars-treesit-ignore-blank-lines-types '("module"))
+    (indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
+                                 list list_comprehension
+                                 dictionary dictionary_comprehension
+                                 parenthesized_expression subscript)))
+    :hook ((python-base-mode yaml-mode) . indent-bars-mode))
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
