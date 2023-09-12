@@ -112,6 +112,9 @@
         inhibit-message-regexps '("C-g is undefined$"
                                   "ESC is undefined$"))
 
+  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+    scroll-margin 2)
+
   (after! time
     (setq display-time-default-load-average nil))
 
