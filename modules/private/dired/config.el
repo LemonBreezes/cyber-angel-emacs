@@ -49,7 +49,8 @@
         "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group")
 
   (setq dired-mouse-drag-files t
-        dired-kill-when-opening-new-dired-buffer t)
+        dired-kill-when-opening-new-dired-buffer t
+        dired-movement-style 'cycle)
 
   (map! :map dired-mode-map
         "C-M-k" #'dired-kill-subdir
