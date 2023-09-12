@@ -2,7 +2,7 @@
 
 (use-package! restore-point
     :defer t :init
-    (add-hook 'doom-first-buffer-hook #'restore-point-mode)
+    (add-hook 'doom-first-input-hook #'restore-point-mode)
     :config
     (setq rp/restore-point-commands
           (nconc
