@@ -278,25 +278,6 @@
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
 
-  ;; Fixes an issue for me where the Vertico posframe would flicker and go blank.
-  ;; EDIT: I decided to also set `inhibit-double-buffering' for the other
-  ;; posframe packages.
-  (when (modulep! :completion vertico +childframe)
-    (after! vertico-posframe
-      (setf (alist-get 'inhibit-double-buffering vertico-posframe-parameters) t)
-      (when (modulep! :private exwm)
-        (setf (alist-get 'parent-frame vertico-posframe-parameters) nil))))
-  (when (or (modulep! :completion helm +childframe)
-            (modulep! :private helm +childframe))
-    (after! helm-posframe
-      (setf (alist-get 'inhibit-double-buffering helm-posframe-parameters) t)
-      (when (modulep! :private exwm)
-        (setf (alist-get 'parent-frame helm-posframe-parameters) nil))))
-  (after! posframe
-    (setq posframe-inhibit-double-buffering t))
-  (after! corfu
-    (setf (alist-get 'inhibit-double-buffering corfu--frame-parameters) t))
-
   (use-package! breadcrumb
     :defer t :init
     (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
