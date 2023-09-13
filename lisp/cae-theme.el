@@ -131,5 +131,13 @@
 ;;                            "dunstrc-light")
 ;;                          cae-multi-data-dir)))))
 
-(require 'theme-magic)
+(use-package! ewal
+  :defer t
+  :init
+  ;; Use all 16 colors from our palette, not just the primary 8.
+  (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
+                                       brightblack brightred brightgreen brightyellow
+                                       brightblue brightmagenta brightcyan brightwhite))
+  (add-hook 'doom-load-theme-hook #'ewal-load-colors))
+
 (theme-magic-export-theme-mode)
