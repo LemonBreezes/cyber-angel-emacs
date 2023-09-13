@@ -132,14 +132,17 @@
 ;;                          cae-multi-data-dir)))))
 
 ;; This package applies the Pywal config to Emacs.
-(use-package! ewal
-  :defer t :init
-  ;; Use all 16 colors from our palette, not just the primary 8.
-  (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
-                                       brightblack brightred brightgreen brightyellow
-                                       brightblue brightmagenta brightcyan brightwhite)))
+;;(use-package! ewal
+;;  :defer t :init
+;;  ;; Use all 16 colors from our palette, not just the primary 8.
+;;  (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
+;;                                       brightblack brightred brightgreen brightyellow
+;;                                       brightblue brightmagenta brightcyan brightwhite)))
 
-(add-hook 'doom-load-theme-hook
-          (cae-defun cae-theme-use-pywal ()
-            (call-interactively #'theme-magic-from-emacs)
-            (ewal-load-colors)))
+;;(add-hook 'doom-load-theme-hook
+;;          (cae-defun cae-theme-use-pywal ()
+;;            (theme-magic--apply-colors-with-pywal
+;;             (theme-magic--auto-extract-16-colors))
+;;            (ewal-load-colors)))
+
+(modus-themes--current-theme-palette)
