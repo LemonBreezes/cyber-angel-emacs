@@ -117,11 +117,14 @@
     (setq doom-theme theme)))
 
 (use-package! ewal
+  :defer-incrementally t
   :defer t :init
   ;; Use all 16 colors from our palette, not just the primary 8.
   (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
                                        brightblack brightred brightgreen brightyellow
                                        brightblue brightmagenta brightcyan brightwhite)))
+(use-package! theme-magic
+  :defer t :defer-incrementally t)
 
 (run-with-idle-timer
  1.5 nil
