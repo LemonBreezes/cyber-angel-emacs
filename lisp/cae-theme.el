@@ -131,7 +131,7 @@
 ;;                            "dunstrc-light")
 ;;                          cae-multi-data-dir)))))
 
-;; This package applies Pywal config to Emacs.
+;; This package applies the Pywal config to Emacs.
 (use-package! ewal
   :defer t
   :init
