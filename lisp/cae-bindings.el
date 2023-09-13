@@ -284,4 +284,5 @@
 (when (modulep! :private exwm)
   (map! "s-c" (cmd! () (start-process "chrome" nil "google-chrome-stable"))
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
-        "s-t" (cmd! () (start-process "teams" nil "teams-for-linux"))))
+        "s-t" (cmd! () (start-process "teams" nil "teams-for-linux"))
+        "s-d" (cmd! () (start-process "discord" nil "discord"))))
