@@ -68,4 +68,5 @@
   (let ((inhibit-redisplay t))
     (mpc-quit)
     (mpc)
+    (+mpc-jump-to-previous-position)
     (setq +mpc--wconf (current-window-configuration))))
