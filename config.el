@@ -1075,9 +1075,9 @@
 
 (doom-load-packages-incrementally
  `(,@(when (modulep! :private corfu)
-    '(corfu))
+       '(corfu))
    ,@(when (modulep! :emacs dirvish)
-           '(dired transient dirvish))
+       '(dired transient dirvish))
    auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
