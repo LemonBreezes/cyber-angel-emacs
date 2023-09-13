@@ -662,8 +662,6 @@
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
         "<f6>" #'cae-cheatsheets-mpc
-        :n "gr" #'+mpc-refresh
-        :n "gR" #'+mpc-refresh
         :n "<f6>" #'cae-cheatsheets-evil-mpc
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
