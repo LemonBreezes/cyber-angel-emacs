@@ -45,9 +45,10 @@
                   font-lock-doc-face))
     (set-face-attribute face nil :weight 'normal))
 
-  (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5 outline-6
-                  outline-7 outline-8))
-    (set-face-attribute face nil :extend t)))
+  (after! outline
+    (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5 outline-6
+                    outline-7 outline-8))
+      (set-face-attribute face nil :extend t))))
 
 (after! modus-themes
   (setq modus-themes-org-blocks 'gray-background
