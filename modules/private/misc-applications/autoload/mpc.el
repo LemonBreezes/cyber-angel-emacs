@@ -61,3 +61,10 @@
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
                                           +mpc-buf-pos-alist)))))
+
+;;;###autoload
+(defun +mpc-refresh ()
+  (interactive)
+  (let ((inhibit-redisplay t))
+    (mpc-quit)
+    (mpc)))
