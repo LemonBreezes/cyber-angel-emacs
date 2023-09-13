@@ -133,7 +133,6 @@
 
 (use-package! ewal
   :defer t :defer-incrementally t
-  :config (ewal-load-colors)
   :init
   ;; Use all 16 colors from our palette, not just the primary 8.
   (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
