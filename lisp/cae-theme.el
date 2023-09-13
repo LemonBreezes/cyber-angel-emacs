@@ -142,4 +142,9 @@
        (lambda (_proc event)
          (when (string= event "finished\n")
            (ewal-load-colors)))))))
-(add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+
+(run-with-idle-timer
+ 1.5 nil
+ (lambda ()
+   (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+   (cae-theme-export-using-pywal)))
