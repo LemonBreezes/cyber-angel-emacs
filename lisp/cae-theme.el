@@ -139,5 +139,7 @@
                                        brightblack brightred brightgreen brightyellow
                                        brightblue brightmagenta brightcyan brightwhite)))
 
-(advice-remove #'theme-magic-from-emacs :after #'ewal-load-colors)
-(theme-magic-export-theme-mode +1)
+(add-hook 'doom-load-theme-hook
+          (cae-defun cae-theme-use-pywal ()
+            (call-interactively #'theme-magic-from-emacs)
+            (ewal-load-colors)))
