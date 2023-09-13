@@ -145,4 +145,4 @@
 ;;             (theme-magic--auto-extract-16-colors))
 ;;            (ewal-load-colors)))
 
-(modus-themes--current-theme-palette)
+;;(modus-themes--current-theme-palette)
