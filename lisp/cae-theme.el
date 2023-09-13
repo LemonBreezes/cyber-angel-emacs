@@ -132,12 +132,15 @@
 ;;                          cae-multi-data-dir)))))
 
 (use-package! ewal
-  :init (setq ewal-use-built-in-always-p nil
-              ewal-use-built-in-on-failure-p t
-              ewal-built-in-palette "sexy-material")
+  :defer t :defer-incrementally t
+  :config (ewal-load-colors)
+  :init
+  ;; Use all 16 colors from our palette, not just the primary 8.
+  (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
+                                       brightblack brightred brightgreen brightyellow
+                                       brightblue brightmagenta brightcyan brightwhite)))
+
+(use-package! ewal-doom-themes
+  :after ewal
   :config
-  (ewal-load-colors))
-(use-package! ewal-evil-cursors
-  :after (ewal-spacemacs-themes)
-  :config (ewal-evil-cursors-get-colors
-           :apply t :spaceline t))
+  (setq ewal-doom-vibrant-brighter-comments t))
