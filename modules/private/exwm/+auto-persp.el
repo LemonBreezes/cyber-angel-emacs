@@ -4,7 +4,7 @@
   (defvar +exwm-workspaces ()
     "The list of EXWM workspaces created up to now.")
 
-  (defvar +exwm-floating-apps '("..." "virtualbox" "discord")
+  (defvar +exwm-floating-apps '("..." "virtualbox")
     "A list of class-names for EXWM applications which should stay floating.")
 
   (defvar +exwm-workspace-name-replacements '()
