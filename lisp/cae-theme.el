@@ -139,8 +139,3 @@
   (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
                                        brightblack brightred brightgreen brightyellow
                                        brightblue brightmagenta brightcyan brightwhite)))
-
-(use-package! ewal-doom-themes
-  :after ewal
-  :config
-  (setq ewal-doom-vibrant-brighter-comments t))
