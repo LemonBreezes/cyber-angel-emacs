@@ -117,16 +117,16 @@
     (setq doom-theme theme)))
 
 ;; Make Dunst use our current theme
-(when (and (executable-find "dunstctl")
-           (eq system-type 'gnu/linux))
-  (after! alert
-    (setq alert-default-style 'libnotify))
-  (defvar cae-theme-dunst-process nil)
-  (unless (process-live-p cae-theme-dunst-process)
-    (setq cae-theme-dunst-process
-          (start-process "dunst" " *startup/dunst*" "dunst" "-config"
-                         (expand-file-name
-                          (if (cae-dark-theme-p)
-                              "dunstrc-dark"
-                            "dunstrc-light")
-                          cae-multi-data-dir)))))
+;;(when (and (executable-find "dunstctl")
+;;           (eq system-type 'gnu/linux))
+;;  (after! alert
+;;    (setq alert-default-style 'libnotify))
+;;  (defvar cae-theme-dunst-process nil)
+;;  (unless (process-live-p cae-theme-dunst-process)
+;;    (setq cae-theme-dunst-process
+;;          (start-process "dunst" " *startup/dunst*" "dunst" "-config"
+;;                         (expand-file-name
+;;                          (if (cae-dark-theme-p)
+;;                              "dunstrc-dark"
+;;                            "dunstrc-light")
+;;                          cae-multi-data-dir)))))
