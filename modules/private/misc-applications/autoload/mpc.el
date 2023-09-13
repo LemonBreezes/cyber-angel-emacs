@@ -70,5 +70,4 @@
   (let ((inhibit-redisplay t))
     (mpc-quit)
     (mpc)
-    (mpc-goto-playing-song)
     (setq +mpc--wconf (current-window-configuration))))
