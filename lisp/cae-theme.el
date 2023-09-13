@@ -133,8 +133,7 @@
 
 ;; This package applies the Pywal config to Emacs.
 (use-package! ewal
-  :defer t
-  :init
+  :defer t :init
   ;; Use all 16 colors from our palette, not just the primary 8.
   (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
                                        brightblack brightred brightgreen brightyellow
