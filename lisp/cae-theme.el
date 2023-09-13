@@ -126,11 +126,9 @@
 (use-package! theme-magic
   :defer t :defer-incrementally t)
 
-(run-with-idle-timer
- 1.5 nil
- (lambda ()
-   (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-   (cae-theme-export-using-pywal)))
+(after! (:all ewal theme-magic)
+  (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+  (cae-theme-export-using-pywal))
 
 (defvar cae-dunst-process nil)
 (unless (process-live-p cae-dunst-process)
