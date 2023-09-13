@@ -63,7 +63,7 @@
       "<f6>" #'cae-cheatsheets-process-menu
       :n "<f6>" #'cae-cheatsheets-evil-process-menu
       :n "gr" #'revert-buffer)
-(add-hook 'package-menu-mode #'+misc-applications-hide-cursor-h)
+(add-hook 'package-menu-mode-hook #'+misc-applications-hide-cursor-h)
 (after! package
   (map! :map package-menu-mode-map
         "<f6>" #'cae-cheatsheets-package-menu
