@@ -5,7 +5,7 @@
   (defvar +exwm-workspaces ()
     "The list of EXWM workspaces created up to now.")
 
-  (defvar +exwm-floating-apps '("..." "virtualbox" "discord1")
+  (defvar +exwm-floating-apps '("..." "virtualbox")
     "A list of class-names for EXWM applications which should stay floating.")
 
   (defvar +exwm-workspace-name-replacements
@@ -53,7 +53,7 @@
     "An alist whose for which a key is an EXWM class name and a value is the name
 of the corresponding workspace that will be created.")
 
-  (defun exwm--disable-floating ()
+  (defun +exwm-disable-floating-h ()
     "Tile the current application unless its class is in `+exwm-floating-apps'."
     (unless (member exwm-class-name +exwm-floating-apps)
       (exwm-floating--unset-floating exwm--id)))
@@ -142,7 +142,7 @@ buffers of that class."
             (+workspace-delete (+workspace-current))
             (+workspace/other))))))
 
-  (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
+  (add-hook 'exwm-floating-setup-hook #'+exwm-disable-floating-h)
 
   (persp-def-auto-persp "EXWM"
                         :parameters '((dont-save-to-file . t))

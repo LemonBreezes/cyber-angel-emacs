@@ -35,9 +35,10 @@ alias sysr sudo systemctl restart                                             $*
 alias sysx sudo systemctl stop                                                $*
 alias sysdr sudo systemctl daemon-reload                                      $*
 
-alias mcd    mkdir -p                                                         $1 && cd $1
+alias mcd    mkdir -p $1 && cd $1
 alias cd-    cd -
 alias cd--   cd -2
+alias cd_    cd $_
 
 alias f     find-file                    $1
 alias ff    find-file-other-window       $1
@@ -65,3 +66,5 @@ alias update-gentoo (progn (add-transient-hook! 'compilation-mode-hook (font-loc
 alias update-gentoo2 (progn (add-transient-hook! 'compilation-mode-hook (font-lock-mode -1)) nil) && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
 alias doom ~/.config/emacs/bin/doom $*
 alias update-doom-patch rm ~/.config/emacs/cae-emacs-doom.patch && cd ~/.config/emacs && git diff *> ~/.config/doom/cae-emacs-doom.patch && cd -
+
+alias emacs-patch sudo bash -c "rm /etc/portage/patches/app-editors/emacs/test.patch 2>/dev/null && git diff > /etc/portage/patches/app-editors/emacs/test.patch"

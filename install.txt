@@ -12,3 +12,4 @@
 12. Install Udiskctl.
 13. Install LSOF.
 14. Install Fuse in slot 0, emerge --ask sys-fs/fuse:0
+15. Install Fira Sans font

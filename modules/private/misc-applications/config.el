@@ -248,6 +248,7 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "u" "daemons"))
+  (add-hook 'daemons-mode-hook #'+misc-applications-hide-cursor-h)
   :config
   (map! :map daemons-mode-map
         "<f6>" #'cae-cheatsheets-daemons

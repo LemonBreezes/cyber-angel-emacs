@@ -3,3 +3,4 @@
 
 (package! nnhackernews)
 (package! bbdb)
+(package! debbugs)
