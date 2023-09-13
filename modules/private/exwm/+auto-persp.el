@@ -79,8 +79,8 @@ nil if its not an EXWM buffer."
                                 (buffer-list)))))
         (unless (window-live-p (get-buffer-window app-buffer))
           (if (and (modulep! :ui popup)
-                     (+popup-window-p))
-            (other-window 1))
+                   (+popup-window-p))
+              (other-window 1))
           (switch-to-buffer app-buffer)))))
 
   (defun +exwm-persp-cleanup-workspace ()
@@ -114,6 +114,19 @@ buffers of that class."
                         :get-name #'+exwm-persp--get-name)
 
   (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
+
+  (defadvice! +exwm-browse-url-generic-a (&rest _)
+    :before #'browse-url-generic
+    (when-let ((workspace
+                (alist-get (string-join
+                            (cl-find-if (lambda (l)
+                                          (setq l (string-join l "-"))
+                                          (alist-get l +exwm-workspace-name-replacements nil nil #'cl-equalp))
+                                        (nreverse (cdr (-inits (string-split (file-name-base browse-url-generic-program) "-")))))
+                            "-")
+                           +exwm-workspace-name-replacements nil nil #'cl-equalp)))
+      (+workspace-switch workspace t)
+      (+workspace/display)))
 
   (add-hook! 'exwm-mode-hook
     (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace)))
