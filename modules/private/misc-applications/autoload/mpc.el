@@ -66,5 +66,6 @@
 (defun +mpc-refresh ()
   (interactive)
   (let ((inhibit-redisplay t))
+    (setq +mpc-buf-pos-alist nil)
     (mpc-quit)
     (mpc)))
