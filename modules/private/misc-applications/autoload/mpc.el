@@ -45,7 +45,8 @@
                    +mpc-buf-pos-alist)
         (point-marker))
   (cl-loop do (call-interactively #'other-window-previous)
-           until (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+           until (and (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+                      (not (string= (buffer-name (current-buffer)) "*MPC-Songs*")))
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
                                           +mpc-buf-pos-alist)))))
@@ -57,7 +58,8 @@
                    +mpc-buf-pos-alist)
         (point-marker))
   (cl-loop do (call-interactively #'other-window)
-           until (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+           until (and (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+                      (not (string= (buffer-name (current-buffer)) "*MPC-Songs*")))
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
                                           +mpc-buf-pos-alist)))))
@@ -68,5 +70,4 @@
   (let ((inhibit-redisplay t))
     (mpc-quit)
     (mpc)
-    (+mpc-jump-to-previous-position)
     (setq +mpc--wconf (current-window-configuration))))
