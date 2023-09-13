@@ -812,12 +812,12 @@
                 #'cae-bind-C-z-to-abort-a))
 
   (use-package! logos
-    :defer t :custom
-    (logos-outlines-are-pages t)
-    :bind
-    ([remap forward-page] . logos-forward-page-dwim)
-    ([remap backward-page] . logos-backward-page-dwim)
-    ([remap narrow-to-page] . cae-narrow-to-page))
+    :defer t :init
+    (map! [remap forward-page] #'logos-forward-page-dwim
+          [remap backward-page] #'logos-backward-page-dwim
+          [remap narrow-to-page] #'cae-narrow-to-page)
+    :config
+    (setq logos-outlines-are-pages t))
 
   (use-package! aas
     :defer t :init
