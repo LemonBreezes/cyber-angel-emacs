@@ -63,12 +63,3 @@
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
                                           +mpc-buf-pos-alist)))))
-
-;;;###autoload
-(defun +mpc-refresh ()
-  (interactive)
-  (let ((inhibit-redisplay t))
-    (mpc-quit)
-    (mpc)
-    (run-at-time 0.01 nil #'mpc-goto-playing-song)
-    (setq +mpc--wconf (current-window-configuration))))
