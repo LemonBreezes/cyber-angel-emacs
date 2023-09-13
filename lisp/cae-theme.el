@@ -139,5 +139,5 @@
                                        brightblack brightred brightgreen brightyellow
                                        brightblue brightmagenta brightcyan brightwhite)))
 
-(advice-add #'theme-magic-from-emacs :after #'ewal-load-colors)
-(add-hook 'doom-load-theme-hook #'theme-magic-from-emacs)
+(advice-remove #'theme-magic-from-emacs :after #'ewal-load-colors)
+(theme-magic-export-theme-mode +1)
