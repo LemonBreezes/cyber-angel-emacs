@@ -16,7 +16,7 @@
 (when (modulep! :editor evil)
   (load! "lisp/cae-evil"))
 
-;; ;; Helm is not our main completion system.
+;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
   (remove-hook 'doom-first-input-hook #'helm-mode))
@@ -40,7 +40,7 @@
                  (cae-defun cae-persp-skip-buffer-p (buffer)
                    (string= (buffer-name buffer) "*lsp-log*")))))
 
-;; ;; Set up fonts
+;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   ;; Previously I used Iosevka Comfy and size 18.
   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
@@ -50,7 +50,7 @@
                             (font-spec :family "LXGW WenKai" :weight 'light
                                        :size 18))))
 
-;; ;; Do not break my clipboard in SSH sessions.
+;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
            (getenv "SSH_TTY")
            (not (cae-display-graphic-p)))
