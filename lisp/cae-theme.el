@@ -158,5 +158,3 @@
          (when (string= event "finished\n")
            (ewal-load-colors)))))))
 (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-
-;;(modus-themes--current-theme-palette)
