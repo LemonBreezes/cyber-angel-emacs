@@ -129,7 +129,3 @@
 (after! (:all ewal theme-magic)
   (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
   (cae-theme-export-using-pywal))
-
-(defvar cae-dunst-process nil)
-(unless (process-live-p cae-dunst-process)
-  (setq cae-dunst-process (start-process "dunst" nil "dunst")))
