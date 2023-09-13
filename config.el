@@ -162,6 +162,9 @@
                       warning-minimum-log-level :error))
               :append))
 
+  (after! alert
+    (setq alert-default-style 'libnotify))
+
   (after! shr
     ;; `shr' wraps lines in a visually unappealing way.
     (setq shr-width 120
