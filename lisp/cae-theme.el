@@ -138,7 +138,7 @@
   ;; Use all 16 colors from our palette, not just the primary 8.
   (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
                                        brightblack brightred brightgreen brightyellow
-                                       brightblue brightmagenta brightcyan brightwhite))
-  (add-hook 'doom-load-theme-hook #'ewal-load-colors))
+                                       brightblue brightmagenta brightcyan brightwhite)))
 
+(advice-add #'theme-magic-from-emacs :after #'ewal-load-colors)
 (theme-magic-export-theme-mode)
