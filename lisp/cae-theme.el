@@ -139,10 +139,24 @@
 ;;                                       brightblack brightred brightgreen brightyellow
 ;;                                       brightblue brightmagenta brightcyan brightwhite)))
 
-;;(add-hook 'doom-load-theme-hook
-;;          (cae-defun cae-theme-use-pywal ()
-;;            (theme-magic--apply-colors-with-pywal
-;;             (theme-magic--auto-extract-16-colors))
-;;            (ewal-load-colors)))
+(add-hook 'doom-load-theme-hook
+          (cae-defun cae-theme-use-pywal ()
+            (when (and (executable-find "python")
+                       (executable-find "wal"))
+              (require 'theme-magic)
+              (let (;; If we're in a pyenv directory, we might accidentally run the virtual
+                    ;; version of Python instead of the user's root version. To fix this, we
+                    ;; temporarily change to the user's dir.
+                    (default-directory "~/"))
+                (set-process-sentinel
+                 (apply #'start-process
+                        "cae-theme-magic"
+                        "*cae-theme-magic*"
+                        "python"
+                        theme-magic--pywal-python-script
+                        (theme-magic--auto-extract-16-colors))
+                 (lambda (_proc event)
+                   (when (string= event "finished\n")
+                     (ewal-load-colors))))))))
 
 ;;(modus-themes--current-theme-palette)
