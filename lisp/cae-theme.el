@@ -151,7 +151,7 @@
       (set-process-sentinel
        (apply #'start-process
               "cae-theme-magic"
-              nil
+              " *cae-theme-magic*"
               "python"
               theme-magic--pywal-python-script
               (theme-magic--auto-extract-16-colors))
