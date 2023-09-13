@@ -39,7 +39,7 @@
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
-  (setq org-ai-default-chat-model "gpt-4-32k"
+  (setq org-ai-default-chat-model "gpt-4"
         org-ai-on-project-modify-with-diffs t)
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
