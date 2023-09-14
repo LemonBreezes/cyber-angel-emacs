@@ -86,3 +86,6 @@
   (use-package! org-block-capf
     :defer t :init
     (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)))
+
+;; This way, we don't have to type RET twice in Eshell.
+(advice-add #'corfu-insert :after #'corfu-send-shell)
