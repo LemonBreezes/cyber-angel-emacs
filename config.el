@@ -904,7 +904,6 @@
       :defer t :init
       ;; See `lisp/cae-bindings' for keybindings.
       :config
-      (setq consult-preview-key (list :debounce 0.4 'any))
       (consult-customize
        consult-theme :preview-key '(:debounce 0.2 any)
        ;; :preview-key "M-."
