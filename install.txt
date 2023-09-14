@@ -13,3 +13,9 @@
 13. Install LSOF.
 14. Install Fuse in slot 0, emerge --ask sys-fs/fuse:0
 15. Install Fira Sans font
+16. Install Pywal
+
+1. Set up my kernel parameters in Grub
+2. Set up /etc/fstab
+3. Set up sysctl.conf
+4. Set up preload and a vmtouch service.
