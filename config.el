@@ -904,7 +904,7 @@
       :defer t :init
       ;; See `lisp/cae-bindings' for keybindings.
       :config
-      (setq consult-preview-key (list :debounce 0.5 'any))
+      (setq consult-preview-key (list :debounce 0.4 'any))
       (consult-customize
        consult-ripgrep consult-git-grep consult-grep
        consult-bookmark consult-recent-file
