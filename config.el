@@ -904,7 +904,7 @@
       :defer t :init
       ;; See `lisp/cae-bindings' for keybindings.
       :config
-      (setq consult-preview-key 'any)
+      (setq consult-preview-key (list :debounce 0.5 'any))
       (consult-customize
        consult-ripgrep consult-git-grep consult-grep
        consult-bookmark consult-recent-file
@@ -1114,6 +1114,8 @@
               '(leetcode)
               '(alarm))))
  t)
+
+(set-face-background 'modus-themes-heading-1 "gray")
 
 (setq cae-config-finished-loading t)
 
