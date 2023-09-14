@@ -9,5 +9,3 @@
   (package! exwm-evil
     :recipe (:host github :repo "LemonBreezes/exwm-evil"))
   (package! exwm-firefox-evil))
-(when (modulep! +notifications)
-  (package! ednc))
