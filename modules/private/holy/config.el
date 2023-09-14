@@ -125,6 +125,9 @@
         (nreverse (apply oldfun args))
       (apply oldfun args))))
 
+(use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
+  :defer t)
+
 (use-package! edit-indirect
   :defer t :init
   (map! :leader "'" #'cae-edit-indirect-dwim)
