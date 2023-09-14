@@ -905,6 +905,8 @@
       ;; See `lisp/cae-bindings' for keybindings.
       :config
       (setq consult-preview-key (list :debounce 0.4 'any))
+      (add-to-list 'consult-preview-allowed-hooks 'global-org-modern-mode-check-buffers)
+      (add-to-list 'consult-preview-allowed-hooks 'global-hl-todo-mode-check-buffers)
       (consult-customize
        consult-ripgrep consult-git-grep consult-grep
        consult-bookmark consult-recent-file
