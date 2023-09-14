@@ -795,9 +795,6 @@
       (define-key embark-heading-map "T" #'titlecase-line)
       (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
-  (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-    :defer t)
-
   (after! outline
     (setq outline-font-lock-faces nil
           outline-font-lock-keywords nil)
