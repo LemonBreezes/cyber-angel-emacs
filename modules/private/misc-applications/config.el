@@ -83,6 +83,9 @@
           (modulep! :completion helm))
   (map! :map +misc-applications-map
         "h" (cae-oneshot-keymap helm-command-map helm))
+  (after! helm
+    (map! :map +misc-applications-map
+          "h" helm-command-map))
   (after! which-key
     (which-key-add-keymap-based-replacements '+misc-applications-map
       "h" "helm")))
