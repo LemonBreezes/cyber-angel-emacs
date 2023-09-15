@@ -431,7 +431,7 @@
               (consult-grep buffer)
               (imenu grid)
               (consult-location buffer)
-              (t ,@'(vertico-flat-mode))))))
+              (t flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
