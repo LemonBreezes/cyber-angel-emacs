@@ -275,10 +275,9 @@
   (after! tooltip
     (setq tooltip-hide-delay 3))
 
-  (when (modulep! :checkers syntax +childframe)
-    (after! flycheck-posframe
-      (setq flycheck-posframe-border-width 1
-            flycheck-posframe-border-use-error-face t)))
+  (after! flycheck-posframe
+    (setq flycheck-posframe-border-width 1
+          flycheck-posframe-border-use-error-face t))
 
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
@@ -425,20 +424,19 @@
                     "/run/current-system/profile/sbin"))
       (add-to-list 'tramp-remote-path path)))
 
-  (when (modulep! :completion vertico)
-    (after! marginalia
-      ;; Use `embark-file-map' for `ffap-menu'.
-      (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
-    (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
-    (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
-    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
-    (after! vertico-multiform
-      (setq vertico-multiform-categories
-            `((embark-keybinding grid)
-              (consult-grep buffer)
-              (imenu grid)
-              (consult-location buffer)
-              (t ,(if (cae-display-graphic-p) 'posframe 'flat))))))
+  (after! marginalia
+    ;; Use `embark-file-map' for `ffap-menu'.
+    (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
+  (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
+  (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
+  (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
+  (after! vertico-multiform
+    (setq vertico-multiform-categories
+          `((embark-keybinding grid)
+            (consult-grep buffer)
+            (imenu grid)
+            (consult-location buffer)
+            (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
@@ -449,62 +447,56 @@
         (add-hook hook fn)))
     (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a))
 
-  (when (and (modulep! :checkers spell)
-             (not (modulep! :checkers spell +flyspell)))
-    (after! spell-fu
-      (add-to-list 'spell-fu-faces-exclude 'message-header-other)
-      (add-to-list 'spell-fu-faces-exclude 'org-property-value)
-      (add-to-list 'spell-fu-faces-exclude 'message-header-to)
-      (setq spell-fu-faces-exclude
-            (delq 'font-lock-string-face spell-fu-faces-include))))
+  (after! spell-fu
+    (add-to-list 'spell-fu-faces-exclude 'message-header-other)
+    (add-to-list 'spell-fu-faces-exclude 'org-property-value)
+    (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+    (setq spell-fu-faces-exclude
+          (delq 'font-lock-string-face spell-fu-faces-include)))
 
-  (when (and (modulep! :tools lsp)
-             (not (modulep! :tools lsp +eglot)))
-    (after! lsp-mode
-      (setq lsp-headerline-breadcrumb-enable nil
-            lsp-enable-snippet t
-            lsp-enable-text-document-color t
-            lsp-enable-folding t
-            lsp-enable-indentation nil
-            lsp-semantic-tokens-enable t)
-      (after! lsp-ui
-        (setq lsp-signature-auto-activate t
-              lsp-ui-doc-include-signature t
-              lsp-ui-doc-header nil))
-      (after! lsp-clangd
-        (setq lsp-clients-clangd-args
-              `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
-                "--background-index"
-                "--clang-tidy"
-                "--completion-style=detailed"
-                "--header-insertion=never"
-                "--header-insertion-decorators=0")))
-      (after! lsp-lua
-        (setq lsp-lua-runtime-version "LuaJIT"
-              lsp-lua-hint-enable t
-              lsp-lua-hint-set-type t
-              lsp-clients-lua-language-server-bin (executable-find "lua-language-server")
-              lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
-              lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
-      (add-to-list 'lsp-disabled-clients 'ccls)
-      (add-to-list 'lsp-disabled-clients 'mspyls)))
+  (after! lsp-mode
+    (setq lsp-headerline-breadcrumb-enable nil
+          lsp-enable-snippet t
+          lsp-enable-text-document-color t
+          lsp-enable-folding t
+          lsp-enable-indentation nil
+          lsp-semantic-tokens-enable t)
+    (after! lsp-ui
+      (setq lsp-signature-auto-activate t
+            lsp-ui-doc-include-signature t
+            lsp-ui-doc-header nil))
+    (after! lsp-clangd
+      (setq lsp-clients-clangd-args
+            `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
+              "--background-index"
+              "--clang-tidy"
+              "--completion-style=detailed"
+              "--header-insertion=never"
+              "--header-insertion-decorators=0")))
+    (after! lsp-lua
+      (setq lsp-lua-runtime-version "LuaJIT"
+            lsp-lua-hint-enable t
+            lsp-lua-hint-set-type t
+            lsp-clients-lua-language-server-bin (executable-find "lua-language-server")
+            lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
+            lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
+    (add-to-list 'lsp-disabled-clients 'ccls)
+    (add-to-list 'lsp-disabled-clients 'mspyls))
 
-  (when (modulep! :tools lsp +eglot)
-    (after! eglot
-      (let ((clangd '("clangd" "--background-index" "--clang-tidy"
-                      "--completion-style=detailed" "--header-insertion=never"
-                      "--header-insertion-decorators=0")))
-        (if (assoc '(c++-mode c-mode) eglot-server-programs)
-            (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs)) clangd)
-          (setq eglot-server-programs
-                (cons (cons '(c++-mode c-mode) clangd)
-                      eglot-server-programs))))))
+  (after! eglot
+    (let ((clangd '("clangd" "--background-index" "--clang-tidy"
+                    "--completion-style=detailed" "--header-insertion=never"
+                    "--header-insertion-decorators=0")))
+      (if (assoc '(c++-mode c-mode) eglot-server-programs)
+          (setf (cdr (assoc '(c++-mode c-mode) eglot-server-programs)) clangd)
+        (setq eglot-server-programs
+              (cons (cons '(c++-mode c-mode) clangd)
+                    eglot-server-programs)))))
 
-  (when (modulep! :checkers spell)
-    (after! spell-fu
-      (add-hook 'nxml-mode-hook
-                (cae-defun cae-disable-spell-fu-h ()
-                  (spell-fu-mode -1)))))
+  (after! spell-fu
+    (add-hook 'nxml-mode-hook
+              (cae-defun cae-disable-spell-fu-h ()
+                (spell-fu-mode -1))))
 
   (use-package! 0x0
     :defer t :init
@@ -662,10 +654,9 @@
   (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
   (map! [remap eval-last-sexp] #'cae-eval-last-sexp
         [remap eval-expression] #'cae-eval-expression)
-  (when (modulep! :tools eval +overlay)
-    (add-hook 'eros-mode-hook
-              (cae-defun cae-eros-setup-keybindings-h ()
-                (map! [remap eval-last-sexp] #'cae-eval-last-sexp))))
+  (add-hook 'eros-mode-hook
+            (cae-defun cae-eros-setup-keybindings-h ()
+              (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
   (after! outline
     (setq outline-minor-mode-use-buttons nil))
