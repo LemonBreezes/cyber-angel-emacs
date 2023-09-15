@@ -8,7 +8,6 @@
   (after! evil-snipe
     (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode gnus-server-mode))
       (cl-pushnew mode evil-snipe-disabled-modes))))
-
 (use-package! gnus
   :commands gnus-unplugged
   :config
@@ -36,22 +35,22 @@
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
    gnus-select-method '(nnnil "")
-   gnus-secondary-select-methods `((nntp "Gmane"
+   gnus-secondary-select-methods '((nntp "Gmane"
                                     (nntp-address "news.gmane.io"))
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea"))
                                    (nnhackernews "")
-
-                                   ,@(when (modulep! +email)
-                                       '(nnimap "fastmail"
-                                         (nnimap-inbox "INBOX")
-                                         (nnimap-address "imap.fastmail.com")
-                                         (nnimap-server-port 993)
-                                         (nnimap-stream ssl)
-                                         (nnimap-streaming t)
-                                         (nnimap-expunge never)
-                                         (nnimap-split-methods default))))
+                                   ;;(nnimap "Fastmail"
+                                   ;;        (nnimap-inbox "INBOX")
+                                   ;;        (nnimap-address "imap.fastmail.com")
+                                   ;;        (nnimap-server-port 993)
+                                   ;;        (nnimap-stream ssl)
+                                   ;;        (nnimap-streaming t)
+                                   ;;        (nnimap-expunge never)
+                                   ;;        (nnimap-split-methods default))
+                                   (nnmaildir "Fastmail"
+                                              (directory "~/Mail/Fastmail")))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
