@@ -149,7 +149,7 @@ using the tab-width variable."
                                     (regexp-quote actual-indent) "" line)))
              stripped-indent)
          line))
-               lines "\n")))
+     lines "\n")))
 
 ;;;###autoload
 (defun cae-copy-for-reddit ()
@@ -323,7 +323,7 @@ This is the format used on Reddit for code blocks."
           ((eq this-command 'cae-avy-symbol-at-point)
            (er/mark-symbol))
           (t (if (fboundp 'eri/expand-region)
-                  (eri/expand-region 1)
+                 (eri/expand-region 1)
                (er/expand-region 1))))
     (call-interactively action))
   (run-at-time 0.0 nil
