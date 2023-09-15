@@ -141,7 +141,7 @@
           which-key-separator (if (cae-tty-disable-unicode-p) " -> " " → ")))
 
   (after! eros
-    (setq eros-eval-result-prefix (if (cae-tty-disable-unicode-p) "=> " "⟹ "))) ;Pretty arrow
+    (setq eros-eval-result-prefix ""))
 
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
