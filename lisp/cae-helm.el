@@ -1,6 +1,7 @@
 ;;; lisp/cae-helm.el -*- lexical-binding: t; -*-
 
-;; It's super annoying to have to confirm the package
+;; It's super annoying to have to confirm the package installations and then
+;; manually require the package as well. Let's skip those parts.
 (advice-add #'helm-packages-install :around
             (cae-defun cae-helm-packages-install-and-require-a (oldfun candidate)
               (let ((pkgs (helm-marked-candidates)))
