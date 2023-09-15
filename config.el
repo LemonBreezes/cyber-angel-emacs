@@ -431,9 +431,7 @@
               (consult-grep buffer)
               (imenu grid)
               (consult-location buffer)
-              (t ,@(if (cae-display-graphic-p)
-                       '(posframe indexed)
-                     '(vertico-flat-mode))))
+              (t ,@'(vertico-flat-mode)))
             vertico-multiform-commands
             `((cae-embark-act-with-completing-read
                ,@(if (cae-display-graphic-p)
