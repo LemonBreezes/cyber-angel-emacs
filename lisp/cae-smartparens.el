@@ -12,6 +12,9 @@
   (defalias 'sp-pair #'ignore)
   (defalias 'sp-with-modes #'ignore)
   (defalias 'sp--syntax-ppss #'syntax-ppss)
+  (defalias 'sp-up-sexp #'up-list)
+  (defalias 'sp-backward-up-sexp #'backward-up-list)
+  (defalias 'sp-raise-sexp #'raise-sexp)
   (defalias 'sp-point-in-comment
     (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
   (defalias 'sp-point-in-string
