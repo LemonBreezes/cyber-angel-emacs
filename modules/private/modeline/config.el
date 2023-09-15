@@ -188,7 +188,7 @@
     (add-hook 'doom-first-buffer-hook #'nyan-mode)
     :config
     (setq! nyan-bar-length 20
-            nyan-minimum-window-width 20)))
+           nyan-minimum-window-width 20)))
 
 ;; Email
 (after! mu4e-bookmarks
