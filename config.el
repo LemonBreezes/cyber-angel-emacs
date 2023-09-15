@@ -427,14 +427,11 @@
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
     (after! vertico-multiform
       (setq vertico-multiform-categories
-            `((embark-keybinding grid)
+            `((embark-keybinding grid posframe)
               (consult-grep buffer)
               (imenu grid)
               (consult-location buffer)
-              (t ,@'(vertico-flat-mode)))
-            vertico-multiform-commands
-            `((cae-embark-act-with-completing-read
-               ,@(alist-get 'embark-keybinding vertico-multiform-categories))))))
+              (t ,@'(vertico-flat-mode))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
