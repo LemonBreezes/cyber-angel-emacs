@@ -136,7 +136,9 @@
           doom-modeline-github t
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil
-          doom-modeline-persp-name t))
+          doom-modeline-persp-name t)
+    (after! mu4e
+      (setq mu4e-modeline-show-global nil)))
 
   (after! which-key
     (setq which-key-ellipsis "..."
