@@ -433,7 +433,7 @@
               (consult-grep buffer)
               (imenu grid)
               (consult-location buffer)
-              (t flat)))))
+              (t ,(if (cae-display-graphic-p) 'posframe 'flat))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
