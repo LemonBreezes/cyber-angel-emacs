@@ -61,7 +61,7 @@
         "]" #'dired-next-dirline
         "," #'dired-create-empty-file))
 
-(when (modulep! :private dired)
+(when (modulep! :private dirvish)
   (after! dirvish
     (advice-add #'find-file :around #'cae-dired-find-file-a)
     (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
