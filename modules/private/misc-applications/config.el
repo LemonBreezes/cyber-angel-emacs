@@ -738,6 +738,9 @@
         :ng "a" #'+emms-quick-access)
   (emms-all)
   (emms-default-players)
+  (when (executable-find "mpd")
+    (setq emms-setup-default-player-list '(emms-player-mpd))
+    (emms-player-mpd-connect))
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
