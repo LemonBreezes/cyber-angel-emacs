@@ -256,6 +256,8 @@
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+        :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
+      (set-popup-rule! "^\\*Embark Export: "
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t))
     (after! elfeed
       (set-popup-rule! (format "^%s$" (regexp-quote elfeed-log-buffer-name))
