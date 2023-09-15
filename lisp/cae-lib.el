@@ -41,3 +41,8 @@
                             (lambda ()
                               (cancel-timer timer)))))))
 
+;; A generic adviser for responding yes to yes or no prompts automatically.
+(defun cae-always-yes-a (oldfun &rest args)
+  (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
+            ((symbol-function #'y-or-n-p) (symbol-function #'always)))
+    (apply oldfun args)))
