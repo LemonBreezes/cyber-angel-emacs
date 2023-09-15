@@ -291,6 +291,4 @@
 
 (after! treemacs
   (map! :map treemacs-mode-map
-        "<f6>" #'treemacs-helpful-hydra)
-  (add-hook! 'treemacs-mode-hook
-    (evil-local-set-key 'motion "e" #'consult-line)))
+        "<f6>" #'treemacs-helpful-hydra))
