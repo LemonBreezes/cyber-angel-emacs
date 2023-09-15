@@ -217,7 +217,7 @@ This is the format used on Reddit for code blocks."
                     (nreverse (visible-frame-list))))
          (vertico-posframe-size-function)
          (vertico-multiform-commands
-          `((cae-embark-act-with-completing-read))))
+          `((cae-embark-act-with-completing-read grid ,@(delq 'flat (car vertico-multiform--stack))))))
     (setf vertico-posframe-size-function
           `(lambda (_)
              '(:height ,(frame-height posframe)
