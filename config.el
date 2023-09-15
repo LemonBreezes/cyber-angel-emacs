@@ -427,7 +427,7 @@
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
     (after! vertico-multiform
       (setq vertico-multiform-categories
-            `((embark-keybinding grid posframe)
+            `((embark-keybinding grid)
               (consult-grep buffer)
               (imenu grid)
               (consult-location buffer)
