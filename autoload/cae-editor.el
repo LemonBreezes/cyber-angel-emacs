@@ -69,6 +69,13 @@ unbalanced. Works with Lispy and Smartparens."
 (defun cae-sp-raise-sexp ()
   "Like `sp-raise-sexp', but works on the region if active."
   (interactive)
+  (cl-letf (((symbol-function #'sp-up-sexp)
+             (if (featurep 'sp-up-sexp)
+                 (symbol-function #'sp-up-sexp)
+               (symbol-function #'up-list)))
+            ((symbol-function #'sp-backward-up-sexp)
+
+             )))
   (if (region-active-p)
       (save-excursion
         (let ((beg (region-beginning))
@@ -77,9 +84,7 @@ unbalanced. Works with Lispy and Smartparens."
           (delete-region end (progn (sp-up-sexp) (point)))
           (goto-char beg)
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
-    (call-interactively (if (functionp 'sp-raise-sexp)
-                            #'sp-raise-sexp
-                          #'raise-sexp))))
+    (call-interactively #'sp-raise-sexp)))
 
 ;;;###autoload
 (defun cae-insert-closing-paren ()
@@ -144,7 +149,7 @@ using the tab-width variable."
                                     (regexp-quote actual-indent) "" line)))
              stripped-indent)
          line))
-     lines "\n")))
+               lines "\n")))
 
 ;;;###autoload
 (defun cae-copy-for-reddit ()
@@ -318,7 +323,7 @@ This is the format used on Reddit for code blocks."
           ((eq this-command 'cae-avy-symbol-at-point)
            (er/mark-symbol))
           (t (if (fboundp 'eri/expand-region)
-                 (eri/expand-region 1)
+                  (eri/expand-region 1)
                (er/expand-region 1))))
     (call-interactively action))
   (run-at-time 0.0 nil
