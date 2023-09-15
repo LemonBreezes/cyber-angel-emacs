@@ -1120,8 +1120,6 @@
               '(alarm))))
  t)
 
-(set-face-background 'modus-themes-heading-1 "gray")
-
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
