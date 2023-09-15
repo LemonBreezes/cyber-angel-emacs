@@ -91,12 +91,6 @@ It is meant to be used as a `post-gc-hook'."
   (unless package-archive-contents
     (package--archives-initialize)))
 
-;; A generic adviser for responding yes to yes or no prompts automatically.
-(defun cae-hacks-always-yes-a (oldfun &rest args)
-  (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
-            ((symbol-function #'y-or-n-p) (symbol-function #'always)))
-    (apply oldfun args)))
-
 ;; Compile Vterm without asking.
 (setq vterm-always-compile-module t)
 
