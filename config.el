@@ -669,9 +669,8 @@
   (after! vline
     (setq vline-idle-time 0.1))
 
-  (when (modulep! :emacs undo)
-    (after! undo-fu
-      (setq undo-fu-allow-undo-in-region t)))
+  (after! undo-fu
+    (setq undo-fu-allow-undo-in-region t))
 
   ;; Hide commands in M-x which do not work in the current mode. Vertico commands
   ;; are hidden in normal buffers.
