@@ -733,9 +733,6 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"))
   :config
-  (map! :map emms-browser-mode-map
-        :ng "q" #'+emms-quit
-        :ng "a" #'+emms-quick-access)
   (emms-all)
   (emms-default-players)
   (when (executable-find "mpd")
@@ -753,7 +750,11 @@
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool)
         emms-browser-switch-to-playlist-on-add t)
+  (map! :map emms-browser-mode-map
+        :ng "q" #'+emms-quit
+        :ng "a" #'+emms-quick-access)
   (map! :map emms-playlist-mode-map
+        :ng "q" #'+emms-quit
         :localleader
         "l" #'emms-toggle-repeat-playlist
         "p" #'emms-insert-playlist
