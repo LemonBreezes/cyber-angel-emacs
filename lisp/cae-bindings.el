@@ -288,3 +288,7 @@
         "s-t" (cmd! () (start-process "teams" nil "teams-for-linux"))
         "s-d" (cmd! () (start-process "discord" nil "discord"))
         "s-p" (cmd! () (start-process "pavucontrol" nil "pavucontrol"))))
+
+(after! treemacs
+  (map! :map treemacs-mode-map
+        "<f6>" #'treemacs-helpful-hydra))
