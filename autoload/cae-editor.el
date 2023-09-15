@@ -215,7 +215,9 @@ This is the format used on Reddit for code blocks."
                       (eq (frame-parameter frame 'posframe-hidehandler)
                           #'vertico-posframe-hidehandler))
                     (nreverse (visible-frame-list))))
-         (vertico-posframe-size-function))
+         (vertico-posframe-size-function)
+         (vertico-multiform-commands
+          `((cae-embark-act-with-completing-read))))
     (setf vertico-posframe-size-function
           `(lambda (_)
              '(:height ,(frame-height posframe)
