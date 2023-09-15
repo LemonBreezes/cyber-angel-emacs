@@ -128,9 +128,7 @@
           comment-padding nil))         ;I prefer no spaces between comment
                                         ;delimiters and the comment text.
 
-  (when (and (modulep! :ui modeline)
-             (not (modulep! :ui modeline +light)))
-    (after! doom-modeline
+  (after! doom-modeline
       (setq doom-modeline-hud t
             doom-modeline-support-imenu t
             doom-modeline-mu4e t
@@ -138,7 +136,7 @@
             doom-modeline-github t
             doom-modeline-major-mode-icon nil
             doom-modeline-minor-modes nil
-            doom-modeline-persp-name t)))
+            doom-modeline-persp-name t))
 
   (after! which-key
     (setq which-key-ellipsis "..."
