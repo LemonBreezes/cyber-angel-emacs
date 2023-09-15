@@ -291,4 +291,5 @@
 
 (after! treemacs
   (map! :map treemacs-mode-map
-        "<f6>" #'treemacs-helpful-hydra))
+        "<f6>" #'treemacs-helpful-hydra
+        "e" #'consult-line))
