@@ -856,7 +856,55 @@
             er/mark-email
             eri/mark-line
             eri/mark-block
-            mark-page))))
+            mark-page)))
+
+  (use-package! parrot
+    :defer t :init
+    ;; Wrangle parrot into being fully lazy-loaded.
+    (autoload #'parrot-party-while-process "parrot")
+    (autoload #'parrot--todo-party "parrot")
+    (autoload #'parrot--magit-push-filter "parrot")
+    (advice-add #'gac-push
+                :after
+                (cae-defun cae-modeline-gac-party-on-push-a (buffer)
+                  (when-let ((proc (get-buffer-process "*git-auto-push*")))
+                    (parrot-party-while-process proc))))
+    (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
+    (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
+    :config
+    (setq parrot-animate 'hide-static
+          parrot-num-rotations 3
+          parrot-animate-on-load nil
+          parrot-party-on-magit-push t
+          parrot-party-on-org-todo-states '("DONE")
+          parrot-type 'nyan)
+    (parrot-mode +1))
+
+  (use-package! parrot-rotate
+    :defer t :init
+    (map! "C-!" #'cae-modeline-rotate-forward-word-at-point
+          "C-M-!" #'cae-modeline-rotate-backward-word-at-point
+          :n "]r"  #'cae-modeline-rotate-forward-word-at-point
+          :n "[r"  #'cae-modeline-rotate-backward-word-at-point)
+    :config
+    (after! parrot-rotate
+      (setq parrot-rotate-animate-after-rotation nil
+            parrot-rotate-highlight-after-rotation nil
+            parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+            parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+      (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
+                                               "cae-keyboard-remap-to-strings"
+                                               "cae-keyboard-strings")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled"))))))
 
 
 ;;; Autocompletion
