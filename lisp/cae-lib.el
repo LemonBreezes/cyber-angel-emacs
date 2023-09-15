@@ -17,6 +17,7 @@
 (defun cae-tty-disable-unicode-p ()
   (not (cae-display-graphic-p)))
 
+;; Lazy load keymaps from packages.
 (defmacro cae-oneshot-keymap (keymap package)
   `(if (featurep ',package)
        (symbol-value ',keymap)
