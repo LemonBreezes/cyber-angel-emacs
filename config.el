@@ -1061,16 +1061,15 @@
         smtpmail-servers-requiring-authorization ".*"
         smtpmail-smtp-user user-mail-address))
 
-(when (modulep! :email notmuch)
-  (setq +notmuch-sync-backend 'mbsync
-        +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
-        +notmuch-mail-folder "~/.mail/fastmail")
-  (after! notmuch
-    (map! :map notmuch-search-mode-map
-          "q" #'cae-notmuch-quit))
-  (after! notmuch-hello
-    (map! :map notmuch-hello-mode-map
-          "q" #'cae-notmuch-quit)))
+(setq +notmuch-sync-backend 'mbsync
+      +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
+      +notmuch-mail-folder "~/.mail/fastmail")
+(after! notmuch
+  (map! :map notmuch-search-mode-map
+        "q" #'cae-notmuch-quit))
+(after! notmuch-hello
+  (map! :map notmuch-hello-mode-map
+        "q" #'cae-notmuch-quit))
 
 (when (modulep! :email mu4e)
   (map! [remap compose-mail] #'+mu4e/compose))
