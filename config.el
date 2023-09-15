@@ -434,7 +434,7 @@
   (after! vertico-multiform
     (setq vertico-multiform-categories
           `((embark-keybinding grid)
-            (consult-grep buffer)
+            (consult-grep ,(if (cae-display-graphic-p) 'posframe 'buffer))
             (imenu grid)
             (consult-location buffer)
             (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
