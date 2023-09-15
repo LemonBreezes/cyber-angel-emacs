@@ -280,6 +280,7 @@
   (setq winum-auto-setup-mode-line t)
 
   (use-package! breadcrumb
+    :unless (modulep! :ui modeline)
     :defer t :init
     (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
 
