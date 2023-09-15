@@ -189,3 +189,4 @@ It is meant to be used as a `post-gc-hook'."
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
 
+(advice-add #'+format--refresh-git-gutter-h :override #'ignore)
