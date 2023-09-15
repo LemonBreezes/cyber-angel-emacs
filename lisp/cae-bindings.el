@@ -72,7 +72,7 @@
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "C-M-S-C" #'embrace-commander
-      "M-R" #'raise-sexp
+      "M-R" #'cae-sp-raise-sexp
       ;;[C-i] #'doom/dumb-indent
       [remap dabbrev-expand] #'hippie-expand
       ;;"C-S-i" #'doom/dumb-dedent
