@@ -532,6 +532,9 @@
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
+  (when (or (modulep! :private helm)
+            (modulep! :completion helm))
+    (load! "lisp/cae-helm"))
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
   ;; This is problematic because it means that a fold can be broken by an
