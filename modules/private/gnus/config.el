@@ -1,8 +1,6 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
-(unless (or (modulep! :email mu4e)
-            (modulep! :email notmuch))
-  (map! :leader :desc "Gnus" "o g" #'=gnus))
+(map! :leader :desc "Gnus" "o g" #'=gnus)
 
 (when (modulep! :editor evil)
   (after! evil-snipe
