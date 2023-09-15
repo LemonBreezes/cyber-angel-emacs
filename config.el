@@ -434,9 +434,7 @@
               (t ,@'(vertico-flat-mode)))
             vertico-multiform-commands
             `((cae-embark-act-with-completing-read
-               ,@(if (cae-display-graphic-p)
-                     '(grid posframe)
-                   '(grid)))))))
+               ,(alist-get 'embark-keybinding vertico-multiform-categories))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
