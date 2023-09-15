@@ -132,7 +132,7 @@
          :i "C-s" #'yasnippet-capf
          :i "C-l" #'cape-line
          :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
-         :i "C-r" #'cape-elisp-symbol
+         :i "s" #'cape-elisp-symbol
          :i "C-n" nil
          :i "C-p" nil)))
 
