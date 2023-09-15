@@ -188,3 +188,5 @@ It is meant to be used as a `post-gc-hook'."
       monroe-mode racket-mode racket-repl-mode
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
+
+(defvar git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode))
