@@ -77,7 +77,9 @@ unbalanced. Works with Lispy and Smartparens."
           (delete-region end (progn (sp-up-sexp) (point)))
           (goto-char beg)
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
-    (call-interactively #'sp-raise-sexp)))
+    (call-interactively (if (functionp 'sp-raise-sexp)
+                            #'sp-raise-sexp
+                          #'raise-sexp))))
 
 ;;;###autoload
 (defun cae-insert-closing-paren ()
