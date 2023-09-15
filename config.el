@@ -1100,13 +1100,12 @@
 
 ;;; Fennel
 
-(when (modulep! :tools lsp)
-  (after! lsp-mode
-    (setf (alist-get 'fennel-mode lsp-language-id-configuration) "fennel")
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
-                      :activation-fn (lsp-activate-on "fennel")
-                      :server-id 'fennel-ls))))
+(after! lsp-mode
+  (setf (alist-get 'fennel-mode lsp-language-id-configuration) "fennel")
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
+                    :activation-fn (lsp-activate-on "fennel")
+                    :server-id 'fennel-ls)))
 
 ;;; Appendix
 
