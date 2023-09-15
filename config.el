@@ -436,7 +436,7 @@
           `((embark-keybinding grid)
             (consult-grep ,(if (cae-display-graphic-p) 'posframe 'buffer))
             (imenu ,@(if (cae-display-graphic-p) '(posframe grid) '(grid)))
-            (consult-location buffer)
+            (consult-location ,(if (cae-display-graphic-p) 'posframe 'buffer))
             (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
