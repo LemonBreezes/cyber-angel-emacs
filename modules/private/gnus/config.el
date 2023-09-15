@@ -116,7 +116,7 @@
                        "nntp+Gmane:gmane.emacs.gnus.patches" "nntp+Gmane:gmane.emacs.gnus.announce"
                        "nntp+Gmane:gmane.emacs.gnus.general")
                       ("orgmode" "nntp+Gmane:gmane.emacs.orgmode") ("misc")
-                      ("fastmail" "nnimap+fastmail:INBOX") ("hackernews" "nnhackernews:news")
+                      ("fastmail" "nnimap+fastmail:INBOX" "nnimap+fastmail:Sent") ("hackernews" "nnhackernews:news")
                       ("emacs" "nntp+Gmane:gmane.linux.gentoo.announce" "nntp+Gmane:gmane.emacs.help"
                        "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.bugs"
                        "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.announce")
