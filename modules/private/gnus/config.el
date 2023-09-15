@@ -49,8 +49,7 @@
                                    ;;        (nnimap-streaming t)
                                    ;;        (nnimap-expunge never)
                                    ;;        (nnimap-split-methods default))
-                                   (nnmaildir "Fastmail"
-                                              (directory "~/Mail/Fastmail")))
+                                   )
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
