@@ -16,15 +16,6 @@
         (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
-  (define-prefix-command 'org-ai-region-map)
-  (map! :map org-ai-region-map
-        "s" #'org-ai-summarize
-        "r" #'org-ai-on-region
-        "R" #'org-ai-talk-read-region
-        "c" #'org-ai-refactor-code)
-  (after! embark
-    (map! :map embark-region-map
-          "M-a" #'org-ai-region-map))
   :config
   (require 'whisper)
   (require 'greader-espeak)
