@@ -413,9 +413,9 @@ also marks comment with leading whitespace"
     (skip-syntax-forward "^w" (line-end-position))
     (condition-case err
         (call-interactively rotate-function)
-        (error
-         (skip-syntax-backward "^w" (line-beginning-position))
-         (call-interactively rotate-function)))))
+      (error
+       (skip-syntax-backward "^w" (line-beginning-position))
+       (call-interactively rotate-function)))))
 
 ;;;###autoload
 (defun cae-modeline-rotate-forward-word-at-point ()
