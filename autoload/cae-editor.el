@@ -218,12 +218,13 @@ This is the format used on Reddit for code blocks."
          (vertico-posframe-size-function)
          (vertico-multiform-commands
           `((cae-embark-act-with-completing-read grid ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
-    (setf vertico-posframe-size-function
-          `(lambda (_)
-             '(:height ,(frame-height posframe)
-               :width ,(frame-width posframe)
-               :min-height nil
-               :min-width nil)))
+    (when (featurep 'vertico-posframe)
+      (setf vertico-posframe-size-function
+            `(lambda (_)
+               '(:height ,(frame-height posframe)
+                 :width ,(frame-width posframe)
+                 :min-height nil
+                 :min-width nil))))
     (embark-act arg)))
 
 ;;;###autoload
