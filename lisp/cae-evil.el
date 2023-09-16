@@ -31,7 +31,7 @@
 (map! :i "C-e" #'evil-copy-from-below)
 
 (when (modulep! :emacs undo)
-  (map! :n "U" #'vundo))
+  (map! :n "U" (if (modulep! :emacs undo +tree) #'undo-tree #'vundo)))
 
 ;; Define a leader key for switching to popup windows.
 (after! evil
