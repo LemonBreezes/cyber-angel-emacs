@@ -2,6 +2,7 @@
 
 (when (or (not (cae-display-graphic-p))
           (not (modulep! :ui modeline)))
+  (remove-hook 'doom-after-init-hook #'doom-modeline-mode)
   (when (modulep! :editor evil)
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
