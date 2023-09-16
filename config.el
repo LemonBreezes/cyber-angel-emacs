@@ -440,13 +440,13 @@
             (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
-  (when (cae-display-graphic-p)
-    (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
-      (dolist (fn '(with-editor-export-editor
-                    with-editor-export-hg-editor
-                    with-editor-export-git-editor))
-        (add-hook hook fn)))
-    (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a))
+  ;;(when (cae-display-graphic-p)
+  ;;  (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
+  ;;    (dolist (fn '(with-editor-export-editor
+  ;;                  with-editor-export-hg-editor
+  ;;                  with-editor-export-git-editor))
+  ;;      (add-hook hook fn)))
+  ;;  (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a))
 
   (after! spell-fu
     (add-to-list 'spell-fu-faces-exclude 'message-header-other)
