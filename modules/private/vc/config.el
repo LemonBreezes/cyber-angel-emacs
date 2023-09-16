@@ -145,5 +145,3 @@
 
 (use-package! igist :defer t)           ; TODO
 
-(use-package! magit-patch-changelog
-  :after magit)
