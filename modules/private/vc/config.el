@@ -144,3 +144,6 @@
   (setq blamer-commit-formatter " ● %s"))
 
 (use-package! igist :defer t)
+
+(use-package! magit-patch-changelog
+  :after magit)
