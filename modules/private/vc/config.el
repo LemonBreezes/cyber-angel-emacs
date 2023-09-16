@@ -144,4 +144,3 @@
   (setq blamer-commit-formatter " ● %s"))
 
 (use-package! igist :defer t)           ; TODO
-
