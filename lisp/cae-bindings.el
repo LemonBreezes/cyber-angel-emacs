@@ -282,12 +282,17 @@
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
 
+(defmacro cae-exwm-app-runner (app-name app-title)
+  `(lambda (arg)
+     (interactive "P")
+     (cae-exwm-start-app ,app-name ,app-title arg)))
+
 (when (modulep! :private exwm)
-  (map! "s-c" (cmd! () (cae-exwm-start-app "google-chrome-stable" "Chrome"))
+  (map! "s-c" (cae-exwm-app-runner "google-chrome-stable" "Chrome")
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
-        "s-t" (cmd! () (cae-exwm-start-app "teams-for-linux" "Teams"))
-        "s-d" (cmd! () (cae-exwm-start-app "discord" "Discord"))
-        "s-p" (cmd! () (cae-exwm-start-app "pavucontrol" "Pavucontrol"))))
+        "s-t" (cae-exwm-app-runner "teams-for-linux" "Teams")
+        "s-d" (cae-exwm-app-runner "discord" "Discord")
+        "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")))
 
 (after! treemacs
   (map! :map treemacs-mode-map
