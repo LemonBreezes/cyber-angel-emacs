@@ -30,6 +30,9 @@
 ;; Restore these Vim keybindings which Doom overrides.
 (map! :i "C-e" #'evil-copy-from-below)
 
+(when (modulep! :emacs undo)
+  (map! :n "U" #'vundo))
+
 ;; Define a leader key for switching to popup windows.
 (after! evil
   (unless (lookup-key evil-window-map "e")
