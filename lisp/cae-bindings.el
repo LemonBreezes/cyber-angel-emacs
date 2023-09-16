@@ -283,11 +283,11 @@
           "M-S-<return>" #'org-insert-todo-heading)))
 
 (when (modulep! :private exwm)
-  (map! "s-c" (cmd! () (start-process "chrome" nil "google-chrome-stable"))
+  (map! "s-c" (cmd! () (cae-exwm-start-app "google-chrome-stable" "Chrome"))
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
-        "s-t" (cmd! () (start-process "teams" nil "teams-for-linux"))
-        "s-d" (cmd! () (start-process "discord" nil "discord"))
-        "s-p" (cmd! () (start-process "pavucontrol" nil "pavucontrol"))))
+        "s-t" (cmd! () (cae-exwm-start-app "teams-for-linux" "Teams"))
+        "s-d" (cmd! () (cae-exwm-start-app "discord" "Discord"))
+        "s-p" (cmd! () (cae-exwm-start-app "pavucontrol" "Pavucontrol"))))
 
 (after! treemacs
   (map! :map treemacs-mode-map
