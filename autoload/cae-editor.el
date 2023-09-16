@@ -427,9 +427,14 @@ also marks comment with leading whitespace"
   (interactive)
   (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
 
+(defvar cae-exwm-workspace-process-alist nil)
+
 ;;;###autoload
 (defun cae-exwm-start-app (app workspace)
   (when (modulep! :ui workspaces)
     (+workspace-switch workspace t))
-  (unless (get-process workspace)
-    (start-process workspace nil app)))
+  (unless (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
+    (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
+          (start-process workspace nil app))))
+
+(get-process "Chrome")
