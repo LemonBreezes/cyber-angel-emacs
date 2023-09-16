@@ -437,5 +437,5 @@ also marks comment with leading whitespace"
     (kill-process (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)))
   (unless (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
     (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
-          (start-process workspace nil app))))
-
+          (start-process workspace nil app)))
+  (+exwm-persp--focus-workspace-app))
