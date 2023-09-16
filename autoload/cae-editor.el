@@ -439,4 +439,3 @@ also marks comment with leading whitespace"
     (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
           (start-process workspace nil app))))
 
-(get-process "Chrome")
