@@ -430,9 +430,11 @@ also marks comment with leading whitespace"
 (defvar cae-exwm-workspace-process-alist nil)
 
 ;;;###autoload
-(defun cae-exwm-start-app (app workspace)
+(defun cae-exwm-start-app (app workspace &optional arg)
   (when (modulep! :ui workspaces)
     (+workspace-switch workspace t))
+  (when arg
+    (kill-process (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)))
   (unless (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
     (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
           (start-process workspace nil app))))
