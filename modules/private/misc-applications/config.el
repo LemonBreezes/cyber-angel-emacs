@@ -141,7 +141,7 @@
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
         "?" #'describe-mode
-        "o" #'link-hint-open-link
+        :ng "o" #'link-hint-open-link
         :map elfeed-search-mode-map
         "?" #'describe-mode
         :ng "q" #'+elfeed-quit
