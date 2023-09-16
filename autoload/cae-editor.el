@@ -426,3 +426,10 @@ also marks comment with leading whitespace"
 (defun cae-modeline-rotate-backward-word-at-point ()
   (interactive)
   (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
+
+;;;###autoload
+(defun cae-exwm-start-app (app workspace)
+  (when (modulep! :ui workspaces)
+    (+workspace-switch workspace t))
+  (unless (get-process workspace)
+    (start-process workspace nil app)))
