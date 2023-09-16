@@ -143,7 +143,7 @@
   (setq blamer-datetime-formatter "[%s]")
   (setq blamer-commit-formatter " ● %s"))
 
-(use-package! igist :defer t)
+(use-package! igist :defer t)           ; TODO
 
 (use-package! magit-patch-changelog
   :after magit)
