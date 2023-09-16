@@ -2,5 +2,7 @@
 ;;; private/gnus/packages.el
 
 (package! nnhackernews)
-(package! bbdb)
+
+;; This package is not really related to Gnus but it helps me browse the Emacs
+;; bug archive.
 (package! debbugs)

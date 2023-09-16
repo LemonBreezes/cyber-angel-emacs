@@ -62,8 +62,8 @@ alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom
 alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
 alias update-emacs sudo smart-live-rebuild && cd ~/.config/emacs && doom build && git stash && doom upgrade && git stash pop && doom sync
 alias update-emacs2 cd ~/.config/emacs && git stash && doom upgrade && git stash pop && doom sync
-alias update-gentoo (progn (add-transient-hook! 'compilation-mode-hook (font-lock-mode -1)) nil) && sudo emaint -a sync && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
-alias update-gentoo2 (progn (add-transient-hook! 'compilation-mode-hook (font-lock-mode -1)) nil) && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
+alias update-gentoo sudo emaint -a sync && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
+alias update-gentoo2 compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
 alias doom ~/.config/emacs/bin/doom $*
 alias update-doom-patch rm ~/.config/emacs/cae-emacs-doom.patch && cd ~/.config/emacs && git diff *> ~/.config/doom/cae-emacs-doom.patch && cd -
 

@@ -4,8 +4,6 @@
                    flyspell
                    ccls                 ; I use clangd.
                    compat               ; I use the latest version of Emacs.
-                   mu4e-alert           ; Mu4e comes with `mu4e-modeline-mode'
-                                        ; and I don't need email notifications.
                    ace-window
                    rainbow-delimiters
                    volatile-highlights
@@ -82,6 +80,7 @@
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! auto-sudoedit :recipe (:host github :repo "LemonBreezes/auto-sudoedit"))
+(package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)

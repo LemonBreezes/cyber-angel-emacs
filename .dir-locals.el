@@ -24,6 +24,9 @@
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t)
 
+            (when (functionp 'apheleia-mode)
+              (apheleia-mode +1))
+
             ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
             (setq-local blamer--block-render-p t)
 

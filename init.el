@@ -35,7 +35,7 @@
        doom-dashboard
        hl-todo
        hydra
-       ;;(ligatures +extra +iosevka)
+       (ligatures +extra +iosevka)
        ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
@@ -43,6 +43,8 @@
        workspaces
        (window-select +numbers)
        ophints
+       treemacs
+       modeline
 
        :editor
        file-templates
@@ -57,6 +59,7 @@
        undo
        ibuffer
        vc
+       (dired +icons)
 
        :term
        eshell
@@ -95,10 +98,10 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings +smartparens)
+       (default +bindings)
 
        :email
-       ;;(mu4e +org)
+       (mu4e +org)
        ;;(notmuch +org)
 
        :app
@@ -109,7 +112,7 @@
        (corfu +orderless +icons +split-char)
        (helm +childframe)
        (debugger +lsp)
-       (dirvish +icons +dirvish)
+       ;;(dirvish +icons +dirvish)
        eshell
        exwm
        dired
