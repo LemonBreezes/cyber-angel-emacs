@@ -296,4 +296,10 @@
 
 (after! treemacs
   (map! :map treemacs-mode-map
-        "<f6>" #'treemacs-helpful-hydra))
+        "<f6>" #'treemacs-helpful-hydra)
+  (when (modulep! :completion vertico)
+    (map! :map treemacs-mode-map
+          "j" #'consult-line)
+    (when (modulep! :editor evil)
+      (map! :map evil-treemacs-state-map
+            "J" #'consult-line))))
