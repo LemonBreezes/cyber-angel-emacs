@@ -45,11 +45,7 @@
   ;; Previously I used Iosevka Comfy and size 18.
   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)
-        ;;doom-unicode-font (unless (modulep! :ui unicode)
-        ;;                    (font-spec :family "LXGW WenKai" :weight 'light
-        ;;                               :size 18))
-        ))
+                                            :size 18)))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
