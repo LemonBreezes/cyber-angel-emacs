@@ -299,7 +299,7 @@
         "<f6>" #'treemacs-helpful-hydra)
   (when (modulep! :completion vertico)
     (map! :map treemacs-mode-map
-          "e" #'consult-line)
+          "J" #'consult-line)
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
-            "e" #'consult-line))))
+            "J" #'consult-line))))
