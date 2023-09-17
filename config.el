@@ -44,7 +44,7 @@
 (unless (memq system-type '(cygwin windows-nt ms-dos))
   ;; Previously I used Iosevka Comfy and size 18.
   (setq doom-font (font-spec :family "Iosevka Term SS15" :size 18)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+        doom-variable-pitch-font (font-spec :family "Iosevka Aile"
                                             :size 18)))
 
 ;; Do not break my clipboard in SSH sessions.
