@@ -906,7 +906,7 @@
 ;;; Autocompletion
 
 (when cae-init-autocompletion-enabled-p
-  (when (modulep! :private corfu)
+  (when (modulep! :completion corfu)
     (load! "lisp/cae-corfu"))
 
   (setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
@@ -1112,7 +1112,7 @@
 ;;; Appendix
 
 (doom-load-packages-incrementally
- `(,@(when (modulep! :private corfu)
+ `(,@(when (modulep! :completion corfu)
        '(corfu))
    ,@(when (modulep! :emacs dirvish)
        '(dired transient dirvish))
