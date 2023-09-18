@@ -48,11 +48,11 @@
   :config
   (setq org-modern-todo nil))
 
-(use-package! org-tidy
-  :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode)
-  :config
-  (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
+;;(use-package! org-tidy
+;;  :defer t :init
+;;  (add-hook 'org-mode-hook #'org-tidy-mode)
+;;  :config
+;;  (setq org-tidy-properties-inline-symbol (if (cae-tty-disable-unicode-p) "." "·")))
 
 (defun locally-defer-font-lock ()
   "Set jit-lock defer and stealth, when buffer is over a certain size."
