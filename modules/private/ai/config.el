@@ -44,6 +44,8 @@
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
+  (setq-hook! 'chatgpt-shell-mode-hook
+    comint-process-echoes t)
   (advice-add #'shell-maker-async-shell-command
               :around
               (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
