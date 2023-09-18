@@ -214,7 +214,7 @@ expansion occurs within the parent Emacs session.")
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
       (load! "+auto-persp")))
-)
+  )
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
