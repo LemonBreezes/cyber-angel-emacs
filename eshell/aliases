@@ -19,6 +19,7 @@ alias eselect sudo eselect                                                    $*
 alias usermod sudo usermod                                                    $*
 alias tree   sudo tree -C                                                     $*
 alias smart-live-rebuild sudo smart-live-rebuild                              $*
+alias updatedb sudo updatedb                                                  $*
 
 alias sysu systemctl --user                                                   $*
 alias sysut systemctl --user status                                           $*

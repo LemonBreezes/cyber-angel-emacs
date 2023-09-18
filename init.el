@@ -45,7 +45,6 @@
        ophints
        treemacs
        modeline
-       unicode
 
        :editor
        file-templates
