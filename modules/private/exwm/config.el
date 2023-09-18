@@ -3,6 +3,7 @@
 (when (and (eq 'x (framep (selected-frame)))
            (not (getenv "EXWM_RUNNING"))
            (not (getenv "RATPOISON"))
+           (not (getenv "I3SOCK"))
            (not (getenv "WAYLAND_DISPLAY")))
 
   ;; Prevent nested Emacs sessions from loading EXWM.
