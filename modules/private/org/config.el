@@ -12,9 +12,9 @@
 
 (advice-add #'org-insert-heading :after #'cae-org-set-created-timestamp)
 (add-hook 'org-capture-mode-hook
-  (cae-defun org-capture--insert-timestamp ()
-    (when (org-at-heading-p)
-      (cae-org-set-created-timestamp))))
+          (cae-defun org-capture--insert-timestamp ()
+            (when (org-at-heading-p)
+              (cae-org-set-created-timestamp))))
 
 ;;(advice-add #'+org-init-keybinds-h :after
 ;;            (cae-defun cae-org-fixup-doom-keybindings ()
