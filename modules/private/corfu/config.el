@@ -74,11 +74,11 @@
   (add-hook! (org-mode markdown-mode) (+add-capf! #'cape-elisp-block))
   (advice-add #'lsp-completion-at-point :around #'cape-wrap-noninterruptible))
 
-;;(use-package! yasnippet-capf
-;;  :after corfu
-;;  :config
-;;  (add-hook 'yas-minor-mode-hook
-;;            (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
+(use-package! yasnippet-capf
+  :after corfu
+  :config
+  (add-hook 'yas-minor-mode-hook
+            (lambda () (add-to-list 'completion-at-point-functions #'yasnippet-capf))))
 
 (use-package! svg-lib
   :after kind-icon)
