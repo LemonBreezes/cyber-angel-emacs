@@ -355,7 +355,9 @@
     (setq browse-url-browser-function
           (cond ((executable-find "termux-setup-storage")
                  #'browse-url-xdg-open)
-                (t #'browse-url-generic)))
+                (t #'browse-url-generic))
+          browse-url-secondary-browser-function
+          #'eww-browse-url)
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
