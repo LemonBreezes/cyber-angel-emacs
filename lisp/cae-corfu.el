@@ -27,7 +27,7 @@
                     ,(concat "[ " (string char) "]+") t))))
 
 (after! orderless
-  (if (modulep! :private corfu +split-char)
+  (if (modulep! :completion corfu +split-char)
       ;; So Orderless splits the string into components and then determines the
       ;; matching style for each component. This is all regexp stuff.
       (progn (setq orderless-component-separator
@@ -45,10 +45,10 @@
   (setq cape-dabbrev-check-other-buffers t
         cape-line-buffer-function #'cae-cape-line-buffers))
 (after! corfu
-  (setq corfu-preview-current (if (modulep! :private corfu +tng) 'insert nil)
+  (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
         corfu-on-exact-match nil
-        corfu-preselect (if (modulep! :private corfu +tng) 'prompt t)
+        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt t)
         tab-always-indent 'complete
         tab-first-completion 'eol)
   (after! corfu-quick

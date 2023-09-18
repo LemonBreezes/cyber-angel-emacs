@@ -207,7 +207,7 @@
 ;;     (map! :map embark-collect-mode-map
 ;;           "M-j" #'avy-embark-collect-choose
 ;;           "M-i" #'avy-embark-collect-act))
-;;   (when (modulep! :private corfu)
+;;   (when (modulep! :completion corfu)
 ;;     (after! corfu
 ;;       (map! :map corfu-map
 ;;             "M-j" #'corfu-quick-jump

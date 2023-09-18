@@ -211,7 +211,7 @@
           (meow-reverse . exchange-point-and-mark)
           (meow-replace . back-to-indentation)
           (meow-save . cae-meow-save-line)))
-  (when (modulep! :private corfu)
+  (when (modulep! :completion corfu)
     (after! corfu
       (add-hook 'meow-insert-exit-hook #'corfu-quit)))
   (unless (cae-display-graphic-p)       ;Make Meow usable in the terminal.

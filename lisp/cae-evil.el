@@ -130,7 +130,7 @@
 
 (after! help
   (map! :map help-map "bn" #'cae-show-normal-state-bindings))
-(when (modulep! :private corfu)
+(when (modulep! :completion corfu)
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file

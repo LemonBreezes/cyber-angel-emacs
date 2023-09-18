@@ -9,8 +9,7 @@
                    volatile-highlights
                    hl-line
                    flymake-popon
-                   elfeed-goodies
-                   highlight-numbers)
+                   elfeed-goodies)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe

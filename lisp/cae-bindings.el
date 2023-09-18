@@ -111,7 +111,7 @@
       :prefix "t"
       :desc "Column indicator" "C" #'vline-mode)
 
-(when (modulep! :private corfu)
+(when (modulep! :completion corfu)
   (after! corfu
     (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
           :map corfu-map

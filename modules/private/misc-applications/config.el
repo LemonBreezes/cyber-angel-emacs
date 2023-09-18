@@ -469,7 +469,7 @@
       "T" "Speed Type"))
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   :config
-  (when (modulep! :private corfu)
+  (when (modulep! :completion corfu)
     (add-to-list 'corfu-excluded-modes #'speed-type-mode))
   (when (modulep! :editor evil)
     (after! evil

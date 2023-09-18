@@ -30,6 +30,7 @@
 
 (doom! :completion
        (vertico +icons +childframe)
+       (corfu +icons +orderless +split-char)
 
        :ui
        doom-dashboard
@@ -109,7 +110,6 @@
 
        :private
        ;;holy
-       (corfu +orderless +icons +split-char)
        (helm +childframe)
        (debugger +lsp)
        ;;(dirvish +icons +dirvish)

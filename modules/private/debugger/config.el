@@ -16,7 +16,7 @@
           dap-auto-configure-features '(sessions locals breakpoints
                                         expressions tooltip))
 
-    (when (modulep! :private corfu)
+    (when (modulep! :completion corfu)
       (defun cae-debugger-dap-ui-repl-corfu-setup ()
         (add-to-list 'completion-at-point-functions #'cape-dabbrev))
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
