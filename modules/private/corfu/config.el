@@ -38,15 +38,15 @@
                                              (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
                                                    '(orderless)))))))
   (map! (:unless (modulep! +tng)
-          "C-SPC" #'completion-at-point)
+         "C-SPC" #'completion-at-point)
         (:map 'corfu-map
-              (:when (modulep! +orderless)
-                "C-SPC" #'corfu-insert-separator)
-              (:when (modulep! +tng)
-                [tab] #'corfu-next
-                [backtab] #'corfu-previous
-                "TAB" #'corfu-next
-                "S-TAB" #'corfu-previous)))
+         (:when (modulep! +orderless)
+          "C-SPC" #'corfu-insert-separator)
+         (:when (modulep! +tng)
+          [tab] #'corfu-next
+          [backtab] #'corfu-previous
+          "TAB" #'corfu-next
+          "S-TAB" #'corfu-previous)))
 
   (after! evil-collection-corfu
     (evil-collection-define-key 'insert 'corfu-map
@@ -137,11 +137,11 @@ This fixes the cropping due to scaling issues."
   :config
   (setq corfu-popupinfo-delay '(0.5 . 1.0))
   (map! (:map 'corfu-map
-              "C-<up>" #'corfu-popupinfo-scroll-down
-              "C-<down>" #'corfu-popupinfo-scroll-up
-              "C-S-p" #'corfu-popupinfo-scroll-down
-              "C-S-n" #'corfu-popupinfo-scroll-up
-              "C-h" #'corfu-popupinfo-toggle)
+         "C-<up>" #'corfu-popupinfo-scroll-down
+         "C-<down>" #'corfu-popupinfo-scroll-up
+         "C-S-p" #'corfu-popupinfo-scroll-down
+         "C-S-n" #'corfu-popupinfo-scroll-up
+         "C-h" #'corfu-popupinfo-toggle)
         (:map 'corfu-popupinfo-map
          :when (modulep! :editor evil)
          ;; Reversed because popupinfo assumes opposite of what feels intuitive
