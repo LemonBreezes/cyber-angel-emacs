@@ -119,7 +119,7 @@
           "C-S-l" #'cae-sudo-toggle
           :i "C-u" #'eshell-kill-input
           :ig "C-d" #'cae-eshell-quit-or-delete-char
-          [remap eshell-bol] #'beginning-of-line)))
+          :ig [remap eshell-bol] #'beginning-of-line)))
 
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
 (load! "eshell-doc-doom-pr-6867")
