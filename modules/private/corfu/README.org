@@ -4,19 +4,22 @@
 #+since:    3.0.0 (#7002)
 
 * Description :unfold:
+
 This module provides code completion, powered by [[doom-package:corfu]].
 
-It is recommended to enable either this or [[doom-module:][:completion company]], in case you
+It is recommended to enable either this or [[doom-module::completion company]], in case you
 desire pre-configured auto-completion. Corfu is much lighter weight and focused,
 plus it's built on native Emacs functionality, whereas company is heavy and
 highly non-native, but has some extra features and more maturity.
 
 ** Maintainers
+
 - [[doom-user:][@LuigiPiucco]]
 
 [[doom-contrib-maintainer:][Become a maintainer?]]
 
 ** Module flags
+
 - +icons ::
   Display icons beside completion suggestions.
 - +tng ::
@@ -28,20 +31,26 @@ highly non-native, but has some extra features and more maturity.
   completion (still needed if [[:completion vertico]] is active).
 
 ** Packages
+
 - [[doom-package:corfu]]
 - [[doom-package:cape]]
-- [[doom-package:kind-icon]] if [[doom-module:][:completion corfu +icons]]
-- [[doom-package:orderless]] if [[doom-module:][:completion corfu +icons]]
-- [[doom-package:corfu-terminal]] if [[doom-module:][:os tty]]
-  
+- [[doom-package:kind-icon]] if [[doom-module::completion corfu +icons]]
+- [[doom-package:orderless]] if [[doom-module::completion corfu +orderless]]
+- [[doom-package:corfu-terminal]] if [[doom-module::os tty]]
+- [[doom-package:yasnippet-capf]] if [[doom-module::editor snippets]]
+
+
 ** Hacks
+
 /No hacks documented for this module./
 
 ** TODO Changelog
+
 # This section will be machine generated. Don't edit it by hand.
 /This module does not have a changelog yet./
 
 * Installation
+
 Enable this module in your ~doom!~ block.
 
 This module has no direct requirements, but some languages may have their own
@@ -53,11 +62,13 @@ supports generic, context insensitive candidates such as file names or recurring
 words. Snippets may also appear in the candidate list if available.
 
 * TODO Usage
+
 #+begin_quote
  🔨 /This module's usage documentation is incomplete./ [[doom-contrib-module:][Complete it?]]
 #+end_quote
 
 ** Code completion
+
 By default, completion gets triggered after typing 2 non-space consecutive
 characters, or by means of the [[kbd:][C-SPC]] keybinding at any moment. While the popup
 is visible, the following relevant keys are available:
@@ -94,6 +105,7 @@ additional binds:
 | [[kbd:][S-TAB]]   | (when completing) Go to previous candidate |
 
 ** Searching with multiple keywords
+
 If the ~+orderless~ flag is enabled, users can perform code completion
 with multiple search keywords by use of space as separator. More information can
 be found [[https://github.com/oantolin/orderless#company][here]]. Pressing [[kdb:][C-SPC]] again while completing inserts a space as
@@ -103,6 +115,7 @@ as normal and restarts completion, so that when typing sentences it doesn't try
 to complete the whole sentence instead of just the word.
 
 ** Exporting to the minibuffer (requires [[doom-module:][:completion vertico]])
+
 When using the [[doom-module::completion vertico]] module, which pulls in the
 [[doom-package:consult]] package, the entries shown in the completion popup can be
 exported to a consult minibuffer, giving access to all the manipulations the
@@ -110,6 +123,7 @@ vertico suite allows. For instance, one could use this to export with
 [[doom-package:embark]] via [[kbd:][C-c C-l]] and get a buffer with all candidates.
 
 * Configuration
+
 A few variables may be set to change behavior of this module:
 
 - [[var:corfu-auto-delay]] ::
@@ -125,12 +139,15 @@ A few variables may be set to change behavior of this module:
   expand immediately.
 
 * Troubleshooting
+
 [[doom-report:][Report an issue?]]
 
 * Frequently asked questions
+
 /This module has no FAQs yet./ [[doom-suggest-faq:][Ask one?]]
 
 * TODO Appendix
+
 #+begin_quote
  🔨 This module has no appendix yet. [[doom-contrib-module:][Write one?]]
 #+end_quote
