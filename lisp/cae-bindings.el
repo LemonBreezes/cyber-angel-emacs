@@ -287,7 +287,8 @@
      (interactive "P")
      (cae-exwm-start-app ,app-name ,app-title arg)))
 
-(when (modulep! :private exwm)
+(when (and (modulep! :private exwm)
+           (getenv "EXWM_RUNNING"))
   (map! "s-c" (cae-exwm-app-runner "google-chrome-stable" "Chrome")
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
         "s-t" (cae-exwm-app-runner "teams-for-linux" "Teams")
