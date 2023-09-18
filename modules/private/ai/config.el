@@ -44,6 +44,7 @@
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
+  ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
   (advice-add #'shell-maker-async-shell-command
