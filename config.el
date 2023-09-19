@@ -389,6 +389,7 @@
   ;; Set up printers.
   (after! lpr (setq printer-name "Brother_HL-2350DW"))
   (after! ps-print (setq ps-printer-name "Brother_HL-2350DW"))
+  (after! pdf-misc (setq pdf-misc-print-program-executable (executable-find "lpr")))
 
   (setq delete-by-moving-to-trash t
         remote-file-name-inhibit-delete-by-moving-to-trash t
