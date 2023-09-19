@@ -58,6 +58,7 @@
     (map! :map corfu-map
           :ig "RET" nil
           :ig "<return>" nil))
+
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'fish-completion-mode-hook corfu-auto nil)
 
