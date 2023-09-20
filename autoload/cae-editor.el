@@ -66,20 +66,6 @@ unbalanced. Works with Lispy and Smartparens."
       (goto-char p))))
 
 ;;;###autoload
-(defun cae-sp-raise-sexp ()
-  "Like `sp-raise-sexp', but works on the region if active."
-  (interactive)
-  (if (region-active-p)
-      (save-excursion
-        (let ((beg (region-beginning))
-              (end (region-end)))
-          (goto-char end)
-          (delete-region end (progn (sp-up-sexp) (point)))
-          (goto-char beg)
-          (delete-region beg (progn (sp-backward-up-sexp) (point)))))
-    (call-interactively #'sp-raise-sexp)))
-
-;;;###autoload
 (defun cae-insert-closing-paren ()
   "Inserts a closing paren if the sexps in the buffer are
 unbalanced, otherwise acts like `self-insert-command'. Works with
