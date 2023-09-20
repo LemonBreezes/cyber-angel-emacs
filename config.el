@@ -184,11 +184,6 @@
   ;; Allow switching to these buffers with `C-x b'
   (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 
-  ;; Randomize all Dired playlists
-  (advice-add #'emms-source-dired :filter-return
-              (lambda (list)
-                (sort list (lambda (_ _) (< (random) 0.5)))))
-
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
