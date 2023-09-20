@@ -61,7 +61,7 @@
                  (evil-cleverparens-swap-move-by-word-and-symbol t))
         :config
         (map! :map evil-cleverparens-mode-map
-              :n "M-\"" #'+evil-cp-wrap-next-double-quotes
+              :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
               :n "<f6>" #'cae-cheatsheets-evil-cleverparens
               [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
