@@ -1,7 +1,7 @@
 ;;; autoload/cae-smartparens.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload '+evil-cp-wrap-next-double-quotes "autoload/cae-evil" nil t)
-(evil-define-command +evil-cp-wrap-next-double-quotes (count)
+;;;###autoload (autoload 'cae-evil-cp-wrap-next-double-quotes "autoload/cae-evil" nil t)
+(evil-define-command cae-evil-cp-wrap-next-double-quotes (count)
   "Wraps the next COUNT sexps inside curly braces. If the point
 is inside a symbol, that symbol is treated as the first sexp to
 wrap.
