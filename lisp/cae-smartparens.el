@@ -62,7 +62,8 @@
         :config
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'+evil-cp-wrap-next-double-quotes
-              :n "<f6>" #'cae-cheatsheets-evil-cleverparens)))
+              :n "<f6>" #'cae-cheatsheets-evil-cleverparens
+              [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
                        ("C-M-S-k" . sp-kill-hybrid-sexp)
