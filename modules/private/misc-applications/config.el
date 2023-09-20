@@ -733,6 +733,10 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"))
+  ;; Randomize all Dired playlists
+  (advice-add #'emms-source-dired :filter-return
+              (lambda (list)
+                (sort list (lambda (_ _) (< (random) 0.5)))))
   :config
   (emms-all)
   (emms-default-players)
