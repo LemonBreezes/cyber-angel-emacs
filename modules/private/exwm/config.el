@@ -18,7 +18,9 @@ handed off to. A macro syntax is valid. Macro
 expansion occurs within the parent Emacs session.")
   (defvar +exwm-vanilla-emacs-theme
     (lambda ()
-      (if (memq doom-theme '(modus-operandi modus-vivendi))
+      (if (memq doom-theme '(modus-operandi modus-vivendi modus-operandi-tinted
+                             modus-operandi-tritanopia modus-vivendi-tinted
+                             modus-vivendi-tritanopia default))
           doom-theme
         'wheatgrass))
     "The theme loaded in our vanilla Emacs child sessions.")
