@@ -8,7 +8,10 @@
   (after! replace
     (setq query-replace-from-to-separator " -> "))
   (after! helm-files
-    (setq helm-rsync-percent-sign "%")))
+    (setq helm-rsync-percent-sign "%"))
+  (dolist (fn '(nerd-icons-faicon
+                nerd-icons-octicon))
+    (advice-add fn :override #'ignore)))
 
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
