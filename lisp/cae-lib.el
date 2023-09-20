@@ -15,7 +15,8 @@
        (not (daemonp))))
 
 (defun cae-tty-disable-unicode-p ()
-  (not (cae-display-graphic-p)))
+  (not (or (cae-display-graphic-p)
+           (string= (getenv "TERM") "foot"))))
 
 ;; Lazy load keymaps from packages.
 (defmacro cae-oneshot-keymap (keymap package)
