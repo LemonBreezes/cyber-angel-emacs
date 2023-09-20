@@ -18,3 +18,17 @@ many times the \\[universal-argument] was invoked."
           (evil-cp--wrap-next "\"" count))
         (evil-cp--backward-up-list))
     (evil-cp--wrap-next "\"" count)))
+
+;;;###autoload
+(defun cae-sp-raise-sexp ()
+  "Like `sp-raise-sexp', but works on the region if active."
+  (interactive)
+  (if (region-active-p)
+      (save-excursion
+        (let ((beg (region-beginning))
+              (end (region-end)))
+          (goto-char end)
+          (delete-region end (progn (sp-up-sexp) (point)))
+          (goto-char beg)
+          (delete-region beg (progn (sp-backward-up-sexp) (point)))))
+    (call-interactively #'sp-raise-sexp)))
