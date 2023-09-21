@@ -675,7 +675,7 @@
       "c" "MPC"))
   :config
   (setq mpc-host "localhost"
-        mpc-mpd-music-directory "/mnt/unindexed-music/")
+        mpc-mpd-music-directory +misc-applications-music-dir)
   (map! :map mpc-mode-map
         :ng "q" #'+mpc-quit
         "<f6>" #'cae-cheatsheets-mpc
