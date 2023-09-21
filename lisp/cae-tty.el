@@ -12,8 +12,6 @@
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
-(unless (cae-tty-disable-unicode-p)
-  (add-hook 'doom-first-buffer-hook #'global-prettify-symbols-mode))
 
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
