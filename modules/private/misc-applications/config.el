@@ -2,7 +2,8 @@
 
 ;;; Preamble
 
-(defvar +misc-applications-music-dir "/mnt/hdd/music/")
+
+(defvar +misc-applications-music-dir "[/mnt/hdd/music/]")
 (defvar +misc-applications-videos-dir "/mnt/hdd/videos/")
 
 (defvar +misc-applications-lisp-files nil)
