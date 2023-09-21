@@ -165,7 +165,7 @@
           [remap save-buffer] #'elfeed-tube-save))
 
   (use-package! pomm
-    :init
+    :defer t :init
     (map! :map +misc-applications-standalone-apps-map
           "p" #'pomm-third-time)))
 
