@@ -292,7 +292,8 @@
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
         "s-t" (cae-exwm-app-runner "teams-for-linux" "Teams")
         "s-d" (cae-exwm-app-runner "discord" "Discord")
-        "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")))
+        "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
+        "s-<return>" (cae-exwm-app-runner "kitty" "kitty")))
 
 (after! treemacs
   (map! :map treemacs-mode-map
