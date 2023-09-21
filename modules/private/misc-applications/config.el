@@ -763,8 +763,8 @@
         emms-later-do-interval 0.5
         emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
-        emms-source-file-default-directory (expand-file-name "Artists" +emms-music-dir)
-        emms-player-mpd-music-directory (expand-file-name "Artists" +emms-music-dir)
+        emms-source-file-default-directory +emms-music-dir
+        emms-player-mpd-music-directory +emms-music-dir
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool)
