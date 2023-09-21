@@ -167,10 +167,10 @@
   (use-package! pomm
     :defer t :init
     (map! :map +misc-applications-standalone-apps-map
-          "p" #'pomm-third-time)
+          "t" #'pomm-third-time)
     (after! which-key
       (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
-        "p" "Third Time"))))
+        "t" "Third Time"))))
 
 
 ;;; External apps
