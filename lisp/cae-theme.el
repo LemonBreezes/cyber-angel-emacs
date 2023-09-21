@@ -48,7 +48,7 @@
   (after! magit
     ;; Give `magit-section-highlight' a background
     (set-face-attribute 'magit-section-highlight nil
-                        :background (face-attribute 'hl-line :background nil t))))
+                        :background 'unspecified)))
 
 (after! modus-themes
   (setq modus-themes-org-blocks 'gray-background
