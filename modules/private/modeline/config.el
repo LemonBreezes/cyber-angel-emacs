@@ -9,7 +9,7 @@
 
   (use-package! minions
     :defer t :init
-    (add-hook 'doom-first-buffer-hook #'minions-mode)
+    (add-hook 'doom-after-init-hook #'minions-mode)
     :config
     (setq minions-mode-line-lighter (if (cae-tty-disable-unicode-p) "=" "≡"))
     (setq minions-demoted-modes

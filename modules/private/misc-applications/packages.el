@@ -9,6 +9,7 @@
 (when (modulep! :app rss)
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
+(package! pomm)
 
 ;; Use external APIs or apps
 (package! leetcode)
@@ -58,6 +59,7 @@
 (package! somafm)
 (package! empv)
 (package! emms)
+(package! lyrics-fetcher)
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
   (package! helm-emms))

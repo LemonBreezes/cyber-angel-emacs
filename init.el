@@ -3,6 +3,9 @@
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
+(setenv "SHELL" (or (executable-find "dash")
+                    (executable-find "sh")))
+
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
@@ -30,7 +33,7 @@
 
 (doom! :completion
        (vertico +icons +childframe)
-       (corfu +icons +orderless +split-char)
+       (corfu +icons +orderless +split-char +tng)
 
        :ui
        doom-dashboard
@@ -45,7 +48,6 @@
        (window-select +numbers)
        ophints
        treemacs
-       modeline
 
        :editor
        file-templates
