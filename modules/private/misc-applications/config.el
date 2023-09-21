@@ -162,21 +162,21 @@
           [remap save-buffer] #'elfeed-tube-save
           :map elfeed-search-mode-map
           "F" #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save))
+          [remap save-buffer] #'elfeed-tube-save)))
 
-  (use-package! pomm
-    :defer t :init
-    (map! :map +misc-applications-standalone-apps-map
-          "t" #'pomm-third-time)
-    (after! which-key
-      (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
-        "t" "Third Time"))
-    (setq pomm-csv-history-file
-          (concat doom-data-dir "pomm-history.csv")
-          pomm-audio-enabled t
-          pomm-audio-tick-enabled t)
-    :config
-    (pomm-mode-line-mode +1)))
+(use-package! pomm
+  :defer t :init
+  (map! :map +misc-applications-standalone-apps-map
+        "t" #'pomm-third-time)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+      "t" "Third Time"))
+  (setq pomm-csv-history-file
+        (concat doom-data-dir "pomm-history.csv")
+        pomm-audio-enabled t
+        pomm-audio-tick-enabled t)
+  :config
+  (pomm-mode-line-mode +1))
 
 
 ;;; External apps
