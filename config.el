@@ -1152,7 +1152,7 @@
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
-              '(alarm))))
+              '(alarm pomm))))
  t)
 
 (setq cae-config-finished-loading t)
