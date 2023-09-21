@@ -170,7 +170,9 @@
           "t" #'pomm-third-time)
     (after! which-key
       (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
-        "t" "Third Time"))))
+        "t" "Third Time"))
+    (setq pomm-csv-history-file
+          (concat doom-data-dir "pomm-history.csv"))))
 
 
 ;;; External apps
