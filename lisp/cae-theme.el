@@ -43,11 +43,7 @@
                   font-lock-string-face
                   font-lock-comment-face
                   font-lock-doc-face))
-    (set-face-attribute face nil :weight 'normal))
-
-  (after! magit
-    ;; Give `magit-section-highlight' a background
-    ))
+    (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
   (setq modus-themes-org-blocks 'gray-background
