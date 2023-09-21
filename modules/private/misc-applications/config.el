@@ -174,7 +174,9 @@
     (setq pomm-csv-history-file
           (concat doom-data-dir "pomm-history.csv")
           pomm-audio-enabled t
-          pomm-audio-tick-enabled t)))
+          pomm-audio-tick-enabled t)
+    :config
+    (pomm-mode-line-mode +1)))
 
 
 ;;; External apps
