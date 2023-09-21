@@ -45,7 +45,9 @@
                   font-lock-doc-face))
     (set-face-attribute face nil :weight 'normal))
 
-  ()
+  (after! magit
+    ;; Give
+    )
   )
 
 (after! modus-themes
