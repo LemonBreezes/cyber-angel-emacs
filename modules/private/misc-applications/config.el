@@ -172,7 +172,9 @@
       (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
         "t" "Third Time"))
     (setq pomm-csv-history-file
-          (concat doom-data-dir "pomm-history.csv"))))
+          (concat doom-data-dir "pomm-history.csv")
+          pomm-audio-enabled t
+          pomm-audio-tick-enabled t)))
 
 
 ;;; External apps
