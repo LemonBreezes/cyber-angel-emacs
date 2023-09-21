@@ -2,8 +2,8 @@
 
 ;;; Preamble
 
-(defvar +misc-applications-music-dir "/mnt/hdd/music/"
-  "The directory where your music library is located.")
+(defvar +misc-applications-music-dir "/mnt/hdd/music/")
+(defvar +misc-applications-videos-dir "/mnt/hdd/videos/")
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
@@ -720,9 +720,9 @@
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
   (setq empv-reset-playback-speed-on-quit t
-        empv-base-directory "/mnt/hdd/music"
-        empv-audio-dir "/mnt/hdd/music"
-        empv-video-dir "/mnt/hdd/videos")
+        empv-base-directory +misc-applications-music-dir
+        empv-audio-dir +misc-applications-music-dir
+        empv-video-dir +misc-applications-videos-dir)
   (setq empv-invidious-instance
         (concat "https://"
                 (aio-wait-for (elfeed-tube--get-invidious-url))
@@ -732,9 +732,9 @@
 
 (use-package! emms
   :defer t :init
-  (defvar +emms-music-dir +misc-applications-music-dir
+  (defvar +misc-applications-music-dir +misc-applications-music-dir
     "The directory where your music library is located.")
-  (add-to-list 'safe-local-variable-directories +emms-music-dir)
+  (add-to-list 'safe-local-variable-directories +misc-applications-music-dir)
   (defvar +emms-workspace-name "*emms*")
   (defvar +emms--old-wconf nil)
   (setq emms-directory (concat doom-data-dir "emms/")
@@ -763,8 +763,8 @@
         emms-later-do-interval 0.5
         emms-later-do-batch 10
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-find
-        emms-source-file-default-directory +emms-music-dir
-        emms-player-mpd-music-directory +emms-music-dir
+        emms-source-file-default-directory +misc-applications-music-dir
+        emms-player-mpd-music-directory +misc-applications-music-dir
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool)
@@ -808,7 +808,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "h" "Helm EMMS"))
   :config
-  (setq helm-emms-dired-directories (list (expand-file-name +emms-music-dir))
+  (setq helm-emms-dired-directories (list (expand-file-name +misc-applications-music-dir))
         helm-emms-use-track-description-function t
         helm-emms-directory-files-recursive-fn #'helm-emms-walk-directory-with-find
         helm-emms-default-sources '(helm-source-emms-files
