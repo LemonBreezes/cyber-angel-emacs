@@ -287,7 +287,7 @@
      (interactive "P")
      (cae-exwm-start-app ,app-name ,app-title arg)))
 
-(add-hook! exwm-init-hook
+(add-hook! 'exwm-init-hook
   (map! "s-v" (cae-exwm-app-runner "google-chrome-stable" "Chrome")
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
         "s-t" (cae-exwm-app-runner "teams-for-linux" "Teams")
