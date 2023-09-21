@@ -787,6 +787,17 @@
 
   (setq emms-track-description-function 'cae-emms-track-description))
 
+(use-package! lyrics-fetcher
+  :after emms
+  :defer t :init
+  (map! :map +misc-applications-music-map
+        "l" #'lyrics-fetcher-show-lyrics
+        "L" #'lyrics-fetcher-show-lyrics-query)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-music-map
+      "l" "Lyrics"
+      "L" "Lyrics query")))
+
 (use-package! helm-emms
   :when (or (modulep! :private helm)
             (modulep! :completion helm))
