@@ -769,18 +769,20 @@
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool)
         emms-browser-switch-to-playlist-on-add t)
-  (map! :map emms-browser-mode-map
-        :ng "q" #'+emms-quit
-        :ng "a" #'+emms-quick-access)
-  (map! :map emms-playlist-mode-map
-        :ng "q" #'+emms-quit
-        :localleader
-        "l" #'emms-toggle-repeat-playlist
-        "p" #'emms-insert-playlist
-        "i" #'emms-insert-file
-        "t" #'emms-toggle-repeat-track
-        "s" #'emms-playlist-save
-        "m" #'emms-shuffle)
+  (after! emms-browser
+    (map! :map emms-browser-mode-map
+          :ng "q" #'+emms-quit
+          :ng "a" #'+emms-quick-access))
+  (after! emms-playlist-mode
+    (map! :map emms-playlist-mode-map
+          :ng "q" #'+emms-quit
+          :localleader
+          "l" #'emms-toggle-repeat-playlist
+          "p" #'emms-insert-playlist
+          "i" #'emms-insert-file
+          "t" #'emms-toggle-repeat-track
+          "s" #'emms-playlist-save
+          "m" #'emms-shuffle))
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
