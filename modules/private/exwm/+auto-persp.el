@@ -1,5 +1,8 @@
 ;;; lisp/exwm-auto-persp.el -*- lexical-binding: t; -*-
 
+;; I wrote this code many years ago but I found it in one of my old archives and
+;; it still works just fine.
+
 (after! (:all exwm dash persp-mode)
   (defvar +exwm-workspaces ()
     "The list of EXWM workspaces created up to now.")
