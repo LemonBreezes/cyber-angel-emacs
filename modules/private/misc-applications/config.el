@@ -771,9 +771,11 @@
         emms-browser-switch-to-playlist-on-add t)
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
-        :ng "a" #'+emms-quick-access)
+        :ng "a" #'+emms-quick-access
+        :n "e" #'other-window)
   (map! :map emms-playlist-mode-map
         :ng "q" #'+emms-quit
+        :n "e" #'other-window
         :localleader
         "l" #'emms-toggle-repeat-playlist
         "p" #'emms-insert-playlist
