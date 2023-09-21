@@ -46,7 +46,7 @@
     (set-face-attribute face nil :weight 'normal))
 
   ()
-)
+  )
 
 (after! modus-themes
   (setq modus-themes-org-blocks 'gray-background
