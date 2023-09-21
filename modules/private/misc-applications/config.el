@@ -162,7 +162,12 @@
           [remap save-buffer] #'elfeed-tube-save
           :map elfeed-search-mode-map
           "F" #'elfeed-tube-fetch
-          [remap save-buffer] #'elfeed-tube-save)))
+          [remap save-buffer] #'elfeed-tube-save))
+
+  (use-package! pomm
+    :init
+    (map! :map +misc-applications-standalone-apps-map
+          "p" #'pomm-third-time)))
 
 
 ;;; External apps
