@@ -30,14 +30,10 @@
         (:prefix "n"
          "r" #'startup/restart-dunst
          "x" #'startup/kill-dunst
-         "c" (cmd! (let ((shell-file-name "/bin/sh"))
-                     (quiet! (shell-command "dunstctl close" nil nil))))
-         "h" (cmd! (let ((shell-file-name "/bin/sh"))
-                     (quiet! (shell-command "dunstctl history-pop" nil nil))))
-         "C" (cmd! (let ((shell-file-name "/bin/sh"))
-                     (quiet! (shell-command "dunstctl close-all" nil nil))))
-         "." (cmd! (let ((shell-file-name "/bin/sh"))
-                     (quiet! (shell-command "dunstctl context" nil nil))))))
+         "c" (cmd! (quiet! (shell-command "dunstctl close" nil nil)))
+         "h" (cmd! (quiet! (shell-command "dunstctl history-pop" nil nil)))
+         "C" (cmd! (quiet! (shell-command "dunstctl close-all" nil nil)))
+         "." (cmd! (quiet! (shell-command "dunstctl context" nil nil)))))
   (after! which-key
     (which-key-add-keymap-based-replacements +startup-applications-map
                                              "n" "Dunst"

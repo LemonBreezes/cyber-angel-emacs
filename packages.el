@@ -80,6 +80,7 @@
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! auto-sudoedit :recipe (:host github :repo "LemonBreezes/auto-sudoedit"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
+(package! string-inflection)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)

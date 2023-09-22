@@ -3,8 +3,9 @@
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
-(setenv "SHELL" (or (executable-find "dash")
-                    (executable-find "sh")))
+(setq shell-file-name (or (executable-find "dash")
+                          (executable-find "sh")))
+(setenv "SHELL" shell-file-name)
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
