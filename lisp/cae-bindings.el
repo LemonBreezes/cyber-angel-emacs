@@ -77,7 +77,6 @@
       ;;"C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
       "<f7>" #'eri/expand-region
-      "<f5>" #'org-ai-on-region
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:after transient
        (:map transient-map
