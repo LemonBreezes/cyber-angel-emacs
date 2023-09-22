@@ -224,7 +224,7 @@
         ("^\\*Messages\\*" :vslot -10 :height 10 :side bottom
          :select t :quit t :ttl nil :vslot 99)
         ("^\\*eww.*" :size cae-popup-resize-help-buffer :side right
-         :select nil :ttl nil)
+         :select t :ttl nil)
         ("^\\*w3m\\*$" :size cae-popup-resize-help-buffer
          :side right :select t :ttl nil)
         ("^\\*dap-ui-repl\\*$" :vslot -5 :size 0.3 :select t
