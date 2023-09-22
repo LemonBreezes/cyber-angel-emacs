@@ -52,7 +52,11 @@
         modus-themes-variable-pitch-ui t
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
-        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)))
+        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
+        modus-themes-common-palette-overrides
+        '((fg-heading-1 blue-warmer)
+          (bg-heading-1 bg-blue-nuanced)
+          (overline-heading-1 blue))))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
