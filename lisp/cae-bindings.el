@@ -72,6 +72,7 @@
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "M-R" #'cae-sp-raise-sexp
+      "<f5>" #'org-ai-on-region
       ;;[C-i] #'doom/dumb-indent
       [remap dabbrev-expand] #'hippie-expand
       ;;"C-S-i" #'doom/dumb-dedent
