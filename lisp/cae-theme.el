@@ -53,6 +53,8 @@
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
+        ;; I have this mostly because I want to work on getting the heading
+        ;; backgrounds working with the code folding!
         modus-themes-common-palette-overrides
         '((fg-heading-1 blue-warmer)
           (bg-heading-1 bg-blue-nuanced)
