@@ -27,7 +27,8 @@
         :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
   (map! :nv "g1" #'cae-evil-org-ai-on-region
-        :nv "g!" #'cae-ai-org-ai-on-buffer)
+        :nv "g!" #'cae-ai-org-ai-on-buffer
+        "<f5>" #'org-ai-on-region)
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
