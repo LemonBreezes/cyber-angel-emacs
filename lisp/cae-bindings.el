@@ -74,7 +74,8 @@
       "M-R" #'cae-sp-raise-sexp
       ;;[C-i] #'doom/dumb-indent
       [remap dabbrev-expand] #'hippie-expand
-      [remap dabbrev-completion] #'cape-dabbrev
+      (:when (modulep! :completion corfu)
+       [remap dabbrev-completion] #'cape-dabbrev)
       ;;"C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
       "<f7>" #'eri/expand-region
