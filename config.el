@@ -155,7 +155,7 @@
      ))
 
   (after! eros
-    (setq eros-eval-result-prefix ""))
+    (setq eros-eval-result-prefix (if (cae-tty-disable-unicode-p) "=> " "⟹ ")))
 
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
