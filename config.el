@@ -1032,7 +1032,7 @@
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
 
-;;; Notes, GTD, Org, etc.
+;;; Text
 
 (remove-hook 'text-mode-hook #'visual-line-mode)
 (add-hook 'text-mode-hook #'auto-fill-mode)
