@@ -33,6 +33,16 @@
     ;; Make the `beacon' more subtle.
     (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
 
+  (after! outline
+    (set-face-attribute 'outline-1 nil :extend t)
+    (set-face-attribute 'outline-2 nil :extend t)
+    (set-face-attribute 'outline-3 nil :extend t)
+    (set-face-attribute 'outline-4 nil :extend t)
+    (set-face-attribute 'outline-5 nil :extend t)
+    (set-face-attribute 'outline-6 nil :extend t)
+    (set-face-attribute 'outline-7 nil :extend t)
+    (set-face-attribute 'outline-8 nil :extend t))
+
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
