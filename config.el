@@ -955,7 +955,11 @@
         (interactive "<R>")
         (string-inflection-all-cycle)
         (setq evil-repeat-info '([?g ?~])))
-      (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection))))
+      (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
+
+  (use-package! beginend
+    :defer t :init
+    (add-hook 'doom-first-buffer-hook #'beginend-global-mode)))
 
 
 ;;; Autocompletion
