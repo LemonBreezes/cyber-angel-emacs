@@ -325,7 +325,10 @@
         :desc "Previous buffer" :ng "p" #'previous-buffer
         :desc "Set theme" :ng "t" #'consult-theme
         :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
-        :desc "Show keybindings" :ng "h" (cmd! (which-key-show-keymap '+doom-dashboard-mode-map))))
+        :desc "Show keybindings" :ng "h" (cmd!
+                                          (if (and (featurep 'evil) (evil-normal-state-p))
+                                              (cae-show-normal-state-bindings)
+                                            (which-key-show-keymap '+doom-dashboard-mode-map)))))
 
 (add-transient-hook! #'+doom-dashboard-mode (+doom-dashboard-setup-modified-keymap))
 (add-transient-hook! #'+doom-dashboard-mode :append (+doom-dashboard-setup-modified-keymap))
