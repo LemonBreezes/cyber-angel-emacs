@@ -46,7 +46,9 @@
     (require 'org-modern)
     (global-org-modern-mode +1))
   :config
-  (setq org-modern-todo nil))
+  (setq org-modern-todo nil)
+  (after! spell-fu
+    (cl-pushnew 'org-modern-tag (alist-get 'org-mode +spell-excluded-faces-alist))))
 
 ;;(use-package! org-tidy
 ;;  :defer t :init
