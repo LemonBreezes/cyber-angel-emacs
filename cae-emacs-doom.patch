@@ -231,18 +231,3 @@ index 05cc20c12..7ba7b1858 100644
             (delete-window)
             t)
            ((eq buf (doom-fallback-buffer))
-diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
-index 1aa68732d..f795b64f7 100644
---- a/modules/completion/vertico/config.el
-+++ b/modules/completion/vertico/config.el
-@@ -239,8 +239,9 @@ orderless."
-   :init
-   (setq which-key-use-C-h-commands nil
-         prefix-help-command #'embark-prefix-help-command)
-+  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-   (map! [remap describe-bindings] #'embark-bindings
--        "C-;"               #'embark-act  ; to be moved to :config default if accepted
-+        "C-;"               #'embark-act ; to be moved to :config default if accepted
-         (:map minibuffer-local-map
-          "C-;"               #'embark-act
-          "C-c C-;"           #'embark-export
