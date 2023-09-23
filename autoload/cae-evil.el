@@ -8,16 +8,18 @@
         (forward-page count))
     (forward-page count)))
 
+(defvar cae-show-normal-state--map (make-sparse-keymap))
+
 ;;;###autoload
 (defun cae-show-normal-state-bindings ()
   (interactive)
-  (if-let ((map
+  (if-let ((cae-show-normal-state--map
             (or (evil-get-auxiliary-keymap
                  (cond ((bound-and-true-p git-timemachine-mode)
                         git-timemachine-mode-map)
                        (t (current-local-map)))
                  'normal))))
-      (which-key--show-keymap "Normal state bindings" map nil nil nil)
+      (cae-oneshot-keymap cae-show-normal-state--map nil)
     (message "No %s normal state bindings are defined." major-mode)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
