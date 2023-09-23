@@ -6,7 +6,7 @@
   (when (modulep! :lang org)
     (after! org
       ;; This is how I like my ellipsis to look. Subtle.
-      (unless (face-background 'org-level-1)
+      (unless (face-background 'org-level-1 nil t)
         (set-face-attribute 'org-ellipsis nil
                             :inherit '(shadow default)
                             :weight 'normal))
