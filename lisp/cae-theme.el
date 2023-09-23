@@ -49,19 +49,20 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (eval
-   `(,(if cae-config-finished-loading 'setq! 'setq)
-     modus-themes-org-blocks 'gray-background
-     modus-themes-slanted-constructs t
-     modus-themes-bold-constructs t
-     modus-themes-variable-pitch-ui t
-     modus-themes-mixed-fonts t
-     modus-themes-prompts '(italic semibold)
-     modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
-     ;; I have this mostly because I want to work on getting the heading
-     ;; backgrounds working with the code folding!
-     modus-themes-common-palette-overrides
-     '())))
+  (setq modus-themes-org-blocks 'gray-background
+        modus-themes-slanted-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-variable-pitch-ui t
+        modus-themes-mixed-fonts t
+        modus-themes-prompts '(italic semibold)
+        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
+        ;; I have this mostly because I want to work on getting the heading
+        ;; backgrounds working with the code folding!
+        ;;modus-themes-common-palette-overrides
+        ;;'((fg-heading-1 blue-warmer)
+        ;;  (bg-heading-1 bg-blue-nuanced)
+        ;;  (overline-heading-1 blue))
+        ))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
