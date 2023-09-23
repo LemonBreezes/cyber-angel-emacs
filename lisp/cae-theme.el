@@ -49,13 +49,13 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (setq! modus-themes-org-blocks 'gray-background
-         modus-themes-slanted-constructs t
-         modus-themes-bold-constructs t
-         modus-themes-variable-pitch-ui t
-         modus-themes-mixed-fonts t
-         modus-themes-prompts '(italic semibold)
-         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)))
+  (setq modus-themes-org-blocks 'gray-background
+        modus-themes-slanted-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-variable-pitch-ui t
+        modus-themes-mixed-fonts t
+        modus-themes-prompts '(italic semibold)
+        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
