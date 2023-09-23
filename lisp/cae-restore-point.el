@@ -75,7 +75,9 @@
            View-scroll-half-page-backward
            chatgpt-shell-mark-at-point-dwim
            c-mark-function
-           mark-whole-buffer)
+           mark-whole-buffer
+           org-backward-heading-same-level
+           org-forward-heading-same-level)
          (and (featurep 'evil)
               '(evil-snipe-s
                 evil-snipe-S
