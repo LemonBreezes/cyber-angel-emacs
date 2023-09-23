@@ -9,8 +9,9 @@
       :desc "Open project" :ng "P" #'projectile-switch-project
       :desc "Open bookmarks" :ng "m" #'bookmark-jump
       :desc "Open documentation" :ng "d" #'doom/help
-      :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
-      :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
+      :desc "Open config.el/org" :ng "c" #'doom/goto-private-config-file
+      :desc "Open init.el" :ng "I" #'doom/goto-private-init-file
+      :desc "Open org-mode root" :ng "O" (cmd! (require 'org) (find-file org-directory))
       :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
       :desc "Notes (roam)" :ng "n" #'org-roam-node-find
       :desc "Switch buffer" :ng "b" #'persp-switch-to-buffer
