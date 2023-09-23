@@ -12,6 +12,8 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
+(advice-add #'general-auto-unbind-keys :override #'ignore)
+
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
@@ -34,8 +36,7 @@
 
 (setq evil-undo-system 'undo-fu
       evil-want-C-u-scroll t
-      evil-want-C-u-delete t
-      +evil-want-o/O-to-continue-comments nil)
+      evil-want-C-u-delete t)
 
 (doom! :completion
        (vertico +icons +childframe)
@@ -54,6 +55,7 @@
        (window-select +numbers)
        ophints
        treemacs
+       unicode
 
        :editor
        file-templates

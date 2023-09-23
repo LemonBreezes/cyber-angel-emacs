@@ -24,3 +24,5 @@
 2. Set up /etc/fstab
 3. Set up sysctl.conf
 4. Set up preload and a vmtouch service.
+
+So my sysctl and my enabled systemd services are a good hint at what to set up on a new PC.

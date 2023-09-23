@@ -173,8 +173,9 @@
   :config
   (when (modulep! :emacs vc)
     (after! git-timemachine
-      (add-hook! 'git-timemachine-mode-hook
-        (run-at-time 0.01 nil #'meow-motion-mode +1))))
+      (add-hook 'git-timemachine-mode-hook
+                (cae-defun cae-meow-enable-motion-mode-after-delay-h ()
+                  (run-at-time 0.01 nil #'meow-motion-mode +1)))))
   (meow/setup-cae)
   (meow/setup-keypad)
   (add-hook 'minions-mode-hook #'meow-setup-indicator)

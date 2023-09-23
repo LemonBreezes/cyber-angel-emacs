@@ -4,7 +4,7 @@
 
 This is my Emacs OS. I use it for everything. Here is a summary of my two favorite modules:
 
-** EXWM: Emacs X Window Manager
+* EXWM: Emacs X Window Manager
 
 EXWM is a window manager for Emacs. It allows you to use Emacs as a window
 manager. Here are some features my EXWM module provides:
@@ -13,7 +13,7 @@ manager. Here are some features my EXWM module provides:
 2. Automatic management of non-floating applications into workspaces.
 3. Universal editing of text boxes with ~exwm-edit~.
 
-** Misc Applications
+* Misc Applications
 
 This module provides an entire suite of desktop applications written in Elisp,
 mostly through Helm and Consult autocompletion interfaces. The current categories of applications are:
