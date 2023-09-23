@@ -161,5 +161,5 @@
         :localleader
         "l f" #'+org-insert-file-link))
 
- (after! ox
-   (add-to-list 'org-export-filter-final-output-functions #'+org-export-remove-zero-width-space t))
+(after! ox
+  (add-to-list 'org-export-filter-final-output-functions #'+org-export-remove-zero-width-space t))
