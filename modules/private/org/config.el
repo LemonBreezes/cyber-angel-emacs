@@ -159,7 +159,7 @@
         (:when (modulep! :editor evil)
          :nie "M-SPC M-SPC" (cmd! (insert "\u200B")))
         :localleader
-        "l f" #'+org-insert-file-link))
+        "l f" #'cae-org-insert-file-link))
 
 (after! ox
   (add-to-list 'org-export-filter-final-output-functions #'cae-org-export-remove-zero-width-space t))
