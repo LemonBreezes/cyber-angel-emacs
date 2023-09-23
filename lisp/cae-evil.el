@@ -159,6 +159,8 @@
       (:prefix "b"
        :desc "New empty Org buffer" "o" #'+evil-buffer-org-new))
 
+(add-hook 'mu4e-compose-mode-hook #'+mu4e-evil-enter-insert-mode 90)
+
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
