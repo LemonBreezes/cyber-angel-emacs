@@ -33,12 +33,6 @@
     ;; Make the `beacon' more subtle.
     (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
 
-  (after! org
-    (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
-                    org-level-6 org-level-7 org-level-8))
-      (set-face-attribute face nil :background (face-background 'default))
-      (set-face-attribute face nil :overline (face-background 'default))))
-
   (after! helpful
     (set-face-attribute 'helpful-heading nil :extend t))
 
@@ -55,19 +49,19 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (setq modus-themes-org-blocks 'gray-background
-        modus-themes-slanted-constructs t
-        modus-themes-bold-constructs t
-        modus-themes-variable-pitch-ui t
-        modus-themes-mixed-fonts t
-        modus-themes-prompts '(italic semibold)
-        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
-        ;; I have this mostly because I want to work on getting the heading
-        ;; backgrounds working with the code folding!
-        modus-themes-common-palette-overrides
-        '((fg-heading-1 blue-warmer)
-          (bg-heading-1 bg-blue-nuanced)
-          (overline-heading-1 blue))))
+  (eval
+   `(,(if cae-config-finished-loading 'setq! 'setq)
+     modus-themes-org-blocks 'gray-background
+     modus-themes-slanted-constructs t
+     modus-themes-bold-constructs t
+     modus-themes-variable-pitch-ui t
+     modus-themes-mixed-fonts t
+     modus-themes-prompts '(italic semibold)
+     modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
+     ;; I have this mostly because I want to work on getting the heading
+     ;; backgrounds working with the code folding!
+     modus-themes-common-palette-overrides
+     '())))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
