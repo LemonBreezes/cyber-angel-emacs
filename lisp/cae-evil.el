@@ -159,6 +159,9 @@
       (:prefix "b"
        :desc "New empty Org buffer" "o" #'+evil-buffer-org-new))
 
+(defun cae-evil-mu4e-enter-insert-mode ()
+  (when (eq evil-state 'normal)
+    (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'+mu4e-evil-enter-insert-mode 90)
 
 
