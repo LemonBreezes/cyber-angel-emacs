@@ -426,8 +426,3 @@ also marks comment with leading whitespace"
           (start-process workspace nil app)))
   (+exwm-persp--focus-workspace-app))
 
-;;;###autoload
-(defun +org-insert-file-link ()
-  "Insert a file link.  At the prompt, enter the filename."
-  (interactive)
-  (insert (format "[[%s]]" (org-link-complete-file))))
