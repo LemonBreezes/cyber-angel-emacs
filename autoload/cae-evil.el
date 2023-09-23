@@ -20,7 +20,7 @@
                    (t (current-local-map)))
              'normal)))
   (if cae-show-normal-state--map
-      (let (((which-key-idle-delay 0)))
+      (let ((which-key-idle-delay 0))
         (funcall (cae-oneshot-keymap cae-show-normal-state--map nil)))
     (message "No %s normal state bindings are defined." major-mode)))
 
