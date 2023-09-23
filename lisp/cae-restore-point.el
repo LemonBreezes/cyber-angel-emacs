@@ -25,6 +25,8 @@
              scroll-up scroll-down
              scroll-up-command
              rp/point-ring-nav-previous
+             dired-maybe-insert-subdir
+             dired-insert-subdir
              lispy-forward
              lispy-backward)
            '(symbol-overlay-switch-forward
