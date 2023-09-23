@@ -1145,6 +1145,7 @@
                     (mu4e-drafts-folder . "/Fastmail/Drafts")
                     (mu4e-sent-folder . "/Fastmail/Sent"))))))
 
+
 ;;; HTML
 
 ;; I don't really need LSP for the XML files I edit.
