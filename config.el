@@ -1174,7 +1174,7 @@
 
 (after! org-msg
   (map! :map org-msg-edit-mode-map
-      :n "G" #'cae-org-msg-goto-body))
+        :n "G" #'cae-org-msg-goto-body))
 (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying)
 
 
