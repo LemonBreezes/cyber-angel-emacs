@@ -151,9 +151,7 @@
         :n "l" #'+elfeed-toggle-log-buffer
         :ng "t" #'mark-whole-buffer)
   (map! :map elfeed-search-mode-map
-        "<f6>" #'cae-cheatsheets-elfeed
         "h" #'cae-cheatsheets-elfeed
-        :n "<f6>" #'cae-cheatsheets-evil-elfeed
         :n "h" #'cae-cheatsheets-evil-elfeed)
 
   (use-package! elfeed-tube
@@ -337,8 +335,8 @@
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
   :config
   (map! :map trashed-mode-map
-        "<f6>" #'cae-cheatsheets-trashed
-        :n "<f6>" #'cae-cheatsheets-evil-trashed))
+        "h" #'cae-cheatsheets-trashed
+        :n "h" #'cae-cheatsheets-evil-trashed))
 
 (use-package! proced
   :defer t :init
