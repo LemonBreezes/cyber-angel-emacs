@@ -677,6 +677,9 @@
   ;; are hidden in normal buffers.
   (setq read-extended-command-predicate #'command-completion-default-include-p)
 
+  (after! embark
+    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
+
   (use-package! avy
     :defer t :init
     (advice-add #'avy-goto-end-of-line :around
