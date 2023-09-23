@@ -5,6 +5,7 @@
   (map! :map +doom-dashboard-mode-map
         :desc "Find file" :ng "f" #'find-file
         :desc "Recent files" :ng "r" #'consult-recent-file
+        :desc "Reload last session" :ng #'doom/quickload-session
         :desc "Config dir" :ng "C" #'doom/open-private-config
         :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
         :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
