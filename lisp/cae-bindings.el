@@ -110,7 +110,8 @@
 
 (map! :leader
       :prefix "t"
-      :desc "Column indicator" "C" #'vline-mode)
+      :desc "Column indicator" "C" #'vline-mode
+      :desc "Font lock mode" "C-f" #'font-lock-mode)
 
 (when (modulep! :completion corfu)
   (after! corfu
