@@ -6,12 +6,14 @@
       :desc "Reload last session" :ng "R" #'doom/quickload-session
       :desc "Config dir" :ng "C" #'doom/open-private-config
       :desc "Open Org agenda" :ng "a" #'org-agenda
+      :desc "Open project" :ng "P" #'projectile-switch-project
+      :desc "Open bookmarks" :ng "B" #'bookmark-jump
       :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
       :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
       :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
       :desc "Notes (roam)" :ng "n" #'org-roam-node-find
       :desc "Switch buffer" :ng "b" #'+vertico/switch-workspace-buffer
-      :desc "Switch buffers (all)" :ng "B" #'consult-buffer
+      :desc "Switch buffers (all)" :ng "B" #'switch-to-buffer
       :desc "IBuffer" :ng "i" #'ibuffer
       :desc "Previous buffer" :ng "p" #'previous-buffer
       :desc "Set theme" :ng "t" #'consult-theme
