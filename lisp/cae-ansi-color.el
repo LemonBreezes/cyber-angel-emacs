@@ -6,3 +6,6 @@
               ;; Apply ANSI color codes
               (with-silent-modifications
                 (ansi-color-apply-on-region (point-min) (point-max) t)))))
+
+(setenv "TERM" "xterm-256color")
+(setq compilation-environment '("TERM=xterm-256color"))
