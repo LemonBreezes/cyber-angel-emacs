@@ -40,7 +40,7 @@
                       org-level-6 org-level-7 org-level-8))
         (set-face-attribute face nil :background (face-background 'default))
         (set-face-attribute face nil :overline (face-background 'default))
-        (set-face-attribute face nil :foreground (face-background 'default)))))
+        (set-face-attribute face nil :foreground (face-foreground 'default)))))
 
   (after! helpful
     (set-face-attribute 'helpful-heading nil :extend t))
