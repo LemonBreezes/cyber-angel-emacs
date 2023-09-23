@@ -33,7 +33,7 @@
                       (let ((which-key-show-prefix t))
                         (which-key--show-keymap
                          (symbol-name ',keymap)
-                         (symbol-value ',keymap)
+                         ,keymap
                          nil nil t))))))))
          (set-transient-map (symbol-value ',keymap)
                             (lambda ()
