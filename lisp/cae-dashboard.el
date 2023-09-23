@@ -31,7 +31,13 @@
   (with-current-buffer (get-buffer +doom-dashboard-name)
     (setq-local line-spacing 0.2
                 mode-line-format nil
-                evil-normal-state-cursor (list nil))))
+                evil-normal-state-cursor '(bar . 0)
+                evil-insert-state-cursor '(bar . 0)
+                evil-visual-state-cursor '(box . 0)
+                evil-motion-state-cursor '(box . 0)
+                evil-replace-state-cursor '(hbar . 0)
+                evil-operator-state-cursor '(hbar . 0)
+                evil-emacs-state-cursor '(hbar . 0))))
 
 (add-hook '+doom-dashboard-mode-hook #'hl-line-mode)
 (add-hook '+doom-dashboard-mode-hook #'+doom-dashboard-tweak)
