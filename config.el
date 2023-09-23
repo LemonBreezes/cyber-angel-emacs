@@ -1034,6 +1034,9 @@
 
 ;;; Notes, GTD, Org, etc.
 
+(remove-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'text-mode-hook #'auto-fill-mode)
+
 (after! calendar
   (setq calendar-week-start-day 1
         calendar-mark-diary-entries-flag t))
