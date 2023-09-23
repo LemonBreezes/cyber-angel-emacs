@@ -642,6 +642,15 @@
 ;; just says some green text slowly one line at a time.
 ;; https://github.com/vreeze/zone-matrix-wake-up
 
+;; This doesn't exactly fit in but I don't know where else to put it!
+(use-package! selectric-mode
+  :defer t :init
+  (map! :map +misc-applications-eyecandy-map
+        "t" #'selectric-mode)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
+      "t" "Typewriter sounds")))
+
 
 ;;; Music
 
