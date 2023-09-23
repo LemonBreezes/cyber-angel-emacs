@@ -117,3 +117,8 @@
       (with-current-buffer buffer
         (org-mode)
         (setq-local doom-real-buffer-p t)))))
+
+;;;###autoload
+(defun cae-evil-mu4e-enter-insert-mode ()
+  (when (eq evil-state 'normal)
+    (call-interactively #'evil-append)))
