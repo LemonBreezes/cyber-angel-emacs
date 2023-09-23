@@ -39,5 +39,4 @@
                 evil-operator-state-cursor '(hbar . 0)
                 evil-emacs-state-cursor '(hbar . 0))))
 
-(add-hook '+doom-dashboard-mode-hook #'hl-line-mode)
 (add-hook '+doom-dashboard-mode-hook #'+doom-dashboard-tweak)
