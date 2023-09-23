@@ -162,7 +162,7 @@
 (defun cae-evil-mu4e-enter-insert-mode ()
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
-(add-hook 'mu4e-compose-mode-hook #'+mu4e-evil-enter-insert-mode 90)
+(add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
 
 
 ;;Local Variables:
