@@ -136,7 +136,8 @@
          :i "C-f" #'cape-file
          :i "C-s" #'yasnippet-capf
          :i "C-l" #'cape-line
-         :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+         (:after cape
+          :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
          :i "C-p" nil)))

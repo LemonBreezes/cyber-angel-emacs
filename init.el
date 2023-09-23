@@ -3,9 +3,14 @@
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
-(setq shell-file-name (or (executable-find "dash")
-                          (executable-find "sh")))
-(setenv "SHELL" shell-file-name)
+(let ((noninteractive-shell (or (executable-find "dash")
+                                (executable-find "sh")))
+      (interactive-shell (or (executable-find "zsh")
+                             (executable-find "bash"))))
+  (setq shell-file-name noninteractive-shell)
+  (setenv "SHELL" noninteractive-shell)
+  (after! vterm
+    (setq vterm-shell interactive-shell)))
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
@@ -70,7 +75,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe +flymake)
+       (syntax +flymake)
        ;;spell
        ;;grammar
 
