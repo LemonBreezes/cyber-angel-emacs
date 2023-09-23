@@ -1061,6 +1061,7 @@
 
 (remove-hook 'text-mode-hook #'visual-line-mode)
 (add-hook 'text-mode-hook #'auto-fill-mode)
+(remove-hook 'text-mode-hook #'display-line-numbers-mode)
 
 (after! calendar
   (setq calendar-week-start-day 1
