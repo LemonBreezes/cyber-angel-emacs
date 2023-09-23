@@ -1066,6 +1066,8 @@
             (:hlines . "no")
             (:tangle . "no")
             (:comments . "link"))))
+  (after! ox
+    (setq org-export-allow-bind-keywords t))
   (after! org-crypt
     (setq org-crypt-disable-auto-save 'encrypt))
   (after! org-agenda
