@@ -1058,6 +1058,8 @@
     (setq +org-roam-auto-backlinks-buffer nil))
   (map! :map org-mode-map
         "C-c C-M-h" #'er/mark-org-code-block)
+  (after! org-list
+    (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
   (after! ob-core
     ;; Export commments by default.
     (setq org-babel-default-header-args
