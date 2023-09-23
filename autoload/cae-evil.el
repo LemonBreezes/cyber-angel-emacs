@@ -20,7 +20,8 @@
                    (t (current-local-map)))
              'normal)))
   (if cae-show-normal-state--map
-      (funcall (cae-oneshot-keymap cae-show-normal-state--map nil))
+      (let (((which-key-idle-delay 0)))
+        (funcall (cae-oneshot-keymap cae-show-normal-state--map nil)))
     (message "No %s normal state bindings are defined." major-mode)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
