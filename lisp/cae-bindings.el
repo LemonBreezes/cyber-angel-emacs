@@ -281,7 +281,9 @@
           "M-RET" #'cae-evil-org-insert-heading
           "M-S-RET" #'cae-evil-org-insert-todo-heading
           "M-<return>" #'org-insert-heading
-          "M-S-<return>" #'org-insert-todo-heading)))
+          "M-S-<return>" #'org-insert-todo-heading
+          :localleader
+          "l f" #'+org-insert-file-link)))
 
 (defmacro cae-exwm-app-runner (app-name app-title)
   `(lambda (arg)
