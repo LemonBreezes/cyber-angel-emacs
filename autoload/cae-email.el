@@ -24,3 +24,9 @@ END can be the symbol top, bottom, or nil to toggle."
       (message-goto-body)
       (search-forward (format org-msg-greeting-fmt
                               (concat " " (org-msg-get-to-name)))))))
+
+;;;###autoload
+(defun cae-org-msg-goto-body-when-replying (compose-type &rest _)
+  "Call `+org-msg-goto-body' when the current message is a reply."
+  (when (and org-msg-edit-mode (eq compose-type 'reply))
+    (+org-msg-goto-body)))
