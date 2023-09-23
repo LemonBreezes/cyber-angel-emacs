@@ -1055,7 +1055,17 @@
     (setq +org-roam-auto-backlinks-buffer nil))
   (map! :map org-mode-map
         "C-c C-M-h" #'er/mark-org-code-block)
-
+  (after! ob-core
+    ;; Export commments by default.
+    (setq org-babel-default-header-args
+          '((:session . "none")
+            (:results . "replace")
+            (:exports . "code")
+            (:cache . "no")
+            (:noweb . "no")
+            (:hlines . "no")
+            (:tangle . "no")
+            (:comments . "link"))))
   (after! org-crypt
     (setq org-crypt-disable-auto-save 'encrypt))
   (after! org-agenda
