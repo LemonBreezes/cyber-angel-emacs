@@ -63,7 +63,8 @@
 (when cae-init-ui-enabled-p
   (when (cae-display-graphic-p)
     (load! "lisp/cae-theme"))
-  (load! "lisp/cae-dashboard")
+  (when (modulep! :ui doom-dashboard)
+    (load! "lisp/cae-dashboard"))
   (after! hydra
     (load! "lisp/cae-hydra"))
 
