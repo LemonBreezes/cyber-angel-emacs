@@ -425,3 +425,9 @@ also marks comment with leading whitespace"
     (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
           (start-process workspace nil app)))
   (+exwm-persp--focus-workspace-app))
+
+;;;###autoload
+(defun +org-insert-file-link ()
+  "Insert a file link.  At the prompt, enter the filename."
+  (interactive)
+  (insert (format "[[%s]]" (org-link-complete-file))))
