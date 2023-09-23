@@ -22,7 +22,7 @@
   `(if (featurep ',package)
        (symbol-value ',keymap)
      (lambda () (interactive)
-       (require ',package)
+       (and ',package (require ',package))
        (let* ((once t)
               (timer
                (when (featurep 'which-key)
