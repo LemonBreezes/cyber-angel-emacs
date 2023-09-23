@@ -6,9 +6,10 @@
   (when (modulep! :lang org)
     (after! org
       ;; This is how I like my ellipsis to look. Subtle.
-      (set-face-attribute 'org-ellipsis nil
-                          :inherit '(shadow default)
-                          :weight 'normal)
+      (unless (face-background 'org-level-1)
+        (set-face-attribute 'org-ellipsis nil
+                            :inherit '(shadow default)
+                            :weight 'normal))
       (set-face-attribute 'org-document-title nil
                           :height 1.2)))
   ;; For `esh-autosuggest'.
