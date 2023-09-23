@@ -185,6 +185,16 @@
   ;; Allow switching to these buffers with `C-x b'
   (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 
+  ;; ANSI colors
+  (add-hook 'text-mode-hook
+            (cae-defun cae-ansi-color-text-mode-h ()
+              (unless (derived-mode-p 'org-mode)
+                ;; Apply ANSI color codes
+                (with-silent-modifications
+                  (ansi-color-apply-on-region (point-min) (point-max) t)))))
+  (setenv "TERM" "xterm-256color")
+  (setq compilation-environment '("TERM=xterm-256color"))
+
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
