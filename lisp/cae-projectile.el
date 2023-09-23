@@ -7,6 +7,8 @@
           (,doom-emacs-dir . 0)
           ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
           ("~/src/" . 1)))
+  (setq projectile-ignored-projects
+        (list "~/" "/tmp" (expand-file-name "straight/repos" doom-local-dir)))
   (add-to-list 'projectile-globally-ignored-directories
                (expand-file-name ".local/straight/repos/" user-emacs-directory))
   (unless (or (cl-set-difference projectile-known-projects
