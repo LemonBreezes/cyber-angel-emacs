@@ -1,6 +1,6 @@
 ;;; lisp/cae-ansi-color.el -*- lexical-binding: t; -*-
 
-(add-hook! 'text-mode-hook
+(add-hook! text-mode
   (unless (derived-mode-p 'org-mode)
     ;; Apply ANSI color codes
     (with-silent-modifications
