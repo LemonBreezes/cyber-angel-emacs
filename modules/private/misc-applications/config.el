@@ -647,6 +647,7 @@
   :defer t :init
   (map! :map +misc-applications-eyecandy-map
         "t" #'selectric-mode)
+  (setq selectric-affected-bindings-list nil)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
       "t" "Typewriter sounds")))
