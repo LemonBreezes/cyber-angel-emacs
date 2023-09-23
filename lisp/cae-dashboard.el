@@ -7,7 +7,7 @@
       :desc "Config dir" :ng "C" #'doom/open-private-config
       :desc "Open Org agenda" :ng "a" #'org-agenda
       :desc "Open project" :ng "P" #'projectile-switch-project
-      :desc "Open bookmarks" :ng "m" #'bookmark-jump
+      :desc "Open bookmarks" :ng "H" #'bookmark-jump
       :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
       :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
       :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
