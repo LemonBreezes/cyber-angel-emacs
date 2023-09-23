@@ -19,6 +19,7 @@ from running."
     (run-hooks '+org-exit-src-code-hook)))
 
 ;;;###autoload (autoload 'cae-org-babel-cheatsheet "private/org/autoload/org" nil t)
+(defun cae-org-babel-cheatsheet ())
 (hercules-def
  :toggle-funs #'cae-org-babel-cheatsheet
  :keymap 'org-babel-map
