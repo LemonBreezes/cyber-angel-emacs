@@ -17,7 +17,11 @@
                         git-timemachine-mode-map)
                        (t (current-local-map)))
                  'normal))))
-      (which-key--show-keymap "Normal state bindings" map nil nil nil)
+      (progn (which-key--show-keymap "Normal state bindings" map nil nil nil)
+             (set-transient-map map (let ((once t))
+                                      (lambda ()
+                                        (prog1 once
+                                          (setq once nil))))))
     (message "No %s normal state bindings are defined." major-mode)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
