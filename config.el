@@ -1085,6 +1085,7 @@
       "C-c \"" "plot"
       "C-c C-v" "org-babel-map")))
 
+
 ;;; Email
 
 (setq user-full-name "StrawberryTea"
