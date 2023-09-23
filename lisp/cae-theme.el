@@ -33,6 +33,15 @@
     ;; Make the `beacon' more subtle.
     (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
 
+  ;; The backgrounds currently break
+  (when (memq doom-theme modus-themes-collection)
+    (after! org
+      (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
+                      org-level-6 org-level-7 org-level-8))
+        (set-face-attribute face nil :background (face-background 'default))
+        (set-face-attribute face nil :overline (face-background 'default))
+        (set-face-attribute face nil :foreground (face-background 'default)))))
+
   (after! helpful
     (set-face-attribute 'helpful-heading nil :extend t))
 
@@ -58,9 +67,10 @@
         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
         ;; I have this mostly because I want to work on getting the heading
         ;; backgrounds working with the code folding!
-        modus-themes-common-palette-overrides '((fg-heading-1 blue-warmer)
-                                                (bg-heading-1 bg-blue-nuanced)
-                                                (overline-heading-1 blue))))
+        modus-themes-common-palette-overrides
+        '((fg-heading-1 blue-warmer)
+          (bg-heading-1 bg-blue-nuanced)
+          (overline-heading-1 blue))))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
