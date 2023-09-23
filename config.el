@@ -959,7 +959,7 @@
 
   (use-package! beginend
     :defer t :init
-    (add-hook 'doom-first-buffer-hook #'beginend-global-mode)))
+    (beginend-global-mode +1)))
 
 
 ;;; Autocompletion
