@@ -12,7 +12,7 @@
       :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
       :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
       :desc "Notes (roam)" :ng "n" #'org-roam-node-find
-      :desc "Switch buffer" :ng "b" #'+vertico/switch-workspace-buffer
+      :desc "Switch buffer" :ng "b" #'persp-switch-to-buffer
       :desc "Switch buffers (all)" :ng "B" #'switch-to-buffer
       :desc "IBuffer" :ng "i" #'ibuffer
       :desc "Previous buffer" :ng "p" #'previous-buffer
