@@ -139,7 +139,7 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil)
     (after! mu4e
-      (setq mu4e-modeline-show-global nil)))
+      (setq mu4e-modeline-show-global t)))
 
   (after! which-key
     (setq which-key-ellipsis "..."
