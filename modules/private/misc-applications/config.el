@@ -315,6 +315,9 @@
   (map! :map ctl-x-map
         "/" (cae-oneshot-keymap pulseaudio-control-map
                                 pulseaudio-control))
+  (after! which-key
+    (which-key-add-keymap-based-replacements ctl-x-map
+      "/" "pulseaudio-control"))
   :config
   (pulseaudio-control-default-keybindings)
   (after! which-key
