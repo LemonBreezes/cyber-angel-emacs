@@ -144,7 +144,15 @@
           which-key-idle-delay 0.5
           which-key-compute-remaps t
           which-key-max-description-length 35
-          which-key-separator (if (cae-tty-disable-unicode-p) " -> " " → ")))
+          which-key-separator (if (cae-tty-disable-unicode-p) " -> " " → "))
+    (pushnew!
+     which-key-replacement-alist
+     '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
+     '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
+     '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
+     '(("" . "doom[-/]\\(.*\\)") . (nil . "\\1"))
+     '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))
+     ))
 
   (after! eros
     (setq eros-eval-result-prefix ""))
