@@ -27,6 +27,9 @@
            rp/point-ring-nav-previous
            dired-maybe-insert-subdir
            dired-insert-subdir
+           dired-kill-subdir
+           dired-next-subdir
+           dired-prev-subdir
            lispy-forward
            lispy-backward)
          '(symbol-overlay-switch-forward
