@@ -89,6 +89,7 @@
 (setq evil-ex-substitute-global t
       evil-move-cursor-back nil
       evil-vsplit-window-right t
+      evil-kill-on-visual-paste nil
       evil-split-window-below t
       evil-v$-excludes-newline t)
 
