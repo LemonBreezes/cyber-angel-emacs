@@ -35,6 +35,10 @@
                    #'undo-tree
                  #'vundo)))
 
+;; I prefer to not continue comments with o/O in Evil.
+(advice-remove #'evil-open-below #'+evil--insert-newline-below-and-respect-comments-a)
+(advice-remove #'evil-open-above #'+evil--insert-newline-above-and-respect-comments-a)
+
 ;; Define a leader key for switching to popup windows.
 (after! evil
   (unless (lookup-key evil-window-map "e")
