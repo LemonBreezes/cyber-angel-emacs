@@ -5,6 +5,7 @@
       :desc "Recent files" :ng "r" #'consult-recent-file
       :desc "Reload last session" :ng "R" #'doom/quickload-session
       :desc "Config dir" :ng "C" #'doom/open-private-config
+      :desc "Open Org agenda" :ng "a" #'org-agenda
       :desc "Open config.org" :ng "c" (cmd! (find-file (expand-file-name "config.org" doom-user-dir)))
       :desc "Open org-mode root" :ng "O" (cmd! (find-file (expand-file-name "lisp/org/" doom-user-dir)))
       :desc "Open dotfile" :ng "." (cmd! (doom-project-find-file "~/.config/"))
