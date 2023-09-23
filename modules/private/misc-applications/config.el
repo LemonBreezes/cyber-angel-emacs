@@ -152,7 +152,9 @@
         :ng "t" #'mark-whole-buffer)
   (map! :map elfeed-search-mode-map
         "<f6>" #'cae-cheatsheets-elfeed
-        :n "<f6>" #'cae-cheatsheets-evil-elfeed)
+        "h" #'cae-cheatsheets-elfeed
+        :n "<f6>" #'cae-cheatsheets-evil-elfeed
+        :n "h" #'cae-cheatsheets-evil-elfeed)
 
   (use-package! elfeed-tube
     :config
