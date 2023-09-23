@@ -5,3 +5,4 @@
     ;; Apply ANSI color codes
     (with-silent-modifications
       (ansi-color-apply-on-region (point-min) (point-max) t))))
+;
