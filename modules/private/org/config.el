@@ -94,7 +94,7 @@
           ("startup" . "⏻")
           ("macro" . "𝓜")
           ("bind" . #("" 0 1 (display (raise -0.1))))
-          ("embed" "↪️")
+          ("embed" . "↪️")
           ("print_bibliography" . #("" 0 1 (display (raise -0.1))))
           ("cite_export" . "⮭")
           ("print_glossary" . #("ᴬᶻ" 0 1 (display (raise -0.1))))
