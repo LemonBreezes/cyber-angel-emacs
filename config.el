@@ -63,6 +63,7 @@
 (when cae-init-ui-enabled-p
   (when (cae-display-graphic-p)
     (load! "lisp/cae-theme"))
+  (load! "lisp/cae-ansi-color")
   (after! hydra
     (load! "lisp/cae-hydra"))
 
