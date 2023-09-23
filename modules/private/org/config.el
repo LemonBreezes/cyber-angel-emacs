@@ -162,4 +162,4 @@
         "l f" #'+org-insert-file-link))
 
 (after! ox
-  (add-to-list 'org-export-filter-final-output-functions #'+org-export-remove-zero-width-space t))
+  (add-to-list 'org-export-filter-final-output-functions #'cae-org-export-remove-zero-width-space t))
