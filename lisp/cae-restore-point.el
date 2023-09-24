@@ -32,158 +32,99 @@
            dired-prev-subdir
            lispy-forward
            lispy-backward)
-         '(symbol-overlay-switch-forward
-           symbol-overlay-switch-backward
-           symbol-overlay-jump-next
-           symbol-overlay-jump-prev
-           recenter-top-bottom
-           reposition-window
-           er/expand-region
-           eri/maximize-region
-           eri/mark-block
-           eri/expand-region
-           eri/mark-line
-           eri/contract-region
-           eri/mark-outside-quotes
-           eri/web-mode-element-parent
-           eri/mark-inside-org-table-cell
-           eri/mark-outside-org-table-cell
-           eri/web-mode-element-parent-content
-           er/mark-org-code-block
-           er/mark-url
-           er/mark-word
-           er/mark-defun
-           er/mark-email
-           er/mark-symbol
-           er/mark-comment
-           er/mark-sentence
-           er/mark-paragraph
-           er/mark-org-parent
-           er/mark-method-call
-           er/mark-org-element
-           er/mark-inside-pairs
-           er/mark-inside-quotes
-           er/mark-next-accessor
-           er/mark-outside-pairs
-           er/mark-text-sentence
-           er/mark-outside-quotes
-           er/mark-text-paragraph
-           er/mark-org-element-parent
-           er/mark-symbol-with-prefix
-           cae-mark-comment
-           View-scroll-half-page-forward
-           View-scroll-half-page-backward
-           chatgpt-shell-mark-at-point-dwim
-           c-mark-function
-           mark-whole-buffer
-           org-backward-heading-same-level
-           org-forward-heading-same-level)
          (and (featurep 'evil)
-              '(evil-snipe-s
-                evil-snipe-S
-                evil-snipe-f
-                evil-snipe-F
-                evil-snipe-t
-                evil-snipe-T
-                evil-snipe-x
-                evil-snipe-X
-                evil-snipe-repeat
-                evil-snipe-repeat-reverse
-                evil-ex-search-forward
-                evil-ex-search-backward
-                evil-ex-search-next
-                evil-ex-search-previous
-                evil-ex-search-word-forward
-                evil-ex-search-word-backward
+              '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t evil-snipe-T
+                evil-snipe-x evil-snipe-X evil-snipe-repeat
+                evil-snipe-repeat-reverse evil-ex-search-next
+                evil-ex-search-previous evil-goto-line evil-jump-item
+                evil-goto-first-line keyboard-escape-quit evil-force-normal-state
+                evil-exit-visual-state evil-normal-state evil-inner-xml-attr
+                +evil:inner-url-txtobj +evil:inner-any-quote
+                evil-indent-plus-i-indent-up evil-indent-plus-i-indent-up-down
+                evil-indent-plus-i-indent evilnc-inner-comment evil-inner-arg
+                evil-inner-symbol evil-inner-tag evil-inner-back-quote
+                evil-inner-double-quote evil-inner-single-quote evil-inner-angle
+                evil-inner-curly evil-textobj-anyblock-inner-block
+                evil-inner-bracket evil-inner-paren evil-inner-paragraph
+                evil-inner-sentence evil-inner-WORD evil-inner-word
+                evil-outer-xml-attr +evil:outer-url-txtobj +evil:outer-any-quote
+                evil-indent-plus-a-indent-up evil-indent-plus-a-indent-up-down
+                evil-indent-plus-a-indent +evil:whole-buffer-txtobj
+                +evil:defun-txtobj evilnc-outer-commenter evil-outer-arg
+                evil-a-symbol evil-a-tag evil-a-back-quote evil-a-double-quote
+                evil-a-single-quote evil-an-angle evil-a-curly
+                evil-textobj-anyblock-a-block evil-a-bracket evil-a-paren
+                evil-a-paragraph evil-a-sentence evil-a-WORD evil-a-word
+                evil-scroll-up evil-scroll-down evil-scroll-left evil-scroll-right
+                evil-scroll-line-up evil-scroll-line-down evil-scroll-page-down
+                evil-scroll-page-up lispyville-backward-atom-begin
+                lispyville-forward-atom-begin lispyville-backward-atom-end
+                lispyville-forward-atom-end evil-cp-a-WORD evil-cp-a-form
+                evil-cp-a-defun evil-cp-a-comment evil-forward-arg
+                evil-backward-arg evil-forward-char evil-jump-forward
+                evil-backward-char evil-jump-backward evil-search-forward
+                evil-cp-drag-forward evil-cp-forward-sexp evil-search-backward
+                evil-cp-backward-sexp evil-cp-drag-backward evil-forward-WORD-end
+                evil-forward-word-end evil-backward-WORD-end
+                evil-backward-word-end evil-ex-search-forward
+                evil-forward-paragraph evil-backward-paragraph
+                evil-ex-search-backward evil-find-char-backward
+                evil-forward-WORD-begin evil-forward-word-begin
+                evil-jump-backward-swap evil-backward-WORD-begin
+                evil-backward-word-begin evil-cp-backward-up-sexp
+                evil-forward-section-end evil-search-word-forward
+                evil-backward-section-end evil-cp--backward-up-list
+                evil-delete-backward-char evil-delete-backward-word
+                evil-org-forward-sentence evil-search-word-backward
+                evil-cp-forward-symbol-end evil-find-char-to-backward
+                evil-forward-section-begin evil-org-backward-sentence
+                evil-backward-section-begin evil-cp-backward-symbol-end
+                evil-ex-search-word-forward evil-forward-sentence-begin
+                evil-backward-sentence-begin evil-cp-delete-backward-word
+                evil-cp-forward-symbol-begin evil-ex-delete-backward-char
+                evil-ex-search-word-backward evil-cp-backward-symbol-begin
+                evil-org-delete-backward-char evilem-motion-forward-WORD-end
+                evilem-motion-forward-word-end evilem-motion-backward-WORD-end
+                evilem-motion-backward-word-end evil-collection-pdf-jump-forward
+                evilem-motion-find-char-backward evilem-motion-forward-WORD-begin
+                evilem-motion-forward-word-begin evil-collection-pdf-jump-backward
+                evilem-motion-backward-WORD-begin
+                evilem-motion-backward-word-begin
+                evilem-motion-forward-section-end
+                evilem-motion-search-word-forward
+                evil-command-window-search-forward
+                evil-delete-backward-char-and-join
+                evil-search-unbounded-word-forward
+                evilem-motion-backward-section-end
+                evilem-motion-search-word-backward
+                evil-search-unbounded-word-backward
+                evilem-motion-find-char-to-backward
+                evilem-motion-forward-section-begin
+                evil-visualstar/begin-search-forward
+                evilem-motion-backward-section-begin
+                evilem-motion-forward-sentence-begin
                 evil-ex-search-unbounded-word-forward
+                evil-visualstar/begin-search-backward
+                evilem-motion-backward-sentence-begin
                 evil-ex-search-unbounded-word-backward
-                evil-goto-line
-                evil-jump-item
-                evil-goto-first-line
-                keyboard-escape-quit
-                evil-force-normal-state
-                evil-exit-visual-state
-                evil-normal-state
-                evil-inner-xml-attr
-                +evil:inner-url-txtobj
-                +evil:inner-any-quote
-                evil-indent-plus-i-indent-up
-                evil-indent-plus-i-indent-up-down
-                evil-indent-plus-i-indent
-                +evil:whole-buffer-txtobj
-                +evil:defun-txtobj
-                evilnc-inner-comment
-                evil-inner-arg
-                evil-inner-symbol
-                evil-inner-tag
-                evil-inner-back-quote
-                evil-inner-double-quote
-                evil-inner-single-quote
-                evil-inner-angle
-                evil-inner-angle
-                evil-inner-curly
-                evil-inner-curly
-                evil-textobj-anyblock-inner-block
-                evil-inner-bracket
-                evil-inner-bracket
-                evil-inner-paren
-                evil-inner-paren
-                evil-inner-paren
-                evil-inner-paragraph
-                evil-inner-sentence
-                evil-inner-WORD
-                evil-inner-word
-                evil-outer-xml-attr
-                +evil:outer-url-txtobj
-                +evil:outer-any-quote
-                evil-indent-plus-a-indent-up
-                evil-indent-plus-a-indent-up-down
-                evil-indent-plus-a-indent
-                +evil:whole-buffer-txtobj
-                +evil:defun-txtobj
-                evilnc-outer-commenter
-                evil-outer-arg
-                evil-a-symbol
-                evil-a-tag
-                evil-a-back-quote
-                evil-a-double-quote
-                evil-a-single-quote
-                evil-an-angle
-                evil-an-angle
-                evil-a-curly
-                evil-a-curly
-                evil-textobj-anyblock-a-block
-                evil-a-bracket
-                evil-a-bracket
-                evil-a-paren
-                evil-a-paren
-                evil-a-paren
-                evil-a-paragraph
-                evil-a-sentence
-                evil-a-WORD
-                evil-a-word
-                evil-scroll-up
-                evil-scroll-down
-                evil-scroll-left
-                evil-scroll-right
-                evil-scroll-line-up
-                evil-scroll-line-down
-                evil-scroll-page-down
-                evil-scroll-page-up
-                evil-forward-word-begin
-                evil-forward-WORD-begin
-                evil-forward-WORD-end
-                evil-forward-word-end
-                evil-backward-word-begin
-                evil-backward-WORD-begin
-                evil-backward-WORD-end
-                evil-backward-word-end
-                evil-forward-arg
-                evil-backward-arg
-                lispyville-backward-atom-begin
-                lispyville-forward-atom-begin
-                lispyville-backward-atom-end
-                lispyville-forward-atom-end))))
+                evil-cp-delete-char-or-splice-backwards
+                evilem--motion-function-evil-forward-arg
+                evilem--motion-function-evil-backward-arg
+                evil-collection-vterm-delete-backward-char
+                evil-textobj-anyblock-forward-any-block-end
+                evil-textobj-anyblock-backward-any-block-end
+                evil-textobj-anyblock-forward-open-block-end
+                evil-textobj-anyblock-backward-open-block-end
+                evil-textobj-anyblock-forward-any-block-start
+                evil-textobj-anyblock-forward-close-block-end
+                evil-textobj-anyblock-backward-any-block-start
+                evil-textobj-anyblock-backward-close-block-end
+                evil-textobj-anyblock-forward-open-block-start
+                evil-textobj-anyblock-backward-open-block-start
+                evil-textobj-anyblock-forward-close-block-start
+                evil-textobj-anyblock-backward-close-block-start
+                cae-cheatsheets-evil-cleverparens/evil-cp-drag-forward
+                cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
