@@ -153,8 +153,9 @@
      '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
      '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
      '(("" . "doom[-/]\\(.*\\)") . (nil . "\\1"))
-     '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))
-     ))
+     '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))))
+
+  (setq +zen-text-scale 0.8)
 
   (after! eros
     (setq eros-eval-result-prefix (if (cae-tty-disable-unicode-p) "=> " "⟹ ")))
@@ -1104,6 +1105,7 @@
         org-archive-location (concat org-directory ".archive/%s::")
         org-hide-emphasis-markers t
         org-special-ctrl-k t
+        org-highlight-latex-and-related '(native script entities)
         ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
