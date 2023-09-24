@@ -1060,6 +1060,12 @@
                                         '(("git" "log" "diff" "show"))))
         eshell-visual-options '(("git" "--help" "--paginate"))))
 
+(when (executable-find "wal")
+  (add-hook 'comint-preoutput-filter-functions
+            (cae-defun cae-filter-wal-sequences (s)
+              (if (string-prefix-p "]4;0;" s)
+                  "" s))))
+
 
 ;;; Text
 
