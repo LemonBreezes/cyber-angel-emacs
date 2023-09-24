@@ -159,6 +159,9 @@
       :priority_d    "[#D]"
       :priority_e    "[#E]")))
 
+(unless (cae-tty-disable-unicode-p)
+  (add-hook 'org-mode-hook #'+org-pretty-mode))
+
 ;;(use-package! org-tidy
 ;;  :defer t :init
 ;;  (add-hook 'org-mode-hook #'org-tidy-mode)
