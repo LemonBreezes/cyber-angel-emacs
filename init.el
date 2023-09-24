@@ -58,9 +58,9 @@
        workspaces
        (window-select +numbers)
        ophints
-       ;;treemacs
-       ;;unicode
-       ;;zen
+       treemacs
+       unicode
+       zen
 
        :editor
        file-templates
