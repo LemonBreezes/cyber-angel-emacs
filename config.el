@@ -854,12 +854,12 @@
                 (cae-defun cae-aas-load-embark-h ()
                   (require 'embark)))
     (aas-set-snippets 'global
-      ";--" "—"
-      ";-." "→"
-      ";=." "⇒"
-      ";!=" "≠"
-      "-." "->"
-      "=." "=>"))
+                      ";--" "—"
+                      ";-." "→"
+                      ";=." "⇒"
+                      ";!=" "≠"
+                      "-." "->"
+                      "=." "=>"))
 
   (use-package! smart-semicolon
     :defer t :init
@@ -1140,6 +1140,7 @@
       (setq +org-roam-auto-backlinks-buffer nil))
     (map! :map org-mode-map
           "C-c C-M-h" #'er/mark-org-code-block)
+    (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
     (after! org-list
       (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
     (after! ob-core
