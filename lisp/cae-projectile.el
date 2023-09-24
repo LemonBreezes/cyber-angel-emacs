@@ -65,7 +65,7 @@
               which-key-replacement-alist)))
   (defalias 'projectile-find-file #'project-find-file)
   (defalias 'projectile-project-root
-    (lambda (dir) (project-root (project-current nil dir))))
+    (lambda (&optional dir) (project-root (project-current nil dir))))
   (map! :leader
         "SPC" #'consult-fd
         "DEL" #'consult-fd
