@@ -109,11 +109,6 @@
         "RET" nil
         "TAB" #'outline-cycle))
 
-(map! :leader
-      :prefix "t"
-      :desc "Column indicator" "C" #'vline-mode
-      :desc "Font lock mode" "C-f" #'font-lock-mode)
-
 (when (modulep! :completion corfu)
   (after! corfu
     (map! "C-SPC" (lookup-key global-map (kbd "C-@"))
@@ -145,9 +140,6 @@
              (define-key ctl-x-map "p" nil)
              (map! :map ctl-x-map
                    "p" #'+popup/other))))))
-
-;; I'm surprised Doom Emacs doesn't bind a key for copying links.
-(map! :leader :desc "Copy link" "sy" #'link-hint-copy-link)
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
@@ -270,7 +262,13 @@
    "M-X" #'consult-mode-command)
   (map! :map help-map "TAB" #'consult-info)
   (map! :leader
-        :desc "Keyboard macro"  "ik" #'consult-kmacro)
+        (:prefix "i"
+         :desc "Keyboard macro" "k" #'consult-kmacro)
+        (:prefix "t"
+         :desc "Column indicator" "C" #'vline-mode
+         :desc "Font lock mode" "C-f" #'font-lock-mode)
+        (:prefix "s"
+         :desc "Copy link" "y" #'link-hint-copy-link))
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
