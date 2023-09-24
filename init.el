@@ -12,8 +12,6 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
-(advice-add #'general-auto-unbind-keys :override #'ignore)
-
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
