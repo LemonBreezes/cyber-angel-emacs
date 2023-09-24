@@ -1140,9 +1140,6 @@
   (after! org-agenda
     (setq org-agenda-sticky nil
           org-agenda-files '("~/org/")))
-  (when (and (modulep! :ui ligatures)
-             (eq (car +ligatures-in-modes) 'not))
-    (add-to-list '+ligatures-in-modes 'org-mode t #'eq))
 
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
