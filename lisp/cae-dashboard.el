@@ -26,7 +26,8 @@
       :desc "Previous buffer" :ng "p" #'previous-buffer
       :desc "Set theme" :ng "t" #'consult-theme
       :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
-      :desc "Show keybindings" :ng "h" #'cae-dashboard-help)
+      :desc "Show keybindings" :ng "h" #'cae-dashboard-help
+      :desc "cd" :ng "C-c" #'cd)
 
 (map! :leader :desc "Dashboard" "d" #'+doom-dashboard/open)
 
