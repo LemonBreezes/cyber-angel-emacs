@@ -62,7 +62,7 @@
        ophints
        treemacs
        ;;unicode
-       ;;zen
+       zen
 
        :editor
        file-templates
@@ -137,7 +137,7 @@
        lisp
        misc-applications
        modeline
-                                        ;unpackaged
+       unpackaged
        vc
                                         ;org
        ai
