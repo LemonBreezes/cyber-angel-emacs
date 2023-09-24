@@ -29,7 +29,7 @@
   "Whether our tools section of `config.el' is enabled.")
 (defvar cae-init-editor-enabled-p t
   "Whether our editor section of `config.el' is enabled.")
-(defvar cae-init-autocompletion-enabled-p t
+(defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is enabled.")
 (defvar cae-init-text-enabled-p t
   "Whether our text section of `config.el' is enabled.")
