@@ -1098,7 +1098,7 @@
                 (concat (make-string (* n (1- org-indent-indentation-per-level))
                                      ?\s)
                         (if (> n 0)
-                             (char-to-string org-indent-boundary-char)
+                            (char-to-string org-indent-boundary-char)
                           "\u200b"))
                 nil 'face 'org-indent)))))
 
