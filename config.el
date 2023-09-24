@@ -1073,30 +1073,6 @@
 (when cae-init-text-enabled-p
   (remove-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'text-mode-hook #'auto-fill-mode)
-  (remove-hook 'text-mode-hook #'display-line-numbers-mode)
-
-  ;; Margin in text mode without line numbers.
-  (defvar +text-mode-left-margin-width 1
-    "The `left-margin-width' to be used in `text-mode' buffers.")
-
-  (defun +setup-text-mode-left-margin ()
-    (when (and (derived-mode-p 'text-mode)
-               (not (and (bound-and-true-p visual-fill-column-mode)
-                         visual-fill-column-center-text))
-               (eq (current-buffer)     ; Check current buffer is active.
-                   (window-buffer (frame-selected-window))))
-      (setq left-margin-width (if display-line-numbers
-                                  0 +text-mode-left-margin-width))
-      (set-window-buffer (get-buffer-window (current-buffer))
-                         (current-buffer))))
-
-  (add-hook 'window-configuration-change-hook #'+setup-text-mode-left-margin)
-  (add-hook 'display-line-numbers-mode-hook #'+setup-text-mode-left-margin)
-  (add-hook 'text-mode-hook #'+setup-text-mode-left-margin)
-
-  (defadvice! +doom/toggle-line-numbers--call-hook-a ()
-    :after #'doom/toggle-line-numbers
-    (run-hooks 'display-line-numbers-mode-hook))
 
   (after! calendar
     (setq calendar-week-start-day 1
