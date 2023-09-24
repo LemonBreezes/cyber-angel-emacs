@@ -828,7 +828,7 @@
           outline-font-lock-keywords nil)
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
-        "C-c @" "outline")))
+                                               "C-c @" "outline")))
 
   (use-package! embark
     :defer t :config
@@ -855,12 +855,12 @@
                 (cae-defun cae-aas-load-embark-h ()
                   (require 'embark)))
     (aas-set-snippets 'global
-      ";--" "—"
-      ";-." "→"
-      ";=." "⇒"
-      ";!=" "≠"
-      "-." "->"
-      "=." "=>"))
+                      ";--" "—"
+                      ";-." "→"
+                      ";=." "⇒"
+                      ";!=" "≠"
+                      "-." "->"
+                      "=." "=>"))
 
   (use-package! smart-semicolon
     :defer t :init
@@ -1163,8 +1163,8 @@
 
   (after! which-key
     (which-key-add-keymap-based-replacements org-mode-map
-      "C-c \"" "plot"
-      "C-c C-v" "org-babel-map")))
+                                             "C-c \"" "plot"
+                                             "C-c C-v" "org-babel-map")))
 
 
 ;;; Email
