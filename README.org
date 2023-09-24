@@ -35,4 +35,3 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
    If you have ideas for apps that should be added or removed from this module,
    feel free to open an issue!
 
-* then what is
