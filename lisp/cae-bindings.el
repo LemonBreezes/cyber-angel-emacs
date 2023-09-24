@@ -261,18 +261,20 @@
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command)
   (map! :map help-map "TAB" #'consult-info)
-  (map! :leader
-        (:prefix "i"
-         :desc "Keyboard macro" "k" #'consult-kmacro)
-        (:prefix "t"
-         :desc "Column indicator" "C" #'vline-mode
-         :desc "Font lock mode" "C-f" #'font-lock-mode)
-        (:prefix "s"
-         :desc "Copy link" "y" #'link-hint-copy-link))
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
+;; Some of these use Consult but whatever man.
+(map! :leader
+      (:prefix "i"
+       :desc "Keyboard macro" "k" #'consult-kmacro)
+      (:prefix "t"
+       :desc "Column indicator" "C" #'vline-mode
+       :desc "Font lock mode" "C-f" #'font-lock-mode)
+      (:prefix "s"
+       :desc "Copy link" "y" #'link-hint-copy-link
+       :desc "Jump to section" "h" #'consult-outline))
 
 (unless (modulep! :editor evil)
   (after! org
