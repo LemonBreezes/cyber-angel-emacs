@@ -1,5 +1,5 @@
 diff --git a/lisp/doom-keybinds.el b/lisp/doom-keybinds.el
-index 29788e9a9..1fb58a747 100644
+index 0cc6e4841..e58e2e720 100644
 --- a/lisp/doom-keybinds.el
 +++ b/lisp/doom-keybinds.el
 @@ -25,6 +25,14 @@ and Emacs states, and for non-evil users.")
@@ -17,7 +17,7 @@ index 29788e9a9..1fb58a747 100644
  
  ;;
  ;;; Global keybind settings
-@@ -145,11 +153,8 @@ all hooks after it are ignored.")
+@@ -146,11 +154,8 @@ all hooks after it are ignored.")
                      forms))
              (when-let (desc (cadr (memq :which-key udef)))
                (prependq!
@@ -31,7 +31,7 @@ index 29788e9a9..1fb58a747 100644
                             ,desc))))))))
      (macroexp-progn
       (append (and wkforms `((after! which-key ,@(nreverse wkforms))))
-@@ -168,6 +173,43 @@ See `doom-leader-key' and `doom-leader-alt-key' to change the leader prefix."
+@@ -169,6 +174,43 @@ See `doom-leader-key' and `doom-leader-alt-key' to change the leader prefix."
      :keymaps 'doom-leader-map
      ,@args))
  
@@ -75,7 +75,7 @@ index 29788e9a9..1fb58a747 100644
  (defmacro define-localleader-key! (&rest args)
    "Define <localleader> key.
  
-@@ -195,8 +237,20 @@ localleader prefix."
+@@ -196,8 +238,21 @@ localleader prefix."
  ;;   :prefix/:non-normal-prefix properties because general is incredibly slow
  ;;   binding keys en mass with them in conjunction with :states -- an effective
  ;;   doubling of Doom's startup time!
@@ -90,14 +90,15 @@ index 29788e9a9..1fb58a747 100644
 +             doom-switch-frame-hook)
 +  (defun doom-init-localleader-key-h ()
 +    "Set the localleader keys for the current major-mode."
-+    (unless (doom-unreal-buffer-p (current-buffer))
++    (unless (and (doom-unreal-buffer-p (current-buffer))
++                 (not (derived-mode-p 'text-mode 'prog-mode 'conf-mode)))
 +      (setq doom-localleader-current-major-mode major-mode)
 +      (set-keymap-parent doom-localleader-map
 +                         (cdr (assq major-mode doom-localleader-map-alist))))))
  
  ;; Bind `doom-leader-key' and `doom-leader-alt-key' as late as possible to give
  ;; the user a chance to modify them.
-@@ -210,9 +264,12 @@ localleader prefix."
+@@ -211,9 +266,12 @@ localleader prefix."
                     (set-keymap-parent doom-leader-map mode-specific-map))
                    ((equal doom-leader-alt-key "C-x")
                     (set-keymap-parent doom-leader-map ctl-x-map)))
@@ -113,7 +114,7 @@ index 29788e9a9..1fb58a747 100644
        (general-override-mode +1))))
  
  
-@@ -283,7 +340,6 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+@@ -284,7 +342,6 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
        (let ((key (pop rest)))
          (cond ((listp key)
                 (doom--map-nested nil key))
@@ -121,7 +122,7 @@ index 29788e9a9..1fb58a747 100644
                ((keywordp key)
                 (pcase key
                   (:leader
-@@ -291,7 +347,7 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+@@ -292,7 +349,7 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
                    (setq doom--map-fn 'doom--define-leader-key))
                   (:localleader
                    (doom--map-commit)
@@ -130,7 +131,7 @@ index 29788e9a9..1fb58a747 100644
                   (:after
                    (doom--map-nested (list 'after! (pop rest)) rest)
                    (setq rest nil))
-@@ -317,6 +373,8 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
+@@ -318,6 +375,8 @@ For example, :nvi will map to (list 'normal 'visual 'insert). See
                                            :prefix prefix)
                                      rest))
                        (push `(defvar ,keymap (make-sparse-keymap))
@@ -140,7 +141,7 @@ index 29788e9a9..1fb58a747 100644
                   (:prefix
                    (cl-destructuring-bind (prefix . desc)
 diff --git a/lisp/doom-packages.el b/lisp/doom-packages.el
-index 0e6c2784f..b3b0aaa3f 100644
+index 72d3896b6..8232f16a0 100644
 --- a/lisp/doom-packages.el
 +++ b/lisp/doom-packages.el
 @@ -97,7 +97,7 @@ uses a straight or package.el command directly).")
@@ -216,10 +217,10 @@ index 0e6c2784f..b3b0aaa3f 100644
        (doom-log "Initializing recipes")
        (mapc #'straight-use-recipes
 diff --git a/lisp/doom-ui.el b/lisp/doom-ui.el
-index 05cc20c12..7ba7b1858 100644
+index 172a67634..40a325722 100644
 --- a/lisp/doom-ui.el
 +++ b/lisp/doom-ui.el
-@@ -196,7 +196,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
+@@ -198,7 +198,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
  `kill-current-buffer'."
    :before-until #'kill-current-buffer
    (let ((buf (current-buffer)))
@@ -231,3 +232,163 @@ index 05cc20c12..7ba7b1858 100644
             (delete-window)
             t)
            ((eq buf (doom-fallback-buffer))
+diff --git a/lisp/lib/projects.el b/lisp/lib/projects.el
+index ce7964421..5e4dd6be6 100644
+--- a/lisp/lib/projects.el
++++ b/lisp/lib/projects.el
+@@ -149,9 +149,10 @@ If DIR is not a project, it will be indexed (but not cached)."
+             (if (doom-module-p :completion 'ivy)
+                 #'counsel-projectile-find-file
+               #'projectile-find-file)))
+-          ((and (bound-and-true-p vertico-mode)
+-                (fboundp '+vertico/find-file-in))
+-           (+vertico/find-file-in default-directory))
++          ((bound-and-true-p vertico-mode)
++           (if (executable-find "fd")
++               (consult-fd dir)
++             (consult-find dir)))
+           ((and (bound-and-true-p ivy-mode)
+                 (fboundp 'counsel-file-jump))
+            (call-interactively #'counsel-file-jump))
+diff --git a/modules/completion/vertico/autoload/vertico.el b/modules/completion/vertico/autoload/vertico.el
+index 0bfd9e00f..fcdfeb887 100644
+--- a/modules/completion/vertico/autoload/vertico.el
++++ b/modules/completion/vertico/autoload/vertico.el
+@@ -135,26 +135,6 @@ Supports exporting consult-grep to wgrep, file to wdeired, and consult-location
+         (+vertico/embark-preview)
+       (user-error (vertico-directory-enter)))))
+ 
+-(defvar +vertico/find-file-in--history nil)
+-;;;###autoload
+-(defun +vertico/find-file-in (&optional dir initial)
+-  "Jump to file under DIR (recursive).
+-If INITIAL is non-nil, use as initial input."
+-  (interactive)
+-  (require 'consult)
+-  (let* ((default-directory (or dir default-directory))
+-         (prompt-dir (consult--directory-prompt "Find" default-directory))
+-         (cmd (split-string-and-unquote +vertico-consult-fd-args " ")))
+-    (find-file
+-     (consult--read
+-      (split-string (cdr (apply #'doom-call-process cmd)) "\n" t)
+-      :prompt default-directory
+-      :sort nil
+-      :initial (if initial (shell-quote-argument initial))
+-      :add-history (thing-at-point 'filename)
+-      :category 'file
+-      :history '(:input +vertico/find-file-in--history)))))
+-
+ ;;;###autoload
+ (defun +vertico/jump-list (jump)
+   "Go to an entry in evil's (or better-jumper's) jumplist."
+diff --git a/modules/config/default/+evil-bindings.el b/modules/config/default/+evil-bindings.el
+index f6d1c9225..0f1e1c787 100644
+--- a/modules/config/default/+evil-bindings.el
++++ b/modules/config/default/+evil-bindings.el
+@@ -660,36 +660,36 @@
+         :desc "wanderlust" "m" #'=wanderlust))
+ 
+       ;;; <leader> p --- project
+-      (:prefix-map ("p" . "project")
+-       :desc "Browse project"               "." #'+default/browse-project
+-       :desc "Browse other project"         ">" #'doom/browse-in-other-project
+-       :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
+-       :desc "Async cmd in project root"    "&" #'projectile-run-async-shell-command-in-root
+-       :desc "Add new project"              "a" #'projectile-add-known-project
+-       :desc "Switch to project buffer"     "b" #'projectile-switch-to-buffer
+-       :desc "Compile in project"           "c" #'projectile-compile-project
+-       :desc "Repeat last command"          "C" #'projectile-repeat-last-command
+-       :desc "Remove known project"         "d" #'projectile-remove-known-project
+-       :desc "Discover projects in folder"  "D" #'+default/discover-projects
+-       :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
+-       :desc "Find file in project"         "f" #'projectile-find-file
+-       :desc "Find file in other project"   "F" #'doom/find-file-in-other-project
+-       :desc "Configure project"            "g" #'projectile-configure-project
+-       :desc "Invalidate project cache"     "i" #'projectile-invalidate-cache
+-       :desc "Kill project buffers"         "k" #'projectile-kill-buffers
+-       :desc "Find other file"              "o" #'projectile-find-other-file
+-       :desc "Switch project"               "p" #'projectile-switch-project
+-       :desc "Find recent project files"    "r" #'projectile-recentf
+-       :desc "Run project"                  "R" #'projectile-run-project
+-       :desc "Save project files"           "s" #'projectile-save-project-buffers
+-       :desc "List project todos"           "t" #'magit-todos-list
+-       :desc "Test project"                 "T" #'projectile-test-project
+-       :desc "Pop up scratch buffer"        "x" #'doom/open-project-scratch-buffer
+-       :desc "Switch to scratch buffer"     "X" #'doom/switch-to-project-scratch-buffer
+-       (:when (and (modulep! :tools taskrunner)
+-                   (or (modulep! :completion ivy)
+-                       (modulep! :completion helm)))
+-        :desc "List project tasks"          "z" #'+taskrunner/project-tasks))
++      ;;(:prefix-map ("p" . "project")
++      ;; :desc "Browse project"               "." #'+default/browse-project
++      ;; :desc "Browse other project"         ">" #'doom/browse-in-other-project
++      ;; :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
++      ;; :desc "Async cmd in project root"    "&" #'projectile-run-async-shell-command-in-root
++      ;; :desc "Add new project"              "a" #'projectile-add-known-project
++      ;; :desc "Switch to project buffer"     "b" #'projectile-switch-to-buffer
++      ;; :desc "Compile in project"           "c" #'projectile-compile-project
++      ;; :desc "Repeat last command"          "C" #'projectile-repeat-last-command
++      ;; :desc "Remove known project"         "d" #'projectile-remove-known-project
++      ;; :desc "Discover projects in folder"  "D" #'+default/discover-projects
++      ;; :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
++      ;; :desc "Find file in project"         "f" #'projectile-find-file
++      ;; :desc "Find file in other project"   "F" #'doom/find-file-in-other-project
++      ;; :desc "Configure project"            "g" #'projectile-configure-project
++      ;; :desc "Invalidate project cache"     "i" #'projectile-invalidate-cache
++      ;; :desc "Kill project buffers"         "k" #'projectile-kill-buffers
++      ;; :desc "Find other file"              "o" #'projectile-find-other-file
++      ;; :desc "Switch project"               "p" #'projectile-switch-project
++      ;; :desc "Find recent project files"    "r" #'projectile-recentf
++      ;; :desc "Run project"                  "R" #'projectile-run-project
++      ;; :desc "Save project files"           "s" #'projectile-save-project-buffers
++      ;; :desc "List project todos"           "t" #'magit-todos-list
++      ;; :desc "Test project"                 "T" #'projectile-test-project
++      ;; :desc "Pop up scratch buffer"        "x" #'doom/open-project-scratch-buffer
++      ;; :desc "Switch to scratch buffer"     "X" #'doom/switch-to-project-scratch-buffer
++      ;; (:when (and (modulep! :tools taskrunner)
++      ;;             (or (modulep! :completion ivy)
++      ;;                 (modulep! :completion helm)))
++      ;;  :desc "List project tasks"          "z" #'+taskrunner/project-tasks))
+ 
+       ;;; <leader> q --- quit/session
+       (:prefix-map ("q" . "quit/session")
+diff --git a/modules/config/default/autoload/files.el b/modules/config/default/autoload/files.el
+index 115f71245..fddb5cec3 100644
+--- a/modules/config/default/autoload/files.el
++++ b/modules/config/default/autoload/files.el
+@@ -32,10 +32,14 @@
+   (doom-project-find-file org-directory))
+ 
+ ;;;###autoload
+-(defun +default/find-file-under-here ()
+-  "Perform a recursive file search from the current directory."
+-  (interactive)
+-  (doom-project-find-file default-directory))
++(defun +default/find-file-under-here (&optional prefix)
++  "Perform a recursive file search from the current directory.
++Prompt for directory if PREFIX."
++  (interactive "P")
++  (let ((dir (if prefix
++                 (read-directory-name "Directory: ")
++               default-directory)))
++    (doom-project-find-file dir)))
+ 
+ ;;;###autoload
+ (defun +default/discover-projects (arg)
+diff --git a/modules/tools/lsp/+lsp.el b/modules/tools/lsp/+lsp.el
+index 5ae4a417d..96361aae4 100644
+--- a/modules/tools/lsp/+lsp.el
++++ b/modules/tools/lsp/+lsp.el
+@@ -138,8 +138,11 @@ server getting expensively restarted when reverting buffers."
+                                    " "))
+           (add-to-list 'global-mode-string
+                        '(t (:eval lsp-modeline-icon))
+-                       'append))))))
++                       'append)))))
+ 
++  (when (modulep! :completion corfu)
++    (setq lsp-completion-provider :none)
++    (add-hook 'lsp-mode-hook #'lsp-completion-mode)))
+ 
+ (use-package! lsp-ui
+   :hook (lsp-mode . lsp-ui-mode)

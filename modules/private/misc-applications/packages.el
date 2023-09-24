@@ -54,6 +54,8 @@
 (package! zone-rainbow)
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
+(package! xkcd)                         ; TODO copy from Tecosaur
+(package! selectric-mode)
 
 ;; Music
 (package! somafm)
