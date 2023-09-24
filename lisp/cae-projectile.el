@@ -65,7 +65,10 @@
               which-key-replacement-alist)))
   (defalias 'projectile-find-file #'project-find-file)
   (defalias 'projectile-project-root
-    (lambda (&optional dir) (project-root (project-current nil dir))))
+    (lambda (&optional dir)
+      (if-let ((proj (project-current nil dir)))
+          (project-root proj)
+        dir)))
   (defvar projectile-before-switch-project-hook nil)
   (defvar projectile-after-switch-project-hook nil)
   (defvar projectile-project-name-function
