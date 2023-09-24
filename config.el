@@ -854,12 +854,12 @@
                 (cae-defun cae-aas-load-embark-h ()
                   (require 'embark)))
     (aas-set-snippets 'global
-                      ";--" "—"
-                      ";-." "→"
-                      ";=." "⇒"
-                      ";!=" "≠"
-                      "-." "->"
-                      "=." "=>"))
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"))
 
   (use-package! smart-semicolon
     :defer t :init
