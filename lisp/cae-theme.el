@@ -5,18 +5,19 @@
 ;; Make Org headlines respect the heading backgrounds.
 (advice-add #'org-fold-core-region :around #'cae-org-fold-region-a)
 (defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
-  (if (and (eq to (point-max)) (not (eq from to)) flag)
-      (setq to (1- to)))
-  (funcall oldfun from to flag spec-or-alias)
-  (remove-overlays from (1+ to) 'cae-org-fold-heading t)
-  (when flag
-    (let ((o (make-overlay to (1+ to) nil 'front-advance)))
-      (overlay-put o 'evaporate t)
-      (overlay-put o 'cae-org-fold-heading t)
-      (overlay-put o 'face
-                   (save-excursion (goto-char from)
-                                   (face-at-point)))
-      (overlay-put o 'display "\n"))))
+  (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
+    (when shift-fold-p
+        (setq to (1- to)))
+    (funcall oldfun from to flag spec-or-alias)
+    (remove-overlays from (1+ to) 'cae-org-fold-heading t)
+    (when flag
+      (let ((o (make-overlay to (1+ to) nil 'front-advance)))
+        (overlay-put o 'evaporate t)
+        (overlay-put o 'cae-org-fold-heading t)
+        (overlay-put o 'face
+                     (intern (concat "org-level-" (number-to-string (org-current-level)))))
+        (when shift-fold-p
+          (overlay-put o 'display "\n"))))))
 
 (defun cae-theme-customize-faces-h (_)
   (when (modulep! :lang org)
