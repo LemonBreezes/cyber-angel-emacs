@@ -46,14 +46,6 @@
     (require 'org-modern)
     (global-org-modern-mode +1))
   :config
-  (setq org-modern-todo nil)
-  (after! spell-fu
-    (cl-pushnew 'org-modern-tag (alist-get 'org-mode +spell-excluded-faces-alist))))
-
-(use-package! org-modern
-  :unless (cae-tty-disable-unicode-p)
-  :hook (org-mode . org-modern-mode)
-  :config
   (setq org-modern-star '("◉" "○" "✸" "✿" "✤" "✜" "◆" "▶")
         org-modern-table-vertical 1
         org-modern-table-horizontal 0.2
