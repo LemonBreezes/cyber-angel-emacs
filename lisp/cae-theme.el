@@ -78,7 +78,7 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (setq modus-themes-org-blocks 'gray-background
+  (setq! modus-themes-org-blocks 'gray-background
         modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-variable-pitch-ui t
@@ -161,7 +161,7 @@
     (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
     (cae-theme-export-using-pywal)))
 
-(after! org
+(after! ox-latex
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
 (after! org-src
   (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t))))
