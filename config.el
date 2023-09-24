@@ -1086,6 +1086,22 @@
 (add-hook 'display-line-numbers-mode-hook #'+setup-text-mode-left-margin)
 (add-hook 'text-mode-hook #'+setup-text-mode-left-margin)
 
+(defadvice! +org-indent--reduced-text-prefixes ()
+  :after #'org-indent--compute-prefixes
+  (setq org-indent--text-line-prefixes
+        (make-vector org-indent--deepest-level nil))
+  (when (> org-indent-indentation-per-level 0)
+    (dotimes (n org-indent--deepest-level)
+      (aset org-indent--text-line-prefixes
+            n
+            (org-add-props
+                (concat (make-string (* n (1- org-indent-indentation-per-level))
+                                     ?\s)
+                        (if (> n 0)
+                             (char-to-string org-indent-boundary-char)
+                          "\u200b"))
+                nil 'face 'org-indent)))))
+
 (defadvice! +doom/toggle-line-numbers--call-hook-a ()
   :after #'doom/toggle-line-numbers
   (run-hooks 'display-line-numbers-mode-hook))
