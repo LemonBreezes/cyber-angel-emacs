@@ -74,8 +74,7 @@
   (map! :leader
         "SPC" #'consult-fd
         "DEL" #'consult-fd
-        ;;"p" project-prefix-map
-        )
+        "p" project-prefix-map)
   (after! project
     (map! :map project-prefix-map
           "t" #'magit-todo-list
