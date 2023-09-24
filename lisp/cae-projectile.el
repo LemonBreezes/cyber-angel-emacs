@@ -75,6 +75,10 @@
         "SPC" #'consult-fd
         "DEL" #'consult-fd
         "p" project-prefix-map)
+  (setq project-switch-commands
+        '((project-find-file "Find file") (project-find-regexp "Find regexp")
+          (project-find-dir "Find directory") (magit-status "Magit")
+          (project-eshell "Eshell")))
   (advice-add #'project-switch-project :before
               (cae-defun cae-project-switch-action-a (dir)
                 (+workspaces-switch-to-project-h dir))))
