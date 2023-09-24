@@ -24,27 +24,27 @@
                      (bound-and-true-p cae-config-finished-loading))
             (add-hook 'write-file-functions 'eval-buffer 1 t))
 
-            (when (functionp 'apheleia-mode)
-              (apheleia-mode +1))
+          (when (functionp 'apheleia-mode)
+            (apheleia-mode +1))
 
-            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
-            (setq-local blamer--block-render-p t)
+          ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
+          (setq-local blamer--block-render-p t)
 
-            ;; Automatically update Eshell aliases.
-            (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
-                       (file-equal-p (buffer-file-name)
-                                     (bound-and-true-p eshell-aliases-file))
-                       (fboundp 'eshell-read-aliases-list))
-              (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
+          ;; Automatically update Eshell aliases.
+          (when (and (buffer-file-name) (bound-and-true-p eshell-aliases-file)
+                     (file-equal-p (buffer-file-name)
+                                   (bound-and-true-p eshell-aliases-file))
+                     (fboundp 'eshell-read-aliases-list))
+            (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
 
-            (setq-local jinx-local-words "cae corfu eshell")
+          (setq-local jinx-local-words "cae corfu eshell")
 
-            ;; Automatically commit saved files to Git and push them to the
-            ;; remote.
-            (when (and (buffer-file-name)
-                       (not (file-in-directory-p (buffer-file-name)
-                                                 (concat doom-private-dir "secrets/")))
-                       (require 'git-auto-commit-mode nil t))
-              (git-auto-commit-mode 1)
-              (setq-local gac-automatically-push-p t))))))
+          ;; Automatically commit saved files to Git and push them to the
+          ;; remote.
+          (when (and (buffer-file-name)
+                     (not (file-in-directory-p (buffer-file-name)
+                                               (concat doom-private-dir "secrets/")))
+                     (require 'git-auto-commit-mode nil t))
+            (git-auto-commit-mode 1)
+            (setq-local gac-automatically-push-p t))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
