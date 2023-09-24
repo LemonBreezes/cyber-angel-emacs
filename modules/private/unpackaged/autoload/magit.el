@@ -10,8 +10,8 @@ command was called, go to its unstaged changes section."
           (or
            (project-root (project-current))
            (when buffer-file-name
-                (file-relative-name buffer-file-name
-                                    (locate-dominating-file buffer-file-name ".git")))))
+             (file-relative-name buffer-file-name
+                                 (locate-dominating-file buffer-file-name ".git")))))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
     (call-interactively #'magit-status)
     (let ((ignore-window-parameters t))
