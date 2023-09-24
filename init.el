@@ -134,11 +134,11 @@
        dired
        lisp
        misc-applications
-       modeline
-       unpackaged
-       vc
-       org
-       ai
+       ;modeline
+       ;unpackaged
+       ;vc
+       ;org
+       ;ai
        gnus
        )
 
