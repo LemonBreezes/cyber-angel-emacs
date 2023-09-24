@@ -66,7 +66,12 @@
   (defalias 'projectile-find-file #'project-find-file)
   (defalias 'projectile-project-root
     (lambda (&optional dir) (project-root (project-current nil dir))))
+  (defvar projectile-before-switch-project-hook nil)
+  (defvar projectile-after-switch-project-hook nil)
   (map! :leader
         "SPC" #'consult-fd
         "DEL" #'consult-fd
-        "p" project-prefix-map))
+        "p" project-prefix-map)
+  (advice-add #'project-switch-project :before
+              (cae-defun cae-project-switch-action-a (dir)
+                (+workspaces-switch-to-project-h dir))))
