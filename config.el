@@ -299,10 +299,6 @@
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t))
 
-  (after! flymake
-    (unless cae-config-finished-loading
-      (setq flymake-show-diagnostics-at-end-of-line t)))
-
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
 
