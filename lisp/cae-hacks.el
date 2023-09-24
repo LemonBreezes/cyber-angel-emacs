@@ -173,6 +173,7 @@ It is meant to be used as a `post-gc-hook'."
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
 
+;; This function gives too many errors.
 (advice-add #'magit-section-post-command-hook
             :around
             (cae-defun cae-ignore-errors-a (oldfun &rest args)
