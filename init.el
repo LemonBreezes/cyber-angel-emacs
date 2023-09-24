@@ -55,7 +55,8 @@
        (window-select +numbers)
        ophints
        treemacs
-       unicode
+       ;;unicode
+       zen
 
        :editor
        file-templates
@@ -103,6 +104,7 @@
        (solidity +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
+       (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
 
        :os
        (:if IS-MAC macos)
