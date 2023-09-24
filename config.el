@@ -1106,6 +1106,8 @@
         org-hide-emphasis-markers t
         org-special-ctrl-k t
         org-highlight-latex-and-related '(native script entities)
+        org-priority-highest ?A
+        org-priority-lowest ?E
         org-priority-faces
         '((?A . 'nerd-icons-red)
           (?B . 'nerd-icons-orange)
