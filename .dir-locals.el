@@ -22,7 +22,7 @@
                      (not (string-match-p "/benchmarks/"
                                           buffer-file-name))
                      (bound-and-true-p cae-config-finished-loading))
-            (add-hook 'write-file-functions 'eval-buffer 1 t)
+            (add-hook 'write-file-functions 'eval-buffer 1 t))
 
             (when (functionp 'apheleia-mode)
               (apheleia-mode +1))
@@ -46,5 +46,5 @@
                                                  (concat doom-private-dir "secrets/")))
                        (require 'git-auto-commit-mode nil t))
               (git-auto-commit-mode 1)
-              (setq-local gac-automatically-push-p t)))))))
+              (setq-local gac-automatically-push-p t))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
