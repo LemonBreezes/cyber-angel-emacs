@@ -139,7 +139,7 @@
        modeline
        unpackaged
        vc
-                                        ;org
+       ;org
        ai
        gnus)
 
