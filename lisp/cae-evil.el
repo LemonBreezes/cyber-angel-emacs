@@ -165,6 +165,16 @@
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
 
+(use-package! evil-textobj-synax
+  :defer t :init
+  (after! evil
+    (map! :map evil-inner-text-objects-map
+          "h" #'evil-i-syntax
+          :map evil-outer-text-objects-map
+          "h" #'evil-a-syntax)))
+  :config
+  (define-key evil-outer-text-objects-map "x" #'evil-textobj-syntax-wordhfa)
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
