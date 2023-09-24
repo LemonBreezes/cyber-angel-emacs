@@ -157,13 +157,12 @@
         :g "M-S-<return>" #'cae-evil-org-insert-todo-heading))
 (map! :leader
       (:prefix "b"
-       :desc "New empty Org buffer" "o" #'+evil-buffer-org-new))
+       :desc "New empty Org buffer" "o" #'cae-evil-buffer-org-new))
 
 (defun cae-evil-mu4e-enter-insert-mode ()
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
-
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
