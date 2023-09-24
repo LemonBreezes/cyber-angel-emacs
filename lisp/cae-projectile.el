@@ -68,4 +68,5 @@
     (lambda (dir) (project-root (project-current nil dir))))
   (map! :leader
         "SPC" #'consult-fd
-        "DEL" #'consult-fd))
+        "DEL" #'consult-fd
+        "p" project-prefix-map))
