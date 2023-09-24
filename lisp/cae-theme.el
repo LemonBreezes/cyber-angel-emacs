@@ -149,3 +149,5 @@
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
+(after! org-src
+  (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t))))
