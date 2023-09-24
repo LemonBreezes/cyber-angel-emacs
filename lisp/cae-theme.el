@@ -7,7 +7,7 @@
 (defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
   (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
     (when shift-fold-p
-        (setq to (1- to)))
+      (setq to (1- to)))
     (funcall oldfun from to flag spec-or-alias)
     (remove-overlays from (1+ to) 'cae-org-fold-heading t)
     (when flag
