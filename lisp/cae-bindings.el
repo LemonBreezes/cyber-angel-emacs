@@ -67,7 +67,8 @@
       "C-x !" #'doom/window-enlargen
       "C-x M-o" #'ace-swap-window
       "C-x M-t" #'transpose-frame
-      "C-x x N" #'cae-make-new-buffer
+      ;;"C-x x N" #'cae-make-new-buffer ;TODO Check if this is necessary next
+                                        ;time I disable Evil.
       "C-x x o" #'ov-clear
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
