@@ -25,13 +25,13 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-init-ui-enabled-p t
+(defvar cae-init-ui-enabled-p nil
   "Whether our UI section of `config.el' is enabled.")
-(defvar cae-init-tools-enabled-p t
+(defvar cae-init-tools-enabled-p nil
   "Whether our tools section of `config.el' is enabled.")
-(defvar cae-init-editor-enabled-p t
+(defvar cae-init-editor-enabled-p nil
   "Whether our editor section of `config.el' is enabled.")
-(defvar cae-init-autocompletion-enabled-p t
+(defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is enabled.")
 
 (setq evil-undo-system 'undo-fu
