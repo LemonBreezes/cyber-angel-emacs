@@ -9,8 +9,6 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   flymake-popon
-                   popon
                    projectile
                    treemacs-projectile
                    ibuffer-projectile)
