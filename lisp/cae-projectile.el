@@ -82,8 +82,10 @@
           "x" #'doom/open-project-scratch-buffer
           "X" #'doom/switch-to-project-scratch-buffer)
     (setq +workspaces-switch-project-function #'ignore
-          project-switch-commands '((consult-fd "Find file" "f") (+default/search-project "Search regexp" "s")
-                                    (project-find-dir "Find directory") (magit-status "Magit status" "g")
+          project-switch-commands `((consult-fd "Find file" "f")
+                                    (+default/search-project "Search regexp" "s")
+                                    (project-find-dir "Find directory")
+                                    (cae-unpackaged-magit-status "Magit status" "g")
                                     (project-eshell "Eshell")))
     (advice-add #'project-switch-project :before
                 (cae-defun cae-project-switch-action-a (dir)
