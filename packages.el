@@ -11,7 +11,8 @@
                    elfeed-goodies
                    projectile
                    treemacs-projectile
-                   ibuffer-projectile)
+                   ibuffer-projectile
+                   yasnippet-capf)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
@@ -21,6 +22,9 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
+(when (and (modulep! :completion corfu)
+           (modulep! :editor snippets))
+  (package! yasnippet-capf))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
