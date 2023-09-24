@@ -1113,6 +1113,7 @@
           org-image-actual-width t
           org-log-done 'time
           org-log-done-with-time t
+          org-hide-leading-stars nil
           org-ellipsis " ..."
           org-archive-location (concat org-directory ".archive/%s::")
           org-hide-emphasis-markers t
