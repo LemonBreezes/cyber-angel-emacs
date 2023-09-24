@@ -104,8 +104,8 @@
   (when (eq evil-state 'normal)
     (evil-append-line 1)))
 
-;;;###autoload (autoload '+evil-buffer-org-new "autoload/cae-evil" nil t)
-(evil-define-command +evil-buffer-org-new (count file)
+;;;###autoload (autoload 'cae-evil-buffer-org-new "autoload/cae-evil" nil t)
+(evil-define-command cae-evil-buffer-org-new (count file)
   "Creates a new ORG buffer replacing the current window, optionally
    editing a certain FILE"
   :repeat nil
