@@ -67,4 +67,5 @@
   (defalias 'projectile-project-root
     (lambda (dir) (project-root (project-current nil dir))))
   (map! :leader
-        [remap projectile-find-file] #'consult-fd))
+        "SPC" #'consult-fd
+        "DEL" #'consult-fd))
