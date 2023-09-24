@@ -1106,6 +1106,8 @@
     (setq calendar-week-start-day 1
           calendar-mark-diary-entries-flag t))
 
+  (setq-hook! org-mode
+    org-hide-leading-stars nil)
   (after! org
     (setq org-directory "~/org/"
           org-extend-today-until 4
@@ -1113,7 +1115,6 @@
           org-image-actual-width t
           org-log-done 'time
           org-log-done-with-time t
-          org-hide-leading-stars nil
           org-ellipsis " ..."
           org-archive-location (concat org-directory ".archive/%s::")
           org-hide-emphasis-markers t
