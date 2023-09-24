@@ -134,7 +134,7 @@
        dired
        lisp
                                         ;misc-applications
-       modeline
+                                        ;modeline
                                         ;unpackaged
                                         ;vc
                                         ;org
