@@ -1114,6 +1114,11 @@
           (?C . 'nerd-icons-yellow)
           (?D . 'nerd-icons-green)
           (?E . 'nerd-icons-blue))
+        org-agenda-deadline-faces
+        '((1.001 . error)
+          (1.0 . org-warning)
+          (0.5 . org-upcoming-deadline)
+          (0.0 . org-upcoming-distant-deadline))
         ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
