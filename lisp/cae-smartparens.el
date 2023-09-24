@@ -58,7 +58,8 @@
                 ("M-h" . evil-cp-beginning-of-defun)))
         (add-hook 'prog-mode-hook #'evil-cleverparens-mode)
         (dolist (mode sp-lisp-modes)
-          (add-hook mode #'evil-cleverparens-mode))
+          (add-hook mode (cae-defun cae-enable-evil-cleverparens-mode ()
+                           (evil-cleverparens-mode +1))))
         :custom ((evil-cleverparens-use-s-and-S nil)
                  (evil-cleverparens-swap-move-by-word-and-symbol nil))
         :config
