@@ -26,6 +26,7 @@
                              (magit-pull "--rebase" "--autostash")
                              (magit-revert "--autostash")))
     (when (modulep! :tools magit +forge)
+      (advice-remove #'forge-get-repository #'+magit--forge-get-repository-lazily-a)
       (map! :map magit-status-mode-map
             ;; Killing the Magit status buffer removes the `forge-pull' progress
             ;; from the modeline. One alternative is setting
