@@ -68,6 +68,9 @@
     (lambda (&optional dir) (project-root (project-current nil dir))))
   (defvar projectile-before-switch-project-hook nil)
   (defvar projectile-after-switch-project-hook nil)
+  (defvar projectile-project-name-function
+    (lambda (dir)
+      (project-name (project-current nil dir))))
   (map! :leader
         "SPC" #'consult-fd
         "DEL" #'consult-fd
