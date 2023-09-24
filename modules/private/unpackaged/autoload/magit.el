@@ -6,9 +6,12 @@
 If a file was visited in the buffer that was active when this
 command was called, go to its unstaged changes section."
   (interactive)
-  (let* ((buffer-file-path (when buffer-file-name
-                             (file-relative-name buffer-file-name
-                                                 (locate-dominating-file buffer-file-name ".git"))))
+  (let* ((buffer-file-path
+          (or
+           (project-root (project-current))
+           (when buffer-file-name
+                (file-relative-name buffer-file-name
+                                    (locate-dominating-file buffer-file-name ".git")))))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
     (call-interactively #'magit-status)
     (let ((ignore-window-parameters t))
