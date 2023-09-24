@@ -33,6 +33,12 @@
   "Whether our editor section of `config.el' is enabled.")
 (defvar cae-init-autocompletion-enabled-p nil
   "Whether our autocompletion section of `config.el' is enabled.")
+(defvar cae-init-text-enabled-p nil
+  "Whether our text section of `config.el' is enabled.")
+(defvar cae-init-email-enabled-p nil
+  "Whether our email section of `config.el' is enabled.")
+(defvar cae-init-term-enabled-p nil
+  "Whether our term section of `config.el' is enabled.")
 
 (setq evil-undo-system 'undo-fu
       evil-want-C-u-scroll t
@@ -133,7 +139,7 @@
        modeline
        unpackaged
        vc
-       org
+       ;org
        ai
        gnus)
 
