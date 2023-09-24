@@ -58,7 +58,7 @@
        workspaces
        (window-select +numbers)
        ophints
-       treemacs
+       ;;treemacs
        ;;unicode
        ;;zen
 
