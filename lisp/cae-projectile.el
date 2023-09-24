@@ -75,8 +75,9 @@
     (lambda (dir)
       (project-name (project-current nil dir))))
   (map! :leader
-        "SPC" #'consult-fd
-        "DEL" #'consult-fd
+        (:when (modulep! :editor evil)
+         "SPC" #'consult-fd
+         "DEL" #'consult-fd)
         "p" project-prefix-map)
   (after! project
     (map! :map project-prefix-map
