@@ -128,16 +128,6 @@ It is meant to be used as a `post-gc-hook'."
 ;; sporadically for me.
 (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
 
-;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
-;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
-(defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
-  :override #'projectile-skel-dir-locals
-  (interactive "*P\nP")
-  (skeleton-proxy-new
-   '(nil "((nil . (" ("" '(projectile-skel-variable-cons) n)
-     resume: ")))")
-   str arg))
-
 ;; For backwards compatibility.
 (defun toggle-read-only (arg)
   (read-only-mode
@@ -182,3 +172,8 @@ It is meant to be used as a `post-gc-hook'."
       monroe-mode racket-mode racket-repl-mode
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
+
+(advice-add #'magit-section-post-command-hook
+            :around
+            (cae-defun cae-ignore-errors-a (oldfun &rest args)
+              (ignore-errors (apply oldfun args))))
