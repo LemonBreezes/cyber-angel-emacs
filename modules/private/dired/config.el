@@ -56,6 +56,7 @@
         "C-M-k" #'dired-kill-subdir
         "K" #'dired-kill-subdir
         "I" #'dired-insert-subdir
+        [remap dired-do-man] #'woman-dired-find-file
         :ng "_" #'dired-up-directory
         "[" #'dired-prev-dirline
         "]" #'dired-next-dirline
