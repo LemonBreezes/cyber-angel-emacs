@@ -81,8 +81,7 @@
           "." #'+default/search-project-for-symbol-at-point
           "x" #'doom/open-project-scratch-buffer
           "X" #'doom/switch-to-project-scratch-buffer)
-    (add-to-list 'project-switch-commands
-                 '(magit-status "Magit"))
+    (setq project-switch-commands #'find-file)
     (advice-add #'project-switch-project :before
                 (cae-defun cae-project-switch-action-a (dir)
                   (+workspaces-switch-to-project-h dir)))))
