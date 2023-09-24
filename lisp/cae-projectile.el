@@ -81,7 +81,10 @@
           "." #'+default/search-project-for-symbol-at-point
           "x" #'doom/open-project-scratch-buffer
           "X" #'doom/switch-to-project-scratch-buffer)
-    (setq +workspaces-switch-project-function #'ignore)
+    (setq +workspaces-switch-project-function #'ignore
+          project-switch-commands '((consult-fd "Find file" "f") (+default/search-project "Find regexp" "g")
+                                    (project-find-dir "Find directory") (project-vc-dir "VC-Dir")
+                                    (project-eshell "Eshell")))
     (advice-add #'project-switch-project :before
                 (cae-defun cae-project-switch-action-a (dir)
                   (+workspaces-switch-to-project-h dir)))))
