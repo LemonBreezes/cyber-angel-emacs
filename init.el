@@ -133,12 +133,12 @@
        exwm
        dired
        lisp
-                                        ;misc-applications
-                                        ;modeline
-                                        ;unpackaged
-                                        ;vc
-                                        ;org
-                                        ;ai
+       misc-applications
+       modeline
+       unpackaged
+       vc
+       org
+       ai
        gnus
        )
 
