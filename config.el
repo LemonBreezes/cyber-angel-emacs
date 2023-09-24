@@ -967,7 +967,7 @@
 
   (use-package! beginend
     :defer t :init
-    (add-hook 'doom-first-input-hook beginend-global-mode)
+    (add-hook 'doom-first-input-hook #'beginend-global-mode)
     ;; This patches around this function not being compatible with Evil when
     ;; `evil-move-beyond-eol' is `nil'.
     (advice-add #'beginend-prog-mode-goto-end :before #'end-of-line)))
