@@ -88,7 +88,7 @@
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
 (package! beginend)
-(package! cae-cheatsheets)
+(package! cae-cheatsheets :recipe (:host github :repo "LemonBreezes/cae-cheatsheets"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
