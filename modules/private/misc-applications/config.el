@@ -436,6 +436,9 @@
   (defvar +bubbles--old-wconf nil)
   (map! :map +misc-applications-games-map
         "b" #'+bubbles)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "b" "Bubbles"))
   :config
   (when (modulep! :editor evil)
     (after! evil-snipe
