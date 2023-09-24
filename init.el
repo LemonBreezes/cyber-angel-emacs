@@ -130,7 +130,7 @@
        (debugger +lsp)
        ;;(dirvish +icons +dirvish)
        eshell
-       exwm
+       ;;exwm
        dired
        lisp
        misc-applications
