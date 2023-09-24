@@ -13,6 +13,8 @@
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
+(load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
+                                        ;is also our Projectile configuration.
 (when (modulep! :editor evil)
   (load! "lisp/cae-evil"))
 
@@ -379,8 +381,6 @@
 ;;; Tools
 
 (when cae-init-tools-enabled-p
-  (load! "lisp/cae-projectile")
-
   ;; Set up the default browser.
   (after! browse-url
     (setq browse-url-browser-function
@@ -828,7 +828,7 @@
           outline-font-lock-keywords nil)
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
-                                               "C-c @" "outline")))
+        "C-c @" "outline")))
 
   (use-package! embark
     :defer t :config
@@ -1042,195 +1042,195 @@
 
 ;;; Term
 
-;; Enable Fish autocompletion in `read-shell-command'.
-(advice-add #'shell-completion-vars :after #'fish-completion-mode)
+(when cae-init-term-enabled-p
+  ;; Enable Fish autocompletion in `read-shell-command'.
+  (advice-add #'shell-completion-vars :after #'fish-completion-mode)
 
-(after! em-glob
-  ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
-  (setq eshell-error-if-no-glob nil))
+  (after! em-glob
+    ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
+    (setq eshell-error-if-no-glob nil))
 
-(after! vterm
-  (setq vterm-max-scrollback 100000))
+  (after! vterm
+    (setq vterm-max-scrollback 100000))
 
-(after! em-term
-  ;; Some of the commands I copied from other configurations and will likely
-  ;; never use.
-  (setq eshell-visual-commands
-        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
-        eshell-visual-subcommands `(("gh" "repo" "fork")
-                                    ("geth" "attach")
-                                    ,@(unless (string= (getenv "GIT_PAGER") "cat")
-                                        '(("git" "log" "diff" "show"))))
-        eshell-visual-options '(("git" "--help" "--paginate"))))
+  (after! em-term
+    ;; Some of the commands I copied from other configurations and will likely
+    ;; never use.
+    (setq eshell-visual-commands
+          '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+            "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+            "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+            "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+            "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+          eshell-visual-subcommands `(("gh" "repo" "fork")
+                                      ("geth" "attach")
+                                      ,@(unless (string= (getenv "GIT_PAGER") "cat")
+                                          '(("git" "log" "diff" "show"))))
+          eshell-visual-options '(("git" "--help" "--paginate"))))
 
-;; Do not spam my terminal with escape sequences when `wal' exports colors.
-(when (executable-find "wal")
-  (add-hook 'comint-preoutput-filter-functions
-            (cae-defun cae-filter-wal-sequences (s)
-              (if (string-prefix-p "]4;0;#" s)
-                  "" s))))
+  ;; Do not spam my terminal with escape sequences when `wal' exports colors.
+  (when (executable-find "wal")
+    (add-hook 'comint-preoutput-filter-functions
+              (cae-defun cae-filter-wal-sequences (s)
+                (if (string-prefix-p "]4;0;#" s)
+                    "" s)))))
 
 
 ;;; Text
 
-(remove-hook 'text-mode-hook #'visual-line-mode)
-(add-hook 'text-mode-hook #'auto-fill-mode)
-(remove-hook 'text-mode-hook #'display-line-numbers-mode)
+(when cae-init-text-enabled-p
+  (remove-hook 'text-mode-hook #'visual-line-mode)
+  (add-hook 'text-mode-hook #'auto-fill-mode)
+  (remove-hook 'text-mode-hook #'display-line-numbers-mode)
 
-;; Margin in text mode without line numbers.
-(defvar +text-mode-left-margin-width 1
-  "The `left-margin-width' to be used in `text-mode' buffers.")
+  ;; Margin in text mode without line numbers.
+  (defvar +text-mode-left-margin-width 1
+    "The `left-margin-width' to be used in `text-mode' buffers.")
 
-(defun +setup-text-mode-left-margin ()
-  (when (and (derived-mode-p 'text-mode)
-             (not (and (bound-and-true-p visual-fill-column-mode)
-                       visual-fill-column-center-text))
-             (eq (current-buffer) ; Check current buffer is active.
-                 (window-buffer (frame-selected-window))))
-    (setq left-margin-width (if display-line-numbers
-                                0 +text-mode-left-margin-width))
-    (set-window-buffer (get-buffer-window (current-buffer))
-                       (current-buffer))))
+  (defun +setup-text-mode-left-margin ()
+    (when (and (derived-mode-p 'text-mode)
+               (not (and (bound-and-true-p visual-fill-column-mode)
+                         visual-fill-column-center-text))
+               (eq (current-buffer)     ; Check current buffer is active.
+                   (window-buffer (frame-selected-window))))
+      (setq left-margin-width (if display-line-numbers
+                                  0 +text-mode-left-margin-width))
+      (set-window-buffer (get-buffer-window (current-buffer))
+                         (current-buffer))))
 
-(add-hook 'window-configuration-change-hook #'+setup-text-mode-left-margin)
-(add-hook 'display-line-numbers-mode-hook #'+setup-text-mode-left-margin)
-(add-hook 'text-mode-hook #'+setup-text-mode-left-margin)
+  (add-hook 'window-configuration-change-hook #'+setup-text-mode-left-margin)
+  (add-hook 'display-line-numbers-mode-hook #'+setup-text-mode-left-margin)
+  (add-hook 'text-mode-hook #'+setup-text-mode-left-margin)
 
-(defadvice! +doom/toggle-line-numbers--call-hook-a ()
-  :after #'doom/toggle-line-numbers
-  (run-hooks 'display-line-numbers-mode-hook))
+  (defadvice! +doom/toggle-line-numbers--call-hook-a ()
+    :after #'doom/toggle-line-numbers
+    (run-hooks 'display-line-numbers-mode-hook))
 
-(after! calendar
-  (setq calendar-week-start-day 1
-        calendar-mark-diary-entries-flag t))
+  (after! calendar
+    (setq calendar-week-start-day 1
+          calendar-mark-diary-entries-flag t))
 
-(after! org
-  (setq org-directory "~/org/"
-        org-extend-today-until 4
-        org-startup-with-inline-images t
-        org-image-actual-width t
-        org-log-done 'time
-        org-log-done-with-time t
-        org-ellipsis " ..."
-        org-archive-location (concat org-directory ".archive/%s::")
-        org-hide-emphasis-markers t
-        org-special-ctrl-k t
-        org-highlight-latex-and-related '(native script entities)
-        org-priority-highest ?A
-        org-priority-lowest ?E
-        org-priority-faces
-        '((?A . 'nerd-icons-red)
-          (?B . 'nerd-icons-orange)
-          (?C . 'nerd-icons-yellow)
-          (?D . 'nerd-icons-green)
-          (?E . 'nerd-icons-blue))
-        org-agenda-deadline-faces
-        '((1.001 . error)
-          (1.0 . org-warning)
-          (0.5 . org-upcoming-deadline)
-          (0.0 . org-upcoming-distant-deadline))
-        ;; All my computers use 64-bit processors
-        org-read-date-force-compatible-dates nil)
-  (when (modulep! :lang org +roam2)
-    (setq +org-roam-auto-backlinks-buffer nil))
-  (map! :map org-mode-map
-        "C-c C-M-h" #'er/mark-org-code-block)
-  (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
-  (after! org-list
-    (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
-  (after! ob-core
-    ;; Export commments by default.
-    (setq org-babel-default-header-args
-          '((:session . "none")
-            (:results . "replace")
-            (:exports . "code")
-            (:cache . "no")
-            (:noweb . "no")
-            (:hlines . "no")
-            (:tangle . "no")
-            (:comments . "link"))))
-  (after! ox
-    (setq org-export-allow-bind-keywords t))
-  (after! org-crypt
-    (setq org-crypt-disable-auto-save 'encrypt))
-  (after! org-agenda
-    (setq org-agenda-sticky nil
-          org-agenda-files '("~/org/")))
+  (after! org
+    (setq org-directory "~/org/"
+          org-extend-today-until 4
+          org-startup-with-inline-images t
+          org-image-actual-width t
+          org-log-done 'time
+          org-log-done-with-time t
+          org-ellipsis " ..."
+          org-archive-location (concat org-directory ".archive/%s::")
+          org-hide-emphasis-markers t
+          org-special-ctrl-k t
+          org-highlight-latex-and-related '(native script entities)
+          org-priority-highest ?A
+          org-priority-lowest ?E
+          org-priority-faces
+          '((?A . 'nerd-icons-red)
+            (?B . 'nerd-icons-orange)
+            (?C . 'nerd-icons-yellow)
+            (?D . 'nerd-icons-green)
+            (?E . 'nerd-icons-blue))
+          org-agenda-deadline-faces
+          '((1.001 . error)
+            (1.0 . org-warning)
+            (0.5 . org-upcoming-deadline)
+            (0.0 . org-upcoming-distant-deadline))
+          ;; All my computers use 64-bit processors
+          org-read-date-force-compatible-dates nil)
+    (when (modulep! :lang org +roam2)
+      (setq +org-roam-auto-backlinks-buffer nil))
+    (map! :map org-mode-map
+          "C-c C-M-h" #'er/mark-org-code-block)
+    (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+    (after! org-list
+      (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
+    (after! ob-core
+      ;; Export commments by default.
+      (setq org-babel-default-header-args
+            '((:session . "none")
+              (:results . "replace")
+              (:exports . "code")
+              (:cache . "no")
+              (:noweb . "no")
+              (:hlines . "no")
+              (:tangle . "no")
+              (:comments . "link"))))
+    (after! ox
+      (setq org-export-allow-bind-keywords t))
+    (after! org-crypt
+      (setq org-crypt-disable-auto-save 'encrypt))
+    (after! org-agenda
+      (setq org-agenda-sticky nil
+            org-agenda-files '("~/org/")))
 
-  (after! which-key
-    (which-key-add-keymap-based-replacements org-mode-map
-                                             "C-c \"" "plot"
-                                             "C-c C-v" "org-babel-map")))
+    (after! which-key
+      (which-key-add-keymap-based-replacements org-mode-map
+        "C-c \"" "plot"
+        "C-c C-v" "org-babel-map"))))
 
 
 ;;; Email
 
-(setq user-full-name "StrawberryTea"
-      user-mail-address "look@strawberrytea.xyz"
-      mail-host-address "strawberrytea.xyz"
-      mail-source-directory "~/.mail/")
+(when cae-init-email-enabled-p
+  (setq user-full-name "StrawberryTea"
+        user-mail-address "look@strawberrytea.xyz"
+        mail-host-address "strawberrytea.xyz"
+        mail-source-directory "~/.mail/")
 
-(autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
-(setq compose-mail-user-agent-warnings nil)
-(after! sendmail
-  (setq send-mail-function #'async-smtpmail-send-it
-        mail-self-blind t))
-(after! message
-  (setq message-send-mail-function #'async-smtpmail-send-it
-        message-default-mail-headers "Bcc: look@strawberrytea.xyz\n"
-        message-forward-as-mime t
-        message-forward-before-signature t)
-  (add-hook 'message-setup-hook #'message-check-recipients))
-(after! smtpmail
-  (setq smtpmail-smtp-server "smtp.fastmail.com"
-        smtpmail-default-smtp-server "smtp.fastmail.com"
-        smtpmail-smtp-service 465
-        smtpmail-stream-type 'tls
-        smtpmail-queue-mail nil
-        smtpmail-queue-dir "~/.mail/queued-mail/"
-        smtpmail-servers-requiring-authorization ".*"
-        smtpmail-smtp-user user-mail-address))
+  (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
+  (setq compose-mail-user-agent-warnings nil)
+  (after! sendmail
+    (setq send-mail-function #'async-smtpmail-send-it
+          mail-self-blind t))
+  (after! message
+    (setq message-send-mail-function #'async-smtpmail-send-it
+          message-default-mail-headers "Bcc: look@strawberrytea.xyz\n"
+          message-forward-as-mime t
+          message-forward-before-signature t)
+    (add-hook 'message-setup-hook #'message-check-recipients))
+  (after! smtpmail
+    (setq smtpmail-smtp-server "smtp.fastmail.com"
+          smtpmail-default-smtp-server "smtp.fastmail.com"
+          smtpmail-smtp-service 465
+          smtpmail-stream-type 'tls
+          smtpmail-queue-mail nil
+          smtpmail-queue-dir "~/.mail/queued-mail/"
+          smtpmail-servers-requiring-authorization ".*"
+          smtpmail-smtp-user user-mail-address))
 
-(setq +notmuch-sync-backend 'mbsync
-      +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
-      +notmuch-mail-folder "~/.mail/fastmail")
-(after! notmuch
-  (map! :map notmuch-search-mode-map
-        "q" #'cae-notmuch-quit))
-(after! notmuch-hello
-  (map! :map notmuch-hello-mode-map
-        "q" #'cae-notmuch-quit))
+  (setq +notmuch-sync-backend 'mbsync
+        +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
+        +notmuch-mail-folder "~/.mail/fastmail")
+  (after! notmuch
+    (map! :map notmuch-search-mode-map
+          "q" #'cae-notmuch-quit))
+  (after! notmuch-hello
+    (map! :map notmuch-hello-mode-map
+          "q" #'cae-notmuch-quit))
 
-(when (modulep! :email mu4e)
-  (map! [remap compose-mail] #'+mu4e/compose))
-(after! mu4e
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "Fastmail"
-            :match-func
-            (lambda (msg)
-              (when msg
-                (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
-            :vars '((user-mail-address . "look@strawberrytea.xyz")
-                    (user-full-name . "StrawberryTea")
-                    (smtpmail-smtp-server . "smtp.fastmail.com")
-                    (smtpmail-default-smtp-server . "smtp.fastmail.com")
-                    (smtpmail-stream-type . tls)
-                    (smtpmail-smtp-service . 465)
-                    (mu4e-trash-folder . "/Fastmail/Trash")
-                    (mu4e-refile-folder . "/Fastmail/Archive")
-                    (mu4e-drafts-folder . "/Fastmail/Drafts")
-                    (mu4e-sent-folder . "/Fastmail/Sent"))))))
+  (when (modulep! :email mu4e)
+    (map! [remap compose-mail] #'+mu4e/compose))
+  (after! mu4e
+    (setq mu4e-contexts
+          `(,(make-mu4e-context
+              :name "Fastmail"
+              :match-func
+              (lambda (msg)
+                (when msg
+                  (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
+              :vars '((user-mail-address . "look@strawberrytea.xyz")
+                      (user-full-name . "StrawberryTea")
+                      (smtpmail-smtp-server . "smtp.fastmail.com")
+                      (smtpmail-default-smtp-server . "smtp.fastmail.com")
+                      (smtpmail-stream-type . tls)
+                      (smtpmail-smtp-service . 465)
+                      (mu4e-trash-folder . "/Fastmail/Trash")
+                      (mu4e-refile-folder . "/Fastmail/Archive")
+                      (mu4e-drafts-folder . "/Fastmail/Drafts")
+                      (mu4e-sent-folder . "/Fastmail/Sent"))))))
 
-(after! org-msg
-  (map! :map org-msg-edit-mode-map
-        :n "G" #'cae-org-msg-goto-body))
-(when (modulep! :email mu4e +org)
-  (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying))
+  (when (modulep! :email mu4e +org)
+    (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying)))
 
 
 ;;; HTML
