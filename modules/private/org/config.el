@@ -93,3 +93,6 @@
 
 (after! ox
   (add-to-list 'org-export-filter-final-output-functions #'cae-org-export-remove-zero-width-space t))
+
+(when (modulep! +pretty)
+  (load! "+pretty"))
