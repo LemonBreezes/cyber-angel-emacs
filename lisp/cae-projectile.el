@@ -74,9 +74,16 @@
   (map! :leader
         "SPC" #'consult-fd
         "DEL" #'consult-fd
-        "p" project-prefix-map)
-  (add-to-list 'project-switch-commands
-               '(magit-status "Magit"))
-  (advice-add #'project-switch-project :before
-              (cae-defun cae-project-switch-action-a (dir)
-                (+workspaces-switch-to-project-h dir))))
+        ;;"p" project-prefix-map
+        )
+  (after! project
+    (map! :map project-prefix-map
+          "t" #'magit-todo-list
+          "." #'+default/search-project-for-symbol-at-point
+          "x" #'doom/open-project-scratch-buffer
+          "X" #'doom/switch-to-project-scratch-buffer)
+    (add-to-list 'project-switch-commands
+                 '(magit-status "Magit"))
+    (advice-add #'project-switch-project :before
+                (cae-defun cae-project-switch-action-a (dir)
+                  (+workspaces-switch-to-project-h dir)))))
