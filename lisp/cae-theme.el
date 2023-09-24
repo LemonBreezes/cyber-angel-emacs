@@ -78,7 +78,7 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (setq! modus-themes-org-blocks 'gray-background
+  (setq modus-themes-org-blocks 'gray-background
         modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-variable-pitch-ui t
