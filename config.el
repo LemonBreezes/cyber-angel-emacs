@@ -959,7 +959,10 @@
 
   (use-package! beginend
     :defer t :init
-    (beginend-global-mode +1)))
+    (beginend-global-mode +1)
+    ;; This patches around this function not being compatible with Evil when
+    ;; `evil-move-beyond-eol' is `nil'.
+    (advice-add #'beginend-prog-mode-goto-end :before #'end-of-line)))
 
 
 ;;; Autocompletion
