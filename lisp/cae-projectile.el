@@ -81,7 +81,7 @@
           "." #'+default/search-project-for-symbol-at-point
           "x" #'doom/open-project-scratch-buffer
           "X" #'doom/switch-to-project-scratch-buffer)
-    (setq project-switch-commands #'consult-fd)
+    (setq +workspaces-switch-project-function nil)
     (advice-add #'project-switch-project :before
                 (cae-defun cae-project-switch-action-a (dir)
                   (+workspaces-switch-to-project-h dir)))))
