@@ -62,7 +62,7 @@
        ophints
        treemacs
        ;;unicode
-       zen
+       ;;zen
 
        :editor
        file-templates
