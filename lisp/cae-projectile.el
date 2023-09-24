@@ -84,7 +84,11 @@
           "t" #'magit-todo-list
           "." #'+default/search-project-for-symbol-at-point
           "x" #'doom/open-project-scratch-buffer
-          "X" #'doom/switch-to-project-scratch-buffer)
+          "X" #'doom/switch-to-project-scratch-buffer
+          "M-x" #'project-execute-extended-command
+          "-" #'project-dired
+          "D" #'project-forget-project)
+    (setq project-vc-extra-root-markers '(".projectile.el" ".project.el" ".project"))
     (setq +workspaces-switch-project-function #'ignore
           project-switch-commands `((consult-fd "Find file" "f")
                                     (+default/search-project "Search regexp" "s")
