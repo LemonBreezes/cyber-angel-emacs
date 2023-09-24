@@ -9,7 +9,7 @@
     (when shift-fold-p
       (setq to (1- to)))
     (funcall oldfun from to flag spec-or-alias)
-    (remove-overlays to (1+ to) 'cae-org-fold-heading t)
+    (remove-overlays from (1+ to) 'cae-org-fold-heading t)
     (when flag
       (let ((o (make-overlay to (1+ to) nil 'front-advance)))
         (overlay-put o 'evaporate t)
