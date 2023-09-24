@@ -139,8 +139,7 @@
        vc
        org
        ai
-       gnus
-       )
+       gnus)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
