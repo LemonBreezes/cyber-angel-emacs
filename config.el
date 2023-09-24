@@ -1120,7 +1120,7 @@
           org-archive-location (concat org-directory ".archive/%s::")
           org-hide-emphasis-markers t
           org-special-ctrl-k t
-          org-highlight-latex-and-related '(native script entities)
+          org-highlight-latex-and-related nil
           org-priority-highest ?A
           org-priority-lowest ?E
           org-priority-faces
