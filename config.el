@@ -298,7 +298,11 @@
           flycheck-posframe-border-use-error-face t))
 
   (after! flymake
-    (setq flymake-show-diagnostics-at-end-of-line t))
+    (setq flymake-show-diagnostics-at-end-of-line t)
+    (add-hook 'emacs-lisp-mode-hook
+              (cae-defun cae-flymake-disable-diagnostics-in-emacs-dir-h ()
+                (when (and (buffer-file-name) (file-in-directory-p (buffer-file-name) doom-emacs-dir))
+                  (setq-local flymake-show-diagnostics-at-end-of-line nil)))))
 
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
