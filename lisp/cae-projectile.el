@@ -80,6 +80,8 @@
          "DEL" #'consult-fd)
         "p" project-prefix-map)
   (after! project
+    (project-forget-projects-under doom-local-dir t)
+    (project-forget-projects-under temporary-file-directory t)
     (map! :map project-prefix-map
           "t" #'magit-todo-list
           "." #'+default/search-project-for-symbol-at-point
