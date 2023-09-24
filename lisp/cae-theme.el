@@ -14,8 +14,7 @@
       (let ((o (make-overlay to (1+ to) nil 'front-advance)))
         (overlay-put o 'evaporate t)
         (overlay-put o 'cae-org-fold-heading t)
-        (overlay-put o 'face
-                     (intern (concat "org-level-" (number-to-string (org-current-level)))))
+        (overlay-put o 'face (progn (goto-char from) (face-at-point)))
         (when shift-fold-p
           (overlay-put o 'display "\n"))))))
 
