@@ -172,8 +172,6 @@
           "h" #'evil-i-syntax
           :map evil-outer-text-objects-map
           "h" #'evil-a-syntax)))
-:config
-(define-key evil-outer-text-objects-map "x" #'evil-textobj-syntax-wordhfa)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
