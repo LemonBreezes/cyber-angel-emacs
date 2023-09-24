@@ -8,8 +8,12 @@
                    rainbow-delimiters
                    volatile-highlights
                    hl-line
+                   elfeed-goodies
                    flymake-popon
-                   elfeed-goodies)
+                   popon
+                   projectile
+                   treemacs-projectile
+                   ibuffer-projectile)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
@@ -83,6 +87,8 @@
 (package! auto-sudoedit :recipe (:host github :repo "LemonBreezes/auto-sudoedit"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
+(package! beginend)
+(package! cae-cheatsheets)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
