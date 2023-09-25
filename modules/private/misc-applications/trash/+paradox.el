@@ -12,6 +12,4 @@
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "e" "emacs packages"))
   :config
-  (paradox-enable)
-  (map! :map paradox-menu-mode-map
-        "<f6>" #'cae-paradox-menu-quick-help))
+  (paradox-enable))
