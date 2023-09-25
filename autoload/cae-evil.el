@@ -24,8 +24,7 @@
                     (make-composed-keymap
                      (current-minor-mode-maps) t)
                     evil-state)))))
-    (which-key--show-keymap nil keymap nil)
-    ))
+    (which-key--show-keymap nil keymap nil t t)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
   "Apply FN from BEG to END."
