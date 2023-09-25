@@ -56,8 +56,6 @@
     "T" "List Emacs timers"))
 (after! timer-list
   (map! :map timer-list-mode-map
-        "<f6>" #'cae-cheatsheets-timer-list
-        :n "<f6>" #'cae-cheatsheets-evil-timer-list
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
       "<f6>" #'cae-cheatsheets-process-menu
