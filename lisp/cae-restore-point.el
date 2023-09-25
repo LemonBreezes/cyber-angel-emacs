@@ -135,7 +135,7 @@
                 evil-end-of-line evil-beginning-of-line evil-first-non-blank
                 evil-end-of-line-or-visual-line evil-beginning-of-visual-line
                 evil-first-non-blank-of-visual-line
-                ;; Moving by words
+                ;; Moving by words/symbols
                 evil-forward-word-end evil-backward-WORD-end
                 evil-backward-word-end evil-backward-word-begin
                 ))))
