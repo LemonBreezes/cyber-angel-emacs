@@ -42,7 +42,3 @@
       (set-face-attribute 'cae-visible-mark-face nil :background (face-background 'match nil t) :foreground "white")
     (set-face-attribute 'cae-visible-mark-face nil :background 'unspecified :foreground 'unspecified))
   (cae-visible-mark-draw-mark))
-
-;;Local Variables:
-;;eval: (when (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
-;;End:
