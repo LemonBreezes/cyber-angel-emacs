@@ -2,7 +2,6 @@
 
 (load! "+visible-mark")
 (load! "+multiple-cursors")
-(load! "+restore-point")
 
 ;; Allow escape to exit the minibuffer.
 (define-key! :keymaps +default-minibuffer-maps
