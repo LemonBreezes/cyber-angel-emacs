@@ -11,6 +11,7 @@
         whisper-use-threads (num-processors)))
 
 (use-package! org-ai
+  :commands (org-ai-on-region)
   :defer t :init
   (map! :desc "org-ai-prefix" "C-c M-a"
         (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
