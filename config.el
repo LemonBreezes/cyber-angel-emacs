@@ -351,12 +351,6 @@
      :show-funs #'macrostep-expand
      :hide-funs #'macrostep-collapse-all
      :keymap 'macrostep-keymap)
-    ;;(after! debug
-    ;;  (map! :map debugger-mode-map
-    ;;        "<f6>" #'cae-debugger-cheatsheet))
-    ;;(after! edebug
-    ;;  (map! :map edebug-mode-map
-    ;;        "<f6>" #'cae-edebug-cheatsheet))
     :config
     (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
