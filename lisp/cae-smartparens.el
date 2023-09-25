@@ -44,6 +44,7 @@
 (when (modulep! :config default +smartparens)
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>")
+    (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
     ;; `sp-up-sexp'.
