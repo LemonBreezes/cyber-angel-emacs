@@ -433,7 +433,7 @@ also marks comment with leading whitespace"
   (interactive "p")
   (insert
    (replace-regexp-in-string
-    "\\`\n" ""
+    "\\s-+" " "
     (with-minibuffer-selected-window
       (unless (and cae-yank-point (eq last-command this-command))
         (setq cae-yank-point (point))
