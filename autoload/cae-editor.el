@@ -431,19 +431,13 @@ also marks comment with leading whitespace"
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
   (interactive "p")
-  (add-hook 'post-command-hook
-            (cae-defun cae-cleanup-yank-overlays ()
-              (when (and isearch-lazy-highlight-overlays
-                         (not (eq this-command
-                                  'cae-yank-word-in-minibuffer)))
-                (lazy-highlight-cleanup t)))
-            nil t)
   (insert
    (replace-regexp-in-string
     "\\`\n" ""
     (with-minibuffer-selected-window
       (unless (and cae-yank-point (eq last-command this-command))
-        (setq cae-yank-point (point)))
+        (setq cae-yank-point (point))
+        (lazy-highlight-cleanup t))
       (save-excursion
         (let  ((beg (progn (goto-char cae-yank-point)
                            cae-yank-point))
