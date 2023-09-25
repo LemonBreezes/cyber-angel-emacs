@@ -41,7 +41,8 @@
 
 (setq evil-undo-system 'undo-fu
       evil-want-C-u-scroll t
-      evil-want-C-u-delete t)
+      evil-want-C-u-delete t
+      evil-want-C-w-delete nil)
 
 (doom! :completion
        (vertico +icons +childframe)
