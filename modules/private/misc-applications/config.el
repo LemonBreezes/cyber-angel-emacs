@@ -190,8 +190,6 @@
   (map! :map leetcode--problems-mode-map
         "q" #'+leetcode-soft-quit
         "Q" #'+leetcode-quit
-        "<f6>" #'cae-cheatsheets-leetcode-problems
-        :n "<f6>" #'cae-cheatsheets-evil-leetcode-problems
         :map leetcode--problem-detail-mode-map
         "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
