@@ -15,10 +15,6 @@
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
 
-(add-hook! 'emacs-lisp-mode-hook
-  (setq-local elisp-flymake-byte-compile-load-path
-              load-path))
-
 ;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
   (defun cae-edebug-compute-previous-result-a (_ &rest r)
