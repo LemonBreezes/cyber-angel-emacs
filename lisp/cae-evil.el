@@ -31,10 +31,8 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
-(when (modulep! :emacs undo)
-  (map! :n "U" (if (modulep! :emacs undo +tree)
-                   #'undo-tree
-                 #'vundo)))
+;; Use `C-a' to append in a more generalized context.
+(map! :n "C-a" #'cae-evil-append-buffer-or-code)
 
 ;; I prefer to not continue comments with o/O in Evil.
 (advice-remove #'evil-open-below #'+evil--insert-newline-below-and-respect-comments-a)
