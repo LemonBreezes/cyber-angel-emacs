@@ -122,4 +122,4 @@
 (defun cae-evil-append-buffer-or-code ()
   (interactive)
   (funcall (key-binding "G"))
-  (evil-append))
+  (call-interactively #'evil-append))
