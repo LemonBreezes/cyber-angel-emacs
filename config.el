@@ -109,7 +109,8 @@
         kill-buffer-delete-auto-save-files t
         window-combination-resize t     ;Take new window space from all other
                                         ;windows (not just current)
-        scroll-preserve-screen-position 'always)
+        scroll-preserve-screen-position 'always
+        suggest-key-bindings nil)
 
   (setq set-message-functions
         '(inhibit-message
