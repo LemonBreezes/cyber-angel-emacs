@@ -8,10 +8,7 @@
                    rainbow-delimiters
                    volatile-highlights
                    hl-line
-                   elfeed-goodies
-                   projectile
-                   treemacs-projectile
-                   ibuffer-projectile)
+                   elfeed-goodies)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
