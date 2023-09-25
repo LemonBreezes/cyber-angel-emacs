@@ -110,7 +110,8 @@
         window-combination-resize t     ;Take new window space from all other
                                         ;windows (not just current)
         scroll-preserve-screen-position 'always
-        suggest-key-bindings nil)
+        suggest-key-bindings nil
+        cursor-in-non-selected-windows t)
 
   (setq set-message-functions
         '(inhibit-message
