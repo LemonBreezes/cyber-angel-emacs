@@ -13,17 +13,19 @@
 ;;;###autoload
 (defun cae-show-normal-state-bindings ()
   (interactive)
-  (setq cae-show-normal-state--map
-        (or (evil-get-auxiliary-keymap
-             (cond ((bound-and-true-p git-timemachine-mode)
-                    git-timemachine-mode-map)
-                   (t (current-local-map)))
-             evil-state)
-            (evil-get-auxiliary-keymap
-             (make-composed-keymap (current-minor-mode-maps) t)
-             evil-state)))
-  (let ((which-key-idle-delay 0))
-    (funcall (cae-oneshot-keymap cae-show-normal-state--map nil))))
+  (let ((keymap
+         (setq cae-show-normal-state--map
+               (or (evil-get-auxiliary-keymap
+                    (cond ((bound-and-true-p git-timemachine-mode)
+                           git-timemachine-mode-map)
+                          (t (current-local-map)))
+                    evil-state t t)
+                   (evil-get-auxiliary-keymap
+                    (make-composed-keymap
+                     (current-minor-mode-maps) t)
+                    evil-state)))))
+    (which-key--show-keymap nil keymap nil)
+    (set-transient-map keymap)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
   "Apply FN from BEG to END."
