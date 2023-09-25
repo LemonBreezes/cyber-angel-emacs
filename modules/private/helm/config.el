@@ -40,10 +40,7 @@ Can be negative.")
           "C-j" #'helm-next-line
           "C-k" #'helm-previous-line
           "C-S-j" #'helm-next-source
-          "C-S-k" #'helm-previous-source
-          ;; This removes a keybinding that copies text from the point to the
-          ;; search query. It seems useful so maybe I'll rebind that in the future.
-          "C-w" #'doom/delete-backward-word)
+          "C-S-k" #'helm-previous-source)
          "C-u" #'helm-delete-minibuffer-contents
          "C-s" #'helm-minibuffer-history
          ;; Swap TAB and C-z
