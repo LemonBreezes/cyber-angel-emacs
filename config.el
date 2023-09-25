@@ -470,9 +470,16 @@
   (after! vertico-multiform
     (setq vertico-multiform-categories
           `((embark-keybinding grid)
-            (consult-grep ,(if (cae-display-graphic-p) 'posframe 'buffer))
-            (imenu ,@(if (cae-display-graphic-p) '(posframe grid) '(grid)))
-            (consult-location ,(if (cae-display-graphic-p) 'posframe 'buffer))
+            (consult-grep
+             ,(if (and (cae-display-graphic-p)
+                       (modulep! :completion vertico +childframe))
+                               'posframe 'buffer))
+            (imenu ,@(if (and (cae-display-graphic-p)
+                              (modulep! :completion vertico +childframe))
+                         '(posframe grid) '(grid)))
+            (consult-location ,(if (and (cae-display-graphic-p)
+                                        (modulep! :completion vertico +childframe))
+                                   'posframe 'buffer))
             (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
