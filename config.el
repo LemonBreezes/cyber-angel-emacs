@@ -346,16 +346,19 @@
       (add-to-list 'beacon-dont-blink-commands cmd)))
 
   (use-package! hercules
-    :defer t :init
-    (after! debug
-      (map! :map debugger-mode-map
-            "<f6>" #'cae-debugger-cheatsheet))
-    (after! edebug
-      (map! :map edebug-mode-map
-            "<f6>" #'cae-edebug-cheatsheet))
-    (after! macrostep
-      (map! :map macrostep-mode-keymap
-            "<f6>" #'cae-macrostep-cheatsheet))
+    :defer t :after which-key
+    (hercules-def
+     :show-funs #'macrostep-expand
+     :keymap 'macrostep-keymap)
+    ;;(after! debug
+    ;;  (map! :map debugger-mode-map
+    ;;        "<f6>" #'cae-debugger-cheatsheet))
+    ;;(after! edebug
+    ;;  (map! :map edebug-mode-map
+    ;;        "<f6>" #'cae-edebug-cheatsheet))
+    ;;(after! macrostep
+    ;;  (map! :map macrostep-mode-keymap
+    ;;        "<f6>" #'cae-macrostep-cheatsheet))
     :config
     (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
