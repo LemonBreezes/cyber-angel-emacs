@@ -128,7 +128,8 @@
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-forward
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward
                 cae-evil-append-buffer-or-code
-                evil-normal-state evil-force-normal-state))))
+                evil-normal-state evil-force-normal-state
+                evil-insert-line evil-append-line))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
@@ -144,8 +145,7 @@
 
                ;; When we're using Evil, we also want to restore point when we
                ;; exit visual state.
-               (advice-add #'evil-exit-visual-state :before #'rp/cond-restore-point)
-               (advice-add #'evil-normal-state :before #'rp/cond-restore-point))
+               (advice-add #'evil-exit-visual-state :before #'rp/cond-restore-point))
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
       (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
       (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
