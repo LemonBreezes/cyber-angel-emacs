@@ -107,7 +107,6 @@
   (add-hook 'prog-mode-hook #'symbol-overlay-mode)
   :config
   (map! :map symbol-overlay-map
-        "<f6>" #'cae-symbol-overlay-cheatsheet
         "N" #'symbol-overlay-switch-forward
         "P" #'symbol-overlay-switch-backward
         "r" #'symbol-overlay-rename
