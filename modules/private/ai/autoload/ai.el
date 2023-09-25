@@ -4,8 +4,8 @@
 (defun cae-org-ai-on-buffer ()
   (interactive)
   (save-mark-and-excursion
-      (mark-whole-buffer)
-      (call-interactively #'org-ai-on-region)))
+    (mark-whole-buffer)
+    (call-interactively #'org-ai-on-region)))
 
 ;;;###autoload
 (defun cae-org-ai-on-region-or-buffer ()
@@ -32,8 +32,8 @@
   (require 'chatgpt-shell)
   (if-let* ((buf (chatgpt-shell--primary-buffer))
             (win (get-buffer-window (chatgpt-shell--primary-buffer))))
-          (delete-window (get-buffer-window (chatgpt-shell--primary-buffer)))
-      (let ((chatgpt-shell-display-function #'pop-to-buffer))
+      (delete-window (get-buffer-window (chatgpt-shell--primary-buffer)))
+    (let ((chatgpt-shell-display-function #'pop-to-buffer))
       (call-interactively #'chatgpt-shell))))
 
 ;;;###autoload
