@@ -50,6 +50,9 @@
     ;; `sp-up-sexp'.
     (setq sp-navigate-interactive-always-progress-point t)
 
+    (setq sp-navigate-reindent-after-up '()
+          sp-navigate-reindent-after-up-in-string nil)
+
     (when (and (modulep! :editor evil)
                (not (modulep! :editor lispy)))
       (use-package! evil-cleverparens
