@@ -90,7 +90,6 @@
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
 (package! beginend)
-(package! cae-cheatsheets :recipe (:host github :repo "LemonBreezes/cae-cheatsheets"))
 (package! isearch-mb)
 
 ;; cae-multi.el
