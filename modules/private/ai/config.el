@@ -16,6 +16,9 @@
         (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
+  (map! :nv "g1" #'cae-evil-org-ai-on-region
+        :nv "g!" #'cae-ai-org-ai-on-buffer
+        "<f5>" #'org-ai-on-region)
   :config
   (require 'whisper)
   (require 'greader-espeak)
@@ -26,9 +29,6 @@
   (map! :map org-ai-global-mode-map
         :prefix ("C-c M-a" . "org-ai")
         "b" #'cae-ai-org-ai-on-buffer)
-  (map! :nv "g1" #'cae-evil-org-ai-on-region
-        :nv "g!" #'cae-ai-org-ai-on-buffer
-        "<f5>" #'org-ai-on-region)
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
