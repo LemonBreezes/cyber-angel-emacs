@@ -25,7 +25,7 @@
                      (current-minor-mode-maps) t)
                     evil-state)))))
     (which-key--show-keymap nil keymap nil)
-    (set-transient-map keymap)))
+    ))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
   "Apply FN from BEG to END."
