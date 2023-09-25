@@ -97,17 +97,6 @@
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
 
-;; Jump to the end of the prompt when entering insert state in a terminal.
-(add-hook 'evil-insert-state-entry-hook
-          (cae-defun cae-goto-end-of-prompt-h ()
-            (cond ((and (bound-and-true-p comint-last-prompt)
-                        (not (eq (point) (point-max))))
-                   (goto-char (point-max)))
-                  ;; eshell
-                  ((and (bound-and-true-p eshell-last-output-end)
-                        (not (>= (point) eshell-last-output-end)))
-                   (goto-char (point-max))))))
-
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
