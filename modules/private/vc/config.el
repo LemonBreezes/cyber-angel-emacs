@@ -113,10 +113,6 @@
 (use-package! embark-vc
   :after embark)
 
-(after! smerge-mode
-  (map! :map smerge-mode-map
-        "<f6>" #'+vc/smerge-hydra/body))
-
 (use-package! blamer
   :defer t :init
   (map! :leader :desc "Blamer" "tB" #'blamer-mode)
