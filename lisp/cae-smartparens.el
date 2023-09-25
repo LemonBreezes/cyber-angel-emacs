@@ -70,7 +70,6 @@
         :config
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
-              :n "<f6>" #'cae-cheatsheets-evil-cleverparens
               [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
 
     (map! :map narrow-map
@@ -103,6 +102,4 @@
                        ;;("C-M-]" . sp-select-next-thing)
                        ;;("C-M-@" . sp-mark-sexp)
                        ("C-M-S-w" . sp-copy-sexp)))
-      (define-key smartparens-mode-map (kbd (car binding)) (cdr binding)))
-
-    (keymap-set smartparens-mode-map "C-M-?" #'cae-cheatsheets-smartparens)))
+      (define-key smartparens-mode-map (kbd (car binding)) (cdr binding)))))
