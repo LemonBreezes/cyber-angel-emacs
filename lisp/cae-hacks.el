@@ -172,9 +172,3 @@ It is meant to be used as a `post-gc-hook'."
       monroe-mode racket-mode racket-repl-mode
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
-
-;; This function gives too many errors. I hate it.
-(advice-add #'magit-section-post-command-hook
-            :around
-            (cae-defun cae-ignore-errors-a (oldfun &rest args)
-              (ignore-errors (apply oldfun args))))
