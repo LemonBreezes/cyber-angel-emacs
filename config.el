@@ -118,6 +118,9 @@
         inhibit-message-regexps '("C-g is undefined$"
                                   "ESC is undefined$"))
 
+  (after! flymake
+    (setq flymake-start-on-flymake-mode nil))
+
   ;; A little bit of margin is nice but I don't like it when I'm in terminal
   ;; popups.
   (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
