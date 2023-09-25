@@ -513,8 +513,6 @@
       "t" "Tetris"))
   :config
   (map! :map tetris-mode-map
-        "<f6>" #'cae-cheatsheets-tetris
-        :n "<f6>" #'cae-cheatsheets-evil-tetris
         :ng "a" #'autotetris-mode
         :ng "q" #'+tetris-quit)
   (map! :map autotetris-mode-map
