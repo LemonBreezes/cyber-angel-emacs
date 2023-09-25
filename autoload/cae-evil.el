@@ -27,9 +27,9 @@
                             (delq general-override-mode-map)
                             (delq evil-snipe-local-mode-map)
                             (delq (let ((mode (cl-find-if (lambda (x)
-                                                           (string-prefix-p "beginend-"
-                                                                            (symbol-name x)))
-                                                         local-minor-modes)))
+                                                            (string-prefix-p "beginend-"
+                                                                             (symbol-name x)))
+                                                          local-minor-modes)))
                                     (when mode
                                       (symbol-value (intern (concat (symbol-name mode) "-map")))))))
                t)
