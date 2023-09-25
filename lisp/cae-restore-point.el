@@ -128,18 +128,6 @@
                 evil-textobj-anyblock-backward-close-block-start
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-forward
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward
-                cae-evil-append-buffer-or-code evil-cp-append
-                evil-normal-state evil-force-normal-state
-                evil-insert-line evil-append-line
-                evil-window-top evil-window-middle evil-window-bottom
-                evil-cp-insert-at-end-of-form
-                evil-cp-insert-at-beginning-of-form
-                evil-cp-insert
-                evil-end-of-line evil-beginning-of-line evil-first-non-blank
-                evil-end-of-line-or-visual-line evil-beginning-of-visual-line
-                evil-first-non-blank-of-visual-line
-                evil-goto-mark-line evil-goto-mark evil-owl-goto-mark
-                evil-owl-goto-mark-line +evil/reselect-paste
                 evil-beginend-bs-mode-goto-end
                 evil-beginend-rg-mode-goto-end
                 evil-beginend-org-mode-goto-end
@@ -188,6 +176,18 @@
                 evil-beginend-magit-revision-mode-goto-beginning
                 evil-beginend-notmuch-search-mode-goto-beginning
                 evil-beginend-recentf-dialog-mode-goto-beginning
+                cae-evil-append-buffer-or-code evil-cp-append
+                evil-normal-state evil-force-normal-state
+                evil-insert-line evil-append-line
+                evil-window-top evil-window-middle evil-window-bottom
+                evil-cp-insert-at-end-of-form
+                evil-cp-insert-at-beginning-of-form
+                evil-cp-insert
+                evil-end-of-line evil-beginning-of-line evil-first-non-blank
+                evil-end-of-line-or-visual-line evil-beginning-of-visual-line
+                evil-first-non-blank-of-visual-line
+                evil-goto-mark-line evil-goto-mark evil-owl-goto-mark
+                evil-owl-goto-mark-line +evil/reselect-paste
                 ;; Moving by words/symbols
                 ;;evil-forward-word-end evil-backward-WORD-end
                 ;;evil-backward-word-end evil-backward-word-begin
