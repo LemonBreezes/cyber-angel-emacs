@@ -71,8 +71,8 @@
     (load! "lisp/cae-theme"))
   (when (modulep! :ui doom-dashboard)
     (load! "lisp/cae-dashboard"))
-  (after! hydra
-    (load! "lisp/cae-hydra"))
+  ;;(after! hydra
+  ;;  (load! "lisp/cae-hydra"))
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
