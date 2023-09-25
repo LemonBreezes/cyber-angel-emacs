@@ -130,7 +130,9 @@
                 cae-evil-append-buffer-or-code evil-cp-append
                 evil-normal-state evil-force-normal-state
                 evil-insert-line evil-append-line
-                evil-window-top evil-window-middle evil-window-bottom))))
+                evil-window-top evil-window-middle evil-window-bottom
+                evil-cp-insert-at-end-of-form
+                evil-cp-insert-at-beginning-of-form))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
