@@ -30,7 +30,6 @@
                           which-key-replacement-alist))))
   (map! (:when (modulep! :completion vertico)
          "C-;" nil
-         "C-S-h" #'embark-bindings
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'cae-embark-act
