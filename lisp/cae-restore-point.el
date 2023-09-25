@@ -72,7 +72,7 @@
                 evil-ex-search-backward evil-find-char-backward
                 evil-forward-WORD-begin evil-forward-word-begin
                 evil-jump-backward-swap evil-backward-WORD-begin
-                evil-backward-word-begin evil-cp-backward-up-sexp
+                 evil-cp-backward-up-sexp
                 evil-forward-section-end evil-search-word-forward
                 evil-backward-section-end evil-cp--backward-up-list
                 evil-delete-backward-char evil-delete-backward-word
@@ -135,8 +135,10 @@
                 evil-end-of-line evil-beginning-of-line evil-first-non-blank
                 evil-end-of-line-or-visual-line evil-beginning-of-visual-line
                 evil-first-non-blank-of-visual-line
+                ;; Moving by words
                 evil-forward-word-end evil-backward-WORD-end
-                evil-backward-word-end))))
+                evil-backward-word-end evil-backward-word-begin
+                ))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
