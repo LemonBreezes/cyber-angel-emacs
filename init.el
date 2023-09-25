@@ -19,7 +19,8 @@
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
 
-(setq native-comp-async-jobs-number (num-processors))
+(setq native-comp-async-jobs-number (num-processors)
+      native-comp-async-report-warnings-errors 'silent)
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
