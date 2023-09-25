@@ -18,11 +18,12 @@
              (cond ((bound-and-true-p git-timemachine-mode)
                     git-timemachine-mode-map)
                    (t (current-local-map)))
-             'normal)))
-  (if cae-show-normal-state--map
-      (let ((which-key-idle-delay 0))
-        (funcall (cae-oneshot-keymap cae-show-normal-state--map nil)))
-    (message "No %s normal state bindings are defined." major-mode)))
+             evil-state)
+            (evil-get-auxiliary-keymap
+             (make-composed-keymap (current-minor-mode-maps) t)
+             evil-state)))
+  (let ((which-key-idle-delay 0))
+    (funcall (cae-oneshot-keymap cae-show-normal-state--map nil))))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
   "Apply FN from BEG to END."
