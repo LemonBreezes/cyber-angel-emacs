@@ -427,11 +427,17 @@ also marks comment with leading whitespace"
   (+exwm-persp--focus-workspace-app))
 
 (defvar cae-yank-point nil)
-(add-hook 'minibuffer-exit-hook #'cae-clean-up-lazy-highlight-h)
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
   (interactive "p")
+  (add-hook 'post-command-hook
+            (cae-defun cae-cleanup-yank-overlays ()
+              (when (and isearch-lazy-highlight-overlays
+                             (not (eq this-command
+                                      'cae-yank-word-in-minibuffer)))
+                    (lazy-highlight-cleanup t)))
+            nil t)
   (insert
    (replace-regexp-in-string
     "\\`\n" ""
