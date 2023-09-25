@@ -834,7 +834,6 @@
 
   (use-package! embark
     :defer t :config
-    (map! :map embark-collect-mode-map "<f6>" #'cae-cheatsheets-embark-collect)
     (after! vertico
       (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
     (advice-add #'embark-completing-read-prompter :around
