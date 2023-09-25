@@ -7,6 +7,14 @@
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
 
+  (use-package! anzu
+    :after-call isearch-mode)
+
+  (use-package! evil-anzu
+    :when (modulep! :editor evil)
+    :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight
+    :config (global-anzu-mode +1))
+
   (use-package! minions
     :defer t :init
     (add-hook 'doom-after-init-hook #'minions-mode)
