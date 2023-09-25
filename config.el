@@ -350,9 +350,7 @@
     (hercules-def
      :show-funs #'macrostep-expand
      :hide-funs #'macrostep-collapse-all
-     :keymap 'macrostep-keymap)
-    :config
-    (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
+     :keymap 'macrostep-keymap))
 
   (use-package! outline-minor-faces
     :defer t :init
