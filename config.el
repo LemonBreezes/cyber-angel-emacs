@@ -349,6 +349,7 @@
     :defer t :after which-key
     (hercules-def
      :show-funs #'macrostep-expand
+     :hide-funs #'macrostep-collapse-all
      :keymap 'macrostep-keymap)
     ;;(after! debug
     ;;  (map! :map debugger-mode-map
