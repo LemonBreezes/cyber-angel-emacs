@@ -159,8 +159,7 @@
           [remap dirvish-emerge-menu] #'cae-dired-dirvish-emerge-menu
           "v" #'dirvish-vc-menu
           "h" #'dirvish-history-jump
-          "j" #'+default/search-buffer
-          "<f6>" #'cae-cheatsheets-dirvish))
+          "j" #'+default/search-buffer))
   (map! :leader
         "o-" #'cae-dired-jump
         "op" #'dirvish-side)
