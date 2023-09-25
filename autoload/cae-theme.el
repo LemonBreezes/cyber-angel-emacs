@@ -48,6 +48,6 @@
   (dolist (buffer (doom-buffers-in-mode 'org-mode (buffer-list)))
     (with-current-buffer buffer
       (+org--toggle-inline-images-in-subtree (point-min) (point-max) 'refresh)
-      (unless (eq org-latex-preview-default-process 'dvisvgm)
+      (unless (eq org-preview-latex-default-process 'dvisvgm)
         (org-clear-latex-preview (point-min) (point-max))
         (org--latex-preview-region (point-min) (point-max))))))
