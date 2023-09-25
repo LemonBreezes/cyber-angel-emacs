@@ -119,7 +119,7 @@
         (setq-local doom-real-buffer-p t)))))
 
 ;;;###autoload
-(defun evil-append-buffer-or-code ()
+(defun cae-evil-append-buffer-or-code ()
   (interactive)
   (funcall (key-binding "G"))
   (evil-append))
