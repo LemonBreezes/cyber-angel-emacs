@@ -35,7 +35,10 @@
           embark-act-key #'cae-embark-act
           embark-act-alt-key #'cae-embark-act
           embark-act-all-key #'embark-act-all
-          embark-act-all-alt-key #'embark-act-all))
+          embark-act-all-alt-key #'embark-act-all)
+         (:map isearch-mode-map
+          [remap isearch-describe-bindings] (cmd! () (embark-bindings-in-keymap isearch-mode-map)
+                                                  (when isearch-mode (isearch-update)))))
         embark-act-key #'cae-embark-act
         embark-act-alt-key #'cae-embark-act
         embark-act-all-key #'embark-act-all
