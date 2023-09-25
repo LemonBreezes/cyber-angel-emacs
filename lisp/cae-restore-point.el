@@ -124,7 +124,8 @@
                 evil-textobj-anyblock-forward-close-block-start
                 evil-textobj-anyblock-backward-close-block-start
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-forward
-                cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward))))
+                cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward
+                cae-evil-append-buffer-or-code))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
