@@ -434,9 +434,9 @@ also marks comment with leading whitespace"
   (add-hook 'post-command-hook
             (cae-defun cae-cleanup-yank-overlays ()
               (when (and isearch-lazy-highlight-overlays
-                             (not (eq this-command
-                                      'cae-yank-word-in-minibuffer)))
-                    (lazy-highlight-cleanup t)))
+                         (not (eq this-command
+                                  'cae-yank-word-in-minibuffer)))
+                (lazy-highlight-cleanup t)))
             nil t)
   (insert
    (replace-regexp-in-string
