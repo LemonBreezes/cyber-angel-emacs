@@ -135,7 +135,7 @@
                 evil-end-of-line-or-visual-line evil-beginning-of-visual-line
                 evil-first-non-blank-of-visual-line
                 evil-goto-mark-line evil-goto-mark evil-owl-goto-mark
-                evil-owl-goto-mark-line
+                evil-owl-goto-mark-line +evil/reselect-paste
                 ;; Moving by words/symbols
                 ;;evil-forward-word-end evil-backward-WORD-end
                 ;;evil-backward-word-end evil-backward-word-begin
