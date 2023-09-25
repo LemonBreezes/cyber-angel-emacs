@@ -74,6 +74,9 @@
     "C-w" nil
     "C-z" nil))
 
+(define-key! :keymaps +default-minibuffer-maps
+  "C-w"    #'cae-yank-word-to-minibuffer)
+
 (after! evil-easymotion
   (map! :map evilem-map
         "RET" #'cae-avy-embark-act-on-region
