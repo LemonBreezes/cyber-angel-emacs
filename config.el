@@ -600,6 +600,9 @@
   ;; Allow us to undo deleting frames.
   (undelete-frame-mode +1)
 
+  ;; Optimization
+  (advice-add 'custom-save-all :override #'ignore)
+
   ;; Automatically deindent items when they are added to the kill ring.
   (add-hook #'doom-first-input-hook #'kill-ring-deindent-mode)
 
