@@ -101,6 +101,7 @@
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
+;; Evil Collection setup.
 (let ((blacklist (append (when (modulep! :config default)
                            (list doom-leader-key doom-localleader-key
                                  doom-leader-alt-key))
