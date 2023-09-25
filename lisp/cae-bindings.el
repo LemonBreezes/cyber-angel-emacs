@@ -31,6 +31,7 @@
   (map! (:when (modulep! :completion vertico)
          "C-;" nil
          "C-S-h" #'embark-bindings
+         "C-S-c" #'embrace-commander
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'cae-embark-act
