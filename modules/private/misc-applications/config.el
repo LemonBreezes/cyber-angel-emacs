@@ -552,7 +552,10 @@
   :config
   (map! :map fireplace-mode-map
         "<f6>" #'cae-cheatsheets-fireplace
-        :ng "q" #'+fireplace-quit))
+        :ng "q" #'+fireplace-quit
+        :n "k" #'fireplace-up
+        :n "j" #'fireplace-down
+        :n "s" #'fireplace-toggle-))
 
 (use-package! flames-of-freedom
   :defer t :init
@@ -700,7 +703,7 @@
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
         :n "w" #'+mpc-other-window-previous
-        :n "RET" #'mpc-play-at-point
+        :n "RET" #'mpc-select
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
         :n "i" #'evilem-motion-next-line
