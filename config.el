@@ -449,7 +449,7 @@
   (after! compile
     ;; Some projects I work on have many warnings I am not interested in and the
     ;; `first-error' value for `compilation-scroll-output' stops scrolling at the
-    ;; first warning. It would be nice if it scrolled to the first error instead.
+
     ;; Since it doesn't though, I just set it to `t' and scroll up manually if
     ;; there are errors.
     (setq compilation-scroll-output t))
@@ -480,7 +480,11 @@
             (consult-location ,(if (and (cae-display-graphic-p)
                                         (modulep! :completion vertico +childframe))
                                    'posframe 'buffer))
-            (t ,(if (cae-display-graphic-p) 'posframe 'flat)))))
+            (t ,(if (cae-display-graphic-p)
+                    (if  (modulep! :completion vertico +childframe)
+                        'posframe
+                      'buffer)
+                  'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
