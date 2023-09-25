@@ -115,7 +115,6 @@
                           (("gnus" visible nil nil)) (("emms" invisible nil nil)))
                          (("hackernews" visible))))
   (map! :map gnus-group-mode-map
-        "<f6>" #'cae-gnus-group-cheatsheet/body
         :n "Tm" #'gnus-topic-move-group))
 
 ;; Summary mode commands for Gnus
@@ -154,9 +153,7 @@
          ;; No auto select
          gnus-auto-select-first nil
          gnus-auto-select-next nil
-         gnus-paging-select-next nil)
-  (map! :map gnus-summary-mode-map
-        "<f6>" #'cae-gnus-summary-cheatsheet/body))
+         gnus-paging-select-next nil))
 
 (use-package! gnus-art
   :defer t :config
@@ -170,9 +167,7 @@
          gnus-ignored-mime-types
          '("application/x-pkcs7-signature"
            "application/ms-tnef"
-           "text/x-vcard"))
-  (map! :map gnus-article-mode-map
-        "<f6>" #'cae-gnus-article-cheatsheet/body))
+           "text/x-vcard")))
 
 (use-package! gnus-dired
   :hook (dired-mode . gnus-dired-mode))
