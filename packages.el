@@ -46,8 +46,6 @@
 (package! iscroll)
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))
-(when (modulep! :ui hydra)
-  (package! cae-cheatsheets))
 (package! backline)
 (package! xterm-color)
 
