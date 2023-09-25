@@ -133,7 +133,9 @@
                 evil-window-top evil-window-middle evil-window-bottom
                 evil-cp-insert-at-end-of-form
                 evil-cp-insert-at-beginning-of-form
-                evil-end-of-line evil-beginning-of-line evil-first-non-blank))))
+                evil-end-of-line evil-beginning-of-line evil-first-non-blank
+                evil-end-of-line-or-visual-line evil-beginning-of-visual-line
+                evil-first-non-blank-of-visual-line))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
