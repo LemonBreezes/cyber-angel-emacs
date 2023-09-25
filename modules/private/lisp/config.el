@@ -15,13 +15,9 @@
   (setq nameless-private-prefix t
         nameless-global-aliases '()))
 
-(after! elisp-mode
-  (defadvice! +syntax--fix-elisp-flymake-load-path (orig-fn &rest args)
-    "Set load path for elisp byte compilation Flymake backend"
-    :around #'elisp-flymake-byte-compile
-    (let ((elisp-flymake-byte-compile-load-path
-           (append elisp-flymake-byte-compile-load-path load-path)))
-      (apply orig-fn args))))
+(add-hook! 'emacs-lisp-mode-hook
+  (setq-local elisp-flymake-byte-compile-load-path
+              load-path))
 
 ;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
