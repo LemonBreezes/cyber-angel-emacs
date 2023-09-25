@@ -427,6 +427,7 @@ also marks comment with leading whitespace"
   (+exwm-persp--focus-workspace-app))
 
 (defvar cae-yank-point nil)
+(add-hook 'minibuffer-exit-hook #'cae-clean-up-lazy-highlight-h)
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
@@ -435,12 +436,21 @@ also marks comment with leading whitespace"
    (replace-regexp-in-string
     "\\`\n" ""
     (with-minibuffer-selected-window
-      (unless cae-yank-point
+      (unless (and cae-yank-point (eq last-command this-command))
         (setq cae-yank-point (point)))
-      (buffer-substring-no-properties
-       (point)
-       (setq cae-yank-point
-             (save-excursion
-               (goto-char cae-yank-point)
-               (forward-word)
-               (point))))))))
+      (save-excursion
+        (let  ((beg (progn (goto-char cae-yank-point)
+                           cae-yank-point))
+               (end (setq cae-yank-point
+                          (progn (forward-word)
+                                 (point)))))
+          (let ((ov (make-overlay beg end)))
+            (push ov isearch-lazy-highlight-overlays)
+            ;; 1000 is higher than ediff's 100+,
+            ;; but lower than isearch main overlay's 1001
+            (overlay-put ov 'priority 1000)
+            (overlay-put ov 'face 'lazy-highlight)
+            (unless (or (eq isearch-lazy-highlight 'all-windows)
+                        isearch-lazy-highlight-buffer)
+              (overlay-put ov 'window (selected-window))))
+          (save-excursion (buffer-substring-no-properties beg end))))))))
