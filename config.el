@@ -563,7 +563,7 @@
 (when cae-init-editor-enabled-p
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-vlf")
-  (load! "lisp/cae-restore-point")
+  ;;(load! "lisp/cae-restore-point")
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
