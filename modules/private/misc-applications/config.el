@@ -340,8 +340,6 @@
   (setq proced-enable-color-flag t)
   (add-hook 'proced-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map proced-mode-map
-        "<f6>" #'cae-cheatsheets-proced
-        :n "<f6>" #'cae-cheatsheets-evil-proced
         "c" #'proced-mark-children
         :n "gr" #'revert-buffer))
 
