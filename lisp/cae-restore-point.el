@@ -145,7 +145,8 @@
 
                ;; When we're using Evil, we also want to restore point when we
                ;; exit visual state.
-               (advice-add #'evil-exit-visual-state :before #'rp/cond-restore-point))
+               (add-hook 'evil-visual-state-exit-hook #'rp/cond-restore-point)
+               (add-hook 'evil-insert-state-exit-hook #'rp/cond-restore-point))
       (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
       (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
       (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
