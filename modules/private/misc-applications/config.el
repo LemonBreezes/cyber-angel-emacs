@@ -259,9 +259,6 @@
       "u" "daemons"))
   (add-hook 'daemons-mode-hook #'+misc-applications-hide-cursor-h)
   :config
-  (map! :map daemons-mode-map
-        "<f6>" #'cae-cheatsheets-daemons
-        :n "<f6>" #'cae-cheatsheets-evil-daemons)
   (setq daemons-always-sudo t
         daemons-show-output-in-minibuffer t))
 
