@@ -138,28 +138,6 @@
                           'major-mode
                           (overlay-buffer edit-indirect--overlay)))))))
 
-
-(use-package! isearch-mb
-  :after-call isearch-mode-hook
-  :config
-  (isearch-mb--setup)
-  (isearch-mb-mode +1)
-  (dolist (cmd '(recenter-top-bottom reposition-window
-                 scroll-right scroll-left isearch-yank-word
-                 consult-isearch-history))
-    (add-to-list 'isearch-mb--with-buffer cmd))
-  (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
-                 avy-isearch consult-line))
-    (add-to-list 'isearch-mb--after-exit cmd))
-  (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
-  (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
-  (when (modulep! :completion vertico)
-    (map! :map isearch-mb-minibuffer-map
-          [remap consult-history] #'consult-isearch-history)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-  (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-  (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
-
 ;; (unless (modulep! :editor evil)
 ;;   (map! :prefix "C-z"
 ;;         "n" #'avy-goto-line-below
