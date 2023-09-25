@@ -16,6 +16,7 @@
 
 (when (modulep! :tools magit)
   (after! magit
+    (magit-wip-mode +1)
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
             [remap +fold/toggle] #'magit-section-toggle))
