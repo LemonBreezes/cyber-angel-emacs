@@ -429,7 +429,6 @@
   (map! :map bubbles-mode-map
         :ng "q" #'+bubbles-quit
         :n "RET" #'bubbles-plop
-        "<f6>" #'cae-cheatsheets-bubbles
         :ng "u" #'bubbles-undo
         :ng "ta" #'bubbles-set-graphics-theme-ascii
         :ng "tb" #'bubbles-set-graphics-theme-balls
