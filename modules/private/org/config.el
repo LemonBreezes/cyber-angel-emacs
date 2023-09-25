@@ -52,7 +52,6 @@
 
 (add-hook 'org-mode-hook #'locally-defer-font-lock)
 
-
 (use-package! org-ol-tree
   :commands org-ol-tree
   :init
