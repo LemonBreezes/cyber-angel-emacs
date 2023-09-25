@@ -345,13 +345,6 @@
     (dolist (cmd '(+eshell-tldr-to-man))
       (add-to-list 'beacon-dont-blink-commands cmd)))
 
-  (use-package! hercules
-    :defer t :after which-key
-    (hercules-def
-     :show-funs #'macrostep-expand
-     :hide-funs #'macrostep-collapse-all
-     :keymap 'macrostep-keymap))
-
   (use-package! outline-minor-faces
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
