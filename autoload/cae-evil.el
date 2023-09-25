@@ -121,7 +121,7 @@
 ;;;###autoload
 (defun cae-evil-append-buffer-or-code ()
   (interactive)
-  (funcall (key-binding "G"))
-  (cl-destructuring-bind (beg . end) (bounds-of-thing-at-point 'page)
-    (evil-with-restriction beg end
-      (call-interactively #'evil-append))))
+  (save-restriction
+    (narrow-to-page)
+    (funcall (key-binding "G"))
+    (call-interactively #'evil-append)))
