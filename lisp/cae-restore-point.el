@@ -32,7 +32,8 @@
            dired-prev-subdir
            lispy-forward
            lispy-backward
-           keyboard-quit)
+           keyboard-quit
+           describe-key describe-key-briefly)
          (and (featurep 'evil)
               '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t evil-snipe-T
                 evil-snipe-x evil-snipe-X evil-snipe-repeat
