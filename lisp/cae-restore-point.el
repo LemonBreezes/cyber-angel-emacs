@@ -66,24 +66,23 @@
                 evil-backward-arg evil-forward-char evil-jump-forward
                 evil-backward-char evil-jump-backward evil-search-forward
                 evil-cp-drag-forward evil-cp-forward-sexp evil-search-backward
-                evil-cp-backward-sexp evil-cp-drag-backward evil-forward-WORD-end
+                evil-cp-backward-sexp evil-cp-drag-backward
                 evil-ex-search-forward
                 evil-forward-paragraph evil-backward-paragraph
                 evil-ex-search-backward evil-find-char-backward
-                evil-forward-WORD-begin evil-forward-word-begin
-                evil-jump-backward-swap evil-backward-WORD-begin
+                evil-jump-backward-swap
                 evil-cp-backward-up-sexp
                 evil-forward-section-end evil-search-word-forward
                 evil-backward-section-end evil-cp--backward-up-list
                 evil-delete-backward-char evil-delete-backward-word
                 evil-org-forward-sentence evil-search-word-backward
-                evil-cp-forward-symbol-end evil-find-char-to-backward
+                 evil-find-char-to-backward
                 evil-forward-section-begin evil-org-backward-sentence
-                evil-backward-section-begin evil-cp-backward-symbol-end
+                evil-backward-section-begin
                 evil-ex-search-word-forward evil-forward-sentence-begin
                 evil-backward-sentence-begin evil-cp-delete-backward-word
-                evil-cp-forward-symbol-begin evil-ex-delete-backward-char
-                evil-ex-search-word-backward evil-cp-backward-symbol-begin
+                evil-ex-delete-backward-char
+                evil-ex-search-word-backward
                 evil-org-delete-backward-char evilem-motion-forward-WORD-end
                 evilem-motion-forward-word-end evilem-motion-backward-WORD-end
                 evilem-motion-backward-word-end evil-collection-pdf-jump-forward
@@ -135,9 +134,15 @@
                 evil-end-of-line evil-beginning-of-line evil-first-non-blank
                 evil-end-of-line-or-visual-line evil-beginning-of-visual-line
                 evil-first-non-blank-of-visual-line
+                evil-goto-mark-line evil-goto-mark evil-owl-goto-mark
+                evil-owl-goto-mark-line
                 ;; Moving by words/symbols
-                evil-forward-word-end evil-backward-WORD-end
-                evil-backward-word-end evil-backward-word-begin
+                ;;evil-forward-word-end evil-backward-WORD-end
+                ;;evil-backward-word-end evil-backward-word-begin
+                ;;evil-forward-WORD-begin evil-forward-word-begin
+                ;;evil-forward-WORD-end evil-backward-WORD-begin
+                ;;evil-cp-forward-symbol-end evil-cp-backward-symbol-end
+                ;;evil-cp-forward-symbol-begin evil-cp-backward-symbol-begin
                 ))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
