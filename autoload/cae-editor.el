@@ -442,7 +442,7 @@ also marks comment with leading whitespace"
     (with-minibuffer-selected-window
       (unless (and cae-yank-point (eq last-command this-command))
         (setq cae-yank-point (point))
-        (lazy-highlight-cleanup t))
+        (cae-yank-on-exit-h))
       (save-excursion
         (let  ((beg (progn (goto-char cae-yank-point)
                            cae-yank-point))
