@@ -8,7 +8,13 @@
           '(after . mode-line-frame-identification)))
 
   (use-package! anzu
-    :after-call isearch-mode)
+    :after-call isearch-mode
+    :init
+    (map! (:map isearch-mode-map
+           [remap isearch-query-replace] #'anzu-isearch-query-replace
+           [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+          [remap query-replace] #'anzu-query-replace
+          [remap query-replace-regexp] #'anzu-query-replace-regexp))
 
   (use-package! evil-anzu
     :when (modulep! :editor evil)
