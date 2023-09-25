@@ -37,21 +37,7 @@
             :nvg "q" #'magit-mode-bury-buffer)
       (after! forge
         (setq forge-pull-notifications t
-              forge-buffer-draft-p t)
-        (map! :map forge-post-mode-map
-              "<f6>" #'cae-cheatsheets-magit-forge-post
-              :map forge-topic-mode-map
-              "<f6>" #'cae-cheatsheets-magit-forge-topic
-              :map forge-pullreq-list-mode-map
-              "<f6>" #'cae-cheatsheets-magit-forge-pullreq-list
-              :map forge-pullreq-list-mode-map
-              "j" #'+default/search-buffer
-              :map forge-topic-list-mode-map
-              "j" #'+default/search-buffer
-              :map forge-repository-list-mode-map
-              "j" #'+default/search-buffer
-              :map forge-notifications-mode-map
-              "j" #'+default/search-buffer)))))
+              forge-buffer-draft-p t)))))
 
 (when (modulep! :emacs vc)
   (after! git-timemachine
