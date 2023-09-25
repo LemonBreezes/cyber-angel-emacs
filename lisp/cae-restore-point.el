@@ -76,7 +76,7 @@
                 evil-backward-section-end evil-cp--backward-up-list
                 evil-delete-backward-char evil-delete-backward-word
                 evil-org-forward-sentence evil-search-word-backward
-                 evil-find-char-to-backward
+                evil-find-char-to-backward
                 evil-forward-section-begin evil-org-backward-sentence
                 evil-backward-section-begin
                 evil-ex-search-word-forward evil-forward-sentence-begin
