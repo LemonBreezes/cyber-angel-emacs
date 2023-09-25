@@ -117,3 +117,9 @@
       (with-current-buffer buffer
         (org-mode)
         (setq-local doom-real-buffer-p t)))))
+
+;;;###autoload
+(defun evil-append-buffer-or-code ()
+  (interactive)
+  (funcall (key-binding "G"))
+  (evil-append))
