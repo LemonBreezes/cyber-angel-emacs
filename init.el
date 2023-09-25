@@ -128,7 +128,7 @@
 
        :private
        ;;holy
-       (helm +childframe)
+       (helm)
        (debugger +lsp)
        ;;(dirvish +icons +dirvish)
        eshell
