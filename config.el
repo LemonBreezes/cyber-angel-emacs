@@ -600,7 +600,7 @@
   ;; Allow us to undo deleting frames.
   (undelete-frame-mode +1)
 
-  ;; Optimization
+  ;; This is an optimization.
   (advice-add 'custom-save-all :override #'ignore)
 
   ;; Automatically deindent items when they are added to the kill ring.
