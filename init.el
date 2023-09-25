@@ -45,7 +45,7 @@
       evil-want-C-w-delete nil)
 
 (doom! :completion
-       (vertico +icons +childframe)
+       (vertico +icons)
        (corfu +icons +orderless +split-char)
 
        :ui
