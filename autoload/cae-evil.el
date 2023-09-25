@@ -8,22 +8,19 @@
         (forward-page count))
     (forward-page count)))
 
-(defvar cae-show-normal-state--map nil)
-
 ;;;###autoload
 (defun cae-show-normal-state-bindings ()
   (interactive)
   (let ((keymap
-         (setq cae-show-normal-state--map
-               (or (evil-get-auxiliary-keymap
-                    (cond ((bound-and-true-p git-timemachine-mode)
-                           git-timemachine-mode-map)
-                          (t (current-local-map)))
-                    evil-state t t)
-                   (evil-get-auxiliary-keymap
-                    (make-composed-keymap
-                     (current-minor-mode-maps) t)
-                    evil-state)))))
+         (or (evil-get-auxiliary-keymap
+              (cond ((bound-and-true-p git-timemachine-mode)
+                     git-timemachine-mode-map)
+                    (t (current-local-map)))
+              evil-state t t)
+             (evil-get-auxiliary-keymap
+              (make-composed-keymap
+               (current-minor-mode-maps) t)
+              evil-state))))
     (which-key--show-keymap nil keymap nil t t)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
