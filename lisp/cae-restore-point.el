@@ -72,7 +72,7 @@
                 evil-ex-search-backward evil-find-char-backward
                 evil-forward-WORD-begin evil-forward-word-begin
                 evil-jump-backward-swap evil-backward-WORD-begin
-                 evil-cp-backward-up-sexp
+                evil-cp-backward-up-sexp
                 evil-forward-section-end evil-search-word-forward
                 evil-backward-section-end evil-cp--backward-up-list
                 evil-delete-backward-char evil-delete-backward-word
