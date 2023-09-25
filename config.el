@@ -480,11 +480,11 @@
             (consult-location ,(if (and (cae-display-graphic-p)
                                         (modulep! :completion vertico +childframe))
                                    'posframe 'buffer))
-            (t ,(if (cae-display-graphic-p)
-                    (if  (modulep! :completion vertico +childframe)
-                        'posframe
-                      'vertical)
-                  'flat)))))
+            ,@(if (cae-display-graphic-p)
+                   (if (modulep! :completion vertico +childframe)
+                       (list t 'posframe)
+                     nil)
+                 (list t 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
