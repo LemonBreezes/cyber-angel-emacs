@@ -134,6 +134,7 @@
                 evil-window-top evil-window-middle evil-window-bottom
                 evil-cp-insert-at-end-of-form
                 evil-cp-insert-at-beginning-of-form
+                evil-cp-insert
                 evil-end-of-line evil-beginning-of-line evil-first-non-blank
                 evil-end-of-line-or-visual-line evil-beginning-of-visual-line
                 evil-first-non-blank-of-visual-line
