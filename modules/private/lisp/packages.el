@@ -2,4 +2,4 @@
 ;;; private/lisp/packages.el
 
 (package! nameless)
-(package! page-break-lines)
+(package! xr)
