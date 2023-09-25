@@ -498,7 +498,6 @@
       "s" "Snake"))
   :config
   (map! :map snake-mode-map
-        "<f6>" #'cae-cheatsheets-snake
         :ng "q" #'+snake-quit
         :map snake-null-map
         :ng "q" #'+snake-quit))
