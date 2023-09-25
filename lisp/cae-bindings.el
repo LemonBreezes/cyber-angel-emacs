@@ -86,9 +86,6 @@
       "<escape>" #'keyboard-quit
       "<f7>" #'eri/expand-region
       [remap doom/sudo-this-file] #'cae-toggle-sudo
-      (:after transient
-       (:map transient-map
-        "<f6>" #'transient-quit-all))
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
       (:when (modulep! :completion vertico)
