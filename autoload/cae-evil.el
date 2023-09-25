@@ -12,16 +12,29 @@
 (defun cae-show-normal-state-bindings ()
   (interactive)
   (let ((keymap
-         (or (evil-get-auxiliary-keymap
-              (cond ((bound-and-true-p git-timemachine-mode)
-                     git-timemachine-mode-map)
-                    (t (current-local-map)))
-              evil-state t t)
+         (or (let ((map (evil-get-auxiliary-keymap
+                         (cond ((bound-and-true-p git-timemachine-mode)
+                                git-timemachine-mode-map)
+                               (t (current-local-map)))
+                         evil-state t t)))
+               (and (keymapp map)
+                    (> (length map) 2)
+                    map))
              (evil-get-auxiliary-keymap
               (make-composed-keymap
-               (current-minor-mode-maps) t)
+               (thread-last (current-minor-mode-maps)
+                            (delq doom-leader-map)
+                            (delq general-override-mode-map)
+                            (delq evil-snipe-local-mode-map)
+                            (delq (let ((mode (cl-find-if (lambda (x)
+                                                           (string-prefix-p "beginend-"
+                                                                            (symbol-name x)))
+                                                         local-minor-modes)))
+                                    (when mode
+                                      (symbol-value (intern (concat (symbol-name mode) "-map")))))))
+               t)
               evil-state))))
-    (which-key--show-keymap nil keymap nil t t)))
+    (which-key--show-keymap nil keymap nil t)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
   "Apply FN from BEG to END."
