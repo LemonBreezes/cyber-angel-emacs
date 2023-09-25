@@ -426,3 +426,22 @@ also marks comment with leading whitespace"
           (start-process workspace nil app)))
   (+exwm-persp--focus-workspace-app))
 
+(defvar cae-yank-point nil)
+
+;;;###autoload
+(defun cae-yank-word-to-minibuffer (arg)
+  "Yank text at point in `helm-current-buffer' into minibuffer."
+  (interactive "p")
+  (insert
+   (replace-regexp-in-string
+    "\\`\n" ""
+    (with-minibuffer-selected-window
+      (unless cae-yank-point
+        (setq cae-yank-point (point)))
+      (buffer-substring-no-properties
+       (point)
+       (setq cae-yank-point
+             (save-excursion
+               (goto-char cae-yank-point)
+               (forward-word)
+               (point))))))))
