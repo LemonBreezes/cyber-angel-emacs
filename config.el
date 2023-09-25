@@ -473,7 +473,7 @@
             (consult-grep
              ,(if (and (cae-display-graphic-p)
                        (modulep! :completion vertico +childframe))
-                               'posframe 'buffer))
+                  'posframe 'buffer))
             (imenu ,@(if (and (cae-display-graphic-p)
                               (modulep! :completion vertico +childframe))
                          '(posframe grid) '(grid)))
