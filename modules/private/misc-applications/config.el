@@ -524,6 +524,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
       "f" "Fireplace"))
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'fireplace-mode evil-snipe-disabled-modes)))
   :config
   (map! :map fireplace-mode-map
         :ng "q" #'+fireplace-quit
