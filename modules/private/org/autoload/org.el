@@ -18,13 +18,6 @@ from running."
   (let ((inhibit-read-only t))
     (run-hooks '+org-exit-src-code-hook)))
 
-;;;###autoload (autoload 'cae-org-babel-cheatsheet "private/org/autoload/org" nil t)
-(defun cae-org-babel-cheatsheet () (interactive))
-(hercules-def
- :toggle-funs #'cae-org-babel-cheatsheet
- :keymap 'org-babel-map
- :transient t)
-
 ;;;###autoload
 (defun cae-org-export-remove-zero-width-space (text _backend _info)
   "Remove zero width spaces from TEXT."
