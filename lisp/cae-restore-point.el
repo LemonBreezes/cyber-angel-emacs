@@ -127,7 +127,7 @@
                 evil-textobj-anyblock-backward-close-block-start
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-forward
                 cae-cheatsheets-evil-cleverparens/evil-cp-drag-backward
-                cae-evil-append-buffer-or-code
+                cae-evil-append-buffer-or-code evil-cp-append
                 evil-normal-state evil-force-normal-state
                 evil-insert-line evil-append-line))))
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
