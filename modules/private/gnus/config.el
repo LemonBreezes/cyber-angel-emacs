@@ -43,7 +43,6 @@
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
    gnus-large-newsgroup 200
-   network-security-level 'low
    gnus-permanently-visible-groups "INBOX"
 ;;; Startup functions
    gnus-save-killed-list nil
