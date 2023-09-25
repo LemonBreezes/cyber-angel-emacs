@@ -268,11 +268,7 @@
         "d" #'disk-usage)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "d" "disk usage"))
-  :config
-  (map! :map disk-usage-mode-map
-        "<f6>" #'cae-cheatsheets-disk-usage
-        :n "<f6>" #'cae-cheatsheets-evil-disk-usage))
+      "d" "disk usage")))
 
 (use-package! helm-linux-disks
   :when (and (eq system-type 'gnu/linux)
