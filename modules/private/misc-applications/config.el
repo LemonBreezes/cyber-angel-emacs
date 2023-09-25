@@ -58,8 +58,6 @@
   (map! :map timer-list-mode-map
         :n "gr" #'revert-buffer))
 (map! :map process-menu-mode-map
-      "<f6>" #'cae-cheatsheets-process-menu
-      :n "<f6>" #'cae-cheatsheets-evil-process-menu
       :n "gr" #'revert-buffer)
 (add-hook 'package-menu-mode-hook #'+misc-applications-hide-cursor-h)
 (after! package
