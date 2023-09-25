@@ -17,9 +17,8 @@
         (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
-  (map! :nv "g1" #'cae-evil-org-ai-on-region
-        :nv "g!" #'cae-ai-org-ai-on-buffer
-        "<f5>" #'org-ai-on-region)
+  (map! :nv "g!" #'cae-org-ai-on-region-or-buffer
+        "<f5>" #'cae-org-ai-on-region-or-buffer)
   :config
   (require 'whisper)
   (require 'greader-espeak)
@@ -27,9 +26,6 @@
   (setq org-ai-talk-say-words-per-minute 210
         org-ai-talk-say-voice "Karen")
   (org-ai-global-mode +1)
-  (map! :map org-ai-global-mode-map
-        :prefix ("C-c M-a" . "org-ai")
-        "b" #'cae-ai-org-ai-on-buffer)
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
