@@ -9,12 +9,15 @@
 
   (use-package! anzu
     :after-call isearch-mode
-    :init
-    (map! (:map isearch-mode-map
-           [remap isearch-query-replace] #'anzu-isearch-query-replace
-           [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
-          [remap query-replace] #'anzu-query-replace
-          [remap query-replace-regexp] #'anzu-query-replace-regexp))
+    :defer t :init
+    (global-set-key [remap query-replace] 'anzu-query-replace)
+    (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+    (define-key isearch-mode-map [remap isearch-query-replace] #'anzu-isearch-query-replace)
+    (define-key isearch-mode-map [remap isearch-query-replace-regexp] #'anzu-isearch-query-replace-regexp)
+    :config
+    (setq anzu-mode-lighter ""
+          anzu-replace-threshold 50
+          anzu-replace-to-string-separator (if (cae-tty-disable-unicode-p) " -> " " → ")))
 
   (use-package! evil-anzu
     :when (modulep! :editor evil)
