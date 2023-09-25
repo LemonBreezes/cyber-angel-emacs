@@ -357,9 +357,6 @@
     ;;(after! edebug
     ;;  (map! :map edebug-mode-map
     ;;        "<f6>" #'cae-edebug-cheatsheet))
-    ;;(after! macrostep
-    ;;  (map! :map macrostep-mode-keymap
-    ;;        "<f6>" #'cae-macrostep-cheatsheet))
     :config
     (add-hook 'cae-tab-bar-before-switch-hook #'hercules--hide))
 
