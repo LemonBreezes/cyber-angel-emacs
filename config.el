@@ -60,6 +60,9 @@
   (setq tramp-shell-prompt-pattern
         "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
+(after! nsm
+  (setq network-security-level 'high))
+
 
 ;;; UI
 
