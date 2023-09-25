@@ -483,7 +483,7 @@
             (t ,(if (cae-display-graphic-p)
                     (if  (modulep! :completion vertico +childframe)
                         'posframe
-                      'buffer)
+                      'vertical)
                   'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
