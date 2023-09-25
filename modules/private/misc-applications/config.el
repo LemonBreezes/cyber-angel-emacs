@@ -533,7 +533,6 @@
       "f" "Fireplace"))
   :config
   (map! :map fireplace-mode-map
-        "<f6>" #'cae-cheatsheets-fireplace
         :ng "q" #'+fireplace-quit
         :n "k" #'fireplace-up
         :n "j" #'fireplace-down
