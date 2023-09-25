@@ -57,10 +57,11 @@
         (setq evil-cp-additional-movement-keys
               '(("M-l" . evil-cp-end-of-defun)
                 ("M-h" . evil-cp-beginning-of-defun)))
-        (add-hook 'prog-mode-hook #'evil-cleverparens-mode)
         (dolist (mode sp-lisp-modes)
           (add-hook mode (cae-defun cae-enable-evil-cleverparens-mode ()
                            (evil-cleverparens-mode +1))))
+        (add-hook 'prog-mode-hook #'cae-enable-evil-cleverparens-mode)
+
         :custom ((evil-cleverparens-use-s-and-S nil)
                  (evil-cleverparens-swap-move-by-word-and-symbol nil))
         :config
@@ -68,6 +69,10 @@
               :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
               :n "<f6>" #'cae-cheatsheets-evil-cleverparens
               [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
+
+    (map! :map narrow-map
+          "s" #'sp-narrow-to-sexp)
+
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
                        ("C-M-S-k" . sp-kill-hybrid-sexp)
