@@ -430,7 +430,6 @@ also marks comment with leading whitespace"
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
-  "Yank text at point in `helm-current-buffer' into minibuffer."
   (interactive "p")
   (insert
    (replace-regexp-in-string
