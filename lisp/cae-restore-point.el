@@ -33,7 +33,10 @@
            lispy-forward
            lispy-backward
            keyboard-quit
-           describe-key describe-key-briefly)
+           describe-key describe-key-briefly
+           sp-backward-down-sexp sp-down-sexp
+           sp-up-sexp sp-forward-sexp sp-next-sexp sp-previous-sexp
+           sp-backward-up-sexp)
          (and (featurep 'evil)
               '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t evil-snipe-T
                 evil-snipe-x evil-snipe-X evil-snipe-repeat
