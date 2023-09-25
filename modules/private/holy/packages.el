@@ -3,7 +3,6 @@
 
 (package! anzu)
 (package! goggles)
-(package! isearch-mb)
 (package! edit-indirect)
 (package! string-edit-at-point)
 (package! symbol-overlay)
