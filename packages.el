@@ -13,6 +13,8 @@
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (package! evil-org :recipe
   (:host github :repo "LemonBreezes/evil-org-mode"))
+(package! evil-indent-plus :recipe
+  (:host github :repo "LemonBreezes/evil-indent-plus"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
