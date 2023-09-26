@@ -97,14 +97,6 @@ It is meant to be used as a `post-gc-hook'."
 ;; Use the system's `libvterm' if available.
 (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
-;; I'm disabling this workaround until I run into a problem. I forgot why I
-;; added this advice.
-(defadvice! cae-hacks-ignore-this-command-keys-a (oldfun &rest args)
-  :around #'embark--act
-  (advice-add #'set--this-command-keys :override #'ignore)
-  (unwind-protect (apply oldfun args)
-    (advice-remove #'set--this-command-keys #'ignore)))
-
 ;; Fix `save-some-buffers' so that I can continue the command after quitting a
 ;; diff with "q".
 (defadvice! cae-hacks-quit-view-mode-a (oldfun)
