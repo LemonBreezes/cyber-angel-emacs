@@ -52,21 +52,6 @@
 
 (add-hook 'org-mode-hook #'locally-defer-font-lock)
 
-(use-package! org-ol-tree
-  :commands org-ol-tree
-  :init
-  (after! org
-    (map! :map org-mode-map
-          :localleader
-          :desc "Outline" "O" #'org-ol-tree))
-  :config
-  (setq org-ol-tree-ui-icon-set
-        (if (and (display-graphic-p)
-                 (fboundp 'all-the-icons-material))
-            'all-the-icons
-          'unicode))
-  (org-ol-tree-ui--update-icon-set))
-
 (after! org
   (map! :map org-mode-map
         (:when (modulep! :editor evil)
