@@ -332,11 +332,7 @@
       "t" "trash files"))
   (advice-add #'trashed :around #'+trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'+misc-applications-hide-cursor-h)
-  (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h)
-  :config
-  (map! :map trashed-mode-map
-        "h" #'cae-cheatsheets-trashed
-        :n "h" #'cae-cheatsheets-evil-trashed))
+  (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
 
 (use-package! proced
   :defer t :init
