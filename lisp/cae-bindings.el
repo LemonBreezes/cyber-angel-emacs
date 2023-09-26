@@ -268,14 +268,15 @@
             "M-r" #'consult-history))))
 ;; Some of these use Consult but whatever man.
 (map! :leader
-      (:prefix "i"
-       :desc "Keyboard macro" "k" #'consult-kmacro)
+      (:when (modulep! :completion vertico)
+       (:prefix "i"
+        :desc "Keyboard macro" "k" #'consult-kmacro)
+       (:prefix "s"
+        :desc "Copy link" "y" #'link-hint-copy-link
+        :desc "Jump to section" "h" #'consult-outline))
       (:prefix "t"
        :desc "Column indicator" "C" #'vline-mode
-       :desc "Font lock mode" "C-f" #'font-lock-mode)
-      (:prefix "s"
-       :desc "Copy link" "y" #'link-hint-copy-link
-       :desc "Jump to section" "h" #'consult-outline))
+       :desc "Font lock mode" "C-f" #'font-lock-mode))
 
 (unless (modulep! :editor evil)
   (after! org
