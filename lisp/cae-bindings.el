@@ -266,7 +266,6 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
-;; Some of these use Consult but whatever man.
 (map! :leader
       (:when (modulep! :completion vertico)
        (:prefix "i"
