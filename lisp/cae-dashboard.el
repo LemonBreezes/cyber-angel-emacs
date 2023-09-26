@@ -14,7 +14,7 @@
       :desc "Open Org agenda" :ng "a" #'org-agenda
       :desc "Open project" :ng "P" #'projectile-switch-project
       :desc "Open bookmarks" :ng "m" #'bookmark-jump
-      :desc "Open documentation" :ng "d" #'doom/help
+      :desc "Open directory" :ng "d" #'+default/dired
       :desc "Open config.el/org" :ng "c" #'doom/goto-private-config-file
       :desc "Open init.el" :ng "I" #'doom/goto-private-init-file
       :desc "Open org-mode root" :ng "O" (cmd! (require 'org) (find-file org-directory))
@@ -28,8 +28,7 @@
       :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
       :desc "Show keybindings" :ng "h" #'cae-dashboard-help
       :desc "Find file in .emacs.d" :ng "e" #'doom/find-file-in-emacsd
-      :desc "Browse .emacs.d" :ng "E" #'doom/browse-in-emacsd
-      :desc "cd" :ng "C-c" #'cd)
+      :desc "Browse .emacs.d" :ng "E" #'doom/browse-in-emacsd)
 
 (map! :leader :desc "Dashboard" "d" #'+doom-dashboard/open)
 
