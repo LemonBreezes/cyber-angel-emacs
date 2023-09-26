@@ -98,7 +98,7 @@ It is meant to be used as a `post-gc-hook'."
 (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
 ;; I'm disabling this workaround until I run into a problem. I forgot why I
-;; added this advice but it was some kind of error I encountered.
+;; added this advice.
 (defadvice! cae-hacks-ignore-this-command-keys-a (oldfun &rest args)
   :around #'embark--act
   (advice-add #'set--this-command-keys :override #'ignore)
