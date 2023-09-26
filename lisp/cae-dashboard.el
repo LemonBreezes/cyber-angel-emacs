@@ -15,7 +15,7 @@
       :desc "Open project" :ng "P" #'projectile-switch-project
       :desc "Open bookmark" :ng "m" #'bookmark-jump
       :desc "Open directory" :ng "d" #'consult-dir
-      :desc "Open directory with Dired":ng "D" #'+default/dired
+      :desc "Open documentation":ng "D" #'doom/help
       :desc "Magit status" :ng "v" #'magit-status
       :desc "Open config.el/org" :ng "c" #'doom/goto-private-config-file
       :desc "Open init.el" :ng "I" #'doom/goto-private-init-file
