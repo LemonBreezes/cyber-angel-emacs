@@ -159,9 +159,6 @@
         :n "F" #'elfeed-tube-fetch
         :n "l" #'+elfeed-toggle-log-buffer
         :ng "t" #'mark-whole-buffer)
-  (map! :map elfeed-search-mode-map
-        "h" #'cae-cheatsheets-elfeed
-        :n "h" #'cae-cheatsheets-evil-elfeed)
 
   (use-package! elfeed-tube
     :config
