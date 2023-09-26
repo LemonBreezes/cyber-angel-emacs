@@ -533,7 +533,7 @@
         :n "k" #'fireplace-up
         :n "j" #'fireplace-down
         :n "s" #'fireplace-toggle-sound
-        :n "*" #'fireplace-toggle-smoke))
+        :n "m" #'fireplace-toggle-smoke))
 
 (use-package! flames-of-freedom
   :defer t :init
@@ -717,10 +717,10 @@
         empv-audio-dir +misc-applications-music-dir
         empv-video-dir +misc-applications-videos-dir)
   (aio-defun cae-empv-set-invidious-instance ()
-    (setq empv-invidious-instance
-          (concat "https://"
-                  (aio-await (elfeed-tube--get-invidious-url))
-                  "/api/v1")))
+             (setq empv-invidious-instance
+                   (concat "https://"
+                           (aio-await (elfeed-tube--get-invidious-url))
+                           "/api/v1")))
   (cae-empv-set-invidious-instance)
   (after! embark
     (empv-embark-initialize-extra-actions)))
