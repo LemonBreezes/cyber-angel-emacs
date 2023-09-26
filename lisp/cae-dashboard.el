@@ -13,7 +13,7 @@
       :desc "Config dir" :ng "C" #'doom/open-private-config
       :desc "Open Org agenda" :ng "a" #'org-agenda
       :desc "Open project" :ng "P" #'projectile-switch-project
-      :desc "Open bookmarks" :ng "m" #'bookmark-jump
+      :desc "Open bookmark" :ng "m" #'bookmark-jump
       :desc "Open directory" :ng "d" #'consult-dir
       :desc "Open directory with Dired":ng "D" #'+default/dired
       :desc "Magit status" :ng "v" #'magit-status
