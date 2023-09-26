@@ -16,6 +16,7 @@
       :desc "Open bookmarks" :ng "m" #'bookmark-jump
       :desc "Open directory" :ng "d" #'consult-dir
       :desc "Open directory with Dired":ng "D" #'+default/dired
+      :desc "Magit status" :ng "v" #'magit-status
       :desc "Open config.el/org" :ng "c" #'doom/goto-private-config-file
       :desc "Open init.el" :ng "I" #'doom/goto-private-init-file
       :desc "Open org-mode root" :ng "O" (cmd! (require 'org) (find-file org-directory))
