@@ -533,7 +533,7 @@
         :n "k" #'fireplace-up
         :n "j" #'fireplace-down
         :n "s" #'fireplace-toggle-sound
-        :n "m" #'fireplace-toggle-smoke))
+        :n "*" #'fireplace-toggle-smoke))
 
 (use-package! flames-of-freedom
   :defer t :init
