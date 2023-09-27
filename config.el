@@ -438,7 +438,10 @@
         revert-buffer-quick-short-answers t
         scroll-error-top-bottom t
         scroll-preserve-screen-position t
-        shift-select-mode 'permanent)
+        shift-select-mode 'permanent
+        smiley-style t
+        tar-mode-show-date t
+        track-eol t)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
