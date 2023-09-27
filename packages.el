@@ -11,7 +11,7 @@
                    elfeed-goodies)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
-(when (and (modulep! :editor evil)
+(when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
