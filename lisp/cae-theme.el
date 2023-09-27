@@ -166,8 +166,8 @@
   (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t))))
 
 (defface cae-modeline-bell-face
-   '((t (:foreground "red")))
-   "Face used for the modeline beep.")
+  '((t (:foreground "red")))
+  "Face used for the modeline beep.")
 (setq visible-bell t
       ring-bell-function (lambda ()
                            (let ((buf (current-buffer))
