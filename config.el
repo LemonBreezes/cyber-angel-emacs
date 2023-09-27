@@ -375,7 +375,9 @@
                  #'browse-url-xdg-open)
                 (t #'browse-url-generic))
           browse-url-secondary-browser-function
-          #'eww-browse-url)
+          #'eww-browse-url
+          browse-url-firefox-new-window-is-tab t)
+
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
@@ -417,7 +419,6 @@
         remote-file-name-inhibit-auto-save-visited t
         make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t
-        browse-url-firefox-new-window-is-tab t
         completion-auto-select 'second-tab
         completions-detailed t
         completions-format 'vertical
