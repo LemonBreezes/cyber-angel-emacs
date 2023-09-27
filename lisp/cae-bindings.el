@@ -30,7 +30,6 @@
                           which-key-replacement-alist))))
   (map! (:when (modulep! :completion vertico)
          "C-;" nil
-         "<f6>" #'embrace-commander
          (:map minibuffer-local-map
           "C-;" nil
           embark-act-key #'cae-embark-act
@@ -85,6 +84,7 @@
        [remap dabbrev-completion] #'cape-dabbrev)
       ;;"C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
+      "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
