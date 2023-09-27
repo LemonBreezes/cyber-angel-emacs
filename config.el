@@ -1036,7 +1036,7 @@
     ;; `evil-move-beyond-eol' is `nil'.
     (advice-add #'beginend-prog-mode-goto-end :before
                 (cae-defun cae-beginend-goto-eol-a (&rest_)
-                  (goto-char (bol)))))
+                  (goto-char (eol)))))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook
