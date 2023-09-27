@@ -441,6 +441,7 @@
         history-delete-duplicates t
         history-length t
         mark-ring-max 1024
+        message-log-max t
         save-place-limit nil
         save-place-save-skipped nil
         kill-ring-max 1024
