@@ -48,7 +48,6 @@
       completions-group t
       completions-group-sort 'alphabetical
       custom-buffer-done-kill t
-      describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
       dired-isearch-filenames 'dwim
       global-mark-ring-max 1024
       grep-program "rg"
