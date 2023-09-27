@@ -4,8 +4,6 @@
 (map! :map general-override-mode-map
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
-;;(map! :leader
-;;      :desc "Find file in project" "DEL" (lookup-key doom-leader-map (kbd "SPC")))
 (define-key key-translation-map (kbd "SPC DEL") (kbd "SPC SPC"))
 (define-key key-translation-map (kbd "<backspace> DEL") (kbd "<backspace> SPC"))
 
