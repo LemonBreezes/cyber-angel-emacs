@@ -20,7 +20,11 @@
           (overlay-put o 'cae-org-fold-heading t)
           (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
           (when shift-fold-p
-            (overlay-put o 'display "\n")))))))
+            (overlay-put o 'display "\n"))))))
+
+  (use-package! backline
+    :defer t :init
+    (advice-add 'outline-flag-region :after 'backline-update)))
 
 (defun cae-theme-customize-faces-h (_)
   (when (modulep! :lang org)
