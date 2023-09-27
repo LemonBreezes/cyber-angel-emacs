@@ -27,7 +27,7 @@
 (column-number-mode 1)
 (global-display-line-numbers-mode 1)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(load-theme 'wombat)
+(load-theme 'wheatgrass)
 
 ;; Bootstrap straight
 (defvar bootstrap-version)
