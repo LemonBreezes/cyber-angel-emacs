@@ -109,7 +109,7 @@
         kill-buffer-delete-auto-save-files t
         window-combination-resize t     ;Take new window space from all other
                                         ;windows (not just current)
-        scroll-preserve-screen-position 'always
+        scroll-preserve-screen-position t
         suggest-key-bindings nil)
 
   (setq-default cursor-in-non-selected-windows t)
@@ -408,6 +408,10 @@
   (after! ps-print (setq ps-printer-name "Brother_HL-2350DW"))
   (after! pdf-misc (setq pdf-misc-print-program-executable (executable-find "lpr")))
 
+  ;; Was reading this
+  ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
+  ;; I should just set all the built-in variables in one block like this down
+  ;; the line or find a way to dump those settings into a separate file.
   (setq delete-by-moving-to-trash t
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
@@ -423,11 +427,18 @@
         grep-use-headings t
         history-delete-duplicates t
         history-length t
+        save-place-limit nil
+        save-place-save-skipped nil
         kill-ring-max 1024
         kill-whole-line t
         list-matching-lines-jump-to-current-line t
         mouse-prefer-closest-glyph t
-        next-error-message-highlight 'keep)
+        next-error-message-highlight 'keep
+        read-char-by-name-sort 'code
+        revert-buffer-quick-short-answers t
+        scroll-error-top-bottom t
+        scroll-preserve-screen-position t
+        shift-select-mode 'permanent)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
