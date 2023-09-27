@@ -443,7 +443,7 @@
   (after! cus-edit
     (setq custom-buffer-done-kill t))
 
-  (after! save-place
+  (after! saveplace
     (setq save-place-limit nil
           save-place-save-skipped nil))
 
