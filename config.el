@@ -358,11 +358,7 @@
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
-    :after (:or gnus message))
-
-  (use-package! backline
-    :defer t :init
-    (advice-add 'outline-flag-region :after 'backline-update)))
+    :after (:or gnus message)))
 
 
 ;;; Tools
