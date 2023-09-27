@@ -111,7 +111,9 @@
                                         ;windows (not just current)
         scroll-preserve-screen-position 'always
         suggest-key-bindings nil)
+
   (setq-default cursor-in-non-selected-windows t)
+  (setq highlight-nonselected-windows t)
 
   (setq set-message-functions
         '(inhibit-message
@@ -672,6 +674,13 @@
             (cae-defun cae-clean-up-lazy-highlight-h ()
               (when isearch-lazy-highlight-overlays
                 (lazy-highlight-cleanup t) t)))
+
+  (setq help-enable-symbol-autoload t
+        help-enable-completion-autoload t
+        help-enable-symbol-autoload t
+        help-window-select t
+        help-clean-buttons t
+        grep-use-headings t)
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
