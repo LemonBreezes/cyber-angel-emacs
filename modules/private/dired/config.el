@@ -50,8 +50,9 @@
 
   (setq dired-mouse-drag-files t
         dired-kill-when-opening-new-dired-buffer t
-        dired-movement-style 'cycle
-        dired-isearch-filenames 'dwim)
+        dired-movement-style 'cycle)
+  (after! dired-aux
+    (setq dired-isearch-filenames 'dwim))
 
   (map! :map dired-mode-map
         "C-M-k" #'dired-kill-subdir
