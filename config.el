@@ -496,7 +496,8 @@
 
     ;; Since it doesn't though, I just set it to `t' and scroll up manually if
     ;; there are errors.
-    (setq compilation-scroll-output t))
+    (setq compilation-scroll-output t
+          compilation-environment '("LANG=C" "TERM=dumb")))
 
 
   (after! tramp
