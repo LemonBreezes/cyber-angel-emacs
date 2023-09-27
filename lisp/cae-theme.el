@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
+(defvar cae-theme-enable-modeline-bell t)
+
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 ;; Make Org headlines respect the heading backgrounds.
