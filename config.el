@@ -410,8 +410,6 @@
 
   ;; Was reading this
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
-  ;; I should just set all the built-in variables in one block like this down
-  ;; the line or find a way to dump those settings into a separate file.
   (setq delete-by-moving-to-trash t
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
