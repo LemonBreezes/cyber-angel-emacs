@@ -173,7 +173,7 @@
                            (let ((buf (current-buffer))
                                  (cookie (face-remap-add-relative 'mode-line-active 'cae-modeline-bell-face)))
                              (force-mode-line-update)
-                             (run-with-timer 0.15 nil
+                             (run-with-timer 0.1 nil
                                              (lambda ()
                                                (with-current-buffer buf
                                                  (face-remap-remove-relative cookie)
