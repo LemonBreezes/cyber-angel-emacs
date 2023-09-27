@@ -426,7 +426,8 @@
         kill-ring-max 1024
         kill-whole-line t
         list-matching-lines-jump-to-current-line t
-        mouse-prefer-closest-glyph t)
+        mouse-prefer-closest-glyph t
+        next-error-message-highlight 'keep)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
