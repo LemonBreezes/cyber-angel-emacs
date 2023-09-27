@@ -425,7 +425,6 @@
         completions-group t
         completions-group-sort 'alphabetical
         global-mark-ring-max 1024
-        grep-program "rg"
         history-delete-duplicates t
         history-length t
         mark-ring-max 1024
@@ -453,7 +452,8 @@
           save-place-save-skipped nil))
 
   (after! grep
-    (setq grep-use-headings t))
+    (setq grep-use-headings t
+          grep-program "rg"))
 
   (after! tar-mode
     (setq tar-mode-show-date t))
