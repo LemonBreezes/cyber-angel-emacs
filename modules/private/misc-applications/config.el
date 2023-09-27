@@ -343,7 +343,8 @@
     (after! evil-snipe
       (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
   :config
-  (setq proced-enable-color-flag t)
+  (setq proced-enable-color-flag t
+        proced-filter 'all)
   (add-hook 'proced-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map proced-mode-map
         "c" #'proced-mark-children
