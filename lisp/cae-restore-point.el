@@ -36,7 +36,40 @@
            describe-key describe-key-briefly
            sp-backward-down-sexp sp-down-sexp
            sp-up-sexp sp-forward-sexp sp-next-sexp sp-previous-sexp
-           sp-backward-up-sexp eri/expand-region er/expand-region)
+           sp-backward-up-sexp eri/expand-region er/expand-region
+           er/mark-url
+           er/mark-word
+           er/mark-defun
+           er/mark-email
+           eri/mark-line
+           er/mark-symbol
+           eri/mark-block
+           er/mark-comment
+           er/expand-region
+           er/mark-sentence
+           er/mark-paragraph
+           eri/expand-region
+           er/contract-region
+           er/mark-org-parent
+           er/mark-method-call
+           er/mark-org-element
+           eri/contract-region
+           eri/maximize-region
+           er/mark-inside-pairs
+           er/mark-inside-quotes
+           er/mark-next-accessor
+           er/mark-outside-pairs
+           er/mark-text-sentence
+           er/mark-org-code-block
+           er/mark-outside-quotes
+           er/mark-text-paragraph
+           eri/mark-outside-quotes
+           er/mark-org-element-parent
+           er/mark-symbol-with-prefix
+           eri/web-mode-element-parent
+           eri/mark-inside-org-table-cell
+           eri/mark-outside-org-table-cell
+           eri/web-mode-element-parent-content)
          (and (featurep 'evil)
               '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t evil-snipe-T
                 evil-snipe-x evil-snipe-X evil-snipe-repeat
