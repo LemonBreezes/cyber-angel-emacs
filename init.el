@@ -61,7 +61,6 @@
        (window-select +numbers)
        ophints
        treemacs
-       unicode
        zen
 
        :editor
