@@ -71,11 +71,13 @@
            eri/mark-outside-org-table-cell
            eri/web-mode-element-parent-content)
          (and (featurep 'evil)
-              '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t evil-snipe-T
+              '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t
+                evil-snipe-T
                 evil-snipe-x evil-snipe-X evil-snipe-repeat
                 evil-snipe-repeat-reverse evil-ex-search-next
                 evil-ex-search-previous evil-goto-line evil-jump-item
-                evil-goto-first-line keyboard-escape-quit evil-force-normal-state
+                evil-goto-first-line keyboard-escape-quit
+                evil-force-normal-state
                 evil-exit-visual-state evil-normal-state evil-inner-xml-attr
                 +evil:inner-url-txtobj +evil:inner-any-quote
                 evil-indent-plus-i-indent-up evil-indent-plus-i-indent-up-down
@@ -93,7 +95,8 @@
                 evil-a-single-quote evil-an-angle evil-a-curly
                 evil-textobj-anyblock-a-block evil-a-bracket evil-a-paren
                 evil-a-paragraph evil-a-sentence evil-a-WORD evil-a-word
-                evil-scroll-up evil-scroll-down evil-scroll-left evil-scroll-right
+                evil-scroll-up evil-scroll-down evil-scroll-left
+                evil-scroll-right
                 evil-scroll-line-up evil-scroll-line-down evil-scroll-page-down
                 evil-scroll-page-up lispyville-backward-atom-begin
                 lispyville-forward-atom-begin lispyville-backward-atom-end
@@ -122,8 +125,10 @@
                 evil-org-delete-backward-char evilem-motion-forward-WORD-end
                 evilem-motion-forward-word-end evilem-motion-backward-WORD-end
                 evilem-motion-backward-word-end evil-collection-pdf-jump-forward
-                evilem-motion-find-char-backward evilem-motion-forward-WORD-begin
-                evilem-motion-forward-word-begin evil-collection-pdf-jump-backward
+                evilem-motion-find-char-backward
+                evilem-motion-forward-WORD-begin
+                evilem-motion-forward-word-begin
+                evil-collection-pdf-jump-backward
                 evilem-motion-backward-WORD-begin
                 evilem-motion-backward-word-begin
                 evilem-motion-forward-section-end
