@@ -33,7 +33,11 @@
   (setq org-ai-default-chat-model "gpt-4"
         org-ai-on-project-modify-with-diffs t)
   (when (modulep! :editor snippets)
-    (org-ai-install-yasnippets)))
+    (org-ai-install-yasnippets))
+  (defun cae-org-ai-indent-after-insertion-h (type _text)
+    (when (and (eq type 'end) (derived-mode-p 'org-mode) (memq 'org-indent-mode minor-mode-list))
+      (org-indent-indent-buffer)))
+  (add-hook 'org-ai-after-chat-insertion-hook #'cae-org-ai-indent-after-insertion-h))
 
 (use-package! chatgpt-shell
   :defer t :init
