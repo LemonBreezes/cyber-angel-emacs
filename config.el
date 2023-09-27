@@ -429,6 +429,7 @@
         custom-buffer-done-kill t
         describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         dired-isearch-filenames 'dwim
+        global-mark-ring-max 1024
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
         help-enable-symbol-autoload t
@@ -439,6 +440,7 @@
         grep-use-headings t
         history-delete-duplicates t
         history-length t
+        mark-ring-max 1024
         save-place-limit nil
         save-place-save-skipped nil
         kill-ring-max 1024
