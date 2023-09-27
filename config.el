@@ -418,12 +418,18 @@
         remote-file-name-inhibit-auto-save-visited t
         make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t
+        browse-url-firefox-new-window-is-tab t
+        comint-history-isearch 'dwim
+        compilation-environment '("LANG=C" "TERM=dumb")
+        completion-auto-select 'second-tab
+        describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeDate.txt")
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
         help-enable-symbol-autoload t
         help-window-select t
         help-clean-buttons t
         help-enable-variable-value-editing t
+        Info-fontify-maximum-menu-size t
         grep-use-headings t
         history-delete-duplicates t
         history-length t
@@ -441,7 +447,13 @@
         shift-select-mode 'permanent
         smiley-style t
         tar-mode-show-date t
-        track-eol t)
+        track-eol t
+        tramp-allow-unsafe-temporary-files t
+        visual-order-cursor-movement t
+        view-read-only t
+        what-cursor-show-names t)
+(add-hook 'help-fns-describe-function-functions
+          #'shortdoc-help-fns-examples-function)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
