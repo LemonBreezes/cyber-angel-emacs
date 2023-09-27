@@ -74,7 +74,7 @@
   (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
-  (advice-add #'copilot--start-agent :around #'cae-hacks-shut-up-a)
+  (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
