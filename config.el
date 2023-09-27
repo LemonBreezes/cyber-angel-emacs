@@ -665,7 +665,8 @@
   (add-hook 'c-mode-common-hook #'subword-mode)
 
   (after! paren
-    (setq show-paren-context-when-offscreen 'overlay))
+    (setq show-paren-context-when-offscreen 'overlay
+          show-paren-ring-bell-on-mismatch t))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
