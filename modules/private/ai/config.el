@@ -35,7 +35,7 @@
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets))
   (defun cae-org-ai-indent-after-insertion-h (type _text)
-    (when (and (eq type 'end) (derived-mode-p 'org-mode) (memq 'org-indent-mode minor-mode-list))
+    (when (and (eq type 'end) (derived-mode-p 'org-mode) (bound-and-true-p org-indent-mode))
       (org-indent-indent-buffer)))
   (add-hook 'org-ai-after-chat-insertion-hook #'cae-org-ai-indent-after-insertion-h))
 
