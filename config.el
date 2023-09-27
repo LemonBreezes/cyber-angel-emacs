@@ -58,7 +58,8 @@
 
 (after! tramp
   (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+        tramp-allow-unsafe-temporary-files t))
 
 (after! nsm
   (setq network-security-level 'high))
@@ -425,7 +426,6 @@
         completions-group t
         completions-group-sort 'alphabetical
         custom-buffer-done-kill t
-        describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         global-mark-ring-max 1024
         grep-program "rg"
         Info-fontify-maximum-menu-size t
@@ -446,14 +446,20 @@
         scroll-error-top-bottom t
         scroll-preserve-screen-position t
         shift-select-mode 'permanent
-        smiley-style t
         tar-mode-show-date t
         track-eol t
-        tramp-allow-unsafe-temporary-files t
         visual-order-cursor-movement t
         view-read-only t
-        what-cursor-show-names t
-        xref-search-program 'ripgrep)
+        what-cursor-show-names t)
+
+  (after! describe-char
+    (setq describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")))
+
+  (after! smiley
+    (setq smiley-style t))
+
+  (after! xref
+    (setq xref-search-program 'ripgrep))
 
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
