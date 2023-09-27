@@ -426,6 +426,7 @@
         completions-format 'vertical
         completions-group t
         completions-group-sort 'alphabetical
+        custom-buffer-done-kill t
         describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
