@@ -1,7 +1,8 @@
 ;;; vanilla-config.el -*- lexical-binding: t; -*-
 
 (setopt create-lockfiles nil
-        inhibit-startup-screen t)
+        inhibit-startup-screen t
+        suggest-key-bindings nil)
 
 (with-eval-after-load 'org
   (setopt org-agenda-files ',(progn (require 'org)
