@@ -16,6 +16,8 @@
 (show-paren-mode 1)
 (global-eldoc-mode 1)
 (abbrev-mode 1)
+(icomplete-mode 1)
+(icomplete-vertical-mode 1)
 (setopt tab-always-indent 'complete)
 
 ;; Set up modeline and appearance
@@ -29,6 +31,59 @@
 (global-display-line-numbers-mode 1)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-theme 'wheatgrass)
+
+;; This is incomplete but at least it sets some variables up
+(setq delete-by-moving-to-trash t
+      remote-file-name-inhibit-delete-by-moving-to-trash t
+      remote-file-name-inhibit-auto-save t
+      remote-file-name-inhibit-auto-save-visited t
+      make-cursor-line-fully-visible nil ;I forgot why I set this.
+      yank-pop-change-selection t
+      browse-url-firefox-new-window-is-tab t
+      comint-history-isearch 'dwim
+      compilation-environment '("LANG=C" "TERM=dumb")
+      completion-auto-select 'second-tab
+      completions-detailed t
+      completions-format 'vertical
+      completions-group t
+      completions-group-sort 'alphabetical
+      custom-buffer-done-kill t
+      describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
+      dired-isearch-filenames 'dwim
+      global-mark-ring-max 1024
+      grep-program "rg"
+      help-enable-symbol-autoload t
+      help-enable-completion-autoload t
+      help-enable-symbol-autoload t
+      help-window-select t
+      help-clean-buttons t
+      help-enable-variable-value-editing t
+      Info-fontify-maximum-menu-size t
+      grep-use-headings t
+      history-delete-duplicates t
+      history-length t
+      mark-ring-max 1024
+      message-log-max t
+      save-place-limit nil
+      save-place-save-skipped nil
+      kill-ring-max 1024
+      kill-whole-line t
+      list-matching-lines-jump-to-current-line t
+      mouse-prefer-closest-glyph t
+      next-error-message-highlight 'keep
+      read-char-by-name-sort 'code
+      revert-buffer-quick-short-answers t
+      scroll-error-top-bottom t
+      scroll-preserve-screen-position t
+      shift-select-mode 'permanent
+      smiley-style t
+      tar-mode-show-date t
+      track-eol t
+      tramp-allow-unsafe-temporary-files t
+      visual-order-cursor-movement t
+      view-read-only t
+      what-cursor-show-names t
+      xref-search-program 'ripgrep)
 
 ;; Bootstrap straight
 (defvar bootstrap-version)
