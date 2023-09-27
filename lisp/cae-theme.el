@@ -1,30 +1,32 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
 (defvar cae-theme-enable-modeline-bell t)
+(defvar cae-theme-extend-heading-faces t)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 ;; Make Org headlines respect the heading backgrounds.
-(advice-add #'org-fold-core-region :around #'cae-org-fold-region-a)
-(defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
-  (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
-    (when shift-fold-p
-      (setq to (1- to)))
-    (funcall oldfun from to flag spec-or-alias)
-    (remove-overlays from (1+ to) 'cae-org-fold-heading t)
-    (when flag
-      (let ((o (make-overlay to (1+ to) nil 'front-advance)))
-        (overlay-put o 'evaporate t)
-        (overlay-put o 'cae-org-fold-heading t)
-        (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
-        (when shift-fold-p
-          (overlay-put o 'display "\n"))))))
+(when cae-theme-extend-heading-faces
+  (advice-add #'org-fold-core-region :around #'cae-org-fold-region-a)
+  (defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
+    (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
+      (when shift-fold-p
+        (setq to (1- to)))
+      (funcall oldfun from to flag spec-or-alias)
+      (remove-overlays from (1+ to) 'cae-org-fold-heading t)
+      (when flag
+        (let ((o (make-overlay to (1+ to) nil 'front-advance)))
+          (overlay-put o 'evaporate t)
+          (overlay-put o 'cae-org-fold-heading t)
+          (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
+          (when shift-fold-p
+            (overlay-put o 'display "\n")))))))
 
 (defun cae-theme-customize-faces-h (_)
   (when (modulep! :lang org)
     (after! org
       ;; This is how I like my ellipsis to look. Subtle.
-      (unless (face-background 'org-level-1 nil t)
+      (unless cae-theme-extend-heading-faces
         (set-face-attribute 'org-ellipsis nil
                             :inherit '(shadow default)
                             :weight 'normal))
@@ -54,17 +56,17 @@
     (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
 
   ;; The backgrounds currently break
-  (after! org
-    (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
-                    org-level-6 org-level-7 org-level-8))
-      (set-face-attribute face nil :extend t)))
-  (after! outline
-    (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5
-                    outline-6 outline-7 outline-8))
-      (set-face-attribute face nil :extend t)))
-
-  (after! helpful
-    (set-face-attribute 'helpful-heading nil :extend t))
+  (when cae-theme-extend-heading-faces
+    (after! org
+      (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
+                      org-level-6 org-level-7 org-level-8))
+        (set-face-attribute face nil :extend t)))
+    (after! outline
+      (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5
+                      outline-6 outline-7 outline-8))
+        (set-face-attribute face nil :extend t)))
+    (after! helpful
+      (set-face-attribute 'helpful-heading nil :extend t)))
 
   ;; Remove bold constructs.
   (dolist (face '(font-lock-keyword-face
