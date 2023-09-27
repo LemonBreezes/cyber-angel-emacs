@@ -422,6 +422,10 @@
         comint-history-isearch 'dwim
         compilation-environment '("LANG=C" "TERM=dumb")
         completion-auto-select 'second-tab
+        completions-detailed t
+        completions-format 'vertical
+        completions-group t
+        completions-group-sort 'alphabetical
         describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
