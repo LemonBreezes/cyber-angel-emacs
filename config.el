@@ -422,7 +422,7 @@
         comint-history-isearch 'dwim
         compilation-environment '("LANG=C" "TERM=dumb")
         completion-auto-select 'second-tab
-        describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeDate.txt")
+        describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
         help-enable-symbol-autoload t
