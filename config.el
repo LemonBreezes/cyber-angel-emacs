@@ -460,7 +460,8 @@
         tramp-allow-unsafe-temporary-files t
         visual-order-cursor-movement t
         view-read-only t
-        what-cursor-show-names t)
+        what-cursor-show-names t
+        xref-search-program 'ripgrep)
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
 
