@@ -43,7 +43,7 @@
           ;; remote.
           (when (and (buffer-file-name)
                      (not (file-in-directory-p (buffer-file-name)
-                                               (concat doom-private-dir "secrets/")))
+                                               (concat doom-user-dir "secrets/")))
                      (require 'git-auto-commit-mode nil t))
             (git-auto-commit-mode 1)
             (setq-local gac-automatically-push-p t))))))
