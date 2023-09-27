@@ -5,7 +5,7 @@
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
 (map! :leader
-      "DEL" (lookup-key doom-leader-map (kbd "SPC")))
+      :desc "Find file in project" "DEL" (lookup-key doom-leader-map (kbd "SPC")))
 
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
