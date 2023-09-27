@@ -428,6 +428,7 @@
         completions-group-sort 'alphabetical
         custom-buffer-done-kill t
         describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
+        dired-isearch-filenames 'dwim
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
         help-enable-symbol-autoload t
