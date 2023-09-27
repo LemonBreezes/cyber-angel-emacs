@@ -47,3 +47,9 @@
   (cl-letf (((symbol-function #'yes-or-no-p) (symbol-function #'always))
             ((symbol-function #'y-or-n-p) (symbol-function #'always)))
     (apply oldfun args)))
+
+;; For shutting up noisy functions.
+(defun cae-shut-up-a (oldfun &rest args)
+  (advice-add #'message :override #'ignore)
+  (unwind-protect (apply oldfun args)
+    (advice-remove #'message #'ignore)))
