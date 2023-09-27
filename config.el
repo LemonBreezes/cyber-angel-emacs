@@ -418,24 +418,17 @@
         make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t
         browse-url-firefox-new-window-is-tab t
-        comint-history-isearch 'dwim
-        compilation-environment '("LANG=C" "TERM=dumb")
         completion-auto-select 'second-tab
         completions-detailed t
         completions-format 'vertical
         completions-group t
         completions-group-sort 'alphabetical
-        custom-buffer-done-kill t
         global-mark-ring-max 1024
         grep-program "rg"
-        Info-fontify-maximum-menu-size t
-        grep-use-headings t
         history-delete-duplicates t
         history-length t
         mark-ring-max 1024
         message-log-max t
-        save-place-limit nil
-        save-place-save-skipped nil
         kill-ring-max 1024
         kill-whole-line t
         list-matching-lines-jump-to-current-line t
@@ -446,13 +439,28 @@
         scroll-error-top-bottom t
         scroll-preserve-screen-position t
         shift-select-mode 'permanent
-        tar-mode-show-date t
         track-eol t
         visual-order-cursor-movement t
         view-read-only t
         what-cursor-show-names t)
 
-  (after! describe-char
+  (after! cus-edit
+    (setq custom-buffer-done-kill t))
+
+  (after! save-place
+    (setq save-place-limit nil
+          save-place-save-skipped nil))
+
+  (after! grep
+    (setq grep-use-headings t))
+
+  (after! tar-mode
+    (setq tar-mode-show-date t))
+
+  (after! info
+    (setq Info-fontify-maximum-menu-size t))
+
+  (after! describe-text
     (setq describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")))
 
   (after! smiley
@@ -492,6 +500,7 @@
     ;; Since it doesn't though, I just set it to `t' and scroll up manually if
     ;; there are errors.
     (setq compilation-scroll-output t))
+
 
   (after! tramp
     (setq tramp-use-scp-direct-remote-copying t)
@@ -1128,6 +1137,9 @@
 
   (after! vterm
     (setq vterm-max-scrollback 100000))
+
+  (after! comint
+    (setq comint-history-isearch 'dwim))
 
   (after! em-term
     ;; Some of the commands I copied from other configurations and will likely
