@@ -1035,7 +1035,7 @@
     ;; This patches around this function not being compatible with Evil when
     ;; `evil-move-beyond-eol' is `nil'.
     (advice-add #'beginend-prog-mode-goto-end :before
-                (cae-defun cae-beginend-goto-eol-a (&rest_)
+                (cae-defun cae-beginend-goto-eol-a (&rest _)
                   (goto-char (eol)))))
 
   (use-package! isearch-mb
