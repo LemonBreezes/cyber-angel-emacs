@@ -24,6 +24,8 @@
            scroll-other-window-down
            scroll-up scroll-down
            scroll-up-command
+           pop-mark
+           cae-pop-mark
            rp/point-ring-nav-previous
            dired-maybe-insert-subdir
            dired-insert-subdir
