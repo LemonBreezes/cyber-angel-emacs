@@ -89,6 +89,7 @@
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
 (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
+(defvar doom-user-dir "~/.config/doom")
 
 ;; Load some Doom library functions so that I can evaluate code from my private
 ;; config without Doom running.
