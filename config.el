@@ -538,7 +538,7 @@
                     with-editor-export-hg-editor
                     with-editor-export-git-editor))
         (add-hook hook fn)))
-    (advice-add #'with-editor-export-editor :around #'cae-hacks-shut-up-a))
+    (advice-add #'with-editor-export-editor :around #'cae-shut-up-a))
 
   (after! spell-fu
     (add-to-list 'spell-fu-faces-exclude 'message-header-other)
