@@ -452,8 +452,8 @@
         visual-order-cursor-movement t
         view-read-only t
         what-cursor-show-names t)
-(add-hook 'help-fns-describe-function-functions
-          #'shortdoc-help-fns-examples-function)
+  (add-hook 'help-fns-describe-function-functions
+            #'shortdoc-help-fns-examples-function)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
