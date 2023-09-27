@@ -429,12 +429,6 @@
         dired-isearch-filenames 'dwim
         global-mark-ring-max 1024
         grep-program "rg"
-        help-enable-symbol-autoload t
-        help-enable-completion-autoload t
-        help-enable-symbol-autoload t
-        help-window-select t
-        help-clean-buttons t
-        help-enable-variable-value-editing t
         Info-fontify-maximum-menu-size t
         grep-use-headings t
         history-delete-duplicates t
@@ -461,8 +455,17 @@
         view-read-only t
         what-cursor-show-names t
         xref-search-program 'ripgrep)
+
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
+  (after! help
+    (setq
+     help-enable-symbol-autoload t
+     help-enable-completion-autoload t
+     help-enable-symbol-autoload t
+     help-window-select t
+     help-clean-buttons t
+     help-enable-variable-value-editing t))
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
