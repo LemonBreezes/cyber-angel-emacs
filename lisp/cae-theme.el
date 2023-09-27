@@ -164,3 +164,17 @@
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
 (after! org-src
   (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t))))
+
+(defface cae-modeline-bell-face
+   '((t (:foreground "red")))
+   "Face used for the modeline beep.")
+(setq visible-bell t
+      ring-bell-function (lambda ()
+                           (let ((buf (current-buffer))
+                                 (cookie (face-remap-add-relative 'mode-line 'cae-modeline-bell-face)))
+                             (force-mode-line-update)
+                             (run-with-timer 0.15 nil
+                                             (lambda ()
+                                               (with-current-buffer buf
+                                                 (face-remap-remove-relative cookie)
+                                                 (force-mode-line-update)))))))
