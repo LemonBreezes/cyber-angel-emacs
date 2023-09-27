@@ -166,12 +166,12 @@
   (add-to-list 'org-src-block-faces '("latex" (:inherit default :extend t))))
 
 (defface cae-modeline-bell-face
-  '((t (:foreground "red")))
+  '((t (:inherit mode-line-highlight)))
   "Face used for the modeline beep.")
 (setq visible-bell t
       ring-bell-function (lambda ()
                            (let ((buf (current-buffer))
-                                 (cookie (face-remap-add-relative 'mode-line 'cae-modeline-bell-face)))
+                                 (cookie (face-remap-add-relative 'mode-line-active 'cae-modeline-bell-face)))
                              (force-mode-line-update)
                              (run-with-timer 0.15 nil
                                              (lambda ()
