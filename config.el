@@ -170,7 +170,7 @@
      '(("" . "cae-\\(.*\\)") . (nil . "+\\1"))
      '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))))
 
-  (setq +zen-text-scale 0.7)
+  (setq +zen-text-scale 0)
 
   (after! eros
     (setq eros-eval-result-prefix (if (cae-tty-disable-unicode-p) "=> " "⟹ ")))
