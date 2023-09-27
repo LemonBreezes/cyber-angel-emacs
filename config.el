@@ -430,6 +430,7 @@
         describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")
         dired-isearch-filenames 'dwim
         global-mark-ring-max 1024
+        grep-program "rg"
         help-enable-symbol-autoload t
         help-enable-completion-autoload t
         help-enable-symbol-autoload t
