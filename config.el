@@ -113,7 +113,9 @@
         suggest-key-bindings nil)
 
   (setq-default cursor-in-non-selected-windows t)
-  (setq highlight-nonselected-windows t)
+
+  (after! image
+    (setq image-use-external-converter t))
 
   (setq set-message-functions
         '(inhibit-message
@@ -410,9 +412,21 @@
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
         remote-file-name-inhibit-auto-save-visited t
-        history-length (expt 2 16)
         make-cursor-line-fully-visible nil ;I forgot why I set this.
-        yank-pop-change-selection t)
+        yank-pop-change-selection t
+        help-enable-symbol-autoload t
+        help-enable-completion-autoload t
+        help-enable-symbol-autoload t
+        help-window-select t
+        help-clean-buttons t
+        help-enable-variable-value-editing t
+        grep-use-headings t
+        history-delete-duplicates t
+        history-length t
+        kill-ring-max 1024
+        kill-whole-line t
+        list-matching-lines-jump-to-current-line t
+        mouse-prefer-closest-glyph t)
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
@@ -674,13 +688,6 @@
             (cae-defun cae-clean-up-lazy-highlight-h ()
               (when isearch-lazy-highlight-overlays
                 (lazy-highlight-cleanup t) t)))
-
-  (setq help-enable-symbol-autoload t
-        help-enable-completion-autoload t
-        help-enable-symbol-autoload t
-        help-window-select t
-        help-clean-buttons t
-        grep-use-headings t)
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
