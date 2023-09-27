@@ -10,7 +10,7 @@
 
 (set-language-environment "UTF-8")
 
-;; Set up some editing conveniences
+;; Set up some editing conveniences.
 (electric-pair-mode 1)
 (electric-indent-mode 1)
 (show-paren-mode 1)
@@ -20,7 +20,7 @@
 (icomplete-vertical-mode 1)
 (setopt tab-always-indent 'complete)
 
-;; Set up modeline and appearance
+;; Set up modeline and appearance.
 (blink-cursor-mode -1)
 (scroll-bar-mode -1)
 (fringe-mode -1)
@@ -32,7 +32,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-theme 'wheatgrass)
 
-;; This is incomplete but at least it sets some variables up
+;; This is incomplete but at least it sets some variables up.
 (setq delete-by-moving-to-trash t
       remote-file-name-inhibit-delete-by-moving-to-trash t
       remote-file-name-inhibit-auto-save t
@@ -94,7 +94,7 @@
 ;; Load some Doom library functions so that I can evaluate code from my private
 ;; config without Doom running.
 (let ((doom-lib "~/.config/emacs/lisp/doom-lib"))
-  (when (file-exists-p doom-lib)
+  (when (file-exists-p (concat doom-lib ".el"))
     (load doom-lib t t)))
 
 ;; Bootstrap straight
