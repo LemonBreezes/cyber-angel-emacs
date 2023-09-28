@@ -5,7 +5,6 @@
                    ccls                 ; I use clangd.
                    compat               ; I use the latest version of Emacs.
                    ace-window
-                   rainbow-delimiters
                    volatile-highlights
                    hl-line
                    elfeed-goodies)
