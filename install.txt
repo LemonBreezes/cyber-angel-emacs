@@ -19,6 +19,7 @@
 19. Install js-beautify.
 20. Install mu.
 21. Install poppler and libvterm.
+... (check my world file)
 
 1. Set up my kernel parameters in Grub.
 2. Set up /etc/fstab
