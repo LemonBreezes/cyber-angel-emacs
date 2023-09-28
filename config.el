@@ -457,7 +457,7 @@
   (after! info
     (setq Info-fontify-maximum-menu-size t))
 
-  (after! describe-text
+  (after! descr-text
     (setq describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")))
 
   (after! smiley
