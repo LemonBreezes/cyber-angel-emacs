@@ -70,13 +70,6 @@
     (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
     (advice-add #'consult--jump :around #'cae-dired-consult-jump-a)
 
-    (when (cae-tty-disable-unicode-p)
-      (setq dirvish-attributes
-            (delq 'subtree-state
-                  (delq 'all-the-icons dirvish-attributes))
-            dirvish-path-separators '("~" "/" "/")
-            dirvish-subtree-prefix " |"
-            dirvish-subtree-line-prefix " |"))
     (after! dirvish-side
       (dirvish-side-follow-mode 1))
     (add-hook! 'dirvish-setup-hook
