@@ -28,7 +28,7 @@
     :defer t :init
     (add-hook 'doom-after-init-hook #'minions-mode)
     :config
-    (setq minions-mode-line-lighter (if (cae-tty-disable-unicode-p) "=" "≡"))
+    (setq minions-mode-line-lighter "≡")
     (setq minions-demoted-modes
           '(abbrev-mode
             auto-fill-function
