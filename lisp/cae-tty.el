@@ -19,6 +19,8 @@
     (setq minions-mode-line-lighter "="))
   (after! anzu
     (setq anzu-replace-to-string-separator " -> "))
+  (after! org-tidy
+    (setq org-tidy-properties-inline-symbol "."))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
