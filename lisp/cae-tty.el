@@ -22,6 +22,13 @@
     (setq anzu-replace-to-string-separator " -> "))
   (after! org-tidy
     (setq org-tidy-properties-inline-symbol "."))
+  (after! dirvish-attributes
+    (setq dirvish-attributes
+          (delq 'subtree-state
+                (delq 'all-the-icons dirvish-attributes))
+          dirvish-path-separators '("~" "/" "/")
+          dirvish-subtree-prefix " |"
+          dirvish-subtree-line-prefix " |"))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
