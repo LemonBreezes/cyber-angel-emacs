@@ -871,7 +871,14 @@
     :config
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
-          file-info-max-value-length 100))
+          file-info-max-value-length 100)
+    (when (cae-display-graphic-p)
+      (setq hydra-hint-display-type 'posframe)
+      (setq hydra-posframe-show-params `(:poshandler posframe-poshandler-frame-center
+                                         :internal-border-width 2
+                                         :internal-border-color "#61AFEF"
+                                         :left-fringe 16
+                                         :right-fringe 16))))
 
   (use-package! titlecase
     :defer t :init
