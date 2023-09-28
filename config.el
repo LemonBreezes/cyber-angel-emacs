@@ -4,10 +4,6 @@
 
 ;;; Stuff that should not be disabled.
 
-;; I have disabled `rainbow-delimiters' as a package so this is to prevent
-;; errors.
-(defalias 'rainbow-delimiters-mode #'ignore)
-
 (load! "lisp/cae-tty")
 (load! "lisp/cae-bindings")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
