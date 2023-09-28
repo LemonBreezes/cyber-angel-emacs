@@ -164,8 +164,7 @@
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
           which-key-compute-remaps t
-          which-key-max-description-length 35
-          which-key-separator (if (cae-tty-disable-unicode-p) " -> " " → "))
+          which-key-max-description-length 35)
     (pushnew!
      which-key-replacement-alist
      '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
@@ -176,9 +175,6 @@
      '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))))
 
   (setq +zen-text-scale 0)
-
-  (after! eros
-    (setq eros-eval-result-prefix (if (cae-tty-disable-unicode-p) "=> " "⟹ ")))
 
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
@@ -1071,7 +1067,8 @@
 
   (after! yasnippet
     (setq yas-triggers-in-field t     ;Allow nested snippets.
-          yas-trigger-symbol (if (cae-tty-disable-unicode-p) " =>"" →")))
+          ;;yas-trigger-symbol " →"
+          ))
 
   (use-package! dabbrev
     :defer t :config
