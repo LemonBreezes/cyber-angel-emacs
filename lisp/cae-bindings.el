@@ -78,11 +78,11 @@
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "M-R" #'cae-sp-raise-sexp
-      ;;[C-i] #'doom/dumb-indent
       [remap dabbrev-expand] #'hippie-expand
       (:when (modulep! :completion corfu)
        [remap dabbrev-completion] #'cape-dabbrev)
-      ;;"C-S-i" #'doom/dumb-dedent
+      [C-i] #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
