@@ -17,7 +17,7 @@
     :config
     (setq anzu-mode-lighter ""
           anzu-replace-threshold 50
-          anzu-replace-to-string-separator (if (cae-tty-disable-unicode-p) " -> " " → ")))
+          anzu-replace-to-string-separator " → "))
 
   (use-package! evil-anzu
     :when (modulep! :editor evil)
