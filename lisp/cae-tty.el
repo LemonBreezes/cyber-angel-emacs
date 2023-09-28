@@ -17,6 +17,8 @@
     (setq yas-trigger-symbol " =>"))
   (after! minions
     (setq minions-mode-line-lighter "="))
+  (after! anzu
+    (setq anzu-replace-to-string-separator " -> "))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
