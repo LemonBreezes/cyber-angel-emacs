@@ -70,7 +70,7 @@
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
-(package! file-info :recipe (:host github :repo "Artawower/file-info.el"))
+(package! file-info)
 (package! titlecase)
 (package! transpose-frame)
 (package! logos)
