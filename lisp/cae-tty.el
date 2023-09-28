@@ -11,6 +11,8 @@
     (setq helm-rsync-percent-sign "%"))
   (after! which-key
     (setq which-key-separator " -> "))
+  (after! eros
+    (setq eros-eval-result-prefix "=> "))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
