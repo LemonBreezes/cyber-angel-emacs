@@ -1067,8 +1067,7 @@
 
   (after! yasnippet
     (setq yas-triggers-in-field t     ;Allow nested snippets.
-          ;;yas-trigger-symbol " →"
-          ))
+          yas-trigger-symbol " →"))
 
   (use-package! dabbrev
     :defer t :config
