@@ -437,7 +437,6 @@
         shift-select-mode 'permanent
         track-eol t
         visual-order-cursor-movement t
-        view-read-only t
         what-cursor-show-names t)
 
   (after! cus-edit
