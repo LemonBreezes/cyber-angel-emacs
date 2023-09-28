@@ -13,6 +13,10 @@
     (setq which-key-separator " -> "))
   (after! eros
     (setq eros-eval-result-prefix "=> "))
+  (after! yasnippet
+    (setq yas-trigger-symbol " =>"))
+  (after! minions
+    (setq minions-mode-line-lighter "="))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
