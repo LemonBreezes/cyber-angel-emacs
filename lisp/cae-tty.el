@@ -9,6 +9,8 @@
     (setq query-replace-from-to-separator " -> "))
   (after! helm-files
     (setq helm-rsync-percent-sign "%"))
+  (after! which-key
+    (setq which-key-separator " -> "))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore)))
