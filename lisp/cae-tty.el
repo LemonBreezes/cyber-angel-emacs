@@ -1,38 +1,5 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
-(defun cae-tty-disable-unicode ()
-  (interactive)
-  (after! org-eldoc
-    (setq org-eldoc-breadcrumb-separator " -> "))
-  (after! embrace
-    (setq embrace-help-separator " -> "))
-  (after! replace
-    (setq query-replace-from-to-separator " -> "))
-  (after! helm-files
-    (setq helm-rsync-percent-sign "%"))
-  (after! which-key
-    (setq which-key-separator " -> "))
-  (after! eros
-    (setq eros-eval-result-prefix "=> "))
-  (after! yasnippet
-    (setq yas-trigger-symbol " =>"))
-  (after! minions
-    (setq minions-mode-line-lighter "="))
-  (after! anzu
-    (setq anzu-replace-to-string-separator " -> "))
-  (after! org-tidy
-    (setq org-tidy-properties-inline-symbol "."))
-  (after! dirvish-attributes
-    (setq dirvish-attributes
-          (delq 'subtree-state
-                (delq 'all-the-icons dirvish-attributes))
-          dirvish-path-separators '("~" "/" "/")
-          dirvish-subtree-prefix " |"
-          dirvish-subtree-line-prefix " |"))
-  (dolist (fn '(nerd-icons-faicon
-                nerd-icons-octicon))
-    (advice-add fn :override #'ignore)))
-
 ;; Stuff so that Emacs doesn't break in the Terminal.
 (when (modulep! :completion vertico +childframe)
   (unless (cae-display-graphic-p)
