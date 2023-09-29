@@ -211,11 +211,6 @@
              nyan-minimum-window-width 20)))
 
   ;; Email
-  (after! mu4e-bookmarks
-    (setq mu4e-modeline-unread-items '("U:" "U:")
-          mu4e-modeline-all-read '("R:" "R:")
-          mu4e-modeline-all-clear '("C:" "C:")
-          mu4e-modeline-new-items '("N:" "N:")))
   (when (modulep! :email mu4e)
     (after! mu4e-modeline
       (mu4e-modeline-mode +1))))
