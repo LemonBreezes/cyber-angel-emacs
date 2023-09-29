@@ -211,7 +211,6 @@
              nyan-minimum-window-width 20)))
 
   ;; Email
-  (backtrace! mu4e-modeline-mode)
   (when (modulep! :email mu4e)
     (after! mu4e-modeline
       (setq mu4e-modeline-show-global t))))
