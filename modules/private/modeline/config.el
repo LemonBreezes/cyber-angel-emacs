@@ -200,10 +200,6 @@
 
   (add-hook 'doom-first-file-hook #'column-number-mode)
 
-  (when (modulep! :email mu4e)
-    (after! mu4e
-      (mu4e-modeline-mode +1)))
-
   ;; I have this disabled because I never use it to scroll the window.
   (when (modulep! +pretty)
     (use-package! nyan-mode
@@ -219,4 +215,7 @@
     (setq mu4e-modeline-unread-items '("U:" "U:")
           mu4e-modeline-all-read '("R:" "R:")
           mu4e-modeline-all-clear '("C:" "C:")
-          mu4e-modeline-new-items '("N:" "N:"))))
+          mu4e-modeline-new-items '("N:" "N:")))
+  (when (modulep! :email mu4e)
+    (after! mu4e-modeline
+      (mu4e-modeline-mode +1))))
