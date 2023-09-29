@@ -1267,8 +1267,6 @@
   (after! mu4e-vars
     (setq mu4e-modeline-support t
           mu4e-notification-support t))
-  (after! mu4e-modeline
-    (setq mu4e-modeline-show-global t))
   (after! mu4e
     (setq mu4e-contexts
           `(,(make-mu4e-context
