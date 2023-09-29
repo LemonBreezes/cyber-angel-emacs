@@ -796,7 +796,8 @@
   (setq emms-track-description-function 'cae-emms-track-description
         emms-mode-line-icon-enabled-p nil)
   (after! emms-mode-line-cycle
-    (setq emms-mode-line-cycle-max-width 24))
+    (setq emms-mode-line-cycle-max-width 24
+          emms-mode-line-cycle-velocity 4))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
