@@ -23,8 +23,13 @@
             (overlay-put o 'display "\n"))))))
 
   (use-package! backline
+    :when cae-theme-extend-heading-faces
     :defer t :init
-    (advice-add 'outline-flag-region :after 'backline-update)))
+    (advice-add 'outline-flag-region :after 'backline-update)
+    (after! org
+      (setq org-fontify-whole-heading-line t))
+    (after! markdown-mode
+      (setq markdown-fontify-whole-heading-line t))))
 
 (defun cae-theme-customize-faces-h (_)
   (when (modulep! :lang org)
