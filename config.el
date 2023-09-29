@@ -1326,6 +1326,8 @@
        '(vterm))
    ,@(when (modulep! :ui hydra)
        '(hydra cae-cheatsheets))
+   ,@(when (modulep! :email mu4e)
+       '(mu4e))
    ,@(when (or (modulep! :completion helm)
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
