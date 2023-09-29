@@ -871,9 +871,7 @@
     :config
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
-          file-info-max-value-length 100)
-    (when (cae-display-graphic-p)
-      (setq hydra-hint-display-type 'lv)))
+          file-info-max-value-length 100))
 
   (use-package! titlecase
     :defer t :init
