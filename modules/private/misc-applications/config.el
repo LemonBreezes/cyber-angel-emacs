@@ -688,7 +688,7 @@
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
         :n "w" #'+mpc-other-window-previous
-        :n "RET" #'mpc-play
+        :n "RET" (cmd! () (mpc-select) (mpc-play))
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
         :n "i" #'evilem-motion-next-line
