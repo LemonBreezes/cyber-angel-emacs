@@ -23,6 +23,11 @@
     (setq anzu-replace-to-string-separator " -> "))
   (after! org-tidy
     (setq org-tidy-properties-inline-symbol "."))
+  (after! mu4e-bookmarks
+    (setq mu4e-modeline-unread-items '("U:" "U:")
+          mu4e-modeline-all-read '("R:" "R:")
+          mu4e-modeline-all-clear '("C:" "C:")
+          mu4e-modeline-new-items '("N:" "N:")))
   (after! dirvish-attributes
     (setq dirvish-attributes
           (delq 'subtree-state
