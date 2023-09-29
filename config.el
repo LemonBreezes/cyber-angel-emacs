@@ -86,7 +86,7 @@
 
   ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
   ;; other overlays. But in tabulated buffers like `proced', it helps me see
-  ;; what item, like say what process in `proced' I have selected.
+  ;; what item I have selected.
   (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
   ;; I never use the mouse buttons on the tab bar so I prefer to not show them.
