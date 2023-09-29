@@ -214,4 +214,6 @@
   (after! mu4e-vars
     (setq mu4e-modeline-support t))
   (after! mu4e-modeline
-    (setq mu4e-modeline-show-global t)))
+    (setq mu4e-modeline-show-global t))
+  (after! mu4e
+    (mu4e-modeline-mode +1)))
