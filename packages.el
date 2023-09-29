@@ -8,7 +8,8 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   mu4e-alert)
+                   mu4e-alert
+                   flymake-popon)       ;FIXME
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (when (and (modulep! :editor evil +everywhere)
