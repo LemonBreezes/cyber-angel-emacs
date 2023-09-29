@@ -1220,7 +1220,10 @@
     (after! which-key
       (which-key-add-keymap-based-replacements org-mode-map
         "C-c \"" "plot"
-        "C-c C-v" "org-babel-map"))))
+        "C-c C-v" "org-babel-map")))
+
+  (after! markdown-mode
+    (setq markdown-fontify-code-blocks-natively t)))
 
 
 ;;; Email
