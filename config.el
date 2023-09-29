@@ -591,12 +591,7 @@
     (after! embark
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
 
-  (use-package! wakatime-mode
-    :defer t :defer-incrementally t :config
-    (global-wakatime-mode +1)
-    (setq wakatime-cli-path (executable-find "wakatime")))
 
-  
   ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we need
   ;; to use sudo on a file before `tramp-sh' is loaded.
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
@@ -872,6 +867,17 @@
     ;; See the `:private vc' module for further configuration.
     (setq file-info-include-headlines t
           file-info-max-value-length 100))
+
+  (use-package! wakatime-mode
+    :defer t :defer-incrementally t :config
+    (global-wakatime-mode +1)
+    (setq wakatime-cli-path (executable-find "wakatime")))
+
+  (use-package! wakatime-ui
+    :defer t :after wakatime-mode
+    (setq wakatime-ui--binary-name wakatime-cli-path)
+    (global-wakatime-ui-mode +1))
+
 
   (use-package! titlecase
     :defer t :init
