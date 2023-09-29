@@ -85,6 +85,7 @@
 (package! string-inflection)
 (package! beginend)
 (package! isearch-mb)
+(package! file-info)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
