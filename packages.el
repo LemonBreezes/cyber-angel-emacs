@@ -15,7 +15,7 @@
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! file-info :recipe
-  (:host github :repo "LemonBreezes/file-info" :branch "fix-flymake-wrong-number-of-args-error"))
+  (:host github :repo "LemonBreezes/file-info.el" :branch "fix-flymake-wrong-number-of-args-error"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
