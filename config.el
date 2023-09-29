@@ -1264,7 +1264,6 @@
   (when (modulep! :email mu4e)
     (map! [remap compose-mail] #'+mu4e/compose))
   (after! mu4e
-    (mu4e-modeline-mode +1)
     (setq mu4e-contexts
           `(,(make-mu4e-context
               :name "Fastmail"
