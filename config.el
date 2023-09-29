@@ -873,14 +873,6 @@
     (global-wakatime-mode +1)
     (setq wakatime-cli-path (executable-find "wakatime")))
 
-  (use-package! wakatime-ui
-    :defer t :init
-    (after! (:or wakatime-mode file-info)
-      (require 'wakatime-ui))
-    :config
-    (setq wakatime-ui--binary-name "wakatime")
-    (global-wakatime-ui-mode +1))
-
   (use-package! titlecase
     :defer t :init
     (after! embark
