@@ -878,7 +878,6 @@
     (setq wakatime-ui--binary-name wakatime-cli-path)
     (global-wakatime-ui-mode +1))
 
-
   (use-package! titlecase
     :defer t :init
     (after! embark
