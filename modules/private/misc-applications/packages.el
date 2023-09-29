@@ -58,6 +58,7 @@
 (package! somafm)
 (package! empv)
 (package! emms)
+(package! emms-mode-line-cycle)
 (package! lyrics-fetcher)
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
