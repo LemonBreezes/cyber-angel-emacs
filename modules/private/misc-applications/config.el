@@ -808,7 +808,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "l" "Lyrics"
-      "L" "Lyrics query")))
+      "L" "Lyrics query"))
+  :config
+  (setq lyrics-fetcher-lyrics-folder +misc-applications-music-dir))
 
 (use-package! helm-emms
   :when (or (modulep! :private helm)
