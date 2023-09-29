@@ -1265,7 +1265,8 @@
   (when (modulep! :email mu4e)
     (map! [remap compose-mail] #'+mu4e/compose))
   (after! mu4e-vars
-    (setq mu4e-modeline-support t))
+    (setq mu4e-modeline-support t
+          mu4e-notification-support t))
   (after! mu4e-modeline
     (setq mu4e-modeline-show-global t))
   (after! mu4e
