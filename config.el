@@ -155,9 +155,7 @@
           doom-modeline-gnus t
           doom-modeline-github t
           doom-modeline-major-mode-icon nil
-          doom-modeline-minor-modes nil)
-    (after! mu4e
-      (setq mu4e-modeline-show-global t)))
+          doom-modeline-minor-modes nil))
 
   (after! which-key
     (setq which-key-ellipsis "..."
