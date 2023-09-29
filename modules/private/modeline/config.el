@@ -212,7 +212,7 @@
 
   ;; Email
   (when (modulep! :email mu4e)
-    (setq mu4e-modeline-support t)
+    (after! mu4e
+      (setq mu4e-modeline-support t))
     (after! mu4e-modeline
-      (setq mu4e-modeline-show-global t)
-      (run-at-time 0.0 nil #'mu4e-modeline-mode 1))))
+      (setq mu4e-modeline-show-global t))))
