@@ -208,11 +208,4 @@
       (add-hook 'doom-after-init-hook #'nyan-mode)
       :config
       (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20)))
-
-  ;; Email
-  (after! mu4e-vars
-    (setq mu4e-modeline-support t))
-  (after! mu4e-modeline
-    (setq mu4e-modeline-show-global t))
-  (backtrace! mu4e-modeline-mode))
+             nyan-minimum-window-width 20))))
