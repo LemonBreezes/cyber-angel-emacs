@@ -3,7 +3,7 @@
 (if (locate-library "projectile")
     (after! projectile
       (map! :leader :prefix "p"
-       :desc "Dired in project root"  "-" #'projectile-dired)
+            :desc "Dired in project root"  "-" #'projectile-dired)
 
       ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
       ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
