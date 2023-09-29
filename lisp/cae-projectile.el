@@ -2,6 +2,9 @@
 
 (if (locate-library "projectile")
     (after! projectile
+      (map! :map projectile-command-map
+            "C-d" #'projectile-dired)
+
       ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
       ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
       (defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
