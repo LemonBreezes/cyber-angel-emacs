@@ -65,7 +65,7 @@
 
        :editor
        file-templates
-       (format +onsave)
+       format
        snippets
        multiple-cursors
        fold
