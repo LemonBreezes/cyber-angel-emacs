@@ -85,7 +85,7 @@
   (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
   ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
-  ;; other overlays. But in tabulated buffers like `proced', it helps me see
+  ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
   ;; what item I have selected.
   (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
