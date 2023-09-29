@@ -212,4 +212,4 @@
 
   ;; Email
   (when (modulep! :email mu4e)
-  (setq mu4e-modeline-mode 1)))
+    (setq mu4e-modeline-mode 1)))
