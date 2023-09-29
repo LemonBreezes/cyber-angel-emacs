@@ -10,7 +10,6 @@ flycheck_*
 .local/
 .localelpa/
 secrets/
-secrets/*
 misc-files/iosevka-comfy*
 custom.el
 
