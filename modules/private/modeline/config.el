@@ -200,6 +200,9 @@
 
   (add-hook 'doom-first-file-hook #'column-number-mode)
 
+  (after! mu4e
+    (mu4e-modeline-mode +1))
+
   ;; I have this disabled because I never use it to scroll the window.
   (when (modulep! +pretty)
     (use-package! nyan-mode
