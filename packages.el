@@ -7,7 +7,8 @@
                    ace-window
                    volatile-highlights
                    hl-line
-                   elfeed-goodies)
+                   elfeed-goodies
+                   mu4e-alert)
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
 (when (and (modulep! :editor evil +everywhere)
