@@ -214,5 +214,4 @@
   (backtrace! mu4e-modeline-mode)
   (when (modulep! :email mu4e)
     (after! mu4e-modeline
-      (setq mu4e-modeline-show-global t)
-      (mu4e-modeline-mode +1))))
+      (setq mu4e-modeline-show-global t))))
