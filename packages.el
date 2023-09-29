@@ -72,7 +72,7 @@
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
-;;(package! file-info)
+(package! file-info)
 (package! titlecase)
 (package! transpose-frame)
 (package! logos)
@@ -85,7 +85,6 @@
 (package! string-inflection)
 (package! beginend)
 (package! isearch-mb)
-(package! file-info)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
