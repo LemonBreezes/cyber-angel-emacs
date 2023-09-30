@@ -523,6 +523,8 @@
         "a" nil))                       ;Not sure what `autotetris-move' even
                                         ;does to be honest.
 
+;; I have no idea how to play this game and I have not set up Evil keybindings
+;; for it but it looks really cool. It's basically Solitaire.
 (use-package! klondike
   :defer t :init
   (map! :map +misc-applications-games-map
