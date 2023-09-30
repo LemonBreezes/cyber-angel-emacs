@@ -33,8 +33,9 @@
 ;;;###autoload
 (defun +mpc-reload ()
   (interactive)
-  (mpc-quit)
-  (mpc))
+  (let ((inhibit-redisplay t))
+    (mpc-quit)
+    (mpc)))
 
 ;; This is a hack that should be unncessary but for some reason restoring the
 ;; window configuration doesn't work properly for MPC. This is a workaround.
