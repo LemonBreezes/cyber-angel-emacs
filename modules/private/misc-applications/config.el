@@ -682,6 +682,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "c" "MPC"))
+  (add-hook! (mpc-songs-mode mpc-tagbrowser-mode)
+             #'+misc-applications-hide-cursor-h)
   :config
   (setq mpc-host "localhost"
         mpc-mpd-music-directory +misc-applications-music-dir)
