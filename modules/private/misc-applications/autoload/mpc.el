@@ -48,7 +48,10 @@
 (defun +mpc-jump-to-previous-position ()
   (when-let (pos (alist-get (window-buffer (selected-window))
                             +mpc-buf-pos-alist))
-    (goto-char (marker-position pos))))
+    (goto-char (marker-position pos)))
+  (when (get-buffer-window "*MPC-Songs*")
+    (with-selected-window (get-buffer-window "*MPC-Songs*")
+      (mpc-goto-playing-song))))
 
 ;;;###autoload
 (defun +mpc-other-window-previous ()
