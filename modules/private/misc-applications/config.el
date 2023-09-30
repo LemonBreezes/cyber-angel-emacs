@@ -813,9 +813,10 @@
                   (unless (get-char-property 0 'valign emms-mode-line-format)
                     (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
                            (pixel-width
-                            (- (cae-variable-pitch-width
-                                (make-string (1- (length emms-mode-line-string)) ?T))
-                               (cae-variable-pitch-width emms-mode-line-string))))
+                            (max (- (cae-variable-pitch-width
+                                     (make-string (1- (length emms-mode-line-string)) ?T))
+                                    (cae-variable-pitch-width emms-mode-line-string))
+                                 0)))
                       (setq emms-mode-line-string
                             (propertize (concat (string-remove-suffix suffix emms-mode-line-string)
                                                 (propertize " "
