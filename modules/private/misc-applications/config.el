@@ -819,9 +819,7 @@
                           (concat (string-remove-suffix suffix emms-mode-line-string)
                                   (propertize " "
                                               'display `(space :width (,pixel-width)))
-                                  suffix)))))
-    (emms-mode-line-cycle-update-mode-line-string)
-    )
+                                  suffix))))))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
