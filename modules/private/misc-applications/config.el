@@ -811,10 +811,10 @@
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
                   (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-                        (pixel-width
-                         (- (cae-variable-pitch-width
-                             (make-string (1- (length emms-mode-line-string)) ?T))
-                            (cae-variable-pitch-width emms-mode-line-string))))
+                         (pixel-width
+                          (- (cae-variable-pitch-width
+                              (make-string (1- (length emms-mode-line-string)) ?T))
+                             (cae-variable-pitch-width emms-mode-line-string))))
                     (setq emms-mode-line-string
                           (concat (string-remove-suffix suffix emms-mode-line-string)
                                   (propertize " "
