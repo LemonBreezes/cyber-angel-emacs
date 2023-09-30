@@ -766,6 +766,8 @@
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
   (setq emms-info-functions '(emms-info-native emms-info-cueinfo))
   (setq emms-track-description-function #'emms-info-track-description)
+  (require 'emms-cache)
+  (require 'emms-score)
   (emms-cache +1)
   (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (emms-score +1)
