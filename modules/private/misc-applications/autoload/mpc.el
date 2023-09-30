@@ -35,7 +35,11 @@
   (interactive)
   (let ((inhibit-redisplay t))
     (mpc-quit)
-    (mpc)))
+    (mpc)
+    (dolist (buf (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))
+      (setf (alist-get buf +mpc-buf-pos-alist)
+            (with-current-buffer buf
+              (point-marker))))))
 
 ;; This is a hack that should be unncessary but for some reason restoring the
 ;; window configuration doesn't work properly for MPC. This is a workaround.
