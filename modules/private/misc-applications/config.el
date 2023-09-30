@@ -690,6 +690,7 @@
   (map! :map mpc-mode-map
         :n "gr" #'+mpc-reload
         :ng "q" #'+mpc-quit
+        :ng "Q" #'mpc-quit
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
