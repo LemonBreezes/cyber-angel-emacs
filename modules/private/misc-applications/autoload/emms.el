@@ -108,7 +108,10 @@ rather than the whole path."
 
 
 (defun +emms-compute-modeline-cycle-pixel-width (song)
-  (or (gethash song emms-mode-line-song-pixel-width-hash)
+  (when (< emms-mode-line-cycle-max-width (length song))
+    (setq song
+          (concat song " ")))
+  (or ;(gethash song emms-mode-line-song-pixel-width-hash)
       (puthash song
                (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
                  (cl-do* ((output 0)
@@ -121,7 +124,7 @@ rather than the whole path."
                    (insert (format emms-mode-line-format
                                    (propertize
                                     (if (< end beg)
-                                        (concat (substring-no-properties song beg (1- l))
+                                        (concat (substring-no-properties song beg l)
                                                 (substring-no-properties song 0 end))
                                       (substring-no-properties song beg end))
                                     'line-prefix nil 'wrap-prefix nil 'face 'mode-line)))
@@ -148,8 +151,12 @@ rather than the whole path."
                   (propertize " " 'display `(space :width (,padding)))
                   suffix))))
 
-;;(setq emms-mode-line-string
-;;      (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
+(setq emms-mode-line-string
+      (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
+(- (+emms-compute-modeline-cycle-pixel-width
+    (or emms-mode-line-cycle--title
+        (funcall emms-mode-line-cycle-current-title-function)))
+   (cae-variable-pitch-width emms-mode-line-string))
 ;;(length (or emms-mode-line-cycle--title
 ;;            (funcall emms-mode-line-cycle-current-title-function)))
 
