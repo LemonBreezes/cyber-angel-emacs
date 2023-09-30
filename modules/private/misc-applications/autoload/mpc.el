@@ -14,9 +14,6 @@
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
-  (when (get-buffer-window "*MPC-Songs*")
-    (with-selected-window (get-buffer-window "*MPC-Songs*")
-      (mpc-goto-playing-song)))
   (+mpc-jump-to-previous-position)
   (setq +mpc--wconf (current-window-configuration)))
 
@@ -46,6 +43,16 @@
               (point-marker))))))
 
 (defun +mpc-jump-to-previous-position ()
+  (when-let ((marker (alist-get (window-buffer (selected-window)) +mpc-buf-pos-alist))
+             (pos (marker-position marker)))
+    (goto-char pos)))
+
+;;;###autoload
+(defun +mpc-other-window-previous ()
+  (interactive)
+  (setf (alist-get (window-buffer (selected-window))
+                   +mpc-buf-pos-alist)
+        (point-marker))
   (cl-loop do (call-interactively #'other-window-previous)
            until (and (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
                       (not (string= (buffer-name (current-buffer)) "*MPC-Songs*")))
@@ -54,17 +61,14 @@
                                           +mpc-buf-pos-alist)))))
 
 ;;;###autoload
-(defun +mpc-other-window-previous ()
-  (interactive)
-  (setf (alist-get (window-buffer (selected-window))
-                   +mpc-buf-pos-alist)
-        (point-marker))
-  (+mpc-jump-to-previous-position))
-
-;;;###autoload
 (defun +mpc-other-window ()
   (interactive)
   (setf (alist-get (window-buffer (selected-window))
                    +mpc-buf-pos-alist)
         (point-marker))
-  (+mpc-jump-to-previous-position))
+  (cl-loop do (call-interactively #'other-window)
+           until (and (not (string= (buffer-name (current-buffer)) "*MPC-Status*"))
+                      (not (string= (buffer-name (current-buffer)) "*MPC-Songs*")))
+           finally (goto-char (marker-position
+                               (alist-get (window-buffer (selected-window))
+                                          +mpc-buf-pos-alist)))))
