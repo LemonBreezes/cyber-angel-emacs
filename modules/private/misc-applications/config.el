@@ -761,10 +761,16 @@
               (lambda (list)
                 (sort list (lambda (_ _) (< (random) 0.5)))))
   :config
-  (cl-letf (((symbol-function #'emms-mode-line-mode) (symbol-function #'ignore))
-            ((symbol-function #'emms-playing-time-mode) (symbol-function #'ignore)))
-    (emms-all))
+  ;; These are the defaults minus the modeline setup.
+  (setq emms-playlist-default-major-mode #'emms-playlist-mode)
+  (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
+  (setq emms-info-functions '(emms-info-native emms-info-cueinfo))
+  (setq emms-track-description-function #'emms-info-track-description)
+  (emms-cache +1)
+  (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
+  (emms-score +1)
   (emms-default-players)
+
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
