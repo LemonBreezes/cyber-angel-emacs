@@ -1,35 +1,36 @@
 ;;; private/misc-applications/trash/emms-mode-line-cycle-variable-pitch.el -*- lexical-binding: t; -*-
 
-;;(defvar emms-mode-line-string-pixel-length-max-alist nil)
+(defvar emms-mode-line-string-pixel-length-max-alist nil)
+(defvar emms-mode-line-song-pixel-length-max-hash-table (make-hash-table :test #'equal))
 ;;;;;###autoload
-;;(defun +emms-mode-line-cycle-valign (&rest _)
-;;  (let* ((song (or emms-mode-line-cycle--title
-;;                   (funcall emms-mode-line-cycle-current-title-function))))
-;;    (if (or (not emms-mode-line-string)
-;;            (> (length emms-mode-line-string)
-;;               (+ (length (string-replace "%s" "" emms-mode-line-format))
-;;                  (min (length song)
-;;                       emms-mode-line-cycle-max-width))))
-;;        (and emms-mode-line-string
-;;             (setq emms-mode-line-string
-;;                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
-;;      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-;;             (width (cae-variable-pitch-width emms-mode-line-string))
-;;             (l (length emms-mode-line-string))
-;;             (padding (max (- (max (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
-;;                                         (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
-;;                                              width))
-;;                                   (puthash song
-;;                                            (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
-;;                                                     0)
-;;                                                 width)
-;;                                            emms-mode-line-song-pixel-length-max-hash-table))
-;;                              width 0))))
-;;        (setq emms-mode-line-string
-;;              (concat (string-remove-suffix suffix emms-mode-line-string)
-;;                      (propertize " "
-;;                                  'display `(space :width (,padding)))
-;;                      suffix))))))
+(defun +emms-mode-line-cycle-valign (&rest _)
+  (let* ((song (or emms-mode-line-cycle--title
+                   (funcall emms-mode-line-cycle-current-title-function))))
+    (if (or (not emms-mode-line-string)
+            (> (length emms-mode-line-string)
+               (+ (length (string-replace "%s" "" emms-mode-line-format))
+                  (min (length song)
+                       emms-mode-line-cycle-max-width))))
+        (and emms-mode-line-string
+             (setq emms-mode-line-string
+                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
+      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+             (width (cae-variable-pitch-width emms-mode-line-string))
+             (l (length emms-mode-line-string))
+             (padding (max (- (max (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
+                                         (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
+                                              width))
+                                   (puthash song
+                                            (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
+                                                     0)
+                                                 width)
+                                            emms-mode-line-song-pixel-length-max-hash-table))
+                              width 0))))
+        (setq emms-mode-line-string
+              (concat (string-remove-suffix suffix emms-mode-line-string)
+                      (propertize " "
+                                  'display `(space :width (,padding)))
+                      suffix))))))
 
 
 (defvar emms-mode-line-song-max-pixel-width-hash (make-hash-table :test 'equal))
