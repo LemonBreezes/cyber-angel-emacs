@@ -71,7 +71,9 @@ rather than the whole path."
 
 
 (defvar emms-mode-line-string-pixel-length-max-alist nil)
-(defvar emms-mode-line-song-pixel-length-max-hash-table (make-hash-table :test 'equal))
+(defvar emms-mode-line-song-pixel-length-max-hash-table
+  (or (doom-store-get 'emms-mode-line-song-pixel-length-max-hash-table)
+      (make-hash-table :test 'equal)))
 
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
@@ -99,3 +101,8 @@ rather than the whole path."
                       (propertize " "
                                   'display `(space :width (,padding)))
                       suffix))))))
+
+(add-hook 'kill-emacs-hook
+          (cae-defun +emms-store-song-pixel-length-hash-table-h ()
+            (doom-store-put 'emms-mode-line-song-pixel-length-max-hash-table
+                            emms-mode-line-song-pixel-length-max-hash-table)))
