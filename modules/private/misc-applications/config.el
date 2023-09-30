@@ -757,7 +757,7 @@
           :ng "E" #'dired-do-eww))
   (map! :map +misc-applications-music-map
         "e" #'+emms
-        "a" #'+emms-quick-access)
+        "j" #'+emms-quick-access)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"
