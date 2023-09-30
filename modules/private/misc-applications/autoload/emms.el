@@ -115,7 +115,7 @@ rather than the whole path."
                           (beg 0)
                           (l (length song))
                           (end (min (length song) emms-mode-line-cycle-max-width))
-                          (continue t))
+                          (continue (< emms-mode-line-cycle-max-width (length song))))
                      ((not continue) output)
                    (delete-region (point-min) (point-max))
                    (insert (format emms-mode-line-format
@@ -142,10 +142,16 @@ rather than the whole path."
                                width)
                             0))
               (padding-nontrivial-p (> padding 0)))
+    (+log padding width (+emms-compute-modeline-cycle-pixel-width song))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
                   suffix))))
+
+;;(setq emms-mode-line-string
+;;      (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
+;;(length (or emms-mode-line-cycle--title
+;;            (funcall emms-mode-line-cycle-current-title-function)))
 
 (add-hook 'kill-emacs-hook
           (cae-defun +emms-store-mode-line-song-pixel-width-hash-h ()
