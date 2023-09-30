@@ -76,7 +76,7 @@ rather than the whole path."
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
   (let* ((song (or emms-mode-line-cycle--title
-                  (funcall emms-mode-line-cycle-current-title-function))))
+                   (funcall emms-mode-line-cycle-current-title-function))))
     (unless (or (not emms-mode-line-string)
                 (> (length emms-mode-line-string)
                    (+ (length (string-replace "%s" "" emms-mode-line-format))
