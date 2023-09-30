@@ -670,8 +670,6 @@
 ;; Beware. Using MPC and EMMS together does not work well. Mostly running
 ;; `emms-player-mpd-connect' can cause EMMS to info a lot of tracks and EMMS is
 ;; painfully slow at doing so because it calls all its processes synchronously.
-;; So this is a solvable problem but I'm not really willing to grind that myself
-;; right now.
 (use-package! mpc
   :defer t :init
   (defvar +mpc-workspace-name "*mpc*")
