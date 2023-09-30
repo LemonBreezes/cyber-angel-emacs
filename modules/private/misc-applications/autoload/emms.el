@@ -102,12 +102,8 @@ rather than the whole path."
 ;;                      suffix))))))
 
 
-(defvar emms-mode-line-song-max-pixel-width-hash
-  (or (doom-store-get 'emms-mode-line-song-max-pixel-width-hash)
-      (make-hash-table :test 'equal)))
-(defvar emms-mode-line-song-pixel-width-hash
-  (or (doom-store-get 'emms-mode-line-song-pixel-width-hash)
-      (make-hash-table :test 'equal)))
+(defvar emms-mode-line-song-max-pixel-width-hash (make-hash-table :test 'equal))
+(defvar emms-mode-line-song-pixel-width-hash (make-hash-table :test 'equal))
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
   (or (gethash emms-mode-line-cycle--title
@@ -168,8 +164,3 @@ rather than the whole path."
 ;;   (cae-variable-pitch-width emms-mode-line-string))
 ;;(length (or emms-mode-line-cycle--title
 ;;            (funcall emms-mode-line-cycle-current-title-function)))
-
-(add-hook 'kill-emacs-hook
-          (cae-defun +emms-store-mode-line-song-pixel-width-hash-h ()
-            (doom-store-put 'emms-mode-line-song-pixel-width-hash
-                            emms-mode-line-song-pixel-width-hash)))
