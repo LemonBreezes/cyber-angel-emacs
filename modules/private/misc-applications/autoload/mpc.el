@@ -20,7 +20,8 @@
   (let ((inhibit-redisplay t))
     (when (and +mpc--prev-buf (get-buffer-window +mpc--prev-buf))
       (select-window (get-buffer-window +mpc--prev-buf))
-      (+mpc-jump-to-previous-position)))
+      (+mpc-jump-to-previous-position)
+      (hl-line-highlight)))
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
