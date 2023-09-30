@@ -781,7 +781,7 @@
         emms-player-mpd-music-directory +misc-applications-music-dir
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-thumbnail-async
-        emms-info-functions '(emms-info-exiftool)
+        emms-info-functions '(emms-info-native emms-info-exiftool)
         emms-browser-switch-to-playlist-on-add t)
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
