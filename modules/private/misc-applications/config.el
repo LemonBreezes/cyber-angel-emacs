@@ -531,7 +531,11 @@
     (which-key-add-keymap-based-replacements +misc-applications-games-map
       "k" "Solitaire"))
   (after! evil
-    (evil-set-initial-state 'klondike-mode 'emacs)))
+    (evil-set-initial-state 'klondike-mode 'emacs))
+  :config
+  (map! :map klondike-mode-map
+        :g "?" #'describe-mode
+        :ng "q" #'bury-buffer))
 
 
 ;;; Eyecandy
