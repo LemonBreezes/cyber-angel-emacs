@@ -686,6 +686,7 @@
   (setq mpc-host "localhost"
         mpc-mpd-music-directory +misc-applications-music-dir)
   (map! :map mpc-mode-map
+        :n "gr" #'+mpc-reload
         :ng "q" #'+mpc-quit
         :n "C-j" #'evil-collection-mpc-move-down
         :n "C-k" #'evil-collection-mpc-move-up
