@@ -63,4 +63,4 @@
 (when (or (modulep! :private helm)
           (modulep! :completion helm))
   (package! helm-emms))
-(package! consult-emms)
+(package! consult-emms :recipe (:host github :repo "Hugo-Heagren/consult-emms"))
