@@ -70,36 +70,36 @@ rather than the whole path."
           (t (emms-track-simple-description track)))))
 
 
-(defvar emms-mode-line-string-pixel-length-max-alist nil)
-;;;###autoload
-(defun +emms-mode-line-cycle-valign (&rest _)
-  (let* ((song (or emms-mode-line-cycle--title
-                   (funcall emms-mode-line-cycle-current-title-function))))
-    (if (or (not emms-mode-line-string)
-            (> (length emms-mode-line-string)
-               (+ (length (string-replace "%s" "" emms-mode-line-format))
-                  (min (length song)
-                       emms-mode-line-cycle-max-width))))
-        (and emms-mode-line-string
-             (setq emms-mode-line-string
-                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
-      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-             (width (cae-variable-pitch-width emms-mode-line-string))
-             (l (length emms-mode-line-string))
-             (padding (max (- (max (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
-                                         (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
-                                              width))
-                                   (puthash song
-                                            (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
-                                                     0)
-                                                 width)
-                                            emms-mode-line-song-pixel-length-max-hash-table))
-                              width 0))))
-        (setq emms-mode-line-string
-              (concat (string-remove-suffix suffix emms-mode-line-string)
-                      (propertize " "
-                                  'display `(space :width (,padding)))
-                      suffix))))))
+;;(defvar emms-mode-line-string-pixel-length-max-alist nil)
+;;;;;###autoload
+;;(defun +emms-mode-line-cycle-valign (&rest _)
+;;  (let* ((song (or emms-mode-line-cycle--title
+;;                   (funcall emms-mode-line-cycle-current-title-function))))
+;;    (if (or (not emms-mode-line-string)
+;;            (> (length emms-mode-line-string)
+;;               (+ (length (string-replace "%s" "" emms-mode-line-format))
+;;                  (min (length song)
+;;                       emms-mode-line-cycle-max-width))))
+;;        (and emms-mode-line-string
+;;             (setq emms-mode-line-string
+;;                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
+;;      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+;;             (width (cae-variable-pitch-width emms-mode-line-string))
+;;             (l (length emms-mode-line-string))
+;;             (padding (max (- (max (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
+;;                                         (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
+;;                                              width))
+;;                                   (puthash song
+;;                                            (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
+;;                                                     0)
+;;                                                 width)
+;;                                            emms-mode-line-song-pixel-length-max-hash-table))
+;;                              width 0))))
+;;        (setq emms-mode-line-string
+;;              (concat (string-remove-suffix suffix emms-mode-line-string)
+;;                      (propertize " "
+;;                                  'display `(space :width (,padding)))
+;;                      suffix))))))
 
 
 (defvar emms-mode-line-song-pixel-width-hash
@@ -121,13 +121,12 @@ rather than the whole path."
                           (continue (< emms-mode-line-cycle-max-width (length song))))
                      ((not continue) output)
                    (delete-region (point-min) (point-max))
-                   (insert (format (string-remove-prefix " " emms-mode-line-format)
-                                   (propertize
-                                    (if (< end beg)
-                                        (concat (substring-no-properties song beg l)
-                                                (substring-no-properties song 0 end))
-                                      (substring-no-properties song beg end))
-                                    'line-prefix nil 'wrap-prefix nil 'face 'mode-line)))
+                   (insert (propertize
+                            (if (< end beg)
+                                (concat (substring-no-properties song beg l)
+                                        (substring-no-properties song 0 end))
+                              (substring-no-properties song beg end))
+                            'line-prefix nil 'wrap-prefix nil 'face 'mode-line))
                    (setq output (max (car (buffer-text-pixel-size nil nil t))
                                      output)
                          beg (% (+ beg emms-mode-line-cycle-velocity) l)
@@ -146,7 +145,7 @@ rather than the whole path."
                                width)
                             0))
               (padding-nontrivial-p (> padding 0)))
-    ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width song))
+    (+log padding width (+emms-compute-modeline-cycle-pixel-width song))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
