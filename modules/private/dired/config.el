@@ -49,7 +49,6 @@
         "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group")
 
   (setq dired-mouse-drag-files t
-        dired-kill-when-opening-new-dired-buffer t
         dired-movement-style 'cycle)
   (after! dired-aux
     (setq dired-isearch-filenames 'dwim))
