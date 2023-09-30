@@ -2,6 +2,7 @@
 
 (defvar +mpc--wconf nil)
 (defvar +mpc-buf-pos-alist nil)
+(defvar +mpc--prev-buf nil)
 
 ;;;###autoload
 (defun +mpc (&optional arg)
@@ -16,6 +17,8 @@
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
+  (when (and +mpc--prev-buf (get-buffer-window +mpc--prev-buf))
+    (select-window (get-buffer-window +mpc--prev-buf)))
   (+mpc-jump-to-previous-position)
   (setq +mpc--wconf (current-window-configuration)))
 
@@ -26,6 +29,7 @@
     (setf (alist-get buf +mpc-buf-pos-alist)
           (with-current-buffer buf
             (point-marker))))
+  (setq +mpc--prev-buf (buffer-name (current-buffer)))
   (if +mpc--old-wconf
       (progn
         (set-window-configuration +mpc--old-wconf)
