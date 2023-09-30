@@ -71,10 +71,6 @@ rather than the whole path."
 
 
 (defvar emms-mode-line-string-pixel-length-max-alist nil)
-(defvar emms-mode-line-song-pixel-length-max-hash-table
-  (or (doom-store-get 'emms-mode-line-song-pixel-length-max-hash-table)
-      (make-hash-table :test 'equal)))
-
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
   (let* ((song (or emms-mode-line-cycle--title
@@ -105,27 +101,36 @@ rather than the whole path."
                                   'display `(space :width (,padding)))
                       suffix))))))
 
+
+(defvar emms-mode-line-song-pixel-width-hash
+  (or (doom-store-get 'emms-mode-line-song-pixel-width-hash)
+      (make-hash-table :test 'equal)))
+
+
 (defun +emms-compute-modeline-cycle-pixel-width (song)
-  (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
-    (cl-do* ((output 0)
-             (beg 0)
-             (l (length song))
-             (end (min (length song) emms-mode-line-cycle-max-width))
-             (continue t))
-        ((not continue) output)
-      (delete-region (point-min) (point-max))
-      (insert (format emms-mode-line-format
-                      (propertize
-                       (if (< end beg)
-                           (concat (substring-no-properties song beg (1- l))
-                                   (substring-no-properties song 0 end))
-                         (substring-no-properties song beg end))
-                       'line-prefix nil 'wrap-prefix nil 'face 'mode-line)))
-      (setq output (max (car (buffer-text-pixel-size nil nil t))
-                        output)
-            beg (% (+ beg emms-mode-line-cycle-velocity) l)
-            end (% (+ end emms-mode-line-cycle-velocity) l)
-            continue (not (eq beg 0))))))
+  (or (gethash song emms-mode-line-song-pixel-width-hash)
+      (puthash song
+               (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
+                 (cl-do* ((output 0)
+                          (beg 0)
+                          (l (length song))
+                          (end (min (length song) emms-mode-line-cycle-max-width))
+                          (continue t))
+                     ((not continue) output)
+                   (delete-region (point-min) (point-max))
+                   (insert (format emms-mode-line-format
+                                   (propertize
+                                    (if (< end beg)
+                                        (concat (substring-no-properties song beg (1- l))
+                                                (substring-no-properties song 0 end))
+                                      (substring-no-properties song beg end))
+                                    'line-prefix nil 'wrap-prefix nil 'face 'mode-line)))
+                   (setq output (max (car (buffer-text-pixel-size nil nil t))
+                                     output)
+                         beg (% (+ beg emms-mode-line-cycle-velocity) l)
+                         end (% (+ end emms-mode-line-cycle-velocity) l)
+                         continue (not (eq beg 0)))))
+               emms-mode-line-song-pixel-width-hash)))
 
 (defun +emms-mode-line-cycle-valign (&rest _)
   (let* ((song (or emms-mode-line-cycle--title
@@ -149,6 +154,6 @@ rather than the whole path."
                       suffix))))))
 
 (add-hook 'kill-emacs-hook
-          (cae-defun +emms-store-song-pixel-length-hash-table-h ()
-            (doom-store-put 'emms-mode-line-song-pixel-length-max-hash-table
-                            emms-mode-line-song-pixel-length-max-hash-table)))
+          (cae-defun +emms-store-mode-line-song-pixel-width-hash-h ()
+            (doom-store-put 'emms-mode-line-song-pixel-width-hash
+                            emms-mode-line-song-pixel-width-hash)))
