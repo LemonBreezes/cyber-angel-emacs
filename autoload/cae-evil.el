@@ -133,3 +133,10 @@
         (org-mode)
         (setq-local doom-real-buffer-p t)))))
 
+;;;###autoload
+(defun cae-evil-append-buffer-or-code ()
+  (interactive)
+  (save-restriction
+    (narrow-to-page)
+    (funcall (key-binding "G"))
+    (call-interactively #'evil-append)))
