@@ -809,7 +809,7 @@
                   (cancel-timer emms-mode-line-cycle-timer))))
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
-                (cae-defun +emms-mode-line-cycle-ensure-monospace ()
+                (cae-defun +emms-mode-line-cycle-ensure-monospace (&rest _)
                   (setq emms-mode-line-string
                         (propertize emms-mode-line-string
                                     :font (face-font 'default))))))
