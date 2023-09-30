@@ -734,6 +734,7 @@
         empv-base-directory +misc-applications-music-dir
         empv-audio-dir +misc-applications-music-dir
         empv-video-dir +misc-applications-videos-dir)
+  (add-hook 'empv-init-hook #'empv-override-quit-key)
   (aio-defun cae-empv-set-invidious-instance ()
     (setq empv-invidious-instance
           (concat "https://"
