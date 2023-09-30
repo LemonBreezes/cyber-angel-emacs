@@ -105,6 +105,49 @@ rather than the whole path."
                                   'display `(space :width (,padding)))
                       suffix))))))
 
+(defun +emms-compute-modeline-cycle-pixel-width (song)
+  (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
+    (cl-do* ((output 0)
+             (beg 0)
+             (l (length song))
+             (end (min (length song) emms-mode-line-cycle-max-width))
+             (continue t))
+        ((not continue) output)
+      (delete-region (point-min) (point-max))
+      (insert (format emms-mode-line-format
+                      (propertize
+                       (if (< end beg)
+                           (concat (substring-no-properties song beg (1- l))
+                                   (substring-no-properties song 0 end))
+                         (substring-no-properties song beg end))
+                       'line-prefix nil 'wrap-prefix nil 'face 'mode-line)))
+      (setq output (max (car (buffer-text-pixel-size nil nil t))
+                        output)
+            beg (% (+ beg emms-mode-line-cycle-velocity) l)
+            end (% (+ end emms-mode-line-cycle-velocity) l)
+            continue (not (eq beg 0))))))
+
+(defun +emms-mode-line-cycle-valign (&rest _)
+  (let* ((song (or emms-mode-line-cycle--title
+                   (funcall emms-mode-line-cycle-current-title-function))))
+    (if (or (not emms-mode-line-string)
+            (> (length emms-mode-line-string)
+               (+ (length (string-replace "%s" "" emms-mode-line-format))
+                  (min (length song)
+                       emms-mode-line-cycle-max-width))))
+        (and emms-mode-line-string
+             (setq emms-mode-line-string
+                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
+      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+             (width (cae-variable-pitch-width emms-mode-line-string))
+             (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
+                              width 0))))
+        (setq emms-mode-line-string
+              (concat (string-remove-suffix suffix emms-mode-line-string)
+                      (propertize " "
+                                  'display `(space :width (,padding)))
+                      suffix))))))
+
 (add-hook 'kill-emacs-hook
           (cae-defun +emms-store-song-pixel-length-hash-table-h ()
             (doom-store-put 'emms-mode-line-song-pixel-length-max-hash-table
