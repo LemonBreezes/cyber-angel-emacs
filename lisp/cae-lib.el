@@ -53,3 +53,10 @@
   (advice-add #'message :override #'ignore)
   (unwind-protect (apply oldfun args)
     (advice-remove #'message #'ignore)))
+
+;; Compute the width of variable pitch fonts
+(defun cae-variable-pitch-width (s)
+  (with-current-buffer (get-buffer-create " *cae-variable-pitch-pixel-width*")
+    (delete-region (point-min) (point-max))
+    (insert (propertize s 'line-prefix nil 'wrap-prefix nil 'face 'variable-pitch))
+    (car (buffer-text-pixel-size nil nil t))))
