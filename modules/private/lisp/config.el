@@ -41,10 +41,10 @@
       :duration eros-eval-result-duration))
   (advice-add #'edebug-compute-previous-result
               :around
-              #'adviced:edebug-compute-previous-result)
+              #'cae-edebug-compute-previous-result-a)
   (advice-add #'edebug-previous-result
               :around
-              #'adviced:edebug-previous-result))
+              #'cae-edebug-previous-result-a))
 
 ;; Allow `eval-expression' to have comments.
 (add-hook 'minibuffer-setup-hook
