@@ -66,3 +66,10 @@ rather than the whole path."
   (save-excursion
     (save-window-excursion
       (call-interactively #'emms-browser-add-tracks))))
+
+;;;###autoload
+(defun +emms-browser-and-tracks-and-play ()
+  (interactive)
+  (save-excursion
+    (save-window-excursion
+      (call-interactively #'emms-browser-add-tracks-and-play))))
