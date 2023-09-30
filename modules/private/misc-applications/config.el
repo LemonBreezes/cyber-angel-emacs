@@ -808,8 +808,6 @@
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
                   (cancel-timer emms-mode-line-cycle-timer))))
     ;; Align the cycling modeline pixelwise
-    (defvar emms-mode-line-string-pixel-length-max-alist
-      (doom-store-get 'emms-mode-line-string-pixel-length-max-alist))
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
@@ -826,11 +824,7 @@
                                                 (propertize " "
                                                             'display `(space :width (,padding)))
                                                 suffix)
-                                        'valign t))))))
-    (add-hook 'kill-emacs-hook
-              (cae-defun +emms-store-mode-line-cycle-lengths ()
-                (doom-store-put 'emms-mode-line-string-pixel-length-max-alist
-                                emms-mode-line-string-pixel-length-max-alist))))
+                                        'valign t)))))))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
