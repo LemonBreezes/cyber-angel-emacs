@@ -765,8 +765,8 @@
     (emms-player-mpd-connect)
     (dolist (fn '(+mpc-play +mpc-quit mpc-next mpc-prev))
       (advice-add fn :after
-                     (cae-defun +emms-update-current-song-from-mpd (&rest _)
-                       (emms-player-mpd-sync-from-mpd)))))
+                  (cae-defun +emms-update-current-song-from-mpd (&rest _)
+                    (emms-player-mpd-sync-from-mpd)))))
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
