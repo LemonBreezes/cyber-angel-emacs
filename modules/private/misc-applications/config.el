@@ -790,7 +790,7 @@
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-exiftool))
-    (dolist (fn '(+mpc-play +mpc-quit mpc-next mpc-prev))
+    (dolist (fn '(+mpc-play +mpc-quit mpc-next mpc-prev +mpc-reload))
       (advice-add fn :after
                   (cae-defun +emms-update-current-song-from-mpd (&rest _)
                     (emms-player-mpd-sync-from-mpd)))))
