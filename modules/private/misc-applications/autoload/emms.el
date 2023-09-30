@@ -147,10 +147,9 @@ rather than the whole path."
               (song (emms-mode-line-cycle-get-title))
               (max-width (+emms-compute-modeline-cycle-pixel-width))
               (width (or (gethash song emms-mode-line-song-pixel-width-hash)
-                         ;;(puthash song
-                         ;;         (cae-variable-pitch-width song)
-                         ;;         emms-mode-line-song-pixel-width-hash)
-                         ))
+                         (puthash song
+                                  (cae-variable-pitch-width song)
+                                  emms-mode-line-song-pixel-width-hash)))
               (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
     ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width))
