@@ -523,6 +523,16 @@
         "a" nil))                       ;Not sure what `autotetris-move' even
                                         ;does to be honest.
 
+(use-package! klondike
+  :defer t :init
+  (map! :map +misc-applications-games-map
+        "k" #'klondike)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-games-map
+      "k" "Solitaire"))
+  (after! evil
+    (evil-set-initial-state 'klondike-mode 'emacs)))
+
 
 ;;; Eyecandy
 
@@ -787,7 +797,7 @@
         emms-source-file-default-directory +misc-applications-music-dir
         emms-player-mpd-music-directory +misc-applications-music-dir
         emms-info-native--max-num-vorbis-comments 48000
-        emms-browser-covers #'emms-browser-cache-thumbnail
+        emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
