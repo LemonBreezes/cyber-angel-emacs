@@ -4,8 +4,9 @@
 (defun +emms (&optional arg)
   (interactive "P")
   (setq +emms--old-wconf (current-window-configuration))
+  (let ((ignore-window-parameters t))
+    (delete-other-windows))
   (call-interactively #'emms-smart-browse))
-
 
 ;;;###autoload
 (defun +emms-quit ()
