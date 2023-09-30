@@ -794,6 +794,8 @@
       (advice-add fn :after
                   (cae-defun +emms-update-current-song-from-mpd (&rest _)
                     (emms-player-mpd-sync-from-mpd)))))
+  (add-hook 'emms-browser-mode-hook #'+misc-applications-hide-cursor-h)
+  (add-hook 'emms-playlist-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
