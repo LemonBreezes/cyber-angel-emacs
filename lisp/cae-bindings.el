@@ -83,6 +83,7 @@
        [remap dabbrev-completion] #'cape-dabbrev)
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
+      "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
