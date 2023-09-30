@@ -118,8 +118,7 @@ rather than the whole path."
          (cl-do* ((output 0)
                   (n 0)
                   (cache-length (+ emms-mode-line-cycle--title-width
-                                   emms-mode-line-cycle-additional-space-num
-                                   1))
+                                   emms-mode-line-cycle-additional-space-num))
                   (continue (< emms-mode-line-cycle-max-width cache-length))
                   (s (emms-mode-line-cycle--get-title-cache n)))
              ((not continue) output)
@@ -155,7 +154,7 @@ rather than the whole path."
                               emms-mode-line-song-pixel-width-hash))
               (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
-    ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width))
+    (+log padding width (+emms-compute-modeline-cycle-pixel-width))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
