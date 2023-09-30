@@ -780,7 +780,7 @@
         emms-random-playlist t
         emms-later-do-interval 0.5
         emms-later-do-batch 10
-        emms-info-asynchronously nil
+        emms-info-asynchronously t
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-internal
         emms-source-file-default-directory +misc-applications-music-dir
         emms-player-mpd-music-directory +misc-applications-music-dir
