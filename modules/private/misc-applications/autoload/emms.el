@@ -107,32 +107,26 @@ rather than the whole path."
       (make-hash-table :test 'equal)))
 
 
-(defun +emms-compute-modeline-cycle-pixel-width (song)
-  (when (< emms-mode-line-cycle-max-width (length song))
-    (setq song
-          (concat song " ")))
-  (or (gethash song emms-mode-line-song-pixel-width-hash)
-      (puthash song
+(defun +emms-compute-modeline-cycle-pixel-width ()
+  (or ;(gethash song emms-mode-line-song-pixel-width-hash)
+      (puthash emms-mode-line-cycle--title
                (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
                  (cl-do* ((output 0)
-                          (beg 0)
-                          (l (length song))
-                          (end (min (length song) emms-mode-line-cycle-max-width))
-                          (continue (< emms-mode-line-cycle-max-width (length song))))
+                          (n 0)
+                          (l emms-mode-line-cycle--title-width)
+                          (continue (< emms-mode-line-cycle-max-width emms-mode-line-cycle--title-width)))
                      ((not continue) output)
                    (delete-region (point-min) (point-max))
                    (insert (propertize
-                            (if (< end beg)
-                                (concat (substring-no-properties song beg l)
-                                        (substring-no-properties song 0 end))
-                              (substring-no-properties song beg end))
+                            (emms-mode-line-cycle--get-title-cache n)
                             'line-prefix nil 'wrap-prefix nil 'face 'mode-line))
                    (setq output (max (car (buffer-text-pixel-size nil nil t))
                                      output)
-                         beg (% (+ beg emms-mode-line-cycle-velocity) l)
-                         end (% (+ end emms-mode-line-cycle-velocity) l)
-                         continue (not (eq beg 0)))))
+                         n (1+ n)
+                         continue (< n l))))
                emms-mode-line-song-pixel-width-hash)))
+
+(+emms-compute-modeline-cycle-pixel-width)
 
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
@@ -140,7 +134,7 @@ rather than the whole path."
               (song (or emms-mode-line-cycle--title
                         (funcall emms-mode-line-cycle-current-title-function)))
               (width (and emms-mode-line-string
-                          (cae-variable-pitch-width emms-mode-line-string)))
+                          (cae-variable-pitch-width (propertize (emms-mode-line-cycle-get-title (unless t emms-mode-line-cycle-velocity)) 'face 'mode-line))))
               (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
                                width)
                             0))
