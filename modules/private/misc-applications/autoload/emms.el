@@ -150,7 +150,7 @@ rather than the whole path."
                               emms-mode-line-song-pixel-width-hash))
               (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
-    (+log padding width (+emms-compute-modeline-cycle-pixel-width))
+    ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
