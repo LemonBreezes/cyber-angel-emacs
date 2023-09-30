@@ -9,6 +9,8 @@
   (setq +mpc--old-wconf (current-window-configuration))
   (let ((ignore-window-parameters t))
     (delete-other-windows))
+  (cl-letf (((symbol-function #'goto-char)
+             (symbol-function #'ignore))))
   (if (and +mpc--wconf
            (not (cl-find-if-not #'buffer-live-p
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
@@ -43,8 +45,8 @@
               (point-marker))))))
 
 (defun +mpc-jump-to-previous-position ()
-  (when-let ((marker (alist-get (window-buffer (selected-window)) +mpc-buf-pos-alist))
-             (pos (marker-position marker)))
+  (let* ((marker (alist-get (window-buffer (selected-window)) +mpc-buf-pos-alist))
+        (pos (marker-position marker)))
     (goto-char pos)))
 
 ;;;###autoload
