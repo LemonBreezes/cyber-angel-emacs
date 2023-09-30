@@ -806,7 +806,13 @@
                     (unless (memq emms-mode-line-cycle-timer timer-list)
                       (setq emms-mode-line-cycle-timer
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
-                  (cancel-timer emms-mode-line-cycle-timer)))))
+                  (cancel-timer emms-mode-line-cycle-timer))))
+    (advice-add #'emms-mode-line-cycle-update-mode-line-string
+                :after
+                (cae-defun +emms-mode-line-cycle-ensure-monospace ()
+                  (setq emms-mode-line-string
+                        (propertize emms-mode-line-string
+                                    :font (face-font 'default))))))
   (emms-mode-line-cycle +1)
 
   )
