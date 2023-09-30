@@ -817,9 +817,6 @@
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
-                  (set-text-properties 0 (length emms-mode-line-string) nil emms-mode-line-string)
-                  (setq emms-mode-line-string
-                        (replace-regexp-in-string "[ \t\n]+" " " emms-mode-line-string))
                   (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
                          (width (cae-variable-pitch-width emms-mode-line-string))
                          (l (length emms-mode-line-string))
