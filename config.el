@@ -870,8 +870,9 @@
           file-info-max-value-length 100))
 
   (use-package! wakatime-mode
-    :defer t :defer-incrementally t :config
-    (global-wakatime-mode +1)
+    :defer t :init
+    (add-hook 'doom-first-file-hook #'global-wakatime-mode)
+    :config
     (setq wakatime-cli-path (executable-find "wakatime")))
   (use-package! wakatime-ui
     :defer t :after wakatime-mode :config
