@@ -807,20 +807,19 @@
                       (setq emms-mode-line-cycle-timer
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
                   (cancel-timer emms-mode-line-cycle-timer))))
+    (defvar emms-mode-line-string-pixel-length-max 0)
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
                   (unless (get-char-property 0 'valign emms-mode-line-format)
                     (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-                           (pixel-width
-                            (max (- (cae-variable-pitch-width
-                                     (make-string (- (length emms-mode-line-string) 2) ?T))
-                                    (cae-variable-pitch-width emms-mode-line-string))
-                                 0)))
+                           (width (cae-variable-pitch-width emms-mode-line-string))
+                           (padding (max (- (setq emms-mode-line-string-pixel-length-max (max emms-mode-line-string-pixel-length-max width))
+                                            width 0))))
                       (setq emms-mode-line-string
                             (propertize (concat (string-remove-suffix suffix emms-mode-line-string)
                                                 (propertize " "
-                                                            'display `(space :width (,pixel-width)))
+                                                            'display `(space :width (,padding)))
                                                 suffix)
                                         'valign t)))))))
   (emms-mode-line-cycle +1))
