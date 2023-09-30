@@ -102,54 +102,59 @@ rather than the whole path."
 ;;                      suffix))))))
 
 
+(defvar emms-mode-line-song-max-pixel-width-hash
+  (or (doom-store-get 'emms-mode-line-song-max-pixel-width-hash)
+      (make-hash-table :test 'equal)))
 (defvar emms-mode-line-song-pixel-width-hash
   (or (doom-store-get 'emms-mode-line-song-pixel-width-hash)
-      (make-hash-table :test 'equal)))
-
+    (make-hash-table :test 'equal)))
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
-  (or ;(gethash song emms-mode-line-song-pixel-width-hash)
-   (puthash emms-mode-line-cycle--title
-            (with-current-buffer (get-buffer-create " *emms-mode-line-cycle-pad-modeline*")
-              (cl-do* ((output 0)
-                       (n 1)
-                       (continue (< emms-mode-line-cycle-max-width
-                                    (+ emms-mode-line-cycle--title-width
-                                       emms-mode-line-cycle-additional-space-num))))
-                  ((not continue) output)
-                (delete-region (point-min) (point-max))
-                (insert (propertize
-                         (emms-mode-line-cycle--get-title-cache n)
-                         'line-prefix nil 'wrap-prefix nil 'face 'mode-line))
-                (setq output (max (car (buffer-text-pixel-size))
-                                  output)
-                      continue (< n (+ emms-mode-line-cycle--title-width
-                                       emms-mode-line-cycle-additional-space-num))
-                      n (1+ n))
-                ;;(+log (buffer-string) n continue output)
-                ))
-            emms-mode-line-song-pixel-width-hash)))
+  (or (gethash emms-mode-line-cycle--title
+               emms-mode-line-song-max-pixel-width-hash)
+      (puthash
+       emms-mode-line-cycle--title
+       (with-current-buffer (get-buffer-create " *+emms-compute-modeline-cycle-pixel-width*")
+         (cl-do* ((output 0)
+                  (n 0)
+                  (cache-length (+ emms-mode-line-cycle--title-width
+                                   emms-mode-line-cycle-additional-space-num
+                                   1))
+                  (continue (< emms-mode-line-cycle-max-width cache-length))
+                  (s (emms-mode-line-cycle--get-title-cache n)))
+             ((not continue) output)
+           (delete-region (point-min) (point-max))
+           (insert (propertize s 'face 'mode-line))
+           (setq output (max (puthash s (car (buffer-text-pixel-size))
+                                      emms-mode-line-song-pixel-width-hash)
+                             output)
+                 s (emms-mode-line-cycle--get-title-cache n)
+                 continue (< n cache-length)
+                 n (1+ n))))
+       emms-mode-line-song-max-pixel-width-hash)))
 
-(let ((initial (emms-mode-line-cycle--get-title-cache))
-      (n 1))
-  (while (not (string= (emms-mode-line-cycle--get-title-cache n) initial))
-    (setq n (1+ n)))
-  (+log n))
+;;(let ((initial (emms-mode-line-cycle--get-title-cache))
+;;      (n 1))
+;;  (while (not (string= (emms-mode-line-cycle--get-title-cache n) initial))
+;;    (setq n (1+ n)))
+;;  (+log n ))
 
-(+emms-compute-modeline-cycle-pixel-width)
+;;(+emms-compute-modeline-cycle-pixel-width)
+
+;;(unless (gethash (emms-mode-line-cycle-get-title emms-mode-line-cycle-velocity)
+;;                 emms-mode-line-song-pixel-width-hash)
+;;  (+log (concat "|" (emms-mode-line-cycle-get-title emms-mode-line-cycle-velocity)
+;;                "|")))
 
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
   (when-let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-              (song (or emms-mode-line-cycle--title
-                        (funcall emms-mode-line-cycle-current-title-function)))
-              (width (and emms-mode-line-string
-                          (cae-variable-pitch-width (propertize (emms-mode-line-cycle-get-title (unless t emms-mode-line-cycle-velocity)) 'face 'mode-line))))
-              (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
-                               width)
-                            0))
+              (song (emms-mode-line-cycle-get-title))
+              (max-width (+emms-compute-modeline-cycle-pixel-width))
+              (width (gethash (emms-mode-line-cycle-get-title)
+                              emms-mode-line-song-pixel-width-hash))
+              (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
-    (+log padding width (+emms-compute-modeline-cycle-pixel-width song))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
