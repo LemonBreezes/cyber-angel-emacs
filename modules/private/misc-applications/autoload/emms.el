@@ -140,7 +140,8 @@ rather than the whole path."
   (when-let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
               (song (or emms-mode-line-cycle--title
                         (funcall emms-mode-line-cycle-current-title-function)))
-              (width (cae-variable-pitch-width emms-mode-line-string))
+              (width (and emms-mode-line-string
+                          (cae-variable-pitch-width emms-mode-line-string)))
               (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
                                width)
                             0))
