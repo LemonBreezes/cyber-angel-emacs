@@ -17,9 +17,10 @@
                                 (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))))
       (set-window-configuration +mpc--wconf)
     (call-interactively #'mpc))
-  (when (and +mpc--prev-buf (get-buffer-window +mpc--prev-buf))
-    (select-window (get-buffer-window +mpc--prev-buf)))
-  (+mpc-jump-to-previous-position)
+  (let ((inhibit-redisplay t))
+    (when (and +mpc--prev-buf (get-buffer-window +mpc--prev-buf))
+      (select-window (get-buffer-window +mpc--prev-buf)))
+    (+mpc-jump-to-previous-position))
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
