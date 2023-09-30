@@ -109,22 +109,22 @@ rather than the whole path."
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
   (or ;(gethash song emms-mode-line-song-pixel-width-hash)
-      (puthash emms-mode-line-cycle--title
-               (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
-                 (cl-do* ((output 0)
-                          (n 0)
-                          (l emms-mode-line-cycle--title-width)
-                          (continue (< emms-mode-line-cycle-max-width emms-mode-line-cycle--title-width)))
-                     ((not continue) output)
-                   (delete-region (point-min) (point-max))
-                   (insert (propertize
-                            (emms-mode-line-cycle--get-title-cache n)
-                            'line-prefix nil 'wrap-prefix nil 'face 'mode-line))
-                   (setq output (max (car (buffer-text-pixel-size nil nil t))
-                                     output)
-                         n (1+ n)
-                         continue (< n l))))
-               emms-mode-line-song-pixel-width-hash)))
+   (puthash emms-mode-line-cycle--title
+            (with-current-buffer (get-buffer-create "*emms-mode-line-cycle-pad-modeline*")
+              (cl-do* ((output 0)
+                       (n 0)
+                       (l emms-mode-line-cycle--title-width)
+                       (continue (< emms-mode-line-cycle-max-width emms-mode-line-cycle--title-width)))
+                  ((not continue) output)
+                (delete-region (point-min) (point-max))
+                (insert (propertize
+                         (emms-mode-line-cycle--get-title-cache n)
+                         'line-prefix nil 'wrap-prefix nil 'face 'mode-line))
+                (setq output (max (car (buffer-text-pixel-size nil nil t))
+                                  output)
+                      n (1+ n)
+                      continue (< n l))))
+            emms-mode-line-song-pixel-width-hash)))
 
 (+emms-compute-modeline-cycle-pixel-width)
 
