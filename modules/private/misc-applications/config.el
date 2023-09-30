@@ -786,7 +786,11 @@
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
-          emms-info-functions '(emms-info-mpd emms-info-exiftool)))
+          emms-info-functions '(emms-info-mpd emms-info-exiftool))
+    (dolist (fn '(+mpc-play +mpc-quit mpc-next mpc-prev))
+      (advice-remove fn :after
+                     (cae-defun +emms-update-current-song-from-mpd (&rest _)
+                       (emms-player-mpd-sync-from-mpd)))))
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
