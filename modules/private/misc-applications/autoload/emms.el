@@ -19,10 +19,10 @@
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
-   [("v" "VGM" (lambda () (interactive) (dired (expand-file-name "VGM" +emms-music-dir))))
-    ("y" "Youtube Music" (lambda () (interactive) (dired (expand-file-name "Youtube Music" +emms-music-dir))))
-    ("p" "Playlists" (lambda () (interactive) (dired (expand-file-name "Playlists" +emms-music-dir))))
-    ("a" "Anime Music" (lambda () (interactive) (dired (expand-file-name "Anime Music" +emms-music-dir))))
+   [("v" "VGM" (lambda () (interactive) (dired (expand-file-name "VGM" +misc-applications-music-dir))))
+    ("y" "Youtube Music" (lambda () (interactive) (dired (expand-file-name "Youtube Music" +misc-applications-music-dir))))
+    ("p" "Playlists" (lambda () (interactive) (dired (expand-file-name "Playlists" +misc-applications-music-dir))))
+    ("a" "Anime Music" (lambda () (interactive) (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
     ("r" "Artists" (lambda () (interactive) (dired emms-source-file-default-directory)))]])
 
 ;; The following two functions are from
