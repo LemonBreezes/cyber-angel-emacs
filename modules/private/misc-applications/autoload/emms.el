@@ -37,7 +37,7 @@
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
 
-(defun +track-title-from-file-name (file)
+(defun +emms-track-title-from-file-name (file)
   "For using with EMMS description functions. Extracts the track
 title from the file name FILE, which just means a) taking only
 the file component at the end of the path, and b) removing any
@@ -66,7 +66,7 @@ rather than the whole path."
            (concat (format "%s" artist) " - " (format "%s" title)))
           (title title)
           ((eq (emms-track-type track) 'file)
-           (cae-track-title-from-file-name (emms-track-name track)))
+           (+emms-track-title-from-file-name (emms-track-name track)))
           (t (emms-track-simple-description track)))))
 
 
