@@ -817,20 +817,21 @@
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
-                  (unless (get-char-property 0 'valign emms-mode-line-format)
-                    (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-                           (width (cae-variable-pitch-width emms-mode-line-string))
-                           (l (length emms-mode-line-string))
-                           (padding (max (- (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
-                                                  (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
-                                                       width))
-                                            width 0))))
-                      (setq emms-mode-line-string
-                            (propertize (concat (string-remove-suffix suffix emms-mode-line-string)
-                                                (propertize " "
-                                                            'display `(space :width (,padding)))
-                                                suffix)
-                                        'valign t)))))))
+                  (set-text-properties 0 (length emms-mode-line-string) nil emms-mode-line-string)
+                  (setq emms-mode-line-string
+                        (replace-regexp-in-string "[ \t\n]+" " " emms-mode-line-string))
+                  (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+                         (width (cae-variable-pitch-width emms-mode-line-string))
+                         (l (length emms-mode-line-string))
+                         (padding (max (- (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
+                                                (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
+                                                     width))
+                                          width 0))))
+                    (setq emms-mode-line-string
+                          (concat (string-remove-suffix suffix emms-mode-line-string)
+                                  (propertize " "
+                                              'display `(space :width (,padding)))
+                                  suffix))))))
 
   (emms-mode-line-cycle +1))
 
