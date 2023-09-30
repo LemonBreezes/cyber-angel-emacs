@@ -808,6 +808,7 @@
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
                   (cancel-timer emms-mode-line-cycle-timer))))
     ;; Align the cycling modeline pixelwise
+    (defvar emms-mode-line-string-pixel-length-max-alist nil)
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
