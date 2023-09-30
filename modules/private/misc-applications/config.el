@@ -761,7 +761,6 @@
               (lambda (list)
                 (sort list (lambda (_ _) (< (random) 0.5)))))
   :config
-  ;; These are the defaults minus the modeline setup.
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
   (require 'emms-cache)
@@ -770,7 +769,6 @@
   (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (emms-score +1)
   (emms-default-players)
-
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
