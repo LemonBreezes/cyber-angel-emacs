@@ -688,7 +688,7 @@
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
         :n "w" #'+mpc-other-window-previous
-        :n "RET" (cmd! () (mpc-select) (mpc-play))
+        :n "RET" (cae-defun +mpc-play () (mpc-select) (mpc-play))
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
         :n "i" #'evilem-motion-next-line
@@ -762,7 +762,8 @@
   (emms-default-players)
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd))
-    (emms-player-mpd-connect))
+    (emms-player-mpd-connect)
+    (dolist (fn '())))
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
