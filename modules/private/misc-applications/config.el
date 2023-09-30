@@ -797,7 +797,7 @@
         emms-mode-line-icon-enabled-p nil)
   (after! emms-mode-line-cycle
     (setq emms-mode-line-cycle-max-width 24
-          emms-mode-line-cycle-velocity 4)
+          emms-mode-line-cycle-velocity 1)
     (advice-remove #'emms-playing-time-display #'emms-mode-line-cycle-update-mode-line-string)
     (defvar emms-mode-line-cycle-timer nil)
     (add-hook 'emms-mode-line-cycle-hook
