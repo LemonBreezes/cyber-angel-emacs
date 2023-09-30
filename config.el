@@ -874,11 +874,6 @@
     (add-hook 'doom-first-file-hook #'global-wakatime-mode)
     :config
     (setq wakatime-cli-path (executable-find "wakatime")))
-  (use-package! wakatime-ui
-    :defer t :init
-    (add-hook 'doom-first-file-hook #'global-wakatime-ui-mode)
-    :config
-    (setq wakatime-ui--binary-name "wakatime"))
 
   (use-package! titlecase
     :defer t :init
