@@ -797,8 +797,19 @@
         emms-mode-line-icon-enabled-p nil)
   (after! emms-mode-line-cycle
     (setq emms-mode-line-cycle-max-width 24
-          emms-mode-line-cycle-velocity 4))
-  (emms-mode-line-cycle +1))
+          emms-mode-line-cycle-velocity 4)
+    (advice-remove #'emms-playing-time-display #'emms-mode-line-cycle-update-mode-line-string)
+    (defvar emms-mode-line-cycle-timer nil)
+    (add-hook 'emms-mode-line-cycle-hook
+              (cae-defun +emms-mode-line-cycle-timer ()
+                (if emms-mode-line-cycle
+                    (unless (memq emms-mode-line-cycle-timer timer-list)
+                      (setq emms-mode-line-cycle-timer
+                            (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
+                  (cancel-timer emms-mode-line-cycle-timer)))))
+  (emms-mode-line-cycle +1)
+
+  )
 
 (use-package! lyrics-fetcher
   :after emms
