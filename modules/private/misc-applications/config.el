@@ -781,7 +781,9 @@
         emms-later-do-interval 0.5
         emms-later-do-batch 5
         emms-info-asynchronously nil
+        ;; The `find' version did not always work for me for some reason.
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-internal
+
         emms-source-file-default-directory +misc-applications-music-dir
         emms-player-mpd-music-directory +misc-applications-music-dir
         emms-info-native--max-num-vorbis-comments 48000
