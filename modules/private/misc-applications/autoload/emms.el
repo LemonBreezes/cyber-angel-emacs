@@ -107,7 +107,7 @@ rather than the whole path."
       (make-hash-table :test 'equal)))
 (defvar emms-mode-line-song-pixel-width-hash
   (or (doom-store-get 'emms-mode-line-song-pixel-width-hash)
-    (make-hash-table :test 'equal)))
+      (make-hash-table :test 'equal)))
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
   (or (gethash emms-mode-line-cycle--title
