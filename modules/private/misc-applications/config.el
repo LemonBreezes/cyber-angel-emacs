@@ -816,6 +816,7 @@
                               (string-pixel-width
                                (propertize (make-string (1- emms-mode-line-cycle-max-width) ?\s)
                                            :face 'mode-line))))))
+                    (+log pixel-width)
                     (setq emms-mode-line-string
                           (concat (string-remove-suffix " ] " emms-mode-line-string)
                                   (propertize " "
