@@ -750,7 +750,7 @@
         emms-cache-file (concat emms-directory "cache"))
   (after! dired
     (map! :map dired-mode-map
-          :ng "E" #'emms-play-dired))
+          :ng "E" #'dired-do-eww))
   (map! :map +misc-applications-music-map
         "e" #'+emms)
   (after! which-key
