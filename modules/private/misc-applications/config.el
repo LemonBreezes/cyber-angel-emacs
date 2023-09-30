@@ -795,7 +795,9 @@
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
         :ng "e" #'other-window
-        :n "gr" #'emms-player-mpd-connect)
+        :n "gr" #'emms-player-mpd-connect
+        [remap emms-browser-add-tracks] #'+emms-browser-add-tracks
+        [remap emms-browser-add-tracks-and-play] #'+emms-browser-and-tracks-and-play)
   (map! :map emms-playlist-mode-map
         :ng "q" #'+emms-quit
         :ng "e" #'other-window
