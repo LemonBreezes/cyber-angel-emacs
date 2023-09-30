@@ -810,9 +810,17 @@
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-ensure-monospace (&rest _)
-                  (setq emms-mode-line-string
-                        (propertize emms-mode-line-string
-                                    :font (face-font 'default))))))
+                  (let ((pixel-width
+                         (let ((global-mode-string))
+                           (+ (string-pixel-width (format-mode-line mode-line-format))
+                              (string-pixel-width
+                               (propertize (make-string (1- emms-mode-line-cycle-max-width) ?\s)
+                                           :face 'mode-line))))))
+                    (setq emms-mode-line-string
+                          (concat (string-remove-suffix " ] " emms-mode-line-string)
+                                  (propertize " "
+                                              'display `(space :align-to (,pixel-width)))
+                                  "]"))))))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
