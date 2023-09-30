@@ -93,7 +93,6 @@ rather than the whole path."
                                    (puthash song
                                             (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
                                                      0)
-                                                 (alist-get l emms-mode-line-string-pixel-length-max-alist)
                                                  width)
                                             emms-mode-line-song-pixel-length-max-hash-table))
                               width 0))))
