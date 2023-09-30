@@ -36,6 +36,7 @@
   (let ((inhibit-redisplay t))
     (mpc-quit)
     (mpc)
+    (set-window-configuration +mpc--wconf)
     (dolist (buf (mapcar #'cdr (if mpc-proc (process-get mpc-proc 'buffers))))
       (setf (alist-get buf +mpc-buf-pos-alist)
             (with-current-buffer buf
