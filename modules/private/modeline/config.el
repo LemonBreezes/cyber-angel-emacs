@@ -179,7 +179,7 @@
                                      ;;projectile-mode
                                      flycheck-mode
                                      flymake-mode
-                                     ;persp-mode
+                                        ;persp-mode
                                      eat-eshell-mode
                                      envrc-mode
                                      ))
