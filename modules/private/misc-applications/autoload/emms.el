@@ -119,7 +119,7 @@ rather than the whole path."
                   (s (emms-mode-line-cycle--get-title-cache n)))
              ((not continue) output)
            (delete-region (point-min) (point-max))
-           (insert (propertize s 'face 'mode-line))
+           (propertize s 'line-prefix nil 'wrap-prefix nil 'face 'variable-pitch)
            (setq output (max (puthash s (car (buffer-text-pixel-size nil nil t))
                                       emms-mode-line-song-pixel-width-hash)
                              output)
