@@ -826,6 +826,7 @@
                                                             'display `(space :width (,padding)))
                                                 suffix)
                                         'valign t)))))))
+
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
