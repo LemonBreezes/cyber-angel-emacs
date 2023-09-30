@@ -814,10 +814,7 @@
                   (cancel-timer emms-mode-line-cycle-timer))))
     ;; Align the cycling modeline pixelwise. This does nothing if you are using
     ;; a monospace font for your modeline.
-    (defvar emms-mode-line-string-pixel-length-max-alist nil)
-    (advice-add #'emms-mode-line-cycle-update-mode-line-string
-                :after
-                #'+emms-mode-line-cycle-valign))
+    (advice-add #'emms-mode-line-cycle-update-mode-line-string :after #'+emms-mode-line-cycle-valign))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
