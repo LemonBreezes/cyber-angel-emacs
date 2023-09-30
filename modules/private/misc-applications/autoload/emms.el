@@ -59,3 +59,9 @@ rather than the whole path."
            (+emms-track-title-from-file-name (emms-track-name track)))
           (t (emms-track-simple-description track)))))
 
+;;;###autoload
+(defun +emms-browser-add-tracks ()
+  (interactive)
+  (save-excursion
+    (save-window-excursion
+      (call-interactively #'emms-browser-add-tracks))))
