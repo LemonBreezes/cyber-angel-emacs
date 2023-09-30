@@ -797,7 +797,7 @@
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
 
-  (setq emms-track-description-function 'cae-emms-track-description
+  (setq emms-track-description-function '+emms-track-description
         emms-mode-line-icon-enabled-p nil)
   (after! emms-mode-line-cycle
     (setq emms-mode-line-cycle-max-width 24
