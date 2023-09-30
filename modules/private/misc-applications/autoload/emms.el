@@ -79,11 +79,13 @@ rather than the whole path."
 (defun +emms-mode-line-cycle-valign (&rest _)
   (let* ((song (or emms-mode-line-cycle--title
                    (funcall emms-mode-line-cycle-current-title-function))))
-    (unless (or (not emms-mode-line-string)
+    (if (or (not emms-mode-line-string)
                 (> (length emms-mode-line-string)
                    (+ (length (string-replace "%s" "" emms-mode-line-format))
                       (min (length song)
                            emms-mode-line-cycle-max-width))))
+        (setq emms-mode-line-string
+              (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
       (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
              (width (cae-variable-pitch-width emms-mode-line-string))
              (l (length emms-mode-line-string))
