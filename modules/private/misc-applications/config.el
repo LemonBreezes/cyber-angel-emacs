@@ -807,18 +807,20 @@
                       (setq emms-mode-line-cycle-timer
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
                   (cancel-timer emms-mode-line-cycle-timer))))
-    ;;(advice-add #'emms-mode-line-cycle-update-mode-line-string
-    ;;            :after
-    ;;            (cae-defun +emms-mode-line-cycle-valign (&rest _)
-    ;;              (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-    ;;                    (pixel-width
-    ;;                     (- 210
-    ;;                      (string-pixel-width (propertize emms-mode-line-string :face 'mode-line)))))
-    ;;                (setq emms-mode-line-string
-    ;;                      (concat (string-remove-suffix suffix emms-mode-line-string)
-    ;;                              (propertize " "
-    ;;                                          'display `(space :width (,pixel-width)))
-    ;;                              suffix)))))
+    (advice-add #'emms-mode-line-cycle-update-mode-line-string
+                :after
+                (cae-defun +emms-mode-line-cycle-valign (&rest _)
+                  (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+                        (pixel-width
+                         (- (cae-variable-pitch-width
+                             (make-string (1- (length emms-mode-line-string)) ?T))
+                            (cae-variable-pitch-width emms-mode-line-string))))
+                    (setq emms-mode-line-string
+                          (concat (string-remove-suffix suffix emms-mode-line-string)
+                                  (propertize " "
+                                              'display `(space :width (,pixel-width)))
+                                  suffix)))))
+    (emms-mode-line-cycle-update-mode-line-string)
     )
   (emms-mode-line-cycle +1))
 
