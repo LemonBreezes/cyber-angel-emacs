@@ -3,14 +3,7 @@
 ;;;###autoload
 (defun +emms (&optional arg)
   (interactive "P")
-  (if arg
-      (setq +emms--old-wconf nil)
-    (if (modulep! :ui workspaces)
-        (+workspace-switch +emms-workspace-name t)
-      (setq +emms--old-wconf (current-window-configuration))
-      (let ((ignore-window-parameters t))
-        (delete-other-windows))
-      (switch-to-buffer (doom-fallback-buffer))))
+  (setq +emms--old-wconf (current-window-configuration))
   (call-interactively #'emms-smart-browse))
 
 
@@ -18,11 +11,8 @@
 (defun +emms-quit ()
   (interactive)
   (call-interactively #'emms-browser-bury-buffer)
-  (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +emms-workspace-name)
-        (+workspace/delete +emms-workspace-name))
-    (when +emms--old-wconf
-      (set-window-configuration +emms--old-wconf))))
+  (when +emms--old-wconf
+    (set-window-configuration +emms--old-wconf)))
 
 ;;;###autoload (autoload '+emms-quick-access "private/misc-applications/autoload/emms" nil t)
 (transient-define-prefix +emms-quick-access ()
