@@ -775,10 +775,10 @@
         emms-browser-covers #'emms-browser-cache-thumbnail-async
         emms-info-functions '(emms-info-exiftool)
         emms-browser-switch-to-playlist-on-add t)
-  ;;(when (executable-find "mpd")
-  ;;  (setq emms-setup-default-player-list '(emms-player-mpd)
-  ;;        emms-info-functions '(emms-info-mpd emms-info-exiftool))
-  ;;  (emms-player-mpd-connect))
+  (when (executable-find "mpd")
+    (setq emms-setup-default-player-list '(emms-player-mpd)
+          emms-info-functions '(emms-info-mpd emms-info-exiftool))
+    (emms-player-mpd-connect))
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
