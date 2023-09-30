@@ -151,12 +151,12 @@ rather than the whole path."
                   (propertize " " 'display `(space :width (,padding)))
                   suffix))))
 
-(setq emms-mode-line-string
-      (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
-(- (+emms-compute-modeline-cycle-pixel-width
-    (or emms-mode-line-cycle--title
-        (funcall emms-mode-line-cycle-current-title-function)))
-   (cae-variable-pitch-width emms-mode-line-string))
+;;(setq emms-mode-line-string
+;;      (replace-regexp-in-string "\\s-+" " " emms-mode-line-string))
+;;(- (+emms-compute-modeline-cycle-pixel-width
+;;    (or emms-mode-line-cycle--title
+;;        (funcall emms-mode-line-cycle-current-title-function)))
+;;   (cae-variable-pitch-width emms-mode-line-string))
 ;;(length (or emms-mode-line-cycle--title
 ;;            (funcall emms-mode-line-cycle-current-title-function)))
 
