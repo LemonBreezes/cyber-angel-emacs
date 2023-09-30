@@ -784,15 +784,16 @@
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
-          emms-info-functions '(emms-info-mpd emms-info-exiftool))
-    (emms-player-mpd-connect))
+          emms-info-functions '(emms-info-mpd emms-info-exiftool)))
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
-        :ng "e" #'other-window)
+        :ng "e" #'other-window
+        :n "gr" #'emms-player-mpd-connect)
   (map! :map emms-playlist-mode-map
         :ng "q" #'+emms-quit
         :ng "e" #'other-window
+        :n "gr" #'emms-player-mpd-connect
         :localleader
         "l" #'emms-toggle-repeat-playlist
         "p" #'emms-insert-playlist
