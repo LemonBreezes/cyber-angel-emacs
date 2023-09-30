@@ -761,7 +761,9 @@
               (lambda (list)
                 (sort list (lambda (_ _) (< (random) 0.5)))))
   :config
-  (emms-all)
+  (cl-letf (((symbol-function #'emms-mode-line-mode) (symbol-function #'ignore))
+            ((symbol-function #'emms-playing-time-mode) (symbol-function #'ignore)))
+    (emms-all))
   (emms-default-players)
   (setq emms-repeat-playlist t
         emms-repeat-track t
