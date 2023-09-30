@@ -667,6 +667,11 @@
         :n "l" #'somafm--sort
         :n "s" #'somafm--stop))
 
+;; Beware. Using MPC and EMMS together does not work well. Mostly running
+;; `emms-player-mpd-connect' can cause EMMS to info a lot of tracks and EMMS is
+;; painfully slow at doing so because it calls all its processes synchronously.
+;; So this is a solvable problem but I'm not really willing to grind that myself
+;; right now.
 (use-package! mpc
   :defer t :init
   (defvar +mpc-workspace-name "*mpc*")
@@ -775,12 +780,7 @@
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-exiftool))
-    (emms-player-mpd-connect)
-    ;;(dolist (fn '(+mpc-play +mpc-quit mpc-next mpc-prev))
-    ;;  (advice-remove fn :after
-    ;;              (cae-defun +emms-update-current-song-from-mpd (&rest _)
-    ;;                (emms-player-mpd-sync-from-mpd))))
-    )
+    (emms-player-mpd-connect))
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
