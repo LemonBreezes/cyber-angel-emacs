@@ -33,7 +33,10 @@
                                     (when mode
                                       (symbol-value (intern (concat (symbol-name mode) "-map")))))))
                t)
-              evil-state))))
+              evil-state)))
+        (which-key-replacement-alist
+         (concat '((("" . "emms-\\(.*\\)") . (nil . "+\\1")))
+                 which-key-replacement-alist)))
     (which-key--show-keymap nil keymap nil t t)))
 
 (defun evil-collection-unimpaired--encode (beg end fn)
