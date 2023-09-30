@@ -59,6 +59,7 @@
 (package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! wakatime-mode)
+(package! wakatime-ui :recipe (:host github :repo "LemonBreezes/wakatime-ui.el" :branch "various-usability-improvements"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
