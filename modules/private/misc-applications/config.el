@@ -756,10 +756,12 @@
     (map! :map dired-mode-map
           :ng "E" #'dired-do-eww))
   (map! :map +misc-applications-music-map
-        "e" #'+emms)
+        "e" #'+emms
+        "a" #'+emms-quick-access)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
-      "e" "EMMS"))
+      "e" "EMMS"
+      "j" "Jump to music dir"))
   ;; Randomize all Dired playlists
   (advice-add #'emms-source-dired :filter-return
               (lambda (list)
