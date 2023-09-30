@@ -817,11 +817,12 @@
     (advice-add #'emms-mode-line-cycle-update-mode-line-string
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
-                  (unless (> (length emms-mode-line-string)
-                             (+ (length (string-replace "%s" "" emms-mode-line-format))
-                                (min (length (or emms-mode-line-cycle--title
-                                                 (funcall emms-mode-line-cycle-current-title-function)))
-                                     emms-mode-line-cycle-max-width)))
+                  (unless (ignore-errors
+                            (> (length emms-mode-line-string)
+                               (+ (length (string-replace "%s" "" emms-mode-line-format))
+                                  (min (length (or emms-mode-line-cycle--title
+                                                   (funcall emms-mode-line-cycle-current-title-function)))
+                                       emms-mode-line-cycle-max-width))))
                     (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
                            (width (cae-variable-pitch-width emms-mode-line-string))
                            (l (length emms-mode-line-string))
