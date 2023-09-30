@@ -873,6 +873,10 @@
     :defer t :defer-incrementally t :config
     (global-wakatime-mode +1)
     (setq wakatime-cli-path (executable-find "wakatime")))
+  (use-package! wakatime-ui
+    :defer t :after wakatime-mode :config
+    (setq wakatime-ui--binary-name "wakatime")
+    (global-wakatime-ui-mode +1))
 
   (use-package! titlecase
     :defer t :init
