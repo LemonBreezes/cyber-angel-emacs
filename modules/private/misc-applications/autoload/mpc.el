@@ -19,7 +19,8 @@
     (call-interactively #'mpc))
   (let ((inhibit-redisplay t))
     (when (and +mpc--prev-buf (get-buffer-window +mpc--prev-buf))
-      (select-window (get-buffer-window +mpc--prev-buf))))
+      (select-window (get-buffer-window +mpc--prev-buf))
+      (+mpc-jump-to-previous-position)))
   (setq +mpc--wconf (current-window-configuration)))
 
 ;;;###autoload
