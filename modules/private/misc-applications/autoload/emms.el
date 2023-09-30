@@ -134,25 +134,19 @@ rather than the whole path."
 
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
-  (let* ((song (or emms-mode-line-cycle--title
-                   (funcall emms-mode-line-cycle-current-title-function))))
-    (if (or (not emms-mode-line-string)
-            (> (length emms-mode-line-string)
-               (+ (length (string-replace "%s" "" emms-mode-line-format))
-                  (min (length song)
-                       emms-mode-line-cycle-max-width))))
-        (and emms-mode-line-string
-             (setq emms-mode-line-string
-                   (replace-regexp-in-string "\\s-+" " " emms-mode-line-string)))
-      (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-             (width (cae-variable-pitch-width emms-mode-line-string))
-             (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
-                              width 0))))
-        (setq emms-mode-line-string
-              (concat (string-remove-suffix suffix emms-mode-line-string)
-                      (propertize " "
-                                  'display `(space :width (,padding)))
-                      suffix))))))
+  (when-let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+              (song (or emms-mode-line-cycle--title
+                        (funcall emms-mode-line-cycle-current-title-function)))
+              (width (cae-variable-pitch-width emms-mode-line-string))
+              (padding (max (- (+emms-compute-modeline-cycle-pixel-width song)
+                               width)
+                            0))
+              (padding-nontrivial-p (> padding 0)))
+    (setq emms-mode-line-string
+          (concat (string-remove-suffix suffix emms-mode-line-string)
+                  (propertize " "
+                              'display `(space :width (,padding)))
+                  suffix))))
 
 (add-hook 'kill-emacs-hook
           (cae-defun +emms-store-mode-line-song-pixel-width-hash-h ()
