@@ -813,9 +813,7 @@
                   (setq emms-mode-line-string
                         (propertize emms-mode-line-string
                                     :font (face-font 'default))))))
-  (emms-mode-line-cycle +1)
-
-  )
+  (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
   :after emms
