@@ -46,7 +46,7 @@
 
 (defun +mpc-jump-to-previous-position ()
   (let* ((marker (alist-get (window-buffer (selected-window)) +mpc-buf-pos-alist))
-        (pos (marker-position marker)))
+         (pos (marker-position marker)))
     (goto-char pos)))
 
 ;;;###autoload
