@@ -811,9 +811,9 @@
                 :after
                 (cae-defun +emms-mode-line-cycle-valign (&rest _)
                   (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
-                        (pixel-width
-                         (- 210
-                          (string-pixel-width (propertize emms-mode-line-string :face 'mode-line)))))
+                         (pixel-width
+                          (- 210
+                             (string-pixel-width (propertize emms-mode-line-string :face 'mode-line)))))
                     (setq emms-mode-line-string
                           (concat (string-remove-suffix suffix emms-mode-line-string)
                                   ;;(propertize " "
