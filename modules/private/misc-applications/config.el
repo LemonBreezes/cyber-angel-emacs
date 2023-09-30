@@ -798,24 +798,7 @@
   (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
 
   (setq emms-track-description-function '+emms-track-description
-        emms-mode-line-icon-enabled-p nil)
-  (after! emms-mode-line-cycle
-    (setq emms-mode-line-cycle-max-width 24
-          emms-mode-line-cycle-velocity 1)
-    ;; Cycle the EMMS modeline more quickly.
-    (advice-remove #'emms-playing-time-display #'emms-mode-line-cycle-update-mode-line-string)
-    (defvar emms-mode-line-cycle-timer nil)
-    (add-hook 'emms-mode-line-cycle-hook
-              (cae-defun +emms-mode-line-cycle-timer ()
-                (if emms-mode-line-cycle
-                    (unless (memq emms-mode-line-cycle-timer timer-list)
-                      (setq emms-mode-line-cycle-timer
-                            (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
-                  (cancel-timer emms-mode-line-cycle-timer))))
-    ;; Align the cycling modeline pixelwise. This does nothing if you are using
-    ;; a monospace font for your modeline.
-    (advice-add #'emms-mode-line-cycle-update-mode-line-string :after #'+emms-mode-line-cycle-valign))
-  (emms-mode-line-cycle +1))
+        emms-mode-line-icon-enabled-p nil))
 
 (use-package! lyrics-fetcher
   :after emms
