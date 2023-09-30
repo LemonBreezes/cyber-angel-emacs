@@ -814,7 +814,7 @@
                     (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
                            (pixel-width
                             (max (- (cae-variable-pitch-width
-                                     (make-string (1- (length emms-mode-line-string)) ?T))
+                                     (make-string (- (length emms-mode-line-string) 2) ?T))
                                     (cae-variable-pitch-width emms-mode-line-string))
                                  0)))
                       (setq emms-mode-line-string
