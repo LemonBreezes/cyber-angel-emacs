@@ -114,6 +114,9 @@ It is meant to be used as a `post-gc-hook'."
 ;; sporadically for me.
 (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
 
+;; Another error but during completion. Strange.
+(autoload 'tramp-command-completion-p "tramp")
+
 ;; For backwards compatibility.
 (defun toggle-read-only (arg)
   (read-only-mode
