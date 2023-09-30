@@ -107,7 +107,7 @@ rather than the whole path."
       (make-hash-table :test 'equal)))
 (defvar emms-mode-line-song-pixel-width-hash
   (or (doom-store-get 'emms-mode-line-song-pixel-width-hash)
-      (make-hash-table :test 'equal)))
+    (make-hash-table :test 'equal)))
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
   (or (gethash emms-mode-line-cycle--title
@@ -155,6 +155,7 @@ rather than the whole path."
                               emms-mode-line-song-pixel-width-hash))
               (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
+    ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
                   (propertize " " 'display `(space :width (,padding)))
