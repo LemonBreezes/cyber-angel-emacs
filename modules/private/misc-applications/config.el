@@ -764,8 +764,6 @@
   ;; These are the defaults minus the modeline setup.
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
-  (setq emms-info-functions '(emms-info-native emms-info-cueinfo))
-  (setq emms-track-description-function #'emms-info-track-description)
   (require 'emms-cache)
   (require 'emms-score)
   (emms-cache +1)
@@ -787,6 +785,7 @@
         emms-browser-switch-to-playlist-on-add t)
   (when (executable-find "mpd")
     (setq emms-setup-default-player-list '(emms-player-mpd)
+          emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-exiftool))
     (emms-player-mpd-connect))
   (map! :map emms-browser-mode-map
