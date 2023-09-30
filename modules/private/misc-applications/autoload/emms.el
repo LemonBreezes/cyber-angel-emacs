@@ -144,8 +144,7 @@ rather than the whole path."
               (padding-nontrivial-p (> padding 0)))
     (setq emms-mode-line-string
           (concat (string-remove-suffix suffix emms-mode-line-string)
-                  (propertize " "
-                              'display `(space :width (,padding)))
+                  (propertize " " 'display `(space :width (,padding)))
                   suffix))))
 
 (add-hook 'kill-emacs-hook
