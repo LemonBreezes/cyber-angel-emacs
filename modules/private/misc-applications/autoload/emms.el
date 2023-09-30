@@ -87,12 +87,14 @@ rather than the whole path."
       (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
              (width (cae-variable-pitch-width emms-mode-line-string))
              (l (length emms-mode-line-string))
-             (max-pixel-width (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
-                                   (gethash song emms-mode-line-song-pixel-length-max-hash-table)
-                                   width))
              (padding (max (- (max (setf (alist-get l emms-mode-line-string-pixel-length-max-alist)
-                                         max-pixel-width)
-                                   (puthash song max-pixel-width
+                                         (max (alist-get l emms-mode-line-string-pixel-length-max-alist 0)
+                                              width))
+                                   (puthash song
+                                            (max (or (gethash song emms-mode-line-song-pixel-length-max-hash-table)
+                                                     0)
+                                                 (alist-get l emms-mode-line-string-pixel-length-max-alist)
+                                                 width)
                                             emms-mode-line-song-pixel-length-max-hash-table))
                               width 0))))
         (setq emms-mode-line-string
