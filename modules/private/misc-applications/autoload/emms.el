@@ -132,6 +132,7 @@ rather than the whole path."
                          continue (not (eq beg 0)))))
                emms-mode-line-song-pixel-width-hash)))
 
+;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
   (let* ((song (or emms-mode-line-cycle--title
                    (funcall emms-mode-line-cycle-current-title-function))))
