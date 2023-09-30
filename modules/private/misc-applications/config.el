@@ -806,7 +806,19 @@
                     (unless (memq emms-mode-line-cycle-timer timer-list)
                       (setq emms-mode-line-cycle-timer
                             (run-at-time 0.5 0.5 #'emms-mode-line-cycle-update-mode-line-string)))
-                  (cancel-timer emms-mode-line-cycle-timer)))))
+                  (cancel-timer emms-mode-line-cycle-timer))))
+    (advice-add #'emms-mode-line-cycle-update-mode-line-string
+                :after
+                (cae-defun +emms-mode-line-cycle-valign (&rest _)
+                  (let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
+                        (pixel-width
+                         (- 210
+                          (string-pixel-width (propertize emms-mode-line-string :face 'mode-line)))))
+                    (setq emms-mode-line-string
+                          (concat (string-remove-suffix suffix emms-mode-line-string)
+                                  ;;(propertize " "
+                                  ;;            'display `(space :width (,pixel-width)))
+                                  suffix))))))
   (emms-mode-line-cycle +1))
 
 (use-package! lyrics-fetcher
