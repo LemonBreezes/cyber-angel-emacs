@@ -507,6 +507,25 @@
     (add-to-list 'marginalia-prompt-categories '("\\<find file\\>" . file)))
   (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
   (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
+  (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
+  (after! vertico-multiform
+    (setq vertico-multiform-categories
+          `((embark-keybinding grid)
+            (consult-grep
+             ,(if (and (cae-display-graphic-p)
+                       (modulep! :completion vertico +childframe))
+                  'posframe 'buffer))
+            (imenu ,@(if (and (cae-display-graphic-p)
+                              (modulep! :completion vertico +childframe))
+                         '(posframe grid) '(grid)))
+            (consult-location ,(if (and (cae-display-graphic-p)
+                                        (modulep! :completion vertico +childframe))
+                                   'posframe 'buffer))
+            ,@(if (cae-display-graphic-p)
+                  (if (modulep! :completion vertico +childframe)
+                      (list t 'posframe)
+                    nil)
+                (list t 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
