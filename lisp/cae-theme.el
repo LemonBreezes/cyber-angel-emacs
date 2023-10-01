@@ -142,7 +142,7 @@
               (doom-store-put 'circadian-sunrise (circadian-sunrise)))))
 
 ;; Set the theme on startup.
-(when (and (doom-store-get 'circadian-themes)
+(if (and (doom-store-get 'circadian-themes)
            (not (symbolp (caar (doom-store-get 'circadian-themes))))
            (not cae-config-finished-loading))
   (let* ((themes (doom-store-get 'circadian-themes))
@@ -156,7 +156,10 @@
                         themes))
          (entry (car (last (or past-themes themes))))
          (theme (cdr entry)))
-    (setq doom-theme theme)))
+    (setq doom-theme theme))
+  ;; If we don't have `circadian-themes' cached, load `circadian' eagerly so
+  ;; that we always have the correct theme on startup.
+  (require 'circadian))
 
 (use-package! ewal
   :defer-incrementally t
