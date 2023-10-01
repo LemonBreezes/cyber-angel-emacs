@@ -2,8 +2,6 @@
 
 ;; A dedicated file where I handle the usage of posframes
 
-(defvar cae-theme-posframe-enabled nil)
-
 (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
 (after! vertico-multiform
   (setq vertico-multiform-categories
