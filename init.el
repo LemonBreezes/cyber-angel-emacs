@@ -51,7 +51,7 @@
        :ui
        doom-dashboard
        hl-todo
-       hydra
+       (hydra +childframe)
        (ligatures +extra +iosevka)
        ;;nav-flash
        (popup +defaults)
