@@ -277,7 +277,7 @@
         ("^\\*notmuch-hello"  :ignore)
         ("^\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top)
-        ("*helm" :ignore t)
+        ("*helm " :ignore t)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
     (after! embark
