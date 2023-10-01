@@ -34,7 +34,6 @@
 
 
 (defvar emms-mode-line-song-max-pixel-width-hash (make-hash-table :test 'equal))
-(defvar emms-mode-line-song-pixel-width-hash (make-hash-table :test 'equal))
 
 (defun +emms-compute-modeline-cycle-pixel-width ()
   (or (gethash emms-mode-line-cycle--title
@@ -51,8 +50,7 @@
              ((not continue) output)
            (delete-region (point-min) (point-max))
            (propertize s 'line-prefix nil 'wrap-prefix nil 'face 'variable-pitch)
-           (setq output (max (puthash s (car (buffer-text-pixel-size nil nil t))
-                                      emms-mode-line-song-pixel-width-hash)
+           (setq output (max (car (buffer-text-pixel-size nil nil t))
                              output)
                  n (1+ n)
                  s (emms-mode-line-cycle--get-title-cache n)
@@ -67,20 +65,12 @@
 
 ;;(+emms-compute-modeline-cycle-pixel-width)
 
-;;(unless (gethash (emms-mode-line-cycle-get-title emms-mode-line-cycle-velocity)
-;;                 emms-mode-line-song-pixel-width-hash)
-;;  (+log (concat "|" (emms-mode-line-cycle-get-title emms-mode-line-cycle-velocity)
-;;                "|")))
-
 ;;;###autoload
 (defun +emms-mode-line-cycle-valign (&rest _)
   (when-let* ((suffix (cadr (split-string emms-mode-line-format "%s")))
               (max-width (+emms-compute-modeline-cycle-pixel-width))
               (song (emms-mode-line-cycle-get-title))
-              (width (or (gethash song emms-mode-line-song-pixel-width-hash)
-                         (puthash song
-                                  (cae-variable-pitch-width song)
-                                  emms-mode-line-song-pixel-width-hash)))
+              (width (cae-variable-pitch-width song))
               (padding (- max-width width))
               (padding-nontrivial-p (> padding 0)))
     ;;(+log padding width (+emms-compute-modeline-cycle-pixel-width))
