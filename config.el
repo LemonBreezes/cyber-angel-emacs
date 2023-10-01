@@ -1155,14 +1155,7 @@
                                           '(("git" "log" "diff" "show"))))
           eshell-visual-options '(("git" "--help" "--paginate"))))
 
-  ;; Do not spam my terminal with escape sequences when `wal' exports colors.
-  (when (executable-find "wal")
-    (add-hook 'comint-preoutput-filter-functions
-              (cae-defun cae-filter-wal-sequences (s)
-                (if (string-match-p "^\n?]4;0;" s)
-                    "" s)))))
-
-
+)
 ;;; Text
 
 (when cae-init-text-enabled-p
