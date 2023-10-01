@@ -143,20 +143,20 @@
 
 ;; Set the theme on startup.
 (if (and (doom-store-get 'circadian-themes)
-           (not (symbolp (caar (doom-store-get 'circadian-themes))))
-           (not cae-config-finished-loading))
-  (let* ((themes (doom-store-get 'circadian-themes))
-         (now (reverse (cl-subseq (decode-time) 0 3)))
-         (past-themes
-          (cl-remove-if (lambda (entry)
-                          (let ((theme-time (cl-first entry)))
-                            (not (or (and (= (cl-first theme-time) (cl-first now))
-                                          (<= (cl-second theme-time) (cl-second now)))
-                                     (< (cl-first theme-time) (cl-first now))))))
-                        themes))
-         (entry (car (last (or past-themes themes))))
-         (theme (cdr entry)))
-    (setq doom-theme theme))
+         (not (symbolp (caar (doom-store-get 'circadian-themes))))
+         (not cae-config-finished-loading))
+    (let* ((themes (doom-store-get 'circadian-themes))
+           (now (reverse (cl-subseq (decode-time) 0 3)))
+           (past-themes
+            (cl-remove-if (lambda (entry)
+                            (let ((theme-time (cl-first entry)))
+                              (not (or (and (= (cl-first theme-time) (cl-first now))
+                                            (<= (cl-second theme-time) (cl-second now)))
+                                       (< (cl-first theme-time) (cl-first now))))))
+                          themes))
+           (entry (car (last (or past-themes themes))))
+           (theme (cdr entry)))
+      (setq doom-theme theme))
   ;; If we don't have `circadian-themes' cached, load `circadian' eagerly so
   ;; that we always have the correct theme on startup.
   (require 'circadian))
