@@ -10,8 +10,6 @@
 
 ;; Use external APIs or apps
 (package! leetcode)
-(when (modulep! :completion vertico)
-  (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
 
 ;; System
 (when (eq system-type 'gnu/linux)
