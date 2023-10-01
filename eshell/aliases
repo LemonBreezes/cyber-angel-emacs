@@ -35,6 +35,8 @@ alias syse sudo systemctl enable                                              $*
 alias sysr sudo systemctl restart                                             $*
 alias sysx sudo systemctl stop                                                $*
 alias sysdr sudo systemctl daemon-reload                                      $*
+alias syslt sudo systemctl list-timers                                        $*
+alias sysult systemctl list-timers                                            $*
 
 alias mcd    mkdir -p $1 && cd $1
 alias cd-    cd -
