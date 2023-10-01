@@ -215,47 +215,6 @@
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
-(use-package! consult-gh
-  :defer t :when (modulep! :completion vertico)
-  :commands (consult-gh-orgs
-             consult-gh-repo-clone
-             consult-gh-search-repos
-             consult-gh-search-issues
-             consult-gh-find-file
-             consult-gh-repo-fork)
-  :init
-  (setq consult-gh-prioritize-local-folder 'suggest
-        consult-gh-confirm-before-clone nil)
-  (map! :map +misc-applications-external-apps-map
-        "go" #'consult-gh-orgs
-        "gc" #'consult-gh-repo-clone
-        "gs" #'consult-gh-search-repos
-        "gi" #'consult-gh-search-issues
-        "gf" #'consult-gh-find-file
-        "gk" #'consult-gh-repo-fork)
-  (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
-      "g" "GitHub CLI"
-      "go" "Organizations"
-      "gc" "Clone repo"
-      "gs" "Search repos"
-      "gi" "Search issues"
-      "gf" "Find file"
-      "gk" "Fork repo"))
-  :config
-  (setq consult-gh-default-clone-directory "~/src/"
-        consult-gh-show-preview t
-        consult-gh-issue-action #'consult-gh--issue-browse-url-action
-        consult-gh-repo-action #'consult-gh--repo-browse-files-action
-        consult-gh-file-action #'consult-gh--files-view-action
-        consult-gh-preview-buffer-mode #'org-mode
-        consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa"
-                                       "LemonBreezes" "protesilaos"
-                                       "emacs-mirror" "doomemacs" "tecosaur"
-                                       "systemcrafters")))
-(use-package! consult-gh-embark
-  :after (consult-gh embark))
-
 
 ;;; System
 
