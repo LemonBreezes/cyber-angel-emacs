@@ -11,3 +11,6 @@
 (package! blamer)
 (when (modulep! :completion vertico)
   (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
+(when (or (modulep! :completion helm)
+          (modulep! :private helm))
+  (package! helm-ls-git))
