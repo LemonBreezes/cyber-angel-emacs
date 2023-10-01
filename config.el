@@ -1153,9 +1153,9 @@
                                       ("geth" "attach")
                                       ,@(unless (string= (getenv "GIT_PAGER") "cat")
                                           '(("git" "log" "diff" "show"))))
-          eshell-visual-options '(("git" "--help" "--paginate"))))
+          eshell-visual-options '(("git" "--help" "--paginate")))))
 
-  )
+
 ;;; Text
 
 (when cae-init-text-enabled-p
