@@ -166,8 +166,11 @@
 (use-package! helm-ls-git
   :when (or (modulep! :completion helm)
             (modulep! :private helm))
-  :init
-  ()
+  :defer t :init
+  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
+  (map! :leader
+        :prefix vc-prefix
+        :desc "Helm LS Git" "h" #'helm-ls-git))
   :config
   (setq helm-ls-git-auto-checkout t
         helm-ls-git-fuzzy-match t
