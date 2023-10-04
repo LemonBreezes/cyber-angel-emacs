@@ -32,16 +32,16 @@
       (setq markdown-fontify-whole-heading-line t))))
 
 (defun cae-theme-customize-faces-h (_)
-  (when (modulep! :lang org)
-    (after! org
-      ;; This is how I like my ellipsis to look. Subtle.
-      (unless cae-theme-extend-heading-faces
-        (set-face-attribute 'org-ellipsis nil
-                            :inherit '(shadow default)
-                            :weight 'normal))
-      (unless (face-attribute 'org-document-title :height nil t)
-        (set-face-attribute 'org-document-title nil
-                            :height 1.2))))
+  (after! org
+    ;; This is how I like my ellipsis to look. Subtle.
+    (unless cae-theme-extend-heading-faces
+      (set-face-attribute 'org-ellipsis nil
+                          :inherit '(shadow default)
+                          :weight 'normal))
+    (unless (face-attribute 'org-document-title :height nil t)
+      (set-face-attribute 'org-document-title nil
+                          :height 1.2)))
+
   ;; For `esh-autosuggest'.
   (after! company
     (set-face-attribute 'company-preview-common nil
