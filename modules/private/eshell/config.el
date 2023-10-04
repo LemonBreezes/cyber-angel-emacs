@@ -13,6 +13,7 @@
 ;;        :desc "Detached session" "s" #'detached-open-session)
 ;;  :custom ((detached-terminal-data-command system-type)))
 
+;; FIXME Just became broken on Emacs HEAD.
 ;;(use-package! eat
 ;;  :defer t :init
 ;;  (add-hook 'eshell-load-hook #'eat-eshell-mode)
