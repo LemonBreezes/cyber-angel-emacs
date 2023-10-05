@@ -74,6 +74,11 @@
       (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5
                       outline-6 outline-7 outline-8))
         (set-face-attribute face nil :extend t)))
+    (after! markdown-mode
+      (dolist (face '(markdown-header-face-1 markdown-header-face-2
+                      markdown-header-face-3 markdown-header-face-4
+                      markdown-header-face-5 markdown-header-face-6))
+        (set-face-attribute face nil :extend t)))
     (after! helpful
       (set-face-attribute 'helpful-heading nil :extend t)))
 
