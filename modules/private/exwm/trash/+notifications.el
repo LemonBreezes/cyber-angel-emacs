@@ -6,7 +6,6 @@
     (and (require 'dbus nil t)
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'+ednc-load-h)
-  ;; TODO Add keybindings.
   (add-hook 'ednc-notification-presentation-functions #'+ednc-show-notification-in-buffer)
   (defun +ednc-stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
