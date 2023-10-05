@@ -70,5 +70,4 @@
 ;;                    )))
 
 ;; Start up Rtorrent.
-;; TODO Detach from Emacs.
 ;; (start-process "rtorrent" startup/misc-shell-commands-buffer "rtorrent" "-o" "system.daemon.set=true")
