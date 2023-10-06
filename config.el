@@ -1305,7 +1305,8 @@
                     :server-id 'fennel-ls)))
 (after! eglot
   (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls" )))
-  (add-hook 'fennel-mode-local-vars-hook #'lsp!))
+  (when (modulep! :lang lua +lsp)
+    (add-hook 'fennel-mode-local-vars-hook #'lsp!)))
 
 ;;; Appendix
 
