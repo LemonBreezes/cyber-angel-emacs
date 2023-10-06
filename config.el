@@ -1304,7 +1304,8 @@
                     :activation-fn (lsp-activate-on "fennel")
                     :server-id 'fennel-ls)))
 (after! eglot
-  (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls"))))
+  (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls" )))
+  (add-hook 'fennel-mode-local-vars-hook #'lsp!))
 
 ;;; Appendix
 
