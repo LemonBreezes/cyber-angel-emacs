@@ -1343,7 +1343,7 @@
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :private misc-applications) ; system apps
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
-              '(snake speed-type tetris bubbles dunnet autotetris)
+              '(snake speed-type tetris bubbles dunnet autotetris klondike)
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
