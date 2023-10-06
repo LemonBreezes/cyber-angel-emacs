@@ -88,7 +88,7 @@
        ;;grammar
 
        :tools
-       ;; debugger
+       ;;debugger
        direnv
        editorconfig
        (eval +overlay)
