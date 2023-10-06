@@ -423,8 +423,7 @@
         visual-order-cursor-movement t
         view-read-only nil              ; I would maybe enable this if this
                                         ; option was compatible with
-                                        ; `auto-sudoedit'. Perhaps I should add
-                                        ; an advice.
+                                        ; `auto-sudoedit'.
         what-cursor-show-names t)
 
   (after! cus-edit
