@@ -421,9 +421,10 @@
         shift-select-mode 'permanent
         track-eol t
         visual-order-cursor-movement t
-        view-read-only nil              ; I would enable this if this option was
-                                        ; compatible with `auto-sudoedit'.
-                                        ; Perhaps I should add an advice.
+        view-read-only nil              ; I would maybe enable this if this
+                                        ; option was compatible with
+                                        ; `auto-sudoedit'. Perhaps I should add
+                                        ; an advice.
         what-cursor-show-names t)
 
   (after! cus-edit
