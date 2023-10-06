@@ -453,8 +453,7 @@
     (setq xref-search-program 'ripgrep))
 
   ;; We use `corfu' and `vertico' instead of the built-in completions, but I
-  ;; still have this here as my preferred defaults for the built-in completion
-  ;; system.
+  ;; still have this here as my preferred defaults for the built-in completions.
   (setq completion-auto-select 'second-tab
         completions-detailed t
         completions-format 'vertical
