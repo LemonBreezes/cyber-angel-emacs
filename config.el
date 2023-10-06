@@ -457,16 +457,17 @@
   (after! xref
     (setq xref-search-program 'ripgrep))
 
+  ;; These are not used in Doom Emacs since we use `helpful' instead, but I have
+  ;; them here as "better defaults" so-to-say.
   (add-hook 'help-fns-describe-function-functions
             #'shortdoc-help-fns-examples-function)
   (after! help
-    (setq
-     help-enable-symbol-autoload t
-     help-enable-completion-autoload t
-     help-enable-symbol-autoload t
-     help-window-select t
-     help-clean-buttons t
-     help-enable-variable-value-editing t))
+    (setq help-enable-symbol-autoload t
+          help-enable-completion-autoload t
+          help-enable-symbol-autoload t
+          help-window-select t
+          help-clean-buttons t
+          help-enable-variable-value-editing t))
 
   (add-hook 'bookmark-bmenu-mode-hook #'cae-bookmark-extra-keywords)
   (after! bookmark
