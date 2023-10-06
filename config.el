@@ -1303,6 +1303,8 @@
    (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
                     :activation-fn (lsp-activate-on "fennel")
                     :server-id 'fennel-ls)))
+(after! eglot
+  (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls"))))
 
 ;;; Appendix
 
