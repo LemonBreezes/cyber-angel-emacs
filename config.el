@@ -404,11 +404,6 @@
         remote-file-name-inhibit-auto-save-visited t
         make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t
-        completion-auto-select 'second-tab
-        completions-detailed t
-        completions-format 'vertical
-        completions-group t
-        completions-group-sort 'alphabetical
         global-mark-ring-max 1024
         history-delete-duplicates t
         history-length t
@@ -456,6 +451,15 @@
 
   (after! xref
     (setq xref-search-program 'ripgrep))
+
+  ;; We use `corfu' and `vertico' instead of the built-in completions, but I
+  ;; still have this here as my preferred defaults for the built-in completion
+  ;; system.
+  (setq completion-auto-select 'second-tab
+        completions-detailed t
+        completions-format 'vertical
+        completions-group t
+        completions-group-sort 'alphabetical)
 
   ;; These are not used in Doom Emacs since we use `helpful' instead, but I have
   ;; them here as "better defaults" so-to-say.
