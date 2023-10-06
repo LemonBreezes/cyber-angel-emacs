@@ -1323,7 +1323,7 @@
                (modulep! :private helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
    ,@(when (modulep! :private misc-applications) ; music apps
-       '(empv mpc somafm emms helm-emms lyrics-fetcher))
+       '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :private ai)
        '(copilot org-ai chatgpt-shell))
    ,@(when (modulep! :private gnus)
