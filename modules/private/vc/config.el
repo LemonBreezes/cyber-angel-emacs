@@ -159,7 +159,9 @@
         consult-gh-default-orgs-list '("oantolin" "minad" "alphapapa"
                                        "LemonBreezes" "protesilaos"
                                        "emacs-mirror" "doomemacs" "tecosaur"
-                                       "systemcrafters")))
+                                       "systemcrafters"))
+  (after! projectile
+    (add-hook 'consult-gh-repo-post-clone-hook #'projectile-discover-projects-in-search-path)))
 (use-package! consult-gh-embark
   :after (consult-gh embark))
 
