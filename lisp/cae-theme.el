@@ -22,7 +22,7 @@
           (when shift-fold-p
             (overlay-put o 'display "\n"))))))
   (after! org
-    ;; This is so that the entire line is highlighted up to the left margin.
+    ;; This way, there is no blank space at the beginning of the line.
     (setq org-startup-indented nil
           org-hide-leading-stars nil))
 
