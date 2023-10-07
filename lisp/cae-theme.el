@@ -21,6 +21,9 @@
           (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
           (when shift-fold-p
             (overlay-put o 'display "\n"))))))
+  (after! org
+    (setq org-startup-indented nil
+          org-hide-leading-stars nil))
 
   (use-package! backline
     :when cae-theme-extend-heading-faces
