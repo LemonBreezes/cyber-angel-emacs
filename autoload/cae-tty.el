@@ -37,4 +37,5 @@
           dirvish-subtree-line-prefix " |"))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
-    (advice-add fn :override #'ignore)))
+    (advice-add fn :override #'ignore))
+  (remove-hook 'org-mode-hook #'+org-pretty-mode))
