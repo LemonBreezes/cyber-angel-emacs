@@ -25,12 +25,6 @@
           (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
           (when shift-fold-p
             (overlay-put o 'display "\n"))))))
-  (after! org
-    ;; This way, there is no blank space at the beginning of the line. It might
-    ;; be possible to patch these features so that they inherit the background
-    ;; color though.
-    (setq org-startup-indented nil
-          org-hide-leading-stars nil))
   (after! org-modern
     ;; These features interfere with the heading backgrounds.
     (setq org-modern-tag nil
