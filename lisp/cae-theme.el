@@ -22,7 +22,9 @@
           (when shift-fold-p
             (overlay-put o 'display "\n"))))))
   (after! org
-    ;; This way, there is no blank space at the beginning of the line.
+    ;; This way, there is no blank space at the beginning of the line. It might
+    ;; be possible to patch these features so that they inherit the background
+    ;; color though.
     (setq org-startup-indented nil
           org-hide-leading-stars nil))
 
