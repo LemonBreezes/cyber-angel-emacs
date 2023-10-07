@@ -27,6 +27,10 @@
     ;; color though.
     (setq org-startup-indented nil
           org-hide-leading-stars nil))
+  (after! org-modern
+    ;; These features interfere with the heading backgrounds.
+    (setq org-modern-tag nil
+          ))
 
   (use-package! backline
     :when cae-theme-extend-heading-faces
