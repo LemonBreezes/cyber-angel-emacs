@@ -11,7 +11,8 @@
   (defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
     ;; This function monkey-patches Org fold into preserving the heading
     ;; backgrounds when folded but does not work when unfolding nested
-    ;; headlines. Still, it's a lot better than having nothing.
+    ;; headlines. Still, it's a lot better than having nothing. It's basically
+    ;; what `backline' does for Outline.
     (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
       (when shift-fold-p
         (setq to (1- to)))
