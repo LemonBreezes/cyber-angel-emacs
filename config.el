@@ -1324,7 +1324,7 @@
    ,@(when (modulep! :term vterm)
        '(vterm))
    ,@(when (modulep! :ui hydra)
-       '(hydra cae-cheatsheets))
+       '(hydra))
    ,@(when (modulep! :email mu4e)
        '(mu4e))
    ,@(when (or (modulep! :completion helm)
