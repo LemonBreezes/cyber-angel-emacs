@@ -30,7 +30,7 @@
   (after! org-modern
     ;; These features interfere with the heading backgrounds.
     (setq org-modern-tag nil
-          ))
+          org-modern-todo-faces nil))
 
   (use-package! backline
     :when cae-theme-extend-heading-faces
