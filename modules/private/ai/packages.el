@@ -5,6 +5,5 @@
 (package! greader)
 (package! whisper :recipe (:host github :repo "natrys/whisper.el"))
 (package! chatgpt-shell)
-(package! gpt-commit)
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
