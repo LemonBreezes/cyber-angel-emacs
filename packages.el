@@ -16,6 +16,8 @@
            (modulep! :lang org))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
+(package! elfeed-org :recipe (:host github :repo "LemonBreezes/elfeed-org"
+                              :branch "fix-export-to-opml"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
