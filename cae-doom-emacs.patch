@@ -217,10 +217,10 @@ index 72d3896b6..8232f16a0 100644
        (doom-log "Initializing recipes")
        (mapc #'straight-use-recipes
 diff --git a/lisp/doom-ui.el b/lisp/doom-ui.el
-index 172a67634..40a325722 100644
+index 360998c66..23066b502 100644
 --- a/lisp/doom-ui.el
 +++ b/lisp/doom-ui.el
-@@ -198,7 +198,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
+@@ -210,7 +210,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
  `kill-current-buffer'."
    :before-until #'kill-current-buffer
    (let ((buf (current-buffer)))
@@ -309,7 +309,7 @@ index 0bfd9e00f..a1114fb4a 100644
  
  ;;;###autoload
 diff --git a/modules/completion/vertico/config.el b/modules/completion/vertico/config.el
-index 3d84d9f79..e02e3817a 100644
+index a4efa7c4e..d01f2c112 100644
 --- a/modules/completion/vertico/config.el
 +++ b/modules/completion/vertico/config.el
 @@ -7,9 +7,6 @@ The completion/vertico module uses the orderless completion style by default,
@@ -322,8 +322,8 @@ index 3d84d9f79..e02e3817a 100644
  (defvar +vertico-consult-dir-container-executable "docker"
    "Command to call for listing container hosts.")
  
-@@ -141,20 +138,18 @@ orderless."
-     :before #'consult-recent-file
+@@ -142,20 +139,18 @@ orderless."
+     :before (list #'consult-recent-file #'consult-buffer)
      (recentf-mode +1))
  
 -  (setq consult-project-root-function #'doom-project-root
@@ -349,7 +349,7 @@ index 3d84d9f79..e02e3817a 100644
  
    (consult-customize
     consult-ripgrep consult-git-grep consult-grep
-@@ -304,9 +299,9 @@ orderless."
+@@ -305,9 +300,9 @@ orderless."
    (map! (:map embark-file-map
           :desc "Open target with sudo"        "s"   #'doom/sudo-find-file
           (:when (modulep! :tools magit)
@@ -401,77 +401,6 @@ index 68f1b73e9..98ce55310 100644
      :recipe (:host github :repo "tumashu/vertico-posframe")
 -    :pin "7da6d648ff4202a48eb6647ee7dce8d65de48779"))
 +    :pin "db9fbc95bb8316165ec74e500a76d6857e6ced1a"))
-diff --git a/modules/config/default/+evil-bindings.el b/modules/config/default/+evil-bindings.el
-index f6d1c9225..0f1e1c787 100644
---- a/modules/config/default/+evil-bindings.el
-+++ b/modules/config/default/+evil-bindings.el
-@@ -660,36 +660,36 @@
-         :desc "wanderlust" "m" #'=wanderlust))
- 
-       ;;; <leader> p --- project
--      (:prefix-map ("p" . "project")
--       :desc "Browse project"               "." #'+default/browse-project
--       :desc "Browse other project"         ">" #'doom/browse-in-other-project
--       :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
--       :desc "Async cmd in project root"    "&" #'projectile-run-async-shell-command-in-root
--       :desc "Add new project"              "a" #'projectile-add-known-project
--       :desc "Switch to project buffer"     "b" #'projectile-switch-to-buffer
--       :desc "Compile in project"           "c" #'projectile-compile-project
--       :desc "Repeat last command"          "C" #'projectile-repeat-last-command
--       :desc "Remove known project"         "d" #'projectile-remove-known-project
--       :desc "Discover projects in folder"  "D" #'+default/discover-projects
--       :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
--       :desc "Find file in project"         "f" #'projectile-find-file
--       :desc "Find file in other project"   "F" #'doom/find-file-in-other-project
--       :desc "Configure project"            "g" #'projectile-configure-project
--       :desc "Invalidate project cache"     "i" #'projectile-invalidate-cache
--       :desc "Kill project buffers"         "k" #'projectile-kill-buffers
--       :desc "Find other file"              "o" #'projectile-find-other-file
--       :desc "Switch project"               "p" #'projectile-switch-project
--       :desc "Find recent project files"    "r" #'projectile-recentf
--       :desc "Run project"                  "R" #'projectile-run-project
--       :desc "Save project files"           "s" #'projectile-save-project-buffers
--       :desc "List project todos"           "t" #'magit-todos-list
--       :desc "Test project"                 "T" #'projectile-test-project
--       :desc "Pop up scratch buffer"        "x" #'doom/open-project-scratch-buffer
--       :desc "Switch to scratch buffer"     "X" #'doom/switch-to-project-scratch-buffer
--       (:when (and (modulep! :tools taskrunner)
--                   (or (modulep! :completion ivy)
--                       (modulep! :completion helm)))
--        :desc "List project tasks"          "z" #'+taskrunner/project-tasks))
-+      ;;(:prefix-map ("p" . "project")
-+      ;; :desc "Browse project"               "." #'+default/browse-project
-+      ;; :desc "Browse other project"         ">" #'doom/browse-in-other-project
-+      ;; :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
-+      ;; :desc "Async cmd in project root"    "&" #'projectile-run-async-shell-command-in-root
-+      ;; :desc "Add new project"              "a" #'projectile-add-known-project
-+      ;; :desc "Switch to project buffer"     "b" #'projectile-switch-to-buffer
-+      ;; :desc "Compile in project"           "c" #'projectile-compile-project
-+      ;; :desc "Repeat last command"          "C" #'projectile-repeat-last-command
-+      ;; :desc "Remove known project"         "d" #'projectile-remove-known-project
-+      ;; :desc "Discover projects in folder"  "D" #'+default/discover-projects
-+      ;; :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
-+      ;; :desc "Find file in project"         "f" #'projectile-find-file
-+      ;; :desc "Find file in other project"   "F" #'doom/find-file-in-other-project
-+      ;; :desc "Configure project"            "g" #'projectile-configure-project
-+      ;; :desc "Invalidate project cache"     "i" #'projectile-invalidate-cache
-+      ;; :desc "Kill project buffers"         "k" #'projectile-kill-buffers
-+      ;; :desc "Find other file"              "o" #'projectile-find-other-file
-+      ;; :desc "Switch project"               "p" #'projectile-switch-project
-+      ;; :desc "Find recent project files"    "r" #'projectile-recentf
-+      ;; :desc "Run project"                  "R" #'projectile-run-project
-+      ;; :desc "Save project files"           "s" #'projectile-save-project-buffers
-+      ;; :desc "List project todos"           "t" #'magit-todos-list
-+      ;; :desc "Test project"                 "T" #'projectile-test-project
-+      ;; :desc "Pop up scratch buffer"        "x" #'doom/open-project-scratch-buffer
-+      ;; :desc "Switch to scratch buffer"     "X" #'doom/switch-to-project-scratch-buffer
-+      ;; (:when (and (modulep! :tools taskrunner)
-+      ;;             (or (modulep! :completion ivy)
-+      ;;                 (modulep! :completion helm)))
-+      ;;  :desc "List project tasks"          "z" #'+taskrunner/project-tasks))
- 
-       ;;; <leader> q --- quit/session
-       (:prefix-map ("q" . "quit/session")
 diff --git a/modules/config/default/autoload/files.el b/modules/config/default/autoload/files.el
 index 115f71245..fddb5cec3 100644
 --- a/modules/config/default/autoload/files.el
