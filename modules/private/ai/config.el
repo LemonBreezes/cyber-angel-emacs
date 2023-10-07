@@ -66,13 +66,6 @@
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
   (advice-add #'shell-maker-welcome-message :override #'ignore))
 
-(use-package! gpt-commit
-  :defer t :init
-  (autoload 'gpt-commit-message "gpt-commit")
-  ;;(add-hook 'git-commit-setup-hook 'gpt-commit-message)
-  :config
-  (setq gpt-commit-model-name "gpt-4"))
-
 (use-package! copilot
   :defer t :init
   (add-hook 'text-mode-hook   #'copilot-mode)
