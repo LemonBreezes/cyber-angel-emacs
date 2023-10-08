@@ -36,6 +36,7 @@
                                               (symbol-value (intern (concat (symbol-name mode) "-map")))))))
                        t)
                       evil-state))))))
+    ;; Do not show the remaps that are mapped to `ignore'.
     (map-keymap (lambda (key binding)
                   (when (eq key 'remap)
                     (map-keymap (lambda (key binding)
