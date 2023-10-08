@@ -1,10 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
-;; EAF is huge. It gets its own category.
-(when (modulep! +eaf)
-  (package! eaf :recipe (:host github :repo "emacs-eaf/emacs-application-framework" :files ("*"))))
-
 ;; Standalone apps
 (package! alarm-clock)
 (when (modulep! :app rss)
