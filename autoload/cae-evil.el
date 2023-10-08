@@ -9,31 +9,32 @@
     (forward-page count)))
 
 (defun cae-current-state-keymap ()
-  (or (let ((map (evil-get-auxiliary-keymap
-                  (cond ((bound-and-true-p git-timemachine-mode)
-                         git-timemachine-mode-map)
-                        (t (current-local-map)))
-                  evil-state t t)))
-        (and (keymapp map)
-             (> (length map) 2)
-             map))
-      (evil-get-auxiliary-keymap
-       (make-composed-keymap
-        (thread-last (current-minor-mode-maps)
-                     (delq doom-leader-map)
-                     (delq general-override-mode-map)
-                     (delq evil-snipe-local-mode-map)
-                     ;; This is because the `evil-collection' module for
-                     ;; `beginend' defines its keybindings in `normal-state'
-                     ;; rather than `motion-state'.
-                     (delq (let ((mode (cl-find-if (lambda (x)
-                                                     (string-prefix-p "beginend-"
-                                                                      (symbol-name x)))
-                                                   local-minor-modes)))
-                             (when mode
-                               (symbol-value (intern (concat (symbol-name mode) "-map")))))))
-        t)
-       evil-state)))
+  (make-composed-keymap
+   (list (let ((map (evil-get-auxiliary-keymap
+                     (cond ((bound-and-true-p git-timemachine-mode)
+                            git-timemachine-mode-map)
+                           (t (current-local-map)))
+                     evil-state t t)))
+           (and (keymapp map)
+                (> (length map) 2)
+                map))
+         (evil-get-auxiliary-keymap
+          (make-composed-keymap
+           (thread-last (current-minor-mode-maps)
+                        (delq doom-leader-map)
+                        (delq general-override-mode-map)
+                        (delq evil-snipe-local-mode-map)
+                        ;; This is because the `evil-collection' module for
+                        ;; `beginend' defines its keybindings in `normal-state'
+                        ;; rather than `motion-state'.
+                        (delq (let ((mode (cl-find-if (lambda (x)
+                                                        (string-prefix-p "beginend-"
+                                                                         (symbol-name x)))
+                                                      local-minor-modes)))
+                                (when mode
+                                  (symbol-value (intern (concat (symbol-name mode) "-map")))))))
+           t)
+          evil-state))))
 
 ;;;###autoload
 (defun cae-embark-bindings-for-current-state ()
