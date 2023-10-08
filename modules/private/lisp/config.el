@@ -144,6 +144,7 @@
           (:when (modulep! :editor evil)
            "M-," nil)
           "C-d" #'cae-delete-char
+          "C-M-?" #'cae-lispy-cheatsheet
           ")" #'cae-insert-closing-paren))
 
   (when (modulep! :editor evil)
