@@ -95,7 +95,7 @@
           (setq count (1+ count))))
       (message "Replaced %d occurances" count))))
 
-;;;###autoload (autoload 'cae-org-jira-hydra/body "private/org/autoload/commands" nil t)
+;;;###autoload
 (defun cae-org-babel-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-org-babel-cheatsheet
               :keymap 'org-babel-map
