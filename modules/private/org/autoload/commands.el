@@ -94,3 +94,8 @@
           (replace-match (downcase (match-string 0)) t)
           (setq count (1+ count))))
       (message "Replaced %d occurances" count))))
+
+;;;###autoload
+(defun cae-org-babel-cheatsheet () (interactive))
+(hercules-def :toggle-funs #'cae-org-babel-cheatsheet
+              :keymap 'org-babel-map)
