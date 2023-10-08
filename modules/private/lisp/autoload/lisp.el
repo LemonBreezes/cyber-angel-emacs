@@ -49,6 +49,6 @@
 (defun cae-lispy-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-lispy-cheatsheet
               :keymap 'lispy-mode-map
-              ;;:blacklist-funs '(special-digit-argument)
               :transient t
               :flatten t)
+
