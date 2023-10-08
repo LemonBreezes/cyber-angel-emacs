@@ -32,8 +32,8 @@
 (map! :i "C-S-e" #'evil-copy-from-below)
 
 ;; Define help better keybinding help commands for Evil.
-(map! :n "C-M-?" #'cae-which-key-show-state-keymap
-      :n "C-M-S-h" #'cae-embark-state-bindings)
+(map! :n "C-M-s-?" #'cae-which-key-show-state-keymap
+      :n "C-M-S-s-h" #'cae-embark-state-bindings)
 (after! help
   (map! :map help-map
         "bn" #'cae-which-key-show-state-keymap
