@@ -143,7 +143,6 @@
            "M-D" #'lispy-splice)
           (:when (modulep! :editor evil)
            "M-," nil)
-          "C-M-?" (cae-oneshot-keymap lispy-mode-map lispy)
           "C-d" #'cae-delete-char
           ")" #'cae-insert-closing-paren))
 
@@ -162,6 +161,4 @@
                     evil-goggles-enable-commentary :advice
                     evil-goggles--generic-async-advice)
                   evil-goggles--commands)
-      (map! :map lispyville-mode-map
-            :n "C-M-?" (cae-oneshot-keymap lispyville-mode-map lispyville))
       (setq lispyville-motions-put-into-special t))))
