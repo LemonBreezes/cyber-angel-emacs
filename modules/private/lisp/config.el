@@ -162,4 +162,6 @@
                     evil-goggles-enable-commentary :advice
                     evil-goggles--generic-async-advice)
                   evil-goggles--commands)
+      (map! :map lispyville-mode-map
+            :n "C-M-?" #'cae-lispyville-cheatsheet)
       (setq lispyville-motions-put-into-special t))))
