@@ -1,4 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/manateelazycat/packages.el
 
-(package! holo-layer :recipe (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "icon_cache" "swaymsg-treefetch" "resources")))
+;; Did not work for me at all. Black screen
+;;(package! holo-layer :recipe (:host github :repo "manateelazycat/holo-layer" :files ("*.el" "*.py" "plugin" "icon_cache" "swaymsg-treefetch" "resources")))
