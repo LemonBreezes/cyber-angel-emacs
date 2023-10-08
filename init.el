@@ -70,7 +70,7 @@
        multiple-cursors
        fold
        (evil +everywhere)
-       ;;lispy
+       lispy
 
        :emacs
        undo
