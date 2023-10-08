@@ -140,6 +140,7 @@
        vc
        org
        ai
+       manateelazycat
        gnus)
 
 ;;Local Variables:
