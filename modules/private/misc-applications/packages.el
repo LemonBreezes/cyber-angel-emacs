@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
-;; EAF is huge. It gets its own category
+;; EAF is huge. It gets its own category.
 (when (modulep! +eaf)
   (package! eaf :recipe (:host github :repo "emacs-eaf/emacs-application-framework" :files ("*"))))
 
