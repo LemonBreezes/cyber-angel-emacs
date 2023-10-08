@@ -31,6 +31,7 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
+;; Define help better keybinding help commands for Evil.
 (map! :n "C-S-h" #'cae-embark-bindings-for-current-state)
 
 ;; Use `C-a' to append in a more generalized context.
