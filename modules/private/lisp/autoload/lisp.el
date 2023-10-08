@@ -46,8 +46,13 @@
           ("Types" "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2))))
 
 ;;;###autoload
-(defun cae-lispy-cheatsheet () (interactive))
+(defun cae-lispy-which-key-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-lispy-cheatsheet
               :keymap 'lispy-mode-map
               :transient t
               :flatten t)
+
+;;;###autoload
+(defun cae-lispy-embark-cheatsheet ()
+  (interactive)
+  (embark-bindings-in-keymap lispy-mode-map))
