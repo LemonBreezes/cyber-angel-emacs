@@ -98,4 +98,6 @@
 ;;;###autoload
 (defun cae-org-babel-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-org-babel-cheatsheet
-              :keymap 'org-babel-map)
+              :keymap 'org-babel-map
+              :transient t
+              :flatten t)
