@@ -9,32 +9,41 @@
     (forward-page count)))
 
 (defun cae-current-state-keymap ()
-  (make-composed-keymap
-   (list (let ((map (evil-get-auxiliary-keymap
-                     (cond ((bound-and-true-p git-timemachine-mode)
-                            git-timemachine-mode-map)
-                           (t (current-local-map)))
-                     evil-state t t)))
-           (and (keymapp map)
-                (> (length map) 2)
-                map))
-         (evil-get-auxiliary-keymap
-          (make-composed-keymap
-           (thread-last (current-minor-mode-maps)
-                        (delq doom-leader-map)
-                        (delq general-override-mode-map)
-                        (delq evil-snipe-local-mode-map)
-                        ;; This is because the `evil-collection' module for
-                        ;; `beginend' defines its keybindings in `normal-state'
-                        ;; rather than `motion-state'.
-                        (delq (let ((mode (cl-find-if (lambda (x)
-                                                        (string-prefix-p "beginend-"
-                                                                         (symbol-name x)))
-                                                      local-minor-modes)))
-                                (when mode
-                                  (symbol-value (intern (concat (symbol-name mode) "-map")))))))
-           t)
-          evil-state))))
+  (let ((map (copy-keymap
+              (make-composed-keymap
+               (list (let ((map (evil-get-auxiliary-keymap
+                                 (cond ((bound-and-true-p git-timemachine-mode)
+                                        git-timemachine-mode-map)
+                                       (t (current-local-map)))
+                                 evil-state t t)))
+                       (and (keymapp map)
+                            (> (length map) 2)
+                            map))
+                     (evil-get-auxiliary-keymap
+                      (make-composed-keymap
+                       (thread-last (current-minor-mode-maps)
+                                    (delq doom-leader-map)
+                                    (delq general-override-mode-map)
+                                    (delq evil-snipe-local-mode-map)
+                                    ;; This is because the `evil-collection' module for
+                                    ;; `beginend' defines its keybindings in `normal-state'
+                                    ;; rather than `motion-state'.
+                                    (delq (let ((mode (cl-find-if (lambda (x)
+                                                                    (string-prefix-p "beginend-"
+                                                                                     (symbol-name x)))
+                                                                  local-minor-modes)))
+                                            (when mode
+                                              (symbol-value (intern (concat (symbol-name mode) "-map")))))))
+                       t)
+                      evil-state))))))
+    (map-keymap (lambda (key binding)
+                  (when (eq key 'remap)
+                    (map-keymap (lambda (key binding)
+                                  (when (eq binding 'ignore)
+                                    (define-key map (vector 'remap key) nil t)))
+                                binding)))
+                map)
+    map))
 
 ;;;###autoload
 (defun cae-embark-bindings-for-current-state ()
