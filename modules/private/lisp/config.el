@@ -143,6 +143,8 @@
            "M-D" #'lispy-splice)
           (:when (modulep! :editor evil)
            "M-," nil)
+          "C-M-?" (cae-oneshot-keymap lispy-mode-map lispy)
+          :n "C-M-?" (cae-oneshot-keymap lispyville-mode-map lispyville)
           "C-d" #'cae-delete-char
           ")" #'cae-insert-closing-paren))
 
