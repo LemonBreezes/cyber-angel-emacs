@@ -47,12 +47,12 @@
     map))
 
 ;;;###autoload
-(defun cae-embark-bindings-for-current-state ()
+(defun cae-embark-state-bindings ()
   (interactive)
   (embark-bindings-in-keymap (cae-current-state-keymap)))
 
 ;;;###autoload
-(defun cae-which-key-show-current-state-bindings ()
+(defun cae-which-key-show-state-keymap ()
   (interactive)
   (let ((keymap (cae-current-state-keymap))
         (which-key-replacement-alist
