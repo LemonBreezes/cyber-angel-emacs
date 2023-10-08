@@ -92,7 +92,7 @@
                        ("C-(" . sp-backward-slurp-sexp)
                        ("C-}" . sp-forward-barf-sexp)
                        ("C-{" . sp-backward-barf-sexp)
-                       ("C-x C-t" sp-transpose-hybrid-sexp)
+                       ("C-x C-t" . sp-transpose-hybrid-sexp)
                        ("M-<delete>" . sp-unwrap-sexp)
                        ("M-<backspace>" . sp-backward-unwrap-sexp)
                        ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
