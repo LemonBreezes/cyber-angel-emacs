@@ -100,7 +100,6 @@
 
 (when (modulep! :editor lispy)
   (after! lispy
-    (define-key lispy-mode-map (kbd "<f6>") #'cae-lispy-cheat-sheet/body)
     (add-hook 'doom-escape-hook
               (cae-defun cae-lispy-clear-iedit-h ()
                 (when (bound-and-true-p iedit-mode)
