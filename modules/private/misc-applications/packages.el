@@ -2,7 +2,7 @@
 ;;; private/misc-applications/packages.el
 
 ;; EAF is huge. It gets its own category
-(package! eaf)
+(package! eaf :recipe (:host github :repo "emacs-eaf/emacs-application-framework"))
 
 ;; Standalone apps
 (package! alarm-clock)
