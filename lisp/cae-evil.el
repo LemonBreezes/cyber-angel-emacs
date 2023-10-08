@@ -31,6 +31,8 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
+(map! :n "C-S-h" #'cae-embark-bindings-for-current-state)
+
 ;; Use `C-a' to append in a more generalized context.
 (map! :n "C-a" #'cae-evil-append-buffer-or-code)
 
