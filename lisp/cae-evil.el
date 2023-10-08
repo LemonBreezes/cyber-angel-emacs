@@ -32,7 +32,10 @@
 (map! :i "C-S-e" #'evil-copy-from-below)
 
 ;; Define help better keybinding help commands for Evil.
-(map! :n "C-S-h" #'cae-embark-bindings-for-current-state)
+(map! :n "C-S-h" #'cae-embark-bindings-for-current-state
+      :n "C-M-?" #'cae-which-key-show-current-state-bindings)
+(after! help
+  (map! :map help-map "bn" #'cae-show-normal-state-bindings))
 
 ;; Use `C-a' to append in a more generalized context.
 (map! :n "C-a" #'cae-evil-append-buffer-or-code)
@@ -128,8 +131,6 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
-(after! help
-  (map! :map help-map "bn" #'cae-show-normal-state-bindings))
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
