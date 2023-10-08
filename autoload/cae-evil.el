@@ -23,6 +23,9 @@
                      (delq doom-leader-map)
                      (delq general-override-mode-map)
                      (delq evil-snipe-local-mode-map)
+                     ;; This is because the `evil-collection' module for
+                     ;; `beginend' defines its keybindings in `normal-state'
+                     ;; rather than `motion-state'.
                      (delq (let ((mode (cl-find-if (lambda (x)
                                                      (string-prefix-p "beginend-"
                                                                       (symbol-name x)))
@@ -31,6 +34,10 @@
                                (symbol-value (intern (concat (symbol-name mode) "-map")))))))
         t)
        evil-state)))
+
+(defun cae-embark-bindings-for-current-state ()
+  (interactive)
+  (embark-bindings-in-keymap (cae-current-state-keymap)))
 
 ;;;###autoload
 (defun cae-which-key-show-current-state-bindings ()
