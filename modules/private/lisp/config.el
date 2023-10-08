@@ -114,6 +114,7 @@
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
+    (remove-hook 'lispy-mode-hook #'turn-off-smartparens-mode)
     (map! :map lispy-mode-map-lispy
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
