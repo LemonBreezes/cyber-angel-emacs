@@ -49,12 +49,6 @@
 (defun cae-lispy-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-lispy-cheatsheet
               :keymap 'lispy-mode-map
-              :transient t
-              :flatten t)
-
-;;;###autoload
-(defun cae-lispyville-cheatsheet () (interactive))
-(hercules-def :toggle-funs #'cae-lispyville-cheatsheet
-              :keymap 'lispyville-mode-map
+              ;;:blacklist-funs '(special-digit-argument)
               :transient t
               :flatten t)
