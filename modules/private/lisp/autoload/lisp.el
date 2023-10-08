@@ -51,3 +51,7 @@
               :keymap 'lispy-mode-map
               :transient t
               :flatten t)
+;;;###autoload
+(defun cae-lispy-embark-cheatsheet ()
+  (interactive)
+  (embark-bindings-in-keymap lispy-mode-map))
