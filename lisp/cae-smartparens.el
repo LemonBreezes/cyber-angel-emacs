@@ -102,5 +102,4 @@
                        ;;("C-M-]" . sp-select-next-thing)
                        ;;("C-M-@" . sp-mark-sexp)
                        ("C-M-S-w" . sp-copy-sexp)))
-      (define-key smartparens-mode-map (kbd (car binding)) (cdr binding)))
-    (map! :map smartparens-mode-map "C-M-?" (cae-oneshot-keymap smartparens-mode-map smartparens))))
+      (define-key smartparens-mode-map (kbd (car binding)) (cdr binding)))))
