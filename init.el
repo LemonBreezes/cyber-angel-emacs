@@ -134,7 +134,7 @@
        ;;exwm
        dired
        lisp
-       misc-applications
+       (misc-applications +eaf)
        modeline
        unpackaged
        vc
