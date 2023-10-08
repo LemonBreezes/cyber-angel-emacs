@@ -114,7 +114,7 @@
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
-    (map! :map lispy-mode-map-lispy
+    (map! :map lispy-mode-map
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
