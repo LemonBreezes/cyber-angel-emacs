@@ -84,6 +84,9 @@
     (which-key-add-keymap-based-replacements '+misc-applications-map
       "h" "helm")))
 
+(when (modulep! +eaf)
+  (load! "eaf"))
+
 
 ;;; Standalone apps
 
