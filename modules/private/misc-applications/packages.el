@@ -1,6 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
+;; EAF is huge. It gets its own category
+(package! eaf)
+
 ;; Standalone apps
 (package! alarm-clock)
 (when (modulep! :app rss)
