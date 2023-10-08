@@ -54,8 +54,7 @@
 
 (after! tramp
   (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
-        tramp-allow-unsafe-temporary-files t))
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 (after! nsm
   (setq network-security-level 'high))
@@ -495,7 +494,8 @@
 
 
   (after! tramp
-    (setq tramp-use-scp-direct-remote-copying t)
+    (setq tramp-use-scp-direct-remote-copying t
+          tramp-allow-unsafe-temporary-files t)
     (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                     "/run/current-system/profile/bin"
                     "/run/current-system/profile/sbin"))
