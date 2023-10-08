@@ -11,6 +11,3 @@
 (package! tldr)
 (package! x86-lookup)
 
-;; EAF is huge. It gets its own category.
-(when (modulep! +eaf)
-  (package! eaf :recipe (:host github :repo "emacs-eaf/emacs-application-framework" :files ("*"))))
