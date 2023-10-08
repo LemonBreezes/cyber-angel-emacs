@@ -55,6 +55,6 @@
 ;;;###autoload
 (defun cae-lispyville-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-lispyville-cheatsheet
-              :keymap 'lispyvil-mode-map
+              :keymap 'lispyville-mode-map
               :transient t
               :flatten t)
