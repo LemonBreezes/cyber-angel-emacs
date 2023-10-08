@@ -35,6 +35,7 @@
         t)
        evil-state)))
 
+;;;###autoload
 (defun cae-embark-bindings-for-current-state ()
   (interactive)
   (embark-bindings-in-keymap (cae-current-state-keymap)))
