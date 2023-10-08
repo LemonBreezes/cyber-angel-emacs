@@ -33,6 +33,7 @@ many times the \\[universal-argument] was invoked."
           (delete-region beg (progn (sp-backward-up-sexp) (point)))))
     (call-interactively #'sp-raise-sexp)))
 
+;;;###autoload
 (defun cae-sp-which-key-cheatsheet () (interactive))
 (hercules-def :toggle-funs #'cae-sp-which-key-cheatsheet
               :keymap 'smartparens-mode-map
