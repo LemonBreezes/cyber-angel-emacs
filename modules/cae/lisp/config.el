@@ -129,8 +129,11 @@
                                         ;than moving to the end of the line
                                         ;first.
 
-           "M-i" nil)                    ;formerly `lispy-iedit'. I prefer
+           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
+          ;; I used to use these commands but now I have some `smartparens'
+          ;; keybindings for them.
+
           ;;:ie "M-R" #'lispy-raise-sexp
           ;;:ie "M-S" #'lispy-split
           ;;:ie "M-C" #'lispy-convolute
