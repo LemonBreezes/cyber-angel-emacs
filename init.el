@@ -125,7 +125,7 @@
        :app
        (rss +org)
 
-       :private
+       :cae
        ;;holy
        (helm)
        (debugger +lsp)
