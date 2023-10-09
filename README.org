@@ -39,12 +39,14 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
 
 I've also added a few custom patches to Emacs, which are available in the
 ~emacs-patches~ folder. These patches are:
-1. use-comp-speed-3.patch: Sets the default compilation speed to 3, which
+1. ~use-comp-speed-3.patch~: Sets the default compilation speed to 3, which
    generates after code than the default of 2.
-2. use-custom-cflags-for-native-comp.patch: Sets custom CFLAGS for native
-   compilation. These are specific to my computer but they serve as a good
+2. ~use-custom-cflags-for-native-comp.patch~: Sets custom CFLAGS for native
+   compilation. These flags are specific to my computer but they serve as a good
    example.
-3. use-lexical-binding-everywhere.patch: Enables lexical binding everywhere as
+3. ~use-lexical-binding-everywhere.patch~: Enables lexical binding everywhere as
    the default in Emacs and disables checking of the ~-*- lexical-binding: t~
    header. I have personally PR'd all Emacs packages in this config which break
    with lexical binding enabled.
+4. ~cae-doom-emacs.patch~: This patch is a patch I wrote for Doom Emacs which
+   patches in some pending PRs to Doom Emacs. I use this patch to test out PRs.
