@@ -136,10 +136,10 @@
            "M-S" #'lispy-split
            "M-C" #'lispy-convolute
            "M-D" #'lispy-splice)
-           ;; I prefer Doom's jump commands.
-           "M-." nil                    ;formerly `lispy-goto-symbol'.
-           "C-M-," nil                  ;formerly `lispy-mark'.
-           "M-," nil                    ;formerly `pop-tag-mark'.
+          ;; I prefer Doom's jump commands.
+          "M-." nil                    ;formerly `lispy-goto-symbol'.
+          "C-M-," nil                  ;formerly `lispy-mark'.
+          "M-," nil                    ;formerly `pop-tag-mark'.
           (:when (modulep! :editor evil)
            "M-," nil)
           "C-d" #'cae-delete-char
