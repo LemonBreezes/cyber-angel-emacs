@@ -31,6 +31,9 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
+(map! :n "gt" #'tab-bar-switch-to-next-tab
+      :n "gT" #'tab-bar-switch-to-prev-tab)
+
 ;; Define help better keybinding help commands for Evil.
 (map! :n "C-M-?" #'cae-which-key-show-state-keymap)
 (after! help
