@@ -347,13 +347,7 @@
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
-    :after (:or gnus message))
-
-  (use-package! scrollkeeper
-    :defer t :init
-    (map! [remap scroll-up-command] #'scrollkeeper-contents-up
-          [remap scroll-down-command] #'scrollkeeper-contents-down)
-    (setq scrollkeeper-scroll-steps 1)))
+    :after (:or gnus message)))
 
 
 ;;; Tools
@@ -617,7 +611,8 @@
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-restore-point")
-  (load! "lisp/cae-visible-mark.el")
+  (load! "lisp/cae-visible-mark")
+  (load! "lisp/cae-visible-scrolling")
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
