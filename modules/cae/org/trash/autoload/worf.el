@@ -1,6 +1,6 @@
 ;;; private/org/autoload/worf.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'cae-worf-cheat-sheet/body "private/org/autoload/worf" nil t)
+;;;###autoload (autoload 'cae-worf-cheat-sheet/body "cae/org/autoload/worf" nil t)
 (let ((bindings
        `(("j" wspecial-worf-down "")
          ("k" wspecial-worf-up "")

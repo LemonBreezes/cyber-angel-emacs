@@ -1,6 +1,6 @@
 ;;; private/debugger/trash/dap-hydra.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'cae-debugger-dap-hydra/body "private/debugger/autoload" t nil)
+;;;###autoload (autoload 'cae-debugger-dap-hydra/body "cae/debugger/autoload" t nil)
 (defhydra cae-debugger-dap-hydra (:color pink :hint nil :foreign-keys run)
   "
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval

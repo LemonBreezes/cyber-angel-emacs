@@ -1,6 +1,6 @@
 ;;; private/lisp/autoload/lispy.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'cae-lispy-cheat-sheet/body "private/lisp/autoload/lispy" nil t)
+;;;###autoload (autoload 'cae-lispy-cheat-sheet/body "cae/lisp/autoload/lispy" nil t)
 (let ((bindings
        '(("l" special-lispy-right "")
          ("h" special-lispy-left "")

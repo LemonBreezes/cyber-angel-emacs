@@ -1,6 +1,6 @@
 ;;; private/ai/autoload/evil.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'cae-evil-org-ai-on-region "private/ai/autoload/evil" nil t)
+;;;###autoload (autoload 'cae-evil-org-ai-on-region "cae/ai/autoload/evil" nil t)
 (evil-define-operator cae-evil-org-ai-on-region (beg end)
   "Evaluate selection or sends it to the open REPL, if available."
   :move-point nil

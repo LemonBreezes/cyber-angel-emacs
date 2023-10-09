@@ -53,7 +53,7 @@
   (doom-store-put 'ytel-invidious-api-url ytel-invidious-api-url))
 
 
-;;;###autoload (autoload '+ytel-hydra/body "private/misc-applications/autoload/ytel" nil t)
+;;;###autoload (autoload '+ytel-hydra/body "cae/misc-applications/autoload/ytel" nil t)
 (defhydra +ytel-hydra (:color pink :hint nil)
   ("<f6>" nil "Exit" :exit t)
   ("q" ytel-quit nil :exit t)
