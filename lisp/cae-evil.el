@@ -37,6 +37,7 @@
   (map! :map magit-mode-map
         :n "gt" #'tab-bar-switch-to-next-tab
         :n "gT" #'tab-bar-switch-to-prev-tab
+        :n "gz" #'magit-jump-to-stashes
         :n [remap revert-buffer] #'magit-refresh))
 
 ;; Define help better keybinding help commands for Evil.
