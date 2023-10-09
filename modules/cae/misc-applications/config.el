@@ -569,14 +569,11 @@
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (unless (minibufferp)
-      (let ((wconf (current-window-configuration))
-            (tabbar-state (frame-parameter nil 'tab-bar-lines)))
+      (let ((wconf (current-window-configuration)))
         (select-window (car (doom-visible-windows)))
         (let ((ignore-window-parameters t))
           (delete-other-windows))
-        (set-frame-parameter nil 'tab-bar-lines 0)
         (apply oldfun args)
-        (set-frame-parameter nil 'tab-bar-lines tabbar-state)
         (set-window-configuration wconf))))
   :config
   ;; remove not interesting programs
