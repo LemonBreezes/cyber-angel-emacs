@@ -37,6 +37,7 @@
 
 ;; For some reason this command is bound differently in my Emacs!
 (after! magit
+  (map! :map magit)
   (map! :map magit-status-mode-map
         :nv "gz" #'magit-jump-to-stashes))
 
