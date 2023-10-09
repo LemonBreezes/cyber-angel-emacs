@@ -105,6 +105,8 @@
                        ("C-M-S-w" . sp-copy-sexp)))
       (define-key smartparens-mode-map (kbd (car binding)) (cdr binding))
       (when (modulep! :editor lispy)
-        (after! lispy (define-key lispy-mode-map (kbd (car binding)) (cdr binding))))))
+        (after! lispy
+          (unless (lookup-key lispy-mode-map (kbd (car binding)))
+            (define-key lispy-mode-map (kbd (car binding)) (cdr binding)))))))
 
   (map! :map smartparens-mode-map "C-M-?" #'cae-sp-which-key-cheatsheet))
