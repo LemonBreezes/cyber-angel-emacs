@@ -89,14 +89,6 @@
   ;; what item I have selected.
   (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
-  ;; I never use the mouse buttons on the tab bar so I prefer to not show them.
-  ;;(defadvice! cae-tab-bar-load-buttons-a ()
-  ;;  :override #'tab-bar--load-buttons
-  ;;  (setq tab-bar-close-button   nil
-  ;;        tab-bar-back-button    nil
-  ;;        tab-bar-forward-button nil
-  ;;        tab-bar-new-button     nil))
-
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
 
