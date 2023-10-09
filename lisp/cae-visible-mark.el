@@ -2,7 +2,7 @@
 
 ;; I copied this from somewhere and I don't remember where. But also, I prefer
 ;; this code to `visible-mark-mode'. I don't remember why I liked this solution
-;; more.
+;; more though.
 
 (defface cae-visible-mark-face
   '((t :inherit match))
