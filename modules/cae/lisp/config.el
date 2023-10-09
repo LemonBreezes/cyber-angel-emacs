@@ -133,7 +133,6 @@
                                         ;multiple cursors.
           ;; I used to use these commands but now I have some `smartparens'
           ;; keybindings for them.
-
           ;;:ie "M-R" #'lispy-raise-sexp
           ;;:ie "M-S" #'lispy-split
           ;;:ie "M-C" #'lispy-convolute
