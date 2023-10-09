@@ -47,7 +47,8 @@
 
 ;;;###autoload
 (defun cae-lispy-which-key-cheatsheet () (interactive))
-(hercules-def :toggle-funs #'cae-lispy-which-key-cheatsheet
+(hercules-def :show-funs #'cae-lispy-which-key-cheatsheet
+              :hide-funs #'doom/escape
               :keymap 'lispy-mode-map
               :transient t
               :flatten t)
