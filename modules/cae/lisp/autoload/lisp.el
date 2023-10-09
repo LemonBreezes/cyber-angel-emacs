@@ -47,7 +47,7 @@
 
 ;;;###autoload
 (defun cae-lispy-which-key-cheatsheet () (interactive))
-(hercules-def :toggle-funs #'cae-sp-which-key-cheatsheet
+(hercules-def :toggle-funs #'cae-lispy-which-key-cheatsheet
               :keymap 'lispy-mode-map
               :transient t
               :flatten t)
