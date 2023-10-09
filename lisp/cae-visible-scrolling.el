@@ -1,6 +1,6 @@
 ;;; lisp/cae-visible-scrolling.el -*- lexical-binding: t; -*-
 
-(advice-add #'evil-scroll-up :before
+(advice-add #'evil-scroll-down :before
             (cae-defun cae-evil-scroll-up-with-hint-a (count)
               (unless (= (line-end-position) (point-max))
                 (require 'scrollkeeper)
@@ -11,7 +11,7 @@
                                            0))
                     (funcall scrollkeeper-guideline-fn))))))
 
-(advice-add #'evil-scroll-down :before
+(advice-add #'evil-scroll-up :before
             (cae-defun cae-evil-scroll-up-with-hint-a (count)
               (unless (= (line-beginning-position) (point-min))
                 (require 'scrollkeeper)
