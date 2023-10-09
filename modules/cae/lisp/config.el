@@ -114,10 +114,9 @@
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
-    ;; Dunno why Doom disables `smartparens-mode' in `lispy-mode'. I still use
-    ;; the smartparens keybindings sometimes. They may not be necessary but I
-    ;; find this adds with consistency across modes where Lispy is not
-    ;; available.
+    ;; I still use the smartparens keybindings sometimes. They may not be
+    ;; necessary but I find this adds with consistency across modes where Lispy
+    ;; is not available.
     (remove-hook 'lispy-mode-hook #'turn-off-smartparens-mode)
     (map! :map lispy-mode-map-lispy
           (:when (not (modulep! :editor evil))
