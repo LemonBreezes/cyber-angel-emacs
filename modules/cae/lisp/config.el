@@ -119,6 +119,7 @@
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
            "M-m" nil                    ;formerly `lispy-mark-symbol'.
+
            "C-a" nil                    ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
