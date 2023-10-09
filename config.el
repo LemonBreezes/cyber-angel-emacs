@@ -353,7 +353,8 @@
     :defer t
     :init
     (map! [remap scroll-up-command] #'scrollkeeper-contents-up
-          [remap scroll-down-command] #'scrollkeeper-contents-down)))
+          [remap scroll-down-command] #'scrollkeeper-contents-down)
+    (setq scrollkeeper-scroll-steps 1)))
 
 
 ;;; Tools
