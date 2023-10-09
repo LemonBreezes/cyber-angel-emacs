@@ -1,5 +1,9 @@
 ;;; lisp/cae-visible-mark.el -*- lexical-binding: t; -*-
 
+;; I copied this from somewhere and I don't remember where. But also, I prefer
+;; this code to `visible-mark-mode'. I don't remember why I preferred this one
+;; though.
+
 (defface cae-visible-mark-face
   '((t :inherit match))
   "Face used for showing the mark's position.")
