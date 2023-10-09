@@ -408,7 +408,6 @@
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
         remote-file-name-inhibit-auto-save-visited t
-        make-cursor-line-fully-visible nil ;I forgot why I set this.
         yank-pop-change-selection t
         global-mark-ring-max 1024
         history-delete-duplicates t
