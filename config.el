@@ -347,7 +347,13 @@
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
-    :after (:or gnus message)))
+    :after (:or gnus message))
+
+  (use-package! scrollkeeper
+    :defer t
+    :init
+    (map! [remap scroll-up-command] #'scrollkeeper-contents-up
+          [remap scroll-down-command] #'scrollkeeper-contents-down)))
 
 
 ;;; Tools
