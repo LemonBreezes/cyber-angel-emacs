@@ -508,8 +508,6 @@
   (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
   (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
   (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
-  (after! vertico-grid
-    (setq vertico-grid-min-columns 6))
   (after! vertico-multiform
     (setq vertico-multiform-categories
           `((embark-keybinding grid)
