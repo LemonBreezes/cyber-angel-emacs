@@ -2,7 +2,8 @@
 
 (advice-add #'evil-scroll-up :before
             (cae-defun cae-evil-scroll-up-with-hint-a (count)
-              (unless (= (line-beginning-position) (point-min))
+              (unless (= (line-end-position) (point-max))
+                (require 'scrollkeeper)
                 (let ((count (evil--get-scroll-count count)))
                   (save-excursion
                     (move-to-window-line (if (< count 0)
@@ -13,6 +14,7 @@
 (advice-add #'evil-scroll-down :before
             (cae-defun cae-evil-scroll-up-with-hint-a (count)
               (unless (= (line-beginning-position) (point-min))
+                (require 'scrollkeeper)
                 (let ((count (evil--get-scroll-count count)))
                   (save-excursion
                     (move-to-window-line (if (< count 0)
