@@ -97,7 +97,8 @@
 
 ;;;###autoload
 (defun cae-org-babel-cheatsheet () (interactive))
-(hercules-def :toggle-funs #'cae-org-babel-cheatsheet
+(hercules-def :show-funs #'cae-org-babel-cheatsheet
+              :hide-funs #'doom/escape
               :keymap 'org-babel-map
               :transient t
               :flatten t)
