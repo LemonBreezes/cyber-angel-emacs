@@ -566,7 +566,6 @@
                 (face-remap-add-relative 'default :background "black")))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
-  ;; Quit out of the minibuffer if necessary before zoning.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (let ((zone-fn (lambda ()
