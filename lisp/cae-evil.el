@@ -35,13 +35,10 @@
       :n "gT" #'tab-bar-switch-to-prev-tab)
 (after! magit
   (map! :map magit-status-mode-map
-        :nv "gz" #'magit-jump-to-stashes)
-  ;;(map! :map magit-status-mode-map
-  ;;      :n "gt" #'tab-bar-switch-to-next-tab
-  ;;      :n "gT" #'tab-bar-switch-to-prev-tab
-  ;;      :n "gz" #'magit-jump-to-stashes
-  ;;      :n [remap revert-buffer] #'magit-refresh)
-  )
+        :nv "gz" #'magit-jump-to-stashes))
+
+;; Gotta have my Emacs bindings.
+(map! :leader "k" ctl-x-map)
 
 ;; Define help better keybinding help commands for Evil.
 (map! :n "C-M-?" #'cae-which-key-show-state-keymap)
