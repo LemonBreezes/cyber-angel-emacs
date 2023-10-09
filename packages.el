@@ -47,6 +47,7 @@
 (package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))
 (package! backline)
 (package! xterm-color)
+(package! scrollkeeper)
 
 ;; cae-theme.el
 (package! modus-themes)
