@@ -1,0 +1,23 @@
+diff --git a/lisp/emacs-lisp/comp.el b/lisp/emacs-lisp/comp.el
+index bb4552459dd..745612838cc 100644
+--- a/lisp/emacs-lisp/comp.el
++++ b/lisp/emacs-lisp/comp.el
+@@ -193,7 +193,7 @@ native-comp-async-query-on-exit
+   :type 'boolean
+   :version "28.1")
+ 
+-(defcustom native-comp-compiler-options nil
++(defcustom native-comp-compiler-options '("-march=skylake" "-Ofast" "-g0" "-fno-finite-math-only")
+   "Command line options passed verbatim to GCC compiler.
+ Note that not all options are meaningful and some options might even
+ break your Emacs.  Use at your own risk.
+@@ -205,7 +205,8 @@ native-comp-compiler-options
+ 
+ (defcustom native-comp-driver-options
+   (cond ((eq system-type 'darwin) '("-Wl,-w"))
+-        ((eq system-type 'cygwin) '("-Wl,-dynamicbase")))
++        ((eq system-type 'cygwin) '("-Wl,-dynamicbase"))
++        (t '("-march=skylake" "-Ofast" "-g0" "-fno-finite-math-only")))
+   "Options passed verbatim to the native compiler's back-end driver.
+ Note that not all options are meaningful; typically only the options
+ affecting the assembler and linker are likely to be useful.
