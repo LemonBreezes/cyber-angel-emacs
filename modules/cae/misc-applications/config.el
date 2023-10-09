@@ -566,7 +566,7 @@
                 (face-remap-add-relative 'default :background "black")))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
-  ;; Quit out of the minibuffer if necessary before zoning.q
+  ;; Quit out of the minibuffer if necessary before zoning.
   (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
     :around #'zone
     (let ((zone-fn (lambda ()
@@ -579,7 +579,9 @@
                        (apply oldfun args)
                        (set-frame-parameter nil 'tab-bar-lines tabbar-state)
                        (set-window-configuration wconf)))))
-      (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn))
+      (if (minibufferp)
+          (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn)
+        (funcall zone-fn)))
     (dotimes (i (minibuffer-depth))
       (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit)))
   :config
