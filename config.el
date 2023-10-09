@@ -76,8 +76,8 @@
   (setq display-line-numbers-type t
         display-line-numbers-width-start t)
 
-  ;; Based on the documentation, estimate for what this magic number should be
-  ;; (no benchmarks) is 10000. It's also the value used in `emacs-ess'.
+  ;; Based on the documentation, my estimate for what this magic number should
+  ;; be (no benchmarks) is 10000. It's also the value used in `emacs-ess'.
   (setq jit-lock-chunk-size 10000)
 
   ;; Show minibuffer recursion depth
