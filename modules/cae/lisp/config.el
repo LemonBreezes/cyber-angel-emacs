@@ -129,17 +129,16 @@
                                         ;than moving to the end of the line
                                         ;first.
 
-           "M-i" nil                    ;formerly `lispy-iedit'. I prefer
+           "M-i" nil)                    ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
-           ;; Lispyville defines these in normal state so for Evil, we will use those.
-           "M-R" #'lispy-raise-sexp
-           "M-S" #'lispy-split
-           "M-C" #'lispy-convolute
-           "M-D" #'lispy-splice)
+          :ie "M-R" #'lispy-raise-sexp
+          :ie "M-S" #'lispy-split
+          :ie "M-C" #'lispy-convolute
+          :ie "M-D" #'lispy-splice
           ;; I prefer Doom's jump commands.
-          "M-." nil                    ;formerly `lispy-goto-symbol'.
-          "C-M-," nil                  ;formerly `lispy-mark'.
-          "M-," nil                    ;formerly `pop-tag-mark'.
+          "M-." nil                     ;formerly `lispy-goto-symbol'.
+          "C-M-," nil                   ;formerly `lispy-mark'.
+          "M-," nil                     ;formerly `pop-tag-mark'.
           (:when (modulep! :editor evil)
            "M-," nil)
           "C-d" #'cae-delete-char
