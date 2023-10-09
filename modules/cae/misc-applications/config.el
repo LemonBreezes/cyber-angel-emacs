@@ -602,6 +602,9 @@
   (after! zone-matrix
     (setq zmx-unicode-mode t))
 
+  (after! zone-rainbow
+    (setq zone-rainbow-background "#000000"))
+
   (unless (bound-and-true-p exwm--connection)
     (zone-when-idle (* 5 60))))
 
