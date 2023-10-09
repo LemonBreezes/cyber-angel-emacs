@@ -34,11 +34,13 @@
 ;; I never use `gt' and `gT' for workspace navigation.
 (map! :n "gt" #'tab-bar-switch-to-next-tab
       :n "gT" #'tab-bar-switch-to-prev-tab)
+(after! magit
+  (map! :map magit-status-mode-map
+        :nv "gt" #'tab-bar-switch-to-next-tab))
 
 ;; For some reason this command is bound differently in my Emacs!
 (after! magit
   (map! :map magit-status-mode-map
-        :nv "gt" #'tab-bar-switch-to-next-tab
         :nv "gz" #'magit-jump-to-stashes))
 
 ;; Gotta have my Emacs bindings.
