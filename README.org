@@ -49,4 +49,4 @@ I've also added a few custom patches to Emacs, which are available in the
    header. I have personally PR'd all Emacs packages in this config which break
    with lexical binding enabled.
 4. ~cae-doom-emacs.patch~: This patch is a patch I wrote for Doom Emacs which
-   patches in some pending PRs to Doom Emacs. I use this patch to test out PRs.
+   patches in some pending PRs. I use this patch to test out PRs.
