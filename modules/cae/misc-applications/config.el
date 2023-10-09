@@ -579,11 +579,8 @@
                        (apply oldfun args)
                        (set-frame-parameter nil 'tab-bar-lines tabbar-state)
                        (set-window-configuration wconf)))))
-      (if (minibufferp)
-          (run-at-time (+ (* 0.01 (minibuffer-depth)) 0.01) nil zone-fn)
-        (funcall zone-fn)))
-    (dotimes (i (minibuffer-depth))
-      (run-at-time (* 0.01 i) nil #'minibuffer-keyboard-quit)))
+      (unless (minibufferp)
+        (funcall zone-fn))))
   :config
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
