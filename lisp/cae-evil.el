@@ -35,7 +35,7 @@
       :n "gT" #'tab-bar-switch-to-prev-tab)
 (after! magit
   (map! :map magit-status-mode-map
-        "gz" #'magit-jump-to-stashes)
+        :nv "gz" #'magit-jump-to-stashes)
   ;;(map! :map magit-status-mode-map
   ;;      :n "gt" #'tab-bar-switch-to-next-tab
   ;;      :n "gT" #'tab-bar-switch-to-prev-tab
