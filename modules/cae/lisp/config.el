@@ -131,10 +131,10 @@
 
            "M-i" nil)                    ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
-          :ie "M-R" #'lispy-raise-sexp
-          :ie "M-S" #'lispy-split
-          :ie "M-C" #'lispy-convolute
-          :ie "M-D" #'lispy-splice
+          ;;:ie "M-R" #'lispy-raise-sexp
+          ;;:ie "M-S" #'lispy-split
+          ;;:ie "M-C" #'lispy-convolute
+          ;;:ie "M-D" #'lispy-splice
           ;; I prefer Doom's jump commands.
           "M-." nil                     ;formerly `lispy-goto-symbol'.
           "C-M-," nil                   ;formerly `lispy-mark'.
