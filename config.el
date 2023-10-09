@@ -54,7 +54,8 @@
 
 (after! tramp
   (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+        tramp-default-remote-shell (executable-find "bash")))
 
 (after! nsm
   (setq network-security-level 'high))
