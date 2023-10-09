@@ -88,6 +88,7 @@
                        ("C-M-p" . sp-previous-sexp)
                        ("C-M-R" . cae-sp-raise-sexp)
                        ("C-M-S" . sp-split-sexp)
+                       ("C-M-C" . sp-convolute-sexp)
                        ("C-)" . sp-forward-slurp-sexp)
                        ("C-M-)" . sp-slurp-hybrid-sexp)
                        ("C-(" . sp-backward-slurp-sexp)
