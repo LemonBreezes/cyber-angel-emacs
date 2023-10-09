@@ -71,6 +71,9 @@
   (after! beacon
     ;; Make the `beacon' more subtle.
     (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
+  (after! scrollkeeper
+    (set-face-attribute 'scrollkeeper-guideline-highlight nil
+                        :background (face-attribute 'lazy-highlight :background nil t)))
 
   ;; The backgrounds currently break
   (when cae-theme-extend-heading-faces
