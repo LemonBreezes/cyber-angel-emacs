@@ -35,3 +35,16 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
    If you have ideas for apps that should be added or removed from this module,
    feel free to open an issue!
 
+* Custom Emacs Patches
+
+I've also added a few custom patches to Emacs, which are available in the
+~emacs-patches~ folder. These patches are:
+1. use-comp-speed-3.patch: Sets the default compilation speed to 3, which
+   generates after code than the default of 2.
+2. use-custom-cflags-for-native-comp.patch: Sets custom CFLAGS for native
+   compilation. These are specific to my computer but they serve as a good
+   example.
+3. use-lexical-binding-everywhere.patch: Enables lexical binding everywhere as
+   the default in Emacs and disables checking of the ~-*- lexical-binding: t~
+   header. I have personally PR'd all Emacs packages in this config which break
+   with lexical binding enabled.
