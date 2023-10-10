@@ -118,7 +118,7 @@
        :cae
        ;;holy
        (helm)
-       (debugger +lsp)
+       ;;(debugger +lsp)
        ;;(dirvish +icons +dirvish)
        eshell
        ;;exwm
