@@ -146,7 +146,8 @@
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
           which-key-compute-remaps t
-          which-key-max-description-length 35)
+          which-key-max-description-length 35
+          which-key-show-transient-maps t)
     (pushnew!
      which-key-replacement-alist
      '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
