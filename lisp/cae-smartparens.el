@@ -101,8 +101,10 @@
                        ("M-<backspace>" . sp-backward-unwrap-sexp)
                        ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
                        ("C-M-<delete>" . sp-splice-sexp-killing-forward)
+                       ;; These are redundant with previous keybindings.
                        ;;("C-M-S-<backspace>" . sp-backward-kill-sexp)
                        ;;("C-M-S-<delete>" . sp-kill-sexp)
+
                        ;;("C-]" . sp-select-next-thing-exchange) ;Overrides `abort-recursive-edit'.
                        ;;("C-M-]" . sp-select-next-thing)
                        ;;("C-M-@" . sp-mark-sexp)
