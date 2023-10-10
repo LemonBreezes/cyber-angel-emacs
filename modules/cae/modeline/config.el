@@ -182,8 +182,10 @@
                                      flymake-mode
                                         ;persp-mode
                                      eat-eshell-mode
-                                     envrc-mode
-                                     ))
+                                     envrc-mode))
+    (after! lsp-ui
+      (dolist (mode (cl-remove-if-not (lambda (s) (string-prefix-p "lsp-" (symbol-name s))) minor-mode-list))
+        (add-to-list 'minions-prominent-modes mode 'append)))
     (after! compilation
       (or (assq 'compilation-in-progress mode-line-modes)
           (add-to-list 'minions-mode-line-modes
