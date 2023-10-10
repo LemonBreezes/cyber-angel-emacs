@@ -541,10 +541,11 @@
           (delq 'font-lock-string-face spell-fu-faces-include)))
 
   (after! lsp-mode
-    (setq lsp-headerline-breadcrumb-enable nil
+    (setq lsp-headerline-breadcrumb-enable nil ; I use the `breadcrumb' package.
           lsp-enable-snippet t
           lsp-enable-text-document-color t
           lsp-enable-folding t
+          lsp-inlay-hint-enable t
           lsp-enable-indentation nil
           lsp-semantic-tokens-enable t)
     (after! lsp-ui
