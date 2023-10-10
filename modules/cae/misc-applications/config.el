@@ -73,7 +73,7 @@
         :n "s u" #'package-menu-filter-upgradable
         :n "s v" #'package-menu-filter-by-version))
 
-(when (or (modulep! :private helm)
+(when (or (modulep! :cae helm)
           (modulep! :completion helm))
   (map! :map +misc-applications-map
         "h" (cae-oneshot-keymap helm-command-map helm))
@@ -241,7 +241,7 @@
 
 (use-package! helm-linux-disks
   :when (and (eq system-type 'gnu/linux)
-             (or (modulep! :private helm)
+             (or (modulep! :cae helm)
                  (modulep! :completion helm)))
   :defer t :init
   (map! :map +misc-applications-system-map
@@ -252,7 +252,7 @@
 
 (use-package! helm-system-packages
   :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
-             (or (modulep! :private helm)
+             (or (modulep! :cae helm)
                  (modulep! :completion helm)))
   :defer t :init
   (map! :map +misc-applications-system-map
@@ -325,7 +325,7 @@
 ;;; Insert
 
 (use-package! helm-rage
-  :when (or (modulep! :private helm)
+  :when (or (modulep! :cae helm)
             (modulep! :completion helm))
   :defer t :init
   (map! :map +misc-applications-insert-map
@@ -802,7 +802,7 @@
   (setq lyrics-fetcher-lyrics-folder +misc-applications-music-dir))
 
 (use-package! helm-emms
-  :when (or (modulep! :private helm)
+  :when (or (modulep! :cae helm)
             (modulep! :completion helm))
   :defer t :init
   (map! :map +misc-applications-music-map
