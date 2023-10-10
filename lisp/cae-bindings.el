@@ -211,8 +211,9 @@
     (which-key-add-keymap-based-replacements ctl-x-map "X" "edebug")
     (which-key-add-keymap-based-replacements emacs-lisp-mode-map
       "C-x C-a" "edebug"))
-  (after! gud
-    (which-key-add-keymap-based-replacements ctl-x-map "g" "gud")))
+  ;;(after! gud
+  ;;  (which-key-add-keymap-based-replacements ctl-x-map "g" "gud"))
+  )
 (define-prefix-command 'ctl-x-r-map)
 (define-prefix-command 'ctl-x-map)
 
