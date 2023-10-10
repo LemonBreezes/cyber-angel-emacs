@@ -97,7 +97,8 @@
     "C-z" nil))
 
 (define-key! :keymaps +default-minibuffer-maps
-  "C-w"    #'cae-yank-word-to-minibuffer)
+  "C-S-y"    #'cae-yank-word-to-minibuffer)
+
 
 (after! evil-easymotion
   (map! :map evilem-map
