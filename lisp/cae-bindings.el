@@ -197,7 +197,6 @@
                ("a" . "abbrev")
                ("a i" . "inverse")
                ("n" . "narrow")
-               ("r" . "register")
                ("t" . "tab-bar")
                ("t ^" . "detach")
                ("v" . "version-control")
@@ -215,9 +214,11 @@
       "C-x C-a" "edebug"))
   (after! gud
     (fset 'gud-global-map gud-global-map)
-    (map! :map ctl-x-map "C-a" #'gud-global-map)))
-(fset 'ctl-x-r-map ctl-x-r-map)
+    (map! :map ctl-x-map "C-a" #'gud-global-map))
+  (after! register
+    (which-key-add-keymap-based-replacements ctl-x-map "r" "register")))
 (fset 'ctl-x-map ctl-x-map)
+
 
 
 ;;; Consult keybindings
