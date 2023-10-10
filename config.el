@@ -390,9 +390,12 @@
   ;; Was reading this
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
   (setq delete-by-moving-to-trash t
-        remote-file-name-inhibit-delete-by-moving-to-trash t
-        remote-file-name-inhibit-auto-save t
-        remote-file-name-inhibit-auto-save-visited t
+        ;; These are slow but not being able to recover files can be really
+        ;; painful too.
+        remote-file-name-inhibit-delete-by-moving-to-trash nil
+        remote-file-name-inhibit-auto-save nil
+        remote-file-name-inhibit-auto-save-visited nil
+
         yank-pop-change-selection t
         global-mark-ring-max 1024
         history-delete-duplicates t
