@@ -35,6 +35,8 @@
 (setq evil-undo-system 'undo-fu
       evil-want-C-u-scroll t
       evil-want-C-u-delete t
+      ;; I use `C-w' to yank words into the minibuffer. So to maintain a single
+      ;; keybinding for deleting words, I use `C-<backspace>'.
       evil-want-C-w-delete nil)
 
 (doom! :completion
