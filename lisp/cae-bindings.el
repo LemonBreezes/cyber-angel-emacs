@@ -189,7 +189,6 @@
   (which-key-add-keymap-based-replacements help-map "4" "other-window")
   (which-key-add-key-based-replacements "C-x r" "register")
   (which-key-add-key-based-replacements "C-x w" "window")
-  (which-key-add-key-based-replacements "C-x X" "debug")
   (dolist (p '(("4" . "other-window")
                ("5" . "other-frame")
                ("8" . "unicode")
@@ -208,8 +207,7 @@
                ("C-a" . "gud")
                ("X" . "edebug")
                ("C-k" . "kmacro")
-               ("RET" . "MULE")
-               ("X" . "debug")))
+               ("RET" . "MULE")))
     (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
   (after! edebug
     (which-key-add-keymap-based-replacements ctl-x-map "X" "edebug")))
