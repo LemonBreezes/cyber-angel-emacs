@@ -704,7 +704,6 @@
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
-  (setq empv-mpv-args (cl-remove "--no-video" empv-mpv-args :test #'equal))
   (empv-observe 'metadata (lambda (data) (message "Metadata changed, new metadata is: %s" data)))
   (setq empv-reset-playback-speed-on-quit t
         empv-base-directory +misc-applications-music-dir
