@@ -87,6 +87,7 @@
                        ("C-M-a" . sp-backward-down-sexp)
                        ("C-M-n" . sp-next-sexp)
                        ("C-M-p" . sp-previous-sexp)
+                       ("C-M-y" . sp-clone-sexp)
                        ("C-M-S-r" . cae-sp-raise-sexp)
                        ("C-M-S-s" . sp-split-sexp)
                        ("C-M-S-c" . sp-convolute-sexp)
