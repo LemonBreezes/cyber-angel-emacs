@@ -19,7 +19,7 @@
 (when (eq system-type 'gnu/linux)
   (package! daemons))
 (package! disk-usage)
-(when (or (modulep! :private helm)
+(when (or (modulep! :cae helm)
           (modulep! :completion helm))
   (when (and (eq system-type 'gnu/linux)
              (not (getenv "WSL_DISTRO_NAME")))
@@ -33,7 +33,7 @@
 (package! neato-graph-bar)
 
 ;; Insert
-(when (or (modulep! :private helm)
+(when (or (modulep! :cae helm)
           (modulep! :completion helm))
   (package! helm-rage))
 (package! lorem-ipsum)
@@ -53,6 +53,7 @@
 (package! zone-rainbow)
 (package! zone-sl)
 (package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
+(package! zone-pgm-spoopy)
 (package! selectric-mode)
 
 ;; Music
@@ -61,6 +62,6 @@
 (package! emms)
 (package! emms-mode-line-cycle)
 (package! lyrics-fetcher)
-(when (or (modulep! :private helm)
+(when (or (modulep! :cae helm)
           (modulep! :completion helm))
   (package! helm-emms))
