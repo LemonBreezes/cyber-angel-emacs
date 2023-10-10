@@ -552,7 +552,7 @@
 (use-package! zone
   :defer t :defer-incrementally t :init
   (map! :map +misc-applications-eyecandy-map
-        "z" #'zone-choose)
+        "z" #'+zone-choose)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-eyecandy-map
       "z" "Zone"))
@@ -566,21 +566,14 @@
                 (face-remap-add-relative 'default :background "black")))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
-  (defadvice! +zone-switch-to-root-window-a (oldfun &rest args)
-    :around #'zone
-    (unless (minibufferp)
-      (let ((wconf (current-window-configuration)))
-        (select-window (car (doom-visible-windows)))
-        (let ((ignore-window-parameters t))
-          (delete-other-windows))
-        (apply oldfun args)
-        (set-window-configuration wconf))))
+  (advice-add #'zone :around #'+zone-switch-to-root-window-a)
+
   :config
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
                        zone-rainbow
                        zone-matrix
-                       zone-pgm-md5
+                       +zone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
                        zone-pgm-putz-with-case
