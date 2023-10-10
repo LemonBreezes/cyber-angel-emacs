@@ -210,7 +210,9 @@
                ("C-k" . "kmacro")
                ("RET" . "MULE")
                ("X" . "debug")))
-    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p))))
+    (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
+  (after! edebug
+    (which-key-add-keymap-based-replacements ctl-x-map "X" "edebug")))
 (define-prefix-command 'ctl-x-r-map)
 
 
