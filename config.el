@@ -1134,7 +1134,8 @@
     (setq vterm-max-scrollback 100000))
 
   (after! comint
-    (setq comint-history-isearch 'dwim))
+    (setq comint-history-isearch 'dwim
+          comint-buffer-maximum-size 8192))
 
   (after! em-term
     ;; Some of the commands I copied from other configurations and will likely
