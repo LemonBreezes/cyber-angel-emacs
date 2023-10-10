@@ -609,7 +609,7 @@
   (when (and (modulep! :editor multiple-cursors)
              (not (modulep! :editor evil)))
     (load! "lisp/cae-multiple-cursors"))
-  (when (or (modulep! :private helm)
+  (when (or (modulep! :cae helm)
             (modulep! :completion helm))
     (load! "lisp/cae-helm"))
 
@@ -859,7 +859,7 @@
     :defer t :init
     (map! :leader :desc "Show file info" "fi" #'file-info-show)
     :config
-    ;; See the `:private vc' module for further configuration.
+    ;; See the `:cae vc' module for further configuration.
     (setq file-info-include-headlines t
           file-info-max-value-length 100))
 
@@ -1322,13 +1322,13 @@
    ,@(when (modulep! :email mu4e)
        '(mu4e))
    ,@(when (or (modulep! :completion helm)
-               (modulep! :private helm))
+               (modulep! :cae helm))
        '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
-   ,@(when (modulep! :private misc-applications) ; music apps
+   ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
-   ,@(when (modulep! :private ai)
+   ,@(when (modulep! :cae ai)
        '(copilot org-ai chatgpt-shell))
-   ,@(when (modulep! :private gnus)
+   ,@(when (modulep! :cae gnus)
        '(gnus gnus-group gnus-sum bbdb gnus-srvr))
    ,@(when (modulep! :tools pdf)
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
@@ -1337,13 +1337,13 @@
    ,@(when (modulep! :app rss +org)
        '(elfeed-org))
    ,@(when (and (modulep! :completion vertico)
-                (modulep! :private misc-applications))
+                (modulep! :cae misc-applications))
        '(consult-gh))
    ,@(when (and (or (modulep! :completion helm)
-                    (modulep! :private helm))
-                (modulep! :private misc-applications))
+                    (modulep! :cae helm))
+                (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
-   ,@(when (modulep! :private misc-applications) ; system apps
+   ,@(when (modulep! :cae misc-applications) ; system apps
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
               '(snake speed-type tetris bubbles dunnet autotetris klondike)
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow zone-nyan)
