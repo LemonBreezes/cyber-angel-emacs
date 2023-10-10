@@ -572,6 +572,7 @@
   (advice-add #'zone :around #'+zone-switch-to-root-window-a)
 
   :config
+  (autoload 'zone-pgm-spoopy "zone-pgm-spoopy")
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
                        zone-rainbow
