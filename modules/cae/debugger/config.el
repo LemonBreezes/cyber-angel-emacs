@@ -27,9 +27,6 @@
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
-(after! which-key
-  (which-key-add-key-based-replacements
-    "C-x C-a" "gud"))
 (after! gud
   (setq gud-chdir-before-run nil))
 (after! gdb-mi
