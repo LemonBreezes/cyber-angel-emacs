@@ -12,6 +12,7 @@
               evil-operator-state-cursor '(hbar . 0)
               evil-emacs-state-cursor '(hbar . 0)))
 
+;;;###autoload
 (defmacro +misc-applications-with-cursor-hidden (&rest body)
   `(let ((cursor-type-old cursor-type)
          (evil-normal-state-cursor-old evil-normal-state-cursor)
