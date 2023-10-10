@@ -54,9 +54,9 @@
 (package! standard-themes)
 (package! ef-themes)
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
+(package! halloweenie)
 (package! theme-magic)
 (package! ewal)
-(package! halloweenie)
 
 ;;; Tools
 (package! nov)
