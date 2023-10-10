@@ -215,6 +215,7 @@
     (define-prefix-command 'gud-global-map)
     (map! :map ctl-x-map "C-a" #'gud-global-map)))
 (define-prefix-command 'ctl-x-r-map)
+(fset 'ctl-x-map ctl-x-map)
 
 
 ;;; Consult keybindings
