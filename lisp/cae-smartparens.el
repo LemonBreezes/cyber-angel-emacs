@@ -78,7 +78,6 @@
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
                        ("C-M-S-k" . sp-kill-hybrid-sexp)
-                       ("C-S-w" . sp-backward-kill-sexp)
                        ("C-M-f" . sp-forward-sexp)
                        ("C-M-b" . sp-backward-sexp)
                        ("C-M-u" . sp-backward-up-sexp)
