@@ -555,6 +555,9 @@
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
             lsp-ui-doc-header nil))
+    (after! lsp-ui-sideline
+      (setq lsp-ui-sideline-show-hover t
+            lsp-ui-sideline-show-code-actions t))
     (after! lsp-clangd
       (setq lsp-clients-clangd-args
             `(,(format "-j=%d" (max 1 (/ (doom-system-cpus) 2)))
