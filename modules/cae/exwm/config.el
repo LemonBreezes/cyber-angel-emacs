@@ -11,7 +11,7 @@
   (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
 
   (defvar +exwm-vanilla-emacs-config-file
-    (expand-file-name "./exwm-vanilla-emacs-default-config.el" (doom-module-locate-path :private 'exwm))
+    (expand-file-name "./exwm-vanilla-emacs-default-config.el" (doom-module-locate-path :cae 'exwm))
     "The configuration loaded in our nested vanilla Emacs sessions.
 The configuration must be a single symbolic expression as it is
 handed off to. A macro syntax is valid. Macro
@@ -85,7 +85,7 @@ expansion occurs within the parent Emacs session.")
                    ([?\s-&] . (lambda (command)
 		                (interactive (list (read-shell-command "$ ")))
 		                (start-process-shell-command command nil command)))
-                   ,@(when (or (modulep! :private helm)
+                   ,@(when (or (modulep! :cae helm)
                                (modulep! :completion helm))
                        '(([?\s-d] . helm-run-external-command)))))))
 
@@ -219,5 +219,5 @@ expansion occurs within the parent Emacs session.")
   )
 
 ;;Local Variables:
-;;eval: (unless (modulep! :private exwm) (remove-hook 'write-file-functions #'eval-buffer t))
+;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:

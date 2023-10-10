@@ -1,6 +1,6 @@
 ;;; private/dired/trash/dirvish.el -*- lexical-binding: t; -*-
 
-(when (modulep! :private dirvish)
+(when (modulep! :cae dirvish)
   (after! dirvish
     (advice-add #'find-file :around #'cae-dired-find-file-a)
     (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)

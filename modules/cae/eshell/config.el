@@ -125,5 +125,5 @@
 (load! "eshell-doc-doom-pr-6867")
 
 ;;Local Variables:
-;;eval: (unless (modulep! :private eshell) (remove-hook 'write-file-functions #'eval-buffer t))
+;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:

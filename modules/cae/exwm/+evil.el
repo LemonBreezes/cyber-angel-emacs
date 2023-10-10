@@ -30,7 +30,7 @@
   (advice-add #'exwm-evil-insert :after #'garbage-collect)
 
   (when (or (modulep! :completion helm)
-            (modulep! :private helm))
+            (modulep! :cae helm))
     (map! :leader :desc "Run external command" "$" #'helm-run-external-command))
   (map! :map exwm-mode-map
         :localleader

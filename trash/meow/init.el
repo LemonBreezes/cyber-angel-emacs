@@ -1,7 +1,7 @@
 ;;; editor/meow/init.el -*- lexical-binding: t; -*-
 
 ;; Rewriting the doom-localleader-key! macro to add support for meow mode
-(when (modulep! :private meow +leader)
+(when (modulep! :cae meow +leader)
   (defmacro define-localleader-key! (&rest args)
     `(progn
        (general-define-key

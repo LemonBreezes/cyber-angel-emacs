@@ -249,5 +249,5 @@
           (?` . ("`" . "`")))))
 
 ;;Local Variables:
-;;eval: (unless (modulep! :private meow) (remove-hook 'write-file-functions #'eval-buffer t))
+;;eval: (unless (modulep! :cae meow) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:

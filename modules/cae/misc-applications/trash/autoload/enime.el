@@ -3,5 +3,5 @@
 ;;;###autoload
 (defun +enime--start-mpv-playback-a (&rest _)
   (when (and (modulep! :ui workspaces)
-             (modulep! :private exwm))
+             (modulep! :cae exwm))
     (+workspace-switch +enime-workspace-name t)))

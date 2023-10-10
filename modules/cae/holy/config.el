@@ -180,5 +180,5 @@
 ;;             "M-i" #'corfu-quick-insert))))
 
 ;;Local Variables:
-;;eval: (unless (modulep! :private holy) (remove-hook 'write-file-functions #'eval-buffer t))
+;;eval: (unless (modulep! :cae holy) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:

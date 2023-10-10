@@ -148,7 +148,7 @@ paragraph to your private configuration:
 #+begin_src elisp
 ;; i3-like keybindings for EXWM
 (windmove-mode +1)
-(when (modulep! :private exwm)
+(when (modulep! :cae exwm)
   (map! "s-j" #'windmove-left
         "s-k" #'windmove-down
         "s-l" #'windmove-up

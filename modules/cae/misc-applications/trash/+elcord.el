@@ -8,7 +8,7 @@
              (not (or (memq system-type '(cygwin windows-nt ms-dos))
                       (getenv "WSL_DISTRO_NAME")))
              ;; I only use this on my desktop machine when EXWM is running.
-             (modulep! :private exwm))
+             (modulep! :cae exwm))
   :defer t :hook (doom-first-file . elcord-mode)
   :init
   (defadvice! +elcord--buffer-boring-p-a (buffer-name)
