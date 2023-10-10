@@ -543,11 +543,13 @@
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable nil ; I use the `breadcrumb' package.
           lsp-enable-snippet t
-          lsp-enable-text-document-color t
           lsp-enable-folding t
           lsp-inlay-hint-enable t
           lsp-enable-indentation nil
-          lsp-semantic-tokens-enable t)
+          lsp-semantic-tokens-enable t
+          ;; Doom disables these for performance but I'll leave them on.
+          lsp-enable-text-document-color t
+          lsp-enable-folding t)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
