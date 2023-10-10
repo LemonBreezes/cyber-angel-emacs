@@ -63,7 +63,9 @@
     ;; For `lsp-ui'. Fixes the background color of the doc popup.
     (after! lsp-mode
       (set-face-attribute 'markdown-code-face nil
-                          :background 'unspecified)))
+                          :background 'unspecified)
+      (set-face-attribute 'lsp-inlay-hint-face nil
+                          :inherit 'shadow)))
   (after! goggles
     ;; Make the `goggles' more subtle.
     (set-face-attribute 'goggles-added nil
