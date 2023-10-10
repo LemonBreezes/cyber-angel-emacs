@@ -78,6 +78,7 @@
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
                        ("C-M-S-k" . sp-kill-hybrid-sexp)
+                       ("C-S-w" . sp-backward-kill-sexp)
                        ("C-M-f" . sp-forward-sexp)
                        ("C-M-b" . sp-backward-sexp)
                        ("C-M-u" . sp-backward-up-sexp)
@@ -100,8 +101,8 @@
                        ("M-<backspace>" . sp-backward-unwrap-sexp)
                        ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
                        ("C-M-<delete>" . sp-splice-sexp-killing-forward)
-                       ("C-M-S-<backspace>" . sp-backward-kill-sexp)
-                       ("C-M-S-<delete>" . sp-kill-sexp)
+                       ;;("C-M-S-<backspace>" . sp-backward-kill-sexp)
+                       ;;("C-M-S-<delete>" . sp-kill-sexp)
                        ;;("C-]" . sp-select-next-thing-exchange) ;Overrides `abort-recursive-edit'.
                        ;;("C-M-]" . sp-select-next-thing)
                        ;;("C-M-@" . sp-mark-sexp)
