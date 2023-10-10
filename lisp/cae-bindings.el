@@ -204,13 +204,15 @@
                ("w" . "window")
                ("w ^" . "detach")
                ("x" . "extra")
-               ("C-a" . "gud")
-               ("X" . "edebug")
                ("C-k" . "kmacro")
                ("RET" . "MULE")))
     (which-key-add-keymap-based-replacements ctl-x-map (car p) (cdr p)))
   (after! edebug
-    (which-key-add-keymap-based-replacements ctl-x-map "X" "edebug")))
+    (which-key-add-keymap-based-replacements ctl-x-map "X" "edebug")
+    (which-key-add-keymap-based-replacements emacs-lisp-mode-map
+      "C-x C-a" "edebug"))
+  (after! gud
+    (which-key-add-keymap-based-replacements ctl-x-map "g" "gud")))
 (define-prefix-command 'ctl-x-r-map)
 
 
