@@ -65,7 +65,8 @@
       (set-face-attribute 'markdown-code-face nil
                           :background 'unspecified)
       (set-face-attribute 'lsp-inlay-hint-face nil
-                          :inherit 'shadow)))
+                          :inherit 'shadow
+                          :height 0.8)))
   (after! goggles
     ;; Make the `goggles' more subtle.
     (set-face-attribute 'goggles-added nil
