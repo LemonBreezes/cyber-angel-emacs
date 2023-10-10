@@ -576,6 +576,7 @@
   (setq zone-programs [zone-nyan
                        zone-rainbow
                        zone-matrix
+                       zone-pgm-spoopy
                        +zone-pgm-md5
                        zone-pgm-sl
                        zone-pgm-jitter
