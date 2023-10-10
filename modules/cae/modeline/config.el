@@ -185,7 +185,7 @@
                                      envrc-mode))
     (add-hook! 'lsp-mode-hook
       (setq-local minions-prominent-modes
-                  (delq 'flycheck-mode (default-value minions-prominent-modes))))
+                  (delq 'flycheck-mode (default-value 'minions-prominent-modes))))
     (after! lsp-ui
       (dolist (mode (cl-remove-if-not (lambda (s) (string-prefix-p "lsp-" (symbol-name s))) minor-mode-list))
         (add-to-list 'minions-prominent-modes mode 'append)))
