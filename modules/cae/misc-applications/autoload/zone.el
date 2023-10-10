@@ -65,7 +65,7 @@
   (unless (minibufferp)
     (+misc-applications-with-cursor-hidden
      (let ((wconf (current-window-configuration)))
-       (select-window (car (doom-visible-windows)))
+       (select-window (frame-root-window))
        (let ((ignore-window-parameters t))
          (delete-other-windows))
        (apply oldfun args)
