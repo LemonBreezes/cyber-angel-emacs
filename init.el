@@ -24,13 +24,13 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-init-ui-enabled-p nil)
-(defvar cae-init-tools-enabled-p nil)
-(defvar cae-init-editor-enabled-p nil)
-(defvar cae-init-autocompletion-enabled-p nil)
-(defvar cae-init-text-enabled-p nil)
-(defvar cae-init-email-enabled-p nil)
-(defvar cae-init-term-enabled-p nil)
+(defvar cae-init-ui-enabled-p t)
+(defvar cae-init-tools-enabled-p t)
+(defvar cae-init-editor-enabled-p t)
+(defvar cae-init-autocompletion-enabled-p t)
+(defvar cae-init-text-enabled-p t)
+(defvar cae-init-email-enabled-p t)
+(defvar cae-init-term-enabled-p t)
 
 (setq evil-undo-system 'undo-fu
       evil-want-C-u-scroll t
