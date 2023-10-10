@@ -704,6 +704,7 @@
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
+  (setq empv-mpv-args (cl-remove "--no-video" empv-mpv-args :test #'equal))
   (setq empv-reset-playback-speed-on-quit t
         empv-base-directory +misc-applications-music-dir
         empv-audio-dir +misc-applications-music-dir
@@ -711,10 +712,10 @@
         empv-playlist-dir +misc-applications-music-dir)
   (add-hook 'empv-init-hook #'empv-override-quit-key)
   (aio-defun cae-empv-set-invidious-instance ()
-             (setq empv-invidious-instance
-                   (concat "https://"
-                           (aio-await (elfeed-tube--get-invidious-url))
-                           "/api/v1")))
+    (setq empv-invidious-instance
+          (concat "https://"
+                  (aio-await (elfeed-tube--get-invidious-url))
+                  "/api/v1")))
   (cae-empv-set-invidious-instance)
   (after! embark
     (empv-embark-initialize-extra-actions)))
