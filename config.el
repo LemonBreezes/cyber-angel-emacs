@@ -147,7 +147,8 @@
           which-key-idle-delay 0.5
           which-key-compute-remaps t
           which-key-max-description-length 35
-          ;; I am testing this option out.
+          ;; I am testing this option out. Seems useful in principal since a
+          ;; transient map can be active without any UI indication whatsoever.
           which-key-show-transient-maps t)
     (pushnew!
      which-key-replacement-alist
