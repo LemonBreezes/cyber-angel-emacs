@@ -214,7 +214,7 @@
     (which-key-add-keymap-based-replacements emacs-lisp-mode-map
       "C-x C-a" "edebug"))
   (after! gud
-    (define-prefix-command 'gud-global-map)
+    (fset 'gud-global-map gud-global-map)
     (map! :map ctl-x-map "C-a" #'gud-global-map)))
 (fset 'ctl-x-r-map ctl-x-r-map)
 (fset 'ctl-x-map ctl-x-map)
