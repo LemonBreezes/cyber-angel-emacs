@@ -704,9 +704,8 @@
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
-  ;; I want to be able to close Emacs and have MPV continue playing in the
-  ;; background.
   (setq empv-mpv-args (cl-remove "--no-video" empv-mpv-args :test #'equal))
+  (empv-observe 'metadata (lambda (data) (message "Metadata changed, new metadata is: %s" data)))
   (setq empv-reset-playback-speed-on-quit t
         empv-base-directory +misc-applications-music-dir
         empv-audio-dir +misc-applications-music-dir
