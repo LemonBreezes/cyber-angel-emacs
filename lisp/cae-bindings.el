@@ -1,5 +1,9 @@
   ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
+;; This is so that I don't get an error if my `cae-doom-emacs.patch' is not
+;; applied.
+(unless (symbol-function 'doom-leader-map)
+  (fset 'doom-leader-map doom-leader-map))
 
 (map! :map general-override-mode-map
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
