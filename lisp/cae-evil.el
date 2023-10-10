@@ -45,7 +45,7 @@
 
 ;; Gotta have my Emacs bindings.
 (map! :leader
-      :desc "ctl-x-map"  "k" ctl-x-map)
+      "k" #'ctl-x-map)
 
 ;; Define help better keybinding help commands for Evil.
 (map! :n "C-M-?" #'cae-which-key-show-state-keymap)
