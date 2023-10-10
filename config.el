@@ -148,7 +148,7 @@
           which-key-compute-remaps t
           which-key-max-description-length 35
           ;; I am testing this option out. Seems useful in principal since a
-          ;; transient map can be active without any UI indication whatsoever.
+          ;; transient map can be active without any UI indication.
           which-key-show-transient-maps t)
     (pushnew!
      which-key-replacement-alist
