@@ -147,6 +147,7 @@
           which-key-idle-delay 0.5
           which-key-compute-remaps t
           which-key-max-description-length 35
+          ;; I am testing this option out.
           which-key-show-transient-maps t)
     (pushnew!
      which-key-replacement-alist
