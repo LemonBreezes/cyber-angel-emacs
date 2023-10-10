@@ -12,7 +12,8 @@
   (after! helm-files
     (setq helm-rsync-percent-sign "%"))
   (after! which-key
-    (setq which-key-separator " -> "))
+    (setq which-key-separator " -> "
+          which-key-dont-use-unicode t))
   (after! eros
     (setq eros-eval-result-prefix "=> "))
   (after! yasnippet
