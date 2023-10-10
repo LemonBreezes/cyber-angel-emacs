@@ -547,8 +547,9 @@
           lsp-inlay-hint-enable t
           lsp-enable-indentation nil
           lsp-semantic-tokens-enable t
-          ;; Doom disables these for performance but I'll leave them on.
+          ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
+          lsp-enable-on-type-formatting t
           lsp-enable-folding t)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
