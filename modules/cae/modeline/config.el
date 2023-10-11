@@ -10,25 +10,25 @@
 
   (after! minions
     (setq-default mode-line-format
-          '("%e" mode-line-front-space
-            (:propertize
-             ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
-             display (min-width (5.0)))
-            mode-line-client
-            mode-line-frame-identification
-            evil-mode-line-tag
-            mode-line-buffer-identification
-            (:eval (when (eq major-mode 'image-mode)
-                     ;; Needs imagemagick installed.
-                     (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
-            "   "
-            mode-line-position
-            (project-mode-line project-mode-line-format)
-            (vc-mode vc-mode)
-            "  "
-            minions-mode-line-modes
-            mode-line-misc-info
-            mode-line-end-spaces)))
+                  '("%e" mode-line-front-space
+                    (:propertize
+                     ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
+                     display (min-width (5.0)))
+                    mode-line-client
+                    mode-line-frame-identification
+                    evil-mode-line-tag
+                    mode-line-buffer-identification
+                    (:eval (when (eq major-mode 'image-mode)
+                             ;; Needs imagemagick installed.
+                             (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
+                    "   "
+                    mode-line-position
+                    (project-mode-line project-mode-line-format)
+                    (vc-mode vc-mode)
+                    "  "
+                    minions-mode-line-modes
+                    mode-line-misc-info
+                    mode-line-end-spaces)))
 
   (use-package! anzu
     :after-call isearch-mode
