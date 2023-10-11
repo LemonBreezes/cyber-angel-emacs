@@ -1032,13 +1032,13 @@
       (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
 
   (use-package! beginend
-    :defer t :init
-    (add-hook 'doom-first-input-hook #'beginend-global-mode)
-    ;; This patches around this function not being compatible with Evil when
-    ;; `evil-move-beyond-eol' is `nil'.
-    (advice-add #'beginend-prog-mode-goto-end :before
-                (cae-defun cae-beginend-goto-eol-a (&rest _)
-                  (goto-char (eol)))))
+                                 :defer t :init
+                                 (add-hook 'doom-first-input-hook #'beginend-global-mode)
+                                 ;; This patches around this function not being compatible with Evil when
+                                 ;; `evil-move-beyond-eol' is `nil'.
+                                 (advice-add #'beginend-prog-mode-goto-end :before
+                                             (cae-defun cae-beginend-goto-eol-a (&rest _)
+                                               (goto-char (eol)))))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook
@@ -1068,7 +1068,14 @@
                 (when (eq major-mode 'fundamental-mode)
                   (funcall (buffer-local-value
                             'major-mode
-                            (overlay-buffer edit-indirect--overlay))))))))
+                            (overlay-buffer edit-indirect--overlay)))))))
+
+  (use-package! zop-to-char
+    :defer t :init
+    (map! [remap zap-to-char] #'zop-to-char
+          [remap zap-up-to-char] #'zop-up-to-char)
+    :config
+    (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w))))
 
 
 ;;; Autocompletion
