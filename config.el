@@ -261,6 +261,7 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side bottom :select t :quit t
          :ttl 0)
+        ("^\\*chatgpt\\* " :ttl 0 :select nil :quit t :side top)
         ("^\\*evil-owl\\*$" :side bottom :select nil :ttl 0 :size cae-popup-shrink-to-fit)
         ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
@@ -577,6 +578,7 @@
     (add-to-list 'lsp-disabled-clients 'mspyls))
 
   (after! eglot
+    (setq eglot-sync-connect nil)
     (let ((clangd '("clangd" "--background-index" "--clang-tidy"
                     "--completion-style=detailed" "--header-insertion=never"
                     "--header-insertion-decorators=0")))
@@ -990,6 +992,7 @@
       (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
       (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
       (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
       (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
       (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
       (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
