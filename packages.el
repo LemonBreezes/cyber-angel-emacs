@@ -28,7 +28,8 @@
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
-  (package! string-inflection))
+  (package! string-inflection)
+  (package! edit-indirect))
 
 ;; cae-smartparens
 (when (and (not (modulep! :editor lispy))
