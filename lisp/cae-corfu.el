@@ -3,7 +3,7 @@
 (defmacro cae-orderless-escapable-split-fn (char)
   `(defun cae-orderless-escapable-split-on-space-or-char (s)
      (if (eq (aref s 0) ,char)
-         s
+         (progn (+log s "HELLO") s)
        (mapcar
         (lambda (piece)
           (replace-regexp-in-string
