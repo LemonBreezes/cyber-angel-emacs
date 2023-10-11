@@ -74,6 +74,7 @@
       "C-x _" #'shrink-window           ;Dual to `C-x ^'.
       "C-x O" #'other-window-previous   ;Dual to `C-x o'.
       "C-x !" #'doom/window-enlargen
+      "C-x x c" #'cae-edit-indirect-dwim
       "C-x M-o" #'ace-swap-window
       "C-x M-t" #'transpose-frame
       ;;"C-x x N" #'cae-make-new-buffer ;TODO Check if this is necessary next
