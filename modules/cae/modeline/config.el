@@ -13,7 +13,7 @@
   ;;                        ;; Needs imagemagick installed.
   ;;                        (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
   ;;              mode-line-format))
-  (after! image
+  (after! lispy
     (let ((place (cdr (cl-member 'mode-line-buffer-identification mode-line-format
                                  :test 'equal))))
       (setf (cdr place)
