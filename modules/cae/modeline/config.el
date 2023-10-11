@@ -8,7 +8,7 @@
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
 
-  (after! lispy
+  (add-hook! 'doom-init-ui-hook
     (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
