@@ -45,6 +45,8 @@
         :prefix "o"
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
+  ;; Use , to ask ChatGPT questions in any comint buffer
+  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
@@ -64,31 +66,7 @@
   (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
   (map! :map chatgpt-shell-mode-map
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
-  (advice-add #'shell-maker-welcome-message :override #'ignore)
-  ;; Use , to ask ChatGPT questions in any comint buffer
-  (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
-    (require 'chatgpt-shell)
-    (let ((input (comint-get-old-input-default))
-          (chatgpt-shell-prompt-query-response-style 'other-buffer)
-          (display-buffer-alist '(("^\\*chatgpt\\* "
-                                   (+popup-buffer)
-                                   (actions)
-                                   (side . top)
-                                   (size)
-                                   (window-width . 40)
-                                   (window-height . 0.16)
-                                   (slot) (vslot)
-                                   (window-parameters (ttl . 0)
-                                                      (quit . t)
-                                                      (select . t)
-                                                      (modeline)
-                                                      (autosave)
-                                                      (transient . t)
-                                                      (no-other-window . t))))))
-      (if (string-prefix-p "," input)
-          (chatgpt-shell-send-to-buffer (substring input 1))
-        (apply f args))))
-  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a))
+  (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 (use-package! copilot
   :defer t :init
