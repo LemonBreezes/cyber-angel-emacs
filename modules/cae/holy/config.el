@@ -126,17 +126,6 @@
 (use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
   :defer t)
 
-(use-package! edit-indirect
-  :defer t :init
-  (map! :leader "'" #'cae-edit-indirect-dwim)
-  :config
-  (add-hook 'edit-indirect-after-creation-hook
-            (cae-defun cae-edit-indirect-major-mode-fallback-h ()
-              (when (eq major-mode 'fundamental-mode)
-                (funcall (buffer-local-value
-                          'major-mode
-                          (overlay-buffer edit-indirect--overlay)))))))
-
 ;; (unless (modulep! :editor evil)
 ;;   (map! :prefix "C-z"
 ;;         "n" #'avy-goto-line-below
