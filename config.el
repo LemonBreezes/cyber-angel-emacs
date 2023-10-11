@@ -261,7 +261,7 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side bottom :select t :quit t
          :ttl 0)
-        ("^\\*chatgpt\\* " :ttl 0 :select nil :quit t :side top)
+        ("^\\*chatgpt\\* " :ttl 0 :select t :quit t :side top)
         ("^\\*evil-owl\\*$" :side bottom :select nil :ttl 0 :size cae-popup-shrink-to-fit)
         ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
