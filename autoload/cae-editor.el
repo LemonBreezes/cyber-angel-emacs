@@ -457,15 +457,15 @@ also marks comment with leading whitespace"
             (overlay-put ov 'face 'lazy-highlight))
           (save-excursion (buffer-substring-no-properties beg end))))))))
 
-(defun cae-cycle-spacing ()
-  (interactive)
-  (if (region-active-p)
-      ;; If the region spans over multiple lines, collapse all the whitespace,
-      ;; otherwise, split the region across multiple lines.
-      (let ((beg (region-beginning))
-            (end (region-end)))
-        (when (eq (char-before (region-end)) ?\n)
-          (cl-decf end))
-        (or (replace-regexp-in-region ",[\s\t]+" " " beg end)
-            (replace-regexp-in-region "[\s\t\n]+" " " beg end)))
-    (call-interactively #'cycle-spacing)))
+;;(defun cae-cycle-spacing ()
+;;  (interactive)
+;;  (if (region-active-p)
+;;      ;; If the region spans over multiple lines, collapse all the whitespace,
+;;      ;; otherwise, split the region across multiple lines.
+;;      (let ((beg (region-beginning))
+;;            (end (region-end)))
+;;        (when (eq (char-before (region-end)) ?\n)
+;;          (cl-decf end))
+;;        (or (replace-regexp-in-region ",[\s\t]+" " " beg end)
+;;            (replace-regexp-in-region "[\s\t\n]+" " " beg end)))
+;;    (call-interactively #'cycle-spacing)))
