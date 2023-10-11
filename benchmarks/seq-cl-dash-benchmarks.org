@@ -314,3 +314,27 @@ Old results:
 |     3 | 22.590929926999998 |       95 |  6.710677827000001 |
 |     4 |         0.94718291 |        0 |                0.0 |
 
+** Finding if an element is in a vector
+:PROPERTIES:
+:CREATED_TIME: [2023-10-11 Wed 14:28]
+:END:
+
+#+begin_src emacs-lisp :noweb yes
+<<benchmark-setup>>
+(let ((l (number-sequence 1 1000))
+      (v (vconcat (number-sequence 1 1000)))
+      (-compare-fn #'=))
+  (k/benchmark-run-compiled 10000
+    (cl-find 935 v)
+    (seq-position v 935)
+    (cl-position 935 v)
+    (-contains? l 935)))
+#+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 | 0.104658656 |        0 |     0.0 |
+|     2 | 0.324462697 |        0 |     0.0 |
+|     3 | 0.105823765 |        0 |     0.0 |
+|     4 | 1.255225624 |        0 |     0.0 |
