@@ -90,6 +90,7 @@
 (package! isearch-mb)
 (package! edit-indirect)
 (package! string-edit-at-point)
+(package! zop-to-char)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
