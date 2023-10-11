@@ -9,26 +9,29 @@
           '(after . mode-line-frame-identification)))
 
   (after! minions
-    (setq-default mode-line-format
-                  '("%e" mode-line-front-space
-                    mode-line-client
-                    (:propertize
-                     ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
-                     display (min-width (5.0)))
-                    mode-line-frame-identification
-                    evil-mode-line-tag
-                    mode-line-buffer-identification
-                    (:eval (when (eq major-mode 'image-mode)
-                             ;; Needs imagemagick installed.
-                             (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
-                    "   "
-                    mode-line-position
-                    (project-mode-line project-mode-line-format)
-                    (vc-mode vc-mode)
-                    "  "
-                    minions-mode-line-modes
-                    mode-line-misc-info
-                    mode-line-end-spaces)))
+    (setq-default
+     mode-line-format
+     (cl-union (default-value 'mode-line-format)
+               '("%e" mode-line-front-space
+                 mode-line-client
+                 (:propertize
+                  ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
+                  display (min-width (5.0)))
+                 mode-line-frame-identification
+                 evil-mode-line-tag
+                 mode-line-buffer-identification
+                 (:eval (when (eq major-mode 'image-mode)
+                          ;; Needs imagemagick installed.
+                          (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
+                 "   "
+                 mode-line-position
+                 (project-mode-line project-mode-line-format)
+                 (vc-mode vc-mode)
+                 "  "
+                 minions-mode-line-modes
+                 mode-line-misc-info
+                 mode-line-end-spaces)
+               :test #'equal)))
 
   (use-package! anzu
     :after-call isearch-mode
