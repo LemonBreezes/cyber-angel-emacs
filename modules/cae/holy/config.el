@@ -82,13 +82,6 @@
   :config
   (setq-default goggles-pulse t))
 
-(use-package! zop-to-char
-  :defer t :init
-  (map! [remap zap-to-char] #'zop-to-char
-        [remap zap-up-to-char] #'zop-up-to-char)
-  :config
-  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
-
 ;; Type `?' during `rectangle-mark-mode' for a help buffer describing the
 ;; `speedrect' commands.
 (use-package! speedrect
@@ -122,9 +115,6 @@
     (if (eq (car args) -1)
         (nreverse (apply oldfun args))
       (apply oldfun args))))
-
-(use-package! string-edit-at-point    ; Used in `cae-edit-indirect-dwim'.
-  :defer t)
 
 ;; (unless (modulep! :editor evil)
 ;;   (map! :prefix "C-z"
