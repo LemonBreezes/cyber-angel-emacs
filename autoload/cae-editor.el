@@ -468,8 +468,10 @@ mark the string and call `edit-indirect-region' with it."
          (call-interactively #'edit-indirect-region))
         ((and (derived-mode-p 'org-mode)
               (ignore-error 'user-error (call-interactively #'org-edit-special))))
-        (t
-         (call-interactively #'string-edit-at-point))))
+        ((nth 3 (sp--syntax-ppss)) (call-interactively #'string-edit-at-point))
+        (t (save-mark-and-excursion
+             (mark-defun)
+             (call-interactively #'edit-indirect-region)))))
 
 ;;(defun cae-cycle-spacing ()
 ;;  (interactive)
