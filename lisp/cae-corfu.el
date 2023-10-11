@@ -2,29 +2,31 @@
 
 (defmacro cae-orderless-escapable-split-fn (char)
   `(defun cae-orderless-escapable-split-on-space-or-char (s)
-     (mapcar
-      (lambda (piece)
-        (replace-regexp-in-string
-         (string 1) ,(string char)
-         (replace-regexp-in-string
-          (concat (string 0) "\\|" (string 1))
-          (lambda (x)
-            (pcase x
-              ("\0" " ")
-              ("\1" ,(string char))
-              (_ x)))
-          piece
-          'fixedcase 'literal)
-         'fixedcase 'literal))
-      (split-string (replace-regexp-in-string
-                     (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
-                     (lambda (x)
-                       (pcase x
-                         ("\\ " "\0")
-                         (,(concat "\\" (string char)) "\1")
-                         (_ x)))
-                     s 'fixedcase 'literal)
-                    ,(concat "[ " (string char) "]+") t))))
+     (if (eq (aref s 0) ,char)
+         s
+       (mapcar
+        (lambda (piece)
+          (replace-regexp-in-string
+           (string 1) ,(string char)
+           (replace-regexp-in-string
+            (concat (string 0) "\\|" (string 1))
+            (lambda (x)
+              (pcase x
+                ("\0" " ")
+                ("\1" ,(string char))
+                (_ x)))
+            piece
+            'fixedcase 'literal)
+           'fixedcase 'literal))
+        (split-string (replace-regexp-in-string
+                       (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
+                       (lambda (x)
+                         (pcase x
+                           ("\\ " "\0")
+                           (,(concat "\\" (string char)) "\1")
+                           (_ x)))
+                       s 'fixedcase 'literal)
+                      ,(concat "[ " (string char) "]+") t)))))
 
 (after! orderless
   (if (modulep! :completion corfu +split-char)
