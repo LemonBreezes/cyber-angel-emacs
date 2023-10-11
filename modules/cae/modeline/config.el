@@ -8,6 +8,19 @@
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
 
+  ;;(setq mode-line-format
+  ;;      (delete '(:eval (when (eq major-mode 'image-mode)
+  ;;                        ;; Needs imagemagick installed.
+  ;;                        (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
+  ;;              mode-line-format))
+  (let ((place (cl-member 'mode-line-buffer-identification mode-line-format
+                          :test 'equal)))
+    (setf place
+          (cons '(:eval (when (eq major-mode 'image-mode)
+                          ;; Needs imagemagick installed.
+                          (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
+                place)))
+
   (use-package! anzu
     :after-call isearch-mode
     :defer t :init
@@ -187,8 +200,8 @@
       (setq-local minions-prominent-modes
                   (delq 'flycheck-mode (default-value 'minions-prominent-modes))))
     (after! lsp-ui
-      (dolist (mode (cl-remove-if-not (lambda (s) (string-prefix-p "lsp-" (symbol-name s))) minor-mode-list))
-        (add-to-list 'minions-prominent-modes mode 'append)))
+      (dolist (mode-line-format (cl-remove-if-not (lambda (s) (string-prefix-p "lsp-" (symbol-name s))) minor-mode-list))
+        (add-to-list 'minions-prominent-modes mode-line-format 'append)))
     (after! compilation
       (or (assq 'compilation-in-progress mode-line-modes)
           (add-to-list 'minions-mode-line-modes
