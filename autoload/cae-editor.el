@@ -470,8 +470,10 @@ mark the string and call `edit-indirect-region' with it."
               (ignore-error 'user-error (call-interactively #'org-edit-special))))
         ((nth 3 (sp--syntax-ppss)) (call-interactively #'string-edit-at-point))
         (t (save-mark-and-excursion
-             (mark-defun)
-             (call-interactively #'edit-indirect-region)))))
+             (let ((pos (point))
+                   (beg (progn (mark-defun) (region-beginning))))
+               (call-interactively #'edit-indirect-region)
+               (goto-char (- pos beg)))))))
 
 ;;(defun cae-cycle-spacing ()
 ;;  (interactive)
