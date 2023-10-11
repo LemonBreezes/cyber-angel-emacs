@@ -9,7 +9,7 @@
           '(after . mode-line-frame-identification)))
 
   (after! lispy
-    (let* ((idx (cl-position 'mode-line-buffer-identification mode-line-format))
+    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
            (new-id '(:eval (when (eq major-mode 'image-mode)
