@@ -5,7 +5,7 @@
   (add-hook 'doom-first-input-hook #'restore-point-mode)
   :config
   (setq rp/restore-point-commands
-        (nconc
+        (vconcat
          '(beginning-of-buffer
            end-of-buffer
            mark-defun
