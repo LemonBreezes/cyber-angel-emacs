@@ -8,20 +8,6 @@
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
 
-  ;;(setq mode-line-format
-  ;;      (delete '(:eval (when (eq major-mode 'image-mode)
-  ;;                        ;; Needs imagemagick installed.
-  ;;                        (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
-  ;;              mode-line-format))
-  (after! lispy
-    (let ((place (cdr (cl-member 'mode-line-buffer-identification mode-line-format
-                                 :test 'equal))))
-      (setf (cdr place)
-            (cons '(:eval (when (eq major-mode 'image-mode)
-                            ;; Needs imagemagick installed.
-                            (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))
-                  (cdr place)))))
-
   (use-package! anzu
     :after-call isearch-mode
     :defer t :init
