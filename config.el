@@ -1032,13 +1032,13 @@
       (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
 
   (use-package! beginend
-    :defer t :init
-    (add-hook 'doom-first-input-hook #'beginend-global-mode)
-    ;; This patches around this function not being compatible with Evil when
-    ;; `evil-move-beyond-eol' is `nil'.
-    (advice-add #'beginend-prog-mode-goto-end :before
-                (cae-defun cae-beginend-goto-eol-a (&rest _)
-                  (goto-char (eol)))))
+                                 :defer t :init
+                                 (add-hook 'doom-first-input-hook #'beginend-global-mode)
+                                 ;; This patches around this function not being compatible with Evil when
+                                 ;; `evil-move-beyond-eol' is `nil'.
+                                 (advice-add #'beginend-prog-mode-goto-end :before
+                                             (cae-defun cae-beginend-goto-eol-a (&rest _)
+                                               (goto-char (eol)))))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook
@@ -1059,7 +1059,16 @@
             [remap consult-history] #'consult-isearch-history)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
     (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp)))
+    (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
+
+  (use-package! edit-indirect
+    :defer t :config
+    (add-hook 'edit-indirect-after-creation-hook
+              (cae-defun cae-edit-indirect-major-mode-fallback-h ()
+                (when (eq major-mode 'fundamental-mode)
+                  (funcall (buffer-local-value
+                            'major-mode
+                            (overlay-buffer edit-indirect--overlay))))))))
 
 
 ;;; Autocompletion
