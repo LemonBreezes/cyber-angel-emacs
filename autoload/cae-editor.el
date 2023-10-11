@@ -457,6 +457,20 @@ also marks comment with leading whitespace"
             (overlay-put ov 'face 'lazy-highlight))
           (save-excursion (buffer-substring-no-properties beg end))))))))
 
+;;;###autoload
+(defun cae-edit-indirect-dwim ()
+  "DWIM version of edit-indirect-region.
+When region is selected, behave like `edit-indirect-region'
+but when no region is selected and the cursor is in a 'string' syntax
+mark the string and call `edit-indirect-region' with it."
+  (interactive)
+  (cond ((region-active-p)
+         (call-interactively #'edit-indirect-region))
+        ((and (derived-mode-p 'org-mode)
+              (ignore-error 'user-error (call-interactively #'org-edit-special))))
+        (t
+         (call-interactively #'string-edit-at-point))))
+
 ;;(defun cae-cycle-spacing ()
 ;;  (interactive)
 ;;  (if (region-active-p)
