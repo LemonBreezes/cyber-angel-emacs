@@ -96,6 +96,8 @@
     "C-w" nil
     "C-z" nil))
 
+(map! :n "zC" #'cae-evil-edit-indirect)
+
 (define-key! :keymaps +default-minibuffer-maps
   "C-S-y"    #'cae-yank-word-to-minibuffer)
 (after! isearch
@@ -181,13 +183,6 @@
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
 
-(use-package! evil-textobj-synax
-  :defer t :init
-  (after! evil
-    (map! :map evil-inner-text-objects-map
-          "h" #'evil-i-syntax
-          :map evil-outer-text-objects-map
-          "h" #'evil-a-syntax)))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
