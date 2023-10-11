@@ -26,6 +26,8 @@
            scroll-up-command
            pop-mark
            cae-pop-mark
+           c-mark-function
+           c-mark
            rp/point-ring-nav-previous
            dired-maybe-insert-subdir
            dired-insert-subdir
@@ -39,6 +41,14 @@
            sp-backward-down-sexp sp-down-sexp
            sp-up-sexp sp-forward-sexp sp-next-sexp sp-previous-sexp
            sp-backward-up-sexp eri/expand-region er/expand-region
+           er/c-mark-statement
+           er/c-mark-function-call-1
+           er/c-mark-function-call-2
+           er/c-mark-vector-access-1
+           er/c-mark-vector-access-2
+           er/c-mark-statement-block-1
+           er/c-mark-statement-block-2
+           er/c-mark-fully-qualified-name
            er/mark-url
            er/mark-word
            er/mark-defun
