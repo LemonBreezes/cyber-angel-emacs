@@ -9,11 +9,11 @@
           '(after . mode-line-frame-identification)))
 
   (let* ((idx (cl-position 'mode-line-buffer-identification mode-line-format))
-       (head (cl-subseq mode-line-format 0 idx))
-       (tail (cl-subseq mode-line-format idx))
-       (new-id '(:eval (when (eq major-mode 'image-mode)
-                         (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))))
-  (setq-default mode-line-format (append head (cons new-id tail))))
+         (head (cl-subseq mode-line-format 0 idx))
+         (tail (cl-subseq mode-line-format idx))
+         (new-id '(:eval (when (eq major-mode 'image-mode)
+                           (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))))
+    (setq-default mode-line-format (append head (cons new-id tail))))
 
   (use-package! anzu
     :after-call isearch-mode
