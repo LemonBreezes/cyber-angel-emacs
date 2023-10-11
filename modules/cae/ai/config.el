@@ -67,12 +67,12 @@
   (advice-add #'shell-maker-welcome-message :override #'ignore)
   ;; Use , to ask ChatGPT questions in any comint buffer
   (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
-    (let ((input (comint-get-old-input-default)))
+    (let ((input (comint-get-old-input-default))
+          (chatgpt-shell-prompt-query-response-style 'other-buffer))
       (if (string-prefix-p "," input)
           (chatgpt-shell-send-to-buffer (substring input 1))
         (apply f args))))
-  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
-  )
+  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a))
 
 (use-package! copilot
   :defer t :init
