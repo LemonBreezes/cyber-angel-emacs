@@ -28,8 +28,7 @@
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
-  (package! string-inflection)
-  (package! edit-indirect))
+  (package! string-inflection))
 
 ;; cae-smartparens
 (when (and (not (modulep! :editor lispy))
@@ -89,6 +88,8 @@
 (package! string-inflection)
 (package! beginend)
 (package! isearch-mb)
+(package! edit-indirect)
+(package! string-edit-at-point)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
