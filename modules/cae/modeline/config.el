@@ -11,10 +11,10 @@
   (after! minions
     (setq-default mode-line-format
                   '("%e" mode-line-front-space
+                    mode-line-client
                     (:propertize
                      ("" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote)
                      display (min-width (5.0)))
-                    mode-line-client
                     mode-line-frame-identification
                     evil-mode-line-tag
                     mode-line-buffer-identification
