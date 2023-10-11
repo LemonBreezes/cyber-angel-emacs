@@ -48,7 +48,6 @@
   (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
         corfu-on-exact-match nil
-        corfu-quit-no-match (if (modulep! +split-char) t 'separator)
         corfu-preselect (if (modulep! :completion corfu +tng) 'prompt t)
         tab-always-indent 'complete
         tab-first-completion 'eol)
