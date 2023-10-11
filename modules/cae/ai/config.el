@@ -64,7 +64,16 @@
   (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
   (map! :map chatgpt-shell-mode-map
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
-  (advice-add #'shell-maker-welcome-message :override #'ignore))
+  (advice-add #'shell-maker-welcome-message :override #'ignore)
+  ;; Use , to ask ChatGPT questions in any comint buffer
+  (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
+    (let ((input (comint-get-old-input-default)))
+      (if (and (string-prefix-p "," input)
+               (memq major-mode '(python-mode inferior-python-mode)))
+          (chatgpt-shell-send-to-buffer (substring input 1))
+        (apply f args))))
+  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  )
 
 (use-package! copilot
   :defer t :init
