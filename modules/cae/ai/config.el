@@ -68,8 +68,7 @@
   ;; Use , to ask ChatGPT questions in any comint buffer
   (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
     (let ((input (comint-get-old-input-default)))
-      (if (and (string-prefix-p "," input)
-               (memq major-mode '(python-mode inferior-python-mode)))
+      (if (string-prefix-p "," input)
           (chatgpt-shell-send-to-buffer (substring input 1))
         (apply f args))))
   (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
