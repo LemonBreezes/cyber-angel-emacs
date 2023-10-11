@@ -158,3 +158,14 @@
     (narrow-to-page)
     (funcall (key-binding "G"))
     (call-interactively #'evil-append)))
+
+;; Allow passing the current point to Evil operators.
+(setf (alist-get "d" evil-interactive-alist)
+      '((list (point))))
+
+;;;###autoload (autoload 'cae-evil-edit-indirect "autoload/cae-evil" nil t)
+(evil-define-operator cae-evil-edit-indirect (beg end type pos)
+  "Edit the region indirectly."
+  (interactive "<R>d")
+  (edit-indirect-region beg end t)
+  (goto-char (- pos beg)))
