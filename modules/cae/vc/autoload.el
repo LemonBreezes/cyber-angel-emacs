@@ -21,3 +21,25 @@ Meant to be used like:
 ;;;###autoload
 (defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
+
+;;;###autoload
+(defun cae-magit-add-PR-fetch-ref (&optional remote-name)
+  "If refs/pull is not defined on a GH repo, define it.
+
+If REMOTE-NAME is not specified, it defaults to the `remote' set
+for the \"main\" or \"master\" branch."
+  (let* ((remote-name (or remote-name
+                          (magit-get "branch" "main" "remote")
+                          (magit-get "branch" "master" "remote")))
+         (remote-url (magit-get "remote" remote-name "url"))
+         (fetch-refs (and (stringp remote-url)
+                          (string-match "github" remote-url)
+                          (magit-get-all "remote" remote-name "fetch")))
+         ;; https://oremacs.com/2015/03/11/git-tricks/
+         (fetch-address (format "+refs/pull/*/head:refs/pull/%s/*" remote-name)))
+    (when fetch-refs
+      (unless (member fetch-address fetch-refs)
+        (magit-git-string "config"
+                          "--add"
+                          (format "remote.%s.fetch" remote-name)
+                          fetch-address)))))
