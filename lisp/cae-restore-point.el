@@ -28,6 +28,10 @@
            cae-pop-mark
            c-mark-function
            c-mark
+           query-replace
+           query-replace-regexp
+           anzu-query-replace
+           anzu-query-replace-regexp
            rp/point-ring-nav-previous
            dired-maybe-insert-subdir
            dired-insert-subdir
