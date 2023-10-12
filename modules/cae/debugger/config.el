@@ -28,7 +28,8 @@
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
 (after! gud
-  (setq gud-chdir-before-run nil))
+  (setq gud-chdir-before-run nil
+        gud-highlight-current-line t))
 (after! gdb-mi
   (setq gdb-show-main nil
         gdb-many-windows nil
