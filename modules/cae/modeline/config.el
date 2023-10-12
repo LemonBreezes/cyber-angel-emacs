@@ -9,13 +9,12 @@
           '(after . mode-line-frame-identification)))
 
   ;; Show image metadata in the modeline.
-  (add-transient-hook! 'image-mode-hook
-    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification (default-value mode-line-format))))
+  (add-hook! 'image-mode-hook
+    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
-           (new-id '(:eval (when (eq major-mode 'image-mode)
-                             (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name))))))
-      (setq-default mode-line-format (append head (cons new-id tail)))))
+           (new-id '(:eval (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name)))))
+      (setq mode-line-format (append head (cons new-id tail)))))
 
   (use-package! anzu
     :after-call isearch-mode
