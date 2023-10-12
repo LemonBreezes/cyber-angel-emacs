@@ -10,7 +10,7 @@
 
   ;; Show image metadata in the modeline.
   (add-hook! 'doom-init-ui-hook
-    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
+    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification (default-value mode-line-format))))
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
            (new-id '(:eval (when (eq major-mode 'image-mode)
