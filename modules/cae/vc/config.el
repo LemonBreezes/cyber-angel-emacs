@@ -15,12 +15,10 @@
   (setq vc-annotate-background-mode nil))
 
 (when (modulep! :tools magit)
-  (after! ghub-graphql
-    ;; Do not hit the rate limit.
-    ;; EDIT: Hopefully this is no longer necessary now that I fixed my
-    ;; `authinfo' authentication.
-    ;;(setq ghub-graphql-items-per-request 10)
-    )
+  ;; EDIT: Hopefully this is no longer necessary now that I fixed my
+  ;; `authinfo' authentication.
+  ;;(after! ghub-graphql
+  ;;  (setq ghub-graphql-items-per-request 10))
   (after! magit
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
