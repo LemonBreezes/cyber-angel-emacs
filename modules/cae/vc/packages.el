@@ -13,3 +13,5 @@
   (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
 (when (or (modulep! :completion helm)
           (modulep! :cae helm)))
+(package! magit-stgit)
+(package! stgit)
