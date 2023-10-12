@@ -395,11 +395,12 @@
   ;; Was reading this
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
   (setq delete-by-moving-to-trash t
-        ;; These are slow but not being able to recover deleted files can be
-        ;; really painful too.
-        remote-file-name-inhibit-delete-by-moving-to-trash nil
-        remote-file-name-inhibit-auto-save nil
-        remote-file-name-inhibit-auto-save-visited nil
+        ;; Careful with these settings! They can prevent errors and Emacs
+        ;; freezing but they can surprise you if you expect all your files to be
+        ;; trashed when you delete them.
+        remote-file-name-inhibit-delete-by-moving-to-trash t
+        remote-file-name-inhibit-auto-save t
+        remote-file-name-inhibit-auto-save-visited t
 
         yank-pop-change-selection t
         global-mark-ring-max 1024
