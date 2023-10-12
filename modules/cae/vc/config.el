@@ -15,6 +15,8 @@
   (setq vc-annotate-background-mode nil))
 
 (when (modulep! :tools magit)
+  (after! ghub-graphql
+    (setq ghub-graphql-items-per-request 20))
   (after! magit
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
