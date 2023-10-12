@@ -17,7 +17,10 @@
 (when (modulep! :tools magit)
   (after! ghub-graphql
     ;; Do not hit the rate limit.
-    (setq ghub-graphql-items-per-request 10))
+    ;; EDIT: Hopefully this is no longer necessary now that I fixed my
+    ;; `authinfo' authentication.
+    ;;(setq ghub-graphql-items-per-request 10)
+    )
   (after! magit
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
