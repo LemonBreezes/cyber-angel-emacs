@@ -14,6 +14,8 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
+(after! code-review
+  (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
   ;; EDIT: Hopefully this is no longer necessary now that I fixed my
   ;; `authinfo' authentication.
