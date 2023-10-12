@@ -170,3 +170,5 @@
 (use-package! magit-stgit
   :defer t :init
   (add-hook 'magit-mode-hook 'magit-stgit-mode))
+
+(use-package! stgit)
