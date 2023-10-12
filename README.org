@@ -52,6 +52,6 @@ I've also added a few custom patches to Emacs, which are available in the
 * My custom fork of Doom Emacs
 
 I am also maintaining my own fork of Doom Emacs where I pre-emptively merge PRs
-to Doom Emacs that I like before they get merged upstream:
+to Doom Emacs that I am currently using:
 
 https://github.com/lemonbreezes/doomemacs
