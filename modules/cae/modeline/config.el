@@ -8,6 +8,7 @@
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
 
+  ;; Show image metadata in the modeline.
   (add-hook! 'doom-init-ui-hook
     (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
            (head (cl-subseq mode-line-format 0 idx))
