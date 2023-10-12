@@ -396,8 +396,8 @@
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
   (setq delete-by-moving-to-trash t
         ;; Careful with these settings! They can prevent errors and Emacs
-        ;; freezing but they can surprise you if you expect all your files to be
-        ;; trashed when you delete them.
+        ;; freezing but they can also surprise you if you expect all your files
+        ;; to be trashed when you delete them.
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
         remote-file-name-inhibit-auto-save-visited t
