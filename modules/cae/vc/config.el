@@ -32,7 +32,8 @@
           transient-values '((magit-rebase "--autosquash" "--autostash")
                              (magit-pull "--rebase" "--autostash")
                              (magit-revert "--autostash"))
-          magit-log-auto-more t)
+          magit-log-auto-more t
+          magit-pull-or-fetch t)
     (when (modulep! :tools magit +forge)
       (advice-remove #'forge-get-repository #'+magit--forge-get-repository-lazily-a)
       (advice-remove #'forge-dispatch #'+magit--forge-build-binary-lazily-a)
@@ -174,9 +175,3 @@
   :after (consult-gh embark))
 
 (use-package! igist :defer t)           ; TODO
-
-(use-package! magit-stgit
-  :defer t :init
-  (add-hook 'magit-mode-hook 'magit-stgit-mode))
-
-(use-package! stgit)
