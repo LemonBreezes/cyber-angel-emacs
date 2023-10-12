@@ -9,7 +9,7 @@
           '(after . mode-line-frame-identification)))
 
   ;; Show image metadata in the modeline.
-  (add-hook! 'doom-init-ui-hook
+  (add-transient-hook! 'image-mode-hook
     (let* ((idx (1+ (cl-position 'mode-line-buffer-identification (default-value mode-line-format))))
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
