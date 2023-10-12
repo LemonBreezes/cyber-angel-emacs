@@ -166,3 +166,7 @@
   :after (consult-gh embark))
 
 (use-package! igist :defer t)           ; TODO
+
+(use-package! magit-stgit
+  :defer t :init
+  (add-hook 'magit-mode-hook 'magit-stgit-mode))
