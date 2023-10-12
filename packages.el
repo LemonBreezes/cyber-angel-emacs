@@ -10,8 +10,10 @@
                    elfeed-goodies
                    mu4e-alert
                    flymake-popon)       ;FIXME
+;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
+;; Hopefully Hlissner will merge my PR for `evil-org-mode'.
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
   (package! evil-org :recipe
