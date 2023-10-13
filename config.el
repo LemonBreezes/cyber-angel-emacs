@@ -1335,6 +1335,8 @@
   (when (modulep! :lang lua +lsp)
     (add-hook 'fennel-mode-local-vars-hook #'lsp!)))
 
+(add-hook 'fennel-mode-hook #'outline-minor-mode)
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
