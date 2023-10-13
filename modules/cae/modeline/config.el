@@ -14,8 +14,7 @@
            (head (cl-subseq mode-line-format 0 idx))
            (tail (cl-subseq mode-line-format idx))
            (new-id '(:eval (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name)))))
-      (unless (member new-id mode-line-format)
-        (setq mode-line-format (append head (cons new-id tail))))))
+      (setq mode-line-format (append head (cons new-id tail)))))
 
   (use-package! anzu
     :after-call isearch-mode
