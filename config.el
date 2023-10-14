@@ -60,6 +60,7 @@
 (after! nsm
   (setq network-security-level 'high))
 
+;; I really don't like this advice. Just let me kill the buffer.
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
 
