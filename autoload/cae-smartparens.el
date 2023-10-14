@@ -38,5 +38,6 @@ many times the \\[universal-argument] was invoked."
 (hercules-def :show-funs #'cae-sp-which-key-cheatsheet
               :hide-funs '(doom/escape evil-change-state)
               :keymap 'smartparens-mode-map
+              :package 'smartparens
               :transient t
               :flatten t)
