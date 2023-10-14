@@ -100,5 +100,6 @@
 (hercules-def :show-funs #'cae-org-babel-cheatsheet
               :hide-funs '(doom/escape evil-change-state)
               :keymap 'org-babel-map
+              :package 'org-keys
               :transient t
               :flatten t)
