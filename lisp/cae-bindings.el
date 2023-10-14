@@ -67,6 +67,7 @@
       [remap capitalize-word] #'capitalize-dwim
       [remap ispell-word] #'cae-ispell-word-then-abbrev
       [remap exchange-point-and-mark] #'cae-exchange-point-and-mark
+      [remap kill-current-buffer] #'cae-kill-current-buffer
       "C-x 4 I" #'ibuffer-other-window
       "C-x 4 -" #'dired-jump-other-window
       [remap ibuffer] #'ibuffer-jump    ;This way
