@@ -50,5 +50,6 @@
 (hercules-def :show-funs #'cae-lispy-which-key-cheatsheet
               :hide-funs '(doom/escape evil-change-state)
               :keymap 'lispy-mode-map
+              :package 'lispy
               :transient t
               :flatten t)
