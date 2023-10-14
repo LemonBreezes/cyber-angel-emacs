@@ -402,7 +402,7 @@
         remote-file-name-inhibit-auto-save t
         remote-file-name-inhibit-auto-save-visited t
 
-        large-file-warning-threshold 100000000 ; Multiply Doom's number by 10.
+        large-file-warning-threshold 100000000 ; ~100 MB
         yank-pop-change-selection t
         global-mark-ring-max 1024
         history-delete-duplicates t
