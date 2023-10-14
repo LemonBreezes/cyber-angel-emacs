@@ -475,6 +475,13 @@ mark the string and call `edit-indirect-region' with it."
                (call-interactively #'edit-indirect-region)
                (goto-char (- pos beg)))))))
 
+;;;###autoload
+(defun cae-kill-current-buffer ()
+  (interactive)
+  (when-let (proc (get-buffer-process (current-buffer)))
+    (kill-process proc))
+  (call-interactively #'kill-current-buffer))
+
 ;;(defun cae-cycle-spacing ()
 ;;  (interactive)
 ;;  (if (region-active-p)
