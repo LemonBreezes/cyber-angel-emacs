@@ -35,9 +35,9 @@ many times the \\[universal-argument] was invoked."
 
 ;;;###autoload
 (defun cae-sp-which-key-cheatsheet () (interactive))
-(hercules-def :show-funs #'cae-sp-which-key-cheatsheet
-              :hide-funs '(doom/escape evil-change-state)
-              :keymap 'smartparens-mode-map
-              :package 'smartparens
-              :transient t
-              :flatten t)
+(after! smartparens
+  (hercules-def :show-funs #'cae-sp-which-key-cheatsheet
+                :hide-funs '(doom/escape evil-change-state)
+                :keymap 'smartparens-mode-map
+                :transient t
+                :flatten t))
