@@ -60,6 +60,8 @@
 (after! nsm
   (setq network-security-level 'high))
 
+(advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
+
 
 ;;; UI
 
