@@ -6,8 +6,8 @@
         [remap scroll-down-command] #'scrollkeeper-contents-down)
   (setq scrollkeeper-scroll-steps 1)
 
-  ;; These advices don't support scrolling in multiple steps but that is fine
-  ;; for me.
+  ;; These advices don't support scrolling in multiple steps but that is okay
+  ;; with me.
   (advice-add #'evil-scroll-down :before
               (cae-defun cae-evil-scroll-down-with-hint-a (count)
                 (unless (= (line-end-position) (point-max))
