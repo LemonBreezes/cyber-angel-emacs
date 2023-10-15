@@ -8,8 +8,8 @@
     (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
 
 (defun cae-exwm-evil-use-initial-state-h ()
-  (when (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
-                   nil nil #'string=)
+  (when-let ((state (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
+                               nil nil #'string=)))
     (pcase state
       ('normal (exwm-evil-normal-state))
       ('insert (exwm-evil-insert)))))
