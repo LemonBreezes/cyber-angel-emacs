@@ -212,23 +212,6 @@
     (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
     (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
-  (defvar cae-window-timeout-timer nil)
-  (defvar cae-window-timeout)
-  (when (member cae-window-timeout-timer timer-list)
-    (cancel-timer cae-window-timeout-timer))
-  (setq cae-window-timeout-timer
-        (run-at-time 1 1
-                     (cae-defun cae-timeout-windows ()
-                       (dolist (window (+popup-windows))
-                         (when (and
-                                (window-live-p window)
-                                (window-parameter window 'timeout)
-                                (window-parameter window 'creation-time)
-                                (> (- (float-time)
-                                      (window-parameter window 'creation-time))
-                                   (window-parameter window 'timeout)))
-                           (delete-window window))))))
-
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
   (when (modulep! :ui popup)
