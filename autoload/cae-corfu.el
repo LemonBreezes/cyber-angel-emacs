@@ -53,10 +53,3 @@
   (interactive)
   (cape-interactive #'lsp-completion-at-point))
 
-;;;###autoload
-(defun cae-yasnippet-capf ()
-  (if (or (not (char-before))
-          (eq (char-syntax (char-before))
-              ?\s))
-      (call-interactively #'+default/insert-snippet)
-    (call-interactively #'yasnippet-capf)))
