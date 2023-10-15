@@ -158,14 +158,19 @@
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
-         :i "C-s" #'yasnippet-capf
+         :i "C-s" #'cae-yasnippet-capf
          :i "C-l" #'cape-line
          :i "C-]" #'cape-lsp
          (:after cape
           :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
-         :i "C-p" nil)))
+         :i "C-p" nil))
+  (map! :map corfu-map
+        :i "C-u" nil
+        :i "C-d" nil
+        :i "C-f" #'corfu-scroll-down
+        :i "C-b" #'corfu-scroll-up))
 
 (advice-add #'yas-expand-snippet :after
             (cae-defun cae-evil-insert-state-a (&rest _)
