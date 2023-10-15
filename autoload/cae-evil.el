@@ -169,10 +169,3 @@
   (interactive "<R>d")
   (edit-indirect-region beg end t)
   (goto-char (- pos beg)))
-
-;;;###autoload
-(defun cae-yasnippet-capf ()
-  (interactive)
-  (if (thing-at-point-looking-at "\\(?:\\sw\\|\\s_\\)+")
-      (call-interactively #'yasnippet-capf)
-    (call-interactively #'+default/insert-snippet)))
