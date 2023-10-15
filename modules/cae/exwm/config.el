@@ -169,18 +169,6 @@ expansion occurs within the parent Emacs session.")
         (set-frame-parameter frame 'parent-frame nil)
         frame)))
 
-  (use-package! exwm-edit
-    :commands exwm-edit--compose
-    :init
-    (map! :map exwm-mode-map
-          :localleader
-          :desc "Edit input box" "'" #'exwm-edit--compose)
-    :config
-    (setq exwm-edit-split "below"
-          exwm-edit-yank-delay 0.3
-          exwm-edit-paste-delay 0.05
-          exwm-edit-clean-kill-ring-delay 0.10))
-
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
   (defun +exwm-input--translate-a (oldfun &rest args)
