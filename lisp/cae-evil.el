@@ -167,6 +167,8 @@
          :i "C-n" nil
          :i "C-p" nil))
   (map! :map corfu-map
+        ;; I prefer `C-f' and `C-b' for scrolling so that `C-u' still works for
+        ;; deleting lines.
         :i "C-u" nil
         :i "C-d" nil
         :i "C-f" #'corfu-scroll-down
