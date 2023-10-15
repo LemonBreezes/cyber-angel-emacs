@@ -1,7 +1,7 @@
 ;;; lisp/cae-exwm.el -*- lexical-binding: t; -*-
 
 (setq exwm-evil-initial-state-alist
-  '(("kitty" . insert)))
+      '(("kitty" . insert)))
 
 (defun cae-exwm-exit-floating-mode-h ()
   (when (string= exwm-class-name "love")
