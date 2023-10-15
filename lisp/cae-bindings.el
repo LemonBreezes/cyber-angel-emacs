@@ -307,6 +307,7 @@
         "s-T" (cae-exwm-app-runner "tiled" "Tiled")
         "s-d" (cae-exwm-app-runner "discord" "Discord")
         "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
+        "s-s" (cae-exwm-app-runner "signal" "Signal")
         "s-<return>" (cae-exwm-app-runner "kitty" "kitty")))
 
 (after! treemacs
