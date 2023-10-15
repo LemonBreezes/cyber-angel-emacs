@@ -8,7 +8,7 @@
    "nntp\\|news\\|telnet\\|wais\\|mailto\\|info\\):\\)"
    "\\(//[-a-z0-9_.]+:[0-9]*\\)?"
    (let ((chars "-a-z0-9_=#$@~%&*+\\/[:word:]")
-	     (punct "!?:;.,"))
+	 (punct "!?:;.,"))
      (concat
       "\\(?:"
       ;; Match paired parentheses, e.g. in Wikipedia URLs:
