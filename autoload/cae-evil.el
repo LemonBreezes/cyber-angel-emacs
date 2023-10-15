@@ -169,3 +169,11 @@
   (interactive "<R>d")
   (edit-indirect-region beg end t)
   (goto-char (- pos beg)))
+
+;;;###autoload
+(defun cae-yasnippet-capf ()
+  (if (or (not (char-before))
+          (eq (char-syntax (char-before))
+              ?\s))
+      (call-interactively #'+default/insert-snippet)
+    (call-interactively #'yasnippet-capf)))
