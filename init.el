@@ -104,6 +104,7 @@
        (json +lsp +tree-sitter)
        (javascript +lsp +tree-sitter)
        (python +lsp +tree-sitter)
+       (markdown +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
