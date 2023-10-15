@@ -1,12 +1,5 @@
 ;;; lisp/cae-lsp.el -*- lexical-binding: t; -*-
 
-;; For some reason Persp is picking up a few buffers that it should not.
-(when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-to-list 'persp-add-buffer-on-after-change-major-mode-filter-functions
-                 (cae-defun cae-persp-skip-buffer-p (buffer)
-                   (string= (buffer-name buffer) "*lsp-log*")))))
-
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable nil ; I use the `breadcrumb' package.
         lsp-enable-snippet t
