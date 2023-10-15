@@ -8,9 +8,7 @@
 (use-package! exwm-evil
   :after exwm
   :config
-  (add-hook 'exwm-mode-hook #'enable-exwm-evil-mode)
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
-  (add-hook 'doom-switch-buffer-hook #'enable-exwm-evil-mode)
   (cl-pushnew 'escape exwm-input-prefix-keys)
 
   ;; We will disable `C-c' in insert state.
