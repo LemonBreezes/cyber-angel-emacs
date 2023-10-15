@@ -13,7 +13,7 @@
                                         ;is also our Projectile configuration.
 (when (modulep! :editor evil)
   (load! "lisp/cae-evil"))
-(when (modulep! :cae exwm)
+(add-hook! 'exwm-init-hook
   (load! "lisp/cae-exwm"))
 
 ;; Helm is not our main completion system.
