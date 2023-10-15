@@ -10,9 +10,10 @@
 (defun cae-exwm-evil-use-initial-state-h ()
   (when-let ((state (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
                                nil nil #'string=)))
-    (pcase state
-      ('normal (exwm-evil-normal-state))
-      ('insert (exwm-evil-insert)))))
+    ;;(pcase state
+    ;;  ('normal (exwm-evil-normal-state))
+    ;;  ('insert (exwm-evil-insert)))
+    ))
 
 (add-hook 'exwm-manage-finish-hook #'cae-exwm-exit-floating-mode-h)
 (add-hook 'exwm-manage-finish-hook #'cae-exwm-evil-use-initial-state-h)
