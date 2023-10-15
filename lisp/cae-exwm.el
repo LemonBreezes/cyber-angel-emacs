@@ -1,10 +1,21 @@
 ;;; lisp/cae-exwm.el -*- lexical-binding: t; -*-
 
-(defun +exwm-exit-floating-mode-h ()
+(defvar cae-exwm-evil-initial-state-alist
+  '(("kitty" . insert)))
+
+(defun cae-exwm-exit-floating-mode-h ()
   (when (string= exwm-class-name "love")
     (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
 
-(add-hook 'exwm-manage-finish-hook #'+exwm-exit-floating-mode-h)
+(defun cae-exwm-evil-use-initial-state-h ()
+  (when (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
+                   nil nil #'string=)
+    (pcase state
+      ('normal (exwm-evil-normal-state))
+      ('insert (exwm-evil-insert)))))
+
+(add-hook 'exwm-manage-finish-hook #'cae-exwm-exit-floating-mode-h)
+(add-hook 'exwm-manage-finish-hook #'cae-exwm-evil-use-initial-state-h)
 
 (defmacro cae-exwm-app-runner (app-name app-title &optional state)
   `(lambda (arg)
