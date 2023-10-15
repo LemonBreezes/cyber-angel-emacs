@@ -295,11 +295,6 @@
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
 
-(defmacro cae-exwm-app-runner (app-name app-title &optional state)
-  `(lambda (arg)
-     (interactive "P")
-     (cae-exwm-start-app ,app-name ,app-title arg)))
-
 (after! treemacs
   (when (modulep! :completion vertico)
     (map! :map treemacs-mode-map
