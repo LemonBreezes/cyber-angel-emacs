@@ -3,7 +3,8 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
-    (setq lsp-headerline-breadcrumb-enable nil ; I use the `breadcrumb' package.
+    (setq lsp-headerline-breadcrumb-enable (not (or (featurep 'breadcrumb)
+                                                    (featurep 'topsy)))
           lsp-enable-snippet t
           lsp-enable-folding t
           lsp-inlay-hint-enable t
