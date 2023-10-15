@@ -6,6 +6,11 @@
 
 (add-hook 'exwm-manage-finish-hook #'+exwm-exit-floating-mode-h)
 
+(defmacro cae-exwm-app-runner (app-name app-title &optional state)
+  `(lambda (arg)
+     (interactive "P")
+     (cae-exwm-start-app ,app-name ,app-title arg)))
+
 (add-hook! 'exwm-init-hook
   (map! "s-v" (cae-exwm-app-runner browse-url-generic-program "Chrome")
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
