@@ -222,9 +222,9 @@
                                 (window-live-p window)
                                 (window-parameter window 'timeout)
                                 (window-parameter window 'creation-time)
-                                (> (window-parameter window 'timeout)
-                                   (- (float-time)
-                                      (window-parameter window 'creation-time))))
+                                (> (- (float-time)
+                                      (window-parameter window 'creation-time))
+                                   (window-parameter window 'timeout)))
                            (delete-window window))))))
 
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
