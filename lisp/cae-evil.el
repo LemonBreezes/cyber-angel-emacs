@@ -193,7 +193,6 @@
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
 
-
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
