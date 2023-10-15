@@ -4,7 +4,7 @@
 (defun exwm-firefox-core-hint-links-h ()
   "Helper function which enters normal state after the browser
 switches pages."
-  (when exwm-firefox-evil-mode (exwm-firefox-evil-normal))
+  (when exwm-firefox-evil-mode (evil-normal-state))
   (remove-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
