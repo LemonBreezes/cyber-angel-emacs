@@ -102,6 +102,7 @@
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
        (yaml +lsp +tree-sitter)
        (json +lsp +tree-sitter)
+       (javascript +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
