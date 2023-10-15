@@ -158,7 +158,7 @@
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
-         :i "C-s" #'+default/insert-snippet ; I am not a fan of `yasnippet-capf'.
+         :i "C-s" #'yasnippet-capf
          :i "C-l" #'cape-line
          :i "C-]" #'cape-lsp
          (:after cape
