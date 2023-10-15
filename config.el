@@ -100,8 +100,6 @@
         scroll-preserve-screen-position t
         suggest-key-bindings nil)
 
-  (setq-default cursor-in-non-selected-windows t)
-
   (after! image
     (setq image-use-external-converter t))
 
