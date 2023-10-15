@@ -47,3 +47,8 @@
     (eshell-send-input))
    ((and (derived-mode-p 'comint-mode)  (fboundp 'comint-send-input))
     (comint-send-input))))
+
+;;;###autoload
+(defun cape-lsp ()
+  (interactive)
+  (cape-interactive #'lsp-completion-at-point))
