@@ -4,8 +4,6 @@
   (when (string= exwm-class-name "love")
     (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
 
-(defun +exwm-evil-use-initial-state-h ())
-
 (add-hook 'exwm-manage-finish-hook #'+exwm-exit-floating-mode-h)
 
 (defmacro cae-exwm-app-runner (app-name app-title &optional state)
