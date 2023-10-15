@@ -282,6 +282,8 @@
        (:prefix "s"
         :desc "Copy link" "y" #'link-hint-copy-link
         :desc "Jump to section" "h" #'consult-outline))
+      (:when (modulep! :tools editorconfig)
+       :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
       (:prefix "t"
        :desc "Column indicator" "C" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode))
