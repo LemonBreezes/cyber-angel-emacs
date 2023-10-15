@@ -26,6 +26,7 @@
       :desc "Switch buffers (all)" :ng "B" #'switch-to-buffer
       :desc "IBuffer" :ng "i" #'ibuffer
       :desc "Previous buffer" :ng "p" #'previous-buffer
+      :desc "Previous buffer" :ng "q" #'previous-buffer
       :desc "Set theme" :ng "t" #'consult-theme
       :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
       :desc "Show keybindings" :ng "h" #'cae-dashboard-help
