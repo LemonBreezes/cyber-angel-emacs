@@ -304,6 +304,7 @@
   (map! "s-v" (cae-exwm-app-runner browse-url-generic-program "Chrome")
         "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
         "s-t" (cae-exwm-app-runner "teams-for-linux" "Teams")
+        "s-T" (cae-exwm-app-runner "tiled" "Tiled")
         "s-d" (cae-exwm-app-runner "discord" "Discord")
         "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
         "s-<return>" (cae-exwm-app-runner "kitty" "kitty")))
