@@ -54,13 +54,10 @@
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkl;")))
-  (if (modulep! :completion corfu +tng)
-      (map! :map corfu-map
-            :ig "RET" nil
-            :ig "<return>" nil)
+  (when (modulep! :completion corfu +tng)
     (map! :map corfu-map
-          :ig "TAB" nil
-          :ig "<tab>" nil))
+          :ig "RET" nil
+          :ig "<return>" nil))
 
   ;; Fish completions are too slow for on-key completion.
   (setq-hook! 'fish-completion-mode-hook corfu-auto nil)
