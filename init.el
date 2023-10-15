@@ -100,6 +100,7 @@
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+       (yaml +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
