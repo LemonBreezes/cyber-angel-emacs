@@ -7,13 +7,22 @@
   (when (string= exwm-class-name "love")
     (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
 
+(defvar cae-exwm-evil-use-initial-state-timer nil)
 (defun cae-exwm-evil-use-initial-state-h ()
   (when-let ((state (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
-                               nil nil #'string=)))
-    (run-at-time 0.05 nil
-                 (pcase state
-                   ('normal #'exwm-evil-normal-state)
-                   ('insert #'exwm-evil-insert)))))
+                               nil nil #'string=))
+             (_ (not (member cae-exwm-evil-use-initial-state-timer
+                             timer-list))))
+    (setq cae-exwm-evil-use-initial-state-timer
+          (run-at-time 0.05 0.05
+                       (lambda (state class)
+                         (when (equal exwm-class-name class)
+                           (cancel-timer cae-exwm-evil-use-initial-state-timer)
+                           (pcase state
+                             ('normal #'exwm-evil-normal-state)
+                             ('insert #'exwm-evil-insert))))
+                       state
+                       exwm-class-name))))
 
 (add-hook 'exwm-manage-finish-hook #'cae-exwm-exit-floating-mode-h)
 (add-hook 'exwm-manage-finish-hook #'cae-exwm-evil-use-initial-state-h)
