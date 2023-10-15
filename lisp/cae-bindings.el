@@ -300,7 +300,7 @@
      (interactive "P")
      (cae-exwm-start-app ,app-name ,app-title arg)
      (when ,(and state (modulep! :editor evil))
-       (funcall ',(intern (concat "evil-" (symbol-name state) "-state"))))))
+       (add-transient-hook! 'exwm-mode-hook ',(intern (concat "evil-" (symbol-name state) "-state"))))))
 
 (add-hook! 'exwm-init-hook
   (map! "s-v" (cae-exwm-app-runner browse-url-generic-program "Chrome")
