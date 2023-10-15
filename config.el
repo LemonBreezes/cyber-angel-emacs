@@ -210,6 +210,19 @@
     (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
     (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
+  (defvar cae-window-timeout-timer nil)
+  (defvar cae-window-timeout)
+  (setq cae-window-timeout-timer
+        (run-at-time 0.05 0.05
+                     (cae-defun cae-timeout-windows ()
+                       (dolist (window (+popup-windows))
+                         (when (and (window-parameter window 'timeout)
+                                    (window-parameter window 'creation-time)
+                                    (> (window-parameter window 'timeout)
+                                       (- (float-time)
+                                          (window-parameter window 'creation-time))))
+                           (delete-window window))))))
+
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
   (when (modulep! :ui popup)
@@ -270,7 +283,7 @@
         ("^\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top)
         ("*helm " :ignore t)
-        ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t :size cae-popup-shrink-to-fit)
+        ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t :size cae-popup-shrink-to-fit :timeout 0.05)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
     (after! embark
