@@ -311,7 +311,7 @@
         "s-d" (cae-exwm-app-runner "discord" "Discord")
         "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
         "s-s" (cae-exwm-app-runner "signal-desktop" "Signal")
-        "s-<return>" (cae-exwm-app-runner "kitty" "kitty" insert)))
+        "s-<return>" (cae-exwm-app-runner "kitty" "kitty")))
 
 (after! treemacs
   (when (modulep! :completion vertico)
