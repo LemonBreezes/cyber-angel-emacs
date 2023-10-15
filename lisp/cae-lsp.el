@@ -37,7 +37,7 @@
             lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
             lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
     (after! lsp-json
-      (setq lsp-json-schemas `[(:fileMatch ["*.resume.json"] :url "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json")]))
+      (plist-put lsp-json--schema-associations :/*.resume.json ["https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json"]))
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)
 
