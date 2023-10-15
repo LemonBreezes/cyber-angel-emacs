@@ -298,10 +298,7 @@
 (defmacro cae-exwm-app-runner (app-name app-title &optional state)
   `(lambda (arg)
      (interactive "P")
-     (cae-exwm-start-app ,app-name ,app-title arg)
-     ;;(when ,(and state (modulep! :editor evil))
-     ;;  (add-transient-hook! 'exwm-mode-hook ',(intern (concat "evil-" (symbol-name state) "-state"))))
-     ))
+     (cae-exwm-start-app ,app-name ,app-title arg)))
 
 (add-hook! 'exwm-init-hook
   (map! "s-v" (cae-exwm-app-runner browse-url-generic-program "Chrome")
