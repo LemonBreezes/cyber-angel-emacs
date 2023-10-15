@@ -295,10 +295,12 @@
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
 
-(defmacro cae-exwm-app-runner (app-name app-title)
+(defmacro cae-exwm-app-runner (app-name app-title &optional state)
   `(lambda (arg)
      (interactive "P")
-     (cae-exwm-start-app ,app-name ,app-title arg)))
+     (cae-exwm-start-app ,app-name ,app-title arg)
+     (when ,(and state (modulep! :editor evil))
+       (funcall ',(intern (concat "evil-" (symbol-name state) "-state"))))))
 
 (add-hook! 'exwm-init-hook
   (map! "s-v" (cae-exwm-app-runner browse-url-generic-program "Chrome")
@@ -308,7 +310,7 @@
         "s-d" (cae-exwm-app-runner "discord" "Discord")
         "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
         "s-s" (cae-exwm-app-runner "signal-desktop" "Signal")
-        "s-<return>" (cae-exwm-app-runner "kitty" "kitty")))
+        "s-<return>" (cae-exwm-app-runner "kitty" "kitty" insert)))
 
 (after! treemacs
   (when (modulep! :completion vertico)
