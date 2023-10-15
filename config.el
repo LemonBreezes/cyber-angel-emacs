@@ -272,6 +272,7 @@
         ("^\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top)
         ("*helm " :ignore t)
+        ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
     (after! embark
