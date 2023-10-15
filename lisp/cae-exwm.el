@@ -1,6 +1,6 @@
 ;;; lisp/cae-exwm.el -*- lexical-binding: t; -*-
 
-(defvar cae-exwm-evil-initial-state-alist
+(setq exwm-evil-initial-state-alist
   '(("kitty" . insert)))
 
 (defun cae-exwm-exit-floating-mode-h ()
