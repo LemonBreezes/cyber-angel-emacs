@@ -212,6 +212,8 @@
 
   (defvar cae-window-timeout-timer nil)
   (defvar cae-window-timeout)
+  (when (member cae-window-timeout-timer timer-list)
+    (cancel-timer cae-window-timeout-timer))
   (setq cae-window-timeout-timer
         (run-at-time 0.05 0.05
                      (cae-defun cae-timeout-windows ()
