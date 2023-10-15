@@ -513,7 +513,6 @@
     ;; there are errors.
     (setq compilation-scroll-output t))
 
-
   (after! tramp
     (setq tramp-use-scp-direct-remote-copying t
           tramp-allow-unsafe-temporary-files t)
