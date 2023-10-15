@@ -99,15 +99,17 @@
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-newest-download (_)
-  (let ((newest-file (-max-by #'file-newer-than-file-p
-                              (cl-remove-if
-                               (lambda (file)
-                                 (or (string-prefix-p "." (file-name-nondirectory file))
-                                     (file-directory-p file)))
-                               (cl-union (directory-files "~/Downloads/" t)
-                                         (directory-files "~/" t))))))
-    (dired (file-name-directory newest-file))
-    (dired-goto-file newest-file)))
+  (if-let* ((downloads (cl-remove-if
+                        (lambda (file)
+                          (or (string-prefix-p "." (file-name-nondirectory file))
+                              (file-directory-p file)))
+                        (cl-union (directory-files "~/Downloads/" t)
+                                  (directory-files "~/" t))))
+            (newest-file (-max-by #'file-newer-than-file-p downloads)))
+      (progn
+        (dired (file-name-directory newest-file))
+        (dired-goto-file newest-file))
+    (dired "~/Downloads/")))
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-project-bookmarks (_)
