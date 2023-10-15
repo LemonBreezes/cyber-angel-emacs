@@ -1051,7 +1051,7 @@
     (load! "lisp/cae-ido"))
 
   (after! yasnippet
-    (setq yas-triggers-in-field t     ;Allow nested snippets.
+    (setq yas-triggers-in-field t       ;Allow nested snippets.
           yas-trigger-symbol " →"))
 
   (use-package! dabbrev
