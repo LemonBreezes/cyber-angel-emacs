@@ -154,11 +154,6 @@ expansion occurs within the parent Emacs session.")
       (when window (apply oldfun window args)))
     (advice-add #'select-window :around #'+exwm-select-window-a)
 
-    (defun +exwm-exit-floating-mode-h ()
-      (when (string= exwm-class-name "love")
-        (exwm-floating--unset-floating (exwm--buffer->id (window-buffer)))))
-    (add-hook 'exwm-manage-finish-hook #'+exwm-exit-floating-mode-h)
-
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
       outline-minor-mode-highlight nil)
@@ -203,8 +198,7 @@ expansion occurs within the parent Emacs session.")
 
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
-      (load! "+auto-persp")))
-  )
+      (load! "+auto-persp"))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
