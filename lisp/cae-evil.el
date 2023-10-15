@@ -167,6 +167,8 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
+(advice-add #'yas-expand-snippet :after #'evil-insert-state)
+
 (after! evil-org
   (map! :map evil-org-mode-map
         :i "C-u" #'cae-evil-org-delete-back-to-indentation)
