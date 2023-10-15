@@ -167,7 +167,9 @@
          :i "C-n" nil
          :i "C-p" nil)))
 
-(advice-add #'yas-expand-snippet :after #'evil-insert-state)
+(advice-add #'yas-expand-snippet :after
+            (cae-defun cae-evil-insert-state-a (&rest _)
+              (evil-insert-state)))
 
 (after! evil-org
   (map! :map evil-org-mode-map
