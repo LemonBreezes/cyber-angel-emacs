@@ -169,7 +169,7 @@
 
 (advice-add #'yas-expand-snippet :after
             (cae-defun cae-evil-insert-state-a (&rest _)
-              (evil-insert-state)))
+              (call-interactively #'evil-insert)))
 
 (after! evil-org
   (map! :map evil-org-mode-map
