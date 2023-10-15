@@ -216,11 +216,13 @@
         (run-at-time 0.05 0.05
                      (cae-defun cae-timeout-windows ()
                        (dolist (window (+popup-windows))
-                         (when (and (window-parameter window 'timeout)
-                                    (window-parameter window 'creation-time)
-                                    (> (window-parameter window 'timeout)
-                                       (- (float-time)
-                                          (window-parameter window 'creation-time))))
+                         (when (and
+                                (window-live-p window)
+                                (window-parameter window 'timeout)
+                                (window-parameter window 'creation-time)
+                                (> (window-parameter window 'timeout)
+                                   (- (float-time)
+                                      (window-parameter window 'creation-time))))
                            (delete-window window))))))
 
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
