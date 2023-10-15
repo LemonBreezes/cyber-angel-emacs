@@ -10,6 +10,7 @@
 (defun cae-exwm-evil-use-initial-state-h ()
   (when-let ((state (alist-get exwm-class-name cae-exwm-evil-initial-state-alist
                                nil nil #'string=)))
+    (+log state)
     (pcase state
       ('normal (exwm-evil-normal-state))
       ('insert (exwm-evil-insert)))))
