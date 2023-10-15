@@ -54,8 +54,8 @@ expansion occurs within the parent Emacs session.")
                    ;; Bind "s-&" to launch applications ('M-&' also works if the output
                    ;; buffer does not bother you).
                    ([?\s-&] . (lambda (command)
-		                (interactive (list (read-shell-command "$ ")))
-		                (start-process-shell-command command nil command)))
+                                (interactive (list (read-shell-command "$ ")))
+                                (start-process-shell-command command nil command)))
                    ([?\s-1] . +workspace/switch-to-0)
                    ([?\s-2] . +workspace/switch-to-1)
                    ([?\s-3] . +workspace/switch-to-2)
@@ -83,8 +83,8 @@ expansion occurs within the parent Emacs session.")
                    ;; Bind "s-&" to launch applications ('M-&' also works if the output
                    ;; buffer does not bother you).
                    ([?\s-&] . (lambda (command)
-		                (interactive (list (read-shell-command "$ ")))
-		                (start-process-shell-command command nil command)))
+                                (interactive (list (read-shell-command "$ ")))
+                                (start-process-shell-command command nil command)))
                    ,@(when (or (modulep! :cae helm)
                                (modulep! :completion helm))
                        '(([?\s-d] . helm-run-external-command)))))))
