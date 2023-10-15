@@ -172,8 +172,6 @@
 
 ;;;###autoload
 (defun cae-yasnippet-capf ()
-  (if (or (not (char-before))
-          (eq (char-syntax (char-before))
-              ?\s))
-      (call-interactively #'+default/insert-snippet)
-    (call-interactively #'yasnippet-capf)))
+  (if (thing-at-point-looking-at "\\(?:\\sw\\|\\s_\\)+")
+      (call-interactively #'yasnippet-capf)
+    (call-interactively #'+default/insert-snippet)))
