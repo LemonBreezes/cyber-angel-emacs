@@ -121,7 +121,7 @@
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
-       ;;exwm
+       exwm
        dired
        lisp
        misc-applications
