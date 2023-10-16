@@ -479,7 +479,7 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-kill-current-buffer ()
   (interactive)
   (when-let (proc (get-buffer-process (current-buffer)))
-    (kill-process proc))
+    (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
 
 ;;(defun cae-cycle-spacing ()
