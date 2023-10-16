@@ -48,7 +48,7 @@
         corfu-auto-delay 0.05
         corfu-auto-prefix 1
         corfu-on-exact-match nil
-        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt t)
+        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt 'valid)
         tab-always-indent 'complete
         tab-first-completion 'eol)
   (after! corfu-quick
