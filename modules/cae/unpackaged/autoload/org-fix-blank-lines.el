@@ -49,7 +49,7 @@ exist after each headings's drawers."
 (defun cae-unpackaged-org-fix-all-blank-lines ()
   (unless (and (buffer-file-name)
                (file-in-directory-p (buffer-file-name) doom-emacs-dir)
-               (string-match-p "doom-emacs" (project-name (project-current))))
+               (string-match-p "doom.*emacs" (project-name (project-current))))
     (ignore-errors (cae-unpackaged-org-fix-blank-lines '(4)))))
 
 ;;;###autoload
