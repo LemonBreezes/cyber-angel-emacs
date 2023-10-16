@@ -32,7 +32,8 @@
 (defvar cae-init-email-enabled-p t)
 (defvar cae-init-term-enabled-p t)
 
-(setq evil-undo-system 'undo-fu)
+(setq evil-undo-system 'undo-fu
+      +corfu-completion-styles '(orderless basic))
 
 (doom! :completion
        (vertico +icons)
