@@ -45,9 +45,7 @@
 (after! corfu
   (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
-        ;; Personally, I'm in the habbit of hitting `SPC' when the Corfu popup
-        ;; is open and I want to insert a newline character.
-        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt 'valid)
+        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt t)
         tab-always-indent 'complete
         tab-first-completion 'eol)
   (after! corfu-quick
@@ -58,8 +56,9 @@
           :ig "RET" nil
           :ig "<return>" nil))
 
-  ;; Fish completions are too slow for on-key completion.
-  (setq-hook! 'fish-completion-mode-hook corfu-auto nil)
+  ;; Fish completions for `emerge' are too slow for on-key completion.
+  (when (executable-find "emerge")
+    (setq-hook! 'fish-completion-mode-hook corfu-auto nil))
 
   (defun cae-corfu-quit ()
     (interactive)
@@ -85,11 +84,6 @@
 
 (add-hook! (org-mode markdown-mode)
   (add-to-list 'completion-at-point-functions #'cape-elisp-block))
-
-(when (modulep! :lang org)
-  (use-package! org-block-capf
-    :defer t :init
-    (add-hook 'org-mode-hook #'org-block-capf-add-to-completion-at-point-functions)))
 
 ;; This way, we don't have to press RET twice in Eshell.
 (advice-add #'corfu-insert :after #'corfu-send-shell)
