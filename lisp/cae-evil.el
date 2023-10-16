@@ -166,7 +166,13 @@
           :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
-         :i "C-p" nil)))
+         :i "C-p" nil))
+  (after! corfu
+    (map! :map corfu-map
+          :i "C-u" nil
+          :i "C-d" nil
+          :i "C-f" nil
+          :i "C-b" nil)))
 
 (advice-add #'yas-expand-snippet :after
             (cae-defun cae-evil-insert-state-a (&rest _)
