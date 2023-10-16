@@ -78,6 +78,7 @@
        ;;grammar
 
        :tools
+       (debugger +lsp)
        direnv
        editorconfig
        (eval +overlay)
