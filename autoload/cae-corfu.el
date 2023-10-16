@@ -48,7 +48,10 @@
 ;;;###autoload
 (defun cape-lsp ()
   (interactive)
-  (cape-interactive #'lsp-completion-at-point))
+  (cond ((and (modulep! :tools lsp)
+              (not (modulep! :tools lsp +eglot)))
+         (cape-interactive #'lsp-completion-at-point))
+        (t (cape-interactive #'eglot-completion-at-point))))
 
 ;;;###autoload
 (defun cae-yasnippet-capf ()
