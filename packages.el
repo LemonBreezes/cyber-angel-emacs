@@ -109,7 +109,3 @@
 
 ;;; Autocompletion
 (package! consult-yasnippet)
-
-;; cae-corfu.el
-(when (modulep! :lang org)
-  (package! org-block-capf :recipe (:host github :repo "xenodium/org-block-capf")))
