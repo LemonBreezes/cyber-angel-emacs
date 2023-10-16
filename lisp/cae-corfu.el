@@ -27,7 +27,7 @@
                     ,(concat "[ " (string char) "]+") t))))
 
 (after! orderless
-  (if (modulep! :completion corfu +split-char)
+  (when (modulep! :completion corfu +split-char)
       ;; So Orderless splits the string into components and then determines the
       ;; matching style for each component. This is all regexp stuff.
       (progn (setq orderless-component-separator
@@ -35,8 +35,7 @@
              (after! corfu
                (setq corfu-separator ?,)
                (map! :map corfu-map
-                     "," #'corfu-insert-separator)))
-    (setq orderless-component-separator " +")))
+                     "," #'corfu-insert-separator)))))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 (add-hook 'minibuffer-exit-hook #'corfu-quit)
