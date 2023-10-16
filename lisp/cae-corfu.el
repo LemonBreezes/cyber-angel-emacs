@@ -28,7 +28,7 @@
 
 (after! orderless
   (when (modulep! :completion corfu +split-char)
-    ;; So Orderless splits the string into components and then determines the
+    ;; Orderless splits the string into components and then determines the
     ;; matching style for each component. This is all regexp stuff.
     (progn (setq orderless-component-separator
                  (cae-orderless-escapable-split-fn ?,))
