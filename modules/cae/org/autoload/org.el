@@ -6,7 +6,8 @@
 If the current command is run with a prefix argument, prevent
 from running."
   (unless (or current-prefix-arg
-              (string-prefix-p "README.org" (buffer-name)))
+              (string-prefix-p "README.org" (buffer-name))
+              (string-match-p "doom-emacs" (project-name (project-current))))
     (org-set-property "CREATED_TIME"
                       (org-timestamp-format
                        (org-timestamp-from-time (current-time) t t)
