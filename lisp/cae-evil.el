@@ -163,7 +163,7 @@
           :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
          :i "C-]" #'cape-lsp
          (:after cape
-          :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
+          :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
          :i "C-p" nil)))
