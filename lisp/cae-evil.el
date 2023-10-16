@@ -168,6 +168,8 @@
          :i "C-n" nil
          :i "C-p" nil))
   (after! corfu
+    ;; I just use `<prior>' and `<next>'. These keybindings conflict with
+    ;; others.
     (map! :map corfu-map
           :i "C-u" nil
           :i "C-d" nil
