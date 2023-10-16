@@ -51,16 +51,13 @@
         tab-first-completion 'eol)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
-          corfu-quick2 (cae-keyboard-kbd "jkl;")))
-  (when (modulep! :completion corfu +tng)
-    (map! :map corfu-map
-          :ig "RET" nil
-          :ig "<return>" nil))
+          corfu-quick2 (cae-keyboard-kbd "jkluionm")))
 
   ;; Fish completions for `emerge' are too slow for on-key completion.
   (when (executable-find "emerge")
     (setq-hook! 'fish-completion-mode-hook corfu-auto nil))
 
+  ;; Glue between Copilot and Corfu.
   (defun cae-corfu-quit ()
     (interactive)
     (let ((copilot-state (and (bound-and-true-p copilot-mode)
@@ -70,12 +67,9 @@
         (copilot-complete))))
   (add-hook 'doom-escape-hook
             (cae-defun cae-corfu-quit-h ()
-              (when (cae-corfu-visible-p)
-                (cae-corfu-quit)
-                t)))
+              (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
   (map! :map corfu-map
-        "C-g" #'cae-corfu-quit)
-  (add-hook 'evil-insert-state-exit-hook #'corfu-quit))
+        [remap corfu-quit] #'cae-corfu-quit))
 
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
