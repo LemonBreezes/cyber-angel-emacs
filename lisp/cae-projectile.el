@@ -20,8 +20,8 @@
             `((,doom-user-dir . 0)
               (,doom-emacs-dir . 0)
               ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-              ("~/src/" . 1)
-              ("~/Documents/" . 1)))
+              ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
+              ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
       (add-to-list 'projectile-globally-ignored-directories
                    (expand-file-name ".local/straight/repos/" user-emacs-directory))
       (unless (or (cl-set-difference projectile-known-projects
