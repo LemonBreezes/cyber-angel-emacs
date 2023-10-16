@@ -31,6 +31,9 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
+;; Evil's `C-v' keybinding is redundant with `C-q'.
+(map! :i "C-v" nil)
+
 ;; I never use `gt' and `gT' for workspace navigation.
 (map! :n "gt" #'tab-bar-switch-to-next-tab
       :n "gT" #'tab-bar-switch-to-prev-tab)
