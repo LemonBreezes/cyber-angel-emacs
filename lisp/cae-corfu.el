@@ -38,7 +38,6 @@
                    "," #'corfu-insert-separator)))))
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
-(add-hook 'minibuffer-exit-hook #'corfu-quit)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t
