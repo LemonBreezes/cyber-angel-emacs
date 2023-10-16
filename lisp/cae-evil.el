@@ -159,7 +159,8 @@
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-s" #'yasnippet-capf
-         :i "C-l" (cape-capf-super #'cape-history #'cape-line)
+         (:after cape
+          :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
          :i "C-]" #'cape-lsp
          (:after cape
           :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
