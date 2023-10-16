@@ -161,7 +161,7 @@
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
-         :i "C-s" #'yasnippet-capf
+         :i "C-s" #'+default/insert-snippet
          (:after cape
           :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
          :i "C-]" #'cape-lsp
