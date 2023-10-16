@@ -32,12 +32,12 @@
       (and (featurep 'corfu-terminal)
            (popon-live-p corfu-terminal--popon))))
 
-;;;###autoload
-(defun cae-cape-line-buffers ()
-  (cl-loop for buf in (buffer-list)
-           if (or (eq major-mode (buffer-local-value 'major-mode buf))
-                  (< (buffer-size buf) (* 1 1024 1024)))
-           collect buf))
+;;;;;###autoload
+;;(defun cae-cape-line-buffers ()
+;;  (cl-loop for buf in (buffer-list)
+;;           if (or (eq major-mode (buffer-local-value 'major-mode buf))
+;;                  (< (buffer-size buf) (* 1 1024 1024)))
+;;           collect buf))
 
 ;;;###autoload
 (defun corfu-send-shell (&rest _)
