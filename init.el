@@ -36,7 +36,7 @@
 
 (doom! :completion
        (vertico +icons)
-       (corfu +orderless +split-char +tng)
+       (corfu +orderless +split-char)
 
        :ui
        doom-dashboard
