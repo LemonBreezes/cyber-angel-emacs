@@ -46,7 +46,6 @@
 (after! corfu
   (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
-        corfu-auto-prefix 1
         corfu-on-exact-match nil
         ;; Personally, I'm in the habbit of hitting `SPC' when the Corfu popup
         ;; is open and I want to insert a newline character.
