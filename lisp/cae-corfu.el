@@ -14,6 +14,7 @@
               ("\1" ,(string char))
               (_ x)))
           piece
+          ;; These are arguments to `replace-regexp-in-string'.
           'fixedcase 'literal)
          'fixedcase 'literal))
       (split-string (replace-regexp-in-string
