@@ -74,9 +74,9 @@
   ;; deleted directory. Of course I do!
   (setq dired-clean-confirm-killing-deleted-buffers nil)
   ;; Let OS decide how to open certain files
-  (when-let (cmd (cond (IS-MAC "open")
-                       (IS-LINUX "xdg-open")
-                       (IS-WINDOWS "start")))
+  (when-let ((cmd (cond (IS-MAC "open")
+                        (IS-LINUX "xdg-open")
+                        (IS-WINDOWS "start"))))
     (setq dired-guess-shell-alist-user
           `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'" ,cmd)
             ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'" ,cmd)
