@@ -60,9 +60,9 @@
                         ((buffer-file-name
                           (marker-buffer pos))))))
         ;; Check if file is in a different directory and if so change to it
-        (when-let ((dir (file-name-directory file)))
-          (unless (file-equal-p dir default-directory)
-            (find-file dir)))
+        (when-let ((dir (file-name-directory file))
+                   (not (file-equal-p dir default-directory)))
+          (find-file dir))
         ;; If not a directory, kill Dirvish and find the file
         (unless (file-directory-p file)
           ;; Copied from `dirvish-find-entry-a'
