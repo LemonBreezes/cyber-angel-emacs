@@ -1115,7 +1115,7 @@
 
 (when cae-init-term-enabled-p
   ;; Enable Fish autocompletion in `read-shell-command'.
-  (advice-add #'shell-completion-vars :after #'fish-completion-mode)
+  (advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
 
   (after! em-glob
     ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
