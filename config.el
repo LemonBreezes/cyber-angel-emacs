@@ -1278,7 +1278,6 @@
     (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying)))
 
 
-
 ;;; Fennel
 
 (add-hook 'fennel-mode-hook #'outline-minor-mode)
