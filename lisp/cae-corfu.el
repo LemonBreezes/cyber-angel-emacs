@@ -27,8 +27,8 @@
                      s 'fixedcase 'literal)
                     ,(concat "[ " (string char) "]+") t))))
 
-(after! orderless
-  (when (modulep! :completion corfu +split-char)
+(when (modulep! :completion corfu +split-char)
+  (after! orderless
     ;; Orderless splits the string into components and then determines the
     ;; matching style for each component. This is all regexp stuff.
     (progn (setq orderless-component-separator
