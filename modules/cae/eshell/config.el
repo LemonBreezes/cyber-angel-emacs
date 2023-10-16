@@ -55,11 +55,6 @@
         (symbol-function #'eshell/emacs))
   (unintern 'eshell/emacs))
 
-(add-hook 'eshell-mode-hook
-          (cae-defun cae-eshell-set-up-autocompletion ()
-            (add-hook 'completion-at-point-functions
-                      #'cape-file nil t)))
-
 ;; Expand abbreviations before parsing input.
 (advice-add 'eshell-send-input :before
             (cae-defun cae-eshell-expand-abbrev-a (&rest _)
