@@ -166,15 +166,7 @@
           :i "C-d" (cape-interactive-capf (cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword)))
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
-         :i "C-p" nil))
-  (after! corfu
-    (map! :map corfu-map
-          ;; I prefer `C-f' and `C-b' for scrolling so that `C-u' still works for
-          ;; deleting lines.
-          :i "C-u" nil
-          :i "C-d" nil
-          :i "C-f" #'corfu-scroll-down
-          :i "C-b" #'corfu-scroll-up)))
+         :i "C-p" nil)))
 
 (advice-add #'yas-expand-snippet :after
             (cae-defun cae-evil-insert-state-a (&rest _)
