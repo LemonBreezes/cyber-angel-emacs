@@ -121,7 +121,7 @@
 
        :cae
        ;;holy
-       (helm)
+       helm
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
