@@ -75,10 +75,5 @@
   ;; Do not try to configure `company-capf' for LSP.
   (setq lsp-completion-provider nil))
 
-;; Text mode
-
-(add-hook! (org-mode markdown-mode)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
-
 ;; This way, we don't have to press RET twice in Eshell.
 (advice-add #'corfu-insert :after #'corfu-send-shell)
