@@ -21,11 +21,14 @@
            (modulep! :completion vertico))
   (remove-hook 'doom-first-input-hook #'helm-mode))
 
+;; Have a fallback completion system.
 (unless (or (modulep! :completion helm)
             (modulep! :completion ivy)
             (modulep! :completion vertico))
   (icomplete-mode +1)
   (icomplete-vertical-mode +1))
+
+;; I was getting an error withoout this.
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
