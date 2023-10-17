@@ -151,7 +151,7 @@
   (map! :map elfeed-show-mode-map
         :ng "o" #'link-hint-open-link
         :map elfeed-search-mode-map
-        :ng "q" #'+elfeed-quit
+        [remap elfeed-search-quit-window] #'+elfeed-quit
         :n "b" #'elfeed-search-browse-url
         :n "m" #'elfeed-toggle-star
         :n "F" #'elfeed-tube-fetch
