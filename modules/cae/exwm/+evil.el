@@ -5,6 +5,15 @@
 (after! evil-snipe
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
+;; Fixes focus being lost from EXWM buffers when switching workspaces or
+;; buffers. This seems to be a problem specific to Evil. and perhaps Doom. There
+;; is probably a more elegant solution but it requires more digging.
+(add-hook 'doom-switch-buffer-hook #'+exwm-refocus-application)
+(add-hook 'doom-switch-window-hook #'+exwm-refocus-application)
+(add-hook 'doom-escape-hook #'+exwm-refocus-application)
+(when (modulep! :ui workspaces)
+  (add-hook 'persp-before-switch-functions #'+exwm-refocus-application))
+
 (use-package! exwm-evil
   :after exwm
   :config
