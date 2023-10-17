@@ -16,7 +16,7 @@
 (add-hook! 'exwm-init-hook
   (load! "lisp/cae-exwm"))
 
-;; Helm is not our main completion system. (Though I love Helm.)
+;; Helm is not our main completion system. (Though I love Helm).
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
   (remove-hook 'doom-first-input-hook #'helm-mode))
