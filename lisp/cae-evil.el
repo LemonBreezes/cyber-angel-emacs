@@ -129,6 +129,7 @@
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
+
 (use-package! evil-visual-mark-mode
   :hook (doom-first-buffer-hook . evil-visual-mark-mode))
 
