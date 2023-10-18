@@ -699,8 +699,7 @@
         regexp-search-ring-max 200)
   (add-hook 'doom-escape-hook
             (cae-defun cae-clean-up-lazy-highlight-h ()
-              (when isearch-lazy-highlight-overlays
-                (lazy-highlight-cleanup t) t))
+              (lazy-highlight-cleanup t))
             -1)
 
   ;; Autokill buffers which have not been displayed for 3 days.
