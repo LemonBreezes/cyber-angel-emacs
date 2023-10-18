@@ -701,6 +701,8 @@
             (cae-defun cae-clean-up-lazy-highlight-h ()
               (lazy-highlight-cleanup t))
             -1)
+  ;; Redundant.
+  (remove-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h)
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
