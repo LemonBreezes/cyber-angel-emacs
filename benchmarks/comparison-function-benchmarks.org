@@ -113,3 +113,17 @@ Old results:
 |     1 | 2.1837288499999996 |        0 |     0.0 |
 |     2 | 2.2947235069999996 |        0 |     0.0 |
 |     3 |        2.468356209 |        0 |     0.0 |
+
+#+begin_src emacs-lisp :tangle :noweb yes
+<<benchmark-setup>>
+(k/benchmark-run-compiled
+ 10000
+ (cl-find (vector ?\r) (vector (vector 'return) (vector ?\r)) :test #'equal)
+ (member (vector ?\r) (list (vector 'return) (vector ?\r))))
+#+end_src
+
+#+RESULTS:
+| form# |       total | gc-count | gc-time |
+|-------+-------------+----------+---------|
+|     1 |  0.00348661 |        0 |     0.0 |
+|     2 | 0.000861914 |        0 |     0.0 |
