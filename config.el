@@ -700,7 +700,8 @@
   (add-hook 'doom-escape-hook
             (cae-defun cae-clean-up-lazy-highlight-h ()
               (when isearch-lazy-highlight-overlays
-                (lazy-highlight-cleanup t) t)))
+                (lazy-highlight-cleanup t) t))
+            -1)
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
