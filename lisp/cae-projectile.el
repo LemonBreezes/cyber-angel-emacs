@@ -2,6 +2,10 @@
 
 (if (locate-library "projectile")
     (after! projectile
+      (advice-add #'projectile-switch-project :before
+                  (cae-defun cae-projectile-update-projects-list (&optional _)
+                    (projectile-discover-projects-in-search-path)))
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
