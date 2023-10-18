@@ -12,11 +12,12 @@
 (define-key key-translation-map (kbd "<backspace> DEL") (kbd "<backspace> SPC"))
 
 ;; Remove redundant `consult-history' keybinding.
-(define-key!
-  :keymaps (append +default-minibuffer-maps
-                   (when (modulep! :editor evil +everywhere)
-                     '(evil-ex-completion-map)))
-  "C-s" nil)                          ;We already have `consult-history' bound
+(when (boundp +default-minibuffer-maps)
+  (define-key!
+    :keymaps (append +default-minibuffer-maps
+                     (when (modulep! :editor evil +everywhere)
+                       '(evil-ex-completion-map)))
+    "C-s" nil))                         ;We already have `consult-history' bound
                                         ;to `M-r' and `M-s'. This way we can use
                                         ;`C-s' to search in the minibuffer.
 
