@@ -321,9 +321,9 @@
           beacon-blink-duration 0.15)
     (beacon-mode +1)
     (add-to-list 'beacon-dont-blink-commands 'doom/escape)
-    (add-hook 'persp-activated-functions
-              (cae-defun cae-beacon-blink-on-workspace-switch (&rest _)
-                (run-at-time 0.01 nil #'beacon-blink-automated)))
+    (add-hook! 'persp-activated-functions
+      (defun cae-beacon-blink-on-workspace-switch (&rest _)
+        (run-at-time 0.01 nil #'beacon-blink-automated)))
     (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
     (after! corfu
       (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
