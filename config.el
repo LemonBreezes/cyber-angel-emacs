@@ -882,9 +882,9 @@
     :defer t :init
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
-    (advice-add #'aas-embark-menu :before
-                (cae-defun cae-aas-load-embark-h ()
-                  (require 'embark)))
+    (defadvice! cae-aas-load-embark-a ()
+      :before #'aas-embark-menu
+      (require 'embark))
     (aas-set-snippets 'global
       ";--" "—"
       ";-." "→"
