@@ -428,10 +428,10 @@ also marks comment with leading whitespace"
 
 (defvar cae-yank-point nil)
 (defvar cae-yank-point-overlays nil)
-(add-hook 'minibuffer-exit-hook
-          (cae-defun cae-yank-on-exit-h ()
-            (dolist (ov cae-yank-point-overlays)
-              (delete-overlay ov))))
+(add-hook! 'minibuffer-exit-hook
+  (defun cae-yank-on-exit-h ()
+    (dolist (ov cae-yank-point-overlays)
+      (delete-overlay ov))))
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
