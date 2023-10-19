@@ -656,7 +656,7 @@
         :n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'+mpc-other-window
         :n "w" #'+mpc-other-window-previous
-        :n "RET" (cae-defun +mpc-play () (interactive) (mpc-select) (mpc-play))
+        :n "RET" #'+mpc-play
         :n "o" #'mpc-goto-playing-song
         :n "C" #'mpc-stop
         :n "i" #'evilem-motion-next-line
