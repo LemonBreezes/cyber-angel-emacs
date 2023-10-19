@@ -18,6 +18,8 @@
            (modulep! :lang org))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
+(package! anzu :recipe
+  (:host github :repo "LemonBreezes/anzu" :branch "expose-anzu-update-timer-to-user"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
