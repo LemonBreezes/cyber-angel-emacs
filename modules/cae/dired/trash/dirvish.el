@@ -95,14 +95,13 @@
         "o-" #'cae-dired-jump
         "op" #'dirvish-side)
 
-  (add-hook! 'find-directory-functions
+  (add-hook! 'find-directory-functions :append
     (defun cae-dired-load-dirvish-h (dir)
       (remove-hook 'find-directory-functions #'cae-dired-load-dirvish-h)
       (require 'dirvish nil t)
       (unless (memq #'dired-noselect find-directory-functions)
         (add-hook 'find-directory-functions #'dired-noselect :append))
-      (dired-noselect dir))
-            t)
+      (dired-noselect dir)))
 
   (setq find-directory-functions
         (delq 'dired-noselect find-directory-functions)))
