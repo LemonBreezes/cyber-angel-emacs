@@ -43,7 +43,7 @@
        doom-dashboard
        hl-todo
        (hydra +childframe)
-       (ligatures +extra +iosevka)
+       ;;(ligatures +extra +iosevka)
        ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
