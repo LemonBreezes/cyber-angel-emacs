@@ -181,11 +181,10 @@
   (after! warnings
     (setq warning-minimum-level :emergency
           warning-minimum-log-level :emergency)
-    (add-hook 'doom-first-file-hook
-              (cae-defun cae-warnings-initialize ()
-                (setq warning-minimum-level :error
-                      warning-minimum-log-level :error))
-              :append))
+    (add-hook! 'doom-first-file-hook :append
+      (defun cae-warnings-initialize ()
+        (setq warning-minimum-level :error
+              warning-minimum-log-level :error))))
 
   (after! alert
     (setq alert-default-style 'libnotify))
