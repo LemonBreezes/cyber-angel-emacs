@@ -1000,9 +1000,9 @@
     ;; This patches around this function not being compatible with Evil when
     ;; `evil-move-beyond-eol' is `nil'. This should probably go into
     ;; `evil-collection'.
-    (advice-add #'beginend-prog-mode-goto-end :before
-                (cae-defun cae-beginend-goto-eol-a (&rest _)
-                  (goto-char (eol)))))
+    (defadvice! cae-beginend-goto-eol-a (&rest _)
+      :before #'beginend-prog-mode-goto-end
+      (goto-char (eol))))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook
