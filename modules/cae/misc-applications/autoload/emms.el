@@ -36,9 +36,9 @@
        (dired (expand-file-name "Artists" emms-source-file-default-directory))))
     ("j" "Currently playing"
      (lambda () (interactive) (dired-jump nil
-                                     (emms-track-get
-                                      (emms-playlist-current-selected-track)
-                                      'name))))]])
+                                          (emms-track-get
+                                           (emms-playlist-current-selected-track)
+                                           'name))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
