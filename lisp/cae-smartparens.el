@@ -60,9 +60,10 @@
         (setq evil-cp-additional-movement-keys
               '(("M-l" . evil-cp-end-of-defun)
                 ("M-h" . evil-cp-beginning-of-defun)))
+        (defun cae-enable-evil-cleverparens-mode ()
+          (evil-cleverparens-mode +1))
         (dolist (mode sp-lisp-modes)
-          (add-hook mode (cae-defun cae-enable-evil-cleverparens-mode ()
-                           (evil-cleverparens-mode +1))))
+          (add-hook mode #'cae-enable-evil-cleverparens-mode))
         (add-hook 'prog-mode-hook #'cae-enable-evil-cleverparens-mode)
 
         :custom ((evil-cleverparens-use-s-and-S nil)
