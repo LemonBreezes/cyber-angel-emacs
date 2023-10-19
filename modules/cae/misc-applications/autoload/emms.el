@@ -19,11 +19,25 @@
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
-   [("v" "VGM" (lambda () (interactive) (dired (expand-file-name "VGM" +misc-applications-music-dir))))
-    ("y" "Youtube Music" (lambda () (interactive) (dired (expand-file-name "Youtube Music" +misc-applications-music-dir))))
-    ("p" "Playlists" (lambda () (interactive) (dired (expand-file-name "Playlists" +misc-applications-music-dir))))
-    ("a" "Anime Music" (lambda () (interactive) (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
-    ("r" "Artists" (lambda () (interactive) (dired (expand-file-name "Artists" emms-source-file-default-directory))))]])
+   [("v" "VGM"
+     (lambda () (interactive)
+       (dired (expand-file-name "VGM" +misc-applications-music-dir))))
+    ("y" "Youtube Music"
+     (lambda () (interactive)
+       (dired (expand-file-name "Youtube Music" +misc-applications-music-dir))))
+    ("p" "Playlists"
+     (lambda () (interactive)
+       (dired (expand-file-name "Playlists" +misc-applications-music-dir))))
+    ("a" "Anime Music"
+     (lambda () (interactive)
+       (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
+    ("r" "Artists"
+     (lambda () (interactive)
+       (dired (expand-file-name "Artists" emms-source-file-default-directory))))
+    ("j" "Currently playing"
+     (lambda () (interactive (dired (emms-track-get
+                                (emms-playlist-current-selected-track)
+                                'name)))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
