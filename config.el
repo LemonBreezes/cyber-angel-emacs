@@ -569,9 +569,9 @@
   (use-package! auto-sudoedit
     :after tramp-sh :config
     (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-    (advice-add #'dirvish-data-for-dir :around
-                (cae-defun cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
-                  (funcall oldfun (tramp-file-local-name dir) buffer setup)))
+    (defadvice! cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
+      :around #'dirvish-data-for-dir
+      (funcall oldfun (tramp-file-local-name dir) buffer setup))
     (auto-sudoedit-mode +1)))
 
 
