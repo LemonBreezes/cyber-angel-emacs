@@ -182,9 +182,9 @@
           :i "C-f" nil
           :i "C-b" nil)))
 
-(advice-add #'yas-expand-snippet :after
-            (cae-defun cae-evil-insert-state-a (&rest _)
-              (call-interactively #'evil-insert)))
+(defadvice! cae-evil-insert-state-a (&rest _)
+  :after #'yas-expand-snippet
+  (call-interactively #'evil-insert))
 
 (after! evil-org
   (map! :map evil-org-mode-map
