@@ -741,10 +741,10 @@
 
   (use-package! avy
     :defer t :init
-    (advice-add #'avy-goto-end-of-line :around
-                (cae-defun cae-avy-use-post-style-a (oldfun &rest args)
-                  (let ((avy-style 'post))
-                    (apply oldfun args))))
+    (defadvice! cae-avy-use-post-style-a (oldfun &rest args)
+      :around #'avy-goto-end-of-line
+      (let ((avy-style 'post))
+        (apply oldfun args)))
     :config
     (setq avy-timeout-seconds 0.4
           avy-all-windows t
