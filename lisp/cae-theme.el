@@ -153,12 +153,12 @@
 
 ;; Cache the theme times so that we can set the theme on startup without loading
 ;; the circadian package.
-(add-hook 'kill-emacs-hook
-          (cae-defun cae-theme-store-circadian-times-h ()
-            (when (require 'circadian nil t)
-              (doom-store-put 'circadian-themes (circadian-themes-parse))
-              (doom-store-put 'circadian-sunset (circadian-sunset))
-              (doom-store-put 'circadian-sunrise (circadian-sunrise)))))
+(add-hook! 'kill-emacs-hook
+  (defun cae-theme-store-circadian-times-h ()
+    (when (require 'circadian nil t)
+      (doom-store-put 'circadian-themes (circadian-themes-parse))
+      (doom-store-put 'circadian-sunset (circadian-sunset))
+      (doom-store-put 'circadian-sunrise (circadian-sunrise)))))
 
 ;; Set the theme on startup.
 (if (and (doom-store-get 'circadian-themes)
