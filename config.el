@@ -552,9 +552,9 @@
           (delq 'font-lock-string-face spell-fu-faces-include)))
 
   (after! spell-fu
-    (add-hook 'nxml-mode-hook
-              (cae-defun cae-disable-spell-fu-h ()
-                (spell-fu-mode -1))))
+    (add-hook! 'nxml-mode-hook
+      (defun cae-disable-spell-fu-h ()
+        (spell-fu-mode -1))))
 
   (use-package! 0x0
     :defer t :init
