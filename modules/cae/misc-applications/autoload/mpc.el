@@ -81,3 +81,9 @@
            finally (goto-char (marker-position
                                (alist-get (window-buffer (selected-window))
                                           +mpc-buf-pos-alist)))))
+
+;;;###autoload
+(defun +mpc-play ()
+  (interactive)
+  (mpc-select)
+  (mpc-play))
