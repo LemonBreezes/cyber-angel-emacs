@@ -165,7 +165,7 @@
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-s" (cmd! ()
-                        (require 'consult-yasnippet)
+                        (require 'consult-yasnippet nil t)
                         (let ((consult-yasnippet-use-thing-at-point t))
                           (call-interactively #'+default/insert-snippet)))
          (:after cape
