@@ -548,11 +548,11 @@
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
-  (advice-add #'zone-matrix :before
-              (cae-defun +zone-matrix-setup-buffer-appearance ()
-                (setq-local nobreak-char-display nil)
-                (+misc-applications-hide-cursor-h)
-                (face-remap-add-relative 'default :background "black")))
+  (defadvice! +zone-matrix-setup-buffer-appearance ()
+    :before #'zone-matrix
+    (setq-local nobreak-char-display nil)
+    (+misc-applications-hide-cursor-h)
+    (face-remap-add-relative 'default :background "black"))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
   (advice-add #'zone :around #'+zone-switch-to-root-window-a)
