@@ -55,9 +55,9 @@
   (unintern 'eshell/emacs))
 
 ;; Expand abbreviations before parsing input.
-(advice-add 'eshell-send-input :before
-            (cae-defun cae-eshell-expand-abbrev-a (&rest _)
-              (expand-abbrev)))
+(defadvice! cae-eshell-expand-abbrev-a (&rest _)
+  :before #'eshell-send-input
+  (expand-abbrev))
 
 (use-package eshell-bookmark
   :defer t :init
