@@ -40,9 +40,6 @@
 
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 
-(after! cape
-  (setq cape-dabbrev-check-other-buffers t
-        cape-line-buffer-function #'cae-cape-line-buffers))
 (after! corfu
   (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
         corfu-auto-delay 0.05
