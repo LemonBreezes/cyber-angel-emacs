@@ -100,10 +100,10 @@
 
 (when (modulep! :editor lispy)
   (after! lispy
-    (add-hook 'doom-escape-hook
-              (cae-defun cae-lispy-clear-iedit-h ()
-                (when (bound-and-true-p iedit-mode)
-                  (iedit-mode -1) t)))
+    (add-hook! 'doom-escape-hook
+      (defun cae-lispy-clear-iedit-h ()
+        (when (bound-and-true-p iedit-mode)
+          (iedit-mode -1) t)))
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
           lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
