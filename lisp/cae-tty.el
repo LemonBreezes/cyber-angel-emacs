@@ -32,25 +32,25 @@
         (apply #'pdftotext-mode args)))))
 
 ;; Automatically enable & disable the posframe when using multiple client frames.
-(add-hook! 'pre-command-hook
-  (defun cae-tty-setup-posframe-h ()
-    "Setup frame for TTY."
-    (if (cae-display-graphic-p)
-        (progn (when (and (boundp 'vertico-posframe-mode)
-                          (not vertico-posframe-mode))
-                 (vertico-posframe-mode +1))
-               (when (and (boundp 'helm-display-function)
-                          (not (eq helm-display-function #'helm-posframe-display)))
-                 (posframe-delete-all)
-                 (helm-posframe-enable)))
-      (when (bound-and-true-p vertico-posframe-mode)
-        (vertico-posframe-mode -1))
-      (when (and (boundp 'helm-display-function)
-                 (eq helm-display-function #'helm-posframe-display))
-        (helm-posframe-disable)))))
-
-(add-hook! 'doom-switch-frame-hook
-  (defun cae-tty-setup-frame-h ()
-    (unless (cae-display-graphic-p)
-      (when (bound-and-true-p corfu-mode)
-        (corfu-terminal-mode +1)))))
+;;(add-hook! 'pre-command-hook
+;;  (defun cae-tty-setup-posframe-h ()
+;;    "Setup frame for TTY."
+;;    (if (cae-display-graphic-p)
+;;        (progn (when (and (boundp 'vertico-posframe-mode)
+;;                          (not vertico-posframe-mode))
+;;                 (vertico-posframe-mode +1))
+;;               (when (and (boundp 'helm-display-function)
+;;                          (not (eq helm-display-function #'helm-posframe-display)))
+;;                 (posframe-delete-all)
+;;                 (helm-posframe-enable)))
+;;      (when (bound-and-true-p vertico-posframe-mode)
+;;        (vertico-posframe-mode -1))
+;;      (when (and (boundp 'helm-display-function)
+;;                 (eq helm-display-function #'helm-posframe-display))
+;;        (helm-posframe-disable)))))
+;;
+;;(add-hook! 'doom-switch-frame-hook
+;;  (defun cae-tty-setup-frame-h ()
+;;    (unless (cae-display-graphic-p)
+;;      (when (bound-and-true-p corfu-mode)
+;;        (corfu-terminal-mode +1)))))
