@@ -268,7 +268,7 @@
                                         ;in
                                         ;https://github.com/minad/consult/issues/363
     "M-s r" #'consult-ripgrep
-    "M-s D" #'consult-locate)
+    "M-s c" #'consult-locate)
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command)
   (map! :map help-map "TAB" #'consult-info)
