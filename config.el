@@ -1030,12 +1030,12 @@
 
   (use-package! edit-indirect
     :defer t :config
-    (add-hook 'edit-indirect-after-creation-hook
-              (cae-defun cae-edit-indirect-major-mode-fallback-h ()
-                (when (eq major-mode 'fundamental-mode)
-                  (funcall (buffer-local-value
-                            'major-mode
-                            (overlay-buffer edit-indirect--overlay)))))))
+    (add-hook! 'edit-indirect-after-creation-hook
+      (defun cae-edit-indirect-major-mode-fallback-h ()
+        (when (eq major-mode 'fundamental-mode)
+          (funcall (buffer-local-value
+                    'major-mode
+                    (overlay-buffer edit-indirect--overlay)))))))
 
   (use-package! zop-to-char
     :defer t :init
