@@ -203,57 +203,6 @@
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
 
-(setq evil-fold-list
-  `(((vdiff-mode)
-     :open-all   vdiff-open-all-folds
-     :close-all  vdiff-close-all-folds
-     :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
-     :open       ,(lambda () (call-interactively 'vdiff-open-fold))
-     :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
-     :close      ,(lambda () (call-interactively 'vdiff-close-fold)))
-    ((vdiff-3way-mode)
-     :open-all   vdiff-open-all-folds
-     :close-all  vdiff-close-all-folds
-     :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
-     :open       ,(lambda () (call-interactively 'vdiff-open-fold))
-     :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
-     :close      ,(lambda () (call-interactively 'vdiff-close-fold)))
-    ((hs-minor-mode)
-     :open-all   hs-show-all
-     :close-all  hs-hide-all
-     :toggle     hs-toggle-hiding
-     :open       hs-show-block
-     :open-rec   nil
-     :close      hs-hide-block)
-    ((hide-ifdef-mode)
-     :open-all   show-ifdefs
-     :close-all  hide-ifdefs
-     :toggle     nil
-     :open       show-ifdef-block
-     :open-rec   nil
-     :close      hide-ifdef-block)
-    ((outline-mode
-      outline-minor-mode
-      org-mode
-      markdown-mode)
-     :open-all   show-all
-     :close-all  ,(lambda ()
-                    (with-no-warnings (hide-sublevels 1)))
-     :toggle     outline-toggle-children
-     :open       ,(lambda ()
-                    (with-no-warnings
-                      (show-entry)
-                      (show-children)))
-     :open-rec   show-subtree
-     :close      hide-subtree)
-    ((origami-mode)
-     :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
-     :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
-     :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
-     :open       ,(lambda () (origami-open-node (current-buffer) (point)))
-     :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
-     :close      ,(lambda () (origami-close-node (current-buffer) (point))))))
-
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
