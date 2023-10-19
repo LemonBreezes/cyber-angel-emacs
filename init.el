@@ -59,7 +59,7 @@
        format
        snippets
        multiple-cursors
-       fold
+       ;;fold
        (evil +everywhere)
        lispy
 
