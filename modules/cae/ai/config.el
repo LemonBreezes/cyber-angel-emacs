@@ -93,12 +93,12 @@
     (when (copilot--overlay-visible)
       (copilot-clear-overlay) t))
   (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
-  (add-to-list 'copilot-disable-predicates
-               (cae-defun cae-disable-copilot-in-gptel-p ()
-                 (bound-and-true-p gptel-mode)))
-  (add-to-list 'copilot-disable-predicates
-               (cae-defun cae-disable-copilot-in-dunnet-p ()
-                 (bound-and-true-p dun-mode)))
+  (add-hook! 'copilot-disable-predicates
+    (defun cae-disable-copilot-in-gptel-p ()
+      (bound-and-true-p gptel-mode)))
+  (add-hook! 'copilot-disable-predicates
+    (defun cae-disable-copilot-in-dunnet-p ()
+      (bound-and-true-p dun-mode)))
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
   (when (modulep! :editor multiple-cursors)
