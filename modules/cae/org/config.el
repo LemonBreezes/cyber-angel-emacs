@@ -11,10 +11,10 @@
 (add-hook '+org-exit-src-code-hook #'ws-butler-trim-eob-lines)
 
 (advice-add #'org-insert-heading :after #'cae-org-set-created-timestamp)
-(add-hook 'org-capture-mode-hook
-          (cae-defun org-capture--insert-timestamp ()
-            (when (org-at-heading-p)
-              (cae-org-set-created-timestamp))))
+(add-hook! 'org-capture-mode-hook
+  (defun org-capture--insert-timestamp ()
+    (when (org-at-heading-p)
+      (cae-org-set-created-timestamp))))
 
 ;; I use a split keyboard and want `DEL' to clear priorities.
 (advice-add #'org-priority :around
