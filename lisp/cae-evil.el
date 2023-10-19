@@ -164,9 +164,9 @@
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
-         :i "C-s" #'+default/insert-snippet
          (:after cape
-          :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
+          :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line))
+          :i "C-s" (cape-interactive-capf (cape-company-to-capf #'company-yasnippet)))
          :i "C-]" #'cape-lsp
          (:after cape
           :i "C-r" (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
