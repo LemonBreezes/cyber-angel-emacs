@@ -53,16 +53,15 @@
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
-  (advice-add #'shell-maker-async-shell-command
-              :around
-              (cae-defun cae-ai-ignore-ld-library-path-a (oldfun &rest args)
-                ;; This is a hack to prevent the ChatGPT shell from inheriting
-                ;; the LD_LIBRARY_PATH variable in projects where I override
-                ;; that.
-                (let ((process-environment (cl-remove-if
-                                            (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
-                                            process-environment)))
-                  (apply oldfun args))))
+  (defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+    :around #'shell-maker-async-shell-command
+    ;; This is a hack to prevent the ChatGPT shell from inheriting
+    ;; the LD_LIBRARY_PATH variable in projects where I override
+    ;; that.
+    (let ((process-environment (cl-remove-if
+                                (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
+                                process-environment)))
+      (apply oldfun args)))
   (define-key chatgpt-shell-mode-map (kbd "C-d") #'cae-ai-chatgpt-quit-or-delete-char)
   (map! :map chatgpt-shell-mode-map
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
