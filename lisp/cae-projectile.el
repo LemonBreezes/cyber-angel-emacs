@@ -109,6 +109,6 @@
                                     (project-find-dir "Find directory")
                                     (cae-unpackaged-magit-status "Magit status" "g")
                                     (project-eshell "Eshell")))
-    (advice-add #'project-switch-project :before
-                (cae-defun cae-project-switch-action-a (dir)
-                  (+workspaces-switch-to-project-h dir)))))
+    (defadvice! cae-project-switch-action-a (dir)
+      :before #'projectile-switch-project
+      (+workspaces-switch-to-project-h dir))))
