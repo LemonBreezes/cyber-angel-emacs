@@ -102,9 +102,9 @@
   (when (modulep! :editor snippets)
     (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
   (when (modulep! :editor multiple-cursors)
-    (add-to-list 'copilot-disable-predicates
-                 (cae-defun cae-multiple-cursors-active-p ()
-                   (bound-and-true-p multiple-cursors-mode))))
+    (add-hook! 'copilot-disable-predicates
+      (defun cae-multiple-cursors-active-p ()
+        (bound-and-true-p multiple-cursors-mode))))
   (after! copilot-balancer
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
     (after! midnight
