@@ -39,10 +39,9 @@
                           (set mode-var nil)))))))))
 
   ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
-  (advice-add #'eat-eshell-char-mode
-              :after
-              (cae-defun cae-eat-eshell-print-char-mode-hint-a ()
-                (message "Type M-RET/C-M-m to exit char mode."))))
+  (defadvice! cae-eat-eshell-print-char-mode-hint-a ()
+    :after #'eat-eshell-char-mode
+    (message "Type M-RET/C-M-m to exit char mode.")))
 
 (setq-hook! 'eshell-mode-hook
   imenu-generic-expression
