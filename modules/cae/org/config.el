@@ -17,11 +17,11 @@
       (cae-org-set-created-timestamp))))
 
 ;; I use a split keyboard and want `DEL' to clear priorities.
+(defun cae-return-del-as-spc-a (ret)
+  (if (memq ret '(?\C-? ?\C-h)) ?\s ret))
 (defadvice! cae-allow-del-to-clear-priority-a (oldfun &rest args)
   :around #'org-priority
-  (advice-add #'read-char-exclusive :filter-return
-              (cae-defun cae-return-del-as-spc-a (ret)
-                (if (memq ret '(?\C-? ?\C-h)) ?\s ret)))
+  (advice-add #'read-char-exclusive :filter-return #'cae-return-del-as-spc-a)
   (unwind-protect (apply oldfun args)
     (advice-remove #'read-char-exclusive #'cae-return-del-as-spc-a)))
 
