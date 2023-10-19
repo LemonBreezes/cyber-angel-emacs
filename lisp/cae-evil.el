@@ -166,7 +166,7 @@
          :i "C-f" #'cape-file
          (:after cape
           :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line))
-          :i "C-s" #'+default/insert-snippet)
+          :i "C-s" #'yasnippet-capf)
          :i "C-]" #'cape-lsp
          (:after cape
           :i "C-r" (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
