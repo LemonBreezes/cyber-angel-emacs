@@ -696,10 +696,9 @@
         ;; we can fuzzy search the history with Consult.
         search-ring-max 200
         regexp-search-ring-max 200)
-  (add-hook 'doom-escape-hook
-            (cae-defun cae-clean-up-lazy-highlight-h ()
-              (lazy-highlight-cleanup t))
-            -1)
+  (add-hook! 'doom-escape-hook :depth -1
+    (defun cae-clean-up-lazy-highlight-h ()
+      (lazy-highlight-cleanup t)))
   ;; Redundant.
   (remove-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h)
 
