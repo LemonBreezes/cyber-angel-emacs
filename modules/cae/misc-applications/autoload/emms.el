@@ -36,6 +36,7 @@
        (dired (expand-file-name "Artists" emms-source-file-default-directory))))
     ("j" "Currently playing"
      (lambda () (interactive)
+       (emms-player-mpd-sync-from-mpd)
        (dired-jump nil (emms-track-get
                         (emms-playlist-current-selected-track) 'name))))]])
 
