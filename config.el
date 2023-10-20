@@ -335,7 +335,6 @@
   (use-package! outline-minor-faces
     :defer t :init
     (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
-  ;; Comp
 
   (use-package indent-bars
     :custom
