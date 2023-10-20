@@ -46,7 +46,7 @@
     (comint-send-input))))
 
 ;;;###autoload
-(defun cape-lsp ()
+(defun cae-cape-lsp ()
   (interactive)
   (cond ((and (modulep! :tools lsp)
               (not (modulep! :tools lsp +eglot)))
