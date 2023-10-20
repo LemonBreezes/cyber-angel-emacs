@@ -100,8 +100,7 @@
       (bound-and-true-p dun-mode))
     (defun cae-multiple-cursors-active-p ()
       (bound-and-true-p multiple-cursors-mode)))
-  (when (modulep! :editor snippets)
-    (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay))
+  (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)
   (after! copilot-balancer
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
     (after! midnight
