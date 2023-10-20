@@ -1110,7 +1110,10 @@
     (advice-add #'register-preview :override #'consult-register-window))
 
   (after! helm
-    (setq helm-split-window-default-side 'right)))
+    (setq helm-split-window-default-side 'right))
+
+  (after! corfu
+    (setq corfu-auto-delay 0.2)))
 
 
 ;;; Term
