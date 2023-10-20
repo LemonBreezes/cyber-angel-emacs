@@ -173,6 +173,7 @@
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
          :i "C-p" nil))
+
   (after! corfu
     ;; I just use `<prior>' and `<next>'. These keybindings conflict with
     ;; others.
