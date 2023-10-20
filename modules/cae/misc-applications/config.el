@@ -24,6 +24,7 @@
     ("standalone-apps" "t")
     ("insert" "i")
     ("music" "m")
+    ("quotes" "q")
     ("helm" "h")))
 
 (mapc (lambda (app-type)
