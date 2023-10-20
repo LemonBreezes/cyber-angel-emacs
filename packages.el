@@ -23,8 +23,7 @@
            (modulep! :editor snippets))
   (package! yasnippet-capf :recipe
     (:host github
-     :repo "LemonBreezes/yasnippet-capf"
-     :branch "allow-interactive-completion-without-prefix")))
+     :repo "LemonBreezes/yasnippet-capf" :branch "cae")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
