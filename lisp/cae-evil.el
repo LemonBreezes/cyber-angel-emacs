@@ -160,16 +160,24 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
+(defun cae-cape-history-or-line ()
+  (interactive)
+  (cape-capf-super #'cape-history #'cape-line))
+
+(defun cae-cape-keyword-or-dict ()
+  (interactive)
+  (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
+
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          (:after cape
-          :i "C-l" (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line))
+          :i "C-l" #'cae-cape-history-or-line
           :i "C-s" #'yasnippet-capf)
          :i "C-]" #'cape-lsp
          (:after cape
-          :i "C-r" (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
+          :i "C-r" #'cae-cape-keyword-or-dict)
          :i "s" #'cape-elisp-symbol
          :i "C-n" nil
          :i "C-p" nil))
