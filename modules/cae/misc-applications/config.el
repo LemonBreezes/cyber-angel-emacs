@@ -810,3 +810,9 @@
         helm-emms-default-sources '(helm-source-emms-files
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
+
+;;; Quotes
+
+(use-package! fortune
+  :defer t :config
+  (setq fortune-dir "/usr/share/fortune/"))
