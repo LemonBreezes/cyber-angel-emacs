@@ -434,6 +434,7 @@
                                         ; option was compatible with
                                         ; `auto-sudoedit'.
         what-cursor-show-names t)
+
   (setq-default show-trailing-whitespace t) ; https://idiomdrottning.org/show-trailing-whitespace
 
   (after! cus-edit
