@@ -166,7 +166,7 @@
 
 (defun cae-cape-keyword-or-dict ()
   (interactive)
-  (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict)))
+  (cape-capf-super #'cape-keyword #'cape-dict))
 
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
