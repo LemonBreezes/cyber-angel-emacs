@@ -1113,7 +1113,7 @@
     (setq helm-split-window-default-side 'right))
 
   (after! corfu
-    (setq corfu-auto-delay 0.2)))
+    (setq corfu-auto-delay 0.05)))
 
 
 ;;; Term
