@@ -160,13 +160,11 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
-(defun cae-cape-history-or-line ()
-  (interactive)
-  (cape-capf-super #'cape-history #'cape-line))
-
-(defun cae-cape-keyword-or-dict ()
-  (interactive)
-  (cape-capf-super #'cape-keyword #'cape-dict))
+(after! cape
+  (defalias 'cae-cape-history-or-line
+    (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
+  (defalias 'cae-cape-keyword-or-dict
+    (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict))))
 
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
