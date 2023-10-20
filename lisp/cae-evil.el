@@ -173,7 +173,7 @@
          (:after cape
           :i "C-l" #'cae-cape-history-or-line
           :i "C-s" #'yasnippet-capf)
-         :i "C-]" #'cape-lsp
+         :i "C-]" #'cae-cape-lsp
          (:after cape
           :i "C-r" #'cae-cape-keyword-or-dict)
          :i "s" #'cape-elisp-symbol
