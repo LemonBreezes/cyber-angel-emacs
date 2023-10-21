@@ -86,7 +86,8 @@
   (setq eshell-highlight-prompt nil
         eshell-prompt-function #'epe-theme-lambda)
   (after! eshell-prompt-extras
-    (setq epe-show-local-working-directory t)))
+    (setq epe-show-local-working-directory t
+          epe-show-git-status-extended t)))
 
 (after! esh-module
   (add-to-list 'eshell-modules-list 'eshell-elecslash))
