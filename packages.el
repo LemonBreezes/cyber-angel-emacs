@@ -46,7 +46,7 @@
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
 (package! beacon)
-(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
+;;(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 (package! iscroll)
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))
