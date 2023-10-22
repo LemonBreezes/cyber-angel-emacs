@@ -701,8 +701,7 @@
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-clean-up-lazy-highlight-h ()
       (lazy-highlight-cleanup t)))
-  ;; Redundant.
-  (remove-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h)
+  (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1)
 
   ;; Autokill buffers which have not been displayed for 3 days.
   (run-with-idle-timer 30 nil #'midnight-mode +1)
