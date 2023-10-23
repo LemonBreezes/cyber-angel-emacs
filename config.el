@@ -385,6 +385,10 @@
 
   (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
   (add-to-list 'auto-mode-alist '("\\.log$" . syslog-mode))
+
+  (add-to-list 'auto-mode-alist '("/sway/.*config.*/" . i3wm-config-mode))
+  (add-to-list 'auto-mode-alist '("/sway/config\\'" . i3wm-config-mode))
+
   ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
   ;; balanced, which breaks font-lock.
   (after! syslog-mode
