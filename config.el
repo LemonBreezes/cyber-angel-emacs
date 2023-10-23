@@ -628,9 +628,6 @@
   ;; Automatically deindent items when they are added to the kill ring.
   (add-hook #'doom-first-input-hook #'kill-ring-deindent-mode)
 
-  ;; Navigate camelCase words.
-  (add-hook 'c-mode-common-hook #'subword-mode)
-
   (after! paren
     (setq show-paren-context-when-offscreen 'overlay
           show-paren-ring-bell-on-mismatch t))
@@ -1288,9 +1285,17 @@
     (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying)))
 
 
+;;; C/C++
+
+(add-hook 'c-mode-common-hook #'subword-mode)
+
 ;;; Fennel
 
 (add-hook 'fennel-mode-hook #'outline-minor-mode)
+
+;;; Lua
+
+(add-hook 'lua-mode-hook #'subword-mode)
 
 ;;; Appendix
 
