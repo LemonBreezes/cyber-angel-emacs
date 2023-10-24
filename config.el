@@ -703,8 +703,8 @@
                                         ; is better but does not work with
                                         ; `isearch-mb'.
         lazy-highlight-cleanup nil
-        ;; The default search ring size is 16, which is too small considering that
-        ;; we can fuzzy search the history with Consult.
+        ;; The default search ring size is 16, which is too small considering
+        ;; that we can fuzzy search the history with Consult.
         search-ring-max 200
         regexp-search-ring-max 200)
   (add-hook! 'doom-escape-hook :depth -1
