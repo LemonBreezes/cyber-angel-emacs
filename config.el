@@ -537,7 +537,8 @@
                               (modulep! :completion vertico +childframe))
                          '(posframe grid) '(grid)))
             (consult-location ,(if (and (cae-display-graphic-p)
-                                        (modulep! :completion vertico +childframe))
+                                        (modulep! :completion vertico
+                                                  +childframe))
                                    'posframe 'buffer))
             ,@(if (cae-display-graphic-p)
                   (if (modulep! :completion vertico +childframe)
