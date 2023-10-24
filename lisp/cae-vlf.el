@@ -48,7 +48,7 @@
   (add-hook 'vlf-after-chunk-update-hook #'+vlf-update-linum)
 
   ;; Since this only works with absolute line numbers, let's make sure we use them.
-  (add-hook! 'vlf-mode-hook (setq-local display-line-numbers t))
+  (setq-hook! 'vlf-mode-hook display-line-numbers t)
 
   (defun +vlf-next-chunk-or-start ()
     (if (= vlf-file-size vlf-end-pos)
