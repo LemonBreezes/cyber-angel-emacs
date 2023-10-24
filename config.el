@@ -1003,7 +1003,8 @@
         (interactive "<R>")
         (string-inflection-all-cycle)
         (setq evil-repeat-info '([?g ?~])))
-      (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
+      (define-key evil-normal-state-map (kbd "g~")
+        'evil-operator-string-inflection)))
 
   (use-package! beginend
     :defer t :init
@@ -1033,8 +1034,10 @@
       (map! :map isearch-mb-minibuffer-map
             [remap consult-history] #'consult-isearch-history)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-    (define-key isearch-mb-minibuffer-map (kbd "M-%")   #'anzu-isearch-query-replace)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s %") #'anzu-isearch-query-replace-regexp))
+    (define-key isearch-mb-minibuffer-map (kbd "M-%")
+      #'anzu-isearch-query-replace)
+    (define-key isearch-mb-minibuffer-map (kbd "M-s %")
+      #'anzu-isearch-query-replace-regexp))
 
   (use-package! edit-indirect
     :defer t :config
