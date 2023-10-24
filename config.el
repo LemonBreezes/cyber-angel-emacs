@@ -1101,8 +1101,10 @@
     (setq consult-preview-key
           '(:debounce 0.4 any)
           consult-locate-args "plocate --ignore-case --regexp")
-    (add-to-list 'consult-preview-allowed-hooks 'global-org-modern-mode-check-buffers)
-    (add-to-list 'consult-preview-allowed-hooks 'global-hl-todo-mode-check-buffers)
+    (add-to-list 'consult-preview-allowed-hooks
+                 'global-org-modern-mode-check-buffers)
+    (add-to-list 'consult-preview-allowed-hooks
+                 'global-hl-todo-mode-check-buffers)
     (consult-customize
      consult-ripgrep consult-git-grep consult-grep
      consult-bookmark consult-recent-file
@@ -1111,7 +1113,8 @@
      +default/search-cwd +default/search-other-cwd
      +default/search-notes-for-symbol-at-point
      +default/search-emacsd
-     consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+     consult--source-recent-file consult--source-project-recent-file
+     consult--source-bookmark
      :preview-key 'any)
     ;; Optionally configure the register formatting. This improves the register
     ;; preview for `consult-register', `consult-register-load',
@@ -1158,7 +1161,8 @@
             "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
           eshell-visual-subcommands `(("gh" "repo" "fork")
                                       ("geth" "attach")
-                                      ,@(unless (string= (getenv "GIT_PAGER") "cat")
+                                      ,@(unless (string= (getenv "GIT_PAGER")
+                                                         "cat")
                                           '(("git" "log" "diff" "show"))))
           eshell-visual-options '(("git" "--help" "--paginate")))))
 
