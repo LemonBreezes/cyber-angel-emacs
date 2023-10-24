@@ -510,10 +510,9 @@
   (after! compile
     ;; Some projects I work on have many warnings I am not interested in and the
     ;; `first-error' value for `compilation-scroll-output' stops scrolling at
-    ;; the
-
-    ;; Since it doesn't though, I just set it to `t' and scroll up manually if
-    ;; there are errors.
+    ;; the first warning. It would be nice if it scrolled to the first error
+    ;; instead. Since it doesn't though, I just set it to `t' and scroll up
+    ;; manually if there are errors.
     (setq compilation-scroll-output t))
 
   (after! tramp
