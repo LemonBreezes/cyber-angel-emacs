@@ -742,8 +742,8 @@
   (after! undo-fu
     (setq undo-fu-allow-undo-in-region t))
 
-  ;; Hide commands in M-x which do not work in the current mode. Vertico commands
-  ;; are hidden in normal buffers.
+  ;; Hide commands in M-x which do not work in the current mode. Vertico
+  ;; commands are hidden in normal buffers.
   (setq read-extended-command-predicate #'command-completion-default-include-p)
 
   (after! embark
