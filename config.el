@@ -394,8 +394,8 @@
   (add-to-list 'auto-mode-alist '("/sway/.*config.*/" . i3wm-config-mode))
   (add-to-list 'auto-mode-alist '("/sway/config\\'" . i3wm-config-mode))
 
-  ;; Do not highlight quoted strings in syslog-mode because sometimes they aren't
-  ;; balanced, which breaks font-lock.
+  ;; Do not highlight quoted strings in syslog-mode because sometimes they
+  ;; aren't balanced, which breaks font-lock.
   (after! syslog-mode
     (setq syslog-font-lock-keywords
           (cl-remove-if
@@ -408,7 +408,8 @@
   ;; Set up printers.
   (after! lpr (setq printer-name "Brother_HL-2350DW"))
   (after! ps-print (setq ps-printer-name "Brother_HL-2350DW"))
-  (after! pdf-misc (setq pdf-misc-print-program-executable (executable-find "lpr")))
+  (after! pdf-misc
+    (setq pdf-misc-print-program-executable (executable-find "lpr")))
 
   ;; Was reading this
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
@@ -464,7 +465,8 @@
     (setq Info-fontify-maximum-menu-size t))
 
   (after! descr-text
-    (setq describe-char-unicodedata-file (concat cae-multi-data-dir "UnicodeData.txt")))
+    (setq describe-char-unicodedata-file
+          (concat cae-multi-data-dir "UnicodeData.txt")))
 
   (after! smiley
     (setq smiley-style t))
@@ -507,7 +509,8 @@
 
   (after! compile
     ;; Some projects I work on have many warnings I am not interested in and the
-    ;; `first-error' value for `compilation-scroll-output' stops scrolling at the
+    ;; `first-error' value for `compilation-scroll-output' stops scrolling at
+    ;; the
 
     ;; Since it doesn't though, I just set it to `t' and scroll up manually if
     ;; there are errors.
