@@ -1205,7 +1205,8 @@
           "C-c C-M-h" #'er/mark-org-code-block)
     (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
     (after! org-list
-      (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a."))))
+      (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+")
+                                            ("1." . "a."))))
     (after! ob-core
       ;; Export commments by default.
       (setq org-babel-default-header-args
@@ -1285,7 +1286,8 @@
               :match-func
               (lambda (msg)
                 (when msg
-                  (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
+                  (string-prefix-p "/Fastmail"
+                                   (mu4e-message-field msg :maildir))))
               :vars '((user-mail-address . "look@strawberrytea.xyz")
                       (user-full-name . "StrawberryTea")
                       (smtpmail-smtp-server . "smtp.fastmail.com")
@@ -1298,7 +1300,8 @@
                       (mu4e-sent-folder . "/Fastmail/Sent"))))))
 
   (when (modulep! :email mu4e +org)
-    (advice-add 'mu4e~compose-handler :after #'cae-org-msg-goto-body-when-replying)))
+    (advice-add 'mu4e~compose-handler :after
+                #'cae-org-msg-goto-body-when-replying)))
 
 
 ;;; C/C++
@@ -1334,7 +1337,8 @@
        '(mu4e))
    ,@(when (or (modulep! :completion helm)
                (modulep! :cae helm))
-       '(async helm-lib helm-multi-match helm-source helm-core helm-global-bindings helm))
+       '(async helm-lib helm-multi-match helm-source helm-core
+         helm-global-bindings helm))
    ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :cae ai)
@@ -1357,7 +1361,8 @@
    ,@(when (modulep! :cae misc-applications) ; system apps
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
               '(snake speed-type tetris bubbles dunnet autotetris klondike)
-              '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow zone-nyan)
+              '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
+                zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
               '(alarm pomm))))
