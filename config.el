@@ -803,7 +803,8 @@
                       (?< . ("< " . " >"))
                       (?> . ("<" . ">"))))
         (embrace-add-pair (car pair) (cadr pair) (cddr pair)))
-      (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")" 'cae-embrace-with-prefix-function
+      (embrace-add-pair-regexp ?\C-f "(\\([^ ]+\\) " ")"
+                               'cae-embrace-with-prefix-function
                                (embrace-build-help "(function " ")")))
     :config
     (after! evil-embrace
