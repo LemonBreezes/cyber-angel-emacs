@@ -445,7 +445,8 @@
                                         ; `auto-sudoedit'.
         what-cursor-show-names t)
 
-  (setq-default show-trailing-whitespace t) ; https://idiomdrottning.org/show-trailing-whitespace
+  ;; https://idiomdrottning.org/show-trailing-whitespace
+  (setq-default show-trailing-whitespace t)
 
   (after! cus-edit
     (setq custom-buffer-done-kill t))
