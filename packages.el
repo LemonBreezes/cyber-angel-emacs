@@ -19,11 +19,6 @@
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! anzu :recipe
   (:host github :repo "LemonBreezes/anzu" :branch "expose-anzu-update-timer-to-user"))
-(when (and (modulep! :completion corfu)
-           (modulep! :editor snippets))
-  (package! yasnippet-capf :recipe
-    (:host github
-     :repo "LemonBreezes/yasnippet-capf" :branch "cae")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
