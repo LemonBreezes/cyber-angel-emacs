@@ -170,7 +170,9 @@
                                        "emacs-mirror" "doomemacs" "tecosaur"
                                        "systemcrafters"))
   (after! projectile
-    (add-hook 'consult-gh-repo-post-clone-hook #'projectile-discover-projects-in-search-path)))
+    (add-hook! 'consult-gh-repo-post-clone-hook
+      (defun cae-projectile-discover-projects-in-search-path-h (&rest _)
+        (projectile-discover-projects-in-search-path)))))
 (use-package! consult-gh-embark
   :after (consult-gh embark))
 
