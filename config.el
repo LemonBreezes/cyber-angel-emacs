@@ -445,8 +445,8 @@
                                         ; `auto-sudoedit'.
         what-cursor-show-names t)
 
-  ;; `show-trailing-whitespace' is my friend.
   ;; https://idiomdrottning.org/show-trailing-whitespace
+  ;; `show-trailing-whitespace' is my friend.
   (setq-default show-trailing-whitespace t)
 
   (after! cus-edit
