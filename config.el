@@ -196,11 +196,12 @@
           shr-max-width 120
           shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
 
-    ;; I prefer to not use fonts in `shr' because it looks weird with the font setup I have.
+    ;; I prefer to not use fonts in `shr' because it looks weird with the font
+    ;; setup I have.
     (setq shr-use-fonts nil)
 
-    ;; Sometimes EWW makes web pages unreadable by adding a bright background. Do
-    ;; not colorize backgrounds at all.
+    ;; Sometimes EWW makes web pages unreadable by adding a bright background.
+    ;; Do not colorize backgrounds at all.
     (advice-add #'shr-colorize-region :around #'ignore))
 
   ;; Allow switching to these buffers with `C-x b'
@@ -267,7 +268,8 @@
          :side right :ttl t :select t :quit t :ttl 0)
         ("^Trash Can" :size 0.3 :side bottom :select t :quit t
          :ttl 0)
-        ("^\\*evil-owl\\*$" :side bottom :select nil :ttl 0 :size cae-popup-shrink-to-fit)
+        ("^\\*evil-owl\\*$" :side bottom :select nil :ttl 0
+         :size cae-popup-shrink-to-fit)
         ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
         ("^\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
@@ -275,7 +277,8 @@
         ("^\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top)
         ("*helm " :ignore t)
-        ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t :size cae-popup-shrink-to-fit)
+        ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t
+         :size cae-popup-shrink-to-fit)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
     (after! embark
@@ -342,7 +345,8 @@
     (indent-bars-treesit-support t)
     (indent-bars-no-descend-string t)
     (indent-bars-treesit-ignore-blank-lines-types '("module"))
-    (indent-bars-treesit-wrap '((python argument_list parameters ; for python, as an example
+    (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
+                                                                 ; as an example
                                  list list_comprehension
                                  dictionary dictionary_comprehension
                                  parenthesized_expression subscript)))
