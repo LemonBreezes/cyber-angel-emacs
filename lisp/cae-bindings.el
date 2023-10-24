@@ -228,6 +228,7 @@
 
 (when (modulep! :completion vertico)
   (map!                                ;; C-x bindings (ctl-x-map)
+   "C-x t b" #'consult-buffer-other-tab
    "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
    ;; Custom M-# bindings for fast register access
    "M-#" #'consult-register-load
