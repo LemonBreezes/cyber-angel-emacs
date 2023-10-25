@@ -40,7 +40,7 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
 I've also added a few custom patches to Emacs, which are available in the
 ~emacs-patches~ folder. These patches are:
 1. ~use-comp-speed-3.patch~: Sets the default compilation speed to 3, which
-   generates after code than the default of 2.
+   generates faster code than the default of 2.
 2. ~use-custom-cflags-for-native-comp.patch~: Sets custom CFLAGS for native
    compilation. These flags are specific to my computer but they serve as a good
    example.
