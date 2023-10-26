@@ -54,7 +54,7 @@
        workspaces
        (window-select +numbers)
        ophints
-       treemacs
+       ;;treemacs
        zen
 
        :editor
