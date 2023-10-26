@@ -55,6 +55,7 @@
        (window-select +numbers)
        ophints
        ;;treemacs
+       neotree
        zen
 
        :editor
