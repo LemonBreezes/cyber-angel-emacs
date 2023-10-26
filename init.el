@@ -35,6 +35,8 @@
 
 (setq evil-undo-system 'undo-fu)
 
+(when init-file-debug (setq doom-incremental-first-idle-timer nil))
+
 (doom! :completion
        (vertico +icons)
        (corfu +tng +orderless)
