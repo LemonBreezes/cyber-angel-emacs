@@ -28,7 +28,7 @@
   (icomplete-mode +1)
   (icomplete-vertical-mode +1))
 
-;; I was getting an error withoout this.
+;; I was getting an error without this.
 (unless (modulep! :lang emacs-lisp)
   (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
