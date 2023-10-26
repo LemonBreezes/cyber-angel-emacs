@@ -42,7 +42,7 @@
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell)
   ;; Use , to ask ChatGPT questions in any comint buffer
-  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
