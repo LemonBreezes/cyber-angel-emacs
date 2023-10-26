@@ -35,6 +35,7 @@
 
 (setq evil-undo-system 'undo-fu)
 
+;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
 (doom! :completion
