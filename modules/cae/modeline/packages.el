@@ -7,4 +7,4 @@
 (package! anzu)
 (when (modulep! :editor evil)
   (package! evil-anzu))
-(package! mini-echo :recipe (:host github :repo "liuyinz/mini-echo.el"))
+(package! awesome-tray :recipe (:host github :repo "manateelazycat/awesome-tray"))
