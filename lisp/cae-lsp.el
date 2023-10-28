@@ -5,6 +5,7 @@
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable (not (or (featurep 'breadcrumb)
                                                     (featurep 'topsy)))
+          lsp-log-max nil
           lsp-enable-snippet t
           lsp-enable-folding t
           lsp-inlay-hint-enable t
