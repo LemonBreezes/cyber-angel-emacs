@@ -41,7 +41,7 @@
   (after! persp-mode
     (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
       (defun cae-persp-skip-buffer-p (buffer)
-        (string= (buffer-name buffer) "*lsp-log*")))))
+        (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
