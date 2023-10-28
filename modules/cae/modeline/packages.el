@@ -7,4 +7,3 @@
 (package! anzu)
 (when (modulep! :editor evil)
   (package! evil-anzu))
-(package! awesome-tray :recipe (:host github :repo "manateelazycat/awesome-tray"))
