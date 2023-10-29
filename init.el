@@ -72,7 +72,7 @@
        (dired +icons)
 
        :term
-       eshell
+       ;; eshell
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
@@ -127,7 +127,7 @@
        helm
        debugger
        ;;(dirvish +icons +dirvish)
-       eshell
+       ;; eshell
        exwm
        dired
        lisp
