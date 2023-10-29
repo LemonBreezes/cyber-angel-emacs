@@ -72,7 +72,7 @@
        (dired +icons)
 
        :term
-       ;; eshell
+       eshell
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
