@@ -91,7 +91,8 @@
     (setq epe-show-local-working-directory t
           epe-show-git-status-extended t)))
 
-;; Eshell Elisp highlighting breaks autocompletion with Corfu and Company.
+;; Eshell Elisp highlighting breaks Elisp autocompletion with Corfu and Company
+;; in Eshell.
 (after! eshell-syntax-highlighting
   (setq eshell-syntax-highlighting-highlight-elisp nil))
 
