@@ -111,6 +111,10 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(straight-use-package 'corfu)
+(require 'corfu)
+(global-corfu-mode +1)
+
 ;;Local Variables:
 ;;eval: (remove-hook 'write-file-functions #'eval-buffer t)
 ;;End:
