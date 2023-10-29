@@ -4,7 +4,8 @@
   :defer t :init
   (map! [remap scroll-up-command] #'scrollkeeper-contents-up
         [remap scroll-down-command] #'scrollkeeper-contents-down)
-  (setq scrollkeeper-scroll-steps 1)
+  (setq scrollkeeper-scroll-steps 1
+        scrollkeeper-scroll-step-delay 0)
 
   ;; These advices don't support scrolling in multiple steps but that is okay
   ;; with me.
