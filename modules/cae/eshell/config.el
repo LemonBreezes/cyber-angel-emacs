@@ -95,6 +95,13 @@
 (after! eshell-syntax-highlighting
   (setq eshell-syntax-highlighting-highlight-elisp nil))
 
+(defadvice! cae-eshell-kill-input-with-delimiters-a ()
+  :after #'eshell-kill-input
+  (while (condition-case _
+             (scan-sexps (pos-bol) (pos-eol))
+           (scan-error t))
+    (delete-char 1)))
+
 (after! esh-module
   (add-to-list 'eshell-modules-list 'eshell-elecslash))
 
