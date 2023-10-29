@@ -54,7 +54,7 @@
 (when (symbol-function #'eshell/emacs)
   (setf (symbol-function #'eshell/e)
         (symbol-function #'eshell/emacs))
-  (unintern 'eshell/emacs))
+  (unintern 'eshell/emacs obarray))
 
 ;; Expand abbreviations before parsing input.
 (defadvice! cae-eshell-expand-abbrev-a (&rest _)
