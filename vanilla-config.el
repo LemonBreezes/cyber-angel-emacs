@@ -114,6 +114,9 @@
 (straight-use-package 'corfu)
 (require 'corfu)
 (global-corfu-mode +1)
+(setq corfu-auto t
+      corfu-auto-prefix 2
+      corfu-auto-delay 0.05)
 
 ;;Local Variables:
 ;;eval: (remove-hook 'write-file-functions #'eval-buffer t)
