@@ -127,7 +127,7 @@
        helm
        debugger
        ;;(dirvish +icons +dirvish)
-       ;; eshell
+       eshell
        exwm
        dired
        lisp
