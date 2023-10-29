@@ -119,7 +119,7 @@
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
 ;; From this PR https://github.com/doomemacs/doomemacs/pull/6867/files.
-(load! "eshell-doc-doom-pr-6867")
+;;(load! "eshell-doc-doom-pr-6867")
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
