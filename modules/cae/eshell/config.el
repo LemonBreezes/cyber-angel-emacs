@@ -103,6 +103,23 @@
   (add-to-list 'eshell-expand-input-functions
                #'eshell-expand-history-references))
 
+;; Define an Eshell lookup handler and integrate Man with TLDR.
+(let ((tldr-dir (concat doom-cache-dir "tldr/")))
+  (unless (file-exists-p tldr-dir)
+    (after! async
+      (async-start
+       `(lambda ()
+          (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
+          (setq tldr-directory-path ,tldr-dir)
+          (require 'tldr)
+          (tldr-update-docs))
+       (lambda (_) (message "tldr docs updated"))))))
+(set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
+(after! man
+  (map! :map Man-mode-map :n "x" #'+eshell-man-to-tldr))
+(after! tldr
+  (map! :map tldr-mode-map :n "x" #'+eshell-tldr-to-man))
+
 (after! eshell
   (when (modulep! :completion vertico)
     (map! :map eshell-mode-map
