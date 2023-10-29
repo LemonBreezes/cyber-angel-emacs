@@ -32,7 +32,7 @@ deletes the following char if the sexps in the buffer are
 unbalanced. Works with Lispy and Smartparens."
   (interactive)
   (let ((delete-fn
-         (cond ((condition-case error
+         (cond ((condition-case _
                     (scan-sexps (point-min) (point-max))
                   (scan-error t))
                 #'delete-char)
