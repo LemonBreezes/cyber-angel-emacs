@@ -97,9 +97,10 @@
 
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
-  (while (condition-case _
-             (scan-sexps (pos-bol) (pos-eol))
-           (scan-error t))
+  (while (and (not (eq (point) (pos-eol)))
+              (condition-case _
+                  (scan-sexps (pos-bol) (pos-eol))
+                (scan-error t)))
     (delete-char 1)))
 
 (after! esh-module
