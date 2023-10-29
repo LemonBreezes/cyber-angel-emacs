@@ -446,7 +446,8 @@
 
   ;; https://idiomdrottning.org/show-trailing-whitespace
   ;; `show-trailing-whitespace' is my friend.
-  (setq-default show-trailing-whitespace t)
+  (setq-hook! (text-mode prog-mode conf-mode)
+    show-trailing-whitespace t)
 
   (after! cus-edit
     (setq custom-buffer-done-kill t))
