@@ -19,6 +19,8 @@
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! anzu :recipe
   (:host github :repo "LemonBreezes/anzu" :branch "expose-anzu-update-timer-to-user"))
+(package! eshell-syntax-highlighting :recipe
+  (:host github :repo "akreisher/eshell-syntax-highlighting"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
