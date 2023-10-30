@@ -47,7 +47,7 @@
 (setq-hook! 'eshell-mode-hook
   imenu-generic-expression
   `((,(propertize "λ" 'face 'eshell-prompt)
-     ,(format "%s\\(.*\\)" eshell-prompt-regexp) 1)))
+     ,(concat eshell-prompt-regexp "\\(.*\\)") 1)))
 
 ;;Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
 ;;to work in Eshell as it does in a terminal.
