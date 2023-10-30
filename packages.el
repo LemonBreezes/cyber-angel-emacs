@@ -111,6 +111,3 @@
 
 ;;; Autocompletion
 (package! consult-yasnippet)
-
-;;; Email
-(package! mu4e-taxy :recipe (:host github :repo "alphapapa/mu4e-taxy"))
