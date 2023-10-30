@@ -105,7 +105,7 @@
                        ("C-M-<delete>" . sp-splice-sexp-killing-forward)
                        ;;("C-]" . sp-select-next-thing-exchange) ;Overrides `abort-recursive-edit'.
                        ;;("C-M-]" . sp-select-next-thing)
-                       ;;("C-M-@" . sp-mark-sexp)
+                       ("C-M-@" . sp-mark-sexp) ;Overrides `mark-sexp'.
                        ("C-M-S-w" . sp-copy-sexp)))
       (define-key smartparens-mode-map (kbd (car binding)) (cdr binding))
       (when (modulep! :editor lispy)
