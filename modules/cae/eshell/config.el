@@ -90,11 +90,6 @@
     (setq epe-show-local-working-directory t
           epe-show-git-status-extended t)))
 
-;; Eshell Elisp highlighting breaks Elisp autocompletion with Corfu and Company
-;; in Eshell.
-(after! eshell-syntax-highlighting
-  (setq eshell-syntax-highlighting-highlight-elisp nil))
-
 ;; Don't leave me with unbalanced delimiters.
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
