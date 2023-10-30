@@ -9,7 +9,7 @@
 
 (add-hook 'exwm-manage-finish-hook #'cae-exwm-exit-floating-mode-h)
 
-(defmacro cae-exwm-app-runner (app-name app-title &optional state)
+(defmacro cae-exwm-app-runner (app-name app-title)
   `(lambda (arg)
      (interactive "P")
      (cae-exwm-start-app ,app-name ,app-title arg)))
