@@ -48,8 +48,8 @@
   `((,(propertize "λ" 'face 'eshell-prompt)
      ,(concat eshell-prompt-regexp "\\(.*\\)") 1)))
 
-;;Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
-;;to work in Eshell as it does in a terminal.
+;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
+;; to work in Eshell as it does in a terminal.
 (when (symbol-function #'eshell/emacs)
   (setf (symbol-function #'eshell/e)
         (symbol-function #'eshell/emacs))
