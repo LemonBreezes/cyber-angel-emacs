@@ -93,11 +93,13 @@
 ;; Don't leave me with unbalanced delimiters.
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
-  (while (and (not (eq (point) (pos-eol)))
-              (condition-case _
-                  (scan-sexps (pos-bol) (pos-eol))
-                (scan-error t)))
-    (delete-char 1))
+  (let ((beg (pos-bol))
+        (end (pos-eol)))
+    (while (and (not (eq (point) end))
+                (condition-case _
+                    (scan-sexps beg end)
+                  (scan-error t)))
+      (delete-char 1)))
   (unless (eq (char-syntax (char-before)) ?\s)
     (insert-char ?\s)))
 
