@@ -162,7 +162,7 @@
 
 (when (modulep! :editor lispy)
   (autoload 'lispyville-delete-backward-word "lispyville")
-  (map! [remap doom/delete-backward-word] #'lispyville-delete-backward-word))
+  (map! [remap backward-kill-word] #'lispyville-delete-backward-word))
 
 (after! cape
   (defalias 'cae-cape-history-or-line
