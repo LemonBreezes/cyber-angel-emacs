@@ -113,7 +113,7 @@
       ")" #'cae-insert-closing-paren)
 
 ;; Don't leave me with unbalanced delimiters.
-(defadvice! cae-delete-with-delimiters-a ()
+(defadvice! cae-delete-with-delimiters-a (&optional _)
   :after #'eshell-kill-input
   (while (and (not (eq (point) (pos-eol)))
               (condition-case _
