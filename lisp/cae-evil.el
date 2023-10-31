@@ -160,10 +160,6 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
-(when (modulep! :editor lispy)
-  (autoload 'lispyville-delete-backward-word "lispyville")
-  (map! [remap backward-kill-word] #'lispyville-delete-backward-word))
-
 (after! cape
   (defalias 'cae-cape-history-or-line
     (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
