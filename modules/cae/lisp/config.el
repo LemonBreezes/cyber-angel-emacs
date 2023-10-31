@@ -39,11 +39,9 @@
     (eros--make-result-overlay edebug-previous-result
       :where (point)
       :duration eros-eval-result-duration))
-  (advice-add #'edebug-compute-previous-result
-              :around
+  (advice-add #'edebug-compute-previous-result :around
               #'cae-edebug-compute-previous-result-a)
-  (advice-add #'edebug-previous-result
-              :around
+  (advice-add #'edebug-previous-result :around
               #'cae-edebug-previous-result-a))
 
 ;; Allow `eval-expression' to have comments.
