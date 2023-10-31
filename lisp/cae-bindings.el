@@ -112,16 +112,6 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
-;; Don't leave me with unbalanced delimiters.
-(defadvice! cae-delete-with-delimiters-a (&optional _)
-  :after #'eshell-kill-input
-  (while (and (not (eq (point) (pos-eol)))
-              (condition-case _
-                  (scan-sexps (pos-bol) (pos-eol))
-                (scan-error t)))
-    (delete-char 1)))
-(advice-add #'doom/delete-backward-word :after #'cae-delete-with-delimiters-a)
-
 ;; Use `TAB' instead of `RET' for outline cycling buttons
 (after! outline
   (map! :map outline-overlay-button-map
