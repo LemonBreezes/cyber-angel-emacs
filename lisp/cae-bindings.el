@@ -290,7 +290,7 @@
        :desc "Column indicator" "C" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode))
 (map! :map help-map
-      (:prefix "hd"
+      (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
 
 (unless (modulep! :editor evil)
