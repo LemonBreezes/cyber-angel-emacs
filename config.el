@@ -1124,6 +1124,7 @@
 
 (when cae-init-term-enabled-p
   ;; Enable Fish autocompletion in `read-shell-command'.
+  (autoload 'turn-on-fish-completion-mode "fish-completion" nil t)
   (advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
 
   (after! em-glob
