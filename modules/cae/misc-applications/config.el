@@ -753,6 +753,7 @@
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
   (when (executable-find "mpd")
+    (require 'emms-player-mpd)
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-exiftool)))
