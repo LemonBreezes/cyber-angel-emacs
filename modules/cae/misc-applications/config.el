@@ -739,6 +739,7 @@
   (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (emms-score +1)
   (emms-default-players)
+  (require 'emms-info-exiftool)
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
