@@ -38,8 +38,6 @@
              (map! :map corfu-map
                    "," #'corfu-insert-separator)))))
 
-(add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
-
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
@@ -73,6 +71,3 @@
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
   (setq lsp-completion-provider nil))
-
-;; This way, we don't have to press RET twice in Eshell.
-(advice-add #'corfu-insert :after #'corfu-send-shell)
