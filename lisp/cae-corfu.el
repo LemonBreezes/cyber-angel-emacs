@@ -34,11 +34,12 @@
 ;; Do not make us type RET twice with Corfu.
 (defun corfu--maybe-return-filter (cmd)
   (if (eq corfu--index -1) (corfu-quit) cmd))
-(keymap-set corfu-map "RET" `(menu-item "corfu-maybe-return" corfu-insert
-                              :filter corfu--maybe-return-filter))
-(keymap-set
- corfu-map "<return>" `(menu-item "corfu-maybe-return" corfu-insert
-                        :filter corfu--maybe-return-filter))
+(after! corfu
+  (keymap-set corfu-map "RET" `(menu-item "corfu-maybe-return" corfu-insert
+                                :filter corfu--maybe-return-filter))
+  (keymap-set
+   corfu-map "<return>" `(menu-item "corfu-maybe-return" corfu-insert
+                          :filter corfu--maybe-return-filter)))
 
 ;; Wildcard separator
 (defvar +orderless-wildcard-character ?,
@@ -85,16 +86,17 @@ This variable needs to be set at the top-level before any `after!' blocks.")
     ;; matching style for each component. This is all regexp stuff.
     (setq orderless-component-separator
           (+orderless-escapable-split-fn +orderless-wildcard-character))
-    (setq corfu-separator +orderless-wildcard-character)
-    (keymap-set corfu-map (char-to-string +orderless-wildcard-character)
-                #'+corfu-insert-wildcard-separator)
-    ;; Quit completion after typing the wildcard followed by a space.
-    (keymap-set corfu-map "SPC"
-                `(menu-item "corfu-maybe-quit" nil
-                  :filter
-                  ,(lambda (_)
-                     (when (and (> (point) (point-min))
-                                (eq (char-before)
-                                    +orderless-wildcard-character))
-                       (corfu-quit)
-                       nil))))))
+    (after! corfu
+      (setq corfu-separator +orderless-wildcard-character)
+      (keymap-set corfu-map (char-to-string +orderless-wildcard-character)
+                  #'+corfu-insert-wildcard-separator)
+      ;; Quit completion after typing the wildcard followed by a space.
+      (keymap-set corfu-map "SPC"
+                  `(menu-item "corfu-maybe-quit" nil
+                    :filter
+                    ,(lambda (_)
+                       (when (and (> (point) (point-min))
+                                  (eq (char-before)
+                                      +orderless-wildcard-character))
+                         (corfu-quit)
+                         nil)))))))
