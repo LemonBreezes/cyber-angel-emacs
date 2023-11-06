@@ -1306,7 +1306,21 @@
 (add-hook 'lua-mode-hook #'outline-minor-mode)
 (setq-hook! 'lua-mode-hook
   outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]"
-  lsp-semantic-tokens-enable nil)
+  lsp-semantic-token-faces '(;;("comment" . lsp-face-semhl-comment)
+                             ("keyword" . lsp-face-semhl-keyword)
+                             ("string" . lsp-face-semhl-string) ("number" . lsp-face-semhl-number)
+                             ("regexp" . lsp-face-semhl-regexp) ("operator" . lsp-face-semhl-operator)
+                             ("namespace" . lsp-face-semhl-namespace) ("type" . lsp-face-semhl-type)
+                             ("struct" . lsp-face-semhl-struct) ("class" . lsp-face-semhl-class)
+                             ("interface" . lsp-face-semhl-interface) ("enum" . lsp-face-semhl-enum)
+                             ("typeParameter" . lsp-face-semhl-type-parameter)
+                             ("function" . lsp-face-semhl-function) ("method" . lsp-face-semhl-method)
+                             ("member" . lsp-face-semhl-member) ("property" . lsp-face-semhl-property)
+                             ("event" . lsp-face-semhl-event) ("macro" . lsp-face-semhl-macro)
+                             ("variable" . lsp-face-semhl-variable) ("parameter" . lsp-face-semhl-parameter)
+                             ("label" . lsp-face-semhl-label) ("enumConstant" . lsp-face-semhl-constant)
+                             ("enumMember" . lsp-face-semhl-constant) ("dependent" . lsp-face-semhl-type)
+                             ("concept" . lsp-face-semhl-interface)))
 
 ;;; Appendix
 
