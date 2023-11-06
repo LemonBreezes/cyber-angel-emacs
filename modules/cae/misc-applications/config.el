@@ -736,6 +736,7 @@
   (require 'emms-cache)
   (require 'emms-score)
   (require 'emms-last-played)
+  (require 'emms-info-native)
   (require 'emms-info-exiftool)
   (emms-cache +1)
   (remove-hook 'emms-player-started-hook #'emms-last-played-update-current)
@@ -758,7 +759,7 @@
     (require 'emms-player-mpd)
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
-          emms-info-functions '(emms-info-mpd emms-info-exiftool)))
+          emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)))
   (add-hook 'emms-browser-mode-hook #'+misc-applications-hide-cursor-h)
   (add-hook 'emms-playlist-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map emms-browser-mode-map
