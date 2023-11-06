@@ -1,50 +1,9 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
-(defmacro cae-orderless-escapable-split-fn (char)
-  `(defun cae-orderless-escapable-split-on-space-or-char (s)
-     (mapcar
-      (lambda (piece)
-        (replace-regexp-in-string
-         (string 1) ,(string char)
-         (replace-regexp-in-string
-          (concat (string 0) "\\|" (string 1))
-          (lambda (x)
-            (pcase x
-              ("\0" " ")
-              ("\1" ,(string char))
-              (_ x)))
-          piece
-          ;; These are arguments to `replace-regexp-in-string'.
-          'fixedcase 'literal)
-         'fixedcase 'literal))
-      (split-string (replace-regexp-in-string
-                     (concat "\\\\\\\\\\|\\\\ \\|\\\\" ,(string char))
-                     (lambda (x)
-                       (pcase x
-                         ("\\ " "\0")
-                         (,(concat "\\" (string char)) "\1")
-                         (_ x)))
-                     s 'fixedcase 'literal)
-                    ,(concat "[ " (string char) "]+") t))))
-
-(when (modulep! :completion corfu +wildcard)
-  (after! orderless
-    ;; Orderless splits the string into components and then determines the
-    ;; matching style for each component. This is all regexp stuff.
-    (progn (setq orderless-component-separator
-                 (cae-orderless-escapable-split-fn ?,))
-           (after! corfu
-             (setq corfu-separator ?,)
-             (map! :map corfu-map
-                   "," #'corfu-insert-separator)))))
-
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
-  (setq corfu-preview-current (if (modulep! :completion corfu +tng) 'insert nil)
-        corfu-auto-delay 0.05
-        corfu-preselect (if (modulep! :completion corfu +tng) 'prompt t)
-        tab-always-indent 'complete
+  (setq corfu-auto-delay 0.05
         tab-first-completion 'eol)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
@@ -71,3 +30,71 @@
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
   (setq lsp-completion-provider nil))
+
+;; Do not make us type RET twice with Corfu.
+(defun corfu--maybe-return-filter (cmd)
+  (if (eq corfu--index -1) (corfu-quit) cmd))
+(keymap-set corfu-map "RET" `(menu-item "corfu-maybe-return" corfu-insert
+                              :filter corfu--maybe-return-filter))
+(keymap-set
+ corfu-map "<return>" `(menu-item "corfu-maybe-return" corfu-insert
+                        :filter corfu--maybe-return-filter))
+
+;; Wildcard separator
+(defvar +orderless-wildcard-character ?,
+  "A character used as a wildcard in Corfu for fuzzy autocompletion. If you
+want to match the wildcard literally in completion, you can
+escape it with forward slash. Do NOT set this to SPC.
+
+This variable needs to be set at the top-level before any `after!' blocks.")
+
+(when (and (modulep! corfu +orderless)
+           +orderless-wildcard-character)
+  (defmacro +orderless-escapable-split-fn (char)
+    (let ((char-string (string (if (symbolp char) (symbol-value char) char))))
+      `(defun +orderless-escapable-split-on-space-or-char (s)
+         (mapcar
+          (lambda (piece)
+            (replace-regexp-in-string
+             (string 1) ,char-string
+             (replace-regexp-in-string
+              (concat (string 0) "\\|" (string 1))
+              (lambda (x)
+                (pcase x
+                  ("\0" " ")
+                  ("\1" ,char-string)
+                  (_ x)))
+              piece
+              ;; These are arguments to `replace-regexp-in-string'.
+              'fixedcase 'literal)
+             'fixedcase 'literal))
+          (split-string (replace-regexp-in-string
+                         (concat "\\\\\\\\\\|\\\\ \\|\\\\"
+                                 ,char-string)
+                         (lambda (x)
+                           (pcase x
+                             ("\\ " "\0")
+                             (,(concat "\\" char-string)
+                              "\1")
+                             (_ x)))
+                         s 'fixedcase 'literal)
+                        ,(concat "[ " char-string "]+")
+                        t)))))
+  (after! orderless
+    ;; Orderless splits the string into components and then determines the
+    ;; matching style for each component. This is all regexp stuff.
+    (setq orderless-component-separator
+          (+orderless-escapable-split-fn +orderless-wildcard-character))
+    (setq corfu-separator +orderless-wildcard-character)
+    (keymap-set corfu-map (char-to-string +orderless-wildcard-character)
+                #'+corfu-insert-wildcard-separator)
+    ;; Quit completion after typing the wildcard followed by a space.
+    (keymap-set corfu-map "SPC"
+                `(menu-item "corfu-maybe-quit" nil
+                  :filter
+                  ,(lambda (_)
+                     (when (and (> (point) (point-min))
+                                (eq (char-before)
+                                    +orderless-wildcard-character))
+                       (corfu-quit)
+                       nil))))))
