@@ -1305,7 +1305,8 @@
 (add-hook 'lua-mode-hook #'subword-mode)
 (add-hook 'lua-mode-hook #'outline-minor-mode)
 (setq-hook! 'lua-mode-hook
-  outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
+  outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]"
+  lsp-semantic-tokens-enable nil)
 
 ;;; Appendix
 
