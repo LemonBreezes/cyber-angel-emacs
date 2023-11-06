@@ -735,11 +735,12 @@
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
   (require 'emms-cache)
   (require 'emms-score)
+  (require 'emms-last-played)
+  (require 'emms-info-exiftool)
   (emms-cache +1)
-  (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
+  (remove-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (emms-score +1)
   (emms-default-players)
-  (require 'emms-info-exiftool)
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
