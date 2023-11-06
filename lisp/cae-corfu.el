@@ -81,22 +81,21 @@ This variable needs to be set at the top-level before any `after!' blocks.")
                          s 'fixedcase 'literal)
                         ,(concat "[ " char-string "]+")
                         t)))))
-  (after! orderless
+  (after! (:all orderless corfu)
     ;; Orderless splits the string into components and then determines the
     ;; matching style for each component. This is all regexp stuff.
     (setq orderless-component-separator
           (+orderless-escapable-split-fn +orderless-wildcard-character))
-    (after! corfu
-      (setq corfu-separator +orderless-wildcard-character)
-      (keymap-set corfu-map (char-to-string +orderless-wildcard-character)
-                  #'+corfu-insert-wildcard-separator)
-      ;; Quit completion after typing the wildcard followed by a space.
-      (keymap-set corfu-map "SPC"
-                  `(menu-item "corfu-maybe-quit" nil
-                    :filter
-                    ,(lambda (_)
-                       (when (and (> (point) (point-min))
-                                  (eq (char-before)
-                                      +orderless-wildcard-character))
-                         (corfu-quit)
-                         nil)))))))
+    (setq corfu-separator +orderless-wildcard-character)
+    (keymap-set corfu-map (char-to-string +orderless-wildcard-character)
+                #'+corfu-insert-wildcard-separator)
+    ;; Quit completion after typing the wildcard followed by a space.
+    (keymap-set corfu-map "SPC"
+                `(menu-item "corfu-maybe-quit" nil
+                  :filter
+                  ,(lambda (_)
+                     (when (and (> (point) (point-min))
+                                (eq (char-before)
+                                    +orderless-wildcard-character))
+                       (corfu-quit)
+                       nil))))))
