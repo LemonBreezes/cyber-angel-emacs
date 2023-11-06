@@ -48,7 +48,7 @@ escape it with forward slash. Do NOT set this to SPC.
 
 This variable needs to be set at the top-level before any `after!' blocks.")
 
-(when (and (modulep! corfu +orderless)
+(when (and (modulep! :completion corfu +orderless)
            +orderless-wildcard-character)
   (defmacro +orderless-escapable-split-fn (char)
     (let ((char-string (string (if (symbolp char) (symbol-value char) char))))
