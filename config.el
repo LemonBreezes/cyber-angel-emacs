@@ -349,7 +349,7 @@
                                  list list_comprehension
                                  dictionary dictionary_comprehension
                                  parenthesized_expression subscript)))
-    :hook ((python-base-mode yaml-mode) . indent-bars-mode))
+    :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
