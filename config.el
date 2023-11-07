@@ -888,7 +888,7 @@
       ";!=" "≠"
       "-." "->"
       "=." "=>"
-      "j9" ")"))
+      "j9" "("))
 
   (use-package! smart-semicolon
     :defer t :init
