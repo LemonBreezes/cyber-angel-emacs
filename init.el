@@ -43,18 +43,18 @@
        (corfu +tng +orderless)
 
        :ui
-       doom-dashboard
-       hl-todo
-       (hydra +childframe)
-       ;;(ligatures +extra +iosevka)
-       ;;nav-flash
-       (popup +defaults)
-       (vc-gutter +pretty +diff-hl)
-       vi-tilde-fringe
-       workspaces
-       (window-select +numbers)
-       ophints
-       zen
+       ;; doom-dashboard
+       ;; hl-todo
+       ;; (hydra +childframe)
+       ;; ;;(ligatures +extra +iosevka)
+       ;; ;;nav-flash
+       ;; (popup +defaults)
+       ;; (vc-gutter +pretty +diff-hl)
+       ;; vi-tilde-fringe
+       ;; workspaces
+       ;; (window-select +numbers)
+       ;; ophints
+       ;; zen
 
        :editor
        file-templates
@@ -128,7 +128,7 @@
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
-       ;; exwm
+       exwm
        dired
        lisp
        misc-applications
