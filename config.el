@@ -44,13 +44,13 @@
         (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
 
 ;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  ;; Previously I used Iosevka Comfy and size 18.
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-        doom-serif-font (font-spec :family "IBM Plex Mono" :size 18
-                                   :weight 'light)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)))
+;; (unless (memq system-type '(cygwin windows-nt ms-dos))
+;;   ;; Previously I used Iosevka Comfy and size 18.
+;;   (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
+;;         doom-serif-font (font-spec :family "IBM Plex Mono" :size 18
+;;                                    :weight 'light)
+;;         doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
+;;                                             :size 18)))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
