@@ -40,7 +40,7 @@
 
 (doom! :completion
        (vertico +icons)
-       (corfu +tng +orderless)
+       (corfu +tng +orderless +icons +dabbrev +dict +emoji)
 
        :ui
        doom-dashboard
@@ -61,7 +61,7 @@
        format
        snippets
        multiple-cursors
-       fold
+       ;;fold
        (evil +everywhere)
        lispy
 
@@ -107,6 +107,7 @@
        (json +lsp +tree-sitter)
        (javascript +lsp +tree-sitter)
        (python +lsp +tree-sitter)
+       (clojure +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)

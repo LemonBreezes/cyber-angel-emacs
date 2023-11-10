@@ -45,12 +45,13 @@
 
 ;; Set up fonts
 (unless (memq system-type '(cygwin windows-nt ms-dos))
-  ;; Previously I used Iosevka Comfy and size 18.
-  (setq doom-font (font-spec :family "Iosevka Comfy" :size 18)
-        doom-serif-font (font-spec :family "IBM Plex Mono" :size 18
-                                   :weight 'light)
-        doom-variable-pitch-font (font-spec :family "Iosevka Comfy Duo"
-                                            :size 18)))
+  (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
+                          ("IBM Plex Mono" doom-serif-font)
+                          ("Iosevka Comfy Duo" doom-variable-pitch-font))))
+    (dolist (font fonts-to-check)
+      (if (find-font (font-spec :name (car font)))
+          (set (cadr font) (font-spec :family (car font) :size 18))
+        (warn "Font %s does not exist!" (car font))))))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
@@ -304,10 +305,10 @@
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
 
-  ;;(use-package! breadcrumb
-  ;;  :unless (modulep! :ui modeline)
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
+  (use-package! breadcrumb
+    :unless (modulep! :ui modeline)
+    :defer t :init
+    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
 
   (use-package! iscroll
     :defer t :init
@@ -349,7 +350,7 @@
                                  list list_comprehension
                                  dictionary dictionary_comprehension
                                  parenthesized_expression subscript)))
-    :hook ((python-base-mode yaml-mode) . indent-bars-mode))
+    :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
   (use-package! nice-citation
     :when (cae-display-graphic-p)
@@ -887,7 +888,8 @@
       ";=." "⇒"
       ";!=" "≠"
       "-." "->"
-      "=." "=>"))
+      "=." "=>"
+      "j9" "("))
 
   (use-package! smart-semicolon
     :defer t :init
@@ -945,8 +947,8 @@
           :n "[r"  #'cae-modeline-rotate-backward-word-at-point)
     :config
     (after! parrot-rotate
-      (setq parrot-rotate-animate-after-rotation nil
-            parrot-rotate-highlight-after-rotation nil
+      (setq parrot-rotate-animate-after-rotation t
+            parrot-rotate-highlight-after-rotation t
             parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
             parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
       (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
@@ -1046,8 +1048,8 @@
 ;;; Autocompletion
 
 (when cae-init-autocompletion-enabled-p
-  ;;(when (modulep! :completion corfu)
-  ;;  (load! "lisp/cae-corfu"))
+  (when (modulep! :completion corfu)
+    (load! "lisp/cae-corfu"))
 
   (setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
   (after! ido
@@ -1303,6 +1305,9 @@
 ;;; Lua
 
 (add-hook 'lua-mode-hook #'subword-mode)
+(add-hook 'lua-mode-hook #'outline-minor-mode)
+(setq-hook! 'lua-mode-hook
+  outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
 
 ;;; Appendix
 

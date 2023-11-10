@@ -3,7 +3,7 @@
 (defun cae-dashboard-help ()
   (interactive)
   (if (and (featurep 'evil) (evil-normal-state-p))
-      (cae-show-normal-state-bindings)
+      (cae-which-key-show-state-keymap)
     (which-key-show-keymap '+doom-dashboard-mode-map)))
 
 (map! :map +doom-dashboard-mode-map
