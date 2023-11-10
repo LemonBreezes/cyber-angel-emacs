@@ -946,8 +946,8 @@
           :n "[r"  #'cae-modeline-rotate-backward-word-at-point)
     :config
     (after! parrot-rotate
-      (setq parrot-rotate-animate-after-rotation nil
-            parrot-rotate-highlight-after-rotation nil
+      (setq parrot-rotate-animate-after-rotation t
+            parrot-rotate-highlight-after-rotation t
             parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
             parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
       (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
