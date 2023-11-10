@@ -882,12 +882,12 @@
       :before #'aas-embark-menu
       (require 'embark))
     (aas-set-snippets 'global
-                      ";--" "—"
-                      ";-." "→"
-                      ";=." "⇒"
-                      ";!=" "≠"
-                      "-." "->"
-                      "=." "=>"))
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"))
 
   (use-package! smart-semicolon
     :defer t :init
