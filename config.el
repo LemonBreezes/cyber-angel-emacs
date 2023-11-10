@@ -305,10 +305,10 @@
   ;; Show the window number in the modeline (when applicable).
   (setq winum-auto-setup-mode-line t)
 
-  ;;(use-package! breadcrumb
-  ;;  :unless (modulep! :ui modeline)
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-buffer-hook #'breadcrumb-mode))
+  (use-package! breadcrumb
+    :unless (modulep! :ui modeline)
+    :defer t :init
+    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-mode))
 
   (use-package! iscroll
     :defer t :init
