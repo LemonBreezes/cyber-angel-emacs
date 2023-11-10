@@ -308,7 +308,7 @@
   (use-package! breadcrumb
     :unless (modulep! :ui modeline)
     :defer t :init
-    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-mode))
+    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
 
   (use-package! iscroll
     :defer t :init
