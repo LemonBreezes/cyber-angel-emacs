@@ -6,6 +6,7 @@
   (add-to-list 'global-mode-string 'dired-rsync-modeline-status 'append))
 
 (after! dired
+  ;; TODO Investigate `p7zip' for `rar'.
   ;; Use parallel versions of comression programs.
   ;; Install `pigz', `pbzip2', `pixz', `plzip', and `lzop' for parallel decompression.
   ;; Install `dpkg', `rar', and `unrar' as well.
