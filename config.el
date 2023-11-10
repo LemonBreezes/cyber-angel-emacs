@@ -49,9 +49,9 @@
                           ("IBM Plex Mono" doom-serif-font)
                           ("Iosevka Comfy Duo" doom-variable-pitch-font))))
     (dolist (font fonts-to-check)
-      (if (not (find-font (font-spec :name (car font))))
-          (warn "Font %s does not exist!" (car font))
-        (set (cadr font) (font-spec :family (car font) :size 18))))))
+      (if (find-font (font-spec :name (car font)))
+          (set (cadr font) (font-spec :family (car font) :size 18))
+        (warn "Font %s does not exist!" (car font))))))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
