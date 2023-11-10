@@ -4,17 +4,17 @@
 
 ;;; Stuff that should not be disabled.
 
-(load! "lisp/cae-tty")
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
-                                        ;is also our Smartparens configuration.
-(load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
-                                        ;is also our Projectile configuration.
-(when (modulep! :editor evil)
-  (load! "lisp/cae-evil"))
-(add-hook! 'exwm-init-hook
-  (load! "lisp/cae-exwm"))
+;; (load! "lisp/cae-tty")
+;; (load! "lisp/cae-bindings")
+;; (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+;; (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+;;                                         ;is also our Smartparens configuration.
+;; (load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
+;;                                         ;is also our Projectile configuration.
+;; (when (modulep! :editor evil)
+;;   (load! "lisp/cae-evil"))
+;; (add-hook! 'exwm-init-hook
+;;   (load! "lisp/cae-exwm"))
 
 ;; Helm is not our main completion system. (Though I love Helm.)
 (when (and (modulep! :completion helm)
