@@ -108,6 +108,7 @@
        (javascript +lsp +tree-sitter)
        (python +lsp +tree-sitter)
        (clojure +lsp +tree-sitter)
+       (haskell +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
