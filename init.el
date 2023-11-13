@@ -90,6 +90,7 @@
        (lsp +peek)
        tree-sitter
        docker
+       ein
        pdf
 
        :lang
