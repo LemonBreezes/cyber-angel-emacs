@@ -180,12 +180,10 @@
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
   ;; Do not spam me with warnings on startup.
-  ;;(setq warning-minimum-level :emergency
-  ;;      warning-minimum-log-level :emergency)
-  ;;(add-hook! 'doom-first-file-hook :append
-  ;;  (defun cae-warnings-initialize ()
-  ;;    (setq warning-minimum-level :error
-  ;;          warning-minimum-log-level :error)))
+  (add-hook! 'doom-first-file-hook :append
+    (defun cae-warnings-initialize ()
+      (setq warning-minimum-level :error
+            warning-minimum-log-level :error)))
 
   (after! alert
     (setq alert-default-style 'libnotify))
