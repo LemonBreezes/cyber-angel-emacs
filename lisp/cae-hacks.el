@@ -110,14 +110,10 @@ It is meant to be used as a `post-gc-hook'."
     (when (bolp)
       (goto-char p))))
 
-;; This autoload fixes a void function error on `find-file-hook' that occurs
-;; sporadically for me.
+;; I made these to work around void function errors that I've seen once and
+;; haven't seen since.
 (autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
-
-;; Another error but during completion. Strange.
 (autoload 'tramp-command-completion-p "tramp")
-
-;; Saw a void function error once. Hopefully this makes it never show up again.
 (autoload 'org-eldoc-get-src-lang "org-eldoc")
 
 ;; For backwards compatibility.
