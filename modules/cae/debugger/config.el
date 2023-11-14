@@ -19,9 +19,9 @@
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
 
   (when (modulep! :lang cc +lsp)
-    (add-transient-hook! 'c-mode-common-hook
-      (require 'dap-cpptools)
-      (dap-cpptools-setup))
+    ;;(add-transient-hook! 'c-mode-common-hook
+    ;;  (require 'dap-cpptools)
+    ;;  (dap-cpptools-setup))
     (when (modulep! :tools eval)
       (after! cc-mode
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
