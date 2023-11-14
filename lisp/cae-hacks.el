@@ -117,6 +117,9 @@ It is meant to be used as a `post-gc-hook'."
 ;; Another error but during completion. Strange.
 (autoload 'tramp-command-completion-p "tramp")
 
+;; Saw a void function error once. Hopefully this makes it never show up again.
+(autoload 'org-eldoc-get-src-lang "org-eldoc")
+
 ;; For backwards compatibility.
 (defun toggle-read-only (arg)
   (read-only-mode
