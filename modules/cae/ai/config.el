@@ -1,5 +1,7 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
+(defvar cae-openai-default-model "gpt-4-1106-preview")
+
 (use-package! whisper
   :defer t :init
   (map! "<f10>" #'whisper-run)
@@ -30,7 +32,7 @@
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
-  (setq org-ai-default-chat-model "gpt-4"
+  (setq org-ai-default-chat-model cae-openai-default-model
         org-ai-on-project-modify-with-diffs t)
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
@@ -46,6 +48,12 @@
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
+  (if (member cae-openai-default-model chatgpt-shell-model-versions)
+      (setq chatgpt-shell-model-version
+            (seq-position chatgpt-shell-model-versions cae-openai-default-model))
+    (setq chatgpt-shell-model-versions
+          (cons cae-openai-default-model chatgpt-shell-model-versions)
+          chatgpt-shell-model-version 0))
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
