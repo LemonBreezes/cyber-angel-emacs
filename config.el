@@ -179,7 +179,7 @@
     (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
-  ;; Do not spam me with warnings on startup.
+  ;; Do not spam me with warnings while using `org-ai'.
   (add-hook! 'doom-first-file-hook :append
     (defun cae-warnings-initialize ()
       (setq warning-minimum-level :error
