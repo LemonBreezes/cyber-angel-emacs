@@ -44,7 +44,8 @@
         (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
 
 ;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
+(unless (or (memq system-type '(cygwin windows-nt ms-dos))
+            (not (cae-display-graphic-p)))
   (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
                           ("IBM Plex Mono" doom-serif-font)
                           ("Iosevka Comfy Duo" doom-variable-pitch-font))))
