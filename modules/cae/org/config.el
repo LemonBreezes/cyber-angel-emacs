@@ -28,9 +28,6 @@
   (unwind-protect (apply oldfun args)
     (advice-remove #'read-char-exclusive #'cae-return-del-as-spc-a)))
 
-;; This is giving me an error.
-(remove-hook 'org-mode-hook #'+org-make-last-point-visible-h)
-
 (use-package! org-appear
   :defer t :init
   (add-hook 'org-mode-hook #'org-appear-mode)
