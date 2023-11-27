@@ -35,8 +35,8 @@
           magit-log-auto-more t
           magit-pull-or-fetch t)
     (when (modulep! :tools magit +forge)
-      ;;(advice-remove #'forge-get-repository #'+magit--forge-get-repository-lazily-a)
-      ;;(advice-remove #'forge-dispatch #'+magit--forge-build-binary-lazily-a)
+      (advice-remove #'forge-get-repository #'+magit--forge-get-repository-lazily-a)
+      (advice-remove #'forge-dispatch #'+magit--forge-build-binary-lazily-a)
       ;;(map! :map magit-status-mode-map
       ;;      ;; Killing the Magit status buffer removes the `forge-pull' progress
       ;;      ;; from the modeline. One alternative is setting
