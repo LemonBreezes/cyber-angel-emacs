@@ -789,10 +789,6 @@
       (cl-letf (((symbol-function #'display-buffer-in-side-window)
                  (symbol-function #'display-buffer)))
         (funcall oldfun help-string)))
-    ;; I don't like Doom's `f' for a Lisp function. I prefer `C-f' and `f' to
-    ;; behave the same way globally rather than having `f' be context-sensitive.
-    (remove-hook! (lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
-      #'+evil-embrace-lisp-mode-hook-h)
     :config
     (after! evil-embrace
       (setq evil-embrace-show-help-p t))
