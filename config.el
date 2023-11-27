@@ -996,7 +996,7 @@
     ;; This patches around this function not being compatible with Evil when
     ;; `evil-move-beyond-eol' is `nil'. This should probably go into
     ;; `evil-collection'.
-    (defadvice! cae-beginend-goto-eol-a (&rest _)
+    (defadvice! cae-beginend-goto-eol-a ()
       :before #'beginend-prog-mode-goto-end
       (goto-char (eol))))
 
