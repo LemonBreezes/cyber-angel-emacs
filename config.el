@@ -274,7 +274,7 @@
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
         ("^\\*notmuch-hello"  :ignore)
         ("^\\*gud-" :ttl nil :size 0.35)
-        ("embrace-help" :side top)
+        ("embrace-help" :side top :size +popup-shrink-to-fit)
         ("*helm " :ignore t)
         ("^\\*Async Shell Command\\*$" :side top :select nil :ttl 0 :quit t
          :size cae-popup-shrink-to-fit)
