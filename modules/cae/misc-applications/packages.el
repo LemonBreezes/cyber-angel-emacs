@@ -31,6 +31,7 @@
      (package! pulseaudio-control))
 (package! trashed)
 (package! neato-graph-bar)
+(package! journalctl-mode)
 
 ;; Insert
 (when (or (modulep! :cae helm)
