@@ -317,7 +317,10 @@
         "j" #'journalctl)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "j" "Journalctl")))
+      "j" "Journalctl"))
+  :config
+  (map! :map journalctl-mode-map
+        :n "q" #'journalctl-quit))
 
 
 ;;; Insert
