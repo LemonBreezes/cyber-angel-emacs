@@ -1304,6 +1304,14 @@
 (setq-hook! 'lua-mode-hook
   outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
 
+;; Prevent heading backgrounds from being overwritten.
+(when cae-theme-extend-heading-faces
+  (after! lsp
+    (add-hook! 'lua-mode-hook
+      (defun cae-lsp-do-not-highlight-comments-h ()
+        (setq-local lsp-semantic-token-faces
+                  (assoc-delete-all "comment" lsp-semantic-token-faces))))))
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
