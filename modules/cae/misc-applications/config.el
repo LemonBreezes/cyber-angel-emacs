@@ -312,10 +312,12 @@
         :ng "q" #'quit-window))
 
 (use-package! journalctl-mode
-  :defer t :config
-  (when (modulep! :editor evil)
-    (after! evil
-      (evil-set-initial-state #'journalctl-mode 'insert))))
+  :defer t :init
+  (map! :map +misc-applications-system-map
+        "j" #'journalctl)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-system-map
+      "j" "Journalctl")))
 
 
 ;;; Insert
