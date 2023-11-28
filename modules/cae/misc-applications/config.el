@@ -311,6 +311,9 @@
   (map! :map neato-graph-bar-mode-map
         :ng "q" #'quit-window))
 
+(use-package! journalctl-mode
+  :defer t)
+
 
 ;;; Insert
 
