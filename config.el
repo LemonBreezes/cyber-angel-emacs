@@ -1310,7 +1310,7 @@
     (add-hook! 'lua-mode-hook
       (defun cae-lsp-do-not-highlight-comments-h ()
         (setq-local lsp-semantic-token-faces
-                  (assoc-delete-all "comment" lsp-semantic-token-faces))))))
+                    (assoc-delete-all "comment" lsp-semantic-token-faces))))))
 
 ;;; Appendix
 
