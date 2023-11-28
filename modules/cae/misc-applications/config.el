@@ -312,7 +312,10 @@
         :ng "q" #'quit-window))
 
 (use-package! journalctl-mode
-  :defer t)
+  :defer t :config
+  (when (modulep! :editor evil)
+    (after! evil
+      (evil-set-initial-state #'journalctl-mode 'insert))))
 
 
 ;;; Insert
