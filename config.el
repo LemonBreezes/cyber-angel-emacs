@@ -169,6 +169,7 @@
      '(("" . "special-lispy-\\(.*\\)") . (nil . "lispy-\\1"))
      '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "\\1"))))
 
+  ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
 
   (after! mule-util
