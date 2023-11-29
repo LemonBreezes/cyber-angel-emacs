@@ -676,7 +676,7 @@
   ;; Allow remembering risky variables.
   (advice-add 'risky-local-variable-p :override #'ignore)
 
-  ;; Kill buffers without asking.
+  ;; Kill process buffers without asking.
   (setq kill-buffer-query-functions
         (remq 'process-kill-buffer-query-function
               kill-buffer-query-functions))
