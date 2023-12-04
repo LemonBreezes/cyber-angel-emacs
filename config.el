@@ -1293,7 +1293,7 @@
   outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
 
 ;; Prevent heading backgrounds from being overwritten.
-(when cae-theme-extend-heading-faces
+(when (bound-and-true-p cae-theme-extend-heading-faces)
   (after! lsp
     (add-hook! 'lua-mode-hook
       (defun cae-lsp-do-not-highlight-comments-h ()
