@@ -30,7 +30,9 @@
         org-ai-on-project-max-files 300)
   (org-ai-global-mode +1)
   (map! :map org-ai-mode-map
-        [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
+        [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point
+        :map org-ai-on-project-mode-map
+        :i "q" #'sellf-insert-command)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
   (setq org-ai-default-chat-model cae-openai-default-model
