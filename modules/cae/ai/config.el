@@ -32,6 +32,7 @@
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point
         :map org-ai-on-project-mode-map
+        ;; Do not accidentally quit `org-ai-on-project-mode' when trying to type `q'.
         :i "q" #'sellf-insert-command)
   (defvar org-ai-global-mode-prefix-map
     (lookup-key org-ai-global-mode-map (kbd "C-c M-a")))
