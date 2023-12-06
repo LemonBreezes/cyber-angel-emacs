@@ -26,7 +26,8 @@
   (require 'greader-espeak)
   (require 'greader)
   (setq org-ai-talk-say-words-per-minute 210
-        org-ai-talk-say-voice "Karen")
+        org-ai-talk-say-voice "Karen"
+        org-ai-on-project-max-files 600)
   (org-ai-global-mode +1)
   (map! :map org-ai-mode-map
         [remap org-ai-kill-region-at-point] #'cae-ai-org-ai-kill-region-at-point)
