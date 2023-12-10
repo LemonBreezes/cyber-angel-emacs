@@ -47,8 +47,7 @@ exist after each headings's drawers."
                          'tree))))
 
 (defun cae-unpackaged-org-fix-all-blank-lines ()
-  (unless (and (project-current)
-               (string-match-p "doom.*emacs" (project-name (project-current))))
+  (unless (derived-mode-p 'doom-docs-org-mode)
     (ignore-errors (cae-unpackaged-org-fix-blank-lines '(4)))))
 
 ;;;###autoload
