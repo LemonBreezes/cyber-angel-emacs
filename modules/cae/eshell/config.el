@@ -105,6 +105,7 @@
 
 (after! em-hist
   (setq eshell-history-size nil
+        eshell-history-append t
         eshell-hist-ignoredups 'erase)
   (add-to-list 'eshell-expand-input-functions
                #'eshell-expand-history-references))
