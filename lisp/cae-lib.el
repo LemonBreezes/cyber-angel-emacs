@@ -5,8 +5,8 @@
   (ignore-errors (apply fun args)))
 
 (defun cae-display-graphic-p ()
-  (and (display-graphic-p)
-       (not (daemonp))))
+  (or (display-graphic-p)
+      (daemonp)))
 
 (defun cae-tty-disable-unicode-p ()
   (not (cae-display-graphic-p)))
