@@ -4,6 +4,7 @@
            (not (or (getenv "EXWM_RUNNING")
                     (getenv "RATPOISON")
                     (getenv "I3SOCK")
+                    (getenv "KDE_FULL_SESSION")
                     (getenv "WAYLAND_DISPLAY"))))
 
   ;; Prevent nested Emacs sessions from loading EXWM.
