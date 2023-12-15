@@ -214,6 +214,7 @@
 
   (add-hook 'doom-first-file-hook #'column-number-mode)
 
+  ;; This package could use some improvements or a fork.
   (use-package! nyan-mode
     :when (cae-display-graphic-p)
     :defer t :init
