@@ -226,4 +226,4 @@
       :defer t :init
       (add-hook 'doom-after-init-hook #'mlscroll-mode)
       (add-hook! 'doom-load-theme-hook
-                 (mlscroll-layout t)))))
+        (mlscroll-layout t)))))
