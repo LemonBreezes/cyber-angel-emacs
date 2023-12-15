@@ -739,7 +739,7 @@
           ispell-dictionary "en_US"
           ispell-help-in-bufferp 'electric)
     (when-let* ((nixos-aspell-dir "/run/current-system/sw/lib/aspell")
-               (file-exists-p nixos-aspell-dir))
+                (file-exists-p nixos-aspell-dir))
       (setq ispell-aspell-data-dir nixos-aspell-dir
             ispell-aspell-dict-dir nixos-aspell-dir)))
 
