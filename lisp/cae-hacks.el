@@ -160,3 +160,6 @@ It is meant to be used as a `post-gc-hook'."
       monroe-mode racket-mode racket-repl-mode
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
+
+;; Void variable error for Modus themes
+(defvar bg-search-current nil)
