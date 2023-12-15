@@ -163,3 +163,4 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; Void variable error for Modus themes
 (defvar bg-search-current nil)
+(defvar bg-search-lazy nil)
