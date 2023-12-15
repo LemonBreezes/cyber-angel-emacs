@@ -4,6 +4,9 @@
 ((nil
   . ((eval
       . (progn
+          (unless (fboundp 'cae-display-graphic-p)
+            (defalias 'cae-display-graphic-p 'display-graphic-p))
+
           ;; Prevent an Elisp file from being saved if it contains an error.
           ;; This forces us to write our config so that it's idempotent, as it
           ;; will get reloaded on every save.
