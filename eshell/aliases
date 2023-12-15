@@ -73,8 +73,6 @@ alias update-gentoo2 compile sudo emerge -uDUv @world --with-bdeps=y --changed-u
 alias doom ~/.config/emacs/bin/doom $*
 alias update-doom-patch rm ~/.config/emacs/cae-emacs-doom.patch && cd ~/.config/emacs && git diff *> ~/.config/doom/cae-emacs-doom.patch && cd -
 
-alias update sudo nixos-rebuild switch --upgrade-all$*
-alias rebuild sudo nixos-rebuild switch $*
 alias nixos-rebuild sudo nixos-rebuild $*
 alias nix-store sudo nix-store $*
 
