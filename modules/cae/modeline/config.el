@@ -214,12 +214,14 @@
 
   (add-hook 'doom-first-file-hook #'column-number-mode)
 
-  ;; I have this disabled because I never use it to scroll the window.
-  (when (modulep! +pretty)
-    (use-package! nyan-mode
-      :when (cae-display-graphic-p)
+  (if (modulep! +pretty)
+      (use-package! nyan-mode
+        :when (cae-display-graphic-p)
+        :defer t :init
+        (add-hook 'doom-first-buffer-hook #'nyan-mode)
+        :config
+        (setq! nyan-bar-length 20
+               nyan-minimum-window-width 20))
+    (use-package! mlscroll
       :defer t :init
-      (add-hook 'doom-after-init-hook #'nyan-mode)
-      :config
-      (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20))))
+      (add-hook 'doom-first-buffer-hook #'mlscroll-mode))))
