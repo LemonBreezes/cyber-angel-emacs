@@ -118,7 +118,11 @@
         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
         ;; I have this mostly because I want to work on getting the heading
         ;; backgrounds working with the code folding!
-        modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
+        modus-themes-common-palette-overrides
+        (nconc modus-themes-preset-overrides-intense
+               ;; Made the modeline more subtle.
+               '((border-mode-line-active unspecified)
+                 (border-mode-line-inactive unspecified)))))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
