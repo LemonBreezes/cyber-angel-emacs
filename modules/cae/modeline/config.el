@@ -214,10 +214,11 @@
 
   (add-hook 'doom-first-file-hook #'column-number-mode)
 
-  (use-package! nyan-mode
-    :when (cae-display-graphic-p)
-    :defer t :init
-    (add-hook 'doom-after-init-hook #'nyan-mode)
-    :config
-    (setq! nyan-bar-length 20
-           nyan-minimum-window-width 20)))
+  (when (modulep! +pretty)
+    (use-package! nyan-mode
+      :when (cae-display-graphic-p)
+      :defer t :init
+      (add-hook 'doom-after-init-hook #'nyan-mode)
+      :config
+      (setq! nyan-bar-length 20
+             nyan-minimum-window-width 20))))
