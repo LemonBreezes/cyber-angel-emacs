@@ -737,7 +737,9 @@
   (after! ispell
     (setq ispell-quietly t
           ispell-dictionary "en_US"
-          ispell-help-in-bufferp 'electric))
+          ispell-help-in-bufferp 'electric)
+    (when (file-exists-p "/run/current-system/sw/lib/aspell")
+      (setq ispell-aspell-data-dir "/run/current-system/sw/lib/aspell")))
 
   (after! vline
     (setq vline-idle-time 0.1))
