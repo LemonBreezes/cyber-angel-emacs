@@ -74,6 +74,6 @@ alias doom ~/.config/emacs/bin/doom $*
 alias update-doom-patch rm ~/.config/emacs/cae-emacs-doom.patch && cd ~/.config/emacs && git diff *> ~/.config/doom/cae-emacs-doom.patch && cd -
 
 alias update sudo nixos-rebuild switch --upgrade-all
-alias nixos-rebuild sudo nixos-rebuild
+alias nixos-rebuild sudo nixos-rebuild $*
 
 alias emacs-patch sudo bash -c "rm /etc/portage/patches/app-editors/emacs/test.patch 2>/dev/null && git diff > /etc/portage/patches/app-editors/emacs/test.patch"
