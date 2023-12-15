@@ -739,7 +739,8 @@
           ispell-dictionary "en_US"
           ispell-help-in-bufferp 'electric)
     (when (file-exists-p "/run/current-system/sw/lib/aspell")
-      (setq ispell-aspell-data-dir "/run/current-system/sw/lib/aspell")))
+      (setq ispell-aspell-data-dir "/run/current-system/sw/lib/aspell"
+            ispell-aspell-dict-dir "/run/current-system/sw/lib/aspell")))
 
   (after! vline
     (setq vline-idle-time 0.1))
