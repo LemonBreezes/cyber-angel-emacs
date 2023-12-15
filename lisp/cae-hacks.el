@@ -162,5 +162,6 @@ It is meant to be used as a `post-gc-hook'."
       sly-mrepl-mode stumpwm-mode)))
 
 ;; Void variable error for Modus themes
-(defvar bg-search-current nil)
-(defvar bg-search-lazy nil)
+(after! modus-themes
+  (defvar bg-search-current nil)
+  (defvar bg-search-lazy nil))
