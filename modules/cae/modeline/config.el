@@ -224,4 +224,6 @@
                nyan-minimum-window-width 20))
     (use-package! mlscroll
       :defer t :init
-      (add-hook 'doom-after-init-hook #'mlscroll-mode))))
+      (add-hook 'doom-after-init-hook #'mlscroll-mode)
+      (add-hook! 'doom-load-theme-hook
+                 (mlscroll-layout t)))))
