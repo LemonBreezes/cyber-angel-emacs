@@ -212,13 +212,4 @@
   (defalias 'cae-modeline-truncate-string (doom-rpartial #'truncate-string-to-width 30 nil nil t))
   (advice-add #'vc-git-mode-line-string :filter-return #'cae-modeline-truncate-string)
 
-  (add-hook 'doom-first-file-hook #'column-number-mode)
-
-  (when (modulep! +pretty)
-    (use-package! nyan-mode
-      :when (cae-display-graphic-p)
-      :defer t :init
-      (add-hook 'doom-after-init-hook #'nyan-mode)
-      :config
-      (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20))))
+  (add-hook 'doom-first-file-hook #'column-number-mode))
