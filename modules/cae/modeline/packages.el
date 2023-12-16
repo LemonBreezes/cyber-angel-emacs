@@ -2,7 +2,7 @@
 ;;; private/modeline/packages.el
 
 (package! minions)
-(if (modulep! +pretty)
+(when (modulep! +pretty)
     (package! nyan-mode))
 (package! anzu)
 (when (modulep! :editor evil)
