@@ -37,12 +37,6 @@
     (when (modulep! :tools magit +forge)
       (advice-remove #'forge-get-repository #'+magit--forge-get-repository-lazily-a)
       (advice-remove #'forge-dispatch #'+magit--forge-build-binary-lazily-a)
-      (map! :map magit-status-mode-map
-            ;; Killing the Magit status buffer removes the `forge-pull' progress
-            ;; from the modeline. One alternative is setting
-            ;; `forge--mode-line-buffer' every time the new Magit buffer is
-            ;; created in that repo.
-            :nvg "q" #'magit-mode-bury-buffer)
       (after! forge
         (setq forge-pull-notifications t
               forge-buffer-draft-p t)))))
