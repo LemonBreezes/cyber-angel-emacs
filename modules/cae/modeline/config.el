@@ -181,7 +181,7 @@
             auto-revert-mode
             auto-revert-tail-mode
             font-lock-mode
-            highlight-changes-mode
+
             ruler-mode
             vline-mode))
     (setq minions-prominent-modes '(defining-kbd-macro
@@ -195,19 +195,19 @@
       minions-prominent-modes (delq 'flycheck-mode
                                     (default-value 'minions-prominent-modes)))
     (after! lsp-ui
-      (dolist (mode-line-format (cl-remove-if-not (lambda (s) (string-prefix-p "lsp-" (symbol-name s))) minor-mode-list))
-        (add-to-list 'minions-prominent-modes mode-line-format 'append)))
-    (after! compilation
-      (or (assq 'compilation-in-progress mode-line-modes)
-          (add-to-list 'minions-mode-line-modes
-                       (list 'compilation-in-progress
-                             (propertize "[Compiling] "
-                                         'help-echo "Compiling; mouse-2: Goto Buffer"
-                                         'mouse-face 'mode-line-highlight
-                                         'local-map
-                                         (make-mode-line-mouse-map
-                                          'mouse-2
-                                          #'compilation-goto-in-progress-buffer)))))))
+
+      (add-to-list 'minions-prominent-modes mode-line-format 'append)))
+  (after! compilation
+    (or (assq 'compilation-in-progress mode-line-modes)
+        (add-to-list 'minions-mode-line-modes
+                     (list 'compilation-in-progress
+                           (propertize "[Compiling] "
+                                       'help-echo "Compiling; mouse-2: Goto Buffer"
+                                       'mouse-face 'mode-line-highlight
+                                       'local-map
+                                       (make-mode-line-mouse-map
+                                        'mouse-2
+                                        #'compilation-goto-in-progress-buffer))))))
 
   (defalias 'cae-modeline-truncate-string (doom-rpartial #'truncate-string-to-width 30 nil nil t))
   (advice-add #'vc-git-mode-line-string :filter-return #'cae-modeline-truncate-string)
@@ -221,4 +221,9 @@
       (add-hook 'doom-after-init-hook #'nyan-mode)
       :config
       (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20))))
+             nyan-minimum-window-width 20)))
+
+  (use-package! wakatime-ui-mode
+    :when (modulep! +wakatime)
+    :defer t :init
+    (add-hook 'wakatime-mode-hook #'wakatime-ui-mode)))
