@@ -67,6 +67,7 @@
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
 (package! crontab-mode)
+(package! inputrc-mode)
 (package! ebuild-mode :built-in t)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
