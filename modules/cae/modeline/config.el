@@ -226,4 +226,7 @@
   (use-package! wakatime-ui-mode
     :when (modulep! +wakatime)
     :defer t :init
-    (add-hook 'wakatime-mode-hook #'wakatime-ui-mode)))
+    (add-hook 'wakatime-mode-hook #'wakatime-ui-mode))
+
+  (use-package! mlscroll
+    :init (add-hook 'doom-after-init-hook #'mlscroll-mode)))
