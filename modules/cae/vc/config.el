@@ -110,10 +110,10 @@
         vc-make-backup-files t))
 
 (use-package! abridge-diff
-  :after magit)
+  :after magit :config (abridge-diff-mode +1))
 
 (use-package! magit-stats
-  :defer t :config (abridge-diff-mode +1))
+  :defer t)
 
 (use-package! embark-vc
   :after embark)
