@@ -833,10 +833,6 @@
     :config
     (setq wakatime-cli-path (executable-find "wakatime")))
 
-  (use-package! wakatime-ui-mode
-    :defer t :init
-    (add-hook 'wakatime-mode-hook #'wakatime-ui-mode))
-
   (use-package! titlecase
     :defer t :init
     (after! embark
