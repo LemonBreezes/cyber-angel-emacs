@@ -113,8 +113,7 @@
   :after magit)
 
 (use-package! magit-stats
-  :defer t
-  :config (abridge-diff-mode +1))
+  :defer t :config (abridge-diff-mode +1))
 
 (use-package! embark-vc
   :after embark)
