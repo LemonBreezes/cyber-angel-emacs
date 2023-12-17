@@ -63,6 +63,7 @@
 (package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! wakatime-mode)
+(package! symbols-outline)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
