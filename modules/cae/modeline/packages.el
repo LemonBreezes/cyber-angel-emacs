@@ -8,5 +8,5 @@
 (when (modulep! :editor evil)
   (package! evil-anzu))
 (when (modulep! +wakatime)
-  package! wakatime-ui :recipe (:host github :repo "Artawower/wakatime-ui.el"))
+  (package! wakatime-ui :recipe (:host github :repo "Artawower/wakatime-ui.el")))
 (package! mlscroll)
