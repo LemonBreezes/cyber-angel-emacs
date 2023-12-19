@@ -2,8 +2,8 @@
 
 ;;; Preamble
 
-(defvar +misc-applications-music-dir "/mnt/hdd/music/")
-(defvar +misc-applications-videos-dir "/mnt/hdd/videos/")
+(defvar +misc-applications-music-dir "~/Music")
+(defvar +misc-applications-videos-dir "~/Videos")
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
