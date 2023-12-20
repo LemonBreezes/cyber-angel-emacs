@@ -1,6 +1,6 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; This is so that I don't accidentally start a daemon.
+;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
 (add-to-list 'safe-local-variable-directories doom-user-dir)
