@@ -1,7 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(when (daemonp)
-  (kill-emacs))
+;; This is so that I don't accidentally start a daemon.
+(when (daemonp) (kill-emacs))
 
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
