@@ -10,9 +10,10 @@
            :ig "<return>" #'cae-unpackaged-org-return-dwim
            :ig "RET" #'cae-unpackaged-org-return-dwim)
           (:when (modulep! :editor evil)
-           :map evil-org-mode-map
-           :ig "<return>" nil
-           :ig "RET" nil)))
+           (:after evil-org
+            :map evil-org-mode-map
+            :ig "<return>" nil
+            :ig "RET" nil))))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
