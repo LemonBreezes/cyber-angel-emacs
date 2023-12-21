@@ -440,7 +440,7 @@
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   :config
   (when (modulep! :completion corfu)
-    (add-to-list 'corfu-excluded-modes #'speed-type-mode))
+    (add-to-list 'global-corfu-modes '(not speed-type-mode)))
   (when (modulep! :editor evil)
     (after! evil
       (evil-set-initial-state #'speed-type-mode 'insert)))
