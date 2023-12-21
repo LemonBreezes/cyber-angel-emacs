@@ -6,12 +6,13 @@
 ;;; Org
 (when (modulep! :lang org)
   (after! org
-    (map! :map org-mode-map
-          :ig "<return>" #'cae-unpackaged-org-return-dwim
-          :ig "RET" #'cae-unpackaged-org-return-dwim
-          :map evil-org-mode-map
-          :ig "<return>" nil
-          :ig "RET" nil))
+    (map! (:map org-mode-map
+           :ig "<return>" #'cae-unpackaged-org-return-dwim
+           :ig "RET" #'cae-unpackaged-org-return-dwim)
+          (:when (modulep! :editor evil)
+           :map evil-org-mode-map
+           :ig "<return>" nil
+           :ig "RET" nil)))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
