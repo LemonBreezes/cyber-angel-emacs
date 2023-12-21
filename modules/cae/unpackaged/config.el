@@ -8,7 +8,10 @@
   (after! org
     (map! :map org-mode-map
           :ig "<return>" #'cae-unpackaged-org-return-dwim
-          :ig "RET" #'cae-unpackaged-org-return-dwim))
+          :ig "RET" #'cae-unpackaged-org-return-dwim
+          :map evil-org-mode-map
+          :ig "<return>" nil
+          :ig "RET" nil))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
