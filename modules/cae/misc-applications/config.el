@@ -601,7 +601,8 @@
   (after! zone-rainbow
     (setq zone-rainbow-background "#000000"))
 
-  (unless (bound-and-true-p exwm--connection)
+  (when (and (not (bound-and-true-p exwm--connection))
+             (modulep! +screensaver))
     (zone-when-idle (* 5 60))))
 
 ;; Here's another Zone that says positive words together with their definitions.
