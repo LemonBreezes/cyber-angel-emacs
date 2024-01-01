@@ -55,3 +55,21 @@ I am also maintaining my own fork of Doom Emacs where I pre-emptively merge
 specific Doom Emacs PRs that I am currently using:
 
 https://github.com/lemonbreezes/doomemacs
+
+* Leader key bindings
+
+| Module   | Key | Command                        |
+|----------+-----+--------------------------------|
+|          | fi  | ~file-info-show~                 |
+|          | c~  | ~naming-convention-map~          |
+|          | k   | ~ctl-x-map~                      |
+| vc       | iI  | ~gitignore-templates-insert~     |
+| vc       | tB  | ~blamer-mode~                    |
+|          | d   | ~+doom-dashboard/open~           |
+|          | tT  | ~modus-themes-toggle~            |
+|          | bo  | ~cae-evil-buffer-org-new~        |
+| gnus     | og  | ~=gnus~                          |
+| debugger | od  | ~cae-debugger-run-or-pop-to-gdb~ |
+| ai       | oc  | ~cae-ai-toggle-chatgpt-shell~  |
+| ai       | oC  | ~chatgpt-shell~                  |
+| exwm     | $   | ~helm-run-external-command~    |
