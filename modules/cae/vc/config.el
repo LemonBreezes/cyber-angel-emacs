@@ -18,10 +18,6 @@
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
-  ;; EDIT: Hopefully this is no longer necessary now that I fixed my
-  ;; `authinfo' authentication.
-  ;;(after! ghub-graphql
-  ;;  (setq ghub-graphql-items-per-request 10))
   (after! magit
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
