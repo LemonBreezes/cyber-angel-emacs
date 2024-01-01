@@ -58,6 +58,9 @@ https://github.com/lemonbreezes/doomemacs
 
 * Leader key bindings
 
+These are the non-misc-applications leader keybindings for this Emacs config
+that are in currently enabled modules.
+
 | Module   | Key | Command                        |
 |----------+-----+--------------------------------|
 |          | fi  | ~file-info-show~                 |
@@ -70,6 +73,6 @@ https://github.com/lemonbreezes/doomemacs
 |          | bo  | ~cae-evil-buffer-org-new~        |
 | gnus     | og  | ~=gnus~                          |
 | debugger | od  | ~cae-debugger-run-or-pop-to-gdb~ |
-| ai       | oc  | ~cae-ai-toggle-chatgpt-shell~  |
+| ai       | oc  | ~cae-ai-toggle-chatgpt-shell~    |
 | ai       | oC  | ~chatgpt-shell~                  |
-| exwm     | $   | ~helm-run-external-command~    |
+| exwm     | $   | ~helm-run-external-command~      |
