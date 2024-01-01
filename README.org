@@ -61,19 +61,19 @@ https://github.com/lemonbreezes/doomemacs
 These are the non-misc-applications leader keybindings for this Emacs config
 that are in currently enabled modules.
 
-| Module   | Key  | Command                        |
-|----------+------+--------------------------------|
-|          | fi   | ~file-info-show~                 |
-|          | k    | ~ctl-x-map~                      |
-|          | d    | ~+doom-dashboard/open~           |
-|          | tT   | ~modus-themes-toggle~            |
-|          | c~   | ~naming-convention-map~          |
-| evil     | bo   | ~cae-evil-buffer-org-new~        |
-| vc       | iI   | ~gitignore-templates-insert~     |
-| vc       | tB   | ~blamer-mode~                    |
-| vc       | gRET | ~git-email-format-patch~         |
-| gnus     | og   | ~=gnus~                          |
-| debugger | od   | ~cae-debugger-run-or-pop-to-gdb~ |
-| ai       | oc   | ~cae-ai-toggle-chatgpt-shell~    |
-| ai       | oC   | ~chatgpt-shell~                  |
-| exwm     | $    | ~helm-run-external-command~      |
+| Module or package | Key  | Command                        |
+|-------------------+------+--------------------------------|
+|                   | fi   | ~file-info-show~                 |
+|                   | k    | ~ctl-x-map~                      |
+|                   | d    | ~+doom-dashboard/open~           |
+|                   | tT   | ~modus-themes-toggle~            |
+|                   | c~   | ~naming-convention-map~          |
+| evil              | bo   | ~cae-evil-buffer-org-new~        |
+| vc                | iI   | ~gitignore-templates-insert~     |
+| vc                | tB   | ~blamer-mode~                    |
+| vc                | gRET | ~git-email-format-patch~         |
+| gnus              | og   | ~=gnus~                          |
+| debugger          | od   | ~cae-debugger-run-or-pop-to-gdb~ |
+| ai                | oc   | ~cae-ai-toggle-chatgpt-shell~    |
+| ai                | oC   | ~chatgpt-shell~                  |
+| exwm              | $    | ~helm-run-external-command~      |
