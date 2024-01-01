@@ -77,3 +77,5 @@ that are in currently enabled modules.
 | ai                | oc   | ~cae-ai-toggle-chatgpt-shell~    |
 | ai                | oC   | ~chatgpt-shell~                  |
 | exwm              | $    | ~helm-run-external-command~      |
+| holy              | F    | ~doom-leader-fold-map~           |
+| holy              | to   | ~symbol-overlay-mode~          |
