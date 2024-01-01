@@ -972,6 +972,7 @@
           :desc "under_score" "_" #'string-inflection-underscore
           :desc "Upper_Score" "u" #'string-inflection-capital-underscore
           :desc "UP_CASE" "U" #'string-inflection-upcase)
+    (defvaralias 'naming-convention-map 'doom-leader-naming\ convention-map)
     (after! evil
       (evil-define-operator evil-operator-string-inflection (beg end _type)
         "Define a new evil operator that cycles symbol casing."
