@@ -41,4 +41,5 @@
         gdb-debuginfod-enable nil
         gdb-debuginfod-enable-setting nil
         gdb-display-io-buffer nil))
-(map! :leader "od" #'cae-debugger-run-or-pop-to-gdb)
+(map! :leader
+      :desc "Pop GDB" "og" #'cae-debugger-run-or-pop-to-gdb)
