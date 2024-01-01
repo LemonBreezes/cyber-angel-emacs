@@ -42,4 +42,4 @@
         gdb-debuginfod-enable-setting nil
         gdb-display-io-buffer nil))
 (map! :leader
-      :desc "Start GDB" "og" #'cae-debugger-run-or-pop-to-gdb)
+      :desc "GDB" "og" #'cae-debugger-run-or-pop-to-gdb)
