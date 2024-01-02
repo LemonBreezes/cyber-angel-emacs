@@ -1015,7 +1015,7 @@
     ;; Define replace commands analogously to ordinary Isearch.
     (define-key isearch-mb-minibuffer-map (kbd "M-%")
       #'anzu-isearch-query-replace)
-    (define-key isearch-mb-minibuffer-map (kbd "M-s %")
+    (define-key isearch-mb-minibuffer-map (kbd "C-M-%")
       #'anzu-isearch-query-replace-regexp))
 
   (use-package! edit-indirect
