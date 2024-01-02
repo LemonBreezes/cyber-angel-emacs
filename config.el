@@ -1012,11 +1012,9 @@
       (map! :map isearch-mb-minibuffer-map
             [remap consult-history] #'consult-isearch-history)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-    ;; Define replace commands analogously to ordinary Isearch.
-    (define-key isearch-mb-minibuffer-map (kbd "M-%")
-      #'anzu-isearch-query-replace)
-    (define-key isearch-mb-minibuffer-map (kbd "C-M-%")
-      #'anzu-isearch-query-replace-regexp))
+    (map! :map isearch-mb-minibuffer-map
+          [remap isearch-query-replace] #'anzu-isearch-query-replace
+          [remap isearch-query-replace-regexp] #'anzu-query-replace-regexp))
 
   (use-package! edit-indirect
     :defer t :config
