@@ -1311,55 +1311,55 @@
 
 ;;; Appendix
 
-(doom-load-packages-incrementally
- `(,@(when (modulep! :completion corfu)
-       '(corfu))
-   ,@(when (modulep! :emacs dirvish)
-       '(dired transient dirvish))
-   auth-source tramp-compat tramp-integration tramp tramp-sh
-   ,@(when (modulep! :term eshell)
-       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-         em-tramp em-smart em-banner em-basic em-cmpl
-         em-extpipe em-glob em-hist em-ls em-script em-term
-         em-alias em-elecslash em-rebind em-prompt))
-   ,@(when (modulep! :term vterm)
-       '(vterm))
-   ,@(when (modulep! :ui hydra)
-       '(hydra))
-   ,@(when (modulep! :email mu4e)
-       '(mu4e))
-   ,@(when (or (modulep! :completion helm)
-               (modulep! :cae helm))
-       '(async helm-lib helm-multi-match helm-source helm-core
-         helm-global-bindings helm))
-   ,@(when (modulep! :cae misc-applications) ; music apps
-       '(empv mpc somafm emms helm-emms))
-   ,@(when (modulep! :cae ai)
-       '(copilot org-ai chatgpt-shell))
-   ,@(when (modulep! :cae gnus)
-       '(gnus gnus-group gnus-sum bbdb gnus-srvr))
-   ,@(when (modulep! :tools pdf)
-       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
-   ,@(when (modulep! :app rss)
-       '(elfeed))
-   ,@(when (modulep! :app rss +org)
-       '(elfeed-org))
-   ,@(when (and (modulep! :completion vertico)
-                (modulep! :cae misc-applications))
-       '(consult-gh))
-   ,@(when (and (or (modulep! :completion helm)
-                    (modulep! :cae helm))
-                (modulep! :cae misc-applications))
-       '(helm-system-packages helm-emms helm-linux-disks helm-rage))
-   ,@(when (modulep! :cae misc-applications) ; system apps
-       (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
-              '(snake speed-type tetris bubbles dunnet autotetris klondike)
-              '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-                zone-nyan)
-              '(lorem-ipsum password-generator uuidgen)
-              '(leetcode)
-              '(alarm pomm))))
- t)
+;;(doom-load-packages-incrementally
+;; `(,@(when (modulep! :completion corfu)
+;;       '(corfu))
+;;   ,@(when (modulep! :emacs dirvish)
+;;       '(dired transient dirvish))
+;;   auth-source tramp-compat tramp-integration tramp tramp-sh
+;;   ,@(when (modulep! :term eshell)
+;;       '(esh-util esh-module esh-proc esh-io esh-cmd eshell
+;;         em-tramp em-smart em-banner em-basic em-cmpl
+;;         em-extpipe em-glob em-hist em-ls em-script em-term
+;;         em-alias em-elecslash em-rebind em-prompt))
+;;   ,@(when (modulep! :term vterm)
+;;       '(vterm))
+;;   ,@(when (modulep! :ui hydra)
+;;       '(hydra))
+;;   ,@(when (modulep! :email mu4e)
+;;       '(mu4e))
+;;   ,@(when (or (modulep! :completion helm)
+;;               (modulep! :cae helm))
+;;       '(async helm-lib helm-multi-match helm-source helm-core
+;;         helm-global-bindings helm))
+;;   ,@(when (modulep! :cae misc-applications) ; music apps
+;;       '(empv mpc somafm emms helm-emms))
+;;   ,@(when (modulep! :cae ai)
+;;       '(copilot org-ai chatgpt-shell))
+;;   ,@(when (modulep! :cae gnus)
+;;       '(gnus gnus-group gnus-sum bbdb gnus-srvr))
+;;   ,@(when (modulep! :tools pdf)
+;;       '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
+;;   ,@(when (modulep! :app rss)
+;;       '(elfeed))
+;;   ,@(when (modulep! :app rss +org)
+;;       '(elfeed-org))
+;;   ,@(when (and (modulep! :completion vertico)
+;;                (modulep! :cae misc-applications))
+;;       '(consult-gh))
+;;   ,@(when (and (or (modulep! :completion helm)
+;;                    (modulep! :cae helm))
+;;                (modulep! :cae misc-applications))
+;;       '(helm-system-packages helm-emms helm-linux-disks helm-rage))
+;;   ,@(when (modulep! :cae misc-applications) ; system apps
+;;       (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
+;;              '(snake speed-type tetris bubbles dunnet autotetris klondike)
+;;              '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
+;;                zone-nyan)
+;;              '(lorem-ipsum password-generator uuidgen)
+;;              '(leetcode)
+;;              '(alarm pomm))))
+;; t)
 
 (setq cae-config-finished-loading t)
 
