@@ -160,7 +160,8 @@
           ;; transient map can be active without any UI indication.
           which-key-show-transient-maps t)
     (pushnew!
-     ;; Make the `which-key' popup easier to parse.
+     ;; Make the `which-key' popup easier to parse. You might want to turn this
+     ;; off if you are less experienced with Emacs.
      which-key-replacement-alist
      '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "\\1"))
