@@ -163,7 +163,7 @@
      ;; Make the `which-key' popup easier to parse. You might want to turn this
      ;; off if you are less experienced with Emacs.
      which-key-replacement-alist
-     '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
+     '(("" . "\\`+?evil[-:/]?\\(?:a-\\|ex-\\)?\\(.*\\)") . (nil . "\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "\\1"))
      '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
      '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
