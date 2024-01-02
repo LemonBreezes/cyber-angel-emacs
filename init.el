@@ -112,7 +112,7 @@
        (javascript +lsp +tree-sitter)
        (python +lsp +tree-sitter)
        ;;(haskell +lsp +tree-sitter)
-       (agda +lsp +tree-sitter +local)
+       ;;(agda +lsp +tree-sitter +local)
 
        :os
        (:if IS-MAC macos)
