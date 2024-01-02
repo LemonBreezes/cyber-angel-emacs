@@ -160,8 +160,9 @@
           ;; transient map can be active without any UI indication.
           which-key-show-transient-maps t)
     (pushnew!
+     ;; Make the `which-key' popup easier to parse.
      which-key-replacement-alist
-     '(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
+     ;;'(("" . "\\`+?evil[-:/]?\\(?:a-\\)?\\(.*\\)") . (nil . "\\1"))
      '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
      '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
      '(("" . "doom[-/]\\(.*\\)") . (nil . "\\1"))
