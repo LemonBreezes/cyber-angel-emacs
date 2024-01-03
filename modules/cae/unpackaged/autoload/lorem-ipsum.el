@@ -1,11 +1,11 @@
 ;;; private/unpackaged/autoload/lorem-ipsum.el -*- lexical-binding: t; -*-
 
-(defcustom unpackaged/lorem-ipsum-overlay-exclude nil
-  "List of regexps to exclude from `unpackaged/lorem-ipsum-overlay'."
+(defcustom cae-unpackaged-lorem-ipsum-overlay-exclude nil
+  "List of regexps to exclude from `cae-unpackaged-lorem-ipsum-overlay'."
   :type '(repeat regexp))
 
 ;;;###autoload
-(cl-defun unpackaged/lorem-ipsum-overlay (&key replace-p use-map-p)
+(cl-defun cae-unpackaged-lorem-ipsum-overlay (&key replace-p use-map-p)
   "Overlay all text in current buffer with \"lorem ipsum\" text.
 When called again, remove overlays.  Useful for taking
 screenshots without revealing buffer contents.
@@ -23,7 +23,7 @@ otherwise, each instance of a real word is replaced with a random
 word (further obscuring the text).
 
 Each piece of non-whitespace text in the buffer is compared with
-regexps in `unpackaged/lorem-ipsum-overlay-exclude', and ones
+regexps in `cae-unpackaged-lorem-ipsum-overlay-exclude', and ones
 that match are not overlaid.  Note that the regexps are compared
 against the entire non-whitespace token, up-to and including the
 preceding whitespace, but only the alphabetic part of the token
@@ -109,7 +109,7 @@ And the line would be overlaid like:
                                                  (group (1+ alpha))
                                                  (0+ (not (any alpha blank)))))
                                       nil t)
-              (unless (cl-member (match-string-no-properties 0) unpackaged/lorem-ipsum-overlay-exclude
+              (unless (cl-member (match-string-no-properties 0) cae-unpackaged-lorem-ipsum-overlay-exclude
                                  :test (lambda (string regexp)
                                          (string-match-p regexp string)))
                 (if replace-p
