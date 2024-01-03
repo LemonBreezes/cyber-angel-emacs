@@ -29,6 +29,7 @@
       :desc "Set theme" :ng "t" #'consult-theme
       :desc "Quit" :ng "Q" #'save-buffers-kill-terminal
       :desc "Show keybindings" :ng "h" #'cae-dashboard-help
+      :desc "Show keybindings" :ng "?" #'cae-dashboard-help
       :desc "Find file in .emacs.d" :ng "e" #'doom/find-file-in-emacsd
       :desc "Browse .emacs.d" :ng "E" #'doom/browse-in-emacsd)
 
