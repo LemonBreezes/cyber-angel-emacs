@@ -61,3 +61,11 @@
               ?\s))
       (call-interactively #'+default/insert-snippet)
     (call-interactively #'yasnippet-capf)))
+
+;;;###autoload
+(defun +corfu-insert-wildcard-separator ()
+  ;; I had to rename this command so that it doesn't start with "corfu-".
+  ;; Otherwise, it does not insert the completion when +tng is enabled.
+  (interactive)
+  (setq this-command #'corfu-insert-separator)
+  (call-interactively #'corfu-insert-separator))
