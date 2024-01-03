@@ -163,13 +163,13 @@
      which-key-replacement-alist
      '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
      ;;'(("" . "\\`+?evil[-:/]?\\(?:a-\\|ex-\\|em--?motion-\\)?\\(.*\\)") . (nil . "ę-\\1"))
-     '(("" . "lispyville-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
+     '(("" . "lispyville-\\(.*\\)") . ("ļ" . "\\1"))
+     ;;'(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
+     ;;'(("" . "winum-\\(.*\\)") . (nil . "\\1"))
+     ;;'(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
      '(("" . "doom[-/]\\(.*\\)") . (nil . "\\1"))
      '(("" . "cae-\\(?:evil-\\)?\\(.*\\)") . (nil . "+\\1"))
-     '(("" . "special-lispy-\\(.*\\)") . (nil . "lispy-\\1"))))
+     '(("" . "special-lispy-\\(.*\\)") . (nil . "ļ-\\1"))))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
