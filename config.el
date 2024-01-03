@@ -160,6 +160,7 @@
           ;; transient map can be active without any UI indication.
           which-key-show-transient-maps t)
     (pushnew!
+     ;; I like having curly shorthands for common command prefixes.
      which-key-replacement-alist
      '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
      '(("" . "evil-avy-\\(.*\\)") . (nil . "ęm-\\1"))
