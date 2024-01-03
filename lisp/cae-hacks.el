@@ -15,6 +15,8 @@
 ;; The purpose of these functions is to disable GC during long-running tasks
 ;; while showing GC messages if Emacs GCs anyways while running such a task.
 
+;; Currently I only use this to prevent GC while running `kill-emacs-hook'.
+
 (defun cae-hacks-disable-gc ()
   "Raise the GC threshold to a large value and enable GC messages."
   (unless cae-hacks--gc-disabled
