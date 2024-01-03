@@ -8,7 +8,7 @@
         scrollkeeper-scroll-step-delay 0)
 
   ;; These advices don't support scrolling in multiple steps but that is okay
-  ;; with me.
+  ;; with me. They also sometimes glitch out and don't let me scroll.
   (defun cae-shared-scroll-with-hint-a (count line-fn count-fn)
     (require 'scrollkeeper)
     (let ((count (funcall count-fn count)))
