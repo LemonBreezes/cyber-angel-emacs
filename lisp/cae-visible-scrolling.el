@@ -9,7 +9,7 @@
 
   ;; These advices don't support scrolling in multiple steps but that is okay
   ;; with me. They also sometimes glitch out and don't let me scroll. But I
-  ;; definitely need some kind of scroll guide to be honest.
+  ;; definitely need some kind of scroll guide since we don't have smooth scrolling.
   (defun cae-shared-scroll-with-hint-a (count line-fn count-fn)
     (require 'scrollkeeper)
     (let ((count (funcall count-fn count)))
