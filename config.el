@@ -165,12 +165,13 @@
      '(("" . "evil-avy-\\(.*\\)") . (nil . "ęm-\\1"))
      '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "ł-\\1"))
-     '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))
      '(("" . "doom[-/]\\(.*\\)") . (nil . "ḑ-\\1"))
      '(("" . "cae-\\(?:evil-\\)?\\(.*\\)") . (nil . "ç-\\1"))
-     '(("" . "special-lispy-\\(.*\\)") . (nil . "ļ-\\1"))))
+     '(("" . "special-lispy-\\(.*\\)") . (nil . "ļ-\\1"))
+     ;; For these, you can always tell what the command does without the prefix.
+     '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
+     '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
+     '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
