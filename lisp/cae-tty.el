@@ -31,6 +31,10 @@
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
 
+;; This is code from when I tried to run Emacs simultaneously from terminal
+;; frames and GUI frames but decided to remove it because I did not use Emacs
+;; that way much.
+
 ;; Automatically enable & disable the posframe when using multiple client frames.
 ;;(add-hook! 'pre-command-hook
 ;;  (defun cae-tty-setup-posframe-h ()
