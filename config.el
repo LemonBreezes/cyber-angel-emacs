@@ -161,7 +161,8 @@
           which-key-show-transient-maps t)
     (pushnew!
      which-key-replacement-alist
-     '(("" . "evil-em--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
+     '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
+     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęa-\\1"))
      '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "ļ-\\1"))
      ;;'(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
