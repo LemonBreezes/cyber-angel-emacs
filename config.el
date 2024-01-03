@@ -162,7 +162,7 @@
     (pushnew!
      which-key-replacement-alist
      '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
-     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęa-\\1"))
+     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęm-\\1"))
      '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "ļ-\\1"))
      ;;'(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
