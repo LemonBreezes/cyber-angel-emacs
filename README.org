@@ -46,7 +46,8 @@ I've also added a few custom patches to Emacs, which are available in the
    example.
 3. ~use-lexical-binding-everywhere.patch~: Enables lexical binding everywhere as
    the default in Emacs and disables checking of the ~-*- lexical-binding: t~
-   header. I have fixed all Emacs packages in this config which previously broke.
+   header. I have fixed all Emacs packages in this config which previously broke
+   with lexical binding.
 
 * My custom fork of Doom Emacs
 
