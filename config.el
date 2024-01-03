@@ -163,11 +163,12 @@
      ;; I like having curly shorthands for common command prefixes.
      which-key-replacement-alist
      '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
-     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęm-\\1"))
+     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęa-\\1"))
      '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
      '(("" . "lispyville-\\(.*\\)") . (nil . "ȴ-\\1"))
      '(("" . "doom[-/]\\(.*\\)") . (nil . "ȡ-\\1"))
      '(("" . "cae-\\(?:evil-\\)?\\(.*\\)") . (nil . "ç-\\1"))
+     '(("" . "cae-\\(?:avy-\\)?\\(.*\\)") . (nil . "ça-\\1"))
      '(("" . "special-lispy-\\(.*\\)") . (nil . "ļ-\\1"))
      ;; For these, you can always tell what the command does without the prefix.
      '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
