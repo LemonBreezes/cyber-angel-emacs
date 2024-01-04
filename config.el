@@ -72,7 +72,12 @@
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
 ;; On NixOS, this is necessary.
-(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+(dolist (path '("~/.local/bin"))
+  (setq path (expand-file-name path))
+  (add-to-list 'exec-path path)
+  (unless (member path (split-string (getenv "PATH") ":"))
+    (setenv "PATH" (format "%s:%s" path (getenv "PATH")))))
+
 
 
 ;;; UI
