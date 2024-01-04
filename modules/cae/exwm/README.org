@@ -18,7 +18,6 @@
   - [[#setting-up-link-hints-for-chrome-based-and-firefox-based-web-browsers][Setting up link hints for Chrome-based and Firefox-based web browsers]]
   - [[#bookmarks-in-web-browsers][Bookmarks in web browsers]]
   - [[#setting-up-multiple-monitors][Setting up multiple monitors]]
-  - [[#setting-up-an-alternate-emacs-configuration-for-nested-emacs-sessions][Setting up an alternate Emacs configuration for nested Emacs sessions]]
   - [[#using-i3-style-keybindings][Using i3-style keybindings]]
 - [[#troubleshooting][Troubleshooting]]
   - [[#how-do-i-send-escape-or-c-c-to-applications][How do I send ~escape~ or ~C-c~ to applications?]]
@@ -131,15 +130,6 @@ of Chromium that have the [[https://chrome.google.com/webstore/detail/add-url-to
 Currently this module does not provide any simplified setup for multi-head
 configurations. Please refer to
 https://github.com/ch11ng/exwm/wiki#randr-multi-screen for how to do this.
-
-** Setting up an alternate Emacs configuration for nested Emacs sessions
-
-Although we provide a curated default vanilla-Emacs configuration (without
-Evil), you can write your own configuration file and evaluate
-
-#+begin_src elisp
-(setq +exwm-vanilla-emacs-config-file "/path/to/alternate-emacs-config.el")
-#+end_src
 
 ** Using i3-style keybindings
 
