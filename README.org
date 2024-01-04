@@ -11,7 +11,6 @@ manager. Here are some features my EXWM module provides:
 
 1. Full Evil mode (Vim) integration globally for every application.
 2. Automatic management of non-floating applications into workspaces.
-3. Universal editing of text boxes with ~exwm-edit~.
 
 * Misc Applications
 
