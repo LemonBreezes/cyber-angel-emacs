@@ -8,6 +8,7 @@
     (delete-other-windows))
   (call-interactively #'emms-smart-browse)
   (when (executable-find "mpd")
+    ;; This can be very slow depending on your computer.
     (emms-player-mpd-connect)))
 
 ;;;###autoload
