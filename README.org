@@ -49,8 +49,8 @@ I've also added a few custom patches to Emacs, which are available in the
    with lexical binding.
 
 Note, if you use any of these patches on your version of Emacs, you must ensure
-bugs are reproducible in a unmodified Emacs before reporting them upstream with
-~M-x report-emacs-bug~.
+bugs are reproducible in an unmodified version of Emacs before reporting them
+upstream with ~M-x report-emacs-bug~.
 
 * My custom fork of Doom Emacs
 
