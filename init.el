@@ -6,9 +6,6 @@
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
-;; On NixOS, this is necessary.
-(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
-
 (let ((noninteractive-shell (or (executable-find "dash")
                                 (executable-find "sh")))
       (interactive-shell (or (executable-find "zsh")
