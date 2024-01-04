@@ -53,14 +53,14 @@
   ;; improve the performance of LSP.
   (if (not (executable-find "emacs-lsp-booster"))
       (warn "Could not find emacs-lsp-booster executable.")
-      (define-advice json-parse-buffer (:around (old-fn &rest args) lsp-booster-parse-bytecode)
-        "Try to parse bytecode instead of json."
-        (or
-         (when (equal (following-char) ?#)
-           (let ((bytecode (read (current-buffer))))
-             (when (byte-code-function-p bytecode)
-               (funcall bytecode))))
-         (apply old-fn args)))
+    (define-advice json-parse-buffer (:around (old-fn &rest args) lsp-booster-parse-bytecode)
+      "Try to parse bytecode instead of json."
+      (or
+       (when (equal (following-char) ?#)
+         (let ((bytecode (read (current-buffer))))
+           (when (byte-code-function-p bytecode)
+             (funcall bytecode))))
+       (apply old-fn args)))
 
     (define-advice lsp-resolve-final-command (:around (old-fn cmd &optional test?) add-lsp-server-booster)
       "Prepend emacs-lsp-booster command to lsp CMD."
