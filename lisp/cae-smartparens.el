@@ -8,15 +8,6 @@
   ;; much for my taste) or paredit (which supposedly works with non-lisps to
   ;; some regard), but I prefer those small utility functions
   (provide 'smartparens)
-  (defvar sp-lisp-modes
-    '(cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode
-      common-lisp-mode emacs-lisp-mode eshell-mode fennel-mode
-      fennel-repl-mode geiser-repl-mode gerbil-mode inf-clojure-mode
-      inferior-emacs-lisp-mode inferior-lisp-mode
-      inferior-scheme-mode lisp-interaction-mode lisp-mode
-      monroe-mode racket-mode racket-repl-mode
-      scheme-interaction-mode scheme-mode slime-repl-mode
-      sly-mrepl-mode stumpwm-mode))
   (defalias 'sp-local-pair #'ignore)
   (defalias 'sp-pair #'ignore)
   (defalias 'sp-with-modes #'ignore)
