@@ -14,21 +14,6 @@
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
   (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
 
-  (defvar +exwm-vanilla-emacs-config-file
-    (expand-file-name "./exwm-vanilla-emacs-default-config.el" (doom-module-locate-path :cae 'exwm))
-    "The configuration loaded in our nested vanilla Emacs sessions.
-The configuration must be a single symbolic expression as it is
-handed off to. A macro syntax is valid. Macro
-expansion occurs within the parent Emacs session.")
-  (defvar +exwm-vanilla-emacs-theme
-    (lambda ()
-      (if (memq doom-theme '(modus-operandi modus-vivendi modus-operandi-tinted
-                             modus-operandi-tritanopia modus-vivendi-tinted
-                             modus-vivendi-tritanopia default))
-          doom-theme
-        'wheatgrass))
-    "The theme loaded in our vanilla Emacs child sessions.")
-
   (defun +exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
