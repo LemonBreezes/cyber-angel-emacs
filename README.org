@@ -48,12 +48,20 @@ I've also added a few custom patches to Emacs, which are available in the
    header. I have fixed all Emacs packages in this config which previously broke
    with lexical binding.
 
+Note, if you use any of these patches on your version of Emacs, you must ensure
+bugs are reproducible in a unmodified Emacs before reporting them upstream with
+~M-x report-emacs-bug~.
+
 * My custom fork of Doom Emacs
 
 I am also maintaining my own fork of Doom Emacs where I pre-emptively merge
 specific Doom Emacs PRs that I am currently using:
 
 https://github.com/lemonbreezes/doomemacs
+
+Note, if you use my version of Doom Emacs and want to report a bug upstream,
+make sure it is reproducible in the ordinary Doom Emacs first or report it to my
+fork's repository instead.
 
 * Leader key bindings
 
