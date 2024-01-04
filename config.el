@@ -71,6 +71,8 @@
 ;; I really don't like this advice. Just let me kill the buffer.
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
+(add-to-list 'exec-path (expand-file-name "~/.local/bin"))
+
 
 ;;; UI
 
