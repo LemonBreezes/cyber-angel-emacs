@@ -166,8 +166,7 @@ paragraph to your private configuration:
                          (interactive)
                          (+workspace-switch "Vterm" t)
                          (let ((display-buffer-alist))
-                           (vterm most-positive-fixnum)))))
-        "s-'" #'exwm-edit--compose)
+                           (vterm most-positive-fixnum))))))
   (after! exwm
     (dolist (key '(?\s-h ?\s-j ?\s-k ?\s-l ?\s-H ?\s-J ?\s-K ?\s-L ?\s-0 ?\s-1
                          ?\s-2 ?\s-3 ?\s-4 ?\s-5 ?\s-6 ?\s-7 ?\s-8 ?\s-9 ?\s-d
