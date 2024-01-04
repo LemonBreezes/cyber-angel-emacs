@@ -60,8 +60,8 @@ specific Doom Emacs PRs that I am currently using:
 https://github.com/lemonbreezes/doomemacs
 
 Note, if you use my version of Doom Emacs and want to report a bug upstream,
-make sure it is reproducible in the ordinary Doom Emacs first or report it to my
-fork's repository instead.
+make sure it is reproducible in an unmodified version Doom Emacs first or report
+it to my fork's repository instead.
 
 * Leader key bindings
 
