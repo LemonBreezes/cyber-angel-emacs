@@ -48,7 +48,7 @@ I've also added a few custom patches to Emacs, which are available in the
    header. I have fixed all Emacs packages in this config which previously broke
    with lexical binding.
 
-Note, if you use any of these patches on your version of Emacs, you must ensure
+Note: If you use any of these patches on your version of Emacs, you must ensure
 bugs are reproducible in an unmodified version of Emacs before reporting them
 upstream with ~M-x report-emacs-bug~.
 
@@ -59,7 +59,7 @@ specific Doom Emacs PRs that I am currently using:
 
 https://github.com/lemonbreezes/doomemacs
 
-Note, if you use my version of Doom Emacs and want to report a bug upstream,
+Note: If you use my version of Doom Emacs and want to report a bug upstream,
 make sure it is reproducible in an unmodified version Doom Emacs first or report
 it to my fork's repository instead.
 
