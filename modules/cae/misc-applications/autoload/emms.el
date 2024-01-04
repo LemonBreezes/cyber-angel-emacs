@@ -6,7 +6,9 @@
   (setq +emms--old-wconf (current-window-configuration))
   (let ((ignore-window-parameters t))
     (delete-other-windows))
-  (call-interactively #'emms-smart-browse))
+  (call-interactively #'emms-smart-browse)
+  (when (executable-find "mpd")
+    (emms-player-mpd-connect)))
 
 ;;;###autoload
 (defun +emms-quit ()
