@@ -13,7 +13,10 @@
           ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
           lsp-enable-on-type-formatting t
-          lsp-enable-folding t)
+          lsp-enable-folding t
+          ;; For some reason LSP isn't working for me over Tramp as well as
+          ;; Eglot does. At least not over `sudo'.
+          lsp-auto-register-remote-clients nil)
     (after! lsp-ui
       (setq lsp-signature-auto-activate t
             lsp-ui-doc-include-signature t
