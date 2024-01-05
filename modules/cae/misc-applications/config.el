@@ -124,15 +124,16 @@
       (interactive)
       (elfeed-search-set-filter (concat "@" period "-ago" (if tag (concat " +" tag) "")))))
   (let ((custom-filters
-         `(("R" ,(cae-elfeed-set-filter "reddit" "6-months") "reddit" :column "Custom filters")
-           ("E" ,(cae-elfeed-set-filter "emacs" "6-months") "emacs" :column "Custom filters")
-           ("Y" ,(cae-elfeed-set-filter "tube" "6-months") "youtube" :column "Custom filters")
-           ("*" ,(cae-elfeed-set-filter "star" "6-months") "star" :column "Custom filters")
-           ("a" ,(cae-elfeed-set-filter "" "6-months") "All" :column "Custom filters")
-           ("T" ,(cae-elfeed-set-filter "" "1-day") "Today" :column "Custom filters"))))
-    (cl-loop for (key . filter) in custom-filters do
+         `(("R" ,(cae-elfeed-set-filter "reddit" "6-months") "Reddit feeds" :column "Custom filters")
+           ("E" ,(cae-elfeed-set-filter "emacs" "6-months") "Emacs feeds" :column "Custom filters")
+           ("Y" ,(cae-elfeed-set-filter "tube" "6-months") "Youtube feeds" :column "Custom filters")
+           ("*" ,(cae-elfeed-set-filter "star" "6-months") "Starred feeds" :column "Custom filters")
+           ("a" ,(cae-elfeed-set-filter "" "6-months") "All feeds" :column "Custom filters")
+           ("T" ,(cae-elfeed-set-filter "" "1-day") "Today's feeds" :column "Custom filters"))))
+    (cl-loop for (key filter desc . rest) in custom-filters do
              (after! elfeed
-               (map! :map elfeed-search-mode-map :ng key filter))))
+               (map! :map elfeed-search-mode-map
+                     :desc desc :ng key filter))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
