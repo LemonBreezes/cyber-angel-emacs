@@ -139,7 +139,6 @@
     (map! :leader
           :prefix vc-prefix
           (:prefix-map ("h" . "GitHub")
-           :desc "Clone" "c" #'consult-gh-repo-clone
            :desc "Search organizations" "o" #'consult-gh-orgs
            :desc "Search repos" "r" #'consult-gh-search-repos
            :desc "Search code" "s" #'consult-gh-search-code
@@ -147,8 +146,9 @@
            :desc "Search issues" "i" #'consult-gh-search-issues
            :desc "List PRs" "P" #'consult-gh-pr-list
            :desc "List issues" "I" #'consult-gh-issue-list
-           :desc "List organizations" "O" #'consult-gh-orgs
+           :desc "Default repos" "d" #'consult-gh-orgs
            :desc "Find file" "f" #'consult-gh-find-file
+           :desc "Clone" "c" #'consult-gh-repo-clone
            :desc "Fork" "k" #'consult-gh-repo-fork)))
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
