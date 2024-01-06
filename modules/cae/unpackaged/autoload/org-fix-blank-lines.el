@@ -47,7 +47,10 @@ exist after each headings's drawers."
                          'tree))))
 
 (defun cae-unpackaged-org-fix-all-blank-lines ()
-  (unless (derived-mode-p 'doom-docs-org-mode)
+  (unless (or (derived-mode-p 'doom-docs-org-mode)
+              (and (buffer-file-name)
+                   (file-in-directory-p (buffer-file-name)
+                                        "~/src/")))
     (ignore-errors (cae-unpackaged-org-fix-blank-lines '(4)))))
 
 ;;;###autoload
