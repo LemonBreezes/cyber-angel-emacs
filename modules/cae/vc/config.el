@@ -135,13 +135,16 @@
   :init
   (setq consult-gh-prioritize-local-folder 'suggest
         consult-gh-confirm-before-clone nil)
-  (map! :map +misc-applications-external-apps-map
-        "go" #'consult-gh-orgs
-        "gc" #'consult-gh-repo-clone
-        "gs" #'consult-gh-search-repos
-        "gi" #'consult-gh-search-issues
-        "gf" #'consult-gh-find-file
-        "gk" #'consult-gh-repo-fork)
+  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
+    (map! :leader
+          :prefix vc-prefix
+          (:prefix-map ("h" . "GitHub")
+           "o" #'consult-gh-orgs
+           "c" #'consult-gh-repo-clone
+           "s" #'consult-gh-search-repos
+           "i" #'consult-gh-search-issues
+           "f" #'consult-gh-find-file
+           "k" #'consult-gh-repo-fork)))
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "g" "GitHub CLI"
