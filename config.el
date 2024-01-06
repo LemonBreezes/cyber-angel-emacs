@@ -1017,8 +1017,8 @@
     (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
-      (map! :map isearch-mb-minibuffer-map
-            [remap consult-history] #'consult-isearch-history)
+      (map! :map [remap consult-history]
+            isearch-mb-minibuffer-map #'consult-isearch-history)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
     (map! :map isearch-mb-minibuffer-map
           [remap isearch-query-replace] #'anzu-isearch-query-replace
@@ -1026,6 +1026,8 @@
 
   (use-package! edit-indirect
     :defer t :config
+    (map! :map edit-indirect-mode-map
+          [remap delete-window] #'edit-indirect-abort)
     (add-hook! 'edit-indirect-after-creation-hook
       (defun cae-edit-indirect-major-mode-fallback-h ()
         (when (eq major-mode 'fundamental-mode)
