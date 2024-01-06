@@ -479,6 +479,8 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-edit-indirect-abort ()
   (interactive)
   (when-let ((window (get-buffer-window (overlay-buffer edit-indirect--overlay))))
+    (delete-overlay edit-indirect--overlay)
+    (setq edit-indirect--overlay nil)
     (select-window window)))
 
 ;;;###autoload
