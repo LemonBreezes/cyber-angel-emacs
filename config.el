@@ -285,7 +285,7 @@
         ("^\\*evil-owl\\*$" :side bottom :select nil :ttl 0
          :size cae-popup-shrink-to-fit)
         ("^\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
-        ("^\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
+        ("^\\*edit-indirect " :side top :select t :ttl 1 :size cae-popup-shrink-to-fit)
         ("^\\*vterm" :quit nil :ttl nil :size 0.3)
         ("^\\*notmuch-hello"  :ignore)
         ("^\\*gud-" :ttl nil :size 0.35)
