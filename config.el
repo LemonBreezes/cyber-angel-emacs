@@ -1031,7 +1031,11 @@
         (when (eq major-mode 'fundamental-mode)
           (funcall (buffer-local-value
                     'major-mode
-                    (overlay-buffer edit-indirect--overlay)))))))
+                    (overlay-buffer edit-indirect--overlay))))))
+    (add-hook! 'edit-indirect-after-creation-hook
+      (defun cae-edit-indirect-setup-defaults-h ()
+        (when (bound-and-true-p flycheck-mode)
+          (flycheck-mode -1)))))
 
   (use-package! zop-to-char
     :defer t :init
