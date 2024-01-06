@@ -1032,7 +1032,7 @@
           (funcall (buffer-local-value
                     'major-mode
                     (overlay-buffer edit-indirect--overlay))))))
-    (add-hook! 'edit-indirect-after-creation-hook
+    (add-hook! 'edit-indirect-after-creation-hook :append
       (defun cae-edit-indirect-setup-defaults-h ()
         (when (bound-and-true-p flycheck-mode)
           (flycheck-mode -1)))))
