@@ -126,11 +126,15 @@
 
 (use-package! consult-gh
   :defer t :when (modulep! :completion vertico)
-  :commands (consult-gh-orgs
-             consult-gh-repo-clone
-             consult-gh-search-repos
+  :commands (consult-gh-search-repos
+             consult-gh-search-code
+             consult-gh-search-prs
              consult-gh-search-issues
+             consult-gh-pr-list
+             consult-gh-issue-list
+             consult-gh-default-repos
              consult-gh-find-file
+             consult-gh-repo-clone
              consult-gh-repo-fork)
   :init
   (setq consult-gh-prioritize-local-folder 'suggest
