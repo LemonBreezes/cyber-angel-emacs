@@ -87,7 +87,7 @@
 (package! smart-semicolon)
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
-(package! auto-sudoedit :recipe (:host github :repo "LemonBreezes/auto-sudoedit"))
+(package! auto-sudoedit)
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
 (package! beginend)
