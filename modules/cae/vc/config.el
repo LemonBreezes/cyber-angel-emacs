@@ -146,7 +146,7 @@
            :desc "Search issues" "i" #'consult-gh-search-issues
            :desc "List PRs" "P" #'consult-gh-pr-list
            :desc "List issues" "I" #'consult-gh-issue-list
-           :desc "Default repos" "d" #'consult-gh-orgs
+           :desc "Default repos" "d" #'consult-gh-default-repos
            :desc "Find file" "f" #'consult-gh-find-file
            :desc "Clone" "c" #'consult-gh-repo-clone
            :desc "Fork" "k" #'consult-gh-repo-fork)))
