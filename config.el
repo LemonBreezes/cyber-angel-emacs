@@ -1026,9 +1026,6 @@
 
   (use-package! edit-indirect
     :defer t :config
-    (map! :map edit-indirect-mode-map
-          [remap delete-window] #'edit-indirect-abort
-          [remap edit-indirect-abort] #'cae-edit-indirect-abort)
     (add-hook! 'edit-indirect-after-creation-hook
       (defun cae-edit-indirect-major-mode-fallback-h ()
         (when (eq major-mode 'fundamental-mode)
