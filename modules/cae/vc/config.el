@@ -139,7 +139,7 @@
     (map! :leader
           :prefix vc-prefix
           (:prefix-map ("h" . "GitHub")
-           :desc "Search organizations" "o" #'consult-gh-orgs
+           :desc "Search organizations" "o" #'consult-gh-search-repos
            :desc "Search repos" "r" #'consult-gh-search-repos
            :desc "Search code" "s" #'consult-gh-search-code
            :desc "Search PRs" "p" #'consult-gh-search-prs
