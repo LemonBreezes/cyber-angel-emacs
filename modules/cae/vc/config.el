@@ -139,12 +139,12 @@
     (map! :leader
           :prefix vc-prefix
           (:prefix-map ("h" . "GitHub")
-           "o" #'consult-gh-orgs
-           "c" #'consult-gh-repo-clone
-           "s" #'consult-gh-search-repos
-           "i" #'consult-gh-search-issues
-           "f" #'consult-gh-find-file
-           "k" #'consult-gh-repo-fork)))
+           :desc "Organizations" "o" #'consult-gh-orgs
+           :desc "Clone" "c" #'consult-gh-repo-clone
+           :desc "Search repos" "s" #'consult-gh-search-repos
+           :desc "Search issues" "i" #'consult-gh-search-issues
+           :desc "Find file" "f" #'consult-gh-find-file
+           :desc "Fork" "k" #'consult-gh-repo-fork)))
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "g" "GitHub CLI"
