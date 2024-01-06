@@ -92,7 +92,8 @@
 (package! string-inflection)
 (package! beginend)
 (package! isearch-mb)
-(package! edit-indirect)
+(package! edit-indirect :recipe (:host github :repo "LemonBreezes/edit-indirect"
+                                 :branch "fix-unintended-quit-window"))
 (package! string-edit-at-point)
 (package! zop-to-char)
 (package! i3wm-config-mode)
