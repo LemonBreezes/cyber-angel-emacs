@@ -23,9 +23,9 @@
 
 ;;;###autoload
 (defun cae-keyboard-insert-current-prefix (arg)
-"Insert the current prefix argument."
-(interactive "P")
-(insert (format "%s" arg)))
+  "Insert the current prefix argument."
+  (interactive "P")
+  (insert (format "%s" arg)))
 
 (cl-defun cae-keyboard-apply-recursively (fn arg)
   (declare (pure t) (side-effect-free t))
@@ -125,7 +125,7 @@
         (let ((ch (following-char)))
           (if (and (char-equal ch ?_)
                    (eq (char-after (+ 2 (point)))
-                               ?_))
+                       ?_))
               (progn
                 (forward-char 1)        ; discard _
                 (let ((char (following-char)))
