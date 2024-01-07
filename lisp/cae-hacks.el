@@ -145,7 +145,8 @@ It is meant to be used as a `post-gc-hook'."
                cae-keyboard-kbd
                cae-keyboard-kbd-reverse
                cae-keyboard-remap-hydra-hint))
-  (defalias sym #'identity))
+  (unless (or (fboundp sym) (autoloadp sym))
+    (defalias sym #'identity)))
 
 ;; For some reason I got a void variable error in `helm-system-packages' for
 ;; this.
