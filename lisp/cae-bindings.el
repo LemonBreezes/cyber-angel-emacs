@@ -25,7 +25,9 @@
 (let ((embark-act-key "C-;")
       (embark-act-alt-key "<f8>")
       (embark-act-all-key "C-:")
-      (embark-act-all-alt-key "<f9>"))
+      (embark-act-all-alt-key "<f9>")
+      (embark-export-key "C-c C-;")
+      (embark-export-alt-key "C-c ;"))
   (when (eq (lookup-key doom-leader-map "a")
             'embark-act)
     (define-key doom-leader-map "a" nil)
@@ -40,7 +42,9 @@
           embark-act-key #'cae-embark-act
           embark-act-alt-key #'cae-embark-act
           embark-act-all-key #'embark-act-all
-          embark-act-all-alt-key #'embark-act-all)
+          embark-act-all-alt-key #'embark-act-all
+          embark-export-key #'embark-export
+          embark-export-alt-key #'embark-export)
          (:map isearch-mode-map
           [remap isearch-describe-bindings] (cmd! () (embark-bindings-in-keymap isearch-mode-map)
                                                   (when isearch-mode (isearch-update)))))
