@@ -138,14 +138,16 @@ It is meant to be used as a `post-gc-hook'."
 (defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
 
 ;; These are for backwards compatibility.
-(dolist (sym '(cae-keyboard-strings
-               cae-keyboard-remap
-               cae-keyboard-remap-reverse
-               cae-keyboard-remap-to-strings
-               cae-keyboard-kbd
-               cae-keyboard-kbd-reverse
-               cae-keyboard-remap-hydra-hint))
-  (unless (or (fboundp sym) (autoloadp sym))
+(cl-dolist (sym '(cae-keyboard-strings
+                  cae-keyboard-remap
+                  cae-keyboard-remap-reverse
+                  cae-keyboard-remap-to-strings
+                  cae-keyboard-kbd
+                  cae-keyboard-kbd-reverse
+                  cae-keyboard-remap-hydra-hint))
+  (if (or (fboundp sym) (autoloadp sym)
+          (bound-and-true-p cae-keyboard-remaps-enabled-p))
+      (cl-return nil)
     (defalias sym #'identity)))
 
 ;; For some reason I got a void variable error in `helm-system-packages' for
