@@ -15,7 +15,7 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
-(defvar cae-keyboard-remaps-enabled-p t) ; remap to Engrammer.
+(defvar cae-keyboard-remaps-enabled-p t) ; remap some keys to Engrammer layout.
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
