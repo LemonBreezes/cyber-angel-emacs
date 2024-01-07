@@ -268,7 +268,7 @@
           (special-lispy-ace-symbol-replace . "Edit")
           (special-lispy-mark-list . "Select")
           (special-lispy-eval . "Eval")
-
+          
           (special-lispy-goto-local . "Move")
           (special-lispy-goto . "Move")
           (special-lispy-follow . "Move")
