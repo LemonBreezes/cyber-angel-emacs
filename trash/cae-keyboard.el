@@ -192,12 +192,7 @@
                ,(cae-keyboard-kbd "8") #'cae-keyboard-digit-argument
                ,(cae-keyboard-kbd "9") #'cae-keyboard-digit-argument
                ,(cae-keyboard-kbd "0") #'cae-keyboard-digit-argument)
-        t)
-  (map! :map minibuffer-local-map
-        ;; `C-c ;' is a little easier to type on my keyboard. This alternate
-        ;; keybinding also works in the terminal.
-        "C-c ;" #'embark-export
-        "C-c C-;" nil))
+        t))
 
 (defun cae-make-conditional-key-translation (key-from key-to translate-keys-p)
   "Make a Key Translation such that if the translate-keys-p function returns true,
