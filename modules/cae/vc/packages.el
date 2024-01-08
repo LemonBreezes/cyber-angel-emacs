@@ -14,3 +14,5 @@
 (when (or (modulep! :completion helm)
           (modulep! :cae helm)))
 (package! abridge-diff)
+(when (modulep! +delta)
+  (package! ansi-diff))
