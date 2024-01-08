@@ -73,7 +73,7 @@
        :emacs
        undo
        ibuffer
-       (vc +delta)
+       vc
        (dired +icons)
 
        :term
@@ -142,7 +142,7 @@
        misc-applications
        (modeline +wakatime)
        unpackaged
-       vc
+       (vc +delta)
        org
        ai
        gnus)
