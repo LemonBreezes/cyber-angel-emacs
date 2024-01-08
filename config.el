@@ -370,7 +370,10 @@
   ;; Prettify email replies.
   (use-package! nice-citation
     :when (cae-display-graphic-p)
-    :after (:or gnus message)))
+    :after (:or gnus message))
+
+  (use-package! fancy-compilation
+    :defer t))
 
 
 ;;; Tools
