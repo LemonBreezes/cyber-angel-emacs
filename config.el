@@ -372,6 +372,7 @@
     :when (cae-display-graphic-p)
     :after (:or gnus message))
 
+  ;; Prettify compilation buffers.
   (use-package! fancy-compilation
     :after compile
     :config
