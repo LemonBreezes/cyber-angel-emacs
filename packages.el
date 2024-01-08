@@ -50,6 +50,7 @@
 (package! nice-citation :recipe (:host github :repo "damiencollard/nice-citation"))
 (package! backline)
 (package! xterm-color)
+(package! fancy-compilation)
 
 ;; cae-theme.el
 (package! modus-themes)
