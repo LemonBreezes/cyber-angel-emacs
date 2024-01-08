@@ -15,4 +15,4 @@
           (modulep! :cae helm)))
 (package! abridge-diff)
 (when (modulep! +delta)
-  (package! ansi-diff))
+  (package! diff-ansi))
