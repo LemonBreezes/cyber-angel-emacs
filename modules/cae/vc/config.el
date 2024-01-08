@@ -186,4 +186,6 @@
   :when (modulep! +delta)
   :after magit-diff
   :config
+  (setq diff-ansi-extra-args-for-delta
+        '("--side-by-side" "--no-gitconfig" "--true-color=always" "--paging=never"))
   (diff-ansi-mode +1))
