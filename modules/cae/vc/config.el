@@ -182,7 +182,7 @@
 
 (use-package! igist :defer t)           ; TODO
 
-;; I currently have this disabled because it's not legible when I have my laser
+;; I have this disabled because it's not legible when I have my laser
 ;; protection goggles on.
 (use-package! diff-ansi
   :when (modulep! +delta)
