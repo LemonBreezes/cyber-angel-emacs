@@ -372,11 +372,10 @@
     :when (cae-display-graphic-p)
     :after (:or gnus message))
 
-  ;;(use-package! fancy-compilation
-  ;;  :after compile
-  ;;  :config
-  ;;  (fancy-compilation-mode +1))
-  )
+  (use-package! fancy-compilation
+    :after compile
+    :config
+    (fancy-compilation-mode +1)))
 
 
 ;;; Tools
