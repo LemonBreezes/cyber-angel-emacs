@@ -73,7 +73,7 @@
        :emacs
        undo
        ibuffer
-       vc
+       (vc +delta)
        (dired +icons)
 
        :term
