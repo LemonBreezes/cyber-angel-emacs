@@ -181,3 +181,9 @@
   :after (consult-gh embark))
 
 (use-package! igist :defer t)           ; TODO
+
+(use-package! diff-ansi
+  :when (modulep! +delta)
+  :after magit-diff
+  :config
+  (diff-ansi-mode +1))
