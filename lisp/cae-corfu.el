@@ -14,19 +14,18 @@
     (setq-hook! 'fish-completion-mode-hook corfu-auto nil))
 
   ;; Glue between Copilot and Corfu.
-  ;;(defun cae-corfu-quit ()
-  ;;  (interactive)
-  ;;  (let ((copilot-state (and (bound-and-true-p copilot-mode)
-  ;;                            (copilot--overlay-visible))))
-  ;;    (corfu-quit)
-  ;;    (when copilot-state
-  ;;      (copilot-complete))))
-  ;;(add-hook! 'doom-escape-hook
-  ;;  (defun cae-corfu-quit-h ()
-  ;;    (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
-  ;;(map! :map corfu-map
-  ;;      [remap corfu-quit] #'cae-corfu-quit)
-  )
+  (defun cae-corfu-quit ()
+    (interactive)
+    (let ((copilot-state (and (bound-and-true-p copilot-mode)
+                              (copilot--overlay-visible))))
+      (corfu-quit)
+      (when copilot-state
+        (copilot-complete))))
+  (add-hook! 'doom-escape-hook
+    (defun cae-corfu-quit-h ()
+      (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
+  (map! :map corfu-map
+        [remap corfu-quit] #'cae-corfu-quit))
 
 (after! lsp-completion
   ;; Do not try to configure `company-capf' for LSP.
