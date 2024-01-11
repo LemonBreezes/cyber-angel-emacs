@@ -2,6 +2,7 @@
 
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
+(defvar cae-theme-export-theme-with-pywal nil)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
@@ -180,20 +181,21 @@
   ;; that we always have the correct theme on startup.
   (require 'circadian))
 
-(use-package! ewal
-  :defer-incrementally t
-  :defer t :init
-  ;; Use all 16 colors from our palette, not just the primary 8.
-  (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
-                                       brightblack brightred brightgreen brightyellow
-                                       brightblue brightmagenta brightcyan brightwhite)))
-(use-package! theme-magic
-  :defer t :defer-incrementally t)
+(when cae-theme-export-theme-with-pywal
+  (use-package! ewal
+    :defer-incrementally t
+    :defer t :init
+    ;; Use all 16 colors from our palette, not just the primary 8.
+    (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
+                                         brightblack brightred brightgreen brightyellow
+                                         brightblue brightmagenta brightcyan brightwhite)))
+  (use-package! theme-magic
+    :defer t :defer-incrementally t)
 
-(unless cae-config-finished-loading
-  (after! (:all ewal theme-magic)
-    (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-    (cae-theme-export-using-pywal)))
+  (unless cae-config-finished-loading
+    (after! (:all ewal theme-magic)
+      (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+      (cae-theme-export-using-pywal))))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
