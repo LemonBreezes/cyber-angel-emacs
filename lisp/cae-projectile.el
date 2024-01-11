@@ -1,6 +1,7 @@
 ;;; lisp/cae-projectile.el -*- lexical-binding: t; -*-
 
 (if (locate-library "projectile")
+    ;;; Projectile configuration
     (after! projectile
       ;; Ensure projects list is up-to-date since I usually switch to a project
       ;; after running a `git clone'.
@@ -74,6 +75,8 @@
       (after! which-key
         (push '((nil . "projectile-\\(.*\\)") . (nil . "\\1"))
               which-key-replacement-alist)))
+
+;;; Configure Doom Emacs with project.el instead of Projectile.
   (defalias 'projectile-find-file #'project-find-file)
   (defalias 'projectile-project-root
     (lambda (&optional dir)
