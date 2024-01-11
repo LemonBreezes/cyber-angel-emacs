@@ -162,9 +162,9 @@
 
 (after! cape
   (defalias 'cae-cape-history-or-line
-    (cape-interactive-capf (cape-capf-super #'cape-history #'cape-line)))
+    (cape-capf-interactive (cape-capf-super #'cape-history #'cape-line)))
   (defalias 'cae-cape-keyword-or-dict
-    (cape-interactive-capf (cape-capf-super #'cape-keyword #'cape-dict))))
+    (cape-capf-interactive (cape-capf-super #'cape-keyword #'cape-dict))))
 
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
