@@ -84,8 +84,7 @@
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
-        copilot-max-char 1000000
-        copilot-indent-warning-suppress t)
+        copilot-max-char 1000000)
   ;; Model our Copilot interface after Fish completions.
   (map! :map copilot-completion-map
         "<right>" #'copilot-accept-completion
