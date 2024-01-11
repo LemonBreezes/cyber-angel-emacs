@@ -99,7 +99,7 @@
     "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
     (when (copilot--overlay-visible)
       (copilot-clear-overlay) t))
-  (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
+  ;;(add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
   (add-hook! 'copilot-disable-predicates
     (defun cae-disable-copilot-in-gptel-p ()
       (bound-and-true-p gptel-mode))
