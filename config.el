@@ -1177,7 +1177,7 @@
 
   (after! org
     (setq org-directory "~/org/"
-          org-extend-today-until 4
+          org-extend-today-until 3
           org-startup-with-inline-images t
           org-image-actual-width t
           org-log-done 'time
