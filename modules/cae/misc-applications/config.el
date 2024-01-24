@@ -450,6 +450,9 @@
   (when (modulep! :editor evil)
     (after! evil
       (evil-set-initial-state #'speed-type-mode 'insert)))
+  (add-hook 'speed-type-mode-hook
+            (defun cae-speed-type-disabe-show-paren-mode-h ()
+              (show-paren-local-mode -1)))
   (map! :map speed-type--completed-keymap
         "q" #'+speed-type-quit
         "r" #'speed-type--replay
