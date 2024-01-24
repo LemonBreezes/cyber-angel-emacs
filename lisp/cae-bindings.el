@@ -137,7 +137,7 @@
 ;; This is so that `describe-key-briefly' is more convenient to use with the
 ;; `<f1>' prefix.
 (define-key help-map (kbd "<f1>") #'describe-key-briefly)
-(define-key help-map (kbd "<f2>") #'describe-key) ; F1 F2 is easier than C-h k.
+(define-key help-map (kbd "<f2>") #'describe-key) ; `F1 F2' is easier than `C-h k'.
 
 (after! diff-mode
   (map! :map diff-mode-map
