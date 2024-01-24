@@ -5,8 +5,6 @@
 ;;; Stuff that should not be disabled.
 
 (load! "lisp/cae-tty")
-(when (bound-and-true-p cae-keyboard-remaps-enabled-p)
-  (load! "lisp/cae-keyboard"))
 (load! "lisp/cae-bindings")
 (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
 (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
