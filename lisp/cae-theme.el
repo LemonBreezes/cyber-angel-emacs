@@ -8,26 +8,6 @@
 
 ;; Make Org headlines respect the heading backgrounds.
 (when cae-theme-extend-heading-faces
-  ;; This hack is no longer necessary after
-  ;; https://git.savannah.gnu.org/cgit/emacs/org-mode.git/commit/?id=2ade16bbc
-  ;;(advice-add #'org-fold-core-region :around #'cae-org-fold-region-a)
-  ;;(defun cae-org-fold-region-a (oldfun from to flag &optional spec-or-alias)
-  ;;  ;; This function monkey-patches Org fold into preserving the heading
-  ;;  ;; backgrounds when folded but does not work when unfolding nested
-  ;;  ;; headlines. Still, it's a lot better than having nothing. It's basically
-  ;;  ;; what `backline' does for Outline.
-  ;;  (let ((shift-fold-p (and (eq to (point-max)) (not (eq from to)) flag)))
-  ;;    (when shift-fold-p
-  ;;      (setq to (1- to)))
-  ;;    (funcall oldfun from to flag spec-or-alias)
-  ;;    (remove-overlays from (1+ to) 'cae-org-fold-heading t)
-  ;;    (when flag
-  ;;      (let ((o (make-overlay to (1+ to) nil 'front-advance)))
-  ;;        (overlay-put o 'evaporate t)
-  ;;        (overlay-put o 'cae-org-fold-heading t)
-  ;;        (overlay-put o 'face (save-excursion (goto-char from) (face-at-point)))
-  ;;        (when shift-fold-p
-  ;;          (overlay-put o 'display "\n"))))))
   (after! org-modern
     ;; These features interfere with the heading backgrounds.
     (setq org-modern-tag nil
@@ -119,8 +99,6 @@
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
         modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
-        ;; I have this mostly because I want to work on getting the heading
-        ;; backgrounds working with the code folding!
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
