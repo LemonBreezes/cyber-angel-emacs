@@ -33,7 +33,7 @@
   (package! evil-owl)
   (package! evil-visual-mark-mode))
 
-;; cae-smartparens
+;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
            (modulep! :editor evil))
   (package! evil-cleverparens))
@@ -66,6 +66,9 @@
 (package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! wakatime-mode)
+
+;; cae-lsp.el
+(package eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
