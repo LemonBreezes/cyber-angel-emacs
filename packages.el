@@ -68,7 +68,8 @@
 (package! wakatime-mode)
 
 ;; cae-lsp.el
-(package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster"))
+(when (modulep! :tools lsp +eglot)
+  (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster")))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
