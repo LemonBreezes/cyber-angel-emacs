@@ -78,6 +78,10 @@
           orig-result)))))
 
 (when (modulep! :tools lsp +eglot)
+  (use-package! eglot-booster
+    :after eglot
+    :config (eglot-booster-mode +1))
+
   (after! eglot
     (setq eglot-sync-connect nil)
     (let ((clangd '("clangd" "--background-index" "--clang-tidy"
