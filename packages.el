@@ -118,9 +118,5 @@
 (package! vline)
 (package! try)
 
-;;; Email
-(when (modulep! :email mu4e)
-  (package! emu :recipe (:host github :repo "alphapapa/emu.el")))
-
 ;;; Autocompletion
 (package! consult-yasnippet)
