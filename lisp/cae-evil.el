@@ -73,10 +73,12 @@
           "~" #'+popup/raise)))
 
 ;; Isearch is better in `Info-mode'
-(after! info
-  (map! :map Info-mode-map
-        :m "/" #'isearch-forward-regexp
-        :m "?" #'isearch-backward-regexp))
+(after! evil
+  (unless (eq evil-search-module 'isearch)
+    (after! info
+      (map! :map Info-mode-map
+            :m "/" #'isearch-forward-regexp
+            :m "?" #'isearch-backward-regexp))))
 
 (when (modulep! :editor evil +hybrid)
   ;; Return Isearch to Evil
