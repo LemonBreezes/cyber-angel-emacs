@@ -1023,8 +1023,8 @@
     (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
-      (map! :map [remap consult-history]
-            isearch-mb-minibuffer-map #'consult-isearch-history)
+      (map! :map isearch-mb-minibuffer-map
+            [remap consult-history] #'consult-isearch-history)
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
     (map! :map isearch-mb-minibuffer-map
           [remap isearch-query-replace] #'anzu-isearch-query-replace
