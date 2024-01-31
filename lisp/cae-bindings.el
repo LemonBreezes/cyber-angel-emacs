@@ -5,6 +5,7 @@
 (unless (symbol-function 'doom-leader-map)
   (fset 'doom-leader-map doom-leader-map))
 
+;; I use a split ergo keyboard with SPC and DEL on the thumb keys.
 (map! :map general-override-mode-map
       :desc "<leader>" :nmv "DEL" #'doom-leader-map
       :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
