@@ -125,7 +125,8 @@
       evil-vsplit-window-right t
       evil-kill-on-visual-paste nil
       evil-split-window-below t
-      evil-v$-excludes-newline t)
+      evil-v$-excludes-newline t
+      evil-search-module 'isearch)
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
