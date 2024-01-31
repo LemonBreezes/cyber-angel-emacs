@@ -123,12 +123,12 @@
 (after! evil-snipe
   (setq evil-snipe-scope 'line))
 (setq! evil-ex-substitute-global t
-      evil-move-cursor-back nil
-      evil-vsplit-window-right t
-      evil-kill-on-visual-paste nil
-      evil-split-window-below t
-      evil-v$-excludes-newline t
-      evil-search-module 'isearch)
+       evil-move-cursor-back nil
+       evil-vsplit-window-right t
+       evil-kill-on-visual-paste nil
+       evil-split-window-below t
+       evil-v$-excludes-newline t
+       evil-search-module 'isearch)
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
