@@ -75,7 +75,8 @@ that are in currently enabled modules.
 |                   | d                    | ~+doom-dashboard/open~           |
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
-| evil              | bo                   | ~cae-evil-buffer-org-new~        |
+| lsp               | cTAB                 | ~lsp-ui-imenu~                 |
+| evil              | bo                   | ~naming-convention-map~          |
 | vc                | iI                   | ~gitignore-templates-insert~     |
 | vc                | tB                   | ~blamer-mode~                    |
 | vc                | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
