@@ -308,7 +308,11 @@
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer))
       (:prefix "t"
        :desc "Column indicator" "C" #'vline-mode
-       :desc "Font lock mode" "C-f" #'font-lock-mode))
+       :desc "Font lock mode" "C-f" #'font-lock-mode)
+      (:when (and (modulep! :tools lsp)
+                  (not (modulep! :tools lsp +eglot)))
+       (:prefix "c"
+        :desc "LSP Imenu" "TAB" #'lsp-ui-imenu)))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
