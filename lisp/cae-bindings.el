@@ -197,6 +197,7 @@
 ;;; Extra which-key descriptions
 
 ;; Add some descriptions for built-in prefixes.
+(fset 'ctl-x-map ctl-x-map)
 (after! which-key
   (which-key-add-keymap-based-replacements search-map "h" "highlight")
   (which-key-add-keymap-based-replacements help-map "4" "other-window")
@@ -225,9 +226,22 @@
     (fset 'gud-global-map gud-global-map)
     (map! :map ctl-x-map "C-a" #'gud-global-map))
   (after! register
-    (which-key-add-keymap-based-replacements ctl-x-map "r" "register")))
-(fset 'ctl-x-map ctl-x-map)
-
+    (which-key-add-keymap-based-replacements ctl-x-map "r" "register"))
+  (pushnew!
+   ;; I like having curly shorthands for common command prefixes. This makes
+   ;; the`which-key' popup more legible for me.
+   which-key-replacement-alist
+   '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
+   '(("" . "evil-avy-\\(.*\\)") . (nil . "ęa-\\1"))
+   '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
+   '(("" . "\\(?:special-\\)?lispy\\(?:ville\\)?-\\(.*\\)") . (nil . "ȴ-\\1"))
+   '(("" . "doom[-/]\\(.*\\)") . (nil . "ȡ-\\1"))
+   '(("" . "cae-\\(?:evil-\\|unpackaged-\\)?\\(.*\\)") . (nil . "ç-\\1"))
+   '(("" . "cae-\\(?:avy-\\)?\\(.*\\)") . (nil . "ça-\\1"))
+   ;; For these, you can always tell what the command does without the prefix.
+   '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
+   '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
+   '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))))
 
 
 ;;; Consult keybindings
