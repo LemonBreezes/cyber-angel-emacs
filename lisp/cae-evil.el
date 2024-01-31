@@ -122,7 +122,7 @@
 
 (after! evil-snipe
   (setq evil-snipe-scope 'line))
-(setq evil-ex-substitute-global t
+(setq! evil-ex-substitute-global t
       evil-move-cursor-back nil
       evil-vsplit-window-right t
       evil-kill-on-visual-paste nil
