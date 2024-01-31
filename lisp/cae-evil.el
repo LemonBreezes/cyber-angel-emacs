@@ -128,6 +128,7 @@
        evil-kill-on-visual-paste nil
        evil-split-window-below t
        evil-v$-excludes-newline t
+       ;; I prefer `isearch' combined with `isearch-mb'.
        evil-search-module 'isearch)
 
 (use-package! evil-owl
