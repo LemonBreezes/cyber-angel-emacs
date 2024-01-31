@@ -166,22 +166,7 @@
           which-key-max-description-length 35
           ;; I am testing this option out. Seems useful in principal since a
           ;; transient map can be active without any UI indication.
-          which-key-show-transient-maps t)
-    (pushnew!
-     ;; I like having curly shorthands for common command prefixes. This makes
-     ;; the`which-key' popup more legible for me.
-     which-key-replacement-alist
-     '(("" . "evilem--?motion-\\(.*\\)") . (nil . "ęm-\\1"))
-     '(("" . "evil-avy-\\(.*\\)") . (nil . "ęa-\\1"))
-     '(("" . "\\`+?evil[-:/]?\\(.*\\)") . (nil . "ę-\\1"))
-     '(("" . "\\(?:special-\\)?lispy\\(?:ville\\)?-\\(.*\\)") . (nil . "ȴ-\\1"))
-     '(("" . "doom[-/]\\(.*\\)") . (nil . "ȡ-\\1"))
-     '(("" . "cae-\\(?:evil-\\|unpackaged-\\)?\\(.*\\)") . (nil . "ç-\\1"))
-     '(("" . "cae-\\(?:avy-\\)?\\(.*\\)") . (nil . "ça-\\1"))
-     ;; For these, you can always tell what the command does without the prefix.
-     '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
-     '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))))
+          which-key-show-transient-maps t))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
