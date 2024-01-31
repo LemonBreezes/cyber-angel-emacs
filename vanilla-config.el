@@ -32,7 +32,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-theme 'wheatgrass)
 
-;; This is incomplete but at least it sets some variables up.
+;; Set some variables up.
 (setq delete-by-moving-to-trash t
       remote-file-name-inhibit-delete-by-moving-to-trash t
       remote-file-name-inhibit-auto-save t
