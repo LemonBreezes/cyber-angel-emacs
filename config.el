@@ -995,6 +995,14 @@
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook
+    :init
+    (when (modulep! :editor evil)
+      (after! evil
+        ;; I prefer `isearch' combined with `isearch-mb'.
+        (setq! evil-search-module 'isearch)
+        (when evil-want-C-w-delete
+          (map! :map isearch-mb-minibuffer-map
+                "C-w" #'evil-delete-backward-word))))
     :config
     (isearch-mb--setup)
     (isearch-mb-mode +1)
@@ -1013,14 +1021,7 @@
       (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
     (map! :map isearch-mb-minibuffer-map
           [remap isearch-query-replace] #'anzu-isearch-query-replace
-          [remap isearch-query-replace-regexp] #'anzu-query-replace-regexp)
-    (when (modulep! :editor evil)
-      (after! evil
-        ;; I prefer `isearch' combined with `isearch-mb'.
-        (setq evil-search-module 'isearch)
-        (when evil-want-C-w-delete
-          (map! :map isearch-mb-minibuffer-map
-                "C-w" #'evil-delete-backward-word)))))
+          [remap isearch-query-replace-regexp] #'anzu-query-replace-regexp))
 
   (use-package! edit-indirect
     :defer t :config
