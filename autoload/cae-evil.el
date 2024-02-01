@@ -156,7 +156,7 @@
   (interactive)
   (save-restriction
     (narrow-to-page)
-    (funcall (key-binding "G"))
+    (call-interactively (key-binding "G"))
     (call-interactively #'evil-append)))
 
 ;; Allow passing the current point to Evil operators.
