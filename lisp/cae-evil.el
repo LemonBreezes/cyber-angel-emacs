@@ -109,7 +109,9 @@
   (map! :map isearch-mode-map
         "C-w" nil
         "C-S-y" #'isearch-yank-word-or-char))
-
+(after! isearch-mb
+  (map! :map isearch-mb-minibuffer-map
+        "C-w" nil))
 
 (after! evil-easymotion
   (map! :map evilem-map
