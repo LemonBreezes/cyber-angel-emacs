@@ -9,10 +9,6 @@
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkluionm")))
 
-  ;; Fish completions for `emerge' are too slow for on-key completion.
-  (when (executable-find "emerge")
-    (setq-hook! 'fish-completion-mode-hook corfu-auto nil))
-
   ;; Glue between Copilot and Corfu.
   (defun cae-corfu-quit ()
     (interactive)
