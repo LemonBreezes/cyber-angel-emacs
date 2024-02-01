@@ -5,6 +5,10 @@
 (after! evil-easymotion
   (map! :map evilem-map
         "DEL" (lookup-key evilem-map "\s")))
+(after! evil-collection
+  (map! :n "] DEL" #'+evil/insert-newline-below
+        :n "[ DEL" #'+evil/insert-newline-above))
+
 
 ;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
 ;; between TAB and C-i there.
@@ -157,8 +161,6 @@
           evil-collection-want-find-usages-bindings nil)
     (map! :n "]p" #'cae-unimpaired-paste-below
           :n "[p" #'cae-unimpaired-paste-above
-          :n "] DEL" #'+evil/insert-newline-below
-          :n "[ DEL" #'+evil/insert-newline-above
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
