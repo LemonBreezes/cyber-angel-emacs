@@ -1020,8 +1020,7 @@
         (setq evil-search-module 'isearch)
         (when evil-want-C-w-delete
           (map! :map isearch-mb-minibuffer-map
-                "C-w" #'evil-delete-backward-word)))
-      ))
+                "C-w" #'evil-delete-backward-word)))))
 
   (use-package! edit-indirect
     :defer t :config
