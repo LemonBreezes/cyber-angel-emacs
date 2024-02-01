@@ -209,6 +209,8 @@
       (:prefix "b"
        :desc "New empty Org buffer" "o" #'cae-evil-buffer-org-new))
 
+(evil-set-initial-state #'font-lock-studio-mode 'emacs)
+
 (defun cae-evil-mu4e-enter-insert-mode ()
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
