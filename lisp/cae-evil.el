@@ -109,9 +109,6 @@
   (map! :map isearch-mode-map
         "C-w" nil
         "C-S-y" #'isearch-yank-word-or-char))
-(after! isearch-mb
-  (map! :map isearch-mb-minibuffer-map
-        "C-w" #'evil-delete-backward-word))
 
 (after! evil-easymotion
   (map! :map evilem-map
@@ -130,9 +127,7 @@
        evil-vsplit-window-right t
        evil-kill-on-visual-paste nil
        evil-split-window-below t
-       evil-v$-excludes-newline t
-       ;; I prefer `isearch' combined with `isearch-mb'.
-       evil-search-module 'isearch)
+       evil-v$-excludes-newline t)
 
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
