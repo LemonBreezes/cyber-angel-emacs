@@ -4,6 +4,8 @@ alias emerge  sudo emerge --color=y --autounmask --autounmask-write=y --keep-goi
 alias emerge1 sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) --oneshot $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
+alias up eshell-up $1
+alias pk eshell-up-peek $1
 
 alias layman sudo layman                                                      $*
 alias tailscale sudo tailscale                                                $*
