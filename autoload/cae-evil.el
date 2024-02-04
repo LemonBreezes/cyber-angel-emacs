@@ -158,7 +158,7 @@
     (narrow-to-page)
     (pcase major-mode
       ('eshell-mode (end-of-buffer))
-      (t (call-interactively (key-binding "G"))))
+      (_ (call-interactively (key-binding "G"))))
     (call-interactively #'evil-append)))
 
 ;; Allow passing the current point to Evil operators.
