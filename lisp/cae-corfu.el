@@ -97,5 +97,6 @@ This variable needs to be set at the top-level before any `after!' blocks.")
                        nil))))))
 
 ;; Use my logic for enabling Corfu in the minibuffer:
-(remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer)
+(after! corfu
+  (remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer))
 (add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
