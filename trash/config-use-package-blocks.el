@@ -39,8 +39,7 @@
   (add-to-list 'hungry-delete-except-modes 'eshell-mode))
 
 (use-package! tabgo
-  :commands tabgo :defer t
-  :config
+  :defer t :config
   (setq tabgo-tab-line-keys (cae-keyboard-kbd tabgo-tab-line-keys)))
 
 (use-package! jinx
