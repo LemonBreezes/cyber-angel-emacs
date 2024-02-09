@@ -20,7 +20,7 @@
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! helpful :recipe
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
-(package! dap-mode :built-in)
+(package! dap-mode :built-in 'prefer)
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
