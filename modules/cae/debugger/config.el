@@ -24,7 +24,12 @@
     (when (modulep! :tools eval)
       (after! cc-mode
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
-        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
+        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))
+    (when (and (executable-find "cpptools")
+               (executable-find "nixos-rebuild"))
+      (setq dap-cpptools-debug-path
+            (file-name-parent-directory
+             (file-name-parent-directory (executable-find "cpptools")))))))
 
 (after! gud
   (setq gud-chdir-before-run nil
