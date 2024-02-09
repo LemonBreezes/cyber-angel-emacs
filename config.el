@@ -72,11 +72,12 @@
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
 ;; On NixOS, this is necessary.
-(dolist (path '("~/.local/bin"))
-  (setq path (expand-file-name path))
-  (add-to-list 'exec-path path)
-  (unless (member path (split-string (getenv "PATH") ":"))
-    (setenv "PATH" (format "%s:%s" path (getenv "PATH")))))
+(when (executable-find "nixos-rebuild")
+  (dolist (path '("~/.local/bin"))
+    (setq path (expand-file-name path))
+    (add-to-list 'exec-path path)
+    (unless (member path (split-string (getenv "PATH") ":"))
+      (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
 
 
 
