@@ -26,10 +26,12 @@
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))
     (when (and (executable-find "cpptools")
-               (executable-find "nixos-rebuild"))
+               (executable-find "nixos"))
       (setq dap-cpptools-debug-path
             (file-name-parent-directory
-             (file-name-parent-directory (executable-find "cpptools")))))))
+             (file-name-parent-directory (executable-find "cpptools")))
+            dap-cpptools-debug-program
+            (concat dap-cpptools-debug-path "debugAdapters/bin/OpenDebugAD7")))))
 
 (after! gud
   (setq gud-chdir-before-run nil
