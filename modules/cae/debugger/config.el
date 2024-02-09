@@ -24,20 +24,7 @@
     (when (modulep! :tools eval)
       (after! cc-mode
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
-        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))
-    (when (executable-find "nixos")
-      (setq dap-utils-extension-path
-            "/nix/store/fy29124j7vfcrv7mlrnz9rd8z2mmys0w-vscode-extensions/share/vscode/extensions/")
-      ;;(after! dap-cpptools
-      ;;  (setq dap-cpptools-debug-path
-      ;;        (file-name-parent-directory
-      ;;         (file-name-parent-directory (executable-find "cpptools")))
-      ;;        dap-cpptools-debug-program
-      ;;        (concat dap-cpptools-debug-path "debugAdapters/bin/OpenDebugAD7")
-      ;;        dap-cpptools-extension-version
-      ;;        (car (last (split-string (nth 3 (split-string dap-cpptools-debug-path "/")) "-")))
-      ;;        ))
-      )))
+        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
 (after! gud
   (setq gud-chdir-before-run nil
