@@ -24,13 +24,7 @@
     (when (modulep! :tools eval)
       (after! cc-mode
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
-        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))
-    (after! dap-cpptools
-      ;; export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(nix-build '<nixpkgs>' --no-out-link -A stdenv.cc.cc.lib)/lib/"
-      (setenv "LD_LIBRARY_PATH" (concat (getenv "LD_LIBRARY_PATH")
-                                        (format ":%s/lib/"
-                                                (string-trim-right (shell-command-to-string "nix-build '<nixpkgs>' --no-out-link -A stdenv.cc.cc.lib")))))
-      )))
+        (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
 (after! gud
   (setq gud-chdir-before-run nil
