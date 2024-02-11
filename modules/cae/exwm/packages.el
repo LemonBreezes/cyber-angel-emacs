@@ -2,7 +2,7 @@
 ;;; private/exwm/packages.el
 
 (package! exwm :recipe
-  (:host github :repo "ch11ng/exwm"))
+  (:host github :repo "emacs-exwm/exwm"))
 (package! exwm-mff)
 (when (modulep! :editor evil +everywhere)
   (package! exwm-evil
