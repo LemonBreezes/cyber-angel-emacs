@@ -162,6 +162,10 @@
   (require 'circadian))
 
 (when cae-theme-export-theme-with-pywal
+  (when cae-config-finished-loading
+    (require 'ewal)
+    (require 'theme-magic))
+
   (use-package! ewal
     :defer-incrementally t
     :defer t :init
