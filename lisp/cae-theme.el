@@ -172,10 +172,9 @@
   (use-package! theme-magic
     :defer t :defer-incrementally t)
 
-  (unless cae-config-finished-loading
-    (after! (:all ewal theme-magic)
-      (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-      (cae-theme-export-using-pywal))))
+  (after! (:all ewal theme-magic)
+    (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+    (cae-theme-export-using-pywal)))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
