@@ -77,7 +77,8 @@ works on Chromium with the Add Page URL to Title extension."
                                                  (buffer-local-value
                                                   'exwm-firefox-evil-mode buf))
                                                (doom-visible-buffers)))))
-    (string-match "|url:\\[\\(.+\\)\\]" title)
+    (or (string-match "|url:\\[\\(.+\\)\\]" title)
+        (string-match "\\(https?://[^\s\t\n]\\)"))
     (match-string-no-properties 1 title)))
 
 ;;;###autoload
