@@ -1,7 +1,7 @@
 alias gr     egrep               --color=always                               $*
 alias c      xclip               -selection     clipboard                     $*
-alias emerge  sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) $*
-alias emerge1 sudo emerge --color=y --autounmask --autounmask-write=y --keep-going --with-bdeps=y --complete-graph=y --verbose --jobs=$(num-processors) --load-average=$(num-processors) --oneshot $*
+alias emerge  sudo emerge --color=y $*
+alias emerge1 sudo emerge --color=y $*
 alias dir    ls                                                               $*
 alias dmesg  dmesg               --color=always                               $*
 alias up eshell-up $1
