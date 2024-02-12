@@ -2,7 +2,7 @@
 
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
-(defvar cae-theme-export-theme-with-pywal nil)
+(defvar cae-theme-export-theme-with-pywal t)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
