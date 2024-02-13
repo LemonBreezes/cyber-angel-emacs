@@ -101,6 +101,10 @@
                 #'helm-display-buffer-in-own-frame)
         (setq helm-default-prompt-display-function #'helm-default-display-buffer)))
 
+    (add-hook! 'post-command-hook
+      (defun cae-disable-mouse-tracking-h ()
+        (setq track-mouse nil)))
+
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
     ;; There are two ways to work around this:
