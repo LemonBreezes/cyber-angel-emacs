@@ -49,7 +49,8 @@
                       :activation-fn (lsp-activate-on "fennel")
                       :server-id 'fennel-ls)))
 
-  ;; This messes with `repeat-mode'. Maybe the keybinding needs a filter.
+  ;; This messes with `repeat-mode'. Maybe the keybinding needs a filter because
+  ;; otherwise it kills the minibuffer contents as well.
   (after! lsp-ui-doc
     (map! :map lsp-ui-doc-mode-map
           "<mouse-movement>" nil))
