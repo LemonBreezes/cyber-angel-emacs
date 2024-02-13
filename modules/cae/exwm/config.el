@@ -101,6 +101,9 @@
                 #'helm-display-buffer-in-own-frame)
         (setq helm-default-prompt-display-function #'helm-default-display-buffer)))
 
+    ;; I never use the <mouse-movement> commands and are being triggered in some
+    ;; strange scenarios involving EXWM so it's easier for me to just turn that
+    ;; off.
     (add-hook! 'post-command-hook
       (defun cae-disable-mouse-tracking-h ()
         (setq track-mouse nil)))
