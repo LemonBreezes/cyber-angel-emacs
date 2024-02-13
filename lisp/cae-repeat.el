@@ -26,6 +26,8 @@
        ,(cae-keyboard-kbd "7") +workspace/switch-to-6
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
+       ,(cae-keyboard-kbd "[") +workspace/switch-left
+       ,(cae-keyboard-kbd "]") +workspace/switch-right
        "0" +workspace/switch-to-final
        "1" +workspace/switch-to-0
        "2" +workspace/switch-to-1
@@ -35,7 +37,9 @@
        "6" +workspace/switch-to-5
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
-       "9" +workspace/switch-to-8))
+       "9" +workspace/switch-to-8
+       "[" +workspace/switch-left
+       "]" +workspace/switch-right))
    t)
 
   (define-repeat-map cae-dired-jump
