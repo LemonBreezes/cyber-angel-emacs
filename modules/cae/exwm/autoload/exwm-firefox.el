@@ -12,7 +12,7 @@ switches pages."
   "Select and open a link with your keyboard."
   (interactive)
   (exwm-input--fake-key ?\M-j)
-  (exwm-firefox-evil-insert)
+  (exwm-evil-insert)
   (+exwm-refocus-application)
   (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
 
@@ -21,7 +21,7 @@ switches pages."
   "Select and open a link in a new tab using your keyboard."
   (interactive)
   (exwm-input--fake-key ?\M-l)
-  (exwm-firefox-evil-insert)
+  (exwm-evil-insert)
   (+exwm-refocus-application)
   (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
 
