@@ -30,10 +30,10 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((p t))
+(let ((p nil))
   (defvar cae-init-ui-enabled-p (and p t))
   (defvar cae-init-tools-enabled-p (and p t))
-  (defvar cae-init-editor-enabled-p (and p t))
+  (defvar cae-init-editor-enabled-p (and t))
   (defvar cae-init-autocompletion-enabled-p (and p t))
   (defvar cae-init-text-enabled-p (and p t))
   (defvar cae-init-email-enabled-p (and p t))
