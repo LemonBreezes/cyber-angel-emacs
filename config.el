@@ -441,6 +441,7 @@
         kill-whole-line t
         list-matching-lines-jump-to-current-line t
         mouse-prefer-closest-glyph t
+        track-mouse nil                 ; This can mess with `repeat-mode'.
         next-error-message-highlight 'keep
         read-char-by-name-sort 'code
         revert-buffer-quick-short-answers t
