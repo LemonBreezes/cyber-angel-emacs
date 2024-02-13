@@ -127,11 +127,24 @@
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
 
-  (defadvice! cae-repeat-disable-hook-a ()
-    :before-until #'repeat-post-hook
-    (or (eq (car-safe last-command-event) 'mouse-movement)
-        (bound-and-true-p hydra-curr-map)))
+  (defun cae-repeat-ignore-when-hydra-active-a ()
+    (bound-and-true-p hydra-curr-map))
 
+  (advice-add #'repeat-post-hook :before-until
+              #'cae-repeat-ignore-when-hydra-active-a)
+
+  ;; Define an advice to disable `repeat-post-hook' on <mouse-movement> commands.
+  (defadvice! cae-repeat-continue-on-mouse-movement (oldfun)
+    :around #'repeat-post-hook
+    (if (and (eq (car-safe last-command-event) 'mouse-movement)
+             repeat-in-progress)
+        (let ((this-command last-command)
+              (real-this-command real-last-command)
+              ;; We are assuming the event before was already validated.
+              (repeat-check-key nil))
+          (funcall oldfun))
+      (funcall oldfun)))
+  
   (after! outline
     (map! :map outline-navigation-repeat-map
           "RET" #'outline-toggle-children)
