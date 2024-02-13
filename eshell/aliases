@@ -59,6 +59,7 @@ alias gg    cae-unpackaged-magit-status
 alias q     exit
 alias d     dirvish                      $1 > /dev/null
 alias rg    rg                           --color=always                       $*
+alias p     phoronix-test-suite          $*
 
 alias j    z $*
 alias vi   e $*
