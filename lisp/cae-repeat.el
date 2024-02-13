@@ -127,16 +127,10 @@
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
 
-  (defun cae-repeat-ignore-when-hydra-active-a ()
-    (bound-and-true-p hydra-curr-map))
-
-  (advice-add #'repeat-post-hook :before-until
-              #'cae-repeat-ignore-when-hydra-active-a)
-
-  (defadvice! cae-repeat-disable-hook-on-mouse-movement ()
+  (defadvice! cae-repeat-disable-hook-a ()
     :before-until #'repeat-post-hook
-    (and (listp last-command-event)
-         (eq (car last-command-event) 'mouse-movement)))
+    (or (eq (car-safe last-command-event) 'mouse-movement)
+        (bound-and-true-p hydra-curr-map)))
 
   (after! outline
     (map! :map outline-navigation-repeat-map
