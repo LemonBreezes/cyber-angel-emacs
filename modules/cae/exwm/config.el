@@ -139,9 +139,9 @@
 
     ;; Prevent `window-live-p' and `frame-live-p' from producing errors when
     ;; their argument is nil.
-    (defun +exwm-select-window-a (oldfun window &rest args)
-      (when window (apply oldfun window args)))
-    (advice-add #'select-window :around #'+exwm-select-window-a)
+    ;;(defun +exwm-select-window-a (oldfun window &rest args)
+    ;;  (when window (apply oldfun window args)))
+    ;;(advice-add #'select-window :around #'+exwm-select-window-a)
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
@@ -155,12 +155,12 @@
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
-  (defun +exwm-input--translate-a (oldfun &rest args)
-    (let ((key-translation-map
-           (copy-keymap key-translation-map)))
-      (define-key key-translation-map [9] nil)
-      (apply oldfun args)))
-  (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
+  ;;(defun +exwm-input--translate-a (oldfun &rest args)
+  ;;  (let ((key-translation-map
+  ;;         (copy-keymap key-translation-map)))
+  ;;    (define-key key-translation-map [9] nil)
+  ;;    (apply oldfun args)))
+  ;;(advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
