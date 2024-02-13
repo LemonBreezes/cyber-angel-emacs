@@ -133,7 +133,6 @@
   (advice-add #'repeat-post-hook :before-until
               #'cae-repeat-ignore-when-hydra-active-a)
 
-  ;; Define an advice to disable `repeat-post-hook' on <mouse-movement> commands.
   (defadvice! cae-repeat-disable-hook-on-mouse-movement ()
     :before-until #'repeat-post-hook
     (and (listp last-command-event)
