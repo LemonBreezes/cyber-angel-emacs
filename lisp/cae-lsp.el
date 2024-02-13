@@ -47,7 +47,7 @@
     ;; HACK LSP mode turns on `track-mouse' and this messes with repeat mode.
     ;; Since I don't use the mouse hover features, I take the easy solution of
     ;; turning that off.
-    (setq-hook! 'lsp-mode-hook
+    (setq-hook! 'lsp-ui-mode-hook
       track-mouse nil)
 
     (lsp-register-client
