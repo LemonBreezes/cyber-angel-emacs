@@ -37,7 +37,7 @@
             lsp-lua-hint-enable t
             lsp-lua-hint-set-type t
             lsp-clients-lua-language-server-bin (executable-find "lua-language-server")
-            lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
+
             lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
     (after! lsp-json
       (plist-put lsp-json--schema-associations :/*.resume.json ["https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json"]))
@@ -48,6 +48,10 @@
      (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
                       :activation-fn (lsp-activate-on "fennel")
                       :server-id 'fennel-ls)))
+
+  (after! lsp-ui-doc
+    (map! :map lsp-ui-doc-mode-map
+          "<mouse-movement>" nil))
 
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
