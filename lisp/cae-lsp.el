@@ -49,6 +49,7 @@
                       :activation-fn (lsp-activate-on "fennel")
                       :server-id 'fennel-ls)))
 
+  ;; This messes with `repeat-mode'.
   (after! lsp-ui-doc
     (map! :map lsp-ui-doc-mode-map
           "<mouse-movement>" nil))
