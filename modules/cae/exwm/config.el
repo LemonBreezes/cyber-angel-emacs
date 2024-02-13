@@ -101,7 +101,7 @@
                 #'helm-display-buffer-in-own-frame)
         (setq helm-default-prompt-display-function #'helm-default-display-buffer)))
 
-    ;; I never use the <mouse-movement> commands and are being triggered in some
+    ;; I never use the `<mouse-movement>' commands and are being triggered in some
     ;; strange scenarios involving EXWM so it's easier for me to just turn them
     ;; off.
     (add-hook! 'post-command-hook
