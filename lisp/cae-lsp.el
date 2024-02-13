@@ -44,6 +44,11 @@
     (add-to-list 'lsp-disabled-clients 'ccls)
     (add-to-list 'lsp-disabled-clients 'mspyls)
 
+    ;; HACK LSP mode turns on `track-mouse' and this messes with repeat mode.
+    ;; Since I don't use the mouse hover features, I take the easy solution of
+    ;; turning that off.
+    (setq-hook! 'lsp-mode-hook
+      track-mouse nil)
 
     (lsp-register-client
      (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
