@@ -140,7 +140,7 @@ buffers of that class."
                          (persp-buffers (persp-get-by-name workspace)))))
           (unless buffers
             (+workspace-delete (+workspace-current))
-            (unless ( > 2 (length (+workspace-list)))
+            (unless (eq +workspace--last (+workspace-current-name))
               (+workspace/other)))))))
 
   (add-hook 'exwm-floating-setup-hook #'+exwm-disable-floating-h)
