@@ -227,7 +227,7 @@
 (use-package! disk-usage
   :defer t :init
   (map! :map +misc-applications-system-map
-        "d" #'disk-usage)
+        "D" #'disk-usage)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
       "d" "disk usage")))
@@ -238,10 +238,10 @@
                  (modulep! :completion helm)))
   :defer t :init
   (map! :map +misc-applications-system-map
-        "D" #'helm-linux-disks)
+        "d" #'helm-linux-disks)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-system-map
-      "D" "Linux disks")))
+      "d" "Linux disks")))
 
 (use-package! helm-system-packages
   :when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
