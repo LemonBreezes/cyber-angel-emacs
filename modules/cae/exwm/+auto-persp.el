@@ -54,7 +54,8 @@ of the corresponding workspace that will be created.")
 (after! (:all exwm dash persp-mode)
   (defun exwm--disable-floating ()
     "Tile the current application unless its class is in `+exwm-floating-apps'."
-    (unless (member exwm-class-name +exwm-floating-apps)
+    (unless (or (not exwm--floating-frame)
+                (member exwm-class-name +exwm-floating-apps))
       (exwm-floating--unset-floating exwm--id)))
 
   (defun +exwm-get-workspace-name (buffer)
@@ -94,9 +95,10 @@ nil if its not an EXWM buffer."
   (defun +exwm-persp--predicate (buffer &optional state)
     "Determines whether to create a workspace for this new EXWM buffer."
     (and (stringp (+exwm-get-workspace-name buffer))
-         (not (cl-member (buffer-local-value 'exwm-class-name buffer)
-                         +exwm-floating-apps
-                         :test #'cl-equalp))
+         (not (and exwm--floating-frame
+                   (cl-member (buffer-local-value 'exwm-class-name buffer)
+                              +exwm-floating-apps
+                              :test #'cl-equalp)))
          (or state t)))
 
   (defun +exwm-persp--focus-workspace-app (&rest _)
