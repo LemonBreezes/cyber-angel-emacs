@@ -10,7 +10,7 @@
         (projectile-discover-projects-in-search-path))
 
       ;; Projectile's caching of commands is really annoying because if I change
-      ;; the commands, the cache doesn't get updated.
+      ;; the commands, the cache doesn't get invalidated automatically.
       (setq projectile-project-enable-cmd-caching nil)
 
       (map! :leader :prefix "p"
