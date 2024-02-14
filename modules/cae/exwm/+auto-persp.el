@@ -94,7 +94,9 @@ nil if its not an EXWM buffer."
 
   (defun +exwm-persp--predicate (buffer &optional state)
     "Determines whether to create a workspace for this new EXWM buffer."
-    (when exwm-class-name (+log exwm-class-name exwm--floating-frame))
+    (when exwm-class-name (+log exwm-class-name exwm--floating-frame
+                                (alist-get 'buffer state) buffer
+                                (current-buffer)))
     (and (stringp (+exwm-get-workspace-name buffer))
          (not (and exwm--floating-frame
                    (cl-member (buffer-local-value 'exwm-class-name buffer)
