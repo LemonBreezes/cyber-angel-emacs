@@ -172,5 +172,4 @@ buffers of that class."
       (+workspace-switch workspace t)
       (+workspace/display)))
 
-  (add-hook! 'exwm-mode-hook
-    (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace)))
+  (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace))
