@@ -146,7 +146,7 @@
     ;; their argument is nil.
     (defun +exwm-select-window-a (oldfun window &rest args)
       (when window
-          (apply oldfun window args)))
+        (apply oldfun window args)))
     (advice-add #'select-window :around #'+exwm-select-window-a)
 
     ;; Remove invalid face errors
