@@ -368,7 +368,8 @@
 
 (when cae-init-tools-enabled-p
   (when (modulep! :tools lsp)
-    (load! "lisp/cae-lsp"))
+    (load! "lisp/cae-lsp")
+    (load! "lisp/cae-semantic"))
 
   ;; Set up the default browser.
   (after! browse-url
