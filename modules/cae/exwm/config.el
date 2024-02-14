@@ -146,9 +146,11 @@
 
     ;; Prevent `window-live-p' and `frame-live-p' from producing errors when
     ;; their argument is nil.
-    ;;(defun +exwm-select-window-a (oldfun window &rest args)
-    ;;  (when window (apply oldfun window args)))
-    ;;(advice-add #'select-window :around #'+exwm-select-window-a)
+    (defun +exwm-select-window-a (oldfun window &rest args)
+      (if window
+          (apply oldfun window args)
+        (backtrace)))
+    (advice-add #'select-window :around #'+exwm-select-window-a)
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
