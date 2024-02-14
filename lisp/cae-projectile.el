@@ -9,6 +9,10 @@
         :before #'projectile-switch-project
         (projectile-discover-projects-in-search-path))
 
+      ;; Projectile's caching of commands is really annoying because if I change
+      ;; the command, the cache doesn't get updated.
+      (setq projectile-project-enable-cmd-caching nil)
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
