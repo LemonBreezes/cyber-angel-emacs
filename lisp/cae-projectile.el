@@ -13,6 +13,11 @@
       ;; the commands, the cache doesn't get invalidated automatically.
       (setq projectile-project-enable-cmd-caching nil)
 
+      (defadvice! cae-projectile-project-files (project-root)
+        :before-until #'projectile-project-files
+        (or (file-equal-p project-root "~")
+            (file-equal-p project-root "/root")))
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
