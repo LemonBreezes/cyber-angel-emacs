@@ -49,6 +49,7 @@
 (package! backline)
 (package! xterm-color)
 (package! fancy-compilation)
+(package! eldoc-box)
 
 ;; cae-theme.el
 (package! modus-themes)
