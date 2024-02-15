@@ -26,20 +26,20 @@
 (when (modulep! :ui hydra)
   (eval
    `(defhydra hydra-exwm-apps (:hint nil)
-     "
+      "
 EXWM Apps Launcher
 _v_: Chrome       _f_: Flameshot    _T_: Teams
 _t_: Tiled        _d_: Discord      _p_: Pavucontrol
 _s_: Signal       _RET_: Kitty
 "
-     ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
-     ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
-     ("T" ,(cae-exwm-app-runner "teams-for-linux" "Teams"))
-     ("t" ,(cae-exwm-app-runner "tiled" "Tiled"))
-     ("d" ,(cae-exwm-app-runner "discord" "Discord"))
-     ("p" ,(cae-exwm-app-runner "pavucontrol" "Pavucontrol"))
-     ("s" ,(cae-exwm-app-runner "signal-desktop" "Signal"))
-     ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))))
+      ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
+      ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
+      ("T" ,(cae-exwm-app-runner "teams-for-linux" "Teams"))
+      ("t" ,(cae-exwm-app-runner "tiled" "Tiled"))
+      ("d" ,(cae-exwm-app-runner "discord" "Discord"))
+      ("p" ,(cae-exwm-app-runner "pavucontrol" "Pavucontrol"))
+      ("s" ,(cae-exwm-app-runner "signal-desktop" "Signal"))
+      ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))))
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
