@@ -25,7 +25,7 @@
 
 (when (modulep! :ui hydra)
   (eval
-   `(defhydra hydra-exwm-apps (:hint nil)
+   `(defhydra hydra-exwm-apps (:hint nil :color blue)
       "
 EXWM Apps Launcher
 _v_: Chrome       _f_: Flameshot    _T_: Teams
