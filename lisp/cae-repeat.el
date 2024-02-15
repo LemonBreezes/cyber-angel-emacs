@@ -28,6 +28,7 @@
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
        ,(cae-keyboard-kbd "[") +workspace/switch-left
        ,(cae-keyboard-kbd "]") +workspace/switch-right
+       "TAB" +workspace/display
        "0" +workspace/switch-to-final
        "1" +workspace/switch-to-0
        "2" +workspace/switch-to-1
