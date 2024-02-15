@@ -386,6 +386,7 @@
 
 ;;; Tools
 
+(defvar cae-generic-browser-name "")
 (when cae-init-tools-enabled-p
   (when (modulep! :tools lsp)
     (load! "lisp/cae-lsp")
@@ -409,11 +410,14 @@
                                   (executable-find "google-chrome-stable"))))
              (setq browse-url-generic-program chrome
                    browse-url-generic-args (when (eq (user-uid) 0)
-                                             '("--no-sandbox")))))
+                                             '("--no-sandbox"))
+                   cae-generic-browser-name "Chrome")))
           ((executable-find "firefox-bin")
-           (setq browse-url-generic-program "firefox-bin"))
+           (setq browse-url-generic-program "firefox-bin"
+                 cae-generic-browser-name "Firefox"))
           ((executable-find "firefox-beta")
-           (setq browse-url-generic-program "firefox-beta"))))
+           (setq browse-url-generic-program "firefox-beta"
+                 cae-generic-browser-name "Firefox"))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
