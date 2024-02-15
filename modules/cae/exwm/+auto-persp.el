@@ -21,6 +21,7 @@
     ("\"firefox developer edition\"" . "Firefox")
     ("\"firefoxdeveloperedition\"" . "Firefox")
     ("firefoxdeveloperedition" . "Firefox")
+    ("firefox" . "Firefox")
     ("kdeconnect." . "KDE Connect")
     ("libreoffice" . "Libreoffice")
     ("libreoffice-startcenter" . "Libreoffice")
