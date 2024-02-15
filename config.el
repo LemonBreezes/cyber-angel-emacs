@@ -370,7 +370,11 @@
   (use-package! fancy-compilation
     :after compile
     :config
-    (fancy-compilation-mode +1)))
+    (fancy-compilation-mode +1))
+
+  (use-package! eldoc-box
+    :defer t :init
+    (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)))
 
 
 ;;; Tools
