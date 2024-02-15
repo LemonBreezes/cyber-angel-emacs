@@ -28,7 +28,7 @@
    `(defhydra hydra-exwm-apps (:hint nil :color blue)
       "
 EXWM Apps Launcher
-_v_: Web          _f_: Flameshot    _T_: Teams
+_v_: Internet     _f_: Flameshot    _T_: Teams
 _t_: Tiled        _d_: Discord      _p_: Pavucontrol
 _s_: Signal       _RET_: Kitty
 "
