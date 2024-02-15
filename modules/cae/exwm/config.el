@@ -161,12 +161,12 @@
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
-  ;;(defun +exwm-input--translate-a (oldfun &rest args)
-  ;;  (let ((key-translation-map
-  ;;         (copy-keymap key-translation-map)))
-  ;;    (define-key key-translation-map [9] nil)
-  ;;    (apply oldfun args)))
-  ;;(advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
+  (defun +exwm-input--translate-a (oldfun &rest args)
+    (let ((key-translation-map
+           (copy-keymap key-translation-map)))
+      (define-key key-translation-map [9] nil)
+      (apply oldfun args)))
+  (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
