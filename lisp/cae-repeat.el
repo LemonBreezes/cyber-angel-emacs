@@ -28,7 +28,6 @@
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
        ,(cae-keyboard-kbd "[") +workspace/switch-left
        ,(cae-keyboard-kbd "]") +workspace/switch-right
-       "TAB" +workspace/display
        "0" +workspace/switch-to-final
        "1" +workspace/switch-to-0
        "2" +workspace/switch-to-1
@@ -40,7 +39,8 @@
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
        "[" +workspace/switch-left
-       "]" +workspace/switch-right))
+       "]" +workspace/switch-right)
+       (:enter +workspace/display))
    t)
 
   (define-repeat-map cae-dired-jump
