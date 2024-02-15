@@ -304,7 +304,8 @@
           (cons (car out)
                 (lambda ()
                   (funcall (cdr out))
-                  (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
+                  (which-key--echo (concat ;;(current-message) " "
+                                    (+workspace--tabline)))))))))
 
   ;; Lower the default popup delay.
   (after! tooltip
