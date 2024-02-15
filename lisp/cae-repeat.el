@@ -39,8 +39,7 @@
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
        "[" +workspace/switch-left
-       "]" +workspace/switch-right)
-      (:enter +workspace/display))
+       "]" +workspace/switch-right))
    t)
 
   (define-repeat-map cae-dired-jump
