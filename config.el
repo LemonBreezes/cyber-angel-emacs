@@ -42,7 +42,7 @@
     (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
       (defun cae-persp-skip-buffer-p (buffer)
         (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
-;;
+
 ;; Set up fonts
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (not (cae-display-graphic-p)))
