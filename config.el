@@ -294,6 +294,18 @@
         :select nil :quit t :ttl nil))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
+  (when (modulep! :ui workspaces)
+  (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
+    "Show my workspaces in the echo thingy"
+    :around #'which-key--process-page
+    (let ((out (apply orig-fun pages-obj)))
+      (if (not (string-match-p "Display tab bar" (car out)))
+          out
+        (cons (car out)
+              (lambda ()
+                (funcall (cdr out))
+                (which-key--echo (concat (current-message) " " (+workspace--tabline)))))))))
+
   ;; Lower the default popup delay.
   (after! tooltip
     (setq tooltip-hide-delay 3))
