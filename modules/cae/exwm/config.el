@@ -82,13 +82,17 @@
           :localleader
           (:prefix ("d" . "debug")
            "l" #'xcb-debug:clearn
-           "m" #'xcb-debug:mark
+
            "t" #'exwm-debug)
           "f" #'exwm-layout-toggle-fullscreen
           "h" #'exwm-floating-hide
           "q" #'exwm-input-send-next-key
           "SPC" #'exwm-floating-toggle-floating
           "m" #'exwm-layout-toggle-mode-line)
+
+    ;; Testing out this fix to see if it works
+    ;; https://github.com/ch11ng/exwm/issues/889#issuecomment-1874977844
+    (setq x-no-window-manager t)
 
     ;; A few `ido' fixes.
     (use-package! exwm-config
