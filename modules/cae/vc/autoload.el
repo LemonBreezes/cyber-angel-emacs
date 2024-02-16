@@ -37,7 +37,7 @@ for the \"main\" or \"master\" branch."
                           (magit-get-all "remote" remote-name "fetch")))
          ;; https://oremacs.com/2015/03/11/git-tricks/
          ;; TODO Make this apply to all remotes and work for GitLab as well.
-         (fetch-address (format "+refs/pull/*/head:refs/pull/%s/*" remote-name)))
+         (fetch-address (format "+refs/pull/*/head:refs/remotes/%s/pr/*" remote-name)))
     (when fetch-refs
       (unless (member fetch-address fetch-refs)
         (magit-git-string "config"
