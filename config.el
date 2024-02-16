@@ -1017,8 +1017,7 @@
       (goto-char (eol))))
 
   (use-package! isearch-mb
-    :after-call isearch-mode-hook
-    :init
+    :after-call isearch-mode-hook :init
     (when (modulep! :editor evil)
       (after! evil
         ;; I prefer `isearch' combined with `isearch-mb'.
