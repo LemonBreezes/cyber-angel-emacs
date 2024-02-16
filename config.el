@@ -1035,7 +1035,6 @@
     (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
                    avy-isearch consult-line))
       (add-to-list 'isearch-mb--after-exit cmd))
-    (define-key isearch-mb-minibuffer-map (kbd "C-w") #'isearch-yank-word)
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
       (map! :map isearch-mb-minibuffer-map
