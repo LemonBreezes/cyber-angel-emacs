@@ -380,9 +380,7 @@
     :defer t :init
     (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)
     (after! eldoc
-      (setq eldoc-idle-delay 0.7))
-    (map! :leader
-          :desc "Popup documentation" "te" #'eldoc-mode)))
+      (setq eldoc-idle-delay 0.7))))
 
 
 ;;; Tools
