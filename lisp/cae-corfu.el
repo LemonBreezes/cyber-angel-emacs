@@ -28,14 +28,14 @@
   (setq lsp-completion-provider nil))
 
 ;; Do not make us type RET twice with Corfu.
-(defun corfu--maybe-return-filter (cmd)
-  (if (eq corfu--index -1) (corfu-quit) cmd))
-(after! corfu
-  (keymap-set corfu-map "RET" `(menu-item "corfu-maybe-return" corfu-insert
-                                :filter corfu--maybe-return-filter))
-  (keymap-set
-   corfu-map "<return>" `(menu-item "corfu-maybe-return" corfu-insert
-                          :filter corfu--maybe-return-filter)))
+;;(defun corfu--maybe-return-filter (cmd)
+;;  (if (eq corfu--index -1) (corfu-quit) cmd))
+;;(after! corfu
+;;  (keymap-set corfu-map "RET" `(menu-item "corfu-maybe-return" corfu-insert
+;;                                :filter corfu--maybe-return-filter))
+;;  (keymap-set
+;;   corfu-map "<return>" `(menu-item "corfu-maybe-return" corfu-insert
+;;                          :filter corfu--maybe-return-filter)))
 
 ;; Wildcard separator
 (defvar +orderless-wildcard-character ?,
