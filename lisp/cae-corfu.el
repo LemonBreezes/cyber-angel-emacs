@@ -23,9 +23,9 @@
   (map! :map corfu-map
         [remap corfu-quit] #'cae-corfu-quit))
 
-(after! lsp-completion
-  ;; Do not try to configure `company-capf' for LSP.
-  (setq lsp-completion-provider nil))
+;;(after! lsp-completion
+;;  ;; Do not try to configure `company-capf' for LSP.
+;;  (setq lsp-completion-provider nil))
 
 ;; Do not make us type RET twice with Corfu.
 ;;(defun corfu--maybe-return-filter (cmd)
