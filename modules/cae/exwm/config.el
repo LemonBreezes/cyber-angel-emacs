@@ -161,7 +161,12 @@
       (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)
       (define-advice posframe-show (:filter-return (frame) exwm-deparent)
         (set-frame-parameter frame 'parent-frame nil)
-        frame)))
+        frame))
+
+    ;; For some reason, `which-key' is not popping up for me without this.
+    ;;(setq-hook! exwm-mode
+    ;;  which-key-popup-type 'minibuffer)
+    )
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
