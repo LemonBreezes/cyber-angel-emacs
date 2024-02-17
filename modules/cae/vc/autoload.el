@@ -22,6 +22,14 @@ Meant to be used like:
 (defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
 
+;; As an example, add this to your .dir-locals.el to use the above function:
+;;(when (and (derived-mode-p 'magit-status-mode)
+;;           (fboundp #'cae-magit-insert-diff-upstream-master))
+;;  (magit-add-section-hook 'magit-status-sections-hook
+;;                          #'cae-magit-insert-diff-upstream-master
+;;                          'magit-insert-stashes
+;;                          nil t))
+
 ;;;###autoload
 (defun cae-magit-add-PR-fetch-ref (&optional remote-name)
   "If refs/pull is not defined on a GH repo, define it.
