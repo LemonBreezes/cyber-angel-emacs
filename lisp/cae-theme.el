@@ -61,7 +61,6 @@
     (set-face-attribute 'scrollkeeper-guideline-highlight nil
                         :background (face-attribute 'lazy-highlight :background nil t)))
 
-  ;; The backgrounds currently break
   (when cae-theme-extend-heading-faces
     (after! org
       (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
