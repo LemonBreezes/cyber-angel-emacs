@@ -73,4 +73,4 @@ if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of th
 (defun cae-diffastic-magit-diff-single-window ()
   (let ((difftastic-requested-window-width-function #'my/difftastic--requested-window-width-single-window)
         (difftastic-display-buffer-function #'display-buffer-same-window))
-  (call-interactively #'difftastic-magit-diff)))
+    (call-interactively #'difftastic-magit-diff)))
