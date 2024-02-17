@@ -91,13 +91,13 @@
     (set-face-attribute face nil :weight 'normal)))
 
 (after! modus-themes
-  (setq modus-themes-org-blocks 'gray-background
+  (setq! modus-themes-org-blocks 'gray-background
         modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-variable-pitch-ui t
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
-        modus-themes-to-toggle '(modus-vivendi-deuteranopia modus-operandi-deuteranopia)
+        modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted)
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
