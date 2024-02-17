@@ -205,4 +205,6 @@
   :config
   (setq difftastic-requested-window-width-function
         #'cae-difftastic--requested-window-width-single-window
-        difftastic-display-buffer-function #'display-buffer-same-window))
+        difftastic-display-buffer-function
+        (lambda (buf _)
+          (display-buffer-same-window buf nil))))
