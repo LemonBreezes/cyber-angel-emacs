@@ -44,3 +44,23 @@ for the \"main\" or \"master\" branch."
                           "--add"
                           (format "remote.%s.fetch" remote-name)
                           fetch-address)))))
+
+;;;###autoload
+(defun consult-gh-fork-current-repo (&optional name remote remote-name)
+  "Forks the repo in the current directory as NAME.
+if REMOTE is non-nil adds a remote to the current repo, otherwise queries the user
+if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of the remote"
+  (interactive)
+  (if (consult-gh--get-repo-from-directory)
+      (let* ((name (or name (read-string "name for forked repo: " (car (last (split-string (consult-gh--get-repo-from-directory) "\/"))))))
+             (forkrepo (concat (consult-gh--get-current-username) "/" name))
+             (remote (or remote (yes-or-no-p "add a remote? ")))
+             (remote-name (or (and remote remote-name)
+                              (and remote (read-string "name of remote? " "origin"))
+                              (and remote "origin"))))
+        (consult-gh--command-to-string "repo" "fork" (if remote "--remote") (if (and remote-name (not (equal remote-name "origin"))) "--remote-name" "") (if  (and remote-name (not (equal remote-name "origin"))) remote-name ""))
+        (message (format "current repo was forked to %s" (propertize forkrepo 'face 'font-lock-warning-face)))
+        (run-hook-with-args 'consult-gh-repo-post-fork-hook forkrepo)
+        (let ((inhibit-message t))
+          forkrepo))
+    (consult-gh-repo-fork)))
