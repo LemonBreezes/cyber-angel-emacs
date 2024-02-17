@@ -11,14 +11,14 @@
 (defun cae-corfu-enable-in-minibuffer-h ()
   (unless (or (bound-and-true-p mct--active)
               (bound-and-true-p vertico--input)
-              (and (minibuffer-prompt)
-                   (cl-member (minibuffer-prompt)
-                              '("I-search: "
-                                "Query replace"
-                                "Align regexp"
-                                "Expansion for ")
-                              :test (lambda (x y)
-                                      (string-match-p y x))))
+              ;;(and (minibuffer-prompt)
+              ;;     (cl-member (minibuffer-prompt)
+              ;;                '("I-search: "
+              ;;                  "Query replace"
+              ;;                  "Align regexp"
+              ;;                  "Expansion for ")
+              ;;                :test (lambda (x y)
+              ;;                        (string-match-p y x))))
               (and (featurep 'helm-core)
                    (helm--alive-p)))
     (corfu-mode +1)))
