@@ -200,6 +200,8 @@
       (transient-append-suffix 'magit-diff '(-1 -1)
         [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
          ("S" "Difftastic show" difftastic-magit-show)])))
+  (defun cae-difftastic--requested-window-width-single-window ()
+    (- (frame-width) (fringe-columns 'left) (fringe-columns 'right)))
   :config
   (setq difftastic-requested-window-width-function
         #'cae-difftastic--requested-window-width-single-window
