@@ -17,7 +17,8 @@
                                 "Query replace"
                                 "Align regexp"
                                 "Expansion for ")
-                              :test #'string-match-p))
+                              :test (lambda (x y)
+                                      (string-match-p y x))))
               (and (featurep 'helm-core)
                    (helm--alive-p)))
     (corfu-mode +1)))
