@@ -12,6 +12,7 @@ alias tailscale sudo tailscale                                                $*
 alias tailscaled sudo tailscaled                                              $*
 alias nvidia-settings sudo nvidia-settings                                    $*
 alias genlop sudo genlop                                                      $*
+alias emaint sudo emaint                                                      $*
 alias groupadd sudo groupadd                                                  $*
 alias gpasswd sudo gpasswd                                                    $*
 alias groupmod sudo groupmod                                                  $*
