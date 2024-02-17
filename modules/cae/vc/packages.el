@@ -15,3 +15,4 @@
 (package! abridge-diff)
 (when (modulep! +delta)
   (package! diff-ansi))
+(package! difftastic)
