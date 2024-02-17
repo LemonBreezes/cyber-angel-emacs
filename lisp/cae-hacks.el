@@ -171,3 +171,8 @@ It is meant to be used as a `post-gc-hook'."
 (defadvice! cae-disable-copilot-rpc-version-check-a ()
   :override #'copilot--jsonrpc-version
   "9999")
+
+;; For some reason, `which-key' would get canceled out by the Eldoc help.
+(defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
+  :before-until #'eldoc-print-current-symbol-info
+  (and (featurep 'which-key) (which-key--popup-showing-p)))
