@@ -309,13 +309,13 @@
       (:prefix "t"
        :desc "Column indicator" "C" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
-      (:when (and (modulep! :tools lsp)
-                  (not (modulep! :tools lsp +eglot)))
-       (:prefix "c"
-        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu))
-      (:when (not (and (modulep! :tools lsp)
-                       (not (modulep! :tools lsp +eglot))))
-       :desc "Imenu sidebar" "TAB" #'imenu-list))
+      (:prefix "c"
+       (:when (and (modulep! :tools lsp)
+                   (not (modulep! :tools lsp +eglot)))
+        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
+       (:when (not (and (modulep! :tools lsp)
+                        (not (modulep! :tools lsp +eglot))))
+        :desc "Imenu sidebar" "TAB" #'imenu-list)))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
