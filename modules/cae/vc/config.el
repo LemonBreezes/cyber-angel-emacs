@@ -152,7 +152,7 @@
            :desc "Default repos" "d" #'consult-gh-default-repos
            :desc "Find file" "f" #'consult-gh-find-file
            :desc "Clone" "c" #'consult-gh-repo-clone
-           :desc "Fork" "k" #'consult-gh-repo-fork)))
+           :desc "Fork" "k" #'consult-gh-fork-current-repo)))
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "g" "GitHub CLI"
