@@ -230,7 +230,7 @@
         ("^\\*org-roam\\*" :size 60 :side left :select nil
          :quit nil)
         ("^\\*info.*" :size cae-popup-resize-help-buffer
-         :side right :ttl t :select t :quit t :ttl t :slot 2 :vslot 2)
+         :side right :ttl nil :select t :quit t :ttl t :slot 2 :vslot 2)
         ("^\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
          :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
         ("^\\*tldr\\*" :size cae-popup-resize-help-buffer
