@@ -45,6 +45,7 @@ unbalanced. Works with Lispy and Smartparens."
                (t #'delete-char))))
     (call-interactively delete-fn)))
 
+;; FIXME This command is broken.
 ;;;###autoload
 (defun cae-toggle-sudo ()
   "Toggle sudo access for the current file."
