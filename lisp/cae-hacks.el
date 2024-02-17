@@ -175,4 +175,5 @@ It is meant to be used as a `post-gc-hook'."
 ;; For some reason, `which-key' would get canceled out by the Eldoc help.
 (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
   :before-until #'eldoc-print-current-symbol-info
-  (and (featurep 'which-key) (which-key--popup-showing-p)))
+  (or (and (featurep 'which-key) (which-key--popup-showing-p))
+      (derived-mode-p 'exwm-mode)))
