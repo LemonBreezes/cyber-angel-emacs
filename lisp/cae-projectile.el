@@ -39,6 +39,7 @@
               (,doom-emacs-dir . 0)
               ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
               ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
+              ,@(when (file-exists-p "~/src/love2d/") '(("~/src/love2d" . 1)))
               ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
       (add-to-list 'projectile-globally-ignored-directories
                    (expand-file-name ".local/straight/repos/" user-emacs-directory))
