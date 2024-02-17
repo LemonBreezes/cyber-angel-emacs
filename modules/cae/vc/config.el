@@ -198,5 +198,9 @@
   (after! magit-diff
     (unless (ignore-errors (transient-get-suffix 'magit-diff "D"))
       (transient-append-suffix 'magit-diff '(-1 -1)
-        [("D" "Difftastic diff (dwim)" cae-difftastic-magit-diff-single-window)
-         ("S" "Difftastic show" difftastic-magit-show)]))))
+        [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
+         ("S" "Difftastic show" difftastic-magit-show)])))
+  :config
+  (setq difftastic-requested-window-width-function
+        #'cae-difftastic--requested-window-width-single-window
+        difftastic-display-buffer-function #'display-buffer-same-window))
