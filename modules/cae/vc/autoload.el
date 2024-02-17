@@ -22,7 +22,7 @@ Meant to be used like:
 (defalias 'cae-magit-insert-diff-upstream-master
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
 
-;; As an example, add this to your .dir-locals.el to use the above function:
+;; As an example, add this to your .dir-locals.el:
 ;;(when (and (derived-mode-p 'magit-status-mode)
 ;;           (fboundp #'cae-magit-insert-diff-upstream-master))
 ;;  (magit-add-section-hook 'magit-status-sections-hook
