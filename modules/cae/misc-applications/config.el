@@ -444,12 +444,13 @@
     (which-key-add-keymap-based-replacements +misc-applications-games-map
       "T" "Speed Type"))
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
-  :config
   (when (modulep! :completion corfu)
-    (add-to-list 'global-corfu-modes '(not speed-type-mode)))
+    (after! corfu
+      (add-to-list 'global-corfu-modes '(not speed-type-mode))))
   (when (modulep! :editor evil)
     (after! evil
       (evil-set-initial-state #'speed-type-mode 'insert)))
+  :config
   (add-hook 'speed-type-mode-hook
             (defun cae-speed-type-disabe-show-paren-mode-h ()
               (show-paren-local-mode -1)))
