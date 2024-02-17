@@ -12,14 +12,13 @@ alias tailscale sudo tailscale                                                $*
 alias tailscaled sudo tailscaled                                              $*
 alias nvidia-settings sudo nvidia-settings                                    $*
 alias genlop sudo genlop                                                      $*
-alias emaint sudo emaint                                                      $*
 alias groupadd sudo groupadd                                                  $*
 alias gpasswd sudo gpasswd                                                    $*
 alias groupmod sudo groupmod                                                  $*
 alias grub-mkconfig sudo grub-mkconfig                                        $*
 alias eselect sudo eselect                                                    $*
 alias usermod sudo usermod                                                    $*
-alias tree   sudo tree -C                                                     $*
+alias tree sudo tree -C                                                       $*
 alias smart-live-rebuild sudo smart-live-rebuild                              $*
 alias updatedb sudo updatedb                                                  $*
 alias sysctl sudo sysctl                                                      $*
