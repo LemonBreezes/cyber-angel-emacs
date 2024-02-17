@@ -187,3 +187,13 @@
   (setq diff-ansi-extra-args-for-delta
         '("--no-gitconfig" "--true-color=always" "--paging=never"))
   (diff-ansi-mode +1))
+
+(use-package difftastic
+  :bind (:map magit-blame-read-only-mode-map
+         ("D" . difftastic-magit-show)
+         ("S" . difftastic-magit-show))
+  :config
+  (eval-after-load 'magit-diff
+    '(transient-append-suffix 'magit-diff '(-1 -1)
+       [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
+        ("S" "Difftastic show" difftastic-magit-show)])))
