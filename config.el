@@ -223,8 +223,7 @@
       ;; TODO Set the correct slot/vslot for these popups.
       '(("^\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
          :ttl nil :vslot 99)
-        ("^\\*exwm" :size +popup-shrink-to-fit :ttl nil
-         :ttl nil)
+        ("^\\*exwm" :size +popup-shrink-to-fit :ttl nil)
         ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
          :quit t :ttl t)
         ("^\\*org-roam\\*" :size 60 :side left :select nil
