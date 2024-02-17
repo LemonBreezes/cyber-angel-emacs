@@ -196,6 +196,10 @@
   (after! evil
     (evil-set-initial-state 'difftastic-mode 'emacs))
   :config
+  (defun cae-difftastic--requested-window-width-single-window ()
+    (- (frame-width) (fringe-columns 'left) (fringe-columns 'right)))
+  (setq difftastic-requested-window-width-function
+        #'cae-difftastic--requested-window-width-single-window)
   (after! magit-diff
     (unless (ignore-errors (transient-get-suffix 'magit-diff "D"))
       (transient-append-suffix 'magit-diff '(-1 -1)
