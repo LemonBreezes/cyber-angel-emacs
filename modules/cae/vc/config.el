@@ -192,6 +192,9 @@
   :bind (:map magit-blame-read-only-mode-map
          ("D" . difftastic-magit-show)
          ("S" . difftastic-magit-show))
+  :init
+  (after! evil
+    (evil-set-initial-state 'difftastic-mode 'emacs))
   :config
   (after! magit-diff
     (unless (ignore-errors (transient-get-suffix 'magit-diff "D"))
