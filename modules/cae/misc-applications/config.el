@@ -426,10 +426,10 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-games-map
       "d" "Dunnet"))
-  :config
   (when (modulep! :editor evil)
     (after! evil
       (evil-set-initial-state #'dun-mode 'insert)))
+  :config
   (map! :map dun-mode-map
         "C-c C-k" #'+dunnet-quit
         :n "q" #'+dunnet-quit))
