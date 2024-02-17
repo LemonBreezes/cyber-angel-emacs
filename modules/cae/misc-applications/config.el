@@ -189,12 +189,6 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
       "l" "LeetCode"))
-  :config
-  (map! :map leetcode--problems-mode-map
-        "q" #'+leetcode-soft-quit
-        "Q" #'+leetcode-quit
-        :map leetcode--problem-detail-mode-map
-        "o" #'link-hint-open-link)
   (add-hook 'leetcode-solution-mode-hook
             (lambda ()
               ;; Flycheck will emit errors because the code does not have any
@@ -205,6 +199,12 @@
               ;; Copilot is basically cheating, so disable it too.
               (when (bound-and-true-p copilot-mode)
                 (copilot-mode -1))))
+  :config
+  (map! :map leetcode--problems-mode-map
+        "q" #'+leetcode-soft-quit
+        "Q" #'+leetcode-quit
+        :map leetcode--problem-detail-mode-map
+        "o" #'link-hint-open-link)
   (setq leetcode-save-solutions t)
   (setq leetcode-directory "~/src/leetcode"))
 
@@ -265,14 +265,14 @@
   (after! which-key
     (which-key-add-keymap-based-replacements ctl-x-map
       "/" "pulseaudio-control"))
+  (after! which-key
+    (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
+          which-key-replacement-alist))
   :config
   (after! which-key
     (which-key-add-keymap-based-replacements ctl-x-map
       "/" "pulseaudio-control"))
   (pulseaudio-control-default-keybindings)
-  (after! which-key
-    (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
-          which-key-replacement-alist))
   (setq pulseaudio-control-use-default-sink t)
   (pulseaudio-control-default-keybindings))
 
@@ -297,11 +297,11 @@
   (when (modulep! :editor evil)
     (after! evil-snipe
       (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
+  (add-hook 'proced-mode-hook #'+misc-applications-hide-cursor-h)
   :config
   (setq proced-enable-color-flag t
         proced-filter 'all
         proced-format 'medium)
-  (add-hook 'proced-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map proced-mode-map
         "c" #'proced-mark-children
         :n "gr" #'revert-buffer))
@@ -396,10 +396,10 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-games-map
       "b" "Bubbles"))
-  :config
   (when (modulep! :editor evil)
     (after! evil-snipe
       (cl-pushnew #'bubbles-mode evil-snipe-disabled-modes)))
+  :config
   (map! :map bubbles-mode-map
         :ng "q" #'+bubbles-quit
         :n "RET" #'bubbles-plop
@@ -502,10 +502,11 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-games-map
       "k" "Solitaire"))
-  (after! evil
-    (evil-set-initial-state 'klondike-mode 'emacs)
-    (evil-set-initial-state 'klondike-select-mode 'emacs)
-    (evil-set-initial-state 'klondike-picker-mode 'emacs))
+  (when (modulep! :editor evil)
+    (after! evil
+      (evil-set-initial-state 'klondike-mode 'emacs)
+      (evil-set-initial-state 'klondike-select-mode 'emacs)
+      (evil-set-initial-state 'klondike-picker-mode 'emacs)))
   :config
   (map! :map klondike-mode-map
         :g "?" #'describe-mode
@@ -579,8 +580,8 @@
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
   (advice-add #'zone :around #'+zone-switch-to-root-window-a)
 
-  :config
   (autoload 'zone-pgm-spoopy "zone-pgm-spoopy")
+  :config
   ;; remove not interesting programs
   (setq zone-programs [zone-nyan
                        zone-rainbow
@@ -605,15 +606,15 @@
                        zone-pgm-rat-race
                        zone-pgm-paragraph-spaz])
 
-  (after! zone-matrix
-    (setq zmx-unicode-mode t))
-
-  (after! zone-rainbow
-    (setq zone-rainbow-background "#000000"))
-
   (when (and (not (bound-and-true-p exwm--connection))
              (modulep! +screensaver))
     (zone-when-idle (* 5 60))))
+
+(after! zone-matrix
+  (setq zmx-unicode-mode t))
+
+(after! zone-rainbow
+  (setq zone-rainbow-background "#000000"))
 
 ;; Here's another Zone that says positive words together with their definitions.
 ;; But it requires `wordnet' to be installed and also an internet connection.
@@ -692,6 +693,15 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPV"))
+  (add-hook! 'empv-youtube-results-mode-hook
+    (defun +empv-youtube-results-h ()
+      (setq tabulated-list-padding 0)
+      (setq-local tabulated-list-format
+                  `[("Thumbnail" 20 nil)
+                    ("Title" ,(- (window-width) 20 10 10 (* tabulated-list-padding 2)) t)
+                    ("Length"  10 t)
+                    ("Views" 10 t)])))
+  (add-hook 'empv-init-hook #'empv-override-quit-key)
   :config
   (map! :map +misc-applications-music-map
         "m" empv-map)
@@ -703,14 +713,6 @@
         "T" #'empv-youtube-tabulated
         "'" #'empv-youtube-tabulated-last-results)
   (setq empv-youtube-use-tabulated-results nil)
-  (add-hook! 'empv-youtube-results-mode-hook
-    (defun +empv-youtube-results-h ()
-      (setq tabulated-list-padding 0)
-      (setq-local tabulated-list-format
-                  `[("Thumbnail" 20 nil)
-                    ("Title" ,(- (window-width) 20 10 10 (* tabulated-list-padding 2)) t)
-                    ("Length"  10 t)
-                    ("Views" 10 t)])))
   (require 'elfeed-tube)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
@@ -719,7 +721,6 @@
         empv-audio-dir +misc-applications-music-dir
         empv-video-dir +misc-applications-videos-dir
         empv-playlist-dir +misc-applications-music-dir)
-  (add-hook 'empv-init-hook #'empv-override-quit-key)
   (aio-defun cae-empv-set-invidious-instance ()
     (setq empv-invidious-instance
           (concat "https://"
@@ -752,6 +753,10 @@
   (advice-add #'emms-source-dired :filter-return
               (lambda (list)
                 (sort list (lambda (_ _) (< (random) 0.5)))))
+  (add-hook 'emms-browser-mode-hook #'+misc-applications-hide-cursor-h)
+  (add-hook 'emms-playlist-mode-hook #'+misc-applications-hide-cursor-h)
+  (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
+  (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
   :config
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
@@ -782,8 +787,6 @@
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)))
-  (add-hook 'emms-browser-mode-hook #'+misc-applications-hide-cursor-h)
-  (add-hook 'emms-playlist-mode-hook #'+misc-applications-hide-cursor-h)
   (map! :map emms-browser-mode-map
         :ng "q" #'+emms-quit
         :ng "a" #'+emms-quick-access
@@ -801,8 +804,6 @@
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
-  (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
 
   (setq emms-track-description-function '+emms-track-description
         emms-mode-line-icon-enabled-p nil))
