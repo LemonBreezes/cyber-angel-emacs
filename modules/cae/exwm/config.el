@@ -137,7 +137,7 @@
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
     ;; For people who run nested Emacs instances within EXWM.
-    (setq exwm-replace (when (not (getenv "EXWM_RUNNING")) 'ask))
+
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
@@ -165,7 +165,10 @@
 
     ;; For some reason, `which-key' is not popping up for me without this.
     (setq-hook! 'exwm-mode-hook
-      which-key-popup-type 'minibuffer))
+      which-key-popup-type 'minibuffer)
+
+    ;; Do not auto-kill EXWM buffers.
+    (set-popup-rule! "^\\*exwm" :size #'ignore :ttl nil))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
