@@ -49,7 +49,8 @@
 (package! backline)
 (package! xterm-color)
 (package! fancy-compilation)
-(package! eldoc-box)
+(package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
+                             :branch "handle-pos-visible-in-window-p-nil"))
 
 ;; cae-theme.el
 (package! modus-themes)
