@@ -164,7 +164,7 @@
         frame))
 
     ;; For some reason, `which-key' is not popping up for me without this.
-    (setq-hook! exwm-mode
+    (setq-hook! 'exwm-mode-hook
       which-key-popup-type 'minibuffer))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
