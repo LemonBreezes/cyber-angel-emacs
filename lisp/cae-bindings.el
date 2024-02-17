@@ -91,9 +91,9 @@
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "M-R" #'cae-sp-raise-sexp
-      [remap dabbrev-expand] #'hippie-expand
+      [remap dabbrev-expand] #'cape-dabbrev
       (:when (modulep! :completion corfu)
-       [remap dabbrev-completion] #'cape-dabbrev)
+       [remap dabbrev-completion] #'hippie-expand)
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "C-S-h" #'embark-bindings
