@@ -61,6 +61,7 @@
        (window-select +numbers)
        ophints
        zen
+       treemacs
 
        :editor
        file-templates
