@@ -312,7 +312,10 @@
       (:when (and (modulep! :tools lsp)
                   (not (modulep! :tools lsp +eglot)))
        (:prefix "c"
-        :desc "LSP Imenu" "TAB" #'lsp-ui-imenu)))
+        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu))
+      (:when (not (and (modulep! :tools lsp)
+                       (not (modulep! :tools lsp +eglot))))
+       :desc "Imenu sidebar" "TAB" #'imenu-list))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
