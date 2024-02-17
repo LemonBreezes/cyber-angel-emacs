@@ -64,3 +64,6 @@ if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of th
         (let ((inhibit-message t))
           forkrepo))
     (consult-gh-repo-fork)))
+
+;;;###autoload
+(defun cae-diffastic-magit-diff-single-window ())
