@@ -195,7 +195,6 @@
   :init
   (after! evil
     (evil-set-initial-state 'difftastic-mode 'emacs))
-  :config
   (after! magit-diff
     (unless (ignore-errors (transient-get-suffix 'magit-diff "D"))
       (transient-append-suffix 'magit-diff '(-1 -1)
