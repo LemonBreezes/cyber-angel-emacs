@@ -167,7 +167,7 @@
     (setq-hook! 'exwm-mode-hook
       which-key-popup-type 'minibuffer)
 
-    ;; Do not auto-kill EXWM buffers.
+    ;; Do not handle EXWM buffers.
     (set-popup-rule! "^\\*exwm" :ignore t))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
