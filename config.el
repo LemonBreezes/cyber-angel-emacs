@@ -224,7 +224,7 @@
       '(("^\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
          :ttl nil :vslot 99)
         ("^\\*exwm" :ignore t)
-        ("^\\*difftastic git diff\\*$" :size cae-popup-resize-help-buffer
+        ("^\\*difftastic git diff\\*$" :size +popup-shrink-to-fit
          :select t :quit t :side bottom :ttl 0)
         ("^\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
          :quit t :ttl t)
