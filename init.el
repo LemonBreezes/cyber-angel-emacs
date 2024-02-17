@@ -143,7 +143,7 @@
        misc-applications
        (modeline +wakatime)
        unpackaged
-       (vc +delta)
+       vc
        org
        ai
        gnus)
