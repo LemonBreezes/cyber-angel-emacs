@@ -168,7 +168,7 @@
       which-key-popup-type 'minibuffer)
 
     ;; Do not auto-kill EXWM buffers.
-    (set-popup-rule! "^\\*exwm" :size #'ignore :ttl nil))
+    (set-popup-rule! "^\\*exwm" :ignore t))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
