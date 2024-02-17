@@ -93,7 +93,7 @@
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
-       (lsp +peek)
+       (lsp +peek +eglot)
        tree-sitter
        docker
        ein
