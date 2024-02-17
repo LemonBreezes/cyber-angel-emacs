@@ -1,6 +1,7 @@
 ;;; private/debugger/config.el -*- lexical-binding: t; -*-
 
 (when (and (modulep! :tools lsp)
+           (not (modulep! :tools lsp +eglot))
            (modulep! :tools debugger +lsp))
   (after! dap-ui
     (remove-hook 'dap-ui-mode-hook #'dap-ui-controls-mode)
@@ -25,6 +26,11 @@
       (after! cc-mode
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
+
+(when (and (modulep! :tools lsp +eglot)
+           (modulep! :tools debugger +lsp))
+  (use-package! dape
+    :defer t))
 
 (after! gud
   (setq gud-chdir-before-run nil
