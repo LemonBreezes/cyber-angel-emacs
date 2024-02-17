@@ -194,7 +194,7 @@
          ("S" . difftastic-magit-show))
   :config
   (after! magit-diff
-    (unless (transient-get-suffix 'magit-diff "D")
+    (unless (ignore-errors (transient-get-suffix 'magit-diff "D"))
       (transient-append-suffix 'magit-diff '(-1 -1)
         [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
          ("S" "Difftastic show" difftastic-magit-show)]))))
