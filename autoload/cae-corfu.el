@@ -14,7 +14,7 @@
               (and (minibuffer-prompt)
                    (cl-member (minibuffer-prompt)
                               '("I-search: "
-                                "Query replace "
+                                "Query replace"
                                 "Align regexp"
                                 "Expansion for ")
                               :test #'string-match-p))
