@@ -66,11 +66,3 @@ if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of th
     (consult-gh-repo-fork)))
 
 
-(defun cae-difftastic--requested-window-width-single-window ()
-  (- (frame-width) (fringe-columns 'left) (fringe-columns 'right)))
-
-;;;###autoload
-(defun cae-difftastic-magit-diff-single-window ()
-  (let ((difftastic-requested-window-width-function #'my/difftastic--requested-window-width-single-window)
-        (difftastic-display-buffer-function #'display-buffer-same-window))
-    (call-interactively #'difftastic-magit-diff)))
