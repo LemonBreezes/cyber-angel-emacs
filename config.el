@@ -1404,7 +1404,7 @@
                 zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
-              '(alarm pomm))))
+              '(alarm pomm debbugs))))
  t)
 
 (setq cae-config-finished-loading t)
