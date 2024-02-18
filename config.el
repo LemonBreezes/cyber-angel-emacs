@@ -107,6 +107,10 @@
   ;; what item I have selected.
   (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
+  ;; Auto-hide the tab bar.
+  (after! tab-bar
+    (setq tab-bar-show 1))
+
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
 
