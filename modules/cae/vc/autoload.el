@@ -23,7 +23,7 @@ Meant to be used like:
   (apply-partially #'cae-magit-insert-diff-upstream "master"))
 
 ;;;###autoload
-(defun cae-magit-status-setup-upstream-diff-section ()
+(defun cae-magit-status-setup-upstream-diff-section-h ()
   (magit-add-section-hook 'magit-status-sections-hook
                           (apply-partially #'cae-magit-insert-diff-upstream
                                            (cadr (magit--get-default-branch)))
