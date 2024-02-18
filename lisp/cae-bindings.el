@@ -295,6 +295,8 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history))))
+
+(autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
       (:when (modulep! :completion vertico)
        (:prefix "i"
