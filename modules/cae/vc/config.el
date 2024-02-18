@@ -14,6 +14,7 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
+;; Back up uncommitted changes.
 (add-hook 'doom-first-file-hook #'magit-wip-mode)
 
 (after! code-review
