@@ -37,8 +37,6 @@
             ;; `forge--mode-line-buffer' every time the new Magit buffer is
             ;; created in that repo.
             :nvg "q" #'magit-mode-bury-buffer)
-      (add-to-list 'consult-buffer-filter "\\`magit\\(?:-[a-z]+\\)?:")
-      (add-to-list 'consult-buffer-filter "^\\*forge\\(?:-[a-z]+\\)")
       (after! forge
         (setq forge-pull-notifications t
               forge-buffer-draft-p t))
