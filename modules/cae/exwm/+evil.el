@@ -106,19 +106,19 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
-;;(define-minor-mode cae-exwm-discord-mode
-;;  "Minor mode for Discord."
-;;  :init-value nil
-;;  :keymap (make-sparse-keymap)
-;;  :global nil)
-;;
-;;(map! :map cae-exwm-discord-mode-map
-;;      :n "C-k" (cmd! ()
-;;                     (exwm-input--fake-key 'C-k)
-;;                     (exwm-evil-insert)))
-;;
-;;(add-hook! exwm-manage-finish-hook
-;;  (defun cae-exwm-load-special-bindings-h ()
-;;    (when (and (stringp exwm-class-name)
-;;               (string-match-p "discord" exwm-class-name))
-;;      (cae-exwm-discord-mode +1))))
+(define-minor-mode cae-exwm-discord-mode
+  "Minor mode for Discord."
+  :init-value nil
+  :keymap (make-sparse-keymap)
+  :global nil)
+
+(map! :map cae-exwm-discord-mode-map
+      :n "C-k" (cmd! ()
+                     (exwm-input--fake-key 'C-k)
+                     (exwm-evil-insert)))
+
+(add-hook! exwm-manage-finish-hook
+  (defun cae-exwm-load-special-bindings-h ()
+    (when (and (stringp exwm-class-name)
+               (string-match-p "discord" exwm-class-name))
+      (cae-exwm-discord-mode +1))))
