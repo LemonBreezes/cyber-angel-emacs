@@ -38,10 +38,6 @@
             ;; created in that repo.
             :nvg "q" #'magit-mode-bury-buffer)
       (add-to-list 'consult-buffer-filter "\\`magit\\(?:-[a-z]+\\)?:")
-      (add-hook! 'magit-mode-hook
-        (defun cae-magit-unhide-magit-buffers ()
-          (setq-local consult-buffer-filter
-                      (delete "\\`magit\\(?:-[a-z]+\\)?:" consult-buffer-filter))))
       (after! forge
         (setq forge-pull-notifications t
               forge-buffer-draft-p t))))
