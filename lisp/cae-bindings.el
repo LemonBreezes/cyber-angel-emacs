@@ -247,9 +247,9 @@
 ;;; Consult keybindings
 
 (when (modulep! :completion vertico)
-  (map!                                ;; C-x bindings (ctl-x-map)
+  (map! ;; C-x bindings (ctl-x-map)
    "C-x t b" #'consult-buffer-other-tab
-   "C-x M-:" #'consult-complex-command ;orig. repeat-complex-command
+   "C-x M-:" #'consult-complex-command  ;orig. repeat-complex-command
    ;; Custom M-# bindings for fast register access
    "M-#" #'consult-register-load
    "M-'" #'consult-register-store       ;orig. abbrev-prefix-mark (unrelated)
@@ -272,6 +272,8 @@
    :map isearch-mode-map
    "M-e" #'consult-isearch-history      ;orig. isearch-edit-string
    "M-s e" #'consult-isearch-history    ;orig. isearch-edit-string
+   "M-s l" #'consult-line
+   "M-s L" #'consult-line-multi
    ;; Minibuffer history
    :map minibuffer-local-map
    ;; "M-s" #'consult-history     ;orig. next-matching-history-element
