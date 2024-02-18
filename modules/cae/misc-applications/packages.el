@@ -5,15 +5,13 @@
 (when (modulep! +eaf)
   (package! eaf :recipe (:host github :repo "emacs-eaf/emacs-application-framework" :files ("*"))))
 
-;; Standalone apps
+;; Miscellaneous apps
 (package! alarm-clock)
 (when (modulep! :app rss)
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
 (package! pomm)
 (package! debbugs)
-
-;; Use external APIs or apps
 (package! leetcode)
 
 ;; System
