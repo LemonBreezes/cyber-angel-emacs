@@ -20,8 +20,7 @@
   '(("games" "g")
     ("eyecandy" "e")
     ("system" "s")
-    ("external-apps" "x")
-    ("standalone-apps" "t")
+    ("random" "r")
     ("insert" "i")
     ("music" "m")
     ("quotes" "q")
@@ -86,25 +85,25 @@
       "h" "helm")))
 
 
-;;; Standalone apps
+;;; Random apps
 
 (use-package! alarm-clock
   :defer t :init
-  (map! :map +misc-applications-standalone-apps-map
+  (map! :map +misc-applications-random-map
         :prefix "a"
         "a" #'alarm-clock-set
         "A" #'alarm-clock-list-view)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-random-map
       "a" "alarms"
       "a a" "Set alarm"
       "a A" "List alarms"))
   :config
-  (map! :map +misc-applications-standalone-apps-map
+  (map! :map +misc-applications-random-map
         :prefix "a"
         "k" #'alarm-clock-kill)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-random-map
       "a k" "Kill alarm"))
   (setq alarm-clock-cache-file
         (expand-file-name "alarm-clock.cache" doom-cache-dir))
@@ -113,10 +112,10 @@
 (use-package! elfeed
   :when (modulep! :app rss)
   :defer t :init
-  (map! :map +misc-applications-standalone-apps-map
+  (map! :map +misc-applications-random-map
         "r" #'=rss)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-random-map
       "r" "RSS"))
   :config
   (defun cae-elfeed-set-filter (tag period)
@@ -163,10 +162,10 @@
 
 (use-package! pomm
   :defer t :init
-  (map! :map +misc-applications-standalone-apps-map
+  (map! :map +misc-applications-random-map
         "t" #'pomm-third-time)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-standalone-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-random-map
       "t" "Third Time"))
   (setq pomm-csv-history-file
         (concat doom-data-dir "pomm-history.csv")
@@ -180,19 +179,16 @@
 (use-package! debbugs
   :defer t)
 
-
-;;; External apps
-
 (use-package! leetcode
   :defer t :init
   (defvar +leetcode-workspace-name "*leetcode*"
     "The name of the workspace to use for leetcode.")
   (when (memq system-type '(cygwin windows-nt ms-dos))
     (advice-add #'leetcode--install-my-cookie :override #'ignore))
-  (map! :map +misc-applications-external-apps-map
+  (map! :map +misc-applications-random-map
         "l" #'+leetcode)
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+    (which-key-add-keymap-based-replacements +misc-applications-random-map
       "l" "LeetCode"))
   (add-hook 'leetcode-solution-mode-hook
             (lambda ()
