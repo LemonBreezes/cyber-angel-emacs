@@ -171,7 +171,8 @@
   (setq pomm-csv-history-file
         (concat doom-data-dir "pomm-history.csv")
         pomm-audio-enabled t
-        pomm-audio-tick-enabled t)
+        pomm-audio-tick-enabled t
+        pomm-audio-player-executable (executable-find "mpv"))
   :config
   (pomm-mode-line-mode +1))
 
