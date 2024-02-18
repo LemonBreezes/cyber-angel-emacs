@@ -332,4 +332,4 @@
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
 
-(map! "<C-f1>" #'try)
+(map! "<C-f3>" #'try)
