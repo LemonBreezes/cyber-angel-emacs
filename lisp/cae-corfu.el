@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
+(setq +corfu-want-C-x-bindings nil)
+
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
