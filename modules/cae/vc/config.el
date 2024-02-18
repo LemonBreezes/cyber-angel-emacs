@@ -31,12 +31,12 @@
           magit-log-auto-more t
           magit-pull-or-fetch t)
     (when (modulep! :tools magit +forge)
-      (map! :map magit-status-mode-map
+      (map! :map magit-mode-map
             ;; FIXME Killing the Magit status buffer removes the `forge-pull'
             ;; progress from the modeline. One alternative is setting
             ;; `forge--mode-line-buffer' every time the new Magit buffer is
             ;; created in that repo.
-            :nvg "q" #'magit-mode-bury-buffer)
+            :g "q" #'magit-mode-bury-buffer)
       (after! consult
         (add-to-list 'consult-buffer-filter "\\`magit\\(?:-[a-z]+\\)?:")
         (add-to-list 'consult-buffer-filter "^\\*forge\\(?:-[a-z]+\\)"))
