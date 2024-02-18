@@ -14,6 +14,8 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
+(add-hook 'doom-first-file-hook #'magit-wip-mode)
+
 (after! code-review
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
