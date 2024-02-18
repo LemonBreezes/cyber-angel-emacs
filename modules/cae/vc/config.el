@@ -19,6 +19,7 @@
 (when (modulep! :tools magit)
   ;; Back up uncommitted changes.
   (add-hook 'doom-first-file-hook #'magit-wip-mode)
+
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
   (after! magit
     (when (modulep! :editor fold)
