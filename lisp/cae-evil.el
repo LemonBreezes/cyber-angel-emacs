@@ -105,7 +105,7 @@
     "C-w" nil
     "C-z" nil))
 
-(map! :n "zC" #'cae-evil-edit-indirect)
+(map! :n "zE" #'cae-evil-edit-indirect)
 
 (define-key! :keymaps +default-minibuffer-maps
   "C-S-y"    #'cae-yank-word-to-minibuffer)
