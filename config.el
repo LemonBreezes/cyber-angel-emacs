@@ -226,7 +226,7 @@
         ("^\\*exwm" :ignore t)
         ("^\\*lsp-ui-imenu\\*$" :size cae-popup-shrink-to-fit :select t :quit t
          :side right :ttl 0)
-        ("^\\*Ilist\\*$" :size cae-popup-shrink-to-fit :select t :quit t
+        ("^\\*Ilist\\*$" :size (lambda (_)) :select t :quit t
          :side right :ttl 0)
         ("^\\*difftastic git diff\\*$" :size +popup-shrink-to-fit
          :select t :quit t :side bottom :ttl 0)
