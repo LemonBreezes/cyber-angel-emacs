@@ -224,7 +224,7 @@
       '(("^\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
          :ttl nil :vslot 99)
         ("^\\*exwm" :ignore t)
-        ("^\\*lsp-ui-imenu\\*$" :size +popup-shrink-to-fit :select t :quit t
+        ("^\\*lsp-ui-imenu\\*$" :size cae-popup-shrink-to-fit :select t :quit t
          :side right :ttl 0)
         ("^\\*difftastic git diff\\*$" :size +popup-shrink-to-fit
          :select t :quit t :side bottom :ttl 0)
