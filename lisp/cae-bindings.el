@@ -268,7 +268,7 @@
    "M-s k" #'consult-keep-lines
    "M-s u" #'consult-focus-lines
    ;; Isearch integration
-
+   "M-s e" #'consult-isearch-history
    :map isearch-mode-map
    "M-e" #'consult-isearch-history      ;orig. isearch-edit-string
    "M-s e" #'consult-isearch-history    ;orig. isearch-edit-string
