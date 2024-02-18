@@ -35,7 +35,9 @@
       (advice-remove #'forge-dispatch #'+magit--forge-build-binary-lazily-a)
       (after! forge
         (setq forge-pull-notifications t
-              forge-buffer-draft-p t)))))
+              forge-buffer-draft-p t))))
+  (add-hook 'magit-status-mode-hook
+            #'cae-magit-status-setup-upstream-diff-section ))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
