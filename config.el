@@ -385,17 +385,7 @@
     :defer t :init
     (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)
     (after! eldoc
-      (setq eldoc-idle-delay 0.7)))
-
-  (use-package! imenu-list
-    :defer t :init
-    (add-hook! 'imenu-list-update-hook
-      (defun cae-imenu-list-resize-to-buffer ()
-        (when-let ((win (get-buffer-window imenu-list-buffer-name)))
-          (enlarge-window-horizontally (- (+ (cadr (buffer-line-statistics
-                                                    (window-buffer win)))
-                                             3)
-                                          (window-width win))))))))
+      (setq eldoc-idle-delay 0.7))))
 
 
 ;;; Tools
