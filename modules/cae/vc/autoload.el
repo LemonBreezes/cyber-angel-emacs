@@ -27,8 +27,8 @@ Meant to be used like:
   (magit-add-section-hook 'magit-status-sections-hook
                           (apply-partially #'cae-magit-insert-diff-upstream
                                            (cadr (magit--get-default-branch)))
-                        'magit-insert-stashes
-                        nil t))
+                          'magit-insert-stashes
+                          nil t))
 
 ;; As an example, add this to your .dir-locals.el:
 ;;(when (and (derived-mode-p 'magit-status-mode)
