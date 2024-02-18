@@ -7,7 +7,7 @@
   (map! "<f10>" #'whisper-run)
   :config
   (setq whisper-install-directory doom-cache-dir
-        whisper-model "base"
+        whisper-model "large-v3"
         whisper-language "en"
         whisper-translate nil
         whisper-use-threads (num-processors)))
