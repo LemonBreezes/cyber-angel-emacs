@@ -323,8 +323,9 @@
   ;; Show the window number in the modeline (when applicable).
   (when (modulep! :ui window-select +numbers)
     (after! winum
-      (setq winum-auto-setup-mode-line t))
-    (add-hook 'doom-first-buffer-hook #'winum--init))
+      (unless winum-auto-setup-mode-line
+        (winum--install-mode-line))
+      (setq winum-auto-setup-mode-line t)))
 
   (use-package! breadcrumb
     :unless (modulep! :ui modeline)
