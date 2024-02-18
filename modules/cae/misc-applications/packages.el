@@ -11,6 +11,7 @@
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
 (package! pomm)
+(package! debbugs)
 
 ;; Use external APIs or apps
 (package! leetcode)
