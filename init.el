@@ -93,7 +93,7 @@
        editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
-                                        ;(magit +forge)
+       (magit +forge)
        (lsp +peek)
        tree-sitter
        docker
