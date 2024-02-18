@@ -36,7 +36,7 @@
             ;; progress from the modeline. One alternative is setting
             ;; `forge--mode-line-buffer' every time the new Magit buffer is
             ;; created in that repo.
-            "q" #'magit-mode-bury-buffer)
+            :nvg "q" #'magit-mode-bury-buffer)
       (after! forge
         (setq forge-pull-notifications t
               forge-buffer-draft-p t))))
