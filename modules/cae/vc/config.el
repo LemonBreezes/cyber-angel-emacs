@@ -37,7 +37,7 @@
         (setq forge-pull-notifications t
               forge-buffer-draft-p t))))
   (add-hook 'magit-status-mode-hook
-            #'cae-magit-status-setup-upstream-diff-section ))
+            #'cae-magit-status-setup-upstream-diff-section-h))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
