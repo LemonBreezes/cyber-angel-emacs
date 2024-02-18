@@ -14,12 +14,11 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
-;; Back up uncommitted changes.
-(add-hook 'doom-first-file-hook #'magit-wip-mode)
-
 (after! code-review
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
+  ;; Back up uncommitted changes.
+  (add-hook 'doom-first-file-hook #'magit-wip-mode)
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
   (after! magit
     (when (modulep! :editor fold)
@@ -169,7 +168,7 @@
            :desc "Clone" "c" #'consult-gh-repo-clone
            :desc "Fork" "k" #'consult-gh-fork-current-repo)))
   (after! which-key
-    (which-key-add-keymap-based-replacements +misc-applications-external-apps-map
+    (which-key-add-keymap-based-replacements doom-leader-GitHub-map
       "g" "GitHub CLI"
       "go" "Organizations"
       "gc" "Clone repo"
