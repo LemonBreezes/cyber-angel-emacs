@@ -321,8 +321,10 @@
           flycheck-posframe-border-use-error-face t))
 
   ;; Show the window number in the modeline (when applicable).
-  (after! winum
-    (setq winum-auto-setup-mode-line t))
+  (when (modulep! :ui window-select +numbers)
+    (after! winum
+      (setq winum-auto-setup-mode-line t))
+    (add-hook 'doom-first-buffer-hook #'winum--init))
 
   (use-package! breadcrumb
     :unless (modulep! :ui modeline)
