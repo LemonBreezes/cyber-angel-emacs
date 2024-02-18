@@ -176,6 +176,10 @@
   :config
   (pomm-mode-line-mode +1))
 
+;; TODO
+(use-package! debbugs
+  :defer t)
+
 
 ;;; External apps
 
