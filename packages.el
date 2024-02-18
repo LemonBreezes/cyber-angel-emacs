@@ -52,6 +52,7 @@
 (package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
                              :branch "handle-pos-visible-in-window-p-nil"))
 (package! imenu-list)
+(package! boxy-imenu)
 
 ;; cae-theme.el
 (package! modus-themes)
