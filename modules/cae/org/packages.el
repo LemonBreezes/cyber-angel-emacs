@@ -5,6 +5,7 @@
 (package! org-inline-pdf)
 (package! language-detection)
 (package! org-appear)
+(package! org-web-tools)
 
 (when (modulep! +pretty)
   (package! org-tidy :recipe (:host github :repo "jxq0/org-tidy"))
