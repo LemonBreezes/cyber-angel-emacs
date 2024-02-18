@@ -118,6 +118,7 @@
 ;; cae-bindings.el
 (package! vline)
 (package! try)
+(package! lsp-ui)
 
 ;;; Autocompletion
 (package! consult-yasnippet)
