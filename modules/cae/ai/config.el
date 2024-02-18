@@ -8,7 +8,6 @@
   :config
   (setq whisper-install-directory doom-cache-dir
         whisper-model "large-v3"
-        whisper-quantize  nil
         whisper-language "en"
         whisper-translate nil
         whisper-use-threads (num-processors)))
