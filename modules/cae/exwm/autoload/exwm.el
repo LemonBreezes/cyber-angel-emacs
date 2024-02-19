@@ -10,8 +10,7 @@
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
   (when (and (derived-mode-p 'exwm-mode)
-             (not (memq +exwm-refocus-application--timer
-                        timer-list))
+             (not (memq +exwm-refocus-application--timer timer-list))
              (> (float-time) (+ +exwm-refocus-application--last-time
                                 0.01
                                 (cl-reduce #'+ +exwm-refocus-application--delays))))
