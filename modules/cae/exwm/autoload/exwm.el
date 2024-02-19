@@ -6,6 +6,9 @@
 (defvar +exwm-refocus-application--last-time 0)
 (defvar +exwm-refocus-application--last-state nil)
 
+(defvar +exwm-vanilla-emacs-config-dir
+  (concat doom-user-dir "vanilla-emacs-configs"))
+
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
   "Refocus input for the currently selected EXWM buffer, if any."
@@ -56,5 +59,7 @@ well."
 non-nil, debug init as well."
   (interactive "P")
   (apply #'start-process "Emacs" nil "emacs" "-Q"
-         "--eval" (+exwm-read-unquote-config +exwm-vanilla-emacs-config-file)
+         "--eval"
+         ;; Read a file
+         (completing-read)
          (when arg (list "--debug-init"))))
