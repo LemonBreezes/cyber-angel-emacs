@@ -60,7 +60,7 @@ well."
 non-nil, debug init as well."
   (interactive "P")
   (apply #'start-process "Emacs" nil "emacs" "-Q"
-         "--eval"
+         "-f"
          (completing-read "Load file: "
                           (directory-files +exwm-vanilla-emacs-config-dir nil "^[^.]")
                           nil t nil '+exwm-vanilla-emacs--config-history)
