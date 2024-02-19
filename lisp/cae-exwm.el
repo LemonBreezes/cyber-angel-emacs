@@ -30,18 +30,20 @@
    `(defhydra hydra-exwm-apps (:hint nil :color blue)
       "
 EXWM Apps Launcher
-_v_: Firefox      _f_: Flameshot    _T_: Teams
-_t_: Tiled        _d_: Discord      _p_: Pavucontrol
-_s_: Signal       _RET_: Kitty
+_v_: [Browser]    _f_: Flameshot      _T_: Teams
+_t_: Tiled        _d_: Discord        _p_: Pavucontrol
+_s_: Signal       _e_: Nested Emacs   _E_: Nested Vanilla Emacs
+_RET_: Kitty
 "
-      ("v" ,(cae-exwm-app-runner browse-url-generic-program
-                                 cae-generic-browser-name))
+      ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
       ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
       ("T" ,(cae-exwm-app-runner "teams-for-linux" "Teams"))
       ("t" ,(cae-exwm-app-runner "tiled" "Tiled"))
       ("d" ,(cae-exwm-app-runner "discord" "Discord"))
       ("p" ,(cae-exwm-app-runner "pavucontrol" "Pavucontrol"))
       ("s" ,(cae-exwm-app-runner "signal-desktop" "Signal"))
+      ("e" #'+exwm-open-nested-emacs)
+      ("E" #'+exwm-open-nested-vanilla-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))))
 
   ;; Replace the individual keybindings with a hydra
