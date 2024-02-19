@@ -8,6 +8,7 @@
 
 (defvar +exwm-vanilla-emacs-config-dir
   (concat doom-user-dir "vanilla-emacs-configs"))
+(defvar +exwm-vanilla-emacs--config-history nil)
 
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
@@ -60,6 +61,8 @@ non-nil, debug init as well."
   (interactive "P")
   (apply #'start-process "Emacs" nil "emacs" "-Q"
          "--eval"
-         ;; Read a file
-         (completing-read)
+         ;; Read a file in +exwm-vanilla-emacs-config-dir
+         (completing-read "Load file: "
+                          (directory-files +exwm-vanilla-emacs-config-dir nil "^[^.]")
+                          nil t nil '+exwm-vanilla-emacs--config-history)
          (when arg (list "--debug-init"))))
