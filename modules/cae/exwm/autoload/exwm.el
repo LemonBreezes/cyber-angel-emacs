@@ -53,7 +53,7 @@ well."
 ;;;###autoload
 (defun +exwm-open-nested-vanilla-emacs (arg)
   "Open a separate GUI instance of Emacs with a vanilla config. If ARG is
-non-nil,"
+non-nil, debug init as well."
   (interactive "P")
   (apply #'start-process "Emacs" nil "emacs" "-Q"
          "--eval" (+exwm-read-unquote-config +exwm-vanilla-emacs-config-file)
