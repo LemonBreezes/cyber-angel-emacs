@@ -42,3 +42,17 @@
                        (when (minibufferp)
                          (setq +exwm-refocus-application--last-time (float-time))
                          (throw 'exit nil))))))
+;;;###autoload
+(defun +exwm-open-nested-emacs (arg)
+  "Open a separate GUI instance of Emacs. If ARG is non-nil, debug init as
+well."
+  (interactive "P")
+  (apply #'start-process "Emacs" nil "emacs"
+         (when arg (list "--debug-init"))))
+
+;;;###autoload
+(defun +exwm-open-nested-vanilla-emacs (arg)
+  (interactive "P")
+  (apply #'start-process "Emacs" nil "emacs" "-Q"
+         "--eval" (+exwm-read-unquote-config +exwm-vanilla-emacs-config-file)
+         (when arg (list "--debug-init"))))
