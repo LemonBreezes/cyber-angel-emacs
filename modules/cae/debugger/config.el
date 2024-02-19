@@ -38,7 +38,8 @@
                                   (list :name
                                         (substring-no-properties s 0 m)
                                         :value
-                                        (substring-no-properties s (1+ m) (length s)))))
+                                        (substring-no-properties s (1+ m)
+                                                                 (length s)))))
                               process-environment))))
   args)
 (advice-add #'dap-start-debugging-noexpand :filter-args
