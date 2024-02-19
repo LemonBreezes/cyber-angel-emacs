@@ -34,7 +34,8 @@ _v_: Firefox      _f_: Flameshot    _T_: Teams
 _t_: Tiled        _d_: Discord      _p_: Pavucontrol
 _s_: Signal       _RET_: Kitty
 "
-      ("v" ,(cae-exwm-app-runner browse-url-generic-program "Firefox"))
+      ("v" ,(cae-exwm-app-runner browse-url-generic-program
+                                 cae-generic-browser-name))
       ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
       ("T" ,(cae-exwm-app-runner "teams-for-linux" "Teams"))
       ("t" ,(cae-exwm-app-runner "tiled" "Tiled"))
