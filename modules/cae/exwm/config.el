@@ -110,7 +110,9 @@
     ;; off.
     (add-hook! 'post-command-hook
       (defun cae-disable-track-mouse-h ()
-        (setq track-mouse (derived-mode-p 'special-mode))))
+        (setq track-mouse
+              (when (derived-mode-p 'special-mode)
+                  t))))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
