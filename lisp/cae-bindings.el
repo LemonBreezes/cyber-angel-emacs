@@ -329,7 +329,7 @@
   ;; I don't use the `org-priority-down6' and `org-priority-up6' commands.
   (map! :map org-mode-map
         :localleader
-        "p" #'org-set-property))
+        "p" #'org-priority))
 
 (after! treemacs
   (when (modulep! :completion vertico)
