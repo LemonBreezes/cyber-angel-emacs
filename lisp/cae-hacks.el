@@ -181,12 +181,4 @@ It is meant to be used as a `post-gc-hook'."
 
 (undefadvice! cae-magit-section-post-command-hook-a (oldfun)
   :around #'magit-section-post-command-hook
-  (condition-case e
-      (funcall oldfun)
-    (error
-     ;;(+log "magit-post-command-hook error:"
-     ;;      (current-buffer) (selected-window) (buffer-narrowed-p) (point-min) (point-max) (buffer-size))
-
-     ;; I have a solution for this error but I am waiting for Eli to give me
-     ;; some insight.
-     )))
+  (ignore-errors (funcall oldfun)))
