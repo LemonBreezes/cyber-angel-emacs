@@ -19,11 +19,11 @@
       (add-hook 'dap-ui-repl-mode-hook #'cae-debugger-dap-ui-repl-corfu-setup)))
 
   (when (modulep! :lang cc +lsp)
-    ;;(add-transient-hook! 'c-mode-common-hook
-    ;;  (require 'dap-cpptools)
-    ;;  (dap-cpptools-setup))
     (when (modulep! :tools eval)
       (after! cc-mode
+        (map! :map c-mode-base-map
+              :localleader
+              "h" #'cae-debugger-dap-hydra/body)
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
         (set-repl-handler! 'c-mode #'cae-debugger-open-repl)))))
 
