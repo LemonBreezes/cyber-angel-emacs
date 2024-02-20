@@ -34,7 +34,7 @@
     (plist-put (car args) :environment
                (apply #'vector
                       (mapcar (lambda (s)
-                                (let ((m (string-match "=" s)))
+                                (when-let ((m (string-match "=" s)))
                                   (list :name
                                         (substring-no-properties s 0 m)
                                         :value
