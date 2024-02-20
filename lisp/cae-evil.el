@@ -233,7 +233,7 @@
   (map! :leader "9" 'harpoon-go-to-9)
   :config
   (add-to-list 'which-key-replacement-alist
-               '((nil . "harpoon-go-to-[1-9]") . (nil . nil))))
+               '((nil . "harpoon-go-to-[1-9]") . nil)))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
