@@ -140,7 +140,9 @@
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
-    ;; For people who run nested Emacs instances within EXWM.
+    ;; I am testing this as a workaround for focus issues with EXWM and
+    ;; persp-mode.
+    (add-hook 'window-configuration-change-hook #'exwm-input--on-buffer-list-update)
 
 
     (when (modulep! :ui popup)
