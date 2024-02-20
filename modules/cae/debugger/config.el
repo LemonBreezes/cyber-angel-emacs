@@ -29,21 +29,21 @@
 
 
 ;; Pass the `direnv' to `dap-mode' if no environment is specified.
-;;(defun cae-dap-debug-pass-envrc (args)
-;;  (when (length= (plist-get (car args) :environment) 0)
-;;    (plist-put (car args) :environment
-;;               (apply #'vector
-;;                      (mapcar (lambda (s)
-;;                                (let ((m (string-match "=" s)))
-;;                                  (list :name
-;;                                        (substring-no-properties s 0 m)
-;;                                        :value
-;;                                        (substring-no-properties s (1+ m)
-;;                                                                 (length s)))))
-;;                              process-environment))))
-;;  args)
-;;(advice-remove #'dap-start-debugging-noexpand :filter-args
-;;            #'cae-dap-debug-pass-envrc)
+(defun cae-dap-debug-pass-envrc (args)
+  (when (length= (plist-get (car args) :environment) 0)
+    (plist-put (car args) :environment
+               (apply #'vector
+                      (mapcar (lambda (s)
+                                (let ((m (string-match "=" s)))
+                                  (list :name
+                                        (substring-no-properties s 0 m)
+                                        :value
+                                        (substring-no-properties s (1+ m)
+                                                                 (length s)))))
+                              process-environment))))
+  args)
+(advice-add #'dap-start-debugging-noexpand :filter-args
+            #'cae-dap-debug-pass-envrc)
 
 (when (and (modulep! :tools lsp +eglot)
            (modulep! :tools debugger +lsp))
