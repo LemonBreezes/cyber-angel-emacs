@@ -140,11 +140,6 @@
     ;; Show EXWM buffers in buffer switching prompts.
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
-    ;; I am testing this as a workaround for focus issues with EXWM and
-    ;; persp-mode.
-    (add-hook 'window-configuration-change-hook #'exwm-input--on-buffer-list-update)
-
-
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
     (cl-pushnew ?\C-g exwm-input-prefix-keys)
