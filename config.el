@@ -627,7 +627,6 @@
     (after! embark
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
 
-
   ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we
   ;; need to use sudo on a file before `tramp-sh' is loaded.
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
