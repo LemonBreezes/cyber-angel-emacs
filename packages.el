@@ -29,7 +29,8 @@
 (when (modulep! :editor evil)
   (package! evil-owl)
   (package! evil-visual-mark-mode)
-  (package! tabgo))
+  (package! tabgo)
+  (package! harpoon))
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
