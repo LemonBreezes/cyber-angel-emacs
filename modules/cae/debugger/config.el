@@ -21,7 +21,7 @@
   (when (modulep! :lang cc +lsp)
     (when (modulep! :tools eval)
       (after! cc-mode
-        (map! :map c-mode-base-map
+        (map! :map c++-mode-map
               :localleader
               "h" #'cae-debugger-dap-hydra/body)
         (set-repl-handler! 'c++-mode #'cae-debugger-open-repl)
