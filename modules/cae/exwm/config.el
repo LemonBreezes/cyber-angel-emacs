@@ -111,7 +111,7 @@
     (add-hook! 'post-command-hook
       (defun cae-disable-track-mouse-h ()
         (setq track-mouse
-              (when (derived-mode-p 'special-mode)
+              (and (derived-mode-p 'special-mode)
                 t))))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
