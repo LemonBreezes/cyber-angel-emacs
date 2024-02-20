@@ -221,7 +221,16 @@
 (use-package! harpoon
   :init
   (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
-  (map! :n "C-s" 'harpoon-add-file))
+  (map! :n "C-s" 'harpoon-add-file)
+  (map! :leader "1" 'harpoon-go-to-1)
+  (map! :leader "2" 'harpoon-go-to-2)
+  (map! :leader "3" 'harpoon-go-to-3)
+  (map! :leader "4" 'harpoon-go-to-4)
+  (map! :leader "5" 'harpoon-go-to-5)
+  (map! :leader "6" 'harpoon-go-to-6)
+  (map! :leader "7" 'harpoon-go-to-7)
+  (map! :leader "8" 'harpoon-go-to-8)
+  (map! :leader "9" 'harpoon-go-to-9))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
