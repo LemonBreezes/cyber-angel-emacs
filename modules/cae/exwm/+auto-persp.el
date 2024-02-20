@@ -86,7 +86,8 @@ nil if its not an EXWM buffer."
       (when (and (modulep! :ui popup)
                  (+popup-window-p))
         (other-window 1)
-        (switch-to-buffer buffer))))
+        (switch-to-buffer buffer))
+      (delete-other-windows)))
 
   (defun +exwm-persp--get-name (state)
     "Gets the name of our new EXWM workspace."
