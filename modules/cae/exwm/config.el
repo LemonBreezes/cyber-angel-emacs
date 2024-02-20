@@ -108,7 +108,9 @@
     ;; I never use the `<mouse-movement>' commands and are being triggered in some
     ;; strange scenarios involving EXWM so it's easier for me to just turn them
     ;; off.
-    (setq-hook! 'post-command-hook track-mouse nil)
+    (add-hook! 'post-command-hook
+      (defun cae-disable-track-mouse-h ()
+        (setq track-mouse (derived-mode-p 'special-mode))))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
