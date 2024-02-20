@@ -133,15 +133,10 @@
        evil-split-window-below t
        evil-v$-excludes-newline t)
 
-(use-package! evil-owl
-  :hook (doom-first-input . evil-owl-mode))
-
-(use-package! evil-visual-mark-mode
-  :hook (doom-first-buffer-hook . evil-visual-mark-mode))
-
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
+
 ;; Evil Collection setup.
 (let ((blacklist (append (when (modulep! :config default)
                            (list doom-leader-key doom-localleader-key
@@ -216,6 +211,15 @@
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
 (add-hook 'mu4e-compose-mode-hook #'cae-evil-mu4e-enter-insert-mode 90)
+
+(use-package! evil-owl
+  :hook (doom-first-input . evil-owl-mode))
+
+(use-package! evil-visual-mark-mode
+  :hook (doom-first-buffer-hook . evil-visual-mark-mode))
+
+(use-package! harpoon
+  :defer t)
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
