@@ -175,7 +175,8 @@
   :config
   (pomm-mode-line-mode +1))
 
-;; TODO
+;; Currently I just use this package's commands with `M-x' since there are so
+;; many of them.
 (use-package! debbugs
   :defer t)
 
