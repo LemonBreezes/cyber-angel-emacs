@@ -5,7 +5,7 @@
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
-  (setq corfu-auto-delay 0.05
+  (setq corfu-auto-delay 0.1
         tab-first-completion 'eol)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
