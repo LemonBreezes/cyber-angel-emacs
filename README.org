@@ -75,7 +75,9 @@ that are in currently enabled modules.
 |                   | d                    | ~+doom-dashboard/open~           |
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
-| lsp               | cTAB                 | ~lsp-ui-imenu~                 |
+|                   | cC-v                 | ~vline-mode~                     |
+|                   | cC-f                 | ~font-lock-mode~                 |
+| lsp               | cTAB                 | ~lsp-ui-imenu~                   |
 | evil              | bo                   | ~naming-convention-map~          |
 | vc                | iI                   | ~gitignore-templates-insert~     |
 | vc                | tB                   | ~blamer-mode~                    |
