@@ -179,11 +179,10 @@ It is meant to be used as a `post-gc-hook'."
   (or (and (featurep 'which-key) (which-key--popup-showing-p))
       (derived-mode-p 'exwm-mode)))
 
-(defadvice! cae-magit-section-post-command-hook-a (oldfun)
-  :around #'magit-section-post-command-hook
-  ;; handle errors in `magit-section-post-command-hook'
-  (condition-case e
-      (funcall oldfun)
-    (error
-     (+log "magit-post-command-hook error:"
-           (current-buffer) (selected-window) (buffer-narrowed-p) (point-min) (point-max) (buffer-size)))))
+;;(defadvice! cae-magit-section-post-command-hook-a (oldfun)
+;;  :around #'magit-section-post-command-hook
+;;  (condition-case e
+;;      (funcall oldfun)
+;;    (error
+;;     (+log "magit-post-command-hook error:"
+;;           (current-buffer) (selected-window) (buffer-narrowed-p) (point-min) (point-max) (buffer-size)))))
