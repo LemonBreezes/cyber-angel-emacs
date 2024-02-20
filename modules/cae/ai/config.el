@@ -105,7 +105,7 @@
     (defun cae-disable-copilot-in-gptel-p ()
       (bound-and-true-p gptel-mode))
     (defun cae-disable-copilot-in-dunnet-p ()
-      (bound-and-true-p dun-mode))
+      (derived-mode-p 'dun-mode))
     (defun cae-multiple-cursors-active-p ()
       (bound-and-true-p multiple-cursors-mode)))
   (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)
