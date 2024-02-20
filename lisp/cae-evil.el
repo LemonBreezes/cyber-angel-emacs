@@ -219,7 +219,9 @@
   :hook (doom-first-buffer-hook . evil-visual-mark-mode))
 
 (use-package! harpoon
-  :defer t)
+  :init
+  (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
+  (map! :n "C-s" 'harpoon-add-file))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
