@@ -219,7 +219,7 @@
   :hook (doom-first-buffer-hook . evil-visual-mark-mode))
 
 (use-package! harpoon
-  :init
+  :defer t :init
   (map! :n "C-SPC" 'harpoon-quick-menu-hydra)
   (map! :n "C-s" 'harpoon-add-file))
 
