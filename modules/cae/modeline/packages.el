@@ -8,5 +8,6 @@
 (when (modulep! :editor evil)
   (package! evil-anzu))
 (when (modulep! +wakatime)
-  (package! wakatime-ui :recipe (:host github :repo "Artawower/wakatime-ui.el")))
+  (package! wakatime-ui :recipe (:host github :repo "LemonBreezes/wakatime-ui.el"
+                                 :branch "pad-modeline-string-right")))
 (package! mlscroll)
