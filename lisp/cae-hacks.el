@@ -138,6 +138,7 @@ It is meant to be used as a `post-gc-hook'."
 (defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
 
 ;; These are for backwards compatibility.
+(require 'cl-macs)
 (cl-dolist (sym '(cae-keyboard-kbd
                   cae-keyboard-kbd-reverse
                   cae-keyboard-strings
