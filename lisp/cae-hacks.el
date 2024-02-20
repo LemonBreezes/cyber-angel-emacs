@@ -185,4 +185,4 @@ It is meant to be used as a `post-gc-hook'."
   (condition-case e
       (funcall oldfun)
     (error
-     (+log (buffer-narrowed-p) (point-min) (point-max) (buffer-size)))))
+     (+log "magit-post-command-hook error:" (selected-window) (buffer-narrowed-p) (point-min) (point-max) (buffer-size)))))
