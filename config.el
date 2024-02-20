@@ -126,6 +126,9 @@
         scroll-preserve-screen-position t
         suggest-key-bindings nil)
 
+  (after! persp-mode
+    (setq persp-reset-windows-on-nil-window-conf t))
+
   (after! image
     (setq image-use-external-converter t))
 
