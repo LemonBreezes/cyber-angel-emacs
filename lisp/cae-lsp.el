@@ -47,7 +47,9 @@
     (lsp-register-client
      (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
                       :activation-fn (lsp-activate-on "fennel")
-                      :server-id 'fennel-ls)))
+                      :server-id 'fennel-ls))
+    (when (modulep! :ui treemacs +lsp)
+      (lsp-treemacs-sync-mode +1)))
 
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
