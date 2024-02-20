@@ -34,12 +34,15 @@
     (plist-put (car args) :environment
                (apply #'vector
                       (mapcar (lambda (s)
-                                (when-let ((m (string-match "=" s)))
-                                  (list :name
-                                        (substring-no-properties s 0 m)
-                                        :value
-                                        (substring-no-properties s (1+ m)
-                                                                 (length s)))))
+                                (let ((m (string-match "=" s)))
+                                  (if m
+                                      (list :name
+                                            (substring-no-properties s 0 m)
+                                            :value
+                                            (substring-no-properties s (1+ m)
+                                                                     (length s)))
+                                    (list :name s
+                                          :value ""))))
                               process-environment))))
   args)
 (advice-add #'dap-start-debugging-noexpand :filter-args
