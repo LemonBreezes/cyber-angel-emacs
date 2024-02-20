@@ -308,7 +308,7 @@
        (:prefix "c"
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer))
       (:prefix "t"
-       :desc "Column indicator" "C" #'vline-mode
+       :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
       (:prefix "c"
        ;; I load all of LSP just for this command!
