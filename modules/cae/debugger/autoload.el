@@ -98,5 +98,4 @@ _R_: Restart        _sb_: List breakpoints
   ("er" dap-ui-expressions-remove)
   ("q" nil "quit" :color blue)
   ("Q" dap-disconnect :color red)
-  ("<f6>" nil "quit")
   ("R" cae-debugger-dap-kill-all-sessions-and-restart nil :color red))
