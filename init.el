@@ -136,7 +136,7 @@
        ;;holy
        helm
        debugger
-       ;;(dirvish +icons +dirvish)
+       (dirvish +icons +dirvish)
        eshell
        exwm
        dired
