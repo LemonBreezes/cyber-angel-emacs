@@ -186,4 +186,7 @@ It is meant to be used as a `post-gc-hook'."
     (error
      ;;(+log "magit-post-command-hook error:"
      ;;      (current-buffer) (selected-window) (buffer-narrowed-p) (point-min) (point-max) (buffer-size))
+
+     ;; I have a solution for this error but I am waiting for Eli to give me
+     ;; some insight.
      )))
