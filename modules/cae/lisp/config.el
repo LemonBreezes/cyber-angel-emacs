@@ -89,74 +89,74 @@
 ;;(use-package! page-break-lines
 ;;  :defer t :init (add-hook 'emacs-lisp-mode-hook #'page-break-lines-mode))
 
-;;;; This fixes aggressive indent's indentation of plists. :)
-;;(after! lisp-mode
-;;  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
-;;
-;;(when (modulep! :editor lispy)
-;;  (after! lispy
-;;    (add-hook! 'doom-escape-hook
-;;      (defun cae-lispy-clear-iedit-h ()
-;;        (when (bound-and-true-p iedit-mode)
-;;          (iedit-mode -1) t)))
-;;    (setq lispy-font-lock-keywords nil
-;;          lispy-eval-display-style 'overlay
-;;          lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
-;;                                        ;any benefit it provides.
-;;          lispy-avy-style-char 'at
-;;          lispy-avy-style-symbol 'at)
-;;    (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
-;;    (add-to-list 'lispy-elisp-modes #'helpful-mode)
-;;    (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
-;;    (add-hook 'helpful-mode #'lispy-mode)
-;;    (map! :map lispy-mode-map-lispy
-;;          (:when (not (modulep! :editor evil))
-;;           ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
-;;           ;; the beginning of the line or indentation.
-;;           "M-m" nil                    ;formerly `lispy-mark-symbol'.
-;;
-;;           "C-a" nil                    ;formerly
-;;                                        ;`lispy-move-beginning-of-line'.
-;;
-;;           "C-e" nil                    ;formerly `lispy-move-end-of-line'.
-;;                                        ;Doom's default `C-e' is better because
-;;                                        ;it moves to the end of the code first
-;;                                        ;and then to the end of the line rather
-;;                                        ;than moving to the end of the line
-;;                                        ;first.
-;;
-;;           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
-;;                                        ;multiple cursors.
-;;          ;; I used to use these commands but now I have some `smartparens'
-;;          ;; keybindings for them.
-;;          ;;:ie "M-R" #'lispy-raise-sexp
-;;          ;;:ie "M-S" #'lispy-split
-;;          ;;:ie "M-C" #'lispy-convolute
-;;          ;;:ie "M-D" #'lispy-splice
-;;          ;; I prefer Doom's jump commands.
-;;          "M-." nil                     ;formerly `lispy-goto-symbol'.
-;;          "C-M-," nil                   ;formerly `lispy-mark'.
-;;          "M-," nil                     ;formerly `pop-tag-mark'.
-;;          (:when (modulep! :editor evil)
-;;           "M-," nil)
-;;          "C-d" #'cae-delete-char
-;;          "C-M-?" #'cae-lispy-which-key-cheatsheet
-;;          ")" #'cae-insert-closing-paren))
-;;
-;;  (when (modulep! :editor evil)
-;;    (setq lispyville-key-theme
-;;          '(commentary
-;;            (operators normal)
-;;            c-w
-;;            c-u
-;;            (atom-movement t)
-;;            slurp/barf-lispy
-;;            additional
-;;            additional-insert))
-;;    (when (modulep! :ui ophints)
-;;      (after! evil-goggles
-;;        (cl-pushnew '(lispyville-comment-or-uncomment :face evil-goggles-commentary-face :switch
-;;                                                      evil-goggles-enable-commentary :advice
-;;                                                      evil-goggles--generic-async-advice)
-;;                    evil-goggles--commands)
-;;        (setq lispyville-motions-put-into-special t)))))
+;; This fixes aggressive indent's indentation of plists. :)
+(after! lisp-mode
+  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+
+(when (modulep! :editor lispy)
+  (after! lispy
+    (add-hook! 'doom-escape-hook
+      (defun cae-lispy-clear-iedit-h ()
+        (when (bound-and-true-p iedit-mode)
+          (iedit-mode -1) t)))
+    (setq lispy-font-lock-keywords nil
+          lispy-eval-display-style 'overlay
+          lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
+                                        ;any benefit it provides.
+          lispy-avy-style-char 'at
+          lispy-avy-style-symbol 'at)
+    (add-to-list 'lispy-elisp-modes #'minibuffer-mode)
+    (add-to-list 'lispy-elisp-modes #'helpful-mode)
+    (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
+    (add-hook 'helpful-mode #'lispy-mode)
+    (map! :map lispy-mode-map-lispy
+          (:when (not (modulep! :editor evil))
+           ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
+           ;; the beginning of the line or indentation.
+           "M-m" nil                    ;formerly `lispy-mark-symbol'.
+
+           "C-a" nil                    ;formerly
+                                        ;`lispy-move-beginning-of-line'.
+
+           "C-e" nil                    ;formerly `lispy-move-end-of-line'.
+                                        ;Doom's default `C-e' is better because
+                                        ;it moves to the end of the code first
+                                        ;and then to the end of the line rather
+                                        ;than moving to the end of the line
+                                        ;first.
+
+           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
+                                        ;multiple cursors.
+          ;; I used to use these commands but now I have some `smartparens'
+          ;; keybindings for them.
+          ;;:ie "M-R" #'lispy-raise-sexp
+          ;;:ie "M-S" #'lispy-split
+          ;;:ie "M-C" #'lispy-convolute
+          ;;:ie "M-D" #'lispy-splice
+          ;; I prefer Doom's jump commands.
+          "M-." nil                     ;formerly `lispy-goto-symbol'.
+          "C-M-," nil                   ;formerly `lispy-mark'.
+          "M-," nil                     ;formerly `pop-tag-mark'.
+          (:when (modulep! :editor evil)
+           "M-," nil)
+          "C-d" #'cae-delete-char
+          "C-M-?" #'cae-lispy-which-key-cheatsheet
+          ")" #'cae-insert-closing-paren))
+
+  (when (modulep! :editor evil)
+    (setq lispyville-key-theme
+          '(commentary
+            (operators normal)
+            c-w
+            c-u
+            (atom-movement t)
+            slurp/barf-lispy
+            additional
+            additional-insert))
+    (when (modulep! :ui ophints)
+      (after! evil-goggles
+        (cl-pushnew '(lispyville-comment-or-uncomment :face evil-goggles-commentary-face :switch
+                                                      evil-goggles-enable-commentary :advice
+                                                      evil-goggles--generic-async-advice)
+                    evil-goggles--commands)
+        (setq lispyville-motions-put-into-special t)))))
