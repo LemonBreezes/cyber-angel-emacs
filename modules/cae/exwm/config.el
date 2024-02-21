@@ -112,9 +112,9 @@
       (defun cae-disable-track-mouse-h ()
         (setq track-mouse
               ;; Allow drag-to-select.
-              (not (derived-mode-p 'pdf-view-mode
-                                   'doc-view-mode
-                                   'image-mode)))))
+              (derived-mode-p 'pdf-view-mode
+                              'doc-view-mode
+                              'image-mode))))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
