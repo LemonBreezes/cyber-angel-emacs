@@ -41,15 +41,15 @@
               #'cae-edebug-compute-previous-result-a)
   (advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
 
-;;;; Allow `eval-expression' to have comments.
-;;(add-hook! 'minibuffer-setup-hook
-;;  (defun cae-lisp-eval-expression-set-up-comments-h ()
-;;    (when (string= (minibuffer-prompt) "Eval: ")
-;;      (setq-local comment-start ";"
-;;                  comment-end ""
-;;                  comment-start-skip ";+ *"
-;;                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
-;;
+;; Allow `eval-expression' to have comments.
+(add-hook! 'minibuffer-setup-hook
+  (defun cae-lisp-eval-expression-set-up-comments-h ()
+    (when (string= (minibuffer-prompt) "Eval: ")
+      (setq-local comment-start ";"
+                  comment-end ""
+                  comment-start-skip ";+ *"
+                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
+
 ;;;; Allow inserting newlines in the minibuffer. Also protect from
 ;;;; entering unbalanced expressions into `eval-expression'.
 ;;(map! :map minibuffer-local-map
