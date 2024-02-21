@@ -112,6 +112,7 @@
       (defun cae-disable-track-mouse-h ()
         (setq track-mouse
               (and (derived-mode-p 'special-mode)
+                   (not (derived-mode-p 'magit-mode))
                    t))))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
