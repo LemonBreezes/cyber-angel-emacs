@@ -50,15 +50,15 @@
                   comment-start-skip ";+ *"
                   comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
 
-;;;; Allow inserting newlines in the minibuffer. Also protect from
-;;;; entering unbalanced expressions into `eval-expression'.
-;;(map! :map minibuffer-local-map
-;;      [remap exit-minibuffer] #'cae-lisp-newline-and-indent)
-;;(after! lispy
-;;  (setq lispy-avy-keys avy-keys)
-;;  (map! :map lispy-mode-map
-;;        [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
-;;
+;; Allow inserting newlines in the minibuffer. Also protect from
+;; entering unbalanced expressions into `eval-expression'.
+(map! :map minibuffer-local-map
+      [remap exit-minibuffer] #'cae-lisp-newline-and-indent)
+(after! lispy
+  (setq lispy-avy-keys avy-keys)
+  (map! :map lispy-mode-map
+        [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
+
 ;;;; Use Emacs Lisp mode for dir-locals files.
 ;;(add-to-list 'auto-mode-alist (cons (regexp-quote dir-locals-file)
 ;;                                    'emacs-lisp-mode))
