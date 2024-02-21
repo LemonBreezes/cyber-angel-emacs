@@ -1389,7 +1389,7 @@
    ,@(when (modulep! :cae ai)
        '(copilot org-ai chatgpt-shell))
    ,@(when (modulep! :cae gnus)
-       '(gnus gnus-group gnus-sum bbdb gnus-srvr))
+       '(gnus gnus-group gnus-sum gnus-srvr))
    ,@(when (modulep! :tools pdf)
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
    ,@(when (modulep! :ui treemacs)
