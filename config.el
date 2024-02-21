@@ -194,10 +194,11 @@
           (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
 
   ;; Do not spam me with warnings while using `org-ai'.
-  (add-hook! 'doom-first-file-hook :append
-    (defun cae-warnings-initialize ()
-      (setq warning-minimum-level :error
-            warning-minimum-log-level :error)))
+  (unless init-file-debug
+    (add-hook! 'doom-first-file-hook :append
+      (defun cae-warnings-initialize ()
+        (setq warning-minimum-level :error
+              warning-minimum-log-level :error))))
 
   (after! alert
     (setq alert-default-style 'libnotify))
