@@ -22,25 +22,25 @@
          (append elisp-flymake-byte-compile-load-path load-path)))
     (apply orig-fn args)))
 
-;;;; Show `eros' overlays for `edebug' results.
-;;(when (modulep! :tools eval +overlay)
-;;  (defun cae-edebug-compute-previous-result-a (_ &rest r)
-;;    "Adviced `edebug-compute-previous-result'."
-;;    (let ((previous-value (nth 0 r)))
-;;      (if edebug-unwrap-results
-;;          (setq previous-value
-;;                (edebug-unwrap* previous-value)))
-;;      (setq edebug-previous-result
-;;            (edebug-safe-prin1-to-string previous-value))))
-;;
-;;  (defun cae-edebug-previous-result-a (_ &rest r)
-;;    "Adviced `edebug-previous-result'."
-;;    (eros--make-result-overlay edebug-previous-result :where (point)
-;;                               :duration eros-eval-result-duration))
-;;  (advice-add #'edebug-compute-previous-result :around
-;;              #'cae-edebug-compute-previous-result-a)
-;;  (advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
-;;
+;; Show `eros' overlays for `edebug' results.
+(when (modulep! :tools eval +overlay)
+  (defun cae-edebug-compute-previous-result-a (_ &rest r)
+    "Adviced `edebug-compute-previous-result'."
+    (let ((previous-value (nth 0 r)))
+      (if edebug-unwrap-results
+          (setq previous-value
+                (edebug-unwrap* previous-value)))
+      (setq edebug-previous-result
+            (edebug-safe-prin1-to-string previous-value))))
+
+  (defun cae-edebug-previous-result-a (_ &rest r)
+    "Adviced `edebug-previous-result'."
+    (eros--make-result-overlay edebug-previous-result :where (point)
+                               :duration eros-eval-result-duration))
+  (advice-add #'edebug-compute-previous-result :around
+              #'cae-edebug-compute-previous-result-a)
+  (advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
+
 ;;;; Allow `eval-expression' to have comments.
 ;;(add-hook! 'minibuffer-setup-hook
 ;;  (defun cae-lisp-eval-expression-set-up-comments-h ()
