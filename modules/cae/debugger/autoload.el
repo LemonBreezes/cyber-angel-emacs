@@ -103,17 +103,16 @@ _R_: Restart        _sb_: List breakpoints
 ;;;###autoload
 (defun cae-dap-debug-pass-envrc-a (args)
   (when (length= (plist-get (car args) :environment) 0)
-    (plist-put (car args) :environment
-               (apply #'vector
-                      (mapcar (lambda (s)
-                                (let ((m (string-match "=" s)))
-                                  (if m
-                                      (list :name
-                                            (substring-no-properties s 0 m)
-                                            :value
-                                            (substring-no-properties s (1+ m)
-                                                                     (length s)))
-                                    (list :name s
-                                          :value ""))))
-                              process-environment))))
+    (plist-put
+     (car args) :environment
+     (apply #'vector
+            (mapcar (lambda (s)
+                      (let ((m (string-match "=" s)))
+                        (if m
+                            (list :name (substring-no-properties s 0 m)
+                                  :value
+                                  (substring-no-properties s (1+ m) (length s)))
+                          (list :name s
+                                :value ""))))
+                    process-environment))))
   args)
