@@ -1378,6 +1378,8 @@
        '(vterm))
    ,@(when (modulep! :ui hydra)
        '(hydra))
+   ,@(when (modulep! :ui treemacs)
+       '(treemacs))
    ,@(when (modulep! :email mu4e)
        '(mu4e))
    ,@(when (or (modulep! :completion helm)
