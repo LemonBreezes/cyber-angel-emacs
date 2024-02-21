@@ -156,7 +156,7 @@
     (when (modulep! :ui ophints)
       (after! evil-goggles
         (cl-pushnew '(lispyville-comment-or-uncomment :face evil-goggles-commentary-face :switch
-                                                      evil-goggles-enable-commentary :advice
-                                                      evil-goggles--generic-async-advice)
+                      evil-goggles-enable-commentary :advice
+                      evil-goggles--generic-async-advice)
                     evil-goggles--commands)
         (setq lispyville-motions-put-into-special t)))))
