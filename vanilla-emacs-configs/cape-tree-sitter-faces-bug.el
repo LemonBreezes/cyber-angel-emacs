@@ -55,10 +55,11 @@ This assumes both `tree-sitter-mode' and `font-lock-mode' were already enabled."
   ;; TODO: If there's an error, disable `tree-sitter-hl--extra-patterns-list'
   ;; and retry.
   (when (tree-sitter-hl--ensure-query)
-    ;;(unless tree-sitter-hl--query-cursor
-    ;;  (setq tree-sitter-hl--query-cursor (tsc-make-query-cursor))
-    ;;  ;; Invalidate the buffer, only if we were actually disabled previously.
-    ;;  (tree-sitter-hl--invalidate))
+    (unless tree-sitter-hl--query-cursor
+      (setq tree-sitter-hl--query-cursor (tsc-make-query-cursor))
+      ;; Invalidate the buffer, only if we were actually disabled previously.
+      ;;(tree-sitter-hl--invalidate)
+      )
     ;; TODO: Override `font-lock-extend-after-change-region-function', or hook
     ;; into `jit-lock-after-change-extend-region-functions' directly. For that to
     ;; work, we need to make sure `tree-sitter--after-change' runs before
