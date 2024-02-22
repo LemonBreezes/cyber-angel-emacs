@@ -167,12 +167,6 @@ It is meant to be used as a `post-gc-hook'."
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
 
-;; For some reason the old function is giving an error. Just assume we are
-;; always using the latest version.
-(defadvice! cae-disable-copilot-rpc-version-check-a ()
-  :override #'copilot--jsonrpc-version
-  "9999")
-
 ;; For some reason, `which-key' would get canceled out by the Eldoc help.
 (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
   :before-until #'eldoc-print-current-symbol-info
