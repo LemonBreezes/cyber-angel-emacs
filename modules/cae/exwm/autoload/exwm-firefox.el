@@ -71,7 +71,8 @@ page switch."
 ;;;###autoload
 (defun +exwm-firefox--current-url ()
   "Get the URL of the currently focused EXWM buffer. Currently only
-works on Chromium with the Add Page URL to Title extension."
+works on Chromium with the Add Page URL to Title extension or in Firefox
+with the URL in title add-on."
   (let ((title (buffer-local-value 'exwm-title
                                    (cl-find-if (lambda (buf)
                                                  (buffer-local-value
@@ -79,6 +80,19 @@ works on Chromium with the Add Page URL to Title extension."
                                                (doom-visible-buffers)))))
     (or (string-match "|url:\\[\\(.+\\)\\]" title)
         (string-match "\\(https?://[^\s\t\n]+\\)" title))
+    (match-string-no-properties 1 title)))
+
+(defun +exwm-firefox--current-title ()
+  "Get the title of the currently focused EXWM buffer. Currently only works
+on Chromium with the Add Page URL to Title extension or in Firefox with
+the URL in title add-on."
+  (let ((title (buffer-local-value 'exwm-title
+                                   (cl-find-if (lambda (buf)
+                                                 (buffer-local-value
+                                                  'exwm-firefox-evil-mode buf))
+                                               (doom-visible-buffers)))))
+    (or (string-match "\\(.+\\) |url:\\[" title)
+        (string-match "\\([^·]+\\) ·" title))
     (match-string-no-properties 1 title)))
 
 ;;;###autoload
@@ -91,18 +105,10 @@ works on Chromium with the Add Page URL to Title extension."
 (defun +exwm-firefox-bookmark--make ()
   "Make bookmarks for web pages. Currently only works on Chromium
 with the Add Page URL to Title extension."
-  (let ((title
-         (buffer-local-value 'exwm-title
-                             (cl-find-if (lambda (buf)
-                                           (buffer-local-value
-                                            'exwm-firefox-evil-mode buf))
-                                         (doom-visible-buffers)))))
-    `((filename . ,(+exwm-firefox--current-url))
-      (title . ,(progn (or (string-match "\\(.+\\) |url:\\[" title)
-                           (string-match "\\([^·]+\\) ·" title))
-                       (match-string-no-properties 1 title)))
+  (let ((title (+exwm-firefox--current-title))
+        (url (+exwm-firefox--current-url)))
+    `((filename . ,url)
+      (title . ,title)
       (time . ,(current-time-string))
       (handler . +exwm-firefox-bookmark-handler)
-      (defaults . (,(progn (or (string-match "\\(.+\\) |url:\\[" title)
-                               (string-match "\\([^·]+\\) ·" title))
-                           (match-string-no-properties 1 title)))))))
+      (defaults . (,title)))))
