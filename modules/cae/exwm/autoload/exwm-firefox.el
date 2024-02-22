@@ -68,7 +68,6 @@ page switch."
 ;;   (exwm-firefox-core-tab-new)
 ;;   (+exwm-firefox-core-focus-bookmarks-bar))
 
-;;;###autoload
 (defun +exwm-firefox--current-url ()
   "Get the URL of the currently focused EXWM buffer. Currently only
 works on Chromium with the Add Page URL to Title extension or in Firefox
