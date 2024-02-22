@@ -9,6 +9,7 @@
                     (getenv "XDG_CURRENT_DESKTOP") ; Let me know if this one
                                         ; causes problems.
                     (getenv "WAYLAND_DISPLAY"))))
+  (setq doom-incremental-first-idle-timer 3.0)
 
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
