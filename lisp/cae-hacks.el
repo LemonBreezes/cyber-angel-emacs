@@ -172,3 +172,8 @@ It is meant to be used as a `post-gc-hook'."
   :before-until #'eldoc-print-current-symbol-info
   (or (and (featurep 'which-key) (which-key--popup-showing-p))
       (derived-mode-p 'exwm-mode)))
+
+;;(remove-hook! 'post-command-hook
+;;  (defun cae-catch-buffers-out-of-sync-h ()
+;;    (unless (eq (current-buffer) (window-buffer))
+;;      (message "Buffer out of sync: %s" (buffer-name)))))
