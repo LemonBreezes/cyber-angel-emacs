@@ -22,7 +22,7 @@
 (insert "int main() { return 0; // comment")
 (c-mode)
 (tree-sitter-hl-mode)
-(run-at-time 1 nil
-             (lambda () (message "get-text-property: %s | get-pos-property: %s"
-                                 (get-text-property (point-max) 'face)
-                                 (get-pos-property (point-max) 'face))))
+(tree-sitter-hl--highlight-region (point-min) (point-max))
+(message "get-text-property: %s | get-pos-property: %s"
+         (get-text-property (point-max) 'face)
+         (get-pos-property (point-max) 'face))
