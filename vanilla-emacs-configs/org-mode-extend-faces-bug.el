@@ -15,4 +15,4 @@
 (setq org-fontify-whole-heading-line t)
 (scratch-buffer)
 (org-mode)
-(insert "* Heading 1\n** Heading 2\n** Heading 3\n** Heading 4\n")
+(insert-file-contents "/home/st/org/roam/20200912110941-infty_2_reading_group.org")
