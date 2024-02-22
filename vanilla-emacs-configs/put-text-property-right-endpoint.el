@@ -2,4 +2,5 @@
 
 (scratch-buffer)
 (insert "hello world")
+(font-lock-mode -1)
 (put-text-property (point-min) (point-max) 'face '(:foreground "red"))
