@@ -44,8 +44,6 @@
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
-(setq doom-incremental-first-idle-timer 10.0)
-
 (doom! :completion
        (vertico +icons)
        (corfu +tng +orderless +icons +dabbrev +dict +emoji)
