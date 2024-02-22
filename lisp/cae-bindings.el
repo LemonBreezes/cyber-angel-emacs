@@ -88,6 +88,7 @@
       ;;"C-x x N" #'cae-make-new-buffer ;TODO Check if this is necessary next
                                         ;time I disable Evil.
       "C-x x o" #'ov-clear
+      "C-x x p" #'posframe-delete-all
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "M-R" #'cae-sp-raise-sexp
@@ -325,8 +326,10 @@
           "M-S-RET" #'org-insert-todo-heading
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
-(after! org
-  ;; I don't use the `org-priority-down6' and `org-priority-up6' commands.
+
+;; I don't use the `org-priority-down6' and `org-priority-up6' commands.
+(defadvice! cae-org-init-keybindings-a ()
+  :after #'+org-init-keybinds
   (map! :map org-mode-map
         :localleader
         "p" #'org-priority))
