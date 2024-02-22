@@ -18,6 +18,34 @@
 (straight-use-package 'tree-sitter-langs)
 (require 'tree-sitter-hl)
 
+(defun tree-sitter-hl--append-text-property (start end prop value &optional object)
+  "Append VALUE to PROP of the text from START to END.
+This is similar to `font-lock-append-text-property', but deduplicates values. It
+also expects VALUE to be a single value, not a list. Additionally, if PROP was
+previously nil, it will be set to VALUE, not (list VALUE)."
+  (message "tree-sitter-hl--append-text-property: %s %s %s %s" start end prop value)
+  (let (next prev)
+    (while (/= start end)
+      (setq next (next-single-property-change start prop object end)
+            prev (get-text-property start prop object))
+      ;; Canonicalize old forms of face property.
+      (and (memq prop '(face font-lock-face))
+           (listp prev)
+           (or (keywordp (car prev))
+               (memq (car prev) '(foreground-color background-color)))
+           (setq prev (list prev)))
+      (unless (listp prev)
+        (setq prev (list prev)))
+      (unless (memq value prev)
+        (put-text-property start next prop
+                           ;; Reduce GC pressure by not making a list if it's
+                           ;; just a single face.
+                           (if prev
+                               (append prev (list value))
+                             value)
+                           object))
+      (setq start next))))
+
 (require 'cc-mode)
 (scratch-buffer)
 (insert "int main() { return 0; // comment")
