@@ -73,11 +73,7 @@ page switch."
   "Get the URL of the currently focused EXWM buffer. Currently only
 works on Chromium with the Add Page URL to Title extension or in Firefox
 with the KeePass Helper - URL in title add-on."
-  (let ((title (buffer-local-value 'exwm-title
-                                   (cl-find-if (lambda (buf)
-                                                 (buffer-local-value
-                                                  'exwm-firefox-evil-mode buf))
-                                               (doom-visible-buffers)))))
+  (let ((title exwm-title))
     (or (string-match "|url:\\[\\(.+\\)\\]" title)
         (string-match "\\(https?://[^\s\t\n]+\\)" title))
     (match-string-no-properties 1 title)))
@@ -86,11 +82,7 @@ with the KeePass Helper - URL in title add-on."
   "Get the title of the currently focused EXWM buffer. Currently only works
 on Chromium with the Add Page URL to Title extension or in Firefox with
 the KeePass Helper - URL in title add-on."
-  (let ((title (buffer-local-value 'exwm-title
-                                   (cl-find-if (lambda (buf)
-                                                 (buffer-local-value
-                                                  'exwm-firefox-evil-mode buf))
-                                               (doom-visible-buffers)))))
+  (let ((title exwm-title))
     (or (string-match "\\(.+\\) |url:\\[" title)
         (string-match (format "\\(.+\\) https?://" url-handler-regexp) title))
     (match-string-no-properties 1 title)))
