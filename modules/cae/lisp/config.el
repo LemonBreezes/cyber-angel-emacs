@@ -69,7 +69,7 @@
 
 ;; Check parens before saving.
 (dolist (mode sp-lisp-modes)
-  (add-hook (derived-mode-hook-name mode) #'cae-lisp-check-parens-before-save-h))
+  (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h))
 
 ;; This tool helps us a lot with regular expressions
 (after! pcre2el
