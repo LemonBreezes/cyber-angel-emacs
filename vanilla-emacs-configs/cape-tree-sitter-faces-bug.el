@@ -11,7 +11,7 @@
 (scratch-buffer)
 (c-mode)
 (tree-sitter-hl-mode)
-(insert "int main() { return 0; ")
+(insert "int main() { return 0; // comment")
 (end-of-buffer)
 (font-lock-fontify-buffer)
 (message "get-text-property: %s | get-pos-property: %s"
