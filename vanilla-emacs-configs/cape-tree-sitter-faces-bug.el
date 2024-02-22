@@ -36,16 +36,14 @@ previously nil, it will be set to VALUE, not (list VALUE)."
            (setq prev (list prev)))
       (unless (listp prev)
         (setq prev (list prev)))
-      (unless (memq value prev)
-        (put-text-property start next prop
-                           ;; Reduce GC pressure by not making a list if it's
-                           ;; just a single face.
-                           (if prev
-                               (append prev (list value))
-                             value)
-                           object))
-      (setq start next)))
-  (message "%s" (get-text-property (point-max) 'face)))
+      (put-text-property start next prop
+                         ;; Reduce GC pressure by not making a list if it's
+                         ;; just a single face.
+                         (if prev
+                             (append prev (list value))
+                           value)
+                         object)
+      (setq start next))))
 
 (require 'cc-mode)
 (scratch-buffer)
