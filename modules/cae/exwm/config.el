@@ -10,10 +10,6 @@
                                         ; causes problems.
                     (getenv "WAYLAND_DISPLAY"))))
 
-  ;; Increase so that we don't start loading packages before we can interact
-  ;; with Emacs.
-  (setq doom-incremental-first-idle-timer 10.0)
-
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
   (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
