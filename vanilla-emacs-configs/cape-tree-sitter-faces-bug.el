@@ -43,7 +43,10 @@ previously nil, it will be set to VALUE, not (list VALUE)."
                                (append prev (list value))
                              value)
                            object)
-        (message "put-text-property: %s %s %s %s %s" start next prop (get-text-property start prop) object))
+        (message "put-text-property: %s %s %s %s %s" start next prop (get-text-property start prop) object)
+        (message "get-text-property: %s | get-pos-property: %s"
+                 (get-text-property start prop)
+                 (get-pos-property start prop)))
       (setq start next))))
 
 (require 'cc-mode)
