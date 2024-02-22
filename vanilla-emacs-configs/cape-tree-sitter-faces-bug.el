@@ -15,6 +15,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'tree-sitter)
+(straight-use-package 'tree-sitter-langs)
 
 (require 'cc-mode)
 (scratch-buffer)
