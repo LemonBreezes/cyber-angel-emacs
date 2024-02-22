@@ -73,7 +73,7 @@ This assumes both `tree-sitter-mode' and `font-lock-mode' were already enabled."
     ;; updated in-time, instead of eventually.
     (add-function :around (local 'font-lock-fontify-region-function)
                   #'tree-sitter-hl--highlight-region-with-fallback)
-    (tree-sitter-hl--minimize-font-lock-keywords)
+    ;;(tree-sitter-hl--minimize-font-lock-keywords)
     ;; XXX: We used to have a hack that calls`font-lock-turn-on-thing-lock',
     ;; which allows turning on tree-based syntax highlighting by temporarily
     ;; binding `major-mode', even though such a major mode may not be installed,
