@@ -45,7 +45,7 @@ previously nil, it will be set to VALUE, not (list VALUE)."
                              value)
                            object))
       (setq start next)))
-      (message (get-text-property (point-max) 'face)))
+  (message (get-text-property (point-max) 'face)))
 
 (require 'cc-mode)
 (scratch-buffer)
