@@ -12,6 +12,7 @@
 ;;
 ;;
 ;;
+;;
 (load-theme 'leuven t)
 
 (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
