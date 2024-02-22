@@ -23,7 +23,7 @@
 This is similar to `font-lock-append-text-property', but deduplicates values. It
 also expects VALUE to be a single value, not a list. Additionally, if PROP was
 previously nil, it will be set to VALUE, not (list VALUE)."
-  (message "tree-sitter-hl--append-text-property: %s %s %s %s" start end prop value)
+  (message "tree-sitter-hl--append-text-property: %s %s %s %s %s" start end prop value object)
   (let (next prev)
     (while (/= start end)
       (setq next (next-single-property-change start prop object end)
