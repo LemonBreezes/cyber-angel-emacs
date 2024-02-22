@@ -126,7 +126,7 @@
        (default +bindings +smartparens)
 
        :email
-       (mu4e +org)
+       mu4e
        ;;(notmuch +org)
 
        :app
