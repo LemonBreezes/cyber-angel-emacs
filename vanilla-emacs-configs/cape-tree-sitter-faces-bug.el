@@ -9,10 +9,10 @@
 
 (require 'cc-mode)
 (scratch-buffer)
-(c-mode)
-(tree-sitter-hl-mode)
 (insert "int main() { return 0; // comment")
 (goto-char (point-max))
+(c-mode)
+(tree-sitter-hl-mode)
 (font-lock-fontify-buffer)
 (message "get-text-property: %s | get-pos-property: %s"
          (get-text-property (point) 'face)
