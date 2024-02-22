@@ -13,8 +13,8 @@
 (c-mode)
 (tree-sitter-hl-mode)
 (run-at-time 1 nil (lambda () (message "get-text-property: %s | get-pos-property: %s"
-                                 (get-text-property (point-max) 'face)
-                                 (get-pos-property (point-max) 'face))))
+                                       (get-text-property (point-max) 'face)
+                                       (get-pos-property (point-max) 'face))))
 (message "get-text-property: %s | get-pos-property: %s"
          (get-text-property (point-max) 'face)
          (get-pos-property (point-max) 'face))
