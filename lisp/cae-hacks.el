@@ -173,7 +173,7 @@ It is meant to be used as a `post-gc-hook'."
   (or (and (featurep 'which-key) (which-key--popup-showing-p))
       (derived-mode-p 'exwm-mode)))
 
-(add-hook! 'post-command-hook
-  (defun cae-catch-buffers-out-of-sync-h ()
-    (unless (eq (current-buffer) (window-buffer))
-      (message "Buffer out of sync: %s" (buffer-name)))))
+;;(add-hook! 'post-command-hook
+;;  (defun cae-catch-buffers-out-of-sync-h ()
+;;    (unless (eq (current-buffer) (window-buffer))
+;;      (message "Buffer out of sync: %s" (buffer-name)))))
