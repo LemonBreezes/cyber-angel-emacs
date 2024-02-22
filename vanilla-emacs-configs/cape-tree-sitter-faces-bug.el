@@ -44,6 +44,7 @@ previously nil, it will be set to VALUE, not (list VALUE)."
                                (append prev (list value))
                              value)
                            object))
+      (message (get-text-property (point-max) 'face))
       (setq start next))))
 
 (require 'cc-mode)
