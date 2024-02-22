@@ -12,6 +12,6 @@
 (c-mode)
 (tree-sitter-hl-mode)
 (insert "int main() { return 0; ")
-(message "%s %s"
+(message "get-text-property: %s | get-pos-property: %s"
          (get-text-property (point) 'face)
          (get-pos-property (point) 'face))
