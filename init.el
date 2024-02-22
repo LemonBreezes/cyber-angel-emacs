@@ -49,7 +49,7 @@
        (corfu +tng +orderless +icons +dabbrev +dict +emoji)
 
        :ui
-       ;;doom-dashboard
+       doom-dashboard
        hl-todo
        (hydra +childframe)
        ;;(ligatures +extra +iosevka)
