@@ -15,5 +15,5 @@
 (tree-sitter-hl-mode)
 (font-lock-fontify-buffer)
 (message "get-text-property: %s | get-pos-property: %s"
-         (get-text-property (point) 'face)
-         (get-pos-property (point) 'face))
+         (get-text-property (point-max) 'face)
+         (get-pos-property (point-max) 'face))
