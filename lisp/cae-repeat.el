@@ -39,7 +39,8 @@
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
        "[" +workspace/switch-left
-       "]" +workspace/switch-right))
+       "]" +workspace/switch-right
+       "`" +workspace/other))
    t)
 
   (define-repeat-map winum
