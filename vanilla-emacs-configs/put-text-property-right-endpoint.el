@@ -2,4 +2,4 @@
 
 (scratch-buffer)
 (insert "hello world")
-(put-text-property (point) (point-max) 'face '(:foreground "red"))
+(put-text-property (point-min) (point-max) 'face '(:foreground "red"))
