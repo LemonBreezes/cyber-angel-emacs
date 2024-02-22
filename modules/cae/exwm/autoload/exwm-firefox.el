@@ -92,7 +92,7 @@ the URL in title add-on."
                                                   'exwm-firefox-evil-mode buf))
                                                (doom-visible-buffers)))))
     (or (string-match "\\(.+\\) |url:\\[" title)
-        (string-match "\\([^·]+\\) ·" title))
+        (string-match (format "\\(.+\\) https?://" url-handler-regexp) title))
     (match-string-no-properties 1 title)))
 
 ;;;###autoload
