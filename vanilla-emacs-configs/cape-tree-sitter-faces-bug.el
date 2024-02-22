@@ -63,9 +63,9 @@ This assumes both `tree-sitter-mode' and `font-lock-mode' were already enabled."
     ;; into `jit-lock-after-change-extend-region-functions' directly. For that to
     ;; work, we need to make sure `tree-sitter--after-change' runs before
     ;; `jit-lock-after-change'.
-    (add-hook 'tree-sitter-after-change-functions
-              #'tree-sitter-hl--invalidate
-              nil :local)
+    ;;(add-hook 'tree-sitter-after-change-functions
+    ;;          #'tree-sitter-hl--invalidate
+    ;;          nil :local)
     ;; TODO: Figure out how to properly integrate with `jit-lock-mode' directly,
     ;; without relying on `font-lock-mode'. Among other things, it would enable
     ;; highlighting without setting `font-lock-defaults'. At the moment,
