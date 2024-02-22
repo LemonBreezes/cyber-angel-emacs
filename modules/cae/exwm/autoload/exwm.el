@@ -63,7 +63,7 @@ non-nil, debug init as well."
          "-l"
          (expand-file-name
           (completing-read "Load file: "
-                           (directory-files +exwm-vanilla-emacs-config-dir nil "^[^.]")
+                           (directory-files +exwm-vanilla-emacs-config-dir nil "^[^._]")
                            nil t nil '+exwm-vanilla-emacs--config-history)
           +exwm-vanilla-emacs-config-dir)
          (when arg (list "--debug-init"))))
