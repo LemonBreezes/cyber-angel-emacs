@@ -48,12 +48,12 @@
   (unwind-protect (apply oldfun args)
     (advice-remove #'message #'ignore)))
 
-(defun cae-posframe-message (msg &optional buffer)
+(defun cae-posframe-message (msg &rest args)
   "Display MSG in a posframe."
-  (let ((buffer (or buffer "*posframe-message*")))
+  (let ((buffer "*posframe-message*"))
     (with-current-buffer (get-buffer-create buffer)
       (erase-buffer)
-      (insert msg)
+      (insert (apply #'format msg args))
       (posframe-show buffer
                      :string (buffer-string)
                      :position (point)))))
