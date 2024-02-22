@@ -47,3 +47,15 @@
   (advice-add #'message :override #'ignore)
   (unwind-protect (apply oldfun args)
     (advice-remove #'message #'ignore)))
+
+(defun cae-posframe-message (msg &optional buffer)
+  "Display MSG in a posframe."
+  (let ((buffer (or buffer "*posframe-message*")))
+    (with-current-buffer (get-buffer-create buffer)
+      (erase-buffer)
+      (insert msg)
+      (posframe-show buffer
+                     :string (buffer-string)
+                     :position (point)))))
+
+(cae-posframe-message "Hello, world!")
