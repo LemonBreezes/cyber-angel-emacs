@@ -102,5 +102,5 @@ If LOUDLY is non-nil, print debug messages."
 (tree-sitter-hl--highlight-region (point-min) (point-max))
 (message "HELLO2: %s %s" (current-buffer) (window-buffer))
 (message "HELLO: get-text-property: %s | get-pos-property: %s"
-         (get-text-property (point-max) 'face)
-         (get-pos-property (point-max) 'face))
+         (get-text-property (1- (point-max)) 'face)
+         (get-pos-property (1- (point-max)) 'face))
