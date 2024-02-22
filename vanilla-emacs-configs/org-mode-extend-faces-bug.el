@@ -15,7 +15,6 @@
 (setq org-fontify-whole-heading-line t)
 (scratch-buffer)
 (org-mode)
-;;
 (insert "#+title: (Infty, 2) Reading Group
 #+ROAM_TAGS: \"Quasicategories\"
 
