@@ -50,10 +50,12 @@
 
 (defun cae-posframe-message (msg &rest args)
   "Display MSG in a posframe."
+  (set-buffer (window-buffer))
   (let ((buffer "*posframe-message*"))
     (posframe-delete buffer)
     (with-current-buffer (get-buffer-create buffer)
       (erase-buffer)
       (insert (apply #'format msg args))
       (posframe-show buffer
-                     :string (buffer-string)))))
+                     :string (buffer-string)
+                     :position (point)))))
