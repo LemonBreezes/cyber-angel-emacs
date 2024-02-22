@@ -9,6 +9,8 @@
                     (getenv "XDG_CURRENT_DESKTOP") ; Let me know if this one
                                         ; causes problems.
                     (getenv "WAYLAND_DISPLAY"))))
+
+  ;; Increase so that we don't start loading packages before we can interact with Emacs.
   (setq doom-incremental-first-idle-timer 3.0)
 
   ;; Prevent nested Emacs sessions from loading EXWM.
