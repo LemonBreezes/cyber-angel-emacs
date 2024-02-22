@@ -72,7 +72,7 @@ page switch."
 (defun +exwm-firefox--current-url ()
   "Get the URL of the currently focused EXWM buffer. Currently only
 works on Chromium with the Add Page URL to Title extension or in Firefox
-with the URL in title add-on."
+with the KeePass Helper - URL in title add-on."
   (let ((title (buffer-local-value 'exwm-title
                                    (cl-find-if (lambda (buf)
                                                  (buffer-local-value
@@ -85,7 +85,7 @@ with the URL in title add-on."
 (defun +exwm-firefox--current-title ()
   "Get the title of the currently focused EXWM buffer. Currently only works
 on Chromium with the Add Page URL to Title extension or in Firefox with
-the URL in title add-on."
+the KeePass Helper - URL in title add-on."
   (let ((title (buffer-local-value 'exwm-title
                                    (cl-find-if (lambda (buf)
                                                  (buffer-local-value
