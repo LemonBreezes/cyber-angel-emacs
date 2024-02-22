@@ -178,7 +178,3 @@ It is meant to be used as a `post-gc-hook'."
   :before-until #'eldoc-print-current-symbol-info
   (or (and (featurep 'which-key) (which-key--popup-showing-p))
       (derived-mode-p 'exwm-mode)))
-
-(undefadvice! cae-magit-section-post-command-hook-a (oldfun)
-  :around #'magit-section-post-command-hook
-  (ignore-errors (funcall oldfun)))
