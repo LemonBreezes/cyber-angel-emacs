@@ -67,8 +67,8 @@ If LOUDLY is non-nil, print debug messages."
         (tree-sitter-hl--extend-regions hl-region query-region)
         (setf `(,beg . ,end) hl-region)
         (tsc--query-cursor-set-byte-range tree-sitter-hl--query-cursor
-                                         (position-bytes (car query-region))
-                                         (position-bytes (cdr query-region))))
+                                          (position-bytes (car query-region))
+                                          (position-bytes (cdr query-region))))
       (let* ((root-node (tsc-root-node tree-sitter-tree))
              (captures  (tsc--query-cursor-captures-1
                          tree-sitter-hl--query-cursor
