@@ -57,5 +57,3 @@
       (posframe-show buffer
                      :string (buffer-string)
                      :position (point)))))
-
-(cae-posframe-message "Hello, world!")
