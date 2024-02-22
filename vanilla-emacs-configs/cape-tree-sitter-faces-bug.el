@@ -56,6 +56,6 @@ previously nil, it will be set to VALUE, not (list VALUE)."
 (setq tree-sitter-hl-enable-query-region-extension t)
 (tree-sitter-hl-mode)
 (tree-sitter-hl--highlight-region (point-min) (point-max))
-(message "get-text-property: %s | get-pos-property: %s"
+(message "HELLO: get-text-property: %s | get-pos-property: %s"
          (get-text-property (point-max) 'face)
          (get-pos-property (point-max) 'face))
