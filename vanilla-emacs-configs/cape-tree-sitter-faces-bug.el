@@ -49,13 +49,6 @@ previously nil, it will be set to VALUE, not (list VALUE)."
                  (get-pos-property start prop)))
       (setq start next))))
 
-(defun tree-sitter-hl--invalidate (&optional old-tree)
-  "Mark regions of text to be rehighlighted after a text change.
-Installed on `tree-sitter-after-change-functions'.
-
-OLD-TREE is the tree before the edit."
-  )
-
 (require 'cc-mode)
 (scratch-buffer)
 (insert "int main() { return 0; // comment")
