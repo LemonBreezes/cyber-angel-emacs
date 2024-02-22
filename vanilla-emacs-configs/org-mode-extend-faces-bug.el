@@ -1,6 +1,6 @@
 ;;; vanilla-emacs-configs/org-mode-extend-faces-bug.el -*- lexical-binding: t; -*-
 
-(load-file (expand-file-name "default.el" default-directory))
+(load-file (expand-file-name "default.el" (file-name-directory user-init-file)))
 
 (require 'org)
 (load-theme 'leuven t)
