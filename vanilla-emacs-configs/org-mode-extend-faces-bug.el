@@ -15,7 +15,7 @@
 (setq org-fontify-whole-heading-line t)
 (scratch-buffer)
 (org-mode)
-(insert-file-contents "#+title: (Infty, 2) Reading Group
+(insert "#+title: (Infty, 2) Reading Group
 #+ROAM_TAGS: \"Quasicategories\"
 
 * [2020-09-11 Fri] Links passed around in today's meeting
