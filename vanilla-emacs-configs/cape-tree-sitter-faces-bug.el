@@ -6,9 +6,9 @@
 
 (straight-use-package 'tree-sitter)
 (straight-use-package 'tree-sitter-langs)
-(straight-use-package 'tree-sitter-hl)
 
 (require 'cc-mode)
 (scratch-buffer)
 (c-mode)
+(tree-sitter-hl-mode)
 (insert "int main() { return 0; ")
