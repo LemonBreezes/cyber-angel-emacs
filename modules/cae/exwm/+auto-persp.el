@@ -135,11 +135,11 @@ buffers of that class."
     (when-let ((exwm-workspace-p (cl-member (+workspace-current-name)
                                             +exwm-workspaces
                                             :test #'cl-equalp))
-               (workspace (+exwm-get-workspace-name (window-buffer))))
+               (workspace (+exwm-get-workspace-name (current-buffer))))
       (when (persp-p (persp-get-by-name workspace))
         (let ((buffers
                (--filter (and (buffer-live-p it)
-                              (not (eq it (window-buffer)))
+                              (not (eq it (current-buffer)))
                               (string= (+exwm-get-workspace-name it) workspace))
                          (persp-buffers (persp-get-by-name workspace)))))
           (unless buffers
