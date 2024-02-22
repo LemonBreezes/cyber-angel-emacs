@@ -111,21 +111,21 @@
     (add-hook 'helpful-mode #'lispy-mode)
     (map! :map lispy-mode-map-lispy
           (:when (not (modulep! :editor evil))
-           ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
-           ;; the beginning of the line or indentation.
-           "M-m" nil                    ;formerly `lispy-mark-symbol'.
+            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
+            ;; the beginning of the line or indentation.
+            "M-m" nil                    ;formerly `lispy-mark-symbol'.
 
-           "C-a" nil                    ;formerly
+            "C-a" nil                    ;formerly
                                         ;`lispy-move-beginning-of-line'.
 
-           "C-e" nil                    ;formerly `lispy-move-end-of-line'.
+            "C-e" nil                    ;formerly `lispy-move-end-of-line'.
                                         ;Doom's default `C-e' is better because
                                         ;it moves to the end of the code first
                                         ;and then to the end of the line rather
                                         ;than moving to the end of the line
                                         ;first.
 
-           "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
+            "M-i" nil)                   ;formerly `lispy-iedit'. I prefer
                                         ;multiple cursors.
           ;; I used to use these commands but now I have some `smartparens'
           ;; keybindings for them.
@@ -138,7 +138,7 @@
           "C-M-," nil                   ;formerly `lispy-mark'.
           "M-," nil                     ;formerly `pop-tag-mark'.
           (:when (modulep! :editor evil)
-           "M-," nil)
+            "M-," nil)
           "C-d" #'cae-delete-char
           "C-M-?" #'cae-lispy-which-key-cheatsheet
           ")" #'cae-insert-closing-paren))
