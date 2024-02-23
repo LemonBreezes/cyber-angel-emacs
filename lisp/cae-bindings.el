@@ -101,6 +101,7 @@
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
+      "C-<f1>" #'try
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
@@ -328,5 +329,3 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
-
-(map! "<C-f1>" #'try)
