@@ -95,7 +95,7 @@ If LOUDLY is non-nil, print debug messages."
 
 (require 'cc-mode)
 (scratch-buffer)
-(insert "\"the\"")
+(insert "int main() { return 0; // comment")
 (c-mode)
 (setq tree-sitter-hl-enable-query-region-extension t)
 (tree-sitter-hl-mode)
