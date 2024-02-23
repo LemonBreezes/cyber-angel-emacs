@@ -1,7 +1,7 @@
 ;;; vanilla-emacs-configs/put-text-property-right-endpoint.el -*- lexical-binding: t; -*-
 
 (scratch-buffer)
-(insert "hello world ")
+(insert "hello world")
 (font-lock-mode -1)
 (put-text-property (point-min) (length "hello world") 'face '(:foreground "red"))
 (message "get-text-property: %s, get-pos-property: %s"
