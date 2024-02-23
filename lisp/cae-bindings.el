@@ -118,12 +118,6 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
-;; Use `TAB' instead of `RET' for outline cycling buttons
-(after! outline
-  (map! :map outline-overlay-button-map
-        "RET" nil
-        "TAB" #'outline-cycle))
-
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (define-key help-map (kbd "SPC") #'cae-pop-mark)
 ;; This is so that `describe-key-briefly' is more convenient to use with the
