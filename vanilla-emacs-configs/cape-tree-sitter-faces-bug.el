@@ -36,7 +36,7 @@ previously nil, it will be set to VALUE, not (list VALUE)."
       (unless (listp prev)
         (setq prev (list prev)))
       (unless (memq value prev)
-        (put-text-property start next prop
+        (put-text-property start (1+ next) prop
                            ;; Reduce GC pressure by not making a list if it's
                            ;; just a single face.
                            (if prev
