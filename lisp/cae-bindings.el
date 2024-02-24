@@ -95,6 +95,7 @@
       "C-M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
+      ;; Use `M-<tab>' for expanding snippets.
       (:when (and (modulep! :editor snippets)
                   (eq tab-always-indent 'complete))
        (:after yasnippet
