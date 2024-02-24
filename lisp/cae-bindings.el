@@ -115,7 +115,8 @@
         "M-S-<tab>" (yas-filtered-definition 'yas-prev-field))
        (:after corfu
         :map corfu-map
-        "M-<tab>" yas-maybe-expand))
+        "M-<tab>" '(menu-item "" yas-expand :filter
+                    yas-maybe-expand-abbrev-key-filter)))
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
