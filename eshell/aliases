@@ -73,6 +73,7 @@ alias update-emacs emerge emacs && cd ~/.config/emacs && doom build && git stash
 alias update-emacs2 cd ~/.config/emacs && git stash && doom upgrade && git stash pop && doom sync
 alias update-gentoo smart-live-rebuild && sudo emaint -a sync && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
 alias update-gentoo2 smart-live-rebuild && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
+alias update-all update-gentoo && update-emacs
 alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 
