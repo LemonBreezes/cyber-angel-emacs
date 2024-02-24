@@ -95,7 +95,10 @@
       "C-M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
-      "M-<tab>" yas-maybe-expand
+      (:when (modulep! :editor snippets)
+       :map yas-minor-mode-map
+       "M-<tab>" yas-maybe-expand
+       "TAB" nil)
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "C-S-h" #'embark-bindings
