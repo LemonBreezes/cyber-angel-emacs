@@ -96,7 +96,7 @@
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
       ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
-      ;; completion.
+      ;; completion. I also don't insert the separator with `M-<tab>'.
       (:when (and (modulep! :editor snippets)
                   (modulep! :completion corfu +tng))
        (:after yasnippet
