@@ -103,7 +103,6 @@
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
       [remap doom/sudo-this-file] #'cae-toggle-sudo
-      "M-<tab>" yas-maybe-expand
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
       (:when (modulep! :completion vertico)
