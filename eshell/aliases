@@ -72,7 +72,7 @@ alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/do
 alias update-emacs emerge emacs && cd ~/.config/emacs && doom build && doom upgrade && git stash pop && doom sync
 alias update-emacs2 cd ~/.config/emacs && doom upgrade && doom sync
 alias update-emacs3 update-emacs && doom build
-alias update-gentoo smart-live-rebuild && sudo emaint -a sync && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
+alias update-gentoo smart-live-rebuild && sudo emaint -a sync && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && emerge @module-rebuild && update-grub
 alias update-gentoo2 smart-live-rebuild && compile sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y
 alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
