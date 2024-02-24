@@ -83,7 +83,9 @@ This variable needs to be set at the top-level before any `after!' blocks.")
                                 (eq (char-before)
                                     +orderless-wildcard-character))
                        (corfu-quit)
-                       nil))))))
+                       nil))))
+    ;; I do not need the module's command for inserting the wildcard.
+    (map! :map corfu-map [remap completion-at-point] nil)))
 
 ;; Use my logic for enabling Corfu in the minibuffer:
 (after! corfu
