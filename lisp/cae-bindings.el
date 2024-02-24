@@ -102,10 +102,6 @@
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
-      (:when (modulep! :editor snippets)
-       "M-<tab>" yas-maybe-expand
-       :map corfu-map
-       "M-<tab>" nil)
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
