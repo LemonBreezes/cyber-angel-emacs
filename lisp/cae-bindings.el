@@ -105,8 +105,6 @@
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
-      (:when (modulep! :completion vertico)
-       [remap apropos] nil)             ;`consult-apropos' is obsolete.
       (:after vertico
        (:map vertico-map
         "<prior>" #'vertico-scroll-down
