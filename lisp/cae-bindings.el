@@ -100,7 +100,10 @@
        (:after yasnippet
         :map yas-minor-mode-map
         "M-<tab>" yas-maybe-expand
-        "TAB" nil))
+        "TAB" nil)
+       (:after corfu
+        :map corfu-map
+        "M-<tab>" #'yas-maybe-expand))
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "C-S-h" #'embark-bindings
