@@ -78,5 +78,3 @@ alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 alias nixos-rebuild sudo nixos-rebuild $*
 alias nix-store sudo nix-store $*
-
-alias emacs-patch sudo bash -c "rm /etc/portage/patches/app-editors/emacs/test.patch 2>/dev/null && git diff > /etc/portage/patches/app-editors/emacs/test.patch"
