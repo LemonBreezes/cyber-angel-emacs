@@ -95,13 +95,15 @@
       "C-M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
-      ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
-      ;; completion. I also don't insert the separator with `M-<tab>'.
+      ;; Resolve the age-old conflict between using TAB for completion,
+      ;; indentation, and expanding snippets.
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
                   (modulep! :completion corfu +tng))
        (:after yasnippet
+        ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
+        ;; completion. I also don't insert the separator with `M-<tab>'.
         :map yas-minor-mode-map
         "M-<tab>" yas-maybe-expand
         "TAB" nil
