@@ -102,7 +102,13 @@
        (:after yasnippet
         :map yas-minor-mode-map
         "M-<tab>" yas-maybe-expand
-        "TAB" nil)
+        "TAB" nil
+        :map yas-keymap
+        "TAB" nil
+        "S-<tab>" nil
+        "<backtab>" nil
+        "M-<tab>" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
+        "M-S-<tab>" (yas-filtered-definition 'yas-prev-field))
        (:after corfu
         :map corfu-map
         "M-<tab>" yas-maybe-expand))
