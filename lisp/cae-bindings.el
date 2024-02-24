@@ -95,7 +95,8 @@
       "C-M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
-      (:when (modulep! :editor snippets)
+      (:when (and (modulep! :editor snippets)
+                  (eq c-tab-always-indent 'complete))
        (:after yasnippet
         :map yas-minor-mode-map
         "M-<tab>" yas-maybe-expand
