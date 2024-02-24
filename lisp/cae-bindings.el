@@ -98,7 +98,7 @@
       ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
       ;; completion.
       (:when (and (modulep! :editor snippets)
-                  (eq tab-always-indent 'complete))
+                  (modulep! :completion corfu +tng))
        (:after yasnippet
         :map yas-minor-mode-map
         "M-<tab>" yas-maybe-expand
