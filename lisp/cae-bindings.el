@@ -103,7 +103,7 @@
         "TAB" nil)
        (:after corfu
         :map corfu-map
-        "M-<tab>" #'yas-maybe-expand))
+        "M-<tab>" yas-maybe-expand))
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       "C-S-h" #'embark-bindings
