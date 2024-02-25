@@ -167,12 +167,6 @@ It is meant to be used as a `post-gc-hook'."
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
 
-;; For some reason, `which-key' would get canceled out by the Eldoc help.
-(defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
-  :before-until #'eldoc-print-current-symbol-info
-  (or (and (featurep 'which-key) (which-key--popup-showing-p))
-      (derived-mode-p 'exwm-mode)))
-
 ;;(add-hook! 'post-command-hook
 ;;  (defun cae-catch-buffers-out-of-sync-h ()
 ;;    (unless (eq (current-buffer) (window-buffer))
