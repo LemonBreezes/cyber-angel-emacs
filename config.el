@@ -402,7 +402,12 @@
     :defer t :init
     (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)
     (after! eldoc
-      (setq eldoc-idle-delay 0.7))))
+      (setq eldoc-idle-delay 0.7))
+    ;; For some reason, `which-key' would get canceled out by the Eldoc help.
+    (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
+      :before-until #'eldoc-print-current-symbol-info
+      (or (and (featurep 'which-key) (which-key--popup-showing-p))
+          (derived-mode-p 'exwm-mode)))))
 
 
 ;;; Tools
