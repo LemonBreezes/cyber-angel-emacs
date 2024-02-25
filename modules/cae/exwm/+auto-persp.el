@@ -125,8 +125,8 @@ nil if its not an EXWM buffer."
                                 (buffer-list)))))
         (unless (window-live-p (get-buffer-window app-buffer))
           (when (and (modulep! :ui popup)
-                   (+popup-window-p))
-              (other-window 1))
+                     (+popup-window-p))
+            (other-window 1))
           (switch-to-buffer app-buffer)))))
 
   (defun +exwm-persp-cleanup-workspace ()
