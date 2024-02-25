@@ -124,7 +124,7 @@ nil if its not an EXWM buffer."
                       (cl-union (+workspace-buffer-list)
                                 (buffer-list)))))
         (unless (window-live-p (get-buffer-window app-buffer))
-          (if (and (modulep! :ui popup)
+          (when (and (modulep! :ui popup)
                    (+popup-window-p))
               (other-window 1))
           (switch-to-buffer app-buffer)))))
