@@ -50,4 +50,4 @@
       (+org--toggle-inline-images-in-subtree (point-min) (point-max) 'refresh)
       (unless (eq org-preview-latex-default-process 'dvisvgm)
         (org-clear-latex-preview (point-min) (point-max))
-        (org--latex-preview-region (point-min) (point-max))))))
+        (ignore-errors (org--latex-preview-region (point-min) (point-max)))))))
