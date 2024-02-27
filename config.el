@@ -84,6 +84,8 @@
     (unless (member path (split-string (getenv "PATH") ":"))
       (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
 
+;; I regularly PR Doom Emacs.
+(advice-add #'doom-docs--toggle-read-only-h :override #'ignore)
 
 
 ;;; UI
