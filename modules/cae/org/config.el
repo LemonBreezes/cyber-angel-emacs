@@ -62,5 +62,8 @@
 (after! ox
   (add-to-list 'org-export-filter-final-output-functions #'cae-org-export-remove-zero-width-space t))
 
+;; I regularly PR Doom Emacs.
+(advice-add #'doom-docs--toggle-read-only-h :override #'ignore)
+
 (when (modulep! +pretty)
   (load! "+pretty"))
