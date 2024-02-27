@@ -1423,6 +1423,9 @@
               '(alarm pomm debbugs))))
  t)
 
+(after! pdf-tools
+  (pdf-tools-install))
+
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
