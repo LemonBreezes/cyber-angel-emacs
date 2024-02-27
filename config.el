@@ -1424,7 +1424,7 @@
  t)
 
 (after! pdf-tools
-  (pdf-tools-install))
+  (pdf-tools-install t nil t))
 
 (setq cae-config-finished-loading t)
 
