@@ -85,7 +85,7 @@
       (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
 
 ;; I regularly PR Doom Emacs.
-(advice-add #'doom-docs--toggle-read-only-h :override #'ignore)
+(advice-add #'doom-docs-read-only-h :override #'ignore)
 
 
 ;;; UI
