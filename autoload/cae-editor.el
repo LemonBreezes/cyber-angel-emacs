@@ -493,6 +493,7 @@ mark the string and call `edit-indirect-region' with it."
               (floor (/ (line-end-position) (line-number-at-pos)))
               (1+ (or line-spacing 0))))))
 
+;;;###autoload
 (defun cae-set-jit-lock-chunk-size-to-optimal ()
   "Set `jit-lock-chunk-size' to the computed optimal value."
   (interactive)
