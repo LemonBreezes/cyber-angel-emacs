@@ -111,11 +111,11 @@
         "TAB" nil
         "S-<tab>" nil
         "<backtab>" nil
-        "M-<tab>" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
-        "M-S-<tab>" (yas-filtered-definition 'yas-prev-field))
+        "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
+        "C-M-S-i" (yas-filtered-definition 'yas-prev-field))
        (:after corfu
         :map corfu-map
-        "M-<tab>" '(menu-item "" yas-expand :filter
+        "C-M-i" '(menu-item "" yas-expand :filter
                     yas-maybe-expand-abbrev-key-filter)))
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
