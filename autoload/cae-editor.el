@@ -482,3 +482,27 @@ mark the string and call `edit-indirect-region' with it."
     ;; Stop AI from freezing Emacs while Emacs is waiting for the AI to respond.
     (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
+
+(defun cae-compute-optimal-jit-lock-chunk-size ()
+  "Estimate the optimal value for `jit-lock-chunk-size'."
+  (let ((window-height (window-height))
+        (window-width (window-width))
+        (line-spacing (or line-spacing 0)) ; If `line-spacing` is nil, default to 0
+        average-chars-per-line)
+    ;; Estimate average characters per line
+    (save-excursion
+      (goto-char (window-start))
+      (setq average-chars-per-line (floor (/ (line-end-position) (line-number-at-pos)))))
+    ;; Compute chunk size based on the visible window area
+    (let ((optimal-size (floor (* window-height
+                                  average-chars-per-line
+                                  (+ 1 line-spacing)))))
+      ;; Adjust the estimate to be "a little over" the computed value, maybe 10% more
+      (floor (* optimal-size 1.1)))))
+
+(defun cae-set-jit-lock-chunk-size-to-optimal ()
+  "Set `jit-lock-chunk-size' to the computed optimal value."
+  (interactive) ; Allows the function to be called interactively
+  (let ((optimal (compute-optimal-jit-lock-chunk-size)))
+    (set-variable 'jit-lock-chunk-size optimal)
+    (message "jit-lock-chunk-size set to optimal value of %d" optimal)))
