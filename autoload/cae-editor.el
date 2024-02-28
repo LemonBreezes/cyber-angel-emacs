@@ -490,8 +490,8 @@ mark the string and call `edit-indirect-region' with it."
     ;; Calculate optimal chunk size: window height * average line length (with spacing)
     ;; Then, increase the estimated size by 10% to provide a buffer.
     (floor (* 1.1 (window-height)
-               (floor (/ (line-end-position) (line-number-at-pos)))
-               (1+ (or line-spacing 0))))))
+              (floor (/ (line-end-position) (line-number-at-pos)))
+              (1+ (or line-spacing 0))))))
 
 (defun cae-set-jit-lock-chunk-size-to-optimal ()
   "Set `jit-lock-chunk-size' to the computed optimal value."
