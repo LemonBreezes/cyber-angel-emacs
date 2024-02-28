@@ -111,6 +111,7 @@
         "TAB" nil
         "S-<tab>" nil
         "<backtab>" nil
+        ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
         "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
         "C-M-S-i" (yas-filtered-definition 'yas-prev-field))
        (:after corfu
