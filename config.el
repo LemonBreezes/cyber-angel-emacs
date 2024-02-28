@@ -101,13 +101,12 @@
   (setq display-line-numbers-type t
         display-line-numbers-width-start t)
 
-  ;; Based on the documentation, my estimate for what this magic number should
-  ;; be (no benchmarks) is 10000. It's also the value used in `emacs-ess'.
-  (setq jit-lock-chunk-size 10000)
-
   ;; Show minibuffer recursion depth
   (autoload 'minibuffer-depth-setup "mb-depth")
   (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+
+  ;; Run `cae-set-jit-lock-chunk-size-to-optimal' on a couple of files.
+  (setq jit-lock-chunk-size 2500)
 
   ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
   ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
