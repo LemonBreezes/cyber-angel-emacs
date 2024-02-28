@@ -13,7 +13,8 @@
               (bound-and-true-p vertico--input)
               (eq (current-local-map) read-passwd-map)
               (and (featurep 'helm-core)
-                   (helm--alive-p)))
+                   (helm--alive-p))
+              (where-is-internal 'minibuffer-complete (list (current-local-map))))
     (corfu-mode +1)))
 
 ;;;###autoload
