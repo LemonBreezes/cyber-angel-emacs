@@ -105,7 +105,7 @@
   (autoload 'minibuffer-depth-setup "mb-depth")
   (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-  ;; Just my guess for how big this number should be. Call
+  ;; My guess for how big this number should be for my setup. Call
   ;; `cae-set-jit-lock-chunk-size-to-optimal' on a few different files to get an
   ;; idea.
   (setq jit-lock-chunk-size 2500)
