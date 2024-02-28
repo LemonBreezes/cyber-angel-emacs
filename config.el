@@ -105,7 +105,7 @@
   (autoload 'minibuffer-depth-setup "mb-depth")
   (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-  ;; Run `cae-set-jit-lock-chunk-size-to-optimal' on a couple of files.
+  ;; Just my guess for how big this number should be.
   (setq jit-lock-chunk-size 2500)
 
   ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
