@@ -17,7 +17,7 @@
 
 ;; Currently I only use this to prevent GC while running `kill-emacs-hook'.
 
-(defun cae-hacks-disable-gc ()
+(defun cae-hacks-disable-gc (&rest _)
   "Raise the GC threshold to a large value and enable GC messages."
   (unless cae-hacks--gc-disabled
     (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
@@ -65,6 +65,7 @@ It is meant to be used as a `post-gc-hook'."
 ;; Be wary of enabling this, especially on Android devices:
 ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
 (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
+(advice-add #'save-buffers-kill-emacs :before-until #'cae-hacks-disable-gc)
 
 
 ;;; Other hacks
