@@ -70,11 +70,12 @@
 (package! nov)
 (package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
-(package! wakatime-mode)
 
 ;; cae-statistics.el
 (package! emacs-gc-stats)
 (package! keyfreq)
+(package! wakatime-mode)
+
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
