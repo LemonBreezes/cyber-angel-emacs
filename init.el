@@ -16,7 +16,7 @@
     (setq vterm-shell interactive-shell)))
 
 (when (>= (num-processors) 32)
-  (setq gcmh-high-cons-threshold (* 2 1024 1024 1024)))
+  (setq gcmh-high-cons-threshold (* 8 1024 1024 1024)))
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
