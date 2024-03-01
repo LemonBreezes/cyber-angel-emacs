@@ -72,7 +72,7 @@
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! wakatime-mode)
 
-;; cae-benchmark.el
+;; cae-statistics.el
 (package! emacs-gc-stats)
 (package! keyfreq)
 
