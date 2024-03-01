@@ -31,4 +31,4 @@
     (message "Garbage collection completed in %.06f seconds"
              (float-time (time-subtract (current-time) start-time)))))
 
-(cae-benchmark-gc (* 32 1024 1024 1024))
+;;(cae-benchmark-gc (* 32 1024 1024 1024))
