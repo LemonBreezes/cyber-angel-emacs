@@ -76,7 +76,6 @@
 (package! keyfreq)
 (package! wakatime-mode)
 
-
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
   (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster")))
