@@ -416,7 +416,7 @@
   (when (modulep! :tools lsp)
     (load! "lisp/cae-lsp")
     (load! "lisp/cae-semantic")
-    (load! "lisp/cae-benchmark"))
+    (load! "lisp/cae-statistics"))
 
   ;; Set up the default browser.
   (after! browse-url
