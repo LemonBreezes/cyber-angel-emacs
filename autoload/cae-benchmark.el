@@ -21,9 +21,9 @@
   "Convert human-readable size (e.g., '1G', '1M', '512K') to bytes."
   (interactive "sEnter size (e.g., 1G, 1M, 512K): ")
   (let ((unit-multiplier `((?K . 1024)
-                          (?M . ,(* 1024 1024))
-                          (?G . ,(* 1024 1024 1024))
-                          (?T . ,(* 1024 1024 1024 1024))))
+                           (?M . ,(* 1024 1024))
+                           (?G . ,(* 1024 1024 1024))
+                           (?T . ,(* 1024 1024 1024 1024))))
         (number (string-to-number size))
         (unit (upcase (aref size (1- (length size))))))
     (if (and (> number 0) (assoc unit unit-multiplier))
