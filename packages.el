@@ -72,6 +72,10 @@
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! wakatime-mode)
 
+;; cae-benchmark.el
+(package! emacs-gc-stats)
+(package! keyfreq)
+
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
   (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster")))
