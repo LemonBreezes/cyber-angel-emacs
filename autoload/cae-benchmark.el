@@ -16,3 +16,20 @@
   (interactive)
   (set-variable 'jit-lock-chunk-size (compute-optimal-jit-lock-chunk-size))
   (message "jit-lock-chunk-size set to optimal value of %d" jit-lock-chunk-size))
+
+
+;;;###autoload
+(defun cae-benchmark-gc ()
+  (interactive)
+  (let ((start-time (current-time))
+        (gcs-done-old gcs-done))
+    ;; generate garbage until `gc-cons-threshold' is exceeded
+    (while (>= gcs-done-old gcs-done)
+      ;; generate varied types of garbage
+      (cl-loop for i from 0 to 1000 do
+               (make-string 1000 ?a)
+               (make-vector 1000 0)
+               (make-hash-table :test 'eq)
+               (make-symbol "a")))
+    (message "Garbage collection completed in %.06f seconds"
+             (float-time (time-subtract (current-time) start-time)))))
