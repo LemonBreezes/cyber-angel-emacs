@@ -64,3 +64,11 @@ normally have their errors suppressed."
    (t
     (advice-add func :around #'cae-debug-reraise-error)
     (message "Debug on hidden errors enabled for %s" func))))
+
+;;; Debug garbage in dabbrev completion
+
+(defun cae-search-in-dabbrev-buffers (search-string)
+  "Search for SEARCH-STRING in all buffers returned by dabbrev--select-buffers."
+  (interactive "sSearch string: ")
+  (let ((buffers (dabbrev--select-buffers)))
+    (multi-occur buffers search-string)))
