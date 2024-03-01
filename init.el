@@ -18,10 +18,11 @@
 (when (>= (num-processors) 32)
   ;; Testing disabling GC during work. Careful with this. I found this was not
   ;; worth it on my i9 9900K but maybe with a 7950X I can get away with it.
-  (setq gcmh-high-cons-threshold (* 8 1024 1024 1024)
-        consult--gc-threshold gcmh-high-cons-threshold
-        cae-hacks-gc-cons-threshold gcmh-high-cons-threshold
-        +lsp--default-gcmh-high-cons-threshold gcmh-high-cons-threshold))
+  (let ((cae-gc-cons-threshold (* 1024 1024 1024)))
+    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
+          consult--gc-threshold cae-gc-cons-threshold
+          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
+          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
