@@ -12,9 +12,9 @@
 (define-key key-translation-map (kbd "SPC DEL") (kbd "SPC SPC"))
 (define-key key-translation-map (kbd "<backspace> DEL") (kbd "<backspace> SPC"))
 
-;; Define the leader key in Emacs state.
+;; Define the leader key in Emacs state so that I can use it from the minibuffer.
 (map! :map general-override-mode-map
-      :desc "<leader>" :e doom-leader-alt-key #'doom-leader-map)
+      :desc "<leader>" :g doom-leader-alt-key #'doom-leader-map)
 
 ;; Remove redundant `consult-history' keybinding.
 (when (boundp '+default-minibuffer-maps)
