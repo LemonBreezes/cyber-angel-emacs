@@ -65,9 +65,6 @@
         "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
         tramp-default-remote-shell (executable-find "bash")))
 
-(after! nsm
-  (setq network-security-level 'high))
-
 (after! ghub
   ;; I use the latest Emacs.
   (setq ghub-use-workaround-for-emacs-bug-54989 nil
