@@ -82,7 +82,7 @@
 (package! crontab-mode)
 (package! inputrc-mode)
 (package! ebuild-mode :built-in t)
-(package! tokei)
+(package! tokei)                        ;I use this for counting lines of code.
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
 (package! eff)
