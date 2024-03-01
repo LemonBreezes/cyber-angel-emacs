@@ -18,6 +18,7 @@
                               (copilot--overlay-visible))))
       (corfu-quit)
       (when copilot-state
+        ;; Restore Copilot's overlay.
         (copilot-complete))))
   (add-hook! 'doom-escape-hook
     (defun cae-corfu-quit-h ()
