@@ -43,7 +43,7 @@
                             ('insert (exwm-evil-core-insert))
                             ('normal (exwm-evil-core-normal))
                             (_ nil))))
-                       (when (minibufferp)
+                       (when (minibufferp nil t)
                          (setq +exwm-refocus-application--last-time (float-time))
                          (throw 'exit nil))))))
 ;;;###autoload

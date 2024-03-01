@@ -207,7 +207,7 @@
   (and
    ;; Only allow a non identity translation if we're beginning a Key Sequence.
    (equal key-from (this-command-keys))
-   (or  (and (minibufferp)
+   (or  (and (minibufferp nil t)
              (not (bound-and-true-p vertico--input))
              (cl-member (minibuffer-prompt)
                         '("Go to line: "
@@ -224,7 +224,7 @@
                           "tabgo")
                         :test #'string=))
         (and (not this-command)
-             (minibufferp)
+             (minibufferp nil t)
              (symbol-file last-command)
              (string= (file-name-base (symbol-file last-command)) "switch-window")))))
 

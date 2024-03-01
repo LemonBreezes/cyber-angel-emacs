@@ -62,7 +62,7 @@
 
 ;;;###autoload
 (defun +zone-switch-to-root-window-a (oldfun &rest args)
-  (unless (minibufferp)
+  (unless (minibufferp nil t)
     (+misc-applications-with-cursor-hidden
      (let ((wconf (current-window-configuration)))
        (select-window (car (doom-visible-windows)))

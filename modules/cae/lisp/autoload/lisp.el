@@ -7,7 +7,7 @@
 ;;;###autoload
 (defun cae-lisp-newline-and-indent ()
   (interactive)
-  (cond ((and (minibufferp)
+  (cond ((and (minibufferp nil t)
               (string= (minibuffer-prompt) "Eval: ")
               ;; Insert a newline if either the sexp is unbalanced or we are in a
               ;; commented/empty line.
@@ -18,7 +18,7 @@
          (progn
            (insert-char ?\n 1)
            (indent-according-to-mode)))
-        ((minibufferp)
+        ((minibufferp nil t)
          (call-interactively #'exit-minibuffer))
         ((bound-and-true-p lispy-mode)
          (call-interactively #'lispy-newline-and-indent))

@@ -71,7 +71,7 @@ nil if its not an EXWM buffer."
     "Creates workspace for a new EXWM buffer and switches to that workspace"
     (let* ((buffer (alist-get 'buffer state))
            (application-name (+exwm-get-workspace-name buffer)))
-      (when (minibufferp)
+      (when (minibufferp nil t)
         (minibuffer-keyboard-quit))
       (when (not (string= application-name (+workspace-current-name)))
         (persp-remove-buffer buffer))
