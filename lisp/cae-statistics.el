@@ -5,8 +5,10 @@
   (emacs-gc-stats-mode +1))
 
 (use-package! keyfreq
-  :init
-  (keyfreq-mode +1))
+  :after-call post-command-hook
+  :config
+  (keyfreq-mode +1)
+  (keyfreq-autosave-mode +1))
 
 (use-package! wakatime-mode
   :defer t :init
