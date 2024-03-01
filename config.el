@@ -1112,14 +1112,6 @@
     (setq yas-triggers-in-field t       ;Allow nested snippets.
           yas-trigger-symbol " →"))
 
-  (use-package! dabbrev
-    :defer t :config
-    (defun cae-dabbrev-friend-buffer (other-buffer)
-      (< (buffer-size other-buffer) (* 1 1024 1024)))
-    (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")
-          dabbrev-upcase-means-case-search t
-          dabbrev-friend-buffer-function #'cae-dabbrev-friend-buffer))
-
   (use-package! hippie-exp
     :defer t :config
     (setq  hippie-expand-try-functions-list
@@ -1433,6 +1425,8 @@
 ;;  (pdf-tools-install t nil t))
 
 (setq cae-config-finished-loading t)
+
+(search-in-dabbrev-buffers "\342\200\231")
 
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
