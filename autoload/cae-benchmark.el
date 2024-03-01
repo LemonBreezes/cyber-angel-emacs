@@ -19,7 +19,7 @@
 
 
 ;;;###autoload
-(defun benchmark-garbage-creation ()
+(defun cae-benchmark-garbage-creation ()
   "Generate garbage and measure the time taken to trigger a single GC at the current `gc-cons-threshold`."
   (interactive)
   ;; First, we ensure garbage collection is turned off to prevent it from interfering
