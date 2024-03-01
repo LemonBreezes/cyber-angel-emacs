@@ -482,13 +482,3 @@ mark the string and call `edit-indirect-region' with it."
     ;; Stop AI from freezing Emacs while Emacs is waiting for the AI to respond.
     (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
-
-(defun cae-compute-optimal-jit-lock-chunk-size ()
-  "Calculate an estimated optimal value for `jit-lock-chunk-size' based on window dimensions."
-  (save-excursion
-    (goto-char (window-start))
-    ;; Calculate optimal chunk size: window height * average line length (with spacing)
-    ;; Then, increase the estimated size by 10% to provide a buffer.
-    (floor (* 1.1 (window-height)
-              (floor (/ (line-end-position) (line-number-at-pos)))
-              (1+ (or line-spacing 0))))))
