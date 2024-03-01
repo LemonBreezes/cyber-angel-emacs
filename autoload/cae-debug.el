@@ -14,6 +14,7 @@ normally have their errors suppressed."
       (apply func args)
     ((debug error) (signal (car err) (cdr err)))))
 
+;;;###autoload
 (defun cae-debug-toggle-debugging-function-on-hidden-errors (func)
   "Toggle hidden error debugging for function FUNC."
   (interactive "aFunction: ")
@@ -27,6 +28,7 @@ normally have their errors suppressed."
 
 ;;; Debug garbage in dabbrev completion
 
+;;;###autoload
 (defun cae-search-in-dabbrev-buffers (search-string)
   "Search for SEARCH-STRING in all buffers returned by dabbrev--select-buffers."
   (interactive "sSearch string: ")
