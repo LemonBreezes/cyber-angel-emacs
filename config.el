@@ -881,12 +881,6 @@
     (setq file-info-include-headlines t
           file-info-max-value-length 100))
 
-  (use-package! wakatime-mode
-    :defer t :init
-    (add-hook 'doom-first-file-hook #'global-wakatime-mode)
-    :config
-    (setq wakatime-cli-path (executable-find "wakatime")))
-
   (use-package! titlecase
     :defer t :init
     (after! embark
