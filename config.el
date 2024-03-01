@@ -1426,8 +1426,6 @@
 
 (setq cae-config-finished-loading t)
 
-(search-in-dabbrev-buffers "\342\200\231")
-
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
 ;;End:
