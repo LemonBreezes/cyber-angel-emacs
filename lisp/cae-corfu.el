@@ -87,8 +87,4 @@ This variable needs to be set at the top-level before any `after!' blocks.")
     ;; I do not need the module's command for inserting the wildcard.
     (map! :map corfu-map [remap completion-at-point] nil)))
 
-;; Use my logic for enabling Corfu in the minibuffer:
-;;(after! corfu
-;;  (remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer))
-;;(add-hook 'minibuffer-setup-hook #'cae-corfu-enable-in-minibuffer-h)
 (setq +corfu-want-minibuffer-completion 'aggressive)
