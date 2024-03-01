@@ -22,7 +22,8 @@
     (setq gcmh-high-cons-threshold cae-gc-cons-threshold
           consult--gc-threshold cae-gc-cons-threshold
           cae-hacks-gc-cons-threshold cae-gc-cons-threshold
-          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
+          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold
+          garbage-collection-messages t)))
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
