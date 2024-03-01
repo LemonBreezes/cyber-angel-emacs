@@ -17,29 +17,14 @@
   (set-variable 'jit-lock-chunk-size (compute-optimal-jit-lock-chunk-size))
   (message "jit-lock-chunk-size set to optimal value of %d" jit-lock-chunk-size))
 
-(defun cae-convert-size-to-bytes (size)
-  "Convert human-readable size (e.g., '1G', '1M', '512K') to bytes."
-  (interactive "sEnter size (e.g., 1G, 1M, 512K): ")
-  (let ((unit-multiplier `((?K . 1024)
-                           (?M . ,(* 1024 1024))
-                           (?G . ,(* 1024 1024 1024))
-                           (?T . ,(* 1024 1024 1024 1024))))
-        (number (string-to-number size))
-        (unit (upcase (aref size (1- (length size))))))
-    (if (and (> number 0) (assoc unit unit-multiplier))
-        (let ((multiplier (cdr (assoc unit unit-multiplier))))
-          (message "%s is %d bytes" size (* number multiplier)))
-      (error "Invalid format"))))
-
 ;;;###autoload
 (defun cae-benchmark-gc (&optional threshold)
   (interactive)
   (let ((start-time (current-time))
         (gcs-done-old gcs-done)
         (gc-cons-threshold (or threshold gc-cons-threshold)))
-    ;; generate garbage until `gc-cons-threshold' is exceeded
+    ;; Generate garbage until `gc-cons-threshold' is exceeded.
     (while (>= gcs-done-old gcs-done)
-      ;; generate varied types of garbage
       (cl-loop for i from 0 to 1000 do
                (make-string 1000 ?a)
                (make-vector 1000 0)
