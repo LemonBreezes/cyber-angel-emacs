@@ -492,10 +492,3 @@ mark the string and call `edit-indirect-region' with it."
     (floor (* 1.1 (window-height)
               (floor (/ (line-end-position) (line-number-at-pos)))
               (1+ (or line-spacing 0))))))
-
-;;;###autoload
-(defun cae-set-jit-lock-chunk-size-to-optimal ()
-  "Set `jit-lock-chunk-size' to the computed optimal value."
-  (interactive)
-  (set-variable 'jit-lock-chunk-size (compute-optimal-jit-lock-chunk-size))
-  (message "jit-lock-chunk-size set to optimal value of %d" jit-lock-chunk-size))
