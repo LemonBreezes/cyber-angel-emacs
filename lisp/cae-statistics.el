@@ -1,9 +1,5 @@
 ;;; lisp/cae-statistics.el -*- lexical-binding: t; -*-
 
-(use-package! emacs-gc-stats
-  :init
-  (emacs-gc-stats-mode +1))
-
 (use-package! keyfreq
   :after-call post-command-hook
   :config
