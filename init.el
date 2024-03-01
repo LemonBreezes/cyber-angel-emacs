@@ -18,7 +18,9 @@
 (when (>= (num-processors) 32)
   ;; Testing disabling GC during work. Careful with this. I found this was not
   ;; worth it on my i9 9900K but maybe with a 7950X I can get away with it.
-  (setq gcmh-high-cons-threshold (* 8 1024 1024 1024)))
+  (setq gcmh-high-cons-threshold (* 8 1024 1024 1024)
+        consult--gc-threshold gcmh-high-cons-threshold
+        cae-hacks-gc-cons-threshold gcmh-high-cons-threshold))
 
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
