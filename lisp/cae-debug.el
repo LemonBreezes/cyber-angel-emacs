@@ -34,7 +34,7 @@
        (backtrace))))
 
 (defmacro backtrace! (function &rest args)
-  `(advice-add ',function :before ,(cae-debug-backtrace-a args)))
+  `(advice-add ,function :before ,(cae-debug-backtrace-a args)))
 
 (defmacro unbacktrace! (function)
   `(advice-remove ',function #'cae-debug-backtrace-a))
