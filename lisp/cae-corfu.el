@@ -19,9 +19,9 @@
       (corfu-quit)
       (when copilot-state
         (copilot-complete))))
-  ;;(add-hook! 'doom-escape-hook
-  ;;  (defun cae-corfu-quit-h ()
-  ;;    (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
+  (add-hook! 'doom-escape-hook
+    (defun cae-corfu-quit-h ()
+      (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
   (map! :map corfu-map
         [remap corfu-quit] #'cae-corfu-quit))
 
