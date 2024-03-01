@@ -21,8 +21,7 @@
   (setq gcmh-high-cons-threshold (* 8 1024 1024 1024)
         consult--gc-threshold gcmh-high-cons-threshold
         cae-hacks-gc-cons-threshold gcmh-high-cons-threshold
-        +lsp--default-gcmh-high-cons-threshold gcmh-high-cons-threshold
-        gcmh-low-cons-threshold most-positive-fixnum))
+        +lsp--default-gcmh-high-cons-threshold gcmh-high-cons-threshold))
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
@@ -30,7 +29,6 @@
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
-(backtrace! garbage-collect)
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
