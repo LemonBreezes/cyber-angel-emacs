@@ -17,9 +17,7 @@
   (set-variable 'jit-lock-chunk-size (compute-optimal-jit-lock-chunk-size))
   (message "jit-lock-chunk-size set to optimal value of %d" jit-lock-chunk-size))
 
-;;;###autoload
 (defun cae-benchmark-gc (&optional threshold)
-  (interactive)
   (let ((start-time (current-time))
         (gcs-done-old gcs-done)
         (gc-cons-threshold (or threshold gc-cons-threshold)))
@@ -33,4 +31,4 @@
     (message "Garbage collection completed in %.06f seconds"
              (float-time (time-subtract (current-time) start-time)))))
 
-(cae-benchmark-gc (* 8 1024 1024 1024))
+(cae-benchmark-gc (* 32 1024 1024 1024))
