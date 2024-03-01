@@ -37,7 +37,7 @@
   `(advice-add ,function :before ,(cae-debug-backtrace-a args)))
 
 (defmacro unbacktrace! (function)
-  `(advice-remove ',function #'cae-debug-backtrace-a))
+  `(advice-remove ,function #'cae-debug-backtrace-a))
 
 
 ;;; Power debugging
