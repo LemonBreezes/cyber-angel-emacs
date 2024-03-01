@@ -82,6 +82,7 @@
 (package! crontab-mode)
 (package! inputrc-mode)
 (package! ebuild-mode :built-in t)
+(package! tokei)
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
 (package! eff)
