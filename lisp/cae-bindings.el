@@ -258,7 +258,7 @@
    "C-x M-:" #'consult-complex-command  ;orig. repeat-complex-command
    ;; Custom M-# bindings for fast register access
    "M-#" #'consult-register-load
-   "M-'" #'consult-register-store       ;orig. abbrev-prefix-mark (unrelated)
+   "M-*" #'consult-register-store
    "C-M-#" #'consult-register
    [remap jump-to-register] #'consult-register-load
    ;; Other custom bindings
