@@ -93,7 +93,9 @@
           "j" #'+default/search-buffer))
   (map! :leader
         "o-" #'cae-dired-jump
-        "op" #'dirvish-side)
+        (:when (not (or (modulep! :ui neotree)
+                        (modulep! :ui treemacs)))
+          "op" #'dirvish-side))
 
   (add-hook! 'find-directory-functions :append
     (defun cae-dired-load-dirvish-h (dir)
