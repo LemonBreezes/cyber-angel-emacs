@@ -159,4 +159,7 @@
                       evil-goggles-enable-commentary :advice
                       evil-goggles--generic-async-advice)
                     evil-goggles--commands)
-        (setq lispyville-motions-put-into-special t)))))
+        (setq lispyville-motions-put-into-special t)))
+    (after! lispyville
+      (map! :n "M-s" nil                ;formerly `lispy-splice'.
+            ))))
