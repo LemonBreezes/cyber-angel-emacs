@@ -62,6 +62,10 @@
     ("=" eri/expand-region
      "-" eri/contract-region))
 
+  (define-repeat-map org-priority
+    ("u" org-priority-up
+     "d" org-priority-down))
+
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
   (define-repeat-map cae-org-ai-kill-region-at-point
