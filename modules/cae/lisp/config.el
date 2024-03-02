@@ -161,5 +161,6 @@
                     evil-goggles--commands)
         (setq lispyville-motions-put-into-special t)))
     (after! lispyville
-      (map! :n "M-s" nil                ;formerly `lispy-splice'.
+      (map! :map lispyville-mode-map
+            :n "M-s" nil                     ;formerly `lispy-splice'.
             ))))
