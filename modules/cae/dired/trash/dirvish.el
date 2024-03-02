@@ -95,7 +95,7 @@
         "o-" #'cae-dired-jump
         (:when (not (or (modulep! :ui neotree)
                         (modulep! :ui treemacs)))
-          "op" #'dirvish-side))
+         "op" #'dirvish-side))
 
   (add-hook! 'find-directory-functions :append
     (defun cae-dired-load-dirvish-h (dir)
