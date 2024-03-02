@@ -1,6 +1,7 @@
 ;;; trash/auto-sudoedit.el -*- lexical-binding: t; -*-
 
 ;; I was editing `shr.el' with this enabled and it kept creating new buffers.
+;; This also breaks `dirvish'. So this definitely has some pretty big issues.
 
 ;; Loading `tramp-sh' is slow, so we have this hook load auto-sudoedit if we
 ;; need to use sudo on a file before `tramp-sh' is loaded.
