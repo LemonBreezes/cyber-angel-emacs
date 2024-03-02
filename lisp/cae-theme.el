@@ -51,16 +51,15 @@
       (set-face-attribute 'lsp-inlay-hint-face nil
                           :inherit 'shadow
                           :height 0.8)))
-  (after! goggles
-    ;; Make the `goggles' more subtle.
-    (set-face-attribute 'goggles-added nil
-                        :background (face-attribute 'lazy-highlight :background nil t)))
-  (after! beacon
-    ;; Make the `beacon' more subtle.
-    (setq beacon-color (face-attribute 'lazy-highlight :background nil t)))
-  (after! scrollkeeper
-    (set-face-attribute 'scrollkeeper-guideline-highlight nil
-                        :background (face-attribute 'lazy-highlight :background nil t)))
+  ;; Use a more subtle background color for some packages.
+  (let ((subtle-bg-color (face-attribute 'lazy-highlight :background nil t)))
+    (after! goggles
+      (set-face-attribute 'goggles-added nil :background subtle-bg-color))
+    (after! beacon
+      (setq beacon-color subtle-bg-color))
+    (after! scrollkeeper
+      (set-face-attribute 'scrollkeeper-guideline-highlight nil
+                          :background subtle-bg-color)))
 
   (when cae-theme-extend-heading-faces
     (after! org
