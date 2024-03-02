@@ -32,7 +32,11 @@
           ("example" "»–" "–«")
           ("quote" "❝" "❞")
           ("export" "⏩" "⏪"))
-        org-modern-priority '((?A . "⚑") (?B . "⬆") (?C . "■") (?D . "⬇") (?E . "⛾"))
+        org-modern-priority '((?A . "⚑")
+                              (?B . "⬆")
+                              (?C . "■")
+                              (?D . "⬇")
+                              (?E . "⛾"))
         org-modern-horizontal-rule (make-string 36 ?─)
         org-modern-keyword
         '((t . t)
