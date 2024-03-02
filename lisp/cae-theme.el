@@ -76,6 +76,9 @@
                       markdown-header-face-3 markdown-header-face-4
                       markdown-header-face-5 markdown-header-face-6))
         (set-face-attribute face nil :extend t)))
+    (after! shr
+      (dolist (face '(shr-h1 shr-h2 shr-h3 shr-h4 shr-h5 shr-h6))
+        (set-face-attribute face nil :extend t)))
     (after! helpful
       (set-face-attribute 'helpful-heading nil :extend t)))
 
