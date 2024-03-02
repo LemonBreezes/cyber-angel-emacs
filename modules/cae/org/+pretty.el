@@ -32,7 +32,6 @@
           ("example" "»–" "–«")
           ("quote" "❝" "❞")
           ("export" "⏩" "⏪"))
-        org-modern-progress t
         org-modern-priority nil
         org-modern-horizontal-rule (make-string 36 ?─)
         org-modern-keyword
@@ -98,19 +97,19 @@
     :after #'+org-init-appearance-h
     (set-ligatures! 'org-mode nil)
     (set-ligatures! 'org-mode
-      :list_property "::"
-      :em_dash       "---"
-      :ellipsis      "..."
-      :arrow_right   "->"
-      :arrow_left    "<-"
-      :arrow_lr      "<->"
-      :properties    ":PROPERTIES:"
-      :end           ":END:"
-      :priority_a    "[#A]"
-      :priority_b    "[#B]"
-      :priority_c    "[#C]"
-      :priority_d    "[#D]"
-      :priority_e    "[#E]")))
+                    :list_property "::"
+                    :em_dash       "---"
+                    :ellipsis      "..."
+                    :arrow_right   "->"
+                    :arrow_left    "<-"
+                    :arrow_lr      "<->"
+                    :properties    ":PROPERTIES:"
+                    :end           ":END:"
+                    :priority_a    "[#A]"
+                    :priority_b    "[#B]"
+                    :priority_c    "[#C]"
+                    :priority_d    "[#D]"
+                    :priority_e    "[#E]")))
 
 (use-package! org-tidy
   :defer t :init
