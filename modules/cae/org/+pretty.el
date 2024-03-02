@@ -114,9 +114,3 @@
                     :priority_c    "[#C]"
                     :priority_d    "[#D]"
                     :priority_e    "[#E]")))
-
-(use-package! org-tidy
-  :defer t :init
-  (add-hook 'org-mode-hook #'org-tidy-mode)
-  :config
-  (setq org-tidy-properties-inline-symbol "·"))
