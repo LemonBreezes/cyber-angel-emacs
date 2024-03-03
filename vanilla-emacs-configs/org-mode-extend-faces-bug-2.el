@@ -243,8 +243,8 @@ To add other CAPFs to keys, adapt the snippet below into your ~config.el~:
 (add-hook! some-mode ; Only needed if the binding is mode-specific
            (make-local-variable 'corfu-mode-map)
            (map! :map corfu-mode-map
-                 :prefix "C-x" ; C-x is usually used as prefix, but it's not required
-                 "e" #'cape-emoji)) ; Evil users probably want :i to avoid this in other states
+                 :prefix \"C-x\" ; C-x is usually used as prefix, but it's not required
+                 \"e\" #'cape-emoji)) ; Evil users probably want :i to avoid this in other states
 #+end_src
 
 * Troubleshooting
