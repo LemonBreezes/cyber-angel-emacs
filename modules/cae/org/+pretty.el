@@ -22,7 +22,8 @@
           ("WAIT" :inverse-video t :inherit +org-todo-onhold)
           ("[?]"  :inverse-video t :inherit +org-todo-onhold)
           ("KILL" :inverse-video t :inherit +org-todo-cancel)
-          ("NO"   :inverse-video t :inherit +org-todo-cancel))
+          ("NO"   :inverse-video t :inherit +org-todo-cancel)
+          ("COMMENT" :inverse-video t :inherit org-special-keyword))
         org-modern-footnote
         (cons nil (cadr org-script-display))
         org-modern-block-fringe nil
