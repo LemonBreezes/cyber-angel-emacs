@@ -44,9 +44,9 @@
       (after! consult
         (add-to-list 'consult-buffer-filter "\\`magit\\(?:-[a-z]+\\)?:")
         (add-to-list 'consult-buffer-filter "^\\*forge\\(?:-[a-z]+\\)"))
-      (after! forge
-        (setq forge-pull-notifications t
-              forge-buffer-draft-p t))
+      ;;(after! forge
+      ;;  (setq forge-pull-notifications t
+      ;;        forge-buffer-draft-p t))
       (after! forge-list
         (map! :map forge-topic-list-mode-map
               :n "@" #'forge-topics-menu))))
