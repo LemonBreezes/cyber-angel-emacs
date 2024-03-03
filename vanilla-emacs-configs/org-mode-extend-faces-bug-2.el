@@ -245,27 +245,4 @@ To add other CAPFs to keys, adapt the snippet below into your ~config.el~:
            (map! :map corfu-mode-map
                  :prefix \"C-x\" ; C-x is usually used as prefix, but it's not required
                  \"e\" #'cape-emoji)) ; Evil users probably want :i to avoid this in other states
-#+end_src
-
-* Troubleshooting
-[[doom-report:][Report an issue?]]
-
-If you have performance issues with ~cape-dabbrev~, the first thing I recommend
-doing is to look at the list of buffers Dabbrev is scanning:
-
-#+begin_src emacs-lisp
-(dabbrev--select-buffers) ; => (#<buffer README.org> #<buffer config.el<3>> #<buffer cape.el> ...)
-(length (dabbrev--select-buffers)) ; => 37
-#+end_src
-
-... and modify ~dabbrev-ignored-buffer-regexps~ or ~dabbrev-ignored-buffer-modes~
-accordingly.
-
-* Frequently asked questions
-/This module has no FAQs yet./ [[doom-suggest-faq:][Ask one?]]
-
-* TODO Appendix
-#+begin_quote
- 🔨 This module has no appendix yet. [[doom-contrib-module:][Write one?]]
-#+end_quote
-")
+#+end_src ")
