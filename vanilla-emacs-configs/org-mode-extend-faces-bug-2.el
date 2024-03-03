@@ -29,4 +29,3 @@
 (insert "* Headline 1\n Hello
 * Headline 1\nHello\n")
 (run-at-time 0.1 0 #'org-cycle-global)
-(run-at-time 0.2 0 #'org-cycle-global)
