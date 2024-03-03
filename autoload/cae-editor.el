@@ -474,7 +474,9 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-find-sibling-file (file)
-  "Find a sibling file of FILE."
+  "Find a sibling file of FILE.
+
+This function is a wrapper around `find-file' that also stores"
   (interactive (progn
                  (unless buffer-file-name
                    (user-error "Not visiting a file"))
@@ -482,6 +484,9 @@ mark the string and call `edit-indirect-region' with it."
   (let ((old-file (buffer-file-name)))
     (condition-case err (call-interactively #'find-sibling-file)
       (user-error
-       (find-file (gethash old-file cae--sibling-file-history))))
+       (when (thread-last cae--sibling-file-history
+                          (gethash old-file)
+                          (file-exists-p))
+         (find-file (gethash old-file cae--sibling-file-history)))))
     (unless (equal old-file (buffer-file-name))
       (puthash (buffer-file-name) old-file cae--sibling-file-history))))
