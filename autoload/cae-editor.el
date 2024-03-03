@@ -501,7 +501,7 @@ toggling."
                  (completing-read
                   "Choose file: " previous-files nil t nil
                   'cae-find-sibling-file-previous-file-history))))))
-      (unless (equal old-file (buffer-file-name))
+      (unless (string= old-file (buffer-file-name))
         ;; append new sibling or create list if multiple siblings
         (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
           (puthash (buffer-file-name)
