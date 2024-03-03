@@ -30,7 +30,7 @@
 
 ;; Run startup progrms
 (defun tmp/exwm-init-hook ()
-  (dolist (file (directory-files +startup-directory t "\\.el$"))
+  (dolist (file (directory-files +startup-directory t "\\.el\\'"))
     (load (file-name-sans-extension file) nil t))
 
   ;;(advice-add #'+workspace/switch-to :after #'+workspace-switch-to-exwm-buffer-maybe)
