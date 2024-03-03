@@ -16,7 +16,7 @@
     ,(expand-file-name "config/default/autoload/text.el" doom-modules-dir)))
 
 (defvar cae-compile-native-comp-speed 3)
-    
+
 (defun cae-compile--compile-pdf-tools ()
   (unless (ignore-errors (and (require 'pdf-tools nil t)
                               (pdf-info-check-epdfinfo))
