@@ -507,9 +507,9 @@ toggling."
                         ;; no entry exists, store the old-file
                         old-file)
                        ((stringp current-history)
-                        ;; one entry exists, make it a list
                         (if (string= old-file current-history)
                             current-history
+                          ;; one entry exists, make it a list
                           (list old-file current-history)))
                        ((listp current-history)
                         ;; a list already, append if not already there
