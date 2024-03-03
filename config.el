@@ -687,7 +687,7 @@
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
   (setq find-sibling-rules
-        '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org")))
+        '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org\\'")))
 
   ;; Query buffers for a diff before killing them.
   (defvar cae-diff-window nil
