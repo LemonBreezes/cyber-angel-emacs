@@ -65,38 +65,6 @@ By default, completion gets triggered after typing 2 non-space consecutive
 characters, or by means of the [[kbd:][C-SPC]] keybinding at any moment. While the popup
 is visible, the following relevant keys are available:
 
-| Keybind  | Description                                               |
-|----------+-----------------------------------------------------------|
-| [[kbd:][<down>]]   | Go to next candidate                                      |
-| [[kbd:][<up>]]     | Go to previous candidate                                  |
-| [[kbd:][C-n]]      | Go to next candidate                                      |
-| [[kbd:][C-p]]      | Go to previous candidate                                  |
-| [[kbd:][C-j]]      | (evil) Go to next candidate                               |
-| [[kbd:][C-k]]      | (evil) Go to previous candidate                           |
-| [[kbd:][C-<down>]] | Go to next doc line                                       |
-| [[kbd:][C-<up>]]   | Go to previous doc line                                   |
-| [[kbd:][C-S-n]]    | Go to next doc line                                       |
-| [[kbd:][C-S-p]]    | Go to previous doc line                                   |
-| [[kbd:][C-S-j]]    | (evil) Go to next doc line                                |
-| [[kbd:][C-S-k]]    | (evil) Go to previous doc line                            |
-| [[kbd:][C-h]]      | Toggle documentation (if available)                       |
-| [[kbd:][C-S-s]]    | Export to minibuffer (if [[doom-module::completion vertico]]) |
-| [[kbd:][RET]]      | Insert candidate                                          |
-| [[kbd:][SPC]]      | Quit autocompletion or pass-through after a wildcard      |
-| [[kbd:][C-SPC]]    | Complete (unless [[doom-module::completion corfu +tng]])      |
-| [[kbd:][C-SPC]]    | (when completing) Insert separator DWIM (see below)       |
-
-If you prefer a [[kbd:][TAB]]-centric completion style, enable the [[doom-module::completion
-corfu +tng]] flag so that, instead, you trigger completion with [[kbd:][TAB]], getting the
-following additional binds:
-
-| Keybind | Description                                   |
-|---------+-----------------------------------------------|
-| [[kbd:][TAB]]     | Complete                                      |
-| [[kbd:][TAB]]     | (when completing) Go to next candidate        |
-| [[kbd:][S-TAB]]   | (when completing) Go to previous candidate    |
-| [[kbd:][DEL]]     | (when completing) Reset completion DWIM-style |
-
 ** Searching with multiple keywords
 If the [[doom-module::completion corfu +orderless]] flag is enabled, users can
 perform code completion with multiple search keywords by use of space as the
