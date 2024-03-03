@@ -34,25 +34,6 @@ and highly non-native, but has some extra features and more maturity.
 
 [[doom-contrib-maintainer:][Become a maintainer?]]
 
-** Module flags
-- +icons ::
-  Display icons beside completion suggestions.
-- +tng ::
-  Known as Tab'n'Go to Company users, changes behavior to invoke completion on
-  [[kbd:][TAB]]. When Corfu is active, [[kbd:][TAB]] and [[kbd:][S-TAB]] will navigate the completion
-  candidates. Arrow keys and evil-style movement are still supported.
-- +orderless ::
-  Pull in [[doom-package:orderless]] if necessary and apply multi-component
-  completion (still needed if [[doom-module::completion vertico]] is active).
-- +dabbrev ::
-  Enable and configure [[doom-package:dabbrev]] as a close-to-universal CAPF
-  fallback.
-- +dict ::
-  Enable and configure dictionary completion for text modes and related regions
-  in programming modes.
-- +emoji ::
-  Enable and configure emoji completion via the emoji input method.
-
 ** Packages
 - [[doom-package:corfu]]
 - [[doom-package:cape]]
