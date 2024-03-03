@@ -97,29 +97,6 @@ following additional binds:
 | [[kbd:][S-TAB]]   | (when completing) Go to previous candidate    |
 | [[kbd:][DEL]]     | (when completing) Reset completion DWIM-style |
 
-*** Completion in the minibuffer
-In the minibuffer, sometimes autocompletion can interfere with your goal;
-Imagine you're composing a search pattern incrementally, and you find what you
-want early, with only half the word. You then press [[kbd:RET]]. If completion
-kicked in as you typed, you may lose the match, since it will complete the
-first candidate. On the other hand, if you were paying attention to the
-suggestions and selecting one appropriate, that's desired behavior, and you may
-even desire to modify the prompt further (if you were composing a command
-instead, you may want to extend it after the candidate). To allow better
-control, there are 3 confirm bindings when Corfu appears in the minibuffer:
-
-| Keybind   | Description                                                        |
-|-----------+--------------------------------------------------------------------|
-| [[kbd:RET]]   | Accept the candidate only                                          |
-| [[kbd:C-RET]] | Confirm the current prompt only                                    |
-| [[kbd:S-RET]] | Accept the candidate then immediately confirm the completed prompt |
-
-- Use [[kbd:RET]] when you want to continue composing after completing;
-- Use [[kbd:C-RET]] when you already have the desired string, and completing would
-  break it;
-- Use [[kbd:S-RET]] when you know the composition will be finished after completion
-  (thus avoiding the need to type [[kbd:RET]] twice);
-
 ** Searching with multiple keywords
 If the [[doom-module::completion corfu +orderless]] flag is enabled, users can
 perform code completion with multiple search keywords by use of space as the
