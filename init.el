@@ -151,7 +151,7 @@
        (modeline +wakatime)
        unpackaged
        vc
-       (org +pretty)
+       org
        ai
        gnus
        eww)
