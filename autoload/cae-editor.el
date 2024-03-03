@@ -486,21 +486,22 @@ toggling."
                    (user-error "Not visiting a file"))
                  (list buffer-file-name)))
   (let ((old-file (buffer-file-name)))
-    (condition-case err (call-interactively #'find-file)
+    (condition-case err (call-interactively #'find-sibling-file)
       (user-error
-       (let ((previous-files (gethash old-file cae--sibling-file-history)))
-         (cond ((null previous-files)
-                ;; no previous file recorded
-                nil)
-               ((stringp previous-files)
-                ;; one previous file, use it directly
-                (find-file previous-files))
-               ((listp previous-files)
-                ;; multiple previous files, let the user choose
-                (find-file
-                 (completing-read
-                  "Choose file: " previous-files nil t nil
-                  'cae-find-sibling-file-previous-file-history))))))
+       (when (string= (error-message-string err) "Couldn’t find any sibling files")
+         (let ((previous-files (gethash old-file cae--sibling-file-history)))
+           (cond ((null previous-files)
+                  ;; no previous file recorded
+                  nil)
+                 ((stringp previous-files)
+                  ;; one previous file, use it directly
+                  (find-file previous-files))
+                 ((listp previous-files)
+                  ;; multiple previous files, let the user choose
+                  (find-file
+                   (completing-read
+                    "Choose file: " previous-files nil t nil
+                    'cae-find-sibling-file-previous-file-history)))))))
       (unless (string= old-file (buffer-file-name))
         ;; append new sibling or create list if multiple siblings
         (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
