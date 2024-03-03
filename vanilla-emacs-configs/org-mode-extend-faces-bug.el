@@ -4,6 +4,8 @@
   (when (file-exists-p (expand-file-name "default.el" default-directory))
     (load-file (expand-file-name "default.el" default-directory))))
 
+(straight-use-package 'org)
+
 (require 'org)
 (load-theme 'leuven t)
 
