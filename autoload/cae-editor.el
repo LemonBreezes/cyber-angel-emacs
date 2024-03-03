@@ -473,8 +473,6 @@ mark the string and call `edit-indirect-region' with it."
 
 (defvar cae--sibling-file-history (make-hash-table :test 'equal)
   "A hash-table that keeps track of sibling file history.")
-(defvar cae-find-sibling-file-previous-file-history nil
-  "A history variable for `cae-find-sibling-file'.")
 
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
@@ -500,19 +498,20 @@ toggling."
                   ;; multiple previous files, let the user choose
                   (find-file
                    (completing-read
-                    "Choose file: " previous-files nil t nil
-                    'cae-find-sibling-file-previous-file-history)))))))
-      (unless (string= old-file (buffer-file-name))
-        ;; append new sibling or create list if multiple siblings
-        (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
-          (puthash (buffer-file-name)
-                   (cond ((null current-history)
-                          ;; no entry exists, store the old-file
-                          old-file)
-                         ((stringp current-history)
-                          ;; one entry exists, make it a list
-                          (list old-file current-history))
-                         ((listp current-history)
-                          ;; a list already, append if not already there
-                          (cons old-file (remove old-file current-history))))
-                   cae--sibling-file-history))))))
+                    "Choose file: " previous-files nil t nil))))))))
+    (unless (string= old-file (buffer-file-name))
+      ;; append new sibling or create list if multiple siblings
+      (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
+        (puthash (buffer-file-name)
+                 (cond ((null current-history)
+                        ;; no entry exists, store the old-file
+                        old-file)
+                       ((stringp current-history)
+                        ;; one entry exists, make it a list
+                        (if (string= old-file current-history)
+                            current-history
+                          (list old-file current-history)))
+                       ((listp current-history)
+                        ;; a list already, append if not already there
+                        (cons old-file (remove old-file current-history))))
+                 cae--sibling-file-history)))))
