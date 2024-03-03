@@ -470,9 +470,12 @@ mark the string and call `edit-indirect-region' with it."
     (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
 
-(defvar cae--sibling-file-history (make-hash-table :test #'equal :size 10))
 
-;;;###autoload
+(defvar cae--sibling-file-history (make-hash-table :test 'equal)
+  "A hash-table that keeps track of sibling file history.")
+(defvar cae-find-sibling-file-previous-file-history nil
+  "A history variable for `cae-find-sibling-file'.")
+
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
 
@@ -483,11 +486,32 @@ toggling."
                    (user-error "Not visiting a file"))
                  (list buffer-file-name)))
   (let ((old-file (buffer-file-name)))
-    (condition-case err (call-interactively #'find-sibling-file)
+    (condition-case err (call-interactively #'find-file)
       (user-error
-       (when (thread-last cae--sibling-file-history
-                          (gethash old-file)
-                          (file-exists-p))
-         (find-file (gethash old-file cae--sibling-file-history)))))
-    (unless (equal old-file (buffer-file-name))
-      (puthash (buffer-file-name) old-file cae--sibling-file-history))))
+       (let ((previous-files (gethash old-file cae--sibling-file-history)))
+         (cond ((null previous-files)
+                ;; no previous file recorded
+                nil)
+               ((stringp previous-files)
+                ;; one previous file, use it directly
+                (find-file previous-files))
+               ((listp previous-files)
+                ;; multiple previous files, let the user choose
+                (find-file
+                 (completing-read
+                  "Choose file: " previous-files nil t nil
+                  'cae-find-sibling-file-previous-file-history))))))
+      (unless (equal old-file (buffer-file-name))
+        ;; append new sibling or create list if multiple siblings
+        (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
+          (puthash (buffer-file-name)
+                   (cond ((null current-history)
+                          ;; no entry exists, store the old-file
+                          old-file)
+                         ((stringp current-history)
+                          ;; one entry exists, make it a list
+                          (list old-file current-history))
+                         ((listp current-history)
+                          ;; a list already, append if not already there
+                          (cons old-file (remove old-file current-history))))
+                   cae--sibling-file-history))))))
