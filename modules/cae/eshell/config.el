@@ -72,7 +72,7 @@
            (equal "cd" str)
            (string-prefix-p "cd " str)
            (string-prefix-p " " str)
-           (string-match-p "^[a-zA-Z]$" str))))
+           (string-match-p "^[a-zA-Z]\\'" str))))
 (setq eshell-input-filter #'cae-eshell-input-filter)
 
 ;; Set the prompt
