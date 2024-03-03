@@ -79,7 +79,7 @@
             ;;                              #'cae-compile-file-not-in-unused-module-p)
             (directory-files-recursively
              doom-user-dir
-             "[a-zA-Z0-9]+\\.el$"
+             "[a-zA-Z0-9]+\\.el\\'"
              nil
              (lambda (s)
                (and
