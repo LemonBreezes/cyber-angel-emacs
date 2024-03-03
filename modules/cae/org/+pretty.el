@@ -80,4 +80,3 @@
   (custom-set-faces! '(org-modern-statistics :inherit org-checkbox-statistics-todo))
   (after! spell-fu
     (cl-pushnew 'org-modern-tag (alist-get 'org-mode +spell-excluded-faces-alist))))
-
