@@ -16,12 +16,7 @@
 (setq org-fontify-whole-heading-line t)
 (scratch-buffer)
 (org-mode)
-(insert "#+title:    :completion corfu
-#+subtitle: Complete with cap(f), cape and a flying feather
-#+created:  September 9, 2022
-#+since:    3.0.0 (#7002)
-
-* Description :unfold:
+(insert "* Description :unfold:
 This module provides code completion, powered by [[doom-package:corfu]].
 
 It is recommended to enable either this or [[doom-module::completion company]], in
