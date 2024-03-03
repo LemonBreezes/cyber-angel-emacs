@@ -121,7 +121,10 @@
        (:after corfu
         :map corfu-map
         "C-M-i" '(menu-item "" yas-expand :filter
-                  yas-maybe-expand-abbrev-key-filter)))
+                  yas-maybe-expand-abbrev-key-filter)
+        ;; Remember to remove this after my `evil-collection' PR is merged.
+        :i "<down>" #'corfu-next
+        :i "<up>" #'corfu-previous))
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
