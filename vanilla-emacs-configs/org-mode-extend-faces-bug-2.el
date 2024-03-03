@@ -17,4 +17,4 @@
 (scratch-buffer)
 (org-mode)
 (insert "* Headline 1\n Hello
-* Headline 1\nHello\n** Headline 2\nHello\n*** Headline 3\nHello")
+* Headline 1\nHello")
