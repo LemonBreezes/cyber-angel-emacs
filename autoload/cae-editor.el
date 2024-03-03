@@ -478,7 +478,7 @@ mark the string and call `edit-indirect-region' with it."
   "Find a sibling file of FILE.
 
 This function is a wrapper around `find-file' that also allows for
-going backwards."
+jumping backwards."
   (interactive (progn
                  (unless buffer-file-name
                    (user-error "Not visiting a file"))
