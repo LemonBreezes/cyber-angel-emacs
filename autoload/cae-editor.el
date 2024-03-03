@@ -488,7 +488,7 @@ toggling."
   (let ((old-file (buffer-file-name)))
     (condition-case err (call-interactively #'find-sibling-file)
       (user-error
-       (when (string= (error-message-string err) "Couldn’t find any sibling files")
+       (when (string-match-p "\\`Couldn['’]t find any sibling files\\'" (error-message-string err))
          (let ((previous-files (gethash old-file cae--sibling-file-history)))
            (cond ((null previous-files)
                   ;; no previous file recorded
