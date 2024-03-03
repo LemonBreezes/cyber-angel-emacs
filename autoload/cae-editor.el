@@ -476,7 +476,8 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
 
-This function is a wrapper around `find-file' that also stores"
+This function is a wrapper around `find-file' that also stores the
+current file in `cae--sibling-file-history' and allows for toggling."
   (interactive (progn
                  (unless buffer-file-name
                    (user-error "Not visiting a file"))
