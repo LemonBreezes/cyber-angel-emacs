@@ -171,7 +171,7 @@ Can be negative.")
 
 (after! helm-files
   (setq helm-boring-file-regexp-list
-        (append (list "\\.projects$" "\\.DS_Store$")
+        (append (list "\\.projects\\'" "\\.DS_Store\\'")
                 helm-boring-file-regexp-list)))
 
 
