@@ -76,8 +76,9 @@ that are in currently enabled modules.
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
 |                   | cC-v                 | ~vline-mode~                     |
-|                   | cC-f                 | ~font-lock-mode~                 |
-| lsp               | cTAB                 | ~lsp-ui-imenu~                   |
+|                   | cC-f                 | ~lsp-ui-imenu~                   |
+|                   | fTAB                 | ~find-sibling-file~              |
+| lsp               | cTAB                 | ~font-lock-mode~                 |
 | evil              | bo                   | ~naming-convention-map~          |
 | vc                | iI                   | ~gitignore-templates-insert~     |
 | vc                | tB                   | ~blamer-mode~                    |
