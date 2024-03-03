@@ -323,7 +323,9 @@
        :desc "Font lock mode" "C-f" #'font-lock-mode)
       (:prefix "c"
        ;; I load all of LSP just for this command!
-       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu))
+       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
+      (:prefix "f"
+       :desc "Find sibling file" "TAB" #'find-sibling-file))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
