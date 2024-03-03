@@ -328,7 +328,7 @@
        ;; I load all of LSP just for this command!
        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
       (:prefix "f"
-       :desc "Find sibling file" "TAB" #'find-sibling-file))
+       :desc "Find sibling file" "TAB" #'cae-find-sibling-file))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
