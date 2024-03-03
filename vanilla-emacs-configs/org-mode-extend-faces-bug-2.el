@@ -29,4 +29,4 @@
 (insert "* Headline 1\n Hello
 * Headline 1\nHello\n")
 (org-shifttab nil)
-(org-shifttab 1)
+(org-shifttab '(4))
