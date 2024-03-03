@@ -30,3 +30,4 @@
 * Headline 1\nHello\n")
 (run-at-time 1 0 #'org-cycle-global)
 (run-at-time 2 0 #'org-cycle-global)
+(run-at-time 3 0 #'org-cycle-global)
