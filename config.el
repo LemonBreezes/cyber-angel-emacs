@@ -686,6 +686,9 @@
   (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
+  (setq find-sibling-rules
+        '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org")))
+
   ;; Query buffers for a diff before killing them.
   (defvar cae-diff-window nil
     "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
