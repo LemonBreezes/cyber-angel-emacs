@@ -70,11 +70,11 @@
             ;; Compiling `lisp/lib' creates some errors and these functions
             ;; are not that important to have compiled anyways.
             ;; (directory-files-recursively doom-core-dir
-            ;;                              "[a-za-z0-9]+\\.el$"
+            ;;                              "[a-za-z0-9]+\\.el\\'"
             ;;                              nil
             ;;                              #'ignore)
             ;; (directory-files-recursively doom-modules-dir
-            ;;                              "[a-za-z0-9]+\\.el$"
+            ;;                              "[a-za-z0-9]+\\.el\\'"
             ;;                              nil
             ;;                              #'cae-compile-file-not-in-unused-module-p)
             (directory-files-recursively
