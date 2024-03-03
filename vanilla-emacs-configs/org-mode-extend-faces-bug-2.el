@@ -16,5 +16,5 @@
 (setq org-fontify-whole-heading-line t)
 (scratch-buffer)
 (org-mode)
-(insert "* Headline 1\n Hello** Headline 2\nHello*** Headline 3\nHello
+(insert "* Headline 1\n Hello** Headline 2\nHello
 * Headline 1\nHello\n** Headline 2\nHello\n*** Headline 3\nHello")
