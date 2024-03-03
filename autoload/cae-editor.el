@@ -242,7 +242,7 @@ This is the format used on Reddit for code blocks."
 (defun cae-delete-duplicate-bookmarks ()
   (interactive)
   (let ((bookmarks (cl-remove-if-not (lambda (x)
-                                       (string-match-p "<[0-9]+>$" x))
+                                       (string-match-p "<[0-9]+>\\'" x))
                                      (bookmark-all-names))))
     (dolist (bookmark bookmarks)
       (bookmark-delete bookmark))))
