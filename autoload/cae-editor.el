@@ -469,3 +469,19 @@ mark the string and call `edit-indirect-region' with it."
     ;; Stop AI from freezing Emacs while Emacs is waiting for the AI to respond.
     (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
+
+(defvar cae--sibling-file-history (make-hash-table :test #'equal :size 10))
+
+;;;###autoload
+(defun cae-find-sibling-file (file)
+  "Find a sibling file of FILE."
+  (interactive (progn
+                 (unless buffer-file-name
+                   (user-error "Not visiting a file"))
+                 (list buffer-file-name)))
+  (let ((old-file (buffer-file-name)))
+    (condition-case err (call-interactively #'find-sibling-file)
+      (user-error
+       (find-file (gethash old-file cae--sibling-file-history))))
+    (unless (equal old-file (buffer-file-name))
+      (puthash (buffer-file-name) old-file cae--sibling-file-history))))
