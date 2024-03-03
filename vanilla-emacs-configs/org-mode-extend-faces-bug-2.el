@@ -55,60 +55,59 @@ for completions in languages that have no development intelligence, since it
 supports generic, context insensitive candidates such as file names or recurring
 words. Snippets may also appear in the candidate list if available.
 
-* Configuration
-A few variables may be set to change behavior of this module:
+* TODO Usage
+#+begin_quote
+ 🔨 /This module's usage documentation is incomplete./ [[doom-contrib-module:][Complete it?]]
+#+end_quote
 
-- [[var:completion-at-point-functions]] ::
-  This is not a module/package variable, but a builtin Emacs one. Even so, it's
-  very important to how Corfu works, so we document it here. It contains a list
-  of functions that are called in turn to generate completion candidates. The
-  regular (non-lexical) value should contain few entries and they should
-  generally be context aware, so as to predict what you need. Additional
-  functions can be added as you get into more and more specific contexts. Also,
-  there may be cases where you know beforehand the kind of candidate needed, and
-  want to enable only that one. For this, the variable may be lexically bound to
-  the correct value, or you may call the CAPF interactively if a single function
-  is all you need.
-- [[var:corfu-auto-delay]] ::
-  Number of seconds till completion occurs automatically. Defaults to 0.1.
-- [[var:corfu-auto-prefix]] ::
-  Number of characters till auto-completion starts to happen. Defaults to 2.
-- [[var:corfu-on-exact-match]] ::
-  Configures behavior for exact matches. Its default is nil, and it's
-  recommended to leave it at that. Otherwise, single matches on snippet keys
-  expand immediately.
-- [[var:+corfu-buffer-scanning-size-limit]]  ::
-  Sets the maximum buffer size to be scanned by ~cape-dabbrev~. Defaults to 1
-  MB. Set this if you are having performance problems using the CAPF.
-- [[var:+corfu-want-C-x-bindings]]  ::
-  Enables autocompletion backends to be bound under the ~C-x~ prefix. This
-  overrides some built-in Emacs keybindings.
+** Code completion
+By default, completion gets triggered after typing 2 non-space consecutive
+characters, or by means of the [[kbd:][C-SPC]] keybinding at any moment. While the popup
+is visible, the following relevant keys are available:
 
-** Adding CAPFs to a mode
-To add other CAPFs on a mode-per-mode basis, put either of the following in your
-~config.el~:
+** Searching with multiple keywords
+If the [[doom-module::completion corfu +orderless]] flag is enabled, users can
+perform code completion with multiple search keywords by use of space as the
+separator. More information can be found [[https://github.com/oantolin/orderless#company][here]]. Pressing [[kdb:][C-SPC]] again while
+completing inserts a space as separator. This allows searching with
+space-separated terms; each piece will match individually and in any order, with
+smart casing. Pressing just [[kbd:][SPC]] acts as normal and quits completion, so that
+when typing sentences it doesn't try to complete the whole sentence instead of
+just the word. Pressing [[kdb:][C-SPC]] with point after a separator escapes it with a
+backslash, including the space in the search term, and pressing it with an
+already escaped separator before point deletes it. Thus, you can cycle back if
+you accidentaly press more than needed.
 
-#+begin_src emacs-lisp
-(add-hook! some-mode (add-hook 'completion-at-point-functions #'some-capf depth t))
-;; OR, but note the different call signature
-(add-hook 'some-mode-hook (lambda () (add-hook 'completion-at-point-functions #'some-capf depth t)))
-#+end_src
+Additionally, for users of evil and regular corfu style, [[kdb:][C-SPC]] is smart
+regarding your state. In normal-like states, enter insert then start corfu; in
+visual-like states, perform [[help:evil-change][evil-change]] (which leaves you in insert state) then
+start corfu; in insert-like states, start corfu immediatelly.
 
-~DEPTH~ above is an integer between -100, 100, and defaults to 0 of omitted.  Also
-see ~add-hook!~'s documentation for additional ways to call it. ~add-hook~ only
-accepts the quoted arguments form above.
+** Exporting to the minibuffer
+The entries shown in the completion popup can be exported to a ~completing-read~
+minibuffer, giving access to all the manipulations that suite allows. Using
+Vertico for instance, one could use this to export with [[doom-package:embark]] via
+[[kbd:][C-c C-l]] and get a buffer with all candidates.
 
-** Adding CAPFs to a key
-To add other CAPFs to keys, adapt the snippet below into your ~config.el~:
-#+begin_src emacs-lisp
-;; For binding inside `corfu-mode-map'. Line 1 ensures the binding only exists
-;; after some-mode-hook runs. Line 2 is needed only if the binding can't leak
-;; into other Corfu buffers. When neither of the above make sense, the `map!'
-;; call is enough.
-(add-hook! some-mode ; Only needed if the binding is mode-specific
-           (make-local-variable 'corfu-mode-map)
-           (map! :map corfu-mode-map
-                 :prefix \"C-x\" ; C-x is usually used as prefix, but it's not required
-                 \"e\" #'cape-emoji)) ; Evil users probably want :i to avoid this in other states
-#+end_src
+** Manually call generic CAPFs
+Completion at point functions have the property that, when called interactively
+via their symbol, they work as a call to ~completion-at-point~ where
+[[var:completion-at-point-functions]] is bound to that CAPF alone. This allows to
+assign generic functions to a binding and call as needed, leaving the default
+value used for most completion tasks much leaner (thus, faster and easier to
+look through). This module provides some such bindings for Evil users (see the
+table below), and you're free map your own of course. Emacs users have to map it
+themselves for now, due to the author's lack of knowledge on ergonomic
+equivalents to the Evil ones. If you have suggestions, though, we'd be happy to
+know!
+
+| Keybind | Description                     |
+|---------+---------------------------------|
+| [[kbd:][C-x]] [[kbd:][C-l]] | (insert-state) ~cape-line~      |
+| [[kbd:][C-x]] [[kbd:][C-k]] | (insert-state) ~cape-keyword~   |
+| [[kbd:][C-x]] [[kbd:][C-f]] | (insert-state) ~cape-file~      |
+| [[kbd:][C-x]] [[kbd:][s]]   | (insert-state) ~cape-dict~      |
+| [[kbd:][C-x]] [[kbd:][C-s]] | (insert-state) ~yasnippet-capf~ |
+| [[kbd:][C-x]] [[kbd:][C-n]] | (insert-state) ~cape-dabbrev~   |
+| [[kbd:][C-x]] [[kbd:][C-p]] | (insert-state) ~cape-history~   |
 ")
