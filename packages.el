@@ -21,6 +21,17 @@
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 (package! yasnippet-capf :recipe
   (:host github :repo "LemonBreezes/yasnippet-capf"))
+(package! org
+  :recipe
+  (:type 'git
+   :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
+   :local-repo "org"
+   ;; `org-version' depends on repository tags.
+   :depth 'full
+   :pre-build '(straight-recipes-org-elpa--build)
+   :build '(:not autoloads)
+   :files '(:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*")))
+  )
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
