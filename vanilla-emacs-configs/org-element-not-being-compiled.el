@@ -1,5 +1,7 @@
 ;;; vanilla-emacs-configs/org-element-not-being-compiled.el -*- lexical-binding: t; -*-
 
+(load-theme 'wheatgrass t)
+
 ;; Bootstrap straight
 (defvar bootstrap-version)
 
@@ -13,8 +15,6 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-
-(load-theme 'wheatgrass t)
 
 (straight-use-package 'org)
 (straight-use-package 'vertico)
