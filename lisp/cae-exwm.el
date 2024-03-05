@@ -32,7 +32,7 @@
 EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
-_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _C-e_: Vanilla Doom Emacs
+_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _D_: Vanilla Doom Emacs
 _RET_: Kitty
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
@@ -44,7 +44,7 @@ _RET_: Kitty
       ("s" ,(cae-exwm-app-runner "signal-desktop" "Signal"))
       ("e" #'+exwm-open-nested-emacs)
       ("E" #'+exwm-open-nested-vanilla-emacs)
-      ("C-e" #'+exwm-open-nested-vanilla-doom-emacs)
+      ("D" #'+exwm-open-nested-vanilla-doom-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))))
 
   ;; Replace the individual keybindings with a hydra
