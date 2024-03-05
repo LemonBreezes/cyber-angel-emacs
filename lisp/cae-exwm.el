@@ -23,6 +23,7 @@
       "s-s" (cae-exwm-app-runner "signal-desktop" "Signal")
       "s-e" #'+exwm-open-nested-emacs
       "s-E" #'+exwm-open-nested-vanilla-emacs
+      "s-D" #'+exwm-open-nested-vanilla-doom-emacs
       "s-<return>" (cae-exwm-app-runner "kitty" "Kitty"))
 
 (when (modulep! :ui hydra)
