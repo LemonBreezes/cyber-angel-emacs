@@ -10,7 +10,7 @@
 (require 'org-faces)
 (load-theme 'leuven t)
 
-(setq org-fontify-whole-heading-line nil)
+(setq org-fontify-whole-heading-line t)
 (setq org-startup-folded t)
 
 (defvar org-extend-faces-bug-4-file "/tmp/org-extend-faces-bug-4.org"
