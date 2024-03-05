@@ -190,8 +190,10 @@
   (after! ffap
     ;; Do not count angle brackets as part of file names because then they get
     ;; mixed up with the tags.
-    (setf (alist-get 'nxml-mode ffap-string-at-point-mode-alist)
-          (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))
+    (let ((modes '(nxml-mode xml-mode)))
+      (dolist (mode modes)
+        (setf (alist-get mode ffap-string-at-point-mode-alist)
+              (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" )))))
 
   ;; Do not spam me with warnings while using `org-ai'.
   (unless init-file-debug
