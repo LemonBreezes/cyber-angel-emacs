@@ -38,6 +38,7 @@
                      (format "(defun org-git-version (&rest _) \"9.5-??-%s\")\n"
                              (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
                      "(provide 'org-version)\n"))))
+(package! org-contrib)
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
