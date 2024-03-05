@@ -26,18 +26,13 @@
   :recipe (:host nil
            :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
            :files (:defaults "etc")
-           ;; HACK Org requires a post-install compilation step to generate a
-           ;;      org-version.el with org-release and org-git-version
-           ;;      functions, using a 'git describe ...' call.  This won't work
-           ;;      in a sparse clone and I value smaller network burdens on
-           ;;      users over non-essential variables so we fake it:
            :build t
            :depth 1
            :pre-build
            (with-temp-file "org-version.el"
-             (insert "(defun org-release () \"9.5\")\n"
-                     (format "(defun org-git-version (&rest _) \"9.5-??-%s\")\n"
-                             (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
+             (insert (format "(defun org-release () %S)\n" version)
+                     (format "(defun org-git-version (&rest _) \"%s-??-%s\")\n"
+                             version (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
                      "(provide 'org-version)\n"))))
 (package! org-contrib)
 
