@@ -26,6 +26,7 @@
   :recipe (:host nil
            :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
            :pre-build '(straight-recipes-org-elpa--build)
+           :depth 'full
            :build '(:not autoloads)
            :files '(:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
 (package! org-contrib)
