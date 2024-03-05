@@ -5,8 +5,7 @@
 (add-to-list 'load-path "/home/st/.config/emacs/.local/straight/repos/org/")
 (add-to-list 'load-path "/home/st/.config/emacs/.local/straight/repos/org/lisp")
 (setq org-fontify-whole-heading-line t)
-(require 'org-loaddefs)
-(require 'org)
+(require 'org nil t)
 (load-theme 'leuven t)
 
 (with-current-buffer (get-buffer-create "*demo*")
