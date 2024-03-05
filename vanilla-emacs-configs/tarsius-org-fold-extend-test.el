@@ -24,6 +24,10 @@
   (set-face-attribute face nil :extend t))
 
 (setq org-fontify-whole-heading-line t)
-(scratch-buffer)
-(org-mode)
-(insert "* foo\n** bar\ntest\n** baz\ntest\n\n")
+
+(with-current-buffer (get-buffer-create "*demo*")
+  (org-mode)
+  (erase-buffer)
+  (save-excursion
+    (insert "* foo\n** bar\ntest\n** baz\ntest\n\n"))
+  (pop-to-buffer (current-buffer)))
