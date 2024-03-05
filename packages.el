@@ -31,6 +31,7 @@
            ;;      in a sparse clone and I value smaller network burdens on
            ;;      users over non-essential variables so we fake it:
            :build t
+           :depth 1
            :pre-build
            (with-temp-file "org-version.el"
              (insert "(defun org-release () \"9.5\")\n"
