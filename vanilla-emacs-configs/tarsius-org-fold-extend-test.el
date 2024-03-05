@@ -1,8 +1,8 @@
 ;;; vanilla-emacs-configs/tarsius-org-fold-extend-test.el -*- lexical-binding: t; -*-
 
-(setq org-fontify-whole-heading-line t)
 (use-package org
   :load-path "/home/st/.config/emacs/.local/straight/build-30.0.50/org/lisp/")
+(setq org-fontify-whole-heading-line t)
 (load-theme 'leuven t)
 
 (with-current-buffer (get-buffer-create "*demo*")
