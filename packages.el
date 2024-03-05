@@ -23,14 +23,14 @@
   (:host github :repo "LemonBreezes/yasnippet-capf"))
 (package! org
   :recipe
-  (:type 'git
+  (:type git
    :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
    :local-repo "org"
    ;; `org-version' depends on repository tags.
-   :depth 'full
+   :depth full
    :pre-build '(straight-recipes-org-elpa--build)
-   :build '(:not autoloads)
-   :files '(:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*")))
+   :build (:not autoloads)
+   :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*")))
   )
 
 (unless (modulep! :config default +smartparens)
