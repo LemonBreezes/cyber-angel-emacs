@@ -19,7 +19,7 @@
   (org-mode)
   (erase-buffer)
   (save-excursion
-    insert "#+title: (Infty, 2) Reading Group
+    (insert "#+title: (Infty, 2) Reading Group
 #+ROAM_TAGS: \"Quasicategories\"
 
 * [2020-09-11 Fri] Links passed around in today's meeting
@@ -67,5 +67,5 @@
 :CREATED_TIME: [2020-09-18 Fri 14:30]
 :END:
 
-")
+"))
   (pop-to-buffer (current-buffer)))
