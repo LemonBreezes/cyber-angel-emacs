@@ -1326,11 +1326,7 @@
                       (mu4e-trash-folder . "/Fastmail/Trash")
                       (mu4e-refile-folder . "/Fastmail/Archive")
                       (mu4e-drafts-folder . "/Fastmail/Drafts")
-                      (mu4e-sent-folder . "/Fastmail/Sent"))))))
-
-  (when (modulep! :email mu4e +org)
-    (advice-add 'mu4e~compose-handler :after
-                #'cae-org-msg-goto-body-when-replying)))
+                      (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
 
 ;;; C/C++
