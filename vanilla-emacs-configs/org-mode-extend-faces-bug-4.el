@@ -16,16 +16,11 @@
 (setq org-fontify-whole-heading-line t)
 
 
-(defvar org-extend-faces-bug-4-file "/tmp/org-extend-faces-bug-4"
+(defvar org-extend-faces-bug-4-file "/tmp/org-extend-faces-bug-4.org"
   "The file to be used for the bug demo.")
 
 (with-temp-buffer
   (insert "* foo\n** bar\ntest\n** baz\ntest")
   (write-file org-extend-faces-bug-4-file))
 
-(with-current-buffer (get-buffer-create "*demo*")
-  (org-mode)
-  (erase-buffer)
-  (save-excursion
-    (insert "* foo\n** bar\ntest\n** baz\ntest"))
-  (pop-to-buffer (current-buffer)))
+(find-file org-extend-faces-bug-4-file)
