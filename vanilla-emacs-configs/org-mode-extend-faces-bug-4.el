@@ -14,7 +14,7 @@
   (set-face-attribute face nil :extend t))
 
 (setq org-fontify-whole-heading-line t)
-(setq org-startup-folded nil)
+(setq org-startup-folded t)
 
 (defvar org-extend-faces-bug-4-file "/tmp/org-extend-faces-bug-4.org"
   "The file to be used for the bug demo.")
