@@ -14,6 +14,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(load-theme 'wheatgrass t)
+
 (straight-use-package 'org)
 (straight-use-package 'vertico)
 
