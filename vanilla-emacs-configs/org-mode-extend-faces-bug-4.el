@@ -19,5 +19,5 @@
   (org-mode)
   (erase-buffer)
   (save-excursion
-    (insert "* foo\n** bar\ntest\n** baz\ntest\n*** test"))
+    (insert "* foo\n** bar\ntest\n*** test\n** baz\ntest\n\n"))
   (pop-to-buffer (current-buffer)))
