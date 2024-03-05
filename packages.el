@@ -25,15 +25,9 @@
 (package! org
   :recipe (:host nil
            :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
-           :files (:defaults "etc")
-           :build t
-           :depth 1
-           :pre-build
-           (with-temp-file "org-version.el"
-             (insert (format "(defun org-release () %S)\n" version)
-                     (format "(defun org-git-version (&rest _) \"%s-??-%s\")\n"
-                             version (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
-                     "(provide 'org-version)\n"))))
+           :pre-build '(straight-recipes-org-elpa--build)
+           :build '(:not autoloads)
+           :files '(:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
 (package! org-contrib)
 
 (unless (modulep! :config default +smartparens)
