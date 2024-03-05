@@ -4,8 +4,8 @@
 (setq load-path (cl-remove-if (lambda (x) (string-match-p "org$" x)) load-path))
 (add-to-list 'load-path "/home/st/.config/emacs/.local/straight/repos/org/")
 (add-to-list 'load-path "/home/st/.config/emacs/.local/straight/repos/org/lisp")
-(require 'org-loaddefs)
 (setq org-fontify-whole-heading-line t)
+(require 'org-loaddefs)
 (require 'org)
 (load-theme 'leuven t)
 
