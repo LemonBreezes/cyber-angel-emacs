@@ -32,8 +32,8 @@
 EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
-_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs
-_C-e_: Vanilla Doom Emacs _RET_: Kitty
+_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs _C-e_: Vanilla Doom Emacs
+_RET_: Kitty
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
       ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
