@@ -26,10 +26,10 @@
   :recipe (:host nil
            :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
            :local-repo "org"
-           :depth 'full
+           :depth full
            :pre-build '(straight-recipes-org-elpa--build)
-           :build '(:not autoloads)
-           :files '(:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
+           :build (:not autoloads)
+           :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
 (package! org-contrib)
 
 (unless (modulep! :config default +smartparens)
