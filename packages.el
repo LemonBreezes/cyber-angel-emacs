@@ -21,6 +21,22 @@
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 (package! yasnippet-capf :recipe
   (:host github :repo "LemonBreezes/yasnippet-capf"))
+(package! org
+  :recipe (:host nil
+           :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
+           :files (:defaults "etc")
+           ;; HACK Org requires a post-install compilation step to generate a
+           ;;      org-version.el with org-release and org-git-version
+           ;;      functions, using a 'git describe ...' call.  This won't work
+           ;;      in a sparse clone and I value smaller network burdens on
+           ;;      users over non-essential variables so we fake it:
+           :build t
+           :pre-build
+           (with-temp-file "org-version.el"
+             (insert "(defun org-release () \"9.5\")\n"
+                     (format "(defun org-git-version (&rest _) \"9.5-??-%s\")\n"
+                             (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
+                     "(provide 'org-version)\n"))))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
