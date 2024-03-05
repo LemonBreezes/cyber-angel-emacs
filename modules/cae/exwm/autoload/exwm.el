@@ -9,6 +9,9 @@
 (defvar +exwm-vanilla-emacs-config-dir
   (concat doom-user-dir "vanilla-emacs-configs/"))
 (defvar +exwm-vanilla-emacs--config-history nil)
+(defvar +exwm-vanilla-doom-emacs-config-dir
+  (concat doom-user-dir "vanilla-doom-emacs-configs/"))
+(defvar +exwm-vanilla-doom-emacs--config-history nil)
 
 ;;;###autoload
 (defun +exwm-refocus-application (&rest _)
@@ -69,3 +72,8 @@ non-nil, debug init as well."
                            nil t nil '+exwm-vanilla-emacs--config-history)
           +exwm-vanilla-emacs-config-dir)
          (when arg (list "--debug-init"))))
+
+;;;###autoload
+(defun +exwm-open-nested-vanilla-doom-emacs (arg)
+  "Open a separate GUI instance of Doom Emacs. If ARG is non-nil, debug init"
+  (interactive "P"))
