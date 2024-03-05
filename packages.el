@@ -21,6 +21,7 @@
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 (package! yasnippet-capf :recipe
   (:host github :repo "LemonBreezes/yasnippet-capf"))
+;; I use the latest version of Org.
 (package! org
   :recipe (:host nil
            :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
