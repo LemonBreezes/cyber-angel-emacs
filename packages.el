@@ -21,7 +21,6 @@
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 (package! yasnippet-capf :recipe
   (:host github :repo "LemonBreezes/yasnippet-capf"))
-(package! org :recipe (:host org-elpa))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
