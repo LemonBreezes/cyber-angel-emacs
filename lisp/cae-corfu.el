@@ -116,3 +116,7 @@ This variable needs to be set at the top-level before any `after!' blocks.")
   (defun +corfu-add-cape-emoji-text-h ()
     (add-hook 'completion-at-point-functions
               (cape-capf-prefix-length #'cape-emoji 1) 10 t)))
+
+;; Enable Fish autocompletion in `read-shell-command'.
+(autoload 'turn-on-fish-completion-mode "fish-completion" nil t)
+(advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
