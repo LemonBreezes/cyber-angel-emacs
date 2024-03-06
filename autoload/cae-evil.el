@@ -11,8 +11,11 @@
 (defun cae-current-state-keymap ()
   (let ((map (copy-keymap
               (make-composed-keymap
-               (list (evil-get-auxiliary-keymap (current-local-map)
-                                                evil-state t t)
+               (list (cond ((bound-and-true-p git-timemachine-mode)
+                            (evil-get-minor-mode-keymap 'normal 'git-timemachine-mode))
+                           (t (evil-get-auxiliary-keymap (current-local-map)
+                                                         evil-state t t)))
+
                      (evil-get-auxiliary-keymap
                       (make-composed-keymap
                        (thread-last (current-minor-mode-maps)
