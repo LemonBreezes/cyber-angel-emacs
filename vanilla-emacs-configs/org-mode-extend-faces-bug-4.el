@@ -7,8 +7,11 @@
 (straight-use-package 'org)
 
 (require 'org)
-(require 'org-faces)
 (load-theme 'leuven t)
+
+(dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
+                org-level-6 org-level-7 org-level-8))
+  (set-face-attribute face nil :extend t))
 
 (setq org-fontify-whole-heading-line t)
 (setq org-startup-folded t)
@@ -21,10 +24,3 @@
   (write-file org-extend-faces-bug-4-file))
 
 (find-file org-extend-faces-bug-4-file)
-
-(dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
-                org-level-6 org-level-7 org-level-8))
-  (set-face-attribute face nil :extend nil))
-(dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
-                org-level-6 org-level-7 org-level-8))
-  (set-face-attribute face nil :underline t))
