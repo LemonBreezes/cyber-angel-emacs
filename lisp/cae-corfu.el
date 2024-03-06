@@ -1,6 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
 (setq +corfu-want-C-x-bindings nil)
+(setq +corfu-want-minibuffer-completion 'aggressive)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
@@ -88,4 +89,30 @@ This variable needs to be set at the top-level before any `after!' blocks.")
     ;; I do not need the module's command for inserting the wildcard.
     (map! :map corfu-map [remap completion-at-point] nil)))
 
-(setq +corfu-want-minibuffer-completion 'aggressive)
+;; Autocomplete words from the dictionary. Useful for typing country names!
+(add-hook! (prog-mode conf-mode)
+  (defun +corfu-add-cape-dict-h ()
+    (add-hook 'completion-at-point-functions
+              (cape-capf-inside-faces
+               ;; Only call inside comments and docstrings.
+               #'cape-dict 'tree-sitter-hl-face:doc 'font-lock-doc-face
+               'font-lock-comment-face 'tree-sitter-hl-face:comment)
+              40 t)))
+(add-hook! text-mode
+  (defun +corfu-add-cape-dict-text-h ()
+    (add-hook 'completion-at-point-functions #'cape-dict 40 t)))
+
+;; Autocomplete emoji.
+(add-hook! (prog-mode conf-mode)
+  (defun +corfu-add-cape-emoji-h ()
+    (add-hook 'completion-at-point-functions
+              (cape-capf-inside-faces
+               (cape-capf-prefix-length #'cape-emoji 1)
+               ;; Only call inside comments and docstrings.
+               'tree-sitter-hl-face:doc 'font-lock-doc-face
+               'font-lock-comment-face 'tree-sitter-hl-face:comment)
+              10 t)))
+(add-hook! text-mode
+  (defun +corfu-add-cape-emoji-text-h ()
+    (add-hook 'completion-at-point-functions
+              (cape-capf-prefix-length #'cape-emoji 1) 10 t)))
