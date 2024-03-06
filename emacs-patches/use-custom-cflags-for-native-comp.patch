@@ -7,7 +7,7 @@ index bb4552459dd..745612838cc 100644
    :version "28.1")
  
 -(defcustom native-comp-compiler-options nil
-+(defcustom native-comp-compiler-options '("-march=native" "-Ofast" "-g0" "-fno-finite-math-only")
++(defcustom native-comp-compiler-options '("-march=native" "-O3")
    "Command line options passed verbatim to GCC compiler.
  Note that not all options are meaningful and some options might even
  break your Emacs.  Use at your own risk.
