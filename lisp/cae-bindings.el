@@ -101,7 +101,6 @@
        "M-/" #'cape-dabbrev)
       ;; Resolve the age-old conflict between using TAB for completion,
       ;; indentation, and expanding snippets.
-      :gi "<tab>" nil
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
@@ -185,6 +184,7 @@
 
 (after! cc-mode
   (map! :map c-mode-base-map
+        "<tab>" #'indent-for-tab-command
         "TAB" #'indent-for-tab-command))
 
 
@@ -342,7 +342,7 @@
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
 
-;; I don't use the `org-priority-down6' and `org-priority-up6' commands.
+;; I don't use the `org-priority-down' and `org-priority-up' commands.
 (defadvice! cae-org-init-keybindings-a ()
   :after #'+org-init-keybinds
   (map! :map org-mode-map
