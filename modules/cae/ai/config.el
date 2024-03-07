@@ -113,9 +113,7 @@
   (remove-hook 'copilot-enable-predicates 'evil-insert-state-p)
   (add-hook! 'copilot-enable-predicates
     (defun cae-evil-insert-state-p ()
-      (and (bound-and-true-p evil-mode)
-           (or (eq evil-state 'insert)
-               (minibufferp nil t)))))
+      (memq (bound-and-true-p evil-state) '(insert emacs nil))))
   (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)
   (after! copilot-balancer
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
