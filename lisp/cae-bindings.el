@@ -182,9 +182,9 @@
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
 (after! cc-mode
-  (if (cae-display-graphic-p)
-      (map! :map c-mode-base-map "<tab>" #'indent-for-tab-command)
-    (map! :map c-mode-base-map "TAB" #'indent-for-tab-command)))
+      (map! :map c-mode-base-map
+            "<tab>" #'indent-for-tab-command
+            "TAB" #'indent-for-tab-command))
 
 
 ;;; Fixup leader key
