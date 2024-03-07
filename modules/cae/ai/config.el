@@ -78,7 +78,7 @@
 
 (use-package! copilot
   :defer t :init
-
+  (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
   (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
