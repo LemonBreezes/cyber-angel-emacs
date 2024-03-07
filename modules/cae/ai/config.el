@@ -78,7 +78,7 @@
 
 (use-package! copilot
   :defer t :init
-  (add-hook 'text-mode-hook   #'copilot-mode)
+
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
   (add-hook 'minibuffer-setup-hook #'copilot-mode)
@@ -119,4 +119,14 @@
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
     (after! midnight
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                   (buffer-name copilot-balancer-debug-buffer)))))
+                   (buffer-name copilot-balancer-debug-buffer))))
+  ;; Enable Copilot in the minibuffer.
+  (advice-add #'copilot--buffer-changed :around
+              (defun cae-always-in-minibuffer-a (oldfun &rest args)
+                (if (minibufferp nil t) t (apply oldfun args))))
+  (advice-add #'minibuffer-exit :before #'copilot--on-doc-close)
+  ;;(dolist (buf copilot--opened-buffers)
+  ;;  (when (minibufferp buf)
+  ;;    (with-current-buffer buf
+  ;;      (copilot--on-doc-close))))
+  )
