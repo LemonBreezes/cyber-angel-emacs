@@ -185,7 +185,6 @@
 
 (after! cc-mode
   (map! :map c-mode-base-map
-        "<tab>" #'indent-for-tab-command
         "TAB" #'indent-for-tab-command))
 
 
