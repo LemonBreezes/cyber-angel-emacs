@@ -99,29 +99,6 @@
       "C-M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "M-/" #'cape-dabbrev)
-      ;; Resolve the age-old conflict between using TAB for completion,
-      ;; indentation, and expanding snippets.
-      [C-i] #'doom/dumb-indent
-      "C-S-i" #'doom/dumb-dedent
-      (:when (and (modulep! :editor snippets)
-                  (modulep! :completion corfu +tng))
-       (:after yasnippet
-        ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
-        ;; completion. I also don't insert the separator with `M-<tab>'.
-        :map yas-minor-mode-map
-        "M-<tab>" yas-maybe-expand
-        "TAB" nil
-        :map yas-keymap
-        "TAB" nil
-        "S-<tab>" nil
-        "<backtab>" nil
-        ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
-        "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
-        "C-M-S-i" (yas-filtered-definition 'yas-prev-field))
-       (:after corfu
-        :map corfu-map
-        "C-M-i" '(menu-item "" yas-expand :filter
-                  yas-maybe-expand-abbrev-key-filter)))
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
@@ -145,6 +122,30 @@
       (:after cc-mode
        :map c-mode-base-map
        "TAB" #'indent-for-tab-command))
+
+;; Resolve the age-old conflict between using TAB for completion,
+;; indentation, and expanding snippets.
+(map! [C-i] #'doom/dumb-indent
+      "C-S-i" #'doom/dumb-dedent
+      (:when (and (modulep! :editor snippets)
+                  (modulep! :completion corfu +tng))
+       (:after yasnippet
+        ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
+        ;; completion. I also don't insert the separator with `M-<tab>'.
+        :map yas-minor-mode-map
+        "M-<tab>" yas-maybe-expand
+        "TAB" nil
+        :map yas-keymap
+
+        "S-<tab>" nil
+        "<backtab>" nil
+        ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
+        "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
+        "C-M-S-i" (yas-filtered-definition 'yas-prev-field))
+       (:after corfu
+        :map corfu-map
+        "C-M-i" '(menu-item "" yas-expand :filter
+                  yas-maybe-expand-abbrev-key-filter))))
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.
@@ -178,11 +179,11 @@
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
-  :after #'tab-bar--define-keys
+
   (unless (global-key-binding [(control f4)])
     (global-set-key [(control f4)] #'tab-close)))
 (defadvice! cae-tab-bar-undefine-keys-a ()
-  :after #'tab-bar--undefine-keys
+
   (when (eq (global-key-binding [(control f4)]) #'tab-close)
     (global-unset-key [(control f4)])))
 
