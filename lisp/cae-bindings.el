@@ -139,7 +139,9 @@
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Fix the TAB key
-(map! :i "<tab>" nil                    ; This seems like a weird bug.
+(map! :i "<tab>" nil                    ; It seems like a weird bug in Doom that
+                                        ; this was bound to
+                                        ; `completion-at-point'.
       (:after cc-mode
        :map c-mode-base-map
        "TAB" #'indent-for-tab-command))
