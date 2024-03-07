@@ -175,9 +175,15 @@
          :i "C-]" #'cae-cape-lsp
          (:after cape
           :i "C-r" #'cae-cape-keyword-or-dict)
-         :i "s" #'cape-elisp-symbol
-         :i "C-n" nil
-         :i "C-p" nil))
+         :i "s" #'cape-elisp-symbol))
+  (define-key! :keymaps +default-minibuffer-maps
+    "C-x C-c" #'copilot-complete
+    "C-x C-f" #'cape-file
+    "C-x C-l" #'cae-cape-history-or-line
+    "C-x C-s" #'yasnippet-capf
+    "C-x C-]" #'cae-cape-lsp
+    "C-x C-r" #'cae-cape-keyword-or-dict
+    "C-x s" #'cape-elisp-symbol)
 
   (after! corfu
     ;; I just use `<prior>' and `<next>'. These keybindings conflict with
