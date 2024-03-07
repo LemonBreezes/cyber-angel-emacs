@@ -163,12 +163,10 @@
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
-         (:after cape
-          :i "C-l" #'cae-cape-history-or-line
-          :i "C-s" #'yasnippet-capf)
+         :i "C-l" #'cae-cape-history-or-line
+         :i "C-s" #'yasnippet-capf
          :i "C-]" #'cae-cape-lsp
-         (:after cape
-          :i "C-r" #'cae-cape-keyword-or-dict)
+         :i "C-r" #'cae-cape-keyword-or-dict
          :i "s" #'cape-elisp-symbol))
   (define-key! :keymaps +default-minibuffer-maps
     "C-x C-c" #'copilot-complete
