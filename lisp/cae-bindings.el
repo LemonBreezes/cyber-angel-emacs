@@ -139,7 +139,7 @@
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Fix the TAB key
-(map! :i "<tab>" nil
+(map! :i "<tab>" nil                    ; This seems like a weird bug.
       (:after cc-mode
        :map c-mode-base-map
        "TAB" #'indent-for-tab-command))
