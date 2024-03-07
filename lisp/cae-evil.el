@@ -159,12 +159,6 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
-(after! cape
-  (defalias 'cae-cape-history-or-line
-    (cape-capf-interactive (cape-capf-super #'cape-history #'cape-line)))
-  (defalias 'cae-cape-keyword-or-dict
-    (cape-capf-interactive (cape-capf-super #'cape-keyword #'cape-dict))))
-
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
          :i "C-c" #'copilot-complete
