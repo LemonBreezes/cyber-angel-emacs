@@ -101,7 +101,6 @@
        "M-/" #'cape-dabbrev)
       ;; Resolve the age-old conflict between using TAB for completion,
       ;; indentation, and expanding snippets.
-      :i "<tab>" nil
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
@@ -138,6 +137,12 @@
         "<next>" #'vertico-scroll-up
         "C-z" #'cae-embark-act-with-completing-read)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
+
+;; Fix the TAB key
+(map! :i "<tab>" nil
+      (:after cc-mode
+       :map c-mode-base-map
+       "TAB" #'indent-for-tab-command))
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.
