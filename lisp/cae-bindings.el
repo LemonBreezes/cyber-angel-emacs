@@ -103,9 +103,6 @@
       ;; indentation, and expanding snippets.
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
-      ;; For some reason this key was getting overriden by
-      ;; `completion-at-point'.
-      :gi "<tab>" #'indent-for-tab-command
       (:when (and (modulep! :editor snippets)
                   (modulep! :completion corfu +tng))
        (:after yasnippet
