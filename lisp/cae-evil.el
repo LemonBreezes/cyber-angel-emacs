@@ -169,7 +169,7 @@
          :i "C-r" #'cae-cape-keyword-or-dict
          :i "s" #'cape-elisp-symbol))
   (define-key! :keymaps +default-minibuffer-maps
-    ;;"C-x C-c" #'copilot-complete
+    "C-x C-c" #'copilot-complete
     "C-x C-f" #'cape-file
     "C-x C-l" #'cae-cape-history-or-line
     "C-x C-s" #'yasnippet-capf
