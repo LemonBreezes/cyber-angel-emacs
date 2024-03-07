@@ -101,6 +101,7 @@
        "M-/" #'cape-dabbrev)
       ;; Resolve the age-old conflict between using TAB for completion,
       ;; indentation, and expanding snippets.
+      :gi "<tab>" nil
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
