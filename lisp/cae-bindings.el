@@ -1,4 +1,4 @@
-  ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
+;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
 ;; This is so that I don't get an error if my `cae-doom-emacs.patch' is not
 ;; applied.
