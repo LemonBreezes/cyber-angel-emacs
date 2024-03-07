@@ -64,3 +64,15 @@
   (interactive)
   (setq this-command #'corfu-insert-separator)
   (call-interactively #'corfu-insert-separator))
+
+;;;###autoload
+(defun cae-cape-history-or-line ()
+  (interactive)
+  (let ((capf (cape-capf-super #'cape-history #'cape-line)))
+    (cape-interactive capf)))
+
+;;;###autoload
+(defun cae-cape-keyword-or-dict ()
+  (interactive)
+  (let ((capf (cape-capf-super #'cape-keyword #'cape-dict)))
+    (cape-interactive capf)))
