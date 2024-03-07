@@ -80,11 +80,11 @@
       [remap kill-current-buffer] #'cae-kill-current-buffer
       "C-x 4 I" #'ibuffer-other-window
       "C-x 4 -" #'dired-jump-other-window
-      [remap ibuffer] #'ibuffer-jump ;This way
+      [remap ibuffer] #'ibuffer-jump    ;This way
                                         ;I can do `C-x C-b =' to quickly diff a
                                         ;buffer with its file.
-      "C-x _" #'shrink-window ;Dual to `C-x ^'.
-      "C-x O" #'other-window-previous ;Dual to `C-x o'.
+      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
+      "C-x O" #'other-window-previous   ;Dual to `C-x o'.
       "C-x !" #'doom/window-enlargen
       "C-x x c" #'cae-edit-indirect-dwim
       "C-x M-o" #'ace-swap-window
@@ -101,6 +101,7 @@
        "M-/" #'cape-dabbrev)
       ;; Resolve the age-old conflict between using TAB for completion,
       ;; indentation, and expanding snippets.
+      :i "<tab>" nil
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
