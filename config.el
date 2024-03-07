@@ -193,7 +193,7 @@
     (let ((modes '(nxml-mode xml-mode)))
       (dolist (mode modes)
         (setf (alist-get mode ffap-string-at-point-mode-alist)
-              (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" )))))
+              (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))))
 
   ;; Do not spam me with warnings while using `org-ai'.
   (unless init-file-debug
