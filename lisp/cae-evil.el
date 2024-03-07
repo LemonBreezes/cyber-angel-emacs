@@ -230,8 +230,8 @@
         "8" #'harpoon-go-to-8
         "9" #'harpoon-go-to-9)
   (after! which-key
-    (pushnew! which-key-replacement-alist
-              '(("" . "harpoon-go-to-[0-9]+") . 'ignore))))
+    (add-to-list 'which-key-replacement-alist
+              '(("" . "harpoon-go-to-[0-9]+") . ignore))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
