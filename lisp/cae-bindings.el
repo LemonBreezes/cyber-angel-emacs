@@ -136,7 +136,6 @@
         "M-<tab>" yas-maybe-expand
         "TAB" nil
         :map yas-keymap
-
         "S-<tab>" nil
         "<backtab>" nil
         ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
