@@ -83,6 +83,18 @@
   (add-hook 'conf-mode-hook   #'copilot-mode)
   (add-hook 'minibuffer-setup-hook #'copilot-mode)
   (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
+  (add-hook! 'copilot-disable-predicates
+    (defun cae-disable-copilot-in-gptel-p ()
+      (bound-and-true-p gptel-mode))
+    (defun cae-disable-copilot-in-dunnet-p ()
+      (derived-mode-p 'dun-mode))
+    (defun cae-multiple-cursors-active-p ()
+      (bound-and-true-p multiple-cursors-mode)))
+  (defun cae-copilot-clear-overlay-h ()
+    "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
+    (when (copilot--overlay-visible)
+      (copilot-clear-overlay) t))
+  (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
   :config
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
@@ -98,18 +110,12 @@
         "<end>" #'copilot-accept-completion-by-line
         "M-n" #'copilot-next-completion
         "M-p" #'copilot-previous-completion)
-  (defun cae-copilot-clear-overlay-h ()
-    "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
-    (when (copilot--overlay-visible)
-      (copilot-clear-overlay) t))
-  (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
-  (add-hook! 'copilot-disable-predicates
-    (defun cae-disable-copilot-in-gptel-p ()
-      (bound-and-true-p gptel-mode))
-    (defun cae-disable-copilot-in-dunnet-p ()
-      (derived-mode-p 'dun-mode))
-    (defun cae-multiple-cursors-active-p ()
-      (bound-and-true-p multiple-cursors-mode)))
+  (remove-hook 'copilot-enable-predicates 'evil-insert-state-p)
+  (add-hook 'copilot-enable-predicates
+            (defun cae-evil-insert-state-p ()
+              (and (bound-and-true-p evil-mode)
+                   (or (eq evil-state 'insert)
+                       (minibufferp nil t)))))
   (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)
   (after! copilot-balancer
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
