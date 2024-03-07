@@ -80,11 +80,11 @@
       [remap kill-current-buffer] #'cae-kill-current-buffer
       "C-x 4 I" #'ibuffer-other-window
       "C-x 4 -" #'dired-jump-other-window
-      [remap ibuffer] #'ibuffer-jump ;This way
+      [remap ibuffer] #'ibuffer-jump    ;This way
                                         ;I can do `C-x C-b =' to quickly diff a
                                         ;buffer with its file.
-      "C-x _" #'shrink-window ;Dual to `C-x ^'.
-      "C-x O" #'other-window-previous ;Dual to `C-x o'.
+      "C-x _" #'shrink-window           ;Dual to `C-x ^'.
+      "C-x O" #'other-window-previous   ;Dual to `C-x o'.
       "C-x !" #'doom/window-enlargen
       "C-x x c" #'cae-edit-indirect-dwim
       "C-x M-o" #'ace-swap-window
@@ -103,21 +103,23 @@
       ;; indentation, and expanding snippets.
       [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
+      ;; For some reason this key was getting overriden.
+      :gi "<tab>" #'indent-for-tab-command
       (:when (and (modulep! :editor snippets)
                   (modulep! :completion corfu +tng))
        (:after yasnippet
         ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
         ;; completion. I also don't insert the separator with `M-<tab>'.
-        :map yas-minor-mode-map
-        "M-<tab>" yas-maybe-expand
-        "TAB" nil
-        :map yas-keymap
-        "TAB" nil
-        "S-<tab>" nil
-        "<backtab>" nil
-        ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
-        "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
-        "C-M-S-i" (yas-filtered-definition 'yas-prev-field))
+        (:map yas-minor-mode-map
+         "M-<tab>" yas-maybe-expand
+         "TAB" nil)
+        (:map yas-keymap
+         "TAB" nil
+         "S-<tab>" nil
+         "<backtab>" nil
+         ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
+         "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
+         "C-M-S-i" (yas-filtered-definition 'yas-prev-field)))
        (:after corfu
         :map corfu-map
         "C-M-i" '(menu-item "" yas-expand :filter
