@@ -36,7 +36,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((p nil))
+(let ((p t))
   (defvar cae-init-ui-enabled-p (and p t))
   (defvar cae-init-tools-enabled-p (and p t))
   (defvar cae-init-editor-enabled-p (and p t))
@@ -52,7 +52,7 @@
 
 (doom! :completion
        (vertico +icons)
-       (corfu +tng +orderless +icons +dabbrev +dict +emoji)
+       ;; (corfu +tng +orderless +icons +dabbrev +dict +emoji)
 
        :ui
        doom-dashboard
@@ -145,16 +145,16 @@
        ;;(dirvish +icons +dirvish)
        eshell
        exwm
-       ;; dired
-       ;; lisp
-       ;; misc-applications
-       ;; (modeline +wakatime)
-       ;; unpackaged
-       ;; vc
-       ;; org
-       ;; ai
-       ;; gnus
-       ;; eww
+       dired
+       lisp
+       misc-applications
+       (modeline +wakatime)
+       unpackaged
+       vc
+       org
+       ai
+       gnus
+       eww
        )
 
 ;;Local Variables:
