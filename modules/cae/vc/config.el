@@ -8,9 +8,9 @@
   (setq add-log-keep-changes-together t))
 (after! vc-git
   (setq
-   ;;vc-git-diff-switches '("--patch-with-stat" "--histogram"
-   ;;                       "--ignore-cr-at-eol" "--ignore-space-change"
-   ;;                       "--ignore-all-space" "--ignore-blank-lines")
+   vc-git-diff-switches '("--patch-with-stat" "--histogram"
+                          "--ignore-cr-at-eol" "--ignore-space-change"
+                          "--ignore-all-space" "--ignore-blank-lines")
    vc-git-print-log-follow t))
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
