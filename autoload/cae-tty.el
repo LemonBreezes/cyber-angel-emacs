@@ -29,6 +29,8 @@
           mu4e-modeline-all-read '("R:" "R:")
           mu4e-modeline-all-clear '("C:" "C:")
           mu4e-modeline-new-items '("N:" "N:")))
+  (after! blamer
+    (setq blamer-commit-formatter " * %s"))
   (after! dirvish-attributes
     (setq dirvish-attributes
           (delq 'subtree-state
