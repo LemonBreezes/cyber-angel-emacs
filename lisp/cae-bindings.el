@@ -103,7 +103,7 @@
       "<escape>" #'keyboard-quit
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
-      "<f2>" nil
+      "<f2>" #'copilot-panel-complete
       "C-<f1>" #'try
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
