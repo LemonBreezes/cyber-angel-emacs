@@ -161,7 +161,7 @@
 
 (when (modulep! :completion corfu)
   (map! (:prefix "C-x"
-         :i "C-c" #'copilot-panel-complete
+         :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-l" #'cae-cape-history-or-line
          :i "C-s" #'yasnippet-capf
