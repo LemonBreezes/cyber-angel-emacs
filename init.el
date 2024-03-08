@@ -147,15 +147,14 @@
        exwm
        dired
        lisp
-       ;; misc-applications
-       ;; (modeline +wakatime)
-       ;; unpackaged
-       ;; vc
-       ;; org
-       ;; ai
-       ;; gnus
-       ;; eww
-       )
+       misc-applications
+       (modeline +wakatime)
+       unpackaged
+       vc
+       org
+       ai
+       gnus
+       eww)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
