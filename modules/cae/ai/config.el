@@ -89,12 +89,12 @@
       (derived-mode-p 'dun-mode))
     (defun cae-multiple-cursors-active-p ()
       (bound-and-true-p multiple-cursors-mode)))
-  (defun cae-copilot-clear-overlay-h ()
-    "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
-    (when (copilot--overlay-visible)
-      (copilot-clear-overlay) t))
-  (add-hook 'doom-escape-hook #'cae-copilot-clear-overlay-h)
   :config
+  (add-hook! 'doom-escape-hook
+    (defun cae-copilot-clear-overlay-h ()
+      "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
+      (when (copilot--overlay-visible)
+        (copilot-clear-overlay) t)))
   (setq copilot--base-dir
         (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
         copilot-max-char 1000000
