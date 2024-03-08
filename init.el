@@ -15,14 +15,14 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
-(when (>= (num-processors) 32)
-  ;; Testing disabling GC during work. Careful with this. I found this was not
-  ;; worth it on my i9 9900K but maybe with a 7950X I can get away with it.
-  (let ((cae-gc-cons-threshold (* 64 1024 1024 1024)))
-    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
-          consult--gc-threshold cae-gc-cons-threshold
-          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
-          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
+;;(when (>= (num-processors) 32)
+;;  ;; Testing disabling GC during work. Careful with this. I found this was not
+;;  ;; worth it on my i9 9900K but maybe with a 7950X I can get away with it.
+;;  (let ((cae-gc-cons-threshold (* 64 1024 1024 1024)))
+;;    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
+;;          consult--gc-threshold cae-gc-cons-threshold
+;;          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
+;;          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
