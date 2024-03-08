@@ -52,7 +52,7 @@
 
 (doom! :completion
        (vertico +icons)
-       ;; (corfu +tng +orderless +icons +dabbrev +dict +emoji)
+       ;; (corfu +orderless +icons +dabbrev)
 
        :ui
        doom-dashboard
