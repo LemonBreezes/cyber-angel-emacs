@@ -3,9 +3,7 @@
 (defvar cae-openai-default-model "gpt-4-1106-preview")
 
 (use-package! whisper
-  :defer t :init
-  (map! "<f2>" #'whisper-run)
-  :config
+  :defer t :config
   (setq whisper-install-directory doom-cache-dir
         whisper-model "large-v3"
         whisper-language "en"
