@@ -204,8 +204,12 @@
   (map! :leader
         (:prefix-map ("S" . "snippets")
          :desc "Insert Snippet" "s" #'yas-insert-snippet
-         :desc "Create new snippet" "n" #'yas-new-snippet
-         :desc "Visit Snippet file" "v" #'yas-visit-snippet-file)))
+         :desc "Create new snippet" "n" #'+snippets/new
+         :desc "Visit Snippet file" "v" #'+snippets/edit
+         :desc "Create new snippet alias" "a" #'+snippets/new-alias
+         :desc "Find private snippet" "p" #'+snippets/find-private
+         :desc "Find snippet for mode" "m" #'+snippets/find-for-current-mode
+         :desc "Find snippet" "f" #'+snippets/find)))
 
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
