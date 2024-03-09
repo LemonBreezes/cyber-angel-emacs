@@ -303,20 +303,6 @@ This is the format used on Reddit for code blocks."
     (goto-char pt)
     (call-interactively #'parrot-rotate-prev-word-at-point)))
 
-;;;###autoload
-(defalias 'cae-avy-action-comment-dwim
-  (apply-partially #'cae-avy-do
-                   (lambda ()
-                     (cond ((or (eq avy-command 'avy-goto-line)
-                                (memq this-command '(avy-goto-line-above
-                                                     avy-goto-line-below)))
-                            (call-interactively #'comment-or-uncomment-region))
-                           ((bound-and-true-p lispy-mode)
-                            (deactivate-mark)
-                            (lispy-comment))
-                           (t (call-interactively #'comment-or-uncomment-region)))
-                     (avy-pop-mark))))
-
 (defun cae-avy-rotate (direction)
   (setq avy-action (if (eq direction 'forward)
                        #'cae-avy-parrot-rotate-forward-action
