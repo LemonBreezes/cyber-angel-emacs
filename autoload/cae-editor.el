@@ -303,11 +303,11 @@ This is the format used on Reddit for code blocks."
     (goto-char pt)
     (call-interactively #'parrot-rotate-prev-word-at-point)))
 
-(defun cae-avy-rotate (direction)
+;;;###autoload
+(defun cae-avy-rotate ()
+  (interactive)
   (require 'parrot)
-  (setq avy-action (if (eq direction 'forward)
-                       #'cae-avy-parrot-rotate-forward-action
-                     #'cae-avy-parrot-rotate-backward-action))
+  (setq avy-action #'cae-avy-parrot-rotate-forward-action)
   (when-let* ((candidates
                (let ((res))
                  (cl-loop for words in parrot-rotate-dict
@@ -323,16 +323,6 @@ This is the format used on Reddit for code blocks."
                                            res))))))
                  res)))
     (avy-process candidates)))
-
-;;;###autoload
-(defalias 'cae-avy-rotate-forward
-  (lambda () (interactive)
-    (cae-avy-rotate 'forward)))
-
-;;;###autoload
-(defalias 'cae-avy-rotate-backward
-  (lambda () (interactive)
-    (cae-avy-rotate 'backward)))
 
 ;;;###autoload
 (defun cae-mark-comment ()
