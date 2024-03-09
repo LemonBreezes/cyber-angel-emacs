@@ -119,25 +119,9 @@
 ;; indentation, and expanding snippets.
 (map! [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
-      ;;(:when (and (modulep! :editor snippets)
-      ;;            (modulep! :completion corfu))
-      ;; (:after yasnippet
-      ;;  ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
-      ;;  ;; completion. I also don't insert the separator with `M-<tab>'.
-      ;;  (:map yas-minor-mode-map
-      ;;   "M-<tab>" yas-maybe-expand
-      ;;   "TAB" yas-maybe-expand)
-      ;;  (:map yas-keymap
-      ;;   "S-<tab>" nil
-      ;;   "<backtab>" nil
-      ;;   ;; Changed to C-M-i and C-M-S-i to avoid conflicts windows keybindings.
-      ;;   "C-M-i" (yas-filtered-definition 'yas-next-field-or-maybe-expand)
-      ;;   "C-M-S-i" (yas-filtered-definition 'yas-prev-field)))
-      ;; (:after corfu
-      ;;  :map corfu-map
-      ;;  "C-M-i" '(menu-item "" yas-expand :filter
-      ;;            yas-maybe-expand-abbrev-key-filter)))
-      )
+      (:after cc-mode
+       :map c-mode-base-map
+       "TAB" nil))
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.
