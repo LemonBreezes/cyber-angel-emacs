@@ -981,7 +981,7 @@
     (map! :n "]r" #'cae-modeline-rotate-forward-word-at-point
           :n "[r" #'cae-modeline-rotate-backward-word-at-point
           (:after evil-easymotion
-           :m "gsr" #'cae-avy-rotate-forward))
+           :m "gsr" #'cae-avy-rotate))
     :config
     (after! parrot-rotate
       (setq parrot-rotate-animate-after-rotation t
