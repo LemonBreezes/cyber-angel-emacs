@@ -186,6 +186,10 @@
           :i "C-f" nil
           :i "C-b" nil)))
 
+(when (modulep! :email mu4e)
+  (map! :map mu4e-headers-mode-map
+        :m [tab] nil))
+
 (defadvice! cae-evil-insert-state-a (&rest _)
   :after #'yas-expand-snippet
   (call-interactively #'evil-insert))
