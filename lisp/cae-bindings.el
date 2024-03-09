@@ -199,7 +199,10 @@
         "C-c & C-s" nil
         "C-c & C-n" nil
         "C-c & C-v" nil
-        "C-c &" nil))
+        "C-c &" nil
+        "C-c S s" #'yas-insert-snippet
+        "C-c S n" #'yas-new-snippet
+        "C-c S v" #'yas-visit-snippet-file))
 
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
