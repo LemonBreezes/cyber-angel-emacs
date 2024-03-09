@@ -382,6 +382,16 @@ This is the format used on Reddit for code blocks."
     (avy-process candidates)))
 
 ;;;###autoload
+(defalias 'cae-avy-rotate-forward
+  (lambda () (interactive)
+    (apply-partially #'cae-avy-rotate 'forward)))
+
+;;;###autoload
+(defalias 'cae-avy-rotate-backward
+  (lambda () (interactive)
+    (apply-partially #'cae-avy-rotate 'backward)))
+
+;;;###autoload
 (defun cae-mark-comment ()
   "Mark the entire comment around point. Like `er/mark-comment' but
 also marks comment with leading whitespace"
