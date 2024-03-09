@@ -62,6 +62,9 @@
     ("=" eri/expand-region
      "-" eri/contract-region))
 
+  (define-repeat-map avy-rotate
+    ("r" cae-avy-rotate))
+
   (define-repeat-map org-priority
     ("u" org-priority-up
      "d" org-priority-down))
