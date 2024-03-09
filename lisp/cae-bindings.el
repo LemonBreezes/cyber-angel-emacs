@@ -184,7 +184,7 @@
 (global-set-key [remap delete-other-windows] #'doom/window-maximize-buffer)
 
 
-;;; Fixup leader key
+;;; Fixup leader key and C-c
 
 ;; I don't use Deft.
 (when (and (not (modulep! :ui deft))
@@ -200,6 +200,12 @@
         "C-c & C-n" nil
         "C-c & C-v" nil
         "C-c &" nil))
+
+(when (and (modulep! :checkers syntax)
+           (not (modulep! :checkers syntax +flymake)))
+  (setq flycheck-keymap-prefix (kbd "C-c C"))
+  (map! :map mode-specific-map
+        (:prefix-map ("C" . "checkers"))))
 
 
 ;;; Extra which-key descriptions
