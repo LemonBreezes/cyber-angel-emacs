@@ -97,8 +97,8 @@
   (when (file-exists-p (concat doom-lib ".el"))
     (load doom-lib t t)))
 
-(delete-directory "~/.config/emacs/straight/" t)
-(delete-directory "~/.config/emacs/eln-cache/" t)
+;;(delete-directory "~/.config/emacs/straight/" t)
+;;(delete-directory "~/.config/emacs/eln-cache/" t)
 
 ;; Bootstrap straight
 (defvar bootstrap-version)
