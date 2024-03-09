@@ -125,7 +125,7 @@
 (map! [C-i] #'doom/dumb-indent
       "C-S-i" #'doom/dumb-dedent
       (:when (and (modulep! :editor snippets)
-                  (modulep! :completion corfu +tng))
+                  (modulep! :completion corfu))
        (:after yasnippet
         ;; Use `M-<tab>' for expanding snippets when we are using `<tab>' for
         ;; completion. I also don't insert the separator with `M-<tab>'.
