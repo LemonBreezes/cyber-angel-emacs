@@ -51,3 +51,16 @@
       (unless (eq org-preview-latex-default-process 'dvisvgm)
         (org-clear-latex-preview (point-min) (point-max))
         (ignore-errors (org--latex-preview-region (point-min) (point-max)))))))
+
+;;;###autoload
+(defun cae-theme-ring-bell-function ()
+  (let ((buf (current-buffer))
+        (cookie (face-remap-add-relative 'mode-line-active
+                                         'cae-modeline-bell-face)))
+    (force-mode-line-update)
+    (run-with-timer 0.1 nil
+                    (lambda ()
+                      (when (buffer-live-p buf)
+                        (with-current-buffer buf
+                          (face-remap-remove-relative cookie)
+                          (force-mode-line-update)))))))
