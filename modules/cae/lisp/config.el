@@ -1,20 +1,5 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
-(use-package! nameless
-  :defer t
-  ;; `nameless-mode' can cause buffers to become garbled when used in a
-  ;; terminal.
-  :when (cae-display-graphic-p)
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'nameless-mode)
-  (after! elisp-mode
-    (map! :map emacs-lisp-mode-map
-          :localleader
-          "n" #'nameless-mode))
-  :config
-  (setq nameless-private-prefix t
-        nameless-global-aliases '()))
-
 (defadvice! +syntax--fix-elisp-flymake-load-path (orig-fn &rest args)
   "Set load path for elisp byte compilation Flymake backend"
   :around #'elisp-flymake-byte-compile
