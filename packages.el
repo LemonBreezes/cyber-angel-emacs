@@ -40,7 +40,6 @@
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
-  (package! evil-visual-mark-mode)
   (package! tabgo)
   (package! harpoon))
 
