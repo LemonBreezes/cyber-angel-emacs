@@ -115,11 +115,6 @@
         "C-z" #'cae-embark-act-with-completing-read)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
-;; Fix the TAB key
-(map! (:after cc-mode
-       :map c-mode-base-map
-       "TAB" #'indent-for-tab-command))
-
 ;; Resolve the age-old conflict between using TAB for completion,
 ;; indentation, and expanding snippets.
 (map! [C-i] #'doom/dumb-indent
