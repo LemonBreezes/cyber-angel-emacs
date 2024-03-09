@@ -15,7 +15,9 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
-(when (>= (num-processors) 32)
+(when (and (>= (num-processors) 32)
+           (> (car (memory-info))
+              (* 1024 1024 180)))
   (let ((cae-gc-cons-threshold (* 64 1024 1024 1024)))
     (setq gcmh-high-cons-threshold cae-gc-cons-threshold
           consult--gc-threshold cae-gc-cons-threshold
