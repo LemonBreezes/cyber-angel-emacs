@@ -144,7 +144,6 @@
                   yas-maybe-expand-abbrev-key-filter))))
 
 
-
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.
 (map! [remap delete-char] #'cae-delete-char
