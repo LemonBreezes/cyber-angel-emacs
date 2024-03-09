@@ -189,13 +189,4 @@
     '((t (:inherit mode-line-highlight)))
     "Face used for the modeline beep.")
   (setq visible-bell t
-        ring-bell-function (lambda ()
-                             (let ((buf (current-buffer))
-                                   (cookie (face-remap-add-relative 'mode-line-active 'cae-modeline-bell-face)))
-                               (force-mode-line-update)
-                               (run-with-timer 0.1 nil
-                                               (lambda ()
-                                                 (when (buffer-live-p buf)
-                                                   (with-current-buffer buf
-                                                     (face-remap-remove-relative cookie)
-                                                     (force-mode-line-update)))))))))
+        ring-bell-function #'cae-theme-ring-bell-function))
