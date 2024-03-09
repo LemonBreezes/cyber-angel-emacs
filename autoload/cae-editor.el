@@ -304,6 +304,7 @@ This is the format used on Reddit for code blocks."
     (call-interactively #'parrot-rotate-prev-word-at-point)))
 
 (defun cae-avy-rotate (direction)
+  (require 'parrot)
   (setq avy-action (if (eq direction 'forward)
                        #'cae-avy-parrot-rotate-forward-action
                      #'cae-avy-parrot-rotate-backward-action))
