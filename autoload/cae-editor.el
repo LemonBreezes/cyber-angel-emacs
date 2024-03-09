@@ -331,11 +331,11 @@ This is the format used on Reddit for code blocks."
   (delete-blank-lines))
 
 ;;;###autoload
-(defalias 'cae-avy-parrot-rotate
+(defalias 'cae-avy-parrot-rotate-forward-dispatch
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-forward-word-at-point))
 
 ;;;###autoload
-(defalias 'cae-avy-parrot-rotate-backward
+(defalias 'cae-avy-parrot-rotate-backward-dispatch
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-backward-word-at-point))
 
 ;;;###autoload
