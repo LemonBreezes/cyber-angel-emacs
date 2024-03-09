@@ -816,6 +816,12 @@
                     '(?a ?s ?d ?f ?g
                       ?h ?j ?k ?l ?\;))
           avy-background nil
+          avy-dispatch-alist
+          (cae-keyboard-remap
+           '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
+            (?t . avy-action-teleport) (?m . avy-action-mark) (?n . avy-action-copy)
+            (?y . avy-action-yank) (?Y . avy-action-yank-line) (?i . avy-action-ispell)
+            (?z . avy-action-zap-to-char)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
                              (avy-goto-end-of-line . post)
