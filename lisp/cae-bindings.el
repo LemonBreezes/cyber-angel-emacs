@@ -208,7 +208,8 @@
 
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
+  (after! flycheck
+    (define-key flycheck-mode-map flycheck-keymap-prefix nil))
   (map! :leader
         (:prefix-map ("C" . "checkers")
          :desc "Check buffer" "c" #'flycheck-buffer
