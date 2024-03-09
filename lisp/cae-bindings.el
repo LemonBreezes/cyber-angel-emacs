@@ -131,7 +131,8 @@
         ;; completion. I also don't insert the separator with `M-<tab>'.
         (:map yas-minor-mode-map
          "M-<tab>" yas-maybe-expand
-         "TAB" nil)
+         "TAB" nil
+         "<tab>" nil)
         (:map yas-keymap
          "S-<tab>" nil
          "<backtab>" nil
@@ -142,7 +143,6 @@
         :map corfu-map
         "C-M-i" '(menu-item "" yas-expand :filter
                   yas-maybe-expand-abbrev-key-filter))))
-
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.
