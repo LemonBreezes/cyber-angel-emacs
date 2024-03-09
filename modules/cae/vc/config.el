@@ -103,6 +103,9 @@
   (map! :map dired-mode-map
         :localleader
         "g" #'git-email-send-email)
+  (after! mu4e-compose
+    (unless (fboundp 'mu4e~compose-mail)
+      (defalias 'mu4e~compose-mail #'mu4e-compose-new)))
   :config
   (cond ((modulep! :email mu4e)
          (require 'git-email-mu4e)
