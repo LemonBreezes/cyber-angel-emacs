@@ -101,6 +101,8 @@
        "M-/" #'cape-dabbrev)
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
+      "<f2>" #'whisper-run
+      "<f5>" #'cae-org-ai-on-region-or-buffer
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
