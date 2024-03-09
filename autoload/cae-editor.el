@@ -339,16 +339,16 @@ This is the format used on Reddit for code blocks."
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-backward-word-at-point))
 
 ;;;###autoload
-(defun cae-avy-rotate-forward-action (pt)
+(defun cae-avy-parrot-rotate-forward-action (pt)
   (save-mark-and-excursion
     (goto-char pt)
-    (call-interactively #'cae-modeline-rotate-forward-word-at-point)))
+    (call-interactively #'parrot-rotate-next-word-at-point)))
 
 ;;;###autoload
-(defun cae-avy-rotate-backward-action (pt)
+(defun cae-avy-parrot-rotate-backward-action (pt)
   (save-mark-and-excursion
     (goto-char pt)
-    (call-interactively #'cae-modeline-rotate-backward-word-at-point)))
+    (call-interactively #'parrot-rotate-prev-word-at-point)))
 
 ;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
@@ -363,6 +363,23 @@ This is the format used on Reddit for code blocks."
                             (lispy-comment))
                            (t (call-interactively #'comment-or-uncomment-region)))
                      (avy-pop-mark))))
+
+(defun cae-avy-rotate (direction)
+  (setq avy-action (if (eq direction 'forward)
+                       #'cae-avy-parrot-rotate-forward-action
+                     #'cae-avy-parrot-rotate-backward-action))
+  (when-let* ((candidates
+               (let ((res))
+                 (cl-loop for words in parrot-rotate-dict
+                          do (save-excursion
+                               (while (re-search-forward
+                                       (regexp-opt (plist-get words :rot) 'symbols)
+                                       (window-end nil t) t)
+                                 (push (cons (bounds-of-thing-at-point 'symbol)
+                                             (selected-window))
+                                       res))))
+                 res)))
+    (avy-process candidates)))
 
 ;;;###autoload
 (defun cae-mark-comment ()
