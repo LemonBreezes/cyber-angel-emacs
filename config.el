@@ -821,8 +821,6 @@
            '((?z . avy-action-zap-to-char)
              (?x . cae-avy-action-kill)
              (?e . cae-avy-action-embark-act)
-             (?r . cae-avy-parrot-rotate)
-             (?R . cae-avy-parrot-rotate)
              (?\; . cae-avy-action-comment-dwim)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
