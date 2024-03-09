@@ -213,9 +213,6 @@
 (use-package! evil-owl
   :hook (doom-first-input . evil-owl-mode))
 
-(use-package! evil-visual-mark-mode
-  :hook (doom-first-buffer . evil-visual-mark-mode))
-
 (use-package! harpoon
   :defer t :init
   (map! :n "C-SPC" 'harpoon-quick-menu-hydra
