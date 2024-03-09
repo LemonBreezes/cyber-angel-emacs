@@ -215,9 +215,7 @@
 
 (use-package! harpoon
   :defer t :init
-  (map! :n "C-SPC" 'harpoon-quick-menu-hydra
-        :n "C-s" 'harpoon-add-file
-        :leader
+  (map! :leader
         "1" #'harpoon-go-to-1
         "2" #'harpoon-go-to-2
         "3" #'harpoon-go-to-3
