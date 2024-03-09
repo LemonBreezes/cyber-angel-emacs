@@ -1102,7 +1102,9 @@
 
   (after! yasnippet
     (setq yas-triggers-in-field t       ;Allow nested snippets.
-          yas-trigger-symbol " →"))
+          yas-trigger-symbol " →")
+    (setq-hook! 'org-mode-hook
+      yas-triggers-in-field nil))
 
   (use-package! hippie-exp
     :defer t :config
