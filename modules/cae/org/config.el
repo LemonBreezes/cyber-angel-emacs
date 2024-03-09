@@ -54,8 +54,6 @@
 
 (after! org
   (map! :map org-mode-map
-        (:when (modulep! :editor evil)
-         :nie "M-SPC M-SPC" (cmd! (insert "\u200B")))
         :localleader
         "l f" #'cae-org-insert-file-link))
 
