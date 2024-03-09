@@ -372,6 +372,7 @@ This is the format used on Reddit for code blocks."
                (let ((res))
                  (cl-loop for words in parrot-rotate-dict
                           do (save-excursion
+                               (goto-char (window-start))
                                (while (re-search-forward
                                        (regexp-opt (plist-get words :rot) 'symbols)
                                        (window-end nil t) t)
