@@ -383,14 +383,6 @@ also marks comment with leading whitespace"
   (save-excursion
     (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
       (goto-char beg))
-    ;;(->> parrot-rotate-dict
-    ;;     (-map (lambda (it) (plist-get it :rot)))
-    ;;     (-map #'-flatten)
-    ;;     (-min-by (lambda (x y)
-    ;;                ;; get the minimum distance to a match in x and y from point
-    ;;                (setq x (-min-by (lambda (a b)
-    ;;                                   (re-search-forward (format "")))))
-    ;;                )))
     (skip-syntax-forward "^w" (line-end-position))
     (condition-case err
         (call-interactively rotate-function)
