@@ -126,7 +126,7 @@
         ;; completion. I also don't insert the separator with `M-<tab>'.
         (:map yas-minor-mode-map
          "M-<tab>" yas-maybe-expand
-         "TAB" yas-maybe-expand)
+         "TAB" nil)
         (:map yas-keymap
          "S-<tab>" nil
          "<backtab>" nil
