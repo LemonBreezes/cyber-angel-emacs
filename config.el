@@ -980,7 +980,8 @@
     :defer t :init
     (map! :n "]r" #'cae-modeline-rotate-forward-word-at-point
           :n "[r" #'cae-modeline-rotate-backward-word-at-point
-          :m "gsr" #'cae-avy-rotate-forward)
+          (:after evilem
+           :m "gsr" #'cae-avy-rotate-forward))
     :config
     (after! parrot-rotate
       (setq parrot-rotate-animate-after-rotation t
