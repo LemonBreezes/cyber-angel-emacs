@@ -6,14 +6,14 @@
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 
-(let ((noninteractive-shell (or (executable-find "dash")
-                                (executable-find "sh")))
-      (interactive-shell (or (executable-find "zsh")
-                             (executable-find "bash"))))
-  (setq shell-file-name noninteractive-shell)
-  (setenv "SHELL" noninteractive-shell)
-  (after! vterm
-    (setq vterm-shell interactive-shell)))
+;;(let ((noninteractive-shell (or (executable-find "dash")
+;;                                (executable-find "sh")))
+;;      (interactive-shell (or (executable-find "zsh")
+;;                             (executable-find "bash"))))
+;;  (setq shell-file-name noninteractive-shell)
+;;  (setenv "SHELL" noninteractive-shell)
+;;  (after! vterm
+;;    (setq vterm-shell interactive-shell)))
 
 (when (>= (num-processors) 32)
   ;; Testing disabling GC during work. Careful with this. I found this was not
