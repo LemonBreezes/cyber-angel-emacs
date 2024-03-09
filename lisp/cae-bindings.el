@@ -101,8 +101,10 @@
        "M-/" #'cape-dabbrev)
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
-      "<f2>" #'whisper-run
-      "<f5>" #'cae-org-ai-on-region-or-buffer
+      (:when (modulep! :cae ai)
+       "<f2>" #'whisper-run
+       "<f5>" #'cae-org-ai-on-region-or-buffer
+       "C-<f5>" #'copilot-panel-complete)
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
