@@ -339,6 +339,18 @@ This is the format used on Reddit for code blocks."
   (apply-partially #'cae-avy-do #'cae-modeline-rotate-backward-word-at-point))
 
 ;;;###autoload
+(defun cae-avy-rotate-forward-action (pt)
+  (save-mark-and-excursion
+    (goto-char pt)
+    (call-interactively #'cae-modeline-rotate-forward-word-at-point)))
+
+;;;###autoload
+(defun cae-avy-rotate-backward-action (pt)
+  (save-mark-and-excursion
+    (goto-char pt)
+    (call-interactively #'cae-modeline-rotate-backward-word-at-point)))
+
+;;;###autoload
 (defalias 'cae-avy-action-comment-dwim
   (apply-partially #'cae-avy-do
                    (lambda ()
