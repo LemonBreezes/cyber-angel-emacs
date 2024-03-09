@@ -50,6 +50,8 @@
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
+(setq doom-leader-alt-key "<f2>")
+
 (doom! :completion
        (vertico +icons)
        (corfu +orderless +icons +dabbrev)
