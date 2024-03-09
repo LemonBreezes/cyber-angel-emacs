@@ -821,7 +821,7 @@
            '((?z . avy-action-zap-to-char)
              (?x . cae-avy-action-kill)
              (?e . cae-avy-action-embark-act)
-             (?\; . cae-avy-action-comment-dwim)))
+             (? c. cae-avy-action-comment-dwim)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
                              (avy-goto-end-of-line . post)
