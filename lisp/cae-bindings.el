@@ -199,16 +199,34 @@
         "C-c & C-s" nil
         "C-c & C-n" nil
         "C-c & C-v" nil
-        "C-c &" nil
-        "C-c S s" #'yas-insert-snippet
-        "C-c S n" #'yas-new-snippet
-        "C-c S v" #'yas-visit-snippet-file))
+        "C-c &" nil)
+  (map! :leader
+        (:prefix-map ("S" . "snippets")
+         :desc "Insert Snippet" "s" #'yas-insert-snippet
+         :desc "Create new snippet" "n" #'yas-new-snippet
+         :desc "Visit Snippet file" "v" #'yas-visit-snippet-file)))
 
 (when (and (modulep! :checkers syntax)
            (not (modulep! :checkers syntax +flymake)))
   (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :map mode-specific-map
-        (:prefix-map ("C" . "checkers"))))
+  (map! :leader
+        (:prefix-map ("C" . "checkers")
+         :desc "Check buffer" "c" #'flycheck-buffer
+         :desc "Clear errors" "C" #'flycheck-clear
+         :desc "Compile buffer" "C-c" #'flycheck-compile
+         :desc "Next error" "n" #'flycheck-next-error
+         :desc "Previous error" "p" #'flycheck-previous-error
+         :desc "List errors" "l" #'flycheck-list-errors
+         :desc "Copy errors as kill" "C-w" #'flycheck-copy-errors-as-kill
+         :desc "Select checker" "s" #'flycheck-select-checker
+         :desc "Describe checker" "?" #'flycheck-describe-checker
+         :desc "Display error at point" "h" #'flycheck-display-error-at-point
+         :desc "Explain error at point" "e" #'flycheck-explain-error-at-point
+         :desc "Display local help" "H" #'display-local-help
+         :desc "Flycheck manual" "i" #'flycheck-manual
+         :desc "Flycheck version" "V" #'flycheck-version
+         :desc "Verify setup" "v" #'flycheck-verify-setup
+         :desc "Disable checker" "x" #'flycheck-disable-checker)))
 
 
 ;;; Extra which-key descriptions
