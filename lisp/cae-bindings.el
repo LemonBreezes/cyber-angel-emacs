@@ -194,7 +194,8 @@
 
 (when (modulep! :editor snippets)
   (map! (:when (modulep! :completion vertico)
-         [remap yas-insert-snippet] #'consult-yasnippet)
+         [remap yas-insert-snippet] #'consult-yasnippet
+         [remap yas-visit-snippet-file] #'consult-yasnippet-visit-snippet-file)
         :map yas-minor-mode-map
         "C-c & C-s" nil
         "C-c & C-n" nil
