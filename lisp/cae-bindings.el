@@ -106,7 +106,7 @@
        "<f5>" #'cae-org-ai-on-region-or-buffer
        "C-<f5>" #'copilot-panel-complete)
       "<f6>" #'embrace-commander
-      "<f7>" #'eri/expand-region
+      "<f10>" #'eri/expand-region
       "C-<f1>" #'try
       [remap doom/sudo-this-file] #'cae-toggle-sudo
       (:map process-menu-mode-map
