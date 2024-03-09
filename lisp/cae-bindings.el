@@ -15,8 +15,6 @@
 ;; Define the leader key in Emacs state so that I can use it from the minibuffer.
 (map! :map general-override-mode-map
       :desc "<leader>" :g doom-leader-alt-key #'doom-leader-map)
-(map! :leader
-      doom-leader-alt-key #'doom-localleader-map)
 
 ;; Remove redundant `consult-history' keybinding.
 (when (boundp '+default-minibuffer-maps)
