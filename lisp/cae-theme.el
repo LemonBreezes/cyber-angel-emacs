@@ -195,6 +195,7 @@
                                (force-mode-line-update)
                                (run-with-timer 0.1 nil
                                                (lambda ()
-                                                 (with-current-buffer buf
-                                                   (face-remap-remove-relative cookie)
-                                                   (force-mode-line-update))))))))
+                                                 (when (buffer-live-p buf)
+                                                   (with-current-buffer buf
+                                                     (face-remap-remove-relative cookie)
+                                                     (force-mode-line-update)))))))))
