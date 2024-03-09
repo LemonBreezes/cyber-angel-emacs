@@ -7,15 +7,6 @@
 (define-key! :keymaps +default-minibuffer-maps
   [escape] #'abort-recursive-edit)
 
-;; Doom should not bind leader key prefixes to keys which are not alphanumeric
-;; because then they can be overwriting other packages' keybindings. As an
-;; example, Org mode has `C-c !' bound to `org-time-stamp-inactive' and `C-c &'
-;; bound to `org-mark-ring-goto'.
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake)))
-  (setq flycheck-keymap-prefix (kbd "C-c C"))
-  (map! :leader (:prefix-map ("C" . "checkers"))))
-
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
 ;; Evil.
 (map! :leader :desc "help" "h" help-map)
