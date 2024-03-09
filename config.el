@@ -821,6 +821,8 @@
            '((?z . avy-action-zap-to-char)
              (?x . cae-avy-action-kill)
              (?e . cae-avy-action-embark-act)
+             (?r . cae-avy-parrot-rotate)
+             (?R . cae-avy-parrot-rotate)
              (?\; . cae-avy-action-comment-dwim)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
@@ -978,8 +980,8 @@
 
   (use-package! parrot-rotate
     :defer t :init
-    (map! :n "]r"  #'cae-modeline-rotate-forward-word
-          :n "[r"  #'cae-modeline-rotate-backward-word)
+    (map! :n "]r"  #'cae-modeline-rotate-forward-word-at-point
+          :n "[r"  #'cae-modeline-rotate-backward-word-at-point)
     :config
     (after! parrot-rotate
       (setq parrot-rotate-animate-after-rotation t
