@@ -379,31 +379,12 @@ also marks comment with leading whitespace"
   (let ((fname (read-string "Function: ")))
     (cons (format "(%s " (or fname "")) ")")))
 
-(defun cae-modeline--rotate-word-at-point (rotate-function)
-  (save-excursion
-    (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
-      (goto-char beg))
-    (skip-syntax-forward "^w" (line-end-position))
-    (condition-case err
-        (call-interactively rotate-function)
-      (error
-       (skip-syntax-backward "^w" (line-beginning-position))
-       (call-interactively rotate-function)))))
-
-;;;###autoload
-(defun cae-modeline-rotate-forward-word-at-point ()
-  (interactive)
-  (cae-modeline--rotate-word-at-point #'parrot-rotate-next-word-at-point))
-
-;;;###autoload
-(defun cae-modeline-rotate-backward-word-at-point ()
-  (interactive)
-  (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
-
 (defun cae-modeline--rotate-word (rotate-function)
   (when-let* ((closest-rotation
                (cl-loop for words in parrot-rotate-dict
                         for occurrence = (save-excursion
+                                           (goto-char (or (car (bounds-of-thing-at-point 'symbol))
+                                                          (point)))
                                            (re-search-forward
                                             (regexp-opt (plist-get words :rot) 'symbols)
                                             (window-end) t))
