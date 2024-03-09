@@ -103,6 +103,7 @@
   (map! :map dired-mode-map
         :localleader
         "g" #'git-email-send-email)
+  ;; This is an old package.
   (after! mu4e-compose
     (unless (fboundp 'mu4e~compose-mail)
       (defalias 'mu4e~compose-mail #'mu4e-compose-new)))
