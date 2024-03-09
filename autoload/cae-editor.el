@@ -371,7 +371,9 @@ This is the format used on Reddit for code blocks."
   (when-let* ((candidates
                (let ((res))
                  (cl-loop for words in parrot-rotate-dict
+                          for win in (selected-frame)
                           do (save-excursion
+                               (select-window win)
                                (goto-char (window-start))
                                (while (re-search-forward
                                        (regexp-opt (plist-get words :rot) 'symbols)
@@ -383,14 +385,9 @@ This is the format used on Reddit for code blocks."
     (avy-process candidates)))
 
 ;;;###autoload
-(defalias 'cae-avy-rotate-forward
+(defalias 'cae-avy-rotate
   (lambda () (interactive)
     (cae-avy-rotate 'forward)))
-
-;;;###autoload
-(defalias 'cae-avy-rotate-backward
-  (lambda () (interactive)
-    (cae-avy-rotate 'backward)))
 
 ;;;###autoload
 (defun cae-mark-comment ()
