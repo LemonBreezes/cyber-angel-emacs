@@ -4,7 +4,7 @@
 
 (use-package! whisper
   :defer t :init
-  (map! "<f10>" #'whisper-run)
+  (map! "<f2>" #'whisper-run)
   :config
   (setq whisper-install-directory doom-cache-dir
         whisper-model "large-v3"
