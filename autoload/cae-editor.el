@@ -384,12 +384,12 @@ This is the format used on Reddit for code blocks."
 ;;;###autoload
 (defalias 'cae-avy-rotate-forward
   (lambda () (interactive)
-    (apply-partially #'cae-avy-rotate 'forward)))
+    (cae-avy-rotate 'forward)))
 
 ;;;###autoload
 (defalias 'cae-avy-rotate-backward
   (lambda () (interactive)
-    (apply-partially #'cae-avy-rotate 'backward)))
+    (cae-avy-rotate 'backward)))
 
 ;;;###autoload
 (defun cae-mark-comment ()
