@@ -27,7 +27,8 @@
       ""
       "* Second heading"
       "Body text of the second heading"
-      "* Last heading")
+      "* Last heading"
+      "Body text of the last heading")
     "\n"))
   (write-file org-extend-faces-bug-4-file))
 
