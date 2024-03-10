@@ -24,7 +24,7 @@
    (string-join
     '("* First heading"
       "Body text of the first heading"
-      "\n"
+      ""
       "* Second heading"
       "Body text of the second heading"
       "* Last heading")
