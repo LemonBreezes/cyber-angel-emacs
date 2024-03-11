@@ -328,11 +328,12 @@
 ;;; Leader keybindings
 (autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
-      (:when (modulep! :completion vertico)
-       (:prefix "i"
-        :desc "Keyboard macro" "k" #'consult-kmacro)
-       (:prefix "s"
-        :desc "Copy link" "y" #'link-hint-copy-link
+      (:prefix "i"
+       (:when (modulep! :completion vertico)
+        :desc "Keyboard macro" "k" #'consult-kmacro))
+      (:prefix "s"
+       :desc "Copy link" "y" #'link-hint-copy-link
+       (:when (modulep! :completion vertico)
         :desc "Jump to section" "h" #'consult-outline))
       (:when (modulep! :tools editorconfig)
        (:prefix "c"
@@ -345,7 +346,9 @@
        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
       (:prefix "f"
        :desc "Find sibling file" "TAB" #'cae-find-sibling-file
-       :desc "Open harpoon menu" "h" #'harpoon-quick-menu-hydra))
+       :desc "Open harpoon menu" "h" #'harpoon-quick-menu-hydra
+       (:when (modulep! :completion vertico)
+        :desc "Find directory" "d" #'consult-dir)))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
