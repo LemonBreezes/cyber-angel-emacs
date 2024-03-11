@@ -492,7 +492,8 @@ jumping backwards."
   "Jump to the end of a random line in the current buffer."
   (interactive)
   (goto-char (point-min)) ; Start at the beginning of the buffer
-  (let ((line-count (count-lines (point-min) (point-max)))) ; Count the lines
+  (let ((line-count (count-lines (point-min) (point-max))))
     (unless (zerop line-count)
-      (forward-line (random line-count)) ; Jump to a random line
-      (end-of-line)))) ; Move to the end of that line
+      (forward-line (random line-count))
+      (end-of-line)
+      (recenter))))
