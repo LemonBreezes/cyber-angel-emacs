@@ -108,7 +108,7 @@
 (map! :n "zE" #'cae-evil-edit-indirect)
 
 (define-key! :keymaps +default-minibuffer-maps
-  "C-S-y"    #'cae-yank-word-to-minibuffer)
+  "C-S-w"    #'cae-yank-word-to-minibuffer)
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
