@@ -112,7 +112,7 @@
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
-        "C-S-y" #'isearch-yank-word-or-char))
+        "C-S-w" #'isearch-yank-word-or-char))
 
 (after! evil-easymotion
   (map! :map evilem-map
