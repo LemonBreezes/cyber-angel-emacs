@@ -195,7 +195,7 @@
         (setf (alist-get mode ffap-string-at-point-mode-alist)
               (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))))
 
-  ;; Do not spam me with warnings while using `org-ai'.
+  ;; Do not spam me with warnings.
   (unless init-file-debug
     (add-hook! 'doom-first-file-hook :append
       (defun cae-warnings-initialize ()
