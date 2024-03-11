@@ -84,7 +84,8 @@
                   eri/web-mode-element-parent
                   eri/mark-inside-org-table-cell
                   eri/mark-outside-org-table-cell
-                  eri/web-mode-element-parent-content)
+                  eri/web-mode-element-parent-content
+                  cae-jump-to-random-line-end)
                 (and (featurep 'evil)
                      '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t
                        evil-snipe-T
