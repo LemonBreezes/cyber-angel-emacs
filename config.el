@@ -1404,9 +1404,7 @@
                 zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
-              '(alarm pomm
-                ;;debbugs <= Error: failed to incrementally load debbugs
-                ;;because: (error url-expand-file-name confused - no default?)
+              '(alarm pomm debbugs
                 ))))
  t)
 
