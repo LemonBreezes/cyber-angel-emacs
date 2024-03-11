@@ -1404,8 +1404,7 @@
                 zone-nyan)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
-              '(alarm pomm debbugs
-                ))))
+              '(alarm pomm debbugs))))
  t)
 
 (after! pdf-tools
