@@ -449,7 +449,7 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
 
-This function is a wrapper around `find-file' that also allows for
+This function is a wrapper around `find-sibling-file' that also allows for
 jumping backwards."
   (interactive (progn
                  (unless buffer-file-name
