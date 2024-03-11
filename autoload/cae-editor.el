@@ -529,9 +529,9 @@ jumping backwards."
   "Randomly permute the elements of LIST.
 All permutations equally likely."
   (let ((i 0)
-  j
-  temp
-  (len (length list)))
+        j
+        temp
+        (len (length list)))
     (while (< i len)
       (setq j (+ i (random (- len i))))
       (setq temp (nth i list))
