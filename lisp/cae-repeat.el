@@ -65,6 +65,9 @@
   (define-repeat-map avy-rotate
     ("r" cae-avy-rotate))
 
+  (define-repeat-map cae-jump-to-random-line-end
+    ("j" cae-jump-to-random-line-end))
+
   (define-repeat-map org-priority
     ("u" org-priority-up
      "d" org-priority-down))
