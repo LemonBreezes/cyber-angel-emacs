@@ -636,7 +636,10 @@
     :defer t :init
     (map! "C-x U" #'0x0-dwim)
     (after! embark
-      (define-key embark-region-map (kbd "U") '0x0-dwim))))
+      (define-key embark-region-map (kbd "U") '0x0-dwim)))
+
+  (use-package! consult-mu
+    :defer t))
 
 
 ;;; Editor
