@@ -640,8 +640,7 @@
 
   (use-package! consult-mu
     :when (and (modulep! :email mu4e)
-               (modulep! :completion vertico)
-               nil)
+               (modulep! :completion vertico))
     :defer t
     :custom
     (consult-mu-maxnum 200)
@@ -664,7 +663,7 @@
     (require 'consult-mu-contacts)
     (require 'consult-mu-contacts-embark)
     ;; pick a key to bind to consult-mu-compose-attach in embark-file-map
-    (setq 'consult-mu-embark-attach-file-key "C-a")
+    (setq consult-mu-embark-attach-file-key "C-a")
     (consult-mu-compose-embark-bind-attach-file-key)
     ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
     (customize-save-variable 'consult-mu-compose-use-dired-attachment 'in-dired)))
