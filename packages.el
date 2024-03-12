@@ -133,6 +133,7 @@
 (package! try)
 (package! lsp-ui :recipe (:host github :repo "LemonBreezes/lsp-ui"
                           :branch "fix-lsp-ui-imenu-resizing"))
+(package! consult-mu)
 
 ;;; Autocompletion
 (package! consult-yasnippet)
