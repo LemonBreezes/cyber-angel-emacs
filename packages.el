@@ -79,6 +79,7 @@
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
 (package! wakatime-mode)
+(package! consult-mu)
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
@@ -133,7 +134,6 @@
 (package! try)
 (package! lsp-ui :recipe (:host github :repo "LemonBreezes/lsp-ui"
                           :branch "fix-lsp-ui-imenu-resizing"))
-(package! consult-mu)
 
 ;;; Autocompletion
 (package! consult-yasnippet)
