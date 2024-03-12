@@ -639,6 +639,8 @@
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
 
   (use-package! consult-mu
+    :when (and (modulep! :email mu4e)
+               (modulep! :completion vertico))
     :defer t))
 
 
