@@ -685,7 +685,6 @@
           show-paren-ring-bell-on-mismatch t))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-  (advice-add #'kill-buffer-and-window :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
   (setq find-sibling-rules
