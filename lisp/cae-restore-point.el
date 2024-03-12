@@ -91,6 +91,7 @@
                        evil-snipe-T
                        evil-snipe-x evil-snipe-X evil-snipe-repeat
                        evil-snipe-repeat-reverse evil-ex-search-next
+                       evil-undo evil-redo
                        evil-ex-search-previous evil-goto-line evil-jump-item
                        evil-goto-first-line keyboard-escape-quit
                        evil-force-normal-state
