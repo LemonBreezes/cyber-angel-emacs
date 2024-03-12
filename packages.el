@@ -79,7 +79,8 @@
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
 (package! wakatime-mode)
-(package! consult-mu :recipe (:host github :repo "armindarvish/consult-mu"))
+(package! consult-mu :recipe
+  (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
