@@ -639,35 +639,35 @@
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
 
   (use-package! consult-mu
-  :when (and (modulep! :email mu4e)
-             (modulep! :completion vertico)
-             nil)
-  :defer t
-  :custom
-  (consult-mu-maxnum 200)
-  (consult-mu-preview-key 'any)
-  (consult-mu-mark-previewed-as-read nil)
-  (consult-mu-mark-viewed-as-read t)
-  (consult-mu-use-wide-reply t)
-  ;; define a template for headers view in minibuffer. The example below adjusts the width based on the width of the screen.
-  (consult-mu-headers-template (lambda () (concat "%f" (number-to-string (floor (* (frame-width) 0.15))) "%s" (number-to-string (floor (* (frame-width) 0.5))) "%d13" "%g" "%x")))
-  :config
-  ;;create a list of saved searches for quick access using `histroy-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
-  (setq consult-mu-saved-searches-dynamics '("#flag:unread"))
-  (setq consult-mu-saved-searches-async '("#flag:unread"))
-  ;; require embark actions for marking, replying, forwarding, etc. directly from minibuffer
-  (require 'consult-mu-embark)
-  ;; require extra module for composing (e.g. for interactive attachment) as well as embark actions
-  (require 'consult-mu-compose)
-  (require 'consult-mu-compose-embark)
-  ;; require extra module for searching contacts and runing embark actions on contacts
-  (require 'consult-mu-contacts)
-  (require 'consult-mu-contacts-embark)
-  ;; pick a key to bind to consult-mu-compose-attach in embark-file-map
-  (setq 'consult-mu-embark-attach-file-key "C-a")
-  (consult-mu-compose-embark-bind-attach-file-key)
-  ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
-  (customize-save-variable 'consult-mu-compose-use-dired-attachment 'in-dired)))
+    :when (and (modulep! :email mu4e)
+               (modulep! :completion vertico)
+               nil)
+    :defer t
+    :custom
+    (consult-mu-maxnum 200)
+    (consult-mu-preview-key 'any)
+    (consult-mu-mark-previewed-as-read nil)
+    (consult-mu-mark-viewed-as-read t)
+    (consult-mu-use-wide-reply t)
+    ;; define a template for headers view in minibuffer. The example below adjusts the width based on the width of the screen.
+    (consult-mu-headers-template (lambda () (concat "%f" (number-to-string (floor (* (frame-width) 0.15))) "%s" (number-to-string (floor (* (frame-width) 0.5))) "%d13" "%g" "%x")))
+    :config
+    ;;create a list of saved searches for quick access using `histroy-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
+    (setq consult-mu-saved-searches-dynamics '("#flag:unread"))
+    (setq consult-mu-saved-searches-async '("#flag:unread"))
+    ;; require embark actions for marking, replying, forwarding, etc. directly from minibuffer
+    (require 'consult-mu-embark)
+    ;; require extra module for composing (e.g. for interactive attachment) as well as embark actions
+    (require 'consult-mu-compose)
+    (require 'consult-mu-compose-embark)
+    ;; require extra module for searching contacts and runing embark actions on contacts
+    (require 'consult-mu-contacts)
+    (require 'consult-mu-contacts-embark)
+    ;; pick a key to bind to consult-mu-compose-attach in embark-file-map
+    (setq 'consult-mu-embark-attach-file-key "C-a")
+    (consult-mu-compose-embark-bind-attach-file-key)
+    ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
+    (customize-save-variable 'consult-mu-compose-use-dired-attachment 'in-dired)))
 
 
 ;;; Editor
