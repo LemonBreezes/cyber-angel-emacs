@@ -65,8 +65,8 @@ It is meant to be used as a `post-gc-hook'."
 ;; Be wary of enabling this, especially on Android devices:
 ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
 (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
-(advice-add #'save-buffers-kill-emacs :before-until #'cae-hacks-disable-gc)
-(advice-add #'kill-emacs :before-until #'cae-hacks-disable-gc)
+(advice-add #'save-buffers-kill-emacs :before #'cae-hacks-disable-gc)
+(advice-add #'kill-emacs :before #'cae-hacks-disable-gc)
 
 
 ;;; Other hacks
