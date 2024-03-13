@@ -379,5 +379,6 @@
             "J" #'consult-line))))
 
 (when (modulep! :email mu4e)
-  (map! :map mu4e-headers-mode-map
-        :n "C-r" #'mu4e-compose-wide-reply))
+  (after! mu4e-headers
+    (map! :map mu4e-headers-mode-map
+          :n "C-r" #'mu4e-compose-wide-reply)))
