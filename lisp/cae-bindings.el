@@ -377,8 +377,3 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
-
-(when (modulep! :email mu4e)
-  (after! mu4e-headers
-    (map! :map mu4e-headers-mode-map
-          :n "C-r" #'mu4e-compose-wide-reply)))
