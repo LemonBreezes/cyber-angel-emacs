@@ -13,10 +13,15 @@
 
   (defun cae-shared-scroll-with-hint-a (count line-fn count-fn)
     (require 'scrollkeeper)
-    (let ((count (funcall count-fn count)))
+    (let ((count (funcall count-fn count))
+          (old-start (window-start)))
       (save-excursion
         (move-to-window-line (funcall line-fn count))
-        (funcall scrollkeeper-guideline-fn))))
+        (funcall scrollkeeper-guideline-fn))
+      (when (and (= old-start (window-start))
+                 (not (eq (window-start) (point-min)))
+                 (not (eq (window-end nil t) (point-max))))
+        (backtrace))))
 
   (defadvice! cae-evil-scroll-down-with-hint-a (count &rest _)
     :before #'evil-scroll-down
