@@ -163,7 +163,7 @@
   (unless (global-key-binding [(control f4)])
     (global-set-key [(control f4)] #'tab-close)))
 (defadvice! cae-tab-bar-undefine-keys-a ()
-
+  :after #'tab-bar--undefine-keys
   (when (eq (global-key-binding [(control f4)]) #'tab-close)
     (global-unset-key [(control f4)])))
 
