@@ -633,7 +633,7 @@
         (spell-fu-mode -1))))
 
   (use-package! 0x0
-    :defer t :init
+
     (map! "C-x U" #'0x0-dwim)
     (after! embark
       (define-key embark-region-map (kbd "U") '0x0-dwim)))
@@ -662,11 +662,12 @@
     ;; require extra module for searching contacts and runing embark actions on contacts
     (require 'consult-mu-contacts)
     (require 'consult-mu-contacts-embark)
-    ;; pick a key to bind to consult-mu-compose-attach in embark-file-map
     (setq consult-mu-embark-attach-file-key "C-a")
+    (setq consult-mu-contacts-ignore-list '("^.*no.*reply.*"))
+    (setq consult-mu-contacts-ignore-case-fold-search t)
     (consult-mu-compose-embark-bind-attach-file-key)
     ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
-    (customize-save-variable 'consult-mu-compose-use-dired-attachment 'in-dired)))
+    (setq consult-mu-compose-use-dired-attachment 'in-dired)))
 
 
 ;;; Editor
