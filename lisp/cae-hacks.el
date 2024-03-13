@@ -207,7 +207,7 @@ It is meant to be used as a `post-gc-hook'."
           '(org-activate-links)
           (when (memq 'tag org-highlight-links) '(org-activate-tags (1 'org-tag prepend)))
           (when (memq 'radio org-highlight-links) '(org-activate-target-links (1 'org-link prepend)))
-          (when (memq 'date org-highlight-links) '(org-activate-dates (0 'org-date append)))
+          (when (memq 'date org-highlight-links) '(org-activate-dates (0 'org-date prepend)))
           (when (memq 'footnote org-highlight-links) '(org-activate-footnote-links))
           ;; Targets.
           (list org-radio-target-regexp '(0 'org-target t))
