@@ -66,6 +66,7 @@ It is meant to be used as a `post-gc-hook'."
 ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
 (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
 (advice-add #'save-buffers-kill-emacs :before-until #'cae-hacks-disable-gc)
+(advice-add #'kill-emacs :before-until #'cae-hacks-disable-gc)
 
 
 ;;; Other hacks
@@ -206,7 +207,7 @@ It is meant to be used as a `post-gc-hook'."
           '(org-activate-links)
           (when (memq 'tag org-highlight-links) '(org-activate-tags (1 'org-tag prepend)))
           (when (memq 'radio org-highlight-links) '(org-activate-target-links (1 'org-link prepend)))
-          (when (memq 'date org-highlight-links) '(org-activate-dates (0 'org-date prepend)))
+          (when (memq 'date org-highlight-links) '(org-activate-dates (0 'org-date append)))
           (when (memq 'footnote org-highlight-links) '(org-activate-footnote-links))
           ;; Targets.
           (list org-radio-target-regexp '(0 'org-target t))
