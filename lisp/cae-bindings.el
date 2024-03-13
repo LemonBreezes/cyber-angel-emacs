@@ -159,7 +159,7 @@
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
 (defadvice! cae-tab-bar-define-keys-a ()
-
+  :after #'tab-bar--define-keys
   (unless (global-key-binding [(control f4)])
     (global-set-key [(control f4)] #'tab-close)))
 (defadvice! cae-tab-bar-undefine-keys-a ()
