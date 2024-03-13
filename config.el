@@ -651,7 +651,7 @@
     ;; define a template for headers view in minibuffer. The example below adjusts the width based on the width of the screen.
     (consult-mu-headers-template (lambda () (concat "%f" (number-to-string (floor (* (frame-width) 0.15))) "%s" (number-to-string (floor (* (frame-width) 0.5))) "%d13" "%g" "%x")))
     :config
-    ;;create a list of saved searches for quick access using `histroy-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
+    ;;create a list of saved searches for quick access using `history-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
     (setq consult-mu-saved-searches-dynamics '("#flag:unread"))
     (setq consult-mu-saved-searches-async '("#flag:unread"))
     ;; require embark actions for marking, replying, forwarding, etc. directly from minibuffer
