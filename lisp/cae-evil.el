@@ -164,7 +164,7 @@
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-l" #'cae-cape-history-or-line
-         :i "C-s" #'yasnippet-capf
+         :i "C-s" #'+default/insert-snippet
          :i "C-]" #'cae-cape-lsp
          :i "C-r" #'cae-cape-keyword-or-dict
          :i "s" #'cape-elisp-symbol))
