@@ -164,10 +164,8 @@
          :i "C-c" #'copilot-complete
          :i "C-f" #'cape-file
          :i "C-l" #'cae-cape-history-or-line
-         (:when (modulep! :editor snippets)
-          :i "C-s" #'yas-insert-snippet)
-         (:when (modulep! :tools lsp)
-          :i "C-]" #'cae-cape-lsp)
+         :i "C-s" #'yas-insert-snippet
+         :i "C-]" #'cae-cape-lsp
          :i "C-r" #'cae-cape-keyword-or-dict
          :i "s" #'cape-elisp-symbol))
   (define-key! :keymaps +default-minibuffer-maps
