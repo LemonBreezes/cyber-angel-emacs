@@ -187,14 +187,6 @@
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
 
-  (after! ffap
-    ;; Do not count angle brackets as part of file names because then they get
-    ;; mixed up with the tags.
-    (let ((modes '(nxml-mode xml-mode)))
-      (dolist (mode modes)
-        (setf (alist-get mode ffap-string-at-point-mode-alist)
-              (list "--:\\\\${}+@-Z_[:alpha:]~*?#" "" "")))))
-
   ;; Do not spam me with warnings.
   (unless init-file-debug
     (add-hook! 'doom-first-file-hook :append
