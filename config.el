@@ -311,7 +311,7 @@
       "Show my workspaces in the echo thingy"
       :around #'which-key--process-page
       (let ((out (apply orig-fun pages-obj)))
-        (if (not (string-match-p "Display tab bar" (car out)))
+        (if (not (string-match-p "Display tab bar\\b" (car out)))
             out
           (cons (car out)
                 (lambda ()
