@@ -308,7 +308,7 @@
 
   (when (modulep! :ui workspaces)
     (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
-      "Show my workspaces in the echo thingy"
+      "Show my workspaces in the echo area."
       :around #'which-key--process-page
       (let ((out (apply orig-fun pages-obj)))
         (if (not (string-match-p "Display tab bar\\b" (car out)))
