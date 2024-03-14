@@ -667,7 +667,11 @@
     (setq consult-mu-contacts-ignore-case-fold-search t)
     (consult-mu-compose-embark-bind-attach-file-key)
     ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
-    (setq consult-mu-compose-use-dired-attachment 'in-dired)))
+    (setq consult-mu-compose-use-dired-attachment 'in-dired))
+
+  (after! consult-yasnippet
+    (setq consult-yasnippet-use-thing-at-point t
+          consult-yasnippet-always-overwrite-thing-at-point t)))
 
 
 ;;; Editor
