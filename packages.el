@@ -28,9 +28,6 @@
            :pre-build (straight-recipes-org-elpa--build)
            :build (:not autoloads)
            :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
-(package! consult-yasnippet :recipe
-  (:host github :repo "LemonBreezes/consult-yasnippet"
-   :branch "fix-integer-or-marker-p-error"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
