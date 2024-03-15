@@ -231,6 +231,7 @@
   (which-key-add-keymap-based-replacements search-map "h" "highlight")
   (which-key-add-keymap-based-replacements help-map "4" "other-window")
   (which-key-add-keymap-based-replacements help-map "dp" "packages")
+  (which-key-add-keymap-based-replacements ctl-x-map "8e" "emoji")
   (dolist (p '(("4" . "other-window")
                ("5" . "other-frame")
                ("8" . "unicode")
