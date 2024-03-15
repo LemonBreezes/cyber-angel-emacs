@@ -270,8 +270,8 @@
    ;; For these, you can always tell what the command does without the prefix.
    '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
    '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
-   '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))))
-(which-key-add-keymap-based-replacements doom-leader-map "hdp" "packages")
+   '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1")))
+  (which-key-add-keymap-based-replacements doom-leader-map "hdp" "packages"))
 
 
 ;;; Consult keybindings
