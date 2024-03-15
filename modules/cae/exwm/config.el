@@ -188,7 +188,8 @@
               :after (lambda (id)
                        (with-current-buffer (exwm--id->buffer id)
                          (setq exwm--ewmh-state
-                               (delq xcb:Atom:_NET_WM_STATE_HIDDEN exwm--ewmh-state))
+                               (delq xcb:Atom:_NET_WM_STATE_HIDDEN
+                                     exwm--ewmh-state))
                          (exwm-layout--set-ewmh-state id)
                          (xcb:flush exwm--connection))))
 
