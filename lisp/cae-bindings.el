@@ -230,6 +230,7 @@
 (after! which-key
   (which-key-add-keymap-based-replacements search-map "h" "highlight")
   (which-key-add-keymap-based-replacements help-map "4" "other-window")
+  (which-key-add-keymap-based-replacements doom-leader-map "hdp" "packages")
   (dolist (p '(("4" . "other-window")
                ("5" . "other-frame")
                ("8" . "unicode")
@@ -270,8 +271,7 @@
    ;; For these, you can always tell what the command does without the prefix.
    '(("" . "tab-bar-\\(.*\\)") . (nil . "\\1"))
    '(("" . "winum-\\(.*\\)") . (nil . "\\1"))
-   '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1")))
-  (which-key-add-keymap-based-replacements doom-leader-map "hdp" "packages"))
+   '(("" . "+workspace[-/]\\(.*\\)") . (nil . "\\1"))))
 
 
 ;;; Consult keybindings
