@@ -182,8 +182,8 @@
       (apply oldfun args)))
   (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
-  ;; See https://github.com/emacs-exwm/exwm/issues/18.
-  ;; Addresses a focus issue with EXWM.
+  ;; See https://github.com/emacs-exwm/exwm/issues/18. Addresses a focus issue
+  ;; with EXWM but can cause increase power consumption.
   (advice-add #'exwm-layout--hide
               :after (lambda (id)
                        (with-current-buffer (exwm--id->buffer id)
