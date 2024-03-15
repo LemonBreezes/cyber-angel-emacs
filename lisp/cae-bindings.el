@@ -230,7 +230,7 @@
 (after! which-key
   (which-key-add-keymap-based-replacements search-map "h" "highlight")
   (which-key-add-keymap-based-replacements help-map "4" "other-window")
-  (which-key-add-keymap-based-replacements doom-leader-map "hdp" "packages")
+  (which-key-add-keymap-based-replacements help-map "dp" "packages")
   (dolist (p '(("4" . "other-window")
                ("5" . "other-frame")
                ("8" . "unicode")
