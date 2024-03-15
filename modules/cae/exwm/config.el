@@ -182,6 +182,15 @@
       (apply oldfun args)))
   (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
+  ;; See https://github.com/emacs-exwm/exwm/issues/18.
+  (advice-add #'exwm-layout--hide
+              :after (lambda (id)
+                       (with-current-buffer (exwm--id->buffer id)
+                         (setq exwm--ewmh-state
+                               (delq xcb:Atom:_NET_WM_STATE_HIDDEN exwm--ewmh-state))
+                         (exwm-layout--set-ewmh-state id)
+                         (xcb:flush exwm--connection))))
+
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
