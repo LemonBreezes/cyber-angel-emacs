@@ -271,12 +271,12 @@
     (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist))
   :config
-  (after! which-key
-    (which-key-add-keymap-based-replacements ctl-x-map
-      "/" "pulseaudio-control"))
   (pulseaudio-control-default-keybindings)
   (setq pulseaudio-control-use-default-sink t)
-  (pulseaudio-control-default-keybindings))
+  (pulseaudio-control-default-keybindings)
+  (after! which-key
+    (which-key-add-keymap-based-replacements ctl-x-map
+      "/" "pulseaudio-control")))
 
 (use-package! trashed
   :defer t :init
