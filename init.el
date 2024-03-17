@@ -50,8 +50,8 @@
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
-(setq doom-leader-alt-key "<f7>"
-      doom-localleader-alt-key "<f7> m")
+(setq doom-leader-alt-key "M-SPC"
+      doom-localleader-alt-key "M-SPC m")
 
 (doom! :completion
        (vertico +icons)
