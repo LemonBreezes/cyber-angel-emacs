@@ -382,9 +382,9 @@
     :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
   ;; Prettify email replies.
-  (use-package! nice-citation
-    :when (cae-display-graphic-p)
-    :after (:or gnus message))
+  ;;(use-package! nice-citation
+  ;;  :when (cae-display-graphic-p)
+  ;;  :after (:or gnus message))
 
   ;; Prettify compilation buffers.
   (use-package! fancy-compilation
