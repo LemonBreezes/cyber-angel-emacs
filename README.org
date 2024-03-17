@@ -79,7 +79,7 @@ that are in currently enabled modules.
 |                   | cC-f                 | ~lsp-ui-imenu~                   |
 |                   | fTAB                 | ~find-sibling-file~              |
 | lsp               | cTAB                 | ~font-lock-mode~                 |
-| evil              | bo                   | ~cae-evil-buffer-org-new~      |
+| evil              | bo                   | ~cae-evil-buffer-org-new~        |
 | vc                | iI                   | ~gitignore-templates-insert~     |
 | vc                | tB                   | ~blamer-mode~                    |
 | vc                | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
@@ -90,3 +90,8 @@ that are in currently enabled modules.
 | exwm and evil     | $                    | ~helm-run-external-command~      |
 | holy              | F                    | ~doom-leader-fold-map~           |
 | holy              | to                   | ~symbol-overlay-mode~            |
+
+- the end ::
+  then what
+- is the cat ::
+then
