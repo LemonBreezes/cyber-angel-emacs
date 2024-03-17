@@ -105,7 +105,9 @@
       (:when (modulep! :cae ai)
        "<f10>" #'whisper-run
        "<f5>" #'cae-org-ai-on-region-or-buffer
-       "C-<f5>" #'copilot-panel-complete)
+       "C-<f5>" #'copilot-panel-complete
+       "<f5>" #'cae-org-ai-on-region-or-buffer
+       "<f2>" #'gptel-menu)
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
