@@ -4,7 +4,6 @@
 (package! org-rich-yank)
 (package! org-inline-pdf)
 (package! language-detection)
-(package! org-appear)
 (package! org-web-tools)
 
 (when (modulep! +pretty)
