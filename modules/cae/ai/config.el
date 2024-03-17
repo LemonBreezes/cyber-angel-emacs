@@ -38,7 +38,8 @@
     (org-ai-install-yasnippets)))
 
 (use-package! gptel
-  :defer t)
+  :defer t :config
+  (setq gptel-model "gpt-4-turbo-preview"))
 
 (use-package! chatgpt-shell
   :defer t :init
