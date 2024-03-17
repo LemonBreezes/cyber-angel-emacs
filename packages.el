@@ -8,7 +8,8 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   mu4e-alert)
+                   mu4e-alert
+                   doom-snippets)
 ;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
