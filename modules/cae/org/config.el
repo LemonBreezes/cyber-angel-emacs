@@ -33,14 +33,6 @@
         "]" #'cae-org-insert-checkbox-or-bracket
         "C-c C-v" #'cae-org-babel-cheatsheet))
 
-(defun locally-defer-font-lock ()
-  "Set jit-lock defer and stealth, when buffer is over a certain size."
-  (when (> (buffer-size) 500000)
-    (setq-local jit-lock-defer-time 0.05
-                jit-lock-stealth-time 1)))
-
-(add-hook 'org-mode-hook #'locally-defer-font-lock)
-
 (after! org
   (map! :map org-mode-map
         :localleader
