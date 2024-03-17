@@ -17,8 +17,6 @@
         (cae-oneshot-keymap org-ai-global-mode-prefix-map org-ai))
   (autoload 'org-ai-mode "org-ai" nil t)
   (add-hook 'org-mode-hook #'org-ai-mode)
-  (map! :nv "g!" #'cae-org-ai-on-region-or-buffer
-        "<f5>" #'cae-org-ai-on-region-or-buffer)
   :config
   (require 'whisper)
   (require 'greader-espeak)
@@ -38,6 +36,10 @@
         org-ai-on-project-modify-with-diffs t)
   (when (modulep! :editor snippets)
     (org-ai-install-yasnippets)))
+
+(use-package! gptel
+  :defer t :init
+  (map! ))
 
 (use-package! chatgpt-shell
   :defer t :init
