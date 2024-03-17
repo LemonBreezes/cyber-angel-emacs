@@ -38,8 +38,7 @@
     (org-ai-install-yasnippets)))
 
 (use-package! gptel
-  :defer t :init
-  (map! ))
+  :defer t)
 
 (use-package! chatgpt-shell
   :defer t :init
