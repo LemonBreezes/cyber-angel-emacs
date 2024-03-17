@@ -1227,6 +1227,7 @@
     (setq org-directory "~/org/"
           org-extend-today-until 3
           org-startup-with-inline-images t
+          org-startup-align-all-tables t
           org-image-actual-width t
           org-log-done 'time
           org-log-done-with-time t
