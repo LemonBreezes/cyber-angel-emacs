@@ -3,9 +3,10 @@
 ;;;###autoload
 (defun +emms (&optional arg)
   (interactive "P")
-  (setq +emms--old-wconf (current-window-configuration))
-  (let ((ignore-window-parameters t))
-    (delete-other-windows))
+  (unless (string-prefix-p "emms-" (symbol-name major-mode))
+    (setq +emms--old-wconf (current-window-configuration))
+    (let ((ignore-window-parameters t))
+      (delete-other-windows)))
   (call-interactively #'emms-smart-browse))
 
 ;;;###autoload
