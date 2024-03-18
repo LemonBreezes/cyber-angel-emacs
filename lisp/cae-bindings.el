@@ -129,11 +129,6 @@
        :map c-mode-base-map
        "TAB" nil))
 
-;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
-;; a closing paren if parens are unbalanced.
-(map! [remap delete-char] #'cae-delete-char
-      ")" #'cae-insert-closing-paren)
-
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (define-key help-map (kbd "SPC") #'cae-pop-mark)
 (define-key help-map (kbd "DEL") #'cae-pop-mark)
