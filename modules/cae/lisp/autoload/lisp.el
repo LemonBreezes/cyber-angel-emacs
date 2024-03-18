@@ -87,3 +87,19 @@ unbalanced. Works with Lispy and Smartparens."
                   #'sp-delete-char))
                (t #'delete-char))))
     (call-interactively delete-fn)))
+
+;;;###autoload
+(defun cae-edebug-compute-previous-result-a (_ &rest r)
+  "Adviced `edebug-compute-previous-result'."
+  (let ((previous-value (nth 0 r)))
+    (if edebug-unwrap-results
+        (setq previous-value
+              (edebug-unwrap* previous-value)))
+    (setq edebug-previous-result
+          (edebug-safe-prin1-to-string previous-value))))
+
+;;;###autoload
+(defun cae-edebug-previous-result-a (_ &rest r)
+  "Adviced `edebug-previous-result'."
+  (eros--make-result-overlay edebug-previous-result :where (point)
+                             :duration eros-eval-result-duration))
