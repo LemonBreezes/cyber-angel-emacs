@@ -28,10 +28,6 @@
                   comment-end ""
                   comment-start-skip ";+ *"
                   comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
-;; Allow inserting newlines in the minibuffer. Also protect from
-;; entering unbalanced expressions into `eval-expression'.
-(map! :map minibuffer-local-map
-      [remap exit-minibuffer] #'cae-lisp-newline-and-indent)
 
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
