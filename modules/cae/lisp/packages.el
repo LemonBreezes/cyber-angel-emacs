@@ -2,3 +2,4 @@
 ;;; private/lisp/packages.el
 
 (package! xr)
+(package! rsw-elisp)
