@@ -25,25 +25,6 @@
 ;;                            ((eq response ?d) (diff-buffer-with-file) nil))))))))))
 ;;  (funcall orig-func buffer-or-name))
 ;;
-;;;###autoload
-(defun cae-delete-char ()
-  "Like `delete-char', but works on the region if active, and
-deletes the following char if the sexps in the buffer are
-unbalanced. Works with Lispy and Smartparens."
-  (interactive)
-  (let ((delete-fn
-         (cond ((condition-case _
-                    (scan-sexps (point-min) (point-max))
-                  (scan-error t))
-                #'delete-char)
-               ((bound-and-true-p lispy-mode)
-                #'lispy-delete)
-               ((bound-and-true-p smartparens-mode)
-                (if (region-active-p)
-                    #'sp-delete-region
-                  #'sp-delete-char))
-               (t #'delete-char))))
-    (call-interactively delete-fn)))
 
 ;;;###autoload
 (defun cae-toggle-sudo ()
