@@ -157,8 +157,7 @@
        org
        ai
        gnus
-       eww
-       )
+       eww)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
