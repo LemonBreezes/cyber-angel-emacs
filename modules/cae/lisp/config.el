@@ -19,6 +19,11 @@
               #'cae-edebug-compute-previous-result-a)
   (advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
 
+;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
+;; a closing paren if parens are unbalanced.
+(map! [remap delete-char] #'cae-delete-char
+      ")" #'cae-insert-closing-paren)
+
 ;; Allow `eval-expression' to have comments.
 (add-hook! 'minibuffer-setup-hook
   (defun cae-lisp-eval-expression-set-up-comments-h ()
