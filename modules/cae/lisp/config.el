@@ -1,12 +1,5 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
-(defadvice! +syntax--fix-elisp-flymake-load-path (orig-fn &rest args)
-  "Set load path for elisp byte compilation Flymake backend"
-  :around #'elisp-flymake-byte-compile
-  (let ((elisp-flymake-byte-compile-load-path
-         (append elisp-flymake-byte-compile-load-path load-path)))
-    (apply orig-fn args)))
-
 ;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
   (defun cae-edebug-compute-previous-result-a (_ &rest r)
