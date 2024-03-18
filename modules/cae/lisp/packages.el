@@ -2,4 +2,4 @@
 ;;; private/lisp/packages.el
 
 (package! xr)
-(package! rsw-elisp)
+(package! rsw-elisp :recipe (:host github :repo "rswgnu/rsw-elisp"))
