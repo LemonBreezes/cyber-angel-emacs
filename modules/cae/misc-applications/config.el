@@ -751,7 +751,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"
       "j" "Jump to music dir"))
-  ;; Randomize all Dired playlists
+  ;; Randomize all Dired playlists.
   (advice-add #'emms-source-dired :filter-return
               (lambda (list)
                 (sort list (lambda (_ _) (< (random) 0.5)))))
