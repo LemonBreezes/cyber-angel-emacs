@@ -66,20 +66,6 @@ unbalanced. Works with Lispy and Smartparens."
       (goto-char p))))
 
 ;;;###autoload
-(defun cae-insert-closing-paren ()
-  "Inserts a closing paren if the sexps in the buffer are
-unbalanced, otherwise acts like `self-insert-command'. Works with
-Lispy."
-  (interactive)
-  (cond ((condition-case error
-             (scan-sexps (point-min) (point-max))
-           (scan-error t))
-         (insert-char ?\)))
-        ((bound-and-true-p lispy-mode)
-         (call-interactively #'lispy-right-nostring))
-        (t (call-interactively #'self-insert-command))))
-
-;;;###autoload
 (defun cae-eval-last-sexp (arg)
   ;; Call `pp-eval-last-sexp' when called with a negative
   ;; prefix argument
