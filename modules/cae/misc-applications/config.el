@@ -751,6 +751,9 @@
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "e" "EMMS"
       "j" "Jump to music dir"))
+    (after! evil-snipe
+      (cl-pushnew #'emms-browser-mode evil-snipe-disabled-modes)
+      (cl-pushnew #'emms-playlist-mode evil-snipe-disabled-modes))
   ;; Randomize all Dired playlists.
   (advice-add #'emms-source-dired :filter-return
               (lambda (list)
