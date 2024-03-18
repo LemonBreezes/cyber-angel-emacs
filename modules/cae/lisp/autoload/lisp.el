@@ -53,3 +53,17 @@
                 :keymap 'lispy-mode-map
                 :transient t
                 :flatten t))
+
+;;;###autoload
+(defun cae-insert-closing-paren ()
+  "Inserts a closing paren if the sexps in the buffer are
+unbalanced, otherwise acts like `self-insert-command'. Works with
+Lispy."
+  (interactive)
+  (cond ((condition-case error
+             (scan-sexps (point-min) (point-max))
+           (scan-error t))
+         (insert-char ?\)))
+        ((bound-and-true-p lispy-mode)
+         (call-interactively #'lispy-right-nostring))
+        (t (call-interactively #'self-insert-command))))
