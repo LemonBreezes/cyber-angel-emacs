@@ -19,7 +19,6 @@
   (defun cae-eros-setup-keybindings-h ()
     (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
-
 ;; Allow `eval-expression' to have comments.
 (add-hook! 'minibuffer-setup-hook
   (defun cae-lisp-eval-expression-set-up-comments-h ()
