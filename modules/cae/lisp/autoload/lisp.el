@@ -103,3 +103,29 @@ unbalanced. Works with Lispy and Smartparens."
   "Adviced `edebug-previous-result'."
   (eros--make-result-overlay edebug-previous-result :where (point)
                              :duration eros-eval-result-duration))
+
+;;;###autoload
+(defun cae-eval-last-sexp (arg)
+  ;; Call `pp-eval-last-sexp' when called with a negative
+  ;; prefix argument
+  (interactive "P")
+  (cond ((or (eq arg '-)
+             (and (numberp arg)
+                  (< arg 0)))
+         (funcall #'pp-eval-last-sexp (if (numberp arg) nil)))
+        ((bound-and-true-p eros-mode)
+         (funcall #'eros-eval-last-sexp arg))
+        (t (funcall #'eval-last-sexp arg))))
+
+;;;###autoload
+(defun cae-eval-expression (arg)
+  ;; Call `pp-eval-expression' when called with a negative
+  ;; prefix argument
+  (interactive "P")
+  (cond ((or (eq arg '-)
+             (and (numberp arg)
+                  (< arg 0)))
+         (setq current-prefix-arg (and (numberp arg)
+                                       (- arg)))
+         (call-interactively #'pp-eval-expression))
+        (t (call-interactively #'eval-expression))))
