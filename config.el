@@ -791,14 +791,6 @@
     (add-to-list 'clean-buffer-list-kill-never-buffer-names
                  doom-fallback-buffer-name))
 
-  ;; Allow C-u - using `pp' on the `eval-expression' output.
-  (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
-  (map! [remap eval-last-sexp] #'cae-eval-last-sexp
-        [remap eval-expression] #'cae-eval-expression)
-  (add-hook! 'eros-mode-hook
-    (defun cae-eros-setup-keybindings-h ()
-      (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
-
   (after! outline
     (setq outline-minor-mode-use-buttons nil))
 
