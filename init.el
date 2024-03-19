@@ -80,6 +80,7 @@
        ;;fold
        (evil +everywhere)
        lispy
+       rotate-text
 
        :emacs
        undo
