@@ -27,7 +27,7 @@
   ;; Add a 3D mode-line effect if we're using a theme from `ef-themes'.
   (when (and (eq (length custom-enabled-themes) 1)
              (string-prefix-p "ef-" (symbol-name (car custom-enabled-themes))))
-    (set-face-attribute 'mode-line nil :box '(:line-width 1 :style released-button)))
+    (set-face-attribute 'mode-line nil :box (face-foreground 'shr-h2 nil t)))
 
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
