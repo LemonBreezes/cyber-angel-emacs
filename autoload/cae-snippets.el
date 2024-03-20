@@ -3,7 +3,8 @@
 ;;;###autoload
 (defun +yas/org-src-header-p ()
   "Determine whether `point' is within a src-block header or header-args."
-  (pcase (org-element-type (org-element-context))
+  (pcase (and (derived-mode-p 'org-mode)
+              (org-element-type (org-element-context)))
     ('src-block (< (point) ; before code part of the src-block
                    (save-excursion (goto-char (org-element-property :begin (org-element-context)))
                                    (forward-line 1)
