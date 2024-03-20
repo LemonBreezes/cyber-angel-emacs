@@ -109,7 +109,7 @@
     ;; some strange scenarios involving EXWM so it's easier for me to just turn
     ;; them off.
     (after! lsp-ui-doc
-      (setq lsp-ui-doc-mode-map (make-sparse-keymap)))
+      (setq lsp-ui-doc-show-with-mouse nil))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
