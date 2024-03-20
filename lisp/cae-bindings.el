@@ -364,13 +364,6 @@
           "M-<return>" #'org-insert-heading
           "M-S-<return>" #'org-insert-todo-heading)))
 
-;; I don't use the `org-priority-down6' and `org-priority-up6' commands.
-(defadvice! cae-org-init-keybindings-a ()
-  :after #'+org-init-keybinds
-  (map! :map org-mode-map
-        :localleader
-        "p" #'org-priority))
-
 (after! treemacs
   (when (modulep! :completion vertico)
     (map! :map treemacs-mode-map
