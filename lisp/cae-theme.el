@@ -25,6 +25,7 @@
 
 (defun cae-theme-customize-faces-h (_)
   ;; Add a 3D mode-line effect if we're using a theme from `ef-themes'.
+  ;; This only looks good for some of the Ef themes sadly.
   (when (and (eq (length custom-enabled-themes) 1)
              (string-prefix-p "ef-" (symbol-name (car custom-enabled-themes))))
     (set-face-attribute 'mode-line nil :box (face-foreground 'ef-themes-heading-0 nil t))
