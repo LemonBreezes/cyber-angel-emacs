@@ -28,7 +28,7 @@
   (when (and (eq (length custom-enabled-themes) 1)
              (string-prefix-p "ef-" (symbol-name (car custom-enabled-themes))))
     (set-face-attribute 'mode-line nil :box (face-foreground 'shr-h2 nil t))
-    (set-face-attribute 'mode-line-inactive nil :box (face-foreground 'custom-comment nil t)))
+    (set-face-attribute 'mode-line-inactive nil :box "DimGray"))
 
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
