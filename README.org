@@ -72,7 +72,6 @@ that are in currently enabled modules.
 |-------------------+----------------------+--------------------------------|
 |                   | fi                   | ~file-info-show~                 |
 |                   | k                    | ~ctl-x-map~                      |
-|                   | d                    | ~+doom-dashboard/open~           |
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
 |                   | cC-v                 | ~vline-mode~                     |
