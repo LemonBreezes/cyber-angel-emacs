@@ -108,7 +108,7 @@
     ;; I never use the `<mouse-movement>' commands they are being triggered in
     ;; some strange scenarios involving EXWM so it's easier for me to just turn
     ;; them off.
-    (add-hook! 'post-command-hook
+    (add-hook! 'post-command-hook :depth -1
       (defun cae-disable-track-mouse-h ()
         (setq track-mouse
               ;; Allow drag-to-select.
