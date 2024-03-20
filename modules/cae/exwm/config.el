@@ -108,13 +108,8 @@
     ;; I never use the `<mouse-movement>' commands they are being triggered in
     ;; some strange scenarios involving EXWM so it's easier for me to just turn
     ;; them off.
-    (add-hook! 'post-command-hook :depth -1
-      (defun cae-disable-track-mouse-h ()
-        (setq track-mouse
-              ;; Allow drag-to-select.
-              (derived-mode-p 'pdf-view-mode
-                              'doc-view-mode
-                              'image-mode))))
+    (after! lsp-ui-doc
+      (setq lsp-ui-doc-mode-map (make-sparse-keymap)))
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
