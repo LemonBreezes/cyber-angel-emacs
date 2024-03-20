@@ -33,9 +33,9 @@
       :desc "Find file in .emacs.d" :ng "e" #'doom/find-file-in-emacsd
       :desc "Browse .emacs.d" :ng "E" #'doom/browse-in-emacsd)
 
-;;(defun +doom-dashboard-tweak (&optional _)
-;;  (with-current-buffer (get-buffer +doom-dashboard-name)
-;;    (setq-local line-spacing 0.2
-;;                mode-line-format nil)))
-;;
-;;(add-hook '+doom-dashboard-mode-hook #'+doom-dashboard-tweak)
+(defun +doom-dashboard-tweak (&optional _)
+  (with-current-buffer (get-buffer +doom-dashboard-name)
+    (setq-local line-spacing 0.2
+                mode-line-format nil)))
+
+(add-hook '+doom-dashboard-mode-hook #'+doom-dashboard-tweak)
