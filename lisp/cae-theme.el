@@ -27,8 +27,8 @@
   ;; Add a 3D mode-line effect if we're using a theme from `ef-themes'.
   (when (and (eq (length custom-enabled-themes) 1)
              (string-prefix-p "ef-" (symbol-name (car custom-enabled-themes))))
-    (set-face-attribute 'mode-line nil :box (face-foreground 'shr-h2 nil t))
-    (set-face-attribute 'mode-line-inactive nil :box "DimGray"))
+    (set-face-attribute 'mode-line nil :box (face-foreground 'ef-themes-heading-1 nil t))
+    (set-face-attribute 'mode-line-inactive nil :box (face-foreground 'spam nil t)))
 
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
