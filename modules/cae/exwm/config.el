@@ -108,7 +108,7 @@
     ;; I never use the `<mouse-movement>' commands they are being triggered in
     ;; some strange scenarios involving EXWM so it's easier for me to just turn
     ;; them off.
-    (setq lsp-ui-doc-show-with-mouse nil)
+    (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
 
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
