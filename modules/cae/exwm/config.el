@@ -105,11 +105,6 @@
                 #'helm-display-buffer-in-own-frame)
         (setq helm-default-prompt-display-function #'helm-default-display-buffer)))
 
-    ;; I never use the `<mouse-movement>' commands they are being triggered in
-    ;; some strange scenarios involving EXWM so it's easier for me to just turn
-    ;; them off.
-    (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-
     ;; Nested Emacs sessions break when `exwm-xim' is used.
     ;; Configure emacs input methods in all X windows.
     ;; There are two ways to work around this:
