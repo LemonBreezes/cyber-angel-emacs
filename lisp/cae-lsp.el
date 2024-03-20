@@ -2,11 +2,7 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
-  ;; I never use the `<mouse-movement>' commands they are being triggered in
-  ;; some strange scenarios involving EXWM so it's easier for me to just turn
-  ;; them off.
   (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-log-max nil
