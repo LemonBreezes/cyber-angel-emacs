@@ -592,9 +592,9 @@
                                    'posframe 'buffer))
             ,@(if (cae-display-graphic-p)
                   (if (modulep! :completion vertico +childframe)
-                      ((t posframe))
+                      '((t posframe))
                     nil)
-                ((t flat))))))
+                '((t flat))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
