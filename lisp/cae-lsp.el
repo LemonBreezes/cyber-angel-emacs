@@ -2,9 +2,6 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
-  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-  (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-log-max nil
@@ -16,7 +13,7 @@
           ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
           lsp-enable-on-type-formatting t
-          lsp-enable-folding t
+
           ;; For some reason LSP isn't working for me over Tramp as well as
           ;; Eglot does. At least not over `sudo'.
           lsp-auto-register-remote-clients nil)
@@ -53,6 +50,12 @@
                       :server-id 'fennel-ls))
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
+
+  ;; Disable mouse support in LSP and Dap UIs. I don't use them and they can
+  ;; cause problems with `repeat-mode'.
+  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+  (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
 
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
