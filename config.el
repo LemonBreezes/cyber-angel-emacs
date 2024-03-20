@@ -594,7 +594,7 @@
                   (if (modulep! :completion vertico +childframe)
                       (list t 'posframe)
                     nil)
-                (list ".*" 'flat)))))
+                (list t 'flat)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
