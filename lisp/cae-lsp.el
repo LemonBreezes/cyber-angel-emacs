@@ -51,12 +51,6 @@
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
 
-  ;; Disable mouse support in LSP and Dap UIs. I don't use them and they can
-  ;; cause problems with `repeat-mode'.
-  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-  (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
-
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
   ;; and https://github.com/blahgeek/emacs-lsp-booster. They are meant to
