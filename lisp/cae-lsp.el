@@ -2,7 +2,6 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
-  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-log-max nil
