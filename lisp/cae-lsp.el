@@ -2,6 +2,11 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
+  ;; I never use the `<mouse-movement>' commands they are being triggered in
+  ;; some strange scenarios involving EXWM so it's easier for me to just turn
+  ;; them off.
+  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-log-max nil
@@ -37,7 +42,7 @@
             lsp-lua-hint-enable t
             lsp-lua-hint-set-type t
             lsp-clients-lua-language-server-bin (executable-find "lua-language-server")
-
+            lsp-clients-lua-lsp-server-install-dir lsp-clients-lua-language-server-bin
             lsp-clients-lua-language-server-main-location "/opt/lua-language-server/main.lua"))
     (after! lsp-json
       (plist-put lsp-json--schema-associations :/*.resume.json ["https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json"]))
