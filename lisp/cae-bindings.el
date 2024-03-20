@@ -178,8 +178,7 @@
   (define-key doom-leader-map "nd" nil))
 
 (when (modulep! :editor snippets)
-  (map! (:when (modulep! :completion vertico)
-         [remap yas-visit-snippet-file] #'consult-yasnippet-visit-snippet-file)
+  (map! (:when (modulep! :completion vertico))
         :map yas-minor-mode-map
         "C-c & C-s" nil
         "C-c & C-n" nil
