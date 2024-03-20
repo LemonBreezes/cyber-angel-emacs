@@ -24,8 +24,9 @@
       (setq markdown-fontify-whole-heading-line t))))
 
 (defun cae-theme-customize-faces-h (_)
-  ;;(set-face-attribute 'mode-line nil
-  ;;                    :box 'unspecified)
+  (when (and (eq (length custom-enabled-themes) 1)
+             (string-prefix-p "ef-" (symbol-name (car custom-enabled-themes))))
+    (set-face-attribute 'mode-line nil :box '(:line-width 1 :style released-button)))
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
     (unless cae-theme-extend-heading-faces
