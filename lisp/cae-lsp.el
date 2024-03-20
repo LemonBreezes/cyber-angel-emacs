@@ -4,6 +4,7 @@
            (not (modulep! :tools lsp +eglot)))
   (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
   (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
           lsp-log-max nil
