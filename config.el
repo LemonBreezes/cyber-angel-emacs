@@ -4,85 +4,86 @@
 
 ;;; Stuff that should not be disabled.
 
-(load! "lisp/cae-tty")
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+(when cae-init-core-enabled-p
+  (load! "lisp/cae-tty")
+  (load! "lisp/cae-bindings")
+  (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
+  (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
-(load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
+  (load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
                                         ;is also our Projectile configuration.
-(when (modulep! :editor evil)
-  (load! "lisp/cae-evil"))
-(add-hook! 'exwm-init-hook
-  (load! "lisp/cae-exwm"))
+  (when (modulep! :editor evil)
+    (load! "lisp/cae-evil"))
+  (add-hook! 'exwm-init-hook
+    (load! "lisp/cae-exwm"))
 
-;; Helm is not our main completion system. (Though I love Helm.)
-(when (and (modulep! :completion helm)
-           (modulep! :completion vertico))
-  (remove-hook 'doom-first-input-hook #'helm-mode))
+  ;; Helm is not our main completion system. (Though I love Helm.)
+  (when (and (modulep! :completion helm)
+             (modulep! :completion vertico))
+    (remove-hook 'doom-first-input-hook #'helm-mode))
 
-;; Have a fallback completion system.
-(unless (or (modulep! :completion helm)
-            (modulep! :completion ivy)
-            (modulep! :completion vertico))
-  (icomplete-mode +1)
-  (icomplete-vertical-mode +1))
+  ;; Have a fallback completion system.
+  (unless (or (modulep! :completion helm)
+              (modulep! :completion ivy)
+              (modulep! :completion vertico))
+    (icomplete-mode +1)
+    (icomplete-vertical-mode +1))
 
-;; I was getting an error without this.
-(unless (modulep! :lang emacs-lisp)
-  (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
+  ;; I was getting an error without this.
+  (unless (modulep! :lang emacs-lisp)
+    (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
-(after! xclip
-  (cond ((executable-find "termux-setup-storage")
-         (setq xclip-method 'termux-clipboard-get))))
+  (after! xclip
+    (cond ((executable-find "termux-setup-storage")
+           (setq xclip-method 'termux-clipboard-get))))
 
-;; For some reason Persp is picking up a few buffers that it should not.
-(when (modulep! :ui workspaces)
-  (after! persp-mode
-    (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
-      (defun cae-persp-skip-buffer-p (buffer)
-        (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
+  ;; For some reason Persp is picking up a few buffers that it should not.
+  (when (modulep! :ui workspaces)
+    (after! persp-mode
+      (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
+        (defun cae-persp-skip-buffer-p (buffer)
+          (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
 
-;; Set up fonts
-(unless (or (memq system-type '(cygwin windows-nt ms-dos))
-            (not (cae-display-graphic-p)))
-  (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
-                          ("IBM Plex Mono" doom-serif-font)
-                          ("Iosevka Comfy Duo" doom-variable-pitch-font))))
-    (dolist (font fonts-to-check)
-      (if (find-font (font-spec :name (car font)))
-          (set (cadr font) (font-spec :family (car font) :size 18))
-        (warn "Font %s does not exist!" (car font))))))
+  ;; Set up fonts
+  (unless (or (memq system-type '(cygwin windows-nt ms-dos))
+              (not (cae-display-graphic-p)))
+    (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
+                            ("IBM Plex Mono" doom-serif-font)
+                            ("Iosevka Comfy Duo" doom-variable-pitch-font))))
+      (dolist (font fonts-to-check)
+        (if (find-font (font-spec :name (car font)))
+            (set (cadr font) (font-spec :family (car font) :size 18))
+          (warn "Font %s does not exist!" (car font))))))
 
-;; Do not break my clipboard in SSH sessions.
-(when (and (modulep! :os tty)
-           (getenv "SSH_TTY")
-           (not (cae-display-graphic-p)))
-  (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
+  ;; Do not break my clipboard in SSH sessions.
+  (when (and (modulep! :os tty)
+             (getenv "SSH_TTY")
+             (not (cae-display-graphic-p)))
+    (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
-(after! tramp
-  (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
-        tramp-default-remote-shell (executable-find "bash")))
+  (after! tramp
+    (setq tramp-shell-prompt-pattern
+          "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
+          tramp-default-remote-shell (executable-find "bash")))
 
-(after! ghub
-  ;; I use the latest Emacs.
-  (setq ghub-use-workaround-for-emacs-bug-54989 nil
-        ghub-use-workaround-for-emacs-bug nil))
+  (after! ghub
+    ;; I use the latest Emacs.
+    (setq ghub-use-workaround-for-emacs-bug-54989 nil
+          ghub-use-workaround-for-emacs-bug nil))
 
-;; I really don't like this advice. Just let me kill the buffer.
-(advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
+  ;; I really don't like this advice. Just let me kill the buffer.
+  (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
-;; On NixOS, this is necessary.
-(when (executable-find "nixos-rebuild")
-  (dolist (path '("~/.local/bin"))
-    (setq path (expand-file-name path))
-    (add-to-list 'exec-path path)
-    (unless (member path (split-string (getenv "PATH") ":"))
-      (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
+  ;; On NixOS, this is necessary.
+  (when (executable-find "nixos-rebuild")
+    (dolist (path '("~/.local/bin"))
+      (setq path (expand-file-name path))
+      (add-to-list 'exec-path path)
+      (unless (member path (split-string (getenv "PATH") ":"))
+        (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
 
-;; I regularly PR Doom Emacs.
-(advice-add #'doom-docs-read-only-h :override #'ignore)
+  ;; I regularly PR Doom Emacs.
+  (advice-add #'doom-docs-read-only-h :override #'ignore))
 
 
 ;;; UI
