@@ -75,18 +75,18 @@ that are in currently enabled modules.
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
 |                   | cC-v                 | ~vline-mode~                     |
-|                   | cC-f                 | ~font-lock-mode~     |
+|                   | cC-f                 | ~font-lock-mode~                 |
 |                   | fTAB                 | ~find-sibling-file~              |
-| lsp               | cTAB                 | ~lsp-ui-imenu~                |
+| :tools lsp        | cTAB                 | ~lsp-ui-imenu~                   |
 | :editor evil      | bo                   | ~cae-evil-buffer-org-new~        |
-| vc                | iI                   | ~gitignore-templates-insert~     |
-| vc                | tB                   | ~blamer-mode~                    |
-| vc                | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
-| gnus              | og                   | ~=gnus~                          |
-| debugger          | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
-| ai                | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
-| ai                | oC                   | ~chatgpt-shell~                  |
-| exwm and evil     | $                    | ~helm-run-external-command~      |
+| :cae vc           | iI                   | ~gitignore-templates-insert~     |
+| :cae vc           | tB                   | ~blamer-mode~                    |
+| :cae vc           | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
+| :cae gnus         | og                   | ~=gnus~                          |
+| :cae debugger     | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
+| :cae ai           | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
+| :cae ai           | oC                   | ~chatgpt-shell~                  |
+| :cae exwm  | $                    | ~helm-run-external-command~      |
 | holy              | F                    | ~doom-leader-fold-map~           |
 | holy              | to                   | ~symbol-overlay-mode~            |
 
