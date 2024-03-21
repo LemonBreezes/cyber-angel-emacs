@@ -1338,6 +1338,7 @@
 ;;; Languages
 
 (when cae-init-languages-enabled-p
+
 ;;;; C/C++
   (add-hook 'c-mode-common-hook #'subword-mode)
 
