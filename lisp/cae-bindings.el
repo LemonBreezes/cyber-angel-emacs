@@ -27,48 +27,49 @@
                                         ;`C-s' to search in the minibuffer.
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
-(let ((embark-act-key "C-;")
-      (embark-act-alt-key "<f8>")
-      (embark-act-all-key "C-:")
-      (embark-act-all-alt-key "<f9>")
-      (embark-export-key "C-c C-;")
-      (embark-export-alt-key "C-c ;"))
-  (when (eq (lookup-key doom-leader-map "a")
-            'embark-act)
-    (define-key doom-leader-map "a" nil)
-    (after! which-key
-      (setq which-key-replacement-alist
-            (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
-                          which-key-replacement-alist))))
-  (map! (:when (modulep! :completion vertico)
-         "C-;" nil
-         (:map minibuffer-local-map
-          "C-;" nil
+(when (modulep! :completion vertico)
+  (let ((embark-act-key "C-;")
+        (embark-act-alt-key "<f8>")
+        (embark-act-all-key "C-:")
+        (embark-act-all-alt-key "<f9>")
+        (embark-export-key "C-c C-;")
+        (embark-export-alt-key "C-c ;"))
+    (when (eq (lookup-key doom-leader-map "a")
+              'embark-act)
+      (define-key doom-leader-map "a" nil)
+      (after! which-key
+        (setq which-key-replacement-alist
+              (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
+                            which-key-replacement-alist))))
+    (map! "C-;" nil
+          (:map minibuffer-local-map
+           "C-;" nil
+           embark-act-key #'cae-embark-act
+           embark-act-alt-key #'cae-embark-act
+           embark-act-all-key #'embark-act-all
+           embark-act-all-alt-key #'embark-act-all
+           embark-export-key #'embark-export
+           embark-export-alt-key #'embark-export)
+          (:map isearch-mode-map
+           [remap isearch-describe-bindings]
+           (cmd! () (embark-bindings-in-keymap isearch-mode-map)
+                 (when isearch-mode (isearch-update))))
           embark-act-key #'cae-embark-act
           embark-act-alt-key #'cae-embark-act
           embark-act-all-key #'embark-act-all
-          embark-act-all-alt-key #'embark-act-all
-          embark-export-key #'embark-export
-          embark-export-alt-key #'embark-export)
-         (:map isearch-mode-map
-          [remap isearch-describe-bindings] (cmd! () (embark-bindings-in-keymap isearch-mode-map)
-                                                  (when isearch-mode (isearch-update)))))
-        embark-act-key #'cae-embark-act
-        embark-act-alt-key #'cae-embark-act
-        embark-act-all-key #'embark-act-all
-        embark-act-all-alt-key #'embark-act-all)
-  (eval
-   `(after! embark
-      (setq embark-cycle-key ,embark-act-key))
-   t))
+          embark-act-all-alt-key #'embark-act-all)
+    (eval
+     `(after! embark
+        (setq embark-cycle-key ,embark-act-key))
+     t))
 
-(after! embark
-  ;; `elp' instrument package commands from `embark-package-map' are not mapped
-  ;; in `+vertico/embark-doom-package-map'.
-  (map! :map +vertico/embark-doom-package-map
-        "t" #'try)
-  (map! :map embark-region-map
-        "k" #'cae-kill-region))
+  (after! embark
+    ;; `elp' instrument package commands from `embark-package-map' are not mapped
+    ;; in `+vertico/embark-doom-package-map'.
+    (map! :map +vertico/embark-doom-package-map
+          "t" #'try)
+    (map! :map embark-region-map
+          "k" #'cae-kill-region)))
 
 ;; General keybindings.
 (map! [remap backward-kill-word] #'doom/delete-backward-word ;Do not litter the kill-ring.
