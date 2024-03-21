@@ -1337,26 +1337,27 @@
 
 ;;; Languages
 
+(when cae-init-languages-enabled-p
 ;;;; C/C++
-(add-hook 'c-mode-common-hook #'subword-mode)
+  (add-hook 'c-mode-common-hook #'subword-mode)
 
 ;;;; Fennel
-(add-hook 'fennel-mode-hook #'outline-minor-mode)
+  (add-hook 'fennel-mode-hook #'outline-minor-mode)
 
 
 ;;;; Lua
-(add-hook 'lua-mode-hook #'subword-mode)
-(add-hook 'lua-mode-hook #'outline-minor-mode)
-(setq-hook! 'lua-mode-hook
-  outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
+  (add-hook 'lua-mode-hook #'subword-mode)
+  (add-hook 'lua-mode-hook #'outline-minor-mode)
+  (setq-hook! 'lua-mode-hook
+    outline-regexp "[ 	]*---\\(-*\\**\\) [^ 	\n]")
 
-;; Prevent heading backgrounds from being overwritten.
-(when (bound-and-true-p cae-theme-extend-heading-faces)
-  (after! lsp
-    (add-hook! 'lua-mode-hook
-      (defun cae-lsp-do-not-highlight-comments-h ()
-        (setq-local lsp-semantic-token-faces
-                    (assoc-delete-all "comment" lsp-semantic-token-faces))))))
+  ;; Prevent heading backgrounds from being overwritten.
+  (when (bound-and-true-p cae-theme-extend-heading-faces)
+    (after! lsp
+      (add-hook! 'lua-mode-hook
+        (defun cae-lsp-do-not-highlight-comments-h ()
+          (setq-local lsp-semantic-token-faces
+                      (assoc-delete-all "comment" lsp-semantic-token-faces)))))))
 
 ;;; Appendix
 
