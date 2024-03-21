@@ -79,7 +79,7 @@
        multiple-cursors
        ;;fold
        (evil +everywhere)
-       lispy
+       ;;lispy
        rotate-text
 
        :emacs
