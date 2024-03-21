@@ -6,9 +6,10 @@
   (fset 'doom-leader-map doom-leader-map))
 
 ;; I use a split ergo keyboard with SPC and DEL on the thumb keys.
-(map! :map general-override-mode-map
-      :desc "<leader>" :nmv "DEL" #'doom-leader-map
-      :desc "<leader>" :nmv "<backspace>" #'doom-leader-map)
+(after! general
+  (map! :map general-override-mode-map
+        :desc "<leader>" :nmv "DEL" #'doom-leader-map
+        :desc "<leader>" :nmv "<backspace>" #'doom-leader-map))
 (define-key key-translation-map (kbd "SPC DEL") (kbd "SPC SPC"))
 (define-key key-translation-map (kbd "<backspace> DEL") (kbd "<backspace> SPC"))
 
