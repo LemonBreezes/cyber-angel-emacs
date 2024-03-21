@@ -86,6 +86,6 @@ that are in currently enabled modules.
 | :cae debugger                                   | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
 | :cae ai                                         | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
 | :cae ai                                         | oC                   | ~chatgpt-shell~                  |
-| :cae exwm and :editor evil and :completion helm | $                    | ~helm-run-external-command~      |
+| :cae exwm and :editor evil and :cae helm | $                    | ~helm-run-external-command~      |
 | :cae holy                                       | F                    | ~doom-leader-fold-map~           |
 | :cae holy                                       | to                   | ~symbol-overlay-mode~            |
