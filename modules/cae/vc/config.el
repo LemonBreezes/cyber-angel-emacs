@@ -58,9 +58,11 @@
   (add-hook 'eldoc-documentation-functions
             #'th/magit-eldoc-for-commit nil t)
   (eldoc-mode 1))
-
 (add-hook 'magit-status-mode-hook #'cae-magit-eldoc-setup)
 (add-hook 'magit-log-mode-hook #'cae-magit-eldoc-setup)
+(after! eldoc
+  (eldoc-add-command 'magit-next-line)
+  (eldoc-add-command 'magit-previous-line))
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
