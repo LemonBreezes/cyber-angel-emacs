@@ -4,4 +4,4 @@
 # condition: t
 # expand-env: ((yas-after-exit-snippet-hook (lambda () (org-edit-latex-fragment) (evil-insert-state) (goto-char 3))))
 # --
-\\(`%`$0\\)
+\\($0\\)
