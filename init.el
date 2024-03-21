@@ -44,7 +44,8 @@
   (defvar cae-init-autocompletion-enabled-p (and p t))
   (defvar cae-init-text-enabled-p (and p t))
   (defvar cae-init-email-enabled-p (and p t))
-  (defvar cae-init-term-enabled-p (and p t)))
+  (defvar cae-init-term-enabled-p (and p t))
+  (defvar cae-init-languages-enabled-p (and p t)))
 
 (setq evil-undo-system 'undo-fu)
 
