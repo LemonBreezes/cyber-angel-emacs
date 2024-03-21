@@ -39,10 +39,9 @@
 
   ;; For some reason Persp is picking up a few buffers that it should not.
   (when (modulep! :ui workspaces)
-    (after! persp-mode
-      (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
-        (defun cae-persp-skip-buffer-p (buffer)
-          (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer))))))
+    (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
+      (defun cae-persp-skip-buffer-p (buffer)
+        (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer)))))
 
   ;; Set up fonts
   (unless (or (memq system-type '(cygwin windows-nt ms-dos))
