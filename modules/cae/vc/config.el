@@ -53,17 +53,6 @@
   (add-hook 'magit-status-mode-hook
             #'cae-magit-status-setup-upstream-diff-section-h))
 
-;; Add Eldoc support for Magit.
-(defun cae-magit-eldoc-setup ()
-  (add-hook 'eldoc-documentation-functions
-            #'cae-magit-eldoc-for-commit nil t)
-  (eldoc-mode 1))
-(add-hook 'magit-status-mode-hook #'cae-magit-eldoc-setup)
-(add-hook 'magit-log-mode-hook #'cae-magit-eldoc-setup)
-(after! eldoc
-  (eldoc-add-command 'magit-next-line)
-  (eldoc-add-command 'magit-previous-line))
-
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
     (setq diff-hl-reference-revision "master")
