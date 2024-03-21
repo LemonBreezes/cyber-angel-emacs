@@ -68,24 +68,24 @@ it to my fork's repository instead.
 These are the non-misc-applications leader keybindings for this Emacs config
 that are in currently enabled modules.
 
-| Module or package                               | Key                  | Command                        |
-|-------------------------------------------------+----------------------+--------------------------------|
-|                                                 | fi                   | ~file-info-show~                 |
-|                                                 | k                    | ~ctl-x-map~                      |
-|                                                 | tT                   | ~modus-themes-toggle~            |
-|                                                 | c~                   | ~naming-convention-map~          |
-|                                                 | cC-v                 | ~vline-mode~                     |
-|                                                 | cC-f                 | ~font-lock-mode~                 |
-|                                                 | fTAB                 | ~find-sibling-file~              |
-| :tools lsp and not :tools lsp +eglot            | cTAB                 | ~lsp-ui-imenu~                   |
-| :editor evil                                    | bo                   | ~cae-evil-buffer-org-new~        |
-| :cae vc                                         | iI                   | ~gitignore-templates-insert~     |
-| :cae vc                                         | tB                   | ~blamer-mode~                    |
-| :cae vc                                         | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
-| :cae gnus                                       | og                   | ~=gnus~                          |
-| :cae debugger                                   | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
-| :cae ai                                         | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
-| :cae ai                                         | oC                   | ~chatgpt-shell~                  |
+| Module or package                        | Key                  | Command                        |
+|------------------------------------------+----------------------+--------------------------------|
+|                                          | fi                   | ~file-info-show~                 |
+|                                          | k                    | ~ctl-x-map~                      |
+|                                          | tT                   | ~modus-themes-toggle~            |
+|                                          | c~                   | ~naming-convention-map~          |
+|                                          | cC-v                 | ~vline-mode~                     |
+|                                          | cC-f                 | ~font-lock-mode~                 |
+|                                          | fTAB                 | ~find-sibling-file~              |
+| :tools lsp and not :tools lsp +eglot     | cTAB                 | ~lsp-ui-imenu~                   |
+| :editor evil                             | bo                   | ~cae-evil-buffer-org-new~        |
+| :cae vc                                  | iI                   | ~gitignore-templates-insert~     |
+| :cae vc                                  | tB                   | ~blamer-mode~                    |
+| :cae vc                                  | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
+| :cae gnus                                | og                   | ~=gnus~                          |
+| :cae debugger                            | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
+| :cae ai                                  | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
+| :cae ai                                  | oC                   | ~chatgpt-shell~                  |
 | :cae exwm and :editor evil and :cae helm | $                    | ~helm-run-external-command~      |
-| :cae holy                                       | F                    | ~doom-leader-fold-map~           |
-| :cae holy                                       | to                   | ~symbol-overlay-mode~            |
+| :cae holy                                | F                    | ~doom-leader-fold-map~           |
+| :cae holy                                | to                   | ~symbol-overlay-mode~            |
