@@ -1335,16 +1335,16 @@
                       (mu4e-sent-folder . "/Fastmail/Sent")))))))
 
 
-;;; C/C++
+;;; Languages
 
+;;;; C/C++
 (add-hook 'c-mode-common-hook #'subword-mode)
 
-;;; Fennel
-
+;;;; Fennel
 (add-hook 'fennel-mode-hook #'outline-minor-mode)
 
-;;; Lua
 
+;;;; Lua
 (add-hook 'lua-mode-hook #'subword-mode)
 (add-hook 'lua-mode-hook #'outline-minor-mode)
 (setq-hook! 'lua-mode-hook
