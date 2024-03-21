@@ -12,23 +12,7 @@
   (setq corfu-auto-delay 0.05)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
-          corfu-quick2 (cae-keyboard-kbd "jkluionm")))
-
-  ;; Glue between Copilot and Corfu.
-  ;;(defun cae-corfu-quit ()
-  ;;  (interactive)
-  ;;  (let ((copilot-state (and (bound-and-true-p copilot-mode)
-  ;;                            (copilot--overlay-visible))))
-  ;;    (corfu-quit)
-  ;;    (when copilot-state
-  ;;      ;; Restore Copilot's overlay.
-  ;;      (copilot-complete))))
-  ;;(add-hook! 'doom-escape-hook
-  ;;  (defun cae-corfu-quit-h ()
-  ;;    (when (cae-corfu-visible-p) (cae-corfu-quit) t)))
-  ;;(map! :map corfu-map
-  ;;      [remap corfu-quit] #'cae-corfu-quit)
-  )
+          corfu-quick2 (cae-keyboard-kbd "jkluionm"))))
 
 ;; Wildcard separator
 (defvar +orderless-wildcard-character ?,
