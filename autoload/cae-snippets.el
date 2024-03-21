@@ -1,7 +1,7 @@
 ;;; autoload/cae-snippets.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +yas/org-src-header-p ()
+(defun cae-yas-org-src-header-p ()
   "Determine whether `point' is within a src-block header or header-args."
   (pcase (and (derived-mode-p 'org-mode)
               (org-element-type (org-element-context)))
@@ -16,7 +16,7 @@
     ('keyword (string-match-p "^header-args" (org-element-property :value (org-element-context))))))
 
 ;;;###autoload
-(defun +yas/org-prompt-header-arg (arg question values)
+(defun cae-yas-org-prompt-header-arg (arg question values)
   "Prompt the user to set ARG header property to one of VALUES with QUESTION.
 The default value is identified and indicated. If either default is selected,
 or no selection is made: nil is returned."
@@ -30,7 +30,7 @@ or no selection is made: nil is returned."
                            org-babel-default-header-args
                            (let ((lang-headers
                                   (intern (concat "org-babel-default-header-args:"
-                                                  (+yas/org-src-lang)))))
+                                                  (cae-yas-org-src-lang)))))
                              (when (boundp lang-headers) (eval lang-headers t)))))))
             ""))
          default-value)
@@ -49,7 +49,7 @@ or no selection is made: nil is returned."
         selection))))
 
 ;;;###autoload
-(defun +yas/org-src-lang ()
+(defun cae-yas-org-src-lang ()
   "Try to find the current language of the src/header at `point'.
 Return nil otherwise."
   (let ((context (org-element-context)))
@@ -60,7 +60,7 @@ Return nil otherwise."
                   (match-string 1 (org-element-property :value context)))))))
 
 ;;;###autoload
-(defun +yas/org-last-src-lang ()
+(defun cae-yas-org-last-src-lang ()
   "Return the language of the last src-block, if it exists."
   (save-excursion
     (beginning-of-line)
@@ -68,16 +68,16 @@ Return nil otherwise."
       (org-element-property :language (org-element-context)))))
 
 ;;;###autoload
-(defun +yas/org-most-common-no-property-lang ()
+(defun cae-yas-org-most-common-no-property-lang ()
   "Find the lang with the most source blocks that has no global header-args, else nil."
   (let (src-langs header-langs)
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward "^[ \t]*#\\+begin_src" nil t)
-        (push (+yas/org-src-lang) src-langs))
+        (push (cae-yas-org-src-lang) src-langs))
       (goto-char (point-min))
       (while (re-search-forward "^[ \t]*#\\+property: +header-args" nil t)
-        (push (+yas/org-src-lang) header-langs)))
+        (push (cae-yas-org-src-lang) header-langs)))
 
     (setq src-langs
           (mapcar #'car
