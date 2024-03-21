@@ -81,4 +81,17 @@ if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of th
           forkrepo))
     (consult-gh-repo-fork)))
 
-
+;;;###autoload
+(defun cae-magit-eldoc-for-commit (_callback)
+  (let ((commit (magit-commit-at-point)))
+    (when commit
+      (with-temp-buffer
+        (magit-git-insert "show"
+                          "--format=format:%an <%ae>, %ar"
+                          (format "--stat=%d" (window-width))
+                          commit)
+        (goto-char (point-min))
+        (put-text-property (point-min)
+                           (line-end-position)
+                           'face 'bold)
+        (buffer-string)))))
