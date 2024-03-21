@@ -103,6 +103,7 @@
     (defun cae-multiple-cursors-active-p ()
       (bound-and-true-p multiple-cursors-mode)))
   :config
+  (add-to-list 'copilot-clear-overlay-ignore-commands #'corfu-quit)
   (add-hook! 'doom-escape-hook
     (defun cae-copilot-clear-overlay-h ()
       "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
