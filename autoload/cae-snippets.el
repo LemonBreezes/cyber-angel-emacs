@@ -1,5 +1,8 @@
 ;;; autoload/cae-snippets.el -*- lexical-binding: t; -*-
 
+;; These functions and the corresponding snippets were taken from Tecosaur's
+;; config: https://github.com/tecosaur/emacs-config
+
 ;;;###autoload
 (defun cae-yas-org-src-header-p ()
   "Determine whether `point' is within a src-block header or header-args."
