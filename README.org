@@ -75,10 +75,10 @@ that are in currently enabled modules.
 |                   | tT                   | ~modus-themes-toggle~            |
 |                   | c~                   | ~naming-convention-map~          |
 |                   | cC-v                 | ~vline-mode~                     |
-|                   | cC-f                 | ~lsp-ui-imenu~                   |
+|                   | cC-f                 | ~font-lock-mode~     |
 |                   | fTAB                 | ~find-sibling-file~              |
-| lsp               | cTAB                 | ~font-lock-mode~                 |
-| evil              | bo                   | ~cae-evil-buffer-org-new~        |
+| lsp               | cTAB                 | ~lsp-ui-imenu~                |
+| :editor evil      | bo                   | ~cae-evil-buffer-org-new~        |
 | vc                | iI                   | ~gitignore-templates-insert~     |
 | vc                | tB                   | ~blamer-mode~                    |
 | vc                | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
