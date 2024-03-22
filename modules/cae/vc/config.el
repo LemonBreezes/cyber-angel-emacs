@@ -117,9 +117,6 @@
   (setq git-email-subject-regexp
         "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)"))
 
-;; `vc-backup' refuses to build on Doom Emacs so I had to fork it and remove the
-;; autoload line it uses.
-(add-to-list 'vc-handled-backends 'Backup t)
 (use-package! vc-backup
   :defer t :init
   (setq make-backup-files t
