@@ -968,6 +968,8 @@
 
   (use-package! parrot
     :defer t :init
+    (map! :n "]r" #'parrot-rotate-next-word-at-point
+          :n "[r" #'parrot-rotate-prev-word-at-point)
     ;; Wrangle parrot into being fully lazy-loaded.
     (autoload #'parrot-party-while-process "parrot")
     (autoload #'parrot--todo-party "parrot")
