@@ -3,7 +3,6 @@
 
 (package! git-link)
 (package! gitignore-templates)
-(package! git-email :recipe (:host github :repo "LemonBreezes/git-email"))
 (package! vc-backup)
 (package! magit-stats)
 (package! embark-vc)
