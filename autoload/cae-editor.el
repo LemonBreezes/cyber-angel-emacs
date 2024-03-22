@@ -438,7 +438,9 @@ jumping backwards."
     (unless (zerop line-count)
       (forward-line (random line-count))
       (end-of-line)
-      (recenter))))
+      (recenter)))
+  (when (featurep 'beacon)
+    (beacon-blink-automated)))
 
 ;;;###autoload
 (defun cae-embark-act ()
