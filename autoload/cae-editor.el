@@ -432,6 +432,7 @@ jumping backwards."
 (defun cae-jump-to-random-line-end ()
   "Jump to the end of a random line in the current buffer."
   (interactive)
+  (push-mark)
   (goto-char (point-min))               ; Start at the beginning of the buffer
   (let ((line-count (count-lines (point-min) (point-max))))
     (unless (zerop line-count)
