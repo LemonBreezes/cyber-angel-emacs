@@ -112,9 +112,6 @@
   ;; what item I have selected.
   (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
-  (after! outline
-    (setq outline-minor-mode-use-buttons t))
-
   ;; Auto-hide the tab bar.
   (after! tab-bar
     (setq tab-bar-show 1))
@@ -793,7 +790,7 @@
                  doom-fallback-buffer-name))
 
   (after! outline
-    (setq outline-minor-mode-use-buttons nil))
+    (setq outline-minor-mode-use-buttons t))
 
   (after! ispell
     (setq ispell-quietly t
