@@ -95,7 +95,7 @@
                                         ;for debugging font-lock issues.
 (package! eff)
 (package! git-modes)
-(package! huff-mode)
+(package! huff-mode :recipe (:host github :repo "GokhanPolat/emacs-huff-mode"))
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
