@@ -78,6 +78,7 @@
 (package! wakatime-mode)
 (package! consult-mu :recipe
   (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
+(package! 0x0)
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
@@ -94,7 +95,6 @@
                                         ;for debugging font-lock issues.
 (package! eff)
 (package! git-modes)
-(package! 0x0)
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
