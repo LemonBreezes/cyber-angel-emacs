@@ -125,9 +125,6 @@
   (setq make-backup-files t
         vc-make-backup-files t))
 
-(use-package! abridge-diff
-  :after magit :config (abridge-diff-mode +1))
-
 (use-package! magit-stats
   :defer t)
 
