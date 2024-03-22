@@ -81,7 +81,6 @@ that are in currently enabled modules.
 | :editor evil                             | bo                   | ~cae-evil-buffer-org-new~        |
 | :cae vc                                  | iI                   | ~gitignore-templates-insert~     |
 | :cae vc                                  | tB                   | ~blamer-mode~                    |
-| :cae vc                                  | vRET (gRET for ~evil~) | ~git-email-format-patch~         |
 | :cae gnus                                | og                   | ~=gnus~                          |
 | :cae debugger                            | od                   | ~cae-debugger-run-or-pop-to-gdb~ |
 | :cae ai                                  | oc                   | ~cae-ai-toggle-chatgpt-shell~    |
