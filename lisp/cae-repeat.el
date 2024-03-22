@@ -76,6 +76,10 @@
     ("u" org-priority-up
      "d" org-priority-down))
 
+  (define-repeat-map emms-next-prev
+    ("j" emms-next
+     "k" emms-previous))
+
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
   (define-repeat-map cae-org-ai-kill-region-at-point
