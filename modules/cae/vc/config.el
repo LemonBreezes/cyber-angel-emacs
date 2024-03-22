@@ -94,29 +94,6 @@
   :defer t :init
   (map! :leader :desc ".gitignore template" "iI" #'gitignore-templates-insert))
 
-(use-package! git-email
-  :defer t :init
-  (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
-    (map! :leader
-          :prefix vc-prefix
-          :desc "Email patch" "RET" #'git-email-format-patch))
-  (map! :map dired-mode-map
-        :localleader
-        "g" #'git-email-send-email)
-  ;; This is an old package.
-  (after! mu4e-compose
-    (unless (fboundp 'mu4e~compose-mail)
-      (defalias 'mu4e~compose-mail #'mu4e-compose-new)))
-  :config
-  (cond ((modulep! :email mu4e)
-         (require 'git-email-mu4e)
-         (git-email-mu4e-mode +1))
-        ((modulep! :email notmuch)
-         (require 'git-email-notmuch)
-         (git-email-notmuch-mode +1)))
-  (setq git-email-subject-regexp
-        "^Subject:[[:space:]]*\\[[^]\n]*PATCH[^]\n]*][[:space:]]+.+\\(?:\\(?:$\\)[\s\t]\\{2\\}[^	\n$]+$\\|$\\)"))
-
 (use-package! vc-backup
   :defer t :init
   (setq make-backup-files t
