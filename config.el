@@ -94,7 +94,8 @@
                       (getenv "GNOME_DESKTOP_SESSION_ID")
                       (getenv "XDG_CURRENT_DESKTOP")
                       (getenv "WAYLAND_DISPLAY")))
-             (not (modulep! :cae exwm)))
+             (or (not (modulep! :cae exwm))
+                 (bound-and-true-p cae-exwm-disabled-p)))
     (toggle-frame-fullscreen)))
 
 
