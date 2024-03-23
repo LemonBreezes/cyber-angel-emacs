@@ -18,7 +18,7 @@
 (when (and (>= (num-processors) 32)
            (> (car (memory-info))
               (* 180 1024 1024)))
-  (let ((cae-gc-cons-threshold (* 64 1024 1024 1024)))
+  (let ((cae-gc-cons-threshold (* 48 1024 1024 1024)))
     (setq gcmh-high-cons-threshold cae-gc-cons-threshold
           consult--gc-threshold cae-gc-cons-threshold
           cae-hacks-gc-cons-threshold cae-gc-cons-threshold
@@ -150,7 +150,7 @@
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
-       exwm
+       ;;exwm
        dired
        lisp
        misc-applications
