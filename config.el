@@ -84,6 +84,8 @@
   ;; I regularly PR Doom Emacs.
   (advice-add #'doom-docs-read-only-h :override #'ignore)
 
+  ;; If I start Emacs in `.xinitrc' without a window manager, I want to be in
+  ;; fullscreen.
   (when (and (eq 'x (framep (selected-frame)))
              (not (or (getenv "EXWM_RUNNING")
                       (getenv "RATPOISON")
