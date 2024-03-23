@@ -808,6 +808,12 @@
         "t" #'emms-toggle-repeat-track
         "s" #'emms-playlist-save
         "m" #'emms-shuffle)
+  (map! "<XF86AudioPlay>" #'emms-pause
+        "<XF86AudioStop>" #'emms-stop
+        "<XF86AudioPrev>" #'emms-previous
+        "<XF86AudioNext>" #'emms-next
+        "<XF86AudioLowerVolume>" #'emms-volume-lower
+        "<XF86AudioRaiseVolume>" #'emms-volume-raise)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
 
   (setq emms-track-description-function '+emms-track-description
