@@ -6,7 +6,8 @@
                     (getenv "I3SOCK")
                     (getenv "KDE_FULL_SESSION")
                     (getenv "GNOME_DESKTOP_SESSION_ID")
-                    (getenv "XDG_CURRENT_DESKTOP")
+                    (getenv "XDG_CURRENT_DESKTOP") ; Let me know if this one
+                                        ; causes problems.
                     (getenv "WAYLAND_DISPLAY"))))
 
   ;; Prevent nested Emacs sessions from loading EXWM.

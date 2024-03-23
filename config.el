@@ -7,10 +7,10 @@
 (when cae-init-core-enabled-p
   (load! "lisp/cae-tty")
   (load! "lisp/cae-bindings")
-  (load! "lisp/cae-multi")                ;Run parallel Emacs instances.
-  (load! "lisp/cae-smartparens")          ;Allow Smartparens to be disabled. This
+  (load! "lisp/cae-multi")              ;Run parallel Emacs instances.
+  (load! "lisp/cae-smartparens")        ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
-  (load! "lisp/cae-projectile")           ;Allow Projectile to be disabled. This
+  (load! "lisp/cae-projectile")         ;Allow Projectile to be disabled. This
                                         ;is also our Projectile configuration.
   (when (modulep! :editor evil)
     (load! "lisp/cae-evil"))
@@ -82,7 +82,18 @@
         (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
 
   ;; I regularly PR Doom Emacs.
-  (advice-add #'doom-docs-read-only-h :override #'ignore))
+  (advice-add #'doom-docs-read-only-h :override #'ignore)
+
+  (when (and (eq 'x (framep (selected-frame)))
+             (not (or (getenv "EXWM_RUNNING")
+                      (getenv "RATPOISON")
+                      (getenv "I3SOCK")
+                      (getenv "KDE_FULL_SESSION")
+                      (getenv "GNOME_DESKTOP_SESSION_ID")
+                      (getenv "XDG_CURRENT_DESKTOP")
+                      (getenv "WAYLAND_DISPLAY")))
+             (not (modulep! :cae exwm)))
+    (toggle-frame-fullscreen)))
 
 
 ;;; UI
