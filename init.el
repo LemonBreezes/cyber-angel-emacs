@@ -15,14 +15,14 @@
   (after! vterm
     (setq vterm-shell interactive-shell)))
 
-(when (and (>= (num-processors) 32)
-           (> (car (memory-info))
-              (* 180 1024 1024)))
-  (let ((cae-gc-cons-threshold (* 32 1024 1024 1024)))
-    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
-          consult--gc-threshold cae-gc-cons-threshold
-          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
-          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
+;(when (and (>= (num-processors) 32)
+;           (> (car (memory-info))
+;              (* 180 1024 1024)))
+;  (let ((cae-gc-cons-threshold (* 32 1024 1024 1024)))
+;    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
+;          consult--gc-threshold cae-gc-cons-threshold
+;          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
+;          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
@@ -36,6 +36,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
+(defvar cae-exwm-disabled-p nil)
 (defvar cae-init-core-enabled-p t)
 (let ((p t))
   (defvar cae-init-ui-enabled-p (and p t))
@@ -150,7 +151,7 @@
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
-       exwm
+       ;;exwm
        dired
        lisp
        misc-applications
