@@ -36,7 +36,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-exwm-disabled-p nil)
+(defvar cae-exwm-disabled-p t)
 (defvar cae-init-core-enabled-p t)
 (let ((p t))
   (defvar cae-init-ui-enabled-p (and p t))
