@@ -448,11 +448,11 @@ jumping backwards."
     (call-interactively 'embark-act)))
 
 ;;;###autoload
-(defun cae-workspace-switch-to-9
+(defun cae-workspace-switch-to-9 ()
     (interactive)
   (+workspace/switch-to 8))
 
 ;;;###autoload
-(defun cae-workspace-switch-to-10
+(defun cae-workspace-switch-to-10 ()
     (interactive)
   (+workspace/switch-to 9))
