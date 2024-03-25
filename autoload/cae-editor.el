@@ -450,9 +450,9 @@ jumping backwards."
 ;;;###autoload
 (defun cae-workspace-switch-to-9 ()
   (interactive)
-  (+workspace/switch-to 8))
+  (+workspace/switch-to 9))
 
 ;;;###autoload
 (defun cae-workspace-switch-to-10 ()
   (interactive)
-  (+workspace/switch-to 9))
+  (+workspace/switch-to 10))
