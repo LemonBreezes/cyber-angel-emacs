@@ -16,8 +16,7 @@
 
   (eval
    `(define-repeat-map workspace-switch
-      (,(cae-keyboard-kbd "0") +workspace/switch-to-final
-       ,(cae-keyboard-kbd "1") +workspace/switch-to-0
+      (,(cae-keyboard-kbd "1") +workspace/switch-to-0
        ,(cae-keyboard-kbd "2") +workspace/switch-to-1
        ,(cae-keyboard-kbd "3") +workspace/switch-to-2
        ,(cae-keyboard-kbd "4") +workspace/switch-to-3
@@ -26,9 +25,11 @@
        ,(cae-keyboard-kbd "7") +workspace/switch-to-6
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
+       ,(cae-keyboard-kbd "0") cae-workspace-switch-to-9
+       ,(cae-keyboard-kbd "\\") cae-workspace-switch-to-10
+       ,(cae-keyboard-kbd "z") +workspace/switch-to-final
        ,(cae-keyboard-kbd "[") +workspace/switch-left
        ,(cae-keyboard-kbd "]") +workspace/switch-right
-       "0" +workspace/switch-to-final
        "1" +workspace/switch-to-0
        "2" +workspace/switch-to-1
        "3" +workspace/switch-to-2
@@ -38,6 +39,9 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
+       "0" cae-workspace-switch-to-9
+       "\\" cae-workspace-switch-to-10
+       "z" +workspace/switch-to-final
        "[" +workspace/switch-left
        "]" +workspace/switch-right
        "`" +workspace/other))
