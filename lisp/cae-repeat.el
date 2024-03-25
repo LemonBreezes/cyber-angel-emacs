@@ -39,8 +39,8 @@
        "7" +workspace/switch-to-6
        "8" +workspace/switch-to-7
        "9" +workspace/switch-to-8
-       "0" cae-workspace-switch-to-9
-       "\\" cae-workspace-switch-to-10
+       "0" cae-workspace-switch-to-10
+       "\\" cae-workspace-switch-to-11
        "z" +workspace/switch-to-final
        "[" +workspace/switch-left
        "]" +workspace/switch-right
