@@ -352,10 +352,9 @@
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
       (:prefix "TAB"
-       :desc "Switch to 10th workspace" "0" (lambda nil (interactive) (+workspace/switch-to 10))
-       :desc "Switch to 11th workspace" "\\" (lambda nil (interactive) (+workspace/switch-to 11))
-       :desc "Switch to final workspace" "z" #'+workspace/switch-to-final
-       ))
+       :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-10
+       :desc "Switch to 11th workspace" "\\" #'cae-workspace-switch-to-11
+       :desc "Switch to final workspace" "z" #'+workspace/switch-to-final))
 (map! :map help-map
       (:prefix "d"
        "e" (cmd! () (find-file eshell-aliases-file))))
