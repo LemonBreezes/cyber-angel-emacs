@@ -446,3 +446,13 @@ jumping backwards."
   (require 'embark)
   (let ((embark-cycle-key (key-description (this-command-keys))))
     (call-interactively 'embark-act)))
+
+;;;###autoload
+(defun cae-workspace-switch-to-9
+    (interactive)
+  (+workspace/switch-to 8))
+
+;;;###autoload
+(defun cae-workspace-switch-to-10
+    (interactive)
+  (+workspace/switch-to 9))
