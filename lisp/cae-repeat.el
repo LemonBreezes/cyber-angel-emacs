@@ -25,8 +25,8 @@
        ,(cae-keyboard-kbd "7") +workspace/switch-to-6
        ,(cae-keyboard-kbd "8") +workspace/switch-to-7
        ,(cae-keyboard-kbd "9") +workspace/switch-to-8
-       ,(cae-keyboard-kbd "0") cae-workspace-switch-to-9
-       ,(cae-keyboard-kbd "\\") cae-workspace-switch-to-10
+       ,(cae-keyboard-kbd "0") cae-workspace-switch-to-10
+       ,(cae-keyboard-kbd "\\") cae-workspace-switch-to-111
        ,(cae-keyboard-kbd "z") +workspace/switch-to-final
        ,(cae-keyboard-kbd "[") +workspace/switch-left
        ,(cae-keyboard-kbd "]") +workspace/switch-right
