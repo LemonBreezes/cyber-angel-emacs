@@ -77,6 +77,7 @@ alias update-gentoo pushd . && cd / && smart-live-rebuild && sudo emaint -a sync
 alias update-gentoo2 pushd . && cd / && smart-live-rebuild && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && popd
 alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
+alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
 
 alias nixos-rebuild sudo nixos-rebuild $*
 alias nix-store sudo nix-store $*
