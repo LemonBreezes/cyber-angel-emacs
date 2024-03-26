@@ -16,6 +16,13 @@
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
 
+      ;; Don't crash my Emacs when running `projectile-project-files' on HOME.
+      (defadvice! cae-projectile-project-files (project-root)
+        :before-until #'projectile-project-files
+        (when (or (file-equal-p project-root "~")
+                  (file-equal-p project-root "/root"))
+          (user-error "Running `projectile-project-files' on HOME is disabled.")))
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
