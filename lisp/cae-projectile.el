@@ -13,6 +13,9 @@
       ;; the commands, the cache doesn't get invalidated automatically.
       (setq projectile-project-enable-cmd-caching nil)
 
+      ;; Stop prompting me about the project root.
+      (setq projectile-require-project-root t)
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
