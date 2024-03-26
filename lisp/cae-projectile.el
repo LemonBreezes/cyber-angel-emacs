@@ -13,6 +13,9 @@
       ;; the commands, the cache doesn't get invalidated automatically.
       (setq projectile-project-enable-cmd-caching nil)
 
+      ;; Stop prompting me about the project root.
+      (setq projectile-require-project-root t)
+
       ;; Don't crash my Emacs when running `projectile-project-files' on HOME.
       (defadvice! cae-projectile-project-files (project-root)
         :before-until #'projectile-project-files
