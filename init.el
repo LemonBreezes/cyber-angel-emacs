@@ -82,7 +82,7 @@
        multiple-cursors
        ;;fold
        (evil +everywhere)
-       lispy
+       ;;lispy
        rotate-text
 
        :emacs
@@ -160,8 +160,7 @@
        vc
        org
        ai
-       gnus
-       eww)
+       gnus)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
