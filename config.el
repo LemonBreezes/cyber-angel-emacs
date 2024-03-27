@@ -1002,7 +1002,10 @@
     (parrot-mode +1))
 
   (use-package! parrot-rotate
-    :defer t :config
+    :defer t :init
+    (map! :n "]r" #'cae-modeline-rotate-forward-word-at-point
+          :n "[r" #'cae-modeline-rotate-backward-word-at-point)
+    :config
     (after! parrot-rotate
       (setq parrot-rotate-animate-after-rotation t
             parrot-rotate-highlight-after-rotation t
