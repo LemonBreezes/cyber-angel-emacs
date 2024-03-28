@@ -160,14 +160,17 @@
           :m "]6" #'cae-unimpaired-b64-decode)))
 
 (when (modulep! :completion corfu)
-  (map! (:prefix "C-x"
-         :i "C-c" #'copilot-complete
-         :i "C-f" #'cape-file
-         :i "C-l" #'cae-cape-history-or-line
-         :i "C-s" #'yas-insert-snippet
-         :i "C-]" #'cae-cape-lsp
-         :i "C-r" #'cae-cape-keyword-or-dict
-         :i "s" #'cape-elisp-symbol))
+  (map!
+   "C-n" #'cae-corfu-popup-and-first
+   "C-p" #'cae-corfu-popup-and-last
+   (:prefix "C-x"
+    :i "C-c" #'copilot-complete
+    :i "C-f" #'cape-file
+    :i "C-l" #'cae-cape-history-or-line
+    :i "C-s" #'yas-insert-snippet
+    :i "C-]" #'cae-cape-lsp
+    :i "C-r" #'cae-cape-keyword-or-dict
+    :i "s" #'cape-elisp-symbol))
   (define-key! :keymaps +default-minibuffer-maps
     "C-x C-c" #'copilot-complete
     "C-x C-f" #'cape-file
