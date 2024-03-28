@@ -1429,7 +1429,7 @@
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
               '(snake speed-type tetris bubbles dunnet autotetris klondike)
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-                zone-nyan)
+                zone-nyan selectric)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
               '(alarm pomm debbugs))))
