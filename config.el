@@ -1402,6 +1402,7 @@
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :cae ai)
        '(copilot org-ai chatgpt-shell))
+   ,@'(parrot parrot-rotate)
    ,@(when (modulep! :cae gnus)
        '(gnus gnus-group gnus-sum gnus-srvr))
    ,@(when (modulep! :tools pdf)
