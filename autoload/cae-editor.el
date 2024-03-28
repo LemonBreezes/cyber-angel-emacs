@@ -456,3 +456,9 @@ jumping backwards."
 (defun cae-workspace-switch-to-10 ()
   (interactive)
   (+workspace/switch-to 10))
+
+;;;###autoload
+(defun cae-complete-in-minibuffer ()
+  (interactive)
+  (let  ((completion-in-region-function #'consult-completion-in-region))
+    (call-interactively #'complete-symbol)))
