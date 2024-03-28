@@ -50,7 +50,8 @@
   ;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
   ;; without explicitly inserting any candidate
   (interactive)
-  (let ((corfu-auto-prefix 1))
+  (let ((corfu-auto-prefix 1)
+        (completion-at-point-functions '(cape-dabbrev)))
     (corfu--auto-complete-deferred))
   (when (> corfu--total 0)
     (corfu--goto 0)))
@@ -61,6 +62,8 @@
   ;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
   ;; without explicitly inserting any candidate
   (interactive)
-  (corfu--auto-complete-deferred)
-  (when (> corfu--total 0)
-    (corfu-last)))
+  (let ((corfu-auto-prefix 1)
+        (completion-at-point-functions '(cape-dabbrev)))
+    (corfu--auto-complete-deferred)
+    (when (> corfu--total 0)
+      (corfu-last))))
