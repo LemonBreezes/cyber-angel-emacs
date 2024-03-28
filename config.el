@@ -959,7 +959,7 @@
     (add-hook 'js-mode-hook   #'smart-semicolon-mode))
 
   (use-package! expand-region-improved
-    :defer t :init
+    :defer t
     :config
     (eri/define-pair org-table-cell "|" 'org-at-table-p)
     (eri/add-mode-expansions 'org-mode
