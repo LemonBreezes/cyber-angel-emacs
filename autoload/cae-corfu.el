@@ -64,3 +64,9 @@
   (corfu--auto-complete-deferred)
   (when (> corfu--total 0)
     (corfu-last)))
+
+;;;###autoload
+(defun cae-corfu-complete-in-minibuffer ()
+  (interactive)
+  (let  ((completion-in-region-function #'consult-completion-in-region))
+    (call-interactively #'complete-symbol)))
