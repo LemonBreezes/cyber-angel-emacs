@@ -26,14 +26,14 @@
 
   (defadvice! cae-evil-scroll-down-with-hint-a (count &rest _)
     :before #'evil-scroll-down
-    (unless (= (line-end-position) (point-max))
+    (unless (= (pos-eol) (point-max))
       (cae-shared-scroll-with-hint-a count
                                      (lambda (count) (if (< count 0) 0 -1))
                                      #'evil--get-scroll-count)))
 
   (defadvice! cae-evil-scroll-up-with-hint-a (count &rest _)
     :before #'evil-scroll-up
-    (unless (= (line-beginning-position) (point-min))
+    (unless (= (pos-bol) (point-min))
       (cae-shared-scroll-with-hint-a count
                                      (lambda (count) (if (< count 0) -1 0))
                                      #'evil--get-scroll-count)))
