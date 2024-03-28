@@ -47,8 +47,8 @@
 ;;;###autoload
 (defun cae-corfu-popup-and-first ()
   "Trigger corfu popup and select the first candidate."
-;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
-;; without explicitly inserting any candidate
+  ;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
+  ;; without explicitly inserting any candidate
   (interactive)
   (let ((corfu-auto-prefix 1))
     (corfu--auto-complete-deferred))
@@ -58,8 +58,8 @@
 ;;;###autoload
 (defun cae-corfu-popup-and-last ()
   "Trigger corfu popup and select the last candidate."
-;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
-;; without explicitly inserting any candidate
+  ;; HACK using `corfu--auto-complete-deferred' to trigger the completion popup
+  ;; without explicitly inserting any candidate
   (interactive)
   (corfu--auto-complete-deferred)
   (when (> corfu--total 0)
