@@ -17,12 +17,7 @@
           (old-start (window-start)))
       (save-excursion
         (move-to-window-line (funcall line-fn count))
-        (funcall scrollkeeper-guideline-fn))
-      ;; For debugging.
-      (when (and (= old-start (window-start))
-                 (not (eq (window-start) (point-min)))
-                 (not (eq (window-end nil t) (point-max))))
-        (backtrace))))
+        (funcall scrollkeeper-guideline-fn))))
 
   (defadvice! cae-evil-scroll-down-with-hint-a (count &rest _)
     :before #'evil-scroll-down
