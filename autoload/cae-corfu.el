@@ -51,7 +51,8 @@
   ;; without explicitly inserting any candidate
   (interactive)
   (let ((corfu-auto-prefix 1)
-        (completion-at-point-functions '(cape-dabbrev)))
+        ;;(completion-at-point-functions '(cape-dabbrev))
+        )
     (corfu--auto-complete-deferred))
   (when (> corfu--total 0)
     (corfu--goto 0)))
@@ -63,7 +64,8 @@
   ;; without explicitly inserting any candidate
   (interactive)
   (let ((corfu-auto-prefix 1)
-        (completion-at-point-functions '(cape-dabbrev)))
+        ;;(completion-at-point-functions '(cape-dabbrev))
+        )
     (corfu--auto-complete-deferred)
     (when (> corfu--total 0)
       (corfu-last))))
