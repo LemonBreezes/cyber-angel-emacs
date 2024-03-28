@@ -71,7 +71,8 @@ alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom
 alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
 alias update-emacs emerge emacs && cd ~/.config/emacs && doom build && doom upgrade && git stash pop && doom sync
 alias update-emacs2 cd ~/.config/emacs && doom upgrade && doom sync
-alias rebuild-emacs rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
+alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
+alias rebuild-emacs emerge emacs && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
 alias update-emacs3 doom upgrade && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
 alias update-gentoo pushd . && cd / && smart-live-rebuild && sudo emaint -a sync && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && update-grub && update-emacs3 && popd
 alias update-gentoo2 pushd . && cd / && smart-live-rebuild && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && popd
