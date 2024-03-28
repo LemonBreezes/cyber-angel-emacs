@@ -161,8 +161,8 @@
 
 (when (modulep! :completion corfu)
   (map!
-   "C-n" #'cae-corfu-popup-and-first
-   "C-p" #'cae-corfu-popup-and-last
+   :i "C-n" #'cae-corfu-popup-and-first
+   :i "C-p" #'cae-corfu-popup-and-last
    (:prefix "C-x"
     :i "C-c" #'copilot-complete
     :i "C-f" #'cape-file
