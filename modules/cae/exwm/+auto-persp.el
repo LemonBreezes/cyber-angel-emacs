@@ -17,6 +17,7 @@
     ("Pavucontrol" . "Pavucontrol")
     ("tiled" . "Tiled")
     ("kitty" . "Kitty")
+    ("mpv" . "MPV")
     ("firefox developer edition" . "Firefox")
     ("\"firefox developer edition\"" . "Firefox")
     ("\"firefoxdeveloperedition\"" . "Firefox")
