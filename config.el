@@ -1377,9 +1377,6 @@
 
 ;;; Appendix
 
-(after! pdf-tools
-  (pdf-tools-install t nil t))
-
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
