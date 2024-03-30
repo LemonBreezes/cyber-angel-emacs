@@ -56,7 +56,7 @@
 
 ;; I don't want to see the message about files being loaded.
 (unless init-file-debug
-  (defadvice! load-ignore-message-a (args) :filter-args #'load
+  (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
       (list file noerror t nosuffix must-suffix))))
 
