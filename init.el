@@ -54,8 +54,8 @@
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
-(setq doom-leader-alt-key nil
-      doom-localleader-alt-key nil)
+(setq doom-leader-alt-key "<menu>"
+      doom-localleader-alt-key "<menu> m")
 
 (doom! :completion
        (vertico +icons)
