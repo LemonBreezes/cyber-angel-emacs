@@ -53,6 +53,8 @@
 
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
+
+;; I don't want to see the message about files being loaded.
 (unless init-file-debug
   (defadvice! load-ignore-message-a (args) :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
