@@ -23,7 +23,7 @@
           consult--gc-threshold cae-gc-cons-threshold
           cae-hacks-gc-cons-threshold cae-gc-cons-threshold
           +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
-(setq doom-incremental-idle-timer 0.5)
+(setq doom-incremental-idle-timer 0.25)
 
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
