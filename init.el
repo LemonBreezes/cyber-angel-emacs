@@ -53,6 +53,10 @@
 
 ;; Make it easier to debug lazy loading issues.
 (when init-file-debug (setq doom-incremental-first-idle-timer nil))
+(unless init-file-debug
+  (defadvice! load-ignore-message-a (args) :filter-args #'load
+    (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
+      (list file noerror t nosuffix must-suffix))))
 
 (setq doom-leader-alt-key "<menu>"
       doom-localleader-alt-key "<menu> m")
