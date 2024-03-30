@@ -9,3 +9,5 @@
 (require 'evil-mc)
 
 (evil-mode +1)
+(scratch-buffer)
+(insert "hello world\nhello world\nhello world")
