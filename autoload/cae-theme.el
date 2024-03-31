@@ -49,7 +49,6 @@
              ;; This assumes you are running `dunst' as a systemd service.
              (start-process "kill dunst" nil "killall" "dunst"))))))))
 
-
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
   (dolist (buffer (doom-buffers-in-mode 'org-mode (buffer-list)))
