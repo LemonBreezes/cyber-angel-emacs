@@ -2,8 +2,8 @@
 
 (use-package! scrollkeeper
   :defer t :init
-  (map! [remap scroll-up-command] #'scrollkeeper-contents-up
-        [remap scroll-down-command] #'scrollkeeper-contents-down)
+  (map! [remap scroll-up-command] #'evil-scroll-page-down
+        [remap scroll-down-command] #'evil-scroll-page-up)
   (setq scrollkeeper-scroll-steps 1
         scrollkeeper-scroll-step-delay 0)
 
