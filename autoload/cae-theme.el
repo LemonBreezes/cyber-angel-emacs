@@ -45,6 +45,7 @@
            (when (executable-find "polybar-msg")
              (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
            (when (executable-find "dunst")
+             ;; This assumes you are running `dunst' as a systemd service.
              (start-process "kill dunst" nil "killall" "dunst"))))))))
 
 
