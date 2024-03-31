@@ -185,9 +185,9 @@
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
-  (use-package! i3bar
-    :when (modulep! +i3bar)
-    :defer t)
+  ;;(use-package! i3bar
+  ;;  :when (modulep! +i3bar)
+  ;;  :defer t)
 
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
