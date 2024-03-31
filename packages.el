@@ -60,8 +60,6 @@
 (package! fancy-compilation)
 (package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
                              :branch "handle-pos-visible-in-window-p-nil"))
-(package! stutter
-  :recipe (:host github :repo "Stebalien/stutter.el"))
 
 
 ;; cae-theme.el
