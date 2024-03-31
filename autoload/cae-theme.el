@@ -41,7 +41,9 @@
               (theme-magic--auto-extract-16-colors))
        (lambda (_proc event)
          (when (string= event "finished\n")
-           (ewal-load-colors)))))))
+           (ewal-load-colors)))))
+    (when (executable-find "polybar-msg")
+      (start-process "polybar-msg" nil "polybar-msg" "cmd" "restart"))))
 
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
