@@ -5,4 +5,3 @@
 (package! eshell-bookmark)
 (package! eshell-prompt-extras)
 (package! tldr)
-;;(package! detached)
