@@ -7,10 +7,6 @@
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
-(add-hook! 'enable-theme-functions
-  (defun cae-run-theme-hook-h ()
-    (run-hooks 'doom-load-theme-hook)))
-
 ;; Make Org headlines respect the heading backgrounds.
 (when cae-theme-extend-heading-faces
   (after! org-modern
