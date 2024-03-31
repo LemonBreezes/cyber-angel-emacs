@@ -169,6 +169,8 @@ It is meant to be used as a `post-gc-hook'."
       scheme-interaction-mode scheme-mode slime-repl-mode
       sly-mrepl-mode stumpwm-mode)))
 
+;; This is for finding and fixing commands that leave the current buffer and the
+;; window buffer out of sync.
 ;;(add-hook! 'post-command-hook
 ;;  (defun cae-catch-buffers-out-of-sync-h ()
 ;;    (unless (eq (current-buffer) (window-buffer))
