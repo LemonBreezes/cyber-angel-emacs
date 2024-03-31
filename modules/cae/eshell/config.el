@@ -1,18 +1,5 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
-;;(use-package! detached
-;;  :defer t :init
-;;  (add-hook 'doom-first-input-hook #'detached-init)
-;;  (map! [remap async-shell-command] #'detached-shell-command
-;;        [remap compile] #'detached-compile
-;;        [remap recompile] #'detached-recompile
-;;        (:when (modulep! :completion vertico)
-;;         [remap detached-open-session] #'detached-consult-session)
-;;        :leader
-;;        :prefix "o"
-;;        :desc "Detached session" "s" #'detached-open-session)
-;;  :custom ((detached-terminal-data-command system-type)))
-
 (use-package! eat
   :defer t :init
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
