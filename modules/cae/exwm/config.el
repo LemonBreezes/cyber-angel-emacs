@@ -201,8 +201,17 @@
        (pcase (and background (upcase background))
          ("#000000" nil)
          ("#111111" 'hl-line))))
-
-    (custom-set-variables '(i3bar-face-function i3bar-face-function-theme)))
+    :config
+    (defun i3bar--redisplay ()
+      "Redisplay the i3bar."
+      (when i3bar-mode
+        (setq i3bar-string (mapconcat #'i3bar--format-block i3bar--last-update ""))
+        (force-mode-line-update t)))
+    (defun i3bar--custom-set (symbol value)
+      "Set an i3bar custom SYMBOL to VALUE and redisplay."
+      (set-default-toplevel-value symbol value)
+      (i3bar--redisplay))
+    (setq! i3bar-face-function #'i3bar-face-function-theme))
 
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
