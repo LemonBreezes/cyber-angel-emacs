@@ -157,7 +157,7 @@
        debugger
        ;;(dirvish +icons +dirvish)
        eshell
-        (exwm +i3bar)
+       (exwm +i3bar)
        dired
        lisp
        misc-applications
