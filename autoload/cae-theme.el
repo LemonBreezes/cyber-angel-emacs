@@ -43,7 +43,10 @@
          (when (string= event "finished\n")
            (ewal-load-colors)))))
     (when (executable-find "polybar-msg")
-      (start-process "polybar-msg" nil "polybar-msg" "cmd" "restart"))))
+      (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
+    (when (executable-find "dunst")
+      (start-process "kill dunst" nil "killall" "dunst"))))
+
 
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
