@@ -24,6 +24,7 @@
 
 ;;;###autoload
 (defun cae-theme-export-using-pywal ()
+  (interactive)
   (when (and (executable-find "python")
              (executable-find "wal")
              (require 'theme-magic nil t)
