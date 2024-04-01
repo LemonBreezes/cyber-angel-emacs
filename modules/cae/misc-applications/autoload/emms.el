@@ -38,12 +38,11 @@
     ("j" "Currently playing"
      (lambda () (interactive)
        (require 'emms)
-       (emms-player-mpd-sync-from-mpd)
-       (let ((file (or (emms-track-get
-                        (emms-playlist-current-selected-track) 'name)
-                       (doom-store-get :last-emms-song)))))
-       (dired-jump nil (emms-track-get
-                        (emms-playlist-current-selected-track) 'name))))]])
+       (emms-player-mpd-sync-from-mpd
+        nil
+        (lambda (&rest _)
+          (dired-jump nil (emms-track-get
+                           (emms-playlist-current-selected-track) 'name))))))]])
 
 (add-hook! 'kill-emacs-hook
   (defun +emms-store-last-playing-song ()
