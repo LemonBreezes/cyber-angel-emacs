@@ -72,8 +72,3 @@ non-nil, debug init as well."
                            nil t nil '+exwm-vanilla-emacs--config-history)
           +exwm-vanilla-emacs-config-dir)
          (when arg (list "--debug-init"))))
-
-;;;###autoload
-(defun +exwm-open-nested-vanilla-doom-emacs (arg)
-  "Open a separate GUI instance of Doom Emacs. If ARG is non-nil, debug init"
-  (interactive "P"))
