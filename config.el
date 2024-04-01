@@ -408,7 +408,15 @@
     (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
       :before-until #'eldoc-print-current-symbol-info
       (or (and (featurep 'which-key) (which-key--popup-showing-p))
-          (derived-mode-p 'exwm-mode)))))
+          (derived-mode-p 'exwm-mode))))
+
+
+  (use-package! casual
+    :defer t :init
+    (after! calc
+      (map! :map calc-mode-map
+            "C-o" #'casual-main-menu
+            "C-M-?"#'casual-main-menu))))
 
 
 ;;; Tools
