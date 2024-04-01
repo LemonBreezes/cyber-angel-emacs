@@ -10,7 +10,7 @@
   (concat doom-user-dir "vanilla-emacs-configs/"))
 (defvar +exwm-vanilla-emacs--config-history nil)
 (defvar +exwm-vanilla-doom-emacs-config-dir
-  (concat doom-user-dir "vanilla-doom-emacs-configs/"))
+  (concat doom-user-dir "profiles/"))
 (defvar +exwm-vanilla-doom-emacs--config-history nil)
 
 ;;;###autoload
@@ -79,9 +79,9 @@ non-nil, debug init as well."
   (interactive "P")
   (let ((process-environment
          (cons
-          (format "DOOMDIR=%s"
-                  (expand-file-name
-                   (completing-read "Set DOOMDIR: "
+          (format "DOOMPROFILE=%s"
+                  (file-name-base
+                   (completing-read "Set DOOMPROFILE: "
                                     (seq-filter (lambda (f)
                                                   (not (string-prefix-p "flycheck_" f)))
                                                 (directory-files +exwm-vanilla-doom-emacs-config-dir nil "^[^.]"))
