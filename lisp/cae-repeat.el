@@ -84,6 +84,9 @@
     ("j" emms-next
      "k" emms-previous))
 
+  (define-repeat-map cae-ai-org-ai-kill-region-at-point
+    ("DEL" cae-ai-org-ai-kill-region-at-point))
+
   (define-repeat-map org-ai-kill-region-at-point
     ("DEL" org-ai-kill-region-at-point))
   (define-repeat-map cae-org-ai-kill-region-at-point
