@@ -187,7 +187,7 @@
 
   (when (modulep! +i3bar)
     (cae-when-none-of-these-processes-running
-     ("polybar")
+     ("polybar" "xmobar")
      (use-package! i3bar
        :defer t :init
        (add-hook 'exwm-init-hook #'i3bar-mode)
