@@ -418,7 +418,8 @@
             "C-o" #'casual-main-menu
             "C-M-?"#'casual-main-menu)))
 
-  (when (not (memq system-type '(cygwin windows-nt ms-dos)))
+  (when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
+             (executable-find "i3status"))
     (cae-when-none-of-these-processes-running
      ("polybar" "xmobar")
      (use-package! i3bar
