@@ -741,6 +741,8 @@
   (defvar +emms--old-wconf nil)
   (setq emms-directory (concat doom-data-dir "emms/")
         emms-cache-file (concat emms-directory "cache"))
+  ;; For playing music from Dired, I have a custom `.dir-locals.el' file in my music directory.
+  ;; https://github.com/lemonbreezes/cae-emacs/blob/master/dir-local-files/music-dir.el
   (map! :map +misc-applications-music-map
         "e" #'+emms
         "j" #'+emms-quick-access)
