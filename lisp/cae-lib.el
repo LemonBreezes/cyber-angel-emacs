@@ -58,3 +58,21 @@
       (posframe-show buffer
                      :string (buffer-string)
                      :position (point)))))
+
+(defun cae-check-processes-async (process-list callback)
+  "Check asynchronously if none of the processes in PROCESS-LIST are running and then call CALLBACK."
+  (let ((buffer (generate-new-buffer " *check-proc-async*")))
+    (set-process-sentinel
+     (apply #'start-process " *check-proc-async*" buffer "pidof" process-list)
+     (lambda (_process _event)
+       (unwind-protect
+           (funcall callback (= (buffer-size buffer) 0)) ; if buffer is empty, no processes are running
+         (kill-buffer buffer)))))
+  nil)
+
+(defmacro cae-when-none-of-these-processes-running (process-list arg-form)
+  "Execute ARG-FORM if none of the processes in PROCESS-LIST are running."
+  `(check-processes-async ',process-list
+    (lambda (none-running)
+      (when none-running
+        ,arg-form))))
