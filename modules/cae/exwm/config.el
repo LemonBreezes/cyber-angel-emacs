@@ -189,7 +189,12 @@
     (cae-when-none-of-these-processes-running
      ("polybar")
      (use-package! i3bar
-       :defer t)))
+       :defer t
+       :config
+       (setq! tab-bar-show t
+              tab-bar-format '(tab-bar-format-tabs        ; Optional: Remove to _only_ display the bar.
+                               tab-bar-format-align-right ; Optional: Remove to align left.
+                               tab-bar-format-global)))))
 
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
