@@ -37,7 +37,7 @@ _s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _D_: Vanilla Doom Emac
 _RET_: Kitty
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
-      ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
+      ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui" "--trayicon" "false")))
       ("T" ,(cae-exwm-app-runner "teams-for-linux" "Teams"))
       ("t" ,(cae-exwm-app-runner "tiled" "Tiled"))
       ("d" ,(cae-exwm-app-runner "discord" "Discord"))
