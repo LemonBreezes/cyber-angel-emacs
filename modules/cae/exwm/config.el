@@ -197,7 +197,8 @@
                         (eq (point-min) (point-max))))
              (use-package! i3bar
                :defer t))
-           (kill-buffer polybar-exists-p-buffer))))))
+           (when (buffer-live-p polybar-exists-p-buffer)
+             (kill-buffer polybar-exists-p-buffer)))))))
 
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
