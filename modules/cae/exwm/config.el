@@ -188,6 +188,9 @@
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
 
+  (when (modulep! :completion corfu)
+    (load! "+corfu"))
+
   (when (modulep! :ui workspaces)
     (unless (bound-and-true-p cae-config-finished-loading)
       (load! "+auto-persp"))))
