@@ -422,8 +422,7 @@
     (cae-when-none-of-these-processes-running
      ("polybar" "xmobar")
      (use-package! i3bar
-       :defer-incrementally t
-       :config
+       :defer-incrementally t :config
        (setq! tab-bar-show t
               tab-bar-format '(tab-bar-format-tabs        ; Optional: Remove to _only_ display the bar.
                                tab-bar-format-align-right ; Optional: Remove to align left.
