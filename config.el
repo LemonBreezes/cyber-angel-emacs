@@ -424,18 +424,9 @@
      ("polybar" "xmobar")
      (use-package! i3bar
        :defer-incrementally t :config
-       (setq! tab-bar-format '(tab-bar-format-tabs        ; Optional: Remove to _only_ display the bar.
+       (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
                                tab-bar-format-align-right ; Optional: Remove to align left.
-                               tab-bar-format-global)))))
-
-  (use-package! sideline
-    :hook ((flycheck-mode . sideline-mode)   ; for `sideline-flycheck`
-           (flymake-mode  . sideline-mode))  ; for `sideline-flymake`
-    :defer t :init
-    (setq sideline-display-backend-name t)
-    (setq sideline-backends-left '(sideline-flycheck)
-          sideline-backends-right '(sideline-lsp))
-    ))
+                               tab-bar-format-global))))))
 
 
 ;;; Tools
