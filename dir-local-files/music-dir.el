@@ -1,6 +1,8 @@
 ((nil
   . ((eval
       . (progn
+          ;; Now that I know about `menu-item' keybindings, I could make this code
+          ;; more robust but I'm too lazy to do it for now.
           (when (derived-mode-p 'dired-mode)
             (when (fboundp #'+emms-quick-access)
               (local-set-key (kbd "a") #'+emms-quick-access)
