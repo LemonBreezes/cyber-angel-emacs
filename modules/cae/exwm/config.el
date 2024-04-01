@@ -192,7 +192,7 @@
     (load! "+corfu"))
 
   (when (modulep! :ui workspaces)
-    (unless (bound-and-true-p cae-config-finished-loading)
+    (unless (featurep '+exwm-auto-persp)
       (load! "+auto-persp"))))
 
 ;;Local Variables:
