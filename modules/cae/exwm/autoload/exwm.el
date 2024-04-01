@@ -84,6 +84,5 @@ non-nil, debug init as well."
                               (seq-filter (lambda (f)
                                             (not (string-prefix-p "flycheck_" f)))
                                           (directory-files +exwm-vanilla-doom-emacs-config-dir nil "^[^.]"))
-                              nil t nil '+exwm-vanilla-doom-emacs--config-history))
-            t)
+                              nil t nil '+exwm-vanilla-doom-emacs--config-history)))
     (apply #'start-process "Emacs" nil "emacs")))
