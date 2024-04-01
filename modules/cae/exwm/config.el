@@ -193,8 +193,8 @@
        (start-process "polybar-exists-p" polybar-exists-p-buffer "pidof" "polybar")
        (lambda (process event)
          (when (string= "finished\n" event)
-           (when (not (with-current-buffer polybar-exists-p-buffer
-                        (eq (point-min) (point-max))))
+           (when (with-current-buffer polybar-exists-p-buffer
+                   (eq (point-min) (point-max)))
              (use-package! i3bar
                :defer t))
            (when (buffer-live-p polybar-exists-p-buffer)
