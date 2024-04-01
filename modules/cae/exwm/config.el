@@ -186,19 +186,10 @@
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (when (modulep! +i3bar)
-    (let ((polybar-exists-p-buffer " *polybar-exists-p*"))
-      (when (buffer-live-p polybar-exists-p-buffer)
-        (kill-buffer polybar-exists-p-buffer))
-      (set-process-sentinel
-       (start-process "polybar-exists-p" polybar-exists-p-buffer "pidof" "polybar")
-       (lambda (process event)
-         (when (string= "finished\n" event)
-           (when (with-current-buffer polybar-exists-p-buffer
-                   (eq (point-min) (point-max)))
-             (use-package! i3bar
-               :defer t))
-           (when (buffer-live-p polybar-exists-p-buffer)
-             (kill-buffer polybar-exists-p-buffer)))))))
+    (cae-when-none-of-these-processes-running
+     ("polybar")
+     (use-package! i3bar
+       :defer t)))
 
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
