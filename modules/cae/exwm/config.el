@@ -190,7 +190,7 @@
       (when (buffer-live-p polybar-exists-p-buffer)
         (kill-buffer polybar-exists-p-buffer))
       (set-process-sentinel
-       (start-process "polybar-exists-p" polybar-exists-p-buffer "pidof" "polybaru")
+       (start-process "polybar-exists-p" polybar-exists-p-buffer "pidof" "polybar")
        (lambda (process event)
          (when (string= "finished\n" event)
            (when (not (with-current-buffer polybar-exists-p-buffer
