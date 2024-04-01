@@ -429,9 +429,10 @@
                                tab-bar-format-global)))))
 
   (use-package! sideline
+    :hook ((flycheck-mode . sideline-mode)   ; for `sideline-flycheck`
+           (flymake-mode  . sideline-mode))  ; for `sideline-flymake`
     :defer t :init
-    (setq sideline-display-backend-name t)
-    ))
+    (setq sideline-display-backend-name t)))
 
 
 ;;; Tools
