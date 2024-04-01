@@ -61,9 +61,6 @@
 (package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
                              :branch "handle-pos-visible-in-window-p-nil"))
 (package! casual)
-(package! sideline-flycheck) ; I could feature-gate these two but it's easier to
-(package! sideline-flymake) ; just install them.
-(package! sideline-lsp)
 
 ;; cae-theme.el
 (package! modus-themes)
