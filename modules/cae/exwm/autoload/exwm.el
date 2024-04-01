@@ -85,4 +85,5 @@ non-nil, debug init as well."
                                             (not (string-prefix-p "flycheck_" f)))
                                           (directory-files +exwm-vanilla-doom-emacs-config-dir nil "^[^.]"))
                               nil t nil '+exwm-vanilla-doom-emacs--config-history)))
-    (apply #'start-process "Emacs" nil "emacs")))
+    (apply #'start-process "Emacs" nil "emacs"
+           (when arg (list "--debug-init")))))
