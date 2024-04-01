@@ -432,7 +432,10 @@
     :hook ((flycheck-mode . sideline-mode)   ; for `sideline-flycheck`
            (flymake-mode  . sideline-mode))  ; for `sideline-flymake`
     :defer t :init
-    (setq sideline-display-backend-name t)))
+    (setq sideline-display-backend-name t)
+    (setq sideline-backends-left '(sideline-flycheck)
+          sideline-backends-right '(sideline-lsp))
+    ))
 
 
 ;;; Tools
