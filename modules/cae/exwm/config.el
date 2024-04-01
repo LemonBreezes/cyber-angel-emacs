@@ -187,7 +187,8 @@
 
   (when (modulep! +i3bar)
     (let ((polybar-exists-p-buffer " *polybar-exists-p*"))
-      (kill-buffer polybar-exists-p-buffer)
+      (when (buffer-live-p polybar-exists-p-buffer)
+        (kill-buffer polybar-exists-p-buffer))
       (set-process-sentinel
        (start-process "polybar-exists-p" polybar-exists-p-buffer "pidof" "polybaru")
        (lambda (process event)
