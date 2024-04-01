@@ -77,13 +77,15 @@ non-nil, debug init as well."
 (defun +exwm-open-nested-vanilla-doom-emacs (arg)
   "Open a separate GUI instance of Doom Emacs. If ARG is non-nil, debug init"
   (interactive "P")
-  (let ((process-environment (seq-copy process-environment)))
-    (setenv "DOOMDIR"
-            (expand-file-name
-             (completing-read "Set DOOMDIR: "
-                              (seq-filter (lambda (f)
-                                            (not (string-prefix-p "flycheck_" f)))
-                                          (directory-files +exwm-vanilla-doom-emacs-config-dir nil "^[^.]"))
-                              nil t nil '+exwm-vanilla-doom-emacs--config-history)))
+  (let ((process-environment
+         (cons
+          (format "DOOMDIR=%s"
+                  (expand-file-name
+                   (completing-read "Set DOOMDIR: "
+                                    (seq-filter (lambda (f)
+                                                  (not (string-prefix-p "flycheck_" f)))
+                                                (directory-files +exwm-vanilla-doom-emacs-config-dir nil "^[^.]"))
+                                    nil t nil '+exwm-vanilla-doom-emacs--config-history)))
+          process-environment)))
     (apply #'start-process "Emacs" nil "emacs"
            (when arg (list "--debug-init")))))
