@@ -29,5 +29,4 @@
     ;; Call the original function with potentially adjusted coordinates
     (funcall orig-fun frame new-x new-y width height buffer)))
 
-
 (advice-add 'corfu--make-frame :around #'advise-corfu-make-frame-with-monitor-awareness)
