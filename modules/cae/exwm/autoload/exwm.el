@@ -77,8 +77,6 @@ non-nil, debug init as well."
 (defun +exwm-open-nested-vanilla-doom-emacs (arg)
   "Open a separate GUI instance of Doom Emacs. If ARG is non-nil, debug init"
   (interactive "P")
-  ;; open emacs with DOOMDIR set to a directory read from vanilla-doom-emacs-configs
-  ;; this has to be set in the process environment, so we can't use -l
   (let ((process-environment (seq-copy process-environment)))
     (setenv "DOOMDIR"
             (expand-file-name
