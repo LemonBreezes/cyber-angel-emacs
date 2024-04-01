@@ -36,6 +36,9 @@
     (set-face-attribute 'mode-line nil :box (face-foreground 'ef-themes-heading-0 nil t))
     (set-face-attribute 'mode-line-inactive nil :box (face-foreground 'shadow nil t)))
 
+  ;; Make the mouse cursor more visible.
+  (set-face-attribute 'mouse nil :background (face-foreground 'default nil t))
+
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
     (unless cae-theme-extend-heading-faces
