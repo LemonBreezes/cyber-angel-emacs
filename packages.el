@@ -60,6 +60,7 @@
 (package! fancy-compilation)
 (package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
                              :branch "handle-pos-visible-in-window-p-nil"))
+(package! casual)
 
 
 ;; cae-theme.el
