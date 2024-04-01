@@ -20,12 +20,11 @@
   (let* ((monitor-geometry (get-focused-monitor-geometry))
          (monitor-x (nth 0 monitor-geometry))
          (monitor-y (nth 1 monitor-geometry))
-         ;; You may want to adjust the logic below if you have specific preferences
-         ;; on where on the monitor the posframe should appear.
-         ;; Currently, it places the posframe at its intended X and Y, but ensures
-         ;; it's within the bounds of the focused monitor.
-         (new-x (+ monitor-x x))
-         (new-y (+ monitor-y y)))
+         (selected-frame-position (frame-position))
+         (selected-frame-x (car selected-frame-position))
+         (selected-frame-y (cdr selected-frame-position))
+         (new-x (+ monitor-x selected-frame-x x))
+         (new-y (+ monitor-y selected-frame-y y)))
 
     ;; Call the original function with potentially adjusted coordinates
     (funcall orig-fun frame new-x new-y width height buffer)))
