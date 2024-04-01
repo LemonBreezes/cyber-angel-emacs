@@ -72,7 +72,7 @@
 
 (defmacro cae-when-none-of-these-processes-running (process-list arg-form)
   "Execute ARG-FORM if none of the processes in PROCESS-LIST are running."
-  `(check-processes-async ',process-list
+  `(cae-check-processes-async ',process-list
     (lambda (none-running)
       (when none-running
         ,arg-form))))
