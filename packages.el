@@ -61,7 +61,11 @@
 (package! eldoc-box :recipe (:host github :repo "LemonBreezes/eldoc-box"
                              :branch "handle-pos-visible-in-window-p-nil"))
 (package! casual)
-(package! sideline-flycheck)
+(when (and (modulep! :checkers syntax)
+           (not (modulep! :checkers syntax +flymake)))
+  (package! sideline-flycheck))
+(when (modulep! :checkers syntax +flymake)
+  (package! sideline-flymake))
 
 
 ;; cae-theme.el
