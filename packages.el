@@ -63,7 +63,7 @@
 (package! casual)
 (package! sideline-flycheck) ; I could feature-gate these two but it's easier to
 (package! sideline-flymake) ; just install them.
-
+(package! sideline-lsp)
 
 ;; cae-theme.el
 (package! modus-themes)
