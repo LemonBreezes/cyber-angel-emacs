@@ -36,7 +36,7 @@
       (let ((theme-magic-colors (theme-magic--auto-extract-16-colors)))
         ;; Set the environment variable WAL_COLORN for N the color number to the color value
         (cl-loop for color in theme-magic-colors
-                 for i upfrom 0
+                 for i upfrom 1
                  do (setenv (format "WAL_COLOR%s" i) color))
         (set-process-sentinel
          (apply #'start-process
