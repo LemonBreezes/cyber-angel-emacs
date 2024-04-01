@@ -185,18 +185,6 @@
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
-  (when (modulep! +i3bar)
-    (cae-when-none-of-these-processes-running
-     ("polybar" "xmobar")
-     (use-package! i3bar
-       :defer t :init
-       (add-hook 'exwm-init-hook #'i3bar-mode)
-       :config
-       (setq! tab-bar-show t
-              tab-bar-format '(tab-bar-format-tabs        ; Optional: Remove to _only_ display the bar.
-                               tab-bar-format-align-right ; Optional: Remove to align left.
-                               tab-bar-format-global)))))
-
   (when (modulep! :editor evil +everywhere)
     (load! "+evil"))
 
