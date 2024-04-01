@@ -17,6 +17,7 @@
     (set-window-configuration +emms--old-wconf)))
 
 ;;;###autoload (autoload '+emms-quick-access "cae/misc-applications/autoload/emms" nil t)
+(require 'transient)
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
