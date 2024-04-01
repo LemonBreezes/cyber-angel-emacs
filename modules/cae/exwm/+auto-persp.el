@@ -177,3 +177,5 @@ buffers of that class."
       (+workspace/display)))
 
   (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace))
+
+(provide '+exwm-auto-persp)
