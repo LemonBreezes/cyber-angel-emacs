@@ -426,7 +426,12 @@
        :defer-incrementally t :config
        (setq! tab-bar-format '(tab-bar-format-tabs        ; Optional: Remove to _only_ display the bar.
                                tab-bar-format-align-right ; Optional: Remove to align left.
-                               tab-bar-format-global))))))
+                               tab-bar-format-global)))))
+
+  (use-package! sideline
+    :defer t :init
+    (setq sideline-display-backend-name t)
+    ))
 
 
 ;;; Tools
