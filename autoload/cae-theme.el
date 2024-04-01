@@ -33,24 +33,21 @@
           ;; version of Python instead of the user's root version. To fix this, we
           ;; temporarily change to the user's dir.
           (default-directory "~/"))
-      (let ((theme-magic-colors (theme-magic--auto-extract-16-colors)))
-        ;; Set the environment variable WAL_COLORN for N the color number to the
-        ;; color value.
-        (set-process-sentinel
-         (apply #'start-process
-                "cae-theme-magic"
-                nil
-                "python"
-                theme-magic--pywal-python-script
-                theme-magic-colors)
-         (lambda (_proc event)
-           (when (string= event "finished\n")
-             (ewal-load-colors)
-             (when (executable-find "polybar-msg")
-               (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
-             (when (executable-find "dunst")
-               ;; This assumes you are running `dunst' as a systemd service.
-               (start-process "kill dunst" nil "killall" "dunst")))))))))
+      (set-process-sentinel
+       (apply #'start-process
+              "cae-theme-magic"
+              nil
+              "python"
+              theme-magic--pywal-python-script
+              (theme-magic--auto-extract-16-colors))
+       (lambda (_proc event)
+         (when (string= event "finished\n")
+           (ewal-load-colors)
+           (when (executable-find "polybar-msg")
+             (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
+           (when (executable-find "dunst")
+             ;; This assumes you are running `dunst' as a systemd service.
+             (start-process "kill dunst" nil "killall" "dunst"))))))))
 
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
