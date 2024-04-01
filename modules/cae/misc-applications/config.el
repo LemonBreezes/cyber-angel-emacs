@@ -792,11 +792,12 @@
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)))
-  (map! :map emms-browser-mode-map
-        :ng "q" #'+emms-quit
-        :ng "a" #'+emms-quick-access
-        :ng "e" #'other-window
-        :n "gr" #'emms-player-mpd-connect)
+  (after! emms-browser
+    (map! :map emms-browser-mode-map
+          :ng "q" #'+emms-quit
+          :ng "a" #'+emms-quick-access
+          :ng "e" #'other-window
+          :n "gr" #'emms-player-mpd-connect))
   (map! :map emms-playlist-mode-map
         :ng "q" #'+emms-quit
         :ng "e" #'other-window
