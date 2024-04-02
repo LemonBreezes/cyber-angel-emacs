@@ -18,3 +18,4 @@
 
 (require 'multiple-cursors)
 (scratch-buffer)
+(insert "hello world\nhello world\nhello world")
