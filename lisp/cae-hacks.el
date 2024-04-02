@@ -9,6 +9,7 @@
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
 (defvar cae-hacks--gc-idle-timer nil)
+(defvar cae-hacks--gc-cons-threshold-old nil)
 
 ;; The purpose of these functions is to disable GC during long-running tasks
 ;; while showing GC messages if Emacs GCs anyways while running such a task.
@@ -22,6 +23,7 @@
     (and (fboundp #'gcmh-mode) (gcmh-mode -1))
     (setq cae-hacks--gc-messages      garbage-collection-messages
           garbage-collection-messages t
+          cae-hacks--gc-cons-threshold-old gc-cons-threshold
           gc-cons-threshold           cae-hacks-gc-cons-threshold)
     (setq cae-hacks--gc-idle-timer
           (run-with-idle-timer cae-hacks-gc-idle-delay
@@ -39,13 +41,14 @@
   "This is the inverse of `cae-hacks-disable-gc'.
 It is meant to be used as a `post-gc-hook'."
   (when cae-hacks--gc-disabled
-    (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
     (when (timerp cae-hacks--gc-idle-timer)
       (cancel-timer cae-hacks--gc-idle-timer))
     (setq garbage-collection-messages cae-hacks--gc-messages
           cae-hacks--gc-messages      nil
           cae-hacks--gcmh-mode        nil
-          cae-hacks--gc-idle-timer    nil)
+          cae-hacks--gc-idle-timer    nil
+          gc-cons-threshold           cae-hacks--gc-cons-threshold-old)
+    (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
     (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
     (setq cae-hacks--gc-disabled nil)))
 
