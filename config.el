@@ -1457,8 +1457,7 @@
    ,@(when (modulep! :editor multiple-cursors)
        (if (modulep! :editor evil)
            '(evil-multiedit evil-mc)
-         '(multiple-cursors)))
-   )
+         '(multiple-cursors))))
  t)
 
 (after! pdf-tools
