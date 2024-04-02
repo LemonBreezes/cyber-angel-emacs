@@ -1453,7 +1453,11 @@
                 zone-nyan selectric)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
-              '(alarm pomm debbugs))))
+              '(alarm pomm debbugs)))
+   ,@(when (modulep! :editor multiple-cursors)
+       (if (modulep! :editor evil)
+           '(evil-multiedit evil-mc)
+         '(multiple-cursors))))
  t)
 
 (after! pdf-tools
