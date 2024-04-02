@@ -4,9 +4,7 @@
 ;;; GC hacks
 
 (defconst cae-hacks-gc-cons-threshold (* 64 1024 1024 1024))
-(defconst cae-hacks-gc-cons-percentage 10)
 (defconst cae-hacks-gc-idle-delay 20)
-(defvar cae-hacks--gc-percentage nil)
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
 (defvar cae-hacks--gcmh-mode nil)
@@ -23,10 +21,8 @@
     (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
     (and (fboundp #'gcmh-mode) (gcmh-mode -1))
     (setq cae-hacks--gc-messages      garbage-collection-messages
-          cae-hacks--gc-percentage    gc-cons-percentage
           garbage-collection-messages t
-          gc-cons-threshold           cae-hacks-gc-cons-threshold
-          gc-cons-percentage          cae-hacks-gc-cons-percentage)
+          gc-cons-threshold           cae-hacks-gc-cons-threshold)
     (setq cae-hacks--gc-idle-timer
           (run-with-idle-timer cae-hacks-gc-idle-delay
                                nil #'cae-hacks-garbage-collect))
@@ -47,9 +43,7 @@ It is meant to be used as a `post-gc-hook'."
     (when (timerp cae-hacks--gc-idle-timer)
       (cancel-timer cae-hacks--gc-idle-timer))
     (setq garbage-collection-messages cae-hacks--gc-messages
-          gc-cons-percentage          cae-hacks--gc-percentage
           cae-hacks--gc-messages      nil
-          cae-hacks--gc-percentage    nil
           cae-hacks--gcmh-mode        nil
           cae-hacks--gc-idle-timer    nil)
     (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
