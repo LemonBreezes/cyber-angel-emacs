@@ -6,5 +6,5 @@
 (package! eshell-prompt-extras)
 (package! tldr)
 
-;; Used occasionally for `stutter-mode'.
+;; These packages have no `use-package!' blocks
 (package! stutter :recipe (:host github :repo "Stebalien/stutter.el"))
