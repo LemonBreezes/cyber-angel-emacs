@@ -5,3 +5,4 @@
 (package! eshell-bookmark)
 (package! eshell-prompt-extras)
 (package! tldr)
+(package! stutter :recipe (:host github :repo "Stebalien/stutter.el"))
