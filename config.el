@@ -399,16 +399,16 @@
     :config
     (fancy-compilation-mode +1))
 
-  (use-package! eldoc-box
-    :defer t :init
-    (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)
-    (after! eldoc
-      (setq eldoc-idle-delay 0.7))
-    ;; For some reason, `which-key' would get canceled out by the Eldoc help.
-    (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
-      :before-until #'eldoc-print-current-symbol-info
-      (or (and (featurep 'which-key) (which-key--popup-showing-p))
-          (derived-mode-p 'exwm-mode))))
+  ;;(use-package! eldoc-box
+  ;;  :defer t :init
+  ;;  (add-hook 'eldoc-mode-hook #'eldoc-box-hover-at-point-mode)
+  ;;  (after! eldoc
+  ;;    (setq eldoc-idle-delay 0.7))
+  ;;  ;; For some reason, `which-key' would get canceled out by the Eldoc help.
+  ;;  (defadvice! cae-disable-eldoc-on-which-key-a (&optional _)
+  ;;    :before-until #'eldoc-print-current-symbol-info
+  ;;    (or (and (featurep 'which-key) (which-key--popup-showing-p))
+  ;;        (derived-mode-p 'exwm-mode))))
 
 
   (use-package! casual
@@ -1462,6 +1462,11 @@
 
 (after! pdf-tools
   (pdf-tools-install t nil t))
+
+(after! copilot
+  (unless (or (not copilot-node-executable)
+              (file-exists-p copilot-install-dir))
+    (copilot-install-server)))
 
 (setq cae-config-finished-loading t)
 
