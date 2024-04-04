@@ -23,8 +23,7 @@
     ("random" "r")
     ("insert" "i")
     ("music" "m")
-    ("quotes" "q")
-    ("helm" "h")))
+    ("quotes" "q")))
 
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
@@ -72,17 +71,6 @@
         :n "s s" #'package-menu-filter-by-status
         :n "s u" #'package-menu-filter-upgradable
         :n "s v" #'package-menu-filter-by-version))
-
-(when (or (modulep! :cae helm)
-          (modulep! :completion helm))
-  (map! :map +misc-applications-map
-        "h" (cae-oneshot-keymap helm-command-map helm))
-  (after! helm
-    (map! :map +misc-applications-map
-          "h" helm-command-map))
-  (after! which-key
-    (which-key-add-keymap-based-replacements '+misc-applications-map
-      "h" "helm")))
 
 
 ;;; Random apps
