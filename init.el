@@ -133,7 +133,7 @@
        ;;(yaml +lsp +tree-sitter)
        (json +lsp +tree-sitter)
        ;;(javascript +lsp +tree-sitter)
-       ;;(python +lsp +tree-sitter)
+       (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
        ;;(agda +lsp +tree-sitter +local)
 
