@@ -27,7 +27,7 @@ alias sysctl sudo sysctl                                                      $*
 alias sysu systemctl --user                                                   $*
 alias sysut systemctl --user status                                           $*
 alias sysus systemctl --user start                                            $*
-alias sysue systemctl --user enable                                           $*
+alias sysue systemctl --user enable --now                                     $*
 alias sysud systemctl --user disable                                          $*
 alias sysur systemctl --user restart                                          $*
 alias sysux systemctl --user stop                                             $*
@@ -35,7 +35,7 @@ alias sysudr systemctl --user daemon-reload                                   $*
 alias sys sudo systemctl                                                      $*
 alias syst sudo systemctl status                                              $*
 alias syss sudo systemctl start                                               $*
-alias syse sudo systemctl enable                                              $*
+alias syse sudo systemctl enable --now                                        $*
 alias sysd sudo systemctl disable                                             $*
 alias sysr sudo systemctl restart                                             $*
 alias sysx sudo systemctl stop                                                $*
