@@ -141,7 +141,7 @@
        ;;(:if IS-MAC macos)
        ;;(:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
        ;;
-       ;;:config
+       :config
        (default +bindings +smartparens)
        ;;
        ;;:email
