@@ -85,7 +85,7 @@
        format
        snippets
        multiple-cursors
-       ;;(evil +everywhere)
+       (evil +everywhere)
 
        :emacs
        undo
