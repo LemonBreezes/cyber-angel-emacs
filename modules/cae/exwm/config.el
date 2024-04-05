@@ -167,7 +167,7 @@
   (defun +exwm-input--translate-a (oldfun &rest args)
     (let ((key-translation-map
            (copy-keymap key-translation-map)))
-      (define-key key-translation-map [9] nil)
+      (define-key key-translation-map [?\C-i] nil)
       (apply oldfun args)))
   (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
 
