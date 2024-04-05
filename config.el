@@ -460,22 +460,21 @@
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
-  (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
-  (add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
-
   (add-to-list 'auto-mode-alist '("/sway/.*config.*/" . i3wm-config-mode))
   (add-to-list 'auto-mode-alist '("/sway/config\\'" . i3wm-config-mode))
 
   ;; Do not highlight quoted strings in syslog-mode because sometimes they
   ;; aren't balanced, which breaks font-lock.
-  (after! syslog-mode
-    (setq syslog-font-lock-keywords
-          (cl-remove-if
-           (lambda (keyword)
-             (cl-destructuring-bind (regexp . face) keyword
-               (string= "'[^']*'" regexp)))
-           syslog-font-lock-keywords)))
-  (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
+  ;;(after! syslog-mode
+  ;;  (setq syslog-font-lock-keywords
+  ;;        (cl-remove-if
+  ;;         (lambda (keyword)
+  ;;           (cl-destructuring-bind (regexp . face) keyword
+  ;;             (string= "'[^']*'" regexp)))
+  ;;         syslog-font-lock-keywords)))
+  ;;(add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
+  ;;(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
 
   ;; Set up printers.
   (after! lpr (setq printer-name "Brother_HL-2350DW"))
