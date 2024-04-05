@@ -61,6 +61,8 @@
     (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
   (after! tramp
+    ;; Tramp still doesn't work for me on this computer so don't blindly copy
+    ;; this.
     (setq tramp-shell-prompt-pattern
           "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
           tramp-default-remote-shell (executable-find "bash")))
