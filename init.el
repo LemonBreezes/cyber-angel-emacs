@@ -83,7 +83,7 @@
        :editor
        file-templates
        format
-       ;;snippets
+       snippets
        multiple-cursors
        ;;(evil +everywhere)
 
