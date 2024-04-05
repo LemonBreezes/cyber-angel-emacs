@@ -182,6 +182,11 @@
                          (exwm-layout--set-ewmh-state id)
                          (xcb:flush exwm--connection))))
 
+  ;; Prevent errors that can occur after deleting a directory.
+  (add-hook! 'exwm-mode-hook
+    (defun +exwm-set-default-directory-h ()
+      (setq default-directory (expand-file-name "~"))))
+
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
