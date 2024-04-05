@@ -5,6 +5,24 @@
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
+  ;; Ensure this is defined even if its module is not loaded.
+  (unless (boundp '+default-minibuffer-maps)
+    (defvar +default-minibuffer-maps
+      (append '(minibuffer-local-map
+                minibuffer-local-ns-map
+                minibuffer-local-completion-map
+                minibuffer-local-must-match-map
+                minibuffer-local-isearch-map
+                read-expression-map)
+              (cond ((modulep! :completion ivy)
+                     '(ivy-minibuffer-map
+                       ivy-switch-buffer-map))
+                    ((modulep! :completion helm)
+                     '(helm-map
+                       helm-rg-map
+                       helm-read-file-map))))
+      "A list of all the keymaps used for the minibuffer."))
+
   (load! "lisp/cae-tty")
   (load! "lisp/cae-bindings")
   (load! "lisp/cae-multi")              ;Run parallel Emacs instances.
