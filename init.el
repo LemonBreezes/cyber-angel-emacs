@@ -82,7 +82,7 @@
        ;;zen
        ;;(treemacs +lsp)
        ;;
-       ;;:editor
+       :editor
        ;;file-templates
        ;;format
        ;;snippets
