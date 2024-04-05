@@ -436,6 +436,8 @@
   (add-hook 'speed-type-mode-hook #'visual-line-mode)
   (when (modulep! :completion corfu)
     (after! corfu
+      (when (not (listp global-corfu-modes))
+        (setq global-corfu-modes (list t)))
       (add-to-list 'global-corfu-modes '(not speed-type-mode))))
   (when (modulep! :editor evil)
     (after! evil
