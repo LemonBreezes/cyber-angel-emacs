@@ -103,3 +103,16 @@
     :before-until #'eldoc-print-current-symbol-info
     (or (and (featurep 'which-key) (which-key--popup-showing-p))
         (derived-mode-p 'exwm-mode))))
+
+;; Do not highlight quoted strings in syslog-mode because sometimes they
+;; aren't balanced, which breaks font-lock.
+(after! syslog-mode
+  (setq syslog-font-lock-keywords
+        (cl-remove-if
+         (lambda (keyword)
+           (cl-destructuring-bind (regexp . face) keyword
+             (string= "'[^']*'" regexp)))
+         syslog-font-lock-keywords)))
+(add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
+(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+(add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
