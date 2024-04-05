@@ -11,6 +11,9 @@
 (defadvice! cae-run-theme-hook-h (theme)
   :after #'consult-theme
   (run-hooks 'doom-load-theme-hook))
+(add-hook! 'circadian-after-load-theme-hook
+  (defun cae-run-theme-hook-h ()
+    (run-hooks 'doom-load-theme-hook)))
 
 ;; Make Org headlines respect the heading backgrounds.
 (when cae-theme-extend-heading-faces
