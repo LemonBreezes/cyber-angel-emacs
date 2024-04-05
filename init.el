@@ -81,10 +81,10 @@
        (treemacs +lsp)
 
        :editor
-       ;;file-templates
-       ;;format
+       file-templates
+       format
        ;;snippets
-       ;;multiple-cursors
+       multiple-cursors
        ;;(evil +everywhere)
 
        :emacs
