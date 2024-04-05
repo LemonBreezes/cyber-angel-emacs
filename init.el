@@ -88,7 +88,7 @@
        snippets
        multiple-cursors
        ;;fold
-       ;;(evil +everywhere)
+       (evil +everywhere)
        ;;lispy
 
        :emacs
