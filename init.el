@@ -68,17 +68,17 @@
        (corfu +orderless +icons +dabbrev)
 
        :ui
-       ;;doom-dashboard
-       ;;hl-todo
-       ;;(hydra +childframe)
-       ;;(popup +defaults)
-       ;;(vc-gutter +pretty +diff-hl)
-       ;;vi-tilde-fringe
-       ;;workspaces
-       ;;(window-select +numbers)
-       ;;ophints
-       ;;zen
-       ;;(treemacs +lsp)
+       doom-dashboard
+       hl-todo
+       (hydra +childframe)
+       (popup +defaults)
+       (vc-gutter +pretty +diff-hl)
+       vi-tilde-fringe
+       workspaces
+       (window-select +numbers)
+       ophints
+       zen
+       (treemacs +lsp)
 
        :editor
        ;;file-templates
