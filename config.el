@@ -546,9 +546,8 @@
   (after! smiley
     (setq smiley-style t))
 
-  (when (executable-find "rg")
-    (after! xref
-      (setq xref-search-program 'ripgrep)))
+  (after! xref
+    (setq xref-search-program 'ripgrep))
 
   ;; We use `corfu' and `vertico' instead of the built-in completions, but I
   ;; still have this here as my preferred defaults for the built-in completions.
