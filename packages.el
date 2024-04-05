@@ -71,7 +71,6 @@
 
 ;;; Tools
 (package! nov)
-(package! syslog-mode)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
 (package! wakatime-mode)
