@@ -140,19 +140,19 @@
        (rss +org)
 
        :cae
-       ;;helm
-       ;;debugger
-       ;;eshell
+       helm
+       debugger
+       eshell
        (exwm +i3bar)
-       ;;dired
+       dired
        ;;lisp
-       ;;misc-applications
-       ;;modeline
-       ;;unpackaged
-       ;;vc
-       ;;org
-       ;;ai
-       ;;gnus
+       misc-applications
+       modeline
+       unpackaged
+       vc
+       org
+       ai
+       gnus
        )
 
 ;;Local Variables:
