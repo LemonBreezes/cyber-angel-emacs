@@ -67,6 +67,8 @@
           "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
           tramp-default-remote-shell (executable-find "bash")))
 
+  (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
   (after! ghub
     ;; I use the latest Emacs.
     (setq ghub-use-workaround-for-emacs-bug-54989 nil
