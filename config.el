@@ -67,6 +67,7 @@
           "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
           tramp-default-remote-shell (executable-find "bash")))
 
+  ;; Automatically mark scripts as executable.
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
   (after! ghub
