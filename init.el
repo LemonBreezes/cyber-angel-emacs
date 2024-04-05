@@ -64,7 +64,7 @@
       doom-localleader-alt-key "<menu> m")
 
 (doom! :completion
-       ;;(vertico +icons)
+       (vertico +icons)
        (corfu +orderless +icons +dabbrev)
 
        :ui
@@ -145,7 +145,7 @@
        eshell
        (exwm +i3bar)
        dired
-       ;;lisp
+       lisp
        misc-applications
        modeline
        unpackaged
