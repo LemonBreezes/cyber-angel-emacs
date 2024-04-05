@@ -38,3 +38,5 @@ dictum nunc justo sit amet elit.")
       (corfu-mode +1)
       (local-set-key (kbd "TAB") #'cape-dabbrev))
   (read-from-minibuffer "Test: "))
+
+;; So the conclusion is that it works in vanilla Emacs.
