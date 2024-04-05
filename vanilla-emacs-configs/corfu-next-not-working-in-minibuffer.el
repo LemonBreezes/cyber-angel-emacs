@@ -35,5 +35,6 @@ dictum nunc justo sit amet elit.")
 (minibuffer-with-setup-hook
     (lambda ()
       (add-hook 'completion-at-point-functions #'cape-dabbrev nil 'local)
-      (corfu-mode +1))
+      (corfu-mode +1)
+      (local-set-key (kbd "TAB") #'corfu-next))
   (read-from-minibuffer "Test: "))
