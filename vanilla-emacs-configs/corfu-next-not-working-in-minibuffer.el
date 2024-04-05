@@ -15,9 +15,12 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'corfu)
+(straight-use-package 'cape)
 
 (require 'corfu)
+(require 'cape)
 (minibuffer-with-setup-hook
     (lambda ()
+      (add-hook 'completion-at-point-functions #'cape-dabbrev nil 'local)
       (corfu-mode +1))
   (read-from-minibuffer "Test: "))
