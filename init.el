@@ -67,106 +67,107 @@
        (vertico +icons)
        (corfu +orderless +icons +dabbrev)
 
-       :ui
-       doom-dashboard
-       hl-todo
-       (hydra +childframe)
-       ;;(ligatures +extra +iosevka)
-       ;;nav-flash
-       (popup +defaults)
-       (vc-gutter +pretty +diff-hl)
-       vi-tilde-fringe
-       workspaces
-       (window-select +numbers)
-       ophints
-       zen
-       (treemacs +lsp)
-
-       :editor
-       file-templates
-       format
-       snippets
-       multiple-cursors
-       ;;fold
-       (evil +everywhere)
-       ;;lispy
-
-       :emacs
-       undo
-       ibuffer
-       vc
-       (dired +icons)
-
-       :term
-       eshell
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
-
-       :checkers
-       (syntax +childframe)
-       ;;spell
-       ;;grammar
-
-       :tools
-       (debugger +lsp)
-       direnv
-       editorconfig
-       (eval +overlay)
-       (lookup +dictionary +docsets +offline)
-       (magit +forge)
-       (lsp +peek)
-       tree-sitter
-       docker
-       ein
-       pdf
-
-       :lang
-       (emacs-lisp +tree-sitter)
-       (org +roam2 +tree-sitter +dragndrop)
-       (cc +lsp +tree-sitter)
-       (web +lsp +tree-sitter)
-       (sh +lsp +tree-sitter)
-       (nix +lsp +tree-sitter)
-       ;;(solidity +lsp +tree-sitter)
-       (lua +lsp +tree-sitter +fennel)
-       (data +lsp +tree-sitter)
-       (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
-       ;;(yaml +lsp +tree-sitter)
-       (json +lsp +tree-sitter)
-       ;;(javascript +lsp +tree-sitter)
-       (python +lsp +tree-sitter)
-       (haskell +lsp +tree-sitter)
-       ;;(agda +lsp +tree-sitter +local)
-
-       :os
-       (:if IS-MAC macos)
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
-
-       :config
-       (default +bindings +smartparens)
-
-       :email
-       mu4e
-       ;;(notmuch +org)
-
-       :app
-       (rss +org)
-
-       :cae
-       ;;holy
-       helm
-       debugger
-       ;;(dirvish +icons +dirvish)
-       eshell
-       (exwm +i3bar)
-       dired
-       lisp
-       misc-applications
-       modeline
-       unpackaged
-       vc
-       org
-       ai
-       gnus)
+       ;;:ui
+       ;;doom-dashboard
+       ;;hl-todo
+       ;;(hydra +childframe)
+       ;;;;(ligatures +extra +iosevka)
+       ;;;;nav-flash
+       ;;(popup +defaults)
+       ;;(vc-gutter +pretty +diff-hl)
+       ;;vi-tilde-fringe
+       ;;workspaces
+       ;;(window-select +numbers)
+       ;;ophints
+       ;;zen
+       ;;(treemacs +lsp)
+       ;;
+       ;;:editor
+       ;;file-templates
+       ;;format
+       ;;snippets
+       ;;multiple-cursors
+       ;;;;fold
+       ;;(evil +everywhere)
+       ;;;;lispy
+       ;;
+       ;;:emacs
+       ;;undo
+       ;;ibuffer
+       ;;vc
+       ;;(dired +icons)
+       ;;
+       ;;:term
+       ;;eshell
+       ;;(:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+       ;;
+       ;;:checkers
+       ;;(syntax +childframe)
+       ;;;;spell
+       ;;;;grammar
+       ;;
+       ;;:tools
+       ;;(debugger +lsp)
+       ;;direnv
+       ;;editorconfig
+       ;;(eval +overlay)
+       ;;(lookup +dictionary +docsets +offline)
+       ;;(magit +forge)
+       ;;(lsp +peek)
+       ;;tree-sitter
+       ;;docker
+       ;;ein
+       ;;pdf
+       ;;
+       ;;:lang
+       ;;(emacs-lisp +tree-sitter)
+       ;;(org +roam2 +tree-sitter +dragndrop)
+       ;;(cc +lsp +tree-sitter)
+       ;;(web +lsp +tree-sitter)
+       ;;(sh +lsp +tree-sitter)
+       ;;(nix +lsp +tree-sitter)
+       ;;;;(solidity +lsp +tree-sitter)
+       ;;(lua +lsp +tree-sitter +fennel)
+       ;;(data +lsp +tree-sitter)
+       ;;(latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+       ;;;;(yaml +lsp +tree-sitter)
+       ;;(json +lsp +tree-sitter)
+       ;;;;(javascript +lsp +tree-sitter)
+       ;;(python +lsp +tree-sitter)
+       ;;(haskell +lsp +tree-sitter)
+       ;;;;(agda +lsp +tree-sitter +local)
+       ;;
+       ;;:os
+       ;;(:if IS-MAC macos)
+       ;;(:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+       ;;
+       ;;:config
+       ;;(default +bindings +smartparens)
+       ;;
+       ;;:email
+       ;;mu4e
+       ;;;;(notmuch +org)
+       ;;
+       ;;:app
+       ;;(rss +org)
+       ;;
+       ;;:cae
+       ;;;;holy
+       ;;helm
+       ;;debugger
+       ;;;;(dirvish +icons +dirvish)
+       ;;eshell
+       ;;(exwm +i3bar)
+       ;;dired
+       ;;lisp
+       ;;misc-applications
+       ;;modeline
+       ;;unpackaged
+       ;;vc
+       ;;org
+       ;;ai
+       ;;gnus
+       )
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
