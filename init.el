@@ -64,15 +64,13 @@
       doom-localleader-alt-key "<menu> m")
 
 (doom! :completion
-       (vertico +icons)
+       ;;(vertico +icons)
        (corfu +orderless +icons +dabbrev)
 
        :ui
        doom-dashboard
        hl-todo
        (hydra +childframe)
-       ;;(ligatures +extra +iosevka)
-       ;;nav-flash
        (popup +defaults)
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
@@ -88,7 +86,7 @@
        snippets
        multiple-cursors
        ;;fold
-       ;;(evil +everywhere)
+       (evil +everywhere)
        ;;lispy
 
        :emacs
@@ -103,8 +101,6 @@
 
        :checkers
        (syntax +childframe)
-       ;;spell
-       ;;grammar
 
        :tools
        (debugger +lsp)
@@ -116,7 +112,6 @@
        (lsp +peek)
        tree-sitter
        docker
-       ;;ein
        pdf
 
        :lang
@@ -126,16 +121,12 @@
        (web +lsp +tree-sitter)
        (sh +lsp +tree-sitter)
        (nix +lsp +tree-sitter)
-       ;;(solidity +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
-       ;;(yaml +lsp +tree-sitter)
        (json +lsp +tree-sitter)
-       ;;(javascript +lsp +tree-sitter)
        (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
-       ;;(agda +lsp +tree-sitter +local)
 
        :os
        (:if IS-MAC macos)
@@ -146,16 +137,13 @@
 
        :email
        mu4e
-       ;;(notmuch +org)
 
        :app
        (rss +org)
 
        :cae
-       ;;holy
        helm
        debugger
-       ;;(dirvish +icons +dirvish)
        eshell
        (exwm +i3bar)
        dired
@@ -166,7 +154,8 @@
        vc
        org
        ai
-       gnus)
+       gnus
+       )
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
