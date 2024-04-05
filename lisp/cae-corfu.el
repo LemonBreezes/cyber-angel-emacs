@@ -108,3 +108,6 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; Enable Fish autocompletion in `read-shell-command'.
 (autoload 'turn-on-fish-completion-mode "fish-completion" nil t)
 (advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
+
+;; Prefer Bash over Fish for completions because it is faster.
+(setq fish-completion-prefer-bash-completion t)
