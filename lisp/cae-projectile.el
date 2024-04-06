@@ -22,6 +22,7 @@
         (when (or (file-equal-p project-root "~")
                   (file-equal-p project-root "/root"))
           (user-error "Running `projectile-project-files' on HOME is disabled.")))
+      (add-to-list 'projectile-globally-ignored-directories "^/home/st/?$" nil #'equal)
 
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
