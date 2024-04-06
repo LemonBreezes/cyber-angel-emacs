@@ -4,8 +4,6 @@
 ;; around. That way, I can improve my handling of the Lispy keybindings.
 ;; (read-char) "<prior>" => (error "Non-character input-event")
 
-;; This code is old and can be improved but it works for now.
-
 (unless (featurep 'json)
   (defun json-alist-p (list)
     "Non-nil if and only if LIST is an alist with simple keys."
