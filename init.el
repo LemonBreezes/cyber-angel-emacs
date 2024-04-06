@@ -39,6 +39,7 @@
 ;; than to comment out large sections of my config.
 (defvar cae-exwm-disabled-p nil)
 (defvar cae-init-core-enabled-p t)
+(defvar cae-keyboard-remaps-enabled-p t)
 (let ((p t))
   (defvar cae-init-ui-enabled-p (and p t))
   (defvar cae-init-tools-enabled-p (and p t))
