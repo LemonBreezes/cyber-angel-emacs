@@ -1,5 +1,7 @@
 ;;; private/emms/autoload/emms.el -*- lexical-binding: t; -*-
 
+(require 'transient)
+
 ;;;###autoload
 (defun +emms (&optional arg)
   (interactive "P")
@@ -17,7 +19,6 @@
     (set-window-configuration +emms--old-wconf)))
 
 ;;;###autoload (autoload '+emms-quick-access "cae/misc-applications/autoload/emms" nil t)
-(require 'transient)
 (transient-define-prefix +emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
