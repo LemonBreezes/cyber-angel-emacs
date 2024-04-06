@@ -356,7 +356,8 @@
        :desc "Switch to final workspace" "z" #'+workspace/switch-to-final))
 (map! :map help-map
       (:prefix "d"
-       "e" (cmd! () (find-file eshell-aliases-file))))
+       :desc "Open Eshell alias file" "e" (cmd! () (find-file eshell-aliases-file))
+       :desc "Toggle debug-on-quit" "q" (cmd! () (setq debug-on-quit (not debug-on-quit)))))
 
 ;;; Other modules
 
