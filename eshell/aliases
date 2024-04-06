@@ -23,6 +23,9 @@ alias tree sudo tree -C                                                       $*
 alias smart-live-rebuild sudo smart-live-rebuild                              $*
 alias updatedb sudo updatedb                                                  $*
 alias sysctl sudo sysctl                                                      $*
+alias eix-remote sudo eix-remote                                              $*
+alias eix-sync sudo eix-sync                                                  $*
+alias eix-remote sudo eix-remote                                              $*
 
 alias sysu systemctl --user                                                   $*
 alias sysut systemctl --user status                                           $*
