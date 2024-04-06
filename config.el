@@ -544,8 +544,7 @@
     (setq custom-buffer-done-kill t))
 
   (after! saveplace
-    (setq save-place-limit nil
-          save-place-save-skipped nil))
+    (setq save-place-limit nil))
 
   (after! grep
     (setq grep-use-headings t
