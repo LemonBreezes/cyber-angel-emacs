@@ -111,7 +111,7 @@
   (dirvish-override-dired-mode)
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/"))
   (when (modulep! :ui popup)
-    (set-popup-rule! "^ ?\\*Dirvish.*" :ignore t))
+    (set-popup-rule! "\\` ?\\*Dirvish.*" :ignore t))
   (if (modulep! +dirvish)
       (setq dirvish-attributes '(file-size collapse)
             dirvish-mode-line-format
