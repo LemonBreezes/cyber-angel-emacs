@@ -8,7 +8,7 @@
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
-(defadvice! cae-run-theme-hook-h (theme)
+(defadvice! cae-run-theme-hook-h (_)
   :after #'consult-theme
   (run-hooks 'doom-load-theme-hook))
 (add-hook! 'circadian-after-load-theme-hook
