@@ -145,7 +145,8 @@
     (use-package elfeed-tube-mpv
       :when (executable-find "mpv")
       :config
-      (map! "C-c C-f" #'elfeed-tube-mpv-follow-mode
+      (map! :map elfeed-show-mode-map
+            "C-c C-f" #'elfeed-tube-mpv-follow-mode
             "C-c C-w" #'elfeed-tube-mpv-where))))
 
 (use-package! pomm
