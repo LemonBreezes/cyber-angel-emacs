@@ -332,7 +332,7 @@
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
-      (set-popup-rule! "^\\*Embark Export: "
+      (set-popup-rule! "\\`\\*Embark Export: "
         :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
     (after! elfeed
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
