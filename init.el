@@ -154,6 +154,7 @@
        org
        ai
        gnus
+       haskell
        )
 
 ;;Local Variables:
