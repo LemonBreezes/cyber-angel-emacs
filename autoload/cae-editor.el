@@ -110,6 +110,7 @@ This is the format used on Reddit for code blocks."
 ;;;###autoload
 (cl-defun cae-avy-embark-act-on-region ()
   (interactive)
+  (require 'avy)
   (save-window-excursion
     (let* ((initial-window (selected-window))
            (avy-indent-line-overlay t)  ;my preference
