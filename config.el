@@ -530,7 +530,6 @@
         shift-select-mode 'permanent
         track-eol t
         visual-order-cursor-movement t
-        view-read-only t ; This is not compatible with `auto-sudoedit'.
         what-cursor-show-names t)
 
   ;; https://idiomdrottning.org/show-trailing-whitespace
