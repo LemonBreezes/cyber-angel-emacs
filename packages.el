@@ -129,5 +129,8 @@
 ;; cae-bindings.el
 (package! vline)
 (package! try)
+(when (and (modulep! :tools lsp)
+           (not (modulep! :editor lsp +eglot)))
+  (package! evil-lsp))
 (package! lsp-ui :recipe (:host github :repo "LemonBreezes/lsp-ui"
                           :branch "fix-lsp-ui-imenu-resizing"))
