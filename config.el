@@ -1436,6 +1436,8 @@
        '(image-mode pdf-util pdf-info pdf-cache pdf-view pdf-tools))
    ,@(when (modulep! :ui treemacs)
        '(treemacs))
+   ,@(when (modulep! :ui treemacs +lsp)
+       '(treemacs-lsp))
    ,@(when (and (modulep! :tools lsp)
                 (not (modulep! :tools lsp +eglot)))
        '(lsp-mode lsp-ui))
