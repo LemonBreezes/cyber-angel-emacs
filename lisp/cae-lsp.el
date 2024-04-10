@@ -51,8 +51,8 @@
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
 
-  ;; Disable mouse support in LSP and Dap UIs. I don't use them and they can
-  ;; cause problems with `repeat-mode'.
+  ;; Disable mouse tracking support in LSP and Dap UIs. I don't use them and
+  ;; they can cause problems with `repeat-mode'.
   (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
   (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
   (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
