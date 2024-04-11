@@ -49,7 +49,16 @@
     ("virtualbox manager" . "VirtualBox")
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
-    ("discord1" . "Discord"))
+    ("discord1" . "Discord")
+    ("minecraft" . "Minecraft")
+    ("snes9x-gtk" . "Snes9x")
+    (".epsxe-wrapped" . "ePSXe")
+    ("net-runelite-client-runelite" . "RuneLite")
+    ("wow.exe" . "WoW")
+    ("battle.net.exe" . "Battle.net")
+    ("hakuneko-desktop" . "Hakuneko")
+    ("runescape" . "RuneScape")
+    ("Anydesk" . "Windows"))
   "An alist whose for which a key is an EXWM class name and a value is the name
 of the corresponding workspace that will be created.")
 
