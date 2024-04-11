@@ -1428,7 +1428,7 @@
    ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :cae ai)
-       '(copilot org-ai chatgpt-shell))
+       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
    ,@'(parrot parrot-rotate)
    ,@(when (modulep! :cae gnus)
        '(gnus gnus-group gnus-sum gnus-srvr))
