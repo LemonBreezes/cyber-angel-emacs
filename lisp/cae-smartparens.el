@@ -57,7 +57,7 @@
                (not (modulep! :editor lispy)))
       (use-package! evil-cleverparens
         :defer t :init
-        (defalias 'sp--syntax-class-to-char #'syntax-class-to-char)
+        (defalias 'sp--syntax-class-to-char #'syntax-class-to-char) ; A temporary fix.
         (setq evil-cp-additional-movement-keys
               '(("M-l" . evil-cp-end-of-defun)
                 ("M-h" . evil-cp-beginning-of-defun)))
