@@ -37,7 +37,6 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(setq +exwm-enabled-p (and t +exwm-enabled-p))
 (defvar cae-init-core-enabled-p t)
 (defvar cae-keyboard-remaps-enabled-p t)
 (let ((p t))
