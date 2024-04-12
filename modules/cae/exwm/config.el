@@ -1,15 +1,17 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
-(when (and (eq 'x (framep (selected-frame)))
-           (not (bound-and-true-p cae-exwm-disabled-p))
-           (not (or (getenv "EXWM_RUNNING")
-                    (getenv "RATPOISON")
-                    (getenv "I3SOCK")
-                    (getenv "KDE_FULL_SESSION")
-                    (getenv "GNOME_DESKTOP_SESSION_ID")
-                    (getenv "XDG_CURRENT_DESKTOP")
-                    (getenv "WAYLAND_DISPLAY"))))
+(defvar +exwm-enabled-p (and (eq 'x (framep (selected-frame)))
+                             (not (bound-and-true-p cae-exwm-disabled-p))
+                             (not (or (getenv "EXWM_RUNNING")
+                                      (getenv "RATPOISON")
+                                      (getenv "I3SOCK")
+                                      (getenv "KDE_FULL_SESSION")
+                                      (getenv "GNOME_DESKTOP_SESSION_ID")
+                                      (getenv "XDG_CURRENT_DESKTOP")
+                                      (getenv "WAYLAND_DISPLAY"))))
+  "Whether EXWM is enabled.")
 
+(when +exwm-enabled-p
   ;; Prevent nested Emacs sessions from loading EXWM.
   (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
   (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
