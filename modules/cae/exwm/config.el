@@ -195,7 +195,8 @@
 
   (when (modulep! :ui workspaces)
     (unless (featurep '+exwm-auto-persp)
-      (load! "+auto-persp"))))
+      (after! (:all exwm dash persp-mode)
+        (load! "+auto-persp")))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
