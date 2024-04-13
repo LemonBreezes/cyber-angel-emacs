@@ -46,6 +46,9 @@ alias sysdr sudo systemctl daemon-reload                                      $*
 alias syslt sudo systemctl list-timers                                        $*
 alias sysult systemctl list-timers                                            $*
 
+alias wine WINEARCH=win64 WINEPREFIX=~/.wine64 wine                           $*
+alias wine32 WINEARCH=win32 WINEPREFIX=~/.wine32 wine                         $*
+
 alias mcd    mkdir -p $1 && cd $1
 alias cd-    cd -
 alias cd--   cd -2
