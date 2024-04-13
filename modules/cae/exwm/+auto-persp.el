@@ -75,7 +75,6 @@ nil if its not an EXWM buffer."
     (let ((class (buffer-local-value 'exwm-class-name buffer)))
       (alist-get class +exwm-workspace-name-replacements
                  class nil #'cl-equalp)))
-  ;;(+exwm-get-workspace-name (current-buffer)) => nil
 
   (defun +exwm-persp--after-match (buffer &rest _)
     "Creates workspace for a new EXWM buffer and switches to that workspace"
