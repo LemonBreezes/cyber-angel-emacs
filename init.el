@@ -144,7 +144,7 @@
        helm
        debugger
        eshell
-       (exwm +i3bar)
+       exwm
        dired
        lisp
        misc-applications
