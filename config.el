@@ -256,6 +256,10 @@
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
+  (use-package! communinfo
+    :after info :config
+    (setopt Info-url-alist communinfo))
+
   (use-package! authinfo-color-mode
     :defer t :init
     (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
