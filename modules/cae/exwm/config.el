@@ -1,7 +1,6 @@
 ;;; private/exwm/config.el -*- lexical-binding: t; -*-
 
 (defvar +exwm-enabled-p (and (eq 'x (framep (selected-frame)))
-                             (not (bound-and-true-p cae-exwm-disabled-p))
                              (not (or (getenv "EXWM_RUNNING")
                                       (getenv "RATPOISON")
                                       (getenv "I3SOCK")
