@@ -171,6 +171,8 @@ buffers of that class."
                         :after-match #'+exwm-persp--after-match
                         :get-name #'+exwm-persp--get-name))
 
+(+exwm-reload-workspaces)
+
 (advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
 
 (defadvice! +exwm-browse-url-generic-a (&rest _)
