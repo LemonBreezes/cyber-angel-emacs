@@ -47,7 +47,7 @@
 
 ;;; UI
 (package! info-colors)
-(package! communinfo :recipe (:host codeberg :repo "mekeor/communinfo"))
+(package! communinfo :recipe (:repo "https://codeberg.org/mekeor/emacs-communinfo.git"))
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! outline-minor-faces)
