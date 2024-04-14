@@ -29,6 +29,9 @@
 
   (use-package! exwm
     :config
+    (when init-file-debug
+      (exwm-debug +1))
+
     (require 'exwm-randr)
     (require 'exwm-systemtray)
     (exwm-randr-enable)
