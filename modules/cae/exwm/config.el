@@ -98,6 +98,10 @@
     ;; https://github.com/ch11ng/exwm/issues/889#issuecomment-1874977844
     (setq x-no-window-manager t)
 
+    ;; Testing out a recommendation from here:
+    ;; https://github.com/emacs-exwm/exwm/issues/18#issuecomment-2030366532
+    (setq exwm-layout-auto-iconify nil)
+
     ;; A few `ido' fixes.
     (use-package! exwm-config
       :config
