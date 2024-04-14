@@ -474,9 +474,11 @@
                    cae-generic-browser-name "Chrome")))
           ((executable-find "firefox-bin")
            (setq browse-url-generic-program "firefox-bin"
+                 browse-url-generic-args '("-new-tab")
                  cae-generic-browser-name "Firefox"))
           ((executable-find "firefox-beta")
            (setq browse-url-generic-program "firefox-beta"
+                 browse-url-generic-args '("-new-tab")
                  cae-generic-browser-name "Firefox"))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
