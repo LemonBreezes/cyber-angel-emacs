@@ -292,7 +292,8 @@
   :config
   (setq proced-enable-color-flag t
         proced-filter 'all
-        proced-format 'medium)
+        proced-format 'medium
+        proced-auto-update-flag 'visible)
   (map! :map proced-mode-map
         "c" #'proced-mark-children
         :n "gr" #'revert-buffer))
