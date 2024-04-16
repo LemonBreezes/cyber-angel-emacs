@@ -341,10 +341,6 @@
       (:prefix "t"
        :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
-      (:prefix "c"
-       (:when (and (modulep! :tools lsp)
-                   (not (modulep! :tools lsp +eglot)))
-        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu))
       (:prefix "f"
        :desc "Find sibling file" "TAB" #'cae-find-sibling-file
        :desc "Open harpoon menu" "h" #'harpoon-quick-menu-hydra
