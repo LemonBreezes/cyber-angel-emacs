@@ -154,6 +154,10 @@
       "gf" "Find file"
       "gk" "Fork repo"))
   :config
+  (after! which-key
+    (which-key-add-keymap-based-replacements consult-gh-embark-general-actions-map
+      "r" "repo"
+      "l" "link"))
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
         consult-gh-issue-action #'consult-gh--issue-browse-url-action
