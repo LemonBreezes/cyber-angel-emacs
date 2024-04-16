@@ -162,7 +162,7 @@
       "bo" "org"
       "br" "repo"
       "C"  "consult"
-      ))
+      "f"  "file"))
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
         consult-gh-issue-action #'consult-gh--issue-browse-url-action
