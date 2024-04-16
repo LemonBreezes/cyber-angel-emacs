@@ -11,7 +11,8 @@
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
 (package! pomm)
-(package! debbugs :recipe (:host github :repo "emacs-straight/debbugs" :files ("*")))
+(package! debbugs :recipe (:host github :repo "emacs-straight/debbugs"
+                           :files ("*"))) ; Have to get all files to fix error.
 (package! leetcode)
 
 ;; System
