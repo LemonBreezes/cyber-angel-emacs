@@ -188,6 +188,7 @@ buffers of that class."
                          +exwm-workspace-name-replacements nil nil #'cl-equalp)))
     (+workspace-switch workspace t)
     (+workspace/display)))
+(advice-add #'consult-gh-embark-open-in-browser :before #'+exwm-browse-url-generic-a)
 
 (add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace)
 
