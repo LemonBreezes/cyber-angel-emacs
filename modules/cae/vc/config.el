@@ -156,8 +156,13 @@
   :config
   (after! which-key
     (which-key-add-keymap-based-replacements consult-gh-embark-general-actions-map
-      "r" "repo"
-      "l" "link"))
+      "r"  "repo"
+      "l"  "link"
+      "b"  "add/remove"
+      "bo" "org"
+      "br" "repo"
+      "C"  "consult"
+      ))
   (setq consult-gh-default-clone-directory "~/src/"
         consult-gh-show-preview t
         consult-gh-issue-action #'consult-gh--issue-browse-url-action
