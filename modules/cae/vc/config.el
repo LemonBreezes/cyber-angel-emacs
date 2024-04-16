@@ -154,7 +154,7 @@
       "gf" "Find file"
       "gk" "Fork repo"))
   :config
-  (after! which-key
+  (after! (:all which-key consult-gh-embark)
     (which-key-add-keymap-based-replacements consult-gh-embark-general-actions-map
       "r"  "repo"
       "l"  "link"
