@@ -2,9 +2,6 @@
 
 (defvar cae-config-finished-loading nil)
 
-;; TODO Fix this.
-;;(defun envrc-global-mode-enable-in-buffers (&rest _))
-
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
