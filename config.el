@@ -1393,6 +1393,10 @@
 ;;;; Fennel
   (add-hook 'fennel-mode-hook #'outline-minor-mode)
 
+;;;; Python
+  (after! nose
+    (when (executable-find "nose2")
+      (setq nose-global-name "nose2")))
 
 ;;;; Lua
   (add-hook 'lua-mode-hook #'subword-mode)
