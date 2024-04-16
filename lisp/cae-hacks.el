@@ -161,3 +161,5 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; I am currently debugging EXWM.
 (setq exwm-debug t)
+
+(cae-debug-toggle-debugging-function-on-hidden-errors #'url-expand-file-name)
