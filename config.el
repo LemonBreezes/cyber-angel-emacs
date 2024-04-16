@@ -1398,6 +1398,11 @@
     (when (executable-find "nose2")
       (setq nose-global-name "nose2")))
 
+;;;; Idris
+  (after! idris-settings
+    (when (executable-find "idris2")
+      (setq idris-interpreter-path "idris2")))
+
 ;;;; Lua
   (add-hook 'lua-mode-hook #'subword-mode)
   (add-hook 'lua-mode-hook #'outline-minor-mode)
