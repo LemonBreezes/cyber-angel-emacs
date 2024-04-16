@@ -11,7 +11,7 @@
   (package! elfeed-tube)
   (package! elfeed-tube-mpv))
 (package! pomm)
-(package! debbugs)
+(package! debbugs :recipe (:host github :repo "emacs-straight/debbugs" :files ("*")))
 (package! leetcode)
 
 ;; System
