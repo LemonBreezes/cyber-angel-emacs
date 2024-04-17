@@ -214,7 +214,10 @@
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
           which-key-compute-remaps t
-          which-key-max-description-length 35))
+          which-key-max-description-length 35
+          ;; This option breaks the Embark Which Key prompter when you have a
+          ;; prefix key in the Embark action map.
+          which-key-show-transient-maps nil))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
