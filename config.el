@@ -216,7 +216,7 @@
           which-key-compute-remaps t
           which-key-max-description-length 35
           ;; This option breaks the Embark Which Key prompter when you have a
-          ;; prefix key in the Embark action map.
+          ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil))
 
   ;; Do not scale fonts in `writeroom-mode'.
