@@ -156,112 +156,112 @@
   ;; Don't confirm when exiting Emacs that active processes exist.
   (setq confirm-kill-processes nil)
 
-  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-        kill-buffer-delete-auto-save-files t
-        window-combination-resize t     ;Take new window space from all other
-                                        ;windows (not just current)
-        scroll-preserve-screen-position t
-        suggest-key-bindings nil)
-
-  (after! persp-mode
-    (setq persp-reset-windows-on-nil-window-conf t))
-
-  (after! image
-    (setq image-use-external-converter t))
-
-  (setq set-message-functions
-        '(inhibit-message
-          set-minibuffer-message)
-        inhibit-message-regexps '("C-g is undefined\\'"
-                                  "ESC is undefined\\'"))
-
-  (after! flymake
-    (setq flymake-start-on-flymake-mode nil))
-
-  ;; A little bit of margin is nice but I don't like it when I'm in terminal
-  ;; popups.
-  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
-    scroll-margin 2)
-
-  (after! time
-    (setq display-time-default-load-average nil))
-
-  (after! bind-key
-    (setq bind-key-describe-special-forms t))
-
-  (after! transient
-    (setq transient-align-variable-pitch t))
-
-  (after! newcomment
-    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
-                                        ;`comment-region' so that I can mark the
-                                        ;entire commented text with
-                                        ;`mark-paragraph'.
-          comment-padding nil))         ;I prefer no spaces between comment
-                                        ;delimiters and the comment text.
-
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t
-          doom-modeline-mu4e t
-          doom-modeline-gnus t
-          doom-modeline-github t
-          doom-modeline-major-mode-icon nil
-          doom-modeline-minor-modes nil))
-
-  (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
-  (after! which-key
-    (setq which-key-ellipsis "..."
-          which-key-idle-delay 0.5
-          which-key-compute-remaps t
-          which-key-max-description-length 35
-          ;; I am testing this option out. It seems useful in principal since a
-          ;; transient map can be active without any UI indication.
-          which-key-show-transient-maps t))
-
-  ;; Do not scale fonts in `writeroom-mode'.
-  (setq +zen-text-scale 0)
-
-  (after! mule-util
-    (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
-
-  ;; Do not spam me with warnings.
-  (unless init-file-debug
-    (setq warning-minimum-level :error
-          warning-minimum-log-level :error))
-
-  (after! alert
-    (setq alert-default-style 'libnotify))
-
-  (after! shr
-    ;; `shr' wraps lines in a visually unappealing way.
-    (setq shr-width 120
-          shr-max-width 120
-          shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
-
-    ;; I prefer to not use fonts in `shr' because it looks weird with the font
-    ;; setup I have.
-    (setq shr-use-fonts nil)
-
-    ;; Sometimes EWW makes web pages unreadable by adding a bright background.
-    ;; Do not colorize backgrounds at all.
-    (advice-add #'shr-colorize-region :around #'ignore))
-
-  ;; Allow switching to these buffers with `C-x b'
-  (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-
-  (use-package! info-colors
-    :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
-
-  (use-package! communinfo
-    :after info :config
-    (setopt Info-url-alist communinfo))
-
-  (use-package! authinfo-color-mode
-    :defer t :init
-    (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-    (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-    (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  ;;(setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+  ;;      kill-buffer-delete-auto-save-files t
+  ;;      window-combination-resize t     ;Take new window space from all other
+  ;;                                      ;windows (not just current)
+  ;;      scroll-preserve-screen-position t
+  ;;      suggest-key-bindings nil)
+  ;;
+  ;;(after! persp-mode
+  ;;  (setq persp-reset-windows-on-nil-window-conf t))
+  ;;
+  ;;(after! image
+  ;;  (setq image-use-external-converter t))
+  ;;
+  ;;(setq set-message-functions
+  ;;      '(inhibit-message
+  ;;        set-minibuffer-message)
+  ;;      inhibit-message-regexps '("C-g is undefined\\'"
+  ;;                                "ESC is undefined\\'"))
+  ;;
+  ;;(after! flymake
+  ;;  (setq flymake-start-on-flymake-mode nil))
+  ;;
+  ;;;; A little bit of margin is nice but I don't like it when I'm in terminal
+  ;;;; popups.
+  ;;(setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+  ;;  scroll-margin 2)
+  ;;
+  ;;(after! time
+  ;;  (setq display-time-default-load-average nil))
+  ;;
+  ;;(after! bind-key
+  ;;  (setq bind-key-describe-special-forms t))
+  ;;
+  ;;(after! transient
+  ;;  (setq transient-align-variable-pitch t))
+  ;;
+  ;;(after! newcomment
+  ;;  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+  ;;                                      ;`comment-region' so that I can mark the
+  ;;                                      ;entire commented text with
+  ;;                                      ;`mark-paragraph'.
+  ;;        comment-padding nil))         ;I prefer no spaces between comment
+  ;;                                      ;delimiters and the comment text.
+  ;;
+  ;;(after! doom-modeline
+  ;;  (setq doom-modeline-hud t
+  ;;        doom-modeline-support-imenu t
+  ;;        doom-modeline-mu4e t
+  ;;        doom-modeline-gnus t
+  ;;        doom-modeline-github t
+  ;;        doom-modeline-major-mode-icon nil
+  ;;        doom-modeline-minor-modes nil))
+  ;;
+  ;;(defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
+  ;;(after! which-key
+  ;;  (setq which-key-ellipsis "..."
+  ;;        which-key-idle-delay 0.5
+  ;;        which-key-compute-remaps t
+  ;;        which-key-max-description-length 35
+  ;;        ;; I am testing this option out. It seems useful in principal since a
+  ;;        ;; transient map can be active without any UI indication.
+  ;;        which-key-show-transient-maps t))
+  ;;
+  ;;;; Do not scale fonts in `writeroom-mode'.
+  ;;(setq +zen-text-scale 0)
+  ;;
+  ;;(after! mule-util
+  ;;  (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
+  ;;
+  ;;;; Do not spam me with warnings.
+  ;;(unless init-file-debug
+  ;;  (setq warning-minimum-level :error
+  ;;        warning-minimum-log-level :error))
+  ;;
+  ;;(after! alert
+  ;;  (setq alert-default-style 'libnotify))
+  ;;
+  ;;(after! shr
+  ;;  ;; `shr' wraps lines in a visually unappealing way.
+  ;;  (setq shr-width 120
+  ;;        shr-max-width 120
+  ;;        shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
+  ;;
+  ;;  ;; I prefer to not use fonts in `shr' because it looks weird with the font
+  ;;  ;; setup I have.
+  ;;  (setq shr-use-fonts nil)
+  ;;
+  ;;  ;; Sometimes EWW makes web pages unreadable by adding a bright background.
+  ;;  ;; Do not colorize backgrounds at all.
+  ;;  (advice-add #'shr-colorize-region :around #'ignore))
+  ;;
+  ;;;; Allow switching to these buffers with `C-x b'
+  ;;(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+  ;;
+  ;;(use-package! info-colors
+  ;;  :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
+  ;;
+  ;;(use-package! communinfo
+  ;;  :after info :config
+  ;;  (setopt Info-url-alist communinfo))
+  ;;
+  ;;(use-package! authinfo-color-mode
+  ;;  :defer t :init
+  ;;  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+  ;;  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
+  ;;  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
