@@ -59,6 +59,7 @@
 (package! xterm-color)
 (package! fancy-compilation)
 (package! casual)
+(package! i3bar)
 
 ;; cae-theme.el
 (package! modus-themes)
