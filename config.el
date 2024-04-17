@@ -125,226 +125,226 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  ;;(when (cae-display-graphic-p)
-  ;;  (load! "lisp/cae-theme"))
-  ;;(when (modulep! :ui doom-dashboard)
-  ;;  (load! "lisp/cae-dashboard"))
+  (when (cae-display-graphic-p)
+    (load! "lisp/cae-theme"))
+  (when (modulep! :ui doom-dashboard)
+    (load! "lisp/cae-dashboard"))
 
-  ;; Show absolute line numbers. I prefer to not show relative line numbers
-  ;; because I use `avy' commands to jump to lines.
-  (setq display-line-numbers-type t
-        display-line-numbers-width-start t)
-
-  ;; Show minibuffer recursion depth
-  (autoload 'minibuffer-depth-setup "mb-depth")
-  (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
-
-  ;; My guess for how big this number should be for my setup. Call
-  ;; `cae-set-jit-lock-chunk-size-to-optimal' on a few different files to get an
-  ;; idea.
-  (setq jit-lock-chunk-size 2500)
-
-  ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
-  ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
-  ;; what item I have selected.
-  (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
-
-  ;; Auto-hide the tab bar.
-  (after! tab-bar
-    (setq tab-bar-show 1))
-
-  ;; Don't confirm when exiting Emacs that active processes exist.
-  (setq confirm-kill-processes nil)
-
-  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-        kill-buffer-delete-auto-save-files t
-        window-combination-resize t     ;Take new window space from all other
-                                        ;windows (not just current)
-        scroll-preserve-screen-position t
-        suggest-key-bindings nil)
-
-  (after! persp-mode
-    (setq persp-reset-windows-on-nil-window-conf t))
-
-  (after! image
-    (setq image-use-external-converter t))
-
-  (setq set-message-functions
-        '(inhibit-message
-          set-minibuffer-message)
-        inhibit-message-regexps '("C-g is undefined\\'"
-                                  "ESC is undefined\\'"))
-
-  (after! flymake
-    (setq flymake-start-on-flymake-mode nil))
-
-  ;; A little bit of margin is nice but I don't like it when I'm in terminal
-  ;; popups.
-  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
-    scroll-margin 2)
-
-  (after! time
-    (setq display-time-default-load-average nil))
-
-  (after! bind-key
-    (setq bind-key-describe-special-forms t))
-
-  (after! transient
-    (setq transient-align-variable-pitch t))
-
-  (after! newcomment
-    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
-                                        ;`comment-region' so that I can mark the
-                                        ;entire commented text with
-                                        ;`mark-paragraph'.
-          comment-padding nil))         ;I prefer no spaces between comment
-                                        ;delimiters and the comment text.
-
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t
-          doom-modeline-mu4e t
-          doom-modeline-gnus t
-          doom-modeline-github t
-          doom-modeline-major-mode-icon nil
-          doom-modeline-minor-modes nil))
-
-  (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
-  (after! which-key
-    (setq which-key-ellipsis "..."
-          which-key-idle-delay 0.5
-          which-key-compute-remaps t
-          which-key-max-description-length 35
-          ;; I am testing this option out. It seems useful in principal since a
-          ;; transient map can be active without any UI indication.
-          which-key-show-transient-maps t))
-
-  ;; Do not scale fonts in `writeroom-mode'.
-  (setq +zen-text-scale 0)
-
-  (after! mule-util
-    (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
-
-  ;; Do not spam me with warnings.
-  (unless init-file-debug
-    (setq warning-minimum-level :error
-          warning-minimum-log-level :error))
-
-  (after! alert
-    (setq alert-default-style 'libnotify))
-
-  (after! shr
-    ;; `shr' wraps lines in a visually unappealing way.
-    (setq shr-width 120
-          shr-max-width 120
-          shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
-
-    ;; I prefer to not use fonts in `shr' because it looks weird with the font
-    ;; setup I have.
-    (setq shr-use-fonts nil)
-
-    ;; Sometimes EWW makes web pages unreadable by adding a bright background.
-    ;; Do not colorize backgrounds at all.
-    (advice-add #'shr-colorize-region :around #'ignore))
-
-  ;; Allow switching to these buffers with `C-x b'
-  (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
-
-  (use-package! info-colors
-    :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
-
-  (use-package! communinfo
-    :after info :config
-    (setopt Info-url-alist communinfo))
-
-  (use-package! authinfo-color-mode
-    :defer t :init
-    (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
-    (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-    (advice-add 'authinfo-mode :override #'authinfo-color-mode))
-
-  ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
-  ;; rules here instead of in the relevant `use-package!' blocks.
-  (when (modulep! :ui popup)
-    (set-popup-rules!
-      ;; TODO Set the correct slot/vslot for these popups.
-      '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
-         :ttl nil :vslot 99)
-        ("\\`\\*exwm" :ignore t)
-        ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
-        ;; :side right :ttl 0)
-        ;;("\\`\\*Ilist\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
-        ;; :side right :ttl 0)
-        ("\\`\\*difftastic git diff\\*\\'" :size +popup-shrink-to-fit
-         :select t :quit t :side bottom :ttl 0)
-        ("\\`\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
-         :quit t :ttl t)
-        ("\\`\\*org-roam\\*" :size 60 :side left :select nil
-         :quit nil)
-        ("\\`\\*info.*" :size cae-popup-resize-help-buffer
-         :side right :ttl nil :select t :quit t :ttl t :slot 2 :vslot 2)
-        ("\\`\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
-         :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
-        ("\\`\\*tldr\\*" :size cae-popup-resize-help-buffer
-         :side right :select t :quit t)
-        ("\\`\\*Diff\\*" :size cae-popup-resize-help-buffer
-         :side right :select t :quit t :ttl 0)
-        ("\\`\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
-         :side right :select t :quit t :ttl 0)
-        ("\\`\\*\\([Hh]elp\\|Apropos\\)"
-         :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
-         :slot 2 :vslot -8)
-        ("\\` \\*Metahelp.*" :size cae-popup-resize-help-buffer
-         :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-        ("\\`\\*Messages\\*" :vslot -10 :height 10 :side bottom
-         :select t :quit t :ttl nil :vslot 99)
-        ("\\`\\*eww.*" :size cae-popup-resize-help-buffer :side right
-         :select t :ttl nil)
-        ("\\`\\*w3m\\*\\'" :size cae-popup-resize-help-buffer
-         :side right :select t :ttl nil)
-        ("\\`\\*dap-ui-repl\\*\\'" :vslot -5 :size 0.3 :select t
-         :modeline nil :quit nil :ttl nil)
-        ("\\`SpeedRect Command Key Help\\'" :size cae-popup-resize-help-buffer
-         :side right :select nil :quit t :ttl 0)
-        ("\\`\\*ednc-log\\*\\'" :size cae-popup-resize-help-buffer
-         :side right :select nil :quit t :ttl nil)
-        ("*Notification [0-9]+" :side top :size +popup-shrink-to-fit
-         :select nil)
-        ("\\`\\*tldr\\*\\'" :size cae-popup-resize-help-buffer
-         :side right :ttl t :select t :quit t :ttl 0)
-        ("\\`\\*Shortdoc .*" :size cae-popup-resize-help-buffer
-         :side right :ttl t :select t :quit t :ttl 0)
-        ;;("\\`\\*ielm\\*\\'" :size cae-popup-resize-help-buffer
-        ;; :side right :ttl nil :select t :quit t :ttl 0)
-        ("\\`\\*devdocs\\*\\'" :width 122
-         :side right :ttl t :select t :quit t :ttl 0)
-        ("\\`Trash Can" :size 0.3 :side bottom :select t :quit t
-         :ttl 0)
-        ("\\`\\*evil-owl\\*\\'" :side bottom :select nil :ttl 0
-         :size cae-popup-shrink-to-fit)
-        ("\\`\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
-        ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
-        ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
-        ("\\`\\*notmuch-hello"  :ignore)
-        ("\\`\\*gud-" :ttl nil :size 0.35)
-        ("embrace-help" :side top :size +popup-shrink-to-fit)
-        ("*helm " :ignore t)
-        ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
-         :size cae-popup-shrink-to-fit)
-        ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
-         (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
-    (after! embark
-      (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-        :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
-      (set-popup-rule! "\\`\\*Embark Export: "
-        :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
-    (after! elfeed
-      (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
-        :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
-    (after! bbdb
-      (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
-        :select nil :quit t :ttl nil))
-    (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+  ;;;; Show absolute line numbers. I prefer to not show relative line numbers
+  ;;;; because I use `avy' commands to jump to lines.
+  ;;(setq display-line-numbers-type t
+  ;;      display-line-numbers-width-start t)
+  ;;
+  ;;;; Show minibuffer recursion depth
+  ;;(autoload 'minibuffer-depth-setup "mb-depth")
+  ;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+  ;;
+  ;;;; My guess for how big this number should be for my setup. Call
+  ;;;; `cae-set-jit-lock-chunk-size-to-optimal' on a few different files to get an
+  ;;;; idea.
+  ;;(setq jit-lock-chunk-size 2500)
+  ;;
+  ;;;; I don't like `hl-line-mode' globally because it sometimes conflicts with
+  ;;;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
+  ;;;; what item I have selected.
+  ;;(add-hook 'tabulated-list-mode-hook #'hl-line-mode)
+  ;;
+  ;;;; Auto-hide the tab bar.
+  ;;(after! tab-bar
+  ;;  (setq tab-bar-show 1))
+  ;;
+  ;;;; Don't confirm when exiting Emacs that active processes exist.
+  ;;(setq confirm-kill-processes nil)
+  ;;
+  ;;(setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+  ;;      kill-buffer-delete-auto-save-files t
+  ;;      window-combination-resize t     ;Take new window space from all other
+  ;;                                      ;windows (not just current)
+  ;;      scroll-preserve-screen-position t
+  ;;      suggest-key-bindings nil)
+  ;;
+  ;;(after! persp-mode
+  ;;  (setq persp-reset-windows-on-nil-window-conf t))
+  ;;
+  ;;(after! image
+  ;;  (setq image-use-external-converter t))
+  ;;
+  ;;(setq set-message-functions
+  ;;      '(inhibit-message
+  ;;        set-minibuffer-message)
+  ;;      inhibit-message-regexps '("C-g is undefined\\'"
+  ;;                                "ESC is undefined\\'"))
+  ;;
+  ;;(after! flymake
+  ;;  (setq flymake-start-on-flymake-mode nil))
+  ;;
+  ;;;; A little bit of margin is nice but I don't like it when I'm in terminal
+  ;;;; popups.
+  ;;(setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+  ;;  scroll-margin 2)
+  ;;
+  ;;(after! time
+  ;;  (setq display-time-default-load-average nil))
+  ;;
+  ;;(after! bind-key
+  ;;  (setq bind-key-describe-special-forms t))
+  ;;
+  ;;(after! transient
+  ;;  (setq transient-align-variable-pitch t))
+  ;;
+  ;;(after! newcomment
+  ;;  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+  ;;                                      ;`comment-region' so that I can mark the
+  ;;                                      ;entire commented text with
+  ;;                                      ;`mark-paragraph'.
+  ;;        comment-padding nil))         ;I prefer no spaces between comment
+  ;;                                      ;delimiters and the comment text.
+  ;;
+  ;;(after! doom-modeline
+  ;;  (setq doom-modeline-hud t
+  ;;        doom-modeline-support-imenu t
+  ;;        doom-modeline-mu4e t
+  ;;        doom-modeline-gnus t
+  ;;        doom-modeline-github t
+  ;;        doom-modeline-major-mode-icon nil
+  ;;        doom-modeline-minor-modes nil))
+  ;;
+  ;;(defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
+  ;;(after! which-key
+  ;;  (setq which-key-ellipsis "..."
+  ;;        which-key-idle-delay 0.5
+  ;;        which-key-compute-remaps t
+  ;;        which-key-max-description-length 35
+  ;;        ;; I am testing this option out. It seems useful in principal since a
+  ;;        ;; transient map can be active without any UI indication.
+  ;;        which-key-show-transient-maps t))
+  ;;
+  ;;;; Do not scale fonts in `writeroom-mode'.
+  ;;(setq +zen-text-scale 0)
+  ;;
+  ;;(after! mule-util
+  ;;  (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
+  ;;
+  ;;;; Do not spam me with warnings.
+  ;;(unless init-file-debug
+  ;;  (setq warning-minimum-level :error
+  ;;        warning-minimum-log-level :error))
+  ;;
+  ;;(after! alert
+  ;;  (setq alert-default-style 'libnotify))
+  ;;
+  ;;(after! shr
+  ;;  ;; `shr' wraps lines in a visually unappealing way.
+  ;;  (setq shr-width 120
+  ;;        shr-max-width 120
+  ;;        shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
+  ;;
+  ;;  ;; I prefer to not use fonts in `shr' because it looks weird with the font
+  ;;  ;; setup I have.
+  ;;  (setq shr-use-fonts nil)
+  ;;
+  ;;  ;; Sometimes EWW makes web pages unreadable by adding a bright background.
+  ;;  ;; Do not colorize backgrounds at all.
+  ;;  (advice-add #'shr-colorize-region :around #'ignore))
+  ;;
+  ;;;; Allow switching to these buffers with `C-x b'
+  ;;(add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
+  ;;
+  ;;(use-package! info-colors
+  ;;  :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
+  ;;
+  ;;(use-package! communinfo
+  ;;  :after info :config
+  ;;  (setopt Info-url-alist communinfo))
+  ;;
+  ;;(use-package! authinfo-color-mode
+  ;;  :defer t :init
+  ;;  (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
+  ;;  (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
+  ;;  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  ;;
+  ;;;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
+  ;;;; rules here instead of in the relevant `use-package!' blocks.
+  ;;(when (modulep! :ui popup)
+  ;;  (set-popup-rules!
+  ;;    ;; TODO Set the correct slot/vslot for these popups.
+  ;;    '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
+  ;;       :ttl nil :vslot 99)
+  ;;      ("\\`\\*exwm" :ignore t)
+  ;;      ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
+  ;;      ;; :side right :ttl 0)
+  ;;      ;;("\\`\\*Ilist\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
+  ;;      ;; :side right :ttl 0)
+  ;;      ("\\`\\*difftastic git diff\\*\\'" :size +popup-shrink-to-fit
+  ;;       :select t :quit t :side bottom :ttl 0)
+  ;;      ("\\`\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
+  ;;       :quit t :ttl t)
+  ;;      ("\\`\\*org-roam\\*" :size 60 :side left :select nil
+  ;;       :quit nil)
+  ;;      ("\\`\\*info.*" :size cae-popup-resize-help-buffer
+  ;;       :side right :ttl nil :select t :quit t :ttl t :slot 2 :vslot 2)
+  ;;      ("\\`\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
+  ;;       :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
+  ;;      ("\\`\\*tldr\\*" :size cae-popup-resize-help-buffer
+  ;;       :side right :select t :quit t)
+  ;;      ("\\`\\*Diff\\*" :size cae-popup-resize-help-buffer
+  ;;       :side right :select t :quit t :ttl 0)
+  ;;      ("\\`\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
+  ;;       :side right :select t :quit t :ttl 0)
+  ;;      ("\\`\\*\\([Hh]elp\\|Apropos\\)"
+  ;;       :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
+  ;;       :slot 2 :vslot -8)
+  ;;      ("\\` \\*Metahelp.*" :size cae-popup-resize-help-buffer
+  ;;       :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+  ;;      ("\\`\\*Messages\\*" :vslot -10 :height 10 :side bottom
+  ;;       :select t :quit t :ttl nil :vslot 99)
+  ;;      ("\\`\\*eww.*" :size cae-popup-resize-help-buffer :side right
+  ;;       :select t :ttl nil)
+  ;;      ("\\`\\*w3m\\*\\'" :size cae-popup-resize-help-buffer
+  ;;       :side right :select t :ttl nil)
+  ;;      ("\\`\\*dap-ui-repl\\*\\'" :vslot -5 :size 0.3 :select t
+  ;;       :modeline nil :quit nil :ttl nil)
+  ;;      ("\\`SpeedRect Command Key Help\\'" :size cae-popup-resize-help-buffer
+  ;;       :side right :select nil :quit t :ttl 0)
+  ;;      ("\\`\\*ednc-log\\*\\'" :size cae-popup-resize-help-buffer
+  ;;       :side right :select nil :quit t :ttl nil)
+  ;;      ("*Notification [0-9]+" :side top :size +popup-shrink-to-fit
+  ;;       :select nil)
+  ;;      ("\\`\\*tldr\\*\\'" :size cae-popup-resize-help-buffer
+  ;;       :side right :ttl t :select t :quit t :ttl 0)
+  ;;      ("\\`\\*Shortdoc .*" :size cae-popup-resize-help-buffer
+  ;;       :side right :ttl t :select t :quit t :ttl 0)
+  ;;      ;;("\\`\\*ielm\\*\\'" :size cae-popup-resize-help-buffer
+  ;;      ;; :side right :ttl nil :select t :quit t :ttl 0)
+  ;;      ("\\`\\*devdocs\\*\\'" :width 122
+  ;;       :side right :ttl t :select t :quit t :ttl 0)
+  ;;      ("\\`Trash Can" :size 0.3 :side bottom :select t :quit t
+  ;;       :ttl 0)
+  ;;      ("\\`\\*evil-owl\\*\\'" :side bottom :select nil :ttl 0
+  ;;       :size cae-popup-shrink-to-fit)
+  ;;      ("\\`\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
+  ;;      ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
+  ;;      ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
+  ;;      ("\\`\\*notmuch-hello"  :ignore)
+  ;;      ("\\`\\*gud-" :ttl nil :size 0.35)
+  ;;      ("embrace-help" :side top :size +popup-shrink-to-fit)
+  ;;      ("*helm " :ignore t)
+  ;;      ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
+  ;;       :size cae-popup-shrink-to-fit)
+  ;;      ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
+  ;;       (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
+  ;;  (after! embark
+  ;;    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+  ;;      :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
+  ;;    (set-popup-rule! "\\`\\*Embark Export: "
+  ;;      :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
+  ;;  (after! elfeed
+  ;;    (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
+  ;;      :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
+  ;;  (after! bbdb
+  ;;    (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
+  ;;      :select nil :quit t :ttl nil))
+  ;;  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
   (when (modulep! :ui workspaces)
     (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
