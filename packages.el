@@ -59,7 +59,7 @@
 (package! xterm-color)
 (package! fancy-compilation)
 (package! casual)
-(package! i3bar)
+(package! i3bar :recipe (:host github :repo "Stebalien/i3bar.el"))
 
 ;; cae-theme.el
 (package! modus-themes)
