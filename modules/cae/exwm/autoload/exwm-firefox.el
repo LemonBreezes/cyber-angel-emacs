@@ -80,7 +80,8 @@ with the KeePass Helper - URL in title add-on."
 (defun +exwm-firefox--current-title ()
   "Get the title of the currently focused EXWM buffer. Currently only works
 on Chromium with the Add Page URL to Title extension or in Firefox with
-the KeePass Helper - URL in title add-on."
+the Add URL to Window Title (Advanced KeePass Usage) in title add-on
+configured to show the full URL."
   (let ((title exwm-title))
     (or (string-match "\\(.+\\) |url:\\[" title)
         (string-match (format "\\(.+\\) https?://" url-handler-regexp) title))
