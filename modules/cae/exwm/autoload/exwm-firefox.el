@@ -84,8 +84,8 @@ the Add URL to Window Title (Advanced KeePass Usage) in title add-on
 configured to show the full URL."
   (let ((title exwm-title))
     (or (string-match "\\(.+\\) |url:\\[" title)
-        (string-match (format "\\(.+\\) https?://" url-handler-regexp) title))
-    (match-string-no-properties 1 title)))
+        (string-match (format "\\(.+\\)\\(?:\\s-*-\\s-*\\) https?://" url-handler-regexp) title))
+    (string-trim (match-string-no-properties 1 title))))
 
 ;;;###autoload
 (defun +exwm-firefox-bookmark-handler (bm)
