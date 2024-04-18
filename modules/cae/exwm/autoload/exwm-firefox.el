@@ -73,20 +73,18 @@ page switch."
 works on Chromium with the Add Page URL to Title extension or in Firefox
 with the KeePass Helper - URL in title add-on."
   (let ((title exwm-title))
-    (or (string-match "|url:\s?\\[\\(.+\\)\\]" title)
-        ;;(string-match "\\(https?://[^\s\t\n]+\\)" title)
-        )
+    (or (string-match "|url:\\[\\(.+\\)\\]" title)
+        (string-match "\\(https?://[^\s\t\n]+\\)" title))
     (match-string-no-properties 1 title)))
 
 (defun +exwm-firefox--current-title ()
   "Get the title of the currently focused EXWM buffer. Currently only works
 on Chromium with the Add Page URL to Title extension or in Firefox with
 the Add URL to Window Title (Advanced KeePass Usage) in title add-on
-configured to show the full URL and with the separator |url:."
+configured to show the full URL."
   (let ((title exwm-title))
-    (or (string-match "\\(.+\\) |url:\s?\\[" title)
-        ;;(string-match (format "\\(.+\\) https?://" url-handler-regexp) title)
-        )
+    (or (string-match "\\(.+\\) |url:\\[" title)
+        (string-match (format "\\(.+\\) https?://" url-handler-regexp) title))
     (match-string-no-properties 1 title)))
 
 ;;;###autoload
