@@ -113,6 +113,7 @@
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-project-bookmarks (_)
+  ;; This function is broken. I am no longer using project bookmarks.
   (let* ((bookmark-file (cae-project--get-bookmark-file))
          (bookmark-dir (file-name-directory bookmark-file)))
     (if (file-exists-p bookmark-dir)
