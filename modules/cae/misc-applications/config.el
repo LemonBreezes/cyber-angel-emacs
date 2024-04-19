@@ -106,6 +106,7 @@
     (which-key-add-keymap-based-replacements +misc-applications-random-map
       "r" "RSS"))
   :config
+  (setq elfeed-search-title-max-width 100)
   (defun cae-elfeed-set-filter (tag period)
     (lambda ()
       (interactive)
