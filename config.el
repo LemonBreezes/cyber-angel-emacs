@@ -938,6 +938,8 @@
     (keyfreq-autosave-mode +1))
 
   (use-package! wakatime-mode
+    :when (or (executable-find "wakatime")
+              (executable-find "wakatime-cli"))
     :defer t :init
     (add-hook 'doom-first-file-hook #'global-wakatime-mode)
     :config
