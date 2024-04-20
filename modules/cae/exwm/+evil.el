@@ -106,7 +106,10 @@
 (map! :map cae-exwm-discord-mode-map
       :n "J" (cmd! ()
                    (exwm-input--fake-key 'C-k)
-                   (exwm-evil-insert)))
+                   (exwm-evil-insert))
+      :n "C-k" (cmd! ()
+                     (exwm-input--fake-key 'C-k)
+                     (exwm-evil-insert)))
 
 (add-hook! 'exwm-manage-finish-hook
   (defun cae-exwm-load-special-bindings-h ()
