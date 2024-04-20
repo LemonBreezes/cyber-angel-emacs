@@ -498,6 +498,7 @@
            syslog-font-lock-keywords)
           ;; I don't use syslog notes.
           syslog-note-thing #'ignore))
+  (advice-add #'syslog-load-notes :override #'ignore)
   (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
   (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
   (add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
