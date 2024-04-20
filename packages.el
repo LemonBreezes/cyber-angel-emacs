@@ -72,7 +72,6 @@
 
 ;;; Tools
 (package! nov :recipe (:host github :repo "emacsmirror/nov"))
-(package! syslog-mode :recipe (:host github :repo "vapniks/syslog-mode"))
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
 (package! wakatime-mode)
