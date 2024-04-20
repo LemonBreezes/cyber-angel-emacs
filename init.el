@@ -68,7 +68,6 @@
        (corfu +orderless +icons +dabbrev)
 
        :ui
-       doom-dashboard
        hl-todo
        (hydra +childframe)
        (popup +defaults)
