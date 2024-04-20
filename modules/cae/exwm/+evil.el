@@ -16,7 +16,9 @@
 
   ;; At this point, we `garbage-collect' without hanging input for our
   ;; application.
-  (advice-add #'exwm-evil-insert :after #'garbage-collect)
+  (defadvice! +exwm-evil-insert-gc ()
+    :after #'exwm-evil-insert
+    (run-at-time 0.01 nil #'garbage-collect))
 
   (when (or (modulep! :completion helm)
             (modulep! :cae helm))
