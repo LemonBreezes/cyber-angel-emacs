@@ -29,7 +29,8 @@
     (package! helm-system-packages)))
 (and (eq system-type 'gnu/linux) (executable-find "pactl")
      (package! pulseaudio-control))
-(package! trashed)
+(package! trashed :recipe (:host github :repo "LemonBreezes/trashed"
+                           :branch "cae"))
 (package! neato-graph-bar)
 (package! journalctl-mode)
 
