@@ -154,6 +154,7 @@
        ai
        gnus
        haskell
+       denote
        )
 
 ;;Local Variables:
