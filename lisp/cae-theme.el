@@ -22,14 +22,15 @@
     (setq org-modern-tag nil
           org-modern-todo nil))
 
+  (after! org
+    (setq org-fontify-whole-heading-line t))
+  (after! markdown-mode
+    (setq markdown-fontify-whole-heading-line t))
+
   (use-package! backline
     :when cae-theme-extend-heading-faces
     :defer t :init
-    (advice-add 'outline-flag-region :after 'backline-update)
-    (after! org
-      (setq org-fontify-whole-heading-line t))
-    (after! markdown-mode
-      (setq markdown-fontify-whole-heading-line t))))
+    (advice-add 'outline-flag-region :after 'backline-update)))
 
 (defun cae-theme-customize-faces-h (_)
   ;; Make the mouse cursor more visible.
