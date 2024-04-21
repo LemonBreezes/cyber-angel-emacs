@@ -130,3 +130,7 @@
 ;; cae-bindings.el
 (package! vline)
 (package! try)
+
+;;; Lang
+(when (modulep! :lang haskell)
+  (package! consult-hoogle))
