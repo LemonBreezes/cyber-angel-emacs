@@ -1407,6 +1407,18 @@
           (setq-local lsp-semantic-token-faces
                       (assoc-delete-all "comment" lsp-semantic-token-faces)))))))
 
+;;;; Haskell
+
+(use-package! consult-hoogle
+  :when (modulep! :lang haskell)
+  :defer t :init
+  (after! haskell-mode
+    (map! :map haskell-mode-map
+          :localleader
+          "g" #'consult-hoogle
+          "G" #'consult-hoogle-project)))
+
+
 ;;; Appendix
 
 (doom-load-packages-incrementally
