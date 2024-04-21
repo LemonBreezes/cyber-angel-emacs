@@ -153,9 +153,7 @@
        org
        ai
        gnus
-       haskell
-       denote
-       )
+       denote)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
