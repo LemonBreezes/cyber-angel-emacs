@@ -472,6 +472,10 @@
                    browse-url-generic-args (when (eq (user-uid) 0)
                                              '("--no-sandbox"))
                    cae-generic-browser-name "Chrome")))
+          ((executable-find "firefox")
+           (setq browse-url-generic-program "firefox"
+                 browse-url-generic-args '("--new-tab")
+                 cae-generic-browser-name "Firefox"))
           ((executable-find "firefox-bin")
            (setq browse-url-generic-program "firefox-bin"
                  browse-url-generic-args '("--new-tab")
