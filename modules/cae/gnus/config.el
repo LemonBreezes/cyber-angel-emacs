@@ -37,8 +37,7 @@
                                     (nntp-address "news.gmane.io"))
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
-                                         (nntp-authinfo-user "StrawberryTea"))
-                                   (nnhackernews ""))
+                                         (nntp-authinfo-user "StrawberryTea")))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
@@ -104,12 +103,10 @@
                        "nntp+Gmane:gmane.emacs.gnus.patches" "nntp+Gmane:gmane.emacs.gnus.announce"
                        "nntp+Gmane:gmane.emacs.gnus.general")
                       ("orgmode" "nntp+Gmane:gmane.emacs.orgmode") ("misc")
-                      ("hackernews" "nnhackernews:news")
                       ("emacs" "nntp+Gmane:gmane.linux.gentoo.announce" "nntp+Gmane:gmane.emacs.help"
                        "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.bugs"
                        "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.announce")
-                      ("Root" "nndraft:drafts" "nnhackernews:ask" "nnhackernews:show"
-                       "nnhackernews:job"))
+                      ("Root" "nndraft:drafts"))
    gnus-topic-topology '(("Root" visible) (("misc" visible))
                          (("emacs" visible nil nil) (("orgmode" visible nil nil))
                           (("gnus" visible nil nil)) (("emms" invisible nil nil)))
@@ -174,10 +171,6 @@
 
 (use-package! spam
   :after gnus)
-
-(use-package! nnhackernews
-  :defer t :config
-  (setq nnhackernews-render-story t))
 
 (use-package! gnus-srvr
   :defer t :config
