@@ -683,6 +683,7 @@
 
 (use-package! empv
   :defer t :init
+  (defconst empv-thumbnail-placeholder "<THUMBNAIL>") ; Temporary fix.
   (map! :map +misc-applications-music-map
         "m" (cae-oneshot-keymap empv-map empv))
   (after! which-key
