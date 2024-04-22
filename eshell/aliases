@@ -78,7 +78,7 @@ alias git  git --no-pager $*
 
 alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom $*
 alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
-alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
+alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache  && doom sync
 alias rebuild-emacs emerge emacs && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
 alias update-emacs doom sync -u && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/ && doom sync
 alias update-emacs2 rebuild-packages
