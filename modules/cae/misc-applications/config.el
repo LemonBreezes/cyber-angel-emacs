@@ -688,14 +688,6 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-music-map
       "m" "MPV"))
-  (add-hook! 'empv-youtube-results-mode-hook
-    (defun +empv-youtube-results-h ()
-      (setq tabulated-list-padding 0)
-      (setq-local tabulated-list-format
-                  `[("Thumbnail" 20 nil)
-                    ("Title" ,(- (window-width) 20 10 10 (* tabulated-list-padding 2)) t)
-                    ("Length"  10 t)
-                    ("Views" 10 t)])))
   (add-hook 'empv-init-hook #'empv-override-quit-key)
   :config
   (map! :map +misc-applications-music-map
