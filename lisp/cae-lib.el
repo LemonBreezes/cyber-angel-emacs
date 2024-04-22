@@ -76,3 +76,7 @@
     (lambda (none-running)
       (when none-running
         ,@args))))
+
+(cae-when-none-of-these-processes-running
+ ("polybar" "xmobar")
+ (message "No Emacs processes running."))
