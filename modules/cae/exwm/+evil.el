@@ -14,12 +14,6 @@
   ;; We will disable `C-c' in insert state.
   (define-key exwm-mode-map (kbd "C-c") nil)
 
-  ;; At this point, we `garbage-collect' without hanging input for our
-  ;; application.
-  (defadvice! +exwm-evil-insert-gc ()
-    :after #'exwm-evil-insert
-    (run-at-time 0.01 nil #'garbage-collect))
-
   (when (or (modulep! :completion helm)
             (modulep! :cae helm))
     (map! :leader :desc "Run external command" "$" #'helm-run-external-command))
