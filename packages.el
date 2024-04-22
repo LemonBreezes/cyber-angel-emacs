@@ -45,6 +45,8 @@
            (modulep! :editor evil))
   (package! evil-cleverparens))
 
+(package! elisp-benchmarks)
+
 ;;; UI
 (package! info-colors)
 (package! communinfo :recipe (:repo "https://codeberg.org/mekeor/emacs-communinfo.git"))
