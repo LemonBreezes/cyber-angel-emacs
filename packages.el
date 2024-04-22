@@ -45,8 +45,6 @@
            (modulep! :editor evil))
   (package! evil-cleverparens))
 
-(package! elisp-benchmarks)
-
 ;;; UI
 (package! info-colors)
 (package! communinfo :recipe (:repo "https://codeberg.org/mekeor/emacs-communinfo.git"))
@@ -80,6 +78,7 @@
 (package! consult-mu :recipe
   (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
 (package! 0x0)
+(package! elisp-benchmarks)
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
