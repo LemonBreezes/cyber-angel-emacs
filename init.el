@@ -5,6 +5,7 @@
 
 (add-to-list 'safe-local-variable-directories doom-user-dir)
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
+(add-to-list 'safe-local-variable-directories (getenv "HOME"))
 
 (let ((noninteractive-shell (or (executable-find "dash")
                                 (executable-find "sh")))
