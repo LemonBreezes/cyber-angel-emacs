@@ -429,6 +429,7 @@
              (executable-find "i3status"))
     (cae-when-none-of-these-processes-running
      ("polybar" "xmobar" "lemonbar" "dzen2" "i3bar" "i3status")
+     (not (display-graphic-p))
      (use-package! i3bar
        :defer-incrementally t :config
        (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
