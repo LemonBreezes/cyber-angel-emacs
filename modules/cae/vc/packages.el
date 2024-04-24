@@ -4,7 +4,6 @@
 (package! git-link)
 (package! gitignore-templates)
 (package! vc-backup)
-(package! magit-stats)
 (package! embark-vc)
 (when (modulep! :completion vertico)
   (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
@@ -13,3 +12,6 @@
 (when (modulep! +delta)
   (package! diff-ansi))
 (package! difftastic)
+
+;; Th
+(package! magit-stats)
