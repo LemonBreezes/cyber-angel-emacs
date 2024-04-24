@@ -48,7 +48,7 @@
 
 (defadvice! cae-debug-message-a (format-string &rest args)
   :before #'message
-  (when format-string
+  (when (and cae-debug-messages-to-backtrace format-string)
     (let ((message (apply #'format format-string args)))
       (when (cl-find message cae-debug-messages-to-backtrace :test #'string=)
         (setq cae-debug-messages-to-backtrace (delete message cae-debug-messages-to-backtrace))
@@ -56,5 +56,7 @@
 
 (defun cae-debug-backtrace-message-source (message)
   (push message cae-debug-messages-to-backtrace))
+
+(benchmark-run-compiled 100 (message "the cat"))
 
 ;; See also autoload/cae-debug.el
