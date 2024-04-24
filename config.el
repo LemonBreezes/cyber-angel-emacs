@@ -1311,12 +1311,51 @@
 
 ;;; Email
 
-(when cae-init-email-enabled-p
-  (setq user-full-name "StrawberryTea"
-        user-mail-address "look@strawberrytea.xyz"
-        mail-host-address "strawberrytea.xyz"
-        mail-source-directory "~/.mail/")
+;; The minimal configuration for email should always be enabled. This is because
+;; if I am testing for a bug in my email configuration, I need to have the
+;; maildirs and addresses, etc., set up.
+(setq user-full-name "StrawberryTea"
+      user-mail-address "look@strawberrytea.xyz"
+      mail-host-address "strawberrytea.xyz"
+      mail-source-directory "~/.mail/")
 
+(after! mu4e
+  (setq mu4e-contexts
+        `(,(make-mu4e-context
+            :name "Fastmail"
+            :match-func
+            (lambda (msg)
+              (when msg
+                (string-prefix-p "/Fastmail"
+                                 (mu4e-message-field msg :maildir))))
+            :vars '((user-mail-address . "look@strawberrytea.xyz")
+                    (user-full-name . "StrawberryTea")
+                    (smtpmail-smtp-server . "smtp.fastmail.com")
+                    (smtpmail-default-smtp-server . "smtp.fastmail.com")
+                    (smtpmail-stream-type . tls)
+                    (smtpmail-smtp-service . 465)
+                    (mu4e-trash-folder . "/Fastmail/Trash")
+                    (mu4e-refile-folder . "/Fastmail/Archive")
+                    (mu4e-drafts-folder . "/Fastmail/Drafts")
+                    (mu4e-sent-folder . "/Fastmail/Sent"))))))
+
+(after! message
+  (setq message-default-mail-headers "Bcc: look@strawberrytea.xyz\n"))
+
+(after! smtpmail
+  (setq smtpmail-smtp-server "smtp.fastmail.com"
+        smtpmail-default-smtp-server "smtp.fastmail.com"
+        smtpmail-smtp-service 465
+        smtpmail-stream-type 'tls
+        smtpmail-queue-mail nil
+        smtpmail-queue-dir "~/.mail/queued-mail/"
+        smtpmail-servers-requiring-authorization ".*"
+        smtpmail-smtp-user user-mail-address))
+
+(setq +notmuch-sync-backend 'mbsync
+      +notmuch-mail-folder "~/.mail/fastmail")
+
+(when cae-init-email-enabled-p
   (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
   (setq compose-mail-user-agent-warnings nil)
   (after! sendmail
@@ -1324,23 +1363,11 @@
           mail-self-blind t))
   (after! message
     (setq message-send-mail-function #'async-smtpmail-send-it
-          message-default-mail-headers "Bcc: look@strawberrytea.xyz\n"
           message-forward-as-mime t
           message-forward-before-signature t)
     (add-hook 'message-setup-hook #'message-check-recipients))
-  (after! smtpmail
-    (setq smtpmail-smtp-server "smtp.fastmail.com"
-          smtpmail-default-smtp-server "smtp.fastmail.com"
-          smtpmail-smtp-service 465
-          smtpmail-stream-type 'tls
-          smtpmail-queue-mail nil
-          smtpmail-queue-dir "~/.mail/queued-mail/"
-          smtpmail-servers-requiring-authorization ".*"
-          smtpmail-smtp-user user-mail-address))
 
-  (setq +notmuch-sync-backend 'mbsync
-        +notmuch-home-function (lambda () (notmuch-search "tag:inbox"))
-        +notmuch-mail-folder "~/.mail/fastmail")
+  (setq +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
   (after! notmuch
     (map! :map notmuch-search-mode-map
           "q" #'cae-notmuch-quit))
@@ -1352,26 +1379,7 @@
     (map! [remap compose-mail] #'+mu4e/compose))
   (after! mu4e-vars
     (setq mu4e-modeline-support t
-          mu4e-notification-support t))
-  (after! mu4e
-    (setq mu4e-contexts
-          `(,(make-mu4e-context
-              :name "Fastmail"
-              :match-func
-              (lambda (msg)
-                (when msg
-                  (string-prefix-p "/Fastmail"
-                                   (mu4e-message-field msg :maildir))))
-              :vars '((user-mail-address . "look@strawberrytea.xyz")
-                      (user-full-name . "StrawberryTea")
-                      (smtpmail-smtp-server . "smtp.fastmail.com")
-                      (smtpmail-default-smtp-server . "smtp.fastmail.com")
-                      (smtpmail-stream-type . tls)
-                      (smtpmail-smtp-service . 465)
-                      (mu4e-trash-folder . "/Fastmail/Trash")
-                      (mu4e-refile-folder . "/Fastmail/Archive")
-                      (mu4e-drafts-folder . "/Fastmail/Drafts")
-                      (mu4e-sent-folder . "/Fastmail/Sent")))))))
+          mu4e-notification-support t)))
 
 
 ;;; Languages
