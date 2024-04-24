@@ -1355,6 +1355,7 @@
       +notmuch-mail-folder "~/.mail/fastmail")
 
 (when cae-init-email-enabled-p
+  (setq report-emacs-bug-no-explanations t)
   (autoload 'async-smtpmail-send-it "smtpmail-async" nil t)
   (setq compose-mail-user-agent-warnings nil)
   (after! sendmail
