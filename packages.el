@@ -137,6 +137,7 @@
 ;; cae-bindings.el
 (package! vline)
 (package! try)
+(package! ov)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
