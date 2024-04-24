@@ -190,7 +190,6 @@
                                         ;persp-mode
                                      eat-eshell-mode
                                      envrc-mode
-                                     winum-mode
                                      evil-mc-mode))
     (setq-hook! 'lsp-mode-hook
       minions-prominent-modes (delq 'flycheck-mode
