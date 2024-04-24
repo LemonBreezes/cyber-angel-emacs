@@ -1,5 +1,6 @@
 ;;; autoload/cae-benchmark.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun cae-compute-optimal-jit-lock-chunk-size ()
   "Calculate an estimated optimal value for `jit-lock-chunk-size' based on window dimensions."
   (save-excursion
