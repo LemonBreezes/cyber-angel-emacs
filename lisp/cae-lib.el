@@ -75,7 +75,7 @@
   `(if ,short-circuit-form
        (progn
          ,@args)
-    `(cae-check-processes-async ',process-list
-                               (lambda (none-running)
-                                 (when none-running
-                                   ,@args)))))
+     `(cae-check-processes-async ',process-list
+       (lambda (none-running)
+         (when none-running
+           ,@args)))))
