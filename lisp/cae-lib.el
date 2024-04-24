@@ -87,7 +87,7 @@ In this example, if Emacs is running in a graphical display (meaning `display-gr
 Otherwise, the message is displayed only if neither \"process1\" nor \"process2\" are running at the time of the check."
   `(if ,short-circuit-form
        (progn ,@args)
-     (cae-check-processes-async ,process-list
+     (cae-check-processes-async ',process-list
                                 (lambda (none-running)
                                   (when none-running
                                     ,@args)))))
