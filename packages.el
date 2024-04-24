@@ -33,6 +33,8 @@
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! helpful :recipe
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
+(package! lsp-mode :recipe
+  (:host github :repo "LemonBreezes/lsp-mode" :branch "fix-padding-for-lsp-modeline-progress"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
