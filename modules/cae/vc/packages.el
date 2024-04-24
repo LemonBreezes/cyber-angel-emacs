@@ -6,7 +6,6 @@
 (package! vc-backup)
 (package! magit-stats)
 (package! embark-vc)
-(package! blamer)
 (when (modulep! :completion vertico)
   (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")))
 (when (or (modulep! :completion helm)
