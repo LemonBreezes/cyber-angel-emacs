@@ -39,4 +39,24 @@
 (defmacro unbacktrace! (function)
   `(advice-remove ,function #'cae-debug-backtrace-a))
 
+;;; Finding where messages are coming from
+
+;; I use this to find where a message is coming from. For example, I do this:
+;; (cae-debug-message "the cat")
+
+(defvar cae-debug-messages nil)
+
+(defadvice! cae-debug-message-a (format-string &rest args)
+  :before #'message
+  (when format-string
+    (let ((message (apply #'format format-string args)))
+      (when (cl-find message cae-debug-messages :test #'string=)
+        (setq cae-debug-messages (delete message cae-debug-messages))
+        (backtrace)))))
+
+(defun cae-debug-message (message)
+  (push message cae-debug-messages))
+
+(cae-debug-message "No Emacs processes running.")
+
 ;; See also autoload/cae-debug.el
