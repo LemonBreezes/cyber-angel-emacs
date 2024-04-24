@@ -71,11 +71,24 @@
   nil)
 
 (defmacro cae-when-none-of-these-processes-running (process-list short-circuit-form &rest args)
-  "Execute ARG-FORM if none of the processes in PROCESS-LIST are running."
+  "Evaluate ARGS if SHORT-CIRCUIT-FORM is true or if none of the processes in PROCESS-LIST are running.
+
+PROCESS-LIST should be a list of strings, each string being the name of a process to check.
+SHORT-CIRCUIT-FORM is an optional form. If it evaluates to non-nil, then ARGS are evaluated without checking the processes.
+If SHORT-CIRCUIT-FORM is nil or evaluates to nil, then process checking occurs: ARGS are evaluated only if it is determined that none of the processes listed in PROCESS-LIST are currently running.
+
+Usage:
+(cae-when-none-of-these-processes-running
+  '(\"process1\" \"process2\")            ; PROCESS-LIST
+  (display-graphic-p)                     ; SHORT-CIRCUIT-FORM, an example condition
+  (message \"No specified processes are running, or we are in a graphical display.\")) ; ARGS to be evaluated
+
+In this example, if Emacs is running in a graphical display (meaning `display-graphic-p' returns non-nil), the message is displayed immediately.
+Otherwise, the message is displayed only if neither \"process1\" nor \"process2\" are running at the time of the check."
   `(if ,short-circuit-form
        (progn
          ,@args)
-     `(cae-check-processes-async ',process-list
-       (lambda (none-running)
-         (when none-running
-           ,@args)))))
+     (cae-check-processes-async ,process-list
+                                (lambda (none-running)
+                                  (when none-running
+                                    ,@args)))))
