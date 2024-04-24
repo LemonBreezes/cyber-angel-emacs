@@ -57,6 +57,6 @@
 (defun cae-debug-backtrace-message-source (message)
   (push message cae-debug-messages-to-backtrace))
 
-(benchmark-run-compiled 100 (message "the cat"))
+;;(benchmark-run-compiled 100 (message "the cat"))
 
 ;; See also autoload/cae-debug.el
