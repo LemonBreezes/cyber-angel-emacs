@@ -78,7 +78,7 @@
        (window-select +numbers)
        ophints
        zen
-       (treemacs +lsp)
+       treemacs
 
        :editor
        file-templates
