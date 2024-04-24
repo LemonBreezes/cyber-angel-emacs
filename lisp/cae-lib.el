@@ -57,7 +57,8 @@
       (insert msg)
       (posframe-show buffer
                      :string (buffer-string)
-                     :position (point)))))
+                     :poshandler #'posframe-poshandler-frame-center))))
+;; (cae-posframe-message "Hello, world!")
 
 (defun cae-check-processes-async (process-list callback)
   "Check asynchronously if none of the processes in PROCESS-LIST are running and then call CALLBACK."
