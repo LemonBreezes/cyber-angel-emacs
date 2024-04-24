@@ -1311,9 +1311,8 @@
 
 ;;; Email
 
-;; The minimal configuration for email should always be enabled. This is because
-;; if I am testing for a bug in my email configuration, I need to have the
-;; maildirs and addresses, etc., set up.
+;; Always enable the essential email configuration, including maildirs and addresses.
+;; This is crucial for testing and debugging any issues with the email setup.
 (setq user-full-name "StrawberryTea"
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz"
