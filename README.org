@@ -80,7 +80,6 @@ that are in currently enabled modules.
 | :tools lsp and not :tools lsp +eglot     | cTAB | ~lsp-ui-imenu~                   |
 | :editor evil                             | bo   | ~cae-evil-buffer-org-new~        |
 | :cae vc                                  | iI   | ~gitignore-templates-insert~     |
-| :cae vc                                  | tB   | ~blamer-mode~                    |
 | :cae gnus                                | og   | ~=gnus~                          |
 | :cae debugger                            | od   | ~cae-debugger-run-or-pop-to-gdb~ |
 | :cae ai                                  | oc   | ~cae-ai-toggle-chatgpt-shell~    |
