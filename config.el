@@ -428,7 +428,7 @@
   (when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
              (executable-find "i3status"))
     (cae-when-none-of-these-processes-running
-     ("polybar" "xmobar")
+     ("polybar" "xmobar" "lemonbar" "dzen2" "i3bar" "i3status")
      (use-package! i3bar
        :defer-incrementally t :config
        (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
