@@ -70,9 +70,12 @@
          (kill-buffer buffer)))))
   nil)
 
-(defmacro cae-when-none-of-these-processes-running (process-list &rest args)
+(defmacro cae-when-none-of-these-processes-running (process-list short-circuit-form &rest args)
   "Execute ARG-FORM if none of the processes in PROCESS-LIST are running."
-  `(cae-check-processes-async ',process-list
-    (lambda (none-running)
-      (when none-running
-        ,@args))))
+  `(if ,short-circuit-form
+       (progn
+         ,@args)
+    `(cae-check-processes-async ',process-list
+                               (lambda (none-running)
+                                 (when none-running
+                                   ,@args)))))
