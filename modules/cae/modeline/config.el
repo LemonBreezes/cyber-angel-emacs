@@ -221,13 +221,4 @@
       (add-hook 'doom-after-init-hook #'nyan-mode)
       :config
       (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20)))
-
-  (when (and (modulep! +wakatime)
-             (not (executable-find "i3status")))
-    (cae-when-none-of-these-processes-running
-     ("polybar" "xmobar" "dzen2" "lemonbar" "i3bar" "i3status")
-     (not (display-graphic-p))
-     (use-package! wakatime-ui-mode
-       :defer t :init
-       (add-hook 'wakatime-mode-hook #'wakatime-ui-mode)))))
+             nyan-minimum-window-width 20))))
