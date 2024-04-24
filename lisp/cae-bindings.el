@@ -358,15 +358,15 @@
 ;;; Other modules
 
 ;; This is also bound for Evil in `cae-evil.el'.
-(unless (modulep! :editor evil)
-  (after! org
-    (map! :map org-mode-map
-          "M-RET" #'org-insert-heading
-          "M-S-RET" #'org-insert-todo-heading
-          "M-<return>" #'org-insert-heading
-          "M-S-<return>" #'org-insert-todo-heading
-          :localleader
-          :desc "Insert heading" "RET" #'org-ctrl-c-ret)))
+(after! org
+  (map! :map org-mode-map
+        (:when (not (modulep! :editor evil))
+         "M-RET" #'org-insert-heading
+         "M-S-RET" #'org-insert-todo-heading
+         "M-<return>" #'org-insert-heading
+         "M-S-<return>" #'org-insert-todo-heading)
+        :localleader
+        :desc "Insert heading" "RET" #'org-ctrl-c-ret))
 
 (after! treemacs
   (when (modulep! :completion vertico)
