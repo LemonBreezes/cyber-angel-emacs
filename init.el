@@ -75,7 +75,7 @@
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
-       window-select
+       (window-select +numbers)
        ophints
        zen
        (treemacs +lsp)
