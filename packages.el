@@ -28,6 +28,10 @@
            :pre-build (straight-recipes-org-elpa--build)
            :build (:not autoloads)
            :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
+(when (and (modulep! :editor evil)
+           (modulep! :editor multiple-cursors))
+  (package! evil-mc :recipe
+    (:host github :repo "LemonBreezes/evil-mc" :branch "enable-lexical-binding")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
