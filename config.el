@@ -423,21 +423,7 @@
     (after! calc
       (map! :map calc-mode-map
             "C-o" #'casual-main-menu
-            "C-M-?"#'casual-main-menu)))
-
-  (when (and (not (memq system-type '(cygwin windows-nt ms-dos)))
-             (executable-find "i3status"))
-    (cae-when-none-of-these-processes-running
-     ("polybar" "xmobar" "lemonbar" "dzen2" "i3bar" "i3status")
-     (not (display-graphic-p))
-     (use-package! i3bar
-       :defer-incrementally t :config
-       (tab-bar-mode +1)
-       (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
-                               tab-bar-format-align-right ; Optional: Remove to align left.
-                               tab-bar-format-global)
-              tab-bar-show t)
-       (i3bar-mode +1)))))
+            "C-M-?"#'casual-main-menu))))
 
 
 ;;; Tools
