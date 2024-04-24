@@ -130,6 +130,15 @@
     ;;   (setenv "SDL_VIDEODRIVER" "x11")
     ;;   (exwm-xim-enable))
 
+    ;; Disable mouse tracking support in LSP and Dap UIs. I don't use them and
+    ;; they can cause problems with `repeat-mode'.
+    (add-hook! 'repeat-mode-hook
+      (defun +exwm-disable-mouse-tracking-h ()
+        (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+        (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+        (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
+        (remove-hook 'repeat-mode-hook #'+exwm-disable-mouse-tracking-h)))
+
     (exwm-enable)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
