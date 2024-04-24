@@ -28,7 +28,7 @@
       "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
 (when (modulep! :ui hydra)
-(eval
+  (eval
    `(defhydra hydra-exwm-apps (:hint nil :color blue)
       "
 EXWM Apps Launcher
