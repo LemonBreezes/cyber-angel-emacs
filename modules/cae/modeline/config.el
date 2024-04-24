@@ -224,9 +224,11 @@
              nyan-minimum-window-width 20)))
 
   (when (and (modulep! +wakatime)
-             (not (executable-find "i3status")))
+             (or (not (executable-find "i3status"))
+                 (not (display-graphic-p))))
     (cae-when-none-of-these-processes-running
      ("polybar" "xmobar" "dzen2" "lemonbar" "i3bar" "i3status")
+     (not (display-graphic-p))
      (use-package! wakatime-ui-mode
        :defer t :init
        (add-hook 'wakatime-mode-hook #'wakatime-ui-mode)))))
