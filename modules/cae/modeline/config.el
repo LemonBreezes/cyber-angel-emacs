@@ -1,7 +1,6 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
-(when (or (not (cae-display-graphic-p))
-          (not (modulep! :ui modeline)))
+(unless (modulep! :ui modeline)
   ;; Use my modeline as a fallback if Doom modeline is enabled.
   (remove-hook 'doom-after-init-hook #'doom-modeline-mode)
   (when (modulep! :editor evil)
@@ -9,12 +8,12 @@
           '(after . mode-line-frame-identification)))
 
   ;; Show image metadata in the modeline.
-  ;;(add-hook! 'image-mode-hook
-  ;;  (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
-  ;;         (head (cl-subseq mode-line-format 0 idx))
-  ;;         (tail (cl-subseq mode-line-format idx))
-  ;;         (new-id '(:eval (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name)))))
-  ;;    (setq mode-line-format (append head (cons new-id tail)))))
+  (add-hook! 'image-mode-hook
+    (let* ((idx (1+ (cl-position 'mode-line-buffer-identification mode-line-format)))
+           (head (cl-subseq mode-line-format 0 idx))
+           (tail (cl-subseq mode-line-format idx))
+           (new-id '(:eval (process-lines "identify" "-format" "[%m %wx%h %b]" (buffer-file-name)))))
+      (setq mode-line-format (append head (cons new-id tail)))))
 
   (use-package! anzu
     :after-call isearch-mode
