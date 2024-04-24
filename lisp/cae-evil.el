@@ -133,6 +133,27 @@
        evil-split-window-below t
        evil-v$-excludes-newline t)
 
+;; I like for scrolling by page to move the point to the beginning or end of the
+;; buffer as is typical for other editors.
+(defun cae-evil-scroll-page-a (direction oldfun args)
+  (apply oldfun args)
+  (cond ((eq direction 'down)
+         (when (eq (pos-eol) (point-max))
+           (goto-char (point-max))))
+        ((eq direction 'up)
+         (when (eq (pos-bol) (point-min))
+           (goto-char (point-min))))))
+
+(defun cae-evil-scroll-page-down-a (oldfun &rest args)
+  (cae-evil-scroll-page-a 'down oldfun args))
+
+(defun cae-evil-scroll-page-up-a (oldfun &rest args)
+  (cae-evil-scroll-page-a 'up oldfun args))
+
+(advice-add #'evil-scroll-page-down :around #'cae-evil-scroll-page-down-a)
+(advice-add #'evil-scroll-page-up :around #'cae-evil-scroll-page-up-a)
+
+
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
