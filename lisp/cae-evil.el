@@ -154,6 +154,7 @@
 (advice-add #'evil-scroll-page-up :around #'cae-evil-scroll-page-up-a)
 
 
+;; Use `C-d' to send EOF in comint buffers.
 (after! comint
   (map! :map comint-mode-map
         :i "C-d" #'cae-comint-delchar-or-maybe-eof))
