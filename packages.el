@@ -138,6 +138,10 @@
 (package! vline)
 (package! try)
 
+;; These are used for their autoloads. They are not explicitly referenced in
+;; this configuration.
+(package! substitute)
+
 ;;; Lang
 (when (modulep! :lang haskell)
   (package! consult-hoogle))
