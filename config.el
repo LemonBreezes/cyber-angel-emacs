@@ -432,11 +432,11 @@
      (not (display-graphic-p))
      (use-package! i3bar
        :defer-incrementally t :config
+       (tab-bar-mode +1)
        (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
                                tab-bar-format-align-right ; Optional: Remove to align left.
                                tab-bar-format-global)
               tab-bar-show t)
-       (tab-bar-mode +1)
        (i3bar-mode +1)))))
 
 
