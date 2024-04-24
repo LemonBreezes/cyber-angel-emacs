@@ -57,7 +57,7 @@
       (insert msg)
       (posframe-show buffer
                      :string (buffer-string)
-                     :poshandler #'posframe-poshandler-frame-center))))
+                     :poshandler #'posframe-poshandler-point-frame-center))))
 ;; (cae-posframe-message "Hello, world!")
 
 (defun cae-check-processes-async (process-list callback)
