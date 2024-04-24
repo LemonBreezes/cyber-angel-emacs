@@ -99,9 +99,6 @@
   (setq make-backup-files t
         vc-make-backup-files t))
 
-(use-package! magit-stats
-  :defer t)
-
 (use-package! embark-vc
   :after embark)
 
