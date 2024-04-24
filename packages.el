@@ -12,13 +12,6 @@
 ;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
-;; Hopefully Hlissner will merge my PR for `evil-org-mode'.
-(when (and (modulep! :editor evil +everywhere)
-           (modulep! :lang org))
-  (package! evil-org :recipe
-    (:host github :repo "LemonBreezes/evil-org-mode")))
-(package! helpful :recipe
-  (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 ;; I use the latest version of Org.
 (package! org
   :recipe (:host nil
@@ -28,10 +21,18 @@
            :pre-build (straight-recipes-org-elpa--build)
            :build (:not autoloads)
            :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
+
+;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil)
            (modulep! :editor multiple-cursors))
   (package! evil-mc :recipe
     (:host github :repo "LemonBreezes/evil-mc" :branch "enable-lexical-binding")))
+(when (and (modulep! :editor evil +everywhere)
+           (modulep! :lang org))
+  (package! evil-org :recipe
+    (:host github :repo "LemonBreezes/evil-org-mode")))
+(package! helpful :recipe
+  (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
