@@ -431,7 +431,7 @@
      ("polybar" "xmobar" "lemonbar" "dzen2" "i3bar" "i3status")
      (not (display-graphic-p))
      (use-package! i3bar
-       :delay 0.1
+       :defer 0.1 :config
        (setq! tab-bar-format '(tab-bar-format-tabs ; Optional: Remove to _only_ display the bar.
                                tab-bar-format-align-right ; Optional: Remove to align left.
                                tab-bar-format-global)
