@@ -224,8 +224,7 @@
              nyan-minimum-window-width 20)))
 
   (when (and (modulep! +wakatime)
-             (or (not (executable-find "i3status"))
-                 (not (display-graphic-p))))
+             (not (executable-find "i3status")))
     (cae-when-none-of-these-processes-running
      ("polybar" "xmobar" "dzen2" "lemonbar" "i3bar" "i3status")
      (not (display-graphic-p))
