@@ -223,7 +223,9 @@
       (setq! nyan-bar-length 20
              nyan-minimum-window-width 20)))
 
-  (use-package! wakatime-ui-mode
-    :when (modulep! +wakatime)
-    :defer t :init
-    (add-hook 'wakatime-mode-hook #'wakatime-ui-mode)))
+  (cae-when-none-of-these-processes-running
+   ("polybar" "lemonbar" "xmobar" "dzen2" "i3bar" "i3status" "conky")
+   (use-package! wakatime-ui-mode
+     :when (modulep! +wakatime)
+     :defer t :init
+     (add-hook 'wakatime-mode-hook #'wakatime-ui-mode))))
