@@ -232,6 +232,24 @@
     (add-to-list 'which-key-replacement-alist
                  '(("" . "harpoon-go-to-[0-9]+") . ignore))))
 
+(defun cae-evil-scroll-page-a (direction oldfun args)
+  (apply oldfun args)
+  (cond ((eq direction 'down)
+         (when (eq (pos-eol) (point-max))
+           (goto-char (point-max))))
+        ((eq direction 'up)
+         (when (eq (pos-bol) (point-min))
+           (goto-char (point-min))))))
+
+(defun cae-evil-scroll-page-down-a (oldfun &rest args)
+  (cae-evil-scroll-page-a 'down oldfun args))
+
+(defun cae-evil-scroll-page-up-a (oldfun &rest args)
+  (cae-evil-scroll-page-a 'up oldfun args))
+
+(advice-add #'evil-scroll-page-down :around #'cae-evil-scroll-page-down-a)
+(advice-add #'evil-scroll-page-up :around #'cae-evil-scroll-page-up-a)
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
