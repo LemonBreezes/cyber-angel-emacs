@@ -13,5 +13,6 @@
   (package! diff-ansi))
 (package! difftastic)
 
-;; Th
+;; These are used for their autoloads. They are not explicitly referenced in
+;; this configuration.
 (package! magit-stats)
