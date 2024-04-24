@@ -367,6 +367,8 @@
 
   ;; Show the window number in the modeline (when applicable).
   (when (modulep! :ui window-select +numbers)
+    (after! winum
+      (setq winum-auto-setup-mode-line t))
     (winum-mode +1))
 
   (use-package! breadcrumb
