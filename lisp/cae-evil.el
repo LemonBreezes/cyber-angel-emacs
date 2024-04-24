@@ -233,7 +233,6 @@
 (defun cae-evil-mu4e-enter-insert-mode (&rest _)
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
-;; For `report-emacs-bug'.
 (advice-add #'compose-mail :after #'cae-evil-mu4e-enter-insert-mode)
 
 (use-package! evil-owl
