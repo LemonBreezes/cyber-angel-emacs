@@ -148,7 +148,7 @@
        dired
        lisp
        misc-applications
-       modeline
+       (modeline +wakatime)
        unpackaged
        vc
        org
