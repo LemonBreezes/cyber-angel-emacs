@@ -164,14 +164,3 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (cl-letf (((symbol-function #'read-only-mode) #'ignore)
 ;;            ((symbol-function #'read-only-p) (lambda () t)))
 ;;    (apply oldfun args)))
-
-(dolist (fn '(evil-mc-put-cursor-kill-ring
-              evil-mc-put-cursor-kill-ring-yank-pointer
-              evil-mc-put-cursor-temporary-goal-column
-              evil-mc-put-cursor-mark-ring
-              evil-mc-put-cursor-mark-active
-              ))
-  (advice-add fn :around
-              (defun cae-evil-mc-debug (oldfun &rest args)
-                (message "Calling %s with args: %s" fn args)
-                (apply oldfun args))))
