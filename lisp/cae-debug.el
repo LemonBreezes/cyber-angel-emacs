@@ -54,7 +54,7 @@
         (setq cae-debug-messages-to-backtrace (delete message cae-debug-messages-to-backtrace))
         (backtrace)))))
 
-(defun cae-debug-message-source (message)
+(defun cae-debug-backtrace-message-source (message)
   (push message cae-debug-messages-to-backtrace))
 
 ;; See also autoload/cae-debug.el
