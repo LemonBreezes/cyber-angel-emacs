@@ -140,7 +140,7 @@
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
-(package! substitute)
+(package! substitute) ; This is for when `lsp-rename' is not available.
 
 ;;; Lang
 (when (modulep! :lang haskell)
