@@ -20,7 +20,7 @@
   '(("games" "g")
     ("eyecandy" "e")
     ("system" "s")
-    ("random" "r")
+    ("random" "t")
     ("insert" "i")
     ("music" "m")
     ("quotes" "q")))
