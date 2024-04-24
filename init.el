@@ -79,7 +79,6 @@
        ophints
        zen
        (treemacs +lsp)
-       modeline
 
        :editor
        file-templates
