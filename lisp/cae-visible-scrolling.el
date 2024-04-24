@@ -20,7 +20,8 @@
           (old-start (window-start)))
       (save-excursion
         (move-to-window-line (funcall line-fn count))
-        (funcall scrollkeeper-guideline-fn))))
+        (when (not (eq old-start (window-start)))
+          (funcall scrollkeeper-guideline-fn)))))
 
   (defadvice! cae-evil-scroll-down-with-hint-a (count &rest _)
     :before #'evil-scroll-down
