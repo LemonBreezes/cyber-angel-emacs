@@ -181,7 +181,6 @@
             auto-revert-mode
             auto-revert-tail-mode
             font-lock-mode
-
             ruler-mode
             vline-mode))
     (setq minions-prominent-modes '(defining-kbd-macro
@@ -190,7 +189,8 @@
                                      flymake-mode
                                         ;persp-mode
                                      eat-eshell-mode
-                                     envrc-mode))
+                                     envrc-mode
+                                     winum-mode))
     (setq-hook! 'lsp-mode-hook
       minions-prominent-modes (delq 'flycheck-mode
                                     (default-value 'minions-prominent-modes)))
