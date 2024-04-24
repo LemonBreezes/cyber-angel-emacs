@@ -44,19 +44,17 @@
 ;; I use this to find where a message is coming from. For example, I do this:
 ;; (cae-debug-message "the cat")
 
-(defvar cae-debug-messages nil)
+(defvar cae-debug-messages-to-backtrace nil)
 
 (defadvice! cae-debug-message-a (format-string &rest args)
   :before #'message
   (when format-string
     (let ((message (apply #'format format-string args)))
-      (when (cl-find message cae-debug-messages :test #'string=)
-        (setq cae-debug-messages (delete message cae-debug-messages))
+      (when (cl-find message cae-debug-messages-to-backtrace :test #'string=)
+        (setq cae-debug-messages-to-backtrace (delete message cae-debug-messages-to-backtrace))
         (backtrace)))))
 
-(defun cae-debug-message (message)
-  (push message cae-debug-messages))
-
-(cae-debug-message "No Emacs processes running.")
+(defun cae-debug-message-source (message)
+  (push message cae-debug-messages-to-backtrace))
 
 ;; See also autoload/cae-debug.el
