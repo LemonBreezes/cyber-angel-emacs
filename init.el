@@ -71,7 +71,7 @@
        :ui
        hl-todo
        (hydra +childframe)
-       ;;(popup +defaults)
+       (popup +defaults)
        (vc-gutter +pretty +diff-hl)
        vi-tilde-fringe
        workspaces
