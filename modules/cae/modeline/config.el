@@ -29,7 +29,7 @@
 
   (use-package! evil-anzu
     :when (modulep! :editor evil)
-    :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight
+    :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight evil-search-incrementally
     :config (global-anzu-mode +1))
 
   (use-package! minions
