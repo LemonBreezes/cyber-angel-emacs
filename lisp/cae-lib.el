@@ -86,8 +86,7 @@ Usage:
 In this example, if Emacs is running in a graphical display (meaning `display-graphic-p' returns non-nil), the message is displayed immediately.
 Otherwise, the message is displayed only if neither \"process1\" nor \"process2\" are running at the time of the check."
   `(if ,short-circuit-form
-       (progn
-         ,@args)
+       (progn ,@args)
      (cae-check-processes-async ,process-list
                                 (lambda (none-running)
                                   (when none-running
