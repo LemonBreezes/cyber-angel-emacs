@@ -154,6 +154,7 @@
        org
        ai
        gnus
+       rss
        denote)
 
 ;;Local Variables:
