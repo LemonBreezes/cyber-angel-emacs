@@ -165,10 +165,10 @@ It is meant to be used as a `post-gc-hook'."
 ;;            ((symbol-function #'read-only-p) (lambda () t)))
 ;;    (apply oldfun args)))
 
-(defun cae-update-current-buffer-a (&rest _)
-  (set-buffer (window-buffer)))
 
 ;; Not having the window buffer and the current buffer in sync can cause issues.
+(defun cae-update-current-buffer-a (&rest _)
+  (set-buffer (window-buffer)))
 (advice-add #'mu4e-compose-new :after #'cae-update-current-buffer-a)
 (advice-add #'view-echo-area-messages :after #'cae-update-current-buffer-a)
 (advice-add #'persp-activate :after #'cae-update-current-buffer-a)
