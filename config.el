@@ -232,7 +232,8 @@
     (setq alert-default-style 'libnotify))
 
   (after! winum
-    (setq winum-auto-setup-mode-line t))
+    (setq winum-auto-setup-mode-line t
+          winum-mode-line-position 3))
 
   (after! shr
     ;; `shr' wraps lines in a visually unappealing way.
