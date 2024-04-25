@@ -1,0 +1,136 @@
+#+title: Elisp Benchmarks Results
+
+* 7950X
+:PROPERTIES:
+:CREATED_TIME: [2024-04-21 Sun 22:37]
+:END:
+
+** ("-march=znver4" "-Ofast" "-g0" "-fno-finite-math-only" "-fgraphite-identity" "-floop-nest-optimize" "-fdevirtualize-at-ltrans" "-fipa-pta" "-fno-semantic-interposition" "-flto=auto" "-fuse-linker-plugin")
+:PROPERTIES:
+:CREATED_TIME: [2024-04-21 Sun 21:47]
+:END:
+
+Basically this is the entire CFLAG set I use for my Gentoo system plus fast
+math. I'm using a Ryzen 9 7950X CPU.
+| test               | non-gc avg (s) | gc avg (s) | gcs avg | tot avg (s) | tot avg err (s) |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| bubble             |           0.41 |       0.11 |       0 |        0.52 |            0.09 |
+| bubble-no-cons     |           0.56 |       0.00 |       0 |        0.56 |            0.02 |
+| bytecomp           |           0.93 |       0.94 |       6 |        1.88 |            0.92 |
+| dhrystone          |           0.80 |       0.00 |       0 |        0.80 |            0.00 |
+| eieio              |           1.05 |       2.13 |      15 |        3.18 |            1.87 |
+| fibn               |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-named-let     |           0.44 |       0.00 |       0 |        0.44 |            0.00 |
+| fibn-rec           |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-tc            |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| flet               |           0.69 |       0.00 |       0 |        0.69 |            0.00 |
+| font-lock          |           0.37 |       0.35 |       2 |        0.72 |            0.06 |
+| inclist            |           1.14 |       0.00 |       0 |        1.14 |            0.00 |
+| inclist-type-hints |           1.11 |       0.00 |       0 |        1.11 |            0.01 |
+| listlen-tc         |           0.07 |       0.00 |       0 |        0.07 |            0.00 |
+| map-closure        |           2.56 |       0.00 |       0 |        2.56 |            0.00 |
+| nbody              |           0.63 |       0.20 |       1 |        0.83 |            0.03 |
+| pack-unpack        |           0.16 |       0.27 |       2 |        0.43 |            0.01 |
+| pack-unpack-old    |           0.23 |       0.68 |       5 |        0.91 |            0.01 |
+| pcase              |           1.02 |       0.00 |       0 |        1.02 |            0.01 |
+| pidigits           |           1.69 |       4.28 |      27 |        5.97 |            0.07 |
+| scroll             |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| smie               |           0.79 |       0.44 |       3 |        1.23 |            0.01 |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| total              |          14.65 |       9.41 |      63 |       24.06 |            2.09 |
+
+** ("-march=znver4" "-Ofast" "-g0" "-fno-finite-math-only" "-fgraphite-identity" "-floop-nest-optimize" "-fdevirtualize-at-ltrans" "-fipa-pta" "-fno-semantic-interposition" "-flto=auto" "-fuse-linker-plugin" "-ftracer")
+:PROPERTIES:
+:CREATED_TIME: [2024-04-21 Sun 21:58]
+:END:
+
+| test               | non-gc avg (s) | gc avg (s) | gcs avg | tot avg (s) | tot avg err (s) |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| bubble             |           0.42 |       0.08 |       0 |        0.51 |            0.04 |
+| bubble-no-cons     |           0.53 |       0.00 |       0 |        0.53 |            0.02 |
+| bytecomp           |           0.91 |       0.87 |       9 |        1.78 |            0.87 |
+| dhrystone          |           1.00 |       0.00 |       0 |        1.00 |            0.01 |
+| eieio              |           1.04 |       1.92 |      21 |        2.96 |            1.69 |
+| fibn               |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-named-let     |           0.44 |       0.00 |       0 |        0.44 |            0.00 |
+| fibn-rec           |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-tc            |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| flet               |           0.69 |       0.00 |       0 |        0.69 |            0.00 |
+| font-lock          |           0.37 |       0.32 |       3 |        0.69 |            0.05 |
+| inclist            |           1.08 |       0.00 |       0 |        1.08 |            0.02 |
+| inclist-type-hints |           1.05 |       0.00 |       0 |        1.05 |            0.02 |
+| listlen-tc         |           0.07 |       0.00 |       0 |        0.07 |            0.00 |
+| map-closure        |           2.57 |       0.00 |       0 |        2.57 |            0.00 |
+| nbody              |           0.62 |       0.16 |       1 |        0.77 |            0.03 |
+| pack-unpack        |           0.15 |       0.36 |       4 |        0.51 |            0.00 |
+| pack-unpack-old    |           0.23 |       0.62 |       7 |        0.85 |            0.01 |
+| pcase              |           1.02 |       0.00 |       0 |        1.02 |            0.10 |
+| pidigits           |           1.67 |       4.05 |      38 |        5.72 |            0.02 |
+| scroll             |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| smie               |           0.77 |       0.51 |       5 |        1.28 |            0.02 |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| total              |          14.64 |       8.89 |      89 |       23.53 |            1.90 |
+
+** ("-march=znver4" "-Ofast" "-g0" "-fno-finite-math-only" "-fgraphite-identity" "-floop-nest-optimize" "-fdevirtualize-at-ltrans" "-fipa-pta" "-fno-semantic-interposition" "-fuse-linker-plugin")
+:PROPERTIES:
+:CREATED_TIME: [2024-04-21 Sun 22:19]
+:END:
+
+| test               | non-gc avg (s) | gc avg (s) | gcs avg | tot avg (s) | tot avg err (s) |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| bubble             |           0.42 |       0.09 |       0 |        0.51 |            0.05 |
+| bubble-no-cons     |           0.57 |       0.00 |       0 |        0.57 |            0.00 |
+| bytecomp           |           0.95 |       0.92 |       8 |        1.87 |            0.92 |
+| dhrystone          |           1.01 |       0.00 |       0 |        1.01 |            0.01 |
+| eieio              |           1.05 |       2.10 |      20 |        3.15 |            1.83 |
+| fibn               |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-named-let     |           0.44 |       0.00 |       0 |        0.44 |            0.00 |
+| fibn-rec           |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-tc            |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| flet               |           0.69 |       0.00 |       0 |        0.69 |            0.00 |
+| font-lock          |           0.37 |       0.25 |       2 |        0.62 |            0.06 |
+| inclist            |           1.13 |       0.00 |       0 |        1.13 |            0.02 |
+| inclist-type-hints |           1.11 |       0.00 |       0 |        1.11 |            0.01 |
+| listlen-tc         |           0.07 |       0.00 |       0 |        0.07 |            0.00 |
+| map-closure        |           2.56 |       0.00 |       0 |        2.56 |            0.02 |
+| nbody              |           0.62 |       0.17 |       1 |        0.79 |            0.03 |
+| pack-unpack        |           0.15 |       0.31 |       3 |        0.47 |            0.00 |
+| pack-unpack-old    |           0.23 |       0.72 |       7 |        0.95 |            0.02 |
+| pcase              |           1.06 |       0.00 |       0 |        1.06 |            0.09 |
+| pidigits           |           1.62 |       4.21 |      35 |        5.83 |            0.07 |
+| scroll             |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| smie               |           0.77 |       0.44 |       4 |        1.21 |            0.00 |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| total              |          14.80 |       9.22 |      81 |       24.02 |            2.06 |
+
+** '()
+:PROPERTIES:
+:CREATED_TIME: [2024-04-21 Sun 22:36]
+:END:
+
+| test               | non-gc avg (s) | gc avg (s) | gcs avg | tot avg (s) | tot avg err (s) |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| bubble             |           0.42 |       0.09 |       0 |        0.51 |            0.06 |
+| bubble-no-cons     |           0.57 |       0.00 |       0 |        0.57 |            0.01 |
+| bytecomp           |           0.90 |       0.90 |       8 |        1.80 |            0.86 |
+| dhrystone          |           1.01 |       0.00 |       0 |        1.01 |            0.01 |
+| eieio              |           1.04 |       2.01 |      19 |        3.05 |            1.76 |
+| fibn               |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-named-let     |           0.44 |       0.00 |       0 |        0.44 |            0.00 |
+| fibn-rec           |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| fibn-tc            |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| flet               |           0.79 |       0.00 |       0 |        0.79 |            0.00 |
+| font-lock          |           0.37 |       0.25 |       2 |        0.62 |            0.05 |
+| inclist            |           1.15 |       0.00 |       0 |        1.15 |            0.02 |
+| inclist-type-hints |           1.12 |       0.00 |       0 |        1.12 |            0.02 |
+| listlen-tc         |           0.07 |       0.00 |       0 |        0.07 |            0.00 |
+| map-closure        |           2.57 |       0.00 |       0 |        2.57 |            0.01 |
+| nbody              |           0.62 |       0.17 |       1 |        0.80 |            0.03 |
+| pack-unpack        |           0.15 |       0.31 |       3 |        0.46 |            0.01 |
+| pack-unpack-old    |           0.23 |       0.72 |       7 |        0.96 |            0.01 |
+| pcase              |           1.16 |       0.00 |       0 |        1.16 |            0.02 |
+| pidigits           |           1.64 |       4.10 |      34 |        5.73 |            0.09 |
+| scroll             |           0.00 |       0.00 |       0 |        0.00 |            0.00 |
+| smie               |           0.78 |       0.43 |       4 |        1.21 |            0.00 |
+|--------------------+----------------+------------+---------+-------------+-----------------|
+| total              |          15.04 |       8.98 |      80 |       24.02 |            1.97 |
