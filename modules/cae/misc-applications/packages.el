@@ -7,9 +7,6 @@
 
 ;; Miscellaneous apps
 (package! alarm-clock)
-(when (modulep! :app rss)
-  (package! elfeed-tube)
-  (package! elfeed-tube-mpv))
 (package! pomm)
 (package! debbugs :recipe (:host github :repo "emacs-straight/debbugs"
                            :files ("*"))) ; Have to get all files to fix error.
@@ -60,6 +57,7 @@
 ;; Music
 (package! somafm)
 (package! empv)
+(package! elfeed-tube) ; For conveniently getting an Invidious instance URL.
 (package! emms)
 (package! emms-mode-line-cycle)
 (package! lyrics-fetcher)
