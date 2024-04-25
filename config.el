@@ -845,6 +845,7 @@
                     '(?a ?s ?d ?f ?g
                       ?h ?j ?k ?l ?\;))
           avy-background nil
+          avy-single-candidate-jump t
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
