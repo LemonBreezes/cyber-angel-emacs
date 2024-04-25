@@ -170,3 +170,4 @@ It is meant to be used as a `post-gc-hook'."
 
 (advice-add #'mu4e-compose-new :after #'cae-update-current-buffer-a)
 (advice-add #'view-echo-area-messages :after #'cae-update-current-buffer-a)
+(advice-add #'persp-activate :after #'cae-update-current-buffer-a)
