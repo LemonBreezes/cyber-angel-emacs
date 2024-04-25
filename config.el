@@ -235,7 +235,7 @@
     ;; `shr' wraps lines in a visually unappealing way.
     (setq shr-width 120
           shr-max-width 120
-          shr-use-xwidgets-for-media (boundp 'xwidget-webkit-new-session))
+          shr-use-xwidgets-for-media (featurep 'xwidget-internal))
 
     ;; I prefer to not use fonts in `shr' because it looks weird with the font
     ;; setup I have.
