@@ -166,7 +166,7 @@ It is meant to be used as a `post-gc-hook'."
 ;;    (apply oldfun args)))
 
 
-;; Not having the window buffer and the current buffer in sync can cause issues.
+;; Not having the window buffer and the current buffer in sync can cause many bugs.
 (defun cae-update-current-buffer-a (&rest _)
   (set-buffer (window-buffer)))
 (advice-add #'mu4e-compose-new :after #'cae-update-current-buffer-a)
