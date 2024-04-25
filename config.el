@@ -858,8 +858,7 @@
                              (avy-kill-ring-save-region . pre)
                              (avy-kill-region . pre)
                              (avy-copy-region . pre)
-                             (avy-move-region . pre))
-          avy-column-line-overlay t))
+                             (avy-move-region . pre))))
 
   (use-package! embrace
     :defer t :init
