@@ -164,3 +164,7 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (cl-letf (((symbol-function #'read-only-mode) #'ignore)
 ;;            ((symbol-function #'read-only-p) (lambda () t)))
 ;;    (apply oldfun args)))
+
+(defun cae-update-current-buffer-a (&rest _)
+  (set-buffer (window-buffer)))
+(advice-add #'mu4e-compose-new :after #'cae-update-current-buffer-a)
