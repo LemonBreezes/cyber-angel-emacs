@@ -234,7 +234,7 @@
   (after! winum
     (setq winum-auto-setup-mode-line t
           winum-mode-line-position 3))
-  (add-hook 'doom-first-buffer-hook #'winum-mode)
+  (add-hook 'doom-after-init-hook #'winum-mode)
   (remove-hook 'doom-switch-window-hook #'winum-mode)
 
   (after! shr
