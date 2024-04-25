@@ -1358,6 +1358,8 @@
 
   (when (modulep! :email mu4e)
     (map! [remap compose-mail] #'+mu4e/compose))
+  (after! mu4e
+    (setq message-mail-user-agent nil))
   (after! mu4e-vars
     (setq mu4e-modeline-support t
           mu4e-notification-support t)))
