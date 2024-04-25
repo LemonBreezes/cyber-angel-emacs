@@ -36,7 +36,7 @@
 (package! lsp-mode :recipe
   (:host github :repo "LemonBreezes/lsp-mode" :branch "fix-padding-for-lsp-modeline-progress"))
 (package! winum :recipe
-  (:host github :repo "LemonBreezes/winum" :branch "fix-install-modeline-function"))
+  (:host github :repo "LemonBreezes/emacs-winum" :branch "fix-install-modeline-function"))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
