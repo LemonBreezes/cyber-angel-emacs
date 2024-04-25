@@ -167,4 +167,5 @@ It is meant to be used as a `post-gc-hook'."
 
 (defun cae-update-current-buffer-a (&rest _)
   (set-buffer (window-buffer)))
+
 (advice-add #'mu4e-compose-new :after #'cae-update-current-buffer-a)
