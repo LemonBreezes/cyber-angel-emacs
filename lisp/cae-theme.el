@@ -3,7 +3,7 @@
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal t)
-(defvar cae-theme-enable-day-night-theme-switching nil)
+(defvar cae-theme-enable-day-night-theme-switching t)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
