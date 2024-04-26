@@ -83,7 +83,8 @@
 (package! nov :recipe (:host github :repo "emacsmirror/nov"))
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
-(package! wakatime-mode)
+(package! wakatime-mode :recipe (:host github :repo "LemonBreezes/wakatime-mode"
+                                 :branch "fix-stringp-error"))
 (package! consult-mu :recipe
   (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
 (package! 0x0)
