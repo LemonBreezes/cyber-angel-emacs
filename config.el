@@ -232,8 +232,7 @@
     (setq alert-default-style 'libnotify))
 
   (after! winum
-    (setq winum-auto-setup-mode-line t
-          winum-mode-line-position 1))
+    (setq winum-auto-setup-mode-line t))
   (add-hook 'doom-after-init-hook #'winum-mode)
   (remove-hook 'doom-switch-window-hook #'winum-mode)
 
