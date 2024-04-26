@@ -132,19 +132,22 @@
     (setq circadian-themes
           '((:sunrise . modus-operandi-tinted)
             (:sunset  . modus-vivendi-tinted)))
-    ;;(if (and calendar-latitude calendar-longitude)
-    ;;    (if doom-init-time
-    ;;        (circadian-setup)
-    ;;      (let ((hook (if (daemonp)
-    ;;                      'server-after-make-frame-hook
-    ;;                    'after-init-hook)))
-    ;;        (remove-hook hook #'doom-init-theme-h)
-    ;;        (add-hook hook #'circadian-setup -90)))
-    ;;  (setq calendar-latitude 0
-    ;;        calendar-longitude 0)
-    ;;  (message "ERROR: Calendar latitude and longitude are not set.")
-    ;;  (doom-store-put 'circadian-themes (circadian-themes-parse)))
-    )
+    (if (and calendar-latitude calendar-longitude)
+        (if doom-init-time
+            (unless (cl-find-if (lambda (timer)
+                                  (eq (timer--function timer)
+                                      #'circadian-activate-and-schedule))
+                                timer-list)
+              (circadian-setup))
+          (let ((hook (if (daemonp)
+                          'server-after-make-frame-hook
+                        'after-init-hook)))
+            (remove-hook hook #'doom-init-theme-h)
+            (add-hook hook #'circadian-setup -90)))
+      (setq calendar-latitude 0
+            calendar-longitude 0)
+      (message "ERROR: Calendar latitude and longitude are not set.")
+      (doom-store-put 'circadian-themes (circadian-themes-parse))))
 
   ;; Cache the theme times so that we can set the theme on startup without loading
   ;; the circadian package.
