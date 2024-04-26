@@ -35,7 +35,7 @@
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 (package! lsp-mode :recipe
   (:host github :repo "LemonBreezes/lsp-mode" :branch "fix-padding-for-lsp-modeline-progress"))
-;; `wakatime-mode' has a PR that fixes a stringp error.
+;; wakatime-mode has a PR that fixes a stringp error.
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
@@ -73,7 +73,8 @@
 
 ;; cae-theme.el
 (package! modus-themes)
-(package! circadian)
+(package! circadian :recipe (:host github :repo "guidoschmidt/circadian.el"
+                             :branch "develop"))
 (package! standard-themes)
 (package! ef-themes)
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
