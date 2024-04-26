@@ -233,7 +233,7 @@
 
   (after! winum
     (setq winum-auto-setup-mode-line t
-          winum-mode-line-position 3))
+          winum-mode-line-position 1))
 
   (after! shr
     ;; `shr' wraps lines in a visually unappealing way.
