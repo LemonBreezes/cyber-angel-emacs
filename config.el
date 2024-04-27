@@ -1334,6 +1334,7 @@
     (use-package! consult-mu
       :when (and (modulep! :email mu4e)
                  (modulep! :completion vertico))
+      :commands consult-mu
       :defer t :custom
       (consult-mu-maxnum 200)
       (consult-mu-preview-key 'any)
@@ -1343,8 +1344,7 @@
       ;; define a template for headers view in minibuffer. The example below adjusts the width based on the width of the screen.
       (consult-mu-headers-template (lambda () (concat "%f" (number-to-string (floor (* (frame-width) 0.15))) "%s" (number-to-string (floor (* (frame-width) 0.5))) "%d13" "%g" "%x")))
       :init
-      (after! mu4e
-        (map! [remap mu4e-search] #'consult-mu))
+      (map! [remap mu4e-search] #'consult-mu)
       :config
       ;;create a list of saved searches for quick access using `history-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
       (setq consult-mu-saved-searches-dynamics '("#flag:unread"))
