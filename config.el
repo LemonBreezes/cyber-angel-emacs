@@ -1342,6 +1342,9 @@
       (consult-mu-use-wide-reply t)
       ;; define a template for headers view in minibuffer. The example below adjusts the width based on the width of the screen.
       (consult-mu-headers-template (lambda () (concat "%f" (number-to-string (floor (* (frame-width) 0.15))) "%s" (number-to-string (floor (* (frame-width) 0.5))) "%d13" "%g" "%x")))
+      :init
+      (after! mu4e
+        (map! [remap mu4e-search] #'consult-mu))
       :config
       ;;create a list of saved searches for quick access using `history-next-element' with `M-n' in minibuffer. Note the "#" character at the beginning of each query! Change these according to
       (setq consult-mu-saved-searches-dynamics '("#flag:unread"))
@@ -1359,7 +1362,10 @@
       (setq consult-mu-contacts-ignore-case-fold-search t)
       (consult-mu-compose-embark-bind-attach-file-key)
       ;; choose if you want to use dired for attaching files (choice of 'always, 'in-dired, or nil)
-      (setq consult-mu-compose-use-dired-attachment 'in-dired))
+      (setq consult-mu-compose-use-dired-attachment 'in-dired)
+      ;; `consult-mu-dynamic' is way too slow.
+      (setq consult-mu-default-command #'consult-mu-async))
+
     (map! [remap compose-mail] #'+mu4e/compose))
   (after! mu4e-vars
     (setq mu4e-modeline-support t
