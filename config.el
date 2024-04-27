@@ -1334,8 +1334,7 @@
     (use-package! consult-mu
       :when (and (modulep! :email mu4e)
                  (modulep! :completion vertico))
-      :defer t
-      :custom
+      :defer t :custom
       (consult-mu-maxnum 200)
       (consult-mu-preview-key 'any)
       (consult-mu-mark-previewed-as-read nil)
