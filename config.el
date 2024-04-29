@@ -31,7 +31,8 @@
   (load! "lisp/cae-projectile")         ;Allow Projectile to be disabled. This
                                         ;is also our Projectile configuration.
   (when (modulep! :editor evil)
-    (load! "lisp/cae-evil"))
+    (after! evil
+      (load! "lisp/cae-evil")))
   (add-hook! 'exwm-init-hook
     (load! "lisp/cae-exwm"))
 
