@@ -5,6 +5,15 @@
 :CREATED_TIME: [2024-04-21 Sun 22:37]
 :END:
 
+** After overclocking CPU and RAM
+:PROPERTIES:
+:CREATED_TIME: [2024-04-30 Tue 16:27]
+:END:
+
+performance boost override: 150 MHz
+RAM overclocked to 4600 MHz
+Curve optimizer: -25
+
 ** ("-march=znver4" "-Ofast" "-g0" "-fno-finite-math-only" "-fgraphite-identity" "-floop-nest-optimize" "-fdevirtualize-at-ltrans" "-fipa-pta" "-fno-semantic-interposition" "-flto=auto" "-fuse-linker-plugin")
 :PROPERTIES:
 :CREATED_TIME: [2024-04-21 Sun 21:47]
