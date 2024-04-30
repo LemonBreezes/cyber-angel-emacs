@@ -413,9 +413,9 @@
     (indent-bars-treesit-ignore-blank-lines-types '("module"))
     (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
                                         ; as an example
-                                        list list_comprehension
-                                        dictionary dictionary_comprehension
-                                        parenthesized_expression subscript)))
+                                 list list_comprehension
+                                 dictionary dictionary_comprehension
+                                 parenthesized_expression subscript)))
     :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
   ;; Prettify compilation buffers.
@@ -818,7 +818,7 @@
           avy-all-windows t
           avy-keys (cae-keyboard-remap
                     '(?a ?s ?d ?f ?g
-                         ?h ?j ?k ?l ?\;))
+                      ?h ?j ?k ?l ?\;))
           avy-background nil
           avy-single-candidate-jump t
           avy-dispatch-alist
@@ -923,13 +923,13 @@
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
     (aas-set-snippets 'global
-                      ";--" "—"
-                      ";-." "→"
-                      ";=." "⇒"
-                      ";!=" "≠"
-                      "-." "->"
-                      "=." "=>"
-                      "j9" "("))
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"
+      "j9" "("))
 
   (use-package! smart-semicolon
     :defer t :init
@@ -1058,11 +1058,11 @@
     (isearch-mb--setup)
     (isearch-mb-mode +1)
     (dolist (cmd '(recenter-top-bottom reposition-window
-                                       scroll-right scroll-left isearch-yank-word
-                                       consult-isearch-history))
+                   scroll-right scroll-left isearch-yank-word
+                   consult-isearch-history))
       (add-to-list 'isearch-mb--with-buffer cmd))
     (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
-                                              avy-isearch consult-line))
+                   avy-isearch consult-line))
       (add-to-list 'isearch-mb--after-exit cmd))
     (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
     (when (modulep! :completion vertico)
@@ -1429,9 +1429,9 @@
    auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-                  em-tramp em-smart em-banner em-basic em-cmpl
-                  em-extpipe em-glob em-hist em-ls em-script em-term
-                  em-alias em-elecslash em-rebind em-prompt))
+         em-tramp em-smart em-banner em-basic em-cmpl
+         em-extpipe em-glob em-hist em-ls em-script em-term
+         em-alias em-elecslash em-rebind em-prompt))
    ,@(when (modulep! :term vterm)
        '(vterm))
    ,@(when (modulep! :ui hydra)
@@ -1441,7 +1441,7 @@
    ,@(when (or (modulep! :completion helm)
                (modulep! :cae helm))
        '(async helm-lib helm-multi-match helm-source helm-core
-               helm-global-bindings helm))
+         helm-global-bindings helm))
    ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
    ;;,@(when (modulep! :cae ai)
@@ -1486,7 +1486,7 @@
        (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
               '(snake speed-type tetris bubbles dunnet autotetris klondike)
               '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-                          zone-nyan selectric)
+                zone-nyan selectric)
               '(lorem-ipsum password-generator uuidgen)
               '(leetcode)
               '(alarm pomm debbugs)))
