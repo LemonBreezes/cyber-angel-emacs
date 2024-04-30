@@ -1444,8 +1444,8 @@
          helm-global-bindings helm))
    ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
-   ;;,@(when (modulep! :cae ai)
-   ;;    '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
+   ,@(when (modulep! :cae ai)
+       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
