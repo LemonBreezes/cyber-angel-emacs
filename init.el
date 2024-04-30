@@ -141,7 +141,7 @@
        (rss +org)
 
        :cae
-                                        ;helm ;Currently broken on Emacs30.
+       ;;helm ;Currently broken on Emacs30.
        debugger
        eshell
        exwm
