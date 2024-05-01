@@ -24,15 +24,19 @@
   ["Quick Access"
    [("v" "VGM"
      (lambda () (interactive)
+       (require 'emms)
        (dired (expand-file-name "VGM" +misc-applications-music-dir))))
     ("y" "Youtube Music"
      (lambda () (interactive)
+       (require 'emms)
        (dired (expand-file-name "Youtube Music" +misc-applications-music-dir))))
     ("p" "Playlists"
      (lambda () (interactive)
+       (require 'emms)
        (dired (expand-file-name "Playlists" +misc-applications-music-dir))))
     ("a" "Anime Music"
      (lambda () (interactive)
+       (require 'emms)
        (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
     ("r" "Artists"
      (lambda () (interactive)
