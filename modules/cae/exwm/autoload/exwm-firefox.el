@@ -75,6 +75,8 @@ with the KeePass Helper - URL in title add-on."
   (let ((title exwm-title))
     (or (string-match "|url:\\[\\(.+\\)\\]" title)
         (string-match "\\(https?://[^\s\t\n]+\\)" title))
+    (unless (match-string-no-properties 1 title)
+      (error "No URL found in EXWM web browser buffer"))
     (match-string-no-properties 1 title)))
 
 (defun +exwm-firefox--current-title ()
