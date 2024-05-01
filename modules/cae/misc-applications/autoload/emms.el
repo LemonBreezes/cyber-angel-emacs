@@ -44,7 +44,6 @@
        (dired (expand-file-name "Artists" emms-source-file-default-directory))))
     ("l" "Longplays"
      (lambda () (interactive)
-       t
        (require 'emms)
        (dired (expand-file-name "Longplays" emms-source-file-default-directory))))
     ("j" "Currently playing"
