@@ -36,6 +36,7 @@
        (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
     ("r" "Artists"
      (lambda () (interactive)
+       (require 'emms)
        (dired (expand-file-name "Artists" emms-source-file-default-directory))))
     ("j" "Currently playing"
      (lambda () (interactive)
