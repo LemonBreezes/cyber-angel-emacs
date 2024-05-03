@@ -731,6 +731,9 @@
           :ng "a" #'+emms-quick-access
           :ng "e" #'other-window
           :n "gr" #'emms-player-mpd-connect))
+  (defadvice! +emms-hl-line-highlight-a (&rest _)
+    :after #'emms-player-mpd-select-song
+    (hl-line-highlight))
   (map! :map emms-playlist-mode-map
         :ng "q" #'+emms-quit
         :ng "e" #'other-window
