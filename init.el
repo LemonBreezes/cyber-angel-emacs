@@ -141,7 +141,7 @@
        (rss +org)
 
        :cae
-       helm
+       ;; helm ; Broken on Emacs 30.
        debugger
        eshell
        exwm
