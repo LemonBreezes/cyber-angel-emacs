@@ -14,9 +14,10 @@
   ;; We will disable `C-c' in insert state.
   (define-key exwm-mode-map (kbd "C-c") nil)
 
-  (when (or (modulep! :completion helm)
+  (if (or (modulep! :completion helm)
             (modulep! :cae helm))
-    (map! :leader :desc "Run external command" "$" #'helm-run-external-command))
+    (map! :leader :desc "Run external command" "$" #'helm-run-external-command)
+    (map! :leader :desc "Run external command" "$" #'app-launcher-run-app))
   (map! :map exwm-mode-map
         :localleader
         (:prefix ("d" . "debug")
