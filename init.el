@@ -111,6 +111,7 @@
        tree-sitter
        docker
        pdf
+       biblio
 
        :lang
        (emacs-lisp +tree-sitter)
