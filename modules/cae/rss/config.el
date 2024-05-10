@@ -1,10 +1,7 @@
 ;;; cae/rss/config.el -*- lexical-binding: t; -*-
 
 (use-package! elfeed
-  :defer t :init
-  (map! :leader
-        :desc "RSS" "ou" #'=rss)
-  :config
+  :defer t :config
   (setq elfeed-search-title-max-width 100)
   (defun cae-elfeed-set-filter (tag period)
     (lambda ()
