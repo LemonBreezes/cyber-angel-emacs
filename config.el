@@ -429,12 +429,7 @@
     (after! calc
       (map! :map calc-mode-map
             "C-o" #'casual-main-menu
-            "C-M-?"#'casual-main-menu)))
-
-  ;;(use-package! fill-page
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-buffer-hook #'global-fill-page-mode))
-  )
+            "C-M-?"#'casual-main-menu))))
 
 
 ;;; Tools
