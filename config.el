@@ -927,13 +927,13 @@
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
     (aas-set-snippets 'global
-                      ";--" "—"
-                      ";-." "→"
-                      ";=." "⇒"
-                      ";!=" "≠"
-                      "-." "->"
-                      "=." "=>"
-                      "j9" "("))
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"
+      "j9" "("))
 
   (use-package! smart-semicolon
     :defer t :init
@@ -1449,7 +1449,7 @@
    ,@(when (modulep! :cae misc-applications) ; music apps
        '(empv mpc somafm emms helm-emms))
    ,@(when (modulep! :cae ai)
-       '(copilot whisper greader org-ai chatgpt-shell gptel))
+       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
