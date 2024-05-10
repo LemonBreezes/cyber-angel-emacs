@@ -658,10 +658,10 @@
         empv-video-dir +misc-applications-videos-dir
         empv-playlist-dir +misc-applications-music-dir)
   (aio-defun cae-empv-set-invidious-instance ()
-             (setq empv-invidious-instance
-                   (concat "https://"
-                           (aio-await (elfeed-tube--get-invidious-url))
-                           "/api/v1")))
+    (setq empv-invidious-instance
+          (concat "https://"
+                  (aio-await (elfeed-tube--get-invidious-url))
+                  "/api/v1")))
   (cae-empv-set-invidious-instance)
   (after! embark
     (empv-embark-initialize-extra-actions)))
