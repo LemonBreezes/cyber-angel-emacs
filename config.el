@@ -126,7 +126,6 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  (load! "lisp/cae-splash")
   (when (cae-display-graphic-p)
     (load! "lisp/cae-theme"))
 
