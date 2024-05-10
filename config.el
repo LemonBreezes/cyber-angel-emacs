@@ -363,77 +363,78 @@
                   (which-key--echo (concat (current-message) " "
                                            (+workspace--tabline)))))))))
 
-  ;; Lower the default popup delay.
-  (after! tooltip
-    (setq tooltip-hide-delay 3))
-
-  (after! flycheck-posframe
-    (setq flycheck-posframe-border-width 1
-          flycheck-posframe-border-use-error-face t))
-
-  (use-package! breadcrumb
-    :unless (modulep! :ui modeline)
-    :defer t :init
-    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
-
-  (use-package! iscroll
-    :defer t :init
-    (add-hook 'org-mode-hook #'iscroll-mode)
-    (add-hook 'markdown-mode-hook #'iscroll-mode)
-    (add-hook 'image-mode-hook #'iscroll-mode)
-    (add-hook 'eww-mode-hook #'iscroll-mode)
-    (add-hook 'w3m-mode-hook #'iscroll-mode))
-
-  (use-package! beacon
-    :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
-    :config
-    (setq beacon-blink-delay 0.15
-          beacon-blink-duration 0.15)
-    (beacon-mode +1)
-    (add-to-list 'beacon-dont-blink-commands 'doom/escape)
-    (add-hook! 'persp-activated-functions
-      (defun cae-beacon-blink-on-workspace-switch (&rest _)
-        (run-at-time 0.01 nil #'beacon-blink-automated)))
-    (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
-    (after! corfu
-      (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
-    (setq beacon-blink-when-window-scrolls nil
-          beacon-overlay-priority -1)
-    (dolist (cmd '(+eshell-tldr-to-man))
-      (add-to-list 'beacon-dont-blink-commands cmd)))
-
-  (use-package! outline-minor-faces
-    :defer t :init
-    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
-
-  (use-package indent-bars
-    :custom
-    (indent-bars-treesit-support t)
-    (indent-bars-no-descend-string t)
-    (indent-bars-treesit-ignore-blank-lines-types '("module"))
-    (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
-                                        ; as an example
-                                 list list_comprehension
-                                 dictionary dictionary_comprehension
-                                 parenthesized_expression subscript)))
-    :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-
-  ;; Prettify compilation buffers.
-  (use-package! fancy-compilation
-    :after compile
-    :config
-    (fancy-compilation-mode +1))
-
-  (use-package! casual
-    :defer t :init
-    (after! calc
-      (map! :map calc-mode-map
-            "C-o" #'casual-main-menu
-            "C-M-?"#'casual-main-menu)))
-
-  (use-package! fill-page
-    :defer t :init
-    (add-hook 'doom-first-buffer-hook #'global-fill-page-mode)))
+  ;;;; Lower the default popup delay.
+  ;;(after! tooltip
+  ;;  (setq tooltip-hide-delay 3))
+  ;;
+  ;;(after! flycheck-posframe
+  ;;  (setq flycheck-posframe-border-width 1
+  ;;        flycheck-posframe-border-use-error-face t))
+  ;;
+  ;;(use-package! breadcrumb
+  ;;  :unless (modulep! :ui modeline)
+  ;;  :defer t :init
+  ;;  (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
+  ;;
+  ;;(use-package! iscroll
+  ;;  :defer t :init
+  ;;  (add-hook 'org-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'markdown-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'image-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'eww-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'w3m-mode-hook #'iscroll-mode))
+  ;;
+  ;;(use-package! beacon
+  ;;  :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
+  ;;  :config
+  ;;  (setq beacon-blink-delay 0.15
+  ;;        beacon-blink-duration 0.15)
+  ;;  (beacon-mode +1)
+  ;;  (add-to-list 'beacon-dont-blink-commands 'doom/escape)
+  ;;  (add-hook! 'persp-activated-functions
+  ;;    (defun cae-beacon-blink-on-workspace-switch (&rest _)
+  ;;      (run-at-time 0.01 nil #'beacon-blink-automated)))
+  ;;  (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
+  ;;  (after! corfu
+  ;;    (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
+  ;;  (setq beacon-blink-when-window-scrolls nil
+  ;;        beacon-overlay-priority -1)
+  ;;  (dolist (cmd '(+eshell-tldr-to-man))
+  ;;    (add-to-list 'beacon-dont-blink-commands cmd)))
+  ;;
+  ;;(use-package! outline-minor-faces
+  ;;  :defer t :init
+  ;;  (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+  ;;
+  ;;(use-package indent-bars
+  ;;  :custom
+  ;;  (indent-bars-treesit-support t)
+  ;;  (indent-bars-no-descend-string t)
+  ;;  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;;  (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
+  ;;                                      ; as an example
+  ;;                               list list_comprehension
+  ;;                               dictionary dictionary_comprehension
+  ;;                               parenthesized_expression subscript)))
+  ;;  :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
+  ;;
+  ;;;; Prettify compilation buffers.
+  ;;(use-package! fancy-compilation
+  ;;  :after compile
+  ;;  :config
+  ;;  (fancy-compilation-mode +1))
+  ;;
+  ;;(use-package! casual
+  ;;  :defer t :init
+  ;;  (after! calc
+  ;;    (map! :map calc-mode-map
+  ;;          "C-o" #'casual-main-menu
+  ;;          "C-M-?"#'casual-main-menu)))
+  ;;
+  ;;(use-package! fill-page
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-buffer-hook #'global-fill-page-mode))
+  )
 
 
 ;;; Tools
