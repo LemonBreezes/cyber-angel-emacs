@@ -269,86 +269,86 @@
 
   ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
   ;; rules here instead of in the relevant `use-package!' blocks.
-  ;;(when (modulep! :ui popup)
-  ;;  (set-popup-rules!
-  ;;    ;; TODO Set the correct slot/vslot for these popups.
-  ;;    '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
-  ;;       :ttl nil :vslot 99)
-  ;;      ("\\`\\*exwm" :ignore t)
-  ;;      ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
-  ;;      ;; :side right :ttl 0)
-  ;;      ;;("\\`\\*Ilist\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
-  ;;      ;; :side right :ttl 0)
-  ;;      ("\\`\\*difftastic git diff\\*\\'" :size +popup-shrink-to-fit
-  ;;       :select t :quit t :side bottom :ttl 0)
-  ;;      ("\\`\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
-  ;;       :quit t :ttl t)
-  ;;      ("\\`\\*org-roam\\*" :size 60 :side left :select nil
-  ;;       :quit nil)
-  ;;      ("\\`\\*info.*" :size cae-popup-resize-help-buffer
-  ;;       :side right :ttl nil :select t :quit t :ttl t :slot 2 :vslot 2)
-  ;;      ("\\`\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
-  ;;       :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
-  ;;      ("\\`\\*tldr\\*" :size cae-popup-resize-help-buffer
-  ;;       :side right :select t :quit t)
-  ;;      ("\\`\\*Diff\\*" :size cae-popup-resize-help-buffer
-  ;;       :side right :select t :quit t :ttl 0)
-  ;;      ("\\`\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
-  ;;       :side right :select t :quit t :ttl 0)
-  ;;      ("\\`\\*\\([Hh]elp\\|Apropos\\)"
-  ;;       :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
-  ;;       :slot 2 :vslot -8)
-  ;;      ("\\` \\*Metahelp.*" :size cae-popup-resize-help-buffer
-  ;;       :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
-  ;;      ("\\`\\*Messages\\*" :vslot -10 :height 10 :side bottom
-  ;;       :select t :quit t :ttl nil :vslot 99)
-  ;;      ("\\`\\*eww.*" :size cae-popup-resize-help-buffer :side right
-  ;;       :select t :ttl nil)
-  ;;      ("\\`\\*w3m\\*\\'" :size cae-popup-resize-help-buffer
-  ;;       :side right :select t :ttl nil)
-  ;;      ("\\`\\*dap-ui-repl\\*\\'" :vslot -5 :size 0.3 :select t
-  ;;       :modeline nil :quit nil :ttl nil)
-  ;;      ("\\`SpeedRect Command Key Help\\'" :size cae-popup-resize-help-buffer
-  ;;       :side right :select nil :quit t :ttl 0)
-  ;;      ("\\`\\*ednc-log\\*\\'" :size cae-popup-resize-help-buffer
-  ;;       :side right :select nil :quit t :ttl nil)
-  ;;      ("*Notification [0-9]+" :side top :size +popup-shrink-to-fit
-  ;;       :select nil)
-  ;;      ("\\`\\*tldr\\*\\'" :size cae-popup-resize-help-buffer
-  ;;       :side right :ttl t :select t :quit t :ttl 0)
-  ;;      ("\\`\\*Shortdoc .*" :size cae-popup-resize-help-buffer
-  ;;       :side right :ttl t :select t :quit t :ttl 0)
-  ;;      ;;("\\`\\*ielm\\*\\'" :size cae-popup-resize-help-buffer
-  ;;      ;; :side right :ttl nil :select t :quit t :ttl 0)
-  ;;      ("\\`\\*devdocs\\*\\'" :width 122
-  ;;       :side right :ttl t :select t :quit t :ttl 0)
-  ;;      ("\\`Trash Can" :size 0.3 :side bottom :select t :quit t
-  ;;       :ttl 0)
-  ;;      ("\\`\\*evil-owl\\*\\'" :side bottom :select nil :ttl 0
-  ;;       :size cae-popup-shrink-to-fit)
-  ;;      ("\\`\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
-  ;;      ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
-  ;;      ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
-  ;;      ("\\`\\*notmuch-hello"  :ignore)
-  ;;      ("\\`\\*gud-" :ttl nil :size 0.35)
-  ;;      ("embrace-help" :side top :size +popup-shrink-to-fit)
-  ;;      ("*helm " :ignore t)
-  ;;      ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
-  ;;       :size cae-popup-shrink-to-fit)
-  ;;      ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
-  ;;       (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
-  ;;  (after! embark
-  ;;    (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
-  ;;      :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
-  ;;    (set-popup-rule! "\\`\\*Embark Export: "
-  ;;      :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
-  ;;  (after! elfeed
-  ;;    (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
-  ;;      :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
-  ;;  (after! bbdb
-  ;;    (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
-  ;;      :select nil :quit t :ttl nil))
-  ;;  (map! :map messages-buffer-mode-map :n "q" #'quit-window))
+  (when (modulep! :ui popup)
+    (set-popup-rules!
+      ;; TODO Set the correct slot/vslot for these popups.
+      '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
+         :ttl nil :vslot 99)
+        ("\\`\\*exwm" :ignore t)
+        ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
+        ;; :side right :ttl 0)
+        ;;("\\`\\*Ilist\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
+        ;; :side right :ttl 0)
+        ("\\`\\*difftastic git diff\\*\\'" :size +popup-shrink-to-fit
+         :select t :quit t :side bottom :ttl 0)
+        ("\\`\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
+         :quit t :ttl t)
+        ("\\`\\*org-roam\\*" :size 60 :side left :select nil
+         :quit nil)
+        ("\\`\\*info.*" :size cae-popup-resize-help-buffer
+         :side right :ttl nil :select t :quit t :ttl t :slot 2 :vslot 2)
+        ("\\`\\*\\(?:Wo\\)?Man " :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0 :vslot -6)
+        ("\\`\\*tldr\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t)
+        ("\\`\\*Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
+        ("\\`\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0)
+        ("\\`\\*\\([Hh]elp\\|Apropos\\)"
+         :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
+         :slot 2 :vslot -8)
+        ("\\` \\*Metahelp.*" :size cae-popup-resize-help-buffer
+         :side right :select t :quit t :ttl 0 :slot 2 :vslot -9)
+        ("\\`\\*Messages\\*" :vslot -10 :height 10 :side bottom
+         :select t :quit t :ttl nil :vslot 99)
+        ("\\`\\*eww.*" :size cae-popup-resize-help-buffer :side right
+         :select t :ttl nil)
+        ("\\`\\*w3m\\*\\'" :size cae-popup-resize-help-buffer
+         :side right :select t :ttl nil)
+        ("\\`\\*dap-ui-repl\\*\\'" :vslot -5 :size 0.3 :select t
+         :modeline nil :quit nil :ttl nil)
+        ("\\`SpeedRect Command Key Help\\'" :size cae-popup-resize-help-buffer
+         :side right :select nil :quit t :ttl 0)
+        ("\\`\\*ednc-log\\*\\'" :size cae-popup-resize-help-buffer
+         :side right :select nil :quit t :ttl nil)
+        ("*Notification [0-9]+" :side top :size +popup-shrink-to-fit
+         :select nil)
+        ("\\`\\*tldr\\*\\'" :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0)
+        ("\\`\\*Shortdoc .*" :size cae-popup-resize-help-buffer
+         :side right :ttl t :select t :quit t :ttl 0)
+        ;;("\\`\\*ielm\\*\\'" :size cae-popup-resize-help-buffer
+        ;; :side right :ttl nil :select t :quit t :ttl 0)
+        ("\\`\\*devdocs\\*\\'" :width 122
+         :side right :ttl t :select t :quit t :ttl 0)
+        ("\\`Trash Can" :size 0.3 :side bottom :select t :quit t
+         :ttl 0)
+        ("\\`\\*evil-owl\\*\\'" :side bottom :select nil :ttl 0
+         :size cae-popup-shrink-to-fit)
+        ("\\`\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
+        ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
+        ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
+        ("\\`\\*notmuch-hello"  :ignore)
+        ("\\`\\*gud-" :ttl nil :size 0.35)
+        ("embrace-help" :side top :size +popup-shrink-to-fit)
+        ("*helm " :ignore t)
+        ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
+         :size cae-popup-shrink-to-fit)
+        ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
+         (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
+    (after! embark
+      (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
+        :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
+      (set-popup-rule! "\\`\\*Embark Export: "
+        :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
+    (after! elfeed
+      (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
+        :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
+    (after! bbdb
+      (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
+        :select nil :quit t :ttl nil))
+    (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
   (when (modulep! :ui workspaces)
     (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
