@@ -66,4 +66,3 @@
   (package! helm-emms))
 
 ;; Read
-(package! hackernews)
