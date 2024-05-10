@@ -796,3 +796,11 @@
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-read-map
       "r" "RSS")))
+
+(use-package! hackernews
+  :defer t :init
+  (map! :map +misc-applications-read-map
+        "h" #'hackernews)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-read-map
+      "h" "Hacker News")))
