@@ -792,7 +792,7 @@
 
 (when (modulep! :app rss)
   (map! :map +misc-applications-read-map
-        "r" #'elfeed)
+        "r" #'=elfeed)
   (after! which-key
     (which-key-add-keymap-based-replacements +misc-applications-read-map
       "r" "RSS")))
