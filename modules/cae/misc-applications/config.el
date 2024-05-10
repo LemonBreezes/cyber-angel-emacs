@@ -26,6 +26,7 @@
     ("quotes" "q")
     ("read" "r")))
 
+
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
                (prefix (cadr app-type))
@@ -786,3 +787,12 @@
         helm-emms-default-sources '(helm-source-emms-files
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
+
+;;; Read
+
+(when (modulep! :app rss)
+  (map! :map +misc-applications-read-map
+        "r" #'elfeed)
+  (after! which-key
+    (which-key-add-keymap-based-replacements +misc-applications-read-map
+      "r" "RSS")))
