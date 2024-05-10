@@ -70,7 +70,6 @@
 (package! xterm-color)
 (package! fancy-compilation)
 (package! casual)
-(package! fill-page)
 
 ;; cae-theme.el
 (package! modus-themes)
