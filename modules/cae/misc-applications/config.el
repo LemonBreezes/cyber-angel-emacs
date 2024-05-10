@@ -23,7 +23,8 @@
     ("random" "t")
     ("insert" "i")
     ("music" "m")
-    ("quotes" "q")))
+    ("quotes" "q")
+    ("read" "r")))
 
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
