@@ -5,4 +5,5 @@
   "Open a new eshell in a new workspace."
   (interactive)
   (+workspace/new "Eshell")
-  (eshell))
+  (eshell)
+  (delete-other-windows))
