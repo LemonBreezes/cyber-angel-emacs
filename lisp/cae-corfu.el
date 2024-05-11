@@ -3,8 +3,8 @@
 (setq +corfu-want-minibuffer-completion 'aggressive)
 (setq +corfu-want-ret-to-confirm 'minibuffer)
 (setq +corfu-want-tab-prefer-expand-snippets t)
-(setq +corfu-want-tab-prefer-navigating-snippets nil)
-(setq +corfu-want-tab-prefer-navigating-org-tables nil)
+(setq +corfu-want-tab-prefer-navigating-snippets t)
+(setq +corfu-want-tab-prefer-navigating-org-tables t)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
