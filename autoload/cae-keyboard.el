@@ -48,8 +48,8 @@
    [?U ?L ?I]
    [?B ?G]
    [?H ?M]])
-(defvar cae-keyboard-orbits cae-keyboard-engram-orbits)
-(defvar cae-keyboard-orbits-for-lispy cae-keyboard-engram-orbits-for-lispy)
+(defvar cae-keyboard-orbits cae-keyboard-colemak-mod-dh-orbits)
+(defvar cae-keyboard-orbits-for-lispy cae-keyboard-colemak-mod-dh-orbits-for-lispy)
 
 ;;;###autoload
 (defun cae-keyboard-insert-current-prefix (arg)
