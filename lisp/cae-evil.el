@@ -125,7 +125,7 @@
       :m "]" #'cae-forward-page)
 
 (after! evil-snipe
-  (setq evil-snipe-scope 'line))
+  (setq evil-snipe-scope 'whole-visible))
 (setq! evil-ex-substitute-global t
        evil-move-cursor-back nil
        evil-vsplit-window-right t
