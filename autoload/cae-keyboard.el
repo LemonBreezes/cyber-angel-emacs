@@ -28,6 +28,8 @@
    [?a ?c ?j ?h ?. ?f]
    [?A ?C ?J ?H ?> ?F]
    [?x]])
+(defvar cae-keyboard-colemak-mod-dh-orbits
+  [])
 (defvar cae-keyboard-orbits cae-keyboard-engram-orbits)
 (defvar cae-keyboard-orbits-for-lispy cae-keyboard-engram-orbits-for-lispy)
 
