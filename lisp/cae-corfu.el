@@ -112,7 +112,3 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; Prefer Bash over Fish for completions because `emerge' completion is a lot
 ;; slower in Fish.
 (setq fish-completion-prefer-bash-completion t)
-
-;; Delete this after my PR is merged.
-(after! evil-collection-corfu
-  (add-to-list 'evil-collection-corfu-supported-states nil))
