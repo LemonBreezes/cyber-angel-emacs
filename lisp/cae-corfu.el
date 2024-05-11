@@ -75,7 +75,8 @@ This variable needs to be set at the top-level before any `after!' blocks.")
                        (corfu-quit)
                        nil))))
     ;; I do not need the module's command for inserting the wildcard.
-    (map! :map corfu-map [remap completion-at-point] nil)))
+    ;;(map! :map corfu-map [remap completion-at-point] nil)
+    ))
 
 ;; Autocomplete words from the dictionary. Useful for typing country names!
 (add-hook! (prog-mode conf-mode)
