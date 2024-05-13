@@ -87,5 +87,7 @@ alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
 
+alias update-flx pushd . && cd ~/src/flx && git stash && git pull && git stash pop && cd ~/src/lookup && git stash && git pull && git stash pop && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup && popd
+
 alias nixos-rebuild sudo nixos-rebuild $*
 alias nix-store sudo nix-store $*
