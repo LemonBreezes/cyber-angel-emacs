@@ -35,8 +35,6 @@
 
   (after! lsp-mode
     (setq lsp-progress-prefix (string-trim-left lsp-progress-prefix)))
-  (setq mode-line-position-column-line-format
-        '("(%l,%c)"))
   (use-package! minions
     :defer t :init
     (add-hook 'doom-after-init-hook #'minions-mode)
