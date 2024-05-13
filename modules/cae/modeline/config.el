@@ -38,6 +38,8 @@
     (add-hook 'doom-after-init-hook #'minions-mode)
     :config
     (setq minions-mode-line-lighter "≡")
+    (after! lsp-mode
+      (setq lsp-progress-prefix (string-trim-left lsp-progress-prefix)))
     (setq minions-demoted-modes
           '(abbrev-mode
             auto-fill-function
