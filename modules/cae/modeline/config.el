@@ -33,8 +33,6 @@
     evil-ex-search-activate-highlight evil-search-incrementally
     :config (global-anzu-mode +1))
 
-  (after! lsp-mode
-    (setq lsp-progress-prefix (string-trim-left lsp-progress-prefix)))
   (use-package! minions
     :defer t :init
     (add-hook 'doom-after-init-hook #'minions-mode)
