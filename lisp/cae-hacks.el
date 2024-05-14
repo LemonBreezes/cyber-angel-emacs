@@ -158,9 +158,3 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (defun cae-catch-buffers-out-of-sync-h ()
 ;;    (unless (eq (current-buffer) (window-buffer))
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
-
-;;(defadvice! cae-annalist-describe-disable-read-only-a (oldfun &rest args)
-;;  :around #'annalist-describe
-;;  (cl-letf (((symbol-function #'read-only-mode) #'ignore)
-;;            ((symbol-function #'read-only-p) (lambda () t)))
-;;    (apply oldfun args)))
