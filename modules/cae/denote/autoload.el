@@ -1,7 +1,7 @@
 ;;; cae/denote/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +denote-open-note-directory ()
+(defun +denote-open-denote-directory ()
   (interactive)
   (dired denote-directory))
 
