@@ -8,5 +8,7 @@
 ;;;###autoload
 (defun +denote-find-note-file ()
   (interactive)
-  (let ((default-directory denote-directory))
-    (call-interactively #'+default/find-file-under-here)))
+  (if (modulep! :completion vertico)
+      (+vertico/consult-fd-or-find denote-directory)
+    (let ((default-directory denote-directory))
+      (call-interactively #'+default/find-file-under-here))))
