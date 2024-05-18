@@ -9,6 +9,6 @@
 (defun +denote-find-note-file ()
   (interactive)
   (if (modulep! :completion vertico)
-      (+vertico/consult-fd-or-find denote-directory ".*\\.org$")
+      (+vertico/consult-fd-or-find denote-directory ".*\\.org$ ")
     (let ((default-directory denote-directory))
       (call-interactively #'+default/find-file-under-here))))
