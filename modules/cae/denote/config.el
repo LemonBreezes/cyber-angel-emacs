@@ -3,7 +3,7 @@
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
   :defer t :init
-  (setq denote-directory (file-truename "~/org/denote/"))
+  (defvar denote-directory (file-truename "~/org/denote/"))
   (setq denote-known-keywords '(emacs journal ideas learning gentoo projects))
 
   (map! :leader
