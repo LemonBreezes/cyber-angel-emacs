@@ -33,8 +33,6 @@
     (:host github :repo "LemonBreezes/evil-org-mode")))
 (package! helpful :recipe
   (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
-(package! lsp-mode :recipe
-  (:host github :repo "LemonBreezes/lsp-mode" :branch "fix-padding-for-lsp-modeline-progress"))
 ;; wakatime-mode has a PR that fixes a stringp error.
 
 (unless (modulep! :config default +smartparens)
@@ -68,7 +66,6 @@
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! backline)
 (package! xterm-color)
-(package! fancy-compilation)
 (package! casual)
 
 ;; cae-theme.el
