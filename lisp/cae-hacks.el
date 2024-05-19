@@ -163,6 +163,6 @@ It is meant to be used as a `post-gc-hook'."
             :around
             (defun cae-hacks-fancy-compilation--compilation-filter-a (oldfun &rest args)
               (unless (eq (current-buffer) (window-buffer))
-                (message "Buffer out of sync: %s" (buffer-name))
+                (message "Buffer out of sync: %s %s" (buffer-name) (window-buffer))
                 (backtrace))
               (apply oldfun args)))
