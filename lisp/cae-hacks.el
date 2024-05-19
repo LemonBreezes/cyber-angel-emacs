@@ -158,3 +158,11 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (defun cae-catch-buffers-out-of-sync-h ()
 ;;    (unless (eq (current-buffer) (window-buffer))
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
+
+(advice-add #'fancy-compilation--compilation-filter
+            :around
+            (defun cae-hacks-fancy-compilation--compilation-filter-a (oldfun &rest args)
+              (unless (eq (current-buffer) (window-buffer))
+                (message "Buffer out of sync: %s" (buffer-name))
+                (backtrace))
+              (apply oldfun args)))
