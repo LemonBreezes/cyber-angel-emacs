@@ -418,12 +418,6 @@
                                  parenthesized_expression subscript)))
     :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
-  ;; Prettify compilation buffers.
-  (use-package! fancy-compilation
-    :after compile
-    :config
-    (fancy-compilation-mode +1))
-
   (use-package! casual
     :defer t :init
     (after! calc
