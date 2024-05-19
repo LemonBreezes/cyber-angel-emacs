@@ -4,6 +4,7 @@
 (defun cae-open-eshell-in-new-workspace ()
   "Open a new eshell in a new workspace."
   (interactive)
-  (+workspace/new "Eshell")
+  (unless (+workspace-exists-p "Eshell")
+    (+workspace/new "Eshell"))
   (eshell)
   (delete-other-windows))
