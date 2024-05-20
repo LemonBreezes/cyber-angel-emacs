@@ -7,15 +7,6 @@
 (add-to-list 'safe-local-variable-directories doom-emacs-dir)
 (add-to-list 'safe-local-variable-directories (getenv "HOME"))
 
-(let ((noninteractive-shell (or (executable-find "dash")
-                                (executable-find "sh")))
-      (interactive-shell (or (executable-find "zsh")
-                             (executable-find "bash"))))
-  (setq shell-file-name noninteractive-shell)
-  (setenv "SHELL" noninteractive-shell)
-  (after! vterm
-    (setq vterm-shell interactive-shell)))
-
 (when (and (>= (num-processors) 32)
            (> (car (memory-info))
               (* 180 1024 1024)))
