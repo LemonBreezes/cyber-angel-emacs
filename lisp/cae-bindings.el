@@ -354,7 +354,6 @@
   (setq which-key-replacement-alist
         (cl-remove-if (lambda (x)
                         (and (stringp (cdr-safe (cdr x)))
-                             (message (cdr-safe (cdr x)))
                              (string-match-p "Switch to final workspace" (cddr x))
                              (string-match-p "0\\\\'" (caar x))))
                       which-key-replacement-alist)))
