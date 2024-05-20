@@ -75,6 +75,7 @@
 (package! standard-themes)
 (package! ef-themes)
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
+(package! girly-notebook-theme :recipe (:host github :repo "melissaboiko/girly-notebook-theme"))
 (package! theme-magic)
 (package! ewal)
 
