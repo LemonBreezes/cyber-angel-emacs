@@ -353,9 +353,10 @@
 (after! which-key
   (setq which-key-replacement-alist
         (cl-remove-if (lambda (x)
-                        (and (stringp (cdr-safe (cdr x)))
-                             (string-match-p "Switch to final workspace" (cddr x))
-                             (string-match-p "0\\\\'" (caar x))))
+                        (let ((cdr-x (cdr-safe (cdr x))))
+                          (and (stringp cdr-x)
+                               (string-equal cdr-x "Switch to final workspace")
+                               (string-suffix-p "0" (caar x)))))
                       which-key-replacement-alist)))
 (map! :map help-map
       (:prefix "d"
