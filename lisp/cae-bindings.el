@@ -350,6 +350,14 @@
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "\\" #'cae-workspace-switch-to-10
        :desc "Switch to final workspace" "z" #'+workspace/switch-to-final))
+;; remove elements from which-key-replacement-alist that say "Switch to final workspace" in the value and end with "0" on the key
+(setq which-key-replacement-alist
+      (cl-remove-if (lambda (x)
+                      (and (stringp (cdr-safe (cdr x)))
+                           (message (cdr-safe (cdr x)))
+                           (string-match-p "Switch to final workspace" (cddr x))
+                           (string-match-p "0\\'" (caar x))))
+                    which-key-replacement-alist))
 (map! :map help-map
       (:prefix "d"
        :desc "Open Eshell alias file" "e" (cmd! () (find-file eshell-aliases-file))
