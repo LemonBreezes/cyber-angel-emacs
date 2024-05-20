@@ -165,11 +165,9 @@
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
 
-  (defun cae-repeat-ignore-when-hydra-active-a ()
+  (defadvice! my/repeat-ignore-when-hydra-active-a ()
+    :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
-
-  (advice-add #'repeat-post-hook :before-until
-              #'cae-repeat-ignore-when-hydra-active-a)
 
   (after! outline
     (map! :map outline-navigation-repeat-map
