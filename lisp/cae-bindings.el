@@ -356,6 +356,7 @@
                         (let ((cdr-x (cdr-safe (cdr x))))
                           (and (stringp cdr-x)
                                (string-equal cdr-x "Switch to final workspace")
+                               (stringp (car-safe (car x)))
                                (string-suffix-p "0" (caar x)))))
                       which-key-replacement-alist)))
 (map! :map help-map
