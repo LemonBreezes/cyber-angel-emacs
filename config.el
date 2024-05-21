@@ -1255,6 +1255,9 @@
         "C-c \"" "plot"
         "C-c C-v" "org-babel-map")))
 
+  (after! org-journal
+    (setq org-journal-file-format "%Y-%m-%d.org"))
+
   (after! markdown-mode
     (setq markdown-fontify-code-blocks-natively t)))
 
