@@ -26,6 +26,7 @@ alias sysctl sudo sysctl                                                      $*
 alias eix-remote sudo eix-remote                                              $*
 alias eix-sync sudo eix-sync                                                  $*
 alias eix-remote sudo eix-remote                                              $*
+alias gtk-lshw sudo gtk-lshw                                                  $*
 
 alias sysu systemctl --user                                                   $*
 alias sysut systemctl --user status                                           $*
