@@ -198,7 +198,7 @@
 
 (use-package magit-file-icons
   :after magit
-  :defer t :init
+  :defer t :config
   (magit-file-icons-mode 1)
   :custom
   ;; These are the default values:
