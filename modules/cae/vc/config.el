@@ -175,7 +175,7 @@
         '("--no-gitconfig" "--true-color=always" "--paging=never"))
   (diff-ansi-mode +1))
 
-(use-package difftastic
+(use-package! difftastic
   :bind (:map magit-blame-read-only-mode-map
          ("D" . difftastic-magit-show)
          ("S" . difftastic-magit-show))
