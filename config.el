@@ -366,7 +366,7 @@
     (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
       "Open the journal in a new workspace."
       :before #'org-journal-new-entry
-      ()))
+      (+workspace-switch "journal" t)))
 
   ;; Lower the default popup delay.
   (after! tooltip
