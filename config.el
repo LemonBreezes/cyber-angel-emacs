@@ -361,7 +361,12 @@
                 (lambda ()
                   (funcall (cdr out))
                   (which-key--echo (concat (current-message) " "
-                                           (+workspace--tabline)))))))))
+                                           (+workspace--tabline))))))))
+
+    (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
+      "Open the journal in a new workspace."
+      :before #'org-journal-new-entry
+      ()))
 
   ;; Lower the default popup delay.
   (after! tooltip
