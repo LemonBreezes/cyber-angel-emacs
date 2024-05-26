@@ -52,9 +52,8 @@
   (unless (modulep! :lang emacs-lisp)
     (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode))
 
-  (after! xclip
-    (cond ((executable-find "termux-setup-storage")
-           (setq xclip-method 'termux-clipboard-get))))
+  (cond ((executable-find "termux-setup-storage")
+         (setq xclip-method 'termux-clipboard-get)))
 
   ;; For some reason Persp is picking up a few buffers that it should not.
   (when (modulep! :ui workspaces)
