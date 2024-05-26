@@ -250,6 +250,9 @@
     (add-to-list 'which-key-replacement-alist
                  '(("" . "harpoon-go-to-[0-9]+") . ignore))))
 
+(after! evil-snipe
+  (cl-pushnew #'calendar-mode evil-snipe-disabled-modes))
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
