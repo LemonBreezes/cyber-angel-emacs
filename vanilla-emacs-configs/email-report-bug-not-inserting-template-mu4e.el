@@ -1,6 +1,7 @@
 ;;; vanilla-emacs-configs/email-report-bug-not-inserting-template-mu4e.el -*- lexical-binding: t; -*-
 
-(add-to-list 'safe-local-variable-directories (getenv "HOME"))
+(when (boundp 'safe-local-variable-values)
+  (add-to-list 'safe-local-variable-values))
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
