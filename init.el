@@ -3,9 +3,10 @@
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
-(add-to-list 'safe-local-variable-directories doom-user-dir)
-(add-to-list 'safe-local-variable-directories doom-emacs-dir)
-(add-to-list 'safe-local-variable-directories (getenv "HOME"))
+(when (boundp 'safe-local-variable-directories)
+  (add-to-list 'safe-local-variable-directories doom-user-dir)
+  (add-to-list 'safe-local-variable-directories doom-emacs-dir)
+  (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
 (when (and (>= (num-processors) 32)
            (> (car (memory-info))
