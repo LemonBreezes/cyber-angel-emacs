@@ -671,7 +671,8 @@
   :defer t :init
   (defvar +misc-applications-music-dir +misc-applications-music-dir
     "The directory where your music library is located.")
-  (add-to-list 'safe-local-variable-directories +misc-applications-music-dir)
+  (when (boundp 'safe-local-variable-directories)
+    (add-to-list 'safe-local-variable-directories +misc-applications-music-dir))
   (defvar +emms-workspace-name "*emms*")
   (defvar +emms--old-wconf nil)
   (setq emms-directory (concat doom-data-dir "emms/")
