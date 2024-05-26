@@ -158,5 +158,3 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (defun cae-catch-buffers-out-of-sync-h ()
 ;;    (unless (eq (current-buffer) (window-buffer))
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
-
-
