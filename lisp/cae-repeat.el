@@ -129,12 +129,16 @@
     ("v" scroll-other-window-down)
     (:exit "V" scroll-other-window))
 
-  (define-repeat-map vertico-scroll-up
-    ("v" vertico-scroll-up)
-    (:exit "V" vertico-scroll-down))
-  (define-repeat-map vertico-scroll-down
-    ("v" vertico-scroll-down)
-    (:exit "V" vertico-scroll-up))
+  (define-repeat-map kill-current-buffer
+    ("d" cae-kill-current-buffer))
+
+  (when (modulep! :completion vertico)
+    (define-repeat-map vertico-scroll-up
+      ("v" vertico-scroll-up)
+      (:exit "V" vertico-scroll-down))
+    (define-repeat-map vertico-scroll-down
+      ("v" vertico-scroll-down)
+      (:exit "V" vertico-scroll-up)))
 
   (when (modulep! :editor evil)
     (define-repeat-map evil-window-next
