@@ -74,7 +74,6 @@
        workspaces
        (window-select +numbers)
        ophints
-       zen
        (treemacs +lsp)
 
        :editor
