@@ -72,7 +72,7 @@ This variable needs to be set at the top-level before any `after!' blocks.")
                      (when (and (> (point) (point-min))
                                 (eq (char-before)
                                     +orderless-wildcard-character)
-                                (= corfu--index 0))
+                                (= corfu--index -1))
                        (corfu-quit)
                        nil))))
     ;; I do not need the module's command for inserting the wildcard.
