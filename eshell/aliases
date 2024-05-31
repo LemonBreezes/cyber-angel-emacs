@@ -85,6 +85,7 @@ alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.
 alias rebuild-emacs emerge emacs && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
 alias update-emacs doom sync -u && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/ && doom sync
 alias update-gentoo pushd . && cd / && sudo emaint -a sync  && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && update-grub && smart-live-rebuild && update-emacs && popd
+alias delete-eln rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/
 alias update-gentoo2 pushd . && cd / && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && smart-live-rebuild && popd
 alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
