@@ -29,6 +29,7 @@ alias eix-remote sudo eix-remote                                              $*
 alias gtk-lshw sudo gtk-lshw                                                  $*
 alias lshw sudo lshw                                                          $*
 alias inxi sudo inxi                                                          $*
+alias webapp-config sudo webapp-config                                        $*
 
 alias sysu systemctl --user                                                   $*
 alias sysut systemctl --user status                                           $*
