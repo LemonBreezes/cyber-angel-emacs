@@ -11,6 +11,7 @@
          :desc "Dired on notes directory" "d" #'+denote-open-denote-directory
          :desc "New note file" "n" #'denote
          :desc "Find note file" "f" #'+denote-find-note-file
+         :desc "Open Denote menu" "m" #'denote-menu-list-notes
          (:prefix-map ("r" . "rename")
           :desc "Using front matter" "f" #'denote-rename-file-using-front-matter)
          (:prefix-map ("l" . "link")
