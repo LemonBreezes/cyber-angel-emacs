@@ -3,3 +3,4 @@
 
 (package! denote)
 (package! denote-explorer :recipe (:host github :repo "pprevos/denote-explore"))
+(package! denote-menu)
