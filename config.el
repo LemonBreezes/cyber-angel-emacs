@@ -451,6 +451,10 @@
     (cond ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
+          ((executable-find "firefox")
+           (setq browse-url-generic-program "firefox"
+                 browse-url-generic-args '("--new-tab")
+                 cae-generic-browser-name "Firefox"))
           ((when-let ((chrome (or (executable-find "chromium-bin-browser")
                                   (executable-find "google-chrome-unstable")
                                   (executable-find "google-chrome-stable"))))
@@ -458,10 +462,6 @@
                    browse-url-generic-args (when (eq (user-uid) 0)
                                              '("--no-sandbox"))
                    cae-generic-browser-name "Chrome")))
-          ((executable-find "firefox")
-           (setq browse-url-generic-program "firefox"
-                 browse-url-generic-args '("--new-tab")
-                 cae-generic-browser-name "Firefox"))
           ((executable-find "firefox-bin")
            (setq browse-url-generic-program "firefox-bin"
                  browse-url-generic-args '("--new-tab")
