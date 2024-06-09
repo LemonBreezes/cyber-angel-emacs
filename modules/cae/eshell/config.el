@@ -131,6 +131,11 @@
         :ig "C-d" #'cae-eshell-quit-or-delete-char
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
+(use-package eshell-atuin
+  :defer t :after eshell
+  :config
+  (eshell-atuin-mode))
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
