@@ -581,7 +581,8 @@
   (after! compile
     ;; The `first-error' value stops scrolling at the first warning too, which I
     ;; don't like.
-    (setq compilation-scroll-output t))
+    (setq compilation-scroll-output t)
+    (add-to-list 'compilation-environment "LC_ALL=C"))
 
   (after! tramp
     (setq tramp-use-scp-direct-remote-copying t
