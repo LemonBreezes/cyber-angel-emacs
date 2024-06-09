@@ -22,3 +22,6 @@
 
 (use-package! denote-explore
   :defer t)
+
+(use-package! denote-menu
+  :defer t)
