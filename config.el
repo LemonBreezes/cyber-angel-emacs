@@ -582,7 +582,8 @@
     ;; The `first-error' value stops scrolling at the first warning too, which I
     ;; don't like.
     (setq compilation-scroll-output t)
-    ;;(add-to-list 'compilation-environment "LC_ALL=C")
+    ;; Testing to see if this fixes some issues with compilation buffer escape
+    ;; sequences not being colorized.
     (remove-hook 'compilation-filter-hook #'comint-truncate-buffer))
 
   (after! tramp
