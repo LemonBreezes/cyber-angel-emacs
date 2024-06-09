@@ -583,8 +583,7 @@
     ;; don't like.
     (setq compilation-scroll-output t)
     ;;(add-to-list 'compilation-environment "LC_ALL=C")
-    (remove-hook 'compilation-filter-hook #'comint-truncate-buffer)
-    )
+    (remove-hook 'compilation-filter-hook #'comint-truncate-buffer))
 
   (after! tramp
     (setq tramp-use-scp-direct-remote-copying t
