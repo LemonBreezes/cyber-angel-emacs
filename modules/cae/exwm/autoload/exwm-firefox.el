@@ -94,8 +94,11 @@ configured to show the full URL."
 ;;;###autoload
 (defun +exwm-firefox-bookmark-handler (bm)
   "Handler for EXWM Firefox bookmarks."
-  (funcall browse-url-browser-function
-           (alist-get 'filename bm)))
+  (require 'ffap)
+  (let ((url (bookmark-prop-get bookmark 'filename)))
+    (if (ffap-url-p url)
+        (browse-url-generic url)
+      (message "Bookmark does not have a valid FILENAME property."))))
 
 ;;;###autoload
 (defun +exwm-firefox-bookmark--make ()
