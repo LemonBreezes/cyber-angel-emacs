@@ -582,9 +582,11 @@
     ;; The `first-error' value stops scrolling at the first warning too, which I
     ;; don't like.
     (setq compilation-scroll-output t)
-    (add-to-list 'compilation-environment "LC_ALL=C")
-    (remove-hook 'compilation-filter-hook #'comint-truncate-buffer)
-    (add-hook 'compilation-filter-hook #'comint-truncate-buffer 'append))
+    ;;(add-to-list 'compilation-environment "LC_ALL=C")
+    ;; I am testing if this fixes the issue with escaps codes not being colorized.
+    ;;(remove-hook 'compilation-filter-hook #'comint-truncate-buffer)
+    ;;(add-hook 'compilation-filter-hook #'comint-truncate-buffer 'append)
+    )
 
   (after! tramp
     (setq tramp-use-scp-direct-remote-copying t
