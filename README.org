@@ -44,7 +44,10 @@ I've also added a few custom patches to Emacs, which are available in the
    compilation. These flags are specific to my computer but they serve as a good
    example.
 3. ~use-compilation-safety-0.patch~: Allows native-compiled elisp to misbehave and
-   crash Emacs. This allows for greater speed but less safety.
+   crash Emacs. This allows for greater speed but less safety. For example, if
+   an elisp function is declared to take a string and return a string, it could
+   crash emacs if it's passed a nil argument instead if it is compiled with
+   compilation-safety at 0.
 
 Note: If you use any of these patches on your version of Emacs, you must ensure
 bugs are reproducible in an unmodified version of Emacs before reporting them
