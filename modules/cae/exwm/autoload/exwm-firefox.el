@@ -92,7 +92,7 @@ configured to show the full URL."
     (string-trim (match-string-no-properties 1 title))))
 
 ;;;###autoload
-(defun +exwm-firefox-bookmark-handler (bm)
+(defun +exwm-firefox-bookmark-handler (bookmark)
   "Handler for EXWM Firefox bookmarks."
   (require 'ffap)
   (let ((url (bookmark-prop-get bookmark 'filename)))
