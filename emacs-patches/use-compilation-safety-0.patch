@@ -1,0 +1,13 @@
+diff --git a/lisp/emacs-lisp/bytecomp.el b/lisp/emacs-lisp/bytecomp.el
+index 12b45f9f5b8..6b9192e21bb 100644
+--- a/lisp/emacs-lisp/bytecomp.el
++++ b/lisp/emacs-lisp/bytecomp.el
+@@ -137,7 +137,7 @@
+   "Emacs Lisp byte-compiler."
+   :group 'lisp)
+ 
+-(defcustom compilation-safety 1
++(defcustom compilation-safety 0
+   "Safety level for generated compiled code.
+ Possible values are:
+   0 - emitted code can misbehave, even crash Emacs, if declarations of
