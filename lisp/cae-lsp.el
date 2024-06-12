@@ -10,6 +10,7 @@
           lsp-inlay-hint-enable t
           lsp-enable-indentation nil
           lsp-semantic-tokens-enable t
+          lsp-enable-file-watchers nil
           ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
           lsp-enable-on-type-formatting t
