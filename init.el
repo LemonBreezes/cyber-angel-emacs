@@ -123,6 +123,7 @@
        (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
        ;;(idris +lsp +tree-sitter)
+       (lean4 +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
