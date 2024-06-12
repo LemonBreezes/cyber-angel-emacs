@@ -123,7 +123,6 @@
        (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
        ;;(idris +lsp +tree-sitter)
-       (lean4 +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
@@ -139,6 +138,7 @@
        (rss +org)
 
        :cae
+       (lean4 +lsp +tree-sitter)
        ;; helm ; Broken on Emacs 30.
        debugger
        eshell
