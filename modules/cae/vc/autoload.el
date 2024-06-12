@@ -45,6 +45,7 @@ Meant to be used like:
 If REMOTE-NAME is not specified, it defaults to the `remote' set
 for the \"main\" or \"master\" branch."
   (let* ((remote-name (or remote-name
+                          (magit-get "branch" "upstream" "remote")
                           (magit-get "branch" "main" "remote")
                           (magit-get "branch" "master" "remote")))
          (remote-url (magit-get "remote" remote-name "url"))
