@@ -31,8 +31,6 @@
            (modulep! :lang org))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
-(package! helpful :recipe
-  (:host github :repo "LemonBreezes/helpful" :branch "fix-scan-sexps-error"))
 ;; wakatime-mode has a PR that fixes a stringp error.
 
 (unless (modulep! :config default +smartparens)
