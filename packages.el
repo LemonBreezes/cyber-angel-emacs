@@ -31,7 +31,6 @@
            (modulep! :lang org))
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
-;; wakatime-mode has a PR that fixes a stringp error.
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
@@ -80,8 +79,7 @@
 (package! nov :recipe (:host github :repo "emacsmirror/nov"))
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
-(package! wakatime-mode :recipe (:host github :repo "LemonBreezes/wakatime-mode"
-                                 :branch "fix-stringp-error"))
+(package! wakatime-mode :recipe (:host github :repo "wakatime/wakatime-mode"))
 (package! consult-mu :recipe
   (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
 (package! 0x0)
