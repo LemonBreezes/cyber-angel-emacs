@@ -63,7 +63,7 @@
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! backline)
 (package! xterm-color)
-(package! casual-calc)
+(package! casual-calc :recipe (:host github :repo "kickingvegas/casual-calc"))
 
 ;; cae-theme.el
 (package! modus-themes)
