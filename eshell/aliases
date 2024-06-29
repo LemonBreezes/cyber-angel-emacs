@@ -92,7 +92,7 @@ alias update-gentoo2 pushd . && cd / && sudo emerge -uDUv @world --with-bdeps=y 
 alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
-alias update-termux pkg upgrade && cd ~/.config/doom && git pull && cd ~/.config/emacs && git pull && cd ~/org && git pull && doom sync && doom upgrade
+alias update-termux pkg upgrade && cd ~/.config/doom && git pull && cd ~/.config/emacs && git pull && cd ~/org && git pull && doom sync -u
 
 alias update-flx pushd . && cd ~/src/flx && git stash && git pull && git stash pop && cd ~/src/lookup && git stash && git pull && git stash pop && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup/ && popd
 
