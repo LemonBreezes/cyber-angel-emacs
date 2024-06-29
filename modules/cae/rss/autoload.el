@@ -21,7 +21,7 @@
 ;;;###autoload
 (defun +elfeed-regenerate-db ()
   (interactive)
-  (let ((buf (curent-buffer)))
+  (let ((buf (current-buffer)))
     (elfeed-db-unload)
     (when (buffer-live-p buf)
       (set-buffer buf)
