@@ -35,13 +35,12 @@
 (after! calendar
   (setq diary-file (concat cae-multi-secrets-dir "diary")))
 
+(setq gac-automatically-add-new-files-p nil
+      gac-automatically-push-p t)
 (use-package! git-auto-commit-mode
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
-  (setq gac-automatically-add-new-files-p nil
-        gac-automatically-push-p t
-        gac-debounce-interval 1.0)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t)
 
