@@ -17,3 +17,10 @@
     (local-set-key (kbd "q") #'quit-window)
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'quit-window))))
+
+;;;###autoload
+(defun +elfeed-regenerate-db ()
+  (interactive)
+  (elfeed-db-unload)
+  (delete-file elfeed-db-directory)
+  (elfeed-search-update--force))
