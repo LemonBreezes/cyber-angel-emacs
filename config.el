@@ -422,7 +422,7 @@
                                  parenthesized_expression subscript)))
     :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
-  (use-package! casual
+  (use-package! casual-calc
     :defer t :init
     (after! calc
       (map! :map calc-mode-map
