@@ -40,7 +40,8 @@
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
   (setq gac-automatically-add-new-files-p nil
-        gac-automatically-push-p t)
+        gac-automatically-push-p t
+        gac-debounce-interval 1.0)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t)
 
