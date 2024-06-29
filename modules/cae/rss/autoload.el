@@ -23,4 +23,5 @@
   (interactive)
   (elfeed-db-unload)
   (delete-file elfeed-db-directory)
+  (=rss)
   (elfeed-search-update--force))
