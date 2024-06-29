@@ -29,4 +29,4 @@
   (when (file-exists-p elfeed-db-directory)
     (delete-directory elfeed-db-directory t))
   (=rss)
-  (elfeed-search-fetch))
+  (elfeed-update))
