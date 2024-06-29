@@ -11,6 +11,7 @@
 (when (boundp 'safe-local-variable-directories)
   (add-to-list 'safe-local-variable-directories doom-user-dir)
   (add-to-list 'safe-local-variable-directories doom-emacs-dir)
+  (add-to-list 'safe-local-variable-directories "~/org")
   (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
 (when (and (>= (num-processors) 32)
