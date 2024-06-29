@@ -258,7 +258,7 @@
 
   (use-package! communinfo
     :after info :config
-    (setopt Info-url-alist communinfo))
+    (setopt Info-url-alist communinfo-url-alist))
 
   (use-package! authinfo-color-mode
     :defer t :init
