@@ -53,6 +53,5 @@
                                                (concat doom-user-dir "secrets/")))
                      (require 'git-auto-commit-mode nil t))
             (setq-local gac-automatically-add-new-files-p nil)
-            (setq-local gac-automatically-push-p t)
             (git-auto-commit-mode 1))))))
  (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/")))))
