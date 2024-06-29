@@ -21,7 +21,11 @@
 ;;;###autoload
 (defun +elfeed-regenerate-db ()
   (interactive)
-  (elfeed-db-unload)
+  (let ((buf (curent-buffer)))
+    (elfeed-db-unload)
+    (when (buffer-live-p buf)
+      (set-buffer buf)
+      (set-window-buffer (selected-window) buf)))
   (delete-file elfeed-db-directory)
   (=rss)
   (elfeed-search-update--force))
