@@ -26,6 +26,7 @@
     (when (buffer-live-p buf)
       (set-buffer buf)
       (set-window-buffer (selected-window) buf)))
-  (delete-file elfeed-db-directory)
+  (when (file-exists-p elfeed-db-directory)
+    (delete-directory elfeed-db-directory t))
   (=rss)
   (elfeed-search-update--force))
