@@ -1505,8 +1505,9 @@
        '(apheleia)))
  t)
 
-(after! pdf-tools
-  (pdf-tools-install t nil t))
+(unless (executable-find "termux-setup-storage")
+  (after! pdf-tools
+    (pdf-tools-install t nil t)))
 
 (after! copilot
   (unless (or (not copilot-node-executable)
