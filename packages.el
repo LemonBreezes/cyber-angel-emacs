@@ -9,7 +9,7 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert
-                   magit-todos ; I need to fix `helm-magit-todos-source'
+                   magit-todos ; I need to fix `helm-magit-todos-source'.
                    )
 ;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
