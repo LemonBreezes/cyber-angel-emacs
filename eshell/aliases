@@ -10,7 +10,6 @@ alias pk eshell-up-peek $1
 alias layman sudo layman                                                      $*
 alias tailscale sudo tailscale                                                $*
 alias tailscaled sudo tailscaled                                              $*
-alias nvidia-settings sudo nvidia-settings                                    $*
 alias genlop sudo genlop                                                      $*
 alias emaint sudo emaint                                                      $*
 alias groupadd sudo groupadd                                                  $*
