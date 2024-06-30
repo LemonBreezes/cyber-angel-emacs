@@ -140,7 +140,7 @@
 
        :cae
        (lean4 +lsp +tree-sitter)
-       ;; helm ; Broken on Emacs 30.
+       helm ; Broken on Emacs 30.
        debugger
        eshell
        exwm
