@@ -9,7 +9,8 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert
-                   magit-todos)
+                   magit-todos ; I need to fix `helm-magit-todos-source'
+                   )
 ;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
