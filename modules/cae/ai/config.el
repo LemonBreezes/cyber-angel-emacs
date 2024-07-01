@@ -1,8 +1,7 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
 
-(defvar cae-openai-default-model
-  (if (modulep! +openai) "gpt-4o" "DISABLED"))
+(defvar cae-openai-default-model "gpt-4o")
 
 (use-package! whisper
   :defer t :config
