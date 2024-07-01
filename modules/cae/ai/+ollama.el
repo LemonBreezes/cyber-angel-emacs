@@ -2,7 +2,7 @@
 
 (after! chatgpt-shell
   ;; your ollama endpoint
-  (setq chatgpt-shell-api-url-base "http://gentoo:3000"
+  (setq chatgpt-shell-api-url-base "http://100.67.230.109:3000"
         chatgpt-shell-api-url-path "/ollama/api/chat")
 
   ;; models you have pulled for use with ollama
