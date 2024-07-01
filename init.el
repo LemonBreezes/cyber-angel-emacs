@@ -12,6 +12,7 @@
   (add-to-list 'safe-local-variable-directories doom-user-dir)
   (add-to-list 'safe-local-variable-directories doom-emacs-dir)
   (add-to-list 'safe-local-variable-directories "~/org")
+  (add-to-list 'safe-local-variable-directories "/data/data/com.termux/files/home/.config/doom/")
   (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
 (when (and (>= (num-processors) 32)
