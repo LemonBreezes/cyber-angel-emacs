@@ -727,7 +727,8 @@
     (require 'emms-player-mpd)
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
-          emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool))
+          emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
+          emms-player-mpd-server-name +misc-applications-mpd-endpoint)
     (emms-player-mpd-connect))
   (after! emms-browser
     (map! :map emms-browser-mode-map
