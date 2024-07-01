@@ -1,6 +1,8 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
-(defvar cae-openai-default-model "gpt-4o")
+
+(defvar cae-openai-default-model
+  (if (modulep! +openai) "gpt-4o" "DISABLED"))
 
 (use-package! whisper
   :defer t :config
@@ -65,12 +67,13 @@
   :config
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
-  (if (member cae-openai-default-model chatgpt-shell-model-versions)
-      (setq chatgpt-shell-model-version
-            (seq-position chatgpt-shell-model-versions cae-openai-default-model))
-    (setq chatgpt-shell-model-versions
-          (cons cae-openai-default-model chatgpt-shell-model-versions)
-          chatgpt-shell-model-version 0))
+  (when (modulep! +openai)
+    (if (member cae-openai-default-model chatgpt-shell-model-versions)
+        (setq chatgpt-shell-model-version
+              (seq-position chatgpt-shell-model-versions cae-openai-default-model))
+      (setq chatgpt-shell-model-versions
+            (cons cae-openai-default-model chatgpt-shell-model-versions)
+            chatgpt-shell-model-version 0)))
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
