@@ -4,6 +4,7 @@
 
 (defvar +misc-applications-music-dir "~/Music")
 (defvar +misc-applications-videos-dir "~/Videos")
+(defvar +misc-applications-mpd-endpoint "wydrogen")
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
