@@ -10,6 +10,7 @@
         '("zephyr:latest"
           "dolphin-mixtral:latest"
           "llava:latest"
+          "llama3:latest"
           "gemma2:27b"
           "deepseek-coder-v2:latest"))
   (setq chatgpt-shell-model-version 0)
@@ -19,7 +20,8 @@
           (cons "llava:13b" '((max-tokens . 8192)))
           (cons "gemma2:27b" '((max-tokens . 8192)))
           (cons "dolphin-mixtral:latest" '((max-tokens . 8192)))
-          (cons "deepseek-coder-v2:latest" '((max-tokens . 8192)))))
+          (cons "deepseek-coder-v2:latest" '((max-tokens . 8192)))
+          (cons "zephyr:latest" '((max-tokens . 8192)))))
 
   ;; Adapt the above function to our `chatgpt-shell-model-settings'
   (defun chatgpt-shell--approximate-context-length (model messages)
