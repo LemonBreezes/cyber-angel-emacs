@@ -1265,7 +1265,7 @@
 
   (after! org-journal
     (setq org-journal-file-format "%Y-%m-%d.org"))
-  (when (featurep! :editor evil)
+  (when (modulep! :editor evil)
     (add-hook 'org-journal-after-entry-create-hook #'evil-insert-state))
 
   (after! markdown-mode
