@@ -614,7 +614,7 @@
   (add-hook! (mpc-songs-mode mpc-tagbrowser-mode)
              #'+misc-applications-hide-cursor-h)
   :config
-  (setq mpc-host "localhost"
+  (setq mpc-host +misc-applications-mpd-host
         mpc-mpd-music-directory +misc-applications-music-dir)
   (map! :map mpc-mode-map
         :n "gr" #'+mpc-reload
