@@ -25,10 +25,6 @@
            :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
 
 ;; PRs that I've made but haven't been merged yet.
-(when (and (modulep! :editor evil)
-           (modulep! :editor multiple-cursors))
-  (package! evil-mc :recipe
-    (:host github :repo "LemonBreezes/evil-mc" :branch "enable-lexical-binding")))
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
   (package! evil-org :recipe
