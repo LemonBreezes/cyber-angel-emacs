@@ -133,3 +133,6 @@
     (after! midnight
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
                    (buffer-name copilot-balancer-debug-buffer)))))
+
+(when (modulep! +ollama)
+  (load! "+ollama"))
