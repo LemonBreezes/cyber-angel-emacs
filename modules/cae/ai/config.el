@@ -41,7 +41,7 @@
 
 (use-package! gptel
   :defer t :config
-  (setq gptel-model "gpt-4-turbo-preview"))
+  (setq gptel-model cae-openai-default-model))
 
 (use-package! magit-gptcommit
   :after gptel magit
