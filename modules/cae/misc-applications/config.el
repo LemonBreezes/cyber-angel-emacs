@@ -4,7 +4,7 @@
 
 (defvar +misc-applications-music-dir "~/Music")
 (defvar +misc-applications-videos-dir "~/Videos")
-(defvar +misc-applications-mpd-endpoint "wydrogen")
+(defvar +misc-applications-mpd-host "wydrogen")
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
@@ -728,7 +728,7 @@
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
           emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
-          emms-player-mpd-server-name +misc-applications-mpd-endpoint)
+          emms-player-mpd-server-name +misc-applications-mpd-host)
     (emms-player-mpd-connect))
   (after! emms-browser
     (map! :map emms-browser-mode-map
