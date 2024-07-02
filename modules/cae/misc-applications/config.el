@@ -4,7 +4,8 @@
 
 (defvar +misc-applications-music-dir "~/Music")
 (defvar +misc-applications-videos-dir "~/Videos")
-(defvar +misc-applications-mpd-host cae-ip-address)
+(defvar +misc-applications-mpd-host (or (bound-and-true-p cae-ip-address)
+                                        "localhost"))
 
 (defvar +misc-applications-lisp-files nil)
 (defvar +misc-applications-map (make-sparse-keymap))
