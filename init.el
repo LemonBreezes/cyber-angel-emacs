@@ -30,6 +30,7 @@
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
+(load! "lisp/cae-multi")              ;Run parallel Emacs instances.
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
