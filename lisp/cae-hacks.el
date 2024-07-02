@@ -160,7 +160,7 @@ It is meant to be used as a `post-gc-hook'."
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
 
 ;; For some reason `https://git.savannah.gnu.org' is down. This is a workaround.
-(defadvice! straight-use-recipes-ingnore-nongnu-elpa-a (fn recipe)
-  :around #'straight-use-recipes
-  (unless (eq 'nongnu-elpa (car recipe))
-    (funcall fn recipe)))
+;;(defadvice! straight-use-recipes-ingnore-nongnu-elpa-a (fn recipe)
+;;  :around #'straight-use-recipes
+;;  (unless (eq 'nongnu-elpa (car recipe))
+;;    (funcall fn recipe)))
