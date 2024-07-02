@@ -30,7 +30,12 @@
 (load! "lisp/cae-debug")
 (load! "lisp/cae-lib")
 (load! "lisp/cae-hacks")
-(load! "lisp/cae-multi")              ;Run parallel Emacs instances.
+
+;; Load secrets
+(defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
+(make-directory cae-multi-secrets-dir t)
+(when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
+  (load! (concat cae-multi-secrets-dir "secrets.el")))
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
