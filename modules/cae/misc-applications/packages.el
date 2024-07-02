@@ -59,7 +59,6 @@
 (package! empv)
 (package! elfeed-tube) ; For conveniently getting an Invidious instance URL.
 (package! emms)
-(package! emms-mode-line-cycle)
 (package! lyrics-fetcher)
 (when (or (modulep! :cae helm)
           (modulep! :completion helm))
