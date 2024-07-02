@@ -14,15 +14,6 @@
 ;; Hopefully Doom will switch to Doom Elpa soon and I can remove this.
 (package! code-review :recipe
   (:host github :repo "phelrine/code-review" :branch "fix/closql-update"))
-;; I use the latest version of Org.
-(package! org
-  :recipe (:host nil
-           :repo "https://git.savannah.gnu.org/git/emacs/org-mode.git"
-           :local-repo "org"
-           :depth full
-           :pre-build (straight-recipes-org-elpa--build)
-           :build (:not autoloads)
-           :files (:defaults "lisp/*.el" ("etc/styles/" "etc/styles/*"))))
 
 ;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
