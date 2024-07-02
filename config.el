@@ -25,6 +25,7 @@
 
   (load! "lisp/cae-tty")
   (load! "lisp/cae-bindings")
+  (load! "lisp/cae-multi")              ;Run parallel Emacs instances.
   (load! "lisp/cae-smartparens")        ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
   (load! "lisp/cae-projectile")         ;Allow Projectile to be disabled. This
