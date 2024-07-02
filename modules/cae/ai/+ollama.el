@@ -4,7 +4,7 @@
   ;; your ollama endpoint
   (setq chatgpt-shell-api-url-base (format "http://%s:3000"
                                            (or (bound-and-true-p cae-ip-address)
-                                                                "localhost"))
+                                               "localhost"))
         chatgpt-shell-api-url-path "/ollama/api/chat")
 
   ;; models you have pulled for use with ollama
