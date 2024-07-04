@@ -8,9 +8,7 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   mu4e-alert
-                   magit-todos ; I need to fix `helm-magit-todos-source'.
-                   )
+                   mu4e-alert)
 
 ;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
