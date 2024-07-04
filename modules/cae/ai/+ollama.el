@@ -9,8 +9,8 @@
 
   ;; models you have pulled for use with ollama
   (setq chatgpt-shell-model-versions
-        '("dolphin-mixtral:latest"
-          "zephyr:latest"
+        '("zephyr:latest"
+          "dolphin-mixtral:latest"
           "llava:latest"
           "llama3:latest"
           "gemma2:27b"
