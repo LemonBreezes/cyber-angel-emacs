@@ -114,6 +114,7 @@ This is the format used on Reddit for code blocks."
   (save-window-excursion
     (let* ((initial-window (selected-window))
            (avy-indent-line-overlay t)  ;my preference
+           (avy-action #'identity)
            (beg (avy--line))
            (end (if beg (avy--line)
                   (cl-return-from cae-avy-embark-act-on-region))))
