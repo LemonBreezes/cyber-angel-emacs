@@ -1,16 +1,14 @@
 ;;; cae/ai/+ollama.el -*- lexical-binding: t; -*-
 
-(require 'llm-ollama)
-(defun llm-ollama--url (provider method)
-  "With ollama PROVIDER, return url for METHOD."
-  (format "%s://%s:%d/ollama/api/%s" (llm-ollama-scheme provider )(llm-ollama-host provider)
-          (llm-ollama-port provider) method))
-
 (after! llm
+  (cl-defmethod llm-provider-chat-url ((provider llm-openai))
+    (llm-openai--url provider "chat")) ; chat/completions
   (setq llm-refactoring-provider
-        (make-llm-ollama :host (or (bound-and-true-p cae-ip-address)
-                                   "127.0.0.1")
-                         :port 3000)
+        (make-llm-openai-compatible :key ollama-api-key
+                                    :url (format "http://%s:3000/ollama/api/"
+                                                 (or (bound-and-true-p cae-ip-address)
+                                                     "127.0.0.1"))
+                                    :chat-model "zephyr:latest")
         magit-gptcommit-llm-provider llm-refactoring-provider))
 
 (after! chatgpt-shell
