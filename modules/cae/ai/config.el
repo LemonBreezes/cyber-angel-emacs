@@ -139,7 +139,8 @@
 
 (after! llm
   (require 'llm-openai)
-  (setq llm-refactoring-provider (make-llm-openai :key openai-api-key)))
+  (setq llm-refactoring-provider (make-llm-openai :key openai-api-key)
+        llm-warn-on-nonfree nil))
 
 (when (modulep! +ollama)
   (load! "+ollama"))
