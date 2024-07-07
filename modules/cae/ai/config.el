@@ -140,7 +140,8 @@
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
-  (setq llm-refactoring-provider (make-llm-openai :key openai-api-key)
+  (setq llm-refactoring-provider (make-llm-openai :key openai-api-key
+                                                  :chat-model cae-openai-default-model)
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 
