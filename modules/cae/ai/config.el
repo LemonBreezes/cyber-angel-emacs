@@ -60,8 +60,7 @@
   :defer t :init
   (map! :leader
         :prefix "o"
-        :desc "Toggle DALL-E popup" "i" #'cae-ai-toggle-dall-e-shell
-        :desc "Open DALL-E here" "I" #'dall-e-shell)
+        :desc "Open DALL-E here" "C-c" #'dall-e-shell)
   :config
   (setq dall-e-shell-display-function #'switch-to-buffer
         dall-e-shell-openai-key openai-api-key))
