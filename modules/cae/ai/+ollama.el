@@ -1,10 +1,17 @@
 ;;; cae/ai/+ollama.el -*- lexical-binding: t; -*-
 
+(after! llm
+  (setq llm-refactoring-provider
+        (make-llm-openai-compatible :key ollama-api-key
+                                    :url (format "http://%s:3000/ollama/api/chat"
+                                                 (or (bound-and-true-p cae-ip-address)
+                                                     "127.0.0.1")))))
+
 (after! chatgpt-shell
   ;; your ollama endpoint
   (setq chatgpt-shell-api-url-base (format "http://%s:3000"
                                            (or (bound-and-true-p cae-ip-address)
-                                               "localhost"))
+                                               "127.0.0.1"))
         chatgpt-shell-api-url-path "/ollama/api/chat")
 
   ;; models you have pulled for use with ollama
