@@ -5,7 +5,7 @@
         (make-llm-ollama :host (or (bound-and-true-p cae-ip-address)
                                    "127.0.0.1")
                          :port 3000
-                         :chat-model "zeus:latest")
+                         :chat-model "zephyr:latest")
         magit-gptcommit-llm-provider llm-refactoring-provider))
 
 (after! chatgpt-shell
