@@ -473,10 +473,10 @@ image-mode buffers."
               ((derived-mode-p 'org-mode)
                (cae-org-get-image-or-latex-filename-at-point))
               ((derived-mode-p 'image-mode) (buffer-file-name))
-              (t ((get-text-property (point) 'display)
-                  (let ((display (get-text-property (point) 'display)))
-                    (when (eq 'image (car display))
-                      (file-relative-name (plist-get (cdr display) :file))))))))))
+              (t (get-text-property (point) 'display)
+                 (let ((display (get-text-property (point) 'display)))
+                   (when (eq 'image (car display))
+                     (file-relative-name (plist-get (cdr display) :file)))))))))
     (when image-file
       (cond
        ((eq system-type 'windows-nt)
