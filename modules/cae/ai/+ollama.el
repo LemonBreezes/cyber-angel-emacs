@@ -3,9 +3,10 @@
 (after! llm
   (setq llm-refactoring-provider
         (make-llm-openai-compatible :key ollama-api-key
-                                    :url (format "http://%s:3000/ollama/api/"
+                                    :url (format "http://%s:3000/ollama/api/chat"
                                                  (or (bound-and-true-p cae-ip-address)
-                                                     "127.0.0.1")))
+                                                     "127.0.0.1"))
+                                    :chat-model "zeus:latest")
         magit-gptcommit-llm-provider llm-refactoring-provider))
 
 (after! chatgpt-shell
