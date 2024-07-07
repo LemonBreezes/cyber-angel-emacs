@@ -142,5 +142,7 @@
   (setq llm-refactoring-provider (make-llm-openai :key openai-api-key)
         llm-warn-on-nonfree nil))
 
+(setq magit-gptcommit-llm-provider llm-refactoring-provider)
+
 (when (modulep! +ollama)
   (load! "+ollama"))
