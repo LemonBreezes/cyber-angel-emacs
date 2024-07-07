@@ -424,6 +424,7 @@ jumping backwards."
 
 Coppied org-mode section from ox-clip.el."
   (require 'ov)
+  (require 'org-element)
   (let ((scale nil) (el (org-element-context)))
     (cond
      ((get-text-property (point) 'display)
@@ -473,9 +474,8 @@ image-mode buffers."
   (let ((image-file (or image-file
 			(cond
 			 ((derived-mode-p 'dired-mode) (dired-copy-filename-as-kill))
-			 ((derived-mode-p 'org-mode)
-			  (cae-org-get-image-or-latex-filename-at-point))
-			 ((derived-mode-p 'image-mode) (buffer-file-name))))))
+                         ((derived-mode-p 'image-mode) (buffer-file-name))
+			 (t (cae-org-get-image-or-latex-filename-at-point))))))
     (when image-file
       (cond
        ((eq system-type 'windows-nt)
