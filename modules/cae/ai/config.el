@@ -65,7 +65,7 @@
   (setq dall-e-shell-display-function #'switch-to-buffer
         dall-e-shell-openai-key openai-api-key
         dall-e-shell-image-quality "hd"
-        dall-e-shell-image-size "1792x1024"
+        dall-e-shell-image-size "1024x1792"
         dall-e-shell-request-timeout 180
         dall-e-shell-model-version "dall-e-3"))
 (use-package! chatgpt-shell
