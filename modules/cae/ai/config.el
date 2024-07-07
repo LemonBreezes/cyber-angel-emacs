@@ -56,15 +56,15 @@
   :bind (:map git-commit-mode-map
          ("C-c C-g" . magit-gptcommit-commit-accept)))
 
-;;(use-package! dall-e-shell
-;;  :defer t :init
-;;  (autoload 'dall-e-shell "dall-e-shell" nil t)
-;;  (map! :leader
-;;        :prefix "o"
-;;        :desc "Toggle DALL-E popup" "i" #'cae-ai-toggle-dall-e-shell
-;;        :desc "Open DALL-E here" "I" #'dall-e-shell)
-;;  :config
-;;  (setq dall-e-shell-display-function #'switch-to-buffer))
+(use-package! dall-e-shell
+  :defer t :init
+  (autoload 'dall-e-shell "dall-e-shell" nil t)
+  (map! :leader
+        :prefix "o"
+        :desc "Toggle DALL-E popup" "i" #'cae-ai-toggle-dall-e-shell
+        :desc "Open DALL-E here" "I" #'dall-e-shell)
+  :config
+  (setq dall-e-shell-display-function #'switch-to-buffer))
 (use-package! chatgpt-shell
   :defer t :init
   (map! :leader
