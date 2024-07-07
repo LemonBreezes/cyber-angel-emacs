@@ -58,7 +58,6 @@
 
 (use-package! dall-e-shell
   :defer t :init
-  (autoload 'dall-e-shell "dall-e-shell" nil t)
   (map! :leader
         :prefix "o"
         :desc "Toggle DALL-E popup" "i" #'cae-ai-toggle-dall-e-shell
