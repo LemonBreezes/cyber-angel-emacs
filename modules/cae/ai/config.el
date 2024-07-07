@@ -137,5 +137,10 @@
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
                    (buffer-name copilot-balancer-debug-buffer)))))
 
+(unless (modulep! +ollama)
+  (after! llm
+    (require 'llm-openai)
+    (setq llm-refactoring-provider (make-llm-openai :key openai-api-key))))
+
 (when (modulep! +ollama)
   (load! "+ollama"))
