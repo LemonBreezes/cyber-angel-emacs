@@ -63,7 +63,8 @@
         :desc "Toggle DALL-E popup" "i" #'cae-ai-toggle-dall-e-shell
         :desc "Open DALL-E here" "I" #'dall-e-shell)
   :config
-  (setq dall-e-shell-display-function #'switch-to-buffer))
+  (setq dall-e-shell-display-function #'switch-to-buffer
+        dall-e-shell-openai-key openai-api-key))
 (use-package! chatgpt-shell
   :defer t :init
   (map! :leader
