@@ -423,6 +423,7 @@ jumping backwards."
   "Get filename of org-mode image link, overlay or latex fragment.
 
 Coppied org-mode section from ox-clip.el."
+  (require 'ov)
   (let ((scale nil) (el (org-element-context)))
     (cond
      ;; condition on a latex fragment
@@ -470,7 +471,7 @@ image-mode buffers."
              (cond
               ((derived-mode-p 'dired-mode) (dired-copy-filename-as-kill))
               ((derived-mode-p 'org-mode)
-               (gm/org-get-image-or-latex-filename-at-point))
+               (cae-org-get-image-or-latex-filename-at-point))
               ((derived-mode-p 'image-mode) (buffer-file-name))
               (t ((get-text-property (point) 'display)
                   (let ((display (get-text-property (point) 'display)))
