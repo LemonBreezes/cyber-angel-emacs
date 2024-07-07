@@ -9,7 +9,7 @@
 (after! llm
   (setq llm-refactoring-provider
         (make-llm-ollama :host (or (bound-and-true-p cae-ip-address)
-                                  "127.0.0.1")
+                                   "127.0.0.1")
                          :port 3000)
         magit-gptcommit-llm-provider llm-refactoring-provider))
 
