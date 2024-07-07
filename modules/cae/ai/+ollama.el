@@ -3,7 +3,7 @@
 (after! llm
   (setq llm-refactoring-provider
         (make-llm-openai-compatible :key ollama-api-key
-                                    :url (format "http://%s:3000/ollama/api/chat"
+                                    :url (format "http://%s:3000/ollama/api/"
                                                  (or (bound-and-true-p cae-ip-address)
                                                      "127.0.0.1")))))
 
