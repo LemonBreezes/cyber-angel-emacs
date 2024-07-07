@@ -1,8 +1,8 @@
 ;;; cae/ai/+ollama.el -*- lexical-binding: t; -*-
 
 (after! llm
-  (cl-defmethod llm-provider-chat-url ((provider llm-openai))
-    (llm-openai--url provider "chat")) ; chat/completions
+  ;;(cl-defmethod llm-provider-chat-url ((provider llm-openai))
+  ;;  (llm-openai--url provider "chat")) ; chat/completions
   (setq llm-refactoring-provider
         (make-llm-openai-compatible :key ollama-api-key
                                     :url (format "http://%s:3000/ollama/api/"
