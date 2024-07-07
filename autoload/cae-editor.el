@@ -423,6 +423,7 @@ jumping backwards."
   "Get filename of org-mode image link, overlay or latex fragment.
 
 Coppied org-mode section from ox-clip.el."
+  (require 'ov)
   (let ((scale nil) (el (org-element-context)))
     (cond
      ;; condition on a latex fragment
