@@ -332,9 +332,7 @@
        (:when (modulep! :completion vertico)
         :desc "Keyboard macro" "k" #'consult-kmacro))
       (:prefix "s"
-       :desc "Copy link" "y" #'link-hint-copy-link
-       (:when (modulep! :completion vertico)
-        :desc "Jump to section" "h" #'consult-outline))
+       :desc "Copy link" "y" #'link-hint-copy-link)
       (:when (modulep! :tools editorconfig)
        (:prefix "c"
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer))
