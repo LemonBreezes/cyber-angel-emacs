@@ -466,11 +466,11 @@ This function recognizes org-mode links, org-mode latex, dired-mode files and
 image-mode buffers."
   (interactive)
   (let ((image-file (or image-file
-			 (cond
-			  ((derived-mode-p 'dired-mode) (dired-copy-filename-as-kill))
-			  ((derived-mode-p 'org-mode)
-			   (gm/org-get-image-or-latex-filename-at-point))
-			  ((derived-mode-p 'image-mode) (buffer-file-name))))))
+			(cond
+			 ((derived-mode-p 'dired-mode) (dired-copy-filename-as-kill))
+			 ((derived-mode-p 'org-mode)
+			  (gm/org-get-image-or-latex-filename-at-point))
+			 ((derived-mode-p 'image-mode) (buffer-file-name))))))
     (when image-file
       (cond
        ((eq system-type 'windows-nt)
