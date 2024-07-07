@@ -5,7 +5,8 @@
         (make-llm-openai-compatible :key ollama-api-key
                                     :url (format "http://%s:3000/ollama/api/"
                                                  (or (bound-and-true-p cae-ip-address)
-                                                     "127.0.0.1")))))
+                                                     "127.0.0.1")))
+        magit-gptcommit-llm-provider llm-refactoring-provider))
 
 (after! chatgpt-shell
   ;; your ollama endpoint
