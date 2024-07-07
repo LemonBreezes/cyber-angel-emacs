@@ -64,7 +64,8 @@
   :config
   (setq dall-e-shell-display-function #'switch-to-buffer
         dall-e-shell-openai-key openai-api-key
-        dall-e-shell-image-quality "hd"))
+        dall-e-shell-image-quality "hd"
+        dall-e-shell-image-size "1792x1024"))
 (use-package! chatgpt-shell
   :defer t :init
   (map! :leader
