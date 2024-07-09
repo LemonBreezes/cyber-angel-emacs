@@ -85,7 +85,7 @@
 
        :editor
        file-templates
-       format
+       (format +lsp)
        snippets
        multiple-cursors
        (evil +everywhere)
