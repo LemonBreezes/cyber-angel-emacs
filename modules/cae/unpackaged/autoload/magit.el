@@ -34,8 +34,7 @@ non-nil `magit-status-goto-file-position'."
   (let ((magit-status-goto-file-position t))
     (call-interactively #'magit-status))
   (let ((ignore-window-parameters t))
-    (delete-other-windows))
-  (recenter))
+    (delete-other-windows)))
 
 ;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status ()
