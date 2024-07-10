@@ -113,9 +113,9 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; I made these to work around void function errors that I've seen once and
 ;; haven't seen since.
-(autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
-(autoload 'tramp-command-completion-p "tramp")
-(autoload 'org-eldoc-get-src-lang "org-eldoc")
+;;(autoload 'tramp-set-connection-local-variables-for-buffer "tramp")
+;;(autoload 'tramp-command-completion-p "tramp")
+;;(autoload 'org-eldoc-get-src-lang "org-eldoc")
 
 ;; For backwards compatibility.
 (defun toggle-read-only (arg)
@@ -126,11 +126,11 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; For some reason, I had to do this after updating Emacs30 to get
 ;; `cape-yasnippet' to work.
-(defalias 'prefix #'string-prefix-p)
+;;(defalias 'prefix #'string-prefix-p)
 
 ;; Finally figured out where the `oddp' function went! Now those errors in Corfu
 ;; are gone.
-(defalias 'oddp #'cl-oddp)
+;;(defalias 'oddp #'cl-oddp)
 
 ;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
