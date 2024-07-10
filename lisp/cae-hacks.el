@@ -94,12 +94,12 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; Fix `save-some-buffers' so that I can continue the command after quitting a
 ;; diff with "q".
-(defadvice! cae-hacks-quit-view-mode-a (oldfun)
-  :around #'+popup/quit-window
-  (if view-mode
-      (View-quit)
-    (funcall oldfun)))
-(advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
+;;(defadvice! cae-hacks-quit-view-mode-a (oldfun)
+;;  :around #'+popup/quit-window
+;;  (if view-mode
+;;      (View-quit)
+;;    (funcall oldfun)))
+;;(advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
 
 ;; Make `eshell-previous-prompt' properly handle the case when there is no
 ;; previous prompt. Normally it goes to the beginning of the buffer. I prefer
