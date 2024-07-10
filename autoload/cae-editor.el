@@ -393,8 +393,7 @@ jumping backwards."
   (let ((line-count (count-lines (point-min) (point-max))))
     (unless (zerop line-count)
       (forward-line (random line-count))
-      (end-of-line)
-      (recenter))))
+      (end-of-line))))
 
 ;;;###autoload
 (defun cae-embark-act ()
