@@ -125,7 +125,7 @@
        (nix +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
-       ;;(latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+       (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
        (json +lsp +tree-sitter)
        (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
