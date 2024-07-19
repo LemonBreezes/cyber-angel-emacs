@@ -16,6 +16,8 @@
   (package! evil-org :recipe
     (:host github :repo "LemonBreezes/evil-org-mode")))
 
+(package! mu4e :built-in t)
+
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
@@ -64,8 +66,9 @@
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
 (package! wakatime-mode :recipe (:host github :repo "wakatime/wakatime-mode"))
-(package! consult-mu :recipe
-  (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*")))
+(when (modulep! :email mu4e)
+  (package! consult-mu :recipe
+    (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
 (package! 0x0)
 
 ;; cae-lsp.el
