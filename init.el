@@ -5,8 +5,6 @@
     (setenv "PATH" (concat (getenv "PATH") ":" termuxpath))
     (setq exec-path (append exec-path (list termuxpath)))))
 
-(setq native-comp-async-env-modifier-form '(setenv "PATH" (concat "/usr/bin" path-separator (getenv "PATH"))))
-
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
