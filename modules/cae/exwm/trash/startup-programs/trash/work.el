@@ -16,7 +16,7 @@
   (startup/kill-teams arg)
   (startup/kill-virtualbox arg)
   (when (and arg (+workspace-exists-p "atlas"))
-    (+workspace-delete "atlas")))
+    (+workspace-kill "atlas")))
 
 (defun startup/select-work ()
   (interactive)

@@ -14,6 +14,6 @@
   (bury-buffer)
   (if (and (modulep! :ui workspaces)
            (+workspace-exists-p +mentor-workspace-name))
-      (progn (+workspace-delete +mentor-workspace-name)
+      (progn (+workspace-kill +mentor-workspace-name)
              (+workspace/other))
     (bury-buffer)))

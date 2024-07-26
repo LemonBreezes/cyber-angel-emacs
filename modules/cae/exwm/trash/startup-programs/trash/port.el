@@ -22,7 +22,7 @@
     (when (string= startup/signal-workspace
                    (+workspace-current-name))
       (+workspace/other))
-    (+workspace-delete startup/port-workspace)))
+    (+workspace-kill startup/port-workspace)))
 
 (defun startup/restart-port (&optional arg)
   (interactive "p")
