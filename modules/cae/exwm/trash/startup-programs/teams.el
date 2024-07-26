@@ -11,7 +11,7 @@
     (when (string= startup/teams-workspace
                    (+workspace-current-name))
       (+workspace/other))
-    (+workspace-delete startup/teams-workspace))
+    (+workspace-kill startup/teams-workspace))
   (shell-command-to-string (concat "killall " (file-name-nondirectory startup/teams-executable)))
   (mapc (lambda (frame)
           (when (frame-live-p frame)

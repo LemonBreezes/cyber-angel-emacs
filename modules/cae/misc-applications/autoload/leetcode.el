@@ -13,7 +13,7 @@
   (leetcode-quit)
   (when (and (modulep! :ui workspaces)
              (+workspace-exists-p +leetcode-workspace-name))
-    (+workspace-delete +leetcode-workspace-name)
+    (+workspace-kill +leetcode-workspace-name)
     (+workspace/other)))
 
 ;;;###autoload

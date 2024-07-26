@@ -151,7 +151,7 @@ buffers of that class."
                             (string= (+exwm-get-workspace-name it) workspace))
                        (persp-buffers (persp-get-by-name workspace)))))
         (unless buffers
-          (+workspace-delete (+workspace-current))
+          (+workspace-kill (+workspace-current))
           (unless (string= (+workspace-current-name) +workspace--last)
             (+workspace/other)))))))
 

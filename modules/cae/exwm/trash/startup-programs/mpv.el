@@ -5,6 +5,6 @@
 (defun startup/mpv-kill-mpv ()
   (interactive)
   (when (+workspace-exists-p startup/mpv-workspace)
-    (+workspace-delete startup/mpv-workspace)))
+    (+workspace-kill startup/mpv-workspace)))
 
 (advice-add #'empv-exit :after #'startup/mpv-kill-mpv)
