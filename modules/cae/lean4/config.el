@@ -7,6 +7,7 @@
     (sp-local-pair "{" "}")
     (sp-local-pair "«" "»")
     (sp-local-pair "⟨" "⟩")
+    (sp-local-pair "⟨ " " ⟩")
     (sp-local-pair "⟪" "⟫"))
   (map! :map lean4-mode-map
 	:localleader
