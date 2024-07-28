@@ -2,6 +2,10 @@
 
 ;;; Preamble
 
+;; This is for keymap-based which-key descriptions.
+(unless (symbol-function 'doom-leader-map)
+  (fset 'doom-leader-map doom-leader-map))
+
 (defvar +misc-applications-music-dir "~/Music")
 (defvar +misc-applications-videos-dir "~/Videos")
 (defvar +misc-applications-mpd-host (or (bound-and-true-p cae-ip-address)
