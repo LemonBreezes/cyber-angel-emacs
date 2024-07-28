@@ -16,7 +16,7 @@
   (defvar cae-init-languages-enabled-p (and p t)))
 
 
-;; No side-effects.
+;; No side-effects. For the :cae modules.
 (load! "lisp/cae-lib")
 
 (when cae-init-preamble-enabled-p
