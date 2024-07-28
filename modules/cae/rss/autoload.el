@@ -4,7 +4,7 @@
 (defun +elfeed-quit ()
   (interactive)
   (elfeed-db-save)
-  (+workspace/delete +rss-workspace-name)
+  (+workspace/kill +rss-workspace-name)
   (when (buffer-live-p elfeed-log-buffer-name)
     (kill-buffer elfeed-log-buffer-name)))
 
