@@ -15,6 +15,10 @@
   (defvar cae-init-term-enabled-p (and p t))
   (defvar cae-init-languages-enabled-p (and p t)))
 
+
+;; No side-effects.
+(load! "lisp/cae-lib")
+
 (when cae-init-preamble-enabled-p
   (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
     (let ((termuxpath "/data/data/com.termux/files/usr/bin"))
@@ -44,7 +48,6 @@
         native-comp-async-report-warnings-errors 'silent)
 
   (load! "lisp/cae-debug")
-  (load! "lisp/cae-lib")
   (load! "lisp/cae-hacks")
 
   ;; Load secrets
