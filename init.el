@@ -136,17 +136,17 @@
        ;; (haskell +lsp +tree-sitter)
 
        :os
-       (:if IS-MAC macos)
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+       ;; (:if IS-MAC macos)
+       ;; (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings +smartparens)
+       ;; (default +bindings +smartparens)
 
        :email
-       mu4e
+       ;; mu4e
 
        :app
-       (rss +org)
+       ;; (rss +org)
 
        :cae
        ;; (lean4 +lsp +tree-sitter)
