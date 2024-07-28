@@ -74,8 +74,8 @@
         doom-localleader-alt-key "<menu> m"))
 
 (doom! :completion
-       ;; (vertico +icons)
-       ;; (corfu +orderless +icons +dabbrev)
+       (vertico +icons)
+       (corfu +orderless +icons +dabbrev)
 
        :ui
        ;; hl-todo
@@ -93,7 +93,7 @@
        ;; (format +lsp)
        ;; snippets
        ;; multiple-cursors
-       ;; (evil +everywhere)
+       (evil +everywhere)
 
        :emacs
        ;; undo
@@ -108,7 +108,7 @@
        :checkers
        ;; (syntax +childframe +icons)
 
-       :tools
+       :toolsp
        ;; (debugger +lsp)
        ;; direnv
        ;; editorconfig
