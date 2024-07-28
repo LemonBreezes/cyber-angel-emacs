@@ -108,7 +108,7 @@
        :checkers
        (syntax +childframe +icons)
 
-       :toolsp
+       :tools
        (debugger +lsp)
        direnv
        editorconfig
