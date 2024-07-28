@@ -2,6 +2,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
+(defvar cae-init-preamble-enabled-p t)
 (defvar cae-init-core-enabled-p t)
 (defvar cae-keyboard-remaps-enabled-p t)
 (let ((p t))
@@ -14,59 +15,60 @@
   (defvar cae-init-term-enabled-p (and p t))
   (defvar cae-init-languages-enabled-p (and p t)))
 
-(when (string-equal system-type "android")  ;; Add Termux binaries to PATH environment
-  (let ((termuxpath "/data/data/com.termux/files/usr/bin"))
-    (setenv "PATH" (concat (getenv "PATH") ":" termuxpath))
-    (setq exec-path (append exec-path (list termuxpath)))))
+(when cae-init-preamble-enabled-p
+  (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
+    (let ((termuxpath "/data/data/com.termux/files/usr/bin"))
+      (setenv "PATH" (concat (getenv "PATH") ":" termuxpath))
+      (setq exec-path (append exec-path (list termuxpath)))))
 
-;; This is so that I don't accidentally start Emacs as a daemon.
-(when (daemonp) (kill-emacs))
+  ;; This is so that I don't accidentally start Emacs as a daemon.
+  (when (daemonp) (kill-emacs))
 
-(when (boundp 'safe-local-variable-directories)
-  (add-to-list 'safe-local-variable-directories doom-user-dir)
-  (add-to-list 'safe-local-variable-directories doom-emacs-dir)
-  (add-to-list 'safe-local-variable-directories "~/org")
-  (add-to-list 'safe-local-variable-directories (getenv "HOME")))
+  (when (boundp 'safe-local-variable-directories)
+    (add-to-list 'safe-local-variable-directories doom-user-dir)
+    (add-to-list 'safe-local-variable-directories doom-emacs-dir)
+    (add-to-list 'safe-local-variable-directories "~/org")
+    (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
-(when (and (>= (num-processors) 32)
-           (> (car (memory-info))
-              (* 180 1024 1024)))
-  (let ((cae-gc-cons-threshold (* 128 1024 1024 1024)))
-    (setq gcmh-high-cons-threshold cae-gc-cons-threshold
-          consult--gc-threshold cae-gc-cons-threshold
-          cae-hacks-gc-cons-threshold cae-gc-cons-threshold
-          +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
-(setq doom-incremental-idle-timer 0.25)
+  (when (and (>= (num-processors) 32)
+             (> (car (memory-info))
+                (* 180 1024 1024)))
+    (let ((cae-gc-cons-threshold (* 128 1024 1024 1024)))
+      (setq gcmh-high-cons-threshold cae-gc-cons-threshold
+            consult--gc-threshold cae-gc-cons-threshold
+            cae-hacks-gc-cons-threshold cae-gc-cons-threshold
+            +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
+  (setq doom-incremental-idle-timer 0.25)
 
-(setq native-comp-async-jobs-number (num-processors)
-      native-comp-async-report-warnings-errors 'silent)
+  (setq native-comp-async-jobs-number (num-processors)
+        native-comp-async-report-warnings-errors 'silent)
 
-(load! "lisp/cae-debug")
-(load! "lisp/cae-lib")
-(load! "lisp/cae-hacks")
+  (load! "lisp/cae-debug")
+  (load! "lisp/cae-lib")
+  (load! "lisp/cae-hacks")
 
-;; Load secrets
-(defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
-(make-directory cae-multi-secrets-dir t)
-(when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
-  (load! (concat cae-multi-secrets-dir "secrets.el")))
+  ;; Load secrets
+  (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
+  (make-directory cae-multi-secrets-dir t)
+  (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
+    (load! (concat cae-multi-secrets-dir "secrets.el")))
 
-;; Set a fallback theme.
-(setq doom-theme 'wheatgrass)
+  ;; Set a fallback theme.
+  (setq doom-theme 'wheatgrass)
 
-(setq evil-undo-system 'undo-fu)
+  (setq evil-undo-system 'undo-fu)
 
-;; Make it easier to debug lazy loading issues.
-(when init-file-debug (setq doom-incremental-first-idle-timer nil))
+  ;; Make it easier to debug lazy loading issues.
+  (when init-file-debug (setq doom-incremental-first-idle-timer nil))
 
-;; I never want to see loading messages.
-(unless init-file-debug
-  (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
-    (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
-      (list file noerror t nosuffix must-suffix))))
+  ;; I never want to see loading messages.
+  (unless init-file-debug
+    (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
+      (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
+        (list file noerror t nosuffix must-suffix))))
 
-(setq doom-leader-alt-key "<menu>"
-      doom-localleader-alt-key "<menu> m")
+  (setq doom-leader-alt-key "<menu>"
+        doom-localleader-alt-key "<menu> m"))
 
 (doom! :completion
        (vertico +icons)
