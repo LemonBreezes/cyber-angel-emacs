@@ -1,9 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 (unpin! t)
-;; Using the latest version of `persp-mode' leads to a the "none" workspace
-;; showing up which is undesirable. It prevents the user from closing the Emacs
-;; session.
-(package! persp-mode :pin "345baaa520ab2d62205f85cc5f29d57d6063c141")
 (disable-packages! evil-escape
                    flyspell
                    ccls                 ; I use clangd.
