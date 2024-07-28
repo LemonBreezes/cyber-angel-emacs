@@ -78,93 +78,93 @@
        (corfu +orderless +icons +dabbrev)
 
        :ui
-       ;; hl-todo
-       ;; (hydra +childframe)
-       ;; (popup +defaults)
-       ;; (vc-gutter +pretty +diff-hl)
-       ;; vi-tilde-fringe
+       hl-todo
+       (hydra +childframe)
+       (popup +defaults)
+       (vc-gutter +pretty +diff-hl)
+       vi-tilde-fringe
        workspaces
-       ;; (window-select +numbers)
-       ;; ophints
-       ;; (treemacs +lsp)
+       (window-select +numbers)
+       ophints
+       (treemacs +lsp)
 
        :editor
-       ;; file-templates
-       ;; (format +lsp)
-       ;; snippets
-       ;; multiple-cursors
+       file-templates
+       (format +lsp)
+       snippets
+       multiple-cursors
        (evil +everywhere)
 
        :emacs
-       ;; undo
-       ;; ibuffer
-       ;; vc
-       ;; (dired +icons)
+       undo
+       ibuffer
+       vc
+       (dired +icons)
 
        :term
-       ;; eshell
-       ;; (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+       eshell
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       ;; (syntax +childframe +icons)
+       (syntax +childframe +icons)
 
        :toolsp
-       ;; (debugger +lsp)
-       ;; direnv
-       ;; editorconfig
-       ;; (eval +overlay)
-       ;; (lookup +dictionary +docsets +offline)
-       ;; (magit +forge)
-       ;; (lsp +peek)
-       ;; tree-sitter
-       ;; docker
-       ;; pdf
-       ;; biblio
+       (debugger +lsp)
+       direnv
+       editorconfig
+       (eval +overlay)
+       (lookup +dictionary +docsets +offline)
+       (magit +forge)
+       (lsp +peek)
+       tree-sitter
+       docker
+       pdf
+       biblio
 
        :lang
-       ;; (emacs-lisp +tree-sitter)
-       ;; (org +roam2 +tree-sitter +dragndrop +journal)
-       ;; (cc +lsp +tree-sitter)
-       ;; (web +lsp +tree-sitter)
-       ;; (sh +lsp +tree-sitter)
-       ;; (nix +lsp +tree-sitter)
-       ;; (lua +lsp +tree-sitter +fennel)
-       ;; (data +lsp +tree-sitter)
-       ;; (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
-       ;; (json +lsp +tree-sitter)
-       ;; (python +lsp +tree-sitter)
-       ;; (haskell +lsp +tree-sitter)
+       (emacs-lisp +tree-sitter)
+       (org +roam2 +tree-sitter +dragndrop +journal)
+       (cc +lsp +tree-sitter)
+       (web +lsp +tree-sitter)
+       (sh +lsp +tree-sitter)
+       (nix +lsp +tree-sitter)
+       (lua +lsp +tree-sitter +fennel)
+       (data +lsp +tree-sitter)
+       (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+       (json +lsp +tree-sitter)
+       (python +lsp +tree-sitter)
+       (haskell +lsp +tree-sitter)
 
        :os
-       ;; (:if IS-MAC macos)
-       ;; (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+       (:if IS-MAC macos)
+       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       ;; (default +bindings +smartparens)
+       (default +bindings +smartparens)
 
        :email
-       ;; mu4e
+       mu4e
 
        :app
-       ;; (rss +org)
+       (rss +org)
 
        :cae
-       ;; (lean4 +lsp +tree-sitter)
-       ;; helm
-       ;; debugger
-       ;; eshell
-       ;; exwm
-       ;; dired
-       ;; lisp
-       ;; misc-applications
-       ;; modeline
-       ;; unpackaged
-       ;; vc
-       ;; org
-       ;; (ai +ollama)
-       ;; gnus
-       ;; rss
-       ;; denote
+       (lean4 +lsp +tree-sitter)
+       helm
+       debugger
+       eshell
+       exwm
+       dired
+       lisp
+       misc-applications
+       modeline
+       unpackaged
+       vc
+       org
+       (ai +ollama)
+       gnus
+       rss
+       denote
        )
 
 ;;Local Variables:
