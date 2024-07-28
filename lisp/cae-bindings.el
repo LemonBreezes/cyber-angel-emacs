@@ -1,7 +1,6 @@
 ;;; lisp/cae-bindings.el -*- lexical-binding: t; -*-
 
-;; This is so that I don't get an error if my `cae-doom-emacs.patch' is not
-;; applied.
+;; This is for keymap-based which-key descriptions.
 (unless (symbol-function 'doom-leader-map)
   (fset 'doom-leader-map doom-leader-map))
 
