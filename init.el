@@ -145,22 +145,23 @@
        (rss +org)
 
        :cae
-       (lean4 +lsp +tree-sitter)
-       helm
-       debugger
-       eshell
-       exwm
-       dired
-       lisp
-       misc-applications
-       modeline
-       unpackaged
-       vc
-       org
-       (ai +ollama)
-       gnus
-       rss
-       denote)
+       ;;(lean4 +lsp +tree-sitter)
+       ;;helm
+       ;;debugger
+       ;;eshell
+       ;;exwm
+       ;;dired
+       ;;lisp
+       ;;misc-applications
+       ;;modeline
+       ;;unpackaged
+       ;;vc
+       ;;org
+       ;;(ai +ollama)
+       ;;gnus
+       ;;rss
+       ;;denote
+       )
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
