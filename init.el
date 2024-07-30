@@ -161,7 +161,7 @@
        unpackaged
        vc
        org
-       ai
+       (ai +ollama)
        gnus
        rss
        denote
