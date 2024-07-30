@@ -31,6 +31,9 @@
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
 
+(when (not (cae-display-graphic-p))
+  (cae-tty-disable-unicode))
+
 ;; This is code from when I tried to run Emacs simultaneously from terminal
 ;; frames and GUI frames but decided to remove it because I did not use Emacs
 ;; that way much.
