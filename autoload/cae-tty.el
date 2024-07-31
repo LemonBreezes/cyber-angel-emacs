@@ -39,7 +39,8 @@
           dirvish-subtree-prefix " |"
           dirvish-subtree-line-prefix " |"))
   (after! corfu
-    (setq nerd-icons-corfu-mapping nil))
+    (setq corfu-margin-formatters
+          (delq 'nerd-icons-corfu-formatter corfu-margin-formatters)))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore))
