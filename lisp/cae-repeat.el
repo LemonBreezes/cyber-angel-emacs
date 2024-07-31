@@ -99,7 +99,8 @@
 
   (define-repeat-map evil-window-width
     ("<" evil-window-decrease-width
-     ">" evil-window-increase-width))
+     ">" evil-window-increase-width
+     "=" balance-windows))
 
   (define-repeat-map cae-buffer-navigation-repeat-map
     ("<left>" cae-dired-previous-buffer
