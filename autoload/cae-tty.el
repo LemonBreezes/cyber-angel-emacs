@@ -38,6 +38,8 @@
           dirvish-path-separators '("~" "/" "/")
           dirvish-subtree-prefix " |"
           dirvish-subtree-line-prefix " |"))
+  (after! corfu
+    (setq nerd-icons-corfu-mapping nil))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
     (advice-add fn :override #'ignore))
