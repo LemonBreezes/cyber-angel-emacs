@@ -92,11 +92,14 @@
   (define-repeat-map cae-org-ai-kill-region-at-point
     ("DEL" cae-org-ai-kill-region-at-point))
 
-  ;; Currently part of `other-window' repeat map
   (define-repeat-map winner
     ("u" winner-undo
      "r" winner-redo
      "U" winner-redo))
+
+  (define-repeat-map evil-window-width
+    ("<" evil-window-decrease-width
+     ">" evil-window-increase-width))
 
   (define-repeat-map cae-buffer-navigation-repeat-map
     ("<left>" cae-dired-previous-buffer
