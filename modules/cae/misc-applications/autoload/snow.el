@@ -22,7 +22,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +snow-workspace-name)
-        (+workspace/delete +snow-workspace-name))
+        (+workspace/kill +snow-workspace-name))
     (when +snow--old-wconf
       (set-window-configuration +snow--old-wconf)))
   (kill-buffer "*snow*"))

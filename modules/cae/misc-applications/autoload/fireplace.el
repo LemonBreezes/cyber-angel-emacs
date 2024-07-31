@@ -19,7 +19,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +fireplace-workspace-name)
-        (+workspace/delete +fireplace-workspace-name))
+        (+workspace/kill +fireplace-workspace-name))
     (when +fireplace--old-wconf
       (set-window-configuration +fireplace--old-wconf)))
   (kill-buffer fireplace-buffer-name))

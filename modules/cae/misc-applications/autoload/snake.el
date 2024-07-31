@@ -26,7 +26,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +snake-workspace-name)
-        (+workspace/delete +snake-workspace-name))
+        (+workspace/kill +snake-workspace-name))
     (when +snake--old-wconf
       (set-window-configuration +snake--old-wconf)))
   (kill-buffer "*Snake*")

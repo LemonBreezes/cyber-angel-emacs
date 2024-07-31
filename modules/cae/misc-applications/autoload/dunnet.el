@@ -18,7 +18,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +dunnet-workspace-name)
-        (+workspace/delete +dunnet-workspace-name))
+        (+workspace/kill +dunnet-workspace-name))
     (when +dunnet--old-wconf
       (set-window-configuration +dunnet--old-wconf)))
   (kill-buffer "*dungeon*"))

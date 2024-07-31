@@ -31,7 +31,7 @@
                  forward-list down-list backward-up-list up-list))
     (add-to-list 'mc/cmds-to-run-for-all cmd))
   (dolist (cmd '(+workspace/new +workspace/load +workspace/save
-                 +workspace/cycle +workspace/other +workspace/delete
+                 +workspace/cycle +workspace/other +workspace/kill
                  +workspace/rename +workspace/display +workspace/new-named
                  +workspace/swap-left +workspace/switch-to
                  +workspace/swap-right +workspace/switch-left

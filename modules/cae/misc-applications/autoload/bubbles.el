@@ -18,7 +18,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +bubbles-workspace-name)
-        (+workspace/delete +bubbles-workspace-name))
+        (+workspace/kill +bubbles-workspace-name))
     (when +bubbles--old-wconf
       (set-window-configuration +bubbles--old-wconf)))
   (kill-buffer "*bubbles*"))

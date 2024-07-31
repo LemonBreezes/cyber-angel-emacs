@@ -18,7 +18,7 @@
   (interactive)
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +speed-type-workspace-name)
-        (+workspace/delete +speed-type-workspace-name))
+        (+workspace/kill +speed-type-workspace-name))
     (when +speed-type--old-wconf
       (set-window-configuration +speed-type--old-wconf)))
   (kill-buffer "speed-type"))
