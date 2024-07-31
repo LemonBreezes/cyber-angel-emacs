@@ -16,7 +16,7 @@
 (defun +flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
       (when (+workspace-exists-p +flames-of-freedom-workspace-name)
-        (+workspace/delete +flames-of-freedom-workspace-name))
+        (+workspace/kill +flames-of-freedom-workspace-name))
     (when +flames-of-freedom--old-wconf
       (set-window-configuration +flames-of-freedom--old-wconf))))
 

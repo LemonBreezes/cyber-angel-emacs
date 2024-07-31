@@ -21,4 +21,4 @@
       (bbdb-save))
     (when (and (modulep! :ui workspaces)
                (+workspace-exists-p +gnus-workspace-name))
-      (+workspace/delete +gnus-workspace-name))))
+      (+workspace/kill +gnus-workspace-name))))
