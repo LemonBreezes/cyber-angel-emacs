@@ -7,7 +7,8 @@
 (setq +corfu-want-tab-prefer-navigating-org-tables t)
 ;; This is until I figure out how it compares to the solution I wrote for Doom
 ;; Emacs.
-(setq global-corfu-minibuffer nil)
+(setq global-corfu-minibuffer #'+corfu-enable-in-minibuffer)
+(remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
