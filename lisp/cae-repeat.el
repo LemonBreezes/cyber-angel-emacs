@@ -102,6 +102,11 @@
      ">" evil-window-increase-width
      "=" balance-windows))
 
+  (define-repeat-map evil-window-height
+    ("-" evil-window-decrease-height
+     "+" evil-window-increase-height
+     "=" balance-windows))
+
   (define-repeat-map cae-buffer-navigation-repeat-map
     ("<left>" cae-dired-previous-buffer
      "<right>" cae-dired-next-buffer))
