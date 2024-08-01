@@ -23,10 +23,11 @@
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
 ;; Make some overlays more visible in the terminal.
-(after! corfu
-  (set-face-attribute 'corfu-default nil :background nil))
-(after! eros
-  (set-face-attribute 'eros-result-overlay-face nil :background nil))
+(unless (cae-display-graphic-p)
+  (after! corfu
+    (set-face-attribute 'corfu-default nil :background nil))
+  (after! eros
+    (set-face-attribute 'eros-result-overlay-face nil :background nil)))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
