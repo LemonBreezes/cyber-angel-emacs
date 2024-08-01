@@ -9,6 +9,7 @@
     ("aboyut" "about" nil :count 0)
     ("ahve" "have" nil :count 0)
     ("appply" "apply" nil :count 1)
+    ("becaues" "because" nil :count 0)
     ("ccacho" "ccache" nil :count 1)
     ("checkoyut" "checkout" nil :count 0)
     ("doomn" "doom" nil :count 1)
