@@ -22,7 +22,7 @@
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode))
 
-;; Make the Corfu popup legible in the terminal.
+;; Make some overlays more visible in the terminal.
 (after! corfu
   (set-face-attribute 'corfu-default nil :background nil))
 (after! eros
