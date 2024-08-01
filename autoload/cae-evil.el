@@ -162,11 +162,6 @@
      (t (call-interactively (key-binding "G"))))
     (call-interactively #'evil-append)))
 
-;; Allow passing the current point to Evil operators.
-(after! evil
-  (setf (alist-get "d" evil-interactive-alist)
-        '((list (point)))))
-
 ;;;###autoload (autoload 'cae-evil-edit-indirect "autoload/cae-evil" nil t)
 (evil-define-operator cae-evil-edit-indirect (beg end type pos)
   "Edit the region indirectly."
