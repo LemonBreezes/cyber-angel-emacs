@@ -42,6 +42,7 @@
 (package! autotetris-mode)
 (package! speed-type)
 (package! klondike)                     ; TODO
+(package! chess)                        ; TODO
 
 ;; Eye candy
 (package! fireplace)
