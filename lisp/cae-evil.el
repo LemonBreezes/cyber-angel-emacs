@@ -11,7 +11,6 @@
   (map! :n "] DEL" #'+evil/insert-newline-below
         :n "[ DEL" #'+evil/insert-newline-above))
 
-
 ;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
 ;; between TAB and C-i there.
 (unless (cae-display-graphic-p)
