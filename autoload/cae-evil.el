@@ -156,9 +156,10 @@
   (interactive)
   (save-restriction
     (narrow-to-page)
-    (pcase major-mode
-      ('eshell-mode (end-of-buffer))
-      (_ (call-interactively (key-binding "G"))))
+    (cond
+      ((derived-mode-p 'eshell-mode 'comint-mode)
+       (end-of-buffer))
+      (t (call-interactively (key-binding "G"))))
     (call-interactively #'evil-append)))
 
 ;; Allow passing the current point to Evil operators.
