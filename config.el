@@ -1426,7 +1426,7 @@
 ;;; Appendix
 
 ;; I have this disabled because incrementally loading everything means that I
-;; will encounter more bugs.
+;; will encounter more bugs because I will loading more packages.
 
 ;;(doom-load-packages-incrementally
 ;; `(,@(when (modulep! :completion corfu)
