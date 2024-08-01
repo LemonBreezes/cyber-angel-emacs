@@ -90,7 +90,7 @@
 
        :editor
        file-templates
-       (fold)
+       fold
        (format +lsp)
        snippets
        multiple-cursors
