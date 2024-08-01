@@ -65,6 +65,7 @@ If REMOTE-NAME is specified, it targets only that remote."
 if REMOTE is non-nil adds a remote to the current repo, otherwise queries the user
 if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of the remote"
   (interactive)
+  (require 'consult-gh)
   (if (consult-gh--get-repo-from-directory)
       (let* ((name (or name (read-string "name for forked repo: " (car (last (split-string (consult-gh--get-repo-from-directory) "\/"))))))
              (forkrepo (concat (consult-gh--get-current-username) "/" name))
