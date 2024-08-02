@@ -124,6 +124,7 @@
 (package! vline)
 (package! try)
 (package! ov)
+(package! lsp-ui)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
