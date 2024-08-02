@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
-(setq +corfu-want-minibuffer-completion t)
+(setq +corfu-want-minibuffer-completion 'aggressive)
 (setq +corfu-want-ret-to-confirm 'minibuffer)
 (setq +corfu-want-tab-prefer-expand-snippets t)
 (setq +corfu-want-tab-prefer-navigating-snippets t)
