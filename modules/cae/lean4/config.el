@@ -4,9 +4,7 @@
   (sp-with-modes 'lean4-mode
     (sp-local-pair "/-" "-/")
     (sp-local-pair "`" "`")
-    (sp-local-pair "{" nil
-                   :post-handlers '(("||\n[i]" "RET") ("| " "SPC"))
-                   :unless '(sp-point-before-word-p sp-point-before-same-p))
+    ;;(sp-local-pair "{" "}")
     (sp-local-pair "«" "»")
     (sp-local-pair "⟨" "⟩")
     (sp-local-pair "⟨ " " ⟩")
