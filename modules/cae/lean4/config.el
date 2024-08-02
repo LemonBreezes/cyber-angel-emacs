@@ -4,7 +4,7 @@
   (sp-with-modes 'lean4-mode
     (sp-local-pair "/-" "-/")
     (sp-local-pair "`" "`")
-    ;;(sp-local-pair "{" "}")
+    (sp-local-pair "{" "}")
     (sp-local-pair "«" "»")
     (sp-local-pair "⟨" "⟩")
     (sp-local-pair "⟨ " " ⟩")
