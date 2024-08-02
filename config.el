@@ -1411,6 +1411,13 @@
           (setq-local lsp-semantic-token-faces
                       (assoc-delete-all "comment" lsp-semantic-token-faces)))))))
 
+;;;; Lean 4
+(setq-hook! 'lean4-mode-hook
+  tab-width 2)
+(add-hook! 'lean4-mode-hook
+  (when (bound-and-true-p evil-cleverparens-mode)
+    (evil-cleverparens-mode -1)))
+
 ;;;; Haskell
 
 (use-package! consult-hoogle
