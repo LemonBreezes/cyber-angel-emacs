@@ -332,9 +332,10 @@
         :desc "Keyboard macro" "k" #'consult-kmacro))
       (:prefix "s"
        :desc "Copy link" "y" #'link-hint-copy-link)
-      (:when (modulep! :tools editorconfig)
-       (:prefix "c"
-        :desc "Format whitespace" "C-f" #'editorconfig-format-buffer))
+      (:prefix "c"
+       (:when (modulep! :tools editorconfig)
+        :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
+       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
       (:prefix "t"
        :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
