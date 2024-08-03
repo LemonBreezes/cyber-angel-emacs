@@ -32,7 +32,9 @@
     (set-face-attribute 'magit-section-highlight nil :background nil)
     (set-face-attribute 'magit-diff-added-highlight nil :background nil)
     (set-face-attribute 'magit-diff-base-highlight nil :background nil)
-    (set-face-attribute 'magit-diff-added nil :background nil)))
+    (set-face-attribute 'magit-diff-added nil :background nil))
+  (after! dired
+    (set-face-attribute 'diredfl-dir-heading nil :background nil)))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
