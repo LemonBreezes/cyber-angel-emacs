@@ -30,7 +30,9 @@
     (set-face-attribute 'eros-result-overlay-face nil :background nil))
   (after! magit
     (set-face-attribute 'magit-section-highlight nil :background nil)
-    (set-face-attribute 'magit-diff-added-highlight nil :background nil)))
+    (set-face-attribute 'magit-diff-added-highlight nil :background nil)
+    (set-face-attribute 'magit-diff-base-highlight nil :background nil)
+    (set-face-attribute 'magit-diff-added nil :background nil)))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
