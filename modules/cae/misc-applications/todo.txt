@@ -1,0 +1,2 @@
+I would really like to add more games to this module. Like Chess, Checkers,
+Minesweeper, etc.
