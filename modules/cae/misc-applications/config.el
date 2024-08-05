@@ -469,10 +469,6 @@
         :g "?" #'describe-mode
         :ng "q" #'bury-buffer))
 
-;; TODO
-(use-package! chess
-  :defer t)
-
 
 ;;; Eyecandy
 
