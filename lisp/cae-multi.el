@@ -30,6 +30,9 @@
 (after! calendar
   (setq diary-file (concat cae-multi-secrets-dir "diary")))
 
+(after! bookmark
+  (setq bookmark-watch-bookmark-file 'silent))
+
 (use-package! git-auto-commit-mode
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
