@@ -109,13 +109,14 @@ unbalanced. Works with Lispy and Smartparens."
   ;; Call `pp-eval-last-sexp' when called with a negative
   ;; prefix argument
   (interactive "P")
-  (cond ((or (eq arg '-)
-             (and (numberp arg)
-                  (< arg 0)))
-         (funcall #'pp-eval-last-sexp (if (numberp arg) nil)))
-        ((bound-and-true-p eros-mode)
-         (funcall #'eros-eval-last-sexp arg))
-        (t (funcall #'eval-last-sexp arg))))
+  (let ((debug-on-error t))
+    (cond ((or (eq arg '-)
+               (and (numberp arg)
+                    (< arg 0)))
+           (funcall #'pp-eval-last-sexp (if (numberp arg) nil)))
+          ((bound-and-true-p eros-mode)
+           (funcall #'eros-eval-last-sexp arg))
+          (t (funcall #'eval-last-sexp arg)))))
 
 ;;;###autoload
 (defun cae-eval-expression (arg)
