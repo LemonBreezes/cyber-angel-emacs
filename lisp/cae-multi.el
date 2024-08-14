@@ -31,7 +31,7 @@
   (setq diary-file (concat cae-multi-secrets-dir "diary")))
 
 (after! bookmark
-  (setq bookmark-watch-bookmark-file 'silent))
+  (setq bookmark-watch-bookmark-file t))
 
 (use-package! git-auto-commit-mode
   :defer t :init
