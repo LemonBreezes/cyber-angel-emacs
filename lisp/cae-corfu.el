@@ -7,6 +7,8 @@
 (setq +corfu-want-tab-prefer-navigating-org-tables t)
 (setq global-corfu-minibuffer nil)
 
+(remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer)
+
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
