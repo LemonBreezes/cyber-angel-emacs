@@ -90,7 +90,8 @@
 
   (after! ghub
     ;; I use the latest Emacs.
-    (setq ghub-use-workaround-for-emacs-bug-54989 nil))
+    (setq ghub-use-workaround-for-emacs-bug-54989
+          (version< emacs-version "29.0")))
 
   ;; I really don't like this advice. Just let me kill the buffer.
   (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
