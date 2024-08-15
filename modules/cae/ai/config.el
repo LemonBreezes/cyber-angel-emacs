@@ -119,9 +119,6 @@
       (bound-and-true-p multiple-cursors-mode)))
   :config
   (setq copilot-install-dir (concat doom-cache-dir "copilot/"))
-  ;;(setq copilot--server-executable
-  ;;      (concat copilot-install-dir "/lib64/node_modules/copilot-node-server"
-  ;;              "/copilot/dist/agent.js"))
   (add-to-list 'copilot-clear-overlay-ignore-commands #'corfu-quit)
   (add-hook! 'doom-escape-hook
     (defun cae-copilot-clear-overlay-h ()
