@@ -89,7 +89,6 @@
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
   (after! ghub
-    ;; I use the latest Emacs.
     (setq ghub-use-workaround-for-emacs-bug-54989
           (version< emacs-version "29.0")))
 
