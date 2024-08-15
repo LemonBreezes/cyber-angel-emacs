@@ -8,6 +8,7 @@
 (setq global-corfu-minibuffer nil)
 
 (remove-hook 'minibuffer-setup-hook #'+corfu-enable-in-minibuffer)
+(setq global-corfu-minibuffer #'+corfu-enable-in-minibuffer)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
