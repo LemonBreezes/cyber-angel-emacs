@@ -103,9 +103,9 @@
     (setq exwm-layout-auto-iconify nil)
 
     ;; A few `ido' fixes.
-    (use-package! exwm-config
-      :config
-      (exwm-config--fix/ido-buffer-window-other-frame))
+    ;; (use-package! exwm-config
+    ;;   :config
+    ;;   (exwm-config--fix/ido-buffer-window-other-frame))
 
     ;; Using `helm-display-buffer-in-own-frame' causes EXWM to emit an error.
     (after! helm
