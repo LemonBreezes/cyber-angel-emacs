@@ -170,12 +170,6 @@
 
 ;;; Fixup leader key and C-c
 
-;; I don't use Deft.
-(when (and (not (modulep! :ui deft))
-           (eq (lookup-key doom-leader-map "nd")
-               'deft))
-  (define-key doom-leader-map "nd" nil))
-
 (when (modulep! :editor snippets)
   (map! (:when (modulep! :completion vertico))
         :map yas-minor-mode-map
