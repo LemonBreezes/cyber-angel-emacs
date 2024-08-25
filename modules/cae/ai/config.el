@@ -105,6 +105,10 @@
   (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 (use-package! copilot
+  :when (if (executable-find "node")
+            t
+          (warn "Not enabling Copilot because NodeJS is not installed.")
+          nil)
   :defer t :init
   (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
