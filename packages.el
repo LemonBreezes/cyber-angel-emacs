@@ -8,7 +8,8 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   mu4e-alert)
+                   mu4e-alert
+                   projectile)
 
 ;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
