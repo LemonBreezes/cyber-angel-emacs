@@ -144,7 +144,7 @@
        (default +bindings +smartparens)
 
        :email
-       mu4e
+       (:if (executable-find "mu") mu4e)
 
        :app
        (rss +org)
