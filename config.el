@@ -881,10 +881,6 @@
     (keyfreq-autosave-mode +1))
 
   ;;(use-package! wakatime-mode
-  ;;  :when (if (executable-find "wakatime")
-  ;;            t
-  ;;          (warn "Wakatime CLI not found. Not enabling wakatime-mode.")
-  ;;          nil)
   ;;  :defer t :init
   ;;  (add-hook 'doom-first-file-hook #'global-wakatime-mode)
   ;;  :config
