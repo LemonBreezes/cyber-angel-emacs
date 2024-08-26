@@ -1,4 +1,4 @@
-;git@gitNew.domain.farelogix.com:farelogix/atlas.git;git@gitNew.domain.farelogix.com:farelogix/atlas.git; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+                                        ;git@gitNew.domain.farelogix.com:farelogix/atlas.git;git@gitNew.domain.farelogix.com:farelogix/atlas.git; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (defvar cae-config-finished-loading nil)
 
