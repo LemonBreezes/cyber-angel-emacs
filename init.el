@@ -134,7 +134,7 @@
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
        (json +lsp +tree-sitter)
        (python +lsp +tree-sitter)
-       ;;(haskell +lsp +tree-sitter)
+       (haskell +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
