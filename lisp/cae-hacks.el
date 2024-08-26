@@ -165,10 +165,3 @@ It is meant to be used as a `post-gc-hook'."
 ;;  :around #'straight-use-recipes
 ;;  (unless (eq 'nongnu-elpa (car recipe))
 ;;    (funcall fn recipe)))
-
-;; Work around recursive load error.
-(advice-add #'projectile-track-known-projects-find-file-hook
-            :around
-            (defun cae-projectile-ignore-temp-buffers-a (oldfun &rest args)
-              (unless (doom-temp-buffer-p (current-buffer))
-                (apply oldfun args))))
