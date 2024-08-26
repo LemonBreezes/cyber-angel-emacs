@@ -352,8 +352,8 @@
         (if (not (string-match-p "Display tab bar\\b" (car out)))
             out
           (cons (car out)
-                (lambda ()
-                  (funcall (cdr out))
+                `(lambda ()
+                  (funcall ,(cdr out))
                   (which-key--echo (concat (current-message) " "
                                            (+workspace--tabline))))))))
 
