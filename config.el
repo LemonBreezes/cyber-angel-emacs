@@ -353,9 +353,9 @@
             out
           (cons (car out)
                 `(lambda ()
-                  (funcall ,(cdr out))
-                  (which-key--echo (concat (current-message) " "
-                                           (+workspace--tabline))))))))
+                   (funcall ,(cdr out))
+                   (which-key--echo (concat (current-message) " "
+                                            (+workspace--tabline))))))))
 
     (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
       "Open the journal in a new workspace."
