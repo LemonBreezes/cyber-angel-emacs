@@ -1,5 +1,15 @@
 ;;; lisp/cae-projectile.el -*- lexical-binding: t; -*-
 
+;; Automatically find projects in the I personally use.
+(setq projectile-project-search-path
+      `((,doom-user-dir . 0)
+        (,doom-emacs-dir . 0)
+        ,@(when (file-exists-p "~/org/") '(("~/org/" . 1)))
+        ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
+        ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
+        ,@(when (file-exists-p "~/src/love2d/") '(("~/src/love2d" . 1)))
+        ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
+
 (if (locate-library "projectile")
     ;;; Projectile configuration
     (after! projectile
@@ -42,15 +52,6 @@
            resume: ")))")
          str arg))
 
-      ;; Automatically find projects in the I personally use.
-      (setq projectile-project-search-path
-            `((,doom-user-dir . 0)
-              (,doom-emacs-dir . 0)
-              ,@(when (file-exists-p "~/org/") '(("~/org/" . 1)))
-              ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
-              ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
-              ,@(when (file-exists-p "~/src/love2d/") '(("~/src/love2d" . 1)))
-              ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
       (add-to-list 'projectile-globally-ignored-directories
                    (expand-file-name ".local/straight/repos/" user-emacs-directory))
       (unless (or (cl-set-difference projectile-known-projects
