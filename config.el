@@ -1,4 +1,4 @@
-;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+;git@gitNew.domain.farelogix.com:farelogix/atlas.git;git@gitNew.domain.farelogix.com:farelogix/atlas.git; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (defvar cae-config-finished-loading nil)
 
@@ -880,15 +880,15 @@
     (keyfreq-mode +1)
     (keyfreq-autosave-mode +1))
 
-  (use-package! wakatime-mode
-    :when (if (executable-find "wakatime")
-              t
-            (warn "Wakatime CLI not found. Not enabling wakatime-mode.")
-            nil)
-    :defer t :init
-    (add-hook 'doom-first-file-hook #'global-wakatime-mode)
-    :config
-    (setq wakatime-cli-path (executable-find "wakatime")))
+  ;;(use-package! wakatime-mode
+  ;;  :when (if (executable-find "wakatime")
+  ;;            t
+  ;;          (warn "Wakatime CLI not found. Not enabling wakatime-mode.")
+  ;;          nil)
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-file-hook #'global-wakatime-mode)
+  ;;  :config
+  ;;  (setq wakatime-cli-path (executable-find "wakatime")))
 
   (use-package! titlecase
     :defer t :init
