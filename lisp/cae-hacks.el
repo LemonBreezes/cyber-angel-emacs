@@ -167,5 +167,8 @@ It is meant to be used as a `post-gc-hook'."
 ;;    (funcall fn recipe)))
 
 ;; Work around recursive load error.
-(after! projectile
-  (remove-hook 'buffer-list-update-hook #'projectile-track-known-projects-find-file-hook))
+(advice-add #'projectile-track-known-projects-find-file-hook
+            :around
+            (defun cae-projectile-ignore-temp-buffers-a (oldfun &rest args)
+              (unless (doom-temp-buffer-p (current-buffer))
+                (apply oldfun args))))
