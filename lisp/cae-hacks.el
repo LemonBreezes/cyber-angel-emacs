@@ -168,4 +168,4 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; Work around recursive load error.
 (after! projectile
-  (remove-hook 'buffer-list-update-hook #'projectile-track-known-projects-find-file-hook t))
+  (remove-hook 'buffer-list-update-hook #'projectile-track-known-projects-find-file-hook))
