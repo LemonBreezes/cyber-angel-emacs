@@ -1,4 +1,4 @@
-                                        ;git@gitNew.domain.farelogix.com:farelogix/atlas.git;git@gitNew.domain.farelogix.com:farelogix/atlas.git; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (defvar cae-config-finished-loading nil)
 
@@ -218,9 +218,9 @@
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
 
   ;; Do not spam me with warnings.
-  ;; (unless init-file-debug
-  ;;   (setq warning-minimum-level :error
-  ;;         warning-minimum-log-level :error))
+  (unless init-file-debug
+    (setq warning-minimum-level :error
+          warning-minimum-log-level :error))
 
   (after! alert
     (setq alert-default-style 'libnotify))
@@ -352,10 +352,10 @@
         (if (not (string-match-p "Display tab bar\\b" (car out)))
             out
           (cons (car out)
-                `(lambda ()
-                   (funcall ,(cdr out))
-                   (which-key--echo (concat (current-message) " "
-                                            (+workspace--tabline))))))))
+                (lambda ()
+                  (funcall (cdr out))
+                  (which-key--echo (concat (current-message) " "
+                                           (+workspace--tabline))))))))
 
     (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
       "Open the journal in a new workspace."
@@ -880,11 +880,11 @@
     (keyfreq-mode +1)
     (keyfreq-autosave-mode +1))
 
-  ;;(use-package! wakatime-mode
-  ;;  :defer t :init
-  ;;  (add-hook 'doom-first-file-hook #'global-wakatime-mode)
-  ;;  :config
-  ;;  (setq wakatime-cli-path (executable-find "wakatime")))
+  (use-package! wakatime-mode
+    :defer t :init
+    (add-hook 'doom-first-file-hook #'global-wakatime-mode)
+    :config
+    (setq wakatime-cli-path (executable-find "wakatime")))
 
   (use-package! titlecase
     :defer t :init
@@ -920,13 +920,13 @@
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
     (aas-set-snippets 'global
-                      ";--" "—"
-                      ";-." "→"
-                      ";=." "⇒"
-                      ";!=" "≠"
-                      "-." "->"
-                      "=." "=>"
-                      "j9" "("))
+      ";--" "—"
+      ";-." "→"
+      ";=." "⇒"
+      ";!=" "≠"
+      "-." "->"
+      "=." "=>"
+      "j9" "("))
 
   (use-package! smart-semicolon
     :defer t :init
