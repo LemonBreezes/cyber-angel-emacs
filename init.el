@@ -2,18 +2,19 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-init-preamble-enabled-p t)
-(defvar cae-init-core-enabled-p t)
-(defvar cae-keyboard-remaps-enabled-p t)
-(let ((p t))
-  (defvar cae-init-ui-enabled-p (and p t))
-  (defvar cae-init-tools-enabled-p (and p t))
-  (defvar cae-init-editor-enabled-p (and p t))
-  (defvar cae-init-autocompletion-enabled-p (and p t))
-  (defvar cae-init-text-enabled-p (and p t))
-  (defvar cae-init-email-enabled-p (and p t))
-  (defvar cae-init-term-enabled-p (and p t))
-  (defvar cae-init-languages-enabled-p (and p t)))
+(let ((q t))
+  (defvar cae-init-preamble-enabled-p (and q t))
+  (defvar cae-init-core-enabled-p (and q t))
+  (defvar cae-keyboard-remaps-enabled-p (and q t))
+  (let ((p (and q t)))
+    (defvar cae-init-ui-enabled-p (and p t))
+    (defvar cae-init-tools-enabled-p (and p t))
+    (defvar cae-init-editor-enabled-p (and p t))
+    (defvar cae-init-autocompletion-enabled-p (and p t))
+    (defvar cae-init-text-enabled-p (and p t))
+    (defvar cae-init-email-enabled-p (and p t))
+    (defvar cae-init-term-enabled-p (and p t))
+    (defvar cae-init-languages-enabled-p (and p t))))
 
 
 ;; No side-effects. For the :cae modules.
