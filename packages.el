@@ -13,7 +13,8 @@
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
   (package! evil-org :recipe
-    (:host github :repo "LemonBreezes/evil-org-mode")))
+    (:host github :repo "LemonBreezes/evil-org-mode")
+    :pin "4d30406efc7c945069c217a051114cc4ad3e7d5a"))
 
 (package! mu4e :built-in t)
 
