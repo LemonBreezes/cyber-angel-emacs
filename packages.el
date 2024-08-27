@@ -1,5 +1,4 @@
 ;; -*- no-byte-compile: t; -*-
-(unpin! t)
 (disable-packages! evil-escape
                    flyspell
                    ccls                 ; I use clangd.
