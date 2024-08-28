@@ -32,6 +32,7 @@
     ("pulblic" "public" nil :count 0)
     ("pythoyn" "python" nil :count 0)
     ("stetq" "setq" nil :count 1)
+    ("timedatctl" "timedatectl" nil :count 1)
     ("waws" "was" nil :count 0)
    ))
 
