@@ -26,8 +26,7 @@
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
-  (package! tabgo)
-  (package! harpoon))
+  (package! tabgo))
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
