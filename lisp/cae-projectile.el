@@ -16,6 +16,16 @@
   :before #'projectile-switch-project
   (projectile-discover-projects-in-search-path))
 
+;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
+;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
+(defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
+  :override #'projectile-skel-dir-locals
+  (interactive "*P\nP")
+  (skeleton-proxy-new
+   '(nil "((nil . (" ("" '(projectile-skel-variable-cons) n)
+     resume: ")))")
+   str arg))
+
 (if (locate-library "projectile")
     ;;; Projectile configuration
     (after! projectile
@@ -41,16 +51,6 @@
 
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
-
-      ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
-      ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
-      (defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
-        :override #'projectile-skel-dir-locals
-        (interactive "*P\nP")
-        (skeleton-proxy-new
-         '(nil "((nil . (" ("" '(projectile-skel-variable-cons) n)
-           resume: ")))")
-         str arg))
 
       (add-to-list 'projectile-globally-ignored-directories
                    (expand-file-name ".local/straight/repos/" user-emacs-directory))
