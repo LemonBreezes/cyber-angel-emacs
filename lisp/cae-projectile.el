@@ -27,17 +27,17 @@
       (setq projectile-require-project-root t)
 
       ;; Don't crash my Emacs when running `projectile-project-files' on HOME.
-      ;;(defadvice! cae-projectile-project-files-a (project-root)
-      ;;  :before-until #'projectile-project-files
-      ;;  (when (or (file-equal-p project-root "~")
-      ;;            (file-equal-p project-root "/root"))
-      ;;    (user-error "Running `projectile-project-files' on HOME is disabled.")))
-      ;;(add-to-list 'projectile-globally-ignored-directories "^/home/st/?$" nil #'equal)
-      ;;(defadvice! cae-projectile-root-bottom-up-a (dir)
-      ;;  :filter-return #'projectile-root-bottom-up
-      ;;  (unless (and dir (or (file-equal-p dir "~")
-      ;;                       (file-equal-p dir "/root")))
-      ;;    dir))
+      (defadvice! cae-projectile-project-files-a (project-root)
+        :before-until #'projectile-project-files
+        (when (or (file-equal-p project-root "~")
+                  (file-equal-p project-root "/root"))
+          (user-error "Running `projectile-project-files' on HOME is disabled.")))
+      (add-to-list 'projectile-globally-ignored-directories "^/home/st/?$" nil #'equal)
+      (defadvice! cae-projectile-root-bottom-up-a (dir)
+        :filter-return #'projectile-root-bottom-up
+        (unless (and dir (or (file-equal-p dir "~")
+                             (file-equal-p dir "/root")))
+          dir))
 
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
