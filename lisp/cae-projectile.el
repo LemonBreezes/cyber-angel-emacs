@@ -29,7 +29,7 @@
 (if (locate-library "projectile")
     ;;; Projectile configuration
     (after! projectile
-      (run-with-idle-timer 2 nil #'projectile--cleanup-known-projects)
+      (run-with-idle-timer 1.0 nil #'projectile--cleanup-known-projects)
       
       ;; Projectile's caching of commands is really annoying because if I change
       ;; the commands, the cache doesn't get invalidated automatically.
