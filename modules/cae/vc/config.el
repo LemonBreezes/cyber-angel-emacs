@@ -164,8 +164,8 @@
     (add-hook! 'consult-gh-repo-post-clone-hook
       (defun cae-projectile-discover-projects-in-search-path-h (&rest _)
         (projectile-discover-projects-in-search-path)))))
-(use-package! consult-gh-embark
-  :after (consult-gh embark))
+;;(use-package! consult-gh-embark
+;;  :after (consult-gh embark))
 
 (use-package! diff-ansi
   :when (modulep! +delta)
