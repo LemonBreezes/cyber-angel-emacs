@@ -6,8 +6,8 @@
 (package! vc-backup)
 (package! embark-vc)
 (when (modulep! :completion vertico)
-  (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main")
-    :files ("*")))
+  (package! consult-gh :recipe (:host github :repo "armindarvish/consult-gh" :branch "main"
+                                :files "*")))
 (when (or (modulep! :completion helm)
           (modulep! :cae helm)))
 (when (modulep! +delta)
