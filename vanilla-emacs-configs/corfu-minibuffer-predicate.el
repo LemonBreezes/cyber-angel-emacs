@@ -36,7 +36,8 @@ See `+corfu-want-minibuffer-completion'."
 
 (add-hook 'minibuffer-setup-hook
           (defun +corfu-add-cape-dabbrev-h ()
-            (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t)))
+            (when (+corfu-enable-in-minibuffer-p)
+              (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t))))
 
 (setq corfu-auto t
       corfu-auto-delay 0.05)
