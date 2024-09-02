@@ -76,7 +76,7 @@
 
 (doom! :completion
        (vertico +icons)
-       (corfu +orderless +icons +dabbrev)
+       (corfu +orderless +icons)
 
        :ui
        hl-todo
