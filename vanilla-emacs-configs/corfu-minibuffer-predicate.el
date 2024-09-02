@@ -32,3 +32,7 @@
 (setq corfu-auto t
       corfu-auto-delay 0.05)
 (global-corfu-mode +1)
+
+(straight-use-package 'vertico)
+(require 'vertico)
+(vertico-mode +1)
