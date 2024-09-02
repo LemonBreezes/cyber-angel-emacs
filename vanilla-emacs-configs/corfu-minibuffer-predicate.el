@@ -18,10 +18,9 @@
 (require 'corfu)
 
 (setq global-corfu-minibuffer
-      (defun +corfu-minibuffer-predicate ()
+      (lambda ()
         (not (or (bound-and-true-p mct--active)
-                 (where-is-internal #'vertico-exit
-                                    (list (current-local-map)))
+                 (and (featurep 'vertico) vertico--input)
                  (and (featurep 'auth-source)
                       (eq (current-local-map) read-passwd-map))
                  (and (featurep 'helm-core) (helm--alive-p))
