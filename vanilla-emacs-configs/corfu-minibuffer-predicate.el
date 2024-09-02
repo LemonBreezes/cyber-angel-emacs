@@ -19,7 +19,7 @@
 
 (setq global-corfu-minibuffer
       (lambda ()
-        (not (or (bound-and-true-p mct--active)
+        (unless (or (bound-and-true-p mct--active)
                  (bound-and-true-p vertico--input)
                  (and (featurep 'auth-source)
                       (eq (current-local-map) read-passwd-map))
