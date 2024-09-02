@@ -20,14 +20,14 @@
 (setq global-corfu-minibuffer
       (lambda ()
         (unless (or (bound-and-true-p mct--active)
-                 (bound-and-true-p vertico--input)
-                 (and (featurep 'auth-source)
-                      (eq (current-local-map) read-passwd-map))
-                 (and (featurep 'helm-core) (helm--alive-p))
-                 (and (featurep 'ido) (ido-active))
-                 (where-is-internal #'minibuffer-complete
-                                    (list (current-local-map)))
-                 (memq #'ivy--queue-exhibit post-command-hook)))))
+                    (bound-and-true-p vertico--input)
+                    (and (featurep 'auth-source)
+                         (eq (current-local-map) read-passwd-map))
+                    (and (featurep 'helm-core) (helm--alive-p))
+                    (and (featurep 'ido) (ido-active))
+                    (where-is-internal #'minibuffer-complete
+                                       (list (current-local-map)))
+                    (memq #'ivy--queue-exhibit post-command-hook)))))
 
 (setq corfu-auto t
       corfu-auto-delay 0.05)
