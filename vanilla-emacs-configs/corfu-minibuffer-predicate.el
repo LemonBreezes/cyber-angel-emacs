@@ -19,16 +19,18 @@
 
 (setq global-corfu-minibuffer
       (defun +corfu-minibuffer-predicate ()
-        (not (or (bound-and-true-p mct--active)
-                 (where-is-internal #'vertico-exit
-                                    (list (current-local-map)))
-                 (and (featurep 'auth-source)
-                      (eq (current-local-map) read-passwd-map))
-                 (and (featurep 'helm-core) (helm--alive-p))
-                 (and (featurep 'ido) (ido-active))
-                 (where-is-internal #'minibuffer-complete
-                                    (list (current-local-map)))
-                 (memq #'ivy--queue-exhibit post-command-hook)))))
+        (if (not (or (bound-and-true-p mct--active)
+                     (where-is-internal #'vertico-exit
+                                        (list (current-local-map)))
+                     (and (featurep 'auth-source)
+                          (eq (current-local-map) read-passwd-map))
+                     (and (featurep 'helm-core) (helm--alive-p))
+                     (and (featurep 'ido) (ido-active))
+                     (where-is-internal #'minibuffer-complete
+                                        (list (current-local-map)))
+                     (memq #'ivy--queue-exhibit post-command-hook)))
+            t
+          (setq-local completion-at-point-functions nil))))
 
 (setq corfu-auto t
       corfu-auto-delay 0.05)
