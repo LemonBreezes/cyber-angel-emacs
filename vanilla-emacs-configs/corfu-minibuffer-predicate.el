@@ -31,6 +31,9 @@ See `+corfu-want-minibuffer-completion'."
                                     (list (current-local-map)))
                  (memq #'ivy--queue-exhibit post-command-hook)))))
 
+(straight-use-package 'cape)
+(require 'cape)
+
 (add-hook 'minibuffer-setup-hook
           (defun +corfu-add-cape-dabbrev-h ()
             (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t)))
