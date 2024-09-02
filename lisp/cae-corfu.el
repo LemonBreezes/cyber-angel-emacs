@@ -5,7 +5,6 @@
 (setq +corfu-want-tab-prefer-expand-snippets t)
 (setq +corfu-want-tab-prefer-navigating-snippets t)
 (setq +corfu-want-tab-prefer-navigating-org-tables t)
-(setq global-corfu-minibuffer nil)
 
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
