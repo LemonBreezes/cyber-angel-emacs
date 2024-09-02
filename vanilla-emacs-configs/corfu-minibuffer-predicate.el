@@ -18,16 +18,27 @@
 (require 'corfu)
 
 (setq global-corfu-minibuffer
-      (lambda ()
-        (not (or (bound-and-true-p mct--active)
-                 (bound-and-true-p vertico--input)
-                 (and (featurep 'auth-source)
-                      (eq (current-local-map) read-passwd-map))
-                 (and (featurep 'helm-core) (helm--alive-p))
-                 (and (featurep 'ido) (ido-active))
-                 (where-is-internal #'minibuffer-complete
-                                    (list (current-local-map)))
-                 (memq #'ivy--queue-exhibit post-command-hook)))))
+      (defun +corfu-enable-in-minibuffer-p ()
+        "Return non-nil if Corfu should be enabled in the minibuffer.
+See `+corfu-want-minibuffer-completion'."
+        (pcase +corfu-want-minibuffer-completion
+          ('nil nil)
+          ('aggressive
+           (not (or (bound-and-true-p mct--active)
+                    (bound-and-true-p vertico--input)
+                    (and (featurep 'auth-source)
+                         (eq (current-local-map) read-passwd-map))
+                    (and (featurep 'helm-core) (helm--alive-p))
+                    (and (featurep 'ido) (ido-active))
+                    (where-is-internal 'minibuffer-complete
+                                       (list (current-local-map)))
+                    (memq #'ivy--queue-exhibit post-command-hook))))
+          (_ (where-is-internal #'completion-at-point
+                                (list (current-local-map)))))))
+
+(add-hook 'minibuffer-setup-hook
+          (defun +corfu-add-cape-dabbrev-h ()
+            (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t)))
 
 (setq corfu-auto t
       corfu-auto-delay 0.05)
