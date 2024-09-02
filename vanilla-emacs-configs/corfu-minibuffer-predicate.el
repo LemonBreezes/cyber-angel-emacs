@@ -30,4 +30,6 @@
                                     (list (current-local-map)))
                  (memq #'ivy--queue-exhibit post-command-hook)))))
 
+(setq corfu-auto t
+      corfu-auto-delay 0.05)
 (global-corfu-mode +1)
