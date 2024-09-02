@@ -29,3 +29,5 @@
                  (where-is-internal #'minibuffer-complete
                                     (list (current-local-map)))
                  (memq #'ivy--queue-exhibit post-command-hook)))))
+
+(global-corfu-mode +1)
