@@ -64,6 +64,9 @@
         "]" #'dired-next-dirline
         "," #'dired-create-empty-file))
 
+(after! wdired
+  (setq wdired-allow-to-change-permissions t))
+
 (after! dirvish-widgets
   (setq dirvish-show-media-properties t))
 
