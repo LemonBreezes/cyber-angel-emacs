@@ -81,9 +81,9 @@
 (package! inputrc-mode)
 (package! ebuild-mode :built-in t)
 (package! tokei) ;I use this for counting lines of code in
-                                        ;my projects.
+;                ;my projects.
 (package! font-lock-studio) ;I don't use this often, but it's useful
-                                        ;for debugging font-lock issues.
+;                           ;for debugging font-lock issues.
 (package! show-font :recipe ;Preview fonts
   (:host github :repo "protesilaos/show-font"))
 (package! eff)
