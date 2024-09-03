@@ -63,3 +63,16 @@
         "[" #'dired-prev-dirline
         "]" #'dired-next-dirline
         "," #'dired-create-empty-file))
+
+(after! dirvish
+  (after! dirvish-widgets
+    (setq dirvish-show-media-properties t))
+
+  (after! dirvish-quick-access
+    (setq! dirvish-quick-access-entries
+           `(("h" "~/" "Home")
+             ("e" ,doom-emacs-dir "Emacs user directory")
+             ("d" "~/Downloads/" "Downloads")
+             ("m" "/mnt/" "Drives")
+             ("s" "~/src/" "Source code")
+             ("t" "~/.local/share/Trash/files/" "TrashCan")))))
