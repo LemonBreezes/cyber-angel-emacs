@@ -84,7 +84,6 @@
                                         ;my projects.
 (package! font-lock-studio)             ;I don't use this often, but it's useful
                                         ;for debugging font-lock issues.
-                                        ;Show me how fonts look.
 (package! show-font :recipe (:host github :repo "protesilaos/show-font"))
 (package! eff)
 (package! git-modes)
