@@ -80,7 +80,7 @@
   (dirvish-side-follow-mode 1))
 
 (add-hook! 'dirvish-setup-hook
-  (when (string-match-p "downloads"
+  (when (string-match-p "Downloads"
                         (file-name-nondirectory
                          (directory-file-name default-directory)))
     (dirvish-emerge-mode 1)))
