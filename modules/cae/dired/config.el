@@ -93,3 +93,6 @@
           ("Pictures" (extensions "jpg" "png" "svg" "gif" "jpeg" "avif"))
           ("Audio" (extensions "mp3" "flac" "wav" "ape" "aac"))
           ("Archives" (extensions "gz" "rar" "zip")))))
+
+(after! dirvish-fd
+  (setq dirvish-fd-default-dir "~/"))
