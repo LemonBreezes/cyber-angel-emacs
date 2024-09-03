@@ -75,7 +75,7 @@
          `(("h" "~/" "Home")
            ("e" ,doom-emacs-dir "Emacs user directory")
            ("d" "~/Downloads/" "Downloads")
-           ("m" "/mnt/" "Drives")
+           ("m" "/run/media/st/" "Drives")
            ("s" "~/src/" "Source code")
            ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
