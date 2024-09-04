@@ -49,13 +49,14 @@
   (cl-loop for win in (window-list)
            when (and (window-live-p win)
                      (window-dedicated-p win)
-                     (parent-mode-is-derived-p (buffer-local-value 'major-mode (window-buffer win))
-                                               'dired-mode))
-           do (with-selected-window win
-                (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-                  (if fn (funcall fn) (dirvish-kill dv))))
+                     (parent-mode-is-derived-p
+                      (buffer-local-value 'major-mode (window-buffer win))
+                      'dired-mode))
+           do (progn (with-selected-window win
+                       (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+                         (if fn (funcall fn) (dirvish-kill dv))))
+                     (set-buffer (window-buffer)))
            finally return nil)
-  (set-buffer (window-buffer))
   (funcall oldfun pos)
   ;;(if (derived-mode-p 'dired-mode)
   ;;    (when-let ((file
