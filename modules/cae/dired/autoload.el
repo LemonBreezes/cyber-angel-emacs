@@ -48,12 +48,12 @@
   ;; If any of the windows are dedicated dired-mode windows, kill Dirvish
   (cl-loop for win in (window-list)
            when (and (window-dedicated-p win)
-                     (with-current-buffer (window-buffer win)
-                       (derived-mode-p 'dired-mode)))
-           do (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv)))
-                     (win (dv-root-window dv)))
-                (if fn (funcall fn) (dirvish-kill dv))
-                (delete-window win)))
+                     (parent-mode-is-derived-p (buffer-local-value 'major-mode (window-buffer win))
+                                               'dired-mode))
+           do (with-selected-window win
+                (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+                  (if fn (funcall fn) (dirvish-kill dv))))
+           finally return nil)
   (funcall oldfun pos)
   ;;(if (derived-mode-p 'dired-mode)
   ;;    (when-let ((file
