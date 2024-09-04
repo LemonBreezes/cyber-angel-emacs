@@ -45,6 +45,7 @@
 
 ;;;###autoload
 (defun cae-dired-consult-jump-a (oldfun pos)
+  (+log "cae-dired-consult-jump-a" pos major-mode default-directory)
   (if (derived-mode-p 'dired-mode)
       (when-let ((file
                   (cond ((and (consp pos)
