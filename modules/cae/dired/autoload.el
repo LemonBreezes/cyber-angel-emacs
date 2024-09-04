@@ -45,25 +45,35 @@
 
 ;;;###autoload
 (defun cae-dired-consult-jump-a (oldfun pos)
-  (+log "cae-dired-consult-jump-a" pos major-mode default-directory)
-  (if (derived-mode-p 'dired-mode)
-      (when-let ((file
-                  (cond ((and (consp pos)
-                              (markerp (car pos)))
-                         (buffer-file-name (marker-buffer (car pos))))
-                        ((stringp pos)
-                         pos)
-                        ((buffer-file-name
-                          (marker-buffer pos))))))
-        ;; Check if file is in a different directory and if so change to it
-        (when-let ((dir (file-name-directory file))
-                   (_ (not (file-equal-p dir default-directory))))
-          (find-file dir))
-        ;; If not a directory, kill Dirvish and find the file
-        (unless (file-directory-p file)
-          ;; Copied from `dirvish-find-entry-a'
-          (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-            (if fn (funcall fn) (dirvish-kill dv)))
-          (funcall oldfun pos)))
-    ;; If not in Dired mode, find the file as usual
-    (funcall oldfun pos)))
+  ;; If any of the windows are dedicated dired-mode windows, kill Dirvish
+  (cl-loop for win in (window-list)
+           when (and (window-dedicated-p win)
+                     (with-current-buffer (window-buffer win)
+                       (derived-mode-p 'dired-mode)))
+           do (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv)))
+                     (win (dv-root-window dv)))
+                (if fn (funcall fn) (dirvish-kill dv))
+                (delete-window win)))
+  (funcall oldfun pos)
+  ;;(if (derived-mode-p 'dired-mode)
+  ;;    (when-let ((file
+  ;;                (cond ((and (consp pos)
+  ;;                            (markerp (car pos)))
+  ;;                       (buffer-file-name (marker-buffer (car pos))))
+  ;;                      ((stringp pos)
+  ;;                       pos)
+  ;;                      ((buffer-file-name
+  ;;                        (marker-buffer pos))))))
+  ;;      ;; Check if file is in a different directory and if so change to it
+  ;;      (when-let ((dir (file-name-directory file))
+  ;;                 (_ (not (file-equal-p dir default-directory))))
+  ;;        (find-file dir))
+  ;;      ;; If not a directory, kill Dirvish and find the file
+  ;;      (unless (file-directory-p file)
+  ;;        ;; Copied from `dirvish-find-entry-a'
+  ;;        (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+  ;;          (if fn (funcall fn) (dirvish-kill dv)))
+  ;;        (funcall oldfun pos)))
+  ;;  ;; If not in Dired mode, find the file as usual
+  ;;  )
+  )
