@@ -101,7 +101,7 @@
        undo
        ibuffer
        vc
-       (dired +icons)
+       (dired +icons +dirvish)
 
        :term
        eshell
