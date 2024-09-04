@@ -54,6 +54,7 @@
   (after! dired-aux
     (setq dired-isearch-filenames 'dwim))
 
+  ;; These are from before the Dired module was revamped and for non-Evil.
   ;;(map! :map dired-mode-map
   ;;      "C-M-k" #'dired-kill-subdir
   ;;      "K" #'dired-kill-subdir
