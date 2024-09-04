@@ -54,15 +54,16 @@
   (after! dired-aux
     (setq dired-isearch-filenames 'dwim))
 
-  (map! :map dired-mode-map
-        "C-M-k" #'dired-kill-subdir
-        "K" #'dired-kill-subdir
-        "I" #'dired-insert-subdir
-        [remap dired-do-man] #'woman-dired-find-file
-        :ng "_" #'dired-up-directory
-        "[" #'dired-prev-dirline
-        "]" #'dired-next-dirline
-        "," #'dired-create-empty-file))
+  ;;(map! :map dired-mode-map
+  ;;      "C-M-k" #'dired-kill-subdir
+  ;;      "K" #'dired-kill-subdir
+  ;;      "I" #'dired-insert-subdir
+  ;;      [remap dired-do-man] #'woman-dired-find-file
+  ;;      :ng "_" #'dired-up-directory
+  ;;      "[" #'dired-prev-dirline
+  ;;      "]" #'dired-next-dirline
+  ;;      "," #'dired-create-empty-file)
+  )
 
 (after! wdired
   (setq wdired-allow-to-change-permissions t))
