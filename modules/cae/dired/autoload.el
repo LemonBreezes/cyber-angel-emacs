@@ -51,8 +51,9 @@
                      (parent-mode-is-derived-p (buffer-local-value 'major-mode (window-buffer win))
                                                'dired-mode))
            do (with-selected-window win
-                (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
-                  (if fn (funcall fn) (dirvish-kill dv))))
+                (with-current-buffer (window-buffer win)
+                  (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
+                    (if fn (funcall fn) (dirvish-kill dv)))))
            finally return nil)
   (funcall oldfun pos)
   ;;(if (derived-mode-p 'dired-mode)
