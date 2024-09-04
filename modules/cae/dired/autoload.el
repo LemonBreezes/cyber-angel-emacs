@@ -46,7 +46,6 @@
 ;;;###autoload
 (defun cae-dired-consult-jump-a (oldfun pos)
   ;; If any of the windows are dedicated dired-mode windows, kill Dirvish
-  (+log "cae-dired-consult-jump-a" (current-buffer) (selected-window) (window-buffer (selected-window)))
   (cl-loop for win in (window-list)
            when (and (window-live-p win)
                      (window-dedicated-p win)
@@ -56,7 +55,7 @@
                 (let* ((dv (dirvish-curr)) (fn (nth 4 (dv-type dv))))
                   (if fn (funcall fn) (dirvish-kill dv))))
            finally return nil)
-  (+log "cae-dired-consult-jump-a-1" (current-buffer) (selected-window) (window-buffer (selected-window)))
+  (set-buffer (window-buffer))
   (funcall oldfun pos)
   ;;(if (derived-mode-p 'dired-mode)
   ;;    (when-let ((file
