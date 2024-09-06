@@ -19,7 +19,8 @@
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
   ;; Back up uncommitted changes.
-  (add-hook 'doom-first-file-hook #'magit-wip-mode)
+  ;; EDIT: This causes the index of projects to become locked.
+  ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
   (after! magit
