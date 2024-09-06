@@ -18,8 +18,8 @@
 (after! code-review
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
-  ;; Back up uncommitted changes.
-  ;; EDIT: This causes the index of projects to become locked.
+  ;; Back up uncommitted changes. EDIT: This causes the index of projects to
+  ;; become locked. I am no longer using this.
   ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
