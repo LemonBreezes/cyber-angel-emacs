@@ -13,6 +13,7 @@
     ("ccacho" "ccache" nil :count 1)
     ("checkoyut" "checkout" nil :count 0)
     ("commmand" "command" nil :count 0)
+    ("corectly" "correctly" nil :count 0)
     ("doomn" "doom" nil :count 1)
     ("eamcs" "emacs" nil :count 0)
     ("emere" "emerge" nil :count 0)
