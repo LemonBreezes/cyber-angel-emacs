@@ -355,6 +355,8 @@
       (:prefix "d"
        :desc "Open Eshell alias file" "e" (cmd! () (find-file eshell-aliases-file))
        :desc "Toggle debug-on-quit" "q" (cmd! () (setq debug-on-quit (not debug-on-quit)))))
+(which-key-add-keymap-based-replacements help-map "de" "Open Eshell alias file")
+(which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
 
 ;;; Other modules
 
