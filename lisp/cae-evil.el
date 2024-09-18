@@ -180,6 +180,10 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
+(when (modulep! :completion corfu)
+  (map! :prefix "C-x"
+        :i "C-c" #'copilot-complete))
+
 ;;(when (modulep! :completion corfu)
 ;;  (map!
 ;;   :i "C-n" #'cae-corfu-popup-and-first
