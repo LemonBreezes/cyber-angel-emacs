@@ -182,7 +182,8 @@
 
 (when (modulep! :completion corfu)
   (map! :prefix "C-x"
-        :i "C-c" #'copilot-complete))
+        (:when (modulep! :cae ai)
+         :i "C-c" #'copilot-complete)))
 
 ;;(when (modulep! :completion corfu)
 ;;  (map!
