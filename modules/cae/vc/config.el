@@ -133,6 +133,7 @@
            :desc "Find file" "f" #'consult-gh-find-file
            :desc "Clone" "c" #'consult-gh-repo-clone
            :desc "Fork" "k" #'consult-gh-fork-current-repo)))
+  (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
   (after! which-key
     (which-key-add-keymap-based-replacements doom-leader-GitHub-map
       "g" "GitHub CLI"
