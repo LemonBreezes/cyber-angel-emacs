@@ -1,7 +1,7 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
 
-(defvar cae-openai-default-model "gpt-4o-mini")
+(defvar cae-openai-default-model "chatgpt-4o-latest")
 
 (use-package! whisper
   :defer t :config
