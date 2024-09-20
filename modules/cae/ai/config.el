@@ -80,12 +80,8 @@
   (setq chatgpt-shell-display-function #'switch-to-buffer
         chatgpt-shell-model-version 2)
   (when (modulep! +openai)
-    (if (member cae-openai-default-model chatgpt-shell-model-versions)
-        (setq chatgpt-shell-model-version
-              (seq-position chatgpt-shell-model-versions cae-openai-default-model))
-      (setq chatgpt-shell-model-versions
-            (cons cae-openai-default-model chatgpt-shell-model-versions)
-            chatgpt-shell-model-version 0)))
+    (setq chatgpt-shell-model-version
+          (seq-position chatgpt-shell-model-versions cae-openai-default-model)))
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
