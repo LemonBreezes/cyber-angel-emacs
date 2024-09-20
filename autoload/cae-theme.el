@@ -52,6 +52,7 @@
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
   (dolist (buffer (doom-buffers-in-mode 'org-mode (buffer-list)))
+    (autoload-do-load #'+org-get-todo-keywords-for)
     (with-current-buffer buffer
       (+org--toggle-inline-images-in-subtree (point-min) (point-max) 'refresh)
       (unless (eq org-preview-latex-default-process 'dvisvgm)
