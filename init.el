@@ -163,7 +163,7 @@
        unpackaged
        vc
        org
-       ai
+       (ai +openai)
        gnus
        rss
        denote
