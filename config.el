@@ -1428,6 +1428,9 @@
           "g" #'consult-hoogle
           "G" #'consult-hoogle-project)))
 
+(add-hook! 'haskell-mode-hook
+  (when (bound-and-true-p evil-cleverparens-mode)
+    (evil-cleverparens-mode -1)))
 
 ;;; Appendix
 
