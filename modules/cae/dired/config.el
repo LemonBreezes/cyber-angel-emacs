@@ -64,6 +64,9 @@
   ;;      "[" #'dired-prev-dirline
   ;;      "]" #'dired-next-dirline
   ;;      "," #'dired-create-empty-file)
+
+  (map! :map dired-mode-map
+        "C-M-k" #'dired-kill-subdir)
   )
 
 (after! wdired
