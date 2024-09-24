@@ -21,6 +21,7 @@
     ("emergeo" "emerge" nil :count 0)
     ("enabed" "enabled" nil :count 0)
     ("erreor" "error" nil :count 0)
+    ("ewith" "with" nil :count 0)
     ("hapen" "happen" nil :count 0)
     ("helpp" "help" nil :count 0)
     ("jsut" "just" nil :count 1)
