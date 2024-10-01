@@ -105,6 +105,9 @@
 (after! dirvish-fd
   (setq dirvish-fd-default-dir "~/"))
 
+(after! dirvish
+  (setq dirvish-hide-cursor nil))
+
 (map! [remap dired-jump] #'cae-dired-jump)
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
