@@ -134,7 +134,7 @@
        (data +lsp +tree-sitter)
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
        (json +lsp +tree-sitter)
-       (python +lsp +tree-sitter +pyenv)
+       (python +lsp +tree-sitter)
        (haskell +lsp +tree-sitter)
 
        :os
