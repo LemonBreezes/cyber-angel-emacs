@@ -72,7 +72,7 @@
           epe-show-git-status-extended t)))
 
 (when (modulep! :lang python)
-  (with-eval-after-load "esh-opt"
+  (after! esh-opt
     (when (require 'virtualenvwrapper nil t)
       (venv-initialize-eshell))))
 
