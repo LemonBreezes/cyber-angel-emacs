@@ -4,7 +4,6 @@
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
     (setq lsp-headerline-breadcrumb-enable t
-          lsp-log-max nil
           lsp-enable-snippet t
           lsp-enable-folding t
           lsp-inlay-hint-enable t
