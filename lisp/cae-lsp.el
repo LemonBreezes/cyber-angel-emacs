@@ -51,6 +51,11 @@
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
 
+  ;; Do not allow LSP to run in the HOME directory.
+  (defadvice! lsp (&optional _)
+    :before-until #'lsp
+    (string= default-directory (expand-file-name "~")))
+
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
   ;; and https://github.com/blahgeek/emacs-lsp-booster. They are meant to
