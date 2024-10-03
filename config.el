@@ -1393,6 +1393,7 @@
   (after! nose
     (when (executable-find "nose2")
       (setq nose-global-name "nose2")))
+  (setq lsp-pyright-langserver-command "basedpyright")
   (when (and (modulep! :tools direnv)
              (modulep! :lang python +pyright))
     (defadvice! cae-envrc-update-python-executable-h ()
@@ -1404,8 +1405,7 @@
             (let ((python-bin (expand-file-name "bin/python" venv-dir)))
               (when (and (file-exists-p python-bin)
                          (file-equal-p python-bin (executable-find "python")))
-                (setq lsp-pyright-venv-path venv-dir
-                      lsp-pyright-langserver-command (executable-find "basedpyright"))
+                (setq lsp-pyright-venv-path venv-dir)
                 (cl-return nil)))))))
 
 ;;;; Idris
