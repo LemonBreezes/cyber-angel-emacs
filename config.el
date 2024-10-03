@@ -1409,7 +1409,7 @@
                   (setq lsp-pyright-venv-path (file-name-nondirectory venv-dir)
                         lsp-pyright-venv-directory (file-name-directory venv-dir))
                   (lsp-dependency 'pyright
-                                  `(:system ,(executable-find (concat lsp-pyright-langserver-command "-langserver"))))
+                                  `(:system ,(executable-find (concat lsp-pyright-langserver-command ))))
                   (cl-return nil))))))))
 
 ;;;; Idris
