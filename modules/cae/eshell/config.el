@@ -71,6 +71,12 @@
     (setq epe-show-local-working-directory t
           epe-show-git-status-extended t)))
 
+(when (modulep! :lang python)
+  (with-eval-after-load "esh-opt"
+    (when (require 'virtualenvwrapper nil t)
+      (venv-initialize-eshell))))
+
+
 ;; Don't leave me with unbalanced delimiters.
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
