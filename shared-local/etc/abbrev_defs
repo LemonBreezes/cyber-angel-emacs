@@ -35,6 +35,7 @@
     ("pythoyn" "python" nil :count 0)
     ("stetq" "setq" nil :count 1)
     ("timedatctl" "timedatectl" nil :count 1)
+    ("versino" "version" nil :count 0)
     ("waws" "was" nil :count 0)
    ))
 
