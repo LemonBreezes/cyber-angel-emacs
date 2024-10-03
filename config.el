@@ -1381,22 +1381,27 @@
 (when cae-init-languages-enabled-p
 
 ;;;; C/C++
+
   (add-hook 'c-mode-common-hook #'subword-mode)
 
 ;;;; Fennel
+
   (add-hook 'fennel-mode-hook #'outline-minor-mode)
 
 ;;;; Python
+
   (after! nose
     (when (executable-find "nose2")
       (setq nose-global-name "nose2")))
 
 ;;;; Idris
+
   (after! idris-settings
     (when (executable-find "idris2")
       (setq idris-interpreter-path "idris2")))
 
 ;;;; Lua
+
   (add-hook 'lua-mode-hook #'subword-mode)
   (add-hook 'lua-mode-hook #'outline-minor-mode)
   (setq-hook! 'lua-mode-hook
@@ -1411,6 +1416,7 @@
                       (assoc-delete-all "comment" lsp-semantic-token-faces)))))))
 
 ;;;; Lean 4
+
 (setq-hook! 'lean4-mode-hook
   tab-width 2)
 (add-hook! 'lean4-mode-hook
