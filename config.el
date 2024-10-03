@@ -1393,6 +1393,12 @@
   (after! nose
     (when (executable-find "nose2")
       (setq nose-global-name "nose2")))
+  (when (modulep! :tools direnv)
+    (defadvice! cae-envrc-update-python-executable-h ()
+      :after 'envrc--update
+      (when (eq major-mode 'python-mode)
+        (setq python-interpreter (executable-find "python")
+              python-shell-interpreter python-interpreter))))
 
 ;;;; Idris
 
