@@ -6,5 +6,3 @@
 (package! eshell-prompt-extras)
 (package! tldr)
 (package! eshell-atuin)
-(when (modulep! :lang python)
-  (package! virtualenvwrapper))
