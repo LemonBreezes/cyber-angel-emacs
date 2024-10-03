@@ -1408,8 +1408,6 @@
                            (file-equal-p python-bin (executable-find "python")))
                   ;;(setq lsp-pyright-venv-path (file-name-nondirectory venv-dir)
                   ;;      lsp-pyright-venv-directory (file-name-directory venv-dir))
-                  (lsp-dependency 'pyright
-                                  `(:system ,(executable-find (concat lsp-pyright-langserver-command "-langserver"))))
                   (cl-return nil))))))))
 
 ;;;; Idris
