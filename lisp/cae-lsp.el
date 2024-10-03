@@ -54,7 +54,7 @@
   ;; Do not allow LSP to run in the HOME directory.
   (defadvice! cae-lsp-disable-in-home-dir-a (&optional _)
     :before-until #'lsp!
-    (string= default-directory (concat (expand-file-name "~") "/")))
+    (string= (lsp--suggest-project-root) "~/"))
 
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
