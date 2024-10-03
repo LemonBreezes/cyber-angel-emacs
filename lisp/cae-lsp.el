@@ -52,8 +52,8 @@
       (lsp-treemacs-sync-mode +1)))
 
   ;; Do not allow LSP to run in the HOME directory.
-  (defadvice! lsp (&optional _)
-    :before-until #'lsp
+  (defadvice! cae-lsp-disable-in-home-dir-a (&optional _)
+    :before-until #'lsp!
     (string= default-directory (expand-file-name "~")))
 
   ;; These are from
