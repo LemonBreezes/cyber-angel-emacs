@@ -1395,19 +1395,7 @@
       (setq nose-global-name "nose2")))
   (when (modulep! :lang python +pyright)
     (after! lsp-pyright
-      (setq lsp-pyright-langserver-command "basedpyright"))
-    ;;(when (modulep! :tools direnv)
-    ;;  (defadvice! cae-envrc-update-python-executable-h ()
-    ;;    :after 'envrc--update
-    ;;    (if-let* ((direnv-dir (expand-file-name ".direnv" (projectile-project-root)))
-    ;;              (venv-subdirs (when (file-exists-p direnv-dir)
-    ;;                              (directory-files direnv-dir t "python-.*$"))))
-    ;;        (cl-dolist (venv-dir venv-subdirs)
-    ;;          (let ((python-bin (expand-file-name "bin/python" venv-dir)))
-    ;;            (when (and (file-exists-p python-bin)
-    ;;                       (file-equal-p python-bin (executable-find "python")))
-    ;;              (cl-return nil)))))))
-    )
+      (setq lsp-pyright-langserver-command "basedpyright")))
 
 ;;;; Idris
 
