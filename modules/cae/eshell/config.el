@@ -76,7 +76,6 @@
     (when (require 'virtualenvwrapper nil t)
       (venv-initialize-eshell))))
 
-
 ;; Don't leave me with unbalanced delimiters.
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
