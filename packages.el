@@ -134,3 +134,5 @@
 ;;; Lang
 (when (modulep! :lang haskell)
   (package! consult-hoogle))
+(when (modulep! :lang python)
+  (package! virtualenvwrapper))
