@@ -1,8 +1,5 @@
 ;;; private/dired/config.el -*- lexical-binding: t; -*-
 
-(defvar cae-dirvish-dwim nil
-  "Whether to use `dirvish-dwim' or `dirvish'.")
-
 ;; Show Rsync progress in the modeline.
 (after! dired-rsync
   (unless global-mode-string (push "" global-mode-string))
@@ -111,7 +108,7 @@
 (after! dirvish
   (setq dirvish-hide-cursor nil))
 
-(map! [remap dired-jump] #'cae-dired-jump)
+;;(map! [remap dired-jump] #'cae-dired-jump)
 (advice-add #'find-file :around #'cae-dired-find-file-a)
 (advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
 (advice-add #'consult--jump :around #'cae-dired-consult-jump-a)
