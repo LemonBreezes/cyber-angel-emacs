@@ -1405,7 +1405,7 @@
             (when (and (file-exists-p python-bin)
                        (file-equal-p python-bin (executable-find "python")))
               (setq lsp-pyright-venv-path venv-dir)
-              (cl-return)))))))
+              (cl-return nil)))))))
 
 ;;;; Idris
 
