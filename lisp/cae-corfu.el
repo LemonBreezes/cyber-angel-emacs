@@ -15,14 +15,6 @@
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkluionm"))))
 
-;; For some reason I need this on my laptop but not on my desktop for Corfu to
-;; not be enabled everywhere in the minibuffer.
-(remove-hook 'minibuffer-setup-hook #'+corfu-add-cape-dabbrev-h)
-(add-hook! minibuffer-setup
-  (defun +corfu-add-cape-dabbrev-for-minibuffer-h ()
-    (when (+corfu-enable-in-minibuffer-p)
-      (add-hook 'completion-at-point-functions #'cape-dabbrev 40 t))))
-
 ;; Wildcard separator
 (defvar +orderless-wildcard-character ?,
   "A character used as a wildcard in Corfu for fuzzy autocompletion. If you
