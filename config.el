@@ -1406,8 +1406,8 @@
               (let ((python-bin (expand-file-name "bin/python" venv-dir)))
                 (when (and (file-exists-p python-bin)
                            (file-equal-p python-bin (executable-find "python")))
-                  ;;(setq lsp-pyright-venv-path (file-name-nondirectory venv-dir)
-                  ;;      lsp-pyright-venv-directory (file-name-directory venv-dir))
+                  (setq lsp-pyright-venv-path (file-name-nondirectory venv-dir)
+                        lsp-pyright-venv-directory (file-name-directory venv-dir))
                   (cl-return nil))))))))
 
 ;;;; Idris
