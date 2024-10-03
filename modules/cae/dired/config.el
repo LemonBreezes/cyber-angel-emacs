@@ -1,5 +1,8 @@
 ;;; private/dired/config.el -*- lexical-binding: t; -*-
 
+(defvar cae-dirvish-dwim nil
+  "Whether to use `dirvish-dwim' or `dirvish'.")
+
 ;; Show Rsync progress in the modeline.
 (after! dired-rsync
   (unless global-mode-string (push "" global-mode-string))
