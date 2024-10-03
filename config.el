@@ -1393,6 +1393,8 @@
   (after! nose
     (when (executable-find "nose2")
       (setq nose-global-name "nose2")))
+  (after! pyvenv
+    (setq pyvenv-workon ".venv"))
 
 ;;;; Idris
 
