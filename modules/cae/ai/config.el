@@ -5,7 +5,8 @@
 
 (use-package! gptel
   :defer t :config
-  (setq gptel-model cae-openai-default-model))
+  (setq gptel-model cae-openai-default-model
+        gptel-default-mode 'org-mode))
 
 ;; I need to configure an `llm' provider.
 (use-package! magit-gptcommit
