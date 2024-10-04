@@ -514,6 +514,9 @@
   (setq-hook! (text-mode prog-mode conf-mode)
     show-trailing-whitespace t)
 
+  (after! editorconfig
+    (add-to-list 'editorconfig-exclude-modes 'dired-mode))
+
   (after! cus-edit
     (setq custom-buffer-done-kill t))
 
