@@ -16,7 +16,6 @@
     (defvar cae-init-term-enabled-p (and p t))
     (defvar cae-init-languages-enabled-p (and p t))))
 
-
 ;; No side-effects. For the :cae modules.
 (load! "lisp/cae-lib")
 
