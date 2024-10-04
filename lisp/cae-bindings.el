@@ -103,7 +103,6 @@
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
-       "<f10>" #'whisper-run
        "<f5>" #'gptel-send
        "M-<f5>" #'copilot-panel-complete
        "C-<f5>" #'gptel-menu)
