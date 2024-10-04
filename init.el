@@ -113,7 +113,7 @@
        :tools
        (debugger +lsp)
        direnv
-       ;;editorconfig
+       ;;editorconfig ;; Now built into Emacs.
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
