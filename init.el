@@ -113,7 +113,7 @@
        :tools
        (debugger +lsp)
        direnv
-       editorconfig
+       ;;editorconfig
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
