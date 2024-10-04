@@ -119,7 +119,7 @@
        (magit +forge)
        (lsp +peek)
        tree-sitter
-       docker
+       (docker +lsp)
        pdf
        biblio
 
