@@ -105,8 +105,8 @@
       (:when (modulep! :cae ai)
        "<f10>" #'whisper-run
        "<f5>" #'gptel-send
-       "C-<f5>" #'copilot-panel-complete
-       "<f2>" #'gptel-menu)
+       "M-<f5>" #'copilot-panel-complete
+       "C-<f5>" #'gptel-menu)
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
