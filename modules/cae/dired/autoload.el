@@ -19,6 +19,8 @@
                         (confirm-nonexistent-file-or-buffer)))
   ;; Check if in Dired mode
   (if (and (derived-mode-p 'dired-mode)
+           ;; This currently doesn't work with remote files. I will fix the code
+           ;; for them when I have a use case.
            (not (file-remote-p file)))
       (progn
         ;; Check if file is in a different directory and if so change to it
