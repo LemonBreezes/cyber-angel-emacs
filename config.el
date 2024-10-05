@@ -1422,9 +1422,6 @@
 
 (setq-hook! 'lean4-mode-hook
   tab-width 2)
-(add-hook! 'lean4-mode-hook
-  (when (bound-and-true-p evil-cleverparens-mode)
-    (evil-cleverparens-mode -1)))
 
 ;;;; Haskell
 
@@ -1436,10 +1433,6 @@
           :localleader
           "g" #'consult-hoogle
           "G" #'consult-hoogle-project)))
-
-(add-hook! 'haskell-mode-hook
-  (when (bound-and-true-p evil-cleverparens-mode)
-    (evil-cleverparens-mode -1)))
 
 ;;; Appendix
 
