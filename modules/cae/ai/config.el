@@ -79,3 +79,47 @@
                                                   :chat-model cae-openai-default-model)
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
+
+(use-package! dall-e-shell
+  :defer t :init
+  (map! :leader
+        :prefix "o"
+        :desc "Open DALL-E here" "I" #'dall-e-shell)
+  :config
+  (setq dall-e-shell-display-function #'switch-to-buffer
+        dall-e-shell-openai-key openai-api-key
+        dall-e-shell-image-quality "hd"
+        dall-e-shell-image-size "1024x1792"
+        dall-e-shell-request-timeout 180
+        dall-e-shell-model-version "dall-e-3"))
+(use-package! chatgpt-shell
+  :defer t :init
+  (map! :leader
+        :prefix "o"
+        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
+        :desc "Open ChatGPT here" "C" #'chatgpt-shell)
+  ;; Use , to ask ChatGPT questions in any comint buffer
+  ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  :config
+  (setq chatgpt-shell-display-function #'switch-to-buffer
+        chatgpt-shell-model-version 2)
+  (when (modulep! +openai)
+    (setq chatgpt-shell-model-version
+          (seq-position chatgpt-shell-model-versions cae-openai-default-model)))
+  ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
+  (setq-hook! 'chatgpt-shell-mode-hook
+    comint-process-echoes t)
+  (defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+    :around #'shell-maker-async-shell-command
+    ;; This is a hack to prevent the ChatGPT shell from inheriting
+    ;; the LD_LIBRARY_PATH variable in projects where I override
+    ;; that.
+    (let ((process-environment (cl-remove-if
+                                (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
+                                process-environment)))
+      (apply oldfun args)))
+  (map! :map chatgpt-shell-mode-map
+        "C-d" #'cae-ai-chatgpt-quit-or-delete-char
+        "C-l" #'chatgpt-shell-clear-buffer
+        [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
+  (advice-add #'shell-maker-welcome-message :override #'ignore))
