@@ -4,7 +4,7 @@
 ;;  (cl-defmethod llm-provider-chat-url ((provider llm-openai))
 ;;    (llm-openai--url provider "chat")) ; chat/completions
 ;;  (setq llm-refactoring-provider
-;;        (make-llm-openai-compatible :key ollama-api-key
+;;        (make-llm-openai-compatible :key (cae-secrets-get-ollama-api-key)
 ;;                                    :url (format "http://%s:3000/ollama/api/"
 ;;                                                 (or (bound-and-true-p cae-ip-address)
 ;;                                                     "127.0.0.1"))
