@@ -2,7 +2,7 @@
 
 
 (defvar cae-openai-default-model "chatgpt-4o-latest")
-(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
+;;(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
 
 (use-package! gptel
   :defer t :init
