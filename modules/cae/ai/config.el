@@ -8,7 +8,9 @@
   :defer t :init
   (setq gptel-model cae-openai-default-model)
   :config
-  (setq gptel-default-mode 'org-mode))
+  (setq gptel-default-mode 'org-mode
+        ;; Fixes some malformed JSON response error.
+        gptel-use-curl nil))
 
 (defvar llm-refactoring-provider nil)
 (after! llm
