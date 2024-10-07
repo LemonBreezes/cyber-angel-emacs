@@ -104,9 +104,8 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
        "<f5>" #'gptel-send
-       "<f2>" #'gptel
-       "M-<f5>" #'copilot-panel-complete
-       "C-<f5>" #'gptel-menu)
+       "<f2>" #'gptel-menu
+       "M-<f5>" #'copilot-panel-complete)
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
