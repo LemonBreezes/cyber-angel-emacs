@@ -103,7 +103,7 @@
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
-       "<f5>" #'gptel-send
+       "<f2>" #'gptel-send
        "M-<f5>" #'copilot-panel-complete)
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
