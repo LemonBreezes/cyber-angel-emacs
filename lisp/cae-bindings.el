@@ -104,7 +104,8 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
        "<f2>" #'gptel-send
-       "<f5>" #'elysium)
+       ;;"<f5>" #'elysium
+       )
       "<f6>" #'embrace-commander
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
