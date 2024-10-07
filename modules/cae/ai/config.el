@@ -2,13 +2,22 @@
 
 
 (defvar cae-openai-default-model "chatgpt-4o-latest")
+(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
 
 (use-package! gptel
-  :defer t :config
-  (setq gptel-model cae-openai-default-model
-        gptel-default-mode 'org-mode))
+  :defer t :init
+  (setq gptel-model cae-openai-default-model)
+  :config
+  (setq gptel-default-mode 'org-mode))
 
-;; I need to configure an `llm' provider.
+(defvar llm-refactoring-provider nil)
+(after! llm
+  (require 'llm-openai)
+  (setq llm-refactoring-provider (make-llm-openai :key (cae-secrets-get-openai-api-key)
+                                                  :chat-model cae-openai-default-model)
+        magit-gptcommit-llm-provider llm-refactoring-provider
+        llm-warn-on-nonfree nil))
+
 (use-package! magit-gptcommit
   :after gptel magit
   :config
@@ -72,14 +81,6 @@
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
                    (buffer-name copilot-balancer-debug-buffer)))))
 
-(defvar llm-refactoring-provider nil)
-(after! llm
-  (require 'llm-openai)
-  (setq llm-refactoring-provider (make-llm-openai :key openai-api-key
-                                                  :chat-model cae-openai-default-model)
-        magit-gptcommit-llm-provider llm-refactoring-provider
-        llm-warn-on-nonfree nil))
-
 (use-package! dall-e-shell
   :defer t :init
   (map! :leader
@@ -87,7 +88,7 @@
         :desc "Open DALL-E here" "I" #'dall-e-shell)
   :config
   (setq dall-e-shell-display-function #'switch-to-buffer
-        dall-e-shell-openai-key openai-api-key
+        dall-e-shell-openai-key (cae-secrets-get-openai-api-key)
         dall-e-shell-image-quality "hd"
         dall-e-shell-image-size "1024x1792"
         dall-e-shell-request-timeout 180
