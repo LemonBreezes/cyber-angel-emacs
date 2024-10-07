@@ -2,7 +2,7 @@
 
 
 (defvar cae-openai-default-model "chatgpt-4o-latest")
-;;(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
+(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
 
 (use-package! gptel
   :defer t :init
@@ -10,7 +10,12 @@
   :config
   (setq gptel-default-mode 'org-mode
         ;; Fixes some malformed JSON response error.
-        gptel-use-curl nil))
+        gptel-use-curl nil)
+  ;; Use Anthropic's API for generating code completions.
+  (setq
+   gptel-model cae-anthropic-default-model
+   gptel-backend (gptel-make-anthropic "Claude"
+                   :stream t :key (cae-secrets-get-anthropic-api-key))))
 
 (defvar llm-refactoring-provider nil)
 (after! llm
