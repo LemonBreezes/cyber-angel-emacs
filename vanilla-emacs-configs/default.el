@@ -41,7 +41,6 @@
       yank-pop-change-selection t
       browse-url-firefox-new-window-is-tab t
       comint-history-isearch 'dwim
-      ;;compilation-environment '("LANG=C" "TERM=dumb")
       completion-auto-select 'second-tab
       completions-detailed t
       completions-format 'vertical
