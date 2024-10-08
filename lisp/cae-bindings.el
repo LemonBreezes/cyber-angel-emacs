@@ -104,8 +104,8 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
        "<f2>" #'gptel-send
-       "<f5>" #'elysium-query)
-      "<f6>" #'embrace-commander
+       "<f5>" #'elysium-query
+       "<f6>" #'aider-transient-menu)
       "<f7>" #'eri/expand-region
       "C-<f1>" #'try
       (:map process-menu-mode-map
