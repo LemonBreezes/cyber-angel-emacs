@@ -17,6 +17,12 @@
    gptel-backend (gptel-make-anthropic "Claude"
                    :stream t :key (cae-secrets-get-anthropic-api-key))))
 
+(use-package elysium
+  :custom
+  ;; Below are the default values
+  (elysium-window-size 0.33) ; The elysium buffer will be 1/3 your screen
+  (elysium-window-style 'vertical)) ; Can be customized to horizontal
+
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
