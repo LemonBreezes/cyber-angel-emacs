@@ -21,9 +21,7 @@
   :defer t :autoload (elysium-query)
   :custom
   (elysium-window-size 0.5)
-  (elysium-window-style 'vertical)
-  :config
-  (add-hook 'prog-mode-hook #'smerge-mode))
+  (elysium-window-style 'vertical))
 
 (defvar llm-refactoring-provider nil)
 (after! llm
