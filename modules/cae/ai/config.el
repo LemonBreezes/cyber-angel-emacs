@@ -12,12 +12,15 @@
         ;; Fixes some malformed JSON response error.
         gptel-use-curl nil)
   ;; Use Anthropic's API for generating code completions.
-  (setq
-   gptel-model cae-anthropic-default-model
+  (setq gptel-model cae-anthropic-default-model
    gptel-backend (gptel-make-anthropic "Claude"
                    :stream t :key (cae-secrets-get-anthropic-api-key))))
 
-(use-package elysium
+(use-package! aider
+  :defer t :config
+  (setq aider-args '("--model" cae-anthropic-default-model)))
+
+(use-package! elysium
   :defer t :autoload (elysium-query)
   :custom
   (elysium-window-size 0.5)
