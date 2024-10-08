@@ -18,12 +18,12 @@
                    :stream t :key (cae-secrets-get-anthropic-api-key))))
 
 (use-package elysium
-  :defer t
-  :autoload (elysium-query)
+  :defer t :autoload (elysium-query)
   :custom
-  ;; Below are the default values
-  (elysium-window-size 0.5) ; The elysium buffer will be 1/3 your screen
-  (elysium-window-style 'vertical)) ; Can be customized to horizontal
+  (elysium-window-size 0.5)
+  (elysium-window-style 'vertical)
+  :config
+  (add-hook 'prog-mode-hook #'smerge-mode))
 
 (defvar llm-refactoring-provider nil)
 (after! llm
