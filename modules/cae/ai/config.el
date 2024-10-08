@@ -13,8 +13,8 @@
         gptel-use-curl nil)
   ;; Use Anthropic's API for generating code completions.
   (setq gptel-model cae-anthropic-default-model
-   gptel-backend (gptel-make-anthropic "Claude"
-                   :stream t :key (cae-secrets-get-anthropic-api-key))))
+        gptel-backend (gptel-make-anthropic "Claude"
+                        :stream t :key (cae-secrets-get-anthropic-api-key))))
 
 (use-package! aider
   :defer t :config
