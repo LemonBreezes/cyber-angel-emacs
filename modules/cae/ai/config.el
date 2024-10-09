@@ -18,7 +18,7 @@
 
 (use-package! aider
   :defer t :config
-  (setq aider-args `("--model" "--o1-preview")))
+  (setq aider-args '("--model" "--o1-preview")))
 
 (use-package! elysium
   :defer t :autoload (elysium-query)
