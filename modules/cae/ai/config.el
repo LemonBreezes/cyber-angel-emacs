@@ -29,7 +29,7 @@
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
-  (setq llm-refactoring-provider (llm-models-match "4o")
+  (setq llm-refactoring-provider (llm-models-match "gpt-4o")
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 
