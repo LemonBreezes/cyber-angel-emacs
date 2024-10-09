@@ -370,10 +370,10 @@
     (setq flycheck-posframe-border-width 1
           flycheck-posframe-border-use-error-face t))
 
-  (use-package! breadcrumb
-    :unless (modulep! :ui modeline)
-    :defer t :init
-    (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
+  ;;(use-package! breadcrumb
+  ;;  :unless (modulep! :ui modeline)
+  ;;  :defer t :init
+  ;;  (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
 
   (use-package! iscroll
     :defer t :init
@@ -991,6 +991,7 @@
       (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
       (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
       (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
+      (add-to-list 'parrot-rotate-dict '(:rot ("1" "0")))
       (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
       (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
       (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
