@@ -12,7 +12,7 @@
 (after! dall-e-shell
   (setq dall-e-shell-model-version "dall-e-3"))
 (after! aider
-  (setq aider-args '("--model" "--o1-preview")))
+  (setq aider-args '("--o1-preview")))
 
 (use-package! gptel
   :defer t :init
