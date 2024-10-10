@@ -1,24 +1,27 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
 
-(defvar cae-openai-default-model "chatgpt-4o-latest")
-(defvar cae-anthropic-default-model "claude-3-5-sonnet-20240620")
+(after! chatgpt-shell
+  (setq chatgpt-shell-model-version
+        (seq-position chatgpt-shell-model-versions "o1-preview")))
+(after! gptel
+  (setq gptel-model "claude-3-5-sonnet-20240620"
+        gptel-backend (gptel-make-anthropic "Claude"
+                        :stream t :key (cae-secrets-get-anthropic-api-key))))
+(after! dall-e-shell
+  (setq dall-e-shell-model-version "dall-e-3"))
+(after! aider
+  (setq aider-args '("--model" "--o1-preview")))
 
 (use-package! gptel
   :defer t :init
-  (setq gptel-model cae-openai-default-model)
   :config
   (setq gptel-default-mode 'org-mode
         ;; Fixes some malformed JSON response error.
-        gptel-use-curl nil)
-  ;; Use Anthropic's API for generating code completions.
-  (setq gptel-model cae-anthropic-default-model
-        gptel-backend (gptel-make-anthropic "Claude"
-                        :stream t :key (cae-secrets-get-anthropic-api-key))))
+        gptel-use-curl nil))
 
 (use-package! aider
-  :defer t :config
-  (setq aider-args '("--model" "--o1-preview")))
+  :defer t)
 
 (use-package! elysium
   :defer t :autoload (elysium-query)
@@ -106,8 +109,7 @@
         dall-e-shell-openai-key (cae-secrets-get-openai-api-key)
         dall-e-shell-image-quality "hd"
         dall-e-shell-image-size "1024x1792"
-        dall-e-shell-request-timeout 180
-        dall-e-shell-model-version "dall-e-3"))
+        dall-e-shell-request-timeout 180))
 (use-package! chatgpt-shell
   :defer t :init
   (map! :leader
@@ -117,11 +119,7 @@
   ;; Use , to ask ChatGPT questions in any comint buffer
   ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
-  (setq chatgpt-shell-display-function #'switch-to-buffer
-        chatgpt-shell-model-version 2)
-  (when (modulep! +openai)
-    (setq chatgpt-shell-model-version
-          (seq-position chatgpt-shell-model-versions cae-openai-default-model)))
+  (setq chatgpt-shell-display-function #'switch-to-buffer)
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
