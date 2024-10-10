@@ -26,6 +26,7 @@
   (elysium-window-size 0.5)
   (elysium-window-style 'vertical))
 
+;; FIXME
 ;;(defvar llm-refactoring-provider nil)
 ;;(after! llm
 ;;  (require 'llm-openai)
