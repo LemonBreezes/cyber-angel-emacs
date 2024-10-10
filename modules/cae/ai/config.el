@@ -26,25 +26,24 @@
   (elysium-window-size 0.5)
   (elysium-window-style 'vertical))
 
-(defvar llm-refactoring-provider nil)
-(after! llm
-  (require 'llm-openai)
-  (setq llm-refactoring-provider (make-llm-openai :chat-model "chatgpt-4o-latest" :key (cae-secrets-get-openai-api-key))
-        magit-gptcommit-llm-provider llm-refactoring-provider
-        llm-warn-on-nonfree nil))
-
-(use-package! magit-gptcommit
-  :after gptel magit
-  :config
-  ;; Enable magit-gptcommit-mode to watch staged changes and generate commit message automatically in magit status buffer
-  ;; This mode is optional, you can also use `magit-gptcommit-generate' to generate commit message manually
-  ;; `magit-gptcommit-generate' should only execute on magit status buffer currently
-  (magit-gptcommit-mode 0)
-  ;; Add gptcommit transient commands to `magit-commit'
-  ;; Eval (transient-remove-suffix 'magit-commit '(1 -1)) to remove gptcommit transient commands
-  (magit-gptcommit-status-buffer-setup)
-  :bind (:map git-commit-mode-map
-         ("C-c C-g" . magit-gptcommit-commit-accept)))
+;;(defvar llm-refactoring-provider nil)
+;;(after! llm
+;;  (require 'llm-openai)
+;;  (setq llm-refactoring-provider (make-llm-openai :chat-model "chatgpt-4o-latest" :key (cae-secrets-get-openai-api-key))
+;;        magit-gptcommit-llm-provider llm-refactoring-provider
+;;        llm-warn-on-nonfree nil))
+;;(use-package! magit-gptcommit
+;;  :after gptel magit
+;;  :config
+;;  ;; Enable magit-gptcommit-mode to watch staged changes and generate commit message automatically in magit status buffer
+;;  ;; This mode is optional, you can also use `magit-gptcommit-generate' to generate commit message manually
+;;  ;; `magit-gptcommit-generate' should only execute on magit status buffer currently
+;;  (magit-gptcommit-mode 1)
+;;  ;; Add gptcommit transient commands to `magit-commit'
+;;  ;; Eval (transient-remove-suffix 'magit-commit '(1 -1)) to remove gptcommit transient commands
+;;  (magit-gptcommit-status-buffer-setup)
+;;  :bind (:map git-commit-mode-map
+;;         ("C-c C-g" . magit-gptcommit-commit-accept)))
 
 (use-package! copilot
   :defer t :init
