@@ -19,7 +19,7 @@
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
           "--encoding" "latin-1"
           "--cache-prompts"
-          "--no-stream")))
+          "--no-verify-ssl")))
 
 (use-package! gptel
   :defer t :init
