@@ -1,6 +1,6 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
-
+;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version
         (seq-position chatgpt-shell-model-versions "o1-preview")))
