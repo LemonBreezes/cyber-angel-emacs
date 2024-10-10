@@ -29,7 +29,7 @@
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
-  (setq llm-refactoring-provider (llm-models-match "gpt-4o")
+  (setq llm-refactoring-provider (make-llm-openai :chat-model "o1-preview" :key (cae-secrets-get-openai-api-key))
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 
