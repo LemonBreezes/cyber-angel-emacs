@@ -2,6 +2,9 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
+  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+  (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
   ;; Fixes an error I got from `lsp!'.
   (autoload 'lsp--suggest-project-root "lsp-mode")
   (after! lsp-mode
@@ -15,7 +18,7 @@
           ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
           lsp-enable-on-type-formatting t
-          
+          lsp-enable-folding t
           ;; For some reason LSP isn't working for me over Tramp as well as
           ;; Eglot does. At least not over `sudo'.
           lsp-auto-register-remote-clients nil)
