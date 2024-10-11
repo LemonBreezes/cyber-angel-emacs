@@ -41,3 +41,9 @@
     (if (string-prefix-p "," input)
         (chatgpt-shell-send-to-buffer (substring input 1))
       (apply f args))))
+
+;;;###autoload
+(defun cae-ai-chatgpt-open-in-workspace ()
+  (interactive)
+  (+workspace-switch "*chatgpt*" t)
+  (chatgpt-shell))
