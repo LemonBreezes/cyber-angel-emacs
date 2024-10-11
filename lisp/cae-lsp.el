@@ -3,6 +3,7 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
+    (autoload 'lsp--suggest-project-root "lsp-mode")
     (setq lsp-headerline-breadcrumb-enable t
           lsp-enable-snippet t
           lsp-enable-folding t
