@@ -43,7 +43,7 @@
       (apply f args))))
 
 ;;;###autoload
-(defun cae-ai-chatgpt-open-in-workspace ()
+(defun cae-ai-open-chatgpt-workspace ()
   (interactive)
   (+workspace-switch "*chatgpt*" t)
   (chatgpt-shell))
