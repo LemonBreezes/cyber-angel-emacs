@@ -2,10 +2,9 @@
 
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
+  ;; Fixes an error I got from `lsp!'.
+  (autoload 'lsp--suggest-project-root "lsp-mode")
   (after! lsp-mode
-    ;; Fixes an error I got from `lsp!'.
-    (autoload 'lsp--suggest-project-root "lsp-mode")
-
     (setq lsp-headerline-breadcrumb-enable t
           lsp-enable-snippet t
           lsp-enable-folding t
