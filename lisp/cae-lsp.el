@@ -3,7 +3,7 @@
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot)))
   (after! lsp-mode
-    ;; Fixes an error I got from `lsp!'
+    ;; Fixes an error I got from `lsp!'.
     (autoload 'lsp--suggest-project-root "lsp-mode")
 
     (setq lsp-headerline-breadcrumb-enable t
