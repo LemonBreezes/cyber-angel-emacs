@@ -122,7 +122,8 @@
   (map! :leader
         :prefix "o"
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
-        :desc "Open ChatGPT here" "C" #'chatgpt-shell)
+        :desc "Open ChatGPT here" "C" #'chatgpt-shell
+        :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
   ;; Use , to ask ChatGPT questions in any comint buffer
   ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
