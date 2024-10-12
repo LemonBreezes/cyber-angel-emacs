@@ -166,7 +166,7 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (unless (eq 'nongnu-elpa (car recipe))
 ;;    (funcall fn recipe)))
 
-;; GPT O1 does not support system prompt parameter.
+;; GPT O1 does not support the system prompt parameter.
 (defun cae-hacks-chatgpt-shell--make-payload (history)
   "Create the request payload from HISTORY."
   (setq history
