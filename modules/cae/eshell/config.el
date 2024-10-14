@@ -134,6 +134,8 @@
 (use-package eshell-atuin
   :defer t :after eshell
   :config
+  (unless (executable-find "atuin")
+    (warn "atuin is not installed. eshell-atuin will not work."))
   (eshell-atuin-mode))
 
 ;;Local Variables:
