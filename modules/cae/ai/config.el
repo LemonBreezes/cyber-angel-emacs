@@ -127,6 +127,8 @@
   ;; Use , to ask ChatGPT questions in any comint buffer
   ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
+  (unless (executable-find "dwdiff")
+    (warn! "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
   (setq chatgpt-shell-display-function #'switch-to-buffer)
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
