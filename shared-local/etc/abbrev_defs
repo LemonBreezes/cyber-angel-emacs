@@ -25,6 +25,7 @@
     ("hapen" "happen" nil :count 0)
     ("helpp" "help" nil :count 0)
     ("ijnstall" "install" nil :count 0)
+    ("improvue" "improve" nil :count 0)
     ("jsut" "just" nil :count 1)
     ("limti" "limit" nil :count 0)
     ("loals" "locals" nil :count 0)
