@@ -3,7 +3,7 @@
 ;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version
-        (seq-position chatgpt-shell-model-versions "o1-preview")
+        (seq-position chatgpt-shell-model-versions "o1-mini")
         chatgpt-shell-streaming nil))
 (after! gptel
   (setq gptel-model "claude-3-5-sonnet-20240620"
