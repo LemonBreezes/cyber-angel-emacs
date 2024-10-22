@@ -5,6 +5,9 @@
 (defvar cae-theme-export-theme-with-pywal t)
 (defvar cae-theme-enable-day-night-theme-switching t)
 
+(defvar cae-modus-day-theme 'modus-vivendi-tinted)
+(defvar cae-modus-night-theme 'modus-operandi-tinted)
+
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
@@ -112,7 +115,7 @@
         modus-themes-variable-pitch-ui t
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
-        modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted)
+        modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
