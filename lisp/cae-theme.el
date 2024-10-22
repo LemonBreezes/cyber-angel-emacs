@@ -133,8 +133,8 @@
     :defer-incrementally t
     :defer t :config
     (setq circadian-themes
-          '(("7:30" . modus-operandi)
-            ("19:30"  . modus-vivendi)))
+          `(("7:30" . ,cae-modus-day-theme)
+            ("19:30" . ,cae-modus-night-theme)))
     (if (and calendar-latitude calendar-longitude)
         (if doom-init-time
             (circadian-activate-current)
