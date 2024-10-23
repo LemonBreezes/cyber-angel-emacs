@@ -155,6 +155,23 @@
         scroll-preserve-screen-position t
         suggest-key-bindings nil)
 
+
+  ;; Do not highlight quoted strings in syslog-mode because sometimes they
+  ;; aren't balanced, which breaks font-lock.
+  (after! syslog-mode
+    (setq syslog-font-lock-keywords
+          (cl-remove-if
+           (lambda (keyword)
+             (cl-destructuring-bind (regexp . face) keyword
+               (string= "'[^']*'" regexp)))
+           syslog-font-lock-keywords)
+          ;; I don't use syslog notes.
+          syslog-note-thing #'ignore))
+  (advice-add #'syslog-load-notes :override #'ignore)
+  (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
+  (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
+  (add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
+
   (after! persp-mode
     (setq persp-reset-windows-on-nil-window-conf t))
 
