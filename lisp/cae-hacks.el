@@ -188,5 +188,7 @@ It is meant to be used as a `post-gc-hook'."
     (when chatgpt-shell-streaming
       (push `(stream . t) request-data))
     request-data))
-
 (advice-add #'chatgpt-shell--make-payload :override #'cae-hacks-chatgpt-shell--make-payload)
+
+;; Getting a void variable error with modus theme.
+(defvar date-scheduled-subtle nil)
