@@ -52,7 +52,7 @@
   ;;(magit-gptcommit-mode 1)
   ;; Add gptcommit transient commands to `magit-commit'
   ;; Eval (transient-remove-suffix 'magit-commit '(1 -1)) to remove gptcommit transient commands
-  ;;(magit-gptcommit-status-buffer-setup)
+  (magit-gptcommit-status-buffer-setup)
   :bind (:map git-commit-mode-map
          ("C-c C-g" . magit-gptcommit-commit-accept)))
 
