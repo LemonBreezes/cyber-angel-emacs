@@ -884,7 +884,9 @@
     :defer t :init
     (add-hook 'doom-first-file-hook #'global-wakatime-mode)
     :config
-    (setq wakatime-cli-path (executable-find "wakatime")))
+    (setq wakatime-cli-path (executable-find "wakatime"))
+    (defadvice! cae-wakatime-handle-remote-files-a (_)
+      :before-until (tramp-tramp-file-p (buffer-file-name (current-buffer)))))
 
   (use-package! titlecase
     :defer t :init
