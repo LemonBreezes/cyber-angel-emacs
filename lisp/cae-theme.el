@@ -5,8 +5,8 @@
 (defvar cae-theme-export-theme-with-pywal t)
 (defvar cae-theme-enable-day-night-theme-switching t)
 
-(defvar cae-modus-day-theme 'modus-vivendi-tinted)
-(defvar cae-modus-night-theme 'modus-operandi-tinted)
+(defvar cae-modus-day-theme 'modus-operandi-tinted)
+(defvar cae-modus-night-theme 'modus-vivendi-tinted)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
