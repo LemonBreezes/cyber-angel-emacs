@@ -16,6 +16,7 @@
     ("corectly" "correctly" nil :count 0)
     ("doomn" "doom" nil :count 1)
     ("eamcs" "emacs" nil :count 0)
+    ("elispp" "elisp" nil :count 1)
     ("emere" "emerge" nil :count 0)
     ("emerege" "emerge" nil :count 0)
     ("emergeo" "emerge" nil :count 0)
