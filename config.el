@@ -886,7 +886,8 @@
     :config
     (setq wakatime-cli-path (executable-find "wakatime"))
     (defadvice! cae-wakatime-handle-remote-files-a (_)
-      :before-until (tramp-tramp-file-p (buffer-file-name (current-buffer)))))
+      :before-until #'wakatime-call
+      (tramp-tramp-file-p (buffer-file-name (current-buffer)))))
 
   (use-package! titlecase
     :defer t :init
