@@ -133,6 +133,9 @@
 (define-key help-map (kbd "<f1>") #'describe-key-briefly)
 (define-key help-map (kbd "<f2>") #'describe-key) ; `F1 F2' is easier than `C-h k'.
 
+;; Doom Emacs unbinds the tutorial keybinding.
+(define-key help-map (kbd "M-t") #'help-with-tutorial)
+
 (after! diff-mode
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
