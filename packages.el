@@ -50,6 +50,7 @@
 (package! xterm-color)
 (package! casual-calc :recipe (:host github :repo "kickingvegas/casual-calc"))
 (package! syslog-mode)
+(package! vimtutor)
 
 ;; cae-theme.el
 (package! modus-themes)
