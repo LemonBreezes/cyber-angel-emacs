@@ -26,7 +26,8 @@
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
-  (package! tabgo))
+  (package! tabgo)
+  (package! evil-tutor))
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
@@ -50,7 +51,6 @@
 (package! xterm-color)
 (package! casual-calc :recipe (:host github :repo "kickingvegas/casual-calc"))
 (package! syslog-mode)
-(package! evil-tutor)
 
 ;; cae-theme.el
 (package! modus-themes)
