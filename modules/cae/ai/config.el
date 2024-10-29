@@ -19,6 +19,12 @@
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
           "--encoding" "latin-1"
           "--cache-prompts")))
+(defvar llm-refactoring-provider nil)
+(after! llm
+  (require 'llm-openai)
+  (setq llm-refactoring-provider (make-llm-openai :chat-model "chatgpt-4o-latest" :key (cae-secrets-get-openai-api-key))
+        magit-gptcommit-llm-provider llm-refactoring-provider
+        llm-warn-on-nonfree nil))
 
 (use-package! gptel
   :defer t :init
@@ -36,13 +42,6 @@
   (elysium-window-size 0.5)
   (elysium-window-style 'vertical))
 
-;; FIXME Using this package causes magit to instantly quit.
-(defvar llm-refactoring-provider nil)
-(after! llm
-  (require 'llm-openai)
-  (setq llm-refactoring-provider (make-llm-openai :chat-model "chatgpt-4o-latest" :key (cae-secrets-get-openai-api-key))
-        magit-gptcommit-llm-provider llm-refactoring-provider
-        llm-warn-on-nonfree nil))
 (use-package! magit-gptcommit
   :after gptel magit
   :config
