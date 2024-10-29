@@ -49,6 +49,7 @@
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! backline)
 (package! xterm-color)
+(package! casual-lib :recipe (:host github :repo "kickingvegas/casual-lib"))
 (package! casual-calc :recipe (:host github :repo "kickingvegas/casual-calc"))
 (package! syslog-mode)
 
