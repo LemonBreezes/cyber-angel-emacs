@@ -23,9 +23,10 @@
 (after! llm
   (require 'llm-openai)
   (setq llm-refactoring-provider
-        (make-llm-openai :chat-model "o1-mini"
+        (make-llm-openai :chat-model "chatgpt-4o-latest"
                          :key (cae-secrets-get-openai-api-key)
-                         :default-chat-non-standard-params '((stream . :json-false)))
+                         ;;:default-chat-non-standard-params '((stream . :json-false))
+                         )
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
                                         ;
