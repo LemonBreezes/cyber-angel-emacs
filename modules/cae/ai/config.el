@@ -28,7 +28,7 @@
                          :default-chat-non-standard-params '((stream . nil)))
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
-
+;
 (use-package! gptel
   :defer t :init
   :config
