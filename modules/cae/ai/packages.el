@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/ai/packages.el
 
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-Lib"))
+
 (package! copilot :recipe (:host github :repo "copilot-emacs/copilot.el"))
 (package! gptel)
 (package! elysium :recipe (:host github :repo "lanceberge/elysium"))
