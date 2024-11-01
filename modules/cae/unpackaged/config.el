@@ -1,5 +1,7 @@
 ;;; private/unpackaged/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;; This is a module created for stuff I copied from Alphapapa's `unpackaged.el'
 ;; package.
 
