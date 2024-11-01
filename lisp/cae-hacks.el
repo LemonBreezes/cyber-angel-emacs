@@ -166,29 +166,5 @@ It is meant to be used as a `post-gc-hook'."
 ;;  (unless (eq 'nongnu-elpa (car recipe))
 ;;    (funcall fn recipe)))
 
-;; GPT O1 does not support the system prompt parameter.
-(defun cae-hacks-chatgpt-shell--make-payload (history)
-  "Create the request payload from HISTORY."
-  (setq history
-        (vconcat ;; Vector for json
-         (chatgpt-shell--user-assistant-messages
-          (last history
-                (chatgpt-shell--unpaired-length
-                 (if (functionp chatgpt-shell-transmitted-context-length)
-                     (funcall chatgpt-shell-transmitted-context-length
-                              (chatgpt-shell-model-version) history)
-                   chatgpt-shell-transmitted-context-length))))))
-  ;; TODO: Use `chatgpt-shell-make-request-data'.
-  (let ((request-data `((model . ,(chatgpt-shell-model-version))
-                        (messages . ,(if (chatgpt-shell-system-prompt)
-                                         history
-                                       history)))))
-    (when chatgpt-shell-model-temperature
-      (push `(temperature . ,chatgpt-shell-model-temperature) request-data))
-    (when chatgpt-shell-streaming
-      (push `(stream . t) request-data))
-    request-data))
-(advice-add #'chatgpt-shell--make-payload :override #'cae-hacks-chatgpt-shell--make-payload)
-
 ;; Getting a void variable error with modus theme.
 (defvar date-scheduled-subtle nil)
