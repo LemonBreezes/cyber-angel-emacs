@@ -49,7 +49,7 @@
   (chatgpt-shell))
 
 ;;;###autoload
-(defun cae-ai-open-chatgpt-workspace ()
+(defun cae-ai-open-dall-e-workspace ()
   (interactive)
   (+workspace-switch "*dall-e*" t)
   (dall-e-shell))
