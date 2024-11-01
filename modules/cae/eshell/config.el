@@ -1,5 +1,7 @@
 ;;; private/eshell/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (use-package! eat
   :defer t :init
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
