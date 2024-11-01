@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/holy/packages.el
 
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+
 (package! anzu)
 (package! goggles)
 (package! edit-indirect)
