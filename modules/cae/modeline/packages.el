@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/modeline/packages.el
 
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+
 (package! minions)
 (when (modulep! +pretty)
   (package! nyan-mode))
