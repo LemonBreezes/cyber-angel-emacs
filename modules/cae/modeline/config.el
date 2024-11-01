@@ -1,5 +1,7 @@
 ;;; private/modeline/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (unless (modulep! :ui modeline)
   ;; Use my modeline as a fallback if Doom modeline is enabled.
   (remove-hook 'doom-after-init-hook #'doom-modeline-mode)
