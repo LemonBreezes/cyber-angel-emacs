@@ -1,5 +1,7 @@
 ;;; private/holy/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (load! "+visible-mark")
 (load! "+multiple-cursors")
 
