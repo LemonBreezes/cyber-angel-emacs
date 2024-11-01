@@ -63,7 +63,7 @@
                 ("M-h" . evil-cp-beginning-of-defun)))
         (defun cae-enable-evil-cleverparens-mode ()
           (unless (funcall #'derived-mode-p
-                           '(haskell-mode lean4-mode org-mode python-mode))
+                           '(haskell-mode lean4-mode org-mode python-mode text-mode))
             (evil-cleverparens-mode +1)))
         (dolist (mode sp-lisp-modes)
           (add-hook mode #'cae-enable-evil-cleverparens-mode))
