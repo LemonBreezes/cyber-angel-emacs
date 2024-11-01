@@ -1,5 +1,7 @@
 ;;; private/org/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (use-package! org-rich-yank
   :defer t :init
   (map! :map org-mode-map
