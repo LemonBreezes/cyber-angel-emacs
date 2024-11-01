@@ -1,5 +1,7 @@
 ;;; completion/helm/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;; Posframe (requires +childframe)
 (defvar +helm-posframe-handler #'posframe-poshandler-frame-center
   "The function that determines the location of the childframe.
