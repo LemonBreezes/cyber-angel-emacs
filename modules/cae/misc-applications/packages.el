@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/misc-applications/packages.el
 
-(require 'cae-lib)
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
 ;; EAF is huge. It gets its own category.
 (when (modulep! +eaf)
