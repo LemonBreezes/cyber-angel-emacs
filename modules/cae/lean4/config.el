@@ -1,5 +1,7 @@
 ;;; lang/lean4/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (after! lean4-mode
   (sp-with-modes 'lean4-mode
     (sp-local-pair "/-" "-/")
