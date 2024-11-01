@@ -9,6 +9,8 @@
                    elfeed-goodies
                    mu4e-alert)
 
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+
 ;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
