@@ -47,3 +47,9 @@
   (interactive)
   (+workspace-switch "*chatgpt*" t)
   (chatgpt-shell))
+
+;;;###autoload
+(defun cae-ai-open-chatgpt-workspace ()
+  (interactive)
+  (+workspace-switch "*dall-e*" t)
+  (dall-e-shell))
