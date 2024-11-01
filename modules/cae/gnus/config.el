@@ -1,5 +1,7 @@
 ;;; private/gnus/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (map! :leader :desc "Gnus" "o G" #'=gnus)
 
 (when (modulep! :editor evil)
