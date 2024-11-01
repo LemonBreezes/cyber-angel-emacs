@@ -6,7 +6,8 @@
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version
         (seq-position chatgpt-shell-model-versions "o1-preview")
-        chatgpt-shell-streaming nil))
+        chatgpt-shell-streaming nil
+        chatgpt-shell-system-prompt nil))
 (after! gptel
   (setq gptel-model "claude-3-5-sonnet-20240620"
         gptel-backend (gptel-make-anthropic "Claude"
