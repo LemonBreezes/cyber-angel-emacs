@@ -1,5 +1,7 @@
 ;;; private/ai/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version
