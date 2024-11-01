@@ -1,5 +1,7 @@
 ;;; cae/denote/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
   :defer t :init
