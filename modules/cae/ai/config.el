@@ -116,7 +116,8 @@
   :defer t :init
   (map! :leader
         :prefix "o"
-        :desc "Open DALL-E here" "I" #'dall-e-shell)
+        :desc "Open DALL-E here" "I" #'dall-e-shell
+        :desc "Open DALL-E workspace" "C-i" #'cae-ai-open-dall-e-workspace)
   :config
   (setq dall-e-shell-display-function #'switch-to-buffer
         dall-e-shell-openai-key (cae-secrets-get-openai-api-key)
