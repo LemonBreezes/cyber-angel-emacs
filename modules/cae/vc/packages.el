@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/vc/packages.el
 
-(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+(package! cae-lib :recipe (:host github :repo "lemonbreezes/cae-lib"))
 
 (package! git-link)
 (package! gitignore-templates)
