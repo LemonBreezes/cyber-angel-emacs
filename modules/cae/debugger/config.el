@@ -1,5 +1,7 @@
 ;;; private/debugger/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot))
            (modulep! :tools debugger +lsp))
