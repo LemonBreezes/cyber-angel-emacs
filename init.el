@@ -17,7 +17,7 @@
     (defvar cae-init-languages-enabled-p (and p t))))
 
 ;; No side-effects. For the :cae modules.
-(load! "lisp/cae-lib")
+(require 'cae-lib)
 
 (when cae-init-preamble-enabled-p
   (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
