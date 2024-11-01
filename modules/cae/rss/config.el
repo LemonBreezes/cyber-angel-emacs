@@ -1,5 +1,7 @@
 ;;; cae/rss/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (use-package! elfeed
   :defer t :config
   (setq elfeed-search-title-max-width 100)
