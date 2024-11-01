@@ -65,8 +65,6 @@
           (unless (funcall #'derived-mode-p
                            '(haskell-mode lean4-mode python-mode text-mode))
             (evil-cleverparens-mode +1)))
-        (dolist (mode sp-lisp-modes)
-          (add-hook mode #'cae-enable-evil-cleverparens-mode))
         (add-hook 'prog-mode-hook #'cae-enable-evil-cleverparens-mode)
 
         :custom ((evil-cleverparens-use-s-and-S nil)
