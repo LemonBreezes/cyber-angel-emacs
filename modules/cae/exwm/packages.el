@@ -1,6 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; private/exwm/packages.el
 
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+
 (package! exwm :recipe
   (:host github :repo "emacs-exwm/exwm"))
 (package! exwm-mff)
