@@ -1,5 +1,7 @@
 ;;; private/lisp/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
   (advice-add #'edebug-compute-previous-result :around
