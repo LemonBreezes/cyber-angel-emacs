@@ -1,5 +1,7 @@
 ;;; private/vc/config.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (setq +vc-gutter-in-remote-files t
       +vc-gutter-in-margin t)
 
