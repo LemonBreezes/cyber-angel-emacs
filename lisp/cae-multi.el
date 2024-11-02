@@ -29,6 +29,8 @@
 (setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir))
 (after! calendar
   (setq diary-file (concat cae-multi-secrets-dir "diary")))
+(after! transient
+  (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
 (after! bookmark
   (setq bookmark-watch-bookmark-file t))
