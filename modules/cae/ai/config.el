@@ -5,7 +5,7 @@
 ;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version
-        (seq-position chatgpt-shell-model-versions "o1")
+        (seq-position chatgpt-shell-model-versions "o1-preview")
         chatgpt-shell-streaming nil
         chatgpt-shell-system-prompt nil))
 (after! gptel
@@ -16,7 +16,7 @@
   (setq dall-e-shell-model-version "dall-e-3"))
 (after! aider
   (setq aider-args
-        `("--o1"
+        `("--o1-preview"
           "--editor-model" "o1-mini"
           "--openai-api-key" ,(cae-secrets-get-openai-api-key)
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
