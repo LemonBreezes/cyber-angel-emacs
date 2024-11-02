@@ -11,7 +11,8 @@
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
 
-(setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs"))
+(after! abbrev
+  (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs")))
 (after! bookmark
   (setq bookmark-default-file (concat cae-multi-secrets-dir "bookmarks")))
 (after! bbdb
