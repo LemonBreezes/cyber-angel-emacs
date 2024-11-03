@@ -49,13 +49,13 @@
                   ((if (listp fs)
                        (cl-loop for f in fs thereis (memq f (list ,@faces)))
                      (memq fs (list ,@faces))))))))
-  (defalias 'cae-sp-point-in-src-block-p (cae-sp-in-faces-p 'org-block))
+  (defalias 'cae-sp-in-src-block-p (cae-sp-in-faces-p 'org-block))
   (defalias 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
   (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
-                   '(cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
-    (sp-local-pair 'org-mode "<" ">")
+                   '(cae-sp-in-src-block-p cae-sp-in-org-table-p))
+    (sp-local-pair 'org-mode "<" ">" :unless '(cae-sp-in-org-block-begin-line-p))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
