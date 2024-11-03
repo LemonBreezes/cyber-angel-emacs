@@ -55,7 +55,7 @@
   (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
-                   '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
+                   '(cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
