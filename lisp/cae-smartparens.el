@@ -57,7 +57,7 @@
   (after! smartparens
     (sp-with-modes 'org-mode
       (sp-local-pair "<<" ">>" :unless
-                     '(cae-sp-in-src-block-p cae-sp-in-org-table-p))
+                     '(cae-sp-in-src-block-p))
       (sp-local-pair "<" ">" :when '(cae-sp-in-org-block-begin-line-p)))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
