@@ -50,9 +50,9 @@
                        (cl-loop for f in fs thereis (memq f ,faces))
                      (memq fs ,faces))))
          t)))
-  (defalias 'cae-sp-point-in-src-block-p (cae-sp-in-faces-p 'org-block))
-  (defalias 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
-  (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
+  (defalias 'cae-sp-point-in-src-block-p (cae-sp-in-faces-p org-block))
+  (defalias 'cae-sp-in-org-table-p (cae-sp-in-faces-p org-table))
+  (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p org-block-begin-line))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
                    '(cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
