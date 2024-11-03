@@ -126,7 +126,7 @@
        "TAB" nil))
 
 ;; Make YaSnippet TAB work in Org mode.
-(after! yasnippet
+(after! org
   (map! :map org-mode-map
         :ie [tab] nil))
 
