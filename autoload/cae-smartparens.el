@@ -42,22 +42,3 @@ many times the \\[universal-argument] was invoked."
                 :transient t
                 :flatten t))
 
-(defun cae-sp-point-in-src-block-p (_ _ _)
-  (let ((face (get-text-property (point) 'face)))
-    (if (listp face)
-        (memq 'org-block face)
-      (eq face 'org-block))))
-(defun cae-sp-in-org-table-p (_ _ _)
-  (let ((face (get-text-property (point) 'face)))
-    (if (listp face)
-        (memq 'org-table face)
-      (eq face 'org-table))))
-
-(defmacro cae-smartparens-inside-faces-p (&rest faces)
-  `(lambda (_ _ _)
-     (when-let (((> (point) (point-min)))
-                (fs (get-text-property (1- (point)) 'face))
-                ((if (listp fs)
-                     (cl-loop for f in fs thereis (memq f faces))
-                   (memq fs faces))))
-       t)))
