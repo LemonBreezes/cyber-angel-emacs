@@ -43,16 +43,6 @@
 
 (when (modulep! :config default +smartparens)
   (after! smartparens
-    (defun cae-sp-point-in-src-block-p (_ _ _)
-      (let ((face (get-text-property (point) 'face)))
-        (if (listp face)
-            (memq 'org-block face)
-          (eq face 'org-block))))
-    (defun cae-sp-in-org-table-p (_ _ _)
-      (let ((face (get-text-property (point) 'face)))
-        (if (listp face)
-            (memq 'org-table face)
-          (eq face 'org-table))))
     (sp-local-pair 'org-mode "<<" ">>" :unless
                    '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
