@@ -127,10 +127,7 @@
 
 ;; Make YaSnippet TAB work in Org mode.
 (after! org
-  (run-at-time 0.01 nil
-               (lambda ()
-                 (map! :map org-mode-map
-                       :ie [tab] nil))))
+  (run-at-time 0.01 nil (lambda () (map! :map org-mode-map :ie [tab] nil))))
 
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (define-key help-map (kbd "SPC") #'cae-pop-mark)
