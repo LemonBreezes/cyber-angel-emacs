@@ -42,6 +42,16 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
+  (defmacro cae-sp-inside-faces-p (&rest faces)
+    `(lambda (_ _ _)
+       (when-let (((> (point) (point-min)))
+                  (fs (get-text-property (1- (point)) 'face))
+                  ((if (listp fs)
+                       (cl-loop for f in fs thereis (memq f faces))
+                     (memq fs faces))))
+         t)))
+  (defalias 'cae-sp-point-in-src-block-p (cae-sp-inside-faces-p 'org-block))
+  (defalias 'cae-sp-in-org-table-p (cae-sp-inside-faces-p 'org-table))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
                    '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
