@@ -125,6 +125,11 @@
        :map c-mode-base-map
        "TAB" nil))
 
+;; Make YaSnippet TAB work in Org mode.
+(after! yasnippet
+  (map! :map org-mode-map
+        :ie [tab] nil))
+
 ;; This one is because I bind `C-h' to a dedicated key on my keyboard.
 (define-key help-map (kbd "SPC") #'cae-pop-mark)
 (define-key help-map (kbd "DEL") #'cae-pop-mark)
