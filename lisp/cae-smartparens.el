@@ -53,6 +53,7 @@
   (fset 'cae-sp-in-src-block-p (cae-sp-in-faces-p 'org-block))
   (fset 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
   (fset 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
+  (autoload 'sp-org-inside-inline-code "smartparens-org")
   (after! smartparens
     (sp-with-modes 'org-mode
       (sp-local-pair "<<" ">>" :unless
