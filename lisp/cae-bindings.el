@@ -126,7 +126,8 @@
        "TAB" nil))
 
 ;; Make YaSnippet TAB work in Org mode.
-(after! org
+(defadvice! cae-org-fix-keybindings ()
+  :after #'+org-init-keybinds-h
   (map! :map org-mode-map
         :ie [tab] nil))
 
