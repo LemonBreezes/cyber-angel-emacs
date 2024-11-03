@@ -45,7 +45,7 @@
   (defmacro cae-sp-in-faces-p (&rest faces)
     `(lambda (&rest _)
        (when (> (point) (point-min))
-         (let ((fs (get-text-property (1- (point)) 'face)))
+         (let ((fs (get-text-property (point) 'face)))
            (and (if (listp fs)
                     (cl-loop for f in fs thereis (memq f (list ,@faces))
                              finally return nil)
