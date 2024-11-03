@@ -42,7 +42,6 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
-  (autoload 'sp-org-inside-inline-code "smartparens-org")
   (after! smartparens
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
