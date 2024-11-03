@@ -42,23 +42,23 @@
   (map! [remap newline] nil))
 
 (when (modulep! :config default +smartparens)
-  (defmacro cae-sp-in-faces-p (&rest faces)
-    `(lambda (&rest _)
-       (when (> (point) (point-min))
-         (let ((fs (get-text-property (1- (point)) 'face)))
-           (if (listp fs)
-               (cl-loop for f in fs thereis (memq f (list ,@faces))
-                        finally return nil)
-             (memq fs (list ,@faces)))))))
-  (fset 'cae-sp-in-src-block-p (cae-sp-in-faces-p 'org-block))
-  (fset 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
-  (fset 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
-  (autoload 'sp-org-inside-inline-code "smartparens-org")
+  ;;(defmacro cae-sp-in-faces-p (&rest faces)
+  ;;  `(lambda (&rest _)
+  ;;     (when (> (point) (point-min))
+  ;;       (let ((fs (get-text-property (1- (point)) 'face)))
+  ;;         (if (listp fs)
+  ;;             (cl-loop for f in fs thereis (memq f (list ,@faces))
+  ;;                      finally return nil)
+  ;;           (memq fs (list ,@faces)))))))
+  ;;(fset 'cae-sp-in-src-block-p (cae-sp-in-faces-p 'org-block))
+  ;;(fset 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
+  ;;(fset 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
+  ;;(autoload 'sp-org-inside-inline-code "smartparens-org")
   (after! smartparens
-    (sp-with-modes 'org-mode
-      (sp-local-pair "<<" ">>" :unless
-                     '(cae-sp-in-src-block-p cae-sp-in-org-table-p sp-org-inside-inline-code))
-      (sp-local-pair "<" ">" :when '(cae-sp-in-org-block-begin-line-p)))
+    ;;(sp-with-modes 'org-mode
+    ;;  (sp-local-pair "<<" ">>" :unless
+    ;;                 '(:add cae-sp-in-src-block-p cae-sp-in-org-table-p sp-org-inside-inline-code))
+    ;;  (sp-local-pair "<" ">" :when '(:add cae-sp-in-org-block-begin-line-p)))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
