@@ -43,22 +43,19 @@
 
 (when (modulep! :config default +smartparens)
   (defmacro cae-sp-in-faces-p (&rest faces)
-    (let ((sym (gensym)))
-      (fset sym (lambda (_ _ _)
-                  (when-let (((> (point) (point-min)))
-                             (fs (get-text-property (1- (point)) 'face))
-                             ((if (listp fs)
-                                  (cl-loop for f in fs thereis (memq f faces))
-                                (memq fs faces))))))
-            sym)))
+    `(lambda (_ _ _)
+       (when-let (((> (point) (point-min)))
+                  (fs (get-text-property (1- (point)) 'face))
+                  ((if (listp fs)
+                       (cl-loop for f in fs thereis (memq f faces))
+                     (memq fs faces))))
+         t)))
   (defalias 'cae-sp-point-in-src-block-p (cae-sp-in-faces-p 'org-block))
   (defalias 'cae-sp-in-org-table-p (cae-sp-in-faces-p 'org-table))
   (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
                    '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
-    (sp-local-pair 'org-mode "<" ">" :when
-                   '(:add cae-sp-in-org-block-begin-line-p))
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
