@@ -55,8 +55,7 @@
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
                    '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
-    (sp-local-pair 'org-mode "<" ">" :when
-                   '(:add cae-sp-in-org-block-begin-line-p))
+    (sp-local-pair 'org-mode "<" ">")
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
     ;; I prefer for `C-M-n' and `C-M-p' to never act like `sp-backward-up-sexp' or
