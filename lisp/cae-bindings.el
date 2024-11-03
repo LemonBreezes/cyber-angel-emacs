@@ -126,7 +126,7 @@
        "TAB" nil))
 
 ;; Make YaSnippet TAB work in Org mode.
-(add-hook! 'org-mode-hook :append
+(add-hook! 'org-load-hook :append
   (defun cae-org-fix-keybindings ()
     (map! :map org-mode-map
           :ie [tab] nil)))
