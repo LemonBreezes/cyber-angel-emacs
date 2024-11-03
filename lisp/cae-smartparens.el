@@ -54,7 +54,7 @@
   (defalias 'cae-sp-in-org-block-begin-line-p (cae-sp-in-faces-p 'org-block-begin-line))
   (after! smartparens
     (sp-local-pair 'org-mode "<<" ">>" :unless
-                   '(:add cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
+                   '(cae-sp-point-in-src-block-p cae-sp-in-org-table-p))
     (sp-local-pair 'org-mode "<" ">")
     (add-to-list 'sp-ignore-modes-list #'inferior-emacs-lisp-mode)
 
