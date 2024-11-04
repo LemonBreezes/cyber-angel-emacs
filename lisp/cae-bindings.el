@@ -96,9 +96,9 @@
       "C-x P" #'pop-to-buffer
       "M-Z" #'zap-up-to-char
       "M-R" #'cae-sp-raise-sexp
-      "C-M-/" #'hippie-expand
+      "M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
-       "M-/" #'cape-dabbrev
+       "C-M-/" #'cape-dabbrev
        "C-S-s" #'cae-complete-in-minibuffer)
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
