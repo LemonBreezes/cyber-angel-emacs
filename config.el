@@ -935,6 +935,7 @@
                     (overlay (make-overlay start (1+ start))))
                (insert "<>")
                (forward-char -1)
+               (overlay-put overlay 'keymap (make-sparse-keymap))
                (define-key (overlay-get overlay 'keymap)
                  (kbd "<backspace>")
                  (lambda ()
