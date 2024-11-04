@@ -503,6 +503,6 @@ image-mode buffers."
       `(menu-item ""
         delete-char
         :filter
-        (lambda (cmd)
+        ,`(lambda (cmd)
           (and (eq (point) (1+ ,start))
                (eq (1+ (point)) ,end)))))))
