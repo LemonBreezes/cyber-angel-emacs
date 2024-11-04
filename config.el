@@ -926,16 +926,18 @@
       (interactive)
       (let* ((start (point))
              (end (progn (insert "<>") (point)))  ; Insert "<>"
-             (overlay (make-overlay start end)))  ; Create overlay for "<>"
+             (overlay (make-overlay start end)) ; Create overlay for "<>"
+             (keymap (make-sparse-keymap)))
+        (forward-char -1)
         (move-overlay overlay start end)
-        (define-key (overlay-get overlay 'keymap) (kbd "DEL")
+        (overlay-put overlay 'keymap keymap)  ; Initialize the keymap
+        (define-key keymap (kbd "DEL")
           (lambda ()
             (interactive)
             (let ((current (point)))
               (when (and (eq current start)      ; Cursor is at the start of the overlay
                          (eq (1+ current) end)) ; Cursor is right before the end of the overlay
                 (delete-region start end)))))  ; Delete the overlay region
-        (overlay-put overlay 'keymap (make-sparse-keymap))  ; Initialize the keymap
         (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
         (overlay-put overlay 'modification-hooks
                      (list (lambda (ov after? beg end &optional _)
