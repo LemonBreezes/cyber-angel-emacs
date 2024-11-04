@@ -500,8 +500,10 @@ image-mode buffers."
     (move-overlay overlay start end)
     (overlay-put overlay 'keymap keymap)
     (define-key keymap (kbd "DEL")
-      `(menu-item ""
-        delete-char
-        :filter
-        ,(lambda (cmd)
-           t)))))
+      `(lambda ()
+         (interactive)
+         (let ((current (point)))
+           (if (and (eq current (1+ ,start))
+                    (eq (1+ current) ,end))
+               (delete-region ,start ,end)
+             (delete-char -1)))))))
