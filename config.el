@@ -929,6 +929,8 @@
       ";!=" "≠"
       "-." "->"
       "=." "=>"
+      ",." (lambda () (interactive)
+             (insert "<>") (forward-char -1))
       "j9" "("))
 
   (use-package! smart-semicolon
