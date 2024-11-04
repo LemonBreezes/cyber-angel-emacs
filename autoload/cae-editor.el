@@ -507,4 +507,4 @@ image-mode buffers."
                     (eq (1+ current) ,end))
                (delete-region ,start ,end)
              (delete-char -1)))))
-    (overlay-put overlay 'face '(:background "light gray"))))
+    (overlay-put overlay 'face '(:inherit 'highlight))))
