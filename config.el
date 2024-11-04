@@ -922,7 +922,7 @@
     :defer t :init
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
-    (defun insert-bracket-pair ()
+    (defun cae-insert-bracket-pair ()
       (interactive)
       (let* ((start (point))
              (end (progn (insert "<>") (point)))
