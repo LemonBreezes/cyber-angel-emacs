@@ -506,4 +506,5 @@ image-mode buffers."
         :filter
         `(lambda (_)
            (and (eq (point) (1+ ,start))
-                (eq (1+ (point)) ,end)))))))
+                (eq (1+ (point)) ,end)
+                (delete-char 1)))))))
