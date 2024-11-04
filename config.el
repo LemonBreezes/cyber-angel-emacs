@@ -936,7 +936,7 @@
                (insert "<>")
                (forward-char -1)
                (define-key (overlay-get overlay 'keymap)
-                 (kbd "DEL")
+                 (kbd "<backspace>")
                  (lambda ()
                    (interactive)
                    (when (and (eq (point) (overlay-start overlay))
