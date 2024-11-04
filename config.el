@@ -935,7 +935,7 @@
           `(lambda ()
              (interactive)
              (let ((current (point)))
-               (if (and (eq current ,start)
+               (if (and (eq current (1+ ,start))
                         (eq (1+ current) ,end))
                    (delete-region ,start ,end)
                  (delete-char -1)))))
