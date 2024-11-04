@@ -506,4 +506,4 @@ image-mode buffers."
         `(lambda ()
            (and (eq (point) (1+ ,start))
                 (eq (1+ (point)) ,end))
-           (delete-char -1))))))
+           (delete-char 1))))))
