@@ -503,5 +503,5 @@ image-mode buffers."
       `(menu-item ""
         delete-char
         :filter
-        ,`(lambda (cmd)
+        ,(lambda (cmd)
             t)))))
