@@ -922,34 +922,32 @@
     :defer t :init
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
+    (defun insert-bracket-pair ()
+      (interactive)
+      (let* ((start (point))
+             (end (progn (insert "<>") (point)))  ; Insert "<>"
+             (overlay (make-overlay start end)))  ; Create overlay for "<>"
+        (move-overlay overlay start end)
+        (define-key (overlay-get overlay 'keymap) (kbd "DEL")
+          (lambda ()
+            (interactive)
+            (let ((current (point)))
+              (when (and (eq current start)      ; Cursor is at the start of the overlay
+                         (eq (1+ current) end)) ; Cursor is right before the end of the overlay
+                (delete-region start end)))))  ; Delete the overlay region
+        (overlay-put overlay 'keymap (make-sparse-keymap))  ; Initialize the keymap
+        (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
+        (overlay-put overlay 'modification-hooks
+                     (list (lambda (ov after? beg end &optional _)
+                             (when after?
+                               (delete-overlay ov)))))))  ; Cleanup the overlay after use
     (aas-set-snippets 'global
       ";--" "—"
       ";-." "→"
       ";=." "⇒"
       ";!=" "≠"
-
       "=." "=>"
-      ",." (lambda ()
-             (interactive)
-             (let* ((start (point))
-                    (overlay (make-overlay start (+ 2 start))))
-               (insert "<>")
-               (forward-char -1)
-               (overlay-put overlay 'keymap (make-sparse-keymap))
-               (define-key (overlay-get overlay 'keymap)
-                 (kbd "DEL")
-                 (lambda ()
-                   (interactive)
-                   (when (and (eq (point) (overlay-start overlay))
-                              (eq (1+ (point)) (overlay-end overlay)))
-                     (delete-region (overlay-start overlay) (overlay-end overlay)))))
-               (overlay-put overlay 'keymap (make-sparse-keymap))
-               (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
-               (overlay-put overlay 'modification-hooks
-                            (list (lambda (ov after? beg end &optional _)
-                                    (when after?
-                                      (delete-overlay ov)))))
-               (move-overlay overlay start (1+ start))))
+      ",." #'insert-bracket-pair
       "j9" "("))
 
   (use-package! smart-semicolon
