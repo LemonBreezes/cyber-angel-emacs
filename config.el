@@ -932,7 +932,7 @@
       ",." (lambda ()
              (interactive)
              (let* ((start (point))
-                    (overlay (make-overlay start (1+ start))))
+                    (overlay (make-overlay start (+ 2 start))))
                (insert "<>")
                (forward-char -1)
                (overlay-put overlay 'keymap (make-sparse-keymap))
