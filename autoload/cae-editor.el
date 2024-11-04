@@ -506,5 +506,4 @@ image-mode buffers."
            (if (and (eq current (1+ ,start))
                     (eq (1+ current) ,end))
                (delete-region ,start ,end)
-             (delete-char -1)))))
-    (overlay-put overlay 'face '(:inherit 'highlight))))
+             (delete-char -1)))))))
