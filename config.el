@@ -928,7 +928,8 @@
       ";=." "⇒"
       ";!=" "≠"
       "=." "=>"
-      ",." (symbol-function #'cae-insert-bracket-pair)
+      ",." (lambda () (interactive)
+             (call-interactively #'cae-insert-bracket-pair))
       "j9" "("))
 
   (use-package! smart-semicolon
