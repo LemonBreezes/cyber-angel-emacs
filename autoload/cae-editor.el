@@ -504,5 +504,5 @@ image-mode buffers."
         delete-char
         :filter
         ,`(lambda (cmd)
-          (and (eq (point) (1+ ,start))
-               (eq (1+ (point)) ,end)))))))
+            (and (eq (point) (1+ ,start))
+                 (eq (1+ (point)) ,end)))))))
