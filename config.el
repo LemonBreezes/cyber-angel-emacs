@@ -937,7 +937,7 @@
                (forward-char -1)
                (overlay-put overlay 'keymap (make-sparse-keymap))
                (define-key (overlay-get overlay 'keymap)
-                 (kbd "<backspace>")
+                 (kbd "DEL")
                  (lambda ()
                    (interactive)
                    (when (and (eq (point) (overlay-start overlay))
