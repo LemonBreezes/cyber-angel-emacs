@@ -925,21 +925,22 @@
     (defun insert-bracket-pair ()
       (interactive)
       (let* ((start (point))
-             (end (progn (insert "<>") (point)))  ; Insert "<>"
-             (overlay (make-overlay start end)) ; Create overlay for "<>"
+             (end (progn (insert "<>") (point)))
+             (overlay (make-overlay start end))
              (keymap (make-sparse-keymap)))
         (forward-char -1)
         (move-overlay overlay start end)
-        (overlay-put overlay 'keymap keymap)  ; Initialize the keymap
+        (overlay-put overlay 'keymap keymap)
         (define-key keymap (kbd "DEL")
           `(lambda ()
              (interactive)
              (let ((current (point)))
-               (when (and (eq current ,start)      ; Cursor is at the start of the overlay
-                          (eq (1+ current) ,end)) ; Cursor is right before the end of the overlay
-                 (delete-region ,start ,end)))))  ; Delete the overlay region
-        (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
-        ))  ; Cleanup the overlay after use
+               (if (and (eq current ,start)
+                        (eq (1+ current) ,end))
+                   (delete-region ,start ,end)
+                 (delete-char -1)))))
+        (overlay-put overlay 'face '(:background "light gray"))
+        ))
     (aas-set-snippets 'global
       ";--" "—"
       ";-." "→"
