@@ -928,7 +928,7 @@
       ";=." "⇒"
       ";!=" "≠"
       "=." "=>"
-      ",." #'insert-bracket-pair
+      ",." #'cae-insert-bracket-pair
       "j9" "("))
 
   (use-package! smart-semicolon
