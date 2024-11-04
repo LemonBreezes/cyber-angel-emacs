@@ -927,10 +927,28 @@
       ";-." "→"
       ";=." "⇒"
       ";!=" "≠"
-      "-." "->"
+
       "=." "=>"
-      ",." (lambda () (interactive)
-             (insert "<>") (forward-char -1))
+      ",." (lambda ()
+             (interactive)
+             (let* ((start (point))
+                    (overlay (make-overlay start (1+ start))))
+               (insert "<>")
+               (forward-char -1)
+               (define-key (overlay-get overlay 'keymap)
+                 (kbd "DEL")
+                 (lambda ()
+                   (interactive)
+                   (when (and (eq (point) (overlay-start overlay))
+                              (eq (1+ (point)) (overlay-end overlay)))
+                     (delete-region (overlay-start overlay) (overlay-end overlay)))))
+               (overlay-put overlay 'keymap (make-sparse-keymap))
+               (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
+               (overlay-put overlay 'modification-hooks
+                            (list (lambda (ov after? beg end &optional _)
+                                    (when after?
+                                      (delete-overlay ov)))))
+               (move-overlay overlay start (1+ start))))
       "j9" "("))
 
   (use-package! smart-semicolon
