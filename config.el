@@ -933,11 +933,11 @@
         (overlay-put overlay 'keymap keymap)  ; Initialize the keymap
         (define-key keymap (kbd "DEL")
           `(lambda ()
-            (interactive)
-            (let ((current (point)))
-              (when (and (eq current ,start)      ; Cursor is at the start of the overlay
-                         (eq (1+ current) ,end)) ; Cursor is right before the end of the overlay
-                (delete-region start ,end)))))  ; Delete the overlay region
+             (interactive)
+             (let ((current (point)))
+               (when (and (eq current ,start)      ; Cursor is at the start of the overlay
+                          (eq (1+ current) ,end)) ; Cursor is right before the end of the overlay
+                 (delete-region start ,end)))))  ; Delete the overlay region
         (overlay-put overlay 'face '(:background "light gray")) ; Optional: highlight the overlay
         ))  ; Cleanup the overlay after use
     (aas-set-snippets 'global
