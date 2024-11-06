@@ -180,6 +180,15 @@
           :m "[6" #'cae-unimpaired-b64-encode
           :m "]6" #'cae-unimpaired-b64-decode)))
 
+(after! evil-collection-comint
+  (map! :map comint-mode-map
+        :n "C-p" nil
+        :n "C-n" nil))
+(after! evil-collection-eshell
+  (map! :map eshell-mode-map
+        :n "C-p" nil
+        :n "C-n"))
+
 (when (modulep! :completion corfu)
   (map! :prefix "C-x"
         (:when (modulep! :cae ai)
