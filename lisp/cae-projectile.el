@@ -104,7 +104,7 @@
   (defalias 'projectile-find-file #'project-find-file)
   (defalias 'projectile-project-root
     (lambda (&optional dir)
-      (if-let ((proj (project-current nil dir)))
+      (if-let* ((proj (project-current nil dir)))
           (project-root proj)
         dir)))
   (defvar projectile-before-switch-project-hook nil)
