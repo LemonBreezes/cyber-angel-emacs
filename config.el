@@ -458,7 +458,7 @@
            (setq browse-url-generic-program "firefox-bin"
                  browse-url-generic-args '("--new-tab")
                  cae-generic-browser-name "Firefox"))
-          ((when-let ((chrome (or (executable-find "chromium-bin-browser")
+          ((when-let* ((chrome (or (executable-find "chromium-bin-browser")
                                   (executable-find "google-chrome-unstable")
                                   (executable-find "google-chrome-stable"))))
              (setq browse-url-generic-program chrome
@@ -968,7 +968,7 @@
     (autoload #'parrot--magit-push-filter "parrot")
     (defadvice! cae-modeline-gac-party-on-push-a (buffer)
       :after #'gac-push
-      (when-let ((proc (get-buffer-process "*git-auto-push*")))
+      (when-let* ((proc (get-buffer-process "*git-auto-push*")))
         (parrot-party-while-process proc)))
     (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
     (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
