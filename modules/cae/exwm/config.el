@@ -169,10 +169,6 @@
         (set-frame-parameter frame 'parent-frame nil)
         frame))
 
-    ;; For some reason, `which-key' is not popping up for me without this.
-    (setq-hook! 'exwm-mode-hook
-      which-key-popup-type 'minibuffer)
-
     ;; Do not handle EXWM buffers.
     (set-popup-rule! "^\\*exwm" :ignore t))
 
