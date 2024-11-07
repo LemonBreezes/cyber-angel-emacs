@@ -190,7 +190,7 @@
         :n "C-n"))
 (after! vterm
   (map! :map vterm-mode-map
-         [remap evil-paste-pop] #'vterm-yank-pop))
+        [remap evil-paste-pop] #'vterm-yank-pop))
 
 
 (when (modulep! :completion corfu)
