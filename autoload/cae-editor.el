@@ -249,7 +249,7 @@ also marks comment with leading whitespace"
 
 (defun cae-modeline--rotate-word-at-point (rotate-function)
   (save-excursion
-    (when-let ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
+    (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
       (goto-char beg))
     (skip-syntax-forward "^w" (line-end-position))
     (condition-case err
@@ -333,7 +333,7 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-kill-current-buffer ()
   (interactive)
-  (when-let (proc (get-buffer-process (current-buffer)))
+  (when-let* ((proc (get-buffer-process (current-buffer))))
     ;; Stop AI from freezing Emacs while Emacs is waiting for the AI to respond.
     (set-process-sentinel proc nil))
   (call-interactively #'kill-current-buffer))
