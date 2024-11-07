@@ -461,8 +461,8 @@
                  browse-url-generic-args '("--new-tab")
                  cae-generic-browser-name "Firefox"))
           ((when-let* ((chrome (or (executable-find "chromium-bin-browser")
-                                  (executable-find "google-chrome-unstable")
-                                  (executable-find "google-chrome-stable"))))
+                                   (executable-find "google-chrome-unstable")
+                                   (executable-find "google-chrome-stable"))))
              (setq browse-url-generic-program chrome
                    browse-url-generic-args (when (eq (user-uid) 0)
                                              '("--no-sandbox"))
