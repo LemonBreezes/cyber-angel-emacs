@@ -45,6 +45,7 @@
     ("pythoyn" "python" nil :count 0)
     ("shoudl" "should" nil :count 0)
     ("stetq" "setq" nil :count 1)
+    ("threadss" "threads" nil :count 0)
     ("timedatctl" "timedatectl" nil :count 1)
     ("versino" "version" nil :count 0)
     ("waws" "was" nil :count 0)
