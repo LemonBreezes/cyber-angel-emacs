@@ -7,6 +7,7 @@
 (package! org-inline-pdf)
 (package! language-detection)
 (package! org-web-tools)
+(package! org-pandoc-import)
 
 (when (modulep! +pretty)
   (package! org-modern))
