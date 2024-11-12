@@ -7,7 +7,10 @@
 (package! org-inline-pdf)
 (package! language-detection)
 (package! org-web-tools)
-(package! org-pandoc-import :recipe (:host github :repo "tecosaur/org-pandoc-import"))
+(package! org-pandoc-import
+  :recipe (:host github
+           :repo "tecosaur/org-pandoc-import"
+           :files ("*.el" "filters" "preprocessors")))
 
 (when (modulep! +pretty)
   (package! org-modern))
