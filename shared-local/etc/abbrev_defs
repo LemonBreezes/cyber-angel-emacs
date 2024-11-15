@@ -41,6 +41,7 @@
     ("paly" "pay" nil :count 0)
     ("pign" "ping" nil :count 0)
     ("poprt" "port" nil :count 0)
+    ("prevew" "preview" nil :count 0)
     ("pulblic" "public" nil :count 0)
     ("pythoyn" "python" nil :count 0)
     ("shoudl" "should" nil :count 0)
