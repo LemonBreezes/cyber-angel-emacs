@@ -1048,7 +1048,9 @@
     ;; `evil-collection'.
     (defadvice! cae-beginend-goto-eol-a ()
       :before #'beginend-prog-mode-goto-end
-      (goto-char (eol))))
+      (goto-char (eol)))
+    (when (modulep! :emacs dired)
+      (setq beginend-dired-mode nil)))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook :init
