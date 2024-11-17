@@ -24,7 +24,7 @@
 (defun ha-eshell-store-last-output ()
   "Store the output from the last eshell command.
 Called after every command by connecting to the `eshell-post-command-hook'."
-  (when-let ((output
+  (when-let* ((output
               (and eshell-last-input-end eshell-last-output-start
                    (buffer-substring-no-properties eshell-last-input-end
                                                    eshell-last-output-start))))
@@ -57,7 +57,7 @@ to be `:text'.
      ((= (length args) 1)  (setq frmt (car args)
                                  element 0)))
 
-    (if-let ((results (ring-ref ha-eshell-output (or element 0))))
+    (if-let* ((results (ring-ref ha-eshell-output (or element 0))))
         (cl-case (string-to-char frmt)
           (?l     (split-string results))
           (?f     (ha-eshell-store-file-output results))

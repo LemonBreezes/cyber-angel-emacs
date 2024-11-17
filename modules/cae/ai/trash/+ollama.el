@@ -62,11 +62,11 @@
                   .message.content)
               .error.message
               ""))
-      (if-let (parsed (shell-maker--json-parse-string json))
+      (if-let* (parsed (shell-maker--json-parse-string json))
           (string-trim
            (let-alist parsed
              .message.content))
-        (if-let (parsed-error (shell-maker--json-parse-string-filtering
+        (if-let* (parsed-error (shell-maker--json-parse-string-filtering
                                json "^curl:.*\n?"))
             (let-alist parsed-error
               .error.message)))))

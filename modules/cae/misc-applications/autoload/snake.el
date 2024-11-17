@@ -30,7 +30,7 @@
     (when +snake--old-wconf
       (set-window-configuration +snake--old-wconf)))
   (kill-buffer "*Snake*")
-  (when-let ((saves-buf (get-file-buffer (expand-file-name "snake-scores" shared-game-score-directory))))
+  (when-let* ((saves-buf (get-file-buffer (expand-file-name "snake-scores" shared-game-score-directory))))
     (with-current-buffer saves-buf
       (save-buffer)
       (kill-buffer))))

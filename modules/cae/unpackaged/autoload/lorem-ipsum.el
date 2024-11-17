@@ -82,7 +82,7 @@ And the line would be overlaid like:
                     (lorem-word* (word)
                                  (or (gethash word map)
                                      (puthash word
-                                              (if-let ((matches (lorem-matches (length word))))
+                                              (if-let* ((matches (lorem-matches (length word))))
                                                   (apply-case word (downcase (seq-random-elt matches)))
                                                 ;; Word too long: compose one.
                                                 (apply-case word (downcase (compose-word (length word)))))

@@ -25,7 +25,7 @@
 (defun +eshell-tldr-to-man ()
   "Go the manpage for current tldr command."
   (interactive)
-  (if-let ((cmd (buffer-substring-no-properties
+  (if-let* ((cmd (buffer-substring-no-properties
                  (point-min)
                  (next-single-property-change (point-min) 'face)))
            ((Man-completion-table cmd nil nil))
@@ -35,7 +35,7 @@
 
 ;;;###autoload
 (defun +eshell-man-to-tldr () "Go the tldr page for the current man pgae." (interactive)
-       (if-let ((cmd (cl-loop for s in (split-string Man-arguments)
+       (if-let* ((cmd (cl-loop for s in (split-string Man-arguments)
                               maximize (length s) into max
                               finally return s))
                 ((tldr-get-file-path-from-command-name cmd)))

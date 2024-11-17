@@ -24,7 +24,7 @@
            (not (file-remote-p file)))
       (progn
         ;; Check if file is in a different directory and if so change to it
-        (when-let ((dir (file-name-directory file)))
+        (when-let* ((dir (file-name-directory file)))
           (unless (file-equal-p dir default-directory)
             (funcall oldfun dir)))
         ;; If not a directory, kill Dirvish and find the file
@@ -62,7 +62,7 @@
            finally return nil)
   (funcall oldfun pos)
   ;;(if (derived-mode-p 'dired-mode)
-  ;;    (when-let ((file
+  ;;    (when-let* ((file
   ;;                (cond ((and (consp pos)
   ;;                            (markerp (car pos)))
   ;;                       (buffer-file-name (marker-buffer (car pos))))
@@ -71,7 +71,7 @@
   ;;                      ((buffer-file-name
   ;;                        (marker-buffer pos))))))
   ;;      ;; Check if file is in a different directory and if so change to it
-  ;;      (when-let ((dir (file-name-directory file))
+  ;;      (when-let* ((dir (file-name-directory file))
   ;;                 (_ (not (file-equal-p dir default-directory))))
   ;;        (find-file dir))
   ;;      ;; If not a directory, kill Dirvish and find the file

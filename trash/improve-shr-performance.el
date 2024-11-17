@@ -89,7 +89,7 @@
                  (funcall function dom))
                 (t
                  (shr-generic dom)))
-          (when-let ((id (dom-attr dom 'id)))
+          (when-let* ((id (dom-attr dom 'id)))
             (push (cons id (set-marker (make-marker) start)) shr--link-targets))
 	  ;; If style is set, then this node has set the color.
 	  (when style

@@ -140,7 +140,7 @@ nil if its not an EXWM buffer."
 (defun +exwm-persp-cleanup-workspace ()
   "Deletes the current EXWM workspace if it has no more EXWM
 buffers of that class."
-  (when-let ((exwm-workspace-p (cl-member (+workspace-current-name)
+  (when-let* ((exwm-workspace-p (cl-member (+workspace-current-name)
                                           +exwm-workspaces
                                           :test #'cl-equalp))
              (workspace (+exwm-get-workspace-name (current-buffer))))
@@ -178,7 +178,7 @@ buffers of that class."
 
 (defadvice! +exwm-browse-url-generic-a (&rest _)
   :before #'browse-url-generic
-  (when-let ((workspace
+  (when-let* ((workspace
               (alist-get (string-join
                           (cl-find-if (lambda (l)
                                         (setq l (string-join l "-"))
