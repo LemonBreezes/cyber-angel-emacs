@@ -32,6 +32,7 @@
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
   (when (and (>= (num-processors) 32)
+             (not (eq system-type 'windows-nt))
              (> (car (memory-info))
                 (* 180 1024 1024)))
     (let ((cae-gc-cons-threshold (* 128 1024 1024 1024)))
