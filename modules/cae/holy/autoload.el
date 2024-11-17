@@ -12,7 +12,7 @@
 (defun cae-lookup-definition-dwim ()
   (interactive)
   (require 'ffap)
-  (if-let ((file (ffap-file-at-point)))
+  (if-let* ((file (ffap-file-at-point)))
       (if (and (file-exists-p file)
                (not (and buffer-file-name
                          (string= (file-truename file)

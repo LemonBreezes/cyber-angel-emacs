@@ -29,7 +29,7 @@
     (when +tetris--old-wconf
       (set-window-configuration +tetris--old-wconf)))
   (kill-buffer "*Tetris*")
-  (when-let ((saves-buf (get-file-buffer (expand-file-name "tetris-scores" shared-game-score-directory))))
+  (when-let* ((saves-buf (get-file-buffer (expand-file-name "tetris-scores" shared-game-score-directory))))
     (with-current-buffer saves-buf
       (save-buffer)
       (kill-buffer))))

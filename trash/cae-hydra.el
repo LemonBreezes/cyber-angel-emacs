@@ -91,7 +91,7 @@
 (defun cae-hydra-tab-bar-resume-hydra-h (&rest _)
   (when (bound-and-true-p hydra-curr-map)
     (hydra-keyboard-quit))
-  (when-let ((hydra (alist-get (funcall cae-hydra-tab--unique-identifier-fn)
+  (when-let* ((hydra (alist-get (funcall cae-hydra-tab--unique-identifier-fn)
                                cae-hydra-tab-bar-hydra-alist
                                nil nil
                                #'equal)))

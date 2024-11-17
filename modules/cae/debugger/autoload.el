@@ -13,7 +13,7 @@
   (when (modulep! :ui popup)
     (+popup/close-all))
   (unwind-protect (dap-delete-all-sessions)
-    (when-let ((workspace-project (cl-find (+workspace-current-name)
+    (when-let* ((workspace-project (cl-find (+workspace-current-name)
                                            (projectile-relevant-known-projects)
                                            :test #'string-match-p)))
       (unless (string= (projectile-project-name)

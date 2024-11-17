@@ -17,7 +17,7 @@
            if (buffer-local-value 'exwm-title buf)
            do (with-current-buffer buf
                 (exwm-workspace-rename-buffer exwm-title)))
-  (when-let ((buf (cl-find-if
+  (when-let* ((buf (cl-find-if
                    (lambda (buf)
                      (and (buffer-local-value 'exwm-class-name buf)
                           (string-match-p (downcase (+workspace-current-name))

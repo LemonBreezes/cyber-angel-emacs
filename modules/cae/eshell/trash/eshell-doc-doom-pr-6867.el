@@ -16,7 +16,7 @@
 ;;
 ;;(defun +eshell-fish-capf ()
 ;;  "A a capf for fish-completion."
-;;  (when-let (((not (file-remote-p default-directory)))
+;;  (when-let* (((not (file-remote-p default-directory)))
 ;;             (args (ignore-errors (eshell-complete-parse-arguments)))
 ;;             (table (+eshell-fish-completion-list
 ;;                     (buffer-substring (or (cadr args) (point)) (point))))
@@ -75,7 +75,7 @@ when inhibited to show history matches."
 (defadvice! +eshell-eldoc-function-a (func cmd)
   "Don't try to parse man output unless a manpage exists."
   :around #'esh-help-eldoc-man-minibuffer-string
-  (if-let ((cache-result (gethash cmd esh-help-man-cache)))
+  (if-let* ((cache-result (gethash cmd esh-help-man-cache)))
       (unless (eq 'none cache-result)
         cache-result)
     (if (Man-completion-table cmd nil nil)

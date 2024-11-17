@@ -7,7 +7,7 @@
 
 ;;;###autoload
 (defun cae-meow-update-cursor-a (&rest _)
-  (when-let ((cursor
+  (when-let* ((cursor
               (and meow--current-state
                    (symbol-value
                     (intern (concat "meow-cursor-type-"
