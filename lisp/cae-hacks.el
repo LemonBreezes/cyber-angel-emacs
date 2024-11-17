@@ -6,6 +6,7 @@
 (defconst cae-hacks-gc-cons-threshold (min (* 64 1024 1024 1024)
                                            (if (memory-info)
                                                (/ (car (memory-info)) 3)
+                                             ;; Fallback
                                              0)))
 (defconst cae-hacks-gc-idle-delay 20)
 (defvar cae-hacks--gc-messages nil)
