@@ -4,7 +4,9 @@
 ;;; GC hacks
 
 (defconst cae-hacks-gc-cons-threshold (min (* 64 1024 1024 1024)
-                                           (/ (car (memory-info)) 3)))
+                                           (if (memory-info)
+                                               (/ (car (memory-info)) 3)
+                                             0)))
 (defconst cae-hacks-gc-idle-delay 20)
 (defvar cae-hacks--gc-messages nil)
 (defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
