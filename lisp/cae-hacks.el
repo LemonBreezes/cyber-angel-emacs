@@ -172,3 +172,5 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; Getting a void variable error with modus theme.
 (defvar date-scheduled-subtle nil)
+
+(defun emacsql-sqlite-ensure-binary (&rest _))
