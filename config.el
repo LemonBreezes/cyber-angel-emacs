@@ -491,7 +491,7 @@
         remote-file-name-inhibit-delete-by-moving-to-trash t
         remote-file-name-inhibit-auto-save t
         remote-file-name-inhibit-auto-save-visited t
-
+        ;; ---
         large-file-warning-threshold 100000000 ; ~100 MB
         yank-pop-change-selection t
         global-mark-ring-max 1024
