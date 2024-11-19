@@ -4,8 +4,7 @@
 
 ;; Set up the default models.
 (after! chatgpt-shell
-  (setq chatgpt-shell-model-version
-        (nth 0 chatgpt-shell-model-versions)
+  (setq chatgpt-shell-model-version 0
         chatgpt-shell-streaming t))
 (after! gptel
   (setq gptel-model "claude-3-5-sonnet-20240620"
