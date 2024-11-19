@@ -7,7 +7,6 @@
   (setq chatgpt-shell-model-version
         (nth 0 chatgpt-shell-model-versions)
         chatgpt-shell-streaming t))
-(advice-add #'chatgpt-shell-system-prompt :override #'ignore)
 (after! gptel
   (setq gptel-model "claude-3-5-sonnet-20240620"
         gptel-backend (gptel-make-anthropic "Claude"
