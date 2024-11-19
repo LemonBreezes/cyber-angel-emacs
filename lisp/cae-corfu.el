@@ -9,8 +9,7 @@
 (after! cape
   (setq cape-dabbrev-check-other-buffers t))
 (after! corfu
-  (setq corfu-auto-delay 0.05
-        corfu-on-exact-match 'quit)
+  (setq corfu-on-exact-match 'quit)
   (after! corfu-quick
     (setq corfu-quick1 (cae-keyboard-kbd "asdfgh")
           corfu-quick2 (cae-keyboard-kbd "jkluionm"))))
