@@ -175,3 +175,6 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; (void-function emacsql-sqlite-ensure-binary)
 (defun emacsql-sqlite-ensure-binary (&rest _))
+
+;; (void-variable chatgpt-shell-anthropic--make-url)
+(defvar chatgpt-shell-anthropic--make-url nil)
