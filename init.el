@@ -31,7 +31,7 @@
     (add-to-list 'safe-local-variable-directories "~/org")
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
-  (when (and (>= (num-processors) 32)
+  (if (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
              (> (car (memory-info))
                 (* 180 1024 1024)))
@@ -39,7 +39,8 @@
       (setq gcmh-high-cons-threshold cae-gc-cons-threshold
             consult--gc-threshold cae-gc-cons-threshold
             cae-hacks-gc-cons-threshold cae-gc-cons-threshold
-            +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
+            +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold))
+    (setq gcmh-auto-idle-delay-factor 20))
   (setq doom-incremental-idle-timer 0.25)
 
   (setq native-comp-async-jobs-number (num-processors)
