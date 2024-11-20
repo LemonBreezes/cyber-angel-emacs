@@ -45,7 +45,6 @@
   (setq native-comp-async-jobs-number (num-processors)
         native-comp-async-report-warnings-errors 'silent)
 
-  (require 'compile-angel)
   (load! "lisp/cae-debug")
   (load! "lisp/cae-hacks")
 
@@ -164,8 +163,7 @@
        (ai +openai)
        gnus
        rss
-       denote
-       )
+       denote)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
