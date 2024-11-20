@@ -48,6 +48,7 @@
     ("prevew" "preview" nil :count 0)
     ("pulblic" "public" nil :count 0)
     ("pythoyn" "python" nil :count 0)
+    ("rempve" "remove" nil :count 0)
     ("shoudl" "should" nil :count 0)
     ("stetq" "setq" nil :count 1)
     ("threadss" "threads" nil :count 0)
