@@ -45,6 +45,8 @@
   (setq native-comp-async-jobs-number (num-processors)
         native-comp-async-report-warnings-errors 'silent)
 
+  (compile-angel-on-load-mode +1)
+
   (load! "lisp/cae-debug")
   (load! "lisp/cae-hacks")
 
