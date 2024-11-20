@@ -73,6 +73,7 @@
   (package! consult-mu :recipe
     (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
 (package! 0x0)
+(package! compile-angel :recipe (:host github :repo "jamescherti/compile-angel.el"))
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
