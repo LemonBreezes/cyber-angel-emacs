@@ -43,8 +43,7 @@
     ;; Slow computer
     (setq gcmh-auto-idle-delay-factor 20
           gcmh-high-cons-threshold #x40000000
-          jit-lock-defer-time 2)
-    (advice-add #'global-diff-hl-mode :override #'ignore))
+          jit-lock-defer-time 2))
   (setq doom-incremental-idle-timer 0.25)
 
   (setq native-comp-async-jobs-number (num-processors)
