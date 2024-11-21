@@ -37,9 +37,6 @@
 ;; benchmarks
 (package! elisp-benchmarks)
 
-;; init.el
-(package! compile-angel :recipe (:host github :repo "jamescherti/compile-angel.el"))
-
 ;;; UI
 (package! info-colors)
 (package! communinfo)
