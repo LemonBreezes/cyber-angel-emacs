@@ -40,6 +40,7 @@
               consult--gc-threshold cae-gc-cons-threshold
               cae-hacks-gc-cons-threshold cae-gc-cons-threshold
               +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold))
+    ;; Slow computer
     (setq gcmh-auto-idle-delay-factor 20
           gcmh-high-cons-threshold #x40000000
           jit-lock-defer-time 2))
