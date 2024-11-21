@@ -31,6 +31,7 @@
     (add-to-list 'safe-local-variable-directories "~/org")
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
+  (defvar cae-slow-computer-p nil)
   (if (and (>= (num-processors) 32)
            (not (eq system-type 'windows-nt))
            (> (car (memory-info))
@@ -43,8 +44,8 @@
     ;; Slow computer
     (setq gcmh-auto-idle-delay-factor 20
           gcmh-high-cons-threshold #x40000000
-          jit-lock-defer-time 2)
-    (defvar cae-slow-computer-p t))
+          jit-lock-defer-time 2
+          cae-slow-computer-p t))
   (setq doom-incremental-idle-timer 0.25)
 
   (setq native-comp-async-jobs-number (num-processors)
