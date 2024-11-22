@@ -41,6 +41,7 @@
     ("limti" "limit" nil :count 0)
     ("loals" "locals" nil :count 0)
     ("mariio" "mario" nil :count 1)
+    ("mentionied" "mentioned" nil :count 0)
     ("mny" "my" nil :count 0)
     ("modle" "model" nil :count 0)
     ("paly" "pay" nil :count 0)
