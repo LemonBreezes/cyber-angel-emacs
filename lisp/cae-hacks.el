@@ -183,4 +183,4 @@ It is meant to be used as a `post-gc-hook'."
 (defvar chatgpt-shell-anthropic--make-model nil)
 (defvar version nil)
 (defvar short-version nil)
-(defvar token-width)
+(defvar token-width nil)
