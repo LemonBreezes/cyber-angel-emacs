@@ -187,3 +187,4 @@ It is meant to be used as a `post-gc-hook'."
 (defvar max-tokens nil)
 (defvar context-window nil)
 (defvar &key nil)
+(defun &key (&rest _))
