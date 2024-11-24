@@ -182,3 +182,4 @@ It is meant to be used as a `post-gc-hook'."
 ;; Error: failed to incrementally load chatgpt-shell because: (void-variable chatgpt-shell-anthropic--make-model)
 (defvar chatgpt-shell-anthropic--make-model nil)
 (defvar version nil)
+(defvar short-version nil)
