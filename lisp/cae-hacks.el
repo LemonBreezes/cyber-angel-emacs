@@ -180,4 +180,4 @@ It is meant to be used as a `post-gc-hook'."
 (defvar chatgpt-shell-anthropic--make-url nil)
 
 ;; Error: failed to incrementally load chatgpt-shell because: (void-variable chatgpt-shell-anthropic--make-model)
-(autoload 'chatgpt-shell-anthropic--make-model "chatgpt-shell-anthropic")
+( defvar chatgpt-shell-anthropic--make-model nil)
