@@ -178,3 +178,5 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; (void-variable chatgpt-shell-anthropic--make-url)
 (defvar chatgpt-shell-anthropic--make-url nil)
+
+(autoload 'chatgpt-shell-anthropic--make-model "chatgpt-shell-anthropic")
