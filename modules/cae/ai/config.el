@@ -4,7 +4,7 @@
 
 ;; Set up the default models.
 (after! chatgpt-shell
-  (setq chatgpt-shell-model-version 0
+  (setq chatgpt-shell-model-version 1
         chatgpt-shell-streaming t))
 (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
 (after! gptel
