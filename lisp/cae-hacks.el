@@ -185,3 +185,4 @@ It is meant to be used as a `post-gc-hook'."
 (defvar short-version nil)
 (defvar token-width nil)
 (defvar max-tokens nil)
+(defvar context-window nil)
