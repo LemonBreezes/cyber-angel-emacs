@@ -31,7 +31,7 @@
     (add-to-list 'safe-local-variable-directories "~/org")
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
-  (if (and (>= (num-processors) 32)
+  (when (and (>= (num-processors) 32)
            (not (eq system-type 'windows-nt))
            (> (car (memory-info))
               (* 180 1024 1024)))
