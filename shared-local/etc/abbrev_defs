@@ -56,6 +56,7 @@
     ("stetq" "setq" nil :count 1)
     ("threadss" "threads" nil :count 0)
     ("timedatctl" "timedatectl" nil :count 1)
+    ("tjat" "that" nil :count 0)
     ("versino" "version" nil :count 0)
     ("walet" "wallet" nil :count 0)
     ("waws" "was" nil :count 0)
