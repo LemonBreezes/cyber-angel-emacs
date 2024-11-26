@@ -42,7 +42,7 @@
 (use-package! aider
   :defer t :config
   (after! consult
-    ;; Ensure consult-ripgrep-args is a list, then add the exclusion glob
+    ;; Ensure consult-ripgrep-args is a list, and add the exclusion glob if not present
     (let ((args (if (listp consult-ripgrep-args)
                     consult-ripgrep-args
                   (split-string consult-ripgrep-args))))
