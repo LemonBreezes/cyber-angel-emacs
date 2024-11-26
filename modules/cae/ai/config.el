@@ -40,7 +40,11 @@
         gptel-use-curl nil))
 
 (use-package! aider
-  :defer t)
+  :defer t :config
+  (after! consult
+    ;; add --glob '!**/.aider*' to consult-ripgrep-args in an idempotent way.
+    )
+  )
 
 (use-package! elysium
   :defer t :autoload (elysium-query)
