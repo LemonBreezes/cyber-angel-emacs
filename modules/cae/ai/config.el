@@ -42,7 +42,7 @@
 (use-package! aider
   :defer t :config
   (after! consult
-    ;; add --glob '!**/.aider*' to `consult-ripgrep-args' in an idempotent way.
+    ;; TODO add --glob '!**/.aider*' to `consult-ripgrep-args' in an idempotent way.
     ))
 
 (use-package! elysium
