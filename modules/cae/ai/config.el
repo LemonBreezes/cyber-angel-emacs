@@ -47,8 +47,8 @@
     (let ((args (if (listp consult-ripgrep-args)
                     consult-ripgrep-args
                   (split-string consult-ripgrep-args))))
-      (unless (or (member "--glob" args) (member "!**/.aider*" args))
-        (setq consult-ripgrep-args (append args '("--glob" "!**/.aider*")))))))
+      (unless (or (member "--glob" args) (member "!.aider*" args))
+        (setq consult-ripgrep-args (append args '("--glob" "!.aider*")))))))
 
 (use-package! elysium
   :defer t :autoload (elysium-query)
