@@ -42,8 +42,12 @@
 (use-package! aider
   :defer t :config
   (after! consult
-    ;; add --glob '!**/.aider*' to `consult-ripgrep-args' in an idempotent way.
-    ))
+    ;; Ensure consult-ripgrep-args is a list, then add the exclusion glob
+    (let ((args (if (listp consult-ripgrep-args)
+                    consult-ripgrep-args
+                  (split-string consult-ripgrep-args))))
+      (unless (member "--glob '!**/.aider*'" args)
+        (setq consult-ripgrep-args (append args '("--glob" "!**/.aider*")))))))
 
 (use-package! elysium
   :defer t :autoload (elysium-query)
