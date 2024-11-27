@@ -11,6 +11,7 @@
     ("appply" "apply" nil :count 1)
     ("becaues" "because" nil :count 0)
     ("ccacho" "ccache" nil :count 1)
+    ("chceklist" "checklist" nil :count 0)
     ("checkoyut" "checkout" nil :count 0)
     ("cntinue" "continue" nil :count 0)
     ("commmand" "command" nil :count 0)
