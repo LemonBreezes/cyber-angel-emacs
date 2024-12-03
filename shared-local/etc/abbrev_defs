@@ -39,6 +39,7 @@
     ("htat" "that" nil :count 1)
     ("ijnstall" "install" nil :count 0)
     ("improvue" "improve" nil :count 0)
+    ("itme" "item" nil :count 0)
     ("iwth" "with" nil :count 0)
     ("jsut" "just" nil :count 1)
     ("limti" "limit" nil :count 0)
