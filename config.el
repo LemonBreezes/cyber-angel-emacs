@@ -1048,7 +1048,7 @@
     ;; `evil-collection'.
     (defadvice! cae-beginend-goto-eol-a ()
       :before #'beginend-prog-mode-goto-end
-      (goto-char (eol)))
+      (goto-char (point-at-eol)))
     ;; Beginend is not needed with Dirvish.
     (when (modulep! :emacs dired)
       (setq beginend-dired-mode nil)
