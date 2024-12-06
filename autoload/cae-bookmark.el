@@ -35,10 +35,10 @@
      (1 'shadow t)))
   "Extra font-lock patterns for the Bookmark menu.")
 
+
 (defgroup cae-bookmark ()
   "Bookmark extras for my dotemacs."
   :group 'matching)
-
 (defface cae-bookmark-url
   '((((class color) (min-colors 88) (background light))
      :foreground "#0000c0")
@@ -124,3 +124,9 @@
                  (message "Bookmark file %s does not exist. It has been copied to the kill ring."
                           bookmark-file)))
       (message "No bookmark files found for this project."))))
+
+;;;###autoload
+(defun cae-bookmark-jump-to-syncthing-directory (_)
+  (if (file-exists-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")
+      (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/")
+    (dired "~/Sync/")))
