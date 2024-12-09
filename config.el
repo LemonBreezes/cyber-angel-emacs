@@ -600,24 +600,25 @@
   (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
   (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
   (after! vertico-multiform
-    (setq vertico-multiform-categories
-          `((embark-keybinding grid)
-            (consult-grep
-             ,(if (and (cae-display-graphic-p)
-                       (modulep! :completion vertico +childframe))
-                  'posframe 'buffer))
-            (imenu ,@(if (and (cae-display-graphic-p)
-                              (modulep! :completion vertico +childframe))
-                         '(posframe grid) '(grid)))
-            (consult-location ,(if (and (cae-display-graphic-p)
-                                        (modulep! :completion vertico
-                                                  +childframe))
-                                   'posframe 'buffer))
-            ,@(if (cae-display-graphic-p)
-                  (if (modulep! :completion vertico +childframe)
-                      '((t posframe))
-                    nil)
-                '((t flat))))))
+    (let ((condensed-display-p (cae-display-graphic-p)))
+      (setq vertico-multiform-categories
+            `((embark-keybinding grid)
+              (consult-grep
+               ,(if (and condensed-display-p
+                         (modulep! :completion vertico +childframe))
+                    'posframe 'buffer))
+              (imenu ,@(if (and condensed-display-p
+                                (modulep! :completion vertico +childframe))
+                           '(posframe grid) '(grid)))
+              (consult-location ,(if (and condensed-display-p
+                                          (modulep! :completion vertico
+                                                    +childframe))
+                                     'posframe 'buffer))
+              ,@(if condensed-display-p
+                    (if (modulep! :completion vertico +childframe)
+                        '((t posframe))
+                      nil)
+                  '((t flat)))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
