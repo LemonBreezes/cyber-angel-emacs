@@ -507,3 +507,21 @@ image-mode buffers."
                     (eq (1+ current) ,end))
                (delete-region ,start ,end)
              (delete-char -1)))))))
+
+;;;###autoload
+(defun cae-open-eshell-in-new-workspace ()
+  "Open a new eshell in a new workspace."
+  (interactive)
+  (unless (+workspace-exists-p "*eshell*")
+    (+workspace/new "*eshell*"))
+  (eshell)
+  (delete-other-windows))
+
+;;;###autoload
+(defun cae-open-vterm-in-new-workspace ()
+  "Open a new vterm in a new workspace."
+  (interactive)
+  (unless (+workspace-exists-p "*vterm*")
+    (+workspace/new "*vterm*"))
+  (vterm)
+  (delete-other-windows))
