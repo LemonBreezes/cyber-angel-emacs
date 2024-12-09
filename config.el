@@ -600,22 +600,22 @@
   (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
   (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
   (after! vertico-multiform
-    (let ((condensed-display-p (and (cae-display-graphic-p)
-                                    (< (frame-width) 120))))
+    (let ((non-condensed-display-p (and (cae-display-graphic-p)
+                                        (>= (frame-width) 120))))
       (setq vertico-multiform-categories
             `((embark-keybinding grid)
               (consult-grep
-               ,(if (and condensed-display-p
+               ,(if (and non-condensed-display-p
                          (modulep! :completion vertico +childframe))
                     'posframe 'buffer))
-              (imenu ,@(if (and condensed-display-p
+              (imenu ,@(if (and non-condensed-display-p
                                 (modulep! :completion vertico +childframe))
                            '(posframe grid) '(grid)))
-              (consult-location ,(if (and condensed-display-p
+              (consult-location ,(if (and non-condensed-display-p
                                           (modulep! :completion vertico
                                                     +childframe))
                                      'posframe 'buffer))
-              ,@(if condensed-display-p
+              ,@(if non-condensed-display-p
                     (if (modulep! :completion vertico +childframe)
                         '((t posframe))
                       nil)
