@@ -51,6 +51,8 @@
 ;; frames and GUI frames but decided to remove it because I did not use Emacs
 ;; that way much.
 
+;; Would also need to set `vertico-multiform-categories'.
+
 ;; Automatically enable & disable the posframe when using multiple client frames.
 ;;(add-hook! 'pre-command-hook
 ;;  (defun cae-tty-setup-posframe-h ()
