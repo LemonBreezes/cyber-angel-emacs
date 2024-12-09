@@ -600,8 +600,8 @@
   (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
   (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
   (after! vertico-multiform
-    (let ((non-condensed-display-p (and (cae-display-graphic-p)
-                                        (>= (frame-width) 120))))
+    (let ((non-condensed-display-p (or (cae-display-graphic-p)
+                                       (>= (frame-width) 120))))
       (setq vertico-multiform-categories
             `((embark-keybinding grid)
               (consult-grep
