@@ -613,7 +613,7 @@
                                         (modulep! :completion vertico
                                                   +childframe))
                                    'posframe 'buffer))
-            ,@(if (cae-display-graphic-p)
+            ,@(if (>= (frame-width) 120)
                   (if (modulep! :completion vertico +childframe)
                       '((t posframe))
                     nil)
