@@ -348,9 +348,9 @@
         :desc "Find directory" "d" #'consult-dir))
       (:prefix "o"
        (:when (modulep! :term eshell)
-        :desc "Open eshell workspace" "C-e" #'nil)
+        :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
        (:when (modulep! :term vterm)
-        :desc "Open vterm workspace" "C-t" #'nil))
+        :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace))
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "\\" #'cae-workspace-switch-to-10
