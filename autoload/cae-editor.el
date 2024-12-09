@@ -512,7 +512,8 @@ image-mode buffers."
 (defun cae-open-eshell-in-new-workspace ()
   "Open a new eshell in a new workspace."
   (interactive)
-  (unless (+workspace-exists-p "*eshell*")
+  (if (+workspace-exists-p "*eshell*")
+      (+workspace-switch "*eshell*")
     (+workspace/new "*eshell*"))
   (eshell)
   (delete-other-windows))
@@ -521,7 +522,8 @@ image-mode buffers."
 (defun cae-open-vterm-in-new-workspace ()
   "Open a new vterm in a new workspace."
   (interactive)
-  (unless (+workspace-exists-p "*vterm*")
+  (if (+workspace-exists-p "*vterm*")
+      (+workspace-switch "*vterm*")
     (+workspace/new "*vterm*"))
   (vterm)
   (delete-other-windows))
