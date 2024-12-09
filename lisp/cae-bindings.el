@@ -346,6 +346,11 @@
        :desc "Open harpoon menu" "h" #'harpoon-quick-menu-hydra
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
+      (:prefix "o"
+       (:when (modulep! :term eshell)
+        :desc "Open eshell workspace" "C-e" #'nil)
+       (:when (modulep! :term vterm)
+        :desc "Open vterm workspace" "C-t" #'nil))
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "\\" #'cae-workspace-switch-to-10
