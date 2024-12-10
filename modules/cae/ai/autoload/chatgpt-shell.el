@@ -60,7 +60,7 @@
   (require 'dall-e-shell)
   (if-let* ((buf (when (dall-e-shell--shell-buffers)
                    (car (dall-e-shell--shell-buffers))))
-            (win (get-buffer-window (dall-e-shell--primary-buffer))))
+            (win (get-buffer-window buf)))
       (+popup/close (dall-e-shell--primary-buffer))
     (let ((dall-e-shell-display-function #'pop-to-buffer))
       (call-interactively #'dall-e-shell))))
