@@ -16,8 +16,9 @@
 (after! aider
   (setq aider-args
         `(
-          "--o1-preview"
-          "--editor-model" "o1-preview"
+          "--model" "gemini/1206"
+          ;;"--o1-preview"
+          ;;"--editor-model" "o1-preview"
           "--openai-api-key" ,(cae-secrets-get-openai-api-key)
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
           "--gemini-api-key" ,(cae-secrets-get-gemini-api-key)
