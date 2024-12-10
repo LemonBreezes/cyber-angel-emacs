@@ -62,5 +62,5 @@
                    (car (dall-e-shell--shell-buffers))))
             (win (get-buffer-window buf)))
       (+popup/close (dall-e-shell--primary-buffer))
-    (let ((dall-e-shell-display-function #'pop-to-buffer))
+    (let ((shell-maker-display-function #'pop-to-buffer))
       (call-interactively #'dall-e-shell))))
