@@ -21,7 +21,6 @@
           ;;"--editor-model" "o1-preview"
           "--openai-api-key" ,(cae-secrets-get-openai-api-key)
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
-          "--gemini-api-key" ,(cae-secrets-get-gemini-api-key)
           "--encoding" "latin-1"
           "--cache-prompts"
           )))
