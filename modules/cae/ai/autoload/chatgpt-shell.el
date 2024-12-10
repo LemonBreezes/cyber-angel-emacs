@@ -53,3 +53,13 @@
   (interactive)
   (+workspace-switch "*dall-e*" t)
   (dall-e-shell))
+
+;;;###autoload
+(defun cae-ai-toggle-dall-e-shell ()
+  (interactive)
+  (require 'dall-e-shell)
+  (if-let* ((buf (dall-e-shell--primary-buffer))
+            (win (get-buffer-window (dall-e-shell--primary-buffer))))
+      (delete-window (get-buffer-window (dall-e-shell--primary-buffer)))
+    (let ((dall-e-shell-display-function #'pop-to-buffer))
+      (call-interactively #'dall-e-shell))))
