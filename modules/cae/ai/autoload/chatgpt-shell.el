@@ -61,6 +61,6 @@
   (if-let* ((buf (when (dall-e-shell--shell-buffers)
                    (car (dall-e-shell--shell-buffers))))
             (win (get-buffer-window (dall-e-shell--primary-buffer))))
-      (delete-window (get-buffer-window (dall-e-shell--primary-buffer)))
-    (let ((dall-e-shell-display-function #'pop-to-buffer))
+      (+popup/close (dall-e-shell--primary-buffer))
+    (let ((dall-e-shell-display-function #'+popup-display-buffer))
       (call-interactively #'dall-e-shell))))
