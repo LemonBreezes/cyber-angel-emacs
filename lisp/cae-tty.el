@@ -33,6 +33,8 @@
     (set-face-attribute 'magit-diff-added-highlight nil :background nil)
     (set-face-attribute 'magit-diff-base-highlight nil :background nil)
     (set-face-attribute 'magit-diff-added nil :background nil))
+  (after! lsp-headerline
+    (set-face-attribute 'header-line nil :inherit 'mode-line-inactive))
   (remove-hook 'dired-mode-hook #'diredfl-mode))
 
 (when (modulep! :tools pdf)
