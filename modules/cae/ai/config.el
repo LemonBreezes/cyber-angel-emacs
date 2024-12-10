@@ -15,12 +15,15 @@
   (setq dall-e-shell-model-version "dall-e-3"))
 (after! aider
   (setq aider-args
-        `("--o1-preview"
+        `(
+          "--o1-preview"
           "--editor-model" "o1-preview"
           "--openai-api-key" ,(cae-secrets-get-openai-api-key)
           "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
+          "--gemini-api-key" ,(cae-secrets-get-gemini-api-key)
           "--encoding" "latin-1"
-          "--cache-prompts")))
+          "--cache-prompts"
+          )))
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
