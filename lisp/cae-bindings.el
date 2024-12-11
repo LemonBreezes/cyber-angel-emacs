@@ -353,8 +353,8 @@
         :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace))
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
-       :desc "Switch to 11th workspace" "\\" #'cae-workspace-switch-to-10
-       :desc "Switch to final workspace" "z" #'+workspace/switch-to-final))
+       :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
+       :desc "Switch to final workspace" "=" #'+workspace/switch-to-final))
 (after! which-key
   (setq which-key-replacement-alist
         (cl-remove-if (lambda (x)
