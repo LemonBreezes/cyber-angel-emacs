@@ -16,7 +16,7 @@
 (after! aider
   (setq aider-args
         `(
-          ;;"--model" "gemini/gemini-exp-1206"
+          "--model" "gemini/gemini-exp-1206"
           ;;"--o1-preview"
           ;;"--editor-model" "o1-preview"
           "--openai-api-key" ,(cae-secrets-get-openai-api-key)
