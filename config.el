@@ -659,7 +659,7 @@
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-restore-point")
-  (load! "lisp/cae-visible-mark")
+  ;;(load! "lisp/cae-visible-mark")
   (load! "lisp/cae-visible-scrolling")
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
