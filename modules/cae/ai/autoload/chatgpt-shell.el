@@ -1,5 +1,8 @@
 ;;; cae/ai/autoload/chatgpt-shell.el -*- lexical-binding: t; -*-
 
+(defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
+(defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
+
 ;;;###autoload
 (defun cae-ai-toggle-chatgpt-shell ()
   (interactive)
@@ -45,13 +48,13 @@
 ;;;###autoload
 (defun cae-ai-open-chatgpt-workspace ()
   (interactive)
-  (+workspace-switch "*scratch*" t)
+  (+workspace-switch cae-ai-chatgpt-shell-workspace-name t)
   (chatgpt-shell))
 
 ;;;###autoload
 (defun cae-ai-open-dall-e-workspace ()
   (interactive)
-  (+workspace-switch "*scratch2*" t)
+  (+workspace-switch cae-ai-dall-e-shell-workspace-name t)
   (dall-e-shell))
 
 ;;;###autoload
