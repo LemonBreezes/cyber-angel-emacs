@@ -45,13 +45,13 @@
 ;;;###autoload
 (defun cae-ai-open-chatgpt-workspace ()
   (interactive)
-  (+workspace-switch "*chatgpt*" t)
+  (+workspace-switch "*scratch*" t)
   (chatgpt-shell))
 
 ;;;###autoload
 (defun cae-ai-open-dall-e-workspace ()
   (interactive)
-  (+workspace-switch "*dall-e*" t)
+  (+workspace-switch "*scratch2" t)
   (dall-e-shell))
 
 ;;;###autoload
