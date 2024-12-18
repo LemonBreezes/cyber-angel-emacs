@@ -2,6 +2,9 @@
 
 (require 'cae-lib)
 
+(defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
+(defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
+
 ;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version 1
