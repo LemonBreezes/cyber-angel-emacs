@@ -2,9 +2,6 @@
 
 (require 'cae-lib)
 
-(defvar cae-ai-use-alternate-prompts-and-buffer-names nil
-  "If non-nil, use alternate prompts and buffer names for AI.")
-
 ;; Set up the default models.
 (after! chatgpt-shell
   (setq chatgpt-shell-model-version 1
