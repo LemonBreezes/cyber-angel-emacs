@@ -51,7 +51,7 @@
 ;;;###autoload
 (defun cae-ai-open-dall-e-workspace ()
   (interactive)
-  (+workspace-switch "*scratch2" t)
+  (+workspace-switch "*scratch2*" t)
   (dall-e-shell))
 
 ;;;###autoload
