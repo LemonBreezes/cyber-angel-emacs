@@ -605,18 +605,22 @@
           `((embark-keybinding grid)
             (consult-grep
              ,(if (and (modulep! :completion vertico +childframe)
-                       cae-init-posframe-enabled-p)
+                       (or (cae-display-graphic-p)
+                           (> emacs-major-version 30)))
                   'posframe 'buffer))
-            (imenu ,@(if (and cae-init-posframe-enabled-p
+            (imenu ,@(if (and (or (cae-display-graphic-p)
+                                  (> emacs-major-version 30))
                               (modulep! :completion vertico +childframe))
                          '(posframe grid) '(grid)))
-            (consult-location ,(if (and cae-init-posframe-enabled-p
+            (consult-location ,(if (and (or (cae-display-graphic-p)
+                                            (> emacs-major-version 30))
                                         (modulep! :completion vertico
                                                   +childframe))
                                    'posframe 'buffer))
             ,@(if (>= (frame-width) 120)
                   (if (and (modulep! :completion vertico +childframe)
-                           cae-init-posframe-enabled-p)
+                           (or (display-graphic-p)
+                               (> emacs-major-version 30)))
                       '((t posframe))
                     nil)
                 '((t flat))))))
