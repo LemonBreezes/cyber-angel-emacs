@@ -149,7 +149,7 @@
 
        :cae
        (lean4 +lsp +tree-sitter)
-       helm
+       (helm +childframe)
        debugger
        eshell
        exwm
