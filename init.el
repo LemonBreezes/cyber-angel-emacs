@@ -72,7 +72,7 @@
         doom-localleader-alt-key "<menu> m"))
 
 (doom! :completion
-       (vertico +icons)
+       (vertico +icons +childframe)
        (corfu +orderless +icons +dabbrev)
 
        :ui
