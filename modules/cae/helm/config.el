@@ -137,7 +137,7 @@ Can be negative.")
 
 (use-package! helm-posframe
   :when (and (modulep! +childframe)
-             (or (> emacs-major-version 30)
+             (or (> emacs-major-version 30) ; tty-posframe was recently added
                  (cae-display-graphic-p)))
   :after helm :config
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
