@@ -138,9 +138,9 @@ Can be negative.")
 (use-package! helm-posframe
   :when (and (modulep! +childframe)
              (if (boundp 'cae-init-posframe-enabled-p)
-                        cae-init-posframe-enabled-p
-                 (or (> emacs-major-version 30)
-                     (cae-display-graphic-p))))
+                 cae-init-posframe-enabled-p
+               (or (> emacs-major-version 30)
+                   (cae-display-graphic-p))))
   :after helm :config
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
         helm-posframe-width 0.65
