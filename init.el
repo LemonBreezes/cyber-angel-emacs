@@ -16,9 +16,6 @@
     (defvar cae-init-term-enabled-p (and p t))
     (defvar cae-init-languages-enabled-p (and p t))))
 
-(defvar cae-init-posframe-enabled-p (or (cae-display-graphic-p)
-                                        (> emacs-major-version 30)))
-
 (when cae-init-preamble-enabled-p
   (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
     (let ((termuxpath "/data/data/com.termux/files/usr/bin"))
