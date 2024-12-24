@@ -3,7 +3,6 @@
 ;;;###autoload
 (defun cae-tty-disable-unicode ()
   (interactive)
-  (provide 'nerd-icons)
   (after! org-eldoc
     (setq org-eldoc-breadcrumb-separator " -> "))
   (after! embrace
@@ -34,8 +33,9 @@
     (setq blamer-commit-formatter " * %s"))
   (after! dirvish
     (setq dirvish-attributes
-          (delq 'subtree-state
-                (delq 'all-the-icons dirvish-attributes))
+          (delq 'nerd-icons
+                (delq 'subtree-state
+                      (delq 'all-the-icons dirvish-attributes)))
           dirvish-path-separators '("~" "/" "/")
           dirvish-subtree-prefix " |"
           dirvish-subtree-line-prefix " |"))
