@@ -3,6 +3,7 @@
 ;;;###autoload
 (defun cae-tty-disable-unicode ()
   (interactive)
+  (provide 'nerd-icons)
   (after! org-eldoc
     (setq org-eldoc-breadcrumb-separator " -> "))
   (after! embrace
