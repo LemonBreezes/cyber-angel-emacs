@@ -324,7 +324,11 @@
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
-            "M-r" #'consult-history))))
+            "M-r" #'consult-history)))
+
+  (after! vertico-posframe
+    ;; `M-p' is already bound to `previous-history-element'.
+    (setq vertico-posframe-vertico-multiform-key "M-P")))
 
 ;;; Leader keybindings
 (autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
