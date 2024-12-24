@@ -31,7 +31,7 @@
           mu4e-modeline-new-items '("N:" "N:")))
   (after! blamer
     (setq blamer-commit-formatter " * %s"))
-  (after! dirvish-attributes
+  (after! dirvish
     (setq dirvish-attributes
           (delq 'subtree-state
                 (delq 'all-the-icons dirvish-attributes))
