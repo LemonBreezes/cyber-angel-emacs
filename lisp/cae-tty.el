@@ -46,7 +46,7 @@
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
 
-(when (not (cae-display-graphic-p))
+(unless (cae-display-graphic-p)
   (cae-tty-disable-unicode))
 
 ;; This is code from when I tried to run Emacs simultaneously from terminal
