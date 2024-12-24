@@ -1057,10 +1057,9 @@
       (goto-char (point-at-eol)))
     ;; Beginend is not needed with Dirvish.
     (when (modulep! :emacs dired)
-      (setq beginend-dired-mode nil)
-      (after! evil-collection-beginend
-        (setq evil-collection-beginend-modes
-              (delq 'dired-mode evil-collection-beginend-modes)))))
+      (defadvice! cae-beginend-disable-in-dirvish-a (&optional _)
+        :before-until #'beginend-dired-mode
+        (bound-and-true-p dirvish--this))))
 
   (use-package! isearch-mb
     :after-call isearch-mode-hook :init
