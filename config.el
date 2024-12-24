@@ -617,6 +617,7 @@
                                         (modulep! :completion vertico
                                                   +childframe))
                                    'posframe 'buffer))
+            (execute-extended-command flat)
             ,@(if (>= (frame-width) 120)
                   (if (and (modulep! :completion vertico +childframe)
                            (or (display-graphic-p)
