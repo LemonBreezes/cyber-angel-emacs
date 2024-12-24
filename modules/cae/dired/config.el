@@ -108,10 +108,9 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
-  ;; I think the header line is harder to read in terminal Emacs. Also, it
-  ;; conflicts with the new `dired-movement-style' equal to `cycle' and with
-  ;; `beginend-dired-mode', as they expect the files to begin on the second line
-  ;; of the buffer.
+  ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
+  ;; and with `beginend-dired-mode', as they expect the files to begin on the
+  ;; second line of the buffer.
   (setq dirvish-use-header-line nil))
 
 ;;(map! [remap dired-jump] #'cae-dired-jump) ; I prefer manually activating the
