@@ -39,6 +39,8 @@
           dirvish-path-separators '("~" "/" "/")
           dirvish-subtree-prefix " |"
           dirvish-subtree-line-prefix " |"))
+  (after! marginalia
+    (remove-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
   (after! corfu
     (setq corfu-margin-formatters
           (delq 'nerd-icons-corfu-formatter corfu-margin-formatters)))
