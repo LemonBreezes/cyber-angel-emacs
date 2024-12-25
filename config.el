@@ -621,7 +621,7 @@
                             (or (display-graphic-p)
                                 (> emacs-major-version 30)))
                        '((t posframe))
-                     '((t buffer)))
+                     '((t vertical)))
                  '((t flat))))))
       (dolist (entry new-entries)
         (let ((key (car entry))
@@ -642,7 +642,7 @@
                               (or (display-graphic-p)
                                   (> emacs-major-version 30)))
                          'posframe
-                       buffer)
+                       'vertical)
                    'flat)
                  (alist-get 'execute-extended-command vertico-multiform-commands)))))
 
