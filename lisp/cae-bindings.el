@@ -398,3 +398,5 @@
 
 (setq evil-escape-unordered-key-sequence t)
 (setq evil-escape-delay 0.1)
+(after! evil-escape
+  (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
