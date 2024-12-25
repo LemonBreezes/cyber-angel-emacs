@@ -606,7 +606,7 @@
              (consult-grep
               ,(if (and (modulep! :completion vertico +childframe)
                         (or (cae-display-graphic-p)
-                               (> emacs-major-version 30)))
+                            (> emacs-major-version 30)))
                    'posframe 'buffer))
              (imenu ,@(if (and (or (cae-display-graphic-p)
                                    (> emacs-major-version 30))
