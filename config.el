@@ -470,6 +470,7 @@
                                              '("--no-sandbox"))
                    cae-generic-browser-name "Chrome")))))
 
+  ;; I use `w3m' because EWW is too slow.
   (use-package! w3m
     :defer t :init
     (setq browse-url-secondary-browser-function #'w3m-browse-url)
