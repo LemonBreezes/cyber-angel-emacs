@@ -77,7 +77,7 @@ It is meant to be used as a `post-gc-hook'."
 (defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
   :before-until #'+workspace/switch-to
   (when (minibuffer-window-active-p (selected-window))
-    ;; Do not trigger the `repeat-map'.
+    ;; Do not trigger the repeat map.
     (setq this-command 'ignore
           real-this-command 'ignore)))
 
