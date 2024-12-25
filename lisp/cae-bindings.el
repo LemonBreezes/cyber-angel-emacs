@@ -393,3 +393,7 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
+
+;;; Chords
+
+(setq evil-escape-unordered-key-sequence t)
