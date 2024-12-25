@@ -400,10 +400,8 @@
 (setq evil-escape-delay 0.07)
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
-(defadvice! evil-escape-pre-command-hook (retval)
-  :filter-return #'evil-escape-pre-command-hook
-  (+log retval)
-  ;;(let ((esc-func (evil-escape-func)))
-  ;;  (when (eq this-command esc-func)
-  ;;    (setq real-this-command esc-func)))
-  )
+(defadvice! cae-evil-escape-fix-for-restore-point ()
+  :after #'evil-escape-pre-command-hook
+  (let ((esc-func (evil-escape-func)))
+    (when (eq this-command esc-func)
+      (setq real-this-command esc-func))))
