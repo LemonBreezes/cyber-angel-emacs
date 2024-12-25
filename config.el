@@ -632,7 +632,7 @@
                  (append (alist-get key vertico-multiform-categories)
                          value)
                  :test #'equal)))))
-    (nreverse vertico-multiform-categories)
+    (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
     (setf (alist-get 'execute-extended-command vertico-multiform-commands)
           (cl-remove-duplicates
            (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands)))))
