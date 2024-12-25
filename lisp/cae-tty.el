@@ -25,14 +25,14 @@
 ;; Make some overlays more visible in the terminal.
 (unless (cae-display-graphic-p)
   (after! corfu
-    (set-face-attribute 'corfu-default nil :background nil))
+    (set-face-attribute 'corfu-default nil :background 'unspecified))
   (after! eros
-    (set-face-attribute 'eros-result-overlay-face nil :background nil))
+    (set-face-attribute 'eros-result-overlay-face nil :background 'unspecified))
   (after! magit
-    (set-face-attribute 'magit-section-highlight nil :background nil)
-    (set-face-attribute 'magit-diff-added-highlight nil :background nil)
-    (set-face-attribute 'magit-diff-base-highlight nil :background nil)
-    (set-face-attribute 'magit-diff-added nil :background nil))
+    (set-face-attribute 'magit-section-highlight nil :background 'unspecified)
+    (set-face-attribute 'magit-diff-added-highlight nil :background 'unspecified)
+    (set-face-attribute 'magit-diff-base-highlight nil :background 'unspecified)
+    (set-face-attribute 'magit-diff-added nil :background 'unspecified))
   (after! lsp-headerline
     (set-face-attribute 'header-line nil :inherit 'mode-line-inactive))
   (remove-hook 'dired-mode-hook #'diredfl-mode))
