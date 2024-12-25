@@ -26,6 +26,7 @@
     ("eamcs" "emacs" nil :count 0)
     ("eles" "else" nil :count 0)
     ("elispp" "elisp" nil :count 1)
+    ("emcas" "emacs" nil :count 0)
     ("emcs" "emacs" nil :count 0)
     ("emere" "emerge" nil :count 0)
     ("emerege" "emerge" nil :count 0)
