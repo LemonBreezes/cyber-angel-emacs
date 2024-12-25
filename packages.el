@@ -1,6 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-(disable-packages! evil-escape
-                   flyspell
+(disable-packages! flyspell
                    ccls                 ; I use clangd.
                    compat               ; I use the latest version of Emacs.
                    ace-window
