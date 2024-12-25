@@ -632,6 +632,7 @@
                  (append (alist-get key vertico-multiform-categories)
                          value)
                  :test #'equal)))))
+    ;; The order matters. We do not want `(t flat)' or `(t posframe)' to override the built-ins.
     (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
     (setf (alist-get 'execute-extended-command vertico-multiform-commands)
           (cl-remove-duplicates
