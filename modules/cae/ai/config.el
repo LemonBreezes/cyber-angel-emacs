@@ -38,13 +38,6 @@
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 
-(use-package! gptel
-  :defer t :init
-  :config
-  (setq gptel-default-mode 'org-mode
-        ;; Fixes some malformed JSON response error.
-        gptel-use-curl nil))
-
 (use-package! aider
   :defer t)
 
