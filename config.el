@@ -457,14 +457,15 @@
 
   ;; Set up the default browser.
   (after! browse-url
-    (setq browse-url-browser-function
-          (cond ((executable-find "termux-setup-storage")
-                 #'browse-url-xdg-open)
-                (t #'browse-url-generic))
-          browse-url-secondary-browser-function
+    (setq browse-url-secondary-browser-function
           (if (eq browse-url-secondary-browser-function #'browse-url-default-browser)
               #'eww-browse-url
             browse-url-secondary-browser-function)
+          browse-url-browser-function
+          (cond ((executable-find "termux-setup-storage")
+                 #'browse-url-xdg-open)
+                ((getenv "SSH_TTY") browse-url-secondary-browser-function)
+                (t #'browse-url-generic))
           browse-url-firefox-new-window-is-tab t)
 
     (defvar cae-generic-browser-name nil)
