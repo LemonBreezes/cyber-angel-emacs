@@ -634,9 +634,17 @@
                  :test #'equal)))))
     ;; The order matters. We do not want `(t flat)' or `(t posframe)' to override the other entries.
     (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
+    ;; Ensure `execute-extended-command'
     (setf (alist-get 'execute-extended-command vertico-multiform-commands)
           (cl-remove-duplicates
-           (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands)))))
+           (cons (if (>= (frame-width) 120)
+                     (if (and (modulep! :completion vertico +childframe)
+                              (or (display-graphic-p)
+                                  (> emacs-major-version 30)))
+                         'posframe
+                       nil)
+                   'flat)
+                 (alist-get 'execute-extended-command vertico-multiform-commands)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
