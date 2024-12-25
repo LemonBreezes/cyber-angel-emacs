@@ -623,7 +623,11 @@
                                (> emacs-major-version 30)))
                       '((t posframe))
                     nil)
-                '((t flat))))))
+                '((t flat)))))
+    ;; Fix the directory and execute-extended-command commands to work with
+    ;; `vertico-posframe'.
+    (setq vertico-multiform-commands
+          (alist-get 'execute-extended-command vertico-multiform-commands)))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
