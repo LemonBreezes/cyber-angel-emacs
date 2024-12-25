@@ -472,7 +472,9 @@
                    cae-generic-browser-name "Chrome")))))
 
   (use-package! w3m
-    :defer t :config
+    :defer t :init
+    (setq browse-url-secondary-browser-function #'w3m-browse-url)
+    :config
     (setq w3m-user-agent
           (string-join
            '("Mozilla/5.0"
