@@ -437,17 +437,38 @@
     (load! "lisp/cae-lsp")
     (load! "lisp/cae-semantic"))
 
+  ;; I use `w3m' because EWW is too slow.
+  (use-package! w3m
+    :defer t :init
+    (setq browse-url-secondary-browser-function #'w3m-browse-url)
+    :config
+    (setq w3m-user-agent
+          (string-join
+           '("Mozilla/5.0"
+             "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
+             "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
+             "Mobile Safari/533.")
+           " ")
+          w3m-command-arguments '("-cookie" "-F"))
+    (after! w3m-search
+      (setq w3m-search-default-engine "duckduckgo"))
+    (map! :map w3m-mode-map
+          "o" #'ace-link-w3m))
+
   ;; Set up the default browser.
   (after! browse-url
     (setq browse-url-browser-function
           (cond ((executable-find "termux-setup-storage")
                  #'browse-url-xdg-open)
                 (t #'browse-url-generic))
-          browse-url-secondary-browser-function #'eww-browse-url
+          browse-url-secondary-browser-function (if (eq browse-url-secondary-browser-function #'browse-url-default-browser)
+                                                    #'eww-browse-url
+                                                  browse-url-secondary-browser-function)
           browse-url-firefox-new-window-is-tab t)
 
     (defvar cae-generic-browser-name nil)
-    (cond ((getenv "WSL_DISTRO_NAME")
+    (cond
+     ((getenv "WSL_DISTRO_NAME")
            (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
                  browse-url-generic-args '("/c" "start")))
           ((executable-find "firefox-beta")
@@ -469,24 +490,6 @@
                    browse-url-generic-args (when (eq (user-uid) 0)
                                              '("--no-sandbox"))
                    cae-generic-browser-name "Chrome")))))
-
-  ;; I use `w3m' because EWW is too slow.
-  (use-package! w3m
-    :defer t :init
-    (setq browse-url-secondary-browser-function #'w3m-browse-url)
-    :config
-    (setq w3m-user-agent
-          (string-join
-           '("Mozilla/5.0"
-             "(Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40)"
-             "AppleWebKit/533.1""(KHTML, like Gecko)" "Version/4.0"
-             "Mobile Safari/533.")
-           " ")
-          w3m-command-arguments '("-cookie" "-F"))
-    (after! w3m-search
-      (setq w3m-search-default-engine "duckduckgo"))
-    (map! :map w3m-mode-map
-          "o" #'ace-link-w3m))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
