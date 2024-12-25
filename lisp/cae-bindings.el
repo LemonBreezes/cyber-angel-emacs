@@ -403,7 +403,7 @@
 (defadvice! cae-evil-escape-set-this-command-a (retval)
   :filter-return #'evil-escape-p
   (when retval
-    (let ((escape-func (evil-escape-func))))
-    (setq this-command escape-func
-          real-this-command escape-func)
+    (let ((escape-func (evil-escape-func)))
+      (setq this-command escape-func
+            real-this-command escape-func))
     retval))
