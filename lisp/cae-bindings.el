@@ -400,3 +400,4 @@
 (setq evil-escape-delay 0.07)
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
+;; TODO make `evil-escape' compatible with `restore-point'.
