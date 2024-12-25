@@ -443,8 +443,7 @@
           (cond ((executable-find "termux-setup-storage")
                  #'browse-url-xdg-open)
                 (t #'browse-url-generic))
-          browse-url-secondary-browser-function
-          #'eww-browse-url
+          browse-url-secondary-browser-function #'eww-browse-url
           browse-url-firefox-new-window-is-tab t)
 
     (defvar cae-generic-browser-name nil)
