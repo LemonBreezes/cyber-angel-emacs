@@ -400,4 +400,10 @@
 (setq evil-escape-delay 0.07)
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
-;; TODO make `evil-escape' compatible with `restore-point'.
+(defadvice! cae-evil-escape-set-this-command-a (retval)
+  :filter-return #'evil-escape-p
+  (when retval
+    (let ((escape-func (evil-escape-func))))
+    (setq this-command escape-func
+          real-this-command escape-func)
+    retval))
