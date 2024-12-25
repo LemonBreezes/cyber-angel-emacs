@@ -397,3 +397,4 @@
 ;;; Chords
 
 (setq evil-escape-unordered-key-sequence t)
+(setq evil-escape-delay 0.1)
