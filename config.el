@@ -624,10 +624,8 @@
                       '((t posframe))
                     nil)
                 '((t flat)))))
-    ;; TODO Fix the directory and execute-extended-command commands to work with
-    ;; `vertico-posframe'.
-    (setq vertico-multiform-commands
-          (alist-get 'execute-extended-command vertico-multiform-commands)))
+    (setf (alist-get 'execute-extended-command vertico-multiform-commands)
+          (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
