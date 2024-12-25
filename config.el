@@ -612,6 +612,7 @@
                           (consult-grep . (, (if posframe-supported-p 'posframe 'buffer)))
                           (imenu . , (if posframe-supported-p '(posframe grid) '(grid)))
                           (consult-location . (, (if posframe-supported-p 'posframe 'buffer)))
+                          (file . (, (if posframe-supported-p 'posframe 'buffer)))
                           (t . (, default-view)))))
       (dolist (entry new-entries)
         (let ((key (car entry))
