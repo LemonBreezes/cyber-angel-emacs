@@ -397,6 +397,6 @@
 ;;; Chords
 
 (setq evil-escape-unordered-key-sequence t)
-(setq evil-escape-delay 0.1)
+(setq evil-escape-delay 0.07)
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
