@@ -633,7 +633,8 @@
                          value)
                  :test #'equal)))))
     (setf (alist-get 'execute-extended-command vertico-multiform-commands)
-          (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands))))
+          (cl-remove-duplicates
+           (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands)))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
