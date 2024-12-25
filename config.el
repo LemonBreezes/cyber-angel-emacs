@@ -469,27 +469,27 @@
     (defvar cae-generic-browser-name nil)
     (cond
      ((getenv "WSL_DISTRO_NAME")
-           (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
-                 browse-url-generic-args '("/c" "start")))
-          ((executable-find "firefox-beta")
-           (setq browse-url-generic-program "firefox-beta"
-                 browse-url-generic-args '("--new-tab")
-                 cae-generic-browser-name "Firefox"))
-          ((executable-find "firefox")
-           (setq browse-url-generic-program "firefox"
-                 browse-url-generic-args '("--new-tab")
-                 cae-generic-browser-name "Firefox"))
-          ((executable-find "firefox-bin")
-           (setq browse-url-generic-program "firefox-bin"
-                 browse-url-generic-args '("--new-tab")
-                 cae-generic-browser-name "Firefox"))
-          ((when-let* ((chrome (or (executable-find "chromium-bin-browser")
-                                   (executable-find "google-chrome-unstable")
-                                   (executable-find "google-chrome-stable"))))
-             (setq browse-url-generic-program chrome
-                   browse-url-generic-args (when (eq (user-uid) 0)
-                                             '("--no-sandbox"))
-                   cae-generic-browser-name "Chrome")))))
+      (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
+            browse-url-generic-args '("/c" "start")))
+     ((executable-find "firefox-beta")
+      (setq browse-url-generic-program "firefox-beta"
+            browse-url-generic-args '("--new-tab")
+            cae-generic-browser-name "Firefox"))
+     ((executable-find "firefox")
+      (setq browse-url-generic-program "firefox"
+            browse-url-generic-args '("--new-tab")
+            cae-generic-browser-name "Firefox"))
+     ((executable-find "firefox-bin")
+      (setq browse-url-generic-program "firefox-bin"
+            browse-url-generic-args '("--new-tab")
+            cae-generic-browser-name "Firefox"))
+     ((when-let* ((chrome (or (executable-find "chromium-bin-browser")
+                              (executable-find "google-chrome-unstable")
+                              (executable-find "google-chrome-stable"))))
+        (setq browse-url-generic-program chrome
+              browse-url-generic-args (when (eq (user-uid) 0)
+                                        '("--no-sandbox"))
+              cae-generic-browser-name "Chrome")))))
 
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
   (add-to-list 'doom-large-file-excluded-modes 'nov-mode)
