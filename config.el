@@ -623,7 +623,7 @@
                        '((t posframe))
                      nil)
                  '((t flat))))))
-      (dolist (entry new-entries)
+      (dolist (entry (nreverse new-entries))
         (let ((key (car entry))
               (value (cdr entry)))
           ;; Merge the new value with existing values, ensuring idempotency
