@@ -606,7 +606,7 @@
              (consult-grep
               ,(if (and (modulep! :completion vertico +childframe)
                         (or (cae-display-graphic-p)
-                            (> emacs-major-version 30)))
+                               (> emacs-major-version 30)))
                    'posframe 'buffer))
              (imenu ,@(if (and (or (cae-display-graphic-p)
                                    (> emacs-major-version 30))
@@ -644,7 +644,9 @@
                          'posframe
                        'vertical)
                    'flat)
-                 (alist-get 'execute-extended-command vertico-multiform-commands)))))
+                 (cl-set-difference
+                  (alist-get 'execute-extended-command vertico-multiform-commands)
+                  '(flat vertical posframe grid reverse unobtrusive))))))
 
   ;; Use Emacs as the default editor for shell commands.
   (when (cae-display-graphic-p)
