@@ -48,12 +48,6 @@
 (use-package! aider
   :defer t)
 
-(use-package! elysium
-  :defer t :autoload (elysium-query)
-  :custom
-  (elysium-window-size 0.5)
-  (elysium-window-style 'vertical))
-
 (use-package! magit-gptcommit
   :after gptel magit
   :config
