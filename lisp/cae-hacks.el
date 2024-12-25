@@ -76,7 +76,9 @@ It is meant to be used as a `post-gc-hook'."
 ;; Prevent the minibuffer from "glitching" the workspace switch.
 (defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
   :before-until #'+workspace/switch-to
-  (minibuffer-window-active-p (selected-window)))
+  (when (minibuffer-window-active-p (selected-window))
+    (setq this-command 'ignore
+          real-this-command 'ignore)))
 
 ;; Make `advice-remove' ignore the keyword argument
 (defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
