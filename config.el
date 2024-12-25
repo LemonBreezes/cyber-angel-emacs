@@ -623,7 +623,7 @@
                        '((t posframe))
                      nil)
                  '((t flat))))))
-      (dolist (entry (nreverse new-entries))
+      (dolist (entry new-entries)
         (let ((key (car entry))
               (value (cdr entry)))
           ;; Merge the new value with existing values, ensuring idempotency
@@ -632,6 +632,7 @@
                  (append (alist-get key vertico-multiform-categories)
                          value)
                  :test #'equal)))))
+    (nreverse vertico-multiform-categories)
     (setf (alist-get 'execute-extended-command vertico-multiform-commands)
           (cl-remove-duplicates
            (cons 'posframe (alist-get 'execute-extended-command vertico-multiform-commands)))))
