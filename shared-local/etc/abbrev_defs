@@ -24,6 +24,7 @@
     ("dfined" "defined" nil :count 0)
     ("doomn" "doom" nil :count 1)
     ("eamcs" "emacs" nil :count 0)
+    ("ecsape" "escape" nil :count 0)
     ("eles" "else" nil :count 0)
     ("elispp" "elisp" nil :count 1)
     ("emcas" "emacs" nil :count 0)
