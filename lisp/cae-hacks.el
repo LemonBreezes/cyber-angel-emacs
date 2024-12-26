@@ -207,3 +207,6 @@ It is meant to be used as a `post-gc-hook'."
 ;;  funcall-interactively(execute-extended-command nil "w3m-find-file" nil)
 ;;  command-execute(execute-extended-command)
 (advice-add #'w3m-fix-melpa-installation :override #'ignore)
+
+;; Symbol’s function definition is void: aider-read-string
+(defalias 'aider-read-string 'aider-plain-read-string)
