@@ -1,18 +1,16 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
-;; Stuff so that Emacs doesn't break in the Terminal.
-(when (modulep! :completion vertico +childframe)
-  (unless (cae-display-graphic-p)
-    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)))
-(when (modulep! :ui ligatures)
-  (unless (cae-display-graphic-p)
+(unless (cae-display-graphic-p)
+  ;; Stuff so that Emacs doesn't break in the Terminal.
+  (when (modulep! :completion vertico +childframe)
+    (remove-hook 'vertico-mode-hook #'vertico-posframe-mode))
+  (when (modulep! :ui ligatures)
     (setq +ligatures-in-modes nil)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
-    (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h)))
+    (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h))
 
-;; Remove some hooks that don't work in the terminal.
-(unless (cae-display-graphic-p)
+  ;; Remove some hooks that don't work in the terminal.
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     #'vi-tilde-fringe-mode)
   (let ((hook (if (daemonp)
@@ -20,10 +18,9 @@
                 'after-init-hook)))
     (remove-hook hook #'doom-init-fonts-h -100)
     (remove-hook hook #'doom-init-theme-h -90))
-  (remove-hook 'doom-init-ui-hook #'window-divider-mode))
+  (remove-hook 'doom-init-ui-hook #'window-divider-mode)
 
-;; Make some overlays more visible in the terminal.
-(unless (cae-display-graphic-p)
+  ;; Make some overlays more visible in the terminal.
   (after! corfu
     (set-face-attribute 'corfu-default nil :background 'unspecified))
   (after! eros
@@ -35,14 +32,15 @@
     (set-face-attribute 'magit-diff-added nil :background 'unspecified))
   (after! lsp-headerline
     (set-face-attribute 'header-line nil :inherit 'mode-line-inactive))
-  (remove-hook 'dired-mode-hook #'diredfl-mode))
+  (remove-hook 'dired-mode-hook #'diredfl-mode)
 
-;; Remove (error Window system frame should be used) in the terminal when using
-;; `chatgpt-shell'.
-(unless (cae-display-graphic-p)
+  ;; Remove (error Window system frame should be used) in the terminal when using
+  ;; `chatgpt-shell'.
   (after! chatgpt-shell
     ;; This feature is not supported in terminal Emacs anyways.
-    (setq chatgpt-shell-render-latex nil)))
+    (setq chatgpt-shell-render-latex nil))
+
+  (cae-tty-disable-unicode))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
@@ -53,8 +51,6 @@
           (apply oldfun args)
         (apply #'pdftotext-mode args)))))
 
-(unless (cae-display-graphic-p)
-  (cae-tty-disable-unicode))
 
 ;; This is code from when I tried to run Emacs simultaneously from terminal
 ;; frames and GUI frames but decided to remove it because I did not use Emacs
