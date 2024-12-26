@@ -39,7 +39,10 @@
         llm-warn-on-nonfree nil))
 
 (use-package! aider
-  :defer t)
+  :defer t
+  :config
+  (when (or (modulep! :cae helm) (modulep! :completion helm))
+    (require 'aider-helm)))
 
 (use-package! magit-gptcommit
   :after gptel magit
