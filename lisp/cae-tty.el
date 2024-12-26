@@ -39,6 +39,9 @@
 
 ;; Remove (error Window system frame should be used) in the terminal when using
 ;; `chatgpt-shell'.
+(unless (cae-display-graphic-p)
+  (after! chatgpt-shell
+    (setq chatgpt-shell-render-latex nil)))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
