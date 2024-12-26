@@ -84,6 +84,7 @@
     ("waws" "was" nil :count 0)
     ("whtaever" "whatever" nil :count 0)
     ("wjat" "what" nil :count 0)
+    ("wjhen" "when" nil :count 0)
     ("wokrs" "works" nil :count 0)
     ("workspcae" "workspace" nil :count 1)
     ("wwhat" "what" nil :count 0)
