@@ -1,7 +1,7 @@
 ;;; private/org/+pretty.el -*- lexical-binding: t; -*-
 
 (use-package! org-modern
-  :unless (cae-tty-disable-unicode-p)
+  :when (cae-display-graphic-p)
   :defer t :init
   (after! org
     (require 'org-modern)
