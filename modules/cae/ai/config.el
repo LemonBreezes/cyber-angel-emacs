@@ -118,33 +118,33 @@
         dall-e-shell-image-quality "hd"
         dall-e-shell-image-size "1024x1792"
         dall-e-shell-request-timeout 180))
-(use-package! chatgpt-shell
-  :defer t :init
-  (map! :leader
-        :prefix "o"
-        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
-        :desc "Open ChatGPT here" "C" #'chatgpt-shell
-        :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
-  ;; Use , to ask ChatGPT questions in any comint buffer
-  ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
-  :config
-  (unless (executable-find "dwdiff")
-    (warn "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
-  (setq chatgpt-shell-display-function #'switch-to-buffer)
-  ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
-  (setq-hook! 'chatgpt-shell-mode-hook
-    comint-process-echoes t)
-  (defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
-    :around #'shell-maker-async-shell-command
-    ;; This is a hack to prevent the ChatGPT shell from inheriting
-    ;; the LD_LIBRARY_PATH variable in projects where I override
-    ;; that.
-    (let ((process-environment (cl-remove-if
-                                (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
-                                process-environment)))
-      (apply oldfun args)))
-  (map! :map chatgpt-shell-mode-map
-        "C-d" #'cae-ai-chatgpt-quit-or-delete-char
-        "C-l" #'chatgpt-shell-clear-buffer
-        [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
-  (advice-add #'shell-maker-welcome-message :override #'ignore))
+;;(use-package! chatgpt-shell
+;;  :defer t :init
+;;  (map! :leader
+;;        :prefix "o"
+;;        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
+;;        :desc "Open ChatGPT here" "C" #'chatgpt-shell
+;;        :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
+;;  ;; Use , to ask ChatGPT questions in any comint buffer
+;;  ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+;;  :config
+;;  (unless (executable-find "dwdiff")
+;;    (warn "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
+;;  (setq chatgpt-shell-display-function #'switch-to-buffer)
+;;  ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
+;;  (setq-hook! 'chatgpt-shell-mode-hook
+;;    comint-process-echoes t)
+;;  (defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+;;    :around #'shell-maker-async-shell-command
+;;    ;; This is a hack to prevent the ChatGPT shell from inheriting
+;;    ;; the LD_LIBRARY_PATH variable in projects where I override
+;;    ;; that.
+;;    (let ((process-environment (cl-remove-if
+;;                                (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
+;;                                process-environment)))
+;;      (apply oldfun args)))
+;;  (map! :map chatgpt-shell-mode-map
+;;        "C-d" #'cae-ai-chatgpt-quit-or-delete-char
+;;        "C-l" #'chatgpt-shell-clear-buffer
+;;        [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
+;;  (advice-add #'shell-maker-welcome-message :override #'ignore))
