@@ -41,6 +41,7 @@
 ;; `chatgpt-shell'.
 (unless (cae-display-graphic-p)
   (after! chatgpt-shell
+    ;; This feature is not supported in terminal Emacs anyways.
     (setq chatgpt-shell-render-latex nil)))
 
 (when (modulep! :tools pdf)
