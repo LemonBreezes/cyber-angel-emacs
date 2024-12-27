@@ -509,7 +509,7 @@ image-mode buffers."
              (delete-char -1)))))))
 
 ;;;###autoload
-(defun cae-call-leader-key ()
+(defun cae-call-leader-map ()
   (interactive)
   (setq unread-command-events (listify-key-sequence [menu])))
 
