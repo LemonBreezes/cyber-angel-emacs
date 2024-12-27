@@ -277,7 +277,6 @@
   (after! evil-escape
     (key-chord-define evil-insert-state-map "jk" #'evil-escape)))
 
-
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
