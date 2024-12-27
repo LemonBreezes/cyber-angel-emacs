@@ -260,8 +260,6 @@
 
 ;;; Chords
 
-(setq evil-escape-unordered-key-sequence t)
-(setq evil-escape-delay 0.07)
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
 (defadvice! cae-evil-escape-fix-for-restore-point ()
@@ -271,9 +269,12 @@
       (setq real-this-command esc-func))))
 
 (use-package! key-chord
-  :after-call doom-first-input-hook :config
-  (key-chord-define-global "jj" #'cae-call-leader-map)
-  (key-chord-mode +1))
+  :defer nil :config
+  (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
+  (key-chord-mode +1)
+  (advice-add #'evil-escape-mode :override #'ignore)
+  (after! evil-escape
+    (key-chord-define evil-insert-state-map "jk" #'evil-escape)))
 
 
 ;;Local Variables:
