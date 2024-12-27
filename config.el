@@ -977,7 +977,6 @@
       "0-" "<-"
       "=0" "=>"
       "0=" "<="
-      "jj" #'cae-call-leader-map
       "j9" "("))
 
   (use-package! smart-semicolon
