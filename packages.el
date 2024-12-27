@@ -128,6 +128,7 @@
 (package! try)
 (package! ov)
 (package! lsp-ui)
+(package! key-chord)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
