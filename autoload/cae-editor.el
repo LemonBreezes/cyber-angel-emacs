@@ -511,9 +511,7 @@ image-mode buffers."
 ;;;###autoload
 (defun cae-call-leader-map ()
   (interactive)
-  (run-at-time 0.0 nil
-               (lambda ()
-                 (setq unread-command-events (listify-key-sequence [menu])))))
+  (setq unread-command-events (listify-key-sequence [menu])))
 
 ;;;###autoload
 (defun cae-open-eshell-in-new-workspace ()
