@@ -631,7 +631,9 @@
                              (if posframe-supported-p 'posframe 'vertical)
                            'flat))
            (new-entries `((embark-keybinding . (grid))
-                          (consult-grep . (, (if posframe-supported-p 'posframe 'buffer)))
+                          (consult-grep . (, (if wide-frame-p
+                                                 (if posframe-supported-p 'posframe 'buffer)
+                                               'buffer)))
                           (imenu . , (if posframe-supported-p '(posframe grid) '(grid)))
                           (consult-location . (, (if wide-frame-p
                                                      (if posframe-supported-p 'posframe 'buffer)
