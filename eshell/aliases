@@ -72,7 +72,6 @@ alias clear clear-scrollback
 alias gg    cae-unpackaged-magit-status
 alias q     exit
 alias rg    rg                           --color=always                       $*
-alias p     phoronix-test-suite          $*
 
 alias j    z $*
 alias vi   e $*
