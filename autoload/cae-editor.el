@@ -97,7 +97,10 @@ This is the format used on Reddit for code blocks."
                     (nreverse (visible-frame-list))))
          (vertico-posframe-size-function)
          (vertico-multiform-commands
-          `((cae-embark-act-with-completing-read grid ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
+          `((cae-embark-act-with-completing-read
+             ,(if (>= (frame-width) 120)
+                  'grid 'buffer)
+             ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
     (when (featurep 'vertico-posframe)
       (setf vertico-posframe-size-function
             `(lambda (_)
