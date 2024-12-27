@@ -509,6 +509,11 @@ image-mode buffers."
              (delete-char -1)))))))
 
 ;;;###autoload
+(defun cae-call-leader-key ()
+  (interactive)
+  (setq unread-command-events (listify-key-sequence [menu])))
+
+;;;###autoload
 (defun cae-open-eshell-in-new-workspace ()
   "Open a new eshell in a new workspace."
   (interactive)
