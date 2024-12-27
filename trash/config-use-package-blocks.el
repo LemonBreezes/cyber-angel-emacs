@@ -119,3 +119,10 @@
 (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
 (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
 (add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
+
+(use-package! smart-semicolon
+  :defer t :init
+  (add-hook 'c-mode-common-hook #'smart-semicolon-mode)
+  (add-hook 'web-mode-hook  #'smart-semicolon-mode)
+  (add-hook 'java-mode-hook #'smart-semicolon-mode)
+  (add-hook 'js-mode-hook   #'smart-semicolon-mode))
