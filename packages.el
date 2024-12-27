@@ -26,7 +26,9 @@
 (when (modulep! :editor evil)
   (package! evil-owl)
   (package! tabgo)
-  (package! evil-tutor))
+  (package! evil-tutor)
+  (package! key-chord))
+
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
@@ -99,7 +101,6 @@
 (package! transpose-frame)
 (package! logos)
 (package! auto-activating-snippets :recipe (:host github :repo "ymarco/auto-activating-snippets"))
-(package! smart-semicolon)
 (package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
@@ -128,7 +129,6 @@
 (package! try)
 (package! ov)
 (package! lsp-ui)
-(package! key-chord)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
