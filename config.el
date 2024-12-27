@@ -979,7 +979,8 @@
       "0-" "<-"
       "=0" "=>"
       "0=" "<="
-      "j9" #'insert-parentheses))
+      ;;"j9" #'insert-parentheses
+      ))
 
   (use-package! expand-region-improved
     :defer t :config
