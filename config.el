@@ -633,7 +633,9 @@
            (new-entries `((embark-keybinding . (grid))
                           (consult-grep . (, (if posframe-supported-p 'posframe 'buffer)))
                           (imenu . , (if posframe-supported-p '(posframe grid) '(grid)))
-                          (consult-location . (, (if posframe-supported-p 'posframe 'buffer)))
+                          (consult-location . (, (if wide-frame-p
+                                                     (if posframe-supported-p 'posframe 'buffer)
+                                                   'buffer)))
                           (file . (, default-view))
                           (t . (, default-view)))))
       (dolist (entry new-entries)
