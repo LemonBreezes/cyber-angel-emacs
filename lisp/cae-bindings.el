@@ -395,3 +395,6 @@
             "J" #'consult-line))))
 
 ;;; Chords
+
+(use-package! key-chord
+  :defer t)
