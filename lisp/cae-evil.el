@@ -271,8 +271,7 @@
 (use-package! key-chord
   :defer nil :config
   (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
-  (key-chord-mode +1)
-  (advice-add #'evil-escape-mode :override #'ignore)
+  (advice-add #'evil-escape-mode :override #'key-chord-mode)
   (after! evil-escape
     (key-chord-define evil-insert-state-map "jk" #'evil-escape)))
 
