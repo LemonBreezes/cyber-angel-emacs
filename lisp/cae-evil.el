@@ -269,9 +269,10 @@
       (setq real-this-command esc-func))))
 
 (use-package! key-chord
-  :defer nil :config
-  (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
+  :defer t :init
   (advice-add #'evil-escape-mode :override #'key-chord-mode)
+  :config
+  (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
   (after! evil-escape
     (key-chord-define evil-insert-state-map "jk" #'evil-escape)))
 
