@@ -393,3 +393,5 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
+
+;;; Chords
