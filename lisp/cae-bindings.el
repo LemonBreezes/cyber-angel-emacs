@@ -393,10 +393,3 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
-
-;;; Chords
-
-(use-package! key-chord
-  :after-call doom-first-input-hook :config
-  (key-chord-define-global "jj" #'cae-call-leader-map)
-  (key-chord-mode +1))
