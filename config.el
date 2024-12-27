@@ -630,11 +630,13 @@
            (default-view (if wide-frame-p
                              (if posframe-supported-p 'posframe 'vertical)
                            'flat))
-           (new-entries `((embark-keybinding . (grid))
+           (new-entries `((embark-keybinding . (, (if wide-frame-p 'buffer 'grid)))
                           (consult-grep . (, (if wide-frame-p
                                                  (if posframe-supported-p 'posframe 'buffer)
                                                'buffer)))
-                          (imenu . , (if posframe-supported-p '(posframe grid) '(grid)))
+                          (imenu . (, (if wide-frame-p
+                                           (if posframe-supported-p '(posframe grid) '(grid))
+                                         'buffer)))
                           (consult-location . (, (if wide-frame-p
                                                      (if posframe-supported-p 'posframe 'buffer)
                                                    'buffer)))
