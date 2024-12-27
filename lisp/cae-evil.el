@@ -258,6 +258,19 @@
 (after! evil-snipe
   (cl-pushnew #'calendar-mode evil-snipe-disabled-modes))
 
+;;; Chords
+
+(setq evil-escape-unordered-key-sequence t)
+(setq evil-escape-delay 0.07)
+(after! evil-escape
+  (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
+(defadvice! cae-evil-escape-fix-for-restore-point ()
+  :after #'evil-escape-pre-command-hook
+  (let ((esc-func (evil-escape-func)))
+    (when (eq this-command esc-func)
+      (setq real-this-command esc-func))))
+
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
