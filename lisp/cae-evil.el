@@ -228,10 +228,10 @@
 ;;          :i "C-f" nil
 ;;          :i "C-b" nil)))
 
-(defadvice! cae-evil-insert-state-a (&rest _)
-  :after #'yas-expand-snippet
-  (unless (minibufferp)
-    (call-interactively #'evil-insert)))
+;; TODO Fix this to work with `consult-yasnippet'.
+;;(defadvice! cae-evil-insert-state-a (&rest _)
+;;  :after #'yas-expand-snippet
+;;  (call-interactively #'evil-insert))
 
 (after! evil-org
   (map! :map evil-org-mode-map
