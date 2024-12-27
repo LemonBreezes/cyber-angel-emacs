@@ -973,6 +973,8 @@
       ";!=" "≠"
       "=." "=>"
       ",." #'cae-insert-bracket-pair ; <>
+      "-0" "->"
+      "0-" "<-"
       "j9" "("))
 
   (use-package! smart-semicolon
