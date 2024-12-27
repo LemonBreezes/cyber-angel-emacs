@@ -398,4 +398,5 @@
 
 (use-package! key-chord
   :after-call doom-first-input-hook :config
+  (key-chord-mode +1)
   (key-chord-define-global "jj" #'cae-call-leader-map))
