@@ -275,6 +275,7 @@
   :config
   (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
   (key-chord-define evil-insert-state-map "qj" #'cae-ispell-word-then-abbrev)
+  (key-chord-define evil-insert-state-map "qk" #'evil-escape)
   (after! evil-escape
     (key-chord-define evil-insert-state-map "jk" #'evil-escape)))
 
