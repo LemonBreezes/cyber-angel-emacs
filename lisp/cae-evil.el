@@ -270,6 +270,11 @@
     (when (eq this-command esc-func)
       (setq real-this-command esc-func))))
 
+(use-package! key-chord
+  :after-call doom-first-input-hook :config
+  (key-chord-define-global "jj" #'cae-call-leader-map)
+  (key-chord-mode +1))
+
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
