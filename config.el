@@ -635,8 +635,8 @@
                                                  (if posframe-supported-p 'posframe 'buffer)
                                                'buffer)))
                           (imenu . (, (if wide-frame-p
-                                           (if posframe-supported-p '(posframe grid) '(grid))
-                                         'buffer)))
+                                          (if posframe-supported-p '(posframe grid) '(grid))
+                                        'buffer)))
                           (consult-location . (, (if wide-frame-p
                                                      (if posframe-supported-p 'posframe 'buffer)
                                                    'buffer)))
