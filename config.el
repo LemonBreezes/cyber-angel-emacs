@@ -626,7 +626,8 @@
     (let* ((posframe-supported-p (and (modulep! :completion vertico +childframe)
                                       (or (cae-display-graphic-p)
                                           (> emacs-major-version 30))))
-           (wide-frame-p (>= (frame-width) 120))
+           (wide-frame-p ;;(>= (frame-width) 120)
+            nil)
            (default-view (if wide-frame-p
                              (if posframe-supported-p 'posframe 'vertical)
                            'flat))
