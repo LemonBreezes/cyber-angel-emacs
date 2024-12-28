@@ -7,7 +7,7 @@
 (defvar cae-misc-applications-music-dir "~/Music")
 (defvar cae-misc-applications-videos-dir "~/Videos")
 (defvar cae-misc-applications-mpd-host (or (bound-and-true-p cae-ip-address)
-                                        "127.0.0.1"))
+                                           "127.0.0.1"))
 
 (defvar cae-misc-applications-lisp-files nil)
 (defvar cae-misc-applications-map (make-sparse-keymap))
