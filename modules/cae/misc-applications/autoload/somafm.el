@@ -3,7 +3,7 @@
 (eval-when-compile (require 'hydra nil t))
 
 ;;;###autoload
-(defun +somafm ()
+(defun cae-somafm ()
   (interactive)
   (require 'somafm)
   (if (cae-display-graphic-p)
