@@ -25,11 +25,11 @@
   (map! :map elfeed-show-mode-map
         :ng "o" #'link-hint-open-link
         :map elfeed-search-mode-map
-        [remap elfeed-search-quit-window] #'+elfeed-quit
+        [remap elfeed-search-quit-window] #'cae-elfeed-quit
         :n "b" #'elfeed-search-browse-url
         :n "m" #'elfeed-toggle-star
         :n "F" #'elfeed-tube-fetch
-        :n "l" #'+elfeed-toggle-log-buffer
+        :n "l" #'cae-elfeed-toggle-log-buffer
         :ng "t" #'mark-whole-buffer)
 
   (use-package! elfeed-tube
