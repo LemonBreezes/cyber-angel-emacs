@@ -26,39 +26,37 @@
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
 (when (modulep! :completion vertico)
-  (let ((embark-act-key "C-;")
-        (embark-act-alt-key "<f8>")
-        (embark-act-all-key "C-:")
-        (embark-act-all-alt-key "<f9>")
-        (embark-export-key "C-c C-;")
-        (embark-export-alt-key "C-c ;"))
-    (when (eq (lookup-key doom-leader-map "a")
-              'embark-act)
-      (define-key doom-leader-map "a" nil)
-      (after! which-key
-        (setq which-key-replacement-alist
-              (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
-                            which-key-replacement-alist))))
+  (when (eq (lookup-key doom-leader-map "a")
+            'embark-act)
+    (define-key doom-leader-map "a" nil)
+    (after! which-key
+      (setq which-key-replacement-alist
+            (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
+                          which-key-replacement-alist))))
+  (map! :map isearch-mode-map
+        [remap isearch-describe-bindings]
+        (cmd! () (embark-bindings-in-keymap isearch-mode-map)
+              (when isearch-mode (isearch-update))))
+  (let ((embark-act-keys '("C-;" "<f8>"))
+        (embark-act-all-keys '("C-:" "<f9>"))
+        (embark-export-keys '("C-c C-;" "C-c ;")))
     (map! "C-;" nil
           (:map minibuffer-local-map
-           "C-;" nil
-           embark-act-key #'cae-embark-act
-           embark-act-alt-key #'cae-embark-act
-           embark-act-all-key #'embark-act-all
-           embark-act-all-alt-key #'embark-act-all
-           embark-export-key #'embark-export
-           embark-export-alt-key #'embark-export)
-          (:map isearch-mode-map
-           [remap isearch-describe-bindings]
-           (cmd! () (embark-bindings-in-keymap isearch-mode-map)
-                 (when isearch-mode (isearch-update))))
-          embark-act-key #'cae-embark-act
-          embark-act-alt-key #'cae-embark-act
-          embark-act-all-key #'embark-act-all
-          embark-act-all-alt-key #'embark-act-all)
+           "C-;" nil))
+    (dolist (key embark-act-keys)
+      (map! key #'embark-act
+            (:map minibuffer-local-map
+             key #'embark-act)))
+    (dolist (key embark-act-all-keys)
+      (map! key #'embark-act-all
+            (:map minibuffer-local-map
+             key #'embark-act-all)))
+    (dolist (key embark-export-keys)
+      (map! :map minibuffer-local-map
+             key #'embark-export))
     (eval
      `(after! embark
-        (setq embark-cycle-key ,embark-act-key))
+        (setq embark-cycle-key ,(car embark-act-keys)))
      t))
 
   (after! embark
