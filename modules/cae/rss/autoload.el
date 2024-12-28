@@ -1,7 +1,7 @@
 ;;; cae/rss/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +elfeed-quit ()
+(defun cae-elfeed-quit ()
   (interactive)
   (elfeed-db-save)
   (+workspace/kill +rss-workspace-name)
@@ -9,7 +9,7 @@
     (kill-buffer elfeed-log-buffer-name)))
 
 ;;;###autoload
-(defun +elfeed-toggle-log-buffer ()
+(defun cae-elfeed-toggle-log-buffer ()
   (interactive)
   (if (get-buffer-window elfeed-log-buffer-name)
       (delete-window (get-buffer-window elfeed-log-buffer-name))
@@ -19,7 +19,7 @@
       (evil-local-set-key 'normal (kbd "q") #'quit-window))))
 
 ;;;###autoload
-(defun +elfeed-regenerate-db ()
+(defun cae-elfeed-regenerate-db ()
   (interactive)
   (let ((buf (window-buffer)))
     (elfeed-db-unload)
