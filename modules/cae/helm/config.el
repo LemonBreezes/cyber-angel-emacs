@@ -138,8 +138,7 @@ Can be negative.")
 (use-package! helm-posframe
   :when (and (modulep! +childframe)
              (or (> emacs-major-version 30) ; tty-posframe was recently added
-                 (cae-display-graphic-p))
-             (>= (frame-width) 120))
+                 (cae-display-graphic-p)))
   :after helm :config
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-center
         helm-posframe-width 0.65
@@ -150,7 +149,8 @@ Can be negative.")
   (setq helm-posframe-parameters +helm-posframe-parameters)
   (advice-add #'helm-posframe-enable :around #'doom-shut-up-a)
   (advice-add #'helm-posframe-disable :around #'doom-shut-up-a)
-  (helm-posframe-enable))
+  (helm-posframe-enable)
+  (setq helm-display-function #'cae-helm-display-function-based-on-frame-width))
 
 (use-package! helm-flx
   :when (modulep! +fuzzy)
