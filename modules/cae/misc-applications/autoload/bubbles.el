@@ -6,7 +6,7 @@
   (if arg
       (setq cae-bubbles--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (cae-workspace-switch cae-bubbles-workspace-name t)
+        (+workspace-switch cae-bubbles-workspace-name t)
       (setq cae-bubbles--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
@@ -17,8 +17,8 @@
 (defun cae-bubbles-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (cae-workspace-exists-p cae-bubbles-workspace-name)
-        (cae-workspace/kill cae-bubbles-workspace-name))
+      (when (+workspace-exists-p cae-bubbles-workspace-name)
+        (+workspace/kill cae-bubbles-workspace-name))
     (when cae-bubbles--old-wconf
       (set-window-configuration cae-bubbles--old-wconf)))
   (kill-buffer "*bubbles*"))
