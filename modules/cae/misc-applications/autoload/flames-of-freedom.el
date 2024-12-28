@@ -4,7 +4,7 @@
 (defun cae-flames-of-freedom (&optional arg)
   (interactive "P")
   (if arg
-    (setq cae-flames-of-freedom--old-wconf nil)
+      (setq cae-flames-of-freedom--old-wconf nil)
     (if (modulep! :ui workspaces)
         (+workspace-switch cae-flames-of-freedom-workspace-name t)
       (setq cae-flames-of-freedom--old-wconf (current-window-configuration))
