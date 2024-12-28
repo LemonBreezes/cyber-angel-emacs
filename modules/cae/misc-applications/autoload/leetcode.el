@@ -1,23 +1,23 @@
 ;;; private/misc-applications/autoload/leetcode.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +leetcode ()
+(defun cae-leetcode ()
   (interactive)
   (when (modulep! :ui workspaces)
-    (+workspace-switch +leetcode-workspace-name t))
+    (+workspace-switch cae-leetcode-workspace-name t))
   (leetcode))
 
 ;;;###autoload
-(defun +leetcode-quit ()
+(defun cae-leetcode-quit ()
   (interactive)
   (leetcode-quit)
   (when (and (modulep! :ui workspaces)
-             (+workspace-exists-p +leetcode-workspace-name))
-    (+workspace-kill +leetcode-workspace-name)
+             (+workspace-exists-p cae-leetcode-workspace-name))
+    (+workspace-kill cae-leetcode-workspace-name)
     (+workspace/other)))
 
 ;;;###autoload
-(defun +leetcode-soft-quit ()
+(defun cae-leetcode-soft-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
       (+workspace/other)
