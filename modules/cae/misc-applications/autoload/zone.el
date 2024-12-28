@@ -1,7 +1,7 @@
 ;;; private/misc-applications/autoload/zone.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +zone-pgm-md5 ()
+(defun cae-zone-pgm-md5 ()
   "MD5 the buffer, then recursively checksum each hash."
   (let ((prev-md5 (buffer-substring-no-properties ;; Initialize.
                    (point-min) (point-max))))
@@ -21,7 +21,7 @@
         (zone-park/sit-for (point-min) 0.1)))))
 
 ;;;###autoload
-(defun +zone-choose (pgm)
+(defun cae-zone-choose (pgm)
   "Choose a PGM to run for `zone'."
   (interactive
    (list
@@ -33,7 +33,7 @@
                      zone-programs))))))
   (zone pgm))
 
-(defmacro +misc-applications-with-cursor-hidden (&rest body)
+(defmacro cae-misc-applications-with-cursor-hidden (&rest body)
   `(let ((cursor-type-old cursor-type)
          (evil-normal-state-cursor-old evil-normal-state-cursor)
          (evil-insert-state-cursor-old evil-insert-state-cursor)
@@ -61,9 +61,9 @@
                    evil-emacs-state-cursor evil-emacs-state-cursor-old))))
 
 ;;;###autoload
-(defun +zone-switch-to-root-window-a (oldfun &rest args)
+(defun cae-zone-switch-to-root-window-a (oldfun &rest args)
   (unless (minibufferp nil t)
-    (+misc-applications-with-cursor-hidden
+    (cae-misc-applications-with-cursor-hidden
      (let ((wconf (current-window-configuration)))
        (select-window (car (doom-visible-windows)))
        (let ((ignore-window-parameters t))
