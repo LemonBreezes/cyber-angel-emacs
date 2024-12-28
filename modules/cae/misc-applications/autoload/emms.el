@@ -3,41 +3,41 @@
 (require 'transient)
 
 ;;;###autoload
-(defun +emms (&optional arg)
+(defun cae-emms (&optional arg)
   (interactive "P")
   (unless (string-prefix-p "emms-" (symbol-name major-mode))
-    (setq +emms--old-wconf (current-window-configuration))
+    (setq cae-emms--old-wconf (current-window-configuration))
     (let ((ignore-window-parameters t))
       (delete-other-windows)))
   (call-interactively #'emms-smart-browse))
 
 ;;;###autoload
-(defun +emms-quit ()
+(defun cae-emms-quit ()
   (interactive)
   (call-interactively #'emms-browser-bury-buffer)
-  (when +emms--old-wconf
-    (set-window-configuration +emms--old-wconf)))
+  (when cae-emms--old-wconf
+    (set-window-configuration cae-emms--old-wconf)))
 
-;;;###autoload (autoload '+emms-quick-access "cae/misc-applications/autoload/emms" nil t)
-(transient-define-prefix +emms-quick-access ()
+;;;###autoload (autoload 'cae-emms-quick-access "cae/misc-applications/autoload/emms" nil t)
+(transient-define-prefix cae-emms-quick-access ()
   "Jump to EMMS music directories."
   ["Quick Access"
    [("v" "VGM"
      (lambda () (interactive)
        (require 'emms)
-       (dired (expand-file-name "VGM" +misc-applications-music-dir))))
+       (dired (expand-file-name "VGM" cae-misc-applications-music-dir))))
     ("y" "Youtube Music"
      (lambda () (interactive)
        (require 'emms)
-       (dired (expand-file-name "Youtube Music" +misc-applications-music-dir))))
+       (dired (expand-file-name "Youtube Music" cae-misc-applications-music-dir))))
     ("p" "Playlists"
      (lambda () (interactive)
        (require 'emms)
-       (dired (expand-file-name "Playlists" +misc-applications-music-dir))))
+       (dired (expand-file-name "Playlists" cae-misc-applications-music-dir))))
     ("a" "Anime Music"
      (lambda () (interactive)
        (require 'emms)
-       (dired (expand-file-name "Anime Music" +misc-applications-music-dir))))
+       (dired (expand-file-name "Anime Music" cae-misc-applications-music-dir))))
     ("r" "Artists"
      (lambda () (interactive)
        (require 'emms)
@@ -55,12 +55,12 @@
             (lambda (&rest _)
               (dired-jump nil (emms-track-get
                                (emms-playlist-current-selected-track) 'name))))
-         (dired (expand-file-name "VGM" +misc-applications-music-dir)))))]])
+         (dired (expand-file-name "VGM" cae-misc-applications-music-dir)))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
 
-(defun +emms-track-title-from-file-name (file)
+(defun cae-emms-track-title-from-file-name (file)
   "For using with EMMS description functions. Extracts the track
 title from the file name FILE, which just means a) taking only
 the file component at the end of the path, and b) removing any
@@ -73,7 +73,7 @@ file extension."
     (buffer-string)))
 
 ;;;###autoload
-(defun +emms-track-description (track)
+(defun cae-emms-track-description (track)
   "Return a description of TRACK, for EMMS, but try to cut just
 the track name from the file name, and just use the file name too
 rather than the whole path."
@@ -89,5 +89,5 @@ rather than the whole path."
            (concat (format "%s" artist) " - " (format "%s" title)))
           (title title)
           ((eq (emms-track-type track) 'file)
-           (+emms-track-title-from-file-name (emms-track-name track)))
+           (cae-emms-track-title-from-file-name (emms-track-name track)))
           (t (emms-track-simple-description track)))))
