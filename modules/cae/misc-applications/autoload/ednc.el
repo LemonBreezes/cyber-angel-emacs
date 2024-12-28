@@ -1,14 +1,14 @@
 ;;; private/misc-applications/autoload/ednc.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +ednc-show-notifications ()
+(defun cae-ednc-show-notifications ()
   (interactive)
   (require 'ednc)
   (let ((buf (get-buffer-create ednc-log-name)))
     (pop-to-buffer buf)))
 
 ;;;###autoload
-(defun +ednc-show-notification-in-buffer (old new)
+(defun cae-ednc-show-notification-in-buffer (old new)
   (let ((name (format "*Notification %d*" (ednc-notification-id (or old new)))))
     (with-current-buffer (get-buffer-create name)
       (if new (let ((inhibit-read-only t))
@@ -19,7 +19,7 @@
         (kill-buffer)))))
 
 ;;;###autoload
-(defun +ednc-dismiss-all-notifications ()
+(defun cae-ednc-dismiss-all-notifications ()
   (interactive)
   (cl-mapcar (lambda (notification)
                (ednc-dismiss-notification notification))
