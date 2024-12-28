@@ -1,24 +1,24 @@
 ;;; private/misc-applications/autoload/bubbles.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +bubbles (&optional arg)
+(defun cae-bubbles (&optional arg)
   (interactive "P")
   (if arg
-      (setq +bubbles--old-wconf nil)
+      (setq cae-bubbles--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch +bubbles-workspace-name t)
-      (setq +bubbles--old-wconf (current-window-configuration))
+        (cae-workspace-switch cae-bubbles-workspace-name t)
+      (setq cae-bubbles--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'bubbles))
 
 ;;;###autoload
-(defun +bubbles-quit ()
+(defun cae-bubbles-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +bubbles-workspace-name)
-        (+workspace/kill +bubbles-workspace-name))
-    (when +bubbles--old-wconf
-      (set-window-configuration +bubbles--old-wconf)))
+      (when (cae-workspace-exists-p cae-bubbles-workspace-name)
+        (cae-workspace/kill cae-bubbles-workspace-name))
+    (when cae-bubbles--old-wconf
+      (set-window-configuration cae-bubbles--old-wconf)))
   (kill-buffer "*bubbles*"))
