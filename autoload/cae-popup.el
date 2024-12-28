@@ -24,9 +24,5 @@ Uses `shrink-window-if-larger-than-buffer'."
      (unless window
        (setq window (selected-window)))
      (unless (= (- (point-max) (point-min)) 0)
-       (shrink-window-if-larger-than-buffer window))
-     ;;(enlarge-window-horizontally
-     ;; (- (1+ (cadr (buffer-line-statistics (window-buffer window))))
-     ;;    (window-width window)))
-     )
+       (shrink-window-if-larger-than-buffer window)))
    window))
