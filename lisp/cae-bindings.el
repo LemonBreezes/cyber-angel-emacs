@@ -53,7 +53,7 @@
              key #'embark-act-all)))
     (dolist (key embark-export-keys)
       (map! :map minibuffer-local-map
-             key #'embark-export))
+            key #'embark-export))
     (eval
      `(after! embark
         (setq embark-cycle-key ,(car embark-act-keys)))
