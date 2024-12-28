@@ -1,13 +1,13 @@
 ;;; private/misc-applications/autoload/fireplace.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +fireplace (&optional arg)
+(defun cae-fireplace (&optional arg)
   (interactive "P")
   (if arg
-      (setq +fireplace--old-wconf nil)
+      (setq cae-fireplace--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch +fireplace-workspace-name t)
-      (setq +fireplace--old-wconf (current-window-configuration))
+        (+workspace-switch cae-fireplace-workspace-name t)
+      (setq cae-fireplace--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
@@ -15,11 +15,11 @@
 
 
 ;;;###autoload
-(defun +fireplace-quit ()
+(defun cae-fireplace-quit ()
   (interactive)
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +fireplace-workspace-name)
-        (+workspace/kill +fireplace-workspace-name))
-    (when +fireplace--old-wconf
-      (set-window-configuration +fireplace--old-wconf)))
+      (when (+workspace-exists-p cae-fireplace-workspace-name)
+        (+workspace/kill cae-fireplace-workspace-name))
+    (when cae-fireplace--old-wconf
+      (set-window-configuration cae-fireplace--old-wconf)))
   (kill-buffer fireplace-buffer-name))
