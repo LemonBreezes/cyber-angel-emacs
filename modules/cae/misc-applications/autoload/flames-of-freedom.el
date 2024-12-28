@@ -1,23 +1,23 @@
 ;;; private/misc-applications/autoload/flames-of-freedom.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +flames-of-freedom (&optional arg)
+(defun cae-flames-of-freedom (&optional arg)
   (interactive "P")
   (if arg
-    (setq +flames-of-freedom--old-wconf nil)
+    (setq cae-flames-of-freedom--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch +flames-of-freedom-workspace-name t)
-      (setq +flames-of-freedom--old-wconf (current-window-configuration))
+        (+workspace-switch cae-flames-of-freedom-workspace-name t)
+      (setq cae-flames-of-freedom--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'flames-of-freedom-default))
 
-(defun +flames-of-freedom-quit ()
+(defun cae-flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
-      (when (+workspace-exists-p +flames-of-freedom-workspace-name)
-        (+workspace/kill +flames-of-freedom-workspace-name))
-    (when +flames-of-freedom--old-wconf
-      (set-window-configuration +flames-of-freedom--old-wconf))))
+      (when (+workspace-exists-p cae-flames-of-freedom-workspace-name)
+        (+workspace/kill cae-flames-of-freedom-workspace-name))
+    (when cae-flames-of-freedom--old-wconf
+      (set-window-configuration cae-flames-of-freedom--old-wconf))))
 
-(advice-add #'flames-of-freedom-default :after #'+flames-of-freedom-quit)
+(advice-add #'flames-of-freedom-default :after #'cae-flames-of-freedom-quit)
