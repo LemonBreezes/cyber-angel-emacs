@@ -406,10 +406,6 @@
     (dolist (cmd '(+eshell-tldr-to-man))
       (add-to-list 'beacon-dont-blink-commands cmd)))
 
-  (use-package! outline-minor-faces
-    :defer t :init
-    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
-
   (use-package indent-bars
     :custom
     (indent-bars-treesit-support t)
