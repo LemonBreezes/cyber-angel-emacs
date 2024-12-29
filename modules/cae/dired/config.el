@@ -69,6 +69,7 @@
 
   (map! :map dired-mode-map
         "C-M-k" #'dired-kill-subdir))
+(add-hook 'dired-mode-hook #'cae-dired-hide-details-in-narrow-screen-h)
 
 (after! wdired
   (setq wdired-allow-to-change-permissions t))
