@@ -947,8 +947,6 @@
       (define-key embark-sentence-map "T" #'titlecase-sentence)))
 
   (after! outline
-    (setq outline-font-lock-faces nil
-          outline-font-lock-keywords nil)
     (after! which-key
       (which-key-add-keymap-based-replacements outline-minor-mode-map
         "C-c @" "outline")))
