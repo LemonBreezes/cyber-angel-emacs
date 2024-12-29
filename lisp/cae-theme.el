@@ -116,6 +116,7 @@
         modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-variable-pitch-ui t
+        modus-themes-italic-constructs (cae-display-graphic-p)
         modus-themes-mixed-fonts t
         modus-themes-prompts '(italic semibold)
         modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
