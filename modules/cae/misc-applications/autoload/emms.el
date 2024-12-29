@@ -108,8 +108,8 @@ rather than the whole path."
         `("" nil
           :filter ,(lambda (&optional _)
                      (when buffer-read-only
-                         #'cae-emms-quick-access
-                         t)))))
+                       #'cae-emms-quick-access
+                       t)))))
 (define-key cae-dired-emms-mode-map (kbd "e")
   (cons 'menu-item
         `("" nil
