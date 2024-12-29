@@ -49,13 +49,14 @@
     ("j" "Currently playing"
      (lambda () (interactive)
        (require 'emms)
-       (emms-player-mpd-sync-from-mpd
-        nil
-        (lambda (&rest _)
-          (if-let* ((track (emms-track-get
-                            (emms-playlist-current-selected-track) 'name)))
-              (dired-jump nil track)
-            (dired (expand-file-name "VGM" cae-misc-applications-music-dir)))))))]])
+       (let ((callback (lambda (&rest _)
+                         (if-let* ((track (emms-track-get
+                                           (emms-playlist-current-selected-track) 'name)))
+                             (dired-jump nil track)
+                           (dired (expand-file-name "VGM" cae-misc-applications-music-dir))))))
+         (if (executable-find "mpd")
+             (emms-player-mpd-sync-from-mpd nil callback)
+           (funcall callback)))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
