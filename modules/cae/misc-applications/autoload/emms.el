@@ -97,6 +97,8 @@ rather than the whole path."
 (defvar cae-dired-emms-mode-map (make-sparse-keymap)
   "Keymap for `cae-dired-emms-mode'.")
 
+(add-hook 'cae-dired-emms-mode-hook #'dired-hide-details-mode)
+
 ;;;###autoload
 (define-minor-mode cae-dired-emms-mode
   "Minor mode to set up EMMS key bindings in Dired."
@@ -104,12 +106,12 @@ rather than the whole path."
   :keymap cae-dired-emms-mode-map)
 
 (map! :map cae-dired-emms-mode-map
-      :g "a" `(menu-item "" nil
+      :ig "a" `(menu-item "" nil
                :filter ,(lambda (&optional _)
                           (when buffer-read-only
                             #'cae-emms-quick-access
                             t)))
-      :g "e" `(menu-item "" nil
+      :ig "e" `(menu-item "" nil
                :filter ,(lambda (&optional _)
                           (when buffer-read-only
                             (call-interactively #'emms-play-dired)
