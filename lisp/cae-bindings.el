@@ -45,7 +45,7 @@
                  (cmd! ()
                        (require 'embark)
                        (let ((embark-cycle-key ,embark-leader-key))
-                            (call-interactively #'embark-act))))
+                         (call-interactively #'embark-act))))
           t)
     (map! "C-;" nil
           (:map minibuffer-local-map
