@@ -206,8 +206,7 @@
 
 (use-package! pulseaudio-control
   :when (and (eq system-type 'gnu/linux)
-             (executable-find "pactl"(and (eq system-type 'gnu/linux)
-                                          (executable-find "pactl"))))
+             (executable-find "pactl"))
   :defer t :init
   (map! :map ctl-x-map
         "/" (cae-oneshot-keymap pulseaudio-control-map
