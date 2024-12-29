@@ -118,7 +118,7 @@
         modus-themes-variable-pitch-ui t
         modus-themes-italic-constructs (cae-display-graphic-p)
         modus-themes-mixed-fonts t
-        modus-themes-prompts '(italic semibold)
+        modus-themes-prompts `(,@(when (cae-display-graphic-p) (italic)) semibold)
         modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
