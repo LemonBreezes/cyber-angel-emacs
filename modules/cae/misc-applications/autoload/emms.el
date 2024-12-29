@@ -112,8 +112,8 @@ rather than the whole path."
                              #'cae-emms-quick-access
                              t)))
       :gn "RET" `(menu-item "" nil
-                :filter ,(lambda (&optional _)
-                           (when buffer-read-only
-                             (call-interactively #'emms-play-dired)
-                             (call-interactively #'emms-shuffle)
-                             t))))
+                  :filter ,(lambda (&optional _)
+                             (when buffer-read-only
+                               (call-interactively #'emms-play-dired)
+                               (call-interactively #'emms-shuffle)
+                               t))))
