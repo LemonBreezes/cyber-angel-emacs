@@ -93,3 +93,16 @@ rather than the whole path."
           ((eq (emms-track-type track) 'file)
            (cae-emms-track-title-from-file-name (emms-track-name track)))
           (t (emms-track-simple-description track)))))
+
+(defvar cae-dired-emms-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "a") #'cae-emms-quick-access)
+    (define-key map (kbd "e")
+      (lambda ()
+        (interactive)
+        (call-interactively #'emms-play-dired)
+        (emms-shuffle)))
+    map)
+  "Keymap for `cae-dired-emms-mode`.")
+
+;;;###autoload
