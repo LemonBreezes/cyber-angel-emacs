@@ -681,11 +681,7 @@
   (add-hook 'emms-playlist-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook! 'dired-mode-hook
-    (defun cae-dired-emms-mode-hook-h ()
-      (when (and (eq major-mode 'dired-mode)
-                 (file-in-directory-p default-directory cae-misc-applications-music-dir))
-        (cae-dired-emms-mode +1))))
+  (add-hook 'dired-mode-hook #'cae-dired-emms-mode-hook-h)
   :config
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
