@@ -54,7 +54,7 @@
         (lambda (&rest _)
           (if-let* ((track (emms-track-get
                             (emms-playlist-current-selected-track) 'name)))
-            (dired-jump nil track)
+              (dired-jump nil track)
             (dired (expand-file-name "VGM" cae-misc-applications-music-dir))
             )))))]])
 
