@@ -39,6 +39,9 @@
   ;; Make the mouse cursor more visible.
   (set-face-attribute 'mouse nil :background (face-foreground 'default nil t))
 
+  ;; Remove redundant underline in `describe-mode'.
+  (set-face-attribute 'separator-line nil :underline nil)
+
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
     (unless cae-theme-extend-heading-faces
