@@ -109,11 +109,9 @@ rather than the whole path."
       :gn "a" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
-                             #'cae-emms-quick-access
-                             'ignore)))
+                             #'cae-emms-quick-access)))
       :gn "e" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
-                             (call-interactively #'emms-shuffle)
-                             'ignore))))
+                             #'emms-shuffle))))
