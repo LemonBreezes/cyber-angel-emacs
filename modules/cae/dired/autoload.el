@@ -86,5 +86,6 @@
 
 ;;;###autoload
 (defun cae-dired-hide-details-in-narrow-screen-h ()
-  (when (<= (frame-width) 120)
+  (when (and (<= (frame-width) 120)
+             (not dired-hide-details-mode))
     (dired-hide-details-mode 1)))
