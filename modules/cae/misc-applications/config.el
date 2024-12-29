@@ -218,7 +218,6 @@
     (push '((nil . "pulseaudio-control-\\(.*\\)") . (nil . "\\1"))
           which-key-replacement-alist))
   :config
-  (pulseaudio-control-default-keybindings)
   (setq pulseaudio-control-use-default-sink t)
   (pulseaudio-control-default-keybindings)
   (after! which-key
