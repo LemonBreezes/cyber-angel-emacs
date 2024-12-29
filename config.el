@@ -971,15 +971,15 @@
     (add-hook 'doom-first-input-hook #'aas-global-mode)
     :config
     (aas-set-snippets 'global
-      ";--" "—"
-      ";-." "→"
-      ";=." "⇒"
-      ";!=" "≠"
-      ",." #'cae-insert-bracket-pair ; <>
-      "-0" "->"
-      "0-" "<-"
-      "=0" "=>"
-      "0=" "<="))
+                      ";--" "—"
+                      ";-." "→"
+                      ";=." "⇒"
+                      ";!=" "≠"
+                      ",." #'cae-insert-bracket-pair ; <>
+                      "-0" "->"
+                      "0-" "<-"
+                      "=0" "=>"
+                      "0=" "<="))
 
   (use-package! expand-region-improved
     :defer t :config
