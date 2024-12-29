@@ -80,7 +80,8 @@ the track name from the file name, and just use the file name too
 rather than the whole path."
   (let ((artist (emms-track-get track 'info-artist))
         (title (emms-track-get track 'info-title)))
-    (cond ((and artist title)
+    (cond ((and (stringp artist) (stringp title)
+                (not (string-empty-p artist)) (not (string-empty-p title)))
            ;; Converting the artist/title to a string works around a bug in `emms-info-exiftool'
            ;; where, if your track name is a number, e.g. "1999" by Jeroen Tel, then it will be an
            ;; integer type here, confusing everything.
