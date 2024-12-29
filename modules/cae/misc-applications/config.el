@@ -219,10 +219,7 @@
           which-key-replacement-alist))
   :config
   (setq pulseaudio-control-use-default-sink t)
-  (pulseaudio-control-default-keybindings)
-  (after! which-key
-    (which-key-add-keymap-based-replacements ctl-x-map
-      "/" "pulseaudio-control")))
+  (pulseaudio-control-default-keybindings))
 
 (use-package! trashed
   :defer t :init
