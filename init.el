@@ -7,14 +7,14 @@
   (defvar cae-init-core-enabled-p (and q t))
   (defvar cae-keyboard-remaps-enabled-p (and q t))
   (let ((p (and q t)))
-    (defvar cae-init-ui-enabled-p (and p nil))
-    (defvar cae-init-tools-enabled-p (and p t))
+    (defvar cae-init-ui-enabled-p (and p t))
+    (defvar cae-init-tools-enabled-p (and p nil))
     (defvar cae-init-editor-enabled-p (and p t))
-    (defvar cae-init-autocompletion-enabled-p (and p t))
-    (defvar cae-init-text-enabled-p (and p t))
-    (defvar cae-init-email-enabled-p (and p t))
-    (defvar cae-init-term-enabled-p (and p t))
-    (defvar cae-init-languages-enabled-p (and p t))))
+    (defvar cae-init-autocompletion-enabled-p (and p nil))
+    (defvar cae-init-text-enabled-p (and p nil))
+    (defvar cae-init-email-enabled-p (and p nil))
+    (defvar cae-init-term-enabled-p (and p nil))
+    (defvar cae-init-languages-enabled-p (and p nil))))
 
 (when cae-init-preamble-enabled-p
   (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
