@@ -42,7 +42,9 @@
         (embark-export-keys '("C-c C-;" "C-c ;"))
         (embark-leader-key "e"))
     (eval `(map! :leader :desc "Embark Act" ,embark-leader-key
-                 (cmd! () (let ((embark-cycle-key ,embark-leader-key))
+                 (cmd! ()
+                       (require 'embark)
+                       (let ((embark-cycle-key ,embark-leader-key))
                             (call-interactively #'embark-act))))
           t)
     (map! "C-;" nil
