@@ -115,5 +115,5 @@ rather than the whole path."
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
-                             (emms-shuffle)
+                             (call-interactively #'emms-shuffle)
                              t))))
