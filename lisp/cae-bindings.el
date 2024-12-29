@@ -33,6 +33,7 @@
       (setq which-key-replacement-alist
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
                           which-key-replacement-alist))))
+  (map! :leader :desc "Embark Act" "e" #'embark-act)
   (map! :map isearch-mode-map
         [remap isearch-describe-bindings]
         (cmd! () (embark-bindings-in-keymap isearch-mode-map)
