@@ -124,8 +124,7 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  (when (cae-display-graphic-p)
-    (load! "lisp/cae-theme"))
+  (load! "lisp/cae-theme")
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
