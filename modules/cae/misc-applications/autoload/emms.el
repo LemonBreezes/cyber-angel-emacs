@@ -115,3 +115,9 @@ rather than the whole path."
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle))))
+
+;;;###autoload
+(defun cae-dired-emms-mode-hook-h ()
+  (when (and (derived-mode-p 'dired-mode)
+             (file-in-directory-p default-directory cae-misc-applications-music-dir))
+    (cae-dired-emms-mode +1)))
