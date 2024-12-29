@@ -55,8 +55,7 @@
           (if-let* ((track (emms-track-get
                             (emms-playlist-current-selected-track) 'name)))
               (dired-jump nil track)
-            (dired (expand-file-name "VGM" cae-misc-applications-music-dir))
-            )))))]])
+            (dired (expand-file-name "VGM" cae-misc-applications-music-dir)))))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
