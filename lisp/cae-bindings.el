@@ -33,14 +33,18 @@
       (setq which-key-replacement-alist
             (cl-remove-if (lambda (x) (equal (cddr x) "Actions"))
                           which-key-replacement-alist))))
-  (map! :leader :desc "Embark Act" "e" (cmd! () (let ((embark-cycle-key "e")) (call-interactively #'embark-act))))
   (map! :map isearch-mode-map
         [remap isearch-describe-bindings]
         (cmd! () (embark-bindings-in-keymap isearch-mode-map)
               (when isearch-mode (isearch-update))))
   (let ((embark-act-keys '("C-;" "<f8>"))
         (embark-act-all-keys '("C-:" "<f9>"))
-        (embark-export-keys '("C-c C-;" "C-c ;")))
+        (embark-export-keys '("C-c C-;" "C-c ;"))
+        (embark-leader-key "e"))
+    (eval `(map! :leader :desc "Embark Act" ,embark-leader-key
+                 (cmd! () (let ((embark-cycle-key ,embark-leader-key))
+                            (call-interactively #'embark-act))))
+          t)
     (map! "C-;" nil
           (:map minibuffer-local-map
            "C-;" nil))
