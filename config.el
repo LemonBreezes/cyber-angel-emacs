@@ -408,7 +408,7 @@
 
   (use-package! outline-minor-faces
     :defer t :init
-    (remove-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
+    (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
 
   (use-package indent-bars
     :custom
