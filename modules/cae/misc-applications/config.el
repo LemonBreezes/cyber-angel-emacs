@@ -681,7 +681,7 @@
   (add-hook 'emms-playlist-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'emms-playlist-mode-hook #'doom-mark-buffer-as-real-h)
-  ;; Enable some player-specific keybindings in Dired within our music directory.
+  ;; Enable some player-specific keybindings in our music directory.
   (add-hook 'dired-mode-hook #'cae-dired-emms-mode-hook-h)
   :config
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
