@@ -106,12 +106,12 @@ rather than the whole path."
   :keymap cae-dired-emms-mode-map)
 
 (map! :map cae-dired-emms-mode-map
-      :gi "a" `(menu-item "" nil
+      :gn "a" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              #'cae-emms-quick-access
                              t)))
-      :gi "e" `(menu-item "" nil
+      :gn "e" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
