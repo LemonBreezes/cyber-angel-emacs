@@ -126,3 +126,7 @@
   (add-hook 'web-mode-hook  #'smart-semicolon-mode)
   (add-hook 'java-mode-hook #'smart-semicolon-mode)
   (add-hook 'js-mode-hook   #'smart-semicolon-mode))
+
+(use-package! outline-minor-faces
+  :defer t :init
+  (add-hook 'outline-minor-mode-hook #'outline-minor-faces-mode))
