@@ -116,4 +116,5 @@ rather than the whole path."
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
                              (call-interactively #'emms-shuffle)
+                             (message "HELLOOO")
                              t))))
