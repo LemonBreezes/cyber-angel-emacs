@@ -103,18 +103,15 @@ rather than the whole path."
   :lighter " Dired-EMMS"
   :keymap cae-dired-emms-mode-map)
 
-(define-key cae-dired-emms-mode-map (kbd "a")
-  (cons 'menu-item
-        `("" nil
-          :filter ,(lambda (&optional _)
-                     (when buffer-read-only
-                       #'cae-emms-quick-access
-                       t)))))
-(define-key cae-dired-emms-mode-map (kbd "e")
-  (cons 'menu-item
-        `("" nil
-          :filter ,(lambda (&optional _)
-                     (when buffer-read-only
-                       (call-interactively #'emms-play-dired)
-                       (emms-shuffle)
-                       t)))))
+(map! :map cae-dired-emms-mode-map
+      :ig "a" `(menu-item "" nil
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             #'cae-emms-quick-access
+                             t)))
+      :ig "e" `(menu-item "" nil
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             (call-interactively #'emms-play-dired)
+                             (emms-shuffle)
+                             t))))
