@@ -113,8 +113,8 @@ rather than the whole path."
                              t)))
       :gi "e" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
+                             (message "HELLOOO")
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
                              (call-interactively #'emms-shuffle)
-                             (message "HELLOOO")
                              t))))
