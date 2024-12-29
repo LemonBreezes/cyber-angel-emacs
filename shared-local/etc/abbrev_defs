@@ -46,6 +46,7 @@
     ("heee" "here" nil :count 0)
     ("helpp" "help" nil :count 0)
     ("hiw" "how" nil :count 1)
+    ("hok" "hook" nil :count 0)
     ("htat" "that" nil :count 1)
     ("hve" "have" nil :count 0)
     ("ijnstall" "install" nil :count 0)
