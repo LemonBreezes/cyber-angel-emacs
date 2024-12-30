@@ -5,6 +5,7 @@ tmp/
 core
 
 bugs.txt
+.gdb_history
 *.swp
 flycheck_*
 .local/
