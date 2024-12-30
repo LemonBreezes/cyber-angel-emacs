@@ -89,14 +89,10 @@ alias q     exit
 alias rg    rg                           --color=always                       $*
 
 alias j    z $*
-alias vi   \
-  e $*
-alias vim  \
-  e $*
-alias nano \
-  e $*
-alias git \
-  git --no-pager $*
+alias vi   e $*
+alias vim  e $*
+alias nano e $*
+alias git git --no-pager $*
 
 alias vdoom \
   DOOMDIR=~/.config/doom-vanilla/ \
