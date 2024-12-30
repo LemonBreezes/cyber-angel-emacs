@@ -11,20 +11,20 @@
   (eshell/cd "/")
 
   ;; Run system update commands.
-  (eshell-command "sudo emaint -a sync")
-  (eshell-command "sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y")
-  (eshell-command "update-grub")
-  (eshell-command "smart-live-rebuild")
-  (eshell-command "pipx upgrade-all")
-  (eshell-command "go-global-update")
-  (eshell-command "update-emacs")
+  (eshell-command "sudo emaint -a sync" t)
+  (eshell-command "sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y" t)
+  (eshell-command "update-grub" t)
+  (eshell-command "smart-live-rebuild" t)
+  (eshell-command "pipx upgrade-all" t)
+  (eshell-command "go-global-update" t)
+  (eshell-command "update-emacs" t)
 
   ;; Update Docker images.
   (let ((images (split-string
                  (shell-command-to-string "docker images --format '{{.Repository}}:{{.Tag}}' | sort | uniq") "\n" t)))
     (dolist (image images)
       (message "Pulling Docker image: %s" image)
-      (eshell-command (format "docker pull %s" image))))
+      (eshell-command (format "docker pull %s" image) t)))
 
   ;; Restart Docker containers.
   (let ((containers (split-string
@@ -38,9 +38,9 @@
                      (format "docker inspect --format='{{.Name}}' %s" id))
                     "/")))
         (message "Restarting Docker container: %s (ID: %s, Image: %s)" name id image)
-        (eshell-command (format "docker stop %s" id))
-        (eshell-command (format "docker rm %s" id))
-        (eshell-command (format "docker run -d --name %s %s" name image)))))
+        (eshell-command (format "docker stop %s" id) t)
+        (eshell-command (format "docker rm %s" id) t)
+        (eshell-command (format "docker run -d --name %s %s" name image) t))))
 
   ;; Return to the original directory.
   (eshell/popd))
