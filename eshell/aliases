@@ -121,7 +121,7 @@ alias delete-eln \
   ~/.config/emacs/.local/cache/eln/ \
   ~/.config/emacs/eln-cache/
 alias doom \
- ~/.config/emacs/bin/doom $*
+  ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
 alias update-termux \
