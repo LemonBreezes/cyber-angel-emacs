@@ -50,27 +50,12 @@ alias sysdr sudo systemctl daemon-reload                                      $*
 alias syslt sudo systemctl list-timers                                        $*
 alias sysult systemctl list-timers                                            $*
 
-alias wine \
-  WINEARCH=win64 \
-  WINEPREFIX=/home/st/.wine64 \
-  wine                                                                            $*
-alias wine32 \
-  WINEARCH=win32 \
-  WINEPREFIX=/home/st/.wine32 \
-  wine                                                                            $*
-alias winecfg \
-  WINEARCH=win64 \
-  WINEPREFIX=/home/st/.wine64 \
-  winecfg                                                                         $*
+alias wine WINEARCH=win64 WINEPREFIX=/home/st/.wine64 wine                           $*
+alias wine32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 wine                         $*
+alias winecfg WINEARCH=win64 WINEPREFIX=/home/st/.wine64 winecfg                     $*
 alias winecfg32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 winecfg                   $*
-alias winetricks \
-  WINEARCH=win64 \
-  WINEPREFIX=/home/st/.wine64 \
-  winetricks                                                                      $*
-alias winetricks32 \
-  WINEARCH=win32 \
-  WINEPREFIX=/home/st/.wine32 \
-  winetricks                                                                      $*
+alias winetricks WINEARCH=win64 WINEPREFIX=/home/st/.wine64 winetricks               $*
+alias winetricks32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 winetricks             $*
 
 alias mcd    mkdir -p $1 && cd $1
 alias cd-    cd -
@@ -92,63 +77,22 @@ alias j    z $*
 alias vi   e $*
 alias vim  e $*
 alias nano e $*
-alias git git --no-pager $*
+alias git  git --no-pager $*
 
-alias vdoom \
-  DOOMDIR=~/.config/doom-vanilla/ \
-  ~/.config/doomemacs-vanilla/bin/doom $*
-alias vemacs \
-  DOOMDIR=~/.config/doom-vanilla/ \
-  emacs --init-directory=~/.config/doomemacs-vanilla $*
-alias rebuild-packages \
-  rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ \
-  ~/.config/emacs/.local/cache/eln/ \
-  ~/.config/emacs/eln-cache \
-  && doom sync
-alias rebuild-emacs \
-  emerge emacs \
-  && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ \
-  ~/.config/emacs/.local/cache/eln/ \
-  && doom sync
-alias update-emacs \
-  doom sync -u \
-  && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ \
-  ~/.config/emacs/.local/cache/eln/ \
-  ~/.config/emacs/eln-cache/ \
-  && doom sync
-alias delete-eln \
-  rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ \
-  ~/.config/emacs/.local/cache/eln/ \
-  ~/.config/emacs/eln-cache/
-alias doom \
-  ~/.config/emacs/bin/doom $*
+alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom $*
+alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
+alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache  && doom sync
+alias rebuild-emacs emerge emacs && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
+alias update-emacs doom sync -u && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/ && doom sync
+alias update-gentoo pushd . && cd / && sudo emaint -a sync  && sudo emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && update-grub && smart-live-rebuild && pipx upgrade-all && go-global-update && update-emacs && docker images --format '{{.Repository}}:{{.Tag}}' | sort | uniq | xargs -I{} docker pull {} && popd
+alias delete-eln rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/
+alias doom ~/.config/emacs/bin/doom $*
 alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
-alias update-termux \
-  pkg upgrade \
-  && cd ~/.config/doom \
-  && git pull \
-  && cd ~/.config/emacs \
-  && git pull \
-  && cd ~/org \
-  && git pull \
-  && cd ~/ \
-  && git pull \
-  && doom sync -u
+alias update-termux pkg upgrade && cd ~/.config/doom && git pull && cd ~/.config/emacs && git pull && cd ~/org && git pull && cd ~/ && git pull && doom sync -u
 alias drop_caches sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"
 
-alias update-flx \
-  pushd . \
-  && cd ~/src/flx \
-  && git stash \
-  && git pull \
-  && git stash pop \
-  && cd ~/src/lookup \
-  && git stash \
-  && git pull \
-  && git stash pop \
-  && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup/ \
-  && popd
+alias update-flx pushd . && cd ~/src/flx && git stash && git pull && git stash pop && cd ~/src/lookup && git stash && git pull && git stash pop && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup/ && popd
 
 alias nixos-rebuild sudo nixos-rebuild $*
 alias nix-store sudo nix-store $*
