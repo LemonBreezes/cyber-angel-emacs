@@ -7,10 +7,9 @@
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
-                                  'modus-vivendi-tinted ;; A little bit more
-                                ;; legible in the
-                                ;; Windows Terminal by
-                                ;; default.
+                                  'modus-vivendi-tinted
+                                ;; A little bit more legible in the Windows
+                                ;; Terminal by default.
                                 'modus-vivendi-tritanopia))
 (setq doom-theme cae-modus-night-theme)
 
