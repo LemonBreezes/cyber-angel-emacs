@@ -11,7 +11,10 @@
                                 ;; A little bit more legible in the Windows
                                 ;; Terminal by default.
                                 'modus-vivendi-tritanopia))
-(setq doom-theme cae-modus-night-theme)
+
+(defvar cae-day-theme cae-modus-day-theme)
+(defvar cae-night-theme cae-modus-night-theme)
+(setq doom-theme cae-night-theme)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
@@ -135,7 +138,9 @@
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
-        ef-themes-to-toggle '(ef-trio-dark ef-trio-light)))
+        ef-themes-to-toggle
+        (if (cl-subsetp `()))
+        '(ef-trio-dark ef-trio-light)))
 
 (map! :leader :desc "Toggle theme" "tT" #'modus-themes-toggle)
 
