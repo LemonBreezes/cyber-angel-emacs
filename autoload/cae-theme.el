@@ -71,3 +71,19 @@
                         (with-current-buffer buf
                           (face-remap-remove-relative cookie)
                           (force-mode-line-update)))))))
+
+;;;###autoload
+(cl-defun cae-theme-toggle ()
+  (interactive)
+  (when (> (length custom-enabled-themes) 1)
+    (user-error "You have more than one theme enabled. Please disable all but one.")
+    (cl-return))
+  (let ((current-theme (car custom-enabled-themes)))
+    (cond ((memq current-theme `(,cae-day-theme ,cae-night-theme))
+           (if (cae-dark-theme-p)
+               (load-theme cae-day-theme t)
+             (load-theme cae-night-theme t)))
+          ((memq current-theme `(,cae-modus-day-theme ,cae-modus-night-theme))
+           (modus-themes-toggle))
+          ((memq current-theme `(,cae-ef-day-theme ,cae-ef-night-theme))
+           (ef-themes-toggle)))))
