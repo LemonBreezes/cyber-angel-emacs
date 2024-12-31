@@ -142,7 +142,7 @@
        (default +bindings +smartparens)
 
        :email
-       ;;mu4e
+       mu4e
 
        :app
        (rss +org)
