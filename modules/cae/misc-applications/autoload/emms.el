@@ -120,7 +120,15 @@ rather than the whole path."
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
-                             #'emms-shuffle))))
+                             #'emms-shuffle)))
+      :gn "<" `(menu-item "" nil
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             #'emms-previous)))
+      :gn ">" `(menu-item "" nil
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             #'emms-next))))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
