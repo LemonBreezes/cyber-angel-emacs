@@ -124,11 +124,11 @@ rather than the whole path."
       :gn "C-j" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
-                               #'emms-previous)))
+                               #'emms-next)))
       :gn "C-k" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
-                               #'emms-next))))
+                               #'emms-previous))))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
