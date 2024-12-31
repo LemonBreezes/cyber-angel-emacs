@@ -129,11 +129,7 @@
         modus-themes-prompts `(,@(when (cae-display-graphic-p)
                                    (italic))
                                semibold)
-        modus-themes-to-toggle
-        (if (cl-subsetp `(,cae-modus-day-theme ,cae-modus-night-theme)
-                        modus-themes-collection)
-            `(,cae-modus-day-theme ,cae-modus-night-theme)
-          '(modus-operandi modus-vivendi))
+        modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
