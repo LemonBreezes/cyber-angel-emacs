@@ -18,6 +18,14 @@
   (when cae-emms--old-wconf
     (set-window-configuration cae-emms--old-wconf)))
 
+(defun cae-emms-jump-to-currently-playing-track (&rest _)
+  (let ((track (emms-track-get
+                (emms-playlist-current-selected-track) 'name)))
+    (if track
+        (dired-jump nil track)
+      (message "No song is currently selected.")
+      (transient-setup 'cae-emms-quick-access))))
+
 ;;;###autoload (autoload 'cae-emms-quick-access "cae/misc-applications/autoload/emms" nil t)
 (transient-define-prefix cae-emms-quick-access ()
   "Jump to EMMS music directories."
@@ -50,16 +58,10 @@
      (lambda () (interactive)
        (require 'emms)
        (let ((callback (lambda (&rest _)
-                         (let ((track (emms-track-get
-                                       (emms-playlist-current-selected-track) 'name)))
-                           (+log track)
-                           (if track
-                               (dired-jump nil track)
-                             (message "No song is currently selected.")
-                             (transient-setup 'cae-emms-quick-access))))))
+                         )))
          (if (executable-find "mpd")
-             (emms-player-mpd-sync-from-mpd nil callback)
-           (funcall callback)))))]])
+             (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
+           (funcall #'cae-emms-jump-to-currently-playing-track)))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
