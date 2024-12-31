@@ -105,5 +105,4 @@
           ((and (string-suffix-p "-night" (symbol-name current-theme))
                 (memq (intern (concat (substring (symbol-name current-theme) 0 -6) "-day"))
                       themes))
-           (load-theme (intern (concat (substring (symbol-name current-theme) 0 -6) "-day")) t))
-          )))
+           (load-theme (intern (concat (substring (symbol-name current-theme) 0 -6) "-day")) t)))))
