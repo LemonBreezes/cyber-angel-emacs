@@ -206,10 +206,7 @@
           which-key-idle-delay 0.5
           which-key-compute-remaps t
           which-key-max-description-length 35
-          ;; For some reason the `which-key' popup was causing popup windows to
-          ;; enlarge. Also, we need to do this for the `which-key' popup to show
-          ;; up in EXWM buffers.
-          which-key-popup-type 'minibuffer
+          which-key-preserve-window-configuration t
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil))
