@@ -94,4 +94,5 @@
            (load-theme (intern (concat (substring (symbol-name current-theme) 0 -5) "-dark")) t))
           ((and (string-suffix-p "-dark" (symbol-name current-theme))
                 (memq (intern (concat (substring (symbol-name current-theme) 0 -4) "-light"))
-                      themes))))))
+                      themes))
+           (load-theme (intern (concat (substring (symbol-name current-theme) 0 -4) "-light")) t)))))
