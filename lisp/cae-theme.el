@@ -138,7 +138,7 @@
         ef-themes-mixed-fonts t
         ef-themes-to-toggle `(,cae-ef-day-theme ,cae-ef-night-theme)))
 
-(map! :leader :desc "Toggle theme" "tT" #'modus-themes-toggle)
+(map! :leader :desc "Toggle theme" "tT" #'cae-theme-toggle)
 
 ;;; Set theme based on time of day.
 
