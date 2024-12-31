@@ -60,6 +60,7 @@
     ("lrefix" "prefix" nil :count 0)
     ("mariio" "mario" nil :count 1)
     ("mentionied" "mentioned" nil :count 0)
+    ("messgae" "message" nil :count 0)
     ("mny" "my" nil :count 0)
     ("modle" "model" nil :count 0)
     ("msater" "master" nil :count 0)
