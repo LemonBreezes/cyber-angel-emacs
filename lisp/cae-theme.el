@@ -11,6 +11,8 @@
                                 ;; A little bit more legible in the Windows
                                 ;; Terminal by default.
                                 'modus-vivendi-tritanopia))
+(defvar cae-ef-day-theme 'ef-trio-light)
+(defvar cae-ef-night-theme 'ef-trio-dark)
 
 (defvar cae-day-theme cae-modus-day-theme)
 (defvar cae-night-theme cae-modus-night-theme)
@@ -134,9 +136,7 @@
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
-        ef-themes-to-toggle
-        (if (cl-subsetp `()))
-        '(ef-trio-dark ef-trio-light)))
+        ef-themes-to-toggle `(,cae-ef-day-theme ,cae-ef-night-theme)))
 
 (map! :leader :desc "Toggle theme" "tT" #'modus-themes-toggle)
 
