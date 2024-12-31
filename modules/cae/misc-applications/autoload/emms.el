@@ -27,7 +27,7 @@
       (transient-setup 'cae-emms-quick-access))))
 
 ;; TODO PR this into EMMS.
-(defadvice! cae-emms-ensure-callback-ran-a (closure tracks)
+(defadvice! cae-emms-ensure-callback-runs-a (closure tracks)
   :after #'emms-player-mpd-sync-from-mpd-1
   (unless tracks (funcall (cadr closure))))
 
