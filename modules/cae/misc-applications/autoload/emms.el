@@ -121,11 +121,11 @@ rather than the whole path."
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle)))
-      :gn "<" `(menu-item "" nil
+      :gn "C-j" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              #'emms-previous)))
-      :gn ">" `(menu-item "" nil
+      :gn "C-k" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              #'emms-next))))
