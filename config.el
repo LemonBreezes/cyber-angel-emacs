@@ -200,7 +200,6 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil))
 
-  (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
   (after! which-key
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
