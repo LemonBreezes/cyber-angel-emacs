@@ -57,11 +57,9 @@
     ("j" "Currently playing"
      (lambda () (interactive)
        (require 'emms)
-       (let ((callback (lambda (&rest _)
-                         )))
-         (if (executable-find "mpd")
-             (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
-           (funcall #'cae-emms-jump-to-currently-playing-track)))))]])
+       (if (executable-find "mpd")
+           (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
+         (funcall #'cae-emms-jump-to-currently-playing-track))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
