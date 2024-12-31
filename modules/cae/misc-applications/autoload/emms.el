@@ -52,6 +52,7 @@
        (let ((callback (lambda (&rest _)
                          (let ((track (emms-track-get
                                        (emms-playlist-current-selected-track) 'name)))
+                           (+log track)
                            (if track
                                (dired-jump nil track)
                              (message "No song is currently selected.")
