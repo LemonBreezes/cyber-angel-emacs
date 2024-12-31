@@ -18,18 +18,20 @@
   (when cae-emms--old-wconf
     (set-window-configuration cae-emms--old-wconf)))
 
-(defun cae-emms-jump-to-currently-playing-track (&rest _)
+(defun cae-emms-jump-to-currently-playing-track (&rest args)
   (let ((track (emms-track-get
                 (emms-playlist-current-selected-track) 'name)))
-    (if track
+    (if (and track args)
         (dired-jump nil track)
       (message "No song is currently selected.")
       (transient-setup 'cae-emms-quick-access))))
 
 ;; TODO PR this into EMMS.
-(defadvice! cae-emms-ensure-callback-runs-a (closure tracks)
+(defadvice! cae-emms-handle-jump-to-playing-track-a (closure tracks)
   :after #'emms-player-mpd-sync-from-mpd-1
-  (unless tracks (funcall (cadr closure))))
+  (when (and (not tracks)
+             (eq (cadr closure) #'cae-emms-jump-to-currently-playing-track))
+    (funcall (cadr closure))))
 
 ;;;###autoload (autoload 'cae-emms-quick-access "cae/misc-applications/autoload/emms" nil t)
 (transient-define-prefix cae-emms-quick-access ()
