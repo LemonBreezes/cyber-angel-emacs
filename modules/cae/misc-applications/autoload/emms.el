@@ -122,13 +122,13 @@ rather than the whole path."
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle)))
       :gn "C-j" `(menu-item "" nil
-                :filter ,(lambda (&optional _)
-                           (when buffer-read-only
-                             #'emms-previous)))
+                  :filter ,(lambda (&optional _)
+                             (when buffer-read-only
+                               #'emms-previous)))
       :gn "C-k" `(menu-item "" nil
-                :filter ,(lambda (&optional _)
-                           (when buffer-read-only
-                             #'emms-next))))
+                  :filter ,(lambda (&optional _)
+                             (when buffer-read-only
+                               #'emms-next))))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
