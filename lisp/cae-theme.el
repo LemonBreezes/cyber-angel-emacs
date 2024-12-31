@@ -7,6 +7,7 @@
 
 (defvar cae-modus-day-theme   'modus-operandi-tinted)
 (defvar cae-modus-night-theme 'modus-vivendi-tinted)
+(setq doom-theme cae-modus-night-theme)
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
@@ -125,8 +126,6 @@
   (setq ef-themes-variable-pitch-ui t
         ef-themes-mixed-fonts t
         ef-themes-to-toggle '(ef-trio-dark ef-trio-light)))
-
-(setq doom-theme 'modus-vivendi-tinted)
 
 (map! :leader :desc "Toggle theme" "tT" #'modus-themes-toggle)
 
