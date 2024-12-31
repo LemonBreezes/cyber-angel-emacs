@@ -5,7 +5,7 @@
 (defvar cae-theme-export-theme-with-pywal t)
 (defvar cae-theme-enable-day-night-theme-switching t)
 
-(defvar cae-modus-day-theme   'modus-operandi-tinted)
+(defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
                                   'modus-vivendi-tinted
                                 'modus-vivendi-tritanopia))
@@ -121,8 +121,14 @@
         modus-themes-variable-pitch-ui t
         modus-themes-italic-constructs (cae-display-graphic-p)
         modus-themes-mixed-fonts t
-        modus-themes-prompts `(,@(when (cae-display-graphic-p) (italic)) semibold)
-        modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
+        modus-themes-prompts `(,@(when (cae-display-graphic-p)
+                                   (italic))
+                               semibold)
+        modus-themes-to-toggle
+        (if (cl-subsetp `(,cae-modus-day-theme ,cae-modus-night-theme)
+                        modus-themes-collection)
+            `(,cae-modus-day-theme ,cae-modus-night-theme)
+          '(modus-operandi modus-vivendi))
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
 (after! ef-themes
   (setq ef-themes-variable-pitch-ui t
