@@ -80,6 +80,7 @@
     (cl-return))
   (let ((current-theme (car custom-enabled-themes))
         (themes (custom-available-themes)))
+    (message "Current theme: %s, Light version: %s" current-theme (concat (substring (symbol-name current-theme) 0 -4) "-light"))
     (cond ((memq current-theme `(,cae-day-theme ,cae-night-theme))
            (if (cae-dark-theme-p)
                (load-theme cae-day-theme t)
