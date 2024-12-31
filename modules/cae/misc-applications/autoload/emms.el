@@ -50,10 +50,12 @@
      (lambda () (interactive)
        (require 'emms)
        (let ((callback (lambda (&rest _)
-                         (if-let* ((track (emms-track-get
-                                           (emms-playlist-current-selected-track) 'name)))
-                             (dired-jump nil track)
-                           (dired (expand-file-name "VGM" cae-misc-applications-music-dir))))))
+                         (let ((track (emms-track-get
+                                       (emms-playlist-current-selected-track) 'name)))
+                           (if track
+                               (dired-jump nil track)
+                             (message "No song is currently playing.")
+                             (transient-setup 'cae-emms-quick-access))))))
          (if (executable-find "mpd")
              (emms-player-mpd-sync-from-mpd nil callback)
            (funcall callback)))))]])
