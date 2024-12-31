@@ -46,6 +46,6 @@
           (delq 'nerd-icons-corfu-formatter corfu-margin-formatters)))
   (dolist (fn '(nerd-icons-faicon
                 nerd-icons-octicon))
-    (advice-add fn :override #'ignore))
+    (advice-add fn :override (cl-constantly "")))
   (remove-hook 'org-mode-hook #'+org-pretty-mode)
   (remove-hook 'dired-mode-hook #'nerd-icons-dired-mode))
