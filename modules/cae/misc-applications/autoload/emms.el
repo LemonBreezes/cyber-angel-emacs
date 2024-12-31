@@ -26,6 +26,10 @@
       (message "No song is currently selected.")
       (transient-setup 'cae-emms-quick-access))))
 
+(defadvice! cae-emms-ensure-callback-ran-a (closure tracks)
+  :after #'emms-player-mpd-sync-from-mpd-1
+  (unless tracks (funcall (cadr closure))))
+
 ;;;###autoload (autoload 'cae-emms-quick-access "cae/misc-applications/autoload/emms" nil t)
 (transient-define-prefix cae-emms-quick-access ()
   "Jump to EMMS music directories."
