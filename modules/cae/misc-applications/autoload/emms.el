@@ -26,7 +26,7 @@
       (message "No song is currently selected.")
       (transient-setup 'cae-emms-quick-access))))
 
-;; TODO PR this into EMMS.
+;; TODO PR something so that the callback always runs to EMMS.
 (defadvice! cae-emms-handle-jump-to-playing-track-a (closure tracks)
   :after #'emms-player-mpd-sync-from-mpd-1
   (when (and (not tracks)
