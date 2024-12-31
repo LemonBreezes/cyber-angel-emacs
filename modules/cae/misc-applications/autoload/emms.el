@@ -54,7 +54,7 @@
                                        (emms-playlist-current-selected-track) 'name)))
                            (if track
                                (dired-jump nil track)
-                             (message "No song is currently playing.")
+                             (message "No song is currently selected.")
                              (transient-setup 'cae-emms-quick-access))))))
          (if (executable-find "mpd")
              (emms-player-mpd-sync-from-mpd nil callback)
