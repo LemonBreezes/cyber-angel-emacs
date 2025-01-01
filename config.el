@@ -5,6 +5,13 @@
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
+  ;; Load secrets
+  (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
+  (make-directory cae-multi-secrets-dir t)
+  (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
+    (load! (concat cae-multi-secrets-dir "secrets.el")))
+
+
   ;; Ensure this is defined even if its module is not loaded.
   (unless (boundp '+default-minibuffer-maps)
     (defvar +default-minibuffer-maps
