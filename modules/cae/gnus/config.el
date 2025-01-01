@@ -136,8 +136,8 @@
          gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
          gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
          ;; Filling in threads
-         gnus-build-sparse-threads 'some
-         gnus-fetch-old-headers 'some
+         gnus-build-sparse-threads t
+         gnus-fetch-old-headers t
          ;; More threading
          gnus-show-threads t
          gnus-thread-indent-level 2
