@@ -76,7 +76,6 @@
   ;; fixes an error.
   (setf (alist-get 'emacs-lisp-mode copilot-indentation-alist) nil)
 
-  (setq copilot-install-dir (concat doom-cache-dir "copilot/"))
   (add-to-list 'copilot-clear-overlay-ignore-commands #'corfu-quit)
   (add-hook! 'doom-escape-hook
     (defun cae-copilot-clear-overlay-h ()
