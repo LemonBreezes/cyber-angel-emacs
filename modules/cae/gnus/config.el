@@ -46,7 +46,7 @@
    gnus-large-newsgroup 200
    gnus-permanently-visible-groups "INBOX"
 ;;; Startup functions
-   gnus-save-killed-list nil
+   gnus-save-killed-list t
    gnus-check-new-newsgroups 'ask-server
    ;; No other newsreader is used.
    gnus-save-newsrc-file nil
