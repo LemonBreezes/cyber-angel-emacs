@@ -146,6 +146,7 @@
   (use-package! circadian
     :defer-incrementally t
     :defer t :config
+    (setq circadian-verbose t)
     (setq circadian-themes
           `(("7:30" . ,cae-modus-day-theme)
             ("19:30" . ,cae-modus-night-theme)))
