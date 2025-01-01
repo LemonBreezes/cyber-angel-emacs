@@ -55,7 +55,7 @@
 
 ;; cae-theme.el
 (package! modus-themes)
-(package! circadian :recipe (:host github :repo "guidoschmidt/circadian.el"))
+(package! circadian :recipe (:host github :repo "guidoschmidt/circadian.el" :branch "develop"))
 (package! standard-themes)
 (package! ef-themes)
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
