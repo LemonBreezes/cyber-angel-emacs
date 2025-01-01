@@ -217,7 +217,9 @@
       (setq which-key-use-C-h-commands t))
     (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
       :around #'which-key-C-h-dispatch
-      (funcall oldfun)))
+      (cond ((not (which-key--popup-showing-p))
+             (call-interactively #'embark-prefix-help-command))
+            (t (funcall oldfun)))))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
