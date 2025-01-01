@@ -185,4 +185,5 @@
                                       ;;(nntp "Eternal September"
                                       ;;      (nntp-address "news.eternal-september.org")
                                       ;;      (nntp-authinfo-user "StrawberryTea"))
-                                      ))
+                                      )
+      gnus-select-method '(nnnil ""))
