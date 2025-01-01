@@ -396,7 +396,9 @@ jumping backwards."
   (let ((line-count (count-lines (point-min) (point-max))))
     (unless (zerop line-count)
       (forward-line (random line-count))
-      (end-of-line))))
+      (if (derived-mode-p 'dired-mode)
+          (dired-move-to-filename)
+        (end-of-line)))))
 
 ;;;###autoload
 (defun cae-embark-act ()
