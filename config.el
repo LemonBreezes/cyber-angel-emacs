@@ -11,7 +11,6 @@
   (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
     (load! (concat cae-multi-secrets-dir "secrets.el")))
 
-
   ;; Ensure this is defined even if its module is not loaded.
   (unless (boundp '+default-minibuffer-maps)
     (defvar +default-minibuffer-maps
