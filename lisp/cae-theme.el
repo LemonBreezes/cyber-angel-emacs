@@ -148,8 +148,8 @@
     :defer t :config
     (setq circadian-verbose t)
     (setq circadian-themes
-          `(("19:30" . ,cae-modus-night-theme)
-            ("7:30" . ,cae-modus-day-theme)))
+          `(("7:30" . ,cae-modus-day-theme)
+            ("19:30" . ,cae-modus-night-theme)))
     (if (and calendar-latitude calendar-longitude)
         (if doom-init-time
             (circadian-activate-current)
