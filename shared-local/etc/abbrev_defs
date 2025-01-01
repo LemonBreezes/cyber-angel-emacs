@@ -59,6 +59,7 @@
     ("jeymap" "keymap" nil :count 1)
     ("jsut" "just" nil :count 1)
     ("keh" "key" nil :count 0)
+    ("lal" "all" nil :count 0)
     ("libux" "linux" nil :count 0)
     ("limti" "limit" nil :count 0)
     ("loals" "locals" nil :count 0)
