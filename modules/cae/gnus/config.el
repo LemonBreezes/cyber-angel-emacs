@@ -12,14 +12,14 @@
   :commands gnus-unplugged
   :config
   (gnus-registry-initialize)
-  ;;(setq nnmail-split-methods 'nnmail-split-fancy)
-  ;;(setq nnimap-split-methods 'nnmail-split-fancy)
-  ;;(setq nnmail-split-fancy
-  ;;      `(|
-  ;;        (: spam-split)
-  ;;        (from ,user-mail-address "Sent")
-  ;;        "INBOX" ;; or "mail.misc" for nnml/POP3
-  ;;        ))
+  (setq nnmail-split-methods 'nnmail-split-fancy)
+  (setq nnimap-split-methods 'nnmail-split-fancy)
+  (setq nnmail-split-fancy
+        `(|
+          (: spam-split)
+          (from ,user-mail-address "Sent")
+          "INBOX" ;; or "mail.misc" for nnml/POP3
+          ))
 
   (setq!
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
@@ -40,13 +40,13 @@
                                    (nntp "Eternal September"
                                          (nntp-address "news.eternal-september.org")
                                          (nntp-authinfo-user "StrawberryTea")))
-   ;;gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
+   gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
    gnus-large-newsgroup 200
    gnus-permanently-visible-groups "INBOX"
 ;;; Startup functions
-   gnus-save-killed-list t
+   gnus-save-killed-list nil
    gnus-check-new-newsgroups 'ask-server
    ;; No other newsreader is used.
    gnus-save-newsrc-file nil
