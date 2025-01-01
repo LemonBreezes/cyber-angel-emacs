@@ -350,7 +350,6 @@
        :desc "Font lock mode" "C-f" #'font-lock-mode)
       (:prefix "f"
        :desc "Find sibling file" "TAB" #'cae-find-sibling-file
-       :desc "Open harpoon menu" "h" #'harpoon-quick-menu-hydra
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
       (:prefix "o"
