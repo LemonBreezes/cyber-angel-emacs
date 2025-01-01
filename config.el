@@ -666,7 +666,7 @@
       ;; Ensure `execute-extended-command' has the correct view
       (let* ((execute-command-view (if wide-frame-p
                                        (if posframe-supported-p 'posframe 'vertical)
-                                     'flat))
+                                     'buffer))
              (existing-views (alist-get 'execute-extended-command vertico-multiform-commands))
              (cleaned-views (cl-set-difference existing-views
                                                '(flat vertical posframe grid reverse unobtrusive))))
