@@ -876,6 +876,7 @@
                       ?h ?j ?k ?l ?\;))
           avy-background nil
           avy-single-candidate-jump t
+          avy-escape-chars '(?\C-g ?\C-\[ ?\s)
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
