@@ -25,7 +25,7 @@
                   scroll-up-command
                   pop-mark
                   cae-pop-mark
-                  cae-jump-to-random-line-end
+                  cae-jump-to-random-line
                   c-mark-function
                   c-mark
                   query-replace
