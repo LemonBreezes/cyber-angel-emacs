@@ -93,7 +93,7 @@
       "C-x x c" #'cae-edit-indirect-dwim
       "C-x M-o" #'ace-swap-window
       "C-x M-t" #'transpose-frame
-      "C-x j" #'cae-jump-to-random-line-end
+      "C-x j" #'cae-jump-to-random-line
       ;;"C-x x N" #'cae-make-new-buffer ;TODO Check if this is necessary next
                                         ;time I disable Evil.
       "C-x x o" #'ov-clear
