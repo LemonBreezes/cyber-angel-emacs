@@ -5,7 +5,7 @@
 (let ((q t))
   (defvar cae-init-preamble-enabled-p (and q t))
   (defvar cae-init-core-enabled-p (and q t))
-  (defvar cae-keyboard-remaps-enabled-p (and q t))
+  (defvar cae-keyboard-remaps-enabled-p (and q nil))
   (let ((p (and q t)))
     (defvar cae-init-ui-enabled-p (and p t))
     (defvar cae-init-tools-enabled-p (and p t))
