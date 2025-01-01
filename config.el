@@ -227,7 +227,7 @@
             ((string-empty-p (which-key--current-key-string))
              (setq this-command 'embark-prefix-help-command)
              (embark-bindings-in-keymap cae-which-key-current-keymap))
-            (t (funcall oldfun)))))
+            (t (call-interactively #'embark-prefix-help-command)))))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
