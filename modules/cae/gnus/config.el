@@ -181,7 +181,7 @@
 ;;  :defer t :config
 ;;  (setq nnmairix-allowfast-default t))
 (setq gnus-secondary-select-methods '((nntp "Gmane"
-                                       (nntp-address "news.gmane.io"))
+                                       (nntp-address "news.gmane.org"))
                                       (nntp "Eternal September"
                                             (nntp-address "news.eternal-september.org")
                                             (nntp-authinfo-user "StrawberryTea"))))
