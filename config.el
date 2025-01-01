@@ -639,7 +639,7 @@
            (wide-frame-p (>= (frame-width) 120))
            (default-view (if wide-frame-p
                              (if posframe-supported-p 'posframe 'vertical)
-                           'flat))
+                           'buffer))
            (new-entries `((embark-keybinding . (, (if wide-frame-p 'grid 'buffer)))
                           (consult-grep . (, (if wide-frame-p
                                                  (if posframe-supported-p 'posframe 'buffer)
@@ -664,9 +664,7 @@
       ;; The order matters. We reverse to give priority to earlier entries.
       (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
       ;; Ensure `execute-extended-command' has the correct view
-      (let* ((execute-command-view (if wide-frame-p
-                                       (if posframe-supported-p 'posframe 'vertical)
-                                     'buffer))
+      (let* ((execute-command-view default-view)
              (existing-views (alist-get 'execute-extended-command vertico-multiform-commands))
              (cleaned-views (cl-set-difference existing-views
                                                '(flat vertical posframe grid reverse unobtrusive))))
