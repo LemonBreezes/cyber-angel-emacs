@@ -277,7 +277,6 @@
   (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
   (key-chord-define evil-insert-state-map "qj" #'cae-ispell-word-then-abbrev)
   (key-chord-define evil-insert-state-map "qk" #'evil-escape)
-  (key-chord-define evil-emacs-state-map "jj" #'cae-call-leader-map)
   (key-chord-define-global "jk" #'evil-escape)
   (key-chord-define-global "qj" #'cae-ispell-word-then-abbrev)
   (key-chord-define-global "qk" #'evil-escape)
