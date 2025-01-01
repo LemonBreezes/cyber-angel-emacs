@@ -216,7 +216,7 @@
     (after! which-key
       (setq which-key-use-C-h-commands t))
     (defvar cae-which-key-current-keymap nil)
-    (defadvice! cae-which-key-update-current-keymap-a (keymap &rest args)
+    (defadvice! cae-which-key-update-current-keymap-a (_keymap-name keymap &rest args)
       :before #'which-key--show-keymap
       (setq cae-which-key-current-keymap keymap))
     (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
