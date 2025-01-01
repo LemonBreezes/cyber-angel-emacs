@@ -280,7 +280,7 @@
   (key-chord-define-global "jj"#'cae-call-leader-map)
   (key-chord-define evil-normal-state-map "jj" #'evilem-motion-next-line)
   (key-chord-define evil-normal-state-map "kk" #'evilem-motion-previous-line)
-  (key-chord-define evil-normal-state-map "ee" #'evilem-motion-forward-word-end)
+  ;;(key-chord-define evil-normal-state-map "ee" #'evilem-motion-forward-word-end)
   (key-chord-define-global "jk" #'evil-escape)
   (key-chord-define-global "qj" #'cae-ispell-word-then-abbrev)
   (key-chord-define-global "qk" #'evil-escape)
