@@ -217,6 +217,7 @@
       (setq which-key-use-C-h-commands t))
     (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
       :around #'which-key-C-h-dispatch
+      (+log (which-key--current-key-string))
       (cond ((not (which-key--popup-showing-p))
              (call-interactively #'embark-prefix-help-command))
             (t (funcall oldfun)))))
