@@ -111,8 +111,7 @@
                       ("Root" "nndraft:drafts"))
    gnus-topic-topology '(("Root" visible) (("misc" visible))
                          (("emacs" visible nil nil) (("orgmode" visible nil nil))
-                          (("gnus" visible nil nil)) (("emms" invisible nil nil)))
-                         (("hackernews" visible))))
+                          (("gnus" visible nil nil)) (("emms" invisible nil nil)))))
   (map! :map gnus-group-mode-map
         :n "Tm" #'gnus-topic-move-group))
 
