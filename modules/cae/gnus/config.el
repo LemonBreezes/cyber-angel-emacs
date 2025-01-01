@@ -35,9 +35,10 @@
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
    gnus-select-method '(nntp "Gmane" (nntp-address "news.gmane.io"))
-   gnus-secondary-select-methods '((nntp "Eternal September"
-                                    (nntp-address "news.eternal-september.org")
-                                    (nntp-authinfo-user "StrawberryTea")))
+   ;; For some reason `gnus-select-method' is working for me but not `gnus-secondary-select-methods'.
+   ;;gnus-secondary-select-methods '((nntp "Eternal September"
+   ;;                                 (nntp-address "news.eternal-september.org")
+   ;;                                 (nntp-authinfo-user "StrawberryTea")))
    gnus-registry-ignored-groups '(("nntp" t) ("^INBOX" t))
    gnus-signature-separator '("^-- $" "^-- *$" "^_____+$")
    gnus-uncacheable-groups "^nnml"
