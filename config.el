@@ -215,11 +215,16 @@
   (when (modulep! :completion vertico)
     (after! which-key
       (setq which-key-use-C-h-commands t))
+    (defvar cae-which-key-current-keymap nil)
+    (defadvice! cae-which-key-update-current-keymap-a (keymap &rest args)
+      :before #'which-key--show-keymap
+      (setq cae-which-key-current-keymap keymap))
     (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
       :around #'which-key-C-h-dispatch
-      (+log (which-key--current-key-string))
       (cond ((not (which-key--popup-showing-p))
              (call-interactively #'embark-prefix-help-command))
+            ((string-empty-p (which-key--current-key-string))
+             (embark-bindings-in-keymap cae-which-key-current-keymap))
             (t (funcall oldfun)))))
 
   ;; Do not scale fonts in `writeroom-mode'.
