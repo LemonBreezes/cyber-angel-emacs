@@ -388,7 +388,7 @@ jumping backwards."
                  cae--sibling-file-history)))))
 
 ;;;###autoload
-(defun cae-jump-to-random-line-end ()
+(defun cae-jump-to-random-line ()
   "Jump to the end of a random line in the current buffer."
   (interactive)
   (push-mark)
