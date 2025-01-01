@@ -69,8 +69,8 @@
   (define-repeat-map avy-rotate
     ("r" cae-avy-rotate))
 
-  (define-repeat-map cae-jump-to-random-line-end
-    ("j" cae-jump-to-random-line-end))
+  (define-repeat-map cae-jump-to-random-line
+    ("j" cae-jump-to-random-line))
 
   (define-repeat-map git-rebase-move-line
     ("j" git-rebase-move-line-down)
