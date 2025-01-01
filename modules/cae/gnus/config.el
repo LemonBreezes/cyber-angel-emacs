@@ -82,39 +82,39 @@
    gnus-cacheable-groups "^\\(nntp\\|\\)"))
 
 ;; Group mode commands for Gnus
-;;(use-package! gnus-group
-;;  :defer t :init
-;;  (autoload 'gnus-topic-mode "gnus-topic")
-;;  :hook
-;;  (gnus-group-mode . gnus-topic-mode)
-;;  :config
-;;  ;;          indentation ------------.
-;;  ;;  #      process mark ----------. |
-;;  ;;                level --------. | |
-;;  ;;           subscribed ------. | | |
-;;  ;;  %          new mail ----. | | | |
-;;  ;;  *   marked articles --. | | | | |
-;;  ;;                        | | | | | |  Ticked    New     Unread  open-status Group
-;;  (setq
-;;   gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
-;;   gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)
-;;
-;;   gnus-topic-alist '(("emms" "nntp+Gmane:gmane.emacs.emms.patches"
-;;                       "nntp+Gmane:gmane.emacs.emms.user")
-;;                      ("gnus" "nntp+Gmane:gmane.emacs.gnus.user"
-;;                       "nntp+Gmane:gmane.emacs.gnus.patches" "nntp+Gmane:gmane.emacs.gnus.announce"
-;;                       "nntp+Gmane:gmane.emacs.gnus.general")
-;;                      ("orgmode" "nntp+Gmane:gmane.emacs.orgmode") ("misc")
-;;                      ("emacs" "nntp+Gmane:gmane.linux.gentoo.announce" "nntp+Gmane:gmane.emacs.help"
-;;                       "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.bugs"
-;;                       "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.announce")
-;;                      ("Root" "nndraft:drafts"))
-;;   gnus-topic-topology '(("Root" visible) (("misc" visible))
-;;                         (("emacs" visible nil nil) (("orgmode" visible nil nil))
-;;                          (("gnus" visible nil nil)) (("emms" invisible nil nil)))
-;;                         (("hackernews" visible))))
-;;  (map! :map gnus-group-mode-map
-;;        :n "Tm" #'gnus-topic-move-group))
+(use-package! gnus-group
+  :defer t :init
+  (autoload 'gnus-topic-mode "gnus-topic")
+  :hook
+  (gnus-group-mode . gnus-topic-mode)
+  :config
+  ;;          indentation ------------.
+  ;;  #      process mark ----------. |
+  ;;                level --------. | |
+  ;;           subscribed ------. | | |
+  ;;  %          new mail ----. | | | |
+  ;;  *   marked articles --. | | | | |
+  ;;                        | | | | | |  Ticked    New     Unread  open-status Group
+  (setq
+   gnus-group-line-format "%M%m%S%L%p%P %1(%7i%) %3(%7U%) %3(%7y%) %4(%B%-45G%) %d\n"
+   gnus-group-sort-function '(gnus-group-sort-by-level gnus-group-sort-by-alphabet)
+
+   gnus-topic-alist '(("emms" "nntp+Gmane:gmane.emacs.emms.patches"
+                       "nntp+Gmane:gmane.emacs.emms.user")
+                      ("gnus" "nntp+Gmane:gmane.emacs.gnus.user"
+                       "nntp+Gmane:gmane.emacs.gnus.patches" "nntp+Gmane:gmane.emacs.gnus.announce"
+                       "nntp+Gmane:gmane.emacs.gnus.general")
+                      ("orgmode" "nntp+Gmane:gmane.emacs.orgmode") ("misc")
+                      ("emacs" "nntp+Gmane:gmane.linux.gentoo.announce" "nntp+Gmane:gmane.emacs.help"
+                       "nntp+Gmane:gmane.emacs.diffs" "nntp+Gmane:gmane.emacs.bugs"
+                       "nntp+Gmane:gmane.emacs.devel" "nntp+Gmane:gmane.emacs.announce")
+                      ("Root" "nndraft:drafts"))
+   gnus-topic-topology '(("Root" visible) (("misc" visible))
+                         (("emacs" visible nil nil) (("orgmode" visible nil nil))
+                          (("gnus" visible nil nil)) (("emms" invisible nil nil)))
+                         (("hackernews" visible))))
+  (map! :map gnus-group-mode-map
+        :n "Tm" #'gnus-topic-move-group))
 
 ;; Summary mode commands for Gnus
 (use-package! gnus-sum
