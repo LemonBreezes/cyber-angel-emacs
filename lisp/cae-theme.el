@@ -142,7 +142,6 @@
 
 ;;; Set theme based on time of day.
 
-;;(backtrace! #'circadian-enable-theme)
 (when cae-theme-enable-day-night-theme-switching
   (use-package! circadian
     :defer-incrementally t
