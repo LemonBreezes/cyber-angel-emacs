@@ -211,6 +211,13 @@
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil))
+  ;; Allow C-h to open Consult when calling which-key without a prefix.
+  (when (modulep! :completion vertico)
+    (after! which-key
+      (setq which-key-use-C-h-commands t))
+    (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
+      :around #'which-key-C-h-dispatch
+      (funcall oldfun)))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
