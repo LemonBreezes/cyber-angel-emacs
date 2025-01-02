@@ -86,7 +86,9 @@
                   eri/mark-inside-org-table-cell
                   eri/mark-outside-org-table-cell
                   eri/web-mode-element-parent-content
-                  cae-jump-to-random-line-end)
+                  cae-jump-to-random-line-end
+                  better-jumper-jump-backward
+                  better-jumper-jump-forward)
                 (and (featurep 'evil)
                      '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F evil-snipe-t
                        evil-snipe-T
