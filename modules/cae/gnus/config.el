@@ -34,7 +34,7 @@
    gnus-expert-user nil
    gnus-interactive-exit 'quiet
    gnus-inhibit-startup-message t
-   gnus-select-method '(nntp "Gmane" "news.gmane.io")
+   gnus-select-method '(nntp "Gmane" (nntp-address "news.gmane.io"))
    ;; For some reason `gnus-select-method' is working for me but not `gnus-secondary-select-methods'.
    ;;gnus-secondary-select-methods '((nntp "Eternal September"
    ;;                                 (nntp-address "news.eternal-september.org")
