@@ -879,7 +879,8 @@
           avy-all-windows t
           avy-keys (cae-keyboard-remap
                     '(?a ?s ?d ?f ?g
-                      ;; Removed ?\; because it's not on default Android touchscreen keyboards.
+                      ;; Removed ?\; because it's not on default Android
+                      ;; touchscreen keyboards.
                       ?h ?j ?k ?l))
           avy-background nil
           avy-single-candidate-jump t
