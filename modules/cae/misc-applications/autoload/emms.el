@@ -95,7 +95,7 @@ rather than the whole path."
            ;; Not good in `helm-emms'
            ;;if (<= (frame-width) 120)
            ;;    (format "%s" title)
-             (concat (format "%s" artist) " - " (format "%s" title)))
+           (concat (format "%s" artist) " - " (format "%s" title)))
           ((and (stringp title) (not (string-empty-p title)))
            title)
           ((eq (emms-track-type track) 'file)
