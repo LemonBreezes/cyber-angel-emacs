@@ -738,7 +738,7 @@
         "<XF86AudioRaiseVolume>" #'emms-volume-raise)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
 
-  (setq emms-track-description-function 'cae-emms-track-description
+  (setq emms-track-description-function 'emms-track-simple-description
         emms-mode-line-icon-enabled-p nil))
 
 (use-package! lyrics-fetcher
