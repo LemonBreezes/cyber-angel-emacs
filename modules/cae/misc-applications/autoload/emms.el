@@ -39,31 +39,24 @@
   ["Quick Access"
    [("v" "VGM"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "VGM" cae-misc-applications-music-dir))))
     ("y" "Youtube Music"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "Youtube Music" cae-misc-applications-music-dir))))
     ("p" "Playlists"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "Playlists" cae-misc-applications-music-dir))))
     ("a" "Anime Music"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "Anime Music" cae-misc-applications-music-dir))))
     ("r" "Artists"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "Artists" emms-source-file-default-directory))))
     ("l" "Longplays"
      (lambda () (interactive)
-       (require 'emms)
        (dired (expand-file-name "Longplays" emms-source-file-default-directory))))
     ("j" "Currently playing"
      (lambda () (interactive)
-       (require 'emms)
        (if (and (executable-find "mpd")
                 cae-misc-applications-mpd-host)
            (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
@@ -121,17 +114,20 @@ rather than the whole path."
       :gn "e" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
+                             (require 'emms)
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle
                              t)))
       :gn "C-j" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
+                               (require 'emms)
                                #'emms-next
                                t)))
       :gn "C-k" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
+                               (require 'emms)
                                #'emms-previous
                                t))))
 
