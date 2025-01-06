@@ -116,20 +116,24 @@ rather than the whole path."
       :gn "a" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
-                             #'cae-emms-quick-access)))
+                             #'cae-emms-quick-access
+                             t)))
       :gn "e" `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (call-interactively #'emms-play-dired)
-                             #'emms-shuffle)))
+                             #'emms-shuffle
+                             t)))
       :gn "C-j" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
-                               #'emms-next)))
+                               #'emms-next
+                               t)))
       :gn "C-k" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
-                               #'emms-previous))))
+                               #'emms-previous
+                               t))))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
