@@ -116,8 +116,7 @@ rather than the whole path."
                            (when buffer-read-only
                              (require 'emms)
                              (call-interactively #'emms-play-dired)
-                             #'emms-shuffle
-                             t)))
+                             #'emms-shuffle)))
       :gn "C-j" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
