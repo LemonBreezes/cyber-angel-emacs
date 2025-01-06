@@ -703,7 +703,8 @@
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
-  (when (executable-find "mpd")
+  (when (and (executable-find "mpd")
+             cae-misc-applications-mpd-host)
     (require 'emms-player-mpd)
     (setq emms-setup-default-player-list '(emms-player-mpd)
           emms-player-list '(emms-player-mpd)
