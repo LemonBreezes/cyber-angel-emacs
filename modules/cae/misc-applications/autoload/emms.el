@@ -64,7 +64,8 @@
     ("j" "Currently playing"
      (lambda () (interactive)
        (require 'emms)
-       (if (executable-find "mpd")
+       (if (and (executable-find "mpd")
+                 cae-misc-applications-mpd-host)
            (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
          (funcall #'cae-emms-jump-to-currently-playing-track))))]])
 
