@@ -6,7 +6,7 @@
 
 (defvar cae-misc-applications-music-dir "~/Music")
 (defvar cae-misc-applications-videos-dir "~/Videos")
-(defvar cae-misc-applications-mpd-host
+(defvar cae-misc-applications-mpd-host nil
   ;;(or (bound-and-true-p cae-ip-address) "127.0.0.1")
   )
 
