@@ -704,17 +704,17 @@
         emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
-  (if (and (executable-find "mpd")
-           cae-misc-applications-mpd-host)
-      (progn
-        (require 'emms-player-mpd)
-        (setq emms-setup-default-player-list '(emms-player-mpd)
-              emms-player-list '(emms-player-mpd)
-              emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
-              emms-player-mpd-server-name cae-misc-applications-mpd-host)
-        (emms-player-mpd-connect))
-    (require 'emms-player-mpv)
-    (setq emms-player-list '(emms-player-mpv)))
+  (cond ((and (executable-find "mpd")
+              cae-misc-applications-mpd-host)
+         (require 'emms-player-mpd)
+         (setq emms-setup-default-player-list '(emms-player-mpd)
+               emms-player-list '(emms-player-mpd)
+               emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
+               emms-player-mpd-server-name cae-misc-applications-mpd-host)
+         (emms-player-mpd-connect))
+        ((executable-find "mpv")
+         (require 'emms-player-mpv)
+         (setq emms-player-list '(emms-player-mpv))))
   (after! emms-browser
     (map! :map emms-browser-mode-map
           :ng "q" #'cae-emms-quit
