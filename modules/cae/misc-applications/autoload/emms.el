@@ -19,6 +19,7 @@
     (set-window-configuration cae-emms--old-wconf)))
 
 (defun cae-emms-jump-to-currently-playing-track (&rest args)
+  (require 'emms)
   (let ((track (emms-track-get
                 (emms-playlist-current-selected-track) 'name)))
     (if (and track args)
