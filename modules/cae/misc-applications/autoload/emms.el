@@ -127,6 +127,7 @@ rather than the whole path."
                                (require 'emms)
                                #'emms-previous))))
 
+;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("<" emms-previous "Previous song" :column "Navigate")
   (">" emms-next "Next song" :column "Navigate")
