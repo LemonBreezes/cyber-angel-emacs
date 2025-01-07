@@ -60,7 +60,7 @@
        (if (and (executable-find "mpd")
                 cae-misc-applications-mpd-host)
            (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
-         (funcall #'cae-emms-jump-to-currently-playing-track))))]])
+         (funcall #'cae-emms-jump-to-currently-playing-track nil))))]])
 
 ;; The following two functions are from
 ;; https://www.reddit.com/r/emacs/comments/qg2d0k/emms_modeline_shows_full_path_to_the_songs_i_only/
@@ -121,14 +121,12 @@ rather than the whole path."
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
                                (require 'emms)
-                               #'emms-next
-                               t)))
+                               #'emms-next)))
       :gn "C-k" `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
                                (require 'emms)
-                               #'emms-previous
-                               t))))
+                               #'emms-previous))))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
