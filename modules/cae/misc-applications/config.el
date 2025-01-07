@@ -672,7 +672,7 @@
   ;; Randomize all Dired playlists.
   (advice-add #'emms-source-dired :filter-return
               (lambda (list)
-                (sort list (lambda (_ _) (< (random) 0.5)))))
+                (sort list (lambda (_ _) (= (random 2) 0)))))
   (add-hook 'emms-browser-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-playlist-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
