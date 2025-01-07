@@ -126,8 +126,8 @@ rather than the whole path."
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("." nil "Exit" :exit t)
   ("q" nil "Exit" :exit t)
-  ("<" emms-previous "Previous song" :column "Navigate")
-  (">" emms-next "Next song" :column "Navigate")
+  ("j" emms-previous "Previous song" :column "Navigate")
+  ("k" emms-next "Next song" :column "Navigate")
   ("x" emms-pause "Toggle play" :column "Toggle"))
 
 ;;;###autoload
