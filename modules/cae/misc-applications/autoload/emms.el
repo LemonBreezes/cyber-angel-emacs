@@ -19,7 +19,6 @@
     (set-window-configuration cae-emms--old-wconf)))
 
 (defun cae-emms-jump-to-currently-playing-track (&rest args)
-  (require 'emms)
   (let ((track (emms-track-get
                 (emms-playlist-current-selected-track) 'name)))
     (if (and track args)
@@ -58,6 +57,7 @@
        (dired (expand-file-name "Longplays" emms-source-file-default-directory))))
     ("j" "Currently playing"
      (lambda () (interactive)
+       (require 'emms)
        (if (and (executable-find "mpd")
                 cae-misc-applications-mpd-host)
            (emms-player-mpd-sync-from-mpd nil #'cae-emms-jump-to-currently-playing-track)
