@@ -130,8 +130,7 @@ rather than the whole path."
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("<" emms-previous "Previous song" :column "Navigate")
   (">" emms-next "Next song" :column "Navigate")
-  ("x" emms-pause "Toggle play" :column "Toggle")
-  )
+  ("x" emms-pause "Toggle play" :column "Toggle"))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
