@@ -131,7 +131,7 @@ rather than the whole path."
   ("k" emms-previous "Previous song" :column "Navigate")
   ("<" emms-seek-backward "Seek backward" :column "Navigate")
   (">" emms-seek-forward "Seek forward" :column "Navigate")
-  ("SPC" emms-pause "Toggle play" :column "Toggle"))
+  ("x" emms-pause "Toggle play" :column "Toggle"))
 
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
