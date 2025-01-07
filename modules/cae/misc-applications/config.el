@@ -707,7 +707,8 @@
          (emms-player-mpd-connect))
         ((executable-find "mpv")
          (require 'emms-player-mpv)
-         (setq emms-player-list '(emms-player-mpv))))
+         (setq emms-player-list '(emms-player-mpv)
+               emms-player-mpv-proc-kill-delay nil)))
   (after! emms-browser
     (map! :map emms-browser-mode-map
           :ng "q" #'cae-emms-quit
