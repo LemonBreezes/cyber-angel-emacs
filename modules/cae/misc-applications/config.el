@@ -683,14 +683,7 @@
   (setq emms-playlist-default-major-mode #'emms-playlist-mode)
   (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
   (emms-all)
-  ;;(require 'emms-cache)
-  ;;(require 'emms-score)
-  ;;(require 'emms-last-played)
-  ;;(require 'emms-info-native)
-  ;;(require 'emms-info-exiftool)
-  (emms-cache +1)
   (remove-hook 'emms-player-started-hook #'emms-last-played-update-current)
-  (emms-score +1)
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
