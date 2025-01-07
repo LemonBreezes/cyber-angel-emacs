@@ -117,10 +117,10 @@ rather than the whole path."
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle)))
       :gn "." `(menu-item "" nil
-                  :filter ,(lambda (&optional _)
-                             (when buffer-read-only
-                               (require 'emms)
-                               #'cae-emms-dired-hydra/body))))
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             (require 'emms)
+                             #'cae-emms-dired-hydra/body))))
 
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
