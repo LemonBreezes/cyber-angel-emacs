@@ -116,16 +116,11 @@ rather than the whole path."
                              (require 'emms)
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle)))
-      :gn "C-j" `(menu-item "" nil
+      :gn "." `(menu-item "" nil
                   :filter ,(lambda (&optional _)
                              (when buffer-read-only
                                (require 'emms)
-                               #'emms-next)))
-      :gn "C-k" `(menu-item "" nil
-                  :filter ,(lambda (&optional _)
-                             (when buffer-read-only
-                               (require 'emms)
-                               #'emms-previous))))
+                               #'cae-emms-dired-hydra/body))))
 
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
