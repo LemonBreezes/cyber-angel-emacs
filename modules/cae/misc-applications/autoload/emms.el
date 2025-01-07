@@ -115,11 +115,6 @@ rather than the whole path."
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (require 'emms)
-                             ;; Hopefully prevent playing multiple songs at the
-                             ;; same time.
-                             (when (process-live-p emms-player-mpv-proc)
-                               (kill-process emms-player-mpv-proc)
-                               (setq emms-player-mpv-proc nil))
                              (call-interactively #'emms-play-dired)
                              #'emms-shuffle)))
       :gn "C-j" `(menu-item "" nil
