@@ -127,6 +127,12 @@ rather than the whole path."
                                (require 'emms)
                                #'emms-previous))))
 
+(defhydra cae-emms-dired-hydra (:color pink :hint nil)
+  ("<" emms-previous "Previous song" :column "Navigate")
+  (">" emms-next "Next song" :column "Navigate")
+  ("x" emms-pause "Toggle play" :column "Toggle")
+  )
+
 ;;;###autoload
 (defun cae-dired-emms-mode-hook-h ()
   (when (and (derived-mode-p 'dired-mode)
