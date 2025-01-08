@@ -690,7 +690,6 @@
   (emms-cache +1)
   (remove-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (emms-score +1)
-  (remove-hook 'emms-player-started-hook #'emms-last-played-update-current)
   (setq emms-repeat-playlist t
         emms-repeat-track t
         emms-random-playlist t
