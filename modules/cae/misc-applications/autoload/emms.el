@@ -131,7 +131,7 @@ rather than the whole path."
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("." nil "Exit" :exit t)
-  ("q" cae-emms-kill-music-players "Kill MPV" :exit t)
+  ("q" cae-emms-kill-mpv "Kill MPV" :exit t)
   ("j" emms-next "Next song" :column "Navigate")
   ("k" emms-previous "Previous song" :column "Navigate")
   ("<" emms-seek-backward "Seek backward" :column "Navigate")
