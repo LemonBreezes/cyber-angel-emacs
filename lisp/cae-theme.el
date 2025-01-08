@@ -129,7 +129,7 @@
         modus-themes-italic-constructs (cae-display-graphic-p)
         modus-themes-mixed-fonts t
         modus-themes-prompts `(,@(when (cae-display-graphic-p)
-                                   (italic))
+                                   '(italic))
                                semibold)
         modus-themes-to-toggle `(,cae-modus-day-theme ,cae-modus-night-theme)
         modus-themes-common-palette-overrides modus-themes-preset-overrides-intense))
