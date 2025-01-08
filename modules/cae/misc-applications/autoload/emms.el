@@ -124,14 +124,14 @@ rather than the whole path."
                              #'cae-emms-dired-hydra/body))))
 
 ;;;###autoload
-(defun cae-emms-kill-music-players ()
+(defun cae-emms-kill-mpv ()
   (interactive)
   (start-process "kill-mpv" nil "killall" "mpv"))
 
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("." nil "Exit" :exit t)
-  ("q" nil "Exit" :exit t)
+  ("q" cae-emms-kill-music-players "Kill MPV" :exit t)
   ("j" emms-next "Next song" :column "Navigate")
   ("k" emms-previous "Previous song" :column "Navigate")
   ("<" emms-seek-backward "Seek backward" :column "Navigate")
