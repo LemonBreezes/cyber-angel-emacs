@@ -123,6 +123,11 @@ rather than the whole path."
                              (require 'emms)
                              #'cae-emms-dired-hydra/body))))
 
+;;;###autoload
+(defun cae-emms-kill-music-players ()
+  (interactive)
+  (shell-command "killall mpv &" nil t))
+
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("." nil "Exit" :exit t)
