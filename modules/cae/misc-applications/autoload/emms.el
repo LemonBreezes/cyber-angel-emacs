@@ -126,7 +126,7 @@ rather than the whole path."
 ;;;###autoload
 (defun cae-emms-kill-music-players ()
   (interactive)
-  (shell-command "killall mpv &" nil t))
+  (start-process "kill-mpv" nil "killall" "mpv"))
 
 ;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
