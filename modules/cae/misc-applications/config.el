@@ -670,9 +670,9 @@
     (cl-pushnew #'emms-browser-mode evil-snipe-disabled-modes)
     (cl-pushnew #'emms-playlist-mode evil-snipe-disabled-modes))
   ;; Randomize all Dired playlists.
-  (advice-add #'emms-source-dired :filter-return
-              (lambda (list)
-                (append (emms-shuffle-vector (apply #'vector list)) nil)))
+  ;;(advice-add #'emms-source-dired :filter-return
+  ;;            (lambda (list)
+  ;;              (append (emms-shuffle-vector (apply #'vector list)) nil)))
   (add-hook 'emms-browser-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-playlist-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'emms-browser-mode-hook #'doom-mark-buffer-as-real-h)
