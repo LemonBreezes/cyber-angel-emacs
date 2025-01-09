@@ -136,7 +136,7 @@ rather than the whole path."
   ("k" emms-previous "Previous song" :column "Navigate")
   ("<" emms-seek-backward "Seek backward" :column "Navigate")
   (">" emms-seek-forward "Seek forward" :column "Navigate")
-  ("s"emms-shuffle "Shuffle" :column "Playback")
+  ("s" emms-shuffle "Shuffle" :column "Playback")
   ("x" emms-pause "Toggle play" :column "Playback"))
 
 ;;;###autoload
