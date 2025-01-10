@@ -763,6 +763,7 @@
   :when (or (modulep! :cae helm)
             (modulep! :completion helm))
   :defer t :init
+  (autoload 'emms-browser-get-cover-from-path "emms-browser")
   (map! :map cae-misc-applications-music-map
         "h" #'helm-emms)
   (after! which-key
