@@ -33,6 +33,7 @@
 
   (when (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
+             (not (functionp 'igc-collect))
              (> (car (memory-info))
                 (* 180 1024 1024)))
     (let ((cae-gc-cons-threshold (* 128 1024 1024 1024)))
