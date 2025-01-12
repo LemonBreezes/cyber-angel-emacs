@@ -33,7 +33,9 @@
 
   (when (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
+             ;; Experimental incremental garbage collector.
              (not (functionp 'igc-collect))
+             ;; 180GB of RAM.
              (> (car (memory-info))
                 (* 180 1024 1024)))
     (let ((cae-gc-cons-threshold (* 128 1024 1024 1024)))
