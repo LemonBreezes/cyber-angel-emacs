@@ -596,20 +596,10 @@
   (setq mpc-host cae-misc-applications-mpd-host
         mpc-mpd-music-directory cae-misc-applications-music-dir)
   (map! :map mpc-mode-map
-        :n "gr" #'cae-mpc-reload
-        :n "gR" #'cae-mpc-reload
+        ;;:n "gr" #'cae-mpc-reload
+        ;;:n "gR" #'cae-mpc-reload
         :ng "q" #'cae-mpc-quit
         :ng "Q" #'mpc-quit
-        ;; TODO Double-check the new Evil Collection MPC bindings.
-        ;;:n "C-j" #'evil-collection-mpc-move-down
-        ;;:n "C-k" #'evil-collection-mpc-move-up
-        ;;:n "e" #'cae-mpc-other-window
-        ;;:n "w" #'cae-mpc-other-window-previous
-        ;;:n "RET" #'cae-mpc-play
-        ;;:n "o" #'mpc-goto-playing-song
-        ;;:n "C" #'mpc-stop
-        ;;:n "i" #'evilem-motion-next-line
-        ;;:n "u" #'evilem-motion-previous-line
         ))
 
 (use-package! empv
