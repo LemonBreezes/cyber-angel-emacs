@@ -579,6 +579,7 @@
         :n "s" #'somafm--stop))
 
 (use-package! mpc
+  :when (and (executable-find "mpd") cae-misc-applications-mpd-host)
   :defer t :init
   (defvar cae-mpc-workspace-name "*mpc*")
   (defvar cae-mpc--old-wconf nil)
