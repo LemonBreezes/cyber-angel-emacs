@@ -125,7 +125,7 @@ rather than the whole path."
                                (call-interactively #'emms-add-dired)
                                (call-interactively #'emms-playlist-shuffle)
                                (emms-playlist-select 1)
-(emms-next)
+                               (emms-next)
                                (emms-start))
                              ;; TODO Improve this so that `describe-key' gives
                              ;; useful information.
