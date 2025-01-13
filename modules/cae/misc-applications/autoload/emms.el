@@ -120,12 +120,12 @@ rather than the whole path."
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (require 'emms)
+                             (emms-stop)
                              (with-current-emms-playlist
                                (emms-playlist-clear)
                                (call-interactively #'emms-add-dired)
                                (call-interactively #'emms-playlist-shuffle)
                                (emms-playlist-select 1)
-                               (emms-next)
                                (emms-start))
                              ;; TODO Improve this so that `describe-key' gives
                              ;; useful information.
