@@ -123,6 +123,7 @@
                        lispyville-forward-atom-begin lispyville-backward-atom-end
                        lispyville-forward-atom-end evil-cp-a-WORD evil-cp-a-form
                        evil-cp-a-defun evil-cp-a-comment evil-forward-arg
+                       evil-cp-beginning-of-defun
                        evil-backward-arg evil-forward-char evil-jump-forward
                        evil-backward-char evil-jump-backward evil-search-forward
                        evil-cp-drag-forward evil-cp-forward-sexp evil-search-backward
