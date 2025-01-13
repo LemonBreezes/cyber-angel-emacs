@@ -115,8 +115,7 @@ rather than the whole path."
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
                              (require 'emms)
-                             (call-interactively #'emms-play-dired)
-                             #'emms-shuffle)))
+                             #'emms-play-dired)))
       :gn "." `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
