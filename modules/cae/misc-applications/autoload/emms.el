@@ -125,6 +125,7 @@ rather than the whole path."
                                (call-interactively #'emms-add-dired)
                                (call-interactively #'emms-playlist-shuffle)
                                (emms-playlist-select 1)
+                               (emms-stop)
                                (emms-start))
                              #'ignore
                              )))
