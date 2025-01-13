@@ -127,8 +127,7 @@ rather than the whole path."
                                (emms-playlist-select 1)
                                (emms-stop)
                                (emms-start))
-                             #'ignore
-                             )))
+                             #'ignore)))
       :gn "." `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
