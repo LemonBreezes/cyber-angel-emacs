@@ -127,6 +127,8 @@ rather than the whole path."
                                (emms-playlist-select 1)
                                (emms-stop)
                                (emms-start))
+                             ;; TODO Improve this so that `describe-key' gives
+                             ;; useful information.
                              #'ignore)))
       :gn "." `(menu-item "" nil
                 :filter ,(lambda (&optional _)
