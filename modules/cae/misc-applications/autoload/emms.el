@@ -124,7 +124,7 @@ rather than the whole path."
                                (emms-playlist-clear))
                              (call-interactively #'emms-add-dired)
                              (call-interactively #'emms-playlist-shuffle)
-                             (emms-playlist-select 0)
+                             (emms-playlist-select 1)
                              #'emms-start
                              )))
       :gn "." `(menu-item "" nil
