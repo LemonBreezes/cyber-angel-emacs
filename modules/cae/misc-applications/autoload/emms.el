@@ -121,11 +121,11 @@ rather than the whole path."
                            (when buffer-read-only
                              (require 'emms)
                              (with-current-emms-playlist
-                               (emms-playlist-clear))
-                             (call-interactively #'emms-add-dired)
-                             (call-interactively #'emms-playlist-shuffle)
-                             (emms-playlist-select 1)
-                             (emms-start)
+                               (emms-playlist-clear)
+                               (call-interactively #'emms-add-dired)
+                               (call-interactively #'emms-playlist-shuffle)
+                               (emms-playlist-select 1)
+                               (emms-start))
                              #'ignore
                              )))
       :gn "." `(menu-item "" nil
