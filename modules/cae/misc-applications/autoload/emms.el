@@ -116,6 +116,15 @@ rather than the whole path."
                            (when buffer-read-only
                              (require 'emms)
                              #'emms-play-dired)))
+      :gn "E" `(menu-item "" nil
+                :filter ,(lambda (&optional _)
+                           (when buffer-read-only
+                             (require 'emms)
+                             (call-interactively #'emms-add-dired)
+                             (call-interactively #'emms-playlist-shuffle)
+                             (emms-playlist-select 0)
+                             #'emms-start
+                             )))
       :gn "." `(menu-item "" nil
                 :filter ,(lambda (&optional _)
                            (when buffer-read-only
