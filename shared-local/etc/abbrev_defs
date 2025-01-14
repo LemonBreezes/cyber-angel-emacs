@@ -109,6 +109,7 @@
     ("whtaever" "whatever" nil :count 0)
     ("wirh" "with" nil :count 1)
     ("witgout" "without" nil :count 0)
+    ("witohut" "without" nil :count 0)
     ("wjat" "what" nil :count 0)
     ("wjhen" "when" nil :count 0)
     ("wokrs" "works" nil :count 0)
