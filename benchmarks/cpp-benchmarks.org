@@ -1,7 +1,6 @@
 #+title: Cpp Benchmarks
 
 #+begin_src cpp
-
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -10,7 +9,7 @@
 using namespace std;
 using namespace std::chrono;
 
-const int NUM_ELEMENTS = 1000000;
+const int NUM_ELEMENTS = 100000000;
 
 int main() {
     // Benchmark for stack<int>
@@ -38,7 +37,7 @@ int main() {
     auto duration_vector = duration_cast<milliseconds>(stop_vector - start_vector);
 
     cout << "Time taken by stack<int>: " << duration_default.count() << " milliseconds" << endl;
-    cout << "Time taken by stack<int, vector<int>>: " << duration_vector.count() << " milliseconds" << endl;
+    cout << "Time taken by stack<int,vector<int>>: " << duration_vector.count() << " milliseconds" << endl;
 
     return 0;
 }
@@ -46,29 +45,5 @@ int main() {
 #+end_src
 
 #+RESULTS:
-| Implementation             | Time (milliseconds) |
-|----------------------------+---------------------|
-| stack<int>                 |                     |
-| stack<int, vector<int>>    |                     |
-
-#+begin_src shell :dir /sudo::/ssh:YOUR_REMOTE_HOST: :results output :exports both
-  # Compile the C++ code
-  g++ -o cpp_benchmark /ssh:YOUR_REMOTE_HOST:/path/to/your/cpp_benchmark.cpp
-
-  # Run the benchmark multiple times
-  for i in $(seq 1 5); do
-      /ssh:YOUR_REMOTE_HOST:/cpp_benchmark
-  done
-#+end_src
-
-#+RESULTS:
-: Time taken by stack<int>: 14 milliseconds
-: Time taken by stack<int, vector<int>>: 13 milliseconds
-: Time taken by stack<int>: 14 milliseconds
-: Time taken by stack<int, vector<int>>: 13 milliseconds
-: Time taken by stack<int>: 14 milliseconds
-: Time taken by stack<int, vector<int>>: 13 milliseconds
-: Time taken by stack<int>: 14 milliseconds
-: Time taken by stack<int, vector<int>>: 13 milliseconds
-: Time taken by stack<int>: 14 milliseconds
-: Time taken by stack<int, vector<int>>: 13 milliseconds
+| Time | taken | by | stack<int>:             |  940 | milliseconds |
+| Time | taken | by | stack<int,vector<int>>: | 1290 | milliseconds |
