@@ -159,7 +159,7 @@
        vc
        org
        (ai +openai)
-       gnus
+       ;;gnus
        rss
        denote)
 
