@@ -359,7 +359,7 @@
         :desc "Find directory" "d" #'consult-dir))
       (:prefix "o"
        (:when (modulep! :app irc)
-        :desc "Open ERC" "i" #'erc)
+        :desc "Open ERC" "i" #'=irc)
        (:when (modulep! :term eshell)
         :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
        (:when (modulep! :term vterm)
