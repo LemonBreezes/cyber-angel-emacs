@@ -1446,6 +1446,12 @@
           mu4e-notification-support t)))
 
 
+;;; Applications
+
+(when cae-init-applications-enabled-p
+  (after! circe
+    (setq circe-logging t)))
+
 ;;; Languages
 
 (when cae-init-languages-enabled-p
