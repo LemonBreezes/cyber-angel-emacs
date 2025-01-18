@@ -414,10 +414,10 @@
 
   (use-package! sublimity
     :defer t :config
-    (sublimity-mode +1)
     (require 'sublimity-scroll)
     (setq sublimity-scroll-weight 5
-          sublimity-scroll-drift-length 10))
+          sublimity-scroll-drift-length 10)
+    (sublimity-mode +1))
 
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
