@@ -90,6 +90,7 @@
        snippets
        multiple-cursors
        (evil +everywhere)
+       lispy
 
        :emacs
        undo
