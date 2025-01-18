@@ -344,7 +344,12 @@
       (:prefix "c"
        (:when (modulep! :tools editorconfig)
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
-       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
+       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu
+       (:prefix-map ("C-r" . "substitute")
+        :desc "Substitute in defun" "f" #'substitute-target-in-defun
+        :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
+        :desc "Substitute above point" "p" #'substitute-target-above-point
+        :desc "Substitute below point" "n" #'substitute-target-below-point))
       (:prefix "t"
        :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
