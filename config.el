@@ -237,8 +237,7 @@
   ;; Inhibit `eldoc' when `which-key' is active.
   (defadvice! cae-disable-eldoc-on-which-key-a ()
     :before-until #'eldoc-documentation-default
-    (or (and (featurep 'which-key) (which-key--popup-showing-p))
-        (derived-mode-p 'exwm-mode)))
+    (and (featurep 'which-key) (which-key--popup-showing-p)))
 
   ;; Do not scale fonts in `writeroom-mode'.
   (setq +zen-text-scale 0)
