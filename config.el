@@ -1090,11 +1090,11 @@
     (defvaralias 'naming-convention-map 'doom-leader-naming\ convention-map)
     (after! evil
       (evil-define-operator evil-operator-string-inflection (beg end _type)
-                            "Define a new evil operator that cycles symbol casing."
-                            :move-point nil
-                            (interactive "<R>")
-                            (string-inflection-all-cycle)
-                            (setq evil-repeat-info '([?g ?~])))
+        "Define a new evil operator that cycles symbol casing."
+        :move-point nil
+        (interactive "<R>")
+        (string-inflection-all-cycle)
+        (setq evil-repeat-info '([?g ?~])))
       (define-key evil-normal-state-map (kbd "g~")
         'evil-operator-string-inflection)))
 
