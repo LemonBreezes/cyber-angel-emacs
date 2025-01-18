@@ -71,7 +71,9 @@
         :config
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
-              [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
+              [remap sp-raise-sexp] #'cae-sp-raise-sexp
+              ;; M-s is a useful prefix key in Emacs.
+              :n "M-s" nil)))
 
     (map! :map narrow-map
           "s" #'sp-narrow-to-sexp)
