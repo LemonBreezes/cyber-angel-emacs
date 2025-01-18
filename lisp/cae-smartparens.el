@@ -71,9 +71,7 @@
         :config
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
-              [remap sp-raise-sexp] #'cae-sp-raise-sexp
-              :map help-map
-              "bs" #'cae-sp-which-key-cheatsheet)))
+              [remap sp-raise-sexp] #'cae-sp-raise-sexp)))
 
     (map! :map narrow-map
           "s" #'sp-narrow-to-sexp)
@@ -115,4 +113,5 @@
           (unless (lookup-key lispy-mode-map (kbd (car binding)))
             (define-key lispy-mode-map (kbd (car binding)) (cdr binding)))))))
 
-  (map! :map smartparens-mode-map "C-M-?" #'cae-sp-which-key-cheatsheet))
+  (map! :map smartparens-mode-map "C-M-?" #'cae-sp-which-key-cheatsheet
+        :map help-map "bs" #'cae-sp-which-key-cheatsheet))
