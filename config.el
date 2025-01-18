@@ -1445,8 +1445,6 @@
     (setq mu4e-modeline-support t
           mu4e-notification-support t)))
 
-
-;;; Applications
 
 
 ;;; Languages
