@@ -412,13 +412,6 @@
     (add-hook 'eww-mode-hook #'iscroll-mode)
     (add-hook 'w3m-mode-hook #'iscroll-mode))
 
-  (use-package! sublimity
-    :defer t :config
-    (require 'sublimity-scroll)
-    (setq sublimity-scroll-weight 5
-          sublimity-scroll-drift-length 10)
-    (sublimity-mode +1))
-
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
     :config
