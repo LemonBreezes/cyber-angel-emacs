@@ -1448,9 +1448,8 @@
 
 ;;; Applications
 
-(when cae-init-applications-enabled-p
-  (after! circe
-    (setq circe-logging t)))
+(when cae-init-applications-enabled-p)
+
 
 ;;; Languages
 
