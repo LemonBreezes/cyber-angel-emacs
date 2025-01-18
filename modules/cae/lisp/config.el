@@ -104,7 +104,9 @@
            "M-," nil)
           "C-d" #'cae-delete-char
           "C-M-?" #'cae-lispy-which-key-cheatsheet
-          ")" #'cae-insert-closing-paren))
+          ")" #'cae-insert-closing-paren)
+    (map! :map help-map
+          "bl" #'cae-lispy-which-key-cheatsheet))
 
   (when (modulep! :editor evil)
     (setq lispyville-key-theme
