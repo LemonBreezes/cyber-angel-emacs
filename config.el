@@ -1446,6 +1446,9 @@
           mu4e-notification-support t)))
 
 
+;;; Applications
+
+
 ;;; Languages
 
 (when cae-init-languages-enabled-p
