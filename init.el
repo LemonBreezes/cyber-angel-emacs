@@ -143,6 +143,7 @@
 
        :app
        (rss +org)
+       irc
 
        :cae
        (lean4 +lsp +tree-sitter)
