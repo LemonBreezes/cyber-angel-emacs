@@ -151,6 +151,7 @@
        debugger
        eshell
        exwm
+       ement
        dired
        lisp
        misc-applications
