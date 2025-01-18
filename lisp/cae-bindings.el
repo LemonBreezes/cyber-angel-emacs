@@ -346,7 +346,7 @@
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
        :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu
        (:prefix-map ("=" . "substitute")
-        :desc "Substitute in defun" "f" #'substitute-target-in-defun
+        :desc "Substitute in defun" "d" #'substitute-target-in-defun
         :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
         :desc "Substitute above point" "p" #'substitute-target-above-point
         :desc "Substitute below point" "n" #'substitute-target-below-point))
