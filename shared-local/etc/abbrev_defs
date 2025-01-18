@@ -91,6 +91,7 @@
     ("pytgon" "python" nil :count 0)
     ("pythoyn" "python" nil :count 0)
     ("rempve" "remove" nil :count 0)
+    ("reuiqre" "require" nil :count 0)
     ("runing" "running" nil :count 0)
     ("runnig" "running" nil :count 0)
     ("shll" "shell" nil :count 0)
