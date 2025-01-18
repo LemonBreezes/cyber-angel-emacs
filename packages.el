@@ -130,10 +130,7 @@
 (package! try)
 (package! ov)
 (package! lsp-ui)
-
-;; These are used for their autoloads. They are not explicitly referenced in
-;; this configuration.
-(package! substitute) ; This is for when `lsp-rename' is not available.
+(package! substitute)
 
 ;;; Lang
 (when (modulep! :lang haskell)
