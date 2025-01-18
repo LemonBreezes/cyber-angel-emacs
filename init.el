@@ -151,7 +151,7 @@
        debugger
        eshell
        exwm
-       ement
+       matrix
        dired
        lisp
        misc-applications
