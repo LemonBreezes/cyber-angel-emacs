@@ -6,36 +6,37 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 ;; Set up the default models.
-(after! chatgpt-shell
-  (setq chatgpt-shell-model-version 1
-        chatgpt-shell-streaming t))
-(advice-add #'chatgpt-shell-system-prompt :override #'ignore)
-(after! gptel
-  (setq gptel-model "claude-3-5-sonnet-20240620"
-        gptel-backend (gptel-make-anthropic "Claude"
-                        :stream t :key (cae-secrets-get-anthropic-api-key))))
-(after! dall-e-shell
-  (setq dall-e-shell-model-version "dall-e-3"))
-(after! aider
-  (setq aider-args
-        `(
-          "--o1-preview"
-          "--editor-model" "o1-preview"
-          "--openai-api-key" ,(cae-secrets-get-openai-api-key)
-          "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
-          ;;"--encoding" "latin-1"
-          "--cache-prompts"
-          )))
-(defvar llm-refactoring-provider nil)
-(after! llm
-  (require 'llm-openai)
-  (setq llm-refactoring-provider
-        (make-llm-openai :chat-model "chatgpt-4o-latest"
-                         :key (cae-secrets-get-openai-api-key)
-                         ;;:default-chat-non-standard-params '((stream . :json-false))
-                         )
-        magit-gptcommit-llm-provider llm-refactoring-provider
-        llm-warn-on-nonfree nil))
+(let ((claude-model "claude-3-5-sonnet-20240620"))
+  (after! chatgpt-shell
+    (setq chatgpt-shell-model-version 1
+          chatgpt-shell-streaming t))
+  (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
+  (after! gptel
+    (setq gptel-model claude-model
+          gptel-backend (gptel-make-anthropic "Claude"
+                          :stream t :key (cae-secrets-get-anthropic-api-key))))
+  (after! dall-e-shell
+    (setq dall-e-shell-model-version "dall-e-3"))
+  (after! aider
+    (setq aider-args
+          `(
+            "--o1-preview"
+            "--editor-model" "o1-preview"
+            "--openai-api-key" ,(cae-secrets-get-openai-api-key)
+            "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
+            ;;"--encoding" "latin-1"
+            "--cache-prompts"
+            )))
+  (defvar llm-refactoring-provider nil)
+  (after! llm
+    (require 'llm-claude)
+    (setq llm-refactoring-provider
+          (make-llm-claude :chat-model claude-model
+                           :key (cae-secrets-get-anthropic-api-key)
+                           ;;:default-chat-non-standard-params '((stream . :json-false))
+                           )
+          magit-gptcommit-llm-provider llm-refactoring-provider
+          llm-warn-on-nonfree nil)))
 
 (use-package! aider
   :defer t
