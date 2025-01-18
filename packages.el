@@ -43,6 +43,7 @@
 (package! communinfo)
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
+(package! sublimity)
 (package! beacon)
 (package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 (package! iscroll)
