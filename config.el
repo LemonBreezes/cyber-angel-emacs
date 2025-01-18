@@ -1112,6 +1112,9 @@
       (after! evil
         ;; I prefer `isearch' combined with `isearch-mb'.
         (setq! evil-search-module 'isearch)
+        ;; I have a setup in `config.el' where I cleanup the overlays in
+        ;; `doom-escape-hook'. I prefer that because I use the overlays as a
+        ;; quick way to highlight text.
         (advice-add #'evil-flash-hook :override #'ignore)
         (advice-add #'evil-clean-isearch-overlays :override #'ignore)
         (when evil-want-C-w-delete
