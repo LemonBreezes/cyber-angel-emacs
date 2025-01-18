@@ -416,7 +416,7 @@
     :defer t :config
     (sublimity-mode +1)
     (require 'sublimity-scroll)
-    (setq sublimity-scroll-weight 20
+    (setq sublimity-scroll-weight 4
           sublimity-scroll-drift-length 20))
 
   (use-package! beacon
