@@ -1112,6 +1112,8 @@
       (after! evil
         ;; I prefer `isearch' combined with `isearch-mb'.
         (setq! evil-search-module 'isearch)
+        (advice-add #'evil-flash-hook :override #'ignore)
+        (advice-add #'evil-clean-isearch-overlays :override #'ignore)
         (when evil-want-C-w-delete
           (map! :map isearch-mb-minibuffer-map
                 "C-w" #'evil-delete-backward-word))))
