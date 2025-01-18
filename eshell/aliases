@@ -39,6 +39,7 @@ alias sysud systemctl --user disable                                          $*
 alias sysur systemctl --user restart                                          $*
 alias sysux systemctl --user stop                                             $*
 alias sysudr systemctl --user daemon-reload                                   $*
+alias sysult systemctl list-timers                                            $*
 alias sys sudo systemctl                                                      $*
 alias syst sudo systemctl status                                              $*
 alias syss sudo systemctl start                                               $*
@@ -48,7 +49,6 @@ alias sysr sudo systemctl restart                                             $*
 alias sysx sudo systemctl stop                                                $*
 alias sysdr sudo systemctl daemon-reload                                      $*
 alias syslt sudo systemctl list-timers                                        $*
-alias sysult systemctl list-timers                                            $*
 
 alias wine WINEARCH=win64 WINEPREFIX=/home/st/.wine64 wine                           $*
 alias wine32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 wine                         $*
