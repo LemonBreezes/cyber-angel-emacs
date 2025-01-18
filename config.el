@@ -1110,11 +1110,8 @@
     :after-call isearch-mode-hook :init
     (when (modulep! :editor evil)
       (after! evil
-        ;; I have disabled the Isearch module in Evil because the highlights are
-        ;; not persisting after ending the search. `evil-search' has some setup
-        ;; to clear the highlights in `pre-command-hook' and it is not
-        ;; configurable without hacks.
-        ;;(setq! evil-search-module 'isearch)
+        ;; I prefer `isearch' combined with `isearch-mb'.
+        (setq! evil-search-module 'isearch)
         (when evil-want-C-w-delete
           (map! :map isearch-mb-minibuffer-map
                 "C-w" #'evil-delete-backward-word))))
