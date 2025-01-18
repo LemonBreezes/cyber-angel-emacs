@@ -412,6 +412,9 @@
     (add-hook 'eww-mode-hook #'iscroll-mode)
     (add-hook 'w3m-mode-hook #'iscroll-mode))
 
+  (use-package! sublimity
+    :defer t)
+
   (use-package! beacon
     :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
     :config
