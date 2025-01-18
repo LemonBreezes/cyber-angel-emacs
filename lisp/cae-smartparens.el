@@ -74,7 +74,8 @@
                [remap sp-raise-sexp] #'cae-sp-raise-sexp
                ;; M-s is a useful prefix key in Emacs.
                :n "M-s" nil)
-              ;; M-d and M-D are used by `evil-multiedit'.
+              ;; M-d and M-D are used by `evil-multiedit' and `evil-cleverparens'.
+              ;; Our solution is to map use `M-n' for `evil-multiedit'.
               (:when (and (modulep! :editor evil)
                           (modulep! :editor multiple-cursors))
                :n  "M-n"   #'evil-multiedit-match-symbol-and-next
