@@ -39,7 +39,7 @@ alias sysud systemctl --user disable                                          $*
 alias sysur systemctl --user restart                                          $*
 alias sysux systemctl --user stop                                             $*
 alias sysudr systemctl --user daemon-reload                                   $*
-alias sysult systemctl list-timers                                            $*
+alias sysult systemctl --user list-timers                                     $*
 alias sys sudo systemctl                                                      $*
 alias syst sudo systemctl status                                              $*
 alias syss sudo systemctl start                                               $*
