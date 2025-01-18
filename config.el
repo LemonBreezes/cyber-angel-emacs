@@ -1446,6 +1446,12 @@
           mu4e-notification-support t)))
 
 
+;;; Applications
+
+(after! erc
+  )
+
+
 ;;; Languages
 
 (when cae-init-languages-enabled-p
