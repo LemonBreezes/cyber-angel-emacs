@@ -152,7 +152,6 @@
        debugger
        eshell
        exwm
-       matrix
        dired
        lisp
        misc-applications
