@@ -148,6 +148,7 @@
                        evilem-motion-forward-word-end evilem-motion-backward-WORD-end
                        evilem-motion-backward-word-end evil-collection-pdf-jump-forward
                        evilem-motion-find-char-backward
+                       evilem-motion-next-line evilem-motion-previous-line
                        evilem-motion-forward-WORD-begin
                        evilem-motion-forward-word-begin
                        evil-collection-pdf-jump-backward
