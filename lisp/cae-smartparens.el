@@ -72,9 +72,6 @@
         (map! :map evil-cleverparens-mode-map
               :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
               [remap sp-raise-sexp] #'cae-sp-raise-sexp
-              ;; M-s is a useful prefix key in Emacs.
-              :n "M-s" nil
-              ;; M-d and M-D are used by `evil-multiedit'.
               )))
 
     (map! :map narrow-map
