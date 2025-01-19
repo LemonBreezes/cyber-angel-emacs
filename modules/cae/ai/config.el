@@ -70,7 +70,9 @@
     (defun cae-disable-copilot-in-dunnet-p ()
       (derived-mode-p 'dun-mode))
     (defun cae-multiple-cursors-active-p ()
-      (bound-and-true-p multiple-cursors-mode)))
+      (bound-and-true-p multiple-cursors-mode))
+    (defun cae-disable-copilot-in-minibuffer ()
+      (minibufferp)))
   :config
   ;; Assume all Elisp code is formatted with the default indentation style. This
   ;; fixes an error.
