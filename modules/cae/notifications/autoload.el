@@ -34,3 +34,45 @@
         ((get-buffer-window ednc-log-name)
          (delete-window (get-buffer-window ednc-log-name)))
         (t (cae-ednc-show-notifications))))
+
+(defun cae-ednc-call-process-advice (orig-fun program &optional infile destination display &rest args)
+  "Advice function to make `call-process` run asynchronously using `start-process`."
+  ;; Generate a unique process name
+  (let* ((process-name (generate-new-buffer-name (concat "async-" (file-name-nondirectory program))))
+         ;; Determine the buffer based on DESTINATION
+         (buffer (cond
+                  ((eq destination t) (current-buffer))
+                  ((bufferp destination) destination)
+                  ((stringp destination) (get-buffer-create destination))
+                  ((and (listp destination)
+                        (eq (car destination) :file))
+                   ;; For DESTINATION of the form (:file FILE), create a temporary buffer
+                   (generate-new-buffer (concat "*" process-name "*")))
+                  (t nil))) ;; For nil or 0, output is discarded
+         ;; Use a pipe for the process communication
+         (process-connection-type nil)
+         ;; Start the process asynchronously
+         (proc (apply 'start-process process-name buffer program args)))
+    ;; If INFILE is specified, send its contents to the process
+    (when infile
+      (with-temp-buffer
+        (insert-file-contents infile)
+        (process-send-region proc (point-min) (point-max)))
+      (process-send-eof proc)) ;; Signal that we've finished sending input
+    ;; Handle DESTINATION being (:file FILE)
+    (when (and (listp destination)
+               (eq (car destination) :file))
+      (let ((file (cadr destination)))
+        ;; Set up a sentinel to write output to FILE when the process exits
+        (set-process-sentinel
+         proc
+         (lambda (proc event)
+           (when (eq (process-status proc) 'exit)
+             (with-current-buffer (process-buffer proc)
+               (write-region (point-min) (point-max) file nil 'quiet))
+             (kill-buffer (process-buffer proc)))))))
+    ;; If DISPLAY is non-nil and a buffer is associated, display the buffer
+    (when (and display buffer)
+      (display-buffer buffer))
+    ;; Since the process is asynchronous, we return nil
+    nil))
