@@ -42,4 +42,5 @@ Uses `shrink-window-if-larger-than-buffer'."
               (window-parent window))
       (window-swap-states window (next-window window)))
     (window-swap-states window (next-window window))
+    ;; Move it to the bottom maximized.
     (transpose-frame)))
