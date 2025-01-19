@@ -354,6 +354,8 @@ jumping backwards."
                  (unless buffer-file-name
                    (user-error "Not visiting a file"))
                  (list buffer-file-name)))
+  (unless cae--sibling-file-history
+    (setq cae--sibling-file-history (doom-store-get 'cae--sibling-file-history)))
   (let ((old-file (buffer-file-name)))
     (condition-case err (call-interactively #'find-sibling-file)
       (user-error
