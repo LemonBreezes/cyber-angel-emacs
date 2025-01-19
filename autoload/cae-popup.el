@@ -31,16 +31,3 @@ Uses `shrink-window-if-larger-than-buffer'."
      (unless (= (- (point-max) (point-min)) 0)
        (shrink-window-if-larger-than-buffer window)))
    window))
-
-;;;###autoload
-(defun cae-popup-maximize-horizontally (&optional window)
-  ;; This function works for me with the `transient' popup but do not expecet it
-  ;; to work in a general setting.
-  ;; Check if window is a vertical split.
-  (when (and (not (eq (window-parent window) (frame-root-window)))
-             (window-combination-p (window-parent window)))
-    ;; Move it to the right.
-    (when (eq (window-parent (next-window window))
-              (window-parent window))
-      (window-swap-states window (next-window window)))
-    (window-swap-states window (next-window window))))
