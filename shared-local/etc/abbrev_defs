@@ -80,6 +80,7 @@
     ("owrk" "work" nil :count 0)
     ("pakcage" "package" nil :count 0)
     ("paly" "pay" nil :count 0)
+    ("pcakage" "package" nil :count 0)
     ("peopl" "people" nil :count 1)
     ("perfet" "perfect" nil :count 0)
     ("pign" "ping" nil :count 0)
