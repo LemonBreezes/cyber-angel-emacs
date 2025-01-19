@@ -13,6 +13,7 @@
     ("becaue" "because" nil :count 0)
     ("becaues" "because" nil :count 1)
     ("bounf" "bound" nil :count 0)
+    ("bufer" "buffer" nil :count 0)
     ("calcultaions" "calculations" nil :count 0)
     ("ccacho" "ccache" nil :count 1)
     ("chceklist" "checklist" nil :count 0)
