@@ -87,7 +87,7 @@
 ;;; Random apps
 
 (when (modulep! :app rss)
-  (map! :map cae-misc-applications-read-map
+  (map! :map cae-misc-applications-random-map
         "r" #'=rss)
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-random-map
