@@ -11,7 +11,9 @@
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'fireplace))
+  (call-interactively #'fireplace)
+  (when (modulep! :ui workspaces)
+    (persp-add-buffer (current-buffer))))
 
 
 ;;;###autoload
