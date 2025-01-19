@@ -7,7 +7,8 @@
       (setq cae-tetris--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-tetris-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-tetri-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-tetris-workspace-name)))
       (setq cae-tetris--old-wconf (current-window-configuration))
       (delete-other-windows)
       (switch-to-buffer (doom-fallback-buffer))))
