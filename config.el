@@ -1449,7 +1449,10 @@
 
 ;;; Applications
 
-(when cae-init-applications-enabled-p)
+(when cae-init-applications-enabled-p
+  (after! circe
+    (require 'lui-logging)
+    (enable-lui-logging-globally)))
 
 
 ;;; Languages
