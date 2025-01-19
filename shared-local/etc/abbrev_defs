@@ -10,6 +10,7 @@
     ("actuakly" "actually" nil :count 0)
     ("ahve" "have" nil :count 0)
     ("appply" "apply" nil :count 1)
+    ("baes" "base" nil :count 0)
     ("becaue" "because" nil :count 0)
     ("becaues" "because" nil :count 1)
     ("bounf" "bound" nil :count 0)
