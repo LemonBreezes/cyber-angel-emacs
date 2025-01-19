@@ -392,6 +392,19 @@
         :ng "du" #'bubbles-set-game-userdefined
         :ng "S" #'bubbles-save-settings))
 
+(use-package! chess
+  :defer t :init
+  (defvar cae-chess-workspace-name "*chess*")
+  (defvar cae-chess--old-wconf nil)
+  (map! :map cae-misc-applications-games-map
+        "c" #'cae-chess)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-games-map
+      "c" "Chess"))
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))))
+
 (use-package! dunnet
   :defer t :init
   (defvar cae-dunnet-workspace-name "*dunnet*")
