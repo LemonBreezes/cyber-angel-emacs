@@ -359,15 +359,16 @@
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
       ((:when (modulep! :cae notifications)
-        :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
+        :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications))
+      (:when (modulep! :ui workspaces)
        (:when (modulep! :term eshell)
         :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
        (:when (modulep! :term vterm)
-        :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace))
-      (:prefix "TAB"
-       :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
-       :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
-       :desc "Switch to final workspace" "=" #'+workspace/switch-to-final))
+        :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace)
+       (:prefix "TAB"
+        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
+        :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
+        :desc "Switch to final workspace" "=" #'+workspace/switch-to-final)))
 (after! which-key
   (setq which-key-replacement-alist
         (cl-remove-if (lambda (x)
