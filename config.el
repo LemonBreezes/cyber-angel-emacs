@@ -1482,7 +1482,7 @@
       (defun cae-circe-add-channel-to-workspace-h ()
         (when (+workspace-exists-p +irc--workspace-name)
           (persp-add-buffer (current-buffer)))))
-    (defadvice! cae-irc-inhibit-workspace-saving-a ()
+    (defadvice! cae-irc-inhibit-workspace-saving-a (_)
       :after #'+irc-setup-wconf
       (when (modulep! :ui workspaces)
         (set-persp-parameter 'dont-save-to-file t +irc--workspace-name)))))
