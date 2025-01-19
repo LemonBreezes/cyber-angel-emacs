@@ -414,6 +414,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "m" "Minesweeper"))
+  (when (modulep! :editor evil)
+    (after! evil-snipe
+      (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes)))
   )
 
 (use-package! dunnet
