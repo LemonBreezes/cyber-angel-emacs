@@ -7,7 +7,8 @@
       (setq cae-chess--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-chess-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-chess-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-chess-workspace-name)))
       (setq cae-chess--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
