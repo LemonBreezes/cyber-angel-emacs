@@ -136,7 +136,14 @@
         "w" #'noaa)
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-random-map
-      "w" "NOAA weather")))
+      "w" "NOAA weather"))
+  :config
+  (map! :map noaa-mode-map
+        :n "h" #'noaa-hourly
+        :n "d" #'noaa-daily
+        :n "q" #'noaa-quit
+        :n "n" #'noaa-next-style
+        :n "c" #'noaa-new-location))
 
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
