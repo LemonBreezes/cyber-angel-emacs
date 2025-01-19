@@ -11,7 +11,9 @@
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'flames-of-freedom-default))
+  (call-interactively #'flames-of-freedom-default)
+  (when (modulep! :ui workspaces)
+    (persp-add-buffer (current-buffer))))
 
 (defun cae-flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
