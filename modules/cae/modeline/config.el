@@ -225,7 +225,7 @@
       (setq! nyan-bar-length 20
              nyan-minimum-window-width 20)))
 
-  (when (modulep! :cae misc-applications)
+  (when (and (modulep! +emms) (modulep! :cae misc-applications))
     (use-package! emms-mode-line-cycle
       :defer t :after emms
       :config
