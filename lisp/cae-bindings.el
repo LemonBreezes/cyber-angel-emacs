@@ -361,6 +361,8 @@
       (:prefix "o"
        (:when (modulep! :app irc)
         :desc "Open ERC" "i" #'=irc)
+       (:when (modulep! :cae notifications)
+        :desc "Toggle notifications" "`" #'cae-toggle-notifications)
        (:when (modulep! :term eshell)
         :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
        (:when (modulep! :term vterm)
