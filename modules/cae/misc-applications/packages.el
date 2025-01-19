@@ -45,6 +45,7 @@
 (package! autotetris-mode)
 (package! speed-type)
 (package! chess)
+(package! minesweeper)
 
 ;; Eye candy
 (package! fireplace)
