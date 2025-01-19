@@ -23,6 +23,9 @@
       (setenv "PATH" (concat (getenv "PATH") ":" termuxpath))
       (setq exec-path (append exec-path (list termuxpath)))))
 
+  ;; This is so that I don't accidentally start Emacs as a daemon.
+  (when (daemonp) (kill-emacs))
+
   (when (boundp 'safe-local-variable-directories)
     (add-to-list 'safe-local-variable-directories doom-user-dir)
     (add-to-list 'safe-local-variable-directories doom-emacs-dir)
