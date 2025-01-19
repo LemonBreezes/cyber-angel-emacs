@@ -24,3 +24,12 @@
   (cl-mapcar (lambda (notification)
                (ednc-dismiss-notification notification))
              (ednc-notifications)))
+
+;;;###autoload
+(defun cae-ednc-toggle-notifications ()
+  (interactive)
+  (cond ((ednc-notifications)
+         (cae-ednc-dismiss-all-notifications))
+        ((get-buffer-window ednc-log-name)
+         (delete-window (get-buffer-window ednc-log-name)))
+        (t (cae-ednc-show-notifications))))
