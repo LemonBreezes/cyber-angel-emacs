@@ -54,38 +54,8 @@
               prefix name)))
         application-types))
 
-;;; System
-
-(map! :map cae-misc-applications-system-map
-      "e" #'list-packages
-      "E" #'list-processes
-      "T" #'list-timers)
-(after! which-key
-  (which-key-add-keymap-based-replacements 'cae-misc-applications-system-map
-    "e" "List Emacs packages"
-    "E" "List Emacs processes"
-    "T" "List Emacs timers"))
-(after! timer-list
-  (map! :map timer-list-mode-map
-        :n "gr" #'revert-buffer))
-(map! :map process-menu-mode-map
-      :n "gr" #'revert-buffer)
-(add-hook 'package-menu-mode-hook #'cae-misc-applications-hide-cursor-h)
-(after! package
-  (map! :map package-menu-mode-map
-        :n "s /" #'package-menu-clear-filter
-        :n "s N" #'package-menu-filter-by-name-or-description
-        :n "s a" #'package-menu-filter-by-archive
-        :n "s d" #'package-menu-filter-by-description
-        :n "s k" #'package-menu-filter-by-keyword
-        :n "s m" #'package-menu-filter-marked
-        :n "s n" #'package-menu-filter-by-name
-        :n "s s" #'package-menu-filter-by-status
-        :n "s u" #'package-menu-filter-upgradable
-        :n "s v" #'package-menu-filter-by-version))
-
 
-;;; Random
+;;; Random apps
 
 (when (modulep! :app rss)
   (map! :map cae-misc-applications-random-map
@@ -190,6 +160,35 @@
 
 
 ;;; System
+
+(map! :map cae-misc-applications-system-map
+      "e" #'list-packages
+      "E" #'list-processes
+      "T" #'list-timers)
+(after! which-key
+  (which-key-add-keymap-based-replacements 'cae-misc-applications-system-map
+    "e" "List Emacs packages"
+    "E" "List Emacs processes"
+    "T" "List Emacs timers"))
+(after! timer-list
+  (map! :map timer-list-mode-map
+        :n "gr" #'revert-buffer))
+(map! :map process-menu-mode-map
+      :n "gr" #'revert-buffer)
+(add-hook 'package-menu-mode-hook #'cae-misc-applications-hide-cursor-h)
+(after! package
+  (map! :map package-menu-mode-map
+        :n "s /" #'package-menu-clear-filter
+        :n "s N" #'package-menu-filter-by-name-or-description
+        :n "s a" #'package-menu-filter-by-archive
+        :n "s d" #'package-menu-filter-by-description
+        :n "s k" #'package-menu-filter-by-keyword
+        :n "s m" #'package-menu-filter-marked
+        :n "s n" #'package-menu-filter-by-name
+        :n "s s" #'package-menu-filter-by-status
+        :n "s u" #'package-menu-filter-upgradable
+        :n "s v" #'package-menu-filter-by-version))
+
 
 (use-package! daemons
   :when (eq system-type 'gnu/linux)
