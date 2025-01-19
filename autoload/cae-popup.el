@@ -43,6 +43,4 @@ Uses `shrink-window-if-larger-than-buffer'."
     (when (eq (window-parent (next-window window))
               (window-parent window))
       (window-swap-states window (next-window window)))
-    (window-swap-states window (next-window window))
-    ;; Move it to the bottom.
-    (transpose-frame)))
+    (window-swap-states window (next-window window))))
