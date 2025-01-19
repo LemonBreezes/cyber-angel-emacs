@@ -381,7 +381,9 @@
 (map! :map help-map
       (:prefix "d"
        :desc "Open Eshell alias file" "e" (cmd! () (find-file eshell-aliases-file))
-       :desc "Toggle debug-on-quit" "q" (cmd! () (setq debug-on-quit (not debug-on-quit)))))
+       :desc "Toggle debug-on-quit" "q" (cmd! () (setq debug-on-quit (not debug-on-quit)))
+       (:when (modulep! :editor evil +everywhere)
+        :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
 (which-key-add-keymap-based-replacements help-map "de" "Open Eshell alias file")
 (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
 
