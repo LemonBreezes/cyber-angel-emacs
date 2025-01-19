@@ -6,7 +6,8 @@
   (if arg
       (setq cae-speed-type--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch cae-speed-type-workspace-name t)
+        (progn (+workspace-switch cae-speed-type-workspace-name t)
+               (set-persp-parameter 'dont-save-to-file t cae-speed-type-workspace-name))
       (setq cae-speed-type--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
