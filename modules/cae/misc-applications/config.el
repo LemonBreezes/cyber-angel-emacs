@@ -405,6 +405,17 @@
     (after! evil-snipe
       (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))))
 
+(use-package! minesweeper
+  :defer t :init
+  (defvar cae-minesweeper-workspace-name "*minesweeper*")
+  (defvar cae-minesweeper--old-wconf nil)
+  (map! :map cae-misc-applications-games-map
+        "m" #'cae-minesweeper)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-games-map
+      "m" "Minesweeper"))
+  )
+
 (use-package! dunnet
   :defer t :init
   (defvar cae-dunnet-workspace-name "*dunnet*")
