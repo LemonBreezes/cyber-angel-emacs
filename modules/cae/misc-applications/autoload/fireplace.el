@@ -7,7 +7,8 @@
       (setq cae-fireplace--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-fireplace-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-fireplace-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-fireplace-workspace-name)))
       (setq cae-fireplace--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
