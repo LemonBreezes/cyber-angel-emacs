@@ -93,6 +93,13 @@
     (which-key-add-keymap-based-replacements cae-misc-applications-random-map
       "r" "RSS")))
 
+(when (modulep! :app irc)
+  (map! :map cae-misc-applications-random-map
+        "i" #'=irc)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
+      "i" "IRC")))
+
 (use-package! alarm-clock
   :defer t :init
   (map! :map cae-misc-applications-random-map
