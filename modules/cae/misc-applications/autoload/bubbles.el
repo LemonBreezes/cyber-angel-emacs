@@ -11,7 +11,9 @@
       (let ((ignore-window-parameters t))
         (delete-other-windows))
       (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'bubbles))
+  (call-interactively #'bubbles)
+  (when (modulep! :ui workspaces)
+    (persp-add-buffer (current-buffer))))
 
 ;;;###autoload
 (defun cae-bubbles-quit ()
