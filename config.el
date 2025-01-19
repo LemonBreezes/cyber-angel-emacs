@@ -1475,7 +1475,12 @@
 
 ;;; Applications
 
-(when cae-init-applications-enabled-p)
+(when cae-init-applications-enabled-p
+  (when (modulep! :ui workspaces)
+    (add-hook! 'circe-channel-mode-hook
+      (defun cae-circe-add-channel-to-workspace-h ()
+        (when (+workspace-exists-p +irc--workspace-name)
+          (persp-add-buffer (current-buffer)))))))
 
 
 ;;; Languages
