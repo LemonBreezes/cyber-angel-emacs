@@ -7,7 +7,8 @@
       (setq cae-snake--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-snake-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-snake-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-snake-workspace-name)))
       (setq cae-snake--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
