@@ -354,8 +354,6 @@ jumping backwards."
                  (unless buffer-file-name
                    (user-error "Not visiting a file"))
                  (list buffer-file-name)))
-  (when (hash-table-empty-p cae--sibling-file-history)
-    (setq cae--sibling-file-history (doom-store-get 'cae--sibling-file-history)))
   (let ((old-file (buffer-file-name)))
     (condition-case err (call-interactively #'find-sibling-file)
       (user-error
@@ -387,8 +385,7 @@ jumping backwards."
                        ((listp current-history)
                         ;; a list already, append if not already there
                         (cons old-file (remove old-file current-history))))
-                 cae--sibling-file-history))))
-  (doom-store-put 'cae--sibling-file-history cae--sibling-file-history))
+                 cae--sibling-file-history)))))
 
 ;;;###autoload
 (defun cae-jump-to-random-line ()
