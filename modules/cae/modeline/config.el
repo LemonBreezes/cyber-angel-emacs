@@ -223,4 +223,12 @@
       (add-hook 'doom-after-init-hook #'nyan-mode)
       :config
       (setq! nyan-bar-length 20
-             nyan-minimum-window-width 20))))
+             nyan-minimum-window-width 20)))
+
+  (when (modulep! :cae misc-applications)
+    (use-package! emms-mode-line-cycle
+      :defer t :after emms
+      :config
+      (emms-playing-time-mode +1)
+      (emms-mode-line-mode +1)
+      (emms-mode-line-cycle +1))))
