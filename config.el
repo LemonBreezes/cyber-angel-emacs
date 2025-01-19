@@ -356,7 +356,6 @@
         ("\\`\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top :size +popup-shrink-to-fit)
         ("*helm " :ignore t)
-        (" \\*transient\\*\\'" :select nil :quit nil :ttl t :size ignore)
         ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
          :size cae-popup-shrink-to-fit)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
@@ -372,6 +371,8 @@
     (after! bbdb
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
         :select nil :quit t :ttl nil))
+    (after! transient
+        (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl t :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
   (when (modulep! :ui workspaces)
