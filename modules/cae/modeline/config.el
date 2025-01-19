@@ -237,5 +237,4 @@
               (let ((out (emms-track-description
                           (emms-playlist-current-selected-track))))
                 (setq out (file-name-base out))
-                out)
-              )))))
+                out))))))
