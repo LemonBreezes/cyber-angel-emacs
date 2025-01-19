@@ -9,3 +9,4 @@
 (package! anzu)
 (when (modulep! :editor evil)
   (package! evil-anzu))
+(package! emms-mode-line-cycle)
