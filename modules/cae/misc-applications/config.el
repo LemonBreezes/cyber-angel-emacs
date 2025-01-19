@@ -54,6 +54,8 @@
               prefix name)))
         application-types))
 
+;;; System
+
 (map! :map cae-misc-applications-system-map
       "e" #'list-packages
       "E" #'list-processes
@@ -83,7 +85,7 @@
         :n "s v" #'package-menu-filter-by-version))
 
 
-;;; Random apps
+;;; Random
 
 (when (modulep! :app rss)
   (map! :map cae-misc-applications-random-map
