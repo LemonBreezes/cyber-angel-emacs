@@ -156,6 +156,7 @@
        lisp
        misc-applications
        modeline
+       notifications
        unpackaged
        vc
        org
