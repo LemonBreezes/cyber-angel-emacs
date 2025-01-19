@@ -127,7 +127,10 @@
 (use-package! noaa
   :defer t :init
   (map! :map cae-misc-applications-random-map
-        "w" #'noaa))
+        "w" #'noaa)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
+      "w" "NOAA weather")))
 
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
