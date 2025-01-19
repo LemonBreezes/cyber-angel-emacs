@@ -87,6 +87,13 @@
 
 ;;; Random apps
 
+(when (modulep! :app rss)
+  (map! :map cae-misc-applications-read-map
+        "r" #'=rss)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-read-map
+      "r" "RSS")))
+
 (use-package! alarm-clock
   :defer t :init
   (map! :map cae-misc-applications-random-map
@@ -788,11 +795,3 @@
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
 
-;;; Read
-
-(when (modulep! :app rss)
-  (map! :map cae-misc-applications-read-map
-        "r" #'=rss)
-  (after! which-key
-    (which-key-add-keymap-based-replacements cae-misc-applications-read-map
-      "r" "RSS")))
