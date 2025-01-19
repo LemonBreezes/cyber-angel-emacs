@@ -773,7 +773,10 @@
                emms-player-list '(emms-player-mpd)
                emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
                emms-player-mpd-server-name cae-misc-applications-mpd-host)
-         (emms-player-mpd-connect))
+         (emms-player-mpd-connect)
+         (map! :map cae-misc-applications-music-map
+               "g" #'emms-player-mpd-connect
+               "G" #'emms-player-mpd-disconnect))
         ((executable-find "mpv")
          (require 'emms-player-mpv)
          (setq emms-player-list '(emms-player-mpv)
