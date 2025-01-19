@@ -1477,6 +1477,7 @@
 
 (when cae-init-applications-enabled-p
   (when (modulep! :ui workspaces)
+    ;; How do I do this with `set-persp-parameter'?
     (add-hook! 'circe-channel-mode-hook
       (defun cae-circe-add-channel-to-workspace-h ()
         (when (+workspace-exists-p +irc--workspace-name)
