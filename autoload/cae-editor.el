@@ -526,7 +526,7 @@ image-mode buffers."
       (+workspace-switch "*eshell*")
     (+workspace/new "*eshell*"))
   (eshell)
-  (delete-other-windows))
+  (delete-other-windows (persp-add-buffer (current-buffer))))
 
 ;;;###autoload
 (defun cae-open-vterm-in-new-workspace ()
@@ -536,4 +536,5 @@ image-mode buffers."
       (+workspace-switch "*vterm*")
     (+workspace/new "*vterm*"))
   (vterm)
-  (delete-other-windows))
+  (delete-other-windows)
+  (persp-add-buffer (current-buffer)))
