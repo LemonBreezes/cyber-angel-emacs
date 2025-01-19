@@ -231,4 +231,14 @@
       :config
       (emms-playing-time-mode +1)
       (emms-mode-line-mode +1)
-      (emms-mode-line-cycle +1))))
+      (emms-mode-line-cycle +1)
+      (setq emms-mode-line-cycle-current-title-function
+            (lambda ()
+              (let ((out (emms-track-description
+                          (emms-playlist-current-selected-track))))
+                (when (string-prefix-p
+                       (expand-file-name cae-misc-applications-music-dir)
+                       out)
+                  (setq out (string-remove-prefix (expand-file-name cae-misc-applications-music-dir) out))))
+
+              )))))
