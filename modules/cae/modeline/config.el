@@ -231,8 +231,8 @@
       (require 'emms-playing-time)
       (require 'emms-mode-line)
       (require 'emms-mode-line-cycle)
-      (emms-playing-time-mode +1)
       (emms-mode-line-mode +1)
+      (emms-playing-time-mode +1)
       (emms-mode-line-cycle +1)
       (setq emms-mode-line-cycle-current-title-function
             (lambda ()
