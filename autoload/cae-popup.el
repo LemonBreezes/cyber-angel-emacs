@@ -37,7 +37,6 @@ Uses `shrink-window-if-larger-than-buffer'."
   ;; This function works for me with the `transient' popup but do not expecet it
   ;; to work in a general setting.
   ;; Check if window is a vertical split.
-  (backtrace)
   (when (and (not (eq (window-parent window) (frame-root-window)))
              (window-combination-p (window-parent window)))
     ;; Move it to the right.
