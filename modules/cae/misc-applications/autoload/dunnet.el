@@ -7,7 +7,8 @@
       (setq cae-dunnet--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-dunnet-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-dunnet-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-dunnet-workspace-name)))
       (setq cae-dunnet--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
