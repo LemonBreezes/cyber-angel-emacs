@@ -30,11 +30,10 @@
   '(("games" "g")
     ("eyecandy" "e")
     ("system" "s")
-    ("random" "t")
+    ("random" "r")
     ("insert" "i")
     ("music" "m")
-    ("quotes" "q")
-    ("read" "r")))
+    ("quotes" "q")))
 
 
 (mapc (lambda (app-type)
@@ -91,7 +90,7 @@
   (map! :map cae-misc-applications-read-map
         "r" #'=rss)
   (after! which-key
-    (which-key-add-keymap-based-replacements cae-misc-applications-read-map
+    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
       "r" "RSS")))
 
 (use-package! alarm-clock
