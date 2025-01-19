@@ -155,7 +155,7 @@
        dired
        lisp
        misc-applications
-       modeline
+       (modeline +emms)
        notifications
        unpackaged
        vc
