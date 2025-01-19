@@ -229,6 +229,8 @@
     (use-package! emms-mode-line-cycle
       :defer t :after emms
       :config
+      (require 'emms-playing-time)
+      (require 'emms-mode-line)
       (emms-playing-time-mode +1)
       (emms-mode-line-mode +1)
       (emms-mode-line-cycle +1)
