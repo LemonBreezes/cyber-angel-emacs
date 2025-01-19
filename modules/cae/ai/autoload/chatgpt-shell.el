@@ -46,13 +46,15 @@
 (defun cae-ai-open-chatgpt-workspace ()
   (interactive)
   (+workspace-switch cae-ai-chatgpt-shell-workspace-name t)
-  (chatgpt-shell))
+  (chatgpt-shell)
+  (persp-add-buffer (current-buffer)))
 
 ;;;###autoload
 (defun cae-ai-open-dall-e-workspace ()
   (interactive)
   (+workspace-switch cae-ai-dall-e-shell-workspace-name t)
-  (dall-e-shell))
+  (dall-e-shell)
+  (persp-add-buffer (current-buffer)))
 
 ;;;###autoload
 (defun cae-ai-toggle-dall-e-shell ()
