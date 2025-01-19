@@ -416,7 +416,13 @@
       "m" "Minesweeper"))
   (when (modulep! :editor evil)
     (after! evil-snipe
-      (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes))))
+      (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes)))
+  :config
+  (map! :map minesweeper-mode-map
+        :n "RET" #'minesweeper-choose
+        :n "s" #'minesweeper-toggle-show-neighbors
+        :n "m" #'minesweeper-toggle-mark
+        :n "c" #'minesweeper-choose-around))
 
 (use-package! dunnet
   :defer t :init
