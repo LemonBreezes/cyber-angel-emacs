@@ -356,7 +356,7 @@
         ("\\`\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top :size +popup-shrink-to-fit)
         ("*helm " :ignore t)
-        ("\\` \\*transient\\*\\'" :ignore t)
+        ("\\` \\*transient\\*\\'" :select t :quit nil :ttl t :size cae-popup-maximize-horizontally)
         ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
          :size cae-popup-shrink-to-fit)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
