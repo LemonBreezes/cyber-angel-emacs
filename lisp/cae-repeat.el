@@ -178,6 +178,10 @@
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab)))
 
+  (when (modulep! :cae notifications)
+    (define-repeat-map cae-ednc-toggle-notifications
+      ("`" cae-ednc-toggle-notifications)))
+
   (defadvice! my/repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
