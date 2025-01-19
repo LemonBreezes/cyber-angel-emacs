@@ -6,7 +6,8 @@
   (if arg
       (setq cae-flames-of-freedom--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch cae-flames-of-freedom-workspace-name t)
+        (progn (+workspace-switch cae-flames-of-freedom-workspace-name t)
+               (set-persp-parameter 'dont-save-to-file t cae-flames-of-freedom-workspace-name))
       (setq cae-flames-of-freedom--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
