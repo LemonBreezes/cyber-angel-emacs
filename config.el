@@ -222,7 +222,8 @@
     (after! which-key
       (setq which-key-use-C-h-commands t))
     (defvar cae-which-key-current-keymap nil)
-    (defadvice! cae-which-key-update-current-keymap-a (_keymap-name keymap &rest args)
+    (defadvice! cae-which-key-update-current-keymap-a
+      (_keymap-name keymap &rest args)
       :before #'which-key--show-keymap
       (setq cae-which-key-current-keymap keymap))
     (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
@@ -297,7 +298,8 @@
       '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
          :ttl nil :vslot 99)
         ("\\`\\*exwm" :ignore t)
-        ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
+        ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t
+        ;;:quit t
         ;; :side right :ttl 0)
         ;;("\\`\\*Ilist\\*\\'" :size cae-popup-shrink-to-fit :select t :quit t
         ;; :side right :ttl 0)
@@ -350,7 +352,8 @@
          :size cae-popup-shrink-to-fit)
         ("\\`\\*chatgpt\\* " :size 0.3 :select t :quit nil :ttl nil)
         ("\\`\\*dall-e\\*.*" :size 0.3 :select t :quit nil :ttl nil)
-        ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size cae-popup-shrink-to-fit)
+        ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size
+         cae-popup-shrink-to-fit)
         ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
         ("\\`\\*notmuch-hello"  :ignore)
         ("\\`\\*gud-" :ttl nil :size 0.35)
@@ -372,7 +375,8 @@
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
         :select nil :quit t :ttl nil))
     (after! transient
-      (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl t :size #'ignore))
+      (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl t
+        :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
   (when (modulep! :ui workspaces)
@@ -480,7 +484,8 @@
   ;; Set up the default browser.
   (after! browse-url
     (setq browse-url-secondary-browser-function
-          (if (eq browse-url-secondary-browser-function #'browse-url-default-browser)
+          (if (eq browse-url-secondary-browser-function
+                  #'browse-url-default-browser)
               #'eww-browse-url
             browse-url-secondary-browser-function)
           browse-url-browser-function
@@ -652,15 +657,19 @@
            (default-view (if wide-frame-p
                              (if posframe-supported-p 'posframe 'vertical)
                            'buffer))
-           (new-entries `((embark-keybinding . (, (if wide-frame-p 'grid 'buffer)))
+           (new-entries `((embark-keybinding . (, (if wide-frame-p
+                                                      'grid 'buffer)))
                           (consult-grep . (, (if wide-frame-p
-                                                 (if posframe-supported-p 'posframe 'buffer)
+                                                 (if posframe-supported-p
+                                                     'posframe 'buffer)
                                                'buffer)))
                           (imenu . (, (if wide-frame-p
-                                          (if posframe-supported-p '(posframe grid) '(grid))
+                                          (if posframe-supported-p
+                                              '(posframe grid) '(grid))
                                         'buffer)))
                           (consult-location . (, (if wide-frame-p
-                                                     (if posframe-supported-p 'posframe 'buffer)
+                                                     (if posframe-supported-p
+                                                         'posframe 'buffer)
                                                    'buffer)))
                           (file . (, default-view))
                           (t . (, default-view)))))
@@ -677,9 +686,11 @@
       (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
       ;; Ensure `execute-extended-command' has the correct view
       (let* ((execute-command-view default-view)
-             (existing-views (alist-get 'execute-extended-command vertico-multiform-commands))
+             (existing-views (alist-get 'execute-extended-command
+                                        vertico-multiform-commands))
              (cleaned-views (cl-set-difference existing-views
-                                               '(flat vertical posframe grid reverse unobtrusive))))
+                                               '(flat vertical posframe grid
+                                                 reverse unobtrusive))))
         (setf (alist-get 'execute-extended-command vertico-multiform-commands)
               (cl-delete-duplicates
                (cons execute-command-view cleaned-views)
@@ -892,8 +903,9 @@
           avy-dispatch-alist
           (cae-keyboard-remap
            '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
-             (?t . avy-action-teleport) (?m . avy-action-mark) (?n . avy-action-copy)
-             (?y . avy-action-yank) (?Y . avy-action-yank-line) (?i . avy-action-ispell)
+             (?t . avy-action-teleport) (?m . avy-action-mark)
+             (?n . avy-action-copy) (?y . avy-action-yank)
+             (?Y . avy-action-yank-line) (?i . avy-action-ispell)
              (?z . avy-action-zap-to-char)))
           avy-styles-alist '((avy-isearch . pre)
                              (ace-link-man . pre)
