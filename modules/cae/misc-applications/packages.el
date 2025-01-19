@@ -64,5 +64,3 @@
 (when (or (modulep! :cae helm)
           (modulep! :completion helm))
   (package! helm-emms))
-
-;; Read
