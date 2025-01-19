@@ -1481,7 +1481,11 @@
     (add-hook! 'circe-channel-mode-hook
       (defun cae-circe-add-channel-to-workspace-h ()
         (when (+workspace-exists-p +irc--workspace-name)
-          (persp-add-buffer (current-buffer)))))))
+          (persp-add-buffer (current-buffer)))))
+    (defadvice! cae-irc-inhibit-workspace-saving-a ()
+      :after #'+irc-setup-wconf
+      (when (modulep! :ui workspaces)
+        (set-persp-parameter 'dont-save-to-file t +irc--workspace-name)))))
 
 
 ;;; Languages
