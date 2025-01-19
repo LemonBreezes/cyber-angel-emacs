@@ -773,7 +773,7 @@
                emms-player-list '(emms-player-mpd)
                emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
                emms-player-mpd-server-name cae-misc-applications-mpd-host)
-         (emms-player-mpd-connect))
+         (run-with-idle-timer nil 5 #'emms-player-mpd-connect))
         ((executable-find "mpv")
          (require 'emms-player-mpv)
          (setq emms-player-list '(emms-player-mpv)
