@@ -776,7 +776,11 @@
          (emms-player-mpd-connect)
          (map! :map cae-misc-applications-music-map
                "g" #'emms-player-mpd-connect
-               "G" #'emms-player-mpd-disconnect))
+               "G" #'emms-player-mpd-disconnect)
+         (after! which-key
+           (which-key-add-keymap-based-replacements cae-misc-applications-music-map
+             "g" "MPD connect"
+             "G" "MPD disconnect")))
         ((executable-find "mpv")
          (require 'emms-player-mpv)
          (setq emms-player-list '(emms-player-mpv)
