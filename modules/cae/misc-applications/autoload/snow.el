@@ -6,7 +6,8 @@
   (if arg
       (setq cae-snow--old-wconf nil)
     (if (modulep! :ui workspaces)
-        (+workspace-switch cae-snow-workspace-name t)
+        (progn (+workspace-switch cae-snow-workspace-name t)
+               (set-persp-parameter 'dont-save-to-file t cae-snow-workspace-name))
       (setq cae-snow--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
