@@ -236,9 +236,6 @@
             (lambda ()
               (let ((out (emms-track-description
                           (emms-playlist-current-selected-track))))
-                (when (string-prefix-p
-                       (expand-file-name cae-misc-applications-music-dir)
-                       out)
-                  (setq out (string-remove-prefix (expand-file-name cae-misc-applications-music-dir) out)))
+                (setq out (file-name-base out))
                 out)
               )))))
