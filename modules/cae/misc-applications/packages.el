@@ -44,6 +44,7 @@
 ;; Games
 (package! autotetris-mode)
 (package! speed-type)
+(package! chess)
 
 ;; Eye candy
 (package! fireplace)
