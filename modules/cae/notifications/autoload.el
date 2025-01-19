@@ -28,6 +28,7 @@
 ;;;###autoload
 (defun cae-ednc-toggle-notifications ()
   (interactive)
+  (require 'ednc)
   (cond ((ednc-notifications)
          (cae-ednc-dismiss-all-notifications))
         ((get-buffer-window ednc-log-name)
