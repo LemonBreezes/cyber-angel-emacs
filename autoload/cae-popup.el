@@ -43,5 +43,4 @@ Uses `shrink-window-if-larger-than-buffer'."
       (window-swap-states window (next-window window)))
     (window-swap-states window (next-window window))
     ;; Move it to the bottom.
-    (transpose-frame)
-    (doom/window-maximize-horizontally)))
+    (transpose-frame)))
