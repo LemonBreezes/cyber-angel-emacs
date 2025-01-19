@@ -7,7 +7,8 @@
       (setq cae-minesweeper--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-minesweeper-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-minesweeper-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-minesweeper-workspace-name)))
       (setq cae-minesweeper--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
