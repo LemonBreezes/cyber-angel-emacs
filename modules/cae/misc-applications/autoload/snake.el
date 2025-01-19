@@ -19,6 +19,8 @@
                           (buffer-substring-no-properties (goto-char (point-min))
                                                           (pos-eol)))))
     (call-interactively #'snake)
+    (when (modulep! :ui workspaces)
+      (persp-add-buffer (current-buffer)))
     (setq-local header-line-format highest-score)))
 
 ;;;###autoload
