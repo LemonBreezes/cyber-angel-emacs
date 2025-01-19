@@ -7,7 +7,8 @@
       (setq cae-bubbles--old-wconf nil)
     (if (modulep! :ui workspaces)
         (progn (+workspace-switch cae-bubbles-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t cae-bubbles-workspace-name))
+               (set-persp-parameter 'dont-save-to-file t
+                                    (+workspace-get cae-bubbles-workspace-name)))
       (setq cae-bubbles--old-wconf (current-window-configuration))
       (let ((ignore-window-parameters t))
         (delete-other-windows))
