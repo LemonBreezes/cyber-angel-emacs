@@ -13,6 +13,8 @@
       (switch-to-buffer (doom-fallback-buffer))))
   (call-interactively #'snow)
   (with-current-buffer "*snow*"
+    (when (modulep! :ui workspaces)
+      (persp-add-buffer (current-buffer)))
     (local-set-key (kbd "q") #'cae-snow-quit)
     (when (featurep 'evil)
       (evil-local-set-key 'normal (kbd "q") #'cae-snow-quit))))
