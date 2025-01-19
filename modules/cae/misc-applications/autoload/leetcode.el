@@ -4,7 +4,8 @@
 (defun cae-leetcode ()
   (interactive)
   (when (modulep! :ui workspaces)
-    (+workspace-switch cae-leetcode-workspace-name t))
+    (progn (+workspace-switch cae-leetcode-workspace-name t)
+           (set-persp-parameter 'dont-save-to-file t 'cae-leetcode-workspace-name)))
   (leetcode))
 
 ;;;###autoload
