@@ -5,6 +5,7 @@
   (interactive)
   (when (modulep! :ui workspaces)
     (+workspace-switch cae-mentor-workspace-name t)
+    (set-persp-parameter 'dont-save-to-file t cae-mentor-workspace-name)
     (+workspace/display))
   (call-interactively #'mentor))
 
