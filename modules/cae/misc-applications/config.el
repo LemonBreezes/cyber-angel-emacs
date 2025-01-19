@@ -124,6 +124,11 @@
   :config
   (pomm-mode-line-mode +1))
 
+(use-package! noaa
+  :defer t :init
+  (map! :map cae-misc-applications-random-map
+        "w" #'noaa))
+
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
 (use-package! debbugs
