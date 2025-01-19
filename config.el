@@ -1486,7 +1486,7 @@
       :after #'+irc-setup-wconf
       (when (and (modulep! :ui workspaces)
                  (not inhibit-workspace))
-        (set-persp-parameter 'dont-save-to-file t +irc--workspace-name)))))
+        (set-persp-parameter 'dont-save-to-file t (+workspace-get +irc--workspace-name))))))
 
 
 ;;; Languages
