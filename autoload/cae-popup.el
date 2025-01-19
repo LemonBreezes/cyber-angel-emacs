@@ -34,8 +34,12 @@ Uses `shrink-window-if-larger-than-buffer'."
 
 ;;;###autoload
 (defun cae-popup-maximize-horizontally (&optional window)
-  (when (not (eq (window-parent window) (frame-root-window)))
+  ;; Check if window is a vertical split.
+  (when (and (not (eq (window-parent window) (frame-root-window)))
+             (window-combination-p (window-parent window)))
+    ;; Move it to the right.
     (when (eq (window-parent (next-window window))
               (window-parent window))
       (window-swap-states window (next-window window)))
-    (window-swap-states window (next-window window))))
+    (window-swap-states window (next-window window))
+    (transpose-frame)))
