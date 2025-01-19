@@ -76,3 +76,9 @@
       (display-buffer buffer))
     ;; Since the process is asynchronous, we return nil
     nil))
+
+;;;###autoload
+(defun cae-ednc-wrap-async-call-process-a (oldfun &rest args)
+  (advice-add #'call-process :around #'cae-ednc-call-process-advice)
+  (unwind-protect (apply oldfun args)
+    (advice-remove #'call-process #'cae-ednc-call-process-advice)))
