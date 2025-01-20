@@ -1,4 +1,4 @@
-;;; private/eshell/autoload/commands.el -*- lexical-binding: t; -*-
+;;; cae/eshell/autoload/commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-eshell-buffer-contents (buffer)
@@ -33,7 +33,7 @@
                 (with-current-buffer buf
                   (buffer-substring-no-properties (point-min) (point-max))))))
 
-;; By LemonBreezes https://github.com/LemonBreezes/.doom.d/blob/master/modules/private/eshell/autoload.el
+;; By LemonBreezes https://github.com/LemonBreezes/.doom.d/blob/master/modules/cae/eshell/autoload.el
 ;; Originally from Aweshell https://github.com/manateelazycat/aweshell/blob/master/aweshell.el.
 ;;;###autoload
 (defun eshell/hat (&rest files)

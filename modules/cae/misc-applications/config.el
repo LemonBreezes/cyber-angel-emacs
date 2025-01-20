@@ -1,4 +1,4 @@
-;;; private/misc-applications/config.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/config.el -*- lexical-binding: t; -*-
 
 ;;; Preamble
 

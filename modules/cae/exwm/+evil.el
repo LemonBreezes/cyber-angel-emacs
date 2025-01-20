@@ -1,4 +1,4 @@
-;;; private/exwm/+evil.el -*- lexical-binding: t; -*-
+;;; cae/exwm/+evil.el -*- lexical-binding: t; -*-
 
 (after! evil
   (evil-set-initial-state 'exwm-mode 'normal))

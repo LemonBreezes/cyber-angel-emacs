@@ -1,4 +1,4 @@
-;;; private/unpackaged/config.el -*- lexical-binding: t; -*-
+;;; cae/unpackaged/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

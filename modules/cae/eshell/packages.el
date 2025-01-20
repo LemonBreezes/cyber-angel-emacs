@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-;;; private/eshell/packages.el
+;;; cae/eshell/packages.el
 
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 

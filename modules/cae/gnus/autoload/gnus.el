@@ -1,4 +1,4 @@
-;;; private/gnus/autoload/gnus.el -*- lexical-binding: t; -*-
+;;; cae/gnus/autoload/gnus.el -*- lexical-binding: t; -*-
 
 (defvar +gnus-workspace-name "*gnus*"
   "Name of the workspace created by `=gnus', dedicated to mu4e.")

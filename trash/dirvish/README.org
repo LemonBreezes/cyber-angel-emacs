@@ -1,3 +1,0 @@
-#+title: Dirvish module
-
-This module was copied from a Doom PR.

@@ -1,4 +1,4 @@
-;;; private/dired/config.el -*- lexical-binding: t; -*-
+;;; cae/dired/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

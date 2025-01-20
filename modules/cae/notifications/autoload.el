@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/ednc.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/ednc.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-ednc-show-notifications ()

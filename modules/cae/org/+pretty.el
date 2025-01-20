@@ -1,4 +1,4 @@
-;;; private/org/+pretty.el -*- lexical-binding: t; -*-
+;;; cae/org/+pretty.el -*- lexical-binding: t; -*-
 
 (use-package! org-modern
   :when (cae-display-graphic-p)

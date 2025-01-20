@@ -1,4 +1,4 @@
-;;; private/lisp/config.el -*- lexical-binding: t; -*-
+;;; cae/lisp/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

@@ -1,4 +1,4 @@
-;;; private/unpackaged/autoload/org-fix-blank-lines.el -*- lexical-binding: t; -*-
+;;; cae/unpackaged/autoload/org-fix-blank-lines.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-unpackaged-org-fix-blank-lines (&optional prefix)

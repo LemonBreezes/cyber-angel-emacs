@@ -1,4 +1,4 @@
-;;; private/unpackaged/autoload/magit.el -*- lexical-binding: t; -*-
+;;; cae/unpackaged/autoload/magit.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-unpackaged-magit-status ()

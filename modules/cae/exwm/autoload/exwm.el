@@ -1,4 +1,4 @@
-;;; private/exwm/autoload/evil.el -*- lexical-binding: t; -*-
+;;; cae/exwm/autoload/evil.el -*- lexical-binding: t; -*-
 
 (defvar +exwm-refocus-application--message "")
 (defvar +exwm-refocus-application--delays '(0.015 0.03))

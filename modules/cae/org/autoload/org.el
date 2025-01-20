@@ -1,4 +1,4 @@
-;;; private/org/autoload/org.el -*- lexical-binding: t; -*-
+;;; cae/org/autoload/org.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-org-set-created-timestamp (&rest _args)
