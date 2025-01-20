@@ -373,7 +373,7 @@
 ;;; Help keybindings
 (map! :map help-map
       (:prefix "d"
-       :desc "Toggle debug-on-quit" "q" (cmd! () (setq debug-on-quit (not debug-on-quit)))
+       :desc "Toggle debug options" "D" #'cae-debug-transient
        (:when (modulep! :editor evil +everywhere)
         :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
 (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
