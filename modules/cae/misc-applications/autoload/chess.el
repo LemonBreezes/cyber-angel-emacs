@@ -1,3 +1,6 @@
+;;;###autoload (autoload 'cae-chess "cae/misc-applications/autoload/chess" nil t)
+;;;###autoload (autoload 'cae-chess-quit "cae/misc-applications/autoload/chess" nil t)
+
 ;;; cae/misc-applications/autoload/chess.el -*- lexical-binding: t; -*-
 
 (cae-define-launcher
