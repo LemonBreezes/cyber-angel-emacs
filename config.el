@@ -374,7 +374,7 @@
     (after! bbdb
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
         :select nil :quit t :ttl nil))
-    (after! transient
+    (after! magit ; Override Doom's popup rule for `transient'.
       (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl t
         :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
