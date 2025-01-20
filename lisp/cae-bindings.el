@@ -359,7 +359,7 @@
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
       (:when (modulep! :cae notifications)
-        :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
+       :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
       (:when (modulep! :term eshell)
        :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
       (:when (modulep! :term vterm)
