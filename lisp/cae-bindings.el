@@ -137,17 +137,6 @@
             :ie [tab] nil)
       (yas-minor-mode +1))))
 
-;; This one is because I bind `C-h' to a dedicated key on my keyboard.
-(define-key help-map (kbd "SPC") #'cae-pop-mark)
-(define-key help-map (kbd "DEL") #'cae-pop-mark)
-;; This is so that `describe-key-briefly' is more convenient to use with the
-;; `<f1>' prefix.
-(define-key help-map (kbd "<f1>") #'describe-key-briefly)
-(define-key help-map (kbd "<f2>") #'describe-key) ; `F1 F2' is easier than `C-h k'.
-
-;; Doom Emacs unbinds the tutorial keybinding.
-(define-key help-map (kbd "M-t") #'help-with-tutorial)
-
 (after! diff-mode
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
@@ -324,7 +313,6 @@
     "M-s c" #'consult-locate)
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command)
-  (map! :map help-map "TAB" #'consult-info)
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
@@ -379,6 +367,8 @@
                                (stringp (car-safe (car x)))
                                (string-suffix-p "0\\\\'" (caar x)))))
                       which-key-replacement-alist)))
+
+;;; Help keybindings
 (map! :map help-map
       (:prefix "d"
        :desc "Open Eshell alias file" "e" (cmd! () (find-file eshell-aliases-file))
@@ -387,6 +377,20 @@
         :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
 (which-key-add-keymap-based-replacements help-map "de" "Open Eshell alias file")
 (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
+(which-key-add-keymap-based-replacements help-map "dC" "Open Evil Collection config")
+
+(when (modulep! :completion vertico)
+  (map! :map help-map "TAB" #'consult-info))
+
+;; This one is because I bind `C-h' to a dedicated key on my keyboard.
+(define-key help-map (kbd "SPC") #'cae-pop-mark)
+(define-key help-map (kbd "DEL") #'cae-pop-mark)
+;; This is so that `describe-key-briefly' is more convenient to use with the
+;; `<f1>' prefix.
+(define-key help-map (kbd "<f1>") #'describe-key-briefly)
+(define-key help-map (kbd "<f2>") #'describe-key) ; `F1 F2' is easier than `C-h k'.
+;; Doom Emacs unbinds the tutorial keybinding.
+(define-key help-map (kbd "M-t") #'help-with-tutorial)
 
 ;;; Other modules
 
