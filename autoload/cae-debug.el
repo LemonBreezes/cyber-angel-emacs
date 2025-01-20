@@ -77,15 +77,6 @@ normally have their errors suppressed."
   (message "debug-on-signal is now %s" (if debug-on-signal "ON" "OFF"))
   (transient-setup 'cae-debug-transient))
 
-(transient-define-suffix cae-debug-toggle-debug-on-next-call ()
-  "Toggle `debug-on-next-call'."
-  :description (lambda ()
-                 (format "Toggle debug-on-next-call [%s]" (if debug-on-next-call "ON" "OFF")))
-  (interactive)
-  (setq debug-on-next-call (not debug-on-next-call))
-  (message "debug-on-next-call is now %s" (if debug-on-next-call "ON" "OFF"))
-  (transient-setup 'cae-debug-transient))
-
 (transient-define-suffix cae-debug-toggle-debug-allow-recursive-debug ()
   "Toggle `debug-allow-recursive-debug'."
   :description (lambda ()
@@ -103,6 +94,5 @@ normally have their errors suppressed."
    ("e" cae-debug-toggle-debug-on-error)
    ("q" cae-debug-toggle-debug-on-quit)
    ("s" cae-debug-toggle-debug-on-signal)
-   ("n" cae-debug-toggle-debug-on-next-call)
    ("r" cae-debug-toggle-debug-allow-recursive-debug)
    ])
