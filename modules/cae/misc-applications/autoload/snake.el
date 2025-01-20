@@ -1,5 +1,8 @@
 ;;; private/misc-applications/autoload/snake.el -*- lexical-binding: t; -*-
 
+;;;###autoload (autoload 'cae-snake "cae/misc-applications/autoload/snake" nil t)
+;;;###autoload (autoload 'cae-snake-quit "cae/misc-applications/autoload/snake" nil t)
+
 (cae-define-launcher
  cae-snake
  :launch-fn #'snake
