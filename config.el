@@ -737,6 +737,7 @@
   (load! "lisp/cae-repeat")
   (load! "lisp/cae-vlf")
   (load! "lisp/cae-restore-point")
+  (load! "lisp/cae-visual-scrolling.el")
 
   ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
   ;; This is problematic because it means that a fold can be broken by an
