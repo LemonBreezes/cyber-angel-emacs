@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/misc-applications.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/misc-applications.el -*- lexical-binding: t; -*-
 
 (eval-when-compile
   (require 'cl-lib))
