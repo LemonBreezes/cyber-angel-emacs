@@ -67,7 +67,7 @@ SAVE-WINDOW-CONFIG determines whether to save and restore window configurations.
            (when ,save-window-config
              (when ,old-wconf-var
                (set-window-configuration ,old-wconf-var))))
-         (when ,buffer-name
+         (when (and ,buffer-name (get-buffer ,buffer-name))
            (kill-buffer ,buffer-name))
          (when ,cleanup-fn
            (funcall ,cleanup-fn))))))
