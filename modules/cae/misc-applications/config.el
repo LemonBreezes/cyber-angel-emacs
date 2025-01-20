@@ -126,6 +126,7 @@
 (use-package! hackernews
   :defer t :init
   (defvar cae-hackernews-workspace-name "*hackernews*")
+  (defvar cae-hackernews--old-wconf nil)
   (map! :map cae-misc-applications-random-map
         "h" #'cae-hackernews)
   (after! which-key
