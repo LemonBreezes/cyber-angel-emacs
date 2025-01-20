@@ -1,21 +1,10 @@
 ;;; private/misc-applications/autoload/flames-of-freedom.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun cae-flames-of-freedom (&optional arg)
-  (interactive "P")
-  (if arg
-      (setq cae-flames-of-freedom--old-wconf nil)
-    (if (modulep! :ui workspaces)
-        (progn (+workspace-switch cae-flames-of-freedom-workspace-name t)
-               (set-persp-parameter 'dont-save-to-file t
-                                    (+workspace-get cae-flames-of-freedom-workspace-name)))
-      (setq cae-flames-of-freedom--old-wconf (current-window-configuration))
-      (let ((ignore-window-parameters t))
-        (delete-other-windows))
-      (switch-to-buffer (doom-fallback-buffer))))
-  (call-interactively #'flames-of-freedom-default)
-  (when (modulep! :ui workspaces)
-    (persp-add-buffer (current-buffer))))
+(cae-define-launcher
+  cae-flames-of-freedom
+  :launch-fn #'flames-of-freedom-default
+  :workspace-name cae-flames-of-freedom-workspace-name
+  :cleanup-fn cae-flames-of-freedom-quit)
 
 (defun cae-flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
