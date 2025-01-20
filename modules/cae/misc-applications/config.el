@@ -126,7 +126,7 @@
 (use-package! hackernews
   :defer t :init
   (map! :map cae-misc-applications-random-map
-        "h" #'hackernews)
+        "h" #'cae-hackernews)
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-random-map
       "h" "Hacker News"))
