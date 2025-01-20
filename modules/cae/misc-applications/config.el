@@ -123,6 +123,9 @@
         :n "n" #'noaa-next-style
         :n "c" #'noaa-new-location))
 
+(use-package! hackernews
+  :defer t)
+
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
 (use-package! debbugs
