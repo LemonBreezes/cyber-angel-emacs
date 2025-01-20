@@ -134,7 +134,8 @@
       "h" "Hacker News"))
   :config
   (map! :map hackernews-mode-map
-        :ng "o" #'link-hint-open-link))
+        :ng "o" #'link-hint-open-link
+        :ng "q" #'cae-hackernews-quit))
 
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
