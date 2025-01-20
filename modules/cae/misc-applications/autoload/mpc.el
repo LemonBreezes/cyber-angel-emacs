@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/mpc.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/mpc.el -*- lexical-binding: t; -*-
 
 (defvar cae-mpc--wconf nil)
 (defvar cae-mpc-buf-pos-alist nil)

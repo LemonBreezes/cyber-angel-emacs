@@ -1,4 +1,4 @@
-;;; private/holy/config.el -*- lexical-binding: t; -*-
+;;; cae/holy/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

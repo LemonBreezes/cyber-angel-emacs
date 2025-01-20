@@ -1,4 +1,4 @@
-;;; private/unpackaged/autoload/lorem-ipsum.el -*- lexical-binding: t; -*-
+;;; cae/unpackaged/autoload/lorem-ipsum.el -*- lexical-binding: t; -*-
 
 (defcustom cae-unpackaged-lorem-ipsum-overlay-exclude nil
   "List of regexps to exclude from `cae-unpackaged-lorem-ipsum-overlay'."

@@ -1,4 +1,4 @@
-;;; private/holy/restore-point.el -*- lexical-binding: t; -*-
+;;; cae/holy/restore-point.el -*- lexical-binding: t; -*-
 
 (use-package! restore-point
   :defer t :init

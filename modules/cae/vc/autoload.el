@@ -1,4 +1,4 @@
-;;; private/vc/autoload.el -*- lexical-binding: t; -*-
+;;; cae/vc/autoload.el -*- lexical-binding: t; -*-
 
 (eval-when-compile (require 'magit nil t))
 

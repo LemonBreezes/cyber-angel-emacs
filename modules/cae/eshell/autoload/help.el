@@ -1,4 +1,4 @@
-;;; private/eshell/autoload/help.el -*- lexical-binding: t; -*-
+;;; cae/eshell/autoload/help.el -*- lexical-binding: t; -*-
 
 (autoload #'tldr-get-file-path-from-command-name "tldr")
 (autoload #'Man-completion-table "man")

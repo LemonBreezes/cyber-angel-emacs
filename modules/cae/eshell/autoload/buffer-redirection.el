@@ -1,4 +1,4 @@
-;;; private/eshell/autoload/buffer-redirection.el -*- lexical-binding: t; -*-
+;;; cae/eshell/autoload/buffer-redirection.el -*- lexical-binding: t; -*-
 
 ;; From https://emacs.stackexchange.com/questions/42113/customize-eshell-redirection-to-buffer
 ;;;###autoload

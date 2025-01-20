@@ -1,4 +1,4 @@
-;;; private/gnus/config.el -*- lexical-binding: t; -*-
+;;; cae/gnus/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

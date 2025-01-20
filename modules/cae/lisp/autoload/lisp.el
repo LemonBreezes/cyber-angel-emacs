@@ -1,4 +1,4 @@
-;;; private/lisp/autoload.el -*- lexical-binding: t; -*-
+;;; cae/lisp/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-lisp-check-parens-before-save-h ()

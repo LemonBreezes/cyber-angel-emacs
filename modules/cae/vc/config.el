@@ -1,4 +1,4 @@
-;;; private/vc/config.el -*- lexical-binding: t; -*-
+;;; cae/vc/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

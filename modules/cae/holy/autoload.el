@@ -1,4 +1,4 @@
-;;; private/holy/autoload.el -*- lexical-binding: t; -*-
+;;; cae/holy/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-avy-symbol-at-point ()

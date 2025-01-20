@@ -1,4 +1,4 @@
-;;; private/org/autoload/commands.el -*- lexical-binding: t; -*-
+;;; cae/org/autoload/commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-org-rich-yank ()

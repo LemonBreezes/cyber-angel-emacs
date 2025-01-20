@@ -1,4 +1,4 @@
-;;; private/debugger/config.el -*- lexical-binding: t; -*-
+;;; cae/debugger/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

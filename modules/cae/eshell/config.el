@@ -1,4 +1,4 @@
-;;; private/eshell/config.el -*- lexical-binding: t; -*-
+;;; cae/eshell/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 

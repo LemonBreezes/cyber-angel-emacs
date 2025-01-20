@@ -1,4 +1,4 @@
-;;; private/debugger/autoload.el -*- lexical-binding: t; -*-
+;;; cae/debugger/autoload.el -*- lexical-binding: t; -*-
 
 (eval-when-compile (require 'hydra nil t))
 

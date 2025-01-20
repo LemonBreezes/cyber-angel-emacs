@@ -1,4 +1,4 @@
-;;; private/exwm/config.el -*- lexical-binding: t; -*-
+;;; cae/exwm/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 
