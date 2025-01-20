@@ -37,6 +37,9 @@ normally have their errors suppressed."
 
 ;;; Debug transient
 
+(require 'transient)
+(require 'debug)
+
 (transient-define-suffix cae-debug-set-debug-on-message ()
   "Set `debug-on-message' to a regular expression."
   :description (lambda ()
