@@ -4,10 +4,10 @@
 ;;;###autoload (autoload 'cae-flames-of-freedom-quit "cae/misc-applications/autoload/flames-of-freedom" nil t)
 
 (cae-define-launcher
-  cae-flames-of-freedom
-  :launch-fn #'flames-of-freedom-default
-  :workspace-name cae-flames-of-freedom-workspace-name
-  :cleanup-fn cae-flames-of-freedom-quit)
+ cae-flames-of-freedom
+ :launch-fn #'flames-of-freedom-default
+ :workspace-name cae-flames-of-freedom-workspace-name
+ :cleanup-fn cae-flames-of-freedom-quit)
 
 (defun cae-flames-of-freedom-quit ()
   (if (modulep! :ui workspaces)
