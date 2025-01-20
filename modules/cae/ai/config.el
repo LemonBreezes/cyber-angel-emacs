@@ -40,7 +40,8 @@
           llm-warn-on-nonfree nil)))
 
 (use-package! aider
-  :defer t)
+  :defer t :init
+  (defalias 'aider-read-string #'aider-plain-read-string))
 
 (use-package! magit-gptcommit
   :after gptel magit
