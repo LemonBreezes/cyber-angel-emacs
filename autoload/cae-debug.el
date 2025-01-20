@@ -95,8 +95,6 @@ normally have their errors suppressed."
 ;;;###autoload (autoload 'cae-debug-transient "autoload/cae-debug" nil t)
 (transient-define-prefix cae-debug-transient ()
   "Set and toggle debugging options."
-  (interactive)
-  (require 'debug)
   ["Debugging Options"
    ("m" cae-debug-set-debug-on-message)
    ("e" cae-debug-toggle-debug-on-error)
