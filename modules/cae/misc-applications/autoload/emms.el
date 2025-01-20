@@ -1,4 +1,4 @@
-;;; private/emms/autoload/emms.el -*- lexical-binding: t; -*-
+;;; cae/emms/autoload/emms.el -*- lexical-binding: t; -*-
 
 (require 'transient)
 
