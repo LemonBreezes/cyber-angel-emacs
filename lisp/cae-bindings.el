@@ -360,15 +360,15 @@
         :desc "Find directory" "d" #'consult-dir))
       ((:when (modulep! :cae notifications)
         :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications))
-       (:when (and (modulep! :term eshell) (modulep! :ui workspaces))
-        :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
-       (:when (and (modulep! :term vterm) (modulep! :ui workspaces))
-        :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace)
-       (:prefix "TAB"
-        (:when (modulep! :ui workspaces)
-         :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
-         :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
-         :desc "Switch to final workspace" "=" #'+workspace/switch-to-final)))
+      (:when (and (modulep! :term eshell) (modulep! :ui workspaces))
+       :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
+      (:when (and (modulep! :term vterm) (modulep! :ui workspaces))
+       :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace)
+      (:prefix "TAB"
+       (:when (modulep! :ui workspaces)
+        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
+        :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
+        :desc "Switch to final workspace" "=" #'+workspace/switch-to-final)))
 (after! which-key
   (setq which-key-replacement-alist
         (cl-remove-if (lambda (x)
