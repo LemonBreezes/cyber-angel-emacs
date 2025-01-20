@@ -1,4 +1,4 @@
-;;; private/modeline/config.el -*- lexical-binding: t; -*-
+;;; cae/modeline/config.el -*- lexical-binding: t; -*-
 
 (require 'cae-lib)
 
