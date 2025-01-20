@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/trashed.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/trashed.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-trashed-revert-buffer-a (oldfun)
