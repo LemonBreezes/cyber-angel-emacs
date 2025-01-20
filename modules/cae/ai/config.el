@@ -26,6 +26,7 @@
             "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
             ;;"--encoding" "latin-1"
             "--cache-prompts"
+            "--chat-language" "English"
             )))
   (defvar llm-refactoring-provider nil)
   (after! llm
