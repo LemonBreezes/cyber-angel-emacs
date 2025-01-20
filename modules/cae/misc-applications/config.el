@@ -124,7 +124,15 @@
         :n "c" #'noaa-new-location))
 
 (use-package! hackernews
-  :defer t)
+  :defer t :init
+  (map! :map cae-misc-applications-random-map
+        "h" #'hackernews)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
+      "h" "Hacker News"))
+  :config
+  (map! :map hackernews-mode-map
+        "o" #'link-hint-open-link))
 
 ;; Currently I just use this package's commands with `M-x' since there are so
 ;; many of them.
