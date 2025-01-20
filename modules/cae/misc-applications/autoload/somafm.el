@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/somafm.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/somafm.el -*- lexical-binding: t; -*-
 
 (eval-when-compile (require 'hydra nil t))
 
