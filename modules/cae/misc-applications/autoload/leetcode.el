@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/leetcode.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/leetcode.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-leetcode ()
