@@ -4,7 +4,7 @@
 ;;;###autoload (autoload 'cae-fireplace-quit "cae/misc-applications/autoload/fireplace" nil t)
 
 (cae-define-launcher
-  cae-fireplace
-  :launch-fn #'fireplace
-  :buffer-name fireplace-buffer-name
-  :workspace-name cae-fireplace-workspace-name)
+ cae-fireplace
+ :launch-fn #'fireplace
+ :buffer-name fireplace-buffer-name
+ :workspace-name cae-fireplace-workspace-name)
