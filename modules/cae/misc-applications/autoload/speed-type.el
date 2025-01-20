@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/speed-type.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/speed-type.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-speed-type-text "cae/misc-applications/autoload/speed-type" nil t)
 ;;;###autoload (autoload 'cae-speed-type-text-quit "cae/misc-applications/autoload/speed-type" nil t)
