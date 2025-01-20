@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/tetris.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/tetris.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-tetris "cae/misc-applications/autoload/tetris" nil t)
 ;;;###autoload (autoload 'cae-tetris-quit "cae/misc-applications/autoload/tetris" nil t)
