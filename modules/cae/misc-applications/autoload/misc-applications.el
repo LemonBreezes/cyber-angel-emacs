@@ -15,6 +15,7 @@
               evil-operator-state-cursor '(hbar . 0)
               evil-emacs-state-cursor '(hbar . 0)))
 
+;;;###autoload
 (cl-defmacro cae-define-launcher (name &key
                                        launch-fn
                                        buffer-name
@@ -70,5 +71,4 @@ SAVE-WINDOW-CONFIG determines whether to save and restore window configurations.
              (when ,old-wconf-var
                (set-window-configuration ,old-wconf-var))))
          (when (and ,buffer-name (get-buffer ,buffer-name))
-           (kill-buffer ,buffer-name))
-         ))))
+           (kill-buffer ,buffer-name))))))
