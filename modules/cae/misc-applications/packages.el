@@ -14,6 +14,7 @@
                            :files ("*"))) ; Have to get all files to fix error.
 (package! leetcode)
 (package! noaa)
+(package! hackernews)
 
 ;; System
 (when (eq system-type 'gnu/linux)
