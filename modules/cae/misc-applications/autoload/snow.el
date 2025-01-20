@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/snow.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/snow.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-snow "cae/misc-applications/autoload/snow" nil t)
 ;;;###autoload (autoload 'cae-snow-quit "cae/misc-applications/autoload/snow" nil t)
