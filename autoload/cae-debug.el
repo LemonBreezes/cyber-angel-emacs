@@ -34,3 +34,5 @@ normally have their errors suppressed."
   (interactive "sSearch string: ")
   (let ((buffers (dabbrev--select-buffers)))
     (multi-occur buffers search-string)))
+
+;;; Debug transient
