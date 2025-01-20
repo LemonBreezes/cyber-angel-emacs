@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/flames-of-freedom.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/flames-of-freedom.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-flames-of-freedom "cae/misc-applications/autoload/flames-of-freedom" nil t)
 ;;;###autoload (autoload 'cae-flames-of-freedom-quit "cae/misc-applications/autoload/flames-of-freedom" nil t)
