@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/zone.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/zone.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun cae-zone-pgm-md5 ()
