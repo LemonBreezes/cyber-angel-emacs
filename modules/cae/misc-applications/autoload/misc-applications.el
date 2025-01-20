@@ -61,6 +61,8 @@ SAVE-WINDOW-CONFIG determines whether to save and restore window configurations.
            (funcall ,setup-fn)))
        (defun ,quit-fn-name ()
          (interactive)
+         (when ,cleanup-fn
+           (funcall ,cleanup-fn))
          (if (and ,use-workspace (modulep! :ui workspaces))
              (when (+workspace-exists-p ,workspace-name)
                (+workspace/kill ,workspace-name))
@@ -69,5 +71,4 @@ SAVE-WINDOW-CONFIG determines whether to save and restore window configurations.
                (set-window-configuration ,old-wconf-var))))
          (when (and ,buffer-name (get-buffer ,buffer-name))
            (kill-buffer ,buffer-name))
-         (when ,cleanup-fn
-           (funcall ,cleanup-fn))))))
+         ))))
