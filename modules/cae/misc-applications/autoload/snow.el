@@ -1,3 +1,6 @@
+;;;###autoload (autoload 'cae-snow "cae/misc-applications/autoload/snow" nil t)
+;;;###autoload (autoload 'cae-snow-quit "cae/misc-applications/autoload/snow" nil t)
+
 ;;; private/misc-applications/autoload/snow.el -*- lexical-binding: t; -*-
 
 (cae-define-launcher
