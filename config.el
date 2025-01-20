@@ -375,6 +375,8 @@
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
         :select nil :quit t :ttl nil))
     (after! magit ; Override Doom's popup rule for `transient'.
+      ;; This is so that the `transient' popup takes up the entire horizontal
+      ;; width of the window when I use `aider'.
       (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl nil
         :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
