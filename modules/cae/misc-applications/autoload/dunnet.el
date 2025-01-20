@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/dunnet.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/dunnet.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-dunnet "cae/misc-applications/autoload/dunnet" nil t)
 ;;;###autoload (autoload 'cae-dunnet-quit "cae/misc-applications/autoload/dunnet" nil t)
