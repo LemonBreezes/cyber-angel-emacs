@@ -379,6 +379,7 @@
 (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
 (which-key-add-keymap-based-replacements help-map "dC" "Open Evil Collection config")
 
+(map! :map help-map "C-r" #'describe-repeat-maps)
 (when (modulep! :completion vertico)
   (map! :map help-map "TAB" #'consult-info))
 
@@ -392,6 +393,7 @@
 ;; Doom Emacs unbinds the tutorial keybinding.
 (define-key help-map (kbd "M-t") #'help-with-tutorial)
 
+
 ;;; Other modules
 
 ;; This is also bound for Evil in `cae-evil.el'.
