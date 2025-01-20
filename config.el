@@ -355,7 +355,8 @@
         ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size
          cae-popup-shrink-to-fit)
         ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
-        ("\\`\\*notmuch-hello"  :ignore)
+        ("\\`\\*notmuch-hello" :ignore t)
+        ("\\`\\*hackernews top stories\\*'" :ignore t)
         ("\\`\\*gud-" :ttl nil :size 0.35)
         ("embrace-help" :side top :size +popup-shrink-to-fit)
         ("*helm " :ignore t)
