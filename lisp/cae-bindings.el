@@ -322,6 +322,7 @@
   ;; set before loading `vertico-posframe'.
   (setq vertico-posframe-vertico-multiform-key "M-P"))
 
+
 ;;; Leader keybindings
 (autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
@@ -368,6 +369,7 @@
                                (string-suffix-p "0\\\\'" (caar x)))))
                       which-key-replacement-alist)))
 
+
 ;;; Help keybindings
 (map! :map help-map
       (:prefix "d"
