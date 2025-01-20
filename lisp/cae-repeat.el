@@ -5,7 +5,6 @@
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
   (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
-  (map! :map help-map "C-r" #'describe-repeat-maps)
   (setq repeat-exit-key "TAB"
         repeat-check-key t
         repeat-echo-mode-line-string nil)
