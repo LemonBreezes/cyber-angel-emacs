@@ -13,14 +13,14 @@
               evil-emacs-state-cursor '(hbar . 0)))
 
 (defmacro cae-define-launcher (name &key
-                             launch-fn
-                             buffer-name
-                             workspace-name
-                             quit-fn
-                             setup-fn
-                             cleanup-fn
-                             (use-workspace t)
-                             (save-window-config t))
+                                    launch-fn
+                                    buffer-name
+                                    workspace-name
+                                    quit-fn
+                                    setup-fn
+                                    cleanup-fn
+                                    (use-workspace t)
+                                    (save-window-config t))
   "Define launcher and quit functions for applications.
 
 NAME is the base name for the functions.
