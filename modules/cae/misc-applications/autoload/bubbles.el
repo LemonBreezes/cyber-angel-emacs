@@ -1,4 +1,4 @@
-;;; private/misc-applications/autoload/bubbles.el -*- lexical-binding: t; -*-
+;;; cae/misc-applications/autoload/bubbles.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload 'cae-bubbles "cae/misc-applications/autoload/bubbles" nil t)
 ;;;###autoload (autoload 'cae-bubbles-quit "cae/misc-applications/autoload/bubbles" nil t)
