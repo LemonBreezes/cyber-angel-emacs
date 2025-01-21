@@ -51,17 +51,17 @@
   (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox)
   (add-hook 'doom-switch-buffer-hook #'exwm-firefox-evil-activate-if-firefox)
 
-  (setq-hook! 'exwm-firefox-evil-mode-hook bookmark-make-record-function #'+exwm-firefox-bookmark--make)
+  (setq-hook! 'exwm-firefox-evil-mode-hook bookmark-make-record-function #'cae-exwm-firefox-bookmark--make)
 
   ;; Automatically reenable `evil-normal-state' after following a link.
   (advice-add #'exwm-firefox-core-focus-search-bar
               :after
-              (defun +exwm-firefox-core-focus-search-bar-a ()
+              (defun cae-exwm-firefox-core-focus-search-bar-a ()
                 (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h)))
   (advice-add #'exwm-firefox-core-tab-new
               :after
-              (defun +exwm-firefox-core-tab-new-a ()
-                (add-hook 'exwm-update-title-hook #'+exwm-firefox-core-focus-search-bar-a-h)))
+              (defun cae-exwm-firefox-core-tab-new-a ()
+                (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-focus-search-bar-a-h)))
 
   (map! :map exwm-firefox-evil-mode-map
         :n "f"  #'exwm-firefox-core-hint-links ; Requires Link Hints add-on.
