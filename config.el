@@ -1634,13 +1634,18 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
-              '(snake speed-type tetris bubbles dunnet autotetris klondike)
-              '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-                zone-nyan selectric)
-              '(lorem-ipsum password-generator uuidgen)
-              '(leetcode)
-              '(alarm pomm debbugs)))
+       (nconc
+        ;; System
+        '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
+        ;; Games
+        '(snake speed-type tetris bubbles dunnet autotetris klondike)
+        ;; Eye candy
+        '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
+          zone-nyan selectric)
+        ;; Insert
+        '(lorem-ipsum password-generator uuidgen)
+        ;; Random apps
+        '(leetcode pomm debbugs)))
    ,@(when (modulep! :editor multiple-cursors)
        (if (modulep! :editor evil)
            '(evil-multiedit evil-mc)
