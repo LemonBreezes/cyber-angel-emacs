@@ -157,3 +157,7 @@
         "C-l" #'chatgpt-shell-clear-buffer
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
   (advice-add #'shell-maker-welcome-message :override #'ignore))
+
+(use-package! gptel
+  :defer t :config
+  (evil-set-initial-state #'gptel-context-buffer-mode 'emacs))
