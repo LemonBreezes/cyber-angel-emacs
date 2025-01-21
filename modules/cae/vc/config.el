@@ -44,7 +44,7 @@
             ;; progress from the modeline. One alternative is setting
             ;; `forge--mode-line-buffer' every time the new Magit buffer is
             ;; created in that repo.
-            :g "q" #'magit-mode-bury-buffer)
+            :nvg "q" #'magit-mode-bury-buffer)
       (after! consult
         (add-to-list 'consult-buffer-filter "\\`magit\\(?:-[a-z]+\\)?:")
         (add-to-list 'consult-buffer-filter "^\\*forge\\(?:-[a-z]+\\)"))
