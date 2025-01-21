@@ -1591,8 +1591,10 @@
                (modulep! :cae helm))
        '(async helm-lib helm-multi-match helm-source helm-core
          helm-global-bindings helm))
+   ,@(when (modulep! :app rss)
+       '(elfeed))
    ,@(when (modulep! :cae misc-applications) ; music apps
-       '(empv mpc somafm emms helm-emms))
+       '(emms elfeed-tube empv mpc somafm helm-emms lyrics-fetcher))
    ,@(when (modulep! :cae ai)
        '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
    ,@(when (modulep! :tools direnv)
@@ -1619,8 +1621,6 @@
    ,@(when (and (modulep! :ui treemacs +lsp)
                 (not (modulep! :tools lsp +eglot)))
        '(treemacs-lsp))
-   ,@(when (modulep! :app rss)
-       '(elfeed))
    ,@(when (modulep! :app rss +org)
        '(elfeed-org))
    ,@(when (and (modulep! :completion vertico)
