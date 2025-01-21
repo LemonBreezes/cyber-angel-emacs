@@ -141,7 +141,7 @@ It is meant to be used as a `post-gc-hook'."
 (defalias 'oddp #'cl-oddp)
 
 ;; This is for backwards compatibility with some of my old bookmarks.
-(defalias #'+exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
+(defalias #'cae-exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
 (defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
 
 ;; For some reason I got a void variable error in `helm-system-packages' for
