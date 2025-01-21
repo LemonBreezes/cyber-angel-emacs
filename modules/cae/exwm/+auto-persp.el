@@ -171,7 +171,7 @@ buffers of that class."
                         :after-match #'cae-exwm-persp--after-match
                         :get-name #'cae-exwm-persp--get-name))
 
-(unless (featurep '+exwm-auto-persp)
+(unless (featurep 'cae-exwm-auto-persp)
   (cae-exwm-reload-workspaces))
 
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
@@ -192,4 +192,4 @@ buffers of that class."
 
 (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
 
-(provide '+exwm-auto-persp)
+(provide 'cae-exwm-auto-persp)
