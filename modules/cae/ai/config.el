@@ -160,5 +160,11 @@
 
 (use-package! gptel
   :defer t :config
-  (after! evil
-    (evil-set-initial-state #'gptel-context-buffer-mode 'emacs)))
+  (after! gptel-context
+    (map! :map gptel-context-buffer-mode-map
+          :n "q" #'gptel-context-quit
+          :n "n" #'gptel-context-next
+          :n "p" #'gptel-context-previous
+          :n "d" #'gptel-context-flag-deletion
+          :n "RET" #'gptel-context-visit))
+  )
