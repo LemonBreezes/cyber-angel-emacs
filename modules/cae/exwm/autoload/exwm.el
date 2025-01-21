@@ -1,11 +1,5 @@
 ;;; cae/exwm/autoload/evil.el -*- lexical-binding: t; -*-
 
-(defvar cae-exwm-refocus-application--message "")
-(defvar cae-exwm-refocus-application--delays '(0.015 0.03))
-(defvar cae-exwm-refocus-application--timer nil)
-(defvar cae-exwm-refocus-application--last-time 0)
-(defvar cae-exwm-refocus-application--last-state nil)
-
 (defvar cae-exwm-vanilla-emacs-config-dir
   (concat doom-user-dir "vanilla-emacs-configs/"))
 (defvar cae-exwm-vanilla-emacs--config-history nil)
