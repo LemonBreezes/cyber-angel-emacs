@@ -3,13 +3,13 @@
 ;; I wrote this code many years ago but I found it in one of my old archives and
 ;; it still works just fine.
 
-(defvar +exwm-workspaces ()
+(defvar cae-exwm-workspaces ()
   "The list of EXWM workspaces created up to now.")
 
-(defvar +exwm-floating-apps '("..." "virtualbox" "discord" "main.py" "setup.tmp")
+(defvar cae-exwm-floating-apps '("..." "virtualbox" "discord" "main.py" "setup.tmp")
   "A list of class-names for EXWM applications which should stay floating.")
 
-(defvar +exwm-workspace-name-replacements
+(defvar cae-exwm-workspace-name-replacements
   '(("google-chrome-unstable" . "Chrome")
     ("chromium-browser" . "Chrome")
     ("chromium" . "Chrome")
@@ -63,31 +63,31 @@
 of the corresponding workspace that will be created.")
 
 (defun exwm--disable-floating ()
-  "Tile the current application unless its class is in `+exwm-floating-apps'."
+  "Tile the current application unless its class is in `cae-exwm-floating-apps'."
   (unless (or (not exwm--floating-frame)
-              (member exwm-class-name +exwm-floating-apps))
+              (member exwm-class-name cae-exwm-floating-apps))
     (exwm-floating--unset-floating exwm--id)))
 
-(defun +exwm-get-workspace-name (buffer)
+(defun cae-exwm-get-workspace-name (buffer)
   "Get the name of the workspace assigned to the current buffer, or
 nil if its not an EXWM buffer."
   (let ((class (buffer-local-value 'exwm-class-name buffer)))
-    (alist-get class +exwm-workspace-name-replacements
+    (alist-get class cae-exwm-workspace-name-replacements
                class nil #'cl-equalp)))
 
-(defun +exwm-persp--after-match (buffer &rest _)
+(defun cae-exwm-persp--after-match (buffer &rest _)
   "Creates workspace for a new EXWM buffer and switches to that workspace"
   (let* ((buffer (alist-get 'buffer state))
-         (application-name (+exwm-get-workspace-name buffer)))
+         (application-name (cae-exwm-get-workspace-name buffer)))
     (when (minibufferp nil t)
       (minibuffer-keyboard-quit))
     (when (not (string= application-name (+workspace-current-name)))
       (persp-remove-buffer buffer))
-    (cl-pushnew application-name +exwm-workspaces :test #'string=)
+    (cl-pushnew application-name cae-exwm-workspaces :test #'string=)
     (+workspace-switch application-name t)
     (+workspace/display)
     (when (-some->> (doom-visible-buffers)
-            (--first (string= (+exwm-get-workspace-name it) application-name))
+            (--first (string= (cae-exwm-get-workspace-name it) application-name))
             (get-buffer-window)
             (select-window))
       (switch-to-buffer buffer))
@@ -97,25 +97,25 @@ nil if its not an EXWM buffer."
       (switch-to-buffer buffer))
     (delete-other-windows)))
 
-(defun +exwm-persp--get-name (state)
+(defun cae-exwm-persp--get-name (state)
   "Gets the name of our new EXWM workspace."
   (setf (alist-get 'persp-name state)
-        (+exwm-get-workspace-name (alist-get 'buffer state)))
+        (cae-exwm-get-workspace-name (alist-get 'buffer state)))
   state)
 
-(defun +exwm-persp--predicate (buffer &optional state)
+(defun cae-exwm-persp--predicate (buffer &optional state)
   "Determines whether to create a workspace for this new EXWM buffer."
-  (and (stringp (+exwm-get-workspace-name buffer))
+  (and (stringp (cae-exwm-get-workspace-name buffer))
        (not (and exwm--floating-frame
                  (cl-member (buffer-local-value 'exwm-class-name buffer)
-                            +exwm-floating-apps
+                            cae-exwm-floating-apps
                             :test #'cl-equalp)))
        (or state t)))
 
-(defun +exwm-persp--focus-workspace-app (&rest _)
+(defun cae-exwm-persp--focus-workspace-app (&rest _)
   "Focuses the EXWM application assigned to our workspace, if any."
   (when (and (cl-member (+workspace-current-name)
-                        +exwm-workspaces
+                        cae-exwm-workspaces
                         :test #'cl-equalp)
              (or (not (boundp 'org-capture-mode))
                  (--none? (and (bufferp (window-buffer it))
@@ -125,9 +125,9 @@ nil if its not an EXWM buffer."
                                          (+popup-windows))
                                     (doom-visible-windows)))))
     (let ((app-buffer
-           (--first (and (cl-equalp (+exwm-get-workspace-name it)
+           (--first (and (cl-equalp (cae-exwm-get-workspace-name it)
                                     (+workspace-current-name))
-                         (string= (+exwm-get-workspace-name it)
+                         (string= (cae-exwm-get-workspace-name it)
                                   (persp-name (get-current-persp))))
                     (cl-union (+workspace-buffer-list)
                               (buffer-list)))))
@@ -137,18 +137,18 @@ nil if its not an EXWM buffer."
           (other-window 1))
         (switch-to-buffer app-buffer)))))
 
-(defun +exwm-persp-cleanup-workspace ()
+(defun cae-exwm-persp-cleanup-workspace ()
   "Deletes the current EXWM workspace if it has no more EXWM
 buffers of that class."
   (when-let* ((exwm-workspace-p (cl-member (+workspace-current-name)
-                                          +exwm-workspaces
+                                          cae-exwm-workspaces
                                           :test #'cl-equalp))
-             (workspace (+exwm-get-workspace-name (current-buffer))))
+             (workspace (cae-exwm-get-workspace-name (current-buffer))))
     (when (persp-p (persp-get-by-name workspace))
       (let ((buffers
              (--filter (and (buffer-live-p it)
                             (not (eq it (current-buffer)))
-                            (string= (+exwm-get-workspace-name it) workspace))
+                            (string= (cae-exwm-get-workspace-name it) workspace))
                        (persp-buffers (persp-get-by-name workspace)))))
         (unless buffers
           (+workspace-kill (+workspace-current))
@@ -157,7 +157,7 @@ buffers of that class."
 
 (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
 
-(defun +exwm-reload-workspaces ()
+(defun cae-exwm-reload-workspaces ()
   "Reloads the EXWM workspaces."
   (interactive)
   (persp-def-auto-persp "EXWM"
@@ -167,29 +167,29 @@ buffers of that class."
                                    (persp-add-buffer-on-find-file nil)
                                    persp-add-buffer-on-after-change-major-mode)
                         :switch 'window
-                        :predicate #'+exwm-persp--predicate
-                        :after-match #'+exwm-persp--after-match
-                        :get-name #'+exwm-persp--get-name))
+                        :predicate #'cae-exwm-persp--predicate
+                        :after-match #'cae-exwm-persp--after-match
+                        :get-name #'cae-exwm-persp--get-name))
 
-(unless (featurep '+exwm-auto-persp)
-  (+exwm-reload-workspaces))
+(unless (featurep 'cae-exwm-auto-persp)
+  (cae-exwm-reload-workspaces))
 
-(advice-add #'+workspace-switch :after #'+exwm-persp--focus-workspace-app)
+(advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
 
-(defadvice! +exwm-browse-url-generic-a (&rest _)
+(defadvice! cae-exwm-browse-url-generic-a (&rest _)
   :before #'browse-url-generic
   (when-let* ((workspace
               (alist-get (string-join
                           (cl-find-if (lambda (l)
                                         (setq l (string-join l "-"))
-                                        (alist-get l +exwm-workspace-name-replacements nil nil #'cl-equalp))
+                                        (alist-get l cae-exwm-workspace-name-replacements nil nil #'cl-equalp))
                                       (nreverse (cdr (-inits (string-split (file-name-base browse-url-generic-program) "-")))))
                           "-")
-                         +exwm-workspace-name-replacements nil nil #'cl-equalp)))
+                         cae-exwm-workspace-name-replacements nil nil #'cl-equalp)))
     (+workspace-switch workspace t)
     (+workspace/display)))
-(advice-add #'consult-gh-embark-open-in-browser :before #'+exwm-browse-url-generic-a)
+(advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
 
-(add-hook 'kill-buffer-hook #'+exwm-persp-cleanup-workspace)
+(add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
 
-(provide '+exwm-auto-persp)
+(provide 'cae-exwm-auto-persp)
