@@ -160,4 +160,5 @@
 
 (use-package! gptel
   :defer t :config
-  (evil-set-initial-state #'gptel-context-buffer-mode 'emacs))
+  (after! evil
+    (evil-set-initial-state #'gptel-context-buffer-mode 'emacs)))
