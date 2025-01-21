@@ -41,7 +41,7 @@
 
 (use-package! aider
   :defer t :init
-  (defalias 'aider-read-string #'aider-plain-read-string))
+  (defalias 'aider-read-string 'aider-plain-read-string))
 
 (use-package! magit-gptcommit
   :after gptel magit
