@@ -13,7 +13,6 @@ switches pages."
   (interactive)
   (exwm-input--fake-key ?\M-j)
   (exwm-evil-insert)
-  (+exwm-refocus-application)
   (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
@@ -22,29 +21,27 @@ switches pages."
   (interactive)
   (exwm-input--fake-key ?\M-l)
   (exwm-evil-insert)
-  (+exwm-refocus-application)
   (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
-(defun +exwm-firefox-core-cancel ()
+(defun cae-exwm-firefox-core-cancel ()
   "General cancel action."
   (interactive)
-  (exwm-input--fake-key 'escape)
-  (+exwm-refocus-application))
+  (exwm-input--fake-key 'escape))
 
 ;;;###autoload
-(defun +exwm-firefox-core-focus-search-bar-a-h ()
+(defun cae-exwm-firefox-core-focus-search-bar-a-h ()
   "Helper function to enter normal state after the next browser
 page switch."
-  (+exwm-firefox-core-focus-search-bar-a)
-  (remove-hook 'exwm-update-title-hook #'+exwm-firefox-core-focus-search-bar-a-h))
+  (cae-exwm-firefox-core-focus-search-bar-a)
+  (remove-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-focus-search-bar-a-h))
 
 ;; These bookmark functions are too delicate as they involve clicking on an
 ;; empty space in the browser window. The spot used may not be empty for every
 ;; window.
 
 ;; ;;;###autoload
-;; (defun +exwm-firefox-core-focus-bookmarks-bar (arg)
+;; (defun cae-exwm-firefox-core-focus-bookmarks-bar (arg)
 ;;   "Focuses the bookmarks bar so that you can use TAB and RET to
 ;; open a bookmark."
 ;;   (interactive "P")
@@ -53,22 +50,22 @@ page switch."
 ;;       (list (mouse-absolute-pixel-position)
 ;;             (window-pixel-width) (window-pixel-height))
 ;;     ;; All that matters is that this spot be blank in the application.
-;;     (+exwm-do-mouse-click (floor (* dim-x (/ 1.0 1000)))
+;;     (cae-exwm-do-mouse-click (floor (* dim-x (/ 1.0 1000)))
 ;;                           (floor (* dim-y (/ 120.0 1410)))))
 ;;   (exwm-input--fake-key 'f6)
 ;;   (exwm-input--fake-key 'f6)
 ;;   (exwm-input--fake-key 'f6)
-;;   (+exwm-refocus-application))
+;;   (cae-exwm-refocus-application))
 
 ;; ;;;###autoload
-;; (defun +exwm-firefox-core-open-bookmark-in-new-tab (arg)
+;; (defun cae-exwm-firefox-core-open-bookmark-in-new-tab (arg)
 ;;   "Opens a new tab and focuses the bookmarks bar so that you can
 ;; use TAB and RET to open a bookmark."
 ;;   (interactive "p")
 ;;   (exwm-firefox-core-tab-new)
-;;   (+exwm-firefox-core-focus-bookmarks-bar))
+;;   (cae-exwm-firefox-core-focus-bookmarks-bar))
 
-(defun +exwm-firefox--current-url ()
+(defun cae-exwm-firefox--current-url ()
   "Get the URL of the currently focused EXWM buffer. Currently only
 works on Chromium with the Add Page URL to Title extension or in Firefox
 with the KeePass Helper - URL in title add-on."
@@ -79,7 +76,7 @@ with the KeePass Helper - URL in title add-on."
       (error "No URL found in EXWM web browser buffer"))
     (match-string-no-properties 1 title)))
 
-(defun +exwm-firefox--current-title ()
+(defun cae-exwm-firefox--current-title ()
   "Get the title of the currently focused EXWM buffer. Currently only works
 on Chromium with the Add Page URL to Title extension or in Firefox with
 the Add URL to Window Title (Advanced KeePass Usage) in title add-on
@@ -92,7 +89,7 @@ configured to show the full URL."
     (string-trim (match-string-no-properties 1 title))))
 
 ;;;###autoload
-(defun +exwm-firefox-bookmark-handler (bookmark)
+(defun cae-exwm-firefox-bookmark-handler (bookmark)
   "Handler for EXWM Firefox bookmarks."
   (require 'ffap)
   (let ((url (bookmark-prop-get bookmark 'filename)))
@@ -101,13 +98,13 @@ configured to show the full URL."
       (message "Bookmark does not have a valid FILENAME property."))))
 
 ;;;###autoload
-(defun +exwm-firefox-bookmark--make ()
+(defun cae-exwm-firefox-bookmark--make ()
   "Make bookmarks for web pages. Currently only works on Chromium
 with the Add Page URL to Title extension."
-  (let ((title (+exwm-firefox--current-title))
-        (url (+exwm-firefox--current-url)))
+  (let ((title (cae-exwm-firefox--current-title))
+        (url (cae-exwm-firefox--current-url)))
     `((filename . ,url)
       (title . ,title)
       (time . ,(current-time-string))
-      (handler . +exwm-firefox-bookmark-handler)
+      (handler . cae-exwm-firefox-bookmark-handler)
       (defaults . (,title)))))
