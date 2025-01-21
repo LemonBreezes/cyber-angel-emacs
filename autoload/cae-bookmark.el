@@ -145,6 +145,6 @@
                 (not (directory-empty-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")))
            (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/"))
           ((and (file-exists-p (format "/mnt/c/Users/%s/Sync/" username))
-                  (not (directory-empty-p (format "/mnt/c/Users/%s/Sync/" username))))
+                (not (directory-empty-p (format "/mnt/c/Users/%s/Sync/" username))))
            (dired (format "/mnt/c/Users/%s/Sync/" username)))
           (t (dired "~/Sync/")))))
