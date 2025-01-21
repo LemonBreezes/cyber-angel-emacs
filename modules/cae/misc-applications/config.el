@@ -282,9 +282,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-system-map
       "p" "List system processes"))
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'proced-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'proced-mode evil-snipe-disabled-modes))
   (add-hook 'proced-mode-hook #'cae-misc-applications-hide-cursor-h)
   :config
   (setq proced-enable-color-flag t
@@ -385,9 +384,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "b" "Bubbles"))
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'bubbles-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'bubbles-mode evil-snipe-disabled-modes))
   :config
   (map! :map bubbles-mode-map
         :ng "q" #'cae-bubbles-quit
@@ -415,9 +413,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "c" "Chess"))
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))))
+  (after! evil-snipe
+    (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes)))
 
 (use-package! minesweeper
   :defer t :init
@@ -428,9 +425,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "m" "Minesweeper"))
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes))
   :config
   (map! :map minesweeper-mode-map
         :n "RET" #'minesweeper-choose
@@ -447,9 +443,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "d" "Dunnet"))
-  (when (modulep! :editor evil)
-    (after! evil
-      (evil-set-initial-state #'dun-mode 'insert)))
+  (after! evil
+    (evil-set-initial-state #'dun-mode 'insert))
   :config
   (map! :map dun-mode-map
         "C-c C-k" #'cae-dunnet-quit
@@ -470,9 +465,8 @@
       (when (not (listp global-corfu-modes))
         (setq global-corfu-modes (list t)))
       (add-to-list 'global-corfu-modes '(not speed-type-mode))))
-  (when (modulep! :editor evil)
-    (after! evil
-      (evil-set-initial-state #'speed-type-mode 'insert)))
+  (after! evil
+    (evil-set-initial-state #'speed-type-mode 'insert))
   (add-hook 'speed-type-mode-hook
             (defun cae-speed-type-disabe-show-paren-mode-h ()
               (show-paren-local-mode -1)))
@@ -528,9 +522,8 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-eyecandy-map
       "f" "Fireplace"))
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'fireplace-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'fireplace-mode evil-snipe-disabled-modes))
   :config
   (map! :map fireplace-mode-map
         :ng "q" #'cae-fireplace-quit
@@ -643,9 +636,8 @@
     (which-key-add-keymap-based-replacements cae-misc-applications-music-map
       "s" "SomaFM"))
   (add-hook 'somafm-mode-hook #'cae-misc-applications-hide-cursor-h)
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'somafm-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'somafm-mode evil-snipe-disabled-modes))
   :config
   (map! :map somafm-mode-map
         :ng "q" #'quit-window
@@ -657,9 +649,8 @@
   :defer t :init
   (defvar cae-mpc-workspace-name "*mpc*")
   (defvar cae-mpc--old-wconf nil)
-  (when (modulep! :editor evil)
-    (after! evil-snipe
-      (cl-pushnew #'mpc-mode evil-snipe-disabled-modes)))
+  (after! evil-snipe
+    (cl-pushnew #'mpc-mode evil-snipe-disabled-modes))
   (map! :map cae-misc-applications-music-map
         "c" #'cae-mpc)
   (after! which-key
