@@ -2,7 +2,7 @@
 
 (require 'cae-lib)
 
-(defvar +exwm-enabled-p (and (eq 'x (framep (selected-frame)))
+(defvar cae-exwm-enabled-p (and (eq 'x (framep (selected-frame)))
                              (not (or (getenv "EXWM_RUNNING")
                                       (getenv "RATPOISON")
                                       (getenv "I3SOCK")
@@ -12,12 +12,12 @@
                                       (getenv "WAYLAND_DISPLAY"))))
   "Whether EXWM is enabled.")
 
-(when +exwm-enabled-p
+(when cae-exwm-enabled-p
   ;; Prevent nested Emacs sessions from loading EXWM.
-  (defun +exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
-  (add-hook 'doom-after-init-hook #'+exwm-flag-as-enabled)
+  (defun cae-exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
+  (add-hook 'doom-after-init-hook #'cae-exwm-flag-as-enabled)
 
-  (defun +exwm-rename-buffer-to-title ()
+  (defun cae-exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
                (not (string= "gimp" exwm-instance-name ))
@@ -26,7 +26,7 @@
                                  if (+workspace-contains-buffer-p (current-buffer) workspace)
                                  return t))))
       (exwm-workspace-rename-buffer exwm-title)))
-  (add-hook 'exwm-update-title-hook #'+exwm-rename-buffer-to-title)
+  (add-hook 'exwm-update-title-hook #'cae-exwm-rename-buffer-to-title)
 
   (use-package! exwm
     :config
@@ -130,11 +130,11 @@
     ;; Disable mouse tracking support in LSP and Dap UIs. I don't use them and
     ;; they can cause problems with `repeat-mode'.
     (add-hook! 'repeat-mode-hook
-      (defun +exwm-disable-mouse-tracking-h ()
+      (defun cae-exwm-disable-mouse-tracking-h ()
         (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
         (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
         (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
-        (remove-hook 'repeat-mode-hook #'+exwm-disable-mouse-tracking-h)))
+        (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
     (exwm-enable)
 
@@ -154,10 +154,10 @@
 
     ;; Prevent `window-live-p' and `frame-live-p' from producing errors when
     ;; their argument is nil.
-    (defun +exwm-select-window-a (oldfun window &rest args)
+    (defun cae-exwm-select-window-a (oldfun window &rest args)
       (when window
         (apply oldfun window args)))
-    (advice-add #'select-window :around #'+exwm-select-window-a)
+    (advice-add #'select-window :around #'cae-exwm-select-window-a)
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
@@ -174,12 +174,12 @@
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
-  (defun +exwm-input--translate-a (oldfun &rest args)
+  (defun cae-exwm-input--translate-a (oldfun &rest args)
     (let ((key-translation-map
            (copy-keymap key-translation-map)))
       (define-key key-translation-map [?\C-i] nil)
       (apply oldfun args)))
-  (advice-add #'exwm-input--translate :around #'+exwm-input--translate-a)
+  (advice-add #'exwm-input--translate :around #'cae-exwm-input--translate-a)
 
   ;; See https://github.com/emacs-exwm/exwm/issues/18. Addresses a focus issue
   ;; with EXWM but can cause increased power consumption.
@@ -202,7 +202,7 @@
     (load! "+corfu"))
 
   (when (modulep! :ui workspaces)
-    (unless (featurep '+exwm-auto-persp)
+    (unless (featurep 'cae-exwm-auto-persp)
       (after! (:all exwm dash persp-mode)
         (load! "+auto-persp")))))
 

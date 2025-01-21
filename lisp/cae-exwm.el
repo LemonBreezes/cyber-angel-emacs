@@ -21,9 +21,9 @@
       "s-d" (cae-exwm-app-runner "discord" "Discord")
       "s-p" (cae-exwm-app-runner "pavucontrol" "Pavucontrol")
       "s-s" (cae-exwm-app-runner "signal-desktop" "Signal")
-      "s-e" #'+exwm-open-nested-emacs
-      "s-E" #'+exwm-open-nested-vanilla-emacs
-      "s-D" #'+exwm-open-nested-vanilla-doom-emacs
+      "s-e" #'cae-exwm-open-nested-emacs
+      "s-E" #'cae-exwm-open-nested-vanilla-emacs
+      "s-D" #'cae-exwm-open-nested-vanilla-doom-emacs
       "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
       "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
@@ -44,9 +44,9 @@ _RET_: Kitty      _S-RET_: Eshell
       ("d" ,(cae-exwm-app-runner "discord" "Discord"))
       ("p" ,(cae-exwm-app-runner "pavucontrol" "Pavucontrol"))
       ("s" ,(cae-exwm-app-runner "signal-desktop" "Signal"))
-      ("e" #'+exwm-open-nested-emacs)
-      ("E" #'+exwm-open-nested-vanilla-emacs)
-      ("D" #'+exwm-open-nested-vanilla-doom-emacs)
+      ("e" #'cae-exwm-open-nested-emacs)
+      ("E" #'cae-exwm-open-nested-vanilla-emacs)
+      ("D" #'cae-exwm-open-nested-vanilla-doom-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))
       ("S-RET" #'cae-open-eshell-in-new-workspace)))
 

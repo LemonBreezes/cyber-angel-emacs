@@ -282,7 +282,7 @@ also marks comment with leading whitespace"
   (unless (process-live-p (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp))
     (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
           (start-process workspace nil app)))
-  (+exwm-persp--focus-workspace-app))
+  (cae-exwm-persp--focus-workspace-app))
 
 (defvar cae-yank-point nil)
 (defvar cae-yank-point-overlays nil)
