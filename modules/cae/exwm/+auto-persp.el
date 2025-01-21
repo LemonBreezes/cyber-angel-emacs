@@ -192,4 +192,4 @@ buffers of that class."
 
 (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
 
-(provide 'cae-exwm-auto-persp)
+(provide '+exwm-auto-persp)
