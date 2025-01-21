@@ -166,5 +166,4 @@
           :n "n" #'gptel-context-next
           :n "p" #'gptel-context-previous
           :n "d" #'gptel-context-flag-deletion
-          :n "RET" #'gptel-context-visit))
-  )
+          :n "RET" #'gptel-context-visit)))
