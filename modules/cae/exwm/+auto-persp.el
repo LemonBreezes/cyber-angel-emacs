@@ -1,4 +1,4 @@
-;;; lisp/exwm-auto-persp.el -*- lexical-binding: t; -*-
+;;; cae/exwm/+auto-persp.el -*- lexical-binding: t; -*-
 
 ;; I wrote this code many years ago but I found it in one of my old archives and
 ;; it still works just fine.
