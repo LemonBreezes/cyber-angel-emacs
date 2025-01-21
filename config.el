@@ -1593,7 +1593,7 @@
          helm-global-bindings helm))
    ,@(when (modulep! :app rss)
        '(elfeed))
-   ,@(when (modulep! :cae misc-applications) ; music apps
+   ,@(when (modulep! :cae misc-applications) ; Music apps
        '(emms elfeed-tube empv mpc somafm helm-emms lyrics-fetcher))
    ,@(when (modulep! :cae ai)
        '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
@@ -1634,7 +1634,7 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc
+       (nconc ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
@@ -1645,7 +1645,7 @@
           zone-nyan zone-pgm-spoopy selectric)
         ;; Insert
         '(lorem-ipsum password-generator uuidgen)
-        ;; Random apps
+        ;; Random
         '(pomm debbugs pomm noaa hackernews leetcode)))
    ,@(when (modulep! :editor multiple-cursors)
        (if (modulep! :editor evil)
