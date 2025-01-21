@@ -125,8 +125,26 @@
                           bookmark-file)))
       (message "No bookmark files found for this project."))))
 
+(defun cae-get-windows-username ()
+  "Extract the Windows username from cmd.exe output in WSL."
+  (let* ((output (shell-command-to-string
+                  "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME%"))
+         ;; Remove carriage returns for consistency
+         (output (replace-regexp-in-string "\r" "" output))
+         ;; Split the output into lines, omitting empty ones
+         (lines (split-string output "\n" t))
+         ;; Get the last non-empty line, assumed to be the username
+         (username (car (last lines))))
+    username))
+
 ;;;###autoload
 (defun cae-bookmark-jump-to-syncthing-directory (_)
-  (if (file-exists-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")
-      (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/")
-    (dired "~/Sync/")))
+  (let ((username (and (file-exists-p "/mnt/c/")
+                       (cae-get-windows-username))))
+    (cond ((and (file-exists-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")
+                (not (directory-empty-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")))
+           (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/"))
+          ((and (file-exists-p (format "/mnt/c/Users/%s/Sync/" username))
+                  (not (directory-empty-p (format "/mnt/c/Users/%s/Sync/" username))))
+           (dired (format "/mnt/c/Users/%s/Sync/" username)))
+          (t (dired "~/Sync/")))))
