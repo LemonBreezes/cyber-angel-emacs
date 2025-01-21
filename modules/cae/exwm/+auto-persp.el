@@ -141,9 +141,9 @@ nil if its not an EXWM buffer."
   "Deletes the current EXWM workspace if it has no more EXWM
 buffers of that class."
   (when-let* ((exwm-workspace-p (cl-member (+workspace-current-name)
-                                          cae-exwm-workspaces
-                                          :test #'cl-equalp))
-             (workspace (cae-exwm-get-workspace-name (current-buffer))))
+                                           cae-exwm-workspaces
+                                           :test #'cl-equalp))
+              (workspace (cae-exwm-get-workspace-name (current-buffer))))
     (when (persp-p (persp-get-by-name workspace))
       (let ((buffers
              (--filter (and (buffer-live-p it)
@@ -179,13 +179,13 @@ buffers of that class."
 (defadvice! cae-exwm-browse-url-generic-a (&rest _)
   :before #'browse-url-generic
   (when-let* ((workspace
-              (alist-get (string-join
-                          (cl-find-if (lambda (l)
-                                        (setq l (string-join l "-"))
-                                        (alist-get l cae-exwm-workspace-name-replacements nil nil #'cl-equalp))
-                                      (nreverse (cdr (-inits (string-split (file-name-base browse-url-generic-program) "-")))))
-                          "-")
-                         cae-exwm-workspace-name-replacements nil nil #'cl-equalp)))
+               (alist-get (string-join
+                           (cl-find-if (lambda (l)
+                                         (setq l (string-join l "-"))
+                                         (alist-get l cae-exwm-workspace-name-replacements nil nil #'cl-equalp))
+                                       (nreverse (cdr (-inits (string-split (file-name-base browse-url-generic-program) "-")))))
+                           "-")
+                          cae-exwm-workspace-name-replacements nil nil #'cl-equalp)))
     (+workspace-switch workspace t)
     (+workspace/display)))
 (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
