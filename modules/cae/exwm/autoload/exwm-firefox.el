@@ -54,8 +54,7 @@ page switch."
 ;;                           (floor (* dim-y (/ 120.0 1410)))))
 ;;   (exwm-input--fake-key 'f6)
 ;;   (exwm-input--fake-key 'f6)
-;;   (exwm-input--fake-key 'f6)
-;;   (cae-exwm-refocus-application))
+;;   (exwm-input--fake-key 'f6))
 
 ;; ;;;###autoload
 ;; (defun cae-exwm-firefox-core-open-bookmark-in-new-tab (arg)
