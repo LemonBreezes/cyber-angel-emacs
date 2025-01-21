@@ -1636,16 +1636,17 @@
    ,@(when (modulep! :cae misc-applications)
        (nconc
         ;; System
-        '(trashed pulseaudio-control disk-usage daemons neato-graph-bar)
+        '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
+          journalctl-mode)
         ;; Games
         '(snake speed-type tetris bubbles dunnet autotetris klondike)
         ;; Eye candy
         '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-          zone-nyan selectric)
+          zone-nyan zone-pgm-spoopy selectric)
         ;; Insert
         '(lorem-ipsum password-generator uuidgen)
         ;; Random apps
-        '(leetcode pomm debbugs)))
+        '(pomm debbugs pomm noaa hackernews leetcode)))
    ,@(when (modulep! :editor multiple-cursors)
        (if (modulep! :editor evil)
            '(evil-multiedit evil-mc)
