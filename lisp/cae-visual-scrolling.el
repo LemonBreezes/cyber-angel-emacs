@@ -3,7 +3,6 @@
 (defun cae-scroll-with-highlight (scroll-fn direction &optional arg)
   "Highlight the appropriate line before calling SCROLL-FN with ARGS.
 DIRECTION should be 'up or 'down."
-  (+log arg)
   (if (or arg
           (cl-some (lambda (x) (and (boundp x) (symbol-value x)))
                    '(executing-kbd-macro)))
