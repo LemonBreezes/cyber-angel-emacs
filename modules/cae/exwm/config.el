@@ -19,7 +19,8 @@
                (not (string= "gimp" exwm-instance-name ))
                (or (persp-contain-buffer-p (current-buffer) (get-current-persp))
                    (not (cl-loop for workspace in (+workspace-list)
-                                 if (+workspace-contains-buffer-p (current-buffer) workspace)
+                                 if (+workspace-contains-buffer-p
+                                     (current-buffer) workspace)
                                  return t))))
       (exwm-workspace-rename-buffer exwm-title)))
   (add-hook 'exwm-update-title-hook #'cae-exwm-rename-buffer-to-title)
@@ -42,8 +43,8 @@
                    ([?\s-r] . exwm-reset)
                    ;; Bind "s-w" to switch workspace interactively.
                    ([?\s-w] . +workspace/switch-to)
-                   ;; Bind "s-&" to launch applications ('M-&' also works if the output
-                   ;; buffer does not bother you).
+                   ;; Bind "s-&" to launch applications ('M-&' also works if the
+                   ;; output buffer does not bother you).
                    ([?\s-&] . (lambda (command)
                                 (interactive (list (read-shell-command "$ ")))
                                 (start-process-shell-command command nil command)))
@@ -71,8 +72,8 @@
                                    (interactive)
                                    (exwm-workspace-switch-create ,i))))
                              (number-sequence 0 9))
-                   ;; Bind "s-&" to launch applications ('M-&' also works if the output
-                   ;; buffer does not bother you).
+                   ;; Bind "s-&" to launch applications ('M-&' also works if the
+                   ;; output buffer does not bother you).
                    ([?\s-&] . (lambda (command)
                                 (interactive (list (read-shell-command "$ ")))
                                 (start-process-shell-command command nil command)))
@@ -111,8 +112,10 @@
     ;; There are two ways to work around this:
     ;; 1. Either do not enable `exwm-xim'
     ;; 2. or compile Emacs `--without-xim'.
-    ;; 3. You can also disable `xim' through `Xresources', though I have not tested this approach.
+    ;; 3. You can also disable `xim' through `Xresources', though I have not
+    ;;    tested this approach.
     ;; (use-package! exwm-xim
+
     ;;   :config
     ;;   ;; These variables are required for X programs to connect with XIM.
     ;;   (setenv "XMODIFIERS" "@im=exwm-xim")
@@ -129,7 +132,8 @@
       (defun cae-exwm-disable-mouse-tracking-h ()
         (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
         (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-        (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
+        (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
+                    #'ignore)
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
     (exwm-enable)
