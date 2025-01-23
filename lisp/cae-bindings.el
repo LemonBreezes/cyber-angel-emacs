@@ -110,7 +110,6 @@
       (:when (modulep! :cae ai)
        "<f5>" #'gptel-menu
        "<f6>" #'aider-transient-menu)
-      "<f7>" #'eri/expand-region
       "C-<f1>" #'try
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
