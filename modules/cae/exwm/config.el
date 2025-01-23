@@ -3,13 +3,13 @@
 (require 'cae-lib)
 
 (defvar cae-exwm-enabled-p (and (eq 'x (framep (selected-frame)))
-                             (not (or (getenv "EXWM_RUNNING")
-                                      (getenv "RATPOISON")
-                                      (getenv "I3SOCK")
-                                      (getenv "KDE_FULL_SESSION")
-                                      (getenv "GNOME_DESKTOP_SESSION_ID")
-                                      (getenv "XDG_CURRENT_DESKTOP")
-                                      (getenv "WAYLAND_DISPLAY"))))
+                                (not (or (getenv "EXWM_RUNNING")
+                                         (getenv "RATPOISON")
+                                         (getenv "I3SOCK")
+                                         (getenv "KDE_FULL_SESSION")
+                                         (getenv "GNOME_DESKTOP_SESSION_ID")
+                                         (getenv "XDG_CURRENT_DESKTOP")
+                                         (getenv "WAYLAND_DISPLAY"))))
   "Whether EXWM is enabled.")
 
 (when cae-exwm-enabled-p
