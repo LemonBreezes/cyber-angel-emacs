@@ -7,7 +7,8 @@
          (not (getenv "INSIDE_EXWM")) ; In EXWM I prefer using Dunst.
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'cae-ednc-load-h)
-  (add-hook 'ednc-notification-presentation-functions #'cae-ednc-show-notification-in-buffer)
+  (add-hook 'ednc-notification-presentation-functions
+            #'cae-ednc-show-notification-in-buffer)
   (defun cae-ednc-stack-notifications (&optional hide)
     (mapconcat (lambda (notification)
                  (let ((app-name (ednc-notification-app-name notification)))
