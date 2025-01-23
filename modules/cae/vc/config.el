@@ -26,6 +26,10 @@
   ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
+  (after! ghub-graphql
+    ;; This works around an issue where killing and recreating the status buffer
+    ;; prevents progress updates from being relayed.
+    (setq ghub-graphql-message-progress t))
   (after! magit
     (when (modulep! :editor fold)
       (map! :map magit-status-mode-map
