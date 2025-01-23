@@ -26,4 +26,5 @@
         "p" #'previous-line)
 
   ;; Otherwise `alert-send-notification' will block the UI.
-  (advice-add #'alert-send-notification :around #'cae-ednc-wrap-async-call-process-a))
+  (advice-add #'alert-send-notification :around
+              #'cae-ednc-wrap-async-call-process-a))
