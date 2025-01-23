@@ -7,6 +7,7 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert)
+(unpin! consult)
 
 ;; PRs that I've made but haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
