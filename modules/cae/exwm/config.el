@@ -3,7 +3,7 @@
 (require 'cae-lib)
 
 (defvar cae-exwm-enabled-p (and (eq 'x (framep (selected-frame)))
-                                (not (or (getenv "EXWM_RUNNING")
+                                (not (or (getenv "INSIDE_EXWM")
                                          (getenv "RATPOISON")
                                          (getenv "I3SOCK")
                                          (getenv "KDE_FULL_SESSION")
