@@ -1655,7 +1655,8 @@
        '(apheleia)))
  t)
 
-(unless (executable-find "termux-setup-storage")
+(unless (or (executable-find "termux-setup-storage")
+            (not (cae-display-graphic-p)))
   (after! pdf-tools
     (pdf-tools-install t nil t)))
 
