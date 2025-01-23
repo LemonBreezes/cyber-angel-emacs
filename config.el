@@ -823,9 +823,6 @@
   (advice-remove #'newline-and-indent
                  #'+default--newline-indent-and-continue-comments-a)
 
-  (after! expand-region
-    (setq expand-region-smart-cursor t))
-
   ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
   (setq set-mark-command-repeat-pop t)
 
