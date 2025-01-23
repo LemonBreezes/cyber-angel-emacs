@@ -13,10 +13,6 @@
   "Whether EXWM is enabled.")
 
 (when cae-exwm-enabled-p
-  ;; Prevent nested Emacs sessions from loading EXWM.
-  (defun cae-exwm-flag-as-enabled () (setenv "EXWM_RUNNING" "true"))
-  (add-hook 'doom-after-init-hook #'cae-exwm-flag-as-enabled)
-
   (defun cae-exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
