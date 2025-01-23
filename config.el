@@ -1265,12 +1265,11 @@
   (after! comint
     (setq comint-history-isearch 'dwim
           comint-buffer-maximum-size 8192))
-  (after! imenu
-    (setq-hook! 'comint-mode-hook
-      imenu-generic-expression
-      `(("Prompts"
-         ,(concat comint-prompt-regexp "\\(.*\\)")
-         1))))
+  (setq-hook! 'comint-mode-hook
+    imenu-generic-expression
+    `(("Prompts"
+       ,(concat comint-prompt-regexp "\\(.*\\)")
+       1)))
 
   (after! em-term
     ;; Some of the commands I copied from other configurations and will likely
