@@ -1009,11 +1009,8 @@
       ";-." "→"
       ";=." "⇒"
       ";!=" "≠"
-      ",." #'cae-insert-bracket-pair ; <>
-      "-0" "->"
-      "0-" "<-"
-      "=0" "=>"
-      "0=" "<="))
+      ",." #'cae-insert-bracket-pair    ; <>
+      ))
 
   (use-package! parrot
     :when (modulep! :tools magit)
