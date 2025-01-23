@@ -32,8 +32,6 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
-(map! "C-=" #'eri/expand-region)
-
 ;; Vim normally binds this to `C-e' but the Emacs `C-a'/`C-e' are more too
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
