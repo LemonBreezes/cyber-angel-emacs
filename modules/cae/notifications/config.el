@@ -4,6 +4,7 @@
   :defer t :init
   (defun cae-ednc-load-h ()
     (and (require 'dbus nil t)
+         (not (getenv "INSIDE_EXWM"))
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'cae-ednc-load-h)
   (add-hook 'ednc-notification-presentation-functions #'cae-ednc-show-notification-in-buffer)
