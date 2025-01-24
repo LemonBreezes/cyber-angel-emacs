@@ -93,7 +93,7 @@
        (evil +everywhere)
 
        :emacs
-       undo
+       (undo +tree)
        ibuffer
        vc
        (dired +icons +dirvish)
