@@ -941,7 +941,8 @@
 
   (use-package! ibuffer
     :defer t :config
-    (setq ibuffer-always-show-last-buffer t)
+    (setq ibuffer-always-show-last-buffer t
+          ibuffer-human-readable-size t)
     (after! ibuffer-ext
       (add-to-list 'ibuffer-never-show-predicates #'doom-unreal-buffer-p)))
 
