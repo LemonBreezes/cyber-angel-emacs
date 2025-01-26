@@ -100,15 +100,6 @@ It is meant to be used as a `post-gc-hook'."
 ;; Use the system's `libvterm' if available.
 (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 
-;; Fix `save-some-buffers' so that I can continue the command after quitting a
-;; diff with "q".
-;;(defadvice! cae-hacks-quit-view-mode-a (oldfun)
-;;  :around #'+popup/quit-window
-;;  (if view-mode
-;;      (View-quit)
-;;    (funcall oldfun)))
-;;(advice-add #'meow-quit :around #'cae-hacks-quit-view-mode-a)
-
 ;; Make `eshell-previous-prompt' properly handle the case when there is no
 ;; previous prompt. Normally it goes to the beginning of the buffer. I prefer
 ;; for it to just stay on the first prompt.
@@ -167,17 +158,8 @@ It is meant to be used as a `post-gc-hook'."
 ;;    (unless (eq (current-buffer) (window-buffer))
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
 
-;; For some reason `https://git.savannah.gnu.org' is down. This is a workaround.
-;;(defadvice! straight-use-recipes-ingnore-nongnu-elpa-a (fn recipe)
-;;  :around #'straight-use-recipes
-;;  (unless (eq 'nongnu-elpa (car recipe))
-;;    (funcall fn recipe)))
-
 ;; Getting a void variable error with modus theme.
 (defvar date-scheduled-subtle nil)
-
-;; (void-function emacsql-sqlite-ensure-binary)
-(defun emacsql-sqlite-ensure-binary (&rest _))
 
 ;; (void-variable chatgpt-shell-anthropic--make-url)
 (defvar chatgpt-shell-anthropic--make-url nil)
