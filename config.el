@@ -658,7 +658,7 @@
                                           (> emacs-major-version 30))))
            (wide-frame-p (>= (frame-width) 120))
            (default-view (if wide-frame-p
-                             (if posframe-supported-p 'posframe 'vertical)
+                             'posframe
                            'buffer))
            (new-entries `((embark-keybinding . (, (if wide-frame-p
                                                       'grid 'buffer)))
