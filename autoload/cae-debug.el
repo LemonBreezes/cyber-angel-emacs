@@ -40,6 +40,18 @@ normally have their errors suppressed."
 (require 'transient)
 (require 'debug)
 
+(defmacro cae-debug-define-toggle-command (name var)
+  "Define a transient toggle command for debugging variable VAR with NAME."
+  (let ((func-name (intern (concat "cae-debug-toggle-" name))))
+    `(transient-define-suffix ,func-name ()
+       ,(format "Toggle `%s'." var)
+       :description (lambda ()
+                      (format "Toggle %s [%s]" ',var (if ,var "ON" "OFF")))
+       (interactive)
+       (setq ,var (not ,var))
+       (message "%s is now %s" ',var (if ,var "ON" "OFF"))
+       (transient-setup 'cae-debug-transient))))
+
 (transient-define-suffix cae-debug-set-debug-on-message ()
   "Set `debug-on-message' to a regular expression."
   :description (lambda ()
@@ -50,41 +62,13 @@ normally have their errors suppressed."
                             (if (string= regexp "") nil regexp)))
   (transient-setup 'cae-debug-transient))
 
-(transient-define-suffix cae-debug-toggle-debug-on-error ()
-  "Toggle `debug-on-error'."
-  :description (lambda ()
-                 (format "Toggle debug-on-error [%s]" (if debug-on-error "ON" "OFF")))
-  (interactive)
-  (setq debug-on-error (not debug-on-error))
-  (message "debug-on-error is now %s" (if debug-on-error "ON" "OFF"))
-  (transient-setup 'cae-debug-transient))
+(cae-debug-define-toggle-command "debug-on-error" debug-on-error)
 
-(transient-define-suffix cae-debug-toggle-debug-on-quit ()
-  "Toggle `debug-on-quit'."
-  :description (lambda ()
-                 (format "Toggle debug-on-quit [%s]" (if debug-on-quit "ON" "OFF")))
-  (interactive)
-  (setq debug-on-quit (not debug-on-quit))
-  (message "debug-on-quit is now %s" (if debug-on-quit "ON" "OFF"))
-  (transient-setup 'cae-debug-transient))
+(cae-debug-define-toggle-command "debug-on-quit" debug-on-quit)
 
-(transient-define-suffix cae-debug-toggle-debug-on-signal ()
-  "Toggle `debug-on-signal'."
-  :description (lambda ()
-                 (format "Toggle debug-on-signal [%s]" (if debug-on-signal "ON" "OFF")))
-  (interactive)
-  (setq debug-on-signal (not debug-on-signal))
-  (message "debug-on-signal is now %s" (if debug-on-signal "ON" "OFF"))
-  (transient-setup 'cae-debug-transient))
+(cae-debug-define-toggle-command "debug-on-signal" debug-on-signal)
 
-(transient-define-suffix cae-debug-toggle-debug-allow-recursive-debug ()
-  "Toggle `debug-allow-recursive-debug'."
-  :description (lambda ()
-                 (format "Toggle debug-allow-recursive-debug [%s]" (if debug-allow-recursive-debug "ON" "OFF")))
-  (interactive)
-  (setq debug-allow-recursive-debug (not debug-allow-recursive-debug))
-  (message "debug-allow-recursive-debug is now %s" (if debug-allow-recursive-debug "ON" "OFF"))
-  (transient-setup 'cae-debug-transient))
+(cae-debug-define-toggle-command "debug-allow-recursive-debug" debug-allow-recursive-debug)
 
 (transient-define-suffix cae-debug-toggle-doom-debug-mode ()
   "Toggle `doom-debug-mode`."
