@@ -66,6 +66,7 @@
         "C-c C-g" #'magit-gptcommit-commit-accept))
 
 (use-package! copilot
+  :when (executable-find "node")
   :defer t :init
   (add-hook 'text-mode-hook   #'copilot-mode)
   (add-hook 'prog-mode-hook   #'copilot-mode)
