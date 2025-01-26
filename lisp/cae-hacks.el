@@ -174,3 +174,6 @@ It is meant to be used as a `post-gc-hook'."
   :before-until #'doom-init-clipboard-in-tty-emacs-h
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
+
+;;let*: Symbol’s function definition is void: consult--async-split-style
+(setf (symbol-function 'consult--async-split-style) (symbol-function 'ignore))
