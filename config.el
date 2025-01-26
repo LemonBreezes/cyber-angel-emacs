@@ -1560,7 +1560,8 @@
          em-tramp em-smart em-banner em-basic em-cmpl
          em-extpipe em-glob em-hist em-ls em-script em-term
          em-alias em-elecslash em-rebind em-prompt))
-   ,@(when (modulep! :term vterm)
+   ,@(when (and (modulep! :term vterm)
+                (executable-find "cmake"))
        '(vterm))
    ,@(when (modulep! :ui hydra)
        '(hydra))
