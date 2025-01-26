@@ -67,12 +67,7 @@
         (list file noerror t nosuffix must-suffix))))
 
   (setq doom-leader-alt-key "<menu>"
-        doom-localleader-alt-key "<menu> m")
-
-  (defadvice! cae-handle-missing-xclip-program ()
-    :before-until #'doom-init-clipboard-in-tty-emacs-h
-    (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
-         (not (executable-find "xclip")))))
+        doom-localleader-alt-key "<menu> m"))
 
 (doom! :completion
        (vertico +icons +childframe)
