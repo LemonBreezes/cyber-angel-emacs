@@ -3,72 +3,73 @@
 
 ;;; GC hacks
 
-(defconst cae-hacks-gc-cons-threshold (min (* 64 1024 1024 1024)
-                                           (if (memory-info)
-                                               (/ (car (memory-info)) 3)
-                                             ;; Fallback
-                                             0)))
-(defconst cae-hacks-gc-idle-delay 20)
-(defvar cae-hacks--gc-messages nil)
-(defvar cae-hacks--gc-disabled nil)     ;Make these functions idempotent.
-(defvar cae-hacks--gcmh-mode nil)
-(defvar cae-hacks--gc-idle-timer nil)
-(defvar cae-hacks--gc-cons-threshold-old nil)
+(unless (fboundp 'igc--collect)
+  (defconst cae-hacks-gc-cons-threshold (min (* 64 1024 1024 1024)
+                                             (if (memory-info)
+                                                 (/ (car (memory-info)) 3)
+                                               ;; Fallback
+                                               0)))
+  (defconst cae-hacks-gc-idle-delay 20)
+  (defvar cae-hacks--gc-messages nil)
+  (defvar cae-hacks--gc-disabled nil)   ;Make these functions idempotent.
+  (defvar cae-hacks--gcmh-mode nil)
+  (defvar cae-hacks--gc-idle-timer nil)
+  (defvar cae-hacks--gc-cons-threshold-old nil)
 
-;; The purpose of these functions is to disable GC during long-running tasks
-;; while showing GC messages if Emacs GCs anyways while running such a task.
+  ;; The purpose of these functions is to disable GC during long-running tasks
+  ;; while showing GC messages if Emacs GCs anyways while running such a task.
 
-;; Currently I only use this to prevent GC while running `kill-emacs-hook'.
+  ;; Currently I only use this to prevent GC while running `kill-emacs-hook'.
 
-(defun cae-hacks-disable-gc (&rest _)
-  "Raise the GC threshold to a large value and enable GC messages."
-  (unless cae-hacks--gc-disabled
-    (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
-    (and (fboundp #'gcmh-mode) (gcmh-mode -1))
-    (setq cae-hacks--gc-messages      garbage-collection-messages
-          garbage-collection-messages t
-          cae-hacks--gc-cons-threshold-old gc-cons-threshold
-          gc-cons-threshold           cae-hacks-gc-cons-threshold)
-    (setq cae-hacks--gc-idle-timer
-          (run-with-idle-timer cae-hacks-gc-idle-delay
-                               nil #'cae-hacks-garbage-collect))
-    (when (timerp (bound-and-true-p gcmh-idle-timer))
-      (cancel-timer gcmh-idle-timer))
-    (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
-    (setq cae-hacks--gc-disabled t)))
+  (defun cae-hacks-disable-gc (&rest _)
+    "Raise the GC threshold to a large value and enable GC messages."
+    (unless cae-hacks--gc-disabled
+      (setq cae-hacks--gcmh-mode        (bound-and-true-p gcmh-mode))
+      (and (fboundp #'gcmh-mode) (gcmh-mode -1))
+      (setq cae-hacks--gc-messages      garbage-collection-messages
+            garbage-collection-messages t
+            cae-hacks--gc-cons-threshold-old gc-cons-threshold
+            gc-cons-threshold           cae-hacks-gc-cons-threshold)
+      (setq cae-hacks--gc-idle-timer
+            (run-with-idle-timer cae-hacks-gc-idle-delay
+                                 nil #'cae-hacks-garbage-collect))
+      (when (timerp (bound-and-true-p gcmh-idle-timer))
+        (cancel-timer gcmh-idle-timer))
+      (add-hook 'post-gc-hook #'cae-hacks-enable-gc)
+      (setq cae-hacks--gc-disabled t)))
 
-(defun cae-hacks-garbage-collect ()
-  (garbage-collect)
-  (cae-hacks-enable-gc))
+  (defun cae-hacks-garbage-collect ()
+    (garbage-collect)
+    (cae-hacks-enable-gc))
 
-(defun cae-hacks-enable-gc ()
-  "This is the inverse of `cae-hacks-disable-gc'.
+  (defun cae-hacks-enable-gc ()
+    "This is the inverse of `cae-hacks-disable-gc'.
 It is meant to be used as a `post-gc-hook'."
-  (when cae-hacks--gc-disabled
-    (when (timerp cae-hacks--gc-idle-timer)
-      (cancel-timer cae-hacks--gc-idle-timer))
-    (setq garbage-collection-messages cae-hacks--gc-messages
-          cae-hacks--gc-messages      nil
-          cae-hacks--gcmh-mode        nil
-          cae-hacks--gc-idle-timer    nil
-          gc-cons-threshold           cae-hacks--gc-cons-threshold-old)
-    (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
-    (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
-    (setq cae-hacks--gc-disabled nil)))
+    (when cae-hacks--gc-disabled
+      (when (timerp cae-hacks--gc-idle-timer)
+        (cancel-timer cae-hacks--gc-idle-timer))
+      (setq garbage-collection-messages cae-hacks--gc-messages
+            cae-hacks--gc-messages      nil
+            cae-hacks--gcmh-mode        nil
+            cae-hacks--gc-idle-timer    nil
+            gc-cons-threshold           cae-hacks--gc-cons-threshold-old)
+      (and (fboundp #'gcmh-mode) (gcmh-mode cae-hacks--gcmh-mode))
+      (remove-hook 'post-gc-hook #'cae-hacks-enable-gc)
+      (setq cae-hacks--gc-disabled nil)))
 
-(when (memory-info)
-  (if (boundp 'after-focus-change-function)
-      (add-function :after after-focus-change-function
-                    (lambda ()
-                      (unless (frame-focus-state)
-                        (cae-hacks-garbage-collect))))
-    (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
+  (when (memory-info)
+    (if (boundp 'after-focus-change-function)
+        (add-function :after after-focus-change-function
+                      (lambda ()
+                        (unless (frame-focus-state)
+                          (cae-hacks-garbage-collect))))
+      (add-hook 'after-focus-change-function #'cae-hacks-garbage-collect))
 
-  ;; Be wary of enabling this, especially on Android devices:
-  ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
-  (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
-  (advice-add #'save-buffers-kill-emacs :before #'cae-hacks-disable-gc)
-  (advice-add #'kill-emacs :before #'cae-hacks-disable-gc))
+    ;; Be wary of enabling this, especially on Android devices:
+    ;; https://lists.gnu.org/archive/html/emacs-devel/2023-03/msg00431.html
+    (add-hook 'kill-emacs-hook #'cae-hacks-disable-gc -10)
+    (advice-add #'save-buffers-kill-emacs :before #'cae-hacks-disable-gc)
+    (advice-add #'kill-emacs :before #'cae-hacks-disable-gc)))
 
 
 ;;; Other hacks
