@@ -86,6 +86,15 @@ normally have their errors suppressed."
   (message "debug-allow-recursive-debug is now %s" (if debug-allow-recursive-debug "ON" "OFF"))
   (transient-setup 'cae-debug-transient))
 
+(transient-define-suffix cae-debug-toggle-doom-debug-mode ()
+  "Toggle `doom-debug-mode`."
+  :description (lambda ()
+                 (format "Toggle doom-debug-mode [%s]" (if doom-debug-mode "ON" "OFF")))
+  (interactive)
+  (doom-debug-mode 'toggle)
+  (message "doom-debug-mode is now %s" (if doom-debug-mode "ON" "OFF"))
+  (transient-setup 'cae-debug-transient))
+
 ;;;###autoload (autoload 'cae-debug-transient "autoload/cae-debug" nil t)
 (transient-define-prefix cae-debug-transient ()
   "Set and toggle debugging options."
@@ -95,4 +104,5 @@ normally have their errors suppressed."
    ("q" cae-debug-toggle-debug-on-quit)
    ("s" cae-debug-toggle-debug-on-signal)
    ("r" cae-debug-toggle-debug-allow-recursive-debug)
+   ("d" cae-debug-toggle-doom-debug-mode)
    ])
