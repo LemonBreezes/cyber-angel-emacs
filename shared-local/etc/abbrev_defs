@@ -102,6 +102,7 @@
     ("runnig" "running" nil :count 0)
     ("shll" "shell" nil :count 0)
     ("shoudl" "should" nil :count 0)
+    ("somehwere" "somewhere" nil :count 0)
     ("stetq" "setq" nil :count 1)
     ("surchrage" "surcharge" nil :count 0)
     ("talkking" "talking" nil :count 0)
