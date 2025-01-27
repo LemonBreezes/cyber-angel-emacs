@@ -177,7 +177,7 @@
       ("t" tab-bar-switch-to-next-tab
        "T" tab-bar-switch-to-prev-tab))
 
-    (define-repeat-map comint-next-prompt
+    (define-repeat-map evil-comint-next-prompt
       ("j" comint-next-prompt
        "k" comint-previous-prompt)))
 
