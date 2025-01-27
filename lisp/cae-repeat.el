@@ -175,11 +175,24 @@
 
     (define-repeat-map tab-bar-switch-next-tab
       ("t" tab-bar-switch-to-next-tab
-       "T" tab-bar-switch-to-prev-tab)))
+       "T" tab-bar-switch-to-prev-tab))
+
+    (define-repeat-map comint-next-prompt
+      ("j" comint-next-prompt
+       "k" comint-previous-prompt)))
 
   (when (modulep! :cae notifications)
     (define-repeat-map cae-ednc-toggle-notifications
       ("`" cae-ednc-toggle-notifications)))
+
+  (when (modulep! :cae ai)
+    (define-repeat-map chatgpt-shell-next-item
+      ("n" chatgpt-shell-next-item
+        "p" chatgpt-shell-previous-item)))
+
+  (define-repeat-map comint-next-prompt
+    ("n" comint-next-prompt
+      "p" comint-previous-prompt))
 
   (defadvice! my/repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
