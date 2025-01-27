@@ -127,10 +127,9 @@
 
 (defun cae-get-windows-username ()
   "Extract the Windows username from cmd.exe output in WSL."
-  (let* ((output (shell-command-to-string
-                  "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME% 2>/dev/null"))
-         (output (replace-regexp-in-string "\r\\|\n" "" output)))
-    output))
+  (thread-last (shell-command-to-string
+                "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME% 2>/dev/null")
+               (replace-regexp-in-string "\r\\|\n" "")))
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-syncthing-directory (_)
