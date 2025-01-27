@@ -188,11 +188,11 @@
   (when (modulep! :cae ai)
     (define-repeat-map chatgpt-shell-next-item
       ("n" chatgpt-shell-next-item
-        "p" chatgpt-shell-previous-item)))
+       "p" chatgpt-shell-previous-item)))
 
   (define-repeat-map comint-next-prompt
     ("n" comint-next-prompt
-      "p" comint-previous-prompt))
+     "p" comint-previous-prompt))
 
   (defadvice! my/repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
