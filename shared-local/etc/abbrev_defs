@@ -24,6 +24,7 @@
     ("cntinue" "continue" nil :count 0)
     ("cnvert" "convert" nil :count 0)
     ("commmand" "command" nil :count 1)
+    ("commmit" "commit" nil :count 0)
     ("completiob" "completion" nil :count 0)
     ("conditino" "condition" nil :count 0)
     ("connnected" "connected" nil :count 0)
