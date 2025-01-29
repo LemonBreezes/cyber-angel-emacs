@@ -4,6 +4,7 @@
 (setq projectile-project-search-path
       `((,doom-user-dir . 0)
         (,doom-emacs-dir . 0)
+        ,@(when (file-exists-p "~/Sync/") '(("~/Sync/" . 0)))
         ,@(when (file-exists-p "~/org/") '(("~/org/" . 1)))
         ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
         ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
