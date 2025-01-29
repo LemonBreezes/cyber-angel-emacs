@@ -1321,7 +1321,7 @@
       (setq org-crypt-disable-auto-save 'encrypt))
     (after! org-agenda
       (setq org-agenda-sticky nil
-            org-agenda-files '("~/org/")))
+            org-agenda-files '("~/org/" "~/org/denote/" "~/org/roam/daily/")))
 
     (after! which-key
       (which-key-add-keymap-based-replacements org-mode-map
