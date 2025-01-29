@@ -9,6 +9,9 @@
         ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
         ,@(when (file-exists-p "~/src/love2d/") '(("~/src/love2d" . 1)))
         ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
+;; This is a performance optimization. I am okay with not tracking projects
+;; automatically and using the list above instead.
+(setq projectile-track-known-projects-automatically nil)
 
 ;; Ensure projects list is up-to-date since I usually switch to a project
 ;; after running a `git clone'.
