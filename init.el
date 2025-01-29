@@ -160,7 +160,7 @@
        unpackaged
        vc
        org
-       (ai +openai)
+       (ai +copilot)
        gnus
        rss
        denote)
