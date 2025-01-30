@@ -197,14 +197,11 @@
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
-  (add-hook! 'doom-escape-hook
+  (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
+      (+log "HELLO!!!")
       (minuet-dismiss-suggestion)
       t))
   (when (modulep! :editor evil)
     (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
-
-;; do something
-;; Setup functions for showing/
-()
