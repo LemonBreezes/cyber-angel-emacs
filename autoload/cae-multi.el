@@ -61,7 +61,8 @@
                         (message "Conflict detected during git pull in %s" repo-dir)
                         (display-buffer (current-buffer))
                         (setq all-pulls-succeeded nil))
-                    (message "Git pull succeeded in %s" repo-dir)))))))))
+                    (when verbose
+                      (message "Git pull succeeded in %s" repo-dir)))))))))
     (when all-pulls-succeeded
       (when verbose
         (message "All pulls succeeded, running 'doom sync'"))
