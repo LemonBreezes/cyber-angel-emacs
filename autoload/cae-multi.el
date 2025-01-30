@@ -41,7 +41,8 @@
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts asynchronously."
   (interactive)
-  (let ((all-pulls-succeeded t)
+  (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
+        (all-pulls-succeeded t)
         (processes '()))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
@@ -51,7 +52,7 @@
             (let ((process
                    (start-process
                     "git-pull-process"
-                    nil
+                    output-buffer
                     "git" "pull")))
               (push process processes)
               (set-process-sentinel
@@ -61,6 +62,8 @@
                    (if (/= (process-exit-status proc) 0)
                        (progn
                          (message "Git pull failed in %s" repo-dir)
+                         ;; Optionally display the output buffer
+                         ;; (display-buffer output-buffer)
                          (setq all-pulls-succeeded nil))
                      (with-current-buffer output-buffer
                        (save-excursion
@@ -68,6 +71,7 @@
                          (if (re-search-backward "CONFLICT" nil t)
                              (progn
                                (message "Conflict detected during git pull in %s" repo-dir)
+                               ;; (display-buffer output-buffer)
                                (setq all-pulls-succeeded nil))
                            (message "Git pull succeeded in %s" repo-dir)))))
                    ;; When all processes have finished, run 'doom sync' if needed
@@ -79,7 +83,7 @@
   (let ((process
          (start-process
           "doom-sync-process"
-          nil
+          " *cae-multi-pull-repositories*"
           "doom" "sync")))
     (set-process-sentinel
      process
@@ -88,6 +92,6 @@
          (if (= (process-exit-status proc) 0)
              (message "'doom sync' finished successfully")
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))))
-       ;; Optionally display the output buffer
-       ;; (display-buffer " *cae-multi-pull-repositories*")
-       ))))
+         ;; Optionally display the output buffer
+         ;; (display-buffer " *cae-multi-pull-repositories*")
+         ))))
