@@ -46,14 +46,12 @@
 (defun cae-debugger-run-or-pop-to-gdb ()
   (interactive)
   (require 'gud)
-  (let ((default-directory (or cae-debugger-default-directory
-                               default-directory)))
-    (cond ((and gud-comint-buffer
-                (get-buffer-window gud-comint-buffer))
-           (delete-window (get-buffer-window gud-comint-buffer)))
-          ((buffer-live-p gud-comint-buffer)
-           (call-interactively #'gdb-display-gdb-buffer))
-          (t (call-interactively #'gdb)))))
+  (cond ((and gud-comint-buffer
+              (get-buffer-window gud-comint-buffer))
+         (delete-window (get-buffer-window gud-comint-buffer)))
+        ((buffer-live-p gud-comint-buffer)
+         (call-interactively #'gdb-display-gdb-buffer))
+        (t (call-interactively #'gdb))))
 
 ;;;###autoload (autoload 'cae-debugger-dap-hydra/body "cae/debugger/autoload" t nil)
 (defhydra cae-debugger-dap-hydra (:color pink :hint nil :foreign-keys run)
