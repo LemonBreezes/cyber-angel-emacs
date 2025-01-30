@@ -200,7 +200,7 @@
 (unless evil-disable-insert-state-bindings
   (when (modulep! :completion corfu)
     (define-key!
-      :keymaps (append doom-minibuffer-maps
+      :keymaps (append +default-minibuffer-maps
                        (when (modulep! :editor evil +everywhere)
                          '(evil-ex-completion-map)))
       "C-x C-f"  #'cape-file
