@@ -38,7 +38,8 @@
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
-;; Minuet uses Deepseek by default as of 1/30/2025.
+(after! minuet
+  (setq minuet-provider 'claude))
 
 (use-package! aider
   :defer t :config
@@ -193,17 +194,13 @@
    ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
    ("M-a" . #'minuet-accept-suggestion-line)
    ("M-e" . #'minuet-dismiss-suggestion))
-
   :init
   ;; if you want to enable auto suggestion.
   ;; Note that you can manually invoke completions without enable minuet-auto-suggestion-mode
   (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
-
   :config
-  (setq minuet-provider 'openai-fim-compatible)
-
   ;; Required when defining minuet-ative-mode-map in insert/normal states.
   ;; Not required when defining minuet-active-mode-map without evil state.
   (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)
