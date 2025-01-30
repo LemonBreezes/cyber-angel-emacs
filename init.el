@@ -71,8 +71,7 @@
 
 (doom! :completion
        (vertico +icons +childframe)
-       ;;(corfu +orderless +icons +dabbrev)
-       (company)
+       (corfu +orderless +icons +dabbrev)
 
        :ui
        hl-todo
