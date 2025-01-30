@@ -7,12 +7,6 @@
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
 
-(defvar cae-multi-repositories
-  (list doom-user-dir
-        cae-multi-data-dir
-        cae-multi-secrets-dir)
-  "List of directories containing Git repositories to pull.")
-
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
@@ -79,6 +73,13 @@
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
 
 ;;; Sync the repositories
+
+
+(defvar cae-multi-repositories
+  (list doom-user-dir
+        org-directory
+        cae-multi-secrets-dir)
+  "List of directories containing Git repositories to pull.")
 
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
