@@ -197,7 +197,11 @@
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
-  (add-hook! 'doom-escape-hook
+  ;;(add-hook! 'doom-escape-hook :depth -5
+  ;;          (defun teste ()
+  ;;            (message "HELLOOOOO!!!")
+  ;;            nil))
+  (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (minuet-dismiss-suggestion)
       t))
