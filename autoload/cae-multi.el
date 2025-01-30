@@ -42,25 +42,25 @@
   "Pull the shared repositories and handle conflicts."
   (interactive)
   (let ((all-pulls-succeeded t))
-  (dolist (repo-dir cae-multi-repositories)
-    (let ((default-directory repo-dir))
-      (when (file-directory-p (concat repo-dir "/.git"))
-        (if (file-exists-p (concat repo-dir "/.git/index.lock"))
-            (message "Git lockfile exists in %s, skipping pull" repo-dir)
-          (with-temp-buffer
-            (let ((exit-code (call-process "git" nil (current-buffer) nil "pull")))
-              (if (/= exit-code 0)
-                  (progn
-                    (message "Git pull failed in %s with exit code %d" repo-dir exit-code)
-                    (display-buffer (current-buffer))
-                    (setq all-pulls-succeeded nil))
-                (goto-char (point-min))
-                (if (re-search-forward "CONFLICT" nil t)
+    (dolist (repo-dir cae-multi-repositories)
+      (let ((default-directory repo-dir))
+        (when (file-directory-p (concat repo-dir "/.git"))
+          (if (file-exists-p (concat repo-dir "/.git/index.lock"))
+              (message "Git lockfile exists in %s, skipping pull" repo-dir)
+            (with-temp-buffer
+              (let ((exit-code (call-process "git" nil (current-buffer) nil "pull")))
+                (if (/= exit-code 0)
                     (progn
-                      (message "Conflict detected during git pull in %s" repo-dir)
+                      (message "Git pull failed in %s with exit code %d" repo-dir exit-code)
                       (display-buffer (current-buffer))
                       (setq all-pulls-succeeded nil))
-                  (message "Git pull succeeded in %s" repo-dir))))))))))
-      (when all-pulls-succeeded
-        (message "All pulls succeeded, running 'doom sync'")
-        (call-process "doom" nil "*doom sync*" nil "sync")))
+                  (goto-char (point-min))
+                  (if (re-search-forward "CONFLICT" nil t)
+                      (progn
+                        (message "Conflict detected during git pull in %s" repo-dir)
+                        (display-buffer (current-buffer))
+                        (setq all-pulls-succeeded nil))
+                    (message "Git pull succeeded in %s" repo-dir)))))))))
+    (when all-pulls-succeeded
+      (message "All pulls succeeded, running 'doom sync'")
+      (call-process "doom" nil "*doom sync*" nil "sync"))))
