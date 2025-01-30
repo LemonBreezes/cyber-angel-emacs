@@ -1230,6 +1230,9 @@
   (after! comint
     (setq comint-history-isearch 'dwim
           comint-buffer-maximum-size 8192))
+  (add-hook! 'comint-mode-hook
+             (when (bound-and-true-p rainbow-delimiters-mode)
+               (rainbow-delimiters-mode -1)))
   (setq-hook! 'comint-mode-hook
     imenu-generic-expression
     `(("Prompts"
