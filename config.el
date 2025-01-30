@@ -1565,7 +1565,9 @@
    ,@(when (modulep! :app rss)
        '(elfeed))
    ,@(when (modulep! :cae misc-applications) ; Music apps
-       '(emms elfeed-tube empv mpc somafm helm-emms lyrics-fetcher))
+       (nconc '(emms elfeed-tube empv somafm helm-emms lyrics-fetcher)
+              (when (executable-find "mpd")
+                '(mpc))))
    ,@(when (modulep! :cae ai)
        '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
    ,@(when (modulep! :tools direnv)
