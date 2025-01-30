@@ -41,13 +41,8 @@
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts asynchronously."
   (interactive)
-  (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
-        (all-pulls-succeeded t)
+  (let ((all-pulls-succeeded t)
         (processes '()))
-    ;; Insert a page separator to separate outputs from different calls
-    (with-current-buffer output-buffer
-      (goto-char (point-max))
-      (insert "\n\f\n"))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
         (when (file-directory-p (concat repo-dir "/.git"))
@@ -56,7 +51,7 @@
             (let ((process
                    (start-process
                     "git-pull-process"
-                    output-buffer
+                    nil
                     "git" "pull")))
               (push process processes)
               (set-process-sentinel
@@ -81,13 +76,13 @@
                    ;; When all processes have finished, run 'doom sync' if needed
                    (when (and (null (cl-remove-if #'process-live-p processes))
                               all-pulls-succeeded)
-                     (cae-multi--run-doom-sync))))))))))
+                     (cae-multi--run-doom-sync))))))))))))
 (defun cae-multi--run-doom-sync ()
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
          (start-process
           "doom-sync-process"
-          " *cae-multi-pull-repositories*"
+          nil
           "doom" "sync")))
     (set-process-sentinel
      process
@@ -98,4 +93,4 @@
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))))
          ;; Optionally display the output buffer
          ;; (display-buffer " *cae-multi-pull-repositories*")
-         )))))
+         ))))
