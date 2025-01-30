@@ -14,7 +14,7 @@
 (defun cae-multi-org-archive-push-changes-h ()
   (gac--after-save (buffer-file-name))
   (dolist (file (org-all-archive-files))
-        (gac--after-save file)))
+    (gac--after-save file)))
 ;;;###autoload
 (defun cae-multi-abbrev-write-file-a (orig-fun &optional file verbose)
   (let ((mtime (nth 5 (file-attributes abbrev-file-name))))
