@@ -58,4 +58,5 @@
                       (progn
                         (message "Conflict detected during git pull in %s" repo-dir)
                         (display-buffer (current-buffer)))
-                    (message "Git pull succeeded in %s" repo-dir)))))))))))
+                    (message "Git pull succeeded in %s" repo-dir)
+                    (setq doom-sync-needed t)))))))))))
