@@ -98,4 +98,4 @@
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))))
          ;; Optionally display the output buffer
          ;; (display-buffer " *cae-multi-pull-repositories*")
-         ))))
+         )))))
