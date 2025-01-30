@@ -63,7 +63,7 @@
                        (progn
                          (message "Git pull failed in %s" repo-dir)
                          ;; Optionally display the output buffer
-                         ;; (display-buffer output-buffer)
+                         (display-buffer output-buffer)
                          (setq all-pulls-succeeded nil))
                      (with-current-buffer output-buffer
                        (save-excursion
@@ -71,7 +71,7 @@
                          (if (re-search-backward "CONFLICT" nil t)
                              (progn
                                (message "Conflict detected during git pull in %s" repo-dir)
-                               ;; (display-buffer output-buffer)
+                               (display-buffer output-buffer)
                                (setq all-pulls-succeeded nil))
                            (message "Git pull succeeded in %s" repo-dir)))))
                    ;; When all processes have finished, run 'doom sync' if needed
