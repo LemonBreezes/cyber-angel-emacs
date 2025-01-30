@@ -68,7 +68,6 @@
 
 ;;; Sync the repositories
 
-
 (defvar cae-multi-repositories
   (list doom-user-dir
         org-directory
