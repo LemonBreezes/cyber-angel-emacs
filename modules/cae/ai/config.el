@@ -27,6 +27,7 @@
             ;;"--encoding" "latin-1"
             "--cache-prompts"
             "--chat-language" "English"
+            "--no-gitignore"
             )))
   (defvar llm-refactoring-provider nil)
   (after! llm
