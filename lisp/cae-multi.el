@@ -33,12 +33,6 @@
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
-(defvar cae-multi-enable-auto-pull t
-  "If non-nil, automatically pull repositories when idle.")
-
-(when cae-multi-enable-auto-pull
-  (run-with-idle-timer 600 t #'cae-multi-pull-repositories))
-
 (after! bookmark
   (setq bookmark-watch-bookmark-file t))
 
@@ -101,3 +95,9 @@
                       (message "Conflict detected during git pull in %s" repo-dir)
                       (display-buffer (current-buffer)))
                   (message "Git pull succeeded in %s" repo-dir))))))))))
+
+(defvar cae-multi-enable-auto-pull t
+  "If non-nil, automatically pull repositories when idle.")
+
+(when cae-multi-enable-auto-pull
+  (run-with-idle-timer 600 t #'cae-multi-pull-repositories))
