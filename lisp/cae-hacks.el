@@ -179,4 +179,10 @@ It is meant to be used as a `post-gc-hook'."
 (setf (symbol-function 'consult--async-split-style) (symbol-function 'ignore))
 
 ;; Ignore some annoying errors when the buffer gets inadvertently deleted.
-(advice-add #'lsp--read-char :around #'cae-ignore-errors-a)
+(defadvice! cae-ignore-selecting-deleted-buffer-error-a (oldfun &rest args)
+  "Ignore 'Selecting deleted buffer' errors in `lsp--read-char`."
+  :around #'lsp--read-char
+  (condition-case err
+      (apply oldfun args)
+    (error (unless (string-prefix-p "Selecting deleted buffer" (error-message-string err))
+             (signal (car err) (cdr err))))))
