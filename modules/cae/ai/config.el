@@ -201,8 +201,6 @@
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
-  ;; Required when defining minuet-ative-mode-map in insert/normal states.
-  ;; Not required when defining minuet-active-mode-map without evil state.
-  (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)
-
+  (when (modulep! :editor evil)
+    (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
