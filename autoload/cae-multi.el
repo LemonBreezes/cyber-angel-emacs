@@ -62,7 +62,7 @@
                         (display-buffer (current-buffer))
                         (setq all-pulls-succeeded nil))
                     (when verbose
-                      (message "Git pull succeeded in %s" repo-dir)))))))))
+                      (message "Git pull succeeded in %s" repo-dir))))))))))
       (when all-pulls-succeeded
         (when verbose
           (message "All pulls succeeded, running 'doom sync'"))
@@ -71,4 +71,4 @@
               (when verbose
                 (message "'doom sync' finished successfully"))
             (message "'doom sync' failed with exit code %d" doom-exit-code)
-            (display-buffer "*doom sync*")))))))
+            (display-buffer "*doom sync*"))))))
