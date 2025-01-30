@@ -2,9 +2,6 @@
 
 (require 'cae-lib)
 
-(defvar cae-debugger-default-directory nil
-  "The default directory to use when starting a debugger.")
-
 (when (and (modulep! :tools lsp)
            (not (modulep! :tools lsp +eglot))
            (modulep! :tools debugger +lsp))
