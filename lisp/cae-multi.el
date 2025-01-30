@@ -79,7 +79,7 @@
   (list doom-user-dir
         org-directory
         cae-multi-secrets-dir)
-  "List of directories containing Git repositories to pull.")
+  "List of directories containing Git repositories to sync between machines.")
 
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
