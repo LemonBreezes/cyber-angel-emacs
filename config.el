@@ -366,6 +366,7 @@
          :size cae-popup-shrink-to-fit)
         ("*Neato Graph Bar" :side top :quit t :ttl 0 :size
          (lambda (win) (set-window-text-height win (+ (num-processors) 2))))))
+    ;;
     (after! embark
       (set-popup-rule! (regexp-quote embark--verbose-indicator-buffer)
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
