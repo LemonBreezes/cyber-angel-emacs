@@ -71,4 +71,4 @@
             (when verbose
               (message "'doom sync' finished successfully"))
           (message "'doom sync' failed with exit code %d" doom-exit-code)
-          (display-buffer "*doom sync*"))))))
+          (display-buffer "*doom sync*")))))))
