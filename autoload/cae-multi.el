@@ -39,36 +39,63 @@
 
 ;;;###autoload
 (defun cae-multi-pull-repositories ()
-  "Pull the shared repositories and handle conflicts."
+  "Pull the shared repositories and handle conflicts asynchronously."
   (interactive)
-  (let ((verbose nil)
-        (all-pulls-succeeded t))
+  (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
+        (all-pulls-succeeded t)
+        (processes '()))
+    ;; Insert a page separator to separate outputs from different calls
+    (with-current-buffer output-buffer
+      (goto-char (point-max))
+      (insert "\n\f\n"))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
         (when (file-directory-p (concat repo-dir "/.git"))
           (if (file-exists-p (concat repo-dir "/.git/index.lock"))
               (message "Git lockfile exists in %s, skipping pull" repo-dir)
-            (with-temp-buffer
-              (let ((exit-code (call-process "git" nil (current-buffer) nil "pull")))
-                (if (/= exit-code 0)
-                    (progn
-                      (message "Git pull failed in %s with exit code %d" repo-dir exit-code)
-                      (display-buffer (current-buffer))
-                      (setq all-pulls-succeeded nil))
-                  (goto-char (point-min))
-                  (if (re-search-forward "CONFLICT" nil t)
-                      (progn
-                        (message "Conflict detected during git pull in %s" repo-dir)
-                        (display-buffer (current-buffer))
-                        (setq all-pulls-succeeded nil))
-                    (when verbose
-                      (message "Git pull succeeded in %s" repo-dir))))))))))
-    (when all-pulls-succeeded
-      (when verbose
-        (message "All pulls succeeded, running 'doom sync'"))
-      (let ((doom-exit-code (call-process "doom" nil "*doom sync*" nil "sync")))
-        (if (= doom-exit-code 0)
-            (when verbose
-              (message "'doom sync' finished successfully"))
-          (message "'doom sync' failed with exit code %d" doom-exit-code)
-          (display-buffer "*doom sync*"))))))
+            (let ((process
+                   (start-process
+                    "git-pull-process"
+                    output-buffer
+                    "git" "pull")))
+              (push process processes)
+              (set-process-sentinel
+               process
+               (lambda (proc event)
+                 (when (memq (process-status proc) '(exit signal))
+                   (if (/= (process-exit-status proc) 0)
+                       (progn
+                         (message "Git pull failed in %s" repo-dir)
+                         ;; Optionally display the output buffer
+                         ;; (display-buffer output-buffer)
+                         (setq all-pulls-succeeded nil))
+                     (with-current-buffer output-buffer
+                       (save-excursion
+                         (goto-char (point-max))
+                         (if (re-search-backward "CONFLICT" nil t)
+                             (progn
+                               (message "Conflict detected during git pull in %s" repo-dir)
+                               ;; (display-buffer output-buffer)
+                               (setq all-pulls-succeeded nil))
+                           (message "Git pull succeeded in %s" repo-dir)))))
+                   ;; When all processes have finished, run 'doom sync' if needed
+                   (when (and (null (cl-remove-if #'process-live-p processes))
+                              all-pulls-succeeded)
+                     (cae-multi--run-doom-sync)))))))))
+(defun cae-multi--run-doom-sync ()
+  "Run 'doom sync' asynchronously and redirect output to the output buffer."
+  (let ((process
+         (start-process
+          "doom-sync-process"
+          " *cae-multi-pull-repositories*"
+          "doom" "sync")))
+    (set-process-sentinel
+     process
+     (lambda (proc event)
+       (when (memq (process-status proc) '(exit signal))
+         (if (= (process-exit-status proc) 0)
+             (message "'doom sync' finished successfully")
+           (message "'doom sync' failed with exit code %d" (process-exit-status proc)))
+         ;; Optionally display the output buffer
+         ;; (display-buffer " *cae-multi-pull-repositories*")
+         )))))
