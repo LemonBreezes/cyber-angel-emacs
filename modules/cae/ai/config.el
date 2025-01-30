@@ -197,9 +197,8 @@
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
-  (add-hook! 'doom-escape-hook :depth -1
+  (add-hook! 'doom-escape-hook
     (defun cae-minuet-dismiss-suggestion-h ()
-      (+log "HELLO!!!")
       (minuet-dismiss-suggestion)
       t))
   (when (modulep! :editor evil)
