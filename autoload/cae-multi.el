@@ -41,7 +41,8 @@
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
   (interactive)
-  (let ((all-pulls-succeeded t))
+  (let ((verbose nil)
+        (all-pulls-succeeded t))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
         (when (file-directory-p (concat repo-dir "/.git"))
@@ -62,9 +63,11 @@
                         (setq all-pulls-succeeded nil))
                     (message "Git pull succeeded in %s" repo-dir)))))))))
     (when all-pulls-succeeded
-      (message "All pulls succeeded, running 'doom sync'")
+      (when verbose
+        (message "All pulls succeeded, running 'doom sync'"))
       (let ((doom-exit-code (call-process "doom" nil "*doom sync*" nil "sync")))
         (if (= doom-exit-code 0)
-            (message "'doom sync' finished successfully")
+            (when verbose
+              (message "'doom sync' finished successfully"))
           (message "'doom sync' failed with exit code %d" doom-exit-code)
           (display-buffer "*doom sync*"))))))
