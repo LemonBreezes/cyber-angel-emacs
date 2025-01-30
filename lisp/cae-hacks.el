@@ -177,3 +177,6 @@ It is meant to be used as a `post-gc-hook'."
 
 ;;let*: Symbol’s function definition is void: consult--async-split-style
 (setf (symbol-function 'consult--async-split-style) (symbol-function 'ignore))
+
+;; Ignore some annoying errors when the buffer gets inadvertently deleted.
+(advice-add #'lsp--read-char :around #'cae-ignore-errors-a)
