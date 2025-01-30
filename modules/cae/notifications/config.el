@@ -11,13 +11,6 @@
   (run-with-idle-timer 1.5 nil #'cae-ednc-load-h)
   (add-hook 'ednc-notification-presentation-functions
             #'cae-ednc-show-notification-in-buffer)
-  (defun cae-ednc-stack-notifications (&optional hide)
-    (mapconcat (lambda (notification)
-                 (let ((app-name (ednc-notification-app-name notification)))
-                   (unless (member app-name hide)
-                     (push app-name hide)
-                     (ednc-format-notification notification))))
-               (ednc-notifications) ""))
   (add-hook 'ednc-notification-presentation-functions
             (lambda (&rest _) (force-mode-line-update t)))
   :config
