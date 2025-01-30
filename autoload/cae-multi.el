@@ -44,19 +44,19 @@
   (require 'org)
   (let ((doom-sync-needed nil))
     (dolist (repo-dir cae-multi-repositories)
-    (let ((default-directory repo-dir))
-      (when (file-directory-p (concat repo-dir "/.git"))
-        (if (file-exists-p (concat repo-dir "/.git/index.lock"))
-            (message "Git lockfile exists in %s, skipping pull" repo-dir)
-          (with-temp-buffer
-            (let ((exit-code (call-process "git" nil (current-buffer) nil "pull")))
-              (if (/= exit-code 0)
-                  (progn
-                    (message "Git pull failed in %s with exit code %d" repo-dir exit-code)
-                    (display-buffer (current-buffer)))
-                (goto-char (point-min))
-                (if (re-search-forward "CONFLICT" nil t)
+      (let ((default-directory repo-dir))
+        (when (file-directory-p (concat repo-dir "/.git"))
+          (if (file-exists-p (concat repo-dir "/.git/index.lock"))
+              (message "Git lockfile exists in %s, skipping pull" repo-dir)
+            (with-temp-buffer
+              (let ((exit-code (call-process "git" nil (current-buffer) nil "pull")))
+                (if (/= exit-code 0)
                     (progn
-                      (message "Conflict detected during git pull in %s" repo-dir)
+                      (message "Git pull failed in %s with exit code %d" repo-dir exit-code)
                       (display-buffer (current-buffer)))
-                  (message "Git pull succeeded in %s" repo-dir)))))))))))
+                  (goto-char (point-min))
+                  (if (re-search-forward "CONFLICT" nil t)
+                      (progn
+                        (message "Conflict detected during git pull in %s" repo-dir)
+                        (display-buffer (current-buffer)))
+                    (message "Git pull succeeded in %s" repo-dir)))))))))))
