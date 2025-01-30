@@ -63,12 +63,12 @@
                         (setq all-pulls-succeeded nil))
                     (when verbose
                       (message "Git pull succeeded in %s" repo-dir)))))))))
-    (when all-pulls-succeeded
-      (when verbose
-        (message "All pulls succeeded, running 'doom sync'"))
-      (let ((doom-exit-code (call-process "doom" nil "*doom sync*" nil "sync")))
-        (if (= doom-exit-code 0)
-            (when verbose
-              (message "'doom sync' finished successfully"))
-          (message "'doom sync' failed with exit code %d" doom-exit-code)
-          (display-buffer "*doom sync*")))))))
+      (when all-pulls-succeeded
+        (when verbose
+          (message "All pulls succeeded, running 'doom sync'"))
+        (let ((doom-exit-code (call-process "doom" nil "*doom sync*" nil "sync")))
+          (if (= doom-exit-code 0)
+              (when verbose
+                (message "'doom sync' finished successfully"))
+            (message "'doom sync' failed with exit code %d" doom-exit-code)
+            (display-buffer "*doom sync*")))))))
