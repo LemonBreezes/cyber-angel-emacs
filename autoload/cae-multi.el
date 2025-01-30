@@ -41,7 +41,6 @@
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
   (interactive)
-  (require 'org)
   (let ((doom-sync-needed nil))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
