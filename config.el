@@ -1230,13 +1230,9 @@
   (after! comint
     (setq comint-history-isearch 'dwim
           comint-buffer-maximum-size 8192))
-  (add-hook! 'comint-mode-hook
-    (defun cae-disable-rainbow-delimiters-h ()
-      (when (bound-and-true-p rainbow-delimiters-mode)
-        (rainbow-delimiters-mode -1)))
     (setq-hook! 'comint-mode-hook
       imenu-generic-expression
-      `(("Prompts" ,(concat comint-prompt-regexp "\\(.*\\)") 1))))
+      `(("Prompts" ,(concat comint-prompt-regexp "\\(.*\\)") 1)))
 
   (after! em-term
     ;; Some of the commands I copied from other configurations and will likely
