@@ -1333,6 +1333,7 @@
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz"
       mail-source-directory "~/.mail/")
+(files--ensure-directory "~/.mail/Fastmail/")
 
 (after! mu4e
   (setq mu4e-contexts
