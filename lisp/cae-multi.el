@@ -78,6 +78,8 @@
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
 
+;;; Sync the repositories
+
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
   (dolist (repo-dir cae-multi-repositories)
