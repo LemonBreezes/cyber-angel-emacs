@@ -11,6 +11,9 @@
   (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
     (load! (concat cae-multi-secrets-dir "secrets.el")))
 
+  (defvar cae-multi-org-dir "~/org/")
+  (make-directory cae-multi-org-dir t)
+
   ;; Ensure this is defined even if its module is not loaded.
   (unless (boundp '+default-minibuffer-maps)
     (defvar +default-minibuffer-maps
@@ -1274,7 +1277,7 @@
           calendar-mark-diary-entries-flag t))
 
   (after! org
-    (setq org-directory "~/org/"
+    (setq org-directory (or (bound-and-true-p cae-multi-org-dir) "~/org/")
           org-extend-today-until 3
           org-startup-with-inline-images t
           org-startup-align-all-tables t
