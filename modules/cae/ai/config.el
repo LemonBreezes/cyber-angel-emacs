@@ -199,10 +199,12 @@
   :config
   (add-hook! 'doom-escape-hook
     (defun cae-minuet-dismiss-suggestion-h ()
-      "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
-      (minuet--cleanup-suggestion)))
+      (minuet-dismiss-suggestion)
+      t))
   (when (modulep! :editor evil)
     (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
 
-;;write some example code
+;; do something
+;; Setup functions for showing/
+()
