@@ -109,6 +109,7 @@
     ("surchrage" "surcharge" nil :count 0)
     ("talkking" "talking" nil :count 0)
     ("thay" "that" nil :count 0)
+    ("thje" "the" nil :count 0)
     ("threadss" "threads" nil :count 0)
     ("thta" "that" nil :count 2)
     ("timedatctl" "timedatectl" nil :count 1)
