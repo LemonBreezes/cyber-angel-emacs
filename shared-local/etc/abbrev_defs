@@ -61,6 +61,7 @@
     ("hok" "hook" nil :count 1)
     ("htat" "that" nil :count 1)
     ("hve" "have" nil :count 0)
+    ("hwich" "which" nil :count 0)
     ("ijnstall" "install" nil :count 0)
     ("improvue" "improve" nil :count 0)
     ("inffo" "info" nil :count 0)
