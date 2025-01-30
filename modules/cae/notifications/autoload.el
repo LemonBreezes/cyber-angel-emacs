@@ -82,3 +82,12 @@
   (advice-add #'call-process :around #'cae-ednc-call-process-advice)
   (unwind-protect (apply oldfun args)
     (advice-remove #'call-process #'cae-ednc-call-process-advice)))
+
+;;;###autoload
+(defun cae-ednc-stack-notifications (&optional hide)
+  (mapconcat (lambda (notification)
+               (let ((app-name (ednc-notification-app-name notification)))
+                 (unless (member app-name hide)
+                   (push app-name hide)
+                   (ednc-format-notification notification))))
+             (ednc-notifications) ""))
