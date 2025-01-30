@@ -77,12 +77,13 @@
 
 (defvar cae-multi-repositories
   (list doom-user-dir
-        cae-multi-org-dir
+        org-directory
         cae-multi-secrets-dir)
   "List of directories containing Git repositories to sync between machines.")
 
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts."
+  (require 'org)
   (dolist (repo-dir cae-multi-repositories)
     (let ((default-directory repo-dir))
       (when (file-directory-p (concat repo-dir "/.git"))
