@@ -135,3 +135,6 @@
 ;;; Lang
 (when (modulep! :lang haskell)
   (package! consult-hoogle))
+
+;;; Term
+(use-package! comint-histories)
