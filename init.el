@@ -137,7 +137,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
        :config
-       (default +bindings +smartparens +gnupg)
+       (default +bindings +gnupg)
 
        :email
        mu4e

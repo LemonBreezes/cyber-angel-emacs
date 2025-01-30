@@ -97,48 +97,60 @@
 
 (defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/"))
 
-;;;###autoload
-(defun cae-bookmark-jump-to-newest-download (_)
-  (if-let* ((downloads (cl-remove-if
-                        (lambda (file)
-                          (or (string-prefix-p "." (file-name-nondirectory file))
-                              (file-directory-p file)))
-                        (cl-union (directory-files "~/Downloads/" t)
-                                  (directory-files "~/" t))))
-            (newest-file (-max-by #'file-newer-than-file-p downloads)))
-      (progn
-        (dired (file-name-directory newest-file))
-        (dired-goto-file newest-file))
-    (dired "~/Downloads/")))
+(defun cae-directory-exists-and-not-empty-p (dir)
+  "Return non-nil if DIR exists and is not empty."
+  (and (file-exists-p dir)
+       (not (directory-empty-p dir))))
+
+(defun cae-newest-file-in-directories (dirs)
+  "Return the most recently modified file in DIRS, excluding hidden files and directories."
+  (let* ((files (cl-loop for dir in dirs
+                         when (file-directory-p dir)
+                         append (directory-files dir t "^[^.]")))
+         (regular-files (cl-remove-if #'file-directory-p files)))
+    (car (sort regular-files #'file-newer-than-file-p))))
 
 ;;;###autoload
-(defun cae-bookmark-jump-to-project-bookmarks (_)
-  ;; This function is broken. I am no longer using project bookmarks.
-  (let* ((bookmark-file (cae-project--get-bookmark-file))
-         (bookmark-dir (file-name-directory bookmark-file)))
-    (if (file-exists-p bookmark-dir)
-        (progn (dired bookmark-dir)
-               (if (file-exists-p bookmark-file)
-                   (dired-goto-file bookmark-file)
-                 (kill-new bookmark-file)
-                 (message "Bookmark file %s does not exist. It has been copied to the kill ring."
-                          bookmark-file)))
-      (message "No bookmark files found for this project."))))
+(defun cae-bookmark-jump-to-newest-download (_)
+  (let ((newest-file (cae-newest-file-in-directories
+                      (list "~/Downloads/" "~/" "~/Sync/"))))
+    (if newest-file
+        (progn
+          (dired (file-name-directory newest-file))
+          (dired-goto-file newest-file))
+      (dired "~/Downloads/"))))
+
+;; (defun cae-bookmark-jump-to-project-bookmarks (_)
+;;   ;; This function is broken. I am no longer using project bookmarks.
+;;   (let* ((bookmark-file (cae-project--get-bookmark-file))
+;;          (bookmark-dir (file-name-directory bookmark-file)))
+;;     (if (file-exists-p bookmark-dir)
+;;         (progn (dired bookmark-dir)
+;;                (if (file-exists-p bookmark-file)
+;;                    (dired-goto-file bookmark-file)
+;;                  (kill-new bookmark-file)
+;;                  (message "Bookmark file %s does not exist. It has been copied to the kill ring."
+;;                           bookmark-file)))
+;;       (message "No bookmark files found for this project."))))
 
 (defun cae-get-windows-username ()
   "Extract the Windows username from cmd.exe output in WSL."
-  (thread-last (shell-command-to-string
-                "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME% 2>/dev/null")
-               (replace-regexp-in-string "\r\n" "")))
+  (when (file-exists-p "/mnt/c/Windows/System32/cmd.exe")
+    (string-trim
+     (shell-command-to-string
+      "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME%"))))
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-syncthing-directory (_)
-  (let ((username (and (file-exists-p "/mnt/c/")
-                       (cae-get-windows-username))))
-    (cond ((and (file-exists-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")
-                (not (directory-empty-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")))
-           (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/"))
-          ((and (file-exists-p (format "/mnt/c/Users/%s/Sync/" username))
-                (not (directory-empty-p (format "/mnt/c/Users/%s/Sync/" username))))
-           (dired (format "/mnt/c/Users/%s/Sync/" username)))
-          (t (dired "~/Sync/")))))
+  (let ((username (cae-get-windows-username)))
+    (cond
+     ((cae-directory-exists-and-not-empty-p "/mnt/c/Users/SyncthingServiceAcct/Sync/")
+      (dired "/mnt/c/Users/SyncthingServiceAcct/Sync/"))
+     ((and username
+           (cae-directory-exists-and-not-empty-p
+            (format "/mnt/c/Users/%s/Sync/" username)))
+      (dired (format "/mnt/c/Users/%s/Sync/" username)))
+     ((cae-directory-exists-and-not-empty-p "~/Sync/")
+      (dired "~/Sync/"))
+     (t
+      (message "No Syncthing directory found.")))))
