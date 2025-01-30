@@ -137,4 +137,4 @@
   (package! consult-hoogle))
 
 ;;; Term
-(use-package! comint-histories)
+(package! comint-histories)
