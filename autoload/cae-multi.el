@@ -42,7 +42,8 @@
   "Pull the shared repositories and handle conflicts."
   (interactive)
   (require 'org)
-  (dolist (repo-dir cae-multi-repositories)
+  (let ((doom-sync-needed nil))
+    (dolist (repo-dir cae-multi-repositories)
     (let ((default-directory repo-dir))
       (when (file-directory-p (concat repo-dir "/.git"))
         (if (file-exists-p (concat repo-dir "/.git/index.lock"))
