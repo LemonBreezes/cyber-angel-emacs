@@ -69,7 +69,6 @@
 (package! w3m)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (package! keyfreq)
-(package! wakatime-mode :recipe (:host github :repo "wakatime/wakatime-mode"))
 (when (modulep! :email mu4e)
   (package! consult-mu :recipe
     (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
