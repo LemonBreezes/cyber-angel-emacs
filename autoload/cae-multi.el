@@ -77,8 +77,7 @@
                    ;; When all processes have finished, run 'doom sync' if needed
                    (when (and (null (delq proc (cl-remove-if #'process-live-p processes)))
                               all-pulls-succeeded)
-                     (cae-multi--run-doom-sync)))
-                 )))))))))
+                     (cae-multi--run-doom-sync))))))))))))
 (defun cae-multi--run-doom-sync ()
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
