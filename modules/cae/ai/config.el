@@ -163,7 +163,10 @@
   (advice-add #'shell-maker-welcome-message :override #'ignore))
 
 (use-package! gptel
-  :defer t :config
+  :defer t
+  :init
+  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  :config
   (after! gptel-context
     (map! :map gptel-context-buffer-mode-map
           :n "q" #'gptel-context-quit
