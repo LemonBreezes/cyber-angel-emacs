@@ -194,7 +194,7 @@
 
 (when (modulep! :completion corfu)
   (map! :prefix "C-x"
-        (:when (modulep! :cae ai)
+        (:when (modulep! :cae ai +copilot)
          :i "C-c" #'copilot-complete)))
 
 (unless evil-disable-insert-state-bindings
