@@ -1,6 +1,5 @@
 ;;; cae/notifications/config.el -*- lexical-binding: t; -*-
 
-
 (use-package! ednc
   :defer t :init
   (defun cae-ednc-load-h ()
