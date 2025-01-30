@@ -70,7 +70,7 @@
 
 (defvar cae-multi-repositories
   (list doom-user-dir
-        org-directory
+        cae-multi-org-dir
         cae-multi-secrets-dir)
   "List of directories containing Git repositories to sync between machines.")
 
