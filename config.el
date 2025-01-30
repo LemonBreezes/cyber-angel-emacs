@@ -1240,28 +1240,28 @@
     (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
 
     (comint-histories-add-history
-     gdb
-     :predicates '((lambda () (string-match-p "^(gdb)"
-                                              (comint-histories-get-prompt))))
-     :length 2000)
+      gdb
+      :predicates '((lambda () (string-match-p "^(gdb)"
+                                               (comint-histories-get-prompt))))
+      :length 2000)
 
     (comint-histories-add-history
-     python
-     :predicates
-     '((lambda () (or (derived-mode-p 'inferior-python-mode)
-                      (string-match-p "^>>>" (comint-histories-get-prompt)))))
-     :length 2000)
+      python
+      :predicates
+      '((lambda () (or (derived-mode-p 'inferior-python-mode)
+                       (string-match-p "^>>>" (comint-histories-get-prompt)))))
+      :length 2000)
 
     (comint-histories-add-history
-     ielm
-     :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
-     :length 2000)
+      ielm
+      :predicates '((lambda () (derived-mode-p 'inferior-emacs-lisp-mode)))
+      :length 2000)
 
     (comint-histories-add-history
-     shell
-     :predicates '((lambda () (derived-mode-p 'shell-mode)))
-     :filters '("^ls" "^cd")
-     :length 2000)
+      shell
+      :predicates '((lambda () (derived-mode-p 'shell-mode)))
+      :filters '("^ls" "^cd")
+      :length 2000)
 
     (define-key comint-mode-map (kbd "M-r")
       (lambda () (interactive)
