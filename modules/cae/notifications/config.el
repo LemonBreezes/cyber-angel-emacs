@@ -21,13 +21,12 @@
                (ednc-notifications) ""))
   (add-hook 'ednc-notification-presentation-functions
             (lambda (&rest _) (force-mode-line-update t)))
+  ;; Otherwise `alert-send-notification' will block the UI.
+  (advice-add #'alert-send-notification :around
+              #'cae-ednc-wrap-async-call-process-a))
   :config
   (add-to-list 'global-mode-string
                '((:eval (cae-ednc-stack-notifications))))
   (map! :map ednc-view-mode-map
         "n" #'next-line
         "p" #'previous-line)
-
-  ;; Otherwise `alert-send-notification' will block the UI.
-  (advice-add #'alert-send-notification :around
-              #'cae-ednc-wrap-async-call-process-a))
