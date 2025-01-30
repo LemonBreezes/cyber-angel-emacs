@@ -847,7 +847,8 @@
         regexp-search-ring-max 200)
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-clean-up-lazy-highlight-h ()
-      (lazy-highlight-cleanup t)))
+      (when isearch-lazy-highlight-overlays
+        (lazy-highlight-cleanup t))))
   (when (fboundp #'+evil-disable-ex-highlights-h)
     (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
