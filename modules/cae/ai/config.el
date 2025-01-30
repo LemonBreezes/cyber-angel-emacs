@@ -38,6 +38,7 @@
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
+;; Minuet uses Deepseek by default as of 1/30/2025.
 
 (use-package! aider
   :defer t :config
