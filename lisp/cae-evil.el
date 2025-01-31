@@ -203,6 +203,11 @@
       "C-x C-o"  #'completion-at-point
       "C-x C-n"  #'cape-dabbrev
       "C-x C-p"  #'+corfu/dabbrev-this-buffer)))
+(map! :map ctl-x-map
+      (:when (modulep! :cae ai +copilot)
+       "C-c" #'copilot-complete)
+      (:when (modulep! :cae ai -copilot)
+       "C-c" #'minuet-show-suggestion))
 
 ;; TODO Fix this to work with `consult-yasnippet'.
 ;;(defadvice! cae-evil-insert-state-a (&rest _)
