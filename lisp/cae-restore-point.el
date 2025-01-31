@@ -268,6 +268,10 @@
     (when (and restore-point-mode
                (not (eq last-command 'evil-normal-state)))
       (rp/cond-restore-point)))
+  (defadvice! cae-evil-normal-state-restore-point-a (oldfun &rest args)
+    :around #'evil-normal-state
+    (unless (rp/cond-restore-point)
+      (apply oldfun args)))
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
         (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
