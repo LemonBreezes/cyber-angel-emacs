@@ -314,7 +314,8 @@
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
     (when (and restore-point-mode
-               ;; So that we don't unexpectedly get stuck in a loop of not running the `evil-escape-hook'.
+               ;; So that we don't unexpectedly get stuck in a loop of not
+               ;; running the `evil-escape-hook'.
                (not (eq last-command 'evil-normal-state)))
       (rp/cond-restore-point)))
   (defun cae-restore-point-enable-in-minibuffer-h ()
