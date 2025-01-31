@@ -951,199 +951,199 @@
   ;;  :config
   ;;  (advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
 
-  (use-package! file-info
-    :defer t :init
-    (map! :leader :desc "Show file info" "fi" #'file-info-show)
-    :config
-    ;; See the `:cae vc' module for further configuration.
-    (setq file-info-include-headlines t
-          file-info-max-value-length 100))
-
-  (use-package! keyfreq
-    :after-call post-command-hook
-    :config
-    (keyfreq-mode +1)
-    (keyfreq-autosave-mode +1))
-
-  (use-package! titlecase
-    :defer t :init
-    (after! embark
-      (define-key embark-region-map "T" #'titlecase-region)
-      (define-key embark-heading-map "T" #'titlecase-line)
-      (define-key embark-sentence-map "T" #'titlecase-sentence)))
-
-  (after! outline
-    (after! which-key
-      (which-key-add-keymap-based-replacements outline-minor-mode-map
-        "C-c @" "outline")))
-
-  (use-package! embark
-    :defer t :config
-    (after! vertico
-      (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
-    (advice-add #'embark-completing-read-prompter :around
-                #'cae-bind-C-z-to-abort-a))
-
-  (use-package! logos
-    :defer t :init
-    (map! [remap forward-page] #'logos-forward-page-dwim
-          [remap backward-page] #'logos-backward-page-dwim
-          [remap narrow-to-page] #'cae-narrow-to-page)
-    :config
-    (setq logos-outlines-are-pages t))
-
-  (use-package! aas
-    :defer t :init
-    (add-hook 'doom-first-input-hook #'aas-global-mode)
-    :config
-    (aas-set-snippets 'global
-      ";--" "—"
-      ";-." "→"
-      ";=." "⇒"
-      ";!=" "≠"
-      ",." #'cae-insert-bracket-pair    ; <>
-      ))
-
-  (use-package! parrot
-    :when (modulep! :tools magit)
-    :defer t :init
-    ;; Wrangle parrot into being fully lazy-loaded.
-    (autoload #'parrot-party-while-process "parrot")
-    (autoload #'parrot--todo-party "parrot")
-    (autoload #'parrot--magit-push-filter "parrot")
-    (defadvice! cae-modeline-gac-party-on-push-a (buffer)
-      :after #'gac-push
-      (when-let* ((proc (get-buffer-process "*git-auto-push*")))
-        (parrot-party-while-process proc)))
-    (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
-    (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
-    :config
-    (setq parrot-animate 'hide-static
-          parrot-num-rotations 3
-          parrot-animate-on-load nil
-          parrot-party-on-magit-push t
-          parrot-party-on-org-todo-states '("DONE")
-          parrot-type 'nyan)
-    (parrot-mode +1))
-
-  (use-package! parrot-rotate
-    :defer t :init
-    (map! :n "]r" #'cae-modeline-rotate-forward-word-at-point
-          :n "[r" #'cae-modeline-rotate-backward-word-at-point)
-    :config
-    (after! parrot-rotate
-      (setq parrot-rotate-animate-after-rotation t
-            parrot-rotate-highlight-after-rotation t
-            parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
-            parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
-      (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("-1" "+1")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
-                                               "cae-keyboard-remap-to-strings"
-                                               "cae-keyboard-strings")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))
-      (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled")))))
-
-  (use-package! string-inflection
-    :commands (string-inflection-all-cycle
-               string-inflection-toggle
-               string-inflection-camelcase
-               string-inflection-lower-camelcase
-               string-inflection-kebab-case
-               string-inflection-underscore
-               string-inflection-capital-underscore
-               string-inflection-upcase)
-    :init
-    (map! :leader :prefix-map ("c~" . "naming convention")
-          :desc "cycle" "~" #'string-inflection-all-cycle
-          :desc "toggle" "t" #'string-inflection-toggle
-          :desc "CamelCase" "c" #'string-inflection-camelcase
-          :desc "downCase" "d" #'string-inflection-lower-camelcase
-          :desc "kebab-case" "k" #'string-inflection-kebab-case
-          :desc "under_score" "_" #'string-inflection-underscore
-          :desc "Upper_Score" "u" #'string-inflection-capital-underscore
-          :desc "UP_CASE" "U" #'string-inflection-upcase)
-    (defvaralias 'naming-convention-map 'doom-leader-naming\ convention-map)
-    (after! evil
-      (evil-define-operator evil-operator-string-inflection (beg end _type)
-        "Define a new evil operator that cycles symbol casing."
-        :move-point nil
-        (interactive "<R>")
-        (string-inflection-all-cycle)
-        (setq evil-repeat-info '([?g ?~])))
-      (define-key evil-normal-state-map (kbd "g~")
-        'evil-operator-string-inflection)))
-
-  (use-package! beginend
-    :defer t :init
-    (add-hook 'doom-first-input-hook #'beginend-global-mode)
-    ;; This patches around this function not being compatible with Evil when
-    ;; `evil-move-beyond-eol' is `nil'. This should probably go into
-    ;; `evil-collection'.
-    (defadvice! cae-beginend-goto-eol-a ()
-      :before #'beginend-prog-mode-goto-end
-      (goto-char (point-at-eol))))
-
-  (use-package! isearch-mb
-    :after-call isearch-mode-hook :init
-    (when (modulep! :editor evil)
-      (after! evil
-        ;; I prefer `isearch' combined with `isearch-mb'.
-        (setq! evil-search-module 'isearch)
-        ;; I have a setup in `config.el' where I cleanup the overlays in
-        ;; `doom-escape-hook'. I prefer that because I use the overlays as a
-        ;; quick way to highlight text.
-        (advice-add #'evil-flash-hook :override #'ignore)
-        (advice-add #'evil-clean-isearch-overlays :override #'ignore)
-        (when evil-want-C-w-delete
-          (map! :map isearch-mb-minibuffer-map
-                "C-w" #'evil-delete-backward-word))))
-    :config
-    (isearch-mb--setup)
-    (isearch-mb-mode +1)
-    (dolist (cmd '(recenter-top-bottom reposition-window
-                   scroll-right scroll-left isearch-yank-word
-                   consult-isearch-history))
-      (add-to-list 'isearch-mb--with-buffer cmd))
-    (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
-                   avy-isearch consult-line))
-      (add-to-list 'isearch-mb--after-exit cmd))
-    (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
-    (when (modulep! :completion vertico)
-      (map! :map isearch-mb-minibuffer-map
-            [remap consult-history] #'consult-isearch-history)
-      (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
-    (map! :map isearch-mb-minibuffer-map
-          [remap isearch-query-replace] #'anzu-isearch-query-replace
-          [remap isearch-query-replace-regexp] #'anzu-query-replace-regexp))
-
-  (use-package! edit-indirect
-    :defer t :config
-    (add-hook! 'edit-indirect-after-creation-hook
-      (defun cae-edit-indirect-major-mode-fallback-h ()
-        (when (eq major-mode 'fundamental-mode)
-          (funcall (buffer-local-value
-                    'major-mode
-                    (overlay-buffer edit-indirect--overlay))))))
-    (add-hook! 'edit-indirect-after-creation-hook :append
-      (defun cae-edit-indirect-setup-defaults-h ()
-        (when (bound-and-true-p flycheck-mode)
-          (flycheck-mode -1)))))
-
-  (use-package! zop-to-char
-    :defer t :init
-    (map! [remap zap-to-char] #'zop-to-char
-          [remap zap-up-to-char] #'zop-up-to-char)
-    :config
-    (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
+  ;;(use-package! file-info
+  ;;  :defer t :init
+  ;;  (map! :leader :desc "Show file info" "fi" #'file-info-show)
+  ;;  :config
+  ;;  ;; See the `:cae vc' module for further configuration.
+  ;;  (setq file-info-include-headlines t
+  ;;        file-info-max-value-length 100))
+  ;;
+  ;;(use-package! keyfreq
+  ;;  :after-call post-command-hook
+  ;;  :config
+  ;;  (keyfreq-mode +1)
+  ;;  (keyfreq-autosave-mode +1))
+  ;;
+  ;;(use-package! titlecase
+  ;;  :defer t :init
+  ;;  (after! embark
+  ;;    (define-key embark-region-map "T" #'titlecase-region)
+  ;;    (define-key embark-heading-map "T" #'titlecase-line)
+  ;;    (define-key embark-sentence-map "T" #'titlecase-sentence)))
+  ;;
+  ;;(after! outline
+  ;;  (after! which-key
+  ;;    (which-key-add-keymap-based-replacements outline-minor-mode-map
+  ;;      "C-c @" "outline")))
+  ;;
+  ;;(use-package! embark
+  ;;  :defer t :config
+  ;;  (after! vertico
+  ;;    (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
+  ;;  (advice-add #'embark-completing-read-prompter :around
+  ;;              #'cae-bind-C-z-to-abort-a))
+  ;;
+  ;;(use-package! logos
+  ;;  :defer t :init
+  ;;  (map! [remap forward-page] #'logos-forward-page-dwim
+  ;;        [remap backward-page] #'logos-backward-page-dwim
+  ;;        [remap narrow-to-page] #'cae-narrow-to-page)
+  ;;  :config
+  ;;  (setq logos-outlines-are-pages t))
+  ;;
+  ;;(use-package! aas
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-input-hook #'aas-global-mode)
+  ;;  :config
+  ;;  (aas-set-snippets 'global
+  ;;    ";--" "—"
+  ;;    ";-." "→"
+  ;;    ";=." "⇒"
+  ;;    ";!=" "≠"
+  ;;    ",." #'cae-insert-bracket-pair    ; <>
+  ;;    ))
+  ;;
+  ;;(use-package! parrot
+  ;;  :when (modulep! :tools magit)
+  ;;  :defer t :init
+  ;;  ;; Wrangle parrot into being fully lazy-loaded.
+  ;;  (autoload #'parrot-party-while-process "parrot")
+  ;;  (autoload #'parrot--todo-party "parrot")
+  ;;  (autoload #'parrot--magit-push-filter "parrot")
+  ;;  (defadvice! cae-modeline-gac-party-on-push-a (buffer)
+  ;;    :after #'gac-push
+  ;;    (when-let* ((proc (get-buffer-process "*git-auto-push*")))
+  ;;      (parrot-party-while-process proc)))
+  ;;  (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
+  ;;  (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
+  ;;  :config
+  ;;  (setq parrot-animate 'hide-static
+  ;;        parrot-num-rotations 3
+  ;;        parrot-animate-on-load nil
+  ;;        parrot-party-on-magit-push t
+  ;;        parrot-party-on-org-todo-states '("DONE")
+  ;;        parrot-type 'nyan)
+  ;;  (parrot-mode +1))
+  ;;
+  ;;(use-package! parrot-rotate
+  ;;  :defer t :init
+  ;;  (map! :n "]r" #'cae-modeline-rotate-forward-word-at-point
+  ;;        :n "[r" #'cae-modeline-rotate-backward-word-at-point)
+  ;;  :config
+  ;;  (after! parrot-rotate
+  ;;    (setq parrot-rotate-animate-after-rotation t
+  ;;          parrot-rotate-highlight-after-rotation t
+  ;;          parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+  ;;          parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("-1" "+1")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
+  ;;                                             "cae-keyboard-remap-to-strings"
+  ;;                                             "cae-keyboard-strings")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))
+  ;;    (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled")))))
+  ;;
+  ;;(use-package! string-inflection
+  ;;  :commands (string-inflection-all-cycle
+  ;;             string-inflection-toggle
+  ;;             string-inflection-camelcase
+  ;;             string-inflection-lower-camelcase
+  ;;             string-inflection-kebab-case
+  ;;             string-inflection-underscore
+  ;;             string-inflection-capital-underscore
+  ;;             string-inflection-upcase)
+  ;;  :init
+  ;;  (map! :leader :prefix-map ("c~" . "naming convention")
+  ;;        :desc "cycle" "~" #'string-inflection-all-cycle
+  ;;        :desc "toggle" "t" #'string-inflection-toggle
+  ;;        :desc "CamelCase" "c" #'string-inflection-camelcase
+  ;;        :desc "downCase" "d" #'string-inflection-lower-camelcase
+  ;;        :desc "kebab-case" "k" #'string-inflection-kebab-case
+  ;;        :desc "under_score" "_" #'string-inflection-underscore
+  ;;        :desc "Upper_Score" "u" #'string-inflection-capital-underscore
+  ;;        :desc "UP_CASE" "U" #'string-inflection-upcase)
+  ;;  (defvaralias 'naming-convention-map 'doom-leader-naming\ convention-map)
+  ;;  (after! evil
+  ;;    (evil-define-operator evil-operator-string-inflection (beg end _type)
+  ;;      "Define a new evil operator that cycles symbol casing."
+  ;;      :move-point nil
+  ;;      (interactive "<R>")
+  ;;      (string-inflection-all-cycle)
+  ;;      (setq evil-repeat-info '([?g ?~])))
+  ;;    (define-key evil-normal-state-map (kbd "g~")
+  ;;      'evil-operator-string-inflection)))
+  ;;
+  ;;(use-package! beginend
+  ;;  :defer t :init
+  ;;  (add-hook 'doom-first-input-hook #'beginend-global-mode)
+  ;;  ;; This patches around this function not being compatible with Evil when
+  ;;  ;; `evil-move-beyond-eol' is `nil'. This should probably go into
+  ;;  ;; `evil-collection'.
+  ;;  (defadvice! cae-beginend-goto-eol-a ()
+  ;;    :before #'beginend-prog-mode-goto-end
+  ;;    (goto-char (point-at-eol))))
+  ;;
+  ;;(use-package! isearch-mb
+  ;;  :after-call isearch-mode-hook :init
+  ;;  (when (modulep! :editor evil)
+  ;;    (after! evil
+  ;;      ;; I prefer `isearch' combined with `isearch-mb'.
+  ;;      (setq! evil-search-module 'isearch)
+  ;;      ;; I have a setup in `config.el' where I cleanup the overlays in
+  ;;      ;; `doom-escape-hook'. I prefer that because I use the overlays as a
+  ;;      ;; quick way to highlight text.
+  ;;      (advice-add #'evil-flash-hook :override #'ignore)
+  ;;      (advice-add #'evil-clean-isearch-overlays :override #'ignore)
+  ;;      (when evil-want-C-w-delete
+  ;;        (map! :map isearch-mb-minibuffer-map
+  ;;              "C-w" #'evil-delete-backward-word))))
+  ;;  :config
+  ;;  (isearch-mb--setup)
+  ;;  (isearch-mb-mode +1)
+  ;;  (dolist (cmd '(recenter-top-bottom reposition-window
+  ;;                 scroll-right scroll-left isearch-yank-word
+  ;;                 consult-isearch-history))
+  ;;    (add-to-list 'isearch-mb--with-buffer cmd))
+  ;;  (dolist (cmd '(anzu-isearch-query-replace anzu-isearch-query-replace-regexp
+  ;;                 avy-isearch consult-line))
+  ;;    (add-to-list 'isearch-mb--after-exit cmd))
+  ;;  (define-key isearch-mb-minibuffer-map (kbd "M-j") #'avy-isearch)
+  ;;  (when (modulep! :completion vertico)
+  ;;    (map! :map isearch-mb-minibuffer-map
+  ;;          [remap consult-history] #'consult-isearch-history)
+  ;;    (define-key isearch-mb-minibuffer-map (kbd "M-s l") 'consult-line))
+  ;;  (map! :map isearch-mb-minibuffer-map
+  ;;        [remap isearch-query-replace] #'anzu-isearch-query-replace
+  ;;        [remap isearch-query-replace-regexp] #'anzu-query-replace-regexp))
+  ;;
+  ;;(use-package! edit-indirect
+  ;;  :defer t :config
+  ;;  (add-hook! 'edit-indirect-after-creation-hook
+  ;;    (defun cae-edit-indirect-major-mode-fallback-h ()
+  ;;      (when (eq major-mode 'fundamental-mode)
+  ;;        (funcall (buffer-local-value
+  ;;                  'major-mode
+  ;;                  (overlay-buffer edit-indirect--overlay))))))
+  ;;  (add-hook! 'edit-indirect-after-creation-hook :append
+  ;;    (defun cae-edit-indirect-setup-defaults-h ()
+  ;;      (when (bound-and-true-p flycheck-mode)
+  ;;        (flycheck-mode -1)))))
+  ;;
+  ;;(use-package! zop-to-char
+  ;;  :defer t :init
+  ;;  (map! [remap zap-to-char] #'zop-to-char
+  ;;        [remap zap-up-to-char] #'zop-up-to-char)
+  ;;  :config
+  ;;  (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
   )
 
 
