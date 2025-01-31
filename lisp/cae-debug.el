@@ -59,4 +59,44 @@
 
 ;;; Debugging `doom-escape-hook'.
 
+(defvar doom-escape-hook-debug-enabled nil
+  "Non-nil if doom-escape-hook debugging is enabled.")
+
+(defvar doom-escape-hook-original nil
+  "A backup of the original doom-escape-hook functions.")
+
+(defun enable-doom-escape-hook-debug ()
+  "Enable debugging for doom-escape-hook.
+This wraps each function in doom-escape-hook with a debugging
+wrapper that prints messages before and after the function runs."
+  (interactive)
+  (unless doom-escape-hook-debug-enabled
+    ;; Backup the original hook functions
+    (setq doom-escape-hook-original doom-escape-hook)
+    ;; Wrap each function with a debugging wrapper
+    (setq doom-escape-hook
+          (mapcar (lambda (fn)
+                    (let ((fn-name (cond
+                                    ((symbolp fn) (symbol-name fn))
+                                    ((byte-code-function-p fn) "<compiled lambda>")
+                                    (t "<lambda>"))))
+                      (lambda ()
+                        (message "doom-escape-hook: Calling %s" fn-name)
+                        (let ((result (funcall fn)))
+                          (message "doom-escape-hook: Finished %s" fn-name)
+                          result))))
+                  doom-escape-hook-original))
+    (setq doom-escape-hook-debug-enabled t)
+    (message "doom-escape-hook debugging enabled.")))
+
+(defun disable-doom-escape-hook-debug ()
+  "Disable debugging for doom-escape-hook.
+This restores the original doom-escape-hook functions."
+  (interactive)
+  (when doom-escape-hook-debug-enabled
+    ;; Restore the original hook functions
+    (setq doom-escape-hook doom-escape-hook-original)
+    (setq doom-escape-hook-debug-enabled nil)
+    (message "doom-escape-hook debugging disabled.")))
+
 ;; See also autoload/cae-debug.el
