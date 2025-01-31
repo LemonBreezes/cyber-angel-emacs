@@ -769,8 +769,8 @@
   (undelete-frame-mode +1)
 
   ;; Automatically deindent items when they are added to the kill ring.
-  (when (fboundp #'kill-ring-deindent-mode)
-    (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
+  ;;(when (fboundp #'kill-ring-deindent-mode)
+  ;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
   (after! paren
     (setq show-paren-context-when-offscreen 'overlay
