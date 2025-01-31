@@ -2,9 +2,12 @@
 
 (use-package! ednc
   :defer t :init
+  ;; Otherwise `alert-send-notification' will block the UI.
+  (advice-add #'alert-send-notification :around
+              #'cae-ednc-wrap-async-call-process-a)
   (defun cae-ednc-load-h ()
     (and (require 'dbus nil t)
-         (not (getenv "INSIDE_EXWM")) ; In EXWM I prefer using Dunst.
+         (not (getenv "INSIDE_EXWM"))   ; In EXWM I prefer using Dunst.
          (let ((path "/org/freedesktop/Notifications"))
            (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))
          (ednc-mode +1)))
@@ -18,8 +21,4 @@
                '((:eval (cae-ednc-stack-notifications))))
   (map! :map ednc-view-mode-map
         "n" #'next-line
-        "p" #'previous-line)
-
-  ;; Otherwise `alert-send-notification' will block the UI.
-  (advice-add #'alert-send-notification :around
-              #'cae-ednc-wrap-async-call-process-a))
+        "p" #'previous-line))
