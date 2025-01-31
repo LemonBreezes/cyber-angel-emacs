@@ -859,92 +859,92 @@
     (add-to-list 'clean-buffer-list-kill-never-buffer-names
                  doom-fallback-buffer-name))
 
-  (after! outline
-    (setq outline-minor-mode-use-buttons t))
-
-  (after! ispell
-    (setq ispell-quietly t
-          ispell-dictionary "en_US"
-          ispell-help-in-bufferp 'electric)
-    (when-let* ((nixos-aspell-dir "/run/current-system/sw/lib/aspell")
-                (_ (file-exists-p nixos-aspell-dir)))
-      (setq ispell-aspell-data-dir nixos-aspell-dir
-            ispell-aspell-dict-dir nixos-aspell-dir)))
-
-  (after! vline
-    (setq vline-idle-time 0.1))
-
-  (after! undo-fu
-    (setq undo-fu-allow-undo-in-region t))
-
-  ;; Hide commands in M-x which do not work in the current mode. Vertico
-  ;; commands are hidden in normal buffers.
-  (setq read-extended-command-predicate #'command-completion-default-include-p)
-
-  (after! embark
-    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
-
-  (use-package! avy
-    :defer t :init
-    (defadvice! cae-avy-use-post-style-a (oldfun &rest args)
-      :around #'avy-goto-end-of-line
-      (let ((avy-style 'post))
-        (apply oldfun args)))
-    :config
-    (setq avy-timeout-seconds 0.4
-          avy-all-windows t
-          avy-keys (cae-keyboard-remap
-                    '(?a ?s ?d ?f ?g
-                      ;; Removed ?\; because it's not on default Android
-                      ;; touchscreen keyboards.
-                      ?h ?j ?k ?l))
-          avy-background nil
-          avy-single-candidate-jump t
-          avy-escape-chars '(?\C-g ?\C-\[ ?\s)
-          avy-dispatch-alist
-          (cae-keyboard-remap
-           '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
-             (?t . avy-action-teleport) (?m . avy-action-mark)
-             (?n . avy-action-copy) (?y . avy-action-yank)
-             (?Y . avy-action-yank-line) (?i . avy-action-ispell)
-             (?z . avy-action-zap-to-char)))
-          avy-styles-alist '((avy-isearch . pre)
-                             (ace-link-man . pre)
-                             (avy-goto-end-of-line . post)
-                             (avy-kill-ring-save-region . pre)
-                             (avy-kill-region . pre)
-                             (avy-copy-region . pre)
-                             (avy-move-region . pre))))
-
-  (use-package! embrace
-    :defer t :init
-    ;; Respect popup rules with the Embrace help popup.
-    (defadvice! +cae-embrace-use-popup-a (oldfun help-string)
-      :around #'embrace--show-help-buffer
-      (cl-letf (((symbol-function #'display-buffer-in-side-window)
-                 (symbol-function #'display-buffer)))
-        (funcall oldfun help-string)))
-    :config
-    (after! evil-embrace
-      (setq evil-embrace-show-help-p t))
-    (setq embrace-show-help-p t))
-
-  (use-package! abbrev
-    :defer t :config
-    (setq-default abbrev-mode t
-                  save-abbrevs 'silently)
-    (setq abbrev-suggest t)
-    (map! :map edit-abbrevs-mode-map
-          [remap save-buffer] #'abbrev-edit-save-buffer)
-    (map! :map abbrev-map "e" #'edit-abbrevs)
-    (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
-
-  (use-package! ibuffer
-    :defer t :config
-    (setq ibuffer-always-show-last-buffer t
-          ibuffer-human-readable-size t)
-    (after! ibuffer-ext
-      (add-to-list 'ibuffer-never-show-predicates #'doom-unreal-buffer-p)))
+  ;;(after! outline
+  ;;  (setq outline-minor-mode-use-buttons t))
+  ;;
+  ;;(after! ispell
+  ;;  (setq ispell-quietly t
+  ;;        ispell-dictionary "en_US"
+  ;;        ispell-help-in-bufferp 'electric)
+  ;;  (when-let* ((nixos-aspell-dir "/run/current-system/sw/lib/aspell")
+  ;;              (_ (file-exists-p nixos-aspell-dir)))
+  ;;    (setq ispell-aspell-data-dir nixos-aspell-dir
+  ;;          ispell-aspell-dict-dir nixos-aspell-dir)))
+  ;;
+  ;;(after! vline
+  ;;  (setq vline-idle-time 0.1))
+  ;;
+  ;;(after! undo-fu
+  ;;  (setq undo-fu-allow-undo-in-region t))
+  ;;
+  ;;;; Hide commands in M-x which do not work in the current mode. Vertico
+  ;;;; commands are hidden in normal buffers.
+  ;;(setq read-extended-command-predicate #'command-completion-default-include-p)
+  ;;
+  ;;(after! embark
+  ;;  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
+  ;;
+  ;;(use-package! avy
+  ;;  :defer t :init
+  ;;  (defadvice! cae-avy-use-post-style-a (oldfun &rest args)
+  ;;    :around #'avy-goto-end-of-line
+  ;;    (let ((avy-style 'post))
+  ;;      (apply oldfun args)))
+  ;;  :config
+  ;;  (setq avy-timeout-seconds 0.4
+  ;;        avy-all-windows t
+  ;;        avy-keys (cae-keyboard-remap
+  ;;                  '(?a ?s ?d ?f ?g
+  ;;                    ;; Removed ?\; because it's not on default Android
+  ;;                    ;; touchscreen keyboards.
+  ;;                    ?h ?j ?k ?l))
+  ;;        avy-background nil
+  ;;        avy-single-candidate-jump t
+  ;;        avy-escape-chars '(?\C-g ?\C-\[ ?\s)
+  ;;        avy-dispatch-alist
+  ;;        (cae-keyboard-remap
+  ;;         '((?x . avy-action-kill-move) (?X . avy-action-kill-stay)
+  ;;           (?t . avy-action-teleport) (?m . avy-action-mark)
+  ;;           (?n . avy-action-copy) (?y . avy-action-yank)
+  ;;           (?Y . avy-action-yank-line) (?i . avy-action-ispell)
+  ;;           (?z . avy-action-zap-to-char)))
+  ;;        avy-styles-alist '((avy-isearch . pre)
+  ;;                           (ace-link-man . pre)
+  ;;                           (avy-goto-end-of-line . post)
+  ;;                           (avy-kill-ring-save-region . pre)
+  ;;                           (avy-kill-region . pre)
+  ;;                           (avy-copy-region . pre)
+  ;;                           (avy-move-region . pre))))
+  ;;
+  ;;(use-package! embrace
+  ;;  :defer t :init
+  ;;  ;; Respect popup rules with the Embrace help popup.
+  ;;  (defadvice! +cae-embrace-use-popup-a (oldfun help-string)
+  ;;    :around #'embrace--show-help-buffer
+  ;;    (cl-letf (((symbol-function #'display-buffer-in-side-window)
+  ;;               (symbol-function #'display-buffer)))
+  ;;      (funcall oldfun help-string)))
+  ;;  :config
+  ;;  (after! evil-embrace
+  ;;    (setq evil-embrace-show-help-p t))
+  ;;  (setq embrace-show-help-p t))
+  ;;
+  ;;(use-package! abbrev
+  ;;  :defer t :config
+  ;;  (setq-default abbrev-mode t
+  ;;                save-abbrevs 'silently)
+  ;;  (setq abbrev-suggest t)
+  ;;  (map! :map edit-abbrevs-mode-map
+  ;;        [remap save-buffer] #'abbrev-edit-save-buffer)
+  ;;  (map! :map abbrev-map "e" #'edit-abbrevs)
+  ;;  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
+  ;;
+  ;;(use-package! ibuffer
+  ;;  :defer t :config
+  ;;  (setq ibuffer-always-show-last-buffer t
+  ;;        ibuffer-human-readable-size t)
+  ;;  (after! ibuffer-ext
+  ;;    (add-to-list 'ibuffer-never-show-predicates #'doom-unreal-buffer-p)))
 
   ;;(use-package! yank-indent
   ;;  :defer t :init (add-hook 'doom-first-buffer-hook #'global-yank-indent-mode)
