@@ -179,22 +179,19 @@
           :n "RET" #'gptel-context-visit)))
 
 (use-package! minuet
-  :bind
-  (("M-y" . #'minuet-complete-with-minibuffer) ;; use minibuffer for completion
-   ("M-i" . #'minuet-show-suggestion)          ;; use overlay for completion
-   :map minuet-active-mode-map
-   ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
-   ("M-p" . #'minuet-previous-suggestion) ;; invoke completion or cycle to next completion
-   ("M-n" . #'minuet-next-suggestion) ;; invoke completion or cycle to previous completion
-   ("C-f" . #'minuet-accept-suggestion) ;; accept whole completion
-   ;; Accept the first line of completion, or N lines with a numeric-prefix:
-   ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
-   ("C-e" . #'minuet-accept-suggestion-line))
-  :init
+  :defer :init
   (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
+  (map! :map minuet-active-mode-map
+        ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
+        "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
+        "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
+        "C-f" #'minuet-accept-suggestion ;; accept whole completion
+        ;; Accept the first line of completion, or N lines with a numeric-prefix:
+        ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
+        "C-e" #'minuet-accept-suggestion-line)
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (minuet-dismiss-suggestion)
