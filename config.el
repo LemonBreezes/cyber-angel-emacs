@@ -776,7 +776,7 @@
     ;; NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
     ;; EVERYTHING!!!
     (setq show-paren-context-when-offscreen nil) ; <--
-    (setq show-paren-ring-bell-on-mismatch t))
+    (setq show-paren-ring-bell-on-mismatch nil))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
