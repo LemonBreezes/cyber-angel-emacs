@@ -87,10 +87,7 @@
                (:after evil-multiedit
                 (:map evil-multiedit-mode-map
                  :nv "M-n" #'evil-multiedit-match-and-next
-                 :nv "M-N" #'evil-multiedit-match-and-prev))))
-
-        (map! :map narrow-map
-              "s" #'sp-narrow-to-sexp)))
+                 :nv "M-N" #'evil-multiedit-match-and-prev))))))
 
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
