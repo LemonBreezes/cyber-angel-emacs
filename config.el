@@ -539,34 +539,34 @@
 
   ;; Was reading this
   ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
-  ;;(setq delete-by-moving-to-trash t
-  ;;      ;; Careful with these settings! They can prevent errors and Emacs
-  ;;      ;; freezing but they can also surprise you if you expect all your files
-  ;;      ;; to be trashed when you delete them.
-  ;;      remote-file-name-inhibit-delete-by-moving-to-trash t
-  ;;      remote-file-name-inhibit-auto-save t
-  ;;      remote-file-name-inhibit-auto-save-visited t
-  ;;      ;; ---
-  ;;      large-file-warning-threshold 100000000 ; ~100 MB
-  ;;      yank-pop-change-selection t
-  ;;      global-mark-ring-max 1024
-  ;;      history-delete-duplicates t
-  ;;      history-length t
-  ;;      mark-ring-max 1024
-  ;;      message-log-max t
-  ;;      kill-ring-max 1024
-  ;;      kill-whole-line t
-  ;;      list-matching-lines-jump-to-current-line t
-  ;;      mouse-prefer-closest-glyph t
-  ;;      next-error-message-highlight 'keep
-  ;;      read-char-by-name-sort 'code
-  ;;      revert-buffer-quick-short-answers t
-  ;;      scroll-error-top-bottom t
-  ;;      scroll-preserve-screen-position t
-  ;;      shift-select-mode 'permanent
-  ;;      track-eol t
-  ;;      visual-order-cursor-movement t
-  ;;      what-cursor-show-names t)
+  (setq delete-by-moving-to-trash t
+        ;; Careful with these settings! They can prevent errors and Emacs
+        ;; freezing but they can also surprise you if you expect all your files
+        ;; to be trashed when you delete them.
+        remote-file-name-inhibit-delete-by-moving-to-trash t
+        remote-file-name-inhibit-auto-save t
+        remote-file-name-inhibit-auto-save-visited t
+        ;; ---
+        large-file-warning-threshold 100000000 ; ~100 MB
+        yank-pop-change-selection t
+        global-mark-ring-max 1024
+        history-delete-duplicates t
+        history-length t
+        mark-ring-max 1024
+        message-log-max t
+        kill-ring-max 1024
+        kill-whole-line t
+        list-matching-lines-jump-to-current-line t
+        mouse-prefer-closest-glyph t
+        next-error-message-highlight 'keep
+        read-char-by-name-sort 'code
+        revert-buffer-quick-short-answers t
+        scroll-error-top-bottom t
+        scroll-preserve-screen-position t
+        shift-select-mode 'permanent
+        track-eol t
+        visual-order-cursor-movement t
+        what-cursor-show-names t)
 
   ;; https://idiomdrottning.org/show-trailing-whitespace
   ;; `show-trailing-whitespace' is my friend.
