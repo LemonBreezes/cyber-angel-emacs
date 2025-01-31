@@ -774,7 +774,7 @@
 
   (after! paren
     (setq show-paren-context-when-offscreen nil
-          show-paren-ring-bell-on-mismatch nil))
+          show-paren-ring-bell-on-mismatch t))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
