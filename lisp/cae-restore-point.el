@@ -88,7 +88,55 @@
                   eri/web-mode-element-parent-content
                   cae-jump-to-random-line-end
                   better-jumper-jump-backward
-                  better-jumper-jump-forward)
+                  better-jumper-jump-forward
+                  beginend-bs-mode-goto-end
+                  beginend-rg-mode-goto-end
+                  beginend-org-mode-goto-end
+                  beginend-deft-mode-goto-end
+                  beginend-prog-mode-goto-end
+                  beginend-LaTeX-mode-goto-end
+                  beginend-dired-mode-goto-end
+                  beginend-latex-mode-goto-end
+                  beginend-nroam-mode-goto-end
+                  beginend-occur-mode-goto-end
+                  beginend-vc-dir-mode-goto-end
+                  beginend-ibuffer-mode-goto-end
+                  beginend-message-mode-goto-end
+                  beginend-outline-mode-goto-end
+                  beginend-prodigy-mode-goto-end
+                  beginend-bs-mode-goto-beginning
+                  beginend-rg-mode-goto-beginning
+                  beginend-org-mode-goto-beginning
+                  beginend-deft-mode-goto-beginning
+                  beginend-org-agenda-mode-goto-end
+                  beginend-prog-mode-goto-beginning
+                  beginend-LaTeX-mode-goto-beginning
+                  beginend-compilation-mode-goto-end
+                  beginend-dired-mode-goto-beginning
+                  beginend-elfeed-show-mode-goto-end
+                  beginend-latex-mode-goto-beginning
+                  beginend-nroam-mode-goto-beginning
+                  beginend-occur-mode-goto-beginning
+                  beginend-epa-key-list-mode-goto-end
+                  beginend-magit-status-mode-goto-end
+                  beginend-vc-dir-mode-goto-beginning
+                  beginend-elfeed-search-mode-goto-end
+                  beginend-ibuffer-mode-goto-beginning
+                  beginend-message-mode-goto-beginning
+                  beginend-outline-mode-goto-beginning
+                  beginend-prodigy-mode-goto-beginning
+                  beginend-magit-revision-mode-goto-end
+                  beginend-notmuch-search-mode-goto-end
+                  beginend-recentf-dialog-mode-goto-end
+                  beginend-org-agenda-mode-goto-beginning
+                  beginend-compilation-mode-goto-beginning
+                  beginend-elfeed-show-mode-goto-beginning
+                  beginend-epa-key-list-mode-goto-beginning
+                  beginend-magit-status-mode-goto-beginning
+                  beginend-elfeed-search-mode-goto-beginning
+                  beginend-magit-revision-mode-goto-beginning
+                  beginend-notmuch-search-mode-goto-beginning
+                  beginend-recentf-dialog-mode-goto-beginning)
                 (and
                  (featurep 'evil)
                  '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F
