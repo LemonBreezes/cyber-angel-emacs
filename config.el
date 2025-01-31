@@ -772,9 +772,12 @@
   (when (fboundp #'kill-ring-deindent-mode)
     (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
-  ;;(after! paren
-  ;;  (setq show-paren-context-when-offscreen 'overlay
-  ;;        show-paren-ring-bell-on-mismatch t))
+  (after! paren
+    (setq show-paren-context-when-offscreen 'overlay
+          ;; NEVER ENABLE THIS VARIABLE. THE BEEP WILL DESTROY ANY FUNCTION CALL
+          ;; THAT IS CURRENTLY HAPPENING AND RUIN MANY EMACS PACKAGES. BE
+          ;; WARNED.
+          show-paren-ring-bell-on-mismatch nil))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
