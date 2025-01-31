@@ -773,8 +773,10 @@
     (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
   (after! paren
-    (setq show-paren-context-when-offscreen nil
-          show-paren-ring-bell-on-mismatch t))
+    ;; NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
+    ;; EVERYTHING!!!
+    (setq show-paren-context-when-offscreen nil) ; <--
+    (setq show-paren-ring-bell-on-mismatch t))
 
   (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
   (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
