@@ -207,7 +207,8 @@
       (:when (modulep! :cae ai +copilot)
        "C-c" #'copilot-complete)
       (:when (modulep! :cae ai -copilot)
-       "C-c" #'minuet-show-suggestion))
+       "C-c" #'minuet-show-suggestion
+       "y" #'minuet-complete-with-minibuffer))
 
 ;; TODO Fix this to work with `consult-yasnippet'.
 ;;(defadvice! cae-evil-insert-state-a (&rest _)
