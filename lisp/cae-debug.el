@@ -57,4 +57,6 @@
 (defun cae-debug-backtrace-message-source (message)
   (push message cae-debug-messages-to-backtrace))
 
+;;; Debugging `doom-escape-hook'.
+
 ;; See also autoload/cae-debug.el
