@@ -413,3 +413,6 @@
     (when (modulep! :editor evil)
       (map! :map evil-treemacs-state-map
             "J" #'consult-line))))
+
+(when (modulep! :config default +smartparens)
+  (map! :map narrow-map "s" #'sp-narrow-to-sexp))
