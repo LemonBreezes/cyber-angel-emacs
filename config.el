@@ -806,58 +806,58 @@
             (setq cae-diff-window nil)))
       t))
 
-  (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
-
-  ;; Automatically reindent after commenting.
-  (advice-add #'comment-or-uncomment-region :after #'indent-region)
-
-  ;; Allow remembering risky variables.
-  (advice-add 'risky-local-variable-p :override #'ignore)
-
-  ;; Kill process buffers without asking.
-  (setq kill-buffer-query-functions
-        (remq 'process-kill-buffer-query-function
-              kill-buffer-query-functions))
-
-  ;; Do not automatically continue comments.
-  (advice-remove #'newline-and-indent
-                 #'+default--newline-indent-and-continue-comments-a)
-
-  ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
-  (setq set-mark-command-repeat-pop t)
-
-  (setq search-whitespace-regexp ".*?"
-        search-default-mode #'char-fold-to-regexp
-        isearch-lax-whitespace t
-        isearch-wrap-pause 'no-ding
-        isearch-lazy-count t
-        isearch-repeat-on-direction-change t
-        isearch-allow-motion t
-        isearch-allow-scroll t
-        isearch-yank-on-move 'shift
-        isearch-motion-changes-direction t
-        lazy-count-prefix-format "(%s/%s) "
-        lazy-count-suffix-format nil    ; Using the suffix for counting matches
-                                        ; is better but does not work with
-                                        ; `isearch-mb'.
-        lazy-highlight-cleanup nil
-        ;; The default search ring size is 16, which is too small considering
-        ;; that we can fuzzy search the history with Consult.
-        search-ring-max 200
-        regexp-search-ring-max 200)
-  (add-hook! 'doom-escape-hook :depth -1
-    (defun cae-clean-up-lazy-highlight-h ()
-      (lazy-highlight-cleanup t)))
-  (when (fboundp #'+evil-disable-ex-highlights-h)
-    (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
-
-  ;; Autokill buffers which have not been displayed for 3 days.
-  (run-with-idle-timer 30 nil #'midnight-mode +1)
-  (after! midnight
-    (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
-          clean-buffer-list-delay-special 7200)
-    (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                 doom-fallback-buffer-name))
+  ;;(add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
+  ;;
+  ;;;; Automatically reindent after commenting.
+  ;;(advice-add #'comment-or-uncomment-region :after #'indent-region)
+  ;;
+  ;;;; Allow remembering risky variables.
+  ;;(advice-add 'risky-local-variable-p :override #'ignore)
+  ;;
+  ;;;; Kill process buffers without asking.
+  ;;(setq kill-buffer-query-functions
+  ;;      (remq 'process-kill-buffer-query-function
+  ;;            kill-buffer-query-functions))
+  ;;
+  ;;;; Do not automatically continue comments.
+  ;;(advice-remove #'newline-and-indent
+  ;;               #'+default--newline-indent-and-continue-comments-a)
+  ;;
+  ;;;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
+  ;;(setq set-mark-command-repeat-pop t)
+  ;;
+  ;;(setq search-whitespace-regexp ".*?"
+  ;;      search-default-mode #'char-fold-to-regexp
+  ;;      isearch-lax-whitespace t
+  ;;      isearch-wrap-pause 'no-ding
+  ;;      isearch-lazy-count t
+  ;;      isearch-repeat-on-direction-change t
+  ;;      isearch-allow-motion t
+  ;;      isearch-allow-scroll t
+  ;;      isearch-yank-on-move 'shift
+  ;;      isearch-motion-changes-direction t
+  ;;      lazy-count-prefix-format "(%s/%s) "
+  ;;      lazy-count-suffix-format nil    ; Using the suffix for counting matches
+  ;;                                      ; is better but does not work with
+  ;;                                      ; `isearch-mb'.
+  ;;      lazy-highlight-cleanup nil
+  ;;      ;; The default search ring size is 16, which is too small considering
+  ;;      ;; that we can fuzzy search the history with Consult.
+  ;;      search-ring-max 200
+  ;;      regexp-search-ring-max 200)
+  ;;(add-hook! 'doom-escape-hook :depth -1
+  ;;  (defun cae-clean-up-lazy-highlight-h ()
+  ;;    (lazy-highlight-cleanup t)))
+  ;;(when (fboundp #'+evil-disable-ex-highlights-h)
+  ;;  (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
+  ;;
+  ;;;; Autokill buffers which have not been displayed for 3 days.
+  ;;(run-with-idle-timer 30 nil #'midnight-mode +1)
+  ;;(after! midnight
+  ;;  (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
+  ;;        clean-buffer-list-delay-special 7200)
+  ;;  (add-to-list 'clean-buffer-list-kill-never-buffer-names
+  ;;               doom-fallback-buffer-name))
 
   ;;(after! outline
   ;;  (setq outline-minor-mode-use-buttons t))
