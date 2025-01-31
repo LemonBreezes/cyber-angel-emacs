@@ -181,7 +181,7 @@
 (use-package! minuet
   :bind
   (("M-y" . #'minuet-complete-with-minibuffer) ;; use minibuffer for completion
-   ("M-i" . #'minuet-show-suggestion) ;; use overlay for completion
+   ("M-i" . #'minuet-show-suggestion)          ;; use overlay for completion
    :map minuet-active-mode-map
    ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
    ("M-p" . #'minuet-previous-suggestion) ;; invoke completion or cycle to next completion
@@ -199,6 +199,7 @@
     (defun cae-minuet-dismiss-suggestion-h ()
       (minuet-dismiss-suggestion)
       t))
+  (add-hook 'evil-insert-state-exit-hook #'minuet-dismiss-suggestion)
   (when (modulep! :editor evil)
     (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
