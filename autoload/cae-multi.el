@@ -53,7 +53,7 @@
                    (start-process
                     "git-pull-process"
                     output-buffer
-                    "git" "pull")))
+                    "git" "pull" "--recurse-submodules=on-demand")))
               (push process processes)
               (set-process-sentinel
                process
@@ -73,7 +73,39 @@
                                (message "Conflict detected during git pull in %s" repo-dir)
                                (display-buffer output-buffer)
                                (setq all-pulls-succeeded nil))
-                           (message "Git pull succeeded in %s" repo-dir)))))
+                           (message "Git pull succeeded in %s" repo-dir))
+                         ;; Start git submodule update --init --recursive
+                         (let ((submodule-process
+                                (start-process
+                                 "git-submodule-update-process"
+                                 output-buffer
+                                 "git" "submodule" "update" "--init" "--recursive")))
+                           (push submodule-process processes)
+                           (set-process-sentinel
+                            submodule-process
+                            (lambda (proc event)
+                              (when (memq (process-status proc) '(exit signal))
+                                (if (/= (process-exit-status proc) 0)
+                                    (progn
+                                      (message "Git submodule update failed in %s" repo-dir)
+                                      ;; Optionally display the output buffer
+                                      (display-buffer output-buffer)
+                                      (setq all-pulls-succeeded nil))
+                                  (message "Git submodule update succeeded in %s" repo-dir))
+                                ;; Check for conflicts in submodule update
+                                (with-current-buffer output-buffer
+                                  (save-excursion
+                                    (goto-char (point-max))
+                                    (if (re-search-backward "CONFLICT" nil t)
+                                        (progn
+                                          (message "Conflict detected during git submodule update in %s" repo-dir)
+                                          (display-buffer output-buffer)
+                                          (setq all-pulls-succeeded nil))
+                                      (message "Submodules updated successfully in %s" repo-dir))))
+                                ;; When all processes have finished, run 'doom sync' if needed
+                                (when (and (null (delq proc (cl-remove-if #'process-live-p processes)))
+                                           all-pulls-succeeded)
+                                  (cae-multi--run-doom-sync))))))))
                    ;; When all processes have finished, run 'doom sync' if needed
                    (when (and (null (delq proc (cl-remove-if #'process-live-p processes)))
                               all-pulls-succeeded)
