@@ -71,7 +71,8 @@
 (defvar cae-multi-repositories
   (list doom-user-dir
         cae-multi-org-dir
-        cae-multi-secrets-dir)
+        cae-multi-secrets-dir
+        (getenv "HOME"))
   "List of directories containing Git repositories to sync between machines.")
 
 (defvar cae-multi-enable-auto-pull t
