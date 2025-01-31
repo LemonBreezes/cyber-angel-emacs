@@ -763,7 +763,7 @@
           (or (get-buffer-window buf)
               (doom-unreal-buffer-p buf))))
 
-  (setq delete-active-region t)         ;makes `d' delete region in Meow.
+  ;;(setq delete-active-region t)         ;makes `d' delete region in Meow.
 
   ;; Allow us to undo deleting frames.
   (undelete-frame-mode +1)
