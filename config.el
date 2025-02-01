@@ -763,8 +763,7 @@
   ;; Allow us to undo deleting frames.
   (undelete-frame-mode +1)
 
-  ;; Automatically deindent items when they are added to the kill ring.
-  ;;
+  ;; BUG Enabling this can cause read-only errors when trying to copy text!
   ;;(when (fboundp #'kill-ring-deindent-mode)
   ;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
