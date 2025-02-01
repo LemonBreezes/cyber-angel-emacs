@@ -371,13 +371,15 @@
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
       (set-popup-rule! "\\`\\*Embark Export: "
         :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
+    (after! which-key
+      (set-popup-rule! (regexp-quote which-key-buffer-name) :ignore t))
     (after! elfeed
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote elfeed-log-buffer-name))
         :size '+popup-shrink-to-fit :side 'right :select nil :quit t :ttl nil))
     (after! bbdb
       (set-popup-rule! (format "\\`%s\\'" (regexp-quote bbdb-buffer-name))
         :select nil :quit t :ttl nil))
-    (after! magit ; Override Doom's popup rule for `transient'.
+    (after! magit                  ; Override Doom's popup rule for `transient'.
       ;; This is so that the `transient' popup takes up the entire horizontal
       ;; width of the window when I use `aider'.
       (set-popup-rule! "\\` \\*transient\\*\\'" :select nil :quit nil :ttl nil
