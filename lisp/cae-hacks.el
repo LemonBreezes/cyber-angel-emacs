@@ -196,5 +196,5 @@ It is meant to be used as a `post-gc-hook'."
 ;; BUG When using `aider', which copies the font-lock-keywords, we get an error
 ;; with `whitespace-mode' since it's not copying the respective overlay.
 (defadvice! cae-inhibit-whitespace-flush-in-aider-a ()
-  :before-while #'whitespace-point--used
+  :before-while #'whitespace-point--flush-used
   (overlayp whitespace-point--used))
