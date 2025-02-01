@@ -211,7 +211,7 @@
   (after! which-key
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
-          ;;which-key-compute-remaps t
+          which-key-compute-remaps t
           which-key-max-description-length 35
           ;; For some reason opening `which-key' with a popup window open on the
           ;; same side would cause the popup window to enlarge.
