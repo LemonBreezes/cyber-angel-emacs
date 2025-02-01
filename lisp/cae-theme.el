@@ -4,6 +4,7 @@
 (defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal t)
 (defvar cae-theme-enable-day-night-theme-switching nil)
+(defvar cae-theme-disable-outline-headings t)
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
@@ -21,9 +22,10 @@
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
 ;; Disable Outline highlighting
-(advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
-(after! outline
-  (setq outline-font-lock-keywords nil))
+(when cae-theme-disable-outline-headings
+  (advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
+  (after! outline
+    (setq outline-font-lock-keywords nil)))
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
 (defadvice! cae-run-theme-hook-h (_)
@@ -46,7 +48,8 @@
     (setq markdown-fontify-whole-heading-line t))
 
   (use-package! backline
-    :when cae-theme-extend-heading-faces
+    :when (and cae-theme-extend-heading-faces
+               (not cae-theme-disable-outline-headings))
     :defer t :init
     (advice-add 'outline-flag-region :after 'backline-update)))
 
