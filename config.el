@@ -8,9 +8,10 @@
   ;; popup would not show and there would be an error. This only happens with
   ;; `which-key-preserve-window-configuration'.
   (setq which-key-preserve-window-configuration t)
-  (when (modulep! :editor evil)
-    (after! evil
-      (add-to-list 'evil-buffer-regexps '("^ ")))))
+  ;;(when (modulep! :editor evil)
+  ;;  (after! evil
+  ;;    (add-to-list 'evil-buffer-regexps '("^ "))))
+  )
 
 ;;; Stuff that should not be disabled.
 
