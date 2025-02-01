@@ -132,7 +132,7 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  (load! "lisp/cae-theme")
+  ;;(load! "lisp/cae-theme")
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
@@ -377,81 +377,77 @@
         :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
-  (when (modulep! :ui workspaces)
-    (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
-      "Show my workspaces in the echo area."
-      :around #'which-key--process-page
-      (let ((out (apply orig-fun pages-obj)))
-        (if (not (string-match-p "Display tab bar\\b" (car out)))
-            out
-          (cons (car out)
-                (lambda ()
-                  (funcall (cdr out))
-                  (which-key--echo (concat (current-message) " "
-                                           (+workspace--tabline))))))))
-
-    (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
-      "Open the journal in a new workspace."
-      :before #'org-journal-new-entry
-      (+workspace-switch "journal" t)))
-
-  ;; Lower the default popup delay.
-  (after! tooltip
-    (setq tooltip-hide-delay 3))
-
-  (after! flycheck-posframe
-    (setq flycheck-posframe-border-width 1
-          flycheck-posframe-border-use-error-face t))
-
-  ;;(use-package! breadcrumb
-  ;;  :unless (modulep! :ui modeline)
+  ;;(when (modulep! :ui workspaces)
+  ;;  (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
+  ;;    "Show my workspaces in the echo area."
+  ;;    :around #'which-key--process-page
+  ;;    (let ((out (apply orig-fun pages-obj)))
+  ;;      (if (not (string-match-p "Display tab bar\\b" (car out)))
+  ;;          out
+  ;;        (cons (car out)
+  ;;              (lambda ()
+  ;;                (funcall (cdr out))
+  ;;                (which-key--echo (concat (current-message) " "
+  ;;                                         (+workspace--tabline))))))))
+  ;;
+  ;;  (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
+  ;;    "Open the journal in a new workspace."
+  ;;    :before #'org-journal-new-entry
+  ;;    (+workspace-switch "journal" t)))
+  ;;
+  ;;;; Lower the default popup delay.
+  ;;(after! tooltip
+  ;;  (setq tooltip-hide-delay 3))
+  ;;
+  ;;(after! flycheck-posframe
+  ;;  (setq flycheck-posframe-border-width 1
+  ;;        flycheck-posframe-border-use-error-face t))
+  ;;
+  ;;(use-package! iscroll
   ;;  :defer t :init
-  ;;  (add-hook 'emacs-lisp-mode-hook #'breadcrumb-local-mode))
-
-  (use-package! iscroll
-    :defer t :init
-    (add-hook 'org-mode-hook #'iscroll-mode)
-    (add-hook 'markdown-mode-hook #'iscroll-mode)
-    (add-hook 'image-mode-hook #'iscroll-mode)
-    (add-hook 'eww-mode-hook #'iscroll-mode)
-    (add-hook 'w3m-mode-hook #'iscroll-mode))
-
-  (use-package! beacon
-    :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
-    :config
-    (setq beacon-blink-delay 0.15
-          beacon-blink-duration 0.15)
-    (beacon-mode +1)
-    (add-to-list 'beacon-dont-blink-commands 'doom/escape)
-    (add-hook! 'persp-activated-functions
-      (defun cae-beacon-blink-on-workspace-switch (&rest _)
-        (run-at-time 0.01 nil #'beacon-blink-automated)))
-    (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
-    (after! corfu
-      (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
-    (setq beacon-blink-when-window-scrolls nil
-          beacon-overlay-priority -1)
-    (dolist (cmd '(+eshell-tldr-to-man))
-      (add-to-list 'beacon-dont-blink-commands cmd)))
-
-  (use-package indent-bars
-    :custom
-    (indent-bars-treesit-support t)
-    (indent-bars-no-descend-string t)
-    (indent-bars-treesit-ignore-blank-lines-types '("module"))
-    (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
-                                        ; as an example
-                                 list list_comprehension
-                                 dictionary dictionary_comprehension
-                                 parenthesized_expression subscript)))
-    :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-
-  (use-package! casual-calc
-    :defer t :init
-    (after! calc
-      (map! :map calc-mode-map
-            "C-o" #'casual-main-menu
-            "C-M-?"#'casual-main-menu))))
+  ;;  (add-hook 'org-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'markdown-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'image-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'eww-mode-hook #'iscroll-mode)
+  ;;  (add-hook 'w3m-mode-hook #'iscroll-mode))
+  ;;
+  ;;(use-package! beacon
+  ;;  :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
+  ;;  :config
+  ;;  (setq beacon-blink-delay 0.15
+  ;;        beacon-blink-duration 0.15)
+  ;;  (beacon-mode +1)
+  ;;  (add-to-list 'beacon-dont-blink-commands 'doom/escape)
+  ;;  (add-hook! 'persp-activated-functions
+  ;;    (defun cae-beacon-blink-on-workspace-switch (&rest _)
+  ;;      (run-at-time 0.01 nil #'beacon-blink-automated)))
+  ;;  (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
+  ;;  (after! corfu
+  ;;    (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
+  ;;  (setq beacon-blink-when-window-scrolls nil
+  ;;        beacon-overlay-priority -1)
+  ;;  (dolist (cmd '(+eshell-tldr-to-man))
+  ;;    (add-to-list 'beacon-dont-blink-commands cmd)))
+  ;;
+  ;;(use-package indent-bars
+  ;;  :custom
+  ;;  (indent-bars-treesit-support t)
+  ;;  (indent-bars-no-descend-string t)
+  ;;  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  ;;  (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
+  ;;                                      ; as an example
+  ;;                               list list_comprehension
+  ;;                               dictionary dictionary_comprehension
+  ;;                               parenthesized_expression subscript)))
+  ;;  :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
+  ;;
+  ;;(use-package! casual-calc
+  ;;  :defer t :init
+  ;;  (after! calc
+  ;;    (map! :map calc-mode-map
+  ;;          "C-o" #'casual-main-menu
+  ;;          "C-M-?"#'casual-main-menu)))
+  )
 
 
 ;;; Tools
