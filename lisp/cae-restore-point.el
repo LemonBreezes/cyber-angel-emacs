@@ -313,11 +313,10 @@
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
-    (when (and restore-point-mode
-               ;; So that we don't unexpectedly get stuck in a loop of not
-               ;; running the `evil-escape-hook'.
-               (not (eq last-command 'evil-normal-state)))
-      (rp/cond-restore-point)))
+    (when-let ((a (point))
+               (b (and restore-point-mode
+                       (rp/cond-restore-point) (point))))
+      (not (eq a b))))
   (defun cae-restore-point-enable-in-minibuffer-h ()
     (if restore-point-mode
         (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
