@@ -768,7 +768,7 @@
   ;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
   (after! paren
-    ;; NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
+    ;; BUG NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
     ;; EVERYTHING!!!
     (setq show-paren-context-when-offscreen nil) ; <--
     (setq show-paren-ring-bell-on-mismatch nil))
