@@ -381,23 +381,23 @@
         :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
-  ;;(when (modulep! :ui workspaces)
-  ;;  (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
-  ;;    "Show my workspaces in the echo area."
-  ;;    :around #'which-key--process-page
-  ;;    (let ((out (apply orig-fun pages-obj)))
-  ;;      (if (not (string-match-p "Display tab bar\\b" (car out)))
-  ;;          out
-  ;;        (cons (car out)
-  ;;              (lambda ()
-  ;;                (funcall (cdr out))
-  ;;                (which-key--echo (concat (current-message) " "
-  ;;                                         (+workspace--tabline))))))))
-  ;;
-  ;;  (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
-  ;;    "Open the journal in a new workspace."
-  ;;    :before #'org-journal-new-entry
-  ;;    (+workspace-switch "journal" t)))
+  (when (modulep! :ui workspaces)
+    (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
+      "Show my workspaces in the echo area."
+      :around #'which-key--process-page
+      (let ((out (apply orig-fun pages-obj)))
+        (if (not (string-match-p "Display tab bar\\b" (car out)))
+            out
+          (cons (car out)
+                (lambda ()
+                  (funcall (cdr out))
+                  (which-key--echo (concat (current-message) " "
+                                           (+workspace--tabline))))))))
+
+    (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
+      "Open the journal in a new workspace."
+      :before #'org-journal-new-entry
+      (+workspace-switch "journal" t)))
 
   ;; Lower the default popup delay.
   (after! tooltip
