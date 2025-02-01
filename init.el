@@ -159,12 +159,12 @@
        ;;(modeline +emms)
        ;;notifications
        ;;unpackaged
-       ;;vc
-       ;;org
-       ;;ai
-       ;;gnus
-       ;;rss
-       ;;denote
+       vc
+       org
+       ai
+       gnus
+       rss
+       denote
        )
 
 ;;Local Variables:
