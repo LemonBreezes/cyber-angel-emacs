@@ -70,6 +70,8 @@ normally have their errors suppressed."
 
 (cae-debug-define-toggle-command "debug-allow-recursive-debug" debug-allow-recursive-debug)
 
+(cae-debug-define-toggle-command "backtrace-on-redisplay-error" backtrace-on-redisplay-error)
+
 (transient-define-suffix cae-debug-toggle-doom-debug-mode ()
   "Toggle `doom-debug-mode`."
   :description (lambda ()
@@ -87,6 +89,7 @@ normally have their errors suppressed."
    ("e" cae-debug-toggle-debug-on-error)
    ("q" cae-debug-toggle-debug-on-quit)
    ("s" cae-debug-toggle-debug-on-signal)
-   ("r" cae-debug-toggle-debug-allow-recursive-debug)
+   ("R" cae-debug-toggle-debug-allow-recursive-debug)
+   ("r" cae-debug-toggle-backtrace-on-redisplay-error)
    ("d" cae-debug-toggle-doom-debug-mode)
    ])
