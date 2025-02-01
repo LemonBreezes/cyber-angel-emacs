@@ -22,6 +22,8 @@
 
 ;; Disable Outline highlighting
 (advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
+(after! outline
+  (setq outline-font-lock-keywords nil))
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
 (defadvice! cae-run-theme-hook-h (_)
@@ -100,8 +102,7 @@
     (after! outline
       (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5
                       outline-6 outline-7 outline-8))
-        (set-face-attribute face nil :extend t)
-        (set-fac)))
+        (set-face-attribute face nil :extend t)))
     (after! markdown-mode
       (dolist (face '(markdown-header-face-1 markdown-header-face-2
                       markdown-header-face-3 markdown-header-face-4
