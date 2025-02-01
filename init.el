@@ -94,7 +94,7 @@
        lispy
 
        :emacs
-       (undo +tree)
+       undo
        ibuffer
        vc
        (dired +icons +dirvish)
