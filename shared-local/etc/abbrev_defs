@@ -32,6 +32,7 @@
     ("creatin" "creating" nil :count 0)
     ("delee" "delete" nil :count 0)
     ("dervar" "defvar" nil :count 1)
+    ("deubg" "debug" nil :count 0)
     ("dfeine" "define" nil :count 0)
     ("dfined" "defined" nil :count 0)
     ("doomn" "doom" nil :count 1)
