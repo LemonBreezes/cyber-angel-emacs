@@ -215,7 +215,7 @@
           which-key-max-description-length 35
           ;; For some reason opening `which-key' with a popup window open on the
           ;; same side would cause the popup window to enlarge.
-          which-key-preserve-window-configuration t
+          ;; which-key-preserve-window-configuration t
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil))
