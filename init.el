@@ -152,7 +152,7 @@
        (helm +childframe)
        debugger
        eshell
-       ;;exwm
+       exwm
        dired
        ;;lisp
        misc-applications
