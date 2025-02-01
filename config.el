@@ -1078,7 +1078,7 @@
         (string-inflection-all-cycle)
         (setq evil-repeat-info '([?g ?~])))
       (define-key evil-normal-state-map (kbd "g~")
-        'evil-operator-string-inflection)))
+                  'evil-operator-string-inflection)))
 
   (use-package! beginend
     :defer t :init
@@ -1257,15 +1257,15 @@
       :filters '("^ls" "^cd")
       :length 2000)
     (define-key comint-mode-map (kbd "M-r")
-      (lambda () (interactive)
-        (let ((ivy-sort-functions-alist nil)
-              (ivy-prescient-enable-sorting nil)
-              (vertico-sort-function nil)
-              (vertico-sort-override-function nil)
-              (vertico-prescient-enable-sorting nil)
-              (selectrum-should-sort nil)
-              (selectrum-prescient-enable-sorting nil))
-          (call-interactively #'comint-histories-search-history)))))
+                (lambda () (interactive)
+                  (let ((ivy-sort-functions-alist nil)
+                        (ivy-prescient-enable-sorting nil)
+                        (vertico-sort-function nil)
+                        (vertico-sort-override-function nil)
+                        (vertico-prescient-enable-sorting nil)
+                        (selectrum-should-sort nil)
+                        (selectrum-prescient-enable-sorting nil))
+                    (call-interactively #'comint-histories-search-history)))))
 
   (after! em-term
     ;; Some of the commands I copied from other configurations and will likely
