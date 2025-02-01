@@ -222,6 +222,7 @@
     ;; same side would cause the popup window to enlarge. However, enabling
     ;; `which-key-preserve-window-configuration' causes errors with Doom's popup
     ;; handling in edge cases.
+    (setq which-key-preserve-window-configuration t)
     )
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
