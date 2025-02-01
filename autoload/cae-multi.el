@@ -52,9 +52,9 @@
               (message "Git lockfile exists in %s, skipping pull" repo-dir)
             (setq pending-processes (1+ pending-processes))
             (let ((process (start-process
-                             "git-pull-process"
-                             output-buffer
-                             "git" "pull" "--recurse-submodules=on-demand")))
+                            "git-pull-process"
+                            output-buffer
+                            "git" "pull" "--recurse-submodules=on-demand")))
               (set-process-sentinel
                process
                (lambda (proc event)
@@ -95,11 +95,11 @@
                                 (if all-pulls-succeeded
                                     (cae-multi--run-doom-sync)
                                   (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))
-                 (setq pending-processes (1- pending-processes))
-                 (when (zerop pending-processes)
-                   (if all-pulls-succeeded
-                       (cae-multi--run-doom-sync)
-                     (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
+                     (setq pending-processes (1- pending-processes))
+                     (when (zerop pending-processes)
+                       (if all-pulls-succeeded
+                           (cae-multi--run-doom-sync)
+                         (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
 (defun cae-multi--run-doom-sync ()
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
