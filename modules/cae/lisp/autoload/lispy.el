@@ -2,6 +2,7 @@
 
 (require 'transient)
 
+;;;###autoload (autoload 'cae-lispy-cheatsheet "cae/lisp/autoload/lispy" nil t)
 (transient-define-prefix cae-lispy-cheatsheet ()
   "Lispy Cheatsheet"
   ;; Group “Move”
