@@ -132,95 +132,100 @@
 ;;; UI
 
 (when cae-init-ui-enabled-p
-  ;;(load! "lisp/cae-theme")
+  (load! "lisp/cae-theme")
 
-  ;;;; Show absolute line numbers. I prefer to not show relative line numbers
-  ;;;; because I use `avy' commands to jump to lines.
-  ;;(setq display-line-numbers-type t
-  ;;      display-line-numbers-width-start t)
-  ;;
-  ;;;; Show minibuffer recursion depth
-  ;;(autoload 'minibuffer-depth-setup "mb-depth")
-  ;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
-  ;;
-  ;;;; I don't like `hl-line-mode' globally because it sometimes conflicts with
-  ;;;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
-  ;;;; what item I have selected.
-  ;;(add-hook 'tabulated-list-mode-hook #'hl-line-mode)
-  ;;
-  ;;;; Auto-hide the tab bar.
-  ;;(after! tab-bar
-  ;;  (setq tab-bar-show 1))
-  ;;
-  ;;;; Don't confirm when exiting Emacs that active processes exist.
-  ;;(setq confirm-kill-processes nil)
-  ;;
-  ;;(setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-  ;;      kill-buffer-delete-auto-save-files t
-  ;;      window-combination-resize t     ;Take new window space from all other
-  ;;                                      ;windows (not just current)
-  ;;      scroll-preserve-screen-position t
-  ;;      suggest-key-bindings nil)
-  ;;
-  ;;(after! persp-mode
-  ;;  (setq persp-reset-windows-on-nil-window-conf t))
-  ;;
-  ;;(after! image
-  ;;  (setq image-use-external-converter t))
-  ;;
-  ;;(setq set-message-functions
-  ;;      '(inhibit-message
-  ;;        set-minibuffer-message)
-  ;;      inhibit-message-regexps '("C-g is undefined\\'"
-  ;;                                "ESC is undefined\\'"))
-  ;;
-  ;;(after! flymake
-  ;;  (setq flymake-start-on-flymake-mode nil))
-  ;;
-  ;;;; A little bit of margin is nice but I don't like it when I'm in terminal
-  ;;;; popups.
-  ;;(setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
-  ;;  scroll-margin 2)
-  ;;
-  ;;(after! time
-  ;;  (setq display-time-default-load-average nil))
-  ;;
-  ;;(after! bind-key
-  ;;  (setq bind-key-describe-special-forms t))
-  ;;
-  ;;(after! transient
-  ;;  (setq transient-align-variable-pitch t))
-  ;;
-  ;;(after! newcomment
-  ;;  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
-  ;;                                      ;`comment-region' so that I can mark the
-  ;;                                      ;entire commented text with
-  ;;                                      ;`mark-paragraph'.
-  ;;        comment-padding nil))         ;I prefer no spaces between comment
-  ;;                                      ;delimiters and the comment text.
-  ;;
-  ;;(after! doom-modeline
-  ;;  (setq doom-modeline-hud t
-  ;;        doom-modeline-support-imenu t
-  ;;        doom-modeline-mu4e t
-  ;;        doom-modeline-gnus t
-  ;;        doom-modeline-github t
-  ;;        doom-modeline-major-mode-icon nil
-  ;;        doom-modeline-minor-modes nil))
+  ;; Show absolute line numbers. I prefer to not show relative line numbers
+  ;; because I use `avy' commands to jump to lines.
+  (setq display-line-numbers-type t
+        display-line-numbers-width-start t)
+
+  ;; Show minibuffer recursion depth
+  (autoload 'minibuffer-depth-setup "mb-depth")
+  (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+
+  ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
+  ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
+  ;; what item I have selected.
+  (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
+
+  ;; Auto-hide the tab bar.
+  (after! tab-bar
+    (setq tab-bar-show 1))
+
+  ;; Don't confirm when exiting Emacs that active processes exist.
+  (setq confirm-kill-processes nil)
+
+  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+        kill-buffer-delete-auto-save-files t
+        window-combination-resize t     ;Take new window space from all other
+                                        ;windows (not just current)
+        scroll-preserve-screen-position t
+        suggest-key-bindings nil)
+
+  (after! persp-mode
+    (setq persp-reset-windows-on-nil-window-conf t))
+
+  (after! image
+    (setq image-use-external-converter t))
+
+  (setq set-message-functions
+        '(inhibit-message
+          set-minibuffer-message)
+        inhibit-message-regexps '("C-g is undefined\\'"
+                                  "ESC is undefined\\'"))
+
+  (after! flymake
+    (setq flymake-start-on-flymake-mode nil))
+
+  ;; A little bit of margin is nice but I don't like it when I'm in terminal
+  ;; popups.
+  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+    scroll-margin 2)
+
+  (after! time
+    (setq display-time-default-load-average nil))
+
+  (after! bind-key
+    (setq bind-key-describe-special-forms t))
+
+  (after! transient
+    (setq transient-align-variable-pitch t))
+
+  (after! newcomment
+    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+                                        ;`comment-region' so that I can mark the
+                                        ;entire commented text with
+                                        ;`mark-paragraph'.
+          comment-padding nil))         ;I prefer no spaces between comment
+                                        ;delimiters and the comment text.
+
+  (after! doom-modeline
+    (setq doom-modeline-hud t
+          doom-modeline-support-imenu t
+          doom-modeline-mu4e t
+          doom-modeline-gnus t
+          doom-modeline-github t
+          doom-modeline-major-mode-icon nil
+          doom-modeline-minor-modes nil))
 
   (after! which-key
-    (setq
-     ;; which-key-ellipsis "..."
-     ;; which-key-idle-delay 0.5
-     ;; which-key-compute-remaps t
-     ;; which-key-max-description-length 35
-     ;; For some reason opening `which-key' with a popup window open on the
-     ;; same side would cause the popup window to enlarge.
-     ;; which-key-preserve-window-configuration t
-     ;; This option breaks the Embark Which Key prompter when you have a
-     ;; prefix key in the Embark action map so disable it.
-     which-key-show-transient-maps nil
-     ))
+    (setq which-key-ellipsis "..."
+          which-key-idle-delay 0.5
+          which-key-compute-remaps t
+          which-key-max-description-length 35
+          ;; This option breaks the Embark Which Key prompter when you have a
+          ;; prefix key in the Embark action map so disable it.
+          which-key-show-transient-maps nil)
+
+    ;; For some reason opening `which-key' with a popup window open on the same
+    ;; side would cause the popup window to enlarge. BUG However, enabling
+    ;; `which-key-preserve-window-configuration' causes errors with Doom's popup
+    ;; handling in edge cases.
+    (when (or (> emacs-major-version 30)
+              (cae-display-graphic-p))
+      (which-key-posframe-mode +1)
+      (setq which-key-posframe-poshandler
+            #'posframe-poshandler-frame-bottom-center)))
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
     (after! which-key
@@ -379,77 +384,76 @@
         :size #'ignore))
     (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
-  ;;(when (modulep! :ui workspaces)
-  ;;  (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
-  ;;    "Show my workspaces in the echo area."
-  ;;    :around #'which-key--process-page
-  ;;    (let ((out (apply orig-fun pages-obj)))
-  ;;      (if (not (string-match-p "Display tab bar\\b" (car out)))
-  ;;          out
-  ;;        (cons (car out)
-  ;;              (lambda ()
-  ;;                (funcall (cdr out))
-  ;;                (which-key--echo (concat (current-message) " "
-  ;;                                         (+workspace--tabline))))))))
-  ;;
-  ;;  (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
-  ;;    "Open the journal in a new workspace."
-  ;;    :before #'org-journal-new-entry
-  ;;    (+workspace-switch "journal" t)))
-  ;;
-  ;;;; Lower the default popup delay.
-  ;;(after! tooltip
-  ;;  (setq tooltip-hide-delay 3))
-  ;;
-  ;;(after! flycheck-posframe
-  ;;  (setq flycheck-posframe-border-width 1
-  ;;        flycheck-posframe-border-use-error-face t))
-  ;;
-  ;;(use-package! iscroll
-  ;;  :defer t :init
-  ;;  (add-hook 'org-mode-hook #'iscroll-mode)
-  ;;  (add-hook 'markdown-mode-hook #'iscroll-mode)
-  ;;  (add-hook 'image-mode-hook #'iscroll-mode)
-  ;;  (add-hook 'eww-mode-hook #'iscroll-mode)
-  ;;  (add-hook 'w3m-mode-hook #'iscroll-mode))
-  ;;
-  ;;(use-package! beacon
-  ;;  :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
-  ;;  :config
-  ;;  (setq beacon-blink-delay 0.15
-  ;;        beacon-blink-duration 0.15)
-  ;;  (beacon-mode +1)
-  ;;  (add-to-list 'beacon-dont-blink-commands 'doom/escape)
-  ;;  (add-hook! 'persp-activated-functions
-  ;;    (defun cae-beacon-blink-on-workspace-switch (&rest _)
-  ;;      (run-at-time 0.01 nil #'beacon-blink-automated)))
-  ;;  (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
-  ;;  (after! corfu
-  ;;    (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
-  ;;  (setq beacon-blink-when-window-scrolls nil
-  ;;        beacon-overlay-priority -1)
-  ;;  (dolist (cmd '(+eshell-tldr-to-man))
-  ;;    (add-to-list 'beacon-dont-blink-commands cmd)))
-  ;;
-  ;;(use-package indent-bars
-  ;;  :custom
-  ;;  (indent-bars-treesit-support t)
-  ;;  (indent-bars-no-descend-string t)
-  ;;  (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  ;;  (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
-  ;;                                      ; as an example
-  ;;                               list list_comprehension
-  ;;                               dictionary dictionary_comprehension
-  ;;                               parenthesized_expression subscript)))
-  ;;  :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-  ;;
-  ;;(use-package! casual-calc
-  ;;  :defer t :init
-  ;;  (after! calc
-  ;;    (map! :map calc-mode-map
-  ;;          "C-o" #'casual-main-menu
-  ;;          "C-M-?"#'casual-main-menu)))
-  )
+  (when (modulep! :ui workspaces)
+    (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
+      "Show my workspaces in the echo area."
+      :around #'which-key--process-page
+      (let ((out (apply orig-fun pages-obj)))
+        (if (not (string-match-p "Display tab bar\\b" (car out)))
+            out
+          (cons (car out)
+                (lambda ()
+                  (funcall (cdr out))
+                  (which-key--echo (concat (current-message) " "
+                                           (+workspace--tabline))))))))
+
+    (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
+      "Open the journal in a new workspace."
+      :before #'org-journal-new-entry
+      (+workspace-switch "journal" t)))
+
+  ;; Lower the default popup delay.
+  (after! tooltip
+    (setq tooltip-hide-delay 3))
+
+  (after! flycheck-posframe
+    (setq flycheck-posframe-border-width 1
+          flycheck-posframe-border-use-error-face t))
+
+  (use-package! iscroll
+    :defer t :init
+    (add-hook 'org-mode-hook #'iscroll-mode)
+    (add-hook 'markdown-mode-hook #'iscroll-mode)
+    (add-hook 'image-mode-hook #'iscroll-mode)
+    (add-hook 'eww-mode-hook #'iscroll-mode)
+    (add-hook 'w3m-mode-hook #'iscroll-mode))
+
+  (use-package! beacon
+    :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
+    :config
+    (setq beacon-blink-delay 0.15
+          beacon-blink-duration 0.15)
+    (beacon-mode +1)
+    (add-to-list 'beacon-dont-blink-commands 'doom/escape)
+    (add-hook! 'persp-activated-functions
+      (defun cae-beacon-blink-on-workspace-switch (&rest _)
+        (run-at-time 0.01 nil #'beacon-blink-automated)))
+    (add-hook 'persp-created-functions #'cae-beacon-blink-on-workspace-switch)
+    (after! corfu
+      (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
+    (setq beacon-blink-when-window-scrolls nil
+          beacon-overlay-priority -1)
+    (dolist (cmd '(+eshell-tldr-to-man))
+      (add-to-list 'beacon-dont-blink-commands cmd)))
+
+  (use-package indent-bars
+    :custom
+    (indent-bars-treesit-support t)
+    (indent-bars-no-descend-string t)
+    (indent-bars-treesit-ignore-blank-lines-types '("module"))
+    (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
+                                        ; as an example
+                                 list list_comprehension
+                                 dictionary dictionary_comprehension
+                                 parenthesized_expression subscript)))
+    :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
+
+  (use-package! casual-calc
+    :defer t :init
+    (after! calc
+      (map! :map calc-mode-map
+            "C-o" #'casual-main-menu
+            "C-M-?"#'casual-main-menu))))
 
 
 ;;; Tools
