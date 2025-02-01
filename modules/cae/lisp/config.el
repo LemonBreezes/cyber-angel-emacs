@@ -73,8 +73,8 @@
     (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
 
 ;; This fixes aggressive indent's indentation of plists. :)
-;;(after! lisp-mode
-;;  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+(after! lisp-mode
+  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
 
 (when (modulep! :editor lispy)
   (after! lispy
