@@ -104,12 +104,12 @@
            "M-," nil)
           "C-d" #'cae-delete-char
           "C-M-?" #'cae-lispy-which-key-cheatsheet
-          ")" #'cae-insert-closing-paren)
+          ")" #'cae-insert-closing-paren
+          "<f7>" #'cae-lispy-cheatsheet/body)
     (map! :map help-map
           ;; You can use this since it dynamically updates, but the Lispy
           ;; cheatsheet Hydra is better.
           ;;"bl" #'cae-lispy-which-key-cheatsheet
-          "bl" #'cae-lispy-cheatsheet/body
           ))
 
   (when (modulep! :editor evil)
