@@ -155,7 +155,7 @@
        ;;exwm
        ;;dired
        ;;lisp
-       ;;misc-applications
+       misc-applications
        ;;(modeline +emms)
        ;;notifications
        ;;unpackaged
