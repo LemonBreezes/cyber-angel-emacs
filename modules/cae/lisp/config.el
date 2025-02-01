@@ -40,7 +40,36 @@
 
 ;; Check parens before saving.
 (after! smartparens
-  (dolist (mode sp-lisp-modes)
+  (dolist (mode '(cider-repl-mode
+                  clojure-mode
+                  clojurec-mode
+                  clojurescript-mode
+                  clojurex-mode
+                  clojure-ts-mode
+                  clojurescript-ts-mode
+                  clojurec-ts-mode
+                  common-lisp-mode
+                  emacs-lisp-mode
+                  eshell-mode
+                  fennel-mode
+                  fennel-repl-mode
+                  geiser-repl-mode
+                  gerbil-mode
+                  inf-clojure-mode
+                  inferior-emacs-lisp-mode
+                  inferior-lisp-mode
+                  inferior-scheme-mode
+                  lisp-interaction-mode
+                  lisp-mode
+                  monroe-mode
+                  racket-mode
+                  racket-repl-mode
+                  scheme-interaction-mode
+                  scheme-mode
+                  slime-repl-mode
+                  sly-mrepl-mode
+                  stumpwm-mode
+                  ))
     (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
 
 ;; This fixes aggressive indent's indentation of plists. :)
