@@ -222,11 +222,7 @@
     ;; same side would cause the popup window to enlarge. However, enabling
     ;; `which-key-preserve-window-configuration' causes errors with Doom's popup
     ;; handling in edge cases.
-    (when (or (> emacs-major-version 30)
-              (cae-display-graphic-p))
-      (which-key-posframe-mode +1)
-      (setq which-key-posframe-poshandler
-            #'posframe-poshandler-frame-bottom-center)))
+    )
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
     (after! which-key
