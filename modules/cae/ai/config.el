@@ -37,7 +37,7 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
 (after! minuet
-  (setq minuet-provider 'gemini))
+  (setq minuet-provider 'openai-fim-compatible))
 
 (use-package! aider
   :defer t :config
