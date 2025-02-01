@@ -43,7 +43,8 @@
   (interactive)
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
-        (pending-processes 0))
+        (pending-processes 0)
+        (verbose nil))
     (with-current-buffer output-buffer (erase-buffer))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
@@ -80,7 +81,8 @@
                                     (message "Git submodule update failed in %s" repo-dir)
                                     (display-buffer output-buffer)
                                     (setq all-pulls-succeeded nil))
-                                (message "Git submodule update succeeded in %s" repo-dir))
+                                (unless verbose
+                                  (message "Git submodule update succeeded in %s" repo-dir)))
                               (with-current-buffer output-buffer
                                 (save-excursion
                                   (goto-char (point-max))
@@ -89,7 +91,8 @@
                                         (message "Conflict detected during git submodule update in %s" repo-dir)
                                         (display-buffer output-buffer)
                                         (setq all-pulls-succeeded nil))
-                                    (message "Submodules updated successfully in %s" repo-dir))))
+                                    (unless verbose
+                                      (message "Submodules updated successfully in %s" repo-dir)))))
                               (setq pending-processes (1- pending-processes))
                               (when (zerop pending-processes)
                                 (if all-pulls-succeeded
