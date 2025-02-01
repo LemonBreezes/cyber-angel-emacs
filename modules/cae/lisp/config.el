@@ -36,7 +36,7 @@
 
 ;; Use my own Imenu expression instead of Doom's. For mine, I do not count
 ;; comments like ";; This code does ..." as sections.
-;;(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
+(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;; Check parens before saving.
 ;;(after! smartparens
@@ -44,8 +44,8 @@
 ;;    (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
 
 ;; This fixes aggressive indent's indentation of plists. :)
-;;(after! lisp-mode
-;;  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+(after! lisp-mode
+  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
 
 (when (modulep! :editor lispy)
   (after! lispy
