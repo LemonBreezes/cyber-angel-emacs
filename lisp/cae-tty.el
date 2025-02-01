@@ -1,7 +1,5 @@
 ;;; lisp/cae-tty.el -*- lexical-binding: t; -*-
 
-(defalias 'cae-display-graphic-p 'display-graphic-p)
-
 (unless (cae-display-graphic-p)
   ;; Stuff so that Emacs doesn't break in the Terminal.
   (when (modulep! :completion vertico +childframe)
