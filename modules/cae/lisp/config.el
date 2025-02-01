@@ -39,9 +39,9 @@
 ;;(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;; Check parens before saving.
-;;(after! smartparens
-;;  (dolist (mode sp-lisp-modes)
-;;    (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
+(after! smartparens
+  (dolist (mode sp-lisp-modes)
+    (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
 
 ;; This fixes aggressive indent's indentation of plists. :)
 ;;(after! lisp-mode
