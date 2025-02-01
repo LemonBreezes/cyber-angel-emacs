@@ -31,8 +31,8 @@
         [remap lispy-newline-and-indent-plain] #'cae-lisp-newline-and-indent))
 
 ;; Use Emacs Lisp mode for dir-locals files. This will make them easier to edit.
-(add-to-list 'auto-mode-alist (cons (regexp-quote dir-locals-file)
-                                    'emacs-lisp-mode))
+;;(add-to-list 'auto-mode-alist (cons (regexp-quote dir-locals-file)
+;;                                    'emacs-lisp-mode))
 
 ;; Use my own Imenu expression instead of Doom's. For mine, I do not count
 ;; comments like ";; This code does ..." as sections.
