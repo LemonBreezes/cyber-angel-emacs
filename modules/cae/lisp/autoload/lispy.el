@@ -4,9 +4,8 @@
 
 (transient-define-prefix cae-lispy-cheatsheet ()
   "Lispy Cheatsheet"
-  [
-   ;; Group “Move”
-   ["Move"
+  ;; Group “Move”
+  [["Move"
     ("l" "right" special-lispy-right)
     ("j" "down" special-lispy-down)
     ("k" "up" special-lispy-up)
@@ -71,6 +70,4 @@
     ("J" "outline next" special-lispy-outline-next)
     ("K" "outline prev" special-lispy-outline-prev)
     ("L" "outline↓child" special-lispy-outline-goto-child)
-    ("D" "pop-tag" special-pop-tag-mark)]
-   ]
-  )
+    ("D" "pop-tag" special-pop-tag-mark)]])
