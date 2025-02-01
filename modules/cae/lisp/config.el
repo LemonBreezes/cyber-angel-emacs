@@ -36,7 +36,7 @@
 
 ;; Use my own Imenu expression instead of Doom's. For mine, I do not count
 ;; comments like ";; This code does ..." as sections.
-;;(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
+(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;; Check parens before saving.
 (after! smartparens
