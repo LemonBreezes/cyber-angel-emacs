@@ -222,8 +222,6 @@
     ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
     ;; popup would not show and there would be an error. This only happens with
     ;; `which-key-preserve-window-configuration'.
-    (when (modulep! :editor evil)
-      (add-hook 'which-key-init-buffer-hook #'evil-initialize))
     (setq which-key-preserve-window-configuration t))
 
   ;; Allow C-h to open Consult when calling which-key without a prefix.
