@@ -6,6 +6,7 @@
 If a file was visited in the buffer that was active when this
 command was called, go to its unstaged changes section."
   (interactive)
+  (require 'project)
   (let* ((buffer-file-path
           (when buffer-file-name
             (file-relative-name buffer-file-name
