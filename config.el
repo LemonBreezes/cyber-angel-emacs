@@ -213,6 +213,7 @@
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
           which-key-compute-remaps t
+          which-key-allow-imprecise-window-fit t
           which-key-max-description-length 35
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
@@ -367,6 +368,7 @@
         :size #'+popup-shrink-to-fit :side 'bottom :ttl t)
       (set-popup-rule! "\\`\\*Embark Export: "
         :size #'cae-popup-resize-help-buffer :side 'right :ttl 0))
+    (set-popup-rule! (regexp-quote " *which-key*") :ignore t)
     (after! which-key
       (set-popup-rule! (regexp-quote which-key-buffer-name) :ignore t))
     (after! elfeed
