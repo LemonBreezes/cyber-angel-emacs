@@ -21,15 +21,6 @@
   (defun cae-eros-setup-keybindings-h ()
     (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
-;; Allow `eval-expression' to have comments.
-(add-hook! 'minibuffer-setup-hook
-  (defun cae-lisp-eval-expression-set-up-comments-h ()
-    (when (string= (minibuffer-prompt) "Eval: ")
-      (setq-local comment-start ";"
-                  comment-end ""
-                  comment-start-skip ";+ *"
-                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
-
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
 (map! :map minibuffer-local-map
