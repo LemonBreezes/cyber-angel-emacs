@@ -209,6 +209,8 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil))
 
+  (when (modulep! :editor evil)
+    (add-hook 'which-key-init-buffer-hook #'evil-initialize))
   (after! which-key
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
