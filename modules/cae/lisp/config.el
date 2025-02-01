@@ -36,7 +36,7 @@
 
 ;; Use my own Imenu expression instead of Doom's. For mine, I do not count
 ;; comments like ";; This code does ..." as sections.
-(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
+;;(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;;;; Check parens before saving.
 ;;(after! smartparens
@@ -81,7 +81,8 @@
     (add-hook! 'doom-escape-hook
       (defun cae-lispy-clear-iedit-h ()
         (when (bound-and-true-p iedit-mode)
-          (iedit-mode -1) t)))
+          (iedit-mode -1)
+          t)))
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
           lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
