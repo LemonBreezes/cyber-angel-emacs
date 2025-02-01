@@ -1572,7 +1572,8 @@
 ;;; Appendix
 
 (doom-load-packages-incrementally
- `(,@(when (modulep! :completion corfu)
+ `(bookmark
+   ,@(when (modulep! :completion corfu)
        '(corfu))
    ,@(when (modulep! :emacs dirvish)
        '(dired transient dirvish))
@@ -1639,7 +1640,7 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc ; The music apps are in a previous line.
+       (nconc                           ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
