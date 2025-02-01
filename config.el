@@ -224,7 +224,8 @@
     ;; `which-key-preserve-window-configuration'.
     (when (modulep! :editor evil)
       (add-hook 'which-key-init-buffer-hook #'evil-initialize))
-    (setq which-key-preserve-window-configuration t))
+    (setq which-key-preserve-window-configuration t
+          which-key--pages-obj ""))
 
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
