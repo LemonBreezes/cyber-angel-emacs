@@ -217,8 +217,8 @@
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil)
 
-    ;; For some reason opening `which-key' with a popup window open on the same
-    ;; side would cause the popup window to enlarge. BUG However, enabling
+    ;; BUG For some reason opening `which-key' with a popup window open on the
+    ;; same side would cause the popup window to enlarge. However, enabling
     ;; `which-key-preserve-window-configuration' causes errors with Doom's popup
     ;; handling in edge cases.
     (when (or (> emacs-major-version 30)
@@ -764,8 +764,9 @@
   (undelete-frame-mode +1)
 
   ;; Automatically deindent items when they are added to the kill ring.
-  (when (fboundp #'kill-ring-deindent-mode)
-    (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
+  ;;
+  ;;(when (fboundp #'kill-ring-deindent-mode)
+  ;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
   (after! paren
     ;; NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
