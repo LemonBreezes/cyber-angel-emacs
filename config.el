@@ -2,7 +2,6 @@
 
 (defvar cae-config-finished-loading nil)
 
-(advice-add #'evil-initialize :around #'ignore)
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
