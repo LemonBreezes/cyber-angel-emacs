@@ -156,9 +156,9 @@
        ;;dired
        ;;lisp
        misc-applications
-       ;;(modeline +emms)
-       ;;notifications
-       ;;unpackaged
+       (modeline +emms)
+       notifications
+       unpackaged
        vc
        org
        ai
