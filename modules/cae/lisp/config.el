@@ -22,13 +22,13 @@
     (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
 ;; Allow `eval-expression' to have comments.
-(add-hook! 'minibuffer-setup-hook
-  (defun cae-lisp-eval-expression-set-up-comments-h ()
-    (when (string= (minibuffer-prompt) "Eval: ")
-      (setq-local comment-start ";"
-                  comment-end ""
-                  comment-start-skip ";+ *"
-                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
+;;(add-hook! 'minibuffer-setup-hook
+;;  (defun cae-lisp-eval-expression-set-up-comments-h ()
+;;    (when (string= (minibuffer-prompt) "Eval: ")
+;;      (setq-local comment-start ";"
+;;                  comment-end ""
+;;                  comment-start-skip ";+ *"
+;;                  comment-end-skip "[ 	]*\\(\\s>\\|\n\\)"))))
 
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
@@ -45,23 +45,23 @@
 
 ;; Use my own Imenu expression instead of Doom's. For mine, I do not count
 ;; comments like ";; This code does ..." as sections.
-(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
+;;(advice-add #'+emacs-lisp-extend-imenu-h :override #'cae-emacs-lisp-extend-imenu-h)
 
 ;; Check parens before saving.
-(after! smartparens
-  (dolist (mode sp-lisp-modes)
-    (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
+;;(after! smartparens
+;;  (dolist (mode sp-lisp-modes)
+;;    (add-hook (intern (concat (symbol-name mode) "-hook")) #'cae-lisp-check-parens-before-save-h)))
 
 ;; This fixes aggressive indent's indentation of plists. :)
-(after! lisp-mode
-  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+;;(after! lisp-mode
+;;  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
 
 (when (modulep! :editor lispy)
   (after! lispy
-    (add-hook! 'doom-escape-hook
-      (defun cae-lispy-clear-iedit-h ()
-        (when (bound-and-true-p iedit-mode)
-          (iedit-mode -1) t)))
+    ;;(add-hook! 'doom-escape-hook
+    ;;  (defun cae-lispy-clear-iedit-h ()
+    ;;    (when (bound-and-true-p iedit-mode)
+    ;;      (iedit-mode -1) t)))
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
           lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
