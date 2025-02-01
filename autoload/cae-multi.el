@@ -103,6 +103,7 @@
                        (cae-multi--run-doom-sync)
                      (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))
             ))
+    )
 (defun cae-multi--run-doom-sync ()
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
