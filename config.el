@@ -2,6 +2,16 @@
 
 (defvar cae-config-finished-loading nil)
 
+(after! which-key
+    ;; BUG Work around `window-live-p' error that would happen if I opened Doom
+    ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
+    ;; popup would not show and there would be an error. This only happens with
+    ;; `which-key-preserve-window-configuration'.
+    (setq which-key-preserve-window-configuration t)
+  (when (modulep! :editor evil)
+    (after! evil
+      (add-to-list 'evil-buffer-regexps '("\\` \\*which-key\\*\\'")))))
+
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
@@ -216,16 +226,7 @@
           which-key-max-description-length 35
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
-          which-key-show-transient-maps nil)
-
-    ;; BUG Work around `window-live-p' error that would happen if I opened Doom
-    ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
-    ;; popup would not show and there would be an error. This only happens with
-    ;; `which-key-preserve-window-configuration'.
-    (setq which-key-preserve-window-configuration t))
-  (when (modulep! :editor evil)
-    (after! evil
-      (add-to-list 'evil-buffer-regexps '("\\` \\*which-key\\*\\'"))))
+          which-key-show-transient-maps nil))
 
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
