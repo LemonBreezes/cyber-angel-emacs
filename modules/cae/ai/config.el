@@ -23,8 +23,6 @@
           `("--model" "openai/o3-mini"
             "--editor-model" "openai/o3-mini"
             "--reasoning-effort" "high"
-            "--openai-api-key" ,(cae-secrets-get-openai-api-key)
-            "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
             "--cache-prompts"
             "--chat-language" "English"
             "--no-gitignore")))
