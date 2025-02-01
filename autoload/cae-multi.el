@@ -66,7 +66,8 @@
                          (display-buffer output-buffer)
                          (setq all-pulls-succeeded nil))
                      (progn
-                       (message "Git pull succeeded in %s" repo-dir)
+                       (when verbose
+                         (message "Git pull succeeded in %s" repo-dir))
                        (setq pending-processes (1+ pending-processes))
                        (let ((submodule-process
                               (start-process "git-submodule-update-process"
