@@ -20,6 +20,9 @@
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
+;; Disable Outline highlighting
+(advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
+
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
 (defadvice! cae-run-theme-hook-h (_)
   :after #'consult-theme
@@ -97,7 +100,8 @@
     (after! outline
       (dolist (face '(outline-1 outline-2 outline-3 outline-4 outline-5
                       outline-6 outline-7 outline-8))
-        (set-face-attribute face nil :extend t)))
+        (set-face-attribute face nil :extend t)
+        (set-fac)))
     (after! markdown-mode
       (dolist (face '(markdown-header-face-1 markdown-header-face-2
                       markdown-header-face-3 markdown-header-face-4
