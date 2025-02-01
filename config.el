@@ -7,8 +7,7 @@
   ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
   ;; popup would not show and there would be an error. This only happens with
   ;; `which-key-preserve-window-configuration'.
-  (setq which-key-preserve-window-configuration t
-        which-key-popup-type 'side-window)
+  (setq which-key-preserve-window-configuration t)
   (when (modulep! :editor evil)
     (after! evil
       (add-to-list 'evil-buffer-regexps '("\\` \\*which-key\\*\\'")))))
