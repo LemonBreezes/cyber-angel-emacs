@@ -90,7 +90,7 @@
        (format +lsp)
        snippets
        multiple-cursors
-       ;; (evil +everywhere)
+       (evil +everywhere)
        lispy
 
        :emacs
