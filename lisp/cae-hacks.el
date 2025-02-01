@@ -140,18 +140,6 @@ It is meant to be used as a `post-gc-hook'."
 ;; this.
 (defvar helm-marked-buffer-name "*helm marked*")
 
-;; Prevent a void variable error
-(unless (boundp 'sp-lisp-modes)
-  (defvar sp-lisp-modes
-    '(cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode
-      common-lisp-mode emacs-lisp-mode eshell-mode fennel-mode
-      fennel-repl-mode geiser-repl-mode gerbil-mode inf-clojure-mode
-      inferior-emacs-lisp-mode inferior-lisp-mode
-      inferior-scheme-mode lisp-interaction-mode lisp-mode
-      monroe-mode racket-mode racket-repl-mode
-      scheme-interaction-mode scheme-mode slime-repl-mode
-      sly-mrepl-mode stumpwm-mode)))
-
 ;; This is for finding and fixing commands that leave the current buffer and the
 ;; window buffer out of sync.
 ;;(add-hook! 'post-command-hook
