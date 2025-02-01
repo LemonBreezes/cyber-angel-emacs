@@ -9,6 +9,7 @@
                    mu4e-alert)
 (unpin! consult) ; (void-function consult--process-collection)
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
+(package! which-key :built-in t)
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
