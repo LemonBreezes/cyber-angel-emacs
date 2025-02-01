@@ -186,3 +186,8 @@ It is meant to be used as a `post-gc-hook'."
 ;;      (apply oldfun args)
 ;;    (error (unless (string-prefix-p "Selecting deleted buffer" (error-message-string err))
 ;;             (signal (car err) (cdr err))))))
+
+;; Inhibit `eldoc' when `which-key' is active to prevent errors.
+(defadvice! cae-disable-eldoc-on-which-key-a ()
+  :before-until #'eldoc-documentation-default
+  (and (featurep 'which-key) (which-key--popup-showing-p)))
