@@ -86,6 +86,7 @@
     ("ofund" "found" nil :count 0)
     ("ont" "not" nil :count 0)
     ("owrk" "work" nil :count 0)
+    ("pacage" "package" nil :count 0)
     ("pakcage" "package" nil :count 0)
     ("paly" "pay" nil :count 0)
     ("pcakage" "package" nil :count 0)
