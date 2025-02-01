@@ -64,6 +64,7 @@
          ("," nil ""))))
   (dolist (binding bindings)
     (define-key lispy-mode-map (car binding) (cadr binding)))
+)
 (require 'transient)
 
 (transient-define-prefix cae-lispy-cheatsheet ()
