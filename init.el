@@ -153,7 +153,7 @@
        debugger
        eshell
        ;;exwm
-       ;;dired
+       dired
        ;;lisp
        misc-applications
        (modeline +emms)
