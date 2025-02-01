@@ -209,11 +209,6 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil))
 
-  ;; BUG Work around `window-live-p' error that would happen if I opened Doom
-  ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
-  ;; popup would not show and there would be an error.
-  (when (modulep! :editor evil)
-    (add-hook 'which-key-init-buffer-hook #'evil-initialize))
   (after! which-key
     (setq which-key-ellipsis "..."
           which-key-idle-delay 0.5
@@ -223,12 +218,14 @@
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil)
 
-    ;; BUG For some reason opening `which-key' with a popup window open on the
-    ;; same side would cause the popup window to enlarge. However, enabling
-    ;; `which-key-preserve-window-configuration' causes errors with Doom's popup
-    ;; handling in edge cases.
-    (setq which-key-preserve-window-configuration t)
-    )
+    ;; BUG Work around `window-live-p' error that would happen if I opened Doom
+    ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
+    ;; popup would not show and there would be an error. This only happens with
+    ;; `which-key-preserve-window-configuration'
+    (when (modulep! :editor evil)
+      (add-hook 'which-key-init-buffer-hook #'evil-initialize))
+    (setq which-key-preserve-window-configuration t
+          which-key-allow-imprecise-window-fit nil))
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
     (after! which-key
