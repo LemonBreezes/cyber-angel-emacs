@@ -133,6 +133,7 @@
 
 (when cae-init-ui-enabled-p
   (load! "lisp/cae-theme")
+  (load! "lisp/cae-visual-scrolling")
 
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
