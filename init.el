@@ -154,7 +154,7 @@
        eshell
        exwm
        dired
-       lisp
+       ;;lisp
        misc-applications
        (modeline +emms)
        notifications
