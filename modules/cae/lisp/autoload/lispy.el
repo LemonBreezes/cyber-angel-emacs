@@ -68,6 +68,7 @@
 
 (transient-define-prefix cae-lispy-cheatsheet ()
   "Lispy Cheatsheet"
+  [
   ;; Group “Move”
   ["Move"
    ("l" "right" special-lispy-right)
