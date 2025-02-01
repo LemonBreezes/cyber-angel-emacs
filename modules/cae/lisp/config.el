@@ -62,6 +62,10 @@
       (defun cae-lispy-clear-iedit-h ()
         (when (bound-and-true-p iedit-mode)
           (iedit-mode -1) t)))
+    (add-hook! 'lispy-mode-hook
+      (defun cae-lispy-undo-outline-changes ()
+        (setq outline-regexp (car lispy-old-outline-settings)
+              outline-level (cdr lispy-old-outline-settings))))
     (setq lispy-font-lock-keywords nil
           lispy-eval-display-style 'overlay
           lispy-no-permanent-semantic t ;Semantic is slow and I don't know of
