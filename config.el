@@ -215,7 +215,7 @@
           which-key-max-description-length 35
           ;; For some reason opening `which-key' with a popup window open on the
           ;; same side would cause the popup window to enlarge.
-          ;; which-key-preserve-window-configuration t
+          which-key-preserve-window-configuration t
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil))
@@ -237,7 +237,7 @@
              (setq this-command 'embark-prefix-help-command)
              (embark-bindings-in-keymap cae-which-key-current-keymap))
             (t (call-interactively #'embark-prefix-help-command)))))
-  ;; Inhibit `eldoc' when `which-key' is active.
+  ;; Inhibit `eldoc' when `which-key' is active to prevent errors.
   (defadvice! cae-disable-eldoc-on-which-key-a ()
     :before-until #'eldoc-documentation-default
     (and (featurep 'which-key) (which-key--popup-showing-p)))
