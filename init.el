@@ -148,23 +148,24 @@
        irc
 
        :cae
-       (lean4 +lsp +tree-sitter)
-       (helm +childframe)
-       debugger
-       eshell
-       exwm
-       dired
-       lisp
-       misc-applications
-       (modeline +emms)
-       notifications
-       unpackaged
-       vc
-       org
-       ai
-       gnus
-       rss
-       denote)
+       ;;(lean4 +lsp +tree-sitter)
+       ;;(helm +childframe)
+       ;;debugger
+       ;;eshell
+       ;;exwm
+       ;;dired
+       ;;lisp
+       ;;misc-applications
+       ;;(modeline +emms)
+       ;;notifications
+       ;;unpackaged
+       ;;vc
+       ;;org
+       ;;ai
+       ;;gnus
+       ;;rss
+       ;;denote
+       )
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
