@@ -41,8 +41,6 @@
 (defun cae-multi-pull-repositories ()
   "Pull the shared repositories and handle conflicts asynchronously."
   (interactive)
-  (unless (and (boundp 'cae-multi-repositories) cae-multi-repositories)
-    (error "cae-multi-repositories is not defined or empty"))
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
         (pending-processes 0))
@@ -101,9 +99,7 @@
                  (when (zerop pending-processes)
                    (if all-pulls-succeeded
                        (cae-multi--run-doom-sync)
-                     (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))
-            ))
-    )
+                     (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
 (defun cae-multi--run-doom-sync ()
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
