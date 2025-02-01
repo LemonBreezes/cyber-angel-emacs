@@ -91,5 +91,4 @@ normally have their errors suppressed."
    ("s" cae-debug-toggle-debug-on-signal)
    ("R" cae-debug-toggle-debug-allow-recursive-debug)
    ("r" cae-debug-toggle-backtrace-on-redisplay-error)
-   ("d" cae-debug-toggle-doom-debug-mode)
-   ])
+   ("d" cae-debug-toggle-doom-debug-mode)])
