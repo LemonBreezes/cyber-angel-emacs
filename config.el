@@ -218,6 +218,38 @@
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil)
 
+(defun which-key--show-page (&optional n)
+  "Show current page.
+N changes the current page to the Nth page relative to the
+current one."
+  (which-key--init-buffer) ;; in case it was killed
+  (let ((prefix-keys (which-key--current-key-string))
+        golden-ratio-mode)
+    (if (null which-key--pages-obj)
+        (backtrace)
+        (message "%s- which-key can't show keys: There is not \
+enough space based on your settings and frame size." prefix-keys)
+      (when n
+        (setq which-key--pages-obj
+              (which-key--pages-set-current-page which-key--pages-obj n)))
+      (let ((page-echo (which-key--process-page which-key--pages-obj))
+            (height (which-key--pages-height which-key--pages-obj))
+            (width (car (which-key--pages-widths which-key--pages-obj))))
+        (which-key--lighter-status)
+        (if (eq which-key-popup-type 'minibuffer)
+            (which-key--echo (car page-echo))
+          (with-current-buffer which-key--buffer
+            (erase-buffer)
+            (insert (car page-echo))
+            (goto-char (point-min)))
+          (when (cdr page-echo) (funcall (cdr page-echo)))
+          (which-key--show-popup (cons height width)))))
+    ;; used for paging at top-level
+    (if (fboundp 'set-transient-map)
+        (set-transient-map (which-key--get-popup-map))
+      (with-no-warnings
+        (set-temporary-overlay-map (which-key--get-popup-map))))))
+
     ;; BUG Work around `window-live-p' error that would happen if I opened Doom
     ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
     ;; popup would not show and there would be an error. This only happens with
