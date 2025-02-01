@@ -1572,12 +1572,11 @@
 ;;; Appendix
 
 (doom-load-packages-incrementally
- `(bookmark
-   ,@(when (modulep! :completion corfu)
+ `(,@(when (modulep! :completion corfu)
        '(corfu))
    ,@(when (modulep! :emacs dirvish)
        '(dired transient dirvish))
-   auth-source tramp-compat tramp-integration tramp tramp-sh
+   bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
@@ -1640,7 +1639,7 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc                           ; The music apps are in a previous line.
+       (nconc ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
