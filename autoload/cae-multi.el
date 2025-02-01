@@ -81,7 +81,7 @@
                                     (message "Git submodule update failed in %s" repo-dir)
                                     (display-buffer output-buffer)
                                     (setq all-pulls-succeeded nil))
-                                (unless verbose
+                                (when verbose
                                   (message "Git submodule update succeeded in %s" repo-dir)))
                               (with-current-buffer output-buffer
                                 (save-excursion
@@ -91,7 +91,7 @@
                                         (message "Conflict detected during git submodule update in %s" repo-dir)
                                         (display-buffer output-buffer)
                                         (setq all-pulls-succeeded nil))
-                                    (unless verbose
+                                    (when verbose
                                       (message "Submodules updated successfully in %s" repo-dir)))))
                               (setq pending-processes (1- pending-processes))
                               (when (zerop pending-processes)
