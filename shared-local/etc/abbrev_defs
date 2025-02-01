@@ -122,6 +122,7 @@
     ("tje" "the" nil :count 0)
     ("tkaing" "taking" nil :count 0)
     ("ues" "use" nil :count 0)
+    ("uing" "using" nil :count 0)
     ("versino" "version" nil :count 0)
     ("vrtico" "vertico" nil :count 1)
     ("walet" "wallet" nil :count 0)
