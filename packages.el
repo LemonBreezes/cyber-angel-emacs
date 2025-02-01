@@ -27,13 +27,15 @@
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 
+;; Preamble
+(package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
+
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
   (package! tabgo)
   (package! evil-tutor)
   (package! key-chord))
-
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
