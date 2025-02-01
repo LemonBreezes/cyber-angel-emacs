@@ -616,20 +616,22 @@
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
+    "If restore-point-mode is active, restore point in the minibuffer and return non-nil if the point changed."
     (when-let ((start (point))
                (restored (and restore-point-mode
                               (rp/cond-restore-point) (point))))
       (not (eq start restored))))
   (defun cae--enable-minibuffer-restore-point ()
-    ;; Install method and hooks when restore-point is active.
-    (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+    "Enable advice and hooks to restore point in the minibuffer."
+    (dolist (pair (list (list #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)))
+      (apply #'advice-add pair))
     (advice-remove #'keyboard-quit #'rp/cond-restore-point)
     (add-hook 'doom-escape-hook #'cae-restore-point-h -2)
     (add-hook 'evil-visual-state-exit-hook #'rp/cond-restore-point)
     (add-hook 'evil-insert-state-exit-hook #'rp/cond-restore-point))
 
   (defun cae--disable-minibuffer-restore-point ()
-    ;; Remove the advice and hooks.
+    "Remove advice and hooks for minibuffer restore-point."
     (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
     (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
     (remove-hook 'doom-escape-hook #'cae-restore-point-h))
