@@ -218,6 +218,7 @@
           ;; prefix key in the Embark action map so disable it.
           which-key-show-transient-maps nil)
 
+    (setq which-key--debug-buffer-name (get-buffer-create "*which-key-debug"))
     ;; BUG Work around `window-live-p' error that would happen if I opened Doom
     ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
     ;; popup would not show and there would be an error. This only happens with
