@@ -15,8 +15,6 @@
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
-  (require 'cae-lib)
-
   ;; Load secrets
   (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
   (make-directory cae-multi-secrets-dir t)
@@ -43,6 +41,7 @@
                        helm-read-file-map))))
       "A list of all the keymaps used for the minibuffer."))
 
+  (require 'cae-lib)
   (load! "lisp/cae-tty")
   (load! "lisp/cae-bindings")
   (load! "lisp/cae-multi")              ;Run parallel Emacs instances.
