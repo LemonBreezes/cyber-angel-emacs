@@ -15,7 +15,7 @@
 ;;; Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
-  (require 'cae-lib nil t)
+  (require 'cae-lib)
 
   ;; Load secrets
   (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
