@@ -10,7 +10,7 @@
   (setq which-key-preserve-window-configuration t)
   (when (modulep! :editor evil)
     (after! evil
-      (add-to-list 'evil-buffer-regexps '("\\` \\*which-key\\*\\'")))))
+      (add-to-list 'evil-buffer-regexps '("\\` ")))))
 
 ;;; Stuff that should not be disabled.
 
