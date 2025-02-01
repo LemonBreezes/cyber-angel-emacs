@@ -196,8 +196,9 @@
         "C-e" #'minuet-accept-suggestion-line)
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
-      (minuet-dismiss-suggestion)
-      t))
+      (when minuet--current-overlay
+        (minuet-dismiss-suggestion)
+        t)))
   (add-hook 'evil-insert-state-exit-hook #'minuet-dismiss-suggestion)
   (when (modulep! :editor evil)
     (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
