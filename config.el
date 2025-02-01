@@ -208,17 +208,17 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil))
 
-  ;;(after! which-key
-  ;;  (setq which-key-ellipsis "..."
-  ;;        which-key-idle-delay 0.5
-  ;;        which-key-compute-remaps t
-  ;;        which-key-max-description-length 35
-  ;;        ;; For some reason opening `which-key' with a popup window open on the
-  ;;        ;; same side would cause the popup window to enlarge.
-  ;;        which-key-preserve-window-configuration t
-  ;;        ;; This option breaks the Embark Which Key prompter when you have a
-  ;;        ;; prefix key in the Embark action map so disable it.
-  ;;        which-key-show-transient-maps nil))
+  (after! which-key
+    (setq which-key-ellipsis "..."
+          which-key-idle-delay 0.5
+          which-key-compute-remaps t
+          which-key-max-description-length 35
+          ;; For some reason opening `which-key' with a popup window open on the
+          ;; same side would cause the popup window to enlarge.
+          which-key-preserve-window-configuration t
+          ;; This option breaks the Embark Which Key prompter when you have a
+          ;; prefix key in the Embark action map so disable it.
+          which-key-show-transient-maps nil))
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
     (after! which-key
@@ -237,7 +237,7 @@
              (setq this-command 'embark-prefix-help-command)
              (embark-bindings-in-keymap cae-which-key-current-keymap))
             (t (call-interactively #'embark-prefix-help-command)))))
-  ;; Inhibit `eldoc' when `which-key' is active to prevent errors.
+  ;; Inhibit `eldoc' when `which-key' is active.
   (defadvice! cae-disable-eldoc-on-which-key-a ()
     :before-until #'eldoc-documentation-default
     (and (featurep 'which-key) (which-key--popup-showing-p)))
