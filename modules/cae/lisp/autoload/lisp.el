@@ -2,8 +2,8 @@
 
 ;;;###autoload
 (defun cae-lisp-check-parens-before-save-h ()
-  (message "HELLO %s %s %s" (buffer-name) (buffer-file-name) major-mode)
-  (add-hook 'write-file-functions #'check-parens nil t))
+  ;;(add-hook 'write-file-functions #'check-parens nil t)
+  )
 
 ;;;###autoload
 (defun cae-lisp-newline-and-indent ()
