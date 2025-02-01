@@ -248,11 +248,6 @@
   (after! mule-util
     (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
 
-  ;; Do not spam me with warnings.
-  (unless init-file-debug
-    (setq warning-minimum-level :error
-          warning-minimum-log-level :error))
-
   (after! alert
     (setq alert-default-style 'libnotify))
 
