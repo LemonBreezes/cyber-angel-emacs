@@ -19,8 +19,9 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--o1-preview"
-            "--editor-model" "o1-preview"
+          `("--model" "openai/o3-mini"
+            "--editor-model" "openai/o3-mini"
+            "--reasoning-effort" "1.0"
             "--openai-api-key" ,(cae-secrets-get-openai-api-key)
             "--anthropic-api-key" ,(cae-secrets-get-anthropic-api-key)
             "--cache-prompts"
