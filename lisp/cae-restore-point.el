@@ -313,23 +313,26 @@
   (advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
-    (when-let ((a (point))
-               (b (and restore-point-mode
-                       (rp/cond-restore-point) (point))))
-      (not (eq a b))))
-  (defun cae-restore-point-enable-in-minibuffer-h ()
-    (if restore-point-mode
-        (progn (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
-               (advice-remove #'keyboard-quit #'rp/cond-restore-point)
-               ;; Use `doom-escape-hook' instead of a `keyboard-quit' advice because that
-               ;; way we are certain this function is only called interactively.
-               (add-hook 'doom-escape-hook #'cae-restore-point-h -2)
+    (when-let ((start (point))
+               (restored (and restore-point-mode
+                               (rp/cond-restore-point) (point))))
+      (not (eq start restored))))
+(defun cae--enable-minibuffer-restore-point ()
+  ;; Install method and hooks when restore-point is active.
+  (advice-add #'minibuffer-keyboard-quit :before #'rp/cond-restore-point)
+  (advice-remove #'keyboard-quit #'rp/cond-restore-point)
+  (add-hook 'doom-escape-hook #'cae-restore-point-h -2)
+  (add-hook 'evil-visual-state-exit-hook #'rp/cond-restore-point)
+  (add-hook 'evil-insert-state-exit-hook #'rp/cond-restore-point))
 
-               ;; When we're using Evil, we also want to restore point when we
-               ;; exit visual state.
-               (add-hook 'evil-visual-state-exit-hook #'rp/cond-restore-point)
-               (add-hook 'evil-insert-state-exit-hook #'rp/cond-restore-point))
-      (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
-      (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
-      (remove-hook 'doom-escape-hook #'cae-restore-point-h)))
+(defun cae--disable-minibuffer-restore-point ()
+  ;; Remove the advice and hooks.
+  (advice-remove #'minibuffer-keyboard-quit #'rp/cond-restore-point)
+  (advice-remove #'evil-exit-visual-state #'rp/cond-restore-point)
+  (remove-hook 'doom-escape-hook #'cae-restore-point-h))
+
+(defun cae-restore-point-enable-in-minibuffer-h ()
+  (if restore-point-mode
+      (cae--enable-minibuffer-restore-point)
+    (cae--disable-minibuffer-restore-point)))
   (add-hook 'restore-point-mode-hook #'cae-restore-point-enable-in-minibuffer-h))
