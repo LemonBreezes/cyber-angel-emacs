@@ -209,6 +209,9 @@
           doom-modeline-major-mode-icon nil
           doom-modeline-minor-modes nil))
 
+  ;; BUG Work around `window-live-p' error that would happen if I opened Doom
+  ;; Emacs and ran `SPC h d c' immediately then typed `SPC h d', the `which-key'
+  ;; popup would not show and there would be an error.
   (when (modulep! :editor evil)
     (add-hook 'which-key-init-buffer-hook #'evil-initialize))
   (after! which-key
