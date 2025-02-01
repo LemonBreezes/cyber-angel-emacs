@@ -134,79 +134,79 @@
 (when cae-init-ui-enabled-p
   ;;(load! "lisp/cae-theme")
 
-  ;; Show absolute line numbers. I prefer to not show relative line numbers
-  ;; because I use `avy' commands to jump to lines.
-  (setq display-line-numbers-type t
-        display-line-numbers-width-start t)
-
-  ;; Show minibuffer recursion depth
-  (autoload 'minibuffer-depth-setup "mb-depth")
-  (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
-
-  ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
-  ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
-  ;; what item I have selected.
-  (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
-
-  ;; Auto-hide the tab bar.
-  (after! tab-bar
-    (setq tab-bar-show 1))
-
-  ;; Don't confirm when exiting Emacs that active processes exist.
-  (setq confirm-kill-processes nil)
-
-  (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
-        kill-buffer-delete-auto-save-files t
-        window-combination-resize t     ;Take new window space from all other
-                                        ;windows (not just current)
-        scroll-preserve-screen-position t
-        suggest-key-bindings nil)
-
-  (after! persp-mode
-    (setq persp-reset-windows-on-nil-window-conf t))
-
-  (after! image
-    (setq image-use-external-converter t))
-
-  (setq set-message-functions
-        '(inhibit-message
-          set-minibuffer-message)
-        inhibit-message-regexps '("C-g is undefined\\'"
-                                  "ESC is undefined\\'"))
-
-  (after! flymake
-    (setq flymake-start-on-flymake-mode nil))
-
-  ;; A little bit of margin is nice but I don't like it when I'm in terminal
-  ;; popups.
-  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
-    scroll-margin 2)
-
-  (after! time
-    (setq display-time-default-load-average nil))
-
-  (after! bind-key
-    (setq bind-key-describe-special-forms t))
-
-  (after! transient
-    (setq transient-align-variable-pitch t))
-
-  (after! newcomment
-    (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
-                                        ;`comment-region' so that I can mark the
-                                        ;entire commented text with
-                                        ;`mark-paragraph'.
-          comment-padding nil))         ;I prefer no spaces between comment
-                                        ;delimiters and the comment text.
-
-  (after! doom-modeline
-    (setq doom-modeline-hud t
-          doom-modeline-support-imenu t
-          doom-modeline-mu4e t
-          doom-modeline-gnus t
-          doom-modeline-github t
-          doom-modeline-major-mode-icon nil
-          doom-modeline-minor-modes nil))
+  ;;;; Show absolute line numbers. I prefer to not show relative line numbers
+  ;;;; because I use `avy' commands to jump to lines.
+  ;;(setq display-line-numbers-type t
+  ;;      display-line-numbers-width-start t)
+  ;;
+  ;;;; Show minibuffer recursion depth
+  ;;(autoload 'minibuffer-depth-setup "mb-depth")
+  ;;(add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
+  ;;
+  ;;;; I don't like `hl-line-mode' globally because it sometimes conflicts with
+  ;;;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
+  ;;;; what item I have selected.
+  ;;(add-hook 'tabulated-list-mode-hook #'hl-line-mode)
+  ;;
+  ;;;; Auto-hide the tab bar.
+  ;;(after! tab-bar
+  ;;  (setq tab-bar-show 1))
+  ;;
+  ;;;; Don't confirm when exiting Emacs that active processes exist.
+  ;;(setq confirm-kill-processes nil)
+  ;;
+  ;;(setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
+  ;;      kill-buffer-delete-auto-save-files t
+  ;;      window-combination-resize t     ;Take new window space from all other
+  ;;                                      ;windows (not just current)
+  ;;      scroll-preserve-screen-position t
+  ;;      suggest-key-bindings nil)
+  ;;
+  ;;(after! persp-mode
+  ;;  (setq persp-reset-windows-on-nil-window-conf t))
+  ;;
+  ;;(after! image
+  ;;  (setq image-use-external-converter t))
+  ;;
+  ;;(setq set-message-functions
+  ;;      '(inhibit-message
+  ;;        set-minibuffer-message)
+  ;;      inhibit-message-regexps '("C-g is undefined\\'"
+  ;;                                "ESC is undefined\\'"))
+  ;;
+  ;;(after! flymake
+  ;;  (setq flymake-start-on-flymake-mode nil))
+  ;;
+  ;;;; A little bit of margin is nice but I don't like it when I'm in terminal
+  ;;;; popups.
+  ;;(setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+  ;;  scroll-margin 2)
+  ;;
+  ;;(after! time
+  ;;  (setq display-time-default-load-average nil))
+  ;;
+  ;;(after! bind-key
+  ;;  (setq bind-key-describe-special-forms t))
+  ;;
+  ;;(after! transient
+  ;;  (setq transient-align-variable-pitch t))
+  ;;
+  ;;(after! newcomment
+  ;;  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+  ;;                                      ;`comment-region' so that I can mark the
+  ;;                                      ;entire commented text with
+  ;;                                      ;`mark-paragraph'.
+  ;;        comment-padding nil))         ;I prefer no spaces between comment
+  ;;                                      ;delimiters and the comment text.
+  ;;
+  ;;(after! doom-modeline
+  ;;  (setq doom-modeline-hud t
+  ;;        doom-modeline-support-imenu t
+  ;;        doom-modeline-mu4e t
+  ;;        doom-modeline-gnus t
+  ;;        doom-modeline-github t
+  ;;        doom-modeline-major-mode-icon nil
+  ;;        doom-modeline-minor-modes nil))
 
   (after! which-key
     (setq which-key-ellipsis "..."
