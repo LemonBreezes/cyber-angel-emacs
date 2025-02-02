@@ -9,13 +9,25 @@
 ;; Set up the default models.
 (let ((claude-model "claude-3-5-sonnet-20240620"))
   (after! chatgpt-shell
-    (setq chatgpt-shell-model-version 1
-          chatgpt-shell-streaming t))
-  (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
+    (cl-pushnew
+     (chatgpt-shell-openai-make-model
+      :version "o3-mini"
+      :token-width 3
+      :context-window 200000
+      :validate-command
+      (lambda (command model settings)
+        (or (chatgpt-shell-openai--validate-command command model settings)
+            (when (map-elt settings :system-prompt)
+                  (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
+                          (map-elt model :version))))))
+     chatgpt-shell-models)
+    (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
+    (setq chatgpt-shell-model-version "o3-mini"
+          chatgpt-shell-streaming nil))
   (after! gptel
     (setq gptel-model claude-model
-          gptel-backend (gptel-make-anthropic "Claude"
-                          :stream t :key (cae-secrets-get-anthropic-api-key))))
+          gptel-backend (gptel-make-openai "o3-mini"
+                          :stream nil :key (cae-secrets-get-openai-api-key))))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
