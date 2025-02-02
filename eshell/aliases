@@ -91,6 +91,7 @@ alias update-grub sudo grub-mkconfig -o /boot/grub/grub.cfg
 alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
 alias update-termux pkg upgrade && cd ~/.config/doom && git pull && cd ~/.config/emacs && git pull && cd ~/org && git pull && cd ~/ && git pull && doom sync -u
 alias drop_caches sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"
+alias rebuild rm -rf ~/.config/emacs/.local/straight/repos/$1 ~/.config/emacs/.local/straight/build-31.0.50/$1 && doom sync
 
 alias update-flx pushd . && cd ~/src/flx && git stash && git pull && git stash pop && cd ~/src/lookup && git stash && git pull && git stash pop && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup/ && popd
 
