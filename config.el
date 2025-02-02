@@ -1222,6 +1222,7 @@
   (setq-hook! 'comint-mode-hook
     imenu-generic-expression
     `(("Prompts" ,(concat comint-prompt-regexp "\\(.*\\)") 1))
+    ;; For aider.el since the AI model outputs unicode whitespace characters.
     nobreak-char-display nil)
 
   (use-package! comint-histories
