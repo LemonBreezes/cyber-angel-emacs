@@ -45,6 +45,7 @@
             cae-hacks-gc-cons-threshold cae-gc-cons-threshold
             +lsp--default-gcmh-high-cons-threshold cae-gc-cons-threshold)))
 
+  ;; Do not start incrementally loading packages until I am actually AFK.
   (setq doom-incremental-first-idle-timer 60)
 
   (setq native-comp-async-jobs-number (num-processors)
