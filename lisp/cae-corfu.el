@@ -1,6 +1,6 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
-;;; TODO Fix the error when running aider-plain-read-string
+;;; TODO Fix the error when running Corfu in `aider-plain-read-string'.
 ;;(setq +corfu-want-minibuffer-completion 'aggressive)
 (setq +corfu-want-ret-to-confirm 'minibuffer)
 (setq +corfu-want-tab-prefer-expand-snippets t)
