@@ -25,7 +25,7 @@
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
     (setq chatgpt-shell-model-version "o3-mini"))
   (after! gptel
-    (setq gptel-model claude-model
+    (setq gptel-model "o3-mini"
           gptel-backend (gptel-make-openai "o3-mini"
                           :stream nil :key (cae-secrets-get-openai-api-key)
                           :request-params '(:reasoning_effort "high"))))
