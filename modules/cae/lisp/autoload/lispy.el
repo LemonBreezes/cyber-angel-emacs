@@ -72,12 +72,3 @@
     ("K" "outline prev" special-lispy-outline-prev :transient t)
     ("L" "outline↓child" special-lispy-outline-goto-child :transient t)
     ("D" "pop-tag" special-pop-tag-mark :transient t)]])
-
-;;;###autoload
-(defun cae-lispyville-cheatsheet () (interactive))
-(after! smartparens
-  (hercules-def :show-funs #'cae-lispyville-cheatsheet
-                :hide-funs '(doom/escape evil-change-state)
-                :keymap 'lispyville-mode-map
-                :transient t
-                :flatten t))
