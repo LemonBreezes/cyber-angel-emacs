@@ -44,7 +44,7 @@
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
         (pending-processes 0)
-        (verbose nil))
+        (verbose (called-interactively-p)))
     (with-current-buffer output-buffer (erase-buffer))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
@@ -97,14 +97,14 @@
                               (setq pending-processes (1- pending-processes))
                               (when (zerop pending-processes)
                                 (if all-pulls-succeeded
-                                    (cae-multi--run-doom-sync)
+                                    (cae-multi--run-doom-sync verbose)
                                   (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))
                      (setq pending-processes (1- pending-processes))
                      (when (zerop pending-processes)
                        (if all-pulls-succeeded
-                           (cae-multi--run-doom-sync)
+                           (cae-multi--run-doom-sync verbose)
                          (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
-(defun cae-multi--run-doom-sync ()
+(defun cae-multi--run-doom-sync (verbose)
   "Run 'doom sync' asynchronously and redirect output to the output buffer."
   (let ((process
          (start-process
@@ -116,7 +116,8 @@
      (lambda (proc event)
        (when (memq (process-status proc) '(exit signal))
          (if (= (process-exit-status proc) 0)
-             (message "'doom sync' finished successfully")
+             (when verbose
+               (message "'doom sync' finished successfully"))
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))
            ;; Optionally display the output buffer
            (display-buffer (process-buffer process))))))))
