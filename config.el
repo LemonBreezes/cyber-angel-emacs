@@ -1221,7 +1221,8 @@
           comint-buffer-maximum-size 8192))
   (setq-hook! 'comint-mode-hook
     imenu-generic-expression
-    `(("Prompts" ,(concat comint-prompt-regexp "\\(.*\\)") 1)))
+    `(("Prompts" ,(concat comint-prompt-regexp "\\(.*\\)") 1))
+    nobreak-char-display nil)
 
   (use-package! comint-histories
     :after comint :config
