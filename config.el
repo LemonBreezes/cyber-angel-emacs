@@ -219,7 +219,12 @@
           which-key-preserve-window-configuration t
           ;; This option breaks the Embark Which Key prompter when you have a
           ;; prefix key in the Embark action map so disable it.
-          which-key-show-transient-maps nil))
+          which-key-show-transient-maps nil)
+    (when (modulep! :editor evil)
+      (after! evil
+        ;; I have gotten a strange error with `which-key' before that I am
+        ;; working around with this.
+        (add-to-list 'evil-buffer-regexps (list which-key-buffer-name)))))
 
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
