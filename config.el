@@ -1669,6 +1669,11 @@
               (file-exists-p copilot-install-dir))
     (copilot-install-server)))
 
+;; Do not spam me with warnings.
+(unless init-file-debug
+  (setq warning-minimum-level :error
+        warning-minimum-log-level :error))
+
 (setq cae-config-finished-loading t)
 
 ;;Local Variables:
