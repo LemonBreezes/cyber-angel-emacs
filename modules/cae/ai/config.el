@@ -26,7 +26,7 @@
     (setq chatgpt-shell-model-version "o3-mini"))
   (after! gptel
     (setq gptel-model "o3-mini")
-    (put 'o3-mini :request-params '(:reasoning_effort "medium" :stream :json-false)))
+    (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
