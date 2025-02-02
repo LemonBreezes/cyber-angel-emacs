@@ -46,7 +46,7 @@
     ("o" "goto-mode" special-lispy-goto-mode :transient t)
     ("u" "undo" special-lispy-undo :transient t)
     ("x" "x" special-lispy-x :transient t)
-    ("Z" "edebug-stop" special-lispy-edeb :transient tug-stop)
+    ("Z" "edebug-stop" special-lispy-edebug-stop :transient t)
     ("V" "visit" special-lispy-visit :transient t)
     ("." "repeat" special-lispy-repeat :transient t)
     (";" "comment" lispy-comment :transient t)
