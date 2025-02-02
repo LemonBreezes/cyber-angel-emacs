@@ -1570,9 +1570,6 @@
 
 ;;; Appendix
 
-;; I currently have this block disabled because it is causing bugs to show up
-;; more often since I am loading packages asynchronously that I would usually
-;; not even load to begin with.
 (doom-load-packages-incrementally
  `(,@(when (modulep! :completion corfu)
        '(corfu))
