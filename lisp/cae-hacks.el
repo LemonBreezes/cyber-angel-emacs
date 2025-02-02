@@ -188,6 +188,8 @@ It is meant to be used as a `post-gc-hook'."
   (overlayp whitespace-point--used))
 
 ;; BUG I'm testing to see if this fixes an error with Corfu autocompletion.
-(defadvice! cae-corfu-disable-if-no-candidates-a ()
+(defadvice! cae-corfu-disable-if-no-candidates-a (_)
   :before-while #'corfu--candidates-popup
+  (when (eq corfu--total 0)
+    (message "HELLOOO"))
   (eq corfu--total 0))
