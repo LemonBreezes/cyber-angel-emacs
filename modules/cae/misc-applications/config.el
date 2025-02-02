@@ -347,12 +347,12 @@
   :defer t :init
   (map! :map cae-misc-applications-insert-map
         (:prefix "p"
-                 "c" #'password-generator-custom
-                 "s" #'password-generator-simple
-                 "t" #'password-generator-strong
-                 "n" #'password-generator-numeric
-                 "p" #'password-generator-paranoid
-                 "h" #'password-generator-phonetic))
+         "c" #'password-generator-custom
+         "s" #'password-generator-simple
+         "t" #'password-generator-strong
+         "n" #'password-generator-numeric
+         "p" #'password-generator-paranoid
+         "h" #'password-generator-phonetic))
   (after! which-key
     (which-key-add-keymap-based-replacements
       cae-misc-applications-insert-map
