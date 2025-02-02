@@ -53,7 +53,8 @@
     (add-hook 'savehist-mode-hook
               (lambda ()
                 (add-to-list 'savehist-additional-variables 'aider-read-string-history))))
-  (defun aider-plain-read-string (prompt &optional initial-input)
+  (advice-add #'aider-plain-read-string :override #'cae-aider-plain-read-string)
+  (defun cae-aider-plain-read-string (prompt &optional initial-input)
     "Read a string from the user with PROMPT and optional INITIAL-INPUT.
 This function can be customized or redefined by the user."
     (read-string prompt initial-input 'aider-read-string-history))
