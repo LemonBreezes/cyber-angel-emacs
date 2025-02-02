@@ -224,7 +224,7 @@
       (after! evil
         ;; I have gotten a strange error with `which-key' before that I am
         ;; working around with this.
-        (add-to-list 'evil-buffer-regexps `(,(regexp-quote " *which-key*")))))
+        (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
   ;; Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
