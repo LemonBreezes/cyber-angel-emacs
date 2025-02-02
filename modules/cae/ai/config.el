@@ -46,16 +46,16 @@
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
-;;(after! minuet
-;;  (setq minuet-openai-fim-compatible-options
-;;        '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
-;;          :api-key cae-secrets-get-nvidia-api-key
-;;          :model "deepseek-ai/deepseek-r1"
-;;          :name "Deepseek"
-;;          :template (:prompt minuet--default-fim-prompt-function
-;;                     :suffix minuet--default-fim-suffix-function)
-;;          :optional nil))
-;;  (setq minuet-provider 'openai-fim-compatible))
+(after! minuet
+  (setq minuet-openai-fim-compatible-options
+        '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
+          :api-key cae-secrets-get-nvidia-api-key
+          :model "deepseek-ai/deepseek-r1"
+          :name "Deepseek"
+          :template (:prompt minuet--default-fim-prompt-function
+                     :suffix minuet--default-fim-suffix-function)
+          :optional nil))
+  (setq minuet-provider 'openai-fim-compatible))
 
 (with-eval-after-load 'minuet
   (setq minuet-provider 'openai)
@@ -208,7 +208,8 @@
           :n "RET" #'gptel-context-visit)))
 
 (use-package! minuet
-  :defer :init
+  :when (modulep! -copilot)
+  :defer t :init
   (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
@@ -228,5 +229,4 @@
         t)))
   (add-hook 'evil-insert-state-exit-hook #'minuet-dismiss-suggestion)
   (when (modulep! :editor evil)
-    (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps))
-  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256))
+    (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)))
