@@ -18,8 +18,8 @@
       (lambda (command model settings)
         (or (chatgpt-shell-openai--validate-command command model settings)
             (when (map-elt settings :system-prompt)
-                  (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
-                          (map-elt model :version))))))
+              (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
+                      (map-elt model :version))))))
      chatgpt-shell-models)
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
     (setq chatgpt-shell-model-version "o3-mini"
