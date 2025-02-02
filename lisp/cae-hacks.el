@@ -175,6 +175,12 @@ It is meant to be used as a `post-gc-hook'."
 ;;    (error (unless (string-prefix-p "Selecting deleted buffer" (error-message-string err))
 ;;             (signal (car err) (cdr err))))))
 
+;; BUG If Eldoc tries to show help while Which Key is active, there is an error.
+;; Inhibit `eldoc' when `which-key' is active to prevent errors.
+(defadvice! cae-disable-eldoc-on-which-key-a ()
+  :before-until #'eldoc-documentation-default
+  (and (featurep 'which-key) (which-key--popup-showing-p)))
+
 ;; BUG When using `aider', which copies the font-lock-keywords, we get an error
 ;; with `whitespace-mode' since it's not copying the respective overlay.
 (defadvice! cae-inhibit-whitespace-flush-in-aider-a (_)
