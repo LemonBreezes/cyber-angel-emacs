@@ -19,11 +19,11 @@
         (or (chatgpt-shell-openai--validate-command command model settings)
             (when (map-elt settings :system-prompt)
               (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
-                      (map-elt model :version))))))
+                      (map-elt model :version)))))
+      :other-params '((reasoning_effort "high")))
      chatgpt-shell-models)
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
-    (setq chatgpt-shell-model-version "o3-mini"
-          chatgpt-shell-streaming nil))
+    (setq chatgpt-shell-model-version "o3-mini"))
   (after! gptel
     (setq gptel-model claude-model
           gptel-backend (gptel-make-openai "o3-mini"
