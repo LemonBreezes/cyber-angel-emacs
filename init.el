@@ -15,7 +15,8 @@
     (defvar cae-init-email-enabled-p (and p t))
     (defvar cae-init-applications-enabled-p (and p t))
     (defvar cae-init-term-enabled-p (and p t))
-    (defvar cae-init-languages-enabled-p (and p t))))
+    (defvar cae-init-languages-enabled-p (and p t))
+    (defvar cae-init-appendix-enabled-p (and p t)))
 
 (when cae-init-preamble-enabled-p
   (when (string-equal system-type "android") ;; Add Termux binaries to PATH environment
