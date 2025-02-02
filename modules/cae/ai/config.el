@@ -46,16 +46,16 @@
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
-(after! minuet
-  (setq minuet-openai-fim-compatible-options
-        '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
-          :api-key cae-secrets-get-nvidia-api-key
-          :model "deepseek-ai/deepseek-r1"
-          :name "Deepseek"
-          :template (:prompt minuet--default-fim-prompt-function
-                     :suffix minuet--default-fim-suffix-function)
-          :optional nil))
-  (setq minuet-provider 'openai-fim-compatible))
+;;(after! minuet
+;;  (setq minuet-openai-fim-compatible-options
+;;        '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
+;;          :api-key cae-secrets-get-nvidia-api-key
+;;          :model "deepseek-ai/deepseek-r1"
+;;          :name "Deepseek"
+;;          :template (:prompt minuet--default-fim-prompt-function
+;;                     :suffix minuet--default-fim-suffix-function)
+;;          :optional nil))
+;;  (setq minuet-provider 'openai-fim-compatible))
 
 (with-eval-after-load 'minuet
   (setq minuet-provider 'openai)
