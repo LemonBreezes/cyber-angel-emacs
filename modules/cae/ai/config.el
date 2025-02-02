@@ -49,7 +49,7 @@
 (after! minuet
   (setq minuet-openai-compatible-options
         '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
-          :api-key #'cae-secrets-get-nvidia-api-key
+          :api-key cae-secrets-get-nvidia-api-key
           :model "deepseek-ai/deepseek-r1"
           :name "Deepseek"
           :template (:prompt minuet--default-fim-prompt-function
