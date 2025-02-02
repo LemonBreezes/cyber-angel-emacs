@@ -21,6 +21,10 @@
   (defun cae-eros-setup-keybindings-h ()
     (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
+;; This fixes aggressive indent's indentation of plists. :)
+(after! lisp-mode
+  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
 (map! :map minibuffer-local-map
