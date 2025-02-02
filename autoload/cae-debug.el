@@ -49,8 +49,7 @@ normally have their errors suppressed."
                       (format "Toggle %s [%s]" ',var (if ,var "ON" "OFF")))
        (interactive)
        (setq ,var (not ,var))
-       (message "%s is now %s" ',var (if ,var "ON" "OFF"))
-       (transient-setup 'cae-debug-transient))))
+       (message "%s is now %s" ',var (if ,var "ON" "OFF")))))
 
 (transient-define-suffix cae-debug-set-debug-on-message ()
   "Set `debug-on-message' to a regular expression."
@@ -59,8 +58,7 @@ normally have their errors suppressed."
   (interactive)
   (let ((regexp (read-regexp "Set debug-on-message to regexp: ")))
     (customize-set-variable 'debug-on-message
-                            (if (string= regexp "") nil regexp)))
-  (transient-setup 'cae-debug-transient))
+                            (if (string= regexp "") nil regexp))))
 
 (cae-debug-define-toggle-command "debug-on-error" debug-on-error)
 
@@ -85,10 +83,10 @@ normally have their errors suppressed."
 (transient-define-prefix cae-debug-transient ()
   "Set and toggle debugging options."
   ["Debugging Options"
-   ("m" cae-debug-set-debug-on-message)
-   ("e" cae-debug-toggle-debug-on-error)
-   ("q" cae-debug-toggle-debug-on-quit)
-   ("s" cae-debug-toggle-debug-on-signal)
-   ("R" cae-debug-toggle-debug-allow-recursive-debug)
-   ("r" cae-debug-toggle-backtrace-on-redisplay-error)
-   ("d" cae-debug-toggle-doom-debug-mode)])
+   ("m" cae-debug-set-debug-on-message :transient t)
+   ("e" cae-debug-toggle-debug-on-error :transient t)
+   ("q" cae-debug-toggle-debug-on-quit :transient t)
+   ("s" cae-debug-toggle-debug-on-signal :transient t)
+   ("R" cae-debug-toggle-debug-allow-recursive-debug :transient t)
+   ("r" cae-debug-toggle-backtrace-on-redisplay-error :transient t)
+   ("d" cae-debug-toggle-doom-debug-mode :transient t)])
