@@ -20,7 +20,7 @@
             (when (map-elt settings :system-prompt)
               (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
                       (map-elt model :version)))))
-      :other-params '((reasoning_effort "high")))
+      :other-params '((reasoning-effort . "high")))
      chatgpt-shell-models)
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
     (setq chatgpt-shell-model-version "o3-mini"))
