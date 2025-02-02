@@ -4,7 +4,6 @@
 
 (defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
-;; gptel <-- implement o3-mini
 
 ;; Set up the default models.
 (let ((claude-model "claude-3-5-sonnet-20240620"))
