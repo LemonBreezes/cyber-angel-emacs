@@ -47,7 +47,7 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil)))
 (after! minuet
-  (setq minuet-openai-fim-compatible-options
+  (setq minuet-openai-compatible-options
         '(:end-point "https://integrate.api.nvidia.com/v1/chat/completions"
           :api-key #'cae-secrets-get-nvidia-api-key
           :model "deepseek-ai/deepseek-r1"
