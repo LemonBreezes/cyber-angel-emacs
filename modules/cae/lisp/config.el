@@ -108,5 +108,4 @@
     (after! lispyville
       (map! :map lispyville-mode-map
             :n "M-s" nil                     ;formerly `lispy-splice'.
-            :n "<f7>" #'cae-lispyville-cheatsheet
             ))))
