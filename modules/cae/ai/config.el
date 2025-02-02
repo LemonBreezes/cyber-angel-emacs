@@ -57,15 +57,6 @@
           :optional nil))
   (setq minuet-provider 'openai-fim-compatible))
 
-(with-eval-after-load 'minuet
-  (setq minuet-provider 'openai)
-  (plist-put minuet-openai-options :model "o3-mini")
-  ;; max_tokens and top_p parameter is not available for o3-mini model,
-  ;; so remember to remove these two options if you have set them previously
-  (minuet-set-optional-options minuet-openai-options :max_tokens nil)
-  (minuet-set-optional-options minuet-openai-options :top_p nil)
-  (minuet-set-optional-options minuet-openai-options :reasoning_effort "low"))
-
 (defvar aider-read-string-history nil
   "History list for aider read string inputs.")
 (use-package! aider
