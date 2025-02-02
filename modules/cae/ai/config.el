@@ -39,8 +39,8 @@
 (after! minuet
   (setq minuet-provider 'openai))
 
-  (defvar aider-read-string-history nil
-    "History list for aider read string inputs.")
+(defvar aider-read-string-history nil
+  "History list for aider read string inputs.")
 (use-package! aider
   :defer t :config
   ;; Fixes a void function error that I was getting. I do not know why it was
