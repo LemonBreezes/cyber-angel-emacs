@@ -27,7 +27,8 @@
   (after! gptel
     (setq gptel-model claude-model
           gptel-backend (gptel-make-openai "o3-mini"
-                          :stream nil :key (cae-secrets-get-openai-api-key))))
+                          :stream nil :key (cae-secrets-get-openai-api-key)
+                          :request-params '(:reasoning_effort "high"))))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
