@@ -4,7 +4,8 @@
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
 (package! gptel)
-(package! aider :recipe (:host github :repo "LemonBreezes/aider.el" :branch "add-history-variable-for-read-string"))
+(package! aider :recipe (:host github :repo "LemonBreezes/aider.el"
+                         :branch "add-history-variable-for-read-string"))
 (package! magit-gptcommit)
 (package! chatgpt-shell)
 (package! dall-e-shell)
