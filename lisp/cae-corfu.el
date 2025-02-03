@@ -114,6 +114,7 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; slower in Fish.
 (setq fish-completion-prefer-bash-completion t)
 
+;; BUG `corfu-terminal' does not work when using `read-string' in the terminal.
 (when (> emacs-major-version 30)
   (advice-add #'corfu--popup-support-p :override #'always)
   (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
