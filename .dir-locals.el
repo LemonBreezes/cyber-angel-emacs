@@ -51,8 +51,10 @@
           ;; Automatically commit saved files to Git and push them to the
           ;; remote.
           (when (and (buffer-file-name)
-                     (not (file-in-directory-p (buffer-file-name)
-                                               (concat doom-user-dir "secrets/")))
+                     (bound-and-true-p doom-user-dir)
+                     (not (file-in-directory-p
+                           (buffer-file-name)
+                           (concat doom-user-dir "secrets/")))
                      (require 'git-auto-commit-mode nil t))
             (setq-local gac-automatically-add-new-files-p nil)
             (git-auto-commit-mode 1))))))
