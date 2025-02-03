@@ -32,8 +32,5 @@ dictum nunc justo sit amet elit.")
 
 (require 'corfu)
 (require 'cape)
-(minibuffer-with-setup-hook
-    (lambda ()
-      (add-hook 'completion-at-point-functions #'cape-dabbrev nil 'local)
-      (corfu-mode +1))
-  (read-from-minibuffer "Test: "))
+(setq global-corfu-minibuffer (lambda () t))
+(read-string "%")
