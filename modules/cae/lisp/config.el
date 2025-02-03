@@ -111,5 +111,8 @@
         (setq lispyville-motions-put-into-special t)))
     (after! lispyville
       (map! :map lispyville-mode-map
-            :n "M-s" nil                     ;formerly `lispy-splice'.
+            :n "M-s" nil                ;formerly `lispy-splice'.
+            ;; I disabled this binding because it breaks the up/down keys in the
+            ;; Windows Terminal for me.
+            :n "M-O" nil                ;formerly `lispyville-open-above-list'
             ))))
