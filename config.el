@@ -31,6 +31,9 @@
                        helm-read-file-map))))
       "A list of all the keymaps used for the minibuffer."))
 
+    ;; This helps me debug issues with my config.
+  (persistent-scratch-setup-default)
+
   (require 'cae-lib)
   (load! "lisp/cae-tty")
   (load! "lisp/cae-bindings")
