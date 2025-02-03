@@ -85,9 +85,6 @@
   (add-hook 'prog-mode-hook   #'copilot-mode)
   (add-hook 'conf-mode-hook   #'copilot-mode)
   (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
-  (defadvice! cae-clear-copilot-overlay-a (&rest _)
-    :before #'doom/delete-backward-word
-    (copilot-clear-overlay))
   (add-hook! 'copilot-disable-predicates
     (defun cae-disable-copilot-in-gptel-p ()
       (bound-and-true-p gptel-mode))
@@ -98,6 +95,9 @@
     (defun cae-disable-copilot-in-minibuffer ()
       (minibufferp)))
   :config
+  (defadvice! cae-clear-copilot-overlay-a (&rest _)
+    :before #'doom/delete-backward-word
+    (copilot-clear-overlay))
   ;; Assume all Elisp code is formatted with the default indentation style. This
   ;; fixes an error.
   (setf (alist-get 'emacs-lisp-mode copilot-indentation-alist) nil)
