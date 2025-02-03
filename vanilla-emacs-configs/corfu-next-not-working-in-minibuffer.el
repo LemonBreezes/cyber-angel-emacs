@@ -33,4 +33,8 @@ dictum nunc justo sit amet elit.")
 (require 'corfu)
 (require 'cape)
 (setq global-corfu-minibuffer (lambda () t))
+
+(defun +corfu-add-cape-dabbrev-h ()
+  (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t))
+(add-hook 'minibuffer-setup-hook #'+corfu-add-cape-dabbrev-h)
 (read-string "%")
