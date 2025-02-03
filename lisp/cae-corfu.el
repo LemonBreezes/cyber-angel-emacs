@@ -112,7 +112,8 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 
 (when (> emacs-major-version 30)
   (advice-add #'corfu--popup-support-p :override #'always)
-  (advice-add #'corfu--popup-support-p :override #'ignore))
+  (advice-add #'corfu--popup-support-p :override #'ignore)
+  (provide 'corfu-terminal))
 
 ;; Prefer Bash over Fish for completions because `emerge' completion is a lot
 ;; slower in Fish.
