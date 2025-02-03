@@ -6,7 +6,8 @@
                    volatile-highlights
                    hl-line
                    elfeed-goodies
-                   mu4e-alert)
+                   mu4e-alert
+                   corfu-terminal)
 (unpin! consult) ; (void-function consult--process-collection)
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
 (package! which-key :built-in t)
