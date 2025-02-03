@@ -37,4 +37,8 @@ dictum nunc justo sit amet elit.")
 (defun +corfu-add-cape-dabbrev-h ()
   (add-hook 'completion-at-point-functions #'cape-dabbrev 20 t))
 (add-hook 'minibuffer-setup-hook #'+corfu-add-cape-dabbrev-h)
+
+(setq corfu-auto t
+      corfu-auto-delay 0.24
+      corfu-auto-prefix 2)
 (read-string "%")
