@@ -27,6 +27,9 @@
   ;; This is so that I don't accidentally start Emacs as a daemon.
   (when (daemonp) (kill-emacs))
 
+  ;; This helps me debug issues with my config.
+  (persistent-scratch-setup-default)
+
   (when (boundp 'safe-local-variable-directories)
     (add-to-list 'safe-local-variable-directories doom-user-dir)
     (add-to-list 'safe-local-variable-directories doom-emacs-dir)
