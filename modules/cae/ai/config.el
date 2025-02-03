@@ -26,6 +26,8 @@
   (after! gptel
     (setq gptel-model "o3-mini")
     (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
+  (setq-hook! gptel-mode-hook
+    nobreak-char-display nil)
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
