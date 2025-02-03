@@ -116,4 +116,4 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 
 (when (> emacs-major-version 30)
   (advice-add #'corfu--popup-support-p :override #'always)
-  (remove-hook 'corf-mode-hook #'corfu-terminal-mode))
+  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
