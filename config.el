@@ -226,7 +226,7 @@
       ;; working around with this.
       (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
-  ;; Allow C-h to open Consult when calling which-key without a prefix.
+  ;; BUG Allow C-h to open Consult when calling which-key without a prefix.
   (when (modulep! :completion vertico)
     (after! which-key
       (setq which-key-use-C-h-commands t))
