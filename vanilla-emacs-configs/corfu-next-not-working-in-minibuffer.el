@@ -37,5 +37,3 @@ dictum nunc justo sit amet elit.")
       (add-hook 'completion-at-point-functions #'cape-dabbrev nil 'local)
       (corfu-mode +1))
   (read-from-minibuffer "Test: "))
-
-;; So the conclusion is that it works in vanilla Emacs.
