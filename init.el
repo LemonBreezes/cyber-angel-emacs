@@ -185,7 +185,7 @@
        denote
 
        :secret
-       job)
+       work)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
