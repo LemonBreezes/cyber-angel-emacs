@@ -46,7 +46,7 @@
   (add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
 
   ;; This is where I clone Git projects to.
-  (defvar cae-repo-dir "~/src")
+  (defvar cae-repo-dir "~/src/")
 
   (when (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
