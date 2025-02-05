@@ -186,3 +186,9 @@ It is meant to be used as a `post-gc-hook'."
 (defadvice! cae-inhibit-whitespace-flush-in-aider-a (_)
   :before-while #'whitespace-point--flush-used
   (overlayp whitespace-point--used))
+
+;; BUG Something bad is happening while editing C++ code sometimes.
+(defadvice! cae-debug-set-window-buffer-a (win buf &optional _)
+  :before #'set-window-buffer
+  (when (eq (get-buffer buf) eldoc--doc-buffer)
+    (backtrace)))

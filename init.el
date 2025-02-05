@@ -33,12 +33,17 @@
     (add-to-list 'safe-local-variable-directories "~/org")
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
+  ;; Add hostname to the modeline.
+  (if (and global-mode-string (listp global-mode-string))
+      (appendq! x system-name)
+    (setq global-mode-string (list system-name)))
+
+  ;; Set up the secrets directory and its module path.
   (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
-  (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
   (make-directory cae-multi-secrets-dir t)
+  (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
   (make-directory cae-multi-secrets-modules-dir t)
-  (when (file-directory-p (concat cae-multi-secrets-dir "jobs"))
-    (setq multi-secrets-dir (concat cae-multi-secrets-dir "multi-secrets/")))
+  (add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
 
   (when (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
@@ -175,7 +180,9 @@
        gnus
        rss
        denote
-       )
+
+       :secret
+       job)
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
