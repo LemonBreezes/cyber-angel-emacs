@@ -33,6 +33,13 @@
     (add-to-list 'safe-local-variable-directories "~/org")
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
+  (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
+  (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
+  (make-directory cae-multi-secrets-dir t)
+  (make-directory cae-multi-secrets-modules-dir t)
+  (when (file-directory-p (concat cae-multi-secrets-dir "jobs"))
+    (setq multi-secrets-dir (concat cae-multi-secrets-dir "multi-secrets/")))
+
   (when (and (>= (num-processors) 32)
              (not (eq system-type 'windows-nt))
              ;; Experimental incremental garbage collector.
