@@ -67,6 +67,8 @@
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
   ;; and https://github.com/blahgeek/emacs-lsp-booster. They are meant to
   ;; improve the performance of LSP.
+  ;; BUG Using this code causes LSP to have errors in C++ saying in-lay hints
+  ;; are not supported even when they are.
   ;;(if (not (executable-find "emacs-lsp-booster"))
   ;;    (warn "Could not find emacs-lsp-booster executable.")
   ;;  (define-advice json-parse-buffer (:around (old-fn &rest args) lsp-booster-parse-bytecode)
