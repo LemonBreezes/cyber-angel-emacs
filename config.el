@@ -285,7 +285,7 @@
     (setq eldoc-echo-area-prefer-doc-buffer t)
     ;; BUG If Eldoc tries to show help while Which Key is active, there is an
     ;; error. Inhibit `eldoc' when `which-key' is active to prevent errors.
-    ;; Eldoc can also try to display when completing in the minibuffer but I
+    ;; NOTE Eldoc can also try to display when completing in the minibuffer but I
     ;; have explicitly disabled that.
     (defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
       :before-until #'eldoc-documentation-default
