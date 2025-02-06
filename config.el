@@ -360,7 +360,7 @@
         ("\\`\\*edit-indirect " :side top :select t :ttl 0 :size
          cae-popup-shrink-to-fit)
         ("\\`\\*vterm" :quit nil :ttl nil :size 0.3)
-        ("\\`\\*eldoc\\*\\'" :quit t :size 0.3 :ttl nil :side bottom)
+        ("\\`\\*eldoc\\*\\'" :quit t :size +popup-shrink-to-fit :ttl nil :side bottom)
         ("\\`\\*notmuch-hello" :ignore t)
         ("\\`\\*hackernews .*\\*'" :ignore t)
         ("\\`\\*gud-" :ttl nil :size 0.35)
