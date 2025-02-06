@@ -279,6 +279,9 @@
   ;; Allow switching to these buffers with `C-x b'
   (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 
+  (when (modulep! :completion vertico)
+    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
+
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
@@ -877,9 +880,6 @@
   ;; commands are hidden in normal buffers.
   (setq read-extended-command-predicate #'command-completion-default-include-p)
 
-  (after! embark
-    (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
-
   (use-package! avy
     :defer t :init
     (defadvice! cae-avy-use-post-style-a (oldfun &rest args)
@@ -1369,6 +1369,7 @@
 (files--ensure-directory "~/.mail/Fastmail/")
 
 (after! mu4e
+  (setq mu4e-eldoc-support t)
   (setq mu4e-contexts
         `(,(make-mu4e-context
             :name "Fastmail"
