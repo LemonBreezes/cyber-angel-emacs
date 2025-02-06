@@ -9,7 +9,7 @@
                    mu4e-alert)
 (unpin! consult) ; (void-function consult--process-collection)
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
-(unpin! :emacs :lang :tools)
+(unpin! :lang :tools)
 (package! which-key :built-in t)
 
 ;; PRs that haven't been merged yet.
