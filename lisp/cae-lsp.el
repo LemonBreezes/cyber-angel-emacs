@@ -15,8 +15,8 @@
           lsp-enable-indentation nil
           lsp-semantic-tokens-enable t
           lsp-enable-file-watchers nil
-          ;; This is causing errors where it says Clangd does not suppor inlay
-          ;; hints even though it does.
+          ;; BUG This is causing errors where it says Clangd does not suppor
+          ;; inlay hints even though it does.
           lsp-update-inlay-hints-on-scroll nil
           ;; Doom disables these but I'll leave them on.
           lsp-enable-text-document-color t
