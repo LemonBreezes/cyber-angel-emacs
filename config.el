@@ -282,7 +282,18 @@
   (when (modulep! :completion vertico)
     (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
   (after! eldoc
-    (setq eldoc-echo-area-prefer-doc-buffer t))
+    (setq eldoc-echo-area-prefer-doc-buffer t)
+    ;; BUG If Eldoc tries to show help while Which Key is active, there is an error.
+    ;; Inhibit `eldoc' when `which-key' is active to prevent errors.
+    (defadvice! cae-disable-eldoc-on-which-key-a ()
+      :before-until #'eldoc-documentation-default
+      (or (and (featurep 'which-key) (which-key--popup-showing-p))
+          ;; This checks if a completion engine is currently active.
+          (bound-and-true-p mct--active)
+          (bound-and-true-p vertico--input)
+          (and (featurep 'helm-core) (helm--alive-p))
+          (and (featurep 'ido) (ido-active))
+          (memq #'ivy--queue-exhibit post-command-hook))))
 
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
