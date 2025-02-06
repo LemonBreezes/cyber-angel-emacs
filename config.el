@@ -281,6 +281,8 @@
 
   (when (modulep! :completion vertico)
     (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
+  (after! eldoc
+    (setq eldoc-echo-area-prefer-doc-buffer t))
 
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
