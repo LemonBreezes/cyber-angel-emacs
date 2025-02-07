@@ -46,11 +46,7 @@
                            ;;:default-chat-non-standard-params '((stream . :json-false))
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
-          llm-warn-on-nonfree nil))
-  (after! minuet
-    (plist-put minuet-openai-compatible-options :model "deepseek/deepseek-r1")
-    (plist-put minuet-openai-compatible-options :api-key "OPENROUTER_API_KEY")
-    (plist-put minuet-openai-compatible-options :end-point "https://openrouter.ai/api/v1/chat/completions")))
+          llm-warn-on-nonfree nil)))
 
 (defvar aider-read-string-history nil
   "History list for aider read string inputs.")
