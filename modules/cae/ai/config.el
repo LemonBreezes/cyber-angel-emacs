@@ -46,7 +46,9 @@
                            ;;:default-chat-non-standard-params '((stream . :json-false))
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
-          llm-warn-on-nonfree nil)))
+          llm-warn-on-nonfree nil))
+  (after! minuet
+    (setq minuet-provider 'codestral)))
 
 (defvar aider-read-string-history nil
   "History list for aider read string inputs.")
