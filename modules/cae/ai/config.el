@@ -36,8 +36,7 @@
             "--editor-model" "openai/o3-mini"
             "--reasoning-effort" "high"
             "--cache-prompts"
-            "--chat-language" "English"
-            "--no-gitignore")))
+            "--chat-language" "English")))
   (defvar llm-refactoring-provider nil)
   (after! llm
     (require 'llm-claude)
