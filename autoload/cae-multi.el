@@ -95,7 +95,7 @@ When called interactively, no prefix yields level 0 and a prefix yields level 2.
                                       (insert (format "\nError: Git submodule update failed in repository %s\n" repo-dir)))
                                     (display-buffer output-buffer)
                                     (setq all-pulls-succeeded nil))
-                                (when verbose
+                                (when (>= verb-level 1)
                                   (message "Git submodule update succeeded in %s" repo-dir)))
                               (with-current-buffer output-buffer
                                 (save-excursion
