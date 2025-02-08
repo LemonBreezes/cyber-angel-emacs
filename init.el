@@ -89,10 +89,7 @@
   (unless init-file-debug
     (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
       (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
-        (list file noerror t nosuffix must-suffix))))
-
-  (setq doom-leader-alt-key "<menu>"
-        doom-localleader-alt-key "<menu> m"))
+        (list file noerror t nosuffix must-suffix)))))
 
 (doom! :completion
        (vertico +icons +childframe)
