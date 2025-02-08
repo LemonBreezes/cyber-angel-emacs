@@ -24,7 +24,7 @@
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
     (setq chatgpt-shell-model-version "o3-mini"))
   (after! gptel
-    (setq gptel-model "o3-mini")
+    (setq gptel-model 'o3-mini)
     (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
   (setq-hook! 'gptel-mode-hook
     nobreak-char-display nil)
