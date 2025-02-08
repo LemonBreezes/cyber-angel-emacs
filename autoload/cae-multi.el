@@ -103,6 +103,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                   (if (re-search-backward "\\bCONFLICT\\b" nil t)
                                       (progn
                                         (message "Conflict detected during git submodule update in %s" repo-dir)
+                                        (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
                                         (display-buffer output-buffer)
                                         (setq all-pulls-succeeded nil))
                                     (when (>= verb-level 2)
