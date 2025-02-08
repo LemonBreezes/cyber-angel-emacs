@@ -87,8 +87,7 @@
     (map! :map help-map
           ;; You can use this since it dynamically updates, but the Lispy
           ;; cheatsheet Hydra is better.
-          "bl" #'cae-lispy-cheatsheet
-          ))
+          "bl" #'cae-lispy-cheatsheet))
 
   (when (modulep! :editor evil)
     (setq lispyville-key-theme
