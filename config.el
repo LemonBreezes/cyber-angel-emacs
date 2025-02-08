@@ -379,6 +379,8 @@
         ("\\`\\*notmuch-hello" :ignore t)
         ("\\`\\*hackernews .*\\*'" :ignore t)
         ("\\`\\*gud-" :ttl nil :size 0.35)
+        ("\\`\\*gptel-diff\\*" :ignore t)
+        ("\\`\\*gptel-rewrite\\*" :ignore t)
         ("embrace-help" :side top :size +popup-shrink-to-fit)
         ("*helm " :ignore t)
         ("\\`\\*Async Shell Command\\*\\'" :side top :select nil :ttl 0 :quit t
