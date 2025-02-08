@@ -32,8 +32,8 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--model" "openrouter/deepseek/deepseek-chat"
-            "--editor-model" "sonnet"
+          `("--model" "o3-mini"
+            "--editor-model" "o3-mini"
             "--reasoning-effort" "high"
             "--cache-prompts"
             "--chat-language" "English")))
