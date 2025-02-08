@@ -63,6 +63,9 @@
                    (if (/= (process-exit-status proc) 0)
                        (progn
                          (message "Git pull failed in %s" repo-dir)
+                         (with-current-buffer output-buffer
+                           (goto-char (point-max))
+                           (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
                          (display-buffer output-buffer)
                          (setq all-pulls-succeeded nil))
                      (progn
@@ -80,6 +83,9 @@
                               (if (/= (process-exit-status subproc) 0)
                                   (progn
                                     (message "Git submodule update failed in %s" repo-dir)
+                                    (with-current-buffer output-buffer
+                                      (goto-char (point-max))
+                                      (insert (format "\nError: Git submodule update failed in repository %s\n" repo-dir)))
                                     (display-buffer output-buffer)
                                     (setq all-pulls-succeeded nil))
                                 (when verbose
