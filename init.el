@@ -34,13 +34,15 @@
     (add-to-list 'safe-local-variable-directories (getenv "HOME")))
 
   ;; Add hostname to the modeline.
-  (if (and global-mode-string (listp global-mode-string))
-      (appendq! global-mode-string
-                (list (concat " " (truncate-string-to-width
-                                   (secure-hash 'sha512 system-name) 6))))
-    (setq global-mode-string
-          (list (concat " " (truncate-string-to-width
-                             (secure-hash 'sha512 system-name) 6)))))
+  (let ((hostname (concat " " (truncate-string-to-width
+                                     (secure-hash 'sha512 system-name) 6))))
+    (unless (or (equal global-mode-string (list hostname))
+                (cl-member hostname global-mode-string
+                           :test (lambda (x y) (and (stringp y) (string-equal x y)))))
+      (if (and global-mode-string (listp global-mode-string))
+          (appendq! global-mode-string (list hostname))
+        (setq global-mode-string
+              (list hostname)))))
 
   ;; Set up the secrets directory and its module path.
   (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
