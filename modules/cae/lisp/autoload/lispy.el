@@ -2,6 +2,12 @@
 
 (require 'transient)
 
+(defadvice! cae-lispy-cheatsheet-evil-insert-state-a ()
+  :before #'cae-lispy-cheatsheet
+  (when (and (featurep 'evil)
+             (memq evil-state '(normal visual)))
+    (evil-insert-state)))
+
 ;;;###autoload (autoload 'cae-lispy-cheatsheet "cae/lisp/autoload/lispy" nil t)
 (transient-define-prefix cae-lispy-cheatsheet ()
   "Lispy Cheatsheet"
