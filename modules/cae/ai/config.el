@@ -33,7 +33,7 @@
   (after! aider
     (setq aider-args
           `("--model" "o3-mini"
-            "--editor-model" (format "anthropic/%s" claude-model)
+            "--editor-model" ,(format "anthropic/%s" claude-model)
             "--reasoning-effort" "high"
             "--cache-prompts"
             "--chat-language" "English")))
