@@ -53,7 +53,6 @@
 (package! authinfo-color-mode :recipe (:host github :repo "tecosaur/authinfo-color-mode"))
 (package! hercules :recipe (:host github :repo "Zetagon/hercules"))
 (package! beacon)
-(package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
 (package! iscroll)
 (package! indent-bars :recipe (:host github :repo "jdtsmith/indent-bars"))
 (package! backline)
