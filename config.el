@@ -1378,7 +1378,7 @@
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz"
       mail-source-directory "~/.mail/")
-(files--ensure-directory "~/.mail/Fastmail/")
+(make-directory "~/.mail/Fastmail/" t)
 
 (after! mu4e
   (setq mu4e-eldoc-support t)
