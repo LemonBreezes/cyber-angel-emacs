@@ -212,6 +212,10 @@
         :ig "C-e" #'minuet-accept-suggestion-line)
   (minuet-set-optional-options minuet-openai-options :max_tokens 256)
   (minuet-set-optional-options minuet-openai-options :top_p 0.9)
+  (setq minuet-provider 'openai-compatible)
+  (plist-put minuet-openai-compatible-options :end-point "https://api.fireworks.ai/inference/v1/chat/completions")
+  (plist-put minuet-openai-compatible-options :api-key "FIREWORKS_API_KEY")
+  (plist-put minuet-openai-compatible-options :model "accounts/fireworks/models/llama-v3p3-70b-instruct")
 
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
