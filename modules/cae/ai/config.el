@@ -212,7 +212,7 @@
         :ig "C-e" #'minuet-accept-suggestion-line)
   (minuet-set-optional-options minuet-openai-options :max_tokens 256)
   (minuet-set-optional-options minuet-openai-options :top_p 0.9)
-  (setq minuet-provider 'codestral)
+  (setq minuet-provider 'openai-codestral)
 
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
