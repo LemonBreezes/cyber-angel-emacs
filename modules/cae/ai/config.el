@@ -58,9 +58,7 @@
   ;; was happening.
   (setf (symbol-function 'aider-read-string) (symbol-function 'aider-plain-read-string))
   (setenv "AIDER_AUTO_COMMITS" "false")
-  export AIDER_GITIGNORE=false
-  (setenv )
-  )
+  (setenv "AIDER_GITIGNORE" "false"))
 
 (use-package! magit-gptcommit
   :after gptel magit
@@ -212,6 +210,8 @@
         ;; Accept the first line of completion, or N lines with a numeric-prefix:
         ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
         :ig "C-e" #'minuet-accept-suggestion-line)
+  (minuet-set-optional-options minuet-openai-options :max_tokens 256)
+  (minuet-set-optional-options minuet-openai-options :top_p 0.9)
 
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
