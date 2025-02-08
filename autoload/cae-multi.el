@@ -42,12 +42,12 @@
   "Pull the shared repositories and handle conflicts asynchronously.
   
 VERB-LEVEL controls output:
-  0: Silent (errors only)
-  1: Normal messages
+  0: Silent (errors only; if explicitly set)
+  1: Normal messages (default when called interactively)
   2: Extra verbose output
   
-When called interactively, no prefix yields level 0 and a prefix yields level 2."
-  (interactive (list (if current-prefix-arg 2 0)))
+When called interactively, no prefix yields level 1 and a prefix yields level 2."
+  (interactive (list (if current-prefix-arg 2 1)))
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
         (pending-processes 0)))
