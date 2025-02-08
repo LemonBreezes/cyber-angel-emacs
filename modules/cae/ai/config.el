@@ -211,7 +211,7 @@
         "C-f" #'minuet-accept-suggestion ;; accept whole completion
         ;; Accept the first line of completion, or N lines with a numeric-prefix:
         ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
-        :ie "C-e" #'minuet-accept-suggestion-line)
+        :ig "C-e" #'minuet-accept-suggestion-line)
 
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
