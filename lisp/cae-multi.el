@@ -6,10 +6,12 @@
 (defvar cae-multi-local-dir (expand-file-name "shared-local/" doom-user-dir))
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
+(defvar cae-multi-org-dir "~/org/")
 
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
+(make-directory cae-multi-org-dir t)
 
 (after! abbrev
   (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs")))
