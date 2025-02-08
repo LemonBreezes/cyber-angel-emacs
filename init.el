@@ -36,7 +36,8 @@
   ;; Add hostname to the modeline.
   (if (and global-mode-string (listp global-mode-string))
       (appendq! global-mode-string
-                (truncate-string-to-width (secure-hash 'sha512 system-name) 6))
+                (list (truncate-string-to-width
+                       (secure-hash 'sha512 system-name) 6)))
     (setq global-mode-string
           (list (truncate-string-to-width (secure-hash 'sha512 system-name) 6))))
 
