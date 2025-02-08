@@ -228,4 +228,4 @@
     (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)))
 
 ;; (setq cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
-        (setq cae-ai-dall-e-shell-workspace-name "*dall-e*")
+(setq cae-ai-dall-e-shell-workspace-name "*dall-e*")
