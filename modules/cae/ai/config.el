@@ -57,7 +57,9 @@
   ;; BUG Fixes a void function error that I was getting. I do not know why it
   ;; was happening.
   (setf (symbol-function 'aider-read-string) (symbol-function 'aider-plain-read-string))
-  ()
+  (setenv "AIDER_AUTO_COMMITS" "false")
+  export AIDER_GITIGNORE=false
+  (setenv )
   )
 
 (use-package! magit-gptcommit
@@ -209,7 +211,8 @@
         "C-f" #'minuet-accept-suggestion ;; accept whole completion
         ;; Accept the first line of completion, or N lines with a numeric-prefix:
         ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
-        "C-e" #'minuet-accept-suggestion-line)
+        :ie "C-e" #'minuet-accept-suggestion-line)
+
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (when minuet--current-overlay
