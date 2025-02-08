@@ -35,7 +35,7 @@
 
   ;; Add hostname to the modeline.
   (let ((hostname (concat " " (truncate-string-to-width
-                                     (secure-hash 'sha512 system-name) 6))))
+                               (secure-hash 'sha512 system-name) 6))))
     (unless (or (equal global-mode-string (list hostname))
                 (cl-member hostname global-mode-string
                            :test (lambda (x y) (and (stringp y) (string-equal x y)))))
