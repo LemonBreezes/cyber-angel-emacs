@@ -50,7 +50,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
   (interactive (list (if current-prefix-arg 2 1)))
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
-        (pending-processes 0)))
+        (pending-processes 0))
     (with-current-buffer output-buffer (erase-buffer))
     (dolist (repo-dir cae-multi-repositories)
       (let ((default-directory repo-dir))
@@ -112,11 +112,12 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                 (if all-pulls-succeeded
                                     (cae-multi--run-doom-sync verb-level)
                                   (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))
-                     (setq pending-processes (1- pending-processes))
-                     (when (zerop pending-processes)
-                       (if all-pulls-succeeded
-                           (cae-multi--run-doom-sync verb-level)
-                         (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))
+                   (setq pending-processes (1- pending-processes))
+                   (when (zerop pending-processes)
+                     (if all-pulls-succeeded
+                         (cae-multi--run-doom-sync verb-level)
+                       (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))))))))
+
 (defun cae-multi--run-doom-sync (verb-level)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
 VERB-LEVEL controls how much output is emitted."
@@ -134,4 +135,4 @@ VERB-LEVEL controls how much output is emitted."
                (message "'doom sync' finished successfully"))
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))
            ;; Optionally display the output buffer
-           (display-buffer (process-buffer process))))))))
+           (display-buffer (process-buffer proc))))))))
