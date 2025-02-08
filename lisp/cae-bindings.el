@@ -104,7 +104,8 @@
       "M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
        "C-M-/" #'cape-dabbrev
-       "C-S-s" #'cae-complete-in-minibuffer)
+       "C-S-s" #'cae-complete-in-minibuffer
+       "C-x d" #'cape-dict)
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
