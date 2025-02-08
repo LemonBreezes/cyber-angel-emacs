@@ -36,9 +36,9 @@
   ;; Add hostname to the modeline.
   (if (and global-mode-string (listp global-mode-string))
       (appendq! x
-                (string-truncate-left (secure-hash 'sha512 system-name) 6))
+                (truncate-string-to-width (secure-hash 'sha512 system-name) 6))
     (setq global-mode-string
-          (list (string-truncate-left (secure-hash 'sha512 system-name) 6))))
+          (list (truncate-string-to-width (secure-hash 'sha512 system-name) 6))))
 
   ;; Set up the secrets directory and its module path.
   (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
