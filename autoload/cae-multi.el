@@ -110,12 +110,12 @@ When called interactively, no prefix yields level 0 and a prefix yields level 2.
                               (setq pending-processes (1- pending-processes))
                               (when (zerop pending-processes)
                                 (if all-pulls-succeeded
-                                    (cae-multi--run-doom-sync verbose)
+                                    (cae-multi--run-doom-sync verb-level)
                                   (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))
                      (setq pending-processes (1- pending-processes))
                      (when (zerop pending-processes)
                        (if all-pulls-succeeded
-                           (cae-multi--run-doom-sync verbose)
+                           (cae-multi--run-doom-sync verb-level)
                          (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
 (defun cae-multi--run-doom-sync (verb-level)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
