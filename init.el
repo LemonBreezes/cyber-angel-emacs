@@ -179,7 +179,7 @@
        lisp
        misc-applications
        (modeline +emms)
-       notifications
+       (:if (eq system-type 'gnu/linux) notifications)
        unpackaged
        vc
        org
