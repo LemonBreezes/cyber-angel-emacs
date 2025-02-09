@@ -189,7 +189,7 @@
        denote
 
        :secret
-       root)
+       (:if (eq system-type 'gnu/linux) root))
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
