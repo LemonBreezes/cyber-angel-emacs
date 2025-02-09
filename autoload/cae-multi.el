@@ -48,6 +48,7 @@ VERB-LEVEL controls output:
   
 When called interactively, no prefix yields level 1 and a prefix yields level 2."
   (interactive (list (if current-prefix-arg 2 1)))
+  (unless verb-level (setq verb-level 0))
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
         (all-pulls-succeeded t)
         (pending-processes 0))
