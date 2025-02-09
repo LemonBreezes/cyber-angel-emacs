@@ -32,7 +32,7 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--model" "o1-pro"
+          `("--model" "o3-mini"
             "--editor-model" "o3-mini"
             "--reasoning-effort" "high"
             "--cache-prompts"
