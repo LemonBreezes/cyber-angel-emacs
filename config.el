@@ -135,7 +135,7 @@
   ;; Show absolute line numbers. I prefer to not show relative line numbers
   ;; because I use `avy' commands to jump to lines.
   (setq display-line-numbers-type nil
-        display-line-numbers-width-start nil)
+        display-line-numbers-width-start t)
 
   ;; Show minibuffer recursion depth
   (autoload 'minibuffer-depth-setup "mb-depth")
