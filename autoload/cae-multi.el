@@ -121,11 +121,12 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
 (defun cae-multi--run-doom-sync (verb-level)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
 VERB-LEVEL controls how much output is emitted."
-  (let ((process
-         (start-process
-          "doom-sync-process"
-          " *cae-multi-pull-repositories*"
-          "doom" "sync")))
+  (let* ((buffer-name " *cae-multi-pull-repositories*")
+         (process
+          (start-process
+           "doom-sync-process"
+           buffer-name
+           "doom" "sync")))
     (set-process-sentinel
      process
      (lambda (proc event)
@@ -135,4 +136,4 @@ VERB-LEVEL controls how much output is emitted."
                (message "'doom sync' finished successfully"))
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))
            ;; Optionally display the output buffer
-           (display-buffer (process-buffer proc))))))))
+           (display-buffer buffer-name)))))))
