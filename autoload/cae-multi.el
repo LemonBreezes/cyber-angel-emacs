@@ -70,11 +70,12 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                  (when (memq (process-status proc) '(exit signal))
                    (if (/= (process-exit-status proc) 0)
                        (progn
-                         (message "Git pull failed in %s" repo-dir)
-                         (with-current-buffer output-buffer
-                           (goto-char (point-max))
-                           (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
-                         (display-buffer output-buffer)
+                         (when (>= verb-level 1)
+                           (message "Git pull failed in %s" repo-dir)
+                           (with-current-buffer output-buffer
+                             (goto-char (point-max))
+                             (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
+                           (display-buffer output-buffer))
                          (setq all-pulls-succeeded nil))
                      (progn
                        (when (>= verb-level 1)
@@ -101,6 +102,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                               (with-current-buffer output-buffer
                                 (save-excursion
                                   (goto-char (point-max))
+                                  ;; For conflicts, output even verbosity 0.
                                   (if (re-search-backward "\\bCONFLICT\\b" nil t)
                                       (progn
                                         (message "Conflict detected during git submodule update in %s" repo-dir)
@@ -113,12 +115,14 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                               (when (zerop pending-processes)
                                 (if all-pulls-succeeded
                                     (cae-multi--run-doom-sync verb-level)
-                                  (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))
+                                  (when (>= verb-level 1)
+                                        (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))))))
                      (setq pending-processes (1- pending-processes))
                      (when (zerop pending-processes)
                        (if all-pulls-succeeded
                            (cae-multi--run-doom-sync verb-level)
-                         (message "One or more git operations failed. See %s for details" (buffer-name output-buffer)))))))))))))))
+                         (when (>= verb-level 1)
+                           (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))))))))))))
 
 (defun cae-multi--run-doom-sync (verb-level)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
@@ -139,4 +143,4 @@ VERB-LEVEL controls how much output is emitted."
            (message "'doom sync' failed with exit code %d" (process-exit-status proc))
            ;; Optionally display the output buffer
            (when (>= verb-level 1)
-             (display-buffer output-buffer)))))))
+             (display-buffer output-buffer))))))))
