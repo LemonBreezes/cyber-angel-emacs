@@ -116,7 +116,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                 (if all-pulls-succeeded
                                     (cae-multi--run-doom-sync verb-level)
                                   (when (>= verb-level 1)
-                                        (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))))))
+                                    (message "One or more git operations failed. See %s for details" (buffer-name output-buffer))))))))))
                      (setq pending-processes (1- pending-processes))
                      (when (zerop pending-processes)
                        (if all-pulls-succeeded
