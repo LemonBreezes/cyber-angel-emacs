@@ -77,7 +77,7 @@
         (getenv "HOME"))
   "List of directories containing Git repositories to sync between machines.")
 
-(defvar cae-multi-enable-auto-pull t
+(defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
 (when cae-multi-enable-auto-pull
