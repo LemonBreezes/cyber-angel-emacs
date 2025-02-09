@@ -140,7 +140,7 @@ VERB-LEVEL controls how much output is emitted."
          (if (= (process-exit-status proc) 0)
              (when (>= verb-level 1)
                (message "'doom sync' finished successfully"))
-           (message "'doom sync' failed with exit code %d" (process-exit-status proc))
            ;; Optionally display the output buffer
            (when (>= verb-level 1)
+             (message "'doom sync' failed with exit code %d" (process-exit-status proc))
              (display-buffer output-buffer))))))))
