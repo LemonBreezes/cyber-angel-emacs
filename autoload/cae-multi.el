@@ -55,68 +55,68 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
     (with-current-buffer output-buffer (erase-buffer))
     (cl-labels
         ((finalize ()
-           "Decrement the pending counter and run doom sync if all are done."
-           (setq pending-processes (1- pending-processes))
-           (when (zerop pending-processes)
-             (if all-pulls-succeeded
-                 (cae-multi--run-doom-sync verb-level)
-               (when (>= verb-level 1)
-                 (message "One or more git operations failed. See %s for details"
-                          (buffer-name output-buffer))))))
+                   "Decrement the pending counter and run doom sync if all are done."
+                   (setq pending-processes (1- pending-processes))
+                   (when (zerop pending-processes)
+                     (if all-pulls-succeeded
+                         (cae-multi--run-doom-sync verb-level)
+                       (when (>= verb-level 1)
+                         (message "One or more git operations failed. See %s for details"
+                                  (buffer-name output-buffer))))))
          (handle-submodule (repo-dir)
-           "Start the submodule update process for REPO-DIR and set its sentinel."
-           (let ((submodule-process
-                  (start-process "git-submodule-update-process"
-                                 output-buffer
-                                 "git" "submodule" "update" "--init" "--recursive")))
-             (set-process-sentinel
-              submodule-process
-              (lambda (subproc subevent)
-                (when (memq (process-status subproc) '(exit signal))
-                  (if (/= (process-exit-status subproc) 0)
-                      (progn
-                        (message "Git submodule update failed in %s" repo-dir)
-                        (with-current-buffer output-buffer
-                          (goto-char (point-max))
-                          (insert (format "\nError: Git submodule update failed in repository %s\n"
-                                          repo-dir)))
-                        (display-buffer output-buffer)
-                        (setq all-pulls-succeeded nil))
-                    (when (>= verb-level 1)
-                      (message "Git submodule update succeeded in %s" repo-dir)))
-                  (with-current-buffer output-buffer
-                    (save-excursion
-                      (goto-char (point-max))
-                      ;; Search for conflict regardless of verb level.
-                      (if (re-search-backward "\\bCONFLICT\\b" nil t)
-                          (progn
-                            (message "Conflict detected during git submodule update in %s" repo-dir)
-                            (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
-                            (display-buffer output-buffer)
-                            (setq all-pulls-succeeded nil))
-                        (when (>= verb-level 2)
-                          (message "Submodules updated successfully in %s" repo-dir)))))
-                  (finalize))))))
+                           "Start the submodule update process for REPO-DIR and set its sentinel."
+                           (let ((submodule-process
+                                  (start-process "git-submodule-update-process"
+                                                 output-buffer
+                                                 "git" "submodule" "update" "--init" "--recursive")))
+                             (set-process-sentinel
+                              submodule-process
+                              (lambda (subproc subevent)
+                                (when (memq (process-status subproc) '(exit signal))
+                                  (if (/= (process-exit-status subproc) 0)
+                                      (progn
+                                        (message "Git submodule update failed in %s" repo-dir)
+                                        (with-current-buffer output-buffer
+                                          (goto-char (point-max))
+                                          (insert (format "\nError: Git submodule update failed in repository %s\n"
+                                                          repo-dir)))
+                                        (display-buffer output-buffer)
+                                        (setq all-pulls-succeeded nil))
+                                    (when (>= verb-level 1)
+                                      (message "Git submodule update succeeded in %s" repo-dir)))
+                                  (with-current-buffer output-buffer
+                                    (save-excursion
+                                      (goto-char (point-max))
+                                      ;; Search for conflict regardless of verb level.
+                                      (if (re-search-backward "\\bCONFLICT\\b" nil t)
+                                          (progn
+                                            (message "Conflict detected during git submodule update in %s" repo-dir)
+                                            (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
+                                            (display-buffer output-buffer)
+                                            (setq all-pulls-succeeded nil))
+                                        (when (>= verb-level 2)
+                                          (message "Submodules updated successfully in %s" repo-dir)))))
+                                  (finalize))))))
          (handle-pull (proc event repo-dir)
-           "Handle the termination of the pull process for REPO-DIR."
-           (when (memq (process-status proc) '(exit signal))
-             (if (/= (process-exit-status proc) 0)
-                 (progn
-                   (when (>= verb-level 1)
-                     (message "Git pull failed in %s" repo-dir)
-                     (with-current-buffer output-buffer
-                       (goto-char (point-max))
-                       (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
-                     (display-buffer output-buffer))
-                   (setq all-pulls-succeeded nil)
-                   (finalize))
-               (progn
-                 (when (>= verb-level 1)
-                   (message "Git pull succeeded in %s" repo-dir))
-                 ;; Increment pending-processes for the upcoming submodule update.
-                 (setq pending-processes (1+ pending-processes))
-                 (handle-submodule repo-dir)
-                 (finalize))))))
+                      "Handle the termination of the pull process for REPO-DIR."
+                      (when (memq (process-status proc) '(exit signal))
+                        (if (/= (process-exit-status proc) 0)
+                            (progn
+                              (when (>= verb-level 1)
+                                (message "Git pull failed in %s" repo-dir)
+                                (with-current-buffer output-buffer
+                                  (goto-char (point-max))
+                                  (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
+                                (display-buffer output-buffer))
+                              (setq all-pulls-succeeded nil)
+                              (finalize))
+                          (progn
+                            (when (>= verb-level 1)
+                              (message "Git pull succeeded in %s" repo-dir))
+                            ;; Increment pending-processes for the upcoming submodule update.
+                            (setq pending-processes (1+ pending-processes))
+                            (handle-submodule repo-dir)
+                            (finalize))))))
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
           (when (file-directory-p (concat repo-dir "/.git"))
