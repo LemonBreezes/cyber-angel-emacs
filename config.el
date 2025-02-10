@@ -282,6 +282,8 @@
     (defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
       :before-until #'eldoc-documentation-default
       (and (featurep 'which-key) (which-key--popup-showing-p)))
+    ;; BUG For some reason, Eldoc overrides the current buffer with a blank
+    ;; *eldoc* buffer randomly while writing C++. I am testing if this fixes it.
     (setq eldoc-display-functions (delq 'eldoc-display-in-buffer eldoc-display-functions)))
 
   (use-package! info-colors
