@@ -279,17 +279,9 @@
     (setq eldoc-echo-area-prefer-doc-buffer t)
     ;; BUG If Eldoc tries to show help while Which Key is active, there is an
     ;; error. Inhibit `eldoc' when `which-key' is active to prevent errors.
-    ;; NOTE Eldoc can also try to display when completing in the minibuffer but I
-    ;; have explicitly disabled that.
     (defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
       :before-until #'eldoc-documentation-default
-      (or (and (featurep 'which-key) (which-key--popup-showing-p))
-          ;; This checks if a completion engine is currently active.
-          (bound-and-true-p mct--active)
-          (bound-and-true-p vertico--input)
-          (and (featurep 'helm-core) (helm--alive-p))
-          (and (featurep 'ido) (ido-active))
-          (memq #'ivy--queue-exhibit post-command-hook))))
+      (and (featurep 'which-key) (which-key--popup-showing-p))))
 
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
