@@ -281,7 +281,8 @@
     ;; error. Inhibit `eldoc' when `which-key' is active to prevent errors.
     (defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
       :before-until #'eldoc-documentation-default
-      (and (featurep 'which-key) (which-key--popup-showing-p))))
+      (and (featurep 'which-key) (which-key--popup-showing-p)))
+    (setq eldoc-display-functions (delq 'eldoc-display-in-buffer eldoc-display-functions)))
 
   (use-package! info-colors
     :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
