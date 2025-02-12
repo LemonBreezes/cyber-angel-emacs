@@ -10,7 +10,8 @@
                      (if (parent-mode-is-derived-p mode 'prog-mode)
                          mode
                        (pcase mode
-                         ('debugger-mode 'emacs-lisp-mode)))))
+                         ('debugger-mode 'emacs-lisp-mode)
+                         (_ nil)))))
               (pcase (language-detection-string (current-kill 0))
                 ('ada 'ada-mode) ('c 'c-mode) ('cpp 'c++-mode)
                 ('clojure 'clojure-mode) ('csharp 'csharp-mode)
