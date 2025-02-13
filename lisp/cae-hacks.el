@@ -186,3 +186,6 @@ It is meant to be used as a `post-gc-hook'."
   :before #'set-window-buffer
   (when (eq (get-buffer buf) eldoc--doc-buffer)
     (backtrace)))
+
+;; BUG Fix void variable langelem in c-langelem-pos
+(defvar langelem nil)
