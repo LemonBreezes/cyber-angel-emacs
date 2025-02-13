@@ -3,7 +3,7 @@
 ;;;###autoload
 (defun cae-claude-code ()
   (interactive)
-  (require 'claude)
+  (require 'vterm)
   (let ((vterm-buffer-name (format "*claude:%s*" (doom-project-root)))
         (default-directory (or (doom-project-root) default-directory)))
     (if (get-buffer vterm-buffer-name)
