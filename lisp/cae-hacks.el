@@ -189,3 +189,5 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; BUG Fix void variable langelem in `c-langelem-pos'
 (defvar langelem nil)
+
+;; BUG Fix void function error
