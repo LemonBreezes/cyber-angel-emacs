@@ -138,7 +138,7 @@
   (when (file-exists-p "/mnt/c/Windows/System32/cmd.exe")
     (string-trim
      (shell-command-to-string
-      "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME%"))))
+      "/mnt/c/Windows/System32/cmd.exe /c echo %USERNAME% 2>/dev/null | tr -d '\n\r'"))))
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-syncthing-directory (_)
