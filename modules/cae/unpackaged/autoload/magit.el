@@ -11,7 +11,8 @@ command was called, go to its unstaged changes section."
           (when buffer-file-name
             (file-relative-name buffer-file-name
                                 (locate-dominating-file buffer-file-name ".git"))))
-         (default-directory (doom-project-root buffer-file-name))
+         (default-directory (or (ignore-errors (project-root (project-current)))
+                                (doom-project-root)))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
     (call-interactively #'magit-status)
     (let ((ignore-window-parameters t))
