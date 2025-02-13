@@ -6,7 +6,8 @@
   (require 'org-rich-yank)
   (let* ((source-mode
           (or (let ((mode (buffer-local-value 'major-mode org-rich-yank--buffer)))
-                (and (buffer-live-p org-rich-yank--buffer)
+                (and org-rich-yank--buffer
+                     (buffer-live-p org-rich-yank--buffer)
                      (if (parent-mode-is-derived-p mode 'prog-mode)
                          mode
                        (pcase mode
