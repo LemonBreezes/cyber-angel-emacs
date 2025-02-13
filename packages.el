@@ -9,7 +9,7 @@
                    mu4e-alert)
 (unpin! consult) ; (void-function consult--process-collection)
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
-(unpin! :lang :tools :emacs :email :input :term :checkers :ui)
+(unpin! :lang :tools :emacs :email :input :term :checkers :ui :editor)
 (unpin! smartparens)
 (unpin! projectile)
 (package! which-key :built-in t)
