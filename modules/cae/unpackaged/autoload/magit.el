@@ -12,7 +12,9 @@ command was called, go to its unstaged changes section."
             (file-relative-name buffer-file-name
                                 (locate-dominating-file buffer-file-name ".git"))))
          (default-directory (or (ignore-errors (project-root (project-current)))
-                                (doom-project-root)))
+                                (ignore-errors (doom-project-root))
+                                buffer-file-path
+                                default-directory))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
     (call-interactively #'magit-status)
     (let ((ignore-window-parameters t))
