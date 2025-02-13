@@ -191,4 +191,4 @@ It is meant to be used as a `post-gc-hook'."
 (defvar langelem nil)
 
 ;; BUG Fix void function error
-(setf (symbol-function (intern "")) #'llama)
+(setf (symbol-function (intern "")) 'llama)
