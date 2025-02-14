@@ -3,4 +3,4 @@
 
 (package! ednc)
 (package! alert)
-(package! ednc-popup)
+(package! ednc-popup :recipe (:host git :url "https://codeberg.org/akib/emacs-ednc-popup"))
