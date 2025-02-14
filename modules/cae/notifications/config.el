@@ -33,3 +33,7 @@
           (cond ((getenv "WSL_DISTRO_NAME")
                  'toast)
                 (t 'libnotify)))))
+
+;;(use-package! alert-toast
+;;  :when (getenv "WSL_DISTRO_NAME")
+;;  :after alert)
