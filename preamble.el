@@ -9,7 +9,7 @@
 (defun cae-add-hostname-to-modeline ()
   "Compute a short hash from system-name and add it to `global-mode-string`."
   (let ((hostname (concat " " (truncate-string-to-width
-                                 (secure-hash 'sha512 system-name) 6))))
+                               (secure-hash 'sha512 system-name) 6))))
     (setf (aref hostname 1) (downcase (aref system-name 0)))
     (unless (or (equal global-mode-string (list hostname))
                 (cl-member hostname global-mode-string
