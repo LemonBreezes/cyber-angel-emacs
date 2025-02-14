@@ -1,5 +1,17 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
 
+(defun cae--get-vertico-posframe-size (posframe)
+  (lambda (_)
+    `(:height ,(frame-height posframe)
+      :width ,(frame-width posframe)
+      :min-height nil
+      :min-width nil)))
+
+(defun cae-avy-parrot-rotate-action (rotate-fn pt)
+  (save-mark-and-excursion
+    (goto-char pt)
+    (call-interactively rotate-fn)))
+
 (defun cae-strip-top-level-indentation (str)
   "Strip the top-level leading indentation for every line in STR.
 The least indented line will have 0 leading whitespace. Convert tabs to spaces
@@ -14,13 +26,7 @@ using the tab-width variable."
     (mapconcat
      (lambda (line)
        (if (string-match "^[[:space:]]+" line)
-           (let* ((indent (match-string 0 line))
-                  (actual-indent (substring indent
-                                            0 (min min-indentation
-                                                   (length indent))))
-                  (stripped-indent (replace-regexp-in-string
-                                    (regexp-quote actual-indent) "" line)))
-             stripped-indent)
+           (substring line min-indentation)
          line))
      lines "\n")))
 
@@ -102,12 +108,7 @@ This is the format used on Reddit for code blocks."
                   'grid 'buffer)
              ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
     (when (featurep 'vertico-posframe)
-      (setf vertico-posframe-size-function
-            `(lambda (_)
-               '(:height ,(frame-height posframe)
-                 :width ,(frame-width posframe)
-                 :min-height nil
-                 :min-width nil))))
+      (setf vertico-posframe-size-function (cae--get-vertico-posframe-size posframe)))
     (embark-act arg)))
 
 ;;;###autoload
@@ -168,13 +169,15 @@ This is the format used on Reddit for code blocks."
 ;;;###autoload
 (defun cae-bookmark-jump-to-newest-download (_)
   ;; For backwards compatibility with my bookmarks file.
-  (let ((newest-file (-max-by #'file-newer-than-file-p
-                              (cl-remove-if
-                               (lambda (file)
-                                 (or (string-prefix-p "." (file-name-nondirectory file))
-                                     (file-directory-p file)))
-                               (cl-union (directory-files "~/Downloads/" t)
-                                         (directory-files "~/" t))))))
+  (let* ((download-files (directory-files "~/Downloads/" t))
+         (home-files (directory-files "~/" t))
+         (all-files (cl-union download-files home-files))
+         (filtered-files (cl-remove-if
+                          (lambda (file)
+                            (or (string-prefix-p "." (file-name-nondirectory file))
+                                (file-directory-p file)))
+                          all-files))
+         (newest-file (-max-by #'file-newer-than-file-p filtered-files)))
     (dired (file-name-directory newest-file))
     (dired-goto-file newest-file)))
 
@@ -192,15 +195,11 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-forward-action (pt)
-  (save-mark-and-excursion
-    (goto-char pt)
-    (call-interactively #'parrot-rotate-next-word-at-point)))
+  (cae-avy-parrot-rotate-action #'parrot-rotate-next-word-at-point pt))
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-backward-action (pt)
-  (save-mark-and-excursion
-    (goto-char pt)
-    (call-interactively #'parrot-rotate-prev-word-at-point)))
+  (cae-avy-parrot-rotate-action #'parrot-rotate-prev-word-at-point pt))
 
 ;;;###autoload
 (defun cae-avy-rotate ()
@@ -336,14 +335,34 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-kill-current-buffer ()
   (interactive)
-  (when-let* ((proc (get-buffer-process (current-buffer))))
-    ;; Stop AI from freezing Emacs while Emacs is waiting for the AI to respond.
-    (set-process-sentinel proc nil))
-  (call-interactively #'kill-current-buffer))
+  (let ((buf (current-buffer)))
+    (when-let ((proc (get-buffer-process buf)))
+      (set-process-sentinel proc nil)))
+  (kill-current-buffer))
 
 
 (defvar cae--sibling-file-history (make-hash-table :test 'equal)
   "A hash-table that keeps track of sibling file history.")
+
+(defun cae--update-sibling-history (old-file new-file)
+  (let ((current-history (gethash new-file cae--sibling-file-history)))
+    (puthash new-file
+             (cond ((null current-history) old-file)
+                   ((stringp current-history)
+                    (if (string= old-file current-history)
+                        current-history
+                      (list old-file current-history)))
+                   ((listp current-history)
+                    (cons old-file (remove old-file current-history))))
+             cae--sibling-file-history)))
+
+(defun cae--open-terminal-in-new-workspace (name terminal-func)
+  (if (+workspace-exists-p name)
+      (+workspace-switch name)
+    (+workspace/new name))
+  (funcall terminal-func)
+  (delete-other-windows)
+  (persp-add-buffer (current-buffer)))
 
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
@@ -520,22 +539,10 @@ image-mode buffers."
 
 ;;;###autoload
 (defun cae-open-eshell-in-new-workspace ()
-  "Open a new eshell in a new workspace."
   (interactive)
-  (if (+workspace-exists-p "*eshell*")
-      (+workspace-switch "*eshell*")
-    (+workspace/new "*eshell*"))
-  (eshell)
-  (delete-other-windows)
-  (persp-add-buffer (current-buffer)))
+  (cae--open-terminal-in-new-workspace "*eshell*" #'eshell))
 
 ;;;###autoload
 (defun cae-open-vterm-in-new-workspace ()
-  "Open a new vterm in a new workspace."
   (interactive)
-  (if (+workspace-exists-p "*vterm*")
-      (+workspace-switch "*vterm*")
-    (+workspace/new "*vterm*"))
-  (vterm)
-  (delete-other-windows)
-  (persp-add-buffer (current-buffer)))
+  (cae--open-terminal-in-new-workspace "*vterm*" #'vterm))
