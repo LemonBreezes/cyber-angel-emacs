@@ -388,21 +388,7 @@ jumping backwards."
                    (completing-read
                     "Choose file: " previous-files nil t nil))))))))
     (unless (string= old-file (buffer-file-name))
-      ;; append new sibling or create list if multiple siblings
-      (let ((current-history (gethash (buffer-file-name) cae--sibling-file-history)))
-        (puthash (buffer-file-name)
-                 (cond ((null current-history)
-                        ;; no entry exists, store the old-file
-                        old-file)
-                       ((stringp current-history)
-                        (if (string= old-file current-history)
-                            current-history
-                          ;; one entry exists, make it a list
-                          (list old-file current-history)))
-                       ((listp current-history)
-                        ;; a list already, append if not already there
-                        (cons old-file (remove old-file current-history))))
-                 cae--sibling-file-history)))))
+      (cae--update-sibling-history old-file (buffer-file-name)))
 
 ;;;###autoload
 (defun cae-jump-to-random-line ()
