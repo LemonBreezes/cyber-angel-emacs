@@ -140,6 +140,7 @@
   (eshell-atuin-mode))
 
 (use-package detached
+  :when (executable-find "dtach")
   :init
   (detached-init)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
