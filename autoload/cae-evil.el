@@ -10,35 +10,41 @@
           (forward-page count)))
     (forward-page count)))
 
+(defun cae--strip-ignored-remaps (map)
+  "Remove keys whose remap sub-keys have an 'ignore binding from MAP."
+  (map-keymap
+   (lambda (key binding)
+     (when (eq key 'remap)
+       (map-keymap
+        (lambda (subkey subbinding)
+          (when (eq subbinding 'ignore)
+            (define-key map (vector 'remap subkey) nil t)))
+        binding)))
+   map)
+  map)
+
 (defun cae-current-state-keymap ()
   (let* ((minor-keymap (if (bound-and-true-p git-timemachine-mode)
                            (evil-get-minor-mode-keymap 'normal 'git-timemachine-mode)
                          (evil-get-auxiliary-keymap (current-local-map)
                                                     evil-state t t)))
-         (aux-keymap (evil-get-auxiliary-keymap
-                      (make-composed-keymap
-                       (thread-last (current-minor-mode-maps)
-                                    (delq doom-leader-map)
-                                    (delq general-override-mode-map)
-                                    (delq evil-snipe-local-mode-map)
-                                    (delq (let ((mode (cl-find-if (lambda (x)
-                                                                    (string-prefix-p "beginend-"
-                                                                                     (symbol-name x)))
-                                                                  local-minor-modes)))
-                                             (when mode
-                                               (symbol-value (intern (concat (symbol-name mode) "-map"))))))
-                                    )
-                       t)
-                      evil-state))
+         (aux-keymap (let ((filtered-minor-maps
+                             (thread-last (current-minor-mode-maps)
+                               (delq doom-leader-map)
+                               (delq general-override-mode-map)
+                               (delq evil-snipe-local-mode-map)
+                               (delq (let ((mode (cl-find-if (lambda (x)
+                                                                (string-prefix-p "beginend-"
+                                                                                 (symbol-name x)))
+                                                              local-minor-modes)))
+                                       (when mode
+                                         (symbol-value (intern (concat (symbol-name mode) "-map"))))))))
+                   )
+                     (evil-get-auxiliary-keymap (make-composed-keymap filtered-minor-maps t)
+                                                evil-state)))
          (combined (make-composed-keymap (list minor-keymap aux-keymap)))
          (map (copy-keymap combined)))
-    (map-keymap (lambda (key binding)
-                  (when (eq key 'remap)
-                    (map-keymap (lambda (subkey subbinding)
-                                  (when (eq subbinding 'ignore)
-                                    (define-key map (vector 'remap subkey) nil t)))
-                                binding)))
-                map)
+    (cae--strip-ignored-remaps map)
     map))
 
 ;;;###autoload
@@ -78,27 +84,26 @@
   (ignore count)
   (evil-collection-unimpaired--encode beg end #'base64-decode-string))
 
-;;;###autoload
-(defun cae-unimpaired-paste-above ()
-  "Paste above current line with preserving indentation."
-  (interactive)
+(defun cae--unimpaired-paste (newline-fn)
+  "Helper to insert a newline (via NEWLINE-FN) and then paste with the current indentation and column."
   (let ((indent (current-indentation))
         (column (current-column)))
-    (evil-insert-newline-above)
+    (funcall newline-fn)
     (indent-to indent)
     (evil-paste-after 1)
     (move-to-column column)))
 
 ;;;###autoload
+(defun cae-unimpaired-paste-above ()
+  "Paste above current line with preserving indentation."
+  (interactive)
+  (cae--unimpaired-paste #'evil-insert-newline-above))
+
+;;;###autoload
 (defun cae-unimpaired-paste-below ()
   "Paste below current line with preserving indentation."
   (interactive)
-  (let ((indent (current-indentation))
-        (column (current-column)))
-    (evil-insert-newline-below)
-    (indent-to indent)
-    (evil-paste-after 1)
-    (move-to-column column)))
+  (cae--unimpaired-paste #'evil-insert-newline-below))
 
 ;;;###autoload
 (defun cae-comint-delchar-or-maybe-eof ()
