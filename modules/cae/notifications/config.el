@@ -29,4 +29,7 @@
   (advice-add #'alert-send-notification :around
               #'cae-ednc-wrap-async-call-process-a)
   (after! alert
-    (setq alert-default-style 'libnotify)))
+    (setq alert-default-style
+          (cond ((getenv "WSL_DISTRO_NAME")
+                 'toast)
+                (t 'libnotify)))))
