@@ -141,8 +141,7 @@
 
 (use-package detached
   :when (executable-find "dtach")
-  :init
-  (detached-init)
+  :hook (doom-first-input . detached-init)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
          ([remap async-shell-command] . detached-shell-command)
          ;; Replace `compile' with `detached-compile'
