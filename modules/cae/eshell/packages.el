@@ -9,6 +9,3 @@
 (package! tldr)
 (package! eshell-atuin)
 (package! detached)
-
-;; Optional but useful for detached.
-(package! alert)
