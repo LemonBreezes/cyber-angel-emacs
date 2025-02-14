@@ -287,8 +287,8 @@ also marks comment with leading whitespace"
 (defvar cae-yank-point-overlays nil)
 (add-hook! 'minibuffer-exit-hook
   (defun cae-yank-on-exit-h ()
-    (dolist (ov cae-yank-point-overlays)
-      (delete-overlay ov))))
+    (mapc #'delete-overlay cae-yank-point-overlays)
+    (setq cae-yank-point-overlays nil)))
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
