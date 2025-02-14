@@ -3,3 +3,4 @@
 
 (package! ednc)
 (package! alert)
+(package! ednc-popup)
