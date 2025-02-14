@@ -320,15 +320,15 @@ but when no region is selected and the cursor is in a 'string' syntax
 mark the string and call `edit-indirect-region' with it."
   (interactive)
   (cond ((region-active-p)
-         (call-interactively #'edit-indirect-region))
+         (edit-indirect-region))
         ((and (derived-mode-p 'org-mode)
-              (ignore-error 'user-error (call-interactively #'org-edit-special))))
-        ((nth 3 (sp--syntax-ppss)) (call-interactively #'string-edit-at-point))
-        (t (save-mark-and-excursion
-             (let ((pos (point))
-                   (beg (progn (mark-defun) (region-beginning))))
-               (call-interactively #'edit-indirect-region)
-               (goto-char (- pos beg)))))))
+              (ignore-error 'user-error (org-edit-special))))
+        ((nth 3 (sp--syntax-ppss))
+         (string-edit-at-point))
+        (t (let ((pos (point)))
+             (mark-defun)
+             (edit-indirect-region)
+             (goto-char (- pos (region-beginning)))))))
 
 ;;;###autoload
 (defun cae-kill-current-buffer ()
