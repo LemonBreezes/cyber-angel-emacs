@@ -2,7 +2,7 @@
 
 (use-package! ednc
   :defer t :init
-  ;; Otherwise `alert-send-notification' will block the UI.
+  ;; BUG Otherwise `alert-send-notification' will block the UI.
   (advice-add #'alert-send-notification :around
               #'cae-ednc-wrap-async-call-process-a)
   (defun cae-ednc-load-h ()
