@@ -408,3 +408,12 @@
         [remap zap-up-to-char] #'zop-up-to-char)
   :config
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
+
+(add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
+(use-package! auto-sudoedit
+  :after tramp-sh :config
+  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
+  (defadvice! cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
+    :around #'dirvish-data-for-dir
+    (funcall oldfun (tramp-file-local-name dir) buffer setup))
+  (auto-sudoedit-mode +1))
