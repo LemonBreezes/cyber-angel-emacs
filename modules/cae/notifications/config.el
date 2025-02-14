@@ -10,12 +10,15 @@
          (ednc-mode +1)))
   (run-with-idle-timer 1.5 nil #'cae-ednc-load-h)
   (add-hook 'ednc-notification-presentation-functions
-            #'cae-ednc-show-notification-in-buffer)
-  (add-hook 'ednc-notification-presentation-functions
-            (lambda (&rest _) (force-mode-line-update t)))
+            #'ednc-popup-presentation-function)
+  ;;(add-hook 'ednc-notification-presentation-functions
+  ;;          #'cae-ednc-show-notification-in-buffer)
+  ;;(add-hook 'ednc-notification-presentation-functions
+  ;;          (lambda (&rest _) (force-mode-line-update t)))
   :config
   (add-to-list 'global-mode-string
                '((:eval (cae-ednc-stack-notifications))))
+  (setq alert-default-style 'libnotify)
   (map! :map ednc-view-mode-map
         "n" #'next-line
         "p" #'previous-line))
