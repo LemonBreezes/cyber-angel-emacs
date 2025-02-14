@@ -152,7 +152,8 @@
   :custom ((detached-show-output-on-attach t)
            (detached-terminal-data-command system-type))
   :config
-  (setq detached-degraded-commands '("^ls")))
+  (setq detached-degraded-commands '("^ls"))
+  (setq detached-notification-function #'detached-extra-alert-notification))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
