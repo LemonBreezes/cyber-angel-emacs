@@ -11,7 +11,6 @@
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
 (unpin! :lang :tools :emacs :email :input :term :checkers :ui :editor)
 (unpin! smartparens)
-(unpin! projectile)
 (package! which-key :built-in t)
 
 ;; PRs that haven't been merged yet.
