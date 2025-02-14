@@ -151,7 +151,9 @@
          ;; Replace built in completion of sessions with `consult'
          ([remap detached-open-session] . detached-consult-session))
   :custom ((detached-show-output-on-attach t)
-           (detached-terminal-data-command system-type)))
+           (detached-terminal-data-command system-type))
+  :config
+  (setq detached-degraded-commands '("^ls")))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
