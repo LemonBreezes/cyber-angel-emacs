@@ -1,9 +1,11 @@
 ;;; preamble.el -*- lexical-binding: t; -*-
+
 (defun cae-add-dir-to-path (dir)
   "Add DIR to the PATH environment variable and `exec-path` if not already present."
   (when (and (file-directory-p dir) (not (member dir exec-path)))
     (setenv "PATH" (concat (getenv "PATH") ":" dir))
     (setq exec-path (append exec-path (list dir)))))
+
 (defun cae-add-hostname-to-modeline ()
   "Compute a short hash from system-name and add it to `global-mode-string`."
   (let ((hostname (concat " " (truncate-string-to-width
@@ -15,6 +17,7 @@
       (if (and global-mode-string (listp global-mode-string))
           (appendq! global-mode-string (list hostname))
         (setq global-mode-string (list hostname))))))
+
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
 
