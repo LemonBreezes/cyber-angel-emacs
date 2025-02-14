@@ -192,3 +192,6 @@ It is meant to be used as a `post-gc-hook'."
 
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
+
+;; BUG Projectile backwards compatibility patch
+(defalias 'projectile-serialize-cache 'projectile-serialize)
