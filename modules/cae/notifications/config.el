@@ -26,6 +26,4 @@
   (advice-add #'alert-send-notification :around
               #'cae-ednc-wrap-async-call-process-a)
   (after! alert
-    (setq alert-default-style 'libnotify))
-  (setq detached-notification-function #'detached-extra-alert-notification)
-  )
+    (setq alert-default-style 'libnotify)))
