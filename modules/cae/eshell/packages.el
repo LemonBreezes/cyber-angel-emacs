@@ -9,3 +9,5 @@
 (package! tldr)
 (package! eshell-atuin)
 (package! detached)
+
+(package! alert)
