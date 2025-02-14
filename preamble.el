@@ -10,6 +10,11 @@
     (setenv "PATH" (concat (getenv "PATH") ":" wslpath))
     (setq exec-path (append exec-path (list wslpath)))))
 
+(when (getenv "WSL_DISTRO_NAME")
+  (let ((wslpath "/mnt/c/Windows/System32"))
+    (setenv "PATH" (concat (getenv "PATH") ":" wslpath))
+    (setq exec-path (append exec-path (list wslpath)))))
+
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
