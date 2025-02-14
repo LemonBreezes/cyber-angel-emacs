@@ -388,7 +388,7 @@ jumping backwards."
                    (completing-read
                     "Choose file: " previous-files nil t nil))))))))
     (unless (string= old-file (buffer-file-name))
-      (cae--update-sibling-history old-file (buffer-file-name)))
+      (cae--update-sibling-history old-file (buffer-file-name)))))
 
 ;;;###autoload
 (defun cae-jump-to-random-line ()
@@ -514,7 +514,7 @@ image-mode buffers."
           (if (and (eq current (1+ start))
                    (eq (1+ current) end))
               (delete-region start end)
-            (delete-char -1)))))
+            (delete-char -1)))))))
 
 ;;;###autoload
 (defun cae-call-leader-map ()
