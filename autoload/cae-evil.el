@@ -29,16 +29,17 @@
                          (evil-get-auxiliary-keymap (current-local-map)
                                                     evil-state t t)))
          (aux-keymap (let ((filtered-minor-maps
-                            (thread-last (current-minor-mode-maps)
-                                         (delq doom-leader-map)
-                                         (delq general-override-mode-map)
-                                         (delq evil-snipe-local-mode-map)
-                                         (delq (let ((mode (cl-find-if (lambda (x)
-                                                                         (string-prefix-p "beginend-"
-                                                                                          (symbol-name x)))
-                                                                       local-minor-modes)))
-                                                 (when mode
-                                                   (symbol-value (intern (concat (symbol-name mode) "-map")))))))))
+                            (thread-last
+                              (current-minor-mode-maps)
+                              (delq doom-leader-map)
+                              (delq general-override-mode-map)
+                              (delq evil-snipe-local-mode-map)
+                              (delq (let ((mode (cl-find-if (lambda (x)
+                                                              (string-prefix-p "beginend-"
+                                                                               (symbol-name x)))
+                                                            local-minor-modes)))
+                                      (when mode
+                                        (symbol-value (intern (concat (symbol-name mode) "-map")))))))))
                        (evil-get-auxiliary-keymap (make-composed-keymap filtered-minor-maps t)
                                                   evil-state)))
          (combined (make-composed-keymap (list minor-keymap aux-keymap)))
