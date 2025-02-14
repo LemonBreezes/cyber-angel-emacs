@@ -26,6 +26,10 @@
                      "/mnt/c/Windows/System32"))
     (cae-add-dir-to-path wslpath)))
 
+;; On NixOS, this is necessary.
+(when (executable-find "nixos-rebuild")
+  (cae-add-dir-to-path "~/.local/bin"))
+
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
