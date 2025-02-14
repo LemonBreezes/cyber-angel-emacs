@@ -121,6 +121,7 @@
 (package! string-edit-at-point)
 (package! zop-to-char)
 (package! i3wm-config-mode)
+(package! auto-sudoedit)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
