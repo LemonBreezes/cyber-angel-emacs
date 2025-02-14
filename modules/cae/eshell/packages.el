@@ -8,3 +8,4 @@
 (package! eshell-prompt-extras)
 (package! tldr)
 (package! eshell-atuin)
+(package! detached)
