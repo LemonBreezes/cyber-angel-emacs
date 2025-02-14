@@ -117,26 +117,25 @@ This is the format used on Reddit for code blocks."
   (require 'avy)
   (save-window-excursion
     (let* ((initial-window (selected-window))
-           (avy-indent-line-overlay t)  ;my preference
+           (avy-indent-line-overlay t)  ; my preference
            (avy-action #'identity)
-           (beg (avy--line))
-           (end (if beg (avy--line)
-                  (cl-return-from cae-avy-embark-act-on-region))))
-      (unless end
-        (cl-return-from cae-avy-embark-act-on-region))
-      (when (> beg end)
-        (cl-rotatef beg end))
-      (setq beg (save-excursion
-                  (goto-char beg)
-                  (line-beginning-position)))
-      (setq end (save-excursion
-                  (goto-char end)
-                  (1+ (line-end-position))))
-      (save-mark-and-excursion
-        (goto-char beg)
-        (set-mark end)
-        (activate-mark)
-        (embark-act)))))
+           (beg (avy--line)))
+      (if (not beg)
+          nil
+        (let ((end (avy--line)))
+          (if (not end)
+              nil
+            (when (> beg end)
+              (cl-rotatef beg end))
+            (setq beg (save-excursion (goto-char beg)
+                                      (line-beginning-position)))
+            (setq end (save-excursion (goto-char end)
+                                      (1+ (line-end-position))))
+            (save-mark-and-excursion
+              (goto-char beg)
+              (set-mark end)
+              (activate-mark)
+              (embark-act))))))))
 
 ;;;###autoload
 (defun cae-delete-duplicate-bookmarks ()
@@ -276,11 +275,12 @@ also marks comment with leading whitespace"
 (defun cae-exwm-start-app (app workspace &optional arg)
   (when (modulep! :ui workspaces)
     (+workspace-switch workspace t))
-  (when arg
-    (kill-process (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)))
-  (unless (process-live-p (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp))
-    (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
-          (start-process workspace nil app)))
+  (let ((proc (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)))
+    (when arg
+      (kill-process proc))
+    (unless (process-live-p proc)
+      (setf (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)
+            (start-process workspace nil app))))
   (cae-exwm-persp--focus-workspace-app))
 
 (defvar cae-yank-point nil)
@@ -301,11 +301,9 @@ also marks comment with leading whitespace"
         (setq cae-yank-point (point))
         (cae-yank-on-exit-h))
       (save-excursion
-        (let  ((beg (progn (goto-char cae-yank-point)
-                           cae-yank-point))
-               (end (setq cae-yank-point
-                          (progn (forward-word)
-                                 (point)))))
+        (let ((beg cae-yank-point)
+              (end (progn (forward-word) (point))))
+          (setq cae-yank-point end)
           (let ((ov (make-overlay beg end)))
             (push ov cae-yank-point-overlays)
             ;; 1000 is higher than ediff's 100+,

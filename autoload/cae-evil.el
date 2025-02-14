@@ -4,8 +4,10 @@
 (defun cae-forward-page (&optional count)
   (interactive "p")
   (if (> count 0)
-      (when (and (eq (point) (progn (forward-page 1) (1- (point)))))
-        (forward-page count))
+      (let ((start (point)))
+        (forward-page 1)
+        (when (eq start (1- (point)))
+          (forward-page count)))
     (forward-page count)))
 
 (defun cae-current-state-keymap ()
@@ -109,7 +111,7 @@
            (eobp)
            (not (bolp)))
       (progn (comint-send-eof)
-             (call-interactively #'kill-current-buffer))
+             (kill-current-buffer))
     (lookup-key evil-insert-state-map [delete])))
 
 ;;;###autoload
