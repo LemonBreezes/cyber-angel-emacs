@@ -95,14 +95,6 @@
 ;; I really don't like this advice. Just let me kill the buffer.
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
-;; On NixOS, this is necessary.
-(when (executable-find "nixos-rebuild")
-  (dolist (path '("~/.local/bin"))
-    (setq path (expand-file-name path))
-    (add-to-list 'exec-path path)
-    (unless (member path (split-string (getenv "PATH") ":"))
-      (setenv "PATH" (format "%s:%s" path (getenv "PATH"))))))
-
 ;; I regularly PR Doom Emacs.
 (advice-add #'doom-docs-read-only-h :override #'ignore)
 
