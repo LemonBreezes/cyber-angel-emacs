@@ -19,7 +19,10 @@
     (cl-loop for (key filter desc . rest) in custom-filters do
              (after! elfeed
                (map! :map elfeed-search-mode-map
-                     :desc desc :ng key filter))))
+                     :ng key filter))
+             (after! which-key
+               (which-key-add-keymap-based-replacements elfeed-search-mode-map
+                 (kbd key) desc))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
