@@ -46,5 +46,6 @@
       (insert
        (string-trim
         (detached--session-header session)))
-      (goto-char (point-min)))
+      (goto-char (point-min))
+      (local-set-key (kbd "q") #'kill-buffer-and-window))
     (pop-to-buffer buffer)))
