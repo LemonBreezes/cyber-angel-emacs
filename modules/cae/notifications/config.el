@@ -8,15 +8,13 @@
  (lambda ()
    (setq cae-dbus-notifications-supported-p
          (let ((path "/org/freedesktop/Notifications"))
-           (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path)))))
+           (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path)))
+   (if cae-dbus-notifications-supported-p
+       (cae-ednc-load-h)
+     (advice-add 'notifications-notify :around #'cae-notifications-notify-advice))))
 
 (use-package! ednc
   :defer t :init
-  (defun cae-ednc-load-h ()
-    (and (require 'dbus nil t)
-         (not (getenv "INSIDE_EXWM"))   ; In EXWM I prefer using Dunst.
-         (ednc-mode +1)))
-  (run-with-idle-timer 3 nil #'cae-ednc-load-h)
   (add-hook 'ednc-notification-presentation-functions
             #'ednc-popup-presentation-function)
   ;;(add-hook 'ednc-notification-presentation-functions
