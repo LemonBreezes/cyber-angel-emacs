@@ -20,6 +20,4 @@
     (compilation-start
      (format "mu init %s --maildir=%s && mu index"
              emails
-             mail-source-directory))))
-
-(cdr (assoc 'user-mail-address (mu4e-context-vars (car mu4e-contexts))))
+             (expand-file-name mail-source-directory)))))
