@@ -311,7 +311,7 @@ the binding is copied to the returned keymap."
           "d" #'detached-detach-session
           "D" #'detached-delete-session)
     (map! :leader
-          "D" (cae-filter-keymap-by-command-prefix embark-detached-map "detached-")))
+          "D" (cae-filter-keymap-by-command-prefix embark-detached-map "\\(?:cae-\\)?detached-")))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
