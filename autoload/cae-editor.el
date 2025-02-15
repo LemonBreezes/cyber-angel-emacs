@@ -108,7 +108,8 @@ This is the format used on Reddit for code blocks."
                   'grid 'buffer)
              ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
     (when (featurep 'vertico-posframe)
-      (setf vertico-posframe-size-function (cae--get-vertico-posframe-size posframe)))
+      (setf vertico-posframe-size-function
+            (cae--get-vertico-posframe-size posframe)))
     (minibuffer-with-setup-hook
         (lambda ()
           (local-set-key (kbd "C-z")
