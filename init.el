@@ -116,7 +116,6 @@
        (ai +copilot)
        gnus
        rss
-       denote
 
        :secret
        (:if (eq system-type 'gnu/linux) root))
