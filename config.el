@@ -95,7 +95,7 @@
   (load! "email"))
 
 
-
+
 ;;; Applications
 
 (when cae-init-applications-enabled-p
@@ -107,6 +107,7 @@
 (when cae-init-languages-enabled-p
   (load! "languages"))
 
+
 ;;; Appendix
 
 (when cae-init-appendix-enabled-p
