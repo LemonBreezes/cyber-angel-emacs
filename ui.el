@@ -317,7 +317,7 @@
   (dolist (cmd '(+eshell-tldr-to-man))
     (add-to-list 'beacon-dont-blink-commands cmd)))
 
-(use-package indent-bars
+(use-package! indent-bars
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)
