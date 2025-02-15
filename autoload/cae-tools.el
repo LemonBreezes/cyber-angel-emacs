@@ -40,7 +40,11 @@
 (defun cae-detached-describe-session (session)
   (interactive (list (progn (require 'detached)
                             (detached-session-in-context))))
-  (cl-letf (((symbol-function 'detached-session-in-context)
-             (lambda ()
-               session)))
-    (call-interactively #'detached-describe-session)))
+  (when-let* ((buffer (get-buffer-create "*detached-session-info*")))
+    (with-current-buffer buffer
+      (erase-buffer)
+      (insert
+       (string-trim
+        (detached--session-header session)))
+      (goto-char (point-min)))
+    (pop-to-buffer buffer)))
