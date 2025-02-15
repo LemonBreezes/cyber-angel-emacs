@@ -49,5 +49,5 @@
       (goto-char (point-min))
       (local-set-key (kbd "q") #'kill-buffer-and-window)
       (when (featurep 'evil)
-        (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window)))
+        (evil-local-set-key 'normal (kbd "q") #'delete-window)))
     (pop-to-buffer buffer)))
