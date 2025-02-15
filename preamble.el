@@ -56,6 +56,7 @@
       native-comp-async-report-warnings-errors 'silent)
 
 (load! "lisp/cae-debug")
+(load! "lisp/cae-hotloading")
 (load! "lisp/cae-hacks")
 
 ;; Set a fallback theme.
