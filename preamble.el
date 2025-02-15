@@ -84,4 +84,4 @@
                                            (eq (timer--idle-delay x)
                                                (timer--idle-delay y)))))))
 
-(run-with-idle-timer 3 nil #'cae-cleanup-duplicate-idle-timers)
+(run-with-idle-timer 3 3 #'cae-cleanup-duplicate-idle-timers)
