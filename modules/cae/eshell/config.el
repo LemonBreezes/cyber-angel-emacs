@@ -153,8 +153,25 @@
            (detached-terminal-data-command system-type))
   :config
   (setq detached-degraded-commands '("^ls"))
-  (setq detached-notification-function #'detached-extra-alert-notification))
+  (setq detached-notification-function #'detached-extra-alert-notification)
+  ;; Hoping this code from the mailing list will fix this package.
+  (when (modulep! :completion vertico)
+    (consult-customize
+     detached-consult--source-inactive-session
+     :items
+     (lambda ()
+       (mapcar #'car
+               (seq-filter (lambda (s) (detached-session-inactive-p (cdr s)))
+                           (detached-session-candidates (detached-get-sessions)))))))
+  (defun patch--detached--db-update-sessions (orig-fn)
+    "Ensure we print the full object to the DB."
+    (let ((print-length nil)
+          (print-level nil))
+      (funcall orig-fn)))
 
+  (advice-add 'detached--db-update-sessions
+              :around
+              #'patch--detached--db-update-sessions))
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae eshell) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
