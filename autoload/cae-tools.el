@@ -22,8 +22,6 @@
                       (message "internet working"))
                     (kill-buffer))))))
 
-(autoload 'detached-session-in-context "detached")
-
 ;;;###autoload
 (defun cae-detached-attach-dwim (session)
   (interactive
@@ -40,13 +38,8 @@
 
 ;;;###autoload
 (defun cae-detached-describe-session (session)
-  (interactive (list (detached-session-in-context)))
-  (when-let* ((buffer (get-buffer-create "*detached-session-info*"))
-              (window (display-buffer buffer detached-session-info-buffer-action)))
-    (select-window window)
-    (with-current-buffer buffer
-      (erase-buffer)
-      (insert
-       (string-trim
-        (detached--session-header session)))
-      (goto-char (point-min)))))
+  (interactive (list (progn (require 'detached)
+                            (detached-session-in-context))))
+  (cl-letf ((symbol-function #'detached-session-in-context)
+            (lambda () session))
+    (call-interactively #'detached-describe-session)))
