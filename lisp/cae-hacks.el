@@ -18,20 +18,6 @@
       (list (nth 0 args) (nth 2 args))
     args))
 
-;; Clean up duplicate idle timers since we are hot-reloading our config.
-;; NOTE If the timers have a different idle time, the last one defined one will
-;; be taken.
-(defun cae-cleanup-duplicate-idle-timers ()
-  (setq timer-idle-list
-        (cl-remove-duplicates timer-idle-list
-                              :test (lambda (x y)
-                                      (and (equal (timer--function x)
-                                                  (timer--function y))
-                                           (equal (timer--args x)
-                                                  (timer--args y)))))))
-
-(run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
-
 ;; If `try' is used before the package list is loaded, fetch it.
 (defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
   :before #'try
