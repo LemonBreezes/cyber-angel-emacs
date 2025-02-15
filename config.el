@@ -94,7 +94,6 @@
 (when cae-init-email-enabled-p
   (load! "email"))
 
-
 
 ;;; Applications
 
