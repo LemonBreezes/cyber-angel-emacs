@@ -21,3 +21,30 @@
                         (cancel-function-timers 'ping-status))
                       (message "internet working"))
                     (kill-buffer))))))
+
+;;;###autoload
+(defun cae-detached-attach-dwim (session)
+  (interactive
+   (pcase (buffer-local-value 'major-mode (current-buffer))
+     ('vterm-mode (eval (cadr (interactive-form #'detached-vterm-attach))))
+     ('eshell-mode (eval (cadr (interactive-form #'detached-eshell-attach-session))))
+     ('shell-mode (eval (cadr (interactive-form #'detached-shell-attach-session))))
+     (t (eval (cadr (interactive-form #'detached-attach-session))))))
+  (pcase (buffer-local-value 'major-mode (current-buffer))
+    ('vterm-mode (detached-vterm-attach session))
+    ('eshell-mode (detached-eshell-attach-session session))
+    ('shell-mode (detached-shell-attach-session session))
+    (t (detached-attach-session session))))
+
+;;;###autoload
+(defun cae-detached-describe-session (session)
+  (interactive (list (detached-session-in-context)))
+  (when-let* ((buffer (get-buffer-create "*detached-session-info*"))
+              (window (display-buffer buffer detached-session-info-buffer-action)))
+    (select-window window)
+    (with-current-buffer buffer
+      (erase-buffer)
+      (insert
+       (string-trim
+        (detached--session-header session)))
+      (goto-char (point-min)))))
