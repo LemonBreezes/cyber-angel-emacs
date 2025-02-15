@@ -4,9 +4,11 @@
 ;;; Other hacks
 
 ;; Clean up duplicate idle timers.
-(defun cae-cleanup-duplicate-idle-timers ()
-  (dolist (timer timer-idle-list)
-    (+log timer (timer--args timer))))
+;;(defun cae-cleanup-duplicate-idle-timers ()
+;;  (dolist (timer timer-idle-list res)
+;;    (+log timer (timer--args timer))))
+;;
+;;(run-with-idle-timer 1.0 1.0 #'cae-cleanup-duplicate-idle-timers)
 
 ;; Prevent the minibuffer from "glitching" the workspace switch.
 (defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
