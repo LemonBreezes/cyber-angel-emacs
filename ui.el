@@ -199,7 +199,7 @@
        :side right :select t :quit t :ttl 0)
       ("\\`\\*Ibuffer Diff\\*" :size cae-popup-resize-help-buffer
        :side right :select t :quit t :ttl 0)
-      ("\\`\\*detached-session-info\\*\\'" :quit t)
+      ("\\`\\*detached-session-info\\*\\'" :quit t :select t :ttl 0)
       ("\\`\\*\\([Hh]elp\\|Apropos\\)"
        :size cae-popup-resize-help-buffer :side right :select t :quit t :ttl 0
        :slot 2 :vslot -8)
