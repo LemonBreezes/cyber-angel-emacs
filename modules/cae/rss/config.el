@@ -45,7 +45,7 @@
           [remap save-buffer] #'elfeed-tube-save
           :localleader
           :desc "Youtube fetch" "f" #'elfeed-tube-fetch)
-    (use-package elfeed-tube-mpv
+    (use-package! elfeed-tube-mpv
       :when (executable-find "mpv")
       :config
       (map! :map elfeed-show-mode-map
