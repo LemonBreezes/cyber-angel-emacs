@@ -281,13 +281,22 @@
   :init
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
-          :n "RET" #'detached-eshell-send-input))
+          :n "RET" #'detached-eshell-send-input
+          :localleader
+          "a" #'detached-eshell-attach
+          "d" #'detached-eshell-detach-session))
   (after! detached-shell
     (map! :map detached-shell-mode-map
-          :n "RET" #'detached-shell-send-input))
+          :n "RET" #'detached-shell-send-input
+          :localleader
+          "a" #'detached-shell-attach
+          "d" #'detached-shell-detach-session))
   (after! detached-vterm
     (map! :map detached-vterm-mode-map
-          :n "RET" #'detached-vterm-send-input))
+          :n "RET" #'detached-vterm-send-input
+          :localleader
+          "a" #'detached-vterm-attach
+          "d" #'detached-vterm-detach-session))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
