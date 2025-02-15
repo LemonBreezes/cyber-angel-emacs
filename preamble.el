@@ -81,4 +81,5 @@
                                          (eq (timer--args x)
                                              (timer--args y))
                                          (eq (timer--idle-delay x)
-                                             (timer--idle-delay y))))))
+                                             (timer--idle-delay y))
+                                         (+log x y)))))
