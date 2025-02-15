@@ -71,17 +71,3 @@
   (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
       (list file noerror t nosuffix must-suffix))))
-
-;; Clean up duplicate idle timers since we are hot-reloading our config.
-;; NOTE If the timers have a different idle time, the last one defined one will
-;; be taken.
-(defun cae-cleanup-duplicate-idle-timers ()
-  (setq timer-idle-list
-        (cl-remove-duplicates timer-idle-list
-                              :test (lambda (x y)
-                                      (and (equal (timer--function x)
-                                                  (timer--function y))
-                                           (equal (timer--args x)
-                                                  (timer--args y)))))))
-
-(run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
