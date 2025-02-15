@@ -73,12 +73,15 @@
       (list file noerror t nosuffix must-suffix))))
 
 ;; Clean up duplicate idle timers since we are hot-reloading our config.
-(setq timer-idle-list
-      (cl-remove-duplicates timer-idle-list
-                            :test (lambda (x y)
-                                    (and (eq (timer--function x)
-                                             (timer--function y))
-                                         (eq (timer--args x)
-                                             (timer--args y))
-                                         (eq (timer--idle-delay x)
-                                             (timer--idle-delay y))))))
+(defun cae-cleanup-duplicate-idle-timers ()
+  (setq timer-idle-list
+        (cl-remove-duplicates timer-idle-list
+                              :test (lambda (x y)
+                                      (and (eq (timer--function x)
+                                               (timer--function y))
+                                           (eq (timer--args x)
+                                               (timer--args y))
+                                           (eq (timer--idle-delay x)
+                                               (timer--idle-delay y)))))))
+
+(run-with-idle-timer 3 nil #'cae-cleanup-duplicate-idle-timers)
