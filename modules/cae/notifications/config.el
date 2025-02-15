@@ -1,14 +1,22 @@
 ;;; cae/notifications/config.el -*- lexical-binding: t; -*-
 
+(defvar cae-dbus-notifications-supported-p nil
+  "Whether the current system supports D-Bus notifications.")
+
+(run-with-idle-timer
+ 2 nil
+ (lambda ()
+   (setq cae-dbus-notifications-supported-p
+         (let ((path "/org/freedesktop/Notifications"))
+           (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path)))))
+
 (use-package! ednc
   :defer t :init
   (defun cae-ednc-load-h ()
     (and (require 'dbus nil t)
          (not (getenv "INSIDE_EXWM"))   ; In EXWM I prefer using Dunst.
-         (let ((path "/org/freedesktop/Notifications"))
-           (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))
          (ednc-mode +1)))
-  (run-with-idle-timer 1.5 nil #'cae-ednc-load-h)
+  (run-with-idle-timer 3 nil #'cae-ednc-load-h)
   (add-hook 'ednc-notification-presentation-functions
             #'ednc-popup-presentation-function)
   ;;(add-hook 'ednc-notification-presentation-functions
@@ -24,7 +32,11 @@
         "p" #'previous-line))
 
 (use-package! alert
-  :defer t :config
+  :defer t :init
+  (after! circe-notifications
+    (setq circe-notifications-alert-style nil))
+  (advice-add 'notifications-notify :around #'cae-notifications-notify-advice)
+  :config
   ;; BUG Otherwise `alert-send-notification' will block the UI.
   (advice-add #'alert-send-notification :around
               #'cae-ednc-wrap-async-call-process-a)
