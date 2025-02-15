@@ -539,17 +539,3 @@ image-mode buffers."
 (defun cae-open-vterm-in-new-workspace ()
   (interactive)
   (cae--open-terminal-in-new-workspace "*vterm*" #'vterm))
-
-;;;###autoload
-(defun cae-detached-attach-dwim (session)
-  (interactive
-   (pcase (buffer-local-value 'major-mode (current-buffer))
-     ('vterm-mode (eval (cadr (interactive-form #'detached-vterm-attach))))
-     ('eshell-mode (eval (cadr (interactive-form #'detached-eshell-attach-session))))
-     ('shell-mode (eval (cadr (interactive-form #'detached-shell-attach-session))))
-     (t (eval (cadr (interactive-form #'detached-attach-session))))))
-  (pcase (buffer-local-value 'major-mode (current-buffer))
-    ('vterm-mode (detached-vterm-attach session))
-    ('eshell-mode (detached-eshell-attach-session session))
-    ('shell-mode (detached-shell-attach-session session))
-    (t (detached-attach-session session))))
