@@ -10,7 +10,16 @@
 ;;;###autoload
 (defun cae-mu-init ()
   (interactive)
-  (compilation-start
-   (format "mu init --my-address=%s --maildir=%s && mu index"
-           user-mail-address
-           mail-source-directory)))
+  (let* ((emails
+          (mapconcat
+           (lambda (context)
+             (concat "--my-address="
+                     (cdr (assoc 'user-mail-address (mu4e-context-vars context)))))
+           mu4e-contexts
+           " ")))
+    (compilation-start
+     (format "mu init %s --maildir=%s && mu index"
+             emails
+             mail-source-directory))))
+
+(cdr (assoc 'user-mail-address (mu4e-context-vars (car mu4e-contexts))))
