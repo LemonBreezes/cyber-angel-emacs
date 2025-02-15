@@ -265,3 +265,29 @@
 (after! consult-yasnippet
   (setq consult-yasnippet-use-thing-at-point t
         consult-yasnippet-always-overwrite-thing-at-point t))
+
+(use-package! detached
+  :when (executable-find "dtach")
+  :hook (doom-first-input . detached-init)
+  :bind (;; Replace `async-shell-command' with `detached-shell-command'
+         ([remap async-shell-command] . detached-shell-command)
+         ;; Replace `compile' with `detached-compile'
+         ([remap compile] . detached-compile)
+         ([remap recompile] . detached-compile-recompile)
+         ;; Replace built in completion of sessions with `consult'
+         ([remap detached-open-session] . detached-consult-session))
+  :custom ((detached-show-output-on-attach t)
+           (detached-terminal-data-command system-type))
+  :init
+  (after! detached-eshell
+    (map! :map detached-eshell-mode-map
+          :n "RET" #'detached-eshell-send-input))
+  (after! detached-shell
+    (map! :map detached-shell-mode-map
+          :n "RET" #'detached-shell-send-input))
+  (after! detached-vterm
+    (map! :map detached-vterm-mode-map
+          :n "RET" #'detached-vterm-send-input))
+  :config
+  (setq detached-degraded-commands '("^ls"))
+  (setq detached-notification-function #'detached-extra-alert-notification))
