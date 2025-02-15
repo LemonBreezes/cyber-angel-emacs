@@ -5,14 +5,14 @@
   (interactive)
   (require 'org-rich-yank)
   (let* ((source-mode
-          (or (let ((mode (buffer-local-value 'major-mode org-rich-yank--buffer)))
-                (and org-rich-yank--buffer
-                     (buffer-live-p org-rich-yank--buffer)
-                     (if (parent-mode-is-derived-p mode 'prog-mode)
-                         mode
-                       (pcase mode
-                         ('debugger-mode 'emacs-lisp-mode)
-                         (_ nil)))))
+          (or (and org-rich-yank--buffer
+                   (let ((mode (buffer-local-value 'major-mode org-rich-yank--buffer)))
+                     (and (buffer-live-p org-rich-yank--buffer)
+                          (if (parent-mode-is-derived-p mode 'prog-mode)
+                              mode
+                            (pcase mode
+                              ('debugger-mode 'emacs-lisp-mode)
+                              (_ nil))))))
               (pcase (language-detection-string (current-kill 0))
                 ('ada 'ada-mode) ('c 'c-mode) ('cpp 'c++-mode)
                 ('clojure 'clojure-mode) ('csharp 'csharp-mode)
