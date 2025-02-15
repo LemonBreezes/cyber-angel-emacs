@@ -7,9 +7,9 @@
           (unless (fboundp 'cae-display-graphic-p)
             (defalias 'cae-display-graphic-p 'display-graphic-p))
 
-          ;; NOTE our config has code to remove duplicate idle timers.
-          ;; If you hot-reload your config, you will have duplicate timers. I
-          ;; only use idle timers in my config.
+          ;; NOTE our config has code to remove duplicate idle timers. If you
+          ;; hot-reload your config, you will have duplicate timers. I only use
+          ;; idle timers in my config.
 
           ;; Prevent an Elisp file from being saved if it contains an error.
           ;; This forces us to write our config so that it's idempotent, as it
