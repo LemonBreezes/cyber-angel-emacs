@@ -47,5 +47,7 @@
        (string-trim
         (detached--session-header session)))
       (goto-char (point-min))
-      (local-set-key (kbd "q") #'kill-buffer-and-window))
+      (local-set-key (kbd "q") #'kill-buffer-and-window)
+      (when (featurep 'evil)
+        (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window)))
     (pop-to-buffer buffer)))
