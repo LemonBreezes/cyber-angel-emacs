@@ -79,9 +79,9 @@
   (setq timer-idle-list
         (cl-remove-duplicates timer-idle-list
                               :test (lambda (x y)
-                                      (and (eq (timer--function x)
-                                               (timer--function y))
-                                           (eq (timer--args x)
-                                               (timer--args y)))))))
+                                      (and (equal (timer--function x)
+                                                  (timer--function y))
+                                           (equal (timer--args x)
+                                                  (timer--args y)))))))
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
