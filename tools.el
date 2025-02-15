@@ -307,7 +307,9 @@ the binding is copied to the returned keymap."
   (after! detached-init
     (map! :map embark-detached-map
           "h" #'detached-describe-session
-          "a" #'cae-detached-attach-dwim)
+          "a" #'cae-detached-attach-dwim
+          "d" #'detached-detach-session
+          "D" #'detached-delete-session)
     (map! :leader
           "D" (cae-filter-keymap-by-command-prefix embark-detached-map "detached-")))
   :config
