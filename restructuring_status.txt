@@ -1,1 +1,0 @@
-No additional package blocks require restructuring. The packages.el and config.el files provide full context, and the two lisp files (lisp/cae-bindings.el and lisp/cae-vlf.el) cover the Editor section references. No further changes are needed.
