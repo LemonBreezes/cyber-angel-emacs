@@ -151,16 +151,6 @@
          ([remap detached-open-session] . detached-consult-session))
   :custom ((detached-show-output-on-attach t)
            (detached-terminal-data-command system-type))
-  :init
-  (when (modulep! :completion vertico)
-    (after! detached-consult
-      (consult-customize
-       detached-consult--source-inactive-session
-       :items
-       (lambda ()
-         (mapcar #'car
-                 (seq-filter (lambda (s) (detached-session-inactive-p (cdr s)))
-                             (detached-session-candidates (detached-get-sessions))))))))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification)
