@@ -2,7 +2,7 @@
 
 (defvar cae-config-finished-loading nil)
 
-;;; Stuff that should not be disabled.
+;;; Core. Stuff that should not be disabled.
 
 (when cae-init-core-enabled-p
   (load! "core"))
