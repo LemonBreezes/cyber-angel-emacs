@@ -133,13 +133,13 @@
         :ig "C-d" #'cae-eshell-quit-or-delete-char
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
-(use-package eshell-atuin
+(use-package! eshell-atuin
   :when (executable-find "atuin")
   :defer t :after eshell
   :config
   (eshell-atuin-mode))
 
-(use-package detached
+(use-package! detached
   :when (executable-find "dtach")
   :hook (doom-first-input . detached-init)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
