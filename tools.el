@@ -1,21 +1,5 @@
 ;;; tools.el -*- lexical-binding: t; -*-
 
-(defun cae-filter-keymap-by-command-prefix (keymap prefix)
-  "Return a new keymap with only commands from KEYMAP whose names start with PREFIX.
-KEYMAP is the source keymap and PREFIX is a string.
-For every binding in KEYMAP that is a command and whose name starts with PREFIX,
-the binding is copied to the returned keymap."
-  (let ((new-map (make-sparse-keymap)))
-    (map-keymap
-     (lambda (key binding)
-       (when (and (commandp binding)
-                  (string-match-p prefix (symbol-name binding)))
-         ;; 'key' here is a single event (like an integer). We wrap it in a vector
-         ;; to create a proper key-sequence for define-key.
-         (define-key new-map (vector key) binding)))
-     keymap)
-    new-map))
-
 (when (modulep! :tools lsp)
   (load! "lisp/cae-lsp")
   (load! "lisp/cae-semantic"))
@@ -305,14 +289,13 @@ the binding is copied to the returned keymap."
     (map! :map detached-vterm-mode-map
           :n "RET" #'detached-vterm-send-input))
   (after! detached-init
-    (map! :map embark-detached-map
+    (map! :map detached-embark-action-map
           "h" #'detached-describe-session
           "a" #'cae-detached-attach-dwim
           "d" #'detached-detach-session
           "D" #'detached-delete-session)
     (map! :leader
-          "D" (cae-filter-keymap-by-command-prefix
-               embark-detached-map "\\`\\(?:cae-\\)?detached-")))
+          "D" detached-embark-action-map))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
