@@ -49,20 +49,6 @@
 ;; This is where I clone Git projects to.
 (defvar cae-repo-dir "~/src/")
 
-(defconst cae-mem-threshold (* 180 1024 1024)
-  "Memory threshold in bytes for enabling high GC thresholds.")
-(defconst cae-gc-threshold (* 128 1024 1024 1024)
-  "GC threshold to use when the system has ample memory.")
-
-(when (and (>= (num-processors) 32)
-           (not (eq system-type 'windows-nt))
-           (not (functionp 'igc-collect))
-           (> (car (memory-info)) cae-mem-threshold))
-  (setq gcmh-high-cons-threshold cae-gc-threshold
-        consult--gc-threshold cae-gc-threshold
-        cae-hacks-gc-cons-threshold cae-gc-threshold
-        +lsp--default-gcmh-high-cons-threshold cae-gc-threshold))
-
 ;; Do not start incrementally loading packages until I am actually AFK.
 (setq doom-incremental-first-idle-timer 60)
 
