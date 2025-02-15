@@ -8,7 +8,8 @@
  (lambda ()
    (setq cae-dbus-notifications-supported-p
          (let ((path "/org/freedesktop/Notifications"))
-           (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path)))
+           (when (require 'dbus nil t)
+             (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))))
    (if cae-dbus-notifications-supported-p
        (cae-ednc-load-h)
      ;; Use `alert' instead of `notifications-notify'.
