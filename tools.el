@@ -293,7 +293,7 @@
           :n "RET" #'detached-vterm-send-input))
   (after! detached-init
     (map! :map detached-embark-action-map
-          "h" #'detached-describe-session
+          "h" #'cae-detached-describe-session
           "a" #'cae-detached-attach-dwim
           "." #'detached-detach-session)
     (map! :leader
