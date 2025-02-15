@@ -1,6 +1,7 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'eshell-mode-abbrev-table
   '(
+    ("rpeo" "repo" nil :count 1)
     ("tailscalse" "tailscale" nil :count 1)
    ))
 
