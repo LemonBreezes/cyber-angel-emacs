@@ -11,6 +11,7 @@
            (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path)))
    (if cae-dbus-notifications-supported-p
        (cae-ednc-load-h)
+     ;; Use `alert' instead of `notifications-notify'.
      (advice-add 'notifications-notify :around #'cae-notifications-notify-advice))))
 
 (use-package! ednc
