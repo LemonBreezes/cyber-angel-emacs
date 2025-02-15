@@ -22,6 +22,8 @@
                       (message "internet working"))
                     (kill-buffer))))))
 
+(autoload 'detached-session-in-context "detached")
+
 ;;;###autoload
 (defun cae-detached-attach-dwim (session)
   (interactive
