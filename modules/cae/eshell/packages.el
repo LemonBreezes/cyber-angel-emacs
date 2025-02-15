@@ -8,6 +8,6 @@
 (package! eshell-prompt-extras)
 (package! tldr)
 (package! eshell-atuin)
-(package! detached)
+(package! detached :recipe (:host github :repo "LemonBreezes/detached"))
 
 (package! alert)
