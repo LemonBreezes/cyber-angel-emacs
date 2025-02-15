@@ -80,8 +80,6 @@
                                       (and (eq (timer--function x)
                                                (timer--function y))
                                            (eq (timer--args x)
-                                               (timer--args y))
-                                           (eq (timer--idle-delay x)
-                                               (timer--idle-delay y)))))))
+                                               (timer--args y)))))))
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
