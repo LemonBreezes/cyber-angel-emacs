@@ -294,7 +294,7 @@
           "a" #'cae-detached-attach-dwim
           "." #'detached-detach-session)
     (map! :leader
-          :desc "detached" "D" detached-embark-action-map))
+          :desc "detached" "d" detached-embark-action-map))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
