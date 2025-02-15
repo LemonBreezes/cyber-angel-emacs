@@ -9,7 +9,7 @@ the binding is copied to the returned keymap."
     (map-keymap
      (lambda (key binding)
        (when (and (commandp binding)
-                  (string-prefix-p prefix (symbol-name binding)))
+                  (string-match-p prefix (symbol-name binding)))
          ;; 'key' here is a single event (like an integer). We wrap it in a vector
          ;; to create a proper key-sequence for define-key.
          (define-key new-map (vector key) binding)))
@@ -311,7 +311,7 @@ the binding is copied to the returned keymap."
           "d" #'detached-detach-session
           "D" #'detached-delete-session)
     (map! :leader
-          "D" (cae-filter-keymap-by-command-prefix embark-detached-map "\\(?:cae-\\)?detached-")))
+          "D" (cae-filter-keymap-by-command-prefix embark-detached-map "\\`\\(?:cae-\\)?detached-")))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
