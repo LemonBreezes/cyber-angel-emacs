@@ -2,9 +2,9 @@
 
 (when (modulep! :ui workspaces)
   (add-hook 'circe-channel-mode-hook
-    (lambda ()
-      (when (+workspace-exists-p +irc--workspace-name)
-        (persp-add-buffer (current-buffer)))))
+            (lambda ()
+              (when (+workspace-exists-p +irc--workspace-name)
+                (persp-add-buffer (current-buffer)))))
   (defadvice! cae-irc-inhibit-workspace-saving-a (&optional inhibit-workspace)
     :after #'+irc-setup-wconf
     (when (and (modulep! :ui workspaces)
