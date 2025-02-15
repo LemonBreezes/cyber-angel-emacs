@@ -71,3 +71,5 @@
   (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
       (list file noerror t nosuffix must-suffix))))
+
+;; Clean up duplicate idle timers since we are hot-reloading our config.
