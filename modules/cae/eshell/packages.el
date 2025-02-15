@@ -9,5 +9,3 @@
 (package! tldr)
 (package! eshell-atuin)
 (package! detached :recipe (:host github :repo "LemonBreezes/detached.el"))
-
-(package! alert)
