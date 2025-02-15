@@ -4,7 +4,7 @@
   "Whether the current system supports D-Bus notifications.")
 
 (run-with-idle-timer
- 1.5 nil
+ 3 nil
  (lambda ()
    (setq cae-dbus-notifications-supported-p
          (let ((path "/org/freedesktop/Notifications"))
