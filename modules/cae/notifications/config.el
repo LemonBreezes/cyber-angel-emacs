@@ -3,17 +3,17 @@
 (defvar cae-dbus-notifications-supported-p nil
   "Whether the current system supports D-Bus notifications.")
 
-(run-with-idle-timer
- 3 nil
- (lambda ()
-   (setq cae-dbus-notifications-supported-p
-         (let ((path "/org/freedesktop/Notifications"))
-           (when (require 'dbus nil t)
-             (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))))
-   (if cae-dbus-notifications-supported-p
-       (cae-ednc-load-h)
-     ;; Use `alert' instead of `notifications-notify'.
-     (advice-add 'notifications-notify :around #'cae-notifications-notify-advice))))
+(defun cae-notifications-setup ()
+  (setq cae-dbus-notifications-supported-p
+        (let ((path "/org/freedesktop/Notifications"))
+          (when (require 'dbus nil t)
+            (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))))
+  (if cae-dbus-notifications-supported-p
+      (cae-ednc-load-h)
+    ;; Use `alert' instead of `notifications-notify'.
+    (advice-add 'notifications-notify :around #'cae-notifications-notify-advice)))
+
+(run-with-idle-timer 3 nil #'cae-notifications-setup)
 
 (use-package! ednc
   :defer t :init
