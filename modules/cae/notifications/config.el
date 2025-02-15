@@ -33,6 +33,8 @@
   :defer t :init
   (after! circe-notifications
     (setq circe-notifications-alert-style nil))
+  ;; Some elisp packages use `notifications-notify' directly and provide no easy
+  ;; way to use `alert'.
   (advice-add 'notifications-notify :around #'cae-notifications-notify-advice)
   :config
   ;; BUG Otherwise `alert-send-notification' will block the UI.
