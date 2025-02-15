@@ -1,7 +1,5 @@
 ;;; applications.el -*- lexical-binding: t; -*-
-;;
-;; Applications configuration (e.g. IRC/Workspaces support)
-;;
+
 (when (modulep! :ui workspaces)
   (add-hook 'circe-channel-mode-hook
     (lambda ()
