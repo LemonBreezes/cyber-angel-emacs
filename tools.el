@@ -304,8 +304,11 @@ the binding is copied to the returned keymap."
   (after! detached-vterm
     (map! :map detached-vterm-mode-map
           :n "RET" #'detached-vterm-send-input))
-  (map! :leader
-        "D" (cae-filter-keymap-by-command-prefix embark-detached-map "detached-"))
+  (after! detached-init
+    (map! :map embark-detached-map
+          "h" #'detached-describe-session)
+    (map! :leader
+          "D" (cae-filter-keymap-by-command-prefix embark-detached-map "detached-")))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
