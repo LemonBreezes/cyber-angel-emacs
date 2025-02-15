@@ -268,6 +268,7 @@
   (after! evil-escape
     (key-chord-define evil-insert-state-map "jk" #'evil-escape))
   (map! :map transient-base-map
+        ;; Extend `evil-escape' to quit transients.
         "<key-chord>" #'transient-quit-all))
 
 ;;Local Variables:
