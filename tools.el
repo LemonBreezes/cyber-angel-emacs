@@ -292,10 +292,9 @@
     (map! :map detached-embark-action-map
           "h" #'detached-describe-session
           "a" #'cae-detached-attach-dwim
-          "d" #'detached-detach-session
-          "D" #'detached-delete-session)
+          "." #'detached-detach-session)
     (map! :leader
-          "D" detached-embark-action-map))
+          :desc "detached" "D" detached-embark-action-map))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
