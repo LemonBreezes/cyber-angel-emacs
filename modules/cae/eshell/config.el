@@ -151,6 +151,16 @@
          ([remap detached-open-session] . detached-consult-session))
   :custom ((detached-show-output-on-attach t)
            (detached-terminal-data-command system-type))
+  :init
+  (after! detached-eshell
+    (map! :map detached-eshell-mode-map
+          :n "RET" #'detached-eshell-send-input))
+  (after! detached-shell
+    (map! :map detached-shell-mode-map
+          :n "RET" #'detached-shell-send-input))
+  (after! detached-vterm
+    (map! :map detached-vterm-mode-map
+          :n "RET" #'detached-vterm-send-input))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
