@@ -10,4 +10,7 @@
 ;;;###autoload
 (defun cae-mu-init ()
   (interactive)
-  (compilation-start "mu init --my-address=look@strawberrytea.xyz --maildir=/home/st/.mail && mu index"))
+  (compilation-start
+   (format "mu init --my-address=%s --maildir=%s && mu index"
+           user-mail-address
+           mail-source-directory)))
