@@ -109,7 +109,15 @@ This is the format used on Reddit for code blocks."
              ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
     (when (featurep 'vertico-posframe)
       (setf vertico-posframe-size-function (cae--get-vertico-posframe-size posframe)))
-    (embark-act arg)))
+    (minibuffer-with-setup-hook
+        (lambda ()
+          (local-set-key (kbd "C-z")
+                         (lambda () (interactive)
+                           (run-at-time 0.0 nil
+                                        (lambda ()
+                                          (vertico--exhibit)))
+                           (abort-recursive-edit))))
+      (embark-act arg))))
 
 ;;;###autoload
 (cl-defun cae-avy-embark-act-on-region ()
