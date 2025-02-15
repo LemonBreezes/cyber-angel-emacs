@@ -2,6 +2,8 @@
 
 (require 'cae-lib)
 
+;; Currently I am using "d" for `detached' instead.
+
 (use-package! denote
   :hook (dired-mode . denote-dired-mode)
   :defer t :init
