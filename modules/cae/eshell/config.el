@@ -43,7 +43,7 @@
   :before #'eshell-send-input
   (expand-abbrev))
 
-(use-package eshell-bookmark
+(use-package! eshell-bookmark
   :defer t :init
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
