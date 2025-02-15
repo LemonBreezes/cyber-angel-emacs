@@ -1,8 +1,13 @@
 ;;; tools.el -*- lexical-binding: t; -*-
 
 (when (modulep! :tools lsp)
-  (load! "lisp/cae-lsp")
-  (load! "lisp/cae-semantic"))
+  (load! "lisp/cae-lsp"))
+
+;; Disable Semantic.
+(defadvice! cae-semantic-disable-a (&rest _)
+  :override #'semantic-mode
+  ;; If something tries to enable semantic-mode, emit a backtrace.
+  (backtrace))
 
 ;; I use `w3m' because EWW is too slow.
 (use-package! w3m
