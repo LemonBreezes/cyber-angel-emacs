@@ -199,7 +199,7 @@
         (lambda (buf _)
           (display-buffer-same-window buf nil))))
 
-(use-package magit-file-icons
+(use-package! magit-file-icons
   :after magit
   :defer t :config
   (magit-file-icons-mode 1)
