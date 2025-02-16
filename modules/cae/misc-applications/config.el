@@ -416,7 +416,9 @@
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "c" "Chess"))
   (after! evil-snipe
-    (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes)))
+    (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))
+  (after! evil
+    (evil-set-initial-state #'chess-display-mode 'emacs)))
 
 (use-package! minesweeper
   :defer t :init
