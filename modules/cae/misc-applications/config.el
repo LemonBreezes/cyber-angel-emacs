@@ -418,7 +418,12 @@
   (after! evil-snipe
     (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))
   (after! evil
-    (evil-set-initial-state #'chess-display-mode 'emacs)))
+    (evil-set-initial-state #'chess-display-mode 'emacs)
+    (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'normal t)
+                       chess-display-mode-map)
+    (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'motion t)
+                       chess-display-mode-map)
+    (evil-define-key 'motion chess-display-mode-map "j" #'ignore)))
 
 (use-package! minesweeper
   :defer t :init
