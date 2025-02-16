@@ -227,7 +227,8 @@
 (use-package! helm-linux-disks
   :when (and (eq system-type 'gnu/linux)
              (or (modulep! :cae helm)
-                 (modulep! :completion helm)))
+                 (modulep! :completion helm))
+             (not (getenv "WSL_DISTRO_NAME")))
   :defer t :init
   (map! :map cae-misc-applications-system-map
         "D" #'helm-linux-disks)
