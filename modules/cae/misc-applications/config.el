@@ -420,8 +420,6 @@
   :config
   (after! evil
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'normal t)
-                       chess-display-mode-map)
-    (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'motion t)
                        chess-display-mode-map)))
 
 (use-package! minesweeper
