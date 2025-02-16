@@ -418,7 +418,6 @@
   (after! evil-snipe
     (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))
   (after! evil
-    (evil-set-initial-state #'chess-display-mode 'emacs)
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'normal t)
                        chess-display-mode-map)
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'motion t)
