@@ -859,4 +859,3 @@
         helm-emms-default-sources '(helm-source-emms-files
                                     helm-source-emms-streams
                                     helm-source-emms-dired)))
-
