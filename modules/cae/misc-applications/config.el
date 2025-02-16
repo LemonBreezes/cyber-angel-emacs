@@ -417,6 +417,7 @@
       "c" "Chess"))
   (after! evil-snipe
     (cl-pushnew #'chess-display-mode evil-snipe-disabled-modes))
+  :config
   (after! evil
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'normal t)
                        chess-display-mode-map)
