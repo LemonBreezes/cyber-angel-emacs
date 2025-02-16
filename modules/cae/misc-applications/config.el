@@ -34,7 +34,6 @@
     ("music" "m")
     ("quotes" "q")))
 
-
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
                (prefix (cadr app-type))
