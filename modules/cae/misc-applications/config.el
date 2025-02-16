@@ -422,8 +422,7 @@
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'normal t)
                        chess-display-mode-map)
     (set-keymap-parent (evil-get-auxiliary-keymap chess-display-mode-map 'motion t)
-                       chess-display-mode-map)
-    (evil-define-key* 'motion chess-display-mode-map "j" nil)))
+                       chess-display-mode-map)))
 
 (use-package! minesweeper
   :defer t :init
