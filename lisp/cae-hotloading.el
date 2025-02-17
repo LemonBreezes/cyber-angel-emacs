@@ -17,6 +17,13 @@
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
+(defun cae-cleanup-duplicate-dir-locals-classes ()
+  (setq dir-locals-directory-cache
+        (cl-remove-duplicates dir-locals-directory-cache
+                              :test #'equal)))
+
+(run-with-idle-timer 3 t #'cae-cleanup-duplicate-dir-locals-classes)
+
 (defun cae-dir-locals-cache-lookup (file)
   (setq file (expand-file-name file))
   (let ((best nil))
