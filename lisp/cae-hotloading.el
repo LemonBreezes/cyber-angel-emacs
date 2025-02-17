@@ -39,7 +39,8 @@ does it attempt to verify cache validity."
     best))
 
 ;; Reload all dir-local variables defined in my Emacs config when a file is
-;; saved. I am abusing the fact that all of them are defined through classes.
+;; saved. I am abusing the fact that all of them are defined through classes
+;; rather than `.dir-locals.el' files.
 (defun cae-hotloading-reload-all-dir-locals ()
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
