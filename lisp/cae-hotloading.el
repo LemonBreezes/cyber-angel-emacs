@@ -17,13 +17,6 @@
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
-(defun cae-cleanup-duplicate-dir-locals-classes ()
-  (setq dir-locals-directory-cache
-        (cl-remove-duplicates dir-locals-directory-cache
-                              :test #'equal)))
-
-(run-with-idle-timer 3 t #'cae-cleanup-duplicate-dir-locals-classes)
-
 (defun cae-dir-locals-cache-lookup (file)
   (setq file (expand-file-name file))
   (let ((best nil))
@@ -45,6 +38,9 @@
 ;; saved. I am abusing the fact that all of them are defined through classes
 ;; rather than `.dir-locals.el' files.
 (defun cae-hotloading-reload-all-dir-locals ()
+  (setq dir-locals-directory-cache
+        (cl-remove-duplicates dir-locals-directory-cache
+                              :test #'equal))
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
       (when (and (buffer-file-name)
