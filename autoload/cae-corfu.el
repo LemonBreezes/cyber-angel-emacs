@@ -24,6 +24,17 @@
       (call-interactively #'+default/insert-snippet)
     (call-interactively #'yasnippet-capf)))
 
+
+;;;###autoload
+(defun cae-cape-elisp ()
+  (interactive)
+  (cond
+   ((memq #'elisp-completion-at-point completion-at-point-functions)
+    (call-interactively #'elisp-completion-at-point))
+   ((cape--inside-block-p "elisp" "emacs-lisp")
+    (elisp-completion-at-point))
+   (t (call-interactively #'elisp-completion-at-point))))
+
 ;;;###autoload
 (defun +corfu-insert-wildcard-separator ()
   ;; I had to rename this command so that it doesn't start with "corfu-".
