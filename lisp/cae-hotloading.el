@@ -47,7 +47,6 @@ does it attempt to verify cache validity."
       (when (and (buffer-file-name)
                  (cae-dir-locals-cache-lookup (buffer-file-name)))
         (with-current-buffer buffer
-          (+log (buffer-name))
           (hack-dir-local-variables-non-file-buffer))))))
 
 (dir-locals-set-class-variables
