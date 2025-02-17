@@ -17,15 +17,12 @@
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
-(cl-defun cae-dir-locals-cache-lookup (file)
+(cl-defun cae-hotloading-dir-locals-cache-lookup (file)
   (dolist (entry dir-locals-directory-cache)
     (when (string-prefix-p (car entry) file
                            (memq system-type '(windows-nt cygwin ms-dos)))
       (cl-return-from cae-dir-locals-cache-lookup t))))
 
-;; Reload all dir-local variables defined in my Emacs config when a file is
-;; saved. I am abusing the fact that all of them are defined through classes
-;; rather than `.dir-locals.el' files.
 (defun cae-hotloading-reload-all-dir-locals ()
   (setq dir-locals-directory-cache
         (cl-remove-duplicates dir-locals-directory-cache
@@ -68,8 +65,7 @@
                        (not (string-match-p "/dir-local-files/"
                                             buffer-file-name))
                        (bound-and-true-p cae-config-finished-loading))
-              (add-hook 'write-file-functions 'eval-buffer 1 t)
-              (add-hook 'write-file-functions 'cae-hotloading-reload-all-dir-locals 2 t))
+              (add-hook 'write-file-functions 'eval-buffer 1 t))
 
             (when (and (buffer-file-name)
                        (derived-mode-p 'emacs-lisp-mode)
