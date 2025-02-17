@@ -95,7 +95,7 @@
     (pdf-tools-install t nil t)))
 
 (after! copilot
-  (unless (or (not copilot-node-executable)
+  (unless (or (not (executable-find "node"))
               (file-exists-p copilot-install-dir))
     (copilot-install-server)))
 
