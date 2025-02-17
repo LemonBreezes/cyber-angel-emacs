@@ -65,8 +65,7 @@
                        (not (string-match-p "/dir-local-files/"
                                             buffer-file-name))
                        (bound-and-true-p cae-config-finished-loading))
-              (add-hook 'write-file-functions 'eval-buffer 1 t)
-              (add-hook 'write-file-functions 'cae-hotloading-reload-all-dir-locals 2 t))
+              (add-hook 'write-file-functions 'eval-buffer 1 t))
 
             (when (and (buffer-file-name)
                        (derived-mode-p 'emacs-lisp-mode)
