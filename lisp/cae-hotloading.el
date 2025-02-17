@@ -40,12 +40,16 @@
   (setq dir-locals-directory-cache
         (cl-remove-duplicates dir-locals-directory-cache
                               :test #'equal))
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (when (and (buffer-file-name)
-                 (cae-dir-locals-cache-lookup (buffer-file-name)))
-        (with-current-buffer buffer
-          (hack-dir-local-variables-non-file-buffer))))))
+  (let ((dir-locals-directory-cache
+         (cl-remove-if (lambda (entry)
+                         (file-directory-p (symbol-name (cadr entry))))
+                       dir-locals-directory-cache)))
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (and (buffer-file-name)
+                   (cae-dir-locals-cache-lookup (buffer-file-name)))
+          (with-current-buffer buffer
+            (hack-dir-local-variables-non-file-buffer)))))))
 
 (dir-locals-set-class-variables
  'doom
