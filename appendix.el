@@ -95,9 +95,15 @@
     (pdf-tools-install t nil t)))
 
 (after! copilot
-  (unless (or (not (executable-find "node"))
-              (file-exists-p copilot-install-dir))
-    (copilot-install-server)))
+  (when (executable-find "node")
+    (condition-case err
+        (progn
+          (copilot-server-executable)
+          nil)
+      (error
+       (when (string-match-p "The package @github/copilot-language-server is not installed"
+                             (error-message-string err))
+         (copilot-install-server))))))
 
 ;; Do not spam me with warnings.
 (unless init-file-debug
