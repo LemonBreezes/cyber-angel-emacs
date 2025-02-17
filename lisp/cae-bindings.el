@@ -22,13 +22,7 @@
                      '(evil-ex-completion-map)))
   ;; We already have `consult-history' bound to `M-r' and `M-s'. This way we can
   ;; use `C-s' to search in the minibuffer.
-  "C-s"   nil
-  ;; We almost never have multiple lines in the minibuffer.
-  "C-j"   nil
-  "C-k"   nil
-  "C-S-j" nil
-  "C-S-k" nil
-  )
+  "C-s"   nil)
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
 (when (modulep! :completion vertico)
