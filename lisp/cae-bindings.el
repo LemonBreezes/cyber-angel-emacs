@@ -134,8 +134,7 @@
   (add-hook! 'org-load-hook :append
     (defun cae-org-fix-keybindings ()
       (map! :map org-mode-map
-            :ie [tab] nil)
-      (yas-minor-mode +1))))
+            :ie [tab] nil))))
 
 (after! diff-mode
   (map! :map diff-mode-map
