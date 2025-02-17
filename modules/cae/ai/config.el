@@ -136,7 +136,21 @@
     (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
     (after! midnight
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                   (buffer-name copilot-balancer-debug-buffer)))))
+                   (buffer-name copilot-balancer-debug-buffer))))
+  (defun cae--check-copilot-server ()
+    "Check if the Copilot server is installed.
+Call `copilot-server-executable' and if it signals an error
+about the missing package, run `copilot-install-server'."
+    (condition-case err
+        (progn
+          (copilot-server-executable)
+          nil)
+      (error
+       (when (string-match-p "The package @github/copilot-language-server is not installed"
+                             (error-message-string err))
+         (copilot-install-server)))))
+  
+  (add-hook 'copilot-mode-hook #'cae--check-copilot-server))
 
 (use-package! dall-e-shell
   :defer t :init
