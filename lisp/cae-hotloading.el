@@ -26,7 +26,6 @@
       ;; We check if "DIRECTORY" is a prefix of FILE and pick the longest match.
       (when (and
              ;; Only check for classes with symbol names.
-             (symbolp (cadr entry))
              (string-prefix-p (car entry) file
                               (memq system-type '(windows-nt cygwin ms-dos)))
              (or (null best)
