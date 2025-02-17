@@ -17,21 +17,11 @@
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
-(defun cae-dir-locals-cache-lookup (file)
-  (setq file (expand-file-name file))
-  (let ((best nil))
-    ;; Iterate over each cached entry in dir-locals-directory-cache.
-    (dolist (entry dir-locals-directory-cache)
-      ;; entry is typically ("DIRECTORY" CLASS MTIME ...)
-      ;; We check if "DIRECTORY" is a prefix of FILE and pick the longest match.
-      (when (and
-             ;; Only check for classes with symbol names.
-             (string-prefix-p (car entry) file
-                              (memq system-type '(windows-nt cygwin ms-dos)))
-             (or (null best)
-                 (> (length (car entry)) (length (car best)))))
-        (setq best entry)))
-    best))
+(cl-defun cae-dir-locals-cache-lookup (file)
+  (dolist (entry dir-locals-directory-cache)
+    (when (string-prefix-p (car entry) file
+                           (memq system-type '(windows-nt cygwin ms-dos)))
+      (cl-return-from cae-dir-locals-cache-lookup t))))
 
 ;; Reload all dir-local variables defined in my Emacs config when a file is
 ;; saved. I am abusing the fact that all of them are defined through classes
