@@ -17,27 +17,6 @@
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
-(cl-defun cae-hotloading-dir-locals-cache-lookup (file)
-  (dolist (entry dir-locals-directory-cache)
-    (when (string-prefix-p (car entry) file
-                           (memq system-type '(windows-nt cygwin ms-dos)))
-      (cl-return-from cae-dir-locals-cache-lookup t))))
-
-(defun cae-hotloading-reload-all-dir-locals ()
-  (setq dir-locals-directory-cache
-        (cl-remove-duplicates dir-locals-directory-cache
-                              :test #'equal))
-  (let ((dir-locals-directory-cache
-         (cl-remove-if (lambda (entry)
-                         (file-directory-p (symbol-name (cadr entry))))
-                       dir-locals-directory-cache)))
-    (dolist (buffer (buffer-list))
-      (with-current-buffer buffer
-        (when (and (buffer-file-name)
-                   (cae-dir-locals-cache-lookup (buffer-file-name)))
-          (with-current-buffer buffer
-            (hack-dir-local-variables-non-file-buffer)))))))
-
 (dir-locals-set-class-variables
  'doom
  '((nil
