@@ -203,7 +203,9 @@
       "C-x C-s"  #'yasnippet-capf
       "C-x C-o"  #'completion-at-point
       "C-x C-n"  #'cape-dabbrev
-      "C-x C-p"  #'+corfu/dabbrev-this-buffer)))
+      "C-x C-p"  #'+corfu/dabbrev-this-buffer)
+    (map! :prefix "C-x"
+          :i "e"   #'cae-cape-elisp-capf)))
 (map! :map ctl-x-map
       (:when (modulep! :cae ai +copilot)
        "C-c" #'copilot-complete)
