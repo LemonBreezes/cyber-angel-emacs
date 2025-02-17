@@ -18,23 +18,19 @@
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
 (defun cae-dir-locals-cache-lookup (file)
-  "Return the best matching `dir-locals-directory-cache' entry for FILE, ignoring any .dir-locals file checks.
-The returned value is an entry of the form:
-  (\"/path/to/dir\" CLASS MTIME ...)
-
-If no matching directory is found in `dir-locals-directory-cache',
-return nil.  This function does not parse `.dir-locals.el' nor
-does it attempt to verify cache validity."
   (setq file (expand-file-name file))
   (let ((best nil))
     ;; Iterate over each cached entry in dir-locals-directory-cache.
     (dolist (entry dir-locals-directory-cache)
       ;; entry is typically ("DIRECTORY" CLASS MTIME ...)
       ;; We check if "DIRECTORY" is a prefix of FILE and pick the longest match.
-      (when (and (string-prefix-p (car entry) file
-                                  (memq system-type '(windows-nt cygwin ms-dos)))
-                 (or (null best)
-                     (> (length (car entry)) (length (car best)))))
+      (when (and
+             ;; Only check for classes defined in my config.
+             (symbolp (cadr entry))
+             (string-prefix-p (car entry) file
+                              (memq system-type '(windows-nt cygwin ms-dos)))
+             (or (null best)
+                 (> (length (car entry)) (length (car best)))))
         (setq best entry)))
     best))
 
