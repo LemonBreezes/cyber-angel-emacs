@@ -32,7 +32,7 @@
     (elisp-completion-at-point))
    ((cape--inside-block-p "elisp" "emacs-lisp")
     (elisp-completion-at-point))
-   (t (elisp-completion-at-point))))
+   (t (cape-elisp-symbol))))
 
 ;;;###autoload
 (defun +corfu-insert-wildcard-separator ()
