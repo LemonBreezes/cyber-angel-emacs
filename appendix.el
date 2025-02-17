@@ -94,8 +94,8 @@
   (after! pdf-tools
     (pdf-tools-install t nil t)))
 
-(after! copilot
-  (when (executable-find "node")
+(when (executable-find "node")
+  (after! copilot
     (condition-case err
         (progn
           (copilot-server-executable)
