@@ -74,3 +74,7 @@
    (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/"))))))
 
 (dir-locals-set-directory-class doom-private-dir 'doom)
+
+;;Local Variables:
+;;eval: (cae-hotloading-reload-dir-locals-for-class 'doom)
+;;End:
