@@ -199,6 +199,7 @@
                          '(evil-ex-completion-map)))
       "C-x C-f"  #'cape-file
       "C-x s"    #'cape-dict
+      "C-x e"    #'cae-cape-elisp-capf
       "C-x C-s"  #'yasnippet-capf
       "C-x C-o"  #'completion-at-point
       "C-x C-n"  #'cape-dabbrev
