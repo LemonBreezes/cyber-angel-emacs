@@ -20,9 +20,15 @@
   :keymaps (append +default-minibuffer-maps
                    (when (modulep! :editor evil +everywhere)
                      '(evil-ex-completion-map)))
-  "C-s" nil)                         ;We already have `consult-history' bound
-                                        ;to `M-r' and `M-s'. This way we can use
-                                        ;`C-s' to search in the minibuffer.
+  ;; We already have `consult-history' bound to `M-r' and `M-s'. This way we can
+  ;; use `C-s' to search in the minibuffer.
+  "C-s"   nil
+  ;; We almost never have multiple lines in the minibuffer.
+  "C-j"   nil
+  "C-k"   nil
+  "C-S-j" nil
+  "C-S-k" nil
+  )
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
 (when (modulep! :completion vertico)
