@@ -133,6 +133,6 @@ the original function is used."
 
 ;;;###autoload
 (defun cae-notifications-wrap-async-call-process-a (oldfun &rest args)
-  (advice-add #'call-process :around #'cae-ednc-call-process-advice)
+  (advice-add #'call-process :around #'cae-notifications-call-process-advice)
   (unwind-protect (apply oldfun args)
-    (advice-remove #'call-process #'cae-ednc-call-process-advice)))
+    (advice-remove #'call-process #'cae-notifications-call-process-advice)))
