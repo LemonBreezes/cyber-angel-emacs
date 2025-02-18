@@ -8,6 +8,7 @@
         calendar-mark-diary-entries-flag t))
 
 (after! org
+  (require 'nerd-icons-faces)
   (setq org-directory (or (bound-and-true-p cae-multi-org-dir) "~/org/")
         org-extend-today-until 3
         org-startup-with-inline-images t
