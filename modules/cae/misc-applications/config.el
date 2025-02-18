@@ -424,6 +424,10 @@
     (map! :map chess-display-mode-map
           :n "/" #'chess-display-pass)))
 
+;; TODO
+(use-package! klondike
+  :defer t)
+
 (use-package! minesweeper
   :defer t :init
   (defvar cae-minesweeper-workspace-name "*minesweeper*")
