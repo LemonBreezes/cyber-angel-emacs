@@ -8,8 +8,7 @@
   (add-to-list 'global-mode-string 'dired-rsync-modeline-status 'append))
 
 (after! dired
-  ;; TODO Investigate `p7zip' for `rar'.
-  ;; Use parallel versions of comression programs.
+  ;; Use parallel versions of compression programs.
   ;; Install `pigz', `pbzip2', `pixz', `plzip', and `lzop' for parallel decompression.
   ;; Install `dpkg', `rar', and `unrar' as well.
   ;; `pax' and `7z' I don't install unless I need them.
@@ -17,7 +16,8 @@
         '(("\\.gz\\'" . "pigz -9f %i")
           ("\\.bz2\\'" . "pbzip2 -9f %i")
           ("\\.xz\\'" . "pixz -9f %i")
-          ("\\.zst\\'" . "zstd -qf -19 --rm -o %o %i"))
+          ("\\.zst\\'" . "zstd -qf -19 --rm -o %o %i")
+          ("\\.rar\\'" . "rar a -idq %o %i"))
         dired-compress-files-alist
         '(("\\.tar\\.gz\\'" . "tar -cf - %i | pigz -c9 > %o")
           ("\\.tar\\.bz2\\'" . "tar -cf - %i | pbzip2 -c9 > %o")
