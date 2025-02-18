@@ -6,17 +6,16 @@
     (setenv "PATH" (concat (getenv "PATH") ":" dir))
     (setq exec-path (append exec-path (list dir)))))
 
-(defun cae-add-hostname-to-modeline ()
-  "Compute a short hash from system-name and add it to `global-mode-string`."
-  (let ((hostname (concat " " (truncate-string-to-width
-                               (secure-hash 'sha512 system-name) 6))))
-    (setf (aref hostname 1) (downcase (aref system-name 0)))
-    (unless (or (equal global-mode-string (list hostname))
-                (cl-member hostname global-mode-string
+(defun cae-add-cpus-to-modeline ()
+  "Show the number of CPUs on the system in `global-mode-string`."
+  (let* ((n-cpus (num-processors))
+         (cpu-string (format " CPUs: %d" n-cpus)))
+    (unless (or (equal global-mode-string (list cpu-string))
+                (cl-member cpu-string global-mode-string
                            :test (lambda (x y) (and (stringp y) (string-equal x y)))))
       (if (and global-mode-string (listp global-mode-string))
-          (appendq! global-mode-string (list hostname))
-        (setq global-mode-string (list hostname))))))
+          (appendq! global-mode-string (list cpu-string))
+        (setq global-mode-string (list cpu-string))))))
 
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
@@ -37,7 +36,7 @@
   (dolist (dir (list doom-user-dir doom-emacs-dir "~/org" (getenv "HOME")))
     (add-to-list 'safe-local-variable-directories dir)))
 
-(cae-add-hostname-to-modeline)
+(cae-add-cpus-to-modeline)
 
 ;; Set up the secrets directory and its module path.
 (defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
