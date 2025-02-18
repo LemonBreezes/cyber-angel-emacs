@@ -46,6 +46,7 @@
 (package! autotetris-mode)
 (package! speed-type)
 (package! chess)
+(package! klondike)
 (package! minesweeper)
 
 ;; Eye candy
