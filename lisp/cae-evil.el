@@ -115,6 +115,9 @@
   "C-k"    nil
   "C-S-j"  nil
   "C-S-k"  nil)
+(define-key! read-expression-map
+  "C-j" nil
+  "C-k" nil)
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
