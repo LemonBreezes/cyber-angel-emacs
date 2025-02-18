@@ -26,7 +26,8 @@
           ("\\.tar\\.lz\\'" . "tar -cf - %i | plzip -c9 > %o")
           ("\\.tar\\.lzo\\'" . "tar -cf - %i | lzop -c9 > %o")
           ("\\.zip\\'" . "pigz --zip -f9 %o -r --filesync %i")
-          ("\\.pax\\'" . "pax -wf %o %i"))
+          ("\\.pax\\'" . "pax -wf %o %i")
+          ("\\.rar\\'" . "rar a -idq %o %i"))
         dired-compress-file-suffixes
         '(("\\.tar\\.gz\\'" "" "pigz -dc %i | tar -xf -")
           ("\\.tar\\.xz\\'" "" "pixz -dc %i | tar -xf -")
@@ -45,6 +46,7 @@
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
           ("\\.7z\\'" "" "7z x -aoa -o%o %i")
+          ("\\.rar\\'" "" "unrar x -o+ %i %o")
           ("\\.tar\\'" ".tgz" nil))
 
         ;; From Dirvish's documentation.
