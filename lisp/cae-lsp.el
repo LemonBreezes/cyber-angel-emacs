@@ -114,7 +114,9 @@
 
   (use-package! window-stool
     :config
-    (add-hook 'prog-mode-hook #'window-stool-mode)))
+    (add-hook 'prog-mode-hook #'window-stool-mode)
+    (after! consult
+      (add-to-list 'consult-preview-allowed-hooks #'window-stool-mode))))
 
 ;; I don't really need LSP for the XML files I edit.
 (remove-hook 'nxml-mode-local-vars-hook #'lsp!)
