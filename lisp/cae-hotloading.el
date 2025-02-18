@@ -31,6 +31,7 @@
                                        `("init.el"
                                          ,dir-locals-file
                                          "custom.el"
+                                         "doctor.el"
                                          "packages.el")
                                        :test #'string=))
                        (not (string-match-p "/packages/"
