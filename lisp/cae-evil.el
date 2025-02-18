@@ -109,6 +109,11 @@
   (map! :map isearch-mode-map
         "C-w" nil
         "C-S-w" #'isearch-yank-word-or-char))
+(define-key! :keymaps +default-minibuffer-maps
+  "C-j"    nil
+  "C-k"    nil
+  "C-S-j"  nil
+  "C-S-k"  nil)
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
