@@ -109,6 +109,7 @@
   (map! :map isearch-mode-map
         "C-w" nil
         "C-S-w" #'isearch-yank-word-or-char))
+;; These keybindings are so garbage. I can't believe Doom Emacs has them.
 (define-key! :keymaps +default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil
