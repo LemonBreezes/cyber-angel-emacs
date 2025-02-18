@@ -113,9 +113,8 @@
 ;; Fix the garbage Doom minibuffer keybindings by enabling Evil states there.
 (unless (modulep! :editor evil +hybrid)
   (setq evil-want-minibuffer t)
-  (dolist (map +default-minibuffer-maps)
-    (map! :map map
-          :i "C-y" #'cae-yank-word-to-minibuffer))
+  (define-key! :states 'insert :keymaps +default-minibuffer-maps
+    "C-y"    #'cae-yank-word-to-minibuffer)
   (map! :map isearch-mode-map
         :i "C-y" #'isearch-yank-word-or-char))
 
