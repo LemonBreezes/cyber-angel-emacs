@@ -110,6 +110,7 @@
         "C-w" nil
         "C-S-w" #'isearch-yank-word-or-char))
 ;; These keybindings are so garbage. I can't believe Doom Emacs has them.
+;; Use C-n/C-p in the minibuffer instead.
 (define-key! :keymaps +default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil
@@ -118,6 +119,9 @@
 (define-key! read-expression-map
   "C-j" nil
   "C-k" nil)
+(define-key! :states 'insert :keymaps +default-minibuffer-maps
+  "C-j"    nil
+  "C-k"    nil)
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
