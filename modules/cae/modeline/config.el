@@ -192,7 +192,8 @@
                                         ;persp-mode
                                      eat-eshell-mode
                                      envrc-mode
-                                     evil-mc-mode))
+                                     evil-mc-mode
+                                     which-func-mode))
     (setq-hook! 'lsp-mode-hook
       minions-prominent-modes (delq 'flycheck-mode
                                     (default-value 'minions-prominent-modes)))
