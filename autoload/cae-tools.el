@@ -1,7 +1,7 @@
 ;;; autoload/cae-tools.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun ping-status ()
+(defun cae-ping-status ()
   (interactive)
   (let ((buffer (generate-new-buffer "*internet*")))
     (make-process
