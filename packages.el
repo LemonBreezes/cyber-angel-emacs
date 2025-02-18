@@ -87,7 +87,7 @@
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
   (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster"))
-  (package! breadcrumb))
+  (package! window-stool :recipe (:host github :repo "jaszhe/window-stool" :files ("*.el"))))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
