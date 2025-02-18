@@ -9,7 +9,7 @@
 (defun cae-add-cpus-to-modeline ()
   "Show the number of CPUs on the system in `global-mode-string`."
   (let* ((n-cpus (num-processors))
-         (cpu-string (format " CPUs: %d" n-cpus)))
+         (cpu-string (format " %d" n-cpus)))
     (unless (or (equal global-mode-string (list cpu-string))
                 (cl-member cpu-string global-mode-string
                            :test (lambda (x y) (and (stringp y) (string-equal x y)))))
