@@ -103,12 +103,12 @@
     "C-v" nil
     "C-w" nil
     "C-z" nil))
-;;(define-key! :keymaps +default-minibuffer-maps
-;;  "C-S-w"    #'cae-yank-word-to-minibuffer)
-;;(after! isearch
-;;  (map! :map isearch-mode-map
-;;        "C-w" nil
-;;        "C-S-w" #'isearch-yank-word-or-char))
+(define-key! :keymaps +default-minibuffer-maps
+  "C-S-w"    #'cae-yank-word-to-minibuffer)
+(after! isearch
+  (map! :map isearch-mode-map
+        "C-w" nil
+        "C-S-w" #'isearch-yank-word-or-char))
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
