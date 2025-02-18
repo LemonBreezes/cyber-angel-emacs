@@ -140,7 +140,6 @@
 (package! vline)
 (package! try)
 (package! ov)
-(package! lsp-ui)
 (package! substitute)
 
 ;;; Lang
