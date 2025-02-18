@@ -104,14 +104,20 @@
     "C-w" nil
     "C-z" nil))
 (define-key! :keymaps +default-minibuffer-maps
-  "C-y"    #'cae-yank-word-to-minibuffer)
+  "C-S-w"    #'cae-yank-word-to-minibuffer)
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
-        "C-y" #'isearch-yank-word-or-char))
+        "C-S-w" #'isearch-yank-word-or-char))
 
+;; Fix the garbage Doom minibuffer keybindings by enabling Evil states there.
 (unless (modulep! :editor evil +hybrid)
-  (setq evil-want-minibuffer t))
+  (setq evil-want-minibuffer t)
+  (dolist (map +default-minibuffer-maps)
+    (map! :map map
+          :i "C-y" #'cae-yank-word-to-minibuffer))
+  (map! :map isearch-mode-map
+        :i "C-y" #'isearch-yank-word-or-char))
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
