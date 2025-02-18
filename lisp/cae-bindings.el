@@ -333,7 +333,6 @@
       (:prefix "c"
        (:when (modulep! :tools editorconfig)
         :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
-       :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu
        (:prefix-map ("=" . "substitute")
         :desc "Substitute in defun" "d" #'substitute-target-in-defun
         :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
