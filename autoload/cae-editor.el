@@ -299,6 +299,7 @@ also marks comment with leading whitespace"
     (mapc #'delete-overlay cae-yank-point-overlays)
     (setq cae-yank-point-overlays nil)))
 
+;; TODO Fix this broken function. It does not work on repeated calls.
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
   (interactive "p")
