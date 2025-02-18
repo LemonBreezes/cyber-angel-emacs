@@ -26,11 +26,11 @@
         org-read-date-force-compatible-dates nil)
   (when (require 'nerd-icons-faces nil t)
     (setq org-priority-faces
-        '((?A . nerd-icons-red)
-          (?B . nerd-icons-orange)
-          (?C . nerd-icons-yellow)
-          (?D . nerd-icons-green)
-          (?E . nerd-icons-blue))))
+          '((?A . nerd-icons-red)
+            (?B . nerd-icons-orange)
+            (?C . nerd-icons-yellow)
+            (?D . nerd-icons-green)
+            (?E . nerd-icons-blue))))
   (when (modulep! :lang org +roam2)
     (setq +org-roam-auto-backlinks-buffer nil))
   (map! :map org-mode-map
