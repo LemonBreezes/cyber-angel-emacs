@@ -1,5 +1,7 @@
 ;;; autoload/cae-multi.el -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (defvar cae-multi-sync-running nil
   "Non-nil if `cae-multi-sync-repositories' is currently running.")
 
@@ -95,115 +97,124 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
 (defun cae-multi-sync-repositories (&optional verb-level)
   (interactive (list (if current-prefix-arg 2 1)))
   (unless verb-level (setq verb-level 0))
-  (if cae-multi-sync-running
+  (if (cl-find-if (lambda (proc)
+                    (and (process-live-p proc)
+                         (let ((cmd (process-command proc)))
+                           (and cmd (string= (car cmd) "git")))))
+                  (process-list))
       (progn
         (when (equal verb-level 1)
-          (message "Warning: cae-multi-sync-repositories is already running."))
-        nil)  ; exit immediately
-    (setq cae-multi-sync-running t)
-    (let ((start-time (current-time))
-          (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
-          (all-ops-succeeded t)
-          (pending-private 0)  ; count of repos entirely in doom-private-dir
-          (private-changed nil)  ; flag: did any private repo change?
-          (initial-hashes (make-hash-table :test #'equal))
-          (pending-repos 0)    ; count of repos with active sync chains
-          doom-sync-proc      ; will hold doom sync process if started
-          sync-finalized)     ; flag to ensure we finalize only once
-      (with-current-buffer output-buffer (erase-buffer))
-      (cl-labels
-          ((repo-sync-finished (repo-dir)
-                               "Called at the end of a repository's sync chain.
+          (message "Not running cae-multi-sync-repositories: Git subprocesses are active."))
+        nil)
+    (if cae-multi-sync-running
+        (progn
+          (when (equal verb-level 1)
+            (message "Warning: cae-multi-sync-repositories is already running."))
+          nil)  ; exit immediately
+      (setq cae-multi-sync-running t)
+      (let ((start-time (current-time))
+            (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
+            (all-ops-succeeded t)
+            (pending-private 0)  ; count of repos entirely in doom-private-dir
+            (private-changed nil)  ; flag: did any private repo change?
+            (initial-hashes (make-hash-table :test #'equal))
+            (pending-repos 0)    ; count of repos with active sync chains
+            doom-sync-proc      ; will hold doom sync process if started
+            sync-finalized)     ; flag to ensure we finalize only once
+        (with-current-buffer output-buffer (erase-buffer))
+        (cl-labels
+            ((repo-sync-finished (repo-dir)
+                                 "Called at the end of a repository's sync chain.
 If the repo is in doom-private, call repo-finalize.
 Then decrement the pending counter and, if zero, clear the running flag."
-                               (when (string-prefix-p (file-truename doom-private-dir)
-                                                      (file-truename repo-dir))
-                                 (repo-finalize repo-dir))
-                               (setq pending-repos (1- pending-repos))
-                               (when (zerop pending-repos)
-                                 (setq cae-multi-sync-running nil)
-                                 (if doom-sync-proc
-                                     nil
-                                   (finalize-all))))
-           (repo-finalize (repo-dir)
-                          "Finalize a repo in doom-private-dir."
-                          (let ((old-hash (gethash repo-dir initial-hashes))
-                                (new-hash (cae-multi--get-repo-commit repo-dir)))
-                            (unless (equal old-hash new-hash)
-                              (setq private-changed t))
-                            (setq pending-private (1- pending-private))
-                            (when (zerop pending-private)
-                              (if private-changed
-                                  (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))
-                                (when (>= verb-level 1)
-                                  (message "No changes detected in doom-private repositories; skipping doom sync"))))))
-           (maybe-finalize (repo-dir)
-                           "Call repo-finalize only for a repo that lies within doom-private-dir."
-                           (when (string-prefix-p (file-truename doom-private-dir)
-                                                  (file-truename repo-dir))
-                             (repo-finalize repo-dir)))
+                                 (when (string-prefix-p (file-truename doom-private-dir)
+                                                        (file-truename repo-dir))
+                                   (repo-finalize repo-dir))
+                                 (setq pending-repos (1- pending-repos))
+                                 (when (zerop pending-repos)
+                                   (setq cae-multi-sync-running nil)
+                                   (if doom-sync-proc
+                                       nil
+                                     (finalize-all))))
+             (repo-finalize (repo-dir)
+                            "Finalize a repo in doom-private-dir."
+                            (let ((old-hash (gethash repo-dir initial-hashes))
+                                  (new-hash (cae-multi--get-repo-commit repo-dir)))
+                              (unless (equal old-hash new-hash)
+                                (setq private-changed t))
+                              (setq pending-private (1- pending-private))
+                              (when (zerop pending-private)
+                                (if private-changed
+                                    (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))
+                                  (when (>= verb-level 1)
+                                    (message "No changes detected in doom-private repositories; skipping doom sync"))))))
+             (maybe-finalize (repo-dir)
+                             "Call repo-finalize only for a repo that lies within doom-private-dir."
+                             (when (string-prefix-p (file-truename doom-private-dir)
+                                                    (file-truename repo-dir))
+                               (repo-finalize repo-dir)))
 
-           (finalize-all ()
-                         (unless sync-finalized
-                           (setq sync-finalized t)
-                           (when (>= verb-level 1)
-                             (if all-ops-succeeded
-                                 (message "All sync operations finished successfully in %.2f seconds"
-                                          (float-time (time-subtract (current-time) start-time)))
-                               (message "Sync operations finished with errors in %.2f seconds"
-                                        (float-time (time-subtract (current-time) start-time)))))))
-           (start-push-step (repo-dir)
-                            (cae-multi--run-git-process
-                             repo-dir
-                             "push"
-                             '("push")
-                             nil
-                             nil
-                             (lambda () (repo-sync-finished repo-dir))
-                             output-buffer
-                             verb-level
-                             (lambda () (setq all-ops-succeeded nil))))
-           (start-merge-step (repo-dir)
-                             (cae-multi--run-git-process
-                              repo-dir
-                              "rebase"
-                              '("rebase" "origin/master")
-                              (lambda (buf)
-                                (with-current-buffer buf
-                                  (save-excursion
-                                    (goto-char (point-min))
-                                    (re-search-forward "CONFLICT" nil t))))
-                              (lambda () (start-push-step repo-dir))
-                              (lambda () (repo-sync-finished repo-dir))
-                              output-buffer
-                              verb-level
-                              (lambda () (setq all-ops-succeeded nil))))
-           (start-fetch-step (repo-dir)
-                             (cae-multi--run-git-process
-                              repo-dir
-                              "fetch"
-                              '("fetch" "origin")
-                              nil
-                              (lambda () (start-merge-step repo-dir))
-                              (lambda () (repo-sync-finished repo-dir))
-                              output-buffer
-                              verb-level
-                              (lambda () (setq all-ops-succeeded nil)))))
-        (dolist (repo-dir cae-multi-repositories)
-          (let ((default-directory repo-dir))
-            (when (file-directory-p (expand-file-name ".git" repo-dir))
-              (if (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
-                  (when (>= verb-level 1)
-                    (message "Git lockfile exists in %s, skipping update" repo-dir))
-                (setq pending-repos (1+ pending-repos))
-                (when (string-prefix-p (file-truename doom-private-dir)
-                                       (file-truename repo-dir))
-                  (puthash repo-dir (cae-multi--get-repo-commit repo-dir) initial-hashes)
-                  (setq pending-private (1+ pending-private)))
-                (start-fetch-step repo-dir)))))
-        (when (zerop pending-repos)
-          (setq cae-multi-sync-running nil))
-        nil))))
+             (finalize-all ()
+                           (unless sync-finalized
+                             (setq sync-finalized t)
+                             (when (>= verb-level 1)
+                               (if all-ops-succeeded
+                                   (message "All sync operations finished successfully in %.2f seconds"
+                                            (float-time (time-subtract (current-time) start-time)))
+                                 (message "Sync operations finished with errors in %.2f seconds"
+                                          (float-time (time-subtract (current-time) start-time)))))))
+             (start-push-step (repo-dir)
+                              (cae-multi--run-git-process
+                               repo-dir
+                               "push"
+                               '("push")
+                               nil
+                               nil
+                               (lambda () (repo-sync-finished repo-dir))
+                               output-buffer
+                               verb-level
+                               (lambda () (setq all-ops-succeeded nil))))
+             (start-merge-step (repo-dir)
+                               (cae-multi--run-git-process
+                                repo-dir
+                                "rebase"
+                                '("rebase" "origin/master")
+                                (lambda (buf)
+                                  (with-current-buffer buf
+                                    (save-excursion
+                                      (goto-char (point-min))
+                                      (re-search-forward "CONFLICT" nil t))))
+                                (lambda () (start-push-step repo-dir))
+                                (lambda () (repo-sync-finished repo-dir))
+                                output-buffer
+                                verb-level
+                                (lambda () (setq all-ops-succeeded nil))))
+             (start-fetch-step (repo-dir)
+                               (cae-multi--run-git-process
+                                repo-dir
+                                "fetch"
+                                '("fetch" "origin")
+                                nil
+                                (lambda () (start-merge-step repo-dir))
+                                (lambda () (repo-sync-finished repo-dir))
+                                output-buffer
+                                verb-level
+                                (lambda () (setq all-ops-succeeded nil)))))
+          (dolist (repo-dir cae-multi-repositories)
+            (let ((default-directory repo-dir))
+              (when (file-directory-p (expand-file-name ".git" repo-dir))
+                (if (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
+                    (when (>= verb-level 1)
+                      (message "Git lockfile exists in %s, skipping update" repo-dir))
+                  (setq pending-repos (1+ pending-repos))
+                  (when (string-prefix-p (file-truename doom-private-dir)
+                                         (file-truename repo-dir))
+                    (puthash repo-dir (cae-multi--get-repo-commit repo-dir) initial-hashes)
+                    (setq pending-private (1+ pending-private)))
+                  (start-fetch-step repo-dir)))))
+          (when (zerop pending-repos)
+            (setq cae-multi-sync-running nil))
+          nil)))))
 
 (defun cae-multi--run-doom-sync (verb-level &optional start-time finalize-callback)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
