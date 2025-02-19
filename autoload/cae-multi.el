@@ -109,13 +109,47 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                            proc))
          ;; For each repository we chain the steps:
          (start-push-step (repo-dir)
-                          (start-git-step repo-dir "push" (list "push") nil))
+                          (start-git-step repo-dir "push" (list "push")
+                                          (lambda () (handle-submodule repo-dir))))
          (start-merge-step (repo-dir)
                            (start-git-step repo-dir "merge" (list "merge" "origin/master")
                                            (lambda () (start-push-step repo-dir))))
          (start-fetch-step (repo-dir)
                            (start-git-step repo-dir "fetch" (list "fetch" "origin")
-                                           (lambda () (start-merge-step repo-dir)))))
+                                           (lambda () (start-merge-step repo-dir))))
+         (handle-submodule (repo-dir)
+           "Start the submodule update process for REPO-DIR and set its sentinel."
+           (let ((submodule-process
+                  (start-process "git-submodule-update-process"
+                                 output-buffer
+                                 "git" "submodule" "update" "--init" "--recursive")))
+             (set-process-sentinel
+              submodule-process
+              (lambda (subproc subevent)
+                (when (memq (process-status subproc) '(exit signal))
+                  (if (/= (process-exit-status subproc) 0)
+                      (progn
+                        (message "Git submodule update failed in %s" repo-dir)
+                        (with-current-buffer output-buffer
+                          (goto-char (point-max))
+                          (insert (format "\nError: Git submodule update failed in repository %s\n"
+                                          repo-dir)))
+                        (display-buffer output-buffer)
+                        (setq all-ops-succeeded nil))
+                    (when (>= verb-level 1)
+                      (message "Git submodule update succeeded in %s" repo-dir)))
+                  (with-current-buffer output-buffer
+                    (save-excursion
+                      (goto-char (point-max))
+                      (if (re-search-backward "\\bCONFLICT\\b" nil t)
+                          (progn
+                            (message "Conflict detected during git submodule update in %s" repo-dir)
+                            (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
+                            (display-buffer output-buffer)
+                            (setq all-ops-succeeded nil))
+                        (when (>= verb-level 2)
+                          (message "Submodules updated successfully in %s" repo-dir)))))
+                  (finalize))))))
       ;; For each directory listed in `cae-multi-repositories' (a global list of repo paths)
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
