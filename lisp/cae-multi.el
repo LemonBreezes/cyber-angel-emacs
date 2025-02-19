@@ -8,6 +8,9 @@
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
 (defvar cae-multi-org-dir "~/org/")
 
+(defvar cae-multi-last-sync-duration 30
+  "Duration in seconds of the last repository sync. Used to schedule the next sync.")
+
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
@@ -80,11 +83,13 @@
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
-;; Ideally, I would want a dynamic sync time based on the amount of time it
-;; takes to sync. But for now, I will just use a fixed time.
 (defun cae-multi-sync-repositories-if-idle ()
   (when (> (time-to-seconds (current-idle-time)) 15)
-    (cae-multi-sync-repositories)))
+    (let ((start-time (current-time)))
+      (cae-multi-sync-repositories)
+      (setq cae-multi-last-sync-duration
+            (float-time (time-subtract (current-time) start-time)))))
+  (run-at-time cae-multi-last-sync-duration nil #'cae-multi-sync-repositories-if-idle))
 
 (dir-locals-set-class-variables
  'home
@@ -109,4 +114,4 @@
 (dir-locals-set-directory-class (getenv "HOME") 'home)
 
 (when cae-multi-enable-auto-pull
-  (run-with-timer 30 30 #'cae-multi-sync-repositories-if-idle))
+  (run-at-time 30 nil #'cae-multi-sync-repositories-if-idle))
