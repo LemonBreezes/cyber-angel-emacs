@@ -176,7 +176,7 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                (lambda () (repo-sync-finished repo-dir))
                                output-buffer
                                verb-level
-                               (lambda () (setq all-ops-succeeded nil))))
+                               (lambda () (message "Skipping push error for repository: %s" repo-dir))))
              (start-fetch-step (repo-dir)
                                (cae-multi--run-git-process
                                 repo-dir
