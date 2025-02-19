@@ -80,5 +80,9 @@
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
+(defun cae-multi-sync-repositories-if-idle ()
+  (when (> (current-idle-time) 30)
+    (cae-multi-sync-repositories)))
+
 (when cae-multi-enable-auto-pull
-  (run-with-idle-timer 60 t #'cae-multi-sync-repositories))
+  (run-with-timer 60 t #'cae-multi-sync-repositories-if-idle))
