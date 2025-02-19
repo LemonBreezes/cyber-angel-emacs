@@ -70,7 +70,6 @@ Also resets the projectile cache once for each affected directory."
             (hack-dir-local-variables-non-file-buffer))
           (puthash (car entry) t dirs))))
     (maphash (lambda (dir _)
-               (+log dir)
                (cae-hotloading-invalidate-project-cache dir))
              dirs)))
 
