@@ -110,13 +110,16 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
          ;; For each repository we chain the steps:
          (start-push-step (repo-dir)
                           (start-git-step repo-dir "push" (list "push")
-                                          (lambda () (handle-submodule repo-dir))))
+                                          (lambda () (finalize))))
          (start-merge-step (repo-dir)
                            (start-git-step repo-dir "merge" (list "merge" "origin/master")
                                            (lambda () (start-push-step repo-dir))))
          (start-fetch-step (repo-dir)
                            (start-git-step repo-dir "fetch" (list "fetch" "origin")
-                                           (lambda () (start-merge-step repo-dir))))
+                                           (lambda ()
+                                             (setq pending-processes (1+ pending-processes))
+                                             (handle-submodule repo-dir)
+                                             (start-merge-step repo-dir))))
          (handle-submodule (repo-dir)
            "Start the submodule update process for REPO-DIR and set its sentinel."
            (let ((submodule-process
