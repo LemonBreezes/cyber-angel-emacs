@@ -66,41 +66,31 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
      proc
      (lambda (proc event)
        (when (memq (process-status proc) '(exit signal))
-         (let* ((exit-code (process-exit-status proc))
-                (error-output (with-current-buffer output-buffer (buffer-string)))
-                (internet-error (or (string-match-p "Could not resolve hostname" error-output)
-                                    (string-match-p "Could not read from remote repository" error-output))))
-           (if (/= exit-code 0)
-               (if internet-error
-                   (progn
-                     (when (= verb-level 1)
-                       (message "Git %s failed due to network error in repository %s" step-name repo-dir))
-                     (funcall set-failure)
-                     (funcall finalize))
-                 (let ((error-msg (format "Git %s failed in repository %s" step-name repo-dir)))
-                   (message "%s" error-msg)
-                   (with-current-buffer output-buffer
-                     (goto-char (point-max))
-                     (insert (format "\nError: %s\n" error-msg)))
-                   (unless (string= step-name "push")
-                     (display-buffer output-buffer))
-                   (funcall set-failure)
-                   (funcall finalize)))
-             (if (and conflict-check (funcall conflict-check output-buffer))
-                 (progn
-                   (message "Conflict detected during %s in %s" step-name repo-dir)
-                   (with-current-buffer output-buffer
-                     (goto-char (point-max))
-                     (insert (format "\nError: Conflict detected in repository %s\n" repo-dir)))
-                   (display-buffer output-buffer)
-                   (funcall set-failure)
-                   (funcall finalize))
+         (if (/= (process-exit-status proc) 0)
+             (let ((error-msg (format "Git %s failed in repository %s" step-name repo-dir)))
+               (message "%s" error-msg)
+               (with-current-buffer output-buffer
+                 (goto-char (point-max))
+                 (insert (format "\nError: %s\n" error-msg)))
+               (unless (string= step-name "push")
+                 (display-buffer output-buffer))
+               (funcall set-failure)
+               (funcall finalize))
+           (if (and conflict-check (funcall conflict-check output-buffer))
                (progn
-                 (when (>= verb-level 1)
-                   (message "Git %s succeeded in %s" step-name repo-dir))
-                 (if next-step
-                     (funcall next-step)
-                   (funcall finalize))))))))
+                 (message "Conflict detected during %s in %s" step-name repo-dir)
+                 (with-current-buffer output-buffer
+                   (goto-char (point-max))
+                   (insert (format "\nError: Conflict detected in repository %s\n" repo-dir)))
+                 (display-buffer output-buffer)
+                 (funcall set-failure)
+                 (funcall finalize))
+             (progn
+               (when (>= verb-level 1)
+                 (message "Git %s succeeded in %s" step-name repo-dir))
+               (if next-step
+                   (funcall next-step)
+                 (funcall finalize))))))))
     proc))
 
 (defun cae-multi--get-repo-commit (repo-dir)
