@@ -180,39 +180,39 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                   (buffer-name output-buffer)
                                   (float-time (time-subtract (current-time) start-time)))))))
          (update-submodule-for-repo (repo-dir)
-           (let ((default-directory repo-dir))
-             (when (file-directory-p (expand-file-name ".git" repo-dir))
-               (unless (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
-                 (setq pending-processes (1+ pending-processes))
-                 (let ((sub-proc (start-process "git-submodule-update"
-                                                output-buffer
-                                                "git" "submodule" "update" "--init" "--recursive")))
-                   (set-process-sentinel
-                    sub-proc
-                    (lambda (proc event)
-                      (when (memq (process-status proc) '(exit signal))
-                        (if (/= (process-exit-status proc) 0)
-                            (progn
-                              (message "Git submodule update failed in %s" repo-dir)
-                              (with-current-buffer output-buffer
-                                (goto-char (point-max))
-                                (insert (format "\nError: Git submodule update failed in repository %s\n"
-                                                repo-dir)))
-                              (display-buffer output-buffer)
-                              (setq all-ops-succeeded nil))
-                          (when (>= verb-level 1)
-                            (message "Git submodule update succeeded in %s" repo-dir))
-                          (with-current-buffer output-buffer
-                            (save-excursion
-                              (goto-char (point-max))
-                              (if (re-search-backward "\\bCONFLICT\\b" nil t)
-                                  (progn
-                                    (message "Conflict detected during submodule update in %s" repo-dir)
-                                    (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
-                                    (display-buffer output-buffer)
-                                    (setq all-ops-succeeded nil))
-                                (when (>= verb-level 2)
-                                  (message "Submodules updated successfully in %s" repo-dir)))))
-                          (finalize)))))))))))
+                                    (let ((default-directory repo-dir))
+                                      (when (file-directory-p (expand-file-name ".git" repo-dir))
+                                        (unless (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
+                                          (setq pending-processes (1+ pending-processes))
+                                          (let ((sub-proc (start-process "git-submodule-update"
+                                                                         output-buffer
+                                                                         "git" "submodule" "update" "--init" "--recursive")))
+                                            (set-process-sentinel
+                                             sub-proc
+                                             (lambda (proc event)
+                                               (when (memq (process-status proc) '(exit signal))
+                                                 (if (/= (process-exit-status proc) 0)
+                                                     (progn
+                                                       (message "Git submodule update failed in %s" repo-dir)
+                                                       (with-current-buffer output-buffer
+                                                         (goto-char (point-max))
+                                                         (insert (format "\nError: Git submodule update failed in repository %s\n"
+                                                                         repo-dir)))
+                                                       (display-buffer output-buffer)
+                                                       (setq all-ops-succeeded nil))
+                                                   (when (>= verb-level 1)
+                                                     (message "Git submodule update succeeded in %s" repo-dir))
+                                                   (with-current-buffer output-buffer
+                                                     (save-excursion
+                                                       (goto-char (point-max))
+                                                       (if (re-search-backward "\\bCONFLICT\\b" nil t)
+                                                           (progn
+                                                             (message "Conflict detected during submodule update in %s" repo-dir)
+                                                             (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
+                                                             (display-buffer output-buffer)
+                                                             (setq all-ops-succeeded nil))
+                                                         (when (>= verb-level 2)
+                                                           (message "Submodules updated successfully in %s" repo-dir)))))
+                                                   (finalize)))))))))))
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
