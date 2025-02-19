@@ -113,6 +113,7 @@
   (load! "appendix"))
 
 (setq cae-config-finished-loading t)
+;; then
 
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
