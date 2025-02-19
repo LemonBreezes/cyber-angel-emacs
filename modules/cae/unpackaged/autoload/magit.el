@@ -11,7 +11,8 @@ command was called, go to its unstaged changes section."
           (when buffer-file-name
             (file-relative-name buffer-file-name
                                 (locate-dominating-file buffer-file-name ".git"))))
-         (default-directory (or (ignore-errors (doom-project-root))
+         (default-directory (or (ignore-errors (project-root (project-current)))
+                                (ignore-errors (doom-project-root))
                                 buffer-file-path
                                 default-directory))
          (section-ident `((file . ,buffer-file-path) (unstaged) (status))))
