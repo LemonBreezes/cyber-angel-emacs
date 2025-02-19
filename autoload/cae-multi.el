@@ -130,7 +130,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
 (defun cae-multi--run-doom-sync (verb-level)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
 VERB-LEVEL controls how much output is emitted."
-  (let* ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
+  (let* ((output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
          (process
           (start-process
            "doom-sync-process"
