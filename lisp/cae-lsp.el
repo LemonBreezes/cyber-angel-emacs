@@ -110,7 +110,13 @@
                     eglot-server-programs))))
     (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls" )))
     (when (modulep! :lang lua +lsp)
-      (add-hook 'fennel-mode-local-vars-hook #'lsp!))))
+      (add-hook 'fennel-mode-local-vars-hook #'lsp!)))
+
+  (use-package! breadcrumb
+    :defer t :init
+    (add-hook 'prog-mode-hook #'breadcrumb-mode)
+    (add-hook 'conf-mode-hook #'breadcrumb-mode)
+    (add-hook 'text-mode-hook #'breadcrumb-mode)))
 
 ;; I don't really need LSP for the XML files I edit.
 (remove-hook 'nxml-mode-local-vars-hook #'lsp!)
