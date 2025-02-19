@@ -64,7 +64,7 @@ Also resets the projectile cache once for each affected directory."
   (cae-hotloading--cleanup-dir-locals-cache)
   (let ((dirs (make-hash-table :test 'equal)))
     (dolist (buf (buffer-list))
-      (when-let ((entry (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))))
+      (when-let* ((entry (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))))
         (when (eq (nth 1 entry) class)
           (with-current-buffer buf
             (hack-dir-local-variables-non-file-buffer))
