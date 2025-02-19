@@ -37,6 +37,50 @@
       (setq cae-multi-abbrev--file-mtime mtime
             cae-multi-abbrev--auto-commit-disabled t))))
 
+(defun cae-multi--run-git-process (repo-dir step-name cmd-args conflict-check next-step finalize output-buffer verb-level set-failure)
+  "Run a git command asynchronously for REPO-DIR.
+STEP-NAME is a string (e.g. \"fetch\").
+CMD-ARGS is a list of arguments passed to git.
+CONFLICT-CHECK is an optional function that takes OUTPUT-BUFFER and returns non-nil if a conflict is detected.
+NEXT-STEP is an optional function to invoke on success.
+FINALIZE is a function to call when the process completes.
+OUTPUT-BUFFER is where process output is collected.
+VERB-LEVEL controls messaging.
+SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to nil)."
+  (let ((proc (apply #'start-process
+                     (concat "git-" step-name "-" (file-name-nondirectory repo-dir))
+                     output-buffer
+                     "git" cmd-args)))
+    (set-process-sentinel
+     proc
+     (lambda (proc event)
+       (when (memq (process-status proc) '(exit signal))
+         (if (/= (process-exit-status proc) 0)
+             (let ((error-msg (format "Git %s failed in repository %s" step-name repo-dir)))
+               (message "%s" error-msg)
+               (with-current-buffer output-buffer
+                 (goto-char (point-max))
+                 (insert (format "\nError: %s\n" error-msg)))
+               (display-buffer output-buffer)
+               (funcall set-failure)
+               (funcall finalize))
+           (if (and conflict-check (funcall conflict-check output-buffer))
+               (progn
+                 (message "Conflict detected during %s in %s" step-name repo-dir)
+                 (with-current-buffer output-buffer
+                   (goto-char (point-max))
+                   (insert (format "\nError: Conflict detected in repository %s\n" repo-dir)))
+                 (display-buffer output-buffer)
+                 (funcall set-failure)
+                 (funcall finalize))
+             (progn
+               (when (>= verb-level 1)
+                 (message "Git %s succeeded in %s" step-name repo-dir))
+               (if next-step
+                   (funcall next-step)
+                 (funcall finalize))))))))
+    proc))
+
 ;;;###autoload
 (defun cae-multi-sync-repositories (&optional verb-level)
   "For every repository in `cae-multi-repositories' do the following asynchronously:
@@ -71,48 +115,43 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                          (message "One or more git operations failed. See %s for details (took %.2f seconds)"
                                   (buffer-name output-buffer)
                                   (float-time (time-subtract (current-time) start-time)))))))
-         (start-git-step (repo-dir step-name cmd-args next-step)
-                         (let ((proc (apply #'start-process
-                                            (concat "git-" step-name "-" (file-name-nondirectory repo-dir))
-                                            output-buffer
-                                            "git" cmd-args)))
-                           (set-process-sentinel
-                            proc
-                            (lambda (proc event)
-                              (when (memq (process-status proc) '(exit signal))
-                                (if (/= (process-exit-status proc) 0)
-                                    (let ((error-msg
-                                           (if (and (string= step-name "merge")
-                                                    (with-current-buffer output-buffer
-                                                      (save-excursion
-                                                        (goto-char (point-min))
-                                                        (re-search-forward "CONFLICT" nil t))))
-                                               (format "Merge conflict detected in repository %s" repo-dir)
-                                             (format "Git %s failed in repository %s" step-name repo-dir))))
-                                      (message "%s" error-msg)
-                                      (with-current-buffer output-buffer
-                                        (goto-char (point-max))
-                                        (insert (format "\nError: %s\n" error-msg)))
-                                      (display-buffer output-buffer)
-                                      (setq all-ops-succeeded nil)
-                                      (finalize))
-                                  (progn
-                                    (when (>= verb-level 1)
-                                      (message "Git %s succeeded in %s" step-name repo-dir))
-                                    (if next-step
-                                        (funcall next-step)
-                                      (finalize)))))))
-                           proc))
          (start-push-step (repo-dir)
-                          (start-git-step repo-dir "push" (list "push")
-                                          (lambda () (finalize))))
+                          (cae-multi--run-git-process
+                           repo-dir
+                           "push"
+                           '("push")
+                           nil
+                           (lambda () (finalize))
+                           finalize
+                           output-buffer
+                           verb-level
+                           (lambda () (setq all-ops-succeeded nil))))
          (start-merge-step (repo-dir)
-                           (start-git-step repo-dir "merge" (list "merge" "origin/master")
-                                           (lambda () (start-push-step repo-dir))))
+                           (cae-multi--run-git-process
+                            repo-dir
+                            "merge"
+                            '("merge" "origin/master")
+                            (lambda (buf)
+                              (with-current-buffer buf
+                                (save-excursion
+                                  (goto-char (point-min))
+                                  (re-search-forward "CONFLICT" nil t))))
+                            (lambda () (start-push-step repo-dir))
+                            finalize
+                            output-buffer
+                            verb-level
+                            (lambda () (setq all-ops-succeeded nil))))
          (start-fetch-step (repo-dir)
-                           (start-git-step repo-dir "fetch" (list "fetch" "origin")
-                                           (lambda ()
-                                             (start-merge-step repo-dir)))))
+                           (cae-multi--run-git-process
+                            repo-dir
+                            "fetch"
+                            '("fetch" "origin")
+                            nil
+                            (lambda () (start-merge-step repo-dir))
+                            finalize
+                            output-buffer
+                            verb-level
+                            (lambda () (setq all-ops-succeeded nil)))))
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
           (when (file-directory-p (expand-file-name ".git" repo-dir))
@@ -184,35 +223,19 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                       (when (file-directory-p (expand-file-name ".git" repo-dir))
                                         (unless (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
                                           (setq pending-processes (1+ pending-processes))
-                                          (let ((sub-proc (start-process "git-submodule-update"
-                                                                         output-buffer
-                                                                         "git" "submodule" "update" "--init" "--recursive")))
-                                            (set-process-sentinel
-                                             sub-proc
-                                             (lambda (proc event)
-                                               (when (memq (process-status proc) '(exit signal))
-                                                 (if (/= (process-exit-status proc) 0)
-                                                     (progn
-                                                       (message "Git submodule update failed in %s" repo-dir)
-                                                       (with-current-buffer output-buffer
-                                                         (goto-char (point-max))
-                                                         (insert (format "\nError: Git submodule update failed in repository %s\n"
-                                                                         repo-dir)))
-                                                       (display-buffer output-buffer)
-                                                       (setq all-ops-succeeded nil))
-                                                   (when (>= verb-level 1)
-                                                     (message "Git submodule update succeeded in %s" repo-dir))
-                                                   (with-current-buffer output-buffer
-                                                     (save-excursion
-                                                       (goto-char (point-max))
-                                                       (if (re-search-backward "\\bCONFLICT\\b" nil t)
-                                                           (progn
-                                                             (message "Conflict detected during submodule update in %s" repo-dir)
-                                                             (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
-                                                             (display-buffer output-buffer)
-                                                             (setq all-ops-succeeded nil))
-                                                         (when (>= verb-level 2)
-                                                           (message "Submodules updated successfully in %s" repo-dir)))))
-                                                   (finalize)))))))))))
+                                          (cae-multi--run-git-process
+                                           repo-dir
+                                           "submodule-update"
+                                           '("submodule" "update" "--init" "--recursive")
+                                           (lambda (buf)
+                                             (with-current-buffer buf
+                                               (save-excursion
+                                                 (goto-char (point-max))
+                                                 (re-search-backward "\\bCONFLICT\\b" nil t))))
+                                           nil  ; No next-step.
+                                           finalize
+                                           output-buffer
+                                           verb-level
+                                           (lambda () (setq all-ops-succeeded nil))))))))
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
