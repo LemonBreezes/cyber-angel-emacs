@@ -107,7 +107,9 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
           (pending-private 0)  ; count of repos entirely in doom-private-dir
           (private-changed nil)  ; flag: did any private repo change?
           (initial-hashes (make-hash-table :test #'equal))
-          (pending-repos 0))    ; NEW: count of repos with active sync chains
+          (pending-repos 0)    ; count of repos with active sync chains
+          doom-sync-proc      ; will hold doom sync process if started
+          sync-finalized)     ; flag to ensure we finalize only once
       (with-current-buffer output-buffer (erase-buffer))
       (cl-labels
           ((repo-sync-finished (repo-dir)
@@ -119,7 +121,10 @@ Then decrement the pending counter and, if zero, clear the running flag."
                (repo-finalize repo-dir))
              (setq pending-repos (1- pending-repos))
              (when (zerop pending-repos)
-               (setq cae-multi-sync-running nil)))
+               (setq cae-multi-sync-running nil)
+               (if doom-sync-proc
+                   nil
+                 (finalize-all))))
            (repo-finalize (repo-dir)
                           "Finalize a repo in doom-private-dir."
                           (let ((old-hash (gethash repo-dir initial-hashes))
@@ -129,7 +134,7 @@ Then decrement the pending counter and, if zero, clear the running flag."
                             (setq pending-private (1- pending-private))
                             (when (zerop pending-private)
                               (if private-changed
-                                  (cae-multi--run-doom-sync verb-level start-time)
+                                  (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))
                                 (when (>= verb-level 1)
                                   (message "No changes detected in doom-private repositories; skipping doom sync"))))))
            (maybe-finalize (repo-dir)
@@ -137,6 +142,16 @@ Then decrement the pending counter and, if zero, clear the running flag."
                            (when (string-prefix-p (file-truename doom-private-dir)
                                                   (file-truename repo-dir))
                              (repo-finalize repo-dir)))
+
+           (finalize-all ()
+             (unless sync-finalized
+               (setq sync-finalized t)
+               (when (>= verb-level 1)
+                 (if all-ops-succeeded
+                     (message "All sync operations finished successfully in %.2f seconds"
+                              (float-time (time-subtract (current-time) start-time)))
+                   (message "Sync operations finished with errors in %.2f seconds"
+                            (float-time (time-subtract (current-time) start-time)))))))
            (start-push-step (repo-dir)
                             (cae-multi--run-git-process
                              repo-dir
@@ -190,9 +205,10 @@ Then decrement the pending counter and, if zero, clear the running flag."
           (setq cae-multi-sync-running nil))
         nil))))
 
-(defun cae-multi--run-doom-sync (verb-level &optional start-time)
+(defun cae-multi--run-doom-sync (verb-level &optional start-time finalize-callback)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
-VERB-LEVEL controls how much output is emitted."
+VERB-LEVEL controls how much output is emitted.
+FINALIZE-CALLBACK, if non-nil, is a function called when the process completes."
   (let* ((output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
          (process
           (start-process
@@ -203,20 +219,11 @@ VERB-LEVEL controls how much output is emitted."
      process
      (lambda (proc event)
        (when (memq (process-status proc) '(exit signal))
-         (if (= (process-exit-status proc) 0)
-             (if (and start-time (= verb-level 1))
-                 (message "'doom sync' finished successfully in %.2f seconds"
-                          (float-time (time-subtract (current-time) start-time)))
-               (when (>= verb-level 1)
-                 (message "'doom sync' finished successfully")))
-           (progn
-             (if (and start-time (= verb-level 1))
-                 (message "'doom sync' failed with exit code %d (took %.2f seconds)"
-                          (process-exit-status proc)
-                          (float-time (time-subtract (current-time) start-time)))
-               (message "'doom sync' failed with exit code %d" (process-exit-status proc)))
-             (when (>= verb-level 1)
-               (display-buffer output-buffer)))))))))
+         (unless (= (process-exit-status proc) 0)
+           (message "'doom sync' failed with exit code %d" (process-exit-status proc)))
+         (when finalize-callback
+           (funcall finalize-callback)))))
+    process))
 
 ;;;###autoload
 (defun cae-multi-update-submodules (&optional verb-level)
