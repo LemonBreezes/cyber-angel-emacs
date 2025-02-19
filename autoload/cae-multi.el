@@ -38,7 +38,7 @@
             cae-multi-abbrev--auto-commit-disabled t))))
 
 ;;;###autoload
-(defun cae-multi-pull-repositories (&optional verb-level)
+(defun cae-multi-sync-repositories (&optional verb-level)
   "For every repository in `cae-multi-repositories' do the following asynchronously:
   1. git fetch origin
   2. git merge origin/master
@@ -56,7 +56,7 @@ After all repositories have been processed, if everything succeeded,
 When called interactively, no prefix yields level 1 and a prefix yields level 2."
   (interactive (list (if current-prefix-arg 2 1)))
   (unless verb-level (setq verb-level 0))
-  (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
+  (let ((output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
         (all-ops-succeeded t)
         (pending-processes 0))
     (with-current-buffer output-buffer (erase-buffer))
