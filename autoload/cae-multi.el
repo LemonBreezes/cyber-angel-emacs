@@ -48,7 +48,10 @@
       (setq cae-multi-abbrev--file-mtime mtime
             cae-multi-abbrev--auto-commit-disabled t))))
 
-(defun cae-multi--run-git-process (repo-dir step-name cmd-args conflict-check next-step finalize output-buffer verb-level set-failure)
+(defun cae-multi--run-git-process (repo-dir step-name cmd-args
+                                             conflict-check next-step
+                                             finalize output-buffer
+                                             verb-level set-failure)
   "Run a git command asynchronously for REPO-DIR.
 STEP-NAME is a string (e.g. \"fetch\").
 CMD-ARGS is a list of arguments passed to git.
@@ -67,13 +70,26 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
      (lambda (proc event)
        (when (memq (process-status proc) '(exit signal))
          (if (/= (process-exit-status proc) 0)
-             (let ((error-msg (format "Git %s failed in repository %s" step-name repo-dir)))
-               (message "%s" error-msg)
-               (with-current-buffer output-buffer
-                 (goto-char (point-max))
-                 (insert (format "\nError: %s\n" error-msg)))
-               (unless (string= step-name "push")
-                 (display-buffer output-buffer))
+             (let* ((output (with-current-buffer output-buffer (buffer-string)))
+                    (is-internet-error (and (string-match "ssh: Could not resolve hostname" output)
+                                            (string-match "fatal: Could not read from remote repository" output)))
+                    (error-msg (format "Git %s failed in repository %s" step-name repo-dir)))
+               (if is-internet-error
+                   (progn
+                     (when (>= verb-level 1)
+                       (message "%s" error-msg)
+                       (with-current-buffer output-buffer
+                         (goto-char (point-max))
+                         (insert (format "\nError: %s\n" error-msg)))
+                       (unless (string= step-name "push")
+                         (display-buffer output-buffer))))
+                 (progn
+                   (message "%s" error-msg)
+                   (with-current-buffer output-buffer
+                     (goto-char (point-max))
+                     (insert (format "\nError: %s\n" error-msg)))
+                   (unless (string= step-name "push")
+                     (display-buffer output-buffer))))
                (funcall set-failure)
                (funcall finalize))
            (if (and conflict-check (funcall conflict-check output-buffer))
