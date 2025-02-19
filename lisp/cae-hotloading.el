@@ -16,7 +16,8 @@
                   (or (equal (timer--args x)
                              (timer--args y))
                       (and (symbolp (timer--function x))
-                           (string-prefix-p "cae-" (symbol-name (timer--function x))))))))))
+                           (string-prefix-p "cae-"
+                                            (symbol-name (timer--function x))))))))))
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
