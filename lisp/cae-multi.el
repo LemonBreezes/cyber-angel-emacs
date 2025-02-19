@@ -85,4 +85,4 @@
     (cae-multi-sync-repositories)))
 
 (when cae-multi-enable-auto-pull
-  (run-with-timer 60 t #'cae-multi-sync-repositories-if-idle))
+  (run-with-timer 60 60 #'cae-multi-sync-repositories-if-idle))
