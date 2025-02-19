@@ -253,7 +253,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                                  (goto-char (point-max))
                                                  (re-search-backward "\\bCONFLICT\\b" nil t))))
                                            nil  ; No next-step.
-                                           (finalize)
+                                           finalize
                                            output-buffer
                                            verb-level
                                            (lambda () (setq all-ops-succeeded nil))))))))
