@@ -181,7 +181,7 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                (cae-multi--run-git-process
                                 repo-dir
                                 "pull"
-                                '("pull" "--rebase")
+                                '("pull" "--rebase" "--reapply-cherry-picks")
                                 (lambda (buf)
                                   (with-current-buffer buf
                                     (save-excursion
