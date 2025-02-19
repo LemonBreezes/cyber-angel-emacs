@@ -192,10 +192,9 @@ Then decrement the pending counter and, if zero, clear the running flag."
              (start-fetch-step (repo-dir)
                                (cae-multi--run-git-process
                                 repo-dir
-                                "fetch"
-                                '("fetch" "origin")
+                                "pull"
+                                '("pull")
                                 nil
-                                (lambda () (start-merge-step repo-dir))
                                 (lambda () (repo-sync-finished repo-dir))
                                 output-buffer
                                 verb-level
