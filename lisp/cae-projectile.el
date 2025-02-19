@@ -16,6 +16,9 @@
 ;; automatically and using the list above instead.
 (setq projectile-track-known-projects-automatically nil)
 
+;; Increase the cache limit to because of monolithic company repositories.
+(setq doom-projectile-cache-limit 30000)
+
 ;; Ensure projects list is up-to-date since I usually switch to a project
 ;; after running a `git clone'.
 (defadvice! cae-projectile-update-projects-list (&optional _)
