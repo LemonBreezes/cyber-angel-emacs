@@ -81,6 +81,13 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
                  (funcall finalize))))))))
     proc))
 
+(defun cae-multi--get-repo-commit (repo-dir)
+  "Return the current commit hash of the git repository in REPO-DIR as a string."
+  (with-temp-buffer
+    (let ((default-directory repo-dir))
+      (when (eq (call-process "git" nil t nil "rev-parse" "HEAD") 0)
+        (string-trim (buffer-string))))))
+
 ;;;###autoload
 (defun cae-multi-sync-repositories (&optional verb-level)
   "For every repository in `cae-multi-repositories' do the following asynchronously:
@@ -103,62 +110,75 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
   (let ((start-time (current-time))
         (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
         (all-ops-succeeded t)
-        (pending-processes 0))
+        (pending-private 0)  ; count of repos entirely in doom-private-dir
+        (private-changed nil)  ; flag: did any private repo change?
+        (initial-hashes (make-hash-table :test #'equal)))
     (with-current-buffer output-buffer (erase-buffer))
     (cl-labels
-        ((finalize ()
-                   (setq pending-processes (1- pending-processes))
-                   (when (zerop pending-processes)
-                     (if all-ops-succeeded
-                         (cae-multi--run-doom-sync verb-level start-time)
-                       (when (>= verb-level 1)
-                         (message "One or more git operations failed. See %s for details (took %.2f seconds)"
-                                  (buffer-name output-buffer)
-                                  (float-time (time-subtract (current-time) start-time)))))))
+        ((repo-finalize (repo-dir)
+           "Finalize a repo in doom-private-dir."
+           (let ((old-hash (gethash repo-dir initial-hashes))
+                 (new-hash (cae-multi--get-repo-commit repo-dir)))
+             (unless (equal old-hash new-hash)
+               (setq private-changed t))
+             (setq pending-private (1- pending-private))
+             (when (zerop pending-private)
+               (if private-changed
+                   (cae-multi--run-doom-sync verb-level start-time)
+                 (when (>= verb-level 1)
+                   (message "No changes detected in doom-private repositories; skipping doom sync"))))))
+         (maybe-finalize (repo-dir)
+           "Call repo-finalize only for a repo that lies within doom-private-dir."
+           (when (string-prefix-p (file-truename doom-private-dir)
+                                    (file-truename repo-dir))
+             (repo-finalize repo-dir)))
          (start-push-step (repo-dir)
-                          (cae-multi--run-git-process
-                           repo-dir
-                           "push"
-                           '("push")
-                           nil
-                           (lambda () (finalize))
-                           finalize
-                           output-buffer
-                           verb-level
-                           (lambda () (setq all-ops-succeeded nil))))
+           (cae-multi--run-git-process
+            repo-dir
+            "push"
+            '("push")
+            nil
+            nil
+            (lambda () (maybe-finalize repo-dir))
+            output-buffer
+            verb-level
+            (lambda () (setq all-ops-succeeded nil))))
          (start-merge-step (repo-dir)
-                           (cae-multi--run-git-process
-                            repo-dir
-                            "merge"
-                            '("merge" "origin/master")
-                            (lambda (buf)
-                              (with-current-buffer buf
-                                (save-excursion
-                                  (goto-char (point-min))
-                                  (re-search-forward "CONFLICT" nil t))))
-                            (lambda () (start-push-step repo-dir))
-                            finalize
-                            output-buffer
-                            verb-level
-                            (lambda () (setq all-ops-succeeded nil))))
+           (cae-multi--run-git-process
+            repo-dir
+            "merge"
+            '("merge" "origin/master")
+            (lambda (buf)
+              (with-current-buffer buf
+                (save-excursion
+                  (goto-char (point-min))
+                  (re-search-forward "CONFLICT" nil t))))
+            (lambda () (start-push-step repo-dir))
+            (lambda () (maybe-finalize repo-dir))
+            output-buffer
+            verb-level
+            (lambda () (setq all-ops-succeeded nil))))
          (start-fetch-step (repo-dir)
-                           (cae-multi--run-git-process
-                            repo-dir
-                            "fetch"
-                            '("fetch" "origin")
-                            nil
-                            (lambda () (start-merge-step repo-dir))
-                            finalize
-                            output-buffer
-                            verb-level
-                            (lambda () (setq all-ops-succeeded nil)))))
+           (cae-multi--run-git-process
+            repo-dir
+            "fetch"
+            '("fetch" "origin")
+            nil
+            (lambda () (start-merge-step repo-dir))
+            (lambda () (maybe-finalize repo-dir))
+            output-buffer
+            verb-level
+            (lambda () (setq all-ops-succeeded nil)))))
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
           (when (file-directory-p (expand-file-name ".git" repo-dir))
             (if (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
                 (when (>= verb-level 1)
                   (message "Git lockfile exists in %s, skipping update" repo-dir))
-              (setq pending-processes (1+ pending-processes))
+              (when (string-prefix-p (file-truename doom-private-dir)
+                                       (file-truename repo-dir))
+                (puthash repo-dir (cae-multi--get-repo-commit repo-dir) initial-hashes)
+                (setq pending-private (1+ pending-private)))
               (start-fetch-step repo-dir)))))
       nil)))
 
