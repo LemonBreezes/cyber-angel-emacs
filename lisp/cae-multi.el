@@ -106,7 +106,7 @@
               (git-auto-commit-mode 1))
             ))))))
 
-(dir-locals-set-directory-class (getenv "HOME") 'doom)
+(dir-locals-set-directory-class (getenv "HOME") 'home)
 
 (when cae-multi-enable-auto-pull
   (run-with-timer 30 30 #'cae-multi-sync-repositories-if-idle))
