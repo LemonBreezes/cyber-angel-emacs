@@ -49,9 +49,9 @@
             cae-multi-abbrev--auto-commit-disabled t))))
 
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
-                                             conflict-check next-step
-                                             finalize output-buffer
-                                             verb-level set-failure)
+                                            conflict-check next-step
+                                            finalize output-buffer
+                                            verb-level set-failure)
   "Run a git command asynchronously for REPO-DIR.
 STEP-NAME is a string (e.g. \"fetch\").
 CMD-ARGS is a list of arguments passed to git.
