@@ -35,7 +35,6 @@
           `("--model" "o3-mini"
             "--editor-model" "claude-3-5-sonnet-20240620"
             "--reasoning-effort" "high"
-            "--install-tree-sitter-language-pack"
             "--cache-prompts"
             "--chat-language" "English")))
   (defvar llm-refactoring-provider nil)
