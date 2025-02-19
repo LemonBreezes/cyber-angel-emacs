@@ -86,5 +86,27 @@
   (when (> (time-to-seconds (current-idle-time)) 15)
     (cae-multi-sync-repositories)))
 
+(dir-locals-set-class-variables
+ 'home
+ '((nil
+    . ((eval
+        . (progn
+            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
+            (setq-local blamer--block-render-p t)
+
+            ;; Automatically commit saved files to Git and push them to the
+            ;; remote.
+            (when (and (buffer-file-name)
+                       (require 'git-auto-commit-mode nil t)
+                       (require 'vc-git nil t)
+                       (file-equal-p (vc-git-root (buffer-file-name))
+                                     "~/"))
+              (setq-local gac-automatically-add-new-files-p nil)
+              (setq-local gac-automatically-push-p t)
+              (git-auto-commit-mode 1))
+            ))))))
+
+(dir-locals-set-directory-class (getenv "HOME") 'doom)
+
 (when cae-multi-enable-auto-pull
   (run-with-timer 30 30 #'cae-multi-sync-repositories-if-idle))
