@@ -278,9 +278,7 @@
          ([remap async-shell-command] . detached-shell-command)
          ;; Replace `compile' with `detached-compile'
          ([remap compile] . detached-compile)
-         ([remap recompile] . detached-compile-recompile)
-         ;; Replace built in completion of sessions with `consult'
-         ([remap detached-open-session] . detached-consult-session))
+         ([remap recompile] . detached-compile-recompile))
   :config
   (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
