@@ -182,5 +182,5 @@ VERB-LEVEL controls how much output is emitted."
                (message "'doom sync' finished successfully"))
            (progn
              (message "'doom sync' failed with exit code %d" (process-exit-status proc))
-             (when (>= verb-level 2)
+             (when (>= verb-level 1)
                (display-buffer output-buffer)))))))))
