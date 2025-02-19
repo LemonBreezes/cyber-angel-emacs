@@ -113,18 +113,18 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
       (with-current-buffer output-buffer (erase-buffer))
       (cl-labels
           ((repo-sync-finished (repo-dir)
-             "Called at the end of a repository's sync chain.
+                               "Called at the end of a repository's sync chain.
 If the repo is in doom-private, call repo-finalize.
 Then decrement the pending counter and, if zero, clear the running flag."
-             (when (string-prefix-p (file-truename doom-private-dir)
-                                    (file-truename repo-dir))
-               (repo-finalize repo-dir))
-             (setq pending-repos (1- pending-repos))
-             (when (zerop pending-repos)
-               (setq cae-multi-sync-running nil)
-               (if doom-sync-proc
-                   nil
-                 (finalize-all))))
+                               (when (string-prefix-p (file-truename doom-private-dir)
+                                                      (file-truename repo-dir))
+                                 (repo-finalize repo-dir))
+                               (setq pending-repos (1- pending-repos))
+                               (when (zerop pending-repos)
+                                 (setq cae-multi-sync-running nil)
+                                 (if doom-sync-proc
+                                     nil
+                                   (finalize-all))))
            (repo-finalize (repo-dir)
                           "Finalize a repo in doom-private-dir."
                           (let ((old-hash (gethash repo-dir initial-hashes))
@@ -144,14 +144,14 @@ Then decrement the pending counter and, if zero, clear the running flag."
                              (repo-finalize repo-dir)))
 
            (finalize-all ()
-             (unless sync-finalized
-               (setq sync-finalized t)
-               (when (>= verb-level 1)
-                 (if all-ops-succeeded
-                     (message "All sync operations finished successfully in %.2f seconds"
-                              (float-time (time-subtract (current-time) start-time)))
-                   (message "Sync operations finished with errors in %.2f seconds"
-                            (float-time (time-subtract (current-time) start-time)))))))
+                         (unless sync-finalized
+                           (setq sync-finalized t)
+                           (when (>= verb-level 1)
+                             (if all-ops-succeeded
+                                 (message "All sync operations finished successfully in %.2f seconds"
+                                          (float-time (time-subtract (current-time) start-time)))
+                               (message "Sync operations finished with errors in %.2f seconds"
+                                        (float-time (time-subtract (current-time) start-time)))))))
            (start-push-step (repo-dir)
                             (cae-multi--run-git-process
                              repo-dir
