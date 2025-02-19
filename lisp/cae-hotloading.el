@@ -7,13 +7,16 @@
 ;; functions from my config.
 (defun cae-cleanup-duplicate-idle-timers ()
   (setq timer-idle-list
-        (cl-remove-duplicates timer-idle-list
-                              :test (lambda (x y)
-                                      (and
-                                       (equal (timer--function x)
-                                              (timer--function y))
-                                       (equal (timer--args x)
-                                              (timer--args y)))))))
+        (cl-remove-duplicates
+         timer-idle-list
+         :test (lambda (x y)
+                 (and
+                  (equal (timer--function x)
+                         (timer--function y))
+                  (or (equal (timer--args x)
+                             (timer--args y))
+                      (and (symbolp (timer--function x))
+                           (string-prefix-p "cae-" (symbol-name (timer--function x))))))))))
 
 (run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
 
