@@ -61,8 +61,11 @@ does it attempt to verify cache validity."
         (with-current-buffer buf
           (hack-dir-local-variables-non-file-buffer))))))
 
+
+;; ---[ 4. Invalidate Projectile Cache ]----------------------------------
+
 ;;;###autoload
-(defun cae-hotload-invalidate-project-cache (project-root)
+(defun cae-hotloading-invalidate-project-cache (project-root)
   (setq projectile-project-root-cache (make-hash-table :test 'equal))
   (remhash project-root projectile-project-type-cache)
   (remhash project-root projectile-projects-cache)
