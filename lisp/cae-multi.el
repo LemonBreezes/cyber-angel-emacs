@@ -84,12 +84,16 @@
   "If non-nil, automatically pull repositories when idle.")
 
 (defun cae-multi-sync-repositories-if-idle ()
-  (when (> (time-to-seconds (current-idle-time)) 15)
+  (when (> (time-to-seconds (current-idle-time))
+           (if (> (* 2 cae-multi-last-sync-duration) 0)
+               (* 2 cae-multi-last-sync-duration)
+             15))
     (let ((start-time (current-time)))
       (cae-multi-sync-repositories)
       (setq cae-multi-last-sync-duration
             (float-time (time-subtract (current-time) start-time)))))
-  (run-at-time cae-multi-last-sync-duration nil #'cae-multi-sync-repositories-if-idle))
+  (run-at-time (max (* 3 cae-multi-last-sync-duration) 5)
+               nil #'cae-multi-sync-repositories-if-idle))
 
 (dir-locals-set-class-variables
  'home
