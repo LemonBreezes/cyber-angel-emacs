@@ -81,7 +81,7 @@
   "If non-nil, automatically pull repositories when idle.")
 
 (defun cae-multi-sync-repositories-if-idle ()
-  (when (> (time-to-seconds (current-idle-time)) 20)
+  (when (> (time-to-seconds (current-idle-time)) 10)
     (cae-multi-sync-repositories)))
 
 (when cae-multi-enable-auto-pull
