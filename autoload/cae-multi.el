@@ -151,8 +151,8 @@ Then decrement the pending counter and, if zero, clear the running flag."
            (start-merge-step (repo-dir)
                              (cae-multi--run-git-process
                               repo-dir
-                              "merge"
-                              '("merge" "origin/master")
+                              "rebase"
+                              '("rebase" "origin/master")
                               (lambda (buf)
                                 (with-current-buffer buf
                                   (save-excursion
