@@ -81,7 +81,7 @@
   "If non-nil, automatically pull repositories when idle.")
 
 ;; Ideally, I would want a dynamic sync time based on the amount of time it
-;; takes to sync.
+;; takes to sync. But for now, I will just use a fixed time.
 (defun cae-multi-sync-repositories-if-idle ()
   (when (> (time-to-seconds (current-idle-time)) 15)
     (cae-multi-sync-repositories)))
