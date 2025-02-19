@@ -82,7 +82,7 @@
   (package! consult-mu :recipe
     (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
 (package! 0x0)
-(package! detached :recipe (:repo "https://git.sr.ht/~niklaseklund/detached.el" :branch "lean"))
+(package! detached :recipe (:host nil :repo "https://git.sr.ht/~niklaseklund/detached.el" :branch "lean"))
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
