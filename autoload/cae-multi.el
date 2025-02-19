@@ -8,9 +8,6 @@
 (defvar cae-multi-last-submodule-update-duration 0
   "Time in seconds that the last submodule update took.")
 
-(defvar cae-multi-last-sync-duration 0
-  "Time in seconds that the last sync operations took.")
-
 (defun cae-multi-commit-file (file)
   (when (file-in-directory-p file doom-user-dir)
     (let ((gac-automatically-push-p t)
@@ -163,12 +160,12 @@ Then decrement the pending counter and, if zero, clear the running flag."
              (finalize-all ()
                            (unless sync-finalized
                              (setq sync-finalized t)
-                             (let ((elapsed (float-time (time-subtract (current-time) start-time))))
-                               (setq cae-multi-last-sync-duration elapsed)
-                               (when (>= verb-level 1)
-                                 (if all-ops-succeeded
-                                     (message "All sync operations finished successfully in %.2f seconds" elapsed)
-                                   (message "Sync operations finished with errors in %.2f seconds" elapsed))))))
+                             (when (>= verb-level 1)
+                               (if all-ops-succeeded
+                                   (message "All sync operations finished successfully in %.2f seconds"
+                                            (float-time (time-subtract (current-time) start-time)))
+                                 (message "Sync operations finished with errors in %.2f seconds"
+                                          (float-time (time-subtract (current-time) start-time)))))))
              (start-push-step (repo-dir)
                               (cae-multi--run-git-process
                                repo-dir
@@ -253,4 +250,32 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
         ((finalize ()
                    (setq pending-processes (1- pending-processes))
                    (when (zerop pending-processes)
-                     (let ((elapsed (float-
+                     (let ((elapsed (float-time (time-subtract (current-time) start-time))))
+                       (setq cae-multi-last-submodule-update-duration elapsed)
+                       (if all-ops-succeeded
+                           (when (>= verb-level 1)
+                             (message "Submodule update finished successfully in %.2f seconds" elapsed))
+                         (when (>= verb-level 1)
+                           (message "One or more submodule updates failed. See %s for details (took %.2f seconds)"
+                                    (buffer-name output-buffer) elapsed))))))
+         (update-submodule-for-repo (repo-dir)
+                                    (let ((default-directory repo-dir))
+                                      (when (file-directory-p (expand-file-name ".git" repo-dir))
+                                        (unless (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
+                                          (setq pending-processes (1+ pending-processes))
+                                          (cae-multi--run-git-process
+                                           repo-dir
+                                           "submodule-update"
+                                           '("submodule" "update" "--init" "--recursive")
+                                           (lambda (buf)
+                                             (with-current-buffer buf
+                                               (save-excursion
+                                                 (goto-char (point-max))
+                                                 (re-search-backward "\\bCONFLICT\\b" nil t))))
+                                           nil  ; No next-step.
+                                           #'finalize
+                                           output-buffer
+                                           verb-level
+                                           (lambda () (setq all-ops-succeeded nil))))))))
+      (dolist (repo-dir cae-multi-repositories)
+        (update-submodule-for-repo repo-dir)))))
