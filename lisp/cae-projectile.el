@@ -39,10 +39,6 @@
     ;;; Projectile configuration
     (after! projectile
       (run-with-idle-timer 1.0 nil #'projectile--cleanup-known-projects)
-      
-      ;; Projectile's caching of commands is really annoying because if I change
-      ;; the commands, the cache doesn't get invalidated automatically.
-      (setq projectile-project-enable-cmd-caching nil)
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
