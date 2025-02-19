@@ -5,6 +5,9 @@
 (defvar cae-multi-sync-running nil
   "Non-nil if `cae-multi-sync-repositories' is currently running.")
 
+(defvar cae-multi-last-submodule-update-duration 0
+  "Time in seconds that the last submodule update took.")
+
 (defun cae-multi-commit-file (file)
   (when (file-in-directory-p file doom-user-dir)
     (let ((gac-automatically-push-p t)
@@ -245,14 +248,14 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
         ((finalize ()
                    (setq pending-processes (1- pending-processes))
                    (when (zerop pending-processes)
-                     (if all-ops-succeeded
+                     (let ((elapsed (float-time (time-subtract (current-time) start-time))))
+                       (setq cae-multi-last-submodule-update-duration elapsed)
+                       (if all-ops-succeeded
+                           (when (>= verb-level 1)
+                             (message "Submodule update finished successfully in %.2f seconds" elapsed))
                          (when (>= verb-level 1)
-                           (message "Submodule update finished successfully in %.2f seconds"
-                                    (float-time (time-subtract (current-time) start-time))))
-                       (when (>= verb-level 1)
-                         (message "One or more submodule updates failed. See %s for details (took %.2f seconds)"
-                                  (buffer-name output-buffer)
-                                  (float-time (time-subtract (current-time) start-time)))))))
+                           (message "One or more submodule updates failed. See %s for details (took %.2f seconds)"
+                                    (buffer-name output-buffer) elapsed))))))
          (update-submodule-for-repo (repo-dir)
                                     (let ((default-directory repo-dir))
                                       (when (file-directory-p (expand-file-name ".git" repo-dir))
