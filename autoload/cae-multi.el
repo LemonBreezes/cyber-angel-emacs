@@ -152,7 +152,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                             (setq all-ops-succeeded nil))
                         (when (>= verb-level 2)
                           (message "Submodules updated successfully in %s" repo-dir)))))
-                  (finalize))))))
+                  (finalize)))))))
       ;; For each directory listed in `cae-multi-repositories' (a global list of repo paths)
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
