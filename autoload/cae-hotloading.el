@@ -12,7 +12,7 @@
   (setq dir-locals-directory-cache
         (cl-remove-duplicates dir-locals-directory-cache :test #'equal)))
 
-(defun cae-hotlodaing-dir-locals-cache-lookup (file)
+(defun cae-hotloading-dir-locals-cache-lookup (file)
   "Return the best matching `dir-locals-directory-cache' entry for FILE,
  ignoring any .dir-locals file checks.
 The returned value is an entry of the form:
@@ -44,7 +44,7 @@ does it attempt to verify cache validity."
   (interactive)
   (cae-hotloading--cleanup-dir-locals-cache)
   (dolist (buf (buffer-list))
-    (when (cae-hotlodaing-dir-locals-cache-lookup (buffer-file-name buf))
+    (when (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))
       (with-current-buffer buf
         (hack-dir-local-variables-non-file-buffer)))))
 
@@ -60,3 +60,11 @@ does it attempt to verify cache validity."
       (when (eq (nth 1 entry) class)
         (with-current-buffer buf
           (hack-dir-local-variables-non-file-buffer))))))
+
+;;;###autoload
+(defun cae-hotload-invalidate-project-cache (project-root)
+  (setq projectile-project-root-cache (make-hash-table :test 'equal))
+  (remhash project-root projectile-project-type-cache)
+  (remhash project-root projectile-projects-cache)
+  (remhash project-root projectile-projects-cache-time)
+  (projectile-serialize-cache))
