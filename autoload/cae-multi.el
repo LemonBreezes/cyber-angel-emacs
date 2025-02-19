@@ -174,27 +174,17 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                output-buffer
                                verb-level
                                (lambda () (setq all-ops-succeeded nil))))
-             (start-merge-step (repo-dir)
+             (start-fetch-step (repo-dir)
                                (cae-multi--run-git-process
                                 repo-dir
-                                "rebase"
-                                '("rebase" "origin/master")
+                                "pull"
+                                '("pull" "--rebase")
                                 (lambda (buf)
                                   (with-current-buffer buf
                                     (save-excursion
                                       (goto-char (point-min))
                                       (re-search-forward "CONFLICT" nil t))))
                                 (lambda () (start-push-step repo-dir))
-                                (lambda () (repo-sync-finished repo-dir))
-                                output-buffer
-                                verb-level
-                                (lambda () (setq all-ops-succeeded nil))))
-             (start-fetch-step (repo-dir)
-                               (cae-multi--run-git-process
-                                repo-dir
-                                "pull"
-                                '("pull")
-                                nil
                                 (lambda () (repo-sync-finished repo-dir))
                                 output-buffer
                                 verb-level
