@@ -115,6 +115,7 @@
   (use-package! window-stool
     :config
     (add-hook 'prog-mode-hook #'window-stool-mode)
+    (add-hook 'conf-mode-hook #'window-stool-mode)
     (after! consult
       (add-to-list 'consult-preview-allowed-hooks #'window-stool-mode))))
 
