@@ -213,6 +213,6 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                     (setq all-ops-succeeded nil))
                                 (when (>= verb-level 2)
                                   (message "Submodules updated successfully in %s" repo-dir)))))
-                        (finalize)))))))))
+                          (finalize)))))))))))
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
