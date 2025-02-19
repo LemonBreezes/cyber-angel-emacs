@@ -412,7 +412,7 @@
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
 (use-package! auto-sudoedit
-  :init
+  :defer t :init
   (defun cae-auto-sudoedit-maybe-h ()
     (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
               (string= (file-attribute-user-id
