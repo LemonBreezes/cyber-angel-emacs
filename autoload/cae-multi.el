@@ -63,59 +63,59 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
     (cl-labels
         ;; finalize: called after any process (or chain) is completed.
         ((finalize ()
-           (setq pending-processes (1- pending-processes))
-           (when (zerop pending-processes)
-             (if all-ops-succeeded
-                 (cae-multi--run-doom-sync verb-level)
-               (when (>= verb-level 1)
-                 (message "One or more git operations failed. See %s for details"
-                          (buffer-name output-buffer))))))
+                   (setq pending-processes (1- pending-processes))
+                   (when (zerop pending-processes)
+                     (if all-ops-succeeded
+                         (cae-multi--run-doom-sync verb-level)
+                       (when (>= verb-level 1)
+                         (message "One or more git operations failed. See %s for details"
+                                  (buffer-name output-buffer))))))
          ;; start-git-step: run a git command asynchronously in REPO-DIR.
          ;; STEP-NAME is used only for logging.
          ;; CMD-ARGS is the list of arguments to pass to git.
          ;; NEXT-STEP—if non-nil—is a function to call if the process succeeds.
          (start-git-step (repo-dir step-name cmd-args next-step)
-           (let ((proc (apply #'start-process
-                              (concat "git-" step-name "-" (file-name-nondirectory repo-dir))
-                              output-buffer
-                              "git" cmd-args)))
-             (set-process-sentinel
-              proc
-              (lambda (proc event)
-                (when (memq (process-status proc) '(exit signal))
-                  (if (/= (process-exit-status proc) 0)
-                      (let ((error-msg
-                             ;; In the merge step, search for “CONFLICT” to report that fact.
-                             (if (and (string= step-name "merge")
+                         (let ((proc (apply #'start-process
+                                            (concat "git-" step-name "-" (file-name-nondirectory repo-dir))
+                                            output-buffer
+                                            "git" cmd-args)))
+                           (set-process-sentinel
+                            proc
+                            (lambda (proc event)
+                              (when (memq (process-status proc) '(exit signal))
+                                (if (/= (process-exit-status proc) 0)
+                                    (let ((error-msg
+                                           ;; In the merge step, search for “CONFLICT” to report that fact.
+                                           (if (and (string= step-name "merge")
+                                                    (with-current-buffer output-buffer
+                                                      (save-excursion
+                                                        (goto-char (point-min))
+                                                        (re-search-forward "CONFLICT" nil t))))
+                                               (format "Merge conflict detected in repository %s" repo-dir)
+                                             (format "Git %s failed in repository %s" step-name repo-dir))))
+                                      (message "%s" error-msg)
                                       (with-current-buffer output-buffer
-                                        (save-excursion
-                                          (goto-char (point-min))
-                                          (re-search-forward "CONFLICT" nil t))))
-                                 (format "Merge conflict detected in repository %s" repo-dir)
-                               (format "Git %s failed in repository %s" step-name repo-dir))))
-                        (message "%s" error-msg)
-                        (with-current-buffer output-buffer
-                          (goto-char (point-max))
-                          (insert (format "\nError: %s\n" error-msg)))
-                        (display-buffer output-buffer)
-                        (setq all-ops-succeeded nil)
-                        (finalize))
-                    (progn
-                      (when (>= verb-level 1)
-                        (message "Git %s succeeded in %s" step-name repo-dir))
-                      (if next-step
-                          (funcall next-step)
-                        (finalize)))))))
-             proc))
+                                        (goto-char (point-max))
+                                        (insert (format "\nError: %s\n" error-msg)))
+                                      (display-buffer output-buffer)
+                                      (setq all-ops-succeeded nil)
+                                      (finalize))
+                                  (progn
+                                    (when (>= verb-level 1)
+                                      (message "Git %s succeeded in %s" step-name repo-dir))
+                                    (if next-step
+                                        (funcall next-step)
+                                      (finalize)))))))
+                           proc))
          ;; For each repository we chain the steps:
          (start-push-step (repo-dir)
-           (start-git-step repo-dir "push" (list "push") nil))
+                          (start-git-step repo-dir "push" (list "push") nil))
          (start-merge-step (repo-dir)
-           (start-git-step repo-dir "merge" (list "merge" "origin/master")
-                           (lambda () (start-push-step repo-dir))))
+                           (start-git-step repo-dir "merge" (list "merge" "origin/master")
+                                           (lambda () (start-push-step repo-dir))))
          (start-fetch-step (repo-dir)
-           (start-git-step repo-dir "fetch" (list "fetch" "origin")
-                           (lambda () (start-merge-step repo-dir)))))
+                           (start-git-step repo-dir "fetch" (list "fetch" "origin")
+                                           (lambda () (start-merge-step repo-dir)))))
       ;; For each directory listed in `cae-multi-repositories' (a global list of repo paths)
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
