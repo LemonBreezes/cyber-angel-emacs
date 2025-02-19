@@ -40,26 +40,38 @@ does it attempt to verify cache validity."
 
 ;;;###autoload
 (defun cae-hotloading-reload-all-dir-locals ()
-  "Reload directory-local variables for all buffers that match any entry in the cache."
+  "Reload directory-local variables for all buffers that match any entry in the cache.
+Also resets the projectile cache for each affected directory."
   (interactive)
   (cae-hotloading--cleanup-dir-locals-cache)
-  (dolist (buf (buffer-list))
-    (when (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))
-      (with-current-buffer buf
-        (hack-dir-local-variables-non-file-buffer)))))
+  (let ((dirs (make-hash-table :test 'equal)))
+    (dolist (buf (buffer-list))
+      (when-let ((entry (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))))
+        (with-current-buffer buf
+          (hack-dir-local-variables-non-file-buffer))
+        (puthash (car entry) t dirs)))
+    (maphash (lambda (dir _)
+               (cae-hotloading-invalidate-project-cache dir))
+             dirs)))
 
 
 ;; ---[ 3. Reload for Buffers of a Specific Class ]----------------------
 
 ;;;###autoload
 (defun cae-hotloading-reload-dir-locals-for-class (class)
-  "Reload directory-local variables for all buffers whose dir-local class is CLASS."
+  "Reload directory-local variables for all buffers whose dir-local class is CLASS.
+Also resets the projectile cache once for each affected directory."
   (cae-hotloading--cleanup-dir-locals-cache)
-  (dolist (buf (buffer-list))
-    (when-let ((entry (cae-hotlodaing-dir-locals-cache-lookup (buffer-file-name buf))))
-      (when (eq (nth 1 entry) class)
-        (with-current-buffer buf
-          (hack-dir-local-variables-non-file-buffer))))))
+  (let ((dirs (make-hash-table :test 'equal)))
+    (dolist (buf (buffer-list))
+      (when-let ((entry (cae-hotloading-dir-locals-cache-lookup (buffer-file-name buf))))
+        (when (eq (nth 1 entry) class)
+          (with-current-buffer buf
+            (hack-dir-local-variables-non-file-buffer))
+          (puthash (car entry) t dirs))))
+    (maphash (lambda (dir _)
+               (cae-hotloading-invalidate-project-cache dir))
+             dirs)))
 
 
 ;; ---[ 4. Invalidate Projectile Cache ]----------------------------------
