@@ -124,14 +124,14 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                 (when (>= verb-level 1)
                   (message "Git lockfile exists in %s, skipping pull" repo-dir))
               (setq pending-processes (1+ pending-processes))
-              (let ((pull-process
-                     (start-process "git-pull-process"
+              (let ((fetch-process
+                     (start-process "git-fetch-process"
                                     output-buffer
-                                    "git" "pull" "--recurse-submodules=on-demand")))
+                                    "git" "fetch" "origin")))
                 (set-process-sentinel
-                 pull-process
+                 fetch-process
                  (lambda (proc event)
-                   (handle-pull proc event repo-dir))))))))
+                   (handle-fetch proc event repo-dir))))))))
       nil)))
 
 (defun cae-multi--run-doom-sync (verb-level)
