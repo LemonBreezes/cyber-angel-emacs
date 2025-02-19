@@ -8,6 +8,9 @@
 (defvar cae-multi-last-submodule-update-duration 0
   "Time in seconds that the last submodule update took.")
 
+(defvar cae-multi-last-sync-duration 0
+  "Time in seconds that the last sync operation took in `cae-multi-sync-repositories`.")
+
 (defun cae-multi-commit-file (file)
   (when (file-in-directory-p file doom-user-dir)
     (let ((gac-automatically-push-p t)
@@ -161,12 +164,12 @@ Then decrement the pending counter and, if zero, clear the running flag."
              (finalize-all ()
                            (unless sync-finalized
                              (setq sync-finalized t)
-                             (when (>= verb-level 1)
-                               (if all-ops-succeeded
-                                   (message "All sync operations finished successfully in %.2f seconds"
-                                            (float-time (time-subtract (current-time) start-time)))
-                                 (message "Sync operations finished with errors in %.2f seconds"
-                                          (float-time (time-subtract (current-time) start-time)))))))
+                             (let ((elapsed (float-time (time-subtract (current-time) start-time))))
+                               (setq cae-multi-last-sync-duration elapsed)
+                               (when (>= verb-level 1)
+                                 (if all-ops-succeeded
+                                     (message "All sync operations finished successfully in %.2f seconds" elapsed)
+                                   (message "Sync operations finished with errors in %.2f seconds" elapsed))))))
              (start-push-step (repo-dir)
                               (cae-multi--run-git-process
                                repo-dir
