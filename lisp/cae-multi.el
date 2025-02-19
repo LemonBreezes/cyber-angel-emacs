@@ -81,4 +81,4 @@
   "If non-nil, automatically pull repositories when idle.")
 
 (when cae-multi-enable-auto-pull
-  (run-with-idle-timer 600 t #'cae-multi-pull-repositories))
+  (run-with-idle-timer 600 t #'cae-multi-sync-repositories))
