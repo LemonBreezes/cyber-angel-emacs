@@ -83,16 +83,21 @@
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
+(defvar cae-multi-auto-pull-debounce 5)
+
 (defun cae-multi-sync-repositories-if-idle ()
   (when (> (time-to-seconds (current-idle-time))
-           (if (> (* 2 cae-multi-last-sync-duration) 0)
+           (if (> (* 2 cae-multi-last-sync-duration)
+                  cae-multi-auto-pull-debounce)
                (* 2 cae-multi-last-sync-duration)
-             15))
+             cae-multi-auto-pull-debounce))
     (let ((start-time (current-time)))
       (cae-multi-sync-repositories)
       (setq cae-multi-last-sync-duration
             (float-time (time-subtract (current-time) start-time)))))
-  (run-at-time (max (* 3 cae-multi-last-sync-duration) 5)
+  (run-at-time (if (> (* 3 cae-multi-last-sync-duration)
+                      (* 2 cae-multi-auto-pull-debounce))
+                   (* 2 cae-multi-auto-pull-debounce))
                nil #'cae-multi-sync-repositories-if-idle))
 
 (dir-locals-set-class-variables
