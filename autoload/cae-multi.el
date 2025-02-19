@@ -56,7 +56,8 @@ After all repositories have been processed, if everything succeeded,
 When called interactively, no prefix yields level 1 and a prefix yields level 2."
   (interactive (list (if current-prefix-arg 2 1)))
   (unless verb-level (setq verb-level 0))
-  (let ((output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
+  (let ((start-time (current-time))
+        (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
         (all-ops-succeeded t)
         (pending-processes 0))
     (with-current-buffer output-buffer (erase-buffer))
@@ -66,10 +67,11 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                    (setq pending-processes (1- pending-processes))
                    (when (zerop pending-processes)
                      (if all-ops-succeeded
-                         (cae-multi--run-doom-sync verb-level)
+                         (cae-multi--run-doom-sync verb-level start-time)
                        (when (>= verb-level 1)
-                         (message "One or more git operations failed. See %s for details"
-                                  (buffer-name output-buffer))))))
+                         (message "One or more git operations failed. See %s for details (took %.2f seconds)"
+                                  (buffer-name output-buffer)
+                                  (float-time (time-subtract (current-time) start-time)))))))
          ;; start-git-step: run a git command asynchronously in REPO-DIR.
          ;; STEP-NAME is used only for logging.
          ;; CMD-ARGS is the list of arguments to pass to git.
@@ -85,7 +87,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                               (when (memq (process-status proc) '(exit signal))
                                 (if (/= (process-exit-status proc) 0)
                                     (let ((error-msg
-                                           ;; In the merge step, search for “CONFLICT” to report that fact.
+                                           ;; In the merge step, search for "CONFLICT" to report that fact.
                                            (if (and (string= step-name "merge")
                                                     (with-current-buffer output-buffer
                                                       (save-excursion
@@ -164,7 +166,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
               (start-fetch-step repo-dir)))))
       nil)))
 
-(defun cae-multi--run-doom-sync (verb-level)
+(defun cae-multi--run-doom-sync (verb-level &optional start-time)
   "Run 'doom sync' asynchronously and redirect output to the output buffer.
 VERB-LEVEL controls how much output is emitted."
   (let* ((output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
@@ -178,9 +180,16 @@ VERB-LEVEL controls how much output is emitted."
      (lambda (proc event)
        (when (memq (process-status proc) '(exit signal))
          (if (= (process-exit-status proc) 0)
-             (when (>= verb-level 1)
-               (message "'doom sync' finished successfully"))
+             (if (and start-time (= verb-level 1))
+                 (message "'doom sync' finished successfully in %.2f seconds"
+                          (float-time (time-subtract (current-time) start-time)))
+               (when (>= verb-level 1)
+                 (message "'doom sync' finished successfully")))
            (progn
-             (message "'doom sync' failed with exit code %d" (process-exit-status proc))
+             (if (and start-time (= verb-level 1))
+                 (message "'doom sync' failed with exit code %d (took %.2f seconds)"
+                          (process-exit-status proc)
+                          (float-time (time-subtract (current-time) start-time)))
+               (message "'doom sync' failed with exit code %d" (process-exit-status proc)))
              (when (>= verb-level 1)
                (display-buffer output-buffer)))))))))
