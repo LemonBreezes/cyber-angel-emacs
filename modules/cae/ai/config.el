@@ -36,6 +36,7 @@
             "--editor-model" "claude-3-5-sonnet-20240620"
             "--reasoning-effort" "high"
             "--cache-prompts"
+            "--editor-edit-format" "editor-whole"
             "--chat-language" "English")))
   (defvar llm-refactoring-provider nil)
   (after! llm
