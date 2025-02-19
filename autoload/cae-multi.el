@@ -39,99 +39,92 @@
 
 ;;;###autoload
 (defun cae-multi-pull-repositories (&optional verb-level)
-  "Pull the shared repositories and handle conflicts asynchronously.
+  "For every repository in `cae-multi-repositories' do the following asynchronously:
+  1. git fetch origin
+  2. git merge origin/master
+  3. git push
 
-VERB-LEVEL controls output:
-  0: Silent (errors only; if explicitly set)
-  1: Normal messages (default when called interactively)
-  2: Extra verbose output
+If any of these steps fails (for example if a merge conflict is detected)
+an error is reported. VERB-LEVEL controls output:
+  0: Silent (errors only)
+  1: Normal messages (default for interactive execution)
+  2: Verbose output
+
+After all repositories have been processed, if everything succeeded,
+`cae-multi--run-doom-sync' is invoked to complete the sync.
 
 When called interactively, no prefix yields level 1 and a prefix yields level 2."
   (interactive (list (if current-prefix-arg 2 1)))
   (unless verb-level (setq verb-level 0))
   (let ((output-buffer (get-buffer-create " *cae-multi-pull-repositories*"))
-        (all-pulls-succeeded t)
+        (all-ops-succeeded t)
         (pending-processes 0))
     (with-current-buffer output-buffer (erase-buffer))
     (cl-labels
+        ;; finalize: called after any process (or chain) is completed.
         ((finalize ()
-                   "Decrement the pending counter and run doom sync if all are done."
-                   (setq pending-processes (1- pending-processes))
-                   (when (zerop pending-processes)
-                     (if all-pulls-succeeded
-                         (cae-multi--run-doom-sync verb-level)
-                       (when (>= verb-level 1)
-                         (message "One or more git operations failed. See %s for details"
-                                  (buffer-name output-buffer))))))
-         (handle-submodule (repo-dir)
-                           "Start the submodule update process for REPO-DIR and set its sentinel."
-                           (let ((submodule-process
-                                  (start-process "git-submodule-update-process"
-                                                 output-buffer
-                                                 "git" "submodule" "update" "--init" "--recursive")))
-                             (set-process-sentinel
-                              submodule-process
-                              (lambda (subproc subevent)
-                                (when (memq (process-status subproc) '(exit signal))
-                                  (if (/= (process-exit-status subproc) 0)
-                                      (progn
-                                        (message "Git submodule update failed in %s" repo-dir)
-                                        (with-current-buffer output-buffer
-                                          (goto-char (point-max))
-                                          (insert (format "\nError: Git submodule update failed in repository %s\n"
-                                                          repo-dir)))
-                                        (display-buffer output-buffer)
-                                        (setq all-pulls-succeeded nil))
-                                    (when (>= verb-level 1)
-                                      (message "Git submodule update succeeded in %s" repo-dir)))
-                                  (with-current-buffer output-buffer
-                                    (save-excursion
-                                      (goto-char (point-max))
-                                      ;; Search for conflict regardless of verb level.
-                                      (if (re-search-backward "\\bCONFLICT\\b" nil t)
-                                          (progn
-                                            (message "Conflict detected during git submodule update in %s" repo-dir)
-                                            (insert (format "\nError: Conflict detected in repository %s\n" repo-dir))
-                                            (display-buffer output-buffer)
-                                            (setq all-pulls-succeeded nil))
-                                        (when (>= verb-level 2)
-                                          (message "Submodules updated successfully in %s" repo-dir)))))
-                                  (finalize))))))
-         (handle-pull (proc event repo-dir)
-                      "Handle the termination of the pull process for REPO-DIR."
-                      (when (memq (process-status proc) '(exit signal))
-                        (if (/= (process-exit-status proc) 0)
-                            (progn
-                              (when (>= verb-level 1)
-                                (message "Git pull failed in %s" repo-dir)
-                                (with-current-buffer output-buffer
-                                  (goto-char (point-max))
-                                  (insert (format "\nError: Git pull failed in repository %s\n" repo-dir)))
-                                (display-buffer output-buffer))
-                              (setq all-pulls-succeeded nil)
-                              (finalize))
-                          (progn
-                            (when (>= verb-level 1)
-                              (message "Git pull succeeded in %s" repo-dir))
-                            ;; Increment pending-processes for the upcoming submodule update.
-                            (setq pending-processes (1+ pending-processes))
-                            (handle-submodule repo-dir)
-                            (finalize))))))
+           (setq pending-processes (1- pending-processes))
+           (when (zerop pending-processes)
+             (if all-ops-succeeded
+                 (cae-multi--run-doom-sync verb-level)
+               (when (>= verb-level 1)
+                 (message "One or more git operations failed. See %s for details"
+                          (buffer-name output-buffer))))))
+         ;; start-git-step: run a git command asynchronously in REPO-DIR.
+         ;; STEP-NAME is used only for logging.
+         ;; CMD-ARGS is the list of arguments to pass to git.
+         ;; NEXT-STEP—if non-nil—is a function to call if the process succeeds.
+         (start-git-step (repo-dir step-name cmd-args next-step)
+           (let ((proc (apply #'start-process
+                              (concat "git-" step-name "-" (file-name-nondirectory repo-dir))
+                              output-buffer
+                              "git" cmd-args)))
+             (set-process-sentinel
+              proc
+              (lambda (proc event)
+                (when (memq (process-status proc) '(exit signal))
+                  (if (/= (process-exit-status proc) 0)
+                      (let ((error-msg
+                             ;; In the merge step, search for “CONFLICT” to report that fact.
+                             (if (and (string= step-name "merge")
+                                      (with-current-buffer output-buffer
+                                        (save-excursion
+                                          (goto-char (point-min))
+                                          (re-search-forward "CONFLICT" nil t))))
+                                 (format "Merge conflict detected in repository %s" repo-dir)
+                               (format "Git %s failed in repository %s" step-name repo-dir))))
+                        (message "%s" error-msg)
+                        (with-current-buffer output-buffer
+                          (goto-char (point-max))
+                          (insert (format "\nError: %s\n" error-msg)))
+                        (display-buffer output-buffer)
+                        (setq all-ops-succeeded nil)
+                        (finalize))
+                    (progn
+                      (when (>= verb-level 1)
+                        (message "Git %s succeeded in %s" step-name repo-dir))
+                      (if next-step
+                          (funcall next-step)
+                        (finalize)))))))
+             proc))
+         ;; For each repository we chain the steps:
+         (start-push-step (repo-dir)
+           (start-git-step repo-dir "push" (list "push") nil))
+         (start-merge-step (repo-dir)
+           (start-git-step repo-dir "merge" (list "merge" "origin/master")
+                           (lambda () (start-push-step repo-dir))))
+         (start-fetch-step (repo-dir)
+           (start-git-step repo-dir "fetch" (list "fetch" "origin")
+                           (lambda () (start-merge-step repo-dir)))))
+      ;; For each directory listed in `cae-multi-repositories' (a global list of repo paths)
       (dolist (repo-dir cae-multi-repositories)
         (let ((default-directory repo-dir))
-          (when (file-directory-p (concat repo-dir "/.git"))
-            (if (file-exists-p (concat repo-dir "/.git/index.lock"))
+          (when (file-directory-p (expand-file-name ".git" repo-dir))
+            (if (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
                 (when (>= verb-level 1)
-                  (message "Git lockfile exists in %s, skipping pull" repo-dir))
+                  (message "Git lockfile exists in %s, skipping update" repo-dir))
               (setq pending-processes (1+ pending-processes))
-              (let ((fetch-process
-                     (start-process "git-fetch-process"
-                                    output-buffer
-                                    "git" "fetch" "origin")))
-                (set-process-sentinel
-                 fetch-process
-                 (lambda (proc event)
-                   (handle-fetch proc event repo-dir))))))))
+              (start-fetch-step repo-dir)))))
       nil)))
 
 (defun cae-multi--run-doom-sync (verb-level)
