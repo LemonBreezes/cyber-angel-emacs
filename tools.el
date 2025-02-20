@@ -273,18 +273,36 @@
 
 (use-package! detached
   :when (executable-find "dtach")
-  :hook (doom-first-input . detached-setup)
+  :hook (doom-first-input . detached-init)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
-         ([remap async-shell-command] . detached-shell-command))
-  :config
-  ;;(advice-add #'compile :around #'detached-compile)
+         ([remap async-shell-command] . detached-shell-command)
+         ;; Replace `compile' with `detached-compile'
+         ([remap compile] . detached-compile)
+         ([remap recompile] . detached-compile-recompile)
+         ;; Replace built in completion of sessions with `consult'
+         ([remap detached-open-session] . detached-consult-session))
+  :custom ((detached-show-output-on-attach t)
+           (detached-terminal-data-command system-type))
+  :init
   (map! :leader
-        :prefix-map ("d" . "detached")
-        :desc "Annotate process" "A" #'detached-annotate-process
-        :desc "Kill process" "k" #'detached-terminate-process
-        :desc "Open process directory" "-" #'detached-open-process-directory
-        :desc "Tail process" "t" #'detached-tail-process
-        :desc "Open detached shell" "d" #'detached-shell
-        :desc "Copy process output" "w" #'detached-copy-process-output
-        :desc "Copy process command" "W" #'detached-copy-process-command)
-  (setq detached-notification-function #'cae-detached-extra-alert-notification))
+        :desc "detached" "d" (cae-oneshot-keymap detached-embark-action-map
+                                                 detached-init))
+  (after! detached-eshell
+    (map! :map detached-eshell-mode-map
+          :n "RET" #'detached-eshell-send-input))
+  (after! detached-shell
+    (map! :map detached-shell-mode-map
+          :n "RET" #'detached-shell-send-input))
+  (after! detached-vterm
+    (map! :map detached-vterm-mode-map
+          :n "RET" #'detached-vterm-send-input))
+  (after! detached-init
+    (map! :map detached-embark-action-map
+          "h" #'cae-detached-describe-session
+          "a" #'cae-detached-attach-dwim
+          "." #'detached-detach-session)
+    (map! :leader
+          :desc "detached" "d" detached-embark-action-map))
+  :config
+  (setq detached-degraded-commands '("^ls"))
+  (setq detached-notification-function #'detached-extra-alert-notification))
