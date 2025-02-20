@@ -280,5 +280,5 @@
          ([remap compile] . detached-compile)
          ([remap recompile] . detached-compile-recompile))
   :config
-  (advice-add #'compile :around #'detached-compile)
+  ;;(advice-add #'compile :around #'detached-compile)
   (setq detached-notification-function #'cae-detached-extra-alert-notification))
