@@ -3,7 +3,7 @@
 (load! "lisp/cae-theme")
 (load! "lisp/cae-visual-scrolling")
 
-#@13777 ;; Show absolute line numbers. I prefer to not show relative line numbers
+;; Show absolute line numbers. I prefer to not show relative line numbers
 ;; because I use `avy' commands to jump to lines.
 (setq display-line-numbers-type nil
       display-line-numbers-width-start t)
@@ -12,6 +12,7 @@
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
+#@00
 ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
 ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
 ;; what item I have selected.
@@ -329,7 +330,7 @@
                                dictionary dictionary_comprehension
                                parenthesized_expression subscript)))
   :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-
+
 (use-package! casual-calc
   :defer t :init
   (after! calc
