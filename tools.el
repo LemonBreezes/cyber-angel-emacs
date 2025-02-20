@@ -280,5 +280,4 @@
          ([remap compile] . detached-compile)
          ([remap recompile] . detached-compile-recompile))
   :config
-  (setq detached-degraded-commands '("^ls"))
   (setq detached-notification-function #'detached-extra-alert-notification))
