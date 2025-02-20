@@ -124,37 +124,38 @@
 
 ;; BUG Detached uses declare-function for `dired-mark-if' even though it is not
 ;; a function.
-(defun detached--dired-info ()
-  "Enable detached info in `dired' buffer using overlays."
-  ;; Remove any existing overlays
-  (detached--dired-remove-overlays)
+(after! detached
+  (defun detached--dired-info ()
+    "Enable detached info in `dired' buffer using overlays."
+    ;; Remove any existing overlays
+    (detached--dired-remove-overlays)
 
-  ;; Hide everything except log files
-  (dired-mark-if
-   (if (looking-at-p dired-re-dot)
-       t
-     (and (not (eolp))			; empty line
-	  (let ((fn (dired-get-filename t t)))
-	    (and fn (not (string-match-p ".*\.detached" fn))))))
-   nil)
-  (dired-do-kill-lines nil "")
+    ;; Hide everything except log files
+    (dired-mark-if
+     (if (looking-at-p dired-re-dot)
+         t
+       (and (not (eolp))                ; empty line
+	    (let ((fn (dired-get-filename t t)))
+	      (and fn (not (string-match-p ".*\.detached" fn))))))
+     nil)
+    (dired-do-kill-lines nil "")
 
-  ;; Alter display of filenames
-  (let ((candidates (detached--process-candidates (detached-get-processes))))
-    (goto-char (point-min))
-    (let ((text-property nil))
-      (while (setq text-property (text-property-search-forward 'dired-filename))
-        (when-let* ((filename (dired-get-filename 'no-dir t))
-                    (extension (file-name-extension filename))
-                    (is-log (string-match "detached" extension)))
-          (let* ((beg (prop-match-beginning text-property))
-                 (end (prop-match-end text-property))
-                 (overlay (make-overlay beg end))
-                 (id (file-name-base filename))
-                 (name (thread-last candidates
-                                    (seq-find (lambda (it)
-                                                (string-equal (detached-process-id (cdr it)) id)))
-                                    (car))))
-            (overlay-put overlay 'detached t)
-            (overlay-put overlay 'detached-process-id id)
-            (overlay-put overlay 'display (concat name (detached--process-annotation-info name)))))))))
+    ;; Alter display of filenames
+    (let ((candidates (detached--process-candidates (detached-get-processes))))
+      (goto-char (point-min))
+      (let ((text-property nil))
+        (while (setq text-property (text-property-search-forward 'dired-filename))
+          (when-let* ((filename (dired-get-filename 'no-dir t))
+                      (extension (file-name-extension filename))
+                      (is-log (string-match "detached" extension)))
+            (let* ((beg (prop-match-beginning text-property))
+                   (end (prop-match-end text-property))
+                   (overlay (make-overlay beg end))
+                   (id (file-name-base filename))
+                   (name (thread-last candidates
+                                      (seq-find (lambda (it)
+                                                  (string-equal (detached-process-id (cdr it)) id)))
+                                      (car))))
+              (overlay-put overlay 'detached t)
+              (overlay-put overlay 'detached-process-id id)
+              (overlay-put overlay 'display (concat name (detached--process-annotation-info name))))))))))
