@@ -275,10 +275,12 @@
   :when (executable-find "dtach")
   :hook (doom-first-input . detached-setup)
   :bind (;; Replace `async-shell-command' with `detached-shell-command'
-         ([remap async-shell-command] . detached-shell-command)
-         ;; Replace `compile' with `detached-compile'
-         ([remap compile] . detached-compile)
-         ([remap recompile] . detached-compile-recompile))
+         ([remap async-shell-command] . detached-shell-command))
   :config
   ;;(advice-add #'compile :around #'detached-compile)
+  (map! :leader
+        :prefix-map ("d" . "detached")
+        :desc "Attach session" "a" #'cae-detached-attach-dwim
+        :desc "Kill session" "k" #'detached-terminate-process
+        :desc "Open session directory" "-" #'detached-open-process-directory)
   (setq detached-notification-function #'cae-detached-extra-alert-notification))
