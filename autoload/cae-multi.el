@@ -114,6 +114,7 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
       (when (eq (call-process "git" nil t nil "rev-parse" "HEAD") 0)
         (string-trim (buffer-string))))))
 
+;; TODO Make it so that git push only runs if there are unmerged commits.
 ;;;###autoload
 (defun cae-multi-sync-repositories (&optional verb-level)
   (interactive (list (if current-prefix-arg 2 1)))
