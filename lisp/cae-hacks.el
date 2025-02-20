@@ -129,8 +129,8 @@ Optionally privide MARKER-CHAR to unmark files instead."
   (let ((dired-marker-char (or marker-char dired-marker-char)))
     (dired-mark-if
      (and (not (looking-at-p dired-re-dot))
-	      (not (eolp))			; empty line
-	      (when-let* ((fn (dired-get-filename t t))
+	  (not (eolp))			; empty line
+	  (when-let* ((fn (dired-get-filename t t))
                       (id (file-name-base fn))
                       (process (detached-get-process id)))
             (funcall predicate process)))
