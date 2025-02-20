@@ -40,11 +40,11 @@
 (defun cae-detached-extra-alert-notification (session)
   "Send an `alert' notification when SESSION becomes inactive."
   (let ((status (detached-session-status session))
-		(host (detached-session-host-name session)))
-	(alert (detached-session-command session)
-		   :title (pcase status
-					('success (format "Detached finished [%s]" host))
-					('failure (format "Detached failed [%s]" host)))
-		   :severity (pcase status
-					   ('success 'moderate)
-					   ('failure 'high)))))
+	(host (detached-session-host-name session)))
+    (alert (detached-session-command session)
+	   :title (pcase status
+		    ('success (format "Detached finished [%s]" host))
+		    ('failure (format "Detached failed [%s]" host)))
+	   :severity (pcase status
+		       ('success 'moderate)
+		       ('failure 'high)))))
