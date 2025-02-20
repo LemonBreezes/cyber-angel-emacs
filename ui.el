@@ -3,7 +3,7 @@
 (load! "lisp/cae-theme")
 (load! "lisp/cae-visual-scrolling")
 
-;; Show absolute line numbers. I prefer to not show relative line numbers
+#@13777 ;; Show absolute line numbers. I prefer to not show relative line numbers
 ;; because I use `avy' commands to jump to lines.
 (setq display-line-numbers-type nil
       display-line-numbers-width-start t)
@@ -329,7 +329,7 @@
                                dictionary dictionary_comprehension
                                parenthesized_expression subscript)))
   :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-
+
 (use-package! casual-calc
   :defer t :init
   (after! calc
