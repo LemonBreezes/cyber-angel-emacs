@@ -106,3 +106,15 @@ unbalanced. Works with Lispy and Smartparens."
                                        (- arg)))
          (call-interactively #'pp-eval-expression))
         (t (call-interactively #'eval-expression))))
+
+;;;###autoload
+(defun cae-comment-elisp-block (beg end)
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      ;; account for space and terminator
+      (insert (format "#@%d " (+ (- end beg) 2)))
+      (goto-char (point-max))
+      (insert "\037"))))
