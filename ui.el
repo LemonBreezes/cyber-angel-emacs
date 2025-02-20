@@ -84,21 +84,21 @@
         which-key-max-description-length 35
         ;; This is so that `which-key' does not cause popup shells to be
         ;; resized unintentionally.
-        ;; BUG However, this breaks `+vertico-embark-which-key-indicator'
         which-key-preserve-window-configuration t
         ;; This option breaks the Embark Which Key prompter when you have a
         ;; prefix key in the Embark action map so disable it.
         which-key-show-transient-maps nil))
-(defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
-  :before #'which-key--hide-buffer-side-window
-  (when (minibufferp)
-    (setq which-key--saved-window-configuration nil)))
 (when (modulep! :editor evil)
   (after! evil
     ;; I have gotten a strange error with `which-key' before that I am
     ;; working around with this.
     (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
+;; BUG `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
+(defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
+  :before #'which-key--hide-buffer-side-window
+  (when (minibufferp)
+    (setq which-key--saved-window-configuration nil)))
 ;; BUG Allow C-h to open Consult when calling which-key without a prefix.
 (when (modulep! :completion vertico)
   (after! which-key
