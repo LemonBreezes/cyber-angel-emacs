@@ -578,15 +578,3 @@ abort completely with `C-g'."
           (message "\"%s\" now expands to \"%s\" %sally"
                    bef aft (if p "loc" "glob")))
       (user-error "No typo at or before point"))))
-
-;;;###autoload
-(defun cae-comment-elisp-block (beg end)
-  (interactive "r")
-  (save-excursion
-    (save-restriction
-      (narrow-to-region beg end)
-      (goto-char (point-min))
-      ;; account for space and terminator
-      (insert (format "#@%d " (+ (- end beg) 2)))
-      (goto-char (point-max))
-      (insert "\037"))))
