@@ -77,16 +77,16 @@
         doom-modeline-major-mode-icon nil
         doom-modeline-minor-modes nil))
 
-(after! which-key
-  (setq which-key-ellipsis "..."
-        which-key-idle-delay 0.5
-        which-key-compute-remaps t
-        which-key-max-description-length 35
-        ;; This is so that `which-key' does not cause popup shells.
-        which-key-preserve-window-configuration t
-        ;; This option breaks the Embark Which Key prompter when you have a
-        ;; prefix key in the Embark action map so disable it.
-        which-key-show-transient-maps nil))
+;;(after! which-key
+;;  (setq which-key-ellipsis "..."
+;;        which-key-idle-delay 0.5
+;;        which-key-compute-remaps t
+;;        which-key-max-description-length 35
+;;        ;; This is so that `which-key' does not cause popup shells.
+;;        which-key-preserve-window-configuration t
+;;        ;; This option breaks the Embark Which Key prompter when you have a
+;;        ;; prefix key in the Embark action map so disable it.
+;;        which-key-show-transient-maps nil))
 (when (modulep! :editor evil)
   (after! evil
     ;; I have gotten a strange error with `which-key' before that I am
@@ -112,7 +112,6 @@
            (embark-bindings-in-keymap cae-which-key-current-keymap))
           (t (call-interactively #'embark-prefix-help-command)))))
 
-#@00
 ;; Do not scale fonts in `writeroom-mode'.
 (setq +zen-text-scale 0)
 
