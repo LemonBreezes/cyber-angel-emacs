@@ -318,7 +318,7 @@
   (dolist (cmd '(+eshell-tldr-to-man))
     (add-to-list 'beacon-dont-blink-commands cmd)))
 
-(use-package! indent-bars
+#@561 (use-package! indent-bars
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)
@@ -329,7 +329,7 @@
                                dictionary dictionary_comprehension
                                parenthesized_expression subscript)))
   :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
-#@00
+
 (use-package! casual-calc
   :defer t :init
   (after! calc
