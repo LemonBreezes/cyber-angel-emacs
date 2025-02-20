@@ -77,7 +77,6 @@
         doom-modeline-major-mode-icon nil
         doom-modeline-minor-modes nil))
 
-#@00
 (after! which-key
   (setq which-key-ellipsis "..."
         which-key-idle-delay 0.5
@@ -113,6 +112,7 @@
            (embark-bindings-in-keymap cae-which-key-current-keymap))
           (t (call-interactively #'embark-prefix-help-command)))))
 
+#@00
 ;; Do not scale fonts in `writeroom-mode'.
 (setq +zen-text-scale 0)
 
