@@ -34,6 +34,7 @@
     ("corectly" "correctly" nil :count 0)
     ("corerctly" "correctly" nil :count 0)
     ("creatin" "creating" nil :count 0)
+    ("declrae" "declare" nil :count 0)
     ("delee" "delete" nil :count 0)
     ("dervar" "defvar" nil :count 1)
     ("detacjed" "detached" nil :count 0)
