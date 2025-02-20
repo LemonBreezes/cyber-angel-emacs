@@ -92,16 +92,9 @@
 (defadvice! cae-which-key-embark-do-not-preserve-window-configuration-a
   (orig-fun &rest args)
   :around #'which-key-show-keymap
-  (let ((which-key-preserve-window-configuration
-         (not (or (bound-and-true-p mct--active)
-                  (bound-and-true-p vertico--input)
-                  (and (featurep 'auth-source)
-                       (eq (current-local-map) read-passwd-map))
-                  (and (featurep 'helm-core) (helm--alive-p))
-                  (and (featurep 'ido) (ido-active))
-                  (where-is-internal 'minibuffer-complete
-                                     (list (current-local-map)))
-                  (memq #'ivy--queue-exhibit post-command-hook)))))
+  (let ((which-key-preserve-window-configuration (not (minibufferp))))
+    (when (minibufferp)
+      (setq which-key-saved-window-configuration nil))
     (apply orig-fun args)))
 (when (modulep! :editor evil)
   (after! evil
