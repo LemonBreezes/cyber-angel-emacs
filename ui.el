@@ -94,6 +94,7 @@
   :around #'which-key-show-keymap
   (let ((which-key-preserve-window-configuration (not (minibufferp))))
     (when (minibufferp)
+      (+log 'hello)
       (setq which-key-saved-window-configuration nil))
     (apply orig-fun args)))
 (when (modulep! :editor evil)
