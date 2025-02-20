@@ -62,13 +62,6 @@
 
       (add-to-list 'projectile-globally-ignored-directories
                    (expand-file-name ".local/straight/repos/" user-emacs-directory))
-      (unless (or (cl-set-difference projectile-known-projects
-                                     '("~/.doom.d/" "~/.emacs.d/" "~/.config/doom/"
-                                       "~/.config/emacs/")
-                                     :test #'string=)
-                  (not (file-directory-p "~/src/"))
-                  (directory-empty-p "~/src/"))
-        (projectile-discover-projects-in-search-path))
       ;; Recognize `makefile' as a Makefile.
       (add-to-list
        'projectile-project-types
