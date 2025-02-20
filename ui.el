@@ -12,7 +12,6 @@
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
 
-#@00
 ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
 ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
 ;; what item I have selected.
@@ -78,6 +77,7 @@
         doom-modeline-major-mode-icon nil
         doom-modeline-minor-modes nil))
 
+#@00
 (after! which-key
   (setq which-key-ellipsis "..."
         which-key-idle-delay 0.5
