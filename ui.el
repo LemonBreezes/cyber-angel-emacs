@@ -80,10 +80,10 @@
 (after! which-key
   (setq which-key-ellipsis "..."
         which-key-idle-delay 0.5
-        which-key-compute-remaps nil
+        which-key-compute-remaps t
         which-key-max-description-length 35
         ;; This is so that `which-key' does not cause popup shells.
-        which-key-preserve-window-configuration t
+        which-key-preserve-window-configuration nil
         ;; This option breaks the Embark Which Key prompter when you have a
         ;; prefix key in the Embark action map so disable it.
         which-key-show-transient-maps nil))
