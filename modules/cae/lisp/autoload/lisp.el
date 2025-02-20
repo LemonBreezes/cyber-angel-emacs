@@ -108,6 +108,8 @@ unbalanced. Works with Lispy and Smartparens."
         (t (call-interactively #'eval-expression))))
 
 ;;https://emacsninja.com/posts/forbidden-emacs-lisp-knowledge-block-comments.html
+;; This code is not complete but it's a reminder of how to use this.
+;; I can also use #@00 to comment out the rest of a file.
 ;;;###autoload
 (defun cae-comment-elisp-block (beg end)
   (interactive "r")
