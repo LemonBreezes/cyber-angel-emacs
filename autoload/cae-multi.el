@@ -213,7 +213,8 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                 verb-level
                                 (lambda () (setq all-ops-succeeded nil)))))
           (dolist (repo-dir cae-multi-repositories)
-            (let ((default-directory repo-dir))
+            (let ((default-directory repo-dir)
+                  (buffer-file-name repo-dir))
               (when (file-directory-p (expand-file-name ".git" repo-dir))
                 (if (file-exists-p (expand-file-name ".git/index.lock" repo-dir))
                     (when (>= verb-level 1)
