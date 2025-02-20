@@ -305,4 +305,6 @@
           :desc "detached" "d" detached-embark-action-map))
   :config
   (setq detached-degraded-commands '("^ls"))
+  (setq detached-db-directory (concat (temporary-file-directory) "detached/")
+        detached-session-directory (concat (temporary-file-directory) "detached/sessions/"))
   (setq detached-notification-function #'detached-extra-alert-notification))
