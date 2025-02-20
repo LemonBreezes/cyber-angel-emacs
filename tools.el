@@ -285,5 +285,6 @@
         :desc "Open process directory" "-" #'detached-open-process-directory
         :desc "Tail process" "t" #'detached-tail-process
         :desc "Open detached shell" "d" #'detached-shell
-        :desc "Copy process output" "w" #'detached-copy-process-output)
+        :desc "Copy process output" "w" #'detached-copy-process-output
+        :desc "Copy process command" "W" #'detached-copy-process-command)
   (setq detached-notification-function #'cae-detached-extra-alert-notification))
