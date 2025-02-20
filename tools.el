@@ -280,4 +280,4 @@
          ([remap compile] . detached-compile)
          ([remap recompile] . detached-compile-recompile))
   :config
-  (setq detached-notification-function #'detached-extra-alert-notification))
+  (setq detached-notification-function #'cae-detached-extra-alert-notification ))
