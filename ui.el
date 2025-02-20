@@ -90,7 +90,7 @@
         ;; prefix key in the Embark action map so disable it.
         which-key-show-transient-maps nil))
 (defadvice! cae-which-key-embark-do-not-preserve-window-configuration-a
-    (orig-fun &rest args)
+  (orig-fun &rest args)
   :around #'+vertico-embark-which-key-indicator
   (let ((which-key-preserve-window-configuration nil))
     (apply orig-fun args)))
