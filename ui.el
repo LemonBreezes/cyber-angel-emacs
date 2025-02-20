@@ -91,12 +91,10 @@
         which-key-show-transient-maps nil))
 (defadvice! cae-which-key-embark-do-not-preserve-window-configuration-a
   (orig-fun &rest args)
-  :around #'which-key-show-keymap
-  (let ((which-key-preserve-window-configuration (not (minibufferp))))
-    (when (minibufferp)
-      (+log 'hello)
-      (setq which-key-saved-window-configuration nil))
-    (apply orig-fun args)))
+  :around #'which-key--hide-buffer-side-window
+  (when (minibufferp)
+    (setq which-key--saved-window-configuration nil))
+  (apply orig-fun args))
 (when (modulep! :editor evil)
   (after! evil
     ;; I have gotten a strange error with `which-key' before that I am
