@@ -25,6 +25,11 @@
 (after! lisp-mode
   (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
 
+(after! elisp-mode
+  (map! :map emacs-lisp-mode-map
+        :localleader
+        ";" #'cae-comment-elisp-block))
+
 ;; Allow inserting newlines in the minibuffer. Also protect from
 ;; entering unbalanced expressions into `eval-expression'.
 (map! :map minibuffer-local-map
