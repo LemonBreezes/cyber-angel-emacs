@@ -280,7 +280,11 @@
   ;;(advice-add #'compile :around #'detached-compile)
   (map! :leader
         :prefix-map ("d" . "detached")
-        :desc "Attach session" "a" #'cae-detached-attach-dwim
-        :desc "Kill session" "k" #'detached-terminate-process
-        :desc "Open session directory" "-" #'detached-open-process-directory)
+        :desc "Attach process" "a" #'cae-detached-attach-dwim
+        :desc "Annotate process" "A" #'detached-annotate-process
+        :desc "Kill process" "k" #'detached-terminate-process
+        :desc "Open process directory" "-" #'detached-open-process-directory
+        :desc "Tail process" "t" #'detached-tail-process
+        :desc "Open detached shell" "d" #'detached-shell
+        :desc "Copy process output" "w" #'detached-copy-process-output)
   (setq detached-notification-function #'cae-detached-extra-alert-notification))
