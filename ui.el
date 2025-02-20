@@ -91,7 +91,7 @@
         which-key-show-transient-maps nil))
 (defadvice! cae-which-key-embark-do-not-preserve-window-configuration-a
   (orig-fun &rest args)
-  :around #'+vertico-embark-which-key-indicator
+  :around #'embark-keymap-prompter
   (let ((which-key-preserve-window-configuration nil))
     (apply orig-fun args)))
 (when (modulep! :editor evil)
