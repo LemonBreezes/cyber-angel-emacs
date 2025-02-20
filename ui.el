@@ -319,16 +319,16 @@
     (add-to-list 'beacon-dont-blink-commands cmd)))
 
 #@561 (use-package! indent-bars
-  :custom
-  (indent-bars-treesit-support t)
-  (indent-bars-no-descend-string t)
-  (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
+        :custom
+        (indent-bars-treesit-support t)
+        (indent-bars-no-descend-string t)
+        (indent-bars-treesit-ignore-blank-lines-types '("module"))
+        (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
                                         ; as an example
-                               list list_comprehension
-                               dictionary dictionary_comprehension
-                               parenthesized_expression subscript)))
-  :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
+                                     list list_comprehension
+                                     dictionary dictionary_comprehension
+                                     parenthesized_expression subscript)))
+        :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
 
 (use-package! casual-calc
   :defer t :init
