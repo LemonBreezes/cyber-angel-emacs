@@ -82,11 +82,11 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
                          (goto-char (point-max))
                          (insert (format "\nError: %s\n" error-msg)))))
                  (progn
-                   (message "%s" error-msg)
                    (with-current-buffer output-buffer
                      (goto-char (point-max))
                      (insert (format "\nError: %s\n" error-msg)))
                    (unless (string= step-name "push")
+                     (message "%s" error-msg)
                      (display-buffer output-buffer))))
                (funcall set-failure)
                (funcall finalize))
