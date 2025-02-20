@@ -280,7 +280,6 @@
   ;;(advice-add #'compile :around #'detached-compile)
   (map! :leader
         :prefix-map ("d" . "detached")
-        :desc "Attach process" "a" #'cae-detached-attach-dwim
         :desc "Annotate process" "A" #'detached-annotate-process
         :desc "Kill process" "k" #'detached-terminate-process
         :desc "Open process directory" "-" #'detached-open-process-directory
