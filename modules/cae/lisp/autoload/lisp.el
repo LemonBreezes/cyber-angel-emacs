@@ -107,6 +107,7 @@ unbalanced. Works with Lispy and Smartparens."
          (call-interactively #'pp-eval-expression))
         (t (call-interactively #'eval-expression))))
 
+;;https://emacsninja.com/posts/forbidden-emacs-lisp-knowledge-block-comments.html
 ;;;###autoload
 (defun cae-comment-elisp-block (beg end)
   (interactive "r")
