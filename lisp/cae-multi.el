@@ -79,8 +79,8 @@
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
-;; Ideally, I would want a dynamic sync time based on the amount of time it
-;; takes to sync. But for now, I will just use a fixed time.
+;; This can probably be improved by using git hooks or something but this works
+;; just fine.
 (defun cae-multi-sync-repositories-if-idle ()
   (when (> (time-to-seconds (current-idle-time)) 30)
     (cae-multi-sync-repositories)))
