@@ -22,6 +22,8 @@
         org-highlight-latex-and-related nil
         org-priority-highest ?A
         org-priority-lowest ?E
+        ;; Make it easier to sync
+        org-capture-bookmark nil
         ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
