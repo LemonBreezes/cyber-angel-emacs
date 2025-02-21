@@ -1,10 +1,5 @@
 ;;; lisp/cae-hotloading.el -*- lexical-binding: t; -*-
 
-;; Clean up duplicate idle timers since we are hot-reloading our config.
-;; NOTE If the timers have a different idle time, the last one defined one will
-;; be taken.
-;; NOTE If this ever causes problems, I can always limit it to only applying to
-;; functions from my config.
 (defun cae-cleanup-duplicate-idle-timers ()
   (setq timer-idle-list
         (cl-remove-duplicates
