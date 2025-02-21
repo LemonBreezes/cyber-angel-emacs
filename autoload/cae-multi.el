@@ -114,7 +114,6 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
       (when (eq (call-process "git" nil t nil "rev-parse" "HEAD") 0)
         (string-trim (buffer-string))))))
 
-;; TODO Make it so that git push only runs if there are unmerged commits.
 ;;;###autoload
 (defun cae-multi-sync-repositories (&optional verb-level)
   (interactive (list (if current-prefix-arg 2 1)))
@@ -132,17 +131,17 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
         (progn
           (when (equal verb-level 1)
             (message "Warning: cae-multi-sync-repositories is already running."))
-          nil)  ; exit immediately
+          nil)                          ; exit immediately
       (setq cae-multi-sync-running t)
       (let ((start-time (current-time))
             (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
             (all-ops-succeeded t)
-            (pending-private 0)  ; count of repos entirely in doom-private-dir
+            (pending-private 0)    ; count of repos entirely in doom-private-dir
             (private-changed nil)  ; flag: did any private repo change?
             (initial-hashes (make-hash-table :test #'equal))
-            (pending-repos 0)    ; count of repos with active sync chains
-            doom-sync-proc      ; will hold doom sync process if started
-            sync-finalized)     ; flag to ensure we finalize only once
+            (pending-repos 0)           ; count of repos with active sync chains
+            doom-sync-proc              ; will hold doom sync process if started
+            sync-finalized)             ; flag to ensure we finalize only once
         (with-current-buffer output-buffer (erase-buffer))
         (cl-labels
             ((repo-sync-finished (repo-dir)
