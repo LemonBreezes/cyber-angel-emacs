@@ -107,13 +107,6 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
                  (funcall finalize))))))))
     proc))
 
-(defun cae-multi--get-repo-commit (repo-dir)
-  "Return the current commit hash of the git repository in REPO-DIR as a string."
-  (with-temp-buffer
-    (let ((default-directory repo-dir))
-      (when (eq (call-process "git" nil t nil "rev-parse" "HEAD") 0)
-        (string-trim (buffer-string))))))
-
 ;;;###autoload
 (defun cae-multi-sync-repositories (&optional verb-level)
   (interactive (list (if current-prefix-arg 2 1)))
@@ -137,8 +130,6 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
             (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
             (all-ops-succeeded t)
             (pending-private 0)    ; count of repos entirely in doom-private-dir
-            (private-changed nil)  ; flag: did any private repo change?
-            (initial-hashes (make-hash-table :test #'equal))
             (pending-repos 0)           ; count of repos with active sync chains
             doom-sync-proc              ; will hold doom sync process if started
             sync-finalized)             ; flag to ensure we finalize only once
@@ -159,16 +150,9 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                      (finalize-all))))
              (repo-finalize (repo-dir)
                             "Finalize a repo in doom-private-dir."
-                            (let ((old-hash (gethash repo-dir initial-hashes))
-                                  (new-hash (cae-multi--get-repo-commit repo-dir)))
-                              (unless (equal old-hash new-hash)
-                                (setq private-changed t))
                               (setq pending-private (1- pending-private))
                               (when (zerop pending-private)
-                                (if private-changed
-                                    (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))
-                                  (when (>= verb-level 1)
-                                    (message "No changes detected in doom-private repositories; skipping doom sync"))))))
+                                (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))))
              (maybe-finalize (repo-dir)
                              "Call repo-finalize only for a repo that lies within doom-private-dir."
                              (when (string-prefix-p (file-truename doom-private-dir)
@@ -220,10 +204,6 @@ Then decrement the pending counter and, if zero, clear the running flag."
                     (when (>= verb-level 1)
                       (message "Git lockfile exists in %s, skipping update" repo-dir))
                   (setq pending-repos (1+ pending-repos))
-                  (when (string-prefix-p (file-truename doom-private-dir)
-                                         (file-truename repo-dir))
-                    (puthash repo-dir (cae-multi--get-repo-commit repo-dir) initial-hashes)
-                    (setq pending-private (1+ pending-private)))
                   (start-fetch-step repo-dir)))))
           (when (zerop pending-repos)
             (setq cae-multi-sync-running nil))
