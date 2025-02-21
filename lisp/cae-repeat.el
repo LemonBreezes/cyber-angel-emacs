@@ -41,8 +41,9 @@
        "-" cae-workspace-switch-to-9
        ;;"=" cae-workspace-switch-to-10
        "=" +workspace/switch-to-final
-       "[" +workspace/switch-left
-       "]" +workspace/switch-right
+       ;; Conflicts with Evil keybindings.
+       ;;"[" +workspace/switch-left
+       ;;"]" +workspace/switch-right
        "`" +workspace/other))
    t)
 
