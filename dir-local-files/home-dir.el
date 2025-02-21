@@ -13,6 +13,6 @@
                      (file-equal-p (vc-git-root (buffer-file-name))
                                    "~/"))
             (setq-local gac-automatically-add-new-files-p nil)
-            (setq-local gac-automatically-push-p t)
+            (setq-local gac-automatically-push-p nil)
             (git-auto-commit-mode 1))
           )))))
