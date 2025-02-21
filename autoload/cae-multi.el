@@ -150,9 +150,9 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                      (finalize-all))))
              (repo-finalize (repo-dir)
                             "Finalize a repo in doom-private-dir."
-                              (setq pending-private (1- pending-private))
-                              (when (zerop pending-private)
-                                (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))))
+                            (setq pending-private (1- pending-private))
+                            (when (zerop pending-private)
+                              (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))))
              (maybe-finalize (repo-dir)
                              "Call repo-finalize only for a repo that lies within doom-private-dir."
                              (when (string-prefix-p (file-truename doom-private-dir)
