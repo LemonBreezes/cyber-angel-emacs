@@ -42,8 +42,7 @@
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
   :config
-  (setq-default gac-automatically-add-new-files-p nil
-                gac-automatically-push-p t)
+  (setq-default gac-automatically-add-new-files-p nil)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t)
 
