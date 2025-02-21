@@ -12,6 +12,7 @@
     ("ahve" "have" nil :count 0)
     ("amout" "amount" nil :count 0)
     ("appply" "apply" nil :count 1)
+    ("appyl" "apply" nil :count 0)
     ("baes" "base" nil :count 0)
     ("becaue" "because" nil :count 0)
     ("becaues" "because" nil :count 2)
