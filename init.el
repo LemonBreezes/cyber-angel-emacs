@@ -107,7 +107,7 @@
        lisp
        misc-applications
        (modeline +emms)
-       (:if (eq system-type 'gnu/linux) notifications)
+       notifications
        unpackaged
        vc
        org
