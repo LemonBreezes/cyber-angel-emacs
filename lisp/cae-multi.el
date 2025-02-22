@@ -169,5 +169,6 @@ the abbrevs are reloaded automatically."
              #'cae-multi-abbrev-watch-callback))
       (message "Started watching abbrev file: %s" abbrev-file-name))))
 
-(when (eq system-type 'gnu/linux)
+(when (and (eq system-type 'gnu/linux)
+           (require 'filenotify nil t))
   (cae-multi-start-abbrev-watch))
