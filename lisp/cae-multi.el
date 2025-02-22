@@ -85,23 +85,6 @@
   (cae-run-with-timer 30 30 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories-when-idle))
 
-;;; Hot reloading abbrevs
-
-(defvar cae-multi-abbrev-watch-descriptor nil
-  "File notification descriptor for the abbrev file.")
-
-(defun cae-multi-start-abbrev-watch ()
-  "Start watching the abbrev file for external changes.
-When the abbrev file (given by the variable `abbrev-file-name`) changes,
-the abbrevs are reloaded automatically."
-  (when (and abbrev-file-name (file-exists-p abbrev-file-name))
-    (unless cae-multi-abbrev-watch-descriptor
-      (setq cae-multi-abbrev-watch-descriptor
-            (file-notify-add-watch
-             abbrev-file-name
-             '(change)
-             #'cae-multi-abbrev-watch-callback)))))
-
 ;; After any call to `define-abbrev', automatically save the abbrev file.
 (defun cae-multi-auto-save-abbrev (&rest _args)
   "Automatically save the abbrev file after a new abbrev is defined.
