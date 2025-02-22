@@ -16,7 +16,7 @@
    (t 0)))
 
 ;;;###autoload
-(defun cae-tty-disable-unicode ()
+(defun cae-tty-disable-unicode-and-or-icons ()
   (interactive)
   (when (= (cae-terminal-type) 0)
     (after! embrace
