@@ -64,3 +64,14 @@ command currently typed."
                             (lookup-key (current-global-map)
                                         (this-command-keys)))))
       (call-interactively command))))
+
+;;;###autoload
+(defun cae-copilot-copilot-mode-safe ()
+  (condition-case err
+      (progn
+        (copilot-mode +1)
+        nil)
+    (error
+     (when (string-match-p "The package @github/copilot-language-server is not installed"
+                           (error-message-string err))
+       (copilot-install-server)))))
