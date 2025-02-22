@@ -100,6 +100,7 @@
     ("ont" "not" nil :count 0)
     ("outpjut" "output" nil :count 0)
     ("owrk" "work" nil :count 0)
+    ("owrks" "works" nil :count 0)
     ("owuld" "would" nil :count 0)
     ("pacage" "package" nil :count 0)
     ("pakcage" "package" nil :count 0)
