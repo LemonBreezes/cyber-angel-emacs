@@ -75,12 +75,6 @@
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
 
-;; This can probably be improved by using git hooks or something but this works
-;; just fine.
-(defun cae-multi-sync-repositories-if-idle ()
-  (when (> (time-to-seconds (current-idle-time)) 30)
-    (cae-multi-sync-repositories)))
-
 (dir-locals-set-class-variables
  'home
  '((nil
@@ -126,8 +120,8 @@
 (dir-locals-set-directory-class (expand-file-name cae-multi-org-dir) 'org)
 
 (when cae-multi-enable-auto-pull
-  (cae-run-with-timer 60 60 "cae-multi-sync-repositories-if-idle"
-                      #'cae-multi-sync-repositories-if-idle))
+  (cae-run-with-timer 60 60 "cae-multi-sync-repositories"
+                      #'cae-multi-sync-repositories))
 
 ;;; Hot reloading bookmarks and abbrevs
 
