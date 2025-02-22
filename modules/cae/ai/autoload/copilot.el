@@ -72,8 +72,7 @@ command currently typed."
         (copilot-mode +1)
         nil)
     (error
-     (+log err (string-match-p "The package @github/copilot-language-server is not installed"
-                               (error-message-string err)))
      (when (string-match-p "The package @github/copilot-language-server is not installed"
                            (error-message-string err))
-       (copilot-install-server)))))
+       (copilot-install-server)
+       (copilot-mode +1)))))
