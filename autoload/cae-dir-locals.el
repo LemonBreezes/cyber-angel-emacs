@@ -25,10 +25,11 @@ does it attempt to verify cache validity."
       (dolist (entry dir-locals-directory-cache)
         ;; entry is typically ("DIRECTORY" CLASS MTIME ...)
         ;; We check if "DIRECTORY" is a prefix of FILE and pick the longest match.
-        (when (and (string-prefix-p (car entry) file
-                                    (memq system-type '(windows-nt cygwin ms-dos)))
-                   (or (null best)
-                       (> (length (car entry)) (length (car best)))))
+        (when (and
+               (string-prefix-p (car entry) file
+                                (memq system-type '(windows-nt cygwin ms-dos)))
+               (or (null best)
+                   (> (length (car entry)) (length (car best)))))
           (setq best entry)))
       best)))
 
@@ -42,7 +43,9 @@ Also resets the projectile cache for each affected directory."
   (cae--cleanup-dir-locals-cache)
   (let ((dirs (make-hash-table :test 'equal)))
     (dolist (buf (buffer-list))
-      (when-let* ((entry (cae-dir-locals-cache-lookup (buffer-file-name buf))))
+      (when-let* ((entry (cae-dir-locals-cache-lookup (buffer-file-name buf)))
+                  (_ (and (symbolp (cadr entry))
+                          (string-prefix-p "cae-" (cadr entry)))))
         (with-current-buffer buf
           (hack-dir-local-variables-non-file-buffer))
         (puthash (car entry) t dirs)))
