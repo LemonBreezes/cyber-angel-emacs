@@ -11,7 +11,7 @@
   (if cae-dbus-notifications-supported-p
       (progn
         (advice-remove #'alert-send-notification :around
-              #'cae-notifications-wrap-async-call-process-a)
+                       #'cae-notifications-wrap-async-call-process-a)
         (and (require 'dbus nil t)
              (not (getenv "INSIDE_EXWM")) ; In EXWM I prefer using Dunst.
              cae-dbus-notifications-supported-p
