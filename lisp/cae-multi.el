@@ -158,12 +158,13 @@
 
 (dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
 
+;; Gotta sync when idle to prevent the sync from interfering with
+;; git commands.
 (defun cae-multi-sync-repositories-when-idle ()
-  (when (> (time-to-seconds (current-idle-time))
-           10)
+  (when (> (time-to-seconds (current-idle-time)) 10)
     (cae-multi-sync-repositories)))
 (when cae-multi-enable-auto-pull
-  (cae-run-with-timer 60 60 "cae-multi-sync-repositories"
+  (cae-run-with-timer 30 30 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories-when-idle))
 
 ;;; Hot reloading abbrevs
