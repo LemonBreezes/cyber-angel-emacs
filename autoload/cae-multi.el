@@ -2,6 +2,22 @@
 
 (require 'cl-lib)
 
+;;;###autoload
+(defun cae-multi--push-changes (file buf-name)
+  "Push changes for FILE using a temporary buffer BUF-NAME.
+Sets the buffer's default directory and file-name, enables auto-push,
+calls `gac--after-save' and then resets the buffer-local values."
+  (let ((buf (get-buffer-create buf-name)))
+    (setf (buffer-local-value 'default-directory buf)
+          (file-name-directory file)
+          (buffer-local-value 'buffer-file-name buf)
+          file
+          (buffer-local-value 'gac-automatically-push-p buf)
+          t)
+    (gac--after-save buf)
+    (setf (buffer-local-value 'default-directory buf) nil
+          (buffer-local-value 'buffer-file-name buf) nil)))
+
 (defvar cae-multi-sync-running nil
   "Non-nil if `cae-multi-sync-repositories' is currently running.")
 
@@ -266,16 +282,6 @@ reload the bookmarks from `bookmark-default-file'."
 ;;; Hot reloading abbrevs
 
 ;;;###autoload
-(defun cae-multi-abbrev-watch-callback (event)
-  "Handle file change EVENT for the abbrev file.
-If the file (or its attributes) have changed, reload the abbrevs from `abbrev-file-name`."
-  (when (memq (cadr event) '(changed attribute-changed))
-    (message "Abbrev file changed -- reloading abbrevs…")
-    (ignore-errors
-      (read-abbrev-file abbrev-file-name t))
-    (message "Abbrevs reloaded.")))
-
-;;;###autoload
 (defun cae-multi-stop-abbrev-watch ()
   "Stop watching the abbrev file for external changes."
   (when cae-multi-abbrev-watch-descriptor
@@ -284,25 +290,26 @@ If the file (or its attributes) have changed, reload the abbrevs from `abbrev-fi
     (message "Stopped watching abbrev file.")))
 
 ;;;###autoload
-(defun cae-multi--push-changes (file buf-name)
-  "Push changes for FILE using a temporary buffer BUF-NAME.
-Sets the buffer's default directory and file-name, enables auto-push,
-calls `gac--after-save' and then resets the buffer-local values."
-  (let ((buf (get-buffer-create buf-name)))
-    (setf (buffer-local-value 'default-directory buf)
-          (file-name-directory file)
-          (buffer-local-value 'buffer-file-name buf)
-          file
-          (buffer-local-value 'gac-automatically-push-p buf)
-          t)
-    (gac--after-save buf)
-    (setf (buffer-local-value 'default-directory buf) nil
-          (buffer-local-value 'buffer-file-name buf) nil)))
-
-;;;###autoload
 (defun cae-multi-auto-save-abbrev (&rest _args)
   "Automatically save the abbrev file after a new abbrev is defined.
 This function is meant to be run as after advice on `define-abbrev'."
   (when abbrevs-changed
     (write-abbrev-file abbrev-file-name nil)
+    ;; Immediately update our stored modification time:
+    (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name)))
     (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
+
+;;;###autoload
+(defun cae-multi-abbrev-watch-callback (event)
+  "Handle file change EVENT for the abbrev file.
+Reload abbrevs only if the file was changed externally.
+If the file's mtime is the same as our stored value, skip reloading."
+  (when (memq (cadr event) '(changed attribute-changed))
+    (let* ((new-mtime (nth 5 (file-attributes abbrev-file-name)))
+           (old-mtime cae-multi-abbrev--file-mtime))
+      (unless (and old-mtime (time-equal-p new-mtime old-mtime))
+        (message "Abbrev file changed externally – reloading abbrevs…")
+        (ignore-errors
+          (read-abbrev-file abbrev-file-name t))
+        (setq cae-multi-abbrev--file-mtime new-mtime)
+        (message "Abbrevs reloaded.")))))
