@@ -283,6 +283,7 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
 
 ;;; Hot reloading bookmarks
 
+;;;###autoload
 (defun cae-multi-bookmark-watch-callback (event)
   "Handle file change EVENT for the bookmark file.
 If the file has been changed (or its attributes changed),
