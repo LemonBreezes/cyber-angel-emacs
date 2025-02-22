@@ -196,9 +196,9 @@
           :n "d" #'gptel-context-flag-deletion
           :n "RET" #'gptel-context-visit))
   (add-hook! 'gptel-mode-hook
-             (defun cae-gptel-mode-setup-h ()
-               (setq-local nobreak-char-display nil)
-               (auto-fill-mode -1))))
+    (defun cae-gptel-mode-setup-h ()
+      (setq-local nobreak-char-display nil)
+      (auto-fill-mode -1))))
 
 (use-package! minuet
   :when (modulep! -copilot)
