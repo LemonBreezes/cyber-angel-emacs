@@ -49,7 +49,7 @@
     (file-in-directory-p default-directory doom-user-dir)))
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
-  (gac--after-save bookmark-default-file))
+  (gac--after-save (find-file-noselect bookmark-default-file)))
 (defun cae-multi-org-archive-push-changes-h ()
   (gac--after-save (buffer-file-name))
   (dolist (file (org-all-archive-files))
