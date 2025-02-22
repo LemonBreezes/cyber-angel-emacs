@@ -1,4 +1,4 @@
-;;; lisp/cae-hotloading.el -*- lexical-binding: t; -*-
+;;; lisp/cae-dir-locals.el -*- lexical-binding: t; -*-
 
 (dir-locals-set-class-variables
  'doom
