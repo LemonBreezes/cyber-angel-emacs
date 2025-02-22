@@ -102,18 +102,18 @@
        (helm +childframe)
        debugger
        eshell
-       ;; exwm
-       ;; dired
-       ;; lisp
-       ;; misc-applications
-       ;; (modeline +emms)
-       ;; (:if (eq system-type 'gnu/linux) notifications)
-       ;; unpackaged
-       ;; vc
-       ;; org
-       ;; (ai +copilot)
-       ;; gnus
-       ;; rss
+       exwm
+       dired
+       lisp
+       misc-applications
+       (modeline +emms)
+       (:if (eq system-type 'gnu/linux) notifications)
+       unpackaged
+       vc
+       org
+       (ai +copilot)
+       gnus
+       rss
 
        :secret
        (:if (eq system-type 'gnu/linux) root))
