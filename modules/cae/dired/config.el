@@ -47,11 +47,7 @@
           ("\\.zst\\'" "" "unzstd --rm")
           ("\\.7z\\'" "" "7z x -aoa -o%o %i")
           ("\\.rar\\'" "" "unrar x -o+ %i %o")
-          ("\\.tar\\'" ".tgz" nil))
-
-        ;; From Dirvish's documentation.
-        dired-listing-switches
-        "-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group")
+          ("\\.tar\\'" ".tgz" nil)))
 
   (setq dired-mouse-drag-files t
         dired-movement-style 'cycle)
