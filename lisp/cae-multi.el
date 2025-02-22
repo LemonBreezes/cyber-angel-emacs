@@ -98,11 +98,32 @@
                                      "~/"))
               (setq-local gac-automatically-add-new-files-p nil)
               (setq-local gac-automatically-push-p t)
-              (git-auto-commit-mode 1))
-            ))))))
+              (git-auto-commit-mode 1))))))))
 
 (when (eq system-type 'gnu/linux)
   (dir-locals-set-directory-class (getenv "HOME") 'home))
+
+(dir-locals-set-class-variables
+ 'org
+ '((nil
+    . ((eval . (progn
+                 ;; Avoid rendering blamer hints because we use
+                 ;; git-auto-commit-mode.
+                 (setq-local blamer--block-render-p t)
+
+                 ;; If this file is inside the Org directory and git-auto-commit-mode
+                 ;; is available, enable it with
+                 ;; automatic addition of new Org files and auto-push enabled.
+                 (when (and (buffer-file-name)
+                            (require 'git-auto-commit-mode nil t)
+                            (require 'vc-git nil t)
+                            (file-in-directory-p (buffer-file-name)
+                                                 (expand-file-name cae-multi-org-dir)))
+                   (setq-local gac-automatically-add-new-files-p t)
+                   (setq-local gac-automatically-push-p t)
+                   (git-auto-commit-mode 1))))))))
+
+(dir-locals-set-directory-class (expand-file-name cae-multi-org-dir) 'org)
 
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 60 60 "cae-multi-sync-repositories-if-idle"
