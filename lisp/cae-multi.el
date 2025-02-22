@@ -59,7 +59,7 @@
   (setq bookmark-save-flag 1)
   (setq bookmark-watch-bookmark-file t))
 
-(advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
+(advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
 
