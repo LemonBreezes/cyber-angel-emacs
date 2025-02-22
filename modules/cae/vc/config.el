@@ -58,6 +58,7 @@
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
     (setq diff-hl-reference-revision "master")
+    (setq diff-hl-flydiff-delay 2)
     (unless (cae-display-graphic-p)
       (diff-hl-margin-mode +1)))
 
