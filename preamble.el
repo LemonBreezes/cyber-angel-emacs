@@ -43,6 +43,8 @@
 (make-directory cae-multi-secrets-dir t)
 (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
 (make-directory cae-multi-secrets-modules-dir t)
+(defvar cae-multi-org-dir "~/org/")
+(make-directory cae-multi-org-dir t)
 (add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
 
 ;; This is where I clone Git projects to.
@@ -55,7 +57,7 @@
       native-comp-async-report-warnings-errors 'silent)
 
 (load! "lisp/cae-debug")
-(load! "lisp/cae-hotloading")
+(load! "lisp/cae-dir-locals")
 (load! "lisp/cae-hacks")
 
 ;; Set a fallback theme.
