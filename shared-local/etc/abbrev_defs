@@ -42,6 +42,7 @@
     ("deubg" "debug" nil :count 0)
     ("dfeine" "define" nil :count 0)
     ("dfined" "defined" nil :count 0)
+    ("dispay" "display" nil :count 0)
     ("doomn" "doom" nil :count 1)
     ("eamcs" "emacs" nil :count 0)
     ("ecsape" "escape" nil :count 0)
