@@ -10,6 +10,7 @@
     ("aboyut" "about" nil :count 0)
     ("actuakly" "actually" nil :count 0)
     ("ahve" "have" nil :count 0)
+    ("alret" "alert" nil :count 0)
     ("amout" "amount" nil :count 0)
     ("appply" "apply" nil :count 1)
     ("appyl" "apply" nil :count 0)
