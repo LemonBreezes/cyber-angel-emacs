@@ -99,6 +99,7 @@
 
   (after! eglot
     (setq eglot-sync-connect nil)
+    (setq eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
     (let ((clangd '("clangd" "--background-index" "--clang-tidy"
                     "--completion-style=detailed" "--header-insertion=never"
                     "--header-insertion-decorators=0")))
