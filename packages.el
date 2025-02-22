@@ -34,6 +34,9 @@
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 (package! persistent-scratch)
 
+;; cae-tty.el
+(package! clipetty)
+
 ;; cae-evil.el
 (when (modulep! :editor evil)
   (package! evil-owl)
