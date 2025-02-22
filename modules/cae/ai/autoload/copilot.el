@@ -69,6 +69,7 @@ command currently typed."
 (defun cae-copilot-turn-on-safely ()
   (condition-case err
       (progn
+        (require 'copilot)
         (copilot-server-executable)
         (copilot-mode +1)
         nil)
