@@ -51,6 +51,13 @@
     :before-until #'diff-hl-mode
     (file-in-directory-p default-directory doom-user-dir)))
 
+(defun cae-multi-bookmark-push-changes-a (&rest _)
+  (gac--after-save bookmark-default-file))
+(defun cae-multi-org-archive-push-changes-h ()
+  (gac--after-save (buffer-file-name))
+  (dolist (file (org-all-archive-files))
+    (gac--after-save file)))
+(setq bookmark-save-flag 1)
 (advice-add #'bookmark-set-internal :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
