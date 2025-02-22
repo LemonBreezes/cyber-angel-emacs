@@ -158,8 +158,7 @@
 
 (dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
 
-;; Gotta sync when idle to prevent the sync from interfering with
-;; git commands.
+;; Gotta sync when idle to prevent the sync from interfering with git commands.
 (defun cae-multi-sync-repositories-when-idle ()
   (when (> (time-to-seconds (current-idle-time)) 10)
     (cae-multi-sync-repositories)))
