@@ -109,8 +109,8 @@
   (setq dirvish-hide-cursor nil)
   (setq dirvish-attributes
         (nconc (when (cae-display-graphic-p)
-                   '(nerd-icons))
-         '(file-size subtree-state collapse file-time)))
+                 '(nerd-icons))
+               '(file-size subtree-state collapse file-time)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
