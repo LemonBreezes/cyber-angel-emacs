@@ -76,6 +76,7 @@
             ;; Automatically commit saved files to Git and push them to the
             ;; remote.
             (when (and (buffer-file-name)
+                       (eq system-type 'gnu/linux)
                        (bound-and-true-p doom-user-dir)
                        (not (file-in-directory-p
                              (buffer-file-name)
