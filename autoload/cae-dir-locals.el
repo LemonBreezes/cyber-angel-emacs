@@ -1,6 +1,4 @@
-;;; autoload/cae-hotloading.el -*- lexical-binding: t; -*-
-
-;;; autoload/cae-hotloading.el -*- lexical-binding: t; -*-
+;;; autoload/cae-dir-locals.el -*- lexical-binding: t; -*-
 
 (require 'cl-lib)
 
