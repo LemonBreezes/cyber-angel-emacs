@@ -298,3 +298,11 @@ calls `gac--after-save' and then resets the buffer-local values."
     (gac--after-save buf)
     (setf (buffer-local-value 'default-directory buf) nil
           (buffer-local-value 'buffer-file-name buf) nil)))
+
+;;;###autoload
+(defun cae-multi-auto-save-abbrev (&rest _args)
+  "Automatically save the abbrev file after a new abbrev is defined.
+This function is meant to be run as after advice on `define-abbrev'."
+  (when abbrevs-changed
+    (write-abbrev-file abbrev-file-name nil)
+    (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
