@@ -34,7 +34,6 @@
        workspaces
        (window-select +numbers)
        ophints
-       (treemacs +lsp)
 
        :editor
        file-templates
