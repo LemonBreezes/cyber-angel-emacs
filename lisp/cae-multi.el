@@ -53,7 +53,6 @@
 (setq bookmark-save-flag 1)
 (setq bookmark-watch-bookmark-file 'silent)
 
-#@00
 (advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
@@ -103,6 +102,7 @@ the abbrevs are reloaded automatically."
              '(change)
              #'cae-multi-abbrev-watch-callback)))))
 
+#@00
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
 
 (when (eq system-type 'gnu/linux)
