@@ -143,6 +143,8 @@
               (setq-local gac-automatically-push-p t)
               (git-auto-commit-mode 1))))))))
 
+(dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
+
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 60 60 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories))
