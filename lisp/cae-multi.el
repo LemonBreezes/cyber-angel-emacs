@@ -102,7 +102,6 @@ the abbrevs are reloaded automatically."
              '(change)
              #'cae-multi-abbrev-watch-callback)))))
 
-#@00
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
 
 (when (eq system-type 'gnu/linux)
