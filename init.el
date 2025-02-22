@@ -98,10 +98,10 @@
        irc
 
        :cae
-       ;; (lean4 +lsp +tree-sitter)
-       ;; (helm +childframe)
-       ;; debugger
-       ;; eshell
+       (lean4 +lsp +tree-sitter)
+       (helm +childframe)
+       debugger
+       eshell
        ;; exwm
        ;; dired
        ;; lisp
