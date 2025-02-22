@@ -9,6 +9,9 @@
   ;; If something tries to enable semantic-mode, emit a backtrace.
   (backtrace))
 
+;; Automatically allow envrc files after saving.
+(add-hook 'envrc-file-mode-hook 'cae-envrc-file-mode-setup)
+
 ;; I use `w3m' because EWW is too slow.
 (use-package! w3m
   :defer t :init
