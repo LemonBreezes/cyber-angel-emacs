@@ -148,7 +148,8 @@ will be reloaded automatically."
              #'cae-multi-bookmark-watch-callback))
       (message "Started watching bookmark file: %s" bookmark-default-file))))
 
-(when (eq system-type 'gnu/linux)
+(when (and (eq system-type 'gnu/linux)
+           (require 'filenotify nil t))
   (cae-multi-start-bookmark-watch))
 
 ;;; Hot reloading abbrevs
