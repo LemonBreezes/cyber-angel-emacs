@@ -1,7 +1,6 @@
 ;;; lisp/cae-lsp.el -*- lexical-binding: t; -*-
 
-(when (and (modulep! :tools lsp)
-           (not (modulep! :tools lsp +eglot)))
+(when (modulep! :tools lsp -eglot)
   (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
   (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
   (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
