@@ -94,17 +94,6 @@
   (after! pdf-tools
     (pdf-tools-install t nil t)))
 
-(when (executable-find "node")
-  (after! copilot
-    (condition-case err
-        (progn
-          (copilot-server-executable)
-          nil)
-      (error
-       (when (string-match-p "The package @github/copilot-language-server is not installed"
-                             (error-message-string err))
-         (copilot-install-server))))))
-
 ;; Do not spam me with warnings.
 (unless init-file-debug
   (setq warning-minimum-level :error
