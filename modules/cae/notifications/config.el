@@ -35,14 +35,14 @@
   :defer t :init
   (after! circe-notifications
     (setq circe-notifications-alert-style nil))
-  (setq alert-default-style
-        (cond ((getenv "WSL_DISTRO_NAME")
-               'toast)
-              (t 'libnotify)))
   ;; Some elisp packages use `notifications-notify' directly and provide no easy
   ;; way to use `alert'.
   (advice-add 'notifications-notify :around #'cae-notifications-notify-advice)
   :config
+  (setq alert-default-style
+        (cond ((getenv "WSL_DISTRO_NAME")
+               'toast)
+              (t 'libnotify)))
   ;; BUG Otherwise `alert-send-notification' will block the UI.
   (advice-add #'alert-send-notification :around
               #'cae-notifications-wrap-async-call-process-a))
