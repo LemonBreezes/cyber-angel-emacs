@@ -11,22 +11,6 @@
 (defvar cae-multi-last-sync-duration 0
   "Time in seconds that the last sync operation took in `cae-multi-sync-repositories`.")
 
-(defun cae-multi-commit-file (file)
-  (when (file-in-directory-p file doom-user-dir)
-    (let ((gac-automatically-push-p t)
-          (gac-silent-message-p t))
-      (gac--after-save (find-file-noselect file)))))
-
-;;;###autoload
-(defun cae-multi-bookmark-push-changes-a (&rest _)
-  (gac--after-save bookmark-default-file))
-
-;;;###autoload
-(defun cae-multi-org-archive-push-changes-h ()
-  (gac--after-save (buffer-file-name))
-  (dolist (file (org-all-archive-files))
-    (gac--after-save file)))
-
 ;;; Sync repositories
 
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
