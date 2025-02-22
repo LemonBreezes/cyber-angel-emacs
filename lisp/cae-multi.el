@@ -170,5 +170,4 @@ the abbrevs are reloaded automatically."
                file-notify--library)
       (cae-multi-start-abbrev-watch)
       (cae-multi-start-bookmark-watch)))
-  (run-with-idle-timer
-   5 nil "cae-multi-start-file-watchers" #'cae-multi-start-file-watchers))
+  (run-with-idle-timer 5 nil#'cae-multi-start-file-watchers))
