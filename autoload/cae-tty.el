@@ -47,7 +47,7 @@
             dirvish-subtree-prefix " |"
             dirvish-subtree-line-prefix " |"))
     (after! eglot
-      (when (eq eglot-code-action-indicator (make-string 1 ?))
+      (when (equal eglot-code-action-indicator (make-string 1 ?))
         (setq eglot-code-action-indicator (make-string 1 ?⚡))))
     (remove-hook 'org-mode-hook #'+org-pretty-mode))
   (when (< (cae-terminal-type) 2)
