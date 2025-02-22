@@ -34,7 +34,6 @@
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
-#@00
 (use-package! git-auto-commit-mode
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
@@ -54,6 +53,7 @@
 (setq bookmark-save-flag 1)
 (setq bookmark-watch-bookmark-file 'silent)
 
+#@00
 (advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
