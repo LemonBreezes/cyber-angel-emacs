@@ -94,6 +94,3 @@ This function is meant to be run as after advice on `define-abbrev'."
     (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
 
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
-
-(when (eq system-type 'gnu/linux)
-  (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
