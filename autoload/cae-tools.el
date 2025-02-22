@@ -15,7 +15,8 @@
                     (if (or (search-forward "unreachable" nil t)
                             (search-forward "errors" nil t))
                         (progn (unless (string-match "ping-status" (format "%s" timer-list))
-                                 (run-with-timer 5 5 'ping-status)
+                                 (cae-run-with-timer 5 5 "cae-ping-status"
+                                                     'cae-ping-status)
                                  (message "no internet")))
                       (when (string-match "ping-status" (format "%s" timer-list))
                         (cancel-function-timers 'ping-status))
