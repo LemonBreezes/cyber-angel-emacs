@@ -43,9 +43,8 @@ Also resets the projectile cache for each affected directory."
   (cae--cleanup-dir-locals-cache)
   (let ((dirs (make-hash-table :test 'equal)))
     (dolist (buf (buffer-list))
-      (when-let* ((entry (cae-dir-locals-cache-lookup (buffer-file-name buf)))
-                  (_ (and (symbolp (cadr entry))
-                          (string-prefix-p "cae-" (cadr entry)))))
+      (when-let* ((entry (cae-dir-locals-cache-lookup (buffer-file-name buf))))
+        (+log entry)
         (with-current-buffer buf
           (hack-dir-local-variables-non-file-buffer))
         (puthash (car entry) t dirs)))
