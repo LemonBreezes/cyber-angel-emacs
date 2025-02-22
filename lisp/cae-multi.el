@@ -110,3 +110,24 @@
 
 (when cae-multi-enable-auto-pull
   (run-with-timer 60 60 #'cae-multi-sync-repositories-if-idle))
+
+;;; Hot reloading bookmarks
+
+;; Define a variable to hold the file notification descriptor.
+(defvar cae-multi-bookmark-watch-descriptor nil
+  "File notification descriptor for the bookmark file.")
+
+(defun cae-multi-start-bookmark-watch ()
+  "Start watching the bookmark file for external changes.
+When the bookmark file (bookmark-default-file) changes, the bookmarks
+will be reloaded automatically."
+  (when (and bookmark-default-file (file-exists-p bookmark-default-file))
+    (unless cae-multi-bookmark-watch-descriptor
+      (setq cae-multi-bookmark-watch-descriptor
+            (file-notify-add-watch
+             bookmark-default-file
+             '(change)
+             #'cae-multi-bookmark-watch-callback))
+      (message "Started watching bookmark file: %s" bookmark-default-file))))
+
+(cae-multi-start-bookmark-watch)
