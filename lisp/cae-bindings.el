@@ -141,15 +141,15 @@
         "q" #'kill-this-buffer))
 
 ;; Monkey fix `project.el' overriding the `C-x p' keybinding.
-(when (modulep! :ui popup)
-  (unless (boundp 'cae-fix-popup-other-keybinding-idle-timer)
-    (defvar cae-fix-popup-other-keybinding-idle-timer nil)
-    (defun cae-fix-popup-other-keybinding ()
-      (define-key ctl-x-map "p" nil)
-      (map! :map ctl-x-map
-            "p" #'+popup/other))
-    (setq cae-fix-popup-other-keybinding-idle-timer
-          (run-with-idle-timer 3 t #'cae-fix-popup-other-keybinding))))
+;;(when (modulep! :ui popup)
+;;  (unless (boundp 'cae-fix-popup-other-keybinding-idle-timer)
+;;    (defvar cae-fix-popup-other-keybinding-idle-timer nil)
+;;    (defun cae-fix-popup-other-keybinding ()
+;;      (define-key ctl-x-map "p" nil)
+;;      (map! :map ctl-x-map
+;;            "p" #'+popup/other))
+;;    (setq cae-fix-popup-other-keybinding-idle-timer
+;;          (run-with-idle-timer 3 t #'cae-fix-popup-other-keybinding))))
 
 (advice-add #'persp-set-keymap-prefix :override #'ignore)
 
