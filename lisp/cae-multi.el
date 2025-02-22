@@ -42,21 +42,6 @@
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
 
-(defun cae-multi--push-changes (file buf-name)
-  "Push changes for FILE using a temporary buffer BUF-NAME.
-Sets the buffer's default directory and file-name, enables auto-push,
-calls `gac--after-save' and then resets the buffer-local values."
-  (let ((buf (get-buffer-create buf-name)))
-    (setf (buffer-local-value 'default-directory buf)
-          (file-name-directory file)
-          (buffer-local-value 'buffer-file-name buf)
-          file
-          (buffer-local-value 'gac-automatically-push-p buf)
-          t)
-    (gac--after-save buf)
-    (setf (buffer-local-value 'default-directory buf) nil
-          (buffer-local-value 'buffer-file-name buf) nil)))
-
 (defun cae-multi-bookmark-push-changes-a (&rest _)
   (cae-multi--push-changes bookmark-default-file " *cae-multi-bookmark-push-changes-a*"))
 
