@@ -34,6 +34,7 @@
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
+#@00
 (use-package! git-auto-commit-mode
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
