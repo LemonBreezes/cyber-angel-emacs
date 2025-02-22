@@ -40,7 +40,7 @@
     ;; This feature is not supported in terminal Emacs anyways.
     (setq chatgpt-shell-render-latex nil))
 
-  (cae-tty-disable-unicode))
+  (cae-tty-disable-unicode-and-or-icons))
 
 (when (modulep! :tools pdf)
   (use-package! pdftotext
