@@ -1,33 +1,5 @@
 ;;; lisp/cae-hotloading.el -*- lexical-binding: t; -*-
 
-(defun cae-cleanup-duplicate-idle-timers ()
-  (setq timer-idle-list
-        (cl-remove-duplicates
-         timer-idle-list
-         :test (lambda (x y)
-                 (and
-                  (equal (timer--function x)
-                         (timer--function y))
-                  (or (equal (timer--args x)
-                             (timer--args y))
-                      (and (symbolp (timer--function x))
-                           (string-prefix-p "cae-"
-                                            (symbol-name (timer--function x))))))))))
-(defun cae-cleanup-duplicate-timers ()
-  (setq timer-list
-        (cl-remove-duplicates
-         timer-list
-         :test (lambda (x y)
-                 (and
-                  (equal (timer--function x)
-                         (timer--function y))
-                  (symbolp (timer--function x))
-                  (string-prefix-p "cae-"
-                                   (symbol-name (timer--function x))))))))
-
-(run-with-idle-timer 3 t #'cae-cleanup-duplicate-idle-timers)
-(run-with-idle-timer 3 t #'cae-cleanup-duplicate-timers)
-
 (dir-locals-set-class-variables
  'doom
  '((nil
