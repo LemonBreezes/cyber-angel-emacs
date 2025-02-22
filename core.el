@@ -52,9 +52,6 @@
   (icomplete-mode +1)
   (icomplete-vertical-mode +1))
 
-(cond ((executable-find "termux-setup-storage")
-       (setq xclip-method 'termux-clipboard-get)))
-
 ;; For some reason Persp is picking up a few buffers that it should not.
 (when (modulep! :ui workspaces)
   (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
