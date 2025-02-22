@@ -49,7 +49,11 @@
     (file-in-directory-p default-directory doom-user-dir)))
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
-  (gac--after-save (find-file-noselect bookmark-default-file)))
+  (let ((buf (get-buffer-create " *cae-multi-bookmark-push-changes-a*")))
+    (setf (buffer-local-value 'default-directory buf)
+          (file-name-directory bookmark-default-file)
+          (buffer-file-name buf) bookmark-default-file)
+    (gac--after-save buf)))
 (defun cae-multi-org-archive-push-changes-h ()
   (gac--after-save (buffer-file-name))
   (dolist (file (org-all-archive-files))
