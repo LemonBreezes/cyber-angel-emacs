@@ -121,7 +121,7 @@
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
 ;; Autokill buffers which have not been displayed for 3 days.
-(run-with-idle-timer 600 nil #'midnight-mode +1)
+(cae-run-with-idle-timer 600 nil "midnight-mode" #'midnight-mode +1)
 (after! midnight
   (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
         clean-buffer-list-delay-special 7200)
