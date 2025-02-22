@@ -62,7 +62,6 @@
   (setenv "AIDER_GITIGNORE" "false"))
 
 (use-package! magit-gptcommit
-  :when (eq system-type 'gnu/linux)
   :after gptel magit
   :init
   (advice-add 'magit-gptcommit-commit-accept :after
