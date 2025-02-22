@@ -105,7 +105,8 @@
               (git-auto-commit-mode 1))
             ))))))
 
-(dir-locals-set-directory-class (getenv "HOME") 'home)
+(when (eq system-type 'gnu/linux)
+  (dir-locals-set-directory-class (getenv "HOME") 'home)
 
-(when cae-multi-enable-auto-pull
-  (run-with-timer 60 60 #'cae-multi-sync-repositories-if-idle))
+  (when cae-multi-enable-auto-pull
+    (run-with-timer 60 60 #'cae-multi-sync-repositories-if-idle)))
