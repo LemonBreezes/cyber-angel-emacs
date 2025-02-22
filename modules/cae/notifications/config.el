@@ -45,8 +45,11 @@
               (t 'libnotify)))
   ;; BUG Otherwise `alert-send-notification' will block the UI.
   (advice-add #'alert-send-notification :around
-              #'cae-notifications-wrap-async-call-process-a))
+              #'cae-notifications-wrap-async-call-process-a)
+  (setq alert-default-style
+        (cond ((getenv "WSL_DISTRO_NAME")
+               'toast)
+              (t 'libnotify))))
 
 (use-package! alert-toast
-  :when (getenv "WSL_DISTRO_NAME")
-  :after alert)
+  :defer t)
