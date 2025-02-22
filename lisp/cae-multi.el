@@ -164,7 +164,7 @@
     (cae-multi-sync-repositories)))
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 60 60 "cae-multi-sync-repositories"
-                      #'cae-multi-sync-repositories))
+                      #'cae-multi-sync-repositories-when-idle))
 
 ;;; Hot reloading abbrevs
 
