@@ -43,10 +43,3 @@
                    (push app-name hide)
                    (ednc-format-notification notification))))
              (ednc-notifications) ""))
-
-;;;###autoload
-(defun cae-ednc-load-h ()
-  (and (require 'dbus nil t)
-       (not (getenv "INSIDE_EXWM"))   ; In EXWM I prefer using Dunst.
-       cae-dbus-notifications-supported-p
-       (ednc-mode +1)))
