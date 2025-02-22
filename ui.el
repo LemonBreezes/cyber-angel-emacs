@@ -124,9 +124,6 @@
 (after! mule-util
   (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
 
-(after! alert
-  (setq alert-default-style 'libnotify))
-
 (when (modulep! :ui window-select +numbers)
   (after! winum
     (setq winum-auto-setup-mode-line t))
