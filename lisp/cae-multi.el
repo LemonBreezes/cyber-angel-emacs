@@ -50,7 +50,8 @@
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
   (let ((buf (get-buffer-create " *cae-multi-bookmark-push-changes-a*")))
-    ;; Performance hack. We don't actually use the contents of the buffer.
+    ;; Performance hack. We don't actually care about the contents of the
+    ;; bookmark file here.
     (setf (buffer-local-value 'default-directory buf)
           (file-name-directory bookmark-default-file)
           (buffer-local-value 'buffer-file-name buf)
