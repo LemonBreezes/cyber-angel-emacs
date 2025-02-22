@@ -126,6 +126,23 @@
 
 (dir-locals-set-directory-class (expand-file-name cae-multi-org-dir) 'org)
 
+(dir-locals-set-class-variables
+ 'secrets
+ '((nil
+    . ((eval
+        . (progn
+            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
+            (setq-local blamer--block-render-p t)
+
+            ;; Automatically commit saved files to Git and push them to the
+            ;; remote.
+            (when (and (buffer-file-name)
+                       (require 'git-auto-commit-mode nil t)
+                       (require 'vc-git nil t))
+              (setq-local gac-automatically-add-new-files-p nil)
+              (setq-local gac-automatically-push-p t)
+              (git-auto-commit-mode 1))))))))
+
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 60 60 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories))
