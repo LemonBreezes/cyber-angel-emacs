@@ -113,5 +113,27 @@ the abbrevs are reloaded automatically."
              '(change)
              #'cae-multi-abbrev-watch-callback)))))
 
+;; After any call to `define-abbrev', automatically save the abbrev file.
+(defun cae-multi-auto-save-abbrev (&rest _args)
+  "Automatically save the abbrev file after a new abbrev is defined.
+This function is meant to be run as “after advice” on `define-abbrev'."
+  (when abbrevs-changed
+    ;; Write out to the file specified by `abbrev-file-name'
+    (write-abbrev-file abbrev-file-name nil)
+    (let ((buf (get-buffer-create " *cae-multi-abbrev-push-changes-a*")))
+      (setf (buffer-local-value 'default-directory buf)
+            (file-name-directory abbrev-file-name)
+            (buffer-local-value 'buffer-file-name buf)
+            abbrev-file-name
+            (buffer-local-value 'gac-automatically-push-p buf)
+            t)
+      (gac--after-save buf)
+      (setf (buffer-local-value 'default-directory buf)
+            nil
+            (buffer-local-value 'buffer-file-name buf)
+            nil))))
+
+(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
+
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil#'cae-multi-start-abbrev-watch))
