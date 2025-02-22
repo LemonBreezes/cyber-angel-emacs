@@ -57,7 +57,7 @@
 
 (after! bookmark
   (setq bookmark-save-flag 1)
-  (setq bookmark-watch-bookmark-file t))
+  (setq bookmark-watch-bookmark-file 'silent))
 
 (advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
