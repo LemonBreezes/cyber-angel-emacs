@@ -9,33 +9,6 @@
   ;; If something tries to enable semantic-mode, emit a backtrace.
   (backtrace))
 
-;; Define a buffer‐local variable to store the original file name.
-(defvar-local cae-original-visited-file nil
-  "If a file was opened via a symlink, this holds the literal file name used.")
-;; Advice ‘find-file’ so that it records the literal argument.
-(defun cae-find-file-track-symlinks-a (orig-fn filename &rest args)
-  "Advice around `find-file' to capture the literal FILENAME.
-If FILENAME (when expanded) is different from its truename,
-store it in `cae-original-visited-file'."
-  (let* ((expanded (expand-file-name filename))
-         (result (apply orig-fn expanded args)))
-    (with-current-buffer result
-      (when (and expanded
-                 ;; If FILENAME is a symlink, its truename will differ.
-                 (not (string= (file-truename expanded) expanded)))
-        (setq-local cae-original-visited-file expanded)))
-    result))
-(advice-add 'find-file :around #'cae-find-file-track-symlinks-a)
-(advice-add 'find-file-noselect :around #'cae-find-file-track-symlinks-a)
-
-;; Now define a handy function to retrieve the “address” you opened the file from.
-(defun compute-opened-from-address ()
-  "Return the literal file name used to open the file,
-i.e. the symlink name if the file was opened via a symlink.
-If no symlink was used, return `buffer-file-name'."
-  (or cae-original-visited-file
-      buffer-file-name))
-
 ;; Automatically allow envrc files after saving them.
 (add-hook 'envrc-file-mode-hook 'cae-envrc-file-mode-setup)
 
