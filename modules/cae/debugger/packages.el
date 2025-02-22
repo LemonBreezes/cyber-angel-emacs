@@ -3,6 +3,5 @@
 
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
-(when (and (modulep! :tools lsp +eglot)
-           (modulep! :tools debugger +lsp))
+(when (modulep! :tools lsp +eglot)
   (package! dape))
