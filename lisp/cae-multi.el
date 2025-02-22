@@ -105,7 +105,8 @@
   (dir-locals-set-directory-class (getenv "HOME") 'home))
 
 (when cae-multi-enable-auto-pull
-  (run-with-timer 60 60 #'cae-multi-sync-repositories-if-idle))
+  (cae-run-with-timer 60 60 "cae-multi-sync-repositories-if-idle"
+                      #'cae-multi-sync-repositories-if-idle))
 
 ;;; Hot reloading bookmarks
 
@@ -126,4 +127,26 @@ will be reloaded automatically."
              #'cae-multi-bookmark-watch-callback))
       (message "Started watching bookmark file: %s" bookmark-default-file))))
 
-(cae-multi-start-bookmark-watch)
+(when (eq system-type 'gnu/linux)
+  (cae-multi-start-bookmark-watch))
+
+;;; Hot reloading abbrevs
+
+(defvar cae-multi-abbrev-watch-descriptor nil
+  "File notification descriptor for the abbrev file.")
+
+(defun cae-multi-start-abbrev-watch ()
+  "Start watching the abbrev file for external changes.
+When the abbrev file (given by the variable `abbrev-file-name`) changes,
+the abbrevs are reloaded automatically."
+  (when (and abbrev-file-name (file-exists-p abbrev-file-name))
+    (unless cae-multi-abbrev-watch-descriptor
+      (setq cae-multi-abbrev-watch-descriptor
+            (file-notify-add-watch
+             abbrev-file-name
+             '(change)
+             #'cae-multi-abbrev-watch-callback))
+      (message "Started watching abbrev file: %s" abbrev-file-name))))
+
+(when (eq system-type 'gnu/linux)
+  (cae-multi-start-abbrev-watch))
