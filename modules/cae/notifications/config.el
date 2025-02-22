@@ -56,7 +56,6 @@
   (setq alert-default-style
         (cond ((getenv "WSL_DISTRO_NAME")
                'toast)
-              (())
-              (t 'libnotify))))
+              (t 'mode-line))))
 
 (use-package! alert-toast :defer t)
