@@ -52,3 +52,12 @@
       (when (featurep 'evil)
         (evil-local-set-key 'normal (kbd "q") #'delete-window)))
     (pop-to-buffer buffer)))
+
+(defun cae-envrc-file-mode-setup ()
+  "Set up the after-save hook to run `envrc-allow' automatically.
+This function is added to `envrc-file-mode-hook' so that it runs only in
+buffers visiting .envrc files."
+  (add-hook 'after-save-hook 'envrc-allow nil t))
+
+;; Attach our setup function to the envrc file mode.
+(add-hook 'envrc-file-mode-hook 'cae-envrc-file-mode-setup)
