@@ -55,8 +55,9 @@
     (setf (buffer-local-value 'default-directory buf)
           (file-name-directory bookmark-default-file)
           (buffer-local-value 'buffer-file-name buf)
-          bookmark-default-file)
-    (setq-local gac-automatically-push-p t)
+          bookmark-default-file
+          (buffer-local-value 'gac-automatically-push-p buf)
+          t)
     (gac--after-save buf)))
 (defun cae-multi-org-archive-push-changes-h ()
   (gac--after-save (buffer-file-name))
