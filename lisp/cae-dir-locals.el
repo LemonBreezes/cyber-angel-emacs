@@ -131,5 +131,5 @@
 
 
 ;;Local Variables:
-;;eval: (cae-hotloading-reload-dir-locals-for-class 'doom)
+;;eval: (cae-reload-all-dir-locals)
 ;;End:
