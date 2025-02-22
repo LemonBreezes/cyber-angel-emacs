@@ -165,7 +165,7 @@ the abbrevs are reloaded automatically."
       (message "Started watching abbrev file: %s" abbrev-file-name))))
 
 (when (eq system-type 'gnu/linux)
-  (cae-run-with-idle-timer
+  (run-with-idle-timer
    5 nil "cae-multi-start-file-watchers"
    (defun cae-multi-start-file-watchers ()
      (when (and (require 'filenotify nil t)
