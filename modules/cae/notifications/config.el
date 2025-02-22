@@ -55,7 +55,9 @@
               #'cae-notifications-wrap-async-call-process-a)
 
   (setq alert-default-style
-        (cond ((getenv "WSL_DISTRO_NAME") 'toast)
+        (cond ((getenv "WSL_DISTRO_NAME")
+               (require ' alert-toast)
+               'toast)
               ((or (display-graphic-p)
                    (featurep 'tty-child-frames))
                (alert-define-style 'child-frame
@@ -64,5 +66,3 @@
                                    :remover #'alert-child-frame-remove)
                'child-frame)
               (t 'message))))
-
-(use-package! alert-toast :defer t)
