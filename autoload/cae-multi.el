@@ -27,27 +27,6 @@
   (dolist (file (org-all-archive-files))
     (gac--after-save file)))
 
-;;;###autoload
-(defun cae-multi-abbrev-write-file-a (orig-fun &optional file verbose)
-  (let ((mtime (nth 5 (file-attributes abbrev-file-name))))
-    (if (or (null cae-multi-abbrev--file-mtime)
-            (equal mtime cae-multi-abbrev--file-mtime))
-        (progn (funcall orig-fun file verbose)
-               (setq cae-multi-abbrev--file-mtime mtime)
-               (unless file
-                 (if cae-multi-abbrev--auto-commit-disabled
-                     (when (y-or-n-p
-                            (concat "Abbrev file modified since a previous "
-                                    "save. Enable auto-commit?"))
-                       (setq cae-multi-abbrev--auto-commit-disabled nil)
-                       (cae-multi-commit-file abbrev-file-name))
-                   (cae-multi-commit-file abbrev-file-name))))
-      (message (concat "Abbrev file modified since last save. "
-                       "Disabling abbrev file auto-commit."))
-      (funcall orig-fun file verbose)
-      (setq cae-multi-abbrev--file-mtime mtime
-            cae-multi-abbrev--auto-commit-disabled t))))
-
 ;;; Sync repositories
 
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
