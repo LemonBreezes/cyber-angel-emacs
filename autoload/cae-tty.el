@@ -1,8 +1,24 @@
 ;;; autoload/cae-tty.el -*- lexical-binding: t; -*-
 
+(defun cae-terminal-type ()
+  (cond
+   ;; If Emacs is running in a GUI, you have full Unicode/font support.
+   ((display-graphic-p)
+    2)
+   ((getenv "WT_SESSION")
+    1)
+   ;; Linux virtual console (tty). The TERM variable is usually "linux"
+   ((string= (or (getenv "TERM") "") "linux")
+    0)
+   ;; Otherwise, if LANG indicates UTF-8 you’re probably in a modern terminal emulator.
+   ((and (getenv "LANG") (string-match "UTF-8" (getenv "LANG")))
+    1)
+   (t 0)))
+
 ;;;###autoload
 (defun cae-tty-disable-unicode ()
   (interactive)
+  (unles)
   (after! org-eldoc
     (setq org-eldoc-breadcrumb-separator " -> "))
   (after! embrace
