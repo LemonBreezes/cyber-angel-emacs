@@ -9,7 +9,13 @@
           (when (require 'dbus nil t)
             (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))))
   (if cae-dbus-notifications-supported-p
-      (cae-ednc-load-h)
+      (progn
+        (advice-remove #'alert-send-notification :around
+              #'cae-notifications-wrap-async-call-process-a)
+        (and (require 'dbus nil t)
+             (not (getenv "INSIDE_EXWM")) ; In EXWM I prefer using Dunst.
+             cae-dbus-notifications-supported-p
+             (ednc-mode +1)))
     ;; Use `alert' instead of `notifications-notify'.
     (advice-add #'notifications-notify :around #'cae-notifications-notify-advice)))
 
