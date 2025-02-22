@@ -41,13 +41,7 @@
   :config
   (setq-default gac-automatically-add-new-files-p nil)
   (setq-hook! 'git-auto-commit-mode-hook
-    backup-inhibited t)
-
-  ;; Disable `diff-hl-mode' in my Doom private dir.
-  (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
-    :before-until #'diff-hl-mode
-    (file-in-directory-p default-directory doom-user-dir)))
-
+    backup-inhibited t))
 (defun cae-multi-bookmark-push-changes-a (&rest _)
   (let ((buf (get-buffer-create " *cae-multi-bookmark-push-changes-a*")))
     ;; Performance hack. We don't actually care about the contents of the
@@ -94,69 +88,6 @@
 
 (defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
   "If non-nil, automatically pull repositories when idle.")
-
-(dir-locals-set-class-variables
- 'home
- '((nil
-    . ((eval
-        . (progn
-            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
-            (setq-local blamer--block-render-p t)
-
-            ;; Automatically commit saved files to Git and push them to the
-            ;; remote.
-            (when (and (buffer-file-name)
-                       (require 'git-auto-commit-mode nil t)
-                       (require 'vc-git nil t)
-                       (file-equal-p (vc-git-root (buffer-file-name))
-                                     "~/"))
-              (setq-local gac-automatically-add-new-files-p nil)
-              (setq-local gac-automatically-push-p t)
-              (git-auto-commit-mode 1))))))))
-
-(when (eq system-type 'gnu/linux)
-  (dir-locals-set-directory-class (getenv "HOME") 'home))
-
-(dir-locals-set-class-variables
- 'org
- '((nil
-    . ((eval . (progn
-                 ;; Avoid rendering blamer hints because we use
-                 ;; git-auto-commit-mode.
-                 (setq-local blamer--block-render-p t)
-
-                 ;; If this file is inside the Org directory and git-auto-commit-mode
-                 ;; is available, enable it with
-                 ;; automatic addition of new Org files and auto-push enabled.
-                 (when (and (buffer-file-name)
-                            (require 'git-auto-commit-mode nil t)
-                            (require 'vc-git nil t)
-                            (file-in-directory-p (buffer-file-name)
-                                                 (expand-file-name cae-multi-org-dir)))
-                   (setq-local gac-automatically-add-new-files-p t)
-                   (setq-local gac-automatically-push-p t)
-                   (git-auto-commit-mode 1))))))))
-
-(dir-locals-set-directory-class (expand-file-name cae-multi-org-dir) 'org)
-
-(dir-locals-set-class-variables
- 'secrets
- '((nil
-    . ((eval
-        . (progn
-            ;; Do not render `blamer' hints since we use `git-auto-commit-mode'.
-            (setq-local blamer--block-render-p t)
-
-            ;; Automatically commit saved files to Git and push them to the
-            ;; remote.
-            (when (and (buffer-file-name)
-                       (require 'git-auto-commit-mode nil t)
-                       (require 'vc-git nil t))
-              (setq-local gac-automatically-add-new-files-p nil)
-              (setq-local gac-automatically-push-p t)
-              (git-auto-commit-mode 1))))))))
-
-(dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
 
 ;; Gotta sync when idle to prevent the sync from interfering with git commands.
 (defun cae-multi-sync-repositories-when-idle ()
