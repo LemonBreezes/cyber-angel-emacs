@@ -59,7 +59,7 @@
        (syntax +childframe +icons +flymake)
 
        :tools
-       (debugger +lsp)
+       debugger
        direnv
        ;;editorconfig ;; Now built into Emacs.
        (eval +overlay)
