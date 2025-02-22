@@ -11,8 +11,6 @@
 (defvar cae-multi-last-sync-duration 0
   "Time in seconds that the last sync operation took in `cae-multi-sync-repositories`.")
 
-;;; Sync repositories
-
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
                                             conflict-check next-step
                                             finalize output-buffer
