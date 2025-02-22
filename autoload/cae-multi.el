@@ -48,6 +48,8 @@
       (setq cae-multi-abbrev--file-mtime mtime
             cae-multi-abbrev--auto-commit-disabled t))))
 
+;;; Sync repositories
+
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
                                             conflict-check next-step
                                             finalize output-buffer
@@ -278,3 +280,23 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
                                            (lambda () (setq all-ops-succeeded nil))))))))
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
+
+;;; Hot reloading bookmarks
+
+(defun cae-multi-bookmark-watch-callback (event)
+  "Handle file change EVENT for the bookmark file.
+If the file has been changed (or its attributes changed),
+reload the bookmarks from `bookmark-default-file'."
+  (when (memq (cadr event) '(changed attribute-changed))
+    (message "Bookmark file changed—reloading bookmarks…")
+    ;; The second argument t says to overwrite the current bookmarks;
+    ;; the third argument t means no extra messages.
+    (bookmark-load bookmark-default-file t t)
+    (message "Bookmarks reloaded.")))
+
+(defun cae-multi-stop-bookmark-watch ()
+  "Stop watching the bookmark file for external changes."
+  (when cae-multi-bookmark-watch-descriptor
+    (file-notify-rm-watch cae-multi-bookmark-watch-descriptor)
+    (setq cae-multi-bookmark-watch-descriptor nil)
+    (message "Stopped watching the bookmark file.")))
