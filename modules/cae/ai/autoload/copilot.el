@@ -21,9 +21,9 @@ command currently typed."
   (if (copilot--overlay-visible)
       (copilot-accept-completion-by-word)
     (when-let* ((command (or (lookup-key (current-local-map)
-                                        (this-command-keys))
-                            (lookup-key (current-global-map)
-                                        (this-command-keys)))))
+                                         (this-command-keys))
+                             (lookup-key (current-global-map)
+                                         (this-command-keys)))))
       (call-interactively command))))
 
 ;;;###autoload
@@ -34,9 +34,9 @@ command currently typed."
   (if (copilot--overlay-visible)
       (copilot-accept-completion-by-line)
     (when-let* ((command (or (lookup-key (current-local-map)
-                                        (this-command-keys))
-                            (lookup-key (current-global-map)
-                                        (this-command-keys)))))
+                                         (this-command-keys))
+                             (lookup-key (current-global-map)
+                                         (this-command-keys)))))
       (call-interactively command))))
 
 ;;;###autoload
@@ -47,9 +47,9 @@ command currently typed."
   (if (copilot--overlay-visible)
       (copilot-next-completion)
     (when-let* ((command (or (lookup-key (current-local-map)
-                                        (this-command-keys))
-                            (lookup-key (current-global-map)
-                                        (this-command-keys)))))
+                                         (this-command-keys))
+                             (lookup-key (current-global-map)
+                                         (this-command-keys)))))
       (call-interactively command))))
 
 ;;;###autoload
@@ -60,9 +60,9 @@ command currently typed."
   (if (copilot--overlay-visible)
       (copilot-previous-completion)
     (when-let* ((command (or (lookup-key (current-local-map)
-                                        (this-command-keys))
-                            (lookup-key (current-global-map)
-                                        (this-command-keys)))))
+                                         (this-command-keys))
+                             (lookup-key (current-global-map)
+                                         (this-command-keys)))))
       (call-interactively command))))
 
 ;;;###autoload
