@@ -58,6 +58,3 @@
 This function is added to `envrc-file-mode-hook' so that it runs only in
 buffers visiting .envrc files."
   (add-hook 'after-save-hook 'envrc-allow nil t))
-
-;; Attach our setup function to the envrc file mode.
-(add-hook 'envrc-file-mode-hook 'cae-envrc-file-mode-setup)
