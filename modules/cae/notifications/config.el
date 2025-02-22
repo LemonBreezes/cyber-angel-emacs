@@ -53,8 +53,16 @@
   ;; BUG Otherwise `alert-send-notification' will block the UI.
   (advice-add #'alert-send-notification :around
               #'cae-notifications-wrap-async-call-process-a)
+
   (setq alert-default-style
         (cond ((getenv "WSL_DISTRO_NAME") 'toast)
+              ((or (display-graphic-p)
+                   (featurep 'tty-child-frames))
+               (alert-define-style 'child-frame
+                                   :title "Display notification in a child frame popup"
+                                   :notifier #'alert-child-frame-notify
+                                   :remover #'alert-child-frame-remove)
+               'child-frame)
               (t 'message))))
 
 (use-package! alert-toast :defer t)
