@@ -333,7 +333,7 @@ ARGS are passed on to ORIG-FUN.  This prevents the advise on
 `define-abbrev' from scheduling a save during bulk operations such as
 reading the abbrev file or defining an abbrev table."
   (with-abbrev-auto-save-disabled
-    (apply orig-fun args)))
+   (apply orig-fun args)))
 
 (defvar cae-multi--auto-save-abbrev-timer nil
   "Timer for deferred automatic saving of the abbrev file.")
