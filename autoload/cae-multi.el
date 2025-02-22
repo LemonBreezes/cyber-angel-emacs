@@ -290,16 +290,6 @@ reload the bookmarks from `bookmark-default-file'."
     (message "Stopped watching abbrev file.")))
 
 ;;;###autoload
-(defun cae-multi-auto-save-abbrev (&rest _args)
-  "Automatically save the abbrev file after a new abbrev is defined.
-This function is meant to be run as after advice on `define-abbrev'."
-  (when abbrevs-changed
-    (write-abbrev-file abbrev-file-name nil)
-    ;; Immediately update our stored modification time:
-    (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name)))
-    (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
-
-;;;###autoload
 (defun cae-multi-abbrev-watch-callback (event)
   "Handle file change EVENT for the abbrev file.
 Reload abbrevs only if the file was changed externally.
