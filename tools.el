@@ -10,7 +10,12 @@
   (backtrace))
 
 ;; Automatically allow envrc files after saving them.
-(add-hook 'envrc-file-mode-hook 'cae-envrc-file-mode-setup)
+(add-hook! 'envrc-file-mode-hook
+  (defun cae-envrc-file-mode-setup ()
+    "Set up the after-save hook to run `envrc-allow' automatically.
+This function is added to `envrc-file-mode-hook' so that it runs only in
+buffers visiting .envrc files."
+    (add-hook 'after-save-hook 'envrc-allow nil t)))
 
 ;; I use `w3m' because EWW is too slow.
 (use-package! w3m
