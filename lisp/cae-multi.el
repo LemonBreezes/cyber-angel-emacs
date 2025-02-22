@@ -6,6 +6,8 @@
 (defvar cae-multi-local-dir (expand-file-name "shared-local/" doom-user-dir))
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
+(defvar cae-multi-org-dir (expand-file-name "org/" cae-multi-local-dir))
+(defvar cae-multi-secrets-dir (expand-file-name "secrets/" cae-multi-local-dir))
 
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
@@ -29,8 +31,6 @@
   (setq ispell-complete-word-dict (concat cae-multi-data-dir "en.dic")
         ispell-personal-dictionary (concat cae-multi-secrets-dir "aspell.en.pws")))
 (setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir))
-(after! calendar
-  (setq diary-file (concat cae-multi-secrets-dir "diary")))
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
@@ -41,21 +41,25 @@
   (setq-default gac-automatically-add-new-files-p nil)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
-(defun cae-multi-bookmark-push-changes-a (&rest _)
-  (let ((buf (get-buffer-create " *cae-multi-bookmark-push-changes-a*")))
-    ;; Performance hack. We don't actually care about the contents of the
-    ;; bookmark file here.
+
+(defun cae-multi--push-changes (file buf-name)
+  "Push changes for FILE using a temporary buffer BUF-NAME.
+Sets the buffer's default directory and file-name, enables auto-push,
+calls `gac--after-save' and then resets the buffer-local values."
+  (let ((buf (get-buffer-create buf-name)))
     (setf (buffer-local-value 'default-directory buf)
-          (file-name-directory bookmark-default-file)
+          (file-name-directory file)
           (buffer-local-value 'buffer-file-name buf)
-          bookmark-default-file
+          file
           (buffer-local-value 'gac-automatically-push-p buf)
           t)
     (gac--after-save buf)
-    (setf (buffer-local-value 'default-directory buf)
-          nil
-          (buffer-local-value 'buffer-file-name buf)
-          nil)))
+    (setf (buffer-local-value 'default-directory buf) nil
+          (buffer-local-value 'buffer-file-name buf) nil)))
+
+(defun cae-multi-bookmark-push-changes-a (&rest _)
+  (cae-multi--push-changes bookmark-default-file " *cae-multi-bookmark-push-changes-a*"))
+
 (defun cae-multi-org-archive-push-changes-h ()
   (gac--after-save (buffer-file-name))
   (dolist (file (org-all-archive-files))
@@ -116,24 +120,12 @@ the abbrevs are reloaded automatically."
 ;; After any call to `define-abbrev', automatically save the abbrev file.
 (defun cae-multi-auto-save-abbrev (&rest _args)
   "Automatically save the abbrev file after a new abbrev is defined.
-This function is meant to be run as “after advice” on `define-abbrev'."
+This function is meant to be run as after advice on `define-abbrev'."
   (when abbrevs-changed
-    ;; Write out to the file specified by `abbrev-file-name'
     (write-abbrev-file abbrev-file-name nil)
-    (let ((buf (get-buffer-create " *cae-multi-abbrev-push-changes-a*")))
-      (setf (buffer-local-value 'default-directory buf)
-            (file-name-directory abbrev-file-name)
-            (buffer-local-value 'buffer-file-name buf)
-            abbrev-file-name
-            (buffer-local-value 'gac-automatically-push-p buf)
-            t)
-      (gac--after-save buf)
-      (setf (buffer-local-value 'default-directory buf)
-            nil
-            (buffer-local-value 'buffer-file-name buf)
-            nil))))
+    (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
 
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
 
 (when (eq system-type 'gnu/linux)
-  (run-with-idle-timer 5 nil#'cae-multi-start-abbrev-watch))
+  (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
