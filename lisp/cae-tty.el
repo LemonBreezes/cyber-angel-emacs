@@ -42,6 +42,16 @@
 
   (cae-tty-disable-unicode-and-or-icons))
 
+;; Fix clipboard issues in the terminal.
+(cond ((executable-find "termux-setup-storage")
+       (setq xclip-method 'termux-clipboard-get)))
+
+;; BUG Do not emit an error if `xclip' is not found.
+(defadvice! cae-handle-missing-xclip-program ()
+  :before-until #'doom-init-clipboard-in-tty-emacs-h
+  (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
+       (not (executable-find "xclip"))))
+
 (when (modulep! :tools pdf)
   (use-package! pdftotext
     :defer t :init
