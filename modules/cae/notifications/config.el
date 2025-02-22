@@ -51,5 +51,4 @@
                'toast)
               (t 'libnotify))))
 
-(use-package! alert-toast
-  :defer t)
+(use-package! alert-toast :defer t)
