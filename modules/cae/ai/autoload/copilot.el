@@ -66,7 +66,7 @@ command currently typed."
       (call-interactively command))))
 
 ;;;###autoload
-(defun cae-copilot-copilot-mode-safe ()
+(defun cae-copilot-turn-on-copilot-mode-safe ()
   (condition-case err
       (progn
         (copilot-mode +1)
