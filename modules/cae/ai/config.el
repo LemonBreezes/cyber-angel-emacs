@@ -85,9 +85,9 @@
   :when (and (executable-find "node")
              (modulep! +copilot))
   :defer t :init
-  (add-hook 'text-mode-hook   #'copilot-mode)
-  (add-hook 'prog-mode-hook   #'copilot-mode)
-  (add-hook 'conf-mode-hook   #'copilot-mode)
+  (add-hook 'text-mode-hook #'cae-copilot-turn-on-safely)
+  (add-hook 'prog-mode-hook #'cae-copilot-turn-on-safely)
+  (add-hook 'conf-mode-hook #'cae-copilot-turn-on-safely)
   (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
   (add-hook! 'copilot-disable-predicates
     (defun cae-disable-copilot-in-gptel-p ()
@@ -98,6 +98,7 @@
       (bound-and-true-p multiple-cursors-mode))
     (defun cae-disable-copilot-in-minibuffer ()
       (minibufferp)))
+  (setq copilot-install-dir (concat doom-cache-dir "copilot"))
   :config
   (defadvice! cae-clear-copilot-overlay-a (&rest _)
     :before #'doom/delete-backward-word
