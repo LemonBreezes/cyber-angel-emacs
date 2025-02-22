@@ -55,6 +55,6 @@
               #'cae-notifications-wrap-async-call-process-a)
   (setq alert-default-style
         (cond ((getenv "WSL_DISTRO_NAME") 'toast)
-         (t 'message))))
+              (t 'message))))
 
 (use-package! alert-toast :defer t)
