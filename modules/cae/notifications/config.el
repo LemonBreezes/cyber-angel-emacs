@@ -11,7 +11,7 @@
   (if cae-dbus-notifications-supported-p
       (cae-ednc-load-h)
     ;; Use `alert' instead of `notifications-notify'.
-    (advice-add 'notifications-notify :around #'cae-notifications-notify-advice)))
+    (advice-add #'notifications-notify :around #'cae-notifications-notify-advice)))
 
 (run-with-idle-timer 3 nil #'cae-notifications-setup)
 
