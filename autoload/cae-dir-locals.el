@@ -4,7 +4,6 @@
 
 (require 'cl-lib)
 
-
 ;; ---[ 1. Cache Lookup & Cleanup ]--------------------------------------
 
 (defun cae--cleanup-dir-locals-cache ()
@@ -35,7 +34,6 @@ does it attempt to verify cache validity."
           (setq best entry)))
       best)))
 
-
 ;; ---[ 2. Reload for All Buffers ]--------------------------------------
 
 ;;;###autoload
