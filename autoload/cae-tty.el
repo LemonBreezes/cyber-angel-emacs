@@ -46,6 +46,9 @@
             dirvish-path-separators '("~" "/" "/")
             dirvish-subtree-prefix " |"
             dirvish-subtree-line-prefix " |"))
+    (after! eglot
+      (when (eq eglot-code-action-indicator ?)
+        (setq eglot-code-action-indicator ?⚡)))
     (remove-hook 'org-mode-hook #'+org-pretty-mode))
   (when (< (cae-terminal-type) 2)
     (after! mu4e-bookmarks
