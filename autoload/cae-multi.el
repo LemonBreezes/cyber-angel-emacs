@@ -280,3 +280,23 @@ reload the bookmarks from `bookmark-default-file'."
     (file-notify-rm-watch cae-multi-bookmark-watch-descriptor)
     (setq cae-multi-bookmark-watch-descriptor nil)
     (message "Stopped watching the bookmark file.")))
+
+;;; Hot reloading abbrevs
+
+;;;###autoload
+(defun cae-multi-abbrev-watch-callback (event)
+  "Handle file change EVENT for the abbrev file.
+If the file (or its attributes) have changed, reload the abbrevs from `abbrev-file-name`."
+  (when (memq (cadr event) '(changed attribute-changed))
+    (message "Abbrev file changed -- reloading abbrevs…")
+    (ignore-errors
+      (read-abbrev-file abbrev-file-name t))
+    (message "Abbrevs reloaded.")))
+
+;;;###autoload
+(defun cae-multi-stop-abbrev-watch ()
+  "Stop watching the abbrev file for external changes."
+  (when cae-multi-abbrev-watch-descriptor
+    (file-notify-rm-watch cae-multi-abbrev-watch-descriptor)
+    (setq cae-multi-abbrev-watch-descriptor nil)
+    (message "Stopped watching abbrev file.")))
