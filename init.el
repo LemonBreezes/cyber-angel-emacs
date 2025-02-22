@@ -18,6 +18,8 @@
     (defvar cae-init-languages-enabled-p (and p t))
     (defvar cae-init-appendix-enabled-p (and p t))))
 
+(provide 'lsp) (provide 'lsp-mode)
+
 (when cae-init-preamble-enabled-p
   (load! "preamble"))
 
