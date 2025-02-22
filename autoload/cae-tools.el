@@ -53,6 +53,7 @@
         (evil-local-set-key 'normal (kbd "q") #'delete-window)))
     (pop-to-buffer buffer)))
 
+;;;###autoload
 (defun cae-envrc-file-mode-setup ()
   "Set up the after-save hook to run `envrc-allow' automatically.
 This function is added to `envrc-file-mode-hook' so that it runs only in
