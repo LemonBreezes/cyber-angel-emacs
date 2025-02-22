@@ -23,6 +23,7 @@
 (run-with-idle-timer 3 nil #'cae-notifications-setup)
 
 (use-package! ednc
+  :when (eq system-type 'gnu/linux)
   :defer t :init
   (add-hook 'ednc-notification-presentation-functions
             #'ednc-popup-presentation-function)
