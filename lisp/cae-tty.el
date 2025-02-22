@@ -20,6 +20,11 @@
     (remove-hook hook #'doom-init-theme-h -90))
   (remove-hook 'doom-init-ui-hook #'window-divider-mode)
 
+  ;; Allow copying from Emacs to OS in SSH sessions.
+  (use-package! clipetty
+    :defer t :when (getenv "SSH_CONNECTION")
+    :init (add-hook 'doom-first-buffer-hook #'global-clipetty-mode))
+
   ;; Make some overlays more visible in the terminal.
   (after! corfu
     (set-face-attribute 'corfu-default nil :background 'unspecified))
