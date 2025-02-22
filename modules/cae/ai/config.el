@@ -26,8 +26,6 @@
   (after! gptel
     (setq gptel-model 'o3-mini)
     (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
-  (setq-hook! 'gptel-mode-hook
-    nobreak-char-display nil)
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
@@ -196,7 +194,11 @@
           :n "n" #'gptel-context-next
           :n "p" #'gptel-context-previous
           :n "d" #'gptel-context-flag-deletion
-          :n "RET" #'gptel-context-visit)))
+          :n "RET" #'gptel-context-visit))
+  (add-hook! 'gptel-mode-hook
+             (defun cae-gptel-mode-setup-h ()
+               (setq-local nobreak-char-display nil)
+               (auto-fill-mode -1))))
 
 (use-package! minuet
   :when (modulep! -copilot)
