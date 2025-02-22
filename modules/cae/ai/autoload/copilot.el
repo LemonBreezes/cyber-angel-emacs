@@ -74,4 +74,6 @@ command currently typed."
     (error
      (when (string-match-p "The package @github/copilot-language-server is not installed"
                            (error-message-string err))
+       ;; Copilot is not going to be enabled after the server is installed but I
+       ;; probably will not notice.
        (copilot-install-server)))))
