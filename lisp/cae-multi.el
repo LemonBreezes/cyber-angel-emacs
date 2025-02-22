@@ -129,7 +129,7 @@
   (cae-run-with-timer 60 60 "cae-multi-sync-repositories-if-idle"
                       #'cae-multi-sync-repositories-if-idle))
 
-;;; Hot reloading bookmarks
+;;; Hot reloading bookmarks and abbrevs
 
 ;; Define a variable to hold the file notification descriptor.
 (defvar cae-multi-bookmark-watch-descriptor nil
@@ -147,12 +147,6 @@ will be reloaded automatically."
              '(change)
              #'cae-multi-bookmark-watch-callback))
       (message "Started watching bookmark file: %s" bookmark-default-file))))
-
-(when (and (eq system-type 'gnu/linux)
-           (require 'filenotify nil t))
-  (cae-multi-start-bookmark-watch))
-
-;;; Hot reloading abbrevs
 
 (defvar cae-multi-abbrev-watch-descriptor nil
   "File notification descriptor for the abbrev file.")
@@ -172,4 +166,8 @@ the abbrevs are reloaded automatically."
 
 (when (and (eq system-type 'gnu/linux)
            (require 'filenotify nil t))
-  (cae-multi-start-abbrev-watch))
+  (cae-run-with-idle-timer
+   5 nil "cae-multi-start-file-watchers"
+   (defun cae-multi-start-file-watchers ()
+     (cae-multi-start-abbrev-watch)
+     (cae-multi-start-bookmark-watch))))
