@@ -97,7 +97,7 @@
                        (file-equal-p (vc-git-root (buffer-file-name))
                                      "~/"))
               (setq-local gac-automatically-add-new-files-p nil)
-              (setq-local gac-automatically-push-p nil)
+              (setq-local gac-automatically-push-p t)
               (git-auto-commit-mode 1))
             ))))))
 
