@@ -87,62 +87,9 @@
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
 
-(defvar cae-multi-abbrev-watch-descriptor nil
-  "File notification descriptor for the abbrev file.")
-
-(defun cae-multi-start-abbrev-watch ()
-  "Start watching the abbrev file for external changes.
-When the abbrev file (given by the variable `abbrev-file-name`) changes,
-the abbrevs are reloaded automatically."
-  (when (and abbrev-file-name (file-exists-p abbrev-file-name))
-    (unless cae-multi-abbrev-watch-descriptor
-      (setq cae-multi-abbrev-watch-descriptor
-            (file-notify-add-watch
-             abbrev-file-name
-             '(change)
-             #'cae-multi-abbrev-watch-callback)))))
-
-;; 1. Add a flag and a helper macro to disable auto‐saving in bulk.
-(defvar cae-multi-abbrev--auto-commit-disabled nil
-  "Non-nil means that automatic saving of abbrev file is temporarily disabled.")
-
-(defmacro with-abbrev-auto-save-disabled (&rest body)
-  "Execute BODY with automatic saving of the abbrev file disabled."
-  `(let ((cae-multi-abbrev--auto-commit-disabled t))
-     ,@body))
-
-;; 2. Instead of writing out the file immediately, schedule a one-shot timer.
-(defvar cae-multi--auto-save-abbrev-timer nil
-  "Timer for deferred automatic saving of the abbrev file.")
-
-(defun cae-multi--schedule-auto-save-abbrev ()
-  "Schedule an automatic save of the abbrev file during idle time.
-If a timer is already active, do not schedule another."
-  (unless cae-multi--auto-save-abbrev-timer
-    (setq cae-multi--auto-save-abbrev-timer
-          (run-with-idle-timer
-           0.5 nil
-           (lambda ()
-             (unless cae-multi-abbrev--auto-commit-disabled
-               (when abbrevs-changed
-                 (write-abbrev-file abbrev-file-name nil)
-                 ;; Update our stored mtime.
-                 (setq cae-multi-abbrev--file-mtime
-                       (nth 5 (file-attributes abbrev-file-name)))
-                 (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
-             (setq cae-multi--auto-save-abbrev-timer nil))))))
-
-;; 3. Rewrite the advice function on define-abbrev so that it just schedules the save.
-(defun cae-multi-auto-save-abbrev (&rest _args)
-  "Automatically schedule saving the abbrev file after a new abbrev is defined.
-This function is meant to be used as :after advice on `define-abbrev'.
-It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
-  (unless cae-multi-abbrev--auto-commit-disabled
-    (cae-multi--schedule-auto-save-abbrev))
-  nil)
-
-;; 4. Install the advice.
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
+(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
+(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
 
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
