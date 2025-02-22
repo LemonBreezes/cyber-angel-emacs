@@ -33,8 +33,7 @@
 (advice-add #'dap-start-debugging-noexpand :filter-args
             #'cae-dap-debug-pass-envrc-a)
 
-(when (and (modulep! :tools lsp +eglot)
-           (modulep! :tools debugger +lsp))
+(when (modulep! :tools lsp +eglot)
   (use-package! dape
     :defer t))
 
