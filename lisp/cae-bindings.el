@@ -129,13 +129,6 @@
        :map c-mode-base-map
        "TAB" nil))
 
-;; Make YaSnippet TAB work in Org mode.
-(when (modulep! :editor snippets)
-  (add-hook! 'org-load-hook :append
-    (defun cae-org-fix-keybindings ()
-      (map! :map org-mode-map
-            :ie [tab] nil))))
-
 (after! diff-mode
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
