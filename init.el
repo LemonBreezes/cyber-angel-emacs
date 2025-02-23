@@ -55,7 +55,7 @@
        (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
        :checkers
-       (syntax +childframe +icons +flymake)
+       (syntax +childframe +icons)
 
        :tools
        direnv
