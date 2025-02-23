@@ -10,6 +10,10 @@
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h))
 
+  ;; Make the cursor blink. I set this because the solid cursor makes it harder
+  ;; to see the character under it.
+  (setq visible-cursor t)
+
   ;; Remove some hooks that don't work in the terminal.
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     #'vi-tilde-fringe-mode)
