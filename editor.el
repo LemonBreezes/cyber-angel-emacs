@@ -400,16 +400,12 @@
 
 (use-package! auto-sudoedit
   :defer t :init
+  (autoload 'auto-sudoedit "auto-sudoedit")
   (defun cae-auto-sudoedit-lazy-h ()
     "When visiting a file that isn’t writable, load auto-sudoedit and run it."
     (let ((path (or buffer-file-name list-buffers-directory)))
       (when (and path (not (file-writable-p path)))
-        ;; Lazy-load auto-sudoedit (which in turn requires tramp and tramp-sh)
-        (unless (featurep 'auto-sudoedit)
-          (require 'auto-sudoedit))
-        (when (fboundp 'auto-sudoedit)
-          (auto-sudoedit)))))
-
+        (auto-sudoedit))))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-lazy-h)
   (add-hook 'dired-mode-hook  #'cae-auto-sudoedit-lazy-h)
   :config
