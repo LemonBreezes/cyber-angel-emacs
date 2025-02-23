@@ -258,18 +258,6 @@
   :config
   (setq logos-outlines-are-pages t))
 
-(use-package! aas
-  :defer t :init
-  (add-hook 'doom-first-input-hook #'aas-global-mode)
-  :config
-  (aas-set-snippets 'global
-    ";--" "—"
-    ";-." "→"
-    ";=." "⇒"
-    ";!=" "≠"
-    ",." #'cae-insert-bracket-pair    ; <>
-    ))
-
 (use-package! parrot
   :when (modulep! :tools magit)
   :defer t :init
