@@ -77,8 +77,8 @@
         doom-modeline-major-mode-icon nil
         doom-modeline-minor-modes nil))
 
-;; See https://github.com/oantolin/embark/issues/470, having this value too low
-;; causes keys to "hang around" in Embark after performing actions.
+;; BUG See https://github.com/oantolin/embark/issues/470, having this value too
+;; low causes keys to "hang around" in Embark after performing actions.
 (setq echo-keystrokes 1)
 (after! embark
   (setq embark-confirm-act-all nil))
