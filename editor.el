@@ -399,24 +399,5 @@
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
 (use-package! auto-sudoedit
-  :defer t :init
-  (defun cae-auto-sudoedit-maybe-h ()
-    (unless (let ((path (or (buffer-file-name) list-buffers-directory
-                            dired-directory)))
-              (message "auto-sudoedit-maybe-h: %s" path)
-              (string= (file-attribute-user-id
-                        (file-attributes path 'string))
-                       (if (and (featurep 'tramp)
-                                (tramp-tramp-file-p path))
-                           (tramp-get-remote-uid (tramp-dissect-file-name path)
-                                                 'string)
-                         (user-login-name))))
-      (require 'auto-sudoedit)
-      (auto-sudoedit)))
-  (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
-  :after tramp-sh :config
-  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-  (defadvice! cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
-    :around #'dirvish-data-for-dir
-    (funcall oldfun (tramp-file-local-name dir) buffer setup))
+  :defer t :config
   (auto-sudoedit-mode +1))
