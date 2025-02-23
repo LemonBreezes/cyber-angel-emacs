@@ -412,6 +412,7 @@
       (require 'auto-sudoedit)
       (auto-sudoedit)))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
+  (add-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h -1)
   :after tramp-sh :config
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (defadvice! cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
