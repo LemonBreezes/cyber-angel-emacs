@@ -200,7 +200,7 @@
       (setq-local nobreak-char-display nil)
       (auto-fill-mode -1)))
   (defadvice! cae-goto-point-max-a (_)
-    #'gptel--read-with-prefix :after
+    :after #'gptel--read-with-prefix
     (goto-char (point-max))))
 
 (use-package! minuet
