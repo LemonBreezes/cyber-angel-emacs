@@ -108,7 +108,7 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
       (let ((start-time (current-time))
             (output-buffer (get-buffer-create " *cae-multi-sync-repositories*"))
             (all-ops-succeeded t)
-            (pending-private 0)    ; count of repos entirely in doom-private-dir
+            (pending-private 0)    ; count of repos entirely in doom-user-dir
             (pending-repos 0)           ; count of repos with active sync chains
             doom-sync-proc              ; will hold doom sync process if started
             sync-finalized)             ; flag to ensure we finalize only once
@@ -118,7 +118,7 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
                                  "Called at the end of a repository's sync chain.
 If the repo is in doom-private, call repo-finalize.
 Then decrement the pending counter and, if zero, clear the running flag."
-                                 (when (string-prefix-p (file-truename doom-private-dir)
+                                 (when (string-prefix-p (file-truename doom-user-dir)
                                                         (file-truename repo-dir))
                                    (repo-finalize repo-dir))
                                  (setq pending-repos (1- pending-repos))
@@ -128,13 +128,13 @@ Then decrement the pending counter and, if zero, clear the running flag."
                                        nil
                                      (finalize-all))))
              (repo-finalize (repo-dir)
-                            "Finalize a repo in doom-private-dir."
+                            "Finalize a repo in doom-user-dir."
                             (setq pending-private (1- pending-private))
                             (when (zerop pending-private)
                               (setq doom-sync-proc (cae-multi--run-doom-sync verb-level start-time #'finalize-all))))
              (maybe-finalize (repo-dir)
-                             "Call repo-finalize only for a repo that lies within doom-private-dir."
-                             (when (string-prefix-p (file-truename doom-private-dir)
+                             "Call repo-finalize only for a repo that lies within doom-user-dir."
+                             (when (string-prefix-p (file-truename doom-user-dir)
                                                     (file-truename repo-dir))
                                (repo-finalize repo-dir)))
 
