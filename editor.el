@@ -400,7 +400,7 @@
 
 (use-package! auto-sudoedit
   :defer t :init
-  (defun my/auto-sudoedit-lazy ()
+  (defun cae-auto-sudoedit-lazy-h ()
     "When visiting a file that isn’t writable, load auto-sudoedit and run it."
     (let ((path (or buffer-file-name list-buffers-directory)))
       (when (and path (not (file-writable-p path)))
@@ -410,8 +410,9 @@
         (when (fboundp 'auto-sudoedit)
           (auto-sudoedit)))))
 
-  ;; Add the lazy hook to find-file and dired
-  (add-hook 'find-file-hook #'my/auto-sudoedit-lazy)
-  (add-hook 'dired-mode-hook  #'my/auto-sudoedit-lazy)
-  ;;(auto-sudoedit-mode +1)
-  )
+  (add-hook 'find-file-hook #'cae-auto-sudoedit-lazy-h)
+  (add-hook 'dired-mode-hook  #'cae-auto-sudoedit-lazy-h)
+  :config
+  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
+  (remove-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h)
+  (auto-sudoedit-mode +1))
