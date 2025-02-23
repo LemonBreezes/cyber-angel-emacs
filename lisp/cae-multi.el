@@ -87,10 +87,6 @@
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
 
-(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
-(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
-(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
-
 (defvar cae-multi-abbrev--auto-commit-disabled nil
   "Non-nil means that automatic saving of abbrev file is temporarily disabled.")
 
@@ -106,6 +102,10 @@ ARGS are passed on to ORIG-FUN.  This prevents the advise on
 reading the abbrev file or defining an abbrev table."
   (with-abbrev-auto-save-disabled
    (apply orig-fun args)))
+
+(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
+(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
+(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
 
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
