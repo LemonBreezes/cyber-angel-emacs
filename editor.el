@@ -413,4 +413,5 @@
   ;; Add the lazy hook to find-file and dired
   (add-hook 'find-file-hook #'my/auto-sudoedit-lazy)
   (add-hook 'dired-mode-hook  #'my/auto-sudoedit-lazy)
-  (auto-sudoedit-mode +1))
+  ;;(auto-sudoedit-mode +1)
+  )
