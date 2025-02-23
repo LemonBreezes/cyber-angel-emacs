@@ -22,7 +22,8 @@
 
   ;; Allow copying from Emacs to OS in SSH sessions.
   (use-package! clipetty
-    :defer t :when (getenv "SSH_CONNECTION")
+    :defer t :when (and (getenv "SSH_CONNECTION")
+                        (not (cae-display-graphic-p)))
     :init (add-hook 'doom-first-buffer-hook #'global-clipetty-mode))
 
   ;; Make some overlays more visible in the terminal.
