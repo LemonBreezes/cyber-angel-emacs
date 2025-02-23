@@ -204,34 +204,3 @@
   (defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
-
-(use-package! minuet
-  :when (modulep! -copilot)
-  :defer t :init
-  (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
-  (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
-  (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
-  :config
-  (map! :map minuet-active-mode-map
-        ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
-        :ig "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
-        :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
-        :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
-        ;; Accept the first line of completion, or N lines with a numeric-prefix:
-        ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
-        :ig "C-e" #'minuet-accept-suggestion-line)
-  (minuet-set-optional-options minuet-openai-options :max_tokens 256)
-  (minuet-set-optional-options minuet-openai-options :top_p 0.9)
-  (setq minuet-provider 'codestral)
-
-  (add-hook! 'doom-escape-hook :depth -1
-    (defun cae-minuet-dismiss-suggestion-h ()
-      (when minuet--current-overlay
-        (minuet-dismiss-suggestion)
-        t)))
-  (add-hook 'evil-insert-state-exit-hook #'minuet-dismiss-suggestion)
-  (when (modulep! :editor evil)
-    (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)))
-
-;; (setq cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
-(setq cae-ai-dall-e-shell-workspace-name "*dall-e*")
