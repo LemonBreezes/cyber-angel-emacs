@@ -3,6 +3,7 @@
 *.log
 tmp/
 core
+custom.el
 
 bugs.txt
 .gdb_history
