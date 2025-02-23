@@ -412,10 +412,16 @@
                                                  'string)
                          (user-login-name))))
       (require 'auto-sudoedit)
-      (auto-sudoedit)))
+      (auto-sudoedit)
+      (when dir
+        (setq find-directory-functions
+              (remq #'cae-auto-sudoedit-maybe-h
+                    find-directory-functions))
+        (run-hook-with-args-until-success 'find-directory-functions dir))))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
   (add-hook 'find-directory-functions #'cae-auto-sudoedit-maybe-h -1)
   :after tramp-sh :config
+  (remove-hook 'find-directory-functions #'cae-auto-sudoedit-maybe-h)
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
   (defadvice! cae-auto-sudoedit-file-local-name-a (oldfun dir buffer setup)
     :around #'dirvish-data-for-dir
