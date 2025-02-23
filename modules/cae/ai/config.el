@@ -198,7 +198,10 @@
   (add-hook! 'gptel-mode-hook
     (defun cae-gptel-mode-setup-h ()
       (setq-local nobreak-char-display nil)
-      (auto-fill-mode -1))))
+      (auto-fill-mode -1)))
+  (defadvice! cae-goto-point-max-a (_)
+    #'gptel--read-with-prefix :after
+    (goto-char (point-max))))
 
 (use-package! minuet
   :when (modulep! -copilot)
