@@ -3,7 +3,6 @@
 (use-package! repeat
   :defer 4.0 :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
-  (add-hook 'doom-first-input-hook #'repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
