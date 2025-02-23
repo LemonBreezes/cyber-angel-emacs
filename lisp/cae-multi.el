@@ -103,6 +103,14 @@ reading the abbrev file or defining an abbrev table."
   (with-abbrev-auto-save-disabled
    (apply orig-fun args)))
 
+(defun cae-multi-auto-save-abbrev (&rest _args)
+  "Automatically schedule saving the abbrev file after a new abbrev is defined.
+This function is meant to be used as :after advice on `define-abbrev'.
+It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
+  (unless cae-multi-abbrev--auto-commit-disabled
+    (cae-multi--schedule-auto-save-abbrev))
+  nil)
+
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
 (advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
 (advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
