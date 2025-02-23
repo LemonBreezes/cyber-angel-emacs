@@ -337,8 +337,7 @@
       'evil-operator-string-inflection)))
 
 (use-package! beginend
-  :defer t :init
-  (add-hook 'doom-first-input-hook #'beginend-global-mode)
+  :defer 2.0 :init
   ;; This patches around this function not being compatible with Evil when
   ;; `evil-move-beyond-eol' is `nil'. This should probably go into
   ;; `evil-collection'.
