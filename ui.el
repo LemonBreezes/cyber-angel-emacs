@@ -304,8 +304,7 @@
   (add-hook 'w3m-mode-hook #'iscroll-mode))
 
 (use-package! beacon
-  :defer 3.0
-  :config
+  :defer 3.0 :config
   (setq beacon-blink-delay 0.15
         beacon-blink-duration 0.15)
   (beacon-mode +1)
