@@ -71,7 +71,7 @@
  '((nil . ((eval . (progn (cae--setup-doom-dir-locals)))))
    (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/"))))))
 
-(dir-locals-set-directory-class doom-private-dir 'doom)
+(dir-locals-set-directory-class doom-user-dir 'doom)
 
 ;; Disable `diff-hl-mode' in my Doom private dir.
 (defadvice! cae-hacks-disable-diff-hl-in-private-config-a (&optional arg)
