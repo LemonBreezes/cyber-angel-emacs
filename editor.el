@@ -399,5 +399,5 @@
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
 (use-package! auto-sudoedit
-  :defer t :config
+  :defer t :init
   (auto-sudoedit-mode +1))
