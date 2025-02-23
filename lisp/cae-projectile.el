@@ -60,8 +60,9 @@
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
-      (add-to-list 'projectile-globally-ignored-directories
-                   (expand-file-name ".local/straight/repos/" user-emacs-directory))
+      (when projectile-track-known-projects-automatically
+        (add-to-list 'projectile-globally-ignored-directories
+                     (expand-file-name ".local/straight/repos/" user-emacs-directory)))
       ;; Recognize `makefile' as a Makefile.
       (add-to-list
        'projectile-project-types
@@ -82,7 +83,6 @@
        'projectile-project-types
        '(evm-truffle marker-files
          ("truffle-config.js")
-
          compile-command "truffle compile" test-command "truffle test" install-command
          "truffle migrate" package-command nil run-command nil))
       (add-to-list 'projectile-project-root-files-top-down-recurring
