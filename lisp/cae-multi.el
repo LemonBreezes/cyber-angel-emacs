@@ -91,5 +91,21 @@
 (advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
 (advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
 
+(defvar cae-multi-abbrev--auto-commit-disabled nil
+  "Non-nil means that automatic saving of abbrev file is temporarily disabled.")
+
+(defmacro with-abbrev-auto-save-disabled (&rest body)
+  "Execute BODY with automatic saving of the abbrev file disabled."
+  `(let ((cae-multi-abbrev--auto-commit-disabled t))
+     ,@body))
+
+(defun cae-multi--disable-auto-save-handler (orig-fun &rest args)
+  "Run ORIG-FUN with automatic abbrev file saving disabled.
+ARGS are passed on to ORIG-FUN.  This prevents the advise on
+`define-abbrev' from scheduling a save during bulk operations such as
+reading the abbrev file or defining an abbrev table."
+  (with-abbrev-auto-save-disabled
+   (apply orig-fun args)))
+
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
