@@ -199,6 +199,8 @@
     (defun cae-gptel-mode-setup-h ()
       (setq-local nobreak-char-display nil)
       (auto-fill-mode -1)))
+  ;; BUG Karthink refused to accept my PR to fix this, saying that starting the
+  ;; point on top of the "Rewrite: " is a good idea. I disagree.
   (defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
