@@ -3,7 +3,7 @@
 (defun cae-terminal-type ()
   (cond
    ;; If Emacs is running in a GUI, you have full Unicode/font support.
-   ((display-graphic-p)
+   ((cae-display-graphic-p)
     2)
    ((getenv "WT_SESSION")
     1)
