@@ -304,7 +304,7 @@
   (add-hook 'w3m-mode-hook #'iscroll-mode))
 
 (use-package! beacon
-  :defer t :init (add-hook 'doom-first-file-hook #'beacon-mode)
+  :defer 3.0
   :config
   (setq beacon-blink-delay 0.15
         beacon-blink-duration 0.15)
