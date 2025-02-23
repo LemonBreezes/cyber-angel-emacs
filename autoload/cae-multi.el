@@ -318,26 +318,10 @@ If the file's mtime is the same as our stored value, skip reloading."
           (read-abbrev-file abbrev-file-name t))
         (setq cae-multi-abbrev--file-mtime new-mtime)
         (message "Abbrevs reloaded.")))))
-
-(defvar cae-multi-abbrev--auto-commit-disabled nil
-  "Non-nil means that automatic saving of abbrev file is temporarily disabled.")
-
-(defmacro with-abbrev-auto-save-disabled (&rest body)
-  "Execute BODY with automatic saving of the abbrev file disabled."
-  `(let ((cae-multi-abbrev--auto-commit-disabled t))
-     ,@body))
-
-(defun cae-multi--disable-auto-save-handler (orig-fun &rest args)
-  "Run ORIG-FUN with automatic abbrev file saving disabled.
-ARGS are passed on to ORIG-FUN.  This prevents the advise on
-`define-abbrev' from scheduling a save during bulk operations such as
-reading the abbrev file or defining an abbrev table."
-  (with-abbrev-auto-save-disabled
-   (apply orig-fun args)))
-
 (defvar cae-multi--auto-save-abbrev-timer nil
   "Timer for deferred automatic saving of the abbrev file.")
 
+;;;###autoload
 (defun cae-multi--schedule-auto-save-abbrev ()
   "Schedule an automatic save of the abbrev file during idle time.
 If a timer is already active, do not schedule another."
@@ -354,13 +338,3 @@ If a timer is already active, do not schedule another."
                        (nth 5 (file-attributes abbrev-file-name)))
                  (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
              (setq cae-multi--auto-save-abbrev-timer nil))))))
-
-
-;;;###autoload
-(defun cae-multi-auto-save-abbrev (&rest _args)
-  "Automatically schedule saving the abbrev file after a new abbrev is defined.
-This function is meant to be used as :after advice on `define-abbrev'.
-It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
-  (unless cae-multi-abbrev--auto-commit-disabled
-    (cae-multi--schedule-auto-save-abbrev))
-  nil)
