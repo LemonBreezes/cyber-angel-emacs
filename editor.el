@@ -400,8 +400,8 @@
 
 (use-package! auto-sudoedit
   :defer t :init
-  (defun cae-auto-sudoedit-maybe-h (&optional dir)
-    (unless (let ((path (or dir (buffer-file-name) list-buffers-directory
+  (defun cae-auto-sudoedit-maybe-h (&optional filename &rest _)
+    (unless (let ((path (or filename (buffer-file-name) list-buffers-directory
                             dired-directory)))
               (message "auto-sudoedit-maybe-h: %s" path)
               (string= (file-attribute-user-id
@@ -412,14 +412,9 @@
                                                  'string)
                          (user-login-name))))
       (require 'auto-sudoedit)
-      (auto-sudoedit)
-      (when dir
-        (setq find-directory-functions
-              (remq #'cae-auto-sudoedit-maybe-h
-                    find-directory-functions))
-        (run-hook-with-args-until-success 'find-directory-functions dir))))
+      (auto-sudoedit)))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h -1)
-  (add-hook 'find-directory-functions #'cae-auto-sudoedit-maybe-h -1)
+  (advice-add #'find-file-noselect :before #'cae-auto-sudoedit-maybe-h)
   :after tramp-sh :config
   (remove-hook 'find-directory-functions #'cae-auto-sudoedit-maybe-h)
   (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
