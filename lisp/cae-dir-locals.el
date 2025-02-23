@@ -31,7 +31,8 @@
              (require 'git-auto-commit-mode nil t))
     (setq-local gac-automatically-add-new-files-p nil
                 gac-automatically-push-p t)
-    (git-auto-commit-mode 1)))
+    (git-auto-commit-mode 1))
+  (setq-local projectile-project-root doom-user-dir))
 
 (defun cae--setup-home-dir-locals ()
   "Setup directory locals for the 'home class."
