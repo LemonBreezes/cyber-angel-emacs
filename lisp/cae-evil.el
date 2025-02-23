@@ -251,7 +251,8 @@
 (advice-add #'compose-mail :after #'cae-evil-mu4e-enter-insert-mode)
 
 (use-package! evil-owl
-  :hook (doom-first-input . evil-owl-mode))
+  :defer 5 :config
+  (evil-owl-mode +1))
 
 (after! evil-snipe
   (cl-pushnew #'calendar-mode evil-snipe-disabled-modes))
