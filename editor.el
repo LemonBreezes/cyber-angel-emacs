@@ -401,7 +401,8 @@
 (use-package! auto-sudoedit
   :defer t :init
   (defun cae-auto-sudoedit-maybe-h ()
-    (unless (let ((path (or (buffer-file-name) list-buffers-directory)))
+    (unless (let ((path (or (buffer-file-name) list-buffers-directory
+                            dired-directory)))
               (message "auto-sudoedit-maybe-h: %s" path)
               (string= (file-attribute-user-id
                         (file-attributes path 'string))
