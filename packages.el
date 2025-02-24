@@ -145,9 +145,12 @@
 (package! ov)
 (package! substitute)
 
-;;; Lang
+;;; Languages
 (when (modulep! :lang haskell)
   (package! consult-hoogle))
+(when (and (modulep! :lang sh +powershell)
+           (modulep! :lang org))
+  (package! ob-powershell))
 
 ;;; Term
 (package! comint-histories)
