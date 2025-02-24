@@ -24,13 +24,15 @@
   (setq diary-file (concat cae-multi-secrets-dir "diary")))
 (after! calc
   (setq calc-settings-file (concat cae-multi-data-dir "calc.el")))
+(setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir))
 (after! eww
   (setq eww-bookmarks-directory (concat cae-multi-data-dir "eww-bookmarks/")
         eww-download-directory (expand-file-name "~/Downloads/")))
 (after! ispell
   (setq ispell-complete-word-dict (concat cae-multi-data-dir "en.dic")
         ispell-personal-dictionary (concat cae-multi-secrets-dir "aspell.en.pws")))
-(setq cape-dict-file (expand-file-name "en.dic" cae-multi-data-dir))
+(after! spell-fu
+  (setq spell-fu-directory (concat cae-multi-data-dir "spell-fu/")))
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
