@@ -3,7 +3,7 @@
 ;; This is code written for the purpose of using this Emacs configuration on
 ;; multiple machines.
 
-(defvar cae-multi-local-dir (expand-file-name "shared-local/" doom-user-dir))
+(defvar cae-multi-local-dir (expand-file-name "shared-local/" cae-multi-secrets-dir))
 (defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
 (defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
 (defvar cae-multi-org-dir (expand-file-name "org/" cae-multi-local-dir))
