@@ -43,6 +43,7 @@
       (when projectile-track-known-projects-automatically
         (add-to-list 'projectile-globally-ignored-directories
                      (expand-file-name ".local/straight/repos/" user-emacs-directory)))
+
       ;; Recognize `makefile' as a Makefile.
       (add-to-list
        'projectile-project-types
