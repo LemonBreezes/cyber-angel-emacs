@@ -23,7 +23,9 @@
     "A list of all the keymaps used for the minibuffer."))
 
 ;; This helps me debug issues with my config.
-(setq persistent-scratch-autosave-mode nil)
+(setq persistent-scratch-autosave-mode t)
+(setq persistent-scratch-what-to-save
+      '(point narrowing text-properties))
 (persistent-scratch-setup-default)
 
 (require 'cae-lib)
