@@ -3,7 +3,14 @@
 (use-package! repeat
   :defer 4.0 :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
+
+  ;; This is so that my repeat maps are reloaded when I save this file.
+  (when (featurep 'repeat-mode)
+    (when cae-config-finished-loading
+      (ignore-errors (repeat-mode -1))
+      (ignore-errors (repeat-mode 1))))
   :config
+  (repeat-mode +1)
   (setq repeat-exit-key "TAB"
         repeat-check-key t
         repeat-echo-mode-line-string nil)
@@ -204,9 +211,4 @@
     (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
 
   (autoload 'embark-verbose-indicator "embark")
-  (autoload 'which-key--create-buffer-and-show "which-key")
-
-  ;; This is so that my repeat maps are reloaded when I save this file.
-  (when cae-config-finished-loading
-    (ignore-errors (repeat-mode -1))
-    (ignore-errors (repeat-mode 1))))
+  (autoload 'which-key--create-buffer-and-show "which-key"))
