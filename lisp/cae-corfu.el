@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-corfu.el -*- lexical-binding: t; -*-
 
 ;;; TODO Fix the error when running Corfu in `aider-plain-read-string'.
-(setq +corfu-want-minibuffer-completion 'aggressive)
+(setq +corfu-want-minibuffer-completion nil)
 (setq +corfu-want-ret-to-confirm 'minibuffer)
 (setq +corfu-want-tab-prefer-expand-snippets t)
 (setq +corfu-want-tab-prefer-navigating-snippets t)
@@ -117,6 +117,6 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; BUG `corfu-terminal' does not work when using `read-string' in the terminal.
 ;; For some reason in the latest update of emacs31, the tty child frame stopped
 ;; working.
-(when (> emacs-major-version 30)
-  (advice-add #'corfu--popup-support-p :override #'always)
-  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
+;;(when (> emacs-major-version 30)
+;;  (advice-add #'corfu--popup-support-p :override #'always)
+;;  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
