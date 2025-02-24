@@ -56,6 +56,7 @@
 
        :checkers
        (syntax +childframe +icons)
+       (spell +everywhere)
 
        :tools
        direnv
