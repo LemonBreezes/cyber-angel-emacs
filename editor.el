@@ -48,6 +48,10 @@
 (advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
 (advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
+;; Reduce error spam in scratch buffers.
+(add-hook 'doom-scratch-buffer-hook #'+emacs-lisp--flycheck-non-package-mode)
+(add-hook 'persistent-scratch-mode-hook #'+emacs-lisp--flycheck-non-package-mode)
+
 (setq find-sibling-rules
       '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org\\'")))
 
