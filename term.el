@@ -5,7 +5,9 @@
   (setq eshell-error-if-no-glob nil))
 
 (after! vterm
-  (setq vterm-max-scrollback 100000))
+  (setq vterm-max-scrollback 100000
+        vterm-always-compile-module t
+        vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
 
 (after! comint
   (setq comint-history-isearch 'dwim
