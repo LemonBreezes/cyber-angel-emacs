@@ -258,6 +258,7 @@
   (add-to-list 'spell-fu-faces-exclude 'message-header-other)
   (add-to-list 'spell-fu-faces-exclude 'org-property-value)
   (add-to-list 'spell-fu-faces-exclude 'message-header-to)
+  (setq spell-fu-word-delimit-camel-case t)
   (setq spell-fu-faces-exclude
         (delq 'font-lock-string-face spell-fu-faces-include)))
 
