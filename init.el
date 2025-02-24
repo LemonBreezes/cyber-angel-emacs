@@ -75,7 +75,7 @@
        (org +roam2 +tree-sitter +dragndrop +journal)
        (cc +lsp +tree-sitter)
        (web +lsp +tree-sitter)
-       (sh +lsp +tree-sitter)
+       (sh +lsp +tree-sitter +powershell +fish)
        (nix +lsp +tree-sitter)
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
