@@ -53,10 +53,6 @@
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
 
-;; For some reason, I had to do this after updating Emacs30 to get
-;; `cape-yasnippet' to work.
-(defalias 'prefix #'string-prefix-p)
-
 ;; This is for backwards compatibility with some of my old bookmarks.
 (defalias #'cae-exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
 (defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
