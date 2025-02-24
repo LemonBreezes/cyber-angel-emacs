@@ -8,7 +8,7 @@
   (when (and (featurep 'repeat-mode)
              cae-config-finished-loading)
     (ignore-errors (repeat-mode -1))
-    (ignore-errors (repeat-mode 1)))
+    (ignore-errors (repeat-mode +1)))
   :config
   (repeat-mode +1)
   (setq repeat-exit-key "TAB"
