@@ -292,6 +292,7 @@ reload the bookmarks from `bookmark-default-file'."
 (defvar cae-multi-abbrev-watch-descriptor nil
   "File notification descriptor for the abbrev file.")
 
+;;;###autoload
 (defun cae-multi-start-abbrev-watch ()
   "Start watching the abbrev file for external changes.
 When the abbrev file (given by the variable `abbrev-file-name`) changes,
