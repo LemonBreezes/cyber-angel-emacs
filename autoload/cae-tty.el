@@ -11,7 +11,7 @@
    ((string= (or (getenv "TERM") "") "linux")
     0)
    ;; Otherwise, if LANG indicates UTF-8 you’re probably in a modern terminal emulator.
-   ((and (getenv "LANG") (string-match "UTF-8" (getenv "LANG")))
+   ((and (getenv "LANG") (string-match "utf8" (getenv "LANG")))
     1)
    (t 0)))
 
