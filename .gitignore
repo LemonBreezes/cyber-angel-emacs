@@ -4,6 +4,7 @@
 tmp/
 core
 custom.el
+!.projectile
 
 bugs.txt
 .gdb_history
