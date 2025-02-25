@@ -29,8 +29,18 @@
      resume: ")))")
    str arg))
 
+;; BUG Disable `projectile-root-local' because sometimes it is being used to
+;; incorrectly set the project root somehow and then setting that incorrect
+;; value in the cache.
+(setq projectile-project-root-functions
+      '(;;projectile-root-local
+        projectile-root-marked
+        projectile-root-bottom-up
+        projectile-root-top-down
+        projectile-root-top-down-recurring))
+
 (if (locate-library "projectile")
-    ;;; Projectile configuration
+;;; Projectile configuration
     (after! projectile
       (run-with-idle-timer 1.0 nil #'projectile--cleanup-known-projects)
 
