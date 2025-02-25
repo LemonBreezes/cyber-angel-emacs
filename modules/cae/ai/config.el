@@ -56,6 +56,11 @@
   ;; BUG Fixes a void function error that I was getting. I do not know why it
   ;; was happening.
   (setf (symbol-function 'aider-read-string) (symbol-function 'aider-plain-read-string))
+  ;; BUG When using `aider', which copies the font-lock-keywords, we get an error
+  ;; with `whitespace-mode' since it's not copying the respective overlay.
+  (defadvice! cae-inhibit-whitespace-flush-in-aider-a (_)
+    :before-while #'whitespace-point--flush-used
+    (overlayp whitespace-point--used))
   (setenv "AIDER_AUTO_COMMITS" "false")
   (setenv "AIDER_GITIGNORE" "false"))
 
