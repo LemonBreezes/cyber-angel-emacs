@@ -32,15 +32,6 @@
 ;; BUG Disable `projectile-root-local' because sometimes it is being used to
 ;; incorrectly set the project root somehow and then setting that incorrect
 ;; value in the cache.
-(defvar cae-project-root nil)
-(defun cae-projectile-root-local (dir)
-  (when (and (bound-and-true-p cae-root-repo-dir)
-             (string-match-p (concat
-                              "\\`"
-                              (regexp-quote cae-root-repo-dir)
-                              "[^/]+/sync/")
-                             dir))
-    ""))
 (setq projectile-project-root-functions
       '(;;projectile-root-local
         cae-projectile-root-local
