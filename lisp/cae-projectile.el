@@ -32,12 +32,12 @@
 ;; BUG Disable `projectile-root-local' because sometimes it is being used to
 ;; incorrectly set the project root somehow and then setting that incorrect
 ;; value in the cache.
-(setq projectile-project-root-functions
-      '(;;projectile-root-local
-        projectile-root-marked
-        projectile-root-bottom-up
-        projectile-root-top-down
-        projectile-root-top-down-recurring))
+;;(setq projectile-project-root-functions
+;;      '(;;projectile-root-local
+;;        projectile-root-marked
+;;        projectile-root-bottom-up
+;;        projectile-root-top-down
+;;        projectile-root-top-down-recurring))
 
 (if (locate-library "projectile")
 ;;; Projectile configuration
