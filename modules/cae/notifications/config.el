@@ -78,7 +78,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
   (map! :map ednc-view-mode-map
         "n" #'next-line
         "p" #'previous-line))
-
+;;
 (use-package! alert
   :defer t :init
   (after! circe-notifications
