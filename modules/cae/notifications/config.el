@@ -14,8 +14,6 @@
 ;;     ;; Use `alert' instead of `notifications-notify'.
 ;;     (advice-add #'notifications-notify :around #'cae-notifications-notify-advice))))
 
-(run-with-idle-timer 3 nil #'cae-notifications-setup)
-
 (use-package! ednc
   :when (eq system-type 'gnu/linux)
   :defer t :init
