@@ -102,10 +102,6 @@
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
 
-;; BUG Fix void function error in eldoc
-(fmakunbound 'incf)
-(setf (symbol-function 'incf) (symbol-function 'cl-incf))
-
 (defun cae-projectile-project-root (&optional dir)
   "Retrieves the root directory of a project if available.
 If DIR is not supplied its set to the current directory by default."
