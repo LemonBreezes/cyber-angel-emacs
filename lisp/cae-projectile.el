@@ -40,7 +40,7 @@
                               (regexp-quote cae-root-repo-dir)
                               "[^/]+/sync/")
                              dir))
-    projectile-project-root))
+    ""))
 (setq projectile-project-root-functions
       '(;;projectile-root-local
         cae-projectile-root-local
