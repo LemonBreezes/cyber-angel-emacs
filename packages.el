@@ -12,6 +12,8 @@
 (unpin! :lang :tools :emacs :email :input :term :ui :editor)
 (unpin! :completion corfu)
 (unpin! smartparens)
+;; Not using the built-in packages can cause errors.
+(package! eldoc :built-in t)
 (package! which-key :built-in t)
 
 ;; PRs that haven't been merged yet.
