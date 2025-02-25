@@ -21,8 +21,8 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--model" (concat "anthropic/" ,claude-model)
-            "--editor-model" (concat "anthropic/" ,claude-model)
+          `("--model" ,(concat "anthropic/" claude-model)
+            "--editor-model" ,(concat "anthropic/" claude-model)
             ;;"--reasoning-effort" "high"
             "--cache-prompts"
             "--editor-edit-format" "editor-whole"
