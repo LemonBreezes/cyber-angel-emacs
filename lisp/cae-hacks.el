@@ -102,6 +102,8 @@
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
 
+;; BUG Fix void function error in eldoc
+(setf (symbol-function 'incf) (symbol-function 'cl-incf))
 
 (defun cae-projectile-project-root (&optional dir)
   "Retrieves the root directory of a project if available.
@@ -131,7 +133,7 @@ If DIR is not supplied its set to the current directory by default."
                ;; prevents Projectile from trying to find information about
                ;; files for which it's not possible to get that information
                ;; right now.
-               (let ((is-local (not (file-remote-p dir)))      ;; `true' if the file is local
+               (let ((is-local (not (file-remote-p dir))) ;; `true' if the file is local
                      (is-connected (file-remote-p dir nil t))) ;; `true' if the file is remote AND we are connected to the remote
                  (unless (or is-local is-connected)
                    'none))
