@@ -25,7 +25,7 @@
 ;; This helps me debug issues with my config.
 (setq persistent-scratch-autosave-mode t)
 (setq persistent-scratch-what-to-save
-      '(point narrowing text-properties))
+      '(point))
 (setq persistent-scratch-autosave-interval
       '(idle . 10))
 (setq persistent-scratch-backup-directory
