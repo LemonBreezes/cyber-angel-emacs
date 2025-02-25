@@ -48,6 +48,8 @@ This function hides the posframe that was created by `alert-child-frame-notify'
 and then, after a short delay, kills its buffer so that the child frame remains
 visible (in its hidden state) for a moment instead of being deleted immediately."
   (let ((buf (plist-get info :child-frame-buffer)))
+    ;; Debugging it not working:
+    (message "HELLO %s" buf)
     (when (and buf (buffer-live-p buf))
       (posframe-hide buf))))
 
