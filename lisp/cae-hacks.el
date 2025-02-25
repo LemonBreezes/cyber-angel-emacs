@@ -84,12 +84,6 @@
 ;;    (error (unless (string-prefix-p "Selecting deleted buffer" (error-message-string err))
 ;;             (signal (car err) (cdr err))))))
 
-;; BUG When using `aider', which copies the font-lock-keywords, we get an error
-;; with `whitespace-mode' since it's not copying the respective overlay.
-(defadvice! cae-inhibit-whitespace-flush-in-aider-a (_)
-  :before-while #'whitespace-point--flush-used
-  (overlayp whitespace-point--used))
-
 ;; BUG Fix void variable langelem in `c-langelem-pos'
 (defvar langelem nil)
 
