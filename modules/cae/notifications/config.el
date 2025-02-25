@@ -5,7 +5,7 @@
 
 (defun cae-notifications-setup ()
   (setq cae-dbus-notifications-supported-p
-        (let ((path "/org/freedesktop/Notifications"))
+        (let ((path "/org/freedesktop/DBus"))
           (when (require 'dbus nil t)
             (dbus-ping (subst-char-in-string ?/ ?. (substring path 1)) path))))
   (if cae-dbus-notifications-supported-p
