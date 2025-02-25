@@ -35,7 +35,7 @@
 (defvar cae-project-root nil)
 (defun cae-projectile-root-local (dir)
   (when (and (bound-and-true-p cae-root-repo-dir)
-             (file-in-directory-p dir cae-root-repo-dir))
+             (string-prefix-p cae-root-repo-dir dir))
     projectile-project-root))
 (setq projectile-project-root-functions
       '(;;projectile-root-local
