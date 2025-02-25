@@ -155,4 +155,4 @@ If DIR is not supplied its set to the current directory by default."
                  (puthash cache-key 'none projectile-project-root-cache)
                  'none)))))
 
-(advice-add #'projectile-project-root :override #'cae-projectile-project-root)
+(advice-remove #'projectile-project-root :override #'cae-projectile-project-root)
