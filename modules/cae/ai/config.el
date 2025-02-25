@@ -21,7 +21,8 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--model" ,claude-model
+          `(;;"--model" ,claude-model
+            "--sonnet"
             "--editor-model" ,claude-model
             "--reasoning-effort" "high"
             "--cache-prompts"
