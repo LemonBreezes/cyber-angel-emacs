@@ -32,7 +32,7 @@
       (concat doom-cache-dir "persistent-scratch-backups/"))
 (make-directory persistent-scratch-backup-directory t)
 (setq persistent-scratch-backup-filter
-      (lambda ()
+      (lambda (_)
         (when (> (doom-directory-size persistent-scratch-backup-directory)
                  (* 1024 1024))
           (message (concat "URGENT: Persistent scratch is over 1 GB. "
