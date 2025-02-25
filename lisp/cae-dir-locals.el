@@ -14,8 +14,6 @@
                (not (string-match-p "/dir-local-files/" buffer-file-name))
                (bound-and-true-p cae-config-finished-loading))
       (add-hook 'write-file-functions 'eval-buffer 1 t))
-    (setq spell-fu-buffer-session-localwords
-          '("config" "smartparens"))
     (when (and (derived-mode-p 'emacs-lisp-mode)
                (require 'apheleia nil t))
       (apheleia-mode +1))
