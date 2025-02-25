@@ -33,8 +33,10 @@
 ;; incorrectly set the project root somehow and then setting that incorrect
 ;; value in the cache.
 (defvar cae-project-root nil)
-(defun cae-projectile-root-local (_dir)
-  cae-project-root)
+(defun cae-projectile-root-local (dir)
+  (when (and (bound-and-true-p cae-root-repo-dir)
+             (file-in-directory-p dir cae-root-repo-dir))
+    projectile-project-root))
 (setq projectile-project-root-functions
       '(;;projectile-root-local
         cae-projectile-root-local
