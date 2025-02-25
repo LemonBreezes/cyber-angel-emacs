@@ -15,6 +15,7 @@
 ;; Not using the built-in packages can cause errors.
 (package! eldoc :built-in t)
 (package! which-key :built-in t)
+(package! track-changes :built-in t)
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
