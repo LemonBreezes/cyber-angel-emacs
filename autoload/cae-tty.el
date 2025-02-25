@@ -46,10 +46,6 @@
             dirvish-path-separators '("~" "/" "/")
             dirvish-subtree-prefix " |"
             dirvish-subtree-line-prefix " |"))
-    (after! eglot
-      (when (or (equal eglot-code-action-indicator (make-string 1 ?))
-                (equal eglot-code-action-indicator (make-string 1 ?⚡)))
-        (setq eglot-code-action-indicator (make-string 1 ?α))))
     (remove-hook 'org-mode-hook #'+org-pretty-mode))
   (when (< (cae-terminal-type) 2)
     (after! mu4e-bookmarks
@@ -65,6 +61,10 @@
     (after! dirvish
       (setq dirvish-attributes (delq 'nerd-icons
                                      (delq 'all-the-icons dirvish-attributes))))
+    (after! eglot
+      (when (or (equal eglot-code-action-indicator (make-string 1 ?))
+                (equal eglot-code-action-indicator (make-string 1 ?⚡)))
+        (setq eglot-code-action-indicator (make-string 1 ?α))))
     (dolist (fn '(nerd-icons-faicon
                   nerd-icons-octicon))
       (advice-add fn :override (cl-constantly "")))
