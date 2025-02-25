@@ -28,6 +28,8 @@
       '(point narrowing text-properties))
 (setq persistent-scratch-autosave-interval
       '(idle . 10))
+(setq persistent-scratch-backup-directory
+      (concat doom-cache-dir "persistent-scratch-backups/"))
 (persistent-scratch-setup-default)
 
 (require 'cae-lib)
