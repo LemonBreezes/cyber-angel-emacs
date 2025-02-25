@@ -9,7 +9,6 @@
              cae-config-finished-loading)
     (ignore-errors (repeat-mode -1)))
   :config
-  (repeat-mode +1)
   (setq repeat-exit-key "TAB"
         repeat-check-key t
         repeat-echo-mode-line-string nil)
@@ -210,4 +209,6 @@
     (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
 
   (autoload 'embark-verbose-indicator "embark")
-  (autoload 'which-key--create-buffer-and-show "which-key"))
+  (autoload 'which-key--create-buffer-and-show "which-key")
+
+  (repeat-mode +1))
