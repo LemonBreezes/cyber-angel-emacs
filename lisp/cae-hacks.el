@@ -103,6 +103,7 @@
 (setf (symbol-function (intern "")) 'llama)
 
 ;; BUG Fix void function error in eldoc
+(fmakunbound 'incf)
 (setf (symbol-function 'incf) (symbol-function 'cl-incf))
 
 (defun cae-projectile-project-root (&optional dir)
