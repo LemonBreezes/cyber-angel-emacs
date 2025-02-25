@@ -117,41 +117,41 @@ If DIR is not supplied its set to the current directory by default."
     ;; cl-subst to replace this 'none value with nil so a nil value is used
     ;; instead
     (cl-subst nil 'none
-      (or
-       ;; if we've already failed to find a project dir for this
-       ;; dir, and cached that failure, don't recompute
-       (let* ((cache-key (format "projectilerootless-%s" dir))
-              (cache-value (gethash cache-key projectile-project-root-cache)))
-         cache-value)
-       ;; if the file isn't local, and we're not connected, don't try to
-       ;; find a root now now, but don't cache failure, as we might
-       ;; re-connect.  The `is-local' and `is-connected' variables are
-       ;; used to fix the behavior where Emacs hangs because of
-       ;; Projectile when you open a file over TRAMP. It basically
-       ;; prevents Projectile from trying to find information about
-       ;; files for which it's not possible to get that information
-       ;; right now.
-       (let ((is-local (not (file-remote-p dir)))      ;; `true' if the file is local
-             (is-connected (file-remote-p dir nil t))) ;; `true' if the file is remote AND we are connected to the remote
-         (unless (or is-local is-connected)
-           'none))
-       ;; if the file is local or we're connected to it via TRAMP, run
-       ;; through the project root functions until we find a project dir
-       (cl-some
-        (lambda (func)
-          (let* ((cache-key (format "%s-%s" func dir))
-                 (cache-value (gethash cache-key projectile-project-root-cache)))
-            (if (and cache-value (file-exists-p cache-value))
-                cache-value
-              (let ((value (funcall func (file-truename dir))))
-                (puthash cache-key value projectile-project-root-cache)
-                value))))
-        projectile-project-root-functions)
-       ;; if we get here, we have failed to find a root by all
-       ;; conventional means, and we assume the failure isn't transient
-       ;; / network related, so cache the failure
-       (let ((cache-key (format "projectilerootless-%s" dir)))
-         (puthash cache-key 'none projectile-project-root-cache)
-         'none)))))
+              (or
+               ;; if we've already failed to find a project dir for this
+               ;; dir, and cached that failure, don't recompute
+               (let* ((cache-key (format "projectilerootless-%s" dir))
+                      (cache-value (gethash cache-key projectile-project-root-cache)))
+                 cache-value)
+               ;; if the file isn't local, and we're not connected, don't try to
+               ;; find a root now now, but don't cache failure, as we might
+               ;; re-connect.  The `is-local' and `is-connected' variables are
+               ;; used to fix the behavior where Emacs hangs because of
+               ;; Projectile when you open a file over TRAMP. It basically
+               ;; prevents Projectile from trying to find information about
+               ;; files for which it's not possible to get that information
+               ;; right now.
+               (let ((is-local (not (file-remote-p dir)))      ;; `true' if the file is local
+                     (is-connected (file-remote-p dir nil t))) ;; `true' if the file is remote AND we are connected to the remote
+                 (unless (or is-local is-connected)
+                   'none))
+               ;; if the file is local or we're connected to it via TRAMP, run
+               ;; through the project root functions until we find a project dir
+               (cl-some
+                (lambda (func)
+                  (let* ((cache-key (format "%s-%s" func dir))
+                         (cache-value (gethash cache-key projectile-project-root-cache)))
+                    (if (and cache-value (file-exists-p cache-value))
+                        cache-value
+                      (let ((value (funcall func (file-truename dir))))
+                        (puthash cache-key value projectile-project-root-cache)
+                        value))))
+                projectile-project-root-functions)
+               ;; if we get here, we have failed to find a root by all
+               ;; conventional means, and we assume the failure isn't transient
+               ;; / network related, so cache the failure
+               (let ((cache-key (format "projectilerootless-%s" dir)))
+                 (puthash cache-key 'none projectile-project-root-cache)
+                 'none)))))
 
 (advice-add #'projectile-project-root :override #'cae-projectile-project-root)
