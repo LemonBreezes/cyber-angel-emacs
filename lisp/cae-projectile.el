@@ -37,7 +37,8 @@
   (when (and (bound-and-true-p cae-root-repo-dir)
              (string-match-p (concat
                               "\\`"
-                              (regexp-quote cae-root-repo-dir))
+                              (regexp-quote cae-root-repo-dir)
+                              "[^/]+/sync/")
                              dir))
     projectile-project-root))
 (setq projectile-project-root-functions
