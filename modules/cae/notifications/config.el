@@ -54,7 +54,9 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
 
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-daemon-present)
-   (if dbus-enabled
+   (if (and dbus-enabled
+            ;; Currently no ednc function for using `toast'.
+            (not (getenv "WSL_DISTRO_NAME")))
        (progn
          (setq alert-default-style 'libnotify)
          (unless notifications-daemon-present
