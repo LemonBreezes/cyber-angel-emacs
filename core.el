@@ -26,6 +26,8 @@
 (setq persistent-scratch-autosave-mode t)
 (setq persistent-scratch-what-to-save
       '(point narrowing text-properties))
+(setq persistent-scratch-autosave-interval
+      '(idle . 10))
 (persistent-scratch-setup-default)
 
 (require 'cae-lib)
