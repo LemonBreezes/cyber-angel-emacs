@@ -144,6 +144,7 @@ If DIR is not supplied its set to the current directory by default."
                     (if (and cache-value (file-exists-p cache-value))
                         cache-value
                       (let ((value (funcall func (file-truename dir))))
+                        (message "HELLO! %s %s %s %s %s" cache-key cache-value (buffer-file-name) default-directory dir)
                         (puthash cache-key value projectile-project-root-cache)
                         value))))
                 projectile-project-root-functions)
