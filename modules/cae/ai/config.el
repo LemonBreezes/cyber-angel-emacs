@@ -6,8 +6,16 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 ;; Set up the default models.
-(let ((claude-model "claude-3-5-sonnet-20240620"))
+(let ((claude-model "claude-3-7-sonnet-20250219"))
   (after! chatgpt-shell
+    (cl-pushnew
+     (chatgpt-shell-anthropic--make-model
+      :version claude-model
+      :short-version (string-remove-prefix "claude-" claude-model)
+      :token-width  4
+      :max-tokens 8192
+      :context-window 200000)
+     chatgpt-shell-models)
     (cl-pushnew
      (chatgpt-shell-openai-make-model
       :version "o3-mini"
@@ -22,16 +30,16 @@
       :other-params '((reasoning_effort . "high")))
      chatgpt-shell-models)
     (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
-    (setq chatgpt-shell-model-version "o3-mini"))
+    (setq chatgpt-shell-model-version claude-model))
   (after! gptel
-    (setq gptel-model 'o3-mini)
+    (setq gptel-model (intern claude-model))
     (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
     (setq aider-args
-          `("--model" "o3-mini"
-            "--editor-model" "claude-3-5-sonnet-20240620"
+          `("--model" ,claude-model
+            "--editor-model" ,claude-model
             "--reasoning-effort" "high"
             "--cache-prompts"
             "--editor-edit-format" "editor-whole"
