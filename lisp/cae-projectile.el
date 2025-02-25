@@ -31,7 +31,7 @@
 
 ;; BUG Disable `projectile-root-local' because sometimes it is being used to
 ;; incorrectly set the project root somehow and then setting that incorrect
-;; value in the cache. I do not know why this happens.
+;; value in the cache.
 (setq projectile-project-root-functions
       '(;;projectile-root-local
         projectile-root-marked
