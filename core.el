@@ -35,7 +35,8 @@
       (lambda ()
         (when (> (doom-directory-size persistent-scratch-backup-directory)
                  (* 1024 1024))
-          (message "URGENT: Persistent scratch is over 1 GB. Write logic for cleaning it."))))
+          (message (concat "URGENT: Persistent scratch is over 1 GB. "
+                           "Write logic for cleaning it.")))))
 (persistent-scratch-setup-default)
 
 (require 'cae-lib)
