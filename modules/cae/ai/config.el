@@ -16,20 +16,6 @@
       :max-tokens 8192
       :context-window 200000)
      chatgpt-shell-models)
-    (cl-pushnew
-     (chatgpt-shell-openai-make-model
-      :version "o3-mini"
-      :token-width 3
-      :context-window 200000
-      :validate-command
-      (lambda (command model settings)
-        (or (chatgpt-shell-openai--validate-command command model settings)
-            (when (map-elt settings :system-prompt)
-              (format "Model \"%s\" does not support system prompts. Please unset via \"M-x chatgpt-shell-swap-system-prompt\" by selecting None."
-                      (map-elt model :version)))))
-      :other-params '((reasoning_effort . "high")))
-     chatgpt-shell-models)
-    (advice-add #'chatgpt-shell-system-prompt :override #'ignore)
     (setq chatgpt-shell-model-version claude-model))
   (after! gptel
     (setq gptel-model (intern claude-model))
