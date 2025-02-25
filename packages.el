@@ -11,6 +11,7 @@
 (unpin! helpful) ; Keep it up-to-date for bug fixes.
 (unpin! :lang :tools :emacs :email :input :term :checkers :ui :editor)
 (unpin! :completion corfu)
+(unpin! projectile)
 (unpin! smartparens)
 (package! which-key :built-in t)
 
