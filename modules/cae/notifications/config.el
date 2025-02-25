@@ -43,6 +43,15 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
        :error-function (lambda (error)
                          (funcall callback t nil))))))
 
+
+#@256
+(cae-check-dbus-and-notifications-async
+ (lambda (dbus-enabled notifications-present)
+   (if dbus-enabled
+       (message "DBus is enabled. Notifications daemon present? %s" notifications-present)
+     (message "DBus does not appear to be enabled."))))
+
+
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-daemon-present)
    (if dbus-enabled
@@ -75,11 +84,6 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
   (after! circe-notifications
     (setq circe-notifications-alert-style nil))
   :config
-  (setq alert-default-style
-        (cond ((getenv "WSL_DISTRO_NAME")
-               'toast)
-              (t 'libnotify)))
-
   (setq alert-default-style
         (cond ((getenv "WSL_DISTRO_NAME")
                (require ' alert-toast)
