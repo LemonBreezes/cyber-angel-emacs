@@ -17,9 +17,6 @@
       :context-window 200000)
      chatgpt-shell-models)
     (setq chatgpt-shell-model-version claude-model))
-  (after! gptel
-    (setq gptel-model (intern claude-model))
-    (put 'o3-mini :request-params '(:reasoning_effort "high" :stream :json-false)))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
   (after! aider
