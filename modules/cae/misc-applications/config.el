@@ -878,17 +878,7 @@
     ;; GPTel
     ("g" gptel "GPTel")
     ("r" gptel-rewrite "GPTel Rewrite")
-    ("m" gptel-menu "GPTel Menu")
-    ;; ChatGPT Shell
-    ("c" chatgpt-shell "ChatGPT Shell")
-    ("C" cae-ai-toggle-chatgpt-shell "Toggle ChatGPT Shell")
-    ;; DALL-E
-    ("d" dall-e-shell "DALL-E")
-    ("D" cae-ai-toggle-dall-e-shell "Toggle DALL-E Shell")
-    ;; Copilot
-    ("p" copilot-mode "Toggle Copilot")
-    ;; Magit GPTCommit
-    ("M" magit-gptcommit-generate "GPT Commit")))
+    ("m" gptel-menu "GPTel Menu")))
 
 ;; Map all available AI commands
 (dolist (cmd cae-misc-applications-ai-commands)
