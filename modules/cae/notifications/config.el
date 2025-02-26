@@ -17,7 +17,7 @@
                                names)))
      (advice-remove #'notifications-notify #'cae-notifications-notify-advice)
      (setq alert-default-style 'libnotify)
-     (unless notifications-daemon-present
+     (unless notif-found
        (ednc-mode +1)))))
 
 (use-package! ednc
