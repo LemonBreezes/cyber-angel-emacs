@@ -39,11 +39,11 @@
 (cae-add-cpus-to-modeline)
 
 ;; Set up multi and secrets dirs.
+(defvar cae-multi-secrets-dir (concat doom-user-dir "secrets/"))
 (defvar cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
 (defvar cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
 (defvar cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
 (defvar cae-multi-org-dir (concat cae-multi-local-dir "org/"))
-(defvar cae-multi-secrets-dir (concat cae-multi-local-dir "secrets/"))
 (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
