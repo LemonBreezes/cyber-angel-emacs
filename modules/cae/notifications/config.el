@@ -30,8 +30,6 @@
   ;;(add-hook 'ednc-notification-presentation-functions
   ;;          (lambda (&rest _) (force-mode-line-update t)))
   :config
-  (add-to-list 'global-mode-string
-               '((:eval (cae-ednc-stack-notifications))))
   (setq alert-default-style 'libnotify)
   (map! :map ednc-view-mode-map
         "n" #'next-line
