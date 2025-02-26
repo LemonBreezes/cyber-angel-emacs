@@ -72,9 +72,6 @@
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
 
-;;let*: Symbol’s function definition is void: consult--async-split-style
-(setf (symbol-function 'consult--async-split-style) (symbol-function 'ignore))
-
 ;; Ignore some annoying errors when the buffer gets inadvertently deleted.
 ;;(defadvice! cae-ignore-selecting-deleted-buffer-error-a (oldfun &rest args)
 ;;  "Ignore 'Selecting deleted buffer' errors in `lsp--read-char`."
