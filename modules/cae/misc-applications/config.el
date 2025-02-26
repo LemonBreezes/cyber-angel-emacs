@@ -438,13 +438,7 @@
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "m" "Minesweeper"))
   (after! evil-snipe
-    (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes))
-  :config
-  (map! :map minesweeper-mode-map
-        :n "RET" #'minesweeper-choose
-        :n "s" #'minesweeper-toggle-show-neighbors
-        :n "m" #'minesweeper-toggle-mark
-        :n "c" #'minesweeper-choose-around))
+    (cl-pushnew #'minesweeper-mode evil-snipe-disabled-modes)))
 
 (use-package! dunnet
   :defer t :init
