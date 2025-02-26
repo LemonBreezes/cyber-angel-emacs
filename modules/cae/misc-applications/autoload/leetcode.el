@@ -24,3 +24,4 @@
   (if (modulep! :ui workspaces)
       (+workspace/other)
     (quit-window)))
+

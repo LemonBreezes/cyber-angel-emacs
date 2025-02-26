@@ -3,7 +3,6 @@
 ;;;###autoload (autoload 'cae-chess "cae/misc-applications/autoload/chess" nil t)
 ;;;###autoload (autoload 'cae-chess-quit "cae/misc-applications/autoload/chess" nil t)
 
-
 (cae-define-launcher
  cae-chess
  :launch-fn #'chess

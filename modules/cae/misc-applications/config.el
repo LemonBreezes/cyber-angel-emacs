@@ -378,6 +378,7 @@
 
 ;;; Games
 
+
 (use-package! bubbles
   :defer t :init
   (defvar cae-bubbles-workspace-name "*bubbles*")

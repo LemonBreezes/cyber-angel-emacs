@@ -157,3 +157,4 @@ rather than the whole path."
   (when (and (derived-mode-p 'dired-mode)
              (file-in-directory-p default-directory cae-misc-applications-music-dir))
     (cae-dired-emms-mode +1)))
+
