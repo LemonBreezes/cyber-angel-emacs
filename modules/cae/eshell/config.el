@@ -135,10 +135,10 @@
 (set-lookup-handlers! 'eshell-mode :documentation #'cae-eshell-help-run-help)
 
 (after! man
-  (map! :map Man-mode-map :n "x" #'+eshell-man-to-tldr))
+  (map! :map Man-mode-map :n "x" #'cae-eshell-man-to-tldr))
 
 (after! tldr
-  (map! :map tldr-mode-map :n "x" #'+eshell-tldr-to-man))
+  (map! :map tldr-mode-map :n "x" #'cae-eshell-tldr-to-man))
 
 ;;;; Keybindings
 
