@@ -872,13 +872,12 @@
 (defvar cae-misc-applications-ai-commands
   '(;; Aidermacs/Aider
     ("a" aidermacs-transient-menu "Aidermacs")
-    ("A" aider-transient-menu "Aider")
+    ("a" aider-transient-menu "Aider")
     ;; Elysium
     ("e" elysium-query "Elysium")
     ;; GPTel
-    ("g" gptel "GPTel")
     ("r" gptel-rewrite "GPTel Rewrite")
-    ("m" gptel-menu "GPTel Menu")))
+    ("g" gptel-menu "GPTel Menu")))
 
 ;; Map all available AI commands
 (dolist (cmd cae-misc-applications-ai-commands)
