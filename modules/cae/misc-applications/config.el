@@ -871,8 +871,8 @@
 ;; Define AI commands with their key bindings
 (defvar cae-misc-applications-ai-commands
   '(;; Aidermacs/Aider
-    ("a" aidermacs-transient-menu "Aidermacs")
     ("a" aider-transient-menu "Aider")
+    ("a" aidermacs-transient-menu "Aidermacs")
     ;; Elysium
     ("e" elysium-query "Elysium")
     ;; GPTel
