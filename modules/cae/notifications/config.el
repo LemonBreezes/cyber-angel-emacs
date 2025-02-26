@@ -55,9 +55,9 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-daemon-present)
    (if dbus-enabled
-       (setq alert-default-style 'libnotify)
-     (unless notifications-daemon-present
-       (ednc-mode +1))
+       (progn (setq alert-default-style 'libnotify)
+              (unless notifications-daemon-present
+                (ednc-mode +1)))
      ;; Use `alert' instead of `notifications-notify'.
      (advice-add #'notifications-notify :around #'cae-notifications-notify-advice))))
 
