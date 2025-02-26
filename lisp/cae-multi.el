@@ -114,9 +114,9 @@ and updates the stored modification time afterward."
 
 ;; Set up advice for abbrev-related functions
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
-(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
-(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
-(advice-add 'write-abbrev-file :around #'cae-multi--track-abbrev-write)
+(advice-add #'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
+(advice-add #'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
+(advice-add #'write-abbrev-file :around #'cae-multi--track-abbrev-write)
 
 ;; Start watching abbrev file for changes on Linux systems
 (when (eq system-type 'gnu/linux)
