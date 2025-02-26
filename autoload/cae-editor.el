@@ -1,5 +1,30 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
 
+;;; Helper functions
+
+(defun cae--with-minibuffer-setup (setup-fn &rest args)
+  "Run function with SETUP-FN in minibuffer setup hook, passing ARGS."
+  (minibuffer-with-setup-hook setup-fn
+    (apply args)))
+
+(defun cae--save-position-and-execute (fn &rest args)
+  "Execute FN with ARGS while preserving point and mark."
+  (save-mark-and-excursion
+    (apply fn args)))
+
+(defun cae--get-file-at-point ()
+  "Get filename at point based on current major mode."
+  (cond
+   ((derived-mode-p 'dired-mode) 
+    (dired-get-filename nil t))
+   ((derived-mode-p 'org-mode)
+    (cae-org-get-image-or-latex-filename-at-point))
+   ((derived-mode-p 'image-mode) 
+    (buffer-file-name))
+   (t (when-let ((display (get-text-property (point) 'display)))
+        (when (eq 'image (car display))
+          (file-relative-name (plist-get (cdr display) :file)))))))
+
 (defun cae--get-vertico-posframe-size (posframe)
   "Return a function that gets the size of POSFRAME."
   (lambda (_)
@@ -8,11 +33,7 @@
       :min-height nil
       :min-width nil)))
 
-(defun cae-avy-parrot-rotate-action (rotate-fn pt)
-  "Apply ROTATE-FN at point PT using avy."
-  (save-mark-and-excursion
-    (goto-char pt)
-    (call-interactively rotate-fn)))
+;;; Text manipulation functions
 
 (defun cae-strip-top-level-indentation (str)
   "Strip the top-level leading indentation for every line in STR.
@@ -49,15 +70,6 @@ This is the format used on Reddit for code blocks."
     (message "Copied!")))
 
 ;;;###autoload
-(defun cae-browse-url-generic-bookmark-handler (bookmark)
-  "Bookmark handler for opening URLs with `browse-url-generic'."
-  (require 'ffap)
-  (let ((url (bookmark-prop-get bookmark 'filename)))
-    (if (ffap-url-p url)
-        (browse-url-generic url)
-      (message "Bookmark does not have a valid FILENAME property."))))
-
-;;;###autoload
 (defun cae-dos2unix ()
   "Convert DOS line endings (CRLF) to Unix line endings (LF)."
   (interactive)
@@ -65,6 +77,70 @@ This is the format used on Reddit for code blocks."
     (goto-char (point-min))
     (while (search-forward (string ?\C-m) nil t)
       (replace-match "" nil t))))
+
+;;;###autoload
+(defun cae-kill-region ()
+  "Kill region and clean up blank lines."
+  (interactive)
+  (call-interactively #'kill-region)
+  (delete-blank-lines))
+
+;;;###autoload
+(defun cae-yank-indent-a (&rest _)
+  "Advice to indent after yanking."
+  (let ((this-command 'yank)
+        (real-this-command 'yank))
+    (yank-indent--post-command-hook)))
+
+;;;###autoload
+(defun cae-mark-comment ()
+  "Mark the entire comment around point including leading whitespace.
+Like `er/mark-comment' but also marks comment with leading whitespace."
+  (interactive)
+  (when (save-excursion
+          (skip-syntax-forward "\s")
+          (er--point-is-in-comment-p))
+    (let ((p (point)))
+      (skip-syntax-backward "\s")
+      (while (and (or (er--point-is-in-comment-p)
+                      (looking-at "[[:space:]]"))
+                  (not (eobp)))
+        (forward-char 1))
+      (skip-chars-backward "\n\r")
+      (set-mark (point))
+      (goto-char p)
+      (while (or (er--point-is-in-comment-p)
+                 (looking-at "[[:space:]]"))
+        (forward-char -1))
+      (forward-char 1))))
+
+;;;###autoload
+(defun cae-embrace-with-prefix-function ()
+  "Create a pair for embrace with function prefix."
+  (let ((fname (read-string "Function: ")))
+    (cons (format "(%s " (or fname "")) ")")))
+
+;;;###autoload
+(defun cae-insert-bracket-pair ()
+  "Insert angle bracket pair and position cursor between them."
+  (interactive)
+  (let* ((start (point))
+         (end (progn (insert "<>") (point)))
+         (overlay (make-overlay start end))
+         (keymap (make-sparse-keymap)))
+    (forward-char -1)
+    (move-overlay overlay start end)
+    (overlay-put overlay 'keymap keymap)
+    (define-key keymap (kbd "DEL")
+      (lambda ()
+        (interactive)
+        (let ((current (point)))
+          (if (and (eq current (1+ start))
+                   (eq (1+ current) end))
+              (delete-region start end)
+            (delete-char -1)))))))
+
+;;; Navigation and mark functions
 
 ;;;###autoload
 (defun cae-pop-mark ()
@@ -89,81 +165,29 @@ Toggles the prefix argument based on region state."
     (call-interactively #'exchange-point-and-mark)))
 
 ;;;###autoload
-(defun cae-bind-C-z-to-abort-a (oldfun &rest args)
-  "Advice to bind C-z to abort in minibuffer for OLDFUN with ARGS."
-  (minibuffer-with-setup-hook
-      (lambda ()
-        (local-set-key (kbd "C-z") #'abort-recursive-edit))
-    (apply oldfun args)))
-
-;;;###autoload
-(defun cae-embark-act-with-completing-read (&optional arg)
-  "Run embark-act with completing-read prompter and ARG."
-  (interactive "P")
-  (require 'embark)
-  (let* ((embark-prompter #'embark-completing-read-prompter)
-         (act (propertize "Act" 'face 'highlight))
-         (embark-indicators '())
-         (posframe (cl-find-if
-                    (lambda (frame)
-                      (eq (frame-parameter frame 'posframe-hidehandler)
-                          #'vertico-posframe-hidehandler))
-                    (nreverse (visible-frame-list))))
-         (vertico-posframe-size-function)
-         (vertico-multiform-commands
-          `((cae-embark-act-with-completing-read
-             ,(if (>= (frame-width) 120)
-                  'grid 'buffer)
-             ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
-    (when (featurep 'vertico-posframe)
-      (setf vertico-posframe-size-function
-            (cae--get-vertico-posframe-size posframe)))
-    (minibuffer-with-setup-hook
-        (lambda ()
-          (local-set-key (kbd "C-z")
-                         (lambda () (interactive)
-                           (run-at-time 0.0 nil
-                                        (lambda ()
-                                          (vertico--exhibit)))
-                           (abort-recursive-edit))))
-      (embark-act arg))))
-
-;;;###autoload
-(cl-defun cae-avy-embark-act-on-region ()
-  "Use avy to select a region and then run embark-act on it."
+(defun cae-jump-to-random-line ()
+  "Jump to the end of a random line in the current buffer."
   (interactive)
-  (require 'avy)
-  (save-window-excursion
-    (let* ((initial-window (selected-window))
-           (avy-indent-line-overlay t)  ; my preference
-           (avy-action #'identity)
-           (beg (avy--line)))
-      (if (not beg)
-          nil
-        (let ((end (avy--line)))
-          (if (not end)
-              nil
-            (when (> beg end)
-              (cl-rotatef beg end))
-            (setq beg (save-excursion (goto-char beg)
-                                      (line-beginning-position)))
-            (setq end (save-excursion (goto-char end)
-                                      (1+ (line-end-position))))
-            (save-mark-and-excursion
-              (goto-char beg)
-              (set-mark end)
-              (activate-mark)
-              (embark-act))))))))
+  (push-mark)
+  (goto-char (point-min))               ; Start at the beginning of the buffer
+  (let ((line-count (count-lines (point-min) (point-max))))
+    (unless (zerop line-count)
+      (forward-line (random line-count))
+      (if (derived-mode-p 'dired-mode)
+          (dired-move-to-filename)
+        (end-of-line)))))
 
 ;;;###autoload
-(defun cae-delete-duplicate-bookmarks ()
-  "Delete bookmarks with numeric suffixes like <1>, <2>, etc."
+(defun cae-narrow-to-page ()
+  "Narrow to the current page using logos."
   (interactive)
-  (let ((bookmarks (cl-remove-if-not (lambda (x)
-                                       (string-match-p "<[0-9]+>\\'" x))
-                                     (bookmark-all-names))))
-    (dolist (bookmark bookmarks)
-      (bookmark-delete bookmark))))
+  (cae--save-position-and-execute
+   (lambda ()
+     (end-of-line)
+     (deactivate-mark)
+     (logos-narrow-dwim))))
+
+;;; Buffer management functions
 
 ;;;###autoload
 (defun cae-make-new-buffer ()
@@ -176,46 +200,40 @@ Toggles the prefix argument based on region state."
       (setq doom-real-buffer-p t))))
 
 ;;;###autoload
-(defun cae-narrow-to-page ()
-  "Narrow to the current page using logos."
+(defun cae-kill-current-buffer ()
+  "Kill current buffer, safely handling process buffers."
   (interactive)
-  (save-mark-and-excursion
-    (end-of-line)
-    (deactivate-mark)
-    (logos-narrow-dwim)))
-
-(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/")
-  "Directory path for downloads.")
+  (let ((buf (current-buffer)))
+    (when-let ((proc (get-buffer-process buf)))
+      (set-process-sentinel proc nil)))
+  (kill-current-buffer))
 
 ;;;###autoload
-(defun cae-bookmark-jump-to-newest-download (_)
-  "Jump to the newest downloaded file in dired.
-For backwards compatibility with bookmarks file."
-  (let* ((download-files (directory-files "~/Downloads/" t))
-         (home-files (directory-files "~/" t))
-         (all-files (cl-union download-files home-files))
-         (filtered-files (cl-remove-if
-                          (lambda (file)
-                            (or (string-prefix-p "." (file-name-nondirectory file))
-                                (file-directory-p file)))
-                          all-files))
-         (newest-file (-max-by #'file-newer-than-file-p filtered-files)))
-    (dired (file-name-directory newest-file))
-    (dired-goto-file newest-file)))
-
-;;;###autoload
-(defun cae-yank-indent-a (&rest _)
-  "Advice to indent after yanking."
-  (let ((this-command 'yank)
-        (real-this-command 'yank))
-    (yank-indent--post-command-hook)))
-
-;;;###autoload
-(defun cae-kill-region ()
-  "Kill region and clean up blank lines."
+(defun cae-edit-indirect-dwim ()
+  "DWIM version of edit-indirect-region.
+When region is selected, behave like `edit-indirect-region'
+but when no region is selected and the cursor is in a 'string' syntax
+mark the string and call `edit-indirect-region' with it."
   (interactive)
-  (call-interactively #'kill-region)
-  (delete-blank-lines))
+  (cond ((region-active-p)
+         (edit-indirect-region))
+        ((and (derived-mode-p 'org-mode)
+              (ignore-error 'user-error (org-edit-special))))
+        ((nth 3 (sp--syntax-ppss))
+         (string-edit-at-point))
+        (t (let ((pos (point)))
+             (mark-defun)
+             (edit-indirect-region)
+             (goto-char (- pos (region-beginning)))))))
+
+;;; Avy and selection functions
+
+(defun cae-avy-parrot-rotate-action (rotate-fn pt)
+  "Apply ROTATE-FN at point PT using avy."
+  (cae--save-position-and-execute
+   (lambda ()
+     (goto-char pt)
+     (call-interactively rotate-fn))))
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-forward-action (pt)
@@ -249,33 +267,7 @@ For backwards compatibility with bookmarks file."
                  res)))
     (avy-process candidates)))
 
-;;;###autoload
-(defun cae-mark-comment ()
-  "Mark the entire comment around point including leading whitespace.
-Like `er/mark-comment' but also marks comment with leading whitespace."
-  (interactive)
-  (when (save-excursion
-          (skip-syntax-forward "\s")
-          (er--point-is-in-comment-p))
-    (let ((p (point)))
-      (skip-syntax-backward "\s")
-      (while (and (or (er--point-is-in-comment-p)
-                      (looking-at "[[:space:]]"))
-                  (not (eobp)))
-        (forward-char 1))
-      (skip-chars-backward "\n\r")
-      (set-mark (point))
-      (goto-char p)
-      (while (or (er--point-is-in-comment-p)
-                 (looking-at "[[:space:]]"))
-        (forward-char -1))
-      (forward-char 1))))
-
-;;;###autoload
-(defun cae-embrace-with-prefix-function ()
-  "Create a pair for embrace with function prefix."
-  (let ((fname (read-string "Function: ")))
-    (cons (format "(%s " (or fname "")) ")")))
+;;; Modeline functions
 
 (defun cae-modeline--rotate-word-at-point (rotate-function)
   "Apply ROTATE-FUNCTION to word at point in modeline."
@@ -301,6 +293,8 @@ Like `er/mark-comment' but also marks comment with leading whitespace."
   (interactive)
   (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
 
+;;; Workspace and EXWM functions
+
 (defvar cae-exwm-workspace-process-alist nil
   "Association list mapping workspaces to their processes.")
 
@@ -317,15 +311,52 @@ Like `er/mark-comment' but also marks comment with leading whitespace."
             (start-process workspace nil app))))
   (cae-exwm-persp--focus-workspace-app))
 
+(defun cae--open-terminal-in-new-workspace (name terminal-func)
+  "Open terminal using TERMINAL-FUNC in a new workspace with NAME."
+  (if (+workspace-exists-p name)
+      (+workspace-switch name)
+    (+workspace/new name))
+  (funcall terminal-func)
+  (delete-other-windows)
+  (persp-add-buffer (current-buffer)))
+
+;;;###autoload
+(defun cae-open-eshell-in-new-workspace ()
+  "Open eshell in a new workspace."
+  (interactive)
+  (cae--open-terminal-in-new-workspace "*eshell*" #'eshell))
+
+;;;###autoload
+(defun cae-open-vterm-in-new-workspace ()
+  "Open vterm in a new workspace."
+  (interactive)
+  (cae--open-terminal-in-new-workspace "*vterm*" #'vterm))
+
+;;;###autoload
+(defun cae-workspace-switch-to-9 ()
+  "Switch to workspace 9."
+  (interactive)
+  (+workspace/switch-to 9))
+
+;;;###autoload
+(defun cae-workspace-switch-to-10 ()
+  "Switch to workspace 10."
+  (interactive)
+  (+workspace/switch-to 10))
+
+;;; Minibuffer and completion functions
+
 (defvar cae-yank-point nil
   "Point from which to yank text.")
 (defvar cae-yank-point-overlays nil
   "Overlays used to highlight yanked text.")
-(add-hook! 'minibuffer-exit-hook
-  (defun cae-yank-on-exit-h ()
-    "Clean up yank overlays on minibuffer exit."
-    (mapc #'delete-overlay cae-yank-point-overlays)
-    (setq cae-yank-point-overlays nil)))
+
+(defun cae-yank-cleanup-overlays ()
+  "Clean up yank overlays."
+  (mapc #'delete-overlay cae-yank-point-overlays)
+  (setq cae-yank-point-overlays nil))
+
+(add-hook! 'minibuffer-exit-hook #'cae-yank-cleanup-overlays)
 
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
@@ -341,7 +372,7 @@ With prefix ARG, yank multiple words."
         (if (thing-at-point 'symbol)
             (setq cae-yank-point (car (bounds-of-thing-at-point 'symbol)))
           (setq cae-yank-point (point)))
-        (cae-yank-on-exit-h))
+        (cae-yank-cleanup-overlays))
       (save-excursion
         (goto-char cae-yank-point)
         (let* ((beg cae-yank-point)
@@ -357,32 +388,137 @@ With prefix ARG, yank multiple words."
           text))))))
 
 ;;;###autoload
-(defun cae-edit-indirect-dwim ()
-  "DWIM version of edit-indirect-region.
-When region is selected, behave like `edit-indirect-region'
-but when no region is selected and the cursor is in a 'string' syntax
-mark the string and call `edit-indirect-region' with it."
-  (interactive)
-  (cond ((region-active-p)
-         (edit-indirect-region))
-        ((and (derived-mode-p 'org-mode)
-              (ignore-error 'user-error (org-edit-special))))
-        ((nth 3 (sp--syntax-ppss))
-         (string-edit-at-point))
-        (t (let ((pos (point)))
-             (mark-defun)
-             (edit-indirect-region)
-             (goto-char (- pos (region-beginning)))))))
+(defun cae-bind-C-z-to-abort-a (oldfun &rest args)
+  "Advice to bind C-z to abort in minibuffer for OLDFUN with ARGS."
+  (cae--with-minibuffer-setup
+   (lambda ()
+     (local-set-key (kbd "C-z") #'abort-recursive-edit))
+   oldfun args))
 
 ;;;###autoload
-(defun cae-kill-current-buffer ()
-  "Kill current buffer, safely handling process buffers."
+(defun cae-complete-in-minibuffer ()
+  "Complete symbol in minibuffer using consult."
   (interactive)
-  (let ((buf (current-buffer)))
-    (when-let ((proc (get-buffer-process buf)))
-      (set-process-sentinel proc nil)))
-  (kill-current-buffer))
+  (let ((completion-in-region-function #'consult-completion-in-region))
+    (call-interactively #'complete-symbol)))
 
+;;;###autoload
+(defun cae-call-leader-map ()
+  "Call the leader key map."
+  (interactive)
+  (setq unread-command-events (listify-key-sequence [menu])))
+
+;;; Embark functions
+
+;;;###autoload
+(defun cae-embark-act-with-completing-read (&optional arg)
+  "Run embark-act with completing-read prompter and ARG."
+  (interactive "P")
+  (require 'embark)
+  (let* ((embark-prompter #'embark-completing-read-prompter)
+         (act (propertize "Act" 'face 'highlight))
+         (embark-indicators '())
+         (posframe (cl-find-if
+                    (lambda (frame)
+                      (eq (frame-parameter frame 'posframe-hidehandler)
+                          #'vertico-posframe-hidehandler))
+                    (nreverse (visible-frame-list))))
+         (vertico-posframe-size-function)
+         (vertico-multiform-commands
+          `((cae-embark-act-with-completing-read
+             ,(if (>= (frame-width) 120)
+                  'grid 'buffer)
+             ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
+    (when (featurep 'vertico-posframe)
+      (setf vertico-posframe-size-function
+            (cae--get-vertico-posframe-size posframe)))
+    (cae--with-minibuffer-setup
+     (lambda ()
+       (local-set-key (kbd "C-z")
+                      (lambda () (interactive)
+                        (run-at-time 0.0 nil
+                                     (lambda ()
+                                       (vertico--exhibit)))
+                        (abort-recursive-edit))))
+     #'embark-act arg)))
+
+;;;###autoload
+(defun cae-embark-act ()
+  "Call embark-act with current key as cycle key."
+  (interactive)
+  (require 'embark)
+  (let ((embark-cycle-key (key-description (this-command-keys))))
+    (call-interactively 'embark-act)))
+
+;;;###autoload
+(defun cae-avy-embark-act-on-region ()
+  "Use avy to select a region and then run embark-act on it."
+  (interactive)
+  (require 'avy)
+  (save-window-excursion
+    (let* ((initial-window (selected-window))
+           (avy-indent-line-overlay t)  ; my preference
+           (avy-action #'identity)
+           (beg (avy--line)))
+      (if (not beg)
+          nil
+        (let ((end (avy--line)))
+          (if (not end)
+              nil
+            (when (> beg end)
+              (cl-rotatef beg end))
+            (setq beg (save-excursion (goto-char beg)
+                                      (line-beginning-position)))
+            (setq end (save-excursion (goto-char end)
+                                      (1+ (line-end-position))))
+            (cae--save-position-and-execute
+             (lambda ()
+               (goto-char beg)
+               (set-mark end)
+               (activate-mark)
+               (embark-act)))))))))
+
+;;; Bookmark functions
+
+;;;###autoload
+(defun cae-browse-url-generic-bookmark-handler (bookmark)
+  "Bookmark handler for opening URLs with `browse-url-generic'."
+  (require 'ffap)
+  (let ((url (bookmark-prop-get bookmark 'filename)))
+    (if (ffap-url-p url)
+        (browse-url-generic url)
+      (message "Bookmark does not have a valid FILENAME property."))))
+
+;;;###autoload
+(defun cae-delete-duplicate-bookmarks ()
+  "Delete bookmarks with numeric suffixes like <1>, <2>, etc."
+  (interactive)
+  (let ((bookmarks (cl-remove-if-not (lambda (x)
+                                       (string-match-p "<[0-9]+>\\'" x))
+                                     (bookmark-all-names))))
+    (dolist (bookmark bookmarks)
+      (bookmark-delete bookmark))))
+
+(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/")
+  "Directory path for downloads.")
+
+;;;###autoload
+(defun cae-bookmark-jump-to-newest-download (_)
+  "Jump to the newest downloaded file in dired.
+For backwards compatibility with bookmarks file."
+  (let* ((download-files (directory-files "~/Downloads/" t))
+         (home-files (directory-files "~/" t))
+         (all-files (cl-union download-files home-files))
+         (filtered-files (cl-remove-if
+                          (lambda (file)
+                            (or (string-prefix-p "." (file-name-nondirectory file))
+                                (file-directory-p file)))
+                          all-files))
+         (newest-file (-max-by #'file-newer-than-file-p filtered-files)))
+    (dired (file-name-directory newest-file))
+    (dired-goto-file newest-file)))
+
+;;; Sibling file functions
 
 (defvar cae--sibling-file-history (make-hash-table :test 'equal)
   "A hash-table that keeps track of sibling file history.")
@@ -400,15 +536,7 @@ mark the string and call `edit-indirect-region' with it."
                     (cons old-file (remove old-file current-history))))
              cae--sibling-file-history)))
 
-(defun cae--open-terminal-in-new-workspace (name terminal-func)
-  "Open terminal using TERMINAL-FUNC in a new workspace with NAME."
-  (if (+workspace-exists-p name)
-      (+workspace-switch name)
-    (+workspace/new name))
-  (funcall terminal-func)
-  (delete-other-windows)
-  (persp-add-buffer (current-buffer)))
-
+;;;###autoload
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
 This function is a wrapper around `find-sibling-file' that also allows for
@@ -432,46 +560,9 @@ jumping backwards through the history of visited sibling files."
     (unless (string= old-file (buffer-file-name))
       (cae--update-sibling-history old-file (buffer-file-name)))))
 
-;;;###autoload
-(defun cae-jump-to-random-line ()
-  "Jump to the end of a random line in the current buffer."
-  (interactive)
-  (push-mark)
-  (goto-char (point-min))               ; Start at the beginning of the buffer
-  (let ((line-count (count-lines (point-min) (point-max))))
-    (unless (zerop line-count)
-      (forward-line (random line-count))
-      (if (derived-mode-p 'dired-mode)
-          (dired-move-to-filename)
-        (end-of-line)))))
+;;; Clipboard and image functions
 
 ;;;###autoload
-(defun cae-embark-act ()
-  "Call embark-act with current key as cycle key."
-  (interactive)
-  (require 'embark)
-  (let ((embark-cycle-key (key-description (this-command-keys))))
-    (call-interactively 'embark-act)))
-
-;;;###autoload
-(defun cae-workspace-switch-to-9 ()
-  "Switch to workspace 9."
-  (interactive)
-  (+workspace/switch-to 9))
-
-;;;###autoload
-(defun cae-workspace-switch-to-10 ()
-  "Switch to workspace 10."
-  (interactive)
-  (+workspace/switch-to 10))
-
-;;;###autoload
-(defun cae-complete-in-minibuffer ()
-  "Complete symbol in minibuffer using consult."
-  (interactive)
-  (let  ((completion-in-region-function #'consult-completion-in-region))
-    (call-interactively #'complete-symbol)))
-
 (defun cae-org-get-image-or-latex-filename-at-point ()
   "Get filename of org-mode image link, overlay or latex fragment.
 Copied from org-mode section in ox-clip.el."
@@ -517,18 +608,7 @@ Copied from org-mode section in ox-clip.el."
 This function recognizes org-mode links, org-mode latex, dired-mode files and
 image-mode buffers. Optional IMAGE-FILE can be provided directly."
   (interactive)
-  (let ((image-file
-         (or image-file
-             (cond
-              ((derived-mode-p 'dired-mode) 
-               (dired-get-filename nil t))
-              ((derived-mode-p 'org-mode)
-               (cae-org-get-image-or-latex-filename-at-point))
-              ((derived-mode-p 'image-mode) 
-               (buffer-file-name))
-              (t (when-let ((display (get-text-property (point) 'display)))
-                   (when (eq 'image (car display))
-                     (file-relative-name (plist-get (cdr display) :file)))))))))
+  (let ((image-file (or image-file (cae--get-file-at-point))))
     (if (not image-file)
         (user-error "No image found at point")
       (let ((full-path (expand-file-name image-file)))
@@ -545,43 +625,7 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
                    (shell-quote-argument full-path))))))
       (message "Copied %s" image-file))))
 
-;;;###autoload
-(defun cae-insert-bracket-pair ()
-  "Insert angle bracket pair and position cursor between them."
-  (interactive)
-  (let* ((start (point))
-         (end (progn (insert "<>") (point)))
-         (overlay (make-overlay start end))
-         (keymap (make-sparse-keymap)))
-    (forward-char -1)
-    (move-overlay overlay start end)
-    (overlay-put overlay 'keymap keymap)
-    (define-key keymap (kbd "DEL")
-      (lambda ()
-        (interactive)
-        (let ((current (point)))
-          (if (and (eq current (1+ start))
-                   (eq (1+ current) end))
-              (delete-region start end)
-            (delete-char -1)))))))
-
-;;;###autoload
-(defun cae-call-leader-map ()
-  "Call the leader key map."
-  (interactive)
-  (setq unread-command-events (listify-key-sequence [menu])))
-
-;;;###autoload
-(defun cae-open-eshell-in-new-workspace ()
-  "Open eshell in a new workspace."
-  (interactive)
-  (cae--open-terminal-in-new-workspace "*eshell*" #'eshell))
-
-;;;###autoload
-(defun cae-open-vterm-in-new-workspace ()
-  "Open vterm in a new workspace."
-  (interactive)
-  (cae--open-terminal-in-new-workspace "*vterm*" #'vterm))
+;;; Ispell functions
 
 (defun cae-ispell-simple-get-word ()
   "Get the word at point for ispell."
