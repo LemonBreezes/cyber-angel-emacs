@@ -202,3 +202,9 @@
   (defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
+
+(use-package! elysium
+  :defer t :autoload (elysium-query)
+  :custom
+  (elysium-window-size 0.5)
+  (elysium-window-style 'vertical))
