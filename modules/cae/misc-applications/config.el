@@ -896,4 +896,6 @@
         (func (nth 1 cmd))
         (desc (nth 2 cmd)))
     (when (cae-misc-applications-ai-function-available-p func)
-      (define-key cae-misc-applications-ai-map key func))))
+      (define-key cae-misc-applications-ai-map key func)
+      (which-key-add-keymap-based-replacements 'cae-misc-applications-ai-map
+        key desc))))
