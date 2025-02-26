@@ -1,6 +1,5 @@
   ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
-
 (use-package! repeat
   :defer t :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
