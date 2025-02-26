@@ -55,6 +55,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-daemon-present)
    (if dbus-enabled
+       (setq alert-default-style 'libnotify)
        (unless notifications-daemon-present
          (ednc-mode +1))
      ;; Use `alert' instead of `notifications-notify'.
@@ -83,17 +84,16 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
     (setq circe-notifications-alert-style nil))
   :config
   (setq alert-default-style
-        (cond
-         ((bound-and-true-p ednc-mode)
-          (setq alert-default-style 'libnotify))
-         ((getenv "WSL_DISTRO_NAME")
-          (require ' alert-toast)
-          'toast)
-         ((or (display-graphic-p)
-              (featurep 'tty-child-frames))
-          (alert-define-style 'child-frame
-                              :title "Display notification in a child frame popup"
-                              :notifier #'alert-child-frame-notify
-                              :remover #'alert-child-frame-remove)
-          'child-frame)
-         (t 'message))))
+        (cond ((eq alert-default-style 'libnotify)
+               'libnotify)
+              ((getenv "WSL_DISTRO_NAME")
+               (require ' alert-toast)
+               'toast)
+              ((or (display-graphic-p)
+                   (featurep 'tty-child-frames))
+               (alert-define-style 'child-frame
+                                   :title "Display notification in a child frame popup"
+                                   :notifier #'alert-child-frame-notify
+                                   :remover #'alert-child-frame-remove)
+               'child-frame)
+              (t 'message))))
