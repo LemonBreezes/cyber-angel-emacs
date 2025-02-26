@@ -110,7 +110,7 @@
       (:when (modulep! :cae ai)
        "<f5>" #'gptel-menu
        "<f7>" #'gptel-rewrite
-       "<f6>" #'aider-transient-menu)
+       "<f6>" #'aidermacs-transient-menu)
       "C-<f1>" #'try
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
