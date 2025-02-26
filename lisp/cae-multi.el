@@ -3,17 +3,56 @@
 ;; This is code written for the purpose of using this Emacs configuration on
 ;; multiple machines.
 
-(defvar cae-multi-local-dir (expand-file-name "shared-local/" cae-multi-secrets-dir))
-(defvar cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir))
-(defvar cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir))
-(defvar cae-multi-org-dir (expand-file-name "org/" cae-multi-local-dir))
-(defvar cae-multi-secrets-dir (expand-file-name "secrets/" cae-multi-local-dir))
+(defgroup cae-multi nil
+  "Multi-machine synchronization for Emacs configuration."
+  :group 'convenience)
 
+(defcustom cae-multi-local-dir (expand-file-name "shared-local/" cae-multi-secrets-dir)
+  "Directory for shared local files across multiple machines."
+  :type 'directory
+  :group 'cae-multi)
+
+(defcustom cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir)
+  "Directory for shared data files."
+  :type 'directory
+  :group 'cae-multi)
+
+(defcustom cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir)
+  "Directory for shared cache files."
+  :type 'directory
+  :group 'cae-multi)
+
+(defcustom cae-multi-org-dir (expand-file-name "org/" cae-multi-local-dir)
+  "Directory for shared org files."
+  :type 'directory
+  :group 'cae-multi)
+
+(defcustom cae-multi-secrets-dir (expand-file-name "secrets/" cae-multi-local-dir)
+  "Directory for shared secret files."
+  :type 'directory
+  :group 'cae-multi)
+
+(defcustom cae-multi-repositories
+  (list doom-user-dir
+        cae-multi-org-dir
+        cae-multi-secrets-dir
+        (getenv "HOME"))
+  "List of directories containing Git repositories to sync between machines."
+  :type '(repeat directory)
+  :group 'cae-multi)
+
+(defcustom cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
+  "If non-nil, automatically pull repositories when idle."
+  :type 'boolean
+  :group 'cae-multi)
+
+;; Create necessary directories
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-org-dir t)
 
+;; Configure file locations for various packages
 (after! abbrev
   (setq abbrev-file-name (concat cae-multi-data-dir "abbrev_defs")))
 (after! bookmark
@@ -45,16 +84,23 @@
     backup-inhibited t))
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
-  (cae-multi--push-changes bookmark-default-file " *cae-multi-bookmark-push-changes-a*"))
+  "Push changes to the bookmark file after it's saved."
+  (when (and bookmark-default-file (file-exists-p bookmark-default-file))
+    (cae-multi--push-changes bookmark-default-file " *cae-multi-bookmark-push-changes-a*")))
 
 (defun cae-multi-org-archive-push-changes-h ()
-  (gac--after-save (buffer-file-name))
-  (dolist (file (org-all-archive-files))
-    (gac--after-save file)))
+  "Push changes to org files and their archives after archiving."
+  (when buffer-file-name
+    (gac--after-save (buffer-file-name))
+    (dolist (file (org-all-archive-files))
+      (when (file-exists-p file)
+        (gac--after-save file)))))
 
+;; Configure bookmark saving
 (setq bookmark-save-flag 1)
 (setq bookmark-watch-bookmark-file 'silent)
 
+;; Set up advice and hooks
 (advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
@@ -71,7 +117,8 @@ Used to detect external changes to the file.")
 ;;; Initialize abbrev file tracking
 (after! abbrev
   (setq cae-multi-abbrev--file-mtime 
-        (and (file-exists-p abbrev-file-name)
+        (and abbrev-file-name
+             (file-exists-p abbrev-file-name)
              (nth 5 (file-attributes abbrev-file-name)))))
 
 (defmacro with-abbrev-auto-save-disabled (&rest body)
@@ -102,15 +149,17 @@ It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
 Sets `cae-multi-abbrev--emacs-is-writing' to t during the write operation
 and updates the stored modification time afterward."
   (let ((cae-multi-abbrev--emacs-is-writing t))
-    (condition-case err
-        (prog1 (apply orig-fun args)
-          ;; Update our stored mtime after writing
-          (when (file-exists-p abbrev-file-name)
-            (setq cae-multi-abbrev--file-mtime
-                  (nth 5 (file-attributes abbrev-file-name)))))
-      (error
-       (setq cae-multi-abbrev--emacs-is-writing nil)
-       (signal (car err) (cdr err))))))
+    (unwind-protect
+        (condition-case err
+            (prog1 (apply orig-fun args)
+              ;; Update our stored mtime after writing
+              (when (and abbrev-file-name (file-exists-p abbrev-file-name))
+                (setq cae-multi-abbrev--file-mtime
+                      (nth 5 (file-attributes abbrev-file-name)))))
+          (error
+           (message "Error in write-abbrev-file: %s" (error-message-string err))
+           (signal (car err) (cdr err))))
+      (setq cae-multi-abbrev--emacs-is-writing nil))))
 
 ;; Set up advice for abbrev-related functions
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
@@ -124,20 +173,13 @@ and updates the stored modification time afterward."
 
 ;;; Sync the repositories
 
-(defvar cae-multi-repositories
-  (list doom-user-dir
-        cae-multi-org-dir
-        cae-multi-secrets-dir
-        (getenv "HOME"))
-  "List of directories containing Git repositories to sync between machines.")
-
-(defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
-  "If non-nil, automatically pull repositories when idle.")
-
 ;; Gotta sync when idle to prevent the sync from interfering with git commands.
 (defun cae-multi-sync-repositories-when-idle ()
-  (when (> (time-to-seconds (current-idle-time)) 10)
+  "Run repository sync when system has been idle for at least 10 seconds."
+  (when (and (current-idle-time)
+             (> (time-to-seconds (current-idle-time)) 10))
     (cae-multi-sync-repositories)))
+
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 30 30 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories-when-idle))
