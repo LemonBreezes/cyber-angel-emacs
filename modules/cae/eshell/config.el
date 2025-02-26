@@ -111,10 +111,7 @@
           (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
           (setq tldr-directory-path ,tldr-dir)
           (require 'tldr)
-          (tldr-update-docs))
-       ;; Now that I'm confident this code works, I don't need the print output.
-       ;;(lambda (_) (message "tldr docs updated"))
-       ))))
+          (tldr-update-docs))))))
 (set-lookup-handlers! 'eshell-mode :documentation #'+eshell-help-run-help)
 (after! man
   (map! :map Man-mode-map :n "x" #'+eshell-man-to-tldr))
