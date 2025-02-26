@@ -4,7 +4,7 @@
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
 (package! gptel)
-(package! aider :recipe (:host github :repo "tninja/aider.el"))
+(package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
 (package! magit-gptcommit)
 (package! chatgpt-shell)
 (package! dall-e-shell)
