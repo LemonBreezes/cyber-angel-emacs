@@ -322,7 +322,7 @@
     (add-hook 'beacon-dont-blink-predicates #'cae-corfu-visible-p))
   (setq beacon-blink-when-window-scrolls nil
         beacon-overlay-priority -1)
-  (dolist (cmd '(+eshell-tldr-to-man))
+  (dolist (cmd '(cae-eshell-tldr-to-man))
     (add-to-list 'beacon-dont-blink-commands cmd)))
 
 (use-package! indent-bars
