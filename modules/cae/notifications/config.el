@@ -32,8 +32,7 @@
         "p" #'previous-line))
 
 (use-package! alert
-  :defer t :init
-  :config
+  :defer t :config
   (setq alert-default-style
         (cond ((eq alert-default-style 'libnotify)
                'libnotify)
