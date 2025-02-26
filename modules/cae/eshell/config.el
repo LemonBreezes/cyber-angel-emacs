@@ -99,6 +99,9 @@
   (add-to-list 'eshell-expand-input-functions
                #'eshell-expand-history-references))
 
+(after! em-glob
+  (setq eshell-glob-splice-results t))
+
 ;; Define an Eshell lookup handler and integrate Man with TLDR.
 (let ((tldr-dir (concat doom-cache-dir "tldr/")))
   (unless (file-exists-p tldr-dir)
