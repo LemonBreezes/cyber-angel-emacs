@@ -41,7 +41,12 @@
   (setq aidermacs-extra-args
         '("--cache-prompts"
           "--chat-language" "English"
-          "--editor-edit-format" "editor-whole")))
+          "--editor-edit-format" "editor-whole"))
+  (defadvice! cae-aidermacs-run-make-real-buffer-a ()
+    :after #'aidermacs-run
+    (when-let ((buf (get-buffer (aidermacs-buffer-name)))
+               (_ (buffer-live-p buf)))
+      (doom-set-buffer-real buf))))
 
 (use-package! magit-gptcommit
   :after gptel magit
