@@ -863,13 +863,37 @@
 
 ;; Here I will assume each of these packages is installed in a separate module.
 
-(map! :map cae-misc-applications-ai-map
-      (:when (or (autoloadp 'aidermacs-transient-menu)
-                 (functionp 'aidermacs-transient-menu))
-       "a" #'aidermacs-transient-menu)
-      (:when (or (autoloadp 'aider-transient-menu)
-                 (functionp 'aider-transient-menu))
-       "a" #'aider-transient-menu)
-      (:when (or (autoloadp 'elysium-query)
-                 (functionp 'elysium-query))
-       "e" #'elysium-query))
+;; Helper function to check if a function is available (either autoloaded or defined)
+(defun cae-misc-applications-ai-function-available-p (func)
+  "Return t if FUNC is available as either an autoloaded or defined function."
+  (or (autoloadp func) (functionp func)))
+
+;; Define AI commands with their key bindings
+(defvar cae-misc-applications-ai-commands
+  '(;; Aidermacs/Aider
+    ("a" aidermacs-transient-menu "Aidermacs")
+    ("A" aider-transient-menu "Aider")
+    ;; Elysium
+    ("e" elysium-query "Elysium")
+    ;; GPTel
+    ("g" gptel "GPTel")
+    ("r" gptel-rewrite "GPTel Rewrite")
+    ("m" gptel-menu "GPTel Menu")
+    ;; ChatGPT Shell
+    ("c" chatgpt-shell "ChatGPT Shell")
+    ("C" cae-ai-toggle-chatgpt-shell "Toggle ChatGPT Shell")
+    ;; DALL-E
+    ("d" dall-e-shell "DALL-E")
+    ("D" cae-ai-toggle-dall-e-shell "Toggle DALL-E Shell")
+    ;; Copilot
+    ("p" copilot-mode "Toggle Copilot")
+    ;; Magit GPTCommit
+    ("M" magit-gptcommit-generate "GPT Commit")))
+
+;; Map all available AI commands
+(dolist (cmd cae-misc-applications-ai-commands)
+  (let ((key (nth 0 cmd))
+        (func (nth 1 cmd))
+        (desc (nth 2 cmd)))
+    (when (cae-misc-applications-ai-function-available-p func)
+      (define-key cae-misc-applications-ai-map key func))))
