@@ -22,10 +22,7 @@
 
 (use-package! ednc
   :when (eq system-type 'gnu/linux)
-  :defer t :init
-  (add-hook 'ednc-notification-presentation-functions
-            #'ednc-popup-presentation-function)
-  :config
+  :defer t :config
   (setq alert-default-style 'libnotify)
   (map! :map ednc-view-mode-map
         "n" #'next-line
