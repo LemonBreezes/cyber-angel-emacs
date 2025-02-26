@@ -39,12 +39,18 @@
 (cae-add-cpus-to-modeline)
 
 ;; Set up the secrets directory and its module path.
-(defvar cae-multi-secrets-dir (expand-file-name "secrets/" doom-user-dir))
-(make-directory cae-multi-secrets-dir t)
+(defvar cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
+(defvar cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
+(defvar cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
+(defvar cae-multi-org-dir (concat cae-multi-local-dir "org/"))
+(defvar cae-multi-secrets-dir (concat cae-multi-local-dir "secrets/"))
 (defvar cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
-(make-directory cae-multi-secrets-modules-dir t)
-(defvar cae-multi-org-dir (expand-file-name "~/org/"))
+
+(make-directory cae-multi-local-dir t)
+(make-directory cae-multi-data-dir t)
+(make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-org-dir t)
+(make-directory cae-multi-secrets-modules-dir t)
 (add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
 
 ;; This is where I clone Git projects to.
