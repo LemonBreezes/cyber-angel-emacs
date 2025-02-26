@@ -46,7 +46,7 @@
     :after #'aidermacs-run
     (when-let ((buf (get-buffer (aidermacs-buffer-name)))
                (_ (buffer-live-p buf)))
-      (doom-set-buffer-real buf))))
+      (doom-set-buffer-real buf t))))
 
 (use-package! magit-gptcommit
   :after gptel magit :init
