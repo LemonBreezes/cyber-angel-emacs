@@ -19,15 +19,6 @@
     (setq chatgpt-shell-model-version claude-model))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
-  (after! aider
-    (setq aider-args
-          `("--model" ,(concat "anthropic/" claude-model)
-            "--editor-model" ,(concat "anthropic/" claude-model)
-            ;;"--editor-model" "o3-mini-high"
-            ;;"--reasoning-effort" "high"
-            "--cache-prompts"
-            "--editor-edit-format" "editor-whole"
-            "--chat-language" "English")))
   (defvar llm-refactoring-provider nil)
   (after! llm
     (require 'llm-claude)
@@ -41,20 +32,11 @@
   (after! minuet
     (setq minuet-provider 'codestral)))
 
-(defvar aider-read-string-history nil
-  "History list for aider read string inputs.")
-(use-package! aider
-  :defer t :config
-  ;; BUG Fixes a void function error that I was getting. I do not know why it
-  ;; was happening.
-  (setf (symbol-function 'aider-read-string) (symbol-function 'aider-plain-read-string))
-  ;; BUG When using `aider', which copies the font-lock-keywords, we get an error
-  ;; with `whitespace-mode' since it's not copying the respective overlay.
-  (defadvice! cae-inhibit-whitespace-flush-in-aider-a (_)
-    :before-while #'whitespace-point--flush-used
-    (overlayp whitespace-point--used))
-  (setenv "AIDER_AUTO_COMMITS" "false")
-  (setenv "AIDER_GITIGNORE" "false"))
+(use-package! aidermacs
+  :config
+  (setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
+  (setq aidermacs-auto-commits nil)
+  (setq aidermacs-use-architect-mode t))
 
 (use-package! magit-gptcommit
   :after gptel magit
