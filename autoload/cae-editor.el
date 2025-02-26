@@ -340,6 +340,7 @@ With prefix ARG, yank multiple words."
         (setq cae-yank-point (point))
         (cae-yank-on-exit-h))
       (save-excursion
+        (goto-char cae-yank-point)
         (let* ((beg cae-yank-point)
                (end (progn (forward-word) (point)))
                (text (buffer-substring-no-properties beg end))
