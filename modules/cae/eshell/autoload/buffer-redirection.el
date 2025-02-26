@@ -1,6 +1,6 @@
 ;;; cae/eshell/autoload/buffer-redirection.el -*- lexical-binding: t; -*-
 
-;;;; Buffer Redirection Utilities for Eshell
+;;; Buffer Redirection Utilities for Eshell
 
 ;;;###autoload
 (defun cae-eshell-syntax-buffer-redirect ()

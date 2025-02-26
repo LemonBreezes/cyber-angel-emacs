@@ -2,7 +2,7 @@
 
 (require 'cae-lib)
 
-;;;; EAT Terminal Integration
+;;; EAT Terminal Integration
 
 (use-package! eat
   :defer t :init
@@ -35,7 +35,7 @@
     :after #'eat-eshell-char-mode
     (message "Type M-RET/C-M-m to exit char mode.")))
 
-;;;; Command Handling
+;;; Command Handling
 
 ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
 ;; to work in Eshell as it does in a terminal.
@@ -49,7 +49,7 @@
   :before #'eshell-send-input
   (expand-abbrev))
 
-;;;; Bookmarks and Buffer Handling
+;;; Bookmarks and Buffer Handling
 
 (use-package! eshell-bookmark
   :defer t :init
@@ -62,7 +62,7 @@
 (after! esh-arg
   (add-hook 'eshell-parse-argument-hook #'cae-eshell-syntax-buffer-redirect))
 
-;;;; History Management
+;;; History Management
 
 ;; Filter trivial commands from history.
 (defun cae-eshell-input-filter (str)
@@ -82,7 +82,7 @@
   (add-to-list 'eshell-expand-input-functions
                #'eshell-expand-history-references))
 
-;;;; Prompt Configuration
+;;; Prompt Configuration
 
 ;; Set the prompt
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
@@ -93,7 +93,7 @@
     (setq epe-show-local-working-directory t
           epe-show-git-status-extended t)))
 
-;;;; Input Handling
+;;; Input Handling
 
 ;; Don't leave me with unbalanced delimiters.
 (defadvice! cae-eshell-kill-input-with-delimiters-a ()
@@ -108,7 +108,7 @@
   (unless (eq (char-syntax (char-before)) ?\s)
     (insert-char ?\s)))
 
-;;;; Module Configuration
+;;; Module Configuration
 
 (after! esh-module
   (add-to-list 'eshell-modules-list 'eshell-elecslash))
@@ -119,7 +119,7 @@
 (after! em-glob
   (setq eshell-glob-splice-results t))
 
-;;;; Documentation and Help
+;;; Documentation and Help
 
 ;; Define an Eshell lookup handler and integrate Man with TLDR.
 (let ((tldr-dir (concat doom-cache-dir "tldr/")))
@@ -140,7 +140,7 @@
 (after! tldr
   (map! :map tldr-mode-map :n "x" #'cae-eshell-tldr-to-man))
 
-;;;; Keybindings
+;;; Keybindings
 
 (after! eshell
   (when (modulep! :completion vertico)
@@ -157,7 +157,7 @@
         :ig "C-d" #'cae-eshell-quit-or-delete-char
         [remap doom/backward-to-bol-or-indent] #'beginning-of-line))
 
-;;;; Atuin Integration
+;;; Atuin Integration
 
 (use-package! eshell-atuin
   :when (executable-find "atuin")

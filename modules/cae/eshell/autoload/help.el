@@ -1,6 +1,6 @@
 ;;; cae/eshell/autoload/help.el -*- lexical-binding: t; -*-
 
-;;;; Documentation Utilities for Eshell
+;;; Documentation Utilities for Eshell
 
 ;; Load required functions lazily
 (autoload #'tldr-get-file-path-from-command-name "tldr")

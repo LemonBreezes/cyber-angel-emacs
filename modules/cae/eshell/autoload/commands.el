@@ -1,6 +1,6 @@
 ;;; cae/eshell/autoload/commands.el -*- lexical-binding: t; -*-
 
-;;;; Buffer and File Operations
+;;; Buffer and File Operations
 
 ;;;###autoload
 (defun cae-eshell-buffer-contents (buffer)
@@ -61,7 +61,7 @@ Both files must exist and be writable."
     (rename-file file2 file1)
     (rename-file temp file2)))
 
-;;;; Directory Navigation
+;;; Directory Navigation
 
 ;;;###autoload
 (defun eshell/u (&optional n)
@@ -88,7 +88,7 @@ N defaults to 1, meaning the most recently used buffer."
 Equivalent to calling `eshell/u' with argument 2."
   (eshell/u 2))
 
-;;;; File Finding and Searching
+;;; File Finding and Searching
 
 ;;;###autoload
 (defun eshell/f (filename &optional dir try-count)
@@ -132,7 +132,7 @@ Uses `eshell/f' to find the file and opens it for editing."
         (find-file file)
       (message "No matching files found"))))
 
-;;;; Utility Commands
+;;; Utility Commands
 
 ;;;###autoload
 (defun eshell/set (&rest args)
@@ -150,7 +150,7 @@ Example: set var1 value1 var2 value2"
   "Get help for command CMD from tldr, man or helpful."
   (cae-eshell-help-run-help cmd))
 
-;;;; Interactive Commands
+;;; Interactive Commands
 
 ;;;###autoload
 (defun cae-eshell-clear ()
