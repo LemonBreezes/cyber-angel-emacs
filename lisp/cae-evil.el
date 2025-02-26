@@ -104,7 +104,7 @@
     "C-w" nil
     "C-z" nil))
 (define-key! :keymaps +default-minibuffer-maps
-  "C-S-w"    #'cae-yank-word-to-minibuffer)
+  "C-l"    #'cae-yank-word-to-minibuffer)
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
