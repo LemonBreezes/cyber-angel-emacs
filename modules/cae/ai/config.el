@@ -36,7 +36,11 @@
   :config
   (setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   (setq aidermacs-auto-commits nil)
-  (setq aidermacs-use-architect-mode t))
+  (setq aidermacs-use-architect-mode t)
+  (setq aidermacs-extra-args
+        '("--cache-prompts"
+          "--chat-language" "English"
+          "--editor-edit-format" "editor-whole")))
 
 (use-package! magit-gptcommit
   :after gptel magit
