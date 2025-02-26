@@ -3,39 +3,22 @@
 ;; This is code written for the purpose of using this Emacs configuration on
 ;; multiple machines.
 
-;;;; Configuration Groups and Variables
+;;; Configuration Groups and Variables
 
-(defvar cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
-(defvar cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
-(defvar cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
-(defvar cae-multi-org-dir (concat cae-multi-local-dir "org/"))
-(defvar cae-multi-secrets-dir (concat cae-multi-local-dir "secrets/"))
-
-(make-directory cae-multi-local-dir t)
-(make-directory cae-multi-data-dir t)
-(make-directory cae-multi-cache-dir t)
-(make-directory cae-multi-org-dir t)
-
-(defcustom cae-multi-repositories
+(defvar cae-multi-repositories
   (list doom-user-dir
         cae-multi-org-dir
         cae-multi-secrets-dir
-        (getenv "HOME"))
-  "List of directories containing Git repositories to sync between machines."
-  :type '(repeat directory)
-  :group 'cae-multi)
+        (getenv "HOME")))
 
-(defcustom cae-multi-enable-auto-pull (eq system-type 'gnu/linux)
-  "If non-nil, automatically pull repositories when idle."
-  :type 'boolean
-  :group 'cae-multi)
+(defvar cae-multi-enable-auto-pull (eq system-type 'gnu/linux))
 
-;;;; Abbrev Variables
+;;; Abbrev Variables
 
 (defvar cae-multi-abbrev--auto-commit-disabled nil
   "When non-nil, automatic saving of abbrev file is temporarily disabled.")
 
-;;;; File Watching Utilities
+;;; File Watching Utilities
 
 (defun cae-multi--setup-file-watch (file-path callback watch-var-symbol)
   "Set up a file watch for FILE-PATH using CALLBACK.
@@ -55,7 +38,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
     (set watch-var-symbol nil)
     (message message)))
 
-;;;; Directory Setup
+;;; Directory Setup
 
 ;; Create necessary directories
 (make-directory cae-multi-local-dir t)
@@ -63,7 +46,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-org-dir t)
 
-;;;; Package Configuration
+;;; Package Configuration
 
 ;; Configure file locations for various packages
 (after! abbrev
@@ -88,7 +71,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
-;;;; Git Auto Commit Mode
+;;; Git Auto Commit Mode
 
 (use-package! git-auto-commit-mode
   :defer t :init
@@ -98,7 +81,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
 
-;;;; Bookmark Handling
+;;; Bookmark Handling
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
   "Push changes to the bookmark file after it's saved."
@@ -122,7 +105,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
 
-;;;; Abbrev Handling
+;;; Abbrev Handling
 
 (defmacro with-abbrev-auto-save-disabled (&rest body)
   "Execute BODY with automatic saving of the abbrev file disabled."
@@ -179,7 +162,7 @@ and updates the stored modification time afterward."
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
 
-;;;; Repository Synchronization
+;;; Repository Synchronization
 
 (defun cae-multi-sync-repositories-when-idle ()
   "Run repository sync when system has been idle for at least 10 seconds."
