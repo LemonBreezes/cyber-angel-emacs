@@ -93,7 +93,7 @@ normally have their errors suppressed."
 
 ;;; Mode-line debugging
 
-(defun cae-show-mode-line-segments ()
+(defun cae-debug-show-mode-line-segments ()
   "Display all mode-line segments in a dedicated buffer.
 Each segment (an element of `mode-line-format’) is printed along with its evaluated result,
 as returned by `format-mode-line'. This makes it easier to inspect segments that may be
