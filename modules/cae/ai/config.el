@@ -188,7 +188,8 @@
   (add-hook! 'gptel-mode-hook
     (defun cae-gptel-mode-setup-h ()
       (setq-local nobreak-char-display nil)
-      (auto-fill-mode -1)))
+      (auto-fill-mode -1)
+      (doom-mark-buffer-as-real-h)))
   ;; BUG Karthink refused to accept my PR to fix this, saying that starting the
   ;; point on top of the "Rewrite: " is a good idea. I disagree.
   (defadvice! cae-goto-point-max-a (_)
