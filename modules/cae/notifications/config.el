@@ -33,8 +33,6 @@
 
 (use-package! alert
   :defer t :init
-  (after! circe-notifications
-    (setq circe-notifications-alert-style nil))
   :config
   (setq alert-default-style
         (cond ((eq alert-default-style 'libnotify)
