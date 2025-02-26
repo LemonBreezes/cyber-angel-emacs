@@ -860,3 +860,7 @@
                                     helm-source-emms-dired)))
 
 ;;; AI
+
+;; Here I will assume each of these packages is installed in a separate module.
+
+(map! :map cae-misc-applications-ai-map)
