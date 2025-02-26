@@ -27,6 +27,9 @@ calls `gac--after-save' and then resets the buffer-local values."
 (defvar cae-multi-last-sync-duration 0
   "Time in seconds that the last sync operation took in `cae-multi-sync-repositories`.")
 
+(defvar cae-multi-doom-dir-changes-detected nil
+  "Non-nil if changes were detected in repositories inside doom-user-dir during sync.")
+
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
                                             conflict-check next-step
                                             finalize output-buffer
@@ -79,6 +82,24 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
                    (funcall set-failure)
                    (funcall finalize))
                (progn
+                 ;; Check for changes in doom-user-dir repos during pull
+                 (when (and (string= step-name "pull")
+                            (string-prefix-p (file-truename doom-user-dir)
+                                             (file-truename repo-dir)))
+                   (with-current-buffer output-buffer
+                     (save-excursion
+                       (goto-char (point-min))
+                       ;; Look for indicators of changes in git pull output
+                       (when (or (re-search-forward "\\(?:Updating\\|Fast-forward\\)" nil t)
+                                 (re-search-forward "\\(?:[0-9]+ file\\|files?\\) changed" nil t)
+                                 (re-search-forward "\\(?:create mode\\|delete mode\\)" nil t)
+                                 (re-search-forward "\\(?:rename\\|copy\\)" nil t)
+                                 (re-search-forward "^ [0-9]+ insertion" nil t)
+                                 (re-search-forward "^ [0-9]+ deletion" nil t))
+                         (setq cae-multi-doom-dir-changes-detected t)
+                         (when (>= verb-level 1)
+                           (message "Changes detected in %s, will run doom sync" repo-dir))))))
+                 
                  (when (>= verb-level 1)
                    (message "Git %s succeeded in %s" step-name repo-dir))
                  (if next-step
@@ -92,6 +113,8 @@ SET-FAILURE is a function called to mark failure (e.g. set all-ops-succeeded to 
 VERB-LEVEL controls output verbosity (0=silent, 1=normal, 2=verbose)."
   (interactive (list (if current-prefix-arg 2 1)))
   (unless verb-level (setq verb-level 0))
+  ;; Reset the changes detected flag at the start of sync
+  (setq cae-multi-doom-dir-changes-detected nil)
   
   ;; Check if git is already running
   (if (cl-find-if (lambda (proc)
@@ -142,8 +165,12 @@ VERB-LEVEL controls output verbosity (0=silent, 1=normal, 2=verbose)."
                "Finalize a repo in doom-user-dir."
                (setq pending-private (1- pending-private))
                (when (zerop pending-private)
-                 (setq doom-sync-proc 
-                       (cae-multi--run-doom-sync verb-level start-time #'finalize-all))))
+                 (if cae-multi-doom-dir-changes-detected
+                     (setq doom-sync-proc 
+                           (cae-multi--run-doom-sync verb-level start-time #'finalize-all))
+                   (when (>= verb-level 1)
+                     (message "No changes detected in doom-user-dir repos, skipping doom sync"))
+                   (finalize-all))))
              
              (finalize-all ()
                "Finalize the entire sync operation."
