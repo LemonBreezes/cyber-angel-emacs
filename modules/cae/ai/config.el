@@ -37,6 +37,7 @@
   (setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-use-architect-mode t)
+  (setq aidermacs-backend (if (modulep! :term vterm) 'vterm 'comint))
   (setq aidermacs-extra-args
         '("--cache-prompts"
           "--chat-language" "English"
