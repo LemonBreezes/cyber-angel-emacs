@@ -16,7 +16,7 @@
                                  (string= name "org.freedesktop.Notifications"))
                                names)))
      (advice-remove #'notifications-notify #'cae-notifications-notify-advice)
-     (setq alert-default-style 'libnotify)
+     (setq alert-default-style 'notifications)
      (unless notif-found
        (ednc-mode +1)))))
 
@@ -34,8 +34,8 @@
 (use-package! alert
   :defer t :config
   (setq alert-default-style
-        (cond ((eq alert-default-style 'libnotify)
-               'libnotify)
+        (cond ((eq alert-default-style 'notifications)
+               'notifications)
               ((getenv "WSL_DISTRO_NAME")
                (require ' alert-toast)
                'toast)
