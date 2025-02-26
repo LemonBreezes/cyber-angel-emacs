@@ -3,6 +3,8 @@
 ;; This is code written for the purpose of using this Emacs configuration on
 ;; multiple machines.
 
+;;;; Configuration Groups and Variables
+
 (defgroup cae-multi nil
   "Multi-machine synchronization for Emacs configuration."
   :group 'convenience)
@@ -46,11 +48,40 @@
   :type 'boolean
   :group 'cae-multi)
 
+;;;; Abbrev Variables
+
+(defvar cae-multi-abbrev--auto-commit-disabled nil
+  "When non-nil, automatic saving of abbrev file is temporarily disabled.")
+
+;;;; File Watching Utilities
+
+(defun cae-multi--setup-file-watch (file-path callback watch-var-symbol)
+  "Set up a file watch for FILE-PATH using CALLBACK.
+WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
+  (when (and file-path (file-exists-p file-path))
+    (unless (symbol-value watch-var-symbol)
+      (set watch-var-symbol
+           (file-notify-add-watch
+            file-path
+            '(change)
+            callback)))))
+
+(defun cae-multi--remove-file-watch (watch-var-symbol message)
+  "Remove file watch stored in WATCH-VAR-SYMBOL and display MESSAGE."
+  (when (symbol-value watch-var-symbol)
+    (file-notify-rm-watch (symbol-value watch-var-symbol))
+    (set watch-var-symbol nil)
+    (message message)))
+
+;;;; Directory Setup
+
 ;; Create necessary directories
 (make-directory cae-multi-local-dir t)
 (make-directory cae-multi-data-dir t)
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-org-dir t)
+
+;;;; Package Configuration
 
 ;; Configure file locations for various packages
 (after! abbrev
@@ -75,6 +106,8 @@
 (after! transient
   (setq transient-values-file (concat cae-multi-data-dir "transient/values.el")))
 
+;;;; Git Auto Commit Mode
+
 (use-package! git-auto-commit-mode
   :defer t :init
   (autoload 'gac--after-save "git-auto-commit-mode")
@@ -82,6 +115,8 @@
   (setq-default gac-automatically-add-new-files-p nil)
   (setq-hook! 'git-auto-commit-mode-hook
     backup-inhibited t))
+
+;;;; Bookmark Handling
 
 (defun cae-multi-bookmark-push-changes-a (&rest _)
   "Push changes to the bookmark file after it's saved."
@@ -105,21 +140,7 @@
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
 
-;;; Abbrevs
-
-(defvar cae-multi-abbrev--auto-commit-disabled nil
-  "When non-nil, automatic saving of abbrev file is temporarily disabled.")
-
-(defvar cae-multi-abbrev--file-mtime nil
-  "Last known modification time of the abbrev file.
-Used to detect external changes to the file.")
-
-;;; Initialize abbrev file tracking
-(after! abbrev
-  (setq cae-multi-abbrev--file-mtime 
-        (and abbrev-file-name
-             (file-exists-p abbrev-file-name)
-             (nth 5 (file-attributes abbrev-file-name)))))
+;;;; Abbrev Handling
 
 (defmacro with-abbrev-auto-save-disabled (&rest body)
   "Execute BODY with automatic saving of the abbrev file disabled."
@@ -153,13 +174,18 @@ and updates the stored modification time afterward."
         (condition-case err
             (prog1 (apply orig-fun args)
               ;; Update our stored mtime after writing
-              (when (and abbrev-file-name (file-exists-p abbrev-file-name))
-                (setq cae-multi-abbrev--file-mtime
-                      (nth 5 (file-attributes abbrev-file-name)))))
+              (cae-multi--update-abbrev-mtime))
           (error
            (message "Error in write-abbrev-file: %s" (error-message-string err))
            (signal (car err) (cdr err))))
       (setq cae-multi-abbrev--emacs-is-writing nil))))
+
+;; Initialize abbrev file tracking
+(after! abbrev
+  (setq cae-multi-abbrev--file-mtime 
+        (and abbrev-file-name
+             (file-exists-p abbrev-file-name)
+             (nth 5 (file-attributes abbrev-file-name)))))
 
 ;; Set up advice for abbrev-related functions
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
@@ -171,9 +197,8 @@ and updates the stored modification time afterward."
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
 
-;;; Sync the repositories
+;;;; Repository Synchronization
 
-;; Gotta sync when idle to prevent the sync from interfering with git commands.
 (defun cae-multi-sync-repositories-when-idle ()
   "Run repository sync when system has been idle for at least 10 seconds."
   (when (and (current-idle-time)
@@ -183,8 +208,3 @@ and updates the stored modification time afterward."
 (when cae-multi-enable-auto-pull
   (cae-run-with-timer 30 30 "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories-when-idle))
-
-;;; Hot reloading abbrevs
-
-(defvar cae-multi-abbrev-watch-descriptor nil
-  "File notification descriptor for the abbrev file.")
