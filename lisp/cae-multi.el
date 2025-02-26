@@ -86,7 +86,7 @@ ARGS are passed on to ORIG-FUN. This prevents the advice on
 `define-abbrev' from scheduling a save during bulk operations such as
 reading the abbrev file or defining an abbrev table."
   (with-abbrev-auto-save-disabled
-   (apply orig-fun args)))
+    (apply orig-fun args)))
 
 (defun cae-multi-auto-save-abbrev (&rest _args)
   "Automatically schedule saving the abbrev file after a new abbrev is defined.
