@@ -337,7 +337,10 @@ With prefix ARG, yank multiple words."
     "\\s-+" " "
     (with-minibuffer-selected-window
       (unless (and cae-yank-point (eq last-command this-command))
-        (setq cae-yank-point (point))
+        ;; Move to beginning of symbol at point when starting
+        (if (thing-at-point 'symbol)
+            (setq cae-yank-point (car (bounds-of-thing-at-point 'symbol)))
+          (setq cae-yank-point (point)))
         (cae-yank-on-exit-h))
       (save-excursion
         (goto-char cae-yank-point)
