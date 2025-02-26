@@ -863,4 +863,13 @@
 
 ;; Here I will assume each of these packages is installed in a separate module.
 
-(map! :map cae-misc-applications-ai-map)
+(map! :map cae-misc-applications-ai-map
+      (:when (or (autoloadp 'aidermacs-transient-menu)
+                 (functionp 'aidermacs-transient-menu))
+       "a" #'aidermacs-transient-menu)
+      (:when (or (autoloadp 'aider-transient-menu)
+                 (functionp 'aider-transient-menu))
+       "a" #'aider-transient-menu)
+      (:when (or (autoloadp 'elysium-query)
+                 (functionp 'elysium-query))
+       "e" #'elysium-query))
