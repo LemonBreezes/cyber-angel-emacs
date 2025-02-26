@@ -5,20 +5,21 @@
             #'cae-notifications-wrap-async-call-process-a)
 
 (advice-add #'notifications-notify :around #'cae-notifications-notify-advice)
-(dbus-call-method-asynchronously
- :session
- "org.freedesktop.DBus"
- "/org/freedesktop/DBus"
- "org.freedesktop.DBus"
- "ListNames"
- (lambda (names)
-   (let ((notif-found (cl-some (lambda (name)
-                                 (string= name "org.freedesktop.Notifications"))
-                               names)))
-     (advice-remove #'notifications-notify #'cae-notifications-notify-advice)
-     (setq alert-default-style 'notifications)
-     (unless notif-found
-       (ednc-mode +1)))))
+(when (require 'dbus nil t)
+  (dbus-call-method-asynchronously
+   :session
+   "org.freedesktop.DBus"
+   "/org/freedesktop/DBus"
+   "org.freedesktop.DBus"
+   "ListNames"
+   (lambda (names)
+     (let ((notif-found (cl-some (lambda (name)
+                                   (string= name "org.freedesktop.Notifications"))
+                                 names)))
+       (advice-remove #'notifications-notify #'cae-notifications-notify-advice)
+       (setq alert-default-style 'notifications)
+       (unless notif-found
+         (ednc-mode +1))))))
 
 (use-package! ednc
   :when (eq system-type 'gnu/linux)
