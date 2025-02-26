@@ -309,11 +309,13 @@ the abbrevs are reloaded automatically."
 (defun cae-multi-abbrev-watch-callback (event)
   "Handle file change EVENT for the abbrev file.
 Reload abbrevs only if the file was changed externally.
-If the file's mtime is the same as our stored value, skip reloading."
+Skip reloading if the change was made by Emacs itself."
   (when (memq (cadr event) '(changed attribute-changed))
     (let* ((new-mtime (nth 5 (file-attributes abbrev-file-name)))
            (old-mtime cae-multi-abbrev--file-mtime))
-      (unless (and old-mtime (time-equal-p new-mtime old-mtime))
+      (when (and (not cae-multi-abbrev--emacs-is-writing)
+                 (or (null old-mtime)
+                     (not (time-equal-p new-mtime old-mtime))))
         (message "Abbrev file changed externally – reloading abbrevs…")
         (ignore-errors
           (read-abbrev-file abbrev-file-name t))
@@ -321,6 +323,9 @@ If the file's mtime is the same as our stored value, skip reloading."
         (message "Abbrevs reloaded.")))))
 (defvar cae-multi--auto-save-abbrev-timer nil
   "Timer for deferred automatic saving of the abbrev file.")
+
+(defvar cae-multi-abbrev--emacs-is-writing nil
+  "Non-nil when Emacs is writing the abbrev file.")
 
 ;;;###autoload
 (defun cae-multi--schedule-auto-save-abbrev ()
@@ -333,9 +338,10 @@ If a timer is already active, do not schedule another."
            (lambda ()
              (unless cae-multi-abbrev--auto-commit-disabled
                (when abbrevs-changed
-                 (write-abbrev-file abbrev-file-name nil)
-                 ;; Update our stored mtime.
-                 (setq cae-multi-abbrev--file-mtime
-                       (nth 5 (file-attributes abbrev-file-name)))
-                 (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*")))
+                 (let ((cae-multi-abbrev--emacs-is-writing t))
+                   (write-abbrev-file abbrev-file-name nil)
+                   ;; Update our stored mtime.
+                   (setq cae-multi-abbrev--file-mtime
+                         (nth 5 (file-attributes abbrev-file-name)))
+                   (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*"))))
              (setq cae-multi--auto-save-abbrev-timer nil))))))

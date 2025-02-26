@@ -113,9 +113,21 @@ It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
     (cae-multi--schedule-auto-save-abbrev))
   nil)
 
+;;;###autoload
+(defun cae-multi--track-abbrev-write (orig-fun &rest args)
+  "Advice for `write-abbrev-file' to track when Emacs is writing the file.
+Sets `cae-multi-abbrev--emacs-is-writing' to t during the write operation."
+  (let ((cae-multi-abbrev--emacs-is-writing t))
+    (apply orig-fun args)
+    ;; Update our stored mtime after writing
+    (when (file-exists-p abbrev-file-name)
+      (setq cae-multi-abbrev--file-mtime
+            (nth 5 (file-attributes abbrev-file-name))))))
+
 (advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
 (advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
 (advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
+(advice-add 'write-abbrev-file :around #'cae-multi--track-abbrev-write)
 
 (when (eq system-type 'gnu/linux)
   (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
