@@ -311,40 +311,6 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
 
-;;; Hot reloading bookmarks
-
-;;;###autoload
-(defun cae-multi-bookmark-watch-callback (event)
-  "Handle file change EVENT for the bookmark file."
-  (when (memq (cadr event) '(changed attribute-changed))
-    (condition-case err
-        (progn
-          (message "Bookmark file changed—reloading bookmarks…")
-          ;; The second argument t says to overwrite the current bookmarks;
-          ;; the third argument t means no extra messages.
-          (bookmark-load bookmark-default-file t t)
-          (message "Bookmarks reloaded."))
-      (error
-       (message "Error reloading bookmarks: %s" (error-message-string err))))))
-
-;;;###autoload
-(defun cae-multi-start-bookmark-watch ()
-  "Start watching the bookmark file for external changes."
-  (when (and bookmark-default-file (file-exists-p bookmark-default-file))
-    (unless cae-multi-bookmark-watch-descriptor
-      (setq cae-multi-bookmark-watch-descriptor
-            (file-notify-add-watch
-             bookmark-default-file
-             '(change)
-             #'cae-multi-bookmark-watch-callback)))))
-
-(defun cae-multi-stop-bookmark-watch ()
-  "Stop watching the bookmark file for external changes."
-  (when cae-multi-bookmark-watch-descriptor
-    (file-notify-rm-watch cae-multi-bookmark-watch-descriptor)
-    (setq cae-multi-bookmark-watch-descriptor nil)
-    (message "Stopped watching the bookmark file.")))
-
 ;;; Hot reloading abbrevs
 
 ;;;###autoload

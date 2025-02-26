@@ -188,8 +188,3 @@ and updates the stored modification time afterward."
 
 (defvar cae-multi-abbrev-watch-descriptor nil
   "File notification descriptor for the abbrev file.")
-
-;;; Hot reloading bookmarks
-
-(defvar cae-multi-bookmark-watch-descriptor nil
-  "File notification descriptor for the bookmark file.")
