@@ -44,7 +44,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
                          (funcall callback t nil))))))
 
 
-#@256
+;; Test the DBus and notifications functionality
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-present)
    (if dbus-enabled
