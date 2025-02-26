@@ -5,34 +5,16 @@
 
 ;;;; Configuration Groups and Variables
 
-(defgroup cae-multi nil
-  "Multi-machine synchronization for Emacs configuration."
-  :group 'convenience)
+(defvar cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
+(defvar cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
+(defvar cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
+(defvar cae-multi-org-dir (concat cae-multi-local-dir "org/"))
+(defvar cae-multi-secrets-dir (concat cae-multi-local-dir "secrets/"))
 
-(defcustom cae-multi-local-dir (expand-file-name "shared-local/" cae-multi-secrets-dir)
-  "Directory for shared local files across multiple machines."
-  :type 'directory
-  :group 'cae-multi)
-
-(defcustom cae-multi-data-dir (expand-file-name "etc/" cae-multi-local-dir)
-  "Directory for shared data files."
-  :type 'directory
-  :group 'cae-multi)
-
-(defcustom cae-multi-cache-dir (expand-file-name "cache/" cae-multi-local-dir)
-  "Directory for shared cache files."
-  :type 'directory
-  :group 'cae-multi)
-
-(defcustom cae-multi-org-dir (expand-file-name "org/" cae-multi-local-dir)
-  "Directory for shared org files."
-  :type 'directory
-  :group 'cae-multi)
-
-(defcustom cae-multi-secrets-dir (expand-file-name "secrets/" cae-multi-local-dir)
-  "Directory for shared secret files."
-  :type 'directory
-  :group 'cae-multi)
+(make-directory cae-multi-local-dir t)
+(make-directory cae-multi-data-dir t)
+(make-directory cae-multi-cache-dir t)
+(make-directory cae-multi-org-dir t)
 
 (defcustom cae-multi-repositories
   (list doom-user-dir
