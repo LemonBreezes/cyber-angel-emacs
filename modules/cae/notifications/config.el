@@ -9,7 +9,7 @@
 CALLBACK is a function that takes two arguments:
   (DBUS-ENABLED NOTIFICATIONS-DAEMON-PRESENT).
 
-If DBus isn’t enabled, the callback is invoked with nil for both arguments.
+If DBus isn't enabled, the callback is invoked with nil for both arguments.
 If DBus is enabled, then we issue an asynchronous call to ListNames on DBus
 and check if \"org.freedesktop.Notifications\" is among the registered names."
   ;; Use a timer to schedule this check asynchronously.
@@ -18,7 +18,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
     ;; so we call it inside our asynchronous lambda.
     (condition-case err
         (progn
-          (dbus-ping :session)
+          (dbus-ping :session "org.freedesktop.DBus")
           (setq dbus-ok t))
       (error
        (setq dbus-ok nil)))
@@ -39,7 +39,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
                                                      names)))
                            (funcall callback t (if notif-found t nil))))
        ;; In case of error in the asynchronous call,
-       ;; assume that the notifications daemon isn’t present.
+       ;; assume that the notifications daemon isn't present.
        :error-function (lambda (error)
                          (funcall callback t nil))))))
 
@@ -50,7 +50,7 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
    (if dbus-enabled
        (message "DBus is enabled. Notifications daemon present? %s" notifications-present)
      (message "DBus does not appear to be enabled."))))
-
+
 
 (cae-check-dbus-and-notifications-async
  (lambda (dbus-enabled notifications-daemon-present)
