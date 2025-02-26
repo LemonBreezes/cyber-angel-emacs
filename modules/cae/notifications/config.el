@@ -45,11 +45,12 @@ and check if \"org.freedesktop.Notifications\" is among the registered names."
 
 
 ;; Test the DBus and notifications functionality
-(cae-check-dbus-and-notifications-async
- (lambda (dbus-enabled notifications-present)
-   (if dbus-enabled
-       (message "DBus is enabled. Notifications daemon present? %s" notifications-present)
-     (message "DBus does not appear to be enabled."))))
+;; Commented out to prevent automatic execution during loading
+;; (cae-check-dbus-and-notifications-async
+;;  (lambda (dbus-enabled notifications-present)
+;;    (if dbus-enabled
+;;        (message "DBus is enabled. Notifications daemon present? %s" notifications-present)
+;;      (message "DBus does not appear to be enabled."))))
 
 
 (cae-check-dbus-and-notifications-async
