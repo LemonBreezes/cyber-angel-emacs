@@ -17,6 +17,8 @@
 (after! vc-annotate
   (setq vc-annotate-background-mode nil))
 
+(setq diff-refine-nonmodified t)
+
 (after! code-review
   (setq code-review-auth-login-marker 'forge))
 (when (modulep! :tools magit)
