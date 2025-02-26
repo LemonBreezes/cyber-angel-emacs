@@ -23,7 +23,7 @@
     (setq aider-args
           `("--model" ,(concat "anthropic/" claude-model)
             ;;"--editor-model" ,(concat "anthropic/" claude-model)
-            "--editor-model" "o3-mini"
+            "--editor-model" "o3-mini-high"
             ;;"--reasoning-effort" "high"
             "--cache-prompts"
             "--editor-edit-format" "editor-whole"
