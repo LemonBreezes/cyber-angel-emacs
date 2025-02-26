@@ -1,6 +1,7 @@
 ;;; autoload/cae-editor.el -*- lexical-binding: t; -*-
 
 (defun cae--get-vertico-posframe-size (posframe)
+  "Return a function that gets the size of POSFRAME."
   (lambda (_)
     `(:height ,(frame-height posframe)
       :width ,(frame-width posframe)
@@ -8,6 +9,7 @@
       :min-width nil)))
 
 (defun cae-avy-parrot-rotate-action (rotate-fn pt)
+  "Apply ROTATE-FN at point PT using avy."
   (save-mark-and-excursion
     (goto-char pt)
     (call-interactively rotate-fn)))
@@ -16,16 +18,17 @@
   "Strip the top-level leading indentation for every line in STR.
 The least indented line will have 0 leading whitespace. Convert tabs to spaces
 using the tab-width variable."
-  (let* ((lines (replace-regexp-in-string "\t" (make-string tab-width ?\s)
-                                          (split-string str "\n")))
+  (let* ((lines (split-string (replace-regexp-in-string "\t" (make-string tab-width ?\s) str) "\n"))
+         (non-empty-lines (cl-remove-if #'string-empty-p lines))
          (indentations (mapcar (lambda (line)
-                                 (string-match "^[[:space:]]*" line)
-                                 (match-end 0))
-                               lines))
-         (min-indentation (apply #'min (delq 0 indentations))))
+                                (string-match "^[[:space:]]*" line)
+                                (match-end 0))
+                              non-empty-lines))
+         (min-indentation (if indentations (apply #'min indentations) 0)))
     (mapconcat
      (lambda (line)
-       (if (string-match "^[[:space:]]+" line)
+       (if (and (not (string-empty-p line))
+                (string-match (format "^[[:space:]]\\{%d\\}" min-indentation) line))
            (substring line min-indentation)
          line))
      lines "\n")))
@@ -56,7 +59,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-dos2unix ()
-  "Automate M-% C-q C-m RET C-q C-j RET"
+  "Convert DOS line endings (CRLF) to Unix line endings (LF)."
   (interactive)
   (save-excursion
     (goto-char (point-min))
@@ -65,6 +68,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-pop-mark ()
+  "Pop mark ring with prefix argument."
   (interactive)
   (let ((current-prefix-arg '(4)))
     (setq this-command 'set-mark-command
@@ -73,6 +77,8 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-exchange-point-and-mark ()
+  "Enhanced version of `exchange-point-and-mark'.
+Toggles the prefix argument based on region state."
   (interactive)
   (let ((current-prefix-arg
          (if (region-active-p)
@@ -84,6 +90,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-bind-C-z-to-abort-a (oldfun &rest args)
+  "Advice to bind C-z to abort in minibuffer for OLDFUN with ARGS."
   (minibuffer-with-setup-hook
       (lambda ()
         (local-set-key (kbd "C-z") #'abort-recursive-edit))
@@ -91,6 +98,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-embark-act-with-completing-read (&optional arg)
+  "Run embark-act with completing-read prompter and ARG."
   (interactive "P")
   (require 'embark)
   (let* ((embark-prompter #'embark-completing-read-prompter)
@@ -122,6 +130,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (cl-defun cae-avy-embark-act-on-region ()
+  "Use avy to select a region and then run embark-act on it."
   (interactive)
   (require 'avy)
   (save-window-excursion
@@ -148,6 +157,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-delete-duplicate-bookmarks ()
+  "Delete bookmarks with numeric suffixes like <1>, <2>, etc."
   (interactive)
   (let ((bookmarks (cl-remove-if-not (lambda (x)
                                        (string-match-p "<[0-9]+>\\'" x))
@@ -157,6 +167,7 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-make-new-buffer ()
+  "Create a new buffer named *new* with default major mode."
   (interactive)
   (let ((buffer (generate-new-buffer "*new*")))
     (set-window-buffer nil buffer)
@@ -166,17 +177,20 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-narrow-to-page ()
+  "Narrow to the current page using logos."
   (interactive)
   (save-mark-and-excursion
     (end-of-line)
     (deactivate-mark)
     (logos-narrow-dwim)))
 
-(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/"))
+(defvar cae-bookmark-downloads-directory (expand-file-name "~/Downloads/")
+  "Directory path for downloads.")
 
 ;;;###autoload
 (defun cae-bookmark-jump-to-newest-download (_)
-  ;; For backwards compatibility with my bookmarks file.
+  "Jump to the newest downloaded file in dired.
+For backwards compatibility with bookmarks file."
   (let* ((download-files (directory-files "~/Downloads/" t))
          (home-files (directory-files "~/" t))
          (all-files (cl-union download-files home-files))
@@ -191,26 +205,31 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-yank-indent-a (&rest _)
+  "Advice to indent after yanking."
   (let ((this-command 'yank)
         (real-this-command 'yank))
     (yank-indent--post-command-hook)))
 
 ;;;###autoload
 (defun cae-kill-region ()
+  "Kill region and clean up blank lines."
   (interactive)
   (call-interactively #'kill-region)
   (delete-blank-lines))
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-forward-action (pt)
+  "Rotate word forward at point PT using parrot."
   (cae-avy-parrot-rotate-action #'parrot-rotate-next-word-at-point pt))
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-backward-action (pt)
+  "Rotate word backward at point PT using parrot."
   (cae-avy-parrot-rotate-action #'parrot-rotate-prev-word-at-point pt))
 
 ;;;###autoload
 (defun cae-avy-rotate ()
+  "Use avy to select and rotate words from parrot dictionary."
   (interactive)
   (require 'parrot)
   (setq avy-action #'cae-avy-parrot-rotate-forward-action)
@@ -232,8 +251,8 @@ This is the format used on Reddit for code blocks."
 
 ;;;###autoload
 (defun cae-mark-comment ()
-  "Mark the entire comment around point. Like `er/mark-comment' but
-also marks comment with leading whitespace"
+  "Mark the entire comment around point including leading whitespace.
+Like `er/mark-comment' but also marks comment with leading whitespace."
   (interactive)
   (when (save-excursion
           (skip-syntax-forward "\s")
@@ -254,10 +273,12 @@ also marks comment with leading whitespace"
 
 ;;;###autoload
 (defun cae-embrace-with-prefix-function ()
+  "Create a pair for embrace with function prefix."
   (let ((fname (read-string "Function: ")))
     (cons (format "(%s " (or fname "")) ")")))
 
 (defun cae-modeline--rotate-word-at-point (rotate-function)
+  "Apply ROTATE-FUNCTION to word at point in modeline."
   (save-excursion
     (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
       (goto-char beg))
@@ -270,18 +291,22 @@ also marks comment with leading whitespace"
 
 ;;;###autoload
 (defun cae-modeline-rotate-forward-word-at-point ()
+  "Rotate word forward at point in modeline."
   (interactive)
   (cae-modeline--rotate-word-at-point #'parrot-rotate-next-word-at-point))
 
 ;;;###autoload
 (defun cae-modeline-rotate-backward-word-at-point ()
+  "Rotate word backward at point in modeline."
   (interactive)
   (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
 
-(defvar cae-exwm-workspace-process-alist nil)
+(defvar cae-exwm-workspace-process-alist nil
+  "Association list mapping workspaces to their processes.")
 
 ;;;###autoload
 (defun cae-exwm-start-app (app workspace &optional arg)
+  "Start APP in WORKSPACE, killing existing process with ARG."
   (when (modulep! :ui workspaces)
     (+workspace-switch workspace t))
   (let ((proc (alist-get workspace cae-exwm-workspace-process-alist nil nil #'cl-equalp)))
@@ -292,16 +317,20 @@ also marks comment with leading whitespace"
             (start-process workspace nil app))))
   (cae-exwm-persp--focus-workspace-app))
 
-(defvar cae-yank-point nil)
-(defvar cae-yank-point-overlays nil)
+(defvar cae-yank-point nil
+  "Point from which to yank text.")
+(defvar cae-yank-point-overlays nil
+  "Overlays used to highlight yanked text.")
 (add-hook! 'minibuffer-exit-hook
   (defun cae-yank-on-exit-h ()
+    "Clean up yank overlays on minibuffer exit."
     (mapc #'delete-overlay cae-yank-point-overlays)
     (setq cae-yank-point-overlays nil)))
 
-;; TODO Fix this broken function. It does not work on repeated calls.
 ;;;###autoload
 (defun cae-yank-word-to-minibuffer (arg)
+  "Yank word at point from the minibuffer's original buffer.
+With prefix ARG, yank multiple words."
   (interactive "p")
   (insert
    (replace-regexp-in-string
@@ -311,16 +340,17 @@ also marks comment with leading whitespace"
         (setq cae-yank-point (point))
         (cae-yank-on-exit-h))
       (save-excursion
-        (let ((beg cae-yank-point)
-              (end (progn (forward-word) (point))))
+        (let* ((beg cae-yank-point)
+               (end (progn (forward-word) (point)))
+               (text (buffer-substring-no-properties beg end))
+               (ov (make-overlay beg end)))
           (setq cae-yank-point end)
-          (let ((ov (make-overlay beg end)))
-            (push ov cae-yank-point-overlays)
-            ;; 1000 is higher than ediff's 100+,
-            ;; but lower than isearch main overlay's 1001
-            (overlay-put ov 'priority 1000)
-            (overlay-put ov 'face 'lazy-highlight))
-          (save-excursion (buffer-substring-no-properties beg end))))))))
+          (push ov cae-yank-point-overlays)
+          ;; 1000 is higher than ediff's 100+,
+          ;; but lower than isearch main overlay's 1001
+          (overlay-put ov 'priority 1000)
+          (overlay-put ov 'face 'lazy-highlight)
+          text))))))
 
 ;;;###autoload
 (defun cae-edit-indirect-dwim ()
@@ -342,6 +372,7 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;;###autoload
 (defun cae-kill-current-buffer ()
+  "Kill current buffer, safely handling process buffers."
   (interactive)
   (let ((buf (current-buffer)))
     (when-let ((proc (get-buffer-process buf)))
@@ -353,6 +384,7 @@ mark the string and call `edit-indirect-region' with it."
   "A hash-table that keeps track of sibling file history.")
 
 (defun cae--update-sibling-history (old-file new-file)
+  "Update sibling history from OLD-FILE to NEW-FILE."
   (let ((current-history (gethash new-file cae--sibling-file-history)))
     (puthash new-file
              (cond ((null current-history) old-file)
@@ -365,6 +397,7 @@ mark the string and call `edit-indirect-region' with it."
              cae--sibling-file-history)))
 
 (defun cae--open-terminal-in-new-workspace (name terminal-func)
+  "Open terminal using TERMINAL-FUNC in a new workspace with NAME."
   (if (+workspace-exists-p name)
       (+workspace-switch name)
     (+workspace/new name))
@@ -374,29 +407,24 @@ mark the string and call `edit-indirect-region' with it."
 
 (defun cae-find-sibling-file (file)
   "Find a sibling file of FILE.
-
 This function is a wrapper around `find-sibling-file' that also allows for
-jumping backwards."
-  (interactive (progn
-                 (unless buffer-file-name
-                   (user-error "Not visiting a file"))
-                 (list buffer-file-name)))
+jumping backwards through the history of visited sibling files."
+  (interactive (list (or buffer-file-name
+                         (user-error "Not visiting a file"))))
   (let ((old-file (buffer-file-name)))
-    (condition-case err (call-interactively #'find-sibling-file)
+    (condition-case err 
+        (call-interactively #'find-sibling-file)
       (user-error
-       (when (string-match-p "\\`Couldn['’]t find any sibling files\\'" (error-message-string err))
+       (when (string-match-p "\\`Couldn['']t find any sibling files\\'" (error-message-string err))
          (let ((previous-files (gethash old-file cae--sibling-file-history)))
-           (cond ((null previous-files)
-                  ;; no previous file recorded
-                  nil)
-                 ((stringp previous-files)
-                  ;; one previous file, use it directly
-                  (find-file previous-files))
-                 ((listp previous-files)
-                  ;; multiple previous files, let the user choose
-                  (find-file
-                   (completing-read
-                    "Choose file: " previous-files nil t nil))))))))
+           (cond 
+            ((null previous-files)
+             (signal (car err) (cdr err))) ; Re-signal the original error
+            ((stringp previous-files)
+             (find-file previous-files))
+            ((listp previous-files)
+             (find-file
+              (completing-read "Choose previous sibling: " previous-files nil t nil))))))))
     (unless (string= old-file (buffer-file-name))
       (cae--update-sibling-history old-file (buffer-file-name)))))
 
@@ -415,6 +443,7 @@ jumping backwards."
 
 ;;;###autoload
 (defun cae-embark-act ()
+  "Call embark-act with current key as cycle key."
   (interactive)
   (require 'embark)
   (let ((embark-cycle-key (key-description (this-command-keys))))
@@ -422,24 +451,26 @@ jumping backwards."
 
 ;;;###autoload
 (defun cae-workspace-switch-to-9 ()
+  "Switch to workspace 9."
   (interactive)
   (+workspace/switch-to 9))
 
 ;;;###autoload
 (defun cae-workspace-switch-to-10 ()
+  "Switch to workspace 10."
   (interactive)
   (+workspace/switch-to 10))
 
 ;;;###autoload
 (defun cae-complete-in-minibuffer ()
+  "Complete symbol in minibuffer using consult."
   (interactive)
   (let  ((completion-in-region-function #'consult-completion-in-region))
     (call-interactively #'complete-symbol)))
 
 (defun cae-org-get-image-or-latex-filename-at-point ()
   "Get filename of org-mode image link, overlay or latex fragment.
-
-Coppied org-mode section from ox-clip.el."
+Copied from org-mode section in ox-clip.el."
   (require 'ov)
   (let ((scale nil) (el (org-element-context)))
     (cond
@@ -479,36 +510,40 @@ Coppied org-mode section from ox-clip.el."
 ;;;###autoload
 (defun cae-copy-image-to-clipboard (&optional image-file)
   "Copy image at point as clipboard image.
-
 This function recognizes org-mode links, org-mode latex, dired-mode files and
-image-mode buffers."
+image-mode buffers. Optional IMAGE-FILE can be provided directly."
   (interactive)
   (let ((image-file
          (or image-file
              (cond
-              ((derived-mode-p 'dired-mode) (dired-copy-filename-as-kill))
+              ((derived-mode-p 'dired-mode) 
+               (dired-get-filename nil t))
               ((derived-mode-p 'org-mode)
                (cae-org-get-image-or-latex-filename-at-point))
-              ((derived-mode-p 'image-mode) (buffer-file-name))
-              (t (let ((display (get-text-property (point) 'display)))
+              ((derived-mode-p 'image-mode) 
+               (buffer-file-name))
+              (t (when-let ((display (get-text-property (point) 'display)))
                    (when (eq 'image (car display))
                      (file-relative-name (plist-get (cdr display) :file)))))))))
-    (when image-file
-      (cond
-       ((eq system-type 'windows-nt)
-        (message "Not supported yet."))
-       ((eq system-type 'darwin)
-        (do-applescript
-         (format "set the clipboard to POSIX file \"%s\"" (expand-file-name image-file))))
-       ((eq system-type 'gnu/linux)
-        (call-process-shell-command
-         (format "xclip -selection clipboard -t image/%s -i %s"
-                 (file-name-extension image-file)
-                 image-file)))))
-    (message "Copied %s" image-file)))
+    (if (not image-file)
+        (user-error "No image found at point")
+      (let ((full-path (expand-file-name image-file)))
+        (pcase system-type
+         ('windows-nt
+          (message "Not supported on Windows yet."))
+         ('darwin
+          (do-applescript
+           (format "set the clipboard to POSIX file \"%s\"" full-path)))
+         ('gnu/linux
+          (call-process-shell-command
+           (format "xclip -selection clipboard -t image/%s -i %s"
+                   (file-name-extension image-file)
+                   (shell-quote-argument full-path))))))
+      (message "Copied %s" image-file))))
 
 ;;;###autoload
 (defun cae-insert-bracket-pair ()
+  "Insert angle bracket pair and position cursor between them."
   (interactive)
   (let* ((start (point))
          (end (progn (insert "<>") (point)))
@@ -528,20 +563,24 @@ image-mode buffers."
 
 ;;;###autoload
 (defun cae-call-leader-map ()
+  "Call the leader key map."
   (interactive)
   (setq unread-command-events (listify-key-sequence [menu])))
 
 ;;;###autoload
 (defun cae-open-eshell-in-new-workspace ()
+  "Open eshell in a new workspace."
   (interactive)
   (cae--open-terminal-in-new-workspace "*eshell*" #'eshell))
 
 ;;;###autoload
 (defun cae-open-vterm-in-new-workspace ()
+  "Open vterm in a new workspace."
   (interactive)
   (cae--open-terminal-in-new-workspace "*vterm*" #'vterm))
 
 (defun cae-ispell-simple-get-word ()
+  "Get the word at point for ispell."
   (require 'ispell)
   (car-safe (save-excursion (ispell-get-word nil))))
 
@@ -555,26 +594,27 @@ looking for a typo until the beginning of buffer. You can
 skip typos you don't want to fix with `SPC', and you can
 abort completely with `C-g'."
   (interactive "P")
-  (let (bef aft)
+  (require 'ispell)
+  (let (original corrected)
     (save-excursion
-      (while (if (setq bef (cae-ispell-simple-get-word))
-                 ;; Word was corrected or used quit.
-                 (if (ispell-word nil 'quiet)
-                     nil ; End the loop.
-                   ;; Also end if we reach `bob'.
-                   (not (bobp)))
-               ;; If there's no word at point, keep looking
-               ;; until `bob'.
-               (not (bobp)))
-        (backward-word)
-        (backward-char))
-      (setq aft (cae-ispell-simple-get-word)))
-    (if (and aft bef (not (equal aft bef)))
-        (let ((aft (downcase aft))
-              (bef (downcase bef)))
+      (while (and (not (bobp))
+                  (not (and original 
+                            (setq corrected (cae-ispell-simple-get-word))
+                            (not (equal original corrected)))))
+        (setq original (cae-ispell-simple-get-word))
+        (if original
+            (unless (ispell-word nil 'quiet)
+              (backward-word)
+              (backward-char))
+          (backward-word)
+          (backward-char))))
+    
+    (if (and original corrected (not (equal original corrected)))
+        (let ((original (downcase original))
+              (corrected (downcase corrected)))
           (define-abbrev
             (if p local-abbrev-table global-abbrev-table)
-            bef aft)
+            original corrected)
           (message "\"%s\" now expands to \"%s\" %sally"
-                   bef aft (if p "loc" "glob")))
+                   original corrected (if p "loc" "glob")))
       (user-error "No typo at or before point"))))
