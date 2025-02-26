@@ -289,9 +289,6 @@ reload the bookmarks from `bookmark-default-file'."
     (setq cae-multi-abbrev-watch-descriptor nil)
     (message "Stopped watching abbrev file.")))
 
-(defvar cae-multi-abbrev-watch-descriptor nil
-  "File notification descriptor for the abbrev file.")
-
 ;;;###autoload
 (defun cae-multi-start-abbrev-watch ()
   "Start watching the abbrev file for external changes.
@@ -316,11 +313,15 @@ Skip reloading if the change was made by Emacs itself."
       (when (and (not cae-multi-abbrev--emacs-is-writing)
                  (or (null old-mtime)
                      (not (time-equal-p new-mtime old-mtime))))
-        (message "Abbrev file changed externally – reloading abbrevs…")
-        (ignore-errors
-          (read-abbrev-file abbrev-file-name t))
-        (setq cae-multi-abbrev--file-mtime new-mtime)
-        (message "Abbrevs reloaded.")))))
+        (condition-case err
+            (progn
+              (message "Abbrev file changed externally – reloading abbrevs…")
+              (read-abbrev-file abbrev-file-name t)
+              (setq cae-multi-abbrev--file-mtime new-mtime)
+              (message "Abbrevs reloaded."))
+          (error
+           (message "Error reloading abbrevs: %s" (error-message-string err))))))))
+
 (defvar cae-multi--auto-save-abbrev-timer nil
   "Timer for deferred automatic saving of the abbrev file.")
 
@@ -336,12 +337,15 @@ If a timer is already active, do not schedule another."
           (run-with-idle-timer
            0.5 nil
            (lambda ()
-             (unless cae-multi-abbrev--auto-commit-disabled
-               (when abbrevs-changed
-                 (let ((cae-multi-abbrev--emacs-is-writing t))
-                   (write-abbrev-file abbrev-file-name nil)
-                   ;; Update our stored mtime.
-                   (setq cae-multi-abbrev--file-mtime
-                         (nth 5 (file-attributes abbrev-file-name)))
-                   (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*"))))
+             (when (and abbrevs-changed
+                        (not cae-multi-abbrev--auto-commit-disabled))
+               (condition-case err
+                   (let ((cae-multi-abbrev--emacs-is-writing t))
+                     (write-abbrev-file abbrev-file-name nil)
+                     ;; Update our stored mtime after successful write
+                     (setq cae-multi-abbrev--file-mtime
+                           (nth 5 (file-attributes abbrev-file-name)))
+                     (cae-multi--push-changes abbrev-file-name " *cae-multi-abbrev-push-changes-a*"))
+                 (error
+                  (message "Error saving abbrevs: %s" (error-message-string err)))))
              (setq cae-multi--auto-save-abbrev-timer nil))))))

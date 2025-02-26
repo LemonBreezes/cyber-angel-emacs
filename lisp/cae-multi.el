@@ -61,7 +61,66 @@
 
 ;;; Abbrevs
 
-(defvar cae-multi-abbrev--auto-commit-disabled nil)
+(defvar cae-multi-abbrev--auto-commit-disabled nil
+  "When non-nil, automatic saving of abbrev file is temporarily disabled.")
+
+(defvar cae-multi-abbrev--file-mtime nil
+  "Last known modification time of the abbrev file.
+Used to detect external changes to the file.")
+
+;;; Initialize abbrev file tracking
+(after! abbrev
+  (setq cae-multi-abbrev--file-mtime 
+        (and (file-exists-p abbrev-file-name)
+             (nth 5 (file-attributes abbrev-file-name)))))
+
+(defmacro with-abbrev-auto-save-disabled (&rest body)
+  "Execute BODY with automatic saving of the abbrev file disabled."
+  (declare (indent 0))
+  `(let ((cae-multi-abbrev--auto-commit-disabled t))
+     ,@body))
+
+(defun cae-multi--disable-auto-save-handler (orig-fun &rest args)
+  "Run ORIG-FUN with automatic abbrev file saving disabled.
+ARGS are passed on to ORIG-FUN. This prevents the advice on
+`define-abbrev' from scheduling a save during bulk operations such as
+reading the abbrev file or defining an abbrev table."
+  (with-abbrev-auto-save-disabled
+   (apply orig-fun args)))
+
+(defun cae-multi-auto-save-abbrev (&rest _args)
+  "Automatically schedule saving the abbrev file after a new abbrev is defined.
+This function is meant to be used as :after advice on `define-abbrev'.
+It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
+  (unless cae-multi-abbrev--auto-commit-disabled
+    (cae-multi--schedule-auto-save-abbrev))
+  nil)
+
+;;;###autoload
+(defun cae-multi--track-abbrev-write (orig-fun &rest args)
+  "Advice for `write-abbrev-file' to track when Emacs is writing the file.
+Sets `cae-multi-abbrev--emacs-is-writing' to t during the write operation
+and updates the stored modification time afterward."
+  (let ((cae-multi-abbrev--emacs-is-writing t))
+    (condition-case err
+        (prog1 (apply orig-fun args)
+          ;; Update our stored mtime after writing
+          (when (file-exists-p abbrev-file-name)
+            (setq cae-multi-abbrev--file-mtime
+                  (nth 5 (file-attributes abbrev-file-name)))))
+      (error
+       (setq cae-multi-abbrev--emacs-is-writing nil)
+       (signal (car err) (cdr err))))))
+
+;; Set up advice for abbrev-related functions
+(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
+(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
+(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
+(advice-add 'write-abbrev-file :around #'cae-multi--track-abbrev-write)
+
+;; Start watching abbrev file for changes on Linux systems
+(when (eq system-type 'gnu/linux)
+  (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
 
 ;;; Sync the repositories
 
@@ -85,49 +144,10 @@
 
 ;;; Hot reloading abbrevs
 
-(defvar cae-multi-abbrev--file-mtime nil)
-(after! abbrev
-  (setq cae-multi-abbrev--file-mtime (nth 5 (file-attributes abbrev-file-name))))
+(defvar cae-multi-abbrev-watch-descriptor nil
+  "File notification descriptor for the abbrev file.")
 
-(defvar cae-multi-abbrev--auto-commit-disabled nil
-  "Non-nil means that automatic saving of abbrev file is temporarily disabled.")
+;;; Hot reloading bookmarks
 
-(defmacro with-abbrev-auto-save-disabled (&rest body)
-  "Execute BODY with automatic saving of the abbrev file disabled."
-  `(let ((cae-multi-abbrev--auto-commit-disabled t))
-     ,@body))
-
-(defun cae-multi--disable-auto-save-handler (orig-fun &rest args)
-  "Run ORIG-FUN with automatic abbrev file saving disabled.
-ARGS are passed on to ORIG-FUN.  This prevents the advise on
-`define-abbrev' from scheduling a save during bulk operations such as
-reading the abbrev file or defining an abbrev table."
-  (with-abbrev-auto-save-disabled
-   (apply orig-fun args)))
-
-(defun cae-multi-auto-save-abbrev (&rest _args)
-  "Automatically schedule saving the abbrev file after a new abbrev is defined.
-This function is meant to be used as :after advice on `define-abbrev'.
-It does nothing if `cae-multi-abbrev--auto-commit-disabled' is non-nil."
-  (unless cae-multi-abbrev--auto-commit-disabled
-    (cae-multi--schedule-auto-save-abbrev))
-  nil)
-
-;;;###autoload
-(defun cae-multi--track-abbrev-write (orig-fun &rest args)
-  "Advice for `write-abbrev-file' to track when Emacs is writing the file.
-Sets `cae-multi-abbrev--emacs-is-writing' to t during the write operation."
-  (let ((cae-multi-abbrev--emacs-is-writing t))
-    (apply orig-fun args)
-    ;; Update our stored mtime after writing
-    (when (file-exists-p abbrev-file-name)
-      (setq cae-multi-abbrev--file-mtime
-            (nth 5 (file-attributes abbrev-file-name))))))
-
-(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
-(advice-add 'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
-(advice-add 'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
-(advice-add 'write-abbrev-file :around #'cae-multi--track-abbrev-write)
-
-(when (eq system-type 'gnu/linux)
-  (run-with-idle-timer 5 nil #'cae-multi-start-abbrev-watch))
+(defvar cae-multi-bookmark-watch-descriptor nil
+  "File notification descriptor for the bookmark file.")
