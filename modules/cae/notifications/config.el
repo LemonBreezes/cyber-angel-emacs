@@ -25,10 +25,6 @@
   :defer t :init
   (add-hook 'ednc-notification-presentation-functions
             #'ednc-popup-presentation-function)
-  ;;(add-hook 'ednc-notification-presentation-functions
-  ;;          #'cae-ednc-show-notification-in-buffer)
-  ;;(add-hook 'ednc-notification-presentation-functions
-  ;;          (lambda (&rest _) (force-mode-line-update t)))
   :config
   (setq alert-default-style 'libnotify)
   (map! :map ednc-view-mode-map
