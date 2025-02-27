@@ -314,7 +314,7 @@ This is a fallback for when parrot is not available."
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-forward-action (pt)
-  "Rotate word forward at point PT using parrot."
+  "Rotate word forward at point PT using parrot or fallback."
   (cae-avy-parrot-rotate-action 
    (if (featurep 'parrot) 
        #'parrot-rotate-next-word-at-point 
@@ -323,7 +323,7 @@ This is a fallback for when parrot is not available."
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-backward-action (pt)
-  "Rotate word backward at point PT using parrot."
+  "Rotate word backward at point PT using parrot or fallback."
   (cae-avy-parrot-rotate-action 
    (if (featurep 'parrot) 
        #'parrot-rotate-prev-word-at-point 
@@ -372,8 +372,8 @@ This is a fallback for when parrot is not available."
 
 ;;; Modeline functions
 
-(defun cae-modeline--rotate-word-at-point (rotate-function)
-  "Apply ROTATE-FUNCTION to word at point in modeline."
+(defun cae--rotate-word-at-point (rotate-function)
+  "Apply ROTATE-FUNCTION to word at point."
   (save-excursion
     (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
       (goto-char beg))
@@ -385,22 +385,30 @@ This is a fallback for when parrot is not available."
        (call-interactively rotate-function)))))
 
 ;;;###autoload
-(defun cae-modeline-rotate-forward-word-at-point ()
-  "Rotate word forward at point in modeline."
+(defun cae-rotate-forward-word-at-point ()
+  "Rotate word forward at point."
   (interactive)
-  (cae-modeline--rotate-word-at-point 
+  (cae--rotate-word-at-point 
    (if (featurep 'parrot) 
        #'parrot-rotate-next-word-at-point 
      #'cae-rotate-word-forward)))
 
 ;;;###autoload
-(defun cae-modeline-rotate-backward-word-at-point ()
-  "Rotate word backward at point in modeline."
+(defun cae-rotate-backward-word-at-point ()
+  "Rotate word backward at point."
   (interactive)
-  (cae-modeline--rotate-word-at-point 
+  (cae--rotate-word-at-point 
    (if (featurep 'parrot) 
        #'parrot-rotate-prev-word-at-point 
      #'cae-rotate-word-backward)))
+
+;;;###autoload
+(defalias 'cae-modeline-rotate-forward-word-at-point 'cae-rotate-forward-word-at-point
+  "Alias for backward compatibility.")
+
+;;;###autoload
+(defalias 'cae-modeline-rotate-backward-word-at-point 'cae-rotate-backward-word-at-point
+  "Alias for backward compatibility.")
 
 ;;; Workspace and EXWM functions
 
