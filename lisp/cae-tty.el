@@ -42,7 +42,6 @@
     (set-face-attribute 'magit-diff-added nil :background 'unspecified))
   (after! lsp-headerline
     (set-face-attribute 'header-line nil :inherit 'mode-line-inactive))
-  (remove-hook 'dired-mode-hook #'diredfl-mode)
 
   ;; Remove (error Window system frame should be used) in the terminal when using
   ;; `chatgpt-shell'.
