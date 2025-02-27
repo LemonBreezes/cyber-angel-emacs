@@ -405,7 +405,7 @@ Tries to find a suitable word to rotate, even if point is not directly on it."
   "Rotate word forward at point."
   (interactive)
   (cae--rotate-word-at-point 
-   (if (featurep 'parrot) 
+   (if cae-init-editor-enabled-p
        #'parrot-rotate-next-word-at-point 
      #'cae-rotate-word-forward)))
 
@@ -414,7 +414,7 @@ Tries to find a suitable word to rotate, even if point is not directly on it."
   "Rotate word backward at point."
   (interactive)
   (cae--rotate-word-at-point 
-   (if (featurep 'parrot) 
+   (if cae-init-editor-enabled-p
        #'parrot-rotate-prev-word-at-point 
      #'cae-rotate-word-backward)))
 
