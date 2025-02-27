@@ -418,14 +418,6 @@ Tries to find a suitable word to rotate, even if point is not directly on it."
        #'parrot-rotate-prev-word-at-point 
      #'cae-rotate-word-backward)))
 
-;;;###autoload
-(defalias 'cae-modeline-rotate-forward-word-at-point 'cae-rotate-forward-word-at-point
-  "Alias for backward compatibility.")
-
-;;;###autoload
-(defalias 'cae-modeline-rotate-backward-word-at-point 'cae-rotate-backward-word-at-point
-  "Alias for backward compatibility.")
-
 ;;; Workspace and EXWM functions
 
 (defvar cae-exwm-workspace-process-alist nil
