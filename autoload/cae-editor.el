@@ -226,6 +226,82 @@ mark the string and call `edit-indirect-region' with it."
              (edit-indirect-region)
              (goto-char (- pos (region-beginning)))))))
 
+;;; Rotation functions
+
+;;;###autoload
+(defun cae-rotate-word-at-point (direction)
+  "Rotate word at point in DIRECTION (1 for forward, -1 for backward).
+This is a fallback for when parrot is not available."
+  (let* ((bounds (bounds-of-thing-at-point 'symbol))
+         (word (and bounds (buffer-substring-no-properties (car bounds) (cdr bounds))))
+         (case-fold-search nil)
+         (rotations '(("true" "false")
+                      ("True" "False")
+                      ("yes" "no")
+                      ("Yes" "No")
+                      ("on" "off")
+                      ("On" "Off")
+                      ("up" "down")
+                      ("Up" "Down")
+                      ("left" "right")
+                      ("Left" "Right")
+                      ("width" "height")
+                      ("Width" "Height")
+                      ("horizontal" "vertical")
+                      ("Horizontal" "Vertical")
+                      ("&&" "||")
+                      ("and" "or")
+                      ("And" "Or")
+                      ("min" "max")
+                      ("Min" "Max")
+                      ("public" "private")
+                      ("Public" "Private")
+                      ("before" "after")
+                      ("Before" "After")
+                      ("+" "-")
+                      ("==" "!=")
+                      ("<" ">")
+                      ("<=" ">=")
+                      ("1" "0")
+                      ("enable" "disable")
+                      ("Enable" "Disable")
+                      ("enabled" "disabled")
+                      ("Enabled" "Disabled")
+                      ("first" "last")
+                      ("First" "Last")
+                      ("allow" "deny")
+                      ("Allow" "Deny")
+                      ("in" "out")
+                      ("In" "Out")
+                      ("dark" "light")
+                      ("Dark" "Light"))))
+    (when (and bounds word)
+      (let* ((group (cl-find-if (lambda (group) (member word group)) rotations))
+             (pos (when group (cl-position word group :test 'string=)))
+             (len (when group (length group)))
+             (next-pos (when (and pos len)
+                         (mod (+ pos direction) len)))
+             (next-word (when (and group next-pos)
+                          (nth next-pos group))))
+        (when next-word
+          (delete-region (car bounds) (cdr bounds))
+          (insert next-word)
+          t)))))
+
+;;;###autoload
+(defun cae-rotate-word-forward ()
+  "Rotate word at point forward through a predefined list."
+  (interactive)
+  (unless (cae-rotate-word-at-point 1)
+    (message "No rotation found for word at point")))
+
+;;;###autoload
+(defun cae-rotate-word-backward ()
+  "Rotate word at point backward through a predefined list."
+  (interactive)
+  (unless (cae-rotate-word-at-point -1)
+    (message "No rotation found for word at point")))
+
 ;;; Avy and selection functions
 
 (defun cae-avy-parrot-rotate-action (rotate-fn pt)
@@ -238,34 +314,60 @@ mark the string and call `edit-indirect-region' with it."
 ;;;###autoload
 (defun cae-avy-parrot-rotate-forward-action (pt)
   "Rotate word forward at point PT using parrot."
-  (cae-avy-parrot-rotate-action #'parrot-rotate-next-word-at-point pt))
+  (cae-avy-parrot-rotate-action 
+   (if (featurep 'parrot) 
+       #'parrot-rotate-next-word-at-point 
+     #'cae-rotate-word-forward)
+   pt))
 
 ;;;###autoload
 (defun cae-avy-parrot-rotate-backward-action (pt)
   "Rotate word backward at point PT using parrot."
-  (cae-avy-parrot-rotate-action #'parrot-rotate-prev-word-at-point pt))
+  (cae-avy-parrot-rotate-action 
+   (if (featurep 'parrot) 
+       #'parrot-rotate-prev-word-at-point 
+     #'cae-rotate-word-backward)
+   pt))
 
 ;;;###autoload
 (defun cae-avy-rotate ()
   "Use avy to select and rotate words from parrot dictionary."
   (interactive)
-  (require 'parrot)
   (setq avy-action #'cae-avy-parrot-rotate-forward-action)
-  (when-let* ((candidates
-               (let ((res))
-                 (cl-loop for words in parrot-rotate-dict
-                          do (dolist (window (window-list) res)
-                               (with-selected-window window
-                                 (save-excursion
-                                   (goto-char (window-start))
-                                   (while (re-search-forward
-                                           (regexp-opt (plist-get words :rot) 'symbols)
-                                           (window-end nil t) t)
-                                     (push (cons (bounds-of-thing-at-point 'symbol)
-                                                 (selected-window))
-                                           res))))))
-                 res)))
-    (avy-process candidates)))
+  (if (featurep 'parrot)
+      (when-let* ((candidates
+                   (let ((res))
+                     (cl-loop for words in parrot-rotate-dict
+                              do (dolist (window (window-list) res)
+                                   (with-selected-window window
+                                     (save-excursion
+                                       (goto-char (window-start))
+                                       (while (re-search-forward
+                                               (regexp-opt (plist-get words :rot) 'symbols)
+                                               (window-end nil t) t)
+                                         (push (cons (bounds-of-thing-at-point 'symbol)
+                                                     (selected-window))
+                                               res))))))
+                     res)))
+        (avy-process candidates))
+    ;; Fallback when parrot is not available
+    (let* ((rotations '("true" "false" "yes" "no" "on" "off" "up" "down" 
+                         "left" "right" "width" "height" "horizontal" "vertical"
+                         "&&" "||" "and" "or" "min" "max" "public" "private"
+                         "before" "after" "+" "-" "==" "!=" "<" ">" "<=" ">="
+                         "1" "0" "enable" "disable" "enabled" "disabled"
+                         "first" "last" "allow" "deny" "in" "out" "dark" "light"))
+           (regexp (regexp-opt rotations 'symbols))
+           (candidates))
+      (dolist (window (window-list) candidates)
+        (with-selected-window window
+          (save-excursion
+            (goto-char (window-start))
+            (while (re-search-forward regexp (window-end nil t) t)
+              (push (cons (bounds-of-thing-at-point 'symbol)
+                          (selected-window))
+                    candidates)))))
+      (avy-process candidates))))
 
 ;;; Modeline functions
 
@@ -285,13 +387,19 @@ mark the string and call `edit-indirect-region' with it."
 (defun cae-modeline-rotate-forward-word-at-point ()
   "Rotate word forward at point in modeline."
   (interactive)
-  (cae-modeline--rotate-word-at-point #'parrot-rotate-next-word-at-point))
+  (cae-modeline--rotate-word-at-point 
+   (if (featurep 'parrot) 
+       #'parrot-rotate-next-word-at-point 
+     #'cae-rotate-word-forward)))
 
 ;;;###autoload
 (defun cae-modeline-rotate-backward-word-at-point ()
   "Rotate word backward at point in modeline."
   (interactive)
-  (cae-modeline--rotate-word-at-point #'parrot-rotate-prev-word-at-point))
+  (cae-modeline--rotate-word-at-point 
+   (if (featurep 'parrot) 
+       #'parrot-rotate-prev-word-at-point 
+     #'cae-rotate-word-backward)))
 
 ;;; Workspace and EXWM functions
 
