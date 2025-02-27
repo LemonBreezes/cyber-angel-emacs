@@ -93,6 +93,7 @@ normally have their errors suppressed."
 
 ;;; Mode-line debugging
 
+;;;###autoload
 (defun cae-debug-show-mode-line-segments ()
   "Display all mode-line segments in a dedicated buffer.
 Each segment (an element of `mode-line-format’) is printed along with its evaluated result,
