@@ -272,6 +272,19 @@ mark the string and call `edit-indirect-region' with it."
     ("Dark" "Light"))
   "Pairs of words that can be rotated between each other.")
 
+(defun cae--get-rotation-function (direction)
+  "Get the appropriate rotation function based on availability.
+DIRECTION should be 'forward or 'backward."
+  (cond
+   ((and (featurep 'parrot) cae-init-editor-enabled-p)
+    (if (eq direction 'forward)
+        #'parrot-rotate-next-word-at-point
+      #'parrot-rotate-prev-word-at-point))
+   (t
+    (if (eq direction 'forward)
+        #'cae-rotate-word-forward-internal
+      #'cae-rotate-word-backward-internal))))
+
 ;;;###autoload
 (defun cae-rotate-word-at-point (direction)
   "Rotate word at point in DIRECTION (1 for forward, -1 for backward).
@@ -292,25 +305,36 @@ This is a fallback for when parrot is not available."
           (insert next-word)
           t)))))
 
+;; Internal implementation functions
+(defun cae-rotate-word-forward-internal ()
+  "Internal implementation to rotate word forward."
+  (interactive)
+  (unless (cae-rotate-word-at-point 1)
+    (message "No rotation found for word at point")))
+
+(defun cae-rotate-word-backward-internal ()
+  "Internal implementation to rotate word backward."
+  (interactive)
+  (unless (cae-rotate-word-at-point -1)
+    (message "No rotation found for word at point")))
+
 ;;;###autoload
 (defun cae-rotate-word-forward ()
   "Rotate word at point forward through a predefined list."
   (interactive)
-  (unless (cae-rotate-word-at-point 1)
-    (message "No rotation found for word at point")))
+  (call-interactively (cae--get-rotation-function 'forward)))
 
 ;;;###autoload
 (defun cae-rotate-word-backward ()
   "Rotate word at point backward through a predefined list."
   (interactive)
-  (unless (cae-rotate-word-at-point -1)
-    (message "No rotation found for word at point")))
+  (call-interactively (cae--get-rotation-function 'backward)))
 
 ;;; Avy rotation functions
 
 (defun cae--get-rotation-candidates ()
   "Get candidates for rotation from visible windows."
-  (if (featurep 'parrot)
+  (if (and (featurep 'parrot) cae-init-editor-enabled-p)
       ;; Use parrot dictionary when available
       (let ((res))
         (cl-loop for words in parrot-rotate-dict
@@ -350,18 +374,14 @@ This is a fallback for when parrot is not available."
 (defun cae-avy-rotate-forward-action (pt)
   "Rotate word forward at point PT using parrot or fallback."
   (cae-avy-rotate-action 
-   (if (featurep 'parrot) 
-       #'parrot-rotate-next-word-at-point 
-     #'cae-rotate-word-forward)
+   (cae--get-rotation-function 'forward)
    pt))
 
 ;;;###autoload
 (defun cae-avy-rotate-backward-action (pt)
   "Rotate word backward at point PT using parrot or fallback."
   (cae-avy-rotate-action 
-   (if (featurep 'parrot) 
-       #'parrot-rotate-prev-word-at-point 
-     #'cae-rotate-word-backward)
+   (cae--get-rotation-function 'backward)
    pt))
 
 ;;;###autoload
@@ -404,19 +424,13 @@ Tries to find a suitable word to rotate, even if point is not directly on it."
 (defun cae-rotate-forward-word-at-point ()
   "Rotate word forward at point."
   (interactive)
-  (cae--rotate-word-at-point 
-   (if cae-init-editor-enabled-p
-       #'parrot-rotate-next-word-at-point 
-     #'cae-rotate-word-forward)))
+  (cae--rotate-word-at-point (cae--get-rotation-function 'forward)))
 
 ;;;###autoload
 (defun cae-rotate-backward-word-at-point ()
   "Rotate word backward at point."
   (interactive)
-  (cae--rotate-word-at-point 
-   (if cae-init-editor-enabled-p
-       #'parrot-rotate-prev-word-at-point 
-     #'cae-rotate-word-backward)))
+  (cae--rotate-word-at-point (cae--get-rotation-function 'backward)))
 
 ;;; Workspace and EXWM functions
 
