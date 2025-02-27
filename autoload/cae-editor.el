@@ -237,6 +237,7 @@ This is a fallback for when parrot is not available."
          (case-fold-search nil)
          (rotations '(("true" "false")
                       ("True" "False")
+                      ("t" "nil")
                       ("yes" "no")
                       ("Yes" "No")
                       ("on" "off")
