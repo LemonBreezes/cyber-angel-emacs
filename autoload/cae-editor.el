@@ -42,9 +42,9 @@ using the tab-width variable."
   (let* ((lines (split-string (replace-regexp-in-string "\t" (make-string tab-width ?\s) str) "\n"))
          (non-empty-lines (cl-remove-if #'string-empty-p lines))
          (indentations (mapcar (lambda (line)
-                                (string-match "^[[:space:]]*" line)
-                                (match-end 0))
-                              non-empty-lines))
+                                 (string-match "^[[:space:]]*" line)
+                                 (match-end 0))
+                               non-empty-lines))
          (min-indentation (if indentations (apply #'min indentations) 0)))
     (mapconcat
      (lambda (line)
@@ -353,11 +353,11 @@ This is a fallback for when parrot is not available."
         (avy-process candidates))
     ;; Fallback when parrot is not available
     (let* ((rotations '("true" "false" "yes" "no" "on" "off" "up" "down" 
-                         "left" "right" "width" "height" "horizontal" "vertical"
-                         "&&" "||" "and" "or" "min" "max" "public" "private"
-                         "before" "after" "+" "-" "==" "!=" "<" ">" "<=" ">="
-                         "1" "0" "enable" "disable" "enabled" "disabled"
-                         "first" "last" "allow" "deny" "in" "out" "dark" "light"))
+                        "left" "right" "width" "height" "horizontal" "vertical"
+                        "&&" "||" "and" "or" "min" "max" "public" "private"
+                        "before" "after" "+" "-" "==" "!=" "<" ">" "<=" ">="
+                        "1" "0" "enable" "disable" "enabled" "disabled"
+                        "first" "last" "allow" "deny" "in" "out" "dark" "light"))
            (regexp (regexp-opt rotations 'symbols))
            (candidates))
       (dolist (window (window-list) candidates)
@@ -722,16 +722,16 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
         (user-error "No image found at point")
       (let ((full-path (expand-file-name image-file)))
         (pcase system-type
-         ('windows-nt
-          (message "Not supported on Windows yet."))
-         ('darwin
-          (do-applescript
-           (format "set the clipboard to POSIX file \"%s\"" full-path)))
-         ('gnu/linux
-          (call-process-shell-command
-           (format "xclip -selection clipboard -t image/%s -i %s"
-                   (file-name-extension image-file)
-                   (shell-quote-argument full-path))))))
+          ('windows-nt
+           (message "Not supported on Windows yet."))
+          ('darwin
+           (do-applescript
+            (format "set the clipboard to POSIX file \"%s\"" full-path)))
+          ('gnu/linux
+           (call-process-shell-command
+            (format "xclip -selection clipboard -t image/%s -i %s"
+                    (file-name-extension image-file)
+                    (shell-quote-argument full-path))))))
       (message "Copied %s" image-file))))
 
 ;;; Ispell functions
