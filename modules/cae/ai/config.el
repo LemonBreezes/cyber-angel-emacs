@@ -40,7 +40,8 @@
   (setq aidermacs-backend (if (modulep! :term vterm) 'vterm 'comint))
   (setq aidermacs-extra-args
         '("--cache-prompts"
-          "--chat-language" "English"))
+          "--chat-language" "English"
+          "--editor-edit-format" "editor-whole"))
   (defadvice! cae-aidermacs-run-make-real-buffer-a ()
     :after #'aidermacs-run
     (when-let ((buf (get-buffer (aidermacs-buffer-name)))
