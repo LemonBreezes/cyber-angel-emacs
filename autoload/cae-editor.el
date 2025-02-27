@@ -269,6 +269,8 @@ mark the string and call `edit-indirect-region' with it."
     ("Allow" "Deny")
     ("in" "out")
     ("In" "Out")
+    ("night" "day")
+    ("Night" "Day")
     ("dark" "light")
     ("Dark" "Light"))
   "Pairs of words that can be rotated between each other.")
