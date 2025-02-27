@@ -6,7 +6,7 @@
   (defvar cae-init-preamble-enabled-p (and q t))
   (defvar cae-init-core-enabled-p (and q t))
   (defvar cae-keyboard-remaps-enabled-p (and q nil))
-  (let ((p (and q t)))
+  (let ((p (and q nil)))
     (defvar cae-init-ui-enabled-p (and p t))
     (defvar cae-init-tools-enabled-p (and p t))
     (defvar cae-init-editor-enabled-p (and p t))
@@ -17,6 +17,10 @@
     (defvar cae-init-term-enabled-p (and p t))
     (defvar cae-init-languages-enabled-p (and p t))
     (defvar cae-init-appendix-enabled-p (and p t))))
+
+(when (> emacs-major-version 30)
+  (advice-add #'corfu--popup-support-p :override #'always)
+  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
 
 (when cae-init-preamble-enabled-p
   (load! "preamble"))
