@@ -275,7 +275,7 @@
   (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
   (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
-  (setq parrot-animate 'hide-static
+  (setq parrot-animate (when (cae-display-graphic-p) 'hide-static)
         parrot-num-rotations 3
         parrot-animate-on-load nil
         parrot-party-on-magit-push t
