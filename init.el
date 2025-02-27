@@ -20,7 +20,7 @@
 
 (when (> emacs-major-version 30)
   (advice-add #'corfu--popup-support-p :override #'always)
-  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
+  (advice-add #'corfu-terminal-mode :override #'ignore))
 
 (when cae-init-preamble-enabled-p
   (load! "preamble"))
