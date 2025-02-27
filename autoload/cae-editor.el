@@ -232,6 +232,7 @@ mark the string and call `edit-indirect-region' with it."
   '(("true" "false")
     ("True" "False")
     ("t" "nil")
+    ("forward" "backward")
     ("yes" "no")
     ("Yes" "No")
     ("on" "off")
