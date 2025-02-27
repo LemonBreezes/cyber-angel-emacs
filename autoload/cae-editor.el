@@ -334,7 +334,8 @@ This is a fallback for when parrot is not available."
 
 (defun cae--get-rotation-candidates ()
   "Get candidates for rotation from visible windows."
-  (if (and (featurep 'parrot) cae-init-editor-enabled-p)
+  (if (and cae-init-editor-enabled-p
+           (require 'parrot nil t))
       ;; Use parrot dictionary when available
       (let ((res))
         (cl-loop for words in parrot-rotate-dict
@@ -391,19 +392,6 @@ This is a fallback for when parrot is not available."
   (setq avy-action #'cae-avy-rotate-forward-action)
   (when-let ((candidates (cae--get-rotation-candidates)))
     (avy-process candidates)))
-
-;; Backward compatibility aliases
-;;;###autoload
-(defalias 'cae-avy-parrot-rotate-action 'cae-avy-rotate-action
-  "Backward compatibility alias for `cae-avy-rotate-action'.")
-
-;;;###autoload
-(defalias 'cae-avy-parrot-rotate-forward-action 'cae-avy-rotate-forward-action
-  "Backward compatibility alias for `cae-avy-rotate-forward-action'.")
-
-;;;###autoload
-(defalias 'cae-avy-parrot-rotate-backward-action 'cae-avy-rotate-backward-action
-  "Backward compatibility alias for `cae-avy-rotate-backward-action'.")
 
 ;;; Rotation UI functions
 
