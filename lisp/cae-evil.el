@@ -289,6 +289,10 @@
         ;; Extend `evil-escape' to quit transients.
         "<key-chord>" #'transient-quit-all))
 
+;; Add rotation commands
+(map! :n "]r" #'cae-rotate-forward-word-at-point
+      :n "[r" #'cae-rotate-backward-word-at-point)
+
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
 ;;End:
