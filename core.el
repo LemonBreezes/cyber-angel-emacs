@@ -30,6 +30,8 @@
       '(idle . 10))
 (setq persistent-scratch-backup-directory
       (concat doom-cache-dir "persistent-scratch-backups/"))
+(setq persistent-scratch-save-file
+      (concat user-emacs-directory "persistent-scratch"))
 (make-directory persistent-scratch-backup-directory t)
 (setq persistent-scratch-backup-filter
       (lambda (_)
