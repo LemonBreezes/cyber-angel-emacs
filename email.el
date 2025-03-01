@@ -22,26 +22,22 @@
 
 (when (modulep! :email mu4e)
   (use-package! consult-mu
-    :when (and (modulep! :email mu4e)
-               (modulep! :completion vertico))
-    :commands consult-mu
-    :defer t :custom
-    (consult-mu-maxnum 200)
-    (consult-mu-preview-key 'any)
-    (consult-mu-mark-previewed-as-read nil)
-    (consult-mu-mark-viewed-as-read t)
-    (consult-mu-use-wide-reply t)
-    ;; define a template for headers view in minibuffer. The example below
-    ;; adjusts the width based on the width of the screen.
-    (consult-mu-headers-template
-     (lambda () (concat "%f"
-                        (number-to-string (floor (* (frame-width) 0.15)))
-                        "%s"
-                        (number-to-string (floor (* (frame-width) 0.5)))
-                        "%d13" "%g" "%x")))
-    :init
+    :commands consult-mu :defer t :init
     (map! [remap mu4e-search] #'consult-mu)
     :config
+    (setq consult-mu-maxnum 200)
+    (setq consult-mu-preview-key 'any)
+    (setq consult-mu-mark-previewed-as-read nil)
+    (setq consult-mu-mark-viewed-as-read t)
+    (setq consult-mu-use-wide-reply t)
+    ;; define a template for headers view in minibuffer. The example below
+    ;; adjusts the width based on the width of the screen.
+    (setq consult-mu-headers-template
+          (lambda () (concat "%f"
+                             (number-to-string (floor (* (frame-width) 0.15)))
+                             "%s"
+                             (number-to-string (floor (* (frame-width) 0.5)))
+                             "%d13" "%g" "%x")))
     ;;create a list of saved searches for quick access using
     ;;`history-next-element' with `M-n' in minibuffer. Note the "#" character
     ;;at the beginning of each query! Change these according to
@@ -68,7 +64,7 @@
     ;; `consult-mu-dynamic' is way too slow.
     (setq consult-mu-default-command #'consult-mu-async))
 
-  (map! [remap compose-mail] #'+mu4e/compose))
-(after! mu4e-vars
-  (setq mu4e-modeline-support t
-        mu4e-notification-support t))
+  (map! [remap compose-mail] #'+mu4e/compose)
+  (after! mu4e-vars
+    (setq mu4e-modeline-support t
+          mu4e-notification-support t)))
