@@ -1,7 +1,7 @@
 ;;; tools.el -*- lexical-binding: t; -*-
 
 (when (modulep! :tools lsp)
-  (load! "lisp/cae-lsp"))
+  (load! "lisp/cae-lsp" doom-user-dir))
 
 ;; Disable Semantic.
 (defadvice! cae-semantic-disable-a (&rest _)
