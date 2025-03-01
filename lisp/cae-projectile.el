@@ -34,7 +34,6 @@
 ;; value in the cache.
 (setq projectile-project-root-functions
       '(;;projectile-root-local
-        cae-projectile-root-local
         projectile-root-marked
         projectile-root-bottom-up
         projectile-root-top-down
