@@ -6,7 +6,8 @@
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
 (use-package! exwm-evil
-  :after exwm
+  :when (modulep! :editor evil)
+  :defer t :after exwm
   :config
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
   (cl-pushnew 'escape exwm-input-prefix-keys)
