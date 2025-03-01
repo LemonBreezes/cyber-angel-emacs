@@ -7,7 +7,7 @@
        '(dired transient dirvish diredfl dirvish-widgets dirvish-side
          dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
-   anzu
+   anzu isearch-mb
    ,@(when (modulep! :editor evil)
        '(evil-anzu))
    ,@(when (modulep! :term eshell)
