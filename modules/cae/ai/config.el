@@ -195,7 +195,8 @@
     (goto-char (point-max))))
 
 (use-package! elysium
-  :defer t :autoload (elysium-query)
+  :defer t :init
+  (autoload #'elysium-query "elysium")
   :custom
   (elysium-window-size 0.5)
   (elysium-window-style 'vertical))
