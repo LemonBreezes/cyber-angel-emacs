@@ -19,7 +19,7 @@
     (defvar cae-init-appendix-enabled-p (and p t))))
 
 (when cae-init-preamble-enabled-p
-  (load! "preamble"))
+  (load! "preamble" doom-user-dir))
 
 (doom! :completion
        (vertico +icons +childframe)

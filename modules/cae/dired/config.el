@@ -76,7 +76,7 @@
   (setq dirvish-show-media-properties t))
 
 (after! dirvish-quick-access
-  (setq! dirvish-quick-access-entries
+  (setopt dirvish-quick-access-entries
          `(("h" "~/" "Home")
            ("e" ,doom-emacs-dir "Emacs user directory")
            ("d" "~/Downloads/" "Downloads")

@@ -2,7 +2,7 @@
 
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
-  (load! (concat cae-multi-secrets-dir "secrets.el")))
+  (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
 ;; Ensure this is defined even if its module is not loaded.
 (unless (boundp '+default-minibuffer-maps)
@@ -46,18 +46,18 @@
 (persistent-scratch-setup-default)
 
 (require 'cae-lib)
-(load! "lisp/cae-tty")
-(load! "lisp/cae-bindings")
-(load! "lisp/cae-multi")              ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens")        ;Allow Smartparens to be disabled. This
+(load! "lisp/cae-tty" doom-user-dir)
+(load! "lisp/cae-bindings" doom-user-dir)
+(load! "lisp/cae-multi" doom-user-dir)              ;Run parallel Emacs instances.
+(load! "lisp/cae-smartparens" doom-user-dir)        ;Allow Smartparens to be disabled. This
                                         ;is also our Smartparens configuration.
-(load! "lisp/cae-projectile")         ;Allow Projectile to be disabled. This
+(load! "lisp/cae-projectile" doom-user-dir)         ;Allow Projectile to be disabled. This
                                         ;is also our Projectile configuration.
 (when (modulep! :editor evil)
   (after! evil
-    (load! "lisp/cae-evil")))
+    (load! "lisp/cae-evil" doom-user-dir)))
 (add-hook! 'exwm-init-hook
-  (load! "lisp/cae-exwm"))
+  (load! "lisp/cae-exwm" doom-user-dir))
 
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
