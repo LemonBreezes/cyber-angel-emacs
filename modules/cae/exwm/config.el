@@ -30,10 +30,6 @@
     (when init-file-debug
       (exwm-debug +1))
 
-    (require 'exwm-systemtray)
-    (setq exwm-systemtray-height (line-pixel-height))
-    (exwm-systemtray-enable)
-
     (cond ((modulep! :ui workspaces)
            (setq exwm-input-global-keys
                  `(;; Bind "s-r" to exit char-mode and fullscreen mode.
