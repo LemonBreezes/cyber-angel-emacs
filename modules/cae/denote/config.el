@@ -30,3 +30,7 @@
 
 (use-package! denote-menu
   :defer t)
+
+;;Local Variables:
+;;eval: (unless (modulep! :cae denote) (remove-hook 'write-file-functions #'eval-buffer t))
+;;End:
