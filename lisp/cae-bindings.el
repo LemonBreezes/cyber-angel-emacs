@@ -308,7 +308,6 @@
 
 
 ;;; Leader keybindings
-(autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
       (:prefix "i"
        (:when (modulep! :completion vertico)
