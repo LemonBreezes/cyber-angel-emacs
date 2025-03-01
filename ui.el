@@ -1,7 +1,8 @@
 ;;; ui.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-theme")
-(load! "lisp/cae-visual-scrolling")
+(unless (eq (cae-terminal-type) 0)
+  (load! "lisp/cae-theme"))
+(load! "lisp/cae-visual-scrolling" doom-user-dir)
 
 ;; Show absolute line numbers. I prefer to not show relative line numbers
 ;; because I use `avy' commands to jump to lines.
@@ -326,16 +327,16 @@
     (add-to-list 'beacon-dont-blink-commands cmd)))
 
 (use-package! indent-bars
-  :custom
-  (indent-bars-treesit-support t)
-  (indent-bars-no-descend-string t)
-  (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  (indent-bars-treesit-wrap '((python argument_list parameters ; for python,
-                                        ; as an example
-                               list list_comprehension
-                               dictionary dictionary_comprehension
-                               parenthesized_expression subscript)))
-  :hook ((python-base-mode yaml-mode lua-mode) . indent-bars-mode))
+  :defer t :init
+  (add-hook! (python-base-mode yaml-mode lua-mode) #'indent-bars-mode)
+  :config
+  (setq indent-bars-treesit-support t)
+  (setq indent-bars-no-descend-string t)
+  (setq indent-bars-treesit-ignore-blank-lines-types '("module"))
+  (setq indent-bars-treesit-wrap '((python argument_list parameters
+                                    list list_comprehension
+                                    dictionary dictionary_comprehension
+                                    parenthesized_expression subscript))))
 
 (use-package! casual-calc
   :defer t :init
