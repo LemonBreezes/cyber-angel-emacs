@@ -20,7 +20,7 @@
           "INBOX" ;; or "mail.misc" for nnml/POP3
           ))
 
-  (setq!
+  (setopt
    message-subscribed-address-functions '(gnus-find-subscribed-addresses)
    gnus-group-use-permanent-levels t
    gnus-agent-queue-mail nil
