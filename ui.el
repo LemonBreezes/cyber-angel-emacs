@@ -34,6 +34,9 @@
 (after! persp-mode
   (setq persp-reset-windows-on-nil-window-conf t))
 
+(after! helpful
+  (setq helpful-set-variable-function #'setopt))
+
 (after! image
   (setq image-use-external-converter t))
 
