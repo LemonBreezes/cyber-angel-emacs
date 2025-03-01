@@ -204,8 +204,6 @@
   :after magit
   :defer t :config
   (magit-file-icons-mode 1)
-  :custom
-  ;; These are the default values:
-  (magit-file-icons-enable-diff-file-section-icons t)
-  (magit-file-icons-enable-untracked-icons t)
-  (magit-file-icons-enable-diffstat-icons t))
+  (setq magit-file-icons-enable-diff-file-section-icons t)
+  (setq magit-file-icons-enable-untracked-icons t)
+  (setq magit-file-icons-enable-diffstat-icons t))
