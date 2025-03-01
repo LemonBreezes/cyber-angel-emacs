@@ -229,7 +229,7 @@
 
   (when (and (modulep! +emms) (modulep! :cae misc-applications))
     (use-package! emms-mode-line-cycle
-      :after emms :config
+      :defer t :after emms :config
       (require 'emms-playing-time)
       (require 'emms-mode-line)
       (require 'emms-mode-line-cycle)
