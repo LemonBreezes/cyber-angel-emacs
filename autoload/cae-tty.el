@@ -8,7 +8,7 @@
    ((getenv "WT_SESSION")
     1)
    ;; Linux virtual console (tty). The TERM variable is usually "linux"
-   ((string= (or (getenv "TERM") "") "linux")
+   ((string-prefix-p "/dev/tty" (terminal-name))
     0)
    ;; Otherwise, if LANG indicates UTF-8 you’re probably in a modern terminal emulator.
    ((and (getenv "LANG") (string-match "utf8" (getenv "LANG")))
