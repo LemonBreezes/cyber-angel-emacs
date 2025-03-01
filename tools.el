@@ -279,8 +279,7 @@
 
 (use-package! detached
   :when (executable-find "dtach")
-  :defer 3.0
-  :init
+  :defer 3.0 :init
   (map! ;; Replace `async-shell-command' with `detached-shell-command'
    [remap async-shell-command] #'detached-shell-command
    ;; Replace `compile' with `detached-compile'
