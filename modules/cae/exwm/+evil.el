@@ -33,7 +33,7 @@
 
 (use-package! exwm-firefox-evil
   :when (modulep! :editor evil)
-  :after exwm
+  :defer t :after exwm
   :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
   ;; We can use VIM keys with any browser that has compatible keybindings.
