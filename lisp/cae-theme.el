@@ -58,7 +58,7 @@
     :when (and cae-theme-extend-heading-faces
                (not cae-theme-disable-outline-headings))
     :defer t :init
-    (advice-add 'outline-flag-region :after 'backline-update)))
+    (advice-add #'outline-flag-region :after #'backline-update)))
 
 (defun cae-theme-customize-faces-h (_)
   ;; Make the mouse cursor more visible.
