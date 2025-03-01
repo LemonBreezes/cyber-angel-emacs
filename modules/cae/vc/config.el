@@ -103,7 +103,7 @@
         vc-make-backup-files t))
 
 (use-package! embark-vc
-  :after embark)
+  :defer t :after embark)
 
 (use-package! consult-gh
   :defer t :when (modulep! :completion vertico) :init
