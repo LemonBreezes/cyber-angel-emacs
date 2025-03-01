@@ -167,7 +167,7 @@
 
 (use-package! gnus-dired
   :defer t :init
-  (add-hook 'dired-mode-hook #'gnus-dired-mode))
+  (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode))
 
 (use-package! spam
   :defer t :after gnus)
