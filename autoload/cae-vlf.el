@@ -1,6 +1,6 @@
 ;;; autoload/cae-vlf.el -*- lexical-binding: t; -*-
 
-(defvar +vlf-cumulative-linenum nil
+(defvar cae-vlf-cumulative-linenum nil
   "Alist mapping file positions to cumulative line numbers.")
 
 ;;;###autoload
@@ -44,12 +44,12 @@ OFFER-RAW if non-nil, offer a \"literal\" option."
   "Update line number offset for VLF mode.
 Calculates and sets the appropriate line number offset based on
 the current chunk position in the file."
-  (let ((linenum-offset (alist-get vlf-start-pos +vlf-cumulative-linenum)))
+  (let ((linenum-offset (alist-get vlf-start-pos cae-vlf-cumulative-linenum)))
     (setq display-line-numbers-offset (or linenum-offset 0))
-    (when (and linenum-offset (not (assq vlf-end-pos +vlf-cumulative-linenum)))
+    (when (and linenum-offset (not (assq vlf-end-pos cae-vlf-cumulative-linenum)))
       (push (cons vlf-end-pos (+ linenum-offset
                                  (count-lines (point-min) (point-max))))
-            +vlf-cumulative-linenum))))
+            cae-vlf-cumulative-linenum))))
 
 ;;;###autoload
 (defun cae-vlf-next-chunk-or-start ()
