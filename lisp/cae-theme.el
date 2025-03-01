@@ -17,7 +17,7 @@
 
 (defvar cae-day-theme cae-modus-day-theme)
 (defvar cae-night-theme cae-modus-night-theme)
-(setq doom-theme cae-night-theme)
+(setq doom-theme (unless (eq (cae-terminal-type) 0) cae-night-theme))
 
 (when cae-theme-enable-modeline-bell
   (defface cae-modeline-bell-face
