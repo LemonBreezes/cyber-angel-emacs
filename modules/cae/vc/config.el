@@ -106,8 +106,7 @@
   :after embark)
 
 (use-package! consult-gh
-  :defer t :when (modulep! :completion vertico)
-  :init
+  :defer t :when (modulep! :completion vertico) :init
   (setq consult-gh-prioritize-local-folder 'suggest
         consult-gh-confirm-before-clone nil)
   (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
