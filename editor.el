@@ -316,7 +316,7 @@
     (goto-char (point-at-eol))))
 
 (use-package! isearch-mb
-  :after-call isearch-mode-hook :init
+  :defer t :after-call isearch-mode-hook :init
   (when (modulep! :editor evil)
     (after! evil
       ;; I prefer `isearch' combined with `isearch-mb'.
