@@ -94,7 +94,7 @@
 
 (when (modulep! :tools lsp +eglot)
   (use-package! eglot-booster
-    :after eglot
+    :defer t :after eglot
     :config (eglot-booster-mode +1))
 
   (after! eglot
