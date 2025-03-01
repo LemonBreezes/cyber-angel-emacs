@@ -173,8 +173,7 @@
          :desc "Find snippet for mode" "m" #'+snippets/find-for-current-mode
          :desc "Find snippet" "f" #'+snippets/find)))
 
-(when (and (modulep! :checkers syntax)
-           (not (modulep! :checkers syntax +flymake)))
+(when (modulep! :checkers syntax -flymake)
   (after! flycheck
     (define-key flycheck-mode-map flycheck-keymap-prefix nil))
   (map! :leader
