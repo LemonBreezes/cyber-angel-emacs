@@ -161,7 +161,7 @@
 
 (use-package! diff-ansi
   :when (modulep! +delta)
-  :after magit-diff
+  :defer t :after magit-diff
   :config
   (setq diff-ansi-extra-args-for-delta
         '("--no-gitconfig" "--true-color=always" "--paging=never"))
