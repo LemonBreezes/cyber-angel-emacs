@@ -92,6 +92,7 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
+;; TODO Determine if I upstream this back to `exwm-evil'.
 (defun exwm-evil--on-ButtonPress-line-mode (buffer button-event)
   "Handle button events in line mode.
 BUFFER is the `exwm-mode' buffer the event was generated
