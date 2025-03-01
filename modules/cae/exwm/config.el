@@ -7,6 +7,7 @@
                                          (getenv "RATPOISON")
                                          (getenv "I3SOCK")
                                          (getenv "KDE_FULL_SESSION")
+                                         t
                                          (getenv "GNOME_DESKTOP_SESSION_ID")
                                          (getenv "XDG_CURRENT_DESKTOP")
                                          (getenv "WAYLAND_DISPLAY"))))
