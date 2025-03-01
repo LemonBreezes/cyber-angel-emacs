@@ -179,9 +179,6 @@
   (diff-ansi-mode +1))
 
 (use-package! difftastic
-  :bind (:map magit-blame-read-only-mode-map
-         ("D" . difftastic-magit-show)
-         ("S" . difftastic-magit-show))
   :init
   (after! evil
     (evil-set-initial-state 'difftastic-mode 'emacs))
@@ -190,6 +187,9 @@
       (transient-append-suffix 'magit-diff '(-1 -1)
         [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
          ("S" "Difftastic show" difftastic-magit-show)])))
+  (after! magit-blame
+    (define-key magit-blame-read-only-mode-map (kbd "D") 'difftastic-magit-show)
+    (define-key magit-blame-read-only-mode-map (kbd "S") 'difftastic-magit-show))
   (defun cae-difftastic--requested-window-width-single-window ()
     (- (frame-width) (fringe-columns 'left) (fringe-columns 'right)))
   :config
