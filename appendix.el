@@ -7,6 +7,9 @@
        '(dired transient dirvish diredfl dirvish-widgets dirvish-side
          dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
+   anzu
+   ,@(when (modulep! :editor evil)
+       '(evil-anzu))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
@@ -70,7 +73,7 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc                         ; The music apps are in a previous line.
+       (nconc                           ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
