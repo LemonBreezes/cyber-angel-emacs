@@ -83,8 +83,7 @@
 (use-package! gnus-group
   :defer t :init
   (autoload 'gnus-topic-mode "gnus-topic")
-  :hook
-  (gnus-group-mode . gnus-topic-mode)
+  (add-hook 'gnus-group-mode #'gnus-topic-mode)
   :config
   ;;          indentation ------------.
   ;;  #      process mark ----------. |
