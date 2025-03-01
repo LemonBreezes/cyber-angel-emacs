@@ -29,7 +29,8 @@
               (when (executable-find "mpd")
                 '(mpc))))
    ,@(when (modulep! :cae ai)
-       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit))
+       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit
+         aider aidermacs elysium minuet dall-e-shell))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
