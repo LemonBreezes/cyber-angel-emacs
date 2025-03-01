@@ -65,10 +65,9 @@
                            '(haskell-mode lean4-mode python-mode text-mode))
             (evil-cleverparens-mode +1)))
         (add-hook 'prog-mode-hook #'cae-enable-evil-cleverparens-mode)
-
-        :custom ((evil-cleverparens-use-s-and-S nil)
-                 (evil-cleverparens-swap-move-by-word-and-symbol nil))
         :config
+        (setq evil-cleverparens-use-s-and-S nil
+              evil-cleverparens-swap-move-by-word-and-symbol nil)
         (map! (:map evil-cleverparens-mode-map
                :n "M-\"" #'cae-evil-cp-wrap-next-double-quotes
                [remap sp-raise-sexp] #'cae-sp-raise-sexp
