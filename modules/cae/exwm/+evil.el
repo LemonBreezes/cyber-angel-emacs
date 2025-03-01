@@ -6,7 +6,7 @@
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
 (use-package! exwm-evil
-  :defer t :config
+  :defer nil :config
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
   (cl-pushnew 'escape exwm-input-prefix-keys)
 
@@ -31,7 +31,7 @@
         :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
 
 (use-package! exwm-firefox-evil
-  :defer t :config
+  :defer nil :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
   ;; We can use VIM keys with any browser that has compatible keybindings.
   (cl-loop for class in '("firefoxdeveloperedition"
