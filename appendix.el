@@ -4,7 +4,8 @@
  `(,@(when (modulep! :completion corfu)
        '(corfu))
    ,@(when (modulep! :emacs dirvish)
-       '(dired transient dirvish diredfl))
+       '(dired transient dirvish diredfl dirvish-widgets dirvish-side
+         dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
