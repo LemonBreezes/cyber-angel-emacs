@@ -119,7 +119,7 @@
   :config
   (when (cae-display-graphic-p)
     ;; Pretty marks
-    (setq! gnus-sum-thread-tree-false-root nil
+    (setopt gnus-sum-thread-tree-false-root nil
            gnus-sum-thread-tree-single-indent nil
            gnus-sum-thread-tree-root nil
            gnus-sum-thread-tree-vertical "│ "
@@ -127,7 +127,7 @@
            gnus-sum-thread-tree-single-leaf "└── "
            gnus-sum-thread-tree-indent " "
            gnus-sum-thread-tree-single-indent nil))
-  (setq! gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
+  (setopt gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
          ;; Loose threads
          gnus-summary-make-false-root 'adopt
          gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
@@ -153,7 +153,7 @@
 
 (use-package! gnus-art
   :defer t :config
-  (setq! gnus-default-article-saver 'gnus-summary-save-in-mail
+  (setopt gnus-default-article-saver 'gnus-summary-save-in-mail
          gnus-treat-hide-citation-maybe t
          gnus-treat-strip-cr t
          gnus-treat-strip-leading-blank-lines t
