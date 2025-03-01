@@ -1,11 +1,11 @@
 ;;; autocompletion.el -*- lexical-binding: t; -*-
 
 (when (modulep! :completion corfu)
-  (load! "lisp/cae-corfu"))
+  (load! "lisp/cae-corfu" doom-user-dir))
 
 (setq ido-save-directory-list-file (concat doom-cache-dir "ido.last"))
 (after! ido
-  (load! "lisp/cae-ido"))
+  (load! "lisp/cae-ido" doom-user-dir))
 
 (after! yasnippet
   (setq yas-triggers-in-field t       ;Allow nested snippets.
