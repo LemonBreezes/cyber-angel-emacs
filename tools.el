@@ -280,16 +280,14 @@
 (use-package! detached
   :when (executable-find "dtach")
   :defer 3.0
-  :bind (;; Replace `async-shell-command' with `detached-shell-command'
-         ([remap async-shell-command] . detached-shell-command)
-         ;; Replace `compile' with `detached-compile'
-         ([remap compile] . detached-compile)
-         ([remap recompile] . detached-compile-recompile)
-         ;; Replace built in completion of sessions with `consult'
-         ([remap detached-open-session] . detached-consult-session))
-  :custom ((detached-show-output-on-attach t)
-           (detached-terminal-data-command system-type))
   :init
+  (map! ;; Replace `async-shell-command' with `detached-shell-command'
+   [remap async-shell-command] #'detached-shell-command
+   ;; Replace `compile' with `detached-compile'
+   [remap compile] #'detached-compile
+   [remap recompile] #'detached-compile-recompile
+   ;; Replace built in completion of sessions with `consult'
+   [remap detached-open-session] #'detached-consult-session)
   (map! :leader
         :desc "detached" "d" (cae-oneshot-keymap detached-embark-action-map
                                                  detached-init))
@@ -310,6 +308,8 @@
     (map! :leader
           :desc "detached" "d" detached-embark-action-map))
   :config
+  (setq detached-show-output-on-attach t)
+  (setq detached-terminal-data-command system-type)
   (setq detached-degraded-commands '("^ls"))
   (setq detached-db-directory (concat (temporary-file-directory) "detached/")
         detached-session-directory (concat (temporary-file-directory) "detached/sessions/"))
