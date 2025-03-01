@@ -360,8 +360,9 @@
        :desc "Toggle debug options" "d" #'cae-debug-transient
        (:when (modulep! :editor evil +everywhere)
         :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
-(which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
-(which-key-add-keymap-based-replacements help-map "dC" "Open Evil Collection config")
+(after! which-key
+  (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
+  (which-key-add-keymap-based-replacements help-map "dC" "Open Evil Collection config"))
 
 (map! :map help-map "C-r" #'describe-repeat-maps)
 (when (modulep! :completion vertico)
