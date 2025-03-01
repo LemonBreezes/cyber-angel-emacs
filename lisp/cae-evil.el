@@ -105,8 +105,9 @@
     "C-z" nil))
 (define-key! :keymaps +default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
-(map! :map vertico-map
-      "C-l" #'cae-yank-word-to-minibuffer)
+(after! vertico-map
+  (map! :map vertico-map
+        "C-l" #'cae-yank-word-to-minibuffer))
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
@@ -139,7 +140,7 @@
 
 (after! evil-snipe
   (setq evil-snipe-scope 'whole-visible))
-(setq! evil-ex-substitute-global t
+(setopt evil-ex-substitute-global t
        evil-move-cursor-back nil
        evil-vsplit-window-right t
        evil-kill-on-visual-paste nil
