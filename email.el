@@ -22,7 +22,8 @@
 
 (when (modulep! :email mu4e)
   (use-package! consult-mu
-    :commands consult-mu :defer t :init
+    :defer t :init
+    (autoload 'consult-mu "consult-mu" nil t)
     (map! [remap mu4e-search] #'consult-mu)
     :config
     (setq consult-mu-maxnum 200)
