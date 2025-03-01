@@ -30,10 +30,7 @@
     (when init-file-debug
       (exwm-debug +1))
 
-    (require 'exwm-randr)
     (require 'exwm-systemtray)
-    (exwm-randr-enable)
-
     (setq exwm-systemtray-height (line-pixel-height))
     (exwm-systemtray-enable)
 
