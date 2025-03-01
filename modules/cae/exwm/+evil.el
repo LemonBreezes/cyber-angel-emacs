@@ -32,6 +32,7 @@
         :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
 
 (use-package! exwm-firefox-evil
+  :when (modulep! :editor evil)
   :after exwm
   :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
