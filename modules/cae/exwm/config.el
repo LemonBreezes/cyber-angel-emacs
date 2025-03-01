@@ -131,6 +131,7 @@
 
     (exwm-randr-mode +1)
     (exwm-systemtray-mode +1)
+    (exwm-background-mode +1)
     (exwm-enable)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
