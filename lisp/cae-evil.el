@@ -141,11 +141,11 @@
 (after! evil-snipe
   (setq evil-snipe-scope 'whole-visible))
 (setopt evil-ex-substitute-global t
-       evil-move-cursor-back nil
-       evil-vsplit-window-right t
-       evil-kill-on-visual-paste nil
-       evil-split-window-below t
-       evil-v$-excludes-newline t)
+        evil-move-cursor-back nil
+        evil-vsplit-window-right t
+        evil-kill-on-visual-paste nil
+        evil-split-window-below t
+        evil-v$-excludes-newline t)
 
 ;; I like for scrolling by page to move the point to the beginning or end of the
 ;; buffer as is typical for other editors.
