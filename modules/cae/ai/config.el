@@ -49,7 +49,7 @@
       (doom-set-buffer-real buf t))))
 
 (use-package! magit-gptcommit
-  :after magit :init
+  :defer t :after magit :init
   (defadvice! cae-magit-gptcommit-save-buffer-a ()
     :after #'magit-gptcommit-commit-accept
     (when-let ((buf (magit-commit-message-buffer)))
