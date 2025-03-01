@@ -168,7 +168,7 @@
   (diff-ansi-mode +1))
 
 (use-package! difftastic
-  :init
+  :defer t :init
   (after! evil
     (evil-set-initial-state 'difftastic-mode 'emacs))
   (after! magit-diff
