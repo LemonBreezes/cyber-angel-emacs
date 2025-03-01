@@ -9,8 +9,7 @@
     (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode gnus-server-mode))
       (cl-pushnew mode evil-snipe-disabled-modes))))
 (use-package! gnus
-  :commands gnus-unplugged
-  :config
+  :defer t :config
   (gnus-registry-initialize)
   (setq nnmail-split-methods 'nnmail-split-fancy)
   (setq nnimap-split-methods 'nnmail-split-fancy)
