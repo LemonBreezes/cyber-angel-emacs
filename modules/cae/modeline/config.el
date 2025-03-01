@@ -31,6 +31,7 @@
 
   (use-package! evil-anzu
     :when (modulep! :editor evil)
+    :defer t
     :after-call evil-ex-start-search evil-ex-start-word-search
     evil-ex-search-activate-highlight evil-search-incrementally
     :config (global-anzu-mode +1))
@@ -223,7 +224,7 @@
       :defer t :init
       (add-hook 'doom-after-init-hook #'nyan-mode)
       :config
-      (setq! nyan-bar-length 20
+      (setopt nyan-bar-length 20
              nyan-minimum-window-width 20)))
 
   (when (and (modulep! +emms) (modulep! :cae misc-applications))
