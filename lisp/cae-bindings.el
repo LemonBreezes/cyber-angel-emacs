@@ -156,12 +156,13 @@
 ;;; Fixup leader key and C-c
 
 (when (modulep! :editor snippets)
-  (map! (:when (modulep! :completion vertico))
-        :map yas-minor-mode-map
-        "C-c & C-s" nil
-        "C-c & C-n" nil
-        "C-c & C-v" nil
-        "C-c &" nil)
+  (after! yasnippet
+    (map! (:when (modulep! :completion vertico))
+          :map yas-minor-mode-map
+          "C-c & C-s" nil
+          "C-c & C-n" nil
+          "C-c & C-v" nil
+          "C-c &" nil))
   (map! :leader
         (:prefix-map ("S" . "snippets")
          :desc "Insert Snippet" "s" #'yas-insert-snippet
