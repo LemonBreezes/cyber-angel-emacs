@@ -5,8 +5,8 @@
 ;; Currently I am using "d" for `detached' instead.
 
 (use-package! denote
-  :hook (dired-mode . denote-dired-mode)
   :defer t :init
+  (add-hook 'dired-mode-hook #'denote-dired-mode)
   (defvar denote-directory (file-truename "~/org/denote/"))
   (setq denote-known-keywords '(emacs journal ideas learning gentoo projects))
 
