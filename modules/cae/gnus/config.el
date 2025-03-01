@@ -166,10 +166,11 @@
            "text/x-vcard")))
 
 (use-package! gnus-dired
-  :hook (dired-mode . gnus-dired-mode))
+  :defer t :init
+  (add-hook 'dired-mode-hook #'gnus-dired-mode))
 
 (use-package! spam
-  :after gnus)
+  :defer t :after gnus)
 
 (use-package! gnus-srvr
   :defer t :config
