@@ -23,6 +23,10 @@
   ;; We already have `consult-history' bound to `M-r' and `M-s'. This way we can
   ;; use `C-s' to search in the minibuffer.
   "C-s"   nil)
+(when (modulep! :editor evil)
+  (after! evil
+    (map! :map evil-ex-completion-map
+          "C-s" nil)))
 
 ;; Only use `embark-act-key' for `embark-act'. Remove all other bindings.
 (when (modulep! :completion vertico)
