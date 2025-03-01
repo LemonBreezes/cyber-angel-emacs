@@ -275,6 +275,7 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled")))))
 
 (use-package! string-inflection
+  :defer t
   :commands (string-inflection-all-cycle
              string-inflection-toggle
              string-inflection-camelcase
