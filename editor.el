@@ -203,12 +203,6 @@
   (setq file-info-include-headlines t
         file-info-max-value-length 100))
 
-(use-package! keyfreq
-  :after-call post-command-hook
-  :config
-  (keyfreq-mode +1)
-  (keyfreq-autosave-mode +1))
-
 (use-package! titlecase
   :defer t :init
   (after! embark
