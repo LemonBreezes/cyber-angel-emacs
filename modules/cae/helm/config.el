@@ -154,7 +154,8 @@ Can be negative.")
 
 (use-package! helm-flx
   :when (modulep! +fuzzy)
-  :hook (helm-mode . helm-flx-mode))
+  :defer t :init
+  (add-hook 'helm-mode-hook #'helm-flx-mode))
 
 
 (after! helm-rg
