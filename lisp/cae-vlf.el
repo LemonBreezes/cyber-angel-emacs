@@ -4,32 +4,7 @@
 ;; https://github.com/tecosaur/emacs-config/blob/master/config.org
 (use-package! vlf-setup
   :defer t :init
-  (defadvice! cae-files--ask-about-large-file-vlf (size op-type filename offer-raw)
-    "Like `files--ask-user-about-large-file', but with support for `vlf'."
-    :override #'files--ask-user-about-large-file
-    (require 'vlf-setup)
-    (if (eq vlf-application 'dont-ask)
-        (progn (vlf filename) (error ""))
-      (let ((prompt (format "File %s is large (%s), really %s?"
-                            (file-name-nondirectory filename)
-                            (funcall byte-count-to-string-function size) op-type)))
-        (if (not offer-raw)
-            (if (y-or-n-p prompt) nil 'abort)
-          (let ((choice
-                 (car
-                  (read-multiple-choice
-                   prompt '((?y "yes")
-                            (?n "no")
-                            (?l "literally")
-                            (?v "vlf"))
-                   (files--ask-user-about-large-file-help-text
-                    op-type (funcall byte-count-to-string-function size))))))
-            (cond ((eq choice ?y) nil)
-                  ((eq choice ?l) 'raw)
-                  ((eq choice ?v)
-                   (vlf filename)
-                   (error ""))
-                  (t 'abort)))))))
+  (advice-add #'files--ask-user-about-large-file :override #'cae-files--ask-about-large-file-vlf)
   :config
   (advice-remove 'abort-if-file-too-large #'ad-Advice-abort-if-file-too-large)
   (defvar-local cae-vlf-cumulative-linenum '((0 . 0))
