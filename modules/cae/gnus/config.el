@@ -114,7 +114,8 @@
 
 ;; Summary mode commands for Gnus
 (use-package! gnus-sum
-  :hook (gnus-select-group . gnus-group-set-timestamp)
+  :defer t :init
+  (add-hook 'gnus-select-group-hook #'gnus-group-set-timestamp)
   :config
   (when (cae-display-graphic-p)
     ;; Pretty marks
