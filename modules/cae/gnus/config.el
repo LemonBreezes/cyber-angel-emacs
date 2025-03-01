@@ -120,50 +120,50 @@
   (when (cae-display-graphic-p)
     ;; Pretty marks
     (setopt gnus-sum-thread-tree-false-root nil
-           gnus-sum-thread-tree-single-indent nil
-           gnus-sum-thread-tree-root nil
-           gnus-sum-thread-tree-vertical "│ "
-           gnus-sum-thread-tree-leaf-with-other "├── "
-           gnus-sum-thread-tree-single-leaf "└── "
-           gnus-sum-thread-tree-indent " "
-           gnus-sum-thread-tree-single-indent nil))
+            gnus-sum-thread-tree-single-indent nil
+            gnus-sum-thread-tree-root nil
+            gnus-sum-thread-tree-vertical "│ "
+            gnus-sum-thread-tree-leaf-with-other "├── "
+            gnus-sum-thread-tree-single-leaf "└── "
+            gnus-sum-thread-tree-indent " "
+            gnus-sum-thread-tree-single-indent nil))
   (setopt gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
-         ;; Loose threads
-         gnus-summary-make-false-root 'adopt
-         gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
-         gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
-         ;; Filling in threads
-         gnus-build-sparse-threads t
-         gnus-fetch-old-headers t
-         ;; More threading
-         gnus-show-threads t
-         gnus-thread-indent-level 2
-         gnus-thread-hide-subtree t
-         ;; Sorting
-         gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
-         gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
-         ;; Viewing
-         gnus-view-pseudos 'automatic
-         gnus-view-pseudos-separately t
-         gnus-view-pseudo-asynchronously t
-         ;; No auto select
-         gnus-auto-select-first nil
-         gnus-auto-select-next nil
-         gnus-paging-select-next nil))
+          ;; Loose threads
+          gnus-summary-make-false-root 'adopt
+          gnus-simplify-subject-functions '(gnus-simplify-subject-fuzzy)
+          gnus-summary-thread-gathering-function 'gnus-gather-threads-by-subject
+          ;; Filling in threads
+          gnus-build-sparse-threads t
+          gnus-fetch-old-headers t
+          ;; More threading
+          gnus-show-threads t
+          gnus-thread-indent-level 2
+          gnus-thread-hide-subtree t
+          ;; Sorting
+          gnus-thread-sort-functions '(gnus-thread-sort-by-most-recent-date)
+          gnus-subthread-sort-functions '(gnus-thread-sort-by-date)
+          ;; Viewing
+          gnus-view-pseudos 'automatic
+          gnus-view-pseudos-separately t
+          gnus-view-pseudo-asynchronously t
+          ;; No auto select
+          gnus-auto-select-first nil
+          gnus-auto-select-next nil
+          gnus-paging-select-next nil))
 
 (use-package! gnus-art
   :defer t :config
   (setopt gnus-default-article-saver 'gnus-summary-save-in-mail
-         gnus-treat-hide-citation-maybe t
-         gnus-treat-strip-cr t
-         gnus-treat-strip-leading-blank-lines t
-         gnus-treat-strip-multiple-blank-lines t
-         gnus-treat-strip-trailing-blank-lines t
-         gnus-treat-unsplit-urls t
-         gnus-ignored-mime-types
-         '("application/x-pkcs7-signature"
-           "application/ms-tnef"
-           "text/x-vcard")))
+          gnus-treat-hide-citation-maybe t
+          gnus-treat-strip-cr t
+          gnus-treat-strip-leading-blank-lines t
+          gnus-treat-strip-multiple-blank-lines t
+          gnus-treat-strip-trailing-blank-lines t
+          gnus-treat-unsplit-urls t
+          gnus-ignored-mime-types
+          '("application/x-pkcs7-signature"
+            "application/ms-tnef"
+            "text/x-vcard")))
 
 (use-package! gnus-dired
   :defer t :init
