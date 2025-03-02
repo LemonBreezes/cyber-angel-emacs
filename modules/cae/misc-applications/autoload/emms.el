@@ -141,7 +141,7 @@ rather than the whole path."
   (interactive)
   (start-process "kill-mpv" nil "killall" "mpv"))
 
-;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" t nil)
+;;;###autoload (autoload 'cae-emms-dired-hydra/body "cae/misc-applications/autoload/emms" nil t)
 (defhydra cae-emms-dired-hydra (:color pink :hint nil)
   ("." nil "Exit" :exit t)
   ("q" cae-emms-kill-mpv "Kill MPV" :exit t)
