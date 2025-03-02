@@ -49,7 +49,7 @@
       (doom-set-buffer-real buf t))))
 
 (use-package! magit-gptcommit
-  :defer t :after magit :init
+  :after magit :init
   (defadvice! cae-magit-gptcommit-save-buffer-a ()
     :after #'magit-gptcommit-commit-accept
     (when-let ((buf (magit-commit-message-buffer)))
@@ -198,3 +198,37 @@
   :defer t :config
   (setq elysium-window-size 0.5)
   (setq elysium-window-style 'vertical))
+
+(use-package!  lsp-uniteai
+  :when (modulep! :tools lsp -eglot)
+  :defer t :after lsp
+  :config
+  (add-hook! 'prog-mode-hook :depth 89
+    (defun cae-ai-enable-uniteai-lsp ()
+      (unless (memq major-mode lsp-uniteai-active-modes)
+        (add-to-list 'lsp-uniteai-active-modes major-mode)
+        (lsp-register-client
+         (make-lsp-client
+          :new-connection
+          (cl-case lsp-uniteai-connection-method
+            (`stdio (lsp-stdio-connection "uniteai_lsp --stdio"
+                                          (lambda (&rest _)
+                                            (zerop (shell-command "uniteai_lsp")))))
+            (`tcp   (lsp-tcp-connection
+                     (lambda (port)
+                       `("uniteai_lsp" "--tcp" "--lsp_port" ,(number-to-string port))))))
+          :priority -2
+          :major-modes (list major-mode)
+          :server-id 'uniteai-lsp
+          :add-on? t
+          :download-server-fn #'lsp-uniteai--install-server))))))
+(use-package! eglot-uniteai)
+(add-hook! 'prog-mode-hook :depth 89
+  (defun cae-ai-enable-uniteai-eglot ()
+
+    (when (modulep! :tools lsp +eglot)
+      (after! eglot-uniteai
+        (unless (memq major-mode eglot-uniteai-active-modes)
+          (add-to-list 'eglot-uniteai-active-modes major-mode)
+          (add-to-list 'eglot-server-programs
+                       `(,major-mode . ,(eglot-uniteai--server-command))))))))
