@@ -77,9 +77,9 @@
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
-                   "l" #'xcb-debug:clearn
+           "l" #'xcb-debug:clearn
 
-                   "t" #'exwm-debug)
+           "t" #'exwm-debug)
           "f" #'exwm-layout-toggle-fullscreen
           "h" #'exwm-floating-hide
           "q" #'exwm-input-send-next-key
@@ -195,6 +195,9 @@
   (when (modulep! :editor evil +everywhere)
     (after! (:all evil exwm)
       (load! "+evil")))
+
+  (when (modulep! :completion corfu)
+    (load! "+corfu"))
 
   (when (modulep! :ui workspaces)
     (unless (featurep 'cae-exwm-auto-persp)
