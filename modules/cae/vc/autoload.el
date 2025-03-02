@@ -80,33 +80,37 @@ if both REMOT and REMOTE-NAME are non-nil, REMOTE-NAME is used as the name of th
           forkrepo))
     (consult-gh-repo-fork)))
 
-;;;###autoload (autoload 'cae-smerge-transient "cae/vc/autoload.el" nil t)
-(transient-define-prefix cae-smerge-transient ()
-  "Perform smerge operations."
-  :transient-suffix 'transient--do-stay
-  :transient-non-suffix 'transient--do-exit
-  ["Move"
-   ("n" "next" smerge-next)
-   ("p" "prev" smerge-prev)]
-  ["Keep"
-   ("b" "base" smerge-keep-base)
-   ("u" "upper" smerge-keep-upper)
-   ("l" "lower" smerge-keep-lower)
-   ("a" "all" smerge-keep-all)
-   ("RET" "current" smerge-keep-current)]
-  ["Diff"
-   ("<" "upper/base" smerge-diff-base-upper)
-   ("=" "upper/lower" smerge-diff-upper-lower)
-   (">" "base/lower" smerge-diff-base-lower)
-   ("R" "refine" smerge-refine)
-   ("E" "ediff" smerge-ediff)]
-  ["Other"
-   ("C" "combine" smerge-combine-with-next)
-   ("r" "resolve" smerge-resolve)
-   ("k" "kill current" smerge-kill-current)
-   ("ZZ" "save and bury" (lambda ()
-                           (interactive)
-                           (save-buffer)
-                           (bury-buffer))
-    :transient nil)
-   ("q" "quit" transient-quit-one)])
+;;;###autoload (autoload 'cae-smerge-hydra/body "cae/vc/autoload.el" nil t)
+(defhydra cae-smerge-hydra
+  (:color pink :hint nil :post (smerge-auto-leave))
+  "
+^Move^       ^Keep^               ^Diff^                 ^Other^
+^^-----------^^-------------------^^---------------------^^-------
+_n_ext       _b_ase               _<_: upper/base        _C_ombine
+_p_rev       _u_pper              _=_: upper/lower       _r_esolve
+^^           _l_ower              _>_: base/lower        _k_ill current
+^^           _a_ll                _R_efine
+^^           _RET_: current       _E_diff
+"
+  ("n" smerge-next)
+  ("p" smerge-prev)
+  ("b" smerge-keep-base)
+  ("u" smerge-keep-upper)
+  ("l" smerge-keep-lower)
+  ("a" smerge-keep-all)
+  ("RET" smerge-keep-current)
+  ("\C-m" smerge-keep-current)
+  ("<" smerge-diff-base-upper)
+  ("=" smerge-diff-upper-lower)
+  (">" smerge-diff-base-lower)
+  ("R" smerge-refine)
+  ("E" smerge-ediff)
+  ("C" smerge-combine-with-next)
+  ("r" smerge-resolve)
+  ("k" smerge-kill-current)
+  ("ZZ" (lambda ()
+          (interactive)
+          (save-buffer)
+          (bury-buffer))
+   "Save and bury buffer" :color blue)
+  ("q" nil "cancel" :color blue))
