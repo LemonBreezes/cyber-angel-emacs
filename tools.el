@@ -292,7 +292,8 @@
                                                  detached-init))
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
-          :n "RET" #'detached-eshell-send-input))
+          :n "RET" #'detached-eshell-send-input
+          :n "<return>" #'detached-eshell-send-input))
   (after! detached-shell
     (map! :map detached-shell-mode-map
           :n "RET" #'detached-shell-send-input))
