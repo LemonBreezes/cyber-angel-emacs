@@ -196,9 +196,6 @@
     (after! (:all evil exwm)
       (load! "+evil")))
 
-  (when (modulep! :completion corfu)
-    (load! "+corfu"))
-
   (when (modulep! :ui workspaces)
     (unless (featurep 'cae-exwm-auto-persp)
       (after! (:all exwm dash persp-mode)
