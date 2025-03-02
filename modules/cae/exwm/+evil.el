@@ -92,32 +92,6 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
-;; TODO Determine if I upstream this back to `exwm-evil'.
-(defun exwm-evil--on-ButtonPress-line-mode (buffer button-event)
-  "Handle button events in line mode.
-BUFFER is the `exwm-mode' buffer the event was generated
-on. BUTTON-EVENT is the X event converted into an Emacs event.
-
-The return value is used as event_mode to release the original
-button event."
-  (with-current-buffer buffer
-    (let ((read-event (exwm-input--mimic-read-event button-event)))
-      (exwm--log "%s" read-event)
-      (if (and read-event
-               (exwm-input--event-passthrough-p read-event))
-          ;; The event should be forwarded to emacs
-          (progn
-            (exwm-input--cache-event read-event)
-            (exwm-input--unread-event button-event)
-
-            xcb:Allow:ReplayPointer)
-        ;; The event should be replayed
-        xcb:Allow:ReplayPointer))))
-(advice-add #'exwm-input--on-ButtonPress-line-mode
-            :override
-            #'exwm-evil--on-ButtonPress-line-mode)
-(advice-add #'exwm-evil-core-do-mouse-click :override #'ignore)
-
 (define-minor-mode cae-exwm-discord-mode
   "Minor mode for Discord."
   :init-value nil
