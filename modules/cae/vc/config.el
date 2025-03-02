@@ -187,11 +187,3 @@
         difftastic-display-buffer-function
         (lambda (buf _)
           (display-buffer-same-window buf nil))))
-
-(use-package! magit-file-icons
-  :after magit
-  :defer t :config
-  (magit-file-icons-mode 1)
-  (setq magit-file-icons-enable-diff-file-section-icons t)
-  (setq magit-file-icons-enable-untracked-icons t)
-  (setq magit-file-icons-enable-diffstat-icons t))
