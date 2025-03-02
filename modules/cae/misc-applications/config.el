@@ -830,8 +830,7 @@
         emms-mode-line-icon-enabled-p nil))
 
 (use-package! lyrics-fetcher
-  :after emms
-  :defer t :init
+  :after emms :init
   (map! :map cae-misc-applications-music-map
         "l" #'lyrics-fetcher-show-lyrics
         "L" #'lyrics-fetcher-show-lyrics-query)
