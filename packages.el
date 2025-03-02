@@ -92,7 +92,10 @@
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
   (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster"))
-  (package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb")))
+  (package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
+  (package! uniteai-eglot))
+(when (modulep! :tools lsp -eglot)
+  (package! uniteai-lsp))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
