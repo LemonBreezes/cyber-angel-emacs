@@ -234,7 +234,7 @@
     LaTeX-mode less-css-mode lua-mode makefile-mode objc-mode perl-mode
     php-mode text-mode powershell-mode ess-mode ruby-mode rust-mode scss-mode
     sass-mode sh-mode sql-mode swift-mode typescript-mode TeX-mode nxml-mode
-    yaml-mode sh-mode toml-mode))
+    yaml-mode sh-mode toml-mode emacs-lisp-mode))
 (use-package!  lsp-uniteai
   :when (modulep! :tools lsp -eglot)
   :defer t :after lsp)
