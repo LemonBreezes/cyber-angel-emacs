@@ -13,7 +13,3 @@
 (when (modulep! -copilot)
   (package! minuet))
 (package! elysium)
-(when (modulep! :tools lsp +eglot)
-  (package! uniteai-eglot :recipe (:host github :repo "emacs-openai/eglot-uniteai")))
-(when (modulep! :tools lsp -eglot)
-  (package! uniteai-lsp :recipe (:host github :repo "emacs-openai/lsp-uniteai")))
