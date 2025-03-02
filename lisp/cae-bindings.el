@@ -308,6 +308,10 @@
 
 
 ;;; Leader keybindings
+;;(let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
+;;    (map! :leader
+;;          :prefix vc-prefix
+;;          :desc "v" #'cae-smerge-transient))
 (map! :leader
       (:prefix "i"
        (:when (modulep! :completion vertico)
