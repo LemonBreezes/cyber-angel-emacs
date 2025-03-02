@@ -17,6 +17,9 @@
 ;; automatically and using the list above instead.
 (setq projectile-track-known-projects-automatically nil)
 
+(cae-run-with-idle-timer 5 5 "projectile-discover-projects"
+                         #'projectile-discover-projects-in-search-path)
+
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
 
