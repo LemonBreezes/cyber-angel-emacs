@@ -311,7 +311,7 @@
 (let ((vc-prefix (if (modulep! :editor evil) "g" "v")))
   (eval `(map! :leader
                :prefix ,vc-prefix
-               :desc "Smerge" "m" #'cae-smerge-transient)
+               :desc "Smerge" "m" #'cae-smerge-hydra/body)
         t))
 (map! :leader
       (:prefix "i"
