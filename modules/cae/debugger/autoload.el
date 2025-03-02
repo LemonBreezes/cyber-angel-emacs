@@ -53,7 +53,7 @@
          (call-interactively #'gdb-display-gdb-buffer))
         (t (call-interactively #'gdb))))
 
-;;;###autoload (autoload 'cae-debugger-dap-hydra/body "cae/debugger/autoload" t nil)
+;;;###autoload (autoload 'cae-debugger-dap-hydra/body "cae/debugger/autoload" nil t)
 (defhydra cae-debugger-dap-hydra (:color pink :hint nil :foreign-keys run)
   "
 ^Stepping^          ^Switch^                 ^Breakpoints^         ^Debug^                     ^Eval
