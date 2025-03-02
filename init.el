@@ -111,7 +111,7 @@
        unpackaged
        vc
        org
-       (ai +copilot)
+       (ai -copilot)
        gnus
        rss
 

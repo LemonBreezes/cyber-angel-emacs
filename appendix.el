@@ -33,8 +33,17 @@
               (when (executable-find "mpd")
                 '(mpc))))
    ,@(when (modulep! :cae ai)
-       '(copilot whisper greader org-ai chatgpt-shell gptel magit-gptcommit
-         aider aidermacs elysium minuet dall-e-shell))
+       (nconc
+        (when (modulep! :tools lsp -eglot)
+          '(lsp-uniteai))
+        (when (modulep! :tools lsp +eglot)
+          '(lsp-eglot))
+        (when (modulep! :cae lsp +copilot)
+          '(copilot))
+        (when (modulep! :cae lsp -copilot)
+          '(minuet))
+        '(whisper greader org-ai chatgpt-shell gptel magit-gptcommit
+          aider aidermacs elysium minuet dall-e-shell)))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
