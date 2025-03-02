@@ -15,7 +15,6 @@
 (when (modulep! +delta)
   (package! diff-ansi))
 (package! difftastic)
-(package! magit-file-icons)
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
