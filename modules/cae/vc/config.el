@@ -157,7 +157,7 @@
     (add-hook! 'consult-gh-repo-post-clone-hook
                #'projectile-discover-projects-in-directory)))
 (use-package! consult-gh-embark
-  :defer t :after (consult-gh embark))
+  :after (consult-gh embark))
 
 (use-package! diff-ansi
   :when (modulep! +delta)
