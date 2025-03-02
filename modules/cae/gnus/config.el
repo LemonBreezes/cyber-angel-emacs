@@ -170,7 +170,7 @@
   (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode))
 
 (use-package! spam
-  :defer t :after gnus)
+  :after gnus)
 
 (use-package! gnus-srvr
   :defer t :config
