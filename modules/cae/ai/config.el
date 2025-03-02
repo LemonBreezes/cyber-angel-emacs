@@ -31,7 +31,9 @@
           llm-warn-on-nonfree nil))
   (after! minuet
     (setq minuet-provider 'claude)
-    (plist-put! minuet-claude-options :model claude-model)))
+    (plist-put! minuet-claude-options
+                :model claude-model
+                :max_tokens 256)))
 
 (use-package! aidermacs
   :defer t :config
