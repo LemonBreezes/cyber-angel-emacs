@@ -160,9 +160,7 @@
 ;;; Atuin Integration
 
 (use-package! eshell-atuin
-  :when (executable-find "atuin")
-  :after eshell
-  :config
+  :when (executable-find "atuin") :after eshell :config
   (eshell-atuin-mode))
 
 ;;Local Variables:
