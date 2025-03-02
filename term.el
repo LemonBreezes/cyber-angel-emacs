@@ -19,7 +19,7 @@
   nobreak-char-display nil)
 
 (use-package! comint-histories
-  :defer t :after comint :config
+  :after comint :config
   (comint-histories-mode 1)
   (setq comint-histories-global-filters '((lambda (x) (<= (length x) 3))))
   (comint-histories-add-history
