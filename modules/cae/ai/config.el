@@ -240,5 +240,5 @@
   :defer t :after lsp)
 (use-package! eglot-uniteai
   :when (modulep! :tools lsp +eglot)
-  :defer t :after lsp :init
+  :defer t :after eglot :init
   (setq eglot-uniteai-active-modes cae-uniteai-modes))
