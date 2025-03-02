@@ -10,6 +10,7 @@
         ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
         ,@(when (file-exists-p "~/src/love2d/") '(("~/src/love2d" . 1)))
         ,@(when (file-exists-p "~/src/ai/") '(("~/src/ai" . 1)))
+        ,@(when (file-exists-p "~/src/trading") '(("~/src/trading" . 1)))
         ,@(when (file-exists-p "~/src/haskell/") '(("~/src/haskell" . 1)))
         ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
 ;; This is a performance optimization. I am okay with not tracking projects
