@@ -245,20 +245,6 @@
              (cons execute-command-view cleaned-views)
              :test #'equal)))))
 
-;; Use Emacs as the default editor for shell commands.
-(when (cae-display-graphic-p)
-  (dolist (hook '(shell-mode-hook eshell-mode-hook vterm-mode-hook))
-    (dolist (fn '(with-editor-export-editor
-                  with-editor-export-hg-editor
-                  with-editor-export-git-editor))
-      (add-hook hook fn)))
-  (advice-add #'with-editor-export-editor :around #'cae-shut-up-a))
-(defadvice! cae-ignore-with-editor-a (oldfun &rest args)
-  :around #'aidermacs-run-vterm
-  (remove-hook 'vterm-mode-hook #'with-editor-export-editor)
-  (unwind-protect (apply oldfun args)
-    (add-hook 'vterm-mode-hook #'with-editor-export-editor)))
-
 (after! spell-fu
   (add-to-list 'spell-fu-faces-exclude 'message-header-other)
   (add-to-list 'spell-fu-faces-exclude 'org-property-value)
