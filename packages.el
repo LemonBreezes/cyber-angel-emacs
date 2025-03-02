@@ -93,9 +93,9 @@
 (when (modulep! :tools lsp +eglot)
   (package! eglot-booster :recipe (:host github :repo "jdtsmith/eglot-booster"))
   (package! breadcrumb :recipe (:host github :repo "joaotavora/breadcrumb"))
-  (package! uniteai-eglot))
+  (package! uniteai-eglot :recipe (:host github :repo "emacs-openai/eglot-uniteai")))
 (when (modulep! :tools lsp -eglot)
-  (package! uniteai-lsp))
+  (package! uniteai-lsp :recipe (:host github :repo "emacs-openai/lsp-uniteai")))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
