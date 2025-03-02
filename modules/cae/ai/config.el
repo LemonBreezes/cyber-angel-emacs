@@ -30,7 +30,8 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! minuet
-    (setq minuet-provider 'codestral)))
+    (setq minuet-provider 'claude)
+    (plist-put! minuet-claude-options :model "sonnet")))
 
 (use-package! aidermacs
   :defer t :config
