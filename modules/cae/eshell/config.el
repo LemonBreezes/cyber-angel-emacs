@@ -161,7 +161,7 @@
 
 (use-package! eshell-atuin
   :when (executable-find "atuin")
-  :defer t :after eshell
+  :after eshell
   :config
   (eshell-atuin-mode))
 
