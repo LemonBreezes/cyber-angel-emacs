@@ -290,7 +290,10 @@
   (map! :leader
         :desc "detached" "d" (cae-oneshot-keymap detached-embark-action-map
                                                  detached-init))
+  (add-hook 'eshell-mode-hook #'detached-eshell-mode)
+  (add-hook 'vterm-mode-hook #'detached-vterm-mode)
   :config
+  (detached-init)
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
           :n "RET" #'detached-eshell-send-input))
