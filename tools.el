@@ -290,6 +290,7 @@
   (map! :leader
         :desc "detached" "d" (cae-oneshot-keymap detached-embark-action-map
                                                  detached-init))
+  :config
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
           :n "RET" #'detached-eshell-send-input))
@@ -306,7 +307,6 @@
           "." #'detached-detach-session)
     (map! :leader
           :desc "detached" "d" detached-embark-action-map))
-  :config
   (setq detached-show-output-on-attach t)
   (setq detached-terminal-data-command system-type)
   (setq detached-degraded-commands '("^ls"))
