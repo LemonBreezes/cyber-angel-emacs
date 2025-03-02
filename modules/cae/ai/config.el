@@ -237,7 +237,7 @@
     yaml-mode sh-mode toml-mode))
 (use-package!  lsp-uniteai
   :when (modulep! :tools lsp -eglot)
-  :defer t :after lsp)
+  :after lsp)
 (use-package! eglot-uniteai
   :when (modulep! :tools lsp +eglot)
   :after eglot :init
