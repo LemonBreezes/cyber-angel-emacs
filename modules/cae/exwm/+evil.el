@@ -89,7 +89,7 @@
                      (exwm-input--fake-key 'C-k)
                      (exwm-evil-insert)))
 
-(add-hook! 'exwm-manage-finish-hook
+(add-hook! 'exwm-manage-finish-hook :depth 1
   (defun cae-exwm-load-special-bindings-h ()
     (when (and (stringp exwm-class-name)
                (string-match-p "discord" exwm-class-name))
