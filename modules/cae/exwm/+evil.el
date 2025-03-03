@@ -6,6 +6,7 @@
 
 (use-package! exwm-evil
   :defer t :init
+  (autoload 'enable-exwm-evil-mode "exwm-evil" nil t)
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
   :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
