@@ -32,7 +32,6 @@
   (add-hook! 'exwm-init-hook
     (load! "lisp/cae-exwm" doom-user-dir)))
 
-
 
 ;;; UI
 
