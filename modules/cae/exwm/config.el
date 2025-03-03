@@ -200,10 +200,10 @@
     (after! corfu
       (load! "+corfu")))
 
-  (when (modulep! :ui workspaces)
-    (unless (featurep 'cae-exwm-auto-persp)
-      (after! (:all dash persp-mode)
-        (load! "+auto-persp")))))
+  (when (and (modulep! :ui workspaces)
+             (not (featurep 'cae-exwm-auto-persp)))
+    (after! persp-mode
+      (load! "+auto-persp"))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
