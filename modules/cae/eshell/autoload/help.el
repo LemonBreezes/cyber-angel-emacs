@@ -22,7 +22,7 @@ Returns t if help was successfully displayed, nil otherwise."
    ((eshell-find-alias-function cmd)
     (helpful-callable (eshell-find-alias-function cmd))
     t)
-   
+
    ;; Case 2: Check for external command
    ((or (and (string-match-p "^\\*." cmd) 
              (setq cmd (substring cmd 1)))
