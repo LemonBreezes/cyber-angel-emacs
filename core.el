@@ -64,15 +64,15 @@
       (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer)))))
 
 ;; Set up fonts
-;;(unless (or (memq system-type '(cygwin windows-nt ms-dos))
-;;            (not (cae-display-graphic-p)))
-;;  (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
-;;                          ("IBM Plex Mono" doom-serif-font)
-;;                          ("Iosevka Comfy Duo" doom-variable-pitch-font))))
-;;    (dolist (font fonts-to-check)
-;;      (if (find-font (font-spec :name (car font)))
-;;          (set (cadr font) (font-spec :family (car font) :size 18))
-;;        (warn "Font %s does not exist!" (car font))))))
+(unless (or (memq system-type '(cygwin windows-nt ms-dos))
+            (not (cae-display-graphic-p)))
+  (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
+                          ("IBM Plex Mono" doom-serif-font)
+                          ("Iosevka Comfy Duo" doom-variable-pitch-font))))
+    (dolist (font fonts-to-check)
+      (if (find-font (font-spec :name (car font)))
+          (set (cadr font) (font-spec :family (car font) :size 18))
+        (warn "Font %s does not exist!" (car font))))))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
