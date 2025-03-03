@@ -45,13 +45,6 @@
       (persistent-scratch-mode +1))))
 (persistent-scratch-setup-default)
 
-(require 'cae-lib)
-(load! "lisp/cae-tty" doom-user-dir)
-(load! "lisp/cae-bindings" doom-user-dir)
-(load! "lisp/cae-multi" doom-user-dir)
-(load! "lisp/cae-smartparens" doom-user-dir)
-(load! "lisp/cae-projectile" doom-user-dir)
-
 (when (modulep! :editor evil)
   (after! evil
     (load! "lisp/cae-evil" doom-user-dir)))
