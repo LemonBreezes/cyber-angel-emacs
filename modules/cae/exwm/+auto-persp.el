@@ -79,58 +79,69 @@ name of the workspace that will be created for that application.")
 
 ;;; Caching variables
 
-(defvar cae-exwm--workspace-name-cache (make-hash-table :test 'equal)
+;; Pre-allocate hash tables with appropriate sizes
+(defvar cae-exwm--workspace-name-cache 
+  (let ((ht (make-hash-table :test 'equal :size 64)))
+    (dolist (mapping cae-exwm-workspace-name-replacements)
+      (puthash (car mapping) (cdr mapping) ht))
+    ht)
   "Cache for workspace names to avoid repeated lookups.")
 
-(defvar cae-exwm--browser-workspace-cache nil
-  "Cache for browser workspace name.")
+(defvar cae-exwm--browser-workspace-cache-table (make-hash-table :test 'equal :size 12)
+  "Cache table for browser workspace names indexed by browser program.")
 
-(defvar cae-exwm--last-browser-program nil
-  "Last browser program used for caching.")
+;; Create a set for faster membership testing
+(defvar cae-exwm--floating-apps-set
+  (let ((set (make-hash-table :test 'equal :size (length cae-exwm-floating-apps))))
+    (dolist (app cae-exwm-floating-apps)
+      (puthash app t set))
+    set)
+  "Hash table for fast lookup of floating apps.")
 
 (defvar cae-exwm--auto-persp-initialized nil
   "Flag to track if auto-persp has been initialized.")
 
+(defvar cae-exwm--workspace-names-set (make-hash-table :test 'equal :size 30)
+  "Hash table for fast lookup of workspace names.")
+
 ;;; Core functions
 
-(defun cae-exwm-get-workspace-name (buffer)
+(defsubst cae-exwm-get-workspace-name (buffer)
   "Get the workspace name for BUFFER based on its EXWM class.
 Returns nil if BUFFER is not an EXWM buffer."
   (let ((class (buffer-local-value 'exwm-class-name buffer)))
-    (or (gethash class cae-exwm--workspace-name-cache)
-        (when class
-          (let ((name (alist-get class cae-exwm-workspace-name-replacements
-                                 class nil #'cl-equalp)))
-            (puthash class name cae-exwm--workspace-name-cache)
-            name)))))
+    (gethash class cae-exwm--workspace-name-cache class)))
 
-(defun cae-exwm--disable-floating ()
+(defsubst cae-exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
   (unless (or (not exwm--floating-frame)
-              (member exwm-class-name cae-exwm-floating-apps))
+              (gethash exwm-class-name cae-exwm--floating-apps-set))
     (exwm-floating--unset-floating exwm--id)))
 
 (defun cae-exwm-clear-caches ()
   "Clear all EXWM caches."
   (interactive)
   (clrhash cae-exwm--workspace-name-cache)
-  (setq cae-exwm--browser-workspace-cache nil
-        cae-exwm--last-browser-program nil))
+  (clrhash cae-exwm--browser-workspace-cache-table)
+  (clrhash cae-exwm--workspace-names-set)
+  
+  ;; Rebuild the workspace name cache
+  (dolist (mapping cae-exwm-workspace-name-replacements)
+    (puthash (car mapping) (cdr mapping) cae-exwm--workspace-name-cache)))
 
 ;;; Workspace management
 
-(defun cae-exwm-persp--predicate (buffer &optional state)
+(defsubst cae-exwm-persp--predicate (buffer &optional state)
   "Determine whether to create a workspace for BUFFER.
 Returns non-nil if a dedicated workspace should be created.
 Optional STATE is passed from persp-mode."
   (and (stringp (cae-exwm-get-workspace-name buffer))
        (not (and exwm--floating-frame
-                 (cl-member (buffer-local-value 'exwm-class-name buffer)
-                            cae-exwm-floating-apps
-                            :test #'cl-equalp)))
+                 (gethash (buffer-local-value 'exwm-class-name buffer)
+                          cae-exwm--floating-apps-set)))
        (or state t)))
 
-(defun cae-exwm-persp--get-name (state)
+(defsubst cae-exwm-persp--get-name (state)
   "Get the name for a new EXWM workspace from STATE."
   (setf (alist-get 'persp-name state)
         (cae-exwm-get-workspace-name (alist-get 'buffer state)))
@@ -138,15 +149,16 @@ Optional STATE is passed from persp-mode."
 
 (defun cae-exwm--select-application-window (application-name buffer)
   "Select window for APPLICATION-NAME and BUFFER."
-  (let ((found nil))
-    ;; Try to find and select an existing window first
-    (let ((visible-buffers (doom-visible-buffers)))
-      (cl-dolist (buf visible-buffers)
+  (let ((found nil)
+        (visible-buffers (doom-visible-buffers)))
+    ;; Try to find and select an existing window first - use faster loop
+    (catch 'found-window
+      (dolist (buf visible-buffers)
         (when (string= (cae-exwm-get-workspace-name buf) application-name)
           (when-let ((win (get-buffer-window buf)))
             (select-window win)
             (setq found t)
-            (cl-return)))))
+            (throw 'found-window t)))))
     
     ;; If no window found, handle popup case
     (unless found
@@ -168,7 +180,12 @@ Optional STATE is passed from persp-mode."
     ;; Handle workspace switching
     (when (not (string= application-name (+workspace-current-name)))
       (persp-remove-buffer buffer))
-    (cl-pushnew application-name cae-exwm-workspaces :test #'string=)
+    
+    ;; Use hash table for faster membership testing
+    (unless (gethash application-name cae-exwm--workspace-names-set)
+      (puthash application-name t cae-exwm--workspace-names-set)
+      (push application-name cae-exwm-workspaces))
+    
     (+workspace-switch application-name t)
     (+workspace/display)
 
@@ -178,33 +195,38 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm--no-org-capture-active-p ()
   "Return non-nil if no org-capture is currently active in any visible window."
   (or (not (boundp 'org-capture-mode))
-      (let ((popup-windows (and (modulep! :ui popup) (+popup-windows))))
-        (cl-block check-windows
+      (catch 'found-capture
+        (let ((popup-windows (and (modulep! :ui popup) (+popup-windows))))
           (dolist (window (if popup-windows
-                              (append popup-windows (doom-visible-windows))
-                            (doom-visible-windows)))
+                             (append popup-windows (doom-visible-windows))
+                           (doom-visible-windows)))
             (when (and (bufferp (window-buffer window))
                        (buffer-local-value 'org-capture-mode (window-buffer window)))
-              (cl-return-from check-windows nil)))
-          t))))
+              (throw 'found-capture nil))))
+        t)))
 
 (defun cae-exwm--find-matching-buffer ()
   "Find the EXWM buffer matching the current workspace."
   (let ((current-workspace-name (+workspace-current-name))
         (current-persp-name (persp-name (get-current-persp))))
-    (cl-find-if (lambda (buffer)
-                  (let ((ws-name (cae-exwm-get-workspace-name buffer)))
-                    (and (cl-equalp ws-name current-workspace-name)
-                         (string= ws-name current-persp-name))))
-                ;; Only search workspace buffers first, then fall back to all buffers
-                (or (+workspace-buffer-list)
-                    (buffer-list)))))
+    ;; First try workspace buffers which is usually smaller
+    (or (catch 'found
+          (dolist (buffer (+workspace-buffer-list))
+            (let ((ws-name (cae-exwm-get-workspace-name buffer)))
+              (when (and (cl-equalp ws-name current-workspace-name)
+                         (string= ws-name current-persp-name))
+                (throw 'found buffer)))))
+        ;; Fall back to all buffers if not found
+        (catch 'found
+          (dolist (buffer (buffer-list))
+            (let ((ws-name (cae-exwm-get-workspace-name buffer)))
+              (when (and (cl-equalp ws-name current-workspace-name)
+                         (string= ws-name current-persp-name))
+                (throw 'found buffer))))))))
 
 (defun cae-exwm-persp--focus-workspace-app (&rest _)
   "Focus the EXWM application assigned to the current workspace."
-  (when (and (cl-member (+workspace-current-name)
-                        cae-exwm-workspaces
-                        :test #'cl-equalp)
+  (when (and (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
              (cae-exwm--no-org-capture-active-p))
     (let ((app-buffer (cae-exwm--find-matching-buffer)))
       (when (and app-buffer (not (window-live-p (get-buffer-window app-buffer))))
@@ -215,18 +237,17 @@ Optional STATE is passed from persp-mode."
 
 (defun cae-exwm--get-matching-live-buffers (workspace)
   "Get live buffers matching WORKSPACE excluding current buffer."
-  (cl-remove-if-not
-   (lambda (buffer)
-     (and (buffer-live-p buffer)
-          (not (eq buffer (current-buffer)))
-          (string= (cae-exwm-get-workspace-name buffer) workspace)))
-   (persp-buffers (persp-get-by-name workspace))))
+  (let ((current-buffer (current-buffer))
+        (result nil))
+    (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
+      (when (and (buffer-live-p buffer)
+                 (not (eq buffer current-buffer))
+                 (string= (cae-exwm-get-workspace-name buffer) workspace))
+        (push buffer result)))))
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
-  (unless (cl-member (+workspace-current-name)
-                     cae-exwm-workspaces
-                     :test #'cl-equalp)
+  (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
     (cl-return-from cae-exwm-persp-cleanup-workspace))
   
   (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
@@ -244,33 +265,38 @@ Optional STATE is passed from persp-mode."
 
 ;;; URL handling
 
+;; Pre-compute browser name parts for common browsers
+(defvar cae-exwm--browser-name-parts-cache (make-hash-table :test 'equal :size 10)
+  "Cache for browser name parts to avoid repeated splitting.")
+
 (defun cae-exwm--get-browser-workspace-name ()
   "Get the workspace name for the current browser."
-  (if (and cae-exwm--browser-workspace-cache
-           (equal browse-url-generic-program cae-exwm--last-browser-program))
-      cae-exwm--browser-workspace-cache
-    (setq cae-exwm--last-browser-program browse-url-generic-program)
-    (setq cae-exwm--browser-workspace-cache
-          (when browse-url-generic-program
-            (let* ((browser-parts (string-split (file-name-base browse-url-generic-program) "-"))
-                   (browser-combinations
-                    (nreverse
-                     (cdr
-                      (cl-loop for i from 1 to (length browser-parts)
-                               collect (cl-subseq browser-parts 0 i)))))
-                   (matching-combo
-                    (cl-find-if
-                     (lambda (parts)
-                       (let ((browser-name (string-join parts "-")))
-                         (alist-get browser-name
-                                    cae-exwm-workspace-name-replacements
-                                    nil nil #'cl-equalp)))
-                     browser-combinations)))
-              (when matching-combo
-                (let ((browser-key (string-join matching-combo "-")))
-                  (alist-get browser-key
-                             cae-exwm-workspace-name-replacements
-                             nil nil #'cl-equalp))))))))
+  (when browse-url-generic-program
+    (or (gethash browse-url-generic-program cae-exwm--browser-workspace-cache-table)
+        (let* ((browser-name (file-name-base browse-url-generic-program))
+               (browser-parts (or (gethash browser-name cae-exwm--browser-name-parts-cache)
+                                 (let ((parts (string-split browser-name "-")))
+                                   (puthash browser-name parts cae-exwm--browser-name-parts-cache)
+                                   parts)))
+               (browser-combinations
+                (nreverse
+                 (cdr
+                  (cl-loop for i from 1 to (length browser-parts)
+                           collect (cl-subseq browser-parts 0 i)))))
+               (workspace-name nil))
+          
+          ;; Use faster loop with early return
+          (catch 'found
+            (dolist (parts browser-combinations)
+              (let* ((browser-key (string-join parts "-"))
+                     (name (gethash browser-key cae-exwm--workspace-name-cache)))
+                (when name
+                  (setq workspace-name name)
+                  (throw 'found t)))))
+          
+          ;; Cache the result for future lookups
+          (puthash browse-url-generic-program workspace-name cae-exwm--browser-workspace-cache-table)
+          workspace-name))))
 
 (defun cae-exwm-browse-url-generic-a (&rest _)
   "Switch to the appropriate workspace before opening a URL."
@@ -284,6 +310,11 @@ Optional STATE is passed from persp-mode."
   "Reload the EXWM workspaces configuration."
   (interactive)
   (cae-exwm-clear-caches)
+  
+  ;; Rebuild workspace names set
+  (dolist (name cae-exwm-workspaces)
+    (puthash name t cae-exwm--workspace-names-set))
+  
   (persp-def-auto-persp "EXWM"
                         :parameters '((dont-save-to-file . t))
                         :hooks '(exwm-manage-finish-hook)
@@ -298,6 +329,9 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm-setup-auto-persp ()
   "Set up EXWM workspace management."
   (unless cae-exwm--auto-persp-initialized
+    ;; Ensure caches are initialized
+    (cae-exwm-clear-caches)
+    
     ;; Set up hooks
     (add-hook 'exwm-floating-setup-hook #'cae-exwm--disable-floating)
     (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
