@@ -26,7 +26,7 @@
   (add-hook 'exwm-update-title-hook #'cae-exwm-rename-buffer-to-title)
 
   (use-package! exwm
-    :config
+    :defer nil :config
     (when init-file-debug
       (exwm-debug +1))
 
