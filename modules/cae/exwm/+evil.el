@@ -1,7 +1,6 @@
 ;;; cae/exwm/+evil.el -*- lexical-binding: t; -*-
 
-(after! evil
-  (evil-set-initial-state 'exwm-mode 'normal))
+(evil-set-initial-state 'exwm-mode 'normal)
 (after! evil-snipe
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
