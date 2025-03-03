@@ -17,7 +17,6 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(defvar cae-debugging-load-p t)
 (let ((q t))
   (defvar cae-init-preamble-enabled-p (and q t))
   (defvar cae-init-core-enabled-p (and q t))
