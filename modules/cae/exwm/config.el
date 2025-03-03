@@ -167,7 +167,25 @@
         frame))
 
     ;; Do not handle EXWM buffers.
-    (set-popup-rule! "^\\*exwm" :ignore t))
+    (set-popup-rule! "^\\*exwm" :ignore t)
+
+    (when (modulep! :editor evil)
+      (if (or (modulep! :completion helm)
+              (modulep! :cae helm))
+          (map! :leader :desc "Run external command" "$" #'helm-run-external-command)
+        (map! :leader :desc "Run external command" "$" #'app-launcher-run-app)))
+    (map! :map exwm-mode-map
+          :localleader
+          (:prefix ("d" . "debug")
+           :desc "Clear debug buffer" "l" #'xcb-debug:clear
+           :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
+           :desc "Enable debug logging" "t" #'exwm-debug)
+          :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
+          :desc "Hide floating window" "h" #'exwm-floating-hide
+          :desc "Send next key" "q" #'exwm-input-send-next-key
+          :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
+          :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
+          :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
