@@ -1,5 +1,21 @@
 ;;; lisp/cae-exwm.el -*- lexical-binding: t; -*-
 
+(defun cae-toggle-redshift ()
+  "Toggle redshift on/off using location data from cae-location-data."
+  (interactive)
+  (if (get 'cae-toggle-redshift 'state)
+      (progn
+        (start-process "redshift-off" nil "redshift" "-x")
+        (put 'cae-toggle-redshift 'state nil)
+        (message "Redshift turned off"))
+    (let* ((lat (cdr (assq 'latitude cae-location-data)))
+           (lon (cdr (assq 'longitude cae-location-data)))
+           (lat-str (number-to-string lat))
+           (lon-str (number-to-string lon)))
+      (start-process "redshift-on" nil "redshift" "-l" (concat lat-str ":" lon-str))
+      (put 'cae-toggle-redshift 'state t)
+      (message "Redshift turned on for %s" (cdr (assq 'name cae-location-data))))))
+
 (setq exwm-evil-initial-state-alist
       '(("kitty" . insert)))
 
@@ -35,7 +51,7 @@ EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
 _s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _D_: Vanilla Doom Emacs
-_RET_: Kitty      _S-RET_: Eshell
+_RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
       ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
@@ -48,7 +64,8 @@ _RET_: Kitty      _S-RET_: Eshell
       ("E" #'cae-exwm-open-nested-vanilla-emacs)
       ("D" #'cae-exwm-open-nested-vanilla-doom-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))
-      ("S-RET" #'cae-open-eshell-in-new-workspace)))
+      ("S-RET" #'cae-open-eshell-in-new-workspace)
+      ("r" #'cae-toggle-redshift)))
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
