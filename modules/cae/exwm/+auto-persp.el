@@ -72,8 +72,7 @@
     ("wow.exe" . "WoW")
     ("battle.net.exe" . "Battle.net")
     ("hakuneko-desktop" . "Hakuneko")
-    ("runescape" . "RuneScape")
-    ("Anydesk" . "Windows"))
+    ("runescape" . "RuneScape"))
   "Alist mapping EXWM class names to workspace names.
 The key is the class name from EXWM and the value is the
 name of the workspace that will be created for that application.")
@@ -223,7 +222,7 @@ Optional STATE is passed from persp-mode."
           (string= (cae-exwm-get-workspace-name buffer) workspace)))
    (persp-buffers (persp-get-by-name workspace))))
 
-(defun cae-exwm-persp-cleanup-workspace ()
+(cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
   (unless (cl-member (+workspace-current-name)
                      cae-exwm-workspaces
