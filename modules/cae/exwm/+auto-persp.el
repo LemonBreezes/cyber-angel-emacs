@@ -115,19 +115,19 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm--select-application-window (application-name buffer)
   "Select window for APPLICATION-NAME and BUFFER."
   (when-let* ((visible-buffers (doom-visible-buffers))
-              (matching-buffer (cl-find-if 
+              (matching-buffer (cl-find-if
                                 (lambda (buf)
                                   (string= (cae-exwm-get-workspace-name buf)
                                            application-name))
                                 visible-buffers))
               (buffer-window (get-buffer-window matching-buffer)))
     (select-window buffer-window))
-  
+
   (when (and (modulep! :ui popup)
              (+popup-window-p))
     (other-window 1)
     (switch-to-buffer buffer))
-  
+
   (delete-other-windows))
 
 (defun cae-exwm-persp--after-match (buffer &rest _)
@@ -137,14 +137,14 @@ Optional STATE is passed from persp-mode."
     ;; Exit minibuffer if active
     (when (minibufferp nil t)
       (minibuffer-keyboard-quit))
-    
+
     ;; Handle workspace switching
     (when (not (string= application-name (+workspace-current-name)))
       (persp-remove-buffer buffer))
     (cl-pushnew application-name cae-exwm-workspaces :test #'string=)
     (+workspace-switch application-name t)
     (+workspace/display)
-    
+
     ;; Select appropriate window
     (cae-exwm--select-application-window application-name buffer)))
 
@@ -184,7 +184,7 @@ Optional STATE is passed from persp-mode."
 
 (defun cae-exwm--get-matching-live-buffers (workspace)
   "Get live buffers matching WORKSPACE excluding current buffer."
-  (cl-remove-if-not 
+  (cl-remove-if-not
    (lambda (buffer)
      (and (buffer-live-p buffer)
           (not (eq buffer (current-buffer)))
@@ -209,21 +209,21 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm--get-browser-workspace-name ()
   "Get the workspace name for the current browser."
   (when-let* ((browser-parts (string-split (file-name-base browse-url-generic-program) "-"))
-              (browser-combinations 
-               (nreverse 
+              (browser-combinations
+               (nreverse
                 (cdr
                  (cl-loop for i from 1 to (length browser-parts)
                           collect (cl-subseq browser-parts 0 i)))))
               (matching-combo
-               (cl-find-if 
+               (cl-find-if
                 (lambda (parts)
                   (let ((browser-name (string-join parts "-")))
-                    (alist-get browser-name 
+                    (alist-get browser-name
                                cae-exwm-workspace-name-replacements
                                nil nil #'cl-equalp)))
                 browser-combinations))
               (browser-key (string-join matching-combo "-"))
-              (workspace (alist-get browser-key 
+              (workspace (alist-get browser-key
                                     cae-exwm-workspace-name-replacements
                                     nil nil #'cl-equalp)))
     workspace))
@@ -255,12 +255,12 @@ Optional STATE is passed from persp-mode."
   ;; Set up hooks
   (add-hook 'exwm-floating-setup-hook #'cae-exwm--disable-floating)
   (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
-  
+
   ;; Set up advice
   (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
   (advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
   (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
-  
+
   ;; Initialize workspaces
   (cae-exwm-reload-workspaces))
 
