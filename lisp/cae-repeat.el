@@ -182,6 +182,20 @@
       ("j" comint-next-prompt
        "k" comint-previous-prompt)))
 
+;; Define repeat maps for scrolling commands.
+  (define-repeat-map View-scroll-half-page-forward
+    ("v" View-scroll-half-page-forward)
+    (:exit "V" View-scroll-half-page-backward))
+  (define-repeat-map View-scroll-half-page-backward
+    ("v" View-scroll-half-page-backward)
+    (:exit "V" View-scroll-half-page-forward))
+  (define-repeat-map cae-View-scroll-half-page-forward-other-window
+    ("v" cae-View-scroll-half-page-forward-other-window)
+    (:exit "V" cae-View-scroll-half-page-backward-other-window))
+  (define-repeat-map cae-View-scroll-half-page-backward-other-window
+    ("v" cae-View-scroll-half-page-backward-other-window)
+    (:exit "V" cae-View-scroll-half-page-forward-other-window))
+
   (when (modulep! :cae notifications)
     (define-repeat-map cae-ednc-toggle-notifications
       ("`" cae-ednc-toggle-notifications)))
