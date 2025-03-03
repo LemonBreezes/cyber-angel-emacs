@@ -48,7 +48,7 @@
 (if (locate-library "projectile")
 ;;; Projectile configuration
     (after! projectile
-      (run-with-idle-timer 1.0 nil #'projectile--cleanup-known-projects)
+      (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
