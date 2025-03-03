@@ -32,7 +32,9 @@
         :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
 
 (use-package! exwm-firefox-evil
-  :defer nil :config
+  :defer t :init
+  (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox)
+  :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
   ;; We can use VIM keys with any browser that has compatible keybindings.
   (cl-loop for class in '("firefoxdeveloperedition"
@@ -46,10 +48,6 @@
                           "librewolf-default")
            do (cl-pushnew class exwm-firefox-evil-firefox-class-name
                           :test #'string=))
-
-  (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox)
-  (add-hook 'doom-switch-buffer-hook #'exwm-firefox-evil-activate-if-firefox)
-
   (setq-hook! 'exwm-firefox-evil-mode-hook bookmark-make-record-function #'cae-exwm-firefox-bookmark--make)
 
   ;; Automatically reenable `evil-normal-state' after following a link.
