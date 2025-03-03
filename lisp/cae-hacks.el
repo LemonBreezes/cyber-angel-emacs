@@ -86,3 +86,7 @@
 
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
+
+;; BUG Use this until Dirvish is bumped in Doom Emacs
+(advice-remove #'dired-find-file :override #'dirvish-find-entry-a)
+(advice-add #'dired--find-file :override #'dirvish--find-entry)
