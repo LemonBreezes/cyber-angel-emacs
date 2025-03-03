@@ -193,7 +193,8 @@
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (when (modulep! :editor evil +everywhere)
-    (load! "+evil"))
+    (after! evil
+      (load! "+evil")))
 
   (when (modulep! :completion corfu)
     (after! corfu
@@ -201,7 +202,7 @@
 
   (when (modulep! :ui workspaces)
     (unless (featurep 'cae-exwm-auto-persp)
-      (after! (:all exwm dash persp-mode)
+      (after! (:all dash persp-mode)
         (load! "+auto-persp")))))
 
 ;;Local Variables:
