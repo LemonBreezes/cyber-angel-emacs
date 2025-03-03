@@ -1,6 +1,6 @@
 ;;; editor.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-repeat" doom-user-dir)
+;;(load! "lisp/cae-repeat" doom-user-dir)
 (load! "lisp/cae-vlf" doom-user-dir)
 (load! "lisp/cae-restore-point" doom-user-dir)
 
