@@ -1,12 +1,8 @@
   ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
 (use-package! repeat
-  :defer t :init
+  :defer 5.0 :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
-  (defun cae-enable-repeat-mode ()
-    (let ((cae-config-finished-loading nil))
-      (repeat-mode +1)))
-  (cae-run-with-timer 5 nil "enable-repeat-mode" #'cae-enable-repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
@@ -212,7 +208,7 @@
     ("n" comint-next-prompt
      "p" comint-previous-prompt))
 
-  (defadvice! my/repeat-ignore-when-hydra-active-a ()
+  (defadvice! cae-repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
 
@@ -222,9 +218,8 @@
     (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
 
   (autoload 'embark-verbose-indicator "embark")
-  (autoload 'which-key--create-buffer-and-show "which-key")
+  (autoload 'which-key--create-buffer-and-show "which-key"))
 
-  ;; This is so that my repeat maps are reloaded when I save this file.
-  (when cae-config-finished-loading
-    (ignore-errors (repeat-mode -1))
-    (ignore-errors (repeat-mode 1))))
+;; Local Variables:
+;; after-save-hook: (lambda () (ignore-errors (repeat-mode -1)) (ignore-errors (repeat-mode 1)))
+;; End:
