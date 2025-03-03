@@ -198,8 +198,8 @@ Optional STATE is passed from persp-mode."
       (catch 'found-capture
         (let ((popup-windows (and (modulep! :ui popup) (+popup-windows))))
           (dolist (window (if popup-windows
-                             (append popup-windows (doom-visible-windows))
-                           (doom-visible-windows)))
+                              (append popup-windows (doom-visible-windows))
+                            (doom-visible-windows)))
             (when (and (bufferp (window-buffer window))
                        (buffer-local-value 'org-capture-mode (window-buffer window)))
               (throw 'found-capture nil))))
@@ -275,9 +275,9 @@ Optional STATE is passed from persp-mode."
     (or (gethash browse-url-generic-program cae-exwm--browser-workspace-cache-table)
         (let* ((browser-name (file-name-base browse-url-generic-program))
                (browser-parts (or (gethash browser-name cae-exwm--browser-name-parts-cache)
-                                 (let ((parts (string-split browser-name "-")))
-                                   (puthash browser-name parts cae-exwm--browser-name-parts-cache)
-                                   parts)))
+                                  (let ((parts (string-split browser-name "-")))
+                                    (puthash browser-name parts cae-exwm--browser-name-parts-cache)
+                                    parts)))
                (browser-combinations
                 (nreverse
                  (cdr
