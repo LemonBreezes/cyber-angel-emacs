@@ -120,6 +120,6 @@
       corfu-auto-delay 0.05)
 (global-corfu-mode +1)
 
-;;Local Variables:
-;;eval: (remove-hook 'write-file-functions #'eval-buffer t)
-;;End:
+;; Local Variables:
+;; eval: (remove-hook 'write-file-functions #'eval-buffer t)
+;; End:
