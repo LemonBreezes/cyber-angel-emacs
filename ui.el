@@ -1,6 +1,7 @@
 ;;; ui.el -*- lexical-binding: t; -*-
 
-(load! "lisp/cae-theme" doom-user-dir)
+(unless cae-config-finished-loading
+  (load! "lisp/cae-theme" doom-user-dir))
 (load! "lisp/cae-visual-scrolling" doom-user-dir)
 
 ;; Show absolute line numbers. I prefer to not show relative line numbers
