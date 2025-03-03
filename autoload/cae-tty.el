@@ -54,19 +54,3 @@
                   nerd-icons-octicon))
       (advice-add fn :override (cl-constantly "")))
     (remove-hook 'dired-mode-hook #'nerd-icons-dired-mode)))
-
-;;;###autoload
-(defun cae-terminal-type ()
-  (cond
-   ;; If Emacs is running in a GUI, you have full Unicode/font support.
-   ((cae-display-graphic-p)
-    2)
-   ((getenv "WT_SESSION")
-    1)
-   ;; Linux virtual console (tty). The TERM variable is usually "linux"
-   ((string-prefix-p "/dev/tty" (terminal-name))
-    0)
-   ;; Otherwise, if LANG indicates UTF-8 you’re probably in a modern terminal emulator.
-   ((and (getenv "LANG") (string-match "utf8" (getenv "LANG")))
-    1)
-   (t 0)))
