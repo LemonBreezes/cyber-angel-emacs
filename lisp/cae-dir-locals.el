@@ -5,7 +5,7 @@
   (when (buffer-file-name)
     (when (and (derived-mode-p 'emacs-lisp-mode)
                (not (cl-member (file-name-nondirectory (buffer-file-name))
-                               `("init.el" ,dir-locals-file "custom.el" "doctor.el" "packages.el")
+                               `(,dir-locals-file "doctor.el" "packages.el")
                                :test #'string=))
                (not (string-match-p "/packages/" buffer-file-name))
                (not (string-match-p "/trash/" buffer-file-name))
