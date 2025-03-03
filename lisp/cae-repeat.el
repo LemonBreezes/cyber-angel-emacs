@@ -1,8 +1,9 @@
   ;;; ~/.doom.d/lisp/cae-repeat.el -*- lexical-binding: t; -*-
 
 (use-package! repeat
-  :defer 3.0 :init
+  :defer t :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
+  (add-hook 'doom-first-file-hook #'repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
