@@ -20,6 +20,16 @@
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
 
+
+(defun cae-projectile-maybe-add-project ()
+  "If saving a .projectile file, add its directory to projectile's known projects."
+  (when (and buffer-file-name
+             (string= (file-name-nondirectory buffer-file-name) ".projectile"))
+    (let ((project-root (file-name-directory buffer-file-name)))
+      (projectile-add-known-project project-root)
+      (message "Added %s to projectile known projects" project-root))))
+(add-hook 'after-save-hook #'cae-maybe-add-projectile-project)
+
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
 (defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
