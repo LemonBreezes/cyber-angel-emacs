@@ -114,6 +114,6 @@
 
 (setq cae-config-finished-loading t)
 
-;;Local Variables:
-;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
-;;End:
+;; Local Variables:
+;; eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
+;; End:
