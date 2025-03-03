@@ -3,7 +3,7 @@
 (use-package! repeat
   :defer t :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
-  (add-hook 'doom-first-file-hook #'repeat-mode)
+  (run-at-time 5 nil #'repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
