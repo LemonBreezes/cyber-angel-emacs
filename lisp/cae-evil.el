@@ -275,6 +275,7 @@
   (advice-add #'evil-escape-mode :override #'key-chord-mode)
   :config
   (setq key-chord-two-keys-delay 0.2)
+  (setq key-chord-typing-detection t)
   (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
   (key-chord-define evil-insert-state-map "qj" #'cae-ispell-word-then-abbrev)
   (key-chord-define evil-insert-state-map "qk" #'evil-escape)
