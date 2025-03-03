@@ -11,24 +11,7 @@
   (cl-pushnew 'escape exwm-input-prefix-keys)
 
   ;; We will disable `C-c' in insert state.
-  (define-key exwm-mode-map (kbd "C-c") nil)
-
-  (if (or (modulep! :completion helm)
-          (modulep! :cae helm))
-      (map! :leader :desc "Run external command" "$" #'helm-run-external-command)
-    (map! :leader :desc "Run external command" "$" #'app-launcher-run-app))
-  (map! :map exwm-mode-map
-        :localleader
-        (:prefix ("d" . "debug")
-         :desc "Clear debug buffer" "l" #'xcb-debug:clear
-         :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
-         :desc "Enable debug logging" "t" #'exwm-debug)
-        :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
-        :desc "Hide floating window" "h" #'exwm-floating-hide
-        :desc "Send next key" "q" #'exwm-input-send-next-key
-        :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
-        :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
-        :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
+  (define-key exwm-mode-map (kbd "C-c") nil))
 
 (use-package! exwm-firefox-evil
   :defer t :init
