@@ -22,6 +22,17 @@
 (when cae-init-projectile-enabled-p
   (load! "lisp/cae-projectile" doom-user-dir))
 
+(when (and (modulep! :editor evil)
+           cae-init-evil-enabled-p)
+  (after! evil
+    (load! "lisp/cae-evil" doom-user-dir)))
+
+(when (and (modulep! :cae exwm)
+           cae-init-exwm-enabled-p)
+  (add-hook! 'exwm-init-hook
+    (load! "lisp/cae-exwm" doom-user-dir)))
+
+
 
 ;;; UI
 
