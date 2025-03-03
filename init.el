@@ -1,10 +1,25 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; Set up constants
+(defconst cae-multi-secrets-dir (concat doom-user-dir "secrets/"))
+(defconst cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
+(defconst cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
+(defconst cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
+(defconst cae-multi-org-dir (concat cae-multi-local-dir "org/"))
+(defconst cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
+(defconst cae-repo-dir (expand-file-name "~/src/"))
+(make-directory cae-multi-local-dir t)
+(make-directory cae-multi-data-dir t)
+(make-directory cae-multi-cache-dir t)
+(make-directory cae-multi-org-dir t)
+(make-directory cae-multi-secrets-modules-dir t)
+(add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
+
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (let ((q t))
-  (defvar cae-init-preamble-enabled-p (and q nil))
-  (defvar cae-init-core-enabled-p (and q t))
+  (defvar cae-init-preamble-enabled-p (and q t))
+  (defvar cae-init-core-enabled-p (and q nil))
   (defvar cae-keyboard-remaps-enabled-p (and q nil))
   (let ((p (and q t)))
     (defvar cae-init-ui-enabled-p (and p t))
