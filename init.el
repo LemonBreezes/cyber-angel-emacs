@@ -17,10 +17,10 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(require 'cae-lib)
+(require 'cae-lib nil t)
 (let ((q t))
   (defvar cae-init-preamble-enabled-p (and q t))
-  (defvar cae-init-core-enabled-p (and q nil))
+  (defvar cae-init-core-enabled-p (and q t))
   (defvar cae-init-tty-enabled-p (and q nil))
   (defvar cae-init-bindings-enabled-p (and q nil))
   (defvar cae-init-multi-enabled-p (and q nil))
