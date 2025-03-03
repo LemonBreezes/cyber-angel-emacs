@@ -71,7 +71,7 @@
 
 (cl-defun cae-keyboard-remap-char (arg)
   (declare (side-effect-free t))
-  (unless cae-keyboard-remaps-enabled-p
+  (unless cae-init-keyboard-remaps-enabled-p
     (cl-return-from cae-keyboard-remap-char arg))
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
@@ -80,7 +80,7 @@
 
 (cl-defun cae-keyboard-remap-char-reverse (arg)
   (declare (side-effect-free t))
-  (unless cae-keyboard-remaps-enabled-p
+  (unless cae-init-keyboard-remaps-enabled-p
     (cl-return-from cae-keyboard-remap-char-reverse arg))
   (let ((orbit (cl-find arg cae-keyboard-orbits :test #'cl-find)))
     (if orbit
