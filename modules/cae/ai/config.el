@@ -36,7 +36,9 @@
                 :top_p 0.9)))
 
 (use-package! aidermacs
-  :defer t :config
+  :defer t :init
+  (autoload 'aidermacs-transient-menu "aidermacs" nil t)
+  :config
   (setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-use-architect-mode t)
