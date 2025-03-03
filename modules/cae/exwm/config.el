@@ -210,18 +210,19 @@
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
-  (when (modulep! :editor evil +everywhere)
-    (after! evil
-      (load! "+evil")))
-
-  (when (modulep! :completion corfu)
-    (after! corfu
-      (load! "+corfu")))
-
-  (when (and (modulep! :ui workspaces)
-             (not (featurep 'cae-exwm-auto-persp)))
-    (after! persp-mode
-      (load! "+auto-persp"))))
+  ;;(when (modulep! :editor evil +everywhere)
+  ;;  (after! evil
+  ;;    (load! "+evil")))
+  ;;
+  ;;(when (modulep! :completion corfu)
+  ;;  (after! corfu
+  ;;    (load! "+corfu")))
+  ;;
+  ;;(when (and (modulep! :ui workspaces)
+  ;;           (not (featurep 'cae-exwm-auto-persp)))
+  ;;  (after! persp-mode
+  ;;    (load! "+auto-persp")))
+  )
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
