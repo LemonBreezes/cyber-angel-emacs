@@ -7,9 +7,6 @@
        '(dired transient dirvish diredfl dirvish-widgets dirvish-side
          dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
-   anzu isearch-mb
-   ,@(when (modulep! :editor evil)
-       '(evil-anzu))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
@@ -100,7 +97,10 @@
            '(evil-multiedit evil-mc)
          '(multiple-cursors)))
    ,@(when (modulep! :editor format)
-       '(apheleia)))
+       '(apheleia))
+   anzu isearch-mb
+   ,@(when (modulep! :editor evil)
+       '(evil-anzu)))
  t)
 
 (unless (or (executable-find "termux-setup-storage")
