@@ -45,12 +45,6 @@
       (persistent-scratch-mode +1))))
 (persistent-scratch-setup-default)
 
-(when (modulep! :editor evil)
-  (after! evil
-    (load! "lisp/cae-evil" doom-user-dir)))
-(add-hook! 'exwm-init-hook
-  (load! "lisp/cae-exwm" doom-user-dir))
-
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
