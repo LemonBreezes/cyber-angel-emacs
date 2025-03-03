@@ -108,7 +108,7 @@
 (after! dirvish
   (setq dirvish-hide-cursor nil)
   (setq dirvish-attributes
-        (nconc (when (cae-display-graphic-p)
+        (append (when (cae-display-graphic-p)
                  '(nerd-icons))
                '(file-size subtree-state collapse file-time)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
