@@ -8,19 +8,19 @@
   (load! "core" doom-user-dir))
 
 (when cae-init-tty-enabled-p
-  (load! "tty" doom-user-dir))
+  (load! "lisp/cae-tty" doom-user-dir))
 
 (when cae-init-bindings-enabled-p
-  (load! "bindings" doom-user-dir))
+  (load! "lisp/cae-bindings" doom-user-dir))
 
 (when cae-init-multi-enabled-p
-  (load! "multi" doom-user-dir))
+  (load! "lisp/cae-multi" doom-user-dir))
 
 (when cae-init-smartparens-enabled-p
-  (load! "smartparens" doom-user-dir))
+  (load! "lisp/cae-smartparens" doom-user-dir))
 
 (when cae-init-projectile-enabled-p
-  (load! "projectile" doom-user-dir))
+  (load! "lisp/cae-projectile" doom-user-dir))
 
 
 ;;; UI
