@@ -38,9 +38,9 @@ If CONTEXT is provided, it will be formatted as a code block before the query."
   (let* ((chatgpt-shell-prompt-query-response-style 'other-buffer)
          (display-buffer-alist cae-ai-chatgpt-popup-display-config)
          (formatted-prompt (if context
-                              (format "Here is the terminal output:\n```\n%s\n```\n\nMy question about this output: %s"
-                                      context query)
-                            query)))
+                               (format "Here is the terminal output:\n```\n%s\n```\n\nMy question about this output: %s"
+                                       context query)
+                             query)))
     (chatgpt-shell-send-to-buffer formatted-prompt)))
 
 ;;;###autoload
