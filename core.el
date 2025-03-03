@@ -48,11 +48,10 @@
 (require 'cae-lib)
 (load! "lisp/cae-tty" doom-user-dir)
 (load! "lisp/cae-bindings" doom-user-dir)
-(load! "lisp/cae-multi" doom-user-dir)              ;Run parallel Emacs instances.
-(load! "lisp/cae-smartparens" doom-user-dir)        ;Allow Smartparens to be disabled. This
-                                        ;is also our Smartparens configuration.
-(load! "lisp/cae-projectile" doom-user-dir)         ;Allow Projectile to be disabled. This
-                                        ;is also our Projectile configuration.
+(load! "lisp/cae-multi" doom-user-dir)
+(load! "lisp/cae-smartparens" doom-user-dir)
+(load! "lisp/cae-projectile" doom-user-dir)
+
 (when (modulep! :editor evil)
   (after! evil
     (load! "lisp/cae-evil" doom-user-dir)))
