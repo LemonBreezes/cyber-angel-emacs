@@ -7,7 +7,7 @@
 (after! ido
   (load! "lisp/cae-ido" doom-user-dir))
 
-(after! yasnippet
+(after! yasnippet                       ;
   (setq yas-triggers-in-field t       ;Allow nested snippets.
         yas-trigger-symbol " →")
   (setq-hook! 'org-mode-hook
