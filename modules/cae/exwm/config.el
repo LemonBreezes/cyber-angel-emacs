@@ -173,6 +173,8 @@
       (if (or (modulep! :completion helm)
               (modulep! :cae helm))
           (map! :leader :desc "Run external command" "$" #'helm-run-external-command)
+        ;; The problem with `app-launcher' is that it only shows applications
+        ;; with desktop files.
         (map! :leader :desc "Run external command" "$" #'app-launcher-run-app)))
     (map! :map exwm-mode-map
           :localleader
