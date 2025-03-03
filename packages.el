@@ -119,7 +119,7 @@
 (package! logos)
 (package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
-(package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
+(package! parrot :recipe (:host github :repo "LemonBreezes/parrot" :branch "handle-nil-mode-line-position"))
 (package! string-inflection)
 (package! beginend)
 (package! isearch-mb)
