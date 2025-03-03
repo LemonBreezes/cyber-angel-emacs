@@ -2,7 +2,7 @@
 
 (use-package! repeat
   :defer t :init
-  ;;(advice-add #'repeat-mode :around #'cae-shut-up-a)
+  (advice-add #'repeat-mode :around #'cae-shut-up-a)
   (add-hook 'doom-first-file-hook #'repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
