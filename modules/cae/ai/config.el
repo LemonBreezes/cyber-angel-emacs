@@ -24,7 +24,7 @@
     (require 'llm-claude)
     (setq llm-refactoring-provider
           (make-llm-claude :chat-model claude-model
-                           :key (cae-secrets-get-anthropic-api-key)
+                           :key (getenv "ANTHROPIC_API_KEY")
                            ;;:default-chat-non-standard-params '((stream . :json-false))
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
@@ -164,7 +164,7 @@
   ;;      :desc "Open DALL-E workspace" "C-i" #'cae-ai-open-dall-e-workspace)
   :config
   (setq dall-e-shell-display-function #'switch-to-buffer
-        dall-e-shell-openai-key (cae-secrets-get-openai-api-key)
+        dall-e-shell-openai-key (getenv "OPENAI_API_KEY")
         dall-e-shell-image-quality "hd"
         dall-e-shell-image-size "1024x1792"
         dall-e-shell-request-timeout 180))
@@ -206,6 +206,7 @@
   :defer t :init
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   :config
+  (setq gpt-openai-key (getenv "OPENAI_API_KEY"))
   (after! gptel-context
     (map! :map gptel-context-buffer-mode-map
           :n "q" #'gptel-context-quit
