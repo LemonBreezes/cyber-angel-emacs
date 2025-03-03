@@ -92,7 +92,9 @@ name of the workspace that will be created for that application.")
 
 ;; Create a set for faster membership testing
 (defvar cae-exwm--floating-apps-set
-  (let ((set (make-hash-table :test 'equal :size (length cae-exwm-floating-apps))))
+  (let ((set (make-hash-table
+              :test 'equal
+              :size (expt 2 (ceiling (log (length cae-exwm-floating-apps) 2))))))
     (dolist (app cae-exwm-floating-apps)
       (puthash app t set))
     set)
