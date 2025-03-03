@@ -1,51 +1,41 @@
-;;; benchmarks/key-chord-benchmark.el -*- lexical-binding: t; -*-
+;;; key-chord-benchmark.el --- Benchmark for key-chord typing simulation -*- lexical-binding: t; -*-
 
-(defun cae-key-chord--random-alnum-char ()
-  "Generate a random alpha-numeric character."
-  (let* ((chars "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-         (len (length chars))
-         (idx (random len)))
-    (aref chars idx)))
+(require 'key-chord)
+(require 'benchmark)
 
-;;;###autoload
 (defun cae-key-chord-benchmark (&optional iterations)
-  "Benchmark key-chord performance without modifying any active buffers.
-Optional argument ITERATIONS specifies how many simulated key chords to process.
-Default is 1000 iterations."
-  (interactive "p")
-  (let* ((iterations (or iterations 1000))
-         (temp-buffer (generate-new-buffer " *key-chord-benchmark*"))
-         (key-chord-mode-was-on key-chord-mode)
-         (start-time (current-time))
-         (elapsed 0))
-    (unwind-protect
-        (with-current-buffer temp-buffer
-          (unless key-chord-mode-was-on
-            (key-chord-mode 1))
-          (emacs-lisp-mode)
+  "Benchmark key-chord by simulating random alpha-numeric key presses.
+Runs ITERATIONS times (default 1000)."
+  (interactive)
+  (unless iterations
+    (setq iterations 1000))
+  
+  (let ((alphanumeric-chars "abcdefghijklmnopqrstuvwxyz0123456789")
+        (key-chord-safety-interval-wait 0.0)
+        (results nil)
+        (last-key nil))
+    
+    ;; Enable key-chord mode for the benchmark
+    (unless key-chord-mode
+      (key-chord-mode 1))
+    
+    ;; Run the benchmark
+    (setq results
+          (benchmark-run iterations
+            (let* ((random-index (random (length alphanumeric-chars)))
+                   (current-key (aref alphanumeric-chars random-index)))
+              ;; Simulate key-chord processing
+              (when last-key
+                (key-chord-input-method last-key current-key))
+              (setq last-key current-key))))
+    
+    ;; Display results
+    (message "Key-chord random typing benchmark (%d iterations):" iterations)
+    (message "  Time elapsed: %f seconds" (car results))
+    (message "  Garbage collections: %d" (cadr results))
+    (message "  GC time: %f seconds" (caddr results))
+    
+    results))
 
-          ;; Simulate processing key chords with random keys
-          (dotimes (_ iterations)
-            (let* ((first-char (cae-key-chord--random-alnum-char))
-                   (second-char (cae-key-chord--random-alnum-char))
-                   (chord (string first-char second-char)))
-
-              ;; Define a test chord with these random characters
-              (key-chord-define-local chord #'ignore)
-
-              ;; Process the chord
-              (key-chord-input-method first-char)
-              ;; Simulate the second keypress arriving within the delay
-              (let ((input-method-function nil)
-                    (key-chord-last-unmatched nil))
-                (key-chord-input-method second-char))))
-
-          (setq elapsed (float-time (time-subtract (current-time) start-time)))
-          (message "Key-chord benchmark: processed %d simulated random chords in %.3f seconds (%.1f chords/sec)"
-                   iterations elapsed (/ iterations elapsed)))
-
-      ;; Cleanup
-      (kill-buffer temp-buffer)
-      (unless key-chord-mode-was-on
-        (key-chord-mode -1))))
-  nil)
+(provide 'key-chord-benchmark)
+;;; key-chord-benchmark.el ends here
