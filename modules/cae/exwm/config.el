@@ -193,11 +193,12 @@
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
   (when (modulep! :editor evil +everywhere)
-    (after! (:all evil exwm)
+    (after! evil
       (load! "+evil")))
 
   (when (modulep! :completion corfu)
-    (load! "+corfu"))
+    (after! corfu
+      (load! "+corfu")))
 
   (when (modulep! :ui workspaces)
     (unless (featurep 'cae-exwm-auto-persp)
