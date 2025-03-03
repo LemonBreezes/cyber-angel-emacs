@@ -18,11 +18,14 @@
                         (no-other-window . t))))
   "Display configuration for ChatGPT popup buffers.")
 
+(defvar cae-ai-terminal-max-chars 4000
+  "Maximum number of characters to extract from terminal buffers.")
+
 ;;;###autoload
 (defun cae-ai-get-terminal-buffer-content (&optional max-chars)
   "Get the content of the current terminal buffer with reasonable truncation.
 Optional argument MAX-CHARS limits the number of characters to extract (default 4000)."
-  (let* ((max-chars (or max-chars 4000))
+  (let* ((max-chars (or max-chars cae-ai-terminal-max-chars))
          (buffer-text (buffer-substring-no-properties
                        (max (- (point-max) max-chars) (point-min))
                        (point-max))))
@@ -43,15 +46,18 @@ If CONTEXT is provided, it will be formatted as a code block before the query."
                              query)))
     (chatgpt-shell-send-to-buffer formatted-prompt)))
 
-;;;###autoload
+(defun cae-ai-extract-query-from-input (input)
+  "Extract query from comma-prefixed INPUT.
+Returns nil if INPUT doesn't start with a comma."
+  (when (string-prefix-p "," input)
+    (substring input 1)))
+
 (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
   "Advice function to intercept comma-prefixed input in comint buffers.
 If input starts with a comma, send it to ChatGPT, otherwise call F with ARGS."
-  (require 'chatgpt-shell)
   (let ((input (comint-get-old-input-default)))
-    (if (string-prefix-p "," input)
-        (let ((query (substring input 1))
-              (buffer-content (cae-ai-get-terminal-buffer-content)))
+    (if-let ((query (cae-ai-extract-query-from-input input)))
+        (let ((buffer-content (cae-ai-get-terminal-buffer-content)))
           (cae-ai-send-to-chatgpt query buffer-content))
       (apply f args))))
 
@@ -60,9 +66,8 @@ If input starts with a comma, send it to ChatGPT, otherwise call F with ARGS."
   "Send eshell input to ChatGPT if it starts with a comma.
 This function is meant to be used in `eshell-input-filter-functions'."
   (let ((input (buffer-substring-no-properties eshell-last-input-start eshell-last-input-end)))
-    (when (string-prefix-p "," input)
-      (let ((query (substring input 1))
-            (buffer-content (cae-ai-get-terminal-buffer-content)))
+    (when-let ((query (cae-ai-extract-query-from-input input)))
+      (let ((buffer-content (cae-ai-get-terminal-buffer-content)))
         (cae-ai-send-to-chatgpt query buffer-content)
         ;; Delete the command from the input to prevent it from being executed
         (delete-region eshell-last-input-start eshell-last-input-end)
@@ -118,17 +123,29 @@ Otherwise delete ARG characters forward."
       (delete-char arg))))
 
 ;;;###autoload
+(defun cae-ai-open-in-workspace (workspace-name create-fn)
+  "Open an AI tool in a dedicated workspace.
+WORKSPACE-NAME is the name of the workspace to create or switch to.
+CREATE-FN is a function that creates the AI tool buffer."
+  (unless (fboundp '+workspace-switch)
+    (user-error "Workspace functionality not available"))
+  (+workspace-switch workspace-name t)
+  (funcall create-fn)
+  (when (fboundp 'persp-add-buffer)
+    (persp-add-buffer (current-buffer))))
+
+;;;###autoload
 (defun cae-ai-open-chatgpt-workspace ()
   "Open ChatGPT in a dedicated workspace."
   (interactive)
-  (+workspace-switch cae-ai-chatgpt-shell-workspace-name t)
-  (chatgpt-shell)
-  (persp-add-buffer (current-buffer)))
+  (cae-ai-open-in-workspace 
+   cae-ai-chatgpt-shell-workspace-name
+   #'chatgpt-shell))
 
 ;;;###autoload
 (defun cae-ai-open-dall-e-workspace ()
   "Open DALL-E in a dedicated workspace."
   (interactive)
-  (+workspace-switch cae-ai-dall-e-shell-workspace-name t)
-  (dall-e-shell)
-  (persp-add-buffer (current-buffer)))
+  (cae-ai-open-in-workspace 
+   cae-ai-dall-e-shell-workspace-name
+   #'dall-e-shell))
