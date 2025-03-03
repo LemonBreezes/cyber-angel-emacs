@@ -176,7 +176,7 @@
         :desc "Open ChatGPT here" "C" #'chatgpt-shell
         :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
   ;; Use , to ask ChatGPT questions in any comint buffer
-  ;;(advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   :config
   (map! :map chatgpt-shell-mode-map
         :n "RET" #'comint-send-input
