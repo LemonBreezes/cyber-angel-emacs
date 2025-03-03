@@ -4,7 +4,6 @@
   :defer 5.0 :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
   :config
-  (repeat-mode +1)
   (setq repeat-exit-key "TAB"
         repeat-check-key t
         repeat-echo-mode-line-string nil)
@@ -213,13 +212,9 @@
     :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
 
-  (after! outline
-    (map! :map outline-navigation-repeat-map
-          "RET" #'outline-toggle-children)
-    (put #'outline-toggle-children 'repeat-map 'outline-navigation-repeat-map))
-
   (autoload 'embark-verbose-indicator "embark")
-  (autoload 'which-key--create-buffer-and-show "which-key"))
+  (autoload 'which-key--create-buffer-and-show "which-key")
+  (repeat-mode +1))
 
 ;; Local Variables:
 ;; after-save-hook: (lambda () (ignore-errors (repeat-mode -1)) (ignore-errors (repeat-mode 1)))
