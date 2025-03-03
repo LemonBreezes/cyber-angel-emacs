@@ -44,9 +44,12 @@
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
 
-(load! "lisp/cae-debug" doom-user-dir)
-(load! "lisp/cae-dir-locals" doom-user-dir)
-(load! "lisp/cae-hacks" doom-user-dir)
+(when cae-init-debug-enabled-p
+  (load! "lisp/cae-debug" doom-user-dir))
+(when cae-init-dir-locals-enabled-p
+  (load! "lisp/cae-dir-locals" doom-user-dir))
+(when cae-init-hacks-enabled-p
+  (load! "lisp/cae-hacks" doom-user-dir))
 
 ;; Set a fallback theme.
 (setq doom-theme 'wheatgrass)
