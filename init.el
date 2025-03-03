@@ -3,7 +3,7 @@
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (let ((q t))
-  (defvar cae-init-preamble-enabled-p (and q t))
+  (defvar cae-init-preamble-enabled-p (and q nil))
   (defvar cae-init-core-enabled-p (and q t))
   (defvar cae-keyboard-remaps-enabled-p (and q nil))
   (let ((p (and q t)))
