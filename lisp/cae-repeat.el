@@ -5,6 +5,7 @@
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
   (defun cae-enable-repeat-mode ()
     (let ((cae-config-finished-loading nil))
+      (require 'repeat)
       (repeat-mode +1)))
   (add-hook 'doom-first-file-hook #'cae-enable-repeat-mode)
   :config
