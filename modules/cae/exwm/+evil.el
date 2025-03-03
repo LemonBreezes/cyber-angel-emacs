@@ -6,9 +6,9 @@
   (add-to-list 'evil-snipe-disabled-modes 'exwm-mode))
 
 (use-package! exwm-evil
-  :init
+  :defer t :init
   (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
-  :defer t :config
+  :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
 
   ;; We will disable `C-c' in insert state.
