@@ -116,10 +116,10 @@ Optional STATE is passed from persp-mode."
   "Select window for APPLICATION-NAME and BUFFER."
   (when-let* ((visible-buffers (doom-visible-buffers))
               (matching-buffer (cl-find-if 
-                               (lambda (buf)
-                                 (string= (cae-exwm-get-workspace-name buf) 
-                                          application-name))
-                               visible-buffers))
+                                (lambda (buf)
+                                  (string= (cae-exwm-get-workspace-name buf)
+                                           application-name))
+                                visible-buffers))
               (buffer-window (get-buffer-window matching-buffer)))
     (select-window buffer-window))
   
@@ -154,7 +154,7 @@ Optional STATE is passed from persp-mode."
       (cl-notany (lambda (window)
                    (and (bufferp (window-buffer window))
                         (buffer-local-value 'org-capture-mode
-                                           (window-buffer window))))
+                                            (window-buffer window))))
                  (cl-union (and (modulep! :ui popup)
                                 (+popup-windows))
                            (doom-visible-windows)))))
@@ -219,13 +219,13 @@ Optional STATE is passed from persp-mode."
                 (lambda (parts)
                   (let ((browser-name (string-join parts "-")))
                     (alist-get browser-name 
-                              cae-exwm-workspace-name-replacements 
-                              nil nil #'cl-equalp)))
+                               cae-exwm-workspace-name-replacements
+                               nil nil #'cl-equalp)))
                 browser-combinations))
               (browser-key (string-join matching-combo "-"))
               (workspace (alist-get browser-key 
-                                   cae-exwm-workspace-name-replacements 
-                                   nil nil #'cl-equalp)))
+                                    cae-exwm-workspace-name-replacements
+                                    nil nil #'cl-equalp)))
     workspace))
 
 (defun cae-exwm-browse-url-generic-a (&rest _)
