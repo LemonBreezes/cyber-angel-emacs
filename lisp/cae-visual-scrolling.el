@@ -45,18 +45,3 @@ DIRECTION should be 'up or 'down."
   (interactive)
   (with-selected-window (next-window)
     (call-interactively 'View-scroll-half-page-backward)))
-
-;; Define repeat maps for scrolling commands.
-(after! repeat
-  (define-repeat-map View-scroll-half-page-forward
-    ("v" View-scroll-half-page-forward)
-    (:exit "V" View-scroll-half-page-backward))
-  (define-repeat-map View-scroll-half-page-backward
-    ("v" View-scroll-half-page-backward)
-    (:exit "V" View-scroll-half-page-forward))
-  (define-repeat-map cae-View-scroll-half-page-forward-other-window
-    ("v" cae-View-scroll-half-page-forward-other-window)
-    (:exit "V" cae-View-scroll-half-page-backward-other-window))
-  (define-repeat-map cae-View-scroll-half-page-backward-other-window
-    ("v" cae-View-scroll-half-page-backward-other-window)
-    (:exit "V" cae-View-scroll-half-page-forward-other-window)))
