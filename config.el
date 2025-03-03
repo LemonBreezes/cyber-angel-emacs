@@ -133,7 +133,7 @@
 
 
 ;;; Appendix
-
+;;
 (when cae-init-appendix-enabled-p
   (load! "appendix" doom-user-dir))
 
