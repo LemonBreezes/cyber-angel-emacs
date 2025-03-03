@@ -99,4 +99,24 @@ This restores the original doom-escape-hook functions."
     (setq doom-escape-hook-debug-enabled nil)
     (message "doom-escape-hook debugging disabled.")))
 
+(defvar doom-load-tracking-alist nil
+  "Alist tracking which elisp files caused which packages to load.
+Format is ((PACKAGE . SOURCE-PATH) ...).")
+
+(when cae-debugging-load-p
+  (defadvice! doom-load--track-package-loading (fn path &optional noerror)
+    "Track which packages are loaded by which elisp files using `doom-load`.
+Reports when a new package is loaded and which file triggered it."
+    :around #'doom-load
+    (let ((before-features (copy-sequence features))
+          (source-file (or load-file-name (buffer-file-name))))
+      (prog1 (funcall fn path noerror)
+        (when source-file
+          (let ((new-features (cl-set-difference features before-features)))
+            (when new-features
+              (dolist (pkg new-features)
+                (push (cons pkg source-file) doom-load-tracking-alist)
+                (message "Package '%s' loaded by %s"
+                         pkg (file-relative-name source-file doom-emacs-dir))))))))))
+
 ;; See also autoload/cae-debug.el
