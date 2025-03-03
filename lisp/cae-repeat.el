@@ -4,6 +4,7 @@
   :defer 5.0 :init
   (advice-add #'repeat-mode :around #'cae-shut-up-a)
   :config
+  (repeat-mode +1)
   (setq repeat-exit-key "TAB"
         repeat-check-key t
         repeat-echo-mode-line-string nil)
