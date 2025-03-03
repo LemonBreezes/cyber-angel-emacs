@@ -1,21 +1,5 @@
 ;;; lisp/cae-exwm.el -*- lexical-binding: t; -*-
 
-(defun cae-toggle-redshift ()
-  "Toggle redshift on/off using location data from cae-location-data."
-  (interactive)
-  (if (get 'cae-toggle-redshift 'state)
-      (progn
-        (start-process "redshift-off" nil "redshift" "-x")
-        (put 'cae-toggle-redshift 'state nil)
-        (message "Redshift turned off"))
-    (let* ((lat (cdr (assq 'latitude cae-location-data)))
-           (lon (cdr (assq 'longitude cae-location-data)))
-           (lat-str (number-to-string lat))
-           (lon-str (number-to-string lon)))
-      (start-process "redshift-on" nil "redshift" "-l" (concat lat-str ":" lon-str))
-      (put 'cae-toggle-redshift 'state t)
-      (message "Redshift turned on for %s" (cdr (assq 'name cae-location-data))))))
-
 (setq exwm-evil-initial-state-alist
       '(("kitty" . insert)))
 
@@ -65,7 +49,7 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift
       ("D" #'cae-exwm-open-nested-vanilla-doom-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))
       ("S-RET" #'cae-open-eshell-in-new-workspace)
-      ("r" #'cae-toggle-redshift)))
+      ("r" #'cae-exwm-toggle-redshift)))
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
