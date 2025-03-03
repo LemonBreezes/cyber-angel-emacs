@@ -24,10 +24,10 @@ Returns t if help was successfully displayed, nil otherwise."
     t)
 
    ;; Case 2: Check for external command
-   ((or (and (string-match-p "^\\*." cmd) 
+   ((or (and (string-match-p "^\\*." cmd)
              (setq cmd (substring cmd 1)))
         (eshell-search-path cmd))
-    (or 
+    (or
      ;; Try tldr first
      (when (tldr-get-file-path-from-command-name cmd)
        (tldr cmd)
@@ -36,10 +36,10 @@ Returns t if help was successfully displayed, nil otherwise."
      (when (Man-completion-table cmd nil nil)
        (display-buffer (man cmd))
        t)))
-   
+
    ;; Case 3: Check for Elisp function
-   ((functionp (intern cmd)) 
-    (helpful-callable (intern cmd)) 
+   ((functionp (intern cmd))
+    (helpful-callable (intern cmd))
     t)))
 
 ;;;###autoload
@@ -66,6 +66,6 @@ Does nothing if no tldr page exists for the current command."
             ((tldr-get-file-path-from-command-name cmd)))
       (progn
         (set-window-buffer (selected-window) (get-buffer-create "*tldr*"))
-        (with-current-buffer "*tldr*" 
+        (with-current-buffer "*tldr*"
           (tldr cmd)))
     (message "No tldr page for %s" cmd)))
