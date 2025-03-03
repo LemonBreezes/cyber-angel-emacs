@@ -284,8 +284,7 @@
   (key-chord-define-global "jk" #'evil-escape)
   (key-chord-define-global "qj" #'cae-ispell-word-then-abbrev)
   (key-chord-define-global "qk" #'evil-escape)
-  (after! evil-escape
-    (key-chord-define evil-insert-state-map "jk" #'evil-escape))
+  (key-chord-define evil-insert-state-map "jk" #'evil-escape)
   (map! :map transient-base-map
         ;; Extend `evil-escape' to quit transients.
         "<key-chord>" #'transient-quit-all))
