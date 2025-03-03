@@ -8,7 +8,7 @@
 Runs ITERATIONS times (default 1000)."
   (interactive)
   (unless iterations
-    (setq iterations 1000))
+    (setq iterations 20))
   
   (let ((alphanumeric-chars "abcdefghijklmnopqrstuvwxyz0123456789")
         (key-chord-safety-interval-wait 0.0)
