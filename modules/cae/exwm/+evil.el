@@ -7,7 +7,8 @@
 (use-package! exwm-evil
   :defer t :init
   (autoload 'enable-exwm-evil-mode "exwm-evil" nil t)
-  (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode)
+  ;; Has to be enabled before `exwm-firefox-evil'.
+  (add-hook 'exwm-manage-finish-hook #'enable-exwm-evil-mode 89)
   :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
 
@@ -18,7 +19,6 @@
   :defer t :init
   (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox)
   :config
-  (evil-make-intercept-map exwm-firefox-evil-mode-map)
   (cl-pushnew 'escape exwm-input-prefix-keys)
   ;; We can use VIM keys with any browser that has compatible keybindings.
   (cl-loop for class in '("firefoxdeveloperedition"
