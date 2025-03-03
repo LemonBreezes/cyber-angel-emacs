@@ -13,7 +13,8 @@ Runs ITERATIONS times (default 1000)."
   (let ((alphanumeric-chars "abcdefghijklmnopqrstuvwxyz0123456789")
         (key-chord-safety-interval-wait 0.0)
         (results nil)
-        (last-key nil))
+        (unread-command-events-original unread-command-events)
+        (key-chord-last-unmatched-original key-chord-last-unmatched))
     
     ;; Enable key-chord mode for the benchmark
     (unless key-chord-mode
@@ -24,10 +25,13 @@ Runs ITERATIONS times (default 1000)."
           (benchmark-run iterations
             (let* ((random-index (random (length alphanumeric-chars)))
                    (current-key (aref alphanumeric-chars random-index)))
-              ;; Simulate key-chord processing
-              (when last-key
-                (key-chord-input-method last-key current-key))
-              (setq last-key current-key))))
+              ;; Simulate key-chord processing by calling the input method
+              ;; with a random character
+              (key-chord-input-method current-key))))
+    
+    ;; Restore original state
+    (setq unread-command-events unread-command-events-original
+          key-chord-last-unmatched key-chord-last-unmatched-original)
     
     ;; Display results
     (message "Key-chord random typing benchmark (%d iterations):" iterations)
