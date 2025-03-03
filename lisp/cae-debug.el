@@ -81,9 +81,13 @@ This restores the original doom-escape-hook functions."
     (setq doom-escape-hook-debug-enabled nil)
     (message "doom-escape-hook debugging disabled.")))
 
+;;; Debugging which config files are loading packages eagerly.
+
 (defvar doom-load-tracking-alist nil
   "Alist tracking which elisp files caused which packages to load.
 Format is ((PACKAGE . SOURCE-PATH) ...).")
+
+(defvar cae-debugging-load-p t)
 
 (when cae-debugging-load-p
   (defadvice! doom-load--track-package-loading (fn path &optional noerror)
