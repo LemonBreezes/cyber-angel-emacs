@@ -87,7 +87,7 @@ This restores the original doom-escape-hook functions."
   "Alist tracking which elisp files caused which packages to load.
 Format is ((PACKAGE . SOURCE-PATH) ...).")
 
-(defvar cae-debugging-load-p t)
+(defvar cae-debugging-load-p nil)
 
 (when cae-debugging-load-p
   (defadvice! doom-load--track-package-loading (fn path &optional noerror)
