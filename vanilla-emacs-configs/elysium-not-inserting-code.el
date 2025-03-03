@@ -26,7 +26,7 @@
 (setq
  gptel-model cae-anthropic-default-model
  gptel-backend (gptel-make-anthropic "Claude"
-                 :stream t :key (cae-secrets-get-anthropic-api-key)))
+                 :stream t :key (getenv "ANTHROPIC_API_KEY")))
 
 ;; For preventing error
 (setq gptel-use-curl nil)

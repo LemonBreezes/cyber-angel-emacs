@@ -177,6 +177,8 @@
         :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
   ;; Use , to ask ChatGPT questions in any comint buffer
   (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  ;; Add eshell support for comma prefix
+  (add-hook 'eshell-input-filter-functions #'cae-eshell-send-to-chatgpt-if-comma)
   :config
   (map! :map chatgpt-shell-mode-map
         :n "RET" #'comint-send-input
