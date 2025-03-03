@@ -77,12 +77,12 @@
 
 (after! dirvish-quick-access
   (setopt dirvish-quick-access-entries
-         `(("h" "~/" "Home")
-           ("e" ,doom-emacs-dir "Emacs user directory")
-           ("d" "~/Downloads/" "Downloads")
-           ,(list "m" (format "/run/media/%s/" (user-login-name)) "Drives")
-           ("s" "~/src/" "Source code")
-           ("t" "~/.local/share/Trash/files/" "TrashCan"))))
+          `(("h" "~/" "Home")
+            ("e" ,doom-emacs-dir "Emacs user directory")
+            ("d" "~/Downloads/" "Downloads")
+            ,(list "m" (format "/run/media/%s/" (user-login-name)) "Drives")
+            ("s" "~/src/" "Source code")
+            ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
 (after! dirvish-side
   (dirvish-side-follow-mode 1))
@@ -109,8 +109,8 @@
   (setq dirvish-hide-cursor nil)
   (setq dirvish-attributes
         (append (when (cae-display-graphic-p)
-                 '(nerd-icons))
-               '(file-size subtree-state collapse file-time)))
+                  '(nerd-icons))
+                '(file-size subtree-state collapse file-time)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
