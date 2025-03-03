@@ -210,9 +210,9 @@
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
 
-  ;;(when (modulep! :editor evil +everywhere)
-  ;;  (after! evil
-  ;;    (load! "+evil")))
+  (when (modulep! :editor evil +everywhere)
+    (after! evil
+      (load! "+evil")))
   ;;
   ;;(when (modulep! :completion corfu)
   ;;  (after! corfu
