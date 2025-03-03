@@ -43,6 +43,7 @@
   (setq aidermacs-backend (if (modulep! :term vterm) 'vterm 'comint))
   (setq aidermacs-extra-args
         '("--cache-prompts"
+          "--cache-keepalive-pings" "6"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
   (defadvice! cae-aidermacs-run-make-real-buffer-a ()
