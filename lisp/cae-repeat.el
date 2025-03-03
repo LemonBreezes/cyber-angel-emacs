@@ -6,7 +6,7 @@
   (defun cae-enable-repeat-mode ()
     (let ((cae-config-finished-loading nil))
       (repeat-mode +1)))
-  (add-hook 'doom-first-file-hook #'cae-enable-repeat-mode)
+  (cae-run-with-timer 5 nil "enable-repeat-mode" #'cae-enable-repeat-mode)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
