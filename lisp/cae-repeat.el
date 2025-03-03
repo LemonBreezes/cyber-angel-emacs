@@ -182,7 +182,7 @@
       ("j" comint-next-prompt
        "k" comint-previous-prompt)))
 
-;; Define repeat maps for scrolling commands.
+  ;; Define repeat maps for scrolling commands.
   (define-repeat-map View-scroll-half-page-forward
     ("v" View-scroll-half-page-forward)
     (:exit "V" View-scroll-half-page-backward))
