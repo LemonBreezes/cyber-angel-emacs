@@ -20,13 +20,6 @@
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
 
-;; Ensure projects list is up-to-date since I usually switch to a project
-;; after running a `git clone'.
-(defadvice! cae-projectile-update-projects-list (&optional _)
-  :before #'projectile-switch-project
-  (quiet!!
-    (projectile-discover-projects-in-search-path)))
-
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
 (defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
