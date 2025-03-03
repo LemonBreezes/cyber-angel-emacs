@@ -22,6 +22,29 @@
                      helm-read-file-map))))
     "A list of all the keymaps used for the minibuffer."))
 
+;; This helps me debug issues with my config.
+(setq persistent-scratch-autosave-mode t)
+(setq persistent-scratch-what-to-save
+      '(point))
+(setq persistent-scratch-autosave-interval
+      '(idle . 10))
+(setq persistent-scratch-backup-directory
+      (concat doom-cache-dir "persistent-scratch-backups/"))
+(setq persistent-scratch-save-file
+      (concat user-emacs-directory "persistent-scratch"))
+(make-directory persistent-scratch-backup-directory t)
+(setq persistent-scratch-backup-filter
+      (lambda (_)
+        (when (> (doom-directory-size persistent-scratch-backup-directory)
+                 (* 1024 1024))
+          (message (concat "URGENT: Persistent scratch is over 1 GB. "
+                           "Write logic for cleaning it.")))))
+(dolist (buffer (buffer-list))
+  (when (string= "*scratch*" (buffer-name buffer))
+    (with-current-buffer buffer
+      (persistent-scratch-mode +1))))
+(persistent-scratch-setup-default)
+
 (when (modulep! :editor evil)
   (after! evil
     (load! "lisp/cae-evil" doom-user-dir)))
