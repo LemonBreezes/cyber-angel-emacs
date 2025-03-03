@@ -286,9 +286,10 @@
   (key-chord-define-global "qk" #'evil-escape)
   (autoload 'evil-escape "evil-escape" nil t)
   (key-chord-define evil-insert-state-map "jk" #'evil-escape)
-  (map! :map transient-base-map
-        ;; Extend `evil-escape' to quit transients.
-        "<key-chord>" #'transient-quit-all))
+  (after! transient
+    (map! :map transient-base-map
+          ;; Extend `evil-escape' to quit transients.
+          "<key-chord>" #'transient-quit-all)))
 
 ;; Add rotation commands
 (map! :n "]r" #'cae-rotate-forward-word-at-point
