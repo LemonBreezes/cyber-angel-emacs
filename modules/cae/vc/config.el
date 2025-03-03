@@ -95,7 +95,7 @@
 
 (use-package! gitignore-templates
   :defer t :init
-  (map! :leader :desc ".gitignore template" "iI" #'gitignore-templates-insert))
+  (map! :leader :desc ".gitignore template" "gI" #'gitignore-templates-insert))
 
 (use-package! vc-backup
   :defer t :init
