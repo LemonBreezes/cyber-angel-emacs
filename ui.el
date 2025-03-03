@@ -169,7 +169,11 @@
   :defer t :init (add-hook 'Info-selection-hook #'info-colors-fontify-node))
 
 (use-package! communinfo
-  :after info :config
+  :defer t :init
+  (defadvice! cae-communinfo-load-a (orig-fun &rest args)
+    :before #'Info-goto-node-web
+    (require 'communinfo))
+  :config
   (setopt Info-url-alist communinfo-url-alist))
 
 (use-package! authinfo-color-mode
