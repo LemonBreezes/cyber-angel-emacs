@@ -18,6 +18,17 @@
         (kill-buffer (current-buffer))
       (delete-char arg))))
 
+(defun cae-ai-get-terminal-buffer-content ()
+  "Get the content of the current terminal buffer with reasonable truncation."
+  (let* ((max-chars 4000)  ;; Reasonable limit to avoid overwhelming the model
+         (buffer-text (buffer-substring-no-properties
+                       (max (- (point-max) max-chars) (point-min))
+                       (point-max))))
+    ;; If we truncated from the beginning, add an indicator
+    (if (> (point-max) (+ (point-min) max-chars))
+        (concat "[...TRUNCATED OUTPUT...]\n" buffer-text)
+      buffer-text)))
+
 ;;;###autoload
 (defun cae-send-to-chatgpt-if-comma-a (f &rest args)
   (require 'chatgpt-shell)
@@ -39,7 +50,11 @@
                                                     (transient . t)
                                                     (no-other-window . t))))))
     (if (string-prefix-p "," input)
-        (chatgpt-shell-send-to-buffer (substring input 1))
+        (let* ((query (substring input 1))
+               (buffer-content (cae-ai-get-terminal-buffer-content))
+               (formatted-prompt (format "Here is the terminal output:\n```\n%s\n```\n\nMy question about this output: %s"
+                                         buffer-content query)))
+          (chatgpt-shell-send-to-buffer formatted-prompt))
       (apply f args))))
 
 ;;;###autoload
