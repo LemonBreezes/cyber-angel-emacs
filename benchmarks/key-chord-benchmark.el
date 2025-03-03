@@ -5,7 +5,7 @@
 
 (defun cae-key-chord-benchmark (&optional iterations)
   "Benchmark key-chord by simulating random alpha-numeric key presses.
-Runs ITERATIONS times (default 1000)."
+Runs ITERATIONS times (default 20)."
   (interactive)
   (unless iterations
     (setq iterations 20))
