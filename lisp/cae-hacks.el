@@ -4,7 +4,7 @@
 ;;; Other hacks
 
 ;; Prevent the minibuffer from "glitching" the workspace switch.
-(defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
+(cae-defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
   :before-until #'+workspace/switch-to
   (when (minibuffer-window-active-p (selected-window))
     ;; Do not trigger the repeat map.
@@ -12,14 +12,14 @@
           real-this-command 'ignore)))
 
 ;; Make `advice-remove' ignore the keyword argument
-(defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
+(cae-defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
   :filter-args #'advice-remove
   (if (keywordp (nth 1 args))
       (list (nth 0 args) (nth 2 args))
     args))
 
 ;; If `try' is used before the package list is loaded, fetch it.
-(defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
+(cae-defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
   :before #'try
   (unless package-archive-contents
     (package--archives-initialize)))
@@ -27,7 +27,7 @@
 ;; Make `eshell-previous-prompt' properly handle the case when there is no
 ;; previous prompt. Normally it goes to the beginning of the buffer. I prefer
 ;; for it to just stay on the first prompt.
-(defadvice! cae-hacks-jump-back-if-bolp (oldfun &rest args)
+(cae-defadvice! cae-hacks-jump-back-if-bolp (oldfun &rest args)
   :around #'eshell-previous-prompt
   (let ((p (point)))
     (apply oldfun args)
@@ -67,7 +67,7 @@
 
 (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
 
-(defadvice! cae-handle-missing-xclip-program ()
+(cae-defadvice! cae-handle-missing-xclip-program ()
   :before-until #'doom-init-clipboard-in-tty-emacs-h
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
