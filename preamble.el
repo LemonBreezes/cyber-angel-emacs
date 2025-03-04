@@ -57,10 +57,6 @@ of ELEMENT."
 (when (executable-find "nixos-rebuild")
   (cae-add-dir-to-path "~/.local/bin"))
 
-;; For Gentoo.
-(when (executable-find "emerge")
-  (cae-add-dir-to-path "/usr/lib64/virtualbox/"))
-
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
 
