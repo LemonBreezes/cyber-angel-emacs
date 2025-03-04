@@ -126,7 +126,7 @@
         (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
         (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
         (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
-                        #'ignore)
+                    #'ignore)
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
     (exwm-randr-mode +1)
