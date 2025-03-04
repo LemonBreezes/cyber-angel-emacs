@@ -98,7 +98,7 @@
 (advice-remove #'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
 ;; I regularly PR Doom Emacs.
-(advice-add #'doom-docs-read-only-h :override #'ignore)
+(cae-advice-add #'doom-docs-read-only-h :override #'ignore)
 
 ;; If I start Emacs in `.xinitrc' without a window manager, I want to be in
 ;; fullscreen.
