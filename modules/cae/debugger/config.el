@@ -30,8 +30,8 @@
 
 
 ;; Pass the `direnv' to `dap-mode' if no environment is specified.
-(advice-add #'dap-start-debugging-noexpand :filter-args
-            #'cae-dap-debug-pass-envrc-a)
+(cae-advice-add #'dap-start-debugging-noexpand :filter-args
+                #'cae-dap-debug-pass-envrc-a)
 
 (when (modulep! :tools lsp +eglot)
   (use-package! dape
