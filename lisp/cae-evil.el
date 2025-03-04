@@ -277,17 +277,10 @@
   (setq key-chord-two-keys-delay 0.2)
   (setq key-chord-typing-detection t)
   (setq key-chord-in-macros nil)
-  (key-chord-define evil-insert-state-map "jj" #'cae-call-leader-map)
-  (key-chord-define evil-insert-state-map "qj" #'cae-ispell-word-then-abbrev)
-  (key-chord-define evil-insert-state-map "qk" #'evil-escape)
   (key-chord-define evil-normal-state-map "jj" #'evilem-motion-next-line)
   (key-chord-define evil-normal-state-map "kk" #'evilem-motion-previous-line)
-  (key-chord-define-global "jj"#'cae-call-leader-map)
-  (key-chord-define-global "jk" #'evil-escape)
-  (key-chord-define-global "qj" #'cae-ispell-word-then-abbrev)
-  (key-chord-define-global "qk" #'evil-escape)
   (autoload 'evil-escape "evil-escape" nil t)
-  (key-chord-define evil-insert-state-map "jk" #'evil-escape)
+  (key-chord-define-global "jk" #'evil-escape)
   (after! transient
     (map! :map transient-base-map
           ;; Extend `evil-escape' to quit transients.
