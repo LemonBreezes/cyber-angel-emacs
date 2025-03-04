@@ -3,6 +3,13 @@
 (require 'key-chord)
 (require 'benchmark)
 
+(defun cae-key-chord--random-alnum-char ()
+  "Generate a random alpha-numeric character."
+  (let* ((chars "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+         (len (length chars))
+         (idx (random len)))
+    (aref chars idx)))
+
 (defun cae-key-chord-benchmark (&optional iterations)
   "Benchmark key-chord performance without modifying any active buffers.
 Optional argument ITERATIONS specifies how many simulated key chords to process.
