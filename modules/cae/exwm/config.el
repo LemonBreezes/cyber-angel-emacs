@@ -123,9 +123,9 @@
     ;; they can cause problems with `repeat-mode'.
     (add-hook! 'repeat-mode-hook
       (defun cae-exwm-disable-mouse-tracking-h ()
-        (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-        (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-        (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
+        (cae-advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+        (cae-advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+        (cae-advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
                     #'ignore)
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
@@ -153,7 +153,7 @@
     (defun cae-exwm-select-window-a (oldfun window &rest args)
       (when window
         (apply oldfun window args)))
-    (advice-add #'select-window :around #'cae-exwm-select-window-a)
+    (cae-advice-add #'select-window :around #'cae-exwm-select-window-a)
 
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
@@ -195,18 +195,18 @@
            (copy-keymap key-translation-map)))
       (define-key key-translation-map [?\C-i] nil)
       (apply oldfun args)))
-  (advice-add #'exwm-input--translate :around #'cae-exwm-input--translate-a)
+  (cae-advice-add #'exwm-input--translate :around #'cae-exwm-input--translate-a)
 
   ;; See https://github.com/emacs-exwm/exwm/issues/18. Addresses a focus issue
   ;; with EXWM but can cause increased power consumption.
-  (advice-add #'exwm-layout--hide
-              :after (lambda (id)
-                       (with-current-buffer (exwm--id->buffer id)
-                         (setq exwm--ewmh-state
-                               (delq xcb:Atom:_NET_WM_STATE_HIDDEN
-                                     exwm--ewmh-state))
-                         (exwm-layout--set-ewmh-state id)
-                         (xcb:flush exwm--connection))))
+  (cae-defadvice! cae-exwm-disable-net-wm-state-hidden-a (id)
+    :after #'exwm-layout--hide
+    (with-current-buffer (exwm--id->buffer id)
+      (setq exwm--ewmh-state
+            (delq xcb:Atom:_NET_WM_STATE_HIDDEN
+                  exwm--ewmh-state))
+      (exwm-layout--set-ewmh-state id)
+      (xcb:flush exwm--connection)))
 
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
