@@ -15,7 +15,7 @@
         ;; I don't use syslog notes.
         syslog-note-thing #'ignore))
 (add-hook 'syslog-mode-hook #'cae-apply-ansi-color-to-buffer-h)
-(advice-add #'syslog-load-notes :override #'ignore)
+(cae-advice-add #'syslog-load-notes :override #'ignore)
 (add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))
 (add-to-list 'auto-mode-alist '("\\.log\\'" . syslog-mode))
 
