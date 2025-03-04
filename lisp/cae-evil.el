@@ -164,8 +164,8 @@
 (defun cae-evil-scroll-page-up-a (oldfun &rest args)
   (cae-evil-scroll-page-a 'up oldfun args))
 
-(advice-add #'evil-scroll-page-down :around #'cae-evil-scroll-page-down-a)
-(advice-add #'evil-scroll-page-up :around #'cae-evil-scroll-page-up-a)
+(cae-advice-add #'evil-scroll-page-down :around #'cae-evil-scroll-page-down-a)
+(cae-advice-add #'evil-scroll-page-up :around #'cae-evil-scroll-page-up-a)
 
 ;; Use `C-d' to send EOF in comint buffers.
 (after! comint
@@ -229,7 +229,7 @@
        "y" #'minuet-complete-with-minibuffer))
 
 ;; TODO Fix this to work with `consult-yasnippet'.
-;;(defadvice! cae-evil-insert-state-a (&rest _)
+;;(cae-defadvice! cae-evil-insert-state-a (&rest _)
 ;;  :after #'yas-expand-snippet
 ;;  (call-interactively #'evil-insert))
 
@@ -251,7 +251,7 @@
 (defun cae-evil-mu4e-enter-insert-mode (&rest _)
   (when (eq evil-state 'normal)
     (call-interactively #'evil-append)))
-(advice-add #'compose-mail :after #'cae-evil-mu4e-enter-insert-mode)
+(cae-advice-add #'compose-mail :after #'cae-evil-mu4e-enter-insert-mode)
 
 (use-package! evil-owl
   :defer 5 :config
@@ -264,7 +264,7 @@
 
 (after! evil-escape
   (remove-hook 'evil-escape-inhibit-functions #'+evil-inhibit-escape-in-minibuffer-fn))
-(defadvice! cae-evil-escape-fix-for-restore-point ()
+(cae-defadvice! cae-evil-escape-fix-for-restore-point ()
   :after #'evil-escape-pre-command-hook
   (let ((esc-func (evil-escape-func)))
     (when (eq this-command esc-func)
@@ -272,7 +272,7 @@
 
 (use-package! key-chord
   :defer t :init
-  (advice-add #'evil-escape-mode :override #'key-chord-mode)
+  (cae-advice-add #'evil-escape-mode :override #'key-chord-mode)
   :config
   (setq key-chord-two-keys-delay 0.2)
   (setq key-chord-typing-speed-threshold 0.15)
@@ -306,7 +306,7 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
     (add-to-list 'parrot-rotate-dict '(:rot ("add-to-list" "remove-from-list")))
     (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
-    (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("cae-defadvice!" "uncae-defadvice!")))
     (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
                                              "cae-keyboard-remap-to-strings"
                                              "cae-keyboard-strings")))
