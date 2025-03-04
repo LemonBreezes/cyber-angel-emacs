@@ -72,15 +72,6 @@
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
 
-;; Ignore some annoying errors when the buffer gets inadvertently deleted.
-;;(defadvice! cae-ignore-selecting-deleted-buffer-error-a (oldfun &rest args)
-;;  "Ignore 'Selecting deleted buffer' errors in `lsp--read-char`."
-;;  :around #'lsp--read-char
-;;  (condition-case err
-;;      (apply oldfun args)
-;;    (error (unless (string-prefix-p "Selecting deleted buffer" (error-message-string err))
-;;             (signal (car err) (cdr err))))))
-
 ;; BUG Fix void variable langelem in `c-langelem-pos'
 (defvar langelem nil)
 
