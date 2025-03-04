@@ -21,9 +21,9 @@ of ELEMENT."
           ;; For cons cells with APPEND, we only compare the car
           (let ((car-element (car element)))
             (set list-var (delq (car (cl-member car-element lst
-                                               :key #'car
-                                               :test test-func))
-                               lst)))
+                                                :key #'car
+                                                :test test-func))
+                                lst)))
         ;; Normal case - remove the element if it exists
         (set list-var (cl-remove element lst :count 1 :test test-func))))
     (symbol-value list-var)))
