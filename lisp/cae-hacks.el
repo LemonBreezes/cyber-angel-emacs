@@ -81,7 +81,7 @@
 (defun cae-hacks-post-doom-modules-h ()
   ;; BUG Use this until Dirvish is bumped in Doom Emacs
   (advice-remove #'dired-find-file :override #'dirvish-find-entry-a)
-  (cae-advice-add #'dired--find-file :override #'dirvish--find-entry))
+  (advice-add #'dired--find-file :override #'dirvish--find-entry))
 
 (if (bound-and-true-p cae-config-finished-loading)
     (cae-hacks-post-doom-modules-h)
