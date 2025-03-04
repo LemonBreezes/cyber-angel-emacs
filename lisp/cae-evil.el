@@ -288,8 +288,32 @@
           "<key-chord>" #'transient-quit-all)))
 
 ;; Add rotation commands
-(map! :n "]r" #'cae-rotate-forward-word-at-point
-      :n "[r" #'cae-rotate-backward-word-at-point)
+(use-package! parrot-rotate
+  :defer t :init
+  (map! :n "]r" #'parrot-rotate-next-word-at-point
+        :n "[r" #'parrot-rotate-prev-word-at-point)
+  :config
+  (after! parrot-rotate
+    (setq parrot-rotate-animate-after-rotation t
+          parrot-rotate-highlight-after-rotation t
+          parrot-rotate-start-bound-regexp "[\]\[[:space:](){}<>]"
+          parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("-1" "+1")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-to-list" "remove-from-list")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
+                                             "cae-keyboard-remap-to-strings"
+                                             "cae-keyboard-strings")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("kbd" "cae-keyboard-kbd")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("+log" "message")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("backtrace!" "unbacktrace!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("enabled" "disabled")))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :editor evil) (remove-hook 'write-file-functions #'eval-buffer t))
