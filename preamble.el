@@ -1,5 +1,33 @@
 ;;; preamble.el -*- lexical-binding: t; -*-
 
+(defun remove-from-list (list-var element &optional append compare-fn)
+  "Remove ELEMENT from the value of LIST-VAR if it is present.
+The test for presence is done with `equal', or with COMPARE-FN if that's
+non-nil.
+
+This is the inverse of `add-to-list'. If LIST-VAR contains a list,
+this function removes the first occurrence of ELEMENT from it.
+
+The return value is the new value of LIST-VAR.
+
+If optional argument APPEND is non-nil, and if ELEMENT is a cons cell,
+then this function uses `eq' instead of `equal' to determine whether
+ELEMENT is already present in LIST-VAR, and it only compares the car
+of ELEMENT."
+  (let ((lst (symbol-value list-var))
+        (test-func (or compare-fn (if (and append (consp element)) #'eq #'equal))))
+    (when lst
+      (if (and append (consp element))
+          ;; For cons cells with APPEND, we only compare the car
+          (let ((car-element (car element)))
+            (set list-var (delq (car (cl-member car-element lst
+                                               :key #'car
+                                               :test test-func))
+                               lst)))
+        ;; Normal case - remove the element if it exists
+        (set list-var (cl-remove element lst :count 1 :test test-func))))
+    (symbol-value list-var)))
+
 (defun cae-add-dir-to-path (dir)
   "Add DIR to the PATH environment variable and `exec-path` if not already present."
   (when (and (file-directory-p dir) (not (member dir exec-path)))
