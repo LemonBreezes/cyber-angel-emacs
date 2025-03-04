@@ -98,17 +98,15 @@
 (when (fboundp #'+evil-disable-ex-highlights-h)
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
-;; BUG Do not enable this. It causes EXWM to crash
-;; Autokill buffers which have not been displayed for 3 days.
-(defadvice! cae-midnight-clean-buffer-list-delay-a (name)
-  :before-until #'midnight-clean-buffer-list-delay
-  (parent-mode-is-derived-p (buffer-local-value 'major-mode name) 'exwm-mode))
-(cae-run-with-idle-timer 600 nil "midnight-mode" #'midnight-mode +1)
-(after! midnight
-  (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
-        clean-buffer-list-delay-special 7200)
-  (add-to-list 'clean-buffer-list-kill-never-buffer-names
-               doom-fallback-buffer-name))
+;; I think it's better to not enable this. Doom already eagerly cleansup
+;; popup and Magit buffers.
+;;(defadvice! cae-midnight-clean-buffer-list-delay-a (name) :before-until
+;;#'midnight-clean-buffer-list-delay (parent-mode-is-derived-p
+;;(buffer-local-value 'major-mode name) 'exwm-mode)) (cae-run-with-idle-timer
+;;600 nil "midnight-mode" #'midnight-mode +1) (after! midnight (setq
+;;clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
+;;clean-buffer-list-delay-special 7200) (add-to-list
+;;'clean-buffer-list-kill-never-buffer-names doom-fallback-buffer-name))
 
 (after! outline
   (setq outline-minor-mode-use-buttons t))
