@@ -228,98 +228,12 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;; Rotation functions
 
-(defvar cae-rotation-pairs
-  '(("true" "false")
-    ("True" "False")
-    ("t" "nil")
-    ("forward" "backward")
-    ("yes" "no")
-    ("Yes" "No")
-    ("on" "off")
-    ("On" "Off")
-    ("up" "down")
-    ("Up" "Down")
-    ("left" "right")
-    ("Left" "Right")
-    ("width" "height")
-    ("Width" "Height")
-    ("horizontal" "vertical")
-    ("Horizontal" "Vertical")
-    ("&&" "||")
-    ("and" "or")
-    ("And" "Or")
-    ("min" "max")
-    ("Min" "Max")
-    ("public" "private")
-    ("Public" "Private")
-    ("before" "after")
-    ("Before" "After")
-    ("+" "-")
-    ("==" "!=")
-    ("<" ">")
-    ("<=" ">=")
-    ("1" "0")
-    ("enable" "disable")
-    ("Enable" "Disable")
-    ("enabled" "disabled")
-    ("Enabled" "Disabled")
-    ("first" "last")
-    ("First" "Last")
-    ("allow" "deny")
-    ("Allow" "Deny")
-    ("in" "out")
-    ("In" "Out")
-    ("night" "day")
-    ("Night" "Day")
-    ("dark" "light")
-    ("Dark" "Light"))
-  "Pairs of words that can be rotated between each other.")
-
 (defun cae--get-rotation-function (direction)
-  "Get the appropriate rotation function based on availability.
+  "Get the appropriate rotation function based on direction.
 DIRECTION should be 'forward or 'backward."
-  (cond
-   ((and (featurep 'parrot) cae-init-editor-enabled-p)
-    (if (eq direction 'forward)
-        #'parrot-rotate-next-word-at-point
-      #'parrot-rotate-prev-word-at-point))
-   (t
-    (if (eq direction 'forward)
-        #'cae-rotate-word-forward-internal
-      #'cae-rotate-word-backward-internal))))
-
-;;;###autoload
-(defun cae-rotate-word-at-point (direction)
-  "Rotate word at point in DIRECTION (1 for forward, -1 for backward).
-This is a fallback for when parrot is not available."
-  (let* ((bounds (bounds-of-thing-at-point 'symbol))
-         (word (and bounds (buffer-substring-no-properties (car bounds) (cdr bounds))))
-         (case-fold-search nil))
-    (when (and bounds word)
-      (let* ((group (cl-find-if (lambda (group) (member word group)) cae-rotation-pairs))
-             (pos (when group (cl-position word group :test 'string=)))
-             (len (when group (length group)))
-             (next-pos (when (and pos len)
-                         (mod (+ pos direction) len)))
-             (next-word (when (and group next-pos)
-                          (nth next-pos group))))
-        (when next-word
-          (delete-region (car bounds) (cdr bounds))
-          (insert next-word)
-          t)))))
-
-;; Internal implementation functions
-(defun cae-rotate-word-forward-internal ()
-  "Internal implementation to rotate word forward."
-  (interactive)
-  (unless (cae-rotate-word-at-point 1)
-    (message "No rotation found for word at point")))
-
-(defun cae-rotate-word-backward-internal ()
-  "Internal implementation to rotate word backward."
-  (interactive)
-  (unless (cae-rotate-word-at-point -1)
-    (message "No rotation found for word at point")))
+  (if (eq direction 'forward)
+      #'parrot-rotate-next-word-at-point
+    #'parrot-rotate-prev-word-at-point))
 
 ;;;###autoload
 (defun cae-rotate-word-forward ()
@@ -337,35 +251,19 @@ This is a fallback for when parrot is not available."
 
 (defun cae--get-rotation-candidates ()
   "Get candidates for rotation from visible windows."
-  (if (and cae-init-editor-enabled-p
-           (require 'parrot nil t))
-      ;; Use parrot dictionary when available
-      (let ((res))
-        (cl-loop for words in parrot-rotate-dict
-                 do (dolist (window (window-list) res)
-                      (with-selected-window window
-                        (save-excursion
-                          (goto-char (window-start))
-                          (while (re-search-forward
-                                  (regexp-opt (plist-get words :rot) 'symbols)
-                                  (window-end nil t) t)
-                            (push (cons (bounds-of-thing-at-point 'symbol)
-                                        (selected-window))
-                                  res))))))
-        res)
-    ;; Fallback to our own rotation pairs
-    (let* ((all-words (apply #'append cae-rotation-pairs))
-           (regexp (regexp-opt all-words 'symbols))
-           (candidates))
-      (dolist (window (window-list) candidates)
-        (with-selected-window window
-          (save-excursion
-            (goto-char (window-start))
-            (while (re-search-forward regexp (window-end nil t) t)
-              (push (cons (bounds-of-thing-at-point 'symbol)
-                          (selected-window))
-                    candidates)))))
-      candidates)))
+  (let ((res))
+    (cl-loop for words in parrot-rotate-dict
+             do (dolist (window (window-list) res)
+                  (with-selected-window window
+                    (save-excursion
+                      (goto-char (window-start))
+                      (while (re-search-forward
+                              (regexp-opt (plist-get words :rot) 'symbols)
+                              (window-end nil t) t)
+                        (push (cons (bounds-of-thing-at-point 'symbol)
+                                    (selected-window))
+                              res))))))
+    res))
 
 (defun cae-avy-rotate-action (rotate-fn pt)
   "Apply ROTATE-FN at point PT using avy."
@@ -376,14 +274,14 @@ This is a fallback for when parrot is not available."
 
 ;;;###autoload
 (defun cae-avy-rotate-forward-action (pt)
-  "Rotate word forward at point PT using parrot or fallback."
+  "Rotate word forward at point PT using parrot."
   (cae-avy-rotate-action 
    (cae--get-rotation-function 'forward)
    pt))
 
 ;;;###autoload
 (defun cae-avy-rotate-backward-action (pt)
-  "Rotate word backward at point PT using parrot or fallback."
+  "Rotate word backward at point PT using parrot."
   (cae-avy-rotate-action 
    (cae--get-rotation-function 'backward)
    pt))
