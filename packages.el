@@ -46,6 +46,7 @@
   (package! tabgo)
   (package! evil-tutor)
   (package! key-chord :recipe (:host github :repo "LemonBreezes/key-chord")))
+;; We also use `parrot' for Evil.
 
 ;; cae-smartparens.el
 (when (and (not (modulep! :editor lispy))
