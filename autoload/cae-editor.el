@@ -172,9 +172,9 @@ Toggles the prefix argument based on region state."
   "Narrow to the current page using logos."
   (interactive)
   (save-mark-and-excursion
-   (end-of-line)
-   (deactivate-mark)
-   (logos-narrow-dwim)))
+    (end-of-line)
+    (deactivate-mark)
+    (logos-narrow-dwim)))
 
 ;;; Buffer management functions
 
@@ -239,8 +239,8 @@ mark the string and call `edit-indirect-region' with it."
   (interactive)
   (setq avy-action (lambda (pt)
                      (save-mark-and-excursion
-                      (goto-char pt)
-                      (call-interactively #'parrot-rotate-next-word-at-point))))
+                       (goto-char pt)
+                       (call-interactively #'parrot-rotate-next-word-at-point))))
   (when-let ((candidates (cae--get-rotation-candidates)))
     (avy-process candidates)))
 
@@ -370,9 +370,9 @@ With prefix ARG, yank multiple words."
 (defun cae-bind-C-z-to-abort-a (oldfun &rest args)
   "Advice to bind C-z to abort in minibuffer for OLDFUN with ARGS."
   (minibuffer-with-setup-hook
-   (lambda ()
-     (local-set-key (kbd "C-z") #'abort-recursive-edit))
-   (apply oldfun args)))
+      (lambda ()
+        (local-set-key (kbd "C-z") #'abort-recursive-edit))
+    (apply oldfun args)))
 
 ;;;###autoload
 (defun cae-complete-in-minibuffer ()
@@ -412,14 +412,14 @@ With prefix ARG, yank multiple words."
       (setf vertico-posframe-size-function
             (cae--get-vertico-posframe-size posframe)))
     (minibuffer-with-setup-hook
-     (lambda ()
-       (local-set-key (kbd "C-z")
-                      (lambda () (interactive)
-                        (run-at-time 0.0 nil
-                                     (lambda ()
-                                       (vertico--exhibit)))
-                        (abort-recursive-edit))))
-     (embark-act arg))))
+        (lambda ()
+          (local-set-key (kbd "C-z")
+                         (lambda () (interactive)
+                           (run-at-time 0.0 nil
+                                        (lambda ()
+                                          (vertico--exhibit)))
+                           (abort-recursive-edit))))
+      (embark-act arg))))
 
 ;;;###autoload
 (defun cae-embark-act ()
@@ -445,10 +445,10 @@ With prefix ARG, yank multiple words."
         (setq beg (save-excursion (goto-char beg) (line-beginning-position))
               end (save-excursion (goto-char end) (1+ (line-end-position))))
         (save-mark-and-excursion
-         (goto-char beg)
-         (set-mark end)
-         (activate-mark)
-         (embark-act))))))
+          (goto-char beg)
+          (set-mark end)
+          (activate-mark)
+          (embark-act))))))
 
 ;;; Bookmark functions
 
