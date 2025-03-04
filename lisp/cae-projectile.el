@@ -31,7 +31,7 @@
 
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
-(defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
+(cae-defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
   :override #'projectile-skel-dir-locals
   (interactive "*P\nP")
   (skeleton-proxy-new
@@ -130,6 +130,6 @@
                                     (project-find-dir "Find directory")
                                     (cae-unpackaged-magit-status "Magit status" "g")
                                     (project-eshell "Eshell")))
-    (defadvice! cae-project-switch-action-a (dir)
+    (cae-defadvice! cae-project-switch-action-a (dir)
       :before #'projectile-switch-project
       (+workspaces-switch-to-project-h dir))))
