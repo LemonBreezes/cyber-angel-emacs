@@ -98,13 +98,15 @@
 (when (fboundp #'+evil-disable-ex-highlights-h)
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
+;; BUG Do not enable this. I don't even know what happened but I think this
+;; clobbered everything.
 ;; Autokill buffers which have not been displayed for 3 days.
-(cae-run-with-idle-timer 600 nil "midnight-mode" #'midnight-mode +1)
-(after! midnight
-  (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
-        clean-buffer-list-delay-special 7200)
-  (add-to-list 'clean-buffer-list-kill-never-buffer-names
-               doom-fallback-buffer-name))
+;;(cae-run-with-idle-timer 600 nil "midnight-mode" #'midnight-mode +1)
+;;(after! midnight
+;;  (setq clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
+;;        clean-buffer-list-delay-special 7200)
+;;  (add-to-list 'clean-buffer-list-kill-never-buffer-names
+;;               doom-fallback-buffer-name))
 
 (after! outline
   (setq outline-minor-mode-use-buttons t))
