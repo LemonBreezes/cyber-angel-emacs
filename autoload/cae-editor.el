@@ -2,16 +2,6 @@
 
 ;;; Helper functions
 
-(defun cae--with-minibuffer-setup (setup-fn &rest args)
-  "Run function with SETUP-FN in minibuffer setup hook, passing ARGS."
-  (minibuffer-with-setup-hook setup-fn
-    (apply args)))
-
-(defun cae--save-position-and-execute (fn &rest args)
-  "Execute FN with ARGS while preserving point and mark."
-  (save-mark-and-excursion
-    (apply fn args)))
-
 (defun cae--get-file-at-point ()
   "Get filename at point based on current major mode."
   (cond
@@ -181,11 +171,10 @@ Toggles the prefix argument based on region state."
 (defun cae-narrow-to-page ()
   "Narrow to the current page using logos."
   (interactive)
-  (cae--save-position-and-execute
-   (lambda ()
-     (end-of-line)
-     (deactivate-mark)
-     (logos-narrow-dwim))))
+  (save-mark-and-excursion
+   (end-of-line)
+   (deactivate-mark)
+   (logos-narrow-dwim)))
 
 ;;; Buffer management functions
 
@@ -228,24 +217,17 @@ mark the string and call `edit-indirect-region' with it."
 
 ;;; Rotation functions
 
-(defun cae--get-rotation-function (direction)
-  "Get the appropriate rotation function based on direction.
-DIRECTION should be 'forward or 'backward."
-  (if (eq direction 'forward)
-      #'parrot-rotate-next-word-at-point
-    #'parrot-rotate-prev-word-at-point))
-
 ;;;###autoload
 (defun cae-rotate-word-forward ()
   "Rotate word at point forward through a predefined list."
   (interactive)
-  (call-interactively (cae--get-rotation-function 'forward)))
+  (call-interactively #'parrot-rotate-next-word-at-point))
 
 ;;;###autoload
 (defun cae-rotate-word-backward ()
   "Rotate word at point backward through a predefined list."
   (interactive)
-  (call-interactively (cae--get-rotation-function 'backward)))
+  (call-interactively #'parrot-rotate-prev-word-at-point))
 
 ;;; Avy rotation functions
 
@@ -265,61 +247,44 @@ DIRECTION should be 'forward or 'backward."
                               res))))))
     res))
 
-(defun cae-avy-rotate-action (rotate-fn pt)
-  "Apply ROTATE-FN at point PT using avy."
-  (cae--save-position-and-execute
-   (lambda ()
-     (goto-char pt)
-     (call-interactively rotate-fn))))
-
-;;;###autoload
-(defun cae-avy-rotate-forward-action (pt)
-  "Rotate word forward at point PT using parrot."
-  (cae-avy-rotate-action 
-   (cae--get-rotation-function 'forward)
-   pt))
-
-;;;###autoload
-(defun cae-avy-rotate-backward-action (pt)
-  "Rotate word backward at point PT using parrot."
-  (cae-avy-rotate-action 
-   (cae--get-rotation-function 'backward)
-   pt))
-
 ;;;###autoload
 (defun cae-avy-rotate ()
   "Use avy to select and rotate words from rotation dictionary."
   (interactive)
-  (setq avy-action #'cae-avy-rotate-forward-action)
+  (setq avy-action (lambda (pt)
+                     (save-mark-and-excursion
+                      (goto-char pt)
+                      (call-interactively #'parrot-rotate-next-word-at-point))))
   (when-let ((candidates (cae--get-rotation-candidates)))
     (avy-process candidates)))
-
-;;; Rotation UI functions
-
-(defun cae--rotate-word-at-point (rotate-function)
-  "Apply ROTATE-FUNCTION to word at point.
-Tries to find a suitable word to rotate, even if point is not directly on it."
-  (save-excursion
-    (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
-      (goto-char beg))
-    (skip-syntax-forward "^w" (line-end-position))
-    (condition-case _err
-        (call-interactively rotate-function)
-      (error
-       (skip-syntax-backward "^w" (line-beginning-position))
-       (call-interactively rotate-function)))))
 
 ;;;###autoload
 (defun cae-rotate-forward-word-at-point ()
   "Rotate word forward at point."
   (interactive)
-  (cae--rotate-word-at-point (cae--get-rotation-function 'forward)))
+  (save-excursion
+    (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
+      (goto-char beg))
+    (skip-syntax-forward "^w" (line-end-position))
+    (condition-case _err
+        (call-interactively #'parrot-rotate-next-word-at-point)
+      (error
+       (skip-syntax-backward "^w" (line-beginning-position))
+       (call-interactively #'parrot-rotate-next-word-at-point)))))
 
 ;;;###autoload
 (defun cae-rotate-backward-word-at-point ()
   "Rotate word backward at point."
   (interactive)
-  (cae--rotate-word-at-point (cae--get-rotation-function 'backward)))
+  (save-excursion
+    (when-let* ((beg (car-safe (bounds-of-thing-at-point 'symbol))))
+      (goto-char beg))
+    (skip-syntax-forward "^w" (line-end-position))
+    (condition-case _err
+        (call-interactively #'parrot-rotate-prev-word-at-point)
+      (error
+       (skip-syntax-backward "^w" (line-beginning-position))
+       (call-interactively #'parrot-rotate-prev-word-at-point)))))
 
 ;;; Workspace and EXWM functions
 
@@ -418,10 +383,10 @@ With prefix ARG, yank multiple words."
 ;;;###autoload
 (defun cae-bind-C-z-to-abort-a (oldfun &rest args)
   "Advice to bind C-z to abort in minibuffer for OLDFUN with ARGS."
-  (cae--with-minibuffer-setup
+  (minibuffer-with-setup-hook
    (lambda ()
      (local-set-key (kbd "C-z") #'abort-recursive-edit))
-   oldfun args))
+   (apply oldfun args)))
 
 ;;;###autoload
 (defun cae-complete-in-minibuffer ()
@@ -460,7 +425,7 @@ With prefix ARG, yank multiple words."
     (when (featurep 'vertico-posframe)
       (setf vertico-posframe-size-function
             (cae--get-vertico-posframe-size posframe)))
-    (cae--with-minibuffer-setup
+    (minibuffer-with-setup-hook
      (lambda ()
        (local-set-key (kbd "C-z")
                       (lambda () (interactive)
@@ -468,7 +433,7 @@ With prefix ARG, yank multiple words."
                                      (lambda ()
                                        (vertico--exhibit)))
                         (abort-recursive-edit))))
-     #'embark-act arg)))
+     (embark-act arg))))
 
 ;;;###autoload
 (defun cae-embark-act ()
@@ -484,27 +449,20 @@ With prefix ARG, yank multiple words."
   (interactive)
   (require 'avy)
   (save-window-excursion
-    (let* ((initial-window (selected-window))
-           (avy-indent-line-overlay t)  ; my preference
+    (let* ((avy-indent-line-overlay t)
            (avy-action #'identity)
-           (beg (avy--line)))
-      (if (not beg)
-          nil
-        (let ((end (avy--line)))
-          (if (not end)
-              nil
-            (when (> beg end)
-              (cl-rotatef beg end))
-            (setq beg (save-excursion (goto-char beg)
-                                      (line-beginning-position)))
-            (setq end (save-excursion (goto-char end)
-                                      (1+ (line-end-position))))
-            (cae--save-position-and-execute
-             (lambda ()
-               (goto-char beg)
-               (set-mark end)
-               (activate-mark)
-               (embark-act)))))))))
+           (beg (avy--line))
+           (end (and beg (avy--line))))
+      (when (and beg end)
+        (when (> beg end)
+          (cl-rotatef beg end))
+        (setq beg (save-excursion (goto-char beg) (line-beginning-position))
+              end (save-excursion (goto-char end) (1+ (line-end-position))))
+        (save-mark-and-excursion
+         (goto-char beg)
+         (set-mark end)
+         (activate-mark)
+         (embark-act))))))
 
 ;;; Bookmark functions
 
