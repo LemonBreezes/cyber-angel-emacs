@@ -55,6 +55,31 @@
 (setq find-sibling-rules
       '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org\\'")))
 
+;; Query buffers for a diff before killing them.
+(defun cae-ask-kill-buffer ()
+  "Ask to diff, save or kill buffer"
+  (if (and (buffer-file-name)
+           (buffer-modified-p))
+      (let (cae-diff-window)
+        (prog1
+            (cl-loop
+             for ch =
+             (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+             if (or (eq ch ?k) (eq ch ?K))
+             return t
+             if (or (eq ch ?d) (eq ch ?D))
+             do (setq cae-diff-window (diff-buffer-with-file))
+             if (or (eq ch ?s) (eq ch ?S))
+             return (progn (save-buffer) t)
+             if (memq ch '(?q ?Q))
+             return nil)
+          (when cae-diff-window
+            (delete-window cae-diff-window)
+            (setq cae-diff-window nil))))
+    t))
+
+(add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
+
 ;; Automatically reindent after commenting.
 (advice-add #'comment-or-uncomment-region :after #'indent-region)
 
