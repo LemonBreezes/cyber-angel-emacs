@@ -98,8 +98,7 @@
 (when (fboundp #'+evil-disable-ex-highlights-h)
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
-;; BUG Do not enable this. I don't even know what happened but I think this
-;; clobbered everything.
+;; BUG Do not enable this. It causes EXWM to crash
 ;; Autokill buffers which have not been displayed for 3 days.
 ;;(cae-run-with-idle-timer 600 nil "midnight-mode" #'midnight-mode +1)
 ;;(after! midnight
