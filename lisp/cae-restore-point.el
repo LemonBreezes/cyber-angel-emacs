@@ -613,7 +613,7 @@
                    evil-first-non-blank-of-visual-line
                    evil-goto-mark-line evil-goto-mark evil-owl-goto-mark
                    evil-owl-goto-mark-line +evil/reselect-paste))))
-  (advice-add #'rp/restore-point-position :after #'deactivate-mark)
+  (cae-advice-add #'rp/restore-point-position :after #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
     "If restore-point-mode is active, restore point in the minibuffer and return non-nil if the point changed."
