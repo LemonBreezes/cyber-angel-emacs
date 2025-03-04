@@ -68,12 +68,7 @@
              if (or (eq ch ?k) (eq ch ?K))
              return t
              if (or (eq ch ?d) (eq ch ?D))
-             do (progn
-                  (let ((diff-mode-class (get 'diff-mode 'mode-class)))
-                    (setf (get 'diff-mode 'mode-class) nil)
-                    (unwind-protect
-                        (setq cae-diff-window (diff-buffer-with-file))
-                      (setf (get 'diff-mode 'mode-class) diff-mode-class))))
+             do (setq cae-diff-window (diff-buffer-with-file))
              if (or (eq ch ?s) (eq ch ?S))
              return (progn (save-buffer) t)
              if (memq ch '(?q ?Q))
@@ -296,6 +291,7 @@
     (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
     (add-to-list 'parrot-rotate-dict '(:rot ("-1" "+1")))
     (add-to-list 'parrot-rotate-dict '(:rot ("when" "unless")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("add-to-list" "remove-from-list")))
     (add-to-list 'parrot-rotate-dict '(:rot ("advice-add" "advice-remove")))
     (add-to-list 'parrot-rotate-dict '(:rot ("defadvice!" "undefadvice!")))
     (add-to-list 'parrot-rotate-dict '(:rot ("cae-keyboard-remap"
