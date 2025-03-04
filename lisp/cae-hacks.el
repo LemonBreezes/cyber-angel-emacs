@@ -63,7 +63,7 @@
 (defvar chatgpt-shell-anthropic--make-url nil)
 
 ;;Debugger entered--Lisp error: (no-catch emacs-version-changed nil)
-(advice-add #'w3m-fix-melpa-installation :override #'ignore)
+(cae-advice-add #'w3m-fix-melpa-installation :override #'ignore)
 
 (defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
 
@@ -81,7 +81,7 @@
 (defun cae-hacks-post-doom-modules-h ()
   ;; BUG Use this until Dirvish is bumped in Doom Emacs
   (advice-remove #'dired-find-file :override #'dirvish-find-entry-a)
-  (advice-add #'dired--find-file :override #'dirvish--find-entry))
+  (cae-advice-add #'dired--find-file :override #'dirvish--find-entry))
 
 (if (bound-and-true-p cae-config-finished-loading)
     (cae-hacks-post-doom-modules-h)
