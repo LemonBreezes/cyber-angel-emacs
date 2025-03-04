@@ -9,13 +9,13 @@
 
 (defvar +org-exit-src-code-hook nil
   "Hook run just before exiting a org source block buffer.")
-(advice-add #'org-edit-src-exit :before #'cae-org-run-exit-src-code-hooks)
+(cae-advice-add #'org-edit-src-exit :before #'cae-org-run-exit-src-code-hooks)
 (add-hook! '+org-exit-src-code-hook
   (defun +org-exit-src-trim-eob-lines-h ()
     (unless (memq this-command '(org-return +org/return))
       (ws-butler-trim-eob-lines))))
 
-(advice-add #'org-insert-heading :after #'cae-org-set-created-timestamp)
+(cae-advice-add #'org-insert-heading :after #'cae-org-set-created-timestamp)
 (add-hook! 'org-capture-mode-hook
   (defun org-capture--insert-timestamp ()
     (when (org-at-heading-p)
@@ -24,7 +24,7 @@
 ;; I use a split keyboard and want `DEL' to clear priorities.
 (defun cae-return-del-as-spc-a (ret)
   (if (memq ret '(?\C-? ?\C-h)) ?\s ret))
-(defadvice! cae-allow-del-to-clear-priority-a (oldfun &rest args)
+(cae-defadvice! cae-allow-del-to-clear-priority-a (oldfun &rest args)
   :around #'org-priority
   (advice-add #'read-char-exclusive :filter-return #'cae-return-del-as-spc-a)
   (unwind-protect (apply oldfun args)
