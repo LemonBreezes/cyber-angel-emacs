@@ -215,20 +215,6 @@ mark the string and call `edit-indirect-region' with it."
              (edit-indirect-region)
              (goto-char (- pos (region-beginning)))))))
 
-;;; Rotation functions
-
-;;;###autoload
-(defun cae-rotate-word-forward ()
-  "Rotate word at point forward through a predefined list."
-  (interactive)
-  (call-interactively #'parrot-rotate-next-word-at-point))
-
-;;;###autoload
-(defun cae-rotate-word-backward ()
-  "Rotate word at point backward through a predefined list."
-  (interactive)
-  (call-interactively #'parrot-rotate-prev-word-at-point))
-
 ;;; Avy rotation functions
 
 (defun cae--get-rotation-candidates ()
