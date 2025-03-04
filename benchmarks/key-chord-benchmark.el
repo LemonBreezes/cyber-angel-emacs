@@ -55,7 +55,7 @@ Runs ITERATIONS times (default 20)."
     ;; Benchmark `keymap-set`
     (setq time-keymap-set
           (benchmark-run iterations
-             (keymap-set global-map-copy key definition)))
+            (keymap-set global-map-copy key definition)))
 
     ;; Reset the global map copy
     (setq global-map-copy (copy-keymap (current-global-map)))
@@ -63,7 +63,7 @@ Runs ITERATIONS times (default 20)."
     ;; Benchmark `define-key`
     (setq time-define-key
           (benchmark-run iterations
-             (define-key global-map-copy (key-parse key) definition)))
+            (define-key global-map-copy (key-parse key) definition)))
 
     (message "Benchmark Results:\n- `keymap-set`: %s\n- `define-key`: %s"
              time-keymap-set
