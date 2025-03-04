@@ -1,7 +1,5 @@
 ;;; benchmarks/key-chord-benchmark.el -*- lexical-binding: t; -*-
 
-;;; key-chord-benchmark.el --- Benchmark for key-chord typing simulation -*- lexical-binding: t; -*-
-
 (require 'key-chord)
 (require 'benchmark)
 
