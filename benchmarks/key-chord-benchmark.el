@@ -43,6 +43,32 @@ Runs ITERATIONS times (default 20)."
     
     results))
 
+(defun benchmark-key-binding ()
+  "Benchmark the speed of `keymap-set` vs `define-key`."
+  (interactive)
+  (let ((global-map-copy (copy-keymap (current-global-map)))
+        (key "C-x g")                ;; The key sequence to bind
+        (definition 'my-test-command) ;; A sample command definition
+        (iterations 10000)           ;; Number of iterations for each method
+        time-keymap-set time-define-key)
+
+    ;; Benchmark `keymap-set`
+    (setq time-keymap-set
+          (benchmark-run iterations
+             (keymap-set global-map-copy key definition)))
+
+    ;; Reset the global map copy
+    (setq global-map-copy (copy-keymap (current-global-map)))
+
+    ;; Benchmark `define-key`
+    (setq time-define-key
+          (benchmark-run iterations
+             (define-key global-map-copy (key-parse key) definition)))
+
+    (message "Benchmark Results:\n- `keymap-set`: %s\n- `define-key`: %s"
+             time-keymap-set
+             time-define-key)))
+
 (provide 'key-chord-benchmark)
 ;;; key-chord-benchmark.el ends here
 
