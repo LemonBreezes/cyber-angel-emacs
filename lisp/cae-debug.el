@@ -90,7 +90,7 @@ Format is ((PACKAGE . SOURCE-PATH) ...).")
 (defvar cae-debugging-load-p nil)
 
 (when cae-debugging-load-p
-  (defadvice! doom-load--track-package-loading (fn path &optional noerror)
+  (cae-defadvice! doom-load--track-package-loading (fn path &optional noerror)
     "Track which packages are loaded by which elisp files using `doom-load`.
 Reports when a new package is loaded and which file triggered it."
     :around #'doom-load
