@@ -30,7 +30,11 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! minuet
-    (setq minuet-provider 'codestral)
+    (setq minuet-provider 'claude)
+    (plist-put! minuet-claude-options
+                :model "sonnet"
+                :max_tokens 256
+                :top_p 0.9)
     (plist-put! minuet-codestral-options
                 :max_tokens 256
                 :top_p 0.9)))
