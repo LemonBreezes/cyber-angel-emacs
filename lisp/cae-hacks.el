@@ -87,7 +87,7 @@
     (cae-hacks-post-doom-modules-h)
   (add-hook 'doom-after-init-hook #'cae-hacks-post-doom-modules-h))
 
-(defadvice! cae-force-kill-with-explanation (orig-fn)
+(defadvice! cae-persp-force-kill-with-explanation (orig-fn)
   "Advise persp-kill-buffer-query-function to explain why a buffer wasn't killed and force kill it anyway.
 This will run the original function, and if it returns nil (preventing the buffer from being killed),
 it will output a message explaining why, remove the buffer from all perspectives, and allow it to be killed."
