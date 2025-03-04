@@ -123,9 +123,9 @@
     ;; they can cause problems with `repeat-mode'.
     (add-hook! 'repeat-mode-hook
       (defun cae-exwm-disable-mouse-tracking-h ()
-        (cae-advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-        (cae-advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-        (cae-advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
+        (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+        (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+        (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
                         #'ignore)
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
