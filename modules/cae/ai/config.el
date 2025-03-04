@@ -6,7 +6,7 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 ;; Set up the default models.
-(let ((claude-model "sonnet"))
+(let ((claude-model "claude-3-7-sonnet-20250219"))
   (after! chatgpt-shell
     (cl-pushnew
      (chatgpt-shell-anthropic--make-model
@@ -146,7 +146,6 @@
         :ig "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
         :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
-        :ig "M-f" #'cae-minuet-accept-suggestion-word
         :ig "C-e" #'minuet-accept-suggestion-line)
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
