@@ -101,7 +101,7 @@
     (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
 ;; BUG `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
-(defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
+(cae-defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
   :before #'which-key--hide-buffer-side-window
   (when (minibufferp)
     (setq which-key--saved-window-configuration nil)))
@@ -110,11 +110,11 @@
   (after! which-key
     (setq which-key-use-C-h-commands t))
   (defvar cae-which-key-current-keymap nil)
-  (defadvice! cae-which-key-update-current-keymap-a
+  (cae-defadvice! cae-which-key-update-current-keymap-a
     (_keymap-name keymap &rest args)
     :before #'which-key--show-keymap
     (setq cae-which-key-current-keymap keymap))
-  (defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
+  (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
     :around #'which-key-C-h-dispatch
     (cond ((not (which-key--popup-showing-p))
            (setq this-command 'embark-prefix-help-command)
@@ -148,7 +148,7 @@
 
   ;; Sometimes EWW makes web pages unreadable by adding a bright background.
   ;; Do not colorize backgrounds at all.
-  (advice-add #'shr-colorize-region :around #'ignore))
+  (cae-advice-add #'shr-colorize-region :around #'ignore))
 
 ;; Allow switching to these buffers with `C-x b'
 (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
@@ -159,7 +159,7 @@
   (setq eldoc-echo-area-prefer-doc-buffer t)
   ;; BUG If Eldoc tries to show help while Which Key is active, there is an
   ;; error. Inhibit `eldoc' when `which-key' is active to prevent errors.
-  (defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
+  (cae-defadvice! cae-disable-eldoc-on-which-key-or-completion-a ()
     :before-until #'eldoc-documentation-default
     (and (featurep 'which-key) (which-key--popup-showing-p)))
   ;; BUG For some reason, Eldoc overrides the current buffer with a blank
@@ -171,7 +171,7 @@
 
 (use-package! communinfo
   :defer t :init
-  (defadvice! cae-communinfo-load-a (orig-fun &rest args)
+  (cae-defadvice! cae-communinfo-load-a (orig-fun &rest args)
     :before #'Info-goto-node-web
     (require 'communinfo))
   :config
@@ -181,7 +181,7 @@
   :defer t :init
   (add-to-list 'auto-mode-alist '("authinfo.gpg\\'" . authinfo-color-mode))
   (add-to-list 'auto-mode-alist '("authinfo\\'" . authinfo-color-mode))
-  (advice-add 'authinfo-mode :override #'authinfo-color-mode))
+  (cae-advice-add 'authinfo-mode :override #'authinfo-color-mode))
 
 ;; Set some popup rules. How does slot/vslot work? I prefer to set these popup
 ;; rules here instead of in the relevant `use-package!' blocks.
@@ -280,7 +280,7 @@
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
 (when (modulep! :ui workspaces)
-  (defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
+  (cae-defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
     "Show my workspaces in the echo area."
     :around #'which-key--process-page
     (let ((out (apply orig-fun pages-obj)))
@@ -292,7 +292,7 @@
                 (which-key--echo (concat (current-message) " "
                                          (+workspace--tabline))))))))
 
-  (defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
+  (cae-defadvice! cae-open-journal-in-new-workspace (orig-fun &rest args)
     "Open the journal in a new workspace."
     :before #'org-journal-new-entry
     (+workspace-switch "journal" t)))
