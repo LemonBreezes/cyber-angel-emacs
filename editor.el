@@ -56,27 +56,31 @@
       '(("\\([^/]+\\)\\.org\\'" "~/org/.archive/\\\\1.org\\'")))
 
 ;; Query buffers for a diff before killing them.
-(defvar cae-diff-window nil
-  "Variable to store the diff window created by 'cae-ask-kill-buffer'.")
 (defun cae-ask-kill-buffer ()
   "Ask to diff, save or kill buffer"
   (if (and (buffer-file-name)
            (buffer-modified-p))
-      (prog1
-          (cl-loop
-           for ch =
-           (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
-           if (or (eq ch ?k) (eq ch ?K))
-           return t
-           if (or (eq ch ?d) (eq ch ?D))
-           do (setq cae-diff-window (diff-buffer-with-file))
-           if (or (eq ch ?s) (eq ch ?S))
-           return (progn (save-buffer) t)
-           if (memq ch '(?q ?Q))
-           return nil)
-        (when cae-diff-window
-          (delete-window cae-diff-window)
-          (setq cae-diff-window nil)))
+      (let (cae-diff-window)
+        (prog1
+            (cl-loop
+             for ch =
+             (read-key "(k)ill buffer, (d)iff buffer, (s)ave buffer, (q)uit?")
+             if (or (eq ch ?k) (eq ch ?K))
+             return t
+             if (or (eq ch ?d) (eq ch ?D))
+             do (progn
+                  (let ((diff-mode-class (get 'diff-mode 'mode-class)))
+                    (setf (get 'diff-mode 'mode-class) nil)
+                    (unwind-protect
+                        (setq cae-diff-window (diff-buffer-with-file))
+                      (setf (get 'diff-mode 'mode-class) diff-mode-class))))
+             if (or (eq ch ?s) (eq ch ?S))
+             return (progn (save-buffer) t)
+             if (memq ch '(?q ?Q))
+             return nil)
+          (when cae-diff-window
+            (delete-window cae-diff-window)
+            (setq cae-diff-window nil))))
     t))
 
 (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
