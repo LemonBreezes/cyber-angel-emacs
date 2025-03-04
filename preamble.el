@@ -89,6 +89,7 @@ of ELEMENT."
 
 ;; I never want to see loading messages.
 (unless init-file-debug
-  (defadvice! cae-load-ignore-message-a (args) :filter-args #'load
+  (cae-defadvice! cae-load-ignore-message-a (args)
+    :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
       (list file noerror t nosuffix must-suffix))))
