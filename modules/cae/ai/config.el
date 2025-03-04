@@ -143,12 +143,10 @@
   (add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
   (map! :map minuet-active-mode-map
-        ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
         :ig "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
         :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
-        ;; Accept the first line of completion, or N lines with a numeric-prefix:
-        ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
+        :ig "M-f" #'cae-minuet-accept-suggestion-word
         :ig "C-e" #'minuet-accept-suggestion-line)
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
