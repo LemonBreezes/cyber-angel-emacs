@@ -80,7 +80,7 @@ name of the workspace that will be created for that application.")
 ;;; Caching variables
 
 ;; Pre-allocate hash tables with appropriate sizes
-(defvar cae-exwm--workspace-name-cache 
+(defvar cae-exwm--workspace-name-cache
   (let ((ht (make-hash-table :test 'equal :size 64)))
     (dolist (mapping cae-exwm-workspace-name-replacements)
       (puthash (car mapping) (cdr mapping) ht))
@@ -126,7 +126,7 @@ Returns nil if BUFFER is not an EXWM buffer."
   (clrhash cae-exwm--workspace-name-cache)
   (clrhash cae-exwm--browser-workspace-cache-table)
   (clrhash cae-exwm--workspace-names-set)
-  
+
   ;; Rebuild the workspace name cache
   (dolist (mapping cae-exwm-workspace-name-replacements)
     (puthash (car mapping) (cdr mapping) cae-exwm--workspace-name-cache)))
@@ -161,14 +161,14 @@ Optional STATE is passed from persp-mode."
             (select-window win)
             (setq found t)
             (throw 'found-window t)))))
-    
+
     ;; If no window found, handle popup case
     (unless found
       (when (and (modulep! :ui popup)
                  (+popup-window-p))
         (other-window 1)
         (switch-to-buffer buffer)))
-    
+
     (delete-other-windows)))
 
 (defun cae-exwm-persp--after-match (state &rest _)
@@ -182,12 +182,12 @@ Optional STATE is passed from persp-mode."
     ;; Handle workspace switching
     (when (not (string= application-name (+workspace-current-name)))
       (persp-remove-buffer buffer))
-    
+
     ;; Use hash table for faster membership testing
     (unless (gethash application-name cae-exwm--workspace-names-set)
       (puthash application-name t cae-exwm--workspace-names-set)
       (push application-name cae-exwm-workspaces))
-    
+
     (+workspace-switch application-name t)
     (+workspace/display)
 
@@ -251,15 +251,15 @@ Optional STATE is passed from persp-mode."
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
   (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
     (cl-return-from cae-exwm-persp-cleanup-workspace))
-  
+
   (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
     (unless workspace
       (cl-return-from cae-exwm-persp-cleanup-workspace))
-    
+
     (let ((persp (persp-get-by-name workspace)))
       (unless (persp-p persp)
         (cl-return-from cae-exwm-persp-cleanup-workspace))
-      
+
       (unless (cae-exwm--get-matching-live-buffers workspace)
         (+workspace-kill (+workspace-current))
         (unless (string= (+workspace-current-name) +workspace--last)
@@ -286,7 +286,7 @@ Optional STATE is passed from persp-mode."
                   (cl-loop for i from 1 to (length browser-parts)
                            collect (cl-subseq browser-parts 0 i)))))
                (workspace-name nil))
-          
+
           ;; Use faster loop with early return
           (catch 'found
             (dolist (parts browser-combinations)
@@ -295,7 +295,7 @@ Optional STATE is passed from persp-mode."
                 (when name
                   (setq workspace-name name)
                   (throw 'found t)))))
-          
+
           ;; Cache the result for future lookups
           (puthash browse-url-generic-program workspace-name cae-exwm--browser-workspace-cache-table)
           workspace-name))))
@@ -312,11 +312,11 @@ Optional STATE is passed from persp-mode."
   "Reload the EXWM workspaces configuration."
   (interactive)
   (cae-exwm-clear-caches)
-  
+
   ;; Rebuild workspace names set
   (dolist (name cae-exwm-workspaces)
     (puthash name t cae-exwm--workspace-names-set))
-  
+
   (persp-def-auto-persp "EXWM"
                         :parameters '((dont-save-to-file . t))
                         :hooks '(exwm-manage-finish-hook)
@@ -333,19 +333,19 @@ Optional STATE is passed from persp-mode."
   (unless cae-exwm--auto-persp-initialized
     ;; Ensure caches are initialized
     (cae-exwm-clear-caches)
-    
+
     ;; Set up hooks
     (add-hook 'exwm-floating-setup-hook #'cae-exwm--disable-floating)
     (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
-    
+
     ;; Set up advice
-    (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
-    (advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
-    (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
-    
+    (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
+    (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
+    (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
+
     ;; Initialize workspaces
     (cae-exwm-reload-workspaces)
-    
+
     (setq cae-exwm--auto-persp-initialized t)))
 
 ;; Initialize if not already loaded
