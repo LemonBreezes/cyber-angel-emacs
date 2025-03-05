@@ -1,7 +1,7 @@
 ;;; autoload/cae-lsp.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun cae-eglot-ensure-no-home-directory ()
+(defun cae-eglot-ensure-no-home-or-root-directory ()
   "Prevent Eglot from starting if the project directory is the home directory."
   (let ((project (project-current t)))
     (when project
