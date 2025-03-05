@@ -338,11 +338,6 @@ Optional STATE is passed from persp-mode."
     (add-hook 'exwm-floating-setup-hook #'cae-exwm--disable-floating)
     (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
 
-    ;; Set up advice
-    (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
-    (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
-    (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
-
     ;; Initialize workspaces
     (cae-exwm-reload-workspaces)
 
