@@ -5,7 +5,7 @@
             (lambda ()
               (when (+workspace-exists-p +irc--workspace-name)
                 (persp-add-buffer (current-buffer)))))
-  (cae-defadvice! cae-ir-inhibit-workspace-saving-a (&optional inhibit-workspace)
+  (cae-defadvice! cae-irc-inhibit-workspace-saving-a (&optional inhibit-workspace)
     :after #'+irc-setup-wconf
     (when (and (modulep! :ui workspaces)
                (not inhibit-workspace))
