@@ -287,13 +287,16 @@
   (detached-init)
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
-          :n "RET" #'detached-eshell-send-input))
+          :n "RET" #'detached-eshell-send-input
+          :n "<return>" #'detached-eshell-send-input))
   (after! detached-shell
     (map! :map detached-shell-mode-map
-          :n "RET" #'detached-shell-send-input))
+          :n "RET" #'detached-shell-send-input
+          :n "<return>" #'detached-shell-send-input))
   (after! detached-vterm
     (map! :map detached-vterm-mode-map
-          :n "RET" #'detached-vterm-send-input))
+          :n "RET" #'detached-vterm-send-input
+          :n "<return>" #'detached-vterm-send-input))
   (after! detached-init
     (map! :map detached-embark-action-map
           "h" #'cae-detached-describe-session
