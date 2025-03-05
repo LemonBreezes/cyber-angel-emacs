@@ -23,32 +23,3 @@
                       (message "internet working"))
                     (kill-buffer))))))
 
-;;;###autoload
-(defun cae-detached-attach-dwim (session)
-  (interactive
-   (pcase (buffer-local-value 'major-mode (current-buffer))
-     ('vterm-mode (eval (cadr (interactive-form #'detached-vterm-attach))))
-     ('eshell-mode (eval (cadr (interactive-form #'detached-eshell-attach-session))))
-     ('shell-mode (eval (cadr (interactive-form #'detached-shell-attach-session))))
-     (t (eval (cadr (interactive-form #'detached-attach-session))))))
-  (pcase (buffer-local-value 'major-mode (current-buffer))
-    ('vterm-mode (detached-vterm-attach session))
-    ('eshell-mode (detached-eshell-attach-session session))
-    ('shell-mode (detached-shell-attach-session session))
-    (t (detached-attach-session session))))
-
-;;;###autoload
-(defun cae-detached-describe-session (session)
-  (interactive (list (progn (require 'detached)
-                            (detached-session-in-context))))
-  (when-let* ((buffer (get-buffer-create "*detached-session-info*")))
-    (with-current-buffer buffer
-      (erase-buffer)
-      (insert
-       (string-trim
-        (detached--session-header session)))
-      (goto-char (point-min))
-      (local-set-key (kbd "q") #'delete-window)
-      (when (featurep 'evil)
-        (evil-local-set-key 'normal (kbd "q") #'delete-window)))
-    (pop-to-buffer buffer)))
