@@ -111,7 +111,7 @@
     (when (modulep! :lang lua +lsp)
       (add-hook 'fennel-mode-local-vars-hook #'lsp!)))
 
-  (cae-advice-add #'eglot-ensure :around #'cae-eglot-ensure-no-home-or-root-directory)
+  (cae-advice-add #'eglot-ensure :before-until #'cae-eglot-ensure-no-home-or-root-directory)
 
   (use-package! breadcrumb
     :defer t :init
