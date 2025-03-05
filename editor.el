@@ -218,9 +218,7 @@
     (add-to-list 'ibuffer-never-show-predicates #'doom-unreal-buffer-p)))
 
 (use-package! yank-indent
-  :defer t :init (add-hook 'doom-first-buffer-hook #'global-yank-indent-mode)
-  :config
-  (cae-advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
+  :defer t :init (add-hook 'doom-first-buffer-hook #'global-yank-indent-mode))
 
 (use-package! file-info
   :defer t :init
