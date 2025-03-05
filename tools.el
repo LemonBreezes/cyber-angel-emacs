@@ -284,7 +284,8 @@
   (add-hook 'eshell-mode-hook #'detached-eshell-mode)
   (add-hook 'vterm-mode-hook #'detached-vterm-mode)
   :config
-  (detached-init)
+  (unless detached--sessions-initialized
+    (detached-init))
   (after! detached-eshell
     (map! :map detached-eshell-mode-map
           :n "RET" #'detached-eshell-send-input
