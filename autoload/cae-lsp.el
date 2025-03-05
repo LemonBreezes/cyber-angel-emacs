@@ -1,11 +1,13 @@
 ;;; autoload/cae-lsp.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun cae-eglot-prevent-home-directory-project (orig-fun)
-  "Advice for `eglot--current-project' to prevent using home directory as project."
-  (let ((project (funcall orig-fun)))
+(defun cae-eglot-ensure-no-home-directory ()
+  "Prevent Eglot from starting if the project directory is the home directory."
+  (let ((project (project-current t)))
     (when project
       (let ((root (project-root project)))
-        (when (equal (expand-file-name "~") (expand-file-name root))
-          (error "Eglot aborted: refusing to use home directory as project root"))))
-    project))
+        (when (or (equal (expand-file-name "~") (expand-file-name root))
+                  (equal "/" root))
+          (error "Eglot aborted: refusing to use home directory as project root"))
+        ;; Proceed to call the original eglot-ensure only if checks pass
+        (call-interactively #'eglot-ensure)))))
