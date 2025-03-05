@@ -7,6 +7,4 @@
              (root (project-root project)))
     (when (or (equal (expand-file-name "~") (expand-file-name root))
               (equal "/" root))
-      (message "Eglot aborted: refusing to use home directory as project root"))
-    ;; Proceed to call the original eglot-ensure only if checks pass
-    (call-interactively #'eglot-ensure)))
+      (message "Eglot aborted: refusing to use home directory as project root"))))
