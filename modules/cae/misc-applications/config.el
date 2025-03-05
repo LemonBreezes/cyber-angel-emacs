@@ -829,16 +829,16 @@
   (setq emms-track-description-function 'emms-track-simple-description
         emms-mode-line-icon-enabled-p nil))
 
+
+(map! :map cae-misc-applications-music-map
+      "l" #'lyrics-fetcher-show-lyrics
+      "L" #'lyrics-fetcher-show-lyrics-query)
+(after! which-key
+  (which-key-add-keymap-based-replacements cae-misc-applications-music-map
+    "l" "Lyrics"
+    "L" "Lyrics query"))
 (use-package! lyrics-fetcher
-  :after emms :init
-  (map! :map cae-misc-applications-music-map
-        "l" #'lyrics-fetcher-show-lyrics
-        "L" #'lyrics-fetcher-show-lyrics-query)
-  (after! which-key
-    (which-key-add-keymap-based-replacements cae-misc-applications-music-map
-      "l" "Lyrics"
-      "L" "Lyrics query"))
-  :config
+  :after emms :config
   (setq lyrics-fetcher-lyrics-folder cae-misc-applications-music-dir))
 
 (use-package! helm-emms
