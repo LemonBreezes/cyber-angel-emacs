@@ -18,7 +18,77 @@
 
 ;;; Configuration variables
 
+(defvar cae-exwm-workspaces ()
+  "List of EXWM workspace names that have been created.")
+
+(defconst cae-exwm-floating-apps '("..." "virtualbox" "discord" "main.py" "setup.tmp")
+  "List of EXWM class names for applications that should remain floating.")
+
+(defconst cae-exwm-workspace-name-replacements
+  '(("google-chrome-unstable" . "Chrome")
+    ("chromium-browser" . "Chrome")
+    ("chromium" . "Chrome")
+    ("Google-chrome" . "Chrome")
+    ("Pavucontrol" . "Pavucontrol")
+    ("tiled" . "Tiled")
+    ("kitty" . "Kitty")
+    ("mpv" . "MPV")
+    ("firefox developer edition" . "Firefox")
+    ("\"firefox developer edition\"" . "Firefox")
+    ("\"firefoxdeveloperedition\"" . "Firefox")
+    ("firefoxdeveloperedition" . "Firefox")
+    ("firefox" . "Firefox")
+    ("kdeconnect." . "KDE Connect")
+    ("libreoffice" . "Libreoffice")
+    ("libreoffice-startcenter" . "Libreoffice")
+    ("Soffice" . "Libreoffice")
+    ("libreoffice-writer" . "Libreoffice")
+    ("libreoffice-calc" . "Libreoffice")
+    ("libreoffice-base" . "Libreoffice")
+    ("libreoffice-draw" . "Libreoffice")
+    ("libreoffice-impress" . "Libreoffice")
+    ("libreoffice-math" . "Libreoffice")
+    ("libreoffice-writer" . "Libreoffice")
+    ("wineboot.exe" . "Wine")
+    ("control.exe" . "Wine")
+    ("plover" . "Plover")
+    (".blueman-manager-wrapped" . "Blueman")
+    ("discord" . "Discord")
+    ("com-azefsw-audioconnect-desktop-app-MainKt" . "AudioRelay")
+    ("qutebrowser" . "Qutebrowser")
+    ("signal beta" . "Signal")
+    ("gnome-control-center" . "Gnome CC")
+    ("microsoft teams" . "Teams")
+    ("teams-for-linux" . "Teams")
+    ("virtualbox" . "VirtualBox")
+    ("virtualbox manager" . "VirtualBox")
+    ("virtualboxvm" . "VirtualBox")
+    ("virtualbox machine" . "VirtualBox")
+    ("discord1" . "Discord")
+    ("minecraft" . "Minecraft")
+    ("snes9x-gtk" . "Snes9x")
+    (".epsxe-wrapped" . "ePSXe")
+    ("net-runelite-client-runelite" . "RuneLite")
+    ("wow.exe" . "WoW")
+    ("battle.net.exe" . "Battle.net")
+    ("hakuneko-desktop" . "Hakuneko")
+    ("runescape" . "RuneScape"))
+  "Alist mapping EXWM class names to workspace names.
+The key is the class name from EXWM and the value is the
+name of the workspace that will be created for that application.")
+
 ;;; Caching variables
+
+;; Pre-allocate hash tables with appropriate sizes
+(defvar cae-exwm--workspace-name-cache
+  (let ((ht (make-hash-table :test 'equal :size 64)))
+    (dolist (mapping cae-exwm-workspace-name-replacements)
+      (puthash (car mapping) (cdr mapping) ht))
+    ht)
+  "Cache for workspace names to avoid repeated lookups.")
+
+(defvar cae-exwm--browser-workspace-cache-table (make-hash-table :test 'equal :size 12)
+  "Cache table for browser workspace names indexed by browser program.")
 
 ;; Create a set for faster membership testing
 (defvar cae-exwm--floating-apps-set
@@ -194,6 +264,47 @@ Optional STATE is passed from persp-mode."
         (+workspace-kill (+workspace-current))
         (unless (string= (+workspace-current-name) +workspace--last)
           (+workspace/other))))))
+
+;;; URL handling
+
+;; Pre-compute browser name parts for common browsers
+(defvar cae-exwm--browser-name-parts-cache (make-hash-table :test 'equal :size 10)
+  "Cache for browser name parts to avoid repeated splitting.")
+
+(defun cae-exwm--get-browser-workspace-name ()
+  "Get the workspace name for the current browser."
+  (when browse-url-generic-program
+    (or (gethash browse-url-generic-program cae-exwm--browser-workspace-cache-table)
+        (let* ((browser-name (file-name-base browse-url-generic-program))
+               (browser-parts (or (gethash browser-name cae-exwm--browser-name-parts-cache)
+                                  (let ((parts (string-split browser-name "-")))
+                                    (puthash browser-name parts cae-exwm--browser-name-parts-cache)
+                                    parts)))
+               (browser-combinations
+                (nreverse
+                 (cdr
+                  (cl-loop for i from 1 to (length browser-parts)
+                           collect (cl-subseq browser-parts 0 i)))))
+               (workspace-name nil))
+
+          ;; Use faster loop with early return
+          (catch 'found
+            (dolist (parts browser-combinations)
+              (let* ((browser-key (string-join parts "-"))
+                     (name (gethash browser-key cae-exwm--workspace-name-cache)))
+                (when name
+                  (setq workspace-name name)
+                  (throw 'found t)))))
+
+          ;; Cache the result for future lookups
+          (puthash browse-url-generic-program workspace-name cae-exwm--browser-workspace-cache-table)
+          workspace-name))))
+
+(defun cae-exwm-browse-url-generic-a (&rest _)
+  "Switch to the appropriate workspace before opening a URL."
+  (when-let ((workspace (cae-exwm--get-browser-workspace-name)))
+    (+workspace-switch workspace t)
+    (+workspace/display)))
 
 ;;; Setup and initialization
 
