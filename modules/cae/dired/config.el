@@ -66,7 +66,8 @@
   ;;      "," #'dired-create-empty-file)
 
   (map! :map dired-mode-map
-        "C-M-k" #'dired-kill-subdir))
+        "C-M-k" #'dired-kill-subdir
+        "," #'dired-create-empty-file))
 (add-hook 'dired-mode-hook #'cae-dired-hide-details-in-narrow-screen-h)
 
 (after! wdired
