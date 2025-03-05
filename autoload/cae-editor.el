@@ -76,13 +76,6 @@ This is the format used on Reddit for code blocks."
   (delete-blank-lines))
 
 ;;;###autoload
-(defun cae-yank-indent-a (&rest _)
-  "Advice to indent after yanking."
-  (let ((this-command 'yank)
-        (real-this-command 'yank))
-    (yank-indent--post-command-hook)))
-
-;;;###autoload
 (defun cae-mark-comment ()
   "Mark the entire comment around point including leading whitespace.
 Like `er/mark-comment' but also marks comment with leading whitespace."
