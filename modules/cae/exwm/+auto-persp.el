@@ -300,12 +300,6 @@ Optional STATE is passed from persp-mode."
           (puthash browse-url-generic-program workspace-name cae-exwm--browser-workspace-cache-table)
           workspace-name))))
 
-(defun cae-exwm-browse-url-generic-a (&rest _)
-  "Switch to the appropriate workspace before opening a URL."
-  (when-let ((workspace (cae-exwm--get-browser-workspace-name)))
-    (+workspace-switch workspace t)
-    (+workspace/display)))
-
 ;;; Setup and initialization
 
 (defun cae-exwm-reload-workspaces ()
