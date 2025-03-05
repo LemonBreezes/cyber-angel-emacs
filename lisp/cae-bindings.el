@@ -335,8 +335,6 @@
        (:when (modulep! :completion vertico)
         :desc "Find directory" "d" #'consult-dir))
       (:prefix "o"
-       (:when (modulep! :completion vertico)
-        :desc "Open Detached session" "C-d" #'detached-consult-session)
        (:when (modulep! :cae notifications)
         :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
        (:when (modulep! :ui workspaces)
