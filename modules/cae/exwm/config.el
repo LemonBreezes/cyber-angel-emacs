@@ -221,6 +221,7 @@
 
   (when (and (modulep! :ui workspaces)
              (not (featurep 'cae-exwm-auto-persp)))
+    (cae-advice-add 'corfu--make-frame :around #'cae-advise-corfu-make-frame-with-monitor-awareness)
     (after! persp-mode
       (load! "+auto-persp"))))
 
