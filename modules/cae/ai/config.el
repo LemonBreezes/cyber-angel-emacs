@@ -94,10 +94,11 @@
     (defun cae-disable-copilot-in-minibuffer ()
       (minibufferp)))
   (setq copilot-install-dir (concat doom-cache-dir "copilot"))
-  :config
+  (autoload 'copilot-clear-overlay "copilot" nil t)
   (cae-defadvice! cae-clear-copilot-overlay-a (&rest _)
     :before #'doom/delete-backward-word
     (copilot-clear-overlay))
+  :config
   ;; Assume all Elisp code is formatted with the default indentation style. This
   ;; fixes an error.
   (setf (alist-get 'emacs-lisp-mode copilot-indentation-alist) nil)
