@@ -58,13 +58,13 @@
                (_ (buffer-live-p buf)))
       (doom-set-buffer-real buf t))))
 
+
+(cae-defadvice! cae-magit-gptcommit-save-buffer-a ()
+  :after #'magit-gptcommit-commit-accept
+  (when-let ((buf (magit-commit-message-buffer)))
+    (with-current-buffer buf (save-buffer))))
 (use-package! magit-gptcommit
-  :after magit :init
-  (cae-defadvice! cae-magit-gptcommit-save-buffer-a ()
-    :after #'magit-gptcommit-commit-accept
-    (when-let ((buf (magit-commit-message-buffer)))
-      (with-current-buffer buf (save-buffer))))
-  :config
+  :after magit :config
   ;; Enable magit-gptcommit-mode to watch staged changes and generate commit message automatically in magit status buffer
   ;; This mode is optional, you can also use `magit-gptcommit-generate' to generate commit message manually
   ;; `magit-gptcommit-generate' should only execute on magit status buffer currently
