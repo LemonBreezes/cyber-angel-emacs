@@ -31,7 +31,7 @@
   (add-hook 'eat--eshell-process-running-mode-hook #'cae-eshell--disable-modes-in-eat)
 
   ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
-  (defadvice! cae-eat-eshell-print-char-mode-hint-a ()
+  (cae-defadvice! cae-eat-eshell-print-char-mode-hint-a ()
     :after #'eat-eshell-char-mode
     (message "Type M-RET/C-M-m to exit char mode.")))
 
@@ -45,7 +45,7 @@
   (unintern 'eshell/emacs obarray))
 
 ;; Expand abbreviations before parsing input.
-(defadvice! cae-eshell-expand-abbrev-a (&rest _)
+(cae-defadvice! cae-eshell-expand-abbrev-a (&rest _)
   :before #'eshell-send-input
   (expand-abbrev))
 
@@ -56,7 +56,7 @@
   (add-hook 'eshell-mode-hook #'eshell-bookmark-setup))
 
 ;; Colorize ansi escape sequences in exported buffers
-(advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
+(cae-advice-add #'eshell-output-object-to-target :around #'cae-eshell-ansi-buffer-output)
 
 ;; Parse buffer redirection >#buf and >#.
 (after! esh-arg
@@ -96,7 +96,7 @@
 ;;; Input Handling
 
 ;; Don't leave me with unbalanced delimiters.
-(defadvice! cae-eshell-kill-input-with-delimiters-a ()
+(cae-defadvice! cae-eshell-kill-input-with-delimiters-a ()
   :after #'eshell-kill-input
   (let ((beg (pos-bol))
         (end (pos-eol)))

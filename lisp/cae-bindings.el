@@ -136,14 +136,14 @@
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
 
-(advice-add #'persp-set-keymap-prefix :override #'ignore)
+(cae-advice-add #'persp-set-keymap-prefix :override #'ignore)
 
 ;; Bind `tab-bar' commands consistently with the built-in keybindings.
-(defadvice! cae-tab-bar-define-keys-a ()
+(cae-defadvice! cae-tab-bar-define-keys-a ()
   :after #'tab-bar--define-keys
   (unless (global-key-binding [(control f4)])
     (global-set-key [(control f4)] #'tab-close)))
-(defadvice! cae-tab-bar-undefine-keys-a ()
+(cae-defadvice! cae-tab-bar-undefine-keys-a ()
   :after #'tab-bar--undefine-keys
   (when (eq (global-key-binding [(control f4)]) #'tab-close)
     (global-unset-key [(control f4)])))

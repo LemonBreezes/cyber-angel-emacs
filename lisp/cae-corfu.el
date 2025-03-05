@@ -107,7 +107,7 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 
 ;; Enable Fish autocompletion in `read-shell-command'.
 (autoload 'turn-on-fish-completion-mode "fish-completion" nil t)
-(advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
+(cae-advice-add #'shell-completion-vars :after #'turn-on-fish-completion-mode)
 
 ;; Prefer Bash over Fish for completions because `emerge' completion is a lot
 ;; slower in Fish.
@@ -117,5 +117,5 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; For some reason in the latest update of emacs31, the tty child frame stopped
 ;; working.
 ;; (when (> emacs-major-version 30)
-;;   (advice-add #'corfu--popup-support-p :override #'always)
+;;   (cae-advice-add #'corfu--popup-support-p :override #'always)
 ;;   (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))

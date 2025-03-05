@@ -129,7 +129,7 @@
   (add-hook! (lsp-mode eglot-managed-mode) (symbol-overlay-mode -1))
   ;; For some reason `symbol-overlay-switch-backward' jumps to the first symbol
   ;; overlay in the buffer. This is probably a bug.
-  (advice-add #'symbol-overlay-get-list
+  (cae-advice-add #'symbol-overlay-get-list
               :around #'cae-hacks-symbol-overlay-reverse-list-a)
   (defun cae-hacks-symbol-overlay-reverse-list-a (oldfun &rest args)
     (if (eq (car args) -1)

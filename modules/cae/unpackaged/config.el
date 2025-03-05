@@ -30,7 +30,7 @@
   ;; deleting other windows with `cae-unpackaged-magit-save-buffer-show-status'.
   (after! magit
     (setq magit-bury-buffer-function #'magit-restore-window-configuration))
-  (advice-add #'cae-unpackaged-magit-status :before-until
+  (cae-advice-add #'cae-unpackaged-magit-status :before-until
               #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
   (defun cae-unpackaged-magit-start-smerge-hydra-h ()

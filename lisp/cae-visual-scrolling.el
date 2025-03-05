@@ -16,7 +16,7 @@ DIRECTION should be 'up or 'down."
 
 (defmacro cae-advise-scroll (func direction)
   "Add around advice to FUNC to highlight line before scrolling in DIRECTION."
-  `(advice-add #',func :around (lambda (f &optional arg)
+  `(cae-advice-add #',func :around (lambda (f &optional arg)
                                  (cae-scroll-with-highlight f ',direction arg))))
 
 ;; Advise scrolling functions to include line highlighting.

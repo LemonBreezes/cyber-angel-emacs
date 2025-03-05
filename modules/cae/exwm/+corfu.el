@@ -29,4 +29,4 @@
     ;; Call the original function with potentially adjusted coordinates
     (funcall orig-fun frame new-x new-y width height)))
 
-(advice-add 'corfu--make-frame :around #'cae-advise-corfu-make-frame-with-monitor-awareness)
+(cae-advice-add 'corfu--make-frame :around #'cae-advise-corfu-make-frame-with-monitor-awareness)

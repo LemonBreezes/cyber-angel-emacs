@@ -45,8 +45,8 @@
   (setq show-paren-context-when-offscreen nil) ; <--
   (setq show-paren-ring-bell-on-mismatch nil))
 
-(advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-(advice-add #'kill-this-buffer :around #'doom-set-jump-a)
+(cae-advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
+(cae-advice-add #'kill-this-buffer :around #'doom-set-jump-a)
 
 ;; Reduce error spam in scratch buffers.
 (add-hook 'doom-scratch-buffer-hook #'+emacs-lisp--flycheck-non-package-mode)
@@ -81,10 +81,10 @@
 (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
 ;; Automatically reindent after commenting.
-(advice-add #'comment-or-uncomment-region :after #'indent-region)
+(cae-advice-add #'comment-or-uncomment-region :after #'indent-region)
 
 ;; Allow remembering risky variables.
-(advice-add 'risky-local-variable-p :override #'ignore)
+(cae-advice-add 'risky-local-variable-p :override #'ignore)
 
 ;; Kill process buffers without asking.
 (setq kill-buffer-query-functions
@@ -125,7 +125,7 @@
 
 ;; I think it's better to not enable this. Doom already eagerly cleansup
 ;; popup and Magit buffers.
-;;(defadvice! cae-midnight-clean-buffer-list-delay-a (name) :before-until
+;;(cae-defadvice! cae-midnight-clean-buffer-list-delay-a (name) :before-until
 ;;#'midnight-clean-buffer-list-delay (parent-mode-is-derived-p
 ;;(buffer-local-value 'major-mode name) 'exwm-mode)) (cae-run-with-idle-timer
 ;;600 nil "midnight-mode" #'midnight-mode +1) (after! midnight (setq
@@ -157,7 +157,7 @@
 
 (use-package! avy
   :defer t :init
-  (defadvice! cae-avy-use-post-style-a (oldfun &rest args)
+  (cae-defadvice! cae-avy-use-post-style-a (oldfun &rest args)
     :around #'avy-goto-end-of-line
     (let ((avy-style 'post))
       (apply oldfun args)))
@@ -190,7 +190,7 @@
 (use-package! embrace
   :defer t :init
   ;; Respect popup rules with the Embrace help popup.
-  (defadvice! +cae-embrace-use-popup-a (oldfun help-string)
+  (cae-defadvice! +cae-embrace-use-popup-a (oldfun help-string)
     :around #'embrace--show-help-buffer
     (cl-letf (((symbol-function #'display-buffer-in-side-window)
                (symbol-function #'display-buffer)))
@@ -208,7 +208,7 @@
   (map! :map edit-abbrevs-mode-map
         [remap save-buffer] #'abbrev-edit-save-buffer)
   (map! :map abbrev-map "e" #'edit-abbrevs)
-  (advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
+  (cae-advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 
 (use-package! ibuffer
   :defer t :config
@@ -220,7 +220,7 @@
 (use-package! yank-indent
   :defer t :init (add-hook 'doom-first-buffer-hook #'global-yank-indent-mode)
   :config
-  (advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
+  (cae-advice-add #'cae-yank-indent-a :after #'yank-indent--after-yank-advice))
 
 (use-package! file-info
   :defer t :init
@@ -246,7 +246,7 @@
   :defer t :config
   (after! vertico
     (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
-  (advice-add #'embark-completing-read-prompter :around
+  (cae-advice-add #'embark-completing-read-prompter :around
               #'cae-bind-C-z-to-abort-a))
 
 (use-package! logos
@@ -263,12 +263,12 @@
   (autoload #'parrot-party-while-process "parrot")
   (autoload #'parrot--todo-party "parrot")
   (autoload #'parrot--magit-push-filter "parrot")
-  (defadvice! cae-modeline-gac-party-on-push-a (buffer)
+  (cae-defadvice! cae-modeline-gac-party-on-push-a (buffer)
     :after #'gac-push
     (when-let* ((proc (get-buffer-process "*git-auto-push*")))
       (parrot-party-while-process proc)))
   (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
-  (advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
+  (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
   (setq parrot-animate (when (cae-display-graphic-p) 'hide-static)
         parrot-num-rotations 3
@@ -315,7 +315,7 @@
   ;; This patches around this function not being compatible with Evil when
   ;; `evil-move-beyond-eol' is `nil'. This should probably go into
   ;; `evil-collection'.
-  (defadvice! cae-beginend-goto-eol-a ()
+  (cae-defadvice! cae-beginend-goto-eol-a ()
     :before #'beginend-prog-mode-goto-end
     (goto-char (point-at-eol))))
 
@@ -328,8 +328,8 @@
       ;; I have a setup in `config.el' where I cleanup the overlays in
       ;; `doom-escape-hook'. I prefer that because I use the overlays as a
       ;; quick way to highlight text.
-      (advice-add #'evil-flash-hook :override #'ignore)
-      (advice-add #'evil-clean-isearch-overlays :override #'ignore)
+      (cae-advice-add #'evil-flash-hook :override #'ignore)
+      (cae-advice-add #'evil-clean-isearch-overlays :override #'ignore)
       (when evil-want-C-w-delete
         (map! :map isearch-mb-minibuffer-map
               "C-w" #'evil-delete-backward-word))))

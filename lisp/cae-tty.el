@@ -56,7 +56,7 @@
        (setq xclip-method 'termux-clipboard-get)))
 
 ;; BUG Do not emit an error if `xclip' is not found.
-(defadvice! cae-handle-missing-xclip-program ()
+(cae-defadvice! cae-handle-missing-xclip-program ()
   :before-until #'doom-init-clipboard-in-tty-emacs-h
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
@@ -64,7 +64,7 @@
 (when (modulep! :tools pdf)
   (use-package! pdftotext
     :defer t :init
-    (defadvice! +pdf-view-mode-a (oldfun &rest args)
+    (cae-defadvice! +pdf-view-mode-a (oldfun &rest args)
       :around #'pdf-view-mode
       (if (cae-display-graphic-p)
           (apply oldfun args)

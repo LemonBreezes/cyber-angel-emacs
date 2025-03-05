@@ -1,9 +1,9 @@
 ;;; lisp/cae-lsp.el -*- lexical-binding: t; -*-
 
 (when (modulep! :tools lsp -eglot)
-  (advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
-  (advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
-  (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
+  (cae-advice-add #'lsp-ui-doc--setup-mouse :override #'ignore)
+  (cae-advice-add #'lsp-ui-doc--disable-mouse-on-prefix :override #'ignore)
+  (cae-advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override #'ignore)
   ;; Fixes an error I got from `lsp!'.
   (autoload 'lsp--suggest-project-root "lsp-mode")
   (after! lsp-mode
@@ -61,7 +61,7 @@
   ;; Do not allow LSP to run in the HOME directory. This is because of
   ;; performance and also because sometimes I accidentally blacklist the home
   ;; directory this way and this breaks LSP.
-  (defadvice! cae-lsp-disable-in-home-dir-a (&optional _)
+  (cae-defadvice! cae-lsp-disable-in-home-dir-a (&optional _)
     :before-until #'lsp!
     (string= (lsp--suggest-project-root) "~/"))
 
@@ -111,7 +111,7 @@
     (when (modulep! :lang lua +lsp)
       (add-hook 'fennel-mode-local-vars-hook #'lsp!)))
 
-  (advice-add 'eglot--current-project :around #'cae-eglot-prevent-home-directory-project)
+  (cae-advice-add 'eglot--current-project :around #'cae-eglot-prevent-home-directory-project)
 
   (use-package! breadcrumb
     :defer t :init

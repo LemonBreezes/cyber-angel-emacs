@@ -101,7 +101,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 (setq bookmark-watch-bookmark-file 'silent)
 
 ;; Set up advice and hooks
-(advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
+(cae-advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
 (after! org
   (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
 
@@ -153,10 +153,10 @@ and updates the stored modification time afterward."
              (nth 5 (file-attributes abbrev-file-name)))))
 
 ;; Set up advice for abbrev-related functions
-(advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
-(advice-add #'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
-(advice-add #'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
-(advice-add #'write-abbrev-file :around #'cae-multi--track-abbrev-write)
+(cae-advice-add #'define-abbrev :after #'cae-multi-auto-save-abbrev)
+(cae-advice-add #'read-abbrev-file :around #'cae-multi--disable-auto-save-handler)
+(cae-advice-add #'define-abbrevs :around #'cae-multi--disable-auto-save-handler)
+(cae-advice-add #'write-abbrev-file :around #'cae-multi--track-abbrev-write)
 
 ;; Start watching abbrev file for changes on Linux systems
 (when (eq system-type 'gnu/linux)

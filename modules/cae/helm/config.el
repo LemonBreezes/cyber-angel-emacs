@@ -133,7 +133,7 @@ Can be negative.")
 
   ;; Use helpful instead of describe-* to display documentation
   (dolist (fn '(helm-describe-variable helm-describe-function))
-    (advice-add fn :around #'doom-use-helpful-a)))
+    (cae-advice-add fn :around #'doom-use-helpful-a)))
 
 (use-package! helm-posframe
   :when (and (modulep! +childframe)
@@ -147,8 +147,8 @@ Can be negative.")
         helm-posframe-min-height 20
         helm-posframe-border-width 1)
   (setq helm-posframe-parameters +helm-posframe-parameters)
-  (advice-add #'helm-posframe-enable :around #'doom-shut-up-a)
-  (advice-add #'helm-posframe-disable :around #'doom-shut-up-a)
+  (cae-advice-add #'helm-posframe-enable :around #'doom-shut-up-a)
+  (cae-advice-add #'helm-posframe-disable :around #'doom-shut-up-a)
   (helm-posframe-enable)
   (setq helm-display-function #'cae-helm-display-function-based-on-frame-width))
 

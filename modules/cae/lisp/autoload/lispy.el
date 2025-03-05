@@ -2,7 +2,7 @@
 
 (require 'transient)
 
-(defadvice! cae-lispy-cheatsheet-evil-insert-state-a ()
+(cae-defadvice! cae-lispy-cheatsheet-evil-insert-state-a ()
   :before #'cae-lispy-cheatsheet
   (when (and (featurep 'evil)
              (memq evil-state '(normal visual)))

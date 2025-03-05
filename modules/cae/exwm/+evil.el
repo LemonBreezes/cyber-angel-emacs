@@ -35,11 +35,11 @@
   (setq-hook! 'exwm-firefox-evil-mode-hook bookmark-make-record-function #'cae-exwm-firefox-bookmark--make)
 
   ;; Automatically reenable `evil-normal-state' after following a link.
-  (advice-add #'exwm-firefox-core-focus-search-bar
+  (cae-advice-add #'exwm-firefox-core-focus-search-bar
               :after
               (defun cae-exwm-firefox-core-focus-search-bar-a ()
                 (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h)))
-  (advice-add #'exwm-firefox-core-tab-new
+  (cae-advice-add #'exwm-firefox-core-tab-new
               :after
               (defun cae-exwm-firefox-core-tab-new-a ()
                 (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-focus-search-bar-a-h)))

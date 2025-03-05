@@ -147,7 +147,7 @@
   (defvar cae-leetcode-workspace-name "*leetcode*"
     "The name of the workspace to use for leetcode.")
   (when (memq system-type '(cygwin windows-nt ms-dos))
-    (advice-add #'leetcode--install-my-cookie :override #'ignore))
+    (cae-advice-add #'leetcode--install-my-cookie :override #'ignore))
   (map! :map cae-misc-applications-random-map
         "l" #'cae-leetcode)
   (after! which-key
@@ -272,7 +272,7 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-system-map
       "t" "trash files"))
-  (advice-add #'trashed :around #'cae-trashed-revert-buffer-a)
+  (cae-advice-add #'trashed :around #'cae-trashed-revert-buffer-a)
   (add-hook 'trashed-mode-hook #'cae-misc-applications-hide-cursor-h)
   (add-hook 'trashed-mode-hook #'doom-mark-buffer-as-real-h))
 
@@ -570,14 +570,14 @@
   ;; For `zone-matrix'.
   (defvar tabbar-mode nil)
   (autoload 'zone-matrix "zone-matrix")
-  (defadvice! cae-zone-matrix-setup-buffer-appearance ()
+  (cae-defadvice! cae-zone-matrix-setup-buffer-appearance ()
     :before #'zone-matrix
     (setq-local nobreak-char-display nil)
     (cae-misc-applications-hide-cursor-h)
     (face-remap-add-relative 'default :background "black"))
 
   ;; Do not zone in a popup window. Also, do not show other windows when zoning.
-  (advice-add #'zone :around #'cae-zone-switch-to-root-window-a)
+  (cae-advice-add #'zone :around #'cae-zone-switch-to-root-window-a)
 
   (autoload 'zone-pgm-spoopy "zone-pgm-spoopy")
   :config
@@ -746,7 +746,7 @@
     (cl-pushnew #'emms-browser-mode evil-snipe-disabled-modes)
     (cl-pushnew #'emms-playlist-mode evil-snipe-disabled-modes))
   ;; Randomize all Dired playlists.
-  ;;(advice-add #'emms-source-dired :filter-return
+  ;;(cae-advice-add #'emms-source-dired :filter-return
   ;;            (lambda (list)
   ;;              (append (emms-shuffle-vector (apply #'vector list)) nil)))
   (add-hook 'emms-browser-mode-hook #'cae-misc-applications-hide-cursor-h)
@@ -804,7 +804,7 @@
           :ng "a" #'cae-emms-quick-access
           :ng "e" #'other-window
           :n "gr" #'emms-player-mpd-connect))
-  (defadvice! cae-emms-hl-line-highlight-a (&rest _)
+  (cae-defadvice! cae-emms-hl-line-highlight-a (&rest _)
     :after #'emms-player-mpd-select-song
     (hl-line-highlight))
   (map! :map emms-playlist-mode-map

@@ -1,10 +1,10 @@
 ;;; cae/notifications/config.el -*- lexical-binding: t; -*-
 
 ;; BUG Otherwise `alert-send-notification' will block the UI.
-(advice-add #'alert-send-notification :around
+(cae-advice-add #'alert-send-notification :around
             #'cae-notifications-wrap-async-call-process-a)
 
-(advice-add #'notifications-notify :around #'cae-notifications-notify-advice)
+(cae-advice-add #'notifications-notify :around #'cae-notifications-notify-advice)
 (when (require 'dbus nil t)
   (dbus-call-method-asynchronously
    :session

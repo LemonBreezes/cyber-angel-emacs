@@ -16,4 +16,4 @@
     (when cae-flames-of-freedom--old-wconf
       (set-window-configuration cae-flames-of-freedom--old-wconf))))
 
-(advice-add #'flames-of-freedom-default :after #'cae-flames-of-freedom-quit)
+(cae-advice-add #'flames-of-freedom-default :after #'cae-flames-of-freedom-quit)

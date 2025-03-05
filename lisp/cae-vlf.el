@@ -4,7 +4,7 @@
 ;; https://github.com/tecosaur/emacs-config/blob/master/config.org
 (use-package! vlf-setup
   :defer t :init
-  (advice-add #'files--ask-user-about-large-file :override #'cae-files--ask-about-large-file-vlf)
+  (cae-advice-add #'files--ask-user-about-large-file :override #'cae-files--ask-about-large-file-vlf)
   :config
   (advice-remove 'abort-if-file-too-large #'ad-Advice-abort-if-file-too-large)
   (defvar-local cae-vlf-cumulative-linenum '((0 . 0))

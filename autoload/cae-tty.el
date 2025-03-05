@@ -52,5 +52,5 @@
         (setq eglot-code-action-indicator (make-string 1 ?α))))
     (dolist (fn '(nerd-icons-faicon
                   nerd-icons-octicon))
-      (advice-add fn :override (cl-constantly "")))
+      (cae-advice-add fn :override (cl-constantly "")))
     (remove-hook 'dired-mode-hook #'nerd-icons-dired-mode)))

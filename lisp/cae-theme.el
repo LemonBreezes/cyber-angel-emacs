@@ -30,12 +30,12 @@
 
 ;; Disable Outline highlighting
 (when cae-theme-disable-outline-headings
-  (advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
+  (cae-advice-add #'outline-minor-mode-highlight-buffer :override #'ignore)
   (after! outline
     (setq outline-font-lock-keywords nil)))
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
-(defadvice! cae-run-theme-hook-h (_)
+(cae-defadvice! cae-run-theme-hook-h (_)
   :after #'consult-theme
   (run-hooks 'doom-load-theme-hook))
 (add-hook! 'circadian-after-load-theme-hook
@@ -58,7 +58,7 @@
     :when (and cae-theme-extend-heading-faces
                (not cae-theme-disable-outline-headings))
     :defer t :init
-    (advice-add #'outline-flag-region :after #'backline-update)))
+    (cae-advice-add #'outline-flag-region :after #'backline-update)))
 
 (defun cae-theme-customize-faces-h (_)
   ;; Make the mouse cursor more visible.

@@ -27,7 +27,7 @@
       (transient-setup 'cae-emms-quick-access))))
 
 ;; TODO PR something so that the callback always runs to EMMS even when tracks is nil.
-(defadvice! cae-emms-handle-jump-to-playing-track-a (closure tracks)
+(cae-defadvice! cae-emms-handle-jump-to-playing-track-a (closure tracks)
   :after #'emms-player-mpd-sync-from-mpd-1
   (when (and (not tracks)
              (eq (cadr closure) #'cae-emms-jump-to-currently-playing-track))

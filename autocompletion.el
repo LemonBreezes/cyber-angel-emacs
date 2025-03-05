@@ -62,7 +62,7 @@
 
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
-  (advice-add #'register-preview :override #'consult-register-window))
+  (cae-advice-add #'register-preview :override #'consult-register-window))
 
 (after! helm
   (setq helm-split-window-default-side 'right))

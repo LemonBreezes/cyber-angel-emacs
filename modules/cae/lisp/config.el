@@ -4,9 +4,9 @@
 
 ;; Show `eros' overlays for `edebug' results.
 (when (modulep! :tools eval +overlay)
-  (advice-add #'edebug-compute-previous-result :around
+  (cae-advice-add #'edebug-compute-previous-result :around
               #'cae-edebug-compute-previous-result-a)
-  (advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
+  (cae-advice-add #'edebug-previous-result :around #'cae-edebug-previous-result-a))
 
 ;; Allow deleting a closing paren if parens are unbalanced. Also allow inserting
 ;; a closing paren if parens are unbalanced.

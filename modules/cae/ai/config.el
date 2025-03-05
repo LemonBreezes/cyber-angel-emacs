@@ -52,7 +52,7 @@
           "--cache-keepalive-pings" "6"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
-  (defadvice! cae-aidermacs-run-make-real-buffer-a ()
+  (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
     :after #'aidermacs-run
     (when-let ((buf (get-buffer (aidermacs-buffer-name)))
                (_ (buffer-live-p buf)))
@@ -60,7 +60,7 @@
 
 (use-package! magit-gptcommit
   :after magit :init
-  (defadvice! cae-magit-gptcommit-save-buffer-a ()
+  (cae-defadvice! cae-magit-gptcommit-save-buffer-a ()
     :after #'magit-gptcommit-commit-accept
     (when-let ((buf (magit-commit-message-buffer)))
       (with-current-buffer buf (save-buffer))))
@@ -83,7 +83,7 @@
   (add-hook 'text-mode-hook #'cae-copilot-turn-on-safely)
   (add-hook 'prog-mode-hook #'cae-copilot-turn-on-safely)
   (add-hook 'conf-mode-hook #'cae-copilot-turn-on-safely)
-  (advice-add #'copilot--start-agent :around #'cae-shut-up-a)
+  (cae-advice-add #'copilot--start-agent :around #'cae-shut-up-a)
   (add-hook! 'copilot-disable-predicates
     (defun cae-disable-copilot-in-gptel-p ()
       (bound-and-true-p gptel-mode))
@@ -95,7 +95,7 @@
       (minibufferp)))
   (setq copilot-install-dir (concat doom-cache-dir "copilot"))
   :config
-  (defadvice! cae-clear-copilot-overlay-a (&rest _)
+  (cae-defadvice! cae-clear-copilot-overlay-a (&rest _)
     :before #'doom/delete-backward-word
     (copilot-clear-overlay))
   ;; Assume all Elisp code is formatted with the default indentation style. This
@@ -177,7 +177,7 @@
         :desc "Open ChatGPT here" "C" #'chatgpt-shell
         :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
   ;; Use , to ask ChatGPT questions in any comint buffer
-  (advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  (cae-advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
   ;; Add eshell support for comma prefix
   (add-hook 'eshell-input-filter-functions #'cae-eshell-send-to-chatgpt-if-comma)
   :config
@@ -190,7 +190,7 @@
   ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
   (setq-hook! 'chatgpt-shell-mode-hook
     comint-process-echoes t)
-  (defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+  (cae-defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
     :around #'shell-maker-async-shell-command
     ;; This is a hack to prevent the ChatGPT shell from inheriting
     ;; the LD_LIBRARY_PATH variable in projects where I override
@@ -203,7 +203,7 @@
         "C-d" #'cae-ai-chatgpt-quit-or-delete-char
         "C-l" #'chatgpt-shell-clear-buffer
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
-  (advice-add #'shell-maker-welcome-message :override #'ignore))
+  (cae-advice-add #'shell-maker-welcome-message :override #'ignore))
 
 (use-package! gptel
   :defer t :init
@@ -224,7 +224,7 @@
       (doom-mark-buffer-as-real-h)))
   ;; BUG Karthink refused to accept my PR to fix this, saying that starting the
   ;; point on top of the "Rewrite: " is a good idea. I disagree.
-  (defadvice! cae-goto-point-max-a (_)
+  (cae-defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
 

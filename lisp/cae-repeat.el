@@ -2,7 +2,7 @@
 
 (use-package! repeat
   :defer 2.0 :init
-  (advice-add #'repeat-mode :around #'cae-shut-up-a)
+  (cae-advice-add #'repeat-mode :around #'cae-shut-up-a)
   :config
   (setq repeat-exit-key "TAB"
         repeat-check-key t
@@ -208,7 +208,7 @@
     ("n" comint-next-prompt
      "p" comint-previous-prompt))
 
-  (defadvice! cae-repeat-ignore-when-hydra-active-a ()
+  (cae-defadvice! cae-repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
 
