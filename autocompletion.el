@@ -29,6 +29,7 @@
 (use-package! consult
   :when (modulep! :completion vertico)
   :defer t :init
+  (cae-advice-add #'register-preview :override #'consult-register-window)
   ;; See `lisp/cae-bindings' for keybindings.
   :config
   (consult-customize
@@ -58,11 +59,7 @@
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
   (setq register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-
-  ;; Optionally tweak the register preview window.
-  ;; This adds thin lines, sorting and hides the mode line of the window.
-  (cae-advice-add #'register-preview :override #'consult-register-window))
+        register-preview-function #'consult-register-format))
 
 (after! helm
   (setq helm-split-window-default-side 'right))
