@@ -87,15 +87,6 @@
     (cae-hacks-post-doom-modules-h)
   (add-hook 'doom-after-init-hook #'cae-hacks-post-doom-modules-h))
 
-(defun persp-names-current-frame-fast-with-filter (&optional filter)
-  "Return a list of perspective names for the current frame optionally filtered by FILTER."
-  (let (names)
-    (maphash (lambda (k _)
-               (when (or (not filter) (funcall filter k))
-                 (push k names)))
-             *persp-hash*)
-    (nreverse names)))
-
 (cae-defadvice! cae-persp-force-kill-with-explanation (orig-fn)
   "Advise persp-kill-buffer-query-function to explain why a buffer wasn't killed and force kill it anyway.
 This will run the original function, and if it returns nil (preventing the buffer from being killed),
@@ -134,11 +125,8 @@ it will output a message explaining why, remove the buffer from all perspectives
 
         ;; Remove from all perspectives
         (when (fboundp 'persp-remove-buffer)
-          (dolist (frame (frame-list))
-            (dolist (persp-name (persp-names-current-frame-fast-with-filter nil frame))
-              (let ((persp (persp-get-by-name persp-name frame)))
-                (when (and persp (memq buffer (safe-persp-buffers persp)))
-                  (persp-remove-buffer buffer persp nil nil t nil))))))
+          (dolist (persp (+workspace-list))
+            (persp-remove-buffer buffer persp nil nil t nil)))
 
         ;; Return t to allow the buffer to be killed
         t))))
