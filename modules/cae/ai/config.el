@@ -54,6 +54,7 @@
           "--auto-test"
           "--test"
           "--auto-commits"
+          "--no-auto-lint"
           "--install-tree-sitter-language-pack"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
