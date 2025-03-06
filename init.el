@@ -113,6 +113,7 @@
        (python +lsp +tree-sitter +pyright +cython)
        (haskell +lsp +tree-sitter)
        (web +lsp +tree-sitter)
+       (json +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
