@@ -52,7 +52,7 @@
           "--cache-keepalive-pings" "6"
           "--watch-files"
           "--auto-test"
-          "--test"
+          ;;"--test"
           "--auto-commits"
           "--no-auto-lint"
           ;;"--install-tree-sitter-language-pack"
