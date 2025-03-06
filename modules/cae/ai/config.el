@@ -51,7 +51,7 @@
         '("--cache-prompts"
           "--cache-keepalive-pings" "6"
           "--watch-files"
-          "--auto-test"
+          ;;"--auto-test"
           "--timeout" "120"
           ;;"--test"
           "--auto-commits"
