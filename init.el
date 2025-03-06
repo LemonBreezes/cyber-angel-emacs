@@ -112,8 +112,6 @@
        (json +lsp +tree-sitter)
        (python +lsp +tree-sitter +pyright +cython)
        (haskell +lsp +tree-sitter)
-       (web +lsp +tree-sitter)
-       (json +lsp +tree-sitter)
        (graphql +lsp +tree-sitter)
 
        :os
