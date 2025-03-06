@@ -191,8 +191,6 @@
     '(("\\`\\*Backtrace\\*" :size +popup-shrink-to-fit :quit nil
        :ttl nil :vslot 99)
       ("\\`\\*exwm" :ignore t)
-      ("\\`\\*ediff" :ignore t)
-      ("\\`\\*Ediff" :ignore t)
       ;;("\\`\\*lsp-ui-imenu\\*\\'" :size cae-popup-shrink-to-fit :select t
       ;;:quit t
       ;; :side right :ttl 0)
