@@ -51,6 +51,7 @@
         '("--cache-prompts"
           "--cache-keepalive-pings" "6"
           "--watch-files"
+          "--auto-test"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
   (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
