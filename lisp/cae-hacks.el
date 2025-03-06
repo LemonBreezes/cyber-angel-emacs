@@ -87,6 +87,15 @@
     (cae-hacks-post-doom-modules-h)
   (add-hook 'doom-after-init-hook #'cae-hacks-post-doom-modules-h))
 
+(defun persp-names-current-frame-fast-with-filter (&optional filter)
+  "Return a list of perspective names for the current frame optionally filtered by FILTER."
+  (let (names)
+    (maphash (lambda (k _)
+               (when (or (not filter) (funcall filter k))
+                 (push k names)))
+             *persp-hash*)
+    (nreverse names)))
+
 (cae-defadvice! cae-persp-force-kill-with-explanation (orig-fn)
   "Advise persp-kill-buffer-query-function to explain why a buffer wasn't killed and force kill it anyway.
 This will run the original function, and if it returns nil (preventing the buffer from being killed),
