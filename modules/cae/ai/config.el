@@ -58,7 +58,8 @@
           "--no-auto-lint"
           ;;"--install-tree-sitter-language-pack"
           "--chat-language" "English"
-          "--editor-edit-format" "editor-whole"))
+          ;;"--editor-edit-format" "editor-whole"
+          ))
   (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
     :after #'aidermacs-run
     (when-let ((buf (get-buffer (aidermacs-buffer-name)))
