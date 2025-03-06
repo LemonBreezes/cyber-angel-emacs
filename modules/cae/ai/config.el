@@ -55,7 +55,7 @@
           "--test"
           "--auto-commits"
           "--no-auto-lint"
-          "--install-tree-sitter-language-pack"
+          ;;"--install-tree-sitter-language-pack"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
   (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
