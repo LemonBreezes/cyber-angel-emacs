@@ -114,6 +114,7 @@
        (haskell +lsp +tree-sitter)
        (web +lsp +tree-sitter)
        (json +lsp +tree-sitter)
+       (graphql +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
