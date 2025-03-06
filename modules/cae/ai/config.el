@@ -53,6 +53,7 @@
           "--watch-files"
           "--auto-test"
           "--test"
+          "--auto-commits"
           "--install-tree-sitter-language-pack"
           "--chat-language" "English"
           "--editor-edit-format" "editor-whole"))
