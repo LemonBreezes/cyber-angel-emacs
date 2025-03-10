@@ -25,6 +25,7 @@
       "s-E" #'cae-exwm-open-nested-vanilla-emacs
       "s-D" #'cae-exwm-open-nested-vanilla-doom-emacs
       "s-r" #'cae-exwm-toggle-redshift
+      "s-l" #'cae-exwm-lock-screen
       "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
       "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
@@ -36,7 +37,7 @@ EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
 _s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _D_: Vanilla Doom Emacs
-_RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift
+_RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
       ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
@@ -50,7 +51,8 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift
       ("D" #'cae-exwm-open-nested-vanilla-doom-emacs)
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))
       ("S-RET" #'cae-open-eshell-in-new-workspace)
-      ("r" #'cae-exwm-toggle-redshift)))
+      ("r" #'cae-exwm-toggle-redshift)
+      ("l" #'cae-exwm-lock-screen)))
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))

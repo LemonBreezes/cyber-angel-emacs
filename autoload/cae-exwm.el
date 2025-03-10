@@ -5,6 +5,12 @@
   "Process object for the running redshift instance.")
 
 ;;;###autoload
+(defun cae-exwm-lock-screen ()
+  "Lock the screen using i3lock."
+  (interactive)
+  (start-process "i3lock" nil "i3lock"))
+
+;;;###autoload
 (defun cae-exwm-toggle-redshift ()
   "Toggle redshift on/off using location data from cae-location-data."
   (interactive)
