@@ -87,6 +87,7 @@
     (cae-hacks-post-doom-modules-h)
   (add-hook 'doom-after-init-hook #'cae-hacks-post-doom-modules-h))
 
+;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
   (setq helm-external-commands-list nil))
