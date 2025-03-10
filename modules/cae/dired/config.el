@@ -46,7 +46,7 @@
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
           ("\\.7z\\'" "" "7z x -aoa -o%o %i")
-          ("\\.rar\\'" "" "unrar x -o+ %i %o")
+          ("\\.rar\\'" "" "rar x -o+ %i %o")
           ("\\.tar\\'" ".tgz" nil)))
 
   (setq dired-mouse-drag-files t

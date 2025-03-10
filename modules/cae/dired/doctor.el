@@ -4,7 +4,7 @@
 (defvar cae-dired-compression-programs
   '("pigz" "pbzip2" "pixz" "zstd" "rar"    ; compression programs used in dired-compress-file-alist
     "plzip" "lzop" "pax"                  ; additional compression tools in dired-compress-files-alist
-    "uncompress" "dpkg-deb" "dictunzip" "pbunzip2" "unzip" "unzstd" "7z" "unrar") ; decompression commands
+    "uncompress" "dpkg-deb" "dictunzip" "pbunzip2" "unzip" "unzstd" "7z") ; decompression commands
   "List of programs required for Dired compression features.")
 
 (dolist (prog cae-dired-compression-programs)
