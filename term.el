@@ -8,6 +8,8 @@
   (setq vterm-max-scrollback 100000
         vterm-always-compile-module t
         vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+(setq-hook! 'vterm-mode-hook
+  nobreak-char-display nil)
 
 (after! comint
   (setq comint-history-isearch 'dwim
