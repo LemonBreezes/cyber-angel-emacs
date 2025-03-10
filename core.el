@@ -66,9 +66,9 @@
 ;; Set up fonts
 (unless (or (memq system-type '(cygwin windows-nt ms-dos))
             (not (cae-display-graphic-p)))
-  (let ((fonts-to-check '(("Iosevka Comfy" doom-font)
+  (let ((fonts-to-check '(("Aporetic Sans Mono" doom-font)
                           ("IBM Plex Mono" doom-serif-font)
-                          ("Iosevka Comfy Duo" doom-variable-pitch-font))))
+                          ("Aporetic Sans" doom-variable-pitch-font))))
     (dolist (font fonts-to-check)
       (if (find-font (font-spec :name (car font)))
           (set (cadr font) (font-spec :family (car font) :size 18))
