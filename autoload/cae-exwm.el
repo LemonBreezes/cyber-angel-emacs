@@ -8,7 +8,10 @@
 (defun cae-exwm-lock-screen ()
   "Lock the screen using i3lock."
   (interactive)
-  (start-process "i3lock" nil "i3lock"))
+  (let ((process (start-process "i3lock" nil "i3lock" "-n" "-c" "000000")))
+    (set-process-sentinel process (lambda (process event)
+                                    (when (string-prefix-p "finished" event)
+                                      (message "Screen unlocked"))))))
 
 ;;;###autoload
 (defun cae-exwm-toggle-redshift ()
