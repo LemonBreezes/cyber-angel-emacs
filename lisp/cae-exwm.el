@@ -36,7 +36,7 @@
 EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
-_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs  _D_: Vanilla Doom Emacs
+_s_: Signal       _e_: Emacs          _E_: Vanilla Emacs    _D_: Vanilla Doom Emacs
 _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 "
       ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
