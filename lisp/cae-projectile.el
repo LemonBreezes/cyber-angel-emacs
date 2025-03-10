@@ -29,8 +29,7 @@
       (message "Added %s to projectile known projects" project-root))))
 (add-hook 'after-save-hook #'cae-projectile-maybe-add-project)
 
-;; Ensure projects list is up-to-date since I usually switch to a project
-;; after running a `git clone'.
+;; If our projects list is empty, update it.
 (defadvice! cae-projectile-update-projects-list (&optional _)
   :before #'projectile-switch-project
   (unless projectile-known-projects
