@@ -159,7 +159,6 @@ Based on https://www.n16f.net/blog/clearing-the-eshell-buffer/"
   (interactive)
   (let ((input (eshell-get-old-input)))
     (eshell/clear t)
-    (eshell-emit-prompt)
     (insert input)))
 
 ;;;###autoload
