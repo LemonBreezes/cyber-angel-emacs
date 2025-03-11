@@ -268,13 +268,13 @@
   (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
   (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
-  (setq parrot-animate (when (cae-display-graphic-p) 'hide-static)
-        parrot-num-rotations 3
+  (setq parrot-num-rotations 3
         parrot-animate-on-load nil
+        parrot-animate nil
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
-  (parrot-mode +1))
+  (parrot-mode -1))
 
 (use-package! string-inflection
   :defer t
