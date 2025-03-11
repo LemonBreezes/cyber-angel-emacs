@@ -276,6 +276,7 @@
   :config
   (setq key-chord-two-keys-delay 0.2)
   (setq key-chord-typing-speed-threshold 0.15)
+  (setq key-chord-one-key-min-delay 0.05)
   (setq key-chord-typing-detection t)
   (setq key-chord-in-macros nil)
   (key-chord-define evil-normal-state-map "jj" #'evilem-motion-next-line)
