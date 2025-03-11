@@ -275,7 +275,7 @@
         parrot-party-on-magit-push t
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
-  (parrot-mode -1))
+  (parrot-mode _1))
 
 (use-package! string-inflection
   :defer t
