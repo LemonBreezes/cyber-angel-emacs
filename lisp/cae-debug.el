@@ -105,6 +105,6 @@ Reports when a new package is loaded and which file triggered it."
                 (message "Package '%s' loaded by %s"
                          pkg (file-relative-name source-file doom-emacs-dir))))))))))
 
-;;; Things I am currently debugging. Scratch pad:
+;;; Things I am currently debugging.
 
 ;; See also autoload/cae-debug.el
