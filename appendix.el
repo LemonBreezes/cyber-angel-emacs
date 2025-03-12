@@ -31,10 +31,6 @@
                 '(mpc))))
    ,@(when (modulep! :cae ai)
        (nconc
-        (when (modulep! :tools lsp -eglot)
-          '(lsp-uniteai))
-        (when (modulep! :tools lsp +eglot)
-          '(lsp-eglot))
         (when (modulep! :cae lsp +copilot)
           '(copilot))
         (when (modulep! :cae lsp -copilot)
