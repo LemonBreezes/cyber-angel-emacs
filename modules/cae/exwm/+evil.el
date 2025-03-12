@@ -97,4 +97,5 @@
           ((and (stringp exwm-class-name)
                 (string-match-p "retroarch" exwm-class-name))
            (evil-emacs-state)
-           (exwm-input-grab-keyboard)))))
+           (setq-local exwm-input-line-mode-passthrough nil
+                       exwm-evil-visual-state-enabled nil)))))
