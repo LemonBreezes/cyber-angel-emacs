@@ -92,5 +92,6 @@
   :before #'helm-external-commands-list-1
   (setq helm-external-commands-list nil))
 
+;; Allow killing buffers that are visible in multiple persps
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
