@@ -74,7 +74,12 @@
           ;;"--install-tree-sitter-language-pack"
           "--chat-language" "English"
           ;;"--editor-edit-format" "editor-whole"
-          )))
+          ))
+  (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
+    :after #'aidermacs-run
+    (when-let ((buf (get-buffer (aidermacs-buffer-name)))
+               (_ (buffer-live-p buf)))
+      (doom-set-buffer-real buf t))))
 
 
 (cae-defadvice! cae-magit-gptcommit-save-buffer-a ()
