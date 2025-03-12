@@ -29,6 +29,21 @@
                            )
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
+  (after! gptel
+    (setq gptel-backend
+          (gptel-make-anthropic "Claude-thinking" ;Any name you want
+            :key (getenv "ANTHROPIC_API_KEY")
+            :stream t
+            :models `(,(intern claude-model))
+            :header (lambda () (when-let* ((key (gptel--get-api-key)))
+                                 `(("x-api-key" . ,key)
+                                   ("anthropic-version" . "2023-06-01")
+                                   ("anthropic-beta" . "pdfs-2024-09-25")
+                                   ("anthropic-beta" . "output-128k-2025-02-19")
+                                   ("anthropic-beta" . "prompt-caching-2024-07-31"))))
+            :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
+                              :max_tokens 4096)))
+    (setq gptel-model (intern claude-model)))
   (after! minuet
     (setq minuet-provider 'claude)
     (plist-put! minuet-claude-options
