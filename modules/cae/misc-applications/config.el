@@ -878,6 +878,8 @@
   '(;; Aidermacs/Aider
     ("a" aider-transient-menu "Aider")
     ("a" aidermacs-transient-menu "Aidermacs")
+    ;; Claude
+    ("c" cae-claude-code "Claude")
     ;; Elysium
     ("e" elysium-query "Elysium")
     ;; GPTel
