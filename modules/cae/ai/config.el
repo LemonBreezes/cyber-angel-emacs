@@ -252,8 +252,3 @@
   (cae-defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
-
-(use-package! elysium
-  :defer t :config
-  (setq elysium-window-size 0.5)
-  (setq elysium-window-style 'vertical))
