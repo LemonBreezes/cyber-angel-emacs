@@ -3,7 +3,6 @@
 
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
-(package! eat)
 (package! eshell-bookmark)
 (package! eshell-prompt-extras)
 (package! tldr)
