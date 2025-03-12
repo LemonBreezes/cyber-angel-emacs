@@ -91,3 +91,6 @@
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
   (setq helm-external-commands-list nil))
+
+(advice-add #'persp-kill-buffer-query-function :override
+            #'cae-persp-kill-buffer-query-function)
