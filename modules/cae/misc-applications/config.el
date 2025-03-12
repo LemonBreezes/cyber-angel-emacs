@@ -866,7 +866,11 @@
 ;; Helper function to check if a function is available (either autoloaded or defined)
 (defun cae-misc-applications-ai-function-available-p (func)
   "Return t if FUNC is available as either an autoloaded or defined function."
-  (or (autoloadp func) (functionp func)))
+  (or (autoloadp func) (functionp func)
+      (and (eq func 'aider-transient-menu)
+           (autoloadp 'aider-run))
+      (and (eq func 'aidermacs-transient-menu)
+           (autoloadp 'aidermacs-run))))
 
 ;; Define AI commands with their key bindings
 (defvar cae-misc-applications-ai-commands
@@ -884,8 +888,7 @@
   (let ((key (nth 0 cmd))
         (func (nth 1 cmd))
         (desc (nth 2 cmd)))
-    (when (or (cae-misc-applications-ai-function-available-p func)
-              (memq (intern (downcase desc)) doom-incremental-packages))
+    (when (cae-misc-applications-ai-function-available-p func)
       (define-key cae-misc-applications-ai-map key func)
       (after! which-key
         (which-key-add-keymap-based-replacements 'cae-misc-applications-ai-map
