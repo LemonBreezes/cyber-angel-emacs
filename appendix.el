@@ -96,8 +96,9 @@
        '(apheleia))
    anzu isearch-mb
    ,@(when (modulep! :editor evil)
-       '(evil-anzu)))
- t)
+       '(evil-anzu))))
+(setq doom-incremental-packages
+      (delq t doom-incremental-packages))
 
 (unless (or (executable-find "termux-setup-storage")
             (not (cae-display-graphic-p)))
