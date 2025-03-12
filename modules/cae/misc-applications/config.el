@@ -884,7 +884,8 @@
   (let ((key (nth 0 cmd))
         (func (nth 1 cmd))
         (desc (nth 2 cmd)))
-    (when (cae-misc-applications-ai-function-available-p func)
+    (when (or (cae-misc-applications-ai-function-available-p func)
+              (memq (intern (downcase desc)) doom-incremental-packages))
       (define-key cae-misc-applications-ai-map key func)
       (after! which-key
         (which-key-add-keymap-based-replacements 'cae-misc-applications-ai-map
