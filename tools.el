@@ -193,13 +193,13 @@
                   "/run/current-system/profile/bin"
                   "/run/current-system/profile/sbin"))
     (add-to-list 'tramp-remote-path path))
-    ;; set `tramp-direct-async-process' locally in all ssh connections
-    (connection-local-set-profile-variables
-     'remote-direct-async-process
-     '((tramp-direct-async-process . t)))
-    (connection-local-set-profiles
-     '(:application tramp :protocol "ssh")
-     'remote-direct-async-process))
+  ;; set `tramp-direct-async-process' locally in all ssh connections
+  (connection-local-set-profile-variables
+   'remote-direct-async-process
+   '((tramp-direct-async-process . t)))
+  (connection-local-set-profiles
+   '(:application tramp :protocol "ssh")
+   'remote-direct-async-process))
 
 (after! marginalia
   ;; Use `embark-file-map' for `ffap-menu'.
