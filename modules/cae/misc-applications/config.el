@@ -867,7 +867,7 @@
 (defun cae-misc-applications-ai-function-available-p (func)
   "Return t if FUNC is available as either an autoloaded or defined function."
   (or (autoloadp func) (functionp func)
-      ;; Exceptions
+      ;; Exceptions:
       (and (eq func 'aider-transient-menu)
            (autoloadp 'aider-run))
       (and (eq func 'aidermacs-transient-menu)
