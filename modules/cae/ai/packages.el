@@ -12,4 +12,3 @@
   (package! copilot :recipe (:host github :repo "copilot-emacs/copilot.el")))
 (when (modulep! -copilot)
   (package! minuet))
-(package! elysium)
