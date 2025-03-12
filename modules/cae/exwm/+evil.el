@@ -96,4 +96,5 @@
            (cae-exwm-discord-mode +1))
           ((and (stringp exwm-class-name)
                 (string-match-p "retroarch" exwm-class-name))
-           (evil-emacs-state)))))
+           (evil-emacs-state)
+           (exwm-input-release-keyboard)))))
