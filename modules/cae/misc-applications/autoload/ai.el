@@ -3,5 +3,5 @@
 ;;;###autoload
 (defun cae-claude-code ()
   (interactive)
-  (let ((eat-buffer-name (format "*claude:%s*" (doom-project-root))))
-    (eat-other-window "claude")))
+  (let ((vterm-buffer-name (format "*claude:%s*" (doom-project-root))))
+    (vterm-other-window "claude")))
