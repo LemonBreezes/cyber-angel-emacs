@@ -228,6 +228,7 @@
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
   :config
   (setq gpt-openai-key (getenv "OPENAI_API_KEY"))
+  (setq gptel-default-mode 'org-mode)
   (after! gptel-context
     (map! :map gptel-context-buffer-mode-map
           :n "q" #'gptel-context-quit
