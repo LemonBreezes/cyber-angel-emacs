@@ -20,6 +20,9 @@
   ;; For aider.el since the AI model outputs unicode whitespace characters.
   nobreak-char-display nil)
 
+(setq-hook! 'eat-mode-hook
+  nobreak-char-display nil)
+
 (use-package! comint-histories
   :after comint :config
   (comint-histories-mode 1)
