@@ -20,10 +20,12 @@
                                  (string= (buffer-name buffer) (cadadr wc)))
                             (setq found t))
                            (t
-                            (dolist (w wc)
-                              (when (and (consp w) (not found))
-                                (funcall search-in-wconf w)))))))))
-              ;; Add a type check before calling search-in-wconf
+                            ;; Use a safer iteration method that checks each element
+                            (let ((items (if (proper-list-p wc) wc nil)))
+                              (when items
+                                (dolist (w items)
+                                  (when (and (consp w) (not found))
+                                    (funcall search-in-wconf w)))))))))))
               (when (consp window-conf)
                 (funcall search-in-wconf window-conf))
               found))))))))
