@@ -2,39 +2,6 @@
 
 (require 'cae-lib)
 
-;;; EAT Terminal Integration
-
-(use-package! eat
-  :defer t :init
-  (add-hook 'eshell-load-hook #'eat-eshell-mode)
-  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
-  :config
-  ;; Do not let EAT override TERM.
-  (setq eat-term-name (lambda () eshell-term-name)
-        eat-enable-yank-to-terminal t)
-
-  ;; Temporarily disable some modes when EAT is active.
-  (defun cae-eshell--disable-modes-in-eat ()
-    "Disable certain modes when EAT is running and restore them when it stops."
-    (let ((modes '(corfu-mode eldoc-mode)))
-      (dolist (mode modes)
-        (when (boundp mode)
-          (let ((mode-var (intern (concat "cae-eshell--" (symbol-name mode) "-enabled-p"))))
-            (make-local-variable mode-var)
-            (if eat--eshell-process-running-mode
-                (progn (set mode-var (symbol-value mode))
-                       (funcall mode -1))
-              (when (symbol-value mode-var)
-                (funcall mode 1)
-                (set mode-var nil))))))))
-  
-  (add-hook 'eat--eshell-process-running-mode-hook #'cae-eshell--disable-modes-in-eat)
-
-  ;; It's kind of hard to figure out how to exit char mode, so let's give a hint.
-  (cae-defadvice! cae-eat-eshell-print-char-mode-hint-a ()
-    :after #'eat-eshell-char-mode
-    (message "Type M-RET/C-M-m to exit char mode.")))
-
 ;;; Command Handling
 
 ;; Doom overrides `eshell/emacs' with a custom function. I prefer for `emacs'
