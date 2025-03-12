@@ -97,4 +97,4 @@
           ((and (stringp exwm-class-name)
                 (string-match-p "retroarch" exwm-class-name))
            (evil-emacs-state)
-           (exwm-input-release-keyboard)))))
+           (exwm-input-grab-keyboard)))))
