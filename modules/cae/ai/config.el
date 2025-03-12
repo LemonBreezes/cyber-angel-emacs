@@ -231,6 +231,7 @@
 (use-package! gptel
   :defer t :init
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+  (autoload 'gptel--stream-convert-markdown->org "gptel-org")
   :config
   (setq gpt-openai-key (getenv "OPENAI_API_KEY"))
   (setq gptel-default-mode 'org-mode)
