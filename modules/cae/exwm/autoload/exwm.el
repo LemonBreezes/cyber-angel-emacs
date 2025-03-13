@@ -47,3 +47,15 @@ non-nil, debug init as well."
           process-environment)))
     (apply #'start-process "Emacs" nil "emacs"
            (when arg (list "--debug-init")))))
+
+;;;###autoload
+(defun cae-exwm-decrease-brightness ()
+  "Decrease screen brightness using xbacklight."
+  (interactive)
+  (start-process "xbacklight" nil "xbacklight" "-dec" "10"))
+
+;;;###autoload
+(defun cae-exwm-increase-brightness ()
+  "Increase screen brightness using xbacklight."
+  (interactive)
+  (start-process "xbacklight" nil "xbacklight" "-inc" "10"))
