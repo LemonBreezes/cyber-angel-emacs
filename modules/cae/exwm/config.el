@@ -227,7 +227,7 @@
     (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
     (after! persp-mode
       (load! "+auto-persp")))
-      
+
   ;; Brightness control keys.
   (global-set-key (kbd "<XF86MonBrightnessDown>") #'cae-exwm-decrease-brightness)
   (global-set-key (kbd "<XF86MonBrightnessUp>") #'cae-exwm-increase-brightness))
