@@ -29,6 +29,10 @@
       "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
       "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
+;; Brightness control keys.
+(global-set-key (kbd "<XF86MonBrightnessDown>") #'cae-exwm-decrease-brightness)
+(global-set-key (kbd "<XF86MonBrightnessUp>") #'cae-exwm-increase-brightness)
+
 (when (modulep! :ui hydra)
   (eval
    `(defhydra hydra-exwm-apps (:hint nil :color blue)
