@@ -264,7 +264,9 @@
   (autoload #'parrot--magit-push-filter "parrot")
   (cae-defadvice! cae-modeline-gac-party-on-push-a (buffer)
     :after #'gac-push
-    (when-let* ((proc (get-buffer-process "*git-auto-push*")))
+    (when-let* ((proc (get-buffer-process "*git-auto-push*"))
+                (_ (and parrot-party-on-magit-push
+                        parrot-animate)))
       (parrot-party-while-process proc)))
   (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
   (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
