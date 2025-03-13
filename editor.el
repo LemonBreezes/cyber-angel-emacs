@@ -268,11 +268,12 @@
         (parrot-party-while-process proc)))
     (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
     (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter))
+  (after! parrot-rotate
+    (setq parrot-rotate-animate-after-rotation nil))
   :config
   (setq parrot-num-rotations 3
         parrot-animate-on-load nil
         parrot-party-on-magit-push nil
-        parrot-rotate-animate-after-rotation nil
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
   (parrot-mode -1))
