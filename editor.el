@@ -259,17 +259,15 @@
   :disabled t
   :defer t :init
   ;; Wrangle parrot into being fully lazy-loaded.
-  (autoload #'parrot-party-while-process "parrot")
-  (autoload #'parrot--todo-party "parrot")
-  (autoload #'parrot--magit-push-filter "parrot")
-  (cae-defadvice! cae-modeline-gac-party-on-push-a (buffer)
-    :after #'gac-push
-    (when-let* ((proc (get-buffer-process "*git-auto-push*"))
-                (_ (and parrot-animate
-                        parrot-party-on-magit-push)))
-      (parrot-party-while-process proc)))
-  (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
-  (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
+  ;;(autoload #'parrot-party-while-process "parrot")
+  ;;(autoload #'parrot--todo-party "parrot")
+  ;;(autoload #'parrot--magit-push-filter "parrot")
+  ;;(cae-defadvice! cae-modeline-gac-party-on-push-a (buffer)
+  ;;  :after #'gac-push
+  ;;  (when-let* ((proc (get-buffer-process "*git-auto-push*")))
+  ;;    (parrot-party-while-process proc)))
+  ;;(add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
+  ;;(cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter)
   :config
   (setq parrot-num-rotations 3
         parrot-animate-on-load nil
