@@ -256,7 +256,6 @@
   (setq logos-outlines-are-pages t))
 
 (use-package! parrot
-  :disabled t
   :defer t :init
   ;; Wrangle parrot into being fully lazy-loaded.
   ;;(autoload #'parrot-party-while-process "parrot")
