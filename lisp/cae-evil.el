@@ -223,9 +223,9 @@
           :i "e"   #'cae-cape-elisp-capf)))
 (map! :map ctl-x-map
       (:when (modulep! :cae ai +copilot)
-       "C-c" #'copilot-complete)
+       :i "C-c" #'copilot-complete)
       (:when (modulep! :cae ai -copilot)
-       "C-c" #'minuet-show-suggestion
+       :i "C-c" #'minuet-show-suggestion
        "y" #'minuet-complete-with-minibuffer))
 
 ;; TODO Fix this to work with `consult-yasnippet'.
