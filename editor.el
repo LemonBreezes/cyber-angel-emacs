@@ -272,7 +272,7 @@
   (setq parrot-num-rotations 3
         parrot-animate-on-load nil
         parrot-animate nil
-        parrot-party-on-magit-push t
+        parrot-party-on-magit-push nil
         parrot-party-on-org-todo-states '("DONE")
         parrot-type 'nyan)
   (parrot-mode _1))
