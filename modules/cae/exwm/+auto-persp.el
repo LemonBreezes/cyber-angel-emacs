@@ -365,7 +365,7 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm--get-browser-workspace-name ()
   "Get the workspace name for the current browser."
   (when browse-url-generic-program
-    (or (gethash browse-url-generic-program cae-exwm--browser-workspace-cache-table)
+    (or (gethash (downcase browse-url-generic-program) cae-exwm--browser-workspace-cache-table)
         (let* ((browser-name (file-name-base browse-url-generic-program))
                (browser-parts (or (gethash browser-name cae-exwm--browser-name-parts-cache)
                                   (let ((parts (string-split browser-name "-")))
@@ -387,8 +387,8 @@ Optional STATE is passed from persp-mode."
                   (setq workspace-name name)
                   (throw 'found t)))))
 
-          ;; Cache the result for future lookups
-          (puthash browse-url-generic-program workspace-name cae-exwm--browser-workspace-cache-table)
+          ;; Cache the result for future lookups - use downcase for case-insensitivity
+          (puthash (downcase browse-url-generic-program) workspace-name cae-exwm--browser-workspace-cache-table)
           workspace-name))))
 
 (defun cae-exwm-browse-url-generic-a (&rest _)
