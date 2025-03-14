@@ -65,6 +65,8 @@
   (setq aidermacs-extra-args
         '("--cache-prompts"
           "--cache-keepalive-pings" "6"
+          "--model r1"
+          "--editor-model sonnet"
           "--watch-files"
           ;;"--auto-test"
           ;;"--timeout" "120"
