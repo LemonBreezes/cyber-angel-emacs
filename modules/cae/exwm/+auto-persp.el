@@ -260,13 +260,31 @@ Optional STATE is passed from persp-mode."
   (let ((current-buffer (current-buffer))
         (result nil)
         (workspace-lower (downcase workspace)))
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Looking for buffers matching workspace: %s" workspace))
+    
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
-      (when (and (buffer-live-p buffer)
-                 (not (eq buffer current-buffer))
-                 (let ((buf-workspace (cae-exwm-get-workspace-name buffer)))
-                   (and buf-workspace
-                        (string= (downcase buf-workspace) workspace-lower))))
-        (push buffer result)))))
+      (when (buffer-live-p buffer)
+        (let ((buf-workspace (cae-exwm-get-workspace-name buffer))
+              (buf-class (when (buffer-local-value 'exwm-class-name buffer t)
+                           (buffer-local-value 'exwm-class-name buffer))))
+          
+          (when cae-exwm-auto-persp-debug
+            (message "[EXWM-DEBUG] Checking buffer: %s, workspace: %s, class: %s, current: %s"
+                     (buffer-name buffer)
+                     buf-workspace
+                     buf-class
+                     (eq buffer current-buffer)))
+          
+          (when (and (not (eq buffer current-buffer))
+                     buf-workspace
+                     (or (string= (downcase buf-workspace) workspace-lower)
+                         ;; Also check if the class name maps to this workspace
+                         (and buf-class
+                              (let ((mapped-workspace (gethash buf-class cae-exwm--workspace-name-cache)))
+                                (and mapped-workspace
+                                     (string= (downcase mapped-workspace) workspace-lower))))))
+            (push buffer result)))))))
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
@@ -278,16 +296,25 @@ Optional STATE is passed from persp-mode."
                         (buffer-local-value 'exwm-class-name (current-buffer)))
                (buffer-local-value 'exwm-class-name (current-buffer)))))
   
+  ;; Don't clean up if this isn't an EXWM workspace
   (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Workspace %s not in workspace-names-set, skipping cleanup"
                (+workspace-current-name)))
     (cl-return-from cae-exwm-persp-cleanup-workspace))
 
+  ;; Don't clean up if this buffer doesn't have a workspace name
   (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
     (unless workspace
       (when cae-exwm-auto-persp-debug
         (message "[EXWM-DEBUG] No workspace name for current buffer, skipping cleanup"))
+      (cl-return-from cae-exwm-persp-cleanup-workspace))
+
+    ;; Don't clean up if the workspace name doesn't match the current workspace
+    (unless (string= (downcase workspace) (downcase (+workspace-current-name)))
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] Workspace mismatch: buffer workspace %s != current workspace %s, skipping cleanup"
+                 workspace (+workspace-current-name)))
       (cl-return-from cae-exwm-persp-cleanup-workspace))
 
     (let ((persp (persp-get-by-name workspace)))
@@ -303,6 +330,15 @@ Optional STATE is passed from persp-mode."
                    (mapcar #'buffer-name matching-buffers)))
         
         (unless matching-buffers
+          ;; Special case for VirtualBox - don't kill it if it's the current buffer
+          (when (and (string= (downcase workspace) "virtualbox")
+                     (or (string-match-p "virtualbox" (downcase (buffer-name (current-buffer))))
+                         (and (boundp 'exwm-class-name)
+                              (string-match-p "virtualbox" (downcase exwm-class-name)))))
+            (when cae-exwm-auto-persp-debug
+              (message "[EXWM-DEBUG] Not killing VirtualBox workspace because current buffer is VirtualBox"))
+            (cl-return-from cae-exwm-persp-cleanup-workspace))
+          
           (when cae-exwm-auto-persp-debug
             (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
           (+workspace-kill (+workspace-current))
