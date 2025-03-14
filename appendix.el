@@ -105,6 +105,8 @@
   (after! pdf-tools
     (pdf-tools-install t nil t)))
 
+(load! "lisp/cae-compile" doom-user-dir)
+
 ;; Do not spam me with warnings.
 (unless init-file-debug
   (setq warning-minimum-level :error
