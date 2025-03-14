@@ -1,9 +1,32 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
+;; Sometimes packages are not compiled. This is a workaround.
+(use-package! compile-angel
+  :defer nil :init
+  (compile-angel-on-load-mode +1)
+  (setq native-comp-async-query-on-exit t)
+  (setq confirm-kill-processes t)
+  (setq package-native-compile t)
+
+  (with-eval-after-load "savehist"
+    (let ((filename (concat "/" (file-name-nondirectory savehist-file))))
+      (unless (member filename compile-angel-excluded-files)
+        (push filename compile-angel-excluded-files))))
+  (with-eval-after-load "recentf"
+    (let ((filename (concat "/" (file-name-nondirectory recentf-save-file))))
+      (unless (member filename compile-angel-excluded-files)
+        (push filename compile-angel-excluded-files))))
+  (with-eval-after-load "cus-edit"
+    (when (stringp custom-file)
+      (let ((filename (concat "/" (file-name-nondirectory custom-file))))
+        (unless (member filename compile-angel-excluded-files)
+          (push filename compile-angel-excluded-files))))))
+
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
+;; Ensure this is defined even if its module is not loaded.
 (unless (boundp '+default-minibuffer-maps)
   (defvar +default-minibuffer-maps
     (append '(minibuffer-local-map
@@ -20,7 +43,6 @@
                      helm-rg-map
                      helm-read-file-map))))
     "A list of all the keymaps used for the minibuffer."))
-;; Ensure this is defined even if its module is not loaded.
 
 ;; This helps me debug issues with my config.
 (setq persistent-scratch-autosave-mode t)
