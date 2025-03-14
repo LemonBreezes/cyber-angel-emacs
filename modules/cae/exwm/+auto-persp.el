@@ -63,6 +63,8 @@
     ("virtualbox" . "VirtualBox")
     ("virtualbox manager" . "VirtualBox")
     ("VirtualBox Manager" . "VirtualBox")
+    ("VirtualBox" . "VirtualBox")
+    ("Oracle VirtualBox Manager" . "VirtualBox")
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
@@ -266,7 +268,8 @@ Optional STATE is passed from persp-mode."
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
       (when (buffer-live-p buffer)
         (let ((buf-workspace (cae-exwm-get-workspace-name buffer))
-              (buf-class (when (buffer-local-value 'exwm-class-name buffer t)
+              (buf-class (when (and (buffer-local-variable-p 'exwm-class-name buffer)
+                                    (buffer-local-value 'exwm-class-name buffer))
                            (buffer-local-value 'exwm-class-name buffer))))
           
           (when cae-exwm-auto-persp-debug
