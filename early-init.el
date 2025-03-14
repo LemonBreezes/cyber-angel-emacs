@@ -45,6 +45,11 @@
   (let ((name (concat "/" (file-name-nondirectory filename))))
     (cae-exclude-file-from-compilation name)))
 
+(defun cae-exclude-file-regexp-from-compilation (regexp)
+  "Add files matching REGEXP to the list of excluded files for native compilation."
+  (unless (member regexp compile-angel-excluded-file-regexps)
+    (add-to-list 'compile-angel-excluded-file-regexps regexp)))
+
 (defun cae-setup-compile-angel-exclusions ()
   "Set up exclusions for native compilation."
   (cae-exclude-file-from-compilation "/early-init.el")
