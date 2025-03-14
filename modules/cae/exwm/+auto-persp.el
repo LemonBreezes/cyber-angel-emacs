@@ -88,7 +88,7 @@ name of the workspace that will be created for that application.")
 (defvar cae-exwm--workspace-name-cache
   (let ((ht (make-hash-table :test 'equal :size 64)))
     (dolist (mapping cae-exwm-workspace-name-replacements)
-      (puthash (car mapping) (cdr mapping) ht))
+      (puthash (downcase (car mapping)) (cdr mapping) ht))
     ht)
   "Cache for workspace names to avoid repeated lookups.")
 
@@ -121,7 +121,7 @@ Returns nil if BUFFER is not an EXWM buffer."
                  (error nil))))
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
-    (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
+    (let ((workspace-name (gethash (downcase class) cae-exwm--workspace-name-cache class)))
       (when cae-exwm-auto-persp-debug
         (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
       workspace-name)))
@@ -141,7 +141,7 @@ Returns nil if BUFFER is not an EXWM buffer."
 
   ;; Rebuild the workspace name cache
   (dolist (mapping cae-exwm-workspace-name-replacements)
-    (puthash (car mapping) (cdr mapping) cae-exwm--workspace-name-cache)))
+    (puthash (downcase (car mapping)) (cdr mapping) cae-exwm--workspace-name-cache)))
 
 ;;; Workspace management
 
