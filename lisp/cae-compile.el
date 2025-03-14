@@ -1,35 +1,24 @@
 ;;; lisp/cae-compile.el -*- lexical-binding: t; -*-
 
-(defun cae-exclude-file-from-compilation (file-path)
-  "Add FILE-PATH to the list of files excluded from native compilation."
-  (unless (member file-path compile-angel-excluded-files)
-    (add-to-list 'compile-angel-excluded-files file-path)))
-
-(defun cae-exclude-filename-from-compilation (filename)
-  "Add FILENAME (just the basename with a leading slash) to excluded files."
-  (let ((name (concat "/" (file-name-nondirectory filename))))
-    (cae-exclude-file-from-compilation name)))
-
-(defun cae-exclude-file-regexp-from-compilation (regexp)
-  "Add files matching REGEXP to the list of excluded files for native compilation."
-  (unless (member regexp compile-angel-excluded-files-regexps)
-    (add-to-list 'compile-angel-excluded-files-regexps regexp)))
-
 (defun cae-setup-compile-angel-exclusions ()
   "Set up exclusions for native compilation."
-  (cae-exclude-file-from-compilation "/early-init.el")
-  (cae-exclude-file-from-compilation "/subdirs.el")
+  ;; Basic exclusions
+  (add-to-list 'compile-angel-excluded-files "/early-init.el")
+  (add-to-list 'compile-angel-excluded-files "/subdirs.el")
 
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
-    (cae-exclude-filename-from-compilation savehist-file))
+    (add-to-list 'compile-angel-excluded-files 
+                 (concat "/" (file-name-nondirectory savehist-file))))
 
   (with-eval-after-load "recentf"
-    (cae-exclude-filename-from-compilation recentf-save-file))
+    (add-to-list 'compile-angel-excluded-files 
+                 (concat "/" (file-name-nondirectory recentf-save-file))))
 
   (with-eval-after-load "cus-edit"
     (when (stringp custom-file)
-      (cae-exclude-filename-from-compilation custom-file)))
+      (add-to-list 'compile-angel-excluded-files 
+                   (concat "/" (file-name-nondirectory custom-file)))))
 
   ;; Exclude Unicode data files that don't need compilation
   (add-to-list 'compile-angel-excluded-files-regexps "/leim/.*")
