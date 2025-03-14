@@ -4,7 +4,6 @@
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
-;; Ensure this is defined even if its module is not loaded.
 (unless (boundp '+default-minibuffer-maps)
   (defvar +default-minibuffer-maps
     (append '(minibuffer-local-map
@@ -21,6 +20,7 @@
                      helm-rg-map
                      helm-read-file-map))))
     "A list of all the keymaps used for the minibuffer."))
+;; Ensure this is defined even if its module is not loaded.
 
 ;; This helps me debug issues with my config.
 (setq persistent-scratch-autosave-mode t)
