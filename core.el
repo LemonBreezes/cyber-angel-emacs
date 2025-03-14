@@ -1,5 +1,7 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
+(compile-angel-on-load-mode +1)
+
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
