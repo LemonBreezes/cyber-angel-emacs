@@ -18,10 +18,10 @@
 (defun cae-setup-compile-angel-exclusions ()
   "Set up exclusions for native compilation."
   ;; Exclude system directories/files from native compilation (idempotent)
-  (dolist (path '("/usr/share/emacs/31.0.50/lisp/international/"
-                  "/usr/share/emacs/31.0.50/lisp/leim/"
-                  "/usr/share/emacs/31.0.50/lisp/subdirs.el"
-                  "/usr/share/emacs/site-lisp/subdirs.el"))
+  (dolist (path (list (format "/usr/share/emacs/%s/lisp/international/" emacs-version)
+                      (format "/usr/share/emacs/%s/lisp/leim/" emacs-version)
+                      (format "/usr/share/emacs/%s/lisp/subdirs.el" emacs-version)
+                      "/usr/share/emacs/site-lisp/subdirs.el"))
     (cae-exclude-file-regexp-from-compilation path))
 
   ;; Exclude various configuration files
