@@ -43,11 +43,9 @@
   (let ((emacs-dir "/usr/share/emacs"))
     (when (and (file-exists-p emacs-dir)
                (not (file-writable-p emacs-dir)))
-      (message "Warning: %s is not writable. Byte compilation may fail." emacs-dir)
       (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
-        (message "Running: %s" sudo-cmd)
-        (if (zerop (shell-command sudo-cmd))
-            (message "Successfully made %s writable." emacs-dir)
+        (unless (zerop (shell-command sudo-cmd))
+          (message "Warning: %s is not writable. Byte compilation may fail." emacs-dir)
           (message "Failed to make %s writable. You may need to run: %s"
                    emacs-dir sudo-cmd))))))
 
