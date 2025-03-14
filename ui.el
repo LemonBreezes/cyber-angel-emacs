@@ -22,9 +22,6 @@
 (after! tab-bar
   (setq tab-bar-show 1))
 
-;; Don't confirm when exiting Emacs that active processes exist.
-(setq confirm-kill-processes nil)
-
 (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
       kill-buffer-delete-auto-save-files t
       window-combination-resize t     ;Take new window space from all other
