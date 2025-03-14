@@ -157,19 +157,17 @@ Optional STATE is passed from persp-mode."
          (is-floating (and exwm--floating-frame
                            (gethash class-name cae-exwm--floating-apps-set)))
          ;; Special case for VirtualBox - always create a workspace
-         (is-virtualbox (and class-name (string-match-p "virtualbox" (downcase class-name))))
          (result (and (stringp workspace-name)
                       (or is-virtualbox  ;; Always create workspace for VirtualBox
                           (not is-floating))
                       (or state t))))
 
     (when cae-exwm-auto-persp-debug
-      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, is-virtualbox=%s, result=%s"
+      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
                (buffer-name buffer)
                class-name
                workspace-name
                is-floating
-               is-virtualbox
                result))
     
     result))
