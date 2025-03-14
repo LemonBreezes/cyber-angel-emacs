@@ -13,11 +13,12 @@
   (setq confirm-kill-processes t)
   (setq package-native-compile t)
 
-  ;; Exclude system directories and files from native compilation
-  (push "/usr/share/emacs/31.0.50/lisp/international/" compile-angel-excluded-files)
-  (push "/usr/share/emacs/31.0.50/lisp/leim/" compile-angel-excluded-files)
-  (push "/usr/share/emacs/31.0.50/lisp/subdirs.el" compile-angel-excluded-files)
-  (push "/usr/share/emacs/site-lisp/subdirs.el" compile-angel-excluded-files)
+  ;; Exclude system directories/files from native compilation (idempotent)
+  (dolist (path '("/usr/share/emacs/31.0.50/lisp/international/"
+                  "/usr/share/emacs/31.0.50/lisp/leim/"
+                  "/usr/share/emacs/31.0.50/lisp/subdirs.el"
+                  "/usr/share/emacs/site-lisp/subdirs.el"))
+    (add-to-list 'compile-angel-excluded-files path))
 
   ;; Ensure that the value of `savehist-file` is updated before proceeding
   (with-eval-after-load "savehist"
