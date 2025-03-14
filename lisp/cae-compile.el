@@ -44,13 +44,12 @@
     (when (and (file-exists-p emacs-dir)
                (not (file-writable-p emacs-dir)))
       (message "Warning: %s is not writable. Byte compilation may fail." emacs-dir)
-      (when (yes-or-no-p (format "Attempt to make %s writable with sudo? " emacs-dir))
-        (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
-          (message "Running: %s" sudo-cmd)
-          (if (zerop (shell-command sudo-cmd))
-              (message "Successfully made %s writable." emacs-dir)
-            (message "Failed to make %s writable. You may need to run: %s"
-                     emacs-dir sudo-cmd)))))))
+      (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
+        (message "Running: %s" sudo-cmd)
+        (if (zerop (shell-command sudo-cmd))
+            (message "Successfully made %s writable." emacs-dir)
+          (message "Failed to make %s writable. You may need to run: %s"
+                   emacs-dir sudo-cmd))))))
 
 (use-package! compile-angel
   :defer 60 :config
