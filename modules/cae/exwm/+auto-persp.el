@@ -416,14 +416,14 @@ Optional STATE is passed from persp-mode."
 
   (persp-def-auto-persp "EXWM"
                         :parameters '((dont-save-to-file . t))
-                        :hooks 'exwm-manage-finish-hook
+                        :hooks '(exwm-manage-finish-hook)
                         :dyn-env '(after-switch-to-buffer-functions ;; prevent recursion
                                    (persp-add-buffer-on-find-file nil)
                                    persp-add-buffer-on-after-change-major-mode)
                         :switch 'window
-                        :predicate #'cae-exwm-persp--predicate
-                        :after-match #'cae-exwm-persp--after-match
-                        :get-name #'cae-exwm-persp--get-name))
+                        :predicate 'cae-exwm-persp--predicate
+                        :after-match 'cae-exwm-persp--after-match
+                        :get-name 'cae-exwm-persp--get-name))
 
 (defun cae-exwm-setup-auto-persp ()
   "Set up EXWM workspace management."
