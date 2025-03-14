@@ -1,8 +1,14 @@
 ;;; early-init.el -*- lexical-binding: t; -*-
 
 ;; Sometimes packages are not compiled. This is a workaround.
-(use-package! compile-angel
-  :defer nil :init
+(when-let ((compile-angel-path (concat doom-local-dir
+                                       (format "straight/build-%s/compile-angel/"
+                                               emacs-version)))
+           (_ (file-exists-p compile-angel-path)))
+  (setq compile-angel-verbose t)
+  (setq load-prefer-newer t)
+  (add-to-list 'load-path compile-angel-path)
+  (require 'compile-angel)
   (compile-angel-on-load-mode +1)
   (setq native-comp-async-query-on-exit t)
   (setq confirm-kill-processes t)
