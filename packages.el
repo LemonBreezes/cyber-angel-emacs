@@ -36,6 +36,7 @@
 ;; Preamble
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 (package! persistent-scratch)
+(package! compile-angel)
 
 ;; cae-tty.el
 (package! clipetty)
