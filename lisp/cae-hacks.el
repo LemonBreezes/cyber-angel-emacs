@@ -95,3 +95,8 @@
 ;; Allow killing buffers that are visible in multiple persps
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
+
+;; Work around a garbage change in Emacs31 that made viewing diffs not work in
+;; `save-some-buffers'.
+(after! diff-mode
+  (put 'diff-mode 'mode-class nil))
