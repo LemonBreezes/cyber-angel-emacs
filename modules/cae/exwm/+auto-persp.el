@@ -151,7 +151,6 @@ Optional STATE is passed from persp-mode."
          (is-floating (and exwm--floating-frame
                           (gethash class-name cae-exwm--floating-apps-set)))
          (result (and (stringp workspace-name)
-                     ;; Special case for VirtualBox applications
                      (not is-floating)
                      (or state t))))
     
