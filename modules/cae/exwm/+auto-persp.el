@@ -329,38 +329,38 @@ Optional STATE is passed from persp-mode."
                  current-workspace))
       (cl-return-from cae-exwm-persp-cleanup-workspace))
 
-  ;; Don't clean up if this buffer doesn't have a workspace name
-  (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
-    (unless workspace
-      (when cae-exwm-auto-persp-debug
-        (message "[EXWM-DEBUG] No workspace name for current buffer, skipping cleanup"))
-      (cl-return-from cae-exwm-persp-cleanup-workspace))
-
-    ;; Don't clean up if the workspace name doesn't match the current workspace
-    (unless (string= (downcase workspace) (downcase (+workspace-current-name)))
-      (when cae-exwm-auto-persp-debug
-        (message "[EXWM-DEBUG] Workspace mismatch: buffer workspace %s != current workspace %s, skipping cleanup"
-                 workspace (+workspace-current-name)))
-      (cl-return-from cae-exwm-persp-cleanup-workspace))
-
-    (let ((persp (persp-get-by-name workspace)))
-      (unless (persp-p persp)
+    ;; Don't clean up if this buffer doesn't have a workspace name
+    (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
+      (unless workspace
         (when cae-exwm-auto-persp-debug
-          (message "[EXWM-DEBUG] No perspective found for workspace %s, skipping cleanup" workspace))
+          (message "[EXWM-DEBUG] No workspace name for current buffer, skipping cleanup"))
         (cl-return-from cae-exwm-persp-cleanup-workspace))
 
-      (let ((matching-buffers (cae-exwm--get-matching-live-buffers workspace)))
+      ;; Don't clean up if the workspace name doesn't match the current workspace
+      (unless (string= (downcase workspace) (downcase (+workspace-current-name)))
         (when cae-exwm-auto-persp-debug
-          (message "[EXWM-DEBUG] Matching buffers for workspace %s: %s"
-                   workspace
-                   (mapcar #'buffer-name matching-buffers)))
-        
-        (unless matching-buffers
+          (message "[EXWM-DEBUG] Workspace mismatch: buffer workspace %s != current workspace %s, skipping cleanup"
+                   workspace (+workspace-current-name)))
+        (cl-return-from cae-exwm-persp-cleanup-workspace))
+
+      (let ((persp (persp-get-by-name workspace)))
+        (unless (persp-p persp)
           (when cae-exwm-auto-persp-debug
-            (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
-          (+workspace-kill (+workspace-current))
-          (unless (string= (+workspace-current-name) +workspace--last)
-            (+workspace/other)))))))
+            (message "[EXWM-DEBUG] No perspective found for workspace %s, skipping cleanup" workspace))
+          (cl-return-from cae-exwm-persp-cleanup-workspace))
+
+        (let ((matching-buffers (cae-exwm--get-matching-live-buffers workspace)))
+          (when cae-exwm-auto-persp-debug
+            (message "[EXWM-DEBUG] Matching buffers for workspace %s: %s"
+                     workspace
+                     (mapcar #'buffer-name matching-buffers)))
+        
+          (unless matching-buffers
+            (when cae-exwm-auto-persp-debug
+              (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
+            (+workspace-kill (+workspace-current))
+            (unless (string= (+workspace-current-name) +workspace--last)
+              (+workspace/other))))))))
 
 ;;; URL handling
 
