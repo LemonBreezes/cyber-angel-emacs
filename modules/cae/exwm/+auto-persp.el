@@ -126,15 +126,10 @@ Returns nil if BUFFER is not an EXWM buffer."
                  (error nil))))
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
-    (if class
-        (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
-          ;; Special case for VirtualBox - always use "VirtualBox" workspace
-          (when (and workspace-name (string-match-p "virtualbox" (downcase class)))
-            (setq workspace-name "VirtualBox"))
-          (when cae-exwm-auto-persp-debug
-            (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
-          workspace-name)
-      nil)))
+    (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
+      workspace-name)))
 
 (defsubst cae-exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
