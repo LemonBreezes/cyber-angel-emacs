@@ -65,8 +65,6 @@
     ("VirtualBox Manager" . "VirtualBox")
     ("VirtualBox" . "VirtualBox")
     ("Oracle VirtualBox Manager" . "VirtualBox")
-    ("VirtualBox Manager<3>" . "VirtualBox")
-    ("VirtualBox Manager<3>" . "VirtualBox")
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
