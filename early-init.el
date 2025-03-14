@@ -18,40 +18,40 @@
                   "/usr/share/emacs/31.0.50/lisp/subdirs.el"
                   "/usr/share/emacs/site-lisp/subdirs.el"))
     (cae-exclude-file-from-compilation path))
-  
+
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
     (cae-exclude-filename-from-compilation savehist-file))
-  
+
   (with-eval-after-load "recentf"
     (cae-exclude-filename-from-compilation recentf-save-file))
-  
+
   (with-eval-after-load "cus-edit"
     (when (stringp custom-file)
       (cae-exclude-filename-from-compilation custom-file))))
 
-(defun cae-setup-compile-angel ()
+(defun cae-setup-compile-angel (compile-angel-path)
   "Set up compile-angel for native compilation."
   (setq compile-angel-verbose t)
   (add-to-list 'load-path compile-angel-path)
   (require 'compile-angel)
   (compile-angel-on-load-mode +1)
-  
+
   ;; Native compilation settings
   (setq native-comp-async-query-on-exit t
         confirm-kill-processes t
         package-native-compile t)
-  
+
   ;; Set up exclusions
   (cae-setup-compile-angel-exclusions))
 
 ;; Initialize compile-angel if available
 ;; This is a workaround for when packages are not compiled
-(when-let ((compile-angel-path (concat doom-local-dir
-                                       (format "straight/build-%s/compile-angel/"
-                                               emacs-version)))
-           (_ (file-exists-p compile-angel-path)))
-  (cae-setup-compile-angel))
+(when-let* ((compile-angel-path (concat doom-local-dir
+                                        (format "straight/build-%s/compile-angel/"
+                                                emacs-version)))
+            (_ (file-exists-p compile-angel-path)))
+  (cae-setup-compile-angel compile-angel-path))
 
 ;; Local Variables:
 ;; after-save-hook: cae-doom-patch-emacs-early-init
