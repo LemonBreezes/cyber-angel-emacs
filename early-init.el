@@ -1,18 +1,39 @@
 ;;; early-init.el -*- lexical-binding: t; -*-
 
 ;; When this file is loaded, modify ~/.config/emacs/early-init.el to load this file first
+(defvar cae-emacs-early-init-file "~/.config/emacs/early-init.el"
+  "Path to the Emacs early-init.el file.")
+
+(defvar cae-emacs-early-init-mtime nil
+  "Modification time of early-init.el when it was last patched.")
+
 (defun cae-doom-patch-emacs-early-init ()
   "Ensures ~/.config/emacs/early-init.el loads ~/.config/doom/early-init.el first."
-  (let ((emacs-early-init "~/.config/emacs/early-init.el"))
-    (when (file-exists-p emacs-early-init)
-      (with-temp-file emacs-early-init
-        (insert-file-contents emacs-early-init)
-        (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\(doom-initialize\\)" nil t)))
-          (when (and found (match-beginning 2))
-            (beginning-of-line)
-            (insert "(progn (load \"~/.config/doom/early-init.el\")\n")
-	    (end-of-line)
-	    (insert ")")))))))
+  (when (file-exists-p cae-emacs-early-init-file)
+    (with-temp-file cae-emacs-early-init-file
+      (insert-file-contents cae-emacs-early-init-file)
+      (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\(doom-initialize\\)" nil t)))
+        (when (and found (match-beginning 2))
+          (beginning-of-line)
+          (insert "(progn (load \"~/.config/doom/early-init.el\")\n")
+          (end-of-line)
+          (insert ")"))))
+    ;; Store the modification time after patching
+    (setq cae-emacs-early-init-mtime
+          (nth 5 (file-attributes cae-emacs-early-init-file)))))
+
+(defun cae-check-and-repatch-early-init-h ()
+  "Check if early-init.el was modified since last patched and repatch if needed."
+  (when (and cae-emacs-early-init-mtime
+             (file-exists-p cae-emacs-early-init-file))
+    (let ((current-mtime (nth 5 (file-attributes cae-emacs-early-init-file))))
+      (when (and current-mtime
+                 (time-less-p cae-emacs-early-init-mtime current-mtime))
+        (message "Re-patching modified early-init.el before exit")
+        (cae-doom-patch-emacs-early-init)))))
+
+;; Add hook to check and repatch early-init.el before exiting
+(add-hook 'kill-emacs-hook #'cae-check-and-repatch-early-init-h)
 
 (defun cae-exclude-file-from-compilation (file-path)
   "Add FILE-PATH to the list of files excluded from native compilation."
@@ -65,6 +86,12 @@
                                                 emacs-version)))
             (_ (file-exists-p compile-angel-path)))
   (cae-setup-compile-angel compile-angel-path))
+
+;; Store initial modification time when this file is loaded
+(when (and (boundp 'cae-emacs-early-init-file)
+           (file-exists-p cae-emacs-early-init-file))
+  (setq cae-emacs-early-init-mtime
+        (nth 5 (file-attributes cae-emacs-early-init-file))))
 
 ;; Local Variables:
 ;; after-save-hook: cae-doom-patch-emacs-early-init
