@@ -258,19 +258,25 @@ Optional STATE is passed from persp-mode."
 (defun cae-exwm--get-matching-live-buffers (workspace)
   "Get live buffers matching WORKSPACE excluding current buffer."
   (let ((current-buffer (current-buffer))
-        (result nil))
+        (result nil)
+        (workspace-lower (downcase workspace)))
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
       (when (and (buffer-live-p buffer)
                  (not (eq buffer current-buffer))
-                 (cl-equalp (cae-exwm-get-workspace-name buffer) workspace))
+                 (let ((buf-workspace (cae-exwm-get-workspace-name buffer)))
+                   (and buf-workspace
+                        (string= (downcase buf-workspace) workspace-lower))))
         (push buffer result)))))
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
   (when cae-exwm-auto-persp-debug
-    (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s"
+    (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s, class: %s"
              (+workspace-current-name)
-             (buffer-name (current-buffer))))
+             (buffer-name (current-buffer))
+             (when (and (boundp 'exwm-class-name)
+                        (buffer-local-value 'exwm-class-name (current-buffer)))
+               (buffer-local-value 'exwm-class-name (current-buffer)))))
   
   (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
     (when cae-exwm-auto-persp-debug
