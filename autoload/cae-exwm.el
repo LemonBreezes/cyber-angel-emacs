@@ -17,11 +17,10 @@
 (defun cae-exwm-run-virtualbox ()
   "Run VirtualBox with proper permissions."
   (interactive)
-  (start-process-shell-command 
-   "virtualbox" nil 
-   (format "sudo -E XDG_RUNTIME_DIR=/run/user/%d -u %s virtualbox"
-           (user-uid)
-           (user-login-name))))
+  (start-process-shell-command
+   "virtualbox" "*VIRTUAL*"
+   (format "sudo XDG_RUNTIME_DIR=/run/user/%d virtualbox"
+           (user-uid))))
 
 ;;;###autoload
 (defun cae-exwm-toggle-redshift ()
