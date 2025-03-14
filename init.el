@@ -113,6 +113,7 @@
        (python +lsp +tree-sitter +pyright +cython)
        (haskell +lsp +tree-sitter)
        (graphql +lsp +tree-sitter)
+       (clojure +lsp +tree-sitter)
 
        :os
        (:if IS-MAC macos)
