@@ -45,20 +45,6 @@ of ELEMENT."
           (appendq! global-mode-string (list cpu-string))
         (setq global-mode-string (list cpu-string))))))
 
-;; When this file is loaded, modify ~/.config/emacs/early-init.el to load this file first
-(defun cae-doom-patch-emacs-early-init ()
-  "Ensures ~/.config/emacs/early-init.el loads ~/.config/doom/early-init.el first."
-  (let ((emacs-early-init "~/.config/emacs/early-init.el"))
-    (when (file-exists-p emacs-early-init)
-      (with-temp-file emacs-early-init
-        (insert-file-contents emacs-early-init)
-        (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\(doom-initialize\\)" nil t)))
-          (when (and found (match-beginning 2))
-            (beginning-of-line)
-            (insert "(progn (load \"~/.config/doom/early-init.el\")\n")
-	    (end-of-line)
-	    (insert ")")))))))
-
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
 
