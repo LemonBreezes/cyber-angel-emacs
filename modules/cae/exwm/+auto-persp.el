@@ -79,7 +79,7 @@ name of the workspace that will be created for that application.")
 
 ;;; Debugging
 
-(defvar cae-exwm-auto-persp-debug t
+(defvar cae-exwm-auto-persp-debug nil
   "When non-nil, enable debugging output for EXWM auto-persp functionality.")
 
 ;;; Caching variables
