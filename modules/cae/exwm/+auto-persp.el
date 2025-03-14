@@ -277,9 +277,9 @@ Optional STATE is passed from persp-mode."
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
       (when (buffer-live-p buffer)
         (let ((buf-workspace (cae-exwm-get-workspace-name buffer))
-              (buf-class (when (and (buffer-local-variable-p 'exwm-class-name buffer)
-                                    (buffer-local-value 'exwm-class-name buffer))
-                           (buffer-local-value 'exwm-class-name buffer))))
+              (buf-class (condition-case nil
+                             (buffer-local-value 'exwm-class-name buffer)
+                           (error nil))))
           
           (when cae-exwm-auto-persp-debug
             (message "[EXWM-DEBUG] Checking buffer: %s, workspace: %s, class: %s, current: %s"
@@ -302,9 +302,9 @@ Optional STATE is passed from persp-mode."
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
   (let ((current-workspace (+workspace-current-name))
         (current-buffer-name (buffer-name (current-buffer)))
-        (current-class (when (and (boundp 'exwm-class-name)
-                                  (buffer-local-value 'exwm-class-name (current-buffer)))
-                         (buffer-local-value 'exwm-class-name (current-buffer)))))
+        (current-class (condition-case nil
+                           (buffer-local-value 'exwm-class-name (current-buffer))
+                         (error nil))))
     
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s, class: %s"
