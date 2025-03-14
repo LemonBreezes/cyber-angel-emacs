@@ -357,13 +357,13 @@ Optional STATE is passed from persp-mode."
         (unless matching-buffers
           ;; Special case for VirtualBox - don't kill it if it's the current buffer or if the workspace
           ;; name contains "virtualbox" (case-insensitive)
-          (when (or (string= (downcase workspace) "virtualbox")
+          (when (or (string-match-p "virtualbox" (downcase workspace))
                     (string-match-p "virtualbox" (downcase current-workspace))
-                    (and (or (string-match-p "virtualbox" (downcase (buffer-name (current-buffer))))
-                             (and current-class
-                                  (string-match-p "virtualbox" (downcase current-class))))))
+                    (string-match-p "virtualbox" (downcase current-buffer-name))
+                    (and current-class
+                         (string-match-p "virtualbox" (downcase current-class))))
             (when cae-exwm-auto-persp-debug
-              (message "[EXWM-DEBUG] Not killing VirtualBox workspace because current buffer is VirtualBox"))
+              (message "[EXWM-DEBUG] Not killing VirtualBox workspace because it's a VirtualBox workspace"))
             (cl-return-from cae-exwm-persp-cleanup-workspace))
           
           (when cae-exwm-auto-persp-debug
