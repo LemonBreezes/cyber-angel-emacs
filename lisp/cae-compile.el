@@ -6,6 +6,9 @@
   (add-to-list 'compile-angel-excluded-files "/early-init.el")
   (add-to-list 'compile-angel-excluded-files "/subdirs.el")
 
+  ;; Files that fail to compile
+  (add-to-list 'compile-angel-excluded-files "/aidermacs-backends.el")
+
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
     (add-to-list 'compile-angel-excluded-files
@@ -40,6 +43,8 @@
 
 (use-package! compile-angel
   :defer 60 :config
+  (setq compile-angel-verbose t
+        compile-angel-debug t)
   (cae-ensure-emacs-dir-writable)
 
   ;; Set up exclusions
