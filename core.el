@@ -1,6 +1,6 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
-(setq compile-angel-verbose t)
+;; Sometimes packages are not compiled. This is a workaround.
 (compile-angel-on-load-mode +1)
 
 ;; Load secrets
