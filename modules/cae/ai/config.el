@@ -43,6 +43,9 @@
                                    ("anthropic-beta" . "prompt-caching-2024-07-31"))))
             :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
                               :max_tokens 4096)))
+    (gptel-make-deepseek "DeepSeek"
+      :stream t
+      :key (getenv "DEEPSEEK_API_KEY"))
     (setq gptel-model (intern claude-model)))
   (after! minuet
     (setq minuet-provider 'claude)
