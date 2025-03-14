@@ -312,17 +312,18 @@ Optional STATE is passed from persp-mode."
                current-buffer-name
                current-class))
     
+    ;; Special case for VirtualBox - never clean up VirtualBox workspaces
+    (when (or (string-match-p "virtualbox" (downcase current-workspace))
+              (and current-class
+                   (string-match-p "virtualbox" (downcase current-class)))
+              (string-match-p "virtualbox" (downcase current-buffer-name)))
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] Not cleaning up VirtualBox workspace: %s"
+                 current-workspace))
+      (cl-return-from cae-exwm-persp-cleanup-workspace))
+    
     ;; Don't clean up if this isn't an EXWM workspace
     (unless (gethash current-workspace cae-exwm--workspace-names-set)
-      ;; Special case for VirtualBox - check if this is a VirtualBox workspace with a different name
-      (when (and current-class
-                 (or (string-match-p "virtualbox" (downcase current-class))
-                     (string-match-p "virtualbox" (downcase current-buffer-name))))
-        (when cae-exwm-auto-persp-debug
-          (message "[EXWM-DEBUG] Not cleaning up VirtualBox workspace with name %s"
-                   current-workspace))
-        (cl-return-from cae-exwm-persp-cleanup-workspace))
-      
       (when cae-exwm-auto-persp-debug
         (message "[EXWM-DEBUG] Workspace %s not in workspace-names-set, skipping cleanup"
                  current-workspace))
@@ -355,17 +356,6 @@ Optional STATE is passed from persp-mode."
                    (mapcar #'buffer-name matching-buffers)))
         
         (unless matching-buffers
-          ;; Special case for VirtualBox - don't kill it if it's the current buffer or if the workspace
-          ;; name contains "virtualbox" (case-insensitive)
-          (when (or (string-match-p "virtualbox" (downcase workspace))
-                    (string-match-p "virtualbox" (downcase current-workspace))
-                    (string-match-p "virtualbox" (downcase current-buffer-name))
-                    (and current-class
-                         (string-match-p "virtualbox" (downcase current-class))))
-            (when cae-exwm-auto-persp-debug
-              (message "[EXWM-DEBUG] Not killing VirtualBox workspace because it's a VirtualBox workspace"))
-            (cl-return-from cae-exwm-persp-cleanup-workspace))
-          
           (when cae-exwm-auto-persp-debug
             (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
           (+workspace-kill (+workspace-current))
