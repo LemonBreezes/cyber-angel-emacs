@@ -165,9 +165,18 @@ Optional STATE is passed from persp-mode."
 
 (defsubst cae-exwm-persp--get-name (state)
   "Get the name for a new EXWM workspace from STATE."
-  (setf (alist-get 'persp-name state)
-        (cae-exwm-get-workspace-name (alist-get 'buffer state)))
-  state)
+  (let* ((buffer (alist-get 'buffer state))
+         (class-name (buffer-local-value 'exwm-class-name buffer))
+         (workspace-name (cae-exwm-get-workspace-name buffer)))
+    
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Getting workspace name for %s (class: %s): %s"
+               (buffer-name buffer)
+               class-name
+               workspace-name))
+    
+    (setf (alist-get 'persp-name state) workspace-name)
+    state))
 
 (defun cae-exwm--select-application-window (application-name buffer)
   "Select window for APPLICATION-NAME and BUFFER."
@@ -291,20 +300,33 @@ Optional STATE is passed from persp-mode."
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
-  (when cae-exwm-auto-persp-debug
-    (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s, class: %s"
-             (+workspace-current-name)
-             (buffer-name (current-buffer))
-             (when (and (boundp 'exwm-class-name)
-                        (buffer-local-value 'exwm-class-name (current-buffer)))
-               (buffer-local-value 'exwm-class-name (current-buffer)))))
-  
-  ;; Don't clean up if this isn't an EXWM workspace
-  (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
+  (let ((current-workspace (+workspace-current-name))
+        (current-buffer-name (buffer-name (current-buffer)))
+        (current-class (when (and (boundp 'exwm-class-name)
+                                  (buffer-local-value 'exwm-class-name (current-buffer)))
+                         (buffer-local-value 'exwm-class-name (current-buffer)))))
+    
     (when cae-exwm-auto-persp-debug
-      (message "[EXWM-DEBUG] Workspace %s not in workspace-names-set, skipping cleanup"
-               (+workspace-current-name)))
-    (cl-return-from cae-exwm-persp-cleanup-workspace))
+      (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s, class: %s"
+               current-workspace
+               current-buffer-name
+               current-class))
+    
+    ;; Don't clean up if this isn't an EXWM workspace
+    (unless (gethash current-workspace cae-exwm--workspace-names-set)
+      ;; Special case for VirtualBox - check if this is a VirtualBox workspace with a different name
+      (when (and current-class
+                 (or (string-match-p "virtualbox" (downcase current-class))
+                     (string-match-p "virtualbox" (downcase current-buffer-name))))
+        (when cae-exwm-auto-persp-debug
+          (message "[EXWM-DEBUG] Not cleaning up VirtualBox workspace with name %s"
+                   current-workspace))
+        (cl-return-from cae-exwm-persp-cleanup-workspace))
+      
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] Workspace %s not in workspace-names-set, skipping cleanup"
+                 current-workspace))
+      (cl-return-from cae-exwm-persp-cleanup-workspace))
 
   ;; Don't clean up if this buffer doesn't have a workspace name
   (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
@@ -333,11 +355,13 @@ Optional STATE is passed from persp-mode."
                    (mapcar #'buffer-name matching-buffers)))
         
         (unless matching-buffers
-          ;; Special case for VirtualBox - don't kill it if it's the current buffer
-          (when (and (string= (downcase workspace) "virtualbox")
-                     (or (string-match-p "virtualbox" (downcase (buffer-name (current-buffer))))
-                         (and (boundp 'exwm-class-name)
-                              (string-match-p "virtualbox" (downcase exwm-class-name)))))
+          ;; Special case for VirtualBox - don't kill it if it's the current buffer or if the workspace
+          ;; name contains "virtualbox" (case-insensitive)
+          (when (or (string= (downcase workspace) "virtualbox")
+                    (string-match-p "virtualbox" (downcase current-workspace))
+                    (and (or (string-match-p "virtualbox" (downcase (buffer-name (current-buffer))))
+                             (and current-class
+                                  (string-match-p "virtualbox" (downcase current-class))))))
             (when cae-exwm-auto-persp-debug
               (message "[EXWM-DEBUG] Not killing VirtualBox workspace because current buffer is VirtualBox"))
             (cl-return-from cae-exwm-persp-cleanup-workspace))
