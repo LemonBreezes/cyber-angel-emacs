@@ -137,6 +137,10 @@ Returns nil if BUFFER is not an EXWM buffer."
   "Determine whether to create a workspace for BUFFER.
 Returns non-nil if a dedicated workspace should be created.
 Optional STATE is passed from persp-mode."
+  ;;(+log (buffer-local-value 'exwm-class-name buffer)
+  ;;      (gethash (buffer-local-value 'exwm-class-name buffer)
+  ;;               cae-exwm--floating-apps-set)
+  ;;      (cae-exwm-get-workspace-name buffer))
   (and (stringp (cae-exwm-get-workspace-name buffer))
        (not (and exwm--floating-frame
                  (gethash (buffer-local-value 'exwm-class-name buffer)
