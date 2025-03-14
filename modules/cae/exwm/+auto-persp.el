@@ -62,6 +62,7 @@
     ("teams-for-linux" . "Teams")
     ("virtualbox" . "VirtualBox")
     ("virtualbox manager" . "VirtualBox")
+    ("VirtualBox Manager" . "VirtualBox")
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
