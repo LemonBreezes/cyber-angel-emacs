@@ -72,6 +72,7 @@ of ELEMENT."
 (setq native-comp-async-jobs-number (num-processors)
       native-comp-async-report-warnings-errors 'silent)
 
+(compile-angel-on-load-mode +1)
 (when cae-init-debug-enabled-p
   (load! "lisp/cae-debug" doom-user-dir))
 (when cae-init-dir-locals-enabled-p
