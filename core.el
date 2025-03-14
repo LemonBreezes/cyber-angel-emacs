@@ -1,9 +1,28 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
 ;; Sometimes packages are not compiled. This is a workaround.
-(compile-angel-on-load-mode +1)
-(setq native-comp-async-query-on-exit t)
-(setq confirm-kill-processes t)
+(use-package! compile-angel
+  :defer nil :init
+  (compile-angel-on-load-mode +1)
+  (setq native-comp-async-query-on-exit t)
+  (setq confirm-kill-processes t)
+  (setq package-native-compile t)
+
+  ;; Ensure that the value of `savehist-file` is updated before proceeding
+  (with-eval-after-load "savehist"
+    (push (concat "/" (file-name-nondirectory savehist-file))
+          compile-angel-excluded-files))
+
+  ;; Ensure that the value of `recentf-save-file` is updated before proceeding
+  (with-eval-after-load "recentf"
+    (push (concat "/" (file-name-nondirectory recentf-save-file))
+          compile-angel-excluded-files))
+
+  ;; Ensure that the value of `custom-file` is updated before proceeding
+  (with-eval-after-load "cus-edit"
+    (when (stringp custom-file)
+      (push (concat "/" (file-name-nondirectory custom-file))
+            compile-angel-excluded-files))))
 
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
