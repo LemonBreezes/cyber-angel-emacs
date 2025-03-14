@@ -65,7 +65,46 @@
 
   (with-eval-after-load "cus-edit"
     (when (stringp custom-file)
-      (cae-exclude-filename-from-compilation custom-file))))
+      (cae-exclude-filename-from-compilation custom-file)))
+  
+  ;; Exclude Unicode data files that don't need compilation
+  (cae-exclude-file-regexp-from-compilation "/leim/leim-list\\.el$")
+  (cae-exclude-file-regexp-from-compilation "/international/uni-[^/]+\\.el$")
+  
+  ;; Exclude Doom's generated init file
+  (cae-exclude-file-regexp-from-compilation "/@/init\\.[0-9]+\\.[0-9]+(\\..*)?\\el$"))
+
+;; Function to test if regexps match the intended files
+;; Uncomment to test:
+;; (defun cae-test-compile-angel-exclusions ()
+;;   "Test if the regexps match the files we want to exclude."
+;;   (let ((test-files '("/usr/share/emacs/31.0.50/lisp/leim/leim-list.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-special-titlecase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-special-uppercase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-titlecase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-special-lowercase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-lowercase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-uppercase.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-category.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-brackets.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-mirrored.el"
+;;                       "/usr/share/emacs/31.0.50/lisp/international/uni-bidi.el"
+;;                       "~/.config/emacs/.local/etc/@/init.31.0.el"))
+;;         (regexps '("/leim/leim-list\\.el$"
+;;                    "/international/uni-[^/]+\\.el$"
+;;                    "/@/init\\.[0-9]+\\.[0-9]+(\\..*)?\\el$"))
+;;         (results nil))
+;;     (dolist (file test-files)
+;;       (let ((matched nil))
+;;         (dolist (regexp regexps)
+;;           (when (string-match-p regexp file)
+;;             (setq matched t)))
+;;         (push (cons file matched) results)))
+;;     (let ((unmatched (cl-remove-if #'cdr results)))
+;;       (if unmatched
+;;           (message "Warning: Some files not matched by regexps: %S" 
+;;                    (mapcar #'car unmatched))
+;;         (message "All files matched successfully!")))))
 
 (defun cae-setup-compile-angel (compile-angel-path)
   "Set up compile-angel for native compilation."
