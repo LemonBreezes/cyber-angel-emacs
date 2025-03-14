@@ -62,6 +62,7 @@
     ("teams-for-linux" . "Teams")
     ("virtualbox" . "VirtualBox")
     ("virtualbox manager" . "VirtualBox")
+    ("VirtualBox Manager" . "VirtualBox")  ;; Added capital version
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
@@ -261,7 +262,7 @@ Optional STATE is passed from persp-mode."
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
       (when (and (buffer-live-p buffer)
                  (not (eq buffer current-buffer))
-                 (string= (cae-exwm-get-workspace-name buffer) workspace))
+                 (cl-equalp (cae-exwm-get-workspace-name buffer) workspace))
         (push buffer result)))))
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
