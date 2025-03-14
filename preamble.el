@@ -52,8 +52,8 @@ of ELEMENT."
     (when (file-exists-p emacs-early-init)
       (with-temp-file emacs-early-init
         (insert-file-contents emacs-early-init)
-        (goto-char (point-min))
-        (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\((load user-init-file\\)" nil t)))
+        (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\((if (let (load-suffixes
+'(\".elc\" \".el\"))\\)" nil t)))
           (when (and found (match-beginning 2))
             (beginning-of-line)
             (insert "(load \"~/.config/doom/early-init.el\")\n")))))))
