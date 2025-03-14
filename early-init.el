@@ -19,20 +19,14 @@
                   "/usr/share/emacs/31.0.50/lisp/subdirs.el"
                   "/usr/share/emacs/site-lisp/subdirs.el"))
     (add-to-list 'compile-angel-excluded-files path))
-
-  ;; Ensure that the value of `savehist-file` is updated before proceeding
   (with-eval-after-load "savehist"
     (let ((filename (concat "/" (file-name-nondirectory savehist-file))))
       (unless (member filename compile-angel-excluded-files)
         (push filename compile-angel-excluded-files))))
-
-  ;; Ensure that the value of `recentf-save-file` is updated before proceeding
   (with-eval-after-load "recentf"
     (let ((filename (concat "/" (file-name-nondirectory recentf-save-file))))
       (unless (member filename compile-angel-excluded-files)
         (push filename compile-angel-excluded-files))))
-
-  ;; Ensure that the value of `custom-file` is updated before proceeding
   (with-eval-after-load "cus-edit"
     (when (stringp custom-file)
       (let ((filename (concat "/" (file-name-nondirectory custom-file))))
