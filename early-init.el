@@ -105,8 +105,25 @@
 ;;                    (mapcar #'car unmatched))
 ;;         (message "All files matched successfully!")))))
 
+(defun cae-ensure-emacs-dir-writable ()
+  "Check if /usr/share/emacs is writable and attempt to make it writable if not."
+  (let ((emacs-dir "/usr/share/emacs"))
+    (when (and (file-exists-p emacs-dir)
+               (not (file-writable-p emacs-dir)))
+      (message "Warning: %s is not writable. Native compilation may fail." emacs-dir)
+      (when (yes-or-no-p (format "Attempt to make %s writable with sudo? " emacs-dir))
+        (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
+          (message "Running: %s" sudo-cmd)
+          (if (zerop (shell-command sudo-cmd))
+              (message "Successfully made %s writable." emacs-dir)
+            (message "Failed to make %s writable. You may need to run: %s" 
+                     emacs-dir sudo-cmd)))))))
+
 (defun cae-setup-compile-angel (compile-angel-path)
   "Set up compile-angel for native compilation."
+  ;; Ensure emacs directory is writable for native compilation
+  (cae-ensure-emacs-dir-writable)
+  
   (add-to-list 'load-path compile-angel-path)
   (require 'compile-angel)
 
