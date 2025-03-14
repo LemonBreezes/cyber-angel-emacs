@@ -354,7 +354,7 @@ Optional STATE is passed from persp-mode."
             (message "[EXWM-DEBUG] Matching buffers for workspace %s: %s"
                      workspace
                      (mapcar #'buffer-name matching-buffers)))
-        
+
           (unless matching-buffers
             (when cae-exwm-auto-persp-debug
               (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
