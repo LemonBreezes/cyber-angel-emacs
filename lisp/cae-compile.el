@@ -8,16 +8,16 @@
 
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
-    (add-to-list 'compile-angel-excluded-files 
+    (add-to-list 'compile-angel-excluded-files
                  (concat "/" (file-name-nondirectory savehist-file))))
 
   (with-eval-after-load "recentf"
-    (add-to-list 'compile-angel-excluded-files 
+    (add-to-list 'compile-angel-excluded-files
                  (concat "/" (file-name-nondirectory recentf-save-file))))
 
   (with-eval-after-load "cus-edit"
     (when (stringp custom-file)
-      (add-to-list 'compile-angel-excluded-files 
+      (add-to-list 'compile-angel-excluded-files
                    (concat "/" (file-name-nondirectory custom-file)))))
 
   ;; Exclude Unicode data files that don't need compilation
