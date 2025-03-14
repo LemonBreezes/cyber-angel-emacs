@@ -122,8 +122,8 @@ Returns nil if BUFFER is not an EXWM buffer."
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
     (let ((workspace-name (if class
-                             (gethash (downcase class) cae-exwm--workspace-name-cache class)
-                           nil)))
+                              (gethash (downcase class) cae-exwm--workspace-name-cache class)
+                            nil)))
       (when cae-exwm-auto-persp-debug
         (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
       workspace-name)))
