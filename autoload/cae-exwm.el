@@ -18,7 +18,7 @@
   "Run VirtualBox with proper permissions."
   (interactive)
   (start-process-shell-command
-   "virtualbox" "*VIRTUAL*"
+   "virtualbox" nil
    (format "sudo XDG_RUNTIME_DIR=/run/user/%d virtualbox"
            (user-uid))))
 
