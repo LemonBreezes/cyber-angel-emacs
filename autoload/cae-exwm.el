@@ -19,7 +19,7 @@
   (interactive)
   (start-process-shell-command
    "virtualbox" nil
-   (format "sudo XDG_RUNTIME_DIR=/run/user/%d virtualbox"
+   (format "sudo XDG_RUNTIME_DIR=/run/user/%d VirtualBox"
            (user-uid))))
 
 ;;;###autoload
