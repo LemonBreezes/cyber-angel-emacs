@@ -2,6 +2,8 @@
 
 ;; Sometimes packages are not compiled. This is a workaround.
 (compile-angel-on-load-mode +1)
+(setq native-comp-async-query-on-exit t)
+(setq confirm-kill-processes t)
 
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
