@@ -141,11 +141,16 @@ Optional STATE is passed from persp-mode."
   ;;      (gethash (buffer-local-value 'exwm-class-name buffer)
   ;;               cae-exwm--floating-apps-set)
   ;;      (cae-exwm-get-workspace-name buffer))
-  (and (stringp (cae-exwm-get-workspace-name buffer))
-       (not (and exwm--floating-frame
-                 (gethash (buffer-local-value 'exwm-class-name buffer)
-                          cae-exwm--floating-apps-set)))
-       (or state t)))
+  (let ((class-name (buffer-local-value 'exwm-class-name buffer)))
+    (and (stringp (cae-exwm-get-workspace-name buffer))
+         ;; Special case for VirtualBox applications
+         (or (string= class-name "virtualbox")
+             (string= class-name "virtualbox manager")
+             (string= class-name "virtualboxvm")
+             (string= class-name "virtualbox machine")
+             (not (and exwm--floating-frame
+                       (gethash class-name cae-exwm--floating-apps-set))))
+         (or state t))))
 
 (defsubst cae-exwm-persp--get-name (state)
   "Get the name for a new EXWM workspace from STATE."
