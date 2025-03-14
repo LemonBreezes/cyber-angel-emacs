@@ -318,16 +318,6 @@ Optional STATE is passed from persp-mode."
                current-buffer-name
                current-class))
     
-    ;; Special case for VirtualBox - never clean up VirtualBox workspaces
-    (when (or (string-match-p "virtualbox" (downcase current-workspace))
-              (and current-class
-                   (string-match-p "virtualbox" (downcase current-class)))
-              (string-match-p "virtualbox" (downcase current-buffer-name)))
-      (when cae-exwm-auto-persp-debug
-        (message "[EXWM-DEBUG] Not cleaning up VirtualBox workspace: %s"
-                 current-workspace))
-      (cl-return-from cae-exwm-persp-cleanup-workspace))
-    
     ;; Don't clean up if this isn't an EXWM workspace
     (unless (gethash current-workspace cae-exwm--workspace-names-set)
       (when cae-exwm-auto-persp-debug
