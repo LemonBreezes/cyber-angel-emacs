@@ -32,11 +32,11 @@
       (cae-exclude-filename-from-compilation custom-file)))
 
   ;; Exclude Unicode data files that don't need compilation
-  (cae-exclude-file-regexp-from-compilation "/leim/.*")
-  (cae-exclude-file-regexp-from-compilation "/international/.*")
+  (add-to-list 'compile-angel-excluded-files-regexps "/leim/.*")
+  (add-to-list 'compile-angel-excluded-files-regexps "/international/.*")
 
   ;; Exclude Doom's generated init file
-  (cae-exclude-file-regexp-from-compilation "/@/.*"))
+  (add-to-list 'compile-angel-excluded-files-regexps "/@/.*"))
 
 (defun cae-ensure-emacs-dir-writable ()
   "Check if /usr/share/emacs is writable and attempt to make it writable if not."
