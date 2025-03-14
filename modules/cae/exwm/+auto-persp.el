@@ -62,7 +62,6 @@
     ("teams-for-linux" . "Teams")
     ("virtualbox" . "VirtualBox")
     ("virtualbox manager" . "VirtualBox")
-    ("VirtualBox Manager" . "VirtualBox")  ;; Added capital version
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
