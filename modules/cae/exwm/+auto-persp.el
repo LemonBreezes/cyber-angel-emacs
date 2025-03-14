@@ -124,10 +124,15 @@ Returns nil if BUFFER is not an EXWM buffer."
                  (error nil))))
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
-    (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
-      (when cae-exwm-auto-persp-debug
-        (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
-      workspace-name)))
+    (if class
+        (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
+          ;; Special case for VirtualBox - always use "VirtualBox" workspace
+          (when (and class (string-match-p "virtualbox" (downcase class)))
+            (setq workspace-name "VirtualBox"))
+          (when cae-exwm-auto-persp-debug
+            (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
+          workspace-name)
+      nil)))
 
 (defsubst cae-exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
@@ -156,16 +161,20 @@ Optional STATE is passed from persp-mode."
          (workspace-name (cae-exwm-get-workspace-name buffer))
          (is-floating (and exwm--floating-frame
                            (gethash class-name cae-exwm--floating-apps-set)))
+         ;; Special case for VirtualBox - always create a workspace
+         (is-virtualbox (and class-name (string-match-p "virtualbox" (downcase class-name))))
          (result (and (stringp workspace-name)
-                      (not is-floating)
+                      (or is-virtualbox  ;; Always create workspace for VirtualBox
+                          (not is-floating))
                       (or state t))))
 
     (when cae-exwm-auto-persp-debug
-      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
+      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, is-virtualbox=%s, result=%s"
                (buffer-name buffer)
                class-name
                workspace-name
                is-floating
+               is-virtualbox
                result))
     
     result))
