@@ -55,7 +55,9 @@ of ELEMENT."
         (let ((found (re-search-forward "\\((load \"~/.config/doom/early-init.el\")\\)\\|\\(doom-initialize\\)" nil t)))
           (when (and found (match-beginning 2))
             (beginning-of-line)
-            (insert "(load \"~/.config/doom/early-init.el\")\n")))))))
+            (insert "(progn (load \"~/.config/doom/early-init.el\")\n")
+	    (end-of-line)
+	    (insert ")")))))))
 
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
