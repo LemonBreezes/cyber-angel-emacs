@@ -149,11 +149,11 @@ Optional STATE is passed from persp-mode."
   (let* ((class-name (buffer-local-value 'exwm-class-name buffer))
          (workspace-name (cae-exwm-get-workspace-name buffer))
          (is-floating (and exwm--floating-frame
-                          (gethash class-name cae-exwm--floating-apps-set)))
+                           (gethash class-name cae-exwm--floating-apps-set)))
          (result (and (stringp workspace-name)
-                     (not is-floating)
-                     (or state t))))
-    
+                      (not is-floating)
+                      (or state t))))
+
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
                (buffer-name buffer)
