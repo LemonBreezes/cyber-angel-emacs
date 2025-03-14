@@ -153,10 +153,8 @@ Optional STATE is passed from persp-mode."
          (workspace-name (cae-exwm-get-workspace-name buffer))
          (is-floating (and exwm--floating-frame
                            (gethash class-name cae-exwm--floating-apps-set)))
-         ;; Special case for VirtualBox - always create a workspace
          (result (and (stringp workspace-name)
-                      (or is-virtualbox  ;; Always create workspace for VirtualBox
-                          (not is-floating))
+                      (not is-floating)
                       (or state t))))
 
     (when cae-exwm-auto-persp-debug
