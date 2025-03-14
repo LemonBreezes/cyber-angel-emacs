@@ -15,6 +15,7 @@
      (cae-exwm-start-app ,app-name ,app-title arg)))
 
 (map! "s-v" (cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name)
+      "s-V" #'cae-exwm-run-virtualbox
       "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
       "s-T" (cae-exwm-app-runner "teams-for-linux" "Teams")
       "s-t" (cae-exwm-app-runner "tiled" "Tiled")
@@ -38,7 +39,7 @@
    `(defhydra hydra-exwm-apps (:hint nil :color blue)
       "
 EXWM Apps Launcher
-_v_: [Browser]    _f_: Flameshot      _T_: Teams
+_v_: [Browser]    _f_: Flameshot      _T_: Teams          _V_: VirtualBox
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
 _s_: Signal       _e_: Emacs          _E_: Vanilla Emacs    _D_: Vanilla Doom Emacs
 _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
@@ -56,7 +57,8 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
       ("RET" ,(cae-exwm-app-runner "kitty" "Kitty"))
       ("S-RET" #'cae-open-eshell-in-new-workspace)
       ("r" #'cae-exwm-toggle-redshift)
-      ("l" #'cae-exwm-lock-screen)))
+      ("l" #'cae-exwm-lock-screen)
+      ("V" #'cae-exwm-run-virtualbox)))
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))

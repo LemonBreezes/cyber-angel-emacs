@@ -14,6 +14,14 @@
                                       (message "Screen unlocked"))))))
 
 ;;;###autoload
+(defun cae-exwm-run-virtualbox ()
+  "Run VirtualBox with proper permissions."
+  (interactive)
+  (start-process "virtualbox" nil "sudo" "-E" 
+                 (concat "XDG_RUNTIME_DIR=/run/user/" (number-to-string (user-uid)))
+                 "-u" (user-login-name) "virtualbox"))
+
+;;;###autoload
 (defun cae-exwm-toggle-redshift ()
   "Toggle redshift on/off using location data from cae-location-data."
   (interactive)
