@@ -77,6 +77,11 @@
 The key is the class name from EXWM and the value is the
 name of the workspace that will be created for that application.")
 
+;;; Debugging
+
+(defvar cae-exwm-auto-persp-debug nil
+  "When non-nil, enable debugging output for EXWM auto-persp functionality.")
+
 ;;; Caching variables
 
 ;; Pre-allocate hash tables with appropriate sizes
@@ -141,12 +146,24 @@ Optional STATE is passed from persp-mode."
   ;;      (gethash (buffer-local-value 'exwm-class-name buffer)
   ;;               cae-exwm--floating-apps-set)
   ;;      (cae-exwm-get-workspace-name buffer))
-  (let ((class-name (buffer-local-value 'exwm-class-name buffer)))
-    (and (stringp (cae-exwm-get-workspace-name buffer))
-         ;; Special case for VirtualBox applications
-         (not (and exwm--floating-frame
-                   (gethash class-name cae-exwm--floating-apps-set)))
-         (or state t))))
+  (let* ((class-name (buffer-local-value 'exwm-class-name buffer))
+         (workspace-name (cae-exwm-get-workspace-name buffer))
+         (is-floating (and exwm--floating-frame
+                          (gethash class-name cae-exwm--floating-apps-set)))
+         (result (and (stringp workspace-name)
+                     ;; Special case for VirtualBox applications
+                     (not is-floating)
+                     (or state t))))
+    
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
+               (buffer-name buffer)
+               class-name
+               workspace-name
+               is-floating
+               result))
+    
+    result))
 
 (defsubst cae-exwm-persp--get-name (state)
   "Get the name for a new EXWM workspace from STATE."
@@ -254,21 +271,41 @@ Optional STATE is passed from persp-mode."
 
 (cl-defun cae-exwm-persp-cleanup-workspace ()
   "Delete the current EXWM workspace if it has no more EXWM buffers of that class."
+  (when cae-exwm-auto-persp-debug
+    (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s"
+             (+workspace-current-name)
+             (buffer-name (current-buffer))))
+  
   (unless (gethash (+workspace-current-name) cae-exwm--workspace-names-set)
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Workspace %s not in workspace-names-set, skipping cleanup"
+               (+workspace-current-name)))
     (cl-return-from cae-exwm-persp-cleanup-workspace))
 
   (let ((workspace (cae-exwm-get-workspace-name (current-buffer))))
     (unless workspace
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] No workspace name for current buffer, skipping cleanup"))
       (cl-return-from cae-exwm-persp-cleanup-workspace))
 
     (let ((persp (persp-get-by-name workspace)))
       (unless (persp-p persp)
+        (when cae-exwm-auto-persp-debug
+          (message "[EXWM-DEBUG] No perspective found for workspace %s, skipping cleanup" workspace))
         (cl-return-from cae-exwm-persp-cleanup-workspace))
 
-      (unless (cae-exwm--get-matching-live-buffers workspace)
-        (+workspace-kill (+workspace-current))
-        (unless (string= (+workspace-current-name) +workspace--last)
-          (+workspace/other))))))
+      (let ((matching-buffers (cae-exwm--get-matching-live-buffers workspace)))
+        (when cae-exwm-auto-persp-debug
+          (message "[EXWM-DEBUG] Matching buffers for workspace %s: %s"
+                   workspace
+                   (mapcar #'buffer-name matching-buffers)))
+        
+        (unless matching-buffers
+          (when cae-exwm-auto-persp-debug
+            (message "[EXWM-DEBUG] No matching buffers, killing workspace %s" workspace))
+          (+workspace-kill (+workspace-current))
+          (unless (string= (+workspace-current-name) +workspace--last)
+            (+workspace/other)))))))
 
 ;;; URL handling
 
