@@ -70,7 +70,7 @@
           ;;"--timeout" "120"
           ;;"--test"
           "--auto-commits"
-          "--no-auto-lint"
+          "--auto-accept-architect"
           ;;"--install-tree-sitter-language-pack"
           "--chat-language" "English"
           ;;"--editor-edit-format" "editor-whole"
