@@ -1,5 +1,6 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
+(setq compile-angel-verbose t)
 (compile-angel-on-load-mode +1)
 
 ;; Load secrets
