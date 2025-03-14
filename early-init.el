@@ -6,7 +6,6 @@
                                                emacs-version)))
            (_ (file-exists-p compile-angel-path)))
   (setq compile-angel-verbose t)
-  (setq load-prefer-newer t)
   (add-to-list 'load-path compile-angel-path)
   (require 'compile-angel)
   (compile-angel-on-load-mode +1)
@@ -16,7 +15,7 @@
 
   ;; Exclude system directories and files from native compilation
   (push "/usr/share/emacs/31.0.50/lisp/international/" compile-angel-excluded-files)
-  (push "/usr/share/emacs/31.0.50/lisp/leim/leim-list.el" compile-angel-excluded-files)
+  (push "/usr/share/emacs/31.0.50/lisp/leim/" compile-angel-excluded-files)
   (push "/usr/share/emacs/31.0.50/lisp/subdirs.el" compile-angel-excluded-files)
   (push "/usr/share/emacs/site-lisp/subdirs.el" compile-angel-excluded-files)
 
