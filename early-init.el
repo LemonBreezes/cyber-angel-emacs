@@ -5,6 +5,11 @@
   (unless (member file-path compile-angel-excluded-files)
     (add-to-list 'compile-angel-excluded-files file-path)))
 
+(defun cae-exclude-file-regexp-from-compilation (file-regexp)
+  "Add FILE-REGEXP to the list of file patterns excluded from native compilation."
+  (unless (member file-regexp compile-angel-excluded-files-regexps)
+    (add-to-list 'compile-angel-excluded-files-regexps file-regexp)))
+
 (defun cae-exclude-filename-from-compilation (filename)
   "Add FILENAME (just the basename with a leading slash) to excluded files."
   (let ((name (concat "/" (file-name-nondirectory filename))))
@@ -17,7 +22,7 @@
                   "/usr/share/emacs/31.0.50/lisp/leim/"
                   "/usr/share/emacs/31.0.50/lisp/subdirs.el"
                   "/usr/share/emacs/site-lisp/subdirs.el"))
-    (cae-exclude-file-from-compilation path))
+    (cae-exclude-file-regexp-from-compilation path))
 
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
