@@ -65,6 +65,7 @@
     ("VirtualBox Manager" . "VirtualBox")
     ("VirtualBox" . "VirtualBox")
     ("Oracle VirtualBox Manager" . "VirtualBox")
+    ("VirtualBox Manager<3>" . "VirtualBox")
     ("virtualboxvm" . "VirtualBox")
     ("virtualbox machine" . "VirtualBox")
     ("discord1" . "Discord")
@@ -120,7 +121,12 @@ name of the workspace that will be created for that application.")
   "Get the workspace name for BUFFER based on its EXWM class.
 Returns nil if BUFFER is not an EXWM buffer."
   (let ((class (buffer-local-value 'exwm-class-name buffer)))
-    (gethash class cae-exwm--workspace-name-cache class)))
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
+    (let ((workspace-name (gethash class cae-exwm--workspace-name-cache class)))
+      (when cae-exwm-auto-persp-debug
+        (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
+      workspace-name)))
 
 (defsubst cae-exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
