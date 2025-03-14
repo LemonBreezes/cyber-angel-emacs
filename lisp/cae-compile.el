@@ -53,7 +53,7 @@
                      emacs-dir sudo-cmd)))))))
 
 (use-package! compile-angel
-  :defer 30 :config
+  :defer 60 :config
   (cae-ensure-emacs-dir-writable)
 
   ;; Set up exclusions
