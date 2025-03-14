@@ -47,14 +47,13 @@
 
 (defun cae-exclude-file-regexp-from-compilation (regexp)
   "Add files matching REGEXP to the list of excluded files for native compilation."
-  (unless (member regexp compile-angel-excluded-file-regexps)
-    (add-to-list 'compile-angel-excluded-file-regexps regexp)))
+  (unless (member regexp compile-angel-excluded-files-regexps)
+    (add-to-list 'compile-angel-excluded-files-regexps regexp)))
 
 (defun cae-setup-compile-angel-exclusions ()
   "Set up exclusions for native compilation."
   (cae-exclude-file-from-compilation "/early-init.el")
   (cae-exclude-file-from-compilation "/subdirs.el")
-  (cae-exclude-file-from-compilation user-init-file)
 
   ;; Exclude various configuration files
   (with-eval-after-load "savehist"
@@ -68,14 +67,14 @@
       (cae-exclude-filename-from-compilation custom-file)))
   
   ;; Exclude Unicode data files that don't need compilation
-  (cae-exclude-file-regexp-from-compilation "/leim/leim-list\\.el$")
-  (cae-exclude-file-regexp-from-compilation "/international/uni-[^/]+\\.el$")
+  (cae-exclude-file-regexp-from-compilation "/leim/.*")
+  (cae-exclude-file-regexp-from-compilation "/international/.*")
   
   ;; Exclude Doom's generated init file
-  (cae-exclude-file-regexp-from-compilation "/@/init\\.[0-9]+\\.[0-9]+(\\..*)?\\el$"))
+  (cae-exclude-file-regexp-from-compilation "/@/.*"))
 
 ;; Function to test if regexps match the intended files
-;; Uncomment to test:
+;e Uncomment to test:
 ;; (defun cae-test-compile-angel-exclusions ()
 ;;   "Test if the regexps match the files we want to exclude."
 ;;   (let ((test-files '("/usr/share/emacs/31.0.50/lisp/leim/leim-list.el"
@@ -108,8 +107,6 @@
 
 (defun cae-setup-compile-angel (compile-angel-path)
   "Set up compile-angel for native compilation."
-  (setq compile-angel-verbose t)
-  (setq compile-angel-debug t)
   (add-to-list 'load-path compile-angel-path)
   (require 'compile-angel)
 
