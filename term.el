@@ -7,8 +7,7 @@
 (setq vterm-always-compile-module t)
 (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 (after! vterm
-  (setq vterm-max-scrollback 100000
-        vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
+  (setq vterm-max-scrollback 100000))
 (setq-hook! 'vterm-mode-hook
   nobreak-char-display nil)
 
