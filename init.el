@@ -27,7 +27,7 @@
     (defvar cae-init-debug-enabled-p (and p t))
     (defvar cae-init-dir-locals-enabled-p (and p t))
     (defvar cae-init-hacks-enabled-p (and p t)))
-  (let ((c (and q nil)))
+  (let ((c (and q t)))
     (defvar cae-init-core-enabled-p (and c t))
     (defvar cae-init-tty-enabled-p (and c t))
     (defvar cae-init-bindings-enabled-p (and c t))
