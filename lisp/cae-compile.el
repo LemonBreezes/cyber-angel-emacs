@@ -47,7 +47,9 @@
 (use-package! compile-angel
   :defer 10.0 :config
   (setq compile-angel-use-file-index t)
+  ;; We already compile packages asynchronously on load.
   (setq compile-angel-enable-native-compile nil)
+
   ;;(setq compile-angel-debug t)
   ;;(setq compile-angel-verbose t)
 
