@@ -21,7 +21,7 @@
 (defvar cae-exwm-workspaces ()
   "List of EXWM workspace names that have been created.")
 
-(defconst cae-exwm-floating-apps '("..." "discord" "main.py" "setup.tmp" "firefox")
+(defconst cae-exwm-floating-apps '("..." "main.py" "setup.tmp" "firefox")
   "List of EXWM class names for applications that should remain floating.")
 
 (defconst cae-exwm-workspace-name-replacements
