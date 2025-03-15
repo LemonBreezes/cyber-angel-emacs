@@ -64,7 +64,7 @@
 (package! somafm)
 (package! empv)
 (package! elfeed-tube) ; For conveniently getting an Invidious instance URL.
-(package! emms :recipe (:host github :repo "emacs-mirror/emms" :files ("*")))
+(package! emms :recipe (:host github :repo "emacsmirror/emms" :files ("*")))
 (package! lyrics-fetcher)
 (when (or (modulep! :cae helm)
           (modulep! :completion helm))
