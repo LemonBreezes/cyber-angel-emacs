@@ -1,5 +1,7 @@
 ;;; core.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
