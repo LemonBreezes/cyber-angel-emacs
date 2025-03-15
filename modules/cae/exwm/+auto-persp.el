@@ -21,7 +21,7 @@
 (defvar cae-exwm-workspaces ()
   "List of EXWM workspace names that have been created.")
 
-(defconst cae-exwm-floating-apps '("..." "discord" "main.py" "setup.tmp" "firefox")
+(defconst cae-exwm-floating-apps '("..." "main.py" "setup.tmp" "firefox")
   "List of EXWM class names for applications that should remain floating.")
 
 (defconst cae-exwm-workspace-name-replacements
@@ -153,17 +153,20 @@ Returns non-nil if a dedicated workspace should be created.
 Optional STATE is passed from persp-mode."
   (let* ((class-name (buffer-local-value 'exwm-class-name buffer))
          (workspace-name (cae-exwm-get-workspace-name buffer))
+         ;; Special case for Discord
+         (is-discord (and class-name (string= (downcase class-name) "discord")))
          (is-floating (and exwm--floating-frame
                            (gethash class-name cae-exwm--floating-apps-set)))
          (result (and (stringp workspace-name)
-                      (not is-floating)
+                      (or is-discord (not is-floating))
                       (or state t))))
 
     (when cae-exwm-auto-persp-debug
-      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
+      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-discord=%s, is-floating=%s, result=%s"
                (buffer-name buffer)
                class-name
                workspace-name
+               is-discord
                is-floating
                result))
     
