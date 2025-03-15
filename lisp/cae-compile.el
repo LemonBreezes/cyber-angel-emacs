@@ -52,8 +52,7 @@
 
   ;; Set up exclusions
   (cae-setup-compile-angel-exclusions)
-  (unless cae-config-finished-loading
-    (compile-angel-on-load-mode +1))
+  (compile-angel-on-load-mode +1)
 
   ;; Native compilation settings
   (setq native-comp-async-query-on-exit t
