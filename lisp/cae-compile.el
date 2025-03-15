@@ -49,10 +49,6 @@
   (cae-setup-compile-angel-exclusions)
   (unless cae-config-finished-loading
     (compile-angel-on-load-mode +1))
-  ;; TODO Make it so that `compile-angel' uses the symbol for features instead
-  ;; of the feature name.
-  ;; TODO Make it so that if we find `evil-collection' in
-  ;; the cache, then we also add all the modes to the cache as well.
 
   ;; Native compilation settings
   (setq native-comp-async-query-on-exit t
