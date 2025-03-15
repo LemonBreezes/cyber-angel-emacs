@@ -37,7 +37,8 @@
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 (package! persistent-scratch)
 (package! compile-angel :recipe
-  (:host github :repo "LemonBreezes/compile-angel.el"))
+  (:host github :repo "LemonBreezes/compile-angel.el"
+   :branch "optimize-compile-angel--guess-el-file"))
 
 ;; cae-tty.el
 (package! clipetty)
