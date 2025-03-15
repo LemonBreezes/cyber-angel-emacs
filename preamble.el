@@ -39,11 +39,10 @@ of ELEMENT."
   (let* ((n-cpus (num-processors))
          (cpu-string (format "%d" n-cpus)))
     (unless (or (equal global-mode-string (list cpu-string))
-                (cl-member cpu-string global-mode-string
-                           :test (lambda (x y) (and (stringp y) (string-equal x y)))))
+                     (member cpu-string global-mode-string))
       (if (and global-mode-string (listp global-mode-string))
-          (appendq! global-mode-string (list cpu-string))
-        (setq global-mode-string (list cpu-string))))))
+	  (appendq! global-mode-string (list cpu-string))
+	(setq global-mode-string (list cpu-string))))))
 
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
