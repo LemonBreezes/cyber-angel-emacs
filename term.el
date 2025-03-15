@@ -4,9 +4,10 @@
   ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
   (setq eshell-error-if-no-glob nil))
 
+(setq vterm-always-compile-module t)
+(setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
 (after! vterm
   (setq vterm-max-scrollback 100000
-        vterm-always-compile-module t
         vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes"))
 (setq-hook! 'vterm-mode-hook
   nobreak-char-display nil)
