@@ -13,6 +13,7 @@
 (make-directory cae-multi-cache-dir t)
 (make-directory cae-multi-org-dir t)
 (make-directory cae-multi-secrets-modules-dir t)
+(make-directory (concat doom-user-dir "snippets") t)
 (add-to-list 'doom-module-load-path cae-multi-secrets-modules-dir)
 (unless (featurep 'cae-lib)
   (defalias 'cae-defadvice! 'defadvice!)
@@ -20,13 +21,13 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((q (and (not noninteractive) nil)))
+(let ((q (and (not noninteractive) t)))
   (let ((p (and q t)))
     (defvar cae-init-preamble-enabled-p (and p t))
     (defvar cae-init-debug-enabled-p (and p t))
     (defvar cae-init-dir-locals-enabled-p (and p t))
     (defvar cae-init-hacks-enabled-p (and p t)))
-  (let ((c (and q t)))
+  (let ((c (and q nil)))
     (defvar cae-init-core-enabled-p (and c t))
     (defvar cae-init-tty-enabled-p (and c t))
     (defvar cae-init-bindings-enabled-p (and c t))
