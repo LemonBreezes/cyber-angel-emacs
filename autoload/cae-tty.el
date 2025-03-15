@@ -1,5 +1,7 @@
 ;;; autoload/cae-tty.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 ;;;###autoload
 (defun cae-tty-disable-unicode-and-or-icons ()
   (interactive)
