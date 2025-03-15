@@ -38,7 +38,7 @@
 (package! persistent-scratch)
 (package! compile-angel :recipe
   (:host github :repo "LemonBreezes/compile-angel.el"
-   :branch "optimize-compile-angel--guess-el-file"))
+   :branch "file-index-optimization"))
 
 ;; cae-tty.el
 (package! clipetty)
