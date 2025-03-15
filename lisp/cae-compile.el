@@ -47,15 +47,16 @@
 (use-package! compile-angel
   :defer 10.0 :config
   (setq compile-angel-use-file-index t)
-  (cae-ensure-emacs-dir-writable)
   ;;(setq compile-angel-debug t)
   ;;(setq compile-angel-verbose t)
-
-  ;; Set up exclusions
-  (cae-setup-compile-angel-exclusions)
-  (compile-angel-on-load-mode +1)
 
   ;; Native compilation settings
   (setq native-comp-async-query-on-exit t
         confirm-kill-processes t
-        package-native-compile t))
+        package-native-compile t)
+
+  (cae-ensure-emacs-dir-writable)
+
+  ;; Set up exclusions
+  (cae-setup-compile-angel-exclusions)
+  (compile-angel-on-load-mode +1))
