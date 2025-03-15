@@ -1,5 +1,7 @@
 ;;; ~/.doom.d/lisp/cae-theme.el -*- lexical-binding: t; -*-
 
+(require 'cae-lib)
+
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal (not (eq (cae-terminal-type) 0)))
