@@ -28,7 +28,10 @@
   (add-to-list 'compile-angel-excluded-files-regexps "/international/.*")
 
   ;; Exclude Doom's generated init file
-  (add-to-list 'compile-angel-excluded-files-regexps "/@/.*"))
+  (add-to-list 'compile-angel-excluded-files-regexps "/@/.*")
+
+  ;; Exclude my site-start file. Gentoo uses it to load site packages.
+  (add-to-list 'compile-angel-excluded-files "/site-start.el"))
 
 (defun cae-ensure-emacs-dir-writable ()
   "Check if /usr/share/emacs is writable and attempt to make it writable if not."
