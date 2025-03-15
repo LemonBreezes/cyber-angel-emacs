@@ -47,8 +47,8 @@
 (use-package! compile-angel
   :defer 10 :config
   (cae-ensure-emacs-dir-writable)
-  (setq compile-angel-debug t)
-  (setq compile-angel-verbose t)
+  ;;(setq compile-angel-debug t)
+  ;;(setq compile-angel-verbose t)
 
   ;; Set up exclusions
   (cae-setup-compile-angel-exclusions)
