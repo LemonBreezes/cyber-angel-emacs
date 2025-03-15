@@ -47,13 +47,9 @@
 (use-package! compile-angel
   :defer 10.0 :config
   (setq compile-angel-use-file-index t)
+  (setq compile-angel-enable-native-compile nil)
   ;;(setq compile-angel-debug t)
   ;;(setq compile-angel-verbose t)
-
-  ;; Native compilation settings
-  (setq native-comp-async-query-on-exit t
-        confirm-kill-processes t
-        package-native-compile t)
 
   (cae-ensure-emacs-dir-writable)
 
