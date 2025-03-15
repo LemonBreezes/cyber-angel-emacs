@@ -31,6 +31,7 @@
               found))))))))
 
 
+;; BUG Cannot kill the buffer if it is in another persp.
 ;;;###autoload
 (defun cae-persp-kill-buffer-query-function ()
   "This must be the last hook in the `kill-buffer-query-functions'.
