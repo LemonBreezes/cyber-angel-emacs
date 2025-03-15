@@ -46,6 +46,7 @@
 
 (use-package! compile-angel
   :defer 10.0 :config
+  (setq compile-angel-use-file-index t)
   (cae-ensure-emacs-dir-writable)
   ;;(setq compile-angel-debug t)
   ;;(setq compile-angel-verbose t)
