@@ -7,6 +7,8 @@
        '(dired transient dirvish diredfl dirvish-widgets dirvish-side
          dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
+   ,@(when (and (getenv "INSIDE_EXWM") (modulep! :cae exwm))
+       '(xelb exwm exwm-mff exwm-evil exwm-firefox-evil))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
