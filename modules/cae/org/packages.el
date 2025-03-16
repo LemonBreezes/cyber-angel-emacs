@@ -11,7 +11,6 @@
   :recipe (:host github
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
-(package! org-view-mode)
 
 (when (modulep! +pretty)
   (package! org-modern))
