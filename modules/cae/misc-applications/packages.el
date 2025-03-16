@@ -51,7 +51,9 @@
 
 ;; Eye candy
 (package! fireplace)
-(package! flames-of-freedom)
+(package! flames-of-freedom :recipe
+  (:host github :repo "LemonBreezes/flames-of-freedom"
+   :branch "optimize-and-remove-compile-calls"))
 (package! snow)
 (package! zone-nyan)
 (package! zone-rainbow)
