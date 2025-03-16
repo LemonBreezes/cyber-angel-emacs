@@ -50,12 +50,12 @@ non-nil, debug init as well."
 
 ;;;###autoload
 (defun cae-exwm-decrease-brightness ()
-  "Decrease screen brightness using xbacklight."
+  "Decrease screen brightness using light."
   (interactive)
-  (start-process "xbacklight" nil "xbacklight" "-dec" "10"))
+  (start-process "light" nil "light" "-U" "10"))
 
 ;;;###autoload
 (defun cae-exwm-increase-brightness ()
-  "Increase screen brightness using xbacklight."
+  "Increase screen brightness using light."
   (interactive)
-  (start-process "xbacklight" nil "xbacklight" "-inc" "10"))
+  (start-process "light" nil "light" "-A" "10"))
