@@ -63,6 +63,9 @@
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
 
+      ;; Automatically track projects in `find-file', and other functions.
+      (setq projectile-track-known-projects-automatically t)
+
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
 
