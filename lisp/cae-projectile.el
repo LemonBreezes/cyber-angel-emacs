@@ -13,9 +13,6 @@
         ,@(when (file-exists-p "~/src/trading") '(("~/src/trading" . 1)))
         ,@(when (file-exists-p "~/src/haskell/") '(("~/src/haskell" . 1)))
         ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
-;; This is a performance optimization. I am okay with not tracking projects
-;; automatically and using the list above instead.
-(setq projectile-track-known-projects-automatically nil)
 
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
@@ -62,9 +59,6 @@
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
-
-      ;; Automatically track projects in `find-file', and other functions.
-      (setq projectile-track-known-projects-automatically t)
 
       (map! :leader :prefix "p"
             :desc "Dired in project root"  "-" #'projectile-dired)
