@@ -280,10 +280,10 @@
   (setq key-chord-typing-reset-delay 0.45)
   (setq key-chord-typing-detection t)
   (setq key-chord-in-macros nil)
-  (key-chord-define evil-normal-state-map "jj" #'evilem-motion-next-line)
-  (key-chord-define evil-normal-state-map "kk" #'evilem-motion-previous-line)
   (autoload 'evil-escape "evil-escape" nil t)
   (key-chord-define-global "jk" #'evil-escape)
+  (key-chord-define-global "jj" #'evilem-motion-next-line)
+  (key-chord-define-global "kk" #'evilem-motion-previous-line)
   (after! transient
     (map! :map transient-base-map
           ;; Extend `evil-escape' to quit transients.
