@@ -8,6 +8,6 @@
         (default-directory (or (doom-project-root) default-directory)))
     (if (get-buffer vterm-buffer-name)
         (pop-to-buffer vterm-buffer-name)
-      (vterm-other-window "claude")
+      (vterm-other-window vterm-buffer-name)
       (vterm-send-string "claude")
       (vterm-send-return))))
