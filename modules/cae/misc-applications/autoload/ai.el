@@ -23,17 +23,8 @@ Uses the llm package to get a concise folder name."
     (make-directory sandbox-dir t)
     (let ((default-directory sandbox-dir))
       (vterm-other-window vterm-buffer-name)
-      (vterm-send-string "claude")
-      (vterm-send-return)
-      ;; Wait a moment for Claude to initialize
-      (sit-for 0.5)
-      ;; Send "y" to confirm directory access permission
-      (vterm-send-string "y")
-      (vterm-send-return)
-      ;; Wait a moment for Claude to process the confirmation
-      (sit-for 0.5)
-      ;; Now send the actual task description
-      (vterm-send-string task-description)
+      ;; Send the task description directly as a quoted argument to claude
+      (vterm-send-string (format "claude \"%s\"" task-description))
       (vterm-send-return))))
 
 ;;;###autoload
