@@ -64,6 +64,7 @@
   (setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-use-architect-mode t)
+  (setq aidermacs-auto-accept-architect t)
   (setq aidermacs-backend 'comint)
   (setq aidermacs-extra-args
         '("--cache-prompts"
