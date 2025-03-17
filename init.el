@@ -102,7 +102,7 @@
 
        :lang
        (emacs-lisp +tree-sitter)
-       (org +roam2 +tree-sitter +dragndrop +journal)
+       (org +roam2 +tree-sitter +dragndrop +journal +pretty)
        (cc +lsp +tree-sitter)
        (web +lsp +tree-sitter)
        (sh +lsp +tree-sitter +powershell +fish)
