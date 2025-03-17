@@ -82,7 +82,8 @@ the Add URL to Window Title (Advanced KeePass Usage) in title add-on
 configured to show the full URL."
   (let ((title exwm-title))
     (or (string-match "\\(.+\\) |url:\\[" title)
-        (string-match (format "\\(.+\\)\\(?:\\s-*-\\s-*\\) https?://" url-handler-regexp) title))
+        (string-match (format "\\(.+\\)\\(?:\\s-*-\\s-*\\) https?://" url-handler-regexp) title)
+        (string-match "https?://[^[:space:]]+\\(?:\\s-*[-—–]\\s-*\\)\\(.+\\)" title))
     (unless (match-string-no-properties 1 title)
       (error "No URL found in EXWM web browser buffer"))
     (string-trim (match-string-no-properties 1 title))))
