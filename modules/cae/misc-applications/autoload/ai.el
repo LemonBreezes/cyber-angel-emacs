@@ -1,15 +1,21 @@
 ;;; cae/misc-applications/autoload/ai.el -*- lexical-binding: t; -*-
 
-(defun cae-claude--generate-folder-name (task-description)
-  "Generate a folder name based on TASK-DESCRIPTION using GPTel."
-  (require 'gptel)
-  (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
-    (replace-regexp-in-string
-     " " "-"
-     (string-trim
-      (gptel-request prompt
-        :system "You are a helpful assistant that generates concise folder names."
-        :stream nil)))))
+(defun cae-claude--create-sandbox (sandbox-root task-description folder-name)
+  "Create a Claude sandbox with FOLDER-NAME in SANDBOX-ROOT for TASK-DESCRIPTION."
+  (let* ((timestamp (format-time-string "%Y%m%d-%H%M%S"))
+         (sandbox-dir (expand-file-name (format "%s--%s" timestamp folder-name)
+                                        (expand-file-name sandbox-root)))
+         (vterm-buffer-name (format "*claude:sandbox:%s*" folder-name)))
+    
+    (make-directory sandbox-dir t)
+    (let ((default-directory sandbox-dir))
+      (vterm-other-window vterm-buffer-name)
+      (vterm-send-string "claude")
+      (vterm-send-return)
+      ;; Wait a moment for Claude to initialize
+      (sit-for 0.5)
+      (vterm-send-string task-description)
+      (vterm-send-return))))
 
 ;;;###autoload
 (defun cae-claude-code (&optional create-sandbox)
@@ -23,24 +29,26 @@ Otherwise, open Claude for the current project."
   
   (if create-sandbox
       (let* ((sandbox-root "~/src/claude-sandbox")
-             (task-description (read-string "Enter task description: "))
-             (_ (unless (file-exists-p (expand-file-name sandbox-root))
-                  (make-directory (expand-file-name sandbox-root) t)))
-             (folder-name (cae-claude--generate-folder-name task-description))
-             (timestamp (format-time-string "%Y%m%d-%H%M%S"))
-             (sandbox-dir (expand-file-name (format "%s--%s" timestamp folder-name)
-                                            (expand-file-name sandbox-root)))
-             (vterm-buffer-name (format "*claude:sandbox:%s*" folder-name)))
+             (task-description (read-string "Enter task description: ")))
         
-        (make-directory sandbox-dir t)
-        (let ((default-directory sandbox-dir))
-          (vterm-other-window vterm-buffer-name)
-          (vterm-send-string "claude")
-          (vterm-send-return)
-          ;; Wait a moment for Claude to initialize
-          (sit-for 0.5)
-          (vterm-send-string task-description)
-          (vterm-send-return)))
+        ;; Ensure sandbox root directory exists
+        (unless (file-exists-p (expand-file-name sandbox-root))
+          (make-directory (expand-file-name sandbox-root) t))
+        
+        ;; Request folder name from GPTel and create sandbox in callback
+        (require 'gptel)
+        (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
+          (gptel-request 
+           prompt
+           :system "You are a helpful assistant that generates concise folder names."
+           :stream nil
+           :callback (lambda (response info)
+                       (when (not info) ;; No error
+                         (let ((folder-name (replace-regexp-in-string
+                                             " " "-"
+                                             (string-trim response))))
+                           (cae-claude--create-sandbox 
+                            sandbox-root task-description folder-name)))))))
     
     ;; Original project-based behavior
     (let* ((project-root (doom-project-root))
