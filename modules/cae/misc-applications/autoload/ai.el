@@ -10,7 +10,7 @@ Uses the llm package to get a concise folder name."
                                                    :max-tokens 50
                                                    :temperature 0.7))))
     (replace-regexp-in-string " " "-" (string-trim response))))
-(cae-claude--generate-folder-name "write a function to create a sandbox for claude")
+;;(cae-claude--generate-folder-name "write a function to create a sandbox for claude")
 
 
 (defun cae-claude--create-sandbox (sandbox-root task-description folder-name)
