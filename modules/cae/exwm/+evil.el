@@ -83,8 +83,8 @@
 
 (map! :map cae-exwm-discord-mode-map
       :n "J" (cmd! ()
-                   (exwm-input--fake-key 'C-k)
-                   (exwm-evil-insert))
+                   (exwm-evil-insert)
+                   (exwm-input--fake-key 'C-k))
       :n "C-k" (cmd! ()
                      (exwm-input--fake-key 'C-k)
                      (exwm-evil-insert)))
