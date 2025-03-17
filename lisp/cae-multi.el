@@ -96,7 +96,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
       (when (file-exists-p file)
         (gac--after-save file)))))
 
-;; Configure bookmark saving
+;; Configure bookmark saving and auto-reloading
 (setq bookmark-save-flag 1)
 (setq bookmark-watch-bookmark-file 'silent)
 
