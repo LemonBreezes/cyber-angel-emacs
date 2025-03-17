@@ -43,7 +43,7 @@ Otherwise, open Claude for the current project."
            :system "You are a helpful assistant that generates concise folder names."
            :stream nil
            :callback (lambda (response info)
-                       (when (not info) ;; No error
+                       (when response
                          (let ((folder-name (replace-regexp-in-string
                                              " " "-"
                                              (string-trim response))))
