@@ -221,12 +221,13 @@
       "C-x C-p"  #'+corfu/dabbrev-this-buffer)
     (map! :prefix "C-x"
           :i "e"   #'cae-cape-elisp-capf)))
-(map! :map ctl-x-map
+(map! :prefix "C-x"                     ; `ctl-x-map' did not work here somehow.
       (:when (modulep! :cae ai +copilot)
        :i "C-c" #'copilot-complete)
       (:when (modulep! :cae ai -copilot)
        :i "C-c" #'minuet-show-suggestion
        "y" #'minuet-complete-with-minibuffer))
+
 
 ;; TODO Fix this to work with `consult-yasnippet'.
 ;;(cae-defadvice! cae-evil-insert-state-a (&rest _)
