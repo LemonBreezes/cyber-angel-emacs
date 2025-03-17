@@ -5,7 +5,7 @@
   (require 'gptel)
   (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
     (replace-regexp-in-string
-     " " "_"
+     " " "-"
      (string-trim
       (gptel-request prompt
                     :system "You are a helpful assistant that generates concise folder names."
@@ -28,7 +28,7 @@ Otherwise, open Claude for the current project."
                   (make-directory (expand-file-name sandbox-root) t)))
              (folder-name (cae-claude--generate-folder-name task-description))
              (timestamp (format-time-string "%Y%m%d-%H%M%S"))
-             (sandbox-dir (expand-file-name (format "%s-%s" timestamp folder-name) 
+             (sandbox-dir (expand-file-name (format "%s--%s" timestamp folder-name)
                                            (expand-file-name sandbox-root)))
              (vterm-buffer-name (format "*claude:sandbox:%s*" folder-name)))
         
