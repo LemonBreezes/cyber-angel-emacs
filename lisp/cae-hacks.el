@@ -41,10 +41,6 @@
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
 
-;; This is for backwards compatibility with some of my old bookmarks.
-(defalias #'cae-exwm-firefox-bookmark-handler #'cae-browse-url-generic-bookmark-handler)
-(defalias #'bookmark/jump-to-newest-download #'cae-bookmark-jump-to-newest-download)
-
 ;; For some reason I got a void variable error in `helm-system-packages' for
 ;; this.
 (defvar helm-marked-buffer-name "*helm marked*")
