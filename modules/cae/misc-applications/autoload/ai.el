@@ -37,7 +37,7 @@ Otherwise, open Claude for the current project."
         
         ;; Request folder name from GPTel and create sandbox in callback
         (require 'gptel)
-        (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
+        (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Only respond with that one folder name and no other text whatsoever. Task: %s" task-description)))
           (gptel-request 
               prompt
             :system "You are a helpful assistant that generates concise folder names."
