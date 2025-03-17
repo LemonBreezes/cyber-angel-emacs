@@ -39,16 +39,16 @@ Otherwise, open Claude for the current project."
         (require 'gptel)
         (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
           (gptel-request 
-           prompt
-           :system "You are a helpful assistant that generates concise folder names."
-           :stream nil
-           :callback (lambda (response info)
-                       (when response
-                         (let ((folder-name (replace-regexp-in-string
-                                             " " "-"
-                                             (string-trim response))))
-                           (cae-claude--create-sandbox 
-                            sandbox-root task-description folder-name)))))))
+              prompt
+            :system "You are a helpful assistant that generates concise folder names."
+            :stream nil
+            :callback (lambda (response info)
+                        (when response
+                          (let ((folder-name (replace-regexp-in-string
+                                              " " "-"
+                                              (string-trim response))))
+                            (cae-claude--create-sandbox
+                             sandbox-root task-description folder-name)))))))
     
     ;; Original project-based behavior
     (let* ((project-root (doom-project-root))
