@@ -245,7 +245,9 @@
           :n "n" #'gptel-context-next
           :n "p" #'gptel-context-previous
           :n "d" #'gptel-context-flag-deletion
-          :n "RET" #'gptel-context-visit))
+          :n "RET" #'gptel-context-visit
+          :map gptel-mode-map
+          :n "<return>" #'gptel-send))
   (add-hook! 'gptel-mode-hook
     (defun cae-gptel-mode-setup-h ()
       (setq-local nobreak-char-display nil)
