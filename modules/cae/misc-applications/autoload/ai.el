@@ -4,10 +4,12 @@
   "Generate a folder name based on TASK-DESCRIPTION using GPTel."
   (require 'gptel)
   (let ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description)))
-    (string-trim
-     (gptel-request prompt
-                   :system "You are a helpful assistant that generates concise folder names."
-                   :stream nil))))
+    (replace-regexp-in-string
+     " " "_"
+     (string-trim
+      (gptel-request prompt
+                    :system "You are a helpful assistant that generates concise folder names."
+                    :stream nil)))))
 
 ;;;###autoload
 (defun cae-claude-code (&optional create-sandbox)
