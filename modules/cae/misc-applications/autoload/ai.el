@@ -8,8 +8,8 @@
      " " "-"
      (string-trim
       (gptel-request prompt
-                    :system "You are a helpful assistant that generates concise folder names."
-                    :stream nil)))))
+        :system "You are a helpful assistant that generates concise folder names."
+        :stream nil)))))
 
 ;;;###autoload
 (defun cae-claude-code (&optional create-sandbox)
@@ -29,7 +29,7 @@ Otherwise, open Claude for the current project."
              (folder-name (cae-claude--generate-folder-name task-description))
              (timestamp (format-time-string "%Y%m%d-%H%M%S"))
              (sandbox-dir (expand-file-name (format "%s--%s" timestamp folder-name)
-                                           (expand-file-name sandbox-root)))
+                                            (expand-file-name sandbox-root)))
              (vterm-buffer-name (format "*claude:sandbox:%s*" folder-name)))
         
         (make-directory sandbox-dir t)
