@@ -48,6 +48,7 @@
 (package! chess)
 (package! klondike)
 (package! minesweeper)
+(package! flappymacs)
 
 ;; Eye candy
 (package! fireplace)
