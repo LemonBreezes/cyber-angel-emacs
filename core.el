@@ -44,8 +44,7 @@
 (dolist (buffer (buffer-list))
   (when (string= "*scratch*" (buffer-name buffer))
     (with-current-buffer buffer
-      (let ((prog-mode-hook nil))
-        (persistent-scratch-mode +1)))))
+      (persistent-scratch-mode +1))))
 (persistent-scratch-setup-default)
 
 ;; Helm is not our main completion system.
