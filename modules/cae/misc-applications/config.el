@@ -518,6 +518,16 @@
         "a" nil))                       ;Not sure what `autotetris-move' even
                                         ;does to be honest.
 
+(use-package! flappymacs
+  :defer t :init
+  (defvar cae-flappymacs-workspace-name "*flappymacs*")
+  (defvar cae-flappymacs--old-wconf nil)
+  (map! :map cae-misc-applications-games-map
+        "f" #'cae-flappymacs)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-games-map
+      "f" "FlappyMacs")))
+
 
 ;;; Eyecandy
 
