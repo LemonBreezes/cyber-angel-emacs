@@ -246,6 +246,10 @@
       (:prefix "b"
        :desc "New empty Org buffer" "o" #'cae-evil-buffer-org-new))
 
+(after! vterm
+  (map! :map vterm-mode-map
+        :localleader "e" #'vterm-send-escape))
+
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
 (evil-set-initial-state #'font-lock-studio-mode 'emacs)
 
