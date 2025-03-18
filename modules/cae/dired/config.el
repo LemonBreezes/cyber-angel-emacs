@@ -2,6 +2,8 @@
 
 (require 'cae-lib)
 
+(setq copy-directory-create-symlink t)
+
 ;; Show Rsync progress in the modeline.
 (after! dired-rsync
   (unless global-mode-string (push "" global-mode-string))
