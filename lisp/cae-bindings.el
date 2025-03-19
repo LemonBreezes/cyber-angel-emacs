@@ -301,10 +301,7 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history)))
-
-  ;; `M-p' is already bound to `previous-history-element'. This also has to be
-  ;; set before loading `vertico-posframe'.
-  (setq vertico-posframe-vertico-multiform-key "M-P"))
+)
 
 
 ;;; Leader keybindings
