@@ -61,6 +61,7 @@ of loading files defined by *-init-*-enabled-p variables."
                    (debug-on-signal nil))
                (condition-case err
                    (progn
+                     (run-hooks 'doom-init-ui-hook)
                      (run-hooks 'doom-first-input-hook)
                      (run-hooks 'doom-first-buffer-hook)
                      (run-hooks 'doom-first-file-hook)
