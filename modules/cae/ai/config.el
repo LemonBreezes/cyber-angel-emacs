@@ -70,7 +70,6 @@
         '("--cache-prompts"
           "--cache-keepalive-pings" "6"
           "--watch-files"
-          "--editor-edit-format=editor-whole"
           ;;"--auto-test"
           ;;"--timeout" "120"
           ;;"--test"
