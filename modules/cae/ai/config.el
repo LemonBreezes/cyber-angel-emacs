@@ -259,3 +259,8 @@
   (cae-defadvice! cae-goto-point-max-a (_)
     :after #'gptel--read-with-prefix
     (goto-char (point-max))))
+
+(use-package! forge-llm
+  :defer t :after forge
+  :config
+  (forge-llm-setup))
