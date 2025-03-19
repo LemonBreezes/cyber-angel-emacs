@@ -129,7 +129,11 @@ KEYMAP-SETUP-FN is a function to set up keybindings for the application."
                                            workspace-name
                                            (setup-keys t)
                                            (save-scores nil)
-                                           scores-file)
+                                           scores-file
+                                           mode-name
+                                           (evil-state nil)
+                                           custom-setup-fn
+                                           force-emacs-state)
   "Define a launcher for a game with common setup patterns.
 NAME is the base name for the functions.
 LAUNCH-FN is the function to start the game.
@@ -137,26 +141,53 @@ BUFFER-NAME is the name of the game's buffer.
 WORKSPACE-NAME is the name of the workspace to use.
 SETUP-KEYS determines whether to set up quit key bindings.
 SAVE-SCORES determines whether to save and load high scores.
-SCORES-FILE is the name of the scores file in `shared-game-score-directory'."
+SCORES-FILE is the name of the scores file in `shared-game-score-directory'.
+MODE-NAME is the major mode symbol for the game (if it has one).
+EVIL-STATE is the evil state to use for the game (nil means don't change).
+CUSTOM-SETUP-FN is a custom function to run after game launch.
+FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
   (let* ((quit-fn-name (intern (format "cae-%s-quit" name)))
+         (keymap-variable (if mode-name
+                             (intern (format "%s-map" mode-name))
+                           (intern (format "%s-mode-map" name))))
          (keymap-setup-fn
           (when setup-keys
             `(lambda ()
+               ;; Try to set key in the mode map if it exists
+               (when (boundp ',keymap-variable)
+                 (define-key ,keymap-variable (kbd "q") ',quit-fn-name))
+               ;; Set local keybinding (works in any mode)
                (local-set-key (kbd "q") ',quit-fn-name)
                (when (featurep 'evil)
-                 (evil-local-set-key 'normal (kbd "q") ',quit-fn-name)))))
+                 (when (boundp ',keymap-variable)
+                   (evil-define-key '(normal emacs) ,keymap-variable (kbd "q") ',quit-fn-name))
+                 (evil-local-set-key 'normal (kbd "q") ',quit-fn-name)
+                 (evil-local-set-key 'emacs (kbd "q") ',quit-fn-name)))))
+         (scores-setup-fn
+          (when save-scores
+            `(lambda ()
+               (let* ((saves-buf (find-file-noselect (expand-file-name ,scores-file shared-game-score-directory)))
+                      (highest-score (with-current-buffer saves-buf
+                                       (local-set-key (kbd "q") ',quit-fn-name)
+                                       (when (featurep 'evil)
+                                         (evil-local-set-key 'normal (kbd "q") ',quit-fn-name))
+                                       (buffer-substring-no-properties (goto-char (point-min))
+                                                                       (line-end-position)))))
+                 (setq-local header-line-format highest-score)))))
+         (evil-state-setup-fn
+          (when (or evil-state force-emacs-state)
+            `(lambda ()
+               (when (featurep 'evil)
+                 (with-current-buffer ,buffer-name
+                   ,(if force-emacs-state
+                        '(evil-emacs-state)
+                      `(when ,evil-state
+                         (evil-change-state ,evil-state))))))))
          (setup-fn
-          (if save-scores
-              `(lambda ()
-                 (let* ((saves-buf (find-file-noselect (expand-file-name ,scores-file shared-game-score-directory)))
-                        (highest-score (with-current-buffer saves-buf
-                                         (local-set-key (kbd "q") ',quit-fn-name)
-                                         (when (featurep 'evil)
-                                           (evil-local-set-key 'normal (kbd "q") ',quit-fn-name))
-                                         (buffer-substring-no-properties (goto-char (point-min))
-                                                                         (line-end-position)))))
-                   (setq-local header-line-format highest-score)))
-            nil))
+          `(lambda ()
+             ,@(when scores-setup-fn `((funcall ,scores-setup-fn)))
+             ,@(when evil-state-setup-fn `((funcall ,evil-state-setup-fn)))
+             ,@(when custom-setup-fn `((funcall ,custom-setup-fn)))))
          (cleanup-fn
           (when save-scores
             `(lambda ()

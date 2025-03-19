@@ -451,12 +451,9 @@
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "d" "Dunnet"))
-  (after! evil
-    (evil-set-initial-state #'dun-mode 'insert))
   :config
   (map! :map dun-mode-map
-        "C-c C-k" #'cae-dunnet-quit
-        :n "q" #'cae-dunnet-quit))
+        "C-c C-k" #'cae-dunnet-quit))
 
 (use-package! speed-type
   :defer t :init
@@ -473,18 +470,16 @@
       (when (not (listp global-corfu-modes))
         (setq global-corfu-modes (list t)))
       (add-to-list 'global-corfu-modes '(not speed-type-mode))))
-  (after! evil
-    (evil-set-initial-state #'speed-type-mode 'insert))
   (add-hook 'speed-type-mode-hook
             (defun cae-speed-type-disabe-show-paren-mode-h ()
               (show-paren-local-mode -1)))
   :config
   (map! :map speed-type--completed-keymap
-        "q" #'cae-speed-type-quit
+        "q" #'cae-speed-type-text-quit
         "r" #'speed-type--replay
         "n" #'speed-type--play-next
         :map speed-type-mode-map
-        :n "q" #'cae-speed-type-quit))
+        :n "q" #'cae-speed-type-text-quit))
 
 (use-package! snake
   :defer t :init
