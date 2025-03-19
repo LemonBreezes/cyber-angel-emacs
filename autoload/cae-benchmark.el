@@ -63,9 +63,8 @@ of loading files defined by *-init-*-enabled-p variables."
                    (debug-on-signal nil))
                (condition-case err
                    (progn
-
                      ;; Run all startup hooks to complete initialization
-                     (doom-run-all-startup-hooks-h))
+                     )
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
