@@ -61,16 +61,7 @@ of loading files defined by *-init-*-enabled-p variables."
              (let ((debug-on-error nil)
                    (debug-on-signal nil))
                (condition-case err
-                   (progn
-                     (run-hooks 'doom-init-ui-hook)
-                     (run-hooks 'doom-after-init-hook)
-                     (run-hooks 'doom-load-theme-hook)
-                     (run-hooks 'doom-first-input-hook)
-                     (run-hooks 'doom-first-buffer-hook)
-                     (run-hooks 'doom-first-file-hook)
-
-                     ;; Run all startup hooks to complete initialization
-                     (doom-run-all-startup-hooks-h))
+                   (progn)
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
