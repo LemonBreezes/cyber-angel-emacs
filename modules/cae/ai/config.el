@@ -261,6 +261,5 @@
     (goto-char (point-max))))
 
 (use-package! forge-llm
-  :defer t :after forge
-  :config
+  :defer t :after forge :config
   (forge-llm-setup))
