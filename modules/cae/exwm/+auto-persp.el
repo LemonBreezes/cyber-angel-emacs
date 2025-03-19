@@ -146,7 +146,7 @@ Returns nil if BUFFER is not an EXWM buffer."
   ;; Rebuild the workspace name cache
   (dolist (mapping cae-exwm-workspace-name-replacements)
     (puthash (downcase (car mapping)) (cdr mapping) cae-exwm--workspace-name-cache))
-    
+
   ;; Rebuild the floating apps set
   (dolist (app cae-exwm-floating-apps)
     (puthash (downcase app) t cae-exwm--floating-apps-set)))
