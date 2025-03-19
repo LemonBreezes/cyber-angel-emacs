@@ -61,7 +61,18 @@ of loading files defined by *-init-*-enabled-p variables."
              (let ((debug-on-error nil)
                    (debug-on-signal nil))
                (condition-case err
-                   (progn)
+                   (progn
+                     (doom-run-hooks 'after-init-hook
+                                     'delayed-warnings-hook
+                                     'emacs-startup-hook
+                                     'tty-setup-hook
+                                     'window-setup-hook
+                                     'doom-after-init-hook)
+                     ;;(run-hooks 'doom-load-theme-hook)
+                     ;;(run-hooks 'doom-first-input-hook)
+                     ;;(run-hooks 'doom-first-buffer-hook)
+                     ;;(run-hooks 'doom-first-file-hook)
+)
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
