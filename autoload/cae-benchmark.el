@@ -68,7 +68,7 @@ of loading files defined by *-init-*-enabled-p variables."
                                      'tty-setup-hook
                                      'window-setup-hook
                                      'doom-after-init-hook
-                                     ;;'doom-load-theme-hook
+                                     'doom-load-theme-hook
                                      'doom-first-input-hook
                                      'doom-first-buffer-hook
                                      'doom-first-file-hook))
