@@ -54,7 +54,7 @@
 
 (doom! :completion
        ;;(vertico +icons +childframe)
-       (helm +childframe)
+       (helm)
        (corfu +orderless +icons +dabbrev)
 
        :ui
