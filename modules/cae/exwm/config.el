@@ -225,7 +225,9 @@
     (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
     (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
     (after! persp-mode
-      (load! "+auto-persp"))))
+      (load! "+auto-persp")
+      ;; Enable debug logging temporarily to diagnose issues
+      (setq cae-exwm-auto-persp-debug t))))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))

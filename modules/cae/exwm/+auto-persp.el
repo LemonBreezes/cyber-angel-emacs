@@ -21,7 +21,7 @@
 (defvar cae-exwm-workspaces ()
   "List of EXWM workspace names that have been created.")
 
-(defconst cae-exwm-floating-apps '("..." "main.py" "setup.tmp" "firefox")
+(defconst cae-exwm-floating-apps '("..." "main.py" "setup.tmp")
   "List of EXWM class names for applications that should remain floating.")
 
 (defconst cae-exwm-workspace-name-replacements
@@ -101,7 +101,7 @@ name of the workspace that will be created for that application.")
               :test 'equal
               :size (expt 2 (ceiling (log (length cae-exwm-floating-apps) 2))))))
     (dolist (app cae-exwm-floating-apps)
-      (puthash app t set))
+      (puthash (downcase app) t set))
     set)
   "Hash table for fast lookup of floating apps.")
 
@@ -121,9 +121,15 @@ Returns nil if BUFFER is not an EXWM buffer."
                  (error nil))))
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking up workspace name for class: '%s'" class))
-    (let ((workspace-name (if class
-                              (gethash (downcase class) cae-exwm--workspace-name-cache class)
-                            nil)))
+    (let ((workspace-name 
+           (if class
+               (or (gethash (downcase class) cae-exwm--workspace-name-cache)
+                   (let ((mapped-name 
+                          (alist-get class cae-exwm-workspace-name-replacements
+                                     class nil #'cl-equalp)))
+                     (puthash (downcase class) mapped-name cae-exwm--workspace-name-cache)
+                     mapped-name))
+             nil)))
       (when cae-exwm-auto-persp-debug
         (message "[EXWM-DEBUG] Found workspace name: '%s'" workspace-name))
       workspace-name)))
@@ -131,7 +137,7 @@ Returns nil if BUFFER is not an EXWM buffer."
 (defsubst cae-exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
   (unless (or (not exwm--floating-frame)
-              (gethash exwm-class-name cae-exwm--floating-apps-set))
+              (gethash (downcase exwm-class-name) cae-exwm--floating-apps-set))
     (exwm-floating--unset-floating exwm--id)))
 
 (defun cae-exwm-clear-caches ()
@@ -140,10 +146,15 @@ Returns nil if BUFFER is not an EXWM buffer."
   (clrhash cae-exwm--workspace-name-cache)
   (clrhash cae-exwm--browser-workspace-cache-table)
   (clrhash cae-exwm--workspace-names-set)
+  (clrhash cae-exwm--floating-apps-set)
 
   ;; Rebuild the workspace name cache
   (dolist (mapping cae-exwm-workspace-name-replacements)
-    (puthash (downcase (car mapping)) (cdr mapping) cae-exwm--workspace-name-cache)))
+    (puthash (downcase (car mapping)) (cdr mapping) cae-exwm--workspace-name-cache))
+    
+  ;; Rebuild the floating apps set
+  (dolist (app cae-exwm-floating-apps)
+    (puthash (downcase app) t cae-exwm--floating-apps-set)))
 
 ;;; Workspace management
 
@@ -154,15 +165,17 @@ Optional STATE is passed from persp-mode."
   (let* ((class-name (buffer-local-value 'exwm-class-name buffer))
          (workspace-name (cae-exwm-get-workspace-name buffer))
          (is-floating (and exwm--floating-frame
-                           (gethash class-name cae-exwm--floating-apps-set)))
+                           (gethash (downcase class-name) cae-exwm--floating-apps-set)))
          (result (and (stringp workspace-name)
+                      (not is-floating)
                       (or state t))))
 
     (when cae-exwm-auto-persp-debug
-      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, result=%s"
+      (message "[EXWM-DEBUG] Predicate for %s (class: %s): workspace-name=%s, is-floating=%s, result=%s"
                (buffer-name buffer)
                class-name
                workspace-name
+               is-floating
                result))
 
     result))
@@ -208,6 +221,10 @@ Optional STATE is passed from persp-mode."
   "Create and switch to a workspace for a new EXWM BUFFER."
   (let* ((buffer (alist-get 'buffer state))
          (application-name (cae-exwm-get-workspace-name buffer)))
+    (when cae-exwm-auto-persp-debug
+      (message "[EXWM-DEBUG] Creating workspace for %s with name %s"
+               (buffer-name buffer) application-name))
+    
     ;; Exit minibuffer if active
     (when (minibufferp nil t)
       (minibuffer-keyboard-quit))
