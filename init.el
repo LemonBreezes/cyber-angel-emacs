@@ -53,8 +53,8 @@
   (load! "preamble" doom-user-dir))
 
 (doom! :completion
-       ;;(vertico +icons +childframe)
-       helm
+       (vertico +icons +childframe)
+       ;;helm
        (corfu +orderless +icons +dabbrev)
 
        :ui
