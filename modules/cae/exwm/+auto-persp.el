@@ -164,7 +164,7 @@ Optional STATE is passed from persp-mode."
                class-name
                workspace-name
                result))
-    
+
     result))
 
 (defsubst cae-exwm-persp--get-name (state)
@@ -172,13 +172,13 @@ Optional STATE is passed from persp-mode."
   (let* ((buffer (alist-get 'buffer state))
          (class-name (buffer-local-value 'exwm-class-name buffer))
          (workspace-name (cae-exwm-get-workspace-name buffer)))
-    
+
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Getting workspace name for %s (class: %s): %s"
                (buffer-name buffer)
                class-name
                workspace-name))
-    
+
     (setf (alist-get 'persp-name state) workspace-name)
     state))
 
@@ -277,21 +277,21 @@ Optional STATE is passed from persp-mode."
         (workspace-lower (downcase workspace)))
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Looking for buffers matching workspace: %s" workspace))
-    
+
     (dolist (buffer (persp-buffers (persp-get-by-name workspace)) result)
       (when (buffer-live-p buffer)
         (let ((buf-workspace (cae-exwm-get-workspace-name buffer))
               (buf-class (condition-case nil
                              (buffer-local-value 'exwm-class-name buffer)
                            (error nil))))
-          
+
           (when cae-exwm-auto-persp-debug
             (message "[EXWM-DEBUG] Checking buffer: %s, workspace: %s, class: %s, current: %s"
                      (buffer-name buffer)
                      buf-workspace
                      buf-class
                      (eq buffer current-buffer)))
-          
+
           (when (and (not (eq buffer current-buffer))
                      buf-workspace
                      (or (string= (downcase buf-workspace) workspace-lower)
@@ -309,7 +309,7 @@ Optional STATE is passed from persp-mode."
         (current-class (condition-case nil
                            (buffer-local-value 'exwm-class-name (current-buffer))
                          (error nil))))
-    
+
     (when cae-exwm-auto-persp-debug
       (message "[EXWM-DEBUG] Cleanup called for workspace: %s, buffer: %s, class: %s"
                current-workspace
