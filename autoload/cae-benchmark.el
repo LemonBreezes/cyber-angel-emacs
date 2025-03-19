@@ -70,7 +70,7 @@ of loading files defined by *-init-*-enabled-p variables."
                      (load ,doom-init-file nil t)
 
                      ;; Initialize Doom properly
-                     (doom-initialize)
+                     (doom-initialize t)
 
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
