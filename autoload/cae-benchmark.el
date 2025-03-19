@@ -70,7 +70,6 @@ of loading files defined by *-init-*-enabled-p variables."
 
                      ;; Initialize Doom properly
                      (doom-initialize)
-                     (doom-initialize-modules)
 
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
