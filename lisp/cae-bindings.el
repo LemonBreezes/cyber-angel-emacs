@@ -301,7 +301,7 @@
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
             "M-r" #'consult-history)))
-)
+  )
 
 
 ;;; Leader keybindings
