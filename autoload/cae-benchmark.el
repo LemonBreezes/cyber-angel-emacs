@@ -72,7 +72,6 @@ of loading files defined by *-init-*-enabled-p variables."
                      (doom-initialize)
 
                      ;; Run all startup hooks to complete initialization
-                     (message "HELLO %s" (featurep 'doom-lib))
                      (doom-run-all-startup-hooks-h))
                  (error
                   (require 'pp)
