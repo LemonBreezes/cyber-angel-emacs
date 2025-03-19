@@ -63,9 +63,6 @@ of loading files defined by *-init-*-enabled-p variables."
                    (debug-on-signal nil))
                (condition-case err
                    (progn
-                     ;; Load the core Doom functionality
-                     (load (expand-file-name "doom.el" doom-core-dir) nil t)
-
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
                  (error
