@@ -27,12 +27,16 @@ Creates a separate Doom Emacs process to test performance impact."
     (unless return-p
       (message output))))
 
+(setq noninteractive nil)
+
 ;; Load Doom normally
 (load (expand-file-name \"early-init.el\" %S) nil t)
 
 ;; Add our advice to capture the results
 (with-eval-after-load 'doom-start
   (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture))
+
+(kill-emacs)
 " 
               (prin1-to-string temp-file)
               (prin1-to-string doom-emacs-dir-path))))
