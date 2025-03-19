@@ -18,6 +18,38 @@ of loading files defined by *-init-*-enabled-p variables."
              (setq inhibit-redisplay nil)
              (setq window-system 'x)
 
+             ;; Fix for the Doom benchmark display function using advice-add pattern
+             (defvar benchmark-start-time (current-time)
+               "Start time for tracking benchmark duration.")
+             (defun doom-benchmark-display-with-timing-h (&optional return-p)
+               "Advice to override doom-display-benchmark-h with accurate timing.
+           If RETURN-P, return the message as a string instead of displaying it."
+               (let* ((package-count (- (length load-path)
+                                        (or (length (get 'load-path 'initial-value)) 0)))
+                      (module-count (if (and (boundp 'doom-modules) doom-modules)
+                                        (hash-table-count doom-modules)
+                                      -1))
+                      ;; Calculate elapsed time properly
+                      (init-time (or (and (boundp 'doom-init-time)
+                                          (numberp doom-init-time)
+                                          (not (= doom-init-time 0))
+                                          doom-init-time)
+                                     (float-time (time-subtract (current-time) benchmark-start-time)))))
+                 (funcall (if return-p #'format #'message)
+                          "Doom loaded %d packages across %d modules in %.03fs"
+                          package-count
+                          module-count
+                          init-time)))
+             (add-hook 'doom-after-init-hook
+                       (lambda ()
+                         (setq doom-init-time
+                               (float-time (time-subtract (current-time) benchmark-start-time))))
+                       80)
+             (with-eval-after-load 'doom-start
+               ;; Use override advice for the benchmark display function
+               (advice-add 'doom-display-benchmark-h :override
+                           #'doom-benchmark-display-with-timing-h))
+
              (advice-add #'y-or-n-p :override #'ignore)
 
              ;; Load the early init file
