@@ -6,8 +6,6 @@
 Creates a separate Doom Emacs process to test performance impact."
   (interactive)
   (let* ((temp-file (make-temp-file "emacs-benchmark-"))
-         (doom-private-dir-path (expand-file-name doom-private-dir))
-         (doom-emacs-dir-path (expand-file-name doom-emacs-dir))
          (benchmark-file (make-temp-file "doom-benchmark-" nil ".el"))
          ;; Define the benchmark form as a proper Lisp form
          (benchmark-form 
@@ -31,7 +29,7 @@ Creates a separate Doom Emacs process to test performance impact."
              (let ((debug-on-error nil)
                    (debug-on-signal nil))
                (condition-case err
-                   (load (expand-file-name "lisp/init.el" ,doom-emacs-dir-path) nil t)
+                   (load (expand-file-name "lisp/init.el" ,doom-emacs-dir) nil t)
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
