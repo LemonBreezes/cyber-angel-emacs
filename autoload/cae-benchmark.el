@@ -53,6 +53,7 @@ of loading files defined by *-init-*-enabled-p variables."
 
              ;; Load the early init file
              (load ,early-init-file nil t)
+             (setq inhibit-startup-hooks nil)
 
              ;; Enable messages
              (setq inhibit-message nil)
