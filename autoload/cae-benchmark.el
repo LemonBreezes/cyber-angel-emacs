@@ -88,27 +88,27 @@ of loading files defined by *-init-*-enabled-p variables."
                   (widen)
                   (buffer-substring-no-properties (point-min) (point-max)))))
              (kill-emacs))))
-         (benchmark-file (make-temp-file "doom-benchmark-" nil ".el")))
-    
+    (benchmark-file (make-temp-file "doom-benchmark-" nil ".el"))
+
     ;; Write the benchmark code to a file
     (with-temp-file benchmark-file
       (prin1 form (current-buffer)))
-    
+
     ;; Run Emacs with the benchmark code
     (call-process
      (expand-file-name invocation-name invocation-directory)
      nil nil nil
      "-Q" "--batch" "--load" benchmark-file)
-    
+
     ;; Display the results
     (when (file-exists-p temp-file)
       (with-current-buffer (get-buffer-create "*Doom Benchmark*")
         (erase-buffer)
         (insert-file-contents temp-file)
         (display-buffer (current-buffer))))
-    
+
     ;; Clean up temporary files
     (when (file-exists-p temp-file)
       (ignore-errors (delete-file temp-file)))
     (when (file-exists-p benchmark-file)
-      (ignore-errors (delete-file benchmark-file))))))
+      (ignore-errors (delete-file benchmark-file)))))
