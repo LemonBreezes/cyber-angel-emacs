@@ -38,7 +38,7 @@
         (when (modulep! :cae lsp -copilot)
           '(minuet))
         '(whisper greader org-ai chatgpt-shell gptel magit-gptcommit
-                  aider aidermacs elysium minuet dall-e-shell)))
+                  aider aidermacs elysium minuet dall-e-shell forge-llm)))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
