@@ -21,7 +21,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((q t))
+(let ((q (and (not noninteractive) t)))
   (let ((p (and q t)))
     (defvar cae-init-preamble-enabled-p (and p t))
     (defvar cae-init-debug-enabled-p (and p t))
