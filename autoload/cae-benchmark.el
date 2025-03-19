@@ -62,9 +62,17 @@ of loading files defined by *-init-*-enabled-p variables."
                (condition-case err
                    (progn
                      (run-hooks 'doom-init-ui-hook)
+                     (run-hooks 'doom-after-init-hook)
+                     (run-hooks 'doom-load-theme-hook)
                      (run-hooks 'doom-first-input-hook)
                      (run-hooks 'doom-first-buffer-hook)
                      (run-hooks 'doom-first-file-hook)
+                     (setq doom-init-ui-hook nil
+                           doom-after-init-hook nil
+                           doom-load-theme-hook nil
+                           doom-first-input-hook nil
+                           doom-first-buffer-hook nil
+                           doom-first-file-hook nil)
 
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
