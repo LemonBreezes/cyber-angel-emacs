@@ -8,7 +8,6 @@ Creates separate Doom Emacs processes to test performance impact
 of loading files defined by *-init-*-enabled-p variables."
   (interactive)
   (let* ((temp-file (make-temp-file "emacs-benchmark-"))
-         (doom-init-file (expand-file-name "init.el" doom-private-dir))
          (early-init-file (expand-file-name "early-init.el" doom-emacs-dir))
          (form
           `(progn
