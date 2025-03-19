@@ -5,15 +5,15 @@
        '(corfu))
    ,@(when (modulep! :emacs dirvish)
        '(dired transient dirvish diredfl dirvish-widgets dirvish-side
-               dirvish-subtree))
+         dirvish-subtree))
    bookmark auth-source tramp-compat tramp-integration tramp tramp-sh
    ,@(when (and (getenv "INSIDE_EXWM") (modulep! :cae exwm))
        '(xelb exwm exwm-mff exwm-evil exwm-firefox-evil app-launcher))
    ,@(when (modulep! :term eshell)
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
-                  em-tramp em-smart em-banner em-basic em-cmpl
-                  em-extpipe em-glob em-hist em-ls em-script em-term
-                  em-alias em-elecslash em-rebind em-prompt))
+         em-tramp em-smart em-banner em-basic em-cmpl
+         em-extpipe em-glob em-hist em-ls em-script em-term
+         em-alias em-elecslash em-rebind em-prompt))
    ,@(when (and (modulep! :term vterm)
                 (executable-find "cmake"))
        '(vterm))
@@ -24,7 +24,7 @@
    ,@(when (or (modulep! :completion helm)
                (modulep! :cae helm))
        '(async helm-lib helm-multi-match helm-source helm-core
-               helm-global-bindings helm))
+         helm-global-bindings helm))
    ,@(when (modulep! :app rss)
        '(elfeed))
    ,@(when (modulep! :cae misc-applications) ; Music apps
@@ -38,7 +38,7 @@
         (when (modulep! :cae lsp -copilot)
           '(minuet))
         '(whisper greader org-ai chatgpt-shell gptel magit-gptcommit
-                  aider aidermacs elysium minuet dall-e-shell forge-llm)))
+          aider aidermacs elysium minuet dall-e-shell forge-llm)))
    ,@(when (modulep! :tools direnv)
        '(envrc))
    ,@(when (and (modulep! :tools lsp)
@@ -80,12 +80,12 @@
        (nconc                           ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
-                  journalctl-mode)
+          journalctl-mode)
         ;; Games
         '(snake speed-type tetris bubbles dunnet autotetris chess klondike)
         ;; Eye candy
         '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-                    zone-nyan zone-pgm-spoopy selectric)
+          zone-nyan zone-pgm-spoopy selectric)
         ;; Insert
         '(lorem-ipsum password-generator uuidgen)
         ;; Random
