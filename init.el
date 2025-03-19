@@ -21,33 +21,6 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((q (and (not noninteractive) t)))
-  (let ((p (and q t)))
-    (defvar cae-init-preamble-enabled-p (and p t))
-    (defvar cae-init-debug-enabled-p (and p t))
-    (defvar cae-init-dir-locals-enabled-p (and p t))
-    (defvar cae-init-hacks-enabled-p (and p t)))
-  (let ((c (and q t)))
-    (defvar cae-init-core-enabled-p (and c t))
-    (defvar cae-init-tty-enabled-p (and c t))
-    (defvar cae-init-bindings-enabled-p (and c t))
-    (defvar cae-init-multi-enabled-p (and c t))
-    (defvar cae-init-smartparens-enabled-p (and c t))
-    (defvar cae-init-projectile-enabled-p (and c t))
-    (defvar cae-init-evil-enabled-p (and c t))
-    (defvar cae-init-exwm-enabled-p (and c t)))
-  (defvar cae-init-keyboard-remaps-enabled-p (and q nil))
-  (let ((p (and q t)))
-    (defvar cae-init-ui-enabled-p (and p t))
-    (defvar cae-init-tools-enabled-p (and p t))
-    (defvar cae-init-editor-enabled-p (and p t))
-    (defvar cae-init-autocompletion-enabled-p (and p t))
-    (defvar cae-init-text-enabled-p (and p t))
-    (defvar cae-init-email-enabled-p (and p t))
-    (defvar cae-init-applications-enabled-p (and p t))
-    (defvar cae-init-term-enabled-p (and p t))
-    (defvar cae-init-languages-enabled-p (and p t))
-    (defvar cae-init-appendix-enabled-p (and p t))))
 
 (when cae-init-preamble-enabled-p
   (load! "preamble" doom-user-dir))
