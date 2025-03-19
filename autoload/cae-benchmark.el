@@ -66,12 +66,6 @@ of loading files defined by *-init-*-enabled-p variables."
                      ;; Load the core Doom functionality
                      (load (expand-file-name "doom.el" doom-core-dir) nil t)
 
-                     ;; Explicitly load the init file
-                     (load ,doom-init-file nil t)
-
-                     ;; Initialize Doom properly
-                     (doom-initialize t)
-
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
                  (error
