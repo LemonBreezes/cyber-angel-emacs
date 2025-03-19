@@ -28,8 +28,17 @@ Creates a separate Doom Emacs process to test performance impact."
              (setq noninteractive nil)
              
              ;; Load Doom normally
-             (load (expand-file-name "early-init.el" ,doom-emacs-dir-path) nil t)
-             
+             (let ((debug-on-error nil)
+                   (debug-on-signal nil))
+               (condition-case err
+                   (load (expand-file-name "early-init.el" ,doom-emacs-dir-path) nil t)
+                 (error
+                  (require 'pp)
+                  (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
+                    (message "Error in startup hooks: %s\nBacktrace:\n%s"
+                             (error-message-string err)
+                             trace)))))
+
              ;; Add our advice to capture the results
              (with-eval-after-load 'doom-start
                (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture)))))
