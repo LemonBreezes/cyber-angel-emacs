@@ -1,5 +1,6 @@
 ;;; autoload/cae-benchmark.el -*- lexical-binding: t; -*-
 
+;; FIXME Does not work for benchmarking our config.
 ;;;###autoload
 (defun cae-benchmark-config-modules ()
   "Benchmark loading time of different config modules.
@@ -98,7 +99,7 @@ of loading files defined by *-init-*-enabled-p variables."
     (call-process
      (expand-file-name invocation-name invocation-directory)
      nil nil nil
-     "-Q" "--batch" "--load" benchmark-file)
+     "--load" benchmark-file)
 
     ;; Display the results
     (when (file-exists-p temp-file)
