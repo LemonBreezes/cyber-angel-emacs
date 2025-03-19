@@ -66,6 +66,7 @@ of loading files defined by *-init-*-enabled-p variables."
                      (run-hooks 'doom-first-input-hook)
                      (run-hooks 'doom-first-buffer-hook)
                      (run-hooks 'doom-first-file-hook)
+
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
                  (error
