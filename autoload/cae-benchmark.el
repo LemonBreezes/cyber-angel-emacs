@@ -9,7 +9,6 @@ of loading files defined by *-init-*-enabled-p variables."
   (interactive)
   (let* ((temp-file (make-temp-file "emacs-benchmark-"))
          (early-init-file (expand-file-name "early-init.el" doom-emacs-dir))
-         (current-time (current-time))
          (form
           `(progn
              ;; Set noninteractive to nil to load full config
@@ -41,9 +40,9 @@ of loading files defined by *-init-*-enabled-p variables."
                           module-count
                           init-time)))
              (add-hook 'doom-after-init-hook
-                       `(lambda ()
-                          (setq doom-init-time
-                                (float-time (time-subtract ',current-time benchmark-start-time))))
+                       (lambda ()
+                         (setq doom-init-time
+                               (float-time (time-subtract (current-time) benchmark-start-time))))
                        80)
              (with-eval-after-load 'doom-start
                ;; Use override advice for the benchmark display function
