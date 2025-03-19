@@ -15,8 +15,7 @@ of loading files defined by *-init-*-enabled-p variables."
              (setq noninteractive nil)
              (setq command-line-args nil
                    command-line-args-left nil)
-             (setq inhibit-redisplay nil)
-             (setq window-system 'x)
+             (setq inhibit-redisplay t)
 
              ;; Fix for the Doom benchmark display function using advice-add pattern
              (defvar benchmark-start-time (current-time)
