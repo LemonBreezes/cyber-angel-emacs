@@ -12,6 +12,7 @@
 (unpin! :lang :tools :emacs :email :input :term :ui :editor)
 (unpin! :completion corfu)
 (unpin! smartparens)
+(unpin! projectile)
 ;; Not using the built-in package verisons can cause errors.
 (package! eldoc :built-in t)
 (package! which-key :built-in t)
