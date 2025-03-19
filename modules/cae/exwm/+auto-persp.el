@@ -108,7 +108,7 @@ name of the workspace that will be created for that application.")
 (defvar cae-exwm--auto-persp-initialized nil
   "Flag to track if auto-persp has been initialized.")
 
-(defvar cae-exwm--workspace-names-set (make-hash-table :test 'equal :size 30)
+(defvar cae-exwm--workspace-names-set (make-hash-table :test 'equal :size 24)
   "Hash table for fast lookup of workspace names.")
 
 ;;; Core functions
