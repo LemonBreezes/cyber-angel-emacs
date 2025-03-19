@@ -11,6 +11,7 @@ of loading files defined by *-init-*-enabled-p variables."
          (early-init-file (expand-file-name "early-init.el" doom-emacs-dir))
          (form
           `(progn
+             (message "%s" (bound-and-true-p cae-config-finished-loading))
              ;; Set noninteractive to nil to load full config
              (setq noninteractive nil)
              (setq command-line-args nil
