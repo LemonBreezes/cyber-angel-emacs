@@ -70,7 +70,7 @@ of loading files defined by *-init-*-enabled-p variables."
 
                      ;; Initialize Doom properly
                      (doom-initialize)
-)
+                     )
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
