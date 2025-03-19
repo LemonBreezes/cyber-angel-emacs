@@ -28,6 +28,7 @@ Creates a separate Doom Emacs process to test performance impact."
       (message output))))
 
 (setq noninteractive nil)
+(kill-emacs)
 
 ;; Load Doom normally
 (load (expand-file-name \"early-init.el\" %S) nil t)
@@ -36,8 +37,7 @@ Creates a separate Doom Emacs process to test performance impact."
 (with-eval-after-load 'doom-start
   (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture))
 
-(kill-emacs)
-" 
+"
                (prin1-to-string temp-file)
                (prin1-to-string doom-emacs-dir-path))))
 
