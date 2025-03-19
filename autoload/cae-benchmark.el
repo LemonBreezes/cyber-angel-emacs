@@ -72,7 +72,7 @@ of loading files defined by *-init-*-enabled-p variables."
                      ;;(run-hooks 'doom-first-input-hook)
                      ;;(run-hooks 'doom-first-buffer-hook)
                      ;;(run-hooks 'doom-first-file-hook)
-)
+                     )
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
