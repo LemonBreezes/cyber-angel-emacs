@@ -29,7 +29,11 @@ of loading files defined by *-init-*-enabled-p variables."
                                         (hash-table-count doom-modules)
                                       -1))
                       ;; Calculate elapsed time properly
-                      (init-time (float-time (time-subtract (current-time) benchmark-start-time))))
+                      (init-time (or (and (boundp 'doom-init-time)
+                                          (numberp doom-init-time)
+                                          (not (= doom-init-time 0))
+                                          doom-init-time)
+                                     (float-time (time-subtract (current-time) benchmark-start-time)))))
                  (funcall (if return-p #'format #'message)
                           "Doom loaded %d packages across %d modules in %.03fs"
                           package-count
