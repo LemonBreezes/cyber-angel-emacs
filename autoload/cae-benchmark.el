@@ -1,6 +1,5 @@
 ;;; autoload/cae-benchmark.el -*- lexical-binding: t; -*-
 
-;; TODO Finish this code! It does not currently initialize dome.
 ;;;###autoload
 (defun cae-benchmark-config-modules ()
   "Benchmark loading time of different config modules.
@@ -9,6 +8,7 @@ of loading files defined by *-init-*-enabled-p variables."
   (interactive)
   (let* ((temp-file (make-temp-file "emacs-benchmark-"))
          (doom-init-file (expand-file-name "init.el" doom-private-dir))
+         (early-init-file (expand-file-name "early-init.el" doom-emacs-dir))
          (form
           `(progn
              ;; Set noninteractive to nil to load full config
@@ -87,4 +87,28 @@ of loading files defined by *-init-*-enabled-p variables."
                 (with-current-buffer messages-buffer-name
                   (widen)
                   (buffer-substring-no-properties (point-min) (point-max)))))
-             (kill-emacs))))))
+             (kill-emacs))))
+         (benchmark-file (make-temp-file "doom-benchmark-" nil ".el")))
+    
+    ;; Write the benchmark code to a file
+    (with-temp-file benchmark-file
+      (prin1 form (current-buffer)))
+    
+    ;; Run Emacs with the benchmark code
+    (call-process
+     (expand-file-name invocation-name invocation-directory)
+     nil nil nil
+     "-Q" "--batch" "--load" benchmark-file)
+    
+    ;; Display the results
+    (when (file-exists-p temp-file)
+      (with-current-buffer (get-buffer-create "*Doom Benchmark*")
+        (erase-buffer)
+        (insert-file-contents temp-file)
+        (display-buffer (current-buffer))))
+    
+    ;; Clean up temporary files
+    (when (file-exists-p temp-file)
+      (delete-file temp-file))
+    (when (file-exists-p benchmark-file)
+      (delete-file benchmark-file))))
