@@ -8,38 +8,35 @@ Creates a separate Doom Emacs process to test performance impact."
   (let* ((temp-file (make-temp-file "emacs-benchmark-"))
          (doom-private-dir-path (expand-file-name doom-private-dir))
          (doom-emacs-dir-path (expand-file-name doom-emacs-dir))
-         (benchmark-file (make-temp-file "doom-benchmark-" nil ".el")))
+         (benchmark-file (make-temp-file "doom-benchmark-" nil ".el"))
+         ;; Define the benchmark form as a proper Lisp form
+         (benchmark-form 
+          `(progn
+             ;; Start timing before anything else happens
+             (defvar benchmark-start-time (current-time))
+             
+             ;; Set up advice to capture the benchmark results
+             (defun doom-display-benchmark-h-with-capture (&optional return-p)
+               "Capture benchmark results and write to temp file."
+               (let* ((output (doom-display-benchmark-h t))
+                      (full-output (format "Benchmark results:\n%s" output)))
+                 (with-temp-file ,temp-file
+                   (insert full-output))
+                 (unless return-p
+                   (message output))))
+             
+             (setq noninteractive nil)
+             
+             ;; Load Doom normally
+             (load (expand-file-name "early-init.el" ,doom-emacs-dir-path) nil t)
+             
+             ;; Add our advice to capture the results
+             (with-eval-after-load 'doom-start
+               (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture)))))
 
-    ;; Write a minimal bootstrap file that will run before Doom loads
+    ;; Write the benchmark form to a file
     (with-temp-file benchmark-file
-      (insert 
-       (format "
-;; Start timing before anything else happens
-(defvar benchmark-start-time (current-time))
-
-;; Set up advice to capture the benchmark results
-(defun doom-display-benchmark-h-with-capture (&optional return-p)
-  \"Capture benchmark results and write to temp file.\"
-  (let* ((output (doom-display-benchmark-h t))
-         (full-output (format \"Benchmark results:\\n%%s\" output)))
-    (with-temp-file %S
-      (insert full-output))
-    (unless return-p
-      (message output))))
-
-(setq noninteractive nil)
-(kill-emacs)
-
-;; Load Doom normally
-(load (expand-file-name \"early-init.el\" %S) nil t)
-
-;; Add our advice to capture the results
-(with-eval-after-load 'doom-start
-  (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture))
-
-"
-               (prin1-to-string temp-file)
-               (prin1-to-string doom-emacs-dir-path))))
+      (pp benchmark-form (current-buffer)))
 
     ;; Run a fresh Emacs process that loads our benchmark file first
     (message "Running benchmark...")
