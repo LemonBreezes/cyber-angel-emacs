@@ -70,10 +70,7 @@ of loading files defined by *-init-*-enabled-p variables."
 
                      ;; Initialize Doom properly
                      (doom-initialize)
-
-                     ;; Run all startup hooks to complete initialization
-                     (require 'doom-lib)
-                     (doom-run-all-startup-hooks-h))
+)
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
