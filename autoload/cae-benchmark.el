@@ -54,7 +54,7 @@ Creates a separate Doom Emacs process to test performance impact."
      nil nil nil
      "-Q" 
      "--load" benchmark-file
-     "--load" (expand-file-name "init.el" doom-emacs-dir-path))
+     "--load" (expand-file-name "init.el" doom-emacs-dir))
 
     ;; Display the results
     (if (file-exists-p temp-file)
