@@ -1,6 +1,7 @@
 ;;; autoload/cae-benchmark.el -*- lexical-binding: t; -*-
 
-;; FIXME Does not work for benchmarking our config.
+;; FIXME The problem is that by the time this loads, the config has already been
+;; loaded!
 ;;;###autoload
 (defun cae-benchmark-config-modules ()
   "Benchmark loading time of different config modules.
@@ -11,7 +12,6 @@ of loading files defined by *-init-*-enabled-p variables."
          (early-init-file (expand-file-name "early-init.el" doom-emacs-dir))
          (form
           `(progn
-             (message "%s" (bound-and-true-p cae-config-finished-loading))
              ;; Set noninteractive to nil to load full config
              (setq noninteractive nil)
              (setq command-line-args nil
