@@ -132,7 +132,7 @@
 
        :cae
        ;;(lean4 +lsp +tree-sitter)
-       ;;(helm +childframe)
+       (helm +childframe)
        debugger
        eat
        eshell
