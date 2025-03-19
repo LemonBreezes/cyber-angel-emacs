@@ -53,7 +53,8 @@
   (load! "preamble" doom-user-dir))
 
 (doom! :completion
-       (vertico +icons +childframe)
+       ;;(vertico +icons +childframe)
+       (helm +childframe +fuzzy)
        (corfu +orderless +icons +dabbrev)
 
        :ui
@@ -131,7 +132,7 @@
 
        :cae
        ;;(lean4 +lsp +tree-sitter)
-       (helm +childframe)
+       ;;(helm +childframe)
        debugger
        eat
        eshell
