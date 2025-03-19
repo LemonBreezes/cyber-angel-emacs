@@ -41,7 +41,9 @@ Creates a separate Doom Emacs process to test performance impact."
 
              ;; Add our advice to capture the results
              (with-eval-after-load 'doom-start
-               (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture)))))
+               (advice-add 'doom-display-benchmark-h :around #'doom-display-benchmark-h-with-capture))
+
+             (kill-emacs))))
 
     ;; Write the benchmark form to a file
     (with-temp-file benchmark-file
