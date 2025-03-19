@@ -38,8 +38,8 @@ Creates a separate Doom Emacs process to test performance impact."
 
 (kill-emacs)
 " 
-              (prin1-to-string temp-file)
-              (prin1-to-string doom-emacs-dir-path))))
+               (prin1-to-string temp-file)
+               (prin1-to-string doom-emacs-dir-path))))
 
     ;; Run a fresh Emacs process that loads our benchmark file first
     (message "Running benchmark...")
