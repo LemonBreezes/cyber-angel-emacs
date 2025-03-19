@@ -71,7 +71,8 @@ of loading files defined by *-init-*-enabled-p variables."
                                      ;;'doom-load-theme-hook
                                      'doom-first-input-hook
                                      'doom-first-buffer-hook
-                                     'doom-first-file-hook))
+                                     'doom-first-file-hook)
+                     (+log "hello"))
                  (error
                   (require 'pp)
                   (let ((trace (mapconcat #'pp-to-string (backtrace-frames) "")))
