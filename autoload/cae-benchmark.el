@@ -87,8 +87,8 @@ of loading files defined by *-init-*-enabled-p variables."
                 (with-current-buffer messages-buffer-name
                   (widen)
                   (buffer-substring-no-properties (point-min) (point-max)))))
-             (kill-emacs))))
-    (benchmark-file (make-temp-file "doom-benchmark-" nil ".el"))
+             (kill-emacs))
+          (benchmark-file (make-temp-file "doom-benchmark-" nil ".el"))))
 
     ;; Write the benchmark code to a file
     (with-temp-file benchmark-file
