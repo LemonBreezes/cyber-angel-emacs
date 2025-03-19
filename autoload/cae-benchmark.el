@@ -67,12 +67,6 @@ of loading files defined by *-init-*-enabled-p variables."
                      (run-hooks 'doom-first-input-hook)
                      (run-hooks 'doom-first-buffer-hook)
                      (run-hooks 'doom-first-file-hook)
-                     (setq doom-init-ui-hook nil
-                           doom-after-init-hook nil
-                           doom-load-theme-hook nil
-                           doom-first-input-hook nil
-                           doom-first-buffer-hook nil
-                           doom-first-file-hook nil)
 
                      ;; Run all startup hooks to complete initialization
                      (doom-run-all-startup-hooks-h))
