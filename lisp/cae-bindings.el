@@ -300,8 +300,7 @@
   (when (modulep! :tools debugger +lsp)
     (after! dap-ui
       (map! :map dap-ui-repl-mode-map
-            "M-r" #'consult-history)))
-  )
+            "M-r" #'consult-history))))
 
 
 ;;; Leader keybindings
