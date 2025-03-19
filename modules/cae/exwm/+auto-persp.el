@@ -153,8 +153,6 @@ Returns non-nil if a dedicated workspace should be created.
 Optional STATE is passed from persp-mode."
   (let* ((class-name (buffer-local-value 'exwm-class-name buffer))
          (workspace-name (cae-exwm-get-workspace-name buffer))
-         ;; Special case for Discord
-         (is-discord (and class-name (string= (downcase class-name) "discord")))
          (is-floating (and exwm--floating-frame
                            (gethash class-name cae-exwm--floating-apps-set)))
          (result (and (stringp workspace-name)
