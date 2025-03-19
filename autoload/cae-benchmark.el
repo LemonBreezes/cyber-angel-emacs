@@ -111,4 +111,4 @@ of loading files defined by *-init-*-enabled-p variables."
     (when (file-exists-p temp-file)
       (ignore-errors (delete-file temp-file)))
     (when (file-exists-p benchmark-file)
-      (ignore-errors (delete-file benchmark-file)))))
+      (ignore-errors (delete-file benchmark-file))))))
