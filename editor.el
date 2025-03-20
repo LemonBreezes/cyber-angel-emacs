@@ -257,7 +257,7 @@
 (use-package! parrot
   :defer t :init
   ;; Wrangle parrot into being fully lazy-loaded.
-  (when nil                             ; Currently disabled.
+  (when t
     (autoload #'parrot-party-while-process "parrot")
     (autoload #'parrot--todo-party "parrot")
     (autoload #'parrot--magit-push-filter "parrot")
@@ -267,8 +267,6 @@
         (parrot-party-while-process proc)))
     (add-hook 'org-after-todo-state-change-hook #'parrot--todo-party)
     (cae-advice-add 'magit-run-git-async :around #'parrot--magit-push-filter))
-  (after! parrot-rotate
-    (setq parrot-rotate-animate-after-rotation nil))
   :config
   (setq parrot-num-rotations 3
         parrot-animate-on-load nil
