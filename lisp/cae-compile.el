@@ -24,10 +24,7 @@
                    (concat "/" (file-name-nondirectory custom-file)))))
 
   (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*")
-  (add-to-list 'compile-angel-excluded-files-regexps "/etc/emacs/.*")
-
-  ;; Exclude my site-start file. Gentoo uses it to load site packages.
-  (add-to-list 'compile-angel-excluded-files "/site-start.el"))
+  (add-to-list 'compile-angel-excluded-files-regexps "/etc/emacs/.*"))
 
 (defun cae-ensure-emacs-dir-writable ()
   "Check if /usr/share/emacs is writable and attempt to make it writable if not."
