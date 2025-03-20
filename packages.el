@@ -94,6 +94,7 @@
 ;;; Tools
 (package! nov :recipe (:host github :repo "emacsmirror/nov"))
 (package! w3m)
+(package! eww-plz)
 (package! pdftotext :recipe (:host github :repo "tecosaur/pdftotext.el"))
 (when (modulep! :email mu4e)
   (package! consult-mu :recipe
