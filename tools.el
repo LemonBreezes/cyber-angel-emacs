@@ -14,6 +14,9 @@
   (defun cae-envrc-file-mode-setup ()
     (add-hook 'after-save-hook 'envrc-allow nil t)))
 
+(use-package! eww-plz
+  :defer t :after eww)
+
 ;; I use `w3m' because EWW is too slow.
 (use-package! w3m
   :defer t :init
