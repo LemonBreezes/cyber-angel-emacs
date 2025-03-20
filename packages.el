@@ -153,6 +153,7 @@
 (package! scrollkeeper)
 
 ;; cae-bindings.el
+(package! ace-window)
 (package! vline)
 (package! try)
 (package! ov)
