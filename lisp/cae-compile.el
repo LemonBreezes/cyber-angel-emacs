@@ -23,12 +23,8 @@
       (add-to-list 'compile-angel-excluded-files
                    (concat "/" (file-name-nondirectory custom-file)))))
 
-  ;; Exclude Unicode data files that don't need compilation
-  (add-to-list 'compile-angel-excluded-files-regexps "/leim/.*")
-  (add-to-list 'compile-angel-excluded-files-regexps "/international/.*")
-
-  ;; Exclude Doom's generated init file
-  (add-to-list 'compile-angel-excluded-files-regexps "/@/.*")
+  (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*")
+  (add-to-list 'compile-angel-excluded-files-regexps "/etc/emacs/.*")
 
   ;; Exclude my site-start file. Gentoo uses it to load site packages.
   (add-to-list 'compile-angel-excluded-files "/site-start.el"))
