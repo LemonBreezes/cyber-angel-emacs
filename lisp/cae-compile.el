@@ -51,8 +51,9 @@
   ;; We already native compile packages asynchronously on load.
   (setq compile-angel-enable-native-compile nil)
 
-  ;;(setq compile-angel-debug t)
-  ;;(setq compile-angel-verbose t)
+  (setq compile-angel-debug t)
+  (setq compile-angel-verbose t)
+  (setq compile-angel-track-file-index-stats t)
 
   (cae-ensure-emacs-dir-writable)
 
