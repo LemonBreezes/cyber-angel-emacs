@@ -5,9 +5,7 @@
 
 (package! gptel)
 (package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
-(package! magit-gptcommit :recipe
-  (:host github :repo "rogsme/magit-gptcommit"
-   :branch "abort-gptcommit-if-buffer-gets-killed"))
+(package! magit-gptcommit)
 (package! chatgpt-shell)
 (package! dall-e-shell)
 (when (modulep! +copilot)
