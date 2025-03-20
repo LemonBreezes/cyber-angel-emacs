@@ -28,8 +28,8 @@
   (package! lispy :recipe (:host github :repo "enzuru/lispy")))
 (when (modulep! :completion vertico)
   (package! embark :recipe
-    (:host github :repo "LemonBreezes/embark")
-    :branch "work-around-browse-url-interactive-arg"))
+    (:host github :repo "LemonBreezes/embark"
+     :branch "work-around-browse-url-interactive-arg")))
 
 (package! mu4e :built-in t)
 
