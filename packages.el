@@ -26,6 +26,8 @@
     :pin "4d30406efc7c945069c217a051114cc4ad3e7d5a"))
 (when (modulep! :editor lispy)
   (package! lispy :recipe (:host github :repo "enzuru/lispy")))
+(when (modulep! :completion vertico)
+  (package! embark :recipe (:host github :repo "LemonBreezes/embark")))
 
 (package! mu4e :built-in t)
 
