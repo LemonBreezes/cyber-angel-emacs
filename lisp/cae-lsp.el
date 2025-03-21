@@ -114,6 +114,7 @@
   (cae-advice-add #'eglot-ensure :before-until #'cae-eglot-ensure-no-home-or-root-directory)
 
   (use-package! breadcrumb
+    :disabled t
     :defer t :init
     (add-hook 'prog-mode-hook #'breadcrumb-mode)
     (add-hook 'conf-mode-hook #'breadcrumb-mode)
