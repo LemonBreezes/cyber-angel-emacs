@@ -58,13 +58,6 @@
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
 
-  ;; Do not allow LSP to run in the HOME directory. This is because of
-  ;; performance and also because sometimes I accidentally blacklist the home
-  ;; directory this way and this breaks LSP.
-  (cae-defadvice! cae-lsp-disable-in-home-dir-a (&optional _)
-    :before-until #'lsp!
-    (string= (lsp--suggest-project-root) "~/"))
-
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
   ;; and https://github.com/blahgeek/emacs-lsp-booster. They are meant to
