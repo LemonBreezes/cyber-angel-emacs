@@ -39,7 +39,8 @@ Otherwise, open Claude for the current project."
 
   (if create-sandbox
       (let* ((sandbox-root "~/src/claude-sandbox")
-             (task-description (read-string "Enter task description: ")))
+             (task-description (read-string "Enter task description: "
+                                            nil 'cae-claude--task-history)))
 
         ;; Ensure sandbox root directory exists
         (unless (file-exists-p (expand-file-name sandbox-root))
