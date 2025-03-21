@@ -28,7 +28,7 @@
                    emacs-dir sudo-cmd))))))
 
 ;;;###autoload
-(defun cae-load-all-deferred-packages ()
+(defun cae-compile-load-all-deferred-packages ()
   "Load all deferred packages."
   (interactive)
   (dolist (package (cl-nunion doom-incremental-packages
