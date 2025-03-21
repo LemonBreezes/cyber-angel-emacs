@@ -41,3 +41,9 @@
   ;; Set up exclusions
   (cae-setup-compile-angel-exclusions)
   (compile-angel-on-load-mode +1))
+
+;; Ensure local elisp packages are up-to-date.
+;; Do not do this when we check out Emacs from Git.
+(unless emacs-repository-version
+  (add-hook! 'emacs-lisp-mode-hook
+    (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
