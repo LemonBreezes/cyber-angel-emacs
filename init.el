@@ -131,7 +131,7 @@
        irc
 
        :cae
-       ;;(lean4 +lsp +tree-sitter)
+       (lean4 +lsp +tree-sitter)
        (helm +childframe)
        debugger
        eat
