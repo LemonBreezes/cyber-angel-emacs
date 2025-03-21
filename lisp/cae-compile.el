@@ -26,8 +26,8 @@
   (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*"))
 
 (defun cae-ensure-emacs-dir-writable ()
-  "Check if /usr/share/emacs is writable and attempt to make it writable if not."
-  (let ((emacs-dir "/usr/share/emacs"))
+  "Check if Emacs directories are writable and attempt to make them writable if not."
+  (dolist (emacs-dir '("/usr/share/emacs" "/etc/emacs"))
     (when (and (file-exists-p emacs-dir)
                (not (file-writable-p emacs-dir)))
       (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
