@@ -169,3 +169,4 @@
 
 ;;; Term
 (package! comint-histories)
+(package! tmux-mode)
