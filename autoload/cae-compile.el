@@ -13,3 +13,15 @@
                                            nil
                                            "flycheck_.*"))
       (straight-rebuild-package package))))
+
+;;;###autoload
+(defun cae-ensure-emacs-dir-writable ()
+  "Check if Emacs directories are writable and attempt to make them writable if not."
+  (dolist (emacs-dir '("/usr/share/emacs" "/etc/emacs"))
+    (when (and (file-exists-p emacs-dir)
+               (not (file-writable-p emacs-dir)))
+      (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
+        (unless (zerop (shell-command sudo-cmd))
+          (message "Warning: %s is not writable. Byte compilation may fail." emacs-dir)
+          (message "Failed to make %s writable. You may need to run: %s"
+                   emacs-dir sudo-cmd))))))
