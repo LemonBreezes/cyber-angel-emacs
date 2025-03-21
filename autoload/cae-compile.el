@@ -22,6 +22,15 @@
                (not (file-writable-p emacs-dir)))
       (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
         (unless (zerop (shell-command sudo-cmd))
-          (message "Warning: %s is not writable. Byte compilation may fail." emacs-dir)
+          (message "Warning: %s is not writable. Byte compilation may fail."
+                   emacs-dir)
           (message "Failed to make %s writable. You may need to run: %s"
                    emacs-dir sudo-cmd))))))
+
+;;;###autoload
+(defun cae-load-all-deferred-packages ()
+  "Load all deferred packages."
+  (interactive)
+  (dolist (package (cl-nunion doom-incremental-packages
+                              (flatten-list doom--deferred-packages-alist)))
+    (require package nil t)))
