@@ -12,12 +12,6 @@
   (add-hook 'doom-first-file-hook #'vimish-fold-global-mode)
   (setq vimish-fold-indication-mode 'right-fringe))
 
-;; Ensure local elisp packages are up-to-date.
-;; Do not do this when we check out Emacs from Git.
-(unless emacs-repository-version
-  (add-hook! 'emacs-lisp-mode-hook
-    (add-hook 'after-save-hook #'cae-compile-rebuild-package nil t)))
-
 ;; Enable all disabled commands.
 (setq disabled-command-function nil)
 
