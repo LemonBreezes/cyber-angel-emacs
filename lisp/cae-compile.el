@@ -23,8 +23,7 @@
       (add-to-list 'compile-angel-excluded-files
                    (concat "/" (file-name-nondirectory custom-file)))))
 
-  (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*")
-  (add-to-list 'compile-angel-excluded-files-regexps "/etc/emacs/.*"))
+  (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*"))
 
 (defun cae-ensure-emacs-dir-writable ()
   "Check if /usr/share/emacs is writable and attempt to make it writable if not."
