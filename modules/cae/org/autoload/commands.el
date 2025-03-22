@@ -47,9 +47,10 @@
                                      (insert s)
                                      (funcall source-mode)
                                      (indent-region (point-min) (point-max))
-                                     (buffer-substring-no-properties (point-min) (point-max))))))
+                                     (buffer-substring-no-properties (point-min) (point-max)))))
+                        (org-escape-code-in-string))
            (format "\n#+end_src\n"))))
-    (insert (org-escape-code-in-string paste))))
+    (insert paste)))
 
 ;;;###autoload
 (defun cae-org-insert-checkbox-or-bracket (arg)
