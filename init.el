@@ -5,7 +5,7 @@
 (defconst cae-multi-local-dir (concat cae-multi-secrets-dir "shared-local/"))
 (defconst cae-multi-data-dir (concat cae-multi-local-dir "etc/"))
 (defconst cae-multi-cache-dir (concat cae-multi-local-dir "cache/"))
-(defconst cae-multi-org-dir (concat cae-multi-local-dir "org/"))
+(defconst cae-multi-org-dir "~/org")
 (defconst cae-multi-secrets-modules-dir (concat cae-multi-secrets-dir "modules/"))
 (defconst cae-repo-dir (expand-file-name "~/src/"))
 (make-directory cae-multi-local-dir t)
