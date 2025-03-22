@@ -1,6 +1,6 @@
 ;;; cae/eshell/doctor.el -*- lexical-binding: t; -*-
 
-(unless (executable-find "node")
+(unless (executable-find "atuin")
   (warn! (concat "Couldn't find atuin executable. "
                  "Atuin will not be used for shell history.")))
 (unless (executable-find "dtach")
