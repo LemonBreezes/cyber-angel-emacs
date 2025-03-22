@@ -281,7 +281,7 @@
   :config
   (setq key-chord-two-keys-delay 0.2)
   (setq key-chord-typing-speed-threshold 0.15)
-  (setq key-chord-one-key-min-delay 0.05)
+  (setq key-chord-one-key-min-delay 0.06)
   (setq key-chord-typing-reset-delay 0.45)
   (setq key-chord-typing-detection t)
   (setq key-chord-in-macros nil)
