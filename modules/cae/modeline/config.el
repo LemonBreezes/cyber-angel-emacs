@@ -188,8 +188,7 @@
   (setq minions-prominent-modes `(defining-kbd-macro
                                    ;;projectile-mode
                                    ,@(unless (modulep! :ui modeline)
-                                       flycheck-mode
-                                       flymake-mode)
+                                       '(flycheck-mode flymake-mode))
                                    ;;persp-mode
                                    eat-eshell-mode
                                    envrc-mode
