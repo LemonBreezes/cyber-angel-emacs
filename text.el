@@ -21,7 +21,7 @@
         org-special-ctrl-k t
         org-highlight-latex-and-related nil
         org-priority-highest ?A
-        org-priority-lowest ?E
+        org-priority-lowest ?C
         ;; All my computers use 64-bit processors
         org-read-date-force-compatible-dates nil)
   (when (modulep! :lang org +roam2)
