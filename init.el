@@ -113,6 +113,7 @@
        (lua +lsp +tree-sitter +fennel)
        (data +lsp +tree-sitter)
        (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+       (javascript +lsp +tree-sitter)
        (json +lsp +tree-sitter)
        (python +lsp +tree-sitter +pyright +cython)
        (haskell +lsp +tree-sitter)
