@@ -34,16 +34,6 @@ of ELEMENT."
     (setenv "PATH" (concat (getenv "PATH") ":" dir))
     (setq exec-path (append exec-path (list dir)))))
 
-(defun cae-add-cpus-to-modeline ()
-  "Show the number of CPUs on the system in `global-mode-string`."
-  (let* ((n-cpus (num-processors))
-         (cpu-string (format "%d" n-cpus)))
-    (unless (or (equal global-mode-string (list cpu-string))
-                     (member cpu-string global-mode-string))
-      (if (and global-mode-string (listp global-mode-string))
-	  (appendq! global-mode-string (list cpu-string))
-	(setq global-mode-string (list cpu-string))))))
-
 (when (string-equal system-type "android")
   (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
 
@@ -62,8 +52,6 @@ of ELEMENT."
 (when (boundp 'safe-local-variable-directories)
   (dolist (dir (list doom-user-dir doom-emacs-dir "~/org" (getenv "HOME")))
     (add-to-list 'safe-local-variable-directories dir)))
-
-(cae-add-cpus-to-modeline)
 
 ;; Do not start incrementally loading packages until I am actually AFK.
 (setq doom-incremental-first-idle-timer 60)
