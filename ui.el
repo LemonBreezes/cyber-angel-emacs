@@ -74,9 +74,9 @@
         doom-modeline-support-imenu t
         doom-modeline-mu4e t
         doom-modeline-gnus t
-        doom-modeline-github t
-        doom-modeline-major-mode-icon nil
-        doom-modeline-minor-modes nil))
+        doom-modeline-github nil
+        doom-modeline-major-mode-icon t
+        doom-modeline-minor-modes t))
 
 (after! embark
   (setq embark-confirm-act-all nil))
