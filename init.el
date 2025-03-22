@@ -67,6 +67,7 @@
        (window-select +numbers)
        ophints
        (treemacs +lsp)
+       modeline
 
        :editor
        file-templates
