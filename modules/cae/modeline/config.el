@@ -213,8 +213,10 @@
                                         #'compilation-goto-in-progress-buffer)))))))
 
 (unless (modulep! :ui modeline)
-  (defalias 'cae-modeline-truncate-string (doom-rpartial #'truncate-string-to-width 30 nil nil t))
-  (cae-advice-add #'vc-git-mode-line-string :filter-return #'cae-modeline-truncate-string))
+  (defalias 'cae-modeline-truncate-string
+    (doom-rpartial #'truncate-string-to-width 30 nil nil t))
+  (cae-advice-add #'vc-git-mode-line-string
+                  :filter-return #'cae-modeline-truncate-string))
 
 (add-hook 'doom-first-file-hook #'column-number-mode)
 
