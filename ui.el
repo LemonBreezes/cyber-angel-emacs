@@ -75,7 +75,7 @@
         doom-modeline-mu4e t
         doom-modeline-gnus t
         doom-modeline-github nil
-        doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-icon (cae-display-graphic-p)
         doom-modeline-minor-modes t))
 
 (after! embark
