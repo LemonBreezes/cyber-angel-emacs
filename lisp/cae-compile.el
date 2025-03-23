@@ -23,6 +23,9 @@
       (add-to-list 'compile-angel-excluded-files
                    (concat "/" (file-name-nondirectory custom-file)))))
 
+  ;; /home/st/.config/emacs/.local/straight/build-31.0.50/aio/aio.el: Error Type aio-select missing from typeof-types!
+  (add-to-list 'compile-angel-excluded-files "/aio/aio.el")
+
   (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*"))
 
 (use-package! compile-angel
