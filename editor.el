@@ -368,12 +368,13 @@
   (autoload 'auto-sudoedit "auto-sudoedit")
   (defun cae-auto-sudoedit-lazy-h ()
     "When visiting a file that isn’t writable, load auto-sudoedit and run it."
-    (let ((path (or buffer-file-name list-buffers-directory)))
-      (when (and path (not (file-writable-p path)))
-        (auto-sudoedit))))
+    (unless (featurep 'auto-sudoedit)
+      (let ((path (or buffer-file-name list-buffers-directory)))
+        (when (and path (not (file-writable-p path)))
+          (auto-sudoedit))))
+    (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
+    (remove-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h))
   (add-hook 'find-file-hook #'cae-auto-sudoedit-lazy-h)
   (add-hook 'dired-mode-hook  #'cae-auto-sudoedit-lazy-h)
   :config
-  (remove-hook 'find-file-hook #'cae-auto-sudoedit-maybe-h)
-  (remove-hook 'dired-mode-hook #'cae-auto-sudoedit-maybe-h)
   (auto-sudoedit-mode +1))
