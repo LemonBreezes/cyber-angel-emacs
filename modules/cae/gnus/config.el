@@ -6,8 +6,10 @@
 
 (when (modulep! :editor evil)
   (after! evil-snipe
-    (dolist (mode '(gnus-group-mode gnus-summary-mode gnus-article-mode gnus-server-mode))
-      (cl-pushnew mode evil-snipe-disabled-modes))))
+    (add-to-list 'evil-snipe-disabled-modes 'gnus-group-mode)
+    (add-to-list 'evil-snipe-disabled-modes 'gnus-summary-mode)
+    (add-to-list 'evil-snipe-disabled-modes 'gnus-article-mode)
+    (add-to-list 'evil-snipe-disabled-modes 'gnus-server-mode)))
 (use-package! gnus
   :defer t :config
   (gnus-registry-initialize)
