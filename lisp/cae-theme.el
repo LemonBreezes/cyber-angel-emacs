@@ -11,11 +11,13 @@
 (defvar cae-theme-disable-outline-headings t)
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
-(defvar cae-modus-night-theme (if (cae-display-graphic-p)
-                                  'modus-vivendi-tinted
-                                ;; A little bit more legible in the Windows
-                                ;; Terminal by default.
-                                'modus-vivendi-tritanopia))
+(defvar cae-modus-night-theme (cond ((cae-display-graphic-p)
+                                     'modus-vivendi-tinted)
+                                    ;; A little bit more legible in the Windows
+                                    ;; Terminal by default.
+                                    ((cae-running-in-ssh-p)
+                                     'ef-melissa-dark)
+                                    (t 'modus-vivendi-tritanopia)))
 (defvar cae-ef-day-theme 'ef-trio-light)
 (defvar cae-ef-night-theme 'ef-trio-dark)
 
