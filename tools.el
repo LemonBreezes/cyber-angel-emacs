@@ -100,7 +100,7 @@
       yank-pop-change-selection t
       ;;global-mark-ring-max 1024
       history-delete-duplicates t
-      history-length 200
+      ;;history-length t
       ;;mark-ring-max 1024
       ;;message-log-max t
       ;;kill-ring-max 1024
