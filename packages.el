@@ -18,6 +18,7 @@
 (package! eldoc :built-in t)
 (package! which-key :built-in t)
 (package! track-changes :built-in t)
+(package! seq :built-in t)
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
