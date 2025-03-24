@@ -97,6 +97,23 @@
 
 (dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
 
+(defun cae-fix-seq-empty-p-eval (fn &rest args)
+  "Fix for `seq-empty-p' when called with an `(eval)` form.
+This advice wraps around `seq-empty-p` to handle the case where it's
+called with an unevaluated `(eval)` form, which can happen during
+directory local variable processing."
+  (condition-case nil
+      (apply fn args)
+    (cl-no-applicable-method
+     (let ((arg (car args)))
+       (if (and (listp arg) (eq (car-safe arg) 'eval))
+           ;; When given an (eval) form, evaluate it first
+           (apply fn (list (eval (cadr arg) t)))
+         ;; Re-signal the original error for other cases
+         (signal 'cl-no-applicable-method (list 'seq-empty-p arg)))))))
+
+(advice-add 'seq-empty-p :around #'cae-fix-seq-empty-p-eval)
+
 
 ;;Local Variables:
 ;;eval: (cae-reload-all-dir-locals)
