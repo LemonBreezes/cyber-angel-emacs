@@ -100,10 +100,10 @@
       yank-pop-change-selection t
       ;;global-mark-ring-max 1024
       history-delete-duplicates t
-      ;;history-length t
+      history-length 256
       ;;mark-ring-max 1024
       ;;message-log-max t
-      ;;kill-ring-max 1024
+      kill-ring-max 256
       kill-whole-line t
       list-matching-lines-jump-to-current-line t
       mouse-prefer-closest-glyph t
