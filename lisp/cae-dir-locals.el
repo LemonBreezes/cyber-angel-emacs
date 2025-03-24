@@ -68,7 +68,7 @@
 
 (dir-locals-set-class-variables
  'doom
- '((nil . ((eval . (progn (cae--setup-doom-dir-locals)))))
+ '((nil . ((eval . (cae--setup-doom-dir-locals))))
    (magit-status-mode . ((magit-todos-exclude-globs . (".git/" "shared-local/"))))))
 
 (dir-locals-set-directory-class doom-user-dir 'doom)
@@ -80,20 +80,20 @@
 
 (dir-locals-set-class-variables
  'home
- '((nil . ((eval . (progn (cae--setup-home-dir-locals)))))))
+ '((nil . ((eval . (cae--setup-home-dir-locals))))))
 
 (when (eq system-type 'gnu/linux)
   (dir-locals-set-directory-class (getenv "HOME") 'home))
 
 (dir-locals-set-class-variables
  'org
- '((nil . ((eval . (progn (cae--setup-org-dir-locals)))))))
+ '((nil . ((eval . (cae--setup-org-dir-locals))))))
 
 (dir-locals-set-directory-class (expand-file-name cae-multi-org-dir) 'org)
 
 (dir-locals-set-class-variables
  'secrets
- '((nil . ((eval . (progn (cae--setup-secrets-dir-locals)))))))
+ '((nil . ((eval . (cae--setup-secrets-dir-locals))))))
 
 (dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
 
