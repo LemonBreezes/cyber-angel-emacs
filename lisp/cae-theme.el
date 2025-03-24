@@ -2,10 +2,18 @@
 
 (require 'cae-lib)
 
+(defun cae-running-in-ssh-p ()
+  "Return non-nil if Emacs is running within an SSH session."
+  (or (getenv "SSH_CLIENT")
+      (getenv "SSH_TTY")
+      (getenv "SSH_CONNECTION")))
+
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
-(defvar cae-theme-export-theme-with-pywal (not (eq (cae-terminal-type) 0)))
-(defvar cae-theme-enable-day-night-theme-switching (not (eq (cae-terminal-type) 0)))
+(defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
+                                              (not (cae-running-in-ssh-p))))
+(defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
+                                                       (not (cae-running-in-ssh-p))))
 (defvar cae-theme-disable-outline-headings t)
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
@@ -19,7 +27,10 @@
 
 (defvar cae-day-theme cae-modus-day-theme)
 (defvar cae-night-theme cae-modus-night-theme)
-(setq doom-theme (unless (eq (cae-terminal-type) 0) cae-night-theme))
+(setq doom-theme (cond
+                  ((cae-running-in-ssh-p) 'modus-vivendi)
+                  ((eq (cae-terminal-type) 0) nil)
+                  (t cae-night-theme)))
 
 (when cae-theme-enable-modeline-bell
   (defface cae-modeline-bell-face
