@@ -26,7 +26,7 @@
       "s-E" #'cae-exwm-open-nested-vanilla-emacs
       "s-D" #'cae-exwm-open-nested-vanilla-doom-emacs
       "s-r" #'cae-exwm-toggle-redshift
-      "s-l" #'cae-exwm-lock-screen
+      "s-X" #'cae-exwm-lock-screen
       "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
       "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
