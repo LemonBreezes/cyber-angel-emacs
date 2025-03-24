@@ -11,7 +11,7 @@
         cae-multi-secrets-dir
         (getenv "HOME")))
 
-(defvar cae-multi-enable-auto-pull nil)
+(defvar cae-multi-enable-auto-pull t)
 
 ;;; Abbrev Variables
 
