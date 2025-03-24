@@ -11,9 +11,9 @@
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
-                                              (not (cae-running-in-ssh-p))))
+                                               (not (cae-running-in-ssh-p))))
 (defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
-                                                       (not (cae-running-in-ssh-p))))
+                                                        (not (cae-running-in-ssh-p))))
 (defvar cae-theme-disable-outline-headings t)
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
