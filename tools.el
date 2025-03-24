@@ -120,9 +120,6 @@
 (after! cus-edit
   (setq custom-buffer-done-kill t))
 
-(after! saveplace
-  (setq save-place-limit nil))
-
 (after! grep
   (setq grep-use-headings t
         grep-program "rg"))
