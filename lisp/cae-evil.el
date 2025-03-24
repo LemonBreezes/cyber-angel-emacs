@@ -287,7 +287,7 @@
   (setq key-chord-in-macros nil)
   (autoload 'evil-escape "evil-escape" nil t)
   (key-chord-define-global "jk" #'evil-escape)
-  (key-chord-define-global "hh" #'avy-goto-char)
+  (key-chord-define-global "hh" #'avy-goto-char-timer)
   (key-chord-define-global "jj" #'evilem-motion-next-line)
   (key-chord-define-global "kk" #'evilem-motion-previous-line)
   (after! transient
