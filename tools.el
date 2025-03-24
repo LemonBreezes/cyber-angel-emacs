@@ -103,7 +103,7 @@
       history-length 256
       ;;mark-ring-max 1024
       ;;message-log-max t
-      kill-ring-max 256
+      kill-ring-max 128
       kill-whole-line t
       list-matching-lines-jump-to-current-line t
       mouse-prefer-closest-glyph t
