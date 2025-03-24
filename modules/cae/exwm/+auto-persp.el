@@ -82,6 +82,9 @@ name of the workspace that will be created for that application.")
 (defvar cae-exwm-auto-persp-debug nil
   "When non-nil, enable debugging output for EXWM auto-persp functionality.")
 
+(defvar cae-exwm-enabled-p nil
+  "When non-nil, enable EXWM auto-persp functionality.")
+
 ;;; Caching variables
 
 ;; Pre-allocate hash tables with appropriate sizes
@@ -447,8 +450,8 @@ Optional STATE is passed from persp-mode."
     (setq cae-exwm--auto-persp-initialized t)))
 
 ;; Initialize if not already loaded
-(unless (featurep 'cae-exwm-auto-persp)
-  (cae-exwm-setup-auto-persp))
+(unless cae-exwm-enabled-p
+  (cae-exwm-setup-auto-persp)
+  (setq cae-exwm-enabled-p t))
 
-(provide 'cae-exwm-auto-persp)
 ;;; cae/exwm/+auto-persp.el ends here
