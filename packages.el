@@ -13,6 +13,7 @@
 (package! which-key :built-in t)
 (package! track-changes :built-in t)
 (package! seq :built-in t)
+(package! mu4e :built-in t)
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
@@ -26,8 +27,6 @@
   (package! embark :recipe
     (:host github :repo "LemonBreezes/embark"
      :branch "work-around-browse-url-interactive-arg")))
-
-(package! mu4e :built-in t)
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
