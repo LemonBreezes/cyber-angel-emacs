@@ -2,12 +2,6 @@
 
 (require 'cae-lib)
 
-(defun cae-running-in-ssh-p ()
-  "Return non-nil if Emacs is running within an SSH session."
-  (or (getenv "SSH_CLIENT")
-      (getenv "SSH_TTY")
-      (getenv "SSH_CONNECTION")))
-
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
