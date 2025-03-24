@@ -113,7 +113,7 @@
        "<f5>" #'gptel-menu
        "<f7>" #'gptel-rewrite
        "<f6>" #'aidermacs-transient-menu
-       "<f12>" #'elysium-query)
+       "<f12>" #'redraw-display)
       "C-<f1>" #'try
       (:map process-menu-mode-map
        "o" #'link-hint-open-link)
