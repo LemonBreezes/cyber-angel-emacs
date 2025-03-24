@@ -74,11 +74,6 @@
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
 
-(defun cae-hacks-post-doom-modules-h ()
-  ;; BUG Use this until Dirvish is bumped in Doom Emacs
-  (advice-remove #'dired-find-file :override #'dirvish-find-entry-a)
-  (advice-add #'dired--find-file :override #'dirvish--find-entry))
-
 (if (bound-and-true-p cae-config-finished-loading)
     (cae-hacks-post-doom-modules-h)
   (add-hook 'doom-after-init-hook #'cae-hacks-post-doom-modules-h))
