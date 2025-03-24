@@ -7,13 +7,7 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert)
-(unpin! consult) ; (void-function consult--process-collection) in consult-gh
-(unpin! helpful) ; Keep it up-to-date for bug fixes.
-(unpin! :lang :tools :emacs :email :input :term :ui :editor)
-(unpin! :completion corfu)
-(unpin! :checkers)
-(unpin! smartparens)
-(unpin! projectile)
+(unpin! t)
 ;; Not using the built-in package verisons can cause errors.
 (package! eldoc :built-in t)
 (package! which-key :built-in t)
