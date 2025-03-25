@@ -117,10 +117,7 @@
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
-  (setq dirvish-use-header-line nil))
+  (setq dirvish-use-header-line nil)
 
-;;(map! [remap dired-jump] #'cae-dired-jump) ; I prefer manually activating the
-                                        ;fullscreen layout.
-;;(cae-advice-add #'find-file :around #'cae-dired-find-file-a)
-;;(cae-advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
-;;(cae-advice-add #'consult--jump :around #'cae-dired-consult-jump-a)
+  (map! :map dirvish-mode-map
+        "<backtab>" #'dirvish-subtree-clear))
