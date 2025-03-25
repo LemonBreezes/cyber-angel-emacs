@@ -49,13 +49,14 @@
              ;; This assumes you are running `dunst' as a systemd service.
              (start-process "kill dunst" nil "killall" "dunst"))))))))
 
+
+(when (autoloadp (symbol-function #'+org-get-todo-keywords-for))
+  (autoload-do-load (symbol-function #'+org-get-todo-keywords-for)))
+
 ;;;###autoload
 (defun cae-theme-refresh-latex-images-previews-h ()
   (dolist (buffer (doom-buffers-in-mode 'org-mode (buffer-list)))
-    (autoload-do-load #'+org-get-todo-keywords-for)
     (with-current-buffer buffer
-      (when (autoloadp (symbol-function #'+org-get-todo-keywords-for))
-        (autoload-do-load (symbol-function #'+org-get-todo-keywords-for)))
       (+org--toggle-inline-images-in-subtree (point-min) (point-max) 'refresh)
       (unless (eq org-preview-latex-default-process 'dvisvgm)
         (org-clear-latex-preview (point-min) (point-max))
