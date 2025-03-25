@@ -120,7 +120,7 @@
   (setq dirvish-use-header-line nil)
 
   (map! :map dirvish-mode-map
-        "<backtab>" #'dirvish-subtree-clear))
+        "<backtab>" #'cae-dirvish-subtree-clear))
 
 ;;(map! [remap dired-jump] #'cae-dired-jump) ; I prefer manually activating the
                                         ;fullscreen layout.
