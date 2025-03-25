@@ -31,6 +31,10 @@
   (package! evil-easymotion :recipe
     (:host github :repo "LemonBreezes/evil-easymotion"
      :branch "avoid-infinite-loops-in-overlays")))
+(when (modulep! :ui treemacs +lsp)
+  (package! lsp-treemacs :recipe
+    (:host github :repo "LemonBreezes/lsp-treemacs"
+     :branch "fix-corrupted-dom-state")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
