@@ -121,3 +121,9 @@
 
   (map! :map dirvish-mode-map
         "<backtab>" #'dirvish-subtree-clear))
+
+;;(map! [remap dired-jump] #'cae-dired-jump) ; I prefer manually activating the
+                                        ;fullscreen layout.
+;;(cae-advice-add #'find-file :around #'cae-dired-find-file-a)
+;;(cae-advice-add #'find-file-other-window :around #'cae-dired-find-file-other-window-a)
+;;(cae-advice-add #'consult--jump :around #'cae-dired-consult-jump-a)
