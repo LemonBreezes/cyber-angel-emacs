@@ -34,3 +34,37 @@
   (dolist (package (cl-nunion doom-incremental-packages
                               (flatten-list doom--deferred-packages-alist)))
     (require package nil t)))
+
+;;;###autoload
+(defun cae-compile-load-all-packages ()
+  "Load all packages by finding .el files in the load path and requiring them.
+This attempts to load every Elisp file found in the load path directories."
+  (interactive)
+  (let ((loaded-count 0)
+        (error-count 0)
+        (load-path-copy load-path)
+        (already-tried (make-hash-table :test 'equal)))
+    (dolist (dir load-path-copy)
+      (when (and dir (file-exists-p dir) (file-directory-p dir))
+        (dolist (file (directory-files dir t "\\.el$"))
+          (let* ((filename (file-name-nondirectory file))
+                 ;; Skip backup files, autoload files, etc.
+                 (skip-file (or (string-match-p "^\\." filename)
+                                (string-match-p "-autoloads\\.el$" filename)
+                                (string-match-p "-pkg\\.el$" filename)
+                                (string-match-p "^flycheck_" filename)))
+                 (feature (unless skip-file
+                            (intern (file-name-sans-extension filename)))))
+            (when (and feature
+                       (not (gethash feature already-tried))
+                       (not (featurep feature)))
+              (puthash feature t already-tried)
+              (condition-case err
+                  (progn
+                    (require feature nil t)
+                    (when (featurep feature)
+                      (cl-incf loaded-count)))
+                (error
+                 (cl-incf error-count)
+                 (message "Error loading %s: %s" feature (error-message-string err)))))))))
+    (message "Loaded %d packages with %d errors" loaded-count error-count)))
