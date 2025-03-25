@@ -28,7 +28,7 @@
     (:host github :repo "LemonBreezes/embark"
      :branch "work-around-browse-url-interactive-arg")))
 (when (modulep! :editor evil)
-  (package! evil-easymotion:recipe
+  (package! evil-easymotion :recipe
     (:host github :repo "LemonBreezes/evil-easymotion"
      :branch "avoid-infinite-loops-in-overlays")))
 
