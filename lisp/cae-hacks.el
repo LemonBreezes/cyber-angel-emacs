@@ -82,6 +82,3 @@
 ;; Allow killing buffers that are visible in multiple persps
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
-
-(with-eval-after-load 'straight
-  (add-to-list 'straight-built-in-pseudo-packages 'seq))
