@@ -14,6 +14,10 @@
         ,@(when (file-exists-p "~/src/haskell/") '(("~/src/haskell" . 1)))
         ,@(when (file-exists-p "~/Documents/") '(("~/Documents/" . 1)))))
 
+;; I have a good `.gitignore' file in ~/ so it is safe to remove ~/ from the
+;; list.
+(setq projectile-ignored-projects nil)
+
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
 
