@@ -48,16 +48,18 @@ Results are displayed in a dedicated log buffer."
         (log-buffer (get-buffer-create "*Package Loading Log*")))
     ;; Set up the log buffer
     (with-current-buffer log-buffer
-      (erase-buffer)
-      (special-mode) ; Make it read-only with convenient navigation
-      (insert "Package Loading Log\n")
-      (insert "==================\n\n")
-      (insert "Loading packages from load-path...\n\n"))
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (insert "Package Loading Log\n")
+        (insert "==================\n\n")
+        (insert "Loading packages from load-path...\n\n"))
+      (special-mode)) ; Apply special-mode after initial content
     
     (dolist (dir load-path-copy)
       (when (and dir (file-exists-p dir) (file-directory-p dir))
         (with-current-buffer log-buffer
-          (insert (format "Scanning directory: %s\n" dir)))
+          (let ((inhibit-read-only t))
+            (insert (format "Scanning directory: %s\n" dir))))
         (dolist (file (directory-files dir t "\\.el$"))
           (let* ((filename (file-name-nondirectory file))
                  ;; Skip backup files, autoload files, etc.
@@ -78,20 +80,24 @@ Results are displayed in a dedicated log buffer."
                         (progn
                           (cl-incf loaded-count)
                           (with-current-buffer log-buffer
-                            (insert (format "✓ Loaded: %s\n" feature))))
+                            (let ((inhibit-read-only t))
+                              (insert (format "✓ Loaded: %s\n" feature)))))
                       (with-current-buffer log-buffer
-                        (insert (format "⚠ Not loaded: %s\n" feature)))))
+                        (let ((inhibit-read-only t))
+                          (insert (format "⚠ Not loaded: %s\n" feature))))))
                 (error
                  (cl-incf error-count)
                  (with-current-buffer log-buffer
-                   (insert (format "✗ Error loading %s: %s\n" 
-                                   feature (error-message-string err)))))))))))
+                   (let ((inhibit-read-only t))
+                     (insert (format "✗ Error loading %s: %s\n" 
+                                     feature (error-message-string err))))))))))))
     
     ;; Add summary at the end of the buffer
     (with-current-buffer log-buffer
-      (goto-char (point-max))
-      (insert (format "\nSummary: Loaded %d packages with %d errors\n" 
-                      loaded-count error-count)))
+      (let ((inhibit-read-only t))
+        (goto-char (point-max))
+        (insert (format "\nSummary: Loaded %d packages with %d errors\n" 
+                        loaded-count error-count))))
     
     ;; Display the buffer and show summary in echo area
     (display-buffer log-buffer)
