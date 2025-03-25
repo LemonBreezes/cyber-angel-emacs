@@ -18,6 +18,8 @@
 (unless (featurep 'cae-lib)
   (defalias 'cae-defadvice! 'defadvice!)
   (defalias 'cae-advice-add 'advice-add))
+(with-eval-after-load 'straight
+  (add-to-list 'straight-built-in-pseudo-packages 'seq))
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
