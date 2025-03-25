@@ -89,3 +89,9 @@
   (when (and (<= (frame-width) 120)
              (not dired-hide-details-mode))
     (dired-hide-details-mode 1)))
+
+;;;###autoload
+(defun cae-dirvish-subtree-clear ()
+  (interactive)
+  (call-interactively #'dirvish-subtree-clear)
+  (beginend-dired-mode-goto-beginning))
