@@ -38,14 +38,26 @@
 ;;;###autoload
 (defun cae-compile-load-all-packages ()
   "Load all packages by finding .el files in the load path and requiring them.
-This attempts to load every Elisp file found in the load path directories."
+This attempts to load every Elisp file found in the load path directories.
+Results are displayed in a dedicated log buffer."
   (interactive)
   (let ((loaded-count 0)
         (error-count 0)
         (load-path-copy load-path)
-        (already-tried (make-hash-table :test 'equal)))
+        (already-tried (make-hash-table :test 'equal))
+        (log-buffer (get-buffer-create "*Package Loading Log*")))
+    ;; Set up the log buffer
+    (with-current-buffer log-buffer
+      (erase-buffer)
+      (special-mode) ; Make it read-only with convenient navigation
+      (insert "Package Loading Log\n")
+      (insert "==================\n\n")
+      (insert "Loading packages from load-path...\n\n"))
+    
     (dolist (dir load-path-copy)
       (when (and dir (file-exists-p dir) (file-directory-p dir))
+        (with-current-buffer log-buffer
+          (insert (format "Scanning directory: %s\n" dir)))
         (dolist (file (directory-files dir t "\\.el$"))
           (let* ((filename (file-name-nondirectory file))
                  ;; Skip backup files, autoload files, etc.
@@ -62,9 +74,26 @@ This attempts to load every Elisp file found in the load path directories."
               (condition-case err
                   (progn
                     (require feature nil t)
-                    (when (featurep feature)
-                      (cl-incf loaded-count)))
+                    (if (featurep feature)
+                        (progn
+                          (cl-incf loaded-count)
+                          (with-current-buffer log-buffer
+                            (insert (format "✓ Loaded: %s\n" feature))))
+                      (with-current-buffer log-buffer
+                        (insert (format "⚠ Not loaded: %s\n" feature)))))
                 (error
                  (cl-incf error-count)
-                 (message "Error loading %s: %s" feature (error-message-string err)))))))))
-    (message "Loaded %d packages with %d errors" loaded-count error-count)))
+                 (with-current-buffer log-buffer
+                   (insert (format "✗ Error loading %s: %s\n" 
+                                   feature (error-message-string err)))))))))))
+    
+    ;; Add summary at the end of the buffer
+    (with-current-buffer log-buffer
+      (goto-char (point-max))
+      (insert (format "\nSummary: Loaded %d packages with %d errors\n" 
+                      loaded-count error-count)))
+    
+    ;; Display the buffer and show summary in echo area
+    (display-buffer log-buffer)
+    (message "Loaded %d packages with %d errors. See *Package Loading Log* buffer for details." 
+             loaded-count error-count)))
