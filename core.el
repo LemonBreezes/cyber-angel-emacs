@@ -24,8 +24,9 @@
           (when (or (modulep! :cae helm) (modulep! :completion helm))
             '(helm-map
               helm-rg-map
-              vertico-map
-              helm-read-file-map)))
+              helm-read-file-map))
+          (when (modulep! :completion vertico)
+            '(vertico-map)))
   "A list of all the keymaps used for the minibuffer.")
 
 ;; This helps me debug issues with my config.
