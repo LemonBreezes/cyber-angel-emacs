@@ -96,7 +96,7 @@
     (define-key evil-insert-state-map [escape] 'evil-normal-state)
     (define-key evil-insert-state-map
       (read-kbd-macro evil-toggle-key) 'evil-emacs-state))
-  (define-key! :keymaps +default-minibuffer-maps
+  (define-key! :keymaps cae-default-minibuffer-maps
     "C-a" nil
     "C-r" nil
     "C-u" nil
