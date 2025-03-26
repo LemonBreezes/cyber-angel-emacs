@@ -24,6 +24,7 @@
           (when (or (modulep! :cae helm) (modulep! :completion helm))
             '(helm-map
               helm-rg-map
+              vertico-map
               helm-read-file-map)))
   "A list of all the keymaps used for the minibuffer.")
 
