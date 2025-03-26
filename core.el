@@ -7,13 +7,17 @@
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
 ;; Ensure this is defined even if its module is not loaded.
+(unless (boundp '+default-minibuffer-maps)
+  (defvar +default-minibuffer-maps
+    (append '(minibuffer-local-map
+              minibuffer-local-ns-map
+              minibuffer-local-completion-map
+              minibuffer-local-must-match-map
+              minibuffer-local-isearch-map
+              read-expression-map))
+    "A list of all the keymaps used for the minibuffer."))
 (defvar cae-default-minibuffer-maps
-  (append '(minibuffer-local-map
-            minibuffer-local-ns-map
-            minibuffer-local-completion-map
-            minibuffer-local-must-match-map
-            minibuffer-local-isearch-map
-            read-expression-map)
+  (append +default-minibuffer-maps
           (when (modulep! :completion ivy)
             '(ivy-minibuffer-map
               ivy-switch-buffer-map))
