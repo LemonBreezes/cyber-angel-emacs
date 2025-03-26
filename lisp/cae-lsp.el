@@ -18,9 +18,9 @@
           lsp-update-inlay-hints-on-scroll nil
           ;; Doom disables these but I'll leave them on. The reason Doom
           ;; disables them is in the comments.
-          lsp-enable-text-document-color t ; performance
-          lsp-enable-on-type-formatting t ; unexpected modifications
-          lsp-enable-folding t ; performance
+          lsp-enable-text-document-color t   ; performance
+          lsp-enable-on-type-formatting t    ; unexpected modifications
+          lsp-enable-folding t               ; performance
           lsp-headerline-breadcrumb-enable t ; redundant with modeline and imenu
           ;; For some reason LSP isn't working for me over Tramp as well as
           ;; Eglot does. At least not over `sudo'.
@@ -85,9 +85,7 @@
               (message "Using emacs-lsp-booster for %s!" orig-result)
               (cons "emacs-lsp-booster" orig-result))
           orig-result))))
-
-  (advice-remove #'lsp--shutdown-workspace #'+lsp-defer-server-shutdown-a)
-  (setq lsp-keep-workspace-alive t))
+)
 
 (when (modulep! :tools lsp +eglot)
   (use-package! eglot-booster
