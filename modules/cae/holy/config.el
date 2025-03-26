@@ -6,7 +6,7 @@
 (load! "+multiple-cursors")
 
 ;; Allow escape to exit the minibuffer.
-(define-key! :keymaps +default-minibuffer-maps
+(define-key! :keymaps cae-default-minibuffer-maps
   [escape] #'abort-recursive-edit)
 
 ;; I like to add bind `<leader> h' to `help-map' like how Doom Emacs does for
