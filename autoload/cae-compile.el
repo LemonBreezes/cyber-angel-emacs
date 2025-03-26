@@ -54,7 +54,7 @@ Results are displayed in a dedicated log buffer."
         (insert "==================\n\n")
         (insert "Loading packages from load-path...\n\n"))
       (special-mode)) ; Apply special-mode after initial content
-    
+
     (dolist (dir load-path-copy)
       (when (and dir (file-exists-p dir) (file-directory-p dir))
         (with-current-buffer log-buffer
@@ -89,17 +89,17 @@ Results are displayed in a dedicated log buffer."
                  (cl-incf error-count)
                  (with-current-buffer log-buffer
                    (let ((inhibit-read-only t))
-                     (insert (format "✗ Error loading %s: %s\n" 
+                     (insert (format "✗ Error loading %s: %s\n"
                                      feature (error-message-string err))))))))))))
-    
+
     ;; Add summary at the end of the buffer
     (with-current-buffer log-buffer
       (let ((inhibit-read-only t))
         (goto-char (point-max))
-        (insert (format "\nSummary: Loaded %d packages with %d errors\n" 
+        (insert (format "\nSummary: Loaded %d packages with %d errors\n"
                         loaded-count error-count))))
-    
+
     ;; Display the buffer and show summary in echo area
     (display-buffer log-buffer)
-    (message "Loaded %d packages with %d errors. See *Package Loading Log* buffer for details." 
+    (message "Loaded %d packages with %d errors. See *Package Loading Log* buffer for details."
              loaded-count error-count)))
