@@ -17,7 +17,7 @@
 
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
-  :keymaps cae-default-minibuffer-maps
+  :keymaps +default-minibuffer-maps
   ;; We already have `consult-history' bound to `M-r' and `M-s'. This way we can
   ;; use `C-s' to search in the minibuffer.
   "C-s"   nil)
