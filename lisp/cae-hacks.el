@@ -82,3 +82,7 @@
 ;; Allow killing buffers that are visible in multiple persps
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
+
+(defun cae-update-current-buffer-a (&rest _)
+  (set-buffer (window-buffer (selected-window))))
+(advice-add #'persp-activate :after #'cae-update-current-buffer-a)
