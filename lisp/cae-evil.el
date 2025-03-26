@@ -105,9 +105,6 @@
     "C-z" nil))
 (define-key! :keymaps cae-default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
-(after! vertico-map
-  (map! :map vertico-map
-        "C-l" #'cae-yank-word-to-minibuffer))
 (after! isearch
   (map! :map isearch-mode-map
         "C-w" nil
