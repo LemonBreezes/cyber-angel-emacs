@@ -3,6 +3,7 @@
 (load! "lisp/cae-repeat" doom-user-dir)
 (load! "lisp/cae-vlf" doom-user-dir)
 (load! "lisp/cae-restore-point" doom-user-dir)
+(load! "lisp/cae-multiple-cursors" doom-user-dir)
 
 ;; `vimish-fold' persists folds by saving the overlay region `(point) (mark)'.
 ;; This is problematic because it means that a fold can be broken by an
