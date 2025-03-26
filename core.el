@@ -15,13 +15,13 @@
               minibuffer-local-must-match-map
               minibuffer-local-isearch-map
               read-expression-map)
-            (cond ((modulep! :completion ivy)
-                   '(ivy-minibuffer-map
-                     ivy-switch-buffer-map))
-                  ((modulep! :completion helm)
-                   '(helm-map
-                     helm-rg-map
-                     helm-read-file-map))))
+            (when (modulep! :completion ivy)
+              '(ivy-minibuffer-map
+                ivy-switch-buffer-map))
+            (when (or (modulep! :cae helm) (modulep! :completion helm))
+              '(helm-map
+                helm-rg-map
+                helm-read-file-map)))
     "A list of all the keymaps used for the minibuffer."))
 
 ;; This helps me debug issues with my config.
