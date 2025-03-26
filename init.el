@@ -95,7 +95,7 @@
 
        :tools
        direnv
-       ;;editorconfig ;; Now built into Emacs.
+       editorconfig ;; Now built into Emacs.
        (eval +overlay)
        (lookup +dictionary +docsets +offline)
        (magit +forge)
