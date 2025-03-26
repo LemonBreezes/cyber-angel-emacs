@@ -27,7 +27,8 @@
               helm-read-file-map))
           (when (modulep! :completion vertico)
             '(vertico-map)))
-  "A list of all the keymaps used for the minibuffer.")
+  "A list of all the keymaps used for the minibuffer plus completion
+frameworks.")
 
 ;; This helps me debug issues with my config.
 (setq persistent-scratch-autosave-mode t)
