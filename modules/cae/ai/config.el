@@ -6,7 +6,8 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 ;; Set up the default models.
-(let ((claude-model "claude-3-7-sonnet-20250219"))
+(let ((claude-model "claude-3-7-sonnet-20250219")
+      (gemini-model "gemini-2.5-pro-exp-03-25"))
   (after! chatgpt-shell
     (cl-pushnew
      (chatgpt-shell-anthropic--make-model
