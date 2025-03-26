@@ -7,8 +7,7 @@
   ;; Fixes an error I got from `lsp!'.
   (autoload 'lsp--suggest-project-root "lsp-mode")
   (after! lsp-mode
-    (setq lsp-headerline-breadcrumb-enable t
-          lsp-enable-snippet t
+    (setq lsp-enable-snippet t
           lsp-enable-folding t
           lsp-inlay-hint-enable t
           lsp-enable-indentation nil
@@ -17,10 +16,12 @@
           ;; BUG This is causing errors where it says Clangd does not suppor
           ;; inlay hints even though it does.
           lsp-update-inlay-hints-on-scroll nil
-          ;; Doom disables these but I'll leave them on.
-          lsp-enable-text-document-color t
-          lsp-enable-on-type-formatting t
-          lsp-enable-folding t
+          ;; Doom disables these but I'll leave them on. The reason Doom
+          ;; disables them is in the comments.
+          lsp-enable-text-document-color t ; performance
+          lsp-enable-on-type-formatting t ; unexpected modifications
+          lsp-enable-folding t ; performance
+          lsp-headerline-breadcrumb-enable t ; redundant with modeline and imenu
           ;; For some reason LSP isn't working for me over Tramp as well as
           ;; Eglot does. At least not over `sudo'.
           lsp-auto-register-remote-clients nil)
