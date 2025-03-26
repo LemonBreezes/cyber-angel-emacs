@@ -26,7 +26,12 @@
               helm-rg-map
               helm-read-file-map))
           (when (modulep! :completion vertico)
-            '(vertico-map)))
+            '(vertico-map))
+          (when (not (or (modulep! :completion ivy)
+                         (modulep! :cae helm)
+                         (modulep! :completion helm)
+                         (modulep! :completion vertico)))
+            '(icomplete-minibuffer-map)))
   "A list of all the keymaps used for the minibuffer plus completion
 frameworks.")
 
