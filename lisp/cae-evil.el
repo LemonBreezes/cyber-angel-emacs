@@ -103,7 +103,7 @@
     "C-v" nil
     "C-w" nil
     "C-z" nil))
-(define-key! :keymaps +default-minibuffer-maps
+(define-key! :keymaps cae-default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
 (after! vertico-map
   (map! :map vertico-map
@@ -114,7 +114,7 @@
         "C-S-w" #'isearch-yank-word-or-char))
 ;; These keybindings are so garbage. I can't believe Doom Emacs has them.
 ;; Use C-n/C-p in the minibuffer instead.
-(define-key! :keymaps +default-minibuffer-maps
+(define-key! :keymaps cae-default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil
   "C-S-j"  nil
@@ -122,7 +122,7 @@
 (define-key! read-expression-map
   "C-j" nil
   "C-k" nil)
-(define-key! :states 'insert :keymaps +default-minibuffer-maps
+(define-key! :states 'insert :keymaps cae-default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil)
 
@@ -209,7 +209,7 @@
 (unless evil-disable-insert-state-bindings
   (when (modulep! :completion corfu)
     (define-key!
-      :keymaps (append +default-minibuffer-maps
+      :keymaps (append cae-default-minibuffer-maps
                        (when (modulep! :editor evil +everywhere)
                          '(evil-ex-completion-map)))
       "C-x C-f"  #'cape-file
