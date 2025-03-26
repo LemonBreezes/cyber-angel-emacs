@@ -6,6 +6,13 @@
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
+;; Have a fallback completion system.
+(unless (or (modulep! :completion helm)
+            (modulep! :completion ivy)
+            (modulep! :completion vertico))
+  (icomplete-mode +1)
+  (icomplete-vertical-mode +1))
+
 ;; Ensure this is defined even if its module is not loaded.
 (unless (boundp '+default-minibuffer-maps)
   (defvar +default-minibuffer-maps
@@ -28,7 +35,6 @@
           (when (modulep! :completion vertico)
             '(vertico-map))
           (when (not (or (modulep! :completion ivy)
-                         (modulep! :cae helm)
                          (modulep! :completion helm)
                          (modulep! :completion vertico)))
             '(icomplete-minibuffer-map)))
@@ -62,13 +68,6 @@ frameworks.")
 (when (and (modulep! :completion helm)
            (modulep! :completion vertico))
   (remove-hook 'doom-first-input-hook #'helm-mode))
-
-;; Have a fallback completion system.
-(unless (or (modulep! :completion helm)
-            (modulep! :completion ivy)
-            (modulep! :completion vertico))
-  (icomplete-mode +1)
-  (icomplete-vertical-mode +1))
 
 ;; For some reason Persp is picking up a few buffers that it should not.
 (when (modulep! :ui workspaces)
