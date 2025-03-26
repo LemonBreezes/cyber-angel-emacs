@@ -84,7 +84,10 @@
             (progn
               (message "Using emacs-lsp-booster for %s!" orig-result)
               (cons "emacs-lsp-booster" orig-result))
-          orig-result)))))
+          orig-result))))
+
+  (advice-remove #'lsp--shutdown-workspace #'+lsp-defer-server-shutdown-a)
+  (setq lsp-keep-workspace-alive t))
 
 (when (modulep! :tools lsp +eglot)
   (use-package! eglot-booster
