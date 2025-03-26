@@ -1,6 +1,5 @@
 ;;; lisp/cae-multiple-cursors.el -*- lexical-binding: t; -*-
 
-
 (map! "C->"   #'mc/mark-next-like-this
       "C-<"   #'mc/mark-previous-like-this
       "C-M->" #'mc/skip-to-next-like-this
