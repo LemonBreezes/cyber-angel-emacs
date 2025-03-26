@@ -21,6 +21,9 @@
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
 
+;; Silence noisy function.
+(advice-add #'projectile-discover-projects-in-directory :around #'cae-shut-up-a)
+
 (defun cae-projectile-maybe-add-project ()
   "If saving a .projectile file, add its directory to projectile's known projects."
   (when (and buffer-file-name
