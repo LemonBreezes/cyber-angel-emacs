@@ -65,6 +65,7 @@
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
   (setq aidermacs-default-model "gemini/gemini-2.5-pro-exp-03-25")
+  (setq aidermacs-editor-model "anthropic/claude-3-7-sonnet-20250219")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-use-architect-mode t)
   (setq aidermacs-auto-accept-architect t)
