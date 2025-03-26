@@ -122,7 +122,7 @@
 (define-key! read-expression-map
   "C-j" nil
   "C-k" nil)
-(define-key! :states 'insert :keymaps cae-default-minibuffer-maps
+(define-key! :states 'insert :keymaps +default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil)
 
