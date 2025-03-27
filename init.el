@@ -54,110 +54,112 @@
 (when cae-init-preamble-enabled-p
   (load! "preamble" doom-user-dir))
 
-(doom! :completion
-       (vertico +icons +childframe)
-       ;;helm
-       (corfu +orderless +icons +dabbrev)
+(if nil
+    (doom! :editor (evil +everywhere) :config (default +bindings +smartparens +gnupg))
+    (doom! :completion
+           (vertico +icons +childframe)
+           ;;helm
+           (corfu +orderless +icons +dabbrev)
 
-       :ui
-       hl-todo
-       (hydra +childframe)
-       (popup +defaults)
-       (vc-gutter +pretty +diff-hl)
-       vi-tilde-fringe
-       workspaces
-       (window-select +numbers)
-       ophints
-       (treemacs +lsp)
-       modeline
+           :ui
+           hl-todo
+           (hydra +childframe)
+           (popup +defaults)
+           (vc-gutter +pretty +diff-hl)
+           vi-tilde-fringe
+           workspaces
+           (window-select +numbers)
+           ophints
+           (treemacs +lsp)
+           modeline
 
-       :editor
-       file-templates
-       fold
-       (format +lsp)
-       snippets
-       multiple-cursors
-       (evil +everywhere)
-       ;;lispy
+           :editor
+           file-templates
+           fold
+           (format +lsp)
+           snippets
+           multiple-cursors
+           (evil +everywhere)
+           ;;lispy
 
-       :emacs
-       undo
-       ibuffer
-       vc
-       (dired +icons +dirvish)
+           :emacs
+           undo
+           ibuffer
+           vc
+           (dired +icons +dirvish)
 
-       :term
-       eshell
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+           :term
+           eshell
+           (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
-       :checkers
-       (syntax +childframe +icons)
+           :checkers
+           (syntax +childframe +icons)
 
-       :tools
-       direnv
-       editorconfig
-       (eval +overlay)
-       (lookup +dictionary +docsets +offline)
-       (magit +forge)
-       (lsp +peek)
-       tree-sitter
-       (docker +lsp)
-       pdf
-       biblio
+           :tools
+           direnv
+           editorconfig
+           (eval +overlay)
+           (lookup +dictionary +docsets +offline)
+           (magit +forge)
+           (lsp +peek)
+           tree-sitter
+           (docker +lsp)
+           pdf
+           biblio
 
-       :lang
-       (emacs-lisp +tree-sitter)
-       (org +roam2 +tree-sitter +dragndrop +journal +pretty)
-       (cc +lsp +tree-sitter)
-       (web +lsp +tree-sitter)
-       (sh +lsp +tree-sitter +powershell +fish)
-       (nix +lsp +tree-sitter)
-       (lua +lsp +tree-sitter +fennel)
-       (data +lsp +tree-sitter)
-       (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
-       (javascript +lsp +tree-sitter)
-       (markdown +grip)
-       (json +lsp +tree-sitter)
-       (python +lsp +tree-sitter +pyright +cython)
-       (haskell +lsp +tree-sitter)
-       (graphql +lsp +tree-sitter)
+           :lang
+           (emacs-lisp +tree-sitter)
+           (org +roam2 +tree-sitter +dragndrop +journal +pretty)
+           (cc +lsp +tree-sitter)
+           (web +lsp +tree-sitter)
+           (sh +lsp +tree-sitter +powershell +fish)
+           (nix +lsp +tree-sitter)
+           (lua +lsp +tree-sitter +fennel)
+           (data +lsp +tree-sitter)
+           (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
+           (javascript +lsp +tree-sitter)
+           (markdown +grip)
+           (json +lsp +tree-sitter)
+           (python +lsp +tree-sitter +pyright +cython)
+           (haskell +lsp +tree-sitter)
+           (graphql +lsp +tree-sitter)
 
-       :os
-       (:if IS-MAC macos)
-       (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
+           :os
+           (:if IS-MAC macos)
+           (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
-       :config
-       (default +bindings +smartparens +gnupg)
+           :config
+           (default +bindings +smartparens +gnupg)
 
-       :email
-       mu4e
+           :email
+           mu4e
 
-       :app
-       (rss +org)
-       irc
+           :app
+           (rss +org)
+           irc
 
-       :cae
-       (lean4 +lsp +tree-sitter)
-       (helm +childframe)
-       debugger
-       eat
-       eshell
-       exwm
-       dired
-       lisp
-       misc-applications
-       (modeline +emms)
-       notifications
-       unpackaged
-       vc
-       org
-       (ai +copilot)
-       gnus
-       rss
+           :cae
+           (lean4 +lsp +tree-sitter)
+           (helm +childframe)
+           debugger
+           eat
+           eshell
+           exwm
+           dired
+           lisp
+           misc-applications
+           (modeline +emms)
+           notifications
+           unpackaged
+           vc
+           org
+           (ai +copilot)
+           gnus
+           rss
 
-       :secret
-       ;;(:if (eq system-type 'gnu/linux) root)
-       )
+           :secret
+           ;;(:if (eq system-type 'gnu/linux) root)
+           ))
 
 ;;Local Variables:
 ;;eval: (when (featurep 'lispy) (lispy-mode -1))
