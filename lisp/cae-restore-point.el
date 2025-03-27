@@ -138,6 +138,7 @@
                '(evil-snipe-s evil-snipe-S evil-snipe-f evil-snipe-F
                  evil-snipe-t evil-snipe-T
                  evil-snipe-x evil-snipe-X evil-snipe-repeat
+                 evil-indent
                  evil-snipe-repeat-reverse evil-ex-search-next
                  evil-backward-WORD-begin evil-cp-forward-symbol-end
                  evil-forward-WORD-end
