@@ -58,7 +58,8 @@
                       :server-id 'fennel-ls))
     (when (modulep! :ui treemacs +lsp)
       (lsp-treemacs-sync-mode +1)))
-  (setq +treemacs-git-mode 'deferred)
+  (setq +treemacs-git-mode 'deferred
+        lsp-treemacs-error-list-expand-depth 1)
 
   ;; These are from
   ;; https://www.reddit.com/r/emacs/comments/18ybxsa/emacs_lspmode_performance_booster/
