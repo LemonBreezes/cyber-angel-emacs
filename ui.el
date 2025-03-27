@@ -78,6 +78,9 @@
         doom-modeline-major-mode-icon (cae-display-graphic-p)
         doom-modeline-minor-modes t))
 
+(setq-hook! 'treemacs-mode-hook
+  nobreak-char-display nil)
+
 (after! embark
   (setq embark-confirm-act-all nil))
 (after! which-key
