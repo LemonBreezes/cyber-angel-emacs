@@ -108,7 +108,7 @@
 
 (dir-locals-set-class-variables
  'polybar
- '((nil . ((eval . (progn (cae--setup-polybar-dir-locals)))))))
+ '((nil . ((eval . (cae--setup-polybar-dir-locals))))))
 
 (dir-locals-set-directory-class (concat (getenv "HOME") "/home/st/.config/polybar") 'polybar)
 
