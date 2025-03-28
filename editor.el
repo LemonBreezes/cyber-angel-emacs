@@ -383,7 +383,7 @@
 (use-package! jinx
   :defer t :init
   (add-hook 'doom-after-init-hook #'global-jinx-mode)
-  (add-hook 'jinx-mode-hook #'my/jinx-add-ispell-localwords)
+  (add-hook 'jinx-mode-hook #'cae-jinx-add-ispell-localwords)
   :config
   (map! "M-$" #'jinx-correct
         "C-M-$" #'jinx-languages)
