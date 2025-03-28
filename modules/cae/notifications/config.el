@@ -2,7 +2,7 @@
 
 ;; BUG Otherwise `alert-send-notification' will block the UI.
 (cae-advice-add #'alert-send-notification :around
-            #'cae-notifications-wrap-async-call-process-a)
+                #'cae-notifications-wrap-async-call-process-a)
 
 (cae-advice-add #'notifications-notify :around #'cae-notifications-notify-advice)
 (when (and
