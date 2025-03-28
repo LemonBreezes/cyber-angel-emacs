@@ -382,4 +382,10 @@
 
 (use-package! jinx
   :defer t :init
-  (add-hook 'doom-after-init-hook #'global-jinx-mode))
+  (add-hook 'doom-after-init-hook #'global-jinx-mode)
+  :config
+  (map! "M-$" #'jinx-correct
+        "C-M-$" #'jinx-languages)
+  (after! vertico-multiform
+    (add-to-list 'vertico-multiform-categories
+             '(jinx grid (vertico-grid-annotate . 20)))))
