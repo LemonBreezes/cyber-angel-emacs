@@ -65,7 +65,4 @@ Also resets the projectile cache once for each affected directory."
         (when (eq (nth 1 entry) class)
           (with-current-buffer buf
             (hack-dir-local-variables-non-file-buffer))
-          (puthash (car entry) t dirs))))
-    (maphash (lambda (dir _)
-               (cae-invalidate-project-cache dir))
-             dirs)))
+          (puthash (car entry) t dirs))))))
