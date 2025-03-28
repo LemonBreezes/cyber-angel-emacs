@@ -78,7 +78,7 @@
           :localleader
           (:prefix ("d" . "debug")
                    "l" #'xcb-debug:clearn
-
+                   "m" #'xcb-debug:mark
                    "t" #'exwm-debug)
           "f" #'exwm-layout-toggle-fullscreen
           "h" #'exwm-floating-hide
