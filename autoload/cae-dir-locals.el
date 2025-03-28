@@ -69,14 +69,3 @@ Also resets the projectile cache once for each affected directory."
     (maphash (lambda (dir _)
                (cae-invalidate-project-cache dir))
              dirs)))
-
-
-;; ---[ 4. Invalidate Projectile Cache ]----------------------------------
-
-;;;###autoload
-(defun cae-invalidate-project-cache (project-root)
-  (setq projectile-project-root-cache (make-hash-table :test 'equal))
-  (remhash project-root projectile-project-type-cache)
-  (remhash project-root projectile-projects-cache)
-  (remhash project-root projectile-projects-cache-time)
-  (projectile-serialize-cache))
