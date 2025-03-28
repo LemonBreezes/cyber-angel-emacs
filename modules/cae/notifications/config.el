@@ -5,7 +5,16 @@
             #'cae-notifications-wrap-async-call-process-a)
 
 (cae-advice-add #'notifications-notify :around #'cae-notifications-notify-advice)
-(when (require 'dbus nil t)
+(when (and
+       ;; In any of these I will just have Dunst or something else.
+       (not (or (getenv "INSIDE_EXWM")
+                (getenv "RATPOISON")
+                (getenv "I3SOCK")
+                (getenv "KDE_FULL_SESSION")
+                (getenv "GNOME_DESKTOP_SESSION_ID")
+                (getenv "XDG_CURRENT_DESKTOP")
+                (getenv "WAYLAND_DISPLAY")))
+       (require 'dbus nil t))
   (dbus-call-method-asynchronously
    :session
    "org.freedesktop.DBus"
