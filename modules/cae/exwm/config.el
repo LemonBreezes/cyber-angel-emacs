@@ -108,7 +108,6 @@
     ;; 3. You can also disable `xim' through `Xresources', though I have not
     ;;    tested this approach.
     ;; (use-package! exwm-xim
-
     ;;   :config
     ;;   ;; These variables are required for X programs to connect with XIM.
     ;;   (setenv "XMODIFIERS" "@im=exwm-xim")
