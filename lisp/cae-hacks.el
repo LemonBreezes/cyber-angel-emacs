@@ -87,3 +87,6 @@
 ;; `save-some-buffers'.
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
+
+;; TODO Debug this message
+;;unsupported image path: nm-device-wired
