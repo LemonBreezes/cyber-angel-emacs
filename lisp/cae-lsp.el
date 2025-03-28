@@ -56,8 +56,9 @@
      (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
                       :activation-fn (lsp-activate-on "fennel")
                       :server-id 'fennel-ls))
-    (when (modulep! :ui treemacs +lsp)
-      (lsp-treemacs-sync-mode +1)))
+    ;;(when (modulep! :ui treemacs +lsp)
+    ;;  (lsp-treemacs-sync-mode +1))
+    )
   (setq +treemacs-git-mode 'deferred
         lsp-treemacs-error-list-expand-depth 1)
 
