@@ -606,7 +606,7 @@ If SAVE is non-nil save, otherwise format candidate given action KEY."
                       (cons word (split-string jinx-local-words)))
                      #'string<)
                " "))))
-      (list key word "File"))
+  (list key word "File"))
 
 (defun cae-jinx-add-to-abbrev (overlay word)
   "Add abbreviation to `global-abbrev-table'.
