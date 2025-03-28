@@ -19,7 +19,7 @@
 ;; Treat all themes as safe.
 (setq custom-safe-themes t)
 
-;; Skip some buffers with prev buffer
+;; Skip some buffers with the previous buffer
 (setq switch-to-prev-buffer-skip
       (lambda (_win buf _bury-or-kill)
         (or (get-buffer-window buf)
@@ -392,3 +392,5 @@
   (after! vertico-multiform
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)))))
+
+; LocalWords:  downCase
