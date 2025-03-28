@@ -393,4 +393,4 @@
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)))))
 
-                                        ; LocalWords:  downCase
+;; LocalWords:  downCase
