@@ -595,6 +595,7 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
 (defun cae-jinx-save-as-ispell-localword (save key word)
   "Save WORD using ispell's `ispell-words-keyword'.
 If SAVE is non-nil save, otherwise format candidate given action KEY."
+  (require 'ispell)
   (if save
       (progn
         (require 'ispell)
