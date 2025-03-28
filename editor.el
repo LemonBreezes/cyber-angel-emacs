@@ -386,6 +386,7 @@
   :config
   (map! "M-$" #'jinx-correct
         "C-M-$" #'jinx-languages)
+  (advice-add 'jinx--correct-replace :before #'jinx--add-to-abbrev)
   (after! vertico-multiform
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)))))
