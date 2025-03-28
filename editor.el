@@ -388,4 +388,4 @@
         "C-M-$" #'jinx-languages)
   (after! vertico-multiform
     (add-to-list 'vertico-multiform-categories
-             '(jinx grid (vertico-grid-annotate . 20)))))
+                 '(jinx grid (vertico-grid-annotate . 20)))))
