@@ -149,7 +149,6 @@
          ;;lisp
          misc-applications
          (modeline +emms)
-         notifications
          unpackaged
          vc
          org
