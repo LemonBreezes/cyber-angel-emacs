@@ -90,3 +90,4 @@
 
 ;; TODO Debug this message
 ;;unsupported image path: nm-device-wired
+(setq debug-on-message "unsupported image path: nm-device-wired")
