@@ -592,7 +592,7 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
 
 ;;; Spell-checking functions
 
-(defun jinx--add-to-abbrev (overlay word)
+(defun cae-jinx-add-to-abbrev (overlay word)
   "Add abbreviation to `global-abbrev-table'.
 The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (let ((abbrev (buffer-substring-no-properties
@@ -601,7 +601,7 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
 
-(defun my/jinx-ispell-localwords ()
+(defun cae-jinx-ispell-localwords ()
   "Return a string of ispell's local words.
 
 Those are the words following `ispell-words-keyword' (usually
@@ -613,7 +613,7 @@ Those are the words following `ispell-words-keyword' (usually
              collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
              finally return (mapconcat #'identity result " "))))
 
-(defun my/jinx-add-ispell-localwords ()
+(defun cae-jinx-add-ispell-localwords ()
   "Add ispell's local words to `jinx-local-words'."
   (let ((ispell-localwords (my/jinx-ispell-localwords)))
     (setq jinx-local-words (concat jinx-local-words ispell-localwords))
