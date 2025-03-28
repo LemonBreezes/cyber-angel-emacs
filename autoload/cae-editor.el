@@ -590,7 +590,16 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
                     (shell-quote-argument full-path))))))
       (message "Copied %s" image-file))))
 
-;;; Ispell functions
+;;; Spell-checking functions
+
+(defun jinx--add-to-abbrev (overlay word)
+  "Add abbreviation to `global-abbrev-table'.
+The misspelled word is taken from OVERLAY.  WORD is the corrected word."
+  (let ((abbrev (buffer-substring-no-properties
+                 (overlay-start overlay)
+                 (overlay-end overlay))))
+    (message "Abbrev: %s -> %s" abbrev word)
+    (define-abbrev global-abbrev-table abbrev word)))
 
 (defun cae-ispell-simple-get-word ()
   "Get the word at point for ispell."
