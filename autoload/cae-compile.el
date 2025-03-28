@@ -16,16 +16,25 @@
 
 ;;;###autoload
 (defun cae-ensure-emacs-dir-writable ()
-  "Check if Emacs directories are writable and attempt to make them writable if not."
+  "Check if Emacs directories are writable and attempt to make them writable if not.
+Note: This function attempts to use sudo to change ownership of system directories.
+This approach has limitations:
+1. It requires password input which can't be provided non-interactively
+2. Changing ownership of system files can cause issues during system updates
+3. Consider using user-specific configuration directories instead
+
+For a manual fix, run this in a terminal:
+  sudo chown -R $USER /usr/share/emacs /etc/emacs"
   (dolist (emacs-dir '("/usr/share/emacs" "/etc/emacs"))
     (when (and (file-exists-p emacs-dir)
                (not (file-writable-p emacs-dir)))
-      (let ((sudo-cmd (format "sudo chown -R %s %s" (user-login-name) emacs-dir)))
+      ;; Try using sudo -A which allows for askpass programs
+      (let ((sudo-cmd (format "sudo -A chown -R %s %s" (user-login-name) emacs-dir)))
         (unless (zerop (shell-command sudo-cmd))
           (message "Warning: Could not change ownership of %s. Byte compilation may fail."
                    emacs-dir)
-          (message "Failed to change ownership of %s. You may need to run: %s"
-                   emacs-dir sudo-cmd))))))
+          (message "This requires sudo privileges. Please run manually in a terminal:")
+          (message "  sudo chown -R %s %s" (user-login-name) emacs-dir))))))
 
 ;;;###autoload
 (defun cae-compile-load-all-deferred-packages ()
