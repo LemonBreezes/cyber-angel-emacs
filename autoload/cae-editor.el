@@ -601,6 +601,24 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
 
+(defun my/jinx-ispell-localwords ()
+  "Return a string of ispell's local words.
+
+Those are the words following `ispell-words-keyword' (usually
+\"LocalWords\") in the current buffer."
+  (require 'ispell)
+  (save-excursion
+    (goto-char (point-min))
+    (cl-loop while (search-forward ispell-words-keyword nil t)
+             collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
+             finally return (mapconcat #'identity result " "))))
+
+(defun my/jinx-add-ispell-localwords ()
+  "Add ispell's local words to `jinx-local-words'."
+  (let ((ispell-localwords (my/jinx-ispell-localwords)))
+    (setq jinx-local-words (concat jinx-local-words ispell-localwords))
+    (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
+
 (defun cae-ispell-simple-get-word ()
   "Get the word at point for ispell."
   (require 'ispell)
