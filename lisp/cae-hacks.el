@@ -91,3 +91,6 @@
 ;; TODO Debug this message
 ;;unsupported image path: nm-device-wired
 (setq debug-on-message "unsupported image path: nm-device-wired")
+
+;; TODO Also debug this one.
+;;Invalid face reference: org-level-1 [2 times]
