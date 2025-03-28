@@ -299,7 +299,7 @@
       (string-inflection-all-cycle)
       (setq evil-repeat-info '([?g ?~])))
     (define-key evil-normal-state-map (kbd "g~")
-      'evil-operator-string-inflection)))
+                'evil-operator-string-inflection)))
 
 (use-package! beginend
   :defer t :init
