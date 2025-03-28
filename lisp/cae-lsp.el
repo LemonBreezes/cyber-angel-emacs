@@ -57,7 +57,7 @@
                       :activation-fn (lsp-activate-on "fennel")
                       :server-id 'fennel-ls)))
   (when (modulep! :ui treemacs +lsp)
-    (after! lsp-treemacs
+    (add-transient-hook! 'lsp-after-initialize-hook
       (lsp-treemacs-sync-mode +1)))
   (setq +treemacs-git-mode 'deferred
         lsp-treemacs-error-list-expand-depth 1)
