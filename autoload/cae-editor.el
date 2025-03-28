@@ -632,6 +632,6 @@ Those are the words following `ispell-words-keyword' (usually
 
 (defun cae-jinx-add-ispell-localwords ()
   "Add ispell's local words to `jinx-local-words'."
-  (let ((ispell-localwords (my/jinx-ispell-localwords)))
+  (let ((ispell-localwords (cae-jinx-ispell-localwords)))
     (setq jinx-local-words (concat jinx-local-words ispell-localwords))
     (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
