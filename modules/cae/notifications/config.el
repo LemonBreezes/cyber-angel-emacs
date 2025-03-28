@@ -13,7 +13,9 @@
                 (getenv "KDE_FULL_SESSION")
                 (getenv "GNOME_DESKTOP_SESSION_ID")
                 (getenv "XDG_CURRENT_DESKTOP")
-                (getenv "WAYLAND_DISPLAY")))
+                (getenv "WAYLAND_DISPLAY")
+                (memq 'exwm-init window-setup-hook)
+                (memq 'exwm-init after-make-frame-functions)))
        (require 'dbus nil t))
   (dbus-call-method-asynchronously
    :session
