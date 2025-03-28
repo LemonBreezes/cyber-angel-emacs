@@ -8,7 +8,8 @@
 (package! vc-backup)
 (package! embark-vc)
 (when (modulep! :completion vertico)
-  (package! consult-gh :recipe (:host github :repo "LemonBreezes/consult-gh" :branch "do-not-ping-github-on-load"
+  (package! consult-gh :recipe (:host github :repo "LemonBreezes/consult-gh"
+                                :branch "do-not-ping-github-on-load"
                                 :files ("*"))))
 (when (or (modulep! :completion helm)
           (modulep! :cae helm)))
