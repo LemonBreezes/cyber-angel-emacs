@@ -139,12 +139,12 @@
          irc
 
          :cae
+         exwm
          (lean4 +lsp +tree-sitter)
          (helm +childframe)
          debugger
          eat
          eshell
-         exwm
          dired
          ;;lisp
          misc-applications
