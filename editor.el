@@ -387,6 +387,7 @@
   :config
   (map! "M-$" #'jinx-correct
         "C-M-$" #'jinx-languages)
+  (setf (alist-get ?* jinx--save-keys) #'cae-jinx-save-as-ispell-localword)
   (cae-advice-add #'jinx--correct-replace :before #'cae-jinx-add-to-abbrev)
   (after! vertico-multiform
     (add-to-list 'vertico-multiform-categories
