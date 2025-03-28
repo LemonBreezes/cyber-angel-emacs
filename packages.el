@@ -144,6 +144,7 @@
 (package! zop-to-char)
 (package! i3wm-config-mode)
 (package! auto-sudoedit)
+(package! jinx)
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
