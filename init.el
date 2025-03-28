@@ -74,12 +74,12 @@
          modeline
 
          :editor
+         (evil +everywhere)
          file-templates
          fold
          (format +lsp)
          snippets
          multiple-cursors
-         (evil +everywhere)
          lispy
 
          :emacs
