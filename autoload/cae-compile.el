@@ -20,11 +20,11 @@
   (dolist (emacs-dir '("/usr/share/emacs" "/etc/emacs"))
     (when (and (file-exists-p emacs-dir)
                (not (file-writable-p emacs-dir)))
-      (let ((sudo-cmd (format "sudo chmod -R u+w %s" emacs-dir)))
+      (let ((sudo-cmd (format "sudo chown -R %s %s" (user-login-name) emacs-dir)))
         (unless (zerop (shell-command sudo-cmd))
-          (message "Warning: %s is not writable. Byte compilation may fail."
+          (message "Warning: Could not change ownership of %s. Byte compilation may fail."
                    emacs-dir)
-          (message "Failed to make %s writable. You may need to run: %s"
+          (message "Failed to change ownership of %s. You may need to run: %s"
                    emacs-dir sudo-cmd))))))
 
 ;;;###autoload
