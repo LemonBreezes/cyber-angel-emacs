@@ -115,13 +115,13 @@ Like `er/mark-comment' but also marks comment with leading whitespace."
     (move-overlay overlay start end)
     (overlay-put overlay 'keymap keymap)
     (define-key keymap (kbd "DEL")
-      (lambda ()
-        (interactive)
-        (let ((current (point)))
-          (if (and (eq current (1+ start))
-                   (eq (1+ current) end))
-              (delete-region start end)
-            (delete-char -1)))))))
+                (lambda ()
+                  (interactive)
+                  (let ((current (point)))
+                    (if (and (eq current (1+ start))
+                             (eq (1+ current) end))
+                        (delete-region start end)
+                      (delete-char -1)))))))
 
 ;;; Navigation and mark functions
 
