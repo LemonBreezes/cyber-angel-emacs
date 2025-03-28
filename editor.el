@@ -74,7 +74,7 @@
 
 (add-to-list 'kill-buffer-query-functions #'cae-ask-kill-buffer)
 
-;; Automatically reindent after commenting.
+;; Automatically re-indent after commenting.
 (cae-advice-add #'comment-or-uncomment-region :after #'indent-region)
 
 ;; Allow remembering risky variables.
@@ -117,7 +117,7 @@
 (when (fboundp #'+evil-disable-ex-highlights-h)
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
-;; I think it's better to not enable this. Doom already eagerly cleansup
+;; I think it's better to not enable this. Doom already eagerly cleans up
 ;; popup and Magit buffers.
 ;;(cae-defadvice! cae-midnight-clean-buffer-list-delay-a (name) :before-until
 ;;#'midnight-clean-buffer-list-delay (parent-mode-is-derived-p
@@ -393,4 +393,4 @@
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)))))
 
-;; LocalWords:  downCase
+;; LocalWords:  downCase CamelCase iff uit sw fi
