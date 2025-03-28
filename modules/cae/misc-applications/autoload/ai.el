@@ -36,7 +36,7 @@ a task description, and start Claude there.
 Otherwise, open Claude for the current project."
   (interactive "P")
   (require 'vterm)
-
+  (require 'llm)
   (if create-sandbox
       (let* ((sandbox-root "~/src/claude-sandbox")
              (task-description (read-string "Enter task description: "
