@@ -379,3 +379,7 @@
   (add-hook 'dired-mode-hook  #'cae-auto-sudoedit-lazy-h)
   :config
   (auto-sudoedit-mode +1))
+
+(use-package! jinx
+  :defer t :init
+  (add-hook 'doom-after-init-hook #'global-jinx-mode))
