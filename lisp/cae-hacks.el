@@ -88,5 +88,4 @@
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
 
-
 (setq debug-on-message "\\(unsupported image path:\\|Invalid face reference:\\)")
