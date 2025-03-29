@@ -63,9 +63,10 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
 
-(when (equal (system-name) "s")
-  (set-process-sentinel
-   (start-process "display-setup" nil "sh" "~/.config/i3/display-setup.sh")
-   (lambda (process event)
-     (when (string= event "finished\n")
-       (start-process "polybar" nil "polybar" "main")))))
+(add-hook! 'exwm-init-hook
+  (defun cae-exwm-setup-monitors ()
+    (set-process-sentinel
+     (start-process "display-setup" nil "sh" "~/.config/i3/display-setup.sh")
+     (lambda (process event)
+       (when (string= event "finished\n")
+         (start-process "polybar" nil "polybar" "main"))))))
