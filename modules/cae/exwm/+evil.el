@@ -75,25 +75,3 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
-(defvar cae-exwm-discord-mode-map (make-sparse-keymap))
-
-(define-minor-mode cae-exwm-discord-mode
-  "Minor mode for Discord with overriding keymap."
-  :init-value nil
-  ;; :keymap cae-exwm-discord-mode-map ;; We now use overriding-local-map
-  :global nil
-  (if cae-exwm-discord-mode
-      ;; Mode is being enabled: set the overriding map
-      (setq-local overriding-local-map cae-exwm-discord-mode-map)
-    ;; Mode is being disabled: clear the overriding map
-    (setq-local overriding-local-map nil)))
-
-(map! :map cae-exwm-discord-mode-map
-      :n "J" (cmd! ()
-                   (exwm-input--fake-key 'C-k)
-                   (exwm-evil-insert))
-      :n "C-k" (cmd! ()
-                     (exwm-input--fake-key 'C-k)
-                     (exwm-evil-insert)))
-
-(add-hook! 'exwm-manage-finish-hook :depth -1 #'cae-exwm-load-special-bindings-h)
