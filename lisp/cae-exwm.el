@@ -62,3 +62,6 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
+
+(when (equal (system-name) "s")
+  (start-process-shell-command "display-setup" nil "~/.config/i3/display-setup.sh"))
