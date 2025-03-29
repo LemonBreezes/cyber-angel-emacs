@@ -71,3 +71,16 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
        (lambda (process event)
          (when (string= event "finished\n")
            (start-process "polybar" nil "polybar" "main")))))))
+
+(add-hook! 'exwm-manage-finish-hook :depth 1
+  (defun cae-exwm-load-special-bindings-h ()
+    (cond ((and (stringp exwm-class-name)
+                (string-match-p "discord" exwm-class-name))
+           (evil-local-set-key 'normal (kbd "J") (cmd! () (exwm-input--fake-key ?\C-k)))
+           (evil-local-set-key 'normal (kbd "C-k") (cmd! () (exwm-input--fake-key ?\C-k))))
+          ((and (stringp exwm-class-name)
+                (string-match-p "retroarch" exwm-class-name))
+           (evil-emacs-state)
+           (setq-local exwm-input-line-mode-passthrough nil
+                       exwm-input-prefix-keys
+                       (delq 'escape exwm-input-prefix-keys))))))
