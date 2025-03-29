@@ -3,6 +3,8 @@
 ;; I wrote this code many years ago but I found it in one of my old archives and
 ;; it still works just fine.
 
+(require 'dash)
+
 (defvar cae-exwm-workspaces ()
   "The list of EXWM workspaces created up to now.")
 
