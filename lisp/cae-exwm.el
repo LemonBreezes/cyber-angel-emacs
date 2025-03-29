@@ -63,12 +63,11 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
 
-(when (string= (system-name) "s")
-  (add-hook! 'exwm-init-hook
-    (defun cae-exwm-setup-monitors ()
-      (run-at-time 3.0 nil
-                   (lambda ()
-                     (shell-command-to-string "~/.config/i3/display-setup.sh"))))))
+(setq exwm-randr-workspace-monitor-plist
+      '(3 "HDMI-1"
+        2 "DP-1"
+        1 "eDP-1"))
+(exwm-randr-refresh)
 
 (add-hook! 'exwm-manage-finish-hook :depth 1
   (defun cae-exwm-load-special-bindings-h ()
