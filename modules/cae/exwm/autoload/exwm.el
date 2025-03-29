@@ -59,3 +59,29 @@ non-nil, debug init as well."
   "Increase screen brightness using light."
   (interactive)
   (start-process "light" nil "light" "-A" "10"))
+
+;;;###autoload
+(defun cae-exwm-workspace-switch-next ()
+  "Switch to the next EXWM workspace.
+Wraps around from the last workspace to the first."
+  (interactive)
+  (let* ((current-index exwm-workspace-current-index)
+         (count (exwm-workspace--count))
+         (next-index (mod (1+ current-index) count)))
+    ;; Avoid switching if there's only one workspace or
+    ;; if the next index is the same as the current (shouldn't happen with mod).
+    (unless (= count 1)
+      (exwm-workspace-switch next-index))))
+
+;;;###autoload
+(defun cae-exwm-workspace-switch-previous ()
+  "Switch to the previous EXWM workspace.
+Wraps around from the first workspace to the last."
+  (interactive)
+  (let* ((current-index exwm-workspace-current-index)
+         (count (exwm-workspace--count))
+         ;; `mod' handles negative numbers correctly for wrap-around.
+         (prev-index (mod (1- current-index) count)))
+    ;; Avoid switching if there's only one workspace.
+    (unless (= count 1)
+      (exwm-workspace-switch prev-index))))
