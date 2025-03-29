@@ -75,10 +75,12 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
+(defvar cae-exwm-discord-mode-map (make-sparse-keymap))
+
 (define-minor-mode cae-exwm-discord-mode
   "Minor mode for Discord."
   :init-value nil
-  :keymap (make-sparse-keymap)
+  :keymap cae-exwm-discord-mode-map
   :global nil)
 
 (map! :map cae-exwm-discord-mode-map
