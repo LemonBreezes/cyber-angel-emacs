@@ -66,7 +66,7 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 (when (string= (system-name) "s")
   (add-hook! 'exwm-init-hook
     (defun cae-exwm-setup-monitors ()
-      (run-at-time 1.0 nil
+      (run-at-time 3.0 nil
                    (lambda ()
                      (shell-command-to-string "~/.config/i3/display-setup.sh"))))))
 
