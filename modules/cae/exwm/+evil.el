@@ -86,8 +86,8 @@
       (progn (make-variable-buffer-local exwm-evil-mode-map)
              (map-keymap (lambda (key def)
                            (define-key exwm-evil-mode-map key def))
-                         cae-exwm-discord-mode-map)
-             (kill-local-variable 'cae-exwm-discord-mode-map))))
+                         'cae-exwm-discord-mode-map))
+    (kill-local-variable 'cae-exwm-discord-mode-map)))
 
 (map! :map cae-exwm-discord-mode-map
       :n "J" (cmd! ()
