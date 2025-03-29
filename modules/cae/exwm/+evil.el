@@ -83,7 +83,7 @@
   :keymap cae-exwm-discord-mode-map
   :global nil
   (if cae-exwm-discord-mode
-      (progn (make-variable-buffer-local exwm-evil-mode-map)
+      (progn (make-variable-buffer-local 'exwm-evil-mode-map)
              (map-keymap (lambda (key def)
                            (define-key exwm-evil-mode-map key def))
                          'cae-exwm-discord-mode-map))
