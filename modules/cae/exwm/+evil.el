@@ -83,10 +83,10 @@
   :keymap cae-exwm-discord-mode-map
   :global nil
   (if cae-exwm-discord-mode
-      (progn (let ((map (copy-keymap exwm-evil-mode-map)))
-               (make-variable-buffer-local 'exwm-evil-mode-map)
-               (setq exwm-evil-mode-map map)
-               (set-keymap-parent map cae-exwm-discord-mode-map)))
+      (progn (make-variable-buffer-local exwm-evil-mode-map)
+             (map-keymap (lambda (key def)
+                           (define-key exwm-evil-mode-map key def))
+                         'cae-exwm-discord-mode-map))
     (kill-local-variable 'cae-exwm-discord-mode-map)))
 
 (map! :map cae-exwm-discord-mode-map
