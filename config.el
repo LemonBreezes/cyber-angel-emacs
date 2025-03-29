@@ -29,8 +29,7 @@
 
 (when (and (modulep! :cae exwm)
            cae-init-exwm-enabled-p)
-  (add-hook! 'exwm-init-hook
-    (load! "lisp/cae-exwm" doom-user-dir)))
+  (load! "lisp/cae-exwm" doom-user-dir))
 
 
 ;;; UI
