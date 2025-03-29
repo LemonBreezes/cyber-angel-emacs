@@ -86,6 +86,7 @@
   (interactive)
   (exwm-input--fake-key ?\C-k)
   (exwm-evil-insert))
+
 (map! :map cae-exwm-discord-mode-map
       :n "J" #'cae-exwm-discord-search
       :n "C-k" #'cae-exwm-discord-search)
