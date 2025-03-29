@@ -592,6 +592,7 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
 
 ;;; Spell-checking functions
 
+;;;###autoload
 (defun cae-jinx-save-as-ispell-localword (save key word)
   "Save WORD using ispell's `ispell-words-keyword'.
 If SAVE is non-nil save, otherwise format candidate given action KEY."
@@ -618,15 +619,3 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
                  (overlay-end overlay))))
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
-
-(defun cae-jinx-ispell-localwords ()
-  "Return a string of ispell's local words.
-
-Those are the words following `ispell-words-keyword' (usually
-\"LocalWords\") in the current buffer."
-  (require 'ispell)
-  (save-excursion
-    (goto-char (point-min))
-    (cl-loop while (search-forward ispell-words-keyword nil t)
-             collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
-             finally return (mapconcat #'identity result " "))))
