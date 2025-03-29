@@ -25,6 +25,8 @@
   ;; using this.
   ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
+  ;; Set `forge.graphqlItemLimit' to 50 locally in some repositories where `forge-pull-notifications'
+
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
   (after! ghub-graphql
     ;; This works around an issue where killing and recreating the status buffer
