@@ -13,7 +13,7 @@
        '(esh-util esh-module esh-proc esh-io esh-cmd eshell
          em-tramp em-smart em-banner em-basic em-cmpl
          em-extpipe em-glob em-hist em-ls em-script em-term
-         em-alias em-elecslash em-rebind em-prompt))
+         em-alias em-elecslash em-rebind em-prompt eshell-pred))
    ,@(when (and (modulep! :term vterm)
                 (executable-find "cmake"))
        '(vterm))
