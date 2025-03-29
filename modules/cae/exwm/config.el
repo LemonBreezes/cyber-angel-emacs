@@ -77,6 +77,10 @@
                                (modulep! :completion helm))
                        '(([?\s-d] . helm-run-external-command)))))))
 
+    (when (bound-and-true-p cae-config-finished-loading)
+      (dolist (i exwm-input-global-keys)
+        (exwm-input--set-key (car i) (cdr i))))
+
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
