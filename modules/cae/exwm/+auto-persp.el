@@ -179,7 +179,8 @@ buffers of that class."
                         :get-name #'cae-exwm-persp--get-name))
 
 (unless cae-exwm-persp-loaded-p
-  (cae-exwm-reload-workspaces))
+  (cae-exwm-reload-workspaces)
+  (setq cae-exwm-persp-loaded-p t))
 
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
 
