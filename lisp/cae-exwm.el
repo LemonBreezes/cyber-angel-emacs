@@ -78,7 +78,7 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
                 (string-match-p "discord" exwm-class-name))
            (evil-local-set-key 'normal (kbd "J") (cmd! () (exwm-input--fake-key ?\C-k)))
            (evil-local-set-key 'normal (kbd "C-k") (cmd! () (exwm-input--fake-key ?\C-k)))
-           (evil-local-set-key 'normal (kbd "RET") (cmd! () (exwm-input--fake-key ?\C-j))))
+           (evil-local-set-key 'normal (kbd "<return>") (cmd! () (exwm-input--fake-key 'return))))
           ((and (stringp exwm-class-name)
                 (string-match-p "retroarch" exwm-class-name))
            (evil-emacs-state)
