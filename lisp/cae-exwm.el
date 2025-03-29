@@ -64,4 +64,8 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
 
 (when (equal (system-name) "s")
-  (start-process "display-setup" nil "sh" "~/.config/i3/display-setup.sh"))
+  (set-process-sentinel
+   (start-process "display-setup" nil "sh" "~/.config/i3/display-setup.sh")
+   (lambda (process event)
+     (when (string= event "finished\n")
+       (start-process "polybar" nil "polybar" "main")))))
