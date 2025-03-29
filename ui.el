@@ -72,8 +72,8 @@
 (after! doom-modeline
   (setq doom-modeline-hud t
         doom-modeline-support-imenu t
-        doom-modeline-mu4e t
-        doom-modeline-gnus t
+        doom-modeline-mu4e nil
+        doom-modeline-gnus nil
         doom-modeline-github nil
         doom-modeline-major-mode-icon (cae-display-graphic-p)
         doom-modeline-minor-modes t))
