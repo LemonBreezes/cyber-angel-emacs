@@ -93,3 +93,5 @@
   (put 'diff-mode 'mode-class nil))
 
 (setq debug-on-message "[iI]nvalid face reference")
+
+(advice-add #'doom-modeline--font-height :override #'ignore)
