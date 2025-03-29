@@ -609,6 +609,7 @@ If SAVE is non-nil save, otherwise format candidate given action KEY."
                " "))))
   (list key word "File"))
 
+;;;###autoload
 (defun cae-jinx-add-to-abbrev (overlay word)
   "Add abbreviation to `global-abbrev-table'.
 The misspelled word is taken from OVERLAY.  WORD is the corrected word."
@@ -629,9 +630,3 @@ Those are the words following `ispell-words-keyword' (usually
     (cl-loop while (search-forward ispell-words-keyword nil t)
              collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
              finally return (mapconcat #'identity result " "))))
-
-(defun cae-jinx-add-ispell-localwords ()
-  "Add ispell's local words to `jinx-local-words'."
-  (let ((ispell-localwords (cae-jinx-ispell-localwords)))
-    (setq jinx-local-words (concat jinx-local-words ispell-localwords))
-    (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
