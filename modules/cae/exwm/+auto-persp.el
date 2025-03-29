@@ -62,6 +62,9 @@
   "An alist whose for which a key is an EXWM class name and a value is the name
 of the corresponding workspace that will be created.")
 
+(defvar cae-exwm-persp-loaded-p nil
+  "Whether EXWM persp has been loaded.")
+
 (defun exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps'."
   (unless (or (not exwm--floating-frame)
@@ -175,7 +178,7 @@ buffers of that class."
                         :after-match #'cae-exwm-persp--after-match
                         :get-name #'cae-exwm-persp--get-name))
 
-(unless (featurep 'cae-exwm-auto-persp)
+(unless cae-exwm-persp-loaded-p
   (cae-exwm-reload-workspaces))
 
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
@@ -198,5 +201,3 @@ buffers of that class."
 (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
 
 (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
-
-(provide 'cae-exwm-auto-persp)
