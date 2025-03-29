@@ -74,3 +74,18 @@
         :n "C-<next>"  #'exwm-firefox-core-tab-next
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
+
+(add-hook! 'exwm-manage-finish-hook :depth 1
+  (defun cae-exwm-load-special-bindings-h ()
+    (cond ((and (stringp exwm-class-name)
+                (string-match-p "discord" exwm-class-name))
+           (local-set-key (evil-get-auxiliary-keymap 'normal 'exwm-mode)
+                          (kbd "J") (cmd! () (exwm-input--fake-key ?\C-k)))
+           (local-set-key (evil-get-auxiliary-keymap 'normal 'exwm-mode)
+                          (kbd "C-k") (cmd! () (exwm-input--fake-key ?\C-k))))
+          ((and (stringp exwm-class-name)
+                (string-match-p "retroarch" exwm-class-name))
+           (evil-emacs-state)
+           (setq-local exwm-input-line-mode-passthrough nil
+                       exwm-input-prefix-keys
+                       (delq 'escape exwm-input-prefix-keys))))))
