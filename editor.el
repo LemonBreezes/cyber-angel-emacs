@@ -409,4 +409,4 @@ Those are the words following `ispell-words-keyword' (usually
     (add-to-list 'vertico-multiform-categories
                  '(jinx grid (vertico-grid-annotate . 20)) t)))
 
-;; jinx-local-words:  downCase CamelCase iff uit sw fi
+;; LocalWords:  downCase CamelCase iff uit sw fi
