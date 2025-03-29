@@ -15,7 +15,7 @@
   '(("google-chrome-unstable" . "Chrome")
     ("chromium-browser" . "Chrome")
     ("chromium" . "Chrome")
-    ("Google-chrome" . "Chrome")
+    ("google-chrome" . "Chrome")
     ("Pavucontrol" . "Pavucontrol")
     ("tiled" . "Tiled")
     ("kitty" . "Kitty")
@@ -28,7 +28,7 @@
     ("kdeconnect." . "KDE Connect")
     ("libreoffice" . "Libreoffice")
     ("libreoffice-startcenter" . "Libreoffice")
-    ("Soffice" . "Libreoffice")
+    ("soffice" . "Libreoffice")
     ("libreoffice-writer" . "Libreoffice")
     ("libreoffice-calc" . "Libreoffice")
     ("libreoffice-base" . "Libreoffice")
@@ -59,10 +59,10 @@
     ("wow.exe" . "WoW")
     ("battle.net.exe" . "Battle.net")
     ("hakuneko-desktop" . "Hakuneko")
-    ("runescape" . "RuneScape")
-    ("Anydesk" . "Windows"))
-  "An alist whose for which a key is an EXWM class name and a value is the name
-of the corresponding workspace that will be created.")
+    ("runescape" . "RuneScape"))
+  "Alist mapping EXWM class names to workspace names.
+The key is the class name from EXWM and the value is the
+name of the workspace that will be created for that application.")
 
 (defvar cae-exwm-persp-loaded-p nil
   "Whether EXWM persp has been loaded.")
