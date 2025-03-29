@@ -97,7 +97,7 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 (when (and cae-config-finished-loading exwm--connection)
   (dolist (buf (buffer-list))
     (when
-      (eq (buffer-local-value 'major-mode buf) 'exwm-mode)
-    (with-current-buffer buf
-      (cae-exwm-load-special-bindings-h))))
+        (eq (buffer-local-value 'major-mode buf) 'exwm-mode)
+      (with-current-buffer buf
+        (cae-exwm-load-special-bindings-h))))
   )
