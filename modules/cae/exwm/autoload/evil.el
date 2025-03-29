@@ -4,6 +4,7 @@
 (defun cae-exwm-load-special-bindings-h ()
   (cond ((and (stringp exwm-class-name)
               (string-match-p "discord" exwm-class-name))
+         (exwm-evil-mode +1)
          (cae-exwm-discord-mode +1))
         ((and (stringp exwm-class-name)
               (string-match-p "retroarch" exwm-class-name))
