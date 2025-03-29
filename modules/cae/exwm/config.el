@@ -77,6 +77,7 @@
                                (modulep! :completion helm))
                        '(([?\s-d] . helm-run-external-command)))))))
 
+    ;; Update the above keys when reloading this file.
     (when (bound-and-true-p cae-config-finished-loading)
       (dolist (i exwm-input-global-keys)
         (exwm-input--set-key (car i) (cdr i))))
