@@ -17,7 +17,7 @@
 
 (use-package! exwm-firefox-evil
   :defer t :init
-  (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox 0)
+  (add-hook 'exwm-manage-finish-hook #'exwm-firefox-evil-activate-if-firefox 1)
   :config
   (cl-pushnew 'escape exwm-input-prefix-keys)
   ;; We can use VIM keys with any browser that has compatible keybindings.
@@ -89,5 +89,5 @@
                      (exwm-input--fake-key 'C-k)
                      (exwm-evil-insert)))
 
-(add-hook! 'exwm-manage-finish-hook :depth 0
+(add-hook! 'exwm-manage-finish-hook :depth 1
            #'cae-exwm-load-special-bindings-h)
