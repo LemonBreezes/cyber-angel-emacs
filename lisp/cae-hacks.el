@@ -94,4 +94,5 @@
 
 (setq debug-on-message "[iI]nvalid face reference")
 
-(advice-add #'doom-modeline--font-height :override #'ignore)
+(advice-add #'doom-modeline--font-height :override
+               (defun cae-const-24 () 24))
