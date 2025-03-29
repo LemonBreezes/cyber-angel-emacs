@@ -82,12 +82,12 @@
   :init-value nil
   :keymap cae-exwm-discord-mode-map)
 
+(defun cae-exwm-discord-search ()
+  (interactive)
+  (exwm-input--fake-key ?\C-k)
+  (exwm-evil-insert))
 (map! :map cae-exwm-discord-mode-map
-      :n "J" (cmd! ()
-                   (exwm-input--fake-key 'C-k)
-                   (exwm-evil-insert))
-      :n "C-k" (cmd! ()
-                     (exwm-input--fake-key 'C-k)
-                     (exwm-evil-insert)))
+      :n "J" #'cae-exwm-discord-search
+      :n "C-k" #'cae-exwm-discord-search)
 
 (add-hook! 'exwm-manage-finish-hook :depth 1 #'cae-exwm-load-special-bindings-h)
