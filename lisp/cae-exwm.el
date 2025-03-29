@@ -65,8 +65,8 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
 
 (when (string= (system-name) "s")
   (setq exwm-randr-workspace-monitor-plist
-        '(2 "HDMI-1"
-          1 "eDP-1"))
+        '(1 "HDMI-1"
+          0 "eDP-1"))
   (setq exwm-workspace-number 2))
 
 (add-hook! 'exwm-manage-finish-hook :depth 1
