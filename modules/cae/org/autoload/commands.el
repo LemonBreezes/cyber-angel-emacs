@@ -45,8 +45,10 @@
                         (funcall (lambda (s)
                                    (with-temp-buffer
                                      (insert s)
-                                     (funcall source-mode)
-                                     (indent-region (point-min) (point-max))
+                                     ;; Only call the mode function and indent if the mode is defined
+                                     (when (and source-mode (fboundp source-mode))
+                                       (funcall source-mode)
+                                       (indent-region (point-min) (point-max)))
                                      (buffer-substring-no-properties (point-min) (point-max)))))
                         (org-escape-code-in-string))
            (format "\n#+end_src\n"))))
