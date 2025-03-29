@@ -218,8 +218,7 @@
     (after! corfu
       (load! "+corfu")))
 
-  (when (and (modulep! :ui workspaces)
-             (not (featurep 'cae-exwm-auto-persp)))
+  (when (modulep! :ui workspaces)
     (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
     (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
     (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
