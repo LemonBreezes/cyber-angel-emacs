@@ -93,4 +93,4 @@
                      (exwm-input--fake-key 'C-k)
                      (exwm-evil-insert)))
 
-(add-hook! 'exwm-manage-finish-hook :depth -1 #'cae-exwm-load-special-bindings-h)
+(add-hook! 'exwm-manage-finish-hook :depth 1 #'cae-exwm-load-special-bindings-h)
