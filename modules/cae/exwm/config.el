@@ -36,6 +36,9 @@
                    ([?\s-r] . exwm-reset)
                    ;; Bind "s-w" to switch workspace interactively.
                    ([?\s-w] . +workspace/switch-to)
+                   ;; Bind "s-," and "s-." to EXWM workspace switching.
+                   ([?\s-,] . cae-exwm-workspace-switch-previous)
+                   ([?\s-.] . cae-exwm-workspace-switch-next)
                    ;; Bind "s-&" to launch applications ('M-&' also works if the
                    ;; output buffer does not bother you).
                    ([?\s-&] . (lambda (command)
