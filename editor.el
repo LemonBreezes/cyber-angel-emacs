@@ -384,21 +384,21 @@
   :defer t :init
   (add-hook 'doom-after-init-hook #'global-jinx-mode)
   (defun cae-jinx-ispell-localwords ()
-  "Return a string of ispell's local words.
+    "Return a string of ispell's local words.
 
 Those are the words following `ispell-words-keyword' (usually
 \"LocalWords\") in the current buffer."
-  (require 'ispell)
-  (save-excursion
-    (goto-char (point-min))
-    (cl-loop while (search-forward ispell-words-keyword nil t)
-             collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
-             finally return (mapconcat #'identity result " "))))
+    (require 'ispell)
+    (save-excursion
+      (goto-char (point-min))
+      (cl-loop while (search-forward ispell-words-keyword nil t)
+               collect (string-trim (buffer-substring-no-properties (point) (line-end-position))) into result
+               finally return (mapconcat #'identity result " "))))
   (defun cae-jinx-add-ispell-localwords ()
     "Add ispell's local words to `jinx-local-words'."
     (let ((ispell-localwords (cae-jinx-ispell-localwords)))
-    (setq jinx-local-words (concat jinx-local-words ispell-localwords))
-    (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
+      (setq jinx-local-words (concat jinx-local-words ispell-localwords))
+      (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
   (add-hook 'jinx-mode-hook #'cae-jinx-add-ispell-localwords)
   :config
   (map! "M-$" #'jinx-correct
