@@ -26,7 +26,7 @@
   ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
   ;; Set `forge.graphqlItemLimit' to 20 locally in some repositories where
-  ;; `forge-pull' will hit the rate limits.
+  ;; `forge-pull' will hit the rate limits. Do this with `@mc'.
 
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
   (after! ghub-graphql
