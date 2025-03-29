@@ -407,6 +407,6 @@ Those are the words following `ispell-words-keyword' (usually
   (cae-advice-add #'jinx--correct-replace :before #'cae-jinx-add-to-abbrev)
   (after! vertico-multiform
     (add-to-list 'vertico-multiform-categories
-                 '(jinx grid (vertico-grid-annotate . 20)))))
+                 '(jinx grid (vertico-grid-annotate . 20)) t)))
 
 ;; LocalWords:  downCase CamelCase iff uit sw fi
