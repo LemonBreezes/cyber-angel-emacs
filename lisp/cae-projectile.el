@@ -23,6 +23,7 @@
 
 ;; Silence noisy function.
 (advice-add #'projectile-discover-projects-in-directory :around #'cae-shut-up-a)
+(advice-add #'+default/discover-projects :around #'cae-shut-up-a)
 
 (defun cae-projectile-maybe-add-project ()
   "If saving a .projectile file, add its directory to projectile's known projects."
