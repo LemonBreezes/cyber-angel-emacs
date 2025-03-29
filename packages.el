@@ -8,11 +8,6 @@
                    elfeed-goodies
                    mu4e-alert)
 (unpin! t)
-;; Not using the built-in package verisons can cause errors.
-(package! eldoc :built-in t)
-(package! which-key :built-in t)
-(package! track-changes :built-in t)
-(package! seq :built-in t)
 (package! mu4e :built-in t)
 
 ;; PRs that haven't been merged yet.
