@@ -30,6 +30,10 @@
   (package! lsp-treemacs :recipe
     (:host github :repo "LemonBreezes/lsp-treemacs"
      :branch "lots-of-fixes")))
+(when (modulep! :ui modeline)
+  (package! doom-modeline :recipe
+    (:host github :repo "LemonBreezes/doom-modeline"
+           :branch "cache-font-height-calculation")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
