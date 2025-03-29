@@ -75,20 +75,20 @@
         :n "C-<prior>" #'exwm-firefox-core-tab-previous
         :n "<f6>" #'exwm-firefox-core-focus-search-bar))
 
-(defvar cae-exwm-discord-mode-map (make-sparse-keymap))
-
-(define-minor-mode cae-exwm-discord-mode
-  "Minor mode for Discord."
-  :init-value nil
-  :keymap cae-exwm-discord-mode-map)
-
 (defun cae-exwm-discord-search ()
   (interactive)
   (exwm-input--fake-key ?\C-k)
   (exwm-evil-insert))
 
+(defvar cae-exwm-discord-mode-map (make-sparse-keymap))
+
 (map! :map cae-exwm-discord-mode-map
       :n "J" #'cae-exwm-discord-search
       :n "C-k" #'cae-exwm-discord-search)
+
+(define-minor-mode cae-exwm-discord-mode
+  "Minor mode for Discord."
+  :init-value nil
+  :keymap cae-exwm-discord-mode-map)
 
 (add-hook! 'exwm-manage-finish-hook :depth 1 #'cae-exwm-load-special-bindings-h)
