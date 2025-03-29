@@ -25,7 +25,7 @@
   ;; using this.
   ;;(add-hook 'doom-first-file-hook #'magit-wip-mode)
 
-  ;; Set `forge.graphqlItemLimit' to 50 locally in some repositories where
+  ;; Set `forge.graphqlItemLimit' to 20 locally in some repositories where
   ;; `forge-pull' will hit the rate limits.
 
   (add-hook 'magit-mode-hook #'cae-magit-add-PR-fetch-ref)
