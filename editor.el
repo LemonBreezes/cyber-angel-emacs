@@ -410,5 +410,5 @@ Those are the words following `ispell-words-keyword' (usually
                  '(jinx grid (vertico-grid-annotate . 20)) t)))
 
 ;;Local Variables:
-;;jinx-local-words: downCase CamelCase iff uit sw fi
+;;jinx-local-words: "downCase CamelCase iff uit sw fi"
 ;;End:
