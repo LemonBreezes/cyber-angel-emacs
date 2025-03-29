@@ -80,8 +80,7 @@
 (define-minor-mode cae-exwm-discord-mode
   "Minor mode for Discord."
   :init-value nil
-  :keymap cae-exwm-discord-mode-map
-  :global nil)
+  :keymap cae-exwm-discord-mode-map)
 
 (map! :map cae-exwm-discord-mode-map
       :n "J" (cmd! ()
