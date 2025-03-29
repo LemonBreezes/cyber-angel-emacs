@@ -63,10 +63,11 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
   ;; Replace the individual keybindings with a hydra
   (global-set-key (kbd "s-h") 'hydra-exwm-apps/body))
 
-(setq exwm-randr-workspace-monitor-plist
-      '(3 "HDMI-1"
-        2 "DP-1"
-        1 "eDP-1"))
+(when (string= (system-name) "s")
+  (setq exwm-randr-workspace-monitor-plist
+        '(3 "HDMI-1"
+          2 "DP-1"
+          1 "eDP-1")))
 (setq exwm-workspace-number 3)
 
 (add-hook! 'exwm-manage-finish-hook :depth 1
