@@ -141,5 +141,5 @@
 
 ;;Local Variables:
 ;;eval: (when (featurep 'aggressive-indent) (aggressive-indent-mode -1))
-;;jinx-local-words: ui
+;;jinx-local-words: "ui"
 ;;End:
