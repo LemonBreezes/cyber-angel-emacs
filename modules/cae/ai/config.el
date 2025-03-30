@@ -79,7 +79,7 @@
           ;;"--auto-test"
           ;;"--timeout" "120"
           ;;"--test"
-          "--auto-commits"
+          ;;"--auto-commits"
           "--auto-accept-architect"
           ;;"--install-tree-sitter-language-pack"
           "--chat-language" "English"
