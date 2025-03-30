@@ -88,7 +88,7 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
   (when (and bookmark-default-file (file-exists-p bookmark-default-file))
     (cae-multi--push-changes bookmark-default-file " *cae-multi-bookmark-push-changes-a*")))
 
-(defun cae-multi-org-archive-push-changes-h ()
+(defun cae-multi-push-changes-h ()
   "Push changes to org files and their archives after archiving."
   (when buffer-file-name
     (gac--after-save (buffer-file-name))
@@ -101,8 +101,6 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 
 ;; Set up advice and hooks
 (cae-advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
-(after! org
-  (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h))
 
 ;;; Abbrev Handling
 
