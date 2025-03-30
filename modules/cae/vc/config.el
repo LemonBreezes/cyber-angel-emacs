@@ -191,3 +191,12 @@
         difftastic-display-buffer-function
         (lambda (buf _)
           (display-buffer-same-window buf nil))))
+
+(use-package magit-blame-color-by-age
+  :defer t :init
+
+  ;; if you'd like date first on heading lines:
+  ;; :config (setf (alist-get 'heading-format (alist-get 'headings magit-blame-styles)) "%C %-20a %s\n")
+  ;; For full heading coloring
+  ;; :custom (magit-blame-color-by-age-full-heading t)
+)
