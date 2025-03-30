@@ -54,10 +54,7 @@
       (setq-local aidermacs-auto-commits t)
       (setq-local gac-automatically-add-new-files-p t)
       (setq-local gac-automatically-push-p t)
-      (add-hook 'org-capture-before-finalize-hook
-                #'gac-after-save-func nil t)
-      (add-hook 'org-archive-hook
-                #'cae-multi-org-archive-push-changes-h nil t)
+      (add-hook 'org-archive-hook #'cae-multi-org-archive-push-changes-h nil t)
       (git-auto-commit-mode 1))))
 
 (defun cae--setup-secrets-dir-locals ()
