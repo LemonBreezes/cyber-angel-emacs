@@ -2,16 +2,16 @@
 
 ;; Advise packages that use posframe for a multi-head setup
 
-(defun cae-get-focused-monitor-geometry ()
-  "Get the geometry of the monitor displaying the selected frame in EXWM."
-  (let* ((monitor-attrs (frame-monitor-attributes))
-         (workarea (assoc 'workarea monitor-attrs))
-         (geometry (cdr workarea)))
-    (list (nth 0 geometry) ; X
-          (nth 1 geometry) ; Y
-          (nth 2 geometry) ; Width
-          (nth 3 geometry) ; Height
-          )))
+;;(defun cae-get-focused-monitor-geometry ()
+;;  "Get the geometry of the monitor displaying the selected frame in EXWM."
+;;  (let* ((monitor-attrs (frame-monitor-attributes))
+;;         (workarea (assoc 'workarea monitor-attrs))
+;;         (geometry (cdr workarea)))
+;;    (list (nth 0 geometry) ; X
+;;          (nth 1 geometry) ; Y
+;;          (nth 2 geometry) ; Width
+;;          (nth 3 geometry) ; Height
+;;          )))
 
 (defun cae-advise-corfu-make-frame-with-monitor-awareness (orig-fun frame x y width height)
   "Advise `corfu--make-frame` to be monitor-aware, adjusting X and Y according to the focused monitor."
