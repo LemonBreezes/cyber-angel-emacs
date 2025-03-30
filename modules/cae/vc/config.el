@@ -196,9 +196,9 @@
   :defer t :after-call magit-blame-mode-hook :config
   ;; Double-check that nothing else has modified the Git Blame header before
   ;; modifying it.
-  (when (equal "%-20a %C %s\n"
-               (alist-get 'heading-format
-                          (alist-get 'headings magit-blame-styles)))
+  (when (string= "%-20a %C %s\n"
+                 (alist-get 'heading-format
+                            (alist-get 'headings magit-blame-styles)))
     (setf (alist-get 'heading-format (alist-get 'headings magit-blame-styles))
           "%C %-20a %s\n"))
   (setq magit-blame-color-by-age-full-heading t)
