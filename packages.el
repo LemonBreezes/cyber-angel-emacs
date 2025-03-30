@@ -58,7 +58,7 @@
   (package! evil-owl)
   (package! tabgo)
   (package! evil-tutor)
-  (package! key-chord :recipe (:host github :repo "LemonBreezes/key-chord")))
+  (package! key-chord :recipe (:host github :repo "emacsorphanage/key-chord")))
 ;; We also use `parrot' for Evil.
 
 ;; cae-smartparens.el
