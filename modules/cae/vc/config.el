@@ -194,5 +194,6 @@
 
 (use-package magit-blame-color-by-age
   :defer t :after-call magit-blame-mode-hook :config
+  (setf (alist-get 'heading-format (alist-get 'headings magit-blame-styles)) "%C %-20a %s\n")
   (setq magit-blame-color-by-age-full-heading t)
   (magit-blame-color-by-age-mode +1))
