@@ -15,6 +15,8 @@
 (when (modulep! +delta)
   (package! diff-ansi))
 (package! difftastic)
+(package! magit-blame-color-by-age :recipe
+  (:host github :repo "jdtsmith/magit-blame-color-by-age"))
 
 ;; These are used for their autoloads. They are not explicitly referenced in
 ;; this configuration.
