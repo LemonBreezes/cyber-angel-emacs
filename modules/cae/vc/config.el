@@ -201,5 +201,5 @@
                             (alist-get 'headings magit-blame-styles)))
     (setf (alist-get 'heading-format (alist-get 'headings magit-blame-styles))
           "%C %-20a %s\n"))
-  (setq magit-blame-color-by-age-full-heading t)
+  (setq magit-blame-color-by-age-full-heading nil)
   (magit-blame-color-by-age-mode +1))
