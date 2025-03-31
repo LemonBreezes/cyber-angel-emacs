@@ -92,7 +92,7 @@
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
 
-(setq debug-on-message "[iI]nvalid face reference")
+(setq debug-on-message "Invalid face reference\\|Remote file error:")
 
 (advice-add #'doom-modeline--font-height :override
             (defun cae-const-24 () 24))
