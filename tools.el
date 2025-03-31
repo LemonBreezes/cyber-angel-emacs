@@ -94,7 +94,6 @@
       remote-file-name-inhibit-delete-by-moving-to-trash t
       remote-file-name-inhibit-auto-save t
       remote-file-name-inhibit-auto-save-visited t
-      remote-file-name-inhibit-cache nil
       ;; ---
       ;;large-file-warning-threshold 100000000 ; ~100 MB
       yank-pop-change-selection t
