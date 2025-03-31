@@ -82,7 +82,7 @@
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
         ;; Games
-        '(snake speed-type tetris bubbles dunnet autotetris chess klondike)
+        '(snake speed-type tetris bubbles dunnet autotetris-mode chess klondike)
         ;; Eye candy
         '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
           zone-nyan zone-pgm-spoopy selectric)
