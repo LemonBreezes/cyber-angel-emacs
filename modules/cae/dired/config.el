@@ -110,9 +110,10 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
-  ;; Disabling almost all of the attributes because they slow down Tramp.
-  (setq dirvish-attributes '(file-size))
-  (setq dirvish-subtree-prefix "  ")
+  (setq dirvish-attributes
+        (append (when (cae-display-graphic-p)
+                  '(nerd-icons))
+                '(file-size subtree-state collapse file-time)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
