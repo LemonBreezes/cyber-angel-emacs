@@ -62,7 +62,7 @@
        '(treemacs))
    ,@(when (and (modulep! :ui treemacs +lsp)
                 (not (modulep! :tools lsp +eglot)))
-       '(treemacs-lsp))
+       '(lsp-treemacs))
    ,@(when (modulep! :app rss +org)
        '(elfeed-org))
    ,@(when (and (modulep! :completion vertico)
