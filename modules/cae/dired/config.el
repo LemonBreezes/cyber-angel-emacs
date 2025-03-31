@@ -110,6 +110,7 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
+  ;; Collapse makes Tramp unbearably slow.
   (setq dirvish-attributes
         (append (when (cae-display-graphic-p)
                   '(nerd-icons))
