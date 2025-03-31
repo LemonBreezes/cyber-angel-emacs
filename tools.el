@@ -89,12 +89,12 @@
 ;; Was reading this
 ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
 (setq delete-by-moving-to-trash t
-      ;; Careful with these settings! They can prevent errors and Emacs
-      ;; freezing but they can also surprise you if you expect all your files
-      ;; to be trashed when you delete them.
+      ;; Careful with these settings! Do not use them unless you know what
+      ;; you're doing.
       remote-file-name-inhibit-delete-by-moving-to-trash t
       remote-file-name-inhibit-auto-save t
       remote-file-name-inhibit-auto-save-visited t
+      remote-file-name-inhibit-cache nil
       ;; ---
       ;;large-file-warning-threshold 100000000 ; ~100 MB
       yank-pop-change-selection t
