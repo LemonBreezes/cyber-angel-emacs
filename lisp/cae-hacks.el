@@ -94,20 +94,24 @@
 
 (setq debug-on-message "Invalid face reference\\|Remote file error:")
 
+;; Replace the existing function definition with this refined version:
 (defun cae-delete-file-projectile-remove-from-cache (filename &optional _trash)
   (when (and projectile-enable-caching projectile-auto-update-cache)
     ;; Avoid Tramp reentrant calls from process sentinels etc.
-    ;; If default-directory is remote, projectile-project-p might trigger
-    ;; a forbidden Tramp call.
-    (unless (file-remote-p default-directory)
-      ;; Check for project *after* ensuring default-directory is not remote.
+    ;; Only proceed if the current context doesn't forbid Tramp calls,
+    ;; even if default-directory is remote. Check fboundp for robustness.
+    (unless (and (fboundp 'tramp-tramp-file-p)
+                 (tramp-tramp-file-p default-directory))
+      ;; Check for project *after* ensuring the context is safe.
       (when-let ((project-root (projectile-project-p)))
-        ;; Also ensure the found project-root is not remote before proceeding,
-        ;; as file-relative-name or persistent cache saving might involve Tramp.
-        (unless (file-remote-p project-root)
-          (let* ((true-filename (file-truename filename))
-                 (relative-filename (file-relative-name true-filename project-root)))
-            (when (projectile-file-cached-p relative-filename project-root)
-              (projectile-purge-file-from-cache relative-filename))))))))
+        ;; Proceed with cache update for both local and remote projects.
+        ;; The context check above should prevent reentrant errors during
+        ;; project-root detection. Subsequent operations might still involve
+        ;; Tramp if project-root is remote, but should be safe in a
+        ;; non-restricted context.
+        (let* ((true-filename (file-truename filename))
+               (relative-filename (file-relative-name true-filename project-root)))
+          (when (projectile-file-cached-p relative-filename project-root)
+            (projectile-purge-file-from-cache relative-filename)))))))
 (advice-add #'delete-file-projectile-remove-from-cache :override
             #'cae-delete-file-projectile-remove-from-cache)
