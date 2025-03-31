@@ -110,11 +110,10 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
-  ;; Careful! If you add attributes and use Tramp, it will cause Tramp to freeze.
   (setq dirvish-attributes
         (append (when (cae-display-graphic-p)
                   '(nerd-icons))
-                '(file-size)))
+                '(file-size subtree-state file-time)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
