@@ -114,7 +114,7 @@
   (setq dirvish-attributes
         (append (when (cae-display-graphic-p)
                   '(nerd-icons))
-                '(file-size subtree-state file-time)))
+                '(file-size)))
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
   ;; second line of the buffer.
