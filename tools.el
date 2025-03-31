@@ -182,7 +182,8 @@
 
 (after! tramp
   (setq tramp-use-scp-direct-remote-copying t
-        tramp-allow-unsafe-temporary-files t)
+        tramp-allow-unsafe-temporary-files t
+        tramp-connection-timeout nil)
   (dolist (path '("~/.guix-profile/bin" "~/.guix-profile/sbin"
                   "/run/current-system/profile/bin"
                   "/run/current-system/profile/sbin"))
