@@ -153,6 +153,9 @@
 ;; Allow switching to these buffers with `C-x b'
 (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
 
+;; BUG This can cause infinite loops with Tramp in Dired.
+;;(when (modulep! :completion vertico)
+;;  (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target))
 (after! eldoc
   (setq eldoc-echo-area-prefer-doc-buffer t)
   ;; BUG If Eldoc tries to show help while Which Key is active, there is an
