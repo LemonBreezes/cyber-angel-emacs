@@ -110,10 +110,8 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
-  ;; The Dirvish `collapse' attribute makes Tramp unbearably slow.
+  ;; Disabling almost all of the attributes because they slow down Tramp.
   (setq dirvish-attributes '(file-size))
-  ;; Without the `subtree-state' attribute, it looks a bit weird to have a "| "
-  ;; prefix.
   (setq dirvish-subtree-prefix "  ")
   ;; This option conflicts with the new `dired-movement-style' equal to `cycle'
   ;; and with `beginend-dired-mode', as they expect the files to begin on the
