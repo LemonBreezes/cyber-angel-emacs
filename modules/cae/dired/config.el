@@ -111,10 +111,7 @@
 (after! dirvish
   (setq dirvish-hide-cursor nil)
   ;; The Dirvish `collapse' attribute makes Tramp unbearably slow.
-  (setq dirvish-attributes
-        (append (when (cae-display-graphic-p)
-                  '(nerd-icons))
-                '(file-size)))
+  (setq dirvish-attributes '(file-size))
   ;; Without the `subtree-state' attribute, it looks a bit weird to have a "| "
   ;; prefix.
   (setq dirvish-subtree-prefix "  ")
