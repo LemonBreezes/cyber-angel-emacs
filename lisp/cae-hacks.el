@@ -101,7 +101,8 @@
     ;; Only proceed if the current context doesn't forbid Tramp calls,
     ;; even if default-directory is remote. Check fboundp for robustness.
     (unless (and (fboundp 'tramp-tramp-file-p)
-                 (tramp-tramp-file-p default-directory))
+                 (tramp-tramp-file-p default-directory)
+                 (not (tramp-tramp-file-p filename)))
       ;; Check for project *after* ensuring the context is safe.
       (when-let ((project-root (projectile-project-p)))
         ;; Proceed with cache update for both local and remote projects.
