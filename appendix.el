@@ -85,7 +85,7 @@
         '(snake speed-type tetris bubbles dunnet autotetris-mode chess klondike)
         ;; Eye candy
         '(fireplace flames-of-freedom snow zone zone-matrix zone-rainbow
-          zone-nyan zone-pgm-spoopy selectric)
+          zone-nyan zone-pgm-spoopy selectric-mode)
         ;; Insert
         '(lorem-ipsum password-generator uuidgen)
         ;; Random
