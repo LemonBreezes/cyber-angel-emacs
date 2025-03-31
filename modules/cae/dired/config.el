@@ -110,6 +110,7 @@
 
 (after! dirvish
   (setq dirvish-hide-cursor nil)
+  ;; Careful! If you add attributes and use Tramp, it will cause Tramp to freeze.
   (setq dirvish-attributes
         (append (when (cae-display-graphic-p)
                   '(nerd-icons))
