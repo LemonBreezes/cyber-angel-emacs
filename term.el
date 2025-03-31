@@ -66,7 +66,8 @@
           "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
           "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
           "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok")
+          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok"
+          "claude")
         eshell-visual-subcommands `(("gh" "repo" "fork")
                                     ("geth" "attach")
                                     ,@(unless (string= (getenv "GIT_PAGER")
