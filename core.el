@@ -96,8 +96,7 @@ frameworks.")
   ;; Tramp still doesn't work for me on this computer so don't blindly copy
   ;; this.
   (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"
-        tramp-default-remote-shell (executable-find "bash")))
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; Automatically mark scripts as executable.
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
