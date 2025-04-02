@@ -3,6 +3,8 @@
 ;; Copied pretty much verbatim from
 ;; https://github.com/tecosaur/emacs-config/blob/master/config.org
 (use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write
+  vlf-search vlf-occur vlf-follow vlf-ediff vlf
   :defer t :init
   (cae-advice-add #'files--ask-user-about-large-file :override #'cae-files--ask-about-large-file-vlf)
   :config
