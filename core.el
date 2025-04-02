@@ -93,10 +93,8 @@ frameworks.")
   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
 (after! tramp
-  ;; Tramp still doesn't work for me on this computer so don't blindly copy
-  ;; this.
-  (setq tramp-shell-prompt-pattern
-        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*"))
+  (setenv "SHELL" "/bin/bash")
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; Automatically mark scripts as executable.
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
