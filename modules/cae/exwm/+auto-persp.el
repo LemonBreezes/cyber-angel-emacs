@@ -186,19 +186,33 @@ buffers of that class."
 
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
 
+(defun cae-exwm-find-workspace-for-program (program-name)
+  "Find the appropriate workspace name for PROGRAM-NAME.
+Returns nil if no matching workspace is found."
+  (let* ((program-parts (string-split (file-name-base program-name) "-"))
+         (possible-names (nreverse
+                          (cl-loop for i from 1 to (length program-parts)
+                                   collect (string-join 
+                                           (cl-subseq program-parts 0 i) "-"))))
+         (matching-key (cl-find-if 
+                       (lambda (name)
+                         (assoc-string name cae-exwm-workspace-name-replacements t))
+                       possible-names)))
+    (when matching-key
+      (alist-get matching-key cae-exwm-workspace-name-replacements nil nil #'cl-equalp))))
+;; Use interactive function `cae-exwm-test-workspace-matching' to test this.
+
+(defun cae-exwm-test-workspace-matching (program-name)
+  "Test the workspace matching logic for PROGRAM-NAME.
+Returns the matched workspace name or nil."
+  (interactive "sProgram name to test: ")
+  (let ((result (cae-exwm-find-workspace-for-program program-name)))
+    (message "Program '%s' matches workspace: %s" program-name (or result "None"))
+    result))
+
 (defadvice! cae-exwm-browse-url-generic-a (&rest _)
   :before #'browse-url-generic
-  (when-let* ((workspace
-               (alist-get (string-join
-                           (cl-find-if (lambda (l)
-                                         (setq l (string-join l "-"))
-                                         (alist-get l cae-exwm-workspace-name-replacements nil nil #'cl-equalp))
-                                       (nreverse
-                                        (cdr
-                                         (cl-loop for i from 1 to (length (string-split (file-name-base browse-url-generic-program) "-"))
-                                                  collect (cl-subseq (string-split (file-name-base browse-url-generic-program) "-") 0 i)))))
-                           "-")
-                          cae-exwm-workspace-name-replacements nil nil #'cl-equalp)))
+  (when-let* ((workspace (cae-exwm-find-workspace-for-program browse-url-generic-program)))
     (+workspace-switch workspace t)
     (+workspace/display)))
 (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
