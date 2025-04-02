@@ -6,6 +6,7 @@
   :defer-incrementally vlf-tune vlf-base vlf-write
   vlf-search vlf-occur vlf-follow vlf-ediff vlf
   :defer t :init
+  (defvar vlf-application 'ask) ; Avoid load-order issues
   (cae-advice-add #'files--ask-user-about-large-file :override #'cae-files--ask-about-large-file-vlf)
   :config
   (advice-remove 'abort-if-file-too-large #'ad-Advice-abort-if-file-too-large)
