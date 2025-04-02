@@ -51,15 +51,15 @@
           t)
     (map! "C-;" nil
           (:map minibuffer-local-map
-           "C-;" nil))
+                "C-;" nil))
     (dolist (key embark-act-keys)
       (map! key #'embark-act
             (:map minibuffer-local-map
-             key #'embark-act)))
+                  key #'embark-act)))
     (dolist (key embark-act-all-keys)
       (map! key #'embark-act-all
             (:map minibuffer-local-map
-             key #'embark-act-all)))
+                  key #'embark-act-all)))
     (dolist (key embark-export-keys)
       (map! :map minibuffer-local-map
             key #'embark-export))
@@ -105,23 +105,23 @@
       "M-R" #'cae-sp-raise-sexp
       "M-/" #'hippie-expand
       (:when (modulep! :completion corfu)
-       "C-M-/" #'cape-dabbrev
-       "C-S-s" #'cae-complete-in-minibuffer)
+        "C-M-/" #'cape-dabbrev
+        "C-S-s" #'cae-complete-in-minibuffer)
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
-       "<f5>" #'gptel-menu
-       "<f7>" #'gptel-rewrite
-       "<f6>" #'aidermacs-transient-menu
-       "<f12>" #'redraw-display)
+        "<f5>" #'gptel-menu
+        "<f7>" #'gptel-rewrite
+        "<f6>" #'aidermacs-transient-menu
+        "<f12>" #'redraw-display)
       "C-<f1>" #'try
       (:map process-menu-mode-map
-       "o" #'link-hint-open-link)
+            "o" #'link-hint-open-link)
       (:after vertico
-       (:map vertico-map
-        "<prior>" #'vertico-scroll-down
-        "<next>" #'vertico-scroll-up
-        "C-z" #'cae-embark-act-with-completing-read)))
+              (:map vertico-map
+                    "<prior>" #'vertico-scroll-down
+                    "<next>" #'vertico-scroll-up
+                    "C-z" #'cae-embark-act-with-completing-read)))
 (define-key resize-window-repeat-map "_" #'shrink-window)
 
 ;; Resolve the age-old conflict between using TAB for completion,
@@ -290,11 +290,11 @@
    "M-g f" #'consult-flymake
    (:when (and (modulep! :checkers syntax)
                (not (modulep! :checkers syntax +flymake)))
-    "M-g f" #'consult-flycheck)
+     "M-g f" #'consult-flycheck)
    (:unless (modulep! :config default)
-    "M-s d" #'consult-fd
-    "M-s r" #'consult-ripgrep
-    "M-s c" #'consult-locate)
+     "M-s d" #'consult-fd
+     "M-s r" #'consult-ripgrep
+     "M-s c" #'consult-locate)
    [remap Info-search] #'consult-info
    "M-X" #'consult-mode-command)
   (when (modulep! :tools debugger +lsp)
@@ -311,33 +311,33 @@
         t))
 (map! :leader
       (:prefix "i"
-       (:when (modulep! :completion vertico)
-        :desc "Keyboard macro" "k" #'consult-kmacro))
+               (:when (modulep! :completion vertico)
+                 :desc "Keyboard macro" "k" #'consult-kmacro))
       (:prefix "s"
        :desc "Copy link" "y" #'link-hint-copy-link)
       (:prefix "c"
-       (:when (modulep! :tools editorconfig)
-        :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
-       (:prefix-map ("=" . "substitute")
-        :desc "Substitute in defun" "d" #'substitute-target-in-defun
-        :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
-        :desc "Substitute above point" "p" #'substitute-target-above-point
-        :desc "Substitute below point" "n" #'substitute-target-below-point))
+               (:when (modulep! :tools editorconfig)
+                 :desc "Format whitespace" "C-f" #'editorconfig-format-buffer)
+               (:prefix-map ("=" . "substitute")
+                :desc "Substitute in defun" "d" #'substitute-target-in-defun
+                :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
+                :desc "Substitute above point" "p" #'substitute-target-above-point
+                :desc "Substitute below point" "n" #'substitute-target-below-point))
       (:prefix "t"
        :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
       (:prefix "f"
        :desc "Find sibling file" "TAB" #'cae-find-sibling-file
        (:when (modulep! :completion vertico)
-        :desc "Find directory" "d" #'consult-dir))
+         :desc "Find directory" "d" #'consult-dir))
       (:prefix "o"
-       (:when (modulep! :cae notifications)
-        :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
-       (:when (modulep! :ui workspaces)
-        (:when (modulep! :term eshell)
-         :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
-        (:when (modulep! :term vterm)
-         :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace)))
+               (:when (modulep! :cae notifications)
+                 :desc "Toggle notifications" "`" #'cae-ednc-toggle-notifications)
+               (:when (modulep! :ui workspaces)
+                 (:when (modulep! :term eshell)
+                   :desc "Open eshell workspace" "C-e" #'cae-open-eshell-in-new-workspace)
+                 (:when (modulep! :term vterm)
+                   :desc "Open vterm workspace" "C-t" #'cae-open-vterm-in-new-workspace)))
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
@@ -358,7 +358,7 @@
       (:prefix "d"
        :desc "Toggle debug options" "d" #'cae-debug-transient
        (:when (modulep! :editor evil +everywhere)
-        :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
+         :desc "Open Evil Collection config" "C" #'evil-collection-open-config-file)))
 (after! which-key
   (which-key-add-keymap-based-replacements help-map "dq" "Toggle debug-on-quit")
   (which-key-add-keymap-based-replacements help-map "dC" "Open Evil Collection config"))
@@ -384,10 +384,10 @@
 (after! org
   (map! :map org-mode-map
         (:when (not (modulep! :editor evil))
-         "M-RET" #'org-insert-heading
-         "M-S-RET" #'org-insert-todo-heading
-         "M-<return>" #'org-insert-heading
-         "M-S-<return>" #'org-insert-todo-heading)
+          "M-RET" #'org-insert-heading
+          "M-S-RET" #'org-insert-todo-heading
+          "M-<return>" #'org-insert-heading
+          "M-S-<return>" #'org-insert-todo-heading)
         :localleader
         :desc "Insert heading" "RET" #'org-ctrl-c-ret))
 
