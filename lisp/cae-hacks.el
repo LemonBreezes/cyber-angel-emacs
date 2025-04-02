@@ -94,6 +94,7 @@
 
 (setq debug-on-message "Invalid face reference\\|Remote file error:")
 
+;; HACK I suspect this is actually a problem with `compile-angel' instead.
 ;; Replace the existing function definition with this refined version:
 (defun cae-delete-file-projectile-remove-from-cache (filename &optional _trash)
   (when (and projectile-enable-caching projectile-auto-update-cache)
