@@ -50,7 +50,7 @@
     (setq-local jit-lock-defer-time 0.05
                 jit-lock-stealth-time 1)))
 
-(add-hook 'org-mode-hook #'locally-defer-font-lock)
+(add-hook 'org-mode-hook #'cae-locally-defer-font-lock)
 
 (when (modulep! +pretty)
   (load! "+pretty"))
