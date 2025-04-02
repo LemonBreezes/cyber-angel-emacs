@@ -202,14 +202,6 @@ Returns nil if no matching workspace is found."
       (alist-get matching-key cae-exwm-workspace-name-replacements nil nil #'cl-equalp))))
 ;; Use interactive function `cae-exwm-test-workspace-matching' to test this.
 
-(defun cae-exwm-test-workspace-matching (program-name)
-  "Test the workspace matching logic for PROGRAM-NAME.
-Returns the matched workspace name or nil."
-  (interactive "sProgram name to test: ")
-  (let ((result (cae-exwm-find-workspace-for-program program-name)))
-    (message "Program '%s' matches workspace: %s" program-name (or result "None"))
-    result))
-
 (defadvice! cae-exwm-browse-url-generic-a (&rest _)
   :before #'browse-url-generic
   (when-let* ((workspace (cae-exwm-find-workspace-for-program browse-url-generic-program)))
