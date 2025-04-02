@@ -193,11 +193,11 @@ Returns nil if no matching workspace is found."
          (possible-names (nreverse
                           (cl-loop for i from 1 to (length program-parts)
                                    collect (string-join 
-                                           (cl-subseq program-parts 0 i) "-"))))
-         (matching-key (cl-find-if 
-                       (lambda (name)
-                         (assoc-string name cae-exwm-workspace-name-replacements t))
-                       possible-names)))
+                                            (cl-subseq program-parts 0 i) "-"))))
+         (matching-key (cl-find-if
+                        (lambda (name)
+                          (assoc-string name cae-exwm-workspace-name-replacements t))
+                        possible-names)))
     (when matching-key
       (alist-get matching-key cae-exwm-workspace-name-replacements nil nil #'cl-equalp))))
 ;; Use interactive function `cae-exwm-test-workspace-matching' to test this.
