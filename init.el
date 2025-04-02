@@ -134,7 +134,7 @@
          (default +bindings +smartparens +gnupg)
 
          :email
-         (:if (executable-find "mu") (mu4e +org))
+         (:if (executable-find "mu") mu4e)
 
          :app
          (rss +org)
