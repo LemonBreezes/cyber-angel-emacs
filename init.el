@@ -72,6 +72,7 @@
          ophints
          (treemacs +lsp)
          modeline
+         smooth-scroll
 
          :editor
          (evil +everywhere)
