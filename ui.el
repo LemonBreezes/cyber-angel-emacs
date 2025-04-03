@@ -91,8 +91,8 @@
         ;; This is so that `which-key' does not cause popup shells to be
         ;; resized unintentionally.
         which-key-preserve-window-configuration t
-        ;; Do not enable this. It causes some of the Evil commands to do
-        ;; nothing, like `c)'
+        ;; Do not enable this. It causes some of the Evil operator executions to
+        ;; do nothing, like `c)'
         which-key-show-operator-state-maps nil
         ;; This option breaks the Embark Which Key prompter when you have a
         ;; prefix key in the Embark action map so disable it.
