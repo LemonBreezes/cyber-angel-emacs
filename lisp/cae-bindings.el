@@ -309,6 +309,7 @@
                :prefix ,vc-prefix
                :desc "Smerge" "m" #'cae-smerge-hydra/body)
         t))
+(autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
       (:prefix "i"
                (:when (modulep! :completion vertico)
@@ -322,7 +323,8 @@
                 :desc "Substitute in defun" "d" #'substitute-target-in-defun
                 :desc "Substitute in buffer" "b" #'substitute-target-in-buffer
                 :desc "Substitute above point" "p" #'substitute-target-above-point
-                :desc "Substitute below point" "n" #'substitute-target-below-point))
+                :desc "Substitute below point" "n" #'substitute-target-below-point)
+               :desc "Imenu sidebar" "TAB" #'lsp-ui-imenu)
       (:prefix "t"
        :desc "Vertical line" "C-v" #'vline-mode
        :desc "Font lock mode" "C-f" #'font-lock-mode)
