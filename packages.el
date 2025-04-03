@@ -82,6 +82,7 @@
 (package! casual-lib :recipe (:host github :repo "kickingvegas/casual-lib"))
 (package! casual-calc :recipe (:host github :repo "kickingvegas/casual-calc"))
 (package! syslog-mode)
+(package! page-break-lines)
 
 ;; cae-theme.el
 (package! modus-themes)
@@ -174,6 +175,3 @@
 ;;; Term
 (package! comint-histories)
 (package! tmux-mode)
-
-;; Tecosaur
-(package! page-break-lines)
