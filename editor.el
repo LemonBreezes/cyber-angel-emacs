@@ -404,6 +404,8 @@ Those are the words following `ispell-words-keyword' (usually
       (setq jinx--session-words (append jinx--session-words (split-string ispell-localwords)))))
   (add-hook 'jinx-mode-hook #'cae-jinx-add-ispell-localwords)
   :config
+  (cl-pushnew 'org-inline-src-block
+              (alist-get 'org-mode jinx-exclude-faces))
   (map! "M-$" #'jinx-correct
         "C-M-$" #'jinx-languages)
   (setf (alist-get ?* jinx--save-keys) #'cae-jinx-save-as-ispell-localword)
