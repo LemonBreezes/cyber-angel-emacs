@@ -73,6 +73,7 @@
          (treemacs +lsp)
          modeline
          smooth-scroll
+         zen
 
          :editor
          (evil +everywhere)
