@@ -174,3 +174,6 @@
 ;;; Term
 (package! comint-histories)
 (package! tmux-mode)
+
+;; Tecosaur
+(package! page-break-lines)
