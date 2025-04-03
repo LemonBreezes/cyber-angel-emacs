@@ -125,7 +125,7 @@
           (t (call-interactively #'embark-prefix-help-command)))))
 
 ;; Do not scale fonts in `writeroom-mode'.
-(setq +zen-text-scale 0)
+(setq +zen-text-scale 0.8)
 
 (after! mule-util
   (setq truncate-string-ellipsis "...")) ;The unicode ellipsis is ugly to me
