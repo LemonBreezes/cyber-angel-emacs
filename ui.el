@@ -3,6 +3,7 @@
 (unless cae-config-finished-loading
   (load! "lisp/cae-theme" doom-user-dir))
 (load! "lisp/cae-visual-scrolling" doom-user-dir)
+(load! "lisp/cae-tecosaur" doom-user-dir)
 
 ;; Show absolute line numbers. I prefer to not show relative line numbers
 ;; because I use `avy' commands to jump to lines.
