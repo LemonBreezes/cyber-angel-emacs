@@ -272,5 +272,6 @@
 
 (after! calc
   (setq calc-angle-mode 'rad  ; radians are rad
-        calc-symbolic-mode t) ; keeps expressions like \sqrt{2} irrational for as long as possible
+        calc-symbolic-mode t) ; keeps expressions like \sqrt{2} irrational for
+                              ; as long as possible
   )
