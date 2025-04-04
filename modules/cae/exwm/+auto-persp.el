@@ -206,5 +206,7 @@ Returns nil if no matching workspace is found."
 
 (advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
 (add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
-(add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
+(add-hook! 'exwm-mode-hook
+  (defun cae-exwm-persp-set-up-cleanup-hook-h ()
+    (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace nil t)))
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
