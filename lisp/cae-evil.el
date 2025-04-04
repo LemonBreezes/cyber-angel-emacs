@@ -290,7 +290,8 @@
   (after! transient
     (map! :map transient-base-map
           ;; Extend `evil-escape' to quit transients.
-          "<key-chord>" #'transient-quit-all)))
+          "<key-chord>" #'transient-quit-one
+          "<escape>" #'transient-quit-one)))
 
 ;; Add rotation commands
 (use-package! parrot-rotate
