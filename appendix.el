@@ -28,7 +28,7 @@
    ,@(when (modulep! :app rss)
        '(elfeed))
    ,@(when (modulep! :cae misc-applications) ; Music apps
-       (nconc '(emms elfeed-tube empv somafm helm-emms lyrics-fetcher)
+       (append '(emms elfeed-tube empv somafm helm-emms lyrics-fetcher)
               (when (executable-find "mpd")
                 '(mpc))))
    ,@(when (modulep! :cae ai)
