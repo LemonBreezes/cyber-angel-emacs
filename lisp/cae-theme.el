@@ -43,7 +43,7 @@
   (defun cae-theme-init-mixed-pitch-h ()
     "Hook `mixed-pitch-mode' into each mode in `mixed-pitch-modes'.
 Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
-    (when (memq major-mode mixed-pitch-modes)
+    (when (memq major-mode cae-theme-mixed-pitch-modes)
       (mixed-pitch-mode 1))
     (dolist (hook cae-theme-mixed-pitch-modes)
       (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
