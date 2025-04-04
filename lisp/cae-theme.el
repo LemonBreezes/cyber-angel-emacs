@@ -9,7 +9,7 @@
 (defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
                                                         (not (cae-running-in-ssh-p))))
 (defvar cae-theme-disable-outline-headings t)
-(defvar cae-theme-enable-mixed-pitch-fonts t)
+(defvar cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p))
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
