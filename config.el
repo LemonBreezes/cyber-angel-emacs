@@ -70,8 +70,9 @@
 
 ;;; Email
 
-;; Always enable the essential email configuration, including maildirs and addresses.
-;; This is crucial for testing and debugging any issues with the email setup.
+;; Always enable the essential email configuration, including maildirs and
+;; addresses. This is crucial for testing and debugging any issues with the
+;; email setup.
 (setq user-full-name "StrawberryTea"
       user-mail-address "look@strawberrytea.xyz"
       mail-host-address "strawberrytea.xyz"
