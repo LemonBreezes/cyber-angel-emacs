@@ -9,6 +9,7 @@
 (defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
                                                         (not (cae-running-in-ssh-p))))
 (defvar cae-theme-disable-outline-headings t)
+(defvar cae-theme-enable-variable-pitch-fonts t)
 
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
@@ -34,6 +35,20 @@
         ring-bell-function #'cae-theme-ring-bell-function))
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
+
+
+;; Set up mixed pitch mode.
+(defvar mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode gfm-mode Info-mode)
+  "Modes that `mixed-pitch-mode' should be enabled in, but only after UI initialisation.")
+(defun cae-theme-init-mixed-pitch-h ()
+  "Hook `mixed-pitch-mode' into each mode in `mixed-pitch-modes'.
+Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
+  (when (memq major-mode mixed-pitch-modes)
+    (mixed-pitch-mode 1))
+  (dolist (hook mixed-pitch-modes)
+    (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
+
+(add-hook 'doom-init-ui-hook #'cae-theme-init-mixed-pitch-h)
 
 ;; Disable Outline highlighting
 (when cae-theme-disable-outline-headings
