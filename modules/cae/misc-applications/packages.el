@@ -63,7 +63,6 @@
 (package! zone-pgm-spoopy :recipe
   (:host github :repo "twitchy-ears/zone-pgm-spoopy"))
 (package! selectric-mode)
-(package! xkcd)
 
 ;; Music
 (package! somafm)
