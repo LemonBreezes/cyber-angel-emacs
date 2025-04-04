@@ -95,7 +95,7 @@
   (after! evil
     (define-key evil-insert-state-map [escape] 'evil-normal-state)
     (define-key evil-insert-state-map
-      (read-kbd-macro evil-toggle-key) 'evil-emacs-state))
+                (read-kbd-macro evil-toggle-key) 'evil-emacs-state))
   (define-key! :keymaps +default-minibuffer-maps
     "C-a" nil
     "C-r" nil
@@ -220,10 +220,10 @@
           :i "e"   #'cae-cape-elisp-capf)))
 (map! :prefix "C-x"                     ; `ctl-x-map' did not work here somehow.
       (:when (modulep! :cae ai +copilot)
-       :i "C-c" #'copilot-complete)
+        :i "C-c" #'copilot-complete)
       (:when (modulep! :cae ai -copilot)
-       :i "C-c" #'minuet-show-suggestion
-       "y" #'minuet-complete-with-minibuffer))
+        :i "C-c" #'minuet-show-suggestion
+        "y" #'minuet-complete-with-minibuffer))
 
 
 ;; TODO Fix this to work with `consult-yasnippet'.
