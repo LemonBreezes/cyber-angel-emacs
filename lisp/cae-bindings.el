@@ -343,8 +343,7 @@
                ;; BUG Doom Emacs currently overrides Treemacs bindings with Dirvish.
                (:when (modulep! :ui treemacs)
                  :desc "Project sidebar" "p" #'+treemacs/toggle
-                 :desc "Find file in project sidebar" "P" #'treemacs-find-file
-                 ))
+                 :desc "Find file in project sidebar" "P" #'treemacs-find-file))
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
