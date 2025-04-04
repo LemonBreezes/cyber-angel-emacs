@@ -289,9 +289,9 @@
   (key-chord-define-global "kk" #'evilem-motion-previous-line)
   (after! transient
     (map! :map transient-base-map
+          "<escape>" #'transient-quit-one
           ;; Extend `evil-escape' to quit transients.
-          "<key-chord>" #'transient-quit-one
-          "<escape>" #'transient-quit-one)))
+          "<key-chord>" #'transient-quit-one)))
 
 ;; Add rotation commands
 (use-package! parrot-rotate
