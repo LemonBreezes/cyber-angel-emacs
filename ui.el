@@ -353,3 +353,6 @@
     (map! :map calc-mode-map
           "C-o" #'casual-main-menu
           "C-M-?"#'casual-main-menu)))
+
+(use-package! page-break-lines
+  :defer t)
