@@ -32,7 +32,7 @@
                (when (executable-find "mpd")
                  '(mpc))))
    ,@(when (modulep! :cae ai)
-       (nconc
+       (append
         (when (modulep! :cae lsp +copilot)
           '(copilot))
         (when (modulep! :cae lsp -copilot)
@@ -77,7 +77,7 @@
                 (modulep! :cae misc-applications))
        '(helm-system-packages helm-emms helm-linux-disks helm-rage))
    ,@(when (modulep! :cae misc-applications)
-       (nconc                           ; The music apps are in a previous line.
+       (append                          ; The music apps are in a previous line.
         ;; System
         '(trashed pulseaudio-control disk-usage daemons neato-graph-bar
           journalctl-mode)
