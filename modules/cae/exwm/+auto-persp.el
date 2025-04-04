@@ -164,8 +164,6 @@ buffers of that class."
           (unless (string= (+workspace-current-name) +workspace--last)
             (+workspace/other)))))))
 
-(add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
-
 (defun cae-exwm-reload-workspaces ()
   "Reloads the EXWM workspaces."
   (interactive)
@@ -183,8 +181,6 @@ buffers of that class."
 (unless cae-exwm-persp-loaded-p
   (cae-exwm-reload-workspaces)
   (setq cae-exwm-persp-loaded-p t))
-
-(advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
 
 (defun cae-exwm-find-workspace-for-program (program-name)
   "Find the appropriate workspace name for PROGRAM-NAME.
@@ -207,6 +203,8 @@ Returns nil if no matching workspace is found."
   (when-let* ((workspace (cae-exwm-find-workspace-for-program browse-url-generic-program)))
     (+workspace-switch workspace t)
     (+workspace/display)))
-(advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
 
+(advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
+(add-hook 'exwm-floating-setup-hook #'exwm--disable-floating)
 (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace)
+(advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
