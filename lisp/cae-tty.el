@@ -64,8 +64,6 @@
 (when (modulep! :tools pdf)
   (use-package! pdftotext
     :defer t :init
-    (cae-defadvice! +pdf-view-mode-a (oldfun &rest args)
-      :around #'pdf-view-mode
-      (if (cae-display-graphic-p)
-          (apply oldfun args)
-        (apply #'pdftotext-mode args)))))
+    (unless (cae-display-graphic-p)
+      (add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdftotext-mode))
+      (add-to-list 'magic-mode-alist '("%PDF" . pdftotext-mode)))))
