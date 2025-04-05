@@ -384,6 +384,12 @@
 (define-key help-map (kbd "M-t") #'help-with-tutorial)
 
 
+;;; Term
+(after! vterm
+  (map! :map vterm-mode-map
+        (:prefix "C-c"
+                 "C-x" #'vterm--self-insert)))
+
 ;;; Other modules
 
 ;; This is also bound for Evil in `cae-evil.el'.
