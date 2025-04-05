@@ -388,6 +388,7 @@
 (after! vterm
   (map! :map vterm-mode-map
         (:prefix "C-c"
+                 ;; Allow sending `C-x'.
                  "C-x" #'vterm--self-insert)))
 
 ;;; Other modules
