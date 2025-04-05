@@ -98,6 +98,8 @@ WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
 
 (setq bookmark-save-flag 1)
 (setq bookmark-watch-bookmark-file 'silent)
+(after! org
+  (setq org-capture-bookmark nil))
 
 ;; Set up advice and hooks
 (cae-advice-add #'bookmark-save :after #'cae-multi-bookmark-push-changes-a)
