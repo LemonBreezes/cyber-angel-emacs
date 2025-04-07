@@ -98,3 +98,8 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
         '(0 "HDMI-1"
           1 "eDP-1"))
   (setq exwm-workspace-number 2))
+
+(defadvice! cae-exwm-disable-key-chord-in-exwm (first-char)
+  :before-until #'key-chord-input-method
+  (when (derived-mode-p 'exwm-mode)
+    (list first-char)))
