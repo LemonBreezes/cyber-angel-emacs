@@ -2,32 +2,21 @@
 
 ;; TODO Integrate with NOAA for weather.
 
-(defgroup cae-geolocation nil
-  "Settings for CAE geolocation features."
-  :group 'cae)
 
-(defcustom cae-geolocation-significant-change-threshold 0.05
+(defvar cae-geolocation-significant-change-threshold 0.05
   "Threshold for determining if a location change is significant.
 This is measured in degrees of latitude/longitude, where ~0.01 is roughly 1km.
-Only changes larger than this will trigger updates to dependent systems."
-  :type 'float
-  :group 'cae-geolocation)
+Only changes larger than this will trigger updates to dependent systems.")
 
-(defcustom cae-geolocation-update-interval 3600
-  "Frequency in seconds for periodic geolocation updates."
-  :type 'integer
-  :group 'cae-geolocation)
+(defvar cae-geolocation-update-interval 3600
+  "Frequency in seconds for periodic geolocation updates.")
 
-(defcustom cae-geolocation-idle-delay 120
-  "Idle time in seconds before running geolocation updates."
-  :type 'integer
-  :group 'cae-geolocation)
+(defvar cae-geolocation-idle-delay 120
+  "Idle time in seconds before running geolocation updates.")
 
-(defcustom cae-geolocation-beacondb-api-key nil
+(defvar cae-geolocation-beacondb-api-key nil
   "API key for BeaconDB geolocation service.
-If nil, attempts to use `geo-nm-moz-api-key'."
-  :type '(choice (const :tag "Use geo-nm-moz-api-key" nil) string)
-  :group 'cae-geolocation)
+If nil, attempts to use `geo-nm-moz-api-key'.")
 
 (defvar cae-geolocation-update-hook nil
   "Hook run after geolocation information is updated.
