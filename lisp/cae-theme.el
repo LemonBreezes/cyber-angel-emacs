@@ -9,11 +9,11 @@
   "Whether to extend heading face backgrounds across the full line.")
 
 (defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
-                                                  (not (cae-running-in-ssh-p)))
+                                               (not (cae-running-in-ssh-p)))
   "Whether to export the current theme colors using pywal.")
 
 (defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
-                                                           (not (cae-running-in-ssh-p)))
+                                                        (not (cae-running-in-ssh-p)))
   "Whether to automatically switch themes based on time of day (or sunrise/sunset).")
 
 (defvar cae-theme-disable-outline-headings t
@@ -26,10 +26,10 @@
   "The Modus theme variant to use during the day.")
 
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
-                                     'modus-vivendi-tinted
-                                   ;; A little bit more legible in the Windows
-                                   ;; Terminal by default.
-                                   'modus-vivendi-tritanopia)
+                                  'modus-vivendi-tinted
+                                ;; A little bit more legible in the Windows
+                                ;; Terminal by default.
+                                'modus-vivendi-tritanopia)
   "The Modus theme variant to use during the night.")
 
 (defvar cae-ef-day-theme 'ef-trio-light
@@ -309,11 +309,11 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
     :defer t)
 
   (after! (:all ewal theme-magic) ; Ensure both are loaded before adding hook
-     (when (and (featurep 'ewal) (featurep 'theme-magic)) ; Check features before adding hook
-       (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-       ;; Run once initially if config is finished
-       (when cae-config-finished-loading
-         (cae-theme-export-using-pywal)))))
+    (when (and (featurep 'ewal) (featurep 'theme-magic)) ; Check features before adding hook
+      (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+      ;; Run once initially if config is finished
+      (when cae-config-finished-loading
+        (cae-theme-export-using-pywal)))))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
