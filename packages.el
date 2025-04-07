@@ -11,8 +11,11 @@
 (package! mu4e :built-in t)
 
 ;; Avoid Codeberg being down.
-(package! popon :recipe (:host github :repo "cimisc/emacs-popon"))
-(package! visual-fill-column :recipe (:host github :repo "miketz/visual-fill-column"))
+(defvar cae-packages-codeberg-is-down t)
+(when cae-packages-codeberg-is-down
+  (package! popon :recipe (:host github :repo "cimisc/emacs-popon"))
+  (package! visual-fill-column :recipe (:host github :repo "miketz/visual-fill-column"))
+  (package! titlecase :recipe (:host github :repo "duckwork/titlecase.el")))
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
@@ -133,7 +136,8 @@
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
 (package! file-info :recipe (:host github :repo "Artawower/file-info.el"))
-(package! titlecase)
+(unless cae-packages-codeberg-is-down
+  (package! titlecase))
 (package! transpose-frame)
 (package! logos)
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"
