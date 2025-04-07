@@ -29,22 +29,17 @@ Returns t if a significant change occurred compared to the current state, nil ot
     (if (and lat lng (not (= 0 lat)) (not (= 0 lng)))
         (progn
           (setq cae-geolocation-current-location-name name)
-          (message "Geolocation: Restoring cached location: %s (%s, %s)" (or name "Unknown") lat lng)
           ;; Update location using the helper, return its result
           (let ((significant-change (cae-geolocation--update-location lat lng "cached" 'cache)))
             ;; Update weather packages with restored data
             (cae-geolocation--update-weather-packages lat lng name)
             significant-change))
-      ;; No valid cached location found
-      (message "Geolocation: No valid cached location found.")
       nil)))
 
 (defun cae-geolocation--update-weather-packages (lat lng name)
   "Update variables in weather packages (biome, noaa) if they are loaded.
 LAT, LNG are coordinates. NAME is the location name string."
   (when (and lat lng name (stringp name) (> (length name) 0))
-    (message "Geolocation: Updating weather packages (biome, noaa) with location: %s (%s, %s)" name lat lng)
-
     ;; Update noaa
     (setq noaa-location name
           noaa-latitude lat
@@ -54,8 +49,6 @@ LAT, LNG are coordinates. NAME is the location name string."
 (defun cae-geolocation-schedule-updates ()
   "Schedule periodic geolocation updates."
   (interactive)
-  (message "Geolocation: Scheduling periodic updates (every %ds after %ds idle)."
-           cae-geolocation-update-interval cae-geolocation-idle-delay)
   ;; Schedule to run periodically when Emacs is idle
   (run-with-idle-timer cae-geolocation-idle-delay
                        cae-geolocation-update-interval
@@ -73,7 +66,6 @@ sets up periodic updates, and updates weather packages with initial data."
 
     ;; If restore failed or location was invalid, schedule an initial fetch.
     (unless restored-successfully
-      (message "Geolocation: Scheduling initial fetch.")
       (run-with-idle-timer 5 nil #'cae-geolocation-setup 0)))
 
   ;; Schedule the regular periodic updates.
