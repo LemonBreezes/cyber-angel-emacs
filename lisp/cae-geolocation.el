@@ -20,6 +20,27 @@ information has been updated and calendar-latitude/longitude have been set.")
   "The human-readable name of the current location (e.g., \"City, State\").
 Updated asynchronously via NOAA API.")
 
+(defun cae-geolocation--update-location (lat lng accuracy source)
+  "Update location, store it, and run hooks if change is significant.
+LAT and LNG are the new coordinates.
+ACCURACY is the reported accuracy in meters.
+SOURCE indicates the origin ('api, 'cache, etc.).
+Returns t if the location change was significant, nil otherwise."
+  (let ((significant-change
+         (cae-geolocation-significant-change-p calendar-latitude calendar-longitude lat lng)))
+    ;; Update calendar variables
+    (setq calendar-latitude lat
+          calendar-longitude lng)
+    ;; Store the location
+    (doom-store-put 'calendar-latitude lat)
+    (doom-store-put 'calendar-longitude lng)
+    ;; Run hooks only if change is significant
+    (when significant-change
+      (message "Geolocation: Location changed significantly (> %s°), running update hook."
+               cae-geolocation-significant-change-threshold)
+      (run-hooks 'cae-geolocation-update-hook))
+    significant-change))
+
 (defun cae-geolocation-restore-location ()
   "Restore location data from doom store if available.
 Returns t if a significant change occurred compared to the current state, nil otherwise."
