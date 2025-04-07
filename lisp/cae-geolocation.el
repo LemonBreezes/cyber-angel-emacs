@@ -39,10 +39,12 @@ Returns t if a significant change occurred compared to the current state, nil ot
 LAT, LNG are coordinates. NAME is the location name string."
   (when (and lat lng name (stringp name) (> (length name) 0))
     (message "Geolocation: Updating noaa package with location: %s (%s, %s)" name lat lng)
-    (setq noaa-location name
-          noaa-latitude lat
-          noaa-longitude lng)
-    (setq calendar-location-name)))
+    ;; Update noaa variables only after noaa package is loaded
+    (with-eval-after-load 'noaa
+      (when (boundp 'noaa-location) ; Check if vars exist before setting
+        (setq noaa-location name
+              noaa-latitude lat
+              noaa-longitude lng)))))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
