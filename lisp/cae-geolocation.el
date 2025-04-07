@@ -65,58 +65,6 @@ Returns t if a significant change occurred compared to the current state, nil ot
       (message "Geolocation: No valid cached location found.")
       nil)))
 
-(defun cae-geolocation-get-noaa-grid-url (lat lng callback)
-  "Fetch the NOAA forecast grid data URL for LAT and LNG asynchronously.
-LAT and LNG are the latitude and longitude coordinates.
-CALLBACK is a function called with the result. The callback
-receives one argument, which is a list:
-- On success: (:success :grid-url \"URL_STRING\" :location-name \"City, State\")
-- On error:   (:error \"ERROR_MESSAGE\" DETAILS)"
-  (unless (and (numberp lat) (numberp lng))
-    (funcall callback (list :error "Invalid coordinates provided" (list lat lng)))
-    (error "Invalid coordinates provided to cae-geolocation-get-noaa-grid-url: %s, %s" lat lng))
-
-  (let* ((noaa-url (format "https://api.weather.gov/points/%s,%s" lat lng))
-         ;; NOAA requires a User-Agent.
-         (url-request-extra-headers `(("User-Agent" . "cae-emacs-config/1.0 (https://github.com/alphapapa/cae)"))))
-    (message "Geolocation: Fetching NOAA grid URL from %s" noaa-url)
-    (url-retrieve
-     noaa-url
-     (lambda (status &rest _)
-       (condition-case err
-           (progn
-             (goto-char (point-min))
-             ;; Skip HTTP headers
-             (unless (re-search-forward "^$" nil t)
-               (error "Could not find end of HTTP headers"))
-             (let* ((json-object-type 'hash-table)
-                    (json-array-type 'list)
-                    (response (json-read)))
-               (if (and response (gethash "properties" response))
-                   ;; Extract relative location first
-                   (let* ((props (gethash "properties" response))
-                          (relative-loc (gethash "relativeLocation" props))
-                          (relative-props (and relative-loc (gethash "properties" relative-loc)))
-                          (city (and relative-props (gethash "city" relative-props)))
-                          (state (and relative-props (gethash "state" relative-props)))
-                          (location-name (if (and city state) (format "%s, %s" city state) "Unknown Location")))
-                     ;; Now get the grid URL and call the callback
-                     (let ((grid-url (gethash "forecastGridData" props))) ; Use props directly
-                       (if grid-url
-                           (progn
-                             (message "Geolocation: Successfully retrieved NOAA grid URL for %s." location-name)
-                             (funcall callback (list :success :grid-url grid-url :location-name location-name)))
-                         (progn
-                           (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")
-                           (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response))))))
-                 (progn
-                   (message "Geolocation Error: Failed to parse 'properties' from NOAA response.")
-                   (funcall callback (list :error "Failed to parse NOAA response properties" response))))))
-         (error
-          (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
-          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))
-     nil t)))
-
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
   "Schedule periodic geolocation updates."
