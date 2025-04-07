@@ -130,8 +130,7 @@
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
 (package! file-info :recipe (:host github :repo "Artawower/file-info.el"))
-(unless cae-packages-codeberg-is-down
-  (package! titlecase))
+(package! titlecase)
 (package! transpose-frame)
 (package! logos)
 (package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"
