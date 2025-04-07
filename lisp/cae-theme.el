@@ -252,10 +252,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
   "Set the initial theme based on time and cached circadian data if available."
   (let ((initial-theme nil))
     (if (and cae-theme-enable-day-night-theme-switching
-             (doom-store-get 'circadian-themes)
-             (listp (doom-store-get 'circadian-themes)) ; Ensure it's a list
-             (caar (doom-store-get 'circadian-themes)) ; Ensure it's not empty
-             (not (symbolp (caar (doom-store-get 'circadian-themes))))) ; Basic validity check (not :sunrise/:sunset)
+             (doom-store-get 'circadian-themes))
         ;; Try setting theme from cache
         (let* ((themes (doom-store-get 'circadian-themes))
                (now (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
