@@ -11,45 +11,10 @@ Only changes larger than this will trigger updates to dependent systems.")
 (defvar cae-geolocation-idle-delay 120
   "Idle time in seconds before running geolocation updates.")
 
-(defvar cae-geolocation-beacondb-api-key nil
-  "API key for BeaconDB geolocation service.
-If nil, attempts to use `geo-nm-moz-api-key'.")
-
 (defvar cae-geolocation-update-hook nil
   "Hook run after geolocation information is updated.
 Functions in this hook are run with no arguments after the location
 information has been updated and calendar-latitude/longitude have been set.")
-
-(defun cae-geolocation-significant-change-p (lat1 lng1 lat2 lng2)
-  "Return t if the change in location from LAT1,LNG1 to LAT2,LNG2 is significant.
-Uses `cae-geolocation-significant-change-threshold' to determine significance.
-A change is considered significant if either the latitude or longitude
-changes by more than the threshold amount."
-  (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
-      (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold)))
-
-(defun cae-geolocation--update-location (lat lng accuracy source)
-  "Update location, store it, and run hooks if change is significant.
-LAT and LNG are the new coordinates.
-ACCURACY is the reported accuracy in meters.
-SOURCE indicates the origin ('api, 'cache, etc.).
-Returns t if the location change was significant, nil otherwise."
-  (let ((significant-change
-         (cae-geolocation-significant-change-p calendar-latitude calendar-longitude lat lng)))
-    (message "Geolocation: Received update from %s: Lat %s, Lon %s (Accuracy: %s m). Significant change: %s"
-             source lat lng accuracy significant-change)
-    ;; Update calendar variables
-    (setq calendar-latitude lat
-          calendar-longitude lng)
-    ;; Store the location
-    (doom-store-put 'calendar-latitude lat)
-    (doom-store-put 'calendar-longitude lng)
-    ;; Run hooks only if change is significant
-    (when significant-change
-      (message "Geolocation: Location changed significantly (> %s°), running update hook."
-               cae-geolocation-significant-change-threshold)
-      (run-hooks 'cae-geolocation-update-hook))
-    significant-change))
 
 (defun cae-geolocation-restore-location ()
   "Restore location data from doom store if available.
