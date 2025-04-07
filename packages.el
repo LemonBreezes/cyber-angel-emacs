@@ -167,7 +167,7 @@
 (package! substitute)
 
 ;; cae-geolocation
-(package! geo)
+(package! geo :recipe (:host github :repo "emacsmirror/geo"))
 
 ;;; Languages
 (when (modulep! :lang haskell)
