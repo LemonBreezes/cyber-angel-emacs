@@ -30,10 +30,8 @@ Returns t if a significant change occurred compared to the current state, nil ot
         (progn
           (setq cae-geolocation-current-location-name name)
           ;; Update location using the helper, return its result
-          (let ((significant-change (cae-geolocation--update-location lat lng "cached" 'cache)))
-            ;; Update weather packages with restored data
-            (cae-geolocation--update-weather-packages lat lng name)
-            significant-change))
+          ;; The hook mechanism now handles updating weather packages.
+          (cae-geolocation--update-location lat lng "cached" 'cache))
       nil)))
 
 (defun cae-geolocation--update-weather-packages (lat lng name)
