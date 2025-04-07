@@ -177,6 +177,9 @@
 (package! ov)
 (package! substitute)
 
+;; cae-geolocation
+(package! geo)
+
 ;;; Languages
 (when (modulep! :lang haskell)
   (package! consult-hoogle))
