@@ -226,6 +226,16 @@ Uses sunrise/sunset when location is available, otherwise falls back to fixed ti
       (when (require 'circadian nil t)
         (doom-store-put 'circadian-themes (circadian-themes-parse)))))
 
+  ;; Initialize location from cache if needed
+  (unless (and calendar-latitude calendar-longitude
+               (not (= 0 calendar-latitude))
+               (not (= 0 calendar-longitude)))
+    (let ((lat (doom-store-get 'calendar-latitude))
+          (lng (doom-store-get 'calendar-longitude)))
+      (when (and lat lng)
+        (setq calendar-latitude lat
+              calendar-longitude lng))))
+              
   ;; Set the theme on startup.
   (if (and (doom-store-get 'circadian-themes)
            (not (symbolp (caar (doom-store-get 'circadian-themes))))
