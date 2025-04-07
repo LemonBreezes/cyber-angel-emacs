@@ -184,10 +184,29 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     :defer-incrementally t
     :defer t :config
     (setq circadian-verbose t)
-    (setq circadian-themes
-          `(("7:30" . ,cae-modus-day-theme)
-            ("19:30" . ,cae-modus-night-theme)))
-    (if (and calendar-latitude calendar-longitude)
+    
+    ;; Define themes based on fixed times or sunrise/sunset if location is available
+    (defun cae-theme-configure-circadian-themes ()
+      "Configure circadian themes based on location availability.
+Uses sunrise/sunset when location is available, otherwise falls back to fixed times."
+      (setq circadian-themes
+            (if (and calendar-latitude calendar-longitude 
+                     (not (= calendar-latitude 0))
+                     (not (= calendar-longitude 0)))
+                `((:sunrise . ,cae-modus-day-theme)
+                  (:sunset . ,cae-modus-night-theme))
+              `(("7:30" . ,cae-modus-day-theme)
+                ("19:30" . ,cae-modus-night-theme)))))
+    
+    (cae-theme-configure-circadian-themes)
+    
+    ;; Add hook to update circadian when location changes
+    (add-hook 'cae-geolocation-update-hook #'cae-theme-configure-circadian-themes -1)
+    (add-hook 'cae-geolocation-update-hook #'circadian-setup)
+    
+    (if (and calendar-latitude calendar-longitude
+             (not (= calendar-latitude 0))
+             (not (= calendar-longitude 0)))
         (if doom-init-time
             (circadian-activate-current)
           (let ((hook (if (daemonp)
@@ -197,7 +216,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
             (add-hook hook #'circadian-setup -90)))
       (setq calendar-latitude 0
             calendar-longitude 0)
-      (message "ERROR: Calendar latitude and longitude are not set.")
+      (message "NOTICE: Calendar latitude and longitude are not set. Using fixed times for theme switching.")
       (doom-store-put 'circadian-themes (circadian-themes-parse))))
 
   ;; Cache the theme times so that we can set the theme on startup without loading
