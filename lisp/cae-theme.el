@@ -265,11 +265,9 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
                                   themes))
                (entry (car (last (or past-themes themes)))) ; Last past theme, or last overall if none are past
                (theme (cdr entry)))
-          (setq initial-theme theme)
-          (message "Theme: Setting initial theme '%s' from cached circadian data." initial-theme))
+          (setq initial-theme theme))
       ;; Fallback if cache unavailable or day/night switching disabled
-      (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme))
-      (message "Theme: Setting initial theme '%s' based on current time (fallback)." initial-theme))
+      (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme)))
 
     (setq doom-theme initial-theme)
 
