@@ -155,7 +155,7 @@ Returns t if a significant change occurred compared to the current state, nil ot
 LAT and LNG are the latitude and longitude coordinates.
 CALLBACK is a function called with the result. The callback
 receives one argument, which is a list:
-- On success: (:success \"URL_STRING\")
+- On success: (:success :grid-url \"URL_STRING\" :location-name \"City, State\")
 - On error:   (:error \"ERROR_MESSAGE\" DETAILS)"
   (unless (and (numberp lat) (numberp lng))
     (funcall callback (list :error "Invalid coordinates provided" (list lat lng)))
@@ -178,17 +178,25 @@ receives one argument, which is a list:
                     (json-array-type 'list)
                     (response (json-read)))
                (if (and response (gethash "properties" response))
-                   (let ((grid-url (gethash "forecastGridData" (gethash "properties" response))))
-                     (if grid-url
+                   ;; Extract relative location first
+                   (let* ((props (gethash "properties" response))
+                          (relative-loc (gethash "relativeLocation" props))
+                          (relative-props (and relative-loc (gethash "properties" relative-loc)))
+                          (city (and relative-props (gethash "city" relative-props)))
+                          (state (and relative-props (gethash "state" relative-props)))
+                          (location-name (if (and city state) (format "%s, %s" city state) "Unknown Location")))
+                     ;; Now get the grid URL and call the callback
+                     (let ((grid-url (gethash "forecastGridData" props))) ; Use props directly
+                       (if grid-url
+                           (progn
+                             (message "Geolocation: Successfully retrieved NOAA grid URL for %s." location-name)
+                             (funcall callback (list :success :grid-url grid-url :location-name location-name)))
                          (progn
-                           (message "Geolocation: Successfully retrieved NOAA grid URL.")
-                           (funcall callback (list :success grid-url)))
-                       (progn
-                         (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")
-                         (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response)))))
+                           (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")
+                           (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response))))))
                  (progn
                    (message "Geolocation Error: Failed to parse 'properties' from NOAA response.")
-                   (funcall callback (list :error "Failed to parse NOAA response properties" response))))))
+                   (funcall callback (list :error "Failed to parse NOAA response properties" response))))))) ; Added one parenthesis for outer let*
          ;; Handle errors during request/parsing
          (error
           (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
