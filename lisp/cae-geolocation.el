@@ -204,7 +204,7 @@ receives one argument, which is a list:
      ;; Optional parameters for url-retrieve
      nil ; params - not needed for GET
      t   ; silent - suppress network messages unless error
-     )))
+     )) ; Close url-retrieve and let*
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
