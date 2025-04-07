@@ -200,7 +200,7 @@ receives one argument, which is a list:
          ;; Handle errors during request/parsing
          (error
           (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
-          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))
+          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))) ; Added parenthesis for condition-case
      ;; Optional parameters for url-retrieve
      nil ; params - not needed for GET
      t   ; silent - suppress network messages unless error
