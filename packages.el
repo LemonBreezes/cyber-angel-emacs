@@ -10,8 +10,9 @@
 (unpin! t)
 (package! mu4e :built-in t)
 
-;; Avoid websites being down.
+;; Avoid Codeberg being down.
 (package! popon :recipe (:host github :repo "cimisc/emacs-popon"))
+(package! visual-fill-column :recipe (:host github :repo "miketz/visual-fill-column"))
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
