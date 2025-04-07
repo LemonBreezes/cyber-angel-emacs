@@ -196,11 +196,11 @@ receives one argument, which is a list:
                            (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response))))))
                  (progn
                    (message "Geolocation Error: Failed to parse 'properties' from NOAA response.")
-                   (funcall callback (list :error "Failed to parse NOAA response properties" response))))))) ; Added one parenthesis for outer let*
+                   (funcall callback (list :error "Failed to parse NOAA response properties" response)))))))) ; Close funcall, progn, outer if, outer let*
          ;; Handle errors during request/parsing
          (error
           (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
-          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))) ; Added parenthesis for condition-case
+          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string)))))) ; Close funcall, error body, error clause, progn, condition-case
      ;; Optional parameters for url-retrieve
      nil ; params - not needed for GET
      t   ; silent - suppress network messages unless error
