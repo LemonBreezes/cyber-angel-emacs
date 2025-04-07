@@ -2,30 +2,88 @@
 
 (require 'cae-lib)
 
-(defvar cae-theme-enable-modeline-bell t)
-(defvar cae-theme-extend-heading-faces t)
-(defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
-                                               (not (cae-running-in-ssh-p))))
-(defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
-                                                        (not (cae-running-in-ssh-p))))
-(defvar cae-theme-disable-outline-headings t)
-(defvar cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p))
+(defgroup cae-theme nil
+  "Settings for CAE theme customization."
+  :group 'cae)
 
-(defvar cae-modus-day-theme 'modus-operandi-tinted)
-(defvar cae-modus-night-theme (if (cae-display-graphic-p)
-                                  'modus-vivendi-tinted
-                                ;; A little bit more legible in the Windows
-                                ;; Terminal by default.
-                                'modus-vivendi-tritanopia))
-(defvar cae-ef-day-theme 'ef-trio-light)
-(defvar cae-ef-night-theme 'ef-trio-dark)
+(defcustom cae-theme-enable-modeline-bell t
+  "Whether to enable the visual bell in the modeline."
+  :type 'boolean
+  :group 'cae-theme)
 
-(defvar cae-day-theme cae-modus-day-theme)
-(defvar cae-night-theme cae-modus-night-theme)
+(defcustom cae-theme-extend-heading-faces t
+  "Whether to extend heading face backgrounds across the full line."
+  :type 'boolean
+  :group 'cae-theme)
+
+(defcustom cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
+                                                  (not (cae-running-in-ssh-p)))
+  "Whether to export the current theme colors using pywal."
+  :type 'boolean
+  :group 'cae-theme)
+
+(defcustom cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
+                                                           (not (cae-running-in-ssh-p)))
+  "Whether to automatically switch themes based on time of day (or sunrise/sunset)."
+  :type 'boolean
+  :group 'cae-theme)
+
+(defcustom cae-theme-disable-outline-headings t
+  "Whether to disable font-locking (coloring) of outline headings."
+  :type 'boolean
+  :group 'cae-theme)
+
+(defcustom cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p)
+  "Whether to enable `mixed-pitch-mode' in certain major modes."
+  :type 'boolean
+  :group 'cae-theme)
+
+(defcustom cae-modus-day-theme 'modus-operandi-tinted
+  "The Modus theme variant to use during the day."
+  :type 'symbol
+  :group 'cae-theme)
+
+(defcustom cae-modus-night-theme (if (cae-display-graphic-p)
+                                     'modus-vivendi-tinted
+                                   ;; A little bit more legible in the Windows
+                                   ;; Terminal by default.
+                                   'modus-vivendi-tritanopia)
+  "The Modus theme variant to use during the night."
+  :type 'symbol
+  :group 'cae-theme)
+
+(defcustom cae-ef-day-theme 'ef-trio-light
+  "The Ef theme variant to use during the day."
+  :type 'symbol
+  :group 'cae-theme)
+
+(defcustom cae-ef-night-theme 'ef-trio-dark
+  "The Ef theme variant to use during the night."
+  :type 'symbol
+  :group 'cae-theme)
+
+(defcustom cae-circadian-fixed-day-time "7:30"
+  "Fallback time to switch to the day theme when geolocation is unavailable."
+  :type 'string
+  :group 'cae-theme)
+
+(defcustom cae-circadian-fixed-night-time "19:30"
+  "Fallback time to switch to the night theme when geolocation is unavailable."
+  :type 'string
+  :group 'cae-theme)
+
+;; Choose theme family (example, could be a defcustom)
+(defvar cae-theme-family 'modus) ; or 'ef
+
+;; Set day/night themes based on family
+(defvar cae-day-theme (if (eq cae-theme-family 'modus) cae-modus-day-theme cae-ef-day-theme))
+(defvar cae-night-theme (if (eq cae-theme-family 'modus) cae-modus-night-theme cae-ef-night-theme))
+
 (setq doom-theme (cond
                   ((cae-running-in-ssh-p) 'ef-melissa-dark)
                   ((eq (cae-terminal-type) 0) nil)
-                  (t cae-night-theme)))
+                  ;; Default theme will be set later by startup logic
+                  (t nil)))
 
 (when cae-theme-enable-modeline-bell
   (defface cae-modeline-bell-face
@@ -179,101 +237,111 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 ;;; Set theme based on time of day.
 
+(defun cae-theme--get-circadian-config ()
+  "Return the appropriate theme list for `circadian-themes`.
+Uses sunrise/sunset if location is valid, otherwise fixed times."
+  (if (and calendar-latitude calendar-longitude
+           (not (= calendar-latitude 0))
+           (not (= calendar-longitude 0)))
+      (progn
+        (message "Theme: Using sunrise/sunset for theme switching.")
+        `((:sunrise . ,cae-day-theme)
+          (:sunset . ,cae-night-theme)))
+    (progn
+      (message "Theme: Using fixed times (%s/%s) for theme switching (location unavailable)."
+               cae-circadian-fixed-day-time cae-circadian-fixed-night-time)
+      `((,cae-circadian-fixed-day-time . ,cae-day-theme)
+        (,cae-circadian-fixed-night-time . ,cae-night-theme)))))
+
+(defun cae-theme--configure-circadian ()
+  "Configure and activate circadian with the correct themes."
+  (require 'circadian)
+  (setq circadian-themes (cae-theme--get-circadian-config)
+        circadian-verbose t) ; Or make this configurable
+  ;; Ensure circadian recalculates and applies the theme now
+  (circadian-setup))
+
+(defun cae-theme--update-circadian-on-location-change ()
+  "Hook function to reconfigure circadian when location changes significantly."
+  (when (and (featurep 'circadian) cae-theme-enable-day-night-theme-switching)
+    (message "Theme: Location changed, reconfiguring circadian.")
+    (cae-theme--configure-circadian)))
+
 (when cae-theme-enable-day-night-theme-switching
   (use-package! circadian
-    :defer-incrementally t
-    :defer t :config
-    (setq circadian-verbose t)
-    
-    ;; Define themes based on fixed times or sunrise/sunset if location is available
-    (defun cae-theme-configure-circadian-themes ()
-      "Configure circadian themes based on location availability.
-Uses sunrise/sunset when location is available, otherwise falls back to fixed times."
-      (setq circadian-themes
-            (if (and calendar-latitude calendar-longitude 
-                     (not (= calendar-latitude 0))
-                     (not (= calendar-longitude 0)))
-                `((:sunrise . ,cae-modus-day-theme)
-                  (:sunset . ,cae-modus-night-theme))
-              `(("7:30" . ,cae-modus-day-theme)
-                ("19:30" . ,cae-modus-night-theme)))))
-    
-    (cae-theme-configure-circadian-themes)
-    
-    ;; Add hook to update circadian when location changes
-    (add-hook 'cae-geolocation-update-hook #'cae-theme-configure-circadian-themes -1)
-    (add-hook 'cae-geolocation-update-hook #'circadian-setup)
-    
-    (if (and calendar-latitude calendar-longitude
-             (not (= calendar-latitude 0))
-             (not (= calendar-longitude 0)))
-        (if doom-init-time
-            (circadian-activate-current)
-          (let ((hook (if (daemonp)
-                          'server-after-make-frame-hook
-                        'after-init-hook)))
-            (remove-hook hook #'doom-init-theme-h)
-            (add-hook hook #'circadian-setup -90)))
-      (setq calendar-latitude 0
-            calendar-longitude 0)
-      (message "NOTICE: Calendar latitude and longitude are not set. Using fixed times for theme switching.")
-      (doom-store-put 'circadian-themes (circadian-themes-parse))))
+    :defer t :init
+    ;; Add the hook to update circadian when geolocation changes.
+    (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
+    :config
+    ;; Initial configuration when circadian loads.
+    (cae-theme--configure-circadian)
 
-  ;; Cache the theme times so that we can set the theme on startup without loading
-  ;; the circadian package.
-  (add-hook! 'kill-emacs-hook
-    (defun cae-theme-store-circadian-times-h ()
-      (when (require 'circadian nil t)
-        (doom-store-put 'circadian-themes (circadian-themes-parse)))))
+    ;; Cache the theme times on exit.
+    (add-hook! 'kill-emacs-hook
+      (defun cae-theme-store-circadian-times-h ()
+        (when (and (boundp 'circadian-themes) circadian-themes)
+          (doom-store-put 'circadian-themes (circadian-themes-parse)))))))
 
-  ;; Initialize location from cache if needed
-  (unless (and calendar-latitude calendar-longitude
-               (not (= 0 calendar-latitude))
-               (not (= 0 calendar-longitude)))
-    (let ((lat (doom-store-get 'calendar-latitude))
-          (lng (doom-store-get 'calendar-longitude)))
-      (when (and lat lng)
-        (setq calendar-latitude lat
-              calendar-longitude lng))))
-              
-  ;; Set the theme on startup.
-  (if (and (doom-store-get 'circadian-themes)
-           (not (symbolp (caar (doom-store-get 'circadian-themes))))
-           (not cae-config-finished-loading))
-      (let* ((themes (doom-store-get 'circadian-themes))
-             (now (reverse (cl-subseq (decode-time) 0 3)))
-             (past-themes
-              (cl-remove-if (lambda (entry)
-                              (let ((theme-time (cl-first entry)))
-                                (not (or (and (= (cl-first theme-time) (cl-first now))
-                                              (<= (cl-second theme-time) (cl-second now)))
-                                         (< (cl-first theme-time) (cl-first now))))))
-                            themes))
-             (entry (car (last (or past-themes themes))))
-             (theme (cdr entry)))
-        (setq doom-theme theme))
-    ;; If we don't have `circadian-themes' cached, load `circadian' eagerly so
-    ;; that we always have the correct theme on startup.
-    (require 'circadian)))
+(defun cae-theme--set-initial-theme ()
+  "Set the initial theme based on time and cached circadian data if available."
+  (let ((initial-theme nil))
+    (if (and cae-theme-enable-day-night-theme-switching
+             (doom-store-get 'circadian-themes)
+             (listp (doom-store-get 'circadian-themes)) ; Ensure it's a list
+             (caar (doom-store-get 'circadian-themes)) ; Ensure it's not empty
+             (not (symbolp (caar (doom-store-get 'circadian-themes))))) ; Basic validity check (not :sunrise/:sunset)
+        ;; Try setting theme from cache
+        (let* ((themes (doom-store-get 'circadian-themes))
+               (now (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
+               (past-themes
+                (cl-remove-if-not (lambda (entry)
+                                    (let ((theme-time (car entry))) ; (hour min)
+                                      (or (< (car theme-time) (car now)) ; Earlier hour
+                                          (and (= (car theme-time) (car now)) ; Same hour, earlier or equal minute
+                                               (<= (cadr theme-time) (cadr now))))))
+                                  themes))
+               (entry (car (last (or past-themes themes)))) ; Last past theme, or last overall if none are past
+               (theme (cdr entry)))
+          (setq initial-theme theme)
+          (message "Theme: Setting initial theme '%s' from cached circadian data." initial-theme))
+      ;; Fallback if cache unavailable or day/night switching disabled
+      (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme))
+      (message "Theme: Setting initial theme '%s' based on current time (fallback)." initial-theme))
+
+    ;; If doom-theme wasn't set by SSH/TTY checks, set it now.
+    (unless doom-theme
+      (setq doom-theme initial-theme))
+
+    ;; Load the determined theme.
+    (when doom-theme
+      (load-theme doom-theme t))))
+
+;; Hook the initial theme setting function to run after basic UI setup.
+(add-hook 'doom-init-ui-hook #'cae-theme--set-initial-theme 90) ; Run fairly late in UI init
 
 (when cae-theme-export-theme-with-pywal
+  ;; Ensure required packages are loaded if needed, respecting :defer
   (when cae-config-finished-loading
-    (require 'ewal)
-    (require 'theme-magic))
+    (require 'ewal nil t)    ; Load if available, don't error
+    (require 'theme-magic nil t)) ; Load if available, don't error
 
   (use-package! ewal
-    :defer-incrementally t
+    :if cae-theme-export-theme-with-pywal ; Condition loading
     :defer t :init
     ;; Use all 16 colors from our palette, not just the primary 8.
     (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
                                          brightblack brightred brightgreen brightyellow
                                          brightblue brightmagenta brightcyan brightwhite)))
   (use-package! theme-magic
-    :defer t :defer t :defer-incrementally t)
+    :if cae-theme-export-theme-with-pywal ; Condition loading
+    :defer t)
 
-  (after! (:all ewal theme-magic)
-    (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-    (cae-theme-export-using-pywal)))
+  (after! (:all ewal theme-magic) ; Ensure both are loaded before adding hook
+     (when (and (featurep 'ewal) (featurep 'theme-magic)) ; Check features before adding hook
+       (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+       ;; Run once initially if config is finished
+       (when cae-config-finished-loading
+         (cae-theme-export-using-pywal)))))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))

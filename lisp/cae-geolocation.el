@@ -2,10 +2,32 @@
 
 ;; TODO Integrate with NOAA for weather.
 
-(defvar cae-geolocation-significant-change-threshold 0.05
+(defgroup cae-geolocation nil
+  "Settings for CAE geolocation features."
+  :group 'cae)
+
+(defcustom cae-geolocation-significant-change-threshold 0.05
   "Threshold for determining if a location change is significant.
 This is measured in degrees of latitude/longitude, where ~0.01 is roughly 1km.
-Only changes larger than this will trigger updates to dependent systems.")
+Only changes larger than this will trigger updates to dependent systems."
+  :type 'float
+  :group 'cae-geolocation)
+
+(defcustom cae-geolocation-update-interval 3600
+  "Frequency in seconds for periodic geolocation updates."
+  :type 'integer
+  :group 'cae-geolocation)
+
+(defcustom cae-geolocation-idle-delay 120
+  "Idle time in seconds before running geolocation updates."
+  :type 'integer
+  :group 'cae-geolocation)
+
+(defcustom cae-geolocation-beacondb-api-key nil
+  "API key for BeaconDB geolocation service.
+If nil, attempts to use `geo-nm-moz-api-key'."
+  :type '(choice (const :tag "Use geo-nm-moz-api-key" nil) string)
+  :group 'cae-geolocation)
 
 (defvar cae-geolocation-update-hook nil
   "Hook run after geolocation information is updated.
@@ -20,6 +42,29 @@ changes by more than the threshold amount."
   (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
       (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold)))
 
+(defun cae-geolocation--update-location (lat lng accuracy source)
+  "Update location, store it, and run hooks if change is significant.
+LAT and LNG are the new coordinates.
+ACCURACY is the reported accuracy in meters.
+SOURCE indicates the origin ('api, 'cache, etc.).
+Returns t if the location change was significant, nil otherwise."
+  (let ((significant-change
+         (cae-geolocation-significant-change-p calendar-latitude calendar-longitude lat lng)))
+    (message "Geolocation: Received update from %s: Lat %s, Lon %s (Accuracy: %s m). Significant change: %s"
+             source lat lng accuracy significant-change)
+    ;; Update calendar variables
+    (setq calendar-latitude lat
+          calendar-longitude lng)
+    ;; Store the location
+    (doom-store-put 'calendar-latitude lat)
+    (doom-store-put 'calendar-longitude lng)
+    ;; Run hooks only if change is significant
+    (when significant-change
+      (message "Geolocation: Location changed significantly (> %s°), running update hook."
+               cae-geolocation-significant-change-threshold)
+      (run-hooks 'cae-geolocation-update-hook))
+    significant-change))
+
 (defun cae-geolocation-setup (&optional verbosity)
   "Set up geolocation using BeaconDB API and integrate with solar calendar asynchronously.
   Updates calendar-latitude and calendar-longitude and triggers circadian theme updates.
@@ -33,9 +78,6 @@ changes by more than the threshold amount."
   (unless verbosity
     (setq verbosity (if (called-interactively-p 'any) 1 0)))
 
-  ;; Add project's lisp directory to load-path
-  (add-to-list 'load-path "/home/st/src/geo/lisp-src")
-
   ;; Load required packages
   (require 'geo)
   (require 'geo-solar)
@@ -44,10 +86,9 @@ changes by more than the threshold amount."
 
   ;; Override geo-nm to use BeaconDB
   (require 'geo-nm)
-  (setq geo-nm-moz-url-format "https://api.beacondb.net/v1/geolocate?key=%s")
 
   (when (> verbosity 0)
-    (message "Getting location from BeaconDB..."))
+    (message "Geolocation: Getting location from BeaconDB..."))
 
   ;; Collect WiFi networks
   (let* ((access-points (geo-nm--get-aps))
@@ -209,19 +250,20 @@ Adds geolocation hooks to update the theme based on current location and time."
 ;; Fast startup function that doesn't require loading geo packages
 (defun cae-geolocation-init ()
   "Initialize geolocation system during startup.
-This function avoids loading heavy geo libraries by using cached values
-and scheduling the full location update for later."
-  (if (cae-geolocation-restore-location)
-      (run-with-idle-timer 120 3600 #'cae-geolocation-setup 0)
-    ;; No cached location, need to schedule immediate update when packages are available
-    (run-with-idle-timer 5 nil #'cae-geolocation-schedule-updates))
+Restores cached location if available, schedules initial fetch if needed,
+and sets up periodic updates."
+  ;; Attempt to restore location from cache.
+  (unless (cae-geolocation-restore-location)
+    ;; If restore failed or location was invalid, schedule an initial fetch attempt
+    ;; after a short idle period (5s).
+    (message "Geolocation: Scheduling initial fetch.")
+    (run-with-idle-timer 5 nil #'cae-geolocation-setup 0))
 
-  ;; Always add the save hook
-  (add-hook 'kill-emacs-hook #'cae-geolocation-store-location))
+  ;; Schedule the regular periodic updates.
+  (cae-geolocation-schedule-updates)
+  ;; Note: Storing location is now handled by cae-geolocation--update-location,
+  ;; so the kill-emacs-hook is no longer needed here.
+  )
 
 ;; Start the geolocation system
 (cae-geolocation-init)
-
-;; Set up integration with theme system
-(when cae-init-ui-enabled-p
-  (cae-geolocation-setup-theme-integration))
