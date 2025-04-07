@@ -58,6 +58,7 @@ Returns t if a significant change occurred compared to the current state, nil ot
     (if (and lat lng (not (= 0 lat)) (not (= 0 lng)))
         (progn
           (setq cae-geolocation-current-location-name name)
+          (cae-geolocation--update-weather-packages lat lng name)
           ;; Update location using the helper, return its result
           ;; The hook mechanism now handles updating weather packages.
           (cae-geolocation--update-location lat lng "cached" 'cache))
