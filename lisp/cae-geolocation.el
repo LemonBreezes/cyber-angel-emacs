@@ -35,7 +35,9 @@ ACCURACY is the reported accuracy in meters.
 SOURCE indicates the origin ('api, 'cache, etc.).
 Returns t if the location change was significant, nil otherwise."
   (let ((significant-change
-         (cae-geolocation-significant-change-p calendar-latitude calendar-longitude lat lng)))
+         (cae-geolocation-significant-change-p
+          (doom-store-get 'calendar-latitude) (doom-store-get 'calendar-longitude)
+          lat lng)))
     ;; Update calendar variables
     (setq calendar-latitude lat
           calendar-longitude lng)
