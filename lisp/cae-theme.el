@@ -279,9 +279,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
       (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme))
       (message "Theme: Setting initial theme '%s' based on current time (fallback)." initial-theme))
 
-    ;; If doom-theme wasn't set by SSH/TTY checks, set it now.
-    (unless doom-theme
-      (setq doom-theme initial-theme))
+    (setq doom-theme initial-theme)
 
     ;; Load the determined theme.
     (when doom-theme
