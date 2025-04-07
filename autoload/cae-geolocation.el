@@ -149,6 +149,11 @@ receives one argument, which is a list:
                        (if grid-url
                            (progn
                              (message "Geolocation: Successfully retrieved NOAA grid URL for %s." location-name)
+                             ;; Set and store the location name
+                             (setq cae-geolocation-current-location-name location-name)
+                             (doom-store-put 'cae-geolocation-current-location-name location-name)
+                             ;; Update weather packages now that we have coordinates AND name
+                             (cae-geolocation--update-weather-packages calendar-latitude calendar-longitude location-name)
                              (funcall callback (list :success :grid-url grid-url :location-name location-name)))
                          (progn
                            (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")

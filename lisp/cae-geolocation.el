@@ -16,19 +16,52 @@ Only changes larger than this will trigger updates to dependent systems.")
 Functions in this hook are run with no arguments after the location
 information has been updated and calendar-latitude/longitude have been set.")
 
+(defvar cae-geolocation-current-location-name nil
+  "The human-readable name of the current location (e.g., \"City, State\").
+Updated asynchronously via NOAA API.")
+
 (defun cae-geolocation-restore-location ()
   "Restore location data from doom store if available.
 Returns t if a significant change occurred compared to the current state, nil otherwise."
   (let ((lat (doom-store-get 'calendar-latitude))
-        (lng (doom-store-get 'calendar-longitude)))
+        (lng (doom-store-get 'calendar-longitude))
+        (name (doom-store-get 'cae-geolocation-current-location-name)))
     (if (and lat lng (not (= 0 lat)) (not (= 0 lng)))
         (progn
-          (message "Geolocation: Restoring cached location: Lat %s, Lon %s" lat lng)
+          (setq cae-geolocation-current-location-name name)
+          (message "Geolocation: Restoring cached location: %s (%s, %s)" (or name "Unknown") lat lng)
           ;; Update location using the helper, return its result
-          (cae-geolocation--update-location lat lng "cached" 'cache))
+          (let ((significant-change (cae-geolocation--update-location lat lng "cached" 'cache)))
+            ;; Update weather packages with restored data
+            (cae-geolocation--update-weather-packages lat lng name)
+            significant-change))
       ;; No valid cached location found
       (message "Geolocation: No valid cached location found.")
       nil)))
+
+(defun cae-geolocation--update-weather-packages (lat lng name)
+  "Update variables in weather packages (biome, noaa) if they are loaded.
+LAT, LNG are coordinates. NAME is the location name string."
+  (when (and lat lng name (stringp name) (> (length name) 0))
+    (message "Geolocation: Updating weather packages (biome, noaa) with location: %s (%s, %s)" name lat lng)
+
+    ;; Update biome
+    (with-eval-after-load 'biome
+      ;; Check if biome-query-coords is defined, might need require
+      (when (boundp 'biome-query-coords)
+        (require 'biome nil t) ; Load if needed, don't error
+        (let ((new-loc (list name lat lng)))
+          ;; Remove any existing entry with the same name
+          (setq biome-query-coords (delete-if (lambda (loc) (equal (car loc) name)) biome-query-coords))
+          ;; Add the new location to the front
+          (add-to-list 'biome-query-coords new-loc :append nil)))) ; Prepend
+
+    ;; Update noaa
+    (with-eval-after-load 'noaa
+      (when (boundp 'noaa-location) ; Check if vars exist
+        (setq noaa-location name
+              noaa-latitude lat
+              noaa-longitude lng)))))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
@@ -45,13 +78,16 @@ Returns t if a significant change occurred compared to the current state, nil ot
 (defun cae-geolocation-init ()
   "Initialize geolocation system during startup.
 Restores cached location if available, schedules initial fetch if needed,
-and sets up periodic updates."
-  ;; Attempt to restore location from cache.
-  (unless (cae-geolocation-restore-location)
-    ;; If restore failed or location was invalid, schedule an initial fetch attempt
-    ;; after a short idle period (5s).
-    (message "Geolocation: Scheduling initial fetch.")
-    (run-with-idle-timer 5 nil #'cae-geolocation-setup 0))
+sets up periodic updates, and updates weather packages with initial data."
+  ;; Attempt to restore location from cache. This sets calendar vars and name var.
+  (let ((restored-successfully (cae-geolocation-restore-location)))
+    ;; Update weather packages with restored/current data *after* attempting restore.
+    (cae-geolocation--update-weather-packages calendar-latitude calendar-longitude cae-geolocation-current-location-name)
+
+    ;; If restore failed or location was invalid, schedule an initial fetch.
+    (unless restored-successfully
+      (message "Geolocation: Scheduling initial fetch.")
+      (run-with-idle-timer 5 nil #'cae-geolocation-setup 0)))
 
   ;; Schedule the regular periodic updates.
   (cae-geolocation-schedule-updates))
