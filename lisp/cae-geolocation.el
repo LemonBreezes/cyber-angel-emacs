@@ -20,6 +20,14 @@ information has been updated and calendar-latitude/longitude have been set.")
   "The human-readable name of the current location (e.g., \"City, State\").
 Updated asynchronously via NOAA API.")
 
+(defun cae-geolocation-significant-change-p (lat1 lng1 lat2 lng2)
+  "Return t if the change in location from LAT1,LNG1 to LAT2,LNG2 is significant.
+Uses `cae-geolocation-significant-change-threshold' to determine significance.
+A change is considered significant if either the latitude or longitude
+changes by more than the threshold amount."
+  (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
+      (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold)))
+
 (defun cae-geolocation--update-location (lat lng accuracy source)
   "Update location, store it, and run hooks if change is significant.
 LAT and LNG are the new coordinates.
