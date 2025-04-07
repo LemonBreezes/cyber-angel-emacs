@@ -51,11 +51,6 @@
 (defvar cae-day-theme (if (eq cae-theme-family 'modus) cae-modus-day-theme cae-ef-day-theme))
 (defvar cae-night-theme (if (eq cae-theme-family 'modus) cae-modus-night-theme cae-ef-night-theme))
 
-(setq doom-theme (cond
-                  ((eq (cae-terminal-type) 0) nil)
-                  ;; Default theme will be set later by startup logic
-                  (t nil)))
-
 (when cae-theme-enable-modeline-bell
   (defface cae-modeline-bell-face
     '((t (:inherit mode-line-highlight)))
