@@ -10,6 +10,9 @@
 (unpin! t)
 (package! mu4e :built-in t)
 
+;; Avoid websites being down.
+(package! popon :recipe (:host github :repo "cimisc/emacs-popon"))
+
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
            (modulep! :lang org))
