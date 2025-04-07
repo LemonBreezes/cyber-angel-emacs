@@ -45,23 +45,10 @@ LAT, LNG are coordinates. NAME is the location name string."
   (when (and lat lng name (stringp name) (> (length name) 0))
     (message "Geolocation: Updating weather packages (biome, noaa) with location: %s (%s, %s)" name lat lng)
 
-    ;; Update biome
-    (with-eval-after-load 'biome
-      ;; Check if biome-query-coords is defined, might need require
-      (when (boundp 'biome-query-coords)
-        (require 'biome nil t) ; Load if needed, don't error
-        (let ((new-loc (list name lat lng)))
-          ;; Remove any existing entry with the same name
-          (setq biome-query-coords (delete-if (lambda (loc) (equal (car loc) name)) biome-query-coords))
-          ;; Add the new location to the front
-          (add-to-list 'biome-query-coords new-loc :append nil)))) ; Prepend
-
     ;; Update noaa
-    (with-eval-after-load 'noaa
-      (when (boundp 'noaa-location) ; Check if vars exist
-        (setq noaa-location name
-              noaa-latitude lat
-              noaa-longitude lng)))))
+    (setq noaa-location name
+          noaa-latitude lat
+          noaa-longitude lng)))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
