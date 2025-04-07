@@ -2,7 +2,6 @@
 
 (require 'cae-lib)
 
-
 (defvar cae-theme-enable-modeline-bell t
   "Whether to enable the visual bell in the modeline.")
 
