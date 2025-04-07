@@ -93,8 +93,8 @@ SOURCE indicates the origin ('api, 'cache, etc.).
 Returns t if the location change was significant, nil otherwise."
   (let ((significant-change
          (cae-geolocation-significant-change-p calendar-latitude calendar-longitude lat lng)))
-    (message "Geolocation: Received update from %s: Lat %s, Lon %s (Accuracy: %s m). Significant change: %s"
-             source lat lng accuracy significant-change)
+    ;;(message "Geolocation: Received update from %s: Lat %s, Lon %s (Accuracy: %s m). Significant change: %s"
+    ;;         source lat lng accuracy significant-change)
     ;; Update calendar variables
     (setq calendar-latitude lat
           calendar-longitude lng)
