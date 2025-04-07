@@ -15,7 +15,8 @@
 (when cae-packages-codeberg-is-down
   (package! popon :recipe (:host github :repo "cimisc/emacs-popon"))
   (package! visual-fill-column :recipe (:host github :repo "miketz/visual-fill-column"))
-  (package! titlecase :recipe (:host github :repo "duckwork/titlecase.el")))
+  (package! titlecase :recipe (:host github :repo "duckwork/titlecase.el"))
+  (package! communinfo :recipe (:host github :repo "emacsmirror/communinfo")))
 
 ;; PRs that haven't been merged yet.
 (when (and (modulep! :editor evil +everywhere)
