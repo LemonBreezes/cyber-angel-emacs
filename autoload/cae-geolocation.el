@@ -83,7 +83,8 @@ Uses `cae-geolocation-significant-change-threshold' to determine significance.
 A change is considered significant if either the latitude or longitude
 changes by more than the threshold amount."
   (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
-      (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold)))
+      (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold))
+  t)
 
 (defun cae-geolocation--update-location (lat lng accuracy source)
   "Update location, store it, and run hooks if change is significant.
