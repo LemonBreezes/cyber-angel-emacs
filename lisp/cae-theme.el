@@ -90,10 +90,10 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 ;; Make Org headlines respect the heading backgrounds.
 (when cae-theme-extend-heading-faces
-  ;;(after! org-modern
-  ;;  ;; These features interfere with the heading backgrounds.
-  ;;  (setq org-modern-tag nil
-  ;;        org-modern-todo nil))
+  (after! org-modern
+    ;; These features interfere with the heading backgrounds.
+    (setq org-modern-tag nil
+          org-modern-todo nil))
 
   (after! org
     (setq org-fontify-whole-heading-line t))
