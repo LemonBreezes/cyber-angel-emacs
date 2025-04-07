@@ -164,4 +164,23 @@ receives one argument, which is a list:
          (error
           (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
           (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))
-     nil t)))
+     nil t))       nil t)))
+
+     nil t));;;###autoload
+     nil t))(defun cae-geolocation--fetch-name-and-update-weather-h ()
+     nil t))  "Hook function to fetch NOAA location name and update weather packages.
+     nil t))Uses current calendar-latitude and calendar-longitude."
+     nil t))  (interactive) ; Make it interactive for easier testing if needed
+     nil t))  (message "Geolocation Hook: Triggered fetching name for %s, %s"
+     nil t))           calendar-latitude calendar-longitude)
+     nil t))  (if (and (boundp 'calendar-latitude) (numberp calendar-latitude) (not (= 0 calendar-latitude))
+     nil t))           (boundp 'calendar-longitude) (numberp calendar-longitude) (not (= 0 calendar-longitude)))
+     nil t))      (cae-geolocation-get-noaa-grid-url
+     nil t))       calendar-latitude
+     nil t))       calendar-longitude
+     nil t))       ;; Dummy callback - the main function handles updates internally now
+     nil t))       (lambda (result)
+     nil t))         (unless (eq (car result) :success)
+     nil t))           (message "Geolocation Hook: Failed to get NOAA details: %S" result))))
+     nil t))    (message "Geolocation Hook: Invalid coordinates (%s, %s), skipping NOAA fetch."
+     nil t))             calendar-latitude calendar-longitude)))

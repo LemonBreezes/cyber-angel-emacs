@@ -37,13 +37,16 @@ Returns t if a significant change occurred compared to the current state, nil ot
       nil)))
 
 (defun cae-geolocation--update-weather-packages (lat lng name)
-  "Update variables in weather packages (biome, noaa) if they are loaded.
+  "Update variables in the noaa weather package if loaded.
 LAT, LNG are coordinates. NAME is the location name string."
   (when (and lat lng name (stringp name) (> (length name) 0))
+    (message "Geolocation: Updating noaa package with location: %s (%s, %s)" name lat lng)
     ;; Update noaa
-    (setq noaa-location name
-          noaa-latitude lat
-          noaa-longitude lng)))
+    (with-eval-after-load 'noaa
+      (when (boundp 'noaa-location) ; Check if vars exist
+        (setq noaa-location name
+              noaa-latitude lat
+              noaa-longitude lng)))))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
@@ -59,11 +62,10 @@ LAT, LNG are coordinates. NAME is the location name string."
   "Initialize geolocation system during startup.
 Restores cached location if available, schedules initial fetch if needed,
 sets up periodic updates, and updates weather packages with initial data."
+  ;; Add the hook function to fetch name/update weather when coords change
+  (add-hook 'cae-geolocation-update-hook #'cae-geolocation--fetch-name-and-update-weather-h)
   ;; Attempt to restore location from cache. This sets calendar vars and name var.
   (let ((restored-successfully (cae-geolocation-restore-location)))
-    ;; Update weather packages with restored/current data *after* attempting restore.
-    (cae-geolocation--update-weather-packages calendar-latitude calendar-longitude cae-geolocation-current-location-name)
-
     ;; If restore failed or location was invalid, schedule an initial fetch.
     (unless restored-successfully
       (run-with-idle-timer 5 nil #'cae-geolocation-setup 0)))
