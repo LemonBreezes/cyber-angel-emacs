@@ -115,137 +115,53 @@ Returns t if the location change was significant, nil otherwise."
          (re-search-forward "^$" nil t)
          (let* ((json-object-type 'hash-table)
                 (json-array-type 'list)
-                (response (condition-case nil
+                (response (condition-case err
                               (json-read)
-                            (error nil))))
+                            (error (message "Geolocation Error: JSON parsing failed: %s" err)
+                                   nil))))
 
-           (if response
+           (if (and response (gethash "location" response))
                (let* ((data (gethash "location" response))
                       (lat (gethash "lat" data))
                       (lng (gethash "lng" data))
                       (accuracy (gethash "accuracy" response)))
-
-                 ;; Create location and update
-                 (let ((location (geo-location lat lng (float-time)
-                                               `((accuracy . ,accuracy)))))
-
-                   ;; Only output location if verbose mode
-                   (when (> verbosity 0)
-                     (message "Location retrieved: Lat %s, Lon %s (accuracy: %s meters)"
-                              lat lng accuracy))
-
-                   ;; Update geo and solar
-                   (run-hook-with-args 'geo-data-changed-hook location)
-
-                   ;; Check if location has changed significantly
-                   (let ((location-changed (and
-                                            ;; Skip completely identical locations
-                                            (or (not (equal calendar-latitude lat))
-                                                (not (equal calendar-longitude lng)))
-                                            ;; Only trigger updates if change is significant
-                                            (cae-geolocation-significant-change-p
-                                             calendar-latitude calendar-longitude
-                                             lat lng))))
-
-                     ;; Update calendar variables
-                     (setq calendar-latitude lat
-                           calendar-longitude lng)
-
-                     ;; Store the location in doom-store for faster retrieval on startup
-                     (doom-store-put 'calendar-latitude lat)
-                     (doom-store-put 'calendar-longitude lng)
-
-                     ;; Only run updates if location has significantly changed
-                     (when location-changed
-                       (when (> verbosity 0)
-                         (message "Location has changed significantly (> %s°), updating dependent systems"
-                                  cae-geolocation-significant-change-threshold))
-
-                       ;; Update circadian theme if available
-                       (when (and (featurep 'circadian)
-                                  cae-theme-enable-day-night-theme-switching)
-                         (circadian-setup))
-
-                       ;; Run any other location-dependent hooks
-                       (run-hooks 'cae-geolocation-update-hook)))))
-
+                 ;; Update location using the new helper
+                 (cae-geolocation--update-location lat lng accuracy 'api))
              ;; Handle errors
-             (when (> verbosity 0)
-               (message "Failed to retrieve location from BeaconDB response")))))
+             (progn
+               (message "Geolocation Error: Failed to parse location from BeaconDB response. Status: %s" status)
+               ;; Optionally log the buffer content for debugging
+               ;; (message "Geolocation Error: Response buffer content:\n%s" (buffer-string))
+               ))))
 
-       nil (= verbosity 0)))))
+       nil (= verbosity 0))))) ;; Silence network errors if verbosity is 0
 
 ;; Store and retrieve location data
-(defun cae-geolocation-store-location ()
-  "Store current location data in doom store for faster retrieval on startup."
-  (when (and calendar-latitude calendar-longitude
-             (not (= 0 calendar-latitude))
-             (not (= 0 calendar-longitude)))
-    (doom-store-put 'calendar-latitude calendar-latitude)
-    (doom-store-put 'calendar-longitude calendar-longitude)
-    (message "Stored location: Lat %s, Lon %s"
-             calendar-latitude calendar-longitude)))
 
 (defun cae-geolocation-restore-location ()
-  "Restore location data from doom store if available."
+  "Restore location data from doom store if available.
+Returns t if a significant change occurred compared to the current state, nil otherwise."
   (let ((lat (doom-store-get 'calendar-latitude))
         (lng (doom-store-get 'calendar-longitude)))
-    (when (and lat lng)
-      ;; Check if location has changed significantly
-      (let ((location-changed (and
-                               ;; Skip identical locations
-                               (or (not (equal calendar-latitude lat))
-                                   (not (equal calendar-longitude lng)))
-                               ;; Only trigger if change is significant
-                               (cae-geolocation-significant-change-p
-                                calendar-latitude calendar-longitude
-                                lat lng))))
-        ;; Update values
-        (setq calendar-latitude lat
-              calendar-longitude lng)
-        (message "Restored cached location: Lat %s, Lon %s" lat lng)
-
-        ;; Only run hooks if location significantly changed
-        (when location-changed
-          (message "Location changed significantly from cached value (> %s°), updating dependent systems"
-                   cae-geolocation-significant-change-threshold)
-          (run-hooks 'cae-geolocation-update-hook))
-        t))))
+    (if (and lat lng (not (= 0 lat)) (not (= 0 lng)))
+        (progn
+          (message "Geolocation: Restoring cached location: Lat %s, Lon %s" lat lng)
+          ;; Update location using the helper, return its result
+          (cae-geolocation--update-location lat lng "cached" 'cache))
+      ;; No valid cached location found
+      (message "Geolocation: No valid cached location found.")
+      nil)))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
-  "Schedule periodic geolocation updates.
-Uses a repeating timer to update location information every hour
-and immediately runs an initial update."
+  "Schedule periodic geolocation updates."
   (interactive)
-  ;; Try to restore location first, if successful, delay the initial update
-  (if (cae-geolocation-restore-location)
-      (run-with-idle-timer 300 nil #'cae-geolocation-setup 0)
-    ;; Run once immediately if no cached location available
-    (cae-geolocation-setup 0))
-
-  ;; Schedule to run every hour when Emacs is idle for 2 minutes
-  (run-with-idle-timer 120 3600 #'cae-geolocation-setup 0)
-
-  ;; Store location on exit
-  (add-hook 'kill-emacs-hook #'cae-geolocation-store-location))
-
-;; Integrate with theme system
-(defun cae-geolocation-setup-theme-integration ()
-  "Set up integration between geolocation and theme system.
-Adds geolocation hooks to update the theme based on current location and time."
-  (when cae-init-ui-enabled-p
-    ;; Make sure circadian is loaded if day/night switching is enabled
-    (when cae-theme-enable-day-night-theme-switching
-      (require 'circadian))
-
-    ;; Add hook to update theme when location changes
-    (add-hook 'cae-geolocation-update-hook
-              (lambda ()
-                (when (and (featurep 'circadian)
-                           cae-theme-enable-day-night-theme-switching)
-                  (message "Updating theme based on new location")
-                  (circadian-setup))))))
+  (message "Geolocation: Scheduling periodic updates (every %ds after %ds idle)."
+           cae-geolocation-update-interval cae-geolocation-idle-delay)
+  ;; Schedule to run periodically when Emacs is idle
+  (run-with-idle-timer cae-geolocation-idle-delay
+                       cae-geolocation-update-interval
+                       #'cae-geolocation-setup 0))
 
 ;; Fast startup function that doesn't require loading geo packages
 (defun cae-geolocation-init ()
