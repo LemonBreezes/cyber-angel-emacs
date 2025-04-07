@@ -100,6 +100,12 @@ Returns t if the location change was significant, nil otherwise."
          (payload (json-encode `((wifiAccessPoints . ,wifi-data)))))
 
     ;; Setup for async request
+    (let ((api-key (or cae-geolocation-beacondb-api-key geo-nm-moz-api-key)))
+      (unless api-key
+        (message "Geolocation Error: No API key found in 'cae-geolocation-beacondb-api-key' or 'geo-nm-moz-api-key'.")
+        (error "Missing BeaconDB API key")) ; Or return nil if you prefer graceful failure
+      (setq geo-nm-moz-url-format (format "https://api.beacondb.net/v1/geolocate?key=%s" api-key)))
+
     (let ((url-request-method "POST")
           (url-request-extra-headers '(("Content-Type" . "application/json")))
           (url-request-data payload))
