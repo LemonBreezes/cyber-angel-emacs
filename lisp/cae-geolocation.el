@@ -2,6 +2,9 @@
 
 ;; TODO Integrate with NOAA for weather.
 
+(require 'url)
+(require 'json)
+
 
 (defvar cae-geolocation-significant-change-threshold 0.05
   "Threshold for determining if a location change is significant.
@@ -146,6 +149,54 @@ Returns t if a significant change occurred compared to the current state, nil ot
       ;; No valid cached location found
       (message "Geolocation: No valid cached location found.")
       nil)))
+
+(defun cae-geolocation-get-noaa-grid-url (lat lng callback)
+  "Fetch the NOAA forecast grid data URL for LAT and LNG asynchronously.
+LAT and LNG are the latitude and longitude coordinates.
+CALLBACK is a function called with the result. The callback
+receives one argument, which is a list:
+- On success: (:success \"URL_STRING\")
+- On error:   (:error \"ERROR_MESSAGE\" DETAILS)"
+  (unless (and (numberp lat) (numberp lng))
+    (funcall callback (list :error "Invalid coordinates provided" (list lat lng)))
+    (error "Invalid coordinates provided to cae-geolocation-get-noaa-grid-url: %s, %s" lat lng))
+
+  (let* ((noaa-url (format "https://api.weather.gov/points/%s,%s" lat lng))
+         ;; NOAA requires a User-Agent.
+         (url-request-extra-headers `(("User-Agent" . "cae-emacs-config/1.0 (https://github.com/alphapapa/cae)"))))
+    (message "Geolocation: Fetching NOAA grid URL from %s" noaa-url)
+    (url-retrieve
+     noaa-url
+     (lambda (status &rest _)
+       (condition-case err
+           (progn
+             (goto-char (point-min))
+             ;; Skip HTTP headers
+             (unless (re-search-forward "^$" nil t)
+               (error "Could not find end of HTTP headers"))
+             (let* ((json-object-type 'hash-table)
+                    (json-array-type 'list)
+                    (response (json-read)))
+               (if (and response (gethash "properties" response))
+                   (let ((grid-url (gethash "forecastGridData" (gethash "properties" response))))
+                     (if grid-url
+                         (progn
+                           (message "Geolocation: Successfully retrieved NOAA grid URL.")
+                           (funcall callback (list :success grid-url)))
+                       (progn
+                         (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")
+                         (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response)))))
+                 (progn
+                   (message "Geolocation Error: Failed to parse 'properties' from NOAA response.")
+                   (funcall callback (list :error "Failed to parse NOAA response properties" response))))))
+         ;; Handle errors during request/parsing
+         (error
+          (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
+          (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))
+     ;; Optional parameters for url-retrieve
+     nil ; params - not needed for GET
+     t   ; silent - suppress network messages unless error
+     )))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
