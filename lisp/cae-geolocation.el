@@ -89,10 +89,7 @@ and sets up periodic updates."
     (run-with-idle-timer 5 nil #'cae-geolocation-setup 0))
 
   ;; Schedule the regular periodic updates.
-  (cae-geolocation-schedule-updates)
-  ;; Note: Storing location is now handled by cae-geolocation--update-location,
-  ;; so the kill-emacs-hook is no longer needed here.
-  )
+  (cae-geolocation-schedule-updates))
 
 ;; Start the geolocation system
 (cae-geolocation-init)
