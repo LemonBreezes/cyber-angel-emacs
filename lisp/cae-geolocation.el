@@ -41,7 +41,7 @@ LAT, LNG are coordinates. NAME is the location name string."
     (setq noaa-location name
           noaa-latitude lat
           noaa-longitude lng)
-    (setq calendar-location-name)))
+    (setq calendar-location-name name)))
 
 ;; Schedule geolocation updates
 (defun cae-geolocation-schedule-updates ()
