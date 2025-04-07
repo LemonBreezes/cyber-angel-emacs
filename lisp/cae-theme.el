@@ -52,7 +52,6 @@
 (defvar cae-night-theme (if (eq cae-theme-family 'modus) cae-modus-night-theme cae-ef-night-theme))
 
 (setq doom-theme (cond
-                  ((cae-running-in-ssh-p) 'ef-melissa-dark)
                   ((eq (cae-terminal-type) 0) nil)
                   ;; Default theme will be set later by startup logic
                   (t nil)))
