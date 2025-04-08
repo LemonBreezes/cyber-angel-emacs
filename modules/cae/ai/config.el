@@ -25,6 +25,7 @@
   (defvar llm-refactoring-provider nil)
   (after! llm
     (require 'llm-claude)
+    ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
     (setq llm-refactoring-provider
           (make-llm-claude :chat-model claude-model
                            :key (getenv "ANTHROPIC_API_KEY")
