@@ -3,7 +3,7 @@
 
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
-(package! gptel :recipe (:host github :repo "karthink/gptel" :files ("*.el" "*.org")))
+(package! gptel :recipe (:nonrecursive t))
 (package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
 (package! magit-gptcommit :recipe (:host github :repo "LemonBreezes/magit-gptcommit"
                                    :branch "make-magit-kill-hooks-buffer-local"))
