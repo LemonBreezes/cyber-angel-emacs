@@ -124,8 +124,7 @@
 (package! titlecase)
 (package! transpose-frame)
 (package! logos)
-(package! restore-point :recipe (:host github :repo "LemonBreezes/restore-point"
-                                 :branch "optimize-command-lookup-using-hash-table"))
+(package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
