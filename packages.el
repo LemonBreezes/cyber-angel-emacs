@@ -12,11 +12,6 @@
 
 
 ;; PRs that haven't been merged yet.
-(when (and (modulep! :editor evil +everywhere)
-           (modulep! :lang org))
-  (package! evil-org :recipe
-    (:host github :repo "LemonBreezes/evil-org-mode")
-    :pin "4d30406efc7c945069c217a051114cc4ad3e7d5a"))
 (when (modulep! :editor lispy)
   (package! lispy :recipe (:host github :repo "enzuru/lispy")))
 (when (modulep! :completion vertico)
