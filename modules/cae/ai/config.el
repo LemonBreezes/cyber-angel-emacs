@@ -65,8 +65,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "gemini/gemini-2.5-pro-exp-03-25")
-  (setq aidermacs-editor-model "gemini/gemini-2.5-pro-exp-03-25")
+  (setq aidermacs-default-model "vertex_ai-language-models/vertex_ai/gemini-2.5-pro-exp-03-25")
+  (setq aidermacs-editor-model "vertex_ai-language-models/vertex_ai/gemini-2.5-pro-exp-03-25")
   ;;(setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   ;;(setq aidermacs-editor-model "anthropic/claude-3-5-haiku-latest")
   (setq aidermacs-auto-commits nil)
