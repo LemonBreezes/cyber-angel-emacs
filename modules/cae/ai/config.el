@@ -161,7 +161,7 @@
   (add-hook! 'copilot-enable-predicates
     (defun cae-evil-insert-state-p ()
       (memq (bound-and-true-p evil-state) '(insert emacs nil))))
-  (when (modulep! ai +copilot)
+  (when (modulep! +copilot)
     (after! copilot
       (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
   (after! copilot-balancer
