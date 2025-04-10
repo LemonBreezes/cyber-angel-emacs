@@ -123,9 +123,10 @@
   (setq buffer-undo-list t))
 (add-hook 'eshell-mode-hook #'cae-disable-undo-history)
 
-;;(progn
-;;  (setq magit-gptcommit-debug t
-;;        magit-gptcommit-cache-limit 0
-;;        magit-gptcommit--cache (make-hash-table :test 'equal :size magit-gptcommit-cache-limit))
-;;  (with-current-buffer magit-gptcommit--debug-buffer-name
-;;    (erase-buffer)))
+(progn
+  (setq magit-gptcommit-debug t
+        magit-gptcommit-cache-limit 0
+        magit-gptcommit--cache (make-hash-table :test 'equal :size magit-gptcommit-cache-limit))
+  (when (buffer-live-p (bound-and-true-p magit-gptcommit--debug-buffer-name))
+    (with-current-buffer
+        (erase-buffer))))
