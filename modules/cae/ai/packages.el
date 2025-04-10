@@ -5,7 +5,8 @@
 
 (package! gptel :recipe (:nonrecursive t))
 (package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
-(package! magit-gptcommit :recipe (:host github :repo "douo/magit-gptcommit"))
+(package! magit-gptcommit :recipe (:host github :repo "LemonBreezes/magit-gptcommit"
+                                         :branch "fix-race-conditions"))
 (package! chatgpt-shell)
 (package! dall-e-shell)
 (when (modulep! +copilot)
