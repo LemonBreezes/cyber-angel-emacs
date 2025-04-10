@@ -259,12 +259,7 @@
     (defun cae-gptel-mode-setup-h ()
       (setq-local nobreak-char-display nil)
       (auto-fill-mode -1)
-      (doom-mark-buffer-as-real-h)))
-  ;; BUG Karthink refused to accept my PR to fix this, saying that starting the
-  ;; point on top of the "Rewrite: " is a good idea. I disagree.
-  (cae-defadvice! cae-goto-point-max-a (_)
-    :after #'gptel--read-with-prefix
-    (goto-char (point-max))))
+      (doom-mark-buffer-as-real-h))))
 
 (use-package! forge-llm
   :defer t :after forge :config
