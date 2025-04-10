@@ -117,3 +117,8 @@
             (projectile-purge-file-from-cache relative-filename)))))))
 (advice-add #'delete-file-projectile-remove-from-cache :override
             #'cae-delete-file-projectile-remove-from-cache)
+
+;; HACK disable undo history for performance testing reasons.
+(defun cae-disable-undo-history ()
+  (setq buffer-undo-list t))
+(add-hook 'eshell-mode-hook #'cae-disable-undo-history)
