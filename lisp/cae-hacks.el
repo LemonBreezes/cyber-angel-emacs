@@ -127,4 +127,4 @@ prog-mode, text-mode, or conf-mode."
   (when (and (not (derived-mode-p 'prog-mode 'text-mode 'conf-mode))
              (not (buffer-file-name)))
     (cae-disable-undo-history)))
-(add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
+;;(add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
