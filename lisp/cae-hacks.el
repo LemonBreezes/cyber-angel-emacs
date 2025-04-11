@@ -134,7 +134,7 @@
   "Disable undo for buffers derived from fundamental-mode but not from
 prog-mode, text-mode, or conf-mode."
   (when (and (eq buffer-undo-list t)
-             (or (derived-mode-p 'prog-mode 'text-mode 'conf-mode)
-                 (buffer-file-name)))
+             (or (buffer-file-name)
+                 (derived-mode-p 'prog-mode 'text-mode 'conf-mode)))
     (setq buffer-undo-list nil)))
 (add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
