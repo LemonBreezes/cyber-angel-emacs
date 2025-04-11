@@ -128,3 +128,4 @@ prog-mode, text-mode, or conf-mode."
              (not (buffer-file-name)))
     (cae-disable-undo-history)))
 (add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
+(add-hook 'temp-buffer-setup-hook #'cae-disable-undo-history)
