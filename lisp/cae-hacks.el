@@ -124,7 +124,6 @@
 (defun cae-disable-buffer-undo-h ()
   "Disable undo for buffers derived from fundamental-mode but not from
 prog-mode, text-mode, or conf-mode."
-  (when (or (not (derived-mode-p 'prog-mode 'text-mode 'conf-mode))
-            buffer-read-only)
+  (when (not (derived-mode-p 'prog-mode 'text-mode 'conf-mode))
     (cae-disable-undo-history)))
 (add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
