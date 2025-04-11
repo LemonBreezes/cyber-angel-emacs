@@ -306,6 +306,7 @@
           parrot-rotate-end-bound-regexp "[\]\[[:space:](){}<>]")
     (add-to-list 'parrot-rotate-dict '(:rot ("add-hook" "remove-hook")))
     (add-to-list 'parrot-rotate-dict '(:rot ("add-hook!" "remove-hook!")))
+    (add-to-list 'parrot-rotate-dict '(:rot ("setq-hook!" "unsetq-hook!")))
     (add-to-list 'parrot-rotate-dict '(:rot ("Yes" "No")))
     (add-to-list 'parrot-rotate-dict '(:rot ("nil" "t")))
     (add-to-list 'parrot-rotate-dict '(:rot ("-1" "+1")))
