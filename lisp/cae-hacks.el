@@ -122,3 +122,5 @@
 (defun cae-disable-undo-history ()
   (setq buffer-undo-list t))
 (add-hook 'eshell-mode-hook #'cae-disable-undo-history)
+(setq-hook! 'special-mode-hook
+  buffer-undo-list t)
