@@ -120,8 +120,6 @@
 
 ;; HACK disable undo history for performance testing reasons.
 (defun cae-disable-undo-history ()
-  (unless (eq buffer-undo-list t)
-    (message "Disabling buffer undo list in: %s" (buffer-name)))
   (setq buffer-undo-list t))
 (defun cae-disable-buffer-undo-h ()
   "Disable undo for buffers derived from fundamental-mode but not from
