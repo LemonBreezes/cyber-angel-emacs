@@ -119,12 +119,12 @@
             #'cae-delete-file-projectile-remove-from-cache)
 
 ;; HACK disable undo history for performance testing reasons.
-(defun disable-undo-history ()
+(defun cae-disable-undo-history ()
   (setq buffer-undo-list t))
-(defun disable-buffer-undo-h ()
+(defun cae-disable-buffer-undo-h ()
   "Disable undo for buffers derived from fundamental-mode but not from
 prog-mode, text-mode, or conf-mode."
   (when (or (not (derived-mode-p 'prog-mode 'text-mode 'conf-mode))
             buffer-read-only)
-    (disable-undo-history)))
-(add-hook 'after-change-major-mode-hook #'disable-buffer-undo-h)
+    (cae-disable-undo-history)))
+(add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
