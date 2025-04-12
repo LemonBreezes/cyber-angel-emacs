@@ -208,6 +208,12 @@
     ("n" comint-next-prompt
      "p" comint-previous-prompt))
 
+  (define-repeat-map cae-exwm-switch-buffer
+    ("n" cae-exwm-switch-next-workspace-buffer
+     "p" cae-exwm-switch-previous-workspace-buffer
+     "," cae-exwm-switch-previous-workspace-buffer
+     "." cae-exwm-switch-next-workspace-buffer))
+
   (cae-defadvice! cae-repeat-ignore-when-hydra-active-a ()
     :before-until #'repeat-post-hook
     (bound-and-true-p hydra-curr-map))
