@@ -94,6 +94,30 @@
 
 (setq debug-on-message "Invalid face reference\\|Remote file error:")
 
+;; HACK I suspect this is actually a problem with `compile-angel' instead.
+;; Replace the existing function definition with this refined version:
+(defun cae-delete-file-projectile-remove-from-cache (filename &optional _trash)
+  (when (and projectile-enable-caching projectile-auto-update-cache)
+    ;; Avoid Tramp reentrant calls from process sentinels etc.
+    ;; Only proceed if the current context doesn't forbid Tramp calls,
+    ;; even if default-directory is remote. Check fboundp for robustness.
+    (unless (and (fboundp 'tramp-tramp-file-p)
+                 (tramp-tramp-file-p default-directory)
+                 (not (tramp-tramp-file-p filename)))
+      ;; Check for project *after* ensuring the context is safe.
+      (when-let ((project-root (projectile-project-p)))
+        ;; Proceed with cache update for both local and remote projects.
+        ;; The context check above should prevent reentrant errors during
+        ;; project-root detection. Subsequent operations might still involve
+        ;; Tramp if project-root is remote, but should be safe in a
+        ;; non-restricted context.
+        (let* ((true-filename (file-truename filename))
+               (relative-filename (file-relative-name true-filename project-root)))
+          (when (projectile-file-cached-p relative-filename project-root)
+            (projectile-purge-file-from-cache relative-filename)))))))
+(advice-add #'delete-file-projectile-remove-from-cache :override
+            #'cae-delete-file-projectile-remove-from-cache)
+
 ;; HACK disable undo history for performance testing reasons.
 (defun cae-disable-undo-history ()
   (setq buffer-undo-list t))
