@@ -230,4 +230,5 @@ Otherwise, fall back to the command mapped to `persp-switch-to-buffer'."
 
 ;; Ensure the keybinding still points to the modified function
 (map! :map exwm-mode-map
-      [remap +vertico/switch-workspace-buffer] #'cae-exwm-switch-to-workspace-buffer)
+      :localleader
+      "b" #'cae-exwm-switch-to-workspace-buffer)
