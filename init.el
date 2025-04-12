@@ -119,6 +119,7 @@
          (nix +lsp +tree-sitter)
          (lua +lsp +tree-sitter +fennel)
          (data +lsp +tree-sitter)
+         (ledger +lsp +tree-sitter)
          (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
          (javascript +lsp +tree-sitter)
          (markdown +grip)
