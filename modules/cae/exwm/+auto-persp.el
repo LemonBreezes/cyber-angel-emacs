@@ -228,6 +228,6 @@ Otherwise, fall back to `+vertico/switch-workspace-buffer'."
             ;; Should not happen if cae-exwm-workspaces is consistent, but fallback just in case
             (call-interactively #'+vertico/switch-workspace-buffer)))
       ;; Not an EXWM workspace, use the default switcher
-      (call-interactively #'+vertico/switch-workspace-buffer))))
+      (call-interactively (command-remapping #'persp-switch-to-buffer)))))
 (map! :map exwm-mode-map
       [remap +vertico/switch-workspace-buffer] #'cae-exwm-switch-to-workspace-buffer)
