@@ -207,12 +207,14 @@
   ;; with EXWM but can cause increased power consumption.
   (cae-defadvice! cae-exwm-disable-net-wm-state-hidden-a (id)
     :after #'exwm-layout--hide
-    (with-current-buffer (exwm--id->buffer id)
-      (setq exwm--ewmh-state
-            (delq xcb:Atom:_NET_WM_STATE_HIDDEN
-                  exwm--ewmh-state))
-      (exwm-layout--set-ewmh-state id)
-      (xcb:flush exwm--connection)))
+    (when-let ((buffer (exwm--id->buffer id)))
+      (with-current-buffer buffer
+        (when (buffer-live-p buffer) ; Check if buffer still exists
+          (setq exwm--ewmh-state
+                (delq xcb:Atom:_NET_WM_STATE_HIDDEN
+                      exwm--ewmh-state))
+          (exwm-layout--set-ewmh-state id)
+          (xcb:flush exwm--connection)))))
 
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
