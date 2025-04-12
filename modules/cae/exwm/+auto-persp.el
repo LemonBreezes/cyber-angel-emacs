@@ -219,6 +219,7 @@ Otherwise, fall back to the command mapped to `persp-switch-to-buffer'."
     (if (member current-ws-name cae-exwm-workspaces)
         ;; EXWM Workspace: Interactive selection filtered to matching EXWM buffers
         (let* ((filter-fn (lambda (buf)
+                            (+log buf)
                             (and (buffer-live-p buf) ; Ensure buffer is live
                                  (string= (cae-exwm-get-workspace-name buf) current-ws-name))))
                ;; persp-buffers-completing-read already filters by current perspective
