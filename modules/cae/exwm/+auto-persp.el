@@ -212,10 +212,22 @@ Returns nil if no matching workspace is found."
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
 
 (defun cae-exwm-switch-to-workspace-buffer ()
+  "Switch to the EXWM buffer associated with the current workspace, if any.
+Otherwise, fall back to `+vertico/switch-workspace-buffer'."
   (interactive)
-  (if (member (+workspace-current-name)
-              cae-exwm-workspaces)
-      ()
-    (call-interactively #'+vertico/switch-workspace-buffer)))
+  (let ((current-ws-name (+workspace-current-name)))
+    (if (member current-ws-name cae-exwm-workspaces)
+        ;; Current workspace is an EXWM workspace, find its buffer
+        (let ((target-buffer
+               (cl-find-if (lambda (buf)
+                             (and (buffer-live-p buf)
+                                  (string= (cae-exwm-get-workspace-name buf) current-ws-name)))
+                           (buffer-list))))
+          (if target-buffer
+              (switch-to-buffer target-buffer)
+            ;; Should not happen if cae-exwm-workspaces is consistent, but fallback just in case
+            (call-interactively #'+vertico/switch-workspace-buffer)))
+      ;; Not an EXWM workspace, use the default switcher
+      (call-interactively #'+vertico/switch-workspace-buffer))))
 (map! :map exwm-mode-map
       [remap +vertico/switch-workspace-buffer] #'cae-exwm-switch-to-workspace-buffer)
