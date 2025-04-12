@@ -222,7 +222,7 @@ Otherwise, fall back to the command mapped to `persp-switch-to-buffer'."
                             (and (buffer-live-p buf) ; Ensure buffer is live
                                  (string= (cae-exwm-get-workspace-name buf) current-ws-name))))
                ;; persp-buffers-completing-read already filters by current perspective
-               (target-buffer-name (persp-buffers-completing-read "Switch to EXWM buffer: " filter-fn)))
+               (target-buffer-name (read-buffer "Switch to EXWM buffer: " nil t filter-fn)))
           (when target-buffer-name
             (switch-to-buffer (get-buffer target-buffer-name))))
       ;; Non-EXWM Workspace: Use the standard interactive switcher for the workspace
