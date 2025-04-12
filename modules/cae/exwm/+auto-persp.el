@@ -210,3 +210,12 @@ Returns nil if no matching workspace is found."
   (defun cae-exwm-persp-set-up-cleanup-hook-h ()
     (add-hook 'kill-buffer-hook #'cae-exwm-persp-cleanup-workspace nil t)))
 (advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
+
+(defun cae-exwm-switch-to-workspace-buffer ()
+  (interactive)
+  (if (member (+workspace-current-name)
+              cae-exwm-workspaces)
+      ()
+    (call-interactively #'+vertico/switch-workspace-buffer)))
+(map! :map exwm-mode-map
+      [remap +vertico/switch-workspace-buffer] #'cae-exwm-switch-to-workspace-buffer)
