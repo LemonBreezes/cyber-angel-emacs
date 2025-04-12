@@ -213,8 +213,8 @@
         (setq exwm--ewmh-state
               (delq xcb:Atom:_NET_WM_STATE_HIDDEN
                     exwm--ewmh-state))
-          (exwm-layout--set-ewmh-state id)
-          (xcb:flush exwm--connection))))
+        (exwm-layout--set-ewmh-state id)
+        (xcb:flush exwm--connection))))
 
   (use-package! exwm-mff
     :defer t :init (add-hook 'exwm-init-hook #'exwm-mff-mode))
