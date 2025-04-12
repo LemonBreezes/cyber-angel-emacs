@@ -228,11 +228,6 @@ Otherwise, fall back to the command mapped to `persp-switch-to-buffer'."
       ;; Non-EXWM Workspace: Use the standard interactive switcher for the workspace
       (call-interactively (command-remapping #'persp-switch-to-buffer)))))
 
-;; Ensure the keybinding still points to the modified function
-(map! :map exwm-mode-map
-      :localleader
-      "b" #'cae-exwm-switch-to-workspace-buffer)
-
 (defun cae-exwm--get-workspace-buffers (workspace-name)
   "Return a list of live buffers matching WORKSPACE-NAME in the current perspective."
   (cl-remove-if-not (lambda (buf)
@@ -274,8 +269,9 @@ EXWM workspace or if only one matching buffer exists."
                      (prev-buffer (nth prev-index candidate-buffers)))
                 (switch-to-buffer prev-buffer)))))))))
 
-;; Optional: Add keybindings if desired, for example:
-;; (map! :map exwm-mode-map
-;;       :localleader
-;;       "B" #'cae-exwm-switch-next-workspace-buffer
-;;       "P" #'cae-exwm-switch-previous-workspace-buffer) ; Choose appropriate keys
+;; Ensure the keybinding still points to the modified function
+(map! :map exwm-mode-map
+      :localleader
+      "b" #'cae-exwm-switch-to-workspace-buffer
+      "n" #'cae-exwm-switch-next-workspace-buffer
+      "p" #'cae-exwm-switch-previous-workspace-buffer)
