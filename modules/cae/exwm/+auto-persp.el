@@ -213,21 +213,21 @@ Returns nil if no matching workspace is found."
 
 (defun cae-exwm-switch-to-workspace-buffer ()
   "Switch to the EXWM buffer associated with the current workspace, if any.
-Otherwise, fall back to `+vertico/switch-workspace-buffer'."
+Otherwise, fall back to the command mapped to `persp-switch-to-buffer'."
   (interactive)
   (let ((current-ws-name (+workspace-current-name)))
     (if (member current-ws-name cae-exwm-workspaces)
-        ;; Current workspace is an EXWM workspace, find its buffer
-        (let ((target-buffer
-               (cl-find-if (lambda (buf)
-                             (and (buffer-live-p buf)
-                                  (string= (cae-exwm-get-workspace-name buf) current-ws-name)))
-                           (buffer-list))))
-          (if target-buffer
-              (switch-to-buffer target-buffer)
-            ;; Should not happen if cae-exwm-workspaces is consistent, but fallback just in case
-            (call-interactively #'+vertico/switch-workspace-buffer)))
-      ;; Not an EXWM workspace, use the default switcher
+        ;; EXWM Workspace: Interactive selection filtered to matching EXWM buffers
+        (let* ((filter-fn (lambda (buf)
+                            (and (buffer-live-p buf) ; Ensure buffer is live
+                                 (string= (cae-exwm-get-workspace-name buf) current-ws-name))))
+               ;; persp-buffers-completing-read already filters by current perspective
+               (target-buffer-name (persp-buffers-completing-read "Switch to EXWM buffer: " filter-fn)))
+          (when target-buffer-name
+            (switch-to-buffer (get-buffer target-buffer-name))))
+      ;; Non-EXWM Workspace: Use the standard interactive switcher for the workspace
       (call-interactively (command-remapping #'persp-switch-to-buffer)))))
+
+;; Ensure the keybinding still points to the modified function
 (map! :map exwm-mode-map
       [remap +vertico/switch-workspace-buffer] #'cae-exwm-switch-to-workspace-buffer)
