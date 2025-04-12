@@ -122,7 +122,7 @@
          (ledger +lsp +tree-sitter)
          (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
          (javascript +lsp +tree-sitter)
-         (markdown +grip)
+         (markdown +lsp +tree-sitter +grip)
          (json +lsp +tree-sitter)
          (python +lsp +tree-sitter +pyright +cython)
          (haskell +lsp +tree-sitter)
