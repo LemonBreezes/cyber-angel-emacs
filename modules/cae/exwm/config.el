@@ -203,6 +203,21 @@
       (apply oldfun args)))
   (cae-advice-add #'exwm-input--translate :around #'cae-exwm-input--translate-a)
 
+  ;; Fix a type validation bug in xcb library triggered by the advice below.
+  ;; The '~lsb' slot in 'xcb:icccm:-ChangeProperty' inherits an initform
+  ;; producing 't' or 'nil', but its type is overridden to 'xcb:-ignore',
+  ;; causing 'cl-typep' to fail during 'make-instance'. We patch the slot
+  ;; type back to 'xcb:-boolean'.
+  (defun cae-fix-xcb-ignore-type-validation-bug ()
+    "Patch xcb class definition to prevent type validation error."
+    (require 'xcb-icccm) ; Ensure the class is defined
+    (let ((class (eieio-find-class 'xcb:icccm:-ChangeProperty)))
+      (when class
+        (let ((slot (cl-find '~lsb (oref class :slots) :key #'oref :name)))
+          (when slot
+            (oset slot :type 'xcb:-boolean))))))
+  (cae-fix-xcb-ignore-type-validation-bug)
+
   ;; See https://github.com/emacs-exwm/exwm/issues/18. Addresses a focus issue
   ;; with EXWM but can cause increased power consumption.
   (cae-defadvice! cae-exwm-disable-net-wm-state-hidden-a (id)
