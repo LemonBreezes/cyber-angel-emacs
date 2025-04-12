@@ -111,7 +111,7 @@
          biblio
 
          :lang
-         (emacs-lisp +tree-sitter)
+         (emacs-lisp +lsp +tree-sitter)
          (org +roam2 +tree-sitter +lsp +dragndrop +journal +pretty)
          (cc +lsp +tree-sitter)
          (web +lsp +tree-sitter)
