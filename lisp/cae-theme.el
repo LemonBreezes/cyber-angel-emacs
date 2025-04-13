@@ -70,7 +70,9 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     (when (memq major-mode cae-theme-mixed-pitch-modes)
       (mixed-pitch-mode 1))
     (dolist (hook cae-theme-mixed-pitch-modes)
-      (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode)))
+      (add-hook (intern (concat (symbol-name hook) "-hook")) #'mixed-pitch-mode))
+    (when (memq 'org-mode cae-theme-mixed-pitch-modes)
+      (add-hook 'org-mode-hook #'valign-mode)))
 
   (add-hook 'doom-init-ui-hook #'cae-theme-init-mixed-pitch-h))
 
