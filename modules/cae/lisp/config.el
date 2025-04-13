@@ -13,6 +13,7 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
+
 ;; Allow C-u - using `pp' on the `eval-expression' output.
 (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
 (map! [remap eval-last-sexp] #'cae-eval-last-sexp
@@ -23,7 +24,7 @@
 
 ;; This fixes aggressive indent's indentation of plists. :)
 (after! lisp-mode
-  (defalias 'lisp-indent-function '+emacs-lisp-indent-function))
+  (setf (symbol-function 'lisp-indent-function) '+emacs-lisp-indent-function))
 
 (after! elisp-mode
   (map! :map emacs-lisp-mode-map
@@ -56,7 +57,7 @@
     (add-to-list 'lispy-elisp-modes #'helpful-mode)
     (add-to-list 'lispy-elisp-modes #'lisp-data-mode)
     (add-hook 'helpful-mode #'lispy-mode)
-    (map! :map lispy-mode-map-lispy
+    (map! :map (lispy-mode-map-lispy lispy-mode-map)
           (:when (not (modulep! :editor evil))
            ;; I prefer to keep the default `C-a' and `M-m' commands for moving to
            ;; the beginning of the line or indentation.
