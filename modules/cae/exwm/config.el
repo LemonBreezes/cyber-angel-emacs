@@ -149,7 +149,7 @@
     ;; My preference.
     (add-hook 'exwm-mode-hook #'hide-mode-line-mode)
     (defadvice! cae-exwm-handle-hide-mode-line-mode-a ()
-      :before #'exwm-layout-hide-mode-line
+      :before #'exwm-layout-show-mode-line
       (hide-mode-line-mode -1))
 
     (when (modulep! :ui popup)
