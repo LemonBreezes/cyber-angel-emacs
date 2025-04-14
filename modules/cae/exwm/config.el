@@ -147,7 +147,7 @@
     (add-hook 'exwm-mode-hook #'doom-mark-buffer-as-real-h)
 
     ;; My preference.
-    (add-hook 'exwm-mode-hook #'exwm-layout-hide-mode-line)
+    (add-hook 'exwm-mode-hook #'hide-mode-line-mode)
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
