@@ -170,6 +170,7 @@
       (add-to-list 'clean-buffer-list-kill-never-buffer-names
                    (buffer-name copilot-balancer-debug-buffer)))))
 
+;; Not really a fan of this package yet.
 (use-package! minuet
   :when (modulep! -copilot)
   :defer t :init
