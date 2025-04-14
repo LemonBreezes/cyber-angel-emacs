@@ -148,6 +148,9 @@
 
     ;; My preference.
     (add-hook 'exwm-mode-hook #'hide-mode-line-mode)
+    (defadvice! cae-exwm-handle-hide-mode-line-mode-a ()
+      :before #'exwm-layout-hide-mode-line
+      (hide-mode-line-mode -1))
 
     (when (modulep! :ui popup)
       (cl-pushnew ?\C-` exwm-input-prefix-keys))
