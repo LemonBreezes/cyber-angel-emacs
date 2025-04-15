@@ -13,7 +13,6 @@
 (map! [remap delete-char] #'cae-delete-char
       ")" #'cae-insert-closing-paren)
 
-
 ;; Allow C-u - using `pp' on the `eval-expression' output.
 (defvaralias 'pp-read-expression-map 'minibuffer-local-map)
 (map! [remap eval-last-sexp] #'cae-eval-last-sexp
