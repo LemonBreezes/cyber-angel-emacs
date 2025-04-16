@@ -222,7 +222,7 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
      (let ((map (make-sparse-keymap)))
        (define-key map (kbd "q") #'kill-current-buffer)
        (when (featurep 'evil)
-         (define-key (evil-get-auxiliary-keymap map 'normal)
+         (define-key (evil-get-auxiliary-keymap map 'normal t)
                      (kbd "q") #'kill-current-buffer))
        map)))
   (hide-mode-line-mode +1))
