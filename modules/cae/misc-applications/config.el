@@ -334,9 +334,9 @@
   :defer t :init
   (map! :map cae-misc-applications-insert-map
         (:prefix "l"
-         "l" #'lorem-ipsum-insert-list
-         "p" #'lorem-ipsum-insert-paragraphs
-         "s" #'lorem-ipsum-insert-sentences))
+                 "l" #'lorem-ipsum-insert-list
+                 "p" #'lorem-ipsum-insert-paragraphs
+                 "s" #'lorem-ipsum-insert-sentences))
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-insert-map
       "l" "lorem-ipsum"
@@ -348,12 +348,12 @@
   :defer t :init
   (map! :map cae-misc-applications-insert-map
         (:prefix "p"
-         "c" #'password-generator-custom
-         "s" #'password-generator-simple
-         "t" #'password-generator-strong
-         "n" #'password-generator-numeric
-         "p" #'password-generator-paranoid
-         "h" #'password-generator-phonetic))
+                 "c" #'password-generator-custom
+                 "s" #'password-generator-simple
+                 "t" #'password-generator-strong
+                 "n" #'password-generator-numeric
+                 "p" #'password-generator-paranoid
+                 "h" #'password-generator-phonetic))
   (after! which-key
     (which-key-add-keymap-based-replacements
       cae-misc-applications-insert-map
@@ -501,7 +501,7 @@
   (defvar cae-tetris-workspace-name "*tetris*")
   (defvar cae-tetris--old-wconf nil)
   (map! (:map cae-misc-applications-games-map
-         "t" #'cae-tetris))
+              "t" #'cae-tetris))
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
       "t" "Tetris"))
