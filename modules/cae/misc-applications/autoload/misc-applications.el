@@ -218,7 +218,6 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
     (delete-other-windows)
     (setq cursor-type nil)
     (message "Black screen created. Press 'q' to exit.")
-    ;; Add a local keymap to exit when 'q' is pressed
     (use-local-map (let ((map (make-sparse-keymap)))
                      (define-key map (kbd "q")
                                  (lambda ()
