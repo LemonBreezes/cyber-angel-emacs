@@ -211,19 +211,12 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
   (interactive)
   ;; Create a new buffer named "*Black Screen*"
   (let ((black-buffer (get-buffer-create "*Black Screen*")))
-    ;; Switch to the buffer
     (switch-to-buffer black-buffer)
-    ;; Set the buffer to fundamental mode
     (fundamental-mode)
-    ;; Delete any existing content
     (erase-buffer)
-    ;; Set the face attributes for the buffer
     (face-remap-add-relative 'default :background "black")
-    ;; Make it full screen
     (delete-other-windows)
-    ;; Disable the cursor
     (setq cursor-type nil)
-    ;; Message with instructions
     (message "Black screen created. Press 'q' to exit.")
     ;; Add a local keymap to exit when 'q' is pressed
     (use-local-map (let ((map (make-sparse-keymap)))
