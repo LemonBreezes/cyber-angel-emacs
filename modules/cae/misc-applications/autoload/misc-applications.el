@@ -223,7 +223,6 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
        (define-key map (kbd "q") #'kill-current-buffer)
        (when (featurep 'evil)
          (define-key (evil-get-auxiliary-keymap map 'normal)
-                     (kbd "q")
-                     #'kill-current-buffer))
+                     (kbd "q") #'kill-current-buffer))
        map)))
   (hide-mode-line-mode +1))
