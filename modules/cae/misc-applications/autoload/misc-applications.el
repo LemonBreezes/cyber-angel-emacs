@@ -124,16 +124,16 @@ KEYMAP-SETUP-FN is a function to set up keybindings for the application."
 
 ;;;###autoload
 (cl-defmacro cae-define-game-launcher (name &key
-                                           launch-fn
-                                           buffer-name
-                                           workspace-name
-                                           (setup-keys t)
-                                           (save-scores nil)
-                                           scores-file
-                                           mode-name
-                                           (evil-state nil)
-                                           custom-setup-fn
-                                           force-emacs-state)
+                                            launch-fn
+                                            buffer-name
+                                            workspace-name
+                                            (setup-keys t)
+                                            (save-scores nil)
+                                            scores-file
+                                            mode-name
+                                            (evil-state nil)
+                                            custom-setup-fn
+                                            force-emacs-state)
   "Define a launcher for a game with common setup patterns.
 NAME is the base name for the functions.
 LAUNCH-FN is the function to start the game.
@@ -148,8 +148,8 @@ CUSTOM-SETUP-FN is a custom function to run after game launch.
 FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
   (let* ((quit-fn-name (intern (format "cae-%s-quit" name)))
          (keymap-variable (if mode-name
-                             (intern (format "%s-map" mode-name))
-                           (intern (format "%s-mode-map" name))))
+                              (intern (format "%s-map" mode-name))
+                            (intern (format "%s-mode-map" name))))
          (keymap-setup-fn
           (when setup-keys
             `(lambda ()
