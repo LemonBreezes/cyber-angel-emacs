@@ -83,6 +83,7 @@ Restores the previous window configuration on exit ('q')."
      (let ((map (make-sparse-keymap)))
        (define-key map (kbd "q") #'cae-exwm--exit-black-screen)
        (define-key map [remap self-insert-command] #'ignore)
+       (define-key map [remap newline-and-indent] #'ignore)
        (when (featurep 'evil)
          (define-key (evil-get-auxiliary-keymap map 'normal t)
                      (kbd "q") #'cae-exwm--exit-black-screen))
