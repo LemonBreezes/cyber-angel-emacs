@@ -526,9 +526,6 @@
 
 ;;; Eyecandy
 
-(map! :map cae-misc-applications-eyecandy-map
-      "b" #'cae-create-black-screen)
-
 (use-package! fireplace
   :defer t :init
   (defvar cae-fireplace-workspace-name "*fireplace*")
