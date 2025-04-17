@@ -357,4 +357,6 @@
   :defer t :init
   (defvaralias 'page-break-lines-max-width 'fill-column)
   (add-hook 'prog-mode-hook #'page-break-lines-mode)
+  (add-hook 'conf-mode-hook #'page-break-lines-mode)
+  (add-hook 'text-mode-hook #'page-break-lines-mode)
   (add-hook 'pdftotext-mode-hook #'page-break-lines-mode))
