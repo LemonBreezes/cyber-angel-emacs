@@ -57,8 +57,9 @@ Restores the previous window configuration on exit ('q')."
   ;; Save the current window configuration
   (let ((saved-wconf (current-window-configuration))
         (black-buffer (get-buffer-create "*Black Screen*")))
-    (let ((tab-bar-show nil))
-      (tab-bar--update-tab-bar-lines t))
+    (when (featurep 'tab-bar)
+      (let ((tab-bar-show nil))
+        (tab-bar--update-tab-bar-lines t)))
     (switch-to-buffer black-buffer)
     (special-mode)
     (erase-buffer)
@@ -74,7 +75,8 @@ Restores the previous window configuration on exit ('q')."
              (interactive)
              (set-window-configuration ,saved-wconf)
              (kill-buffer ,black-buffer)
-             (tab-bar--update-tab-bar-lines t)))
+             (when (featurep 'tab-bar)
+               (tab-bar--update-tab-bar-lines t))))
 
     ;; Set up local keymap
     (use-local-map
