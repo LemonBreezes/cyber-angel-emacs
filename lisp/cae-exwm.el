@@ -28,6 +28,7 @@
         "s-D" #'cae-exwm-open-nested-vanilla-doom-emacs
         "s-r" #'cae-exwm-toggle-redshift
         "s-X" #'cae-exwm-lock-screen
+        "s-x" #'cae-exwm-create-black-screen
         "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
         "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
