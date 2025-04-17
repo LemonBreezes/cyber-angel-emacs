@@ -47,4 +47,4 @@
                            (concat lat-str ":" lon-str)
                            "6500:3500"
                            "-b" "1.0:0.8"))
-      (message "Redshift turned on for %s" (cdr (assq 'name cae-location-data))))))
+      (message "Redshift turned on for %s" calendar-location-name))))
