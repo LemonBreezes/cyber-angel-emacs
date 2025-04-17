@@ -68,5 +68,6 @@
        (when (featurep 'evil)
          (define-key (evil-get-auxiliary-keymap map 'normal t)
                      (kbd "q") #'kill-current-buffer))
-       map)))
+       map))
+    (ignore-errors (evil-emacs-state)))
   (hide-mode-line-mode +1))
