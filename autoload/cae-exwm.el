@@ -73,7 +73,8 @@ Restores the previous window configuration on exit ('q')."
           `(lambda ()
              (interactive)
              (set-window-configuration ,saved-wconf)
-             (kill-buffer ,black-buffer)))
+             (kill-buffer ,black-buffer)
+             (tab-bar--update-tab-bar-lines t)))
 
     ;; Set up local keymap
     (use-local-map
