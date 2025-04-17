@@ -56,9 +56,9 @@ Restores the previous window configuration on exit ('q')."
   (interactive)
   ;; Save the current window configuration
   (let ((saved-wconf (current-window-configuration))
-        (black-buffer (get-buffer-create "*Black Screen*"))
-        (tab-bar-show nil))
-    (tab-bar--update-tab-bar-lines t)
+        (black-buffer (get-buffer-create "*Black Screen*")))
+    (let ((tab-bar-show nil))
+      (tab-bar--update-tab-bar-lines t))
     (switch-to-buffer black-buffer)
     (special-mode)
     (erase-buffer)
