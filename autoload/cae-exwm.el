@@ -68,9 +68,9 @@ Restores the previous window configuration on exit ('q')."
 
     ;; Define the exit function
     (fset 'cae-exwm--exit-black-screen
-          (lambda ()
+          `(lambda ()
             (interactive)
-            (set-window-configuration saved-wconf)
+            (set-window-configuration ,saved-wconf)
             (kill-buffer black-buffer)))
 
     ;; Set up local keymap
