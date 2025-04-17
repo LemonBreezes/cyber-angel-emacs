@@ -51,25 +51,35 @@
 
 ;;;###autoload
 (defun cae-exwm-create-black-screen ()
-  "Create a full-screen buffer with a black background."
+  "Create a full-screen buffer with a black background.
+Restores the previous window configuration on exit ('q')."
   (interactive)
-  ;; Create a new buffer named "*Black Screen*"
-  (let ((black-buffer (get-buffer-create "*Black Screen*"))
-        (wconf (current-window-configuration)))
+  ;; Save the current window configuration
+  (let ((saved-wconf (current-window-configuration))
+        (black-buffer (get-buffer-create "*Black Screen*")))
     (switch-to-buffer black-buffer)
     (special-mode)
     (erase-buffer)
-    (face-remap-add-relative 'default :background "black"
-                             (wconf (current-window-configuration)))
+    ;; Set background to black for the current window configuration
+    (face-remap-add-relative 'default :background "black")
     (delete-other-windows)
     (setq cursor-type nil)
     (message "Black screen created. Press 'q' to exit.")
+
+    ;; Define the exit function
+    (fset 'cae-exwm--exit-black-screen
+          (lambda ()
+            (interactive)
+            (set-window-configuration saved-wconf)
+            (kill-buffer black-buffer)))
+
+    ;; Set up local keymap
     (use-local-map
      (let ((map (make-sparse-keymap)))
-       (define-key map (kbd "q") #'kill-current-buffer)
+       (define-key map (kbd "q") #'cae-exwm--exit-black-screen)
        (when (featurep 'evil)
          (define-key (evil-get-auxiliary-keymap map 'normal t)
-                     (kbd "q") #'kill-current-buffer))
+                     (kbd "q") #'cae-exwm--exit-black-screen))
        map))
     (ignore-errors (evil-emacs-state)))
   (hide-mode-line-mode +1))
