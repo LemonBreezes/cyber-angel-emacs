@@ -56,7 +56,7 @@
   ;; Create a new buffer named "*Black Screen*"
   (let ((black-buffer (get-buffer-create "*Black Screen*")))
     (switch-to-buffer black-buffer)
-    (fundamental-mode)
+    (special-mode)
     (erase-buffer)
     (face-remap-add-relative 'default :background "black")
     (delete-other-windows)
