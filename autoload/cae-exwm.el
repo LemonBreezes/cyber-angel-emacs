@@ -36,8 +36,8 @@
         ;; Reset screen temperature
         (start-process "redshift-reset" nil "redshift" "-x")
         (message "Redshift turned off"))
-    (let* ((lat (cdr (assq 'latitude cae-location-data)))
-           (lon (cdr (assq 'longitude cae-location-data)))
+    (let* ((lat calendar-latitude)
+           (lon calendar-longitude)
            (lat-str (number-to-string lat))
            (lon-str (number-to-string lon)))
       ;; Start new redshift process and store the process object
