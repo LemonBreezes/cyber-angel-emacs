@@ -28,7 +28,7 @@
         "s-D" #'cae-exwm-open-nested-vanilla-doom-emacs
         "s-r" #'cae-exwm-toggle-redshift
         "s-X" #'cae-exwm-lock-screen
-        "s-x" #'cae-exwm-create-black-screen
+        "s-x" #'cae-exwm-create-black-screen ; Added this line
         "s-<return>" (cae-exwm-app-runner "kitty" "Kitty")
         "s-S-<return>" #'cae-open-eshell-in-new-workspace)
 
@@ -44,7 +44,7 @@ EXWM Apps Launcher
 _v_: [Browser]    _f_: Flameshot      _T_: Teams          _V_: VirtualBox
 _t_: Tiled        _d_: Discord        _p_: Pavucontrol
 _s_: Signal       _e_: Emacs          _E_: Vanilla Emacs    _D_: Vanilla Doom Emacs
-_RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
+_RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen    _x_: Black Screen
 "
         ("v" ,(cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name))
         ("f" ,(cmd! () (start-process "flameshot" nil "flameshot" "gui")))
@@ -60,6 +60,7 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen
         ("S-RET" #'cae-open-eshell-in-new-workspace)
         ("r" #'cae-exwm-toggle-redshift)
         ("l" #'cae-exwm-lock-screen)
+        ("x" #'cae-exwm-create-black-screen) ; Added this line
         ("V" #'cae-exwm-run-virtualbox)))
 
     ;; Replace the individual keybindings with a hydra
