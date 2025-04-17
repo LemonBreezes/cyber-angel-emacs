@@ -53,9 +53,7 @@
                    ([?\s-7] . +workspace/switch-to-6)
                    ([?\s-8] . +workspace/switch-to-7)
                    ([?\s-9] . +workspace/switch-to-8)
-                   ([?\s-0] . +workspace/switch-to-final)
-                   ;; Bind "s-b" to create a black screen buffer.
-                   ([?\s-b] . cae-exwm-create-black-screen))))
+                   ([?\s-0] . +workspace/switch-to-final))))
           (t
            (setq exwm-workspace-number 4)
            (setq exwm-input-global-keys
@@ -77,9 +75,7 @@
                                 (start-process-shell-command command nil command)))
                    ,@(when (or (modulep! :cae helm)
                                (modulep! :completion helm))
-                       '(([?\s-d] . helm-run-external-command)))
-                   ;; Bind "s-b" to create a black screen buffer.
-                   ([?\s-b] . cae-exwm-create-black-screen)))))
+                       '(([?\s-d] . helm-run-external-command)))))))
 
     ;; Update the above keys when reloading this file.
     (when (bound-and-true-p cae-config-finished-loading)
