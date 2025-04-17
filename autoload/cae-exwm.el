@@ -36,6 +36,7 @@
         ;; Reset screen temperature
         (start-process "redshift-reset" nil "redshift" "-x")
         (message "Redshift turned off"))
+    (require 'calendar)
     (let* ((lat calendar-latitude)
            (lon calendar-longitude)
            (lat-str (number-to-string lat))
