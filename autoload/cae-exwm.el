@@ -41,7 +41,7 @@
            (lon calendar-longitude)
            (lat-str (number-to-string lat))
            (lon-str (number-to-string lon)))
-      ;; Start new redshift process and store the process object
+      ;; Start new Redshift process and store the process object
       (setq cae-exwm--redshift-process
             (start-process "redshift" nil "redshift" "-l"
                            (concat lat-str ":" lon-str)
