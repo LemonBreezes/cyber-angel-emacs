@@ -21,6 +21,9 @@ Uses the llm package to get a concise folder name."
          (vterm-buffer-name (format "*claude:sandbox:%s*" folder-name)))
 
     (make-directory sandbox-dir t)
+    ;; Create an empty .projectile file to mark it as a project root
+    (with-temp-buffer
+      (write-file (expand-file-name ".projectile" sandbox-dir)))
     (let ((default-directory sandbox-dir))
       (vterm-other-window vterm-buffer-name)
       ;; Send the task description directly as a quoted argument to claude
