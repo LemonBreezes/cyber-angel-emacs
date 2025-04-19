@@ -24,9 +24,14 @@ Updated asynchronously via NOAA API.")
   "Return t if the change in location from LAT1,LNG1 to LAT2,LNG2 is significant.
 Uses `cae-geolocation-significant-change-threshold' to determine significance.
 A change is considered significant if either the latitude or longitude
-changes by more than the threshold amount."
-  (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
-      (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold)))
+changes by more than the threshold amount, or if the previous location
+(LAT1, LNG1) was not set (i.e., nil)."
+  ;; If previous location wasn't set, any valid new location is significant.
+  (if (not (and (numberp lat1) (numberp lng1)))
+      t
+    ;; Otherwise, compare the coordinates.
+    (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
+        (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold))))
 
 (defun cae-geolocation--update-location (lat lng accuracy source)
   "Update location, store it, and run hooks if change is significant.
