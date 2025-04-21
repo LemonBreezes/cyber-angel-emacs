@@ -25,6 +25,7 @@
                           "\"firefoxdeveloperedition\""
                           "IceCat"
                           "chromium-browser"
+                          "Chromium-browser-chromium"
                           "Chromium"
                           "Google-chrome"
                           "Google-chrome-unstable"
