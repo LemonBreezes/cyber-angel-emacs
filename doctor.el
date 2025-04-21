@@ -27,6 +27,7 @@
             (executable-find "firefox-beta") 
             (executable-find "firefox-bin")
             (executable-find "chromium-bin-browser")
+            (executable-find "chromium-browser")
             (executable-find "google-chrome-unstable")
             (executable-find "google-chrome-stable"))
   (warn! "Couldn't find any supported browser. External browsing capabilities will be limited."))
