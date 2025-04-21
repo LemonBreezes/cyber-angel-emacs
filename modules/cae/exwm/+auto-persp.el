@@ -16,6 +16,7 @@
     ("chromium-browser" . "Chrome")
     ("chromium" . "Chrome")
     ("google-chrome" . "Chrome")
+    ("Chromium-browser-chromium" . "Chrome")
     ("Pavucontrol" . "Pavucontrol")
     ("tiled" . "Tiled")
     ("kitty" . "Kitty")
