@@ -14,10 +14,6 @@
 ;; PRs that haven't been merged yet.
 (when (modulep! :editor lispy)
   (package! lispy :recipe (:host github :repo "enzuru/lispy")))
-(when (modulep! :completion vertico)
-  (package! embark :recipe
-    (:host github :repo "LemonBreezes/embark"
-     :branch "work-around-browse-url-interactive-arg")))
 (when (modulep! :editor evil)
   (package! evil-easymotion :recipe
     (:host github :repo "LemonBreezes/evil-easymotion"
