@@ -5,7 +5,7 @@
 ;;;###autoload
 (defun cae-exwm-browse-url-generic-a (&rest _)
   "Switch to the appropriate workspace before opening a URL."
-  (when-let ((workspace (cae-exwm--get-browser-workspace-name)))
+  (when-let ((workspace cae-generic-browser-name))
     (+workspace-switch workspace t)
     (+workspace/display)))
 
