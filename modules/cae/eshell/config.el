@@ -119,27 +119,6 @@
 (after! em-glob
   (setq eshell-glob-splice-results t))
 
-;;; Documentation and Help
-
-;; Define an Eshell lookup handler and integrate Man with TLDR.
-(let ((tldr-dir (concat doom-cache-dir "tldr/")))
-  (unless (file-exists-p tldr-dir)
-    (after! async
-      (async-start
-       `(lambda ()
-          (add-to-list 'load-path ,(file-name-directory (locate-library "tldr")))
-          (setq tldr-directory-path ,tldr-dir)
-          (require 'tldr)
-          (tldr-update-docs))))))
-
-(set-lookup-handlers! 'eshell-mode :documentation #'cae-eshell-help-run-help)
-
-(after! man
-  (map! :map Man-mode-map :n "x" #'cae-eshell-man-to-tldr))
-
-(after! tldr
-  (map! :map tldr-mode-map :n "x" #'cae-eshell-tldr-to-man))
-
 ;;; Keybindings
 
 (after! eshell
