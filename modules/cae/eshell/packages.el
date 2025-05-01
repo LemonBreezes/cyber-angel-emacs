@@ -6,5 +6,4 @@
 (package! eat)
 (package! eshell-bookmark)
 (package! eshell-prompt-extras)
-(package! tldr)
 (package! eshell-atuin)
