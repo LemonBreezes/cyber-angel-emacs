@@ -145,11 +145,6 @@ Example: set var1 value1 var2 value2"
       (let ((var-sym (make-symbol var)))
         (set (make-local-variable var-sym) val)))))
 
-;;;###autoload
-(defun eshell/help (cmd)
-  "Get help for command CMD from tldr, man or helpful."
-  (cae-eshell-help-run-help cmd))
-
 ;;; Interactive Commands
 
 ;;;###autoload
