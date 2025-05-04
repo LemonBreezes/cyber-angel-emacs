@@ -249,20 +249,15 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
       ;; Fallback if cache unavailable or day/night switching disabled
       (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme)))
 
-    (setq doom-theme initial-theme)
+    (setq doom-theme initial-theme)))
 
-    ;; Load the determined theme.
-    (when doom-theme
-      (load-theme doom-theme t))))
-
-;; Hook the initial theme setting function to run after basic UI setup.
-(add-hook 'doom-init-ui-hook #'cae-theme--set-initial-theme 90) ; Run fairly late in UI init
+(cae-theme--set-initial-theme)
 
 (when cae-theme-export-theme-with-pywal
   ;; Ensure required packages are loaded if needed, respecting :defer
   (when cae-config-finished-loading
-    (require 'ewal nil t)    ; Load if available, don't error
-    (require 'theme-magic nil t)) ; Load if available, don't error
+    (require 'ewal nil t)               ; Load if available, don't error
+    (require 'theme-magic nil t))       ; Load if available, don't error
 
   (use-package! ewal
     :if cae-theme-export-theme-with-pywal ; Condition loading
@@ -275,7 +270,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
     :if cae-theme-export-theme-with-pywal ; Condition loading
     :defer t)
 
-  (after! (:all ewal theme-magic) ; Ensure both are loaded before adding hook
+  (after! (:all ewal theme-magic)    ; Ensure both are loaded before adding hook
     (when (and (featurep 'ewal) (featurep 'theme-magic)) ; Check features before adding hook
       (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
       ;; Run once initially if config is finished
