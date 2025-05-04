@@ -2,47 +2,24 @@
 
 (require 'cae-lib)
 
-(defvar cae-theme-enable-modeline-bell t
-  "Whether to enable the visual bell in the modeline.")
-
-(defvar cae-theme-extend-heading-faces t
-  "Whether to extend heading face backgrounds across the full line.")
-
+(defvar cae-theme-enable-modeline-bell t)
+(defvar cae-theme-extend-heading-faces t)
 (defvar cae-theme-export-theme-with-pywal (and (not (eq (cae-terminal-type) 0))
-                                               (not (cae-running-in-ssh-p)))
-  "Whether to export the current theme colors using pywal.")
-
+                                               (not (cae-running-in-ssh-p))))
 (defvar cae-theme-enable-day-night-theme-switching (and (not (eq (cae-terminal-type) 0))
-                                                        (not (cae-running-in-ssh-p)))
-  "Whether to automatically switch themes based on time of day (or sunrise/sunset).")
-
-(defvar cae-theme-disable-outline-headings t
-  "Whether to disable font-locking (coloring) of outline headings.")
-
-(defvar cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p)
-  "Whether to enable `mixed-pitch-mode' in certain major modes.")
-
-(defvar cae-modus-day-theme 'modus-operandi-tinted
-  "The Modus theme variant to use during the day.")
-
+                                                        (not (cae-running-in-ssh-p))))
+(defvar cae-theme-disable-outline-headings t)
+(defvar cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p))
+(defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
                                   'modus-vivendi-tinted
                                 ;; A little bit more legible in the Windows
                                 ;; Terminal by default.
-                                'modus-vivendi-tritanopia)
-  "The Modus theme variant to use during the night.")
-
-(defvar cae-ef-day-theme 'ef-trio-light
-  "The Ef theme variant to use during the day.")
-
-(defvar cae-ef-night-theme 'ef-trio-dark
-  "The Ef theme variant to use during the night.")
-
-(defvar cae-circadian-fixed-day-time "7:30"
-  "Fallback time to switch to the day theme when geolocation is unavailable.")
-
-(defvar cae-circadian-fixed-night-time "19:30"
-  "Fallback time to switch to the night theme when geolocation is unavailable.")
+                                'modus-vivendi-tritanopia))
+(defvar cae-ef-day-theme 'ef-trio-light)
+(defvar cae-ef-night-theme 'ef-trio-dark)
+(defvar cae-circadian-fixed-day-time "7:30")
+(defvar cae-circadian-fixed-night-time "19:30")
 
 ;; Choose theme family (example, could be a defcustom)
 (defvar cae-theme-family 'modus) ; or 'ef
