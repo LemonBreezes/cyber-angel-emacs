@@ -228,7 +228,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
         (when (and (boundp 'circadian-themes) circadian-themes)
           (doom-store-put 'circadian-themes (circadian-themes-parse)))))))
 
-  ;; Set the initial theme based on time and cached circadian data if available.
+;; Set the initial theme based on time and cached circadian data if available.
 (let ((initial-theme nil))
   (if (and cae-theme-enable-day-night-theme-switching
            (doom-store-get 'circadian-themes))
