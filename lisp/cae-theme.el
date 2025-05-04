@@ -228,30 +228,27 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
         (when (and (boundp 'circadian-themes) circadian-themes)
           (doom-store-put 'circadian-themes (circadian-themes-parse)))))))
 
-(defun cae-theme--set-initial-theme ()
-  "Set the initial theme based on time and cached circadian data if available."
-  (let ((initial-theme nil))
-    (if (and cae-theme-enable-day-night-theme-switching
-             (doom-store-get 'circadian-themes))
-        ;; Try setting theme from cache
-        (let* ((themes (doom-store-get 'circadian-themes))
-               (now (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
-               (past-themes
-                (cl-remove-if-not (lambda (entry)
-                                    (let ((theme-time (car entry))) ; (hour min)
-                                      (or (< (car theme-time) (car now)) ; Earlier hour
-                                          (and (= (car theme-time) (car now)) ; Same hour, earlier or equal minute
-                                               (<= (cadr theme-time) (cadr now))))))
-                                  themes))
-               (entry (car (last (or past-themes themes)))) ; Last past theme, or last overall if none are past
-               (theme (cdr entry)))
-          (setq initial-theme theme))
-      ;; Fallback if cache unavailable or day/night switching disabled
-      (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme)))
+  ;; Set the initial theme based on time and cached circadian data if available.
+(let ((initial-theme nil))
+  (if (and cae-theme-enable-day-night-theme-switching
+           (doom-store-get 'circadian-themes))
+      ;; Try setting theme from cache
+      (let* ((themes (doom-store-get 'circadian-themes))
+             (now (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
+             (past-themes
+              (cl-remove-if-not (lambda (entry)
+                                  (let ((theme-time (car entry))) ; (hour min)
+                                    (or (< (car theme-time) (car now)) ; Earlier hour
+                                        (and (= (car theme-time) (car now)) ; Same hour, earlier or equal minute
+                                             (<= (cadr theme-time) (cadr now))))))
+                                themes))
+             (entry (car (last (or past-themes themes)))) ; Last past theme, or last overall if none are past
+             (theme (cdr entry)))
+        (setq initial-theme theme))
+    ;; Fallback if cache unavailable or day/night switching disabled
+    (setq initial-theme (if (cae-night-time-p) cae-night-theme cae-day-theme)))
 
-    (setq doom-theme initial-theme)))
-
-(cae-theme--set-initial-theme)
+  (setq doom-theme initial-theme))
 
 (when cae-theme-export-theme-with-pywal
   ;; Ensure required packages are loaded if needed, respecting :defer
