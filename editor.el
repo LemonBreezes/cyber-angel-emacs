@@ -240,7 +240,7 @@
 (use-package! embark
   :defer t :config
   (after! vertico
-    (define-key vertico-map (kbd "C-z") 'cae-embark-act-with-completing-read))
+    (define-key vertico-map (kbd "C-z") #'cae-embark-act-with-completing-read))
   (cae-advice-add #'embark-completing-read-prompter :around
                   #'cae-bind-C-z-to-abort-a))
 
