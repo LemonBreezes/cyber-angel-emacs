@@ -1,6 +1,6 @@
 ;;; lisp/cae-geolocation.el -*- lexical-binding: t; -*-
 
-(defvar cae-geolocation-significant-change-threshold 0.05
+(defvar cae-geolocation-significant-change-threshold 0.20
   "Threshold for determining if a location change is significant.
 This is measured in degrees of latitude/longitude, where ~0.01 is roughly 1km.
 Only changes larger than this will trigger updates to dependent systems.")
