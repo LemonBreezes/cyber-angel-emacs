@@ -12,7 +12,7 @@
 (defvar cae-theme-enable-mixed-pitch-fonts (cae-display-graphic-p))
 (defvar cae-modus-day-theme 'modus-operandi-tinted)
 (defvar cae-modus-night-theme (if (cae-display-graphic-p)
-                                  'modus-vivendi-tinted
+                                  'modus-vivendi
                                 ;; A little bit more legible in the Windows
                                 ;; Terminal by default.
                                 'modus-vivendi-tritanopia))
