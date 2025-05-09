@@ -98,7 +98,9 @@
   (when-let ((buf (magit-commit-message-buffer)))
     (with-current-buffer buf (save-buffer))))
 (use-package! magit-gptcommit
-  :after magit :config
+  :after magit :init
+  (setq magit-gptcommit-backend 'gptel)
+  :config
   ;; Enable magit-gptcommit-mode to watch staged changes and generate commit message automatically in magit status buffer
   ;; This mode is optional, you can also use `magit-gptcommit-generate' to generate commit message manually
   ;; `magit-gptcommit-generate' should only execute on magit status buffer currently
