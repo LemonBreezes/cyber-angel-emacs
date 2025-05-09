@@ -109,6 +109,7 @@
          (docker +lsp)
          pdf
          biblio
+         llm
 
          :lang
          (emacs-lisp +lsp +tree-sitter)
