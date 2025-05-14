@@ -108,3 +108,5 @@ Reports when a new package is loaded and which file triggered it."
 ;;; Things I am currently debugging.
 
 ;; See also autoload/cae-debug.el
+
+(cae-debug-toggle-debugging-function-on-hidden-errors #'vertico-posframe--minibuffer-exit-hook)
