@@ -7,7 +7,6 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert)
-(unpin! t)
 (package! mu4e :built-in t)
 
 
