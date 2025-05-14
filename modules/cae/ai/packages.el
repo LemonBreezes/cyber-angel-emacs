@@ -15,6 +15,5 @@
   :recipe (:host gitlab :repo "rogs/forge-llm"))
 
 ;; `magit-gptcommit' is much better.
-(package! magit-gptcommit :recipe (:host github :repo "ahmed-shariff/magit-gptcommit"
-                                   :branch "gptel"))
+(package! magit-gptcommit)
 (disable-packages! gptel-magit)
