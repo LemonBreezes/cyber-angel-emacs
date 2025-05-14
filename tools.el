@@ -203,50 +203,50 @@
 (add-hook 'vertico-mode-hook #'vertico-multiform-mode)
 (add-hook 'vertico-mode-hook #'vertico-mouse-mode)
 (remove-hook 'vertico-mode-hook #'vertico-posframe-mode)
-;;(after! vertico-multiform
-;;  (let* ((posframe-supported-p (and (modulep! :completion vertico +childframe)
-;;                                    (or (cae-display-graphic-p)
-;;                                        (> emacs-major-version 30))))
-;;         (wide-frame-p (>= (frame-width) 120))
-;;         (default-view (if wide-frame-p
-;;                           'posframe
-;;                         'buffer))
-;;         (new-entries `((embark-keybinding . (, (if wide-frame-p
-;;                                                    'grid 'buffer)))
-;;                        (consult-grep . (, (if wide-frame-p
-;;                                               'posframe
-;;                                             'buffer)))
-;;                        (imenu . (, (if wide-frame-p
-;;                                        (if posframe-supported-p
-;;                                            '(posframe grid) '(grid))
-;;                                      'buffer)))
-;;                        (consult-location . (, (if wide-frame-p
-;;                                                   'posframe
-;;                                                 'buffer)))
-;;                        (file . (, default-view))
-;;                        (t . (, default-view)))))
-;;    (dolist (entry new-entries)
-;;      (let ((key (car entry))
-;;            (value (cdr entry)))
-;;        ;; Merge the new value with existing values, ensuring idempotency
-;;        (setf (alist-get key vertico-multiform-categories)
-;;              (cl-delete-duplicates
-;;               (append (alist-get key vertico-multiform-categories)
-;;                       value)
-;;               :test #'equal))))
-;;    ;; The order matters. We reverse to give priority to earlier entries.
-;;    (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
-;;    ;; Ensure `execute-extended-command' has the correct view
-;;    (let* ((execute-command-view default-view)
-;;           (existing-views (alist-get 'execute-extended-command
-;;                                      vertico-multiform-commands))
-;;           (cleaned-views (cl-set-difference existing-views
-;;                                             '(flat vertical posframe grid
-;;                                               reverse unobtrusive))))
-;;      (setf (alist-get 'execute-extended-command vertico-multiform-commands)
-;;            (cl-delete-duplicates
-;;             (cons execute-command-view cleaned-views)
-;;             :test #'equal)))))
+(after! vertico-multiform
+  (let* ((posframe-supported-p (and (modulep! :completion vertico +childframe)
+                                    (or (cae-display-graphic-p)
+                                        (> emacs-major-version 30))))
+         (wide-frame-p (>= (frame-width) 120))
+         (default-view (if wide-frame-p
+                           'posframe
+                         'buffer))
+         (new-entries `((embark-keybinding . (, (if wide-frame-p
+                                                    'grid 'buffer)))
+                        (consult-grep . (, (if wide-frame-p
+                                               'posframe
+                                             'buffer)))
+                        (imenu . (, (if wide-frame-p
+                                        (if posframe-supported-p
+                                            '(posframe grid) '(grid))
+                                      'buffer)))
+                        (consult-location . (, (if wide-frame-p
+                                                   'posframe
+                                                 'buffer)))
+                        (file . (, default-view))
+                        (t . (, default-view)))))
+    (dolist (entry new-entries)
+      (let ((key (car entry))
+            (value (cdr entry)))
+        ;; Merge the new value with existing values, ensuring idempotency
+        (setf (alist-get key vertico-multiform-categories)
+              (cl-delete-duplicates
+               (append (alist-get key vertico-multiform-categories)
+                       value)
+               :test #'equal))))
+    ;; The order matters. We reverse to give priority to earlier entries.
+    (setq vertico-multiform-categories (nreverse vertico-multiform-categories))
+    ;; Ensure `execute-extended-command' has the correct view
+    (let* ((execute-command-view default-view)
+           (existing-views (alist-get 'execute-extended-command
+                                      vertico-multiform-commands))
+           (cleaned-views (cl-set-difference existing-views
+                                             '(flat vertical posframe grid
+                                               reverse unobtrusive))))
+      (setf (alist-get 'execute-extended-command vertico-multiform-commands)
+            (cl-delete-duplicates
+             (cons execute-command-view cleaned-views)
+             :test #'equal)))))
 
 (after! spell-fu
   (add-to-list 'spell-fu-faces-exclude 'message-header-other)
