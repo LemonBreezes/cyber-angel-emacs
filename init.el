@@ -58,7 +58,7 @@
 (if nil
     (doom! :editor (evil +everywhere) :config (default +bindings +smartparens +gnupg))
   (doom! :completion
-         (vertico +icons)
+         vertico
          ;;helm
          (corfu +orderless +icons +dabbrev)
 
