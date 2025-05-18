@@ -270,9 +270,3 @@
 (after! consult-yasnippet
   (setq consult-yasnippet-use-thing-at-point t
         consult-yasnippet-always-overwrite-thing-at-point t))
-
-(after! calc
-  (setq calc-angle-mode 'rad  ; radians are rad
-        calc-symbolic-mode t) ; keeps expressions like \sqrt{2} irrational for
-                                        ; as long as possible
-  )
