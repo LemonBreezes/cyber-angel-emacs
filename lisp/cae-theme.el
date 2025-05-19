@@ -215,7 +215,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 
 (when cae-theme-enable-day-night-theme-switching
   (use-package! circadian
-    :defer t :init
+    :defer t :defer-incrementally t :init
     ;; Add the hook to update circadian when geolocation changes.
     (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
     :config
