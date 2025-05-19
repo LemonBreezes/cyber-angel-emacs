@@ -128,3 +128,6 @@ prog-mode, text-mode, or conf-mode."
              (not (buffer-file-name)))
     (cae-disable-undo-history)))
 (add-hook 'after-change-major-mode-hook #'cae-disable-buffer-undo-h)
+
+;; Emacs 31 bug.
+(defun posframe (&rest _))
