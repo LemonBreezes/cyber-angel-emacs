@@ -1,4 +1,4 @@
-;;; cae/misc-applications/autoload/ai.el -*- lexical-binding: t; -*-
+;;; cae/ai/autoload/claude.el -*- lexical-binding: t; -*-
 
 (defun cae-claude--generate-folder-name (task-description)
   "Generate a folder name from TASK-DESCRIPTION using Claude.
