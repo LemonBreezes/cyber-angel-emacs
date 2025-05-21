@@ -7,7 +7,7 @@
 
 ;; Set up the default models.
 (let ((claude-model "claude-3-7-sonnet-20250219")
-      (gemini-model "gemini-2.5-pro-exp-03-25"))
+      (gemini-model "gemini-2.5-pro-preview-05-06"))
   ;; ChatGPT Shell, Dall-E Shell, LLM, GPTel, and Minuet.
   ;; Aider.
   (after! chatgpt-shell
@@ -65,8 +65,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "gemini/gemini-2.5-pro-exp-03-25")
-  (setq aidermacs-editor-model "gemini/gemini-2.5-pro-exp-03-25")
+  (setq aidermacs-default-model "gemini/gemini-2.5-pro-preview-05-06")
+  (setq aidermacs-editor-model "gemini/gemini-2.5-pro-preview-05-06")
   ;;(setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   ;;(setq aidermacs-editor-model "anthropic/claude-3-5-haiku-latest")
   (setq aidermacs-auto-commits nil)
