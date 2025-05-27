@@ -384,6 +384,7 @@
   (auto-sudoedit-mode +1))
 
 (use-package! jinx
+  :when (not (executable-find "nixos-rebuild"))
   :defer t :init
   (add-hook 'doom-after-init-hook #'global-jinx-mode)
   (defun cae-jinx-ispell-localwords ()
