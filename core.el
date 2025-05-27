@@ -93,7 +93,8 @@ frameworks.")
   (remove-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h))
 
 (after! tramp
-  (setenv "SHELL" "/bin/bash")
+  (when (file-exists-p "/bin/bash")
+    (setenv "SHELL" "/bin/bash"))
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\n\\|\x0d\\)[^]#$%>\n]*#?[]#$%>] *\\(\e\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 ;; Automatically mark scripts as executable.
