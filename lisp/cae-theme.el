@@ -269,7 +269,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 
   (after! (:all ewal theme-magic)    ; Ensure both are loaded before adding hook
     (when (and (featurep 'ewal) (featurep 'theme-magic)) ; Check features before adding hook
-      (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+      (add-hook 'enable-theme-functions #'cae-theme-export-using-pywal :append)
       ;; Run once initially if config is finished
       (when cae-config-finished-loading
         (cae-theme-export-using-pywal)))))
