@@ -47,7 +47,7 @@
           ("\\.tar\\.zst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.tzst\\'" "" "unzstd -c %i | tar -xf -")
           ("\\.zst\\'" "" "unzstd --rm")
-          ("\\.7z\\'" "" "7z x -aoa -o%o %i")
+          ("\\.7z\\'" "" "7z x -aoa -o%o %i") ; From `p7zip'.
           ("\\.rar\\'" "" "rar x -o+ %i %o")
           ("\\.tar\\'" ".tgz" nil)))
 
