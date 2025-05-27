@@ -132,7 +132,7 @@
 (package! zop-to-char)
 (package! i3wm-config-mode)
 (package! auto-sudoedit)
-(package! jinx)
+(package! jinx :built-in (executable-find "nixos-rebuild"))
 
 ;; cae-multi.el
 (package! git-auto-commit-mode)
