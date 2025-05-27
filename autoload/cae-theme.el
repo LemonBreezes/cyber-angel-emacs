@@ -23,7 +23,7 @@
              (< (cl-second now) (cl-second sunrise))))))
 
 ;;;###autoload
-(defun cae-theme-export-using-pywal ()
+(defun cae-theme-export-using-pywal (_theme)
   (interactive)
   (when (and (executable-find "python")
              (executable-find "wal")
