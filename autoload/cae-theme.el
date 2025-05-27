@@ -42,6 +42,7 @@
               (theme-magic--auto-extract-16-colors))
        (lambda (_proc event)
          (when (string= event "finished\n")
+           (message "Theme exported using pywal.")
            (ewal-load-colors)
            (when (executable-find "polybar-msg")
              (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
