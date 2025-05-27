@@ -166,7 +166,9 @@ and updates the stored modification time afterward."
 (defun cae-multi-sync-repositories-when-idle ()
   "Run repository sync when system has been idle for at least 10 seconds."
   (when (and (current-idle-time)
-             (> (time-to-seconds (current-idle-time)) 10))
+             (> (time-to-seconds (current-idle-time)) 10)
+             (string= cae-secrets-home-location
+                      cae-geolocation-current-location-name))
     (cae-multi-sync-repositories)))
 
 (when cae-multi-enable-auto-pull
