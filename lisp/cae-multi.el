@@ -170,5 +170,5 @@ and updates the stored modification time afterward."
     (cae-multi-sync-repositories)))
 
 (when cae-multi-enable-auto-pull
-  (cae-run-with-timer 30 30 "cae-multi-sync-repositories"
+  (cae-run-with-timer (* 5 60) (* 5 60) "cae-multi-sync-repositories"
                       #'cae-multi-sync-repositories-when-idle))
