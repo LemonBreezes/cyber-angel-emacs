@@ -43,9 +43,8 @@
        (lambda (_proc event)
          (when (string= event "finished\n")
            (ewal-load-colors)
-           (when (executable-find "polybar")
-             ;; This assumes you have a setup for auto-restarting `polybar'.
-             (start-process "kill polybar" nil "killall" "polybar"))
+           (when (executable-find "polybar-msg")
+             (start-process "restart polybar" nil "polybar-msg" "cmd" "restart"))
            (when (executable-find "dunst")
              ;; This assumes you are running `dunst' as a systemd service.
              (start-process "kill dunst" nil "killall" "dunst"))))))))
