@@ -85,7 +85,7 @@ frameworks.")
       (if (find-font (font-spec :name (car font)))
           (set (cadr font) (font-spec :family (car font) :size
                                       (pcase system-name
-                                        ("g17" 20)
+                                        ("g17" 21)
                                         (_ 18))))
         (warn "Font %s does not exist!" (car font))))))
 
