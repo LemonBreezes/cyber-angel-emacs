@@ -207,7 +207,8 @@
   (let* ((posframe-supported-p (and (modulep! :completion vertico +childframe)
                                     (or (cae-display-graphic-p)
                                         (> emacs-major-version 30))))
-         (wide-frame-p (>= (frame-width) 120))
+         (wide-frame-p (and (>= (frame-width) 120)
+                            (string-equal system-type "android")))
          (default-view (if wide-frame-p
                            'posframe
                          'buffer))
