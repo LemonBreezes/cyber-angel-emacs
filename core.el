@@ -83,7 +83,10 @@ frameworks.")
                           ("Aporetic Sans" doom-variable-pitch-font))))
     (dolist (font fonts-to-check)
       (if (find-font (font-spec :name (car font)))
-          (set (cadr font) (font-spec :family (car font) :size 18))
+          (set (cadr font) (font-spec :family (car font)
+                                      :size (pcase system-name
+                                              ("g17" 24)
+                                              (t 18))))
         (warn "Font %s does not exist!" (car font))))))
 
 ;; Do not break my clipboard in SSH sessions.
