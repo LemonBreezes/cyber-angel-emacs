@@ -2,7 +2,8 @@
 
 ;;;###autoload
 (defun cae-popup-resize-help-buffer (win)
-  (cond ((<= (frame-width) 120)
+  (cond ((and (<= (frame-width) 120)
+              (string= (string-equal system-type "android")))
          (with-selected-window win
            (enlarge-window (- (frame-width)
                               (window-width win))
