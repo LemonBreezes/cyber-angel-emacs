@@ -384,7 +384,6 @@
   (auto-sudoedit-mode +1))
 
 (use-package! jinx
-  :when (not (executable-find "nixos-rebuild"))
   :defer t :init
   (when (executable-find "nixos-rebuild")
     (defun jinx--nix-compile-flags (orig-fun &rest args)
@@ -397,7 +396,6 @@
                             (concat "-L" enchant-lib "/lib")))))
         (apply orig-fun args)))
     (advice-add 'jinx--load-module :around #'jinx--nix-compile-flags))
-  (add-hook 'doom-after-init-hook #'global-jinx-mode)
   (defun cae-jinx-ispell-localwords ()
     "Return a string of ispell's local words.
 
