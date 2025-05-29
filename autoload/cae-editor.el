@@ -398,7 +398,7 @@ With prefix ARG, yank multiple words."
          (vertico-posframe-size-function)
          (vertico-multiform-commands
           `((cae-embark-act-with-completing-read
-             ,(if (and (>= (frame-width) 120) (not (string-equal system-type "android")))
+             ,(if (or (>= (frame-width) 120) (not (string-equal system-type "android")))
                   'grid 'buffer)
              ,@(delq 'vertico-flat-mode (car vertico-multiform--stack))))))
     (when (featurep 'vertico-posframe)
