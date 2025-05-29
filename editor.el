@@ -384,6 +384,7 @@
   (auto-sudoedit-mode +1))
 
 (use-package! jinx
+  :when (not (executable-find "nixos-rebuild"))
   :defer t :init
   (when (executable-find "nixos-rebuild")
     (defun jinx--nix-compile-flags (orig-fun &rest args)
