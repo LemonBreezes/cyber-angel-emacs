@@ -3,7 +3,8 @@
 ;;;###autoload
 (defun cae-helm-display-function-based-on-frame-width (buffer &optional resume)
   "Display helm BUFFER using posframe if (frame-width) >= 120."
-  (if (>= (frame-width) 120)
+  (if (and (>= (frame-width) 120)
+           (string-equal system-type "android"))
       (progn
         ;; Set up helm-posframe if not already done
         (unless (advice-member-p #'helm-posframe-cleanup #'helm-cleanup)
