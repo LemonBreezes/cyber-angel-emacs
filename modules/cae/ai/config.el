@@ -6,7 +6,7 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 ;; Set up the default models.
-(let ((claude-model "claude-3-7-sonnet-20250219")
+(let ((claude-model "claude-opus-4-20250514")
       (gemini-model "gemini-2.5-pro-preview-05-06"))
   ;; ChatGPT Shell, Dall-E Shell, LLM, GPTel, and Minuet.
   ;; Aider.
