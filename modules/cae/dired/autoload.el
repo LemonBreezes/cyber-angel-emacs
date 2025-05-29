@@ -87,6 +87,7 @@
 ;;;###autoload
 (defun cae-dired-hide-details-in-narrow-screen-h ()
   (when (and (<= (frame-width) 120)
+             (string-equal system-type "android")
              (not dired-hide-details-mode))
     (dired-hide-details-mode 1)))
 
