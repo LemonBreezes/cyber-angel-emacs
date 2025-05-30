@@ -48,17 +48,49 @@ non-nil, debug init as well."
     (apply #'start-process "Emacs" nil "emacs"
            (when arg (list "--debug-init")))))
 
+(defvar cae-exwm-backlight-device nil
+  "Cached backlight device path.")
+
 ;;;###autoload
 (defun cae-exwm-decrease-brightness ()
   "Decrease screen brightness using light."
   (interactive)
-  (start-process "light" nil "light" "-U" "10"))
+  (if-let ((device (cae-exwm--get-backlight-device)))
+      (start-process "light" nil "light" "-U" "10")
+    (message "No backlight device found")))
 
 ;;;###autoload
 (defun cae-exwm-increase-brightness ()
   "Increase screen brightness using light."
   (interactive)
-  (start-process "light" nil "light" "-A" "10"))
+  (if-let ((device (cae-exwm--get-backlight-device)))
+      (start-process "light" nil "light" "-A" "10")
+    (message "No backlight device found")))
+
+(defvar cae-exwm-keyboard-backlight-device nil
+  "Cached keyboard backlight device path.")
+
+(defun cae-exwm--get-keyboard-backlight-device ()
+  "Get the keyboard backlight device path, with caching."
+  (or cae-exwm-keyboard-backlight-device
+      (setq cae-exwm-keyboard-backlight-device
+            (car (directory-files "/sys/class/leds/" nil ".*kbd_backlight$")))))
+
+;;;###autoload
+(defun cae-exwm-decrease-keyboard-brightness ()
+  "Decrease keyboard backlight brightness using light."
+  (interactive)
+  (if-let ((device (cae-exwm--get-keyboard-backlight-device)))
+      (start-process "light" nil "light" "-s" (concat "sysfs/leds/" device) "-U" "34")
+    (message "No keyboard backlight device found")))
+
+;;;###autoload
+(defun cae-exwm-increase-keyboard-brightness ()
+  "Increase keyboard backlight brightness using light."
+  (interactive)
+  (if-let ((device (cae-exwm--get-keyboard-backlight-device)))
+      (start-process "light" nil "light" "-s" (concat "sysfs/leds/" device) "-A" "34")
+    (message "No keyboard backlight device found")))
 
 ;;;###autoload
 (defun cae-exwm-workspace-switch-next ()
