@@ -1,5 +1,9 @@
 ;;; lisp/cae-geolocation.el -*- lexical-binding: t; -*-
 
+(defvar cae-geolocation-verbose nil
+  "When non-nil, display geolocation status messages.
+When nil, geolocation operates silently unless errors occur.")
+
 (defvar cae-geolocation-significant-change-threshold 0.20
   "Threshold for determining if a location change is significant.
 This is measured in degrees of latitude/longitude, where ~0.01 is roughly 1km.
@@ -51,8 +55,9 @@ Returns t if the location change was significant, nil otherwise."
     (doom-store-put 'calendar-longitude lng)
     ;; Run hooks only if change is significant
     (when significant-change
-      (message "Geolocation: Location changed significantly (> %s°), running update hook."
-               cae-geolocation-significant-change-threshold)
+      (when cae-geolocation-verbose
+        (message "Geolocation: Location changed significantly (> %s°), running update hook."
+                 cae-geolocation-significant-change-threshold))
       (run-hooks 'cae-geolocation-update-hook))
     significant-change))
 

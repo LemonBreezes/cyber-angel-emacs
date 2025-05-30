@@ -26,7 +26,7 @@
   ;; Override geo-nm to use BeaconDB
   (require 'geo-nm)
 
-  (when (> verbosity 0)
+  (when (and cae-geolocation-verbose (> verbosity 0))
     (message "Geolocation: Getting location from BeaconDB..."))
 
   ;; Collect WiFi networks
@@ -58,7 +58,8 @@
                 (json-array-type 'list)
                 (response (condition-case err
                               (json-read)
-                            (error (message "Geolocation Error: JSON parsing failed: %s" err)
+                            (error (when cae-geolocation-verbose
+                                     (message "Geolocation Error: JSON parsing failed: %s" err))
                                    nil))))
 
            (if (and response (gethash "location" response))
@@ -70,7 +71,8 @@
                  (cae-geolocation--update-location lat lng accuracy 'api))
              ;; Handle errors
              (progn
-               (message "Geolocation Error: Failed to parse location from BeaconDB response. Status: %s" status)
+               (when cae-geolocation-verbose
+                 (message "Geolocation Error: Failed to parse location from BeaconDB response. Status: %s" status))
                ;; Optionally log the buffer content for debugging
                ;; (message "Geolocation Error: Response buffer content:\n%s" (buffer-string))
                ))))
@@ -92,7 +94,8 @@ receives one argument, which is a list:
   (let* ((noaa-url (format "https://api.weather.gov/points/%s,%s" lat lng))
          ;; NOAA requires a User-Agent.
          (url-request-extra-headers `(("User-Agent" . "cae-emacs-config/1.0 (https://github.com/alphapapa/cae)"))))
-    (message "Geolocation: Fetching NOAA grid URL from %s" noaa-url)
+    (when cae-geolocation-verbose
+      (message "Geolocation: Fetching NOAA grid URL from %s" noaa-url))
     (url-retrieve
      noaa-url
      (lambda (status &rest _)
@@ -117,7 +120,8 @@ receives one argument, which is a list:
                      (let ((grid-url (gethash "forecastGridData" props))) ; Use props directly
                        (if grid-url
                            (progn
-                             (message "Geolocation: Successfully retrieved NOAA grid URL for %s." location-name)
+                             (when cae-geolocation-verbose
+                               (message "Geolocation: Successfully retrieved NOAA grid URL for %s." location-name))
                              ;; Set and store the location name
                              (setq cae-geolocation-current-location-name location-name)
                              (doom-store-put 'cae-geolocation-current-location-name location-name)
@@ -125,14 +129,17 @@ receives one argument, which is a list:
                              (cae-geolocation--update-weather-packages calendar-latitude calendar-longitude location-name)
                              (funcall callback (list :success :grid-url grid-url :location-name location-name)))
                          (progn
-                           (message "Geolocation Error: 'forecastGridData' not found in NOAA response.")
+                           (when cae-geolocation-verbose
+                             (message "Geolocation Error: 'forecastGridData' not found in NOAA response."))
                            (funcall callback (list :error "Missing 'forecastGridData' in NOAA response" response))))))
                  (progn
-                   (message "Geolocation Error: Failed to parse 'properties' from NOAA response.")
+                   (when cae-geolocation-verbose
+                     (message "Geolocation Error: Failed to parse 'properties' from NOAA response."))
                    (funcall callback (list :error "Failed to parse NOAA response properties" response))))))
          ;; Handle errors during request/parsing
          (error
-          (message "Geolocation Error: Failed during NOAA request/parsing: %s" err)
+          (when cae-geolocation-verbose
+            (message "Geolocation Error: Failed during NOAA request/parsing: %s" err))
           (funcall callback (list :error (format "NOAA request/parsing error: %s" err) (buffer-string))))))
      ;; Optional parameters for url-retrieve
      nil ; params - not needed for GET
@@ -144,8 +151,9 @@ receives one argument, which is a list:
   "Hook function to fetch NOAA location name and update weather packages.
 Uses current calendar-latitude and calendar-longitude."
   (interactive) ; Make it interactive for easier testing if needed
-  (message "Geolocation Hook: Triggered fetching name for %s, %s"
-           calendar-latitude calendar-longitude)
+  (when cae-geolocation-verbose
+    (message "Geolocation Hook: Triggered fetching name for %s, %s"
+             calendar-latitude calendar-longitude))
   (if (and (boundp 'calendar-latitude) (numberp calendar-latitude) (not (= 0 calendar-latitude))
            (boundp 'calendar-longitude) (numberp calendar-longitude) (not (= 0 calendar-longitude)))
       (cae-geolocation-get-noaa-grid-url
@@ -154,6 +162,8 @@ Uses current calendar-latitude and calendar-longitude."
        ;; Dummy callback - the main function handles updates internally now
        (lambda (result)
          (unless (eq (car result) :success)
-           (message "Geolocation Hook: Failed to get NOAA details: %S" result))))
-    (message "Geolocation Hook: Invalid coordinates (%s, %s), skipping NOAA fetch."
-             calendar-latitude calendar-longitude)))
+           (when cae-geolocation-verbose
+             (message "Geolocation Hook: Failed to get NOAA details: %S" result)))))
+    (when cae-geolocation-verbose
+      (message "Geolocation Hook: Invalid coordinates (%s, %s), skipping NOAA fetch."
+               calendar-latitude calendar-longitude))))
