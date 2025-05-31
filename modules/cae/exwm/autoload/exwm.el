@@ -55,17 +55,13 @@ non-nil, debug init as well."
 (defun cae-exwm-decrease-brightness ()
   "Decrease screen brightness using light."
   (interactive)
-  (if-let ((device (cae-exwm--get-backlight-device)))
-      (start-process "light" nil "light" "-U" "10")
-    (message "No backlight device found")))
+  (start-process "light" nil "light" "-U" "10"))
 
 ;;;###autoload
 (defun cae-exwm-increase-brightness ()
   "Increase screen brightness using light."
   (interactive)
-  (if-let ((device (cae-exwm--get-backlight-device)))
-      (start-process "light" nil "light" "-A" "10")
-    (message "No backlight device found")))
+  (start-process "light" nil "light" "-A" "10"))
 
 (defvar cae-exwm-keyboard-backlight-device nil
   "Cached keyboard backlight device path.")
