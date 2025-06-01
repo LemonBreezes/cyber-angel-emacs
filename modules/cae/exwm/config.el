@@ -196,7 +196,8 @@
           :desc "Send next key" "q" #'exwm-input-send-next-key
           :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
           :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
-          :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line))
+          :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line
+          :desc "Start xclicker" "x" (cmd! (start-process "xclicker" nil "xclicker"))))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
