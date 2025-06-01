@@ -35,6 +35,10 @@
   ;; Brightness control keys.
   (global-set-key (kbd "<XF86MonBrightnessDown>") #'cae-exwm-decrease-brightness)
   (global-set-key (kbd "<XF86MonBrightnessUp>") #'cae-exwm-increase-brightness)
+  
+  ;; Keyboard brightness control keys.
+  (global-set-key (kbd "<XF86KbdBrightnessDown>") #'cae-exwm-decrease-keyboard-brightness)
+  (global-set-key (kbd "<XF86KbdBrightnessUp>") #'cae-exwm-increase-keyboard-brightness)
 
   (when (modulep! :ui hydra)
     (eval
