@@ -143,6 +143,9 @@
          (rss +org)
          irc
 
+         :secret
+         automation
+
          :cae
          exwm
          (lean4 +lsp +tree-sitter)
