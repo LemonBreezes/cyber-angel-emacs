@@ -825,9 +825,7 @@
   (map! "<XF86AudioPlay>" #'emms-pause
         "<XF86AudioStop>" #'emms-stop
         "<XF86AudioPrev>" #'emms-previous
-        "<XF86AudioNext>" #'emms-next
-        "<XF86AudioLowerVolume>" #'emms-volume-lower
-        "<XF86AudioRaiseVolume>" #'emms-volume-raise)
+        "<XF86AudioNext>" #'emms-next)
   (add-to-list 'emms-track-initialize-functions 'emms-info-initialize-track)
 
   (setq emms-track-description-function 'emms-track-simple-description
