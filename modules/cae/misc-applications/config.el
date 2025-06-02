@@ -656,7 +656,7 @@
         :n "s" #'somafm--stop))
 
 (use-package! mpc
-  :when (and cae-misc-applications-mpd-host (executable-find "mpd"))
+  :when (and cae-misc-applications-mpd-host (executable-find "mpc"))
   :defer t :init
   (defvar cae-mpc-workspace-name "*mpc*")
   (defvar cae-mpc--old-wconf nil)
@@ -783,7 +783,7 @@
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
   (cond ((and cae-misc-applications-mpd-host
-              (executable-find "mpd"))
+              (executable-find "mpc"))
          (require 'emms-player-mpd)
          (setq emms-setup-default-player-list '(emms-player-mpd)
                emms-player-list '(emms-player-mpd)
