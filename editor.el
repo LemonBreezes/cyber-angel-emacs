@@ -385,17 +385,6 @@
 
 (use-package! jinx
   :defer t :init
-  (when (executable-find "nixos-rebuild")
-    (defun jinx--nix-compile-flags (orig-fun &rest args)
-      "Advice to add NixOS-specific include paths for enchant."
-      (let* ((enchant-dev (car (file-expand-wildcards "/nix/store/*-enchant-*-dev" t)))
-             (enchant-lib (car (file-expand-wildcards "/nix/store/*-enchant-2.*[0-9]" t)))
-             (jinx--compile-flags
-              (append jinx--compile-flags
-                      (list (concat "-I" enchant-dev "/include/enchant-2")
-                            (concat "-L" enchant-lib "/lib")))))
-        (apply orig-fun args)))
-    (advice-add 'jinx--load-module :around #'jinx--nix-compile-flags))
   (defun cae-jinx-ispell-localwords ()
     "Return a string of ispell's local words.
 
