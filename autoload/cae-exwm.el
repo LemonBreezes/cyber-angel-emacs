@@ -89,3 +89,24 @@ Restores the previous window configuration on exit ('q')."
        map))
     (ignore-errors (evil-emacs-state)))
   (hide-mode-line-mode +1))
+
+;;;###autoload
+(defun cae-exwm-audio-raise-volume ()
+  "Raise audio volume using wpctl."
+  (interactive)
+  (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+")
+  (message "Volume increased"))
+
+;;;###autoload
+(defun cae-exwm-audio-lower-volume ()
+  "Lower audio volume using wpctl."
+  (interactive)
+  (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-")
+  (message "Volume decreased"))
+
+;;;###autoload
+(defun cae-exwm-audio-toggle-mic-mute ()
+  "Toggle microphone mute using wpctl."
+  (interactive)
+  (start-process "wpctl" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle")
+  (message "Microphone mute toggled"))
