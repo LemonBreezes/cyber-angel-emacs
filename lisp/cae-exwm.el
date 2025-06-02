@@ -40,6 +40,11 @@
   (global-set-key (kbd "<XF86KbdBrightnessDown>") #'cae-exwm-decrease-keyboard-brightness)
   (global-set-key (kbd "<XF86KbdBrightnessUp>") #'cae-exwm-increase-keyboard-brightness)
 
+  ;; Audio control keys.
+  (global-set-key (kbd "<XF86AudioRaiseVolume>") #'cae-exwm-audio-raise-volume)
+  (global-set-key (kbd "<XF86AudioLowerVolume>") #'cae-exwm-audio-lower-volume)
+  (global-set-key (kbd "<XF86AudioMicMute>") #'cae-exwm-audio-toggle-mic-mute)
+
   (when (modulep! :ui hydra)
     (eval
      `(defhydra hydra-exwm-apps (:hint nil :color blue)

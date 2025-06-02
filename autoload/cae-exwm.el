@@ -92,21 +92,43 @@ Restores the previous window configuration on exit ('q')."
 
 ;;;###autoload
 (defun cae-exwm-audio-raise-volume ()
-  "Raise audio volume using wpctl."
+  "Raise audio volume using wpctl and show current volume."
   (interactive)
   (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+")
-  (message "Volume increased"))
+  (run-at-time 0.1 nil #'cae-exwm--show-volume))
 
 ;;;###autoload
 (defun cae-exwm-audio-lower-volume ()
-  "Lower audio volume using wpctl."
+  "Lower audio volume using wpctl and show current volume."
   (interactive)
   (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-")
-  (message "Volume decreased"))
+  (run-at-time 0.1 nil #'cae-exwm--show-volume))
 
 ;;;###autoload
 (defun cae-exwm-audio-toggle-mic-mute ()
   "Toggle microphone mute using wpctl."
   (interactive)
   (start-process "wpctl" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle")
-  (message "Microphone mute toggled"))
+  (run-at-time 0.1 nil #'cae-exwm--show-mic-status))
+
+(defun cae-exwm--show-volume ()
+  "Show current volume percentage."
+  (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SINK@")))
+    (if (string-match "Volume: \\([0-9.]+\\)" output)
+        (let* ((volume-float (string-to-number (match-string 1 output)))
+               (volume-percent (round (* volume-float 100))))
+          (message "Volume: %d%%" volume-percent))
+      (message "Volume: unknown"))))
+
+(defun cae-exwm--show-mic-status ()
+  "Show current microphone mute status."
+  (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SOURCE@")))
+    (cond
+     ((string-match-p "\\[MUTED\\]" output)
+      (message "Microphone: MUTED"))
+     ((string-match "Volume: \\([0-9.]+\\)" output)
+      (let* ((volume-float (string-to-number (match-string 1 output)))
+             (volume-percent (round (* volume-float 100))))
+        (message "Microphone: %d%%" volume-percent)))
+     (t
+      (message "Microphone: unknown")))))
