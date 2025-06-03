@@ -48,39 +48,6 @@ non-nil, debug init as well."
     (apply #'start-process "Emacs" nil "emacs"
            (when arg (list "--debug-init")))))
 
-(defvar-local cae-exwm-mouse-disabled-p nil
-  "Whether mouse input is disabled for the current EXWM window.")
-
-;;;###autoload
-(defun cae-exwm-toggle-mouse ()
-  "Toggle mouse input for the current EXWM window using pointer grab."
-  (interactive)
-  (when (derived-mode-p 'exwm-mode)
-    (if cae-exwm-mouse-disabled-p
-        ;; Enable mouse - ungrab the pointer
-        (progn
-          (xcb:+request exwm--connection
-              (make-instance 'xcb:UngrabPointer
-                             :time xcb:Time:CurrentTime))
-          (xcb:flush exwm--connection)
-          (setq cae-exwm-mouse-disabled-p nil)
-          (message "Mouse enabled for window: %s" exwm-title))
-      ;; Disable mouse - grab the pointer
-      (progn
-        (xcb:+request exwm--connection
-            (make-instance 'xcb:GrabPointer
-                           :owner-events 0
-                           :grab-window exwm--id
-                           :event-mask 0
-                           :pointer-mode xcb:GrabMode:Async
-                           :keyboard-mode xcb:GrabMode:Async
-                           :confine-to 0
-                           :cursor 0
-                           :time xcb:Time:CurrentTime))
-        (xcb:flush exwm--connection)
-        (setq cae-exwm-mouse-disabled-p t)
-        (message "Mouse disabled for window: %s" exwm-title)))))
-
 (defvar cae-exwm-backlight-device nil
   "Cached backlight device path.")
 
