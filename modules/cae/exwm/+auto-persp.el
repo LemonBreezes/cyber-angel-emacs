@@ -11,6 +11,9 @@
 (defvar cae-exwm-floating-apps '("..." "virtualbox" "discord" "main.py" "setup.tmp" "xclicker")
   "A list of class-names for EXWM applications which should stay floating.")
 
+(defvar cae-exwm-floating-titles '("TigerVNC options")
+  "A list of window titles for EXWM applications which should stay floating.")
+
 (defvar cae-exwm-workspace-name-replacements
   '(("google-chrome-unstable" . "Chrome")
     ("chromium-browser" . "Chrome")
@@ -70,9 +73,10 @@ name of the workspace that will be created for that application.")
   "Whether EXWM persp has been loaded.")
 
 (defun exwm--disable-floating ()
-  "Tile the current application unless its class is in `cae-exwm-floating-apps'."
+  "Tile the current application unless its class is in `cae-exwm-floating-apps' or its title is in `cae-exwm-floating-titles'."
   (unless (or (not exwm--floating-frame)
-              (member exwm-class-name cae-exwm-floating-apps))
+              (member exwm-class-name cae-exwm-floating-apps)
+              (cl-member exwm-title cae-exwm-floating-titles :test #'cl-equalp))
     (exwm-floating--unset-floating exwm--id)))
 
 (defun cae-exwm-get-workspace-name (buffer)
@@ -115,9 +119,12 @@ nil if its not an EXWM buffer."
   "Determines whether to create a workspace for this new EXWM buffer."
   (and (stringp (cae-exwm-get-workspace-name buffer))
        (not (and exwm--floating-frame
-                 (cl-member (buffer-local-value 'exwm-class-name buffer)
-                            cae-exwm-floating-apps
-                            :test #'cl-equalp)))
+                 (or (cl-member (buffer-local-value 'exwm-class-name buffer)
+                                cae-exwm-floating-apps
+                                :test #'cl-equalp)
+                     (cl-member (buffer-local-value 'exwm-title buffer)
+                                cae-exwm-floating-titles
+                                :test #'cl-equalp))))
        (or state t)))
 
 (defun cae-exwm-persp--focus-workspace-app (&rest _)
