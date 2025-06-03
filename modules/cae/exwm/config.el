@@ -158,13 +158,6 @@
     (after! tooltip
       (add-to-list 'tooltip-frame-parameters '(parent-frame . nil) t))
 
-    ;; Prevent `window-live-p' and `frame-live-p' from producing errors when
-    ;; their argument is nil.
-    (defun cae-exwm-select-window-a (oldfun window &rest args)
-      (when window
-        (apply oldfun window args)))
-    (cae-advice-add #'select-window :around #'cae-exwm-select-window-a)
-
     ;; Remove invalid face errors
     (setq-hook! exwm-mode
       outline-minor-mode-highlight nil)
@@ -197,7 +190,8 @@
           :desc "Toggle floating" "SPC" #'exwm-floating-toggle-floating
           :desc "Send escape" "e" (cmd! (exwm-evil-send-key 1 'escape))
           :desc "Toggle modeline" "m" #'exwm-layout-toggle-mode-line
-          :desc "Start xclicker" "x" (cmd! (start-process "xclicker" nil "xclicker"))))
+          :desc "Start xclicker" "x" (cmd! (start-process "xclicker" nil "xclicker"))
+          :desc "Toggle mouse input" "M" #'cae-exwm-toggle-mouse))
 
   ;; Fixes an error which locks up Emacs. This error is caused by a bad
   ;; interaction with Doom's hack for distinguishing `C-i' and `TAB'.
