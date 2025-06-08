@@ -65,12 +65,3 @@
 
 (defvar-local cae-exwm-mouse-freeze-timer nil
   "Timer for maintaining frozen cursor position.")
-
-(defvar-local cae-exwm-space-spam-timer nil
-  "Timer for spamming space key to EXWM window.")
-
-(defvar-local cae-exwm-space-spam-buffer nil
-  "Buffer associated with space spam timer.")
-
-(defvar-local cae-exwm-space-spam-evil-state nil
-  "Evil state when space spam was started.")
