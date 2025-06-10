@@ -120,3 +120,10 @@
 
 ;; Happened to me when switching from Emacs 30 to Emacs 31 Git.
 (defun posframe (&rest _))
+
+;; These are new functions Doom's Magit doesn't have yet.
+(defun transient--set-layout (prefix layout)Add commentMore actions
+       (put prefix 'transient--layout layout))
+(defun transient--get-layout (prefix)
+  (or (get prefix 'transient--layout)
+      (error "Not a transient prefix command: %s" prefix)))
