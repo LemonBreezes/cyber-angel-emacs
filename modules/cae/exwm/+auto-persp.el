@@ -16,10 +16,10 @@
   "A list of window titles for EXWM applications which should stay floating.")
 
 (defvar cae-exwm-workspace-name-replacements
-  '(("google-chrome-unstable" . "Chrome")
+  '(("google-chrome-unstable" . "Google Chrome")
     ("chromium-browser" . "Chrome")
     ("chromium" . "Chrome")
-    ("google-chrome" . "Chrome")
+    ("google-chrome" . "Google Chrome")
     ("Chromium-browser-chromium" . "Chrome")
     ("Cursor" . "Cursor")
     ("Pavucontrol" . "Pavucontrol")
