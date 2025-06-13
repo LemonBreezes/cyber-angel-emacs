@@ -9,7 +9,7 @@
   "The list of EXWM workspaces created up to now.")
 
 (defvar cae-exwm-floating-apps
-  '("..." "virtualbox" "discord" "main.py" "setup.tmp" "xclicker" "Soffice")
+  '("..." "virtualbox" "discord" "main.py" "setup.tmp" "xclicker" "Soffice" "Xclicker")
   "A list of class-names for EXWM applications which should stay floating.")
 
 (defvar cae-exwm-floating-titles '("TigerVNC options")
