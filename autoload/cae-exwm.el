@@ -14,13 +14,24 @@
                                       (message "Screen unlocked"))))))
 
 ;;;###autoload
-(defun cae-exwm-run-virtualbox ()
-  "Run VirtualBox with proper permissions."
+(defun cae-exwm-run-vm ()
+  "Run VMware or VirtualBox with proper permissions, preferring VMware if available."
   (interactive)
-  (start-process-shell-command
-   "virtualbox" nil
-   (format "sudo XDG_RUNTIME_DIR=/run/user/%d VirtualBox"
-           (user-uid))))
+  (let ((vmware-executable (executable-find "vmware"))
+        (virtualbox-executable (executable-find "VirtualBox")))
+    (cond
+     (vmware-executable
+      (start-process-shell-command
+       "vmware" nil
+       (format "sudo XDG_RUNTIME_DIR=/run/user/%d %s"
+               (user-uid) vmware-executable)))
+     (virtualbox-executable
+      (start-process-shell-command
+       "virtualbox" nil
+       (format "sudo XDG_RUNTIME_DIR=/run/user/%d %s"
+               (user-uid) virtualbox-executable)))
+     (t
+      (user-error "Neither VMware nor VirtualBox found in PATH")))))
 
 ;;;###autoload
 (defun cae-exwm-toggle-redshift ()
