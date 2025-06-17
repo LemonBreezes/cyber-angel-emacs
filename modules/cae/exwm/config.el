@@ -225,6 +225,14 @@
     (after! corfu
       (load! "+corfu")))
 
+  (when (modulep! :completion vertico)
+    (after! consult
+      (add-to-list 'consult-preview-excluded-buffers
+                   "vmware")))
+
+  (seq-filter (lambda (buf) (buffer-match-p "vmware" buf))
+              (buffer-list))
+
   (when (modulep! :ui workspaces)
     (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
     (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
