@@ -23,7 +23,7 @@
      (vmware-executable
       (start-process-shell-command
        "vmware" nil
-       (format "sudo XDG_RUNTIME_DIR=/run/user/%d %s"
+       (format "XDG_RUNTIME_DIR=/run/user/%d %s"
                (user-uid) vmware-executable)))
      (virtualbox-executable
       (start-process-shell-command
