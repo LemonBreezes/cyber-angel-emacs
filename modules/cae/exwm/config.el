@@ -17,11 +17,12 @@
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
                (not (string= "gimp" exwm-instance-name ))
-               (or (persp-contain-buffer-p (current-buffer) (get-current-persp))
-                   (not (cl-loop for workspace in (+workspace-list)
-                                 if (+workspace-contains-buffer-p
-                                     (current-buffer) workspace)
-                                 return t))))
+               (and (featurep 'persp-mode)
+                    (or (persp-contain-buffer-p (current-buffer) (get-current-persp))
+                        (not (cl-loop for workspace in (+workspace-list)
+                                      if (+workspace-contains-buffer-p
+                                          (current-buffer) workspace)
+                                      return t)))))
       (exwm-workspace-rename-buffer exwm-title)))
   (add-hook 'exwm-update-title-hook #'cae-exwm-rename-buffer-to-title)
 
@@ -234,11 +235,11 @@
               (buffer-list))
 
   (when (modulep! :ui workspaces)
+    (require 'persp-mode)
     (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
     (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
     (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
-    (after! persp-mode
-      (load! "+auto-persp"))))
+    (load! "+auto-persp")))
 
 ;;Local Variables:
 ;;eval: (unless (modulep! :cae exwm) (remove-hook 'write-file-functions #'eval-buffer t))
