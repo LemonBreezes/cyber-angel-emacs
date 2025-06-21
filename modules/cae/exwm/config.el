@@ -29,6 +29,8 @@
     :defer nil :config
     (when init-file-debug
       (exwm-debug +1))
+    (exwm-randr-mode +1)
+    (exwm-wm-mode +1)
 
     (cond ((modulep! :ui workspaces)
            (setq exwm-input-global-keys
@@ -135,9 +137,6 @@
         (advice-add #'dap-tooltip-update-mouse-motions-if-enabled :override
                     #'ignore)
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
-
-    (exwm-randr-mode +1)
-    (exwm-wm-mode +1)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
     (map! [remap suspend-frame] #'undefined)
