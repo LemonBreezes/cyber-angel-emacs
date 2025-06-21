@@ -29,7 +29,8 @@
 
 (when (and (modulep! :cae exwm)
            cae-init-exwm-enabled-p)
-  (load! "lisp/cae-exwm" doom-user-dir))
+  (after! exwm
+    (load! "lisp/cae-exwm" doom-user-dir)))
 
 (when cae-init-geolocation-enabled-p
   (load! "lisp/cae-geolocation" doom-user-dir))
