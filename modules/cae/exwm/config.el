@@ -137,7 +137,7 @@
         (remove-hook 'repeat-mode-hook #'cae-exwm-disable-mouse-tracking-h)))
 
     (exwm-randr-mode +1)
-    (exwm-enable)
+    (exwm-wm-mode +1)
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
     (map! [remap suspend-frame] #'undefined)
