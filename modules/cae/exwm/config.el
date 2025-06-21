@@ -25,6 +25,7 @@
       (exwm-workspace-rename-buffer exwm-title)))
   (add-hook 'exwm-update-title-hook #'cae-exwm-rename-buffer-to-title)
 
+  (require 'exwm)
   (when init-file-debug
     (exwm-debug +1))
 
