@@ -235,7 +235,6 @@
               (buffer-list))
 
   (when (modulep! :ui workspaces)
-    (require 'persp-mode)
     (cae-advice-add #'+workspace-switch :after #'cae-exwm-persp--focus-workspace-app)
     (cae-advice-add #'browse-url-generic :before #'cae-exwm-browse-url-generic-a)
     (cae-advice-add #'consult-gh-embark-open-in-browser :before #'cae-exwm-browse-url-generic-a)
