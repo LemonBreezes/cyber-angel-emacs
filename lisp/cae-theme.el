@@ -268,10 +268,12 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
     :defer t)
 
   (when cae-theme-export-theme-with-pywal
-    (add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
+    (theme-magic-export-theme-mode +1)
+    ;;(add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
     ;; Run once initially if config is finished
     (when cae-config-finished-loading
-      (cae-theme-export-using-pywal))))
+      ;;(cae-theme-export-using-pywal)
+      )))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
