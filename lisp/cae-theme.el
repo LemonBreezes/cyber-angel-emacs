@@ -250,31 +250,10 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 
   (setq doom-theme initial-theme))
 
-(when cae-theme-export-theme-with-pywal
-  ;; Ensure required packages are loaded if needed, respecting :defer
-  (when cae-config-finished-loading
-    (require 'ewal nil t)               ; Load if available, don't error
-    (require 'theme-magic nil t))       ; Load if available, don't error
-
-  (use-package! ewal
-    :if cae-theme-export-theme-with-pywal ; Condition loading
-    :defer t :init
-    ;; Use all 16 colors from our palette, not just the primary 8.
-    (setq ewal-ansi-color-name-symbols '(black red green yellow blue magenta cyan white
-                                         brightblack brightred brightgreen brightyellow
-                                         brightblue brightmagenta brightcyan brightwhite)))
-  (use-package! theme-magic
-    :if cae-theme-export-theme-with-pywal ; Condition loading
-    :after-call doom-load-theme-hook
-    :defer t)
-
-  (when cae-theme-export-theme-with-pywal
-    (theme-magic-export-theme-mode +1)
-    ;;(add-hook 'doom-load-theme-hook #'cae-theme-export-using-pywal :append)
-    ;; Run once initially if config is finished
-    (when cae-config-finished-loading
-      ;;(cae-theme-export-using-pywal)
-      )))
+(use-package! theme-magic
+  :if cae-theme-export-theme-with-pywal ; Condition loading
+  :after-call doom-load-theme-hook :defer t
+  :config (theme-magic-export-theme-mode +1))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
