@@ -265,6 +265,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
                                          brightblue brightmagenta brightcyan brightwhite)))
   (use-package! theme-magic
     :if cae-theme-export-theme-with-pywal ; Condition loading
+    :after-call doom-load-theme-hook
     :defer t)
 
   (when cae-theme-export-theme-with-pywal
