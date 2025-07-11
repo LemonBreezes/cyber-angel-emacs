@@ -122,7 +122,7 @@ Otherwise delete ARG characters forward."
   "Open ChatGPT in a dedicated workspace."
   (interactive)
   (+workspace-switch cae-ai-chatgpt-shell-workspace-name t)
-  (chatgpt-shell)
+  (chatgpt-shell nil)
   (persp-add-buffer (current-buffer)))
 
 ;;;###autoload
