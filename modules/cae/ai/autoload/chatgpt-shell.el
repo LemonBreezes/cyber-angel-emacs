@@ -91,7 +91,7 @@ CREATE-FN is called when the buffer doesn't exist or isn't visible."
    #'chatgpt-shell--primary-buffer
    (lambda () 
      (let ((chatgpt-shell-display-function #'pop-to-buffer))
-       (chatgpt-shell)))))
+       (chatgpt-shell nil)))))
 
 ;;;###autoload
 (defun cae-ai-toggle-dall-e-shell ()
