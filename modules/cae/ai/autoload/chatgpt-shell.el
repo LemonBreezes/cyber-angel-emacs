@@ -130,5 +130,5 @@ Otherwise delete ARG characters forward."
   "Open DALL-E in a dedicated workspace."
   (interactive)
   (+workspace-switch cae-ai-dall-e-shell-workspace-name t)
-  (dall-e-shell)
+  (dall-e-shell nil)
   (persp-add-buffer (current-buffer)))
