@@ -41,3 +41,4 @@ custom.el
 .env
 
 **/.claude/settings.local.json
+*.tex
