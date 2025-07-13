@@ -52,9 +52,9 @@ EXWM workspace or if only one matching buffer exists."
                 ((symbol-function #'cae-exwm-persp-cleanup-workspace) #'ignore)
                 ((symbol-function #'+workspace/display) #'ignore))
         (persp-auto-persps-pickup-buffers))
-      (+log candidate-buffers (+workspace-current-name))
       (let* ((candidate-buffers (cae-exwm--get-workspace-buffers current-ws-name))
              (num-candidates (length candidate-buffers)))
+        (+log candidate-buffers (+workspace-current-name))
         (when (> num-candidates 1)  ; Only cycle if there's more than one buffer
           (let ((current-index (cl-position (current-buffer) candidate-buffers)))
             (when current-index ; Ensure current buffer is one of the candidates
