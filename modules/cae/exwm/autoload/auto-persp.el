@@ -78,7 +78,8 @@ EXWM workspace or if only one matching buffer exists."
                 ((symbol-function #'minibuffer-keyboard-quit) #'ignore)
                 ((symbol-function #'cae-exwm-persp-cleanup-workspace) #'ignore)
                 ((symbol-function #'+workspace/display) #'ignore))
-        (persp-auto-persps-pickup-buffers))
+        (save-current-buffer
+          (persp-auto-persps-pickup-buffers)))
       (let* ((candidate-buffers (cae-exwm--get-workspace-buffers current-ws-name))
              (num-candidates (length candidate-buffers)))
         (+log candidate-buffers (+workspace-current-name) current-ws-name)
