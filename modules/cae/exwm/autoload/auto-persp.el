@@ -44,7 +44,7 @@ EXWM workspace or if only one matching buffer exists."
   (let ((current-ws-name (+workspace-current-name)))
     (if (not (cl-member current-ws-name cae-exwm-workspaces :test #'string=))
         (message "Not in an EXWM workspace")
-      (save-buffer
+      (save-current-buffer
        (cl-letf (((symbol-function #'delete-other-windows) #'ignore)
                  ((symbol-function #'switch-to-buffer) #'ignore)
                  ((symbol-function #'select-window) #'ignore)
@@ -72,15 +72,15 @@ EXWM workspace or if only one matching buffer exists."
   (let ((current-ws-name (+workspace-current-name)))
     (if (not (cl-member current-ws-name cae-exwm-workspaces :test #'string=))
         (message "Not in an EXWM workspace")
-      (cl-letf (((symbol-function #'delete-other-windows) #'ignore)
-                ((symbol-function #'switch-to-buffer) #'ignore)
-                ((symbol-function #'select-window) #'ignore)
-                ((symbol-function #'other-window) #'ignore)
-                ((symbol-function #'minibuffer-keyboard-quit) #'ignore)
-                ((symbol-function #'cae-exwm-persp-cleanup-workspace) #'ignore)
-                ((symbol-function #'+workspace/display) #'ignore))
-        (save-current-buffer
-          (persp-auto-persps-pickup-buffers)))
+      (save-current-buffer
+       (cl-letf (((symbol-function #'delete-other-windows) #'ignore)
+                 ((symbol-function #'switch-to-buffer) #'ignore)
+                 ((symbol-function #'select-window) #'ignore)
+                 ((symbol-function #'other-window) #'ignore)
+                 ((symbol-function #'minibuffer-keyboard-quit) #'ignore)
+                 ((symbol-function #'cae-exwm-persp-cleanup-workspace) #'ignore)
+                 ((symbol-function #'+workspace/display) #'ignore))
+         (persp-auto-persps-pickup-buffers)))
       (let* ((candidate-buffers (cae-exwm--get-workspace-buffers current-ws-name))
              (num-candidates (length candidate-buffers)))
         (+log candidate-buffers (+workspace-current-name) current-ws-name)
