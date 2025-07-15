@@ -98,7 +98,7 @@ Restores the previous window configuration on exit ('q')."
          (define-key (evil-get-auxiliary-keymap map 'normal t)
                      (kbd "C-q") #'cae-exwm--exit-black-screen))
        map))
-    (ignore-errors (evil-emacs-state)))
+    (ignore-errors (evil-local-mode -1)))
   (hide-mode-line-mode +1))
 
 ;;;###autoload
