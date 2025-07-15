@@ -78,7 +78,7 @@ Restores the previous window configuration on exit ('q')."
     (face-remap-add-relative 'default :background "black")
     (delete-other-windows)
     (setq cursor-type nil)
-    (message "Black screen created. Press 'q' to exit.")
+    (message "Black screen created. Press 'C-q' to exit.")
 
     ;; Define the exit function
     (fset 'cae-exwm--exit-black-screen
@@ -92,11 +92,11 @@ Restores the previous window configuration on exit ('q')."
     ;; Set up local keymap
     (use-local-map
      (let ((map (make-sparse-keymap)))
-       (define-key map (kbd "q") #'cae-exwm--exit-black-screen)
+       (define-key map (kbd "C-q") #'cae-exwm--exit-black-screen)
        (define-key map [remap self-insert-command] #'ignore)
        (when (featurep 'evil)
          (define-key (evil-get-auxiliary-keymap map 'normal t)
-                     (kbd "q") #'cae-exwm--exit-black-screen))
+                     (kbd "C-q") #'cae-exwm--exit-black-screen))
        map))
     (ignore-errors (evil-emacs-state)))
   (hide-mode-line-mode +1))
