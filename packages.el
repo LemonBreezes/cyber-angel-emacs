@@ -125,7 +125,7 @@
 (package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
-(package! beginend)
+;;(package! beginend)
 (package! isearch-mb)
 (package! edit-indirect)
 (package! string-edit-at-point)
