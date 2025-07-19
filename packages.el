@@ -126,7 +126,7 @@
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
 ;;(package! beginend)
-(package! isearch-mb)
+;;(package! isearch-mb)
 (package! edit-indirect)
 (package! string-edit-at-point)
 (package! zop-to-char)
