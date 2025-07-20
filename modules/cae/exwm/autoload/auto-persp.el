@@ -44,8 +44,7 @@ EXWM workspace or if only one matching buffer exists."
   (let ((current-ws-name (+workspace-current-name)))
     (if (not (cl-member current-ws-name cae-exwm-workspaces :test #'string=))
         (message "Not in an EXWM workspace")
-      (persp-auto-persps-pickup-buffers)
-      (+workspace-switch current-ws-name)
+      (persp-auto-persp-pickup-buffers-for current-ws-name)
       (let* ((candidate-buffers (cae-exwm--get-workspace-buffers current-ws-name))
              (num-candidates (length candidate-buffers)))
         (when (> num-candidates 1)  ; Only cycle if there's more than one buffer
@@ -64,8 +63,7 @@ EXWM workspace or if only one matching buffer exists."
   (let ((current-ws-name (+workspace-current-name)))
     (if (not (cl-member current-ws-name cae-exwm-workspaces :test #'string=))
         (message "Not in an EXWM workspace")
-      (persp-auto-persps-pickup-buffers)
-      (+workspace-switch current-ws-name)
+      (persp-auto-persp-pickup-buffers-for current-ws-name)
       (let* ((candidate-buffers (cae-exwm--get-workspace-buffers current-ws-name))
              (num-candidates (length candidate-buffers)))
         (when (> num-candidates 1)  ; Only cycle if there's more than one buffer
