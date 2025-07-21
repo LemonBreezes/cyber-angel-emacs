@@ -13,6 +13,7 @@
   (package! minuet))
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
+(package! claude-code)
 
 ;; `magit-gptcommit' is much better.
 (package! magit-gptcommit)
