@@ -111,7 +111,7 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
         "<f5>" #'gptel-menu
-        "<f7>" #'cae-claude-code
+        "<f7>" #'claude-code-command-map
         "<f6>" #'aidermacs-transient-menu
         "<f12>" #'redraw-display)
       "C-<f1>" #'try
