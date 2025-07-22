@@ -204,7 +204,7 @@
        :select t :quit t :side bottom :ttl 0)
       ("\\`\\*Pp Eval Output\\*" :size +popup-shrink-to-fit
        :quit t :ttl t)
-      ("\\`\\*claude:*" :select t :ttl nil)
+      ("\\`\\*claude:*" :select t :ttl nil :side right :size 0.5)
       ("\\`\\*org-roam\\*" :size 60 :side left :select nil
        :quit nil)
       ("\\`\\*info.*" :size cae-popup-resize-help-buffer
