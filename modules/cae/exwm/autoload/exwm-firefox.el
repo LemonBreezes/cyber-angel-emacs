@@ -108,3 +108,8 @@ with the Add Page URL to Title extension."
       (time . ,(current-time-string))
       (handler . cae-exwm-firefox-bookmark-handler)
       (defaults . (,title)))))
+
+;;;###autoload
+(defun cae-exwm-clear-session-and-reload ()
+  (interactive)
+  (exwm-input--fake-key ?\M-c))
