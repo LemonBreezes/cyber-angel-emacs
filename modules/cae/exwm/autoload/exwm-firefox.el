@@ -8,7 +8,7 @@ switches pages."
   (remove-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
-(defun exwm-firefox-core-hint-links ()
+(defun cae-exwm-firefox-core-link-hints ()
   "Select and open a link with your keyboard."
   (interactive)
   (exwm-input--fake-key ?\M-j)
@@ -16,7 +16,7 @@ switches pages."
   (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
-(defun exwm-firefox-core-hint-links-new-tab-and-switch ()
+(defun cae-exwm-firefox-core-link-hints-new-tab-and-switch ()
   "Select and open a link in a new tab using your keyboard."
   (interactive)
   (exwm-input--fake-key ?\M-l)
