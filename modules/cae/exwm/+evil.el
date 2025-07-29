@@ -47,8 +47,8 @@
                     (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-focus-search-bar-a-h)))
 
   (map! :map exwm-firefox-evil-mode-map
-        :n "f"  #'exwm-firefox-core-hint-links ; Requires Link Hints add-on.
-        :n "F"  #'exwm-firefox-core-hint-links-new-tab-and-switch
+        :n "f"  #'cae-exwm-firefox-core-hint-links ; Requires Link Hints add-on.
+        :n "F"  #'cae-exwm-firefox-core-link-hints-new-tab-and-switch
         :n "u"  #'exwm-firefox-core-tab-close-undo
         :n "U"  #'exwm-firefox-core-undo
         :n "/"  #'exwm-firefox-core-find ; Compatible with Chrome as well.
