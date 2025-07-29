@@ -40,7 +40,7 @@
   (cae-advice-add #'exwm-firefox-core-focus-search-bar
                   :after
                   (defun cae-exwm-firefox-core-focus-search-bar-a ()
-                    (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h)))
+                    (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h)))
   (cae-advice-add #'exwm-firefox-core-tab-new
                   :after
                   (defun cae-exwm-firefox-core-tab-new-a ()
@@ -52,6 +52,7 @@
         :n "u"  #'exwm-firefox-core-tab-close-undo
         :n "U"  #'exwm-firefox-core-undo
         :n "/"  #'exwm-firefox-core-find ; Compatible with Chrome as well.
+        :n "C"  #'exwm
 
         ;; Do not accidentally send escape
         :n [remap exwm-firefox-core-cancel] #'exwm-evil-normal-state
