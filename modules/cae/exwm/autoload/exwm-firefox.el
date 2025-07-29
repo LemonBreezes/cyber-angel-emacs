@@ -1,11 +1,11 @@
 ;;; cae/exwm/autoload/exwm-firefox.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun exwm-firefox-core-hint-links-h ()
+(defun cae-exwm-firefox-core-hint-links-h ()
   "Helper function which enters normal state after the browser
 switches pages."
   (when exwm-firefox-evil-mode (evil-normal-state))
-  (remove-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
+  (remove-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
 (defun exwm-firefox-core-hint-links ()
@@ -13,7 +13,7 @@ switches pages."
   (interactive)
   (exwm-input--fake-key ?\M-j)
   (exwm-evil-insert)
-  (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
+  (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
 (defun exwm-firefox-core-hint-links-new-tab-and-switch ()
@@ -21,7 +21,7 @@ switches pages."
   (interactive)
   (exwm-input--fake-key ?\M-l)
   (exwm-evil-insert)
-  (add-hook 'exwm-update-title-hook #'exwm-firefox-core-hint-links-h))
+  (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h))
 
 ;;;###autoload
 (defun cae-exwm-firefox-core-cancel ()
