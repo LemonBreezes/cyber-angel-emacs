@@ -40,14 +40,14 @@
   (cae-advice-add #'exwm-firefox-core-focus-search-bar
                   :after
                   (defun cae-exwm-firefox-core-focus-search-bar-a ()
-                    (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-hint-links-h)))
+                    (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-link-hints-h)))
   (cae-advice-add #'exwm-firefox-core-tab-new
                   :after
                   (defun cae-exwm-firefox-core-tab-new-a ()
                     (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-focus-search-bar-a-h)))
 
   (map! :map exwm-firefox-evil-mode-map
-        :n "f"  #'cae-exwm-firefox-core-hint-links ; Requires Link Hints add-on.
+        :n "f"  #'cae-exwm-firefox-core-link-hints ; Requires Link Hints add-on.
         :n "F"  #'cae-exwm-firefox-core-link-hints-new-tab-and-switch
         :n "u"  #'exwm-firefox-core-tab-close-undo
         :n "U"  #'exwm-firefox-core-undo
