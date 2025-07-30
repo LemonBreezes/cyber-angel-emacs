@@ -114,4 +114,5 @@ with the Add Page URL to Title extension."
   (interactive)
   ;; Requires this Greasemonkey script: https://0x0.st/8RJb.txt (Link expires
   ;; one year after this comment. Open an issue if you need a new link.)
+  (let* ((url (cae-exwm-firefox--current-url))))
   (exwm-input--fake-key ?\M-c))
