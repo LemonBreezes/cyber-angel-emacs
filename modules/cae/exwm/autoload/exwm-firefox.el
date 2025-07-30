@@ -18,11 +18,12 @@ switches pages."
   (exwm-input--fake-key ?\M-j)
   (exwm-evil-insert)
   (run-at-time
-   1 (lambda (title url)
-       (when (and exwm-firefox-evil-mode
-                  (string= title (cae-exwm-firefox--current-title))
-                  (string= url (cae-exwm-firefox--current-url)))
-         (evil-normal-state)))
+   1 nil
+   (lambda (title url)
+     (when (and exwm-firefox-evil-mode
+                (string= title (cae-exwm-firefox--current-title))
+                (string= url (cae-exwm-firefox--current-url)))
+       (evil-normal-state)))
    (cae-exwm-firefox--current-title) (cae-exwm-firefox--current-url))
   (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-link-hints-h))
 
