@@ -114,5 +114,49 @@ with the Add Page URL to Title extension."
   (interactive)
   ;; Requires this Greasemonkey script: https://0x0.st/8RJb.txt (Link expires
   ;; one year after this comment. Open an issue if you need a new link.)
-  (let* ((url (cae-exwm-firefox--current-url))))
+  (let* ((url (cae-exwm-firefox--current-url)))
+    (exwm-firefox-core-tab-close)
+    (exwm-firefox-core-tab-new)
+    (let ((total-chars (length url))
+          (typed-chars 0))
+
+      ;; Show progress
+      (message "Typing %d characters..." total-chars)
+
+      ;; Process each character
+      (dolist (char (string-to-list url))
+        (pcase char
+          ;; Special characters
+          (?\n (exwm-input--fake-key 'return))
+          (?\t (exwm-input--fake-key 'tab))
+          (?\b (exwm-input--fake-key 'backspace))
+
+          ;; Characters requiring shift
+          ((guard (and (>= char ?A) (<= char ?Z)))
+           (exwm-input--fake-key char))
+
+          ;; Special symbols that might need shift
+          (?! (exwm-input--fake-key ?!))
+          (?@ (exwm-input--fake-key ?@))
+          (?# (exwm-input--fake-key ?#))
+          (?$ (exwm-input--fake-key ?$))
+          (?% (exwm-input--fake-key ?%))
+          (?^ (exwm-input--fake-key ?^))
+          (?& (exwm-input--fake-key ?&))
+          (?* (exwm-input--fake-key ?*))
+          (?\( (exwm-input--fake-key ?\())
+          (?\) (exwm-input--fake-key ?\)))
+
+          ;; Default: regular character
+          (_ (exwm-input--fake-key char)))
+
+        ;; Update progress occasionally
+        (setq typed-chars (1+ typed-chars))
+        (when (zerop (% typed-chars 10))
+          (message "Typing... %d/%d" typed-chars total-chars))
+
+        ;; Small delay
+        (sit-for cae-exwm-fake-type-delay))
+
+      (message "Done typing %d characters!" total-chars)))
   (exwm-input--fake-key ?\M-c))
