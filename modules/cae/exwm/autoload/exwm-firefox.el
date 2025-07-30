@@ -156,7 +156,5 @@ with the Add Page URL to Title extension."
           (message "Typing... %d/%d" typed-chars total-chars))
 
         ;; Small delay
-        (sit-for cae-exwm-fake-type-delay))
-
-      (message "Done typing %d characters!" total-chars)))
-  (exwm-input--fake-key ?\M-c))
+        (sit-for cae-exwm-fake-type-delay)))
+    (exwm-input--fake-key 'return)))
