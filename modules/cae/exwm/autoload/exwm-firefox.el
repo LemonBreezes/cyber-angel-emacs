@@ -112,4 +112,6 @@ with the Add Page URL to Title extension."
 ;;;###autoload
 (defun cae-exwm-clear-session-and-reload ()
   (interactive)
+  ;; You can use AI to write an extension to clear all cookies and site data
+  ;; with `M-c' in a single prompt.
   (exwm-input--fake-key ?\M-c))
