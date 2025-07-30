@@ -112,4 +112,4 @@ with the Add Page URL to Title extension."
 ;;;###autoload
 (defun cae-exwm-clear-session-and-reload ()
   (interactive)
-  (exwm-input--fake-key ?\M-c))
+  (exwm-input--fake-key ?\C-\S-l))
