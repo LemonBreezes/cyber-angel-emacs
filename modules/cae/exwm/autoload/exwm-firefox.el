@@ -1,9 +1,13 @@
 ;;; cae/exwm/autoload/exwm-firefox.el -*- lexical-binding: t; -*-
 
+(defvar cae-exwm-firefox-evil-link-hint-timer nil)
+
 ;;;###autoload
 (defun cae-exwm-firefox-core-link-hints-h ()
   "Helper function which enters normal state after the browser
 switches pages."
+  (when (timerp cae-exwm-firefox-evil-link-hint-timer)
+    (cancel-timer cae-exwm-firefox-evil-link-hint-timer))
   (when exwm-firefox-evil-mode (evil-normal-state))
   (remove-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-link-hints-h))
 
@@ -13,6 +17,13 @@ switches pages."
   (interactive)
   (exwm-input--fake-key ?\M-j)
   (exwm-evil-insert)
+  (run-at-time
+   1 (lambda (title url)
+       (when (and exwm-firefox-evil-mode
+                  (string= title (cae-exwm-firefox--current-title))
+                  (string= url (cae-exwm-firefox--current-url)))
+         (evil-normal-state)))
+   (cae-exwm-firefox--current-title) (cae-exwm-firefox--current-url))
   (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-link-hints-h))
 
 ;;;###autoload
