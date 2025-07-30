@@ -12,7 +12,6 @@ switches pages."
   "Select and open a link with your keyboard."
   (interactive)
   (exwm-input--fake-key ?\M-j)
-  (exwm-evil-insert)
   (add-hook 'exwm-update-title-hook #'cae-exwm-firefox-core-link-hints-h))
 
 ;;;###autoload
