@@ -112,4 +112,6 @@ with the Add Page URL to Title extension."
 ;;;###autoload
 (defun cae-exwm-clear-session-and-reload ()
   (interactive)
+  ;; Requires this Greasemonkey script: https://0x0.st/8RJb.txt (Link expires
+  ;; one year after this comment. Open an issue if you need a new link.)
   (exwm-input--fake-key ?\M-c))
