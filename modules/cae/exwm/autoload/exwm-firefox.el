@@ -18,7 +18,7 @@ switches pages."
   (exwm-input--fake-key ?\M-j)
   (exwm-evil-insert)
   (run-at-time
-   1 nil
+   3 nil
    (lambda (title url)
      (when (and exwm-firefox-evil-mode
                 (string= title (cae-exwm-firefox--current-title))
