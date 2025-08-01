@@ -105,7 +105,19 @@
 (unless (or (executable-find "termux-setup-storage")
             (not (cae-display-graphic-p)))
   (after! pdf-tools
-    (pdf-tools-install t nil t)))
+    (let* ((pdf-tools-load-path (file-name-directory (locate-library "pdf-tools")))
+           (straight-base (file-name-directory (directory-file-name (file-name-directory
+                                                                     (directory-file-name pdf-tools-load-path)))))
+           (build-dir (expand-file-name "repos/pdf-tools/server" straight-base))
+           (target-dir pdf-tools-load-path))
+      (pdf-tools-build-server
+       target-dir
+       nil nil
+       (lambda (executable)
+         (when executable
+           (setq pdf-info-epdfinfo-program executable)
+           (pdf-tools-install-noverify)))
+       build-dir))))
 
 (load! "lisp/cae-compile" doom-user-dir)
 
