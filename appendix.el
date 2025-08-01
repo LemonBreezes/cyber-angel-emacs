@@ -104,7 +104,8 @@
 
 (unless (or (executable-find "termux-setup-storage")
             (not (cae-display-graphic-p)))
-  (let* ((pdf-tools-load-path (file-name-directory (locate-library "pdf-tools")))
+  (let* ((pdf-tools-load-path (file-name-directory
+                               (locate-library "pdf-tools")))
          (straight-base (file-name-directory
                          (directory-file-name
                           (file-name-directory
