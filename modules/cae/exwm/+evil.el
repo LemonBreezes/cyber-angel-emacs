@@ -31,7 +31,8 @@
                           "Google-chrome"
                           "Google-chrome-unstable"
                           "Chromium-bin-browser-chromium"
-                          "librewolf-default")
+                          "librewolf-default"
+                          "librewolf")
            do (cl-pushnew class exwm-firefox-evil-firefox-class-name
                           :test #'string=))
   (setq-hook! 'exwm-firefox-evil-mode-hook bookmark-make-record-function #'cae-exwm-firefox-bookmark--make)
