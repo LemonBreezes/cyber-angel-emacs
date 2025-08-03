@@ -222,7 +222,7 @@
   (map! :map chatgpt-shell-mode-map
         :n "RET" #'comint-send-input
         :i "RET" #'+default/newline)
-  (setq chatgpt-shell-openrouter-key "")
+  (setq chatgpt-shell-openrouter-key (getenv "OPENROUTER_API_KEY"))
   (unless (executable-find "dwdiff")
     (warn "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
   (setq chatgpt-shell-display-function #'switch-to-buffer)
