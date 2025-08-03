@@ -260,7 +260,7 @@
 
 ;; Experimental
 (use-package! emigo
-  :config
+  :defer t :config
   (emigo-enable) ;; Starts the background process automatically
   :custom
   ;; Encourage using OpenRouter with Deepseek
