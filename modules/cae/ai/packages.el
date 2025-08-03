@@ -19,4 +19,4 @@
 (disable-packages! gptel-magit)
 
 ;; Experiments
-(package! emigo)
+(package! emigo :recipe (:host github :repo "MatthewZMD/emigo"))
