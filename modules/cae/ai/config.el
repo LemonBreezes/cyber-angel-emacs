@@ -55,9 +55,11 @@
             :models '(moonshotai/kimi-k2
                       qwen/qwen3-coder))))
   (after! minuet
-    (setq minuet-provider 'claude)
-    (plist-put! minuet-claude-options
-                :model "sonnet"
+    (setq minuet-provider 'openai-compatible)
+    (plist-put! minuet-openai-compatible-options
+                :end-point "https://openrouter.ai/api/v1/chat/completions"
+                :api-key "OPENROUTER_API_KEY"
+                :model "moonshotai/kimi-k2-turbo-preview"
                 :max_tokens 256
                 :top_p 0.9)
     (plist-put! minuet-codestral-options
