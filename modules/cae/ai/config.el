@@ -16,7 +16,7 @@
                   (list
                    (chatgpt-shell-openrouter-make-model
                     :label "Kimi K2"
-                    :version "moonshotai/kimi-k2"
+                    :version "moonshotai/kimi-k2-turbo-preview"
                     :short-version "kimi-k2"
                     :token-width 4
                     :context-window 128000)
@@ -26,7 +26,7 @@
                     :short-version "qwen3-coder"
                     :token-width 4
                     :context-window 256000))))
-    (setq chatgpt-shell-model-version "moonshotai/kimi-k2")
+    (setq chatgpt-shell-model-version "moonshotai/kimi-k2-turbo-preview")
     (setq chatgpt-shell-always-create-new nil))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
@@ -38,7 +38,7 @@
           (make-llm-openai-compatible
            :url "https://openrouter.ai/api/v1/"
            :key (getenv "OPENROUTER_API_KEY")
-           :chat-model "moonshotai/kimi-k2"
+           :chat-model "moonshotai/kimi-k2-turbo-preview"
            :default-chat-non-standard-params
            `((http-referer . "https://github.com/ahyatt/llm")
              (x-title . "Emacs LLM")))
@@ -52,7 +52,7 @@
             :endpoint "/api/v1/chat/completions"
             :stream t
             :key (getenv "OPENROUTER_API_KEY")
-            :models '(moonshotai/kimi-k2
+            :models '(moonshotai/kimi-k2-turbo-preview
                       qwen/qwen3-coder))))
   (after! minuet
     (setq minuet-provider 'openai-compatible)
@@ -70,8 +70,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "openrouter/moonshotai/kimi-k2")
-  (setq aidermacs-editor-model "openrouter/moonshotai/kimi-k2")
+  (setq aidermacs-default-model "openrouter/moonshotai/kimi-k2-turbo-preview")
+  (setq aidermacs-editor-model "openrouter/moonshotai/kimi-k2-turbo-preview")
   ;;(setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   ;;(setq aidermacs-editor-model "anthropic/claude-3-5-haiku-latest")
   (setq aidermacs-auto-commits nil)
