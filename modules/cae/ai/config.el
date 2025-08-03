@@ -42,7 +42,7 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! gptel
-    (setq gptel-model 'qwen3-coder
+    (setq gptel-model 'qwen/qwen3-coder
           gptel-backend
           (gptel-make-openai "OpenRouter"
             :host "openrouter.ai"
