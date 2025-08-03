@@ -36,12 +36,12 @@
     ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
     (setq llm-refactoring-provider
           (make-llm-openai-compatible
-         :url "https://openrouter.ai/api/v1/"
-         :key (getenv "OPENROUTER_API_KEY")
-         :chat-model model-id
-         :default-chat-non-standard-params
-         `((http-referer . "https://github.com/ahyatt/llm")
-           (x-title . "Emacs LLM")))
+           :url "https://openrouter.ai/api/v1/"
+           :key (getenv "OPENROUTER_API_KEY")
+           :chat-model model-id
+           :default-chat-non-standard-params
+           `((http-referer . "https://github.com/ahyatt/llm")
+             (x-title . "Emacs LLM")))
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! gptel
