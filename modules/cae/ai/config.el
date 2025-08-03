@@ -53,7 +53,7 @@
   (plist-put! minuet-openai-compatible-options
               :end-point "https://openrouter.ai/api/v1/chat/completions"
               :api-key "OPENROUTER_API_KEY"
-              :model "moonshotai/kimi-k2-turbo-preview"
+              :model "qwen/qwen3-coder"
               :max_tokens 256
               :top_p 0.9)
   (plist-put! minuet-codestral-options
