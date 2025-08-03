@@ -45,16 +45,7 @@
                    ([?\s-&] . (lambda (command)
                                 (interactive (list (read-shell-command "$ ")))
                                 (start-process-shell-command command nil command)))
-                   ([?\s-1] . +workspace/switch-to-0)
-                   ([?\s-2] . +workspace/switch-to-1)
-                   ([?\s-3] . +workspace/switch-to-2)
-                   ([?\s-4] . +workspace/switch-to-3)
-                   ([?\s-5] . +workspace/switch-to-4)
-                   ([?\s-6] . +workspace/switch-to-5)
-                   ([?\s-7] . +workspace/switch-to-6)
-                   ([?\s-8] . +workspace/switch-to-7)
-                   ([?\s-9] . +workspace/switch-to-8)
-                   ([?\s-0] . +workspace/switch-to-final))))
+                   )))
           (t
            (setq exwm-workspace-number 4)
            (setq exwm-input-global-keys
