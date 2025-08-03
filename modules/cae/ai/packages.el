@@ -17,3 +17,6 @@
 ;; `magit-gptcommit' is much better.
 (package! magit-gptcommit)
 (disable-packages! gptel-magit)
+
+;; Experiments
+(package! emigo)
