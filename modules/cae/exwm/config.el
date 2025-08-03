@@ -44,8 +44,7 @@
                    ;; output buffer does not bother you).
                    ([?\s-&] . (lambda (command)
                                 (interactive (list (read-shell-command "$ ")))
-                                (start-process-shell-command command nil command)))
-                   )))
+                                (start-process-shell-command command nil command))))))
           (t
            (setq exwm-workspace-number 4)
            (setq exwm-input-global-keys
