@@ -50,8 +50,7 @@
             :stream t
             :key (getenv "OPENROUTER_API_KEY")
             :models '(moonshotai/kimi-k2
-                      qwen/qwen3-coder
-                      anthropic/claude-4-sonnet))))
+                      qwen/qwen3-coder))))
   (after! minuet
     (setq minuet-provider 'claude)
     (plist-put! minuet-claude-options
