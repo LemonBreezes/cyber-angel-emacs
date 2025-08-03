@@ -28,7 +28,6 @@
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
-  ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
   (setq llm-refactoring-provider
         (make-llm-openai-compatible
          :url "https://openrouter.ai/api/v1/"
