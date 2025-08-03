@@ -11,15 +11,22 @@
   ;; ChatGPT Shell, Dall-E Shell, LLM, GPTel, and Minuet.
   ;; Aider.
   (after! chatgpt-shell
-    (cl-pushnew
-     (chatgpt-shell-anthropic--make-model
-      :version claude-model
-      :short-version (string-remove-prefix "claude-" claude-model)
-      :token-width  4
-      :max-tokens 8192
-      :context-window 200000)
-     chatgpt-shell-models)
-    (setq chatgpt-shell-model-version claude-model)
+    (setq chatgpt-shell-models
+          (append chatgpt-shell-models
+                  (list
+                   (chatgpt-shell-openrouter-make-model
+                    :label "Kimi K2"
+                    :version "moonshotai/kimi-k2"
+                    :short-version "kimi-k2"
+                    :token-width 4
+                    :context-window 128000)
+                   (chatgpt-shell-openrouter-make-model
+                    :label "Qwen3 Coder"
+                    :version "qwen/qwen3-coder"
+                    :short-version "qwen3-coder"
+                    :token-width 4
+                    :context-window 256000))))
+    (setq chatgpt-shell-model-version "moonshotai/kimi-k2")
     (setq chatgpt-shell-always-create-new nil))
   (after! dall-e-shell
     (setq dall-e-shell-model-version "dall-e-3"))
