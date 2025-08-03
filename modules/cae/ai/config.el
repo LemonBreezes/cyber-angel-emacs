@@ -7,7 +7,7 @@
 
 ;; Set up the default models.
 (let ((claude-model "claude-opus-4-20250514")
-      (gemini-model "gemini-2.5-pro-preview-05-06"))
+      (_gemini-model "gemini-2.5-pro-preview-05-06"))
   ;; ChatGPT Shell, Dall-E Shell, LLM, GPTel, and Minuet.
   ;; Aider.
   (after! chatgpt-shell
@@ -222,6 +222,7 @@
   (map! :map chatgpt-shell-mode-map
         :n "RET" #'comint-send-input
         :i "RET" #'+default/newline)
+  (setq chatgpt-shell-openrouter-key "")
   (unless (executable-find "dwdiff")
     (warn "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
   (setq chatgpt-shell-display-function #'switch-to-buffer)
