@@ -32,13 +32,16 @@
     (setq dall-e-shell-model-version "dall-e-3"))
   (defvar llm-refactoring-provider nil)
   (after! llm
-    (require 'llm-claude)
+    (require 'llm-openai)
     ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
     (setq llm-refactoring-provider
-          (make-llm-claude :chat-model claude-model
-                           :key (getenv "ANTHROPIC_API_KEY")
-                           ;;:default-chat-non-standard-params '((stream . :json-false))
-                           )
+          (make-llm-openai
+           :key (getenv "OPENROUTER_API_KEY")
+           :chat-model "moonshotai/kimi-k2"
+           :host "openrouter.ai"
+           :default-chat-non-standard-params
+           `((http-referer . "https://github.com/ahyatt/llm")
+             (x-title . "Emacs LLM")))
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! gptel
