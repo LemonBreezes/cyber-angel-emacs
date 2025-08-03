@@ -19,5 +19,5 @@
 (disable-packages! gptel-magit)
 
 ;; Experiments
-(package! emigo :recipe (:host github :repo "MatthewZMD/emigo"))
+(package! emigo :recipe (:host github :repo "MatthewZMD/emigo" :files ("*.el" "*.py")))
 (package! eca :recipe (:host github :repo "editor-code-assistant/eca-emacs" :files ("*.el")))
