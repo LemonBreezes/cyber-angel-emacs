@@ -42,6 +42,15 @@
           magit-gptcommit-llm-provider llm-refactoring-provider
           llm-warn-on-nonfree nil))
   (after! gptel
+    (setq gptel-model 'kimi-k2
+          gptel-backend
+          (gptel-make-openai "OpenRouter"
+            :host "openrouter.ai"
+            :endpoint "/api/v1/chat/completions"
+            :stream t
+            :key (getenv "OPENROUTER_API_KEY")
+            :models '(moonshotai/kimi-k2
+                      qwen/qwen3-coder)))
     (setq gptel-backend
           (gptel-make-anthropic "Claude-thinking" ;Any name you want
             :key (getenv "ANTHROPIC_API_KEY")
