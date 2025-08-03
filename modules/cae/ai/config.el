@@ -66,8 +66,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "gemini/gemini-2.5-pro-preview-05-06")
-  (setq aidermacs-editor-model "gemini/gemini-2.5-pro-preview-05-06")
+  (setq aidermacs-default-model "openrouter/moonshotai/kimi-k2")
+  (setq aidermacs-editor-model "openrouter/moonshotai/kimi-k2")
   ;;(setq aidermacs-default-model "anthropic/claude-3-7-sonnet-20250219")
   ;;(setq aidermacs-editor-model "anthropic/claude-3-5-haiku-latest")
   (setq aidermacs-auto-commits nil)
