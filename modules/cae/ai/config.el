@@ -67,7 +67,6 @@
   (setq aidermacs-default-model "openrouter/moonshotai/kimi-k2")
   (setq aidermacs-editor-model "openrouter/moonshotai/kimi-k2")
   (setq aidermacs-auto-commits nil)
-  (setq aidermacs-auto-accept-architect t)
   (setq aidermacs-backend 'comint)
   (setq aidermacs-extra-args
         '("--cache-prompts"
