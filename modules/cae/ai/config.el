@@ -50,7 +50,8 @@
             :stream t
             :key (getenv "OPENROUTER_API_KEY")
             :models '(moonshotai/kimi-k2
-                      qwen/qwen3-coder)))
+                      qwen/qwen3-coder
+                      anthropic/claude-4-sonnet)))
     (setq gptel-backend
           (gptel-make-anthropic "Claude-thinking" ;Any name you want
             :key (getenv "ANTHROPIC_API_KEY")
