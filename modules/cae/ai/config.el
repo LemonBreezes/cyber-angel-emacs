@@ -5,66 +5,61 @@
 (defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
-;; Set up the default models.
-(let ((claude-model "claude-opus-4-20250514")
-      (gemini-model "gemini-2.5-pro-preview-05-06"))
-  ;; ChatGPT Shell, Dall-E Shell, LLM, GPTel, and Minuet.
-  ;; Aider.
-  (after! chatgpt-shell
-    (setq chatgpt-shell-models
-          (append chatgpt-shell-models
-                  (list
-                   (chatgpt-shell-openrouter-make-model
-                    :label "Kimi K2"
-                    :version "moonshotai/kimi-k2-turbo-preview"
-                    :short-version "kimi-k2"
-                    :token-width 4
-                    :context-window 128000)
-                   (chatgpt-shell-openrouter-make-model
-                    :label "Qwen3 Coder"
-                    :version "qwen/qwen3-coder"
-                    :short-version "qwen3-coder"
-                    :token-width 4
-                    :context-window 256000))))
-    (setq chatgpt-shell-model-version "moonshotai/kimi-k2-turbo-preview")
-    (setq chatgpt-shell-always-create-new nil))
-  (after! dall-e-shell
-    (setq dall-e-shell-model-version "dall-e-3"))
-  (defvar llm-refactoring-provider nil)
-  (after! llm
-    (require 'llm-openai)
-    ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
-    (setq llm-refactoring-provider
-          (make-llm-openai-compatible
-           :url "https://openrouter.ai/api/v1/"
-           :key (getenv "OPENROUTER_API_KEY")
-           :chat-model "moonshotai/kimi-k2-turbo-preview"
-           :default-chat-non-standard-params
-           `((http-referer . "https://github.com/ahyatt/llm")
-             (x-title . "Emacs LLM")))
-          magit-gptcommit-llm-provider llm-refactoring-provider
-          llm-warn-on-nonfree nil))
-  (after! gptel
-    (setq gptel-model 'kimi-k2
-          gptel-backend
-          (gptel-make-openai "OpenRouter"
-            :host "openrouter.ai"
-            :endpoint "/api/v1/chat/completions"
-            :stream t
-            :key (getenv "OPENROUTER_API_KEY")
-            :models '(moonshotai/kimi-k2-turbo-preview
-                      qwen/qwen3-coder))))
-  (after! minuet
-    (setq minuet-provider 'openai-compatible)
-    (plist-put! minuet-openai-compatible-options
-                :end-point "https://openrouter.ai/api/v1/chat/completions"
-                :api-key "OPENROUTER_API_KEY"
-                :model "moonshotai/kimi-k2-turbo-preview"
-                :max_tokens 256
-                :top_p 0.9)
-    (plist-put! minuet-codestral-options
-                :max_tokens 256
-                :top_p 0.9)))
+(after! chatgpt-shell
+  (setq chatgpt-shell-models
+        (append chatgpt-shell-models
+                (list
+                 (chatgpt-shell-openrouter-make-model
+                  :label "Kimi K2"
+                  :version "moonshotai/kimi-k2-turbo-preview"
+                  :short-version "kimi-k2"
+                  :token-width 4
+                  :context-window 128000)
+                 (chatgpt-shell-openrouter-make-model
+                  :label "Qwen3 Coder"
+                  :version "qwen/qwen3-coder"
+                  :short-version "qwen3-coder"
+                  :token-width 4
+                  :context-window 256000))))
+  (setq chatgpt-shell-model-version "moonshotai/kimi-k2-turbo-preview")
+  (setq chatgpt-shell-always-create-new nil))
+(after! dall-e-shell
+  (setq dall-e-shell-model-version "dall-e-3"))
+(defvar llm-refactoring-provider nil)
+(after! llm
+  (require 'llm-openai)
+  ;;(setq llm-refactoring-provider (make-llm-openai :key (getenv "OPENAI_API_KEY")))
+  (setq llm-refactoring-provider
+        (make-llm-openai-compatible
+         :url "https://openrouter.ai/api/v1/"
+         :key (getenv "OPENROUTER_API_KEY")
+         :chat-model "moonshotai/kimi-k2-turbo-preview"
+         :default-chat-non-standard-params
+         `((http-referer . "https://github.com/ahyatt/llm")
+           (x-title . "Emacs LLM")))
+        magit-gptcommit-llm-provider llm-refactoring-provider
+        llm-warn-on-nonfree nil))
+(after! gptel
+  (setq gptel-model 'kimi-k2
+        gptel-backend
+        (gptel-make-openai "OpenRouter"
+          :host "openrouter.ai"
+          :endpoint "/api/v1/chat/completions"
+          :stream t
+          :key (getenv "OPENROUTER_API_KEY")
+          :models '(moonshotai/kimi-k2-turbo-preview
+                    qwen/qwen3-coder))))
+(after! minuet
+  (setq minuet-provider 'openai-compatible)
+  (plist-put! minuet-openai-compatible-options
+              :end-point "https://openrouter.ai/api/v1/chat/completions"
+              :api-key "OPENROUTER_API_KEY"
+              :model "moonshotai/kimi-k2-turbo-preview"
+              :max_tokens 256
+              :top_p 0.9)
+  (plist-put! minuet-codestral-options
+              :max_tokens 256
+              :top_p 0.9))
 
 (use-package! aidermacs
   :defer t :init
