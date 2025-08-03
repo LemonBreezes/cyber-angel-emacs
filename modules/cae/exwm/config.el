@@ -31,43 +31,6 @@
     (when init-file-debug
       (exwm-debug +1))
 
-    (cond ((modulep! :ui workspaces)
-           (setq exwm-input-global-keys
-                 `(;; Bind "s-r" to exit char-mode and fullscreen mode.
-                   ([?\s-r] . exwm-reset)
-                   ;; Bind "s-w" to switch workspace interactively.
-                   ([?\s-w] . +workspace/switch-to)
-                   ;; Bind "s-," and "s-." to EXWM workspace switching.
-                   ([?\s-,] . cae-exwm-workspace-switch-previous)
-                   ([?\s-.] . cae-exwm-workspace-switch-next)
-                   ;; Bind "s-&" to launch applications ('M-&' also works if the
-                   ;; output buffer does not bother you).
-                   ([?\s-&] . (lambda (command)
-                                (interactive (list (read-shell-command "$ ")))
-                                (start-process-shell-command command nil command))))))
-          (t
-           (setq exwm-workspace-number 4)
-           (setq exwm-input-global-keys
-                 `(;; Bind "s-r" to exit char-mode and fullscreen mode.
-                   ([?\s-r] . exwm-reset)
-                   ;; Bind "s-w" to switch workspace interactively.
-                   ([?\s-w] . exwm-workspace-switch)
-                   ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
-                   ,@(mapcar (lambda (i)
-                               `(,(kbd (format "s-%d" i)) .
-                                 (lambda ()
-                                   (interactive)
-                                   (exwm-workspace-switch-create ,i))))
-                             (number-sequence 0 9))
-                   ;; Bind "s-&" to launch applications ('M-&' also works if the
-                   ;; output buffer does not bother you).
-                   ([?\s-&] . (lambda (command)
-                                (interactive (list (read-shell-command "$ ")))
-                                (start-process-shell-command command nil command)))
-                   ,@(when (or (modulep! :cae helm)
-                               (modulep! :completion helm))
-                       '(([?\s-d] . helm-run-external-command)))))))
-
     ;; Update the above keys when reloading this file.
     (when (bound-and-true-p cae-config-finished-loading)
       (dolist (i exwm-input-global-keys)
