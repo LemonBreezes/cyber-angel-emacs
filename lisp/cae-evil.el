@@ -225,7 +225,6 @@
         :i "C-c" #'minuet-show-suggestion
         "y" #'minuet-complete-with-minibuffer))
 
-
 ;; TODO Fix this to work with `consult-yasnippet'.
 ;;(cae-defadvice! cae-evil-insert-state-a (&rest _)
 ;;  :after #'yas-expand-snippet
