@@ -51,9 +51,9 @@ Returns non-nil if changes are detected."
   "Handle git process errors."
   (let* ((output (with-current-buffer output-buffer (buffer-string)))
          (is-internet-error (or (string-match-p "ssh: Could not resolve hostname" output)
-                               (string-match-p "fatal: Could not read from remote repository" output)))
-         (error-msg (format "Git %s failed in repository %s (exit code %d)" 
-                           step-name repo-dir exit-status)))
+                                (string-match-p "fatal: Could not read from remote repository" output)))
+         (error-msg (format "Git %s failed in repository %s (exit code %d)"
+                            step-name repo-dir exit-status)))
     (if is-internet-error
         (when (>= verb-level 1)
           (message "Network error during git %s in %s" step-name repo-dir)
@@ -97,14 +97,14 @@ Returns non-nil if changes are detected."
     (funcall finalize)))
 
 (defun cae-multi--create-git-process-sentinel (repo-dir step-name conflict-check next-step
-                                              finalize output-buffer verb-level set-failure)
+                                                        finalize output-buffer verb-level set-failure)
   "Create a process sentinel for git operations."
   (lambda (proc event)
     (when (memq (process-status proc) '(exit signal))
       (let ((exit-status (process-exit-status proc)))
         (if (/= exit-status 0)
             (cae-multi--handle-git-error repo-dir step-name exit-status 
-                                        output-buffer verb-level set-failure finalize)
+                                         output-buffer verb-level set-failure finalize)
           (if (and conflict-check (funcall conflict-check output-buffer))
               (cae-multi--handle-git-conflict repo-dir step-name output-buffer set-failure finalize)
             (cae-multi--handle-git-success repo-dir step-name output-buffer verb-level next-step finalize)))))))
@@ -126,9 +126,9 @@ calls `gac--after-save' and then resets the buffer-local values."
           (buffer-local-value 'buffer-file-name buf) nil)))
 
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
-                                  conflict-check next-step
-                                  finalize output-buffer
-                                  verb-level set-failure)
+                                            conflict-check next-step
+                                            finalize output-buffer
+                                            verb-level set-failure)
   "Run a git command asynchronously for REPO-DIR.
 STEP-NAME is a string (e.g. \"fetch\").
 CMD-ARGS is a list of arguments passed to git.
@@ -317,33 +317,33 @@ When called interactively, no prefix yields level 1 and a prefix yields level 2.
     (with-current-buffer output-buffer (erase-buffer))
     (cl-labels
         ((finalize ()
-                   (setq pending-processes (1- pending-processes))
-                   (when (zerop pending-processes)
-                     (let ((elapsed (float-time (time-subtract (current-time) start-time))))
-                       (setq cae-multi-last-submodule-update-duration elapsed)
-                       (if all-ops-succeeded
-                           (when (>= verb-level 1)
-                             (message "Submodule update finished successfully in %.2f seconds" elapsed))
-                         (when (>= verb-level 1)
-                           (message "One or more submodule updates failed. See %s for details (took %.2f seconds)"
-                                    (buffer-name output-buffer) elapsed))))))
+           (setq pending-processes (1- pending-processes))
+           (when (zerop pending-processes)
+             (let ((elapsed (float-time (time-subtract (current-time) start-time))))
+               (setq cae-multi-last-submodule-update-duration elapsed)
+               (if all-ops-succeeded
+                   (when (>= verb-level 1)
+                     (message "Submodule update finished successfully in %.2f seconds" elapsed))
+                 (when (>= verb-level 1)
+                   (message "One or more submodule updates failed. See %s for details (took %.2f seconds)"
+                            (buffer-name output-buffer) elapsed))))))
          (update-submodule-for-repo (repo-dir)
-                                    (when (cae-multi--is-valid-git-repo repo-dir)
-                                      (setq pending-processes (1+ pending-processes))
-                                      (cae-multi--run-git-process
-                                       repo-dir
-                                       "submodule-update"
-                                       '("submodule" "update" "--init" "--recursive")
-                                       (lambda (buf)
-                                         (with-current-buffer buf
-                                           (save-excursion
-                                             (goto-char (point-max))
-                                             (re-search-backward "\\bCONFLICT\\b" nil t))))
-                                       nil  ; No next-step.
-                                       #'finalize
-                                       output-buffer
-                                       verb-level
-                                       (lambda () (setq all-ops-succeeded nil))))))
+           (when (cae-multi--is-valid-git-repo repo-dir)
+             (setq pending-processes (1+ pending-processes))
+             (cae-multi--run-git-process
+              repo-dir
+              "submodule-update"
+              '("submodule" "update" "--init" "--recursive")
+              (lambda (buf)
+                (with-current-buffer buf
+                  (save-excursion
+                    (goto-char (point-max))
+                    (re-search-backward "\\bCONFLICT\\b" nil t))))
+              nil  ; No next-step.
+              #'finalize
+              output-buffer
+              verb-level
+              (lambda () (setq all-ops-succeeded nil))))))
       (dolist (repo-dir cae-multi-repositories)
         (update-submodule-for-repo repo-dir)))))
 
