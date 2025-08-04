@@ -1,6 +1,7 @@
 ;;; autoload/cae-multi.el -*- lexical-binding: t; -*-
 
 (require 'cl-lib)
+(require 'filenotify)
 
 ;;;; Variable Definitions
 
