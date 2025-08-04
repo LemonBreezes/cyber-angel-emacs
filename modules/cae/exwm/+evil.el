@@ -55,9 +55,6 @@
         :n "/"  #'exwm-firefox-core-find ; Compatible with Chrome as well.
         :n "C"  #'cae-exwm-clear-session-and-reload
 
-        ;; Add editing commands back to Firefox
-        :n "X"  #'exwm-evil-core-cut
-
         ;; Do not accidentally send escape
         :n [remap exwm-firefox-core-cancel] #'exwm-evil-normal-state
 
