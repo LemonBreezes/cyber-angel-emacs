@@ -18,26 +18,6 @@
 (defvar cae-multi-abbrev--auto-commit-disabled nil
   "When non-nil, automatic saving of abbrev file is temporarily disabled.")
 
-;;; File Watching Utilities
-
-(defun cae-multi--setup-file-watch (file-path callback watch-var-symbol)
-  "Set up a file watch for FILE-PATH using CALLBACK.
-WATCH-VAR-SYMBOL is the symbol of the variable to store the watch descriptor."
-  (when (and file-path (file-exists-p file-path))
-    (unless (symbol-value watch-var-symbol)
-      (set watch-var-symbol
-           (file-notify-add-watch
-            file-path
-            '(change)
-            callback)))))
-
-(defun cae-multi--remove-file-watch (watch-var-symbol message)
-  "Remove file watch stored in WATCH-VAR-SYMBOL and display MESSAGE."
-  (when (symbol-value watch-var-symbol)
-    (file-notify-rm-watch (symbol-value watch-var-symbol))
-    (set watch-var-symbol nil)
-    (message message)))
-
 ;;; Directory Setup
 
 ;; Create necessary directories
