@@ -167,7 +167,6 @@ buffers of that class."
       (let ((buffers
              (cl-remove-if-not (lambda (buffer)
                                  (and (buffer-live-p buffer)
-                                      (not (eq buffer (current-buffer)))
                                       (string= (cae-exwm-get-workspace-name buffer) workspace)))
                                (persp-buffers (persp-get-by-name workspace)))))
         (unless buffers
