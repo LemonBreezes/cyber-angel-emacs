@@ -264,3 +264,8 @@ default motherboard turbo boost setting.
 | smie               |       0.85 |   0.00 |   0 |      0.85 |    0.11 |
 |--------------------+------------+--------+-----+-----------+---------|
 | total              |      17.83 |   0.00 |   0 |     17.83 |    0.74 |
+
+* Laptop g17
+:PROPERTIES:
+:CREATED_TIME: [2025-08-10 Sun 14:21]
+:END:
