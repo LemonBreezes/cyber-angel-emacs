@@ -154,7 +154,7 @@
       (apply oldfun args)))
   (cae-advice-add #'exwm-input--translate :around #'cae-exwm-input--translate-a)
 
-  (defadvice! cae-exwm-disable-in-exwm-a (oldfun &rest args)
+  (cae-defadvice! cae-exwm-disable-in-exwm-a (oldfun &rest args)
     :around #'menu-bar-open
     (unless (derived-mode-p 'exwm-mode)
       (apply oldfun args)))
