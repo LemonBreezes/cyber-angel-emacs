@@ -19,6 +19,7 @@
 (defvar cae-exwm-workspace-name-replacements
   '(("google-chrome-unstable" . "Google Chrome")
     ("chromium-browser" . "Chrome")
+    ("Microsoft-edge" . "Edge")
     ("chromium" . "Chrome")
     ("google-chrome" . "Google Chrome")
     ("Chromium-browser-chromium" . "Chrome")
