@@ -196,7 +196,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
         `((:sunrise . ,cae-day-theme)
           (:sunset . ,cae-night-theme)))
     (progn
-      (message "Theme: Using fixed times (%s/%s) for theme switching (location unavailable)."
+      (message "Theme: Using fixed times (%s/%s) for theme switching."
                cae-circadian-fixed-day-time cae-circadian-fixed-night-time)
       `((,cae-circadian-fixed-day-time . ,cae-day-theme)
         (,cae-circadian-fixed-night-time . ,cae-night-theme)))))
