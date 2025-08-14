@@ -189,7 +189,8 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 Uses sunrise/sunset if location is valid, otherwise fixed times."
   (if (and calendar-latitude calendar-longitude
            (not (= calendar-latitude 0))
-           (not (= calendar-longitude 0)))
+           (not (= calendar-longitude 0))
+           (not cae-circadian-used-fixed-times))
       (progn
         (message "Theme: Using sunrise/sunset for theme switching.")
         `((:sunrise . ,cae-day-theme)
