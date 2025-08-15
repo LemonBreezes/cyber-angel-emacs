@@ -10,11 +10,13 @@
         (append chatgpt-shell-models
                 (list
                  (chatgpt-shell-openrouter-make-model
-                  :label "Kimi K2"
                   :version "moonshotai/kimi-k2"
                   :short-version "kimi-k2"
-                  :token-width 4
-                  :context-window 128000)
+                  :label "Kimi"
+                  :token-width 16
+                  ;; See https://openrouter.ai/moonshotai/kimi-k2
+                  :context-window 131072
+                  :other-params '((provider (require_parameters . t))))
                  (chatgpt-shell-openrouter-make-model
                   :label "Qwen3 Coder"
                   :version "qwen/qwen3-coder"
