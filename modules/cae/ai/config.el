@@ -16,7 +16,7 @@
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
-  (setq gptel-model 'kimi-k2
+  (setq gptel-model 'moonshotai/kimi-k2
         gptel-backend
         (gptel-make-openai "OpenRouter"
           :host "openrouter.ai"
