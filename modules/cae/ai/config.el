@@ -2,6 +2,31 @@
 
 (require 'cae-lib)
 
+(defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
+(defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
+
+(after! chatgpt-shell
+  (setq chatgpt-shell-models
+        (append chatgpt-shell-models
+                (list
+                 (chatgpt-shell-openrouter-make-model
+                  :version "moonshotai/kimi-k2"
+                  :short-version "kimi-k2"
+                  :label "Kimi"
+                  :token-width 16
+                  ;; See https://openrouter.ai/moonshotai/kimi-k2
+                  :context-window 131072
+                  :other-params '((provider (require_parameters . t))))
+                 (chatgpt-shell-openrouter-make-model
+                  :label "Qwen3 Coder"
+                  :version "qwen/qwen3-coder"
+                  :short-version "qwen3-coder"
+                  :token-width 4
+                  :context-window 256000))))
+  (setq chatgpt-shell-model-version "moonshotai/kimi-k2")
+  (setq chatgpt-shell-always-create-new t))
+(after! dall-e-shell
+  (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-openai)
@@ -173,6 +198,42 @@
         dall-e-shell-image-quality "hd"
         dall-e-shell-image-size "1024x1792"
         dall-e-shell-request-timeout 180))
+(use-package! chatgpt-shell
+  :defer t :init
+  (map! :leader
+        :prefix "o"
+        :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
+        :desc "Open ChatGPT here" "C" #'chatgpt-shell
+        :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
+  (cae-advice-add 'comint-send-input :around 'cae-send-to-chatgpt-if-comma-a)
+  ;; Add eshell support for comma prefix
+  (add-hook 'eshell-input-filter-functions #'cae-eshell-send-to-chatgpt-if-comma)
+  :config
+  (map! :map chatgpt-shell-mode-map
+        :n "RET" #'comint-send-input
+        :i "RET" #'+default/newline)
+  (setq chatgpt-shell-openrouter-key (getenv "OPENROUTER_API_KEY"))
+  (unless (executable-find "dwdiff")
+    (warn "dwdiff is not installed, so ChatGPT shell will not be able to use it."))
+  (setq chatgpt-shell-display-function #'switch-to-buffer)
+  ;; Trying to stop some escape codes from showing up in my ChatGPT shell.
+  (setq-hook! 'chatgpt-shell-mode-hook
+    comint-process-echoes t)
+  (cae-defadvice! cae-ai-ignore-ld-library-path-a (oldfun &rest args)
+    :around #'shell-maker-async-shell-command
+    ;; This is a hack to prevent the ChatGPT shell from inheriting
+    ;; the LD_LIBRARY_PATH variable in projects where I override
+    ;; that.
+    (let ((process-environment (cl-remove-if
+                                (lambda (x) (string-prefix-p "LD_LIBRARY_PATH=" x))
+                                process-environment)))
+      (apply oldfun args)))
+  (map! :map chatgpt-shell-mode-map
+        "C-d" #'cae-ai-chatgpt-quit-or-delete-char
+        "C-l" #'chatgpt-shell-clear-buffer
+        [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
+  (cae-advice-add #'shell-maker-welcome-message :override #'ignore))
+
 (use-package! gptel
   :defer t :init
   (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
