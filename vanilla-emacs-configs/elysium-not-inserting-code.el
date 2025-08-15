@@ -30,7 +30,3 @@
 
 ;; For preventing error
 (setq gptel-use-curl nil)
-
-(global-set-key (kbd "<f5>") #'elysium-query)
-(global-set-key (kbd "<f2>") #'gptel-menu)
-(global-set-key (kbd "<f6>") #'gptel-send)
