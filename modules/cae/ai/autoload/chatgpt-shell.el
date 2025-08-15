@@ -31,46 +31,46 @@ Optional argument MAX-CHARS limits the number of characters to extract (default 
         (concat "[...TRUNCATED OUTPUT...]\n" buffer-text)
       buffer-text)))
 
-(defun cae-ai-send-to-chatgpt (query &optional context)
-  "Send QUERY to ChatGPT with optional CONTEXT.
-If CONTEXT is provided, it will be formatted as a code block before the query."
-  (require 'chatgpt-shell)
-  (let* ((chatgpt-shell-prompt-query-response-style 'other-buffer)
-         (display-buffer-alist cae-ai-chatgpt-popup-display-config)
-         (formatted-prompt (if context
-                               (format "Here is the terminal output:\n```\n%s\n```\n\nMy question about this output: %s"
-                                       context query)
-                             query)))
-    (chatgpt-shell-send-to-buffer formatted-prompt)))
-
-;;;###autoload
-(defun cae-send-to-chatgpt-if-comma-a (f &rest args)
-  "Advice function to intercept comma-prefixed input in comint buffers.
-If input starts with a comma, send it to ChatGPT, otherwise call F with ARGS."
-  (require 'chatgpt-shell)
-  (let ((input (comint-get-old-input-default)))
-    (if (string-prefix-p "," input)
-        (let ((query (substring input 1))
-              (buffer-content (cae-ai-get-terminal-buffer-content)))
-          (cae-ai-send-to-chatgpt query buffer-content))
-      (apply f args))))
-
-;;;###autoload
-(defun cae-eshell-send-to-chatgpt-if-comma ()
-  "Send eshell input to ChatGPT if it starts with a comma.
-This function is meant to be used in `eshell-input-filter-functions'."
-  (let ((input (buffer-substring-no-properties eshell-last-input-start eshell-last-input-end)))
-    (when (string-prefix-p "," input)
-      (let ((query (substring input 1))
-            (buffer-content (cae-ai-get-terminal-buffer-content)))
-        (cae-ai-send-to-chatgpt query buffer-content)
-        ;; Delete the command from the input to prevent it from being executed
-        (delete-region eshell-last-input-start eshell-last-input-end)
-        ;; Insert a blank line to maintain the prompt appearance
-        (goto-char eshell-last-input-start)
-        (insert "\n")
-        ;; Return nil to indicate we don't want to continue processing
-        nil))))
+;;(defun cae-ai-send-to-chatgpt (query &optional context)
+;;  "Send QUERY to ChatGPT with optional CONTEXT.
+;;If CONTEXT is provided, it will be formatted as a code block before the query."
+;;  (require 'chatgpt-shell)
+;;  (let* ((chatgpt-shell-prompt-query-response-style 'other-buffer)
+;;         (display-buffer-alist cae-ai-chatgpt-popup-display-config)
+;;         (formatted-prompt (if context
+;;                               (format "Here is the terminal output:\n```\n%s\n```\n\nMy question about this output: %s"
+;;                                       context query)
+;;                             query)))
+;;    (chatgpt-shell-send-to-buffer formatted-prompt)))
+;;
+;;;;;###autoload
+;;(defun cae-send-to-chatgpt-if-comma-a (f &rest args)
+;;  "Advice function to intercept comma-prefixed input in comint buffers.
+;;If input starts with a comma, send it to ChatGPT, otherwise call F with ARGS."
+;;  (require 'chatgpt-shell)
+;;  (let ((input (comint-get-old-input-default)))
+;;    (if (string-prefix-p "," input)
+;;        (let ((query (substring input 1))
+;;              (buffer-content (cae-ai-get-terminal-buffer-content)))
+;;          (cae-ai-send-to-chatgpt query buffer-content))
+;;      (apply f args))))
+;;
+;;;;;###autoload
+;;(defun cae-eshell-send-to-chatgpt-if-comma ()
+;;  "Send eshell input to ChatGPT if it starts with a comma.
+;;This function is meant to be used in `eshell-input-filter-functions'."
+;;  (let ((input (buffer-substring-no-properties eshell-last-input-start eshell-last-input-end)))
+;;    (when (string-prefix-p "," input)
+;;      (let ((query (substring input 1))
+;;            (buffer-content (cae-ai-get-terminal-buffer-content)))
+;;        (cae-ai-send-to-chatgpt query buffer-content)
+;;        ;; Delete the command from the input to prevent it from being executed
+;;        (delete-region eshell-last-input-start eshell-last-input-end)
+;;        ;; Insert a blank line to maintain the prompt appearance
+;;        (goto-char eshell-last-input-start)
+;;        (insert "\n")
+;;        ;; Return nil to indicate we don't want to continue processing
+;;        nil))))
 
 ;;;###autoload
 (defun cae-ai-toggle-shell-buffer (get-buffer-fn &optional create-fn)
