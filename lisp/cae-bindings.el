@@ -110,7 +110,6 @@
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
-        "<f5>" #'gptel-menu
         "<f7>" #'cae-claude-code
         "<f6>" #'aidermacs-transient-menu
         "<f12>" #'redraw-display)
