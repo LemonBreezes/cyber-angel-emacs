@@ -87,9 +87,9 @@ CREATE-FN is called when the buffer doesn't exist or isn't visible."
   "Toggle the visibility of the ChatGPT shell buffer."
   (interactive)
   (require 'chatgpt-shell)
-  (cae-ai-toggle-shell-buffer 
+  (cae-ai-toggle-shell-buffer
    #'chatgpt-shell--primary-buffer
-   (lambda () 
+   (lambda ()
      (let ((chatgpt-shell-display-function #'pop-to-buffer))
        (chatgpt-shell nil)))))
 
@@ -98,11 +98,11 @@ CREATE-FN is called when the buffer doesn't exist or isn't visible."
   "Toggle the visibility of the DALL-E shell buffer."
   (interactive)
   (require 'dall-e-shell)
-  (cae-ai-toggle-shell-buffer 
-   (lambda () 
+  (cae-ai-toggle-shell-buffer
+   (lambda ()
      (when (dall-e-shell--shell-buffers)
        (car (dall-e-shell--shell-buffers))))
-   (lambda () 
+   (lambda ()
      (let ((dall-e-shell-display-function #'pop-to-buffer))
        (dall-e-shell nil)))))
 
