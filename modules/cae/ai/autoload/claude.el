@@ -61,5 +61,6 @@ Otherwise, open Claude for the current project."
       (if existing-buffer
           (pop-to-buffer existing-buffer)
         (vterm-other-window vterm-buffer-name)
-        (vterm-send-string "claude")
+        ;; Testing Opencode
+        (vterm-send-string "opencode")
         (vterm-send-return)))))
