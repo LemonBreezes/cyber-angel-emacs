@@ -101,5 +101,4 @@ Otherwise, open Claude for the current project."
           (vterm-send-return))
          ((eq cae-claude-terminal-backend 'eat)
           (let ((eat-buffer-name buffer-name))
-            (eat-other-window (if cae-claude-use-opencode "opencode" "claude")))
-          ))))))
+            (eat-other-window (if cae-claude-use-opencode "opencode" "claude")))))))))
