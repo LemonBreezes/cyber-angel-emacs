@@ -9,20 +9,20 @@
     (lambda ()
       (interactive)
       (elfeed-search-set-filter (concat "@" period "-ago" (if tag (concat " +" tag) "")))))
-  (let ((custom-filters
-         `(("R" ,(cae-elfeed-set-filter "reddit" "6-months") "Reddit feeds" :column "Custom filters")
-           ("E" ,(cae-elfeed-set-filter "emacs" "6-months") "Emacs feeds" :column "Custom filters")
-           ("Y" ,(cae-elfeed-set-filter "tube" "6-months") "Youtube feeds" :column "Custom filters")
-           ("*" ,(cae-elfeed-set-filter "star" "6-months") "Starred feeds" :column "Custom filters")
-           ("a" ,(cae-elfeed-set-filter "" "6-months") "All feeds" :column "Custom filters")
-           ("T" ,(cae-elfeed-set-filter "" "1-day") "Today's feeds" :column "Custom filters"))))
-    (cl-loop for (key filter desc . rest) in custom-filters do
-             (map! :map elfeed-search-mode-map
-                   :ng key filter)
-             (after! which-key
-               (require 'elfeed-search)
-               (which-key-add-keymap-based-replacements elfeed-search-mode-map
-                 (kbd key) desc))))
+  (after! elfeed-search
+    (let ((custom-filters
+           `(("R" ,(cae-elfeed-set-filter "reddit" "6-months") "Reddit feeds" :column "Custom filters")
+             ("E" ,(cae-elfeed-set-filter "emacs" "6-months") "Emacs feeds" :column "Custom filters")
+             ("Y" ,(cae-elfeed-set-filter "tube" "6-months") "Youtube feeds" :column "Custom filters")
+             ("*" ,(cae-elfeed-set-filter "star" "6-months") "Starred feeds" :column "Custom filters")
+             ("a" ,(cae-elfeed-set-filter "" "6-months") "All feeds" :column "Custom filters")
+             ("T" ,(cae-elfeed-set-filter "" "1-day") "Today's feeds" :column "Custom filters"))))
+      (cl-loop for (key filter desc . rest) in custom-filters do
+               (map! :map elfeed-search-mode-map
+                     :ng key filter)
+               (after! which-key
+                 (which-key-add-keymap-based-replacements elfeed-search-mode-map
+                   (kbd key) desc)))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
