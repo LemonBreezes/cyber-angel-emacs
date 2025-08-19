@@ -205,8 +205,6 @@
         :desc "Toggle ChatGPT popup" "c" #'cae-ai-toggle-chatgpt-shell
         :desc "Open ChatGPT here" "C" #'chatgpt-shell
         :desc "Open ChatGPT workspace" "C-c" #'cae-ai-open-chatgpt-workspace)
-  ;; Add eshell support for comma prefix
-  (add-hook 'eshell-input-filter-functions #'cae-eshell-send-to-chatgpt-if-comma)
   :config
   (map! :map chatgpt-shell-mode-map
         :n "RET" #'comint-send-input
