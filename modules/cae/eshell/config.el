@@ -9,9 +9,7 @@
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
   :config
-  ;; Do not let EAT override TERM.
-  (setq eat-term-name (lambda () eshell-term-name)
-        eat-enable-yank-to-terminal t)
+  (setq eat-enable-yank-to-terminal t)
 
   ;; Temporarily disable some modes when EAT is active.
   (defun cae-eshell--disable-modes-in-eat ()
