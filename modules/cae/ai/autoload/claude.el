@@ -63,6 +63,3 @@ Otherwise, open Claude for the current project."
         (vterm-other-window vterm-buffer-name)
         (vterm-send-string "claude")
         (vterm-send-return)))))
-
-(defun cae-opencode ()
-  (interactive))
