@@ -88,17 +88,28 @@ with the KeePass Helper - URL in title add-on."
     (match-string-no-properties 1 title)))
 
 (defun cae-exwm-firefox--current-title ()
-  "Get the title of the currently focused EXWM buffer. Currently only works
-on Chromium with the Add Page URL to Title extension or in Firefox with
-the Add URL to Window Title (Advanced KeePass Usage) in title add-on
-configured to show the full URL."
+  "Return thepage title** extracted from the EXWM buffer title.
+
+Works with:
+
+- Chromium  → Add Page URL to Title extension
+- Firefox   → Add URL to Window Title (Advanced KeePass Usage)
+
+The window title must be in the form
+   <page title> – <url>  (em-dash or hyphen)
+The URL must start with http/https.
+
+Example:
+   LLM Rankings | OpenRouter – https://openrouter.ai/rankings - Google Chrome
+   ⇒ \"LLM Rankings | OpenRouter\""
   (let ((title exwm-title))
-    (or (string-match "\\(.+\\) |url:\\[" title)
-        (string-match (format "\\(.+\\)\\(?:\\s-*-\\s-*\\) https?://" url-handler-regexp) title)
-        (string-match "https?://[^[:space:]]+\\(?:\\s-*[-—–]\\s-*\\)\\(.+\\)" title))
-    (unless (match-string-no-properties 1 title)
-      (error "No URL found in EXWM web browser buffer"))
-    (string-trim (match-string-no-properties 1 title))))
+    ;; 1. title <em-dash> URL <optional trailing>   (preferred form)
+    ;; 2. title <hyphen/minus> URL <optional trailing>
+    (if (or (string-match "\\(.+?\\)\\s-*[–—-]\\s-*https?://" title)
+            ;; fallback: URL <dash> title
+            (string-match "https?://[^[:space:]]+\\(?:\\s-*[-–—]\\s-*\\)\\(.+\\)" title))
+        (string-trim (match-string-no-properties 1 title))
+      (error "No URL found in EXWM web browser buffer"))))
 
 ;;;###autoload
 (defun cae-exwm-firefox-bookmark-handler (bookmark)
