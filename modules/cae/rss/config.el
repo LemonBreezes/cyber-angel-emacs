@@ -17,12 +17,12 @@
            ("a" ,(cae-elfeed-set-filter "" "6-months") "All feeds" :column "Custom filters")
            ("T" ,(cae-elfeed-set-filter "" "1-day") "Today's feeds" :column "Custom filters"))))
     (cl-loop for (key filter desc . rest) in custom-filters do
-             (after! elfeed
-               (map! :map elfeed-search-mode-map
-                     :ng key filter)
-               (after! which-key
-                 (which-key-add-keymap-based-replacements elfeed-search-mode-map
-                   (kbd key) desc)))))
+             (map! :map elfeed-search-mode-map
+                   :ng key filter)
+             (after! which-key
+               (require 'elfeed-search)
+               (which-key-add-keymap-based-replacements elfeed-search-mode-map
+                 (kbd key) desc))))
   (after! recentf
     (push elfeed-db-directory recentf-exclude))
   (map! :map elfeed-show-mode-map
