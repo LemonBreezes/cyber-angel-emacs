@@ -36,6 +36,7 @@
         "o" #'ace-link-w3m))
 
 ;; Set up the default browser.
+(defvar cae-generic-browser-name 'google-chrome)
 (after! browse-url
   (setq browse-url-secondary-browser-function
         (if (eq browse-url-secondary-browser-function
