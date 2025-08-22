@@ -17,7 +17,7 @@
   "A list of window titles for EXWM applications which should stay floating.")
 
 (defvar cae-exwm-workspace-name-replacements
-  '(("google-chrome-unstable" . "Google Chrome")
+  '(("google-chrome-unstable" . "Chrome")
     ("chromium-browser" . "Chrome")
     ("Microsoft-edge" . "Edge")
     ("chromium" . "Chrome")
