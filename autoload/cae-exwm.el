@@ -105,41 +105,54 @@ Restores the previous window configuration on exit ('q')."
 (defun cae-exwm-audio-raise-volume ()
   "Raise audio volume using wpctl and show current volume."
   (interactive)
-  (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+")
-  (run-at-time 0.1 nil #'cae-exwm--show-volume))
-
-;;;###autoload
-(defun cae-exwm-audio-lower-volume ()
-  "Lower audio volume using wpctl and show current volume."
-  (interactive)
-  (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-")
-  (run-at-time 0.1 nil #'cae-exwm--show-volume))
+  (if (executable-find "wpctl")
+      (progn
+        (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+")
+        (run-at-time 0.1 nil #'cae-exwm--show-volume))
+    (message "wpctl not found - audio volume control unavailable")))
 
 ;;;###autoload
 (defun cae-exwm-audio-toggle-mic-mute ()
   "Toggle microphone mute using wpctl."
   (interactive)
-  (start-process "wpctl" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle")
-  (run-at-time 0.1 nil #'cae-exwm--show-mic-status))
+  (if (executable-find "wpctl")
+      (progn
+        (start-process "wpctl" nil "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle")
+        (run-at-time 0.1 nil #'cae-exwm--show-mic-status))
+    (message "wpctl not found - microphone control unavailable")))
+
+;;;###autoload
+(defun cae-exwm-audio-lower-volume ()
+  "Lower audio volume using wpctl and show current volume."
+  (interactive)
+  (if (executable-find "wpctl")
+      (progn
+        (start-process "wpctl" nil "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-")
+        (run-at-time 0.1 nil #'cae-exwm--show-volume))
+    (message "wpctl not found - audio volume control unavailable")))
 
 (defun cae-exwm--show-volume ()
   "Show current volume percentage."
-  (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SINK@")))
-    (if (string-match "Volume: \\([0-9.]+\\)" output)
-        (let* ((volume-float (string-to-number (match-string 1 output)))
-               (volume-percent (round (* volume-float 100))))
-          (message "Volume: %d%%" volume-percent))
-      (message "Volume: unknown"))))
+  (if (executable-find "wpctl")
+      (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SINK@")))
+        (if (string-match "Volume: \\([0-9.]+\\)" output)
+            (let* ((volume-float (string-to-number (match-string 1 output)))
+                   (volume-percent (round (* volume-float 100))))
+              (message "Volume: %d%%" volume-percent))
+          (message "Volume: unknown")))
+    (message "wpctl not found - cannot display volume")))
 
 (defun cae-exwm--show-mic-status ()
   "Show current microphone mute status."
-  (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SOURCE@")))
-    (cond
-     ((string-match-p "\\[MUTED\\]" output)
-      (message "Microphone: MUTED"))
-     ((string-match "Volume: \\([0-9.]+\\)" output)
-      (let* ((volume-float (string-to-number (match-string 1 output)))
-             (volume-percent (round (* volume-float 100))))
-        (message "Microphone: %d%%" volume-percent)))
-     (t
-      (message "Microphone: unknown")))))
+  (if (executable-find "wpctl")
+      (let ((output (shell-command-to-string "wpctl get-volume @DEFAULT_AUDIO_SOURCE@")))
+        (cond
+         ((string-match-p "\\[MUTED\\]" output)
+          (message "Microphone: MUTED"))
+         ((string-match "Volume: \\([0-9.]+\\)" output)
+          (let* ((volume-float (string-to-number (match-string 1 output)))
+                 (volume-percent (round (* volume-float 100))))
+            (message "Microphone: %d%%" volume-percent)))
+         (t
+          (message "Microphone: unknown"))))
+    (message "wpctl not found - cannot display microphone status")))

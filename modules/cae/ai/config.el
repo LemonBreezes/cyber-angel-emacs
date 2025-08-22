@@ -10,11 +10,11 @@
         (append chatgpt-shell-models
                 (list
                  (chatgpt-shell-openrouter-make-model
-                  :version "moonshotai/kimi-k2"
-                  :short-version "kimi-k2"
-                  :label "Kimi"
-                  :token-width 16
-                  ;; See https://openrouter.ai/moonshotai/kimi-k2
+                  :version "z-ai/glm-4.5"
+                  :short-version "glm-4.5"
+                  :label "GLM-4.5"
+                  :token-width 4
+                  ;; See https://openrouter.ai/z-ai/glm-4.5
                   :context-window 131072
                   :other-params '((provider (require_parameters . t))))
                  (chatgpt-shell-openrouter-make-model
@@ -23,7 +23,7 @@
                   :short-version "qwen3-coder"
                   :token-width 4
                   :context-window 256000))))
-  (setq chatgpt-shell-model-version "moonshotai/kimi-k2")
+  (setq chatgpt-shell-model-version "z-ai/glm-4.5")
   (setq chatgpt-shell-always-create-new t))
 (after! dall-e-shell
   (setq dall-e-shell-model-version "dall-e-3"))
@@ -34,21 +34,21 @@
         (make-llm-openai-compatible
          :url "https://openrouter.ai/api/v1/"
          :key (getenv "OPENROUTER_API_KEY")
-         :chat-model "moonshotai/kimi-k2"
+         :chat-model "z-ai/glm-4.5"
          :default-chat-non-standard-params
          `((http-referer . "https://github.com/ahyatt/llm")
            (x-title . "Emacs LLM")))
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
-  (setq gptel-model 'moonshotai/kimi-k2
+  (setq gptel-model 'z-ai/glm-4.5
         gptel-backend
         (gptel-make-openai "OpenRouter"
           :host "openrouter.ai"
           :endpoint "/api/v1/chat/completions"
           :stream t
           :key (getenv "OPENROUTER_API_KEY")
-          :models '(moonshotai/kimi-k2
+          :models '(z-ai/glm-4.5
                     qwen/qwen3-coder))))
 (after! minuet
   (setq minuet-provider 'openai-compatible)
@@ -66,8 +66,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "openrouter/moonshotai/kimi-k2")
-  (setq aidermacs-editor-model "openrouter/moonshotai/kimi-k2")
+  (setq aidermacs-default-model "openrouter/z-ai/glm-4.5")
+  (setq aidermacs-editor-model "openrouter/z-ai/glm-4.5")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-backend 'comint)
   (setq aidermacs-extra-args
