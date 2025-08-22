@@ -53,7 +53,7 @@
         :n "u"  #'exwm-firefox-core-tab-close-undo
         :n "U"  #'exwm-firefox-core-undo
         :n "/"  #'exwm-firefox-core-find ; Compatible with Chrome as well.
-        :n "C"  #'cae-exwm-clear-session-and-reload
+        :n "M-c"  #'cae-exwm-clear-session-and-reload
 
         ;; Do not accidentally send escape
         :n [remap exwm-firefox-core-cancel] #'exwm-evil-normal-state
