@@ -21,7 +21,7 @@
     ("chromium-browser" . "Chrome")
     ("Microsoft-edge" . "Edge")
     ("chromium" . "Chrome")
-    ("google-chrome" . "Google Chrome")
+    ("google-chrome" . "Chrome")
     ("Chromium-browser-chromium" . "Chrome")
     ("Cursor" . "Cursor")
     ("Pavucontrol" . "Pavucontrol")
