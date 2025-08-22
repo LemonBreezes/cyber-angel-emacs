@@ -24,7 +24,7 @@
                   :token-width 4
                   :context-window 256000))))
   (setq chatgpt-shell-model-version "z-ai/glm-4.5")
-  (setq chatgpt-shell-always-create-new t))
+  (setq chatgpt-shell-always-create-new nil))
 (after! dall-e-shell
   (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
