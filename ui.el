@@ -61,8 +61,11 @@
 (after! transient
   (setq transient-align-variable-pitch t))
 
+(after! alert
+  (setq alert-default-style 'notifications))
+
 (after! newcomment
-  (setq comment-empty-lines 'eol      ;I prefer to comment blank lines with
+  (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
                                         ;`comment-region' so that I can mark the
                                         ;entire commented text with
                                         ;`mark-paragraph'.
