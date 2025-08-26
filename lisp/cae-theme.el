@@ -206,6 +206,14 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
       `((,cae-circadian-fixed-day-time . ,cae-day-theme)
         (,cae-circadian-fixed-night-time . ,cae-night-theme)))))
 
+(defun cae-theme--configure-circadian ()
+  "Configure and activate circadian with the correct themes."
+  (require 'circadian)
+  (setq circadian-themes (cae-theme--get-circadian-config)
+        circadian-verbose t) ; Or make this configurable
+  ;; Ensure circadian recalculates and applies the theme now
+  (circadian-setup))
+
 (defun cae-theme--update-circadian-on-location-change ()
   "Hook function to reconfigure circadian when location changes significantly."
   (when (and (featurep 'circadian) cae-theme-enable-day-night-theme-switching)
