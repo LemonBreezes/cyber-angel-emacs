@@ -185,9 +185,11 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 ;;; Set theme based on time of day.
 
 (defun cae-theme--get-circadian-config ()
-  "Return the appropriate theme list for `circadian-themes`.
+  "Return the appropriate theme list for `circadian-themes'.
 Uses sunrise/sunset if location is valid, otherwise fixed times."
   (if (and calendar-latitude calendar-longitude
+           (numberp calendar-latitude)
+           (numberp calendar-longitude)
            (not (= calendar-latitude 0))
            (not (= calendar-longitude 0))
            (not cae-circadian-used-fixed-times))
@@ -196,18 +198,13 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
         `((:sunrise . ,cae-day-theme)
           (:sunset . ,cae-night-theme)))
     (progn
-      (message "Theme: Using fixed times (%s/%s) for theme switching."
-               cae-circadian-fixed-day-time cae-circadian-fixed-night-time)
+      (when (and (boundp 'cae-geolocation-verbose) cae-geolocation-verbose)
+        (message "Theme: Geolocation not ready or invalid coordinates (%s, %s), using fixed times (%s/%s) for theme switching."
+                 (if (boundp 'calendar-latitude) calendar-latitude 'unbound)
+                 (if (boundp 'calendar-longitude) calendar-longitude 'unbound)
+                 cae-circadian-fixed-day-time cae-circadian-fixed-night-time))
       `((,cae-circadian-fixed-day-time . ,cae-day-theme)
         (,cae-circadian-fixed-night-time . ,cae-night-theme)))))
-
-(defun cae-theme--configure-circadian ()
-  "Configure and activate circadian with the correct themes."
-  (require 'circadian)
-  (setq circadian-themes (cae-theme--get-circadian-config)
-        circadian-verbose t) ; Or make this configurable
-  ;; Ensure circadian recalculates and applies the theme now
-  (circadian-setup))
 
 (defun cae-theme--update-circadian-on-location-change ()
   "Hook function to reconfigure circadian when location changes significantly."
