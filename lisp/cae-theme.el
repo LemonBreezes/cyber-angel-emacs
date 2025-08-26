@@ -198,7 +198,8 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
         `((:sunrise . ,cae-day-theme)
           (:sunset . ,cae-night-theme)))
     (progn
-      (when cae-geolocation-verbose
+      (when (and cae-geolocation-verbose
+                 (not cae-circadian-used-fixed-times))
         (message "Theme: Geolocation not ready or invalid coordinates (%s, %s), using fixed times (%s/%s) for theme switching."
                  calendar-latitude
                  calendar-longitude
