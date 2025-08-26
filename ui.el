@@ -62,7 +62,8 @@
   (setq transient-align-variable-pitch t))
 
 (after! alert
-  (setq alert-default-style 'notifications))
+  (setq alert-default-style
+        (if (executable-find "notify-send") 'libnotify 'notifications)))
 
 (after! newcomment
   (setq comment-empty-lines 'eol        ;I prefer to comment blank lines with
