@@ -209,8 +209,7 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 (defun cae-theme--configure-circadian ()
   "Configure and activate circadian with the correct themes."
   (require 'circadian)
-  (setq circadian-themes (cae-theme--get-circadian-config)
-        circadian-verbose t) ; Or make this configurable
+  (setq circadian-themes (cae-theme--get-circadian-config))
   ;; Ensure circadian recalculates and applies the theme now
   (circadian-setup))
 
