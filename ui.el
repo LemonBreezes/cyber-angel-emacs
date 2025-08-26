@@ -25,7 +25,7 @@
 (setq x-stretch-cursor t              ;Show me if I am on a TAB or a space
       kill-buffer-delete-auto-save-files t
       window-combination-resize t     ;Take new window space from all other
-                                        ;windows (not just current)
+                                      ;windows (not just current)
       scroll-preserve-screen-position t
       suggest-key-bindings nil)
 
