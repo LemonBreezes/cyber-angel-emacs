@@ -90,9 +90,10 @@ LAT, LNG are coordinates. NAME is the location name string."
   "Schedule periodic geolocation updates."
   (interactive)
   ;; Schedule to run periodically when Emacs is idle
-  (run-with-idle-timer cae-geolocation-idle-delay
-                       cae-geolocation-update-interval
-                       #'cae-geolocation-setup 0))
+  (cae-run-with-idle-timer cae-geolocation-idle-delay
+                           cae-geolocation-update-interval
+                           "cae-geolocation-setup"
+                           #'cae-geolocation-setup 0))
 
 ;; Fast startup function that doesn't require loading geo packages
 (defun cae-geolocation-init ()
