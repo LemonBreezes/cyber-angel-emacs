@@ -70,7 +70,7 @@
                                         ;`comment-region' so that I can mark the
                                         ;entire commented text with
                                         ;`mark-paragraph'.
-        comment-padding nil))         ;I prefer no spaces between comment
+        comment-padding nil))           ;I prefer no spaces between comment
                                         ;delimiters and the comment text.
 
 (after! doom-modeline
