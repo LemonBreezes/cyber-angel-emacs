@@ -20,7 +20,7 @@
 (defvar cae-ef-night-theme 'ef-trio-dark)
 (defvar cae-circadian-fixed-day-time "7:30")
 (defvar cae-circadian-fixed-night-time "19:30")
-(defvar cae-circadian-used-fixed-times t)
+(defvar cae-circadian-used-fixed-times nil)
 
 ;; Choose theme family (example, could be a defcustom)
 (defvar cae-theme-family 'modus) ; or 'ef
