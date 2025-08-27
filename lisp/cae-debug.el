@@ -47,7 +47,7 @@
 (defvar doom-escape-hook-original nil
   "A backup of the original doom-escape-hook functions.")
 
-(defun enable-doom-escape-hook-debug ()
+(defun cae-debug-enable-doom-escape-hook-debug ()
   "Enable debugging for doom-escape-hook.
 This wraps each function in doom-escape-hook with a debugging
 wrapper that prints messages before and after the function runs."
@@ -71,7 +71,7 @@ wrapper that prints messages before and after the function runs."
     (setq doom-escape-hook-debug-enabled t)
     (message "doom-escape-hook debugging enabled.")))
 
-(defun disable-doom-escape-hook-debug ()
+(defun cae-debug-disable-doom-escape-hook-debug ()
   "Disable debugging for doom-escape-hook.
 This restores the original doom-escape-hook functions."
   (interactive)
