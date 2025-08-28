@@ -2,7 +2,7 @@
 
 (defcustom cae-claude-terminal-backend 'eat
   "Backend to use for terminal operations.
-Can be \\='vterm, \\='eat, or \\='comint."
+Can be `vterm', `eat', `comint'."
   :type '(choice (const :tag "VTerm" vterm)
                  (const :tag "Eat" eat)
                  (const :tag "Comint" comint))
