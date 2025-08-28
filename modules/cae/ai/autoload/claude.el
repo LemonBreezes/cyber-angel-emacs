@@ -1,6 +1,6 @@
 ;;; cae/ai/autoload/claude.el -*- lexical-binding: t; -*-
 
-(defcustom cae-claude-terminal-backend 'eat
+(defcustom cae-claude-terminal-backend 'comint
   "Backend to use for terminal operations.
 Can be `vterm', `eat', `comint'."
   :type '(choice (const :tag "VTerm" vterm)
