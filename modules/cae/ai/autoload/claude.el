@@ -2,9 +2,10 @@
 
 (defcustom cae-claude-terminal-backend 'eat
   "Backend to use for terminal operations.
-Can be 'vterm or 'eat."
+Can be \\='vterm, \\='eat, or \\='comint."
   :type '(choice (const :tag "VTerm" vterm)
-                 (const :tag "Eat" eat))
+                 (const :tag "Eat" eat)
+                 (const :tag "Comint" comint))
   :group 'cae-claude)
 
 (defcustom cae-claude-use-opencode t
@@ -48,14 +49,16 @@ Can be 'vterm or 'eat."
                                    (if cae-claude-use-opencode "opencode" "claude")
                                    task-description))
         (vterm-send-return))
-       ((eq cae-claude-terminal-backend 'eat)
-        (require 'eat)
-        (eat-other-window buffer-name)
-        ;; Send the task description directly as a quoted argument to claude
-        (eat--send-string (format "%s \"%s\"" 
-                                  (if cae-claude-use-opencode "opencode" "claude")
-                                  task-description))
-        (eat--send-string "\C-m"))))))
+        ((eq cae-claude-terminal-backend 'eat)
+         (require 'eat)
+         (eat-other-window buffer-name)
+         ;; Send the task description directly as a quoted argument to claude
+         (eat--send-string (format "%s \"%s\"" 
+                                   (if cae-claude-use-opencode "opencode" "claude")
+                                   task-description))
+         (eat--send-string "\C-m"))
+        ((eq cae-claude-terminal-backend 'comint)
+         (cae-claude-comint buffer-name task-description))))))
 
 ;;;###autoload
 (defun cae-claude-code (&optional create-sandbox)
@@ -101,4 +104,79 @@ Otherwise, open Claude for the current project."
           (vterm-send-return))
          ((eq cae-claude-terminal-backend 'eat)
           (let ((eat-buffer-name buffer-name))
-            (eat-other-window (if cae-claude-use-opencode "opencode" "claude")))))))))
+            (eat-other-window (if cae-claude-use-opencode "opencode" "claude"))))
+         ((eq cae-claude-terminal-backend 'comint)
+          (cae-claude-comint buffer-name)))))))
+
+(defun cae-claude-comint (&optional buffer-name initial-task)
+  "Create a comint buffer for Claude interaction.
+BUFFER-NAME is the name of the buffer to create.
+INITIAL-TASK is an optional task description to send immediately."
+  (require 'comint)
+  (let* ((buffer-name (or buffer-name (format "*%s:comint*" 
+                                               (if cae-claude-use-opencode "opencode" "claude"))))
+         (buffer (get-buffer-create buffer-name))
+         (program (if cae-claude-use-opencode "opencode" "claude"))
+         (args (when initial-task (list (shell-quote-argument initial-task)))))
+    
+    (with-current-buffer buffer
+      (unless (comint-check-proc buffer)
+        (comint-mode)
+        (comint-exec buffer buffer-name program nil args)
+        (setq-local comint-process-echoes t)
+        (setq-local comint-scroll-to-bottom-on-output t)
+        (setq-local comint-scroll-show-maximum-output t)
+        
+        ;; Add keybindings for better interaction
+        (local-set-key (kbd "C-c C-c") 'comint-interrupt-subjob)
+        (local-set-key (kbd "C-c C-z") 'comint-stop-subjob)
+        (local-set-key (kbd "C-c C-d") 'comint-send-eof)
+        (local-set-key (kbd "C-c C-l") 'comint-clear-buffer)
+        
+        ;; Add a quit function similar to other shells
+        (local-set-key (kbd "C-c C-q") 'cae-claude-comint-quit)))
+    
+    (pop-to-buffer buffer)))
+
+(defun cae-claude-comint-quit ()
+  "Quit the Claude comint buffer or delete character.
+If at the end of buffer and at process mark, kill the buffer.
+Otherwise delete character forward."
+  (interactive)
+  (let ((proc (get-buffer-process (current-buffer))))
+    (if (and (eobp) proc (= (point) (marker-position (process-mark proc))))
+        (kill-buffer (current-buffer))
+      (delete-char 1))))
+
+(defun cae-claude-comint-send-region (start end)
+  "Send the region from START to END to Claude comint process."
+  (interactive "r")
+  (let ((text (buffer-substring-no-properties start end)))
+    (comint-send-string (get-buffer-process (current-buffer)) text)
+    (comint-send-string (get-buffer-process (current-buffer)) "\n")))
+
+(defun cae-claude-comint-send-buffer ()
+  "Send the entire buffer content to Claude comint process."
+  (interactive)
+  (cae-claude-comint-send-region (point-min) (point-max)))
+
+(defun cae-claude-comint-send-file (filename)
+  "Send the content of FILENAME to Claude comint process."
+  (interactive "fSend file: ")
+  (let ((content (with-temp-buffer
+                   (insert-file-contents filename)
+                   (buffer-string))))
+    (comint-send-string (get-buffer-process (current-buffer)) content)
+    (comint-send-string (get-buffer-process (current-buffer)) "\n")))
+
+(defun cae-claude-comint-toggle ()
+  "Toggle the visibility of the Claude comint buffer."
+  (interactive)
+  (let* ((buffer-name (format "*%s:comint*" 
+                               (if cae-claude-use-opencode "opencode" "claude")))
+         (buffer (get-buffer buffer-name)))
+    (if (and buffer (get-buffer-window buffer))
+        (delete-window (get-buffer-window buffer))
+      (cae-claude-comint buffer-name))))
+
+(provide 'cae-claude)
