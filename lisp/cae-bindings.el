@@ -14,6 +14,27 @@
         :desc "<leader>" :g doom-leader-alt-key #'doom-leader-map))
 (define-key key-translation-map (kbd "SPC DEL") (kbd "SPC SPC"))
 (define-key key-translation-map (kbd "<backspace> DEL") (kbd "<backspace> SPC"))
+(after! which-key
+  ;; Define a custom function to normalize prefix keys at the source
+  (defun cae-which-key-normalize-keys ()
+    "Normalize <backspace> and DEL to SPC for which-key.
+     This ensures that which-key shows the same menu for SPC, <backspace>, and DEL
+     when they're all bound to the same leader map."
+    (let ((keys (this-single-command-keys)))
+      ;; Convert the key vector to a list we can modify
+      (when (> (length keys) 0)
+        (let ((last-key (aref keys (1- (length keys)))))
+          ;; Replace backspace and delete with space character
+          (cond ((eq last-key 'backspace)
+                 (aset keys (1- (length keys)) ?\s))
+                ((eq last-key 'delete)
+                 (aset keys (1- (length keys)) ?\s))
+                ((eq last-key 127)        ; DEL character
+                 (aset keys (1- (length keys)) ?\s)))))
+      keys))
+
+  ;; Override the function that retrieves current key sequence
+  (setq which-key-this-command-keys-function #'cae-which-key-normalize-keys))
 
 ;; Remove redundant `consult-history' keybinding.
 (define-key!
