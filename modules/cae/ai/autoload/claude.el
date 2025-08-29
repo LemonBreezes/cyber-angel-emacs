@@ -83,7 +83,8 @@ Otherwise, open Claude for the current project."
    ((eq cae-claude-terminal-backend 'eat)
     (require 'eat))
    ((eq cae-claude-terminal-backend 'exwm)
-    (unless (modulep! :cae exwm)
+    (unless (and (modulep! :cae exwm)
+                 cae-exwm-enabled-p)
       (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))
   
   (if create-sandbox
