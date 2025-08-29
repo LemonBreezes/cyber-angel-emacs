@@ -121,7 +121,6 @@ Otherwise, open Claude for the current project."
             (eat-other-window (if cae-claude-use-opencode "opencode" "claude"))))
          ((eq cae-claude-terminal-backend 'exwm)
           (when (modulep! :cae exwm)
-            (require 'cae-exwm-autoloads-terminal)
             ;; Use the terminal function from exwm module
             (cae-exwm-run-terminal-in-current-workspace
              (if cae-claude-use-opencode "opencode" "claude")))
