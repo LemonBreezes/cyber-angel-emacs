@@ -1,6 +1,9 @@
 ;;; cae/ai/autoload/claude.el -*- lexical-binding: t; -*-
 
-(defcustom cae-claude-terminal-backend 'eat
+(defcustom cae-claude-terminal-backend (if (and (modulep! :cae exwm)
+                                                cae-exwm-enabled-p)
+                                           'exwm
+                                         'eat)
   "Backend to use for terminal operations.
 Can be 'vterm, 'eat, or 'exwm."
   :type '(choice (const :tag "VTerm" vterm)
