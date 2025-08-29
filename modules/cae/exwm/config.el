@@ -15,6 +15,11 @@
 (defvar cae-exwm-inhibit-title-renaming nil)
 (make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)
 
+(defcustom cae-exwm-terminal-command "kitty"
+  "Terminal command to use (e.g., 'kitty', 'xterm')."
+  :type 'string
+  :group 'cae-exwm)
+
 (when cae-exwm-enabled-p
   (defun cae-exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
