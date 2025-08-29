@@ -13,10 +13,13 @@
   "Whether EXWM is enabled.")
 
 (when cae-exwm-enabled-p
+  (defvar cae-exwm-inhibit-title-renaming nil)
+  (make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)
   (defun cae-exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
-               (not (string= "gimp" exwm-instance-name ))
+               (not (string= "gimp" exwm-instance-name))
+               (not (buffer-local-value 'cae-exwm-inhibit-auto-persp (current-buffer)))
                (and (featurep 'persp-mode)
                     (or (persp-contain-buffer-p (current-buffer) (get-current-persp))
                         (not (cl-loop for workspace in (+workspace-list)
