@@ -127,3 +127,8 @@
 (defun transient--get-layout (prefix)
   (or (get prefix 'transient--layout)
       (error "Not a transient prefix command: %s" prefix)))
+
+;; Hack around `envrc' trying to run in scratch buffers.
+(cae-defadvice! cae-hacks-ignore-buffer-without-default-directory-a (&rest _)
+  :before-while #'envrc-global-mode-enable-in-buffer
+  (buffer-local-value 'default-directory (current-buffer)))
