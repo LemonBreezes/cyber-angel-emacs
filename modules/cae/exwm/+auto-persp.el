@@ -75,6 +75,12 @@ name of the workspace that will be created for that application.")
 (defvar cae-exwm-persp-loaded-p nil
   "Whether EXWM persp has been loaded.")
 
+(defvar cae-exwm-inhibit-auto-persp nil
+  "Buffer-local variable to inhibit auto-persp for this EXWM buffer.
+When non-nil, the auto-persp system will not create a new workspace
+for this EXWM buffer, allowing it to remain in the current workspace.")
+(make-variable-buffer-local 'cae-exwm-inhibit-auto-persp)
+
 (defun exwm--disable-floating ()
   "Tile the current application unless its class is in `cae-exwm-floating-apps' or its title is in `cae-exwm-floating-titles'."
   (unless (or (not exwm--floating-frame)
@@ -128,6 +134,8 @@ nil if its not an EXWM buffer."
                      (cl-member (buffer-local-value 'exwm-title buffer)
                                 cae-exwm-floating-titles
                                 :test #'cl-equalp))))
+       ;; Check buffer-local inhibition
+       (not (buffer-local-value 'cae-exwm-inhibit-auto-persp buffer))
        (or state t)))
 
 (defun cae-exwm-persp--focus-workspace-app (&rest _)
