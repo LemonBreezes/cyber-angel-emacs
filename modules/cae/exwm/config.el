@@ -12,9 +12,10 @@
                                          (getenv "WAYLAND_DISPLAY"))))
   "Whether EXWM is enabled.")
 
+(defvar cae-exwm-inhibit-title-renaming nil)
+(make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)
+
 (when cae-exwm-enabled-p
-  (defvar cae-exwm-inhibit-title-renaming nil)
-  (make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)
   (defun cae-exwm-rename-buffer-to-title ()
     "Rename the buffer to its `exwm-title'."
     (when (and (not (string-prefix-p "sun-awt-X11-" exwm-instance-name))
