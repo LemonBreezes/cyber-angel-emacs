@@ -123,9 +123,7 @@ Otherwise, open Claude for the current project."
           (when (modulep! :cae exwm)
             ;; Use the terminal function from exwm module
             (cae-exwm-run-terminal-in-current-workspace
-             (if cae-claude-use-opencode "opencode" "claude")))
-          (unless (modulep! :cae exwm)
-            (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))))))
+             (if cae-claude-use-opencode "opencode" "claude")))))))))
 
 ;;;###autoload
 (defun cae-claude-test-exwm-integration ()
