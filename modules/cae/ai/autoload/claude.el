@@ -62,7 +62,6 @@ Can be 'vterm, 'eat, or 'exwm."
         (eat--send-string "\C-m"))
        ((eq cae-claude-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
-          (require 'cae-exwm-autoloads-terminal)
           ;; Use the terminal function from exwm module
           (cae-exwm-run-terminal-in-current-workspace
            (format "%s \"%s\""
