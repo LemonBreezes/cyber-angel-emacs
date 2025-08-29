@@ -2,9 +2,10 @@
 
 (defcustom cae-claude-terminal-backend 'eat
   "Backend to use for terminal operations.
-Can be 'vterm or 'eat."
+Can be 'vterm, 'eat, or 'exwm."
   :type '(choice (const :tag "VTerm" vterm)
-                 (const :tag "Eat" eat))
+          (const :tag "Eat" eat)
+          (const :tag "EXWM Terminal" exwm))
   :group 'cae-claude)
 
 (defcustom cae-claude-use-opencode t
@@ -55,7 +56,17 @@ Can be 'vterm or 'eat."
         (eat--send-string (format "%s \"%s\"" 
                                   (if cae-claude-use-opencode "opencode" "claude")
                                   task-description))
-        (eat--send-string "\C-m"))))))
+        (eat--send-string "\C-m"))
+       ((eq cae-claude-terminal-backend 'exwm)
+        (when (modulep! :cae exwm)
+          (require 'cae-exwm-autoloads-terminal)
+          ;; Use the terminal function from exwm module
+          (cae-exwm-run-terminal-in-current-workspace
+           (format "%s \"%s\""
+                   (if cae-claude-use-opencode "opencode" "claude")
+                   task-description)))
+        (unless (modulep! :cae exwm)
+          (error "EXWM module is not enabled. Please enable :cae exwm in your config.")))))))
 
 ;;;###autoload
 (defun cae-claude-code (&optional create-sandbox)
@@ -70,7 +81,10 @@ Otherwise, open Claude for the current project."
    ((eq cae-claude-terminal-backend 'vterm)
     (require 'vterm))
    ((eq cae-claude-terminal-backend 'eat)
-    (require 'eat)))
+    (require 'eat))
+   ((eq cae-claude-terminal-backend 'exwm)
+    (unless (modulep! :cae exwm)
+      (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))
   
   (if create-sandbox
       (let* ((sandbox-root "~/src/claude-sandbox")
@@ -101,4 +115,24 @@ Otherwise, open Claude for the current project."
           (vterm-send-return))
          ((eq cae-claude-terminal-backend 'eat)
           (let ((eat-buffer-name buffer-name))
-            (eat-other-window (if cae-claude-use-opencode "opencode" "claude")))))))))
+            (eat-other-window (if cae-claude-use-opencode "opencode" "claude"))))
+         ((eq cae-claude-terminal-backend 'exwm)
+          (when (modulep! :cae exwm)
+            (require 'cae-exwm-autoloads-terminal)
+            ;; Use the terminal function from exwm module
+            (cae-exwm-run-terminal-in-current-workspace
+             (if cae-claude-use-opencode "opencode" "claude")))
+          (unless (modulep! :cae exwm)
+            (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))))))
+
+;;;###autoload
+(defun cae-claude-test-exwm-integration ()
+  "Test the EXWM terminal integration for Claude/opencode."
+  (interactive)
+  (when (eq cae-claude-terminal-backend 'exwm)
+    (if (modulep! :cae exwm)
+        (progn
+          (message "Testing EXWM terminal integration...")
+          (require 'cae-exwm-autoloads-terminal)
+          (cae-exwm-run-terminal-in-current-workspace "echo 'EXWM terminal integration test successful'"))
+      (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))
