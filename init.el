@@ -74,7 +74,7 @@
          (treemacs +lsp)
          modeline
          smooth-scroll
-         unicode
+         ;;unicode
          zen
 
          :editor
