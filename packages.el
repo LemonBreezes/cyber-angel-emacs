@@ -19,7 +19,8 @@
   (package! consult-dash :recipe (:host github :repo "emacsmirror/consult-dash")))
 (when (modulep! :term eshell)
   (package! shrink-path :recipe (:host github :repo "emacsmirror/shrink-path")))
-(package! mixed-pitch :recipe (:host github :repo "emacsmirror/mixed-pitch"))
+(when (modulep! :ui zen)
+  (package! mixed-pitch :recipe (:host github :repo "emacsmirror/mixed-pitch")))
 (package! gcmh :recipe (:host github :repo "emacsmirror/gcmh"))
 
 ;; PRs that haven't been merged yet.
