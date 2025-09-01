@@ -50,28 +50,3 @@
       (delete-file (concat (file-name-sans-extension temp-tex) ".aux")))
     (unless (executable-find "pdflatex")
       (error "pdflatex command not found"))))
-
-;;;###autoload
-(defun cae-handwritten-pdf-ghostscript ()
-  "Create handwritten PDF of current buffer using Ghostscript with custom font."
-  (interactive)
-  (let* ((text (buffer-string))
-         (temp-ps (make-temp-file "/tmp/emacs-handwritten-" nil ".ps"))
-         (temp-pdf (concat (file-name-sans-extension temp-ps) ".pdf")))
-    (with-temp-file temp-ps
-      (insert "%!PS-Adobe-3.0\n")
-      (insert "%%Creator: Emacs\n")
-      (insert "%%Pages: 1\n")
-      (insert "%%EndComments\n")
-      (insert "<< /PageSize [612 792] >> setpagedevice\n")
-      (insert "/Helvetica findfont 16 scalefont setfont\n")
-      (insert "72 700 moveto\n")
-      (insert (format "(%s) show\n" (replace-regexp-in-string "[()]" "\\\\\\&" text)))
-      (insert "showpage\n")
-      (insert "%%EOF\n"))
-    (when (executable-find "gs")
-      (shell-command (format "gs -q -dNOPAUSE -dBATCH -sOutputFile=%s -sDEVICE=pdfwrite %s -c quit" temp-pdf temp-ps))
-      (find-file temp-pdf)
-      (delete-file temp-ps))
-    (unless (executable-find "gs")
-      (error "Ghostscript 'gs' command not found"))))
