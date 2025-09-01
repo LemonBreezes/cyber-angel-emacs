@@ -87,6 +87,9 @@
 (after! pdf-misc
   (setq pdf-misc-print-program-executable (executable-find "lpr")))
 
+;; Override lpr-print-region to use our PDF function
+(advice-add 'lpr-print-region :override #'cae-lpr-print-region-to-pdf)
+
 ;; Was reading this
 ;; https://github.com/link0ff/emacs-init/blob/1fc141e20092cc357f2c6021626635e8ac067b8c/emacs.custom.el.
 (setq delete-by-moving-to-trash t
