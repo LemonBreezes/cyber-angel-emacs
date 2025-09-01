@@ -26,10 +26,11 @@
       (run-with-timer 0.5 nil (lambda (input)
                                 (let ((project-name (or (projectile-project-name) "default"))
                                       (terminal-class (file-name-nondirectory cae-exwm-terminal-command)))
-                                  (when-let ((buffer (get-buffer (format "*%s:%s*" terminal-class project-name))))
+                                  (when-let* ((buffer (get-buffer (format "*%s:%s*" terminal-class project-name)))
+                                             (window (get-buffer-window buffer)))
                                     (with-current-buffer buffer
                                       ;; Ensure the window is focused
-                                      (select-window (get-buffer-window buffer))
+                                      (select-window window)
                                       ;; Send each character with proper delay and special character handling
                                       (dolist (char (string-to-list input))
                                         (exwm-input--fake-key char)
