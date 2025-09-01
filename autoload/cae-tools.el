@@ -24,36 +24,6 @@
                     (kill-buffer))))))
 
 ;;;###autoload
-(defun cae-handwritten-pdf-imagemagick ()
-  "Create handwritten PDF of current buffer using ImageMagick."
-  (interactive)
-  (let* ((text (buffer-string))
-         (temp-txt (make-temp-file "/tmp/emacs-handwritten-" nil ".txt"))
-         (temp-pdf (concat (file-name-sans-extension temp-txt) ".pdf"))
-         (magick-cmd (if (executable-find "magick") "magick" "convert"))
-;; Get just the font family name, not the full path
-         (font-name (or (car (seq-filter (lambda (f) (string-match-p "comic\\|sans\\|handwriting" f)) 
-                                        (split-string (shell-command-to-string "fc-list :family") "\n")))
-                       "DejaVu-Sans"))
-         ;; Clean up font name to get just the family
-         (clean-font (if (string-match "^\\([^:]+\\)" font-name)
-                         (match-string 1 font-name)
-                       "DejaVu-Sans")))
-    (with-temp-file temp-txt
-      (insert text))
-    (when (executable-find magick-cmd)
-      (let ((cmd (format "%s -font \"%s\" -pointsize 16 -fill black -size 800x600 caption:@%s %s" 
-                         magick-cmd clean-font temp-txt temp-pdf)))
-        (message "Running: %s" cmd)
-        (shell-command cmd))
-      (if (file-exists-p temp-pdf)
-          (find-file temp-pdf)
-        (error "PDF creation failed"))
-      (delete-file temp-txt))
-    (unless (executable-find magick-cmd)
-      (error "ImageMagick 'magick' or 'convert' command not found"))))
-
-;;;###autoload
 (defun cae-handwritten-pdf-latex ()
   "Create handwritten PDF of current buffer using LaTeX with calligra font."
   (interactive)
