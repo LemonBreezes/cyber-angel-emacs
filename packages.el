@@ -10,7 +10,8 @@
 (package! mu4e :built-in t)
 
 ;; Avoid forges that can get stuck.
-(package! graphql-ts-mode :recipe (:host github :repo "emacsmirror/graphql-ts-mode"))
+(when (modulep! :lang graphql)
+  (package! graphql-ts-mode :recipe (:host github :repo "emacsmirror/graphql-ts-mode")))
 (package! fennel-mode :recipe (:host github :repo "emacsmirror/fennel-mode"))
 (package! consult-dash :recipe (:host github :repo "emacsmirror/consult-dash"))
 (package! shrink-path :recipe (:host github :repo "emacsmirror/shrink-path"))
