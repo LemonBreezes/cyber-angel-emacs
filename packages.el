@@ -9,6 +9,13 @@
                    mu4e-alert)
 (package! mu4e :built-in t)
 
+;; Avoid forges that can get stuck.
+(package! graphql-ts-mode :recipe (:host github :repo "emacsmirror/graphql-ts-mode"))
+(package! fennel-mode :recipe (:host github :repo "emacsmirror/fennel-mode"))
+(package! consult-dash :recipe (:host github :repo "emacsmirror/consult-dash"))
+(package! shrink-path :recipe (:host github :repo "emacsmirror/shrink-path"))
+(package! mixed-pitch :recipe (:host github :repo "emacsmirror/mixed-pitch"))
+(package! gcmh :recipe (:host github :repo "emacsmirror/gcmh"))
 
 ;; PRs that haven't been merged yet.
 (when (modulep! :editor lispy)
