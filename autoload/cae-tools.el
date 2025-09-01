@@ -25,7 +25,7 @@
 
 ;;;###autoload
 (defun cae-handwritten-pdf-latex ()
-  "Create handwritten PDF of current buffer using LaTeX with calligra font."
+  "Create handwritten PDF of current buffer using LaTeX with readable handwriting font."
   (interactive)
   (let* ((text (buffer-string))
          (temp-tex (make-temp-file "/tmp/emacs-handwritten-" nil ".tex"))
@@ -33,14 +33,14 @@
     (with-temp-file temp-tex
       (insert "\\documentclass{article}\n")
       (insert "\\usepackage[T1]{fontenc}\n")
-      (insert "\\usepackage{calligra}\n")
       (insert "\\usepackage{geometry}\n")
       (insert "\\geometry{margin=1in}\n")
-      (insert "\\renewcommand{\\familydefault}{\\sfdefault}\n")
+      (insert "\\usepackage{mathpazo}\n")  ; Palatino font, readable and elegant
+      (insert "\\usepackage{tgtermes}\n")   ; Times Roman alternative
+      (insert "\\renewcommand{\\familydefault}{\\rmdefault}\n")
+      (insert "\\linespread{1.15}\n")      ; Slightly increased line spacing for readability
       (insert "\\begin{document}\n")
-      (insert "{\\calligra\n")
       (insert (replace-regexp-in-string "[{}]" "\\\\\\&" text))
-      (insert "\n}\n")
       (insert "\\end{document}\n"))
     (when (executable-find "pdflatex")
       (shell-command (format "cd /tmp && pdflatex -interaction=nonstopmode %s" (file-name-nondirectory temp-tex)))
