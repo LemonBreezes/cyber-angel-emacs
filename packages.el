@@ -12,9 +12,13 @@
 ;; Avoid forges that can get stuck.
 (when (modulep! :lang graphql)
   (package! graphql-ts-mode :recipe (:host github :repo "emacsmirror/graphql-ts-mode")))
-(package! fennel-mode :recipe (:host github :repo "emacsmirror/fennel-mode"))
-(package! consult-dash :recipe (:host github :repo "emacsmirror/consult-dash"))
-(package! shrink-path :recipe (:host github :repo "emacsmirror/shrink-path"))
+(when (modulep! :lang lua +fennel)
+  (package! fennel-mode :recipe (:host github :repo "emacsmirror/fennel-mode")))
+(when (and (modulep! :tools lookup +docsets)
+           (modulep! :completion vertico))
+  (package! consult-dash :recipe (:host github :repo "emacsmirror/consult-dash")))
+(when (modulep! :term eshell)
+  (package! shrink-path :recipe (:host github :repo "emacsmirror/shrink-path")))
 (package! mixed-pitch :recipe (:host github :repo "emacsmirror/mixed-pitch"))
 (package! gcmh :recipe (:host github :repo "emacsmirror/gcmh"))
 
