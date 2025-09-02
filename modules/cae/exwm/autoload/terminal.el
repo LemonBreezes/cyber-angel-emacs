@@ -7,37 +7,60 @@
   "Run terminal in current workspace without auto-persp.
   Renames the buffer to *terminal:project-name* where project-name is
   the current projectile project name or 'default' if no project.
-  When called non-interactively, INITIAL-INPUT is sent to the terminal."
+  When called non-interactively, INITIAL-INPUT is sent to the terminal.
+  If a terminal buffer for the current project already exists, focus it instead."
   (interactive)
   (unless cae-exwm-terminal-command
     (error "cae-exwm-terminal-command is not defined. Please configure it in your exwm config."))
   (require 'projectile)
-  (when (one-window-p)
-    (split-window-right)
-    (other-window 1))
-  (let ((process-name (file-name-nondirectory cae-exwm-terminal-command)))
-    (start-process process-name nil cae-exwm-terminal-command)
+  (let* ((terminal-class (file-name-nondirectory cae-exwm-terminal-command))
+         (project-name (or (projectile-project-name) "default"))
+         (buffer-name (format "*%s:%s*" terminal-class project-name))
+         (existing-buffer (get-buffer buffer-name)))
     
-    ;; Set up hook to inhibit auto-persp when terminal buffer appears
-    (add-hook 'exwm-manage-finish-hook #'cae-exwm-inhibit-terminal-auto-persp)
-    
-    ;; If initial-input is provided, send it after a delay
-    (when initial-input
-      (run-with-timer 0.5 nil (lambda (input)
-                                (let ((project-name (or (projectile-project-name) "default"))
-                                      (terminal-class (file-name-nondirectory cae-exwm-terminal-command)))
-                                  (when-let* ((buffer (get-buffer (format "*%s:%s*" terminal-class project-name)))
-                                             (window (get-buffer-window buffer)))
-                                    (with-current-buffer buffer
-                                      ;; Ensure the window is focused
-                                      (select-window window)
-                                      ;; Send each character with proper delay and special character handling
-                                      (dolist (char (string-to-list input))
-                                        (exwm-input--fake-key char)
-                                        (sit-for 0.01))
-                                      ;; Send Return at the end
-                                      (exwm-input--fake-key 'return)))))
-                      initial-input))))
+    (if existing-buffer
+        ;; Buffer already exists, focus it
+        (progn
+          (if-let ((window (get-buffer-window existing-buffer)))
+              ;; Buffer is visible, focus its window
+              (select-window window)
+            ;; Buffer exists but not visible, display it
+            (switch-to-buffer-other-window existing-buffer))
+          ;; If initial-input is provided, send it to the existing buffer
+          (when initial-input
+            (with-current-buffer existing-buffer
+              ;; Send each character with proper delay and special character handling
+              (dolist (char (string-to-list initial-input))
+                (exwm-input--fake-key char)
+                (sit-for 0.01))
+              ;; Send Return at the end
+              (exwm-input--fake-key 'return))))
+      
+      ;; No existing buffer, create new terminal
+      (when (one-window-p)
+        (split-window-right)
+        (other-window 1))
+      (let ((process-name terminal-class))
+        (start-process process-name nil cae-exwm-terminal-command)
+        
+        ;; Set up hook to inhibit auto-persp when terminal buffer appears
+        (add-hook 'exwm-manage-finish-hook #'cae-exwm-inhibit-terminal-auto-persp)
+        
+        ;; If initial-input is provided, send it after a delay
+        (when initial-input
+          (run-with-timer 0.5 nil (lambda (input)
+                                    (when-let* ((buffer (get-buffer buffer-name))
+                                               (window (get-buffer-window buffer)))
+                                      (with-current-buffer buffer
+                                        ;; Ensure the window is focused
+                                        (select-window window)
+                                        ;; Send each character with proper delay and special character handling
+                                        (dolist (char (string-to-list input))
+                                          (exwm-input--fake-key char)
+                                          (sit-for 0.01))
+                                        ;; Send Return at the end
+                                        (exwm-input--fake-key 'return))))
+                        initial-input))))))
 
 ;;;###autoload
 (defun cae-exwm-inhibit-terminal-auto-persp ()

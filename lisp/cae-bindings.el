@@ -131,7 +131,7 @@
       "C-S-h" #'embark-bindings
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
-        "<f7>" #'cae-claude-code
+        "<f7>" #'cae-ai-assistant-code
         "<f6>" #'aidermacs-transient-menu
         "<f12>" #'redraw-display)
       "C-<f1>" #'try
