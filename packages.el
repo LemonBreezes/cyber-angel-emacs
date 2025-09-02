@@ -9,7 +9,7 @@
                    mu4e-alert)
 (package! mu4e :built-in t)
 
-;; Avoid forges that can get stuck.
+;; Avoid forges that can give me problems.
 (when (modulep! :lang graphql)
   (package! graphql-ts-mode :recipe (:host github :repo "emacsmirror/graphql-ts-mode")))
 (when (modulep! :lang lua +fennel)
