@@ -8,7 +8,9 @@
                                          (getenv "I3SOCK")
                                          (getenv "KDE_FULL_SESSION")
                                          (getenv "GNOME_DESKTOP_SESSION_ID")
-                                         (getenv "XDG_CURRENT_DESKTOP")
+                                         (and (getenv "XDG_CURRENT_DESKTOP")
+                                              (not (string= (getenv "XDG_CURRENT_DESKTOP")
+                                                            "none+exwm")))
                                          (getenv "WAYLAND_DISPLAY"))))
   "Whether EXWM is enabled.")
 
