@@ -114,5 +114,5 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen    
   (when (derived-mode-p 'exwm-mode)
     (list first-char)))
 
-(unless (getenv "STARTX_RAN")
+(unless (getenv "STARTX_COMPLETED")
   (load! "xinit" cae-multi-secrets-dir))
