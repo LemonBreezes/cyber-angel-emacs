@@ -4,7 +4,7 @@
 (require 'json)
 
 ;;;###autoload
-(defun cae-geolocation-setup (&optional verbosity)
+(cl-defun cae-geolocation-setup (&optional verbosity)
   "Set up geolocation using BeaconDB API and integrate with solar calendar asynchronously.
   Updates calendar-latitude and calendar-longitude and triggers circadian theme updates.
 
@@ -12,6 +12,9 @@
   0 - Silent operation, errors only if not network-related (default for non-interactive)
   1 - Basic confirmation (default for interactive)"
   (interactive (list 1))
+
+  (when (getenv "WSL_DISTRO_NAME")
+    (cl-return-from cae-geolocation-setup))
 
   ;; Set default verbosity if not provided
   (unless verbosity
