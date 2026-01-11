@@ -119,9 +119,8 @@ Otherwise, open the AI assistant for the current project."
         (let ((buffer-name (format "*%s:%s*" app project-root)))
           (when (get-buffer buffer-name)
             (setq existing-buffer (get-buffer buffer-name))
-            (setq selected-app app)
-            (return))))))
-
+            (setq selected-app app))))))
+    
     (if existing-buffer
         ;; Found existing buffer, focus it
         (if-let ((window (get-buffer-window existing-buffer)))
