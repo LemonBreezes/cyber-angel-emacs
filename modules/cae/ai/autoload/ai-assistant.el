@@ -167,7 +167,7 @@ Otherwise, open the AI assistant for the current project."
         (vterm-send-return))
        ((eq cae-ai-assistant-terminal-backend 'eat)
         (let ((eat-buffer-name buffer-name))
-          (ignore eat-buffer-name)
+          (ignore eat-buffer-name)      ; Silence byte-compiler.
           (eat-other-window app-name)))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
