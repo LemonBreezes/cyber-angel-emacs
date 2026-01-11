@@ -52,7 +52,11 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
     ;; Create an empty .projectile file to mark it as a project root
     (with-temp-buffer
       (write-file (expand-file-name ".projectile" sandbox-dir)))
-    (let ((default-directory sandbox-dir))
+    ;; Unset ANTHROPIC_API_KEY for claude code to use its own token
+    (let ((process-environment (if (string= app-name "claude")
+                                   (cons "ANTHROPIC_API_KEY=" process-environment)
+                                 process-environment))
+          (default-directory sandbox-dir))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (require 'vterm)
@@ -92,7 +96,7 @@ Otherwise, open the AI assistant for the current project."
     (unless (and (modulep! :cae exwm)
                  cae-exwm-enabled-p)
       (error "EXWM module is not enabled. Please enable :cae exwm in your config."))))
-  
+
   ;; First check if there's already an AI assistant buffer for this project
   (let* ((project-root (doom-project-root))
          (app-choices '("claude" "opencode" "codex" "gemini" "aider"))
@@ -151,7 +155,11 @@ Otherwise, open the AI assistant for the current project."
                           (format "*%s:%s*" terminal-class (or (projectile-project-name) "default")))
                          (t
                           (format "*%s:%s*" app-name project-root))))
-           (default-directory (or project-root default-directory)))
+           (default-directory (or project-root default-directory))
+           ;; Unset ANTHROPIC_API_KEY only for claude code
+           (process-environment (if (string= app-name "claude")
+                                    (cons "ANTHROPIC_API_KEY=" process-environment)
+                                  process-environment)))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (vterm-other-window buffer-name)
@@ -159,6 +167,7 @@ Otherwise, open the AI assistant for the current project."
         (vterm-send-return))
        ((eq cae-ai-assistant-terminal-backend 'eat)
         (let ((eat-buffer-name buffer-name))
+          (ignore eat-buffer-name)
           (eat-other-window app-name)))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
