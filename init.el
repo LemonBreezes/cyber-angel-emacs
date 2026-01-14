@@ -129,6 +129,7 @@
          (haskell +lsp +tree-sitter)
          (graphql +lsp +tree-sitter)
          (yaml +lsp +tree-sitter)
+         (gdscript +lsp +tree-sitter)
 
          :os
          (:if IS-MAC macos)
