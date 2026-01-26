@@ -5,7 +5,8 @@
 (use-package! org-rich-yank
   :defer t :init
   (map! :map org-mode-map
-        "C-M-y" #'cae-org-rich-yank))
+        "C-M-y" #'cae-org-rich-yank
+        "C-c C-'" #'cae-org-yank-into-new-block))
 
 ;; TODO Check if this is still necessary
 (defvar +org-exit-src-code-hook nil
@@ -34,8 +35,7 @@
 (after! org
   (map! :map org-mode-map
         "]" #'cae-org-insert-checkbox-or-bracket
-        "C-c C-v" #'cae-org-babel-cheatsheet
-        "C-c C-'" #'cae-org-yank-into-new-block))
+        "C-c C-v" #'cae-org-babel-cheatsheet))
 
 (after! org
   (map! :map org-mode-map
