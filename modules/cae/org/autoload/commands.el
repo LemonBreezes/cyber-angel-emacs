@@ -108,3 +108,24 @@
                 :keymap 'org-babel-map
                 :transient t
                 :flatten t))
+
+;;;###autoload
+(defun cae-org-yank-into-new-block ()
+  (interactive)
+  (let ((begin (point))
+        done)
+    (unwind-protect
+        (progn
+          (end-of-line)
+          (yank)
+          (push-mark begin)
+          (setq mark-active t)
+          (call-interactively #'org-insert-structure-template)
+          (setq done t)
+          (deactivate-mark)
+          (let ((case-fold-search t))
+            (re-search-forward (rx bol "#+END_")))
+          (forward-line 1))
+      (unless done
+        (deactivate-mark)
+        (delete-region begin (point))))))
