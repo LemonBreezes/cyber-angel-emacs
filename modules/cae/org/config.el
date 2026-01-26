@@ -8,7 +8,6 @@
         "C-M-y" #'cae-org-rich-yank
         "C-c C-'" #'cae-org-yank-into-new-block))
 
-;; TODO Check if this is still necessary
 (defvar +org-exit-src-code-hook nil
   "Hook run just before exiting a org source block buffer.")
 (cae-advice-add #'org-edit-src-exit :before #'cae-org-run-exit-src-code-hooks)
