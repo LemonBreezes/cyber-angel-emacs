@@ -34,7 +34,8 @@
 (after! org
   (map! :map org-mode-map
         "]" #'cae-org-insert-checkbox-or-bracket
-        "C-c C-v" #'cae-org-babel-cheatsheet))
+        "C-c C-v" #'cae-org-babel-cheatsheet
+        "C-c C-'" #'cae-org-yank-into-new-block))
 
 (after! org
   (map! :map org-mode-map
