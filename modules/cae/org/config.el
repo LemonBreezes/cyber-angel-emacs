@@ -44,3 +44,4 @@
 (when (modulep! +pretty)
   (load! "+pretty"))
 (load! "+tecosaur")
+(load! "+latex")
