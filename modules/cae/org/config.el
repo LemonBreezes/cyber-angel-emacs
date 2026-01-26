@@ -5,8 +5,7 @@
 (use-package! org-rich-yank
   :defer t :init
   (map! :map org-mode-map
-        "C-M-y" #'cae-org-rich-yank
-        "C-c C-'" #'cae-org-yank-into-new-block))
+        "C-M-y" #'cae-org-rich-yank))
 
 ;; TODO Check if this is still necessary
 (defvar +org-exit-src-code-hook nil
