@@ -19,7 +19,7 @@
         org-archive-location (concat org-directory ".archive/%s::")
         org-hide-emphasis-markers t
         org-special-ctrl-k t
-        org-highlight-latex-and-related '(native latex script entities)
+        org-highlight-latex-and-related nil
         org-priority-highest ?A
         org-priority-lowest ?C
         ;; All my computers use 64-bit processors
