@@ -42,6 +42,8 @@
         :localleader
         "l f" #'cae-org-insert-file-link))
 
+(add-hook '+org-exit-src-code-hook #'ws-butler-trim-eob-lines)
+
 (when (modulep! +pretty)
   (load! "+pretty"))
 (load! "+tecosaur")
