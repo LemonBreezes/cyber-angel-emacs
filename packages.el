@@ -1,4 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
+
 (setq compilation-safety 0)
 (setq native-comp-speed 3)
 
