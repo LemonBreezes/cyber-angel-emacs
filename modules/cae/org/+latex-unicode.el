@@ -424,8 +424,8 @@
 
 (setq lattie-unicode--deprecated-char-alist
       '(
-        (?→ ?)
-        (?⟶ ?)
-        (?↠ ?)
-        (?↪ ?)
+        (? ?→)
+        (? ?⟶)
+        (? ?↠)
+        (? ?↪)
         ))
