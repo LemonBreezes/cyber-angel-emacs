@@ -305,10 +305,11 @@
    ;; (?⟶ "\\longrightarrow" "-->")        ; ⟶
    (?→ "\\rightarrow" "->")             ; →
    (?⟶ "\\longrightarrow" "-->")        ; ⟶
-   (#Xe161 "\\Rightarrow" "=>")
+   (?⇒ "\\Rightarrow" "=>")
+   (?⟹ "\\Longrightarrow" "==>")
    (? "\\twoheadrightarrow" "->>")     ; ↠
    (? "\\rightarrowtail" ">->")        ; ↪
-   (#Xe137 "\\leftarrow" "<-")
+   (?← "\\leftarrow" "<-")
    (?⟼ "\\mapsto" "|->")
    )
  '(("geq" "\\geq")
