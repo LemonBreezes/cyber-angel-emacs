@@ -25,5 +25,5 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
 
 (use-package! lattie-unicode
-  :defer t :after-call org-cdlatex-mode
+  :defer t
   (load! "+latex-unicode"))
