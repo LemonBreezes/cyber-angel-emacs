@@ -311,8 +311,8 @@
    (? "\\rightarrowtail" ">->")        ; ↪
    (?← "\\leftarrow" "<-")
    (?⟼ "\\mapsto" "|->")
-   (?⋀ "\\bigwedge" "^^")
-   (?⋁ "\\bigvee" "||")
+   (?⋀ "\\bigwedge" "band")
+   (?⋁ "\\bigvee" "bor")
    )
  '(("geq" "\\geq")
    ("sk" "\\Sk")
