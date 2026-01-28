@@ -311,7 +311,7 @@
    (? "\\rightarrowtail" ">->")        ; ↪
    (?← "\\leftarrow" "<-")
    (?⟼ "\\mapsto" "|->")
-   (?⋀ "\\bigwedge" "/\\")
+   (?⋀ "\\bigwedge" "/\\\\")
    (?⋁ "\\bigvee" "\\//")
    )
  '(("geq" "\\geq")
