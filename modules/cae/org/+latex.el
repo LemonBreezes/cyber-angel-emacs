@@ -23,3 +23,70 @@
         '("latexmk -pdflatex='lualatex -shell-escape -interaction nonstopmode' -pdf -f  %f")
         org-preview-latex-default-process 'dvisvgm)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
+
+(use-package! lattie
+  :defer t :init
+  (add-transient-hook! 'org-cdlatex-mode-hook
+    (map! :map org-cdlatex-mode-map
+          "]" #'lattie-close-bracket
+          "[" #'lattie-open-bracket
+          "(" #'lattie-open-paren
+          "j" #'special-lattie-down
+          ;; "-" #'special-lattie-punctuation
+          "-" #'lattie-self-insert-command
+          "SPC" #'special-lattie-space
+          "RET" #'special-lattie-newline-and-indent
+          "^" #'special-lattie-underscore-caret
+          [remap org-cdlatex-underscore-caret] #'special-lattie-underscore-caret
+          "_" #'special-lattie-underscore-caret
+          [return] #'special-lattie-newline-and-indent
+          "." #'special-lattie-space
+          "," #'special-lattie-space
+          "+" #'lattie-insert-dollar
+          "k" #'special-lattie-up
+          "h" #'special-lattie-backward
+          "l" #'special-lattie-forward
+          "f" #'special-lattie-flow
+          "e" #'special-lattie-toggle-latex-fragment
+          "$" #'special-lattie-dollar
+          "{" #'special-lattie-open-brace
+          "}" #'special-lattie-close-brace
+          ;; "c" #'special-lattie-compile
+          "`" #'special-lattie-grave
+          "'" #'special-lattie-grave
+          "0" #'special-lattie-digit-or-bol
+          "1" #'special-lattie-digit
+          "^" #'special-lattie-back-to-heading
+          ;; "^" #'org-cdlatex-underscore-caret
+          "2" #'special-lattie-digit
+          "3" #'special-lattie-digit
+          "4" #'special-lattie-digit
+          "5" #'special-lattie-digit
+          "6" #'special-lattie-digit
+          "7" #'special-lattie-digit
+          "8" #'special-lattie-digit
+          "9" #'special-lattie-digit
+          ;; "=" #'special-lattie-equals
+          ;; "/" #'special-lattie-slash
+          "DEL" #'lattie-delete-backward
+          [remap backward-kill-word] #'backward-kill-word
+          [remap org-self-insert-command] #'lattie-self-insert-command
+          [remap self-insert-command] #'lattie-self-insert-command
+          ";" #'lattie-self-insert-command
+          "?" #'lattie-self-insert-command
+          "=" #'lattie-self-insert-command
+          ")" #'lattie-self-insert-command
+          [tab] #'special-lattie-tab
+          "C-c C-k" #'lattie-kill-note-or-show-branches
+          ;; "C-c C-t" #'lattie-org-todo
+          :map evil-org-mode-map
+          :i [return] #'special-lattie-newline-and-indent
+          :i "DEL" #'lattie-delete-backward
+          :i "RET" #'special-lattie-newline-and-indent)
+
+    ;;(add-hook 'evil-org-mode-hook
+    ;;          (defun lattie--remap-return ()
+    ;;            (map! :map evil-org-mode-map
+    ;;                  :i [return] #'special-lattie-newline-and-indent
+    ;;                  :i "RET" #'special-lattie-newline-and-indent)))
+    ))
