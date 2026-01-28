@@ -24,6 +24,10 @@
         org-preview-latex-default-process 'dvisvgm)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
 
-(use-package! lattie-unicode
-  :defer t
-  (load! "+latex-unicode"))
+(defvar cae-org-latex-unicode-setup-timer nil)
+(setq cae-org-latex-unicode-setup-timer
+      (run-with-idle-timer 5 nil (lambda () (load! "+latex-unicode"))))
+(after! org
+  (when (memq cae-org-latex-unicode-setup-timer timer-idle-list)
+    (load! "+latex-unicode")
+    (cancel-timer cae-org-latex-unicode-setup-timer)))
