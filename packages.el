@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
-(message "hello!")
+(backtrace)
 
 (disable-packages! flyspell
                    ccls                 ; I use clangd.
