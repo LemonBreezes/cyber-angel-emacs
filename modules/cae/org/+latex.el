@@ -26,4 +26,4 @@
 
 (use-package! lattie-unicode
   :after org
-  (load! "+lattie-unicode"))
+  (load! "+latex-unicode"))
