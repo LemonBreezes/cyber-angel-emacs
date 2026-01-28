@@ -79,10 +79,11 @@
           [tab] #'special-lattie-tab
           "C-c C-k" #'lattie-kill-note-or-show-branches
           ;; "C-c C-t" #'lattie-org-todo
-          :map evil-org-mode-map
-          :i [return] #'special-lattie-newline-and-indent
-          :i "DEL" #'lattie-delete-backward
-          :i "RET" #'special-lattie-newline-and-indent)
+          ;;:map evil-org-mode-map
+          ;;:i [return] #'special-lattie-newline-and-indent
+          ;;:i "DEL" #'lattie-delete-backward
+          ;;:i "RET" #'special-lattie-newline-and-indent
+          )
 
     ;; Commented because I have since created other Org return DWIM
     ;; functionality that is not synced up with the Lattie codebase.
