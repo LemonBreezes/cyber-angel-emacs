@@ -26,5 +26,4 @@
 
 (use-package! lattie-unicode
   :after org
-  :defer-incrementally t :config
   (load! "+lattie-unicode"))
