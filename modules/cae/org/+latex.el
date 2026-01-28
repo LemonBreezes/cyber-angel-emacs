@@ -25,4 +25,4 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
 
 (after! org
-    (load! "+latex-unicode"))
+  (load! "+latex-unicode"))
