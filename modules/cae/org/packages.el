@@ -3,6 +3,8 @@
 
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 
+(package! lattie :recipe (:host github :repo "LemonBreezes/lattie"))
+
 (package! org-rich-yank)
 (package! org-inline-pdf)
 (package! language-detection)
@@ -12,7 +14,6 @@
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
 (package! org-view-mode)
-(package! lattie :recipe (:host github :repo "LemonBreezes/lattie"))
 
 (when (modulep! +pretty)
   (package! org-modern))
