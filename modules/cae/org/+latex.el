@@ -28,7 +28,7 @@
   :defer t :init
   (add-transient-hook! 'org-cdlatex-mode-hook
     (require 'lattie)
-    (load! "+lattie-unicode")
+    (load! "+latex-unicode")
     (map! :map org-cdlatex-mode-map
           "]" #'lattie-close-bracket
           "[" #'lattie-open-bracket
