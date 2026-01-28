@@ -110,20 +110,12 @@ Returns non-nil if changes are detected."
             (cae-multi--handle-git-success repo-dir step-name output-buffer verb-level next-step finalize)))))))
 
 ;;;###autoload
-(defun cae-multi--push-changes (file buf-name)
-  "Push changes for FILE using a temporary buffer BUF-NAME.
-Sets the buffer's default directory and file-name, enables auto-push,
-calls `gac--after-save' and then resets the buffer-local values."
-  (let ((buf (get-buffer-create buf-name)))
-    (setf (buffer-local-value 'default-directory buf)
-          (file-name-directory file)
-          (buffer-local-value 'buffer-file-name buf)
-          file
-          (buffer-local-value 'gac-automatically-push-p buf)
-          t)
-    (gac--after-save buf)
-    (setf (buffer-local-value 'default-directory buf) nil
-          (buffer-local-value 'buffer-file-name buf) nil)))
+(defun cae-multi--push-changes (file _buf-name)
+  (with-temp-buffer
+    (setq-local default-directory (file-name-directory file))
+    (setq-local buffer-file-name file)
+    (setq-local gac-automatically-push-p t)
+    (gac--after-save (current-buffer))))
 
 (defun cae-multi--run-git-process (repo-dir step-name cmd-args
                                             conflict-check next-step
