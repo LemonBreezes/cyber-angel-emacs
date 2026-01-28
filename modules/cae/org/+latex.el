@@ -25,5 +25,5 @@
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
 
 (use-package! lattie-unicode
-  :after org
+  :defer t :after org
   (load! "+latex-unicode"))
