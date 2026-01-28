@@ -37,11 +37,11 @@
           ;; "-" #'special-lattie-punctuation
           "-" #'lattie-self-insert-command
           "SPC" #'special-lattie-space
-          "RET" #'special-lattie-newline-and-indent
+          ;;"RET" #'special-lattie-newline-and-indent
           "^" #'special-lattie-underscore-caret
           [remap org-cdlatex-underscore-caret] #'special-lattie-underscore-caret
           "_" #'special-lattie-underscore-caret
-          [return] #'special-lattie-newline-and-indent
+          ;;[return] #'special-lattie-newline-and-indent
           "." #'special-lattie-space
           "," #'special-lattie-space
           "+" #'lattie-insert-dollar
