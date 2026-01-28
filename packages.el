@@ -1,4 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
+(print! "hello!")
+
 (disable-packages! flyspell
                    ccls                 ; I use clangd.
                    compat               ; I use the latest version of Emacs.
