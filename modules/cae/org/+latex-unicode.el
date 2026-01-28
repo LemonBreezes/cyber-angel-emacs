@@ -303,8 +303,8 @@
    (?◁ "\\vartriangleleft" "<|")
    ;; (?→ "\\rightarrow" "->")             ; →
    ;; (?⟶ "\\longrightarrow" "-->")        ; ⟶
-   (? "\\rightarrow" "->")             ; →
-   (? "\\longrightarrow" "-->")        ; ⟶
+   (?→ "\\rightarrow" "->")             ; →
+   (?⟶ "\\longrightarrow" "-->")        ; ⟶
    (#Xe161 "\\Rightarrow" "=>")
    (? "\\twoheadrightarrow" "->>")     ; ↠
    (? "\\rightarrowtail" ">->")        ; ↪
