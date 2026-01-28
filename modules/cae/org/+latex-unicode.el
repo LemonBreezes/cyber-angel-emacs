@@ -1,6 +1,6 @@
 ;;; cae/org/+lattie-unicode.el -*- lexical-binding: t; -*-
 
-(require 'latex-unicode)
+(require 'lattie-unicode)
 
 (setq lattie--latex-header-file
       (expand-file-name "unicode-latex.tex" doom-cache-dir))
