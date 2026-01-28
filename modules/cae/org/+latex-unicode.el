@@ -313,6 +313,8 @@
    (?⟼ "\\mapsto" "|->")
    (?⋀ "\\bigwedge" "band")
    (?⋁ "\\bigvee" "bor")
+   (?∧ "\\vee" "sand")
+   (?∨ "\\wedge" "sor")
    )
  '(("geq" "\\geq")
    ("sk" "\\Sk")
