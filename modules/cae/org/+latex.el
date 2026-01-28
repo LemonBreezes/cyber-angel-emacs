@@ -24,5 +24,5 @@
         org-preview-latex-default-process 'dvisvgm)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)))
 
-(after! org
+(add-transient-hook! 'org-cdlatex-mode-hook
   (load! "+latex-unicode"))
