@@ -1,5 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
-(backtrace)
+(setq compilation-safety 0)
+(setq native-comp-speed 3)
 
 (disable-packages! flyspell
                    ccls                 ; I use clangd.
