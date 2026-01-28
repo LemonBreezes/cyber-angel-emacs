@@ -88,8 +88,8 @@
           zone-nyan zone-pgm-spoopy selectric-mode)
         ;; Insert
         '(lorem-ipsum password-generator uuidgen)
-        ;; Random
-        '(pomm debbugs pomm noaa hackernews leetcode)))
+        ;; Random  ; debbugs Error: failed to incrementally load debbugs because: (invalid-function incf)
+        '(pomm pomm noaa hackernews leetcode)))
    ,@(when (modulep! :editor multiple-cursors)
        (if (modulep! :editor evil)
            '(evil-multiedit evil-mc)
