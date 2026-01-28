@@ -12,6 +12,7 @@
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
 (package! org-view-mode)
+(package! lattie :recipe (:host github :repo "LemonBreezes/lattie"))
 
 (when (modulep! +pretty)
   (package! org-modern))
