@@ -85,7 +85,7 @@
           :i "RET" #'special-lattie-newline-and-indent)
 
     ;; Commented because I have since created other Org return DWIM
-    ;; functionality that is not synced up with the Lattie codebase
+    ;; functionality that is not synced up with the Lattie codebase.
     ;;(add-hook 'evil-org-mode-hook
     ;;          (defun lattie--remap-return ()
     ;;            (map! :map evil-org-mode-map
