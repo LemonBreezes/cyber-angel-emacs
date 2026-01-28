@@ -1,5 +1,6 @@
 ;;; cae/org/+lattie-unicode.el -*- lexical-binding: t; -*-
 
+(require 'lattie)
 (require 'lattie-unicode)
 
 (setq lattie--latex-header-file
