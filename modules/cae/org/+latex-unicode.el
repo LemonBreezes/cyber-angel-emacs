@@ -286,6 +286,7 @@
    (?∐ "\\coprod" "coprod")
    (?⨿ "\\amalg" "amalg" "cop")
    (?∀ "\\forall" "forall" "fa")
+   (?∃ "\\exists" "exists" "ex")
    (?♭ "\\flat" "flat" "flt")
    (?♯ "\\sharp" "sharp" "shrp")
    (?⋔ "\\pitchfork" "cotens" "cotns" "ctns" "cotensor" "pitchfork")
