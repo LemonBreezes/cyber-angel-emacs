@@ -284,6 +284,7 @@
    (?∅ "\\varnothing" "empty")
    (?⊆ "\\subseteq" "sse")
    (?∐ "\\coprod" "coprod")
+   (?∏ "\\prod" "prod")
    (?⨿ "\\amalg" "amalg" "cop")
    (?∀ "\\forall" "forall" "fa")
    (?∃ "\\exists" "exists" "ex")
