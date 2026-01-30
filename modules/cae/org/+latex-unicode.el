@@ -354,6 +354,10 @@
    ("sing" "\\Sing")
    )
  (string-join '("\\DeclareMathOperator{\\Hom}{Hom}"
+                "\\DeclareMathOperator{\\lim}{lim}"
+                "\\DeclareMathOperator{\\colim}{colim}"
+                "\\DeclareMathOperator{\\holim}{holim}"
+                "\\DeclareMathOperator{\\hocolim}{hocolim}"
                 "\\DeclareMathOperator{\\sSet}{sSet}"
                 "\\DeclareMathOperator{\\Ob}{Ob}"
                 "\\DeclareMathOperator{\\Mor}{Mor}"
