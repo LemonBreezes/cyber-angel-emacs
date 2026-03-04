@@ -9,7 +9,8 @@
 (after! vterm
   (setq vterm-max-scrollback 100000))
 (setq-hook! 'vterm-mode-hook
-  nobreak-char-display nil)
+  nobreak-char-display nil
+  pixel-scroll-precision-mode nil)
 
 (after! comint
   (setq comint-history-isearch 'dwim
