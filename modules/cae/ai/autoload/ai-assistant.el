@@ -3,7 +3,7 @@
 (defcustom cae-ai-assistant-terminal-backend (if (and (modulep! :cae exwm)
                                                       cae-exwm-enabled-p)
                                                  'exwm
-                                               'eat)
+                                               'vterm)
   "Backend to use for terminal operations.
 Can be 'vterm, 'eat, or 'exwm."
   :type '(choice (const :tag "VTerm" vterm)
