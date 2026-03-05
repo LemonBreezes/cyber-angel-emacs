@@ -6,38 +6,42 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 (after! chatgpt-shell
-  (setq chatgpt-shell-models
-        (append chatgpt-shell-models
-                (list
-                 (chatgpt-shell-openrouter-make-model
-                  :version "z-ai/glm-4.5"
-                  :short-version "glm-4.5"
-                  :label "GLM-4.5"
-                  :token-width 4
-                  ;; See https://openrouter.ai/z-ai/glm-4.5
-                  :context-window 131072
-                  :other-params '((provider (require_parameters . t))))
-                 (chatgpt-shell-openrouter-make-model
-                  :label "Qwen3 Coder"
-                  :version "qwen/qwen3-coder"
-                  :short-version "qwen3-coder"
-                  :token-width 4
-                  :context-window 256000))))
-  (setq chatgpt-shell-model-version "z-ai/glm-4.5")
+  ;;(setq chatgpt-shell-models
+  ;;      (append chatgpt-shell-models
+  ;;              (list
+  ;;               (chatgpt-shell-openrouter-make-model
+  ;;                :version "z-ai/glm-4.5"
+  ;;                :short-version "glm-4.5"
+  ;;                :label "GLM-4.5"
+  ;;                :token-width 4
+  ;;                ;; See https://openrouter.ai/z-ai/glm-4.5
+  ;;                :context-window 131072
+  ;;                :other-params '((provider (require_parameters . t))))
+  ;;               (chatgpt-shell-openrouter-make-model
+  ;;                :label "Qwen3 Coder"
+  ;;                :version "qwen/qwen3-coder"
+  ;;                :short-version "qwen3-coder"
+  ;;                :token-width 4
+  ;;                :context-window 256000))))
+  (setq chatgpt-shell-model-version "gemini-flash-latest")
   (setq chatgpt-shell-always-create-new nil))
 (after! dall-e-shell
   (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
-  (require 'llm-openai)
+  ;;(require 'llm-openai)
+  (require 'llm-gemini)
   (setq llm-refactoring-provider
-        (make-llm-openai-compatible
-         :url "https://openrouter.ai/api/v1/"
-         :key (getenv "OPENROUTER_API_KEY")
-         :chat-model "z-ai/glm-4.5"
-         :default-chat-non-standard-params
-         `((http-referer . "https://github.com/ahyatt/llm")
-           (x-title . "Emacs LLM")))
+        (make-llm-gemini
+         :key (getenv "GEMINI_API_KEY")
+         :chat-model "gemini-flash-latest")
+        ;;(make-llm-openai-compatible
+        ;; :url "https://openrouter.ai/api/v1/"
+        ;; :key (getenv "OPENROUTER_API_KEY")
+        ;; :chat-model "z-ai/glm-4.5"
+        ;; :default-chat-non-standard-params
+        ;; `((http-referer . "https://github.com/ahyatt/llm")
+        ;;   (x-title . "Emacs LLM")))
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
@@ -56,7 +60,7 @@
   (plist-put! minuet-openai-compatible-options
               :end-point "https://openrouter.ai/api/v1/chat/completions"
               :api-key "OPENROUTER_API_KEY"
-              :model "qwen/qwen3-coder"
+              :model "qwen/qwen3-coder-next"
               :max_tokens 256
               :top_p 0.9)
   (plist-put! minuet-codestral-options
@@ -67,8 +71,10 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "openrouter/z-ai/glm-4.5")
-  (setq aidermacs-editor-model "openrouter/z-ai/glm-4.5")
+  ;;(setq aidermacs-default-model "openrouter/z-ai/glm-4.5")
+  ;;(setq aidermacs-editor-model "openrouter/z-ai/glm-4.5")
+  (setq aidermacs-default-model "gemini/flash-latest")
+  (setq aidermacs-editor-model "gemini/flash-latest")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-backend 'comint)
   (setq aidermacs-extra-args
