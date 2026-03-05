@@ -41,15 +41,16 @@
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
-  (setq gptel-model 'z-ai/glm-4.5
-        gptel-backend
-        (gptel-make-openai "OpenRouter"
-          :host "openrouter.ai"
-          :endpoint "/api/v1/chat/completions"
-          :stream t
-          :key (getenv "OPENROUTER_API_KEY")
-          :models '(z-ai/glm-4.5
-                    qwen/qwen3-coder))))
+  (setq gptel-model 'gemini-flash-latest
+        ;;gptel-backend
+        ;;(gptel-make-openai "OpenRouter"
+        ;;  :host "openrouter.ai"
+        ;;  :endpoint "/api/v1/chat/completions"
+        ;;  :stream t
+        ;;  :key (getenv "OPENROUTER_API_KEY")
+        ;;  :models '(z-ai/glm-4.5
+        ;;            qwen/qwen3-coder))
+        ))
 (after! minuet
   (setq minuet-provider 'openai-compatible)
   (plist-put! minuet-openai-compatible-options
