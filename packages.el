@@ -160,7 +160,7 @@
 ;; cae-vlf.el
 (package! vlf)
 
-;; cae-visible-scrolling
+;; cae-visual-scrolling.el
 (package! scrollkeeper)
 
 ;; cae-bindings.el
@@ -170,8 +170,11 @@
 (package! ov)
 (package! substitute)
 
-;; cae-geolocation
+;; cae-geolocation.el
 (package! geo :recipe (:host github :repo "emacsmirror/geo" :files ("*" "lisp-src/*")))
+
+;; cae-corfu.el
+(package! fish-completion)
 
 ;;; Languages
 (when (modulep! :lang haskell)
