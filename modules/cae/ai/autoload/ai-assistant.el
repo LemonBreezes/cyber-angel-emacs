@@ -123,13 +123,13 @@ Otherwise, open the AI assistant for the current project."
     
     (if existing-buffer
         ;; Found existing buffer, focus it
-        (if-let ((window (get-buffer-window existing-buffer)))
-            ;; Buffer is visible, focus its window
-            (select-window window)
-          ;; Buffer exists but not visible, display it
-          (switch-to-buffer-other-window existing-buffer)
-          (cl-return-from cae-ai-assistant-code))
-
+        (progn (if-let ((window (get-buffer-window existing-buffer)))
+                   ;; Buffer is visible, focus its window
+                   (select-window window)
+                 ;; Buffer exists but not visible, display it
+                 (switch-to-buffer-other-window existing-buffer))
+               (cl-return-from cae-ai-assistant-code))
+      
       ;; No existing buffer, proceed with selection
       (setq selected-app (completing-read (format "Select AI assistant (default: %s): " cae-ai-assistant-app)
                                           app-choices
