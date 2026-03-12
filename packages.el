@@ -12,6 +12,7 @@
                    elfeed-goodies
                    mu4e-alert)
 (package! mu4e :built-in t)
+(package! llvm-mode :built-in t)
 
 ;; Avoid forges that can give me problems.
 (when (modulep! :lang graphql)
