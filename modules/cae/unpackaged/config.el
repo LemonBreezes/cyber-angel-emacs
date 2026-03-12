@@ -10,7 +10,9 @@
   (after! org
     (map! (:map org-mode-map
            :ig "<return>" #'cae-unpackaged-org-return-dwim
-           :ig "RET" #'cae-unpackaged-org-return-dwim)
+           :ig "RET" #'cae-unpackaged-org-return-dwim
+           :n "<return>" #'+org/dwim-at-point
+           :n "RET" #'+org/dwim-at-point)
           (:when (modulep! :editor evil)
            (:after evil-org
             :map evil-org-mode-map
