@@ -26,6 +26,7 @@
 
 (use-package! lattie
   :defer t :init
+  (remove-hook 'org-mode-hook #'org-cdlatex-mode)
   (add-transient-hook! 'org-cdlatex-mode-hook
     (require 'lattie)
     (load! "+latex-unicode")
