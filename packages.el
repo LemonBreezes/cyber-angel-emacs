@@ -131,7 +131,6 @@
 (package! eff)
 (package! git-modes)
 (package! huff-mode :recipe (:host github :repo "GokhanPolat/emacs-huff-mode"))
-(package! llvm-mode :recipe (:host github :repo "nverno/llvm-mode"))
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
