@@ -14,10 +14,10 @@
            :n "<return>" #'+org/dwim-at-point
            :n "RET" #'+org/dwim-at-point)
           (:when (modulep! :editor evil)
-           (:after evil-org
-            :map evil-org-mode-map
-            :ig "<return>" nil
-            :ig "RET" nil))))
+            (:after evil-org
+             :map evil-org-mode-map
+             :ig "<return>" nil
+             :ig "RET" nil))))
 
   (add-hook 'org-mode-hook #'cae-unpackaged-org-fix-blank-lines-before-save))
 
@@ -33,7 +33,7 @@
   (after! magit
     (setq magit-bury-buffer-function #'magit-restore-window-configuration))
   (cae-advice-add #'cae-unpackaged-magit-status :before-until
-              #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
+                  #'cae-unpackaged-magit-status-disable-when-gac-enabled-a)
 
   (defun cae-unpackaged-magit-start-smerge-hydra-h ()
     (when smerge-mode
