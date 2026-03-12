@@ -79,7 +79,7 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
           (error "EXWM module is not enabled. Please enable :cae exwm in your config.")))))))
 
 ;;;###autoload
-(defun cae-ai-assistant-code (&optional create-sandbox)
+(cl-defun cae-ai-assistant-code (&optional create-sandbox)
   "Open an AI coding assistant terminal in a vterm buffer.
 If CREATE-SANDBOX is non-nil (with prefix argument), create a sandbox
 environment in `cae-ai-assistant-sandbox-root' with a timestamped folder based on
@@ -127,7 +127,8 @@ Otherwise, open the AI assistant for the current project."
             ;; Buffer is visible, focus its window
             (select-window window)
           ;; Buffer exists but not visible, display it
-          (switch-to-buffer-other-window existing-buffer))
+          (switch-to-buffer-other-window existing-buffer)
+          (cl-return-from cae-ai-assistant-code))
 
       ;; No existing buffer, proceed with selection
       (setq selected-app (completing-read (format "Select AI assistant (default: %s): " cae-ai-assistant-app)
