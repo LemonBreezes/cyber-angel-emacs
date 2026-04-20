@@ -86,7 +86,7 @@ frameworks.")
           (set (cadr font) (font-spec :family (car font) :size
                                       (pcase (system-name)
                                         ("g17" 24)
-                                        ("st-ROG-Strix-G713PI-G713PI" 24)
+                                        ("st-ROG-Strix-G713PI-G713PI" 30)
                                         (_ 18))))
         (warn "Font %s does not exist!" (car font))))))
 
