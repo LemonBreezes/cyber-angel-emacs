@@ -29,22 +29,44 @@ of ELEMENT."
     (symbol-value list-var)))
 
 (defun cae-add-dir-to-path (dir)
-  "Add DIR to the PATH environment variable and `exec-path` if not already present."
-  (when (and (file-directory-p dir) (not (member dir exec-path)))
-    (setenv "PATH" (concat (getenv "PATH") ":" dir))
-    (setq exec-path (append exec-path (list dir)))))
+  "Add DIR to the PATH environment variable and `exec-path` if it exists and isn't a duplicate."
+  (let ((expanded-dir (expand-file-name dir)))
+    (when (and (file-directory-p expanded-dir)
+               (not (member expanded-dir exec-path)))
+      (setenv "PATH" (concat expanded-dir ":" (getenv "PATH")))
+      (push expanded-dir exec-path))))
 
-(when (string-equal system-type "android")
-  (cae-add-dir-to-path "/data/data/com.termux/files/usr/bin"))
+(let ((paths-to-add
+       (list
+        ;; Paths from the beginning of your .bashrc
+        "~/.nix-profile/bin"
+        "~/.config/bin"
+        "/usr/lib/ccache/bin"
+        "~/.local/bin"
+        "~/.cargo/bin"
+        "~/go/bin"
+        "~/.foundry/bin"
+        "~/.config/emacs/bin"
+        "~/.huff/bin"
+        "~/.elan/bin"
+        "~/.npm-packages/bin"
+        "~/.ghcup/bin"
+        "~/.opencode/bin"
+        ;; Platform specific paths
+        (when (string-equal system-type "android")
+          "/data/data/com.termux/files/usr/bin")
+        (when (getenv "WSL_DISTRO_NAME")
+          "/mnt/c/Windows/System32/WindowsPowerShell/v1.0")
+        (when (getenv "WSL_DISTRO_NAME")
+          "/mnt/c/Windows/System32"))))
+  
+  ;; Filter out nil values and apply
+  (dolist (path (delq nil paths-to-add))
+    (cae-add-dir-to-path path)))
 
-(when (getenv "WSL_DISTRO_NAME")
-  (dolist (wslpath '("/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
-                     "/mnt/c/Windows/System32"))
-    (cae-add-dir-to-path wslpath)))
-
-;; On NixOS, this is necessary.
-(when (executable-find "nixos-rebuild")
-  (cae-add-dir-to-path "~/.local/bin"))
+;; Special case for Conda if you need the base environment in Emacs
+(when (file-exists-p "/usr/bin/conda")
+  (cae-add-dir-to-path "/usr/bin"))
 
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
