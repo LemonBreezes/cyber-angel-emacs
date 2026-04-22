@@ -36,37 +36,43 @@ of ELEMENT."
       (setenv "PATH" (concat expanded-dir ":" (getenv "PATH")))
       (push expanded-dir exec-path))))
 
-(let ((paths-to-add
-       (list
-        ;; Paths from the beginning of your .bashrc
-        "~/.nix-profile/bin"
-        "~/.config/bin"
-        "/usr/lib/ccache/bin"
-        "~/.local/bin"
-        "~/.cargo/bin"
-        "~/go/bin"
-        "~/.foundry/bin"
-        "~/.config/emacs/bin"
-        "~/.huff/bin"
-        "~/.elan/bin"
-        "~/.npm-packages/bin"
-        "~/.ghcup/bin"
-        "~/.opencode/bin"
-        ;; Platform specific paths
-        (when (string-equal system-type "android")
-          "/data/data/com.termux/files/usr/bin")
-        (when (getenv "WSL_DISTRO_NAME")
-          "/mnt/c/Windows/System32/WindowsPowerShell/v1.0")
-        (when (getenv "WSL_DISTRO_NAME")
-          "/mnt/c/Windows/System32"))))
-  
-  ;; Filter out nil values and apply
-  (dolist (path (delq nil paths-to-add))
-    (cae-add-dir-to-path path)))
+(let ((env-file (expand-file-name "~/.emacs_env.el")))
+  (if (file-exists-p env-file)
+      ;; --- Strategy A: Load cached file (Fastest) ---
+      (progn
+        (load env-file)
+        ;; Sync exec-path with the newly imported PATH string
+        (setq exec-path (append (split-string (getenv "PATH") path-separator)
+                                (list exec-directory))))
+    
+    ;; --- Strategy B: Manual Fallback (Robust) ---
+    (let ((paths-to-add
+           (list
+            "~/.nix-profile/bin"
+            "~/.config/bin"
+            "/usr/lib/ccache/bin"
+            "~/.local/bin"
+            "~/.cargo/bin"
+            "~/go/bin"
+            "~/.foundry/bin"
+            "~/.config/emacs/bin"
+            "~/.huff/bin"
+            "~/.elan/bin"
+            "~/.npm-packages/bin"
+            "~/.ghcup/bin"
+            "~/.opencode/bin"
+            (when (string-equal system-type "android")
+              "/data/data/com.termux/files/usr/bin")
+            (when (getenv "WSL_DISTRO_NAME")
+              "/mnt/c/Windows/System32/WindowsPowerShell/v1.0")
+            (when (getenv "WSL_DISTRO_NAME")
+              "/mnt/c/Windows/System32"))))
 
-;; Special case for Conda if you need the base environment in Emacs
-(when (file-exists-p "/usr/bin/conda")
-  (cae-add-dir-to-path "/usr/bin"))
+      (dolist (path (delq nil paths-to-add))
+        (cae-add-dir-to-path path))
+      
+      (when (file-exists-p "/usr/bin/conda")
+        (cae-add-dir-to-path "/usr/bin")))))
 
 ;; This is so that I don't accidentally start Emacs as a daemon.
 (when (daemonp) (kill-emacs))
