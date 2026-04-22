@@ -38,14 +38,14 @@ of ELEMENT."
 
 (let ((env-file (expand-file-name "~/.emacs_env.el")))
   (if (file-exists-p env-file)
-      ;; --- Strategy A: Load cached file (Fastest) ---
+      ;; --- Strategy A: Load cached file ---
       (progn
         (load env-file)
         ;; Sync exec-path with the newly imported PATH string
         (setq exec-path (append (split-string (getenv "PATH") path-separator)
                                 (list exec-directory))))
     
-    ;; --- Strategy B: Manual Fallback (Robust) ---
+    ;; --- Strategy B: Manual Fallback ---
     (let ((paths-to-add
            (list
             "~/.nix-profile/bin"
