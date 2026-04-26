@@ -76,7 +76,6 @@
               '("firefox-beta" "firefox" "firefox-bin")))))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(add-to-list 'doom-large-file-excluded-modes 'nov-mode)
 
 (add-to-list 'auto-mode-alist '("/sway/.*config.*/" . i3wm-config-mode))
 (add-to-list 'auto-mode-alist '("/sway/config\\'" . i3wm-config-mode))
