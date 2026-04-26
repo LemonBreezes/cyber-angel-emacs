@@ -113,6 +113,3 @@ _RET_: Kitty      _S-RET_: Eshell     _r_: Toggle Redshift  _l_: Lock Screen    
   :before-until #'key-chord-input-method
   (when (derived-mode-p 'exwm-mode)
     (list first-char)))
-
-(unless (getenv "STARTX_COMPLETED")
-  (load! "xinit" cae-multi-secrets-dir))
