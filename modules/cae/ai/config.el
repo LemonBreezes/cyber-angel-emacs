@@ -23,7 +23,7 @@
   ;;                :short-version "qwen3-coder"
   ;;                :token-width 4
   ;;                :context-window 256000))))
-  (setq chatgpt-shell-model-version "gemini-flash-latest")
+  (setq chatgpt-shell-model-version "claude-opus-4-7")
   (setq chatgpt-shell-always-create-new nil))
 (after! dall-e-shell
   (setq dall-e-shell-model-version "dall-e-3"))
