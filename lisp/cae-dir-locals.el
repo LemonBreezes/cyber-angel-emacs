@@ -68,15 +68,6 @@
       (setq-local gac-automatically-push-p t)
       (git-auto-commit-mode 1))))
 
-(defun cae--setup-polybar-dir-locals ()
-  "Setup directory locals for the 'polybar class, inheriting from 'home."
-  ;; First apply home directory locals
-  (cae--setup-home-dir-locals)
-  ;; Then add polybar-specific settings
-  (when (and (buffer-file-name) 
-             (fboundp #'cae-theme-export-using-pywal))
-    (add-hook 'after-save-hook #'cae-theme-export-using-pywal nil t)))
-
 (dir-locals-set-class-variables
  'doom
  '((nil . ((eval . (cae--setup-doom-dir-locals))))
