@@ -27,6 +27,13 @@
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-claude)
+  (unless (llm-models-by-symbol 'claude-4-7-opus)
+    (llm-models-add
+     :name "Claude 4.7 Opus"
+     :symbol 'claude-4-7-opus
+     :capabilities '(generation tool-use image-input pdf-input caching json-response)
+     :context-length 200000
+     :regex "claude-opus-4-7"))
   (setq llm-refactoring-provider
         (make-llm-claude
          :key (getenv "ANTHROPIC_API_KEY")
