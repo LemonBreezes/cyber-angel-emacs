@@ -27,10 +27,14 @@
 (use-package! lattie
   :defer t :init
   (remove-hook 'org-mode-hook #'org-cdlatex-mode)
-  (add-transient-hook! 'org-cdlatex-mode-hook
-    (require 'lattie)
-    (load! "+latex-unicode")
-    (map! :map org-cdlatex-mode-map
+  (defun +cae-lattie-load-h ()
+    (when (and (derived-mode-p 'org-mode)
+               buffer-file-name
+               (not (minibufferp)))
+      (remove-hook 'org-cdlatex-mode-hook #'+cae-lattie-load-h)
+      (require 'lattie)
+      (load! "+latex-unicode")
+      (map! :map org-cdlatex-mode-map
           "]" #'lattie-close-bracket
           "[" #'lattie-open-bracket
           "(" #'lattie-open-paren
@@ -96,3 +100,4 @@
     ;;                  :i [return] #'special-lattie-newline-and-indent
     ;;                  :i "RET" #'special-lattie-newline-and-indent)))
     ))
+  (add-hook 'org-cdlatex-mode-hook #'+cae-lattie-load-h))
