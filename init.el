@@ -84,7 +84,7 @@
          (format +lsp)
          snippets
          multiple-cursors
-         lispy
+         ;lispy
 
          :emacs
          undo
@@ -104,7 +104,7 @@
          editorconfig
          (eval +overlay)
          (lookup +dictionary +docsets +offline)
-         (magit +forge)
+         magit
          (lsp +peek)
          tree-sitter
          (docker +lsp)
