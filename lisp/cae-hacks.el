@@ -78,6 +78,9 @@
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
 
+;; Fix void variable error in comp--add-cstrs
+(defvar insn nil)
+
 ;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
