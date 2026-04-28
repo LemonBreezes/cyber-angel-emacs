@@ -26,7 +26,6 @@
   (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
-  (require 'llm-claude)
   (setq llm-refactoring-provider
         (make-llm-model
          :name "Claude 4.7 Opus" :symbol 'claude-4-7-opus
