@@ -26,12 +26,11 @@
   (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
+  (require 'llm-claude)
   (setq llm-refactoring-provider
-        (make-llm-model
-         :name "Claude 4.7 Opus" :symbol 'claude-4-7-opus
-         :capabilities '(generation tool-use image-input pdf-input caching json-response)
-         :context-length 200000
-         :regex "claude-opus-4-7")
+        (make-llm-claude
+         :key (getenv "ANTHROPIC_API_KEY")
+         :chat-model "claude-opus-4-7")
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
