@@ -6,23 +6,20 @@
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
 (after! chatgpt-shell
-  ;;(setq chatgpt-shell-models
-  ;;      (append chatgpt-shell-models
-  ;;              (list
-  ;;               (chatgpt-shell-openrouter-make-model
-  ;;                :version "z-ai/glm-4.5"
-  ;;                :short-version "glm-4.5"
-  ;;                :label "GLM-4.5"
-  ;;                :token-width 4
-  ;;                ;; See https://openrouter.ai/z-ai/glm-4.5
-  ;;                :context-window 131072
-  ;;                :other-params '((provider (require_parameters . t))))
-  ;;               (chatgpt-shell-openrouter-make-model
-  ;;                :label "Qwen3 Coder"
-  ;;                :version "qwen/qwen3-coder"
-  ;;                :short-version "qwen3-coder"
-  ;;                :token-width 4
-  ;;                :context-window 256000))))
+  (let* ((new-model (chatgpt-shell-anthropic--make-model
+                     :version "claude-opus-4-7"
+                     :short-version "opus-4.7"
+                     :token-width 4
+                     :thinking-budget-min 1024
+                     :reasoning-effort-selector #'chatgpt-shell-anthropic-reasoning-effort-selector
+                     :max-tokens 32000
+                     :context-window 200000))
+         (version (map-elt new-model :version)))
+    (setq chatgpt-shell-models
+          (cons new-model
+                (seq-remove (lambda (model)
+                              (equal (map-elt model :version) version))
+                            chatgpt-shell-models))))
   (setq chatgpt-shell-model-version "claude-opus-4-7")
   (setq chatgpt-shell-always-create-new nil))
 (after! dall-e-shell
@@ -35,26 +32,10 @@
         (make-llm-gemini
          :key (getenv "GEMINI_API_KEY")
          :chat-model "gemini-flash-latest")
-        ;;(make-llm-openai-compatible
-        ;; :url "https://openrouter.ai/api/v1/"
-        ;; :key (getenv "OPENROUTER_API_KEY")
-        ;; :chat-model "z-ai/glm-4.5"
-        ;; :default-chat-non-standard-params
-        ;; `((http-referer . "https://github.com/ahyatt/llm")
-        ;;   (x-title . "Emacs LLM")))
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
-  (setq gptel-model 'gemini-flash-latest
-        ;;gptel-backend
-        ;;(gptel-make-openai "OpenRouter"
-        ;;  :host "openrouter.ai"
-        ;;  :endpoint "/api/v1/chat/completions"
-        ;;  :stream t
-        ;;  :key (getenv "OPENROUTER_API_KEY")
-        ;;  :models '(z-ai/glm-4.5
-        ;;            qwen/qwen3-coder))
-        ))
+  (setq gptel-model 'gemini-flash-latest))
 (after! minuet
   (setq minuet-provider 'openai-compatible)
   (plist-put! minuet-openai-compatible-options
