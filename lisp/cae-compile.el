@@ -38,9 +38,6 @@
   ;;(setq compile-angel-verbose t)
   ;;(setq compile-angel-track-file-index-stats t)
 
-  ;; I am no longer using this for security reasons.
-  ;;(cae-ensure-emacs-dir-writable)
-
   ;; Set up exclusions
   (cae-setup-compile-angel-exclusions)
   (compile-angel-on-load-mode +1))
