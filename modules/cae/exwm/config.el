@@ -40,7 +40,7 @@
   (use-package! exwm
     :defer 0.01 :config
     (when init-file-debug
-      (exwm-debug +1))
+      (exwm-debug-mode +1))
 
     ;; Update the above keys when reloading this file.
     (when (bound-and-true-p cae-config-finished-loading)
