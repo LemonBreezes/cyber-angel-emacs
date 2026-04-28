@@ -26,12 +26,13 @@
   (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
-  ;;(require 'llm-openai)
-  (require 'llm-gemini)
+  (require 'llm-claude)
   (setq llm-refactoring-provider
-        (make-llm-gemini
-         :key (getenv "GEMINI_API_KEY")
-         :chat-model "gemini-flash-latest")
+        (make-llm-model
+         :name "Claude 4.7 Opus" :symbol 'claude-4-7-opus
+         :capabilities '(generation tool-use image-input pdf-input caching json-response)
+         :context-length 200000
+         :regex "claude-opus-4-7")
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
