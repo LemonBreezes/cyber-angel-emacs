@@ -37,16 +37,7 @@
 (after! gptel
   (setq gptel-model 'claude-opus-4.7))
 (after! minuet
-  (setq minuet-provider 'openai-compatible)
-  (plist-put! minuet-openai-compatible-options
-              :end-point "https://openrouter.ai/api/v1/chat/completions"
-              :api-key "OPENROUTER_API_KEY"
-              :model "qwen/qwen3-coder-next"
-              :max_tokens 256
-              :top_p 0.9)
-  (plist-put! minuet-codestral-options
-              :max_tokens 256
-              :top_p 0.9))
+  (setq minuet-provider 'claude))
 
 (use-package! aidermacs
   :defer t :init
