@@ -84,7 +84,6 @@
          (format +lsp)
          snippets
          multiple-cursors
-                                        ;lispy
 
          :emacs
          undo
