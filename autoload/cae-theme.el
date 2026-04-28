@@ -6,7 +6,9 @@
 
 ;;;###autoload
 (defun cae-night-time-p ()
-  (when-let* ((now (reverse (cl-subseq (decode-time) 0 3)))
+  (when-let* ((_ (and (bound-and-true-p calendar-latitude)
+                      (bound-and-true-p calendar-longitude)))
+              (now (reverse (cl-subseq (decode-time) 0 3)))
               (sunset (or (doom-store-get 'circadian-sunset)
                           (and (require 'circadian nil t)
                                (circadian-sunset))))
