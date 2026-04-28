@@ -35,8 +35,7 @@ Supported values: \"claude\", \"opencode\", \"codex\", \"gemini\", \"aider\",
          (response (llm-chat llm-refactoring-provider
                              (llm-make-chat-prompt prompt
                                                    :context "You are a helpful assistant that generates concise folder names."
-                                                   :max-tokens 50
-                                                   :temperature 0.7))))
+                                                   :max-tokens 50))))
     (replace-regexp-in-string " " "-" (string-trim response))))
 
 (defun cae-ai-assistant--create-sandbox (sandbox-root task-description folder-name &optional app-name)
