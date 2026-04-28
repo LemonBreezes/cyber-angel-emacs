@@ -79,7 +79,7 @@
 (setf (symbol-function (intern "")) 'llama)
 
 ;; BUG Fix void variable error in EXWM
-(defvar request-sequence nil)
+(defvar request-sequence 0)
 
 ;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
