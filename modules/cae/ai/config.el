@@ -52,8 +52,6 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  ;;(setq aidermacs-default-model "openrouter/z-ai/glm-4.5")
-  ;;(setq aidermacs-editor-model "openrouter/z-ai/glm-4.5")
   (setq aidermacs-default-model "gemini/flash-latest")
   (setq aidermacs-editor-model "gemini/flash-latest")
   (setq aidermacs-auto-commits nil)
