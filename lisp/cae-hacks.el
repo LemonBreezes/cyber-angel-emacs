@@ -78,11 +78,6 @@
 ;; BUG Fix void function error
 (setf (symbol-function (intern "")) 'llama)
 
-;; BUG Fix void variable error in XCB
-(defvar request-sequence 0)
-(defvar event-lock 0)
-(defvar event-queue nil)
-
 ;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
