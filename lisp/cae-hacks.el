@@ -100,9 +100,6 @@
 (advice-add #'delete-file-projectile-remove-from-cache :override
             #'cae-delete-file-projectile-remove-from-cache)
 
-;; Happened to me when switching from Emacs 30 to Emacs 31 Git.
-(defun posframe (&rest _))
-
 ;; These are new functions Doom's Magit doesn't have yet.
 (defun transient--set-layout (prefix layout)Add commentMore actions
        (put prefix 'transient--layout layout))
