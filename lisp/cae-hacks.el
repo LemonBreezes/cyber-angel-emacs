@@ -72,15 +72,6 @@
   (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
        (not (executable-find "xclip"))))
 
-;; BUG Fix void variable langelem in `c-langelem-pos'
-(defvar langelem nil)
-
-;; BUG Fix void function error
-(setf (symbol-function (intern "")) 'llama)
-
-;; Fix void variable error in `comp--add-cstrs'
-(defvar insn nil)
-
 ;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
