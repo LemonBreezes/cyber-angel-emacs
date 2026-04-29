@@ -45,10 +45,6 @@
          ((and (integerp arg) (<= arg 0)) nil)
          (t t))))
 
-;; For some reason I got a void variable error in `helm-system-packages' for
-;; this.
-(defvar helm-marked-buffer-name "*helm marked*")
-
 ;; This is for finding and fixing commands that leave the current buffer and the
 ;; window buffer out of sync.
 ;;(add-hook! 'post-command-hook
@@ -58,8 +54,6 @@
 
 ;;Debugger entered--Lisp error: (no-catch emacs-version-changed nil)
 (cae-advice-add #'w3m-fix-melpa-installation :override #'ignore)
-
-(defvar-keymap doom-leader-GitHub-map) ; Silence byte-compiler.
 
 (cae-defadvice! cae-handle-missing-xclip-program ()
   :before-until #'doom-init-clipboard-in-tty-emacs-h
