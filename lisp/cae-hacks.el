@@ -56,12 +56,6 @@
 ;;    (unless (eq (current-buffer) (window-buffer))
 ;;      (message "Buffer out of sync: %s" (buffer-name)))))
 
-;; Getting a void variable error with modus theme.
-(defvar date-scheduled-subtle nil)
-
-;; (void-variable chatgpt-shell-anthropic--make-url)
-(defvar chatgpt-shell-anthropic--make-url nil)
-
 ;;Debugger entered--Lisp error: (no-catch emacs-version-changed nil)
 (cae-advice-add #'w3m-fix-melpa-installation :override #'ignore)
 
