@@ -790,7 +790,7 @@
                emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
                emms-player-mpd-server-name cae-misc-applications-mpd-host)
          (when (file-exists-p cae-misc-applications-music-dir)
-           (emms-player-mpd-connect))
+           (ignore-errors (emms-player-mpd-connect)))
          (map! :map cae-misc-applications-music-map
                "g" #'emms-player-mpd-connect
                "G" #'emms-player-mpd-disconnect)
