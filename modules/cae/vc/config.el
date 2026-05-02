@@ -56,7 +56,48 @@
 
 (when (modulep! :ui vc-gutter +diff-hl)
   (after! diff-hl
-    (setq diff-hl-reference-revision "master")
+    (defvar cae-diff-hl-default-branch-cache (make-hash-table :test 'equal)
+      "Cache mapping repo roots to their default branch name.")
+
+    (defun cae-diff-hl-default-branch (root)
+      "Return the default branch name for the git repo at ROOT.
+Tries `refs/remotes/origin/HEAD' first, then probes for `master' and
+`main'.  Result is cached per ROOT so the git calls run at most once per
+repository per session."
+      (let ((cached (gethash root cae-diff-hl-default-branch-cache 'unset)))
+        (if (not (eq cached 'unset))
+            cached
+          (let* ((default-directory root)
+                 (branch
+                  (or
+                   (with-temp-buffer
+                     (when (zerop (call-process
+                                   "git" nil t nil
+                                   "symbolic-ref" "--short" "--quiet"
+                                   "refs/remotes/origin/HEAD"))
+                       (goto-char (point-min))
+                       (when (re-search-forward "/\\(.+\\)$" nil t)
+                         (match-string 1))))
+                   (cl-some
+                    (lambda (ref)
+                      (when (zerop (call-process
+                                    "git" nil nil nil
+                                    "rev-parse" "--verify" "--quiet" ref))
+                        ref))
+                    '("master" "main")))))
+            (puthash root branch cae-diff-hl-default-branch-cache)
+            branch))))
+
+    (defun cae-diff-hl-set-reference-revision-h ()
+      "Set `diff-hl-reference-revision' to the current repo's default branch."
+      (when-let* ((file (or (buffer-file-name) default-directory))
+                  (root (vc-git-root file)))
+        (setq-local diff-hl-reference-revision
+                    (cae-diff-hl-default-branch
+                     (expand-file-name (file-name-as-directory root))))))
+
+    (add-hook 'diff-hl-mode-hook #'cae-diff-hl-set-reference-revision-h)
+
     (setq diff-hl-flydiff-delay 2)
     (unless (cae-display-graphic-p)
       (diff-hl-margin-mode +1)))
