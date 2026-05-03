@@ -99,7 +99,7 @@ Otherwise, open the AI assistant for the current project."
 
   ;; First check if there's already an AI assistant buffer for this project
   (let* ((project-root (doom-project-root))
-         (app-choices '("claude" "opencode" "codex" "gemini" "aider"))
+         (app-choices '("claude" "opencode" "codex" "gemini" "aider" "vibe"))
          (existing-buffer nil)
          (selected-app nil)
          (terminal-class (when (eq cae-ai-assistant-terminal-backend 'exwm)
