@@ -49,8 +49,8 @@
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "anthropic/claude-opus-4.7")
-  (setq aidermacs-editor-model "anthropic/claude-opus-4.7")
+  (setq aidermacs-default-model "anthropic/claude-opus-4-7")
+  (setq aidermacs-editor-model "anthropic/claude-opus-4-7")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-backend 'comint)
   (setq aidermacs-extra-args
