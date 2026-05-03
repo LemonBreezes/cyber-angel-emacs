@@ -14,7 +14,7 @@
   (interactive (list 1))
 
   (when (or (getenv "WSL_DISTRO_NAME")
-            (not (require 'dbus nil t)))
+            (not (fboundp 'dbus-init-dbus)))
     (cl-return-from cae-geolocation-setup))
 
   ;; Set default verbosity if not provided
