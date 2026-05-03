@@ -90,6 +90,7 @@ repository per session."
 
     (defun cae-diff-hl-set-reference-revision-h ()
       "Set `diff-hl-reference-revision' to the current repo's default branch."
+      (require 'vc-git)
       (when-let* ((file (or (buffer-file-name) default-directory))
                   (root (vc-git-root file)))
         (setq-local diff-hl-reference-revision
