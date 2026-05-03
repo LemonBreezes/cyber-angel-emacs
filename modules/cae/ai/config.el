@@ -41,7 +41,7 @@
         magit-gptcommit-llm-provider llm-refactoring-provider
         llm-warn-on-nonfree nil))
 (after! gptel
-  (setq gptel-model 'claude-opus-4.7))
+  (setq gptel-model 'claude-opus-4-7))
 (after! minuet
   (setq minuet-provider 'claude))
 
