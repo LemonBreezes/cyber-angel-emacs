@@ -121,6 +121,7 @@
          (nix +lsp +tree-sitter)
          (lua +lsp +tree-sitter +fennel)
          (data +lsp +tree-sitter)
+         (lean +lsp +tree-sitter)
          (latex +lsp +tree-sitter +cdlatex +latexmk +fold)
          (javascript +lsp +tree-sitter)
          (markdown +lsp +tree-sitter +grip)
@@ -151,7 +152,6 @@
 
          :cae
          exwm
-         (lean4 +lsp +tree-sitter)
          (helm +childframe)
          debugger
          eat
