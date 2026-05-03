@@ -16,6 +16,7 @@ Can be 'vterm, 'eat, or 'exwm."
 Supported values: \"claude\", \"opencode\", \"codex\", \"gemini\", \"aider\",
 \"chatgpt\", \"copilot\", \"tabnine\", \"sourcegraph-cody\", \"continue\"."
   :type '(choice (const :tag "Claude" "claude")
+          (const :tag "Mistral Vibe" "vibe")
           (const :tag "OpenCode" "opencode")
           (const :tag "Codex" "codex")
           (const :tag "Gemini" "gemini")
