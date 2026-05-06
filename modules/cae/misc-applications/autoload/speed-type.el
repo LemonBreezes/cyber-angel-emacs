@@ -9,4 +9,5 @@
  :buffer-name "*speed-type*"
  :workspace-name cae-speed-type-workspace-name
  :mode-name speed-type-mode
- :evil-state 'insert)
+ :evil-state 'insert
+ :quit-key "C-c q")
