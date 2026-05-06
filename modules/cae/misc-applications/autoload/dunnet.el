@@ -9,4 +9,5 @@
  :buffer-name "*dungeon*"
  :workspace-name cae-dunnet-workspace-name
  :mode-name dun-mode
- :evil-state 'insert)
+ :evil-state 'insert
+ :typing-game t)

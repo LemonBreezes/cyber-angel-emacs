@@ -448,10 +448,7 @@
         "d" #'cae-dunnet)
   (after! which-key
     (which-key-add-keymap-based-replacements cae-misc-applications-games-map
-      "d" "Dunnet"))
-  :config
-  (map! :map dun-mode-map
-        "C-c C-k" #'cae-dunnet-quit))
+      "d" "Dunnet")))
 
 (use-package! speed-type
   :defer t :init
@@ -475,9 +472,7 @@
   (map! :map speed-type--completed-keymap
         "q" #'cae-speed-type-text-quit
         "r" #'speed-type--replay
-        "n" #'speed-type--play-next
-        :map speed-type-mode-map
-        :n "q" #'cae-speed-type-text-quit))
+        "n" #'speed-type--play-next))
 
 (use-package! snake
   :defer t :init
