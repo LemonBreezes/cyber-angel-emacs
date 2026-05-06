@@ -128,7 +128,6 @@ KEYMAP-SETUP-FN is a function to set up keybindings for the application."
                                             buffer-name
                                             workspace-name
                                             (setup-keys t)
-                                            (quit-key "q")
                                             (save-scores nil)
                                             scores-file
                                             mode-name
@@ -141,7 +140,6 @@ LAUNCH-FN is the function to start the game.
 BUFFER-NAME is the name of the game's buffer.
 WORKSPACE-NAME is the name of the workspace to use.
 SETUP-KEYS determines whether to set up quit key bindings.
-QUIT-KEY is the key to bind to the quit function (defaults to \"q\").
 SAVE-SCORES determines whether to save and load high scores.
 SCORES-FILE is the name of the scores file in `shared-game-score-directory'.
 MODE-NAME is the major mode symbol for the game (if it has one).
@@ -153,27 +151,26 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
                               (intern (format "%s-map" mode-name))
                             (intern (format "%s-mode-map" name))))
          (keymap-setup-fn
-          (when (and setup-keys quit-key)
+          (when setup-keys
             `(lambda ()
                ;; Try to set key in the mode map if it exists
                (when (boundp ',keymap-variable)
-                 (define-key ,keymap-variable (kbd ,quit-key) ',quit-fn-name))
+                 (define-key ,keymap-variable (kbd "q") ',quit-fn-name))
                ;; Set local keybinding (works in any mode)
-               (local-set-key (kbd ,quit-key) ',quit-fn-name)
+               (local-set-key (kbd "q") ',quit-fn-name)
                (when (featurep 'evil)
                  (when (boundp ',keymap-variable)
-                   (evil-define-key '(normal emacs) ,keymap-variable (kbd ,quit-key) ',quit-fn-name))
-                 (evil-local-set-key 'normal (kbd ,quit-key) ',quit-fn-name)
-                 (evil-local-set-key 'emacs (kbd ,quit-key) ',quit-fn-name)))))
+                   (evil-define-key '(normal emacs) ,keymap-variable (kbd "q") ',quit-fn-name))
+                 (evil-local-set-key 'normal (kbd "q") ',quit-fn-name)
+                 (evil-local-set-key 'emacs (kbd "q") ',quit-fn-name)))))
          (scores-setup-fn
           (when save-scores
             `(lambda ()
                (let* ((saves-buf (find-file-noselect (expand-file-name ,scores-file shared-game-score-directory)))
                       (highest-score (with-current-buffer saves-buf
-                                       ,@(when quit-key
-                                           `((local-set-key (kbd ,quit-key) ',quit-fn-name)
-                                             (when (featurep 'evil)
-                                               (evil-local-set-key 'normal (kbd ,quit-key) ',quit-fn-name))))
+                                       (local-set-key (kbd "q") ',quit-fn-name)
+                                       (when (featurep 'evil)
+                                         (evil-local-set-key 'normal (kbd "q") ',quit-fn-name))
                                        (buffer-substring-no-properties (goto-char (point-min))
                                                                        (line-end-position)))))
                  (setq-local header-line-format highest-score)))))
@@ -207,3 +204,4 @@ FORCE-EMACS-STATE will force Evil to use emacs state in the game buffer."
       :setup-fn ,setup-fn
       ,@(when cleanup-fn
           `(:cleanup-fn ,cleanup-fn)))))
+
