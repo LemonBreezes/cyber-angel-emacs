@@ -45,6 +45,9 @@
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
 
+;; Compat until I migrate to Emacs 31
+(package! hide-mode-line)
+
 ;; Preamble
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 (package! persistent-scratch)
@@ -110,6 +113,7 @@
   (package! consult-mu :recipe
     (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
 (package! 0x0)
+(package! buffer-to-pdf :recipe (:host github :repo "protesilaos/buffer-to-pdf"))
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
