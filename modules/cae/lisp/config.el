@@ -21,10 +21,6 @@
   (defun cae-eros-setup-keybindings-h ()
     (map! [remap eval-last-sexp] #'cae-eval-last-sexp)))
 
-;; This fixes aggressive indent's indentation of plists. :)
-(after! lisp-mode
-  (setf (symbol-function 'lisp-indent-function) '+emacs-lisp-indent-function))
-
 (after! elisp-mode
   (map! :map emacs-lisp-mode-map
         :localleader
