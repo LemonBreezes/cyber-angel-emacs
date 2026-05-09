@@ -14,7 +14,8 @@
   (interactive (list 1))
 
   (when (or (getenv "WSL_DISTRO_NAME")
-            (not (fboundp 'dbus-init-dbus)))
+            (not (fboundp 'dbus-init-dbus))
+            (not (executable-find "nmcli")))
     (cl-return-from cae-geolocation-setup))
 
   ;; Set default verbosity if not provided
