@@ -112,11 +112,3 @@ of ELEMENT."
     :filter-args #'load
     (cl-destructuring-bind (file &optional noerror nomessage nosuffix must-suffix) args
       (list file noerror t nosuffix must-suffix))))
-
-(defun cae-prefer-eln-over-source (fullname file noerror nomessage)
-  (let ((eln (comp-el-to-eln-filename fullname)))
-    (if (and eln (file-exists-p eln))
-        (native-elisp-load eln)
-      (let ((load-source-file-function nil))
-        (load fullname noerror nomessage t)))))
-(setq load-source-file-function #'cae-prefer-eln-over-source)
