@@ -8,9 +8,8 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert)
-(if (version< "31.0" emacs-version)
-    (defalias 'hide-mode-line-mode 'mode-line-invisible-mode)
-  (package! hide-mode-line))
+(when (version< emacs-version "31.0")
+    (package! hide-mode-line))
 (package! mu4e :built-in t)
 (package! llvm-mode :built-in t)
 
