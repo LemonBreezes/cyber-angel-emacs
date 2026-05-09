@@ -102,7 +102,7 @@ without a module are unconditional.
 |                                      | C-F4   | ~tab-close~                          | active while ~tab-bar-mode~ is on            |
 | :completion vertico                  | F8     | ~embark-act~                         | also on ~C-;~                                |
 | :completion vertico                  | F9     | ~embark-act-all~                     | also on ~C-:~                                |
-| :cae holy                            | F5     | ~cae-completion-prefix-map~          | CAPE dispatch (also on ~C-.~); Evil disabled |
+| :cae holy                            | F5     | ~cae-completion-prefix-map~          | CAPE dispatch (also on ~C-.~) |
 | :cae holy + :editor multiple-cursors | F5     | ~cae-mc-map~                         | inside ~mc/keymap~                           |
 | :cae holy + :editor multiple-cursors | F5     | ~mc/unfreeze-fake-cursors~           | inside ~cae-completion-prefix-map~           |
 | :cae ai                              | F6     | ~aidermacs-transient-menu~           |                                            |
