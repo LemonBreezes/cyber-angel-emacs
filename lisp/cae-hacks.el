@@ -112,3 +112,4 @@
 (defvar it nil)                             ;consult--buffer-query function
 (defvar message-cache (make-string 100 ?\0))
 (defvar request-sequence 0)
+(defvar event-lock 0)
