@@ -29,8 +29,6 @@
   (add-to-list 'compile-angel-excluded-files-regexps "/doom-snippets/.*"))
 
 (use-package! compile-angel
-  :init
-  (setq compile-angel--doom-user-dir nil)
   :defer 10.0 :config
   (setq compile-angel-use-file-index t)
   (setq compile-angel-enable-native-compile t)
