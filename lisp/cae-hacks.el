@@ -3,6 +3,9 @@
 
 ;;; Other hacks
 
+;; To migrate to Emacs31 without redoing my config.
+(defalias 'hide-mode-line-mode 'mode-line-invisible-mode)
+
 (defun cae-shut-up-a (fn &rest args)
   "Generic advisor for silencing noisy functions."
   (quiet!! (apply fn args)))
