@@ -31,7 +31,6 @@
 (use-package! compile-angel
   :defer 10.0 :config
   (setq compile-angel-use-file-index t)
-  (setq compile-angel-guess-el-file-use-load-history t)
   (setq compile-angel-enable-native-compile t)
   (setq compile-angel-exclude-core-emacs-directory t)
 
