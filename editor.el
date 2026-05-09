@@ -95,6 +95,9 @@
 ;; Pop mark multiple times with `C-u C-SPC C-SPC ...'.
 (setq set-mark-command-repeat-pop t)
 
+;; New in Emacs31. I've always preferred not re-activating the region.
+(setq exchange-point-and-mark-highlight-region nil)
+
 (setq search-whitespace-regexp ".*?"
       search-default-mode #'char-fold-to-regexp
       isearch-lax-whitespace t
@@ -106,7 +109,7 @@
       isearch-yank-on-move 'shift
       isearch-motion-changes-direction t
       lazy-count-prefix-format "(%s/%s) "
-      lazy-count-suffix-format nil    ; Using the suffix for counting matches
+      lazy-count-suffix-format nil      ; Using the suffix for counting matches
                                         ; is better but does not work with
                                         ; `isearch-mb'.
       lazy-highlight-cleanup nil
@@ -119,16 +122,6 @@
     (lazy-highlight-cleanup t)))
 (when (fboundp #'+evil-disable-ex-highlights-h)
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
-
-;; I think it's better to not enable this. Doom already eagerly cleans up
-;; popup and Magit buffers.
-;;(cae-defadvice! cae-midnight-clean-buffer-list-delay-a (name) :before-until
-;;#'midnight-clean-buffer-list-delay (parent-mode-is-derived-p
-;;(buffer-local-value 'major-mode name) 'exwm-mode)) (cae-run-with-idle-timer
-;;600 nil "midnight-mode" #'midnight-mode +1) (after! midnight (setq
-;;clean-buffer-list-kill-regexps '("\\`\\*.*\\*\\'")
-;;clean-buffer-list-delay-special 7200) (add-to-list
-;;'clean-buffer-list-kill-never-buffer-names doom-fallback-buffer-name))
 
 (after! outline
   (setq outline-minor-mode-use-buttons t))
