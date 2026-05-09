@@ -153,7 +153,6 @@
          exwm
          (helm +childframe)
          debugger
-         eat
          eshell
          dired
          lisp
