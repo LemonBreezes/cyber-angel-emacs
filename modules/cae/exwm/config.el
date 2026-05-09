@@ -104,7 +104,13 @@
     (exwm-randr-mode +1)
     (exwm-xim-mode +1)                  ; Testing to see if this still breaks
                                         ; nested Emacs sessions.
-    (exwm-wm-mode +1)
+    (condition-case err
+        (exwm-wm-mode +1)
+      (error
+       (toggle-frame-fullscreen)
+       (display-warning 'cae-exwm
+                        (format "Error enabling exwm-wm-mode: %S" err)
+                        :error)))
 
     ;; Never suspend Emacs when using EXWM. Doing so locks up Emacs.
     (map! [remap suspend-frame] #'undefined)
