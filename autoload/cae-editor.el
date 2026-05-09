@@ -135,19 +135,6 @@ Like `er/mark-comment' but also marks comment with leading whitespace."
     (call-interactively #'set-mark-command)))
 
 ;;;###autoload
-(defun cae-exchange-point-and-mark ()
-  "Enhanced version of `exchange-point-and-mark'.
-Toggles the prefix argument based on region state."
-  (interactive)
-  (let ((current-prefix-arg
-         (if (region-active-p)
-             current-prefix-arg
-           (pcase current-prefix-arg
-             (`(4) nil)
-             (_ '(4))))))
-    (call-interactively #'exchange-point-and-mark)))
-
-;;;###autoload
 (defun cae-jump-to-random-line ()
   "Jump to the end of a random line in the current buffer."
   (interactive)
