@@ -194,6 +194,8 @@
   (connection-local-set-profiles
    '(:application tramp :protocol "ssh")
    'remote-direct-async-process))
+(after! ffap
+  (setq ffap-prefer-remote-file t))
 
 (after! marginalia
   ;; Use `embark-file-map' for `ffap-menu'.
