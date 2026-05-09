@@ -52,6 +52,7 @@
           ("\\.tar\\'" ".tgz" nil)))
 
   (setq dired-create-empty-file-in-current-directory t)
+  (setq dired-auto-toggle-b-switch t)
   (setq dired-mouse-drag-files t
         dired-movement-style 'cycle)
   (after! dired-aux
