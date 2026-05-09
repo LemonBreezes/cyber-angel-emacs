@@ -110,5 +110,5 @@
 (defvar ediff-diff3-options nil)
 ;; More Emacs31 errors
 (defvar it nil)                             ;consult--buffer-query function
-(defvar message-cache "")
+(defvar message-cache (make-string 100 ?\0))
 (defvar request-sequence 0)
