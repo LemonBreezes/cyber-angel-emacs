@@ -3,7 +3,7 @@
 
 ;;; Other hacks
 
-;; To migrate to Emacs31 without redoing my config.
+;; To migrate to Emacs31 without changing my config much.
 (defalias 'hide-mode-line-mode 'mode-line-invisible-mode)
 
 (defun cae-shut-up-a (fn &rest args)
