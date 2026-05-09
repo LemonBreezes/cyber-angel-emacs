@@ -21,95 +21,33 @@ Functions in this hook are run with no arguments after the location
 information has been updated and calendar-latitude/longitude have been set.")
 
 (defvar cae-geolocation-current-location-name nil
-  "The human-readable name of the current location (e.g., \"City, State\").
-Updated asynchronously via NOAA API.")
+  "The human-readable name of the current location (e.g., \"City, Region\").
+Sourced from ipinfo.io alongside the coordinates.")
 
-(defun cae-geolocation-significant-change-p (lat1 lng1 lat2 lng2)
-  "Return t if the change in location from LAT1,LNG1 to LAT2,LNG2 is significant.
-Uses `cae-geolocation-significant-change-threshold' to determine significance.
-A change is considered significant if either the latitude or longitude
-changes by more than the threshold amount, or if the previous location
-(LAT1, LNG1) was not set (i.e., nil)."
-  ;; If previous location wasn't set, any valid new location is significant.
-  (if (not (and (numberp lat1) (numberp lng1)))
-      t
-    ;; Otherwise, compare the coordinates.
-    (or (> (abs (- lat1 lat2)) cae-geolocation-significant-change-threshold)
-        (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold))))
-
-(defun cae-geolocation--update-location (lat lng accuracy source)
-  "Update location, store it, and run hooks if change is significant.
-LAT and LNG are the new coordinates.
-ACCURACY is the reported accuracy in meters.
-SOURCE indicates the origin ('api, 'cache, etc.).
-Returns t if the location change was significant, nil otherwise."
-  (let ((significant-change
-         (cae-geolocation-significant-change-p
-          (doom-store-get 'calendar-latitude) (doom-store-get 'calendar-longitude)
-          lat lng)))
-    ;; Update calendar variables
-    (setq calendar-latitude lat
-          calendar-longitude lng)
-    ;; Store the location
-    (doom-store-put 'calendar-latitude lat)
-    (doom-store-put 'calendar-longitude lng)
-    ;; Run hooks only if change is significant
-    (when significant-change
-      (when cae-geolocation-verbose
-        (message "Geolocation: Location changed significantly (> %s°), running update hook."
-                 cae-geolocation-significant-change-threshold))
-      (run-hooks 'cae-geolocation-update-hook))
-    significant-change))
+(defvar cae-geolocation-current-timezone nil
+  "The IANA time zone name for the current location (e.g., \"America/New_York\").
+Sourced from ipinfo.io alongside the coordinates.")
 
 (defun cae-geolocation-restore-location ()
   "Restore location data from doom store if available.
-Returns t if a significant change occurred compared to the current state, nil otherwise."
+Returns t if a significant change occurred compared to the current state,
+nil otherwise (including when any required field is missing from the cache)."
   (let ((lat (doom-store-get 'calendar-latitude))
         (lng (doom-store-get 'calendar-longitude))
+        (timezone (doom-store-get 'cae-geolocation-current-timezone))
         (name (doom-store-get 'cae-geolocation-current-location-name)))
-    (if (and lat lng (not (= 0 lat)) (not (= 0 lng)))
-        (progn
-          (setq cae-geolocation-current-location-name name)
-          (cae-geolocation--update-weather-packages lat lng name)
-          ;; Update location using the helper, return its result
-          ;; The hook mechanism now handles updating weather packages.
-          (cae-geolocation--update-location lat lng "cached" 'cache))
-      nil)))
+    (when (and (numberp lat) (numberp lng) (stringp timezone) (stringp name)
+               (not (= 0 lat)) (not (= 0 lng)))
+      (cae-geolocation--update-location lat lng timezone name))))
 
-(defun cae-geolocation--update-weather-packages (lat lng name)
-  "Update variables in the noaa weather package if loaded.
-LAT, LNG are coordinates. NAME is the location name string."
-  (when (and lat lng name (stringp name) (> (length name) 0))
-    (setq noaa-location name
-          noaa-latitude lat
-          noaa-longitude lng)
-    (setq calendar-location-name name)))
+;; Attempt to restore location from cache. This sets calendar vars and name var.
+(let ((restored-successfully (cae-geolocation-restore-location)))
+  ;; If restore failed or location was invalid, schedule an initial fetch.
+  (unless restored-successfully
+    (run-with-idle-timer 5 nil #'cae-geolocation-setup 0)))
 
-;; Schedule geolocation updates
-(defun cae-geolocation-schedule-updates ()
-  "Schedule periodic geolocation updates."
-  (interactive)
-  ;; Schedule to run periodically when Emacs is idle
-  (cae-run-with-idle-timer cae-geolocation-idle-delay
+;; Schedule the regular periodic updates.
+(cae-run-with-idle-timer cae-geolocation-idle-delay
                            cae-geolocation-update-interval
                            "cae-geolocation-setup"
-                           #'cae-geolocation-setup 0))
-
-;; Fast startup function that doesn't require loading geo packages
-(defun cae-geolocation-init ()
-  "Initialize geolocation system during startup.
-Restores cached location if available, schedules initial fetch if needed,
-sets up periodic updates, and updates weather packages with initial data."
-  ;; Add the hook function to fetch name/update weather when coords change
-  (add-hook 'cae-geolocation-update-hook #'cae-geolocation--fetch-name-and-update-weather-h)
-  ;; Attempt to restore location from cache. This sets calendar vars and name var.
-  (let ((restored-successfully (cae-geolocation-restore-location)))
-    ;; If restore failed or location was invalid, schedule an initial fetch.
-    (unless restored-successfully
-      (run-with-idle-timer 5 nil #'cae-geolocation-setup 0)))
-
-  ;; Schedule the regular periodic updates.
-  (cae-geolocation-schedule-updates))
-
-;; Start the geolocation system
-(cae-geolocation-init)
+                           #'cae-geolocation-setup 0)
