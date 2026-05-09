@@ -140,7 +140,6 @@ enabled, unless gated by a module column.
 |                              | ~C-x x p~                               | ~posframe-delete-all~                      |                                |
 |                              | remap ~ibuffer~                         | ~ibuffer-jump~                             |                                |
 |                              | remap ~kill-current-buffer~             | ~cae-kill-current-buffer~                  |                                |
-|                              | remap ~exchange-point-and-mark~         | ~cae-exchange-point-and-mark~              |                                |
 |                              | remap ~backward-kill-word~              | ~doom/delete-backward-word~                | don't litter the kill-ring     |
 |                              | remap ~upcase/downcase/capitalize-word~ | ~*-dwim~                                   | act on region when active      |
 |                              | remap ~ispell-word~                     | ~cae-ispell-word-then-abbrev~              |                                |
