@@ -109,4 +109,4 @@
 (defvar ediff-ignore-case nil)
 (defvar ediff-diff3-options nil)
 ;; More Emacs31 errors
-(defvar it)                             ;consult--buffer-query function
+(defvar it nil)                             ;consult--buffer-query function
