@@ -48,6 +48,6 @@ nil otherwise (including when any required field is missing from the cache)."
 
 ;; Schedule the regular periodic updates.
 (cae-run-with-idle-timer cae-geolocation-idle-delay
-                           cae-geolocation-update-interval
-                           "cae-geolocation-setup"
-                           #'cae-geolocation-setup 0)
+                         cae-geolocation-update-interval
+                         "cae-geolocation-setup"
+                         #'cae-geolocation-setup 0)
