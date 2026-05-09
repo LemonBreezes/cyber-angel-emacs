@@ -114,3 +114,4 @@
 (defvar request-sequence 0)
 (defvar event-lock 0)
 (defvar event-queue nil)
+(defvar str "")
