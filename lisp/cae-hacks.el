@@ -104,3 +104,7 @@
 (cae-defadvice! cae-hacks-ignore-buffer-without-default-directory-a (&rest _)
   :before-while #'envrc-global-mode-enable-in-buffer
   (buffer-local-value 'default-directory (current-buffer)))
+
+;; On Emacs31. Likely related to the `fset` on `ediff-set-diff-options`.
+(defvar ediff-ignore-case nil)
+(defvar ediff-diff3-options nil)
