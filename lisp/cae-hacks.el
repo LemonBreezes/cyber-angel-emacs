@@ -115,3 +115,7 @@
 (defvar event-lock 0)
 (defvar event-queue nil)
 (defvar str "")
+(with-eval-after-load 'xcb
+  (cl-defmethod xcb:-process-events ((_conn (eql nil)))
+    "No-op when connection is nil."
+    nil))
