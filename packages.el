@@ -1,8 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 
-(setq compilation-safety 0)
-(setq native-comp-speed 3)
-
 (disable-packages! flyspell
                    ccls                 ; I use clangd.
                    compat               ; I use the latest version of Emacs.
