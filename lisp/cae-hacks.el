@@ -105,5 +105,5 @@
   :before-while #'envrc-global-mode-enable-in-buffer
   (buffer-local-value 'default-directory (current-buffer)))
 
-;; On Emacs31. Likely related to the `fset` on `ediff-set-diff-options`.
+;; On Emacs31. 
 (defvar owner 0)
