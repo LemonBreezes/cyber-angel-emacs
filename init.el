@@ -33,13 +33,13 @@
     (defvar cae-init-core-enabled-p (and c t))
     (defvar cae-init-tty-enabled-p (and c t))
     (defvar cae-init-bindings-enabled-p (and c t))
-    (defvar cae-init-multi-enabled-p (and c t))
+    (defvar cae-init-multi-enabled-p (and c t)) ; For using one Emacs config on many computers simultaneously.
     (defvar cae-init-smartparens-enabled-p (and c t))
     (defvar cae-init-projectile-enabled-p (and c t))
     (defvar cae-init-evil-enabled-p (and c t))
     (defvar cae-init-exwm-enabled-p (and c t))
-    (defvar cae-init-geolocation-enabled-p (and c t)))
-  (defvar cae-init-keyboard-remaps-enabled-p (and q nil))
+    (defvar cae-init-geolocation-enabled-p (and c t))) ; For latitude/longitude based on IP.
+  (defvar cae-init-keyboard-remaps-enabled-p (and q nil)) ; For alternative keyboard layouts.
   (let ((p (and q t)))
     (defvar cae-init-ui-enabled-p (and p t))
     (defvar cae-init-tools-enabled-p (and p t))
