@@ -73,7 +73,7 @@
          ophints
          (treemacs +lsp)
          modeline
-         smooth-scroll
+         (smooth-scroll +interpolate)
          unicode
          zen
 
