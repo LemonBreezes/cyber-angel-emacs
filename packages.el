@@ -51,9 +51,6 @@
 ;; Preamble
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
 (package! persistent-scratch)
-;;(package! compile-angel :recipe
-;;  (:host github :repo "LemonBreezes/compile-angel.el"
-;;   :branch "file-index-optimization"))
 (package! compile-angel :recipe
   (:host github :repo "jamescherti/compile-angel.el"
    :branch "develop"))
