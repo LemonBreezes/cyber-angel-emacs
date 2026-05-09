@@ -34,11 +34,11 @@
 (when (modulep! :editor evil)
   (package! evil-easymotion :recipe
     (:host github :repo "LemonBreezes/evil-easymotion"
-           :branch "avoid-infinite-loops-in-overlays")))
+     :branch "avoid-infinite-loops-in-overlays")))
 (when (modulep! :ui treemacs +lsp)
   (package! lsp-treemacs :recipe
     (:host github :repo "LemonBreezes/lsp-treemacs"
-           :branch "lots-of-fixes")))
+     :branch "lots-of-fixes")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
@@ -50,7 +50,7 @@
 (package! persistent-scratch)
 (package! compile-angel :recipe
   (:host github :repo "jamescherti/compile-angel.el"
-         :branch "develop"))
+   :branch "develop"))
 
 ;; cae-tty.el
 (package! clipetty)
