@@ -8,6 +8,9 @@
                    hl-line
                    elfeed-goodies
                    mu4e-alert)
+(if (version< "31.0" emacs-version)
+    (defalias 'mode-line-invisible-mode 'hide-mode-line-mode)
+  (package! hide-mode-line))
 (package! mu4e :built-in t)
 (package! llvm-mode :built-in t)
 
@@ -41,9 +44,6 @@
   (disable-packages! smartparens))
 (when (modulep! :checkers syntax +flymake)
   (disable-packages! flycheck))
-
-;; Compat until I migrate to Emacs 31
-(package! hide-mode-line)
 
 ;; Preamble
 (package! cae-lib :recipe (:host github :repo "LemonBreezes/cae-lib"))
