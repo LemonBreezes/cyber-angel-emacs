@@ -24,6 +24,7 @@
   ;; Load required packages
   (require 'geo)
   (require 'geo-solar)
+  (require 'geo-nm)
   (require 'url)
   (require 'json)
 
