@@ -14,6 +14,9 @@
   ;; to see the character under it.
   (setq visible-cursor t)
 
+  ;; Added in Emacs31. Do not know how useful this is yet.
+  (setq xterm-update-cursor t)
+
   ;; Remove some hooks that don't work in the terminal.
   (remove-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
     #'vi-tilde-fringe-mode)
