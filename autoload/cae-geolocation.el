@@ -18,17 +18,20 @@ changes by more than the threshold amount, or if the previous location
         (> (abs (- lng1 lng2)) cae-geolocation-significant-change-threshold))))
 
 ;;;###autoload
-(defun cae-geolocation--update-location (lat lng timezone name)
+(defun cae-geolocation--update-location (lat lng timezone name &optional force)
   "Update location, store it, and run hooks if change is significant.
 LAT and LNG are the new coordinates.
 TIMEZONE is an IANA tz name (e.g. \"America/New_York\") used to set
 `calendar-time-zone' (in minutes east of UTC).
 NAME is a human-readable location string like \"City, Region\".
-Returns t if the location change was significant, nil otherwise."
+If FORCE is non-nil, the significance check is bypassed and the update hook
+is run unconditionally.
+Returns t if the hook was run, nil otherwise."
   (let* ((significant-change
           (cae-geolocation-significant-change-p
            (doom-store-get 'calendar-latitude) (doom-store-get 'calendar-longitude)
            lat lng))
+         (run-hook (or force significant-change))
          (tz-info (ignore-errors (current-time-zone nil timezone)))
          (tz-offset-minutes (and tz-info (car tz-info) (/ (car tz-info) 60))))
     ;; Update in-memory calendar variables and current-location vars.
@@ -51,27 +54,33 @@ Returns t if the location change was significant, nil otherwise."
             noaa-latitude lat
             noaa-longitude lng
             calendar-location-name name))
-    ;; Run hooks only if change is significant
-    (when significant-change
+    ;; Run hooks if forced or change is significant.
+    (when run-hook
       (when cae-geolocation-verbose
-        (message "Geolocation: Location changed significantly (> %s°), running update hook."
-                 cae-geolocation-significant-change-threshold))
+        (message "Geolocation: Running update hook (%s)."
+                 (if force "forced"
+                   (format "change > %s°" cae-geolocation-significant-change-threshold))))
       (run-hooks 'cae-geolocation-update-hook))
-    significant-change))
+    run-hook))
 
 ;;;###autoload
-(cl-defun cae-geolocation-setup (&optional verbosity)
+(cl-defun cae-geolocation-setup (&optional verbosity force)
   "Set up geolocation using ipinfo.io and integrate with solar calendar asynchronously.
 Updates calendar-latitude, calendar-longitude, and calendar-time-zone, sets the
 current location name, and triggers circadian theme updates.
 
 Optional VERBOSITY controls output messages:
 0 - Silent operation, errors only if not network-related (default for non-interactive)
-1 - Basic confirmation (default for interactive)"
-  (interactive (list 1))
+1 - Basic confirmation (default for interactive)
+
+If FORCE is non-nil, run the update hook regardless of whether the change
+is significant. Defaults to t when called interactively."
+  (interactive (list 1 t))
 
   (unless verbosity
     (setq verbosity (if (called-interactively-p 'any) 1 0)))
+  (unless force
+    (setq force (called-interactively-p 'any)))
 
   (require 'url)
   (require 'json)
@@ -107,7 +116,7 @@ Optional VERBOSITY controls output messages:
              (if (and (numberp lat) (numberp lng)
                       (stringp timezone) (> (length timezone) 0)
                       (stringp name))
-                 (cae-geolocation--update-location lat lng timezone name)
+                 (cae-geolocation--update-location lat lng timezone name force)
                (when cae-geolocation-verbose
                  (message "Geolocation Error: ipinfo response missing fields (loc=%S tz=%S name=%S)"
                           loc timezone name))))
