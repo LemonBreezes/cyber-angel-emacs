@@ -46,10 +46,7 @@ Also resets the projectile cache for each affected directory."
       (when-let* ((entry (cae-dir-locals-cache-lookup (buffer-file-name buf))))
         (with-current-buffer buf
           (hack-dir-local-variables-non-file-buffer))
-        (puthash (car entry) t dirs)))
-    (maphash (lambda (dir _)
-               (cae-invalidate-project-cache dir))
-             dirs)))
+        (puthash (car entry) t dirs)))))
 
 
 ;; ---[ 3. Reload for Buffers of a Specific Class ]----------------------
