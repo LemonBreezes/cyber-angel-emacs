@@ -41,8 +41,7 @@ mostly through Helm and Consult autocompletion interfaces. The current categorie
 I've also added a few custom patches to Emacs, which are available in the
 ~emacs-patches~ folder. These patches are:
 1. ~use-comp-speed-3.patch~: Sets the default compilation speed to 3, which
-   generates faster code than the default of 2. (Currently broken in Emacs31 for
-   me)
+   generates faster code than the default of 2.
 2. ~use-compilation-safety-0.patch~: Allows native-compiled elisp to misbehave and
    crash Emacs. This allows for greater speed but less safety. For example, if
    an elisp function is declared to take a string and return a string, it could
