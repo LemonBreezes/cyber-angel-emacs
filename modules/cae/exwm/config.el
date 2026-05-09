@@ -151,9 +151,9 @@
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
-           :desc "Clear debug buffer" "l" #'xcb-debug:clear
-           :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
-           :desc "Enable debug logging" "t" #'exwm-debug)
+                   :desc "Clear debug buffer" "l" #'xcb-debug:clear
+                   :desc "Insert mark into the debug buffer" "m" #'xcb-debug:mark
+                   :desc "Enable debug logging" "t" #'exwm-debug)
           :desc "Toggle fullscreen" "f" #'exwm-layout-toggle-fullscreen
           :desc "Hide floating window" "h" #'exwm-floating-hide
           :desc "Send next key" "q" #'exwm-input-send-next-key
