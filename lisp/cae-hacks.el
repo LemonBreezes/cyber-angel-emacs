@@ -106,13 +106,4 @@
   (buffer-local-value 'default-directory (current-buffer)))
 
 ;; On Emacs31. Likely related to the `fset` on `ediff-set-diff-options`.
-(defvar ediff-ignore-case nil)
-(defvar ediff-diff3-options nil)
-;; More Emacs31 errors
-(defvar it nil)                             ;consult--buffer-query function
-(defvar message-cache (make-string 100 ?\0))
-(defvar request-sequence 0)
-(defvar event-lock 0)
-(defvar event-queue nil)
-(defvar str "")
 (defvar owner 0)
