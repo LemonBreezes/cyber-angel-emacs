@@ -1,5 +1,7 @@
 ;;; preamble.el -*- lexical-binding: t; -*-
 
+(set-default-toplevel-value 'lexical-binding t)
+
 (defun remove-from-list (list-var element &optional append compare-fn)
   "Remove ELEMENT from the value of LIST-VAR if it is present.
 The test for presence is done with `equal', or with COMPARE-FN if that's
