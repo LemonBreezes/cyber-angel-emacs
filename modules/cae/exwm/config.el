@@ -2,9 +2,6 @@
 
 (require 'cae-lib)
 
-;; Required for XCB. Should PR.
-(require 'compat-31)
-
 (defvar cae-exwm-enabled-p (and (eq 'x (framep (selected-frame)))
                                 (not (or (getenv "INSIDE_EXWM")
                                          (getenv "RATPOISON")
