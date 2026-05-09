@@ -108,3 +108,4 @@
 ;; On Emacs31. Likely related to the `fset` on `ediff-set-diff-options`.
 (defvar ediff-ignore-case nil)
 (defvar ediff-diff3-options nil)
+(require 'compat-31)
