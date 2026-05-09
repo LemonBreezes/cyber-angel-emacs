@@ -154,3 +154,7 @@
       (dired "~/Sync/"))
      (t
       (message "No Syncthing directory found.")))))
+
+;;;###autoload
+(defun cae-bookmark-jump-to-site-file (_)
+  (find-file (car (load-history-filename-element (load-history-regexp site-run-file)))))
