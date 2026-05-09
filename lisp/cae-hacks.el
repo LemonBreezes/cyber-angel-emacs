@@ -109,3 +109,4 @@
 ;; is related to enabling comp speed 3 everywhere and also the CL structs and
 ;; lexical binding not interacting correctly in Emacs31.
 (defvar owner 0)
+(defvar argument nil)
