@@ -109,3 +109,220 @@ without a module are unconditional.
 | :cae ai                              | F7     | ~cae-ai-assistant-code~              |                                            |
 | :cae ai                              | F12    | ~redraw-display~                     |                                            |
 | :cae exwm + :editor evil             | F6     | ~exwm-firefox-core-focus-search-bar~ | EXWM Firefox normal state                  |
+
+* Global keybindings (always active)
+
+These bindings are added or remapped regardless of which editing modules are
+enabled, unless gated by a module column.
+
+** Editing & windows
+
+| Module                          | Key                          | Command                          | Notes                                      |
+|---------------------------------+------------------------------+----------------------------------+--------------------------------------------|
+|                                 | ~<escape>~                     | ~keyboard-quit~                    |                                            |
+|                                 | ~M-Z~                          | ~zap-up-to-char~                   |                                            |
+|                                 | ~M-R~                          | ~cae-sp-raise-sexp~                |                                            |
+|                                 | ~M-/~                          | ~hippie-expand~                    |                                            |
+|                                 | ~M--~ / ~C--~                    | ~negative-argument~                | restored — Doom shadows these              |
+|                                 | ~M-=~                          | ~count-words-region~               |                                            |
+|                                 | ~C-S-h~                        | ~embark-bindings~                  |                                            |
+|                                 | ~C-x !~                        | ~doom/window-enlargen~             |                                            |
+|                                 | ~C-x _~                        | ~shrink-window~                    | dual to ~C-x ^~                              |
+|                                 | ~C-x O~                        | ~other-window-previous~            | dual to ~C-x o~                              |
+|                                 | ~C-x M-o~                      | ~ace-swap-window~                  |                                            |
+|                                 | ~C-x M-t~                      | ~transpose-frame~                  |                                            |
+|                                 | ~C-x j~                        | ~cae-jump-to-random-line~          |                                            |
+|                                 | ~C-x P~                        | ~pop-to-buffer~                    |                                            |
+|                                 | ~C-x 4 I~                      | ~ibuffer-other-window~             |                                            |
+|                                 | ~C-x 4 -~                      | ~dired-jump-other-window~          |                                            |
+|                                 | ~C-x x c~                      | ~cae-edit-indirect-dwim~           |                                            |
+|                                 | ~C-x x o~                      | ~ov-clear~                         |                                            |
+|                                 | ~C-x x p~                      | ~posframe-delete-all~              |                                            |
+|                                 | remap ~ibuffer~                | ~ibuffer-jump~                     |                                            |
+|                                 | remap ~kill-current-buffer~    | ~cae-kill-current-buffer~          |                                            |
+|                                 | remap ~exchange-point-and-mark~ | ~cae-exchange-point-and-mark~     |                                            |
+|                                 | remap ~backward-kill-word~     | ~doom/delete-backward-word~        | don't litter the kill-ring                 |
+|                                 | remap ~upcase/downcase/capitalize-word~ | ~*-dwim~                  | act on region when active                  |
+|                                 | remap ~ispell-word~            | ~cae-ispell-word-then-abbrev~      |                                            |
+|                                 | remap ~delete-other-windows~   | ~doom/window-maximize-buffer~      |                                            |
+|                                 | remap ~scroll-up/down-command~ | ~View-scroll-half-page-*~          | half-page visual scrolling                 |
+|                                 | remap ~scroll-other-window(-down)~ | ~cae-view-scroll-half-page-*-other-window~ |                              |
+| :completion corfu               | ~C-M-/~                        | ~cape-dabbrev~                     |                                            |
+| :completion corfu               | ~C-S-s~                        | ~cae-complete-in-minibuffer~       |                                            |
+| :config default +smartparens    | ~C-x n s~                      | ~sp-narrow-to-sexp~                |                                            |
+
+** Structural editing (smartparens-mode)
+
+Active in any buffer where ~smartparens-mode~ is on, regardless of Evil.
+
+| Key                  | Command                          |
+|----------------------+----------------------------------|
+| ~C-)~ / ~C-(~            | ~sp-{forward,backward}-slurp-sexp~ |
+| ~C-}~ / ~C-{~            | ~sp-{forward,backward}-barf-sexp~  |
+| ~C-M-)~                | ~sp-slurp-hybrid-sexp~             |
+| ~C-x C-t~              | ~sp-transpose-hybrid-sexp~         |
+| ~M-<delete>~           | ~sp-unwrap-sexp~                   |
+| ~M-<backspace>~        | ~sp-backward-unwrap-sexp~          |
+| ~C-M-<delete>~         | ~sp-splice-sexp-killing-forward~   |
+| ~C-M-<backspace>~      | ~sp-splice-sexp-killing-backward~  |
+| ~C-M-@~                | ~sp-mark-sexp~                     |
+| ~C-M-S-w~              | ~sp-copy-sexp~                     |
+| ~C-M-S-c~              | ~sp-convolute-sexp~                |
+| ~C-M-S-d~              | ~sp-splice-sexp~                   |
+| ~C-M-S-k~              | ~sp-kill-hybrid-sexp~              |
+| ~C-M-S-r~              | ~cae-sp-raise-sexp~                |
+| ~C-M-S-s~              | ~sp-split-sexp~                    |
+| ~C-M-S-y~              | ~sp-clone-sexp~                    |
+| ~C-S-w~                | ~sp-backward-kill-sexp~            |
+| ~C-h bs~               | ~cae-sp-which-key-cheatsheet~      |
+| remap ~C-M-{f,b,d,e,u,a,n,p,t,k}~ | ~sp-*~ equivalents       | the standard sexp-motion remaps  |
+
+** Search and navigation (Consult)
+
+Requires ~:completion vertico~.
+
+| Key                | Command                  | Notes                              |
+|--------------------+--------------------------+------------------------------------|
+| ~M-X~                | ~consult-mode-command~     |                                    |
+| ~M-#~                | ~consult-register-load~    | also remaps ~jump-to-register~       |
+| ~C-#~                | ~consult-register-store~   |                                    |
+| ~C-M-#~              | ~consult-register~         |                                    |
+| ~M-g g~ / ~M-g M-g~    | ~consult-goto-line~        |                                    |
+| ~M-g o~              | ~consult-outline~          |                                    |
+| ~M-g m~ / ~M-g k~      | ~consult-{mark,global-mark}~ |                                  |
+| ~M-g e~              | ~consult-compile-error~    |                                    |
+| ~M-g f~              | ~consult-flymake/flycheck~ | which one depends on checker       |
+| ~M-g I~              | ~consult-imenu-multi~      |                                    |
+| ~M-s e~              | ~consult-isearch-history~  | also bound in isearch              |
+| ~M-s k~ / ~M-s u~      | ~consult-{keep,focus}-lines~ |                                  |
+| ~M-s l~ / ~M-s L~      | ~consult-line(-multi)~     | inside isearch                     |
+| ~M-r~                | ~consult-history~          | inside minibuffer                  |
+| ~C-x t b~            | ~consult-buffer-other-tab~ |                                    |
+| ~C-x M-:~            | ~consult-complex-command~  |                                    |
+| ~C-h TAB~            | ~consult-info~             |                                    |
+| remap ~Info-search~  | ~consult-info~             |                                    |
+
+** Help map (~C-h~ prefix) additions
+
+| Key       | Command                          | Notes                                      |
+|-----------+----------------------------------+--------------------------------------------|
+| ~C-h SPC~   | ~cae-pop-mark~                     | also on ~C-h DEL~ — for split-keyboard users |
+| ~C-h C-r~   | ~describe-repeat-maps~             |                                            |
+| ~C-h M-t~   | ~help-with-tutorial~               | restored — Doom unbinds it                 |
+| ~C-h d d~   | ~cae-debug-transient~              |                                            |
+| ~C-h d C~   | ~evil-collection-open-config-file~ | requires ~:editor evil +everywhere~          |
+| ~C-h bn~    | ~cae-which-key-show-state-keymap~  | requires ~:editor evil~                      |
+| ~C-h bh~    | ~cae-embark-state-bindings~        | requires ~:editor evil~                      |
+| ~C-h bs~    | ~cae-sp-which-key-cheatsheet~      | smartparens cheatsheet                     |
+| ~C-h bl~    | ~cae-lispy-cheatsheet~             | requires ~:cae lisp~                         |
+
+* EXWM bindings (Super key)
+
+Active when ~:cae exwm~ is enabled. Doom's leader still wins inside Emacs
+buffers; the Super (~s-~) prefix is reserved for EXWM-level actions.
+
+| Key                            | Command / Action                            |
+|--------------------------------+---------------------------------------------|
+| ~s-v~                            | open generic browser                        |
+| ~s-V~                            | ~cae-exwm-run-vm~                             |
+| ~s-f~                            | flameshot GUI                               |
+| ~s-t~                            | Tiled                                       |
+| ~s-d~                            | Discord                                     |
+| ~s-p~                            | pavucontrol                                 |
+| ~s-s~                            | Signal                                      |
+| ~s-e~ / ~s-E~ / ~s-D~                | nested Emacs / vanilla Emacs / vanilla Doom |
+| ~s-r~                            | ~cae-exwm-toggle-redshift~                    |
+| ~s-x~ / ~s-X~                      | black screen / lock screen                  |
+| ~s-<return>~                     | Kitty                                       |
+| ~s-S-<return>~                   | ~cae-open-eshell-in-new-workspace~            |
+| ~s-h~                            | ~hydra-exwm-apps/body~ (when ~:ui hydra~)       |
+| ~XF86MonBrightness{Up,Down}~     | screen brightness                           |
+| ~XF86KbdBrightness{Up,Down}~     | keyboard backlight                          |
+| ~XF86Audio{Raise,Lower}Volume~   | volume                                      |
+| ~XF86AudioMicMute~               | mic mute                                    |
+
+* Evil-only bindings
+
+Active when ~:editor evil~ is enabled. State columns: =N= normal, =I= insert,
+=M= motion, =V= visual, =g= global (in Evil).
+
+| Module / Map               | State | Key             | Command                                |
+|----------------------------+-------+-----------------+----------------------------------------|
+| global                     | N     | ~C-a~             | ~cae-evil-append-buffer-or-code~         |
+| global                     | I     | ~C-S-e~           | ~evil-copy-from-below~                   |
+| global                     | N     | ~gt~ / ~gT~         | ~tab-bar-switch-to-{next,prev}-tab~      |
+| global                     | N     | ~zE~              | ~cae-evil-edit-indirect~                 |
+| global                     | N     | ~]p~ / ~[p~         | ~cae-unimpaired-paste-{below,above}~     |
+| global                     | M     | ~]6~ / ~[6~         | ~cae-unimpaired-b64-{decode,encode}~     |
+| global                     | N     | ~]r~ / ~[r~         | ~parrot-rotate-{next,prev}-word-at-point~ |
+| global                     | N     | ~] DEL~ / ~[ DEL~   | ~+evil/insert-newline-{below,above}~     |
+| global                     | N     | ~C-M-?~           | ~cae-which-key-show-state-keymap~        |
+| ~g~ prefix                   | M     | ~g [~ / ~g ]~       | ~backward-page~ / ~cae-forward-page~       |
+| ~evil-window-map~ (~C-w~)      |       | ~e~ / ~~~           | ~+popup/other~ / ~+popup/raise~            |
+| ~evilem-map~                 |       | ~RET~             | ~cae-avy-embark-act-on-region~           |
+| ~evilem-map~                 |       | ~r~ / ~TAB~         | ~cae-avy-rotate~ / ~tabgo~                 |
+| ~+hybrid~ only               | M     | ~C-r~ / ~C-s~       | ~isearch-{backward,forward}~             |
+| ~+hybrid~ only               | N     | ~U~               | ~evil-redo~                              |
+| ~Info-mode-map~              | M     | ~/~ / ~?~           | ~isearch-{forward,backward}-regexp~      |
+| ~comint-mode-map~            | I     | ~C-d~             | ~cae-comint-delchar-or-maybe-eof~        |
+| ~magit-status-mode-map~      | NV    | ~gt~              | ~tab-bar-switch-to-next-tab~             |
+| ~magit-status-mode-map~      | NV    | ~gz~              | ~magit-jump-to-stashes~                  |
+| ~vterm-mode-map~ localleader |       | ~e~               | ~vterm-send-escape~                      |
+| ~evil-org-mode-map~          | I     | ~C-u~             | ~cae-evil-org-delete-back-to-indentation~ |
+| ~org-mode-map~               | g     | ~M-RET~           | ~cae-evil-org-insert-heading~            |
+| ~org-mode-map~               | g     | ~M-S-RET~         | ~cae-evil-org-insert-todo-heading~       |
+| ~evil-cleverparens-mode-map~ | N     | ~M-"~             | ~cae-evil-cp-wrap-next-double-quotes~    |
+| +multiple-cursors            | N     | ~M-n~ / ~M-N~       | ~evil-multiedit-match-symbol-{next,prev}~ |
+| +multiple-cursors            | V     | ~M-n~ / ~M-N~       | ~evil-multiedit-match-{next,prev}~        |
+| ~C-x~ prefix (insert)        | I     | ~C-x C-f~         | ~cape-file~                              |
+| ~C-x~ prefix (insert)        | I     | ~C-x s~           | ~cape-dict~                              |
+| ~C-x~ prefix (insert)        | I     | ~C-x e~           | ~cae-cape-elisp-capf~                    |
+| ~C-x~ prefix (insert)        | I     | ~C-x C-s~         | ~yasnippet-capf~                         |
+| ~C-x~ prefix (insert)        | I     | ~C-x C-o~         | ~completion-at-point~                    |
+| ~C-x~ prefix (insert)        | I     | ~C-x C-n~ / ~C-x C-p~ | ~cape-dabbrev~ / ~+corfu/dabbrev-this-buffer~ |
+| ~C-x~ + ~:cae ai~              | I     | ~C-x C-c~         | ~copilot-complete~ or ~minuet-show-suggestion~ |
+| ~C-x~ + ~:cae ai~              |       | ~C-x y~           | ~minuet-complete-with-minibuffer~        |
+
+* Holy-mode bindings (non-Evil)
+
+Active when ~:cae holy~ is enabled (Evil disabled). The holy module also drives
+the F5 completion prefix-map documented above.
+
+| Map                            | Key       | Command                          |
+|--------------------------------+-----------+----------------------------------|
+| global                         | ~M-i~       | ~symbol-overlay-put~               |
+| global                         | ~M-I~       | ~symbol-overlay-remove-all~        |
+| global                         | ~M-N~ / ~M-P~ | ~symbol-overlay-switch-{forward,backward}~ |
+| ~symbol-overlay-map~             | ~N~ / ~P~     | ~symbol-overlay-switch-{forward,backward}~ |
+| ~symbol-overlay-map~             | ~r~         | ~symbol-overlay-rename~            |
+| ~symbol-overlay-map~             | ~o~         | ~cae-avy-symbol-at-point~          |
+| ~symbol-overlay-map~             | ~-~         | ~negative-argument~                |
+| minibuffer                     | ~<escape>~  | ~abort-recursive-edit~             |
+| ~org-mode-map~                   | ~M-RET~     | ~org-insert-heading~               |
+| ~org-mode-map~                   | ~M-S-RET~   | ~org-insert-todo-heading~          |
+| global                         | remap ~doom/backward-to-bol-or-indent~ | ~beginning-of-line~ |
+| global (~:tools lookup~)         | remap ~xref-find-definitions~ | ~cae-lookup-definition-dwim~ |
+
+* Mode-specific niceties
+
+A few non-default bindings worth knowing about inside specific major modes.
+
+| Mode / Map                  | Key             | Command                              | Notes                              |
+|-----------------------------+-----------------+--------------------------------------+------------------------------------|
+| ~diff-mode-map~               | ~q~               | ~kill-this-buffer~                     |                                    |
+| ~process-menu-mode-map~       | ~o~               | ~link-hint-open-link~                  |                                    |
+| ~vertico-map~                 | ~<prior>~/~<next>~  | ~vertico-scroll-{down,up}~             |                                    |
+| ~vertico-map~                 | ~C-z~             | ~cae-embark-act-with-completing-read~  |                                    |
+| ~isearch-mode-map~            | ~C-S-w~           | ~isearch-yank-word-or-char~            |                                    |
+| ~treemacs-mode-map~           | ~j~ (~J~ in Evil)   | ~consult-line~                         | requires ~:completion vertico~       |
+| ~vterm-mode-map~              | ~C-c C-x~         | ~vterm--self-insert~                   | passes ~C-x~ through to terminal     |
+| ~vterm-mode-map~              | remap ~evil-paste-pop~ | ~vterm-yank-pop~                  |                                    |
+| ~dired-mode-map~              | ~C-M-k~           | ~dired-kill-subdir~                    |                                    |
+| ~dired-mode-map~ (Evil)       | ~,~               | ~dired-create-empty-file~              |                                    |
+| ~dirvish~                     | ~<backtab>~       | ~cae-dirvish-subtree-clear~            |                                    |
+| ~ido-*-completion-map~        | ~C-w~             | ~ido-delete-backward-word-updir~       | ~:cae ido~                           |
+| ~ido-*-completion-map~        | ~C-n~/~C-p~/~↑~/~↓~     | ~ido-{next,prev}-match~                | ~:cae ido~                           |
+| ~magit-mode-map~              | ~yc~              | ~git-link-commit~                      | ~:cae vc~ + ~:tools magit~             |
+| ~magit-blame-read-only-map~   | ~D~ / ~S~           | ~difftastic-magit-show~                | ~:cae vc~                            |
+| global (~:cae vc~)              | remap ~+vc-gutter/{next,prev}-hunk~ | ~diff-hl-show-hunk-{next,previous}~ |                       |
+| global (~:cae unpackaged~)      | remap ~magit-status~ | ~cae-unpackaged-magit-save-buffer-show-status~ |                          |
