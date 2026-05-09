@@ -175,9 +175,6 @@
 (package! ov)
 (package! substitute)
 
-;; cae-geolocation.el
-(package! geo :recipe (:host github :repo "emacsmirror/geo" :files ("*" "lisp-src/*")))
-
 ;; cae-corfu.el
 (package! fish-completion)
 
