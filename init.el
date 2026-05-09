@@ -104,7 +104,7 @@
          editorconfig
          (eval +overlay)
          (lookup +dictionary +docsets +offline)
-         (magit +forge)
+         (magit) ; +forge disabled until fixed for Emacs31
          (lsp +peek)
          tree-sitter
          (docker +lsp)
