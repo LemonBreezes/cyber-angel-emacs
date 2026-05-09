@@ -2,7 +2,6 @@
 
 (set-default-toplevel-value 'lexical-binding t)
 (setq load-path-filter-function #'load-path-filter-cache-directory-files)
-(add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" doom-emacs-dir))
 
 (defun remove-from-list (list-var element &optional append compare-fn)
   "Remove ELEMENT from the value of LIST-VAR if it is present.
