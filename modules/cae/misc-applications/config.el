@@ -667,6 +667,7 @@
   :config
   (setq mpc-host cae-misc-applications-mpd-host
         mpc-mpd-music-directory cae-misc-applications-music-dir)
+  (setq mpc-notifications t)
   ;; Evil Collection added MPC bindings so these need to be looked at again.
   ;;(map! :map mpc-mode-map
   ;;      :n "gr" #'cae-mpc-reload
