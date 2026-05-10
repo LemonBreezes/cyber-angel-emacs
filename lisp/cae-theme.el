@@ -260,7 +260,9 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 (use-package! theme-magic
   :if cae-theme-export-theme-with-pywal ; Condition loading
   :after-call doom-load-theme-hook :defer t
-  :config (theme-magic-export-theme-mode +1))
+  :config
+  (theme-magic-export-theme-mode +1)
+  (theme-magic-from-emacs))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
