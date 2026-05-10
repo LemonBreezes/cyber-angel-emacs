@@ -259,10 +259,26 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
 
 (use-package! theme-magic
   :if cae-theme-export-theme-with-pywal ; Condition loading
-  :after-call doom-load-theme-hook :defer t
+  :defer-incrementally t :init
+  (unless (eq (car custom-enabled-themes)
+              (doom-store-get 'cae-theme-last-applied))
+    (theme-magic-from-emacs))
+  (add-hook! 'kill-emacs-hook
+    (defun cae-theme-store-last-applied-h ()
+      (when custom-enabled-themes
+        (doom-store-put 'cae-theme-last-applied (car custom-enabled-themes)))))
   :config
   (theme-magic-export-theme-mode +1)
-  (theme-magic-from-emacs))
+  ;; Only re-export to pywal if the active theme differs from the one in
+  ;; effect when Emacs was last killed. This skips a slow shell-out on
+  ;; startup when the theme hasn't changed.
+  (unless (eq (car custom-enabled-themes)
+              (doom-store-get 'cae-theme-last-applied))
+    (theme-magic-from-emacs))
+  (add-hook! 'kill-emacs-hook
+    (defun cae-theme-store-last-applied-h ()
+      (when custom-enabled-themes
+        (doom-store-put 'cae-theme-last-applied (car custom-enabled-themes))))))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
