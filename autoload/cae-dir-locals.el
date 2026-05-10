@@ -2,7 +2,7 @@
 
 (require 'cl-lib)
 
-;; ---[ 1. Cache Lookup & Cleanup ]--------------------------------------
+;; Cache Lookup & Cleanup
 
 (defun cae--cleanup-dir-locals-cache ()
   "Remove duplicates and invalid entries from `dir-locals-directory-cache'."
@@ -33,7 +33,7 @@ does it attempt to verify cache validity."
           (setq best entry)))
       best)))
 
-;; ---[ 2. Reload for All Buffers ]--------------------------------------
+;; Reload for All Buffers
 
 ;;;###autoload
 (defun cae-reload-all-dir-locals ()
@@ -49,7 +49,7 @@ Also resets the projectile cache for each affected directory."
         (puthash (car entry) t dirs)))))
 
 
-;; ---[ 3. Reload for Buffers of a Specific Class ]----------------------
+;; Reload for Buffers of a Specific Class
 
 ;;;###autoload
 (defun cae-reload-dir-locals-for-class (class)
