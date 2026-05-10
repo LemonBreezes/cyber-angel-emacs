@@ -79,8 +79,7 @@
         doom-modeline-mu4e nil
         doom-modeline-gnus nil
         doom-modeline-github nil
-        doom-modeline-major-mode-icon (cae-display-graphic-p)
-        doom-modeline-minor-modes t))
+        doom-modeline-major-mode-icon (cae-display-graphic-p)))
 
 (setq-hook! 'treemacs-mode-hook
   nobreak-char-display nil)
