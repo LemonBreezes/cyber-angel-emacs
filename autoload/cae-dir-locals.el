@@ -48,7 +48,6 @@ Also resets the projectile cache for each affected directory."
           (hack-dir-local-variables-non-file-buffer))
         (puthash (car entry) t dirs)))))
 
-
 ;; Reload for Buffers of a Specific Class
 
 ;;;###autoload
