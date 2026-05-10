@@ -36,6 +36,7 @@
   :config (global-anzu-mode +1))
 
 (use-package! minions
+  :when (not (modulep! :ui modeline))
   :defer t :init
   (add-hook 'doom-after-init-hook #'minions-mode)
   :config
