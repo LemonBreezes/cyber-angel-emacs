@@ -261,10 +261,9 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
   :if cae-theme-export-theme-with-pywal ; Condition loading
   :defer-incrementally t :init
   (defun cae-theme-magic-export-theme-h ()
-    (message "%s | %s" (car custom-enabled-themes) (doom-store-get 'cae-theme-last-applied))
-    (if (eq (car custom-enabled-themes)
-            (doom-store-get 'cae-theme-last-applied))
-        (theme-magic-from-emacs)
+    (unless (eq (car custom-enabled-themes)
+                (doom-store-get 'cae-theme-last-applied))
+      (theme-magic-from-emacs)
       (doom-store-put 'cae-theme-last-applied (car custom-enabled-themes))))
   (add-hook 'doom-load-theme-hook #'cae-theme-magic-export-theme-h))
 
