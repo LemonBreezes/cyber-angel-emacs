@@ -93,7 +93,8 @@
 (package! standard-themes)
 (package! ef-themes)
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
-(package! girly-notebook-theme :recipe (:host github :repo "melissaboiko/girly-notebook-theme"))
+(package! girly-notebook-theme :recipe
+  (:host github :repo "melissaboiko/girly-notebook-theme"))
 (package! theme-magic)
 (package! ewal)
 
@@ -129,6 +130,7 @@
 (package! git-modes)
 (package! huff-mode :recipe (:host github :repo "GokhanPolat/emacs-huff-mode"))
 (package! buffer-to-pdf :recipe (:host github :repo "protesilaos/buffer-to-pdf"))
+(package! exec-path-from-shell)
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
@@ -137,7 +139,8 @@
 (package! transpose-frame)
 (package! logos)
 (package! restore-point :recipe (:host github :repo "arthurcgusmao/restore-point"))
-(package! expand-region-improved :recipe (:host github :repo "leotaku/expand-region-improved"))
+(package! expand-region-improved :recipe
+  (:host github :repo "leotaku/expand-region-improved"))
 (package! parrot :recipe (:host github :repo "positron-solutions/parrot"))
 (package! string-inflection)
 (package! beginend)
