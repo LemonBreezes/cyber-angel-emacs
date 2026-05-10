@@ -60,7 +60,7 @@ of ELEMENT."
 
   (dolist (path (delq nil paths-to-add))
     (cae-add-dir-to-path path))
-      
+  
   (when (file-exists-p "/usr/bin/conda")
     (cae-add-dir-to-path "/usr/bin")))
 
