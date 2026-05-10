@@ -106,7 +106,6 @@
   (package! consult-mu :recipe
     (:host github :repo "armindarvish/consult-mu" :files ("*" "extras/*"))))
 (package! 0x0)
-(package! buffer-to-pdf :recipe (:host github :repo "protesilaos/buffer-to-pdf"))
 
 ;; cae-lsp.el
 (when (modulep! :tools lsp +eglot)
@@ -129,6 +128,7 @@
 (package! eff)
 (package! git-modes)
 (package! huff-mode :recipe (:host github :repo "GokhanPolat/emacs-huff-mode"))
+(package! buffer-to-pdf :recipe (:host github :repo "protesilaos/buffer-to-pdf"))
 
 ;;; Editor
 (package! yank-indent :recipe (:host github :repo "jimeh/yank-indent"))
