@@ -110,7 +110,10 @@ Otherwise, open the AI assistant for the current project."
     (cond
      ((eq cae-ai-assistant-terminal-backend 'exwm)
       ;; For EXWM, check for terminal buffer (e.g., *kitty:project*)
-      (let ((buffer-name (format "*%s:%s*" terminal-class (or (projectile-project-name) "default"))))
+      (let ((buffer-name (format "*%s:%s*" terminal-class
+                                 (or (and (modulep! :ui workspaces)
+                                          (+workspace-current-name))
+                                  (projectile-project-name) "default"))))
         (when (get-buffer buffer-name)
           (setq existing-buffer (get-buffer buffer-name)))))
      (t
