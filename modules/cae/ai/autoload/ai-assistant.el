@@ -113,7 +113,7 @@ Otherwise, open the AI assistant for the current project."
       (let ((buffer-name (format "*%s:%s*" terminal-class
                                  (or (and (modulep! :ui workspaces)
                                           (+workspace-current-name))
-                                  (projectile-project-name) "default"))))
+                                     (projectile-project-name) "default"))))
         (when (get-buffer buffer-name)
           (setq existing-buffer (get-buffer buffer-name)))))
      (t
