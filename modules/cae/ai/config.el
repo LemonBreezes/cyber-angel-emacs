@@ -222,28 +222,6 @@
         [remap comint-clear-buffer] #'chatgpt-shell-clear-buffer)
   (cae-advice-add #'shell-maker-welcome-message :override #'ignore))
 
-(use-package! gptel
-  :defer t :init
-  (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
-  (autoload 'gptel--stream-convert-markdown->org "gptel-org")
-  :config
-  (setq gpt-openai-key (getenv "OPENAI_API_KEY"))
-  (setq gptel-default-mode 'org-mode)
-  (after! gptel-context
-    (map! :map gptel-context-buffer-mode-map
-          :n "q" #'gptel-context-quit
-          :n "n" #'gptel-context-next
-          :n "p" #'gptel-context-previous
-          :n "d" #'gptel-context-flag-deletion
-          :n "RET" #'gptel-context-visit
-          :map gptel-mode-map
-          :n "<return>" #'gptel-send))
-  (add-hook! 'gptel-mode-hook
-    (defun cae-gptel-mode-setup-h ()
-      (setq-local nobreak-char-display nil)
-      (auto-fill-mode -1)
-      (doom-mark-buffer-as-real-h))))
-
 (use-package! forge-llm
   :defer t :after forge :config
   (forge-llm-setup))
