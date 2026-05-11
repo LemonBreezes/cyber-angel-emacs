@@ -110,7 +110,6 @@
          (docker +lsp)
          pdf
          biblio
-         llm
 
          :lang
          (emacs-lisp +lsp +tree-sitter)
@@ -162,7 +161,7 @@
          unpackaged
          vc
          org
-         (ai -copilot)
+         (ai -copilot +local)
          gnus
          rss
 
