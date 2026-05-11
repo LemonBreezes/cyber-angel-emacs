@@ -247,3 +247,6 @@
 (use-package! forge-llm
   :defer t :after forge :config
   (forge-llm-setup))
+
+(when (modulep! +local)
+  (load! "+local"))
