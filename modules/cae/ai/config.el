@@ -5,6 +5,8 @@
 (defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
+
+
 (after! chatgpt-shell
   (let* ((new-model (chatgpt-shell-anthropic--make-model
                      :version "claude-opus-4-7"
@@ -159,6 +161,15 @@
         :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
         :ig "C-e" #'minuet-accept-suggestion-line)
+  (plist-put minuet-openai-fim-compatible-options :name "Ollama")
+  (plist-put minuet-openai-fim-compatible-options :end-point
+             (format "http://%s:11434/v1/completions"
+                     cae-ip-address))
+  (defvar cae-minuet-fim-model-small "qwen2.5-coder:7b"
+    "Smaller FIM model that fits alongside a 30B+ chat model in 32 GB VRAM.")
+  (defvar cae-minuet-fim-model-large "qwen2.5-coder:32b"
+    "Larger FIM model — best quality, use solo on the 5090.")
+  
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (when minuet--current-overlay
