@@ -169,7 +169,13 @@
     "Smaller FIM model that fits alongside a 30B+ chat model in 32 GB VRAM.")
   (defvar cae-minuet-fim-model-large "qwen2.5-coder:32b"
     "Larger FIM model — best quality, use solo on the 5090.")
-  
+  (plist-put minuet-openai-fim-compatible-options :model cae-minuet-fim-model-small)
+  (when (modulep! :completion corfu)
+    (setq minuet-auto-suggestion-debounce-delay corfu-auto-delay))
+  (cae-defadvice! cae-ai-minuet-close-corfu-on-autosuggestion-a (&rest _)
+    :before #'minuet-show-suggestion
+    (when (bound-and-true-p corfu-mode)
+      (corfu-quit)))
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (when minuet--current-overlay
