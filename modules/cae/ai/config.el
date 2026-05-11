@@ -161,15 +161,6 @@
         :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
         :ig "C-e" #'minuet-accept-suggestion-line)
-  (plist-put minuet-openai-fim-compatible-options :name "Ollama")
-  (plist-put minuet-openai-fim-compatible-options :end-point
-             (format "http://%s:11434/v1/completions"
-                     cae-ip-address))
-  (defvar cae-minuet-fim-model-small "qwen2.5-coder:7b"
-    "Smaller FIM model that fits alongside a 30B+ chat model in 32 GB VRAM.")
-  (defvar cae-minuet-fim-model-large "qwen2.5-coder:32b"
-    "Larger FIM model — best quality, use solo on the 5090.")
-  (plist-put minuet-openai-fim-compatible-options :model cae-minuet-fim-model-small)
   (when (modulep! :completion corfu)
     (setq minuet-auto-suggestion-debounce-delay corfu-auto-delay))
   (cae-defadvice! cae-ai-minuet-close-corfu-on-autosuggestion-a (&rest _)
