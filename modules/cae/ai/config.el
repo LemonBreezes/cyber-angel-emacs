@@ -162,7 +162,7 @@
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
         :ig "C-e" #'minuet-accept-suggestion-line)
   (when (modulep! :completion corfu)
-    (setq minuet-auto-suggestion-debounce-delay corfu-auto-delay))
+    (setq minuet-auto-suggestion-debounce-delay 0.2))
   (cae-defadvice! cae-ai-minuet-close-corfu-on-autosuggestion-a (&rest _)
     :before #'minuet-show-suggestion
     (when (bound-and-true-p corfu-mode)
