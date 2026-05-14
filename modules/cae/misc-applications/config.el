@@ -604,7 +604,7 @@
                        zone-pgm-paragraph-spaz])
 
   (when (and (not (bound-and-true-p exwm--connection))
-             (modulep! cae-screensaver))
+             (modulep! +screensaver))
     (zone-when-idle (* 5 60))))
 
 (after! zone-matrix
