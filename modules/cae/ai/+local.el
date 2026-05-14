@@ -17,4 +17,4 @@
         (make-llm-ollama
          :host cae-ip-address
          :port 11434
-         :chat-model "qwen3.6:35b")))
+         :chat-model "qwen3-coder:30b")))
