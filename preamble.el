@@ -67,7 +67,10 @@ of ELEMENT."
     (cae-add-dir-to-path "/usr/bin")))
 
 ;; This is so that I don't accidentally start Emacs as a daemon.
-(when (daemonp) (kill-emacs))
+;; The OpenRC emacs.<user> service sets EMACS_DAEMON_SERVICE=1 so an
+;; intentional service start isn't killed here.
+(when (and (daemonp) (not (getenv "EMACS_DAEMON_SERVICE")))
+  (kill-emacs))
 
 (when (boundp 'safe-local-variable-directories)
   (dolist (dir (list doom-user-dir doom-emacs-dir "~/org" (getenv "HOME")))
