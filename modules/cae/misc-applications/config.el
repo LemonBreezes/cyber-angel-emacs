@@ -775,7 +775,6 @@
         emms-source-file-directory-tree-function #'emms-source-file-directory-tree-internal
         emms-source-file-default-directory cae-misc-applications-music-dir
         emms-player-mpd-music-directory cae-misc-applications-music-dir
-        emms-info-native--max-num-vorbis-comments 48000
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
   (cond ((and cae-misc-applications-mpd-host
