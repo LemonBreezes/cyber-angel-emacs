@@ -49,8 +49,9 @@
 
 ;; A little bit of margin is nice but I don't like it when I'm in terminal
 ;; popups.
-(setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
-  scroll-margin 2)
+(unless (modulep! :ui smooth-scroll +interpolate)
+  (setq-hook! '(prog-mode-hook conf-mode-hook text-mode-hook)
+    scroll-margin 2))
 
 (after! time
   (setq display-time-default-load-average nil))
