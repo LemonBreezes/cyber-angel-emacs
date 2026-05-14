@@ -10,3 +10,11 @@
   (defvar cae-minuet-fim-model-large "qwen2.5-coder:32b"
     "Larger FIM model — best quality, use solo on the 5090.")
   (plist-put minuet-openai-fim-compatible-options :model cae-minuet-fim-model-small))
+
+(after! llm
+  (require 'llm-ollama)
+  (setq magit-gptcommit-llm-provider
+        (make-llm-ollama
+         :host cae-ip-address
+         :port 11434
+         :chat-model "qwen3.6:35b")))
