@@ -705,7 +705,7 @@
         "T" #'empv-youtube-tabulated
         "'" #'empv-youtube-tabulated-last-results)
   (setq empv-youtube-use-tabulated-results nil)
-  (require 'elfeed-tube)
+  (require 'elfeed-tube-invidious)
   (add-to-list 'empv-mpv-args "--ytdl-format=best")
   (add-to-list 'empv-mpv-args "--save-position-on-quit")
   (setq empv-reset-playback-speed-on-quit t
