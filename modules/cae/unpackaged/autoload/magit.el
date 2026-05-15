@@ -42,9 +42,12 @@ non-nil `magit-status-goto-file-position'."
 
 ;;;###autoload
 (defun cae-unpackaged-magit-save-buffer-show-status ()
-  "Save buffer and show its changes in `magit-status'."
+  "Save buffer and show its changes in `magit-status'.
+Skip saving if the underlying file has been modified on disk since
+it was last visited, to avoid clobbering external changes."
   (interactive)
-  (when (buffer-file-name)
+  (when (and (buffer-file-name)
+             (verify-visited-file-modtime (current-buffer)))
     (ignore-errors (save-buffer)))
   (cae-unpackaged-magit-status))
 
