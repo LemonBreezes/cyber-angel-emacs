@@ -113,6 +113,35 @@ THE FILE DIFFS:
 ```
 
 Now, write the commit message using the Conventional Commits format: **label: summary** (e.g., fix: resolve memory leak)")
+  (setq magit-gptcommit-prompt-one-line "You are an expert programmer writing a Git commit message.
+You have carefully reviewed every file diff included in this commit.
+
+First, choose the most appropriate label for the changes.
+Here are the labels you can choose from:
+- build: Changes that affect the build system or external dependencies (e.g., gulp, broccoli, npm)
+- chore: Routine tasks like updating dependencies, licenses, or repo settings
+- ci: Changes to CI configuration files or scripts (e.g., GitHub Actions, CircleCI)
+- docs: Documentation-only changes (e.g., fixing typos, adding examples)
+- feat: Introduces a new feature to the codebase
+- fix: Patches a bug in the codebase
+- perf: Improves performance without changing behavior
+- refactor: Code changes that neither fix bugs nor add features
+- style: Non-functional changes like formatting or whitespace
+- test: Adds or corrects tests
+
+Next, write a high-level summary of the commit.
+- Keep it to a single line, no more than 50 characters
+- Use the imperative tense (e.g., 'Add logging' not 'Added logging')
+- Ensure the message reflects a clear and cohesive change
+- Do not end the summary with a period
+- Do not use backticks (`) anywhere in the response
+- Do not use square brackets ([]) around the label or the summary
+
+THE FILE DIFFS:
+```
+%s
+```
+Now, write the commit message using the Conventional Commits format: label: summary (e.g., fix: resolve memory leak)")
   (magit-gptcommit-mode 1)
   (magit-gptcommit-status-buffer-setup))
 (after! git-commit
