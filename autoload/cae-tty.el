@@ -33,7 +33,20 @@
             dirvish-path-separators '("~" "/" "/")
             dirvish-subtree-prefix " |"
             dirvish-subtree-line-prefix " |"))
-    (remove-hook 'org-mode-hook #'+org-pretty-mode))
+    (remove-hook 'org-mode-hook #'+org-pretty-mode)
+    (after! doom-modeline
+      (setq doom-modeline-icon nil
+            doom-modeline-lsp-icon nil
+            doom-modeline-vcs-icon nil
+            doom-modeline-time-icon nil
+            doom-modeline-check-icon nil
+            doom-modeline-modal-icon nil
+            doom-modeline-persp-icon nil
+            doom-modeline-time-live-icon nil
+            doom-modeline-major-mode-icon nil
+            doom-modeline-buffer-state-icon nil
+            doom-modeline-modal-modern-icon nil
+            doom-modeline-buffer-modification-icon nil)))
   (when (< (cae-terminal-type) 2)
     (after! mu4e-bookmarks
       (setq mu4e-modeline-unread-items '("U:" "U:")
