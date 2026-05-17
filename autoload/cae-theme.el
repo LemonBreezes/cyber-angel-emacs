@@ -84,3 +84,42 @@
           (t (load-theme current-theme t)))
     (dolist (theme (cdr custom-enabled-themes))
       (disable-theme theme))))
+
+;;;###autoload
+(defun cae-theme--get-circadian-config ()
+  "Return the appropriate theme list for `circadian-themes'.
+Uses sunrise/sunset if location is valid, otherwise fixed times."
+  (if (and calendar-latitude calendar-longitude
+           (numberp calendar-latitude)
+           (numberp calendar-longitude)
+           (not (= calendar-latitude 0))
+           (not (= calendar-longitude 0))
+           (not cae-circadian-used-fixed-times))
+      (progn
+        (message "Theme: Using sunrise/sunset for theme switching.")
+        `((:sunrise . ,cae-day-theme)
+          (:sunset . ,cae-night-theme)))
+    (progn
+      (when (and cae-geolocation-verbose
+                 (not cae-circadian-used-fixed-times))
+        (message "Theme: Geolocation not ready or invalid coordinates (%s, %s), using fixed times (%s/%s) for theme switching."
+                 calendar-latitude
+                 calendar-longitude
+                 cae-circadian-fixed-day-time cae-circadian-fixed-night-time))
+      `((,cae-circadian-fixed-day-time . ,cae-day-theme)
+        (,cae-circadian-fixed-night-time . ,cae-night-theme)))))
+
+;;;###autoload
+(defun cae-theme--configure-circadian ()
+  "Configure and activate circadian with the correct themes."
+  (require 'circadian)
+  (setq circadian-themes (cae-theme--get-circadian-config))
+  ;; Ensure circadian recalculates and applies the theme now
+  (circadian-setup))
+
+;;;###autoload
+(defun cae-theme--update-circadian-on-location-change ()
+  "Hook function to reconfigure circadian when location changes significantly."
+  (when (and (featurep 'circadian) cae-theme-enable-day-night-theme-switching)
+    (message "Theme: Location changed, reconfiguring circadian.")
+    (cae-theme--configure-circadian)))
