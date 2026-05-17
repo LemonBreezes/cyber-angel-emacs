@@ -2,13 +2,18 @@
 
 (unless (cae-display-graphic-p)
   ;; Stuff so that Emacs doesn't break in the Terminal.
-  (when (modulep! :completion vertico +childframe)
+  (when (and (modulep! :completion vertico +childframe)
+             (version< emacs-version "31.0"))
     (remove-hook 'vertico-mode-hook #'vertico-posframe-mode))
   (when (modulep! :ui ligatures)
     (setq +ligatures-in-modes nil)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-h)
     (remove-hook 'doom-init-ui-hook #'+ligature-init-composition-table-h)
     (remove-hook 'doom-init-ui-hook #'+ligatures-init-buffer-h))
+  (when (modulep! :ui smooth-scroll)
+    (remove-hook 'doom-first-input-hook #'ultra-scroll-mode)
+    (remove-hook 'doom-first-file-hook #'ultra-scroll-mode)
+    (remove-hook 'doom-first-input-hook #'good-scroll-mode))
 
   ;; Make the cursor blink. I set this because the solid cursor makes it harder
   ;; to see the character under it.
