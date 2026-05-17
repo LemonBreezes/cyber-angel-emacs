@@ -37,7 +37,8 @@
   :config (global-anzu-mode +1))
 
 (use-package! minions
-  :when (not (modulep! :ui modeline))
+  :when (and (not (modulep! :ui modeline))
+             (not (eq (cae-terminal-type) 0)))
   :defer t :init
   (add-hook 'doom-after-init-hook #'minions-mode)
   :config
