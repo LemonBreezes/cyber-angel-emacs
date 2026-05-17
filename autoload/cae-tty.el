@@ -46,7 +46,8 @@
             doom-modeline-major-mode-icon nil
             doom-modeline-buffer-state-icon nil
             doom-modeline-modal-modern-icon nil
-            doom-modeline-buffer-modification-icon nil)))
+            doom-modeline-buffer-modification-icon nil
+            doom-modeline-major-mode-color-icon nil)))
   (when (< (cae-terminal-type) 2)
     (after! mu4e-bookmarks
       (setq mu4e-modeline-unread-items '("U:" "U:")
