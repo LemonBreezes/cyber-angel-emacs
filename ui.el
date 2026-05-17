@@ -323,6 +323,7 @@
   (add-hook 'w3m-mode-hook #'iscroll-mode))
 
 (use-package! beacon
+  :when (not (modulep! :ui nav-flash))
   :defer 3.0 :config
   (setq beacon-blink-delay 0.15
         beacon-blink-duration 0.15)
