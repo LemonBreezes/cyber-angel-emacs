@@ -130,6 +130,7 @@
          (yaml +lsp +tree-sitter)
          (gdscript +lsp +tree-sitter)
          (graphviz +lsp +tree-sitter)
+         (rust +lsp +tree-sitter)
 
          :os
          (:if IS-MAC macos)
