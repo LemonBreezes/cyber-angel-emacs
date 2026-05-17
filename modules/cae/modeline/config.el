@@ -3,8 +3,7 @@
 (require 'cae-lib)
 
 ;; Use my modeline as a fallback if Doom modeline is enabled.
-(unless (and (modulep! :ui modeline)
-             (not (eq (cae-terminal-type) 0)))
+(unless (modulep! :ui modeline)
   (when (modulep! :editor evil)
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
@@ -37,8 +36,7 @@
   :config (global-anzu-mode +1))
 
 (use-package! minions
-  :when (and (not (modulep! :ui modeline))
-             (not (eq (cae-terminal-type) 0)))
+  :when (not (modulep! :ui modeline))
   :defer t :init
   (add-hook 'doom-after-init-hook #'minions-mode)
   :config
