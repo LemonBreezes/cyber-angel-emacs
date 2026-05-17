@@ -203,7 +203,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 (let ((initial-theme nil))
   (cond
    ((eq (cae-terminal-type) 0)
-    (setq doom-theme 'modus-vivendi-deuteranopia))
+    (setq initial-theme 'modus-vivendi-deuteranopia))
    ((and cae-theme-enable-day-night-theme-switching
          (doom-store-get 'circadian-themes))
     ;; Try setting theme from cache
