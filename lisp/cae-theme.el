@@ -184,20 +184,20 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 ;;; Set theme based on time of day.
 
-(when cae-theme-enable-day-night-theme-switching
-  (use-package! circadian
-    :defer t :defer-incrementally t :init
-    ;; Add the hook to update circadian when geolocation changes.
-    (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
-    :config
-    ;; Initial configuration when circadian loads.
-    (cae-theme--configure-circadian)
+(use-package! circadian
+  :when cae-theme-enable-day-night-theme-switching
+  :defer t :defer-incrementally t :init
+  ;; Add the hook to update circadian when geolocation changes.
+  (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
+  :config
+  ;; Initial configuration when circadian loads.
+  (cae-theme--configure-circadian)
 
-    ;; Cache the theme times on exit.
-    (add-hook! 'kill-emacs-hook
-      (defun cae-theme-store-circadian-times-h ()
-        (when (and (boundp 'circadian-themes) circadian-themes)
-          (doom-store-put 'circadian-themes (circadian-themes-parse)))))))
+  ;; Cache the theme times on exit.
+  (add-hook! 'kill-emacs-hook
+    (defun cae-theme-store-circadian-times-h ()
+      (when (and (boundp 'circadian-themes) circadian-themes)
+        (doom-store-put 'circadian-themes (circadian-themes-parse))))))
 
 ;; Set the initial theme based on time and cached circadian data if available.
 (let ((initial-theme nil))
