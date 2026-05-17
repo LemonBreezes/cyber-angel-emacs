@@ -3,7 +3,8 @@
 (require 'cae-lib)
 
 ;; Use my modeline as a fallback if Doom modeline is enabled.
-(unless (modulep! :ui modeline)
+(unless (and (modulep! :ui modeline)
+             (not (eq (cae-terminal-type) 0)))
   (when (modulep! :editor evil)
     (setq evil-mode-line-format
           '(after . mode-line-frame-identification)))
