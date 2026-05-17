@@ -36,6 +36,7 @@
     (remove-hook 'org-mode-hook #'+org-pretty-mode)
     (after! doom-modeline
       (setq doom-modeline-icon nil
+            doom-modeline-unicode-number nil
             doom-modeline-lsp-icon nil
             doom-modeline-vcs-icon nil
             doom-modeline-time-icon nil
