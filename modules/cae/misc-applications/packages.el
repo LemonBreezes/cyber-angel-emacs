@@ -59,7 +59,7 @@
 (package! zone-nyan)
 (package! zone-rainbow)
 (package! zone-sl)
-(package! zone-matrix :recipe (:host github :repo "ober/zone-matrix"))
+(package! zone-matrix :recipe (:host github :repo "emacsattic/zone-matrix"))
 (package! zone-pgm-spoopy :recipe
   (:host github :repo "twitchy-ears/zone-pgm-spoopy"))
 (package! selectric-mode)
