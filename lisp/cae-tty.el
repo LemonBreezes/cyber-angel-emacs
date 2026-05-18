@@ -63,8 +63,6 @@
 (cond ((executable-find "termux-setup-storage")
        (setq xclip-method 'termux-clipboard-get)))
 
-(add-to-list 'term-file-aliases '("xterm-256color" . "xterm"))
-
 ;; BUG Do not emit an error if `xclip' is not found.
 (cae-defadvice! cae-handle-missing-xclip-program ()
   :before-until #'doom-init-clipboard-in-tty-emacs-h
