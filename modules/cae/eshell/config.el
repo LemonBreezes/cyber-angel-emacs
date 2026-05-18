@@ -119,7 +119,8 @@
 
 (after! em-alias
   (setq eshell-aliases-file
-        (if (executable-find "sudo")
+        (if (or (executable-find "sudo")
+                (eq (user-uid) 0))
             (concat +eshell-config-dir "aliases")
           (concat +eshell-config-dir "aliases-no-sudo"))))
 
