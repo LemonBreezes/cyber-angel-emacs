@@ -1,0 +1,75 @@
+alias gr     egrep               --color=always                               $*
+alias c      xclip               -selection     clipboard                     $*
+alias emerge / && emerge --color=y                                            $*
+alias smart-live-rebuild / && smart-live-rebuild                              $*
+alias emerge1 / && emerge --color=y                                           $*
+alias dir    ls                                                               $*
+alias dmesg  dmesg               --color=always                               $*
+alias up eshell-up $1
+alias pk eshell-up-peek $1
+
+alias tree tree -C                                                            $*
+
+alias sysu systemctl --user                                                   $*
+alias sysut systemctl --user status                                           $*
+alias sysus systemctl --user start                                            $*
+alias sysue systemctl --user enable --now                                     $*
+alias sysud systemctl --user disable                                          $*
+alias sysur systemctl --user restart                                          $*
+alias sysux systemctl --user stop                                             $*
+alias sysudr systemctl --user daemon-reload                                   $*
+alias sysult systemctl --user list-timers                                     $*
+alias sys systemctl                                                           $*
+alias syst systemctl status                                                   $*
+alias syss systemctl start                                                    $*
+alias syse systemctl enable --now                                             $*
+alias sysd systemctl disable                                                  $*
+alias sysr systemctl restart                                                  $*
+alias sysx systemctl stop                                                     $*
+alias sysdr systemctl daemon-reload                                           $*
+alias syslt systemctl list-timers                                             $*
+
+alias wine WINEARCH=win64 WINEPREFIX=/home/st/.wine64 wine                           $*
+alias wine32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 wine                         $*
+alias winecfg WINEARCH=win64 WINEPREFIX=/home/st/.wine64 winecfg                     $*
+alias winecfg32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 winecfg                   $*
+alias winetricks WINEARCH=win64 WINEPREFIX=/home/st/.wine64 winetricks               $*
+alias winetricks32 WINEARCH=win32 WINEPREFIX=/home/st/.wine32 winetricks             $*
+
+alias mcd    mkdir -p $1 && cd $1
+alias cd-    cd -
+alias cd--   cd -2
+alias cd_    cd $_
+
+alias f     find-file                    $1
+alias ff    find-file-other-window       $1
+alias bd    eshell-up                    $1
+alias l     ls -lh                       $*
+alias ll    ls -lah                      $*
+alias cdp   cd-to-project
+alias clear clear-scrollback
+alias gg    cae-unpackaged-magit-status
+alias q     exit
+alias rg    rg                           --color=always                       $*
+
+alias j    z $*
+alias vi   e $*
+alias vim  e $*
+alias nano e $*
+alias git  git --no-pager $*
+
+alias vdoom DOOMDIR=~/.config/doom-vanilla/ ~/.config/doomemacs-vanilla/bin/doom $*
+alias vemacs DOOMDIR=~/.config/doom-vanilla/ emacs --init-directory=~/.config/doomemacs-vanilla $*
+alias rebuild-packages rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache  && doom sync
+alias rebuild-emacs emerge emacs && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ && doom sync
+alias update-emacs doom sync -u && rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/ && doom sync
+alias update-gentoo pushd . && cd / && emaint -a sync  && emerge -uDUv @world --with-bdeps=y --changed-use --keep-going --color=y && update-grub && smart-live-rebuild && pipx upgrade-all && go-global-update && update-emacs && popd
+alias delete-eln rm -rf ~/.config/emacs/.local/straight/build-30.0.50/ ~/.config/emacs/.local/cache/eln/ ~/.config/emacs/eln-cache/
+alias doom ~/.config/emacs/bin/doom $*
+alias update-grub grub-mkconfig -o /boot/grub/grub.cfg
+alias emerge-world emerge --emptytree @world --exclude 'gcc binutils glibc'
+alias update-termux pkg upgrade && cd ~/.config/doom && git pull && cd ~/.config/emacs && git pull && cd ~/org && git pull && cd ~/ && git pull && doom sync -u
+alias drop_caches bash -c "echo 1 > /proc/sys/vm/drop_caches"
+alias rebuild rm -rf ~/.config/emacs/.local/straight/repos/$1 ~/.config/emacs/.local/straight/build-31.0.50/$1 && doom sync
+
+alias update-flx pushd . && cd ~/src/flx && git stash && git pull && git stash pop && cd ~/src/lookup && git stash && git pull && git stash pop && cp -f ~/src/lookup/lookup/* ~/src/flx/flx/lookup/ && popd
