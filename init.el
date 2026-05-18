@@ -147,7 +147,7 @@
          irc
 
          :secret
-         automation
+         ;;automation
 
          :cae
          exwm
