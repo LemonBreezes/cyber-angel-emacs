@@ -577,6 +577,65 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
                     (shell-quote-argument full-path))))))
       (message "Copied %s" image-file))))
 
+(defvar cae-ssh-parent-clipboard-user nil
+  "Username for sshing back to the SSH parent host.
+If nil, `user-login-name' is used.  Set this when the local username
+differs from the username on the remote SSH host.")
+
+;;;###autoload
+(defun cae-osc52-yank-clipboard ()
+  "Push the terminal's clipboard onto the kill ring via OSC 52.
+Sends an OSC 52 read query to the controlling terminal and parses the
+base64-encoded reply.  Requires terminal support for OSC 52 paste; for
+kitty set `clipboard_control' to include `read-clipboard' in kitty.conf
+\(the default uses `read-clipboard-ask' which prompts for each read)."
+  (interactive)
+  (when (display-graphic-p)
+    (user-error "OSC 52 only works in a terminal frame"))
+  (while (input-pending-p)
+    (read-event nil nil 0))
+  (send-string-to-terminal "\e]52;c;?\a")
+  (let* ((deadline (+ (float-time) 2.0))
+         (state 'esc)
+         (payload "")
+         done)
+    (catch 'timeout
+      (while (not done)
+        (let* ((remaining (- deadline (float-time)))
+               (ev (and (> remaining 0)
+                        (read-event nil nil remaining))))
+          (unless ev (throw 'timeout nil))
+          (pcase state
+            ('esc     (when (eq ev ?\e) (setq state 'bracket)))
+            ('bracket (setq state (if (eq ev ?\]) 'p5 'esc)))
+            ('p5      (setq state (if (eq ev ?5)  'p2 'esc)))
+            ('p2      (setq state (if (eq ev ?2)  's1 'esc)))
+            ('s1      (setq state (if (eq ev ?\;) 'sel 'esc)))
+            ('sel     (setq state 's2))
+            ('s2      (setq state (if (eq ev ?\;) 'data 'esc)))
+            ('data
+             (cond ((eq ev ?\a) (setq done t))
+                   ((eq ev ?\e) (setq state 'st))
+                   ((and (integerp ev) (<= 0 ev 127))
+                    (setq payload (concat payload (string ev))))))
+            ('st (setq done t))))))
+    (cond
+     ((not done)
+      (user-error "Timed out waiting for OSC 52 reply (terminal may not allow reads)"))
+     ((string-empty-p payload)
+      (message "Terminal clipboard is empty"))
+     (t
+      (condition-case err
+          (let ((text (decode-coding-string
+                       (base64-decode-string payload)
+                       'utf-8 t)))
+            (kill-new text)
+            (message "Yanked %d chars from OSC 52 clipboard"
+                     (length text)))
+        (error
+         (user-error "Could not decode OSC 52 payload: %s"
+                     (error-message-string err))))))))
+
 ;;; Spell-checking functions
 
 ;;;###autoload
