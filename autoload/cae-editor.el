@@ -577,11 +577,6 @@ image-mode buffers. Optional IMAGE-FILE can be provided directly."
                     (shell-quote-argument full-path))))))
       (message "Copied %s" image-file))))
 
-(defvar cae-ssh-parent-clipboard-user nil
-  "Username for sshing back to the SSH parent host.
-If nil, `user-login-name' is used.  Set this when the local username
-differs from the username on the remote SSH host.")
-
 ;;; Spell-checking functions
 
 ;;;###autoload
