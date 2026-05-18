@@ -121,7 +121,7 @@
   (setq eshell-aliases-file
         (if (executable-find "sudo")
             (concat +eshell-config-dir "aliases")
-          (concat +eshell-config-dir "aliases"))))
+          (concat +eshell-config-dir "aliases-no-sudo"))))
 
 ;;; Keybindings
 
