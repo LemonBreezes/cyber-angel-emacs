@@ -117,6 +117,12 @@
 (after! em-glob
   (setq eshell-glob-splice-results t))
 
+(after! em-alias
+  (setq eshell-aliases-file
+        (if (executable-find "sudo")
+            (concat +eshell-config-dir "aliases")
+          (concat +eshell-config-dir "aliases"))))
+
 ;;; Keybindings
 
 (after! eshell
