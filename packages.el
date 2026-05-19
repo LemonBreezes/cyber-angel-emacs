@@ -53,6 +53,7 @@
 
 ;; cae-tty.el
 (package! clipetty)
+(package! kitty-graphics)
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
