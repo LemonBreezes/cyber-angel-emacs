@@ -165,6 +165,7 @@
          (ai +local)
          gnus
          rss
+         gterm
 
          :secret
          ;;(:if (eq system-type 'gnu/linux) root)
