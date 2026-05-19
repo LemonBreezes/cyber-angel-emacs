@@ -42,3 +42,4 @@ custom.el
 
 **/.claude/settings.local.json
 *.tex
+/.agent-shell/
