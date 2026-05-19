@@ -3,7 +3,7 @@
 add try to package list embark map? <- embark package map not working? >
 separate misc applications system emacs commands?
 
-agent-shell?
+agent-shell? ghostel?
 
 vterm tabs! including the claude code sstuff
 
