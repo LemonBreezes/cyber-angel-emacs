@@ -53,7 +53,8 @@
 
 ;; cae-tty.el
 (package! clipetty)
-(package! kitty-graphics)
+(package! kitty-graphics :recipe
+  (:host github :repo "cashmeredev/kitty-graphics.el"))
 
 ;; cae-evil.el
 (when (modulep! :editor evil)
