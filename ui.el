@@ -315,6 +315,7 @@
         flycheck-posframe-border-use-error-face t))
 
 (use-package! iscroll
+  :when (cae-display-graphic-p)
   :defer t :init
   (add-hook 'org-mode-hook #'iscroll-mode)
   (add-hook 'markdown-mode-hook #'iscroll-mode)
