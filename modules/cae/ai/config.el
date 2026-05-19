@@ -212,8 +212,8 @@ Now, write the commit message using the Conventional Commits format: label: summ
 (use-package! minuet
   :when (modulep! -copilot)
   :defer t :init
-  ;; With my GPU, Minuet is too slow becaus it has to load the model into
-  ;; VRAM.
+  ;; With my GPU, Minuet is too slow for auto-suggestions becaus it has to load
+  ;; the model into VRAM.
   ;;(add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
   ;;(add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
   ;;(add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
