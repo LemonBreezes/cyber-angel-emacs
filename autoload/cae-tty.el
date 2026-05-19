@@ -55,6 +55,8 @@
             mu4e-modeline-all-read '("R:" "R:")
             mu4e-modeline-all-clear '("C:" "C:")
             mu4e-modeline-new-items '("N:" "N:")))
+    (after! org-modern
+      (setq org-modern-table nil))
     (after! marginalia
       (remove-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
     (after! corfu
