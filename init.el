@@ -162,7 +162,7 @@
          unpackaged
          vc
          org
-         (ai -copilot +local)
+         (ai +local)
          gnus
          rss
 
