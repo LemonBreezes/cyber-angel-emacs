@@ -606,3 +606,10 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
                  (overlay-end overlay))))
     (message "Abbrev: %s -> %s" abbrev word)
     (define-abbrev global-abbrev-table abbrev word)))
+
+;;;###autoload
+(defun cae-beacon-blink ()
+  (interactive)
+  (let ((beacon-blink-delay 0.3)
+        (beacon-blink-duration 0.3))
+    (beacon-blink)))
