@@ -26,7 +26,8 @@
     cae-misc-applications-prefix "misc-applications"))
 (defvar application-types
   '(("games" "g")
-    ("eyecandy" "e")
+    ("eyecandy" "c")
+    ("emacs" "e")
     ("system" "s")
     ("random" "r")
     ("insert" "i")
