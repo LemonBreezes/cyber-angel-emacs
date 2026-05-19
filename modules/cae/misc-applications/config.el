@@ -42,6 +42,8 @@
           (set (intern var-prefix) prefix)
           (set (intern var-map) (make-sparse-keymap))
           (define-prefix-command (intern var-map))
+          (when cae-config-finished-loading
+            (keymap-unset cae-misc-applications-map (kbd prefix)))
           (define-key cae-misc-applications-map (kbd prefix) (intern var-map))))
       application-types)
 
