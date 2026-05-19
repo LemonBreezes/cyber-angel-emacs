@@ -81,6 +81,6 @@
   :when (and (not (cae-display-graphic-p))
              (getenv "KITTY_PID"))
   :after-call (org-mode-hook markdown-mode-hook image-mode-hook eww-mode-hook
-                             w3m-mode-hook)
+               w3m-mode-hook)
   :defer t :config
   (kitty-graphics-mode +1))
