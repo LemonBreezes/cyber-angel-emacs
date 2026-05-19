@@ -1,16 +1,17 @@
 ;;; term.el -*- lexical-binding: t; -*-
 
-(after! em-glob
-  ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
-  (setq eshell-error-if-no-glob nil))
-
-(setq vterm-always-compile-module t)
-(setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
-(after! vterm
-  (setq vterm-max-scrollback 100000))
-(setq-hook! 'vterm-mode-hook
-  nobreak-char-display nil
-  pixel-scroll-precision-mode nil)
+(when (modulep! :term vterm)
+  (setq vterm-always-compile-module t)
+  (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
+  (after! vterm
+    (setq vterm-max-scrollback 100000)
+    ;; Attach every vterm to a persistent user-level tmux session.
+    ;; The session is started by the `tmux.service` systemd user unit; -A
+    ;; falls back to creating it if the server isn't up yet.
+    (setq vterm-shell "/usr/bin/tmux new-session -A -s main"))
+  (setq-hook! 'vterm-mode-hook
+    nobreak-char-display nil
+    pixel-scroll-precision-mode nil))
 
 (after! comint
   (setq comint-history-isearch 'dwim
@@ -59,19 +60,24 @@
                       (selectrum-prescient-enable-sorting nil))
                   (call-interactively #'comint-histories-search-history)))))
 
-(after! em-term
-  ;; Some of the commands I copied from other configurations and will likely
-  ;; never use.
-  (setq eshell-visual-commands
-        '("ranger" "vi" "screen" "top" "less" "more" "lynx"
-          "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
-          "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
-          "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
-          "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok"
-          "claude")
-        eshell-visual-subcommands `(("gh" "repo" "fork")
-                                    ("geth" "attach")
-                                    ,@(unless (string= (getenv "GIT_PAGER")
-                                                       "cat")
-                                        '(("git" "log" "diff" "show"))))
-        eshell-visual-options '(("git" "--help" "--paginate"))))
+(when (modulep! :term eshell)
+  (after! em-glob
+    ;; Allow us to type HEAD~1, HEAD~2, etc., as arguments to git commands.
+    (setq eshell-error-if-no-glob nil))
+
+  (after! em-term
+    ;; Some of the commands I copied from other configurations and will likely
+    ;; never use.
+    (setq eshell-visual-commands
+          '("ranger" "vi" "screen" "top" "less" "more" "lynx"
+            "ncftp" "pine" "tin" "trn" "elm" "vim" "nmtui" "alsamixer" "htop"
+            "elinks" "tail" "nano" "ssh" "python" "tmux" "telnet" "fzf"
+            "pulsemixer" "ranger" "bluetoothctl" "watch" "ncmpcpp" "btm"
+            "ptpython" "ipython" "pshell" "nmtui" "dstat" "pgcli" "vue" "ngrok"
+            "claude")
+          eshell-visual-subcommands `(("gh" "repo" "fork")
+                                      ("geth" "attach")
+                                      ,@(unless (string= (getenv "GIT_PAGER")
+                                                         "cat")
+                                          '(("git" "log" "diff" "show"))))
+          eshell-visual-options '(("git" "--help" "--paginate")))))
