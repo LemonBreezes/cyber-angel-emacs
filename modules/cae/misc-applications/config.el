@@ -26,8 +26,7 @@
     cae-misc-applications-prefix "misc-applications"))
 (defvar application-types
   '(("games" "g")
-    ("eyecandy" "c")
-    ("emacs" "e")
+    ("eyecandy" "e")
     ("system" "s")
     ("random" "r")
     ("insert" "i")
@@ -174,7 +173,7 @@
 
 ;;; System
 
-(map! :map cae-misc-applications-emacs-map
+(map! :map cae-misc-applications-system-map
       "e" #'list-packages
       "E" #'list-processes
       "T" #'list-timers)
