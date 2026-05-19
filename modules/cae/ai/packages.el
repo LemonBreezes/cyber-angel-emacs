@@ -14,8 +14,6 @@
   :recipe (:host gitlab :repo "rogs/forge-llm"))
 
 (package! agent-shell)
-(package! shell-maker)
-(package! acp)
 
 ;; `magit-gptcommit' is much better.
 (package! magit-gptcommit)
