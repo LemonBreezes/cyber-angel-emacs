@@ -12,7 +12,6 @@
   (package! minuet))
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
-
 (package! agent-shell)
 
 ;; `magit-gptcommit' is much better.
