@@ -117,38 +117,38 @@ enabled, unless gated by a module column.
 
 ** Editing & windows
 
-| Module                       | Key                                   | Command                                  | Notes                         |
-|------------------------------+---------------------------------------+------------------------------------------+-------------------------------|
-|                              | ~<escape>~                              | ~keyboard-quit~                            |                               |
-|                              | ~M-Z~                                   | ~zap-up-to-char~                           |                               |
-|                              | ~M-R~                                   | ~cae-sp-raise-sexp~                        |                               |
-|                              | ~M-/~                                   | ~hippie-expand~                            |                               |
+| Module                       | Key                                   | Command                                  | Notes                          |
+|------------------------------+---------------------------------------+------------------------------------------+--------------------------------|
+|                              | ~<escape>~                              | ~keyboard-quit~                            |                                |
+|                              | ~M-Z~                                   | ~zap-up-to-char~                           |                                |
+|                              | ~M-R~                                   | ~cae-sp-raise-sexp~                        |                                |
+|                              | ~M-/~                                   | ~hippie-expand~                            |                                |
 |                              | ~M--~ / ~C--~                             | ~negative-argument~                        | restored — Doom shadows these |
-|                              | ~M-=~                                   | ~count-words-region~                       |                               |
-|                              | ~C-S-h~                                 | ~embark-bindings~                          |                               |
-|                              | ~C-x !~                                 | ~doom/window-enlargen~                     |                               |
-|                              | ~C-x _~                                 | ~shrink-window~                            | dual to ~C-x ^~                 |
-|                              | ~C-x O~                                 | ~other-window-previous~                    | dual to ~C-x o~                 |
-|                              | ~C-x M-o~                               | ~ace-swap-window~                          |                               |
-|                              | ~C-x M-t~                               | ~transpose-frame~                          |                               |
-|                              | ~C-x j~                                 | ~cae-jump-to-random-line~                  |                               |
-|                              | ~C-x P~                                 | ~pop-to-buffer~                            |                               |
-|                              | ~C-x 4 I~                               | ~ibuffer-other-window~                     |                               |
-|                              | ~C-x 4 -~                               | ~dired-jump-other-window~                  |                               |
-|                              | ~C-x x c~                               | ~cae-edit-indirect-dwim~                   |                               |
-|                              | ~C-x x o~                               | ~ov-clear~                                 |                               |
-|                              | ~C-x x p~                               | ~posframe-delete-all~                      |                               |
-|                              | remap ~ibuffer~                         | ~ibuffer-jump~                             |                               |
-|                              | remap ~kill-current-buffer~             | ~cae-kill-current-buffer~                  |                               |
-|                              | remap ~backward-kill-word~              | ~doom/delete-backward-word~                | don't litter the kill-ring    |
-|                              | remap ~upcase/downcase/capitalize-word~ | ~*-dwim~                                   | act on region when active     |
-|                              | remap ~ispell-word~                     | ~cae-ispell-word-then-abbrev~              |                               |
-|                              | remap ~delete-other-windows~            | ~doom/window-maximize-buffer~              |                               |
-|                              | remap ~scroll-up/down-command~          | ~View-scroll-half-page-*~                  | half-page visual scrolling    |
-|                              | remap ~scroll-other-window(-down)~      | ~cae-view-scroll-half-page-*-other-window~ |                               |
-| :completion corfu            | ~C-M-/~                                 | ~cape-dabbrev~                             |                               |
-| :completion corfu            | ~C-S-s~                                 | ~cae-complete-in-minibuffer~               |                               |
-| :config default +smartparens | ~C-x n s~                               | ~sp-narrow-to-sexp~                        |                               |
+|                              | ~M-=~                                   | ~count-words-region~                       |                                |
+|                              | ~C-S-h~                                 | ~embark-bindings~                          |                                |
+|                              | ~C-x !~                                 | ~doom/window-enlargen~                     |                                |
+|                              | ~C-x _~                                 | ~shrink-window~                            | dual to ~C-x ^~                  |
+|                              | ~C-x O~                                 | ~other-window-previous~                    | dual to ~C-x o~                  |
+|                              | ~C-x M-o~                               | ~ace-swap-window~                          |                                |
+|                              | ~C-x M-t~                               | ~transpose-frame~                          |                                |
+|                              | ~C-x j~                                 | ~cae-jump-to-random-line~                  |                                |
+|                              | ~C-x P~                                 | ~pop-to-buffer~                            |                                |
+|                              | ~C-x 4 I~                               | ~ibuffer-other-window~                     |                                |
+|                              | ~C-x 4 -~                               | ~dired-jump-other-window~                  |                                |
+|                              | ~C-x x c~                               | ~cae-edit-indirect-dwim~                   |                                |
+|                              | ~C-x x o~                               | ~ov-clear~                                 |                                |
+|                              | ~C-x x p~                               | ~posframe-delete-all~                      |                                |
+|                              | remap ~ibuffer~                         | ~ibuffer-jump~                             |                                |
+|                              | remap ~kill-current-buffer~             | ~cae-kill-current-buffer~                  |                                |
+|                              | remap ~backward-kill-word~              | ~doom/delete-backward-word~                | don't litter the kill-ring     |
+|                              | remap ~upcase/downcase/capitalize-word~ | ~*-dwim~                                   | act on region when active      |
+|                              | remap ~ispell-word~                     | ~cae-ispell-word-then-abbrev~              |                                |
+|                              | remap ~delete-other-windows~            | ~doom/window-maximize-buffer~              |                                |
+|                              | remap ~scroll-up/down-command~          | ~View-scroll-half-page-*~                  | half-page visual scrolling     |
+|                              | remap ~scroll-other-window(-down)~      | ~cae-view-scroll-half-page-*-other-window~ |                                |
+| :completion corfu            | ~C-M-/~                                 | ~cape-dabbrev~                             |                                |
+| :completion corfu            | ~C-S-s~                                 | ~cae-complete-in-minibuffer~               |                                |
+| :config default +smartparens | ~C-x n s~                               | ~sp-narrow-to-sexp~                        |                                |
 
 ** Structural editing (smartparens-mode)
 
@@ -203,17 +203,17 @@ Requires ~:completion vertico~.
 
 ** Help map (~C-h~ prefix) additions
 
-| Key     | Command                          | Notes                                      |
-|---------+----------------------------------+--------------------------------------------|
+| Key     | Command                          | Notes                                       |
+|---------+----------------------------------+---------------------------------------------|
 | ~C-h SPC~ | ~cae-pop-mark~                     | also on ~C-h DEL~ — for split-keyboard users |
-| ~C-h C-r~ | ~describe-repeat-maps~             |                                            |
+| ~C-h C-r~ | ~describe-repeat-maps~             |                                             |
 | ~C-h M-t~ | ~help-with-tutorial~               | restored — Doom unbinds it                 |
-| ~C-h d d~ | ~cae-debug-transient~              |                                            |
-| ~C-h d C~ | ~evil-collection-open-config-file~ | requires ~:editor evil +everywhere~          |
-| ~C-h bn~  | ~cae-which-key-show-state-keymap~  | requires ~:editor evil~                      |
-| ~C-h bh~  | ~cae-embark-state-bindings~        | requires ~:editor evil~                      |
-| ~C-h bs~  | ~cae-sp-which-key-cheatsheet~      | smartparens cheatsheet                     |
-| ~C-h bl~  | ~cae-lispy-cheatsheet~             | requires ~:cae lisp~                         |
+| ~C-h d d~ | ~cae-debug-transient~              |                                             |
+| ~C-h d C~ | ~evil-collection-open-config-file~ | requires ~:editor evil +everywhere~           |
+| ~C-h bn~  | ~cae-which-key-show-state-keymap~  | requires ~:editor evil~                       |
+| ~C-h bh~  | ~cae-embark-state-bindings~        | requires ~:editor evil~                       |
+| ~C-h bs~  | ~cae-sp-which-key-cheatsheet~      | smartparens cheatsheet                      |
+| ~C-h bl~  | ~cae-lispy-cheatsheet~             | requires ~:cae lisp~                          |
 
 * EXWM bindings (Super key)
 
@@ -320,7 +320,7 @@ A few non-default bindings worth knowing about inside specific major modes.
 | ~dired-mode-map~ (Evil)     | ~,~                                 | ~dired-create-empty-file~                      |                                |
 | ~dirvish~                   | ~<backtab>~                         | ~cae-dirvish-subtree-clear~                    |                                |
 | ~ido-*-completion-map~      | ~C-w~                               | ~ido-delete-backward-word-updir~               | ~:cae ido~                       |
-| ~ido-*-completion-map~      | ~C-n~/~C-p~/~↑~/~↓~                 | ~ido-{next,prev}-match~                        | ~:cae ido~                       |
+| ~ido-*-completion-map~      | ~C-n~/~C-p~/~↑~/~↓~               | ~ido-{next,prev}-match~                        | ~:cae ido~                       |
 | ~magit-mode-map~            | ~yc~                                | ~git-link-commit~                              | ~:cae vc~ + ~:tools magit~         |
 | ~magit-blame-read-only-map~ | ~D~ / ~S~                             | ~difftastic-magit-show~                        | ~:cae vc~                        |
 | global (~:cae vc~)          | remap ~+vc-gutter/{next,prev}-hunk~ | ~diff-hl-show-hunk-{next,previous}~            |                                |
