@@ -331,7 +331,7 @@
 (autoload 'lsp-ui-imenu "lsp-ui-imenu" nil t)
 (map! :leader
       (:when (not (modulep! :ui nav-flash))
-        :desc "Blink cursor" "\\" #'beacon-blink)
+        :desc "Blink cursor" "\\" #'cae-beacon-blink)
       (:prefix "i"
                (:when (modulep! :completion vertico)
                  :desc "Keyboard macro" "k" #'consult-kmacro))
