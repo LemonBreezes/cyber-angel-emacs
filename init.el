@@ -166,7 +166,7 @@
          gnus
          rss
 
-         gterm
+         ghostel
 
          :secret
          ;;(:if (eq system-type 'gnu/linux) root)
