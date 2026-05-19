@@ -56,7 +56,7 @@
   (load! "preamble" doom-user-dir))
 
 (if nil
-    (doom! :editor (evil +everywhere) :config (default +bindings +smartparens +gnupg))
+    (doom! :editor (evil +everywhere) :config (default +bindings +gnupg))
   (doom! :completion
          (vertico +icons +childframe)
          ;;helm
@@ -137,7 +137,7 @@
          (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
          :config
-         (default +bindings +smartparens +gnupg)
+         (default +bindings +gnupg)
 
          :email
          (:if (executable-find "mu") mu4e)
