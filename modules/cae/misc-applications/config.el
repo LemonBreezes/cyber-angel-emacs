@@ -174,7 +174,7 @@
 
 ;;; System
 
-(map! :map cae-misc-applications-system-map
+(map! :map cae-misc-applications-emacs-map
       "e" #'list-packages
       "E" #'list-processes
       "T" #'list-timers)
