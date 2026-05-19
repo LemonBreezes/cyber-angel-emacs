@@ -1,5 +1,6 @@
 #+title: Todo
 
-kkp.el? emacs kitty protocol?
 images in kitty terminal?
-copy paste in kitty?
+
+add try to package list embark map?
+separate misc applications system emacs commands?
