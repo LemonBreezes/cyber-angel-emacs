@@ -1,9 +1,7 @@
 ;;; cae/ghostel/config.el -*- lexical-binding: t; -*-
 
 (use-package! ghostel
-  :when (when (and (bound-and-true-p module-file-suffix) ; requires dynamic-modules support
-                   ;; BUG The text is invisibe in Linux TTY.
-                   (not (eq (cae-terminal-type) 0))))
+  :when (bound-and-true-p module-file-suffix)
   :commands (ghostel ghostel-mode ghostel-project)
   :hook (ghostel-mode . mode-line-invisible-mode) ; modeline serves no purpose in ghostel
   :init
