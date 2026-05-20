@@ -1,14 +1,22 @@
 ;;; cae/ai/autoload/ai-assistant.el -*- lexical-binding: t; -*-
 
-(defcustom cae-ai-assistant-terminal-backend (if (and (modulep! :cae exwm)
-                                                      cae-exwm-enabled-p)
-                                                 'exwm
-                                               'vterm)
+(defcustom cae-ai-assistant-terminal-backend
+  (cond ((and (modulep! :cae exwm) cae-exwm-enabled-p)
+         'exwm)
+        ;; When EXWM isn't running, prefer ghostel over vterm as long as it's
+        ;; usable (i.e. not in a Linux TTY, where its text is invisible) and the
+        ;; module is enabled.
+        ((and (or (not (eq (cae-terminal-type) 0))
+                  (cae-display-graphic-p))
+              (modulep! :cae ghostel))
+         'ghostel)
+        (t 'vterm))
   "Backend to use for terminal operations.
-Can be 'vterm, 'eat, or 'exwm."
+Can be 'vterm, 'eat, 'exwm, or 'ghostel."
   :type '(choice (const :tag "VTerm" vterm)
           (const :tag "Eat" eat)
-          (const :tag "EXWM Terminal" exwm))
+          (const :tag "EXWM Terminal" exwm)
+          (const :tag "Ghostel" ghostel))
   :group 'cae-ai-assistant)
 
 (defcustom cae-ai-assistant-app "opencode"
@@ -70,6 +78,16 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
         ;; Send the task description directly as a quoted argument to the AI assistant
         (eat--send-string (format "%s \"%s\"" app-name task-description))
         (eat--send-string "\C-m"))
+       ((eq cae-ai-assistant-terminal-backend 'ghostel)
+        (require 'ghostel)
+        (let ((ghostel-buffer-name buffer-name)
+              (display-buffer-overriding-action
+               '((display-buffer-pop-up-window display-buffer-use-some-window)
+                 (inhibit-same-window . t))))
+          (with-current-buffer (ghostel)
+            ;; Send the task description directly as a quoted argument to the AI assistant
+            (ghostel-send-string (format "%s \"%s\"" app-name task-description))
+            (ghostel-send-string "\C-m"))))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
           ;; Use the terminal function from exwm module
@@ -92,6 +110,8 @@ Otherwise, open the AI assistant for the current project."
     (require 'vterm))
    ((eq cae-ai-assistant-terminal-backend 'eat)
     (require 'eat))
+   ((eq cae-ai-assistant-terminal-backend 'ghostel)
+    (require 'ghostel))
    ((eq cae-ai-assistant-terminal-backend 'exwm)
     (unless (and (modulep! :cae exwm)
                  cae-exwm-enabled-p)
@@ -172,6 +192,14 @@ Otherwise, open the AI assistant for the current project."
         (let ((eat-buffer-name buffer-name))
           (ignore eat-buffer-name)      ; Silence byte-compiler.
           (eat-other-window app-name)))
+       ((eq cae-ai-assistant-terminal-backend 'ghostel)
+        (let ((ghostel-buffer-name buffer-name)
+              (display-buffer-overriding-action
+               '((display-buffer-pop-up-window display-buffer-use-some-window)
+                 (inhibit-same-window . t))))
+          (with-current-buffer (ghostel)
+            (ghostel-send-string app-name)
+            (ghostel-send-string "\C-m"))))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
           ;; Use the terminal function from exwm module
