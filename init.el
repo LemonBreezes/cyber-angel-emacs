@@ -21,6 +21,23 @@
 (with-eval-after-load 'straight
   (add-to-list 'straight-built-in-pseudo-packages 'seq))
 
+;; If Smartparens is loaded, these will be overwritten. This is so Doom works
+;; even if the Smartparens package is disabled.
+(defalias 'sp-local-pair #'ignore)
+(defalias 'sp-pair #'ignore)
+(defalias 'sp-with-modes #'ignore)
+(defalias 'turn-off-smartparens-mode #'ignore)
+(defalias 'sp--syntax-ppss #'syntax-ppss)
+(defalias 'sp-up-sexp #'up-list)
+(defalias 'sp-backward-up-sexp #'backward-up-list)
+(defalias 'sp-raise-sexp #'raise-sexp)
+(defalias 'sp-point-in-comment
+  (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
+(defalias 'sp-point-in-string
+  (lambda (&optional pos) (nth 3 (syntax-ppss pos))))
+(defalias 'sp-beginning-of-sexp
+  (lambda (&optional arg) (goto-char (beginning-of-thing 'sexp))))
+
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (let ((q (and (not noninteractive) nil)))

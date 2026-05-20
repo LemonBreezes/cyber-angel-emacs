@@ -8,19 +8,6 @@
   ;; much for my taste) or paredit (which supposedly works with non-lisps to
   ;; some regard), but I prefer those small utility functions
   (provide 'smartparens)
-  (defalias 'sp-local-pair #'ignore)
-  (defalias 'sp-pair #'ignore)
-  (defalias 'sp-with-modes #'ignore)
-  (defalias 'sp--syntax-ppss #'syntax-ppss)
-  (defalias 'sp-up-sexp #'up-list)
-  (defalias 'sp-backward-up-sexp #'backward-up-list)
-  (defalias 'sp-raise-sexp #'raise-sexp)
-  (defalias 'sp-point-in-comment
-    (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
-  (defalias 'sp-point-in-string
-    (lambda (&optional pos) (nth 3 (syntax-ppss pos))))
-  (defalias 'sp-beginning-of-sexp
-    (lambda (&optional arg) (goto-char (beginning-of-thing 'sexp))))
   (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   (when (modulep! :editor lispy)
     (after! lispy
