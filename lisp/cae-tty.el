@@ -85,6 +85,3 @@
   :defer t :config
   (kitty-graphics-mode +1)
   (map! "C-x x k" #'kitty-gfx-clear-all))
-
-(when (getenv "SSH_TTY")
-  (remove-hook 'tty-setup-hook #'global-kkp-mode))
