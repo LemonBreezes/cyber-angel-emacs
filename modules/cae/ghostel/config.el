@@ -32,7 +32,4 @@
     ;; Don't prompt about dying processes when killing ghostel
     confirm-kill-processes nil
     ;; Prevent premature horizontal scrolling
-    hscroll-margin 0)
-
-  (after! evil
-    (evil-set-initial-state 'ghostel-mode 'insert)))
+    hscroll-margin 0))
