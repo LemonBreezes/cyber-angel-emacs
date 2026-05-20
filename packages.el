@@ -39,6 +39,7 @@
     (:host github :repo "LemonBreezes/lsp-treemacs"
      :branch "lots-of-fixes")))
 (when (modulep! :editor evil +everywhere)
+  (unpin! evil-collection)
   (package! evil-collection :recipe
     ;; Added 05/20/26. Check back later to possibly PR.
     (:host github :repo "LemonBreezes/evil-collection" :branch "add-ghostel-module")))
