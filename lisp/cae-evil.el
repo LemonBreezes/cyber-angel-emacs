@@ -283,13 +283,19 @@
   (setq key-chord-in-macros nil)
   (autoload 'evil-escape "evil-escape" nil t)
   (key-chord-define-global "jk" #'evil-escape)
-  (key-chord-define-global "hh" #'evil-avy-goto-char-timer)
+  (key-chord-define-global
+   "hh"
+   (lambda () (interactive)
+     (if (+corfu--other-completion-active-p)
+         (insert "hh")
+       (funcall-interactively #'evil-avy-goto-char-timer))))
   (key-chord-define-global "jj" #'evilem-motion-next-line)
-  (key-chord-define-global "kk"
-                           (lambda () (interactive)
-                             (if (+corfu--other-completion-active-p)
-                                 (insert "kk")
-                               (funcall-interactively #'evilem-motion-previous-line))))
+  (key-chord-define-global
+   "kk"
+   (lambda () (interactive)
+     (if (+corfu--other-completion-active-p)
+         (insert "kk")
+       (funcall-interactively #'evilem-motion-previous-line))))
   (after! transient
     (map! :map transient-base-map
           "<escape>" #'transient-quit-one
