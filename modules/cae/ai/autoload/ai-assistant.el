@@ -18,7 +18,7 @@ Can be 'vterm, 'eat, 'exwm, or 'ghostel."
           (const :tag "Ghostel" ghostel))
   :group 'cae-ai-assistant)
 
-(defcustom cae-ai-assistant-app "opencode"
+(defcustom cae-ai-assistant-app "claude"
   "AI coding assistant application to use.
 Supported values: \"claude\", \"opencode\", \"codex\", \"gemini\", \"aider\",
 \"chatgpt\", \"copilot\", \"tabnine\", \"sourcegraph-cody\", \"continue\"."
