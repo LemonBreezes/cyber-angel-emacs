@@ -6,5 +6,3 @@ separate misc applications system emacs commands?
 agent-shell? ghostel?
 
 vterm tabs! including the claude code sstuff
-
-caps lock ctrl
