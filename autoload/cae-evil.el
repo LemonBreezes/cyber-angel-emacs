@@ -191,3 +191,32 @@ In shell modes, moves to end of buffer. Otherwise uses Evil's G command."
   (interactive "<R>d")
   (edit-indirect-region beg end t)
   (goto-char (- pos beg)))
+
+;;;###autoload
+(defun cae-evil-avy-goto-char-or-self-insert ()
+  (interactive)
+  (cond ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
+         (insert "hh"))
+        (t (funcall-interactively #'evil-avy-goto-char-timer))))
+
+;;;###autoload
+(defun cae-evil-next-line-or-quick-jump ()
+  (interactive)
+  (cond
+   ((and (boundp 'vertico--input) vertico--input)
+    (funcall-interactively #'vertico-quick-jump))
+   ((cae-corfu-visible-p)
+    (funcall-interactively #'corfu-quick-jump))
+   ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
+    (insert "jj"))
+   (t (funcall-interactively #'evilem-motion-next-line))))
+
+;;;###autoload
+(defun cae-evil-previous-line-or-quick-insert ()
+  (interactive)
+  (cond
+   ((and (boundp 'vertico--input) vertico--input)
+    (funcall-interactively #'vertico-quick-insert))
+   ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
+    (insert "kk"))
+   (t (funcall-interactively #'evilem-motion-previous-line))))
