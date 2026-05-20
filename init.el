@@ -37,11 +37,11 @@
 (defalias 'sp-point-in-string
   (lambda (&optional pos) (nth 3 (syntax-ppss pos))))
 (defalias 'sp-beginning-of-sexp
-  (lambda (&optional arg) (goto-char (beginning-of-thing 'sexp))))
+  (lambda (&optional _arg) (goto-char (beginning-of-thing 'sexp))))
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((q (and (not noninteractive) nil)))
+(let ((q (and (not noninteractive) t)))
   (let ((p (and q t)))
     (defvar cae-init-preamble-enabled-p (and p t))
     (defvar cae-init-debug-enabled-p (and p t))
@@ -58,7 +58,7 @@
     (defvar cae-init-exwm-enabled-p (and c t))
     (defvar cae-init-geolocation-enabled-p (and c t)))
   (defvar cae-init-keyboard-remaps-enabled-p (and q nil))
-  (let ((p (and q t)))
+  (let ((p (and q nil)))
     (defvar cae-init-ui-enabled-p (and p t))
     (defvar cae-init-tools-enabled-p (and p t))
     (defvar cae-init-editor-enabled-p (and p t))
