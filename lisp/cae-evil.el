@@ -286,7 +286,7 @@
   (key-chord-define-global
    "hh"
    (lambda () (interactive)
-     (cond ((+corfu--other-completion-active-p)
+     (cond ((evil-insert-state-p)
             (insert "hh"))
            (t (funcall-interactively #'evil-avy-goto-char-timer)))))
   (key-chord-define-global
@@ -297,7 +297,7 @@
        (funcall-interactively #'vertico-quick-jump))
       ((cae-corfu-visible-p)
        (funcall-interactively #'corfu-quick-jump))
-      ((+corfu--other-completion-active-p)
+      ((evil-insert-state-p)
        (insert "jj"))
       (t (funcall-interactively #'evilem-motion-next-line)))))
   (key-chord-define-global
@@ -306,8 +306,7 @@
      (cond
       ((and (boundp 'vertico--input) vertico--input)
        (funcall-interactively #'vertico-quick-insert))
-      ((or (+corfu--other-completion-active-p)
-           (cae-corfu-visible-p))
+      ((evil-insert-state-p)
        (insert "kk"))
       (t (funcall-interactively #'evilem-motion-previous-line)))))
   (after! transient
