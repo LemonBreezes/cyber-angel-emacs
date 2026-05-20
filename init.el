@@ -94,7 +94,7 @@
 
          :term
          eshell
-         (:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
+         ;;(:if (not (memq system-type '(cygwin windows-nt ms-dos))) vterm)
 
          :checkers
          (syntax +childframe +icons)
@@ -166,7 +166,7 @@
          gnus
          rss
 
-         ghostel
+         (:if (not (memq system-type '(cygwin windows-nt ms-dos))) ghostel)
 
          :secret
          ;;(:if (eq system-type 'gnu/linux) root)
