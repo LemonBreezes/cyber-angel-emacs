@@ -1,10 +1,11 @@
 ;;; cae/ghostel/config.el -*- lexical-binding: t; -*-
 
 (use-package! ghostel
-  :when (bound-and-true-p module-file-suffix)  ; requires dynamic-modules support
+  :when (bound-and-true-p module-file-suffix) ; requires dynamic-modules support
   :commands (ghostel ghostel-mode ghostel-project)
   :hook (ghostel-mode . mode-line-invisible-mode) ; modeline serves no purpose in ghostel
   :init
+  (when (not (eq (cae-terminal-type) 0)))
   (map! :leader
         :desc "Toggle ghostel popup"  "ot" #'cae-ghostel-toggle
         :desc "Open ghostel here"     "oT" #'cae-ghostel-here)
