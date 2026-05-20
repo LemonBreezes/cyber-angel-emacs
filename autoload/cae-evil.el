@@ -216,7 +216,7 @@ Self-inserts \"jj\" while in insert state or another completion frontend."
 
 ;;;###autoload
 (defun cae-evil-previous-line-or-quick-insert ()
-"Self-inserts \"kk\" while in insert state or another completion frontend."
+  "Self-inserts \"kk\" while in insert state or another completion frontend."
   (interactive)
   (cond
    ((and (boundp 'vertico--input) vertico--input)
