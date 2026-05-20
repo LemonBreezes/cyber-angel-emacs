@@ -617,4 +617,5 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
 ;;;###autoload
 (defun cae-switch-to-home-project (&optional arg)
   (interactive "P")
-  (projectile-switch-project-by-name "~/" arg))
+  (let ((projectile-project-name-function (lambda (_) "~/")))
+    (projectile-switch-project-by-name "~/" arg)))
