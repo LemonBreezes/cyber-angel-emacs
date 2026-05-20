@@ -295,6 +295,8 @@
      (cond
       ((and (boundp 'vertico--input) vertico--input)
        (funcall-interactively #'vertico-quick-jump))
+      ((cae-corfu-visible-p)
+       (funcall-interactively #'corfu-quick-jump))
       ((+corfu--other-completion-active-p)
        (insert "jj"))
       (t (funcall-interactively #'evilem-motion-next-line)))))
@@ -304,7 +306,8 @@
      (cond
       ((and (boundp 'vertico--input) vertico--input)
        (funcall-interactively #'vertico-quick-insert))
-      ((+corfu--other-completion-active-p)
+      ((or (+corfu--other-completion-active-p)
+           (cae-corfu-visible-p))
        (insert "kk"))
       (t (funcall-interactively #'evilem-motion-previous-line)))))
   (after! transient
