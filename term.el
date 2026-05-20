@@ -4,11 +4,7 @@
   (setq vterm-always-compile-module t)
   (setq vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=yes")
   (after! vterm
-    (setq vterm-max-scrollback 100000)
-    ;; Attach every vterm to a persistent user-level tmux session.
-    ;; The session is started by the `tmux.service` systemd user unit; -A
-    ;; falls back to creating it if the server isn't up yet.
-    (setq vterm-shell "/usr/bin/tmux new-session -A -s main"))
+    (setq vterm-max-scrollback 100000))
   (setq-hook! 'vterm-mode-hook
     nobreak-char-display nil
     pixel-scroll-precision-mode nil))
