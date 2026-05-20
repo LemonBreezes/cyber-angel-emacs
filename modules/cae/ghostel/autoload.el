@@ -39,8 +39,15 @@ Returns the ghostel buffer."
                            (get-buffer-create buffer-name))))
            (with-current-buffer buffer
              (unless (derived-mode-p 'ghostel-mode)
+               ;; `ghostel' itself calls `pop-to-buffer' with
+               ;; `display-buffer--same-window-action', which forces the
+               ;; buffer into the selected window and defeats the popup
+               ;; rule.  Wrap in `save-window-excursion' so only the outer
+               ;; `pop-to-buffer' (which routes through `display-buffer-alist')
+               ;; controls placement.
                (let ((ghostel-buffer-name buffer-name))
-                 (ghostel)))
+                 (save-window-excursion
+                   (ghostel))))
              (setq-local cae-ghostel--id buffer-name))
            (pop-to-buffer buffer)))
        (get-buffer buffer-name)))))
@@ -57,7 +64,13 @@ Returns the ghostel buffer."
    arg
    (lambda ()
      (require 'ghostel)
-     (let (display-buffer-alist)
+     ;; Mirror `ghostel-project': prefix the buffer name with the project
+     ;; so different projects get their own ghostel buffer (and
+     ;; `ghostel-project-next' / -previous can cycle them by identity).
+     (let ((ghostel-buffer-name
+            (project-prefixed-buffer-name
+             (string-trim ghostel-buffer-name "*" "*")))
+           display-buffer-alist)
        (ghostel)))))
 
 (defun cae-ghostel--configure-project-root-and-display (arg display-fn)

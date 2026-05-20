@@ -284,32 +284,9 @@
   (autoload 'evil-escape "evil-escape" nil t)
   (key-chord-define-global "jk" #'evil-escape)
   ;; Make the chords more flexible in case I need to type them, though rare.
-  (key-chord-define-global
-   "hh"
-   (lambda () (interactive)
-     (cond ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
-            (insert "hh"))
-           (t (funcall-interactively #'evil-avy-goto-char-timer)))))
-  (key-chord-define-global
-   "jj"
-   (lambda () (interactive)
-     (cond
-      ((and (boundp 'vertico--input) vertico--input)
-       (funcall-interactively #'vertico-quick-jump))
-      ((cae-corfu-visible-p)
-       (funcall-interactively #'corfu-quick-jump))
-      ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
-       (insert "jj"))
-      (t (funcall-interactively #'evilem-motion-next-line)))))
-  (key-chord-define-global
-   "kk"
-   (lambda () (interactive)
-     (cond
-      ((and (boundp 'vertico--input) vertico--input)
-       (funcall-interactively #'vertico-quick-insert))
-      ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
-       (insert "kk"))
-      (t (funcall-interactively #'evilem-motion-previous-line)))))
+  (key-chord-define-global "hh" #'cae-evil-avy-goto-char-or-self-insert)
+  (key-chord-define-global "jj" #'cae-evil-next-line-or-quick-jump)
+  (key-chord-define-global "kk" #'cae-evil-previous-line-or-quick-insert)
   (after! transient
     (map! :map transient-base-map
           "<escape>" #'transient-quit-one
