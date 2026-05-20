@@ -11,7 +11,9 @@
         :desc "Toggle ghostel popup"  "ot" #'cae-ghostel-toggle
         :desc "Open ghostel here"     "oT" #'cae-ghostel-here)
   :config
-  (set-popup-rule! "^\\*doom:ghostel-popup" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
+  ;; Mirror Doom's own term/eshell popup rule (the
+  ;; "^\\*doom:\\(?:v?term\\|e?shell\\)-popup" entry in `+popup-default-rules').
+  (set-popup-rule! "^\\*doom:ghostel-popup" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
 
   (map! :map ghostel-semi-char-mode-map "C-q" #'ghostel-send-next-key)
 
