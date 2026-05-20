@@ -292,9 +292,12 @@
   (key-chord-define-global
    "jj"
    (lambda () (interactive)
-     (cond ((+corfu--other-completion-active-p)
-            (insert "jj"))
-           (t (funcall-interactively #'evilem-motion-next-line)))))
+     (cond
+      ((and (boundp 'vertico--input) vertico--input)
+       (funcall-interactively #'vertico-quick))
+      ((+corfu--other-completion-active-p)
+       (insert "jj"))
+      (t (funcall-interactively #'evilem-motion-next-line)))))
   (key-chord-define-global
    "kk"
    (lambda () (interactive)
