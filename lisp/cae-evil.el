@@ -301,9 +301,12 @@
   (key-chord-define-global
    "kk"
    (lambda () (interactive)
-     (if (+corfu--other-completion-active-p)
-         (insert "kk")
-       (funcall-interactively #'evilem-motion-previous-line))))
+     (cond
+      ((and (boundp 'vertico--input) vertico--input)
+       (funcall-interactively #'vertico-quick-insert))
+      ((+corfu--other-completion-active-p)
+       (insert "kk"))
+      (t (funcall-interactively #'evilem-motion-previous-line)))))
   (after! transient
     (map! :map transient-base-map
           "<escape>" #'transient-quit-one
