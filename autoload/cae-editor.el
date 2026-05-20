@@ -615,6 +615,6 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
     (beacon-blink)))
 
 ;;;###autoload
-(defun cae-projectile-switch-to-home-project (&optional arg)
+(defun cae-switch-to-home-project (&optional arg)
   (interactive "P")
   (projectile-switch-project-by-name "~/" arg))
