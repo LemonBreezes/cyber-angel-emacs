@@ -8,6 +8,10 @@
   (setq-hook! 'vterm-mode-hook
     nobreak-char-display nil
     pixel-scroll-precision-mode nil))
+(when (modulep! :cae ghostel)
+  (setq-hook! 'ghostel-mode-hook
+    nobreak-char-display nil
+    pixel-scroll-precision-mode nil))
 
 (after! comint
   (setq comint-history-isearch 'dwim
