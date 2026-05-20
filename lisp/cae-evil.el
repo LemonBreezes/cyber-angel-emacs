@@ -285,7 +285,11 @@
   (key-chord-define-global "jk" #'evil-escape)
   (key-chord-define-global "hh" #'evil-avy-goto-char-timer)
   (key-chord-define-global "jj" #'evilem-motion-next-line)
-  (key-chord-define-global "kk" #'evilem-motion-previous-line)
+  (key-chord-define-global "kk"
+                           (lambda () (interactive)
+                             (if (+corfu--other-completion-active-p)
+                                 (insert "kk")
+                               (funcall-interactively #'evilem-motion-previous-line))))
   (after! transient
     (map! :map transient-base-map
           "<escape>" #'transient-quit-one
