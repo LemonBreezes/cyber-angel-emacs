@@ -194,6 +194,7 @@ In shell modes, moves to end of buffer. Otherwise uses Evil's G command."
 
 ;;;###autoload
 (defun cae-evil-avy-goto-char-or-self-insert ()
+  "Run `evil-avy-goto-char-timer', or self-insert \"hh\" in insert/completion contexts."
   (interactive)
   (cond ((or (+corfu--other-completion-active-p) (evil-insert-state-p))
          (insert "hh"))
@@ -201,6 +202,8 @@ In shell modes, moves to end of buffer. Otherwise uses Evil's G command."
 
 ;;;###autoload
 (defun cae-evil-next-line-or-quick-jump ()
+  "Quick-jump in completion UIs, otherwise move to next line via easymotion.
+Self-inserts \"jj\" while in insert state or another completion frontend."
   (interactive)
   (cond
    ((and (boundp 'vertico--input) vertico--input)
@@ -213,6 +216,7 @@ In shell modes, moves to end of buffer. Otherwise uses Evil's G command."
 
 ;;;###autoload
 (defun cae-evil-previous-line-or-quick-insert ()
+"Self-inserts \"kk\" while in insert state or another completion frontend."
   (interactive)
   (cond
    ((and (boundp 'vertico--input) vertico--input)
