@@ -18,6 +18,7 @@
 (unless (featurep 'cae-lib)
   (defalias 'cae-defadvice! 'defadvice!)
   (defalias 'cae-advice-add 'advice-add))
+(defalias 'cae-shut-up-a 'applyy)
 (with-eval-after-load 'straight
   (add-to-list 'straight-built-in-pseudo-packages 'seq))
 
