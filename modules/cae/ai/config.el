@@ -24,8 +24,6 @@
                             chatgpt-shell-models))))
   (setq chatgpt-shell-model-version "claude-opus-4-7")
   (setq chatgpt-shell-always-create-new nil))
-(after! dall-e-shell
-  (setq dall-e-shell-model-version "dall-e-3"))
 (defvar llm-refactoring-provider nil)
 (after! llm
   (require 'llm-claude)
