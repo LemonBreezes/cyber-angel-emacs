@@ -613,3 +613,8 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (let ((beacon-blink-delay 0.3)
         (beacon-blink-duration 0.3))
     (beacon-blink)))
+
+;;;###autoload
+(defun cae-projectile-switch-to-home-project (&optional arg)
+  (interactive "P")
+  (projectile-switch-project-by-name "~/" arg))
