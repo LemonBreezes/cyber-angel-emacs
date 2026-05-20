@@ -75,13 +75,3 @@
     (unless (cae-display-graphic-p)
       (add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdftotext-mode))
       (add-to-list 'magic-mode-alist '("%PDF" . pdftotext-mode)))))
-
-
-(use-package! kitty-graphics
-  :when (and (not (cae-display-graphic-p))
-             (getenv "KITTY_PID"))
-  :after-call (org-mode-hook markdown-mode-hook image-mode-hook eww-mode-hook
-                             w3m-mode-hook)
-  :defer t :config
-  (kitty-graphics-mode +1)
-  (map! "C-x x k" #'kitty-gfx-clear-all))
