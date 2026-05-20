@@ -294,7 +294,7 @@
    (lambda () (interactive)
      (cond
       ((and (boundp 'vertico--input) vertico--input)
-       (funcall-interactively #'vertico-quick))
+       (funcall-interactively #'vertico-quick-jump))
       ((+corfu--other-completion-active-p)
        (insert "jj"))
       (t (funcall-interactively #'evilem-motion-next-line)))))
