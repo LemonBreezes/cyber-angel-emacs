@@ -14,6 +14,8 @@
   (set-popup-rule! "^\\*doom:ghostel-popup" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
 
   (map! :map ghostel-semi-char-mode-map "C-q" #'ghostel-send-next-key)
+  (map! :map ghostel-mode-map
+        :localleader "e" #'evil-collection-ghostel-send-escape)
 
   ;; Don't rename buffers based on the terminal title (mirrors vterm's
   ;; default). Keeps the popup buffer name stable so `set-popup-rule!'
