@@ -282,8 +282,8 @@
   (setq key-chord-typing-detection t)
   (setq key-chord-in-macros nil)
   (autoload 'evil-escape "evil-escape" nil t)
-  ;; Make the chords more flexible in case I need to type them, though rare.
   (key-chord-define-global "jk" #'evil-escape)
+  ;; Make the chords more flexible in case I need to type them, though rare.
   (key-chord-define-global
    "hh"
    (lambda () (interactive)
