@@ -365,6 +365,8 @@
                (:when (modulep! :ui treemacs)
                  :desc "Project sidebar" "p" #'+treemacs/toggle
                  :desc "Find file in project sidebar" "P" #'treemacs-find-file))
+      (:prefix "p"
+       :desc "Open HOME project" "~" #'cae-switch-to-home-project)
       (:prefix "TAB"
        :desc "Switch to 10th workspace" "0" #'cae-workspace-switch-to-9
        :desc "Switch to 11th workspace" "-" #'cae-workspace-switch-to-10
