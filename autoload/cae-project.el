@@ -16,6 +16,7 @@
                          (not (member dir projectile-known-projects))))))
               projectile-project-search-path)
              projectile-known-projects)
+    (message "Discovering projects in search path...")
     (projectile-discover-projects-in-search-path)))
 
 ;;;###autoload
