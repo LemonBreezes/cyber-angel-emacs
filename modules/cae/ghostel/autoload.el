@@ -83,9 +83,9 @@ Returns the ghostel buffer."
     (user-error "Your build of Emacs lacks dynamic modules support and cannot load ghostel"))
   (let* ((project-root (or (doom-project-root) default-directory))
          (default-directory
-           (if arg
-               default-directory
-             project-root)))
+          (if arg
+              default-directory
+            project-root)))
     (setenv "PROOT" project-root)
     (funcall display-fn)))
 
