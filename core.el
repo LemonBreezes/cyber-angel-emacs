@@ -2,10 +2,6 @@
 
 (require 'cae-lib)
 
-;; Load secrets
-(when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
-  (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
-
 ;; Have a fallback completion system.
 (unless (or (modulep! :completion helm)
             (modulep! :completion ivy)
