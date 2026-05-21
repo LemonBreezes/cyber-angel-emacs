@@ -3,12 +3,14 @@
 (use-package! ghostel
   :when (bound-and-true-p module-file-suffix)
   :commands (ghostel ghostel-mode ghostel-project)
-  :hook (ghostel-mode . mode-line-invisible-mode) ; modeline serves no purpose in ghostel
+  :hook 
   :init
   (map! :leader
         :desc "Toggle ghostel popup"  "ot" #'cae-ghostel-toggle
         :desc "Open ghostel here"     "oT" #'cae-ghostel-here)
   :config
+  (add-hook 'ghostel-mode-hook #'mode-line-invisible-mode)
+  (add-hook 'ghostel-mode-hook #'evil-ghostel-mode)
   ;; Mirror Doom's own term/eshell popup rule (the
   ;; "^\\*doom:\\(?:v?term\\|e?shell\\)-popup" entry in `+popup-default-rules').
   (set-popup-rule! "^\\*doom:ghostel-popup" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
