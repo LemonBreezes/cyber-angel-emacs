@@ -29,6 +29,7 @@
 (defvar cae-project--src-watch-descriptor nil
   "File-notify descriptor for the ~/src/ watcher.")
 
+(require 'filenotify)
 (when (and cae-project--src-watch-descriptor
            (file-notify-valid-p cae-project--src-watch-descriptor))
   (file-notify-rm-watch cae-project--src-watch-descriptor))
