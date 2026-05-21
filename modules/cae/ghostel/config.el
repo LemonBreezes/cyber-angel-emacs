@@ -3,7 +3,6 @@
 (use-package! ghostel
   :when (bound-and-true-p module-file-suffix)
   :commands (ghostel ghostel-mode ghostel-project)
-  :hook 
   :init
   (map! :leader
         :desc "Toggle ghostel popup"  "ot" #'cae-ghostel-toggle
