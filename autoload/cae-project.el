@@ -27,4 +27,3 @@
     (let ((project-root (file-name-directory buffer-file-name)))
       (projectile-add-known-project project-root)
       (message "Added %s to projectile known projects" project-root))))
-(add-hook 'after-save-hook #'cae-projectile-maybe-add-project)
