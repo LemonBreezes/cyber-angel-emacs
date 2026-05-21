@@ -20,7 +20,7 @@
   (load! "lisp/cae-smartparens" doom-user-dir))
 
 (when cae-init-projectile-enabled-p
-  (load! "lisp/cae-projectile" doom-user-dir))
+  (load! "lisp/cae-project" doom-user-dir))
 
 (when (and (modulep! :editor evil)
            cae-init-evil-enabled-p)
