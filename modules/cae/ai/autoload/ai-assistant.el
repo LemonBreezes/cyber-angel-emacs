@@ -1,5 +1,23 @@
 ;;; cae/ai/autoload/ai-assistant.el -*- lexical-binding: t; -*-
 
+(defcustom cae-ai-assistant-tmux-integration 'non-sandbox
+  "Whether to wrap the AI assistant command in a persistent tmux session.
+
+When enabled, the assistant runs inside a tmux session keyed on the
+target directory's basename, so the process survives the Emacs terminal
+buffer and can be reattached later (e.g. with `tmux a -t <name>').  If
+two projects share the same basename, they share the same tmux session.
+
+Values:
+- `disabled': Never use tmux.
+- `non-sandbox': Use tmux for real projects only, not the sandbox
+  invoked via the universal argument.
+- `all': Use tmux for everything, including sandboxes."
+  :type '(choice (const :tag "Disabled" disabled)
+          (const :tag "Non-sandbox only" non-sandbox)
+          (const :tag "All (including sandboxes)" all))
+  :group 'cae-ai-assistant)
+
 (defcustom cae-ai-assistant-terminal-backend
   (cond ((and (modulep! :cae exwm) cae-exwm-enabled-p)
          'exwm)
@@ -35,6 +53,38 @@ Supported values: \"claude\", \"opencode\", \"codex\", \"gemini\", \"aider\",
   :type 'directory
   :group 'cae-ai-assistant)
 
+(defun cae-ai-assistant--tmux-enabled-p (sandbox-p)
+  "Return non-nil if tmux integration should wrap the assistant command.
+SANDBOX-P indicates whether the call targets a sandbox directory."
+  (pcase cae-ai-assistant-tmux-integration
+    ('disabled nil)
+    ('non-sandbox (not sandbox-p))
+    ('all t)
+    (_ nil)))
+
+(defun cae-ai-assistant--tmux-session-name (directory)
+  "Compute a tmux session name from DIRECTORY's basename.
+Tmux disallows `.', `:', and whitespace in session names, so any
+character outside [A-Za-z0-9_-] is replaced with `-'."
+  (let ((name (file-name-nondirectory
+               (directory-file-name (expand-file-name directory)))))
+    (replace-regexp-in-string "[^A-Za-z0-9_-]" "-"
+                              (if (string-empty-p name) "ai" name))))
+
+(defun cae-ai-assistant--maybe-tmux-wrap (command directory sandbox-p)
+  "Optionally wrap COMMAND so it runs inside a persistent tmux session.
+The session is keyed on DIRECTORY's basename.  SANDBOX-P controls
+whether wrapping applies via `cae-ai-assistant-tmux-integration'.
+The inner COMMAND is passed as a single shell-quoted argument so that
+embedded quotes (e.g. a task description) survive intact."
+  (if (cae-ai-assistant--tmux-enabled-p sandbox-p)
+      (format "tmux new-session -A -s %s -c %s %s"
+              (shell-quote-argument
+               (cae-ai-assistant--tmux-session-name directory))
+              (shell-quote-argument (expand-file-name directory))
+              (shell-quote-argument command))
+    command))
+
 (defun cae-ai-assistant--generate-folder-name (task-description)
   "Generate a folder name from TASK-DESCRIPTION using AI.
  Uses the llm package to get a concise folder name."
@@ -59,38 +109,45 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
     (with-temp-buffer
       (write-file (expand-file-name ".projectile" sandbox-dir)))
     ;; Unset ANTHROPIC_API_KEY for claude code to use its own token
-    (let ((process-environment (if (string= app-name "claude")
-                                   (cons "ANTHROPIC_API_KEY=" process-environment)
-                                 process-environment))
-          (default-directory sandbox-dir))
+    (let* ((claude-p (string= app-name "claude"))
+           (unset-anthropic-key (when claude-p '("ANTHROPIC_API_KEY=")))
+           (process-environment (if claude-p
+                                    (append process-environment unset-anthropic-key)
+                                  process-environment))
+           (default-directory sandbox-dir)
+           (inner-command (format "%s \"%s\"" app-name task-description))
+           (command (cae-ai-assistant--maybe-tmux-wrap
+                     inner-command sandbox-dir t)))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (require 'vterm)
-        (vterm-other-window buffer-name)
+        (let ((vterm-environment (append vterm-environment unset-anthropic-key)))
+          (vterm-other-window buffer-name))
         ;; Send the task description directly as a quoted argument to the AI assistant
-        (vterm-send-string (format "%s \"%s\"" app-name task-description))
+        (vterm-send-string command)
         (vterm-send-return))
        ((eq cae-ai-assistant-terminal-backend 'eat)
         (require 'eat)
         (eat-other-window buffer-name)
         ;; Send the task description directly as a quoted argument to the AI assistant
-        (eat--send-string (format "%s \"%s\"" app-name task-description))
+        (eat--send-string command)
         (eat--send-string "\C-m"))
        ((eq cae-ai-assistant-terminal-backend 'ghostel)
         (require 'ghostel)
         (let ((ghostel-buffer-name buffer-name)
+              (ghostel-environment (append (bound-and-true-p ghostel-environment)
+                                           unset-anthropic-key))
               (display-buffer-overriding-action
                '((display-buffer-pop-up-window display-buffer-use-some-window)
                  (inhibit-same-window . t))))
           (with-current-buffer (ghostel)
             ;; Send the task description directly as a quoted argument to the AI assistant
-            (ghostel-send-string (format "%s \"%s\"" app-name task-description))
+            (ghostel-send-string command)
             (ghostel-send-string "\C-m"))))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
           ;; Use the terminal function from exwm module
-          (cae-exwm-run-terminal-in-current-workspace
-           (format "%s \"%s\"" app-name task-description)))
+          (cae-exwm-run-terminal-in-current-workspace command))
         (unless (modulep! :cae exwm)
           (error "EXWM module is not enabled. Please enable :cae exwm in your config.")))))))
 
@@ -178,27 +235,34 @@ Otherwise, open the AI assistant for the current project."
                           (format "*%s:%s*" app-name project-root))))
            (default-directory (or project-root default-directory))
            ;; Unset ANTHROPIC_API_KEY only for claude code
-           (process-environment (if (string= app-name "claude")
-                                    (cons "ANTHROPIC_API_KEY=" process-environment)
-                                  process-environment)))
+           (claude-p (string= app-name "claude"))
+           (unset-anthropic-key (when claude-p '("ANTHROPIC_API_KEY=")))
+           (process-environment (if claude-p
+                                    (append process-environment unset-anthropic-key)
+                                  process-environment))
+           (command (cae-ai-assistant--maybe-tmux-wrap
+                     app-name default-directory nil)))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
-        (vterm-other-window buffer-name)
-        (vterm-send-string app-name)
+        (let ((vterm-environment (append vterm-environment unset-anthropic-key)))
+          (vterm-other-window buffer-name))
+        (vterm-send-string command)
         (vterm-send-return))
        ((eq cae-ai-assistant-terminal-backend 'eat)
         (let ((eat-buffer-name buffer-name))
           (ignore eat-buffer-name)      ; Silence byte-compiler.
-          (eat-other-window app-name)))
+          (eat-other-window command)))
        ((eq cae-ai-assistant-terminal-backend 'ghostel)
         (let ((ghostel-buffer-name buffer-name)
+              (ghostel-environment (append (bound-and-true-p ghostel-environment)
+                                           unset-anthropic-key))
               (display-buffer-overriding-action
                '((display-buffer-pop-up-window display-buffer-use-some-window)
                  (inhibit-same-window . t))))
           (with-current-buffer (ghostel)
-            (ghostel-send-string app-name)
+            (ghostel-send-string command)
             (ghostel-send-string "\C-m"))))
        ((eq cae-ai-assistant-terminal-backend 'exwm)
         (when (modulep! :cae exwm)
           ;; Use the terminal function from exwm module
-          (cae-exwm-run-terminal-in-current-workspace app-name)))))))
+          (cae-exwm-run-terminal-in-current-workspace command)))))))
