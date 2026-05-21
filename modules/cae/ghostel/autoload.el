@@ -88,3 +88,10 @@ Returns the ghostel buffer."
              project-root)))
     (setenv "PROOT" project-root)
     (funcall display-fn)))
+
+
+;;;###autoload
+(defun cae-ghostel-send-escape ()
+  "Send a literal ESC keypress to the terminal."
+  (interactive)
+  (ghostel-send-key "escape"))
