@@ -1,23 +1,5 @@
 ;;; autoload/cae-project.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun cae-project-maybe-discover-projects-a (oldfun &rest args)
-  "Discover projects when depth-0 search-path entries are missing from known projects."
-  (require 'projectile)
-  (apply oldfun args)
-  (when (and (cl-some
-              (lambda (entry)
-                (when (and (consp entry) (eq (cdr entry) 0))
-                  (let ((dir (file-name-as-directory (expand-file-name (car entry)))))
-                    (and (file-directory-p dir)
-                         (directory-files dir nil directory-files-no-dot-files-regexp t)
-                         (not (member (abbreviate-file-name dir)
-                                      projectile-known-projects))
-                         (not (member dir projectile-known-projects))))))
-              projectile-project-search-path)
-             projectile-known-projects)
-    (message "Discovering projects in search path...")
-    (projectile-discover-projects-in-search-path)))
 
 ;;;###autoload
 (defun cae-project-maybe-add-project ()
