@@ -28,6 +28,8 @@
 
 (defvar cae-project--src-watch-descriptor nil
   "File-notify descriptor for the ~/src/ watcher.")
+(defvar cae-project--src-watch-timer nil
+  "Debounce timer for `cae-project--src-changed'.")
 
 ;; Getting an error trying to autoload this function.
 (defun cae-project--src-changed (event)
