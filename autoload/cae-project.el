@@ -12,7 +12,6 @@
 (defvar cae-project--src-watch-timer nil
   "Debounce timer for `cae-project--src-changed'.")
 
-
 ;;;###autoload
 (defun cae-project--src-changed (event)
   "Rediscover projects in ~/src/ when a subdirectory is added.
