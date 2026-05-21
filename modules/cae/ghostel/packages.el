@@ -1,4 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; cae/ghostel/packages.el
 
-(package! ghostel)
+(package! ghostel :recipe
+  (:host github :repo "dakra/ghostel" :files ("*")))
