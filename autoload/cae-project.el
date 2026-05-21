@@ -33,15 +33,3 @@ EVENT is a `file-notify' event."
                (projectile-discover-projects-in-directory
                 (expand-file-name "~/src/") 1)))))))
 
-;;;###autoload
-(defun cae-project-watch-src-directory ()
-  "Watch ~/src/ for new subdirectories and rediscover projects when added."
-  (require 'filenotify)
-  (when (and cae-project--src-watch-descriptor
-             (file-notify-valid-p cae-project--src-watch-descriptor))
-    (file-notify-rm-watch cae-project--src-watch-descriptor))
-  (when (file-directory-p "~/src/")
-    (setq cae-project--src-watch-descriptor
-          (file-notify-add-watch (expand-file-name "~/src/")
-                                 '(change)
-                                 #'cae-project--src-changed))))
