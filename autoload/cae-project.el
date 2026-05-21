@@ -4,6 +4,7 @@
 (defun cae-project-maybe-discover-projects-a (oldfun &rest args)
   "Discover projects when depth-0 search-path entries are missing from known projects."
   (require 'projectile)
+  (apply oldfun args)
   (when (and (cl-some
               (lambda (entry)
                 (when (and (consp entry) (eq (cdr entry) 0))
@@ -15,9 +16,7 @@
                          (not (member dir projectile-known-projects))))))
               projectile-project-search-path)
              projectile-known-projects)
-    (apply oldfun args)
-    (when (equal projectile-known-projects-old projectile-known-projects)
-      (error "No new projects discovered. Update `cae-project-maybe-discover-projects-a'"))))
+    (projectile-discover-projects-in-search-path)))
 
 ;;;###autoload
 (defun cae-project-maybe-add-project ()
