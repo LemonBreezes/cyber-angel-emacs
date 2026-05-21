@@ -25,7 +25,6 @@
 (cae-advice-add #'+default/discover-projects :around #'cae-shut-up-a)
 
 (add-hook 'after-save-hook #'cae-project-maybe-add-project)
-(cae-advice-add 'projectile-switch-project :around #'cae-project-maybe-discover-projects-a)
 
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
