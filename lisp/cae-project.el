@@ -35,12 +35,12 @@
 (defun cae-project--src-changed (event)
   "Rediscover projects in ~/src/ when a subdirectory is added.
 EVENT is a `file-notify' event."
+  (message "hello")
   (pcase-let ((`(,_desc ,action ,file) event))
     (when (and (memq action '(created renamed))
                (file-directory-p file))
       (when (timerp cae-project--src-watch-timer)
         (cancel-timer cae-project--src-watch-timer))
-      (message "hello")
       (setq cae-project--src-watch-timer
             (run-with-idle-timer
              1.0 nil
