@@ -9,13 +9,9 @@
       (projectile-add-known-project project-root)
       (message "Added %s to projectile known projects" project-root))))
 
-;;;###autoload
 (defvar cae-project--src-watch-timer nil
   "Debounce timer for `cae-project--src-changed'.")
 
-;;;###autoload
-(defvar cae-project--src-watch-descriptor nil
-  "File-notify descriptor for the ~/src/ watcher.")
 
 ;;;###autoload
 (defun cae-project--src-changed (event)
