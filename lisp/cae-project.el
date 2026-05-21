@@ -1,4 +1,4 @@
-;;; lisp/cae-project.el -*- lexical-binding: t; -*-
+;;; lisp/cae-projectile.el -*- lexical-binding: t; -*-
 
 ;; Automatically find projects in the I personally use.
 (setq projectile-project-search-path
@@ -23,6 +23,8 @@
 ;; Silence noisy function.
 (advice-add #'projectile-discover-projects-in-directory :around #'cae-shut-up-a)
 (advice-add #'+default/discover-projects :around #'cae-shut-up-a)
+
+(add-hook 'after-save-hook #'cae-projectile-maybe-add-project)
 
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
