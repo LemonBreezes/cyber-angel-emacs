@@ -32,4 +32,3 @@ EVENT is a `file-notify' event."
              (lambda ()
                (projectile-discover-projects-in-directory
                 (expand-file-name "~/src/") 1)))))))
-
