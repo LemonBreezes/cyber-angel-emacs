@@ -35,7 +35,6 @@
 (defun cae-project--src-changed (event)
   "Rediscover projects in ~/src/ when a subdirectory is added.
 EVENT is a `file-notify' event."
-  (message "hello")
   (pcase-let ((`(,_desc ,action ,file) event))
     (when (and (memq action '(created renamed))
                (file-directory-p file))
@@ -53,10 +52,13 @@ EVENT is a `file-notify' event."
            (file-notify-valid-p cae-project--src-watch-descriptor))
   (file-notify-rm-watch cae-project--src-watch-descriptor))
 (when (file-directory-p "~/src/")
-  (setq cae-project--src-watch-descriptor
-        (file-notify-add-watch (expand-file-name "~/src/")
-                               '(change)
-                               #'cae-project--src-changed)))
+  (run-with-idle-timer
+   2.0 nil
+   (lambda ()
+     (setq cae-project--src-watch-descriptor
+           (file-notify-add-watch (expand-file-name "~/src/")
+                                  '(change)
+                                  #'cae-project--src-changed)))))
 
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
