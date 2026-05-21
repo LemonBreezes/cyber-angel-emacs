@@ -1,6 +1,5 @@
 ;;; autoload/cae-project.el -*- lexical-binding: t; -*-
 
-
 ;;;###autoload
 (defun cae-project-maybe-add-project ()
   "If saving a .projectile file, add its directory to projectile's known projects."
