@@ -18,7 +18,7 @@
 
   (when (modulep! :editor evil +everywhere)
     (map! :map ghostel-mode-map
-          :localleader "e" #'evil-collection-ghostel-send-escape)
+          :localleader "e" #'cae-ghostel-send-escape)
     (setq evil-ghostel-escape 'evil))
 
 
