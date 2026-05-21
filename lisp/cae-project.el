@@ -52,7 +52,7 @@
     (after! projectile
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
       (unless (file-exists-p (expand-file-name projectile-cache-file doom-project-cache-dir))
-        (message "Cache file was deleted!"))
+        (projectile-discover-projects-in-search-path))
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
