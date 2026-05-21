@@ -1,4 +1,4 @@
-;;; lisp/cae-projectile.el -*- lexical-binding: t; -*-
+;;; lisp/cae-project.el -*- lexical-binding: t; -*-
 
 ;; Automatically find projects in the I personally use.
 (setq projectile-project-search-path
@@ -24,15 +24,6 @@
 (advice-add #'projectile-discover-projects-in-directory :around #'cae-shut-up-a)
 (advice-add #'+default/discover-projects :around #'cae-shut-up-a)
 
-(defun cae-projectile-maybe-add-project ()
-  "If saving a .projectile file, add its directory to projectile's known projects."
-  (when (and buffer-file-name
-             (string= (file-name-nondirectory buffer-file-name) ".projectile"))
-    (let ((project-root (file-name-directory buffer-file-name)))
-      (projectile-add-known-project project-root)
-      (message "Added %s to projectile known projects" project-root))))
-(add-hook 'after-save-hook #'cae-projectile-maybe-add-project)
-
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
 (cae-defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
@@ -57,6 +48,9 @@
 ;;; Projectile configuration
     (after! projectile
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
+
+      (cae-advice-add 'projectile-switch-project :before
+                      #'cae-project-maybe-discover-projects-a)
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
