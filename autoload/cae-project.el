@@ -8,3 +8,40 @@
     (let ((project-root (file-name-directory buffer-file-name)))
       (projectile-add-known-project project-root)
       (message "Added %s to projectile known projects" project-root))))
+
+;;;###autoload
+(defvar cae-project--src-watch-timer nil
+  "Debounce timer for `cae-project--src-changed'.")
+
+;;;###autoload
+(defvar cae-project--src-watch-descriptor nil
+  "File-notify descriptor for the ~/src/ watcher.")
+
+;;;###autoload
+(defun cae-project--src-changed (event)
+  "Rediscover projects in ~/src/ when a subdirectory is added.
+EVENT is a `file-notify' event."
+  (pcase-let ((`(,_desc ,action ,file) event))
+    (when (and (memq action '(created renamed))
+               (file-directory-p file))
+      (when (timerp cae-project--src-watch-timer)
+        (cancel-timer cae-project--src-watch-timer))
+      (setq cae-project--src-watch-timer
+            (run-with-idle-timer
+             1.0 nil
+             (lambda ()
+               (projectile-discover-projects-in-directory
+                (expand-file-name "~/src/") 1)))))))
+
+;;;###autoload
+(defun cae-project-watch-src-directory ()
+  "Watch ~/src/ for new subdirectories and rediscover projects when added."
+  (require 'filenotify)
+  (when (and cae-project--src-watch-descriptor
+             (file-notify-valid-p cae-project--src-watch-descriptor))
+    (file-notify-rm-watch cae-project--src-watch-descriptor))
+  (when (file-directory-p "~/src/")
+    (setq cae-project--src-watch-descriptor
+          (file-notify-add-watch (expand-file-name "~/src/")
+                                 '(change)
+                                 #'cae-project--src-changed))))
