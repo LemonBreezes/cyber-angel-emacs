@@ -13,8 +13,11 @@
                                  projectile-known-projects))
                     (not (member dir projectile-known-projects))))))
          projectile-project-search-path)
-    (message "Discovering projects in search path...")
-    (projectile-discover-projects-in-search-path)))
+    (let ((projectile-known-projects-old projectile-known-projects))
+      (message "Discovering projects in search path...")
+      (projectile-discover-projects-in-search-path)
+      (when (equal projectile-known-projects-old projectile-known-projects)
+        (error "No new projects discovered. Update `cae-project-maybe-discover-projects-a'")))))
 
 ;;;###autoload
 (defun cae-project-maybe-add-project ()
