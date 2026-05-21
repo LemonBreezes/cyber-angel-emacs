@@ -29,6 +29,22 @@
 (defvar cae-project--src-watch-descriptor nil
   "File-notify descriptor for the ~/src/ watcher.")
 
+;; Getting an error trying to autoload this function.
+(defun cae-project--src-changed (event)
+  "Rediscover projects in ~/src/ when a subdirectory is added.
+EVENT is a `file-notify' event."
+  (pcase-let ((`(,_desc ,action ,file) event))
+    (when (and (memq action '(created renamed))
+               (file-directory-p file))
+      (when (timerp cae-project--src-watch-timer)
+        (cancel-timer cae-project--src-watch-timer))
+      (setq cae-project--src-watch-timer
+            (run-with-idle-timer
+             1.0 nil
+             (lambda ()
+               (projectile-discover-projects-in-directory
+                (expand-file-name "~/src/") 1)))))))
+
 (require 'filenotify)
 (when (and cae-project--src-watch-descriptor
            (file-notify-valid-p cae-project--src-watch-descriptor))
