@@ -58,8 +58,6 @@
     (after! projectile
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
 
-      (when ())
-
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
 
