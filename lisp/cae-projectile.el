@@ -4,7 +4,6 @@
 (setq projectile-project-search-path
       `((,doom-user-dir . 0)
         (,doom-emacs-dir . 0)
-        ,@(when (file-exists-p "~/Sync/") '(("~/Sync/" . 0)))
         ,@(when (file-exists-p "~/org/") '(("~/org/" . 0)))
         ,@(when (file-exists-p "~/projects/") '(("~/projects/" . 1)))
         ,@(when (file-exists-p "~/src/") '(("~/src/" . 1)))
@@ -58,6 +57,8 @@
 ;;; Projectile configuration
     (after! projectile
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
+
+      (when ())
 
       ;; Stop prompting me about the project root.
       (setq projectile-require-project-root t)
