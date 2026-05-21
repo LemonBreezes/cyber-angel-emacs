@@ -26,6 +26,8 @@
 
 (add-hook 'after-save-hook #'cae-project-maybe-add-project)
 
+(cae-project-watch-src-directory)
+
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
 (cae-defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
