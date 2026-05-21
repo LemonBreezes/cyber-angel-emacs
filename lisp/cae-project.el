@@ -26,7 +26,17 @@
 
 (add-hook 'after-save-hook #'cae-project-maybe-add-project)
 
-(cae-project-watch-src-directory)
+(defvar cae-project--src-watch-descriptor nil
+  "File-notify descriptor for the ~/src/ watcher.")
+
+(when (and cae-project--src-watch-descriptor
+             (file-notify-valid-p cae-project--src-watch-descriptor))
+    (file-notify-rm-watch cae-project--src-watch-descriptor))
+  (when (file-directory-p "~/src/")
+    (setq cae-project--src-watch-descriptor
+          (file-notify-add-watch (expand-file-name "~/src/")
+                                 '(change)
+                                 #'cae-project--src-changed)))
 
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
