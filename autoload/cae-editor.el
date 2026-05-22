@@ -619,3 +619,29 @@ The misspelled word is taken from OVERLAY.  WORD is the corrected word."
   (interactive "P")
   (let ((projectile-project-name-function (lambda (_) "~/")))
     (projectile-switch-project-by-name "~/" arg)))
+
+;;;###autoload
+(defun cae-dumb-indent ()
+  "Inserts a tab character (or spaces x tab-width)."
+  (interactive)
+  (if indent-tabs-mode
+      (insert "\t")
+    (let* ((movement (% (current-column) tab-width))
+           (spaces (if (= 0 movement) tab-width (- tab-width movement))))
+      (insert (make-string spaces ? )))))
+
+;;;###autoload
+(defun cae-dumb-dedent ()
+  "Dedents the current line."
+  (interactive)
+  (if indent-tabs-mode
+      (call-interactively #'backward-delete-char)
+    (unless (bolp)
+      (save-excursion
+        (when (> (current-column) (current-indentation))
+          (back-to-indentation))
+        (let ((movement (% (current-column) tab-width)))
+          (delete-char
+           (- (if (= 0 movement)
+                  tab-width
+                (- tab-width movement)))))))))
