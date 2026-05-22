@@ -137,7 +137,6 @@
 (define-key! :keymaps cae-default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
 
-
 (after! isearch
   (map! :map isearch-mode-map
         "C-S-w" #'isearch-yank-word-or-char))
