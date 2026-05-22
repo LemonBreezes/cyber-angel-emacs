@@ -116,6 +116,19 @@
       (:when (modulep! :cae ai -copilot)
         :i "C-c" #'minuet-show-suggestion))
 
+;; Allow me to paste pop.
+(after! comint
+  (map! :map comint-mode-map
+        :n "C-p" nil
+        :n "C-n" nil))
+(after! eshell
+  (map! :map eshell-mode-map
+        :n "C-p" nil
+        :n "C-n" nil))
+(after! vterm
+  (map! :map vterm-mode-map
+        [remap evil-paste-pop] #'vterm-yank-pop))
+
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
 (evil-set-initial-state #'font-lock-studio-mode 'emacs)
 
