@@ -140,7 +140,6 @@
 
 (after! isearch
   (map! :map isearch-mode-map
-        "C-w" nil
         "C-S-w" #'isearch-yank-word-or-char))
 
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
