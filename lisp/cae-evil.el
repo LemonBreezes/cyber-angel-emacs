@@ -14,6 +14,13 @@
   (map! :n "] DEL" #'+evil/insert-newline-below
         :n "[ DEL" #'+evil/insert-newline-above))
 
+;; Define help better keybinding help commands for Evil.
+(map! :n "C-M-?" #'cae-which-key-show-state-keymap)
+(after! help
+  (map! :map help-map
+        "bn" #'cae-which-key-show-state-keymap
+        "bh" #'cae-embark-state-bindings))
+
 ;; Vim normally binds this to `C-e' but the Emacs `C-a'/`C-e' are more too
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
