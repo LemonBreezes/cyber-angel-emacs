@@ -96,13 +96,14 @@
     (define-key evil-insert-state-map [escape] 'evil-normal-state)
     (define-key evil-insert-state-map
                 (read-kbd-macro evil-toggle-key) 'evil-emacs-state))
-  (define-key! :keymaps +default-minibuffer-maps
-    "C-a" nil
-    "C-r" nil
-    "C-u" nil
-    "C-v" nil
-    "C-w" nil
-    "C-z" nil))
+  ;;(define-key! :keymaps +default-minibuffer-maps
+  ;;  "C-a" nil
+  ;;  "C-r" nil
+  ;;  "C-u" nil
+  ;;  "C-v" nil
+  ;;  "C-w" nil
+  ;;  "C-z" nil)
+  )
 (define-key! :keymaps cae-default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
 (after! isearch
