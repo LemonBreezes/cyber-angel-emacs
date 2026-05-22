@@ -78,6 +78,38 @@
         "r" #'cae-avy-rotate
         "TAB" #'tabgo))
 
+
+(after! evil-org
+  (map! :map evil-org-mode-map
+        :i "C-u" #'cae-evil-org-delete-back-to-indentation)
+  (map! :map org-mode-map
+        :g "M-RET" #'cae-evil-org-insert-heading
+        :g "M-S-RET" #'cae-evil-org-insert-todo-heading
+        :g "M-<return>" #'cae-evil-org-insert-heading
+        :g "M-S-<return>" #'cae-evil-org-insert-todo-heading))
+(map! :leader
+      (:prefix "b"
+       :desc "New empty Org buffer" "o" #'cae-evil-buffer-org-new))
+
+(after! vterm
+  (map! :map vterm-mode-map
+        :localleader "e" #'vterm-send-escape))
+
+;; It'd be better to contribute bindings to `evil-collection' but this is okay.
+(evil-set-initial-state #'font-lock-studio-mode 'emacs)
+
+(defun cae-evil-mu4e-enter-insert-mode (&rest _)
+  (when (eq evil-state 'normal)
+    (call-interactively #'evil-append)))
+(cae-advice-add #'compose-mail :after #'cae-evil-mu4e-enter-insert-mode)
+
+(use-package! evil-owl
+  :defer 5 :config
+  (evil-owl-mode +1))
+
+(after! evil-snipe
+  (cl-pushnew #'calendar-mode evil-snipe-disabled-modes))
+
 (after! evil-snipe
   (setq evil-snipe-scope 'whole-visible))
 (setopt evil-ex-substitute-global t
