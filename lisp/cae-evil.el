@@ -53,6 +53,14 @@
   (map! :map magit-status-mode-map
         :nv "gt" #'tab-bar-switch-to-next-tab))
 
+;; Isearch is better in `Info-mode'
+(after! evil
+  (unless (eq evil-search-module 'isearch)
+    (after! info
+      (map! :map Info-mode-map
+            :m "/" #'isearch-forward-regexp
+            :m "?" #'isearch-backward-regexp))))
+
 ;; For some reason this command is bound differently in my Emacs!
 (after! magit
   (map! :map magit-status-mode-map
