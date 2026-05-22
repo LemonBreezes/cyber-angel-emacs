@@ -69,6 +69,8 @@
 ;; Use `C-a' to append in a more generalized context.
 (map! :n "C-a" #'cae-evil-append-buffer-or-code)
 
+(map! :n "zE" #'cae-evil-edit-indirect)
+
 ;; I prefer to not continue comments with o/O in Evil.
 (advice-remove #'evil-open-below #'+evil--insert-newline-below-and-respect-comments-a)
 (advice-remove #'evil-open-above #'+evil--insert-newline-above-and-respect-comments-a)
