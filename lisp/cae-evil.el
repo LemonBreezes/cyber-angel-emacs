@@ -133,6 +133,10 @@
   (map! :map vterm-mode-map
         [remap evil-paste-pop] #'vterm-yank-pop))
 
+;; Combine with `cursor-in-non-selected-windows'.
+(define-key! :keymaps cae-default-minibuffer-maps
+  "C-l"    #'cae-yank-word-to-minibuffer)
+
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
 (evil-set-initial-state #'font-lock-studio-mode 'emacs)
 
