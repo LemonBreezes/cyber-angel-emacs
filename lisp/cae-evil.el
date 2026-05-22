@@ -116,7 +116,29 @@
       (:when (modulep! :cae ai -copilot)
         :i "C-c" #'minuet-show-suggestion))
 
-;; Fix the minibuffer maps.
+;; These keybindings are so garbage. I can't believe Doom Emacs has them.
+;; Use C-n/C-p/C-v in the minibuffer instead.
+(define-key! :keymaps +default-minibuffer-maps
+  "C-j"   nil
+  "C-k"   nil
+  "C-S-j" nil
+  "C-S-k" nil
+  "C-v"   nil)
+(define-key! read-expression-map
+  "C-j" nil
+  "C-k" nil
+  "C-v" nil)
+(define-key! :states 'insert :keymaps +default-minibuffer-maps
+  "C-j" nil
+  "C-k" nil
+  "C-v" nil)
+(when (modulep! :completion vertico)
+  (after! vertico
+    (map! :map vertico-map
+          "C-j" nil
+          "C-k" nil
+          "C-v" nil)))
+
 
 ;; Use `C-d' to send EOF in comint buffers.
 (after! comint
