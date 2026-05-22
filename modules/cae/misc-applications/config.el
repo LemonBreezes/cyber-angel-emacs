@@ -174,9 +174,10 @@
 ;;; System
 
 (map! :map cae-misc-applications-system-map
-      "e" #'list-packages
-      "E" #'list-processes
-      "T" #'list-timers)
+      "e"   #'list-packages
+      "E"   #'list-processes
+      "T"   #'list-timers
+      "C-e" #'try)
 (after! which-key
   (which-key-add-keymap-based-replacements 'cae-misc-applications-system-map
     "e" "List Emacs packages"
