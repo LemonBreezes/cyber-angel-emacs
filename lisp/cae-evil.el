@@ -36,6 +36,13 @@
     (add-hook! (prog-mode conf-mode text-mode)
       (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward))))
 
+;; I never use `gt' and `gT' for workspace navigation.
+(map! :n "gt" #'tab-bar-switch-to-next-tab
+      :n "gT" #'tab-bar-switch-to-prev-tab)
+(after! magit
+  (map! :map magit-status-mode-map
+        :nv "gt" #'tab-bar-switch-to-next-tab))
+
 ;;; Chords
 
 (after! evil-escape
