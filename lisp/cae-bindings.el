@@ -131,9 +131,8 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
         "<f7>" #'cae-ai-assistant-code
-        "<f6>" #'aidermacs-transient-menu
-        "<f12>" #'redraw-display)
-      "C-<f1>" #'try
+        "<f6>" #'aidermacs-transient-menu)
+      "<f12>" #'redraw-display
       (:map process-menu-mode-map
             "o" #'link-hint-open-link)
       (:after vertico
