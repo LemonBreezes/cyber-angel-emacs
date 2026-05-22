@@ -66,10 +66,20 @@
   (map! :map magit-status-mode-map
         :nv "gz" #'magit-jump-to-stashes))
 
-;; Use `C-a' to append in a more generalized context.
 (map! :n "C-a" #'cae-evil-append-buffer-or-code)
-
 (map! :n "zE" #'cae-evil-edit-indirect)
+(map! :prefix "g"
+      :m "[" #'backward-page
+      :m "]" #'cae-forward-page)
+
+(after! evil-snipe
+  (setq evil-snipe-scope 'whole-visible))
+(setopt evil-ex-substitute-global t
+        evil-move-cursor-back nil
+        evil-vsplit-window-right t
+        evil-kill-on-visual-paste nil
+        evil-split-window-below t
+        evil-v$-excludes-newline t)
 
 ;; I prefer to not continue comments with o/O in Evil.
 (advice-remove #'evil-open-below #'+evil--insert-newline-below-and-respect-comments-a)
