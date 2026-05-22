@@ -17,7 +17,14 @@
               minibuffer-local-completion-map
               minibuffer-local-must-match-map
               minibuffer-local-isearch-map
-              read-expression-map))
+              read-expression-map)
+            (cond ((modulep! :completion ivy)
+                   '(ivy-minibuffer-map
+                     ivy-switch-buffer-map))
+                  ((modulep! :completion helm)
+                   '(helm-map
+                     helm-rg-map
+                     helm-read-file-map))))
     "A list of all the keymaps used for the minibuffer."))
 (defvar cae-default-minibuffer-maps
   (append +default-minibuffer-maps
