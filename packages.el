@@ -35,6 +35,7 @@
     (:host github :repo "LemonBreezes/evil-easymotion"
      :branch "avoid-infinite-loops-in-overlays")))
 (when (modulep! :ui treemacs +lsp)
+  (unpin! lsp-treemacs)
   (package! lsp-treemacs :recipe
     (:host github :repo "LemonBreezes/lsp-treemacs"
      :branch "lots-of-fixes")))
