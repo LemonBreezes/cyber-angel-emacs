@@ -91,7 +91,7 @@
 
   (after! embark
     ;; `elp' instrument package commands from `embark-package-map' are not mapped
-    ;; in `+vertico/embark-doom-package-map'.
+    ;; in `+vertico-embark-doom-package-map'.
     (map! :map +vertico-embark-doom-package-map
           "t" #'try)
     (map! :map embark-region-map
