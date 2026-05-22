@@ -21,7 +21,8 @@
             (cond ((modulep! :completion ivy)
                    '(ivy-minibuffer-map
                      ivy-switch-buffer-map))
-                  ((modulep! :completion helm)
+                  ((or (modulep! :completion helm)
+                       (modulep! :cae helm))
                    '(helm-map
                      helm-rg-map
                      helm-read-file-map))))
