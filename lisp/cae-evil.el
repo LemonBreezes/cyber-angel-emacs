@@ -122,6 +122,11 @@
 (define-key! :states 'insert :keymaps +default-minibuffer-maps
   "C-j"    nil
   "C-k"    nil)
+(when (modulep! :completion vertico)
+  (after! vertico
+    (map! :map vertico-map
+          "C-j" nil
+          "C-k" nil)))
 
 (map! :n "zE" #'cae-evil-edit-indirect)
 
