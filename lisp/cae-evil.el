@@ -48,6 +48,9 @@
   (map! :map magit-status-mode-map
         :nv "gz" #'magit-jump-to-stashes))
 
+;; Use `C-a' to append in a more generalized context.
+(map! :n "C-a" #'cae-evil-append-buffer-or-code)
+
 ;;; Chords
 
 (after! evil-escape
