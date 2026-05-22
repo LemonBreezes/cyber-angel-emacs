@@ -116,7 +116,6 @@
       (:when (modulep! :cae ai -copilot)
         :i "C-c" #'minuet-show-suggestion))
 
-
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
 (evil-set-initial-state #'font-lock-studio-mode 'emacs)
 
