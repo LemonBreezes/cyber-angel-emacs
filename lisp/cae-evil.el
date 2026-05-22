@@ -15,6 +15,27 @@
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
 
+;; Restore Emacs keybindings which Doom overrides. `expand-region-fast-keys'
+;; and `C-x C-=' make these keybindings redundant.
+(map! "C--" #'negative-argument
+      "M--" #'negative-argument
+      "M-=" #'count-words-region)
+
+;; Unbind text scaling functions. We use C-x C-=.
+(map! :n "C--" nil
+      :n "C-+" nil
+      :n "C-=" nil
+      :n "M-C-=" nil
+      :n "M-C--" nil)
+
+;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
+;; between TAB and C-i there.
+(unless (cae-display-graphic-p)
+  (after! evil
+    (define-key evil-motion-state-map (kbd "TAB") nil)
+    (add-hook! (prog-mode conf-mode text-mode)
+      (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward))))
+
 ;;; Chords
 
 (after! evil-escape
