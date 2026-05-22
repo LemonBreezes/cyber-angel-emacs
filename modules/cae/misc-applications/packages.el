@@ -34,6 +34,7 @@
                            :branch "cae"))
 (package! neato-graph-bar)
 (package! journalctl-mode)
+(package! try)
 
 ;; Insert
 (when (or (modulep! :cae helm)
