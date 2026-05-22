@@ -116,6 +116,8 @@
       (:when (modulep! :cae ai -copilot)
         :i "C-c" #'minuet-show-suggestion))
 
+;; Fix the minibuffer maps.
+
 ;; Use `C-d' to send EOF in comint buffers.
 (after! comint
   (map! :map comint-mode-map
