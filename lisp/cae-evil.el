@@ -116,6 +116,10 @@
       (:when (modulep! :cae ai -copilot)
         :i "C-c" #'minuet-show-suggestion))
 
+;; Use `C-d' to send EOF in comint buffers.
+(after! comint
+  (map! :map comint-mode-map
+        :i "C-d" #'cae-comint-delchar-or-maybe-eof))
 ;; Allow me to paste pop.
 (after! comint
   (map! :map comint-mode-map
