@@ -38,6 +38,9 @@
       :n "M-C-=" nil
       :n "M-C--" nil)
 
+;; `C-v' is redundant with `C-q' in Evil insert state so make it Emacsy.
+(map! :ir "C-v" nil)
+
 ;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
 ;; between TAB and C-i there.
 (unless (cae-display-graphic-p)
