@@ -151,6 +151,15 @@
        "TAB" nil))
 (setq tab-always-indent 'complete)
 
+;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
+;; between TAB and C-i there.
+(unless (or (cae-display-graphic-p)
+            (bound-and-true-p global-kkp-mode))
+  (after! evil
+    (define-key evil-motion-state-map (kbd "TAB") nil)
+    (add-hook! (prog-mode conf-mode text-mode)
+      (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward))))
+
 (after! diff-mode
   (map! :map diff-mode-map
         "q" #'kill-this-buffer))
