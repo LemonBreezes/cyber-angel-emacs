@@ -144,8 +144,8 @@
 
 ;; Resolve the age-old conflict between using TAB for completion,
 ;; indentation, and expanding snippets.
-(map! [C-i] #'doom/dumb-indent
-      "C-S-i" #'doom/dumb-dedent
+(map! [C-i] #'cae-dumb-indent
+      "C-S-i" #'cae-dumb-dedent
       (:after cc-mode
        :map c-mode-base-map
        "TAB" nil))
