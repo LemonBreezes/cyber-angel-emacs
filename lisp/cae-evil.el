@@ -2,6 +2,9 @@
 
 (setq +evil-want-move-window-to-wrap-around t)
 
+;; Gotta have my Emacs bindings.
+(map! :leader "k" #'ctl-x-map)
+
 ;; I use a split keyboard and map backspace to my left thumb key.
 ;;(lookup-key evil-normal-state-map doom-localleader-key)
 (after! evil-easymotion
