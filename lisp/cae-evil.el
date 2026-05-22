@@ -139,7 +139,6 @@
           "C-k" nil
           "C-v" nil)))
 
-
 ;; Use `C-d' to send EOF in comint buffers.
 (after! comint
   (map! :map comint-mode-map
