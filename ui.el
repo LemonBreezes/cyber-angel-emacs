@@ -9,6 +9,10 @@
 (setq display-line-numbers-type nil
       display-line-numbers-width-start t)
 
+;; I prefer this when the minibuffer is open because then I can yank from the
+;; cursor into the minibuffer more visually.
+(setq cursor-in-non-selected-windows t)
+
 ;; Show minibuffer recursion depth
 (autoload 'minibuffer-depth-setup "mb-depth")
 (add-hook 'minibuffer-setup-hook  #'minibuffer-depth-setup)
