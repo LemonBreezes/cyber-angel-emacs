@@ -11,6 +11,10 @@
   (map! :n "] DEL" #'+evil/insert-newline-below
         :n "[ DEL" #'+evil/insert-newline-above))
 
+;; Vim normally binds this to `C-e' but the Emacs `C-a'/`C-e' are more too
+;; ubiquitous to give up.
+(map! :i "C-S-e" #'evil-copy-from-below)
+
 ;;; Chords
 
 (after! evil-escape
