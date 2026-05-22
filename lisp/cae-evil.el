@@ -137,6 +137,12 @@
 (define-key! :keymaps cae-default-minibuffer-maps
   "C-l"    #'cae-yank-word-to-minibuffer)
 
+
+(after! isearch
+  (map! :map isearch-mode-map
+        "C-w" nil
+        "C-S-w" #'isearch-yank-word-or-char))
+
 ;; It'd be better to contribute bindings to `evil-collection' but this is okay.
 (evil-set-initial-state #'font-lock-studio-mode 'emacs)
 
