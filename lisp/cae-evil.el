@@ -72,6 +72,12 @@
       :m "[" #'backward-page
       :m "]" #'cae-forward-page)
 
+(after! evil-easymotion
+  (map! :map evilem-map
+        "RET" #'cae-avy-embark-act-on-region
+        "r" #'cae-avy-rotate
+        "TAB" #'tabgo))
+
 (after! evil-snipe
   (setq evil-snipe-scope 'whole-visible))
 (setopt evil-ex-substitute-global t
