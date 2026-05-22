@@ -12,7 +12,7 @@
   (add-hook 'ghostel-mode-hook #'evil-ghostel-mode)
   ;; Mirror Doom's own term/eshell popup rule (the
   ;; "^\\*doom:\\(?:v?term\\|e?shell\\)-popup" entry in `+popup-default-rules').
-  (set-popup-rule! "^\\*doom:ghostel-popup" :vslot -5 :size 0.35 :select t :modeline nil :quit nil :ttl nil)
+  (set-popup-rule! "^\\*doom:ghostel-popup" :vslot -5 :size 0.3 :select t :modeline nil :quit nil :ttl nil)
 
   (map! :map ghostel-semi-char-mode-map "C-q" #'ghostel-send-next-key)
 
