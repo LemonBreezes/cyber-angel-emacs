@@ -73,6 +73,8 @@
 (advice-remove #'evil-open-below #'+evil--insert-newline-below-and-respect-comments-a)
 (advice-remove #'evil-open-above #'+evil--insert-newline-above-and-respect-comments-a)
 
+;; OK so C-v in Evil is useless. I always use C-q instead.
+
 ;;; Chords
 
 (after! evil-escape
