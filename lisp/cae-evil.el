@@ -203,21 +203,21 @@
   (map! :map vterm-mode-map
         [remap evil-paste-pop] #'vterm-yank-pop))
 
-;;(unless evil-disable-insert-state-bindings
-;;  (when (modulep! :completion corfu)
-;;    (define-key!
-;;      :keymaps (append +default-minibuffer-maps
-;;                       (when (modulep! :editor evil +everywhere)
-;;                         '(evil-ex-completion-map)))
-;;      "C-x C-f"  #'cape-file
-;;      "C-x s"    #'cape-dict
-;;      "C-x e"    #'cae-cape-elisp-capf
-;;      "C-x C-s"  #'yasnippet-capf
-;;      "C-x C-o"  #'completion-at-point
-;;      "C-x C-n"  #'cape-dabbrev
-;;      "C-x C-p"  #'+corfu/dabbrev-this-buffer)
-;;    (map! :prefix "C-x"
-;;          :i "e"   #'cae-cape-elisp-capf)))
+(unless evil-disable-insert-state-bindings
+  (when (modulep! :completion corfu)
+    (define-key!
+      :keymaps (append +default-minibuffer-maps
+                       (when (modulep! :editor evil +everywhere)
+                         '(evil-ex-completion-map)))
+      "C-x C-f"  #'cape-file
+      "C-x s"    #'cape-dict
+      "C-x e"    #'cae-cape-elisp-capf
+      "C-x C-s"  #'yasnippet-capf
+      "C-x C-o"  #'completion-at-point
+      "C-x C-n"  #'cape-dabbrev
+      "C-x C-p"  #'+corfu/dabbrev-this-buffer)
+    (map! :prefix "C-x"
+          :i "e"   #'cae-cape-elisp-capf)))
 (map! :prefix "C-x"                     ; `ctl-x-map' did not work here somehow.
       (:when (modulep! :cae ai +copilot)
         :i "C-c" #'copilot-complete)
