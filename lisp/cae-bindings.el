@@ -149,6 +149,7 @@
       (:after cc-mode
        :map c-mode-base-map
        "TAB" nil))
+(setq tab-always-indent 'complete)
 
 (after! diff-mode
   (map! :map diff-mode-map
