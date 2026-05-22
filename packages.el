@@ -168,6 +168,7 @@
 ;; cae-bindings.el
 (package! ace-window)
 (package! vline)
+(package! try)
 (package! ov)
 (package! substitute)
 
