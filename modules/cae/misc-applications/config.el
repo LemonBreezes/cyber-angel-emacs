@@ -776,8 +776,7 @@
         emms-player-mpd-music-directory cae-misc-applications-music-dir
         emms-browser-covers #'emms-browser-cache-mbnail
         emms-info-functions '(emms-info-native emms-info-exiftool))
-  (cond ((and cae-misc-applications-mpd-host
-              (executable-find "mpc"))
+  (cond ((executable-find "mpc")
          (require 'emms-player-mpd)
          (setq emms-setup-default-player-list '(emms-player-mpd)
                emms-player-list '(emms-player-mpd)
