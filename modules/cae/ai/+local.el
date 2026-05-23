@@ -21,6 +21,7 @@
            :chat-model "qwen3-coder:30b")))
 
   (after! chatgpt-shell
+    (setq chatgpt-shell-models nil)
     (require 'chatgpt-shell-ollama)
     (setq chatgpt-shell-ollama-api-url-base
           (format "http://%s:11434" cae-ip-address))
