@@ -25,4 +25,5 @@
     (require 'chatgpt-shell-ollama)
     (setq chatgpt-shell-ollama-api-url-base
           (format "http://%s:11434" cae-ip-address))
+    ;;(chatgpt-shell-ollama-load-models)
     (setq chatgpt-shell-model-version "gemma4:31b")))
