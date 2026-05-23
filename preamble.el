@@ -1,9 +1,5 @@
 ;;; preamble.el -*- lexical-binding: t; -*-
 
-;; Load secrets
-(when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
-  (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
-
 (setq load-path-filter-function #'load-path-filter-cache-directory-files)
 
 (defun remove-from-list (list-var element &optional append compare-fn)
