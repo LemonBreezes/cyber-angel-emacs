@@ -664,7 +664,7 @@
   (add-hook! (mpc-songs-mode mpc-tagbrowser-mode)
              #'cae-misc-applications-hide-cursor-h)
   :config
-  (setq mpc-host cae-misc-applications-mpd-host
+  (setq mpc-host (or (bound-and-true-p cae-ip-address) "127.0.0.1")
         mpc-mpd-music-directory cae-misc-applications-music-dir)
   (setq mpc-notifications t)
   ;; Evil Collection added MPC bindings so these need to be looked at again.
