@@ -208,7 +208,7 @@ Now, write the commit message using the Conventional Commits format: label: summ
 
 ;; Not really a fan of this package yet.
 (use-package! minuet
-  :when (modulep! -copilot)
+  :when (or (modulep! -copilot) (modulep! +local))
   :defer t :init
   ;; With my GPU, Minuet is too slow for auto-suggestions becaus it has to load
   ;; the model into VRAM.
