@@ -45,4 +45,4 @@
     (setq chatgpt-shell-ollama-api-url-base
           (format "http://%s:11434" cae-ip-address))
     (chatgpt-shell-ollama-load-models)
-    (setq cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M")))
+    (setq chatgpt-shell-model-version cae-chat-model)))
