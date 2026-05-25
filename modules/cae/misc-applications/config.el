@@ -783,6 +783,21 @@
                emms-info-functions '(emms-info-mpd emms-info-native emms-info-exiftool)
                emms-player-mpd-server-name (or (bound-and-true-p cae-ip-address)
                                                "127.0.0.1"))
+         ;; `emms-player-mpd-get-supported-regexp' scans `mpd --version' for
+         ;; "Decoders plugins:", but modern MPD prints "Decoder plugins:" (no
+         ;; "s"), so the parse fails and `emms-player-mpd-supported-regexp'
+         ;; falls back to a short list that omits opus/m4a/webm.  EMMS then
+         ;; refuses those files with "Don't know how to play track", which
+         ;; surfaces inside a tq callback when MPD advances to such a file
+         ;; (e.g. after an HTTP stream is closed).  Set a regexp covering the
+         ;; formats MPD can actually decode.  `setopt' runs the defcustom's
+         ;; `:set', which also updates the player's `regex' property.
+         (setopt emms-player-mpd-supported-regexp
+                 (concat "\\`https?://\\|"
+                         (emms-player-simple-regexp
+                          "aac" "aiff" "ape" "flac" "m3u" "m4a" "mka" "mp3"
+                          "mp4" "mpc" "oga" "ogg" "opus" "pls" "wav" "webm"
+                          "wma" "wv")))
          (when (file-exists-p cae-misc-applications-music-dir)
            (ignore-errors (emms-player-mpd-connect)))
          (map! :map cae-misc-applications-music-map

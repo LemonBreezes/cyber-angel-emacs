@@ -71,18 +71,52 @@ character outside [A-Za-z0-9_-] is replaced with `-'."
     (replace-regexp-in-string "[^A-Za-z0-9_-]" "-"
                               (if (string-empty-p name) "ai" name))))
 
-(defun cae-ai-assistant--maybe-tmux-wrap (command directory sandbox-p)
+(defun cae-ai-assistant--env-unset-prefix (env-unset)
+  "Return a shell `env -u' prefix that removes ENV-UNSET variables.
+ENV-UNSET is a list of variable names.  Returns the empty string when nil."
+  (if env-unset
+      (concat "env "
+              (mapconcat (lambda (var) (concat "-u " (shell-quote-argument var)))
+                         env-unset " ")
+              " ")
+    ""))
+
+(defun cae-ai-assistant--maybe-tmux-wrap (command directory sandbox-p &optional env-unset)
   "Optionally wrap COMMAND so it runs inside a persistent tmux session.
 The session is keyed on DIRECTORY's basename.  SANDBOX-P controls
 whether wrapping applies via `cae-ai-assistant-tmux-integration'.
 The inner COMMAND is passed as a single shell-quoted argument so that
-embedded quotes (e.g. a task description) survive intact."
+embedded quotes (e.g. a task description) survive intact.
+
+ENV-UNSET is a list of environment variable names to strip from the
+command's environment via `env -u'.  This is necessary because the tmux
+pane inherits the tmux server's environment (and re-sources `.bashrc'),
+so unsetting a variable in `process-environment' on the Emacs side does
+not reach the process that actually runs inside the session.
+
+Note that `tmux new-session -A' ignores the shell-command whenever it
+attaches to a session that already exists, so the `env -u' prefix only
+takes effect the first time the session is created.  To keep reattaches
+clean we also remove ENV-UNSET from the session environment with
+`set-environment -r', so every pane spawned in the session (now or
+later) has them stripped.  A process that is *already* running in a
+stale session keeps its original environment until it is restarted."
   (if (cae-ai-assistant--tmux-enabled-p sandbox-p)
-      (format "tmux new-session -A -s %s -c %s %s"
-              (shell-quote-argument
-               (cae-ai-assistant--tmux-session-name directory))
-              (shell-quote-argument (expand-file-name directory))
-              (shell-quote-argument command))
+      (let ((session (cae-ai-assistant--tmux-session-name directory)))
+        (concat
+         (format "tmux new-session -A -s %s -c %s %s"
+                 (shell-quote-argument session)
+                 (shell-quote-argument (expand-file-name directory))
+                 (shell-quote-argument
+                  (concat (cae-ai-assistant--env-unset-prefix env-unset) command)))
+         ;; `\\;' reaches tmux as a literal `;', chaining a server-side
+         ;; `set-environment -r' for each variable.  This runs on both
+         ;; create and reattach, unlike the new-session shell-command.
+         (mapconcat (lambda (var)
+                      (format " \\; set-environment -t %s -r %s"
+                              (shell-quote-argument session)
+                              (shell-quote-argument var)))
+                    env-unset "")))
     command))
 
 (defun cae-ai-assistant--generate-folder-name (task-description)
@@ -117,7 +151,8 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
            (default-directory sandbox-dir)
            (inner-command (format "%s \"%s\"" app-name task-description))
            (command (cae-ai-assistant--maybe-tmux-wrap
-                     inner-command sandbox-dir t)))
+                     inner-command sandbox-dir t
+                     (when claude-p '("ANTHROPIC_API_KEY")))))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (require 'vterm)
@@ -241,7 +276,8 @@ Otherwise, open the AI assistant for the current project."
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
            (command (cae-ai-assistant--maybe-tmux-wrap
-                     app-name default-directory nil)))
+                     app-name default-directory nil
+                     (when claude-p '("ANTHROPIC_API_KEY")))))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (let ((vterm-environment (append vterm-environment unset-anthropic-key)))
