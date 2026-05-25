@@ -26,40 +26,6 @@
 
 (add-hook 'after-save-hook #'cae-project-maybe-add-project)
 
-(defvar cae-project--src-watch-descriptor nil
-  "File-notify descriptor for the ~/src/ watcher.")
-(defvar cae-project--src-watch-timer nil
-  "Debounce timer for `cae-project--src-changed'.")
-
-;; Getting an error trying to autoload this function.
-(defun cae-project--src-changed (event)
-  "Rediscover projects in ~/src/ when a subdirectory is added.
-EVENT is a `file-notify' event."
-  (pcase-let ((`(,_desc ,action ,file) event))
-    (when (and (memq action '(created renamed))
-               (file-directory-p file))
-      (when (timerp cae-project--src-watch-timer)
-        (cancel-timer cae-project--src-watch-timer))
-      (setq cae-project--src-watch-timer
-            (run-with-idle-timer
-             1.0 nil
-             (lambda ()
-               (projectile-discover-projects-in-directory
-                (expand-file-name "~/src/") 1)))))))
-
-(require 'filenotify)
-(when (and cae-project--src-watch-descriptor
-           (file-notify-valid-p cae-project--src-watch-descriptor))
-  (file-notify-rm-watch cae-project--src-watch-descriptor))
-(when (file-directory-p "~/src/")
-  (run-with-idle-timer
-   2.0 nil
-   (lambda ()
-     (setq cae-project--src-watch-descriptor
-           (file-notify-add-watch (expand-file-name "~/src/")
-                                  '(change)
-                                  #'cae-project--src-changed)))))
-
 ;; Work around a bug with `projectile-skel-dir-locals' that is not in Doom Emacs.
 ;; https://discord.com/channels/406534637242810369/406554085794381833/1025743716662661170
 (cae-defadvice! fixed-projectile-skel-dir-locals (&optional str arg)
