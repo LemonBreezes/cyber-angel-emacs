@@ -6,7 +6,7 @@
              (format "http://%s:11434/v1/completions"
                      cae-ip-address))
   (defvar cae-minuet-fim-model "qwen2.5-coder:7b")
-  (plist-put minuet-openai-fim-compatible-options :model cae-minuet-fim-model-small))
+  (plist-put minuet-openai-fim-compatible-options :model cae-minuet-fim-model))
 
 (after! llm
   (require 'llm-ollama)
