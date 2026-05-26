@@ -224,6 +224,12 @@ Now, write the commit message using the Conventional Commits format: label: summ
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
         :ig "M-f" #'cae-ai-minuet-accept-suggestion-word ;; accept one word
         :ig "C-e" #'minuet-accept-suggestion-line)
+  (defun cae-ai-minuet-between-word-chars-p ()
+    "Return non-nil when point is not at a word boundary."
+    (and (eq (char-syntax (or (char-before) ?\s)) ?w)
+         (eq (char-syntax (or (char-after)  ?\s)) ?w)))
+  (add-to-list 'minuet-auto-suggestion-block-predicates
+               #'cae-ai-minuet-between-word-chars-p)
   (when (modulep! :completion corfu)
     (setq minuet-auto-suggestion-debounce-delay 0.2))
   (add-hook! 'doom-escape-hook :depth -1
