@@ -214,7 +214,7 @@ Now, write the commit message using the Conventional Commits format: label: summ
   ;; the model into VRAM.
   (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
   (add-hook 'text-mode-hook #'minuet-auto-suggestion-mode)
-  ;(add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
+                                        ;(add-hook 'conf-mode-hook #'minuet-auto-suggestion-mode)
   :config
   (map! :map minuet-active-mode-map
         :ig "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
