@@ -1,8 +1,8 @@
 ;;; cae/ai/autoload/minuet.el -*- lexical-binding: t; -*-
 
-(defvar minuet--current-suggestions)
-(defvar minuet--current-overlay)
-(defvar minuet--current-suggestion-index)
+(defvar cae-ai-minuet--current-suggestions)
+(defvar cae-ai-minuet--current-overlay)
+(defvar cae-ai-minuet--current-suggestion-index)
 (declare-function minuet--cleanup-suggestion "minuet")
 (declare-function minuet--display-suggestion "minuet")
 
@@ -17,10 +17,10 @@ boundaries instead of lines.  The source buffer's syntax table is
 carried into the scan so word boundaries match the language being
 edited."
   (interactive "p")
-  (when (and minuet--current-suggestions
-             minuet--current-overlay)
-    (let* ((suggestion (nth minuet--current-suggestion-index
-                            minuet--current-suggestions))
+  (when (and cae-ai-minuet--current-suggestions
+             cae-ai-minuet--current-overlay)
+    (let* ((suggestion (nth cae-ai-minuet--current-suggestion-index
+                            cae-ai-minuet--current-suggestions))
            (n (or n 1))
            ;; Replay `forward-word' over the suggestion in a temp buffer to find
            ;; where the Nth word ends, then split the raw string there so any
