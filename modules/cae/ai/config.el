@@ -244,11 +244,11 @@ One line, label: summary, now:")
             :n "RET" #'pi-coding-agent-send
             :n "<return>" #'pi-coding-agent-send
             :n "ZQ" #'pi-coding-agent-quit
-            :n "<f5>" #'pi-coding-agent-menu
+            :n "<f5>" #'pi-coding-agent-toggle
             :map pi-coding-agent-chat-mode-map
             :n "q" #'pi-coding-agent-quit
             :n "ZQ" #'pi-coding-agent-quit
-            :n "<f5>" #'pi-coding-agent-menu))))
+            :n "<f5>" #'pi-coding-agent-toggle))))
 
 (use-package! fancy-dabbrev
   :when (not (modulep! +fim))
