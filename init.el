@@ -24,6 +24,7 @@
 
 ;; If Smartparens is loaded, these will be overwritten. This is so Doom works
 ;; even if the Smartparens package is disabled.
+(defvar smartparens-mode nil)
 (defalias 'sp-local-pair #'ignore)
 (defalias 'sp-pair #'ignore)
 (defalias 'sp-with-modes #'ignore)
@@ -33,7 +34,6 @@
 (defalias 'sp-backward-up-sexp #'backward-up-list)
 (defalias 'sp-raise-sexp #'raise-sexp)
 (defalias 'smartparens-mode #'ignore)
-(defvar smartparens-mode nil)
 (defalias 'sp-point-in-comment
   (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
 (defalias 'sp-point-in-string
