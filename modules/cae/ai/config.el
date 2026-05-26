@@ -284,3 +284,11 @@ Now, write the commit message using the Conventional Commits format: label: summ
             :n "q" #'pi-coding-agent-quit
             :n "ZQ" #'pi-coding-agent-quit
             :n "<f5>" #'pi-coding-agent-menu))))
+
+(use-package! fancy-dabbrev
+  :when (not (modulep! +fim))
+  :defer t :config
+  (setq dabbrev-case-distinction nil)
+  (setq dabbrev-case-fold-search t)
+  (setq dabbrev-case-replace nil)
+  )
