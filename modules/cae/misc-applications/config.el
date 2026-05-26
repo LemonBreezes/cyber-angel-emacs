@@ -669,8 +669,8 @@
   (setq mpc-notifications t)
   ;; Evil Collection added MPC bindings so these need to be looked at again.
   (map! :map mpc-mode-map
-        ;;:n "gr" #'cae-mpc-reload
-        ;;:n "gR" #'cae-mpc-reload
+        :n "gr" #'cae-mpc-reload
+        :n "gR" #'cae-mpc-reload
         :ng "q" #'cae-mpc-quit
         :ng "Q" #'mpc-quit
         ;;:n "C-j" #'evil-collection-mpc-move-down
