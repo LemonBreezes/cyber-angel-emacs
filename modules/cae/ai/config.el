@@ -54,7 +54,7 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
   ;; request room before it warms up.
   (setq minuet-request-timeout 8))
 
-(after! llm
+(after! magit-gptcommit
   (require 'llm-ollama)
   (setq magit-gptcommit-llm-provider
         (make-llm-ollama
