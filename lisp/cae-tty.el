@@ -57,7 +57,14 @@
     ;; This feature is not supported in terminal Emacs anyways.
     (setq chatgpt-shell-render-latex nil))
 
-  (cae-tty-disable-unicode-and-or-icons))
+  (cae-tty-disable-unicode-and-or-icons)
+
+  ;; The hint passes through `format' twice (once in `hydra-show-hint',
+  ;; again in `lv-message'), so URL-encoded `%' bytes in the GitHub links
+  ;; (e.g. `%2B' from `+' in a filename) crash with "Not enough arguments
+  ;; for format string". Double-escape so two format passes still emit `%'.
+  (advice-add 'file-info--get-pretty-information :filter-return
+              (lambda (str) (replace-regexp-in-string "%" "%%%%" str t t))))
 
 ;; Fix clipboard issues in the terminal.
 (cond ((executable-find "termux-setup-storage")
