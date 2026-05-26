@@ -133,66 +133,31 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 (use-package! magit-gptcommit
   :after magit :init
   :config
+  ;; Strict subject-only output: tool-tuned models (Devstral) tend to wrap the
+  ;; subject in preamble + markdown bold, which breaks magit-gptcommit's first-
+  ;; line-is-subject contract. Be emphatic; no body, no markdown, no surround.
   (setq magit-gptcommit-prompt
-        "You are an expert programmer writing a Git commit message.
-You have carefully reviewed every file diff included in this commit.
+        "You write Git commit subject lines.
 
-First, choose the most appropriate label for the changes.
-Here are the labels you can choose from:
-- build: Changes that affect the build system or external dependencies (e.g., gulp, broccoli, npm)
-- chore: Routine tasks like updating dependencies, licenses, or repo settings
-- ci: Changes to CI configuration files or scripts (e.g., GitHub Actions, CircleCI)
-- docs: Documentation-only changes (e.g., fixing typos, adding examples)
-- feat: Introduces a new feature to the codebase
-- fix: Patches a bug in the codebase
-- perf: Improves performance without changing behavior
-- refactor: Code changes that neither fix bugs nor add features
-- style: Non-functional changes like formatting or whitespace
-- test: Adds or corrects tests
+Choose ONE label from: build, chore, ci, docs, feat, fix, perf, refactor, style, test.
+Labels: build=build system/deps, chore=routine/dep/license/repo upkeep, ci=CI config,
+docs=docs-only, feat=new feature, fix=bug fix, perf=perf improvement (no behavior change),
+refactor=neither fix nor feat, style=formatting/whitespace, test=test changes.
 
-Next, write a high-level summary of the commit.
-- Keep it to a single line, no more than 50 characters
-- Use the imperative tense (e.g., 'Add logging' not 'Added logging')
-- Ensure the message reflects a clear and cohesive change
-- Do not end the summary with a period
-- Do not use backticks (`) anywhere in the response
-- **Do not use square brackets ([]) around the label or the summary**
+REPLY WITH EXACTLY ONE LINE in the form:  label: summary
+- At most 50 characters total.
+- Imperative tense (\"Add logging\", not \"Added logging\").
+- No trailing period.
+- No preamble, no explanation, no body, no markdown, no backticks, no square brackets,
+  no bold markers, no quotes. Output only the single line and nothing else.
 
 THE FILE DIFFS:
 ```
 %s
 ```
 
-Now, write the commit message using the Conventional Commits format: **label: summary** (e.g., fix: resolve memory leak)")
-  (setq magit-gptcommit-prompt-one-line "You are an expert programmer writing a Git commit message.
-You have carefully reviewed every file diff included in this commit.
-
-First, choose the most appropriate label for the changes.
-Here are the labels you can choose from:
-- build: Changes that affect the build system or external dependencies (e.g., gulp, broccoli, npm)
-- chore: Routine tasks like updating dependencies, licenses, or repo settings
-- ci: Changes to CI configuration files or scripts (e.g., GitHub Actions, CircleCI)
-- docs: Documentation-only changes (e.g., fixing typos, adding examples)
-- feat: Introduces a new feature to the codebase
-- fix: Patches a bug in the codebase
-- perf: Improves performance without changing behavior
-- refactor: Code changes that neither fix bugs nor add features
-- style: Non-functional changes like formatting or whitespace
-- test: Adds or corrects tests
-
-Next, write a high-level summary of the commit.
-- Keep it to a single line, no more than 50 characters
-- Use the imperative tense (e.g., 'Add logging' not 'Added logging')
-- Ensure the message reflects a clear and cohesive change
-- Do not end the summary with a period
-- Do not use backticks (`) anywhere in the response
-- Do not use square brackets ([]) around the label or the summary
-
-THE FILE DIFFS:
-```
-%s
-```
-Now, write the commit message using the Conventional Commits format: label: summary (e.g., fix: resolve memory leak)")
+One line, label: summary, now:")
+  (setq magit-gptcommit-prompt-one-line magit-gptcommit-prompt)
   (magit-gptcommit-mode 1)
   (magit-gptcommit-status-buffer-setup))
 (after! git-commit
@@ -287,5 +252,9 @@ Now, write the commit message using the Conventional Commits format: label: summ
 
 (use-package! fancy-dabbrev
   :when (not (modulep! +fim))
+  :init
+  (add-hook 'prog-mode-hook #'fancy-dabbrev-mode)
+  (add-hook 'text-mode-hook #'fancy-dabbrev-mode)
+  (add-hook 'conf-mode-hook #'fancy-dabbrev-mode)
   :defer t :config
   (setq fancy-dabbrev-preview-context 'before-non-word))
