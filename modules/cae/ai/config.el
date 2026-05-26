@@ -257,4 +257,6 @@ One line, label: summary, now:")
   (add-hook 'text-mode-hook #'fancy-dabbrev-mode)
   (add-hook 'conf-mode-hook #'fancy-dabbrev-mode)
   :defer t :config
-  (setq fancy-dabbrev-preview-context 'before-non-word))
+  (setq fancy-dabbrev-preview-context 'before-non-word)
+  (map! "C-f" #'cae-fancy-dabbrev-forward-char-or-complete
+        "M-f" #'cae-fancy-dabbrev-forward-word-or-complete-word))
