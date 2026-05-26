@@ -241,14 +241,14 @@ One line, label: summary, now:")
   (when (modulep! :editor evil)
     (after! evil
       (map! (:map pi-coding-agent-input-mode-map
-            :n "RET" #'pi-coding-agent-send
-            :n "<return>" #'pi-coding-agent-send
-            :n "ZQ" #'pi-coding-agent-quit
-            :n "<f5>" #'pi-coding-agent-toggle
-            :localleader
-            "m" #'pi-coding-agent-menu
-            "a" #'pi-coding-agent-abort
-            "q" #'pi-coding-agent-quit)
+             :n "RET" #'pi-coding-agent-send
+             :n "<return>" #'pi-coding-agent-send
+             :n "ZQ" #'pi-coding-agent-quit
+             :n "<f5>" #'pi-coding-agent-toggle
+             :localleader
+             "m" #'pi-coding-agent-menu
+             "a" #'pi-coding-agent-abort
+             "q" #'pi-coding-agent-quit)
             (:map pi-coding-agent-chat-mode-map
              :n "q" #'pi-coding-agent-quit
              :n "ZQ" #'pi-coding-agent-quit
