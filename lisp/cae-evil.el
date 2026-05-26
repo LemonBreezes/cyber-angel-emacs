@@ -21,6 +21,10 @@
         "bn" #'cae-which-key-show-state-keymap
         "bh" #'cae-embark-state-bindings))
 
+(when (modulep! :ui popup)
+  (map! :map evil-window-map
+        "e" #'+popup/other))
+
 ;; Vim normally binds this to `C-e' but the Emacs `C-a'/`C-e' are more too
 ;; ubiquitous to give up.
 (map! :i "C-S-e" #'evil-copy-from-below)
