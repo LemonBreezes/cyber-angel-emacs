@@ -74,3 +74,36 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
           (format "http://%s:11434" cae-ip-address))
     (chatgpt-shell-ollama-load-models)
     (setq chatgpt-shell-model-version cae-chat-model)))
+
+(after! aidermacs
+  ;; Point aider at the local Ollama server.  The spawned aider child inherits
+  ;; OLLAMA_API_BASE from `process-environment', which is how litellm (aider's
+  ;; backend) discovers the Ollama endpoint when a model uses the
+  ;; `ollama_chat/' prefix.
+  (setenv "OLLAMA_API_BASE" (format "http://%s:11434" cae-ip-address))
+  ;; Aider caps Ollama's context at 2k tokens by default -- way too small for
+  ;; agentic coding.  Both devstral-small-2 and gpt-oss support ~128k; 32k is
+  ;; a balanced default (bump if you want longer context at the cost of VRAM
+  ;; and TTFT).
+  (setenv "OLLAMA_CONTEXT_LENGTH" "32768")
+  ;; Use local models for every aider role.  Architect mode pairs the heavy
+  ;; reasoner (planner) with the fast in-VRAM coder (applies the edits).  The
+  ;; weak model handles cheap chores like commit messages -- devstral is fine
+  ;; there since it's already loaded.
+  (setq aidermacs-use-architect-mode t
+        aidermacs-default-model   (concat "ollama_chat/" cae-coding-agent-model)
+        aidermacs-architect-model (concat "ollama_chat/" cae-coding-reasoning-model)
+        aidermacs-editor-model    (concat "ollama_chat/" cae-coding-agent-model)
+        aidermacs-weak-model      (concat "ollama_chat/" cae-coding-agent-model))
+  ;; Override config.el's extra-args: drop `--cache-prompts' and
+  ;; `--cache-keepalive-pings' (Anthropic prompt-caching, no-op + noisy warning
+  ;; on Ollama) and keep only the provider-agnostic flags.
+  (setq aidermacs-extra-args
+        '("--watch-files"
+          "--auto-accept-architect"
+          "--chat-language" "English")))
+
+(use-package! pi-coding-agent
+  :defer t :config
+  (after! pi-coding-agent-ui
+    (setq pi-coding-agent-input-markdown-highlighting t)))
