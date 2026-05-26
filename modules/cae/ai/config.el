@@ -252,7 +252,7 @@ One line, label: summary, now:")
 
 (use-package! fancy-dabbrev
   :when (not (modulep! +fim))
-  :init
+  :defer t :init
   (add-hook 'prog-mode-hook #'fancy-dabbrev-mode)
   (add-hook 'text-mode-hook #'fancy-dabbrev-mode)
   (add-hook 'conf-mode-hook #'fancy-dabbrev-mode)
