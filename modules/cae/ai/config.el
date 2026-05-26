@@ -222,6 +222,7 @@ Now, write the commit message using the Conventional Commits format: label: summ
         :ig "M-p" #'minuet-previous-suggestion ;; invoke completion or cycle to next completion
         :ig "M-n" #'minuet-next-suggestion ;; invoke completion or cycle to previous completion
         :ig "C-f" #'minuet-accept-suggestion ;; accept whole completion
+        :ig "M-f" #'cae-ai-minuet-accept-suggestion-word ;; accept one word
         :ig "C-e" #'minuet-accept-suggestion-line)
   (when (modulep! :completion corfu)
     (setq minuet-auto-suggestion-debounce-delay 0.2))
