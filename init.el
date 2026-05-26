@@ -180,7 +180,7 @@
          unpackaged
          vc
          org
-         (ai +local)
+         ai
          gnus
          rss
 
