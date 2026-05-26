@@ -132,7 +132,7 @@
       (:when (modulep! :cae ai)
         "<f7>" #'cae-ai-assistant-code
         "<f6>" #'aidermacs-transient-menu
-        "<f5>" #'pi-coding-agent)
+        "<f5>" #'pi-coding-agent-toggle)
       "<f12>" #'redraw-display
       (:map process-menu-mode-map
             "o" #'link-hint-open-link)
