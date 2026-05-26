@@ -426,7 +426,7 @@
 
 ;;; Other modules
 
- ;; This is also bound for Evil in `cae-evil.el'.
+;; This is also bound for Evil in `cae-evil.el'.
 (after! org
   (map! :map org-mode-map
         (:when (not (modulep! :editor evil))
