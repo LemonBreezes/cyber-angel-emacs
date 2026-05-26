@@ -95,3 +95,10 @@ Returns the ghostel buffer."
   "Send a literal ESC keypress to the terminal."
   (interactive)
   (ghostel-send-key "escape"))
+
+;;;###autoload
+(defun cae-ghostel-send-C-x ()
+  (interactive)
+  (ghostel--send-encoded "x" "ctrl"))
+
+
