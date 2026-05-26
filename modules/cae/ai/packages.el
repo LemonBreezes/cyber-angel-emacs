@@ -12,6 +12,7 @@
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
 (package! agent-shell)
+(package! pi-coding-agent)
 
 ;; `magit-gptcommit' is much better.
 (package! magit-gptcommit)
