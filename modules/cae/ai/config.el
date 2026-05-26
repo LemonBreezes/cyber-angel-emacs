@@ -225,10 +225,6 @@ Now, write the commit message using the Conventional Commits format: label: summ
         :ig "C-e" #'minuet-accept-suggestion-line)
   (when (modulep! :completion corfu)
     (setq minuet-auto-suggestion-debounce-delay 0.2))
-  (cae-defadvice! cae-ai-minuet-close-corfu-on-autosuggestion-a (&rest _)
-    :before #'minuet-show-suggestion
-    (when (bound-and-true-p corfu-mode)
-      (corfu-quit)))
   (add-hook! 'doom-escape-hook :depth -1
     (defun cae-minuet-dismiss-suggestion-h ()
       (when minuet--current-overlay
