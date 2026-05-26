@@ -28,11 +28,24 @@ Qwen3-0.6B speculative-decode draft.")
 open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 
 (after! minuet
+  ;; Route completion through the local Ollama FIM endpoint.  cae/ai/config.el
+  ;; sets `minuet-provider' to `claude' as the global default; without overriding
+  ;; it here, minuet keeps calling the Anthropic API and erroring out with plz
+  ;; HTTP errors (there is no ANTHROPIC_API_KEY), so completion never works.
+  (setq minuet-provider 'openai-fim-compatible)
   (plist-put minuet-openai-fim-compatible-options :name "Ollama")
   (plist-put minuet-openai-fim-compatible-options :end-point
              (format "http://%s:11434/v1/completions"
                      cae-ip-address))
-  (plist-put minuet-openai-fim-compatible-options :model cae-coding-fim-model))
+  (plist-put minuet-openai-fim-compatible-options :model cae-coding-fim-model)
+  ;; Ollama needs no API key, but minuet's availability check still requires
+  ;; `:api-key' to name a non-empty env var (the inherited default points at the
+  ;; unset DEEPSEEK_API_KEY).  TERM is always set -- this is minuet's own
+  ;; documented workaround for Ollama.
+  (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
+  ;; Default (3s) is too short for a cold 22B FIM load into VRAM; give the first
+  ;; request room before it warms up.
+  (setq minuet-request-timeout 8))
 
 (after! llm
   (require 'llm-ollama)
