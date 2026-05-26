@@ -16,8 +16,7 @@
 ;; I have a good `.gitignore' file in ~/ so it is safe to remove ~/ from the
 ;; list.
 (setq projectile-ignored-projects nil)
-(after! projectile
-  (setq projectile-track-known-projects-automatically t))
+
 
 ;; Increase the cache limit to because of monolithic company repositories.
 (setq doom-projectile-cache-limit 30000)
@@ -51,6 +50,7 @@
 (if (locate-library "projectile")
 ;;; Projectile configuration
     (after! projectile
+      (setq projectile-track-known-projects-automatically t)
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
       (unless (file-exists-p (expand-file-name projectile-cache-file doom-project-cache-dir))
         (projectile-discover-projects-in-search-path))
