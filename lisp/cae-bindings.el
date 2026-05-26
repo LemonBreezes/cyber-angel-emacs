@@ -131,7 +131,8 @@
       "<escape>" #'keyboard-quit
       (:when (modulep! :cae ai)
         "<f7>" #'cae-ai-assistant-code
-        "<f6>" #'aidermacs-transient-menu)
+        "<f6>" #'aidermacs-transient-menu
+        "<f5>" #'pi-coding-agent)
       "<f12>" #'redraw-display
       (:map process-menu-mode-map
             "o" #'link-hint-open-link)
@@ -425,7 +426,7 @@
 
 ;;; Other modules
 
-;; This is also bound for Evil in `cae-evil.el'.
+ ;; This is also bound for Evil in `cae-evil.el'.
 (after! org
   (map! :map org-mode-map
         (:when (not (modulep! :editor evil))
