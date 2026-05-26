@@ -673,17 +673,10 @@
         :n "gR" #'cae-mpc-reload
         :ng "q" #'cae-mpc-quit
         :ng "Q" #'mpc-quit
-        ;;:n "C-j" #'evil-collection-mpc-move-down
-        ;;:n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'cae-mpc-other-window
         :n "w" #'cae-mpc-other-window-previous
-        ;;:n "RET" #'cae-mpc-play
-        ;;:n "o" #'mpc-goto-playing-song
-        ;;:n "C" #'mpc-stop
-        ;;:n "i" #'evilem-motion-next-line
-        ;;:n "u" #'evilem-motion-previous-line
-        )
-  )
+        :n "RET" #'cae-mpc-play
+        :n "o" #'mpc-goto-playing-song))
 
 (use-package! empv
   :defer t :init
