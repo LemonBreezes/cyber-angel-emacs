@@ -33,6 +33,7 @@
 (defalias 'sp-backward-up-sexp #'backward-up-list)
 (defalias 'sp-raise-sexp #'raise-sexp)
 (defalias 'smartparens-mode #'ignore)
+(defvar smartparens-mode nil)
 (defalias 'sp-point-in-comment
   (lambda (&optional pos) (nth 4 (syntax-ppss pos))))
 (defalias 'sp-point-in-string
