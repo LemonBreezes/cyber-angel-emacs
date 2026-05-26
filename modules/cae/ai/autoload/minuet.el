@@ -7,7 +7,7 @@
 (declare-function minuet--display-suggestion "minuet")
 
 ;;;###autoload
-(defun cae-minuet-accept-suggestion-word (&optional n)
+(defun cae-ai-minuet-accept-suggestion-word (&optional n)
   "Accept N words of the current suggestion.
 When called interactively with a numeric prefix argument, accept that
 many words.  Without a prefix argument, accept only the first word.
