@@ -114,7 +114,7 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
             :n "<return>" #'pi-coding-agent-send
             :n "ZQ" #'pi-coding-agent-quit
             :n "<f5>" #'pi-coding-agent-menu
-            :map pi-coding-agent-chat-mode
+            :map pi-coding-agent-chat-mode-map
             :n "q" #'pi-coding-agent-quit
             :n "ZQ" #'pi-coding-agent-quit
             :n "<f5>" #'pi-coding-agent-menu))))
