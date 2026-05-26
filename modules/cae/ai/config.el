@@ -5,46 +5,6 @@
 (defvar cae-ai-chatgpt-shell-workspace-name "*chatgpt*")
 (defvar cae-ai-dall-e-shell-workspace-name "*dall-e*")
 
-
-
-(after! chatgpt-shell
-  (let* ((new-model (chatgpt-shell-anthropic--make-model
-                     :version "claude-opus-4-7"
-                     :short-version "opus-4.7"
-                     :token-width 4
-                     :thinking-budget-min 1024
-                     :reasoning-effort-selector #'chatgpt-shell-anthropic-reasoning-effort-selector
-                     :max-tokens 32000
-                     :context-window 200000))
-         (version (map-elt new-model :version)))
-    (setq chatgpt-shell-models
-          (cons new-model
-                (seq-remove (lambda (model)
-                              (equal (map-elt model :version) version))
-                            chatgpt-shell-models))))
-  (setq chatgpt-shell-model-version "claude-opus-4-7")
-  (setq chatgpt-shell-always-create-new nil))
-(defvar llm-refactoring-provider nil)
-(after! llm
-  (require 'llm-claude)
-  (unless (llm-models-by-symbol 'claude-4-7-opus)
-    (llm-models-add
-     :name "Claude 4.7 Opus"
-     :symbol 'claude-4-7-opus
-     :capabilities '(generation tool-use image-input pdf-input caching json-response)
-     :context-length 200000
-     :regex "claude-opus-4-7"))
-  (setq llm-refactoring-provider
-        (make-llm-claude
-         :key (getenv "ANTHROPIC_API_KEY")
-         :chat-model "claude-opus-4-7")
-        magit-gptcommit-llm-provider llm-refactoring-provider
-        llm-warn-on-nonfree nil))
-(after! gptel
-  (setq gptel-model 'claude-opus-4-7))
-(after! minuet
-  (setq minuet-provider 'claude))
-
 (use-package! aidermacs
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
@@ -146,71 +106,9 @@ Now, write the commit message using the Conventional Commits format: label: summ
   (map! :map git-commit-mode-map
         "C-c C-g" #'magit-gptcommit-commit-accept))
 
-(use-package! copilot
-  :when (and (executable-find "node")
-             (modulep! +copilot))
-  :defer t :init
-  (add-hook 'text-mode-hook #'cae-copilot-turn-on-safely)
-  (add-hook 'prog-mode-hook #'cae-copilot-turn-on-safely)
-  (add-hook 'conf-mode-hook #'cae-copilot-turn-on-safely)
-  (cae-advice-add #'copilot--start-agent :around #'cae-shut-up-a)
-  (add-hook! 'copilot-disable-predicates
-    (defun cae-disable-copilot-in-gptel-p ()
-      (bound-and-true-p gptel-mode))
-    (defun cae-disable-copilot-in-dunnet-p ()
-      (derived-mode-p 'dun-mode))
-    (defun cae-multiple-cursors-active-p ()
-      (bound-and-true-p multiple-cursors-mode))
-    (defun cae-disable-copilot-in-minibuffer ()
-      (minibufferp)))
-  (setq copilot-install-dir (concat doom-cache-dir "copilot"))
-  (autoload 'copilot-clear-overlay "copilot" nil t)
-  (cae-defadvice! cae-clear-copilot-overlay-a (&rest _)
-    :before #'doom/delete-backward-word
-    (copilot-clear-overlay))
-  :config
-  ;; Assume all Elisp code is formatted with the default indentation style. This
-  ;; fixes an error.
-  (setf (alist-get 'emacs-lisp-mode copilot-indentation-alist) nil)
-
-  (add-to-list 'copilot-clear-overlay-ignore-commands #'corfu-quit)
-  (add-hook! 'doom-escape-hook
-    (defun cae-copilot-clear-overlay-h ()
-      "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
-      (when (copilot--overlay-visible)
-        (copilot-clear-overlay) t)))
-  (setq copilot--base-dir
-        (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
-        copilot-max-char 1000000
-        copilot-idle-delay 0)
-  ;; Model our Copilot interface after Fish completions.
-  (map! :map copilot-completion-map
-        "<right>" #'copilot-accept-completion
-        "C-f" #'copilot-accept-completion
-        "M-<right>" #'copilot-accept-completion-by-word
-        "M-f" #'copilot-accept-completion-by-word
-        "C-e" #'copilot-accept-completion-by-line
-        "<end>" #'copilot-accept-completion-by-line
-        "M-n" #'copilot-next-completion
-        "M-p" #'copilot-previous-completion)
-  (remove-hook 'copilot-enable-predicates 'evil-insert-state-p)
-  (add-hook! 'copilot-enable-predicates
-    (defun cae-evil-insert-state-p ()
-      (memq (bound-and-true-p evil-state) '(insert emacs nil))))
-  (when (modulep! +copilot)
-    (after! copilot
-      (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
-  (after! copilot-balancer
-    (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
-    (after! midnight
-      (add-to-list 'clean-buffer-list-kill-never-buffer-names
-                   (buffer-name copilot-balancer-debug-buffer)))))
-
 ;; Not really a fan of this package yet.
 (use-package! minuet
-  :when (or (modulep! -copilot)
-            (and (modulep! +local)
-                 (not (modulep! +copilot))))
+  :when (modulep! +fim)
   :defer t :init
   ;; With my GPU, Minuet is too slow for auto-suggestions becaus it has to load
   ;; the model into VRAM.
