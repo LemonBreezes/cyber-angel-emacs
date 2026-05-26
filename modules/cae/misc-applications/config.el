@@ -675,8 +675,7 @@
         :ng "Q" #'mpc-quit
         :n "e" #'cae-mpc-other-window
         :n "w" #'cae-mpc-other-window-previous
-        :n "RET" #'cae-mpc-play
-        :n "o" #'mpc-goto-playing-song))
+        :n "RET" #'cae-mpc-play))
 
 (use-package! empv
   :defer t :init
