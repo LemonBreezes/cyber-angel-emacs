@@ -288,7 +288,4 @@ Now, write the commit message using the Conventional Commits format: label: summ
 (use-package! fancy-dabbrev
   :when (not (modulep! +fim))
   :defer t :config
-  (setq dabbrev-case-distinction nil)
-  (setq dabbrev-case-fold-search t)
-  (setq dabbrev-case-replace nil)
-  )
+  (setq fancy-dabbrev-preview-context 'before-non-word))
