@@ -50,7 +50,7 @@
 (if (locate-library "projectile")
 ;;; Projectile configuration
     (after! projectile
-      (setq projectile-track-known-projects-automatically t)
+      (setq projectile-auto-discover t)
       (run-with-idle-timer 10.0 nil #'projectile--cleanup-known-projects)
       (unless (file-exists-p (expand-file-name projectile-cache-file doom-project-cache-dir))
         (projectile-discover-projects-in-search-path))
