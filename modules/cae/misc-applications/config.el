@@ -671,8 +671,8 @@
   (map! :map mpc-mode-map
         ;;:n "gr" #'cae-mpc-reload
         ;;:n "gR" #'cae-mpc-reload
-        ;;:ng "q" #'cae-mpc-quit
-        ;;:ng "Q" #'mpc-quit
+        :ng "q" #'cae-mpc-quit
+        :ng "Q" #'mpc-quit
         ;;:n "C-j" #'evil-collection-mpc-move-down
         ;;:n "C-k" #'evil-collection-mpc-move-up
         :n "e" #'cae-mpc-other-window
