@@ -19,10 +19,16 @@
 (defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M"
   "Default interactive chatgpt-shell model (general, not a coder).")
 
-;; Someone said Qwen 3.6 was still better than devstral-small-2:24b. Currently
-;; I don't even know how to use local AI well so I can't tell which is better.
-(setq cae-coding-agent-model cae-chat-model
-      cae-coding-fim-model cae-chat-model)
+;; Each coding role uses the model trained for that role -- collapsing them all
+;; onto `cae-chat-model` was a mistake (a Qwen3-VL chat model hallucinates Lean-3
+;; commands when asked to scaffold Lean 4, because it's a vision-language tune).
+;; Keep:
+;;   - cae-coding-fim-model      = codestral:22b   (vLLM-coder + suffix decode)
+;;   - cae-coding-agent-model    = devstral-small-2:24b   (SWE-bench-tuned)
+;;   - cae-coding-reasoning-model= gpt-oss:120b    (heavy reasoning)
+;;   - cae-chat-model            = a general chat model, separate
+;; To swap the agent to the fast A3B coder, set:
+;;   (setq cae-coding-agent-model "qwen3-coder:30b")  ; ~276 tok/s, tool-trained
 
 ;; Lean 4 theorem-proving models, served by the same Ollama on cae-ip-address:11434.
 ;; Settings come from the ollama-spec-proxy benchmarks (offload + speculative
@@ -113,8 +119,6 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
   :defer t :init
   (autoload 'aidermacs-transient-menu "aidermacs" nil t)
   :config
-  (setq aidermacs-default-model "openrouter/google/gemini-3.1-pro-preview")
-  (setq aidermacs-editor-model "anthropic/claude-opus-4-7")
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-backend 'comint)
   ;; Override config.el's extra-args: drop `--cache-prompts' and
