@@ -19,8 +19,10 @@
 (defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M"
   "Default interactive chatgpt-shell model (general, not a coder).")
 
-;; Someone said Qwen 3.6 was still better than devstral-small-2:24b.
-(setq cae-coding-agent-model cae-chat-model)
+;; Someone said Qwen 3.6 was still better than devstral-small-2:24b. Currently
+;; I don't even know how to use local AI well so I can't tell which is better.
+(setq cae-coding-agent-model cae-chat-model
+      cae-coding-fim-model cae-chat-model)
 
 ;; Lean 4 theorem-proving models, served by the same Ollama on cae-ip-address:11434.
 ;; Settings come from the ollama-spec-proxy benchmarks (offload + speculative
