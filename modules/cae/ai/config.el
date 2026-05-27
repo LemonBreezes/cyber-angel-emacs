@@ -94,25 +94,34 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
     (setq chatgpt-shell-model-version cae-chat-model)))
 
 (after! aidermacs
-  ;; Point aider at the local Ollama server.  The spawned aider child inherits
-  ;; OLLAMA_API_BASE from `process-environment', which is how litellm (aider's
-  ;; backend) discovers the Ollama endpoint when a model uses the
-  ;; `ollama_chat/' prefix.
-  (setenv "OLLAMA_API_BASE" (format "http://%s:11434" cae-ip-address))
+  ;; Aider talks to the local stack through litellm's openai-compat path
+  ;; (`openai/<model>' + --api-base pointing at the proxy's /v1).  The native
+  ;; `ollama_chat/' provider in the bundled litellm hangs on streaming (NDJSON
+  ;; iterator never yields chunks, even though /api/chat works fine via curl)
+  ;; -- the openai/ path streams cleanly through ollama-spec-proxy's
+  ;; /v1/chat/completions instead.
+  ;;
+  ;; We pass --api-base / --api-key as explicit aider flags rather than env
+  ;; vars: `setenv' in Emacs only propagates to subprocesses spawned by THIS
+  ;; Emacs (subtle when aidermacs uses comint), and a stale `OPENAI_API_BASE'
+  ;; or no `OPENAI_API_BASE' silently falls back to api.openai.com and fails
+  ;; with "Incorrect API key provided: ollama".  Flags can't be ignored.
+  (setq cae-aidermacs--api-base   (format "http://%s:11434/v1" cae-ip-address)
+        cae-aidermacs--api-key    "ollama")
   ;; Aider caps Ollama's context at 2k tokens by default -- way too small for
   ;; agentic coding.  Both devstral-small-2 and gpt-oss support ~128k; 32k is
   ;; a balanced default (bump if you want longer context at the cost of VRAM
-  ;; and TTFT).
+  ;; and TTFT).  Still read by ollama-server, so keep it.
   (setenv "OLLAMA_CONTEXT_LENGTH" "32768")
   ;; Use local models for every aider role.  Architect mode pairs the heavy
   ;; reasoner (planner) with the fast in-VRAM coder (applies the edits).  The
   ;; weak model handles cheap chores like commit messages -- devstral is fine
   ;; there since it's already loaded.
   (setq aidermacs-use-architect-mode t
-        aidermacs-default-model   (concat "ollama_chat/" cae-coding-agent-model)
-        aidermacs-architect-model (concat "ollama_chat/" cae-coding-reasoning-model)
-        aidermacs-editor-model    (concat "ollama_chat/" cae-coding-agent-model)
-        aidermacs-weak-model      (concat "ollama_chat/" cae-coding-agent-model)))
+        aidermacs-default-model   (concat "openai/" cae-coding-agent-model)
+        aidermacs-architect-model (concat "openai/" cae-coding-reasoning-model)
+        aidermacs-editor-model    (concat "openai/" cae-coding-agent-model)
+        aidermacs-weak-model      (concat "openai/" cae-coding-agent-model)))
 
 ;;; Configure the packages
 (use-package! aidermacs
@@ -123,9 +132,21 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
   (setq aidermacs-backend 'comint)
   ;; Override config.el's extra-args: drop `--cache-prompts' and
   ;; `--cache-keepalive-pings' (Anthropic prompt-caching, no-op + noisy warning
-  ;; on Ollama) and keep only the provider-agnostic flags.
+  ;; on Ollama) and keep only the provider-agnostic flags.  --api-base /
+  ;; --api-key wire the openai-compat provider at the local proxy; see the
+  ;; long comment in `(after! aidermacs ...)' above for why these are flags
+  ;; rather than env vars.
   (setq aidermacs-extra-args
-        '("--watch-files"
+        `("--openai-api-base" ,cae-aidermacs--api-base
+          "--openai-api-key"  ,cae-aidermacs--api-key
+          ;; Without explicit metadata aider treats these models as "unknown"
+          ;; and silently truncates added files to its default ~4k context,
+          ;; which looks like "aider isn't seeing my files".  The JSON
+          ;; declares the real max_input_tokens for each local tag.
+          "--model-metadata-file"
+          ,(expand-file-name "modules/cae/ai/aider-model-metadata.json"
+                             doom-user-dir)
+          "--watch-files"
           "--auto-accept-architect"
           "--chat-language" "English"))
   (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
