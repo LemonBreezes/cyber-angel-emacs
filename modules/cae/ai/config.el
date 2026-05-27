@@ -19,6 +19,8 @@
 (defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M"
   "Default interactive chatgpt-shell model (general, not a coder).")
 
+(setq cae-coding-agent-model cae-chat-model)
+
 ;; Lean 4 theorem-proving models, served by the same Ollama on cae-ip-address:11434.
 ;; Settings come from the ollama-spec-proxy benchmarks (offload + speculative
 ;; decoding); the 32GB VRAM budget still holds.
