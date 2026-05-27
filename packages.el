@@ -29,8 +29,10 @@
 
 ;; PRs that haven't been merged yet.
 (when (modulep! :editor lispy)
+  (unpin! lispy)
   (package! lispy :recipe (:host github :repo "enzuru/lispy")))
 (when (modulep! :editor evil)
+  (unpin! evil-easymotion)
   (package! evil-easymotion :recipe
     (:host github :repo "LemonBreezes/evil-easymotion"
      :branch "avoid-infinite-loops-in-overlays")))
