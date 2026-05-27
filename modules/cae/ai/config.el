@@ -121,7 +121,22 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
         aidermacs-default-model   (concat "openai/" cae-coding-agent-model)
         aidermacs-architect-model (concat "openai/" cae-coding-reasoning-model)
         aidermacs-editor-model    (concat "openai/" cae-coding-agent-model)
-        aidermacs-weak-model      (concat "openai/" cae-coding-agent-model)))
+        aidermacs-weak-model      (concat "openai/" cae-coding-agent-model))
+  ;; Set extra-args here (in `after!') instead of inside `use-package! :config'.
+  ;; `:config' only runs once per package load; on `doom/reload' it does NOT
+  ;; re-run, so edits to these args would silently not take effect until you
+  ;; restarted Emacs.  Putting it in `after!' makes a Doom reload pick it up.
+  ;; --openai-api-base / --openai-api-key wire the openai-compat provider at
+  ;; the local proxy; --model-metadata-file declares real context windows.
+  (setq aidermacs-extra-args
+        `("--openai-api-base" ,cae-aidermacs--api-base
+          "--openai-api-key"  ,cae-aidermacs--api-key
+          "--model-metadata-file"
+          ,(expand-file-name "modules/cae/ai/aider-model-metadata.json"
+                             doom-user-dir)
+          "--watch-files"
+          "--auto-accept-architect"
+          "--chat-language" "English")))
 
 ;;; Configure the packages
 (use-package! aidermacs
@@ -130,25 +145,6 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
   :config
   (setq aidermacs-auto-commits nil)
   (setq aidermacs-backend 'comint)
-  ;; Override config.el's extra-args: drop `--cache-prompts' and
-  ;; `--cache-keepalive-pings' (Anthropic prompt-caching, no-op + noisy warning
-  ;; on Ollama) and keep only the provider-agnostic flags.  --api-base /
-  ;; --api-key wire the openai-compat provider at the local proxy; see the
-  ;; long comment in `(after! aidermacs ...)' above for why these are flags
-  ;; rather than env vars.
-  (setq aidermacs-extra-args
-        `("--openai-api-base" ,cae-aidermacs--api-base
-          "--openai-api-key"  ,cae-aidermacs--api-key
-          ;; Without explicit metadata aider treats these models as "unknown"
-          ;; and silently truncates added files to its default ~4k context,
-          ;; which looks like "aider isn't seeing my files".  The JSON
-          ;; declares the real max_input_tokens for each local tag.
-          "--model-metadata-file"
-          ,(expand-file-name "modules/cae/ai/aider-model-metadata.json"
-                             doom-user-dir)
-          "--watch-files"
-          "--auto-accept-architect"
-          "--chat-language" "English"))
   (cae-defadvice! cae-aidermacs-run-make-real-buffer-a ()
     :after #'aidermacs-run
     (when-let ((buf (get-buffer (aidermacs-buffer-name)))
