@@ -3,8 +3,4 @@
 add try to package list embark map? <- embark package map not working? >
 separate misc applications system emacs commands?
 
-agent-shell? ghostel?
-
-vterm tabs! including the claude code sstuff
-
 MAKE MY EMACS SECURE WITH AI
