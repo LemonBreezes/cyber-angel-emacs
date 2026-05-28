@@ -15,7 +15,6 @@
 (package! leetcode)
 (package! noaa)
 (package! hackernews)
-(package! osm)
 
 ;; System
 (when (eq system-type 'gnu/linux)
