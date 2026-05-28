@@ -196,7 +196,8 @@
                 save-abbrevs 'silently)
   (setq abbrev-suggest t)
   (map! :map edit-abbrevs-mode-map
-        [remap save-buffer] #'abbrev-edit-save-buffer)
+        [remap save-buffer] #'abbrev-edit-save-buffer
+        [remap basic-save-buffer] #'abbrev-edit-save-buffer)
   (map! :map abbrev-map "e" #'edit-abbrevs)
   (cae-advice-add #'abbrev-edit-save-buffer :after #'edit-abbrevs-redefine))
 
