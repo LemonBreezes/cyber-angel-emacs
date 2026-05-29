@@ -62,6 +62,10 @@
 (setq-hook! 'lean4-mode-hook
   tab-width 2)
 
+;;; Markdown
+
+(add-hook 'markdown-mode-hook #'cae-languages-align-markdown-tables)
+
 ;;; Haskell
 
 (use-package! consult-hoogle
