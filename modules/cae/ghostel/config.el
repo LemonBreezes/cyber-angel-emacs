@@ -6,7 +6,9 @@
   :defer t :init
   (map! :leader
         :desc "Toggle ghostel popup"  "ot" #'cae-ghostel-toggle
-        :desc "Open ghostel here"     "oT" #'cae-ghostel-here)
+        :desc "Open ghostel here"     "oT" #'cae-ghostel-here
+        (:when (modulep! :ui workspaces)
+          :desc "Open ghostel workspace" "o C-t" #'cae-ghostel-workspace))
   :config
   (add-hook 'ghostel-mode-hook #'mode-line-invisible-mode)
   (add-hook 'ghostel-mode-hook #'evil-ghostel-mode)
