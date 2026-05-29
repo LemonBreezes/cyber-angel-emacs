@@ -77,7 +77,7 @@
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
 
-(setq debug-on-message "Invalid face reference\\|Remote file error:\\|gwlloo")
+(setq debug-on-message "Invalid face reference\\|Remote file error:")
 
 ;; HACK I suspect this is actually a problem with `compile-angel' instead.
 ;; Replace the existing function definition with this refined version:
