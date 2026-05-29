@@ -105,6 +105,6 @@ Returns the ghostel buffer."
 (defun cae-ghostel-workspace ()
   (interactive)
   (+workspace-switch "*ghostel*" t)
-  (ghostel))
+  (call-interactively #'ghostel))
 
 
