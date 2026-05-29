@@ -101,4 +101,10 @@ Returns the ghostel buffer."
   (interactive)
   (ghostel--send-encoded "x" "ctrl"))
 
+;;;###autoload
+(defun cae-ghostel-workspace ()
+  (interactive)
+  (+workspace-switch "*ghostel*" t)
+  (ghostel))
+
 
