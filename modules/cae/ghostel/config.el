@@ -43,7 +43,7 @@
     ;; Prevent premature horizontal scrolling
     hscroll-margin 0)
 
-
   (map! :map ghostel-mode-map
         (:prefix "C-c"
-                 "C-x" #'cae-ghostel-send-C-x)))
+                 "C-x" #'cae-ghostel-send-C-x)
+        :n "p" #'ghostel-paste))
