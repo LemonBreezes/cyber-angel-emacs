@@ -18,7 +18,7 @@
 (unless (featurep 'cae-lib)
   (defalias 'cae-defadvice! 'defadvice!)
   (defalias 'cae-advice-add 'advice-add))
-(defalias 'cae-shut-up-a 'applyy)
+(defalias 'cae-shut-up-a 'apply)
 (with-eval-after-load 'straight
   (add-to-list 'straight-built-in-pseudo-packages 'seq))
 
@@ -43,7 +43,7 @@
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
-(let ((q (and (not noninteractive) nil)))
+(let ((q (and (not noninteractive) t)))
   (let ((p (and q t)))
     (defvar cae-init-preamble-enabled-p (and p t))
     (defvar cae-init-debug-enabled-p (and p t))
