@@ -185,3 +185,63 @@ One line, label: summary, now:")
   (setq fancy-dabbrev-preview-context 'before-non-word)
   (map! "C-f" #'cae-fancy-dabbrev-forward-char-or-complete
         "M-f" #'cae-fancy-dabbrev-forward-word-or-complete-word))
+
+(use-package! copilot
+  :when (and (executable-find "node")
+             (modulep! +fim))
+  :defer t :init
+  (add-hook 'text-mode-hook #'cae-copilot-turn-on-safely)
+  (add-hook 'prog-mode-hook #'cae-copilot-turn-on-safely)
+  (add-hook 'conf-mode-hook #'cae-copilot-turn-on-safely)
+  (cae-advice-add #'copilot--start-agent :around #'cae-shut-up-a)
+  (add-hook! 'copilot-disable-predicates
+    (defun cae-disable-copilot-in-gptel-p ()
+      (bound-and-true-p gptel-mode))
+    (defun cae-disable-copilot-in-dunnet-p ()
+      (derived-mode-p 'dun-mode))
+    (defun cae-multiple-cursors-active-p ()
+      (bound-and-true-p multiple-cursors-mode))
+    (defun cae-disable-copilot-in-minibuffer ()
+      (minibufferp)))
+  (setq copilot-install-dir (concat doom-cache-dir "copilot"))
+  (autoload 'copilot-clear-overlay "copilot" nil t)
+  (cae-defadvice! cae-clear-copilot-overlay-a (&rest _)
+    :before #'doom/delete-backward-word
+    (copilot-clear-overlay))
+  :config
+  ;; Assume all Elisp code is formatted with the default indentation style. This
+  ;; fixes an error.
+  (setf (alist-get 'emacs-lisp-mode copilot-indentation-alist) nil)
+
+  (add-to-list 'copilot-clear-overlay-ignore-commands #'corfu-quit)
+  (add-hook! 'doom-escape-hook
+    (defun cae-copilot-clear-overlay-h ()
+      "Like `copilot-clear-overlay', but returns `t' if the overlay was visible."
+      (when (copilot--overlay-visible)
+        (copilot-clear-overlay) t)))
+  (setq copilot--base-dir
+        (expand-file-name ".local/straight/repos/copilot.el/" doom-emacs-dir)
+        copilot-max-char 1000000
+        copilot-idle-delay 0)
+  ;; Model our Copilot interface after Fish completions.
+  (map! :map copilot-completion-map
+        "<right>" #'copilot-accept-completion
+        "C-f" #'copilot-accept-completion
+        "M-<right>" #'copilot-accept-completion-by-word
+        "M-f" #'copilot-accept-completion-by-word
+        "C-e" #'copilot-accept-completion-by-line
+        "<end>" #'copilot-accept-completion-by-line
+        "M-n" #'copilot-next-completion
+        "M-p" #'copilot-previous-completion)
+  (remove-hook 'copilot-enable-predicates 'evil-insert-state-p)
+  (add-hook! 'copilot-enable-predicates
+    (defun cae-evil-insert-state-p ()
+      (memq (bound-and-true-p evil-state) '(insert emacs nil))))
+  (when (modulep! +copilot)
+    (after! copilot
+      (add-hook 'yas-before-expand-snippet-hook #'copilot-clear-overlay)))
+  (after! copilot-balancer
+    (add-to-list 'copilot-balancer-lisp-modes 'fennel-mode)
+    (after! midnight
+      (add-to-list 'clean-buffer-list-kill-never-buffer-names
+                   (buffer-name copilot-balancer-debug-buffer)))))
