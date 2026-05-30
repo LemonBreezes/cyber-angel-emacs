@@ -105,7 +105,7 @@
 (package! vegetative-theme)
 (package! green-screen-theme)
 (package! cybercafe-theme)
-(package! nothing)
+(package! nothing-theme)
 
 ;; Export your theme.
 (package! theme-magic)
