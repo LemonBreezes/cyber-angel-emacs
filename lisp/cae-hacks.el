@@ -110,9 +110,3 @@
 (cae-defadvice! cae-hacks-ignore-buffer-without-default-directory-a (&rest _)
   :before-while #'envrc-global-mode-enable-in-buffer
   (buffer-local-value 'default-directory (current-buffer)))
-
-;; On Emacs31. Had more errors when my Emacs patches were enabled. I believe it
-;; is related to enabling comp speed 3 everywhere and also the CL structs and
-;; lexical binding not interacting correctly in Emacs31.
-(defvar owner 0)
-(defvar argument "")
