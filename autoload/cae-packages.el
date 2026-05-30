@@ -18,6 +18,9 @@
 ;; Doom's module pins by themselves (the file is loaded last, so its `:pin's
 ;; win), so `unpin! t' is both unnecessary and harmful here.
 
+;;; Variables
+
+;; Freeze
 (defvar cae-packages-freeze-file
   (file-name-concat doom-user-dir "packages.lock.el")
   "File that `cae-packages-freeze' writes generated `:pin's into.
@@ -27,65 +30,7 @@ This file is `load'ed from the end of packages.el.")
   "List of package symbols to never freeze.
 Useful for packages you intentionally want to track upstream HEAD of.")
 
-(defun cae-packages--current-pins ()
-  "Return a sorted alist of (PACKAGE-NAME-STRING . COMMIT) for installed packages.
-Enumerates every non-built-in package straight has a recipe for and reads the
-commit its local repo is currently checked out at."
-  (doom-initialize-packages)
-  (let (pins)
-    (dolist (recipe (doom-package-recipe-alist))
-      (cl-destructuring-bind (&key package local-repo type &allow-other-keys)
-          recipe
-        (when (and package local-repo
-                   (not (memq (intern package)
-                              cae-packages-freeze-excluded-packages)))
-          (when-let* ((commit (ignore-errors
-                                (straight-vc-get-commit type local-repo))))
-            (setf (alist-get package pins nil nil #'equal) commit)))))
-    (cl-sort pins #'string< :key #'car)))
-
-;;;###autoload
-(defun cae-packages-freeze ()
-  "Freeze every installed package to its currently checked-out SHA.
-Writes `(package! NAME :pin \"SHA\")' forms for all installed packages into
-`cae-packages-freeze-file' (packages.lock.el).  Commit that file (and
-packages.el) and run `doom sync' on your other instances to put them on
-identical versions."
-  (interactive)
-  (let ((pins (cae-packages--current-pins)))
-    (unless pins
-      (user-error "No installed packages found to freeze"))
-    (with-temp-file cae-packages-freeze-file
-      (insert ";; -*- no-byte-compile: t; -*-\n"
-              ";;; packages.lock.el --- AUTO-GENERATED, DO NOT EDIT BY HAND\n;;\n"
-              ";; Regenerate with `M-x cae-packages-freeze'.  Each entry pins a package\n"
-              ";; to the commit it was installed at when this file was written.  Loaded\n"
-              ";; from the end of packages.el.\n\n")
-      (dolist (pin pins)
-        (insert (format "(package! %s :pin %S)\n" (car pin) (cdr pin)))))
-    (message "Froze %d package%s to %s"
-             (length pins)
-             (if (= (length pins) 1) "" "s")
-             (abbreviate-file-name cae-packages-freeze-file))))
-
-;;;###autoload
-(defun cae-packages-unfreeze ()
-  "Remove all frozen pins by clearing `cae-packages-freeze-file' (packages.lock.el).
-Run `doom sync' afterwards to let packages float again."
-  (interactive)
-  (when (and (file-exists-p cae-packages-freeze-file)
-             (or (not (called-interactively-p 'interactive))
-                 (yes-or-no-p (format "Clear all frozen pins in %s? "
-                                      (abbreviate-file-name
-                                       cae-packages-freeze-file)))))
-    (with-temp-file cae-packages-freeze-file
-      (insert ";; -*- no-byte-compile: t; -*-\n"
-              ";;; packages.lock.el --- AUTO-GENERATED, DO NOT EDIT BY HAND\n\n"))
-    (message "Cleared frozen pins; run `doom sync' to thaw")))
-
-
-;;; Bump frozen pins to upstream, reviewing the new commits in a magit log
-
+;; Bump: fetch state
 (defvar cae-packages-bump-fetch-concurrency 16
   "Maximum number of concurrent `git fetch' jobs run by `cae-packages-bump-pins'.")
 
@@ -96,9 +41,12 @@ Each spec is a plist with :name :repo :old :new :count.")
 (defvar-local cae-packages--bump-marked nil
   "Hash table of package names (strings) marked for bumping.")
 
+(defvar-local cae-packages--bump-process nil
+  "The fetch process populating this bump buffer, if still running.")
+
 (defconst cae-packages--bump-worker "\
 b=$(git -C \"$1\" rev-parse --abbrev-ref HEAD 2>/dev/null)
-git -C \"$1\" fetch --quiet origin \"$b\" 2>/dev/null
+git -C \"$1\" fetch --quiet --no-tags origin \"$b\" 2>/dev/null
 n=$(git -C \"$1\" rev-parse FETCH_HEAD 2>/dev/null)
 printf '%s\\t%s\\t%s\\n' \"$1\" \"$n\" \"$(git -C \"$1\" rev-list --count \"$2..$n\" 2>/dev/null)\"
 "
@@ -107,245 +55,7 @@ Fetches the repo's current branch from origin and prints a TAB-separated
 \"REPO<TAB>FETCH_HEAD<TAB>NEW-COMMIT-COUNT\" line.  Driven by `xargs -P' for
 bounded concurrency.")
 
-(defun cae-packages--lockfile-pins ()
-  "Return an alist of (NAME-STRING . SHA) parsed from `cae-packages-freeze-file'."
-  (let (pins)
-    (when (file-readable-p cae-packages-freeze-file)
-      (with-temp-buffer
-        (insert-file-contents cae-packages-freeze-file)
-        (goto-char (point-min))
-        (while (re-search-forward
-                "(package! \\([^ )]+\\) :pin \"\\([0-9a-f]+\\)\")" nil t)
-          (push (cons (match-string 1) (match-string 2)) pins))))
-    (nreverse pins)))
-
-(defun cae-packages--bump-collect-specs ()
-  "Return specs (plists :name :repo :old) for every pinned, on-disk package."
-  (doom-initialize-packages)
-  (let ((repo-by-name (make-hash-table :test #'equal))
-        specs)
-    (dolist (recipe (doom-package-recipe-alist))
-      (cl-destructuring-bind (&key package local-repo &allow-other-keys) recipe
-        (when (and package local-repo)
-          (puthash package local-repo repo-by-name))))
-    (pcase-dolist (`(,name . ,old) (cae-packages--lockfile-pins))
-      (let* ((local-repo (gethash name repo-by-name))
-             (dir (and local-repo (straight--repos-dir local-repo))))
-        (when (and dir (file-directory-p dir))
-          (push (list :name name :repo (directory-file-name dir) :old old)
-                specs))))
-    (nreverse specs)))
-
-(defun cae-packages--bump-fetch (specs callback)
-  "Fetch each spec's branch from origin asynchronously, then call CALLBACK.
-Fetching is bounded by `cae-packages-bump-fetch-concurrency'.  CALLBACK receives
-the subset of SPECS that have new upstream commits, each augmented with :new (the
-upstream commit) and :count (number of new commits), sorted by :count."
-  (let ((script (make-temp-file "cae-packages-bump-" nil ".sh"))
-        (listf  (make-temp-file "cae-packages-bump-list-"))
-        (total  (length specs))
-        (by-repo (make-hash-table :test #'equal)))
-    (with-temp-file script (insert cae-packages--bump-worker))
-    (with-temp-file listf
-      (dolist (spec specs)
-        (puthash (plist-get spec :repo) spec by-repo)
-        (insert (plist-get spec :repo) " " (plist-get spec :old) "\n")))
-    (let ((proc (make-process
-                 :name "cae-packages-bump-fetch"
-                 :buffer (generate-new-buffer " *cae-packages-bump-fetch*")
-                 :noquery t
-                 :connection-type 'pipe
-                 :command
-                 (list shell-file-name shell-command-switch
-                       (format "xargs -P %d -n 2 %s %s < %s"
-                               cae-packages-bump-fetch-concurrency
-                               shell-file-name
-                               (shell-quote-argument script)
-                               (shell-quote-argument listf)))
-                 :filter #'cae-packages--bump-fetch-filter
-                 :sentinel #'cae-packages--bump-fetch-sentinel)))
-      ;; State travels on the process (via `process-put'), not via closures, so
-      ;; the callbacks work regardless of how this file was loaded.
-      (process-put proc 'reporter
-                   (make-progress-reporter
-                    (format "Fetching upstream for %d packages... " total) 0 total))
-      (process-put proc 'total total)
-      (process-put proc 'by-repo by-repo)
-      (process-put proc 'callback callback)
-      (process-put proc 'tempfiles (list script listf))
-      proc)))
-
-(defun cae-packages--bump-fetch-filter (proc string)
-  "Process filter for `cae-packages--bump-fetch': accumulate output, show progress."
-  (internal-default-process-filter proc string)
-  (when (buffer-live-p (process-buffer proc))
-    (progress-reporter-update
-     (process-get proc 'reporter)
-     (min (process-get proc 'total)
-          (with-current-buffer (process-buffer proc)
-            (count-lines (point-min) (point-max)))))))
-
-(defun cae-packages--bump-fetch-sentinel (proc _event)
-  "Process sentinel for `cae-packages--bump-fetch': parse results, run callback."
-  (when (memq (process-status proc) '(exit signal))
-    (let ((output   (with-current-buffer (process-buffer proc) (buffer-string)))
-          (by-repo  (process-get proc 'by-repo))
-          (callback (process-get proc 'callback)))
-      (kill-buffer (process-buffer proc))
-      (dolist (f (process-get proc 'tempfiles)) (ignore-errors (delete-file f)))
-      (progress-reporter-done (process-get proc 'reporter))
-      (let (outdated)
-        (dolist (line (split-string output "\n" t))
-          (pcase (split-string line "\t")
-            (`(,repo ,new ,count)
-             (let ((spec (gethash repo by-repo)))
-               (when (and spec
-                          (string-match-p "\\`[0-9a-f]\\{40,64\\}\\'" new)
-                          (not (equal new (plist-get spec :old)))
-                          (> (string-to-number count) 0))
-                 (push (append spec (list :new new :count (string-to-number count)))
-                       outdated))))))
-        (funcall callback
-                 (cl-sort outdated #'> :key (lambda (s) (plist-get s :count))))))))
-
-(defvar cae-packages-bump-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "RET")     #'cae-packages-bump-show-log)
-    (define-key map (kbd "r")       #'cae-packages-bump-review)
-    (define-key map (kbd "a")       #'cae-packages-bump-toggle-mark)
-    (define-key map (kbd "A")       #'cae-packages-bump-mark-all)
-    (define-key map (kbd "U")       #'cae-packages-bump-unmark-all)
-    (define-key map (kbd "C-c C-c") #'cae-packages-bump-apply)
-    map)
-  "Keymap for `cae-packages-bump-mode'.")
-
-(define-derived-mode cae-packages-bump-mode magit-section-mode "Package-Bumps"
-  "Review and apply upstream pin bumps for frozen packages.
-\\{cae-packages-bump-mode-map}")
-
-(defun cae-packages--bump-spec-at-point ()
-  "Return the package spec of the magit section at point, or nil."
-  (when-let* ((section (magit-current-section))
-              (value (oref section value)))
-    (and (consp value) (plist-member value :name) value)))
-
-(defun cae-packages--bump-goto (name)
-  "Move point to the section for package NAME, if present."
-  (goto-char (point-min))
-  (let (found)
-    (while (and (not found) (not (eobp)))
-      (let ((spec (cae-packages--bump-spec-at-point)))
-        (if (and spec (equal (plist-get spec :name) name))
-            (setq found t)
-          (forward-line 1))))
-    (unless found (goto-char (point-min)))))
-
-(defun cae-packages--bump-render ()
-  "(Re)draw the bump overview buffer from `cae-packages--bump-specs'."
-  (let ((inhibit-read-only t)
-        (at (plist-get (cae-packages--bump-spec-at-point) :name)))
-    (erase-buffer)
-    (magit-insert-section (cae-packages-bump-root)
-      (magit-insert-heading
-        (format "Outdated frozen packages (%d)" (length cae-packages--bump-specs)))
-      (insert "\n")
-      (dolist (spec cae-packages--bump-specs)
-        (let ((name (plist-get spec :name)))
-          (magit-insert-section (cae-packages-bump-item spec)
-            (magit-insert-heading
-              (format "%s %-32s %s..%s  %d commit%s"
-                      (if (gethash name cae-packages--bump-marked)
-                          (propertize "*" 'face 'success)
-                        " ")
-                      name
-                      (substring (plist-get spec :old) 0 7)
-                      (substring (plist-get spec :new) 0 7)
-                      (plist-get spec :count)
-                      (if (= 1 (plist-get spec :count)) "" "s")))))))
-    (when at (cae-packages--bump-goto at))))
-
-(defun cae-packages-bump-show-log ()
-  "Show a magit log of the new commits (old..new) for the package at point."
-  (interactive)
-  (let* ((spec (or (cae-packages--bump-spec-at-point)
-                   (user-error "No package on this line")))
-         (default-directory (file-name-as-directory (plist-get spec :repo))))
-    ;; `magit-log-arguments' returns (ARGS FILES); pass ARGS, ignore file filter.
-    (pcase-let ((`(,args ,_files) (magit-log-arguments)))
-      (magit-log-setup-buffer
-       (list (format "%s..%s" (plist-get spec :old) (plist-get spec :new)))
-       args nil))))
-
-(defun cae-packages-bump-toggle-mark ()
-  "Toggle the bump mark on the package at point, then move to the next line."
-  (interactive)
-  (let* ((spec (or (cae-packages--bump-spec-at-point)
-                   (user-error "No package on this line")))
-         (name (plist-get spec :name)))
-    (if (gethash name cae-packages--bump-marked)
-        (remhash name cae-packages--bump-marked)
-      (puthash name t cae-packages--bump-marked))
-    (cae-packages--bump-render)
-    (cae-packages--bump-goto name)
-    (forward-line 1)))
-
-(defun cae-packages-bump-mark-all ()
-  "Mark every outdated package for bumping."
-  (interactive)
-  (dolist (spec cae-packages--bump-specs)
-    (puthash (plist-get spec :name) t cae-packages--bump-marked))
-  (cae-packages--bump-render))
-
-(defun cae-packages-bump-unmark-all ()
-  "Unmark every package."
-  (interactive)
-  (clrhash cae-packages--bump-marked)
-  (cae-packages--bump-render))
-
-(defun cae-packages--bump-write (specs)
-  "Replace the :pin of each spec (with :new) in `cae-packages-freeze-file'."
-  (with-temp-buffer
-    (insert-file-contents cae-packages-freeze-file)
-    (dolist (spec specs)
-      (goto-char (point-min))
-      (when (re-search-forward
-             (format "(package! %s :pin \"\\([0-9a-f]+\\)\")"
-                     (regexp-quote (plist-get spec :name)))
-             nil t)
-        (replace-match (plist-get spec :new) t t nil 1)))
-    (write-region (point-min) (point-max) cae-packages-freeze-file nil 'silent)))
-
-(defun cae-packages-bump-apply ()
-  "Write the new pins for all marked packages into `cae-packages-freeze-file'."
-  (interactive)
-  (let ((marked (cl-remove-if-not
-                 (lambda (s) (gethash (plist-get s :name) cae-packages--bump-marked))
-                 cae-packages--bump-specs)))
-    (unless marked
-      (user-error "No packages marked; use `a' to mark, `A' to mark all"))
-    (when (yes-or-no-p (format "Bump %d pin%s in %s? "
-                               (length marked)
-                               (if (= 1 (length marked)) "" "s")
-                               (file-name-nondirectory cae-packages-freeze-file)))
-      (cae-packages--bump-write marked)
-      (let ((n (length marked)))
-        (setq cae-packages--bump-specs
-              (cl-remove-if (lambda (s)
-                              (gethash (plist-get s :name) cae-packages--bump-marked))
-                            cae-packages--bump-specs))
-        (clrhash cae-packages--bump-marked)
-        (if cae-packages--bump-specs
-            (cae-packages--bump-render)
-          (let ((inhibit-read-only t))
-            (erase-buffer)
-            (insert "All bumps applied.  Run `doom sync' to install them.\n")))
-        (message "Bumped %d pin%s in %s; run `doom sync' to install"
-                 n (if (= 1 n) "" "s")
-                 (file-name-nondirectory cae-packages-freeze-file))))))
-
-
-;;; AI review of a package's new commits (pluggable backend)
-
+;; AI review of a package's new commits (pluggable backend)
 (defvar cae-packages-bump-review-api-endpoint nil
   "OpenAI-compatible chat-completions endpoint used to review commits.
 When nil, it is derived from `cae-ip-address' at request time as
@@ -430,6 +140,254 @@ in `cae-packages-bump-review-model-metadata-file'; if the model isn't listed,
 a conservative fallback is used.  Big bumps are reduced to subject-only logs
 and truncated to fit whichever budget applies.")
 
+(defvar cae-packages-bump-review-strip-reasoning t
+  "When non-nil, strip <think>...</think> reasoning blocks from review output.
+Reasoning models (e.g. Qwen3) wrap their answer in such a block; stripping it
+leaves just the summary.")
+
+;;; Keybindings and major mode
+
+(defvar cae-packages-bump-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "RET")     #'cae-packages-bump-show-log)
+    (define-key map (kbd "r")       #'cae-packages-bump-review)
+    (define-key map (kbd "a")       #'cae-packages-bump-toggle-mark)
+    (define-key map (kbd "A")       #'cae-packages-bump-mark-all)
+    (define-key map (kbd "U")       #'cae-packages-bump-unmark-all)
+    (define-key map (kbd "C-c C-c") #'cae-packages-bump-apply)
+    map)
+  "Keymap for `cae-packages-bump-mode'.")
+
+(define-derived-mode cae-packages-bump-mode magit-section-mode "Package-Bumps"
+  "Review and apply upstream pin bumps for frozen packages.
+\\{cae-packages-bump-mode-map}")
+
+;; Bind in evil normal/motion states too; otherwise evil shadows the single-key
+;; bindings in `cae-packages-bump-mode-map'.
+(map! :map cae-packages-bump-mode-map
+      :nm "RET"     #'cae-packages-bump-show-log
+      :nm "r"       #'cae-packages-bump-review
+      :nm "a"       #'cae-packages-bump-toggle-mark
+      :nm "A"       #'cae-packages-bump-mark-all
+      :nm "U"       #'cae-packages-bump-unmark-all
+      :nm "q"       #'quit-window
+      :nm "C-c C-c" #'cae-packages-bump-apply)
+
+;;; Helper functions (dependency order)
+
+(defun cae-packages--current-pins ()
+  "Return a sorted alist of (PACKAGE-NAME-STRING . COMMIT) for installed packages.
+Enumerates every non-built-in package straight has a recipe for and reads the
+commit its local repo is currently checked out at."
+  (doom-initialize-packages)
+  (let (pins)
+    (dolist (recipe (doom-package-recipe-alist))
+      (cl-destructuring-bind (&key package local-repo type &allow-other-keys)
+          recipe
+        (when (and package local-repo
+                   (not (memq (intern package)
+                              cae-packages-freeze-excluded-packages)))
+          (when-let* ((commit (ignore-errors
+                                (straight-vc-get-commit type local-repo))))
+            (setf (alist-get package pins nil nil #'equal) commit)))))
+    (cl-sort pins #'string< :key #'car)))
+
+(defun cae-packages--lockfile-pins ()
+  "Return an alist of (NAME-STRING . SHA) parsed from `cae-packages-freeze-file'."
+  (let (pins)
+    (when (file-readable-p cae-packages-freeze-file)
+      (with-temp-buffer
+        (insert-file-contents cae-packages-freeze-file)
+        (goto-char (point-min))
+        (while (re-search-forward
+                "(package! \\([^ )]+\\) :pin \"\\([0-9a-f]+\\)\")" nil t)
+          (push (cons (match-string 1) (match-string 2)) pins))))
+    (nreverse pins)))
+
+(defun cae-packages--bump-collect-specs ()
+  "Return specs (plists :name :repo :old) for every pinned, on-disk package."
+  (doom-initialize-packages)
+  (let ((repo-by-name (make-hash-table :test #'equal))
+        specs)
+    (dolist (recipe (doom-package-recipe-alist))
+      (cl-destructuring-bind (&key package local-repo &allow-other-keys) recipe
+        (when (and package local-repo)
+          (puthash package local-repo repo-by-name))))
+    (pcase-dolist (`(,name . ,old) (cae-packages--lockfile-pins))
+      (let* ((local-repo (gethash name repo-by-name))
+             (dir (and local-repo (straight--repos-dir local-repo))))
+        (when (and dir (file-directory-p dir))
+          (push (list :name name :repo (directory-file-name dir) :old old)
+                specs))))
+    (nreverse specs)))
+
+(defun cae-packages--bump-update-header (buffer total done outdated &optional finished)
+  "Set BUFFER's header line: fetch progress, or key hints when FINISHED."
+  (when (buffer-live-p buffer)
+    (with-current-buffer buffer
+      (setq header-line-format
+            (cond
+             ((and finished (zerop outdated)) " All frozen packages are up to date.")
+             (finished
+              " RET=log  r=AI-review  a=mark  A=mark-all  U=unmark-all  C-c C-c=apply  q=quit")
+             (t (format " Fetching %d/%d...  %d outdated so far  (kill buffer to abort)"
+                        done total outdated)))))))
+
+(defun cae-packages--bump-kill-process ()
+  "Kill this buffer's running fetch process (a `kill-buffer-hook')."
+  (when (process-live-p cae-packages--bump-process)
+    (delete-process cae-packages--bump-process)))
+
+(defun cae-packages--bump-spec-at-point ()
+  "Return the package spec of the magit section at point, or nil."
+  (when-let* ((section (magit-current-section))
+              (value (oref section value)))
+    (and (consp value) (plist-member value :name) value)))
+
+(defun cae-packages--bump-goto (name)
+  "Move point to the section for package NAME, if present."
+  (goto-char (point-min))
+  (let (found)
+    (while (and (not found) (not (eobp)))
+      (let ((spec (cae-packages--bump-spec-at-point)))
+        (if (and spec (equal (plist-get spec :name) name))
+            (setq found t)
+          (forward-line 1))))
+    (unless found (goto-char (point-min)))))
+
+(defun cae-packages--bump-render ()
+  "(Re)draw the bump overview buffer from `cae-packages--bump-specs'."
+  (let ((inhibit-read-only t)
+        (at (plist-get (cae-packages--bump-spec-at-point) :name)))
+    (erase-buffer)
+    (magit-insert-section (cae-packages-bump-root)
+      (magit-insert-heading
+        (format "Outdated frozen packages (%d)" (length cae-packages--bump-specs)))
+      (insert "\n")
+      (dolist (spec cae-packages--bump-specs)
+        (let ((name (plist-get spec :name)))
+          (magit-insert-section (cae-packages-bump-item spec)
+            (magit-insert-heading
+              (format "%s %-32s %s..%s  %d commit%s"
+                      (if (gethash name cae-packages--bump-marked)
+                          (propertize "*" 'face 'success)
+                        " ")
+                      name
+                      (substring (plist-get spec :old) 0 7)
+                      (substring (plist-get spec :new) 0 7)
+                      (plist-get spec :count)
+                      (if (= 1 (plist-get spec :count)) "" "s")))))))
+    (when at (cae-packages--bump-goto at))))
+
+(defun cae-packages--bump-fetch-filter (proc chunk)
+  "Process filter: parse finished result lines, add outdated packages to the buffer."
+  (let* ((pending (concat (process-get proc 'pending) chunk))
+         (lines (split-string pending "\n"))
+         (by-repo (process-get proc 'by-repo))
+         (buffer (process-get proc 'buffer))
+         (done (process-get proc 'done))
+         (fresh nil))
+    (process-put proc 'pending (car (last lines)))
+    (dolist (line (butlast lines))
+      (setq line (string-trim line))
+      (unless (string-empty-p line)
+        (pcase (split-string line "\t")
+          (`(,repo ,new ,count)
+           (setq done (1+ done))
+           (when (and (string-match-p "\\`[0-9a-f]\\{40,64\\}\\'" new)
+                      (> (string-to-number count) 0))
+             ;; Emit an entry for every package sharing this repo.
+             (let ((cnt (string-to-number count)))
+               (dolist (spec (gethash repo by-repo))
+                 (unless (equal new (plist-get spec :old))
+                   (push (append spec (list :new new :count cnt)) fresh)))))))))
+    (process-put proc 'done done)
+    (when (buffer-live-p buffer)
+      (with-current-buffer buffer
+        (when fresh
+          (setq cae-packages--bump-specs
+                (cl-sort (append cae-packages--bump-specs fresh)
+                         #'> :key (lambda (s) (plist-get s :count))))
+          (cae-packages--bump-render))
+        (cae-packages--bump-update-header
+         buffer (process-get proc 'total) done (length cae-packages--bump-specs))))))
+
+(defun cae-packages--bump-fetch-sentinel (proc event)
+  "Process sentinel: clean up temp files and finalize the buffer header."
+  (when (memq (process-status proc) '(exit signal))
+    (dolist (f (process-get proc 'tempfiles)) (ignore-errors (delete-file f)))
+    (let ((buffer (process-get proc 'buffer))
+          (total  (process-get proc 'total))
+          (done   (process-get proc 'done)))
+      (when (buffer-live-p buffer)
+        (with-current-buffer buffer
+          (let ((n (length cae-packages--bump-specs)))
+            (cae-packages--bump-render)
+            (cae-packages--bump-update-header buffer total done n t)
+            (cond ((> n 0)
+                   (message "%d package%s have upstream updates."
+                            n (if (= n 1) "" "s")))
+                  ((> done 0)
+                   (message "All frozen packages are already up to date."))
+                  (t (message "Bump fetch ended: %s" (string-trim event))))))))))
+
+(defun cae-packages--bump-fetch (specs buffer)
+  "Fetch SPECS' branches from origin in parallel, populating BUFFER as they finish.
+Concurrency is bounded by `cae-packages-bump-fetch-concurrency'.  Each package
+with new upstream commits is appended to BUFFER's `cae-packages--bump-specs'
+\(sorted by commit count) and rendered live; the header line tracks progress.
+Returns the process."
+  (let ((script (make-temp-file "cae-packages-bump-" nil ".sh"))
+        (listf  (make-temp-file "cae-packages-bump-list-"))
+        (by-repo (make-hash-table :test #'equal)))
+    ;; Group specs by repo: several packages can share one repo (e.g.
+    ;; elfeed-tube + elfeed-tube-mpv).  Fetch each repo ONCE (avoids duplicate
+    ;; entries and concurrent fetches racing on the same .git lock), then emit
+    ;; an entry for every package in it.
+    (dolist (spec specs)
+      (push spec (gethash (plist-get spec :repo) by-repo)))
+    (with-temp-file script (insert cae-packages--bump-worker))
+    (with-temp-file listf
+      (maphash (lambda (repo repo-specs)
+                 (insert repo " " (plist-get (car repo-specs) :old) "\n"))
+               by-repo))
+    (let ((proc (make-process
+                 :name "cae-packages-bump-fetch"
+                 :buffer nil
+                 :noquery t
+                 :connection-type 'pipe
+                 :command
+                 (list shell-file-name shell-command-switch
+                       (format "xargs -P %d -n 2 %s %s < %s"
+                               cae-packages-bump-fetch-concurrency
+                               shell-file-name
+                               (shell-quote-argument script)
+                               (shell-quote-argument listf)))
+                 :filter #'cae-packages--bump-fetch-filter
+                 :sentinel #'cae-packages--bump-fetch-sentinel))
+          (total (hash-table-count by-repo)))
+      (process-put proc 'buffer buffer)
+      (process-put proc 'total total)
+      (process-put proc 'done 0)
+      (process-put proc 'by-repo by-repo)
+      (process-put proc 'pending "")
+      (process-put proc 'tempfiles (list script listf))
+      (cae-packages--bump-update-header buffer total 0 0)
+      proc)))
+
+(defun cae-packages--bump-write (specs)
+  "Replace the :pin of each spec (with :new) in `cae-packages-freeze-file'."
+  (with-temp-buffer
+    (insert-file-contents cae-packages-freeze-file)
+    (dolist (spec specs)
+      (goto-char (point-min))
+      (when (re-search-forward
+             (format "(package! %s :pin \"\\([0-9a-f]+\\)\")"
+                     (regexp-quote (plist-get spec :name)))
+             nil t)
+        (replace-match (plist-get spec :new) t t nil 1)))
+    (write-region (point-min) (point-max) cae-packages-freeze-file nil 'silent)))
+
 (defun cae-packages--git-string (dir &rest args)
   "Run \"git ARGS\" in DIR and return its trimmed standard output."
   (with-temp-buffer
@@ -443,6 +401,12 @@ and truncated to fit whichever budget applies.")
       (concat (substring text 0 limit)
               (format "\n... [%s truncated to %d chars]" label limit))
     text))
+
+(defun cae-packages--review-model ()
+  "Resolve the review model (override, else `cae-chat-model')."
+  (or cae-packages-bump-review-model
+      (bound-and-true-p cae-chat-model)
+      (user-error "Set `cae-packages-bump-review-model' (no `cae-chat-model')")))
 
 (defun cae-packages--review-model-context-tokens ()
   "Return the model's served context (max_input + max_output) from the metadata.
@@ -515,12 +479,6 @@ the total stays under `cae-packages-bump-review-max-input-chars'."
         (format "http://%s:11434/v1/chat/completions" ip))
       (user-error "Set `cae-packages-bump-review-api-endpoint' (no `cae-ip-address')")))
 
-(defun cae-packages--review-model ()
-  "Resolve the review model (override, else `cae-chat-model')."
-  (or cae-packages-bump-review-model
-      (bound-and-true-p cae-chat-model)
-      (user-error "Set `cae-packages-bump-review-model' (no `cae-chat-model')")))
-
 (defun cae-packages--review-api-key ()
   "Resolve `cae-packages-bump-review-api-key' to a string or nil."
   (let ((k cae-packages-bump-review-api-key))
@@ -536,11 +494,6 @@ Swaps out the \"Querying...\" placeholder for the finished, non-streamed reply."
         (erase-buffer)
         (insert text)
         (goto-char (point-min))))))
-
-(defvar cae-packages-bump-review-strip-reasoning t
-  "When non-nil, strip <think>...</think> reasoning blocks from review output.
-Reasoning models (e.g. Qwen3) wrap their answer in such a block; stripping it
-leaves just the summary.")
 
 (defun cae-packages--review-strip-think (text)
   "Strip leading <think>...</think> reasoning from TEXT when enabled."
@@ -562,15 +515,6 @@ leaves just the summary.")
           (let ((err (alist-get 'error json)))
             (and err (format "[API error] %s"
                              (if (listp err) (alist-get 'message err) err))))))))
-
-(defun cae-packages--review-via-api (prompt buffer)
-  "Default `cae-packages-bump-review-function'.
-Stream the review into BUFFER via curl + SSE when `cae-packages-bump-review-stream'
-is set and curl is available; otherwise fall back to a single non-streamed
-request through `url.el'.  Both target the OpenAI-compatible endpoint."
-  (if (and cae-packages-bump-review-stream (executable-find "curl"))
-      (cae-packages--review-via-curl-stream prompt buffer)
-    (cae-packages--review-via-url prompt buffer)))
 
 (defun cae-packages--review-via-url (prompt buffer)
   "Non-streaming review: POST PROMPT to the endpoint via `url.el', reply to BUFFER."
@@ -720,6 +664,15 @@ placeholder; once it closes (or when reasoning isn't stripped) show the text."
     (process-send-eof proc)
     proc))
 
+(defun cae-packages--review-via-api (prompt buffer)
+  "Default `cae-packages-bump-review-function'.
+Stream the review into BUFFER via curl + SSE when `cae-packages-bump-review-stream'
+is set and curl is available; otherwise fall back to a single non-streamed
+request through `url.el'.  Both target the OpenAI-compatible endpoint."
+  (if (and cae-packages-bump-review-stream (executable-find "curl"))
+      (cae-packages--review-via-curl-stream prompt buffer)
+    (cae-packages--review-via-url prompt buffer)))
+
 (defun cae-packages--review-warmup ()
   "Best-effort: fire a tiny request to preload the local review model.
 No-op unless `cae-packages-bump-review-warmup' is set and the default API
@@ -744,6 +697,59 @@ backend is in use.  Errors (e.g. unset endpoint) are ignored."
         (url-retrieve (cae-packages--review-endpoint)
                       (lambda (_status) (ignore-errors (kill-buffer (current-buffer))))
                       nil t t)))))
+
+;;; Entry points (interactive commands)
+
+;;;###autoload
+(defun cae-packages-freeze ()
+  "Freeze every installed package to its currently checked-out SHA.
+Writes `(package! NAME :pin \"SHA\")' forms for all installed packages into
+`cae-packages-freeze-file' (packages.lock.el).  Commit that file (and
+packages.el) and run `doom sync' on your other instances to put them on
+identical versions."
+  (interactive)
+  (let ((pins (cae-packages--current-pins)))
+    (unless pins
+      (user-error "No installed packages found to freeze"))
+    (with-temp-file cae-packages-freeze-file
+      (insert ";; -*- no-byte-compile: t; -*-\n"
+              ";;; packages.lock.el --- AUTO-GENERATED, DO NOT EDIT BY HAND\n;;\n"
+              ";; Regenerate with `M-x cae-packages-freeze'.  Each entry pins a package\n"
+              ";; to the commit it was installed at when this file was written.  Loaded\n"
+              ";; from the end of packages.el.\n\n")
+      (dolist (pin pins)
+        (insert (format "(package! %s :pin %S)\n" (car pin) (cdr pin)))))
+    (message "Froze %d package%s to %s"
+             (length pins)
+             (if (= (length pins) 1) "" "s")
+             (abbreviate-file-name cae-packages-freeze-file))))
+
+;;;###autoload
+(defun cae-packages-unfreeze ()
+  "Remove all frozen pins by clearing `cae-packages-freeze-file' (packages.lock.el).
+Run `doom sync' afterwards to let packages float again."
+  (interactive)
+  (when (and (file-exists-p cae-packages-freeze-file)
+             (or (not (called-interactively-p 'interactive))
+                 (yes-or-no-p (format "Clear all frozen pins in %s? "
+                                      (abbreviate-file-name
+                                       cae-packages-freeze-file)))))
+    (with-temp-file cae-packages-freeze-file
+      (insert ";; -*- no-byte-compile: t; -*-\n"
+              ";;; packages.lock.el --- AUTO-GENERATED, DO NOT EDIT BY HAND\n\n"))
+    (message "Cleared frozen pins; run `doom sync' to thaw")))
+
+(defun cae-packages-bump-show-log ()
+  "Show a magit log of the new commits (old..new) for the package at point."
+  (interactive)
+  (let* ((spec (or (cae-packages--bump-spec-at-point)
+                   (user-error "No package on this line")))
+         (default-directory (file-name-as-directory (plist-get spec :repo))))
+    ;; `magit-log-arguments' returns (ARGS FILES); pass ARGS, ignore file filter.
+    (pcase-let ((`(,args ,_files) (magit-log-arguments)))
+      (magit-log-setup-buffer
+       (list (format "%s..%s" (plist-get spec :old) (plist-get spec :new)))
+       args nil))))
 
 (defun cae-packages-bump-review ()
   "Summarize the new commits for the package at point with an AI backend.
@@ -781,6 +787,60 @@ OpenAI, or any compatible endpoint."
              (cae-packages--bump-review-input spec)
              buffer)))
 
+(defun cae-packages-bump-toggle-mark ()
+  "Toggle the bump mark on the package at point, then move to the next line."
+  (interactive)
+  (let* ((spec (or (cae-packages--bump-spec-at-point)
+                   (user-error "No package on this line")))
+         (name (plist-get spec :name)))
+    (if (gethash name cae-packages--bump-marked)
+        (remhash name cae-packages--bump-marked)
+      (puthash name t cae-packages--bump-marked))
+    (cae-packages--bump-render)
+    (cae-packages--bump-goto name)
+    (forward-line 1)))
+
+(defun cae-packages-bump-mark-all ()
+  "Mark every outdated package for bumping."
+  (interactive)
+  (dolist (spec cae-packages--bump-specs)
+    (puthash (plist-get spec :name) t cae-packages--bump-marked))
+  (cae-packages--bump-render))
+
+(defun cae-packages-bump-unmark-all ()
+  "Unmark every package."
+  (interactive)
+  (clrhash cae-packages--bump-marked)
+  (cae-packages--bump-render))
+
+(defun cae-packages-bump-apply ()
+  "Write the new pins for all marked packages into `cae-packages-freeze-file'."
+  (interactive)
+  (let ((marked (cl-remove-if-not
+                 (lambda (s) (gethash (plist-get s :name) cae-packages--bump-marked))
+                 cae-packages--bump-specs)))
+    (unless marked
+      (user-error "No packages marked; use `a' to mark, `A' to mark all"))
+    (when (yes-or-no-p (format "Bump %d pin%s in %s? "
+                               (length marked)
+                               (if (= 1 (length marked)) "" "s")
+                               (file-name-nondirectory cae-packages-freeze-file)))
+      (cae-packages--bump-write marked)
+      (let ((n (length marked)))
+        (setq cae-packages--bump-specs
+              (cl-remove-if (lambda (s)
+                              (gethash (plist-get s :name) cae-packages--bump-marked))
+                            cae-packages--bump-specs))
+        (clrhash cae-packages--bump-marked)
+        (if cae-packages--bump-specs
+            (cae-packages--bump-render)
+          (let ((inhibit-read-only t))
+            (erase-buffer)
+            (insert "All bumps applied.  Run `doom sync' to install them.\n")))
+        (message "Bumped %d pin%s in %s; run `doom sync' to install"
+                 n (if (= 1 n) "" "s")
+                 (file-name-nondirectory cae-packages-freeze-file))))))
+
 ;;;###autoload
 (defun cae-packages-bump-pins ()
   "Fetch all frozen packages and review/apply pin bumps in an overview buffer.
@@ -798,34 +858,18 @@ RET to view a magit log of the new commits (old..new), `a' to mark a package
     ;; Warm up the local review model now so the first `r' review is fast --
     ;; it loads into VRAM while the (network-bound) fetch runs.
     (cae-packages--review-warmup)
-    (message "Fetching upstream for %d frozen packages (C-g to abort)..."
-             (length specs))
-    (cae-packages--bump-fetch
-     specs
-     (lambda (outdated)
-       (if (null outdated)
-           (message "All frozen packages are already up to date.")
-         (let ((buf (get-buffer-create "*cae package bumps*")))
-           (with-current-buffer buf
-             (cae-packages-bump-mode)
-             (setq cae-packages--bump-specs outdated
-                   cae-packages--bump-marked (make-hash-table :test #'equal)
-                   header-line-format
-                   " RET=log  r=AI-review  a=mark  A=mark-all  U=unmark-all  C-c C-c=apply  q=quit")
-             (cae-packages--bump-render)
-             (goto-char (point-min)))
-           (pop-to-buffer buf)
-           (message "%d package%s have upstream updates."
-                    (length outdated)
-                    (if (= 1 (length outdated)) "" "s"))))))))
-
-;; Bind in evil normal/motion states too; otherwise evil shadows the single-key
-;; bindings in `cae-packages-bump-mode-map'.
-(map! :map cae-packages-bump-mode-map
-      :nm "RET"     #'cae-packages-bump-show-log
-      :nm "r"       #'cae-packages-bump-review
-      :nm "a"       #'cae-packages-bump-toggle-mark
-      :nm "A"       #'cae-packages-bump-mark-all
-      :nm "U"       #'cae-packages-bump-unmark-all
-      :nm "q"       #'quit-window
-      :nm "C-c C-c" #'cae-packages-bump-apply)
+    (let ((buffer (get-buffer-create "*cae package bumps*")))
+      ;; Stop a fetch still running from a previous invocation into this buffer.
+      (let ((old (buffer-local-value 'cae-packages--bump-process buffer)))
+        (when (process-live-p old) (delete-process old)))
+      (with-current-buffer buffer
+        (cae-packages-bump-mode)        ; resets buffer-local state
+        (setq cae-packages--bump-specs nil
+              cae-packages--bump-marked (make-hash-table :test #'equal))
+        (cae-packages--bump-render)
+        (goto-char (point-min))
+        (add-hook 'kill-buffer-hook #'cae-packages--bump-kill-process nil t)
+        ;; Open the buffer empty and let results stream in as fetches finish.
+        (setq cae-packages--bump-process (cae-packages--bump-fetch specs buffer)))
+      (pop-to-buffer buffer)
+      (message "Fetching upstream for %d frozen packages..." (length specs)))))

@@ -35,9 +35,9 @@ Qwen3-0.6B speculative-decode draft.")
 open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 
 ;; Due to VRAM limitations, I use one model for everything currently.
-(setq cae-coding-fim-model cae-chat-model
-      cae-coding-agent-model cae-chat-model
-      cae-coding-reasoning-model cae-chat-model)
+(setq cae-coding-fim-model "qwen3-coder:30b"
+      cae-coding-agent-model "qwen3-coder:30b"
+      cae-coding-reasoning-model "qwen3-coder:30b")
 
 ;; Package-bump commit reviews (`cae-packages-bump-pins' -> `r') use the fast
 ;; A3B coder instead of the heavy 32B chat model: ~10x faster and better at
