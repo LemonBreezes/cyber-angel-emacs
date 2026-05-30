@@ -771,7 +771,9 @@ identical versions."
               ";;; packages.lock.el --- AUTO-GENERATED, DO NOT EDIT BY HAND\n;;\n"
               ";; Regenerate with `M-x cae-packages-freeze'.  Each entry pins a package\n"
               ";; to the commit it was installed at when this file was written.  Loaded\n"
-              ";; from the end of packages.el.\n\n")
+              ";; from the end of packages.el.\n;;\n"
+              ";; Bump all pins:  <cae-packages-bump-pins>\n"
+              ";; (Hyperbole action button -- press the Action Key, M-RET, on it.)\n\n")
       (dolist (pin pins)
         (insert (format "(package! %s :pin %S)\n" (car pin) (cdr pin)))))
     (message "Froze %d package%s to %s"
@@ -879,11 +881,21 @@ previously broke it (e.g. persp-mode)."
              (file-name-nondirectory cae-packages-bump-known-broken-file))))
 
 (defun cae-packages-bump-mark-all ()
-  "Mark every outdated package for bumping."
+  "Mark every outdated package for bumping, skipping known-broken ones.
+Packages flagged with `cae-packages-bump-toggle-broken' (`b') are left unmarked;
+mark them by hand if you really want to bump them."
   (interactive)
-  (dolist (spec cae-packages--bump-specs)
-    (puthash (plist-get spec :name) t cae-packages--bump-marked))
-  (cae-packages--bump-render))
+  (let ((skipped 0))
+    (dolist (spec cae-packages--bump-specs)
+      (let ((name (plist-get spec :name)))
+        (if (and cae-packages--bump-broken
+                 (gethash name cae-packages--bump-broken))
+            (setq skipped (1+ skipped))
+          (puthash name t cae-packages--bump-marked))))
+    (cae-packages--bump-render)
+    (when (> skipped 0)
+      (message "Marked all; skipped %d known-broken package%s (use `a' to mark by hand)"
+               skipped (if (= skipped 1) "" "s")))))
 
 (defun cae-packages-bump-unmark-all ()
   "Unmark every package."
