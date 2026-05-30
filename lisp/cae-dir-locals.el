@@ -7,7 +7,6 @@
                (not (cl-member (file-name-nondirectory (buffer-file-name))
                                `(,dir-locals-file "doctor.el" "packages.el")
                                :test #'string=))
-               (string= cae-packages-freeze-file buffer-file-name)
                (not (string-match-p "/packages/" buffer-file-name))
                (not (string-match-p "/trash/" buffer-file-name))
                (not (string-match-p "/benchmarks/" buffer-file-name))
