@@ -77,8 +77,3 @@
 ;; `save-some-buffers'.
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
-
-;; Hack around `envrc-mode' trying to run in scratch buffers.
-(cae-defadvice! cae-hacks-ignore-buffer-without-default-directory-a (&rest _)
-  :before-while #'envrc-global-mode-enable-in-buffer
-  (buffer-local-value 'default-directory (current-buffer)))
