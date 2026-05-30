@@ -41,5 +41,6 @@ custom.el
 .env
 
 **/.claude/settings.local.json
+**/.claude/scheduled_tasks.lock
 *.tex
 /.agent-shell/
