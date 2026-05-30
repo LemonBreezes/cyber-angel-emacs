@@ -99,7 +99,6 @@
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
 (package! girly-notebook-theme :recipe
   (:host github :repo "melissaboiko/girly-notebook-theme"))
-
 (package! vegetative-theme)
 (package! green-screen-theme)
 
