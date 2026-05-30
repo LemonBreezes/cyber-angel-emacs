@@ -111,29 +111,29 @@
     ;; working around with this.
     (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
-;; BUG `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
-(cae-defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
-  :before #'which-key--hide-buffer-side-window
-  (when (minibufferp)
-    (setq which-key--saved-window-configuration nil)))
-;; BUG Allow C-h to open Consult when calling which-key without a prefix.
-(when (modulep! :completion vertico)
-  (after! which-key
-    (setq which-key-use-C-h-commands t))
-  (defvar cae-which-key-current-keymap nil)
-  (cae-defadvice! cae-which-key-update-current-keymap-a
-    (_keymap-name keymap &rest args)
-    :before #'which-key--show-keymap
-    (setq cae-which-key-current-keymap keymap))
-  (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
-    :around #'which-key-C-h-dispatch
-    (cond ((not (which-key--popup-showing-p))
-           (setq this-command 'embark-prefix-help-command)
-           (call-interactively #'embark-prefix-help-command))
-          ((string-empty-p (which-key--current-key-string))
-           (setq this-command 'embark-prefix-help-command)
-           (embark-bindings-in-keymap cae-which-key-current-keymap))
-          (t (call-interactively #'embark-prefix-help-command)))))
+;;;; BUG `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
+;;(cae-defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
+;;  :before #'which-key--hide-buffer-side-window
+;;  (when (minibufferp)
+;;    (setq which-key--saved-window-configuration nil)))
+;;;; BUG Allow C-h to open Consult when calling which-key without a prefix.
+;;(when (modulep! :completion vertico)
+;;  (after! which-key
+;;    (setq which-key-use-C-h-commands t))
+;;  (defvar cae-which-key-current-keymap nil)
+;;  (cae-defadvice! cae-which-key-update-current-keymap-a
+;;    (_keymap-name keymap &rest args)
+;;    :before #'which-key--show-keymap
+;;    (setq cae-which-key-current-keymap keymap))
+;;  (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
+;;    :around #'which-key-C-h-dispatch
+;;    (cond ((not (which-key--popup-showing-p))
+;;           (setq this-command 'embark-prefix-help-command)
+;;           (call-interactively #'embark-prefix-help-command))
+;;          ((string-empty-p (which-key--current-key-string))
+;;           (setq this-command 'embark-prefix-help-command)
+;;           (embark-bindings-in-keymap cae-which-key-current-keymap))
+;;          (t (call-interactively #'embark-prefix-help-command)))))
 
 ;; Do not scale fonts in `writeroom-mode'.
 (setq +zen-text-scale 0.8)
