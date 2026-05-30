@@ -25,6 +25,11 @@
       (list (nth 0 args) (nth 2 args))
     args))
 
+;; Make `remove-hook' ignore the arguments after the first two.
+(cae-defadvice! cae-hacks-remove-hook (args)
+  :filter-args #'remove-hook
+  (list (nth 0 args) (nth 1 args) (nth 2 args)))
+
 ;; If `try' is used before the package list is loaded, fetch it.
 (cae-defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
   :before #'try
