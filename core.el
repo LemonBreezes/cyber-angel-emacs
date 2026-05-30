@@ -132,6 +132,9 @@ frameworks.")
                (bound-and-true-p cae-exwm-disabled-p)))
   (toggle-frame-fullscreen))
 
+(after! package
+  (setq package-quickstart t))
+
 ;; Load secrets
 (when (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
