@@ -32,23 +32,26 @@ Returns the ghostel buffer."
              (delete-window window))))
        (if-let* ((win (get-buffer-window buffer-name)))
            (delete-window win)
+         ;; Reuse the ghostel buffer we tagged earlier, or create one.  We must
+         ;; let `ghostel' name+create the buffer and use ITS return value:
+         ;; `ghostel'/`ghostel--create' always `generate-new-buffer', ignoring
+         ;; the current buffer.  Pre-creating it with `get-buffer-create' just
+         ;; collides, so `ghostel' uniquifies to "...<2>" and starts the real
+         ;; terminal there while we display the wrong, empty buffer.
          (let ((buffer (or (cl-loop for buf in (doom-buffers-in-mode 'ghostel-mode)
                                     if (equal (buffer-local-value 'cae-ghostel--id buf)
                                               buffer-name)
                                     return buf)
-                           (get-buffer-create buffer-name))))
-           (with-current-buffer buffer
-             (unless (derived-mode-p 'ghostel-mode)
-               ;; `ghostel' itself calls `pop-to-buffer' with
-               ;; `display-buffer--same-window-action', which forces the
-               ;; buffer into the selected window and defeats the popup
-               ;; rule.  Wrap in `save-window-excursion' so only the outer
-               ;; `pop-to-buffer' (which routes through `display-buffer-alist')
-               ;; controls placement.
-               (let ((ghostel-buffer-name buffer-name))
-                 (save-window-excursion
-                   (ghostel))))
-             (setq-local cae-ghostel--id buffer-name))
+                           (let ((ghostel-buffer-name buffer-name))
+                             ;; `ghostel' pops its buffer same-window; undo that
+                             ;; with `save-window-excursion' so our own
+                             ;; `pop-to-buffer' below routes through the popup
+                             ;; rule in `display-buffer-alist' instead.
+                             (save-window-excursion
+                               (let ((buf (ghostel)))
+                                 (with-current-buffer buf
+                                   (setq-local cae-ghostel--id buffer-name))
+                                 buf))))))
            (pop-to-buffer buffer)))
        (get-buffer buffer-name)))))
 
