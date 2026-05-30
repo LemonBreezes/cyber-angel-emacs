@@ -104,6 +104,7 @@
 (package! pink-bliss-uwu-theme)
 (package! vegetative-theme)
 (package! green-screen-theme)
+(package! cybercafe)
 
 ;; Export your theme.
 (package! theme-magic)
