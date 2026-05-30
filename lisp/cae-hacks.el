@@ -27,7 +27,7 @@
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
 
-;; Somehow this got into kill-
+;; Somehow this got into kill-emacs-hook without the package being loaded.
 (defalias 'org-clock-kill-emacs-query #'ignore)
 
 ;; If `try' is used before the package list is loaded, fetch it.
