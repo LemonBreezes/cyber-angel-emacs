@@ -33,9 +33,8 @@
 ;; Not sure if this does anything noticeable yet.
 (setq jit-lock-defer-time 0)
 
-;; BUG Enabling this can cause read-only errors when trying to copy text!
-;;(when (fboundp #'kill-ring-deindent-mode)
-;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
+(when (fboundp #'kill-ring-deindent-mode)
+  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
 (after! paren
   ;; BUG NEVER TURN THIS VARIABLE TO OVERLAY. IT WILL BREAK LISPY, SMARTPARENS,
