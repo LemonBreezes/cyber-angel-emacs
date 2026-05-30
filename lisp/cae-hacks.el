@@ -29,3 +29,9 @@
 
 ;; Somehow this got into kill-
 (defalias 'org-clock-kill-emacs-query #'ignore)
+
+;; If `try' is used before the package list is loaded, fetch it.
+(cae-defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
+  :before #'try
+  (unless package-archive-contents
+    (package--archives-initialize)))
