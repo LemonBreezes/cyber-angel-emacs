@@ -105,6 +105,7 @@
 (package! vegetative-theme)
 (package! green-screen-theme)
 
+;; Export themes elsewhere.
 (package! theme-magic)
 (package! ewal)
 
