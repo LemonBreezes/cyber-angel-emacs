@@ -63,11 +63,6 @@
 ;;Debugger entered--Lisp error: (no-catch emacs-version-changed nil)
 (cae-advice-add #'w3m-fix-melpa-installation :override #'ignore)
 
-(cae-defadvice! cae-handle-missing-xclip-program ()
-  :before-until #'doom-init-clipboard-in-tty-emacs-h
-  (and (memq system-type '(gnu gnu/linux gnu/kfreebsd))
-       (not (executable-find "xclip"))))
-
 ;; Always get a fresh command list so new commands show up immediately.
 (cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
   :before #'helm-external-commands-list-1
