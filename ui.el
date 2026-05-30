@@ -290,6 +290,7 @@
   (map! :map messages-buffer-mode-map :n "q" #'quit-window))
 
 (when (modulep! :ui workspaces)
+  (remove-hook 'persp-mode-hook #'+workspaces-ensure-no-nil-workspaces-h)
   (cae-defadvice! cae-which-key-show-workspace (orig-fun &rest pages-obj)
     "Show my workspaces in the echo area."
     :around #'which-key--process-page
