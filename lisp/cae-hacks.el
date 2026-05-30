@@ -30,41 +30,6 @@
   :filter-args #'remove-hook
   (list (nth 0 args) (nth 1 args) (nth 2 args)))
 
-;; If `try' is used before the package list is loaded, fetch it.
-(cae-defadvice! cae-hacks-try-package-refresh-contents-maybe (&rest _)
-  :before #'try
-  (unless package-archive-contents
-    (package--archives-initialize)))
-
-;; Make `eshell-previous-prompt' properly handle the case when there is no
-;; previous prompt. Normally it goes to the beginning of the buffer. I prefer
-;; for it to just stay on the first prompt.
-(cae-defadvice! cae-hacks-jump-back-if-bolp (oldfun &rest args)
-  :around #'eshell-previous-prompt
-  (let ((p (point)))
-    (apply oldfun args)
-    (when (bolp)
-      (goto-char p))))
-
-;; For backwards compatibility.
-(defun toggle-read-only (arg)
-  (read-only-mode
-   (cond ((not arg) (not buffer-read-only))
-         ((and (integerp arg) (<= arg 0)) nil)
-         (t t))))
-
-;; This is for finding and fixing commands that leave the current buffer and the
-;; window buffer out of sync.
-;;(add-hook! 'post-command-hook
-;;  (defun cae-catch-buffers-out-of-sync-h ()
-;;    (unless (eq (current-buffer) (window-buffer))
-;;      (message "Buffer out of sync: %s" (buffer-name)))))
-
-;; Always get a fresh command list so new commands show up immediately.
-(cae-defadvice! cae-force-refresh-external-commands-a (&optional _)
-  :before #'helm-external-commands-list-1
-  (setq helm-external-commands-list nil))
-
 ;; Work around a garbage change in Emacs31 that made viewing diffs not work in
 ;; `save-some-buffers'.
 (after! diff-mode
