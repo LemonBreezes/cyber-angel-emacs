@@ -8,7 +8,6 @@
   (package! copilot :recipe (:host github :repo "copilot-emacs/copilot.el")))
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
-(package! agent-shell)
 (package! pi-coding-agent)
 (package! fancy-dabbrev)
 
