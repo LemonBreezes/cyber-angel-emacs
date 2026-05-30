@@ -100,6 +100,7 @@
 (package! girly-notebook-theme :recipe
   (:host github :repo "melissaboiko/girly-notebook-theme"))
 (package! nothing-theme)
+(package! vegetative-theme)
 
 (package! theme-magic)
 (package! ewal)
