@@ -104,6 +104,7 @@
 (package! vegetative-theme)
 (package! green-screen-theme)
 (package! cybercafe-theme)
+(package! morrowind-theme)
 
 (package! theme-magic)
 (package! ewal)
