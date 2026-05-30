@@ -10,14 +10,6 @@
   "Generic advisor for silencing noisy functions."
   (quiet!! (apply fn args)))
 
-;; Prevent the minibuffer from "glitching" the workspace switch.
-(cae-defadvice! cae-hacks-workspace-ignore-minibuffer-a (&rest _)
-  :before-until #'+workspace/switch-to
-  (when (minibuffer-window-active-p (selected-window))
-    ;; Do not trigger the repeat map.
-    (setq this-command 'ignore
-          real-this-command 'ignore)))
-
 ;; Make `advice-remove' ignore the keyword argument
 (cae-defadvice! cae-hacks-advice-remove-ignore-keyword-args-a (args)
   :filter-args #'advice-remove
