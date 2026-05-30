@@ -55,6 +55,22 @@ Fetches the repo's current branch from origin and prints a TAB-separated
 \"REPO<TAB>FETCH_HEAD<TAB>NEW-COMMIT-COUNT\" line.  Driven by `xargs -P' for
 bounded concurrency.")
 
+;; Bump: packages known to break when their pin is bumped
+(defvar cae-packages-bump-known-broken-file
+  (file-name-concat doom-user-dir "packages.broken.el")
+  "File listing package names known to break when their pin is bumped.
+Holds a simple list of name strings (e.g. `(\"persp-mode\")'), maintained by
+`cae-packages-bump-toggle-broken' (press `b' in the `cae-packages-bump-pins'
+overview).  Such packages are flagged there with a `!', and `cae-packages-bump-apply'
+asks for an extra confirmation before bumping them.  Kept separate from
+`cae-packages-freeze-file' because `cae-packages-freeze' rewrites that file
+wholesale.  Read directly by the bump tool; it is NOT loaded by Doom.")
+
+(defvar-local cae-packages--bump-broken nil
+  "Hash table of package names (strings) flagged known-broken-on-bump.
+Populated from `cae-packages-bump-known-broken-file' for the current
+`cae-packages-bump-mode' buffer.")
+
 ;; AI review of a package's new commits (pluggable backend)
 (defvar cae-packages-bump-review-api-endpoint nil
   "OpenAI-compatible chat-completions endpoint used to review commits.
@@ -154,6 +170,7 @@ leaves just the summary.")
     (define-key map (kbd "a")       #'cae-packages-bump-toggle-mark)
     (define-key map (kbd "A")       #'cae-packages-bump-mark-all)
     (define-key map (kbd "U")       #'cae-packages-bump-unmark-all)
+    (define-key map (kbd "b")       #'cae-packages-bump-toggle-broken)
     (define-key map (kbd "C-c C-c") #'cae-packages-bump-apply)
     map)
   "Keymap for `cae-packages-bump-mode'.")
@@ -170,6 +187,7 @@ leaves just the summary.")
       :nm "a"       #'cae-packages-bump-toggle-mark
       :nm "A"       #'cae-packages-bump-mark-all
       :nm "U"       #'cae-packages-bump-unmark-all
+      :nm "b"       #'cae-packages-bump-toggle-broken
       :nm "q"       #'quit-window
       :nm "C-c C-c" #'cae-packages-bump-apply)
 
@@ -204,6 +222,37 @@ commit its local repo is currently checked out at."
           (push (cons (match-string 1) (match-string 2)) pins))))
     (nreverse pins)))
 
+(defun cae-packages--known-broken-read ()
+  "Return the known-broken package name strings from the broken file.
+Reads `cae-packages-bump-known-broken-file' and returns the last top-level list
+of strings found there (nil if the file is missing, empty, or unparseable)."
+  (when (file-readable-p cae-packages-bump-known-broken-file)
+    (ignore-errors
+      (with-temp-buffer
+        (insert-file-contents cae-packages-bump-known-broken-file)
+        (goto-char (point-min))
+        (let (result form)
+          (condition-case nil
+              (while t
+                (setq form (read (current-buffer)))
+                (when (and (listp form) (cl-every #'stringp form))
+                  (setq result form)))
+            (end-of-file nil))
+          result)))))
+
+(defun cae-packages--known-broken-write (names)
+  "Persist NAMES (package name strings) to `cae-packages-bump-known-broken-file'.
+NAMES are de-duplicated and sorted; the file can also be edited by hand."
+  (let ((names (cl-sort (delete-dups (copy-sequence names)) #'string<)))
+    (with-temp-file cae-packages-bump-known-broken-file
+      (insert ";; -*- no-byte-compile: t; -*-\n"
+              ";;; packages.broken.el --- packages known to break when their pin is bumped\n;;\n"
+              ";; Maintained by `cae-packages-bump-toggle-broken' (press `b' in the\n"
+              ";; `cae-packages-bump-pins' overview); flagged there with a `!'.  Read\n"
+              ";; directly by the bump tool -- NOT loaded by Doom.\n\n")
+      (prin1 names (current-buffer))
+      (insert "\n"))))
+
 (defun cae-packages--bump-collect-specs ()
   "Return specs (plists :name :repo :old) for every pinned, on-disk package."
   (doom-initialize-packages)
@@ -229,7 +278,7 @@ commit its local repo is currently checked out at."
             (cond
              ((and finished (zerop outdated)) " All frozen packages are up to date.")
              (finished
-              " RET=log  r=AI-review  a=mark  A=mark-all  U=unmark-all  C-c C-c=apply  q=quit")
+              " RET=log  r=AI-review  a=mark  A=mark-all  U=unmark-all  b=known-broken  C-c C-c=apply  q=quit")
              (t (format " Fetching %d/%d...  %d outdated so far  (kill buffer to abort)"
                         done total outdated)))))))
 
@@ -265,18 +314,24 @@ commit its local repo is currently checked out at."
         (format "Outdated frozen packages (%d)" (length cae-packages--bump-specs)))
       (insert "\n")
       (dolist (spec cae-packages--bump-specs)
-        (let ((name (plist-get spec :name)))
+        (let* ((name (plist-get spec :name))
+               (broken (and cae-packages--bump-broken
+                            (gethash name cae-packages--bump-broken))))
           (magit-insert-section (cae-packages-bump-item spec)
             (magit-insert-heading
-              (format "%s %-32s %s..%s  %d commit%s"
-                      (if (gethash name cae-packages--bump-marked)
-                          (propertize "*" 'face 'success)
-                        " ")
-                      name
-                      (substring (plist-get spec :old) 0 7)
-                      (substring (plist-get spec :new) 0 7)
-                      (plist-get spec :count)
-                      (if (= 1 (plist-get spec :count)) "" "s")))))))
+              (concat
+               (format "%s%s %-32s %s..%s  %d commit%s"
+                       (if (gethash name cae-packages--bump-marked)
+                           (propertize "*" 'face 'success)
+                         " ")
+                       (if broken (propertize "!" 'face 'error) " ")
+                       name
+                       (substring (plist-get spec :old) 0 7)
+                       (substring (plist-get spec :new) 0 7)
+                       (plist-get spec :count)
+                       (if (= 1 (plist-get spec :count)) "" "s"))
+               (when broken
+                 (propertize "  known to break on bump" 'face 'error))))))))
     (when at (cae-packages--bump-goto at))))
 
 (defun cae-packages--bump-fetch-filter (proc chunk)
@@ -800,6 +855,29 @@ OpenAI, or any compatible endpoint."
     (cae-packages--bump-goto name)
     (forward-line 1)))
 
+(defun cae-packages-bump-toggle-broken ()
+  "Toggle the \"known broken on bump\" flag for the package at point.
+Flagged packages are persisted to `cae-packages-bump-known-broken-file', shown
+with a `!' marker in the overview, and require an extra confirmation in
+`cae-packages-bump-apply'.  Use this to remember that bumping a package's pin
+previously broke it (e.g. persp-mode)."
+  (interactive)
+  (let* ((spec (or (cae-packages--bump-spec-at-point)
+                   (user-error "No package on this line")))
+         (name (plist-get spec :name)))
+    (if (gethash name cae-packages--bump-broken)
+        (remhash name cae-packages--bump-broken)
+      (puthash name t cae-packages--bump-broken))
+    ;; Persist the whole set so the flag survives across sessions/instances.
+    (cae-packages--known-broken-write
+     (cl-loop for k being the hash-keys of cae-packages--bump-broken collect k))
+    (cae-packages--bump-render)
+    (cae-packages--bump-goto name)
+    (message "%s %s known-broken-on-bump (saved to %s)"
+             name
+             (if (gethash name cae-packages--bump-broken) "flagged as" "no longer")
+             (file-name-nondirectory cae-packages-bump-known-broken-file))))
+
 (defun cae-packages-bump-mark-all ()
   "Mark every outdated package for bumping."
   (interactive)
@@ -816,11 +894,22 @@ OpenAI, or any compatible endpoint."
 (defun cae-packages-bump-apply ()
   "Write the new pins for all marked packages into `cae-packages-freeze-file'."
   (interactive)
-  (let ((marked (cl-remove-if-not
-                 (lambda (s) (gethash (plist-get s :name) cae-packages--bump-marked))
-                 cae-packages--bump-specs)))
+  (let* ((marked (cl-remove-if-not
+                  (lambda (s) (gethash (plist-get s :name) cae-packages--bump-marked))
+                  cae-packages--bump-specs))
+         (broken (cl-remove-if-not
+                  (lambda (s) (and cae-packages--bump-broken
+                                   (gethash (plist-get s :name) cae-packages--bump-broken)))
+                  marked)))
     (unless marked
       (user-error "No packages marked; use `a' to mark, `A' to mark all"))
+    (when (and broken
+               (not (yes-or-no-p
+                     (format "%s flagged known-broken-on-bump (%s).  Bump anyway? "
+                             (if (= 1 (length broken)) "1 marked package is"
+                               (format "%d marked packages are" (length broken)))
+                             (mapconcat (lambda (s) (plist-get s :name)) broken ", ")))))
+      (user-error "Aborted; press `b' to clear the flag or `a' to unmark first"))
     (when (yes-or-no-p (format "Bump %d pin%s in %s? "
                                (length marked)
                                (if (= 1 (length marked)) "" "s")
@@ -865,7 +954,10 @@ RET to view a magit log of the new commits (old..new), `a' to mark a package
       (with-current-buffer buffer
         (cae-packages-bump-mode)        ; resets buffer-local state
         (setq cae-packages--bump-specs nil
-              cae-packages--bump-marked (make-hash-table :test #'equal))
+              cae-packages--bump-marked (make-hash-table :test #'equal)
+              cae-packages--bump-broken (make-hash-table :test #'equal))
+        (dolist (name (cae-packages--known-broken-read))
+          (puthash name t cae-packages--bump-broken))
         (cae-packages--bump-render)
         (goto-char (point-min))
         (add-hook 'kill-buffer-hook #'cae-packages--bump-kill-process nil t)
