@@ -14,7 +14,7 @@
                (not (string-match-p "/vanilla-emacs-configs/" buffer-file-name))
                (not (string-match-p "/dir-local-files/" buffer-file-name))
                (bound-and-true-p cae-config-finished-loading))
-      (remove-hook 'write-file-functions 'eval-buffer 1 t))
+      (add-hook 'write-file-functions 'eval-buffer 1 t))
     (when (and (derived-mode-p 'emacs-lisp-mode)
                (not (equal (bound-and-true-p cae-packages-freeze-file) buffer-file-name))
                (require 'apheleia nil t))
