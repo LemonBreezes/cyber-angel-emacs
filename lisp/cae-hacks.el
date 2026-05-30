@@ -82,8 +82,6 @@
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
 
-(setq debug-on-message "Invalid face reference")
-
 ;; HACK I suspect this is actually a problem with `compile-angel' instead.
 ;; Replace the existing function definition with this refined version:
 (defun cae-delete-file-projectile-remove-from-cache (filename &optional _trash)
