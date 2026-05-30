@@ -155,11 +155,7 @@
 
   ;; I prefer to not use fonts in `shr' because it looks weird with the font
   ;; setup I have.
-  (setq shr-use-fonts nil)
-
-  ;; Sometimes EWW makes web pages unreadable by adding a bright background.
-  ;; Do not colorize backgrounds at all.
-  (cae-advice-add #'shr-colorize-region :around #'ignore))
+  (setq shr-use-fonts nil))
 
 ;; Allow switching to these buffers with `C-x b'
 (add-hook 'compilation-mode-hook #'doom-mark-buffer-as-real-h)
