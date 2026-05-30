@@ -46,6 +46,4 @@
   (map! :map ghostel-mode-map
         (:prefix "C-c"
                  "C-x" #'cae-ghostel-send-C-x)
-        :n "p" #'ghostel-yank
-        :n "P" #'ghostel-yank
         :n [remap evil-paste-pop] #'ghostel-yank-pop))
