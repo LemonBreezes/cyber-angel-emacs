@@ -26,3 +26,6 @@
 ;; `save-some-buffers'.
 (after! diff-mode
   (put 'diff-mode 'mode-class nil))
+
+;; Somehow this got into kill-
+(defalias 'org-clock-kill-emacs-query #'ignore)
