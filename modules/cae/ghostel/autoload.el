@@ -47,7 +47,8 @@ Returns the ghostel buffer."
                ;; controls placement.
                (let ((ghostel-buffer-name buffer-name))
                  (save-window-excursion
-                   (ghostel--create buffer-name))))
+                   (ghostel--create buffer-name)
+                   (ghostel--start-process))))
              (setq-local cae-ghostel--id buffer-name))
            (pop-to-buffer buffer)))
        (get-buffer buffer-name)))))
