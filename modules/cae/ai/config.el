@@ -19,17 +19,6 @@
 (defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M"
   "Default interactive chatgpt-shell model (general, not a coder).")
 
-;; Each coding role uses the model trained for that role -- collapsing them all
-;; onto `cae-chat-model` was a mistake (a Qwen3-VL chat model hallucinates Lean-3
-;; commands when asked to scaffold Lean 4, because it's a vision-language tune).
-;; Keep:
-;;   - cae-coding-fim-model      = codestral:22b   (vLLM-coder + suffix decode)
-;;   - cae-coding-agent-model    = devstral-small-2:24b   (SWE-bench-tuned)
-;;   - cae-coding-reasoning-model= gpt-oss:120b    (heavy reasoning)
-;;   - cae-chat-model            = a general chat model, separate
-;; To swap the agent to the fast A3B coder, set:
-;;   (setq cae-coding-agent-model "qwen3-coder:30b")  ; ~276 tok/s, tool-trained
-
 ;; Lean 4 theorem-proving models, served by the same Ollama on cae-ip-address:11434.
 ;; Settings come from the ollama-spec-proxy benchmarks (offload + speculative
 ;; decoding); the 32GB VRAM budget still holds.
@@ -95,7 +84,8 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
       (or width 4))
     (setq chatgpt-shell-ollama-api-url-base
           (format "http://%s:11434" cae-ip-address))
-    (chatgpt-shell-ollama-load-models)
+    (unless cae-config-finished-loading
+      (chatgpt-shell-ollama-load-models))
     (setq chatgpt-shell-model-version cae-chat-model)))
 
 (after! aidermacs
