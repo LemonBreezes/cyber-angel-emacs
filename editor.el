@@ -38,9 +38,9 @@
 ;;  (add-hook 'doom-first-input-hook #'kill-ring-deindent-mode))
 
 (after! paren
-  ;; BUG NEVER TURN THIS VARIABLE ON. IT WILL BREAK LISPY, SMARTPARENS,
+  ;; BUG NEVER TURN THIS VARIABLE TO OVERLAY. IT WILL BREAK LISPY, SMARTPARENS,
   ;; EVERYTHING!!!
-  (setq show-paren-context-when-offscreen nil) ; <--
+  (setq show-paren-context-when-offscreen 'child-frame) ; <--
   (setq show-paren-ring-bell-on-mismatch nil))
 
 ;; Reduce error spam in scratch buffers.
