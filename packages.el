@@ -96,6 +96,7 @@
 (package! standard-themes)
 (package! ef-themes)
 (package! doric-themes)
+;; Themes for when your eyes are bored.
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
 (package! girly-notebook-theme :recipe
   (:host github :repo "melissaboiko/girly-notebook-theme"))
