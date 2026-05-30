@@ -21,7 +21,6 @@
 (defalias 'cae-shut-up-a 'apply)
 (with-eval-after-load 'straight
   (add-to-list 'straight-built-in-pseudo-packages 'seq))
-(defalias 'org-clock-kill-emacs-query #'ignore)
 
 ;; If Smartparens is loaded, these will be overwritten. This is so Doom works
 ;; even if the Smartparens package is disabled.
