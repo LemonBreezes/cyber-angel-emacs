@@ -23,8 +23,7 @@
     (when (equal (buffer-file-name) (bound-and-true-p eshell-aliases-file))
       (add-hook 'after-save-hook #'eshell-read-aliases-list nil t))
     (when (and (eq system-type 'gnu/linux)
-               (bound-and-true-p doom-user-dir)
-               (not (file-in-directory-p (buffer-file-name) (concat doom-user-dir "secrets/")))
+               (not (string-match-p "/secrets/" (buffer-file-name)))
                (require 'git-auto-commit-mode nil t))
       (setq-local gac-automatically-add-new-files-p nil
                   gac-automatically-push-p t)
