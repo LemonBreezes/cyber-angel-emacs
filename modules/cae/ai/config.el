@@ -19,12 +19,6 @@
 (defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M"
   "Default interactive chatgpt-shell model (general, not a coder).")
 
-;; Package-bump commit reviews (`cae-packages-bump-pins' -> `r') use the fast
-;; A3B coder instead of the heavy 32B chat model: ~10x faster and better at
-;; reading diffs.  Set here; the lazy defvar in autoload/cae-packages.el honors it.
-(defvar cae-packages-bump-review-model)
-(setq cae-packages-bump-review-model "qwen3-coder:30b")
-
 ;; Lean 4 theorem-proving models, served by the same Ollama on cae-ip-address:11434.
 ;; Settings come from the ollama-spec-proxy benchmarks (offload + speculative
 ;; decoding); the 32GB VRAM budget still holds.
@@ -41,9 +35,12 @@ Qwen3-0.6B speculative-decode draft.")
 open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 
 ;; Due to VRAM limitations, I use one model for everything currently.
-(setq cae-coding-fim-model "qwen3-coder:30b"
-      cae-coding-agent-model "qwen3-coder:30b"
-      cae-coding-reasoning-model "qwen3-coder:30b")
+(setq cae-coding-fim-model cae-chat-model
+      cae-coding-agent-model cae-chat-model
+      cae-coding-reasoning-model cae-chat-model)
+
+(defvar cae-packages-bump-review-model)
+(setq cae-packages-bump-review-model cae-coding-agent-model)
 
 (after! minuet
   ;; Route completion through the local Ollama FIM endpoint.  cae/ai/config.el
