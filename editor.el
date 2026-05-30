@@ -43,9 +43,6 @@
   (setq show-paren-context-when-offscreen nil) ; <--
   (setq show-paren-ring-bell-on-mismatch nil))
 
-(cae-advice-add #'doom/kill-this-buffer-in-all-windows :around #'doom-set-jump-a)
-(cae-advice-add #'kill-this-buffer :around #'doom-set-jump-a)
-
 ;; Reduce error spam in scratch buffers.
 (add-hook 'doom-scratch-buffer-hook #'+emacs-lisp--flycheck-non-package-mode)
 
