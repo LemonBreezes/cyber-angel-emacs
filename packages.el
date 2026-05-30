@@ -99,6 +99,7 @@
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
 (package! girly-notebook-theme :recipe
   (:host github :repo "melissaboiko/girly-notebook-theme"))
+(package! temple-os :recipe (:host github :repo "Senka07/temple-os-emacs-theme"))
 
 (package! theme-magic)
 (package! ewal)
