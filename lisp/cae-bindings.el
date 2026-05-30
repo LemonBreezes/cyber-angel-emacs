@@ -152,6 +152,19 @@
        "TAB" nil))
 (setq tab-always-indent 'complete)
 
+;; Disable workspace switching commands in minibuffer.
+(define-key! :keymaps +default-minibuffer-maps
+  "M-1" #'digit-argument
+  "M-2" #'digit-argument
+  "M-3" #'digit-argument
+  "M-4" #'digit-argument
+  "M-5" #'digit-argument
+  "M-6" #'digit-argument
+  "M-7" #'digit-argument
+  "M-8" #'digit-argument
+  "M-9" #'digit-argument
+  "M-0" #'digit-argument)
+
 ;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
 ;; between TAB and C-i there.
 (unless (or (cae-display-graphic-p)
