@@ -39,8 +39,11 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
       cae-coding-agent-model cae-chat-model
       cae-coding-reasoning-model cae-chat-model)
 
+;; Package-bump commit reviews (`cae-packages-bump-pins' -> `r') use the fast
+;; A3B coder instead of the heavy 32B chat model: ~10x faster and better at
+;; reading diffs.  Set here; the lazy defvar in autoload/cae-packages.el honors it.
 (defvar cae-packages-bump-review-model)
-(setq cae-packages-bump-review-model cae-coding-agent-model)
+(setq cae-packages-bump-review-model "qwen3-coder:30b")
 
 (after! minuet
   ;; Route completion through the local Ollama FIM endpoint.  cae/ai/config.el
