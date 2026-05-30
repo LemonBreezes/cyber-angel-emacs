@@ -9,6 +9,7 @@
                                :test #'string=))
                (not (string-match-p "/packages/" buffer-file-name))
                (not (string-match-p "/trash/" buffer-file-name))
+               (string= cae-packages-freeze-file buffer-file-name)
                (not (string-match-p "/benchmarks/" buffer-file-name))
                (not (string-match-p "/vanilla-emacs-configs/" buffer-file-name))
                (not (string-match-p "/dir-local-files/" buffer-file-name))
