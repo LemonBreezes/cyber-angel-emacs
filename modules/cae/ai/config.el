@@ -87,8 +87,7 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
       (or width 4))
     (setq chatgpt-shell-ollama-api-url-base
           (format "http://%s:11434" cae-ip-address))
-    (unless cae-config-finished-loading
-      (chatgpt-shell-ollama-load-models))
+    (chatgpt-shell-ollama-load-models)
     (setq chatgpt-shell-model-version cae-chat-model)))
 
 (after! aidermacs
