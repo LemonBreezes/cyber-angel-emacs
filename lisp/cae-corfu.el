@@ -112,10 +112,3 @@ This variable needs to be set at the top-level before any `after!' blocks.")
 ;; Prefer Bash over Fish for completions because `emerge' completion is a lot
 ;; slower in Fish.
 (setq fish-completion-prefer-bash-completion t)
-
-;; BUG `corfu-terminal' does not work when using `read-string' in the terminal.
-;; For some reason in the latest update of emacs31, the tty child frame stopped
-;; working.
-;;(when (> emacs-major-version 30)
-;;  (cae-advice-add #'corfu--popup-support-p :override #'always)
-;;  (remove-hook 'corfu-mode-hook #'corfu-terminal-mode))
