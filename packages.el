@@ -99,11 +99,7 @@
 (package! crazy-theme :recipe (:host github :repo "eval-exec/crazy-theme.el"))
 (package! girly-notebook-theme :recipe
   (:host github :repo "melissaboiko/girly-notebook-theme"))
-
-(package! almost-mono-themes)
 (package! nothing-theme)
-(package! real-mono-themes)
-(package! tok-theme)
 
 (package! theme-magic)
 (package! ewal)
