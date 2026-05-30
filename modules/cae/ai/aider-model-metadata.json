@@ -40,6 +40,14 @@
     "litellm_provider": "openai", "mode": "chat",
     "supports_function_calling": true, "supports_vision": true
   },
+  "openai/qwen3-coder:30b": {
+    "max_input_tokens": 114688,
+    "max_output_tokens": 16384,
+    "max_tokens": 16384,
+    "input_cost_per_token": 0, "output_cost_per_token": 0,
+    "litellm_provider": "openai", "mode": "chat",
+    "supports_function_calling": true, "supports_vision": false
+  },
   "openai/leanstral:latest": {
     "max_input_tokens": 114688,
     "max_output_tokens": 16384,
