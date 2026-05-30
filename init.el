@@ -58,7 +58,7 @@
     (defvar cae-init-projectile-enabled-p (and c t))
     (defvar cae-init-evil-enabled-p (and c t))
     (defvar cae-init-exwm-enabled-p (and c t))
-    (defvar cae-init-geolocation-enabled-p (and c t)))
+    (defvar cae-init-geolocation-enabled-p (and c nil)))
   (defvar cae-init-keyboard-remaps-enabled-p (and q nil))
   (let ((p (and q t)))
     (defvar cae-init-ui-enabled-p (and p t))
