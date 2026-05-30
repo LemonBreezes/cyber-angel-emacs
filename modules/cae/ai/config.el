@@ -45,6 +45,11 @@ Qwen3-0.6B speculative-decode draft.")
   "Hardest Lean goals. Goedel-Prover-V2-32B (Qwen3-32B, ~90% miniF2F pass@32 --
 open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 
+;; Due to VRAM limitations, I use one model for everything currently.
+(setq cae-coding-fim-model cae-chat-model
+      cae-coding-agent-model cae-chat-model
+      cae-coding-reasoning-model cae-chat-model)
+
 (after! minuet
   ;; Route completion through the local Ollama FIM endpoint.  cae/ai/config.el
   ;; sets `minuet-provider' to `claude' as the global default; without overriding
@@ -71,7 +76,7 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
         (make-llm-ollama
          :host cae-ip-address
          :port 11434
-         :chat-model cae-chat-model)))
+         :chat-model cae-coding-agent-model)))
 
 (after! chatgpt-shell
   (when (bound-and-true-p cae-ip-address)
