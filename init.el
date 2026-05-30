@@ -60,7 +60,7 @@
     (defvar cae-init-exwm-enabled-p (and c t))
     (defvar cae-init-geolocation-enabled-p (and c t)))
   (defvar cae-init-keyboard-remaps-enabled-p (and q nil))
-  (let ((p (and q t)))
+  (let ((p (and q nil)))
     (defvar cae-init-ui-enabled-p (and p t))
     (defvar cae-init-tools-enabled-p (and p t))
     (defvar cae-init-editor-enabled-p (and p t))
