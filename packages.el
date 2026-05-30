@@ -103,7 +103,6 @@
 (package! nothing-theme)
 (package! vegetative-theme)
 (package! green-screen-theme)
-(package! cybercafe-theme)
 
 (package! theme-magic)
 (package! ewal)

@@ -123,3 +123,17 @@ Uses sunrise/sunset if location is valid, otherwise fixed times."
   (when (and (featurep 'circadian) cae-theme-enable-day-night-theme-switching)
     (message "Theme: Location changed, reconfiguring circadian.")
     (cae-theme--configure-circadian)))
+
+(defvar cae-fallback-theme 'wheatgrass
+  "Safe built-in fallback theme loaded by `cae-theme-load-fallback'.
+Matches the `doom-theme' set in preamble.el.")
+
+;;;###autoload
+(defun cae-theme-load-fallback ()
+  "Disable every enabled theme and load `cae-fallback-theme' (wheatgrass).
+A panic button for when theme switching leaves things in a broken state."
+  (interactive)
+  ;; Copy the list: `disable-theme' mutates `custom-enabled-themes' as we go.
+  (mapc #'disable-theme (copy-sequence custom-enabled-themes))
+  (load-theme cae-fallback-theme t)
+  (message "Theme: reset to fallback `%s'." cae-fallback-theme))
