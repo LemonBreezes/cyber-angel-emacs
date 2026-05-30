@@ -89,7 +89,6 @@
 (package! page-break-lines)
 (when (modulep! :lang org)
   (package! valign))
-(package! hyperbole)
 
 ;; cae-theme.el
 (package! modus-themes)
