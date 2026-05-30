@@ -84,6 +84,7 @@
         doom-modeline-mu4e nil
         doom-modeline-gnus nil
         doom-modeline-github nil
+        doom-modeline-remote-host nil
         doom-modeline-major-mode-icon (cae-display-graphic-p)))
 
 (setq-hook! 'treemacs-mode-hook
