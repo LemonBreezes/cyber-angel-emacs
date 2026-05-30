@@ -25,7 +25,7 @@
       (list (nth 0 args) (nth 2 args))
     args))
 
-;; Make `remove-hook' ignore the arguments after the first two.
+;; Make `remove-hook' ignore the arguments after the first three.
 (cae-defadvice! cae-hacks-remove-hook (args)
   :filter-args #'remove-hook
   (list (nth 0 args) (nth 1 args) (nth 2 args)))
