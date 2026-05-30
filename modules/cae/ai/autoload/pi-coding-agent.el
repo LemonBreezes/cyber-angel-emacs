@@ -6,7 +6,7 @@
   (require 'pi-coding-agent)
   (when (one-window-p)
     (split-window-horizontally)
-    (other-window))
+    (other-window 1))
   (let ((buf (if (derived-mode-p 'pi-coding-agent-chat-mode 'pi-coding-agent-input-mode)
                  (pi-coding-agent--get-chat-buffer)
                (car (pi-coding-agent-project-buffers)))))
