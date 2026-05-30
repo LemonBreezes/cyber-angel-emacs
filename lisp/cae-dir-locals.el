@@ -36,7 +36,7 @@
     (setq-local blamer--block-render-p t)
     (when (and (require 'git-auto-commit-mode nil t)
                (require 'vc-git nil t)
-               (file-equal-p (vc-git-root (buffer-file-name)) "~/"))
+               (equal (vc-git-root (buffer-file-name)) "~/"))
       (setq-local aidermacs-auto-commits t)
       (setq-local gac-automatically-add-new-files-p nil)
       (setq-local gac-automatically-push-p t)
