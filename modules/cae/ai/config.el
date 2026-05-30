@@ -71,7 +71,7 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
         (make-llm-ollama
          :host cae-ip-address
          :port 11434
-         :chat-model cae-coding-agent-model)))
+         :chat-model cae-chat-model)))
 
 (after! chatgpt-shell
   (when (bound-and-true-p cae-ip-address)

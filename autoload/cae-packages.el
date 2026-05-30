@@ -403,6 +403,33 @@ new dependencies or requirements, and anything risky for a downstream user.
 Finish with one line exactly: \"Recommendation: SAFE | REVIEW | RISKY\"."
   "Instruction text prepended to the commit log/diff sent to the review backend.")
 
+(defvar cae-packages-bump-review-model-metadata-file
+  (expand-file-name "modules/cae/ai/aider-model-metadata.json" doom-user-dir)
+  "litellm-style JSON of model context windows, keyed by \"openai/<tag>\".
+The review prompt is sized to the current model's `max_input_tokens' from this
+file, so it tracks the served context (e.g. vLLM `--max-model-len').")
+
+(defvar cae-packages-bump-review-chars-per-token 3.0
+  "Conservative characters-per-token estimate for sizing the review prompt.
+Lower is safer (less chance of overflowing the model's input budget).")
+
+(defvar cae-packages-bump-review-fallback-tokens 32768
+  "Served context (tokens) assumed when the model isn't in the metadata file.
+All the models in use serve at least this much.")
+
+(defvar cae-packages-bump-review-output-reserve-tokens 2048
+  "Tokens kept free for the model's reply when sizing the review prompt.
+A review reply is short, so most of the context window goes to the commit log
+\(unlike the metadata's `max_input_tokens', which reserves a large output budget
+for agentic tools like aider).")
+
+(defvar cae-packages-bump-review-max-input-chars nil
+  "Hard override (in characters) for the review prompt size.
+When nil (default), the budget is derived from the model's `max_input_tokens'
+in `cae-packages-bump-review-model-metadata-file'; if the model isn't listed,
+a conservative fallback is used.  Big bumps are reduced to subject-only logs
+and truncated to fit whichever budget applies.")
+
 (defun cae-packages--git-string (dir &rest args)
   "Run \"git ARGS\" in DIR and return its trimmed standard output."
   (with-temp-buffer
@@ -410,23 +437,76 @@ Finish with one line exactly: \"Recommendation: SAFE | REVIEW | RISKY\"."
       (apply #'process-file "git" nil t nil args))
     (string-trim (buffer-string))))
 
+(defun cae-packages--truncate (text limit label)
+  "Return TEXT cut to LIMIT chars, with a note mentioning LABEL when truncated."
+  (if (> (length text) limit)
+      (concat (substring text 0 limit)
+              (format "\n... [%s truncated to %d chars]" label limit))
+    text))
+
+(defun cae-packages--review-model-context-tokens ()
+  "Return the model's served context (max_input + max_output) from the metadata.
+That sum is the effective context window (e.g. vLLM `--max-model-len'); nil if
+the model isn't listed."
+  (let ((model (ignore-errors (cae-packages--review-model)))
+        (file cae-packages-bump-review-model-metadata-file))
+    (when (and model file (file-readable-p file))
+      (when-let* ((data (ignore-errors
+                          (with-temp-buffer
+                            (insert-file-contents file)
+                            (json-parse-buffer :object-type 'hash-table))))
+                  (entry (or (gethash (concat "openai/" model) data)
+                             (gethash model data)))
+                  (in (gethash "max_input_tokens" entry)))
+        (and (numberp in)
+             (truncate (+ in (let ((out (gethash "max_output_tokens" entry)))
+                               (if (numberp out) out 0)))))))))
+
+(defun cae-packages--review-budget-chars ()
+  "Character budget for the review prompt.
+`cae-packages-bump-review-max-input-chars' if set; otherwise the model's served
+context (from the metadata file, else `cae-packages-bump-review-fallback-tokens')
+minus `cae-packages-bump-review-output-reserve-tokens', converted to characters."
+  (or cae-packages-bump-review-max-input-chars
+      (let* ((ctx (or (cae-packages--review-model-context-tokens)
+                      cae-packages-bump-review-fallback-tokens))
+             (input (max 1024 (- ctx cae-packages-bump-review-output-reserve-tokens))))
+        (max 4000 (floor (* input cae-packages-bump-review-chars-per-token))))))
+
 (defun cae-packages--bump-review-input (spec)
-  "Build the full review prompt (instructions + commit log + diffstat) for SPEC."
-  (let ((repo (plist-get spec :repo))
-        (range (format "%s..%s" (plist-get spec :old) (plist-get spec :new))))
-    (concat
-     cae-packages-bump-review-prompt "\n\n"
-     (format "Package: %s\nCurrent pin: %s\nCandidate:   %s  (%d new commits)\n\n"
-             (plist-get spec :name) (plist-get spec :old)
-             (plist-get spec :new) (plist-get spec :count))
-     "=== git log " range " ===\n"
-     (cae-packages--git-string repo "log" "--no-merges"
-                               "--pretty=format:* %h %s%n%w(0,2,2)%b" range)
-     "\n\n=== git diff --stat " range " ===\n"
-     (cae-packages--git-string repo "diff" "--stat" range)
-     (when cae-packages-bump-review-include-diff
-       (concat "\n\n=== git diff " range " ===\n"
-               (cae-packages--git-string repo "diff" range))))))
+  "Build the review prompt for SPEC, budgeted to fit the model context.
+Uses subject-only logs for large bumps and truncates the log/diffstat/diff so
+the total stays under `cae-packages-bump-review-max-input-chars'."
+  (let* ((repo  (plist-get spec :repo))
+         (count (plist-get spec :count))
+         (range (format "%s..%s" (plist-get spec :old) (plist-get spec :new)))
+         (header (concat
+                  cae-packages-bump-review-prompt "\n\n"
+                  (format "Package: %s\nCurrent pin: %s\nCandidate:   %s  (%d new commits)\n\n"
+                          (plist-get spec :name) (plist-get spec :old)
+                          (plist-get spec :new) count)))
+         (budget (cae-packages--review-budget-chars))
+         (stat (cae-packages--truncate
+                (cae-packages--git-string repo "diff" "--stat" range)
+                (/ budget 4) "diffstat"))
+         ;; Subjects only once there are many commits; bodies blow up the size.
+         (fmt (if (> count 30) "%h %s" "* %h %s%n%w(0,2,2)%b"))
+         (log (cae-packages--truncate
+               (cae-packages--git-string
+                repo "log" "--no-merges" (concat "--pretty=format:" fmt) range)
+               (max 1000 (- budget (length header) (length stat) 300))
+               "commit log"))
+         (prompt
+          (concat header
+                  "=== git log " range " ===\n" log
+                  "\n\n=== git diff --stat " range " ===\n" stat
+                  (when cae-packages-bump-review-include-diff
+                    (concat "\n\n=== git diff " range " ===\n"
+                            (cae-packages--truncate
+                             (cae-packages--git-string repo "diff" range)
+                             (/ budget 3) "diff"))))))
+    ;; Hard backstop on the assembled prompt.
+    (cae-packages--truncate prompt budget "prompt")))
 
 (defun cae-packages--review-endpoint ()
   "Resolve the review endpoint URL (override, else derived from `cae-ip-address')."
