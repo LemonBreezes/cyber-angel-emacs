@@ -5,10 +5,8 @@
 
 (package! aidermacs :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
 (package! chatgpt-shell)
-(when (modulep! +copilot)
+(when (modulep! +fim)
   (package! copilot :recipe (:host github :repo "copilot-emacs/copilot.el")))
-(when (modulep! -copilot)
-  (package! minuet))
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
 (package! agent-shell)
