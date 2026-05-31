@@ -150,6 +150,7 @@
   (cae-defadvice! cae-which-key-update-current-keymap-a
     (_keymap-name keymap &rest args)
     :before #'which-key--show-keymap
+    (+log _keymap-name keymap this-command)
     (setq cae-which-key-current-keymap keymap))
   (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
     :around #'which-key-C-h-dispatch
