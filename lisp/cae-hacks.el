@@ -35,3 +35,7 @@
   :before #'try
   (unless package-archive-contents
     (package--archives-initialize)))
+
+;; Address Claude Code getting killed. Should be addressed differently though.
+(advice-add #'persp-kill-buffer-query-function :override
+            #'cae-persp-kill-buffer-query-function)
