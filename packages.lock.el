@@ -7,7 +7,6 @@
 
 (package! 0x0 :pin "04f95142b25d8bb701f239539176df6617dcd982")
 (package! adaptive-wrap :pin "6b9ffc18cdb1d3d18e2b9c3568bfb651f0ad517f")
-(package! agent-shell :pin "dcc3e878a60d82ad665de91bbcb323037329a948")
 (package! aidermacs :pin "9772db3e1969eec1df6a53b7d3e5597d07e3337f")
 (package! alarm-clock :pin "8a805d365aa38be32041c4e968bb624d3bb1b54b")
 (package! anzu :pin "21cb5ab2295614372cb9f1a21429381e49a6255f")
