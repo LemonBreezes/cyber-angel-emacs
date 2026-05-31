@@ -26,18 +26,12 @@
 ;;; Shell
 
 ;; bash-language-server runs background analysis over every shell file under
-;; the workspace root on startup. When that root is $HOME (e.g. a dotfiles repo
-;; with a .git at ~), it recursively walks the entire home tree and the Node
-;; process OOMs ("JavaScript heap out of memory"). lsp-mode reads
-;; `lsp-bash-glob-pattern' buffer-locally when spawning the server (via the
-;; GLOB_PATTERN env var), so blank it out only when the project root is $HOME;
-;; real repos keep the default workspace scan.
-(add-hook! 'lsp-before-open-hook
-  (defun cae-bash-disable-glob-in-home-h ()
-    "Disable bash-language-server's workspace scan when the root is $HOME."
-    (when (and (derived-mode-p 'sh-mode 'bash-ts-mode)
-               (file-equal-p (lsp--suggest-project-root) "~"))
-      (setq-local lsp-bash-glob-pattern ""))))
+;; the workspace root on startup. When the root resolves to $HOME (e.g. editing
+;; dotfiles), it recursively walks the whole home tree and the Node process OOMs
+;; ("JavaScript heap out of memory"). An empty glob pattern disables the
+;; workspace-wide scan so only open files are analyzed.
+(after! lsp-bash
+  (setq lsp-bash-glob-pattern ""))
 
 ;;; Fennel
 
