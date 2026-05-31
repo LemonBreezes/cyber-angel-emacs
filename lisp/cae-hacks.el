@@ -35,3 +35,15 @@
   :before #'try
   (unless package-archive-contents
     (package--archives-initialize)))
+
+;; Pending upstream PR doomemacs/doomemacs#8788: newer `persp-mode' calls
+;; `persp-before-deactivate-functions' with three arguments, but Doom adds the
+;; bare `deactivate-mark' (which only accepts an optional FORCE argument) to it,
+;; throwing (wrong-number-of-arguments deactivate-mark 3). Wrap it.
+(run-at-time 0.1 nil
+             (lambda ()
+               (after! persp-mode
+                 (remove-hook 'persp-before-deactivate-functions #'deactivate-mark)
+                 (add-hook 'persp-before-deactivate-functions
+                           (defun +workspaces-deactivate-mark-h (&rest _)
+                             (deactivate-mark))))))
