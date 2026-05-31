@@ -69,6 +69,56 @@
       (setq-local gac-automatically-push-p t)
       (git-auto-commit-mode 1))))
 
+(defun cae-stumpwm-reload-file ()
+  "Reload the visited file into the running StumpWM.
+This is the Common Lisp analogue of the `eval-buffer' hot-reload the
+'doom class performs for my Emacs Lisp.
+
+Prefer a live SLY connection: it evaluates over a socket inside the
+image, so errors land in the sly-db debugger and compiler notes keep
+their source locations.  Fall back to `stumpish' (an X-property round
+trip through StumpWM's command interpreter), which always works while
+StumpWM is running but flattens any result or error to one message line."
+  (when buffer-file-name
+    (let ((file (expand-file-name buffer-file-name)))
+      (cond
+       ((and (require 'sly nil t)
+             (sly-connected-p))
+        (sly-eval-async `(slynk:load-file ,file)
+                        (lambda (result)
+                          (message "StumpWM (SLY) reload: %s" result))))
+       ((executable-find "stumpish")
+        (with-temp-buffer
+          (call-process "stumpish" nil t nil "eval" (format "(load %S)" file))
+          (let ((out (string-trim (buffer-string))))
+            (unless (string-empty-p out)
+              (message "StumpWM reload: %s" out)))))))))
+
+(defun cae--setup-stumpwm-dir-locals ()
+  "Setup directory locals for the 'stumpwm class.
+For the Common Lisp files in ~/.stumpwm.d this mirrors the 'doom class:
+refuse to save when parens are unbalanced, hot-reload the running
+StumpWM image after a successful save, and auto-format on save."
+  (when (and (buffer-file-name)
+             (derived-mode-p 'lisp-mode)
+             (not (string= (file-name-nondirectory (buffer-file-name))
+                           dir-locals-file)))
+    ;; Abort the save on unbalanced parens — the CL analogue of the
+    ;; `eval-buffer' guard the 'doom class puts on `write-file-functions'.
+    (add-hook 'write-file-functions #'check-parens nil t)
+    ;; Hot-reload into the live StumpWM image once the file hits disk.
+    (add-hook 'after-save-hook #'cae-stumpwm-reload-file nil t)
+    ;; Auto-format on save (apheleia maps `lisp-mode' -> `lisp-indent').
+    (when (require 'apheleia nil t)
+      (apheleia-mode +1))
+    (setq-local blamer--block-render-p t)
+    (setq-local aidermacs-auto-commits t)
+    (when (and (eq system-type 'gnu/linux)
+               (require 'git-auto-commit-mode nil t))
+      (setq-local gac-automatically-add-new-files-p nil
+                  gac-automatically-push-p t)
+      (git-auto-commit-mode 1))))
+
 ;; Requires updating.
 ;;(defun cae--setup-polybar-dir-locals ()
 ;;  "Setup directory locals for the 'polybar class, inheriting from 'home."
@@ -109,6 +159,13 @@
  '((nil . ((eval . (cae--setup-secrets-dir-locals))))))
 
 (dir-locals-set-directory-class cae-multi-secrets-dir 'secrets)
+
+(dir-locals-set-class-variables
+ 'stumpwm
+ '((nil . ((eval . (cae--setup-stumpwm-dir-locals))))))
+
+(when (eq system-type 'gnu/linux)
+  (dir-locals-set-directory-class (expand-file-name "~/.stumpwm.d") 'stumpwm))
 
 (dir-locals-set-class-variables
  'polybar

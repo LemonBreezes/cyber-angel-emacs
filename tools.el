@@ -36,7 +36,21 @@
         "o" #'ace-link-w3m))
 
 ;; Set up the default browser.
-(defvar cae-generic-browser-name 'google-chrome)
+(defvar cae-generic-browser-name nil
+  "Human-facing name of the resolved generic browser, e.g. \"Firefox\".")
+(defconst cae-generic-browser-priority
+  '(("librewolf"              "LibreWolf" "--new-tab")
+    ("librewolf-bin"          "LibreWolf" "--new-tab")
+    ("firefox"                "Firefox"   "--new-tab")
+    ("firefox-beta"           "Firefox"   "--new-tab")
+    ("firefox-bin"            "Firefox"   "--new-tab")
+    ("chromium-bin-browser"   "Chrome")
+    ("chromium-browser"       "Chrome")
+    ("google-chrome-unstable" "Chrome")
+    ("google-chrome-stable"   "Chrome"))
+  "Browsers to try for `browse-url-generic', in priority order.
+Each entry is (BINARY DISPLAY-NAME . NEW-TAB-ARGS).  Mirrors the list in
+~/.config/bin/launch-browser used by the window managers; keep in sync.")
 (after! browse-url
   (setq browse-url-secondary-browser-function
         (if (eq browse-url-secondary-browser-function
@@ -50,30 +64,28 @@
               (t #'browse-url-generic))
         browse-url-firefox-new-window-is-tab t)
 
-  (defvar cae-generic-browser-name nil)
-
   (cond
+   ;; WSL: hand URLs to the Windows host instead.
    ((getenv "WSL_DISTRO_NAME")
     (setq browse-url-generic-program "/mnt/c/Windows/System32/cmd.exe"
           browse-url-generic-args '("/c" "start")))
 
-   ((when-let ((chrome (seq-some #'executable-find
-                                 '("chromium-bin-browser"
-                                   "chromium-browser"
-                                   "google-chrome-unstable"
-                                   "google-chrome-stable"))))
-      (setq browse-url-generic-program chrome
-            browse-url-generic-args (when (eq (user-uid) 0)
-                                      '("--no-sandbox"))
-            cae-generic-browser-name "Chrome")))
+   ;; Pick the first available browser from the priority list.
+   ((cl-some
+     (lambda (entry)
+       (when-let ((program (executable-find (car entry))))
+         (setq browse-url-generic-program program
+               cae-generic-browser-name (cadr entry)
+               browse-url-generic-args
+               (if (string= (cadr entry) "Chrome")
+                   ;; Chromium-family browsers need --no-sandbox under root.
+                   (and (eq (user-uid) 0) '("--no-sandbox"))
+                 (cddr entry)))
+         t))
+     cae-generic-browser-priority))
 
-   ((seq-some (lambda (firefox)
-                (when-let ((program (executable-find firefox)))
-                  (setq browse-url-generic-program program
-                        browse-url-generic-args '("--new-tab")
-                        cae-generic-browser-name "Firefox")
-                  t))
-              '("firefox-beta" "firefox" "firefox-bin")))))
+   (t
+    (warn! "Couldn't find any supported browser. External browsing capabilities will be limited."))))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 (add-to-list 'auto-mode-alist '("/sway/.*config.*/" . i3wm-config-mode))
