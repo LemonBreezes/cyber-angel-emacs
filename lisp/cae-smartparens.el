@@ -20,13 +20,14 @@
                  #'+snippets--disable-smartparens-before-expand-h))
 
   ;; This is how we get curly braces working in C without `smartparens'.
-  (setq electric-pair-pairs '((?\" . ?\")
-                              (?\{ . ?\})
-                              (?\[ . ?\]))
-        electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit
-        electric-pair-open-newline-between-pairs t)
-  (electric-pair-mode +1)
-  (map! [remap newline] nil))
+  (after! elec-pair
+    (setq electric-pair-pairs '((?\" . ?\")
+                                (?\{ . ?\})
+                                (?\[ . ?\]))
+          electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit
+          electric-pair-open-newline-between-pairs t)
+    (map! [remap newline] nil)
+    (add-hook 'doom-first-input-hook #'electric-pair-mode)))
 
 (when (modulep! :config default +smartparens)
   (after! smartparens
