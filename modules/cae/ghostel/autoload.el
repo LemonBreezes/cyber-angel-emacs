@@ -111,3 +111,8 @@ Returns the ghostel buffer."
   (call-interactively #'ghostel))
 
 
+;;;###autoload
+(defun ghostel-send-C-space ()
+  "Send EOF to the terminal."
+  (interactive)
+  (ghostel--send-encoded "\s" "ctrl"))
