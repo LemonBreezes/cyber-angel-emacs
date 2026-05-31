@@ -40,7 +40,8 @@
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
 
-(cae-defadvice! cae-hacks-debug-evil-local-tate (&rest _)
+;; Trying squash a bug.
+(cae-defadvice! cae-hacks-debug-evil-initialize-state (&rest _)
   :after #'evil-initialize-state
   (when (minibufferp)
     (backtrace)))
