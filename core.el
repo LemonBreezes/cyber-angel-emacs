@@ -132,10 +132,6 @@ frameworks.")
                (bound-and-true-p cae-exwm-disabled-p)))
   (toggle-frame-fullscreen))
 
-;; For package menu.
-(after! package
-  (setq package-quickstart t))
-
 ;; Load secrets
 (when (and cae-init-secrets-enabled-p
            (file-exists-p (concat cae-multi-secrets-dir "secrets.el")))
