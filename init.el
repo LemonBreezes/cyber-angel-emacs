@@ -151,6 +151,7 @@
          (gdscript +lsp +tree-sitter)
          (graphviz +lsp +tree-sitter)
          (rust +lsp +tree-sitter)
+         (common-lisp +lsp +tree-sitter)
 
          :os
          (:if IS-MAC macos)
