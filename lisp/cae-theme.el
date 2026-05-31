@@ -240,14 +240,69 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
       (when (and (not (equal wm "stumpwm"))
                  (file-executable-p launch))
         (call-process launch nil 0 nil (if wm "example" "example-ratpoison")))))
+  (defvar cae-theme-magic-after-apply-functions nil
+    "Abnormal hook run when an async pywal export finishes.
+Each function receives one argument: non-nil if pywal exited
+successfully.  Since pywal now runs asynchronously (see the `:config'
+overrides below), theme-dependent side effects such as reloading the WM
+bar must run from here, once the colors have actually been written.")
   (defun cae-theme-magic-export-theme-h ()
+    "Export the current theme to the rest of Linux via pywal (async).
+The bar reloads and the last-applied bookkeeping run from
+`cae-theme-magic-after-apply-functions' once pywal finishes."
     (unless (eq (car custom-enabled-themes)
                 (doom-store-get 'cae-theme-last-applied))
-      (theme-magic-from-emacs)
+      (theme-magic-from-emacs)))
+  (defun cae-theme-magic-after-apply-h (success)
+    "Reload the WM bar and record the applied theme after pywal SUCCESS."
+    (when success
       (cae-theme-magic-reload-stumpwm-h)
       (cae-theme-magic-reload-polybar-h)
       (doom-store-put 'cae-theme-last-applied (car custom-enabled-themes))))
-  (add-hook 'doom-load-theme-hook #'cae-theme-magic-export-theme-h))
+  (add-hook 'cae-theme-magic-after-apply-functions #'cae-theme-magic-after-apply-h)
+  (add-hook 'doom-load-theme-hook #'cae-theme-magic-export-theme-h)
+  :config
+  ;; Make pywal export asynchronous: upstream `theme-magic--call-pywal-process'
+  ;; blocks Emacs on a synchronous `call-process' until the Python script
+  ;; finishes.  Override it to use `start-process' and report the result from a
+  ;; sentinel instead, so loading a theme never freezes the UI.
+  (defun cae-theme-magic--pywal-sentinel (proc _event)
+    "Report the result of async pywal PROC and run the after-apply hook."
+    (when (memq (process-status proc) '(exit signal))
+      (let ((ok (and (eq (process-status proc) 'exit)
+                     (zerop (process-exit-status proc)))))
+        (if ok
+            (message "Successfully applied colors!")
+          (message "theme-magic: error applying colors (see buffer %S)"
+                   theme-magic--pywal-buffer-name))
+        (run-hook-with-args 'cae-theme-magic-after-apply-functions ok))))
+  (defadvice! cae-theme-magic--call-pywal-async-a (colors)
+    "Run the pywal theming script asynchronously via `start-process'.
+Returns the process object; completion is handled by
+`cae-theme-magic--pywal-sentinel'."
+    :override #'theme-magic--call-pywal-process
+    (theme-magic--erase-pywal-buffer)
+    (let* ((default-directory "~/")
+           (process-connection-type nil)
+           (proc (apply #'start-process
+                        "theme-magic-pywal"
+                        theme-magic--pywal-buffer-name
+                        "python"
+                        theme-magic--pywal-python-script
+                        colors)))
+      (set-process-query-on-exit-flag proc nil)
+      (set-process-sentinel proc #'cae-theme-magic--pywal-sentinel)
+      proc))
+  (defadvice! cae-theme-magic--apply-colors-async-a (colors)
+    "Async variant of `theme-magic--apply-colors-with-pywal'.
+Starts pywal and lets the sentinel report success/failure rather than
+branching on a synchronous exit code."
+    :override #'theme-magic--apply-colors-with-pywal
+    (message "Applying colors:\n%s"
+             (cl-mapcar #'cons
+                        (number-sequence 0 (length colors))
+                        colors))
+    (theme-magic--call-pywal-process colors)))
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
