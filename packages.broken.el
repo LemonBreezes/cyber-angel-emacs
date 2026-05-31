@@ -5,4 +5,3 @@
 ;; `cae-packages-bump-pins' overview); flagged there with a `!'.  Read
 ;; directly by the bump tool -- NOT loaded by Doom.
 
-("persp-mode")
