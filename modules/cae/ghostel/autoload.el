@@ -112,7 +112,9 @@ In Emacs `C-SPC' is bound to a command (completion-at-point,
 forces it through to the running program (e.g. to set the mark in
 a terminal Emacs or to send NUL)."
   (interactive)
-  (ghostel-send-key "space" "ctrl"))
+  (ghostel-send-key "space" "ctrl")
+  (when (and (featurep 'evil) (evil-normal-state-p))
+    (evil-insert-state)))
 
 ;;;###autoload
 (defun cae-ghostel-workspace ()
