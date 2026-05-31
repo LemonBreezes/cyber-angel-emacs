@@ -25,13 +25,14 @@
 
 ;;; Shell
 
-;; bash-language-server runs background analysis over every shell file under
-;; the workspace root on startup. When the root resolves to $HOME (e.g. editing
-;; dotfiles), it recursively walks the whole home tree and the Node process OOMs
-;; ("JavaScript heap out of memory"). An empty glob pattern disables the
-;; workspace-wide scan so only open files are analyzed.
+;; Fixes OOM error.
+(defun cae-lsp-bash-bg-max-files ()
+  (when (equal (or (lsp-workspace-root) default-directory)
+               (expand-file-name "~/"))
+    0))
 (after! lsp-bash
-  (setq lsp-bash-glob-pattern ""))
+  (lsp-register-custom-settings
+   '(("bashIde.backgroundAnalysisMaxFiles" cae-lsp-bash-bg-max-files))))
 
 ;;; Fennel
 
