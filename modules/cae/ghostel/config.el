@@ -48,4 +48,5 @@
                  "C-x" #'cae-ghostel-send-C-x)
         :n "p" #'ghostel-yank
         :n "P" #'ghostel-yank
-        :n [remap evil-paste-pop] #'ghostel-yank-pop))
+        :n [remap evil-paste-pop] #'ghostel-yank-pop
+        :g "C-SPC" #'ghostel-send-C-space ))
