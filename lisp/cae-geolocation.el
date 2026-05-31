@@ -1,6 +1,6 @@
 ;;; lisp/cae-geolocation.el -*- lexical-binding: t; -*-
 
-(defvar cae-geolocation-verbose nil
+(defvar cae-geolocation-verbose t
   "When non-nil, display geolocation status messages.
 When nil, geolocation operates silently unless errors occur.")
 
