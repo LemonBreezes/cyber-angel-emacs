@@ -152,6 +152,9 @@
     :before #'which-key--show-keymap
     (setq cae-which-key-current-keymap
           keymap))
+  (cae-defadvice! cae-which-key-update-top-level-keymap-a (&rest _)
+    :before #'which-key-show-top-level
+    (setq cae-which-key-current-keymap (current-global-map)))
   (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
     :around #'which-key-C-h-dispatch
     (cond ((not (which-key--popup-showing-p))
@@ -159,7 +162,8 @@
            (call-interactively #'embark-prefix-help-command))
           ((string-empty-p (which-key--current-key-string))
            (setq this-command 'embark-prefix-help-command)
-           (embark-bindings-in-keymap cae-which-key-current-keymap))
+           (embark-bindings-in-keymap (or cae-which-key-current-keymap
+                                          (current-global-map))))
           (t (call-interactively #'embark-prefix-help-command)))))
 
 ;; Do not scale fonts in `writeroom-mode'.
