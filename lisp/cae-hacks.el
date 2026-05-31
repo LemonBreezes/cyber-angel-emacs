@@ -44,3 +44,7 @@
   :after #'evil-initialize-state
   (when (minibufferp)
     (backtrace)))
+(cae-defadvice! cae-hacks-debug-evil-local-state (&rest _)
+  :after #'evil-local-mode
+  (when (minibufferp)
+    (backtrace)))
