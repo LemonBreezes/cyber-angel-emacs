@@ -311,7 +311,7 @@
   (add-hook 'doom-first-input-hook #'restore-point-mode)
   :config
   (defun cae-restore-point-handle-mark-and-conditional-disable (oldfun)
-    (unless (derived-mode-p 'ghostle-mode)
+    (unless (derived-mode-p 'ghostel-mode)
       (funcall oldfun)
       (deactivate-mark)))
   (cae-advice-add #'rp/restore-point-position :around

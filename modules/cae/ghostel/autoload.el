@@ -105,6 +105,16 @@ Returns the ghostel buffer."
   (ghostel--send-encoded "x" "ctrl"))
 
 ;;;###autoload
+(defun cae-ghostel-send-C-SPC ()
+  "Send a literal C-SPC to the terminal.
+In Emacs `C-SPC' is bound to a command (completion-at-point,
+`set-mark-command', etc.), so it never reaches the shell. This
+forces it through to the running program (e.g. to set the mark in
+a terminal Emacs or to send NUL)."
+  (interactive)
+  (ghostel-send-key "space" "ctrl"))
+
+;;;###autoload
 (defun cae-ghostel-workspace ()
   (interactive)
   (+workspace-switch "*ghostel*" t)
