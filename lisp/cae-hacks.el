@@ -37,6 +37,7 @@
     (package--archives-initialize)))
 
 ;; Address Claude Code getting killed. Should be addressed differently though.
+;; Should probably add debug info to this advice to fix it properly.
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
 
