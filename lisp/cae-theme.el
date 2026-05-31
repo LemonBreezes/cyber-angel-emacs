@@ -225,7 +225,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 (use-package! theme-magic
   :if cae-theme-export-theme-with-pywal
-  :defer-incrementally t :init
+  :defer t :defer-incrementally t :init
   (defun cae-theme-magic-reload-stumpwm-h ()
     (when (and (executable-find "stumpish")
                (equal (cae-wm-name) "stumpwm"))
