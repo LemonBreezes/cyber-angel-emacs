@@ -53,4 +53,10 @@
                  "C-x" #'cae-ghostel-send-C-x)
         :n "p" #'ghostel-yank
         :n "P" #'ghostel-yank
-        :n [remap evil-paste-pop] #'ghostel-yank-pop))
+        :n [remap evil-paste-pop] #'ghostel-yank-pop)
+
+  (when (modulep! :completion corfu)
+    (after! corfu
+      (when (not (listp global-corfu-modes))
+        (setq global-corfu-modes (list t)))
+      (add-to-list 'global-corfu-modes '(not ghostel-mode)))))
