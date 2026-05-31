@@ -89,8 +89,8 @@
             ("s" "~/src/" "Source code")
             ("t" "~/.local/share/Trash/files/" "TrashCan"))))
 
-;;(after! dirvish-side
-;;  (dirvish-side-follow-mode 1))
+(after! dirvish-side
+  (dirvish-side-follow-mode 1))
 
 (add-hook! 'dirvish-setup-hook
   (when (string-match-p "Downloads"
