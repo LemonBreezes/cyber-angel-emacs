@@ -226,7 +226,8 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
 ;;; ----------------------------------------------------------------------------
 
 (use-package! circadian
-  :when cae-theme-enable-day-night-theme-switching
+  :when (and cae-theme-enable-day-night-theme-switching
+             (not cae-config-finished-loading))
   :defer t :defer-incrementally t :init
   ;; Add the hook to update circadian when geolocation changes.
   (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
