@@ -35,4 +35,3 @@
   :before #'try
   (unless package-archive-contents
     (package--archives-initialize)))
-
