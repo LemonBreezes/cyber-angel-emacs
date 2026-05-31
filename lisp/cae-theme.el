@@ -230,11 +230,22 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     (when (and (executable-find "stumpish")
                (equal (cae-wm-name) "stumpwm"))
       (call-process "stumpish" nil 0 nil "reload-colors")))
+  (defun cae-theme-magic-reload-polybar-h ()
+    ;; pywal's reload runs `pkill -USR1 polybar', which terminates polybar 3.x
+    ;; rather than reloading it, so relaunch the bars after a theme change.
+    ;; StumpWM draws its own mode-line (handled above); ratpoison advertises no
+    ;; EWMH name (`cae-wm-name' is nil) and needs the override-redirect bar.
+    (let ((wm (cae-wm-name))
+          (launch (expand-file-name "~/.config/polybar/launch.sh")))
+      (when (and (not (equal wm "stumpwm"))
+                 (file-executable-p launch))
+        (call-process launch nil 0 nil (if wm "example" "example-ratpoison")))))
   (defun cae-theme-magic-export-theme-h ()
     (unless (eq (car custom-enabled-themes)
                 (doom-store-get 'cae-theme-last-applied))
       (theme-magic-from-emacs)
       (cae-theme-magic-reload-stumpwm-h)
+      (cae-theme-magic-reload-polybar-h)
       (doom-store-put 'cae-theme-last-applied (car custom-enabled-themes))))
   (add-hook 'doom-load-theme-hook #'cae-theme-magic-export-theme-h))
 
