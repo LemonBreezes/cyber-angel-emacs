@@ -39,3 +39,8 @@
 ;; Address Claude Code getting killed. Should be addressed differently though.
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
+
+(cae-defadvice! cae-hacks-debug-evil-normal-state-a (&rest _)
+  :after #'evil-normal-state
+  (when (minibufferp)
+    (backtrace)))
