@@ -1,8 +1,5 @@
 ;;; autoload/cae-geolocation.el -*- lexical-binding: t; -*-
 
-(require 'url)
-(require 'json)
-
 ;;;###autoload
 (defun cae-geolocation-significant-change-p (lat1 lng1 lat2 lng2)
   "Return t if the change in location from LAT1,LNG1 to LAT2,LNG2 is significant.
