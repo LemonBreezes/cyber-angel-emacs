@@ -2,9 +2,7 @@
 
 (require 'cae-lib)
 
-;;; ----------------------------------------------------------------------------
 ;;; Options and theme selection
-;;; ----------------------------------------------------------------------------
 
 (defvar cae-theme-enable-modeline-bell t)
 (defvar cae-theme-extend-heading-faces t)
@@ -33,9 +31,7 @@
 (defvar cae-day-theme (if (eq cae-theme-family 'modus) cae-modus-day-theme cae-ef-day-theme))
 (defvar cae-night-theme (if (eq cae-theme-family 'modus) cae-modus-night-theme cae-ef-night-theme))
 
-;;; ----------------------------------------------------------------------------
 ;;; Modeline bell
-;;; ----------------------------------------------------------------------------
 
 (when cae-theme-enable-modeline-bell
   (defface cae-modeline-bell-face
@@ -44,9 +40,7 @@
   (setq visible-bell t
         ring-bell-function #'cae-theme-ring-bell-function))
 
-;;; ----------------------------------------------------------------------------
 ;;; Mixed-pitch fonts
-;;; ----------------------------------------------------------------------------
 
 (when cae-theme-enable-mixed-pitch-fonts
   (defvar cae-theme-mixed-pitch-modes '(org-mode LaTeX-mode markdown-mode gfm-mode Info-mode)
@@ -63,9 +57,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
   (add-hook 'doom-init-ui-hook #'cae-theme-init-mixed-pitch-h))
 
-;;; ----------------------------------------------------------------------------
 ;;; Outline / heading faces
-;;; ----------------------------------------------------------------------------
 
 ;; Disable Outline highlighting
 (when cae-theme-disable-outline-headings
@@ -92,9 +84,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
     :defer t :init
     (cae-advice-add #'outline-flag-region :after #'backline-update)))
 
-;;; ----------------------------------------------------------------------------
 ;;; Re-run the theme hook for commands that bypass it
-;;; ----------------------------------------------------------------------------
 
 ;; I can PR a fix to Doom once we drop support for Emacs 28.
 (cae-defadvice! cae-run-theme-hook-h (_)
@@ -104,20 +94,18 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   (defun cae-run-theme-hook-h (_)
     (run-hooks 'doom-load-theme-hook)))
 
-;;; ----------------------------------------------------------------------------
 ;;; Custom face tweaks
-;;; ----------------------------------------------------------------------------
 
 (defun cae-theme-customize-faces-h (_)
   "Apply personal face tweaks on top of whichever theme is enabled.
 Run from `enable-theme-functions' (see the `add-hook' below)."
-  ;; --- General ---
+  ;; General
   ;; Make the mouse cursor more visible.
   (set-face-attribute 'mouse nil :background (face-foreground 'default nil t))
   ;; Remove redundant underline in `describe-mode'.
   (set-face-attribute 'separator-line nil :underline nil)
 
-  ;; --- Org ---
+  ;; Org
   (after! org
     ;; This is how I like my ellipsis to look. Subtle.
     (unless cae-theme-extend-heading-faces
@@ -128,7 +116,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
       (set-face-attribute 'org-document-title nil
                           :height 1.2)))
 
-  ;; --- Completion popups (company / esh-autosuggest) ---
+  ;; Completion popups (company / esh-autosuggest)
   (after! company
     (set-face-attribute 'company-preview-common nil
                         :inherit 'shadow
@@ -137,7 +125,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
                         :inherit 'shadow
                         :background 'unspecified))
 
-  ;; --- lsp-ui doc popup ---
+  ;; lsp-ui doc popup
   (when (and (modulep! :tools lsp)
              (not (modulep! :tools lsp +eglot)))
     ;; For `lsp-ui'. Fixes the background color of the doc popup.
@@ -148,7 +136,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
                           :inherit 'shadow
                           :height 0.8)))
 
-  ;; --- Subtler backgrounds for highlight packages ---
+  ;; Subtler backgrounds for highlight packages
   (let ((subtle-bg-color (face-attribute 'lazy-highlight :background nil t)))
     (when (stringp subtle-bg-color)
       (after! goggles
@@ -159,7 +147,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
         (set-face-attribute 'scrollkeeper-guideline-highlight nil
                             :background subtle-bg-color))))
 
-  ;; --- Extend heading faces to the edge of the window ---
+  ;; Extend heading faces to the edge of the window
   (when cae-theme-extend-heading-faces
     (after! org-faces
       (dolist (face '(org-level-1 org-level-2 org-level-3 org-level-4 org-level-5
@@ -180,7 +168,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
     (after! helpful
       (set-face-attribute 'helpful-heading nil :extend t)))
 
-  ;; --- Remove bold constructs ---
+  ;; Remove bold constructs
   (dolist (face '(font-lock-keyword-face
                   font-lock-type-face
                   font-lock-builtin-face
@@ -194,9 +182,7 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
 
 (add-hook 'enable-theme-functions #'cae-theme-customize-faces-h)
 
-;;; ----------------------------------------------------------------------------
 ;;; Theme package settings (modus / ef)
-;;; ----------------------------------------------------------------------------
 
 (after! modus-themes
   (setq modus-themes-org-blocks 'gray-background
@@ -215,19 +201,14 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
         ef-themes-mixed-fonts t
         ef-themes-to-toggle `(,cae-ef-day-theme ,cae-ef-night-theme)))
 
-;;; ----------------------------------------------------------------------------
 ;;; Keybindings
-;;; ----------------------------------------------------------------------------
 
 (map! :leader :desc "Toggle theme" "tT" #'cae-theme-toggle)
 
-;;; ----------------------------------------------------------------------------
 ;;; Day/night switching (circadian)
-;;; ----------------------------------------------------------------------------
 
 (use-package! circadian
-  :when (and cae-theme-enable-day-night-theme-switching
-             (not cae-config-finished-loading))
+  :when cae-theme-enable-day-night-theme-switching
   :defer t :defer-incrementally t :init
   ;; Add the hook to update circadian when geolocation changes.
   (add-hook 'cae-geolocation-update-hook #'cae-theme--update-circadian-on-location-change)
@@ -264,21 +245,19 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
   ;; Fallback if cache unavailable or day/night switching disabled
   (setq doom-theme (if (cae-night-time-p) cae-night-theme cae-day-theme))))
 
-;;; ----------------------------------------------------------------------------
 ;;; Export theme to the rest of Linux (pywal)
-;;;
-;;; Everything here runs asynchronously so loading a theme never blocks Emacs:
-;;;   - the pywal Python script is run via `start-process' (see `:config'), and
-;;;     its completion drives `cae-theme-magic-after-apply-functions';
-;;;   - the WM-bar reloads use `call-process' with a destination of 0, i.e.
-;;;     fire-and-forget AND detached, so the relaunched bar outlives Emacs.
-;;; ----------------------------------------------------------------------------
+
+;; Everything here runs asynchronously so loading a theme never blocks Emacs:
+;;   - the pywal Python script is run via `start-process' (see `:config'), and
+;;     its completion drives `cae-theme-magic-after-apply-functions';
+;;   - the WM-bar reloads use `call-process' with a destination of 0, i.e.
+;;     fire-and-forget AND detached, so the relaunched bar outlives Emacs.
 
 (use-package! theme-magic
   :if cae-theme-export-theme-with-pywal
   :defer t :defer-incrementally t :init
 
-  ;; --- WM-bar reload helpers (async, detached) ---
+  ;; WM-bar reload helpers (async, detached)
   (defun cae-theme-magic-reload-stumpwm-h ()
     "Ask a running StumpWM to reload its colors.
 Fire-and-forget: a `call-process' destination of 0 runs the command
@@ -299,7 +278,7 @@ its own mode-line (handled above); ratpoison advertises no EWMH name
                  (file-executable-p launch))
         (call-process launch nil 0 nil (if wm "example" "example-ratpoison")))))
 
-  ;; --- Export orchestration ---
+  ;; Export orchestration
   (defvar cae-theme-magic-after-apply-functions nil
     "Abnormal hook run when an async pywal export finishes.
 Each function receives one argument: non-nil if pywal exited
@@ -323,11 +302,10 @@ The bar reloads and the last-applied bookkeeping run from
   (add-hook 'doom-load-theme-hook #'cae-theme-magic-export-theme-h)
 
   :config
-  ;; --- Async pywal override ---
-  ;; Upstream `theme-magic--call-pywal-process' blocks Emacs on a synchronous
-  ;; `call-process' until the Python script finishes.  Override it to use
-  ;; `start-process' and report the result from a sentinel instead, so loading
-  ;; a theme never freezes the UI.
+  ;; Async pywal override.  Upstream `theme-magic--call-pywal-process' blocks
+  ;; Emacs on a synchronous `call-process' until the Python script finishes.
+  ;; Override it to use `start-process' and report the result from a sentinel
+  ;; instead, so loading a theme never freezes the UI.
   (defun cae-theme-magic--pywal-sentinel (proc _event)
     "Report the result of async pywal PROC and run the after-apply hook."
     (when (memq (process-status proc) '(exit signal))
@@ -366,9 +344,7 @@ branching on a synchronous exit code."
                         colors))
     (theme-magic--call-pywal-process colors)))
 
-;;; ----------------------------------------------------------------------------
 ;;; Org LaTeX previews
-;;; ----------------------------------------------------------------------------
 
 (after! org
   (add-hook 'doom-load-theme-hook #'cae-theme-refresh-latex-images-previews-h))
