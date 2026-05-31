@@ -40,12 +40,9 @@
 (advice-add #'persp-kill-buffer-query-function :override
             #'cae-persp-kill-buffer-query-function)
 
-;; Trying squash a bug.
-(cae-defadvice! cae-hacks-debug-evil-initialize-state (&rest _)
-  :after #'evil-initialize-state
-  (when (minibufferp)
-    (backtrace)))
-(cae-defadvice! cae-hacks-debug-evil-local-state (&rest _)
-  :after #'evil-local-mode
-  (when (minibufferp)
-    (backtrace)))
+;; Trying squash a bug. For some reason, sometimes `evil-local-mode' works in
+;; Consult. I think it has to do with the previews.
+(cae-defadvice! cae-hacks-debug-evil-local-state (oldfun &rest args)
+  :around #'evil-local-mode
+  (unless (> (recursion-depth) 0)
+    (apply oldfun args)))
