@@ -312,8 +312,8 @@
   :config
   (defun cae-restore-point-handle-mark-and-conditional-disable (oldfun)
     unless (derived-mode-p 'ghostel-mode)
-      (funcall oldfun)
-      (deactivate-mark))
+    (funcall oldfun)
+    (deactivate-mark))
   (cae-advice-add #'rp/restore-point-position :around
                   #'deactivate-mark)
   ;; Restore point in the minibuffer.
