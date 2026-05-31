@@ -65,16 +65,16 @@
               ;; Our solution is to map use `M-n' for `evil-multiedit'.
               (:when (and (modulep! :editor evil)
                           (modulep! :editor multiple-cursors))
-               :n  "M-n"   #'evil-multiedit-match-symbol-and-next
-               :n  "M-N"   #'evil-multiedit-match-symbol-and-prev
-               ;; M-d still works in visual state but for symmetry, we bind
-               ;; there M-n anyways.
-               :v  "M-n"   #'evil-multiedit-match-and-next
-               :v  "M-N"   #'evil-multiedit-match-and-prev
-               (:after evil-multiedit
-                (:map evil-multiedit-mode-map
-                 :nv "M-n" #'evil-multiedit-match-and-next
-                 :nv "M-N" #'evil-multiedit-match-and-prev))))))
+                :n  "M-n"   #'evil-multiedit-match-symbol-and-next
+                :n  "M-N"   #'evil-multiedit-match-symbol-and-prev
+                ;; M-d still works in visual state but for symmetry, we bind
+                ;; there M-n anyways.
+                :v  "M-n"   #'evil-multiedit-match-and-next
+                :v  "M-N"   #'evil-multiedit-match-and-prev
+                (:after evil-multiedit
+                        (:map evil-multiedit-mode-map
+                         :nv "M-n" #'evil-multiedit-match-and-next
+                         :nv "M-N" #'evil-multiedit-match-and-prev))))))
 
     (dolist (binding '(("C-M-t" . sp-transpose-sexp)
                        ("C-M-k" . sp-kill-sexp)
