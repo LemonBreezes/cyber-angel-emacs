@@ -2,17 +2,29 @@
 
 (require 'cae-lib)
 
-(defvar cae-exwm-enabled-p (and (eq 'x (framep (selected-frame)))
-                                (not (or (getenv "INSIDE_EXWM")
-                                         (getenv "RATPOISON")
-                                         (getenv "I3SOCK")
-                                         (getenv "KDE_FULL_SESSION")
-                                         (getenv "GNOME_DESKTOP_SESSION_ID")
-                                         (and (getenv "XDG_CURRENT_DESKTOP")
-                                              (not (string= (getenv "XDG_CURRENT_DESKTOP")
-                                                            "none+exwm")))
-                                         (getenv "WAYLAND_DISPLAY"))))
-  "Whether EXWM is enabled.")
+(defun cae-wm-name ()
+  "Return the running window manager's EWMH name, or nil.
+Reads `_NET_WM_NAME' of the window pointed to by the root
+`_NET_SUPPORTING_WM_CHECK' property.  This works regardless of how
+Emacs was launched, so it does not depend on session env vars like
+`XDG_CURRENT_DESKTOP' (which are empty under a bare `xinit' session,
+e.g. StumpWM)."
+  (when (eq 'x (framep (selected-frame)))
+    (let ((id (x-window-property "_NET_SUPPORTING_WM_CHECK" nil "WINDOW" 0 nil t)))
+      (when (integerp id)
+        ;; Some WMs only set the legacy STRING property (e.g. StumpWM, which
+        ;; leaves UTF8_STRING empty), others use UTF8_STRING (e.g. EXWM); try
+        ;; both and skip empty values.
+        (cl-some (lambda (type)
+                   (let ((name (x-window-property "_NET_WM_NAME" nil type id nil t)))
+                     (and (stringp name) (not (string-empty-p name))
+                          (substring-no-properties name))))
+                 '("UTF8_STRING" "STRING"))))))
+
+(defvar cae-exwm-enabled-p (equal "EXWM" (cae-wm-name))
+  "Whether EXWM is enabled.
+Detected via EWMH (`cae-wm-name'); see that function for why this is
+preferred over the `XDG_CURRENT_DESKTOP' env var.")
 
 (defvar cae-exwm-inhibit-title-renaming nil)
 (make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)
