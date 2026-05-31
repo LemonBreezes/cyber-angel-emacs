@@ -154,10 +154,11 @@
           (or keymap (current-global-map))))
   (cae-defadvice! cae-which-key-consult-C-h-dispatch (oldfun)
     :around #'which-key-C-h-dispatch
-    (+log last-command)
     (cond ((not (which-key--popup-showing-p))
            (setq this-command 'embark-prefix-help-command)
            (call-interactively #'embark-prefix-help-command))
+          ((eq last-command #'which-key-show-top-level)
+           (call-interactively #'embark-bindings))
           ((string-empty-p (which-key--current-key-string))
            (setq this-command 'embark-prefix-help-command)
            (embark-bindings-in-keymap cae-which-key-current-keymap))
