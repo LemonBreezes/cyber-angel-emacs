@@ -44,6 +44,12 @@
     hscroll-margin 0)
 
   (map! :map ghostel-mode-map
+        ;; Doom's corfu module binds C-SPC to `completion-at-point' in evil's
+        ;; insert/normal state maps, which outrank `ghostel-mode-map'. Bind per
+        ;; evil-state here so it actually reaches the terminal instead of
+        ;; popping up completion.
+        :ing "C-SPC" #'cae-ghostel-send-C-SPC
+        :ing "C-@" #'cae-ghostel-send-C-SPC
         (:prefix "C-c"
                  "C-x" #'cae-ghostel-send-C-x)
         :n "p" #'ghostel-yank
