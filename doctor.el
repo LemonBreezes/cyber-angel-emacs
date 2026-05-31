@@ -23,7 +23,9 @@
   (warn! "Couldn't find lpr executable. Printing functionality will be unavailable."))
 
 ;; Browsers - Only warn if none are available
-(unless (or (executable-find "firefox") 
+(unless (or (executable-find "librewolf")
+            (executable-find "librewolf-bin")
+            (executable-find "firefox") 
             (executable-find "firefox-beta") 
             (executable-find "firefox-bin")
             (executable-find "chromium-bin-browser")
