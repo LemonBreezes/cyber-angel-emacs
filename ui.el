@@ -137,12 +137,12 @@
     ;; working around with this.
     (add-to-list 'evil-buffer-regexps `(,(concat "\\`" (regexp-quote " *which-key*") "\\'")))))
 
-;; BUG `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
+;; `which-key-preserve-window-configuration' breaks `+vertico-embark-which-key-indicator'.
 (cae-defadvice! cae-do-not-restore-wconf-in-minibuffer-a ()
   :before #'which-key--hide-buffer-side-window
   (when (minibufferp)
     (setq which-key--saved-window-configuration nil)))
-;; BUG Allow C-h to open Consult when calling which-key without a prefix.
+;; Allow C-h to open Consult when calling which-key without a prefix.
 (when (modulep! :completion vertico)
   (after! which-key
     (setq which-key-use-C-h-commands t))
