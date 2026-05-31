@@ -120,7 +120,7 @@
   (add-hook 'doom-escape-hook #'+evil-disable-ex-highlights-h -1))
 
 (after! outline
-  (setq outline-minor-mode-use-buttons t))
+  (setq outline-minor-mode-use-buttons nil))
 
 (after! ispell
   (setq ispell-quietly t
