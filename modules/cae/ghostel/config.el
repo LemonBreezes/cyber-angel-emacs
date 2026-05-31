@@ -49,4 +49,4 @@
         :n "p" #'ghostel-yank
         :n "P" #'ghostel-yank
         :n [remap evil-paste-pop] #'ghostel-yank-pop
-        :g "C-SPC" #'ghostel-send-C-space ))
+        :g "C-SPC" #'ghostel-send-C-space))
