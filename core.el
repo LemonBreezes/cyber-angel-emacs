@@ -137,6 +137,6 @@ frameworks.")
   (setq package-quickstart t))
 
 ;; Load secrets
-(when (and cae-secrets-enabled-p
+(when (and cae-init-secrets-enabled-p
            (file-exists-p (concat cae-multi-secrets-dir "secrets.el")))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
