@@ -96,6 +96,7 @@
          (smooth-scroll +interpolate)
          unicode
          zen
+         dashboard
 
          :editor
          (evil +everywhere)
