@@ -88,7 +88,7 @@
          (popup +defaults)
          (vc-gutter +pretty +diff-hl)
          vi-tilde-fringe
-         workspaces
+         ;;workspaces
          (window-select +numbers)
          ophints
          (treemacs +lsp)
