@@ -227,12 +227,6 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
   :if cae-theme-export-theme-with-pywal
   :defer-incrementally t :init
   (defun cae-theme-magic-reload-stumpwm-h ()
-    "Tell a running StumpWM to re-read the freshly exported pywal palette.
-`theme-magic' runs the `wal' binary via a Python subprocess, which regenerates
-~/.cache/wal/colors-stumpwm.lisp but bypasses ~/.config/wal/scripts/reload_services.sh
-\(pywal has no post-export hook), so StumpWM is never notified.  `theme-magic-from-emacs'
-is synchronous, so by the time we get here the cache file is up to date.  Guarded on
-stumpwm actually running so `stumpish' can't hang when we're under another WM."
     (when (and (executable-find "stumpish")
                (equal (cae-wm-name) "stumpwm"))
       ;; Destination 0: fire-and-forget so Emacs never blocks on stumpish.
