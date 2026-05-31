@@ -109,6 +109,7 @@
 (package! green-screen-theme)
 (package! cybercafe-theme)
 (package! nothing-theme)
+(package! morrowind-theme)              ; Honestly just for the name.
 
 ;; Export your theme.
 (package! theme-magic)
