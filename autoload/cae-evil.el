@@ -66,52 +66,6 @@ Combines local keymaps and minor mode maps for the current Evil state."
          (append '((("" . "emms-\\(.*\\)") . (nil . "\\1")))
                  which-key-replacement-alist)))
     (which-key--show-keymap nil keymap nil t t)))
-
-(defun cae--unimpaired-encode-region (beg end fn)
-  "Apply encoding/decoding function FN to region from BEG to END."
-  (save-excursion
-    (goto-char beg)
-    (let* ((end (if (eq evil-this-type 'line) (1- end) end))
-           (text (buffer-substring-no-properties beg end)))
-      (delete-region beg end)
-      (insert (funcall fn text)))))
-
-;;;###autoload (autoload 'evil-collection-unimpaired-b64-encode "autoload/cae-evil" nil t)
-(evil-define-operator cae-unimpaired-b64-encode (count &optional beg end)
-  "Encode the selected region using base64."
-  (interactive "<c><r>")
-  (ignore count)
-  (cae--unimpaired-encode-region beg end #'base64-encode-string))
-
-;;;###autoload (autoload 'evil-collection-unimpaired-b64-decode "autoload/cae-evil" nil t)
-(evil-define-operator cae-unimpaired-b64-decode (count &optional beg end)
-  "Decode the selected region from base64."
-  (interactive "<c><r>")
-  (ignore count)
-  (cae--unimpaired-encode-region beg end #'base64-decode-string))
-
-(defun cae--unimpaired-paste (newline-fn)
-  "Insert a newline using NEWLINE-FN and paste with preserved indentation.
-Maintains the current indentation and column position."
-  (let ((indent (current-indentation))
-        (column (current-column)))
-    (funcall newline-fn)
-    (indent-to indent)
-    (evil-paste-after 1)
-    (move-to-column column)))
-
-;;;###autoload
-(defun cae-unimpaired-paste-above ()
-  "Paste above current line while preserving indentation."
-  (interactive)
-  (cae--unimpaired-paste #'evil-insert-newline-above))
-
-;;;###autoload
-(defun cae-unimpaired-paste-below ()
-  "Paste below current line while preserving indentation."
-  (interactive)
-  (cae--unimpaired-paste #'evil-insert-newline-below))
-
 ;;;###autoload
 (defun cae-comint-delchar-or-maybe-eof ()
   "Delete char or send EOF in comint mode at end of buffer.
