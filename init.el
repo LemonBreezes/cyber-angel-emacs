@@ -105,7 +105,7 @@
          (format +lsp)
          snippets
          multiple-cursors
-         ;;lispy
+         lispy
 
          :emacs
          undo
