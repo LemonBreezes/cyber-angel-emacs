@@ -309,13 +309,8 @@
 (use-package! restore-point
   :defer t :init
   (add-hook 'doom-first-input-hook #'restore-point-mode)
+  (cae-advice-add #'rp/restore-point-position :after #'deactivate-mark)
   :config
-  (defun cae-restore-point-handle-mark-and-conditional-disable (oldfun)
-    (unless (derived-mode-p 'ghostel-mode)
-      (funcall oldfun)
-      (deactivate-mark)))
-  (cae-advice-add #'rp/restore-point-position :around
-                  #'deactivate-mark)
   ;; Restore point in the minibuffer.
   (defun cae-restore-point-h ()
     "If restore-point-mode is active, restore point in the minibuffer and return non-nil if the point changed."
