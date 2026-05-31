@@ -44,11 +44,12 @@ open SOTA), Q4 fully in VRAM, speculative decoding via the Qwen3-0.6B draft.")
 
 (after! magit-gptcommit
   (require 'llm-ollama)
-  (setq magit-gptcommit-llm-provider
-        (make-llm-ollama
-         :host cae-ip-address
-         :port 11434
-         :chat-model cae-coding-agent-model)))
+  (when (bound-and-true-p cae-ip-address)
+    (setq magit-gptcommit-llm-provider
+          (make-llm-ollama
+           :host cae-ip-address
+           :port 11434
+           :chat-model cae-coding-agent-model))))
 
 (after! aidermacs
   ;; Aider talks to the local stack through litellm's openai-compat path
@@ -141,8 +142,9 @@ THE FILE DIFFS:
 
 One line, label: summary, now:")
   (setq magit-gptcommit-prompt-one-line magit-gptcommit-prompt)
-  (magit-gptcommit-mode 1)
-  (magit-gptcommit-status-buffer-setup))
+  (when (bound-and-true-p cae-ip-address)
+    (magit-gptcommit-mode 1)
+    (magit-gptcommit-status-buffer-setup)))
 (after! git-commit
   (map! :map git-commit-mode-map
         "C-c C-g" #'magit-gptcommit-commit-accept))
