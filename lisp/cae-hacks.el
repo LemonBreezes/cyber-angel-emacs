@@ -41,7 +41,8 @@
             #'cae-persp-kill-buffer-query-function)
 
 ;; Trying squash a bug. For some reason, sometimes `evil-local-mode' works in
-;; Consult. I think it has to do with the previews.
+;; Consult. I think it has to do with the previews. Should probably print more
+;; debug info in this to pinpoint it.
 (cae-defadvice! cae-hacks-debug-evil-local-state (oldfun &rest args)
   :around #'evil-local-mode
   (unless (> (recursion-depth) 0)
