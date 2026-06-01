@@ -76,7 +76,7 @@
 (when cae-init-preamble-enabled-p
   (load! "preamble" doom-user-dir))
 
-(if t
+(if nil
     (doom! :editor (evil +everywhere) :config (default +bindings +gnupg))
   (doom! :completion
          (vertico +icons +childframe)
