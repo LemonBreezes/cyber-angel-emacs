@@ -38,10 +38,6 @@
   (package! lsp-treemacs :recipe
     (:host github :repo "LemonBreezes/lsp-treemacs"
      :branch "lots-of-fixes")))
-(when (modulep! :ui vc-gutter)
-  (package! diff-hl :recipe
-    (:host github :repo "LemonBreezes/diff-hl"
-     :branch "fix-async-diff-buffer-race")))
 
 (unless (modulep! :config default +smartparens)
   (disable-packages! smartparens))
