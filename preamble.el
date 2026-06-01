@@ -1,15 +1,15 @@
 ;;; preamble.el -*- lexical-binding: t; -*-
 
 ;; Print the features that a `doom-load' call ends up providing.
-;;(cae-defadvice! cae-hacks-doom-load-report-features-a (fn &rest args)
-;;  :around #'doom-load
-;;  (let ((features-before features))
-;;    (prog1 (apply fn args)
-;;      (let ((new-features (cl-set-difference features features-before)))
-;;        (when new-features
-;;          (message "doom-load %s provided: %s"
-;;                   (car args)
-;;                   (mapconcat #'symbol-name (nreverse new-features) " ")))))))
+(cae-defadvice! cae-hacks-doom-load-report-features-a (fn &rest args)
+  :around #'doom-load
+  (let ((features-before features))
+    (prog1 (apply fn args)
+      (let ((new-features (cl-set-difference features features-before)))
+        (when new-features
+          (message "doom-load %s provided: %s"
+                   (car args)
+                   (mapconcat #'symbol-name (nreverse new-features) " ")))))))
 
 (setq load-path-filter-function #'load-path-filter-cache-directory-files)
 
