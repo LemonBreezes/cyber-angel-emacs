@@ -158,7 +158,7 @@
          (:if (not (memq system-type '(cygwin windows-nt ms-dos))) tty +osc)
 
          :config
-         (default +bindings +gnupg)
+         (default +bindings +gnupg +smartparens)
 
          :email
          (:if (executable-find "mu") mu4e)
