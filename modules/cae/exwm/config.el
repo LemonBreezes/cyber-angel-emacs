@@ -137,13 +137,10 @@ preferred over the `XDG_CURRENT_DESKTOP' env var.")
     ;; Do not handle EXWM buffers.
     (set-popup-rule! "^\\*exwm" :ignore t)
 
-    (when (modulep! :editor evil)
-      (if (or (modulep! :completion helm)
-              (modulep! :cae helm))
-          (map! :leader :desc "Run external command" "$" #'helm-run-external-command)
-        ;; The problem with `app-launcher' is that it only shows applications
-        ;; with desktop files.
-        (map! :leader :desc "Run external command" "$" #'app-launcher-run-app)))
+    (when (and (modulep! :editor evil)
+               (or (modulep! :completion helm)
+                   (modulep! :cae helm)))
+        (map! :leader :desc "Run external command" "$" #'helm-run-external-command))
     (map! :map exwm-mode-map
           :localleader
           (:prefix ("d" . "debug")
