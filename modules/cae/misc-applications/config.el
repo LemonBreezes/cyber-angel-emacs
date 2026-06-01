@@ -176,7 +176,8 @@
       "e" #'list-packages
       "E" #'list-processes
       "T" #'list-timers
-      "C-t" #'try)
+      "C-t" #'try
+      "b" #'cae-packages-bump-pins)
 (after! which-key
   (which-key-add-keymap-based-replacements 'cae-misc-applications-system-map
     "e" "List Emacs packages"
