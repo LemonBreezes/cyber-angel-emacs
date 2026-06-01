@@ -76,6 +76,20 @@
 (when cae-init-preamble-enabled-p
   (load! "preamble" doom-user-dir))
 
+(defun cae-dump-file ()
+  "Path of the pdump image this Emacs was started from, or nil."
+  (alist-get 'dump-file-name (pdumper-stats)))
+
+(defun cae-loaded-from-custom-pdump-p ()
+  "Non-nil if started from a dump under the user cache (not the stock emacs.pdmp)."
+  (when-let* ((f (cae-dump-file)))
+    (string-prefix-p (expand-file-name "~/.config/emacs/.local/cache/") f)))
+
+(when (and cae-init-secrets-enabled-p
+           (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
+           (cae-loaded-from-custom-pdump-p))
+  (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
+
 (if nil
     (doom! :editor (evil +everywhere) :config (default +bindings +gnupg))
   (doom! :completion
