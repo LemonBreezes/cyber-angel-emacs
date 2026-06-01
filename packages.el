@@ -106,6 +106,7 @@
 (package! cybercafe-theme)
 (package! nothing-theme)
 (package! morrowind-theme)              ; Honestly just for the name.
+(package! real-mono-themes)
 
 ;; Export your theme.
 (package! theme-magic)
