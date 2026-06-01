@@ -65,6 +65,11 @@
         (add-to-list 'projectile-globally-ignored-directories
                      (expand-file-name ".local/straight/repos/" user-emacs-directory)))
 
+      ;; Don't cache remote (TRAMP) projects in the known projects list.
+      (cae-defadvice! cae-project-no-remote-known-projects-a (project)
+        :before-while #'projectile-add-known-project
+        (or (not (featurep 'tramp)) (not (file-remote-p project))))
+
       ;; Recognize `makefile' as a Makefile.
       (add-to-list
        'projectile-project-types
