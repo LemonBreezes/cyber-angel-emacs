@@ -27,9 +27,10 @@
 
 ;; Fixes OOM error.
 (defun cae-lsp-bash-bg-max-files ()
-  (when (equal (or (lsp-workspace-root) default-directory)
-               (expand-file-name "~/"))
-    0))
+  (if (file-equal-p (or (lsp-workspace-root) default-directory)
+                    (expand-file-name "~/"))
+      0
+    500))
 (after! lsp-bash
   (lsp-register-custom-settings
    '(("bashIde.backgroundAnalysisMaxFiles" cae-lsp-bash-bg-max-files))))
