@@ -59,7 +59,6 @@
 (package! consult-gh :pin "f078379a50ebace30252447ad4b4b7c4514b7f95")
 (package! consult-hoogle :pin "8ce7b95a199b06ca0333880d2e031f96d18c1cd2")
 (package! consult-lsp :pin "d11102c9db33c4ca7817296a2edafc3e26a61117")
-(package! consult-mu :pin "8b54bbf86c2f112e3520eeeefb70d509b4590385")
 (package! consult-yasnippet :pin "a3482dfbdcbe487ba5ff934a1bb6047066ff2194")
 (package! corfu :pin "4a9c67da16eb64cadaa4bfcc16713188145c83da")
 (package! crazy-theme :pin "a77492e0675d368aadea6af4669da794bcb51a73")
