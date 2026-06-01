@@ -32,6 +32,11 @@
     ("music" "m")
     ("quotes" "q")))
 
+(defvar cae-packages-freeze-file
+  (file-name-concat doom-user-dir "packages.lock.el")
+  "File that `cae-packages-freeze' writes generated `:pin's into.
+This file is `load'ed from the end of packages.el.")
+
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
                (prefix (cadr app-type))
