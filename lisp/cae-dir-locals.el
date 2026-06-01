@@ -16,7 +16,7 @@
                (bound-and-true-p cae-config-finished-loading))
       (add-hook 'write-file-functions 'eval-buffer 1 t))
     (when (and (derived-mode-p 'emacs-lisp-mode)
-               (not (equal (bound-and-true-p cae-packages-freeze-file) buffer-file-name))
+               (not (file-equal-p (bound-and-true-p cae-packages-freeze-file) buffer-file-name))
                (require 'apheleia nil t))
       (apheleia-mode +1))
     (setq-local blamer--block-render-p t)
