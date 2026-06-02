@@ -5,15 +5,40 @@ diagnostics; it is not normally present in a dumpable heap.  A portable
 dump built by a user that bakes in native-compiled package .eln files can
 reach such objects through comp-unit constant vectors, where
 dump-emacs-portable would otherwise abort with
-"Unsupported object type in dump: pseudovector type 6".
+"unsupported object type in dump: pseudovector type 6".
 
 Dump the bare symbol instead: the position is irrelevant once loaded, and
 with symbols-with-pos-enabled nil (the default) a symbol-with-pos and its
 bare symbol are interchangeable.
 
+Converting only at dump_object's dispatch is not enough: the object table
+(objects_dumped) and the field fixups are keyed by the raw Lisp_Object, so
+a slot referencing a symbol-with-pos records a fixup against that pointer
+while dump_object remembers the dumped object under the *bare* symbol.  The
+fixup then resolves to nothing ("fixup object not dumped").  Canonicalize
+to the bare symbol at the two identity chokepoints (recall/remember) too,
+so enqueue, dump, and fixup resolution all agree on a single key.
 --- a/src/pdumper.c
 +++ b/src/pdumper.c
-@@ -3367,6 +3367,18 @@
+@@ -1026,6 +1026,8 @@
+ static dump_off
+ dump_recall_object (struct dump_context *ctx, Lisp_Object object)
+ {
++  if (SYMBOL_WITH_POS_P (object))
++    object = XSYMBOL_WITH_POS_SYM (object);
+   Lisp_Object dumped = ctx->objects_dumped;
+   return dump_off_from_lisp (Fgethash (object, dumped,
+                                        make_fixnum (DUMP_OBJECT_NOT_SEEN)));
+@@ -1036,6 +1038,8 @@
+                       Lisp_Object object,
+                       dump_off offset)
+ {
++  if (SYMBOL_WITH_POS_P (object))
++    object = XSYMBOL_WITH_POS_SYM (object);
+   Fputhash (object,
+             dump_off_to_lisp (offset),
+             ctx->objects_dumped);
+@@ -3367,6 +3371,18 @@
  #endif
    eassert (!EQ (object, dead_object ()));
  

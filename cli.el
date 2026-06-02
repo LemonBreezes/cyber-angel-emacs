@@ -287,6 +287,35 @@ working PDMP."
             ;; Put every straight package ROOT (not subdirs) on `load-path'.
             (dolist (dir (directory-files ,build-dir t "\\`[^.]"))
               (when (file-directory-p dir) (add-to-list 'load-path dir)))
+            ;; --- pdump oddity fixups ------------------------------------------
+            ;; Some global state does not survive `dump-emacs-portable': a heap
+            ;; booted from this image comes up with `global-font-lock-mode' and
+            ;; `transient-mark-mode' OFF (so code shows no syntax colors and the
+            ;; region is inert) even though a normally-started Emacs has them on.
+            ;; Define ONE named, self-removing fixup and arrange for it to run on
+            ;; the FIRST REAL FRAME, then register the installer HERE -- before the
+            ;; config loads below -- so it is the baseline the rest of init builds
+            ;; on.  This is the single place to collect any future "works in a
+            ;; normal Emacs, broken only when booted from the dump" repairs.
+            (defun cae-pdump-fix-oddities-h (&rest _)
+              "Restore global state that `dump-emacs-portable' fails to carry over.
+Runs once, on the first real frame of an Emacs booted from the pdump image,
+then removes itself.  Add further pdump-only fixups here as discovered."
+              (remove-hook 'server-after-make-frame-hook #'cae-pdump-fix-oddities-h)
+              (unless global-font-lock-mode (global-font-lock-mode 1))
+              (unless transient-mark-mode   (transient-mark-mode 1)))
+            (defun cae-pdump-install-fixups-h ()
+              "Schedule `cae-pdump-fix-oddities-h' to run once, on the first frame.
+The `daemonp' test must happen at RUNTIME (the dump is always built batch,
+never a daemon), so this installer runs from `emacs-startup-hook'.  On a
+daemon there is no frame until a client connects -- wait for
+`server-after-make-frame-hook' (fires once the daemon is connected to);
+otherwise (`-nw'/GUI) the initial frame already exists by now, so apply the
+fixups immediately."
+              (if (daemonp)
+                  (add-hook 'server-after-make-frame-hook #'cae-pdump-fix-oddities-h)
+                (cae-pdump-fix-oddities-h)))
+            (add-hook 'emacs-startup-hook #'cae-pdump-install-fixups-h)
             ;; Drive Doom's INTERACTIVE init in batch using Doom's OWN functions
             ;; (not copies of their internals).  `noninteractive'=nil makes `doom!'
             ;; a no-op (the precomputed module list is used) and makes `after!'
