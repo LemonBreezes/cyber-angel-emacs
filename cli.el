@@ -171,19 +171,32 @@ working PDMP."
             (setq debug-on-error t
                   gc-cons-threshold most-positive-fixnum
                   gc-cons-percentage 1.0)
-            ;; Inhibit native COMPILATION for the build (so no async comp jobs
-            ;; spawn unserializable subprocesses, and the build stays fast), but
-            ;; leave `native-comp-eln-load-path' alone so packages LOAD their
-            ;; existing .eln -- baking native code into the image.  This relies on
-            ;; the local emacs-igc pdumper patch (pdump-user-eln-fallback.patch):
-            ;; it lets dumped user-cache .eln resolve at boot by searching
-            ;; `native-comp-eln-load-path'.  WITHOUT that patch this image will
-            ;; crash on boot ("Error using execdir /usr/bin/ ... .eln: cannot
-            ;; open") -- revert to forcing bytecode (set
-            ;; `native-comp-eln-load-path' to a nonexistent dir here) if the patch
-            ;; is ever dropped.  Trampolines stay OFF: generating ~50 of them would
-            ;; mean ~50 synchronous native-compiles during the build, and advising
-            ;; primitives via the symbol function cell works fine without them.
+            ;; The read-only system native-lisp dir (last entry of the default
+            ;; path), captured before any suppression.  It MUST be the LAST entry
+            ;; of the eln-load-path we bake into the heap: at boot
+            ;; `fixup_eln_load_path' overwrites the LAST cell with the system dir
+            ;; (comp.c), so any user eln dir we want the runtime eln-fallback patch
+            ;; to search must come BEFORE it (else a single-element list gets
+            ;; clobbered and the fallback never sees the cache).
+            (defvar cae--system-eln (car (last native-comp-eln-load-path)))
+            ;; Will hold the runtime eln-load-path to bake into the heap; captured
+            ;; AFTER `doom-startup' so it includes the dir Doom adds
+            ;; (`doom-cache-dir'/eln/) -- otherwise the patched runtime loader
+            ;; can't find user-cache elns that live there (e.g. a `disp-table'
+            ;; copy), and the image fails to boot ("Error using execdir").
+            (defvar cae--default-eln-load-path nil)
+            ;; NATIVE-in-dump.  Don't COMPILE during the build (jit off, automatic
+            ;; comp inhibited) -- just LOAD the native .eln files already in the
+            ;; cache, so packages bake into the heap as native-comp-units.  Two
+            ;; Emacs patches make this work: pdump-symbol-with-pos.patch lets
+            ;; `dump-emacs-portable' serialize the `symbol-with-pos' (pseudovector
+            ;; type 6) constants those comp-units carry (dumped as bare symbols),
+            ;; and pdump-user-eln-fallback.patch lets the booted image resolve a
+            ;; user-cache `.eln' under `native-comp-eln-load-path' instead of the
+            ;; (nonexistent) execdir-relative system path.  That fallback only
+            ;; works if the cache dir survives boot-time `fixup_eln_load_path'
+            ;; (which clobbers the LAST entry) -- hence the system-dir-last restore
+            ;; below.
             (setq native-comp-jit-compilation nil
                   inhibit-automatic-native-compilation t
                   native-comp-async-jobs-number 1
@@ -216,10 +229,18 @@ working PDMP."
               (setq doom-context (list t))
               (doom-initialize t)
               (doom-startup))
+            ;; Doom's init just added its own dir (`doom-cache-dir'/eln/) to
+            ;; `native-comp-eln-load-path'.  Capture the path for the runtime
+            ;; restore, forcing the read-only system dir LAST so boot-time
+            ;; `fixup_eln_load_path' overwrites the system entry, not a cache dir
+            ;; the eln-fallback needs.  Leave `native-comp-eln-load-path' itself
+            ;; alone so the force-load below keeps loading native elns.
+            (setq cae--default-eln-load-path
+                  (append (delete cae--system-eln native-comp-eln-load-path)
+                          (list cae--system-eln)))
             (princ "Interactive init complete; force-loading packages...\n")
-            ;; Force-load every installed package (bytecode-only via the global
-            ;; suppression above).  ~5-10 packages that can't load standalone are
-            ;; reported and skipped.
+            ;; Force-load every installed package (native, from the eln cache).
+            ;; ~5-10 packages that can't load standalone are reported and skipped.
             (let ((file-name-handler-alist nil)
                   (pkgs (mapcar (lambda (d)
                                   (intern (file-name-nondirectory
@@ -294,10 +315,11 @@ working PDMP."
             ;; callers via the symbol function cell only -- exactly how the build
             ;; itself applied them -- so no trampoline is ever requested.
             (setq native-comp-enable-subr-trampolines nil)
-            ;; Re-enable native COMPILATION at runtime so lazily-loaded files
-            ;; native-compile/load as usual.  (eln-load-path was never overridden.)
+            ;; Restore runtime-correct native-comp values (eln cache findable, JIT
+            ;; back on) so lazily-loaded files native-compile/load as usual.
             (setq native-comp-jit-compilation t
-                  inhibit-automatic-native-compilation nil)
+                  inhibit-automatic-native-compilation nil
+                  native-comp-eln-load-path cae--default-eln-load-path)
             ;; Reset the context stack to its pristine value.
             (setq doom-context (list t))
             ;; Keep doom.el's `with-eval-after-load 'straight' block deferred to
@@ -308,19 +330,35 @@ working PDMP."
             (dump-emacs-portable ,tmp))
          (current-buffer))))
     (print! (start "Building pdump image (this runs Doom's whole init)..."))
-    (with-temp-buffer
-      (let ((status (call-process "emacs" nil t nil "--batch" "-Q" "-l" script)))
-        (if (and (eq status 0) (file-exists-p tmp))
-            (progn
-              ;; Atomically replace the live image, then record the fingerprint so
-              ;; the next sync can skip the rebuild when nothing changed.
-              (rename-file tmp pdmp t)
-              (with-temp-file keyfile (insert key))
-              (print! (success "Dumped to %s") pdmp))
-          (ignore-errors (delete-file tmp))
-          ;; Surface the child's stdout+stderr so the failure reason is visible.
-          (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
-          (print! "%s" (string-trim (buffer-string))))))
+    ;; Optional BYTECODE-fallback escape hatch (set CAE_PDUMP_MOVE_ASIDE=1): move
+    ;; the eln-cache version-dir aside for the build so nothing native loads and
+    ;; everything bakes as bytecode.  Native-in-dump (the default) needs the cache
+    ;; PRESENT -- the patched runtime loader resolves the baked native-comp-units
+    ;; from it -- so this stays OFF by default.  Always restored (unwind-protect).
+    (let* ((eln-vdir (and (getenv "CAE_PDUMP_MOVE_ASIDE")
+                          (bound-and-true-p comp-native-version-dir)
+                          (expand-file-name
+                           comp-native-version-dir
+                           (expand-file-name "eln/" doom-cache-dir))))
+           (eln-hidden (and eln-vdir (concat (directory-file-name eln-vdir) ".pdump-hidden"))))
+      (when (and eln-vdir (file-directory-p eln-vdir))
+        (ignore-errors (rename-file eln-vdir eln-hidden t)))
+      (unwind-protect
+          (with-temp-buffer
+            (let ((status (call-process "emacs" nil t nil "--batch" "-Q" "-l" script)))
+              (if (and (eq status 0) (file-exists-p tmp))
+                  (progn
+                    ;; Atomically replace the live image, then record the fingerprint
+                    ;; so the next sync can skip the rebuild when nothing changed.
+                    (rename-file tmp pdmp t)
+                    (with-temp-file keyfile (insert key))
+                    (print! (success "Dumped to %s") pdmp))
+                (ignore-errors (delete-file tmp))
+                ;; Surface the child's stdout+stderr so the failure reason is visible.
+                (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
+                (print! "%s" (string-trim (buffer-string))))))
+        (when (and eln-hidden (file-directory-p eln-hidden))
+          (ignore-errors (rename-file eln-hidden eln-vdir t)))))
     (delete-file script)))
 
 (add-hook 'doom-after-sync-hook #'cae-pdump-build)
