@@ -314,8 +314,7 @@ Runs once, on the first real frame of an Emacs booted from the pdump image,
 then removes itself.  Add further pdump-only fixups here as discovered."
               (remove-hook 'server-after-make-frame-hook #'cae-pdump-fix-oddities-h)
               (unless global-font-lock-mode (global-font-lock-mode 1))
-              (unless transient-mark-mode   (transient-mark-mode 1))
-              (doom-init-fonts-h))
+              (unless transient-mark-mode   (transient-mark-mode 1)))
             (defun cae-pdump-install-fixups-h ()
               "Schedule `cae-pdump-fix-oddities-h' to run once, on the first frame.
 The `daemonp' test must happen at RUNTIME (the dump is always built batch,
