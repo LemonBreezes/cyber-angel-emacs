@@ -81,6 +81,7 @@ frameworks.")
       (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer)))))
 
 ;; Set up fonts
+;; TODO Make it so the hack is in cli.el instead of here?
 (cae-after-frame!
  (unless (memq system-type '(cygwin windows-nt ms-dos))
    (let ((fonts-to-check '(("Aporetic Sans Mono" doom-font)
