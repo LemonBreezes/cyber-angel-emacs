@@ -1,0 +1,34 @@
+Make dump-emacs-portable tolerate symbol-with-pos objects.
+
+A symbol-with-pos carries a source position used only for compile-time
+diagnostics; it is not normally present in a dumpable heap.  A portable
+dump built by a user that bakes in native-compiled package .eln files can
+reach such objects through comp-unit constant vectors, where
+dump-emacs-portable would otherwise abort with
+"Unsupported object type in dump: pseudovector type 6".
+
+Dump the bare symbol instead: the position is irrelevant once loaded, and
+with symbols-with-pos-enabled nil (the default) a symbol-with-pos and its
+bare symbol are interchangeable.
+
+--- a/src/pdumper.c
++++ b/src/pdumper.c
+@@ -3367,6 +3367,18 @@
+ #endif
+   eassert (!EQ (object, dead_object ()));
+ 
++  /* A symbol-with-pos carries a source position used only for
++     compile-time diagnostics; it is not normally present in a dumpable
++     heap.  A user-built portable dump that bakes in native-compiled
++     package .eln files can reach such objects through comp-unit constant
++     vectors, where `dump-emacs-portable' would otherwise abort with
++     "unsupported object type ... pseudovector type 6".  Dump the bare
++     symbol instead: the position is irrelevant once loaded, and with
++     `symbols-with-pos-enabled' nil (the default) a symbol-with-pos and
++     its bare symbol are interchangeable.  */
++  if (SYMBOL_WITH_POS_P (object))
++    object = XSYMBOL_WITH_POS_SYM (object);
++
+   dump_off offset = dump_recall_object (ctx, object);
+   if (offset > 0)
+     return offset;  /* Object already dumped.  */
