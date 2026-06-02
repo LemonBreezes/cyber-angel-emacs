@@ -86,8 +86,7 @@
     (string-prefix-p (expand-file-name "~/.config/emacs/.local/cache/") f)))
 
 (when (and cae-init-secrets-enabled-p
-           (file-exists-p (concat cae-multi-secrets-dir "secrets.el"))
-           (cae-loaded-from-custom-pdump-p))
+           (file-exists-p (concat cae-multi-secrets-dir "secrets.el")))
   (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
 
 (if nil
