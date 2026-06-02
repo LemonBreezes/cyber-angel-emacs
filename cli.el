@@ -140,22 +140,65 @@ lazily after startup."
                     (ignore-errors (set (make-local-variable (car pair)) nil))
                   (ignore-errors (scrub (cdr pair) 0)))))))))))
 
+(defvar cae-pdump-native-compile-jobs
+  (max 1 (/ (or (ignore-errors (num-processors)) 4) 2))
+  "Parallel jobs for the pdump AOT native-compile pass.
+Defaults to half the CPUs to bound peak RAM (each libgccjit job is heavy).")
+
+(defun cae-pdump--native-compile (build-dir)
+  "AOT-native-compile every package under BUILD-DIR before it gets dumped.
+The pdump image only bakes NATIVE code for a package whose `.eln' already
+exists at build time (the build merely LOADS what's on disk), so compile them
+up front.  Incremental: `native-compile-async' skips any source whose `.eln' is
+current, so an unchanged sync recompiles nothing and returns almost
+immediately.  Blocks (pumping the async subprocesses) until the queue drains so
+the dump that follows sees the finished elns."
+  (require 'comp)
+  ;; Async children inherit the parent's `load-path' (comp-run.el binds it into
+  ;; their startup form), so put every package root on it -- otherwise their
+  ;; macro/`require' dependencies don't resolve and compilation fails.
+  (dolist (dir (directory-files build-dir t "\\`[^.]"))
+    (when (file-directory-p dir) (add-to-list 'load-path dir)))
+  (let ((native-comp-async-jobs-number cae-pdump-native-compile-jobs)
+        (native-comp-async-report-warnings-errors 'silent)
+        (native-comp-verbose 0)
+        (inhibit-message t))
+    (native-compile-async (list build-dir) 'recursively)
+    (when (or (bound-and-true-p comp-files-queue)
+              (and (fboundp 'comp--async-runnings) (cl-plusp (comp--async-runnings))))
+      (print! (start "AOT native-compiling packages (incremental, %d jobs)...")
+              cae-pdump-native-compile-jobs)
+      (let ((report 0))
+        (while (or (bound-and-true-p comp-files-queue)
+                   (and (fboundp 'comp--async-runnings) (cl-plusp (comp--async-runnings))))
+          (accept-process-output nil 1)
+          (when (> (- (float-time) report) 15)
+            (setq report (float-time))
+            (print! "  %d files left to native-compile..."
+                    (length (bound-and-true-p comp-files-queue))))))
+      (print! (success "Native compilation complete")))))
+
 (defun cae-pdump-build ()
   "Build the full-config pdump image (`doom.pdmp'), if it is stale.
-The (re)build is skipped when `cae-pdump--inputs-key' is unchanged, so a
-`doom sync' that changed no config or package costs ~0.3s instead of minutes."
+First runs an incremental AOT native-compile so the image bakes native code,
+then (re)builds the dump -- skipped when `cae-pdump--inputs-key' is unchanged,
+so a `doom sync' that changed no config or package costs only the (near-zero)
+incremental compile scan instead of minutes."
   (let* ((pdmp      (expand-file-name "doom.pdmp" doom-cache-dir))
          (build-dir (expand-file-name (format "straight/build-%s" emacs-version)
                                       doom-local-dir))
-         (keyfile   (concat pdmp ".key"))
-         (key       (cae-pdump--inputs-key build-dir)))
-    (if (and (file-exists-p pdmp)
-             (file-exists-p keyfile)
-             (equal key (with-temp-buffer
-                          (insert-file-contents keyfile)
-                          (string-trim (buffer-string)))))
-        (print! (success "pdump image already current; skipping rebuild"))
-      (cae-pdump--dump pdmp keyfile key build-dir))))
+         (keyfile   (concat pdmp ".key")))
+    ;; Native-compile BEFORE fingerprinting so KEY reflects the resulting elns
+    ;; (an unchanged sync then hashes the same key and skips the dump).
+    (cae-pdump--native-compile build-dir)
+    (let ((key (cae-pdump--inputs-key build-dir)))
+      (if (and (file-exists-p pdmp)
+               (file-exists-p keyfile)
+               (equal key (with-temp-buffer
+                            (insert-file-contents keyfile)
+                            (string-trim (buffer-string)))))
+          (print! (success "pdump image already current; skipping rebuild"))
+        (cae-pdump--dump pdmp keyfile key build-dir)))))
 
 (defun cae-pdump--dump (pdmp keyfile key build-dir)
   "Generate the loader script, run the child Emacs to dump PDMP, record KEY.
@@ -330,35 +373,19 @@ working PDMP."
             (dump-emacs-portable ,tmp))
          (current-buffer))))
     (print! (start "Building pdump image (this runs Doom's whole init)..."))
-    ;; Optional BYTECODE-fallback escape hatch (set CAE_PDUMP_MOVE_ASIDE=1): move
-    ;; the eln-cache version-dir aside for the build so nothing native loads and
-    ;; everything bakes as bytecode.  Native-in-dump (the default) needs the cache
-    ;; PRESENT -- the patched runtime loader resolves the baked native-comp-units
-    ;; from it -- so this stays OFF by default.  Always restored (unwind-protect).
-    (let* ((eln-vdir (and (getenv "CAE_PDUMP_MOVE_ASIDE")
-                          (bound-and-true-p comp-native-version-dir)
-                          (expand-file-name
-                           comp-native-version-dir
-                           (expand-file-name "eln/" doom-cache-dir))))
-           (eln-hidden (and eln-vdir (concat (directory-file-name eln-vdir) ".pdump-hidden"))))
-      (when (and eln-vdir (file-directory-p eln-vdir))
-        (ignore-errors (rename-file eln-vdir eln-hidden t)))
-      (unwind-protect
-          (with-temp-buffer
-            (let ((status (call-process "emacs" nil t nil "--batch" "-Q" "-l" script)))
-              (if (and (eq status 0) (file-exists-p tmp))
-                  (progn
-                    ;; Atomically replace the live image, then record the fingerprint
-                    ;; so the next sync can skip the rebuild when nothing changed.
-                    (rename-file tmp pdmp t)
-                    (with-temp-file keyfile (insert key))
-                    (print! (success "Dumped to %s") pdmp))
-                (ignore-errors (delete-file tmp))
-                ;; Surface the child's stdout+stderr so the failure reason is visible.
-                (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
-                (print! "%s" (string-trim (buffer-string))))))
-        (when (and eln-hidden (file-directory-p eln-hidden))
-          (ignore-errors (rename-file eln-hidden eln-vdir t)))))
+    (with-temp-buffer
+      (let ((status (call-process "emacs" nil t nil "--batch" "-Q" "-l" script)))
+        (if (and (eq status 0) (file-exists-p tmp))
+            (progn
+              ;; Atomically replace the live image, then record the fingerprint so
+              ;; the next sync can skip the rebuild when nothing changed.
+              (rename-file tmp pdmp t)
+              (with-temp-file keyfile (insert key))
+              (print! (success "Dumped to %s") pdmp))
+          (ignore-errors (delete-file tmp))
+          ;; Surface the child's stdout+stderr so the failure reason is visible.
+          (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
+          (print! "%s" (string-trim (buffer-string))))))
     (delete-file script)))
 
 (add-hook 'doom-after-sync-hook #'cae-pdump-build)
