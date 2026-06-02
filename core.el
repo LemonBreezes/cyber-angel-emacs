@@ -131,8 +131,3 @@ frameworks.")
            (or (not (modulep! :cae exwm))
                (bound-and-true-p cae-exwm-disabled-p)))
   (toggle-frame-fullscreen))
-
-;; Load secrets
-(when (and cae-init-secrets-enabled-p
-           (file-exists-p (concat cae-multi-secrets-dir "secrets.el")))
-  (load! (concat cae-multi-secrets-dir "secrets.el") "/"))
