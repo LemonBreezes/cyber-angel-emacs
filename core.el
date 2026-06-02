@@ -66,7 +66,8 @@ frameworks.")
   (when (string= "*scratch*" (buffer-name buffer))
     (with-current-buffer buffer
       (persistent-scratch-mode +1))))
-(persistent-scratch-setup-default)
+(cae-after-frame!
+ (persistent-scratch-setup-default))
 
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
