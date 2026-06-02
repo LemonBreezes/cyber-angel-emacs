@@ -327,10 +327,20 @@ fixups immediately."
             ;; `startup--load-user-init-file' override) then loads module config;
             ;; it must run BEFORE the force-load so its `after!' blocks are
             ;; registered when each package loads.  `doom-finalize' runs later.
+            ;; Engage `cae-after-frame!' deferral (preamble.el) for the duration
+            ;; of init: the macro checks `cae-pdump--building' to decide whether
+            ;; to run its body NOW or defer it to the first real frame at runtime.
+            ;; Without this the deferral never triggers and display/WM/tty-
+            ;; dependent config (e.g. `cae-theme', `cae-tty') loads HERE in batch,
+            ;; baking wrong predicate values -- which is why the dumped theme came
+            ;; up empty.  Reset to nil afterward so a runtime `doom/reload' (which
+            ;; re-runs config) behaves like a normal session.
+            (setq cae-pdump--building t)
             (let ((noninteractive nil))
               (setq doom-context (list t))
               (doom-initialize t)
               (doom-startup))
+            (setq cae-pdump--building nil)
             ;; Doom's init just added its own dir (`doom-cache-dir'/eln/) to
             ;; `native-comp-eln-load-path'.  Capture the path for the runtime
             ;; restore, forcing the read-only system dir LAST so boot-time

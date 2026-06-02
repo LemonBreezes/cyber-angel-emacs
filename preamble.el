@@ -41,12 +41,39 @@ of ELEMENT."
         (set list-var (cl-remove element lst :count 1 :test test-func))))
     (symbol-value list-var)))
 
+(defvar cae-pdump--building nil
+  "Non-nil while the pdump image is being built (set by cli.el).
+`cae-after-frame!' checks this to decide whether to run its body now or defer it
+to the first real frame at runtime.")
+
+(defun cae-run-on-first-frame (fn)
+  "Call FN once, on the first real frame.
+On a daemon there is no usable frame until a client connects, so defer to
+`server-after-make-frame-hook' (fires once the daemon is connected to);
+otherwise the initial `-nw'/GUI frame already exists, so call FN immediately.
+The `daemonp' test happens when this runs (at runtime), not when the dump is
+built (always batch, never a daemon).  Self-removing in the daemon case."
+  (if (daemonp)
+      (letrec ((fn* (lambda (&rest _)
+                      (remove-hook 'server-after-make-frame-hook fn*)
+                      (funcall fn))))
+        (add-hook 'server-after-make-frame-hook fn* t))
+    (funcall fn)))
+
 (defmacro cae-after-frame! (&rest body)
   "Run BODY now (a frame already exists), or — during the pdump build — defer it
-  to the first real frame at runtime so the display/WM/tty predicates see the
-  actual launch environment."
+to the first real frame at runtime so the display/WM/tty predicates see the
+actual launch environment.
+
+Deferral fires on the FIRST real frame via `cae-run-on-first-frame': at startup
+for a `-nw'/GUI Emacs (the initial frame already exists by `emacs-startup-hook'
+time), and on `server-after-make-frame-hook' for a daemon (once a client
+connects).  Plain `after-make-frame-functions' would miss the initial frame of a
+non-daemon Emacs entirely."
   `(if (bound-and-true-p cae-pdump--building)
-       (add-transient-hook! 'after-make-frame-functions (lambda () ,@body) t) ; append → load order
+       (add-hook 'emacs-startup-hook
+                 (lambda () (cae-run-on-first-frame (lambda () ,@body)))
+                 t)                     ; append → preserve load order
      ,@body))
 
 (defun cae-add-dir-to-path (dir)
