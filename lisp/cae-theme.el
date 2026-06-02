@@ -86,7 +86,7 @@ Also immediately enables `mixed-pitch-modes' if currently in one of the modes."
 
 ;;; Re-run the theme hook for commands that bypass it
 
-;; I can PR a fix to Doom once we drop support for Emacs 28.
+;; TODO I can PR a fix to Doom once we drop support for Emacs 28.
 (cae-defadvice! cae-run-theme-hook-h (_)
   :after #'consult-theme
   (run-hooks 'doom-load-theme-hook))
@@ -221,29 +221,6 @@ Run from `enable-theme-functions' (see the `add-hook' below)."
     (defun cae-theme-store-circadian-times-h ()
       (when (and (boundp 'circadian-themes) circadian-themes)
         (doom-store-put 'circadian-themes (circadian-themes-parse))))))
-
-;; Set the initial theme based on time and cached circadian data if available.
-(cond
- ((eq (cae-terminal-type) 0)
-  (setq doom-theme 'modus-vivendi-deuteranopia))
- ((and cae-theme-enable-day-night-theme-switching
-       (doom-store-get 'circadian-themes))
-  ;; Try setting theme from cache
-  (let* ((themes (doom-store-get 'circadian-themes))
-         (now (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
-         (past-themes
-          (cl-remove-if-not (lambda (entry)
-                              (let ((theme-time (car entry))) ; (hour min)
-                                (or (< (car theme-time) (car now)) ; Earlier hour
-                                    (and (= (car theme-time) (car now)) ; Same hour, earlier or equal minute
-                                         (<= (cadr theme-time) (cadr now))))))
-                            themes))
-         (entry (car (last (or past-themes themes)))) ; Last past theme, or last overall if none are past
-         (theme (cdr entry)))
-    (setq doom-theme theme)))
- (t
-  ;; Fallback if cache unavailable or day/night switching disabled
-  (setq doom-theme (if (cae-night-time-p) cae-night-theme cae-day-theme))))
 
 ;;; Export theme to the rest of Linux (pywal)
 

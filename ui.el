@@ -1,7 +1,65 @@
 ;;; ui.el -*- lexical-binding: t; -*-
 
 (unless cae-config-finished-loading
-  (cae-after-frame! (load! "lisp/cae-theme" doom-user-dir)))
+  (defun cae-theme-pick-startup-theme (&optional term)
+    "Return the theme to enable at startup.
+TERM is a `cae-terminal-type' value and defaults to the live frame's; pass an
+explicit one when no real frame exists yet (a daemon before any client connects
+should assume a graphical display, i.e. 2).
+
+Self-contained: it needs no frame beyond TERM and none of lisp/cae-theme.el's
+reactive setup, so the pdump early-enable in ui.el can call it BEFORE the first
+frame -- where every theme's data is already baked into the image
+\(`cae-pdump-preload-themes') and enabling one is a cheap `enable-theme'.  This
+is the single source of truth for the initial selection: the deferred full load
+in lisp/cae-theme.el calls it too (with a live frame) and corrects any edge
+case, e.g. a daemon client that turns out to be a TTY."
+    (let* ((term    (or term (cae-terminal-type)))
+           (graphic (eq term 2))
+           (day     (if (boundp 'cae-day-theme) cae-day-theme 'modus-operandi-tinted))
+           (night   (if (boundp 'cae-night-theme)
+                        cae-night-theme
+                      (if graphic 'modus-vivendi 'modus-vivendi-tritanopia))))
+      (cond
+       ;; Linux VT / non-Unicode console: the deuteranopia variant reads best.
+       ((eq term 0) 'modus-vivendi-deuteranopia)
+       ;; Day/night from the cached circadian schedule (SSH disables switching).
+       ((and (not (cae-running-in-ssh-p))
+             (doom-store-get 'circadian-themes))
+        (let* ((themes (doom-store-get 'circadian-themes))
+               (now    (reverse (cl-subseq (decode-time) 0 3))) ; (hour min sec)
+               (past   (cl-remove-if-not
+                        (lambda (entry)
+                          (let ((tt (car entry)))   ; (hour min)
+                            (or (< (car tt) (car now))
+                                (and (= (car tt) (car now))
+                                     (<= (cadr tt) (cadr now))))))
+                        themes)))
+          (cdr (car (last (or past themes)))))) ; last past theme, else last overall
+       ;; Fallback: fixed day/night by current time.
+       ((cae-night-time-p) night)
+       (t day))))
+
+  ;; Kill the theme flash when booting from the pdump.  The full cae-theme load
+  ;; is deferred to the first frame (its display/WM/tty predicates need the real
+  ;; launch environment), so without this `doom-theme' is still the `wheatgrass'
+  ;; fallback when Doom's `doom-init-theme-h' fires (after-init-hook -90) -- the
+  ;; frame is born with wheatgrass and only switches to the real theme once the
+  ;; deferred load runs.  Every theme's data is already baked into the image
+  ;; (`cae-pdump-preload-themes'), so all `doom-init-theme-h' needs is the right
+  ;; `doom-theme': set it just BEFORE that hook (and before any daemon client
+  ;; frame, since the baked `after-init-hook' placement applies in both cases).
+  ;; The deferred load still re-runs the picker with a live frame and corrects
+  ;; the rare mismatch (e.g. a daemon client that is actually a TTY).
+  (add-hook 'after-init-hook
+            (defun cae-theme-preset-doom-theme-h ()
+              (when (bound-and-true-p cae-pdump-active)
+                (setq doom-theme
+                      (cae-theme-pick-startup-theme
+                       ;; No usable frame yet on a daemon -> assume graphical.
+                       (if (daemonp) 2 (cae-terminal-type))))))
+            -95)
+  (load! "lisp/cae-theme" doom-user-dir))
 (load! "lisp/cae-visual-scrolling" doom-user-dir)
 
 ;; Show absolute line numbers. I prefer to not show relative line numbers
