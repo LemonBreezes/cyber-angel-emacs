@@ -41,6 +41,14 @@ of ELEMENT."
         (set list-var (cl-remove element lst :count 1 :test test-func))))
     (symbol-value list-var)))
 
+(defmacro cae-when-frame (&rest body)
+  "Run BODY now (a frame already exists), or — during the pdump build — defer it
+  to the first real frame at runtime so the display/WM/tty predicates see the
+  actual launch environment."
+  `(if (bound-and-true-p cae-pdump--building)
+       (add-hook 'cae-frame-setup-hook (lambda () ,@body) t) ; append → load order
+     ,@body))
+
 (defun cae-add-dir-to-path (dir)
   "Add DIR to the PATH environment variable and `exec-path` if it exists and isn't a duplicate."
   (let ((expanded-dir (expand-file-name dir)))
