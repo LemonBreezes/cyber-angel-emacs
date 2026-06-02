@@ -41,7 +41,7 @@ of ELEMENT."
         (set list-var (cl-remove element lst :count 1 :test test-func))))
     (symbol-value list-var)))
 
-(defmacro cae-when-frame (&rest body)
+(defmacro cae-when-frame! (&rest body)
   "Run BODY now (a frame already exists), or — during the pdump build — defer it
   to the first real frame at runtime so the display/WM/tty predicates see the
   actual launch environment."
