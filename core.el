@@ -81,7 +81,7 @@ frameworks.")
       (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer)))))
 
 ;; Set up fonts
-(cae-when-frame!
+(cae-after-frame!
  (unless (memq system-type '(cygwin windows-nt ms-dos))
    (let ((fonts-to-check '(("Aporetic Sans Mono" doom-font)
                            ("IBM Plex Mono" doom-serif-font)
