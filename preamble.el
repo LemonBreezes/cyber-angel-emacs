@@ -46,7 +46,7 @@ of ELEMENT."
   to the first real frame at runtime so the display/WM/tty predicates see the
   actual launch environment."
   `(if (bound-and-true-p cae-pdump--building)
-       (add-hook 'cae-frame-setup-hook (lambda () ,@body) t) ; append → load order
+       (add-transient-hook! 'after-make-frame-functions (lambda () ,@body) t) ; append → load order
      ,@body))
 
 (defun cae-add-dir-to-path (dir)
