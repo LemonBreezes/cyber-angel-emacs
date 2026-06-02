@@ -1,0 +1,51 @@
+--- a/src/pdumper.c
++++ b/src/pdumper.c
+@@ -5910,6 +5910,48 @@
+ 	   decode-coding-string.  */
+ 	comp_u->file = eln_fname;
+ 	comp_u->handle = dynlib_open_for_eln (SSDATA (eln_fname));
++	/* If the .eln is not under the install/build tree -- e.g. a native
++	   package's .eln (or a subr trampoline) that lives in the user
++	   eln-cache and got baked into a user-made portable dump -- the
++	   execdir-relative path resolves into the read-only system
++	   native-lisp dir, where it does not exist.  Before giving up, retry
++	   under each directory on `native-comp-eln-load-path', reusing the
++	   trailing <comp-native-version-dir>/<name>.eln of the path we just
++	   tried.  Plain C string ops only: `expand-file-name' & co. are not
++	   safe this early in startup (see comment above).  */
++	if (!comp_u->handle)
++	  {
++	    char *full = SSDATA (eln_fname);
++	    ptrdiff_t full_len = SBYTES (eln_fname);
++	    ptrdiff_t pos = full_len;
++	    int slashes = 0;
++	    while (pos > 0 && slashes < 2)
++	      if (full[--pos] == '/')
++		slashes++;
++	    const char *tail = full + (slashes == 2 ? pos + 1 : 0);
++	    ptrdiff_t tail_len = full_len - (tail - full);
++	    Lisp_Object path = Vnative_comp_eln_load_path;
++	    while (!comp_u->handle && CONSP (path))
++	      {
++		Lisp_Object dir = XCAR (path);
++		path = XCDR (path);
++		if (!STRINGP (dir))
++		  continue;
++		Lisp_Object edir = ENCODE_FILE (dir);
++		ptrdiff_t dlen = SBYTES (edir);
++		bool sep = dlen > 0 && SSDATA (edir)[dlen - 1] != '/';
++		Lisp_Object cand =
++		  make_uninit_string (dlen + (sep ? 1 : 0) + tail_len);
++		char *cdata = SSDATA (cand);
++		memcpy (cdata, SSDATA (edir), dlen);
++		if (sep)
++		  cdata[dlen] = '/';
++		memcpy (cdata + dlen + (sep ? 1 : 0), tail, tail_len);
++		if (file_access_p (cdata, F_OK)
++		    && (comp_u->handle = dynlib_open_for_eln (cdata)))
++		  comp_u->file = cand;
++	      }
++	  }
+ 	if (!comp_u->handle)
+ 	  {
+ 	    fprintf (stderr, "Error using execdir %s:\n",
