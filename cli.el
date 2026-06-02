@@ -155,6 +155,17 @@ lazily after startup."
   "Parallel jobs for the pdump AOT native-compile pass.
 Defaults to half the CPUs to bound peak RAM (each libgccjit job is heavy).")
 
+(defvar cae-pdump-preload-themes t
+  "Which themes to bake (DISABLED) into the pdump for fast runtime switching.
+`load-theme' with both NO-CONFIRM and NO-ENABLE records a theme's
+`theme-settings' (its face/variable specs) without enabling it; that data
+survives the dump, so switching to the theme at runtime is a cheap
+`enable-theme' instead of re-reading and evaluating its file.
+
+t bakes every `custom-available-themes' (largest image, any theme switches
+instantly); a list of theme symbols restricts it to those (smaller image);
+nil disables the preload entirely.")
+
 (defun cae-pdump--eln-count ()
   "Number of `.eln' files in this Emacs's user eln cache."
   (length (ignore-errors
@@ -437,6 +448,17 @@ fixups immediately."
             ;; Keep doom.el's `with-eval-after-load 'straight' block deferred to
             ;; its proper time (it would fire mid-doom.el from the dumped image).
             (setq features (delq 'straight features))
+            ;; Bake theme DATA (face/variable specs) into the heap WITHOUT
+            ;; enabling any: `load-theme' with NO-CONFIRM + NO-ENABLE records a
+            ;; theme's `theme-settings' but leaves `custom-enabled-themes' and the
+            ;; live faces untouched.  That data survives the dump, so switching to
+            ;; any baked theme at runtime is a cheap `enable-theme' rather than
+            ;; re-reading and evaluating its file.  (Themes are on the load path
+            ;; now that every package was force-loaded above.)
+            (let ((want ',cae-pdump-preload-themes))
+              (when want
+                (dolist (th (if (eq want t) (custom-available-themes) want))
+                  (ignore-errors (load-theme th t t)))))
             ;; Neutralize objects pdumper can't serialize (created by full init).
             ,@(cae-pdump--cleanup-form)
             (dump-emacs-portable ,tmp))
