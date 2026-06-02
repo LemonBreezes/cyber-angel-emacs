@@ -140,7 +140,8 @@ lazily after startup."
                     (ignore-errors (set (make-local-variable (car pair)) nil))
                   (ignore-errors (scrub (cdr pair) 0)))))))))))
 
-(defvar cae-pdump-native-compile-jobs (num-processors)
+(defvar cae-pdump-native-compile-jobs
+  (max 1 (/ (or (ignore-errors (num-processors)) 4) 2))
   "Parallel jobs for the pdump AOT native-compile pass.
 Defaults to half the CPUs to bound peak RAM (each libgccjit job is heavy).")
 
