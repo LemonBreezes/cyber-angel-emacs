@@ -30,7 +30,17 @@ Emacs/Doom versions).  Any change -- config, packages, Doom core, this build
 logic, or newly-compiled elns (e.g. after an AOT native-compile) -- invalidates
 the cached image so `doom sync' rebuilds it; an unchanged sync hashes the same
 and is skipped."
-  (let ((parts (list emacs-version (bound-and-true-p doom-version)))
+  (let ((parts (list emacs-version (bound-and-true-p doom-version)
+                     ;; A bare dev-version string (e.g. "32.0.50") stays constant
+                     ;; across rebuilds of the same branch, but a pdump is only
+                     ;; loadable by the EXACT Emacs build that produced it.  Hash
+                     ;; the build's commit + timestamp so ANY Emacs rebuild
+                     ;; invalidates the cached image; otherwise an Emacs-only
+                     ;; rebuild (no config/package/eln change) hashes the same
+                     ;; key, sync SKIPS the rebuild, and the stale image fails to
+                     ;; boot with "not built for this Emacs executable".
+                     (bound-and-true-p emacs-repository-version)
+                     (format "%S" (bound-and-true-p emacs-build-time))))
         ;; User-writable eln-cache dirs (skip the read-only system native-lisp
         ;; dir, usually the last entry) -- their elns get baked into the image,
         ;; so a fresh native-compile must trigger a rebuild.
