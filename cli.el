@@ -118,26 +118,63 @@ lazily after startup."
                      module-function xwidget xwidget-view))
           (seen (make-hash-table :test 'eq)))
       (cl-labels ((badp (o) (and (memq (type-of o) cae-bad) (not (eq o main-thread))))
+                  ;; A `treesit-compiled-query' baked into the dump comes back
+                  ;; with a DEAD language pointer (the grammar it points at can't
+                  ;; be serialized), and `treesit-query-compile' on a compiled
+                  ;; query uses the query's OWN language, not the one passed in --
+                  ;; so re-validating it at runtime loads `libtree-sitter-nil' and
+                  ;; errors (e.g. opening a Haskell file -> `haskell-ts-font-lock',
+                  ;; whose rules are compiled eagerly in a load-time `defvar').
+                  ;; Replace each with its SOURCE form -- still recoverable HERE,
+                  ;; pre-dump, while the grammar is live -- so the owning mode
+                  ;; recompiles it fresh against the runtime grammar.
+                  (queryp (o) (and (fboundp 'treesit-compiled-query-p)
+                                   (treesit-compiled-query-p o)))
+                  (qsource (o) (ignore-errors (treesit-query-source o)))
                   (scrub (obj depth)
                     (when (and obj (<= depth 8) (not (gethash obj seen)))
                       (puthash obj t seen)
                       (cond
                        ((consp obj)
-                        (if (badp (car obj)) (setcar obj nil) (scrub (car obj) (1+ depth)))
-                        (if (badp (cdr obj)) (setcdr obj nil) (scrub (cdr obj) (1+ depth))))
+                        ;; Walk the list SPINE iteratively so a long list (e.g.
+                        ;; `haskell-ts-font-lock', 16 settings) doesn't exhaust
+                        ;; DEPTH down the cdr-chain -- only real nesting (each
+                        ;; car) should cost depth, not list length.
+                        (let ((cell obj))
+                          (while (consp cell)
+                            (let ((a (car cell)))
+                              (cond ((queryp a) (setcar cell (qsource a)))
+                                    ((badp a)   (setcar cell nil))
+                                    (t (scrub a (1+ depth)))))
+                            (let ((d (cdr cell)))
+                              (cond ((queryp d) (setcdr cell (qsource d)) (setq cell nil))
+                                    ((badp d)   (setcdr cell nil)         (setq cell nil))
+                                    ((and (consp d) (not (gethash d seen)))
+                                     (puthash d t seen)
+                                     (setq cell d))
+                                    ((consp d)  (setq cell nil)) ; already seen -> stop
+                                    (t (scrub d (1+ depth)) (setq cell nil)))))))
                        ((or (recordp obj) (and (vectorp obj) (not (stringp obj))))
                         (dotimes (i (length obj))
                           (let ((e (aref obj i)))
-                            (if (badp e) (ignore-errors (aset obj i nil))
-                              (scrub e (1+ depth))))))
+                            (cond ((queryp e) (ignore-errors (aset obj i (qsource e))))
+                                  ((badp e)   (ignore-errors (aset obj i nil)))
+                                  (t (scrub e (1+ depth)))))))
                        ((hash-table-p obj)
-                        (let (bad)
-                          (maphash (lambda (k v) (if (badp v) (push k bad) (scrub v (1+ depth)))) obj)
-                          (dolist (k bad) (remhash k obj))))))))
+                        (let (bad fixq)
+                          (maphash (lambda (k v)
+                                     (cond ((queryp v) (push (cons k (qsource v)) fixq))
+                                           ((badp v)   (push k bad))
+                                           (t (scrub v (1+ depth)))))
+                                   obj)
+                          (dolist (k bad) (remhash k obj))
+                          (dolist (kv fixq) (puthash (car kv) (cdr kv) obj))))))))
         (mapatoms (lambda (s)
                     (when (and (boundp s) (not (keywordp s)))
                       (let ((v (ignore-errors (symbol-value s))))
-                        (if (badp v) (set s nil) (scrub v 0))))
+                        (cond ((queryp v) (set s (qsource v)))
+                              ((badp v)   (set s nil))
+                              (t (scrub v 0)))))
                     (when (and (fboundp s)
                                (not (special-form-p (symbol-function s)))
                                (not (subrp (symbol-function s))))
@@ -146,9 +183,12 @@ lazily after startup."
           (with-current-buffer buf
             (dolist (pair (buffer-local-variables buf))
               (when (consp pair)
-                (if (badp (cdr pair))
-                    (ignore-errors (set (make-local-variable (car pair)) nil))
-                  (ignore-errors (scrub (cdr pair) 0)))))))))))
+                (cond ((queryp (cdr pair))
+                       (ignore-errors
+                         (set (make-local-variable (car pair)) (qsource (cdr pair)))))
+                      ((badp (cdr pair))
+                       (ignore-errors (set (make-local-variable (car pair)) nil)))
+                      (t (ignore-errors (scrub (cdr pair) 0))))))))))))
 
 (defvar cae-pdump-native-compile-jobs
   (max 1 (/ (or (ignore-errors (num-processors)) 4) 2))
