@@ -145,38 +145,58 @@ lazily after startup."
   "Parallel jobs for the pdump AOT native-compile pass.
 Defaults to half the CPUs to bound peak RAM (each libgccjit job is heavy).")
 
+(defun cae-pdump--eln-count ()
+  "Number of `.eln' files in this Emacs's user eln cache."
+  (length (ignore-errors
+            (directory-files-recursively
+             (expand-file-name comp-native-version-dir
+                               (expand-file-name "eln/" doom-cache-dir))
+             "\\.eln\\'"))))
+
 (defun cae-pdump--native-compile (build-dir)
-  "AOT-native-compile every package under BUILD-DIR before it gets dumped.
-The pdump image only bakes NATIVE code for a package whose `.eln' already
-exists at build time (the build merely LOADS what's on disk), so compile them
-up front.  Incremental: `native-compile-async' skips any source whose `.eln' is
-current, so an unchanged sync recompiles nothing and returns almost
-immediately.  Blocks (pumping the async subprocesses) until the queue drains so
-the dump that follows sees the finished elns."
+  "AOT-native-compile the packages under BUILD-DIR that need it, before dumping.
+The pdump image only bakes NATIVE code for a package whose `.eln' already exists
+at build time (the build merely LOADS what's on disk), so compile the rest up
+front.  Truly incremental: a source whose `.eln' is present and current is never
+queued -- and `native-compile-async' has NO such up-to-date check itself (it
+would queue all ~3000 files and spawn a checker subprocess for each, wasting
+minutes even when nothing changed), so we pre-filter here.  Autoload/-pkg stubs,
+which are never natively compiled, are excluded too.  Blocks until the queue
+drains, then reports how many elns were actually produced."
   (require 'comp)
   ;; Async children inherit the parent's `load-path' (comp-run.el binds it into
   ;; their startup form), so put every package root on it -- otherwise their
   ;; macro/`require' dependencies don't resolve and compilation fails.
   (dolist (dir (directory-files build-dir t "\\`[^.]"))
     (when (file-directory-p dir) (add-to-list 'load-path dir)))
-  (let ((native-comp-async-jobs-number cae-pdump-native-compile-jobs)
-        (native-comp-async-report-warnings-errors 'silent)
-        (native-comp-verbose 0)
-        (inhibit-message t))
-    (native-compile-async (list build-dir) 'recursively)
-    (when (or (bound-and-true-p comp-files-queue)
-              (and (fboundp 'comp--async-runnings) (cl-plusp (comp--async-runnings))))
-      (print! (start "AOT native-compiling packages (incremental, %d jobs)...")
-              cae-pdump-native-compile-jobs)
-      (let ((report 0))
+  ;; `comp-el-to-eln-filename' resolves against the first writable entry of
+  ;; `native-comp-eln-load-path'; Doom puts its eln cache there, which is exactly
+  ;; where these elns live, so existence == "already compiled, current".
+  (let ((stale (cl-remove-if
+                (lambda (el)
+                  (or (string-match-p "\\(?:-autoloads\\|-pkg\\)\\.el\\'" el)
+                      (let ((eln (ignore-errors (comp-el-to-eln-filename el))))
+                        (and eln (file-exists-p eln)
+                             (file-newer-than-file-p eln el)))))
+                (directory-files-recursively build-dir "\\.el\\'"))))
+    (when stale
+      (print! (start "Native-compiling %d new/changed file(s) (%d jobs)...")
+              (length stale) cae-pdump-native-compile-jobs)
+      (let ((before (cae-pdump--eln-count))
+            (native-comp-async-jobs-number cae-pdump-native-compile-jobs)
+            (native-comp-async-report-warnings-errors 'silent)
+            (native-comp-verbose 0)
+            (inhibit-message t))
+        (native-compile-async stale nil)
         (while (or (bound-and-true-p comp-files-queue)
                    (and (fboundp 'comp--async-runnings) (cl-plusp (comp--async-runnings))))
-          (accept-process-output nil 1)
-          (when (> (- (float-time) report) 15)
-            (setq report (float-time))
-            (print! "  %d files left to native-compile..."
-                    (length (bound-and-true-p comp-files-queue))))))
-      (print! (success "Native compilation complete")))))
+          (accept-process-output nil 1))
+        (let ((delta (- (cae-pdump--eln-count) before)))
+          (if (zerop delta)
+              ;; The leftover stale files are test/no-native-compile sources that
+              ;; never produce an eln -- nothing actually needed building.
+              (print! (success "Native compilation already up to date"))
+            (print! (success "Native-compiled %d new file(s)") delta)))))))
 
 (defun cae-pdump-build ()
   "Build the full-config pdump image (`doom.pdmp'), if it is stale.
