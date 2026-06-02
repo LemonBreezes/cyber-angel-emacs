@@ -81,19 +81,21 @@ frameworks.")
       (string-match-p "^\\*.*[lL]og.*\\*" (buffer-name buffer)))))
 
 ;; Set up fonts
-(unless (memq system-type '(cygwin windows-nt ms-dos))
-  (let ((fonts-to-check '(("Aporetic Sans Mono" doom-font)
-                          ("IBM Plex Mono" doom-serif-font)
-                          ("Aporetic Sans" doom-variable-pitch-font))))
-    (dolist (font fonts-to-check)
-      (if (find-font (font-spec :name (car font)))
-          (set (cadr font) (font-spec :family (car font) :size
-                                      (pcase (system-name)
-                                        ("g17" 24)
-                                        ("st-ROG-Strix-G713PI-G713PI" 36)
-                                        (_ 18))))
-        (unless (cae-display-graphic-p)
-          (warn "Font %s does not exist!" (car font)))))))
+(cae-when-frame!
+ (unless (memq system-type '(cygwin windows-nt ms-dos))
+   (let ((fonts-to-check '(("Aporetic Sans Mono" doom-font)
+                           ("IBM Plex Mono" doom-serif-font)
+                           ("Aporetic Sans" doom-variable-pitch-font))))
+     (dolist (font fonts-to-check)
+       (if (find-font (font-spec :name (car font)))
+           (set (cadr font) (font-spec :family (car font) :size
+                                       (pcase (system-name)
+                                         ("g17" 24)
+                                         ("st-ROG-Strix-G713PI-G713PI" 36)
+                                         (_ 18))))
+         (unless (cae-display-graphic-p)
+           (warn "Font %s does not exist!" (car font))))))
+   (doom-init-fonts-h t)))
 
 ;; Do not break my clipboard in SSH sessions.
 (when (and (modulep! :os tty)
