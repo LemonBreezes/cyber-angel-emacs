@@ -62,11 +62,12 @@ frameworks.")
                  (* 1024 1024))
           (message (concat "URGENT: Persistent scratch is over 1 GB. "
                            "Write logic for cleaning it.")))))
-(dolist (buffer (buffer-list))
-  (when (string= "*scratch*" (buffer-name buffer))
-    (with-current-buffer buffer
-      (persistent-scratch-mode +1))))
-(cae-after-frame! (persistent-scratch-setup-default))
+(cae-after-frame!
+ (dolist (buffer (buffer-list))
+   (when (string= "*scratch*" (buffer-name buffer))
+     (with-current-buffer buffer
+       (persistent-scratch-mode +1))))
+ (persistent-scratch-setup-default))
 
 ;; Helm is not our main completion system.
 (when (and (modulep! :completion helm)
