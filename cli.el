@@ -408,4 +408,4 @@ working PDMP."
           (print! "%s" (string-trim (buffer-string))))))
     (delete-file script)))
 
-(add-hook 'doom-after-sync-hook #'cae-pdump-build)
+;;(add-hook 'doom-after-sync-hook #'cae-pdump-build)
