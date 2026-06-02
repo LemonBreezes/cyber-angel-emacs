@@ -8,7 +8,7 @@
   (load! "core" doom-user-dir))
 
 (when cae-init-tty-enabled-p
-  (load! "lisp/cae-tty" doom-user-dir))
+  (cae-when-frame! (load! "lisp/cae-tty" doom-user-dir)))
 
 (when cae-init-bindings-enabled-p
   (load! "lisp/cae-bindings" doom-user-dir))
