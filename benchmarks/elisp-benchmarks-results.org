@@ -265,7 +265,8 @@ default motherboard turbo boost setting.
 |--------------------+------------+--------+-----+-----------+---------|
 | total              |      17.83 |   0.00 |   0 |     17.83 |    0.74 |
 
-* Laptop g17
+* Laptop g17 (with hardening)
 :PROPERTIES:
 :CREATED_TIME: [2025-08-10 Sun 14:21]
 :END:
+
