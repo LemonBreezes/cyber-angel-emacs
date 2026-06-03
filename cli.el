@@ -488,6 +488,22 @@ fixups immediately."
             ;; Keep doom.el's `with-eval-after-load 'straight' block deferred to
             ;; its proper time (it would fire mid-doom.el from the dumped image).
             (setq features (delq 'straight features))
+            ;; Re-derive env-dependent `custom-initialize-delay' vars at RUNTIME.
+            ;; This batch build's own `command-line' already re-evaluated every
+            ;; such var from the BUILD environment and then set
+            ;; `custom-delayed-init-variables' to t -- both of which the dump
+            ;; freezes.  A heap booted from the image reaches the same
+            ;; re-evaluation block (startup.el) but, finding the variable t (not a
+            ;; list), skips it -- so the build-time values survive.  For
+            ;; `temporary-file-directory' that is wrong: it bakes in $TMPDIR as it
+            ;; was during the build (e.g. a transient `/tmp/…' sandbox dir that no
+            ;; longer exists after a reboot), so `make-temp-file' then fails with
+            ;; "No such file or directory" -- which breaks `envrc-global-mode' on
+            ;; `doom-first-file-hook'.  Re-list it so the booted Emacs re-derives
+            ;; it from the LIVE environment; that block runs early in
+            ;; `command-line', before any file is visited.  (Other delay vars stay
+            ;; frozen as before -- only env-derived ones need this.)
+            (setq custom-delayed-init-variables '(temporary-file-directory))
             ;; Bake theme DATA (face/variable specs) into the heap WITHOUT
             ;; enabling any: `load-theme' with NO-CONFIRM + NO-ENABLE records a
             ;; theme's `theme-settings' but leaves `custom-enabled-themes' and the
