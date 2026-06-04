@@ -102,13 +102,26 @@ clean we also remove ENV-UNSET from the session environment with
 later) has them stripped.  A process that is *already* running in a
 stale session keeps its original environment until it is restarted."
   (if (cae-ai-assistant--tmux-enabled-p sandbox-p)
-      (let ((session (cae-ai-assistant--tmux-session-name directory)))
+      (let* ((session (cae-ai-assistant--tmux-session-name directory))
+             (remote (file-remote-p directory))
+             ;; For a TRAMP directory (e.g. a `sudo'/`su' connection on the
+             ;; local host) the start directory must be a real local path, not
+             ;; the TRAMP file name; otherwise tmux can't `chdir' into `-c' and
+             ;; silently launches the assistant in tmux's own cwd.  We also
+             ;; `cd' into it as part of the command chain, since `-c' is honoured
+             ;; only when the session is first created.
+             (local-dir (if remote
+                            (file-local-name directory)
+                          (expand-file-name directory)))
+             (inner (concat (cae-ai-assistant--env-unset-prefix env-unset) command))
+             (inner (if remote
+                        (format "cd %s && %s" (shell-quote-argument local-dir) inner)
+                      inner)))
         (concat
          (format "tmux new-session -A -s %s -c %s %s"
                  (shell-quote-argument session)
-                 (shell-quote-argument (expand-file-name directory))
-                 (shell-quote-argument
-                  (concat (cae-ai-assistant--env-unset-prefix env-unset) command)))
+                 (shell-quote-argument local-dir)
+                 (shell-quote-argument inner))
          ;; `\\;' reaches tmux as a literal `;', chaining a server-side
          ;; `set-environment -r' for each variable.  This runs on both
          ;; create and reattach, unlike the new-session shell-command.
