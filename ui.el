@@ -53,11 +53,10 @@ case, e.g. a daemon client that turns out to be a TTY."
   ;; the rare mismatch (e.g. a daemon client that is actually a TTY).
   (add-hook 'after-init-hook
             (defun cae-theme-preset-doom-theme-h ()
-              (when (bound-and-true-p cae-pdump-active)
-                (setq doom-theme
-                      (cae-theme-pick-startup-theme
-                       ;; No usable frame yet on a daemon -> assume graphical.
-                       (if (daemonp) 2 (cae-terminal-type))))))
+              (setq doom-theme
+                    (cae-theme-pick-startup-theme
+                     ;; No usable frame yet on a daemon -> assume graphical.
+                     (if (daemonp) 2 (cae-terminal-type)))))
             -95)
   (load! "lisp/cae-theme" doom-user-dir))
 (load! "lisp/cae-visual-scrolling" doom-user-dir)
