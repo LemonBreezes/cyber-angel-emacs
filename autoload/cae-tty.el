@@ -27,6 +27,9 @@
       (setq org-tidy-properties-inline-symbol "."))
     (after! blamer
       (setq blamer-commit-formatter " * %s"))
+    (after! magit-section
+      (setq magit-section-visibility-indicators
+       '((magit-fringe-bitmap> . magit-fringe-bitmapv) ("..." . t))))
     (after! dirvish
       (setq dirvish-attributes
             (delq 'subtree-state dirvish-attributes)
