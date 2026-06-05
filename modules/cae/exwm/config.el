@@ -2,10 +2,17 @@
 
 (require 'cae-lib)
 
-(defvar cae-exwm-enabled-p (equal "EXWM" (cae-wm-name))
-  "Whether EXWM is enabled.
-Detected via EWMH (`cae-wm-name'); see that function for why this is
-preferred over the `XDG_CURRENT_DESKTOP' env var.")
+(defvar cae-exwm-enabled-p
+  (and (eq 'x (framep (selected-frame)))
+       (equal "1" (getenv "CAE_EXWM")))
+  "Whether this Emacs was launched to run as the EXWM window manager.
+Set from the `CAE_EXWM' environment variable, which `.xinitrc' exports
+only on the EXWM session path.  This is launch *intent*, which must be
+knowable before any window manager exists: it must not depend on EXWM
+already running, because EXWM only advertises its EWMH `_NET_WM_NAME'
+once `exwm-wm-mode' has started, and that is itself gated on this flag.
+For runtime \"which WM am I under?\" checks (e.g. theming), use
+`cae-wm-name' instead.")
 
 (defvar cae-exwm-inhibit-title-renaming nil)
 (make-variable-buffer-local 'cae-exwm-inhibit-title-renaming)

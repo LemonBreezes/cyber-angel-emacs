@@ -190,8 +190,7 @@ lazily after startup."
                        (ignore-errors (set (make-local-variable (car pair)) nil)))
                       (t (ignore-errors (scrub (cdr pair) 0))))))))))))
 
-(defvar cae-pdump-native-compile-jobs
-  (max 1 (/ (or (ignore-errors (num-processors)) 4) 2))
+(defvar cae-pdump-native-compile-jobs (num-processors)
   "Parallel jobs for the pdump AOT native-compile pass.
 Defaults to half the CPUs to bound peak RAM (each libgccjit job is heavy).")
 
@@ -517,6 +516,53 @@ fixups immediately."
                   (ignore-errors (load-theme th t t)))))
             ;; Neutralize objects pdumper can't serialize (created by full init).
             ,@(cae-pdump--cleanup-form)
+            ;; Every loaded native comp-unit's `file' slot must be a CONS
+            ;; (install-rel . build-rel) or `dump-emacs-portable' aborts with
+            ;; "trying to dump non fixed-up eln file" (pdumper.c).  Upstream sets
+            ;; this in `load--fixup-all-elns' (loadup.el) -- but only when Emacs
+            ;; is built with --bin-dest/--eln-dest, which our `emacs -Q' batch
+            ;; lacks, so every comp-unit's file is still the bare load-time
+            ;; STRING.  Fix them up here.  Both halves are the `.eln's path
+            ;; relative to THIS build's bindir (`invocation-directory'); since
+            ;; the runtime Emacs is the SAME binary, boot-time
+            ;; `emacs_execdir'+rel reconstructs the original absolute path and
+            ;; the unit loads (the user-eln-fallback patch is the backstop if
+            ;; the eln-cache later moves).  Comp-units loaded FROM the system
+            ;; emacs.pdmp come back as strings too (pdumper resets the slot on
+            ;; load), so this re-fixes them as well; ones already consed are
+            ;; left alone.
+            (let ((cus (make-hash-table :test 'eq))
+                  (fixed 0) (already 0) (collect nil))
+              (setq collect (lambda (cu) (when cu (puthash cu t cus))))
+              ;; (a) the load registry, (b) every native subr reachable
+              ;; through a symbol's function OR value cell -- the dumper walks
+              ;; ALL reachable comp-units, so the registry alone is not enough
+              ;; (a unit re-loaded under the same name evicts the old one from
+              ;; the registry while it stays reachable via its subrs).
+              (when (boundp 'comp-loaded-comp-units-h)
+                (maphash (lambda (_ cu) (funcall collect cu))
+                         comp-loaded-comp-units-h))
+              (mapatoms
+               (lambda (s)
+                 (when (fboundp s)
+                   (let ((f (symbol-function s)))
+                     (when (subr-native-elisp-p f)
+                       (funcall collect (subr-native-comp-unit f)))))
+                 (when (boundp s)
+                   (let ((v (ignore-errors (symbol-value s))))
+                     (when (subr-native-elisp-p v)
+                       (funcall collect (subr-native-comp-unit v)))))))
+              (maphash
+               (lambda (cu _)
+                 (let ((f (native-comp-unit-file cu)))
+                   (if (stringp f)
+                       (let ((rel (file-relative-name f invocation-directory)))
+                         (native-comp-unit-set-file cu (cons rel rel))
+                         (setq fixed (1+ fixed)))
+                     (setq already (1+ already)))))
+               cus)
+              (princ (format "eln fixup: %d comp-units (%d fixed, %d already consed)\n"
+                             (hash-table-count cus) fixed already)))
             (dump-emacs-portable ,tmp))
          (current-buffer))))
     (print! (start "Building pdump image (this runs Doom's whole init)..."))
