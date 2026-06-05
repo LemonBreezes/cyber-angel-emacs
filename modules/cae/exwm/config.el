@@ -2,9 +2,7 @@
 
 (require 'cae-lib)
 
-(defvar cae-exwm-enabled-p
-  (and (eq 'x (framep (selected-frame)))
-       (equal "1" (getenv "CAE_EXWM")))
+(defvar cae-exwm-enabled-p nil
   "Whether this Emacs was launched to run as the EXWM window manager.
 Set from the `CAE_EXWM' environment variable, which `.xinitrc' exports
 only on the EXWM session path.  This is launch *intent*, which must be
@@ -23,6 +21,8 @@ For runtime \"which WM am I under?\" checks (e.g. theming), use
   :group 'cae-exwm)
 
 (cae-after-frame!
+ (setq (and (eq 'x (framep (selected-frame)))
+            (equal "1" (getenv "CAE_EXWM"))))
  (when cae-exwm-enabled-p
    (defun cae-exwm-rename-buffer-to-title ()
      "Rename the buffer to its `exwm-title'."
