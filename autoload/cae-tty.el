@@ -78,3 +78,14 @@
                   nerd-icons-octicon))
       (cae-advice-add fn :override (cl-constantly "")))
     (remove-hook 'dired-mode-hook #'nerd-icons-dired-mode)))
+
+;;;###autoload
+(defun cae-tty-disable-posframe ()
+  (interactive)
+  (when (featurep 'helm-posframe)
+    (helm-posframe-disable))
+  (when (featurep 'vertico)
+    (vertico-multiform-mode -1)
+    (vertico-posframe-mode -1))
+  (when (featurep 'corfu)
+    (global-corfu-mode -1)))

@@ -78,7 +78,18 @@ offending object IN PLACE wherever it is held (record slot, vector, cons, hash
 value, or a top-level var), so it's gone regardless of how many roots reach the
 container.  Every such object is a runtime handle the owning package recreates
 lazily after startup."
-  '(;; 1. Delete live processes and clear pending timers (baking
+  '(;; 0. Undo the doom CLI's output redirection, which `doom-cli--init'
+    ;; installs for the running `doom sync' command and which is LIVE when we
+    ;; dump: an `:override' advice on `message' (routing every message through
+    ;; `doom-print' into the now-dead ` *doom-cli stdout/stderr*' buffers) plus a
+    ;; redirected `standard-output'/`doom-print-stream'.  Baked into the image,
+    ;; this makes runtime `message' a silent no-op -- e.g. `+workspace/display'
+    ;; runs but nothing reaches the echo area.  Strip the advice (restoring the
+    ;; pristine `#<subr message>') and reset the streams to their stock defaults.
+    (advice-mapc (lambda (fn _props) (advice-remove 'message fn)) 'message)
+    (setq-default standard-output t)
+    (when (boundp 'doom-print-stream) (setq-default doom-print-stream t))
+    ;; 1. Delete live processes and clear pending timers (baking
     ;; `doom-after-init-hook' arms idle timers -- incremental loader, gcmh -- that
     ;; are stale at runtime and may hold unserializable references; each owner
     ;; re-arms its timer at runtime as needed).
