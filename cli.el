@@ -414,6 +414,32 @@ fixups immediately."
                 (condition-case err
                     (require p nil 'noerror)
                   (error (princ (format "SKIP %s: %S\n" p err))))))
+            ;; Force-load the autoload files Doom otherwise lazy-loads, so the
+            ;; helpers they define WITHOUT a `;;;###autoload' cookie (e.g.
+            ;; `+workspace--tabline', called directly by `+workspace/display' and
+            ;; the which-key advice in ui.el) are baked into the heap.  Doom's
+            ;; loaddefs carry only the cookied forms, so in the dump those bare
+            ;; helpers stay void until the first call to a cookied sibling lazily
+            ;; loads the file -- and any direct caller before that hits
+            ;; `void-function'.  Mirrors the package force-load above; covers
+            ;; every ENABLED module (core :doom and the user's `:cae/...' modules)
+            ;; via `doom-module-list', PLUS the private config's own top-level
+            ;; autoloads ($DOOMDIR/autoload.el and $DOOMDIR/autoload/*.el).
+            (princ "Force-loading module + config autoloads...\n")
+            (let ((file-name-handler-alist nil)
+                  (roots (append (delq nil (mapcar #'doom-module-locate-path
+                                                   (doom-module-list)))
+                                 (list doom-user-dir))))
+              (dolist (dir roots)
+                (dolist (f (append
+                            (let ((af (expand-file-name "autoload.el" dir)))
+                              (and (file-exists-p af) (list af)))
+                            (let ((ad (expand-file-name "autoload" dir)))
+                              (and (file-directory-p ad)
+                                   (directory-files-recursively ad "\\.el\\'")))))
+                  (condition-case err
+                      (load f nil 'nomessage 'nosuffix)
+                    (error (princ (format "SKIP autoload %s: %S\n" f err)))))))
             ;; Restore the real `module-load' primitive (don't leave it stubbed).
             (fset 'module-load cae--orig-module-load)
             (princ "All packages loaded; finalizing...\n")

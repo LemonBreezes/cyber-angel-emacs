@@ -76,6 +76,29 @@ non-daemon Emacs entirely."
                  t)                     ; append → preserve load order
      ,@body))
 
+(defmacro cae-before-frame! (&rest body)
+  "Run BODY now, or — during the pdump build — defer it to `before-init-hook'
+at runtime, so it runs OUTSIDE the dumped image (seeing the live environment,
+e.g. `CAE_EXWM') and BEFORE the initial frame is created.
+
+The counterpart to `cae-after-frame!': use it when BODY must *precede* the first
+frame rather than follow it — enabling EXWM as the window manager is the case in
+point.  `before-init-hook' fires inside `command-line' after `early-init.el' but
+before `frame-initialize' (see startup.el), which is the earliest runtime point
+a dumped hook can reach.  Predicates that pivot on the frame must therefore use
+`initial-window-system' (set by then) rather than `(framep (selected-frame))'
+\(still the initial terminal frame at this point).
+
+When NOT building the dump, config loads during `init.el', after the initial
+frame already exists, so BODY runs inline — the earliest point still reachable,
+and EXWM simply takes over the existing frame.  Because the env-/frame-sensitive
+decision is deferred into the dump as a hook, the image never bakes in the build
+host's environment.  Intended for the non-daemon WM launch; a daemon has no
+initial frame to precede."
+  `(if (bound-and-true-p cae-pdump--building)
+       (add-hook 'before-init-hook (lambda () ,@body) t) ; append → preserve order
+     ,@body))
+
 (defun cae-add-dir-to-path (dir)
   "Add DIR to the PATH environment variable and `exec-path` if it exists and isn't a duplicate."
   (let ((expanded-dir (expand-file-name dir)))
