@@ -99,8 +99,9 @@ repository per session."
     (add-hook 'diff-hl-mode-hook #'cae-diff-hl-set-reference-revision-h)
 
     (setq diff-hl-flydiff-delay 2)
-    (unless (cae-display-graphic-p)
-      (diff-hl-margin-mode +1)))
+    (cae-after-frame!
+      (unless (cae-display-graphic-p)
+        (diff-hl-margin-mode +1))))
 
   ;; For the built-in repeat map.
   (map! [remap +vc-gutter/previous-hunk] #'diff-hl-show-hunk-previous

@@ -58,7 +58,11 @@ case, e.g. a daemon client that turns out to be a TTY."
                      ;; No usable frame yet on a daemon -> assume graphical.
                      (if (daemonp) 2 (cae-terminal-type)))))
             -95)
-  (load! "lisp/cae-theme" doom-user-dir))
+  ;; Defer the full (display/WM/tty-sensitive) cae-theme setup to the first real
+  ;; frame so its predicates see the live launch environment instead of the batch
+  ;; pdump build (no display) -- the early picker above already set `doom-theme'.
+  ;; Restores the wrapper dropped in f8982d51f; inline when not building the dump.
+  (cae-after-frame! (load! "lisp/cae-theme" doom-user-dir)))
 (load! "lisp/cae-visual-scrolling" doom-user-dir)
 
 ;; Show absolute line numbers. I prefer to not show relative line numbers
@@ -140,8 +144,11 @@ case, e.g. a daemon client that turns out to be a TTY."
         doom-modeline-support-imenu t
         doom-modeline-mu4e nil
         doom-modeline-gnus nil
-        doom-modeline-github nil
-        doom-modeline-major-mode-icon (cae-display-graphic-p)))
+        doom-modeline-github nil)
+  ;; Display-dependent: defer so it reads the live frame instead of the batch
+  ;; (no-display) value that would be baked into the pdump image.
+  (cae-after-frame!
+    (setq doom-modeline-major-mode-icon (cae-display-graphic-p))))
 
 ;; Pending upstream PR doomemacs/doomemacs#8788: newer `persp-mode' calls
 ;; `persp-before-deactivate-functions' with three arguments, but Doom adds the
@@ -404,13 +411,17 @@ case, e.g. a daemon client that turns out to be a TTY."
         flycheck-posframe-border-use-error-face t))
 
 (use-package! iscroll
-  :when (cae-display-graphic-p)
   :defer t :init
-  (add-hook 'org-mode-hook #'iscroll-mode)
-  (add-hook 'markdown-mode-hook #'iscroll-mode)
-  (add-hook 'image-mode-hook #'iscroll-mode)
-  (add-hook 'eww-mode-hook #'iscroll-mode)
-  (add-hook 'w3m-mode-hook #'iscroll-mode))
+  ;; Display-dependent: defer the hook wiring to the first real frame so the
+  ;; check sees the live X/EXWM display.  At pdump-build time there is no display,
+  ;; which would otherwise bake these hooks off in the image.
+  (cae-after-frame!
+    (when (cae-display-graphic-p)
+      (add-hook 'org-mode-hook #'iscroll-mode)
+      (add-hook 'markdown-mode-hook #'iscroll-mode)
+      (add-hook 'image-mode-hook #'iscroll-mode)
+      (add-hook 'eww-mode-hook #'iscroll-mode)
+      (add-hook 'w3m-mode-hook #'iscroll-mode))))
 
 (use-package! beacon
   :when (not (modulep! :ui nav-flash))

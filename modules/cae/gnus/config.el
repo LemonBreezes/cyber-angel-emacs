@@ -119,16 +119,17 @@
   :defer t :init
   (add-hook 'gnus-select-group-hook #'gnus-group-set-timestamp)
   :config
-  (when (cae-display-graphic-p)
-    ;; Pretty marks
-    (setopt gnus-sum-thread-tree-false-root nil
-            gnus-sum-thread-tree-single-indent nil
-            gnus-sum-thread-tree-root nil
-            gnus-sum-thread-tree-vertical "│ "
-            gnus-sum-thread-tree-leaf-with-other "├── "
-            gnus-sum-thread-tree-single-leaf "└── "
-            gnus-sum-thread-tree-indent " "
-            gnus-sum-thread-tree-single-indent nil))
+  (cae-after-frame!
+    (when (cae-display-graphic-p)
+      ;; Pretty marks
+      (setopt gnus-sum-thread-tree-false-root nil
+              gnus-sum-thread-tree-single-indent nil
+              gnus-sum-thread-tree-root nil
+              gnus-sum-thread-tree-vertical "│ "
+              gnus-sum-thread-tree-leaf-with-other "├── "
+              gnus-sum-thread-tree-single-leaf "└── "
+              gnus-sum-thread-tree-indent " "
+              gnus-sum-thread-tree-single-indent nil)))
   (setopt gnus-summary-line-format "%U%R %3d %[%-23,23f%] %B %s\n"
           ;; Loose threads
           gnus-summary-make-false-root 'adopt

@@ -34,3 +34,17 @@
 
     ;; Call the original function with adjusted coordinates
     (funcall orig-fun frame new-x new-y width height)))
+
+(defun cae-exwm-corfu-override-redirect-a (frame)
+  "Keep Corfu's child frame off EXWM's books.
+Under EXWM, `corfu--make-frame' deparents its child frame (sets
+`parent-frame' to nil) so EXWM windows aren't drawn over it -- but that
+makes the frame a root-level window EXWM then manages and tiles to fill
+the monitor.  Mark it override-redirect so the WM ignores it and Corfu's
+own fit-to-content size sticks.  This is the Corfu analogue of the
+`posframe-show' override-redirect advice (Corfu does not use posframe).
+Used as a `:filter-return' advice on `corfu--make-frame', which returns
+the frame; the setter is a no-op when the value is unchanged."
+  (when (and (framep frame) (display-graphic-p frame))
+    (set-frame-parameter frame 'override-redirect t))
+  frame)

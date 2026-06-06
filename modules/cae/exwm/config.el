@@ -133,8 +133,17 @@
 
       (after! posframe
         (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)
+        ;; Posframes are child frames: their X window is reparented *under* the
+        ;; parent frame, so EXWM (which only manages direct children of root)
+        ;; never sees them.  Deparenting (parent-frame nil) lets a posframe span
+        ;; monitors instead of being clipped to the parent, but it also makes the
+        ;; window a direct child of root -- which EXWM then manages like any
+        ;; client and tiles to fill the workspace (the "posframe fills the whole
+        ;; monitor" bug).  Mark it override-redirect so the WM ignores it and
+        ;; posframe's own fit-to-buffer size sticks.
         (define-advice posframe-show (:filter-return (frame) exwm-deparent)
           (set-frame-parameter frame 'parent-frame nil)
+          (set-frame-parameter frame 'override-redirect t)
           frame))
 
       ;; Do not handle EXWM buffers.
@@ -196,6 +205,7 @@
 
     (when (modulep! :completion corfu)
       (cae-advice-add 'corfu--make-frame :around #'cae-advise-corfu-make-frame-with-monitor-awareness)
+      (cae-advice-add 'corfu--make-frame :filter-return #'cae-exwm-corfu-override-redirect-a)
       (after! corfu
         (load! "+corfu")))
 
