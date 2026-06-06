@@ -132,11 +132,35 @@ stale session keeps its original environment until it is restarted."
                     env-unset "")))
     command))
 
+(defvar cae-ip-address)
+(defvar cae-coding-agent-model)
+
+(defvar cae-ai-assistant--llm-provider nil
+  "Cached `llm' provider for AI-assistant helper queries.
+Replaces the old `llm-refactoring-provider', which current `llm' releases no
+longer define.  Built lazily (see `cae-ai-assistant--llm-provider') from
+`cae-ip-address' and `cae-coding-agent-model' to match the rest of the
+`cae/ai' module's local-Ollama setup (cf. `magit-gptcommit-llm-provider').")
+
+(defun cae-ai-assistant--llm-provider ()
+  "Return the `llm' provider for helper queries, creating it once.
+Signal a `user-error' if `cae-ip-address' is unset, since there is then no
+local Ollama endpoint to reach."
+  (require 'llm-ollama)
+  (or cae-ai-assistant--llm-provider
+      (if (not (bound-and-true-p cae-ip-address))
+          (user-error "cae-ip-address is unset; cannot reach the local Ollama server")
+        (setq cae-ai-assistant--llm-provider
+              (make-llm-ollama
+               :host cae-ip-address
+               :port 11434
+               :chat-model cae-coding-agent-model)))))
+
 (defun cae-ai-assistant--generate-folder-name (task-description)
   "Generate a folder name from TASK-DESCRIPTION using AI.
  Uses the llm package to get a concise folder name."
   (let* ((prompt (format "Summarize this task in 3-5 words, using only alphanumeric characters and hyphens. Make it suitable for a folder name. Don't use any special characters. Task: %s" task-description))
-         (response (llm-chat llm-refactoring-provider
+         (response (llm-chat (cae-ai-assistant--llm-provider)
                              (llm-make-chat-prompt prompt
                                                    :context "You are a helpful assistant that generates concise folder names."
                                                    :max-tokens 50))))

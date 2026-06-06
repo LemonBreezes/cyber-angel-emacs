@@ -199,3 +199,12 @@ Can be negative.")
   (after! helm-global-bindings
     (map! :map helm-command-map
           "T" #'helm-tramp)))
+
+;; `helm-run-external-command' caches the executables found on PATH in
+;; `helm-external-commands-list' and never rebuilds it.  Wipe the cache before
+;; every invocation so newly installed commands always show up.
+(after! helm-external
+  (defun cae-helm-run-external-command-invalidate-cache-a (&rest _)
+    (setq helm-external-commands-list nil))
+  (advice-add #'helm-run-external-command :before
+              #'cae-helm-run-external-command-invalidate-cache-a))

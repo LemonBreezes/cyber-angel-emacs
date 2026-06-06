@@ -357,7 +357,6 @@
   :config
   (setq zop-to-char-kill-keys '(?\C-m ?\C-k ?\C-w)))
 
-;; I don't currently use sudo.
 (use-package! auto-sudoedit
   :when (executable-find "sudo")
   :defer t :init
