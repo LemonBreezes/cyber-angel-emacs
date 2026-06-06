@@ -133,17 +133,35 @@
 
       (after! posframe
         (setq posframe-mouse-banish-function #'posframe-mouse-banish-simple)
-        ;; Posframes are child frames: their X window is reparented *under* the
-        ;; parent frame, so EXWM (which only manages direct children of root)
-        ;; never sees them.  Deparenting (parent-frame nil) lets a posframe span
-        ;; monitors instead of being clipped to the parent, but it also makes the
-        ;; window a direct child of root -- which EXWM then manages like any
-        ;; client and tiles to fill the workspace (the "posframe fills the whole
-        ;; monitor" bug).  Mark it override-redirect so the WM ignores it and
-        ;; posframe's own fit-to-buffer size sticks.
+        ;; Keep posframes off EXWM's books.  A posframe child frame must be
+        ;; deparented (parent-frame nil) so EXWM windows don't draw over it, but a
+        ;; root-level *non*-override-redirect window gets managed by EXWM and tiled
+        ;; fullscreen (and fires the auto-persp window rearrange).  EXWM's only
+        ;; runtime trigger is the X MapRequest, which the server never emits for an
+        ;; override-redirect window -- so the frame must be born override-redirect,
+        ;; BEFORE it is mapped.  A :filter-return on posframe-show is too late when
+        ;; a refposhandler is active (vertico-posframe/helm-posframe under EXWM pass
+        ;; parent-frame nil, so the frame is born AT ROOT and mapped inside
+        ;; posframe-show): EXWM grabs it on the first show before the return advice
+        ;; runs (the "first posframe glitches the windows" symptom).  Inject
+        ;; override-redirect into the make-frame parameter list instead (posframe
+        ;; splices `:override-parameters' first, so it wins) -- set at X-window
+        ;; creation while the frame is still invisible.
+        (define-advice posframe--create-posframe
+            (:filter-args (args) cae-exwm-override-redirect)
+          (cons (car args)
+                (plist-put (copy-sequence (cdr args)) :override-parameters
+                           (cons '(override-redirect . t)
+                                 (assq-delete-all
+                                  'override-redirect
+                                  (copy-sequence
+                                   (plist-get (cdr args) :override-parameters)))))))
+        ;; For the non-refposhandler case the frame is born under the real parent;
+        ;; deparent it so it can span monitors.  It is already override-redirect
+        ;; from the create advice, so reparenting to root yields no MapRequest.
         (define-advice posframe-show (:filter-return (frame) exwm-deparent)
-          (set-frame-parameter frame 'parent-frame nil)
-          (set-frame-parameter frame 'override-redirect t)
+          (when (framep frame)
+            (set-frame-parameter frame 'parent-frame nil))
           frame))
 
       ;; Do not handle EXWM buffers.
@@ -205,7 +223,6 @@
 
     (when (modulep! :completion corfu)
       (cae-advice-add 'corfu--make-frame :around #'cae-advise-corfu-make-frame-with-monitor-awareness)
-      (cae-advice-add 'corfu--make-frame :filter-return #'cae-exwm-corfu-override-redirect-a)
       (after! corfu
         (load! "+corfu")))
 
