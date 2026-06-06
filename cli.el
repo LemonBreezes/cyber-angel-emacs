@@ -364,7 +364,32 @@ Runs once, on the first real frame of an Emacs booted from the pdump image,
 then removes itself.  Add further pdump-only fixups here as discovered."
               (remove-hook 'server-after-make-frame-hook #'cae-pdump-fix-oddities-h)
               (unless global-font-lock-mode (global-font-lock-mode 1))
-              (unless transient-mark-mode   (transient-mark-mode 1)))
+              (unless transient-mark-mode   (transient-mark-mode 1))
+              ;; `dump-emacs-portable' drops the `defvar-local' that
+              ;; `define-globalized-minor-mode' generates for evil:
+              ;; `evil-mode--set-explicitly' comes back with NO default value AND
+              ;; without its automatic buffer-localness.  `evil-mode-enable-in-buffer'
+              ;; (on `after-change-major-mode-hook') then signals a void-variable for
+              ;; every new buffer, so evil silently never turns on -- in text buffers,
+              ;; EXWM buffers, everywhere.  Restore the binding, re-assert evil's
+              ;; default-`major-mode' alias (evil's own `:after' advice sets this so
+              ;; Fundamental buffers still trip the hook; bug#23827), then initialize
+              ;; evil in the live buffers that missed it during the dumped startup.
+              (when (featurep 'evil)
+                (unless (default-boundp 'evil-mode--set-explicitly)
+                  (set-default 'evil-mode--set-explicitly nil))
+                (make-variable-buffer-local 'evil-mode--set-explicitly)
+                (when (bound-and-true-p evil-mode)
+                  (when (and (eq (default-value 'major-mode) 'fundamental-mode)
+                             (fboundp 'evil--fundamental-mode))
+                    (setq-default major-mode #'evil--fundamental-mode))
+                  (dolist (buf (buffer-list))
+                    (with-current-buffer buf
+                      (unless (or (bound-and-true-p evil-local-mode)
+                                  (minibufferp)
+                                  (and (fboundp 'evil-disabled-buffer-p)
+                                       (evil-disabled-buffer-p)))
+                        (ignore-errors (evil-initialize))))))))
             (defun cae-pdump-install-fixups-h ()
               "Schedule `cae-pdump-fix-oddities-h' to run once, on the first frame.
 The `daemonp' test must happen at RUNTIME (the dump is always built batch,
@@ -604,18 +629,53 @@ fixups immediately."
          (current-buffer))))
     (print! (start "Building pdump image (this runs Doom's whole init)..."))
     (with-temp-buffer
-      (let ((status (call-process "emacs" nil t nil "--batch" "-Q" "-l" script)))
-        (if (and (eq status 0) (file-exists-p tmp))
-            (progn
-              ;; Atomically replace the live image, then record the fingerprint so
-              ;; the next sync can skip the rebuild when nothing changed.
-              (rename-file tmp pdmp t)
-              (with-temp-file keyfile (insert key))
-              (print! (success "Dumped to %s") pdmp))
-          (ignore-errors (delete-file tmp))
-          ;; Surface the child's stdout+stderr so the failure reason is visible.
-          (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
-          (print! "%s" (string-trim (buffer-string))))))
+      ;; `dump-emacs-portable' on this igc/MPS build runs single-threaded at 100%
+      ;; CPU for 6-18 min and is TOTALLY SILENT -- indistinguishable from a hang,
+      ;; which has repeatedly looked like a stuck sync.  The child can't heartbeat
+      ;; itself (its elisp is frozen inside the C-level dump), so run it async from
+      ;; HERE and emit an elapsed-time pulse every 30s.  `accept-process-output'
+      ;; drives the wait without busy-looping (batch has no running timers); stderr
+      ;; mixes into this buffer exactly as `call-process' did, so the failure path
+      ;; still surfaces the child's output.
+      ;;
+      ;; CRITICAL: redirect the child's stdin from /dev/null via a shell.  Unlike
+      ;; `call-process' (whose nil INFILE means /dev/null, so stdin reads hit EOF),
+      ;; `make-process' wires stdin to a pipe WE never write to -- so any prompt the
+      ;; dumped init reaches (a stray `y-or-n-p'/`read' during `doom-startup' with
+      ;; `noninteractive' nil) blocks forever on that pipe.  `exec ... </dev/null'
+      ;; restores the EOF-on-read behavior; `exec' keeps the child's exit status.
+      (let* ((proc (make-process
+                    :name "doom-pdump"
+                    :buffer (current-buffer)
+                    :command (list "sh" "-c"
+                                   (concat "exec emacs --batch -Q -l "
+                                           (shell-quote-argument script)
+                                           " </dev/null"))
+                    :connection-type 'pipe
+                    :noquery t))
+             (start-time (float-time))
+             (next 30)
+             (fmt (lambda (secs) (format "%dm%02ds" (/ secs 60) (% secs 60)))))
+        (while (process-live-p proc)
+          (accept-process-output proc 1)
+          (let ((elapsed (round (- (float-time) start-time))))
+            (when (>= elapsed next)
+              (print! (item "still dumping... (%s elapsed, this can take 6-18 min)"
+                            (funcall fmt elapsed)))
+              (setq next (+ next 30)))))
+        (let ((status (process-exit-status proc))
+              (elapsed (round (- (float-time) start-time))))
+          (if (and (eq status 0) (file-exists-p tmp))
+              (progn
+                ;; Atomically replace the live image, then record the fingerprint so
+                ;; the next sync can skip the rebuild when nothing changed.
+                (rename-file tmp pdmp t)
+                (with-temp-file keyfile (insert key))
+                (print! (success "Dumped to %s (took %s)") pdmp (funcall fmt elapsed)))
+            (ignore-errors (delete-file tmp))
+            ;; Surface the child's stdout+stderr so the failure reason is visible.
+            (print! (warn "pdump build failed (exit %s) — image left unchanged:" status))
+            (print! "%s" (string-trim (buffer-string)))))))
     (delete-file script)))
 
 (add-hook 'doom-after-sync-hook #'cae-pdump-build)
