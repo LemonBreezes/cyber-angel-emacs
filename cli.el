@@ -269,6 +269,28 @@ drains, then reports how many elns were actually produced."
               (print! (success "Native compilation already up to date"))
             (print! (success "Native-compiled %d new file(s)") delta)))))))
 
+(defun cae-pdump--clean-module-elc ()
+  "Delete stale `.elc' files sitting next to Doom module source files.
+Doom modules MUST load as source.  A bare `(modulep! +flag)' in a module file
+has TWO macroexpansions (see `modulep!'): a constant fast-path when
+`doom-module-context' is bound at expansion time -- which `doom--startup-modules'
+does, per-module, when loading SOURCE -- and a fragile by-path runtime fallback
+otherwise.  An auto-compiler on `load' (here `compile-angel', see
+lisp/cae-compile.el) byte-compiles these files STANDALONE, with NO module
+context, so the fallback gets baked into the `.elc' and then fails at load with
+`void-variable +flag' (observed: `+eglot' in `:tools lsp').  Because `load'
+prefers `.elc' over `.el', a single such file silently breaks EVERY subsequent
+module load -- the pdump child's `doom-startup' AND a normal (non-dumped) boot.
+Stock Doom never compiles module configs, so these `.elc' are always spurious;
+strip them before every build so modules reload from source."
+  (let ((n 0))
+    (dolist (dir (bound-and-true-p doom-module-load-path))
+      (when (and (stringp dir) (file-directory-p dir))
+        (dolist (elc (ignore-errors (directory-files-recursively dir "\\.elc\\'")))
+          (when (ignore-errors (delete-file elc) t) (cl-incf n)))))
+    (when (cl-plusp n)
+      (print! (warn "Removed %d stale module .elc (modules must load as source)" n)))))
+
 (defun cae-pdump-build ()
   "Build the full-config pdump image (`doom.pdmp'), if it is stale.
 First runs an incremental AOT native-compile so the image bakes native code,
@@ -279,6 +301,11 @@ incremental compile scan instead of minutes."
          (build-dir (expand-file-name (format "straight/build-%s" emacs-version)
                                       doom-local-dir))
          (keyfile   (concat pdmp ".key")))
+    ;; Strip spurious module `.elc' first: they shadow source with a broken
+    ;; `modulep!' expansion and would abort the dump child's config load (and any
+    ;; non-dumped boot).  Done unconditionally -- even on a skipped rebuild -- so
+    ;; the on-disk module tree is always loadable from source.
+    (cae-pdump--clean-module-elc)
     ;; Native-compile BEFORE fingerprinting so KEY reflects the resulting elns
     ;; (an unchanged sync then hashes the same key and skips the dump).
     (cae-pdump--native-compile build-dir)
@@ -422,10 +449,57 @@ fixups immediately."
             ;; up empty.  Reset to nil afterward so a runtime `doom/reload' (which
             ;; re-runs config) behaves like a normal session.
             (setq cae-pdump--building t)
-            (let ((noninteractive nil))
-              (setq doom-context (list t))
-              (doom-initialize t)
-              (doom-startup))
+            ;; --- surface the REAL config-load failure -------------------------
+            ;; This child is a bare `emacs -Q', but early-init's CLI branch leaves
+            ;; `debug-on-error' t with `doom-cli-debugger' installed -- so ANY error
+            ;; while loading config trips that debugger, which calls `(exit! 255)'
+            ;; -> `(throw 'exit ...)'.  Nothing here catches `exit', so the genuine
+            ;; cause (e.g. a void autoloaded fn from an uninitialized module
+            ;; submodule) gets buried under an inscrutable `no-catch exit (255)'.
+            ;; Force `debug-on-error' OFF across init so a plain `condition-case'
+            ;; catches the real signal; `handler-bind' grabs a backtrace at signal
+            ;; time (before the stack unwinds); a `catch 'exit' backstops any stray
+            ;; `exit!'.  On failure, print the UNWRAPPED root cause (Doom nests the
+            ;; true error under `doom-*-error' file wrappers) and quit with a
+            ;; distinct, non-255 status so the parent's report is unambiguous.
+            ;; Restore `debug-on-error' for the dump phase on success.
+            (let* ((cae-init-error nil)
+                   (cae-init-bt nil)
+                   (cae-init-outcome
+                    (catch 'exit
+                      (let ((noninteractive nil))
+                        (setq doom-context (list t)
+                              debug-on-error nil)
+                        (condition-case err
+                            (handler-bind
+                                ((error (lambda (_e)
+                                          (unless cae-init-bt
+                                            (setq cae-init-bt
+                                                  (with-output-to-string (backtrace)))))))
+                              (doom-initialize t)
+                              (setq debug-on-error nil)
+                              (doom-startup))
+                          (error (setq cae-init-error err))))
+                      'completed)))
+              (setq debug-on-error t)
+              (when (or cae-init-error (not (eq cae-init-outcome 'completed)))
+                (princ "\n\n=== cae-pdump: CONFIG FAILED TO LOAD -- dump aborted ===\n")
+                (if (null cae-init-error)
+                    (princ (format "Init aborted via `exit!' (%S); real error printed above.\n"
+                                   cae-init-outcome))
+                  (let ((root cae-init-error))
+                    (while (and (consp root)
+                                (memq (car root)
+                                      '(doom-user-error doom-core-error doom-cli-error
+                                        doom-profile-error doom-module-error))
+                                (stringp (cadr root)) (consp (caddr root)))
+                      (setq root (caddr root)))
+                    (princ (format "Real error: %s\n" (error-message-string root)))
+                    (princ (format "Wrapped as: %S\n" cae-init-error))
+                    (when cae-init-bt
+                      (princ "Backtrace (newest first):\n")
+                      (princ cae-init-bt))))
+                (kill-emacs 47)))
             (setq cae-pdump--building nil)
             ;; Doom's init just added its own dir (`doom-cache-dir'/eln/) to
             ;; `native-comp-eln-load-path'.  Capture the path for the runtime
