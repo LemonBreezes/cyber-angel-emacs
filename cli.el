@@ -172,14 +172,33 @@ lazily after startup."
                                   ((badp e)   (ignore-errors (aset obj i nil)))
                                   (t (scrub e (1+ depth)))))))
                        ((hash-table-p obj)
-                        (let (bad fixq)
-                          (maphash (lambda (k v)
-                                     (cond ((queryp v) (push (cons k (qsource v)) fixq))
-                                           ((badp v)   (push k bad))
-                                           (t (scrub v (1+ depth)))))
-                                   obj)
-                          (dolist (k bad) (remhash k obj))
-                          (dolist (kv fixq) (puthash (car kv) (cdr kv) obj))))))))
+                        (cond
+                         ;; Leave native-comp's loaded-units registry untouched:
+                         ;; it's weak-VALUE with STRING keys (sxhash-safe, can't
+                         ;; crash thaw) and the eln-fixup below still enumerates it
+                         ;; -- clearing it makes `dump-emacs-portable' abort with
+                         ;; "trying to dump non fixed-up eln file".
+                         ((eq obj (bound-and-true-p comp-loaded-comp-units-h)) nil)
+                         ;; Empty every OTHER weak hash table.  They are
+                         ;; GC-collectable caches the owner repopulates lazily, but
+                         ;; the igc/MPS pdumper mangles some of their entries so the
+                         ;; load-time `thaw_hash_tables' rehash ABORTS in `sxhash'
+                         ;; (`emacs_abort' on an invalid type tag) and the booted
+                         ;; image SEGFAULTS before printing anything -- observed
+                         ;; after a package bump as a weak-key `equal' table whose
+                         ;; one compound key (list -> list -> vector -> object) held
+                         ;; a corrupted object.  The scrub never recurses into hash
+                         ;; KEYS, and a cold cache is what a non-dumped Emacs has.
+                         ((hash-table-weakness obj) (clrhash obj))
+                         (t
+                          (let (bad fixq)
+                            (maphash (lambda (k v)
+                                       (cond ((queryp v) (push (cons k (qsource v)) fixq))
+                                             ((badp v)   (push k bad))
+                                             (t (scrub v (1+ depth)))))
+                                     obj)
+                            (dolist (k bad) (remhash k obj))
+                            (dolist (kv fixq) (puthash (car kv) (cdr kv) obj))))))))))
         (mapatoms (lambda (s)
                     (when (and (boundp s) (not (keywordp s)))
                       (let ((v (ignore-errors (symbol-value s))))
