@@ -26,9 +26,18 @@
   "File that `cae-packages-freeze' writes generated `:pin's into.
 This file is `load'ed from the end of packages.el.")
 
-(defvar cae-packages-freeze-excluded-packages nil
+(defvar cae-packages-freeze-excluded-packages '(cuda-ts-mode)
   "List of package symbols to never freeze.
-Useful for packages you intentionally want to track upstream HEAD of.")
+Useful for packages you intentionally want to track upstream HEAD of, or whose
+own module pin you'd rather defer to than freeze a local checkout (e.g.
+`cuda-ts-mode', declared by `:lang cc' with its own recipe + pin).")
+
+(defvar cae-packages--inhibit-lockfile nil
+  "When non-nil, packages.el skips loading `cae-packages-freeze-file'.
+`cae-packages--declared-names' binds this so it can read the packages declared by
+modules/user ALONE -- excluding the lockfile's own `package!' forms, which would
+otherwise make every previously-frozen package (including transitive deps and
+straight's recipe-repos) look \"declared\" and get re-frozen.")
 
 ;; Bump: fetch state
 (defvar cae-packages-bump-fetch-concurrency 16
@@ -193,16 +202,35 @@ leaves just the summary.")
 
 ;;; Helper functions (dependency order)
 
+(defun cae-packages--declared-names ()
+  "Return a hash set (NAME-STRING -> t) of packages the config explicitly declares.
+Re-reads every enabled module's (and the user's) `package!' forms with the
+lockfile load suppressed (see `cae-packages--inhibit-lockfile'), so the set
+reflects only what the config GENUINELY declares.  Excluded: straight's
+recipe-repositories (melpa, el-get, ...), transitive dependencies, and packages
+that only the generated lockfile itself pins -- none of which carry a recipe the
+config can resolve on a clean install, so pinning them breaks `doom sync'."
+  (let ((cae-packages--inhibit-lockfile t)
+        (names (make-hash-table :test #'equal)))
+    (dolist (pkg (doom-package-list))
+      (puthash (symbol-name (car pkg)) t names))
+    names))
+
 (defun cae-packages--current-pins ()
   "Return a sorted alist of (PACKAGE-NAME-STRING . COMMIT) for installed packages.
-Enumerates every non-built-in package straight has a recipe for and reads the
-commit its local repo is currently checked out at."
+Only packages the config explicitly declares (see `cae-packages--declared-names')
+are frozen; transitive dependencies and straight's recipe-repositories are
+skipped so the generated lockfile never introduces a brand-new, recipe-less
+`package!' that breaks a clean install.  The commit is the one each package's
+local repo is checked out at right now."
   (doom-initialize-packages)
-  (let (pins)
+  (let ((declared (cae-packages--declared-names))
+        pins)
     (dolist (recipe (doom-package-recipe-alist))
       (cl-destructuring-bind (&key package local-repo type &allow-other-keys)
           recipe
         (when (and package local-repo
+                   (gethash package declared)
                    (not (memq (intern package)
                               cae-packages-freeze-excluded-packages)))
           (when-let* ((commit (ignore-errors

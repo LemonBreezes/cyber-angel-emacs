@@ -206,4 +206,8 @@
 ;; and `doom-package-pinned-alist' drops the pin of anything carrying `:unpin',
 ;; which would silently defeat every frozen pin below. These pins already
 ;; override Doom's module pins on their own (loaded last == they win).
-(load (file-name-concat doom-user-dir "packages.lock") t t)
+;; `cae-packages--inhibit-lockfile' lets `cae-packages-freeze' re-read the set of
+;; packages declared by modules/user ALONE (without the lockfile's own pins) so it
+;; never re-freezes packages that nothing actually declares.
+(unless (bound-and-true-p cae-packages--inhibit-lockfile)
+  (load (file-name-concat doom-user-dir "packages.lock") t t))
