@@ -310,12 +310,22 @@ strip them before every build so modules reload from source."
     (when (cl-plusp n)
       (print! (warn "Removed %d stale module .elc (modules must load as source)" n)))))
 
+(defun cae-pdump--termux-p ()
+  "Non-nil under Termux/Android, where the pdump build is skipped.
+A native Android Emacs reports `system-type' `android'; a Termux-hosted
+GNU/Linux Emacs is detected via the `termux-setup-storage' helper on PATH."
+  (or (eq system-type 'android)
+      (and (executable-find "termux-setup-storage") t)))
+
 (defun cae-pdump-build ()
   "Build the full-config pdump image (`doom.pdmp'), if it is stale.
 First runs an incremental AOT native-compile so the image bakes native code,
 then (re)builds the dump -- skipped when `cae-pdump--inputs-key' is unchanged,
 so a `doom sync' that changed no config or package costs only the (near-zero)
-incremental compile scan instead of minutes."
+incremental compile scan instead of minutes.
+
+On Termux/Android (`cae-pdump--termux-p') the heavy build (native-compile +
+dump) is skipped entirely; only the module `.elc' cleanup runs."
   (let* ((pdmp      (expand-file-name "doom.pdmp" doom-cache-dir))
          (build-dir (expand-file-name (format "straight/build-%s" emacs-version)
                                       doom-local-dir))
@@ -325,17 +335,22 @@ incremental compile scan instead of minutes."
     ;; non-dumped boot).  Done unconditionally -- even on a skipped rebuild -- so
     ;; the on-disk module tree is always loadable from source.
     (cae-pdump--clean-module-elc)
-    ;; Native-compile BEFORE fingerprinting so KEY reflects the resulting elns
-    ;; (an unchanged sync then hashes the same key and skips the dump).
-    (cae-pdump--native-compile build-dir)
-    (let ((key (cae-pdump--inputs-key build-dir)))
-      (if (and (file-exists-p pdmp)
-               (file-exists-p keyfile)
-               (equal key (with-temp-buffer
-                            (insert-file-contents keyfile)
-                            (string-trim (buffer-string)))))
-          (print! (success "pdump image already current; skipping rebuild"))
-        (cae-pdump--dump pdmp keyfile key build-dir)))))
+    ;; The pdump build (AOT native-compile + dump) is far too heavy for, and the
+    ;; pdumper unreliable on, Termux/Android -- skip it.  The `.elc' cleanup above
+    ;; still runs so the (always non-dumped) boot there stays loadable from source.
+    (if (cae-pdump--termux-p)
+        (print! (info "pdump: build skipped on Termux/Android"))
+      ;; Native-compile BEFORE fingerprinting so KEY reflects the resulting elns
+      ;; (an unchanged sync then hashes the same key and skips the dump).
+      (cae-pdump--native-compile build-dir)
+      (let ((key (cae-pdump--inputs-key build-dir)))
+        (if (and (file-exists-p pdmp)
+                 (file-exists-p keyfile)
+                 (equal key (with-temp-buffer
+                              (insert-file-contents keyfile)
+                              (string-trim (buffer-string)))))
+            (print! (success "pdump image already current; skipping rebuild"))
+          (cae-pdump--dump pdmp keyfile key build-dir))))))
 
 (defun cae-pdump--dump (pdmp keyfile key build-dir)
   "Generate the loader script, run the child Emacs to dump PDMP, record KEY.
