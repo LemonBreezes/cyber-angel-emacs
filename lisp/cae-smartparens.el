@@ -113,5 +113,6 @@
           (unless (lookup-key lispy-mode-map (kbd (car binding)))
             (define-key lispy-mode-map (kbd (car binding)) (cdr binding)))))))
 
-  (map! :map smartparens-mode-map "C-M-?" #'cae-sp-which-key-cheatsheet
-        :map help-map "bs" #'cae-sp-which-key-cheatsheet))
+  (map! :map smartparens-mode-map "C-M-?" #'cae-sp-which-key-cheatsheet)
+  (when (keymapp (lookup-key help-map "b"))
+    (map! :map help-map "bs" #'cae-sp-which-key-cheatsheet)))
