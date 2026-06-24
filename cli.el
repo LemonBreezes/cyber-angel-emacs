@@ -590,26 +590,57 @@ fixups immediately."
             ;; context ("Incorrect context error" at every startup).  Drop it.
             (advice-remove 'command-line-1 #'doom-finalize)
             (princ "Preparing image...\n")
-            ;; Guard baked into the image.  At runtime `doom-startup' is still
-            ;; called (by the `startup--load-user-init-file' override).  The heavy
-            ;; part -- `doom--startup-modules', which reloads every module's
-            ;; init.el/config.el -- is already resident from the build, so skip it.
-            ;; But STILL run the lightweight setup: `doom--startup-vars' (load-path,
+            ;; Guard baked into the image.  At boot we run a LIGHTWEIGHT startup:
+            ;; the heavy part -- `doom--startup-modules', which reloads every
+            ;; module's init.el/config.el -- is already resident from the build, so
+            ;; skip it, but STILL run `doom--startup-vars' (load-path,
             ;; auto-mode-alist) and the loaddefs.  Emacs resets `load-path' at
             ;; startup, so without re-running these, lazily-autoloaded package files
             ;; (e.g. `vertico-repeat', loaded on first `SPC .') resolve to "no such
-            ;; file" because their package dir isn't on `load-path'.
+            ;; file" because their package dir isn't on `load-path'.  See
+            ;; `cae-pdump--lightweight-startup' below for how this is driven (an
+            ;; `:after' on the `startup--load-user-init-file' override) and why.
             ;; `doom/reload' (context `reload') still runs the real thing.
             (defvar cae-pdump-active nil
               "Non-nil inside a heap dumped by `cae-pdump-build'.")
+            (defun cae-pdump--lightweight-startup ()
+              "Run Doom's startup functions EXCEPT the heavy module reload.
+`doom--startup-modules' re-runs every module's init.el/config.el,
+which is already resident from the build, so skip it; everything
+else on `doom-startup-functions' (`doom--startup-vars' for
+load-path/auto-mode-alist, plus the loaddefs functions) MUST run
+or lazily-autoloaded package files resolve to \"Cannot open load
+file\".  Running the live hook (minus modules) -- rather than a
+hardcoded list of names -- keeps this robust against Doom
+renaming/re-signing those functions (it has: `doom--startup-vars'
+gained a PROFILE arg and `doom--startup-loaddefs-doom' became
+`doom--startup-loaddefs-modules')."
+              (let ((doom-startup-functions
+                     (remq 'doom--startup-modules doom-startup-functions)))
+                (run-hook-with-args 'doom-startup-functions doom-profile)))
             (define-advice doom-startup (:around (orig &rest args) cae-pdump-skip)
-              (if (and cae-pdump-active (not (doom-context-p 'reload)))
-                  (progn
-                    (when (fboundp 'doom--startup-vars)             (doom--startup-vars))
-                    (when (fboundp 'doom--startup-loaddefs-doom)    (doom--startup-loaddefs-doom))
-                    (when (fboundp 'doom--startup-loaddefs-packages) (doom--startup-loaddefs-packages))
-                    t)
+              (if (and (bound-and-true-p cae-pdump-active)
+                       (not (doom-context-p 'reload)))
+                  (progn (cae-pdump--lightweight-startup) t)
                 (apply orig args)))
+            ;; Doom now gates its OWN `(doom-startup)' call -- the one inside the
+            ;; `startup--load-user-init-file' override -- behind `(doom-context-p
+            ;; 'startup)' (upstream 555dc5f04, 2026-06-24).  This image resets
+            ;; `doom-context' to `(t)' below, so at boot neither `startup' nor
+            ;; `reload' is on the stack, `doom-startup' is never called, and the
+            ;; `:around' advice above never fires -- leaving `load-path' bare so
+            ;; every lazily-autoloaded package ("sly-stepper", "diff-hl-flydiff",
+            ;; ...) dies with "Cannot open load file" at boot.  Drive the
+            ;; lightweight startup ourselves from an `:after' on the same
+            ;; override, which DOES run unconditionally at boot (before
+            ;; `after-init-hook', where e.g. sly-setup fires).  Skip on
+            ;; `doom/reload' (context `reload'): that path runs the real
+            ;; `doom-startup' through the `:around' advice's `orig' branch.
+            (define-advice startup--load-user-init-file
+                (:after (&rest _) cae-pdump-lightweight-startup)
+              (when (and (bound-and-true-p cae-pdump-active)
+                         (not (doom-context-p 'reload)))
+                (cae-pdump--lightweight-startup)))
             ;; Safety net: force-loading every package makes some `after!'/
             ;; `eval-after-load' config fire at boot that normally stays deferred
             ;; (e.g. sly-setup loading a missing contrib), and an error there would
