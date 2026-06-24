@@ -65,7 +65,6 @@
 (package! crontab-mode :pin "7412f3df0958812bfcacd5875a409fa795fa8ecc")
 (package! csv-mode :pin "b7eca7304ef7757700be5c2bc23ef6204c60eb75")
 (package! cuda-mode :pin "c3dae31b3d1abedf4d0b98840127e2cac73d6ad8")
-(package! cuda-ts-mode :pin "807f15150deb3a3060bc36a0e135a27876d7e239")
 (package! cybercafe-theme :pin "c241228914c9bd070733b1e97ea11a5cb6331e86")
 (package! cython-mode :pin "3e4790559d3168fe992cf2aa62f01423038cedb5")
 (package! daemons :pin "4900fe1ec64ab339da29082e8fd4545fc6e48ec4")
