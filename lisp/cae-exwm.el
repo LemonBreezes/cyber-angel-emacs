@@ -16,7 +16,10 @@
 
 (map! "s-v" (cae-exwm-app-runner browse-url-generic-program cae-generic-browser-name)
       "s-V" #'cae-exwm-run-vm
-      "s-f" (cmd! () (start-process "flameshot" nil "flameshot" "gui"))
+      "s-f" (cmd! () (when (and (featurep 'evil)
+                                (evil-normal-state-p))
+                       (evil-insert-state))
+                  (start-process "flameshot" nil "flameshot" "gui"))
       ;;"s-T" (cae-exwm-app-runner "teams-for-linux" "Teams")
       "s-t" (cae-exwm-app-runner "tiled" "Tiled")
       "s-d" (cae-exwm-app-runner "discord" "Discord")
