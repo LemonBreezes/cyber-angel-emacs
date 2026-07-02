@@ -19,8 +19,8 @@ Values:
   :group 'cae-ai-assistant)
 
 (defcustom cae-ai-assistant-terminal-backend
-  (cond ((and (modulep! :cae exwm) cae-exwm-enabled-p)
-         'exwm)
+  (cond ;;((and (modulep! :cae exwm) cae-exwm-enabled-p)
+        ;; 'exwm)
         ;; When EXWM isn't running, prefer ghostel over vterm as long as it's
         ;; usable (i.e. not in a Linux TTY, where its text is invisible) and the
         ;; module is enabled.
