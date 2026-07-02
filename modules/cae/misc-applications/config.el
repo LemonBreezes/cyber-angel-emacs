@@ -32,11 +32,6 @@
     ("music" "m")
     ("quotes" "q")))
 
-(defvar cae-packages-freeze-file
-  (file-name-concat doom-user-dir "packages.lock.el")
-  "File that `cae-packages-freeze' writes generated `:pin's into.
-This file is `load'ed from the end of packages.el.")
-
 (mapc (lambda (app-type)
         (let* ((name (car app-type))
                (prefix (cadr app-type))
@@ -181,8 +176,7 @@ This file is `load'ed from the end of packages.el.")
       "e" #'list-packages
       "E" #'list-processes
       "T" #'list-timers
-      "C-t" #'try
-      "b" #'cae-packages-bump-pins)
+      "C-t" #'try)
 (after! which-key
   (which-key-add-keymap-based-replacements 'cae-misc-applications-system-map
     "e" "List Emacs packages"

@@ -512,6 +512,39 @@ fixups immediately."
                                                   (with-output-to-string (backtrace)))))))
                               (doom-initialize t)
                               (setq debug-on-error nil)
+                              ;; Rebuild the `modulep!' hot cache before any
+                              ;; module loads.  The profile init caches module
+                              ;; state in symbol plists ((get GROUP NAME) ->
+                              ;; `doom-module-context') inside
+                              ;; `(static-unless noninteractive ...)', so under
+                              ;; this batch build that cache is compiled out and
+                              ;; left empty.  Doom's `:doom compat' init.el then
+                              ;; eager-macroexpands `(modulep! +flag)', whose
+                              ;; expansion reads `doom-module-context-index' off
+                              ;; the (now nil) context and dies with
+                              ;; "(wrong-type-argument doom-module-context nil)",
+                              ;; aborting the dump.  Repopulate it from
+                              ;; `doom-modules' exactly as `doom-module--put' does.
+                              (when (bound-and-true-p doom-modules)
+                                (maphash
+                                 (lambda (key module)
+                                   ;; Key by the module KEY (group . name) as
+                                   ;; `doom-module--put' does, not the struct's
+                                   ;; own group/name (which may be an alias).
+                                   (put (car key) (cdr key)
+                                        (doom-module->context module)))
+                                 doom-modules))
+                              ;; Same root cause: the profile init loads
+                              ;; $DOOMDIR/init.el -- which defines the `cae-init-*'
+                              ;; toggles `config.el' reads -- inside
+                              ;; `(static-unless noninteractive ...)', so this batch
+                              ;; build compiled it out and those vars are void.
+                              ;; Run that load ourselves (noninteractive is nil in
+                              ;; this let, so `init.el's own `(not noninteractive)'
+                              ;; toggles resolve as they do interactively, and its
+                              ;; `doom!' stays a no-op).
+                              (with-doom-context '(module init)
+                                (doom-load (doom-user-dir "init.el") t))
                               (doom-startup))
                           (error (setq cae-init-error err))))
                       'completed)))
