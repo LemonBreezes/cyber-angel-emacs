@@ -52,7 +52,7 @@
        '(eglot))
    ,@'(eww)
    ,@(when (modulep! :tools magit)
-       '(parrot))
+       '(magit parrot))
    ,@'(parrot-rotate)
    ,@(when (modulep! :cae gnus)
        '(gnus gnus-group gnus-sum gnus-srvr))
