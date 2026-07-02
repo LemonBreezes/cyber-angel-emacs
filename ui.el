@@ -160,22 +160,6 @@ case, e.g. a daemon client that turns out to be a TTY."
             (defun +workspaces-deactivate-mark-h (&rest _)
               (deactivate-mark))))
 
-;; Pending upstream PR doomemacs/doomemacs#8788: newer `persp-mode' calls
-;; `persp-window-state-get-function' with (FRAME RWIN &optional WRITABLE), but
-;; `+workspace-new' calls it directly with just the frame, throwing
-;; (wrong-number-of-arguments (2 . 3) 1). Shim the function variable during the
-;; call so the 1-arg invocation fills in the root window itself.
-(defadvice! +workspaces-new-window-state-get-compat-a (fn &rest args)
-  :around #'+workspace-new
-  (let* ((real persp-window-state-get-function)
-         (persp-window-state-get-function
-          (lambda (frame &optional rwin writable)
-            (funcall real frame
-                     (or rwin (funcall persp-get-window-for-state-get-put-function
-                                       frame))
-                     writable))))
-    (apply fn args)))
-
 (setq-hook! 'treemacs-mode-hook
   nobreak-char-display nil)
 
