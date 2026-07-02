@@ -20,13 +20,13 @@ Values:
 
 (defcustom cae-ai-assistant-terminal-backend
   (cond ;;((and (modulep! :cae exwm) cae-exwm-enabled-p)
-        ;; 'exwm)
-        ;; When EXWM isn't running, prefer ghostel over vterm as long as it's
-        ;; usable (i.e. not in a Linux TTY, where its text is invisible) and the
-        ;; module is enabled.
-        ((modulep! :cae ghostel)
-         'ghostel)
-        (t 'vterm))
+   ;; 'exwm)
+   ;; When EXWM isn't running, prefer ghostel over vterm as long as it's
+   ;; usable (i.e. not in a Linux TTY, where its text is invisible) and the
+   ;; module is enabled.
+   ((modulep! :cae ghostel)
+    'ghostel)
+   (t 'vterm))
   "Backend to use for terminal operations.
 Can be 'vterm, 'eat, 'exwm, or 'ghostel."
   :type '(choice (const :tag "VTerm" vterm)
