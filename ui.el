@@ -148,7 +148,7 @@ case, e.g. a daemon client that turns out to be a TTY."
   ;; Display-dependent: defer so it reads the live frame instead of the batch
   ;; (no-display) value that would be baked into the pdump image.
   (cae-after-frame!
-    (setq doom-modeline-major-mode-icon (cae-display-graphic-p))))
+   (setq doom-modeline-major-mode-icon (cae-display-graphic-p))))
 
 ;; Pending upstream PR doomemacs/doomemacs#8788: newer `persp-mode' calls
 ;; `persp-before-deactivate-functions' with three arguments, but Doom adds the
@@ -400,12 +400,12 @@ case, e.g. a daemon client that turns out to be a TTY."
   ;; check sees the live X/EXWM display.  At pdump-build time there is no display,
   ;; which would otherwise bake these hooks off in the image.
   (cae-after-frame!
-    (when (cae-display-graphic-p)
-      (add-hook 'org-mode-hook #'iscroll-mode)
-      (add-hook 'markdown-mode-hook #'iscroll-mode)
-      (add-hook 'image-mode-hook #'iscroll-mode)
-      (add-hook 'eww-mode-hook #'iscroll-mode)
-      (add-hook 'w3m-mode-hook #'iscroll-mode))))
+   (when (cae-display-graphic-p)
+     (add-hook 'org-mode-hook #'iscroll-mode)
+     (add-hook 'markdown-mode-hook #'iscroll-mode)
+     (add-hook 'image-mode-hook #'iscroll-mode)
+     (add-hook 'eww-mode-hook #'iscroll-mode)
+     (add-hook 'w3m-mode-hook #'iscroll-mode))))
 
 (use-package! beacon
   :when (not (modulep! :ui nav-flash))
