@@ -10,7 +10,7 @@
 
 (defvar cae-exwm-floating-apps
   '("..." "virtualbox" "discord" "main.py" "setup.tmp" "xclicker" "Soffice"
-    "Xclicker" "SimpleScreenRecorder")
+    "Xclicker" "SimpleScreenRecorder" "Tk")
   "A list of class-names for EXWM applications which should stay floating.")
 
 (defvar cae-exwm-floating-titles '("TigerVNC options")
