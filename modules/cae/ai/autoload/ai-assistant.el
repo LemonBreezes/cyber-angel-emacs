@@ -183,7 +183,8 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
       (write-file (expand-file-name ".projectile" sandbox-dir)))
     ;; Unset ANTHROPIC_API_KEY for claude code to use its own token
     (let* ((claude-p (string= app-name "claude"))
-           (unset-anthropic-key (when (and claude-p cae-ai-assistant-unset) '("ANTHROPIC_API_KEY=")))
+           (unset-anthropic-key (when (and claude-p cae-ai-assistant-claude-unset-api-key)
+                                  '("ANTHROPIC_API_KEY=")))
            (process-environment (if claude-p
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
