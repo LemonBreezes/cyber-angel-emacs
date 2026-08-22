@@ -192,7 +192,8 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
            (inner-command (format "%s \"%s\"" app-name task-description))
            (command (cae-ai-assistant--maybe-tmux-wrap
                      inner-command sandbox-dir t
-                     (when claude-p '("ANTHROPIC_API_KEY")))))
+                     (when (and claude-p cae-ai-assistant-claude-unset-api-key)
+                       '("ANTHROPIC_API_KEY")))))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (require 'vterm)
@@ -313,7 +314,7 @@ Otherwise, open the AI assistant for the current project."
            (claude-p (string= app-name "claude"))
            (unset-anthropic-key (when (and claude-p cae-ai-assistant-claude-unset-api-key)
                                   '("ANTHROPIC_API_KEY=")))
-           (process-environment (if claude-p
+           (process-environment (if (and claude-p cae-ai-assistant-claude-unset-api-key)
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
            (command (cae-ai-assistant--maybe-tmux-wrap
