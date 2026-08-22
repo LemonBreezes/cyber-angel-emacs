@@ -18,6 +18,8 @@ Values:
           (const :tag "All (including sandboxes)" all))
   :group 'cae-ai-assistant)
 
+(defvar cae-ai-assistant-claude-unset-api-key nil)
+
 (defcustom cae-ai-assistant-terminal-backend
   (cond ;;((and (modulep! :cae exwm) cae-exwm-enabled-p)
    ;; 'exwm)
@@ -181,7 +183,7 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
       (write-file (expand-file-name ".projectile" sandbox-dir)))
     ;; Unset ANTHROPIC_API_KEY for claude code to use its own token
     (let* ((claude-p (string= app-name "claude"))
-           (unset-anthropic-key (when claude-p '("ANTHROPIC_API_KEY=")))
+           (unset-anthropic-key (when (and claude-p cae-ai-assistant-unset) '("ANTHROPIC_API_KEY=")))
            (process-environment (if claude-p
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
