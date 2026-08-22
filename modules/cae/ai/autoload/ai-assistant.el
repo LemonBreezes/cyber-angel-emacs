@@ -311,13 +311,15 @@ Otherwise, open the AI assistant for the current project."
            (default-directory (or project-root default-directory))
            ;; Unset ANTHROPIC_API_KEY only for claude code
            (claude-p (string= app-name "claude"))
-           (unset-anthropic-key (when claude-p '("ANTHROPIC_API_KEY=")))
+           (unset-anthropic-key (when (and claude-p cae-ai-assistant-claude-unset-api-key)
+                                  '("ANTHROPIC_API_KEY=")))
            (process-environment (if claude-p
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
            (command (cae-ai-assistant--maybe-tmux-wrap
                      app-name default-directory nil
-                     (when claude-p '("ANTHROPIC_API_KEY")))))
+                     (when (and claude-p cae-ai-assistant-claude-unset-api-key)
+                       '("ANTHROPIC_API_KEY")))))
       (cond
        ((eq cae-ai-assistant-terminal-backend 'vterm)
         (let ((vterm-environment (append vterm-environment unset-anthropic-key)))
