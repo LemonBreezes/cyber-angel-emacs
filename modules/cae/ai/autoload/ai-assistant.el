@@ -185,7 +185,7 @@ Optional APP-NAME specifies which AI assistant to use (defaults to `cae-ai-assis
     (let* ((claude-p (string= app-name "claude"))
            (unset-anthropic-key (when (and claude-p cae-ai-assistant-claude-unset-api-key)
                                   '("ANTHROPIC_API_KEY=")))
-           (process-environment (if claude-p
+           (process-environment (if (and claude-p cae-ai-assistant-claude-unset-api-key)
                                     (append process-environment unset-anthropic-key)
                                   process-environment))
            (default-directory sandbox-dir)
