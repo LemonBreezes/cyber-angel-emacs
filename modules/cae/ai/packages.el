@@ -8,7 +8,7 @@
   (package! copilot :recipe (:host github :repo "copilot-emacs/copilot.el")))
 (package! forge-llm
   :recipe (:host gitlab :repo "rogs/forge-llm"))
-(package! pi-coding-agent)
+(package! pilish)
 (package! fancy-dabbrev)
 
 ;; `magit-gptcommit' is much better.
