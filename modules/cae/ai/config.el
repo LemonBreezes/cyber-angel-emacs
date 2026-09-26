@@ -164,8 +164,8 @@ One line, label: summary, now:")
              "a" #'pilish-abort
              "q" #'pilish-quit)
             (:map pilish-chat-mode-map
-             ;;:n "q" #'pilish-quit
-             ;;:n "ZQ" #'pilish-quit
+             :n "q" #'pilish-quit
+             :n "ZQ" #'pilish-quit
              :n "<f5>" #'pilish-toggle
              :localleader
              "m" #'pilish-menu
