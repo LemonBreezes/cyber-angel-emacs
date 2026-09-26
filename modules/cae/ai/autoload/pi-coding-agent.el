@@ -3,7 +3,7 @@
 ;;;###autoload
 (defun cae-pi-coding-agent-toggle ()
   (interactive)
-  (require 'pi-coding-agent)
+  (require 'pilish)
   (when (one-window-p)
     (split-window-horizontally)
     (other-window 1))
@@ -11,5 +11,5 @@
                  (pi-coding-agent--get-chat-buffer)
                (car (pi-coding-agent-project-buffers)))))
     (if (buffer-live-p buf)
-        (call-interactively #'pi-coding-agent-toggle))
-    (call-interactively #'pi-coding-agent)))
+        (call-interactively #'pilish-toggle))
+    (call-interactively #'pilish)))
