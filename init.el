@@ -41,6 +41,29 @@
 (defalias 'sp-beginning-of-sexp
   (lambda (&optional _arg) (goto-char (beginning-of-thing 'sexp))))
 
+;; Doom generates autoloads with the deprecated `autoload-generate-file-autoloads',
+;; which calls `make-autoload' with two arguments (FORM LOAD-NAME). In Emacs 32
+;; `make-autoload' is an alias for `loaddefs-generate--make-autoload', whose
+;; signature is now (FORM LOAD-NAME FILE &optional EXPANSION), so every
+;; ;;;###autoload cookie errors out and writes nothing to the loaddefs buffer.
+;; That trips the (cl-assert (> (point) output-start)) in
+;; `autoload-generate-file-autoloads' and kills 'doom sync' and 'doom upgrade'.
+;; Fill in the missing FILE argument (as Emacs <= 31 effectively did) until this
+;; is fixed in Emacs itself. Must be unconditional: the CLI loads this file.
+(defun cae-make-autoload (orig-fun form &optional load-name file &rest args)
+  "Adapt `make-autoload' to Emacs 32's three-argument `loaddefs-generate--make-autoload'."
+  (apply orig-fun form load-name (or file load-name) args))
+
+(defun cae-fix-make-autoload (&optional _feature)
+  "Teach the deprecated `autoload.el' callers of `make-autoload' to pass FILE."
+  (require 'advice)
+  (unless (advice-member-p 'make-autoload #'cae-make-autoload)
+    (advice-add 'make-autoload :override #'cae-make-autoload)))
+
+(add-hook 'after-load-functions #'cae-fix-make-autoload)
+(when (featurep 'autoload)
+  (cae-fix-make-autoload))
+
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
 (let ((q (and (not noninteractive) t)))
@@ -119,6 +142,7 @@
          snippets
          multiple-cursors
          lispy
+         (whitespace +guess +trim)
 
          :emacs
          undo
