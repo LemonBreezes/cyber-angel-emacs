@@ -41,31 +41,50 @@
 (defalias 'sp-beginning-of-sexp
   (lambda (&optional _arg) (goto-char (beginning-of-thing 'sexp))))
 
-;; Doom generates autoloads with the deprecated `autoload-generate-file-autoloads',
-;; which calls `make-autoload' with two arguments (FORM LOAD-NAME). In Emacs 32
-;; `make-autoload' is an alias for `loaddefs-generate--make-autoload', whose
-;; signature is now (FORM LOAD-NAME FILE &optional EXPANSION), so every
-;; ;;;###autoload cookie errors out and writes nothing to the loaddefs buffer.
-;; That trips the (cl-assert (> (point) output-start)) in
-;; `autoload-generate-file-autoloads' and kills 'doom sync' and 'doom upgrade'.
-;; Fill in the missing FILE argument (as Emacs <= 31 effectively did) until this
-;; is fixed in Emacs itself. Must be unconditional: the CLI loads this file.
-(defun cae-make-autoload (orig-fun form &optional load-name file &rest args)
-  "Adapt `make-autoload' to Emacs 32's three-argument `loaddefs-generate--make-autoload'."
-  (apply orig-fun form load-name (or file load-name) args))
+;; Doom generates its autoloads (doom-cli-loaddefs, module autoloads) with the
+;; deprecated `autoload-generate-file-autoloads', whose call to `make-autoload'
+;; still passes only two arguments (FORM LOAD-NAME). In Emacs 32, `make-autoload'
+;; is an alias for `loaddefs-generate--make-autoload', whose signature is now
+;; (FORM LOAD-NAME FILE &optional EXPANSION), so every ;;;###autoload cookie
+;; signals wrong-number-of-arguments, nothing is written to the loaddefs buffer,
+;; and the (cl-assert (> (point) output-start)) in
+;; `autoload-generate-file-autoloads' aborts 'doom env', 'doom sync' and
+;; 'doom upgrade'. Teach the alias to fill in the missing FILE argument (the file
+;; being scanned, which the deprecated caller knows but forgets to pass) until
+;; Emacs fixes its obsolete autoload.el. This has to be installed
+;; unconditionally, since the CLI loads this file before it generates loaddefs.
+;; Note it's advice, not a redefinition: loading obsolete/autoload.el re-aliases
+;; `make-autoload', and advice survives that (a plain defalias would not).
+(defvar cae--autoloads-file nil
+  "File currently being scanned for `;;;###autoload' cookies, when known.")
+
+(defun cae--make-autoload (form &optional load-name file &rest expansion)
+  "Compatibility wrapper for Emacs 32's `loaddefs-generate--make-autoload'."
+  (loaddefs-generate--make-autoload
+   form load-name (or file cae--autoloads-file load-name) expansion))
+
+(defun cae--around-print-cookie-text (orig-fn output-start load-name file)
+  "Remember the scanned file for `cae--make-autoload' while calling ORIG-FN."
+  (declare (indent 1))
+  (let ((cae--autoloads-file file))
+    (funcall orig-fn output-start load-name file)))
 
 (defvar cae--make-autoload-fixed nil)
 
 (defun cae-fix-make-autoload (&optional _feature)
   "Teach the deprecated `autoload.el' callers of `make-autoload' to pass FILE."
-  (unless cae--make-autoload-fixed
+  (when (and (not cae--make-autoload-fixed)
+             (fboundp 'loaddefs-generate--make-autoload)
+             ;; Only Emacs 32's three-argument signature needs the shim.
+             (>= (car (func-arity (symbol-function 'loaddefs-generate--make-autoload))) 3))
     (setq cae--make-autoload-fixed t)
     (require 'advice)
-    (advice-add 'make-autoload :override #'cae-make-autoload)))
+    (advice-add 'make-autoload :override #'cae--make-autoload)
+    (advice-add 'autoload--print-cookie-text :around #'cae--around-print-cookie-text)))
 
-(add-hook 'after-load-functions #'cae-fix-make-autoload)
-(when (featurep 'autoload)
-  (cae-fix-make-autoload))
+(unless (version< emacs-version "32.0")
+  (add-hook 'after-load-functions #'cae-fix-make-autoload)
+  (cae-fix-make-autoload 'autoload))
 
 ;; I added these to help with debugging my config. It's easier to toggle these
 ;; than to comment out large sections of my config.
