@@ -10,6 +10,7 @@
   :recipe (:host gitlab :repo "rogs/forge-llm"))
 (package! pilish)
 (package! fancy-dabbrev)
+(package! minuet)
 
 ;; `magit-gptcommit' is much better.
 (package! magit-gptcommit)
