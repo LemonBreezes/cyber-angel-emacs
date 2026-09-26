@@ -158,7 +158,7 @@ One line, label: summary, now:")
   (when (modulep! :editor evil)
     (after! evil
       (map! (:map pilish-input-mode-map
-             :n "<f5>" #'pilish-toggle
+             :g "<f5>" #'pilish-toggle
              :localleader
              ;;"m" #'pilish-menu
              ;;"a" #'pilish-abort
