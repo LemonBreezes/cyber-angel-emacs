@@ -7,8 +7,21 @@
 
 ;;; Set the models
 
-;; Due to VRAM limitations, I use one model for everything currently.
-(defvar cae-chat-model "hf.co/unsloth/Qwen3-32B-GGUF:Q5_K_M")
+;; One model for everything, served natively by Ollama. Qwen3.8-27B ships
+;; built-in MTP speculative decoding, so this needs no proxy: ~186 tok/s,
+;; 2.7x the same weights without draft (measured, 90-96% draft acceptance).
+;;
+;; The `-262k' suffix is a LOCAL derived tag, not an upstream one. The official
+;; `qwen3.8:27b-mtp-q4_K_M' inherits the server's OLLAMA_CONTEXT_LENGTH=65536,
+;; so qwen3.8-mtp-262k.Modelfile re-issues it with PARAMETER num_ctx 262144
+;; (the model's native window; confirmed by needle-retrieval at 175k tokens).
+;; Recipe: ~/.config/ollama/qwen3.8-mtp-262k.Modelfile
+;; Sibling tags -128k and bare (64k) exist as VRAM fallbacks; all three share
+;; weight blobs, so the whole set costs 17.7G total.
+;;
+;; NOTE: cae-coding-fim-model below is currently dead -- nothing in this config
+;; reads it. See the FIM notes at the bottom of this file.
+(defvar cae-chat-model "qwen3.8:27b-mtp-q4_K_M-262k")
 (setq cae-coding-fim-model cae-chat-model
       cae-coding-agent-model cae-chat-model
       cae-coding-reasoning-model cae-chat-model)
@@ -27,10 +40,10 @@
 
 (after! aidermacs
   ;; Aider talks to the local stack through litellm's openai-compat path
-  ;; (`openai/<model>' + --api-base pointing at the proxy's /v1).  The native
+  ;; (`openai/<model>' + --api-base pointing at ollama's /v1).  The native
   ;; `ollama_chat/' provider in the bundled litellm hangs on streaming (NDJSON
   ;; iterator never yields chunks, even though /api/chat works fine via curl)
-  ;; -- the openai/ path streams cleanly through ollama-spec-proxy's
+  ;; -- the openai/ path streams cleanly through ollama's
   ;; /v1/chat/completions instead.
   ;;
   ;; We pass --api-base / --api-key as explicit aider flags rather than env
@@ -40,15 +53,19 @@
   ;; with "Incorrect API key provided: ollama".  Flags can't be ignored.
   (setq cae-aidermacs--api-base   (format "http://%s:11434/v1" cae-ip-address)
         cae-aidermacs--api-key    "ollama")
-  ;; Aider caps Ollama's context at 2k tokens by default -- way too small for
-  ;; agentic coding.  Both devstral-small-2 and gpt-oss support ~128k; 32k is
-  ;; a balanced default (bump if you want longer context at the cost of VRAM
-  ;; and TTFT).  Still read by ollama-server, so keep it.
-  (setenv "OLLAMA_CONTEXT_LENGTH" "32768")
+  ;; This MUST match the model's own num_ctx (262144, set by the derived tag).
+  ;; Ollama sizes its KV cache per request, so a mismatch makes the runner
+  ;; reallocate every time you switch between aider and pi -- and because
+  ;; OLLAMA_MAX_LOADED_MODELS=2 it will then try to hold BOTH allocations at
+  ;; once.  At 262144 the model already sits at ~30G of 32G VRAM, so a second
+  ;; concurrent runner would OOM.  Matching the tag keeps exactly one runner.
+  ;; Aider's usable input is capped separately, via max_input_tokens in
+  ;; aider-model-metadata.json.
+  (setenv "OLLAMA_CONTEXT_LENGTH" "262144")
   ;; Use local models for every aider role.  Architect mode pairs the heavy
   ;; reasoner (planner) with the fast in-VRAM coder (applies the edits).  The
-  ;; weak model handles cheap chores like commit messages -- devstral is fine
-  ;; there since it's already loaded.
+  ;; weak model handles cheap chores like commit messages -- the single Qwen3.8
+  ;; tag covers every role, so all four slots stay identical.
   (setq aidermacs-use-architect-mode t
         aidermacs-default-model   (concat "openai/" cae-coding-agent-model)
         aidermacs-architect-model (concat "openai/" cae-coding-reasoning-model)
@@ -59,7 +76,7 @@
   ;; re-run, so edits to these args would silently not take effect until you
   ;; restarted Emacs.  Putting it in `after!' makes a Doom reload pick it up.
   ;; --openai-api-base / --openai-api-key wire the openai-compat provider at
-  ;; the local proxy; --model-metadata-file declares real context windows.
+  ;; ollama directly; --model-metadata-file declares real context windows.
   (setq aidermacs-extra-args
         `("--openai-api-base" ,cae-aidermacs--api-base
           "--openai-api-key"  ,cae-aidermacs--api-key
@@ -159,7 +176,7 @@ One line, label: summary, now:")
 
 (use-package! copilot
   :when (and (executable-find "node")
-             (modulep! +fim))
+             (modulep! +copilot))
   :defer t :init
   (add-hook 'text-mode-hook #'cae-copilot-turn-on-safely)
   (add-hook 'prog-mode-hook #'cae-copilot-turn-on-safely)
