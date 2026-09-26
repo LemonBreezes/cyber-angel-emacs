@@ -54,10 +54,13 @@
   "Adapt `make-autoload' to Emacs 32's three-argument `loaddefs-generate--make-autoload'."
   (apply orig-fun form load-name (or file load-name) args))
 
+(defvar cae--make-autoload-fixed nil)
+
 (defun cae-fix-make-autoload (&optional _feature)
   "Teach the deprecated `autoload.el' callers of `make-autoload' to pass FILE."
-  (require 'advice)
-  (unless (advice-member-p 'make-autoload #'cae-make-autoload)
+  (unless cae--make-autoload-fixed
+    (setq cae--make-autoload-fixed t)
+    (require 'advice)
     (advice-add 'make-autoload :override #'cae-make-autoload)))
 
 (add-hook 'after-load-functions #'cae-fix-make-autoload)
@@ -183,9 +186,7 @@
          (json +lsp +tree-sitter)
          (python +lsp +tree-sitter +pyright +cython)
          (haskell +lsp +tree-sitter)
-         (graphql +lsp +tree-sitter)
          (yaml +lsp +tree-sitter)
-         (gdscript +lsp +tree-sitter)
          (graphviz +lsp +tree-sitter)
          (rust +lsp +tree-sitter)
          (common-lisp +lsp +tree-sitter)
