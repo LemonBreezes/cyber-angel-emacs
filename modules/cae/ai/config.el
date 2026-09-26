@@ -153,6 +153,25 @@ One line, label: summary, now:")
   :defer t :after forge :config
   (forge-llm-setup))
 
+(use-package! pilish
+  :defer t :config
+  (when (modulep! :editor evil)
+    (after! evil
+      (map! (:map pilish-input-mode-map
+             :n "<f5>" #'pilish-toggle
+             :localleader
+             ;;"m" #'pilish-menu
+             ;;"a" #'pilish-abort
+             "q" #'pilish-quit)
+            (:map pilish-chat-mode-map
+             ;;:n "q" #'pilish-quit
+             ;;:n "ZQ" #'pilish-quit
+             :n "<f5>" #'pilish-toggle
+             :localleader
+             ;;"m" #'pilish-menu
+             ;;"a" #'pilish-abort
+             "q" #'pilish-quit)))))
+
 (use-package! fancy-dabbrev
   :when (not (modulep! +fim))
   :defer t :init
