@@ -174,6 +174,7 @@
 
          :term
          eshell
+         (ghostel +everywhere)
 
          :checkers
          (syntax +childframe +icons)
