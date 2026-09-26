@@ -240,7 +240,7 @@
          unpackaged
          vc
          org
-         ai
+         (ai +fim)
          gnus
          rss
 
