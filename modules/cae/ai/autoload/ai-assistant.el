@@ -18,7 +18,7 @@ Values:
           (const :tag "All (including sandboxes)" all))
   :group 'cae-ai-assistant)
 
-(defvar cae-ai-assistant-claude-unset-api-key nil)
+(defvar cae-ai-assistant-claude-unset-api-key t)
 
 (defcustom cae-ai-assistant-terminal-backend
   (cond ;;((and (modulep! :cae exwm) cae-exwm-enabled-p)
