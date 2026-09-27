@@ -163,7 +163,7 @@
          (format +lsp)
          snippets
          multiple-cursors
-         lispy
+         ;; lispy
          (whitespace +guess +trim)
 
          :emacs
