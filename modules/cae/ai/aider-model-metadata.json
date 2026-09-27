@@ -1,5 +1,5 @@
 {
-  "_comment": "Real context windows for locally-served models reached via openai/<tag> through ollama's /v1 on :11434. Without this aider falls back to its tiny default (~4k tokens) and silently drops files. Each entry's max_input_tokens is a deliberate agentic cap (effective_ctx - max_output_tokens); it is NOT the model's num_ctx. The qwen3.8-27b entry is capped well below its 262144 num_ctx on purpose: at 262144 the model occupies ~30G of 32G VRAM, so a huge aider context is a slow first-token cost with little practical gain. Must stay <= the tag's num_ctx.",
+  "_comment": "Real context windows for locally-served models reached via openai/<tag> through ollama's /v1 on :11434. Without this aider falls back to its tiny default (~4k tokens) and silently drops files. Each entry's max_input_tokens is a deliberate agentic cap (effective_ctx - max_output_tokens); it is NOT the model's num_ctx. The qwen3.8-27b entry is derived from the effective window, not chosen freely: the tag sets num_ctx 196608, but Ollama caps usable prompt at num_ctx/2, giving ~98304 real tokens, and 81920 + 16384 output lands exactly on that. Do not raise max_input_tokens past 81920 without re-measuring -- at the model's native 262144 the KV cache overflows 32G VRAM onto host RAM and decode collapses from ~44 to 3.4 tok/s. Must stay <= the tag's effective window.",
   "openai/gpt-oss:120b": {
     "max_input_tokens": 114688,
     "max_output_tokens": 16384,
@@ -154,8 +154,8 @@
     "supports_function_calling": false,
     "supports_vision": false
   },
-  "openai/qwen3.8:27b-mtp-q4_K_M-262k": {
-    "max_input_tokens": 131072,
+  "openai/qwen3.8:27b-ultra-uncensored-q5_k_m": {
+    "max_input_tokens": 81920,
     "max_output_tokens": 16384,
     "max_tokens": 16384,
     "input_cost_per_token": 0,

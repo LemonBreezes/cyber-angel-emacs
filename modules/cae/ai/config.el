@@ -7,21 +7,34 @@
 
 ;;; Set the models
 
-;; One model for everything, served natively by Ollama. Qwen3.8-27B ships
-;; built-in MTP speculative decoding, so this needs no proxy: ~186 tok/s,
-;; 2.7x the same weights without draft (measured, 90-96% draft acceptance).
+;; One model for everything, served natively by Ollama. The Qwen3.8-27B weights
+;; ship built-in MTP speculative decoding, so this needs no proxy. Measured on
+;; the Q5_K_M quant: 125 tok/s with MTP vs 68 without, a 1.68x speedup.
 ;;
-;; The `-262k' suffix is a LOCAL derived tag, not an upstream one. The official
-;; `qwen3.8:27b-mtp-q4_K_M' inherits the server's OLLAMA_CONTEXT_LENGTH=65536,
-;; so qwen3.8-mtp-262k.Modelfile re-issues it with PARAMETER num_ctx 262144
-;; (the model's native window; confirmed by needle-retrieval at 175k tokens).
-;; Recipe: ~/.config/ollama/qwen3.8-mtp-262k.Modelfile
-;; Sibling tags -128k and bare (64k) exist as VRAM fallbacks; all three share
-;; weight blobs, so the whole set costs 17.7G total.
+;; This is the abliterated ("heretic") build of Qwen3.8-27B -- refusal
+;; directions removed, with the MTP head and the vision tower left intact
+;; upstream. Local tag, built from
+;; `llmfan46/Qwen3.8-27B-Ultra-Uncensored-Heretic-Native-MTP-Preserved-GGUF'
+;; (Q5_K_M weights plus a separate BF16 mmproj, both needed for vision).
+;;
+;; Context: the tag sets PARAMETER num_ctx 196608, but Ollama caps usable
+;; prompt at num_ctx/2, so the real window is ~98304 tokens. 196608 rather
+;; than the model's native 262144 is deliberate -- at 262144 the KV cache
+;; overflows 32G VRAM onto host RAM and decode collapses from ~44 to
+;; 3.4 tok/s. 196608 holds ~98304 tokens at ~44 tok/s and ~1.8G VRAM spare.
+;;
+;; Recipe: ~/models/qwen3.8-ablit/Modelfile. Self-contained -- it points at
+;; durable, sha256-verified GGUF copies in ~/models/gguf/ rather than at
+;; Ollama's blob store, so it still rebuilds after `ollama rm` plus blob
+;; collection. Verified by deleting both the model and its blobs, then
+;; rebuilding from the Modelfile alone.
+;;
+;; The stock `qwen3.8:27b-mtp-q4_K_M' (Q4_K_M) is still installed as a
+;; censored control for A/B-ing the abliteration.
 ;;
 ;; NOTE: cae-coding-fim-model below is currently dead -- nothing in this config
 ;; reads it. See the FIM notes at the bottom of this file.
-(defvar cae-chat-model "qwen3.8:27b-mtp-q4_K_M-262k")
+(defvar cae-chat-model "qwen3.8:27b-ultra-uncensored-q5_k_m")
 (setq cae-coding-fim-model cae-chat-model
       cae-coding-agent-model cae-chat-model
       cae-coding-reasoning-model cae-chat-model)
@@ -53,15 +66,19 @@
   ;; with "Incorrect API key provided: ollama".  Flags can't be ignored.
   (setq cae-aidermacs--api-base   (format "http://%s:11434/v1" cae-ip-address)
         cae-aidermacs--api-key    "ollama")
-  ;; This MUST match the model's own num_ctx (262144, set by the derived tag).
+  ;; This MUST match the model's own num_ctx (196608, set by the derived tag).
   ;; Ollama sizes its KV cache per request, so a mismatch makes the runner
   ;; reallocate every time you switch between aider and pi -- and because
   ;; OLLAMA_MAX_LOADED_MODELS=2 it will then try to hold BOTH allocations at
-  ;; once.  At 262144 the model already sits at ~30G of 32G VRAM, so a second
-  ;; concurrent runner would OOM.  Matching the tag keeps exactly one runner.
-  ;; Aider's usable input is capped separately, via max_input_tokens in
-  ;; aider-model-metadata.json.
-  (setenv "OLLAMA_CONTEXT_LENGTH" "262144")
+  ;; once.  At 196608 the model already sits at ~30.4G of 32.6G VRAM once the
+  ;; context fills, so a second concurrent runner would OOM.  Matching the tag
+  ;; keeps exactly one runner.
+  ;;
+  ;; Remember Ollama only gives the prompt half of num_ctx, so this env var is
+  ;; NOT the usable context: 196608 yields ~98304 real prompt tokens. Aider's
+  ;; usable input is capped separately, via max_input_tokens in
+  ;; aider-model-metadata.json (81920, the remainder after 16384 output).
+  (setenv "OLLAMA_CONTEXT_LENGTH" "196608")
   ;; Use local models for every aider role.  Architect mode pairs the heavy
   ;; reasoner (planner) with the fast in-VRAM coder (applies the edits).  The
   ;; weak model handles cheap chores like commit messages -- the single Qwen3.8
