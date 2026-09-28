@@ -244,8 +244,6 @@
          gnus
          rss
 
-         (:if (not (memq system-type '(cygwin windows-nt ms-dos))) ghostel)
-
          :secret
          ;;(:if (eq system-type 'gnu/linux) root)
          ))
