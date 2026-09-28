@@ -81,6 +81,7 @@ case, e.g. a daemon client that turns out to be a TTY."
 ;; I don't like `hl-line-mode' globally because it sometimes conflicts with
 ;; other overlays. But in tabulated buffers like `*Proced*', it helps me see
 ;; what item I have selected.
+(remove-hook 'doom-first-input-hook #'global-hl-line-mode)
 (add-hook 'tabulated-list-mode-hook #'hl-line-mode)
 
 ;; Auto-hide the tab bar.
