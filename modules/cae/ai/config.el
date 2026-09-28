@@ -163,6 +163,7 @@ One line, label: summary, now:")
 
 (use-package! pilish
   :defer t :config
+  (setq pilish-thinking-display 'hidden)
   (when (modulep! :editor evil)
     (after! evil
       (map! (:map pilish-input-mode-map
