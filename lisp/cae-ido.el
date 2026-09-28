@@ -1,6 +1,7 @@
 ;;; lisp/cae-ido.el -*- lexical-binding: t; -*-
 
-(pushnew! ido-ignore-files "\\`.DS_Store$" "Icon\\?$")
+(dolist (pattern '("\\`.DS_Store$" "Icon\\?$"))
+  (cl-pushnew pattern ido-ignore-files :test #'equal))
 (setq ido-ignore-buffers
       '("\\` " "^\\*ESS\\*" "^\\*Messages\\*" "^\\*[Hh]elp" "^\\*Buffer"
         "^\\*.*Completions\\*$" "^\\*Ediff" "^\\*tramp" "^\\*cvs-" "_region_"
