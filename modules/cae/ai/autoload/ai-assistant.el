@@ -142,20 +142,23 @@ stale session keeps its original environment until it is restarted."
 Replaces the old `llm-refactoring-provider', which current `llm' releases no
 longer define.  Built lazily (see `cae-ai-assistant--llm-provider') from
 `cae-ip-address' and `cae-coding-agent-model' to match the rest of the
-`cae/ai' module's local-Ollama setup (cf. `magit-gptcommit-llm-provider').")
+`cae/ai' module's local-NInfer setup (cf. `magit-gptcommit-llm-provider').")
 
 (defun cae-ai-assistant--llm-provider ()
   "Return the `llm' provider for helper queries, creating it once.
 Signal a `user-error' if `cae-ip-address' is unset, since there is then no
-local Ollama endpoint to reach."
-  (require 'llm-ollama)
+local NInfer endpoint to reach.
+
+NInfer speaks OpenAI Chat Completions on :8081, not Ollama's native API, so this
+uses `make-llm-openai-compatible' rather than `make-llm-ollama'."
+  (require 'llm-openai)
   (or cae-ai-assistant--llm-provider
       (if (not (bound-and-true-p cae-ip-address))
-          (user-error "cae-ip-address is unset; cannot reach the local Ollama server")
+          (user-error "cae-ip-address is unset; cannot reach the local NInfer server")
         (setq cae-ai-assistant--llm-provider
-              (make-llm-ollama
-               :host cae-ip-address
-               :port 11434
+              (make-llm-openai-compatible
+               :url (format "http://%s:8081/v1" cae-ip-address)
+               :key "ninfer"
                :chat-model cae-coding-agent-model)))))
 
 (defun cae-ai-assistant--generate-folder-name (task-description)

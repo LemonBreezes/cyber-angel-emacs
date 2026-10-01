@@ -1,5 +1,16 @@
 {
-  "_comment": "Real context windows for locally-served models reached via openai/<tag> through ollama's /v1 on :11434. Without this aider falls back to its tiny default (~4k tokens) and silently drops files. Each entry's max_input_tokens is a deliberate agentic cap (effective_ctx - max_output_tokens); it is NOT the model's num_ctx. The qwen3.8-27b entry is derived from the effective window, not chosen freely: the tag sets num_ctx 196608, but Ollama caps usable prompt at num_ctx/2, giving ~98304 real tokens, and 81920 + 16384 output lands exactly on that. Do not raise max_input_tokens past 81920 without re-measuring -- at the model's native 262144 the KV cache overflows 32G VRAM onto host RAM and decode collapses from ~44 to 3.4 tok/s. Must stay <= the tag's effective window.",
+  "_comment": "Real context windows for locally-served models reached via openai/<name>. Without this aider falls back to its tiny default (~4k tokens) and silently drops files. Each entry's max_input_tokens is a deliberate agentic cap (effective_ctx - max_output_tokens); it is NOT the backend's own context setting. TWO backends are represented here. qwen3.8-27b-heretic-ara is served by NInfer on :8081 (the default; see modules/cae/ai/config.el): --max-context 200000 with --kv-capacity auto resolves to ~200064 int8 KV tokens, and NInfer does NOT halve the window the way Ollama does, so the whole thing is usable prompt -- 163840 + 32768 output lands just inside it, the larger output allowance covering reasoning tokens under --default-thinking-budget 16384. KV is a startup-fixed pool, so overrunning it queues or errors rather than spilling to host RAM. Every other entry is an Ollama tag on :11434, where usable prompt is only num_ctx/2 -- the qwen3.8:27b-ultra-uncensored-q5_k_m entry keeps 81920 + 16384 for that reason (num_ctx 196608 -> ~98304 real tokens) and must not be raised without re-measuring, since at that model's native 262144 the KV cache overflows 32G VRAM onto host RAM and decode collapses from ~44 to 3.4 tok/s. The two backends cannot run at once: 22.8G of NVFP4 weights plus KV leaves no room for Ollama's 21G Q5_K_M.",
+  "openai/qwen3.8-27b-heretic-ara": {
+    "max_input_tokens": 163840,
+    "max_output_tokens": 32768,
+    "max_tokens": 32768,
+    "input_cost_per_token": 0,
+    "output_cost_per_token": 0,
+    "litellm_provider": "openai",
+    "mode": "chat",
+    "supports_function_calling": true,
+    "supports_vision": true
+  },
   "openai/gpt-oss:120b": {
     "max_input_tokens": 114688,
     "max_output_tokens": 16384,

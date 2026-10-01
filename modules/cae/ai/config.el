@@ -7,34 +7,34 @@
 
 ;;; Set the models
 
-;; One model for everything, served natively by Ollama. The Qwen3.8-27B weights
-;; ship built-in MTP speculative decoding, so this needs no proxy. Measured on
-;; the Q5_K_M quant: 125 tok/s with MTP vs 68 without, a 1.68x speedup.
+;; One model for everything, served by NInfer (~/src/ninfer-custom) on :8081,
+;; not by Ollama on :11434. Launch it with `models/launch-heretic-ara.sh'; it
+;; binds the tailscale0 address, so `cae-ip-address' reaches it exactly as it
+;; reached Ollama. Ollama is still installed for the other tags, but the two
+;; cannot run at once: 22.8G of NVFP4 weights plus KV leaves no room for
+;; Ollama's 21G Q5_K_M.
 ;;
-;; This is the abliterated ("heretic") build of Qwen3.8-27B -- refusal
-;; directions removed, with the MTP head and the vision tower left intact
-;; upstream. Local tag, built from
-;; `llmfan46/Qwen3.8-27B-Ultra-Uncensored-Heretic-Native-MTP-Preserved-GGUF'
-;; (Q5_K_M weights plus a separate BF16 mmproj, both needed for vision).
+;; Still the abliterated Qwen3.8-27B, but a different build of it: the Heretic
+;; ARA BF16 checkpoint (`heretic-org/Qwen3.8-27B-heretic-ara', v1.2.0+custom,
+;; layers 26-56, 99/100 -> 0/100 refusals, KL 0.0535) quantised ONCE from BF16
+;; to mixed NVFP4/FP8 and converted to a single .ninfer artifact. Vision tower
+;; and MTP head intact; DFlash2 drafter and the 131072-row proposal head added.
 ;;
-;; Context: the tag sets PARAMETER num_ctx 196608, but Ollama caps usable
-;; prompt at num_ctx/2, so the real window is ~98304 tokens. 196608 rather
-;; than the model's native 262144 is deliberate -- at 262144 the KV cache
-;; overflows 32G VRAM onto host RAM and decode collapses from ~44 to
-;; 3.4 tok/s. 196608 holds ~98304 tokens at ~44 tok/s and ~1.8G VRAM spare.
+;; Context: 200064 real tokens. NInfer does not halve anything -- the whole
+;; window is usable prompt, unlike Ollama's num_ctx/2. The old 196608/98304
+;; arithmetic and the "KV overflows onto host RAM" cliff are both gone: KV is
+;; a startup-fixed int8 pool sized by --kv-capacity auto, and nothing spills.
 ;;
-;; Recipe: ~/models/qwen3.8-ablit/Modelfile. Self-contained -- it points at
-;; durable, sha256-verified GGUF copies in ~/models/gguf/ rather than at
-;; Ollama's blob store, so it still rebuilds after `ollama rm` plus blob
-;; collection. Verified by deleting both the model and its blobs, then
-;; rebuilding from the Modelfile alone.
-;;
-;; The stock `qwen3.8:27b-mtp-q4_K_M' (Q4_K_M) is still installed as a
-;; censored control for A/B-ing the abliteration.
+;; Measured on this box against the old Ollama tag, same prompts:
+;;   decode   260.8 tok/s on code, 441.8 copy-heavy, 158 prose (was 89-108)
+;;   prefill  12450 tok/s at 22k, 10881 at 66k (was 3166 / 2443)
+;;   reopening a 49k-token chat: 0.02s from the prefix cache (was 18.3s, always)
+;; The prefix cache is the big one -- it spans 68G of host RAM and persists to
+;; disk, so long sessions stay warm across restarts.
 ;;
 ;; NOTE: cae-coding-fim-model below is currently dead -- nothing in this config
 ;; reads it. See the FIM notes at the bottom of this file.
-(defvar cae-chat-model "qwen3.8:27b-ultra-uncensored-q5_k_m")
+(defvar cae-chat-model "qwen3.8-27b-heretic-ara")
 (setq cae-coding-fim-model cae-chat-model
       cae-coding-agent-model cae-chat-model
       cae-coding-reasoning-model cae-chat-model)
@@ -42,43 +42,47 @@
 (defvar cae-packages-bump-review-model)
 (setq cae-packages-bump-review-model cae-chat-model)
 
+;; NInfer serves OpenAI Chat Completions, Responses and Anthropic Messages -- it
+;; does NOT serve Ollama's native /api/chat, so `make-llm-ollama' cannot talk to
+;; it. `make-llm-openai-compatible' takes the base URL and appends
+;; chat/completions itself. The key is unused (the server runs without
+;; --api-key) but must be non-empty.
+(defvar cae-ai-endpoint
+  (lambda () (format "http://%s:8081/v1" cae-ip-address))
+  "Thunk returning the base URL of the local NInfer server.
+A thunk rather than a string so it resolves after `cae-ip-address' is set.")
+
 (after! magit-gptcommit
-  (require 'llm-ollama)
+  (require 'llm-openai)
   (when (bound-and-true-p cae-ip-address)
     (setq magit-gptcommit-llm-provider
-          (make-llm-ollama
-           :host cae-ip-address
-           :port 11434
+          (make-llm-openai-compatible
+           :url (funcall cae-ai-endpoint)
+           :key "ninfer"
            :chat-model cae-coding-agent-model))))
 
 (after! aidermacs
-  ;; Aider talks to the local stack through litellm's openai-compat path
-  ;; (`openai/<model>' + --api-base pointing at ollama's /v1).  The native
-  ;; `ollama_chat/' provider in the bundled litellm hangs on streaming (NDJSON
-  ;; iterator never yields chunks, even though /api/chat works fine via curl)
-  ;; -- the openai/ path streams cleanly through ollama's
-  ;; /v1/chat/completions instead.
+  ;; Aider talks to NInfer through litellm's openai-compat path
+  ;; (`openai/<model>' + --api-base pointing at NInfer's /v1).  That path was
+  ;; already required for Ollama -- the bundled litellm's native `ollama_chat/'
+  ;; provider hangs on streaming -- and it is the only option here, since
+  ;; NInfer serves no Ollama-native API at all.
   ;;
   ;; We pass --api-base / --api-key as explicit aider flags rather than env
   ;; vars: `setenv' in Emacs only propagates to subprocesses spawned by THIS
   ;; Emacs (subtle when aidermacs uses comint), and a stale `OPENAI_API_BASE'
   ;; or no `OPENAI_API_BASE' silently falls back to api.openai.com and fails
-  ;; with "Incorrect API key provided: ollama".  Flags can't be ignored.
-  (setq cae-aidermacs--api-base   (format "http://%s:11434/v1" cae-ip-address)
-        cae-aidermacs--api-key    "ollama")
-  ;; This MUST match the model's own num_ctx (196608, set by the derived tag).
-  ;; Ollama sizes its KV cache per request, so a mismatch makes the runner
-  ;; reallocate every time you switch between aider and pi -- and because
-  ;; OLLAMA_MAX_LOADED_MODELS=2 it will then try to hold BOTH allocations at
-  ;; once.  At 196608 the model already sits at ~30.4G of 32.6G VRAM once the
-  ;; context fills, so a second concurrent runner would OOM.  Matching the tag
-  ;; keeps exactly one runner.
-  ;;
-  ;; Remember Ollama only gives the prompt half of num_ctx, so this env var is
-  ;; NOT the usable context: 196608 yields ~98304 real prompt tokens. Aider's
-  ;; usable input is capped separately, via max_input_tokens in
-  ;; aider-model-metadata.json (81920, the remainder after 16384 output).
-  (setenv "OLLAMA_CONTEXT_LENGTH" "196608")
+  ;; with "Incorrect API key provided".  Flags can't be ignored.
+  (setq cae-aidermacs--api-base   (funcall cae-ai-endpoint)
+        cae-aidermacs--api-key    "ninfer")
+  ;; No context env var: OLLAMA_CONTEXT_LENGTH was Ollama's per-request KV
+  ;; sizing knob and NInfer has no equivalent -- KV is one startup-fixed int8
+  ;; pool (--max-context 200000, --kv-capacity auto -> 200064 tokens), shared by
+  ;; active requests and retained prefixes.  So there is nothing to keep in
+  ;; sync, no per-request reallocation, and no risk of two runners each
+  ;; claiming a KV cache; --max-concurrency 2 bounds the whole server instead.
+  ;; Aider's usable input is still capped via max_input_tokens in
+  ;; aider-model-metadata.json (163840, the remainder after 32768 output).
   ;; Use local models for every aider role.  Architect mode pairs the heavy
   ;; reasoner (planner) with the fast in-VRAM coder (applies the edits).  The
   ;; weak model handles cheap chores like commit messages -- the single Qwen3.8
@@ -93,7 +97,7 @@
   ;; re-run, so edits to these args would silently not take effect until you
   ;; restarted Emacs.  Putting it in `after!' makes a Doom reload pick it up.
   ;; --openai-api-base / --openai-api-key wire the openai-compat provider at
-  ;; ollama directly; --model-metadata-file declares real context windows.
+  ;; NInfer directly; --model-metadata-file declares real context windows.
   (setq aidermacs-extra-args
         `("--openai-api-base" ,cae-aidermacs--api-base
           "--openai-api-key"  ,cae-aidermacs--api-key
