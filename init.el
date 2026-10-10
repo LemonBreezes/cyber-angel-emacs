@@ -225,7 +225,6 @@
          irc
 
          :secret
-         ;;automation
 
          :cae
          exwm
