@@ -242,9 +242,6 @@
          (ai +fim)
          gnus
          rss
-
-         :secret
-         ;;(:if (eq system-type 'gnu/linux) root)
          ))
 
 ;;Local Variables:
