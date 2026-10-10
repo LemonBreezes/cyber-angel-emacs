@@ -224,8 +224,6 @@
          (rss +org)
          irc
 
-         :secret
-
          :cae
          exwm
          (helm +childframe)
