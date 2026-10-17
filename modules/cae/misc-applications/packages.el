@@ -12,7 +12,6 @@
 (package! pomm)
 (package! debbugs :recipe (:host github :repo "emacs-straight/debbugs"
                            :files ("*"))) ; Have to get all files to fix error.
-(package! leetcode)
 (package! noaa)
 (package! hackernews)
 
