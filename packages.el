@@ -109,8 +109,9 @@
 (package! real-mono-themes)
 
 ;; Export your theme.
-(package! theme-magic :recipe (:host github :repo "LemonBreezes/theme-magic"
-                               :branch "atomic-colors-json-write"))
+(package! theme-magic :recipe
+  (:host github :repo "LemonBreezes/theme-magic"
+   :branch "atomic-colors-json-write"))
 (package! ewal)
 
 ;;; Tools
