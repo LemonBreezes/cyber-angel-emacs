@@ -139,36 +139,6 @@
 (use-package! debbugs
   :defer t)
 
-(use-package! leetcode
-  :defer t :init
-  (defvar cae-leetcode-workspace-name "*leetcode*"
-    "The name of the workspace to use for leetcode.")
-  (when (memq system-type '(cygwin windows-nt ms-dos))
-    (cae-advice-add #'leetcode--install-my-cookie :override #'ignore))
-  (map! :map cae-misc-applications-random-map
-        "l" #'cae-leetcode)
-  (after! which-key
-    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
-      "l" "LeetCode"))
-  (add-hook 'leetcode-solution-mode-hook
-            (lambda ()
-              ;; Flycheck will emit errors because the code does not have any
-              ;; import/include/etc statements. Besides, we can't use Flycheck
-              ;; in an interview anyway.
-              (when (bound-and-true-p flycheck-mode)
-                (flycheck-mode -1))
-              ;; Copilot is basically cheating, so disable it too.
-              (when (bound-and-true-p copilot-mode)
-                (copilot-mode -1))))
-  :config
-  (map! :map leetcode--problems-mode-map
-        "q" #'cae-leetcode-soft-quit
-        "Q" #'cae-leetcode-quit
-        :map leetcode--problem-detail-mode-map
-        "o" #'link-hint-open-link)
-  (setq leetcode-save-solutions t)
-  (setq leetcode-directory "~/src/leetcode"))
-
 
 ;;; System
 
