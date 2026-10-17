@@ -209,6 +209,7 @@
          (graphviz +lsp +tree-sitter)
          (rust +lsp +tree-sitter)
          (common-lisp +lsp +tree-sitter)
+         (lua +fennel)
 
          :os
          (:if IS-MAC macos)
