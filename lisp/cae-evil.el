@@ -103,11 +103,10 @@
   (map! :map vterm-mode-map
         :localleader "e" #'vterm-send-escape))
 
-(when (modulep! :editor evil +everywhere)
-  (after! ghostel
-    (map! :map ghostel-mode-map
-          :localleader "e" #'cae-ghostel-send-escape)
-    (setq evil-ghostel-escape 'evil)))
+(after! ghostel
+  (map! :map ghostel-mode-map
+        :localleader "e" #'cae-ghostel-send-escape)
+  (setq evil-ghostel-escape 'evil))
 
 (unless evil-disable-insert-state-bindings
   (when (modulep! :completion corfu)
