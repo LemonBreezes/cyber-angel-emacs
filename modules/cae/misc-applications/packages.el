@@ -14,6 +14,7 @@
                            :files ("*"))) ; Have to get all files to fix error.
 (package! noaa)
 (package! hackernews)
+(package! osm)
 
 ;; System
 (when (eq system-type 'gnu/linux)
