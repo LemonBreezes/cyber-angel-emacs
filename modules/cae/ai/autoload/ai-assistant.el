@@ -26,7 +26,8 @@ Values:
    ;; When EXWM isn't running, prefer ghostel over vterm as long as it's
    ;; usable (i.e. not in a Linux TTY, where its text is invisible) and the
    ;; module is enabled.
-   ((modulep! :cae ghostel)
+   ((or (modulep! :cae ghostel)
+        (modulep! :term ghostel))
     'ghostel)
    (t 'vterm))
   "Backend to use for terminal operations.
