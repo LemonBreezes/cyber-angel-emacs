@@ -140,7 +140,73 @@
   :defer t)
 
 (use-package! osm
-  :defer t)
+  :defer t :init
+  (map! :map cae-misc-applications-random-map
+        :prefix "m"
+        "m" #'osm-home
+        "s" #'osm-search
+        "j" #'osm-jump
+        "b" #'osm-bookmark-jump
+        "g" #'osm-goto
+        "u" #'osm-url
+        "f" #'osm-open
+        "r" #'osm-route
+        "v" #'osm-server)
+  (after! which-key
+    (which-key-add-keymap-based-replacements cae-misc-applications-random-map
+      "m" "maps"
+      "m m" "Home"
+      "m s" "Search for a location"
+      "m j" "Jump to a pin"
+      "m b" "Jump to a bookmark"
+      "m g" "Go to coordinates"
+      "m u" "Open a map URL"
+      "m f" "Open a GPX/TCX track"
+      "m r" "Plan a route"
+      "m v" "Select tile server"))
+  :config
+  ;; `osm-mode' derives from `special-mode', so Evil starts it in normal state,
+  ;; where nearly all of OSM's single-key bindings are shadowed. Mirror them
+  ;; here, with `hjkl' for panning.
+  (map! :map osm-mode-map
+        :n "h" #'osm-left
+        :n "j" #'osm-down
+        :n "k" #'osm-up
+        :n "l" #'osm-right
+        :n "H" #'osm-left-left
+        :n "J" #'osm-down-down
+        :n "K" #'osm-up-up
+        :n "L" #'osm-right-right
+        :n "+" #'osm-zoom-in
+        :n "=" #'osm-zoom-in
+        :n "-" #'osm-zoom-out
+        :n "zi" #'osm-zoom-in
+        :n "zo" #'osm-zoom-out
+        :n "c" #'osm-center
+        :n "b" #'osm-bookmark-set
+        :n "B" #'osm-bookmark-jump
+        :n "d" #'osm-delete
+        :n "r" #'osm-rename
+        :n "R" #'osm-hide
+        :n "s" #'osm-search
+        :n "S" #'osm-server
+        :n "t" #'osm-goto
+        :n "u" #'osm-save-url
+        :n "y" #'org-store-link
+        :n "o" #'clone-buffer
+        :n "gh" #'osm-home
+        :n "gj" #'osm-jump
+        :n "gr" #'revert-buffer
+        :n "q" #'quit-window)
+  ;; `osm-mode' sets `cursor-type' to nil, but Evil overrides that with the
+  ;; state cursor. We cannot reuse `cae-misc-applications-hide-cursor-h' here
+  ;; because `hl-line-mode' would band the tiles.
+  (add-hook! 'osm-mode-hook
+    (defun cae-osm-hide-cursor-h ()
+      (setq-local evil-normal-state-cursor '(bar . 0)
+                  evil-motion-state-cursor '(bar . 0)
+                  evil-insert-state-cursor '(bar . 0)
+                  evil-emacs-state-cursor  '(bar . 0)))))
 
 
 ;;; System
