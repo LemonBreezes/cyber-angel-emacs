@@ -139,6 +139,8 @@
 (use-package! debbugs
   :defer t)
 
+(use-package! osm
+  :defer t)
 
 ;;; System
 
