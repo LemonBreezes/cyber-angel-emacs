@@ -23,7 +23,6 @@
           :localleader "e" #'cae-ghostel-send-escape)
     (setq evil-ghostel-escape 'evil))
 
-
   ;; Don't rename buffers based on the terminal title (mirrors vterm's
   ;; default). Keeps the popup buffer name stable so `set-popup-rule!'
   ;; keeps matching it after the shell sets a title via OSC 2.
