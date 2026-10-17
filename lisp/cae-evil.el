@@ -48,11 +48,11 @@
 ;; Bind `better-jumper-jump-forward' to TAB in terminal Emacs since can't dicern
 ;; between TAB and C-i there.
 (cae-after-frame!
-  (unless (cae-display-graphic-p)
-    (after! evil
-      (define-key evil-motion-state-map (kbd "TAB") nil)
-      (add-hook! (prog-mode conf-mode text-mode)
-        (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward)))))
+ (unless (cae-display-graphic-p)
+   (after! evil
+     (define-key evil-motion-state-map (kbd "TAB") nil)
+     (add-hook! (prog-mode conf-mode text-mode)
+       (evil-local-set-key 'motion (kbd "TAB") #'better-jumper-jump-forward)))))
 
 ;; I never use `gt' and `gT' for workspace navigation.
 (map! :n "gt" #'tab-bar-switch-to-next-tab
@@ -102,6 +102,12 @@
 (after! vterm
   (map! :map vterm-mode-map
         :localleader "e" #'vterm-send-escape))
+
+(when (modulep! :editor evil +everywhere)
+  (after! ghostel
+    (map! :map ghostel-mode-map
+          :localleader "e" #'cae-ghostel-send-escape)
+    (setq evil-ghostel-escape 'evil)))
 
 (unless evil-disable-insert-state-bindings
   (when (modulep! :completion corfu)
