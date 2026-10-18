@@ -74,6 +74,38 @@
         :n "," #'dired-create-empty-file))
 (add-hook 'dired-mode-hook #'cae-dired-hide-details-in-narrow-screen-h)
 
+;; Browse archives as if they were directories. The `avfsd' daemon is mounted on
+;; demand, so there is no need to run `mountavfs' from a login script.
+(use-package! dired-avfs
+  :when (executable-find "avfsd")
+  :after dired
+  :init
+  ;; Only redirect into AVFS when the archive is opened from Dired, so that
+  ;; `C-x C-f' on an archive still gets `tar-mode'/`archive-mode', which can
+  ;; edit members in place.
+  (setq dired-avfs-ignore-commands
+        '(find-file find-file-other-window find-file-other-frame
+                    find-file-other-tab find-file-at-point)
+        ;; AVFS reads only as much of a seekable archive as it needs, so the
+        ;; default 100MB prompt is pessimistic.
+        dired-avfs-file-size-threshold 500)
+  :config
+  ;; Formats AVFS handles with an extfs script, added only when the script's
+  ;; helper program exists. Bare `gz'/`bz2'/`xz'/`zst' are deliberately absent:
+  ;; they would shadow `jka-compr' for files like `foo.el.gz'.
+  (dolist (archive '(("deb" . "dpkg-deb") ("rpm" . "rpm")
+                     ("cpio" . "cpio") ("iso" . "isoinfo")))
+    (when (executable-find (cdr archive))
+      (add-to-list 'dired-avfs-archives (car archive))))
+  (cae-advice-add #'dired-avfs--archive-filename
+                  :before #'cae-dired-avfs-ensure-mounted)
+  ;; `dired-avfs' reads the size of a file without checking that it exists,
+  ;; which errors on, say, `C-x C-f new.tar.gz'.
+  (cae-advice-add #'dired-avfs--archive-p :before-while #'file-exists-p)
+  (map! :map dired-mode-map
+        :localleader
+        :desc "Open archive via AVFS" "a" #'dired-avfs-open))
+
 (after! wdired
   (setq wdired-allow-to-change-permissions t))
 

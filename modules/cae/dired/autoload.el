@@ -96,3 +96,22 @@
   (interactive)
   (call-interactively #'dirvish-subtree-clear)
   (beginend-dired-mode-goto-beginning))
+
+(defvar dired-avfs-root)
+
+;;;###autoload
+(defun cae-dired-avfs-mounted-p ()
+  "Return non-nil if `avfsd' has mounted `dired-avfs-root'."
+  (file-exists-p (expand-file-name "#avfsstat/symlink_rewrite" dired-avfs-root)))
+
+;;;###autoload
+(defun cae-dired-avfs-ensure-mounted (&rest _)
+  "Mount AVFS unless it is mounted already.
+`dired-avfs' assumes `avfsd' was started from a login script; this
+starts it the first time an archive is opened instead."
+  (unless (cae-dired-avfs-mounted-p)
+    (message "Mounting AVFS on %s..." dired-avfs-root)
+    (unless (and (executable-find "mountavfs")
+                 (zerop (call-process "mountavfs" nil nil nil))
+                 (cae-dired-avfs-mounted-p))
+      (user-error "Failed to mount AVFS on %s" dired-avfs-root))))

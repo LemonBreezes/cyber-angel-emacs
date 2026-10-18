@@ -10,3 +10,6 @@
 (dolist (prog cae-dired-compression-programs)
   (unless (executable-find prog)
     (warn! "Couldn't find `%s`. Some compression/decompression features may be disabled." prog)))
+
+(unless (executable-find "avfsd")
+  (warn! "Couldn't find `avfsd'. Browsing archives as directories with `dired-avfs' will be disabled."))
